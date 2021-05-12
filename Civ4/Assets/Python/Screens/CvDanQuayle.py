@@ -32,7 +32,7 @@ class CvDanQuayle:
 		self.W_SCREEN = 1024
 		self.H_SCREEN = 768
 		self.Y_TITLE = 12
-		self.X_EXIT = 920
+		self.X_EXIT = 994
 		self.Y_EXIT = 726
 		
 		self.X_LEADERHEAD = 120
@@ -102,7 +102,7 @@ class CvDanQuayle:
 		screen.addPanel( "TechBottomPanel", u"", u"", True, False, 0, 713, self.W_SCREEN, 55, PanelStyles.PANEL_STYLE_BOTTOMBAR )
 
 		screen.showWindowBackground(False)
-		screen.setText(self.EXIT_ID, "Background", u"<font=4>" + localText.getText("TXT_KEY_PEDIA_SCREEN_EXIT", ()).upper() + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_EXIT, self.Y_EXIT, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_CLOSE_SCREEN, -1, -1 )
+		screen.setText(self.EXIT_ID, "Background", u"<font=4>" + localText.getText("TXT_KEY_PEDIA_SCREEN_EXIT", ()).upper() + u"</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_EXIT, self.Y_EXIT, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_CLOSE_SCREEN, -1, -1 )
 
 		# Header...
 		screen.setLabel(self.WIDGET_HEADER, "Background", u"<font=4b>" + localText.getText("TXT_KEY_GAME_END_SCREEN_TITLE", ()).upper() + u"</font>", CvUtil.FONT_CENTER_JUSTIFY, self.X_SCREEN, self.Y_TITLE, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
@@ -162,9 +162,10 @@ class CvDanQuayle:
 		screen.addMultilineText(self.TEXT_ID, localText.getText("TXT_KEY_DQ_TEXT_STRING", (replayInfo.getLeaderName(), szLeaderText, )), self.X_TEXT+5, self.Y_TEXT+5, self.W_TEXT-10, self.H_TEXT-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
 		
 		screen.addPanel(self.SCORE_ID, u"", u"", True, False, self.X_SCORE, self.Y_SCORE, self.W_SCORE, self.H_SCORE, PanelStyles.PANEL_STYLE_IN)
-		screen.setLabelAt("", self.SCORE_ID, u"<font=4>" + localText.getText("TXT_KEY_VICTORY_SCORE", ( )) + u" : " + unicode(iScore) + u"</font>", CvUtil.FONT_CENTER_JUSTIFY, self.W_SCORE/2-10, 5, 0, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
+		screen.setLabelAt("", self.SCORE_ID, u"<font=4>" + localText.getObjectText("TXT_KEY_VICTORY_SCORE", 0) + u" : " + unicode(iScore) + u"</font>", CvUtil.FONT_CENTER_JUSTIFY, self.W_SCORE/2-10, 5, 0, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 		
 		screen.addListBoxGFC(self.LIST_ID, "", self.X_LIST, self.Y_LIST, self.W_LIST, self.H_LIST, TableStyles.TABLE_STYLE_STANDARD)
+		screen.enableSelect(self.LIST_ID, False)
 		for i in range(len(self.leaders)):
 			szText = self.leaders[i]
 			if (szLeaderText == szText):

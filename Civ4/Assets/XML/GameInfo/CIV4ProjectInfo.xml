@@ -69,7 +69,7 @@
 			<TechPrereq>TECH_SATELLITES</TechPrereq>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>1</iMaxTeamInstances>
-			<iCost>500</iCost>
+			<iCost>750</iCost>
 			<iNukeInterception>75</iNukeInterception>
 			<iTechShare>0</iTechShare>
 			<EveryoneSpecialUnit>NONE</EveryoneSpecialUnit>

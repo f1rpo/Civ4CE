@@ -3108,7 +3108,7 @@
 			<ProductionTraits/>
 			<Flavors/>
 			<iAIWeight>0</iAIWeight>
-			<iCost>40</iCost>
+			<iCost>35</iCost>
 			<iHurryCostModifier>0</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iMoves>1</iMoves>
@@ -3260,7 +3260,7 @@
 			<ProductionTraits/>
 			<Flavors/>
 			<iAIWeight>0</iAIWeight>
-			<iCost>40</iCost>
+			<iCost>45</iCost>
 			<iHurryCostModifier>0</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iMoves>1</iMoves>
@@ -9001,7 +9001,7 @@
 			<iGreatWorkCulture>0</iGreatWorkCulture>
 			<TerrainImpassables/>
 			<FeatureImpassables/>
-			<iCombat>20</iCombat>
+			<iCombat>24</iCombat>
 			<iAirCombat>0</iAirCombat>
 			<iAirCombatLimit>0</iAirCombatLimit>
 			<iXPValueAttack>4</iXPValueAttack>
@@ -9667,7 +9667,7 @@
 			<Description>TXT_KEY_UNIT_WORK_BOAT</Description>
 			<Civilopedia>TXT_KEY_UNIT_WORK_BOAT_PEDIA</Civilopedia>
 			<Strategy>TXT_KEY_UNIT_WORK_BOAT_STRATEGY</Strategy>
-			<Advisor>ADVISOR_MILITARY</Advisor>
+			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bAnimal>0</bAnimal>
 			<bFood>0</bFood>
 			<bNoBadGoodies>0</bNoBadGoodies>
@@ -9858,6 +9858,10 @@
 			<UnitClassUpgrades>
 				<UnitClassUpgrade>
 					<UnitClassUpgradeType>UNITCLASS_GALLEON</UnitClassUpgradeType>
+					<bUnitClassUpgrade>1</bUnitClassUpgrade>
+				</UnitClassUpgrade>
+				<UnitClassUpgrade>
+					<UnitClassUpgradeType>UNITCLASS_FRIGATE</UnitClassUpgradeType>
 					<bUnitClassUpgrade>1</bUnitClassUpgrade>
 				</UnitClassUpgrade>
 			</UnitClassUpgrades>
@@ -12114,33 +12118,33 @@
 			<Class>UNITCLASS_PROPHET</Class>
 			<Type>UNIT_PROPHET</Type>
 			<UniqueNames>
-				<UniqueName>Moses</UniqueName>
-				<UniqueName>Mahavira</UniqueName>
-				<UniqueName>Zoroaster</UniqueName>
-				<UniqueName>Ananda</UniqueName>
-				<UniqueName>Chuang-Tzu</UniqueName>
-				<UniqueName>Mencius</UniqueName>
-				<UniqueName>Mo Tzu</UniqueName>
-				<UniqueName>St. John</UniqueName>
-				<UniqueName>St. Peter</UniqueName>
-				<UniqueName>St. Paul</UniqueName>
-				<UniqueName>Rabbi Akiva</UniqueName>
-				<UniqueName>Mani</UniqueName>
-				<UniqueName>St. Augustine</UniqueName>
-				<UniqueName>St. Patrick</UniqueName>
-				<UniqueName>Abu Bakr</UniqueName>
-				<UniqueName>Shankara</UniqueName>
-				<UniqueName>Kobo-Daishi</UniqueName>
-				<UniqueName>Atisha</UniqueName>
-				<UniqueName>St. Thomas Aquinas</UniqueName>
-				<UniqueName>Mohammed Shah</UniqueName>
-				<UniqueName>Tsongkhapa</UniqueName>
-				<UniqueName>Jeanne d'Arc</UniqueName>
-				<UniqueName>Narak</UniqueName>
-				<UniqueName>Tipu Sultan</UniqueName>
-				<UniqueName>Ramakrishna</UniqueName>
-				<UniqueName>Narayana Guru</UniqueName>
-				<UniqueName>Sojourner Truth</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_MOSES</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_MAHAVIRA</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ZOROASTER</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ANANDA</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_CHUANG_TZU</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_MENCIUS</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_MO_TZU</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ST_JOHN</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ST_PETER</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ST_PAUL</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_RABBI_AKIVA</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_MANI</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ST_AUGUSTINE</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ST_PATRICK</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ABU_BAKR</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_SHANKARA</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_KOBO_DAISHI</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ATISHA</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ST_THOMAS_AQUINAS</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_MOHAMMED_SHAH</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_TSONGKHAPA</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_JEANNE_ARC</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_NARAK</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_TIPU_SULTAN</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_RAMAKRISHNA</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_NARAYANA_GURU</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_SOJOURNER_TRUTH</UniqueName>
 			</UniqueNames>
 			<Special>SPECIALUNIT_PEOPLE</Special>
 			<Capture>NONE</Capture>
@@ -12319,42 +12323,42 @@
 			<Class>UNITCLASS_ARTIST</Class>
 			<Type>UNIT_ARTIST</Type>
 			<UniqueNames>
-				<UniqueName>Homer</UniqueName>
-				<UniqueName>Thespis</UniqueName>
-				<UniqueName>Ling Lun</UniqueName>
-				<UniqueName>Wang Xizhi</UniqueName>
-				<UniqueName>Valmiki</UniqueName>
-				<UniqueName>Virgil</UniqueName>
-				<UniqueName>Kalidas</UniqueName>
-				<UniqueName>Li Po</UniqueName>
-				<UniqueName>Du Fu</UniqueName>
-				<UniqueName>Jalal al-Din Rumi</UniqueName>
-				<UniqueName>Dante Alighieri</UniqueName>
-				<UniqueName>Yunus Emre</UniqueName>
-				<UniqueName>Amir Khusro</UniqueName>
-				<UniqueName>Ibn Muqlah</UniqueName>
-				<UniqueName>Michaelangelo</UniqueName>
-				<UniqueName>Raphael</UniqueName>
-				<UniqueName>William Shakespeare</UniqueName>
-				<UniqueName>Miguel de Cervantes</UniqueName>
-				<UniqueName>Rembrandt van Rijn</UniqueName>
-				<UniqueName>Johannes Vermeer</UniqueName>
-				<UniqueName>J. S. Bach</UniqueName>
-				<UniqueName>Wolfgang Amadeus Mozart</UniqueName>
-				<UniqueName>Johann Wolfgang von Goethe</UniqueName>
-				<UniqueName>Ludwig van Beethoven</UniqueName>
-				<UniqueName>Victor Hugo</UniqueName>
-				<UniqueName>Vincent van Gogh</UniqueName>
-				<UniqueName>Johannes Brahms</UniqueName>
-				<UniqueName>Antonin Dvorak</UniqueName>
-				<UniqueName>Mark Twain</UniqueName>
-				<UniqueName>Claude Monet</UniqueName>
-				<UniqueName>Joseph Conrad</UniqueName>
-				<UniqueName>Frank Kafka</UniqueName>
-				<UniqueName>Louis Armstrong</UniqueName>
-				<UniqueName>Duke Ellington</UniqueName>
-				<UniqueName>Pablo Picasso</UniqueName>
-				<UniqueName>Miles Davis</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_HOMER</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_THESPIS</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_LING_LUN</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_WANG_XIZHI</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_VALMIKI</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_VIRGIL</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_KALIDAS</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_LI_PO</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_DU_FU</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_JALAL_ALDIN_RUMI</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_DANTE_ALIGHIERI</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_YUNUS_EMRE</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_AMIR_KHUSRO</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_IBN_MUQLAH</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_MICHAELANGELO</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_RAPHAEL</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_WILLIAM_SHAKESPEARE</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_MIGUEL_DE_CERVANTES</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_REMBRANDT</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_JOHANNES_VERMEER</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_JS_BACH</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_WOLFGANG_MOZART</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_JOHANN_GOETHE</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_LUDWIG_VAN_BEETHOVEN</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_VICTOR_HUGO</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_VINCENT_VAN_GOGH</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_JOHANNES_BRAHMS</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_DVORAK</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_MARK_TWAIN</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_CLAUDE_MONET</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_JOSEPH_CONRAD</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_FRANK_KAFKA</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_LOUIS_ARMSTRONG</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_DUKE_ELLINGTON</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_PABLO_PICASSO</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_MILES_DAVIS</UniqueName>
 			</UniqueNames>
 			<Special>SPECIALUNIT_PEOPLE</Special>
 			<Capture>NONE</Capture>
@@ -12505,46 +12509,46 @@
 			<Class>UNITCLASS_SCIENTIST</Class>
 			<Type>UNIT_SCIENTIST</Type>
 			<UniqueNames>
-				<UniqueName>Merit Ptah</UniqueName>
-				<UniqueName>Xi Ling Shi</UniqueName>
-				<UniqueName>Nabu-rimanni</UniqueName>
-				<UniqueName>Socrates</UniqueName>
-				<UniqueName>Plato</UniqueName>
-				<UniqueName>Aristole</UniqueName>
-				<UniqueName>Euclid</UniqueName>
-				<UniqueName>Ptolemy</UniqueName>
-				<UniqueName>Hypatia</UniqueName>
-				<UniqueName>Zu Chongzhi</UniqueName>
-				<UniqueName>Aryabhata</UniqueName>
-				<UniqueName>Al-Kindi</UniqueName>
-				<UniqueName>Al-Khwarizmi</UniqueName>
-				<UniqueName>Al-Razi</UniqueName>
-				<UniqueName>Alhazen</UniqueName>
-				<UniqueName>Nicolaus Copernicus</UniqueName>
-				<UniqueName>Francis Bacon</UniqueName>
-				<UniqueName>Tycho Brahe</UniqueName>
-				<UniqueName>Johannes Kepler</UniqueName>
-				<UniqueName>Isaac Newton</UniqueName>
-				<UniqueName>Galileo Galilei</UniqueName>
-				<UniqueName>Rene Descartes</UniqueName>
-				<UniqueName>Antony van Leeuwenhoek</UniqueName>
-				<UniqueName>Gottfried Leibniz</UniqueName>
-				<UniqueName>Mikhail Lomonosov</UniqueName>
-				<UniqueName>Antoine Laurent Lavoisier</UniqueName>
-				<UniqueName>Carl Friedrich Gauss</UniqueName>
-				<UniqueName>John Dalton</UniqueName>
-				<UniqueName>Michael Faraday</UniqueName>
-				<UniqueName>James Clerk Maxwell</UniqueName>
-				<UniqueName>Louis Pasteur</UniqueName>
-				<UniqueName>Charles Darwin</UniqueName>
-				<UniqueName>Ernest Rutherford</UniqueName>
-				<UniqueName>Marie Curie</UniqueName>
-				<UniqueName>Albert Einstein</UniqueName>
-				<UniqueName>Niels Bohr</UniqueName>
-				<UniqueName>Werner Heisenberg</UniqueName>
-				<UniqueName>Enrico Fermi</UniqueName>
-				<UniqueName>Rosalind Franklin</UniqueName>
-				<UniqueName>Andrei Sakharov</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_MERIT_PTAH</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_XI_LING_SHI</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_NABU_RIMANNI</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_SOCRATES</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_PLATO</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ARISTOTLE</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_EUCLID</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_PTOLEMY</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_HYPATIA</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ZU_CHONGZHI</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ARYABHATA</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_AL_KINDI</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_AL_KHWARIZMI</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_AL_RAZI</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ALHAZEN</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_NICOLAUS_COPERNICUS</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_FRANCIS_BACON</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_TYCHO_BRAHE</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_JOHANNES_KEPLER</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ISAAC_NEWTON</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_GALILEO_GALILEI</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_RENE_DESCARTES</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ANTONY_VAN_LEEUWENHOEK</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_GOTTFRIED_LEIBNIZ</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_MIKHAIL_LOMONOSOV</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ANTOINE_LAURENT_lAVOISIER</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_CARL_FRIEDRICH_GAUSS</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_JOHN_DALTON</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_MICHAEL_FARADAY</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_JAMES_CLERK_MAXWELL</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_LOUIS_PASTEUR</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_CHARLES_DARWIN</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ERNEST_RUTHERFORD</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_MARIE_CURIE</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ALBERT_EINSTEIN</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_NIELS_BOHR</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_WERNER_HEISENBERG</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ENRICO_FERMI</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ROSALIND_FRANKLIN</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ANDREI_SAKHAROV</UniqueName>
 			</UniqueNames>
 			<Special>SPECIALUNIT_PEOPLE</Special>
 			<Capture>NONE</Capture>
@@ -12700,36 +12704,36 @@
 			<Class>UNITCLASS_MERCHANT</Class>
 			<Type>UNIT_MERCHANT</Type>
 			<UniqueNames>
-				<UniqueName>Harkuf</UniqueName>
-				<UniqueName>Hanno</UniqueName>
-				<UniqueName>Pytheas</UniqueName>
-				<UniqueName>Zhang Qian</UniqueName>
-				<UniqueName>Aretas III</UniqueName>
-				<UniqueName>Leif Erickson</UniqueName>
-				<UniqueName>Wang Anshi</UniqueName>
-				<UniqueName>Enrico Dandolo</UniqueName>
-				<UniqueName>Marco Polo</UniqueName>
-				<UniqueName>Ibn Battuta</UniqueName>
-				<UniqueName>Richard Whittington</UniqueName>
-				<UniqueName>Giovanni de Medici</UniqueName>
-				<UniqueName>Zheng He</UniqueName>
-				<UniqueName>Vasco da Gama</UniqueName>
-				<UniqueName>Christopher Columbus</UniqueName>
-				<UniqueName>Ferdinand Magellan</UniqueName>
-				<UniqueName>Jacques Cartier</UniqueName>
-				<UniqueName>Raja Todar Mal</UniqueName>
-				<UniqueName>Anthony van Diemen</UniqueName>
-				<UniqueName>Sir Thomas Roe</UniqueName>
-				<UniqueName>Shah Jahan</UniqueName>
-				<UniqueName>Adam Smith</UniqueName>
-				<UniqueName>James Cook</UniqueName>
-				<UniqueName>Cornelius Vanderbilt</UniqueName>
-				<UniqueName>Sir Alexander Mackenzie</UniqueName>
-				<UniqueName>John Stuart Mill</UniqueName>
-				<UniqueName>Andrew Carnegie</UniqueName>
-				<UniqueName>John D. Rockefeller</UniqueName>
-				<UniqueName>John Maynard Keynes</UniqueName>
-				<UniqueName>Coco Chanel</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_HARKUF</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_HANNO</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_PYTHEAS</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ZHANG_QIAN</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ARETAS_III</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_LEIF_ERICKSON</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_WANG_ANSHI</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ENRICO_DANDOLO</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_MARCO_POLO</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_IBN_BATTUTA</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_RRICHARD_WHITTINGTON</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_GIOVANNI_DE_MEDICI</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ZHENG_HE</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_VASCO_DA_GAMA</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_CHRISTOPHER_COLUMBUS</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_FERDINAND_MAGELLAN</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_JACQUES_CARTIER</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_RAJA_TODAR_MAL</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ANTONY_VAN_DIEMEN</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_SIR_THOMAS_ROE</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_SHAH_JAHAN</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ADAM_SMITH</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_JAMES_COOK</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_CORNELIUS_VANDERBILT</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_SIR_ALEXANDER_MACKENZIE</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_JOHN_STUART_MILL</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ANDREW_CARNEGIE</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_JOHN_D_ROCKEFELLER</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_JOHN_MAYNARD_KEYNES</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_COCO_CHANEL</UniqueName>
 			</UniqueNames>
 			<Special>SPECIALUNIT_PEOPLE</Special>
 			<Capture>NONE</Capture>
@@ -12880,38 +12884,38 @@
 			<Class>UNITCLASS_ENGINEER</Class>
 			<Type>UNIT_ENGINEER</Type>
 			<UniqueNames>
-				<UniqueName>Imhotep</UniqueName>
-				<UniqueName>Archimedes</UniqueName>
-				<UniqueName>Heron</UniqueName>
-				<UniqueName>Cai Lun</UniqueName>
-				<UniqueName>Zhang Heng</UniqueName>
-				<UniqueName>Bi Sheng</UniqueName>
-				<UniqueName>Leonardo da Vinci</UniqueName>
-				<UniqueName>Sinan</UniqueName>
-				<UniqueName>Wilhelm Schickard</UniqueName>
-				<UniqueName>Blaise Pascal</UniqueName>
-				<UniqueName>Benjamin Franklin</UniqueName>
-				<UniqueName>Charles Augustin de Coulomb</UniqueName>
-				<UniqueName>James Watt</UniqueName>
-				<UniqueName>Joseph Marie Jacquard</UniqueName>
-				<UniqueName>Isambard Kingdom Brunel</UniqueName>
-				<UniqueName>William T. G. Morton</UniqueName>
-				<UniqueName>Louis Daguerre</UniqueName>
-				<UniqueName>Ferdinand de Lesseps</UniqueName>
-				<UniqueName>John Roebling</UniqueName>
-				<UniqueName>Norbert Rillieux</UniqueName>
-				<UniqueName>Henry Bessemer</UniqueName>
-				<UniqueName>Nain Singh</UniqueName>
-				<UniqueName>Alexander Graham Bell</UniqueName>
-				<UniqueName>Nikolaus August Otto</UniqueName>
-				<UniqueName>Nichola Tesla</UniqueName>
-				<UniqueName>Thomas Edison</UniqueName>
-				<UniqueName>Guglielmo Marconi</UniqueName>
-				<UniqueName>Alexandre Gustave Eiffel</UniqueName>
-				<UniqueName>George Washington Goethals</UniqueName>
-				<UniqueName>Henry Ford</UniqueName>
-				<UniqueName>Wilbur Wright</UniqueName>
-				<UniqueName>Orville Wright</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_IMHOTEP</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ARCHIMEDES</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_HERON</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_CAI_LUN</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ZHANG_HENG</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_BI_SHENG</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_LEONARDO_DA_VINCI</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_SINAN</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_WILHELM_SCHICKARD</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_BLAISE_PASCAL</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_BENJAMIN_FRANKLIN</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_CHARLES_AUGUSTIN_DE_COULOMB</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_JAMES_WATT</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_JOSEPH_MARIE_JACQUARD</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ISAMBARD_KINGDOM_BRUNEL</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_WILLIAN_MORTON</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_LOUIS_DAGUERRE</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_FERDINAND_DE_LESSEPS</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_JOHN_ROEBLING</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_NOBERT_RILLIEUX</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_HENRY_BESSEMER</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_NAIN_SINGH</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ALEXANDER_GRAHM_BELL</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_NIKOLAUS_AUGUST_OTTO</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_NICHOLA_TESLA</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_THOMAS_EDISON</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_GUGLIELMO_MARCONI</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ALEXANDRE_GUSTAVE_EIFFEL</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_GEORGE_WASHINGTON_GOETHALS</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_HENRY_FORD</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_WILBUR_WRIGHT</UniqueName>
+				<UniqueName>TXT_KEY_GREAT_PERSON_ORVILLE_WRIGHT</UniqueName>
 			</UniqueNames>
 			<Special>SPECIALUNIT_PEOPLE</Special>
 			<Capture>NONE</Capture>

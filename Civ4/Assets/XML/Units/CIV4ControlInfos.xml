@@ -278,6 +278,21 @@
 			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
 		</ControlInfo>
 		<ControlInfo>
+			<Type>CONTROL_SIGN</Type>
+			<Description>TXT_KEY_ACTION_SIGN</Description>
+			<Help>TXT_KEY_ACTION_SIGN_HELP</Help>
+			<HotKey>KB_S</HotKey>
+			<bAltDown>1</bAltDown>
+			<bShiftDown>0</bShiftDown>
+			<bCtrlDown>0</bCtrlDown>
+			<iHotKeyPriority>0</iHotKeyPriority>
+			<HotKeyAlt/>
+			<bAltDownAlt>0</bAltDownAlt>
+			<bShiftDownAlt>0</bShiftDownAlt>
+			<bCtrlDownAlt>0</bCtrlDownAlt>
+			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
+		</ControlInfo>
+		<ControlInfo>
 			<Type>CONTROL_GRID</Type>
 			<Description>TXT_KEY_ACTION_GRID</Description>
 			<Help>TXT_KEY_ACTION_GRID_HELP</Help>
@@ -537,7 +552,7 @@
 			<Description>TXT_KEY_ACTION_FLYING_CAMERA</Description>
 			<Help/>
 			<HotKey>KB_F</HotKey>
-			<bAltDown>0</bAltDown>
+			<bAltDown>1</bAltDown>
 			<bShiftDown>0</bShiftDown>
 			<bCtrlDown>1</bCtrlDown>
 			<iHotKeyPriority>0</iHotKeyPriority>
@@ -552,7 +567,7 @@
 			<Description>TXT_KEY_ACTION_MOUSE_FLYING_CAMERA</Description>
 			<Help/>
 			<HotKey>KB_F</HotKey>
-			<bAltDown>0</bAltDown>
+			<bAltDown>1</bAltDown>
 			<bShiftDown>1</bShiftDown>
 			<bCtrlDown>0</bCtrlDown>
 			<iHotKeyPriority>0</iHotKeyPriority>

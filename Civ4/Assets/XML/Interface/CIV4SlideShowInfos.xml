@@ -249,6 +249,9 @@
 	</SlideShowInfos>
 	<SlideShowRandomInfos>
 		<SlideShowRandomInfo>
+			<Path>Art/Interface/Screens/Credits/Cred_006.dds</Path>
+		</SlideShowRandomInfo>
+		<SlideShowRandomInfo>
 			<Path>Art/Interface/Screens/ProgressScreen/005.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
@@ -353,9 +356,9 @@
 		<SlideShowRandomInfo>
 			<Path>Art/Interface/Screens/Credits/Cred_005.dds</Path>
 		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
+		<!--Group shot moved to front<SlideShowRandomInfo>
 			<Path>Art/Interface/Screens/Credits/Cred_006.dds</Path>
-		</SlideShowRandomInfo>
+		</SlideShowRandomInfo>-->
 		<SlideShowRandomInfo>
 			<Path>Art/Interface/Screens/Credits/Cred_007.dds</Path>
 		</SlideShowRandomInfo>

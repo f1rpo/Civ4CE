@@ -53,8 +53,10 @@ class CvPediaHistory:
 		screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, self.iCivilopediaPageType, -1)
 
 		if self.top.iLastScreen	!= CvScreenEnums.PEDIA_HISTORY or bNotActive:		
-			self.placeLinks()
+			self.placeLinks(true)
 			self.top.iLastScreen = CvScreenEnums.PEDIA_HISTORY
+		else:
+			self.placeLinks(false)
 
 		self.placeText()
 			
@@ -69,11 +71,12 @@ class CvPediaHistory:
 		szText = self.getCivilopedia()
 		screen.attachMultilineText( panelName, "Text", szText, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 	
-	def placeLinks(self):
+	def placeLinks(self, bRedraw):
 
 		screen = self.top.getScreen()
                 
-		screen.clearListBoxGFC(self.top.LIST_ID)
+		if bRedraw:
+			screen.clearListBoxGFC(self.top.LIST_ID)
 		
 		iNum = self.getNumInfos()
 		listSorted=[(0,0)] * iNum
@@ -82,10 +85,14 @@ class CvPediaHistory:
 		listSorted.sort()	
 			
 		iSelected = 0
+		i = 0
 		for iI in range(iNum):
-			screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_DESCRIPTION_NO_HELP, self.iCivilopediaPageType, listSorted[iI][1], CvUtil.FONT_LEFT_JUSTIFY)
-			if listSorted[iI][1] == self.iEntry:
-				iSelected = iI
+			if (not self.getInfo(listSorted[iI][1]).isGraphicalOnly()):
+				if bRedraw:
+					screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_DESCRIPTION_NO_HELP, self.iCivilopediaPageType, listSorted[iI][1], CvUtil.FONT_LEFT_JUSTIFY)
+				if listSorted[iI][1] == self.iEntry:
+					iSelected = i
+				i += 1
 					
 		screen.setSelectedListBoxStringGFC(self.top.LIST_ID, iSelected)
 
@@ -125,43 +132,50 @@ class CvPediaHistory:
 		else:
 			iNum = ""
 		return iNum
+
+	def getInfo(self, iEntry):
+		if (CivilopediaPageTypes.CIVILOPEDIA_PAGE_TECH == self.iCivilopediaPageType):
+			info = gc.getTechInfo(iEntry)
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_UNIT == self.iCivilopediaPageType):
+			info = gc.getUnitInfo(iEntry)
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_BUILDING == self.iCivilopediaPageType):
+			info = gc.getBuildingInfo(iEntry)
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_BONUS == self.iCivilopediaPageType):
+			info = gc.getBonusInfo(iEntry)
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_IMPROVEMENT == self.iCivilopediaPageType):
+			info = gc.getImprovementInfo(iEntry)
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_PROMOTION == self.iCivilopediaPageType):
+			info = gc.getPromotionInfo(iEntry)
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_UNIT_GROUP == self.iCivilopediaPageType):
+			info = gc.getUnitCombatInfo(iEntry)
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CIV == self.iCivilopediaPageType):
+			info = gc.getCivilizationInfo(iEntry)
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_LEADER == self.iCivilopediaPageType):
+			info = gc.getLeaderHeadInfo(iEntry)
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_RELIGION == self.iCivilopediaPageType):
+			info = gc.getReligionInfo(iEntry)
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CIVIC == self.iCivilopediaPageType):
+			info = gc.getCivicInfo(iEntry)
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_PROJECT == self.iCivilopediaPageType):
+			info = gc.getProjectInfo(iEntry)
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CONCEPT == self.iCivilopediaPageType):
+			info = gc.getConceptInfo(iEntry)
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_SPECIALIST == self.iCivilopediaPageType):
+			info = gc.getSpecialistInfo(iEntry)
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_TERRAIN == self.iCivilopediaPageType):
+			info = gc.getTerrainInfo(iEntry)
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_FEATURE == self.iCivilopediaPageType):
+			info = gc.getFeatureInfo(iEntry)
+		else:
+			info = None
+		return info
 		
 	def getDescription(self, iEntry):
-		if (CivilopediaPageTypes.CIVILOPEDIA_PAGE_TECH == self.iCivilopediaPageType):
-			szDescription = gc.getTechInfo(iEntry).getDescription()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_UNIT == self.iCivilopediaPageType):
-			szDescription = gc.getUnitInfo(iEntry).getDescription()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_BUILDING == self.iCivilopediaPageType):
-			szDescription = gc.getBuildingInfo(iEntry).getDescription()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_BONUS == self.iCivilopediaPageType):
-			szDescription = gc.getBonusInfo(iEntry).getDescription()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_IMPROVEMENT == self.iCivilopediaPageType):
-			szDescription = gc.getImprovementInfo(iEntry).getDescription()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_PROMOTION == self.iCivilopediaPageType):
-			szDescription = gc.getPromotionInfo(iEntry).getDescription()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_UNIT_GROUP == self.iCivilopediaPageType):
-			szDescription = gc.getUnitCombatInfo(iEntry).getDescription()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CIV == self.iCivilopediaPageType):
-			szDescription = gc.getCivilizationInfo(iEntry).getDescription()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_LEADER == self.iCivilopediaPageType):
-			szDescription = gc.getLeaderHeadInfo(iEntry).getDescription()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_RELIGION == self.iCivilopediaPageType):
-			szDescription = gc.getReligionInfo(iEntry).getDescription()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CIVIC == self.iCivilopediaPageType):
-			szDescription = gc.getCivicInfo(iEntry).getDescription()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_PROJECT == self.iCivilopediaPageType):
-			szDescription = gc.getProjectInfo(iEntry).getDescription()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CONCEPT == self.iCivilopediaPageType):
-			szDescription = gc.getConceptInfo(iEntry).getDescription()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_SPECIALIST == self.iCivilopediaPageType):
-			szDescription = gc.getSpecialistInfo(iEntry).getDescription()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_TERRAIN == self.iCivilopediaPageType):
-			szDescription = gc.getTerrainInfo(iEntry).getDescription()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_FEATURE == self.iCivilopediaPageType):
-			szDescription = gc.getFeatureInfo(iEntry).getDescription()
+		info = self.getInfo(iEntry)
+		if info != None:
+			return info.getDescription()
 		else:
-			szDescription = ""
-		return szDescription
+			return u""
 										
 	def getLink(self):
 		if (CivilopediaPageTypes.CIVILOPEDIA_PAGE_TECH == self.iCivilopediaPageType):
@@ -169,6 +183,8 @@ class CvPediaHistory:
 		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_UNIT == self.iCivilopediaPageType):
 			iLink = WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT
 		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_BUILDING == self.iCivilopediaPageType):
+			iLink = WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_WONDER == self.iCivilopediaPageType):
 			iLink = WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING
 		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_BONUS == self.iCivilopediaPageType):
 			iLink = WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS
@@ -199,41 +215,11 @@ class CvPediaHistory:
 		return iLink
 										
 	def getCivilopedia(self):
-		if (CivilopediaPageTypes.CIVILOPEDIA_PAGE_TECH == self.iCivilopediaPageType):
-			szDescription = gc.getTechInfo(self.iEntry).getCivilopedia()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_UNIT == self.iCivilopediaPageType):
-			szDescription = gc.getUnitInfo(self.iEntry).getCivilopedia()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_BUILDING == self.iCivilopediaPageType):
-			szDescription = gc.getBuildingInfo(self.iEntry).getCivilopedia()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_BONUS == self.iCivilopediaPageType):
-			szDescription = gc.getBonusInfo(self.iEntry).getCivilopedia()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_IMPROVEMENT == self.iCivilopediaPageType):
-			szDescription = gc.getImprovementInfo(self.iEntry).getCivilopedia()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_PROMOTION == self.iCivilopediaPageType):
-			szDescription = gc.getPromotionInfo(self.iEntry).getCivilopedia()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_UNIT_GROUP == self.iCivilopediaPageType):
-			szDescription = gc.getUnitCombatInfo(self.iEntry).getCivilopedia()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CIV == self.iCivilopediaPageType):
-			szDescription = gc.getCivilizationInfo(self.iEntry).getCivilopedia()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_LEADER == self.iCivilopediaPageType):
-			szDescription = gc.getLeaderHeadInfo(self.iEntry).getCivilopedia()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_RELIGION == self.iCivilopediaPageType):
-			szDescription = gc.getReligionInfo(self.iEntry).getCivilopedia()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CIVIC == self.iCivilopediaPageType):
-			szDescription = gc.getCivicInfo(self.iEntry).getCivilopedia()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_PROJECT == self.iCivilopediaPageType):
-			szDescription = gc.getProjectInfo(self.iEntry).getCivilopedia()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CONCEPT == self.iCivilopediaPageType):
-			szDescription = gc.getConceptInfo(self.iEntry).getCivilopedia()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_SPECIALIST == self.iCivilopediaPageType):
-			szDescription = gc.getSpecialistInfo(self.iEntry).getCivilopedia()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_TERRAIN == self.iCivilopediaPageType):
-			szDescription = gc.getTerrainInfo(self.iEntry).getCivilopedia()
-		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_FEATURE == self.iCivilopediaPageType):
-			szDescription = gc.getFeatureInfo(self.iEntry).getCivilopedia()
+		info = self.getInfo(self.iEntry)
+		if info != None:
+			return info.getCivilopedia()
 		else:
-			szDescription = ""
-		return szDescription
+			return u""
 
 	def getEntryInfoFromId(self, iEntryId):
 		self.iCivilopediaPageType = iEntryId % CivilopediaPageTypes.NUM_CIVILOPEDIA_PAGE_TYPES

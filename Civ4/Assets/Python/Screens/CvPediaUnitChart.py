@@ -51,8 +51,10 @@ class CvPediaUnitChart:
 		screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_UNIT_GROUP, -1)
 
 		if self.top.iLastScreen	!= CvScreenEnums.PEDIA_UNIT_CHART or bNotActive:		
-			self.placeLinks()
+			self.placeLinks(true)
 			self.top.iLastScreen = CvScreenEnums.PEDIA_UNIT_CHART
+		else:
+			self.placeLinks(false)
 				
 		self.placeUnitTable()
 						
@@ -109,16 +111,17 @@ class CvPediaUnitChart:
 
 		for i in range(nUnits):			
 			iRow = screen.appendTableRow(szTable)
-			screen.setTableText(szTable, 0, iRow, u"<font=3>" + unitsList[i][3] + u"</font>", "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)						
+			screen.setTableText(szTable, 0, iRow, u"<font=3>" + unitsList[i][3] + u"</font>", "", WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, unitsList[i][4], 1, CvUtil.FONT_LEFT_JUSTIFY)						
 			screen.setTableInt(szTable, 1, iRow, u"<font=3>" + unicode(unitsList[i][0]) + u"</font>", "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 			screen.setTableInt(szTable, 2, iRow, u"<font=3>" + unicode(unitsList[i][1]) + u"</font>", "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 			screen.setTableInt(szTable, 3, iRow, u"<font=3>" + unicode(unitsList[i][2]) + u"</font>", "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 
-	def placeLinks(self):
+	def placeLinks(self, bRedraw):
 
 		screen = self.top.getScreen()
-                
-		screen.clearListBoxGFC(self.top.LIST_ID)
+
+		if bRedraw:
+			screen.clearListBoxGFC(self.top.LIST_ID)
 		
 		# sort groups alphabetically
 		listSorted=[(0 ,0)] * gc.getNumUnitCombatInfos()
@@ -126,15 +129,20 @@ class CvPediaUnitChart:
 			listSorted[j] = (gc.getUnitCombatInfo(j).getDescription(), j)
 		listSorted.sort()			
 
-		iSelected = 0			
-		screen.appendListBoxString( self.top.LIST_ID, localText.getText("TXT_KEY_PEDIA_ALL_GROUPS", ()), WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT_COMBAT, gc.getNumUnitCombatInfos(), 0, CvUtil.FONT_LEFT_JUSTIFY )
+		iSelected = 0
+		if bRedraw:		
+			screen.appendListBoxString( self.top.LIST_ID, localText.getText("TXT_KEY_PEDIA_ALL_GROUPS", ()), WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT_COMBAT, gc.getNumUnitCombatInfos(), 0, CvUtil.FONT_LEFT_JUSTIFY )
 		if self.iGroup == gc.getNumUnitCombatInfos():
 			iSelected = 0
 
+		i = 1
 		for iI in range(gc.getNumUnitCombatInfos()):
-			screen.appendListBoxString( self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT_COMBAT, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
-			if listSorted[iI][1] == self.iGroup:
-				iSelected = iI+1			
+			if (not gc.getUnitCombatInfo(iI).isGraphicalOnly()):
+				if bRedraw:
+					screen.appendListBoxString( self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT_COMBAT, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
+				if listSorted[iI][1] == self.iGroup:
+					iSelected = i
+				i += 1			
 
 		screen.setSelectedListBoxStringGFC(self.top.LIST_ID, iSelected)
 		

@@ -53,7 +53,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		self.Y_TITLE = 8
 		self.DY_TEXT = 45
 		
-		self.X_EXIT = 925
+		self.X_EXIT = 994
 		self.Y_EXIT = 730
 						
 		self.X_BACK = 50
@@ -115,6 +115,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 			CivilopediaPageTypes.CIVILOPEDIA_PAGE_TECH	: self.placeTechs, 
 			CivilopediaPageTypes.CIVILOPEDIA_PAGE_UNIT	: self.placeUnits, 
 			CivilopediaPageTypes.CIVILOPEDIA_PAGE_BUILDING	: self.placeBuildings, 
+			CivilopediaPageTypes.CIVILOPEDIA_PAGE_WONDER	: self.placeWonders, 
 			CivilopediaPageTypes.CIVILOPEDIA_PAGE_TERRAIN	: self.placeTerrains,
 			CivilopediaPageTypes.CIVILOPEDIA_PAGE_FEATURE	: self.placeFeatures,
 			CivilopediaPageTypes.CIVILOPEDIA_PAGE_BONUS	: self.placeBoni, 
@@ -143,6 +144,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		self.szCategoryTech = localText.getText("TXT_KEY_PEDIA_CATEGORY_TECH", ())		
 		self.szCategoryUnit = localText.getText("TXT_KEY_PEDIA_CATEGORY_UNIT", ())		
 		self.szCategoryBuilding = localText.getText("TXT_KEY_PEDIA_CATEGORY_BUILDING", ())		
+		self.szCategoryWonder = localText.getText("TXT_KEY_CONCEPT_WONDERS", ())		
 		self.szCategoryBonus = localText.getText("TXT_KEY_PEDIA_CATEGORY_BONUS", ())		
 		self.szCategoryTerrain = localText.getText("TXT_KEY_PEDIA_CATEGORY_TERRAIN", ())		
 		self.szCategoryFeature = localText.getText("TXT_KEY_PEDIA_CATEGORY_FEATURE", ())		
@@ -161,6 +163,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		self.listCategories = [ self.szCategoryTech, 
 								self.szCategoryUnit, 
 								self.szCategoryBuilding,
+								self.szCategoryWonder,
 								self.szCategoryTerrain, 
 								self.szCategoryFeature, 
 								self.szCategoryBonus, 
@@ -179,6 +182,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		# Create a new screen
 		screen = self.getScreen()
 		screen.setRenderInterfaceOnly(True);
+		screen.setScreenGroup(1)
 		screen.showScreen(PopupStates.POPUPSTATE_IMMEDIATE, False)
 		
 		# Set background
@@ -188,7 +192,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		screen.setDimensions(screen.centerX(0), screen.centerY(0), self.W_SCREEN, self.H_SCREEN)
 		
 		# Exit button
-		screen.setText(self.EXIT_ID, "Background", self.EXIT_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.X_EXIT, self.Y_EXIT, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_CLOSE_SCREEN, -1, -1)
+		screen.setText(self.EXIT_ID, "Background", self.EXIT_TEXT, CvUtil.FONT_RIGHT_JUSTIFY, self.X_EXIT, self.Y_EXIT, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_CLOSE_SCREEN, -1, -1)
 
 		# Back
 		screen.setText(self.BACK_ID, "Background", self.BACK_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.X_BACK, self.Y_BACK, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_BACK, 1, -1)
@@ -199,6 +203,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		# List of items on the right
 		screen.addListBoxGFC(self.LIST_ID, "", self.X_LINKS, self.Y_LINKS, self.W_LINKS, self.H_LINKS, TableStyles.TABLE_STYLE_STANDARD)
 		screen.enableSelect(self.LIST_ID, True)
+		screen.setStyle(self.LIST_ID, "Table_StandardCiv_Style")
 		
 	# Screen construction function
 	def showScreen(self, iCategory):
@@ -222,8 +227,10 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 			self.X_ITEMS_PANE, self.Y_ITEMS_PANE, self.W_ITEMS_PANE, self.H_ITEMS_PANE, PanelStyles.PANEL_STYLE_BLUE50)
 		
 		if self.iLastScreen	!= CvScreenEnums.PEDIA_MAIN or bNotActive:		
-			self.placeLinks()
+			self.placeLinks(true)
 			self.iLastScreen = CvScreenEnums.PEDIA_MAIN
+		else:
+			self.placeLinks(false)
 		
 		if (self.mapCategories.has_key(iCategory)):
 			self.mapCategories.get(iCategory)()
@@ -231,290 +238,80 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 	def placeTechs(self):
 		screen = self.getScreen()
 		
-		# sort techs alphabetically
-		techsList = self.getSortedList( gc.getNumTechInfos(), gc.getTechInfo )
+		# Create and place a tech pane									
+		list = self.getSortedList( gc.getNumTechInfos(), gc.getTechInfo )
 
-		# display the techs
-		if (gc.getNumTechInfos() > self.BUTTON_COLUMNS):
-			rowListName = "Child" + self.panelName
-			screen.attachMultiListControlGFC(self.panelName, rowListName, "", 1, self.BUTTON_SIZE,self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
-			for tech in techsList:
-				screen.appendMultiListButton( rowListName, gc.getTechInfo(tech[1]).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, tech[1], 1, false )
-		else:
-			i = 0
-			for tech in techsList:
-				y = self.ITEMS_SEPARATION + i * (self.BUTTON_SIZE + self.ITEMS_SEPARATION)
-				screen.setImageButtonAt("", self.panelName, gc.getTechInfo(tech[1]).getButton(), self.ITEMS_MARGIN, y, self.BUTTON_SIZE, self.BUTTON_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, tech[1], 1)
-				screen.setLabelAt("", self.panelName, u"<font=4>" + gc.getTechInfo(tech[1]).getDescription() + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, 2*self.ITEMS_MARGIN + self.BUTTON_SIZE, y+10, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-				i += 1
-
-
+		nColumns = 4
+		tableName = self.getNextWidgetName()
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.enableSelect(tableName, False)
+		for i in range(nColumns):
+			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
+		
+		iCounter = 0
+		iNumRows = 0
+		for item in list:
+			iColumn = iCounter % nColumns
+			iRow = iCounter // nColumns
+			if iRow >= iNumRows:
+				iNumRows += 1
+				screen.appendTableRow(tableName)
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getTechInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+			iCounter += 1
 						
 	def placeUnits(self):
 		screen = self.getScreen()
 		
-		unitList = self.getSortedList( gc.getNumUnitInfos(), gc.getUnitInfo )
-			
-		# display the units
-		if (gc.getNumUnitInfos() > self.BUTTON_COLUMNS):
-			rowListName = "Child" + self.panelName
-			screen.attachMultiListControlGFC(self.panelName, rowListName, "", 1, self.BUTTON_SIZE,self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
-			for unit in unitList:
-				screen.appendMultiListButton( rowListName, gc.getUnitInfo(unit[1]).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, unit[1], 1, false )		
-		else:
-			i = 0
-			for unit in unitList:
-				y = self.ITEMS_SEPARATION + i * (self.BUTTON_SIZE + self.ITEMS_SEPARATION)
-				screen.setImageButtonAt("", self.panelName, gc.getUnitInfo(unit[1]).getButton(), self.ITEMS_MARGIN, y, self.BUTTON_SIZE, self.BUTTON_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, unit[1], 1)
-				screen.setLabelAt("", self.panelName, u"<font=4>" + gc.getUnitInfo(unit[1]).getDescription() + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, 2*self.ITEMS_MARGIN + self.BUTTON_SIZE, y+10, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-				i += 1
+		# Create and place a tech pane									
+		list = self.getSortedList( gc.getNumUnitInfos(), gc.getUnitInfo )
 
+		nColumns = 4
+		tableName = self.getNextWidgetName()
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.enableSelect(tableName, False)
+		for i in range(nColumns):
+			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
+		
+		iCounter = 0
+		iNumRows = 0
+		for item in list:
+			iColumn = iCounter % nColumns
+			iRow = iCounter // nColumns
+			if iRow >= iNumRows:
+				iNumRows += 1
+				screen.appendTableRow(tableName)
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getUnitInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+			iCounter += 1
+						
 	def placeBuildings(self):
-		screen = self.getScreen()
-				
-		buildingList = self.pediaBuildingScreen.getBuildingSortedList()
-		
-		# display the buildings
-		if (gc.getNumBuildingInfos() > self.BUTTON_COLUMNS):
-			rowListName = "Child" + self.panelName
-			screen.attachMultiListControlGFC(self.panelName, rowListName, "", 1, self.BUTTON_SIZE,self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
-			for building in buildingList:
-				if (not gc.getBuildingInfo(building[1]).isGraphicalOnly()):
-					screen.appendMultiListButton( rowListName, gc.getBuildingInfo(building[1]).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, building[1], 1, false )
-		else:
-			i = 0
-			for building in buildingList:
-				if (not gc.getBuildingInfo(building[1]).isGraphicalOnly()):
-					y = self.ITEMS_SEPARATION + i * (self.BUTTON_SIZE + self.ITEMS_SEPARATION)
-					screen.setImageButtonAt("", self.panelName, gc.getBuildingInfo(building[1]).getButton(), self.ITEMS_MARGIN, y, self.BUTTON_SIZE, self.BUTTON_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, building[1], 1)
-					screen.setLabelAt("", self.panelName, u"<font=4>" + gc.getBuildingInfo(building[1]).getDescription() + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, 2*self.ITEMS_MARGIN + self.BUTTON_SIZE, y+10, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-					i += 1
-
-						
-	def placeBoni(self):
-		screen = self.getScreen()
-		
-		bonusList = self.getSortedList( gc.getNumBonusInfos(), gc.getBonusInfo )
-		
-		# display the resources
-		if (gc.getNumBonusInfos() > self.BUTTON_COLUMNS):
-			rowListName = "Child" + self.panelName
-			screen.attachMultiListControlGFC(self.panelName, rowListName, "", 1, self.BUTTON_SIZE,self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
-			for bonus in bonusList:
-				screen.appendMultiListButton( rowListName, gc.getBonusInfo(bonus[1]).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, bonus[1], 1, false )
-		else:
-			i = 0
-			for bonus in bonusList:
-				y = self.ITEMS_SEPARATION + i * (self.BUTTON_SIZE + self.ITEMS_SEPARATION)
-				screen.setImageButtonAt("", self.panelName, gc.getBonusInfo(bonus[1]).getButton(), self.ITEMS_MARGIN, y, self.BUTTON_SIZE, self.BUTTON_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, bonus[1], 1)
-				screen.setLabelAt("", self.panelName, u"<font=4>" + gc.getBonusInfo(bonus[1]).getDescription() + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, 2*self.ITEMS_MARGIN + self.BUTTON_SIZE, y+10, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-				i += 1
-			
-	def placeImprovements(self):
-		screen = self.getScreen()
-		
-		improvementList = self.getSortedList( gc.getNumImprovementInfos(), gc.getImprovementInfo )
-		
-		# display the improvements
-		if (gc.getNumImprovementInfos() > self.BUTTON_COLUMNS):
-			rowListName = "Child" + self.panelName
-			screen.attachMultiListControlGFC(self.panelName, rowListName, "", 1, self.BUTTON_SIZE,self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
-			for improvement in improvementList:
-				if (not gc.getImprovementInfo(improvement[1]).isGraphicalOnly()):
-					screen.appendMultiListButton( rowListName, gc.getImprovementInfo(improvement[1]).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_IMPROVEMENT, improvement[1], 1, false )
-		else:
-			i = 0
-			for improvement in improvementList:
-				if (not gc.getImprovementInfo(improvement[1]).isGraphicalOnly()):
-					y = self.ITEMS_SEPARATION + i * (self.BUTTON_SIZE + self.ITEMS_SEPARATION)
-					screen.setImageButtonAt("", self.panelName, gc.getImprovementInfo(improvement[1]).getButton(), self.ITEMS_MARGIN, y, self.BUTTON_SIZE, self.BUTTON_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_IMPROVEMENT, improvement[1], 1)
-					screen.setLabelAt("", self.panelName, u"<font=4>" + gc.getImprovementInfo(improvement[1]).getDescription() + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, 2*self.ITEMS_MARGIN + self.BUTTON_SIZE, y+10, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-					i += 1
-												
-	def placePromotions(self):
-		screen = self.getScreen()
-					
-		promotionList = self.getSortedList( gc.getNumPromotionInfos(), gc.getPromotionInfo )
-		
-		# display the promotion
-		if (gc.getNumPromotionInfos() > self.BUTTON_COLUMNS):
-			rowListName = "Child" + self.panelName
-			screen.attachMultiListControlGFC(self.panelName, rowListName, "", 1, self.BUTTON_SIZE,self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
-			for promotion in promotionList:
-				screen.appendMultiListButton( rowListName, gc.getPromotionInfo(promotion[1]).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, promotion[1], 1, false )
-		else:
-			i = 0
-			for promotion in promotionList:
-				y = self.ITEMS_SEPARATION + i * (self.BUTTON_SIZE + self.ITEMS_SEPARATION)
-				screen.setImageButtonAt("", self.panelName, gc.getPromotionInfo(promotion[1]).getButton(), self.ITEMS_MARGIN, y, self.BUTTON_SIZE, self.BUTTON_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, promotion[1], 1)
-				screen.setLabelAt("", self.panelName, u"<font=4>" + gc.getPromotionInfo(promotion[1]).getDescription() + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, 2*self.ITEMS_MARGIN + self.BUTTON_SIZE, y+10, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-				i += 1
-
-	def placeUnitGroups(self):
-		screen = self.getScreen()
-		
-		groupList = self.getSortedList( gc.getNumUnitCombatInfos(), gc.getUnitCombatInfo )
-
-		if (gc.getNumUnitCombatInfos() > self.BUTTON_COLUMNS):
-			rowListName = "Child" + self.panelName
-			screen.attachMultiListControlGFC(self.panelName, rowListName, "", 1, self.BUTTON_SIZE,self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
-			for group in groupList:
-				screen.appendMultiListButton(rowListName, gc.getUnitCombatInfo(group[1]).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT_COMBAT, group[1], 1, false )
-		else:
-			i = 0
-			for group in groupList:
-				y = self.ITEMS_SEPARATION + i * (self.BUTTON_SIZE + self.ITEMS_SEPARATION)
-				screen.setImageButtonAt("", self.panelName, gc.getUnitCombatInfo(group[1]).getButton(), self.ITEMS_MARGIN, y, self.BUTTON_SIZE, self.BUTTON_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT_COMBAT, group[1], 1)
-				screen.setLabelAt("", self.panelName, u"<font=4>" + gc.getUnitCombatInfo(group[1]).getDescription() + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, 2*self.ITEMS_MARGIN + self.BUTTON_SIZE, y+10, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-				i += 1
-
-	def placeCivs(self):
-		screen = self.getScreen()
-				
-		civList = self.getSortedList( gc.getNumCivilizationInfos(), gc.getCivilizationInfo )
-			
-		# display the civs
-
-		if (gc.getNumCivilizationInfos() > self.BUTTON_COLUMNS):
-			rowListName = "Child" + self.panelName
-			screen.attachMultiListControlGFC(self.panelName, rowListName, "", 1, self.BUTTON_SIZE,self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
-			for civ in civList:
-				if (gc.getCivilizationInfo(civ[1]).isPlayable()):
-					screen.appendMultiListButton( rowListName, ArtFileMgr.getCivilizationArtInfo(gc.getCivilizationInfo(civ[1]).getArtDefineTag()).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIV, civ[1], 1, false )
-		else:
-			i = 0
-			for civ in civList:
-				if (gc.getCivilizationInfo(civ[1]).isPlayable()):
-					y = self.ITEMS_SEPARATION + i * (self.BUTTON_SIZE + self.ITEMS_SEPARATION)
-					screen.setImageButtonAt("", self.panelName, gc.getCivilizationInfo(civ[1]).getButton(), self.ITEMS_MARGIN, y, self.BUTTON_SIZE, self.BUTTON_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIV, civ[1], 1)
-					screen.setLabelAt("", self.panelName, u"<font=4>" + gc.getCivilizationInfo(civ[1]).getDescription() + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, 2*self.ITEMS_MARGIN + self.BUTTON_SIZE, y+10, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-					i += 1
-						
-	def placeLeaders(self):
-		screen = self.getScreen()
-		
-		leaderList = self.getSortedList( gc.getNumLeaderHeadInfos(), gc.getLeaderHeadInfo )
-		
-		# display the leaders					
-		if (gc.getNumLeaderHeadInfos() > self.BUTTON_COLUMNS):
-			rowListName = "Child" + self.panelName
-			screen.attachMultiListControlGFC(self.panelName, rowListName, "", 1, self.BUTTON_SIZE,self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
-			for leader in leaderList:
-				if gc.getLeaderHeadInfo(leader[1]).getFavoriteCivic() != -1:
-					screen.appendMultiListButton( rowListName, gc.getLeaderHeadInfo(leader[1]).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_LEADER, leader[1], 1, false )
-		else:
-			i = 0
-			for leader in leaderList:
-				if gc.getLeaderHeadInfo(leader[1]).getFavoriteCivic() != -1:
-					y = self.ITEMS_SEPARATION + i * (self.BUTTON_SIZE + self.ITEMS_SEPARATION)
-					screen.setImageButtonAt("", self.panelName, gc.getLeaderHeadInfo(leader[1]).getButton(), self.ITEMS_MARGIN, y, self.BUTTON_SIZE, self.BUTTON_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_LEADER, leader[1], 1)
-					screen.setLabelAt("", self.panelName, u"<font=4>" + gc.getLeaderHeadInfo(leader[1]).getDescription() + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, 2*self.ITEMS_MARGIN + self.BUTTON_SIZE, y+10, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-					i += 1
-
-	def placeReligions(self):
-		screen = self.getScreen()
-				
-		religionList = self.getSortedList( gc.getNumReligionInfos(), gc.getReligionInfo )
-			
-		# display the religions
-		if (gc.getNumReligionInfos() > self.BUTTON_COLUMNS):
-			rowListName = "Child" + self.panelName
-			screen.attachMultiListControlGFC(self.panelName, rowListName, "", 1, self.BUTTON_SIZE,self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
-			for religion in religionList:
-				screen.appendMultiListButton(rowListName, gc.getReligionInfo(religion[1]).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_RELIGION, religion[1], 1, false )
-		else:
-			i = 0
-			for religion in religionList:
-				y = self.ITEMS_SEPARATION + i * (self.BUTTON_SIZE + self.ITEMS_SEPARATION)
-				screen.setImageButtonAt("", self.panelName, gc.getReligionInfo(religion[1]).getButton(), self.ITEMS_MARGIN, y, self.BUTTON_SIZE, self.BUTTON_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_RELIGION, religion[1], 1)
-				screen.setLabelAt("", self.panelName, u"<font=4>" + gc.getReligionInfo(religion[1]).getDescription() + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, 2*self.ITEMS_MARGIN + self.BUTTON_SIZE, y+10, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-				i += 1
-						
-	def placeCivics(self):
-		screen = self.getScreen()
-		
-		civicList = self.getSortedList( gc.getNumCivicInfos(), gc.getCivicInfo )
-		
-		# display the civics
-		if (gc.getNumCivicInfos() > self.BUTTON_COLUMNS):
-			rowListName = "Child" + self.panelName
-			screen.attachMultiListControlGFC(self.panelName, rowListName, "", 1, self.BUTTON_SIZE,self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
-			for civic in civicList:
-				screen.appendMultiListButton( rowListName, gc.getCivicInfo(civic[1]).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIVIC, civic[1], 1, false )
-		else:
-			i = 0
-			for civic in civicList:
-				y = self.ITEMS_SEPARATION + i * (self.BUTTON_SIZE + self.ITEMS_SEPARATION)
-				screen.setImageButtonAt("", self.panelName, gc.getCivicInfo(civic[1]).getButton(), self.ITEMS_MARGIN, y, self.BUTTON_SIZE, self.BUTTON_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIVIC, civic[1], 1)
-				screen.setLabelAt("", self.panelName, u"<font=4>" + gc.getCivicInfo(civic[1]).getDescription() + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, 2*self.ITEMS_MARGIN + self.BUTTON_SIZE, y+10, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-				i += 1
-
-	def placeProjects(self):
-		screen = self.getScreen()
-		
-		projectList = self.pediaProjectScreen.getProjectSortedList()
-		
-		# display the projects						
-		if (gc.getNumProjectInfos() > self.BUTTON_COLUMNS):
-			rowListName = "Child" + self.panelName
-			screen.attachMultiListControlGFC(self.panelName, rowListName, "", 1, self.BUTTON_SIZE,self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
-			for project in projectList:
-				screen.appendMultiListButton( rowListName, gc.getProjectInfo(project[1]).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROJECT, project[1], 1, false )
-		else:
-			i = 0
-			for project in projectList:
-				y = self.ITEMS_SEPARATION + i * (self.BUTTON_SIZE + self.ITEMS_SEPARATION)
-				screen.setImageButtonAt("", self.panelName, gc.getProjectInfo(project[1]).getButton(), self.ITEMS_MARGIN, y, self.BUTTON_SIZE, self.BUTTON_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROJECT, project[1], 1)
-				screen.setLabelAt("", self.panelName, u"<font=4>" + gc.getProjectInfo(project[1]).getDescription() + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, 2*self.ITEMS_MARGIN + self.BUTTON_SIZE, y+10, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-				i += 1
-
-	def placeTerrains(self):
-		screen = self.getScreen()
-
-		terrainList = self.getSortedList( gc.getNumTerrainInfos(), gc.getTerrainInfo )
-		
-		# display the terrains
-		if (gc.getNumTerrainInfos() > self.BUTTON_COLUMNS):
-			rowListName = "Child" + self.panelName
-			screen.attachMultiListControlGFC(self.panelName, rowListName, "", 1, self.BUTTON_SIZE,self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
-			for terrain in terrainList:
-				if (not gc.getTerrainInfo(terrain[1]).isGraphicalOnly()):
-					screen.appendMultiListButton( rowListName, gc.getTerrainInfo(terrain[1]).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TERRAIN, terrain[1], 1, false )
-		else:
-			i = 0
-			for terrain in terrainList:
-				if (not gc.getTerrainInfo(terrain[1]).isGraphicalOnly()):
-					y = self.ITEMS_SEPARATION + i * (self.BUTTON_SIZE + self.ITEMS_SEPARATION)
-					screen.setImageButtonAt("", self.panelName, gc.getTerrainInfo(terrain[1]).getButton(), self.ITEMS_MARGIN, y, self.BUTTON_SIZE, self.BUTTON_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TERRAIN, terrain[1], 1)
-					screen.setLabelAt("", self.panelName, u"<font=4>" + gc.getTerrainInfo(terrain[1]).getDescription() + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, 2*self.ITEMS_MARGIN + self.BUTTON_SIZE, y+10, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-					i += 1
-						
-	def placeFeatures(self):
-		screen = self.getScreen()
-		
-		featureList = self.getSortedList( gc.getNumFeatureInfos(), gc.getFeatureInfo )
-		
-		# display the features
-		if (gc.getNumFeatureInfos() > self.BUTTON_COLUMNS):
-			rowListName = "Child" + self.panelName
-			screen.attachMultiListControlGFC(self.panelName, rowListName, "", 1, self.BUTTON_SIZE,self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
-			for feature in featureList:
-				if (not gc.getFeatureInfo(feature[1]).isGraphicalOnly()):
-					screen.appendMultiListButton( rowListName, gc.getFeatureInfo(feature[1]).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_FEATURE, feature[1], 1, false )
-		else:
-			i = 0
-			for feature in featureList:
-				if (not gc.getFeatureInfo(feature[1]).isGraphicalOnly()):
-					y = self.ITEMS_SEPARATION + i * (self.BUTTON_SIZE + self.ITEMS_SEPARATION)
-					screen.setImageButtonAt("", self.panelName, gc.getFeatureInfo(feature[1]).getButton(), self.ITEMS_MARGIN, y, self.BUTTON_SIZE, self.BUTTON_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_FEATURE, feature[1], 1)
-					screen.setLabelAt("", self.panelName, u"<font=4>" + gc.getFeatureInfo(feature[1]).getDescription() + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, 2*self.ITEMS_MARGIN + self.BUTTON_SIZE, y+10, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-					i += 1
-						
-	def placeConcepts(self):
 		screen = self.getScreen()
 		
 		# Create and place a tech pane									
-		conceptList = self.getSortedList( gc.getNumConceptInfos(), gc.getConceptInfo )
+		list = self.pediaBuildingScreen.getBuildingSortedList(false)
+
+		nColumns = 3
+		tableName = self.getNextWidgetName()
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.enableSelect(tableName, False)
+		for i in range(nColumns):
+			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
+		
+		iCounter = 0
+		iNumRows = 0
+		for item in list:
+			iColumn = iCounter % nColumns
+			iRow = iCounter // nColumns
+			if iRow >= iNumRows:
+				iNumRows += 1
+				screen.appendTableRow(tableName)
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getBuildingInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+			iCounter += 1
+						
+	def placeWonders(self):
+		screen = self.getScreen()
+		
+		# Create and place a tech pane									
+		list = self.pediaBuildingScreen.getBuildingSortedList(true)
 
 		nColumns = 2
 		tableName = self.getNextWidgetName()
@@ -523,33 +320,332 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		for i in range(nColumns):
 			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
 		
-		# display the game concepts
 		iCounter = 0
 		iNumRows = 0
-		for concept in conceptList:
+		for item in list:
 			iColumn = iCounter % nColumns
 			iRow = iCounter // nColumns
 			if iRow >= iNumRows:
 				iNumRows += 1
 				screen.appendTableRow(tableName)
-			screen.setText("tableItem" + str(iRow*nColumns + iColumn), "", u"<font=4>" + concept[0] + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, 0, 0, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_DESCRIPTION_NO_HELP, CivilopediaPageTypes.CIVILOPEDIA_PAGE_CONCEPT, concept[1])
-			screen.attachControlToTableCell("tableItem" + str(iRow*nColumns + iColumn), tableName, iRow, iColumn)
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getBuildingInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
 			iCounter += 1
+						
+	def placeBoni(self):
+		screen = self.getScreen()
+		
+		# Create and place a tech pane									
+		list = self.getSortedList( gc.getNumBonusInfos(), gc.getBonusInfo )
+
+		nColumns = 2
+		tableName = self.getNextWidgetName()
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.enableSelect(tableName, False)
+		for i in range(nColumns):
+			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
+		
+		iCounter = 0
+		iNumRows = 0
+		for item in list:
+			iColumn = iCounter % nColumns
+			iRow = iCounter // nColumns
+			if iRow >= iNumRows:
+				iNumRows += 1
+				screen.appendTableRow(tableName)
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getBonusInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+			iCounter += 1
+			
+	def placeImprovements(self):
+		screen = self.getScreen()
+		
+		# Create and place a tech pane									
+		list = self.getSortedList( gc.getNumImprovementInfos(), gc.getImprovementInfo )
+
+		nColumns = 1
+		tableName = self.getNextWidgetName()
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.enableSelect(tableName, False)
+		for i in range(nColumns):
+			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
+		
+		iCounter = 0
+		iNumRows = 0
+		for item in list:
+			iColumn = iCounter % nColumns
+			iRow = iCounter // nColumns
+			if iRow >= iNumRows:
+				iNumRows += 1
+				screen.appendTableRow(tableName)
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getImprovementInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_IMPROVEMENT, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+			iCounter += 1
+															
+	def placePromotions(self):
+		screen = self.getScreen()
+		
+		# Create and place a tech pane									
+		list = self.getSortedList( gc.getNumPromotionInfos(), gc.getPromotionInfo )
+
+		nColumns = 2
+		tableName = self.getNextWidgetName()
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.enableSelect(tableName, False)
+		for i in range(nColumns):
+			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
+		
+		iCounter = 0
+		iNumRows = 0
+		for item in list:
+			iColumn = iCounter % nColumns
+			iRow = iCounter // nColumns
+			if iRow >= iNumRows:
+				iNumRows += 1
+				screen.appendTableRow(tableName)
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getPromotionInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+			iCounter += 1
+
+	def placeUnitGroups(self):
+		screen = self.getScreen()
+		
+		# Create and place a tech pane									
+		list = self.getSortedList( gc.getNumUnitCombatInfos(), gc.getUnitCombatInfo )
+
+		nColumns = 1
+		tableName = self.getNextWidgetName()
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.enableSelect(tableName, False)
+		for i in range(nColumns):
+			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
+		
+		iCounter = 0
+		iNumRows = 0
+		for item in list:
+			iColumn = iCounter % nColumns
+			iRow = iCounter // nColumns
+			if iRow >= iNumRows:
+				iNumRows += 1
+				screen.appendTableRow(tableName)
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getUnitCombatInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT_COMBAT, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+			iCounter += 1
+
+	def placeCivs(self):
+		screen = self.getScreen()
+		
+		# Create and place a tech pane									
+		list = self.getSortedList( gc.getNumCivilizationInfos(), gc.getCivilizationInfo )
+
+		nColumns = 1
+		tableName = self.getNextWidgetName()
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.enableSelect(tableName, False)
+		for i in range(nColumns):
+			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
+		
+		iCounter = 0
+		iNumRows = 0
+		for item in list:
+			iColumn = iCounter % nColumns
+			iRow = iCounter // nColumns
+			if (gc.getCivilizationInfo(item[1]).isPlayable()):
+				if iRow >= iNumRows:
+					iNumRows += 1
+					screen.appendTableRow(tableName)
+				screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getCivilizationInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIV, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+				iCounter += 1
+						
+	def placeLeaders(self):
+		screen = self.getScreen()
+		
+		# Create and place a tech pane									
+		list = self.getSortedList( gc.getNumLeaderHeadInfos(), gc.getLeaderHeadInfo )
+
+		nColumns = 2
+		tableName = self.getNextWidgetName()
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.enableSelect(tableName, False)
+		for i in range(nColumns):
+			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
+		
+		iCounter = 0
+		iNumRows = 0
+		for item in list:
+			iColumn = iCounter % nColumns
+			iRow = iCounter // nColumns
+			if gc.getLeaderHeadInfo(item[1]).getFavoriteCivic() != -1:
+				if iRow >= iNumRows:
+					iNumRows += 1
+					screen.appendTableRow(tableName)
+				screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getLeaderHeadInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_LEADER, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+				iCounter += 1
+
+	def placeReligions(self):
+		screen = self.getScreen()
+		
+		# Create and place a tech pane									
+		list = self.getSortedList( gc.getNumReligionInfos(), gc.getReligionInfo )
+
+		nColumns = 1
+		tableName = self.getNextWidgetName()
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.enableSelect(tableName, False)
+		for i in range(nColumns):
+			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
+		
+		iCounter = 0
+		iNumRows = 0
+		for item in list:
+			iColumn = iCounter % nColumns
+			iRow = iCounter // nColumns
+			if iRow >= iNumRows:
+				iNumRows += 1
+				screen.appendTableRow(tableName)
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getReligionInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_RELIGION, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+			iCounter += 1
+						
+	def placeCivics(self):
+		screen = self.getScreen()
+		
+		# Create and place a tech pane									
+		list = self.getSortedList( gc.getNumCivicInfos(), gc.getCivicInfo )
+
+		nColumns = 1
+		tableName = self.getNextWidgetName()
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.enableSelect(tableName, False)
+		for i in range(nColumns):
+			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
+		
+		iCounter = 0
+		iNumRows = 0
+		for item in list:
+			iColumn = iCounter % nColumns
+			iRow = iCounter // nColumns
+			if iRow >= iNumRows:
+				iNumRows += 1
+				screen.appendTableRow(tableName)
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getCivicInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIVIC, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+			iCounter += 1
+
+	def placeProjects(self):
+		screen = self.getScreen()
+		
+		# Create and place a tech pane									
+		list = self.pediaProjectScreen.getProjectSortedList()
+
+		nColumns = 1
+		tableName = self.getNextWidgetName()
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.enableSelect(tableName, False)
+		for i in range(nColumns):
+			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
+		
+		iCounter = 0
+		iNumRows = 0
+		for item in list:
+			iColumn = iCounter % nColumns
+			iRow = iCounter // nColumns
+			if iRow >= iNumRows:
+				iNumRows += 1
+				screen.appendTableRow(tableName)
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getProjectInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROJECT, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+			iCounter += 1
+
+	def placeTerrains(self):
+		screen = self.getScreen()
+		
+		# Create and place a tech pane									
+		list = self.getSortedList( gc.getNumTerrainInfos(), gc.getTerrainInfo )
+
+		nColumns = 1
+		tableName = self.getNextWidgetName()
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.enableSelect(tableName, False)
+		for i in range(nColumns):
+			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
+		
+		iCounter = 0
+		iNumRows = 0
+		for item in list:
+			iColumn = iCounter % nColumns
+			iRow = iCounter // nColumns
+			if iRow >= iNumRows:
+				iNumRows += 1
+				screen.appendTableRow(tableName)
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getTerrainInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_TERRAIN, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+			iCounter += 1
+
+						
+	def placeFeatures(self):
+		screen = self.getScreen()
+		
+		# Create and place a tech pane									
+		list = self.getSortedList( gc.getNumFeatureInfos(), gc.getFeatureInfo )
+
+		nColumns = 1
+		tableName = self.getNextWidgetName()
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.enableSelect(tableName, False)
+		for i in range(nColumns):
+			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
+		
+		iCounter = 0
+		iNumRows = 0
+		for item in list:
+			iColumn = iCounter % nColumns
+			iRow = iCounter // nColumns
+			if iRow >= iNumRows:
+				iNumRows += 1
+				screen.appendTableRow(tableName)
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getFeatureInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_FEATURE, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+			iCounter += 1
+						
+	def placeConcepts(self):
+		screen = self.getScreen()
+		
+		# Create and place a tech pane									
+		list = self.getSortedList( gc.getNumConceptInfos(), gc.getConceptInfo )
+
+		nColumns = 2
+		tableName = self.getNextWidgetName()
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.enableSelect(tableName, False)
+		for i in range(nColumns):
+			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
+		
+		iCounter = 0
+		iNumRows = 0
+		for item in list:
+			iColumn = iCounter % nColumns
+			iRow = iCounter // nColumns
+			if iRow >= iNumRows:
+				iNumRows += 1
+				screen.appendTableRow(tableName)
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getConceptInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_DESCRIPTION, CivilopediaPageTypes.CIVILOPEDIA_PAGE_CONCEPT, item[1], CvUtil.FONT_LEFT_JUSTIFY)
+			iCounter += 1
+
 						
 	def placeSpecialists(self):
 		screen = self.getScreen()
 		
-		# display specialists
-		if (gc.getNumSpecialistInfos() > self.BUTTON_COLUMNS):
-			rowListName = "Child" + self.panelName
-			screen.attachMultiListControlGFC(self.panelName, rowListName, "", 1, self.BUTTON_SIZE,self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
-			for i in range(gc.getNumSpecialistInfos()):
-				screen.appendMultiListButton( rowListName, gc.getSpecialistInfo(i).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_SPECIALIST, i, 1, false )
-		else:
-			for i in range(gc.getNumSpecialistInfos()):
-				y = self.ITEMS_SEPARATION + i * (self.BUTTON_SIZE + self.ITEMS_SEPARATION)
-				screen.setImageButtonAt("", self.panelName, gc.getSpecialistInfo(i).getButton(), self.ITEMS_MARGIN, y, self.BUTTON_SIZE, self.BUTTON_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_SPECIALIST, i, 1)
-				screen.setLabelAt("", self.panelName, u"<font=4>" + gc.getSpecialistInfo(i).getDescription() + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, 2*self.ITEMS_MARGIN + self.BUTTON_SIZE, y+10, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
+		# Create and place a tech pane									
+		list = self.getSortedList( gc.getNumSpecialistInfos(), gc.getSpecialistInfo )
+
+		nColumns = 1
+		tableName = self.getNextWidgetName()
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.enableSelect(tableName, False)
+		for i in range(nColumns):
+			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
+		
+		iCounter = 0
+		iNumRows = 0
+		for item in list:
+			iColumn = iCounter % nColumns
+			iRow = iCounter // nColumns
+			if iRow >= iNumRows:
+				iNumRows += 1
+				screen.appendTableRow(tableName)
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getSpecialistInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_SPECIALIST, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+			iCounter += 1
 						
 	def placeHints(self):
 		screen = self.getScreen()
@@ -564,15 +660,17 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 			if len( hint ) != 0:
 				screen.appendListBoxString( self.szAreaId, hint, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 										
-	def placeLinks(self):
+	def placeLinks(self, bRedraw):
 		
 		screen = self.getScreen()
 		
-		screen.clearListBoxGFC(self.LIST_ID)
+		if bRedraw:
+			screen.clearListBoxGFC(self.LIST_ID)
 
 		i = 0
 		for szCategory in self.listCategories:
-			screen.appendListBoxString(self.LIST_ID, szCategory, WidgetTypes.WIDGET_PEDIA_MAIN, i, 0, CvUtil.FONT_LEFT_JUSTIFY )
+			if bRedraw:
+				screen.appendListBoxString(self.LIST_ID, szCategory, WidgetTypes.WIDGET_PEDIA_MAIN, i, 0, CvUtil.FONT_LEFT_JUSTIFY )
 			i += 1
 
 		screen.setSelectedListBoxStringGFC(self.LIST_ID, self.iCategory)
@@ -658,54 +756,89 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		self.pediaJump(current[0], current[1], False)
 		
 	def link(self, szLink):
+		if (szLink == "PEDIA_MAIN_TECH"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_TECH), True)			
+		if (szLink == "PEDIA_MAIN_UNIT"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_UNIT), True)			
+		if (szLink == "PEDIA_MAIN_BUILDING"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_BUILDING), True)			
+		if (szLink == "PEDIA_MAIN_TERRAIN"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_TERRAIN), True)			
+		if (szLink == "PEDIA_MAIN_FEATURE"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_FEATURE), True)			
+		if (szLink == "PEDIA_MAIN_BONUS"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_BONUS), True)			
+		if (szLink == "PEDIA_MAIN_IMPROVEMENT"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_IMPROVEMENT), True)			
+		if (szLink == "PEDIA_MAIN_SPECIALIST"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_SPECIALIST), True)			
+		if (szLink == "PEDIA_MAIN_PROMOTION"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_PROMOTION), True)			
+		if (szLink == "PEDIA_MAIN_UNIT_GROUP"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_UNIT_GROUP), True)			
+		if (szLink == "PEDIA_MAIN_CIV"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_CIV), True)			
+		if (szLink == "PEDIA_MAIN_LEADER"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_LEADER), True)			
+		if (szLink == "PEDIA_MAIN_RELIGION"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_RELIGION), True)			
+		if (szLink == "PEDIA_MAIN_CIVIC"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_CIVIC), True)			
+		if (szLink == "PEDIA_MAIN_PROJECT"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_PROJECT), True)			
+		if (szLink == "PEDIA_MAIN_CONCEPT"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_CONCEPT), True)			
+		if (szLink == "PEDIA_MAIN_HINTS"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_HINTS), True)			
+
 		for i in range(gc.getNumConceptInfos()):
-			if (gc.getConceptInfo(i).getType() == szLink):
+			if (gc.getConceptInfo(i).isMatchForLink(szLink, False)):
 				iEntryId = self.pediaHistorical.getIdFromEntryInfo(CivilopediaPageTypes.CIVILOPEDIA_PAGE_CONCEPT, i)
 				return self.pediaJump(CvScreenEnums.PEDIA_HISTORY, iEntryId, True)
 		for i in range(gc.getNumTechInfos()):
-			if (gc.getTechInfo(i).getType() == szLink):
+			if (gc.getTechInfo(i).isMatchForLink(szLink, False)):
 				return self.pediaJump(CvScreenEnums.PEDIA_TECH, i, True)
 		for i in range(gc.getNumUnitInfos()):
-			if (gc.getUnitInfo(i).getType() == szLink):
+			if (gc.getUnitInfo(i).isMatchForLink(szLink, False)):
 				return self.pediaJump(CvScreenEnums.PEDIA_UNIT, i, True)
 		for i in range(gc.getNumBuildingInfos()):
-			if (gc.getBuildingInfo(i).getType() == szLink):
+			if (gc.getBuildingInfo(i).isMatchForLink(szLink, False)):
 				return self.pediaJump(CvScreenEnums.PEDIA_BUILDING, i, True)
 		for i in range(gc.getNumPromotionInfos()):
-			if (gc.getPromotionInfo(i).getType() == szLink):
+			if (gc.getPromotionInfo(i).isMatchForLink(szLink, False)):
 				return self.pediaJump(CvScreenEnums.PEDIA_PROMOTION, i, True)
 		for i in range(gc.getNumUnitCombatInfos()):
-			if (gc.getUnitCombatInfo(i).getType() == szLink):
+			if (gc.getUnitCombatInfo(i).isMatchForLink(szLink, False)):
 				return self.pediaJump(CvScreenEnums.PEDIA_UNIT_CHART, i, True)				
 		for i in range(gc.getNumBonusInfos()):
-			if (gc.getBonusInfo(i).getType() == szLink):
+			if (gc.getBonusInfo(i).isMatchForLink(szLink, False)):
 				return self.pediaJump(CvScreenEnums.PEDIA_BONUS, i, True)				
 		for i in range(gc.getNumTerrainInfos()):
-			if (gc.getTerrainInfo(i).getType() == szLink):
+			if (gc.getTerrainInfo(i).isMatchForLink(szLink, False)):
 				return self.pediaJump(CvScreenEnums.PEDIA_TERRAIN, i, True)
 		for i in range(gc.getNumFeatureInfos()):
-			if (gc.getFeatureInfo(i).getType() == szLink):
+			if (gc.getFeatureInfo(i).isMatchForLink(szLink, False)):
 				return self.pediaJump(CvScreenEnums.PEDIA_FEATURE, i, True)				
 		for i in range(gc.getNumImprovementInfos()):
-			if (gc.getImprovementInfo(i).getType() == szLink):
+			if (gc.getImprovementInfo(i).isMatchForLink(szLink, False)):
 				return self.pediaJump(CvScreenEnums.PEDIA_IMPROVEMENT, i, True)
 		for i in range(gc.getNumCivicInfos()):
-			if (gc.getCivicInfo(i).getType() == szLink):
+			if (gc.getCivicInfo(i).isMatchForLink(szLink, False)):
 				return self.pediaJump(CvScreenEnums.PEDIA_CIVIC, i, True)
 		for i in range(gc.getNumCivilizationInfos()):
-			if (gc.getCivilizationInfo(i).getType() == szLink):
+			if (gc.getCivilizationInfo(i).isMatchForLink(szLink, False)):
 				return self.pediaJump(CvScreenEnums.PEDIA_CIVILIZATION, i, True)
 		for i in range(gc.getNumLeaderHeadInfos()):
-			if (gc.getLeaderHeadInfo(i).getType() == szLink):
+			if (gc.getLeaderHeadInfo(i).isMatchForLink(szLink, False)):
 				return self.pediaJump(CvScreenEnums.PEDIA_LEADER, i, True)
 		for i in range(gc.getNumSpecialistInfos()):
-			if (gc.getSpecialistInfo(i).getType() == szLink):
+			if (gc.getSpecialistInfo(i).isMatchForLink(szLink, False)):
 				return self.pediaJump(CvScreenEnums.PEDIA_SPECIALIST, i, True)
 		for i in range(gc.getNumProjectInfos()):
-			if (gc.getProjectInfo(i).getType() == szLink):
+			if (gc.getProjectInfo(i).isMatchForLink(szLink, False)):
 				return self.pediaJump(CvScreenEnums.PEDIA_PROJECT, i, True)
 		for i in range(gc.getNumReligionInfos()):
-			if (gc.getReligionInfo(i).getType() == szLink):
+			if (gc.getReligionInfo(i).isMatchForLink(szLink, False)):
 				return self.pediaJump(CvScreenEnums.PEDIA_RELIGION, i, True)
 																
 	def deleteAllWidgets(self):

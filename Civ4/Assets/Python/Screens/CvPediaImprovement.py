@@ -4,7 +4,6 @@ from CvPythonExtensions import *
 import CvUtil
 import ScreenInput
 import CvScreenEnums
-import string
 
 # globals
 gc = CyGlobalContext()
@@ -79,8 +78,10 @@ class CvPediaImprovement:
 		screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_IMPROVEMENT, -1)
 
 		if self.top.iLastScreen	!= CvScreenEnums.PEDIA_IMPROVEMENT or bNotActive:		
-			self.placeLinks()
+			self.placeLinks(true)
 			self.top.iLastScreen = CvScreenEnums.PEDIA_IMPROVEMENT
+		else:
+			self.placeLinks(false)
 			
 		# Icon
 		screen.addPanel( self.top.getNextWidgetName(), "", "", False, False,
@@ -109,58 +110,55 @@ class CvPediaImprovement:
 		screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_CATEGORY_IMPROVEMENT", ()), "", true, true,
 				 self.X_IMPROVEMENTS_PANE, self.Y_IMPROVEMENTS_PANE, self.W_IMPROVEMENTS_PANE, self.H_IMPROVEMENTS_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 		
-		listName = self.top.getNextWidgetName()
-		screen.attachListBoxGFC( panelName, listName, "", TableStyles.TABLE_STYLE_EMPTY )
-		screen.enableSelect(listName, False)
 		
 		info = gc.getImprovementInfo(self.iImprovement)
 		
+		szYield = u""
 		for k in range(YieldTypes.NUM_YIELD_TYPES):
 			iYieldChange = gc.getImprovementInfo(self.iImprovement).getYieldChange(k)
 			if (iYieldChange != 0):										
-				szYield = u""
 				if (iYieldChange > 0):
 					sign = "+"
 				else:
 					sign = ""
 					
-				szYield += (u"%s: %s%i%c" % (gc.getYieldInfo(k).getDescription(), sign, iYieldChange, gc.getYieldInfo(k).getChar()))
-				screen.appendListBoxString( listName, szYield, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+				szYield += (u"%s: %s%i%c\n" % (gc.getYieldInfo(k).getDescription(), sign, iYieldChange, gc.getYieldInfo(k).getChar()))
 			
 		for k in range(YieldTypes.NUM_YIELD_TYPES):
 			iYieldChange = gc.getImprovementInfo(self.iImprovement).getIrrigatedYieldChange(k)
 			if (iYieldChange != 0):
-				szYield = localText.getText("TXT_KEY_PEDIA_IRRIGATED_YIELD", (gc.getYieldInfo(k).getTextKey(), iYieldChange, gc.getYieldInfo(k).getChar()))
-				screen.appendListBoxString( listName, szYield, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+				szYield += localText.getText("TXT_KEY_PEDIA_IRRIGATED_YIELD", (gc.getYieldInfo(k).getTextKey(), iYieldChange, gc.getYieldInfo(k).getChar())) + u"\n"
 			
 		for k in range(YieldTypes.NUM_YIELD_TYPES):
 			iYieldChange = gc.getImprovementInfo(self.iImprovement).getHillsYieldChange(k)
 			if (iYieldChange != 0):										
-				szYield = localText.getText("TXT_KEY_PEDIA_HILLS_YIELD", (gc.getYieldInfo(k).getTextKey(), iYieldChange, gc.getYieldInfo(k).getChar()))	
-				screen.appendListBoxString( listName, szYield, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+				szYield += localText.getText("TXT_KEY_PEDIA_HILLS_YIELD", (gc.getYieldInfo(k).getTextKey(), iYieldChange, gc.getYieldInfo(k).getChar())) + u"\n"	
 			
 		for k in range(YieldTypes.NUM_YIELD_TYPES):
-			szYield = u""
 			iYieldChange = gc.getImprovementInfo(self.iImprovement).getRiverSideYieldChange(k)
 			if (iYieldChange != 0):										
-				szYield = localText.getText("TXT_KEY_PEDIA_RIVER_YIELD", (gc.getYieldInfo(k).getTextKey(), iYieldChange, gc.getYieldInfo(k).getChar()))	
-				screen.appendListBoxString( listName, szYield, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+				szYield += localText.getText("TXT_KEY_PEDIA_RIVER_YIELD", (gc.getYieldInfo(k).getTextKey(), iYieldChange, gc.getYieldInfo(k).getChar())) + u"\n"	
 
 		for iTech in range(gc.getNumTechInfos()):
 			for k in range(YieldTypes.NUM_YIELD_TYPES):
-				szYield = u""
 				iYieldChange = gc.getImprovementInfo(self.iImprovement).getTechYieldChanges(iTech, k)
 				if (iYieldChange != 0):										
-					szYield = localText.getText("TXT_KEY_PEDIA_TECH_YIELD", (gc.getYieldInfo(k).getTextKey(), iYieldChange, gc.getYieldInfo(k).getChar(), gc.getTechInfo(iTech).getDescription()))
-					screen.appendListBoxString( listName, szYield, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+					szYield += localText.getText("TXT_KEY_PEDIA_TECH_YIELD", (gc.getYieldInfo(k).getTextKey(), iYieldChange, gc.getYieldInfo(k).getChar(), gc.getTechInfo(iTech).getTextKey())) + u"\n"	
 
 		for iCivic in range(gc.getNumCivicInfos()):
 			for k in range(YieldTypes.NUM_YIELD_TYPES):
-				szYield = u""
 				iYieldChange = gc.getCivicInfo(iCivic).getImprovementYieldChanges(self.iImprovement, k)
 				if (iYieldChange != 0):										
-					szYield = localText.getText("TXT_KEY_PEDIA_TECH_YIELD", (gc.getYieldInfo(k).getTextKey(), iYieldChange, gc.getYieldInfo(k).getChar(), gc.getCivicInfo(iCivic).getDescription()))	
-					screen.appendListBoxString( listName, szYield, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+					szYield += localText.getText("TXT_KEY_PEDIA_TECH_YIELD", (gc.getYieldInfo(k).getTextKey(), iYieldChange, gc.getYieldInfo(k).getChar(), gc.getCivicInfo(iCivic).getTextKey())) + u"\n"		
+
+		for iRoute in range(gc.getNumRouteInfos()):
+			for k in range(YieldTypes.NUM_YIELD_TYPES):
+				iYieldChange = gc.getImprovementInfo(self.iImprovement).getRouteYieldChanges(iRoute, k)
+				if (iYieldChange != 0):										
+					szYield += localText.getText("TXT_KEY_PEDIA_ROUTE_YIELD", (gc.getYieldInfo(k).getTextKey(), iYieldChange, gc.getYieldInfo(k).getChar(), gc.getRouteInfo(iRoute).getTextKey())) + u"\n"
+
+		listName = self.top.getNextWidgetName()
+		screen.addMultilineText(listName, szYield, self.X_IMPROVEMENTS_PANE+5, self.Y_IMPROVEMENTS_PANE+30, self.W_IMPROVEMENTS_PANE-10, self.H_IMPROVEMENTS_PANE-35, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
 
 	def placeBonusYield(self):
 		
@@ -227,20 +225,16 @@ class CvPediaImprovement:
 				 self.X_EFFECTS, self.Y_EFFECTS, self.W_EFFECTS, self.H_EFFECTS, PanelStyles.PANEL_STYLE_BLUE50 )
 				
 		listName = self.top.getNextWidgetName()
-		screen.attachListBoxGFC( panelName, listName, "", TableStyles.TABLE_STYLE_EMPTY )
-		screen.enableSelect(listName, False)
 		
 		szSpecialText = CyGameTextMgr().getImprovementHelp(self.iImprovement, True)
-		splitText = string.split( szSpecialText, "\n" )
-		for special in splitText:
-			if len( special ) != 0:
-				screen.appendListBoxString( listName, special, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		screen.addMultilineText(listName, szSpecialText, self.X_EFFECTS+5, self.Y_EFFECTS+5, self.W_EFFECTS-10, self.H_EFFECTS-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
 										
-	def placeLinks(self):
+	def placeLinks(self, bRedraw):
 
 		screen = self.top.getScreen()
 
-		screen.clearListBoxGFC(self.top.LIST_ID)
+		if bRedraw:
+			screen.clearListBoxGFC(self.top.LIST_ID)
 		
 		# sort Improvements alphabetically
 		rowListName=[(0,0)]*gc.getNumImprovementInfos()
@@ -252,7 +246,8 @@ class CvPediaImprovement:
 		i = 0
 		for iI in range(gc.getNumImprovementInfos()):
 			if (not gc.getImprovementInfo(rowListName[iI][1]).isGraphicalOnly()):
-				screen.appendListBoxString(self.top.LIST_ID, rowListName[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_IMPROVEMENT, rowListName[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY)
+				if bRedraw:
+					screen.appendListBoxString(self.top.LIST_ID, rowListName[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_IMPROVEMENT, rowListName[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY)
 				if rowListName[iI][1] == self.iImprovement:
 					iSelected = i
 				i += 1

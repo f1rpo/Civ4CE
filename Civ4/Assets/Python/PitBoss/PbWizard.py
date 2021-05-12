@@ -22,28 +22,40 @@ localText = CyTranslator()
 curPage = None
 
 #
-# Net Select Page (first page of wizard)
+# SMTP Login Page (first page of wizard)
 #
-class NetSelectPage(wx.wizard.PyWizardPage):
+class SMTPLoginPage(wx.wizard.WizardPageSimple):
 	def __init__(self, parent):
-		wx.wizard.PyWizardPage.__init__(self, parent)
-		self.next = self.prev = None
+		wx.wizard.WizardPageSimple.__init__(self, parent)
+		
 		self.myParent = parent
+		header = wx.StaticText(self, -1, localText.getText("TXT_KEY_PITBOSS_SMTP_HEADER", ()))
 		
-		# Place the radio buttons
-		selections = ['LAN', 'Internet']
-		sizer = wx.BoxSizer(wx.VERTICAL)
-		self.rb = wx.RadioBox(
-					self, -1, (localText.getText("TXT_KEY_PITBOSS_SELECT_NETWORK", ())), wx.DefaultPosition, wx.DefaultSize,
-					selections, 1, wx.RA_SPECIFY_COLS
-					)
-				
-		self.rb.SetToolTip(wx.ToolTip((localText.getText("TXT_KEY_PITBOSS_SELECT_NETWORK_HELP", ()))))
-		sizer.Add(self.rb, 0, wx.ALL, 5)
+		hostLbl = wx.StaticText(self, -1, localText.getText("TXT_KEY_PITBOSS_SMTP_HOST", ()))
+		self.host = wx.TextCtrl(self, -1, PB.getSMTPHost(), size=(125,-1))
+		self.host.SetHelpText(localText.getText("TXT_KEY_PITBOSS_SMTP_HOST_HELP", ()))
+		self.host.SetInsertionPoint(0)
 		
-		self.SetSizer(sizer)
+		usernameLbl = wx.StaticText(self, -1, localText.getText("TXT_KEY_PITBOSS_SMTP_LOGIN", ()))
+		self.username = wx.TextCtrl(self, -1, PB.getSMTPLogin(), size=(125,-1))
+		self.username.SetHelpText(localText.getText("TXT_KEY_PITBOSS_SMTP_LOGIN_HELP", ()))
 		
+		passwordLbl = wx.StaticText(self, -1, localText.getText("TXT_KEY_PITBOSS_SMTP_PASSWORD", ()))
+		self.password = wx.TextCtrl(self, -1, "", size=(125,-1), style=wx.TE_PASSWORD)
+		self.password.SetHelpText(localText.getText("TXT_KEY_PITBOSS_SMTP_PASSWORD_HELP", ()))
+		
+		self.Bind(wx.wizard.EVT_WIZARD_PAGE_CHANGING, self.OnPageChanging)
 		self.Bind(wx.wizard.EVT_WIZARD_PAGE_CHANGED, self.OnPageChanged)
+		
+		sizer = wx.FlexGridSizer(cols=2, hgap=4, vgap=4)
+		sizer.AddMany([ hostLbl, self.host,
+						usernameLbl, self.username,
+						passwordLbl, self.password,
+						])
+		border = wx.BoxSizer(wx.VERTICAL)
+		border.Add(sizer, 0, wx.ALL, 25)
+		self.SetSizer(border)
+		self.SetAutoLayout(True)
 		
 	def enableButtons(self):
 		self.myParent.FindWindowById(wx.ID_FORWARD).Enable(True)
@@ -56,6 +68,49 @@ class NetSelectPage(wx.wizard.PyWizardPage):
 		
 		bPatchConfirmed = False
 		bPatchOK = False
+
+		# Determine what buttons should be enabled
+		self.enableButtons()
+		
+		# We are the current page
+		curPage = self
+			
+	def OnPageChanging(self, event):
+		# Check direction
+		if event.GetDirection():
+			# We are trying to move forward - set the SMTP values
+			PB.setSMTPValues( self.host.GetValue(), self.username.GetValue(), self.password.GetValue() )
+			
+#
+# Network Selection Page
+#
+class NetSelectPage(wx.wizard.PyWizardPage):
+	def __init__(self, parent):
+		wx.wizard.PyWizardPage.__init__(self, parent)
+		self.next = self.prev = None
+		self.myParent = parent
+		
+		# Place the radio buttons
+		selections = [localText.getText("TXT_KEY_PITBOSS_DIRECTIP", ()), localText.getText("TXT_KEY_PITBOSS_LAN", ()), localText.getText("TXT_KEY_PITBOSS_INTERNET", ())]
+		sizer = wx.BoxSizer(wx.VERTICAL)
+		self.rb = wx.RadioBox(
+					self, -1, localText.getText("TXT_KEY_PITBOSS_SELECT_NETWORK", ()), wx.DefaultPosition, wx.DefaultSize,
+					selections, 1, wx.RA_SPECIFY_COLS
+					)
+				
+		self.rb.SetToolTip(wx.ToolTip(localText.getText("TXT_KEY_PITBOSS_SELECT_NETWORK_HELP", ())))
+		sizer.Add(self.rb, 0, wx.ALL, 5)
+		
+		self.SetSizer(sizer)
+		
+		self.Bind(wx.wizard.EVT_WIZARD_PAGE_CHANGED, self.OnPageChanged)
+		
+	def enableButtons(self):
+		self.myParent.FindWindowById(wx.ID_FORWARD).Enable(True)
+		self.myParent.FindWindowById(wx.ID_BACKWARD).Enable(True)
+		
+	def OnPageChanged(self, event):
+		global curPage
 
 		# Determine what buttons should be enabled
 		self.enableButtons()
@@ -76,6 +131,9 @@ class NetSelectPage(wx.wizard.PyWizardPage):
 		next = self.next
 		
 		if (self.rb.GetSelection() == 0):
+			bPublic = True
+			next = next.GetNext()
+		elif (self.rb.GetSelection() == 1):
 			bPublic = False
 			next = next.GetNext()
 		else:
@@ -94,17 +152,17 @@ class LoginPage(wx.wizard.WizardPageSimple):
 		wx.wizard.WizardPageSimple.__init__(self, parent)
 		
 		self.myParent = parent
-		header = wx.StaticText(self, -1, (localText.getText("TXT_KEY_PITBOSS_LOGIN", ())))
+		header = wx.StaticText(self, -1, localText.getText("TXT_KEY_PITBOSS_LOGIN", ()))
 		
-		usernameLbl = wx.StaticText(self, -1, (localText.getText("TXT_KEY_PITBOSS_USERNAME", ())))
+		usernameLbl = wx.StaticText(self, -1, localText.getText("TXT_KEY_PITBOSS_USERNAME", ()))
 		self.username = wx.TextCtrl(self, -1, "", size=(125,-1))
-		self.username.SetHelpText((localText.getText("TXT_KEY_PITBOSS_USERNAME_HELP", ())))
+		self.username.SetHelpText(localText.getText("TXT_KEY_PITBOSS_USERNAME_HELP", ()))
 		self.username.SetInsertionPoint(0)
 		self.Bind(wx.EVT_TEXT, self.OnTextEntered, self.username)
 		
-		passwordLbl = wx.StaticText(self, -1, (localText.getText("TXT_KEY_PITBOSS_PASSWORD", ())))
+		passwordLbl = wx.StaticText(self, -1, localText.getText("TXT_KEY_PITBOSS_PASSWORD", ()))
 		self.password = wx.TextCtrl(self, -1, "", size=(125,-1), style=wx.TE_PASSWORD)
-		self.password.SetHelpText((localText.getText("TXT_KEY_PITBOSS_PASSWORD_HELP", ())))
+		self.password.SetHelpText(localText.getText("TXT_KEY_PITBOSS_PASSWORD_HELP", ()))
 		self.Bind(wx.EVT_TEXT, self.OnTextEntered, self.password)
 		
 		self.Bind(wx.wizard.EVT_WIZARD_PAGE_CHANGING, self.OnPageChanging)
@@ -143,15 +201,15 @@ class LoginPage(wx.wizard.WizardPageSimple):
 		
 		# Put up a dialog
 		dlg = wx.MessageDialog(
-			self, "You must install the latest updates to continue",
-			"Patch required!", wx.OK|wx.CANCEL|wx.ICON_EXCLAMATION)
+			self, localText.getText("TXT_KEY_PITBOSS_PATCH_REQUIRED_DESC", ()),
+			localText.getText("TXT_KEY_PITBOSS_PATCH_REQUIRED_TITLE", ()), wx.OK|wx.CANCEL|wx.ICON_EXCLAMATION)
 			
 		# Show the modal dialog and get the response
 		if dlg.ShowModal() == wx.ID_OK:
 			# They want to download the patch - tell the app
 			if (not PB.downloadPatch(patchName, patchUrl)):
 				# Patching failed - tell the user
-				msg = wx.MessageBox("Error while downloadint the patch", "Download Error", wx.ICON_ERROR)
+				msg = wx.MessageBox(localText.getText("TXT_KEY_PITBOSS_PATCH_DOWNLOAD_ERROR_DESC", ()), localText.getText("TXT_KEY_PITBOSS_PATCH_DOWNLOAD_ERROR_TITLE", ()), wx.ICON_ERROR)
 				bPatchConfirmed = true
 				szPatchName = patchName
 				self.enableButtons()
@@ -166,8 +224,8 @@ class LoginPage(wx.wizard.WizardPageSimple):
 		
 		# Put up a dialog
 		dlg = wx.MessageDialog(
-			self, "Press ok to shut down and install the patch",
-			"Download complete!", wx.OK|wx.ICON_EXCLAMATION)
+			self, localText.getText("TXT_KEY_PITBOSS_PATCH_COMPLETE_DESC", ()),
+			localText.getText("TXT_KEY_PITBOSS_PATCH_COMPLETE_TITLE", ()), wx.OK|wx.ICON_EXCLAMATION)
 			
 		# Show the dialog and get the response
 		if dlg.ShowModal() == wx.ID_OK:
@@ -201,7 +259,7 @@ class LoginPage(wx.wizard.WizardPageSimple):
 		if (not bPatchConfirmed):
 			if (not PB.checkPatch()):
 				# Error in checking for a patch
-				msg = wx.MessageBox("Error while looking for updates", "Update error", wx.ICON_ERROR)
+				msg = wx.MessageBox(localText.getText("TXT_KEY_PITBOSS_PATCH_CHECK_ERROR_DESC", ()), localText.getText("TXT_KEY_PITBOSS_PATCH_DOWNLOAD_ERROR_TITLE", ()), wx.ICON_ERROR)
 				bPatchConfirmed = true
 		
 		# Determine what buttons should be enabled
@@ -213,14 +271,14 @@ class LoginPage(wx.wizard.WizardPageSimple):
 #
 # Load Select Page
 #
-class LoadSelectPage(wx.wizard.WizardPageSimple):
+class LoadSelectPage(wx.wizard.PyWizardPage):
 	def __init__(self, parent):
-		wx.wizard.WizardPageSimple.__init__(self, parent)
-		
+		wx.wizard.PyWizardPage.__init__(self, parent)
+		self.next = self.prev = None
 		self.myParent = parent
 		
 		# Place the radio buttons
-		selections = ['New Game', 'Load Game']
+		selections = [localText.getText("TXT_KEY_PITBOSS_NEWGAME", ()), localText.getText("TXT_KEY_PITBOSS_LOADGAME", ())]
 		sizer = wx.BoxSizer(wx.VERTICAL)
 		self.rb = wx.RadioBox(
 					self, -1, (localText.getText("TXT_KEY_PITBOSS_SELECT_INIT", ())), wx.DefaultPosition, wx.DefaultSize,
@@ -239,28 +297,23 @@ class LoadSelectPage(wx.wizard.WizardPageSimple):
 		# If the patch state is ok, enable appropriate buttons
 		global bPatchConfirmed
 		
-		if (not bPatchConfirmed):
-			# Not confirmed, disable buttons
-			self.myParent.FindWindowById(wx.ID_FORWARD).Disable()
-			self.myParent.FindWindowById(wx.ID_BACKWARD).Disable()
-		else:
-			self.myParent.FindWindowById(wx.ID_FORWARD).Enable(True)
-			self.myParent.FindWindowById(wx.ID_BACKWARD).Enable(True)
+		self.myParent.FindWindowById(wx.ID_FORWARD).Enable(bPatchConfirmed)
+		self.myParent.FindWindowById(wx.ID_BACKWARD).Enable(bPatchConfirmed)
 			
 	def patchAvailable(self, patchName, patchUrl):
 		global bPatchConfirmed
 		
 		# Put up a dialog
 		dlg = wx.MessageDialog(
-			self, "Would you like to install the latest updates?",
-			"Patch available!", wx.YES_NO|wx.ICON_QUESTION)
+			self, localText.getText("TXT_KEY_PITBOSS_PATCH_AVAILABLE_DESC", ()),
+			localText.getText("TXT_KEY_PITBOSS_PATCH_AVAILABLE_TITLE", ()), wx.YES_NO|wx.ICON_QUESTION)
 			
 		# Show the modal dialog and get the response
 		if dlg.ShowModal() == wx.ID_YES:
 			# They want to download the patch - tell the app
 			if (not PB.downloadPatch(patchName, patchUrl)):
 				# Patching failed - tell the user
-				msg = wx.MessageBox("Error while downloadint the patch", "Download Error", wx.ICON_ERROR)
+				msg = wx.MessageBox(localText.getText("TXT_KEY_PITBOSS_PATCH_DOWNLOAD_ERROR_DESC", ()), localText.getText("TXT_KEY_PITBOSS_PATCH_DOWNLOAD_ERROR_TITLE", ()), wx.ICON_ERROR)
 				bPatchConfirmed = true
 				self.enableButtons()
 		else:
@@ -275,8 +328,8 @@ class LoadSelectPage(wx.wizard.WizardPageSimple):
 		
 		# Put up a dialog
 		dlg = wx.MessageDialog(
-			self, "Press ok to shut down and install the patch",
-			"Download complete!", wx.OK|wx.CANCEL|wx.ICON_EXCLAMATION)
+			self, localText.getText("TXT_KEY_PITBOSS_PATCH_COMPLETE_DESC", ()),
+			localText.getText("TXT_KEY_PITBOSS_PATCH_COMPLETE_TITLE", ()), wx.OK|wx.CANCEL|wx.ICON_EXCLAMATION)
 			
 		# Show the dialog and get the response
 		if dlg.ShowModal() == wx.ID_OK:
@@ -295,13 +348,32 @@ class LoadSelectPage(wx.wizard.WizardPageSimple):
 		if (not bPatchConfirmed):
 			if (not PB.checkPatch()):
 				# Error in checking for a patch
-				msg = wx.MessageBox("Error while looking for updates", "Update error", wx.ICON_ERROR)
+				msg = wx.MessageBox(localText.getText("TXT_KEY_PITBOSS_PATCH_CHECK_ERROR_DESC", ()), localText.getText("TXT_KEY_PITBOSS_PATCH_CHECK_ERROR_TITLE", ()), wx.ICON_ERROR)
 				bPatchConfirmed = true
 				
 		# Determine what buttons should be enabled
 		self.enableButtons()
 		
 		curPage = self
+		
+	def SetNext(self, next):
+		self.next = next
+		
+	def SetPrev(self, prev):
+		self.prev = prev
+		
+	def GetNext(self):
+		"Determine whether to skip the staging page"
+		
+		next = self.next
+		
+		if (self.rb.GetSelection() == 1):
+			next = NULL
+			
+		return next
+		
+	def GetPrev(self):
+		return self.prev
 			
 	def OnPageChanging(self, event):
 		
@@ -313,8 +385,8 @@ class LoadSelectPage(wx.wizard.WizardPageSimple):
 			if (self.rb.GetSelection() == 0):
 				# Hosting a new game - pop the gamename dialog
 				dlg = wx.TextEntryDialog(
-					self, 'Please enter a name for your game',
-					'Name your game!')
+					self, localText.getText("TXT_KEY_PITBOSS_NAME_GAME_DESC", ()),
+					localText.getText("TXT_KEY_PITBOSS_NAME_GAME_TITLE", ()))
 					
 				# Show the modal dialog and get the response
 				if dlg.ShowModal() == wx.ID_OK:
@@ -324,14 +396,30 @@ class LoadSelectPage(wx.wizard.WizardPageSimple):
 						# We got a gamename, save it here
 						PB.setGamename(gamename)
 						
-						# Now host!
-						if ( not PB.host() ):
-							# Hosting failed for some reason.  Clean up and exit
-							msg = wx.MessageBox((localText.getText("TXT_KEY_PITBOSS_ERROR_HOSTING", ())), (localText.getText("TXT_KEY_PITBOSS_HOST_ERROR", ())), wx.ICON_ERROR)
-							PB.reset()
-							event.Veto()
+						# Prompt for passwords in public games
+						bOK = (not bPublic)
+						if bPublic:
+							dlg = wx.TextEntryDialog(
+								self, localText.getText("TXT_KEY_PITBOSS_PWD_GAME_DESC", ()),
+								localText.getText("TXT_KEY_PITBOSS_PWD_GAME_TITLE", ()))
+								
+							if ( dlg.ShowModal() == wx.ID_OK ):
+								bOK = true
+								PB.setGamePassword( dlg.GetValue() )
+								
+						if bOK:	
+							# Now host!
+							if ( not PB.host(bPublic) ):
+								# Hosting failed for some reason.  Clean up and exit
+								msg = wx.MessageBox((localText.getText("TXT_KEY_PITBOSS_ERROR_HOSTING", ())), (localText.getText("TXT_KEY_PITBOSS_HOST_ERROR", ())), wx.ICON_ERROR)
+								PB.reset()
+								event.Veto()
+							else:
+								bSaved = False
+								
 						else:
-							bSaved = False
+							# User hit cancel
+							event.Veto()
 							
 					else:
 						# Malicious user didn't enter a gamename...
@@ -347,7 +435,7 @@ class LoadSelectPage(wx.wizard.WizardPageSimple):
 				# Loading a game - popup the file browser
 				dlg = wx.FileDialog(
 					self, message=(localText.getText("TXT_KEY_PITBOSS_CHOOSE_SAVE", ())), defaultDir=".\saves\multi",
-					defaultFile="", wildcard=localText.getText("TXT_KEY_PITBOSS_SAVE_FILES", ("(*.sav)|*.sav", )), style=wx.OPEN
+					defaultFile="", wildcard=localText.getText("TXT_KEY_PITBOSS_SAVE_FILES", ("(*.Civ4SavedGame)|*.Civ4SavedGame", )), style=wx.OPEN
 					)
 				
 				# Show the modal dialog and get the response
@@ -364,7 +452,7 @@ class LoadSelectPage(wx.wizard.WizardPageSimple):
 						else:
 							# Successfully loaded, try hosting
 							PB.setLoadFileName(path)
-							if ( not PB.host() ):
+							if ( not PB.host(bPublic) ):
 								msg = wx.MessageBox((localText.getText("TXT_KEY_PITBOSS_ERROR_HOSTING", ())), (localText.getText("TXT_KEY_PITBOSS_HOST_ERROR", wx.ICON_ERROR)))
 								PB.reset()
 								event.Veto()
@@ -407,6 +495,11 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		self.teamArray = []
 		self.diffArray = []
 		self.statusArray = []
+		
+		# Declare storage arrays
+		self.customItemSizerArray = []
+		self.customMapTextArray = []
+		self.customMapOptionArray = []
 		
 		# Build the initial selections
 		# Map
@@ -532,9 +625,9 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		
 		# Entry box to set turn timer time
 		timerOutputSizer = wx.BoxSizer(wx.HORIZONTAL)
-		timerPreText = wx.StaticText(self, -1, "Allow ")
+		timerPreText = wx.StaticText(self, -1, localText.getText("TXT_KEY_PITBOSS_TURNTIMER_A", ()))
 		self.turnTimerEdit = wx.TextCtrl(self, -1, str(gameData.iTurnTime), size=(30,-1))
-		timerPostText = wx.StaticText(self, -1, " hours to complete a turn")
+		timerPostText = wx.StaticText(self, -1, localText.getText("TXT_KEY_PITBOSS_TURNTIMER_B", ()))
 		timerOutputSizer.Add(timerPreText, 0, wx.TOP, 5)
 		timerOutputSizer.Add(self.turnTimerEdit, 0, wx.TOP, 5)
 		timerOutputSizer.Add(timerPostText, 0, wx.TOP, 5)
@@ -571,21 +664,27 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		self.pageSizer.Add(self.optionsSizer, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5)
 		
 		# Slot status - choices are static
-		slotStatusList = ['Human', 'Computer', 'Closed']
+		slotStatusList = [localText.getText("TXT_KEY_PITBOSS_HUMAN", ()), localText.getText("TXT_KEY_PITBOSS_COMPUTER", ()), localText.getText("TXT_KEY_PITBOSS_CLOSED", ())]
 		
 		# Civilizations - get from app
 		civList = []
-		civList.append('Random')
+		civList.append(localText.getText("TXT_KEY_PITBOSS_RANDOM", ()))
 		rowNum = 0
 		for rowNum in range(PB.getNumCivs()):
 			civList.append((PB.getCivAt(rowNum)))
 			
-		leaderList = ['Random']
+		leaderList = [localText.getText("TXT_KEY_PITBOSS_RANDOM", ())]
 		
 		teamList = []
 		rowNum = 0
 		for rowNum in range(gc.getMAX_CIV_PLAYERS()):
 			teamList.append(str(rowNum+1))
+			
+		# Handicaps - get from app
+		diffList = []
+		rowNum = 0
+		for rowNum in range(PB.getNumHandicaps()):
+			diffList.append((PB.getHandicapAt(rowNum)))
 			
 		playerPanel = wx.lib.scrolledpanel.ScrolledPanel(self, -1, size=(425, 300), style = wx.SUNKEN_BORDER)
 		panelSizer = wx.BoxSizer(wx.VERTICAL)
@@ -648,11 +747,13 @@ class StagingPage(wx.wizard.WizardPageSimple):
 			# Difficulty dropdown
 			itemSizer = wx.BoxSizer(wx.VERTICAL)
 			txt = wx.StaticText(playerPanel, -1, (localText.getText("TXT_KEY_PITBOSS_DIFFICULTY", ())))
-			statusTxt = wx.StaticText(playerPanel, rowNum, (PB.getHandicapAt(playerData.iDifficulty)))
+			dropDown = wx.Choice(playerPanel, rowNum, (-1,-1), choices=diffList)
+			dropDown.SetSelection(playerData.iDifficulty)
 			itemSizer.Add(txt)
-			itemSizer.Add(statusTxt)
-			rowSizer.Add(itemSizer, 0, wx.ALL, 5)
-			self.diffArray.append(statusTxt)
+			itemSizer.Add(dropDown)
+			rowSizer.Add(itemSizer, 0, wx.TOP, 3)
+			self.diffArray.append(dropDown)
+			self.Bind(wx.EVT_CHOICE, self.OnPlayerChoice, dropDown)
 			
 			# Ready status
 			itemSizer = wx.BoxSizer(wx.VERTICAL)
@@ -699,7 +800,7 @@ class StagingPage(wx.wizard.WizardPageSimple):
 			
 	def OnCustomMapOptionChoice(self, event):
 		# Get the option ID
-		optionID = event.GetId()
+		optionID = ( (event.GetId()/100) - 1)
 		PB.customMapOptionChanged( optionID, self.customMapOptionArray[optionID].GetSelection() )
 		
 	def IsNumericString(self, myStr):
@@ -715,8 +816,8 @@ class StagingPage(wx.wizard.WizardPageSimple):
 			if ( not self.IsNumericString(self.turnTimerEdit.GetValue()) ):
 				# It's not - lay the smack down				
 				dlg = wx.MessageDialog(
-					self, "Turn Time Value must be an integer",
-					"Oops", wx.OK|wx.ICON_EXCLAMATION)
+					self, localText.getText("TXT_KEY_PITBOSS_TURNTIMER_ERROR_DESC", ()),
+					localText.getText("TXT_KEY_PITBOSS_TURNTIMER_ERROR_TITLE", ()), wx.OK|wx.ICON_EXCLAMATION)
 					
 				# Show the modal dialog and get the response
 				if dlg.ShowModal() == wx.ID_OK:
@@ -738,6 +839,9 @@ class StagingPage(wx.wizard.WizardPageSimple):
 			PB.mpOptionChanged( (optionID-1000), self.mpOptionArray[(optionID-1000)].GetValue() )
 		else:
 			PB.gameOptionChanged( optionID, self.optionArray[optionID].GetValue() )
+			
+		bEnable = PB.getTurnTimer()
+		self.turnTimerEdit.Enable(bEnable)
 		
 	def OnPlayerChoice(self, event):
 		# Get the row for the player modified
@@ -748,7 +852,7 @@ class StagingPage(wx.wizard.WizardPageSimple):
 			self.leaderRefresh = ( PB.getCiv(rowNum) != (self.civArray[rowNum].GetSelection()-1) );
 				
 		PB.playerParamChanged( rowNum, self.whoArray[rowNum].GetSelection(), self.civArray[rowNum].GetSelection()-1, self.teamArray[rowNum].GetSelection(), 
-			PB.getGlobalLeaderIndex(self.civArray[rowNum].GetSelection()-1, self.leaderArray[rowNum].GetSelection()-1) )
+			self.diffArray[rowNum].GetSelection(), PB.getGlobalLeaderIndex(self.civArray[rowNum].GetSelection()-1, self.leaderArray[rowNum].GetSelection()-1) )
 		
 	def OnPageChanging(self, event):
 		# Check direction
@@ -776,67 +880,47 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		
 		# Set the selections currently in our init structure
 		self.mapChoice.SetStringSelection(gameData.getMapName())
-		if (bSaved):
-			self.mapChoice.Disable()
-		else:
-			self.mapChoice.Enable(True)
+		self.mapChoice.Enable(not bSaved)
+		
 		self.sizeChoice.SetSelection(gameData.iSize)
-		if (bSaved):
-			self.sizeChoice.Disable()
-		else:
-			self.sizeChoice.Enable(True)
+		self.sizeChoice.Enable(not bSaved)
+		
 		self.climateChoice.SetSelection(gameData.iClimate)
-		if (bSaved):
-			self.climateChoice.Disable()
-		else:
-			self.climateChoice.Enable(True)
+		self.climateChoice.Enable(not bSaved)
+		
 		self.seaLevelChoice.SetSelection(gameData.iSeaLevel)
-		if (bSaved):
-			self.seaLevelChoice.Disable()
-		else:
-			self.seaLevelChoice.Enable(True)
+		self.seaLevelChoice.Enable(not bSaved)
+		
 		self.eraChoice.SetSelection(gameData.iEra)
-		if (bSaved):
-			self.eraChoice.Disable()
-		else:
-			self.eraChoice.Enable(True)
+		self.eraChoice.Enable(not bSaved)
+		
 		self.speedChoice.SetSelection(gameData.iSpeed)
-		if (bSaved):
-			self.speedChoice.Disable()
-		else:
-			self.speedChoice.Enable(True)
+		self.speedChoice.Enable(not bSaved)
+		
 		self.turnTimerEdit.SetValue(str(gameData.iTurnTime))
-		if (bSaved):
-			self.turnTimerEdit.Disable()
+		if (not bSaved):
+			bEnable = PB.getTurnTimer()
+			self.turnTimerEdit.Enable(bEnable)
 		else:
-			self.turnTimerEdit.Enable(True)
+			self.turnTimerEdit.Disable()
 			
 		# Set selections of map options
 		optionNum = 0
 		for optionNum in range(PB.getNumCustomMapOptions(gameData.getMapName())):
 			self.customMapOptionArray[optionNum].SetSelection(gameData.getCustomMapOption(optionNum))
-			if (bSaved):
-				self.customMapOptionArray[optionNum].Disable()
-			else:
-				self.customMapOptionArray[optionNum].Enable(True)	
+			self.customMapOptionArray[optionNum].Enable(not bSaved)	
 				
 		# set the mp options selection
 		rowNum = 0
 		for rowNum in range(PB.getNumMPOptions()):
 			self.mpOptionArray[rowNum].SetValue(gameData.getMPOptionAt(rowNum))
-			if (bSaved):
-				self.mpOptionArray[rowNum].Disable()
-			else:
-				self.mpOptionArray[rowNum].Enable(True)
+			self.mpOptionArray[rowNum].Enable(not bSaved)
 		
 		# Set the options selected
 		rowNum = 0
 		for rowNum in range(PB.getNumOptions()):
 			self.optionArray[rowNum].SetValue(gameData.getOptionAt(rowNum))
-			if (bSaved):
-				self.optionArray[rowNum].Disable()
-			else:
-				self.optionArray[rowNum].Enable(True)
+			self.optionArray[rowNum].Enable(not bSaved)
 				
 		# Have the app suggest number of players based on map size
 		PB.suggestPlayerSetup()
@@ -849,34 +933,22 @@ class StagingPage(wx.wizard.WizardPageSimple):
 			# We may need to add/remove items from who box
 			self.refreshWhoBox(rowNum, playerData.iWho)
 			self.whoArray[rowNum].SetSelection(playerData.iWho)
-			if (bSaved):
-				self.whoArray[rowNum].Disable()
-			else:
-				self.whoArray[rowNum].Enable(True)
+			self.whoArray[rowNum].Enable(not bSaved)
 			
 			# Civ choices are static inside the instance
 			civChoice = playerData.iCiv+1
 			self.civArray[rowNum].SetSelection(civChoice)
-			if (bSaved):
-				self.civArray[rowNum].Disable()
-			else:
-				self.civArray[rowNum].Enable(True)
+			self.civArray[rowNum].Enable(not bSaved)
 			
 			# We may need to add/remove items from the leader box
 			self.refreshLeaderBox(rowNum, playerData.iCiv)
 			self.leaderRefresh = False
 			self.leaderArray[rowNum].SetSelection(PB.getCivLeaderIndex(civChoice-1, playerData.iLeader)+1)
-			if (bSaved):
-				self.leaderArray[rowNum].Disable()
-			else:
-				self.leaderArray[rowNum].Enable(True)
+			self.leaderArray[rowNum].Enable(not bSaved)
 			
 			# Team choices are static
 			self.teamArray[rowNum].SetSelection(playerData.iTeam)
-			if (bSaved):
-				self.teamArray[rowNum].Disable()
-			else:
-				self.teamArray[rowNum].Enable(True)
+			self.teamArray[rowNum].Enable(not bSaved)
 		
 			# Difficulty choices are static
 			self.diffArray[rowNum].SetLabel((PB.getHandicapAt(playerData.iDifficulty)))
@@ -902,10 +974,7 @@ class StagingPage(wx.wizard.WizardPageSimple):
 						bAllReady = False
 						break
 					
-		if (not bAllReady):
-			self.myParent.FindWindowById(wx.ID_FORWARD).Disable()
-		else:
-			self.myParent.FindWindowById(wx.ID_FORWARD).Enable(True)
+		self.myParent.FindWindowById(wx.ID_FORWARD).Enable(bAllReady)
 					
 		# Get information from the app for this row
 		playerData = PB.getPlayerSetupData(iRow)
@@ -934,7 +1003,8 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		dropDown.SetSelection(playerData.iTeam)
 		
 		# Get the Difficulty
-		self.diffArray[iRow].SetLabel((PB.getHandicapAt(playerData.iDifficulty)))
+		dropDown = self.diffArray[iRow]
+		dropDown.SetSelection(playerData.iDifficulty)
 		
 		
 		# Modify Status 
@@ -980,10 +1050,13 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		# Clear the widgets from the custom option area
 		i = 0
 		for i in range( len(self.customItemSizerArray) ):
+			self.Unbind(wx.EVT_CHOICE, self.customMapOptionArray[i])
 			currentSizer = self.customItemSizerArray[i]
-			currentSizer.Remove(1)	#dropDown
-			currentSizer.Remove(0)	#txt
-			self.dropDownSizer.Remove(currentSizer)
+			success = currentSizer.Remove(1)	#dropDown
+			success = currentSizer.Remove(0)	#txt
+			success = self.dropDownSizer.Remove(currentSizer)
+			self.customMapOptionArray[i].Destroy()
+			self.customMapTextArray[i].Destroy()
 		
 		self.buildCustomMapOptions(szMapName)
 		
@@ -991,16 +1064,19 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		self.dropDownSizer.Layout()
 		self.optionsSizer.Layout()
 		self.pageSizer.Layout()
+		self.Layout()
+		
 		
 	def buildCustomMapOptions(self, szMapName):
 		gameData = PB.getGameSetupData()
 		
-		# Declare storage arrays
 		self.customItemSizerArray = []
+		self.customMapTextArray = []
 		self.customMapOptionArray = []
 		
-		# Get the map options
+		# Create label/control pairs for custom map option
 		customMapOptionsList = []
+			
 		optionNum = 0
 		for optionNum in range(PB.getNumCustomMapOptions( gameData.getMapName() )):
 			customMapOptionValuesList = []
@@ -1009,19 +1085,19 @@ class StagingPage(wx.wizard.WizardPageSimple):
 				customMapOptionValuesList.append(PB.getCustomMapOptionDescAt( optionNum, rowNum, gameData.getMapName() ))
 			customMapOptionsList.append(customMapOptionValuesList[:])
 			
-		# Create label/control pairs for custom map option
 		optionNum = 0
 		for optionNum in range(PB.getNumCustomMapOptions( szMapName )):
 			itemSizer = wx.BoxSizer(wx.VERTICAL)
-			self.customItemSizerArray.append(itemSizer)
 			txt = wx.StaticText( self, -1, PB.getCustomMapOptionName(optionNum, szMapName) )
-			optionDropDown = wx.Choice(self, optionNum, (-1,-1), choices=customMapOptionsList[optionNum])
+			optionDropDown = wx.Choice(self, ((optionNum+1)*100), (-1,-1), choices=customMapOptionsList[optionNum])
 			optionDropDown.SetSelection(gameData.getCustomMapOption(optionNum))
 			itemSizer.Add(txt)
 			itemSizer.Add(optionDropDown)
+			self.customItemSizerArray.append(itemSizer)
+			self.customMapTextArray.append(txt)
 			self.customMapOptionArray.append(optionDropDown)
 			self.dropDownSizer.Add(itemSizer, 0, wx.TOP, 3)
-			self.Bind(wx.EVT_CHOICE, self.OnCustomMapOptionChoice, optionDropDown)
+			self.Bind(wx.EVT_CHOICE, self.OnCustomMapOptionChoice, self.customMapOptionArray[optionNum])
 
 #
 # Progress bar dialog
@@ -1029,7 +1105,7 @@ class StagingPage(wx.wizard.WizardPageSimple):
 class ProgressDialog(wx.Dialog):
 	def __init__(self, parent):
 		global curPage
-		wx.Dialog.__init__(self, curPage, -1, "Patch Progress", wx.DefaultPosition, wx.DefaultSize, wx.STAY_ON_TOP)
+		wx.Dialog.__init__(self, curPage, -1, localText.getText("TXT_KEY_PITBOSS_PATCH_PROGRESS_TITLE", ()), wx.DefaultPosition, wx.DefaultSize, wx.STAY_ON_TOP)
 		
 		self.myParent = parent
 		
@@ -1037,7 +1113,6 @@ class ProgressDialog(wx.Dialog):
 		self.iTotal = 100	# Arbitrary Value until it's actually set
 		
 		# Place the progress bar
-		selections = ['LAN', 'Internet']
 		self.sizer = wx.BoxSizer(wx.VERTICAL)
 		
 		self.progress = None
@@ -1091,11 +1166,14 @@ class StartupIFace(wx.App):
 		self.wizard = wx.wizard.Wizard(None, -1, (localText.getText("TXT_KEY_PITBOSS_TITLE", ())))
 		
 		# Create each wizard page
+		self.smtpLogin = SMTPLoginPage(self.wizard)
 		self.netSelect = NetSelectPage(self.wizard)
 		self.login = LoginPage(self.wizard)
 		self.loadSelect = LoadSelectPage(self.wizard)
 		self.staging = StagingPage(self.wizard)
 		
+		self.smtpLogin.SetNext(self.netSelect)
+		self.netSelect.SetPrev(self.smtpLogin)
 		self.netSelect.SetNext(self.login)
 		self.login.SetPrev(self.netSelect)
 		self.login.SetNext(self.loadSelect)
@@ -1105,7 +1183,7 @@ class StartupIFace(wx.App):
 		
 		self.progressDlg = None
 		
-		curPage = self.netSelect
+		curPage = self.smtpLogin
 		
 		self.wizard.FitToPage(curPage)
 		
@@ -1183,7 +1261,7 @@ class StartupIFace(wx.App):
 			curPage.patchComplete()
 		else:
 			bPatchOK = false
-			msg = wx.MessageBox("Patch was not successfully retrieved", "Download failure", wx.ICON_ERROR)
+			msg = wx.MessageBox(localText.getText("TXT_KEY_PITBOSS_PATCH_DOWNLOAD_ERROR_DESC", ()), localText.getText("TXT_KEY_PITBOSS_PATCH_DOWNLOAD_ERROR_TITLE", ()), wx.ICON_ERROR)
 		
 		bPatchConfirmed = true
 		

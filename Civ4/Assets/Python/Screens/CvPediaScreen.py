@@ -14,9 +14,21 @@ class CvPediaScreen( CvScreen.CvScreen ):
 	
 	def getSortedList( self, numInfos, getInfo ):
 		' returned a list of infos sorted alphabetically '
-		infoList = [(0,0)] * numInfos
+		
+		# count the items we are going to display
+		iNumNonGraphical = 0
+		for i in range(numInfos):
+			if (not getInfo(i).isGraphicalOnly()):
+				iNumNonGraphical += 1
+				
+		infoList = [(0,0)] * iNumNonGraphical
+		j = 0
 		for i in range( numInfos ):
-			infoList[i] = (getInfo(i).getDescription(), i)
+			if (not getInfo(i).isGraphicalOnly()):
+				infoList[j] = (getInfo(i).getDescription(), i)
+				j += 1
+				
 		infoList.sort()
+		
 		return infoList
 	

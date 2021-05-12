@@ -12,6 +12,10 @@
 			<iCityDefenseModifier>0</iCityDefenseModifier>
 			<SpeedThresholds>
 				<SpeedThreshold>
+					<GameSpeedType>GAMESPEED_MARATHON</GameSpeedType>
+					<iThreshold>0</iThreshold>
+				</SpeedThreshold>
+				<SpeedThreshold>
 					<GameSpeedType>GAMESPEED_EPIC</GameSpeedType>
 					<iThreshold>0</iThreshold>
 				</SpeedThreshold>
@@ -30,6 +34,10 @@
 			<Description>TXT_KEY_CULTURELEVEL_POOR</Description>
 			<iCityDefenseModifier>0</iCityDefenseModifier>
 			<SpeedThresholds>
+				<SpeedThreshold>
+					<GameSpeedType>GAMESPEED_MARATHON</GameSpeedType>
+					<iThreshold>0</iThreshold>
+				</SpeedThreshold>
 				<SpeedThreshold>
 					<GameSpeedType>GAMESPEED_EPIC</GameSpeedType>
 					<iThreshold>0</iThreshold>
@@ -50,6 +58,10 @@
 			<iCityDefenseModifier>20</iCityDefenseModifier>
 			<SpeedThresholds>
 				<SpeedThreshold>
+					<GameSpeedType>GAMESPEED_MARATHON</GameSpeedType>
+					<iThreshold>30</iThreshold>
+				</SpeedThreshold>
+				<SpeedThreshold>
 					<GameSpeedType>GAMESPEED_EPIC</GameSpeedType>
 					<iThreshold>15</iThreshold>
 				</SpeedThreshold>
@@ -68,6 +80,10 @@
 			<Description>TXT_KEY_CULTURELEVEL_DEVELOPING</Description>
 			<iCityDefenseModifier>40</iCityDefenseModifier>
 			<SpeedThresholds>
+				<SpeedThreshold>
+					<GameSpeedType>GAMESPEED_MARATHON</GameSpeedType>
+					<iThreshold>300</iThreshold>
+				</SpeedThreshold>
 				<SpeedThreshold>
 					<GameSpeedType>GAMESPEED_EPIC</GameSpeedType>
 					<iThreshold>150</iThreshold>
@@ -88,6 +104,10 @@
 			<iCityDefenseModifier>60</iCityDefenseModifier>
 			<SpeedThresholds>
 				<SpeedThreshold>
+					<GameSpeedType>GAMESPEED_MARATHON</GameSpeedType>
+					<iThreshold>1500</iThreshold>
+				</SpeedThreshold>
+				<SpeedThreshold>
 					<GameSpeedType>GAMESPEED_EPIC</GameSpeedType>
 					<iThreshold>750</iThreshold>
 				</SpeedThreshold>
@@ -107,6 +127,10 @@
 			<iCityDefenseModifier>80</iCityDefenseModifier>
 			<SpeedThresholds>
 				<SpeedThreshold>
+					<GameSpeedType>GAMESPEED_MARATHON</GameSpeedType>
+					<iThreshold>15000</iThreshold>
+				</SpeedThreshold>
+				<SpeedThreshold>
 					<GameSpeedType>GAMESPEED_EPIC</GameSpeedType>
 					<iThreshold>7500</iThreshold>
 				</SpeedThreshold>
@@ -125,6 +149,10 @@
 			<Description>TXT_KEY_CULTURELEVEL_LEGENDARY</Description>
 			<iCityDefenseModifier>100</iCityDefenseModifier>
 			<SpeedThresholds>
+				<SpeedThreshold>
+					<GameSpeedType>GAMESPEED_MARATHON</GameSpeedType>
+					<iThreshold>150000</iThreshold>
+				</SpeedThreshold>
 				<SpeedThreshold>
 					<GameSpeedType>GAMESPEED_EPIC</GameSpeedType>
 					<iThreshold>75000</iThreshold>

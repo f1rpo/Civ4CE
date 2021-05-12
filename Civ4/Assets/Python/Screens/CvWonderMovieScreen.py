@@ -5,7 +5,6 @@ import PyHelpers
 import CvUtil
 import ScreenInput
 import CvScreenEnums
-import string
 
 PyPlayer = PyHelpers.PyPlayer
 PyInfo = PyHelpers.PyInfo
@@ -25,6 +24,7 @@ class CvWonderMovieScreen:
 	def __init__(self):
 		self.fDelay = -1.0
 		self.fTime = 0.0
+		self.bDone = false
 
 	def interfaceScreen (self, iMovieItem, iCityId, iMovieType):
 		# iMovieItem is either the WonderID, the ReligionID, or the ProjectID, depending on iMovieType
@@ -50,7 +50,8 @@ class CvWonderMovieScreen:
 		
 		self.iMovieType = iMovieType
 		self.fTime = 0.0
-		self.fDelay = 1.
+		self.fDelay = 1.5
+		self.bDone = false
 		
 		# not all projects have movies
 		if self.iMovieType == MOVIE_SCREEN_PROJECT:
@@ -113,25 +114,18 @@ class CvWonderMovieScreen:
 	# Will handle the input for this screen...
 	def handleInput (self, inputClass):
 		if (inputClass.getNotifyCode() == NotifyCode.NOTIFY_MOVIE_DONE):
-			screen = CyGInterfaceScreen( "WonderMovieScreen" + str(self.iWonderId), CvScreenEnums.WONDER_MOVIE_SCREEN )
-			if self.iMovieType == MOVIE_SCREEN_WONDER:
-				szHelp = CyGameTextMgr().getBuildingHelp(self.iWonderId, False, False, False, None)
-			elif self.iMovieType == MOVIE_SCREEN_WONDER:
-				szHelp = CyGameTextMgr().getProjectHelp(self.iWonderId, False, None)
-			else:
-				szHelp = ""
-			
-			i = 0
-			if len(szHelp) > 0:
-				splitText = string.split( szHelp, "\n" )
-				y = self.Y_SCREEN + 100
-				for szLine in splitText:
-					if len( szLine ) != 0:
-						szName = "MonkeyText" + str(i)
-						screen.setText(szName, "", szLine, CvUtil.FONT_CENTER_JUSTIFY,
-								self.X_SCREEN + self.W_SCREEN / 2, y, self.Z_CONTROLS, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-						y += 20
-						i += 1
+			if (not self.bDone):
+				screen = CyGInterfaceScreen( "WonderMovieScreen" + str(self.iWonderId), CvScreenEnums.WONDER_MOVIE_SCREEN )
+				if self.iMovieType == MOVIE_SCREEN_WONDER:
+					szHelp = CyGameTextMgr().getBuildingHelp(self.iWonderId, False, False, False, None)
+				elif self.iMovieType == MOVIE_SCREEN_PROJECT:
+					szHelp = CyGameTextMgr().getProjectHelp(self.iWonderId, False, None)
+				else:
+					szHelp = ""
+				
+				if len(szHelp) > 0:
+					screen.addMultilineText("MonkeyText", szHelp, self.X_SCREEN + self.X_MOVIE + self.W_MOVIE / 8, self.Y_SCREEN + self.Y_MOVIE + 100, 3 * self.W_MOVIE / 4, self.H_MOVIE - 100, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
+				self.bDone = true
 
 		return 0
 

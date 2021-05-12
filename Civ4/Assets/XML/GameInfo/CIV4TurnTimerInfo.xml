@@ -9,33 +9,33 @@
 		<TurnTimerInfo>
 			<Type>TURNTIMER_SNAIL</Type>
 			<Description>TXT_KEY_TURNTIMER_SNAIL</Description>
-			<iBaseTime>320</iBaseTime>
-			<iCityBonus>32</iCityBonus>
-			<iUnitBonus>10</iUnitBonus>
+			<iBaseTime>160</iBaseTime>
+			<iCityBonus>16</iCityBonus>
+			<iUnitBonus>8</iUnitBonus>
 			<iFirstTurnMultiplier>6</iFirstTurnMultiplier>
 		</TurnTimerInfo>
 		<TurnTimerInfo>
 			<Type>TURNTIMER_SLOW</Type>
 			<Description>TXT_KEY_TURNTIMER_SLOW</Description>
-			<iBaseTime>240</iBaseTime>
-			<iCityBonus>24</iCityBonus>
-			<iUnitBonus>8</iUnitBonus>
+			<iBaseTime>120</iBaseTime>
+			<iCityBonus>12</iCityBonus>
+			<iUnitBonus>6</iUnitBonus>
 			<iFirstTurnMultiplier>5</iFirstTurnMultiplier>
 		</TurnTimerInfo>
 		<TurnTimerInfo>
 			<Type>TURNTIMER_MEDIUM</Type>
 			<Description>TXT_KEY_TURNTIMER_MEDIUM</Description>
-			<iBaseTime>160</iBaseTime>
-			<iCityBonus>16</iCityBonus>
-			<iUnitBonus>6</iUnitBonus>
+			<iBaseTime>100</iBaseTime>
+			<iCityBonus>8</iCityBonus>
+			<iUnitBonus>4</iUnitBonus>
 			<iFirstTurnMultiplier>4</iFirstTurnMultiplier>
 		</TurnTimerInfo>
 		<TurnTimerInfo>
 			<Type>TURNTIMER_FAST</Type>
 			<Description>TXT_KEY_TURNTIMER_FAST</Description>
-			<iBaseTime>120</iBaseTime>
-			<iCityBonus>8</iCityBonus>
-			<iUnitBonus>4</iUnitBonus>
+			<iBaseTime>90</iBaseTime>
+			<iCityBonus>6</iCityBonus>
+			<iUnitBonus>3</iUnitBonus>
 			<iFirstTurnMultiplier>3</iFirstTurnMultiplier>
 		</TurnTimerInfo>
 		<TurnTimerInfo>

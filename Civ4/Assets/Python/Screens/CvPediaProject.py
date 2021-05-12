@@ -4,7 +4,6 @@ from CvPythonExtensions import *
 import CvUtil
 import ScreenInput
 import CvScreenEnums
-import string
 
 # globals
 gc = CyGlobalContext()
@@ -72,8 +71,10 @@ class CvPediaProject:
 		screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_PROJECT, -1)
 
 		if self.top.iLastScreen	!= CvScreenEnums.PEDIA_PROJECT or bNotActive:		
-			self.placeLinks()
+			self.placeLinks(true)
 			self.top.iLastScreen = CvScreenEnums.PEDIA_PROJECT
+		else:
+			self.placeLinks(false)
 			
 		# Icon
 		screen.addPanel( self.top.getNextWidgetName(), "", "", False, False,
@@ -153,14 +154,9 @@ class CvPediaProject:
 				 self.X_SPECIAL, self.Y_SPECIAL, self.W_SPECIAL, self.H_SPECIAL, PanelStyles.PANEL_STYLE_BLUE50 )
 		
 		listName = self.top.getNextWidgetName()
-		screen.attachListBoxGFC( panelName, listName, "", TableStyles.TABLE_STYLE_EMPTY )
-		screen.enableSelect(listName, False)
 		
 		szSpecialText = CyGameTextMgr().getProjectHelp(self.iProject, True, None)
-		splitText = string.split( szSpecialText, "\n" )
-		for special in splitText:
-			if len( special ) != 0:
-				screen.appendListBoxString( listName, special, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		screen.addMultilineText(listName, szSpecialText, self.X_SPECIAL+5, self.Y_SPECIAL+5, self.W_SPECIAL-10, self.H_SPECIAL-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
 		
 	def placeText(self):
 		
@@ -173,11 +169,12 @@ class CvPediaProject:
 		szText = gc.getProjectInfo(self.iProject).getCivilopedia()
 		screen.attachMultilineText( panelName, "Text", szText, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 	
-	def placeLinks(self):
+	def placeLinks(self, bRedraw):
 
 		screen = self.top.getScreen()
-		
-		screen.clearListBoxGFC(self.top.LIST_ID)
+
+		if bRedraw:		
+			screen.clearListBoxGFC(self.top.LIST_ID)
 
 		listSorted = self.getProjectSortedList()
 
@@ -185,7 +182,8 @@ class CvPediaProject:
 		i = 0
 		for iI in range(len(listSorted)):
 			if (not gc.getProjectInfo(listSorted[iI][1]).isGraphicalOnly()):
-				screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROJECT, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY)
+				if bRedraw:
+					screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROJECT, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY)
 				if listSorted[iI][1] == self.iProject:
 					iSelected = i
 				i += 1		
@@ -208,7 +206,7 @@ class CvPediaProject:
 			listBuildings = []
 			iCount = 0
 			for iBuilding in range(gc.getNumProjectInfos()):
-				if (self.getProjectType(iBuilding) == iBuildingType):
+				if (self.getProjectType(iBuilding) == iBuildingType and not gc.getProjectInfo(iBuilding).isGraphicalOnly()):
 					listBuildings.append(iBuilding)
 					iCount += 1
 			

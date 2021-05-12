@@ -86,13 +86,11 @@ class CvIntroMovieScreen:
 			if self.bMovieState == 2:
 				return self.hideScreen()
 			elif self.bMovieState == 1:
-				print "MS 2"
 				self.bMovieState = 2
 				self.currentMovie = "ART_DEF_MOVIE_INTRO"
 				self.closeScreen()
 				self.createMovieScreen( "ART_DEF_MOVIE_INTRO" )
 			else:
-				print "MS 1"
 				self.bMovieState = 1
 				self.closeScreen()
 				self.createLogoScreen()

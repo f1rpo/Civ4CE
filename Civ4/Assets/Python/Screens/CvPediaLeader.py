@@ -7,7 +7,6 @@ import CvUtil
 import ScreenInput
 import CvScreenEnums
 import random
-import string
 
 # globals
 gc = CyGlobalContext()
@@ -73,8 +72,10 @@ class CvPediaLeader:
 		screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_LEADER, -1)
 
 		if self.top.iLastScreen	!= CvScreenEnums.PEDIA_LEADER or bNotActive:		
-			self.placeLinks()
+			self.placeLinks(true)
 			self.top.iLastScreen = CvScreenEnums.PEDIA_LEADER
+		else:
+			self.placeLinks(false)
 		
 		# Leaderhead
 		leaderPanelWidget = self.top.getNextWidgetName()
@@ -105,14 +106,9 @@ class CvPediaLeader:
                                  self.X_TRAITS, self.Y_TRAITS, self.W_TRAITS, self.H_TRAITS, PanelStyles.PANEL_STYLE_BLUE50 )
 				
 		listName = self.top.getNextWidgetName()
-		screen.attachListBoxGFC( panelName, listName, "", TableStyles.TABLE_STYLE_EMPTY )
-		screen.enableSelect(listName, False)
 		
 		szSpecialText = CyGameTextMgr().parseLeaderTraits(self.iLeader, -1, False, True)
-		splitText = string.split( szSpecialText, "\n" )
-		for special in splitText:
-			if len( special ) != 0:
-				screen.appendListBoxString( listName, special, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		screen.addMultilineText(listName, szSpecialText, self.X_TRAITS+5, self.Y_TRAITS+5, self.W_TRAITS-10, self.H_TRAITS-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
 		
 	def placeCivic(self):		
 		screen = self.top.getScreen()
@@ -121,14 +117,11 @@ class CvPediaLeader:
 		screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_FAV_CIVIC", ()), "", true, true,
                                  self.X_CIVIC, self.Y_CIVIC, self.W_CIVIC, self.H_CIVIC, PanelStyles.PANEL_STYLE_BLUE50 )
 		
-		listName = self.top.getNextWidgetName()
-		screen.attachListBoxGFC( panelName, listName, "", TableStyles.TABLE_STYLE_EMPTY )
-		screen.enableSelect(listName, False)
-
 		iCivic = gc.getLeaderHeadInfo(self.iLeader).getFavoriteCivic()
 		if (-1 != iCivic):
-			szCivicText = gc.getCivicInfo(iCivic).getDescription()
-			screen.appendListBoxString( listName, szCivicText, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+			szCivicText = u"<link=literal>" + gc.getCivicInfo(iCivic).getDescription() + u"</link>"
+			listName = self.top.getNextWidgetName()
+			screen.addMultilineText(listName, szCivicText, self.X_CIVIC+5, self.Y_CIVIC+30, self.W_CIVIC-10, self.H_CIVIC-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
 
 	def placeHistory(self):
 		screen = self.top.getScreen()
@@ -144,10 +137,11 @@ class CvPediaLeader:
 			WidgetTypes.WIDGET_GENERAL,-1,-1, CvUtil.FONT_LEFT_JUSTIFY ) 
 
 			
-	def placeLinks(self):
+	def placeLinks(self, bRedraw):
 		screen = self.top.getScreen()
                 
-		screen.clearListBoxGFC(self.top.LIST_ID)
+		if bRedraw:
+			screen.clearListBoxGFC(self.top.LIST_ID)
 
 		# sort leaders alphabetically
 		rowListName=[(0,0)]*gc.getNumLeaderHeadInfos()
@@ -158,8 +152,9 @@ class CvPediaLeader:
 		i = 0
 		iSelected = 0
 		for iI in range(gc.getNumLeaderHeadInfos()):
-			if gc.getLeaderHeadInfo(rowListName[iI][1]).getFavoriteCivic() != -1:
-				screen.appendListBoxString(self.top.LIST_ID, rowListName[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_LEADER, rowListName[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY)
+			if (gc.getLeaderHeadInfo(rowListName[iI][1]).getFavoriteCivic() != -1 and not gc.getLeaderHeadInfo(rowListName[iI][1]).isGraphicalOnly()):
+				if bRedraw:
+					screen.appendListBoxString(self.top.LIST_ID, rowListName[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_LEADER, rowListName[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY)
 				if rowListName[iI][1] == self.iLeader:
 					iSelected = i
 				i += 1

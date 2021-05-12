@@ -99,7 +99,6 @@ class CvOptionsScreen:
 		self.getTabControl().setValue("GraphicsLevelDropdownBox", UserProfile.getGraphicsLevel() )
 		self.getTabControl().setValue("RenderQualityDropdownBox", UserProfile.getRenderQualityLevel() )
 		self.getTabControl().setValue("GlobeViewDropdownBox", UserProfile.getGlobeViewRenderLevel() )
-		self.getTabControl().setValue("TextureQualityDropdownBox", UserProfile.getTextureQualityLevel() )
 		
 		# Graphic Option Checkboxes
 		for iOptionLoop in range(GraphicOptionTypes.NUM_GRAPHICOPTION_TYPES):
@@ -274,6 +273,7 @@ class CvOptionsScreen:
 		i = 0
 		for iOptionLoop in range(PlayerOptionTypes.NUM_PLAYEROPTION_TYPES):
 			szOptionDesc = gc.getPlayerOptionsInfoByIndex(iOptionLoop).getDescription()
+			szHelp = gc.getPlayerOptionsInfoByIndex(iOptionLoop).getHelp()
 			szCallbackFunction = "handleGameOptionsClicked"
 			szWidgetName = "GameOptionCheckBox_" + str(iOptionLoop)
 			bOptionOn = UserProfile.getPlayerOption(iOptionLoop)#gc.getPlayer(gc.getGame().getActivePlayer()).isOption(iOptionLoop)
@@ -282,6 +282,7 @@ class CvOptionsScreen:
 			else: 
 				vbox = "GameVBox2"
 			tab.attachCheckBox(vbox, szWidgetName, szOptionDesc, self.callbackIFace, szCallbackFunction, szWidgetName, bOptionOn)
+			tab.setToolTip(szWidgetName, szHelp)
 			i += 1
 				
 	
@@ -438,18 +439,7 @@ class CvOptionsScreen:
 		szCallbackFunction = "handleGlobeViewDropdownBoxInput"
 		szWidgetName = self.szGlobeViewDropdownBoxName = "GlobeViewDropdownBox"
 		iInitialSelection = UserProfile.getGlobeViewRenderLevel()
-		tab.attachDropDown(vbox2, szWidgetName, szDropdownDesc, aszDropdownElements, self.callbackIFace, szCallbackFunction, szWidgetName, iInitialSelection)
-		
-		# Texture Quality level
-		tab.attachLabel(vbox1, "GraphicsQualityLabel", localText.getText("TXT_KEY_OPTIONS_SCREEN_TEXTURE_QUALITY_LEVEL", ()))	# Label
-		tab.setControlFlag("GraphicsQualityLabel", "CF_LABEL_DEFAULTSIZE")
-		szDropdownDesc = "TextureQualityDropdownBox"
-		aszDropdownElements = (localText.getText("TXT_KEY_SEALEVEL_HIGH", ()), localText.getText("TXT_KEY_SEALEVEL_MEDIUM", ()), localText.getText("TXT_KEY_SEALEVEL_LOW", ()))
-		szCallbackFunction = "handleTextureQualityDropdownBoxInput"
-		szWidgetName = self.szTextureQualityDropdownBoxName = "TextureQualityDropdownBox"
-		iInitialSelection = UserProfile.getTextureQualityLevel()
-		tab.attachDropDown(vbox2, szWidgetName, szDropdownDesc, aszDropdownElements, self.callbackIFace, szCallbackFunction, szWidgetName, iInitialSelection)
-
+		tab.attachDropDown(vbox2, szWidgetName, szDropdownDesc, aszDropdownElements, self.callbackIFace, szCallbackFunction, szWidgetName, iInitialSelection)		
 
 		####### GAME GRAPHICS
 
@@ -460,16 +450,17 @@ class CvOptionsScreen:
 		tab.attachVBox(hbox, vbox)
 		tab.setLayoutFlag(vbox, "LAYOUT_SIZE_HEXPANDING")
 		tab.setLayoutFlag(vbox, "LAYOUT_SIZE_VEXPANDING")
-		tab.setLayoutFlag(vbox, "LAYOUT_SPACING_NONE")
-			
+		tab.setLayoutFlag(vbox, "LAYOUT_SPACING_NONE")			
 				
 		# Checkboxes
 		for iOptionLoop in range(GraphicOptionTypes.NUM_GRAPHICOPTION_TYPES):
 			szOptionDesc = gc.getGraphicOptionsInfoByIndex(iOptionLoop).getDescription()
+			szHelp = gc.getGraphicOptionsInfoByIndex(iOptionLoop).getHelp()
 			szCallbackFunction = "handleGraphicOptionsClicked"
 			szWidgetName = "GraphicOptionCheckbox_" + str(iOptionLoop)
 			bOptionOn = UserProfile.getGraphicOption(iOptionLoop)
 			tab.attachCheckBox(vbox, szWidgetName, szOptionDesc, self.callbackIFace, szCallbackFunction, szWidgetName, bOptionOn)
+			tab.setToolTip(szWidgetName, szHelp)
 			
 		########## EXIT
 

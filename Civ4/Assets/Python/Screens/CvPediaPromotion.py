@@ -4,7 +4,6 @@ from CvPythonExtensions import *
 import CvUtil
 import ScreenInput
 import CvScreenEnums
-import string
 
 # globals
 gc = CyGlobalContext()
@@ -76,8 +75,10 @@ class CvPediaPromotion:
 		screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_PROMOTION, -1)
 
 		if self.top.iLastScreen	!= CvScreenEnums.PEDIA_PROMOTION or bNotActive:		
-			self.placeLinks()
+			self.placeLinks(true)
 			self.top.iLastScreen = CvScreenEnums.PEDIA_PROMOTION
+		else:
+			self.placeLinks(false)
 			
 		# Icon
 		screen.addPanel( self.top.getNextWidgetName(), "", "", False, False,
@@ -152,14 +153,9 @@ class CvPediaPromotion:
 				 self.X_SPECIAL_PANE, self.Y_SPECIAL_PANE, self.W_SPECIAL_PANE, self.H_SPECIAL_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 		
 		listName = self.top.getNextWidgetName()
-		screen.attachListBoxGFC( panelName, listName, "", TableStyles.TABLE_STYLE_EMPTY )
-		screen.enableSelect(listName, False)
 		
 		szSpecialText = CyGameTextMgr().getPromotionHelp(self.iPromotion, True)
-		splitText = string.split( szSpecialText, "\n" )
-		for special in splitText:
-			if len( special ) != 0:
-				screen.appendListBoxString( listName, special, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		screen.addMultilineText(listName, szSpecialText, self.X_SPECIAL_PANE+5, self.Y_SPECIAL_PANE+5, self.W_SPECIAL_PANE-10, self.H_SPECIAL_PANE-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
 
 	def placeUnitGroups(self):
 		screen = self.top.getScreen()
@@ -179,11 +175,12 @@ class CvPediaPromotion:
 				screen.setTableText(szTable, 0, i, u"<font=4>" + gc.getUnitCombatInfo(iI).getDescription() + u"</font>", gc.getUnitCombatInfo(iI).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT_COMBAT, iI, -1, CvUtil.FONT_LEFT_JUSTIFY)
 				i += 1
 
-	def placeLinks(self):
+	def placeLinks(self, bRedraw):
 
 		screen = self.top.getScreen()
-                
-		screen.clearListBoxGFC(self.top.LIST_ID)
+
+		if bRedraw:		               
+			screen.clearListBoxGFC(self.top.LIST_ID)
 		
 		# sort techs alphabetically
 		listSorted=[(0,0)]*gc.getNumPromotionInfos()
@@ -191,11 +188,15 @@ class CvPediaPromotion:
 			listSorted[j] = (gc.getPromotionInfo(j).getDescription(), j)
 		listSorted.sort()
 			
+		i = 0
 		iSelected = 0
 		for iI in range(gc.getNumPromotionInfos()):
-			screen.appendListBoxString( self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
-			if listSorted[iI][1] == self.iPromotion:
-				iSelected = iI			
+			if (not gc.getPromotionInfo(iI).isGraphicalOnly()):
+				if bRedraw:
+					screen.appendListBoxString( self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
+				if listSorted[iI][1] == self.iPromotion:
+					iSelected = i			
+				i += 1
 
 		screen.setSelectedListBoxStringGFC(self.top.LIST_ID, iSelected)
 

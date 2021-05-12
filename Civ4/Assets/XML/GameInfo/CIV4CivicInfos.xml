@@ -564,7 +564,7 @@
 			<Button>,Art/Interface/Buttons/Civics/Free_Speech.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,2,3</Button>
 			<TechPrereq>TECH_LIBERALISM</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
-			<Upkeep>NONE</Upkeep>
+			<Upkeep>UPKEEP_LOW</Upkeep>
 			<iAIWeight>0</iAIWeight>
 			<iGreatPeopleRateModifier>0</iGreatPeopleRateModifier>
 			<iStateReligionGreatPeopleRateModifier>0</iStateReligionGreatPeopleRateModifier>
@@ -693,7 +693,7 @@
 			<Button>,Art/Interface/Buttons/Civics/Slavery.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,8,2</Button>
 			<TechPrereq>TECH_BRONZE_WORKING</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
-			<Upkeep>UPKEEP_LOW</Upkeep>
+			<Upkeep>NONE</Upkeep>
 			<iAIWeight>0</iAIWeight>
 			<iGreatPeopleRateModifier>0</iGreatPeopleRateModifier>
 			<iStateReligionGreatPeopleRateModifier>0</iStateReligionGreatPeopleRateModifier>
@@ -885,7 +885,7 @@
 			<Button>,Art/Interface/Buttons/Civics/Emancipation.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,6,1</Button>
 			<TechPrereq>TECH_DEMOCRACY</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
-			<Upkeep>NONE</Upkeep>
+			<Upkeep>UPKEEP_LOW</Upkeep>
 			<iAIWeight>0</iAIWeight>
 			<iGreatPeopleRateModifier>0</iGreatPeopleRateModifier>
 			<iStateReligionGreatPeopleRateModifier>0</iStateReligionGreatPeopleRateModifier>
@@ -1190,9 +1190,9 @@
 			<Civilopedia>TXT_KEY_CIVIC_ENVIRONMENTALISM_PEDIA</Civilopedia>
 			<Strategy>TXT_KEY_CIVIC_ENVIRONMENTALISM_STRATEGY</Strategy>
 			<Button>,Art/Interface/Buttons/Civics/Environmentalism.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,7,1</Button>
-			<TechPrereq>TECH_ECOLOGY</TechPrereq>
+			<TechPrereq>TECH_MEDICINE</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
-			<Upkeep>UPKEEP_HIGH</Upkeep>
+			<Upkeep>UPKEEP_MEDIUM</Upkeep>
 			<iAIWeight>0</iAIWeight>
 			<iGreatPeopleRateModifier>0</iGreatPeopleRateModifier>
 			<iStateReligionGreatPeopleRateModifier>0</iStateReligionGreatPeopleRateModifier>

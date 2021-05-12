@@ -173,10 +173,8 @@ class CvTechSplashScreen:
 			#screen.addPanel( szQuotePanel, "", "", true, true,
              #                    self.X_QUOTE, self.Y_QUOTE, self.W_QUOTE, self.H_QUOTE, PanelStyles.PANEL_STYLE_IN )
 		
-#			screen.attachMultilineText( szQuotePanel, "Text", techInfo.getQuote(), WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 			screen.addMultilineText( "Text", techInfo.getQuote(),
 						 self.X_QUOTE, self.Y_QUOTE + self.iMarginSpace*2, self.W_QUOTE - (self.iMarginSpace * 2), self.H_QUOTE - (self.iMarginSpace * 2), WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_CENTER_JUSTIFY)
-#			screen.attachTextGFC(szQuotePanel, "", techInfo.getQuote(), FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 		
 		# Special
 		szSpecialTitle = u"<font=3b>" + localText.getText("TXT_KEY_PEDIA_SPECIAL_ABILITIES", ()) + u"</font>"
@@ -185,14 +183,9 @@ class CvTechSplashScreen:
 			       self.X_SPECIAL_PANEL+self.iMarginSpace, self.Y_SPECIAL_PANEL - 20, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 		
 		listName = self.getNextWidgetName()
-		screen.attachListBoxGFC( szSpecialPanel, listName, "", TableStyles.TABLE_STYLE_EMPTY )
-		screen.enableSelect(listName, False)
 		
-		szSpecialText = CyGameTextMgr().getTechHelp(self.iTech, True, False, False, True, -1)
-		splitText = string.split( szSpecialText, "\n" )
-		for special in splitText:
-			if len( special ) != 0:
-				screen.appendListBoxString( listName, special, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		szSpecialText = CyGameTextMgr().getTechHelp(self.iTech, True, False, False, True, -1)[1:]
+		screen.addMultilineText(listName, szSpecialText, self.X_SPECIAL_PANEL+10, self.Y_SPECIAL_PANEL+5, self.W_SPECIAL_PANEL-20, self.H_SPECIAL_PANEL-20, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
 		
 		# Allows
 		szAllowsTitleDesc = u"<font=3b>" + localText.getText("TXT_KEY_PEDIA_ALLOWS", ()) + ":" + u"</font>"

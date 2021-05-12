@@ -87,7 +87,7 @@ class CvWorldBuilderScreen:
 		self.initVars()
 		screen = CyGInterfaceScreen( "WorldBuilderScreen", CvScreenEnums.WORLDBUILDER_SCREEN )
 		screen.setCloseOnEscape(False)
-		screen.setPersistent(True)
+		screen.setAlwaysShown(True)
 
 		self.setSideMenu()
 		self.refreshSideMenu()
@@ -139,7 +139,6 @@ class CvWorldBuilderScreen:
 			self.m_tabCtrlEdit = 0
 			
 		screen = CyGInterfaceScreen( "WorldBuilderScreen", CvScreenEnums.WORLDBUILDER_SCREEN )
-		screen.setPersistent(False)
 		screen.hideScreen()
 		CyEngine().clearColoredPlots(PlotLandscapeLayers.PLOT_LANDSCAPE_LAYER_WORLD_BUILDER)
 		CvScreensInterface.hideWorldBuilderDiplomacyScreen()
@@ -649,7 +648,7 @@ class CvWorldBuilderScreen:
 				else:
 					self.m_pCurrentPlot.setRouteType(-1)
 		elif (self.m_bLandmark):
-			self.setLandmarkCB("")
+			self.removeLandmarkCB()
 		return 1
 
 	def handleClicked( self ):
@@ -1785,7 +1784,14 @@ class CvWorldBuilderScreen:
 
 	def setLandmarkCB(self, szLandmark):
 		self.m_pCurrentPlot = CyInterface().getMouseOverPlot()
-		self.m_pCurrentPlot.setLandmark(u"%s" %(szLandmark))
+		print "Jason3"
+		CyEngine().addLandmarkPopup(self.m_pCurrentPlot) # , u"%s" %(szLandmark))
+		print "Jason4"
+		return
+		
+	def removeLandmarkCB(self):
+		self.m_pCurrentPlot = CyInterface().getMouseOverPlot()
+		CyEngine().removeLandmark(self.m_pCurrentPlot)
 		return
 
 	def refreshPlayerTabCtrl(self):
@@ -1828,7 +1834,7 @@ class CvWorldBuilderScreen:
 			self.m_pCurrentPlot.setNOfRiver(False, CardinalDirectionTypes.NO_CARDINALDIRECTION)
 			self.m_pCurrentPlot.setWOfRiver(False, CardinalDirectionTypes.NO_CARDINALDIRECTION)
 			self.m_pCurrentPlot.setImprovementType(-1)
-			self.setLandmarkCB("")
+			self.removeLandmarkCB()
 		return
 
 	def getUnitScript(self):

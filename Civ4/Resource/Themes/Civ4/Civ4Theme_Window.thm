@@ -28,6 +28,9 @@ StandardResize_Style
 NoTitleBar_Style
 NoTitleBarResize_Style
 
+Tool_Style
+ToolResize_Style
+
 */
 
 // *** Main Window control namespace 
@@ -3054,7 +3057,7 @@ with GFC_Control_TitleBar
 				.Minimized					=	GPropertyId(SF_CtrlTheme_Civ4_Control_Window_Tool_TitleBar_Collapsed_Style);
 				.Collapsed					=	GPropertyId(SF_CtrlTheme_Civ4_Control_Window_Tool_TitleBar_Collapsed_Style);
 											
-				//.SysBorderCollapsed			=	GPropertyId(SF_CtrlTheme_Civ4_Control_Window_Tool_TitleBar_SysBorderCollapsed_Style);
+				.SysBorderCollapsed			=	GPropertyId(GFC_Control_EmptyBorder_Style);
 			}								
 												
 			with .InFrameBorder					
@@ -3082,8 +3085,7 @@ with GFC_Control_TitleBar
 
 	style SF_CtrlTheme_Civ4_Control_Window_ToolResize_Style
 	{
-		.Flag_NoTitleBar	= GFlags(GWindowCtrl, GFC_CF_WINDOW_NOTITLEBAR);
-		
+	
 		with GFC_CtrlTheme_Bitmap_Control_Window_StyleId
 		{
 			.InFrameBorder_Normal	=	GPropertyId(SF_CtrlTheme_Civ4_Control_Window_ToolResize_InFrameBorder_Normal_Style);

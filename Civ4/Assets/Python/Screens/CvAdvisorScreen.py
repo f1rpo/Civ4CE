@@ -63,7 +63,7 @@ class CvAdvisorScreen(CvGFCScreen.CvGFCScreen):
 		yResolution = self.getScreen().getYResolution()
 
 		screen.showScreen(PopupStates.POPUPSTATE_IMMEDIATE, self.bPassInput)
-		screen.setPersistent( True )
+		screen.setAlwaysShown( True )
 		screen.setDimensions(0, 0, xResolution, yResolution)
 		screen.addPanel( "AdvisorScreenLeaderheadBack", u"", u"", False, False, self.X_SCREEN + self.X_LEADERHEAD - 15, self.Y_SCREEN + self.Y_LEADERHEAD - 15, self.W_LEADERHEAD + 30, self.H_LEADERHEAD + 30, PanelStyles.PANEL_STYLE_BLUELARGE )
 		#screen.addPanel( "AdvisorScreenLeaderheadBack", u"", u"", False, False, self.X_SCREEN, self.Y_SCREEN, self.W_LEADERHEAD, self.H_LEADERHEAD, PanelStyles.PANEL_STYLE_EXTERNAL )

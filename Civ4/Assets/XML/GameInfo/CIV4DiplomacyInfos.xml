@@ -192,6 +192,10 @@
 							<LeaderType>LEADER_BISMARCK</LeaderType>
 							<bLeaderType>1</bLeaderType>
 						</Leader>
+						<Leader>
+							<LeaderType>LEADER_FREDERICK</LeaderType>
+							<bLeaderType>1</bLeaderType>
+						</Leader>
 					</Leaders>
 					<Attitudes/>
 					<DiplomacyPowers/>
@@ -559,6 +563,10 @@
 					<Leaders>
 						<Leader>
 							<LeaderType>LEADER_BISMARCK</LeaderType>
+							<bLeaderType>1</bLeaderType>
+						</Leader>
+						<Leader>
+							<LeaderType>LEADER_FREDERICK</LeaderType>
 							<bLeaderType>1</bLeaderType>
 						</Leader>
 					</Leaders>
@@ -961,6 +969,10 @@
 					<Leaders>
 						<Leader>
 							<LeaderType>LEADER_BISMARCK</LeaderType>
+							<bLeaderType>1</bLeaderType>
+						</Leader>
+						<Leader>
+							<LeaderType>LEADER_FREDERICK</LeaderType>
 							<bLeaderType>1</bLeaderType>
 						</Leader>
 					</Leaders>
@@ -1496,6 +1508,10 @@
 					<Leaders>
 						<Leader>
 							<LeaderType>LEADER_BISMARCK</LeaderType>
+							<bLeaderType>1</bLeaderType>
+						</Leader>
+						<Leader>
+							<LeaderType>LEADER_FREDERICK</LeaderType>
 							<bLeaderType>1</bLeaderType>
 						</Leader>
 					</Leaders>
@@ -2160,6 +2176,10 @@
 					<Leaders>
 						<Leader>
 							<LeaderType>LEADER_BISMARCK</LeaderType>
+							<bLeaderType>1</bLeaderType>
+						</Leader>
+						<Leader>
+							<LeaderType>LEADER_FREDERICK</LeaderType>
 							<bLeaderType>1</bLeaderType>
 						</Leader>
 					</Leaders>
@@ -3911,6 +3931,10 @@
 							<LeaderType>LEADER_BISMARCK</LeaderType>
 							<bLeaderType>1</bLeaderType>
 						</Leader>
+						<Leader>
+							<LeaderType>LEADER_FREDERICK</LeaderType>
+							<bLeaderType>1</bLeaderType>
+						</Leader>
 					</Leaders>
 					<Attitudes/>
 					<DiplomacyPowers>
@@ -4367,6 +4391,10 @@
 					<Leaders>
 						<Leader>
 							<LeaderType>LEADER_BISMARCK</LeaderType>
+							<bLeaderType>1</bLeaderType>
+						</Leader>
+						<Leader>
+							<LeaderType>LEADER_FREDERICK</LeaderType>
 							<bLeaderType>1</bLeaderType>
 						</Leader>
 					</Leaders>

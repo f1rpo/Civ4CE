@@ -24,7 +24,7 @@
 	</Fader>
 	<Fader>
 		<Name>DF_GLOBE_MORPH</Name>
-		<Key>6000,	0.00</Key>
+		<Key>6400,	0.00</Key>
 		<Key>%CAMERA_MAX_DISTANCE*0.97, 1.00</Key>
 	</Fader>
 	<Fader>
@@ -49,7 +49,7 @@
 	<Fader>
 		<Name>F_PLOTINDICATOR_SCALE</Name>
 		<Key>0.0,  0.0</Key>
-		<Key>0.2,  0.5</Key>
+		<Key>0.2,  0.9</Key>
 		<Key>1.0,  1.0</Key>
 	</Fader>
 	<Fader>
@@ -67,8 +67,9 @@
 	<Fader>
 		<Name>CITYBILLBOARD_SCALE</Name>
 		<!-- changes the size of the billboards based on the camera distance -->
-		<Key>700,	 0.70</Key>
-		<Key>2500,   0.85</Key>
+		<Key>700,	 1.5</Key>
+		<Key>2500,   1.0</Key>
+		<Key>6000,   0.67</Key>
 	</Fader>
 	<Fader>
 		<Name>CITYBILLBOARD_HEIGHT</Name>
@@ -444,7 +445,7 @@
 	<!-- cities visible on globe -->
 	<Fader>
 		<Name>CITY_VISIBILITY</Name>
-		<Key>6000,1.0</Key>
+		<Key>6000, 1.0</Key>
 		<!-- uncomment this to hide cities on maps wider than 6000 units
 		<Key>6001,0.0</Key>
 		-->

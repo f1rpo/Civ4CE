@@ -1049,7 +1049,7 @@ EndPlayer
 BeginPlayer                         
 	Team=10                         
 	CivDesc=TXT_KEY_CIV_MONGOL_DESC
-	CivShortDesc=TXT_KEY_CIV_MONGOL_SHORT_DES
+	CivShortDesc=TXT_KEY_CIV_MONGOL_SHORT_DESC
 	CivAdjective=TXT_KEY_CIV_MONGOL_ADJECTIVE                        
 	LeaderName=TXT_KEY_LEADER_GENGHIS_KHAN                        
 	LeaderType=LEADER_GENGHIS_KHAN

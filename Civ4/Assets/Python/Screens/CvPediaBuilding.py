@@ -4,7 +4,6 @@ from CvPythonExtensions import *
 import CvUtil
 import ScreenInput
 import CvScreenEnums
-import string
 
 # globals
 gc = CyGlobalContext()
@@ -16,6 +15,7 @@ class CvPediaBuilding:
 	
 	def __init__(self, main):
 		self.iBuilding = -1
+		self.bLastBuildingType = false
 		self.top = main
 
 		self.BUTTON_SIZE = 46
@@ -78,11 +78,18 @@ class CvPediaBuilding:
 		screen.setLabel(szHeaderId, "Background", szHeader, CvUtil.FONT_CENTER_JUSTIFY, self.top.X_SCREEN, self.top.Y_TITLE, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, CivilopediaPageTypes.CIVILOPEDIA_PAGE_BUILDING, iBuilding)
 		
 		# Top
-		screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_BUILDING, -1)
+		if self.getBuildingType(iBuilding):
+			link = CivilopediaPageTypes.CIVILOPEDIA_PAGE_WONDER
+		else:
+			link = CivilopediaPageTypes.CIVILOPEDIA_PAGE_BUILDING
+		screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, link, -1)
 
-		if self.top.iLastScreen	!= CvScreenEnums.PEDIA_BUILDING or bNotActive:		
-			self.placeLinks()
+		if self.top.iLastScreen	!= CvScreenEnums.PEDIA_BUILDING or bNotActive or self.bLastBuildingType != self.getBuildingType(self.iBuilding):		
+			self.placeLinks(true)
 			self.top.iLastScreen = CvScreenEnums.PEDIA_BUILDING
+		else:
+			self.placeLinks(false)
+		self.bLastBuildingType = self.getBuildingType(self.iBuilding)
 					
 		screen.addPanel( self.top.getNextWidgetName(), "", "", False, False, self.X_BUILDING_PANE, self.Y_BUILDING_PANE, self.W_BUILDING_PANE, self.H_BUILDING_PANE, PanelStyles.PANEL_STYLE_BLUE50)
 		
@@ -216,14 +223,9 @@ class CvPediaBuilding:
                                  self.X_SPECIAL_PANE, self.Y_SPECIAL_PANE, self.W_SPECIAL_PANE, self.H_SPECIAL_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 		
 		listName = self.top.getNextWidgetName()
-		screen.attachListBoxGFC( panelName, listName, "", TableStyles.TABLE_STYLE_EMPTY )
-		screen.enableSelect(listName, False)
 		
 		szSpecialText = CyGameTextMgr().getBuildingHelp(self.iBuilding, True, False, False, None)
-		splitText = string.split( szSpecialText, "\n" )
-		for special in splitText:
-			if len( special ) != 0:
-				screen.appendListBoxString( listName, special, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		screen.addMultilineText(listName, szSpecialText, self.X_SPECIAL_PANE+5, self.Y_SPECIAL_PANE+5, self.W_SPECIAL_PANE-10, self.H_SPECIAL_PANE-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
 
 	def placeHistory(self):
 		
@@ -240,19 +242,21 @@ class CvPediaBuilding:
 		screen.addMultilineText( textName, gc.getBuildingInfo(self.iBuilding).getCivilopedia(), self.X_HISTORY_PANE + 15, self.Y_HISTORY_PANE + 40,
 		    self.W_HISTORY_PANE - (15 * 2), self.H_HISTORY_PANE - (15 * 2) - 25, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		
-	def placeLinks(self):
+	def placeLinks(self, bRedraw):
 
 		screen = self.top.getScreen()
-                		
-		screen.clearListBoxGFC(self.top.LIST_ID)
+        
+		if bRedraw:
+			screen.clearListBoxGFC(self.top.LIST_ID)
 
-		listSorted = self.getBuildingSortedList()
+		listSorted = self.getBuildingSortedList(self.getBuildingType(self.iBuilding))
 				
 		iSelected = 0
 		i = 0
 		for iI in range(len(listSorted)):
 			if (not gc.getBuildingInfo(listSorted[iI][1]).isGraphicalOnly()):
-				screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY)
+				if bRedraw:
+					screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY)
 				if listSorted[iI][1] == self.iBuilding:
 					iSelected = i
 				i += 1			
@@ -261,37 +265,33 @@ class CvPediaBuilding:
 			
 	def getBuildingType(self, iBuilding):
 		if (isWorldWonderClass(gc.getBuildingInfo(iBuilding).getBuildingClassType())):
-			return (3)			
+			return true			
 
 		if (isTeamWonderClass(gc.getBuildingInfo(iBuilding).getBuildingClassType())):
-			return (2)
+			return true
 
 		if (isNationalWonderClass(gc.getBuildingInfo(iBuilding).getBuildingClassType())):
-			return (1)
+			return true
 
 		# Regular building
-		return (0)
+		return false
 		
-	def getBuildingSortedList(self):
-		listOfAllTypes = []
-		for iBuildingType in range(4):		
-			listBuildings = []
-			iCount = 0
-			for iBuilding in range(gc.getNumBuildingInfos()):
-				if (self.getBuildingType(iBuilding) == iBuildingType):
-					listBuildings.append(iBuilding)
-					iCount += 1
-			
-			listSorted = [(0,0)] * iCount
-			iI = 0
-			for iBuilding in listBuildings:
-				listSorted[iI] = (gc.getBuildingInfo(iBuilding).getDescription(), iBuilding)
-				iI += 1
-			listSorted.sort()
-			for i in range(len(listSorted)):
-				listOfAllTypes.append(listSorted[i])
-		return listOfAllTypes
+	def getBuildingSortedList(self, bWonder):
+		listBuildings = []
+		iCount = 0
+		for iBuilding in range(gc.getNumBuildingInfos()):
+			if (self.getBuildingType(iBuilding) == bWonder and not gc.getBuildingInfo(iBuilding).isGraphicalOnly()):
+				listBuildings.append(iBuilding)
+				iCount += 1
 		
+		listSorted = [(0,0)] * iCount
+		iI = 0
+		for iBuilding in listBuildings:
+			listSorted[iI] = (gc.getBuildingInfo(iBuilding).getDescription(), iBuilding)
+			iI += 1
+		listSorted.sort()
+		return listSorted
+				
 													
 	# Will handle the input for this screen...
 	def handleInput (self, inputClass):

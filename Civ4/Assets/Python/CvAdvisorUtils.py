@@ -244,8 +244,6 @@ def endTurnFeats(iPlayer):
 		populationFeat(iPlayer, FeatTypes.FEAT_POPULATION_1_BILLION, "TXT_KEY_FEAT_1_BILLION")
 	if (lRealPopulation > 2000000000):
 		populationFeat(iPlayer, FeatTypes.FEAT_POPULATION_2_BILLION, "TXT_KEY_FEAT_2_BILLION")
-	if (lRealPopulation > 5000000000):
-		populationFeat(iPlayer, FeatTypes.FEAT_POPULATION_5_BILLION, "TXT_KEY_FEAT_5_BILLION")
 
 	if (not gc.getPlayer(iPlayer).isFeatAccomplished(FeatTypes.FEAT_TRADE_ROUTE)):
 	
@@ -381,509 +379,511 @@ def cityAdvise(pCity, iPlayer):
 
 	if (gc.getPlayer(iPlayer).isOption(PlayerOptionTypes.PLAYEROPTION_ADVISOR_POPUPS) and gc.getPlayer(iPlayer).isHuman() and not gc.getGame().isNetworkMultiPlayer()):
 		
-		if (not pCity.isProductionUnit() and (pCity.getOrderQueueLength() <= 1)):
+		if (pCity.isProduction()):
+		
+			if (not pCity.isProductionUnit() and (pCity.getOrderQueueLength() <= 1)):
 
-			if (gc.getGame().getGameTurn() + 1) % 40 == pCity.getGameTurnFounded() % 40:
-				
-				if ((pCity.getPopulation() > 2) and (gc.getPlayer(iPlayer).AI_totalAreaUnitAIs(pCity.area(), UnitAITypes.UNITAI_SETTLE) == 0) and not gc.getPlayer(iPlayer).AI_isFinancialTrouble() and (pCity.area().getBestFoundValue(iPlayer) > 0)):
-				
-					iBestValue = 0
-					eBestUnit = UnitTypes.NO_UNIT
-
-					for iI in range(gc.getNumUnitClassInfos()):
-
-						if (not isLimitedUnitClass(iI)):
-							
-							eLoopUnit = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationUnits(iI)
-							
-							if (eLoopUnit != UnitTypes.NO_UNIT):
-							
-								if (gc.getUnitInfo(eLoopUnit).getDomainType() == DomainTypes.DOMAIN_LAND):
-
-									if pCity.canTrain(eLoopUnit, False, False):
-
-										if (pCity.getFirstUnitOrder(eLoopUnit) == -1):
-										
-											iValue = gc.getPlayer(iPlayer).AI_unitValue(eLoopUnit, UnitAITypes.UNITAI_SETTLE, pCity.area())
-
-											if (iValue > iBestValue):
-											
-												iBestValue = iValue
-												eBestUnit = eLoopUnit
-										
-					if (eBestUnit != UnitTypes.NO_UNIT):
-						popupInfo = CyPopupInfo()
-						popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-						popupInfo.setData1(pCity.getID())
-						popupInfo.setData2(OrderTypes.ORDER_TRAIN)
-						popupInfo.setData3(eBestUnit)
-						popupInfo.setText(localText.getText("TXT_KEY_POPUP_UNIT_SETTLE_DEMAND", (gc.getUnitInfo(eBestUnit).getTextKey(), )))
-						popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
-						popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
-						popupInfo.addPopup(iPlayer)
-						g_iAdvisorNags += 1
-				
-			if (gc.getGame().getGameTurn() + 5) % 40 == pCity.getGameTurnFounded() % 40:
-				
-				if ((pCity.getPopulation() > 1) and (pCity.countNumImprovedPlots() == 0) and (pCity.AI_countBestBuilds(pCity.area()) > 3)):
-				
-					iBestValue = 0
-					eBestUnit = UnitTypes.NO_UNIT
-
-					for iI in range(gc.getNumUnitClassInfos()):
-
-						if (not isLimitedUnitClass(iI)):
-							
-							eLoopUnit = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationUnits(iI)
-							
-							if (eLoopUnit != UnitTypes.NO_UNIT):
-							
-								if (gc.getUnitInfo(eLoopUnit).getDomainType() == DomainTypes.DOMAIN_LAND):
-
-									if pCity.canTrain(eLoopUnit, False, False):
-
-										if (pCity.getFirstUnitOrder(eLoopUnit) == -1):
-										
-											iValue = gc.getPlayer(iPlayer).AI_unitValue(eLoopUnit, UnitAITypes.UNITAI_WORKER, pCity.area())
-
-											if (iValue > iBestValue):
-											
-												iBestValue = iValue
-												eBestUnit = eLoopUnit
-										
-					if (eBestUnit != UnitTypes.NO_UNIT):
-						popupInfo = CyPopupInfo()
-						popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-						popupInfo.setData1(pCity.getID())
-						popupInfo.setData2(OrderTypes.ORDER_TRAIN)
-						popupInfo.setData3(eBestUnit)
-						popupInfo.setText(localText.getText("TXT_KEY_POPUP_UNIT_WORKER_DEMAND", (pCity.getNameKey(), gc.getUnitInfo(eBestUnit).getTextKey())))
-						popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
-						popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
-						popupInfo.addPopup(iPlayer)
-						g_iAdvisorNags += 1
-
-			if (gc.getGame().getGameTurn() + 9) % 40 == pCity.getGameTurnFounded() % 40:
-				
-				if (pCity.plot().getNumDefenders(iPlayer) == 0):
-				
-					iBestValue = 0
-					eBestUnit = UnitTypes.NO_UNIT
-
-					for iI in range(gc.getNumUnitClassInfos()):
-
-						if (not isLimitedUnitClass(iI)):
-							
-							eLoopUnit = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationUnits(iI)
-							
-							if (eLoopUnit != UnitTypes.NO_UNIT):
-							
-								if (gc.getUnitInfo(eLoopUnit).getDomainType() == DomainTypes.DOMAIN_LAND):
-
-									if pCity.canTrain(eLoopUnit, False, False):
-
-										iValue = (gc.getPlayer(iPlayer).AI_unitValue(eLoopUnit, UnitAITypes.UNITAI_CITY_DEFENSE, pCity.area()) * 2)
-										iValue += gc.getPlayer(iPlayer).AI_unitValue(eLoopUnit, UnitAITypes.UNITAI_ATTACK, pCity.area())
-
-										if (iValue > iBestValue):
-										
-											iBestValue = iValue
-											eBestUnit = eLoopUnit
-									
-					if (eBestUnit != UnitTypes.NO_UNIT):
-						popupInfo = CyPopupInfo()
-						popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-						popupInfo.setData1(pCity.getID())
-						popupInfo.setData2(OrderTypes.ORDER_TRAIN)
-						popupInfo.setData3(eBestUnit)
-						popupInfo.setText(localText.getText("TXT_KEY_POPUP_UNIT_DEFENSE_DEMAND", (pCity.getNameKey(), gc.getUnitInfo(eBestUnit).getTextKey())))
-						popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
-						popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
-						popupInfo.addPopup(iPlayer)
-						g_iAdvisorNags += 1
-
-			if (gc.getGame().getGameTurn() + 12) % 40 == pCity.getGameTurnFounded() % 40:
-				
-				if ((gc.getPlayer(iPlayer).AI_totalAreaUnitAIs(pCity.area(), UnitAITypes.UNITAI_MISSIONARY) == 0) and (gc.getTeam(gc.getPlayer(iPlayer).getTeam()).getAtWarCount(True) == 0)):
-				
-					eStateReligion = gc.getPlayer(iPlayer).getStateReligion()
+				if (gc.getGame().getGameTurn() + 1) % 40 == pCity.getGameTurnFounded() % 40:
 					
-					if (eStateReligion != ReligionTypes.NO_RELIGION):
+					if ((gc.getGame().getElapsedGameTurns() < 200) and (pCity.getPopulation() > 2) and (gc.getPlayer(iPlayer).AI_totalAreaUnitAIs(pCity.area(), UnitAITypes.UNITAI_SETTLE) == 0) and not gc.getPlayer(iPlayer).AI_isFinancialTrouble() and (pCity.area().getBestFoundValue(iPlayer) > 0)):
 					
-						if (gc.getPlayer(iPlayer).getHasReligionCount(eStateReligion) < (gc.getPlayer(iPlayer).getNumCities() / 2)):
-						
-							iBestValue = 0
-							eBestUnit = UnitTypes.NO_UNIT
+						iBestValue = 0
+						eBestUnit = UnitTypes.NO_UNIT
 
-							for iI in range(gc.getNumUnitClassInfos()):
+						for iI in range(gc.getNumUnitClassInfos()):
 
+							if (not isLimitedUnitClass(iI)):
+								
 								eLoopUnit = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationUnits(iI)
 								
 								if (eLoopUnit != UnitTypes.NO_UNIT):
 								
 									if (gc.getUnitInfo(eLoopUnit).getDomainType() == DomainTypes.DOMAIN_LAND):
 
-										if (gc.getUnitInfo(eLoopUnit).getReligionSpreads(eStateReligion)):
-										
-											if pCity.canTrain(eLoopUnit, False, False):
+										if pCity.canTrain(eLoopUnit, False, False):
 
-												iValue = gc.getPlayer(iPlayer).AI_unitValue(eLoopUnit, UnitAITypes.UNITAI_MISSIONARY, pCity.area())
+											if (pCity.getFirstUnitOrder(eLoopUnit) == -1):
+											
+												iValue = gc.getPlayer(iPlayer).AI_unitValue(eLoopUnit, UnitAITypes.UNITAI_SETTLE, pCity.area())
 
 												if (iValue > iBestValue):
 												
 													iBestValue = iValue
 													eBestUnit = eLoopUnit
 											
-							if (eBestUnit != UnitTypes.NO_UNIT):
-								popupInfo = CyPopupInfo()
-								popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-								popupInfo.setData1(pCity.getID())
-								popupInfo.setData2(OrderTypes.ORDER_TRAIN)
-								popupInfo.setData3(eBestUnit)
-								popupInfo.setText(localText.getText("TXT_KEY_POPUP_MISSIONARY_DEMAND", (gc.getReligionInfo(eStateReligion).getTextKey(), gc.getUnitInfo(eBestUnit).getTextKey(), pCity.getNameKey())))
-								popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
-								popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
-								popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
-								popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
-								popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
-								popupInfo.addPopup(iPlayer)
-								g_iAdvisorNags += 1
+						if (eBestUnit != UnitTypes.NO_UNIT):
+							popupInfo = CyPopupInfo()
+							popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+							popupInfo.setData1(pCity.getID())
+							popupInfo.setData2(OrderTypes.ORDER_TRAIN)
+							popupInfo.setData3(eBestUnit)
+							popupInfo.setText(localText.getText("TXT_KEY_POPUP_UNIT_SETTLE_DEMAND", (gc.getUnitInfo(eBestUnit).getTextKey(), )))
+							popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
+							popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
+							popupInfo.addPopup(iPlayer)
+							g_iAdvisorNags += 1
+					
+				if (gc.getGame().getGameTurn() + 5) % 40 == pCity.getGameTurnFounded() % 40:
+					
+					if ((pCity.getPopulation() > 1) and (pCity.countNumImprovedPlots() == 0) and (pCity.AI_countBestBuilds(pCity.area()) > 3)):
+					
+						iBestValue = 0
+						eBestUnit = UnitTypes.NO_UNIT
 
-		if (not pCity.isProductionBuilding() and (pCity.getOrderQueueLength() <= 1)):
+						for iI in range(gc.getNumUnitClassInfos()):
 
-			if (pCity.healthRate(False, 0) < 0):
-			
-				if (gc.getGame().getGameTurn() + 2) % 40 == pCity.getGameTurnFounded() % 40:
-						
-					iBestValue = 0
-					eBestBuilding = BuildingTypes.NO_BUILDING
+							if (not isLimitedUnitClass(iI)):
+								
+								eLoopUnit = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationUnits(iI)
+								
+								if (eLoopUnit != UnitTypes.NO_UNIT):
+								
+									if (gc.getUnitInfo(eLoopUnit).getDomainType() == DomainTypes.DOMAIN_LAND):
 
-					for iI in range(gc.getNumBuildingClassInfos()):
+										if pCity.canTrain(eLoopUnit, False, False):
 
-						if (not isLimitedWonderClass(iI)):
-						
-							eLoopBuilding = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationBuildings(iI)
-							
-							if (eLoopBuilding != BuildingTypes.NO_BUILDING):
-							
-								if (gc.getBuildingInfo(eLoopBuilding).getHealth() > 0):
+											if (pCity.getFirstUnitOrder(eLoopUnit) == -1):
+											
+												iValue = gc.getPlayer(iPlayer).AI_unitValue(eLoopUnit, UnitAITypes.UNITAI_WORKER, pCity.area())
 
-									if pCity.canConstruct(eLoopBuilding, False, False, False):
+												if (iValue > iBestValue):
+												
+													iBestValue = iValue
+													eBestUnit = eLoopUnit
+											
+						if (eBestUnit != UnitTypes.NO_UNIT):
+							popupInfo = CyPopupInfo()
+							popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+							popupInfo.setData1(pCity.getID())
+							popupInfo.setData2(OrderTypes.ORDER_TRAIN)
+							popupInfo.setData3(eBestUnit)
+							popupInfo.setText(localText.getText("TXT_KEY_POPUP_UNIT_WORKER_DEMAND", (pCity.getNameKey(), gc.getUnitInfo(eBestUnit).getTextKey())))
+							popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
+							popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
+							popupInfo.addPopup(iPlayer)
+							g_iAdvisorNags += 1
 
-										iValue = gc.getBuildingInfo(eLoopBuilding).getHealth()
+				if (gc.getGame().getGameTurn() + 9) % 40 == pCity.getGameTurnFounded() % 40:
+					
+					if (pCity.plot().getNumDefenders(iPlayer) == 0):
+					
+						iBestValue = 0
+						eBestUnit = UnitTypes.NO_UNIT
 
-										if (iValue > iBestValue):
+						for iI in range(gc.getNumUnitClassInfos()):
+
+							if (not isLimitedUnitClass(iI)):
+								
+								eLoopUnit = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationUnits(iI)
+								
+								if (eLoopUnit != UnitTypes.NO_UNIT):
+								
+									if (gc.getUnitInfo(eLoopUnit).getDomainType() == DomainTypes.DOMAIN_LAND):
+
+										if pCity.canTrain(eLoopUnit, False, False):
+
+											iValue = (gc.getPlayer(iPlayer).AI_unitValue(eLoopUnit, UnitAITypes.UNITAI_CITY_DEFENSE, pCity.area()) * 2)
+											iValue += gc.getPlayer(iPlayer).AI_unitValue(eLoopUnit, UnitAITypes.UNITAI_ATTACK, pCity.area())
+
+											if (iValue > iBestValue):
+											
+												iBestValue = iValue
+												eBestUnit = eLoopUnit
 										
-											iBestValue = iValue
-											eBestBuilding = eLoopBuilding
+						if (eBestUnit != UnitTypes.NO_UNIT):
+							popupInfo = CyPopupInfo()
+							popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+							popupInfo.setData1(pCity.getID())
+							popupInfo.setData2(OrderTypes.ORDER_TRAIN)
+							popupInfo.setData3(eBestUnit)
+							popupInfo.setText(localText.getText("TXT_KEY_POPUP_UNIT_DEFENSE_DEMAND", (pCity.getNameKey(), gc.getUnitInfo(eBestUnit).getTextKey())))
+							popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
+							popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
+							popupInfo.addPopup(iPlayer)
+							g_iAdvisorNags += 1
+
+				if (gc.getGame().getGameTurn() + 12) % 40 == pCity.getGameTurnFounded() % 40:
+					
+					if ((gc.getPlayer(iPlayer).AI_totalAreaUnitAIs(pCity.area(), UnitAITypes.UNITAI_MISSIONARY) == 0) and (gc.getTeam(gc.getPlayer(iPlayer).getTeam()).getAtWarCount(True) == 0)):
+					
+						eStateReligion = gc.getPlayer(iPlayer).getStateReligion()
+						
+						if (eStateReligion != ReligionTypes.NO_RELIGION):
+						
+							if (gc.getPlayer(iPlayer).getHasReligionCount(eStateReligion) < (gc.getPlayer(iPlayer).getNumCities() / 2)):
+							
+								iBestValue = 0
+								eBestUnit = UnitTypes.NO_UNIT
+
+								for iI in range(gc.getNumUnitClassInfos()):
+
+									eLoopUnit = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationUnits(iI)
 									
-					if (eBestBuilding != BuildingTypes.NO_BUILDING):
-						popupInfo = CyPopupInfo()
-						popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-						popupInfo.setData1(pCity.getID())
-						popupInfo.setData2(OrderTypes.ORDER_CONSTRUCT)
-						popupInfo.setData3(eBestBuilding)
-						popupInfo.setText(localText.getText("TXT_KEY_POPUP_UNHEALTHY_CITIZENS_DEMAND", (pCity.getNameKey(), gc.getBuildingInfo(eBestBuilding).getTextKey())))
-						popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
-						popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_UNHEALTHY_DO_SO_NEXT", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_UNHEALTHY_REFUSE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_UNHEALTHY_EXAMINE", ()), "")
-						popupInfo.addPopup(iPlayer)
-						g_iAdvisorNags += 1
+									if (eLoopUnit != UnitTypes.NO_UNIT):
+									
+										if (gc.getUnitInfo(eLoopUnit).getDomainType() == DomainTypes.DOMAIN_LAND):
 
-			if (pCity.angryPopulation(0) > 0):
+											if (gc.getUnitInfo(eLoopUnit).getReligionSpreads(eStateReligion)):
+											
+												if pCity.canTrain(eLoopUnit, False, False):
 
-				if (gc.getGame().getGameTurn() + 3) % 40 == pCity.getGameTurnFounded() % 40:
+													iValue = gc.getPlayer(iPlayer).AI_unitValue(eLoopUnit, UnitAITypes.UNITAI_MISSIONARY, pCity.area())
 
-					iBestValue = 0
-					eBestBuilding = BuildingTypes.NO_BUILDING
+													if (iValue > iBestValue):
+													
+														iBestValue = iValue
+														eBestUnit = eLoopUnit
+												
+								if (eBestUnit != UnitTypes.NO_UNIT):
+									popupInfo = CyPopupInfo()
+									popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+									popupInfo.setData1(pCity.getID())
+									popupInfo.setData2(OrderTypes.ORDER_TRAIN)
+									popupInfo.setData3(eBestUnit)
+									popupInfo.setText(localText.getText("TXT_KEY_POPUP_MISSIONARY_DEMAND", (gc.getReligionInfo(eStateReligion).getTextKey(), gc.getUnitInfo(eBestUnit).getTextKey(), pCity.getNameKey())))
+									popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
+									popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
+									popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
+									popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
+									popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
+									popupInfo.addPopup(iPlayer)
+									g_iAdvisorNags += 1
 
-					for iI in range(gc.getNumBuildingClassInfos()):
+			if (not pCity.isProductionBuilding() and (pCity.getOrderQueueLength() <= 1)):
 
-						if (not isLimitedWonderClass(iI)):
-						
-							eLoopBuilding = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationBuildings(iI)
+				if (pCity.healthRate(False, 0) < 0):
+				
+					if (gc.getGame().getGameTurn() + 2) % 40 == pCity.getGameTurnFounded() % 40:
 							
-							if (eLoopBuilding != BuildingTypes.NO_BUILDING):
+						iBestValue = 0
+						eBestBuilding = BuildingTypes.NO_BUILDING
+
+						for iI in range(gc.getNumBuildingClassInfos()):
+
+							if (not isLimitedWonderClass(iI)):
 							
-								if (gc.getBuildingInfo(eLoopBuilding).getHappiness() > 0):
+								eLoopBuilding = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationBuildings(iI)
+								
+								if (eLoopBuilding != BuildingTypes.NO_BUILDING):
+								
+									if (gc.getBuildingInfo(eLoopBuilding).getHealth() > 0):
 
-									if pCity.canConstruct(eLoopBuilding, False, False, False):
+										if pCity.canConstruct(eLoopBuilding, False, False, False):
 
-										iValue = gc.getBuildingInfo(eLoopBuilding).getHappiness()
+											iValue = gc.getBuildingInfo(eLoopBuilding).getHealth()
 
-										if (iValue > iBestValue):
-
-											iBestValue = iValue
-											eBestBuilding = eLoopBuilding
-
-					if (eBestBuilding != BuildingTypes.NO_BUILDING):
-						popupInfo = CyPopupInfo()
-						popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-						popupInfo.setData1(pCity.getID())
-						popupInfo.setData2(OrderTypes.ORDER_CONSTRUCT)
-						popupInfo.setData3(eBestBuilding)
-						popupInfo.setText(localText.getText("TXT_KEY_POPUP_UNHAPPY_CITIZENS_DEMAND", (pCity.getNameKey(), gc.getBuildingInfo(eBestBuilding).getTextKey())))
-						popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
-						popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_UNHAPPY_DO_SO_NEXT", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_UNHAPPY_REFUSE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_UNHEALTHY_EXAMINE", ()), "")
-						popupInfo.addPopup(iPlayer)
-						g_iAdvisorNags += 1
-
-			if ((gc.getGame().getGameTurn < 100) and (gc.getTeam(gc.getPlayer(iPlayer).getTeam()).getHasMetCivCount(True) > 0) and (pCity.getBuildingDefense() == 0)):
-			
-				if (gc.getGame().getGameTurn() + 4) % 40 == pCity.getGameTurnFounded() % 40:
-
-					iBestValue = 0
-					eBestBuilding = BuildingTypes.NO_BUILDING
-
-					for iI in range(gc.getNumBuildingClassInfos()):
-
-						if (not isLimitedWonderClass(iI)):
-						
-							eLoopBuilding = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationBuildings(iI)
-							
-							if (eLoopBuilding != BuildingTypes.NO_BUILDING):
-							
-								if (gc.getBuildingInfo(eLoopBuilding).getDefenseModifier() > pCity.getNaturalDefense()):
-
-									if pCity.canConstruct(eLoopBuilding, False, False, False):
-
-										iValue = gc.getBuildingInfo(eLoopBuilding).getDefenseModifier()
-
-										if (iValue > iBestValue):
+											if (iValue > iBestValue):
+											
+												iBestValue = iValue
+												eBestBuilding = eLoopBuilding
 										
-											iBestValue = iValue
-											eBestBuilding = eLoopBuilding
-									
-					if (eBestBuilding != BuildingTypes.NO_BUILDING):
-						popupInfo = CyPopupInfo()
-						popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-						popupInfo.setData1(pCity.getID())
-						popupInfo.setData2(OrderTypes.ORDER_CONSTRUCT)
-						popupInfo.setData3(eBestBuilding)
-						popupInfo.setText(localText.getText("TXT_KEY_POPUP_BUILDING_DEFENSE_DEMAND", (pCity.getNameKey(), gc.getBuildingInfo(eBestBuilding).getTextKey())))
-						popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
-						popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
-						popupInfo.addPopup(iPlayer)
-						g_iAdvisorNags += 1
+						if (eBestBuilding != BuildingTypes.NO_BUILDING):
+							popupInfo = CyPopupInfo()
+							popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+							popupInfo.setData1(pCity.getID())
+							popupInfo.setData2(OrderTypes.ORDER_CONSTRUCT)
+							popupInfo.setData3(eBestBuilding)
+							popupInfo.setText(localText.getText("TXT_KEY_POPUP_UNHEALTHY_CITIZENS_DEMAND", (pCity.getNameKey(), gc.getBuildingInfo(eBestBuilding).getTextKey())))
+							popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
+							popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_UNHEALTHY_DO_SO_NEXT", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_UNHEALTHY_REFUSE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_UNHEALTHY_EXAMINE", ()), "")
+							popupInfo.addPopup(iPlayer)
+							g_iAdvisorNags += 1
 
-			if (pCity.getMaintenance() >= 8):
-			
-				if (gc.getGame().getGameTurn() + 6) % 40 == pCity.getGameTurnFounded() % 40:
+				if (pCity.angryPopulation(0) > 0):
 
-					iBestValue = 0
-					eBestBuilding = BuildingTypes.NO_BUILDING
+					if (gc.getGame().getGameTurn() + 3) % 40 == pCity.getGameTurnFounded() % 40:
 
-					for iI in range(gc.getNumBuildingClassInfos()):
+						iBestValue = 0
+						eBestBuilding = BuildingTypes.NO_BUILDING
 
-						if (not isLimitedWonderClass(iI)):
-						
-							eLoopBuilding = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationBuildings(iI)
+						for iI in range(gc.getNumBuildingClassInfos()):
+
+							if (not isLimitedWonderClass(iI)):
 							
-							if (eLoopBuilding != BuildingTypes.NO_BUILDING):
+								eLoopBuilding = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationBuildings(iI)
+								
+								if (eLoopBuilding != BuildingTypes.NO_BUILDING):
+								
+									if (gc.getBuildingInfo(eLoopBuilding).getHappiness() > 0):
+
+										if pCity.canConstruct(eLoopBuilding, False, False, False):
+
+											iValue = gc.getBuildingInfo(eLoopBuilding).getHappiness()
+
+											if (iValue > iBestValue):
+
+												iBestValue = iValue
+												eBestBuilding = eLoopBuilding
+
+						if (eBestBuilding != BuildingTypes.NO_BUILDING):
+							popupInfo = CyPopupInfo()
+							popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+							popupInfo.setData1(pCity.getID())
+							popupInfo.setData2(OrderTypes.ORDER_CONSTRUCT)
+							popupInfo.setData3(eBestBuilding)
+							popupInfo.setText(localText.getText("TXT_KEY_POPUP_UNHAPPY_CITIZENS_DEMAND", (pCity.getNameKey(), gc.getBuildingInfo(eBestBuilding).getTextKey())))
+							popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
+							popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_UNHAPPY_DO_SO_NEXT", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_UNHAPPY_REFUSE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_UNHEALTHY_EXAMINE", ()), "")
+							popupInfo.addPopup(iPlayer)
+							g_iAdvisorNags += 1
+
+				if ((gc.getGame().getGameTurn < 100) and (gc.getTeam(gc.getPlayer(iPlayer).getTeam()).getHasMetCivCount(True) > 0) and (pCity.getBuildingDefense() == 0)):
+				
+					if (gc.getGame().getGameTurn() + 4) % 40 == pCity.getGameTurnFounded() % 40:
+
+						iBestValue = 0
+						eBestBuilding = BuildingTypes.NO_BUILDING
+
+						for iI in range(gc.getNumBuildingClassInfos()):
+
+							if (not isLimitedWonderClass(iI)):
 							
-								if (gc.getBuildingInfo(eLoopBuilding).getMaintenanceModifier() < 0):
+								eLoopBuilding = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationBuildings(iI)
+								
+								if (eLoopBuilding != BuildingTypes.NO_BUILDING):
+								
+									if (gc.getBuildingInfo(eLoopBuilding).getDefenseModifier() > pCity.getNaturalDefense()):
 
-									if pCity.canConstruct(eLoopBuilding, False, False, False):
+										if pCity.canConstruct(eLoopBuilding, False, False, False):
 
-										iValue = gc.getBuildingInfo(eLoopBuilding).getMaintenanceModifier()
+											iValue = gc.getBuildingInfo(eLoopBuilding).getDefenseModifier()
 
-										if (iValue < iBestValue):
+											if (iValue > iBestValue):
+											
+												iBestValue = iValue
+												eBestBuilding = eLoopBuilding
 										
-											iBestValue = iValue
-											eBestBuilding = eLoopBuilding
-									
-					if (eBestBuilding != BuildingTypes.NO_BUILDING):
-						popupInfo = CyPopupInfo()
-						popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-						popupInfo.setData1(pCity.getID())
-						popupInfo.setData2(OrderTypes.ORDER_CONSTRUCT)
-						popupInfo.setData3(eBestBuilding)
-						popupInfo.setText(localText.getText("TXT_KEY_POPUP_MAINTENANCE_DEMAND", (pCity.getNameKey(), gc.getBuildingInfo(eBestBuilding).getTextKey())))
-						popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
-						popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
-						popupInfo.addPopup(iPlayer)
-						g_iAdvisorNags += 1
+						if (eBestBuilding != BuildingTypes.NO_BUILDING):
+							popupInfo = CyPopupInfo()
+							popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+							popupInfo.setData1(pCity.getID())
+							popupInfo.setData2(OrderTypes.ORDER_CONSTRUCT)
+							popupInfo.setData3(eBestBuilding)
+							popupInfo.setText(localText.getText("TXT_KEY_POPUP_BUILDING_DEFENSE_DEMAND", (pCity.getNameKey(), gc.getBuildingInfo(eBestBuilding).getTextKey())))
+							popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
+							popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
+							popupInfo.addPopup(iPlayer)
+							g_iAdvisorNags += 1
 
-			if (pCity.getCommerceRate(CommerceTypes.COMMERCE_CULTURE) == 0):
-			
-				if (gc.getGame().getGameTurn() + 7) % 40 == pCity.getGameTurnFounded() % 40:
+				if (pCity.getMaintenance() >= 8):
+				
+					if (gc.getGame().getGameTurn() + 6) % 40 == pCity.getGameTurnFounded() % 40:
 
-					iBestValue = 0
-					eBestBuilding = BuildingTypes.NO_BUILDING
+						iBestValue = 0
+						eBestBuilding = BuildingTypes.NO_BUILDING
 
-					for iI in range(gc.getNumBuildingClassInfos()):
+						for iI in range(gc.getNumBuildingClassInfos()):
 
-						if (not isLimitedWonderClass(iI)):
-						
-							eLoopBuilding = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationBuildings(iI)
+							if (not isLimitedWonderClass(iI)):
 							
-							if (eLoopBuilding != BuildingTypes.NO_BUILDING):
-							
-								if (gc.getBuildingInfo(eLoopBuilding).getObsoleteSafeCommerceChange(CommerceTypes.COMMERCE_CULTURE) > 0):
+								eLoopBuilding = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationBuildings(iI)
+								
+								if (eLoopBuilding != BuildingTypes.NO_BUILDING):
+								
+									if (gc.getBuildingInfo(eLoopBuilding).getMaintenanceModifier() < 0):
 
-									if pCity.canConstruct(eLoopBuilding, False, False, False):
+										if pCity.canConstruct(eLoopBuilding, False, False, False):
 
-										iValue = gc.getBuildingInfo(eLoopBuilding).getObsoleteSafeCommerceChange(CommerceTypes.COMMERCE_CULTURE)
+											iValue = gc.getBuildingInfo(eLoopBuilding).getMaintenanceModifier()
 
-										if (iValue > iBestValue):
+											if (iValue < iBestValue):
+											
+												iBestValue = iValue
+												eBestBuilding = eLoopBuilding
 										
-											iBestValue = iValue
-											eBestBuilding = eLoopBuilding
-									
-					if (eBestBuilding != BuildingTypes.NO_BUILDING):
-						popupInfo = CyPopupInfo()
-						popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-						popupInfo.setData1(pCity.getID())
-						popupInfo.setData2(OrderTypes.ORDER_CONSTRUCT)
-						popupInfo.setData3(eBestBuilding)
-						popupInfo.setText(localText.getText("TXT_KEY_POPUP_CULTURE_DEMAND", (pCity.getNameKey(), gc.getBuildingInfo(eBestBuilding).getTextKey())))
-						popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
-						popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
-						popupInfo.addPopup(iPlayer)
-						g_iAdvisorNags += 1
+						if (eBestBuilding != BuildingTypes.NO_BUILDING):
+							popupInfo = CyPopupInfo()
+							popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+							popupInfo.setData1(pCity.getID())
+							popupInfo.setData2(OrderTypes.ORDER_CONSTRUCT)
+							popupInfo.setData3(eBestBuilding)
+							popupInfo.setText(localText.getText("TXT_KEY_POPUP_MAINTENANCE_DEMAND", (pCity.getNameKey(), gc.getBuildingInfo(eBestBuilding).getTextKey())))
+							popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
+							popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
+							popupInfo.addPopup(iPlayer)
+							g_iAdvisorNags += 1
 
-			if (pCity.getBaseCommerceRate(CommerceTypes.COMMERCE_GOLD) > 10):
-			
-				if (gc.getGame().getGameTurn() + 8) % 40 == pCity.getGameTurnFounded() % 40:
+				if (pCity.getCommerceRate(CommerceTypes.COMMERCE_CULTURE) == 0):
+				
+					if (gc.getGame().getGameTurn() + 7) % 40 == pCity.getGameTurnFounded() % 40:
 
-					iBestValue = 0
-					eBestBuilding = BuildingTypes.NO_BUILDING
+						iBestValue = 0
+						eBestBuilding = BuildingTypes.NO_BUILDING
 
-					for iI in range(gc.getNumBuildingClassInfos()):
+						for iI in range(gc.getNumBuildingClassInfos()):
 
-						if (not isLimitedWonderClass(iI)):
-						
-							eLoopBuilding = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationBuildings(iI)
+							if (not isLimitedWonderClass(iI)):
 							
-							if (eLoopBuilding != BuildingTypes.NO_BUILDING):
-							
-								if (gc.getBuildingInfo(eLoopBuilding).getCommerceModifier(CommerceTypes.COMMERCE_GOLD) > 0):
+								eLoopBuilding = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationBuildings(iI)
+								
+								if (eLoopBuilding != BuildingTypes.NO_BUILDING):
+								
+									if (gc.getBuildingInfo(eLoopBuilding).getObsoleteSafeCommerceChange(CommerceTypes.COMMERCE_CULTURE) > 0):
 
-									if pCity.canConstruct(eLoopBuilding, False, False, False):
+										if pCity.canConstruct(eLoopBuilding, False, False, False):
 
-										iValue = gc.getBuildingInfo(eLoopBuilding).getCommerceModifier(CommerceTypes.COMMERCE_GOLD)
+											iValue = gc.getBuildingInfo(eLoopBuilding).getObsoleteSafeCommerceChange(CommerceTypes.COMMERCE_CULTURE)
 
-										if (iValue > iBestValue):
+											if (iValue > iBestValue):
+											
+												iBestValue = iValue
+												eBestBuilding = eLoopBuilding
 										
-											iBestValue = iValue
-											eBestBuilding = eLoopBuilding
-									
-					if (eBestBuilding != BuildingTypes.NO_BUILDING):
-						popupInfo = CyPopupInfo()
-						popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-						popupInfo.setData1(pCity.getID())
-						popupInfo.setData2(OrderTypes.ORDER_CONSTRUCT)
-						popupInfo.setData3(eBestBuilding)
-						popupInfo.setText(localText.getText("TXT_KEY_POPUP_GOLD_DEMAND", (pCity.getNameKey(), gc.getBuildingInfo(eBestBuilding).getTextKey())))
-						popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
-						popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
-						popupInfo.addPopup(iPlayer)
-						g_iAdvisorNags += 1
+						if (eBestBuilding != BuildingTypes.NO_BUILDING):
+							popupInfo = CyPopupInfo()
+							popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+							popupInfo.setData1(pCity.getID())
+							popupInfo.setData2(OrderTypes.ORDER_CONSTRUCT)
+							popupInfo.setData3(eBestBuilding)
+							popupInfo.setText(localText.getText("TXT_KEY_POPUP_CULTURE_DEMAND", (pCity.getNameKey(), gc.getBuildingInfo(eBestBuilding).getTextKey())))
+							popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
+							popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
+							popupInfo.addPopup(iPlayer)
+							g_iAdvisorNags += 1
 
-			if (pCity.getBaseCommerceRate(CommerceTypes.COMMERCE_RESEARCH) > 10):
-			
-				if (gc.getGame().getGameTurn() + 10) % 40 == pCity.getGameTurnFounded() % 40:
+				if (pCity.getBaseCommerceRate(CommerceTypes.COMMERCE_GOLD) > 10):
+				
+					if (gc.getGame().getGameTurn() + 8) % 40 == pCity.getGameTurnFounded() % 40:
 
-					iBestValue = 0
-					eBestBuilding = BuildingTypes.NO_BUILDING
+						iBestValue = 0
+						eBestBuilding = BuildingTypes.NO_BUILDING
 
-					for iI in range(gc.getNumBuildingClassInfos()):
+						for iI in range(gc.getNumBuildingClassInfos()):
 
-						if (not isLimitedWonderClass(iI)):
-						
-							eLoopBuilding = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationBuildings(iI)
+							if (not isLimitedWonderClass(iI)):
 							
-							if (eLoopBuilding != BuildingTypes.NO_BUILDING):
-							
-								if (gc.getBuildingInfo(eLoopBuilding).getCommerceModifier(CommerceTypes.COMMERCE_RESEARCH) > 0):
+								eLoopBuilding = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationBuildings(iI)
+								
+								if (eLoopBuilding != BuildingTypes.NO_BUILDING):
+								
+									if (gc.getBuildingInfo(eLoopBuilding).getCommerceModifier(CommerceTypes.COMMERCE_GOLD) > 0):
 
-									if pCity.canConstruct(eLoopBuilding, False, False, False):
+										if pCity.canConstruct(eLoopBuilding, False, False, False):
 
-										iValue = gc.getBuildingInfo(eLoopBuilding).getCommerceModifier(CommerceTypes.COMMERCE_RESEARCH)
+											iValue = gc.getBuildingInfo(eLoopBuilding).getCommerceModifier(CommerceTypes.COMMERCE_GOLD)
 
-										if (iValue > iBestValue):
+											if (iValue > iBestValue):
+											
+												iBestValue = iValue
+												eBestBuilding = eLoopBuilding
 										
-											iBestValue = iValue
-											eBestBuilding = eLoopBuilding
-									
-					if (eBestBuilding != BuildingTypes.NO_BUILDING):
-						popupInfo = CyPopupInfo()
-						popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-						popupInfo.setData1(pCity.getID())
-						popupInfo.setData2(OrderTypes.ORDER_CONSTRUCT)
-						popupInfo.setData3(eBestBuilding)
-						popupInfo.setText(localText.getText("TXT_KEY_POPUP_RESEARCH_DEMAND", (pCity.getNameKey(), gc.getBuildingInfo(eBestBuilding).getTextKey())))
-						popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
-						popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
-						popupInfo.addPopup(iPlayer)
-						g_iAdvisorNags += 1
+						if (eBestBuilding != BuildingTypes.NO_BUILDING):
+							popupInfo = CyPopupInfo()
+							popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+							popupInfo.setData1(pCity.getID())
+							popupInfo.setData2(OrderTypes.ORDER_CONSTRUCT)
+							popupInfo.setData3(eBestBuilding)
+							popupInfo.setText(localText.getText("TXT_KEY_POPUP_GOLD_DEMAND", (pCity.getNameKey(), gc.getBuildingInfo(eBestBuilding).getTextKey())))
+							popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
+							popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
+							popupInfo.addPopup(iPlayer)
+							g_iAdvisorNags += 1
 
-			if (pCity.countNumWaterPlots() > 10):
-			
-				if (gc.getGame().getGameTurn() + 11) % 40 == pCity.getGameTurnFounded() % 40:
+				if (pCity.getBaseCommerceRate(CommerceTypes.COMMERCE_RESEARCH) > 10):
+				
+					if (gc.getGame().getGameTurn() + 10) % 40 == pCity.getGameTurnFounded() % 40:
 
-					iBestValue = 0
-					eBestBuilding = BuildingTypes.NO_BUILDING
+						iBestValue = 0
+						eBestBuilding = BuildingTypes.NO_BUILDING
 
-					for iI in range(gc.getNumBuildingClassInfos()):
+						for iI in range(gc.getNumBuildingClassInfos()):
 
-						if (not isLimitedWonderClass(iI)):
-						
-							eLoopBuilding = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationBuildings(iI)
+							if (not isLimitedWonderClass(iI)):
 							
-							if (eLoopBuilding != BuildingTypes.NO_BUILDING):
-							
-								if (gc.getBuildingInfo(eLoopBuilding).getSeaPlotYieldChange(YieldTypes.YIELD_FOOD) > 0):
+								eLoopBuilding = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationBuildings(iI)
+								
+								if (eLoopBuilding != BuildingTypes.NO_BUILDING):
+								
+									if (gc.getBuildingInfo(eLoopBuilding).getCommerceModifier(CommerceTypes.COMMERCE_RESEARCH) > 0):
 
-									if pCity.canConstruct(eLoopBuilding, False, False, False):
+										if pCity.canConstruct(eLoopBuilding, False, False, False):
 
-										iValue = gc.getBuildingInfo(eLoopBuilding).getSeaPlotYieldChange(YieldTypes.YIELD_FOOD)
+											iValue = gc.getBuildingInfo(eLoopBuilding).getCommerceModifier(CommerceTypes.COMMERCE_RESEARCH)
 
-										if (iValue > iBestValue):
+											if (iValue > iBestValue):
+											
+												iBestValue = iValue
+												eBestBuilding = eLoopBuilding
 										
-											iBestValue = iValue
-											eBestBuilding = eLoopBuilding
-									
-					if (eBestBuilding != BuildingTypes.NO_BUILDING):
-						popupInfo = CyPopupInfo()
-						popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-						popupInfo.setData1(pCity.getID())
-						popupInfo.setData2(OrderTypes.ORDER_CONSTRUCT)
-						popupInfo.setData3(eBestBuilding)
-						popupInfo.setText(localText.getText("TXT_KEY_POPUP_WATER_FOOD_DEMAND", (pCity.getNameKey(), gc.getBuildingInfo(eBestBuilding).getTextKey())))
-						popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
-						popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
-						popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
-						popupInfo.addPopup(iPlayer)
-						g_iAdvisorNags += 1
+						if (eBestBuilding != BuildingTypes.NO_BUILDING):
+							popupInfo = CyPopupInfo()
+							popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+							popupInfo.setData1(pCity.getID())
+							popupInfo.setData2(OrderTypes.ORDER_CONSTRUCT)
+							popupInfo.setData3(eBestBuilding)
+							popupInfo.setText(localText.getText("TXT_KEY_POPUP_RESEARCH_DEMAND", (pCity.getNameKey(), gc.getBuildingInfo(eBestBuilding).getTextKey())))
+							popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
+							popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
+							popupInfo.addPopup(iPlayer)
+							g_iAdvisorNags += 1
+
+				if (pCity.countNumWaterPlots() > 10):
+				
+					if (gc.getGame().getGameTurn() + 11) % 40 == pCity.getGameTurnFounded() % 40:
+
+						iBestValue = 0
+						eBestBuilding = BuildingTypes.NO_BUILDING
+
+						for iI in range(gc.getNumBuildingClassInfos()):
+
+							if (not isLimitedWonderClass(iI)):
+							
+								eLoopBuilding = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationBuildings(iI)
+								
+								if (eLoopBuilding != BuildingTypes.NO_BUILDING):
+								
+									if (gc.getBuildingInfo(eLoopBuilding).getSeaPlotYieldChange(YieldTypes.YIELD_FOOD) > 0):
+
+										if pCity.canConstruct(eLoopBuilding, False, False, False):
+
+											iValue = gc.getBuildingInfo(eLoopBuilding).getSeaPlotYieldChange(YieldTypes.YIELD_FOOD)
+
+											if (iValue > iBestValue):
+											
+												iBestValue = iValue
+												eBestBuilding = eLoopBuilding
+										
+						if (eBestBuilding != BuildingTypes.NO_BUILDING):
+							popupInfo = CyPopupInfo()
+							popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+							popupInfo.setData1(pCity.getID())
+							popupInfo.setData2(OrderTypes.ORDER_CONSTRUCT)
+							popupInfo.setData3(eBestBuilding)
+							popupInfo.setText(localText.getText("TXT_KEY_POPUP_WATER_FOOD_DEMAND", (pCity.getNameKey(), gc.getBuildingInfo(eBestBuilding).getTextKey())))
+							popupInfo.setOnClickedPythonCallback("cityWarningOnClickedCallback")
+							popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
+							popupInfo.addPopup(iPlayer)
+							g_iAdvisorNags += 1

@@ -84,5 +84,17 @@
 			<Help>TXT_KEY_GAME_OPTION_NO_CHANGING_WAR_PEACE_HELP</Help>
 			<bDefault>0</bDefault>
 		</GameOptionInfo>
+		<GameOptionInfo>
+			<Type>GAMEOPTION_NEW_RANDOM_SEED</Type>
+			<Description>TXT_KEY_GAME_OPTION_NEW_RANDOM_SEED</Description>
+			<Help>TXT_KEY_GAME_OPTION_NEW_RANDOM_SEED_HELP</Help>
+			<bDefault>0</bDefault>
+		</GameOptionInfo>
+		<GameOptionInfo>
+			<Type>GAMEOPTION_NO_CHEATING</Type>
+			<Description>TXT_KEY_GAME_OPTION_NO_CHEATING</Description>
+			<Help>TXT_KEY_GAME_OPTION_NO_CHEATING_HELP</Help>
+			<bDefault>0</bDefault>
+		</GameOptionInfo>
 	</GameOptionInfos>
 </Civ4GameOptionInfos>

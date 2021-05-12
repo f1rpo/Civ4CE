@@ -119,15 +119,7 @@ def handleGlobeViewDropdownBoxInput ( argsList ):
 	UserProfile.setGlobeViewRenderLevel(iValue)
 	
 	return 1
-	
-def handleTextureQualityDropdownBoxInput ( argsList ):
-	"Handles Texture Quality Dropdown Box input"
-	iValue, szName = argsList
-	
-	UserProfile.setTextureQualityLevel(iValue)
-	
-	return 1
-	
+		
 def handleResolutionDropdownInput ( argsList ):
 	"Handles Resolution Dropdown Box input"
 	iValue, szName = argsList

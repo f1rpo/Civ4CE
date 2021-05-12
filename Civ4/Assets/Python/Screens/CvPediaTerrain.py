@@ -61,9 +61,10 @@ class CvPediaTerrain:
 		screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_TERRAIN, -1)
 
 		if self.top.iLastScreen	!= CvScreenEnums.PEDIA_TERRAIN or bNotActive:		
-			self.placeLinks()
+			self.placeLinks(true)
 			self.top.iLastScreen = CvScreenEnums.PEDIA_TERRAIN
-
+		else:
+			self.placeLinks(false)
 		
 		# Icon
 		screen.addPanel( self.top.getNextWidgetName(), "", "", False, False,
@@ -112,11 +113,12 @@ class CvPediaTerrain:
 			if len( special ) != 0:
 				screen.appendListBoxString( listName, special, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 		
-	def placeLinks(self):
+	def placeLinks(self, bRedraw):
 
 		screen = self.top.getScreen()
-                
-		screen.clearListBoxGFC(self.top.LIST_ID)
+
+		if bRedraw:
+			screen.clearListBoxGFC(self.top.LIST_ID)
 		
 		# sort resources alphabetically
 		listSorted=[(0,0)]*gc.getNumTerrainInfos()
@@ -128,7 +130,8 @@ class CvPediaTerrain:
 		i = 0
 		for iI in range(gc.getNumTerrainInfos()):
 			if (not gc.getTerrainInfo(listSorted[iI][1]).isGraphicalOnly()):
-				screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_TERRAIN, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
+				if bRedraw:
+					screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_TERRAIN, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
 				if listSorted[iI][1] == self.iTerrain:
 					iSelected = i
 				i += 1

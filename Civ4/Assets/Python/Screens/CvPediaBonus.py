@@ -97,8 +97,10 @@ class CvPediaBonus:
 		screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_BONUS, -1)
 
 		if self.top.iLastScreen	!= CvScreenEnums.PEDIA_BONUS or bNotActive:		
-			self.placeLinks()
+			self.placeLinks(true)
 			self.top.iLastScreen = CvScreenEnums.PEDIA_BONUS
+		else:
+			self.placeLinks(false)
 		
 		# Icon
 		screen.addPanel( self.top.getNextWidgetName(), "", "", False, False,
@@ -295,11 +297,12 @@ class CvPediaBonus:
 			if bFound:
 				screen.attachImageButton( panelName, "", gc.getBuildingInfo(eLoopBuilding).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, eLoopBuilding, 1, False )
 		
-	def placeLinks(self):
+	def placeLinks(self, bRedraw):
 
 		screen = self.top.getScreen()
 
-		screen.clearListBoxGFC(self.top.LIST_ID)
+		if bRedraw:
+			screen.clearListBoxGFC(self.top.LIST_ID)
 		
 		# sort resources alphabetically
 		rowListName=[(0,0)]*gc.getNumBonusInfos()
@@ -308,10 +311,14 @@ class CvPediaBonus:
 		rowListName.sort()	
 		
 		iSelected = 0	
+		i = 0
 		for iI in range(gc.getNumBonusInfos()):
-			screen.appendListBoxString(self.top.LIST_ID, rowListName[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, rowListName[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
-			if rowListName[iI][1] == self.iBonus:
-				iSelected = iI			
+			if (not gc.getBonusInfo(rowListName[iI][1]).isGraphicalOnly()):
+				if bRedraw:
+					screen.appendListBoxString(self.top.LIST_ID, rowListName[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, rowListName[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
+				if rowListName[iI][1] == self.iBonus:
+					iSelected = i
+				i += 1
 
 		screen.setSelectedListBoxStringGFC(self.top.LIST_ID, iSelected)
 			

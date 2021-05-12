@@ -4,7 +4,6 @@ from CvPythonExtensions import *
 import CvUtil
 import ScreenInput
 import CvScreenEnums
-import string
 
 # globals
 gc = CyGlobalContext()
@@ -48,7 +47,7 @@ class CvPediaUnit:
 		self.X_SPECIAL_PANE = 20
 		self.Y_SPECIAL_PANE = 420
 		self.W_SPECIAL_PANE = 433
-		self.H_SPECIAL_PANE = 278
+		self.H_SPECIAL_PANE = 144
 
 		self.X_PREREQ_PANE = 20
 		self.Y_PREREQ_PANE = 292
@@ -60,10 +59,15 @@ class CvPediaUnit:
 		self.W_UPGRADES_TO_PANE = 303
 		self.H_UPGRADES_TO_PANE = 124
 
-		self.X_PROMO_PANE = 475
-		self.Y_PROMO_PANE = 420
-		self.W_PROMO_PANE = 303
-		self.H_PROMO_PANE = 278
+		self.X_PROMO_PANE = 20
+		self.Y_PROMO_PANE = 574
+		self.W_PROMO_PANE = 433
+		self.H_PROMO_PANE = 124
+
+		self.X_HISTORY_PANE = 475
+		self.Y_HISTORY_PANE = 420
+		self.W_HISTORY_PANE = 303
+		self.H_HISTORY_PANE = 278
 
 						
 	# Screen construction function
@@ -81,15 +85,16 @@ class CvPediaUnit:
 
 		# Header...
 		szHeader = u"<font=4b>" + gc.getUnitInfo(self.iUnit).getDescription().upper() + u"</font>"
-		screen.setText(self.top.getNextWidgetName(), "Background", szHeader, CvUtil.FONT_CENTER_JUSTIFY, self.top.X_SCREEN, self.top.Y_TITLE, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_DESCRIPTION, CivilopediaPageTypes.CIVILOPEDIA_PAGE_UNIT, iUnit)
-		screen.setImageButton(self.top.getNextWidgetName(), ArtFileMgr.getInterfaceArtInfo("INTERFACE_GENERAL_CIVILOPEDIA_ICON").getPath(), self.top.X_EXIT, self.top.Y_TITLE, 32, 32, WidgetTypes.WIDGET_PEDIA_DESCRIPTION,  CivilopediaPageTypes.CIVILOPEDIA_PAGE_UNIT, iUnit)
+		screen.setLabel(self.top.getNextWidgetName(), "Background", szHeader, CvUtil.FONT_CENTER_JUSTIFY, self.top.X_SCREEN, self.top.Y_TITLE, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, CivilopediaPageTypes.CIVILOPEDIA_PAGE_UNIT, iUnit)
 
 		# Top
 		screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_UNIT, -1)
 
 		if self.top.iLastScreen	!= CvScreenEnums.PEDIA_UNIT or bNotActive:		
-			self.placeLinks()
+			self.placeLinks(true)
 			self.top.iLastScreen = CvScreenEnums.PEDIA_UNIT
+		else:
+			self.placeLinks(false)
 		
 		# Icon
 		screen.addPanel( self.top.getNextWidgetName(), "", "", False, False,
@@ -112,7 +117,7 @@ class CvPediaUnit:
 		
 		self.placePromotions()
 										
-		return
+		self.placeHistory()
 
 	# Place strength/movement
 	def placeStats(self):
@@ -253,20 +258,30 @@ class CvPediaUnit:
                                  self.X_SPECIAL_PANE, self.Y_SPECIAL_PANE, self.W_SPECIAL_PANE, self.H_SPECIAL_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 		
 		listName = self.top.getNextWidgetName()
-		screen.attachListBoxGFC( panelName, listName, "", TableStyles.TABLE_STYLE_EMPTY )
-		screen.enableSelect(listName, False)
 		
-		szSpecialText = CyGameTextMgr().getUnitHelp( self.iUnit, True, False, False, None )
-		splitText = string.split( szSpecialText, "\n" )
-		for special in splitText:
-			if len( special ) != 0:
-				screen.appendListBoxString( listName, special, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		szSpecialText = CyGameTextMgr().getUnitHelp( self.iUnit, True, False, False, None )[1:]
+		screen.addMultilineText(listName, szSpecialText, self.X_SPECIAL_PANE+5, self.Y_SPECIAL_PANE+30, self.W_SPECIAL_PANE-10, self.H_SPECIAL_PANE-35, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
 					
-	def placeLinks(self):
+	def placeHistory(self):
+		
+		screen = self.top.getScreen()
+		
+		panelName = self.top.getNextWidgetName()
+		screen.addPanel( panelName, localText.getText("TXT_KEY_CIVILOPEDIA_HISTORY", ()), "", True, True,
+						self.X_HISTORY_PANE, self.Y_HISTORY_PANE,
+						self.W_HISTORY_PANE, self.H_HISTORY_PANE,
+						PanelStyles.PANEL_STYLE_BLUE50 )
+		
+		textName = self.top.getNextWidgetName()
+		screen.addMultilineText( textName, gc.getUnitInfo(self.iUnit).getCivilopedia(), self.X_HISTORY_PANE + 15, self.Y_HISTORY_PANE + 40,
+		    self.W_HISTORY_PANE - (15 * 2), self.H_HISTORY_PANE - (15 * 2) - 25, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+		
+	def placeLinks(self, bRedraw):
 
 		screen = self.top.getScreen()
 
-		screen.clearListBoxGFC(self.top.LIST_ID)
+		if bRedraw:
+			screen.clearListBoxGFC(self.top.LIST_ID)
 		
 		# sort Units alphabetically
 		unitsList=[(0,0)]*gc.getNumUnitInfos()
@@ -274,11 +289,15 @@ class CvPediaUnit:
 			unitsList[j] = (gc.getUnitInfo(j).getDescription(), j)
 		unitsList.sort()	
 		
+		i = 0
 		iSelected = 0
 		for iI in range(gc.getNumUnitInfos()):
-			screen.appendListBoxString( self.top.LIST_ID, unitsList[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, unitsList[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
-			if unitsList[iI][1] == self.iUnit:
-				iSelected = iI			
+			if (not gc.getUnitInfo(iI).isGraphicalOnly()):
+				if bRedraw:
+					screen.appendListBoxString( self.top.LIST_ID, unitsList[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, unitsList[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
+				if unitsList[iI][1] == self.iUnit:
+					iSelected = i
+				i += 1
 
 		screen.setSelectedListBoxStringGFC(self.top.LIST_ID, iSelected)
 			

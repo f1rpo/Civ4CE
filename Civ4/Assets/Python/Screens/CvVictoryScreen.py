@@ -243,7 +243,9 @@ class CvVictoryScreen:
 		
 		for i in range(len(self.locations)):
 			screen.addDDSGFC(self.getMouseOverWidget(i, False), self.locations[i][5], self.X_BG + self.X_DETAIL, self.Y_BG + self.Y_DETAIL, self.W_DETAIL, self.H_DETAIL, WidgetTypes.WIDGET_GENERAL, -1, -1)
-			screen.setLabel(self.getMouseOverWidget(i, True), "Background", u"<font=3>" + localText.getColorText(self.locations[i][6], (), gc.getInfoTypeForString("COLOR_BROWN_TEXT")) + u"</font>", CvUtil.FONT_CENTER_JUSTIFY, self.X_BG + self.X_DETAIL + self.W_DETAIL/2, self.Y_BG + self.Y_DETAIL - 25, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
+			szName = localText.getObjectText(self.locations[i][6], 0)
+			szName = localText.changeTextColor(szName, gc.getInfoTypeForString("COLOR_BROWN_TEXT"))
+			screen.setLabel(self.getMouseOverWidget(i, True), "Background", u"<font=3>" + szName + u"</font>", CvUtil.FONT_CENTER_JUSTIFY, self.X_BG + self.X_DETAIL + self.W_DETAIL/2, self.Y_BG + self.Y_DETAIL - 25, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 			screen.hide(self.getMouseOverWidget(i, False))
 			screen.hide(self.getMouseOverWidget(i, True))
 
@@ -254,7 +256,8 @@ class CvVictoryScreen:
 				for i in range(gc.getNumProjectInfos()):
 					component = gc.getProjectInfo(i)
 					if (component.isSpaceship()):
-						if (component.getVictoryThreshold(iLoopVC) > 0 and component.getVictoryThreshold(iLoopVC) == gc.getTeam(iActiveTeam).getProjectCount(i)):
+						if (True):
+#						if (component.getVictoryThreshold(iLoopVC) > 0 and component.getVictoryThreshold(iLoopVC) == gc.getTeam(iActiveTeam).getProjectCount(i)):
 							if iSSComponent < len(self.locations):	
 								screen.setImageButton(self.SPACESHIP_WIDGET_ID + str(iSSComponent), self.locations[iSSComponent][4], self.X_BG + self.locations[iSSComponent][0], self.Y_BG + self.locations[iSSComponent][1], self.locations[iSSComponent][2], self.locations[iSSComponent][3], WidgetTypes.WIDGET_GENERAL, -1, -1)	
 						iSSComponent += 1
@@ -280,6 +283,7 @@ class CvVictoryScreen:
 		screen.appendListBoxString(szSettingsTable, " ", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 		screen.appendListBoxString(szSettingsTable, localText.getText("TXT_KEY_SETTINGS_DIFFICULTY", (gc.getHandicapInfo(activePlayer.getHandicapType()).getTextKey(), )), WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 		screen.appendListBoxString(szSettingsTable, " ", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		screen.appendListBoxString(szSettingsTable, gc.getMap().getMapScriptName(), WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 		screen.appendListBoxString(szSettingsTable, localText.getText("TXT_KEY_SETTINGS_MAP_SIZE", (gc.getWorldInfo(gc.getMap().getWorldSize()).getTextKey(), )), WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 		screen.appendListBoxString(szSettingsTable, localText.getText("TXT_KEY_SETTINGS_CLIMATE", (gc.getClimateInfo(gc.getMap().getClimate()).getTextKey(), )), WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 		screen.appendListBoxString(szSettingsTable, localText.getText("TXT_KEY_SETTINGS_SEA_LEVEL", (gc.getSeaLevelInfo(gc.getMap().getSeaLevel()).getTextKey(), )), WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
@@ -447,7 +451,7 @@ class CvVictoryScreen:
 				
 				iNumRows = screen.getTableNumRows(szTable)
 				szVictoryType = u"<font=4b>" + victory.getDescription().upper() + u"</font>"
-				if (victory.isEndScore()):
+				if (victory.isEndScore() and (gc.getGame().getMaxTurns() > gc.getGame().getElapsedGameTurns())):
 					szVictoryType += "    (" + localText.getText("TXT_KEY_MISC_TURNS_LEFT", (gc.getGame().getMaxTurns() - gc.getGame().getElapsedGameTurns(), )) + ")"
 
 				screen.setTableText(szTable, 0, iNumRows - 1, szVictoryType, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)

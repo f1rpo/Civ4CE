@@ -91,7 +91,7 @@ def showFinanceAdvisor():
 	financeAdvisor.interfaceScreen()
 
 domesticAdvisor = CvDomesticAdvisor.CvDomesticAdvisor()
-def showDomesticAdvisor():
+def showDomesticAdvisor(argsList):
 	domesticAdvisor.interfaceScreen()
 
 militaryAdvisor = CvMilitaryAdvisor.CvMilitaryAdvisor(MILITARY_ADVISOR)
@@ -313,7 +313,6 @@ def WorldBuilderHandleCityEditAddScriptCB( argsList ):
 	worldBuilderScreen.getCityScript()
 
 def WorldBuilderHandleUnitEditAddScriptCB( argsList ):
-	print("TEST")
 	worldBuilderScreen.getUnitScript()
 
 def WorldBuilderHandleCityEditNameCB( argsList ):
@@ -461,6 +460,9 @@ def WorldBuilderHasHolyCity(argsList):
 	iReligion = argsList[0]
 	return worldBuilderScreen.hasHolyCity(iReligion)
 
+def WorldBuilderHandleDiploPlayerDropdownCB( argsList ):
+	worldBuilderScreen.handleDiploPlayerDropdownCB(argsList)
+	
 ##### WORLDBUILDER DIPLOMACY SCREEN #####
 
 worldBuilderDiplomacyScreen = CvWorldBuilderDiplomacyScreen.CvWorldBuilderDiplomacyScreen()
@@ -470,6 +472,20 @@ def showWorldBuilderDiplomacyScreen():
 def hideWorldBuilderDiplomacyScreen():
 	worldBuilderDiplomacyScreen.killScreen()
 
+def handleWorldBuilderDiplomacyPlayerPullDownCB(argsList):
+	worldBuilderDiplomacyScreen.handlePlayerPullDownCB(int(argsList[0]))
+
+def handleWorldBuilderDiplomacyAtWarPullDownCB(argsList):
+	worldBuilderDiplomacyScreen.handleAtWarPullDownCB(argsList)
+
+def handleWorldBuilderDiplomacyAIWeightPullDownCB(argsList):
+	worldBuilderDiplomacyScreen.handleAIWeightPullDownCB(argsList)
+
+def handleWorldBuilderDiplomacyAIWeightResetAllCB(argsList):
+	worldBuilderDiplomacyScreen.handleAIWeightResetAll()
+
+def handleWorldBuilderDiplomacyExitCB(argsList):
+	worldBuilderDiplomacyScreen.killScreen()
 
 #################################################
 ## Utility Functions (can be overridden by CvScreenUtilsInterface
@@ -558,8 +574,6 @@ def forceScreenUpdate (argsList):
 	# world builder diplomacy Screen
 	elif ( argsList[0] == WORLDBUILDER_DIPLOMACY_SCREEN ):
 		worldBuilderDiplomacyScreen.updateScreen()
-	elif ( argsList[0] == DOMESTIC_ADVISOR ):
-		domesticAdvisor.updateScreen()
 
 # Forced redraw
 def forceScreenRedraw (argsList):
@@ -610,10 +624,12 @@ def handleForward(screens):
 	return 0
 
 def refreshMilitaryAdvisor (argsList):
-	if (0 == argsList[0]):
-		militaryAdvisor.refreshSelected(argsList[1])
-	elif (1 == argsList[0]):
+	if (1 == argsList[0]):
+		militaryAdvisor.refreshSelectedGroup(argsList[1])
+	elif (2 == argsList[0]):
 		militaryAdvisor.refreshSelectedLeader(argsList[1])
+	elif (argsList[0] <= 0):
+		militaryAdvisor.refreshSelectedUnit(-argsList[0], argsList[1])
 	
 def updateMusicPath (argsList):
     szPathName = argsList[0]
@@ -658,13 +674,13 @@ def featAccomplishedOnClickedCallback(argsList):
 	
 	if (iButtonId == 1):
 		if (iData1 == FeatTypes.FEAT_TRADE_ROUTE):
-			showDomesticAdvisor()
+			showDomesticAdvisor(())
 		elif ((iData1 >= FeatTypes.FEAT_UNITCOMBAT_ARCHER) and (iData1 <= FeatTypes.FEAT_UNITCOMBAT_NAVAL)):
 			showMilitaryAdvisor()
 		elif ((iData1 >= FeatTypes.FEAT_COPPER_CONNECTED) and (iData1 <= FeatTypes.FEAT_FOOD_CONNECTED)):
 			showForeignAdvisorScreen([0])
 		elif ((iData1 == FeatTypes.FEAT_NATIONAL_WONDER) or
-		      ((iData1 >= FeatTypes.FEAT_POPULATION_HALF_MILLION) and (iData1 <= FeatTypes.FEAT_POPULATION_5_BILLION))):
+		      ((iData1 >= FeatTypes.FEAT_POPULATION_HALF_MILLION) and (iData1 <= FeatTypes.FEAT_POPULATION_2_BILLION))):
 		  # 1 is for the wonder tab...
 			showInfoScreen([1, 0])
 

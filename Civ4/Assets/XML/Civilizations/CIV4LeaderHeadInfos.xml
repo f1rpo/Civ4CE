@@ -205,7 +205,7 @@
 			<iBasePeaceWeight>0</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>2</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>30</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
@@ -247,7 +247,7 @@
 			<iDefensivePactAttitudeChangeLimit>2</iDefensivePactAttitudeChangeLimit>
 			<iShareWarAttitudeChange>1</iShareWarAttitudeChange>
 			<iShareWarAttitudeDivisor>8</iShareWarAttitudeDivisor>
-			<iShareWarAttitudeChangeLimit>3</iShareWarAttitudeChangeLimit>
+			<iShareWarAttitudeChangeLimit>4</iShareWarAttitudeChangeLimit>
 			<iFavoriteCivicAttitudeChange>1</iFavoriteCivicAttitudeChange>
 			<iFavoriteCivicAttitudeDivisor>10</iFavoriteCivicAttitudeDivisor>
 			<iFavoriteCivicAttitudeChangeLimit>2</iFavoriteCivicAttitudeChangeLimit>
@@ -706,7 +706,7 @@
 			<iBasePeaceWeight>8</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>0</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>6</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>20</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>10</iMaxGoldTradePercent>
@@ -748,7 +748,7 @@
 			<iDefensivePactAttitudeChangeLimit>2</iDefensivePactAttitudeChangeLimit>
 			<iShareWarAttitudeChange>1</iShareWarAttitudeChange>
 			<iShareWarAttitudeDivisor>8</iShareWarAttitudeDivisor>
-			<iShareWarAttitudeChangeLimit>3</iShareWarAttitudeChangeLimit>
+			<iShareWarAttitudeChangeLimit>2</iShareWarAttitudeChangeLimit>
 			<iFavoriteCivicAttitudeChange>1</iFavoriteCivicAttitudeChange>
 			<iFavoriteCivicAttitudeDivisor>10</iFavoriteCivicAttitudeDivisor>
 			<iFavoriteCivicAttitudeChangeLimit>2</iFavoriteCivicAttitudeChangeLimit>
@@ -1223,7 +1223,7 @@
 			<iBasePeaceWeight>6</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>1</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>70</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
@@ -1733,7 +1733,7 @@
 			<iBasePeaceWeight>2</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>2</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>6</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>10</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>20</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
@@ -1775,7 +1775,7 @@
 			<iDefensivePactAttitudeChangeLimit>2</iDefensivePactAttitudeChangeLimit>
 			<iShareWarAttitudeChange>1</iShareWarAttitudeChange>
 			<iShareWarAttitudeDivisor>8</iShareWarAttitudeDivisor>
-			<iShareWarAttitudeChangeLimit>3</iShareWarAttitudeChangeLimit>
+			<iShareWarAttitudeChangeLimit>2</iShareWarAttitudeChangeLimit>
 			<iFavoriteCivicAttitudeChange>1</iFavoriteCivicAttitudeChange>
 			<iFavoriteCivicAttitudeDivisor>10</iFavoriteCivicAttitudeDivisor>
 			<iFavoriteCivicAttitudeChangeLimit>3</iFavoriteCivicAttitudeChangeLimit>
@@ -2234,7 +2234,7 @@
 			<iBasePeaceWeight>8</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>0</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>10</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>30</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>10</iMaxGoldTradePercent>
@@ -2751,7 +2751,7 @@
 			<iBasePeaceWeight>9</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>0</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>10</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>40</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
@@ -2793,7 +2793,7 @@
 			<iDefensivePactAttitudeChangeLimit>2</iDefensivePactAttitudeChangeLimit>
 			<iShareWarAttitudeChange>1</iShareWarAttitudeChange>
 			<iShareWarAttitudeDivisor>8</iShareWarAttitudeDivisor>
-			<iShareWarAttitudeChangeLimit>3</iShareWarAttitudeChangeLimit>
+			<iShareWarAttitudeChangeLimit>2</iShareWarAttitudeChangeLimit>
 			<iFavoriteCivicAttitudeChange>1</iFavoriteCivicAttitudeChange>
 			<iFavoriteCivicAttitudeDivisor>10</iFavoriteCivicAttitudeDivisor>
 			<iFavoriteCivicAttitudeChangeLimit>4</iFavoriteCivicAttitudeChangeLimit>
@@ -3256,7 +3256,7 @@
 			<iBasePeaceWeight>8</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>0</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>6</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>30</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>10</iMaxGoldTradePercent>
@@ -3764,7 +3764,7 @@
 			<iBasePeaceWeight>10</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>0</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>6</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>10</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>20</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>10</iMaxGoldTradePercent>
@@ -3806,7 +3806,7 @@
 			<iDefensivePactAttitudeChangeLimit>2</iDefensivePactAttitudeChangeLimit>
 			<iShareWarAttitudeChange>1</iShareWarAttitudeChange>
 			<iShareWarAttitudeDivisor>8</iShareWarAttitudeDivisor>
-			<iShareWarAttitudeChangeLimit>3</iShareWarAttitudeChangeLimit>
+			<iShareWarAttitudeChangeLimit>2</iShareWarAttitudeChangeLimit>
 			<iFavoriteCivicAttitudeChange>1</iFavoriteCivicAttitudeChange>
 			<iFavoriteCivicAttitudeDivisor>10</iFavoriteCivicAttitudeDivisor>
 			<iFavoriteCivicAttitudeChangeLimit>6</iFavoriteCivicAttitudeChangeLimit>
@@ -4278,7 +4278,7 @@
 			<iDefensivePactAttitudeChangeLimit>2</iDefensivePactAttitudeChangeLimit>
 			<iShareWarAttitudeChange>1</iShareWarAttitudeChange>
 			<iShareWarAttitudeDivisor>8</iShareWarAttitudeDivisor>
-			<iShareWarAttitudeChangeLimit>3</iShareWarAttitudeChangeLimit>
+			<iShareWarAttitudeChangeLimit>4</iShareWarAttitudeChangeLimit>
 			<iFavoriteCivicAttitudeChange>1</iFavoriteCivicAttitudeChange>
 			<iFavoriteCivicAttitudeDivisor>10</iFavoriteCivicAttitudeDivisor>
 			<iFavoriteCivicAttitudeChangeLimit>3</iFavoriteCivicAttitudeChangeLimit>
@@ -4746,7 +4746,7 @@
 			<iBasePeaceWeight>9</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>0</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>6</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>10</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>30</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>10</iMaxGoldTradePercent>
@@ -5253,7 +5253,7 @@
 			<iBasePeaceWeight>2</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>2</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>30</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>10</iMaxGoldTradePercent>
@@ -5798,7 +5798,7 @@
 			<iDefensivePactAttitudeChangeLimit>2</iDefensivePactAttitudeChangeLimit>
 			<iShareWarAttitudeChange>1</iShareWarAttitudeChange>
 			<iShareWarAttitudeDivisor>8</iShareWarAttitudeDivisor>
-			<iShareWarAttitudeChangeLimit>3</iShareWarAttitudeChangeLimit>
+			<iShareWarAttitudeChangeLimit>2</iShareWarAttitudeChangeLimit>
 			<iFavoriteCivicAttitudeChange>1</iFavoriteCivicAttitudeChange>
 			<iFavoriteCivicAttitudeDivisor>10</iFavoriteCivicAttitudeDivisor>
 			<iFavoriteCivicAttitudeChangeLimit>3</iFavoriteCivicAttitudeChangeLimit>
@@ -6264,7 +6264,7 @@
 			<iBasePeaceWeight>4</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>1</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>40</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>10</iMaxGoldTradePercent>
@@ -6778,7 +6778,7 @@
 			<iBasePeaceWeight>1</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>2</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>30</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
@@ -7288,7 +7288,7 @@
 			<iBasePeaceWeight>1</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>2</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>6</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>30</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>20</iMaxGoldTradePercent>
@@ -7330,7 +7330,7 @@
 			<iDefensivePactAttitudeChangeLimit>2</iDefensivePactAttitudeChangeLimit>
 			<iShareWarAttitudeChange>1</iShareWarAttitudeChange>
 			<iShareWarAttitudeDivisor>8</iShareWarAttitudeDivisor>
-			<iShareWarAttitudeChangeLimit>3</iShareWarAttitudeChangeLimit>
+			<iShareWarAttitudeChangeLimit>2</iShareWarAttitudeChangeLimit>
 			<iFavoriteCivicAttitudeChange>1</iFavoriteCivicAttitudeChange>
 			<iFavoriteCivicAttitudeDivisor>10</iFavoriteCivicAttitudeDivisor>
 			<iFavoriteCivicAttitudeChangeLimit>3</iFavoriteCivicAttitudeChangeLimit>
@@ -7789,7 +7789,7 @@
 			<iBasePeaceWeight>9</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>0</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>6</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>20</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>0</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>20</iMaxGoldTradePercent>
@@ -8294,7 +8294,7 @@
 			<iBasePeaceWeight>1</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>2</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>50</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
@@ -8846,7 +8846,7 @@
 			<iDefensivePactAttitudeChangeLimit>2</iDefensivePactAttitudeChangeLimit>
 			<iShareWarAttitudeChange>1</iShareWarAttitudeChange>
 			<iShareWarAttitudeDivisor>8</iShareWarAttitudeDivisor>
-			<iShareWarAttitudeChangeLimit>3</iShareWarAttitudeChangeLimit>
+			<iShareWarAttitudeChangeLimit>4</iShareWarAttitudeChangeLimit>
 			<iFavoriteCivicAttitudeChange>1</iFavoriteCivicAttitudeChange>
 			<iFavoriteCivicAttitudeDivisor>10</iFavoriteCivicAttitudeDivisor>
 			<iFavoriteCivicAttitudeChangeLimit>2</iFavoriteCivicAttitudeChangeLimit>
@@ -9354,7 +9354,7 @@
 			<iDefensivePactAttitudeChangeLimit>2</iDefensivePactAttitudeChangeLimit>
 			<iShareWarAttitudeChange>1</iShareWarAttitudeChange>
 			<iShareWarAttitudeDivisor>8</iShareWarAttitudeDivisor>
-			<iShareWarAttitudeChangeLimit>3</iShareWarAttitudeChangeLimit>
+			<iShareWarAttitudeChangeLimit>4</iShareWarAttitudeChangeLimit>
 			<iFavoriteCivicAttitudeChange>1</iFavoriteCivicAttitudeChange>
 			<iFavoriteCivicAttitudeDivisor>10</iFavoriteCivicAttitudeDivisor>
 			<iFavoriteCivicAttitudeChangeLimit>5</iFavoriteCivicAttitudeChangeLimit>
@@ -9826,7 +9826,7 @@
 			<iBasePeaceWeight>1</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>2</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>10</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>10</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>10</iMaxGoldTradePercent>
@@ -9868,7 +9868,7 @@
 			<iDefensivePactAttitudeChangeLimit>2</iDefensivePactAttitudeChangeLimit>
 			<iShareWarAttitudeChange>1</iShareWarAttitudeChange>
 			<iShareWarAttitudeDivisor>8</iShareWarAttitudeDivisor>
-			<iShareWarAttitudeChangeLimit>3</iShareWarAttitudeChangeLimit>
+			<iShareWarAttitudeChangeLimit>4</iShareWarAttitudeChangeLimit>
 			<iFavoriteCivicAttitudeChange>1</iFavoriteCivicAttitudeChange>
 			<iFavoriteCivicAttitudeDivisor>10</iFavoriteCivicAttitudeDivisor>
 			<iFavoriteCivicAttitudeChangeLimit>2</iFavoriteCivicAttitudeChangeLimit>
@@ -10338,7 +10338,7 @@
 			<iBasePeaceWeight>2</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>2</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>30</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>10</iMaxGoldTradePercent>
@@ -11349,7 +11349,7 @@
 			<iBasePeaceWeight>4</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>1</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>40</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
@@ -11391,7 +11391,7 @@
 			<iDefensivePactAttitudeChangeLimit>2</iDefensivePactAttitudeChangeLimit>
 			<iShareWarAttitudeChange>1</iShareWarAttitudeChange>
 			<iShareWarAttitudeDivisor>8</iShareWarAttitudeDivisor>
-			<iShareWarAttitudeChangeLimit>3</iShareWarAttitudeChangeLimit>
+			<iShareWarAttitudeChangeLimit>4</iShareWarAttitudeChangeLimit>
 			<iFavoriteCivicAttitudeChange>1</iFavoriteCivicAttitudeChange>
 			<iFavoriteCivicAttitudeDivisor>10</iFavoriteCivicAttitudeDivisor>
 			<iFavoriteCivicAttitudeChangeLimit>1</iFavoriteCivicAttitudeChangeLimit>
@@ -11903,7 +11903,7 @@
 			<iDefensivePactAttitudeChangeLimit>2</iDefensivePactAttitudeChangeLimit>
 			<iShareWarAttitudeChange>1</iShareWarAttitudeChange>
 			<iShareWarAttitudeDivisor>8</iShareWarAttitudeDivisor>
-			<iShareWarAttitudeChangeLimit>3</iShareWarAttitudeChangeLimit>
+			<iShareWarAttitudeChangeLimit>4</iShareWarAttitudeChangeLimit>
 			<iFavoriteCivicAttitudeChange>1</iFavoriteCivicAttitudeChange>
 			<iFavoriteCivicAttitudeDivisor>10</iFavoriteCivicAttitudeDivisor>
 			<iFavoriteCivicAttitudeChangeLimit>5</iFavoriteCivicAttitudeChangeLimit>
@@ -12878,7 +12878,7 @@
 			<iBasePeaceWeight>8</iBasePeaceWeight>
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>0</iWarmongerRespect>
-			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
+			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
 			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>30</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>

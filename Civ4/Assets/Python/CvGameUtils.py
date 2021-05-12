@@ -246,6 +246,7 @@ class CvGameUtils:
 
 	def doPlotCulture(self,argsList):
 		pCity = argsList[0]
+		bUpdate = argsList[1]
 		return False
 
 	def doReligion(self,argsList):

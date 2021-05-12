@@ -16,7 +16,7 @@
 			<iGold>0</iGold>
 			<iFreeUnits>24</iFreeUnits>
 			<iUnitCostPercent>20</iUnitCostPercent>
-			<iResearchPercent>70</iResearchPercent>
+			<iResearchPercent>60</iResearchPercent>
 			<iDistanceMaintenancePercent>45</iDistanceMaintenancePercent>
 			<iNumCitiesMaintenancePercent>40</iNumCitiesMaintenancePercent>
 			<iMaxNumCitiesMaintenance>4</iMaxNumCitiesMaintenance>
@@ -110,7 +110,7 @@
 			<iGold>0</iGold>
 			<iFreeUnits>18</iFreeUnits>
 			<iUnitCostPercent>30</iUnitCostPercent>
-			<iResearchPercent>80</iResearchPercent>
+			<iResearchPercent>75</iResearchPercent>
 			<iDistanceMaintenancePercent>55</iDistanceMaintenancePercent>
 			<iNumCitiesMaintenancePercent>50</iNumCitiesMaintenancePercent>
 			<iMaxNumCitiesMaintenance>4</iMaxNumCitiesMaintenance>

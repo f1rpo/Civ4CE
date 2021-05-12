@@ -83,17 +83,17 @@ def onPbemSend(argsList):
 	szUser = argsList[6]
 	szPassword = argsList[7]
 	
-	#print 'sending e-mail'
-	#print 'To:', szToAddr
-	#print 'From:', szFromAddr
-	#print 'Subject:', szSubject
-	#print 'Path:', szPath
-	#print 'File:', szFilename
-	#print 'Server:', szHost
-	#print 'User:', szUser
+	print 'sending e-mail'
+	print 'To:', szToAddr
+	print 'From:', szFromAddr
+	print 'Subject:', szSubject
+	print 'Path:', szPath
+	print 'File:', szFilename
+	print 'Server:', szHost
+	print 'User:', szUser
 	
 	if len(szFromAddr) == 0 or len(szHost) == 0:
-		#print 'host or address empty'
+		print 'host or address empty'
 		return 1
 
 	message = StringIO.StringIO()
@@ -121,6 +121,11 @@ def onPbemSend(argsList):
 	# send the mail
 	try:
 		smtp = smtplib.SMTP(szHost)
+		# trying to get TLS to work...
+		#smtp.set_debuglevel(1)
+		#smtp.ehlo()
+		#smtp.starttls()
+		#smtp.ehlo()
 		if len(szUser) > 0:
 			smtp.login(szUser, szPassword)
 		smtp.sendmail(szFromAddr, szToAddr, message.getvalue())

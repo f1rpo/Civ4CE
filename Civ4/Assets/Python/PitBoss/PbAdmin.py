@@ -6,6 +6,7 @@
 #
 from CvPythonExtensions import *
 import wx
+import wx.lib.scrolledpanel
 import time
 
 PB = CyPitboss()
@@ -26,11 +27,7 @@ class AdminFrame(wx.Frame):
 	def __init__(self, parent, ID, title):
 		"constructor"
 		wx.Frame.__init__(self, parent, ID, title,
-						wx.DefaultPosition, wx.Size(640, 480))
-		
-		# Create the status bar				
-		self.CreateStatusBar()
-		self.SetStatusText((localText.getText("TXT_KEY_PITBOSS_STATUS_INGAME", ())))
+						wx.DefaultPosition, wx.Size(675, 480))
 		
 		# Create the menu
 		menu = wx.Menu()
@@ -67,6 +64,9 @@ class AdminFrame(wx.Frame):
 			pageSizer.Add(self.timerDisplay, 0, wx.ALL, 5)
 		
 		infoSizer = wx.BoxSizer(wx.HORIZONTAL)
+		leftSizer = wx.BoxSizer(wx.VERTICAL)
+		
+		playerPanel = wx.lib.scrolledpanel.ScrolledPanel(self, -1, size=(370, 280), style = wx.DOUBLE_BORDER)
 		playerSizer = wx.BoxSizer(wx.VERTICAL)
 		
 		# Create a row for each player in the game
@@ -74,14 +74,14 @@ class AdminFrame(wx.Frame):
 		for rowNum in range(gc.getMAX_CIV_PLAYERS()):
 			if (gc.getPlayer(rowNum).isEverAlive()):
 				# Create the border box
-				border = wx.StaticBox(self, -1, (localText.getText("TXT_KEY_PITBOSS_PLAYER", (rowNum, ))), (0,(rowNum*30)))
+				border = wx.StaticBox(playerPanel, -1, (localText.getText("TXT_KEY_PITBOSS_PLAYER", (rowNum, ))), (0,(rowNum*30)))
 				# Create the layout mgr
 				rowSizer = wx.StaticBoxSizer(border, wx.HORIZONTAL)
 				
 				# Player name
 				itemSizer = wx.BoxSizer(wx.VERTICAL)
-				lbl = wx.StaticText(self, -1, (localText.getText("TXT_KEY_PITBOSS_WHO", ())))
-				txtValue = wx.StaticText(self, rowNum, "", size = wx.Size(100, 13))
+				lbl = wx.StaticText(playerPanel, -1, (localText.getText("TXT_KEY_PITBOSS_WHO", ())))
+				txtValue = wx.StaticText(playerPanel, rowNum, "", size = wx.Size(100, 13))
 				itemSizer.Add(lbl)
 				itemSizer.Add(txtValue)
 				rowSizer.Add(itemSizer, 0, wx.ALL, 5)
@@ -89,8 +89,8 @@ class AdminFrame(wx.Frame):
 				
 				# Ping times
 				itemSizer = wx.BoxSizer(wx.VERTICAL)
-				lbl = wx.StaticText(self, -1, (localText.getText("TXT_KEY_PITBOSS_PING", ())))
-				txtValue = wx.StaticText(self, rowNum, "", size = wx.Size(70, 13))
+				lbl = wx.StaticText(playerPanel, -1, (localText.getText("TXT_KEY_PITBOSS_PING", ())))
+				txtValue = wx.StaticText(playerPanel, rowNum, "", size = wx.Size(70, 13))
 				itemSizer.Add(lbl)
 				itemSizer.Add(txtValue)
 				rowSizer.Add(itemSizer, 0, wx.ALL, 5)
@@ -98,45 +98,65 @@ class AdminFrame(wx.Frame):
 				
 				# Scores
 				itemSizer = wx.BoxSizer(wx.VERTICAL)
-				lbl = wx.StaticText(self, -1, (localText.getText("TXT_KEY_PITBOSS_SCORE", ())))
-				txtValue = wx.StaticText(self, rowNum, "", size = wx.Size(30, 13))
+				lbl = wx.StaticText(playerPanel, -1, (localText.getText("TXT_KEY_PITBOSS_SCORE", ())))
+				txtValue = wx.StaticText(playerPanel, rowNum, "", size = wx.Size(30, 13))
 				itemSizer.Add(lbl)
 				itemSizer.Add(txtValue)
 				rowSizer.Add(itemSizer, 0, wx.ALL, 5)
 				self.scoreArray.append(txtValue)
 				
 				# Kick buttons
-				kickButton = wx.Button(self, rowNum, (localText.getText("TXT_KEY_PITBOSS_KICK", ())))
+				kickButton = wx.Button(playerPanel, rowNum, (localText.getText("TXT_KEY_PITBOSS_KICK", ())))
 				rowSizer.Add(kickButton, 0, wx.ALL, 5)
 				kickButton.Disable()
 				self.Bind(wx.EVT_BUTTON, self.OnKick, kickButton)
 				self.kickArray.append(kickButton)
 				
 				playerSizer.Add(rowSizer, 0, wx.ALL, 5)
+			
+		playerPanel.SetSizer(playerSizer)
+		playerPanel.SetAutoLayout(1)
+		playerPanel.SetupScrolling()
+		leftSizer.Add(playerPanel, 0, wx.ALL, 5)
+		
+		# Add a button row
+		buttonSizer = wx.BoxSizer(wx.HORIZONTAL)
+		
+		# Add the save game button
+		saveButton = wx.Button(self, -1, (localText.getText("TXT_KEY_PITBOSS_SAVE_GAME", ())))
+		self.Bind(wx.EVT_BUTTON, self.OnSave, saveButton)
+		buttonSizer.Add(saveButton, 0, wx.ALL, 5)
+		
+		# Add the exit game button
+		exitButton = wx.Button(self, -1, (localText.getText("TXT_KEY_MAIN_MENU_EXIT_GAME", ())))
+		self.Bind(wx.EVT_BUTTON, self.OnExit, exitButton)
+		buttonSizer.Add(exitButton, 0, wx.ALL, 5)
+		
+		leftSizer.Add(buttonSizer, 0, wx.ALL, 5)
 				
-		# Add the player area to the info area
-		infoSizer.Add(playerSizer, 0, wx.ALL, 5)
+		# Add the left area to the info area
+		infoSizer.Add(leftSizer, 0, wx.ALL, 5)
 		
 		# Now create the message area
 		messageSizer = wx.BoxSizer(wx.VERTICAL)
 		
 		# Create the MotD Panel
-		motdBorder = wx.StaticBox(self, -1, "Message of the Day")
+		motdBorder = wx.StaticBox(self, -1, localText.getText("TXT_KEY_PITBOSS_MOTD_TITLE", ()))
 		motdSizer = wx.StaticBoxSizer(motdBorder, wx.VERTICAL)
 		
 		# Check box whether to use MotD or not
-		self.motdCheckBox = wx.CheckBox(self, -1, "Display Message of the Day")
+		self.motdCheckBox = wx.CheckBox(self, -1, localText.getText("TXT_KEY_PITBOSS_MOTD_TOGGLE", ()))
 		self.motdCheckBox.SetValue(false)
 		motdSizer.Add(self.motdCheckBox, 0, wx.TOP, 5)
 		
 		# Add edit box displaying current MotD
 		self.motdDisplayBox = wx.TextCtrl(self, -1, "", size=(225,50), style=wx.TE_MULTILINE|wx.TE_READONLY)
-		self.motdDisplayBox.SetHelpText("Current Message of the Day")
+		self.motdDisplayBox.SetHelpText(localText.getText("TXT_KEY_PITBOSS_MOTD_HELP", ()))
 		motdSizer.Add(self.motdDisplayBox, 0, wx.ALL, 5)
 		
 		# Add a button to allow motd modification
-		motdChangeButton = wx.Button(self, -1, "Change MotD")
-		motdChangeButton.SetHelpText("Modify the Message of the Day")
+		motdChangeButton = wx.Button(self, -1, localText.getText("TXT_KEY_PITBOSS_MOTD_CHANGE", ()))
+		motdChangeButton.SetHelpText(localText.getText("TXT_KEY_PITBOSS_MOTD_CHANGE_HELP", ()))
 		self.Bind(wx.EVT_BUTTON, self.OnChangeMotD, motdChangeButton)
 		motdSizer.Add(motdChangeButton, 0, wx.ALL, 5)
 		
@@ -144,17 +164,17 @@ class AdminFrame(wx.Frame):
 		messageSizer.Add(motdSizer, 0, wx.ALL, 5)
 		
 		# Create the dialog panel
-		dialogBorder = wx.StaticBox(self, -1, "Chat Dialog")
+		dialogBorder = wx.StaticBox(self, -1, localText.getText("TXT_KEY_PITBOSS_CHAT_TITLE", ()))
 		dialogSizer = wx.StaticBoxSizer(dialogBorder, wx.VERTICAL)
 		
 		# Chat log
 		self.chatLog = wx.TextCtrl(self, -1, "", size=(225,100), style=wx.TE_MULTILINE|wx.TE_READONLY)
-		self.chatLog.SetHelpText("Log of received chat messages")
+		self.chatLog.SetHelpText(localText.getText("TXT_KEY_PITBOSS_CHAT_LOG_HELP", ()))
 		dialogSizer.Add(self.chatLog, 0, wx.ALL, 5)
 		
 		# Chat edit
 		self.chatEdit = wx.TextCtrl(self, -1, "", size=(225,-1), style=wx.TE_PROCESS_ENTER)
-		self.chatEdit.SetHelpText("Enter chat messages here")
+		self.chatEdit.SetHelpText(localText.getText("TXT_KEY_PITBOSS_CHAT_EDIT_HELP", ()))
 		dialogSizer.Add(self.chatEdit, 0, wx.ALL, 5)
 		self.Bind(wx.EVT_TEXT_ENTER, self.OnSendChat, self.chatEdit)
 		
@@ -166,11 +186,6 @@ class AdminFrame(wx.Frame):
 		
 		# Add the info area to the page
 		pageSizer.Add(infoSizer, 0, wx.ALL, 5)
-			
-		# Add the save game button
-		saveButton = wx.Button(self, -1, (localText.getText("TXT_KEY_PITBOSS_SAVE_GAME", ())))
-		self.Bind(wx.EVT_BUTTON, self.OnSave, saveButton)
-		pageSizer.Add(saveButton, 0, wx.ALL, 5)
 		
 		self.SetSizer(pageSizer)
 		
@@ -282,8 +297,8 @@ class AdminFrame(wx.Frame):
 		"'save' event handler"
 		dlg = wx.FileDialog(
 			self, message=(localText.getText("TXT_KEY_PITBOSS_SAVE_AS", ())), defaultDir=".\saves\multi",
-			defaultFile="Pitboss "+PB.getGamedate(True)+".sav", 
-			wildcard=(localText.getText("TXT_KEY_PITBOSS_SAVE_AS_TEXT", ())) + " (*.sav)|*.sav", style=wx.SAVE | wx.OVERWRITE_PROMPT
+			defaultFile="Pitboss_"+PB.getGamedate(True)+".Civ4SavedGame", 
+			wildcard=(localText.getText("TXT_KEY_PITBOSS_SAVE_AS_TEXT", ())) + " (*.Civ4SavedGame)|*.Civ4SavedGame", style=wx.SAVE | wx.OVERWRITE_PROMPT
 			)
 			
 		if dlg.ShowModal() == wx.ID_OK:
@@ -304,8 +319,8 @@ class AdminFrame(wx.Frame):
 		
 		# Changing MotD - pop a modal dialog
 		dlg = wx.TextEntryDialog(
-			self, "Provide a Message of the Day",
-			"Message of the Day")
+			self, localText.getText("TXT_KEY_PITBOSS_MOTD_POPUP_DESC", ()),
+			localText.getText("TXT_KEY_PITBOSS_MOTD_POPUP_TITLE", ()))
 			
 		# Show the modal dialog and get the response
 		if dlg.ShowModal() == wx.ID_OK:

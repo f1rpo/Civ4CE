@@ -174,13 +174,15 @@ class CvDiplomacy:
 
 					# This is a two way deal
 					if (self.diploScreen.ourOfferEmpty() == 0 and self.diploScreen.theirOfferEmpty() == 0):
-						# Insert the propose trade button
-						self.addUserComment("USER_DIPLOCOMMENT_PROPOSE", -1, -1)
+					
+						if (not self.isComment(eComment, "AI_DIPLOCOMMENT_CURRENT_DEALS")):
+							# Insert the propose trade button
+							self.addUserComment("USER_DIPLOCOMMENT_PROPOSE", -1, -1)
 
-						# During peace, see what we can get for these items
-						if (not self.diploScreen.atWar()):
-							if (gc.getGame().getActiveTeam() != gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()):
-								self.addUserComment("USER_DIPLOCOMMENT_COMPLETE_DEAL", -1, -1)
+							# During peace, see what we can get for these items
+							if (not self.diploScreen.atWar()):
+								if (gc.getGame().getActiveTeam() != gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()):
+									self.addUserComment("USER_DIPLOCOMMENT_COMPLETE_DEAL", -1, -1)
 
 					# Otherwise they have something on the table and we dont
 					elif (self.diploScreen.theirOfferEmpty() == 0):

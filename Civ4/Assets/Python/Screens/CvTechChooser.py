@@ -758,7 +758,7 @@ class CvTechChooser:
 			iIndex = screen.getSelectedPullDownID("CivDropDown")
 			g_civSelected = screen.getPullDownData("CivDropDown", iIndex)
 			self.updateTechRecords()
-		
+
 	# Will handle the input for this screen...
 	def handleInput (self, inputClass):
 		# Get the screen
@@ -766,9 +766,9 @@ class CvTechChooser:
 
 		' Calls function mapped in TechChooserInputMap'
 		# only get from the map if it has the key
-		if (inputClass.getNotifyCode() == NotifyCode.NOTIFY_CHARACTER and ( inputClass.getData() == int(InputTypes.KB_F6) or inputClass.getData() == int(InputTypes.KB_ESCAPE) ) ):
-			self.hideScreen()
-			return 1
+#		if (inputClass.getNotifyCode() == NotifyCode.NOTIFY_CHARACTER and ( inputClass.getData() == int(InputTypes.KB_F6) or inputClass.getData() == int(InputTypes.KB_ESCAPE) ) ):
+#			self.hideScreen()
+#			return 1
 		if ( inputClass.getNotifyCode() == NotifyCode.NOTIFY_LISTBOX_ITEM_SELECTED ):
 			self.CivDropDown( inputClass )
 			return 1

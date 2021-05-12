@@ -345,9 +345,7 @@ class CvDebugInfoScreen(CvGFCScreen.CvGFCScreen):
 		
 		bonusList = ""
 		for bonus in bonus_infos:
-			print bonus.getChar()
-			bonusChar = "%c" % bonus.getChar()
-			bonusList += CvUtil.convertToUnicode(bonusChar)
+			bonusList += bonus.getDescription()[0]
 		title_list += bonusList
 
 		d_TableData[0] = title_list

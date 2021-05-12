@@ -5,7 +5,6 @@ import CvUtil
 import CvPediaScreen
 import ScreenInput
 import CvScreenEnums
-import string
 
 # globals
 gc = CyGlobalContext()
@@ -21,7 +20,7 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 	
 		self.X_TECH_PANE = 20
 		self.Y_TECH_PANE = 70
-		self.W_TECH_PANE = 433
+		self.W_TECH_PANE = 368
 		self.H_TECH_PANE = 210
 
 		self.X_ICON = 48
@@ -30,14 +29,14 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 		self.H_ICON = 150
 		self.ICON_SIZE = 64
 
-		self.X_COST = 210
+		self.X_COST = 200
 		self.Y_COST = 165
 		
 		self.BUTTON_SIZE = 64
 
-		self.X_QUOTE_PANE = 475
+		self.X_QUOTE_PANE = 410
 		self.Y_QUOTE_PANE = 70
-		self.W_QUOTE_PANE = 303
+		self.W_QUOTE_PANE = 368
 		self.H_QUOTE_PANE = 210
 
 		self.X_UNIT_PANE = 410
@@ -79,15 +78,16 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 
 		# Header...
 		szHeader = u"<font=4b>" + gc.getTechInfo(self.iTech).getDescription().upper() + u"</font>"
-		screen.setText(self.top.getNextWidgetName(), "Background", szHeader, CvUtil.FONT_CENTER_JUSTIFY, self.top.X_SCREEN, self.top.Y_TITLE, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_DESCRIPTION, CivilopediaPageTypes.CIVILOPEDIA_PAGE_TECH, iTech)
-		screen.setImageButton(self.top.getNextWidgetName(), ArtFileMgr.getInterfaceArtInfo("INTERFACE_GENERAL_CIVILOPEDIA_ICON").getPath(), self.top.X_EXIT, self.top.Y_TITLE, 32, 32, WidgetTypes.WIDGET_PEDIA_DESCRIPTION,  CivilopediaPageTypes.CIVILOPEDIA_PAGE_TECH, iTech)
+		screen.setLabel(self.top.getNextWidgetName(), "Background", szHeader, CvUtil.FONT_CENTER_JUSTIFY, self.top.X_SCREEN, self.top.Y_TITLE, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, CivilopediaPageTypes.CIVILOPEDIA_PAGE_TECH, iTech)
 		
 		# Top
 		screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_TECH, -1)
 
 		if self.top.iLastScreen	!= CvScreenEnums.PEDIA_TECH or bNotActive:		
-			self.placeLinks()
+			self.placeLinks(true)
 			self.top.iLastScreen = CvScreenEnums.PEDIA_TECH
+		else:
+			self.placeLinks(false)
 
 		screen.addPanel( self.top.getNextWidgetName(), "", "", False, False, self.X_TECH_PANE, self.Y_TECH_PANE, self.W_TECH_PANE, self.H_TECH_PANE, PanelStyles.PANEL_STYLE_BLUE50)
 
@@ -246,14 +246,10 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 		screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_SPECIAL_ABILITIES", ()), "", true, false, self.X_SPECIAL_PANE, self.Y_SPECIAL_PANE, self.W_SPECIAL_PANE, self.H_SPECIAL_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 		
 		listName = self.top.getNextWidgetName()
-		screen.attachListBoxGFC( panelName, listName, "", TableStyles.TABLE_STYLE_EMPTY )
-		screen.enableSelect(listName, False)
 		
 		szSpecialText = CyGameTextMgr().getTechHelp(self.iTech, True, False, False, False, -1)
-		splitText = string.split( szSpecialText, "\n" )
-		for special in splitText:
-			if len( special ) != 0:
-				screen.appendListBoxString( listName, special, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		screen.addMultilineText(listName, szSpecialText, self.X_SPECIAL_PANE+5, self.Y_SPECIAL_PANE+5, self.W_SPECIAL_PANE-10, self.H_SPECIAL_PANE-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
+		
 
 	def placeQuote(self):
 		screen = self.top.getScreen()
@@ -263,24 +259,30 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 			self.X_QUOTE_PANE, self.Y_QUOTE_PANE, self.W_QUOTE_PANE, self.H_QUOTE_PANE, PanelStyles.PANEL_STYLE_BLUE50)
 
 		szQuote = gc.getTechInfo(self.iTech).getQuote()
+		szQuote += u"\n\n" + gc.getTechInfo(self.iTech).getCivilopedia()
 		
 		szQuoteTextWidget = self.top.getNextWidgetName()
 		screen.addMultilineText( szQuoteTextWidget, szQuote, self.X_QUOTE_PANE + 15, self.Y_QUOTE_PANE + 15,
 		    self.W_QUOTE_PANE - (15 * 2), self.H_QUOTE_PANE - (15 * 2), WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		
-	def placeLinks(self):
+	def placeLinks(self, bRedraw):
 
 		screen = self.top.getScreen()
-		
-		screen.clearListBoxGFC(self.top.LIST_ID)
+
+		if bRedraw:	
+			screen.clearListBoxGFC(self.top.LIST_ID)
 		
 		techsList = self.getSortedList( gc.getNumTechInfos(), gc.getTechInfo )
 		
 		iSelected = 0			
+		i = 0
 		for iI in range(gc.getNumTechInfos()):
-			screen.appendListBoxString(self.top.LIST_ID, techsList[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, techsList[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
-			if techsList[iI][1] == self.iTech:
-				iSelected = iI			
+			if (not gc.getTechInfo(iI).isGraphicalOnly()): 
+				if bRedraw:
+					screen.appendListBoxString(self.top.LIST_ID, techsList[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, techsList[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
+				if techsList[iI][1] == self.iTech:
+					iSelected = i
+				i += 1			
 
 		screen.setSelectedListBoxStringGFC(self.top.LIST_ID, iSelected)
 								

@@ -34,7 +34,6 @@ class CvEventManager:
 		#################### ON EVENT MAP ######################
 		#print "EVENTMANAGER INIT"
 		
-		self.bMultiplayer = False
 		self.bCtrl = False
 		self.bShift = False
 		self.bAlt = False
@@ -157,7 +156,8 @@ class CvEventManager:
 		self.origArgsList = argsList	# point to original
 		tag = argsList[0]				# event type string
 		idx = len(argsList)-6
-		self.bDbg, self.bMultiPlayer, self.bAlt, self.bCtrl, self.bShift, self.bAllowCheats = argsList[idx:]
+		bDummy = false
+		self.bDbg, bDummy, self.bAlt, self.bCtrl, self.bShift, self.bAllowCheats = argsList[idx:]
 		ret = 0
 		if self.EventHandlerMap.has_key(tag):
 			fxn = self.EventHandlerMap[tag]
@@ -196,11 +196,10 @@ class CvEventManager:
 
 		eventType,key,mx,my,px,py = argsList
 		game = CyGame()
-		self.bMultiplayer = CyGame().isNetworkMultiPlayer()
 		
 		if (self.bAllowCheats):
 			# notify debug tools of input to allow it to override the control
-			argsList = (eventType,key,self.bCtrl,self.bShift,self.bAlt,mx,my,px,py,self.bMultiplayer)
+			argsList = (eventType,key,self.bCtrl,self.bShift,self.bAlt,mx,my,px,py,CyGame().isNetworkMultiPlayer())
 			if ( CvDebugTools.g_CvDebugTools.notifyInput(argsList) ):
 				return 0
 		
@@ -356,11 +355,8 @@ class CvEventManager:
 		genericArgs = argsList[0][0]
 		cdAttacker = genericArgs[0]
 		cdDefender = genericArgs[1]
-		iDefenderOdds = genericArgs[2]
-		CvUtil.combatMessageBuilder(cdAttacker, cdDefender)
-		combatMessage = "%s: %.1f%%" %(localText.getText("TXT_KEY_COMBAT_MESSAGE_DEFENDER_ODDS", ()),iDefenderOdds/10.0,)
-		CyInterface().addCombatMessage(cdAttacker.eOwner,combatMessage)
-		CyInterface().addCombatMessage(cdDefender.eOwner,combatMessage)
+		iCombatOdds = genericArgs[2]
+		CvUtil.combatMessageBuilder(cdAttacker, cdDefender, iCombatOdds)
 		
 	def onCombatLogHit(self, argsList):
 		'Combat Message'
@@ -413,7 +409,7 @@ class CvEventManager:
 		'Building Completed'
 		pCity, iBuildingType = argsList
 		game = CyGame()
-		if ((not self.bMultiPlayer) and (pCity.getOwner() == CyGame().getActivePlayer()) and isWorldWonderClass(gc.getBuildingInfo(iBuildingType).getBuildingClassType())):
+		if ((not CyGame().isNetworkMultiPlayer()) and (pCity.getOwner() == CyGame().getActivePlayer()) and isWorldWonderClass(gc.getBuildingInfo(iBuildingType).getBuildingClassType())):
 			# If this is a wonder...
 			popupInfo = CyPopupInfo()
 			popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON_SCREEN)
@@ -434,7 +430,7 @@ class CvEventManager:
 		'Project Completed'
 		pCity, iProjectType = argsList
 		game = CyGame()
-		if ((not self.bMultiPlayer) and (pCity.getOwner() == CyGame().getActivePlayer())):
+		if ((not CyGame().isNetworkMultiPlayer()) and (pCity.getOwner() == CyGame().getActivePlayer())):
 			popupInfo = CyPopupInfo()
 			popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON_SCREEN)
 			popupInfo.setData1(iProjectType)
@@ -548,9 +544,9 @@ class CvEventManager:
 		# Note that iPlayer may be NULL (-1) and not a refer to a player object
 		
 		# Show tech splash when applicable
-		if (iPlayer > -1 and bAnnounce and not CyInterface().noMovies()):
+		if (iPlayer > -1 and bAnnounce and not CyInterface().noTechSplash()):
 			if (gc.getGame().isFinalInitialized() and not gc.getGame().GetWorldBuilder2Mode()):
-				if ((not self.bMultiPlayer) and (iPlayer == CyGame().getActivePlayer())):
+				if ((not CyGame().isNetworkMultiPlayer()) and (iPlayer == CyGame().getActivePlayer())):
 					popupInfo = CyPopupInfo()
 					popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON_SCREEN)
 					popupInfo.setData1(iTechType)
@@ -576,7 +572,7 @@ class CvEventManager:
 		
 		iCityId = gc.getGame().getHolyCity(iReligion).getID()
 		if (gc.getGame().isFinalInitialized() and not gc.getGame().GetWorldBuilder2Mode()):
-			if ((not self.bMultiPlayer) and (iFounder == CyGame().getActivePlayer())):
+			if ((not CyGame().isNetworkMultiPlayer()) and (iFounder == CyGame().getActivePlayer())):
 				popupInfo = CyPopupInfo()
 				popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON_SCREEN)
 				popupInfo.setData1(iReligion)
@@ -645,7 +641,7 @@ class CvEventManager:
 		'City Built'
 		city = argsList[0]
 		if (city.getOwner() == CyGame().getActivePlayer()):
-			self.__eventEditCityNameBegin(city)	
+			self.__eventEditCityNameBegin(city, False)	
 		CvUtil.pyPrint('City Built Event: %s' %(city.getName()))
 		
 	def onCityRazed(self, argsList):
@@ -711,7 +707,7 @@ class CvEventManager:
 		'City is renamed'
 		pCity = argsList[0]
 		if (pCity.getOwner() == CyGame().getActivePlayer()):
-			self.__eventEditCityNameBegin(pCity)	
+			self.__eventEditCityNameBegin(pCity, True)	
 
 	def onVictory(self, argsList):
 		'Victory'
@@ -752,9 +748,9 @@ class CvEventManager:
 		
 
 #################### TRIGGERED EVENTS ##################	
-	def __eventEditCityNameBegin(self, city):
+	def __eventEditCityNameBegin(self, city, bRename):
 		popup = PyPopup.PyPopup(CvUtil.EventEditCityName, EventContextTypes.EVENTCONTEXT_ALL)
-		popup.setUserData((city.getID(),))
+		popup.setUserData((city.getID(), bRename))
 		popup.setHeaderString(localText.getText("TXT_KEY_NAME_CITY", ()))
 		popup.setBodyString(localText.getText("TXT_KEY_SETTLE_NEW_CITY_NAME", ()))
 		popup.createEditBox(city.getName())
@@ -764,12 +760,13 @@ class CvEventManager:
 	def __eventEditCityNameApply(self, playerID, userData, popupReturn):	
 		'Edit City Name Event'
 		iCityID = userData[0]
+		bRename = userData[1]
 		player = gc.getPlayer(playerID)
 		city = player.getCity(iCityID)
 		cityName = popupReturn.getEditBoxString(0)
 		if (len(cityName) > 30):
 			cityName = cityName[:30]
-		city.setName(cityName, false)
+		city.setName(cityName, not bRename)
 
 	def __eventEditCityBegin(self, argsList):
 		'Edit City Event'
@@ -825,9 +822,10 @@ class CvEventManager:
 		return
 
 	def __eventWBLandmarkPopupBegin(self, argsList):
-		popup = PyPopup.PyPopup(CvUtil.EventWBLandmarkPopup, EventContextTypes.EVENTCONTEXT_ALL)
-		popup.createEditBox(localText.getText("TXT_KEY_WB_LANDMARK_START", ()))
-		popup.launch()
+		CvScreensInterface.getWorldBuilderScreen().setLandmarkCB("")
+		#popup = PyPopup.PyPopup(CvUtil.EventWBLandmarkPopup, EventContextTypes.EVENTCONTEXT_ALL)
+		#popup.createEditBox(localText.getText("TXT_KEY_WB_LANDMARK_START", ()))
+		#popup.launch()
 		return
 
 	def __eventWBLandmarkPopupApply(self, playerID, userData, popupReturn):

@@ -5,6 +5,7 @@ import CvUtil
 import ScreenInput
 import CvScreenEnums
 import string
+import CvScreensInterface
 
 # globals
 gc = CyGlobalContext()
@@ -216,10 +217,13 @@ class CvCivicsScreen:
 	def CivicsButton(self, inputClass):
 	
 		if (inputClass.getNotifyCode() == NotifyCode.NOTIFY_CLICKED) :
-			# Select button
-			self.select(inputClass.getID())
-			self.drawHelpText(gc.getCivicInfo(inputClass.getID()).getCivicOptionType())
-			self.updateAnarchy()
+			if (inputClass.getFlags() & MouseFlags.MOUSE_RBUTTONUP):
+				CvScreensInterface.pediaJumpToCivic((inputClass.getID(), ))
+			else:
+				# Select button
+				self.select(inputClass.getID())
+				self.drawHelpText(gc.getCivicInfo(inputClass.getID()).getCivicOptionType())
+				self.updateAnarchy()
 		elif (inputClass.getNotifyCode() == NotifyCode.NOTIFY_CURSOR_MOVE_ON) :
 			# Highlight this button
 			if self.highlight(inputClass.getID()):
@@ -249,7 +253,7 @@ class CvCivicsScreen:
 		else:
 			szHelpText = localText.getText("TXT_KEY_CIVICS_SCREEN_NO_UPKEEP", ())
 
-		szHelpText += CyGameTextMgr().parseCivicInfo(iCivic, True, True)
+		szHelpText += CyGameTextMgr().parseCivicInfo(iCivic, False, True, True)
 
 		fX = self.HEADINGS_SPACING  + (self.HEADINGS_WIDTH + self.HEADINGS_SPACING) * iCivicOption
 
@@ -308,11 +312,11 @@ class CvCivicsScreen:
 		else:
 			szText = CyGameTextMgr().setRevolutionHelp(self.iActivePlayer)
 
-		screen.setLabel("CivicsRevText", "", u"<font=3>" + szText + u"</font>", CvUtil.FONT_CENTER_JUSTIFY, self.X_SCREEN, self.BOTTOM_LINE_TOP + self.TEXT_MARGIN//2, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
+		screen.setLabel("CivicsRevText", "Background", u"<font=3>" + szText + u"</font>", CvUtil.FONT_CENTER_JUSTIFY, self.X_SCREEN, self.BOTTOM_LINE_TOP + self.TEXT_MARGIN//2, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 
 		# Maintenance		
 		szText = localText.getText("TXT_KEY_CIVIC_SCREEN_UPKEEP", (activePlayer.getCivicUpkeep(self.m_paeDisplayCivics, True), ))
-		screen.setLabel("CivicsUpkeepText", "", u"<font=3>" + szText + u"</font>", CvUtil.FONT_CENTER_JUSTIFY, self.X_SCREEN, self.BOTTOM_LINE_TOP + self.BOTTOM_LINE_HEIGHT - 2 * self.TEXT_MARGIN, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
+		screen.setLabel("CivicsUpkeepText", "Background", u"<font=3>" + szText + u"</font>", CvUtil.FONT_CENTER_JUSTIFY, self.X_SCREEN, self.BOTTOM_LINE_TOP + self.BOTTOM_LINE_HEIGHT - 2 * self.TEXT_MARGIN, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 		
 	# Revolution!!!
 	def Revolution(self, inputClass):

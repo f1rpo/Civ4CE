@@ -4,7 +4,6 @@ from CvPythonExtensions import *
 import CvUtil
 import ScreenInput
 import CvScreenEnums
-import string
 
 # globals
 gc = CyGlobalContext()
@@ -71,8 +70,10 @@ class CvPediaCivic:
 		screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_CIVIC, -1)
 
 		if self.top.iLastScreen	!= CvScreenEnums.PEDIA_CIVIC or bNotActive:		
-			self.placeLinks()
+			self.placeLinks(true)
 			self.top.iLastScreen = CvScreenEnums.PEDIA_CIVIC
+		else:
+			self.placeLinks(false)
 
 			
 		# Icon
@@ -136,11 +137,8 @@ class CvPediaCivic:
 		screen.attachListBoxGFC( panelName, listName, "", TableStyles.TABLE_STYLE_EMPTY )
 		screen.enableSelect(listName, False)
 		
-		szSpecialText = CyGameTextMgr().parseCivicInfo(self.iCivic, True, False)
-		splitText = string.split( szSpecialText, "\n" )
-		for special in splitText:
-			if len( special ) != 0:
-				screen.appendListBoxString( listName, special, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		szSpecialText = CyGameTextMgr().parseCivicInfo(self.iCivic, True, False, True)
+		screen.addMultilineText(listName, szSpecialText, self.X_SPECIAL+5, self.Y_SPECIAL+5, self.W_SPECIAL-10, self.H_SPECIAL-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
 		
 	def placeText(self):
 		
@@ -153,11 +151,12 @@ class CvPediaCivic:
 		szText = gc.getCivicInfo(self.iCivic).getCivilopedia()
 		screen.attachMultilineText( panelName, "Text", szText, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		
-	def placeLinks(self):
+	def placeLinks(self, bRedraw):
 
 		screen = self.top.getScreen()
-                
-		screen.clearListBoxGFC(self.top.LIST_ID)
+		
+		if bRedraw:                
+			screen.clearListBoxGFC(self.top.LIST_ID)
 		
 		# sort Improvements alphabetically
 		listSorted=[(0,0)]*gc.getNumCivicInfos()
@@ -166,10 +165,14 @@ class CvPediaCivic:
 		listSorted.sort()	
 
 		iSelected = 0			
+		i = 0
 		for iI in range(gc.getNumCivicInfos()):
-			screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIVIC, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
-			if listSorted[iI][1] == self.iCivic:
-				iSelected = iI			
+			if (not gc.getCivicInfo(listSorted[iI][1]).isGraphicalOnly()):
+				if bRedraw:
+					screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIVIC, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
+				if listSorted[iI][1] == self.iCivic:
+					iSelected = i
+				i += 1			
 
 		screen.setSelectedListBoxStringGFC(self.top.LIST_ID, iSelected)
 			

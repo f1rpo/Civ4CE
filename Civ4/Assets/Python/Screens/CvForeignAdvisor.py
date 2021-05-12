@@ -47,8 +47,8 @@ class CvForeignAdvisor:
 		self.Y_LINK = 726
 		
 		self.X_LEGEND = 20
-		self.Y_LEGEND = 570
-		self.H_LEGEND = 130
+		self.Y_LEGEND = 540
+		self.H_LEGEND = 160
 		self.W_LEGEND = 160
 		self.MARGIN_LEGEND = 10
 		
@@ -246,6 +246,12 @@ class CvForeignAdvisor:
 		# Active player panel
 		activePlayerPanelName = self.getNextWidgetName()
 		szPlayerName = playerActive.getName()
+		
+		if (gc.getTeam(playerActive.getTeam()).isGoldTrading() or gc.getTeam(playerSelected.getTeam()).isGoldTrading()):
+			if (self.iScreen == FOREIGN_BONUS_SCREEN):
+				szPlayerName += u" : " + localText.getText("TXT_KEY_MISC_GOLD_PER_TURN", (playerActive.calculateGoldRate(), ))
+			elif (self.iScreen == FOREIGN_TECH_SCREEN):
+				szPlayerName += u" : " + localText.getText("TXT_KEY_MISC_GOLD", (playerActive.getGold(), ))
 		screen.attachPanel(mainPanelName, activePlayerPanelName, szPlayerName, "", False, True, PanelStyles.PANEL_STYLE_EMPTY )
 					
 		screen.attachLabel(activePlayerPanelName, "", "                    ")
@@ -261,17 +267,16 @@ class CvForeignAdvisor:
 					# loop through all players and display resources that are available to trade to at least one leader
 					for iLoopPlayer in range(gc.getMAX_PLAYERS()):
 						if (gc.getPlayer(iLoopPlayer).isAlive() and not gc.getPlayer(iLoopPlayer).isBarbarian() and not gc.getPlayer(iLoopPlayer).isMinorCiv() and gc.getTeam(gc.getPlayer(iLoopPlayer).getTeam()).isHasMet(gc.getPlayer(self.iActiveLeader).getTeam())):
-							if (iLoopPlayer != self.iActiveLeader and gc.getPlayer(self.iActiveLeader).canTradeItem(iLoopPlayer, tradeData)):
+							if (iLoopPlayer != self.iActiveLeader and gc.getPlayer(self.iActiveLeader).canTradeItem(iLoopPlayer, tradeData, False)):
 								bTradeable = True
 								iLoopPlayer = gc.getMAX_PLAYERS() # exit for loop
 				else:
 					# display resources that you can trade to the selected leader
-					bTradeable = gc.getPlayer(self.iActiveLeader).canTradeItem(self.iSelectedLeader, tradeData)
+					bTradeable = gc.getPlayer(self.iActiveLeader).canTradeItem(self.iSelectedLeader, tradeData, False)
 
 				if bTradeable:
-#					screen.attachImageButton(activePlayerPanelName, "", gc.getBonusInfo(iLoopBonus).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, iLoopBonus, -1, False)
-#				if 1 == 1:
-					screen.appendMultiListButton("Child" + activePlayerPanelName, gc.getBonusInfo(iLoopBonus).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, iLoopBonus, -1, False)
+					for i in range(playerActive.getNumTradeableBonuses(iLoopBonus)):
+						screen.appendMultiListButton("Child" + activePlayerPanelName, gc.getBonusInfo(iLoopBonus).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, iLoopBonus, -1, False)
 
 		elif (self.iScreen == FOREIGN_TECH_SCREEN):
 			tradeData = TradeData()
@@ -283,17 +288,15 @@ class CvForeignAdvisor:
 					# loop through all players and display techs that are available to trade to at least one leader
 					for iLoopPlayer in range(gc.getMAX_PLAYERS()):
 						if (gc.getPlayer(iLoopPlayer).isAlive() and not gc.getPlayer(iLoopPlayer).isBarbarian() and not gc.getPlayer(iLoopPlayer).isMinorCiv() and gc.getTeam(gc.getPlayer(iLoopPlayer).getTeam()).isHasMet(gc.getPlayer(self.iActiveLeader).getTeam())):
-							if (iLoopPlayer != self.iActiveLeader and gc.getPlayer(self.iActiveLeader).canTradeItem(iLoopPlayer, tradeData)):
+							if (iLoopPlayer != self.iActiveLeader and gc.getPlayer(self.iActiveLeader).canTradeItem(iLoopPlayer, tradeData, False)):
 								bTradeable = True
 								iLoopPlayer = gc.getMAX_PLAYERS() # exit for loop
 								
 				else:
 					# display techs that you can trade to the selected leader
-					bTradeable = gc.getPlayer(self.iActiveLeader).canTradeItem(self.iSelectedLeader, tradeData)
+					bTradeable = gc.getPlayer(self.iActiveLeader).canTradeItem(self.iSelectedLeader, tradeData, False)
 					
 				if bTradeable:
-#					screen.attachImageButton(activePlayerPanelName, "", gc.getTechInfo(iLoopTech).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iLoopTech, -1, False)
-#				if 1 == 1:
 					screen.appendMultiListButton("Child" + activePlayerPanelName, gc.getTechInfo(iLoopTech).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iLoopTech, -1, False)
 
 		# Add active player leaderhead
@@ -311,13 +314,18 @@ class CvForeignAdvisor:
 
 				currentPlayerPanelName = self.getNextWidgetName()
 				szPlayerName = gc.getPlayer(iLoopPlayer).getName()
+				if (gc.getTeam(playerActive.getTeam()).isGoldTrading() or gc.getTeam(gc.getPlayer(iLoopPlayer).getTeam()).isGoldTrading()):
+					if (self.iScreen == FOREIGN_BONUS_SCREEN):
+						szPlayerName += u" : " + localText.getText("TXT_KEY_FOREIGN_ADVISOR_GOLD_PER_TURN_FOR_TRADE", (gc.getPlayer(iLoopPlayer).AI_maxGoldPerTurnTrade(self.iActiveLeader), ))
+					elif (self.iScreen == FOREIGN_TECH_SCREEN):
+						szPlayerName += u" : " + localText.getText("TXT_KEY_FOREIGN_ADVISOR_GOLD_FOR_TRADE", (gc.getPlayer(iLoopPlayer).AI_maxGoldTrade(self.iActiveLeader), ))
 				screen.attachPanel(mainPanelName, currentPlayerPanelName, szPlayerName, "", False, True, PanelStyles.PANEL_STYLE_EMPTY )				
 
 				screen.attachLabel(currentPlayerPanelName, "", "                    ")
 
 				if (self.iScreen == FOREIGN_BONUS_SCREEN):
 					if (not playerActive.canTradeNetworkWith(iLoopPlayer) and not gc.getGame().isDebugMode()):
-						screen.attachTextGFC(currentPlayerPanelName, "", localText.getText("TXT_KEY_FOREIGN_ADVISOR_NOT_CONNECTED", ()), FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
+						screen.attachTextGFC(currentPlayerPanelName, "", u"<font=4>" + localText.getText("TXT_KEY_FOREIGN_ADVISOR_NOT_CONNECTED", ()) + u"</font>", FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 					else:
 						listTradeable = []
 						listUntradeable = []
@@ -325,7 +333,7 @@ class CvForeignAdvisor:
 						tradeData.ItemType = TradeableItems.TRADE_RESOURCES
 						for iLoopBonus in range(gc.getNumBonusInfos()):
 							tradeData.iData = iLoopBonus
-							if (gc.getPlayer(iLoopPlayer).canTradeItem(self.iActiveLeader, tradeData)):
+							if (gc.getPlayer(iLoopPlayer).canTradeItem(self.iActiveLeader, tradeData, False)):
 								if (gc.getPlayer(iLoopPlayer).getTradeDenial(self.iActiveLeader, tradeData) == DenialTypes.NO_DENIAL):
 									listTradeable.append(iLoopBonus)
 								else:
@@ -336,7 +344,6 @@ class CvForeignAdvisor:
 										
 						screen.attachMultiListControlGFC(currentPlayerPanelName, "ChildTrade" + currentPlayerPanelName, "", 1, self.BUTTON_SIZE, self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
 						for iLoopBonus in listTradeable:
-#								screen.attachImageButton(currentPlayerPanelName, "", gc.getBonusInfo(iLoopBonus).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, iLoopBonus, -1, False)
 							screen.appendMultiListButton("ChildTrade" + currentPlayerPanelName, gc.getBonusInfo(iLoopBonus).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, iLoopBonus, -1, False)
 									
 						if len(listUntradeable) > 0:
@@ -344,31 +351,32 @@ class CvForeignAdvisor:
 										
 						screen.attachMultiListControlGFC(currentPlayerPanelName, "ChildNoTrade" + currentPlayerPanelName, "", 1, self.BUTTON_SIZE, self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
 						for iLoopBonus in listUntradeable:
-#								screen.attachImageButton(currentPlayerPanelName, "", gc.getBonusInfo(iLoopBonus).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, iLoopBonus, -1, False)
 							screen.appendMultiListButton("ChildNoTrade" + currentPlayerPanelName, gc.getBonusInfo(iLoopBonus).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, iLoopBonus, -1, False)
 
 				elif (self.iScreen == FOREIGN_TECH_SCREEN):
 					if (not gc.getTeam(playerActive.getTeam()).isTechTrading() and not gc.getTeam(gc.getPlayer(iLoopPlayer).getTeam()).isTechTrading() and not gc.getGame().isDebugMode()):
-						screen.attachTextGFC(currentPlayerPanelName, "", localText.getText("TXT_KEY_FOREIGN_ADVISOR_NO_TECH_TRADING", ()), FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
+						screen.attachTextGFC(currentPlayerPanelName, "", u"<font=4>" + localText.getText("TXT_KEY_FOREIGN_ADVISOR_NO_TECH_TRADING", ()) + u"</font>", FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 					else:
 						listTradeable = []
 						listUntradeable = []
+						listTradeNotAllowed = []						
 						tradeData = TradeData()
 						tradeData.ItemType = TradeableItems.TRADE_TECHNOLOGIES
 						for iLoopTech in range(gc.getNumTechInfos()):
 							tradeData.iData = iLoopTech
-							if (gc.getPlayer(iLoopPlayer).canTradeItem(self.iActiveLeader, tradeData)):
+							if (gc.getPlayer(iLoopPlayer).canTradeItem(self.iActiveLeader, tradeData, False)):
 								if (gc.getPlayer(iLoopPlayer).getTradeDenial(self.iActiveLeader, tradeData) == DenialTypes.NO_DENIAL):
 									listTradeable.append(iLoopTech)
 								else:
 									listUntradeable.append(iLoopTech)
+							elif (gc.getTeam(gc.getPlayer(iLoopPlayer).getTeam()).isHasTech(iLoopTech) and playerActive.canResearch(iLoopTech, False)):
+								listTradeNotAllowed.append(iLoopTech)
 										
 						if len(listTradeable) > 0:
 							screen.attachLabel(currentPlayerPanelName, "", u"<font=4>" + localText.getText("TXT_KEY_FOREIGN_ADVISOR_FOR_TRADE", ()) + u"</font>")
 										
 						screen.attachMultiListControlGFC(currentPlayerPanelName, "ChildTrade" + currentPlayerPanelName, "", 1, self.BUTTON_SIZE, self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
 						for iLoopTech in listTradeable:
-#								screen.attachImageButton(currentPlayerPanelName, "", gc.getTechInfo(iLoopTech).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iLoopTech, -1, False)
 							screen.appendMultiListButton("ChildTrade" + currentPlayerPanelName, gc.getTechInfo(iLoopTech).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iLoopTech, -1, False)
 
 						if len(listUntradeable) > 0:
@@ -376,8 +384,14 @@ class CvForeignAdvisor:
 										
 						screen.attachMultiListControlGFC(currentPlayerPanelName, "ChildNoTrade" + currentPlayerPanelName, "", 1, self.BUTTON_SIZE, self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
 						for iLoopTech in listUntradeable:
-#								screen.attachImageButton(currentPlayerPanelName, "", gc.getTechInfo(iLoopTech).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iLoopTech, -1, False)
 							screen.appendMultiListButton("ChildNoTrade" + currentPlayerPanelName, gc.getTechInfo(iLoopTech).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iLoopTech, -1, False)
+
+						if len(listTradeNotAllowed) > 0:
+							screen.attachLabel(currentPlayerPanelName, "", u"<font=4>" + localText.getText("TXT_KEY_FOREIGN_ADVISOR_NOT_ALLOWED_TRADE", ()) + u"</font>")
+										
+						screen.attachMultiListControlGFC(currentPlayerPanelName, "ChildCantTrade" + currentPlayerPanelName, "", 1, self.BUTTON_SIZE, self.BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
+						for iLoopTech in listTradeNotAllowed:
+							screen.appendMultiListButton("ChildCantTrade" + currentPlayerPanelName, gc.getTechInfo(iLoopTech).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iLoopTech, -1, False)
 
 				screen.attachLabel(currentPlayerPanelName, "", "   ")
 				szName = self.getNextWidgetName()
@@ -453,6 +467,10 @@ class CvForeignAdvisor:
 		screen.setLabel(self.getNextWidgetName(), "", u"<font=2>" + localText.getText("TXT_KEY_TRADE_OPEN_BORDERS_STRING", ()) + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, x, y-10, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 		y += self.MARGIN_LEGEND
 		screen.addLineGFC(self.BACKGROUND_ID, self.getNextLineName(), x, y, x + self.W_LEGEND - 2*self.MARGIN_LEGEND, y, gc.getInfoTypeForString("COLOR_CITY_GREEN"))
+		y += 2 * self.MARGIN_LEGEND
+		screen.setLabel(self.getNextWidgetName(), "", u"<font=2>" + localText.getText("TXT_KEY_PITBOSS_TEAM", ()) + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, x, y-10, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
+		y += self.MARGIN_LEGEND
+		screen.addLineGFC(self.BACKGROUND_ID, self.getNextLineName(), x, y, x + self.W_LEGEND - 2*self.MARGIN_LEGEND, y, gc.getInfoTypeForString("COLOR_YELLOW"))
 	
 		# Our leader head
 		szLeaderHead = self.getNextWidgetName()
@@ -527,7 +545,10 @@ class CvForeignAdvisor:
 					
 					# draw lines
 					if (iSelectedLeader != iPlayer):
-						if (gc.getTeam(player.getTeam()).isHasMet(gc.getPlayer(iSelectedLeader).getTeam())):
+						if (player.getTeam() == gc.getPlayer(iSelectedLeader).getTeam()):
+							szName = self.getNextLineName()
+							screen.addLineGFC(self.BACKGROUND_ID, szName, int(fXSelected), int(fYSelected), int(fX), int(fY), gc.getInfoTypeForString("COLOR_YELLOW") )						
+						elif (gc.getTeam(player.getTeam()).isHasMet(gc.getPlayer(iSelectedLeader).getTeam())):
 							if (gc.getTeam(player.getTeam()).isAtWar(gc.getPlayer(iSelectedLeader).getTeam())):
 								szName = self.getNextLineName()
 								screen.addLineGFC(self.BACKGROUND_ID, szName, int(fXSelected), int(fYSelected), int(fX), int(fY), gc.getInfoTypeForString("COLOR_RED") )
@@ -555,7 +576,10 @@ class CvForeignAdvisor:
 									screen.addLineGFC(self.BACKGROUND_ID, szName, int(fXSelected), int(fYSelected), int(fX), int(fY), gc.getInfoTypeForString("COLOR_WHITE") )
 		
 				player = gc.getPlayer(self.iActiveLeader)
-				if (gc.getTeam(player.getTeam()).isHasMet(gc.getPlayer(iSelectedLeader).getTeam())):
+				if (player.getTeam() == gc.getPlayer(iSelectedLeader).getTeam()):
+					szName = self.getNextLineName()
+					screen.addLineGFC(self.BACKGROUND_ID, szName, int(fXSelected), int(fYSelected), self.X_LEADER_CIRCLE_TOP, fLeaderTop + iLeaderHeight/2, gc.getInfoTypeForString("COLOR_YELLOW") )
+				elif (gc.getTeam(player.getTeam()).isHasMet(gc.getPlayer(iSelectedLeader).getTeam())):
 					if (gc.getTeam(player.getTeam()).isAtWar(gc.getPlayer(iSelectedLeader).getTeam())):
 						szName = self.getNextLineName()
 						screen.addLineGFC(self.BACKGROUND_ID, szName, int(fXSelected), int(fYSelected), self.X_LEADER_CIRCLE_TOP, fLeaderTop + iLeaderHeight/2, gc.getInfoTypeForString("COLOR_RED") )
@@ -626,7 +650,8 @@ class CvForeignAdvisor:
 					self.iSelectedLeader = inputClass.getData1()
 					self.drawContents(False)
 				elif (inputClass.getFlags() & MouseFlags.MOUSE_RBUTTONUP):
-					self.getScreen().hideScreen()
+					if (self.iActiveLeader != inputClass.getData1()):
+						self.getScreen().hideScreen()
 			 
 		elif (inputClass.getNotifyCode() == NotifyCode.NOTIFY_LISTBOX_ITEM_SELECTED):
 			if (inputClass.getFunctionName() + str(inputClass.getID()) == self.getWidgetName(self.DEBUG_DROPDOWN_ID)):

@@ -78,7 +78,6 @@ class CvDawnOfMan:
 		screen.showWindowBackground( False )
 		screen.setDimensions(screen.centerX(self.X_SCREEN), screen.centerY(self.Y_SCREEN), self.W_SCREEN, self.H_SCREEN)
 		screen.enableWorldSounds( false )
-		screen.setCloseOnEscape( false )
 		
 		# Create panels
 		
@@ -131,20 +130,9 @@ class CvDawnOfMan:
 		
 		pActivePlayer = gc.getPlayer(CyGame().getActivePlayer())
 		pLeaderHeadInfo = gc.getLeaderHeadInfo(pActivePlayer.getLeaderType())
-		self.iSoundID = CyAudioGame().Play2DSoundWithId(pLeaderHeadInfo.getDiploPeaceMusicScriptIds(0))
-#		CyInterface().playGeneralSoundByID()
+		screen.setSoundId(CyAudioGame().Play2DSoundWithId(pLeaderHeadInfo.getDiploPeaceMusicScriptIds(0)))
 		
 	def handleInput( self, inputClass ):
-		screen = CyInterfaceScreen( "CvDawnOfMan", self.iScreenID )		
-		
-		if ( inputClass.getFunctionName() == "Exit" and inputClass.getNotifyCode() == NotifyCode.NOTIFY_CLICKED \
-				or inputClass.getData() == int(InputTypes.KB_RETURN) ):
-			print("2d sound should be stopping")
-			CyAudioGame().Destroy2DSound(self.iSoundID)
-#			CyInterface().stop2DSound()
-			screen.hideScreen()
-			import CvEventInterface
-			return 1
 		return 0
 	
 	def update(self, fDelta):

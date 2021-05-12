@@ -7,11 +7,59 @@
 <Civ4GameSpeedInfo xmlns="x-schema:CIV4GameInfoSchema.xml">
 	<GameSpeedInfos>
 		<GameSpeedInfo>
+			<Type>GAMESPEED_MARATHON</Type>
+			<Description>TXT_KEY_GAMESPEED_MARATHON</Description>
+			<Help>TXT_KEY_GAMESPEED_MARATHON_HELP</Help>
+			<iGrowthPercent>300</iGrowthPercent>
+			<iTrainPercent>200</iTrainPercent>
+			<iConstructPercent>300</iConstructPercent>
+			<iCreatePercent>300</iCreatePercent>
+			<iResearchPercent>300</iResearchPercent>
+			<iBuildPercent>300</iBuildPercent>
+			<iImprovementPercent>300</iImprovementPercent>
+			<iGreatPeoplePercent>300</iGreatPeoplePercent>
+			<iCulturePercent>300</iCulturePercent>
+			<iAnarchyPercent>300</iAnarchyPercent>
+			<iBarbPercent>300</iBarbPercent>
+			<iFeatureProductionPercent>300</iFeatureProductionPercent>
+			<iUnitDiscoverPercent>300</iUnitDiscoverPercent>
+			<iUnitHurryPercent>300</iUnitHurryPercent>
+			<iUnitTradePercent>300</iUnitTradePercent>
+			<iUnitGreatWorkPercent>300</iUnitGreatWorkPercent>
+			<iGoldenAgePercent>200</iGoldenAgePercent>
+			<iHurryPercent>33</iHurryPercent>
+			<iHurryConscriptAngerPercent>300</iHurryConscriptAngerPercent>
+			<iInflationPercent>10</iInflationPercent>
+			<iInflationOffset>-200</iInflationOffset>
+			<GameTurnInfos>
+				<GameTurnInfo>
+					<iYearIncrement>20</iYearIncrement>
+					<iTurnsPerIncrement>100</iTurnsPerIncrement>
+				</GameTurnInfo>
+				<GameTurnInfo>
+					<iYearIncrement>10</iYearIncrement>
+					<iTurnsPerIncrement>200</iTurnsPerIncrement>
+				</GameTurnInfo>
+				<GameTurnInfo>
+					<iYearIncrement>5</iYearIncrement>
+					<iTurnsPerIncrement>200</iTurnsPerIncrement>
+				</GameTurnInfo>
+				<GameTurnInfo>
+					<iYearIncrement>2</iYearIncrement>
+					<iTurnsPerIncrement>350</iTurnsPerIncrement>
+				</GameTurnInfo>
+				<GameTurnInfo>
+					<iYearIncrement>1</iYearIncrement>
+					<iTurnsPerIncrement>350</iTurnsPerIncrement>
+				</GameTurnInfo>
+			</GameTurnInfos>
+		</GameSpeedInfo>
+		<GameSpeedInfo>
 			<Type>GAMESPEED_EPIC</Type>
 			<Description>TXT_KEY_GAMESPEED_EPIC</Description>
 			<Help>TXT_KEY_GAMESPEED_EPIC_HELP</Help>
 			<iGrowthPercent>150</iGrowthPercent>
-			<iTrainPercent>150</iTrainPercent>
+			<iTrainPercent>125</iTrainPercent>
 			<iConstructPercent>150</iConstructPercent>
 			<iCreatePercent>150</iCreatePercent>
 			<iResearchPercent>150</iResearchPercent>
@@ -29,8 +77,8 @@
 			<iGoldenAgePercent>125</iGoldenAgePercent>
 			<iHurryPercent>67</iHurryPercent>
 			<iHurryConscriptAngerPercent>150</iHurryConscriptAngerPercent>
-			<iInflationPercent>18</iInflationPercent>
-			<iInflationOffset>-150</iInflationOffset>
+			<iInflationPercent>20</iInflationPercent>
+			<iInflationOffset>-160</iInflationOffset>
 			<GameTurnInfos>
 				<GameTurnInfo>
 					<iYearIncrement>40</iYearIncrement>
@@ -85,8 +133,8 @@
 			<iGoldenAgePercent>100</iGoldenAgePercent>
 			<iHurryPercent>100</iHurryPercent>
 			<iHurryConscriptAngerPercent>100</iHurryConscriptAngerPercent>
-			<iInflationPercent>27</iInflationPercent>
-			<iInflationOffset>-100</iInflationOffset>
+			<iInflationPercent>30</iInflationPercent>
+			<iInflationOffset>-120</iInflationOffset>
 			<GameTurnInfos>
 				<GameTurnInfo>
 					<iYearIncrement>40</iYearIncrement>
@@ -106,15 +154,15 @@
 				</GameTurnInfo>
 				<GameTurnInfo>
 					<iYearIncrement>5</iYearIncrement>
-					<iTurnsPerIncrement>70</iTurnsPerIncrement>
+					<iTurnsPerIncrement>60</iTurnsPerIncrement>
 				</GameTurnInfo>
 				<GameTurnInfo>
 					<iYearIncrement>2</iYearIncrement>
-					<iTurnsPerIncrement>40</iTurnsPerIncrement>
+					<iTurnsPerIncrement>60</iTurnsPerIncrement>
 				</GameTurnInfo>
 				<GameTurnInfo>
 					<iYearIncrement>1</iYearIncrement>
-					<iTurnsPerIncrement>120</iTurnsPerIncrement>
+					<iTurnsPerIncrement>130</iTurnsPerIncrement>
 				</GameTurnInfo>
 			</GameTurnInfos>
 		</GameSpeedInfo>
@@ -123,7 +171,7 @@
 			<Description>TXT_KEY_GAMESPEED_QUICK</Description>
 			<Help>TXT_KEY_GAMESPEED_QUICK_HELP</Help>
 			<iGrowthPercent>67</iGrowthPercent>
-			<iTrainPercent>67</iTrainPercent>
+			<iTrainPercent>80</iTrainPercent>
 			<iConstructPercent>67</iConstructPercent>
 			<iCreatePercent>67</iCreatePercent>
 			<iResearchPercent>67</iResearchPercent>
@@ -142,7 +190,7 @@
 			<iHurryPercent>150</iHurryPercent>
 			<iHurryConscriptAngerPercent>67</iHurryConscriptAngerPercent>
 			<iInflationPercent>40</iInflationPercent>
-			<iInflationOffset>-67</iInflationOffset>
+			<iInflationOffset>-70</iInflationOffset>
 			<GameTurnInfos>
 				<GameTurnInfo>
 					<iYearIncrement>50</iYearIncrement>

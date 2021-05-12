@@ -577,6 +577,7 @@ class CvUnitDesc:
 		self.plotY = -1
 		self.unitType = None
 		self.owner =-1
+		self.damage = 0
 		self.level = -1
 		self.experience = -1
 		self.promotionType = []
@@ -601,6 +602,8 @@ class CvUnitDesc:
 					
 				unit = player.initUnit(unitTypeNum, self.plotX, self.plotY, UnitAITypes(eUnitAI))#UnitAITypes.NO_UNITAI)
 			if (unit):
+				if self.damage != 0:
+					unit.setDamage(self.damage, PlayerTypes.NO_PLAYER)
 				if self.level != -1:
 					unit.setLevel(self.level)
 				if self.experience != -1:
@@ -630,6 +633,11 @@ class CvUnitDesc:
 			if (v!=-1 and vOwner != -1):
 				self.unitType = v
 				self.owner = int(vOwner)
+				continue
+
+			v = parser.findTokenValue(toks, "Damage")
+			if (v != -1):
+				self.damage = (int(v))			
 				continue
 				
 			v = parser.findTokenValue(toks, "Level")
@@ -664,6 +672,7 @@ class CvUnitDesc:
 		unitOwner= unit.getOwner()
 		f.write("\tBeginUnit\n")
 		f.write("\t\tUnitType=%s, UnitOwner=%d\n" %(unitType,unitOwner))
+		f.write("\t\tDamage=%d\n" %(unit.getDamage(),))
 		f.write("\t\tLevel=%d, Experience=%d\n" %(unit.getLevel(), unit.getExperience()))
 		for i in range(gc.getNumPromotionInfos()):
 			if unit.isHasPromotion(i):
@@ -734,13 +743,13 @@ class CvCityDesc:
 		processTypeNum = CvUtil.findInfoTypeNum(gc.getProcessInfo, gc.getNumProcessInfos(), self.productionProcess)
 		
 		if (unitTypeNum != UnitTypes.NO_UNIT):
-			self.city.pushOrder(OrderTypes.ORDER_TRAIN, unitTypeNum, -1, False, False, False)
+			self.city.pushOrder(OrderTypes.ORDER_TRAIN, unitTypeNum, -1, False, False, False, True)
 		elif (buildingTypeNum != BuildingTypes.NO_BUILDING):
-			self.city.pushOrder(OrderTypes.ORDER_CONSTRUCT, buildingTypeNum, -1, False, False, False)
+			self.city.pushOrder(OrderTypes.ORDER_CONSTRUCT, buildingTypeNum, -1, False, False, False, True)
 		elif (projectTypeNum != ProjectTypes.NO_PROJECT):
-			self.city.pushOrder(OrderTypes.ORDER_CREATE, projectTypeNum, -1, False, False, False)
+			self.city.pushOrder(OrderTypes.ORDER_CREATE, projectTypeNum, -1, False, False, False, True)
 		elif (processTypeNum != ProcessTypes.NO_PROCESS):
-			self.city.pushOrder(OrderTypes.ORDER_MAINTAIN, processTypeNum, -1, False, False, False)
+			self.city.pushOrder(OrderTypes.ORDER_MAINTAIN, processTypeNum, -1, False, False, False, True)
 
 		if (self.szScriptData != "NONE"):
 			self.city.setScriptData(self.szScriptData)	
@@ -937,8 +946,8 @@ class CvPlotDesc:
 			plot.setRouteType(routeTypeNum)
 		
 		if (self.szLandmark != ""):
-			plot.setLandmark(u"%s" %(self.szLandmark))
-		
+			CyEngine().addLandmark(CyMap().plot(self.iX, self.iY), "%s" %(self.szLandmark))
+			
 		if (self.szScriptData != "NONE"):
 			plot.setScriptData(self.szScriptData)
 
@@ -957,9 +966,6 @@ class CvPlotDesc:
 		f.write("BeginPlot\n")
 		f.write("\tx=%d,y=%d\n" %(plot.getX(), plot.getY()))	
 		
-		# landmarks
-		if (plot.getLandmark() != ""):
-			f.write("\tLandmark=%s\n" %plot.getLandmark())
 		# scriptData
 		if (plot.getScriptData() != ""):
 			f.write("\tScriptData=%s\n" %plot.getScriptData())
@@ -1142,6 +1148,7 @@ class CvMapDesc:
 		self.climate = None
 		self.seaLevel = None
 		self.numPlotsWritten = 0
+		self.numSignsWritten = 0
 		
 	def write(self, f):
 		"write map data"
@@ -1149,6 +1156,7 @@ class CvMapDesc:
 		iGridW = map.getGridWidth()
 		iGridH = map.getGridHeight()
 		iNumPlots = iGridW * iGridH
+		iNumSigns = CyEngine().getNumSigns()
 		
 		f.write("BeginMap\n")
 		f.write("\tgrid width=%d\n" %(map.getGridWidth(),))
@@ -1161,6 +1169,7 @@ class CvMapDesc:
 		f.write("\tclimate=%s\n" %(gc.getClimateInfo(map.getClimate()).getType(),))
 		f.write("\tsealevel=%s\n" %(gc.getSeaLevelInfo(map.getSeaLevel()).getType(),))
 		f.write("\tnum plots written=%d\n" %(iNumPlots,))
+		f.write("\tnum signs written=%d\n" %(iNumSigns,))
 		f.write("EndMap\n")
 		
 	def read(self, f):
@@ -1225,9 +1234,74 @@ class CvMapDesc:
 			if v!=-1:
 				self.numPlotsWritten = int(v)
 				continue
+				
+			v = parser.findTokenValue(toks, "num signs written")
+			if v!=-1:
+				self.numSignsWritten = int(v)
+				continue			
 			
 			if parser.findTokenValue(toks, "EndMap")!=-1:
 				break
+				
+################
+class CvSignDesc:
+	"serialize map data"
+	def __init__(self):
+		self.iPlotX = 0
+		self.iPlotY = 0
+		self.playerType = 0
+		self.szCaption = ""
+		
+	def apply(self):
+		plot = CyMap().plot(self.iPlotX, self.iPlotY)
+		CyEngine().addSign(plot, self.playerType, self.szCaption)
+		
+	def write(self, f, sign):
+		"write sign data"
+		f.write("BeginSign\n")
+		f.write("\tplotX=%d\n" %(sign.getPlot().getX(),))
+		f.write("\tplotY=%d\n" %(sign.getPlot().getY(),))
+		f.write("\tplayerType=%d\n" %(sign.getPlayerType(),))
+		f.write("\tcaption=%s\n" %(sign.getCaption(),))
+		f.write("EndSign\n")
+		
+	def read(self, f):
+		"read sign data"		
+		self.__init__()
+		parser = CvWBParser()
+		if parser.findNextToken(f, "BeginSign")==false:
+			print "can't find sign"
+			return
+		while (true):
+			nextLine = parser.getNextLine(f)
+			toks = parser.getTokens(nextLine)
+			if (len(toks)==0):
+				break
+							
+			v = parser.findTokenValue(toks, "plotX")
+			if v!=-1:
+				self.iPlotX = int(v)
+				continue
+
+			v = parser.findTokenValue(toks, "plotY")
+			if v!=-1:
+				self.iPlotY = int(v)
+				continue
+
+			v = parser.findTokenValue(toks, "playerType")
+			if v!=-1:
+				self.playerType = int(v)
+				continue
+
+			v = parser.findTokenValue(toks, "caption")
+			if v!=-1:
+				self.szCaption = v
+				continue
+				
+			if parser.findTokenValue(toks, "EndSign")!=-1:
+				break
+				
+		return True
 									
 class CvWBDesc:
 	"handles saving/loading a worldbuilder description file"
@@ -1236,6 +1310,7 @@ class CvWBDesc:
 		self.gameDesc = CvGameDesc()
 		self.playersDesc = None
 		self.plotDesc = None	# list
+		self.signDesc = None	# list
 		self.mapDesc = CvMapDesc()
 		
 	def getVersion(self):
@@ -1271,6 +1346,13 @@ class CvWBDesc:
 				pDesc = CvPlotDesc()
 				if pDesc.needToWritePlot(plot): 
 					pDesc.write(f, plot)
+					
+		f.write("\n### Sign Info ###\n")
+		iNumSigns = CyEngine().getNumSigns()
+		for i in range(iNumSigns):
+			sign = CyEngine().getSignByIndex(i)
+			pDesc = CvSignDesc()
+			pDesc.write(f, sign)
 
 		f.close()
 		
@@ -1298,6 +1380,10 @@ class CvWBDesc:
 
 		print "apply plots"
 		for pDesc in self.plotDesc:
+			pDesc.apply()
+			
+		print "apply signs"
+		for pDesc in self.signDesc:
 			pDesc.apply()
 		
 		print ("WB apply done\n")
@@ -1492,6 +1578,17 @@ class CvWBDesc:
 				self.plotDesc.append(pDesc)
 			else:
 				break
+				
+		print("Reading/creating %d sign descs" %(self.mapDesc.numSignsWritten,))
+		self.signDesc = []
+		for i in range(self.mapDesc.numSignsWritten):
+			pDesc = CvSignDesc()
+			print "Jason1"
+			if pDesc.read(f)==True:
+				print "Jason2"
+				self.signDesc.append(pDesc)
+			else:
+				break		
 								
 		f.close()
 		print ("WB read done\n")

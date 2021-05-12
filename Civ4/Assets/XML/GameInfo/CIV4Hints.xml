@@ -202,6 +202,9 @@
 			<Description>TXT_KEY_HINT_INTERFACE_65</Description>
 		</HintInfo>
 		<HintInfo>
+			<Description>TXT_KEY_HINT_INTERFACE_66</Description>
+		</HintInfo>
+		<HintInfo>
 			<Description>TXT_KEY_HINT_1</Description>
 		</HintInfo>
 		<HintInfo>
@@ -238,7 +241,7 @@
 			<Description>TXT_KEY_HINT_12</Description>
 		</HintInfo>
 		<HintInfo>
-			<Description>TXT_KEY_HINT_3</Description>
+			<Description>TXT_KEY_HINT_13</Description>
 		</HintInfo>
 		<HintInfo>
 			<Description>TXT_KEY_HINT_14</Description>

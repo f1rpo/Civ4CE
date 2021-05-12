@@ -3084,7 +3084,7 @@
 			<iAirlift>0</iAirlift>
 			<iAirModifier>0</iAirModifier>
 			<iNukeModifier>0</iNukeModifier>
-			<iNukeExplosionRand>1000</iNukeExplosionRand>
+			<iNukeExplosionRand>2000</iNukeExplosionRand>
 			<iFreeSpecialist>0</iFreeSpecialist>
 			<iAreaFreeSpecialist>0</iAreaFreeSpecialist>
 			<iGlobalFreeSpecialist>0</iGlobalFreeSpecialist>
@@ -3431,7 +3431,11 @@
 			<SpecialistCounts/>
 			<FreeSpecialistCounts/>
 			<CommerceFlexibles/>
-			<CommerceChangeOriginalOwners/>
+			<CommerceChangeOriginalOwners>
+				<bCommerceChangeOriginalOwner>0</bCommerceChangeOriginalOwner>
+				<bCommerceChangeOriginalOwner>0</bCommerceChangeOriginalOwner>
+				<bCommerceChangeOriginalOwner>1</bCommerceChangeOriginalOwner>
+			</CommerceChangeOriginalOwners>
 			<ConstructSound>AS2D_BUILD_LIBRARY</ConstructSound>
 			<BonusHealthChanges/>
 			<BonusHappinessChanges/>

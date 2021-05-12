@@ -31,6 +31,18 @@
 			<bSelectAll>0</bSelectAll>
 		</InterfaceModeInfo>
 		<InterfaceModeInfo>
+			<Type>INTERFACEMODE_SIGN</Type>
+			<Description>TXT_KEY_INTERFACEMODE_SIGN</Description>
+			<Help/>
+			<CursorType>CURSOR_EDIT</CursorType>
+			<Mission>NONE</Mission>
+			<bVisible>0</bVisible>
+			<bGotoPlot>0</bGotoPlot>
+			<bHighlightPlot>1</bHighlightPlot>
+			<bSelectType>0</bSelectType>
+			<bSelectAll>0</bSelectAll>
+		</InterfaceModeInfo>
+		<InterfaceModeInfo>
 			<Type>INTERFACEMODE_GRIP</Type>
 			<Description>TXT_KEY_INTERFACEMODE_GRIP</Description>
 			<Help/>

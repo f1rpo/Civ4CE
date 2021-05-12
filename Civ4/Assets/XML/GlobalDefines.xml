@@ -7,11 +7,15 @@
 <Civ4Defines xmlns="x-schema:CIV4GlobalDefinesSchema.xml">
 	<Define>
 		<DefineName>CIV4_VERSION</DefineName>
-		<iDefineIntVal>109</iDefineIntVal>
+		<iDefineIntVal>152</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>SAVE_VERSION</DefineName>
-		<iDefineIntVal>101</iDefineIntVal>
+		<iDefineIntVal>102</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>NUM_LANGUAGES</DefineName>
+		<iDefineIntVal>8</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>LAND_TERRAIN</DefineName>
@@ -218,6 +222,10 @@
 		<iDefineIntVal>1</iDefineIntVal>
 	</Define>
 	<Define>
+		<DefineName>OWNERSHIP_SCORE_DURATION_THRESHOLD</DefineName>
+		<iDefineIntVal>20</iDefineIntVal>
+	</Define>
+	<Define>
 		<DefineName>NUM_DO_GOODY_ATTEMPTS</DefineName>
 		<iDefineIntVal>10</iDefineIntVal>
 	</Define>
@@ -405,21 +413,34 @@
 		<DefineName>GREAT_PEOPLE_THRESHOLD_INCREASE</DefineName>
 		<iDefineIntVal>50</iDefineIntVal>
 	</Define>
-	<Define>
-		<DefineName>GREAT_PEOPLE_THRESHOLD_INCREASE_TEAM</DefineName>
-		<iDefineIntVal>50</iDefineIntVal>
-	</Define>
+	<Define><DefineName>GREAT_PEOPLE_THRESHOLD_INCREASE_TEAM</DefineName><iDefineIntVal>50</iDefineIntVal>(</Define>
 	<Define>
 		<DefineName>GREAT_PEOPLE_THRESHOLD</DefineName>
 		<iDefineIntVal>100</iDefineIntVal>
 	</Define>
 	<Define>
-		<DefineName>MOVE_EFFECT_LENGTH</DefineName>
-		<iDefineIntVal>3</iDefineIntVal>
+		<DefineName>BASE_SPY_SABOTAGE_COST</DefineName>
+		<iDefineIntVal>200</iDefineIntVal>
 	</Define>
 	<Define>
-		<DefineName>MAX_AUTOSAVES</DefineName>
-		<iDefineIntVal>5</iDefineIntVal>
+		<DefineName>BASE_SPY_DESTROY_COST</DefineName>
+		<iDefineIntVal>50</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>SPY_DESTROY_COST_MULTIPLIER_LIMITED</DefineName>
+		<iDefineIntVal>4</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>SPY_DESTROY_COST_MULTIPLIER</DefineName>
+		<iDefineIntVal>2</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>BASE_SPY_STEAL_PLANS_COST</DefineName>
+		<iDefineIntVal>100</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>SPY_STEAL_PLANS_COST_MULTIPLIER</DefineName>
+		<iDefineIntVal>1</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>QUICKSAVE</DefineName>
@@ -496,6 +517,10 @@
 	<Define>
 		<DefineName>HILLS_EXTRA_MOVEMENT</DefineName>
 		<iDefineIntVal>1</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>FEATURE_GROWTH_MODIFIER</DefineName>
+		<iDefineIntVal>25</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>ROUTE_FEATURE_GROWTH_MODIFIER</DefineName>
@@ -587,7 +612,7 @@
 	</Define>
 	<Define>
 		<DefineName>NUKE_UNIT_DAMAGE_BASE</DefineName>
-		<iDefineIntVal>25</iDefineIntVal>
+		<iDefineIntVal>30</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>NUKE_UNIT_DAMAGE_RAND_1</DefineName>
@@ -603,11 +628,11 @@
 	</Define>
 	<Define>
 		<DefineName>NUKE_BUILDING_DESTRUCTION_PROB</DefineName>
-		<iDefineIntVal>30</iDefineIntVal>
+		<iDefineIntVal>40</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>NUKE_POPULATION_DEATH_BASE</DefineName>
-		<iDefineIntVal>20</iDefineIntVal>
+		<iDefineIntVal>30</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>NUKE_POPULATION_DEATH_RAND_1</DefineName>

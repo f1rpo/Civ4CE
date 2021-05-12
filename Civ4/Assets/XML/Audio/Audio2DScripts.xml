@@ -11669,7 +11669,7 @@
 	<Script2DSound>
 		<ScriptID>AS2D_CLOUDWIND</ScriptID>
 		<SoundID>SND_CLOUDWIND</SoundID>
-		<SoundType>GAME_SFX</SoundType>
+		<SoundType>GAME_AMBIENCE</SoundType>
 		<iMinVolume>35</iMinVolume>
 		<iMaxVolume>35</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
@@ -11691,7 +11691,7 @@
 	<Script2DSound>
 		<ScriptID>AS2D_RIVERAMB</ScriptID>
 		<SoundID>SND_RIVERAMB</SoundID>
-		<SoundType>GAME_SFX</SoundType>
+		<SoundType>GAME_AMBIENCE</SoundType>
 		<iMinVolume>20</iMinVolume>
 		<iMaxVolume>20</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>

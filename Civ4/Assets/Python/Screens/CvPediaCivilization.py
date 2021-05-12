@@ -70,8 +70,10 @@ class CvPediaCivilization:
 		screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_CIV, -1)
 
 		if self.top.iLastScreen	!= CvScreenEnums.PEDIA_CIVILIZATION or bNotActive:		
-			self.placeLinks()
+			self.placeLinks(true)
 			self.top.iLastScreen = CvScreenEnums.PEDIA_CIVILIZATION
+		else:
+			self.placeLinks(false)
 			
 		# Icon
 		screen.addPanel( self.top.getNextWidgetName(), "", "", False, False,
@@ -141,11 +143,12 @@ class CvPediaCivilization:
 		szText = gc.getCivilizationInfo(self.iCivilization).getCivilopedia()
 		screen.attachMultilineText( panelName, "Text", szText, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 													
-	def placeLinks(self):
+	def placeLinks(self, bRedraw):
 
 		screen = self.top.getScreen()
-		
-		screen.clearListBoxGFC(self.top.LIST_ID)
+
+		if bRedraw:	
+			screen.clearListBoxGFC(self.top.LIST_ID)
 		
 		# sort Improvements alphabetically
 		listSorted=[(0,0)]*gc.getNumCivilizationInfos()
@@ -156,8 +159,9 @@ class CvPediaCivilization:
 		iSelected = 0
 		i = 0
 		for iI in range(gc.getNumCivilizationInfos()):
-			if (gc.getCivilizationInfo(listSorted[iI][1]).isPlayable()):
-				screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIV, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
+			if (gc.getCivilizationInfo(listSorted[iI][1]).isPlayable() and not gc.getCivilizationInfo(listSorted[iI][1]).isGraphicalOnly()):
+				if bRedraw:
+					screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIV, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
 				if listSorted[iI][1] == self.iCivilization:
 					iSelected = i
 				i += 1

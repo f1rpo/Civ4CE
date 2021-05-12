@@ -108,5 +108,11 @@
 			<Help>TXT_KEY_PLAYER_OPTION_RIGHT_CLICK_MENU_HELP</Help>
 			<bDefault>0</bDefault>
 		</PlayerOptionInfo>
+		<PlayerOptionInfo>
+			<Type>PLAYEROPTION_LEAVE_FORESTS</Type>
+			<Description>TXT_KEY_PLAYEROPTION_LEAVE_FORESTS</Description>
+			<Help>TXT_KEY_PLAYEROPTION_LEAVE_FORESTS_HELP</Help>
+			<bDefault>0</bDefault>
+		</PlayerOptionInfo>
 	</PlayerOptionInfos>
 </Civ4PlayerOptionInfos>

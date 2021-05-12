@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Firaxis Games (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Bart Muzzin (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -1624,6 +1624,8 @@
 			<fUpdateRate>1.0</fUpdateRate>
 			<Path>Art/Units/MachineGun/MachineGun_Fire.nif</Path>
 			<bIsProjectile>1</bIsProjectile>
+			<fSpeed>600.0</fSpeed>
+			<fArcValue>0.0</fArcValue>
 		</EffectInfo>
 		<!-- Unit information:-->
 		<EffectInfo>

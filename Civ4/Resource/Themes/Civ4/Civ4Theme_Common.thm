@@ -102,7 +102,7 @@ with GFC_Control
 		{
 			// ToolTip delays, in milliseconds
 			.ToolTipShow						=	500;
-			.ToolTipHide						=	2000;
+			.ToolTipHide						=	30000;
 		}
 		
 		with .Color	//All default color types are set for dynamic color change.
@@ -214,6 +214,7 @@ with GFC_Control
 				GColor	.DisableSelect				=	GColor(199,178,153, 89);
 				GColor	.DisableOffselect			=	GColor(199,178,153, 89);	
 				GColor	.DisableMultiselect			=	GColor(199,178,153, 64);
+				GColor	.Rollover					=	GColor(255,229,121, 64);
 				// Table alt row / column
 				GColor	.AltCell					=	GColor(199,178,153, 32);
 				// Progress Fill
@@ -359,32 +360,40 @@ with GFC_Control
 			// to be BlendSource instead of Source, which means
 			// there must be an ALPHA channel in all fonts
 
+			// To save memory (both system and video) unused fonts are currently commented out.
+			// Civ really only uses the following font sizes and styles:
+			// 1 - normal
+			// 2 - normal, 2 - bold, 2 - italic
+			// 3 - normal, 3 - bold
+			// 4 - normal, 4 - bold
+			// -Moose
+
 			with SF_CtrlTheme_Civ4_Control_Font
 			{
-				GFont	.Size0_Normal			=	GFont("Sylfaen",		"Regular",		10, GFlags(GFontFeature, GFC_FONT_ALPHA));
-				GFont	.Size0_Bold				=	GFont("Sylfaen",		"Bold",			10, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ALPHA));
-				GFont	.Size0_Italic			=	GFont("Sylfaen",		"Italic",		10, GFlags(GFontFeature, GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
-				GFont	.Size0_BoldItalic		=	GFont("Sylfaen",		"Bold Italic",	10, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
+//				GFont	.Size0_Normal			=	GFont("Sylfaen",		"Regular",		10, GFlags(GFontFeature, GFC_FONT_ALPHA));
+//				GFont	.Size0_Bold				=	GFont("Sylfaen",		"Bold",			10, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ALPHA));
+//				GFont	.Size0_Italic			=	GFont("Sylfaen",		"Italic",		10, GFlags(GFontFeature, GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
+//				GFont	.Size0_BoldItalic		=	GFont("Sylfaen",		"Bold Italic",	10, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
 
 				GFont	.Size1_Normal			=	GFont("Sylfaen",		"Regular",		12, GFlags(GFontFeature, GFC_FONT_ALPHA));
-				GFont	.Size1_Bold				=	GFont("Sylfaen",		"Bold",			12, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ALPHA));
-				GFont	.Size1_Italic			=	GFont("Sylfaen",		"Italic",		12, GFlags(GFontFeature, GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
-				GFont	.Size1_BoldItalic		=	GFont("Sylfaen",		"Bold Italic",	12, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
+//				GFont	.Size1_Bold				=	GFont("Sylfaen",		"Bold",			12, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ALPHA));
+//				GFont	.Size1_Italic			=	GFont("Sylfaen",		"Italic",		12, GFlags(GFontFeature, GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
+//				GFont	.Size1_BoldItalic		=	GFont("Sylfaen",		"Bold Italic",	12, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
 
 				GFont	.Size2_Normal			=	GFont("Sylfaen",		"Regular",		14, GFlags(GFontFeature, GFC_FONT_ALPHA));
 				GFont	.Size2_Bold				=	GFont("Sylfaen",		"Bold",			14, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ALPHA));
 				GFont	.Size2_Italic			=	GFont("Sylfaen",		"Italic",		14, GFlags(GFontFeature, GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
-				GFont	.Size2_BoldItalic		=	GFont("Sylfaen",		"Bold Italic",	14, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
+//				GFont	.Size2_BoldItalic		=	GFont("Sylfaen",		"Bold Italic",	14, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
 
 				GFont	.Size3_Normal			=	GFont("Sylfaen",		"Regular",		16, GFlags(GFontFeature, GFC_FONT_ALPHA));
 				GFont	.Size3_Bold				=	GFont("Sylfaen",		"Bold",			16, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ALPHA));
-				GFont	.Size3_Italic			=	GFont("Sylfaen",		"Italic",		16, GFlags(GFontFeature, GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
-				GFont	.Size3_BoldItalic		=	GFont("Sylfaen",		"Bold Italic",	16, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
+//				GFont	.Size3_Italic			=	GFont("Sylfaen",		"Italic",		16, GFlags(GFontFeature, GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
+//				GFont	.Size3_BoldItalic		=	GFont("Sylfaen",		"Bold Italic",	16, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
 
 				GFont	.Size4_Normal			=	GFont("Sylfaen",		"Regular",		22, GFlags(GFontFeature, GFC_FONT_ALPHA));
 				GFont	.Size4_Bold				=	GFont("Sylfaen",		"Bold",			22, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ALPHA));
-				GFont	.Size4_Italic			=	GFont("Sylfaen",		"Italic",		22, GFlags(GFontFeature, GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
-				GFont	.Size4_BoldItalic		=	GFont("Sylfaen",		"Bold Italic",	22, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
+//				GFont	.Size4_Italic			=	GFont("Sylfaen",		"Italic",		22, GFlags(GFontFeature, GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
+//				GFont	.Size4_BoldItalic		=	GFont("Sylfaen",		"Bold Italic",	22, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ITALIC, GFC_FONT_ALPHA), 0, GRectMargin(1));
 			}
 			
 			.Normal								=	SF_CtrlTheme_Civ4_Control_Font_Size3_Normal;
@@ -398,8 +407,8 @@ with GFC_Control
 			.Footer								=	SF_CtrlTheme_Civ4_Control_Font_Size1_Normal;
 			.FooterBold							=	SF_CtrlTheme_Civ4_Control_Font_Size1_Bold;
 			
-			.Fixed								=	GFont("Fonts/cour.ttf",		"Courier New",	"Regular",		14, GFlags(GFontFeature, GFC_FONT_ALPHA));
-			.FixedBold							=	GFont("Fonts/courbd.ttf",	"Courier New",	"Bold",			14, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ALPHA));
+//			.Fixed								=	GFont("Fonts/cour.ttf",		"Courier New",	"Regular",		14, GFlags(GFontFeature, GFC_FONT_ALPHA));
+//			.FixedBold							=	GFont("Fonts/courbd.ttf",	"Courier New",	"Bold",			14, GFlags(GFontFeature, GFC_FONT_BOLD,	GFC_FONT_ALPHA));
 
 		}
 		

@@ -36,6 +36,7 @@ class CvVictoryMovieScreen:
 		screen = CyGInterfaceScreen( "VictoryMovieScreen", CvScreenEnums.VICTORY_MOVIE_SCREEN )
 		screen.setDimensions(screen.centerX(0), screen.centerY(0), -1, -1)
 		screen.setRenderInterfaceOnly(True)
+		screen.enableWorldSounds( false )
 		screen.addDDSGFC("VictoryMovieScreenBackground", ArtFileMgr.getInterfaceArtInfo("SCREEN_BG_OPAQUE").getPath(), 0, 0, -1, -1, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 		screen.addPanel( "VictoryMovieTopPanel", u"", u"", False, False, self.X_SCREEN, self.Y_SCREEN, self.W_SCREEN, self.BORDER_HEIGHT, PanelStyles.PANEL_STYLE_TOPBAR )
 		screen.addPanel( "VictoryMovieBottomPanel", u"", u"", False, False, self.X_SCREEN, self.H_SCREEN-(self.BORDER_HEIGHT+3), self.W_SCREEN, self.BORDER_HEIGHT+3, PanelStyles.PANEL_STYLE_BOTTOMBAR )		
