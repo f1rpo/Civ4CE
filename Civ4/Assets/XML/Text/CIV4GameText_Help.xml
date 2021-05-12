@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Jesse Smith (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by XMLSPY 2004 Professional Ed. Release 2, Installed Multi + SMP for 3 users (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -12,6 +12,9 @@
 		<German>Die einfachste Schwierigkeitsstufe ist eine gute Wahl, wenn Sie Ihr allererstes Spiel starten oder eine neue Strategie ausprobieren m&#246;chten. Als Siedleranf&#252;hrer werden Sie feststellen: Barbaren und wilde Tiere sind weniger aggressiv, Ihre B&#252;rger bleiben l&#228;nger gesund und zufrieden und Sie erhalten dar&#252;ber hinaus viele Produktionsboni.</German>
 		<Italian>Il livello di difficolt&#224; pi&#249; semplice e il modo migliore per iniziare la tua prima partita oppure se desideri provare una nuova strategia. Giocando al livello Colono, i Barbari e gli animali selvaggi saranno meno aggressivi, i tuoi cittadini saranno pi&#249; felici, godranno di buona salute pi&#249; a lungo e potrai contare su molti bonus produttivi.</Italian>
 		<Spanish>El nivel de dificultad m&#225;s f&#225;cil y una manera excelente de empezar con vuestra primera partida o probar una estrategia nueva.  Como Colono, ver&#233;is que los b&#225;rbaros y animales salvajes son menos agresivos, que los ciudadanos est&#225;n m&#225;s felices y sanos y que habr&#225; muchas bonificaciones a la producci&#243;n para ayudaros.</Spanish>
+		<Russian>The easiest difficulty level and a great way to start your very first game or when you want to try a new strategy.  As a Settler leader, you will notice that: barbarians and wild animals are less aggressive, your citizens stay happy and healthy longer, and there are many production bonuses to help you.</Russian>
+		<Japanese>The easiest difficulty level and a great way to start your very first game or when you want to try a new strategy.  As a Settler leader, you will notice that: barbarians and wild animals are less aggressive, your citizens stay happy and healthy longer, and there are many production bonuses to help you.</Japanese>
+		<Chinese>The easiest difficulty level and a great way to start your very first game or when you want to try a new strategy.  As a Settler leader, you will notice that: barbarians and wild animals are less aggressive, your citizens stay happy and healthy longer, and there are many production bonuses to help you.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_HANDICAP_CHIEFTAIN_HELP</Tag>
@@ -20,6 +23,9 @@
 		<German>Diesen relativ einfachen Schwierigkeitsgrad sollten Sie w&#228;hlen, wenn Sie eine neue Strategie testen m&#246;chten. Barbaren und wilde Tiere sind in diesem Fall st&#228;rker und aggressiver. Au&#223;erdem erhalten Sie weniger Boni.</German>
 		<Italian>Un livello di difficolt&#224; abbastanza basso, utile per provare una nuova strategia. I barbari e gli animali selvaggi sono pi&#249; forti e aggressivi, inoltre non otterrai molti bonus.</Italian>
 		<Spanish>Un nivel de dificultad relativamente bajo, bueno para probar nuevas estrategias.  Los b&#225;rbaros y animales salvajes son m&#225;s fuertes y agresivos y no se reciben tantas bonificaciones.</Spanish>
+		<Russian>A relatively easy difficulty level - good for when you want to try a new strategy.  Barbarians and wild animals are stronger and more aggressive and you don't get as many bonuses.</Russian>
+		<Japanese>A relatively easy difficulty level - good for when you want to try a new strategy.  Barbarians and wild animals are stronger and more aggressive and you don't get as many bonuses.</Japanese>
+		<Chinese>A relatively easy difficulty level - good for when you want to try a new strategy.  Barbarians and wild animals are stronger and more aggressive and you don't get as many bonuses.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_HANDICAP_WARLORD_HELP</Tag>
@@ -28,6 +34,9 @@
 		<German>Kriegsherren haben es etwas schwerer, da Barbaren und wilde Tiere st&#228;rker und aggressiver sind. Au&#223;erdem erhalten Sie als Kriegsherr weniger Boni.</German>
 		<Italian>I guerrieri hanno una vita un po' pi&#249; difficile: i tuoi avversari sono meno permissivi e pi&#249; aggressivi. Fai attenzione!</Italian>
 		<Spanish>Los Caudillos lo tienen un poco m&#225;s crudo.  Los oponentes son menos clementes y m&#225;s peligrosos. &#161;Mucho cuidado!</Spanish>
+		<Russian>Warlords have a slightly tougher time of it.  Your opponents are less forgiving and more aggressive - watch your back!</Russian>
+		<Japanese>Warlords have a slightly tougher time of it.  Your opponents are less forgiving and more aggressive - watch your back!</Japanese>
+		<Chinese>Warlords have a slightly tougher time of it.  Your opponents are less forgiving and more aggressive - watch your back!</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_HANDICAP_NOBLE_HELP</Tag>
@@ -36,6 +45,9 @@
 		<German>Da Adlige sehr viele Pflichten wahrnehmen m&#252;ssen, ist dieser Schwierigkeitsgrad sehr ausgewogen und eignet sich vor allem f&#252;r erfahrene Civilization-Spieler.</German>
 		<Italian>I Nobili devono saper bilanciare le loro grandi responsabilit&#224; e, per questo motivo, questo &#232; il livello pi&#249; equilibrato. I veterani di Civilization lo troveranno il livello ideale per iniziare.</Italian>
 		<Spanish>Los Nobles tienen que equilibrar sus diversas responsabilidades, as&#237; que &#233;ste es el nivel m&#225;s equilibrado.  Los veteranos del Civi comprobar&#225;n que este nivel es un punto estupendo por el que empezar. </Spanish>
+		<Russian>Nobles need to balance their many responsibilities so this is the most balanced level.  Civ veterans will find this level to be a great place to start.</Russian>
+		<Japanese>Nobles need to balance their many responsibilities so this is the most balanced level.  Civ veterans will find this level to be a great place to start.</Japanese>
+		<Chinese>Nobles need to balance their many responsibilities so this is the most balanced level.  Civ veterans will find this level to be a great place to start.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_HANDICAP_PRINCE_HELP</Tag>
@@ -44,6 +56,9 @@
 		<German>Als Prinz m&#252;ssen Sie beweisen, dass Sie wirklich von k&#246;niglichem Blut sind. Um Ihnen das Leben schwer zu machen, produziert und forscht die KI des Spiels in diesem Schwierigkeitsgrad etwas schneller als Sie. Sie m&#252;ssen sich also anstrengen, wenn Sie das Spiel gewinnen m&#246;chten.</German>
 		<Italian>Come Principe, dovrai saper dimostrare di essere di vera stirpe reale, poich&#233; questo &#232; il primo livello nel quale parti con uno svantaggio nei confronti dell'IA. Quest'ultima pu&#242; produrre e fare ricerche pi&#249; velocemente di te, pertanto dovrai giocare con maggior impegno per poter vincere.</Italian>
 		<Spanish>Como Pr&#237;ncipe, tendr&#233;is que demostrar que ten&#233;is sangre real de verdad, por lo que &#233;ste es el primer nivel en el que sufrir&#233;is una desventaja respecto a la IA.  La IA producir&#225; e investigar&#225; algo m&#225;s deprisa que vos, por lo que tendr&#233;is que jugar mucho mejor para lograr la victoria.</Spanish>
+		<Russian>As a Prince you will need to truly prove you are of royal stock so this is the first level where you are handicapped vs. the AI.  The AI can produce and research slightly faster than you so you will have to play a much better game to be victorious.</Russian>
+		<Japanese>As a Prince you will need to truly prove you are of royal stock so this is the first level where you are handicapped vs. the AI.  The AI can produce and research slightly faster than you so you will have to play a much better game to be victorious.</Japanese>
+		<Chinese>As a Prince you will need to truly prove you are of royal stock so this is the first level where you are handicapped vs. the AI.  The AI can produce and research slightly faster than you so you will have to play a much better game to be victorious.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_HANDICAP_MONARCH_HELP</Tag>
@@ -52,6 +67,9 @@
 		<German>Dieser Schwierigkeitsgrad ist wahrlich k&#246;niglich. Ihre Unterhaltskosten erreichen nun schwindelnde H&#246;hen, Ihre Forschungen kommen nur langsam voran und Ihr Volk ist alles andere als gen&#252;gsam. Zu allem &#220;berfluss m&#252;ssen Sie sich mit &#252;beraus geschickten Computergegnern herumschlagen.</German>
 		<Italian>Per i Monarchi, la sfida comincia a farsi impegnativa. Il costo di mantenimento &#232; superiore, la ricerca pi&#249; lenta, la gente pi&#249; difficile da accontentare e gli avversari computerizzati pi&#249; scaltri.</Italian>
 		<Spanish>Para los Monarcas, el reto empieza a ponerse serio en este nivel.  El mantenimiento es m&#225;s alto, la investigaci&#243;n, m&#225;s lenta, vuestro pueblo es m&#225;s dif&#237;cil de complacer y los oponentes que lleva el ordenador son m&#225;s astutos.</Spanish>
+		<Russian>For Monarchs, the challenges definitely start to ramp up on this level.  Upkeep is higher, research is slower, your people are harder to please, and your computer opponents are just plain smarter.</Russian>
+		<Japanese>For Monarchs, the challenges definitely start to ramp up on this level.  Upkeep is higher, research is slower, your people are harder to please, and your computer opponents are just plain smarter.</Japanese>
+		<Chinese>For Monarchs, the challenges definitely start to ramp up on this level.  Upkeep is higher, research is slower, your people are harder to please, and your computer opponents are just plain smarter.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_HANDICAP_EMPEROR_HELP</Tag>
@@ -60,6 +78,9 @@
 		<German>Sie sind der geborene Kaiser? Beweisen Sie es, indem Sie Ihre schnellen und aggressiven Gegner bezwingen, w&#228;hrend Sie Ihr notorisch unzufriedenes Volk gl&#252;cklich machen. Dieser Herausforderung sind nur wahre Civilization-Experten gewachsen.</German>
 		<Italian>Sei pronto per diventare Imperatore? Se s&#236;, dovrai affrontare con coraggio gli avversari, rapidi e aggressivi, e allo stesso tempo cercare di soddisfare la tua popolazione, pi&#249; difficile da compiacere e motivare. Una vera sfida per gli esperti di Civilization.</Italian>
 		<Spanish>&#191;Est&#225;is listo para ser emperador?  De ser as&#237;, tendr&#233;is que demostrar vuestra val&#237;a derrotando a adversarios m&#225;s r&#225;pidos y agresivos a la vez que cuid&#225;is de una poblaci&#243;n m&#225;s dif&#237;cil de motivar y complacer. Esto es una prueba de verdad para los expertos en Civilization.</Spanish>
+		<Russian>Are you ready to be an Emperor?  If so, you will need to prove your mettle by overcoming opponents that are both fast and aggressive while dealing with a population that is harder to motivate and please. This is a true test for Civ experts.</Russian>
+		<Japanese>Are you ready to be an Emperor?  If so, you will need to prove your mettle by overcoming opponents that are both fast and aggressive while dealing with a population that is harder to motivate and please. This is a true test for Civ experts.</Japanese>
+		<Chinese>Are you ready to be an Emperor?  If so, you will need to prove your mettle by overcoming opponents that are both fast and aggressive while dealing with a population that is harder to motivate and please. This is a true test for Civ experts.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_HANDICAP_IMMORTAL_HELP</Tag>
@@ -68,6 +89,9 @@
 		<German>Nur wenige Herrscher werden durch ihre Leistungen unsterblich. Dieser Herausforderung sind nur die Besten der Besten gewachsen.</German>
 		<Italian>Solo in pochi possono appartenere alla schiera degli Immortali. Una prova molto impegnativa, anche per i pi&#249; esperti.</Italian>
 		<Spanish>Solo unos cuantos pueden contarse entre las filas de los inmortales.  Esto resulta una prueba demoledora para todos, excepto para los m&#225;s experimentados.</Spanish>
+		<Russian>Only a few can claim memberships among the ranks of the Immortals.  This is a bruising test for all but the most experienced.</Russian>
+		<Japanese>Only a few can claim memberships among the ranks of the Immortals.  This is a bruising test for all but the most experienced.</Japanese>
+		<Chinese>Only a few can claim memberships among the ranks of the Immortals.  This is a bruising test for all but the most experienced.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_HANDICAP_DIETY_HELP</Tag>
@@ -76,8 +100,10 @@
 		<German>Diese ultimative Pr&#252;fung bestehen nur die besten Civ-Spieler aller Zeiten. Geh&#246;ren auch Sie dazu?</German>
 		<Italian>La prova definitiva per i migliori giocatori di Civilization. Ce la farai?</Italian>
 		<Spanish>La prueba definitiva, solo para los mejores jugadores del Civi. &#191;Podr&#225; superarla alguien?</Spanish>
+		<Russian>The ultimate test for only the best Civ players. Can it be beat?</Russian>
+		<Japanese>The ultimate test for only the best Civ players. Can it be beat?</Japanese>
+		<Chinese>The ultimate test for only the best Civ players. Can it be beat?</Chinese>
 	</TEXT>
-	<!-- WORLDSIZEINFO - HELP -->
 	<TEXT>
 		<Tag>TXT_KEY_WORLDSIZE_DUEL_HELP</Tag>
 		<English>A very tiny map with only one opponent.  This is tougher than it sounds because you will have to work extra hard at research without the benefit of multiple trading partners.</English>
@@ -85,6 +111,9 @@
 		<German>Eine winzige Karte mit nur einem Gegner. Allerdings ist Ihre Aufgabe schwieriger, als Sie denken. Schlie&#223;lich m&#252;ssen Sie sich auf die Forschung konzentrieren und k&#246;nnen nicht auf mehrere Handelspartner zur&#252;ckgreifen.</German>
 		<Italian>Una mappa molto piccola con un solo avversario. &#200; pi&#249; dura di quanto possa sembrare, poich&#233; dovrai svolgere del lavoro extra per sopperire alla mancanza di civilt&#224; con cui commerciare.</Italian>
 		<Spanish>Un mapa muy diminuto, con un solo adversario.  Es m&#225;s dif&#237;cil de lo que parece porque tendr&#233;is que trabajar m&#225;s duro e investigar sin el beneficio de tener varios socios con los que realizar intercambios.</Spanish>
+		<Russian>A very tiny map with only one opponent.  This is tougher than it sounds because you will have to work extra hard at research without the benefit of multiple trading partners.</Russian>
+		<Japanese>A very tiny map with only one opponent.  This is tougher than it sounds because you will have to work extra hard at research without the benefit of multiple trading partners.</Japanese>
+		<Chinese>A very tiny map with only one opponent.  This is tougher than it sounds because you will have to work extra hard at research without the benefit of multiple trading partners.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_WORLDSIZE_TINY_HELP</Tag>
@@ -93,6 +122,9 @@
 		<German>Eine sehr kleine Karte mit zwei Gegnern. Da Sie die anderen Zivilisationen relativ schnell finden, d&#252;rften Eroberungsspiele nicht allzu lange dauern.</German>
 		<Italian>Una mappa molto piccola con due avversari. Incontrerai presto le altre civilt&#224;, perci&#242; le partite a conquista sono pi&#249; rapide.</Italian>
 		<Spanish>Un mapa muy peque&#241;o, con dos oponentes.  Os encontrar&#233;is a otras civilizaciones enseguida y las partidas de conquista ir&#225;n m&#225;s r&#225;pido.</Spanish>
+		<Russian>A very small map with two opponents.  Expect to find other Civs rather quickly and for Conquest games to go more quickly.</Russian>
+		<Japanese>A very small map with two opponents.  Expect to find other Civs rather quickly and for Conquest games to go more quickly.</Japanese>
+		<Chinese>A very small map with two opponents.  Expect to find other Civs rather quickly and for Conquest games to go more quickly.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_WORLDSIZE_SMALL_HELP</Tag>
@@ -101,6 +133,9 @@
 		<German>Eine etwas gr&#246;&#223;ere Karte mit 4 Gegnern.</German>
 		<Italian>Una mappa leggermente pi&#249; grande, studiata per ospitare fino a quattro rivali per te.</Italian>
 		<Spanish>Un mapa algo mayor, con el tama&#241;o justo para albergar a cuatro rivales.</Spanish>
+		<Russian>A slightly larger map sized to have 4 opponents for you.</Russian>
+		<Japanese>A slightly larger map sized to have 4 opponents for you.</Japanese>
+		<Chinese>A slightly larger map sized to have 4 opponents for you.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_WORLDSIZE_STANDARD_HELP</Tag>
@@ -109,6 +144,9 @@
 		<German>Eine Standardkarte f&#252;r bis zu 7 Zivilisationen. Sie haben zahlreiche Erkundungsm&#246;glichkeiten, bleiben aber nicht allzu lange allein.</German>
 		<Italian>Questa &#232; la mappa predefinita, disegnata per ospitare un totale di sette civilt&#224;. Ci sono molte opportunit&#224; di esplorazione, ma presto non ti sentirai pi&#249; solo.</Italian>
 		<Spanish>Este mapa es la elecci&#243;n predeterminada y est&#225; dise&#241;ado para albergar a siete civilizaciones en total.  Hay muchas posibilidades de explorar, pero es posible que no tard&#233;is mucho en dejar de sentiros solo.</Spanish>
+		<Russian>This map size is the default choice and is designed to have 7 total Civs.  There's a lot of opportunity for exploration but you shouldn't feel alone for very long.</Russian>
+		<Japanese>This map size is the default choice and is designed to have 7 total Civs.  There's a lot of opportunity for exploration but you shouldn't feel alone for very long.</Japanese>
+		<Chinese>This map size is the default choice and is designed to have 7 total Civs.  There's a lot of opportunity for exploration but you shouldn't feel alone for very long.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_WORLDSIZE_LARGE_HELP</Tag>
@@ -117,6 +155,9 @@
 		<German>F&#252;r Spieler, die gerne etwas mehr Platz haben, um sich auszubreiten. Diese Karte bietet Platz f&#252;r bis zu 9 Zivilisationen.</German>
 		<Italian>Per gente che vuole spazio per espandersi ed esplorare. Questa mappa supporta tranquillamente fino a nove civilt&#224;.</Italian>
 		<Spanish>Para los que quieran tener m&#225;s espacio que explorar y por el que expandirse.  El tama&#241;o de este mapa permite albergar nueve civilizaciones con facilidad.</Spanish>
+		<Russian>For people who want to have some extra room to spread out and explore.  This map size will support 9 Civs comfortably.</Russian>
+		<Japanese>For people who want to have some extra room to spread out and explore.  This map size will support 9 Civs comfortably.</Japanese>
+		<Chinese>For people who want to have some extra room to spread out and explore.  This map size will support 9 Civs comfortably.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_WORLDSIZE_HUGE_HELP</Tag>
@@ -125,8 +166,10 @@
 		<German>Wenn Sie eine unvergessliche Erfahrung suchen, ist diese Karte Ihre erste Wahl. Immerhin treffen Sie hier auf bis zu 10 Gegner!</German>
 		<Italian>Se sei alla ricerca di un'esperienza davvero epica, la dimensione di questa mappa &#232; quello che fa per te, poich&#233; oltre a te c'&#232; posto per altri dieci rivali.</Italian>
 		<Spanish>Si quer&#233;is una experiencia &#233;pica de verdad, el tama&#241;o de este mapa es lo que and&#225;is buscando.  Tiene espacio suficiente para vos y para otros diez rivales.</Spanish>
+		<Russian>If you are looking for a truly epic experience, this map size is for you.  It has room for you and 10 opponents.</Russian>
+		<Japanese>If you are looking for a truly epic experience, this map size is for you.  It has room for you and 10 opponents.</Japanese>
+		<Chinese>If you are looking for a truly epic experience, this map size is for you.  It has room for you and 10 opponents.</Chinese>
 	</TEXT>
-	<!-- SEALEVELINFO - HELP -->
 	<TEXT>
 		<Tag>TXT_KEY_SEALEVEL_LOW_HELP</Tag>
 		<English>When the sea level is low, large continents will appear on the map.</English>
@@ -134,6 +177,9 @@
 		<German>Ist der Meeresspiegel niedrig, erscheinen auf der Karte gro&#223;e Kontinente.</German>
 		<Italian>Quando il livello delle acque del mare &#232; basso, sulla mappa appaiono grandi continenti.</Italian>
 		<Spanish>Cuando el nivel del mar es bajo, aparecen en el mapa grandes continentes.</Spanish>
+		<Russian>When the sea level is low, large continents will appear on the map.</Russian>
+		<Japanese>When the sea level is low, large continents will appear on the map.</Japanese>
+		<Chinese>When the sea level is low, large continents will appear on the map.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_SEALEVEL_MEDIUM_HELP</Tag>
@@ -142,6 +188,9 @@
 		<German>Die Standardeinstellung mit einer normalen Kombination aus Wasser und Land.</German>
 		<Italian>Questa &#232; l'impostazione predefinita per le normali quantit&#224; di terra e acqua. </Italian>
 		<Spanish>&#201;ste es el ajuste predeterminado, con la mezcla normal de agua y tierra.</Spanish>
+		<Russian>This is the default setting with the normal mix of land and water.</Russian>
+		<Japanese>This is the default setting with the normal mix of land and water.</Japanese>
+		<Chinese>This is the default setting with the normal mix of land and water.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_SEALEVEL_HIGH_HELP</Tag>
@@ -150,8 +199,10 @@
 		<German>Wenn Sie auf einer Hochseekarte mit vielen Inseln spielen, brauchen Sie eine starke Flotte!</German>
 		<Italian>Avrai bisogno di una flotta molto potente per affrontare l'alto mare e raggiungere la moltitudine di isole.</Italian>
 		<Spanish>Necesitar&#233;is una gran armada para jugar con todos estos mares e islas.</Spanish>
+		<Russian>You will need a strong Navy when playing with high seas and lots of islands.</Russian>
+		<Japanese>You will need a strong Navy when playing with high seas and lots of islands.</Japanese>
+		<Chinese>You will need a strong Navy when playing with high seas and lots of islands.</Chinese>
 	</TEXT>
-	<!-- CLIMATE INFO TEXT -->
 	<TEXT>
 		<Tag>TXT_KEY_CLIMATE_TEMPERATE_HELP</Tag>
 		<English>This is the default Climate.  Everything is balanced exactly as designed for the world type chosen.</English>
@@ -159,6 +210,9 @@
 		<German>Das Standardklima. Alles ist exakt auf die gew&#228;hlte Welt ausgerichtet.</German>
 		<Italian>Questo &#232; il clima predefinito: tutto &#232; bilanciato esattamente sul tipo di mondo scelto.</Italian>
 		<Spanish>&#201;ste es el clima predeterminado.  Todo est&#225; equilibrado exactamente para el tipo de mundo escogido.</Spanish>
+		<Russian>This is the default Climate.  Everything is balanced exactly as designed for the world type chosen.</Russian>
+		<Japanese>This is the default Climate.  Everything is balanced exactly as designed for the world type chosen.</Japanese>
+		<Chinese>This is the default Climate.  Everything is balanced exactly as designed for the world type chosen.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_CLIMATE_TROPICAL_HELP</Tag>
@@ -167,14 +221,20 @@
 		<German>Das Klima ist w&#228;rmer und feuchter. Rechnen Sie also mit zahlreichen Urw&#228;ldern. Ihre Bautrupps haben auf den fruchtbaren B&#246;den alle H&#228;nde voll zu tun.</German>
 		<Italian>Questo clima &#232; pi&#249; caldo e umido, perci&#242; dovrai affrontare molte giungle. I tuoi lavoratori avranno molto da fare, ma il suolo &#232; molto ricco di risorse.</Italian>
 		<Spanish>Este clima es m&#225;s c&#225;lido y h&#250;medo, as&#237; que os encontrar&#233;is muchas selvas.  Vuestros trabajadores estar&#225;n ataread&#237;simos gracias a la f&#233;rtil tierra que pisan.</Spanish>
+		<Russian>This climate is warmer and wetter so expect to see a lot more jungle.  Your workers will have their hands full but there is rich soil underneath.</Russian>
+		<Japanese>This climate is warmer and wetter so expect to see a lot more jungle.  Your workers will have their hands full but there is rich soil underneath.</Japanese>
+		<Chinese>This climate is warmer and wetter so expect to see a lot more jungle.  Your workers will have their hands full but there is rich soil underneath.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_CLIMATE_ARID_HELP</Tag>
 		<English>A warm and dry climate means you will have to contend with more deserts.  You will want to settle along rivers and take advantage of the flood plains.</English>
 		<French>Un climat chaud et sec entra&#238;ne une plus grande proportion de d&#233;serts. Il faudra vous installer pr&#232;s des rivi&#232;res et tirer profit des plaines inondables.</French>
-		<German>Angesichts des warmen und trockenen Klimas sollten Sie mit zahlreichen W&#252;sten rechnen. Gr&#252;nden Sie Ihre St&#228;dte an Fl&#252;ssen und nutzen Sie auch Sumpfgebiete.</German>
+		<German>Angesichts des warmen und trockenen Klimas sollten Sie mit zahlreichen W&#252;sten rechnen. Gr&#252;nden Sie Ihre St&#228;dte an Fl&#252;ssen und nutzen Sie auch Schwemmland.</German>
 		<Italian>Un clima asciutto e temperato significa avere a che fare con pi&#249; deserti. Dovrai colonizzare le rive dei fiumi e trarre vantaggio dalle pianure allagate.</Italian>
 		<Spanish>Un clima m&#225;s c&#225;lido y seco supone que tendr&#233;is que v&#233;roslas con m&#225;s desiertos.  Os convendr&#225; instalaros junto a r&#237;os y aprovechar al m&#225;ximo los terrenos de aluvi&#243;n.</Spanish>
+		<Russian>A warm and dry climate means you will have to contend with more deserts.  You will want to settle along rivers and take advantage of the flood plains.</Russian>
+		<Japanese>A warm and dry climate means you will have to contend with more deserts.  You will want to settle along rivers and take advantage of the flood plains.</Japanese>
+		<Chinese>A warm and dry climate means you will have to contend with more deserts.  You will want to settle along rivers and take advantage of the flood plains.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_CLIMATE_ROCKY_HELP</Tag>
@@ -183,6 +243,9 @@
 		<German>W&#228;hlen Sie dieses Klima, ist das Gel&#228;nde vergleichsweise gebirgig. Ihre Zivilisation w&#228;chst also nur langsam, muss sich aber keine Sorgen um fehlende mineralische Ressourcen machen.</German>
 		<Italian>Scegliendo questo clima, ti troverai ad affrontare pi&#249; colline e montagne; ci&#242; significa che la crescita potrebbe risultare pi&#249; difficile, ma non dovrebbe esserci carenza di risorse minerarie.</Italian>
 		<Spanish>Cuando elij&#225;is este clima encontrar&#233;is m&#225;s colinas y monta&#241;as.  Eso supone que el crecimiento ser&#225; m&#225;s dif&#237;cil, aunque no habr&#225; escasez de recursos minerales.</Spanish>
+		<Russian>You will find many more hills and mountains when you choose this climate.  That means growth may be tougher but there should be no shortage of mineral resources.</Russian>
+		<Japanese>You will find many more hills and mountains when you choose this climate.  That means growth may be tougher but there should be no shortage of mineral resources.</Japanese>
+		<Chinese>You will find many more hills and mountains when you choose this climate.  That means growth may be tougher but there should be no shortage of mineral resources.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_CLIMATE_COLD_HELP</Tag>
@@ -191,8 +254,10 @@
 		<German>Entscheiden Sie sich f&#252;r dieses Klima, ist die Tundra die vorherrschende Landschaftsform.</German>
 		<Italian>Con questo clima, aspettati di trovare vaste aree di tundra.</Italian>
 		<Spanish>Encontrar&#233;is un exceso de tundra en este tipo de clima.  </Spanish>
+		<Russian>Expect to find an excess of tundra in this climate type.  </Russian>
+		<Japanese>Expect to find an excess of tundra in this climate type.  </Japanese>
+		<Chinese>Expect to find an excess of tundra in this climate type.  </Chinese>
 	</TEXT>
-	<!--GAMESPEEDINFO - HELP-->
 	<TEXT>
 		<Tag>TXT_KEY_GAMESPEED_EPIC_HELP</Tag>
 		<English>Experience the full sweep of time when you choose this speed.  The game is balanced to take longer but still feel like a normal game.</English>
@@ -200,6 +265,9 @@
 		<German>W&#228;hlen Sie diese Geschwindigkeit, erleben Sie die gesamte Zeitspanne. Das Spiel dauert dadurch zwar l&#228;nger, ist aber trotzdem ausgewogen.</German>
 		<Italian>Scegliendo questa velocit&#224;, potrai provare l'esperienza dello scorrere del tempo. Il gioco &#232; bilanciato per durare pi&#249; a lungo, ma avrai la sensazione di giocare una partita normale.</Italian>
 		<Spanish>Experimentar&#233;is todo el transcurso del tiempo si escog&#233;is esta velocidad.  La partida est&#225; equilibrada para durar m&#225;s, aunque seguir&#225; pareciendo normal.</Spanish>
+		<Russian>Experience the full sweep of time when you choose this speed.  The game is balanced to take longer but still feel like a normal game.</Russian>
+		<Japanese>Experience the full sweep of time when you choose this speed.  The game is balanced to take longer but still feel like a normal game.</Japanese>
+		<Chinese>Experience the full sweep of time when you choose this speed.  The game is balanced to take longer but still feel like a normal game.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GAMESPEED_NORMAL_HELP</Tag>
@@ -208,6 +276,9 @@
 		<German>Die traditionelle Spielgeschwindigkeit von Civilization.</German>
 		<Italian>Questa &#232; la velocit&#224; di gioco tradizionale di Civilization.</Italian>
 		<Spanish>Es la velocidad de juego tradicional del Civi.</Spanish>
+		<Russian>This is the traditional game speed for Civ.</Russian>
+		<Japanese>This is the traditional game speed for Civ.</Japanese>
+		<Chinese>This is the traditional game speed for Civ.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GAMESPEED_QUICK_HELP</Tag>
@@ -216,8 +287,10 @@
 		<German>W&#228;hlen Sie diese Geschwindigkeit, l&#228;uft das Spiel etwas schneller. Es ist dadurch zwar schneller vorbei, aber trotzdem ausgewogen.</German>
 		<Italian>Scegli questa opzione per avviare una partita nella quale le cose avvengono pi&#249; rapidamente. La partita sar&#224; pi&#249; veloce, ma bilanciata in modo da sembrare una partita normale.</Italian>
 		<Spanish>Escoged &#233;sta si quer&#233;is una partida en la que todo suceda un poco m&#225;s deprisa.  La partida ser&#225; m&#225;s r&#225;pida pero estar&#225; equilibrada para seguir pareciendo normal.</Spanish>
+		<Russian>Choose this for a game where everything happens a bit quicker.  The game will be faster but is balanced to still feel like a normal game.</Russian>
+		<Japanese>Choose this for a game where everything happens a bit quicker.  The game will be faster but is balanced to still feel like a normal game.</Japanese>
+		<Chinese>Choose this for a game where everything happens a bit quicker.  The game will be faster but is balanced to still feel like a normal game.</Chinese>
 	</TEXT>
-	<!--AUTOMATEINFO - HELP-->
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_AUTOMATE_BUILD_HELP</Tag>
 		<English>Automate all [COLOR_UNIT_TEXT]Worker[COLOR_REVERT] actions. The unit will continue working until you cancel its automation.</English>
@@ -225,6 +298,9 @@
 		<German>Automatisiert alle Aktionen Ihres [COLOR_UNIT_TEXT]Bautrupps[COLOR_REVERT]. Die Einheit arbeitet, bis Sie die Automatisierung beenden.</German>
 		<Italian>Automatizza tutte le azioni del [COLOR_UNIT_TEXT]lavoratore[COLOR_REVERT]. L'unit&#224; continuer&#224; a lavorare finch&#233; non annullerai l'automazione.</Italian>
 		<Spanish>Automatizar todas las acciones del [COLOR_UNIT_TEXT]Trabajador[COLOR_REVERT]. La unidad seguir&#225; trabajando hasta que cancel&#233;is la automatizaci&#243;n.</Spanish>
+		<Russian>Automate all [COLOR_UNIT_TEXT]Worker[COLOR_REVERT] actions. The unit will continue working until you cancel its automation.</Russian>
+		<Japanese>Automate all [COLOR_UNIT_TEXT]Worker[COLOR_REVERT] actions. The unit will continue working until you cancel its automation.</Japanese>
+		<Chinese>Automate all [COLOR_UNIT_TEXT]Worker[COLOR_REVERT] actions. The unit will continue working until you cancel its automation.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_AUTOMATE_NETWORK_HELP</Tag>
@@ -233,6 +309,9 @@
 		<German>Die Einheit verbindet alle St&#228;dte und Ressourcen &#252;ber ein Handelsnetz und arbeitet weiter, bis Sie die Automatisierung beenden.</German>
 		<Italian>L'unit&#224; creer&#224; una rete commerciale per collegare tutte le tue citt&#224; e le risorse e continuer&#224; a lavorare finch&#233; non annullerai l'automazione.</Italian>
 		<Spanish>La unidad crear&#225; una red comercial que comunicar&#225; todas vuestras ciudades y recursos. Seguir&#225; trabajando hasta que cancel&#233;is la automatizaci&#243;n.</Spanish>
+		<Russian>The unit will create a trade network connecting all your cities and resources. It will continue working until you cancel its automation.</Russian>
+		<Japanese>The unit will create a trade network connecting all your cities and resources. It will continue working until you cancel its automation.</Japanese>
+		<Chinese>The unit will create a trade network connecting all your cities and resources. It will continue working until you cancel its automation.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_AUTOMATE_CITY_HELP</Tag>
@@ -241,6 +320,9 @@
 		<German>Die Einheit modernisiert nur die n&#228;chstgelegene Stadt und arbeitet weiter, bis Sie die Automatisierung beenden.</German>
 		<Italian>L'unit&#224; migliorer&#224; solamente la citt&#224; pi&#249; vicina e continuer&#224; a lavorare finch&#233; non annullerai l'automazione.</Italian>
 		<Spanish>La unidad solo mejorar&#225; la ciudad que tenga m&#225;s cerca. Seguir&#225; trabajando hasta que cancel&#233;is la automatizaci&#243;n.</Spanish>
+		<Russian>The unit will improve its closest city only. It will continue working until you cancel its automation.</Russian>
+		<Japanese>The unit will improve its closest city only. It will continue working until you cancel its automation.</Japanese>
+		<Chinese>The unit will improve its closest city only. It will continue working until you cancel its automation.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_AUTOMATE_EXPLORE_HELP</Tag>
@@ -249,8 +331,10 @@
 		<German>Erteilen Sie einer Einheit diesen Befehl, erforscht diese alle unbekannten Gebiete, bis sie auch den entlegensten Winkel der Karte erkundet hat.</German>
 		<Italian>Questo ordine comanda all'unit&#224; di esplorare le regioni ancora inesplorate della mappa. L'unit&#224; continuer&#224; a muoversi finch&#233; ci saranno luoghi da esplorare.</Italian>
 		<Spanish>Con esta orden le dec&#237;s a la unidad que explore las zonas del mapa que est&#233;n sin cartografiar. Seguir&#225; movi&#233;ndose hasta que se quede sin lugares que explorar.</Spanish>
+		<Russian>This order tells the unit to explore the uncharted regions on the map. The unit will continue to move until it has run out of places to explore.</Russian>
+		<Japanese>This order tells the unit to explore the uncharted regions on the map. The unit will continue to move until it has run out of places to explore.</Japanese>
+		<Chinese>This order tells the unit to explore the uncharted regions on the map. The unit will continue to move until it has run out of places to explore.</Chinese>
 	</TEXT>
-	<!-- CONTROLINFO - HELP-->
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_CONTROL_CENTER_SELECTION_HELP</Tag>
 		<English>Centers camera on the selected unit.</English>
@@ -258,6 +342,9 @@
 		<German>Zentriert die Kamera &#252;ber der gew&#228;hlten Einheit.</German>
 		<Italian>Centra la visuale sull'unit&#224; selezionata.</Italian>
 		<Spanish>Centra la c&#225;mara en la unidad seleccionada.</Spanish>
+		<Russian>Centers camera on the selected unit.</Russian>
+		<Japanese>Centers camera on the selected unit.</Japanese>
+		<Chinese>Centers camera on the selected unit.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_CONTROL_NEXT_CITY_HELP</Tag>
@@ -266,6 +353,9 @@
 		<German>Zum n&#228;chsten Stadt-Bildschirm.</German>
 		<Italian>Scorre alla schermata della citt&#224; successiva.</Italian>
 		<Spanish>Para pasar a la siguiente pantalla de ciudad.</Spanish>
+		<Russian>Cycle to the next city screen.</Russian>
+		<Japanese>Cycle to the next city screen.</Japanese>
+		<Chinese>Cycle to the next city screen.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_CONTROL_PREVIOUS_CITY_HELP</Tag>
@@ -274,6 +364,9 @@
 		<German>Zum vorherigen Stadt-Bildschirm.</German>
 		<Italian>Scorre alla schermata della citt&#224; precedente.</Italian>
 		<Spanish>Para pasar a la anterior pantalla de ciudad.</Spanish>
+		<Russian>Cycle to previous city screen.</Russian>
+		<Japanese>Cycle to previous city screen.</Japanese>
+		<Chinese>Cycle to previous city screen.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_CONTROL_NEXT_PLOT_UNIT_HELP</Tag>
@@ -282,6 +375,9 @@
 		<German>Zur n&#228;chsten Einheit auf dem Gel&#228;ndefeld.</German>
 		<Italian>Passa la selezione dell'unit&#224; a quella successiva sulla casella.</Italian>
 		<Spanish>La unidad seleccionada pasa a ser la siguiente en la casilla.</Spanish>
+		<Russian>Cycle unit selection to the next unit on the plot.</Russian>
+		<Japanese>Cycle unit selection to the next unit on the plot.</Japanese>
+		<Chinese>Cycle unit selection to the next unit on the plot.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_CONTROL_PREVIOUS_PLOT_UNIT_HELP</Tag>
@@ -290,6 +386,9 @@
 		<German>Zur vorherigen Einheit auf dem Gel&#228;ndefeld.</German>
 		<Italian>Passa la selezione dell'unit&#224; a quella precedente sulla casella.</Italian>
 		<Spanish>La unidad seleccionada pasa a ser la anterior en la casilla.</Spanish>
+		<Russian>Cycle unit selection to the previous unit on the plot.</Russian>
+		<Japanese>Cycle unit selection to the previous unit on the plot.</Japanese>
+		<Chinese>Cycle unit selection to the previous unit on the plot.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_CONTROL_CYCLES_UNIT_HELP</Tag>
@@ -298,6 +397,9 @@
 		<German>Zu einer Einheit, die in der aktuellen Runde noch eine Aktion ausf&#252;hren muss.</German>
 		<Italian>Passa la selezione dell'unit&#224; a una che deve ancora compiere un'azione in questo turno.</Italian>
 		<Spanish>La unidad seleccionada pasa a ser una que a&#250;n tenga que realizar una acci&#243;n en este turno.</Spanish>
+		<Russian>Cycle unit selection to one that still needs to perform an action this turn.</Russian>
+		<Japanese>Cycle unit selection to one that still needs to perform an action this turn.</Japanese>
+		<Chinese>Cycle unit selection to one that still needs to perform an action this turn.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_CONTROL_CYCLE_UNIT_ALT_HELP</Tag>
@@ -306,6 +408,9 @@
 		<German>Zu einer Einheit, die in der aktuellen Runde noch eine Aktion ausf&#252;hren muss.</German>
 		<Italian>Passa dall'unit&#224; selezionata a una che deve ancora compiere azioni durante questo turno.</Italian>
 		<Spanish>La unidad seleccionada pasa a ser una que a&#250;n tenga que realizar una acci&#243;n en este turno.</Spanish>
+		<Russian>Cycle unit selection to one that still needs to perform an action this turn.</Russian>
+		<Japanese>Cycle unit selection to one that still needs to perform an action this turn.</Japanese>
+		<Chinese>Cycle unit selection to one that still needs to perform an action this turn.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_CONTROL_WORKERS_HELP</Tag>
@@ -314,6 +419,9 @@
 		<German>Zu einem Bautrupp, der in dieser Runde noch eine Aktion ausf&#252;hren muss.</German>
 		<Italian>Passa la selezione dell'unit&#224; a lavoratore che deve ancora compiere un'azione in questo turno.</Italian>
 		<Spanish>La unidad seleccionada pasa a ser un Trabajador que a&#250;n tenga que realizar una acci&#243;n en este turno.</Spanish>
+		<Russian>Cycle unit selection to a worker that still needs to perform an action this turn.</Russian>
+		<Japanese>Cycle unit selection to a worker that still needs to perform an action this turn.</Japanese>
+		<Chinese>Cycle unit selection to a worker that still needs to perform an action this turn.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_CONTROL_ENDTURN_HELP</Tag>
@@ -322,6 +430,9 @@
 		<German>Runde beenden.</German>
 		<Italian>Termina il tuo turno</Italian>
 		<Spanish>Para terminar el turno.</Spanish>
+		<Russian>End your turn</Russian>
+		<Japanese>End your turn</Japanese>
+		<Chinese>End your turn</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_CONTROL_ENDTURN_ALT_HELP</Tag>
@@ -330,6 +441,9 @@
 		<German>Runde beenden.</German>
 		<Italian>Termina il tuo turno</Italian>
 		<Spanish>Para terminar el turno.</Spanish>
+		<Russian>End your turn</Russian>
+		<Japanese>End your turn</Japanese>
+		<Chinese>End your turn</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_CONTROL_FORCE_ENDTURN_HELP</Tag>
@@ -338,6 +452,9 @@
 		<German>Runde beenden, obwohl m&#246;glicherweise noch Einheiten auf Befehle warten.</German>
 		<Italian>Impone la fine del turno, anche se ci sono ancora unit&#224; che devono ricevere ordini.</Italian>
 		<Spanish>Para hacer que termine el turno aunque a&#250;n haya unidades que tengan que recibir &#243;rdenes.</Spanish>
+		<Russian>Forces the turn to end even though units may still need to receive orders</Russian>
+		<Japanese>Forces the turn to end even though units may still need to receive orders</Japanese>
+		<Chinese>Forces the turn to end even though units may still need to receive orders</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_CONTROL_AUTOMOVES_HELP</Tag>
@@ -346,6 +463,9 @@
 		<German>Zwingt alle Einheiten mit offenen Aktionen, diese auszuf&#252;hren.</German>
 		<Italian>Impone a tutte le unit&#224; con azioni in coda a compiere i propri movimenti.</Italian>
 		<Spanish>Para obligar a todas las unidades con acciones en cola a que hagan sus movimientos.</Spanish>
+		<Russian>Forces all units with queued actions to make their moves</Russian>
+		<Japanese>Forces all units with queued actions to make their moves</Japanese>
+		<Chinese>Forces all units with queued actions to make their moves</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_SHOW_RELIGION_SCREEN_HELP</Tag>
@@ -354,6 +474,9 @@
 		<German>Religionen-Bildschirm einblenden.</German>
 		<Italian>Visualizza la schermata della religione.</Italian>
 		<Spanish>Muestra la pantalla de religi&#243;n.</Spanish>
+		<Russian>Display the Religion Screen</Russian>
+		<Japanese>Display the Religion Screen</Japanese>
+		<Chinese>Display the Religion Screen</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_SHOW_CIVICS_SCREEN_HELP</Tag>
@@ -362,6 +485,9 @@
 		<German>Staatsformen-Bildschirm einblenden.</German>
 		<Italian>Visualizza la schermata della politica.</Italian>
 		<Spanish>Muestra la pantalla de principios.</Spanish>
+		<Russian>Display the Civics Screen</Russian>
+		<Japanese>Display the Civics Screen</Japanese>
+		<Chinese>Display the Civics Screen</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_PING_HELP</Tag>
@@ -370,6 +496,9 @@
 		<German>Pingen Sie ein Gel&#228;ndefeld an, um Ihre Mitstreiter darauf aufmerksam zu machen.</German>
 		<Italian>Segnala un punto per richiamare l'attenzione dei tuoi compagni di squadra.</Italian>
 		<Spanish>Hac&#233;is que destaque una casilla para llamar la atenci&#243;n sobre ella a vuestros compa&#241;eros de equipo.</Spanish>
+		<Russian>Ping a plot to bring it to the attention of your team mates</Russian>
+		<Japanese>Ping a plot to bring it to the attention of your team mates</Japanese>
+		<Chinese>Ping a plot to bring it to the attention of your team mates</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_GRID_HELP</Tag>
@@ -378,6 +507,9 @@
 		<German>Rasterlinien ein-/ausblenden.</German>
 		<Italian>Attiva/disattiva la griglia</Italian>
 		<Spanish>Activar cuadr&#237;cula</Spanish>
+		<Russian>Toggle Gridlines On / Off</Russian>
+		<Japanese>Toggle Gridlines On / Off</Japanese>
+		<Chinese>Toggle Gridlines On / Off</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_BARE_MAP_HELP</Tag>
@@ -386,14 +518,20 @@
 		<German>Erleichtert die Sicht auf die Landschaft.</German>
 		<Italian>Agevola la visione del panorama.</Italian>
 		<Spanish>Hace que ver el paisaje sea m&#225;s f&#225;cil</Spanish>
+		<Russian>Makes it easier to see the landscape</Russian>
+		<Japanese>Makes it easier to see the landscape</Japanese>
+		<Chinese>Makes it easier to see the landscape</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_YIELDS_HELP</Tag>
 		<English>Toggle Food / Production / Commerce icon visibility</English>
-		<French>Alterner entre l'affichage des icones Nourriture / Production / Commerce</French>
+		<French>Alterner entre l'affichage des ic&#244;nes Nourriture / Production / Commerce</French>
 		<German>Nahrungs-/Produktions-/Wirtschaftssymbole ein-/ausblenden.</German>
 		<Italian>Attiva/disattiva la visibilit&#224; delle icone Cibo/Produzione/Commercio.</Italian>
 		<Spanish>Activa la visibilidad de iconos de alimentos / producci&#243;n / comercio</Spanish>
+		<Russian>Toggle Food / Production / Commerce icon visibility</Russian>
+		<Japanese>Toggle Food / Production / Commerce icon visibility</Japanese>
+		<Chinese>Toggle Food / Production / Commerce icon visibility</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_SHOW_RESOURCES_HELP</Tag>
@@ -402,6 +540,9 @@
 		<German>Erleichtert die Suche nach Ressourcen.</German>
 		<Italian>Agevola la ricerca di risorse.</Italian>
 		<Spanish>Hace que sea m&#225;s f&#225;cil encontrar recursos</Spanish>
+		<Russian>Makes finding resources easier</Russian>
+		<Japanese>Makes finding resources easier</Japanese>
+		<Chinese>Makes finding resources easier</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_SCORES_HELP</Tag>
@@ -410,6 +551,9 @@
 		<German>Punktestand ein-/ausblenden.</German>
 		<Italian>Attiva/disattiva la visibilit&#224; del punteggio.</Italian>
 		<Spanish>Activa la visibilidad de la puntuaci&#243;n</Spanish>
+		<Russian>Toggle Score Visibility</Russian>
+		<Japanese>Toggle Score Visibility</Japanese>
+		<Chinese>Toggle Score Visibility</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_CONTROL_LOAD_GAME_HELP</Tag>
@@ -418,6 +562,9 @@
 		<German>Laden-Bildschirm einblenden.</German>
 		<Italian>Visualizza la schermata di caricamento della partita.</Italian>
 		<Spanish>Muestra la pantalla de cargar partida</Spanish>
+		<Russian>Display the Load Game Screen</Russian>
+		<Japanese>Display the Load Game Screen</Japanese>
+		<Chinese>Display the Load Game Screen</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_CONTROL_OPTIONS_SCREEN_HELP</Tag>
@@ -426,6 +573,9 @@
 		<German>Optionen-Bildschirm aufrufen.</German>
 		<Italian>Mostra la schermata delle opzioni.</Italian>
 		<Spanish>Muestra la pantalla de opciones.</Spanish>
+		<Russian>Display the Options Screen</Russian>
+		<Japanese>Display the Options Screen</Japanese>
+		<Chinese>Display the Options Screen</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_CONTROL_RETIRE_HELP</Tag>
@@ -434,6 +584,9 @@
 		<German>Spiel beenden. Im Multiplayer-Modus &#252;bernimmt in diesem Fall die KI die Zivilisation des entsprechenden Spielers.</German>
 		<Italian>Ritirati dal gioco. Se ci si ritira durante una partita in multigiocatore, l'IA rilever&#224; la civilt&#224; del giocatore.</Italian>
 		<Spanish>Para retirarse de la partida. Cuando se haga en multijugador, la IA llevar&#225; a la civilizaci&#243;n del jugador que abandone.</Spanish>
+		<Russian>Retire from the game. When done in multiplayer, the AI will take over the player's Civilization.</Russian>
+		<Japanese>Retire from the game. When done in multiplayer, the AI will take over the player's Civilization.</Japanese>
+		<Chinese>Retire from the game. When done in multiplayer, the AI will take over the player's Civilization.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_CONTROL_SAVE_GROUP_HELP</Tag>
@@ -442,6 +595,9 @@
 		<German>Spiel auf allen Computern speichern (Multiplayer-Modus).</German>
 		<Italian>Salva la partita su tutti i computer (per il multiplayer).</Italian>
 		<Spanish>Guarda la partida en todos los ordenadores (para multijugador)</Spanish>
+		<Russian>Save the Game on all computers (for multi-player)</Russian>
+		<Japanese>Save the Game on all computers (for multi-player)</Japanese>
+		<Chinese>Save the Game on all computers (for multi-player)</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_CONTROL_SAVE_GAME_HELP</Tag>
@@ -450,8 +606,10 @@
 		<German>Spiel speichern.</German>
 		<Italian>Salva la partita</Italian>
 		<Spanish>Guarda la partida</Spanish>
+		<Russian>Save the Game</Russian>
+		<Japanese>Save the Game</Japanese>
+		<Chinese>Save the Game</Chinese>
 	</TEXT>
-	<!-- COMMANDINFO - HELP-->
 	<TEXT>
 		<Tag>TXT_KEY_COMMAND_WAKE_HELP</Tag>
 		<English>This will wake the unit up so that it can be issued orders. Waking a unit does not remove its fortification bonus.</English>
@@ -459,6 +617,9 @@
 		<German>Wecken Sie eine Einheit auf und erteilen Sie ihr Befehle. Die Einheit verliert dadurch nicht ihren Befestigungsbonus.</German>
 		<Italian>Questo comando sveglier&#224; l'unit&#224;, in modo che possa ricevere ordini. Svegliando un'unit&#224; non si perde il bonus della sua fortificazione.</Italian>
 		<Spanish>Esto despertar&#225; a la unidad para que se le puedan dar &#243;rdenes. Despertar a una unidad no elimina las bonificaciones que tenga por fortificaci&#243;n.</Spanish>
+		<Russian>This will wake the unit up so that it can be issued orders. Waking a unit does not remove its fortification bonus.</Russian>
+		<Japanese>This will wake the unit up so that it can be issued orders. Waking a unit does not remove its fortification bonus.</Japanese>
+		<Chinese>This will wake the unit up so that it can be issued orders. Waking a unit does not remove its fortification bonus.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMMAND_CANCEL_HELP</Tag>
@@ -467,6 +628,9 @@
 		<German>L&#246;schen Sie den letzten Befehl in der Befehlsliste der Einheit. Haben Sie dieser versehentlich einen falschen Befehl erteilt, ist diese Funktion sehr n&#252;tzlich.</German>
 		<Italian>Questo comando annulla l'ultimo ordine nella coda delle azioni dell'unit&#224;. Estremamente utile se si sbaglia a impostare la coda degli ordini.</Italian>
 		<Spanish>Esto cancelar&#225; la &#250;ltima orden en la cola de &#243;rdenes de la unidad. Es muy &#250;til si pon&#233;is sin querer una orden incorrecta en la cola.</Spanish>
+		<Russian>This will cancel the last order in the unit's mission queue. You will find this to be very useful if you accidentally queue the wrong order.</Russian>
+		<Japanese>This will cancel the last order in the unit's mission queue. You will find this to be very useful if you accidentally queue the wrong order.</Japanese>
+		<Chinese>This will cancel the last order in the unit's mission queue. You will find this to be very useful if you accidentally queue the wrong order.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMMAND_CANCEL_ALL_HELP</Tag>
@@ -475,6 +639,9 @@
 		<German>L&#246;schen Sie alle Befehle der aktuellen Einheit.</German>
 		<Italian>Per annullare tutti gli ordini in coda dell'unit&#224; selezionata.</Italian>
 		<Spanish>Esto cancelar&#225; todas las &#243;rdenes que haya en cola para la unidad que teng&#225;is seleccionada.</Spanish>
+		<Russian>This will cancel all queued orders for the currently selected unit.</Russian>
+		<Japanese>This will cancel all queued orders for the currently selected unit.</Japanese>
+		<Chinese>This will cancel all queued orders for the currently selected unit.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMMAND_STOP_AUTOMATION_HELP</Tag>
@@ -483,6 +650,9 @@
 		<German>Widerrufen Sie den Automatisierungsbefehl der Einheit. Diese wartet anschlie&#223;end auf weitere Befehle. </German>
 		<Italian>Per annullare l'ordine di automazione di un'unit&#224; e riprenderne completamente il controllo.</Italian>
 		<Spanish>Sirve para cancelar la orden de automatizarse de la unidad. &#201;sta pasar&#225; a obedecer solo las &#243;rdenes que le deis.</Spanish>
+		<Russian>This will cancel the order for the unit to automate itself. It will then rely on you for all orders.</Russian>
+		<Japanese>This will cancel the order for the unit to automate itself. It will then rely on you for all orders.</Japanese>
+		<Chinese>This will cancel the order for the unit to automate itself. It will then rely on you for all orders.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMMAND_DELETE_HELP</Tag>
@@ -491,6 +661,9 @@
 		<German>Klicken Sie hier, um die Einheit aus dem Spiel zu entfernen.</German>
 		<Italian>Clicca su questo ordine per rimuovere l'unit&#224; dalla partita.</Italian>
 		<Spanish>Hacer clic en esta orden para eliminar a la unidad de la partida.</Spanish>
+		<Russian>Click on this order to remove the unit from play.</Russian>
+		<Japanese>Click on this order to remove the unit from play.</Japanese>
+		<Chinese>Click on this order to remove the unit from play.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMMAND_GIFT_HELP</Tag>
@@ -499,6 +672,9 @@
 		<German>&#220;bergeben Sie die aktuelle Einheit dem Spieler, der ihren Standort kontrolliert. M&#246;chten Sie die Einheit einem anderen Spieler &#252;bergeben, m&#252;ssen Sie sie zuerst in dessen Territorium verlegen.</German>
 		<Italian>Questo comando serve per consegnare l'unit&#224; attualmente selezionata al giocatore che controlla il territorio sul quale si trova l'unit&#224;. Per dare l'unit&#224; a un altro giocatore devi prima muovere l'unit&#224; nel territorio prescelto.</Italian>
 		<Spanish>Con esto le dar&#233;is la unidad seleccionada al jugador que controle la tierra en la que se encuentre dicha unidad. Para darle la unidad a otro jugador, antes tendr&#233;is que moverla a un territorio que le pertenezca.</Spanish>
+		<Russian>This will give the currently selected unit to the player who controls the land the unit is standing on. To give the unit to a different player you must first move the unit into their territory.</Russian>
+		<Japanese>This will give the currently selected unit to the player who controls the land the unit is standing on. To give the unit to a different player you must first move the unit into their territory.</Japanese>
+		<Chinese>This will give the currently selected unit to the player who controls the land the unit is standing on. To give the unit to a different player you must first move the unit into their territory.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMMAND_LOAD_HELP</Tag>
@@ -507,6 +683,9 @@
 		<German>Schicken Sie die Einheit in ein Transportschiff.</German>
 		<Italian>Per muovere un'unit&#224; a bordo di un trasporto.</Italian>
 		<Spanish>Con esto subir&#233;is la unidad a un transporte.</Spanish>
+		<Russian>This will move the unit into a transport.</Russian>
+		<Japanese>This will move the unit into a transport.</Japanese>
+		<Chinese>This will move the unit into a transport.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMMAND_UNLOAD_HELP</Tag>
@@ -515,6 +694,9 @@
 		<German>Entladen Sie eine zuvor eingeladene Einheit.</German>
 		<Italian>Per scaricare un'unit&#224; precedentemente caricata su un trasporto.</Italian>
 		<Spanish>Con esto bajar&#233;is del transporte a una unidad previamente embarcada en &#233;l.</Spanish>
+		<Russian>This will unload a previously loaded unit from its transport.</Russian>
+		<Japanese>This will unload a previously loaded unit from its transport.</Japanese>
+		<Chinese>This will unload a previously loaded unit from its transport.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMMAND_UNLOAD_ALL_HELP</Tag>
@@ -523,6 +705,9 @@
 		<German>Entladen Sie alle transportierten Einheiten.</German>
 		<Italian>Per scaricare tutte le unit&#224; a bordo del trasporto.</Italian>
 		<Spanish>Con esto desembarcar&#225;n todas las unidades transportadas.</Spanish>
+		<Russian>This will unload all transported units.</Russian>
+		<Japanese>This will unload all transported units.</Japanese>
+		<Chinese>This will unload all transported units.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMMAND_HOTKEY_HELP</Tag>
@@ -531,8 +716,10 @@
 		<German>Weisen Sie dieser Einheit eine Schnelltaste zu.</German>
 		<Italian>Ti permette di assegnare un tasto di scelta rapida a questa unit&#224;.</Italian>
 		<Spanish>Permite asignarle una tecla de acceso a esta unidad.</Spanish>
+		<Russian>Allows you to assign a hot-key to this unit.</Russian>
+		<Japanese>Allows you to assign a hot-key to this unit.</Japanese>
+		<Chinese>Allows you to assign a hot-key to this unit.</Chinese>
 	</TEXT>
-	<!-- MISSION TEXT -->
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_PATROL_TO_HELP</Tag>
 		<English>Set your unit to patrol (repeats a goto path indefinitely)</English>
@@ -540,6 +727,9 @@
 		<German>Versetzen Sie die Einheit in den Patrouillenmodus.</German>
 		<Italian>Ordina all'unit&#224; di pattugliare la zona (ripetendo lo stesso percorso a tempo indeterminato).</Italian>
 		<Spanish>Para poner la unidad a patrullar (recorrer indefinidamente un camino)</Spanish>
+		<Russian>Set your unit to patrol (repeats a goto path indefinitely)</Russian>
+		<Japanese>Set your unit to patrol (repeats a goto path indefinitely)</Japanese>
+		<Chinese>Set your unit to patrol (repeats a goto path indefinitely)</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_MOVE_TO_HELP</Tag>
@@ -548,6 +738,9 @@
 		<German>Schicken Sie Ihre Einheit auf ein bestimmtes Gel&#228;ndefeld.</German>
 		<Italian>Ordina alla tua unit&#224; di muoversi in una casella specifica.</Italian>
 		<Spanish>Para decirle a la unidad que vaya a una casilla concreta.</Spanish>
+		<Russian>Set your unit to move to a specific plot</Russian>
+		<Japanese>Set your unit to move to a specific plot</Japanese>
+		<Chinese>Set your unit to move to a specific plot</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_ROUTE_TO_HELP</Tag>
@@ -556,6 +749,9 @@
 		<German>Befehlen Sie einem Bautrupp, eine Stra&#223;e (oder Eisenbahnstrecke) zur gew&#228;hlten Position zu bauen. Ihr Bautrupp w&#228;hlt nun den k&#252;rzesten Weg und wartet nach dem Bau der Stra&#223;e/Eisenbahnstrecke auf weitere Befehle.</German>
 		<Italian>Con questo ordine, si obbliga un lavoratore a costruire una strada (o una ferrovia) nel luogo prescelto. Il lavoratore far&#224; il percorso pi&#249; breve per raggiungere il punto e si sveglier&#224; quando avr&#224; completato il proprio incarico.</Italian>
 		<Spanish>Con esta orden hac&#233;is que un trabajador construya una carretera (o ferrocarril) al lugar seleccionado. El trabajador seguir&#225; el camino m&#225;s corto hasta dicho lugar. Se despertar&#225; cuando haya cumplido su cometido.</Spanish>
+		<Russian>This order causes the worker to build a road (or railroad) to the location selected. The worker will follow the shortest path to the location. The worker wakes when it has completed the assignment.</Russian>
+		<Japanese>This order causes the worker to build a road (or railroad) to the location selected. The worker will follow the shortest path to the location. The worker wakes when it has completed the assignment.</Japanese>
+		<Chinese>This order causes the worker to build a road (or railroad) to the location selected. The worker will follow the shortest path to the location. The worker wakes when it has completed the assignment.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_MOVE_TO_UNIT_HELP</Tag>
@@ -564,6 +760,9 @@
 		<German>Schicken Sie Ihre Einheit zu einer anderen Einheit.</German>
 		<Italian>Ordina alla tua unit&#224; di muoversi verso un'altra unit&#224;.</Italian>
 		<Spanish>Para decirle a la unidad que vaya hasta otra unidad.</Spanish>
+		<Russian>Set your unit to move to a unit</Russian>
+		<Japanese>Set your unit to move to a unit</Japanese>
+		<Chinese>Set your unit to move to a unit</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_SKIP_HELP</Tag>
@@ -572,14 +771,20 @@
 		<German>Tun Sie gar nichts, wartet die Einheit in der n&#228;chsten Runde auf weitere Befehle.</German>
 		<Italian>Nessun ordine. L'unit&#224; si sveglier&#224; e attender&#224; altri ordini al turno successivo.</Italian>
 		<Spanish>La unidad no har&#225; nada, despertar&#225; y volver&#225; a solicitar &#243;rdenes al turno siguiente.</Spanish>
+		<Russian>Do nothing. The unit will awake and ask again for orders the next turn.</Russian>
+		<Japanese>Do nothing. The unit will awake and ask again for orders the next turn.</Japanese>
+		<Chinese>Do nothing. The unit will awake and ask again for orders the next turn.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_SLEEP_HELP</Tag>
 		<English>Order the unit to sleep until activated by the player</English>
-		<French>Ordonner &#224; l'unit&#233; de s emettre en sommeil tant qu'elle n'est pas r&#233;activ&#233;e par la joueur.</French>
+		<French>Ordonner &#224; l'unit&#233; de se mettre en sommeil tant qu'elle n'est pas r&#233;activ&#233;e par le joueur.</French>
 		<German>Versetzen Sie die Einheit in den Ausruhmodus, bis Sie sie wieder aktivieren.</German>
 		<Italian>Ordina all'unit&#224; di riposare finch&#233; non viene attivata dal giocatore</Italian>
 		<Spanish>Para ordenarle a la unidad que duerma hasta que la activ&#233;is.</Spanish>
+		<Russian>Order the unit to sleep until activated by the player</Russian>
+		<Japanese>Order the unit to sleep until activated by the player</Japanese>
+		<Chinese>Order the unit to sleep until activated by the player</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_FORTIFY_HELP</Tag>
@@ -588,6 +793,9 @@
 		<German>Die Einheit "gr&#228;bt sich ein", um dem Feind besser standhalten zu k&#246;nnen. Befestigte Einheiten erhalten pro Runde 5%% Defensivbonus (maximal 25%%).</German>
 		<Italian>L'unit&#224; si "trincera" per poter fronteggiare meglio l'attacco nemico. Un'unit&#224; guadagna il 5%% di bonus difensivo per ogni turno che rimane fortificata, fino a un massimo del 25%%.</Italian>
 		<Spanish>La unidad se "atrinchera" para aguantar mejor los ataques del enemigo. Obtiene una bonificaci&#243;n defensiva del 5%% por cada turno que se fortifique hasta un m&#225;ximo de un 25%%.</Spanish>
+		<Russian>The unit "digs in" to better withstand enemy attack. A unit gets a 5%% defensive bonus for each turn it is fortified, to a maximum bonus of 25%%.</Russian>
+		<Japanese>The unit "digs in" to better withstand enemy attack. A unit gets a 5%% defensive bonus for each turn it is fortified, to a maximum bonus of 25%%.</Japanese>
+		<Chinese>The unit "digs in" to better withstand enemy attack. A unit gets a 5%% defensive bonus for each turn it is fortified, to a maximum bonus of 25%%.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_INTERCEPT_HELP</Tag>
@@ -596,6 +804,9 @@
 		<German>Befehlen Sie einer Lufteinheit, alle Luftangriffe abzufangen.</German>
 		<Italian>Questo ordine serve per dire al velivolo di intercettare qualsiasi tentativo di attacco aereo.</Italian>
 		<Spanish>Esta orden es para unidades a&#233;reas y les dice que intenten interceptar todos los ataques a&#233;reos que lleguen.</Spanish>
+		<Russian>This air unit order will tell the craft to attempt interception with any incoming air attacks.</Russian>
+		<Japanese>This air unit order will tell the craft to attempt interception with any incoming air attacks.</Japanese>
+		<Chinese>This air unit order will tell the craft to attempt interception with any incoming air attacks.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_HEAL_HELP</Tag>
@@ -604,6 +815,9 @@
 		<German>Die Einheit bleibt inaktiv, bis sie wieder ihre volle St&#228;rke erreicht hat.</German>
 		<Italian>L'unit&#224; rimane inattiva finch&#233; non ritorna al massimo delle forze.</Italian>
 		<Spanish>La unidad permanecer&#225; inactiva hasta que recobre el total de su fuerza.</Spanish>
+		<Russian>The unit remains inactive until it reaches full strength.</Russian>
+		<Japanese>The unit remains inactive until it reaches full strength.</Japanese>
+		<Chinese>The unit remains inactive until it reaches full strength.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_SENTRY_HELP</Tag>
@@ -612,6 +826,9 @@
 		<German>Die Einheit bleibt inaktiv, bis eine feindliche Einheit ein benachbartes Gel&#228;ndefeld betritt.</German>
 		<Italian>L'unit&#224; rimane inattiva finch&#233; un'unit&#224; nemica non passa in una delle caselle adiacenti.</Italian>
 		<Spanish>La unidad permanecer&#225; inactiva hasta que una unidad enemiga entre en cualquier casilla adyacente.</Spanish>
+		<Russian>The unit remains inactive until an enemy unit enters any adjacent square.</Russian>
+		<Japanese>The unit remains inactive until an enemy unit enters any adjacent square.</Japanese>
+		<Chinese>The unit remains inactive until an enemy unit enters any adjacent square.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_AIRLIFT_HELP</Tag>
@@ -620,6 +837,9 @@
 		<German>Fliegen Sie die Einheit in eine andere Stadt.</German>
 		<Italian>L'unit&#224; viene trasportata in aereo verso un'altra citt&#224;.</Italian>
 		<Spanish>Para aerotransportar a la unidad a otra ciudad.</Spanish>
+		<Russian>Airlifts the unit to another city.</Russian>
+		<Japanese>Airlifts the unit to another city.</Japanese>
+		<Chinese>Airlifts the unit to another city.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_NUKE_HELP</Tag>
@@ -628,6 +848,9 @@
 		<German>Werfen Sie im Zielgebiet eine Atombombe ab.</German>
 		<Italian>Lancia una bomba nucleare nella casella selezionata.</Italian>
 		<Spanish>Deja caer una bomba nuclear en la casilla seleccionada.</Spanish>
+		<Russian>Drops a nuclear device onto the selected space.</Russian>
+		<Japanese>Drops a nuclear device onto the selected space.</Japanese>
+		<Chinese>Drops a nuclear device onto the selected space.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_RECON_HELP</Tag>
@@ -636,6 +859,9 @@
 		<German>Der Nebel des Krieges lichtet sich im Zielgebiet eine Runde lang.</German>
 		<Italian>Elimina la nebbia di guerra dallo spazio selezionato per un turno.</Italian>
 		<Spanish>Despeja durante un turno la niebla de la guerra que haya alrededor de la casilla seleccionada.</Spanish>
+		<Russian>Clears the fog of war from around the selected space for one turn.</Russian>
+		<Japanese>Clears the fog of war from around the selected space for one turn.</Japanese>
+		<Chinese>Clears the fog of war from around the selected space for one turn.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_AIRBOMB_HELP</Tag>
@@ -644,6 +870,9 @@
 		<German>Zerst&#246;ren Sie Befestigungen und Modernisierungen.</German>
 		<Italian>Distrugge le fortificazioni delle citt&#224; e i miglioramenti delle caselle.</Italian>
 		<Spanish>Destruye fortificaciones de ciudades y mejoras de casillas.</Spanish>
+		<Russian>Destroys city fortifications and tile improvements.</Russian>
+		<Japanese>Destroys city fortifications and tile improvements.</Japanese>
+		<Chinese>Destroys city fortifications and tile improvements.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_BOMBARD_HELP</Tag>
@@ -652,6 +881,9 @@
 		<German>Zerst&#246;ren Sie die Befestigungen einer Stadt und senken Sie deren Defensivbonus.</German>
 		<Italian>Distrugge le fortificazioni e riduce i bonus difensivi delle citt&#224;.</Italian>
 		<Spanish>Destruye las fortificaciones y reduce la bonificaci&#243;n defensiva de las ciudades.</Spanish>
+		<Russian>Destroys fortifications and reduces the cities defensive bonus.</Russian>
+		<Japanese>Destroys fortifications and reduces the cities defensive bonus.</Japanese>
+		<Chinese>Destroys fortifications and reduces the cities defensive bonus.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_PILLAGE_HELP</Tag>
@@ -660,6 +892,9 @@
 		<German>Die Einheit zerst&#246;rt eine Modernisierung oder Stra&#223;e auf ihrem Gel&#228;ndefeld.</German>
 		<Italian>L'unit&#224; distrugge un miglioramento o un collegamento sulla casella che occupa.</Italian>
 		<Spanish>La unidad destruye una mejora o ruta en la casilla en que se encuentre.</Spanish>
+		<Russian>The unit destroys an improvement or route in the tile it occupies.</Russian>
+		<Japanese>The unit destroys an improvement or route in the tile it occupies.</Japanese>
+		<Chinese>The unit destroys an improvement or route in the tile it occupies.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_SABOTAGE_HELP</Tag>
@@ -668,6 +903,9 @@
 		<German>Der [COLOR_UNIT_TEXT]Spion[COLOR_REVERT] versucht, alle Modernisierungen eines Gel&#228;ndefelds zu sabotieren.</German>
 		<Italian>La [COLOR_UNIT_TEXT]spia[COLOR_REVERT] tenter&#224; di sabotare il miglioramento della casella.</Italian>
 		<Spanish>El [COLOR_UNIT_TEXT]Esp&#237;a[COLOR_REVERT] intentar&#225; sabotear la mejora que haya en la casilla.</Spanish>
+		<Russian>The [COLOR_UNIT_TEXT]Spy[COLOR_REVERT] will attempt to sabotage the tile's improvement.</Russian>
+		<Japanese>The [COLOR_UNIT_TEXT]Spy[COLOR_REVERT] will attempt to sabotage the tile's improvement.</Japanese>
+		<Chinese>The [COLOR_UNIT_TEXT]Spy[COLOR_REVERT] will attempt to sabotage the tile's improvement.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_DESTROY_HELP</Tag>
@@ -676,6 +914,9 @@
 		<German>Der [COLOR_UNIT_TEXT]Spion[COLOR_REVERT] versucht, die aktuelle Produktion der Stadt zu zerst&#246;ren.</German>
 		<Italian>La [COLOR_UNIT_TEXT]spia[COLOR_REVERT] tenter&#224; di distruggere la produzione attuale della citt&#224;.</Italian>
 		<Spanish>El [COLOR_UNIT_TEXT]Esp&#237;a[COLOR_REVERT] intentar&#225; destruir la producci&#243;n que haya en ese momento en la ciudad.</Spanish>
+		<Russian>The [COLOR_UNIT_TEXT]Spy[COLOR_REVERT] will attempt to destroy the city's current production.</Russian>
+		<Japanese>The [COLOR_UNIT_TEXT]Spy[COLOR_REVERT] will attempt to destroy the city's current production.</Japanese>
+		<Chinese>The [COLOR_UNIT_TEXT]Spy[COLOR_REVERT] will attempt to destroy the city's current production.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_STEAL_PLANS_HELP</Tag>
@@ -684,6 +925,9 @@
 		<German>Der [COLOR_UNIT_TEXT]Spion[COLOR_REVERT] versucht, Pl&#228;ne zu stehlen, die alle Einheiten der gew&#252;nschten Zivilisation enth&#252;llen.</German>
 		<Italian>La [COLOR_UNIT_TEXT]spia[COLOR_REVERT] tenter&#224; di rubare dei documenti per rivelare tutte le unit&#224; della civilt&#224; bersaglio.</Italian>
 		<Spanish>El [COLOR_UNIT_TEXT]Esp&#237;a[COLOR_REVERT] intentar&#225; robar los planos, que revelar&#225;n todas las unidades de la civilizaci&#243;n objetivo.</Spanish>
+		<Russian>The [COLOR_UNIT_TEXT]Spy[COLOR_REVERT] will attempt to steal plans, which will reveal all of the target civilization's units.</Russian>
+		<Japanese>The [COLOR_UNIT_TEXT]Spy[COLOR_REVERT] will attempt to steal plans, which will reveal all of the target civilization's units.</Japanese>
+		<Chinese>The [COLOR_UNIT_TEXT]Spy[COLOR_REVERT] will attempt to steal plans, which will reveal all of the target civilization's units.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_BUILD_CITY_HELP</Tag>
@@ -692,6 +936,9 @@
 		<German>Opfern Sie einen [COLOR_UNIT_TEXT]Siedler[COLOR_REVERT], damit dieser an seinem aktuellen Standort eine Stadt gr&#252;ndet.</German>
 		<Italian>Con questo comando, si ordina al [COLOR_UNIT_TEXT]colono[COLOR_REVERT] di costruire una citt&#224; nel punto in cui si trova. Il [COLOR_UNIT_TEXT]colono[COLOR_REVERT] viene sacrificato durante il procedimento.</Italian>
 		<Spanish>Esta orden hace que el [COLOR_UNIT_TEXT]Colono[COLOR_REVERT] construya una ciudad en el lugar en que se encuentre. El [COLOR_UNIT_TEXT]Colono[COLOR_REVERT] se consumir&#225; en el proceso.</Spanish>
+		<Russian>This order causes the [COLOR_UNIT_TEXT]Settler[COLOR_REVERT] to build a city in its current location. The [COLOR_UNIT_TEXT]Settler[COLOR_REVERT] is consumed in the process.</Russian>
+		<Japanese>This order causes the [COLOR_UNIT_TEXT]Settler[COLOR_REVERT] to build a city in its current location. The [COLOR_UNIT_TEXT]Settler[COLOR_REVERT] is consumed in the process.</Japanese>
+		<Chinese>This order causes the [COLOR_UNIT_TEXT]Settler[COLOR_REVERT] to build a city in its current location. The [COLOR_UNIT_TEXT]Settler[COLOR_REVERT] is consumed in the process.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_SPREAD_HELP</Tag>
@@ -700,6 +947,9 @@
 		<German>Opfern Sie einen [COLOR_UNIT_TEXT]Missionar[COLOR_REVERT], damit dieser seine Religion in der Welt verbreitet.</German>
 		<Italian>Con questo ordine, si sacrifica un [COLOR_UNIT_TEXT]missionario[COLOR_REVERT], ma viene diffusa la religione nella citt&#224;.</Italian>
 		<Spanish>Esta orden har&#225; que se consuma la unidad de [COLOR_UNIT_TEXT]Misionero[COLOR_REVERT], pero propagar&#225; la religi&#243;n por la ciudad.</Spanish>
+		<Russian>This order will consume the [COLOR_UNIT_TEXT]Missionary[COLOR_REVERT] unit but spread their religion to the city.</Russian>
+		<Japanese>This order will consume the [COLOR_UNIT_TEXT]Missionary[COLOR_REVERT] unit but spread their religion to the city.</Japanese>
+		<Chinese>This order will consume the [COLOR_UNIT_TEXT]Missionary[COLOR_REVERT] unit but spread their religion to the city.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_JOIN_CITY_HELP</Tag>
@@ -708,6 +958,9 @@
 		<German>Opfern Sie eine Gro&#223;e Pers&#246;nlichkeit und befehlen Sie ihr, sich als Super-Spezialist in der Stadt anzusiedeln.</German>
 		<Italian>Con questo ordine, i Grandi Personaggi possono unirsi alla citt&#224; in veste di super specialisti, venendo sacrificati nel procedimento.</Italian>
 		<Spanish>Esta orden hace que el gran personaje se quede en la ciudad como un superespecialista, consumi&#233;ndose en el proceso.</Spanish>
+		<Russian>This order will make the Great Person join the city as a super specialist. It will consume the Great Person.</Russian>
+		<Japanese>This order will make the Great Person join the city as a super specialist. It will consume the Great Person.</Japanese>
+		<Chinese>This order will make the Great Person join the city as a super specialist. It will consume the Great Person.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_CONSTRUCT_HELP</Tag>
@@ -716,14 +969,20 @@
 		<German>Opfern Sie die Gro&#223;e Pers&#246;nlichkeit, damit diese ihr Spezialgeb&#228;ude errichtet.</German>
 		<Italian>Con questo comando, ordini a un Grande Personaggio di creare un edificio speciale. L'unit&#224; viene sacrificata nel procedimento.</Italian>
 		<Spanish>Hace que el gran personaje cree su edificio especial, consumi&#233;ndose en el proceso.</Spanish>
+		<Russian>This will have the Great Person create their special building. It consumes the Great Person.</Russian>
+		<Japanese>This will have the Great Person create their special building. It consumes the Great Person.</Japanese>
+		<Chinese>This will have the Great Person create their special building. It consumes the Great Person.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_DISCOVER_TECH_HELP</Tag>
-		<English>This will have the Great Person automatically discover a technology. It consumes the Great Person.</English>
+		<English>This will have the Great Person help research a technology. It consumes the Great Person.</English>
 		<French>Ordonner au personnage illustre de d&#233;couvrir automatiquement une nouvelle technologie. Le personnage illustre est alors d&#233;truit.</French>
 		<German>Opfern Sie die Gro&#223;e Pers&#246;nlichkeit, damit diese automatisch eine Technologie entdeckt.</German>
 		<Italian>Con questo comando, un Grande Personaggio scopre automaticamente una tecnologia. L'unit&#224; viene sacrificata nel procedimento.</Italian>
 		<Spanish>Hace que el gran personaje descubra autom&#225;ticamente una tecnolog&#237;a, consumi&#233;ndose en el proceso.</Spanish>
+		<Russian>This will have the Great Person help research a technology. It consumes the Great Person.</Russian>
+		<Japanese>This will have the Great Person help research a technology. It consumes the Great Person.</Japanese>
+		<Chinese>This will have the Great Person help research a technology. It consumes the Great Person.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_HURRY_PRODUCTION_HELP</Tag>
@@ -732,6 +991,9 @@
 		<German>Opfern Sie die Gro&#223;e Pers&#246;nlichkeit, um die aktuelle Produktion der Stadt zu beschleunigen.</German>
 		<Italian>Con questo ordine, la produzione attuale di una citt&#224; viene accelerata. L'unit&#224; viene sacrificata nel procedimento.</Italian>
 		<Spanish>El gran personaje acelera la producci&#243;n que la ciudad est&#233; llevando a cabo, consumi&#233;ndose en el proceso.</Spanish>
+		<Russian>This order will hurry production on the city's current effort. It consumes the Great Person.</Russian>
+		<Japanese>This order will hurry production on the city's current effort. It consumes the Great Person.</Japanese>
+		<Chinese>This order will hurry production on the city's current effort. It consumes the Great Person.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_CONDUCT_TRADE_MISSION_HELP</Tag>
@@ -740,6 +1002,9 @@
 		<German>Opfern Sie die Gro&#223;e Pers&#246;nlichkeit, damit ein Gro&#223;er H&#228;ndler in einer anderen Stadt eine Handelsmission gr&#252;ndet. Die auf diese Weise erzeugte Goldmenge ist von der Gr&#246;&#223;e der Stadt und der Entfernung von Ihrer Hauptstadt abh&#228;ngig.</German>
 		<Italian>Ordina a un Grande Mercante di eseguire una missione commerciale in una citt&#224; straniera. Il quantitativo d'oro generato &#232; relativo alla dimensione della citt&#224; e alla distanza dalla tua capitale. L'unit&#224; viene sacrificata nel procedimento.</Italian>
 		<Spanish>Esta orden hace que el gran mercader lleve a cabo una misi&#243;n comercial en una ciudad extranjera. La cantidad de oro que se genera va en relaci&#243;n al tama&#241;o de la ciudad y la distancia que la separe de la capital. El gran mercader se sacrifica, consumi&#233;ndose en el proceso.</Spanish>
+		<Russian>This order will have the Great Merchant conduct a trade mission with a foreign city. The amount of gold created is relative to the size of the city and its distance from your capital. It consumes the Great Person.</Russian>
+		<Japanese>This order will have the Great Merchant conduct a trade mission with a foreign city. The amount of gold created is relative to the size of the city and its distance from your capital. It consumes the Great Person.</Japanese>
+		<Chinese>This order will have the Great Merchant conduct a trade mission with a foreign city. The amount of gold created is relative to the size of the city and its distance from your capital. It consumes the Great Person.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_CREATE_GREAT_WORK_HELP</Tag>
@@ -748,6 +1013,9 @@
 		<German>Opfern Sie die Gro&#223;e Pers&#246;nlichkeit, damit ein Gro&#223;er K&#252;nstler in der aktuellen Stadt ein gro&#223;es Kunstwerk erschafft.</German>
 		<Italian>Ordina a un Grande Artista di creare una Grande Opera nella citt&#224; in cui si trova. L'unit&#224; viene sacrificata nel procedimento.</Italian>
 		<Spanish>Esta orden hace que el gran artista cree una gran obra en la ciudad en la que se encuentre, consumi&#233;ndose en el proceso.</Spanish>
+		<Russian>This order will have the Great Artist create a Great Work in the city they are currently in. It consumes the Great Person.</Russian>
+		<Japanese>This order will have the Great Artist create a Great Work in the city they are currently in. It consumes the Great Person.</Japanese>
+		<Chinese>This order will have the Great Artist create a Great Work in the city they are currently in. It consumes the Great Person.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_START_GOLDENAGE_HELP</Tag>
@@ -756,8 +1024,10 @@
 		<German>Opfern Sie mehrere Gro&#223;e Pers&#246;nlichkeiten (unterschiedlicher Klassen), um ein goldenes Zeitalter (zus&#228;tzliche [ICON_PRODUCTION] &amp; [ICON_COMMERCE]) zu begr&#252;nden.</German>
 		<Italian>Con questo ordine, si sacrificano svariati grandi personaggi (di tipi differenti) e si avvia l'Et&#224; dell'Oro ([ICON_PRODUCTION] &amp; [ICON_COMMERCE] supplementari).</Italian>
 		<Spanish>Esta orden consumir&#225; a varios grandes personajes (de diferentes tipos) e iniciar&#225; una edad de oro ([ICON_PRODUCTION] y [ICON_COMMERCE] mayores).</Spanish>
+		<Russian>This order will consume multiple Great People (of different types) and initiate a Golden Age (extra [ICON_PRODUCTION] &amp; [ICON_COMMERCE]).</Russian>
+		<Japanese>This order will consume multiple Great People (of different types) and initiate a Golden Age (extra [ICON_PRODUCTION] &amp; [ICON_COMMERCE]).</Japanese>
+		<Chinese>This order will consume multiple Great People (of different types) and initiate a Golden Age (extra [ICON_PRODUCTION] &amp; [ICON_COMMERCE]).</Chinese>
 	</TEXT>
-	<!-- EMPHASIZEINFO - HELP -->
 	<TEXT>
 		<Tag>TXT_KEY_EMPHASIZE_FOOD_HELP</Tag>
 		<English>Select this to have a city obtain high levels of food (bread) each turn. Food is necessary to help cities gain population.</English>
@@ -765,6 +1035,9 @@
 		<German>Konzentrieren Sie sich auf die Nahrungsproduktion (Brot). Ausreichend Nahrung ist f&#252;r das Bev&#246;lkerungswachstum entscheidend.</German>
 		<Italian>Seleziona questo comando per ottenere a ogni turno grandi quantit&#224; di cibo (pane) nella citt&#224; selezionata. Il cibo &#232; necessario per aiutare l'aumento della popolazione nelle citt&#224;.</Italian>
 		<Spanish>Seleccionad esto para hacer que la ciudad obtenga grandes cantidades de alimentos (panes) cada turno. Los alimentos son necesarios para que se incremente la poblaci&#243;n de las ciudades.</Spanish>
+		<Russian>Select this to have a city obtain high levels of food (bread) each turn. Food is necessary to help cities gain population.</Russian>
+		<Japanese>Select this to have a city obtain high levels of food (bread) each turn. Food is necessary to help cities gain population.</Japanese>
+		<Chinese>Select this to have a city obtain high levels of food (bread) each turn. Food is necessary to help cities gain population.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EMPHASIZE_PRODUCTION_HELP</Tag>
@@ -773,6 +1046,9 @@
 		<German>Konzentrieren Sie sich auf die Produktion (H&#228;mmer). Dadurch w&#228;chst Ihre Bev&#246;lkerung zwar langsamer, Ihre St&#228;dte produzieren allerdings mit maximaler Geschwindigkeit.</German>
 		<Italian>Seleziona questo comando per ottenere a ogni turno grandi quantit&#224; di produzione (scudi) nella citt&#224; selezionata. Concentrando gli sforzi della citt&#224; nella produzione, la crescita demografica verr&#224; ridotta, ma le opere verranno realizzate pi&#249; rapidamente.</Italian>
 		<Spanish>Seleccionad esto para hacer que la ciudad obtenga grandes cantidades de producci&#243;n (martillos) cada turno. Centrar una ciudad en la producci&#243;n har&#225; que crezca lentamente, pero asegura que produzca lo m&#225;s r&#225;pido posible.</Spanish>
+		<Russian>Select this to have a city obtain high levels of production (hammers) each turn. Focusing the city on production will slow growth but ensure that the cities are producing as quickly as possible.</Russian>
+		<Japanese>Select this to have a city obtain high levels of production (hammers) each turn. Focusing the city on production will slow growth but ensure that the cities are producing as quickly as possible.</Japanese>
+		<Chinese>Select this to have a city obtain high levels of production (hammers) each turn. Focusing the city on production will slow growth but ensure that the cities are producing as quickly as possible.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EMPHASIZE_COMMERCE_HELP</Tag>
@@ -781,6 +1057,9 @@
 		<German>Konzentrieren Sie sich auf die Wirtschaft (Gold) einer Stadt. Investieren Sie das erwirtschaftete Gold anschlie&#223;end in die Forschung und die Vergr&#246;&#223;erung Ihres Imperiums.</German>
 		<Italian>Seleziona questo comando per ottenere a ogni turno grandi quantit&#224; di commercio (oro) nella citt&#224; selezionata. Il commercio viene trasformato in oro, necessario per compiere ricerche, espandersi e costruire il tuo impero.</Italian>
 		<Spanish>Seleccionad esto para hacer que la ciudad obtenga grandes cantidades de comercio (oro) cada turno. El comercio se traduce en oro, lo que os permite investigar, as&#237; como expandir y construir vuestro imperio.</Spanish>
+		<Russian>Select this to have a city obtain high levels of commerce (gold) each turn. Commerce translates into gold which allows you to research, expand, and build your empire.</Russian>
+		<Japanese>Select this to have a city obtain high levels of commerce (gold) each turn. Commerce translates into gold which allows you to research, expand, and build your empire.</Japanese>
+		<Chinese>Select this to have a city obtain high levels of commerce (gold) each turn. Commerce translates into gold which allows you to research, expand, and build your empire.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EMPHASIZE_RESEARCH_HELP</Tag>
@@ -789,6 +1068,9 @@
 		<German>Konzentrieren Sie sich auf die Forschung. Dadurch bringen Ihre St&#228;dte Spezialisten hervor. Diese beschleunigen die Erforschung von Technologien.</German>
 		<Italian>Seleziona questo comando per concentrare al massimo gli sforzi della citt&#224; sulla ricerca. Cos&#236; attiverai degli specialisti che, se disponibili, aiuteranno lo sviluppo tecnologico all'interno delle citt&#224;.</Italian>
 		<Spanish>Seleccionad esto para hacer que la ciudad se concentre en lograr la mayor cantidad posible de investigaci&#243;n. Esto activar&#225; a los especialistas, si est&#225;n disponibles, para ayudar a facilitar la investigaci&#243;n tecnol&#243;gica de la ciudad.</Spanish>
+		<Russian>Select this to have a city focus on achieving the highest amount of research possible. This will activate specialists if they are available to help facilitate the city's tech research.</Russian>
+		<Japanese>Select this to have a city focus on achieving the highest amount of research possible. This will activate specialists if they are available to help facilitate the city's tech research.</Japanese>
+		<Chinese>Select this to have a city focus on achieving the highest amount of research possible. This will activate specialists if they are available to help facilitate the city's tech research.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EMPHASIZE_GREAT_PEOPLE_HELP</Tag>
@@ -797,6 +1079,9 @@
 		<German>Konzentrieren Sie sich auf die Schaffung Gro&#223;er Pers&#246;nlichkeiten. Der Statthalter der Stadt setzt in diesem Fall Spezialisten ein, um m&#246;glichst schnell eine Gro&#223;e Pers&#246;nlichkeit hervorzubringen.</German>
 		<Italian>Seleziona questo comando per concentrare al massimo gli sforzi della citt&#224; sulla realizzazione di un Grande Personaggio. Il governatore cercher&#224; di utilizzare degli specialisti per tentare di realizzare il pi&#249; velocemente possibile un Grande Personaggio.</Italian>
 		<Spanish>Seleccionad esto para hacer que la ciudad se concentre en crear un gran personaje. El gobernante usar&#225; a los especialistas para que intenten crear un gran personaje lo m&#225;s r&#225;pidamente posible.</Spanish>
+		<Russian>Select this to have the city focus on creating a great person. The governor will use specialists to try and create a Great Person as quickly as possible.</Russian>
+		<Japanese>Select this to have the city focus on creating a great person. The governor will use specialists to try and create a Great Person as quickly as possible.</Japanese>
+		<Chinese>Select this to have the city focus on creating a great person. The governor will use specialists to try and create a Great Person as quickly as possible.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EMPHASIZE_AVOID_GROWTH_HELP</Tag>
@@ -805,8 +1090,10 @@
 		<German>Normalerweise versuchen Statthalter, Ihre Forderungen zu erf&#252;llen und die Stadt gleichzeitig zu vergr&#246;&#223;ern. W&#228;hlen Sie diese Option, wenn Sie das Wachstum vernachl&#228;ssigen und sich auf das Wesentliche konzentrieren m&#246;chten.</German>
 		<Italian>In genere, i governatori cercheranno di soddisfare le tue richieste, permettendo comunque una leggera crescita delle citt&#224;. Seleziona questa opzione per indicare che bisogna evitare la crescita e per concentrare tutti gli sforzi sugli ordini appropriati.</Italian>
 		<Spanish>Normalmente, el gobernante intentar&#225; cumplir vuestras exigencias permitiendo que, a la vez, la ciudad siga creciendo a menor velocidad. Seleccionad esta opci&#243;n para indicarle que prescinda del crecimiento y se concentre en lo que hag&#225;is hincapi&#233;.</Spanish>
+		<Russian>Typically the governor will try to meet your demands while allowing for some growth to continue in the city. Select this option to indicate that growth should be avoided with all focus being on the appropriate emphasis.</Russian>
+		<Japanese>Typically the governor will try to meet your demands while allowing for some growth to continue in the city. Select this option to indicate that growth should be avoided with all focus being on the appropriate emphasis.</Japanese>
+		<Chinese>Typically the governor will try to meet your demands while allowing for some growth to continue in the city. Select this option to indicate that growth should be avoided with all focus being on the appropriate emphasis.</Chinese>
 	</TEXT>
-	<!-- EMPHASIZEINFO - HELP -->
 	<TEXT>
 		<Tag>TXT_KEY_INTERFACEMODE_GO_TO_HELP</Tag>
 		<English>Order the selected unit to move to a tile</English>
@@ -814,6 +1101,9 @@
 		<German>Schicken Sie die gew&#228;hlte Einheit auf ein bestimmtes Gel&#228;ndefeld.</German>
 		<Italian>Ordina all'unit&#224; selezionata di muoversi su una casella</Italian>
 		<Spanish>Ordena a la unidad seleccionada que se mueva hasta una casilla.</Spanish>
+		<Russian>Order the selected unit to move to a tile</Russian>
+		<Japanese>Order the selected unit to move to a tile</Japanese>
+		<Chinese>Order the selected unit to move to a tile</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_INTERFACEMODE_GO_TO_TYPE_HELP</Tag>
@@ -822,6 +1112,9 @@
 		<German>Erteilen Sie allen Einheiten des gew&#228;hlten Typs den Marschbefehl.</German>
 		<Italian>Ordina a tutte le unit&#224; dello stesso tipo di quella selezionata di muoversi</Italian>
 		<Spanish>Ordena moverse a todas las unidades del tipo seleccionado actualmente.</Spanish>
+		<Russian>Orders all units of the currently selected unit's type to move</Russian>
+		<Japanese>Orders all units of the currently selected unit's type to move</Japanese>
+		<Chinese>Orders all units of the currently selected unit's type to move</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_INTERFACEMODE_GO_TO_ALL_HELP</Tag>
@@ -830,6 +1123,9 @@
 		<German>Erteilen Sie allen Einheiten auf dem Feld der gew&#228;hlten Einheit den Marschbefehl.</German>
 		<Italian>Ordina a tutte le unit&#224; attualmente sulla casella selezionata di muoversi</Italian>
 		<Spanish>Ordena moverse a todas las unidades de la casilla seleccionada actualmente.</Spanish>
+		<Russian>Order all units on the currently selected unit's tile to move</Russian>
+		<Japanese>Order all units on the currently selected unit's tile to move</Japanese>
+		<Chinese>Order all units on the currently selected unit's tile to move</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_INTERFACEMODE_ROUTE_TO_HELP</Tag>
@@ -838,6 +1134,9 @@
 		<German>Befehlen Sie der Einheit, Stra&#223;en oder Eisenbahnstrecken zum gew&#228;hlten Gel&#228;ndefeld zu bauen.</German>
 		<Italian>Ordina all'unit&#224; di costruire strade e ferrovie sulla casella selezionata</Italian>
 		<Spanish>Ordena a la unidad que construya carreteras o ferrocarriles hasta la casilla seleccionada.</Spanish>
+		<Russian>Order the unit to build roads or railroads to the selected tile</Russian>
+		<Japanese>Order the unit to build roads or railroads to the selected tile</Japanese>
+		<Chinese>Order the unit to build roads or railroads to the selected tile</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_INTERFACEMODE_AIRLIFT_HELP</Tag>
@@ -846,6 +1145,9 @@
 		<German>Fliegen Sie die Einheit zum gew&#228;hlten Gel&#228;ndefeld.</German>
 		<Italian>Ordina il trasporto aereo dell'unit&#224; sulla casella selezionata</Italian>
 		<Spanish>Ordena a la unidad que se aerotransporte hasta la casilla seleccionada.</Spanish>
+		<Russian>Order the unit airlifted to the selected tile</Russian>
+		<Japanese>Order the unit airlifted to the selected tile</Japanese>
+		<Chinese>Order the unit airlifted to the selected tile</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_INTERFACEMODE_NUKE_HELP</Tag>
@@ -854,6 +1156,9 @@
 		<German>Befehlen Sie einen Atomschlag auf das gew&#228;hlte Gel&#228;ndefeld.</German>
 		<Italian>Ordina un attacco missilistico nucleare sulla casella selezionata</Italian>
 		<Spanish>Ordena un ataque con misil nuclear a la casilla seleccionada.</Spanish>
+		<Russian>Order a nuclear missile strike on the selected tile</Russian>
+		<Japanese>Order a nuclear missile strike on the selected tile</Japanese>
+		<Chinese>Order a nuclear missile strike on the selected tile</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_INTERFACEMODE_RECON_HELP</Tag>
@@ -862,6 +1167,9 @@
 		<German>Schicken Sie die Lufteinheit zu einem Aufkl&#228;rungsflug in das Zielgebiet.</German>
 		<Italian>Ordina all'unit&#224; aerea di eseguire un giro di ricognizione sulla zona</Italian>
 		<Spanish>Ordena a la unidad a&#233;rea que lleve a cabo un barrido de reconocimiento en un &#225;rea.</Spanish>
+		<Russian>Order the air unit to perform a recon sweep on an area</Russian>
+		<Japanese>Order the air unit to perform a recon sweep on an area</Japanese>
+		<Chinese>Order the air unit to perform a recon sweep on an area</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_INTERFACEMODE_AIRBOMB_HELP</Tag>
@@ -870,6 +1178,9 @@
 		<German>Befehlen Sie der Lufteinheit, die Modernisierung des gew&#228;hlten Gel&#228;ndefelds zu bombardieren.</German>
 		<Italian>Ordina all'unit&#224; aerea di bombardare la citt&#224; o il miglioramento sulla casella selezionata</Italian>
 		<Spanish>Ordena a la unidad a&#233;rea que bombardee la ciudad o la mejora que haya en la casilla seleccionada.</Spanish>
+		<Russian>Order the air unit to bomb the city or improvement in the selected tile</Russian>
+		<Japanese>Order the air unit to bomb the city or improvement in the selected tile</Japanese>
+		<Chinese>Order the air unit to bomb the city or improvement in the selected tile</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_INTERFACEMODE_AIRSTRIKE_HELP</Tag>
@@ -878,6 +1189,9 @@
 		<German>Befehlen Sie der Lufteinheit, feindliche Einheiten auf dem gew&#228;hlten Gel&#228;ndefeld zu bombardieren.</German>
 		<Italian>Ordina all'unit&#224; aerea di attaccare le unit&#224; nemiche sulla casella selezionata</Italian>
 		<Spanish>Ordena a la unidad a&#233;rea que ataque a las unidades enemigas que haya en la casilla seleccionada.</Spanish>
+		<Russian>Order the air unit to attack enemy units in the selected tile</Russian>
+		<Japanese>Order the air unit to attack enemy units in the selected tile</Japanese>
+		<Chinese>Order the air unit to attack enemy units in the selected tile</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_INTERFACEMODE_REBASE_HELP</Tag>
@@ -886,5 +1200,8 @@
 		<German>Befehlen Sie der Lufteinheit, in einer anderen Stadt zu landen.</German>
 		<Italian>Ordina all'unit&#224; aerea di tornare alla base in un'altra citt&#224;</Italian>
 		<Spanish>Ordena a la unidad a&#233;rea que cambie de base y se vaya a otra ciudad.</Spanish>
+		<Russian>Order the air unit to rebase to another city</Russian>
+		<Japanese>Order the air unit to rebase to another city</Japanese>
+		<Chinese>Order the air unit to rebase to another city</Chinese>
 	</TEXT>
 </Civ4GameText>

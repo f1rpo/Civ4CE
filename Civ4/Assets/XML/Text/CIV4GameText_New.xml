@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Ed Piper (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by XMLSPY 2004 Professional Ed. Release 2, Installed Multi + SMP for 3 users (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -7,1075 +7,300 @@
 <Civ4GameText xmlns="http://www.firaxis.com">
 	<TEXT>
 		<Tag>TXT_KEY_OPTION_SOUND_MONO</Tag>
-		<English>Mono</English>		
+		<English>Mono</English>
 		<French>Mono</French>
 		<German>Mono</German>
 		<Italian>Mono</Italian>
 		<Spanish>Mono</Spanish>
+		<Russian>Mono</Russian>
+		<Japanese>Mono</Japanese>
+		<Chinese>Mono</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_OPTION_SOUND_STEREO</Tag>
-		<English>Stereo</English>		
+		<English>Stereo</English>
 		<French>Stereo</French>
 		<German>Stereo</German>
 		<Italian>Stereo</Italian>
 		<Spanish>Stereo</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_OPTION_SOUND_SYSTEM_CONFIG</Tag>
-		<English>Use System Config</English>		
-		<French>Utiliser Config. Système</French>
-		<German>Systemkonfiguration verwenden</German>
-		<Italian>Usa configurazione di sistema</Italian>
-		<Spanish>Usar config. sistema</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_OPTION_SOUND_HEADPHONES</Tag>
-		<English>Headphones</English>		
-		<French>Casque</French>
-		<German>Lautsprecher</German>
-		<Italian>Cuffie</Italian>
-		<Spanish>Auriculares</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MOD_REQUIRED</Tag>
-		<English>The save file you have selected requires the following mod to be loaded:[NEWLINE][BOLD]%s1[\BOLD][NEWLINE]The application must restart, ok?</English>
-		<French>La sauvegardé sélectionnée nécessite le chargement du mod suivant : [NEWLINE][BOLD]%s1[\BOLD][NEWLINE] L'application doit être relancée. Confirmer ?</French>
-		<German>Für den von Ihnen gewählten Spielstand muss das folgende Mod geladen werden: [NEWLINE][BOLD]%s1[\BOLD][NEWLINE] Die Anwendung wird neu gestartet, okay? </German>
-		<Italian>Il salvataggio selezionato richiede il caricamento del seguente mod: [NEWLINE][BOLD]%s1[\BOLD][NEWLINE] Il gioco deve essere riavviato, continuare?</Italian>
-		<Spanish>La partida guardada que has seleccionado requiere que se cargue el siguiente mod: [NEWLINE][BOLD]%s1[\BOLD][NEWLINE] La aplicación debe reiniciarse. ¿Aceptar? </Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_OVERWRITE_FILE</Tag>
-		<English>The file %s1 already exists.[NEWLINE]Press OK to proceed, overwriting the file.</English>
-		<French>Le fichier %s1 existe déjà.[NEWLINE]Cliquez sur OK pour continuer et écraser ce fichier.</French>
-		<German>Die Datei %s1 besteht bereits.[NEWLINE]Wählen Sie OK, um fortzufahren und die Datei zu überschreiben.</German>
-		<Italian>File di salvataggio di Civilization IV %s1 già esistente.[NEWLINE]Premi OK per continuare e sovrascrivere il file.</Italian>
-		<Spanish>Ya existe el archivo %s1.[NEWLINE]Pulsa 'Aceptar' para continuar y sobrescribirlo.</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_CIVILOPEDIA_HISTORY</Tag>
-		<English>History</English>
-		<French>Histoire</French>
-		<German>Geschichte</German>
-		<Italian>Storia</Italian>
-		<Spanish>Historia</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_CHOOSE_TECH</Tag>
-		<English>Please choose a technology</English>
-		<French>Choisir une technologie</French>
-		<German>Bitte eine Technologie wählen</German>
-		<Italian>Scegli una tecnologia</Italian>
-		<Spanish>Elige una tecnología</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_OPTIONS_SCREEN_OTHER</Tag>
-		<English>Other</English>
-		<French>Autre</French>
-		<German>Sonstige</German>
-		<Italian>Altro</Italian>
-		<Spanish>Otros</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_SAVING_GAME</Tag>
-		<English>Saving Game...</English>
-		<French>Sauvegarde en cours...</French>
-		<German>Speichervorgang ...</German>
-		<Italian>Salvataggio in corso...</Italian>
-		<Spanish>Guardando la partida...</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_QUICK_SAVING</Tag>
-		<English>Quick Saving...</English>
-		<French>Sauvegarde rapide en cours...</French>
-		<German>Schnellspeichern ...</German>
-		<Italian>Salvataggio rapido in corso...</Italian>
-		<Spanish>Guardado r&#225;pido...</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_AUTOSAVING</Tag>
-		<English>Autosaving...</English>
-		<French>Sauvegarde automatique...</French>
-		<German>Automatisches Speichern ...</German>
-		<Italian>Salvataggio automatico...</Italian>
-		<Spanish>Guardado automático...</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MOVE_FOCUS_BACK_TO</Tag>
-		<English>Move focus back to[SPACE]</English>
-		<French>Centrer la vue sur[SPACE] </French>
-		<German>Fokus zur&#252;cksetzen auf[SPACE]</German>
-		<Italian>Torna su[SPACE]</Italian>
-		<Spanish>Volver a centrarse en[SPACE]</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PEDIA_BONUS_APPEARANCE</Tag>
-		<English>Reveals</English>
-		<French>R&#233;v&#232;le</French>
-		<German>Enth&#252;llt</German>
-		<Italian>Rivela</Italian>
-		<Spanish>Revela</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PEDIA_BONUS_TRADE</Tag>
-		<English>Enables</English>
-		<French>Active</French>
-		<German>Erm&#246;glicht</German>
-		<Italian>Abilita</Italian>
-		<Spanish>Permite</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_POPUP_ARE_YOU_SURE</Tag>
-		<English>Are you sure?</English>
-		<French>Vraiment ?</French>
-		<German>Sind Sie sicher?</German>
-		<Italian>Sei sicuro?</Italian>
-		<Spanish>¿Seguro?</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_ENGLISH</Tag>
-		<English>English</English>
-		<French>Anglais</French>
-		<German>English</German>
-		<Italian>Inglese</Italian>
-		<Spanish>Inglés</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_FRENCH</Tag>
-		<English>French</English>
-		<French>Fran&#231;ais</French>
-		<German>Fran&#231;ais</German>
-		<Italian>Francese</Italian>
-		<Spanish>Francés</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_GERMAN</Tag>
-		<English>German</English>
-		<French>Allemand</French>
-		<German>Deutsch</German>
-		<Italian>Tedesco</Italian>
-		<Spanish>Alemán</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_ITALIAN</Tag>
-		<English>Italian</English>
-		<French>Italien</French>
-		<German>Italiano</German>
-		<Italian>Italiano</Italian>
-		<Spanish>Italiano</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_SPANISH</Tag>
-		<English>Spanish</English>
-		<French>Espagnol</French>
-		<German>Espa&#241;ol</German>
-		<Italian>Spagnolo</Italian>
-		<Spanish>Español</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_CANCEL_PATCH_DOWNLOAD</Tag>
-		<English>Cancel the patch download</English>
-		<French>Annuler le t&#233;l&#233;chargement de la mise &#224; jour</French>
-		<German>Patch-Download abbrechen</German>
-		<Italian>Annulla il download della patch</Italian>
-		<Spanish>Cancelar la descarga del parche</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_HOST_GAME</Tag>
-		<English>Host Game</English>
-		<French>H&#233;berger</French>
-		<German>Spiel erstellen</German>
-		<Italian>Ospita partita</Italian>
-		<Spanish>Alojar partida</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_HOST_GAME</Tag>
-		<English>Host Game</English>
-		<French>H&#233;berger</French>
-		<German>Spiel erstellen</German>
-		<Italian>Ospita partita</Italian>
-		<Spanish>Alojar partida</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_LOAD_FILE</Tag>
-		<English>Load File</English>
-		<French>Charger fichier</French>
-		<German>Datei laden</German>
-		<Italian>Carica file</Italian>
-		<Spanish>Cargar archivo</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_SAVE_FILE</Tag>
-		<English>Save File</English>
-		<French>Sauvegarder fichier</French>
-		<German>Datei speichern</German>
-		<Italian>Salva file</Italian>
-		<Spanish>Guardar archivo</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_ESCAPE</Tag>
-		<English>Escape</English>
-		<French>Echap</French>
-		<German>Esc</German>
-		<Italian>Esc</Italian>
-		<Spanish>Esc</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_BACKSPACE</Tag>
-		<English>Backspace</English>
-		<French>Retour arri&#232;re</French>
-		<German>R&#252;cktaste</German>
-		<Italian>Indietro</Italian>
-		<Spanish>Retroceso</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_ENTER</Tag>
-		<English>Enter</English>
-		<French>Entr&#233;e</French>
-		<German>Eingabetaste</German>
-		<Italian>Invio</Italian>
-		<Spanish>Intro</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_LEFT_CONTROL_KEY</Tag>
-		<English>Left Control Key</English>
-		<French>Ctrl gauche</French>
-		<German>Strg links</German>
-		<Italian>Ctrl sinistro</Italian>
-		<Spanish>Ctrl izq.</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_LEFT_SHIFT_KEY</Tag>
-		<English>Left Shift Key</English>
-		<French>Maj gauche</French>
-		<German>Umschalten links</German>
-		<Italian>Maiusc sinistro</Italian>
-		<Spanish>Mayús izq.</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_RIGHT_SHIFT_KEY</Tag>
-		<English>Right Shift Key</English>
-		<French>Maj droite</French>
-		<German>Umschalten rechts</German>
-		<Italian>Maiusc destro</Italian>
-		<Spanish>Mayús der.</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_NUM_PAD_STAR</Tag>
-		<English>Num Pad *</English>
-		<French>* pav&#233; num</French>
-		<German>Ziffernblock *</German>
-		<Italian>TastNum *</Italian>
-		<Spanish>* (num.)</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_LEFT_ALT_KEY</Tag>
-		<English>Left Alt Key</English>
-		<French>Alt gauche</French>
-		<German>Alt</German>
-		<Italian>Alt sinistro</Italian>
-		<Spanish>Alt izq.</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_SPACE_KEY</Tag>
-		<English>Space Key</English>
-		<French>Espace</French>
-		<German>Leertaste</German>
-		<Italian>Barra spaziatrice</Italian>
-		<Spanish>Espacio</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_CAPS_LOCK</Tag>
-		<English>Caps Lock</English>
-		<French>Verr.Maj</French>
-		<German>Feststelltaste</German>
-		<Italian>Bloc Maiusc</Italian>
-		<Spanish>Bloq Mayús</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_NUM_LOCK</Tag>
-		<English>Num Lock</English>
-		<French>Verr.Num</French>
-		<German>Num</German>
-		<Italian>Bloc Num</Italian>
-		<Spanish>Bloq Num</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_SCROLL_KEY</Tag>
-		<English>Scroll Key</English>
-		<French>Arr&#234;t d&#233;fil</French>
-		<German>Rollen</German>
-		<Italian>Bloc Scorr</Italian>
-		<Spanish>Bloq Despl</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_NUMPAD_NUMBER</Tag>
-		<English>Numpad %d1_Num</English>
-		<French>%d1_Num pav&#233; num</French>
-		<German>Ziffernblock %d1_Num</German>
-		<Italian>TastNum %d1_Num</Italian>
-		<Spanish>%d1_Num (num.)</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_NUMPAD_MINUS</Tag>
-		<English>Numpad Minus</English>
-		<French>Moins pav&#233; num</French>
-		<German>Zifferblock Minus</German>
-		<Italian>TastNum -</Italian>
-		<Spanish>- (num.)</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_NUMPAD_PLUS</Tag>
-		<English>Numpas Plus</English>
-		<French>Plus pav&#233; num</French>
-		<German>Ziffernblock Plus</German>
-		<Italian>TastNum +</Italian>
-		<Spanish>+ (num.)</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_NUMPAD_PERIOD</Tag>
-		<English>Numpad .</English>
-		<French>. pav&#233; num</French>
-		<German>Ziffernblock ,</German>
-		<Italian>TastNum .</Italian>
-		<Spanish>. (num.)</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_NUMPAD_EQUALS</Tag>
-		<English>Numpad =</English>
-		<French>= pav&#233; num</French>
-		<German>Ziffernblock =</German>
-		<Italian>TastNum =</Italian>
-		<Spanish>= (num.)</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_NUMPAD_ENTER_KEY</Tag>
-		<English>Numpad Enter Key</English>
-		<French>Entr&#233;e pav&#233; num</French>
-		<German>Ziffernblock Enter</German>
-		<Italian>TastNum Invio</Italian>
-		<Spanish>Intro (num.)</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_RIGHT_CONTROL_KEY</Tag>
-		<English>Right Control Key</English>
-		<French>Ctrl droite</French>
-		<German>Strg rechts</German>
-		<Italian>Ctrl destro</Italian>
-		<Spanish>Ctrl der.</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_VOLUME_DOWN</Tag>
-		<English>Volume Down</English>
-		<French>Volume -</French>
-		<German>Leiser</German>
-		<Italian>Abbassa volume</Italian>
-		<Spanish>Volumen -</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_VOLUME_UP</Tag>
-		<English>Volume Up</English>
-		<French>Volume +</French>
-		<German>Lauter</German>
-		<Italian>Alza volume</Italian>
-		<Spanish>Volumen +</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_NUMPAD_COMMA</Tag>
-		<English>Numpad ,</English>
-		<French>, pav&#233; num</French>
-		<German>Ziffernblock .</German>
-		<Italian>TastNum .</Italian>
-		<Spanish>, (num.)</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_NUMPAD_SLASH</Tag>
-		<English>Numpad /</English>
-		<French>/ pav&#233; num</French>
-		<German>Ziffernblock /</German>
-		<Italian>TastNum /</Italian>
-		<Spanish>/ (num.)</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_SYSRQ</Tag>
-		<English>SYSRQ</English>
-		<French>Syst</French>
-		<German>S-Abf</German>
-		<Italian>Stamp/R Sist</Italian>
-		<Spanish>Impr Pant</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_RIGHT_ALT_KEY</Tag>
-		<English>Right Alt Key</English>
-		<French>Alt droite</French>
-		<German>Alt Gr</German>
-		<Italian>Alt Gr</Italian>
-		<Spanish>Alt der.</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_PAUSE_KEY</Tag>
-		<English>Pause Key</English>
-		<French>Pause</French>
-		<German>Pause</German>
-		<Italian>Pausa</Italian>
-		<Spanish>Pausa</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_HOME_KEY</Tag>
-		<English>Home Key</English>
-		<French>Orig</French>
-		<German>Pos1</German>
-		<Italian>Home</Italian>
-		<Spanish>Inicio</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_UP_ARROW</Tag>
-		<English>Up Arrow</English>
-		<French>Fl&#232;che haut</French>
-		<German>Pfeil nach oben</German>
-		<Italian>Freccia su</Italian>
-		<Spanish>Flecha arriba</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_PAGE_UP</Tag>
-		<English>Page Up</English>
-		<French>Page Haut</French>
-		<German>Bild auf</German>
-		<Italian>PagSu</Italian>
-		<Spanish>Re Pág</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_LEFT_ARROW</Tag>
-		<English>Left Arrow</English>
-		<French>Fl&#232;che gauche</French>
-		<German>Pfeil nach links</German>
-		<Italian>Freccia sinistra</Italian>
-		<Spanish>Flecha izq.</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_RIGHT_ARROW</Tag>
-		<English>Right Arrow</English>
-		<French>Fl&#232;che droite</French>
-		<German>Pfeil nach rechts</German>
-		<Italian>Freccia destra</Italian>
-		<Spanish>Flecha der.</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_END_KEY</Tag>
-		<English>End Key</English>
-		<French>Fin</French>
-		<German>Ende</German>
-		<Italian>Fine</Italian>
-		<Spanish>Fin</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_DOWN_ARROW</Tag>
-		<English>Down Arrow</English>
-		<French>Fl&#232;che bas</French>
-		<German>Pfeil nach unten</German>
-		<Italian>Freccia giù</Italian>
-		<Spanish>Flecha abajo</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_PAGE_DOWN</Tag>
-		<English>Page Down</English>
-		<French>Page Bas</French>
-		<German>Bild ab</German>
-		<Italian>PagGiù</Italian>
-		<Spanish>Av Pág</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_INSERT_KEY</Tag>
-		<English>Insert Key</English>
-		<French>Inser</French>
-		<German>Einfg</German>
-		<Italian>Ins</Italian>
-		<Spanish>Insert</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_KEYBOARD_DELETE_KEY</Tag>
-		<English>Delete</English>
-		<French>Suppr</French>
-		<German>Entf</German>
-		<Italian>Canc</Italian>
-		<Spanish>Supr</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_IMPROVEMENTS</Tag>
-		<English>Improvements</English>
-		<French>Am&#233;nagements</French>
-		<German>Modernisierungen</German>
-		<Italian>Miglioramenti</Italian>
-		<Spanish>Mejoras</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_BONUSES</Tag>
-		<English>Bonuses</English>
-		<French>Bonus</French>
-		<German>Boni</German>
-		<Italian>Bonus</Italian>
-		<Spanish>Bonificaciones</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_TERRAINS</Tag>
-		<English>Terrains</English>
-		<French>Terrains</French>
-		<German>Gel&#228;nde</German>
-		<Italian>Terreni</Italian>
-		<Spanish>Terrenos</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_CHOOSE_UNIT</Tag>
-		<English>Choose Unit</English>
-		<French>Choisir unit&#233;</French>
-		<German>Einheit w&#228;hlen</German>
-		<Italian>Scegli unità</Italian>
-		<Spanish>Elegir unidad</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_ADD_BUILDINGS</Tag>
-		<English>Add Buildings</English>
-		<French>Ajouter b&#226;timents</French>
-		<German>Geb&#228;ude</German>
-		<Italian>Aggiungi edifici</Italian>
-		<Spanish>Agregar edificios</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_UNITS</Tag>
-		<English>Units</English>
-		<French>Unit&#233;s</French>
-		<German>Einheiten</German>
-		<Italian>Unità</Italian>
-		<Spanish>Unidades</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_BUILDINGS</Tag>
-		<English>Buildings</English>
-		<French>B&#226;timents</French>
-		<German>Geb&#228;ude</German>
-		<Italian>Edifici</Italian>
-		<Spanish>Edificios</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_TECHNOLOGIES</Tag>
-		<English>Technologies</English>
-		<French>Technologies</French>
-		<German>Technologien</German>
-		<Italian>Tecnologie</Italian>
-		<Spanish>Tecnologías</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_CHANGE_ALL_PLOTS</Tag>
-		<English>Change all plots</English>
-		<French>Changer toutes les cases</French>
-		<German>Alle Gel&#228;ndefelder &#228;ndern</German>
-		<Italian>Cambia tutti i terreni</Italian>
-		<Spanish>Cambiar todas las casillas</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_ADD_MOUNTAIN</Tag>
-		<English>Add Mountain</English>
-		<French>Ajouter montagne</French>
-		<German>Berg hinzuf&#252;gen</German>
-		<Italian>Aggiungi montagna</Italian>
-		<Spanish>Agregar montaña</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_ADD_HILL</Tag>
-		<English>Add Hill</English>
-		<French>Ajouter colline</French>
-		<German>H&#252;gel hinzuf&#252;gen</German>
-		<Italian>Aggiungi collina</Italian>
-		<Spanish>Agregar colina</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_ADD_GRASS</Tag>
-		<English>Add Grass</English>
-		<French>Ajouter prairie</French>
-		<German>Gras hinzuf&#252;gen</German>
-		<Italian>Aggiungi prato</Italian>
-		<Spanish>Agregar pradera</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_ADD_OCEAN</Tag>
-		<English>Add Ocean</English>
-		<French>Ajouter oc&#233;an</French>
-		<German>Ozean hinzuf&#252;gen</German>
-		<Italian>Aggiungi oceano </Italian>
-		<Spanish>Agregar océano</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_EXPERIENCE</Tag>
-		<English>Experience:</English>
-		<French>Exp&#233;rience :</French>
-		<German>Erfahrung:</German>
-		<Italian>Esperienza:</Italian>
-		<Spanish>Experiencia:</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_LEVEL</Tag>
-		<English>Level:</English>
-		<French>Niveau :</French>
-		<German>Stufe:</German>
-		<Italian>Livello:</Italian>
-		<Spanish>Nivel:</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_ADD_SCRIPT</Tag>
-		<English>Add Script</English>
-		<French>Ajouter script</French>
-		<German>Skript hinzuf&#252;gen</German>
-		<Italian>Aggiungi script</Italian>
-		<Spanish>Agregar secuencia de comandos</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_POPULATION</Tag>
-		<English>Population:</English>
-		<French>Population :</French>
-		<German>Bev&#246;lkerung:</German>
-		<Italian>Popolazione:</Italian>
-		<Spanish>Población:</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_CULTURE</Tag>
-		<English>Culture:</English>
-		<French>Culture :</French>
-		<German>Kultur:</German>
-		<Italian>Cultura:</Italian>
-		<Spanish>Cultura:</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_GOLD</Tag>
-		<English>Gold:</English>
-		<French>Or :</French>
-		<German>Gold:</German>
-		<Italian>Oro:</Italian>
-		<Spanish>Oro:</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_EDIT_CITY</Tag>
-		<English>Edit City</English>
-		<French>Modifier ville</French>
-		<German>Stadt bearbeiten:</German>
-		<Italian>Modifica città</Italian>
-		<Spanish>Editar ciudad</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_ADD_SCRIPT_TO_PLOT</Tag>
-		<English>Add script to plot</English>
-		<French>Ajouter script &#224; la case</French>
-		<German>Skript zum Gel&#228;ndefeld hinzuf&#252;gen</German>
-		<Italian>Aggiungi script alla casella</Italian>
-		<Spanish>Agregar secuencia de comandos a la casilla</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_CHANGE_START_YEAR</Tag>
-		<English>Change start year</English>
-		<French>Change ann&#233;e de d&#233;part</French>
-		<German>Startjahr &#228;ndern</German>
-		<Italian>Cambia l'anno iniziale</Italian>
-		<Spanish>Cambiar año de comienzo</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_1_BY_1</Tag>
-		<English>1x1</English>
-		<French>1x1</French>
-		<German>1x1</German>
-		<Italian>1x1</Italian>
-		<Spanish>1x1</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_3_BY_3</Tag>
-		<English>3x3</English>
-		<French>3x3</French>
-		<German>3x3</German>
-		<Italian>3x3</Italian>
-		<Spanish>3x3</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_5_BY_5</Tag>
-		<English>5x5</English>
-		<French>5x5</French>
-		<German>5x5</German>
-		<Italian>5x5</Italian>
-		<Spanish>5x5</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_PLAYER_MODE</Tag>
-		<English>Player Mode</English>
-		<French>Mode Joueur</French>
-		<German>Spielermodus</German>
-		<Italian>Modalità giocatore</Italian>
-		<Spanish>Modo Jugador</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_MAP_MODE</Tag>
-		<English>Map Mode</English>
-		<French>Mode Carte</French>
-		<German>Kartenmodus</German>
-		<Italian>Modalità mappa</Italian>
-		<Spanish>Modo Mapa</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_WORLD_BUILDER_EDIT_CONTROL</Tag>
-		<English>World Builder Edit Control</English>
-		<French>Commande Editeur de monde </French>
-		<German>Weltenbauer-Bearbeitungssteuerung</German>
-		<Italian>Comandi dell'editor</Italian>
-		<Spanish>Control de edición del Creador de mundos</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_PROMOTIONS</Tag>
-		<English>Promotions</English>
-		<French>Promotions</French>
-		<German>Bef&#246;rderungen</German>
-		<Italian>Promozioni</Italian>
-		<Spanish>Ascensos</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_GRAPHICOPTION_EFFECTS_DISABLED</Tag>
-		<English>Effects Disabled</English>
-		<French>Effets d&#233;sactiv&#233;s</French>
-		<German>Effekte deaktiviert</German>
-		<Italian>Effetti disattivati</Italian>
-		<Spanish>Efectos desactivados</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_GRAPHICOPTION_EFFECTS_DISABLED_HELP</Tag>
-		<English>Turns off particle effects</English>
-		<French>D&#233;sactive les effets de particule</French>
-		<German>Schaltet Partikeleffekte aus</German>
-		<Italian>Disattiva effetti particellari</Italian>
-		<Spanish>Desactiva los efectos de partículas.</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_GRAPHICOPTION_GLOBE_VIEW_BUILDINGS_DISABLED</Tag>
-		<English>Globe View Buildings Disabled</English>
-		<French>B&#226;timents de la vue du globe d&#233;sactiv&#233;s</French>
-		<German>Globusansicht Geb&#228;ude deaktiviert</German>
-		<Italian>Edifici disattivati nella visuale globale</Italian>
-		<Spanish>Edificios desactivados en vista global</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_GRAPHICOPTION_GLOBE_VIEW_BUILDINGS_DISABLED_HELP</Tag>
-		<English>Building models won't be displayed in Globe View</English>
-		<French>Les mod&#232;les des b&#226;timents ne s'affichent pas en vue du globe</French>
-		<German>Geb&#228;udemodelle erscheinen nicht in Globusansicht</German>
-		<Italian>I modelli degli edifici non verranno mostrati nella visuale globale</Italian>
-		<Spanish>Los modelos de los edificios no se mostrarán en la vista global.</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_LEGAL_LINE_1</Tag>
-		<English>©2005 Firaxis Games, Inc. All Rights Reserved. Manufactured and marketed by Take Two Interactive, New York, NY.</English>
-		<French>&#169;2005 Firaxis Games, Inc. Tous droits r&#233;serv&#233;s. Fabriqu&#233; et commercialis&#233; par Take Two Interactive, New York, NY.</French>
-		<German>&#169; 2005 Firaxis Games, Inc. Alle Rechte vorbehalten. Herstellung und Vermarktung durch Take Two Interactive, New York, NY.</German>
-		<Italian>© 2005 Firaxis Games, Inc. Tutti i diritti riservati. Fabbricato e prodotto da Take Two Interactive, New York, NY.</Italian>
-		<Spanish>©2005 Firaxis Games, Inc. Reservados todos los derechos. Fabricado y comercializado por Take Two Interactive, New York, NY.</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_LEGAL_LINE_2</Tag>
-		<English>All trademarks are the property of their respective owners.</English>
-		<French>Toutes les marques commerciales sont la propri&#233;t&#233; de leurs d&#233;tenteurs respectifs.</French>
-		<German>Alle Warenzeichen sind Eigentum der jeweiligen Inhaber.</German>
-		<Italian>Tutti i marchi registrati sono proprietà dei rispettivi detentori.</Italian>
-		<Spanish>Todas las marcas comerciales pertenecen a sus respectivos titulares.</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_TUTORIAL_EXIT_RESTART_TITLE</Tag>
-		<English>Relaunching Game</English>
-		<French>Red&#233;marrage du jeu</French>
-		<German>Spiel wird neu gestartet</German>
-		<Italian>Riavvio del gioco in corso</Italian>
-		<Spanish>Reiniciando el juego</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_TUTORIAL_EXIT_RESTART_DESC</Tag>
-		<English>Restarting in order to exit tutorial...</English>
-		<French>Red&#233;marrage pour quitter l'initiation...</French>
-		<German>Neustart, um das Tutorial zu verlassen ...</German>
-		<Italian>Riavvio in corso per uscire dal tutorial...</Italian>
-		<Spanish>Reiniciando para salir del tutorial...</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MAP_UPDATE_TITLE</Tag>
-		<English>Map Transfer</English>
-		<French>Transfert carte</French>
-		<German>Kartentransfer</German>
-		<Italian>Trasferimento mappa</Italian>
-		<Spanish>Transferencia de mapa</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MAP_UPDATE_SEND</Tag>
-		<English>SENDING MAP...</English>
-		<French>ENVOI CARTE...</French>
-		<German>KARTE WIRD GESENDET ...</German>
-		<Italian>INVIO MAPPA IN CORSO...</Italian>
-		<Spanish>ENVIANDO MAPA...</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MAP_UPDATE_RECV</Tag>
-		<English>RECEIVING MAP...</English>
-		<French>RECEPTION CARTE...</French>
-		<German>KARTE WIRD ERHALTEN ...</German>
-		<Italian>RICEZIONE MAPPA IN CORSO...</Italian>
-		<Spanish>RECIBIENDO MAPA...</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MAP_NAME_TAG</Tag>
-		<English>Map Name:  %s1_Name</English>
-		<French>Nom de la carte : %s1_Name</French>
-		<German>Kartenname:  %s1_Name</German>
-		<Italian>Nome mappa:  %s1_Name</Italian>
-		<Spanish>Nombre del mapa:  %s1_Name</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_DOWNLOAD_MAP_WAIT</Tag>
-		<English>Waiting for peers to complete map transfer</English>
-		<French>En attente de peer pour terminer le transfert de la carte</French>
-		<German>Warten, dass Peers Kartentranfer abschließen</German>
-		<Italian>In attesa che i peer completino il trasferimento della mappa</Italian>
-		<Spanish>Esperando a que los interlocutores completen la transferencia del mapa</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_SEND_MAP_WAIT</Tag>
-		<English>Sending map to clients.  Please wait...</English>
-		<French>Envoi de la carte aux clients. Veuillez patienter...</French>
-		<German>Karte wird an Clients gesendet. Bitte warten ...</German>
-		<Italian>Invio della mappa ai client in corso.  Attendere...</Italian>
-		<Spanish>Enviando el mapa a los clientes.  Un momento...</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_INVALID_CAPTURE_TITLE</Tag>
-		<English>Invalid Device</English>
-		<French>Invalid Device</French>
-		<German>Invalid Device</German>
-		<Italian>Invalid Device</Italian>
-		<Spanish>Invalid Device</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_INVALID_CAPTURE_DESC</Tag>
-		<English>You have selected an unusable voice capture device.  Voice capture disabled.</English>
-		<French>You have selected an unusable voice capture device.  Voice capture disabled.</French>
-		<German>You have selected an unusable voice capture device.  Voice capture disabled.</German>
-		<Italian>You have selected an unusable voice capture device.  Voice capture disabled.</Italian>
-		<Spanish>You have selected an unusable voice capture device.  Voice capture disabled.</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_INVALID_PLAYBACK_TITLE</Tag>
-		<English>Invalid Device</English>
-		<French>Invalid Device</French>
-		<German>Invalid Device</German>
-		<Italian>Invalid Device</Italian>
-		<Spanish>Invalid Device</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_INVALID_PLAYBACK_DESC</Tag>
-		<English>You have selected an unusable voice playback device.  Voice playback disabled.</English>
-		<French>You have selected an unusable voice playback device.  Voice playback disabled.</French>
-		<German>You have selected an unusable voice playback device.  Voice playback disabled.</German>
-		<Italian>You have selected an unusable voice playback device.  Voice playback disabled.</Italian>
-		<Spanish>You have selected an unusable voice playback device.  Voice playback disabled.</Spanish>
+		<Russian>Stereo</Russian>
+		<Japanese>Stereo</Japanese>
+		<Chinese>Stereo</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_WB_SIZE_TAG</Tag>
 		<English>Map Size: %s1_size</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Map Size: %s1_size</French>
+		<German>Map Size: %s1_size</German>
+		<Italian>Map Size: %s1_size</Italian>
+		<Spanish>Map Size: %s1_size</Spanish>
+		<Russian>Map Size: %s1_size</Russian>
+		<Japanese>Map Size: %s1_size</Japanese>
+		<Chinese>Map Size: %s1_size</Chinese>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_GAME_LIST_FIREWALL_PING</Tag>
-		<English>[Firewalled]</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<Tag>TXT_KEY_GLOBELAYER_STRATEGY_DELETE_LINES</Tag>
+		<English>Delete All Lines</English>
+		<French>Delete All Lines</French>
+		<German>Delete All Lines</German>
+		<Italian>Delete All Lines</Italian>
+		<Spanish>Delete All Lines</Spanish>
+		<Russian>Delete All Lines</Russian>
+		<Japanese>Delete All Lines</Japanese>
+		<Chinese>Delete All Lines</Chinese>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_WB_REGENERATE_MAP</Tag>
-		<English>Regenerate Map Using Current Map Script</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<Tag>TXT_KEY_PITBOSS_DISCONNECT</Tag>
+		<English>We have lost our connection to the PitBoss!  Exiting to main menu...</English>
+		<French>We have lost our connection to the PitBoss!  Exiting to main menu...</French>
+		<German>We have lost our connection to the PitBoss!  Exiting to main menu...</German>
+		<Italian>We have lost our connection to the PitBoss!  Exiting to main menu...</Italian>
+		<Spanish>We have lost our connection to the PitBoss!  Exiting to main menu...</Spanish>
+		<Russian>We have lost our connection to the PitBoss!  Exiting to main menu...</Russian>
+		<Japanese>We have lost our connection to the PitBoss!  Exiting to main menu...</Japanese>
+		<Chinese>We have lost our connection to the PitBoss!  Exiting to main menu...</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_PLAYER_OOS</Tag>
 		<English>OOS Values: Sync=%d1_Num; Options=%d2_Num</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>OOS Values: Sync=%d1_Num; Options=%d2_Num</French>
+		<German>OOS Values: Sync=%d1_Num; Options=%d2_Num</German>
+		<Italian>OOS Values: Sync=%d1_Num; Options=%d2_Num</Italian>
+		<Spanish>OOS Values: Sync=%d1_Num; Options=%d2_Num</Spanish>
+		<Russian>OOS Values: Sync=%d1_Num; Options=%d2_Num</Russian>
+		<Japanese>OOS Values: Sync=%d1_Num; Options=%d2_Num</Japanese>
+		<Chinese>OOS Values: Sync=%d1_Num; Options=%d2_Num</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_OOS_TITLE</Tag>
 		<English>The game has gone Out Of Sync.[NEWLINE]Please check OOS values (next to scores).[NEWLINE]The player with different values should reconnect in order to resync.</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>The game has gone Out Of Sync.[NEWLINE]Please check OOS values (next to scores).[NEWLINE]The player with different values should reconnect in order to resync.</French>
+		<German>The game has gone Out Of Sync.[NEWLINE]Please check OOS values (next to scores).[NEWLINE]The player with different values should reconnect in order to resync.</German>
+		<Italian>The game has gone Out Of Sync.[NEWLINE]Please check OOS values (next to scores).[NEWLINE]The player with different values should reconnect in order to resync.</Italian>
+		<Spanish>The game has gone Out Of Sync.[NEWLINE]Please check OOS values (next to scores).[NEWLINE]The player with different values should reconnect in order to resync.</Spanish>
+		<Russian>The game has gone Out Of Sync.[NEWLINE]Please check OOS values (next to scores).[NEWLINE]The player with different values should reconnect in order to resync.</Russian>
+		<Japanese>The game has gone Out Of Sync.[NEWLINE]Please check OOS values (next to scores).[NEWLINE]The player with different values should reconnect in order to resync.</Japanese>
+		<Chinese>The game has gone Out Of Sync.[NEWLINE]Please check OOS values (next to scores).[NEWLINE]The player with different values should reconnect in order to resync.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_INVALID_LOGIN_TITLE</Tag>
 		<English>Invalid Login Name</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Invalid Login Name</French>
+		<German>Invalid Login Name</German>
+		<Italian>Invalid Login Name</Italian>
+		<Spanish>Invalid Login Name</Spanish>
+		<Russian>Invalid Login Name</Russian>
+		<Japanese>Invalid Login Name</Japanese>
+		<Chinese>Invalid Login Name</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_INVALID_LOGIN_DESC</Tag>
 		<English>Nicknames may not begin with a number, '$', '#', '%%', '&amp;', or '@'</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Nicknames may not begin with a number, '$', '#', '%%', '&amp;', or '@'</French>
+		<German>Nicknames may not begin with a number, '$', '#', '%%', '&amp;', or '@'</German>
+		<Italian>Nicknames may not begin with a number, '$', '#', '%%', '&amp;', or '@'</Italian>
+		<Spanish>Nicknames may not begin with a number, '$', '#', '%%', '&amp;', or '@'</Spanish>
+		<Russian>Nicknames may not begin with a number, '$', '#', '%%', '&amp;', or '@'</Russian>
+		<Japanese>Nicknames may not begin with a number, '$', '#', '%%', '&amp;', or '@'</Japanese>
+		<Chinese>Nicknames may not begin with a number, '$', '#', '%%', '&amp;', or '@'</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GAME_LIST_FIREWALL_PING</Tag>
 		<English>[Firewalled]</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>[Firewalled]</French>
+		<German>[Firewalled]</German>
+		<Italian>[Firewalled]</Italian>
+		<Spanish>[Firewalled]</Spanish>
+		<Russian>[Firewalled]</Russian>
+		<Japanese>[Firewalled]</Japanese>
+		<Chinese>[Firewalled]</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MEMBERS_IGNORE_MEMBER</Tag>
 		<English>Ignore User</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Ignore User</French>
+		<German>Ignore User</German>
+		<Italian>Ignore User</Italian>
+		<Spanish>Ignore User</Spanish>
+		<Russian>Ignore User</Russian>
+		<Japanese>Ignore User</Japanese>
+		<Chinese>Ignore User</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MEMBERS_UNIGNORE_MEMBER</Tag>
 		<English>Stop Ignoring User</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Stop Ignoring User</French>
+		<German>Stop Ignoring User</German>
+		<Italian>Stop Ignoring User</Italian>
+		<Spanish>Stop Ignoring User</Spanish>
+		<Russian>Stop Ignoring User</Russian>
+		<Japanese>Stop Ignoring User</Japanese>
+		<Chinese>Stop Ignoring User</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_POPUP_KICKED</Tag>
 		<English>We are being kicked from the game!  Exiting to main menu...</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>We are being kicked from the game!  Exiting to main menu...</French>
+		<German>We are being kicked from the game!  Exiting to main menu...</German>
+		<Italian>We are being kicked from the game!  Exiting to main menu...</Italian>
+		<Spanish>We are being kicked from the game!  Exiting to main menu...</Spanish>
+		<Russian>We are being kicked from the game!  Exiting to main menu...</Russian>
+		<Japanese>We are being kicked from the game!  Exiting to main menu...</Japanese>
+		<Chinese>We are being kicked from the game!  Exiting to main menu...</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_LOGIN_TIMEOUT_TITLE</Tag>
 		<English>Login Error</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Login Error</French>
+		<German>Login Error</German>
+		<Italian>Login Error</Italian>
+		<Spanish>Login Error</Spanish>
+		<Russian>Login Error</Russian>
+		<Japanese>Login Error</Japanese>
+		<Chinese>Login Error</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_LOGIN_TIMEOUT_DESC</Tag>
 		<English>Our login attempt has timed out.  The authentication server may be down.</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Our login attempt has timed out.  The authentication server may be down.</French>
+		<German>Our login attempt has timed out.  The authentication server may be down.</German>
+		<Italian>Our login attempt has timed out.  The authentication server may be down.</Italian>
+		<Spanish>Our login attempt has timed out.  The authentication server may be down.</Spanish>
+		<Russian>Our login attempt has timed out.  The authentication server may be down.</Russian>
+		<Japanese>Our login attempt has timed out.  The authentication server may be down.</Japanese>
+		<Chinese>Our login attempt has timed out.  The authentication server may be down.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_BAD_NEW_PASSWORD_TITLE</Tag>
 		<English>Bad Password</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Bad Password</French>
+		<German>Bad Password</German>
+		<Italian>Bad Password</Italian>
+		<Spanish>Bad Password</Spanish>
+		<Russian>Bad Password</Russian>
+		<Japanese>Bad Password</Japanese>
+		<Chinese>Bad Password</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_BAD_NEW_PASSWORD_DESC</Tag>
 		<English>The password is incorrect for the provided E-Mail address.</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>The password is incorrect for the provided E-Mail address.</French>
+		<German>The password is incorrect for the provided E-Mail address.</German>
+		<Italian>The password is incorrect for the provided E-Mail address.</Italian>
+		<Spanish>The password is incorrect for the provided E-Mail address.</Spanish>
+		<Russian>The password is incorrect for the provided E-Mail address.</Russian>
+		<Japanese>The password is incorrect for the provided E-Mail address.</Japanese>
+		<Chinese>The password is incorrect for the provided E-Mail address.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_NICKNAME_INUSE_TITLE</Tag>
 		<English>Bad Login</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Bad Login</French>
+		<German>Bad Login</German>
+		<Italian>Bad Login</Italian>
+		<Spanish>Bad Login</Spanish>
+		<Russian>Bad Login</Russian>
+		<Japanese>Bad Login</Japanese>
+		<Chinese>Bad Login</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_NICKNAME_INUSE_DESC</Tag>
 		<English>This login name has already been claimed by another account.</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>This login name has already been claimed by another account.</French>
+		<German>This login name has already been claimed by another account.</German>
+		<Italian>This login name has already been claimed by another account.</Italian>
+		<Spanish>This login name has already been claimed by another account.</Spanish>
+		<Russian>This login name has already been claimed by another account.</Russian>
+		<Japanese>This login name has already been claimed by another account.</Japanese>
+		<Chinese>This login name has already been claimed by another account.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_BUDDY_LIST_STATUS_ONLINE</Tag>
 		<English>Online</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Online</French>
+		<German>Online</German>
+		<Italian>Online</Italian>
+		<Spanish>Online</Spanish>
+		<Russian>Online</Russian>
+		<Japanese>Online</Japanese>
+		<Chinese>Online</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_BUDDY_LIST_STATUS_NA</Tag>
 		<English>Not Available</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Not Available</French>
+		<German>Not Available</German>
+		<Italian>Not Available</Italian>
+		<Spanish>Not Available</Spanish>
+		<Russian>Not Available</Russian>
+		<Japanese>Not Available</Japanese>
+		<Chinese>Not Available</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_BUDDY_LIST_STATUS_STAGING</Tag>
 		<English>Staging</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Staging</French>
+		<German>Staging</German>
+		<Italian>Staging</Italian>
+		<Spanish>Staging</Spanish>
+		<Russian>Staging</Russian>
+		<Japanese>Staging</Japanese>
+		<Chinese>Staging</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_BUDDY_LIST_STATUS_PLAYING</Tag>
 		<English>Playing</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Playing</French>
+		<German>Playing</German>
+		<Italian>Playing</Italian>
+		<Spanish>Playing</Spanish>
+		<Russian>Playing</Russian>
+		<Japanese>Playing</Japanese>
+		<Chinese>Playing</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_BUDDY_LIST_STATUS_OFFLINE</Tag>
 		<English>Offline</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Offline</French>
+		<German>Offline</German>
+		<Italian>Offline</Italian>
+		<Spanish>Offline</Spanish>
+		<Russian>Offline</Russian>
+		<Japanese>Offline</Japanese>
+		<Chinese>Offline</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MIN_LATITUDE</Tag>
 		<English>[ICON_BULLET]Can build at a minimum latitude of %d1 degrees</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>[ICON_BULLET]Can build at a minimum latitude of %d1 degrees</French>
+		<German>[ICON_BULLET]Can build at a minimum latitude of %d1 degrees</German>
+		<Italian>[ICON_BULLET]Can build at a minimum latitude of %d1 degrees</Italian>
+		<Spanish>[ICON_BULLET]Can build at a minimum latitude of %d1 degrees</Spanish>
+		<Russian>[ICON_BULLET]Can build at a minimum latitude of %d1 degrees</Russian>
+		<Japanese>[ICON_BULLET]Can build at a minimum latitude of %d1 degrees</Japanese>
+		<Chinese>[ICON_BULLET]Can build at a minimum latitude of %d1 degrees</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MAX_LATITUDE</Tag>
 		<English>[ICON_BULLET]Can build at a maximum latitude of %d1 degrees</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>[ICON_BULLET]Can build at a maximum latitude of %d1 degrees</French>
+		<German>[ICON_BULLET]Can build at a maximum latitude of %d1 degrees</German>
+		<Italian>[ICON_BULLET]Can build at a maximum latitude of %d1 degrees</Italian>
+		<Spanish>[ICON_BULLET]Can build at a maximum latitude of %d1 degrees</Spanish>
+		<Russian>[ICON_BULLET]Can build at a maximum latitude of %d1 degrees</Russian>
+		<Japanese>[ICON_BULLET]Can build at a maximum latitude of %d1 degrees</Japanese>
+		<Chinese>[ICON_BULLET]Can build at a maximum latitude of %d1 degrees</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_WB_REGENERATE_MAP</Tag>
 		<English>Regenerate Map Using Current Map Script</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Regenerate Map Using Current Map Script</French>
+		<German>Regenerate Map Using Current Map Script</German>
+		<Italian>Regenerate Map Using Current Map Script</Italian>
+		<Spanish>Regenerate Map Using Current Map Script</Spanish>
+		<Russian>Regenerate Map Using Current Map Script</Russian>
+		<Japanese>Regenerate Map Using Current Map Script</Japanese>
+		<Chinese>Regenerate Map Using Current Map Script</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_CHANGE_PRODUCTION</Tag>
@@ -1084,6 +309,9 @@
 		<German>Change Production</German>
 		<Italian>Change Production</Italian>
 		<Spanish>Change Production</Spanish>
+		<Russian>Change Production</Russian>
+		<Japanese>Change Production</Japanese>
+		<Chinese>Change Production</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_DRAFT_UNIT</Tag>
@@ -1092,6 +320,9 @@
 		<German>Draft %s1_Unit, %d2 Pop</German>
 		<Italian>Draft %s1_Unit, %d2 Pop</Italian>
 		<Spanish>Draft %s1_Unit, %d2 Pop</Spanish>
+		<Russian>Draft %s1_Unit, %d2 Pop</Russian>
+		<Japanese>Draft %s1_Unit, %d2 Pop</Japanese>
+		<Chinese>Draft %s1_Unit, %d2 Pop</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_HURRY_PRODUCTION</Tag>
@@ -1100,6 +331,9 @@
 		<German>Hurry Production</German>
 		<Italian>Hurry Production</Italian>
 		<Spanish>Hurry Production</Spanish>
+		<Russian>Hurry Production</Russian>
+		<Japanese>Hurry Production</Japanese>
+		<Chinese>Hurry Production</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_HURRY_PRODUCTION_GOLD</Tag>
@@ -1108,6 +342,9 @@
 		<German>, %d1 Gold</German>
 		<Italian>, %d1 Gold</Italian>
 		<Spanish>, %d1 Gold</Spanish>
+		<Russian>, %d1 Gold</Russian>
+		<Japanese>, %d1 Gold</Japanese>
+		<Chinese>, %d1 Gold</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_HURRY_PRODUCTION_POP</Tag>
@@ -1116,6 +353,9 @@
 		<German>, %d1 Pop</German>
 		<Italian>, %d1 Pop</Italian>
 		<Spanish>, %d1 Pop</Spanish>
+		<Russian>, %d1 Pop</Russian>
+		<Japanese>, %d1 Pop</Japanese>
+		<Chinese>, %d1 Pop</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_TRADE_RESOURCE</Tag>
@@ -1124,30 +364,42 @@
 		<German>%s1_Bonus (1 of %d2)</German>
 		<Italian>%s1_Bonus (1 of %d2)</Italian>
 		<Spanish>%s1_Bonus (1 of %d2)</Spanish>
+		<Russian>%s1_Bonus (1 of %d2)</Russian>
+		<Japanese>%s1_Bonus (1 of %d2)</Japanese>
+		<Chinese>%s1_Bonus (1 of %d2)</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_UNIT_STACK</Tag>
 		<English>Unit Stack (%d1):</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Unit Stack (%d1):</French>
+		<German>Unit Stack (%d1):</German>
+		<Italian>Unit Stack (%d1):</Italian>
+		<Spanish>Unit Stack (%d1):</Spanish>
+		<Russian>Unit Stack (%d1):</Russian>
+		<Japanese>Unit Stack (%d1):</Japanese>
+		<Chinese>Unit Stack (%d1):</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_UNIT_CAN_MOVE_IMPASSABLE</Tag>
 		<English>[ICON_BULLET]Can Move through Impassable Terrain</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>[ICON_BULLET]Can Move through Impassable Terrain</French>
+		<German>[ICON_BULLET]Can Move through Impassable Terrain</German>
+		<Italian>[ICON_BULLET]Can Move through Impassable Terrain</Italian>
+		<Spanish>[ICON_BULLET]Can Move through Impassable Terrain</Spanish>
+		<Russian>[ICON_BULLET]Can Move through Impassable Terrain</Russian>
+		<Japanese>[ICON_BULLET]Can Move through Impassable Terrain</Japanese>
+		<Chinese>[ICON_BULLET]Can Move through Impassable Terrain</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_POPUP_FLIPPED_CITY_KEEP</Tag>
 		<English>The people of %s1_CityName wish to join our illustrious empire! Shall we welcome them?</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>The people of %s1_CityName wish to join our illustrious empire! Shall we welcome them?</French>
+		<German>The people of %s1_CityName wish to join our illustrious empire! Shall we welcome them?</German>
+		<Italian>The people of %s1_CityName wish to join our illustrious empire! Shall we welcome them?</Italian>
+		<Spanish>The people of %s1_CityName wish to join our illustrious empire! Shall we welcome them?</Spanish>
+		<Russian>The people of %s1_CityName wish to join our illustrious empire! Shall we welcome them?</Russian>
+		<Japanese>The people of %s1_CityName wish to join our illustrious empire! Shall we welcome them?</Japanese>
+		<Chinese>The people of %s1_CityName wish to join our illustrious empire! Shall we welcome them?</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_POPUP_KEEP_FLIPPED_CITY</Tag>
@@ -1156,101 +408,1407 @@
 		<German>Ja! Benennt einen neuen Statthalter ...</German>
 		<Italian>S&#236;! Instaura un nuovo governatore...</Italian>
 		<Spanish>S&#237;. Que tome posesi&#243;n un nuevo gobernante.</Spanish>
+		<Russian>Yes! Install a new Governor...</Russian>
+		<Japanese>Yes! Install a new Governor...</Japanese>
+		<Chinese>Yes! Install a new Governor...</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_POPUP_DISBAND_FLIPPED_CITY</Tag>
 		<English>No. Disband the city!</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>No. Disband the city!</French>
+		<German>No. Disband the city!</German>
+		<Italian>No. Disband the city!</Italian>
+		<Spanish>No. Disband the city!</Spanish>
+		<Russian>No. Disband the city!</Russian>
+		<Japanese>No. Disband the city!</Japanese>
+		<Chinese>No. Disband the city!</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ZOOM_TO_CITY_DOMESTIC</Tag>
 		<English>Zoom</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Zoom</French>
+		<German>Zoom</German>
+		<Italian>Zoom</Italian>
+		<Spanish>Zoom</Spanish>
+		<Russian>Zoom</Russian>
+		<Japanese>Zoom</Japanese>
+		<Chinese>Zoom</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ZOOM_CITY_HELP</Tag>
 		<English>Enter the city screen for this City</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Enter the city screen for this City</French>
+		<German>Enter the city screen for this City</German>
+		<Italian>Enter the city screen for this City</Italian>
+		<Spanish>Enter the city screen for this City</Spanish>
+		<Russian>Enter the city screen for this City</Russian>
+		<Japanese>Enter the city screen for this City</Japanese>
+		<Chinese>Enter the city screen for this City</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_BELOW_MIN_SPECS_MESSAGE</Tag>
 		<English>Your machine is below minimum specifications. Civ4 will not run on this hardware setup.</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Your machine is below minimum specifications. Civ4 will not run on this hardware setup.</French>
+		<German>Your machine is below minimum specifications. Civ4 will not run on this hardware setup.</German>
+		<Italian>Your machine is below minimum specifications. Civ4 will not run on this hardware setup.</Italian>
+		<Spanish>Your machine is below minimum specifications. Civ4 will not run on this hardware setup.</Spanish>
+		<Russian>Your machine is below minimum specifications. Civ4 will not run on this hardware setup.</Russian>
+		<Japanese>Your machine is below minimum specifications. Civ4 will not run on this hardware setup.</Japanese>
+		<Chinese>Your machine is below minimum specifications. Civ4 will not run on this hardware setup.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_OPTIONS_SCREEN_TEXTURE_QUALITY_LEVEL</Tag>
 		<English>Texture Quality Level</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Texture Quality Level</French>
+		<German>Texture Quality Level</German>
+		<Italian>Texture Quality Level</Italian>
+		<Spanish>Texture Quality Level</Spanish>
+		<Russian>Texture Quality Level</Russian>
+		<Japanese>Texture Quality Level</Japanese>
+		<Chinese>Texture Quality Level</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_OPTIONS_SCREEN_TEXTURE_QUALITY_LEVEL_HELP</Tag>
 		<English>Determines the quality of texture displayed in-game.</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Determines the quality of texture displayed in-game.</French>
+		<German>Determines the quality of texture displayed in-game.</German>
+		<Italian>Determines the quality of texture displayed in-game.</Italian>
+		<Spanish>Determines the quality of texture displayed in-game.</Spanish>
+		<Russian>Determines the quality of texture displayed in-game.</Russian>
+		<Japanese>Determines the quality of texture displayed in-game.</Japanese>
+		<Chinese>Determines the quality of texture displayed in-game.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GRAPHICOPTION_FULLSCREEN</Tag>
 		<English>Full-screen Mode</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>Full-screen Mode</French>
+		<German>Full-screen Mode</German>
+		<Italian>Full-screen Mode</Italian>
+		<Spanish>Full-screen Mode</Spanish>
+		<Russian>Full-screen Mode</Russian>
+		<Japanese>Full-screen Mode</Japanese>
+		<Chinese>Full-screen Mode</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GRAPHICOPTION_FULLSCREEN_HELP</Tag>
 		<English>The game will run in a window when not set.</English>
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<French>The game will run in a window when not set.</French>
+		<German>The game will run in a window when not set.</German>
+		<Italian>The game will run in a window when not set.</Italian>
+		<Spanish>The game will run in a window when not set.</Spanish>
+		<Russian>The game will run in a window when not set.</Russian>
+		<Japanese>The game will run in a window when not set.</Japanese>
+		<Chinese>The game will run in a window when not set.</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GRAPHICOPTION_LOWRES_TEXTURES_HELP</Tag>
-		<English>Lower resolution textures will be used</English>		
-		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<English>Lower resolution textures will be used</English>
+		<French>Lower resolution textures will be used</French>
+		<German>Lower resolution textures will be used</German>
+		<Italian>Lower resolution textures will be used</Italian>
+		<Spanish>Lower resolution textures will be used</Spanish>
+		<Russian>Lower resolution textures will be used</Russian>
+		<Japanese>Lower resolution textures will be used</Japanese>
+		<Chinese>Lower resolution textures will be used</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_LOADSAVE_ALL_FILES</Tag>
-		<English>All files (*.*)</English>		
+		<English>All files (*.*)</English>
 		<French>All files (*.*)</French>
 		<German>All files (*.*)</German>
 		<Italian>All files (*.*)</Italian>
 		<Spanish>All files (*.*)</Spanish>
+		<Russian>All files (*.*)</Russian>
+		<Japanese>All files (*.*)</Japanese>
+		<Chinese>All files (*.*)</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_LOADSAVE_FILE_NOT_EXIST</Tag>
-		<English>The specified file does not exist.[NEWLINE]Please select a valid file name.</English>		
+		<English>The specified file does not exist.[NEWLINE]Please select a valid file name.</English>
 		<French>The specified file does not exist.[NEWLINE]Please select a valid file name.</French>
 		<German>The specified file does not exist.[NEWLINE]Please select a valid file name.</German>
 		<Italian>The specified file does not exist.[NEWLINE]Please select a valid file name.</Italian>
 		<Spanish>The specified file does not exist.[NEWLINE]Please select a valid file name.</Spanish>
+		<Russian>The specified file does not exist.[NEWLINE]Please select a valid file name.</Russian>
+		<Japanese>The specified file does not exist.[NEWLINE]Please select a valid file name.</Japanese>
+		<Chinese>The specified file does not exist.[NEWLINE]Please select a valid file name.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_LOADSAVE_FILE_CANT_OPEN</Tag>
+		<English>Error opening file %s1</English>
+		<French>Error opening file %s1</French>
+		<German>Error opening file %s1</German>
+		<Italian>Error opening file %s1</Italian>
+		<Spanish>Error opening file %s1</Spanish>
+		<Russian>Error opening file %s1</Russian>
+		<Japanese>Error opening file %s1</Japanese>
+		<Chinese>Error opening file %s1</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_LOADSAVE_FILE_CANT_CREATE</Tag>
+		<English>Error creating file %s1</English>
+		<French>Error creating file %s1</French>
+		<German>Error creating file %s1</German>
+		<Italian>Error creating file %s1</Italian>
+		<Spanish>Error creating file %s1</Spanish>
+		<Russian>Error creating file %s1</Russian>
+		<Japanese>Error creating file %s1</Japanese>
+		<Chinese>Error creating file %s1</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_LOADSAVE_FILE_PROTECTED</Tag>
+		<English>The save file you have selected is protected to ensure that the assets in your mod folder have not been changed.</English>
+		<French>The save file you have selected is protected to ensure that the assets in your mod folder have not been changed.</French>
+		<German>The save file you have selected is protected to ensure that the assets in your mod folder have not been changed.</German>
+		<Italian>The save file you have selected is protected to ensure that the assets in your mod folder have not been changed.</Italian>
+		<Spanish>The save file you have selected is protected to ensure that the assets in your mod folder have not been changed.</Spanish>
+		<Russian>The save file you have selected is protected to ensure that the assets in your mod folder have not been changed.</Russian>
+		<Japanese>The save file you have selected is protected to ensure that the assets in your mod folder have not been changed.</Japanese>
+		<Chinese>The save file you have selected is protected to ensure that the assets in your mod folder have not been changed.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WRONG_VERSION</Tag>
+		<English>Cannot load version %d1, expected version %d2 or lower</English>
+		<French>Cannot load version %d1, expected version %d2 or lower</French>
+		<German>Cannot load version %d1, expected version %d2 or lower</German>
+		<Italian>Cannot load version %d1, expected version %d2 or lower</Italian>
+		<Spanish>Cannot load version %d1, expected version %d2 or lower</Spanish>
+		<Russian>Cannot load version %d1, expected version %d2 or lower</Russian>
+		<Japanese>Cannot load version %d1, expected version %d2 or lower</Japanese>
+		<Chinese>Cannot load version %d1, expected version %d2 or lower</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_UNCOMPRESS_FAILED</Tag>
+		<English>Failed to uncompress game data</English>
+		<French>Failed to uncompress game data</French>
+		<German>Failed to uncompress game data</German>
+		<Italian>Failed to uncompress game data</Italian>
+		<Spanish>Failed to uncompress game data</Spanish>
+		<Russian>Failed to uncompress game data</Russian>
+		<Japanese>Failed to uncompress game data</Japanese>
+		<Chinese>Failed to uncompress game data</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_COMPRESS_FAILED</Tag>
+		<English>Failed to compress game data</English>
+		<French>Failed to compress game data</French>
+		<German>Failed to compress game data</German>
+		<Italian>Failed to compress game data</Italian>
+		<Spanish>Failed to compress game data</Spanish>
+		<Russian>Failed to compress game data</Russian>
+		<Japanese>Failed to compress game data</Japanese>
+		<Chinese>Failed to compress game data</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_LOAD_ERROR</Tag>
+		<English>Load Error</English>
+		<French>Load Error</French>
+		<German>Load Error</German>
+		<Italian>Load Error</Italian>
+		<Spanish>Load Error</Spanish>
+		<Russian>Load Error</Russian>
+		<Japanese>Load Error</Japanese>
+		<Chinese>Load Error</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_SAVE_ERROR</Tag>
+		<English>Save Error</English>
+		<French>Save Error</French>
+		<German>Save Error</German>
+		<Italian>Save Error</Italian>
+		<Spanish>Save Error</Spanish>
+		<Russian>Save Error</Russian>
+		<Japanese>Save Error</Japanese>
+		<Chinese>Save Error</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GRAPHICOPTION_LOWRES_TEXTURES</Tag>
 		<English>Low Resolution Textures</English>
+		<French>Low Resolution Textures</French>
+		<German>Low Resolution Textures</German>
+		<Italian>Low Resolution Textures</Italian>
+		<Spanish>Low Resolution Textures</Spanish>
+		<Russian>Low Resolution Textures</Russian>
+		<Japanese>Low Resolution Textures</Japanese>
+		<Chinese>Low Resolution Textures</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_BUDDY_LIST_STAGING_LOC</Tag>
+		<English>In Staging Room: "%s1_GameName"</English>
+		<French>In Staging Room: "%s1_GameName"</French>
+		<German>In Staging Room: "%s1_GameName"</German>
+		<Italian>In Staging Room: "%s1_GameName"</Italian>
+		<Spanish>In Staging Room: "%s1_GameName"</Spanish>
+		<Russian>In Staging Room: "%s1_GameName"</Russian>
+		<Japanese>In Staging Room: "%s1_GameName"</Japanese>
+		<Chinese>In Staging Room: "%s1_GameName"</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_BUDDY_LIST_PLAYING_LOC</Tag>
+		<English>Playing Game: "%s1_GameName"</English>
+		<French>Playing Game: "%s1_GameName"</French>
+		<German>Playing Game: "%s1_GameName"</German>
+		<Italian>Playing Game: "%s1_GameName"</Italian>
+		<Spanish>Playing Game: "%s1_GameName"</Spanish>
+		<Russian>Playing Game: "%s1_GameName"</Russian>
+		<Japanese>Playing Game: "%s1_GameName"</Japanese>
+		<Chinese>Playing Game: "%s1_GameName"</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISC_SEND</Tag>
+		<English>Send</English>
+		<French>Send</French>
+		<German>Send</German>
+		<Italian>Send</Italian>
+		<Spanish>Send</Spanish>
+		<Russian>Send</Russian>
+		<Japanese>Send</Japanese>
+		<Chinese>Send</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_CLIMATE</Tag>
+		<English>Climate:</English>
+		<French>Climate:</French>
+		<German>Climate:</German>
+		<Italian>Climate:</Italian>
+		<Spanish>Climate:</Spanish>
+		<Russian>Climate:</Russian>
+		<Japanese>Climate:</Japanese>
+		<Chinese>Climate:</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_SEALEVEL</Tag>
+		<English>Sea Level:</English>
+		<French>Sea Level:</French>
+		<German>Sea Level:</German>
+		<Italian>Sea Level:</Italian>
+		<Spanish>Sea Level:</Spanish>
+		<Russian>Sea Level:</Russian>
+		<Japanese>Sea Level:</Japanese>
+		<Chinese>Sea Level:</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INFO_GRAPH</Tag>
+		<English>Graph</English>
+		<French>Graph</French>
+		<German>Graph</German>
+		<Italian>Graph</Italian>
+		<Spanish>Graph</Spanish>
+		<Russian>Graph</Russian>
+		<Japanese>Graph</Japanese>
+		<Chinese>Graph</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INFO_RIVAL_BEST</Tag>
+		<English>Rival Best</English>
+		<French>Rival Best</French>
+		<German>Rival Best</German>
+		<Italian>Rival Best</Italian>
+		<Spanish>Rival Best</Spanish>
+		<Russian>Rival Best</Russian>
+		<Japanese>Rival Best</Japanese>
+		<Chinese>Rival Best</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INFO_RIVAL_WORST</Tag>
+		<English>Rival Worst</English>
+		<French>Rival Worst</French>
+		<German>Rival Worst</German>
+		<Italian>Rival Worst</Italian>
+		<Spanish>Rival Worst</Spanish>
+		<Russian>Rival Worst</Russian>
+		<Japanese>Rival Worst</Japanese>
+		<Chinese>Rival Worst</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INFO_ENTIRE_HISTORY</Tag>
+		<English>Entire History</English>
+		<French>Entire History</French>
+		<German>Entire History</German>
+		<Italian>Entire History</Italian>
+		<Spanish>Entire History</Spanish>
+		<Russian>Entire History</Russian>
+		<Japanese>Entire History</Japanese>
+		<Chinese>Entire History</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INFO_NUM_TURNS</Tag>
+		<English>%d1_Num Turns</English>
+		<French>%d1_Num Turns</French>
+		<German>%d1_Num Turns</German>
+		<Italian>%d1_Num Turns</Italian>
+		<Spanish>%d1_Num Turns</Spanish>
+		<Russian>%d1_Num Turns</Russian>
+		<Japanese>%d1_Num Turns</Japanese>
+		<Chinese>%d1_Num Turns</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GAMESPEED_MARATHON_HELP</Tag>
+		<English>This extremely long game speed will allow almost an entire normal game's worth of turns for each era.</English>
+		<French>This extremely long game speed will allow almost an entire normal game's worth of turns for each era.</French>
+		<German>This extremely long game speed will allow almost an entire normal game's worth of turns for each era.</German>
+		<Italian>This extremely long game speed will allow almost an entire normal game's worth of turns for each era.</Italian>
+		<Spanish>This extremely long game speed will allow almost an entire normal game's worth of turns for each era.</Spanish>
+		<Russian>This extremely long game speed will allow almost an entire normal game's worth of turns for each era.</Russian>
+		<Japanese>This extremely long game speed will allow almost an entire normal game's worth of turns for each era.</Japanese>
+		<Chinese>This extremely long game speed will allow almost an entire normal game's worth of turns for each era.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_FOREIGN_ADVISOR_NOT_ALLOWED_TRADE</Tag>
+		<English>Can't Trade:</English>
+		<French>Can't Trade:</French>
+		<German>Can't Trade:</German>
+		<Italian>Can't Trade:</Italian>
+		<Spanish>Can't Trade:</Spanish>
+		<Russian>Can't Trade:</Russian>
+		<Japanese>Can't Trade:</Japanese>
+		<Chinese>Can't Trade:</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PLAYEROPTION_LEAVE_FORESTS</Tag>
+		<English>Automated Workers Leave Forests</English>
+		<French>Automated Workers Leave Forests</French>
+		<German>Automated Workers Leave Forests</German>
+		<Italian>Automated Workers Leave Forests</Italian>
+		<Spanish>Automated Workers Leave Forests</Spanish>
+		<Russian>Automated Workers Leave Forests</Russian>
+		<Japanese>Automated Workers Leave Forests</Japanese>
+		<Chinese>Automated Workers Leave Forests</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PLAYEROPTION_LEAVE_FORESTS_HELP</Tag>
+		<English>Automated workers will not chop down forests</English>
+		<French>Automated workers will not chop down forests</French>
+		<German>Automated workers will not chop down forests</German>
+		<Italian>Automated workers will not chop down forests</Italian>
+		<Spanish>Automated workers will not chop down forests</Spanish>
+		<Russian>Automated workers will not chop down forests</Russian>
+		<Japanese>Automated workers will not chop down forests</Japanese>
+		<Chinese>Automated workers will not chop down forests</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INTERFACEMODE_SIGN</Tag>
+		<English>Sign Mode</English>
+		<French>Sign Mode</French>
+		<German>Sign Mode</German>
+		<Italian>Sign Mode</Italian>
+		<Spanish>Sign Mode</Spanish>
+		<Russian>Sign Mode</Russian>
+		<Japanese>Sign Mode</Japanese>
+		<Chinese>Sign Mode</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_SIGN</Tag>
+		<English>Sign</English>
+		<French>Sign</French>
+		<German>Sign</German>
+		<Italian>Sign</Italian>
+		<Spanish>Sign</Spanish>
+		<Russian>Sign</Russian>
+		<Japanese>Sign</Japanese>
+		<Chinese>Sign</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_SIGN_HELP</Tag>
+		<English>Adds a sign to a specific plot that you and your teammates can see.</English>
+		<French>Adds a sign to a specific plot that you and your teammates can see.</French>
+		<German>Adds a sign to a specific plot that you and your teammates can see.</German>
+		<Italian>Adds a sign to a specific plot that you and your teammates can see.</Italian>
+		<Spanish>Adds a sign to a specific plot that you and your teammates can see.</Spanish>
+		<Russian>Adds a sign to a specific plot that you and your teammates can see.</Russian>
+		<Japanese>Adds a sign to a specific plot that you and your teammates can see.</Japanese>
+		<Chinese>Adds a sign to a specific plot that you and your teammates can see.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PLOT_NOT_IRRIGATED</Tag>
+		<English>[SPACE](Not Irrigated)</English>
+		<French>[SPACE](Not Irrigated)</French>
+		<German>[SPACE](Not Irrigated)</German>
+		<Italian>[SPACE](Not Irrigated)</Italian>
+		<Spanish>[SPACE](Not Irrigated)</Spanish>
+		<Russian>[SPACE](Not Irrigated)</Russian>
+		<Japanese>[SPACE](Not Irrigated)</Japanese>
+		<Chinese>[SPACE](Not Irrigated)</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAIN_CITY_DEFENSE</Tag>
+		<English>%F1 Defense: %D2%%</English>
+		<French>%F1 D&#233;fense: %D2%%</French>
+		<German>%F1 Verteidigung: %D2%%</German>
+		<Italian>%F1 Difesa: %D2%%</Italian>
+		<Spanish>%F1 Defensa: %D2%%</Spanish>
+		<Russian>%F1 Defense: %D2%%</Russian>
+		<Japanese>%F1 Defense: %D2%%</Japanese>
+		<Chinese>%F1 Defense: %D2%%</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISC_PLAYERS_SIGN_DEFENSIVE_PACT</Tag>
+		<English>%s1 signs defensive pact with %s2</English>
+		<French>%s1 signs defensive pact with %s2</French>
+		<German>%s1 signs defensive pact with %s2</German>
+		<Italian>%s1 signs defensive pact with %s2</Italian>
+		<Spanish>%s1 signs defensive pact with %s2</Spanish>
+		<Russian>%s1 signs defensive pact with %s2</Russian>
+		<Japanese>%s1 signs defensive pact with %s2</Japanese>
+		<Chinese>%s1 signs defensive pact with %s2</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_HINT_INTERFACE_66</Tag>
+		<English>Press [ALT + S] to add a sign to the map that you and your teammates can see...</English>
+		<French>Press [ALT + S] to add a sign to the map that you and your teammates can see...</French>
+		<German>Press [ALT + S] to add a sign to the map that you and your teammates can see...</German>
+		<Italian>Press [ALT + S] to add a sign to the map that you and your teammates can see...</Italian>
+		<Spanish>Press [ALT + S] to add a sign to the map that you and your teammates can see...</Spanish>
+		<Russian>Press [ALT + S] to add a sign to the map that you and your teammates can see...</Russian>
+		<Japanese>Press [ALT + S] to add a sign to the map that you and your teammates can see...</Japanese>
+		<Chinese>Press [ALT + S] to add a sign to the map that you and your teammates can see...</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_EMAIL_FROM</Tag>
+		<English>Civ4 Pitboss</English>
+		<French>Civ4 Pitboss</French>
+		<German>Civ4 Pitboss</German>
+		<Italian>Civ4 Pitboss</Italian>
+		<Spanish>Civ4 Pitboss</Spanish>
+		<Russian>Civ4 Pitboss</Russian>
+		<Japanese>Civ4 Pitboss</Japanese>
+		<Chinese>Civ4 Pitboss</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_EMAIL_SUBJECT</Tag>
+		<English>It's your turn!</English>
+		<French>It's your turn!</French>
+		<German>It's your turn!</German>
+		<Italian>It's your turn!</Italian>
+		<Spanish>It's your turn!</Spanish>
+		<Russian>It's your turn!</Russian>
+		<Japanese>It's your turn!</Japanese>
+		<Chinese>It's your turn!</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_EMAIL_BODY</Tag>
+		<English>You are now welcome to take your turn in the Civ4 Pitboss game "%s1_Name"!</English>
+		<French>You are now welcome to take your turn in the Civ4 Pitboss game "%s1_Name"!</French>
+		<German>You are now welcome to take your turn in the Civ4 Pitboss game "%s1_Name"!</German>
+		<Italian>You are now welcome to take your turn in the Civ4 Pitboss game "%s1_Name"!</Italian>
+		<Spanish>You are now welcome to take your turn in the Civ4 Pitboss game "%s1_Name"!</Spanish>
+		<Russian>You are now welcome to take your turn in the Civ4 Pitboss game "%s1_Name"!</Russian>
+		<Japanese>You are now welcome to take your turn in the Civ4 Pitboss game "%s1_Name"!</Japanese>
+		<Chinese>You are now welcome to take your turn in the Civ4 Pitboss game "%s1_Name"!</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_EMAIL_TIMER</Tag>
+		<English>Your turn will expire in %d1_timer hours.</English>
+		<French>Your turn will expire in %d1_timer hours.</French>
+		<German>Your turn will expire in %d1_timer hours.</German>
+		<Italian>Your turn will expire in %d1_timer hours.</Italian>
+		<Spanish>Your turn will expire in %d1_timer hours.</Spanish>
+		<Russian>Your turn will expire in %d1_timer hours.</Russian>
+		<Japanese>Your turn will expire in %d1_timer hours.</Japanese>
+		<Chinese>Your turn will expire in %d1_timer hours.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_MOTD_TITLE</Tag>
+		<English>Message of the Day</English>
+		<French>Message of the Day</French>
+		<German>Message of the Day</German>
+		<Italian>Message of the Day</Italian>
+		<Spanish>Message of the Day</Spanish>
+		<Russian>Message of the Day</Russian>
+		<Japanese>Message of the Day</Japanese>
+		<Chinese>Message of the Day</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_MOTD_TOGGLE</Tag>
+		<English>Display Message of the Day</English>
+		<French>Display Message of the Day</French>
+		<German>Display Message of the Day</German>
+		<Italian>Display Message of the Day</Italian>
+		<Spanish>Display Message of the Day</Spanish>
+		<Russian>Display Message of the Day</Russian>
+		<Japanese>Display Message of the Day</Japanese>
+		<Chinese>Display Message of the Day</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_MOTD_HELP</Tag>
+		<English>Current Message of the Day</English>
+		<French>Current Message of the Day</French>
+		<German>Current Message of the Day</German>
+		<Italian>Current Message of the Day</Italian>
+		<Spanish>Current Message of the Day</Spanish>
+		<Russian>Current Message of the Day</Russian>
+		<Japanese>Current Message of the Day</Japanese>
+		<Chinese>Current Message of the Day</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_MOTD_CHANGE</Tag>
+		<English>Change MotD</English>
+		<French>Change MotD</French>
+		<German>Change MotD</German>
+		<Italian>Change MotD</Italian>
+		<Spanish>Change MotD</Spanish>
+		<Russian>Change MotD</Russian>
+		<Japanese>Change MotD</Japanese>
+		<Chinese>Change MotD</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_MOTD_CHANGE_HELP</Tag>
+		<English>Modify the Message of the Day</English>
+		<French>Modify the Message of the Day</French>
+		<German>Modify the Message of the Day</German>
+		<Italian>Modify the Message of the Day</Italian>
+		<Spanish>Modify the Message of the Day</Spanish>
+		<Russian>Modify the Message of the Day</Russian>
+		<Japanese>Modify the Message of the Day</Japanese>
+		<Chinese>Modify the Message of the Day</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_CHAT_TITLE</Tag>
+		<English>Chat Dialog</English>
+		<French>Chat Dialog</French>
+		<German>Chat Dialog</German>
+		<Italian>Chat Dialog</Italian>
+		<Spanish>Chat Dialog</Spanish>
+		<Russian>Chat Dialog</Russian>
+		<Japanese>Chat Dialog</Japanese>
+		<Chinese>Chat Dialog</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_CHAT_LOG_HELP</Tag>
+		<English>Log of sent and received chat messages</English>
+		<French>Log of sent and received chat messages</French>
+		<German>Log of sent and received chat messages</German>
+		<Italian>Log of sent and received chat messages</Italian>
+		<Spanish>Log of sent and received chat messages</Spanish>
+		<Russian>Log of sent and received chat messages</Russian>
+		<Japanese>Log of sent and received chat messages</Japanese>
+		<Chinese>Log of sent and received chat messages</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_CHAT_EDIT_HELP</Tag>
+		<English>Enter chat messages here</English>
+		<French>Enter chat messages here</French>
+		<German>Enter chat messages here</German>
+		<Italian>Enter chat messages here</Italian>
+		<Spanish>Enter chat messages here</Spanish>
+		<Russian>Enter chat messages here</Russian>
+		<Japanese>Enter chat messages here</Japanese>
+		<Chinese>Enter chat messages here</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_MOTD_POPUP_DESC</Tag>
+		<English>Provide a Message of the Day</English>
+		<French>Provide a Message of the Day</French>
+		<German>Provide a Message of the Day</German>
+		<Italian>Provide a Message of the Day</Italian>
+		<Spanish>Provide a Message of the Day</Spanish>
+		<Russian>Provide a Message of the Day</Russian>
+		<Japanese>Provide a Message of the Day</Japanese>
+		<Chinese>Provide a Message of the Day</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_MOTD_POPUP_TITLE</Tag>
+		<English>Message of the Day</English>
+		<French>Message of the Day</French>
+		<German>Message of the Day</German>
+		<Italian>Message of the Day</Italian>
+		<Spanish>Message of the Day</Spanish>
+		<Russian>Message of the Day</Russian>
+		<Japanese>Message of the Day</Japanese>
+		<Chinese>Message of the Day</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_SMTP_HEADER</Tag>
+		<English>Provide SMTP information to send reminder emails</English>
+		<French>Provide SMTP information to send reminder emails</French>
+		<German>Provide SMTP information to send reminder emails</German>
+		<Italian>Provide SMTP information to send reminder emails</Italian>
+		<Spanish>Provide SMTP information to send reminder emails</Spanish>
+		<Russian>Provide SMTP information to send reminder emails</Russian>
+		<Japanese>Provide SMTP information to send reminder emails</Japanese>
+		<Chinese>Provide SMTP information to send reminder emails</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_SMTP_HOST</Tag>
+		<English>SMTP Host:</English>
+		<French>SMTP Host:</French>
+		<German>SMTP Host:</German>
+		<Italian>SMTP Host:</Italian>
+		<Spanish>SMTP Host:</Spanish>
+		<Russian>SMTP Host:</Russian>
+		<Japanese>SMTP Host:</Japanese>
+		<Chinese>SMTP Host:</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_SMTP_HOST_HELP</Tag>
+		<English>SMTP server address or domain name</English>
+		<French>SMTP server address or domain name</French>
+		<German>SMTP server address or domain name</German>
+		<Italian>SMTP server address or domain name</Italian>
+		<Spanish>SMTP server address or domain name</Spanish>
+		<Russian>SMTP server address or domain name</Russian>
+		<Japanese>SMTP server address or domain name</Japanese>
+		<Chinese>SMTP server address or domain name</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_SMTP_LOGIN</Tag>
+		<English>SMTP Login:</English>
+		<French>SMTP Login:</French>
+		<German>SMTP Login:</German>
+		<Italian>SMTP Login:</Italian>
+		<Spanish>SMTP Login:</Spanish>
+		<Russian>SMTP Login:</Russian>
+		<Japanese>SMTP Login:</Japanese>
+		<Chinese>SMTP Login:</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_SMTP_LOGIN_HELP</Tag>
+		<English>SMTP server login</English>
+		<French>SMTP server login</French>
+		<German>SMTP server login</German>
+		<Italian>SMTP server login</Italian>
+		<Spanish>SMTP server login</Spanish>
+		<Russian>SMTP server login</Russian>
+		<Japanese>SMTP server login</Japanese>
+		<Chinese>SMTP server login</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_SMTP_PASSWORD</Tag>
+		<English>SMTP Password:</English>
+		<French>SMTP Password:</French>
+		<German>SMTP Password:</German>
+		<Italian>SMTP Password:</Italian>
+		<Spanish>SMTP Password:</Spanish>
+		<Russian>SMTP Password:</Russian>
+		<Japanese>SMTP Password:</Japanese>
+		<Chinese>SMTP Password:</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_SMTP_PASSWORD_HELP</Tag>
+		<English>SMTP server password</English>
+		<French>SMTP server password</French>
+		<German>SMTP server password</German>
+		<Italian>SMTP server password</Italian>
+		<Spanish>SMTP server password</Spanish>
+		<Russian>SMTP server password</Russian>
+		<Japanese>SMTP server password</Japanese>
+		<Chinese>SMTP server password</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_DIRECTIP</Tag>
+		<English>Direct IP</English>
+		<French>Direct IP</French>
+		<German>Direct IP</German>
+		<Italian>Direct IP</Italian>
+		<Spanish>Direct IP</Spanish>
+		<Russian>Direct IP</Russian>
+		<Japanese>Direct IP</Japanese>
+		<Chinese>Direct IP</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_LAN</Tag>
+		<English>LAN</English>
+		<French>LAN</French>
+		<German>LAN</German>
+		<Italian>LAN</Italian>
+		<Spanish>LAN</Spanish>
+		<Russian>LAN</Russian>
+		<Japanese>LAN</Japanese>
+		<Chinese>LAN</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_INTERNET</Tag>
+		<English>Internet</English>
+		<French>Internet</French>
+		<German>Internet</German>
+		<Italian>Internet</Italian>
+		<Spanish>Internet</Spanish>
+		<Russian>Internet</Russian>
+		<Japanese>Internet</Japanese>
+		<Chinese>Internet</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_PATCH_REQUIRED_DESC</Tag>
+		<English>You must install the latest update to continue</English>
+		<French>You must install the latest update to continue</French>
+		<German>You must install the latest update to continue</German>
+		<Italian>You must install the latest update to continue</Italian>
+		<Spanish>You must install the latest update to continue</Spanish>
+		<Russian>You must install the latest update to continue</Russian>
+		<Japanese>You must install the latest update to continue</Japanese>
+		<Chinese>You must install the latest update to continue</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_PATCH_REQUIRED_TITLE</Tag>
+		<English>Patch Required</English>
+		<French>Patch Required</French>
+		<German>Patch Required</German>
+		<Italian>Patch Required</Italian>
+		<Spanish>Patch Required</Spanish>
+		<Russian>Patch Required</Russian>
+		<Japanese>Patch Required</Japanese>
+		<Chinese>Patch Required</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_PATCH_DOWNLOAD_ERROR_DESC</Tag>
+		<English>Error while downloading the patch</English>
+		<French>Error while downloading the patch</French>
+		<German>Error while downloading the patch</German>
+		<Italian>Error while downloading the patch</Italian>
+		<Spanish>Error while downloading the patch</Spanish>
+		<Russian>Error while downloading the patch</Russian>
+		<Japanese>Error while downloading the patch</Japanese>
+		<Chinese>Error while downloading the patch</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_PATCH_DOWNLOAD_ERROR_TITLE</Tag>
+		<English>Download Error</English>
+		<French>Download Error</French>
+		<German>Download Error</German>
+		<Italian>Download Error</Italian>
+		<Spanish>Download Error</Spanish>
+		<Russian>Download Error</Russian>
+		<Japanese>Download Error</Japanese>
+		<Chinese>Download Error</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_PATCH_COMPLETE_DESC</Tag>
+		<English>Press ok to shut down and install the patch</English>
+		<French>Press ok to shut down and install the patch</French>
+		<German>Press ok to shut down and install the patch</German>
+		<Italian>Press ok to shut down and install the patch</Italian>
+		<Spanish>Press ok to shut down and install the patch</Spanish>
+		<Russian>Press ok to shut down and install the patch</Russian>
+		<Japanese>Press ok to shut down and install the patch</Japanese>
+		<Chinese>Press ok to shut down and install the patch</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_PATCH_COMPLETE_TITLE</Tag>
+		<English>Download Complete!</English>
+		<French>Download Complete!</French>
+		<German>Download Complete!</German>
+		<Italian>Download Complete!</Italian>
+		<Spanish>Download Complete!</Spanish>
+		<Russian>Download Complete!</Russian>
+		<Japanese>Download Complete!</Japanese>
+		<Chinese>Download Complete!</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_PATCH_CHECK_ERROR_DESC</Tag>
+		<English>Error while looking for updates</English>
+		<French>Error while looking for updates</French>
+		<German>Error while looking for updates</German>
+		<Italian>Error while looking for updates</Italian>
+		<Spanish>Error while looking for updates</Spanish>
+		<Russian>Error while looking for updates</Russian>
+		<Japanese>Error while looking for updates</Japanese>
+		<Chinese>Error while looking for updates</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_PATCH_CHECK_ERROR_TITLE</Tag>
+		<English>Update Error</English>
+		<French>Update Error</French>
+		<German>Update Error</German>
+		<Italian>Update Error</Italian>
+		<Spanish>Update Error</Spanish>
+		<Russian>Update Error</Russian>
+		<Japanese>Update Error</Japanese>
+		<Chinese>Update Error</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_NEWGAME</Tag>
+		<English>New Game</English>
+		<French>New Game</French>
+		<German>New Game</German>
+		<Italian>New Game</Italian>
+		<Spanish>New Game</Spanish>
+		<Russian>New Game</Russian>
+		<Japanese>New Game</Japanese>
+		<Chinese>New Game</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_LOADGAME</Tag>
+		<English>Load Game</English>
+		<French>Load Game</French>
+		<German>Load Game</German>
+		<Italian>Load Game</Italian>
+		<Spanish>Load Game</Spanish>
+		<Russian>Load Game</Russian>
+		<Japanese>Load Game</Japanese>
+		<Chinese>Load Game</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_PATCH_AVAILBLE_DESC</Tag>
+		<English>Would you like to install the latest updates?</English>
+		<French>Would you like to install the latest updates?</French>
+		<German>Would you like to install the latest updates?</German>
+		<Italian>Would you like to install the latest updates?</Italian>
+		<Spanish>Would you like to install the latest updates?</Spanish>
+		<Russian>Would you like to install the latest updates?</Russian>
+		<Japanese>Would you like to install the latest updates?</Japanese>
+		<Chinese>Would you like to install the latest updates?</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_PATCH_AVAILABLE_TITLE</Tag>
+		<English>Patch Available</English>
+		<French>Patch Available</French>
+		<German>Patch Available</German>
+		<Italian>Patch Available</Italian>
+		<Spanish>Patch Available</Spanish>
+		<Russian>Patch Available</Russian>
+		<Japanese>Patch Available</Japanese>
+		<Chinese>Patch Available</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_NAME_GAME_DESC</Tag>
+		<English>Please enter a name for your game</English>
+		<French>Please enter a name for your game</French>
+		<German>Please enter a name for your game</German>
+		<Italian>Please enter a name for your game</Italian>
+		<Spanish>Please enter a name for your game</Spanish>
+		<Russian>Please enter a name for your game</Russian>
+		<Japanese>Please enter a name for your game</Japanese>
+		<Chinese>Please enter a name for your game</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_NAME_GAME_TITLE</Tag>
+		<English>Name Your Game</English>
+		<French>Name Your Game</French>
+		<German>Name Your Game</German>
+		<Italian>Name Your Game</Italian>
+		<Spanish>Name Your Game</Spanish>
+		<Russian>Name Your Game</Russian>
+		<Japanese>Name Your Game</Japanese>
+		<Chinese>Name Your Game</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_PWD_GAME_DESC</Tag>
+		<English>Please enter a password for your game</English>
+		<French>Please enter a password for your game</French>
+		<German>Please enter a password for your game</German>
+		<Italian>Please enter a password for your game</Italian>
+		<Spanish>Please enter a password for your game</Spanish>
+		<Russian>Please enter a password for your game</Russian>
+		<Japanese>Please enter a password for your game</Japanese>
+		<Chinese>Please enter a password for your game</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_PWD_GAME_TITLE</Tag>
+		<English>Protect Your Game</English>
+		<French>Protect Your Game</French>
+		<German>Protect Your Game</German>
+		<Italian>Protect Your Game</Italian>
+		<Spanish>Protect Your Game</Spanish>
+		<Russian>Protect Your Game</Russian>
+		<Japanese>Protect Your Game</Japanese>
+		<Chinese>Protect Your Game</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_TURNTIMER_A</Tag>
+		<English>Allow </English>
+		<French>Allow </French>
+		<German>Allow </German>
+		<Italian>Allow </Italian>
+		<Spanish>Allow </Spanish>
+		<Russian>Allow </Russian>
+		<Japanese>Allow </Japanese>
+		<Chinese>Allow </Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_TURNTIMER_B</Tag>
+		<English>[SPACE]hours to complete a turn</English>
+		<French>[SPACE]hours to complete a turn</French>
+		<German>[SPACE]hours to complete a turn</German>
+		<Italian>[SPACE]hours to complete a turn</Italian>
+		<Spanish>[SPACE]hours to complete a turn</Spanish>
+		<Russian>[SPACE]hours to complete a turn</Russian>
+		<Japanese>[SPACE]hours to complete a turn</Japanese>
+		<Chinese>[SPACE]hours to complete a turn</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_HUMAN</Tag>
+		<English>Human</English>
+		<French>Human</French>
+		<German>Human</German>
+		<Italian>Human</Italian>
+		<Spanish>Human</Spanish>
+		<Russian>Human</Russian>
+		<Japanese>Human</Japanese>
+		<Chinese>Human</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_COMPUTER</Tag>
+		<English>Computer</English>
+		<French>Computer</French>
+		<German>Computer</German>
+		<Italian>Computer</Italian>
+		<Spanish>Computer</Spanish>
+		<Russian>Computer</Russian>
+		<Japanese>Computer</Japanese>
+		<Chinese>Computer</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_CLOSED</Tag>
+		<English>Closed</English>
+		<French>Closed</French>
+		<German>Closed</German>
+		<Italian>Closed</Italian>
+		<Spanish>Closed</Spanish>
+		<Russian>Closed</Russian>
+		<Japanese>Closed</Japanese>
+		<Chinese>Closed</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_RANDOM</Tag>
+		<English>Random</English>
+		<French>Random</French>
+		<German>Random</German>
+		<Italian>Random</Italian>
+		<Spanish>Random</Spanish>
+		<Russian>Random</Russian>
+		<Japanese>Random</Japanese>
+		<Chinese>Random</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_TURNTIMER_ERROR_DESC</Tag>
+		<English>Turn Timer value must be an integer</English>
+		<French>Turn Timer value must be an integer</French>
+		<German>Turn Timer value must be an integer</German>
+		<Italian>Turn Timer value must be an integer</Italian>
+		<Spanish>Turn Timer value must be an integer</Spanish>
+		<Russian>Turn Timer value must be an integer</Russian>
+		<Japanese>Turn Timer value must be an integer</Japanese>
+		<Chinese>Turn Timer value must be an integer</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_TURNTIMER_ERROR_TITLE</Tag>
+		<English>Invalid Turn Timer</English>
+		<French>Invalid Turn Timer</French>
+		<German>Invalid Turn Timer</German>
+		<Italian>Invalid Turn Timer</Italian>
+		<Spanish>Invalid Turn Timer</Spanish>
+		<Russian>Invalid Turn Timer</Russian>
+		<Japanese>Invalid Turn Timer</Japanese>
+		<Chinese>Invalid Turn Timer</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PITBOSS_PATCH_PROGRESS_TITLE</Tag>
+		<English>Patch Progress</English>
+		<French>Patch Progress</French>
+		<German>Patch Progress</German>
+		<Italian>Patch Progress</Italian>
+		<Spanish>Patch Progress</Spanish>
+		<Russian>Patch Progress</Russian>
+		<Japanese>Patch Progress</Japanese>
+		<Chinese>Patch Progress</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_MEMORY_DESC</Tag>
+		<English>A memory error was encountered while downloading the patch.</English>
+		<French>A memory error was encountered while downloading the patch.</French>
+		<German>A memory error was encountered while downloading the patch.</German>
+		<Italian>A memory error was encountered while downloading the patch.</Italian>
+		<Spanish>A memory error was encountered while downloading the patch.</Spanish>
+		<Russian>A memory error was encountered while downloading the patch.</Russian>
+		<Japanese>A memory error was encountered while downloading the patch.</Japanese>
+		<Chinese>A memory error was encountered while downloading the patch.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_OVERFLOW_DESC</Tag>
+		<English>Our computer could not handle the rate that the data was sent!  Verify your network speed is correct in game options.</English>
+		<French>Our computer could not handle the rate that the data was sent!  Verify your network speed is correct in game options.</French>
+		<German>Our computer could not handle the rate that the data was sent!  Verify your network speed is correct in game options.</German>
+		<Italian>Our computer could not handle the rate that the data was sent!  Verify your network speed is correct in game options.</Italian>
+		<Spanish>Our computer could not handle the rate that the data was sent!  Verify your network speed is correct in game options.</Spanish>
+		<Russian>Our computer could not handle the rate that the data was sent!  Verify your network speed is correct in game options.</Russian>
+		<Japanese>Our computer could not handle the rate that the data was sent!  Verify your network speed is correct in game options.</Japanese>
+		<Chinese>Our computer could not handle the rate that the data was sent!  Verify your network speed is correct in game options.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_PARSE_DESC</Tag>
+		<English>The URL specified for this patch is not valid.</English>
+		<French>The URL specified for this patch is not valid.</French>
+		<German>The URL specified for this patch is not valid.</German>
+		<Italian>The URL specified for this patch is not valid.</Italian>
+		<Spanish>The URL specified for this patch is not valid.</Spanish>
+		<Russian>The URL specified for this patch is not valid.</Russian>
+		<Japanese>The URL specified for this patch is not valid.</Japanese>
+		<Chinese>The URL specified for this patch is not valid.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_HOSTNAME_DESC</Tag>
+		<English>The host name specified for this patch is not valid.</English>
+		<French>The host name specified for this patch is not valid.</French>
+		<German>The host name specified for this patch is not valid.</German>
+		<Italian>The host name specified for this patch is not valid.</Italian>
+		<Spanish>The host name specified for this patch is not valid.</Spanish>
+		<Russian>The host name specified for this patch is not valid.</Russian>
+		<Japanese>The host name specified for this patch is not valid.</Japanese>
+		<Chinese>The host name specified for this patch is not valid.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_SOCKET_DESC</Tag>
+		<English>There was a network resource error while downloading the patch.</English>
+		<French>There was a network resource error while downloading the patch.</French>
+		<German>There was a network resource error while downloading the patch.</German>
+		<Italian>There was a network resource error while downloading the patch.</Italian>
+		<Spanish>There was a network resource error while downloading the patch.</Spanish>
+		<Russian>There was a network resource error while downloading the patch.</Russian>
+		<Japanese>There was a network resource error while downloading the patch.</Japanese>
+		<Chinese>There was a network resource error while downloading the patch.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_CONNECT_DESC</Tag>
+		<English>We were unable to connect to the server hosting the patch.</English>
+		<French>We were unable to connect to the server hosting the patch.</French>
+		<German>We were unable to connect to the server hosting the patch.</German>
+		<Italian>We were unable to connect to the server hosting the patch.</Italian>
+		<Spanish>We were unable to connect to the server hosting the patch.</Spanish>
+		<Russian>We were unable to connect to the server hosting the patch.</Russian>
+		<Japanese>We were unable to connect to the server hosting the patch.</Japanese>
+		<Chinese>We were unable to connect to the server hosting the patch.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_RESPONSE_DESC</Tag>
+		<English>The server hosting the patch sent us a strange response.</English>
+		<French>The server hosting the patch sent us a strange response.</French>
+		<German>The server hosting the patch sent us a strange response.</German>
+		<Italian>The server hosting the patch sent us a strange response.</Italian>
+		<Spanish>The server hosting the patch sent us a strange response.</Spanish>
+		<Russian>The server hosting the patch sent us a strange response.</Russian>
+		<Japanese>The server hosting the patch sent us a strange response.</Japanese>
+		<Chinese>The server hosting the patch sent us a strange response.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_REJECTED_DESC</Tag>
+		<English>Our request for the patch has been rejected by the server.</English>
+		<French>Our request for the patch has been rejected by the server.</French>
+		<German>Our request for the patch has been rejected by the server.</German>
+		<Italian>Our request for the patch has been rejected by the server.</Italian>
+		<Spanish>Our request for the patch has been rejected by the server.</Spanish>
+		<Russian>Our request for the patch has been rejected by the server.</Russian>
+		<Japanese>Our request for the patch has been rejected by the server.</Japanese>
+		<Chinese>Our request for the patch has been rejected by the server.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_UNAUTHORIZED_DESC</Tag>
+		<English>We are not authorized to access the patch.</English>
+		<French>We are not authorized to access the patch.</French>
+		<German>We are not authorized to access the patch.</German>
+		<Italian>We are not authorized to access the patch.</Italian>
+		<Spanish>We are not authorized to access the patch.</Spanish>
+		<Russian>We are not authorized to access the patch.</Russian>
+		<Japanese>We are not authorized to access the patch.</Japanese>
+		<Chinese>We are not authorized to access the patch.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_FORBIDDEN_DESC</Tag>
+		<English>The retrieval of the patch has been forbidden on this server.</English>
+		<French>The retrieval of the patch has been forbidden on this server.</French>
+		<German>The retrieval of the patch has been forbidden on this server.</German>
+		<Italian>The retrieval of the patch has been forbidden on this server.</Italian>
+		<Spanish>The retrieval of the patch has been forbidden on this server.</Spanish>
+		<Russian>The retrieval of the patch has been forbidden on this server.</Russian>
+		<Japanese>The retrieval of the patch has been forbidden on this server.</Japanese>
+		<Chinese>The retrieval of the patch has been forbidden on this server.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_FILENOTFOUND_DESC</Tag>
+		<English>The specified file for this patch could not be found on the server.</English>
 		<French>French</French>
-		<German>German</German>
-		<Italian>Italian</Italian>
-		<Spanish>Spanish</Spanish>
+		<German>The specified file for this patch could not be found on the server.</German>
+		<Italian>The specified file for this patch could not be found on the server.</Italian>
+		<Spanish>The specified file for this patch could not be found on the server.</Spanish>
+		<Russian>The specified file for this patch could not be found on the server.</Russian>
+		<Japanese>The specified file for this patch could not be found on the server.</Japanese>
+		<Chinese>The specified file for this patch could not be found on the server.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_SERVER_DESC</Tag>
+		<English>The server hosting the patch has encountered an internal error.</English>
+		<French>The server hosting the patch has encountered an internal error</French>
+		<German>The server hosting the patch has encountered an internal error</German>
+		<Italian>The server hosting the patch has encountered an internal error</Italian>
+		<Spanish>The server hosting the patch has encountered an internal error</Spanish>
+		<Russian>The server hosting the patch has encountered an internal error.</Russian>
+		<Japanese>The server hosting the patch has encountered an internal error.</Japanese>
+		<Chinese>The server hosting the patch has encountered an internal error.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_FILEWRITE_DESC</Tag>
+		<English>An error was encountered while trying to write data to our disk.</English>
+		<French>An error was encountered while trying to write data to our disk.</French>
+		<German>An error was encountered while trying to write data to our disk.</German>
+		<Italian>An error was encountered while trying to write data to our disk.</Italian>
+		<Spanish>An error was encountered while trying to write data to our disk.</Spanish>
+		<Russian>An error was encountered while trying to write data to our disk.</Russian>
+		<Japanese>An error was encountered while trying to write data to our disk.</Japanese>
+		<Chinese>An error was encountered while trying to write data to our disk.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_FILEREAD_DESC</Tag>
+		<English>An error was encountered while trying to read data from our disk.</English>
+		<French>An error was encountered while trying to read data from our disk.</French>
+		<German>An error was encountered while trying to read data from our disk.</German>
+		<Italian>An error was encountered while trying to read data from our disk.</Italian>
+		<Spanish>An error was encountered while trying to read data from our disk.</Spanish>
+		<Russian>An error was encountered while trying to read data from our disk.</Russian>
+		<Japanese>An error was encountered while trying to read data from our disk.</Japanese>
+		<Chinese>An error was encountered while trying to read data from our disk.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_INCOMPLETE_DESC</Tag>
+		<English>The download of the patch was interrupted.</English>
+		<French>The download of the patch was interrupted.</French>
+		<German>The download of the patch was interrupted.</German>
+		<Italian>The download of the patch was interrupted.</Italian>
+		<Spanish>The download of the patch was interrupted.</Spanish>
+		<Russian>The download of the patch was interrupted.</Russian>
+		<Japanese>The download of the patch was interrupted.</Japanese>
+		<Chinese>The download of the patch was interrupted.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_TOOBIG_DESC</Tag>
+		<English>The patch file is too large to be downloaded.</English>
+		<French>The patch file is too large to be downloaded.</French>
+		<German>The patch file is too large to be downloaded.</German>
+		<Italian>The patch file is too large to be downloaded.</Italian>
+		<Spanish>The patch file is too large to be downloaded.</Spanish>
+		<Russian>The patch file is too large to be downloaded.</Russian>
+		<Japanese>The patch file is too large to be downloaded.</Japanese>
+		<Chinese>The patch file is too large to be downloaded.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_ENCRYPTION_DESC</Tag>
+		<English>An error occurred while trying to encrypt the patch data.</English>
+		<French>An error occurred while trying to encrypt the patch data.</French>
+		<German>An error occurred while trying to encrypt the patch data.</German>
+		<Italian>An error occurred while trying to encrypt the patch data.</Italian>
+		<Spanish>An error occurred while trying to encrypt the patch data.</Spanish>
+		<Russian>An error occurred while trying to encrypt the patch data.</Russian>
+		<Japanese>An error occurred while trying to encrypt the patch data.</Japanese>
+		<Chinese>An error occurred while trying to encrypt the patch data.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_CANCELLED_DESC</Tag>
+		<English>The patch download has been canceled.</English>
+		<French>The patch download has been canceled.</French>
+		<German>The patch download has been canceled.</German>
+		<Italian>The patch download has been canceled.</Italian>
+		<Spanish>The patch download has been canceled.</Spanish>
+		<Russian>The patch download has been canceled.</Russian>
+		<Japanese>The patch download has been canceled.</Japanese>
+		<Chinese>The patch download has been canceled.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHCOMPLETE_UNKNOWN_DESC</Tag>
+		<English>An unknown error has occurred while downloading the patch.</English>
+		<French>An unknown error has occurred while downloading the patch.</French>
+		<German>An unknown error has occurred while downloading the patch.</German>
+		<Italian>An unknown error has occurred while downloading the patch.</Italian>
+		<Spanish>An unknown error has occurred while downloading the patch.</Spanish>
+		<Russian>An unknown error has occurred while downloading the patch.</Russian>
+		<Japanese>An unknown error has occurred while downloading the patch.</Japanese>
+		<Chinese>An unknown error has occurred while downloading the patch.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PATCHING_WEBSITE_INFO</Tag>
+		<English>Please visit www.CivIV.com for the latest patching information.</English>
+		<French>Please visit www.CivIV.com for the latest patching information.</French>
+		<German>Please visit www.CivIV.com for the latest patching information.</German>
+		<Italian>Please visit www.CivIV.com for the latest patching information.</Italian>
+		<Spanish>Please visit www.CivIV.com for the latest patching information.</Spanish>
+		<Russian>Please visit www.CivIV.com for the latest patching information.</Russian>
+		<Japanese>Please visit www.CivIV.com for the latest patching information.</Japanese>
+		<Chinese>Please visit www.CivIV.com for the latest patching information.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MILITARY_ADVISOR_UNIT_TOGGLE_ON</Tag>
+		<English>Show individual units</English>
+		<French>Show individual units</French>
+		<German>Show individual units</German>
+		<Italian>Show individual units</Italian>
+		<Spanish>Show individual units</Spanish>
+		<Russian>Show individual units</Russian>
+		<Japanese>Show individual units</Japanese>
+		<Chinese>Show individual units</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MILITARY_ADVISOR_UNIT_TOGGLE_OFF</Tag>
+		<English>Hide individual units</English>
+		<French>Hide individual units</French>
+		<German>Hide individual units</German>
+		<Italian>Hide individual units</Italian>
+		<Spanish>Hide individual units</Spanish>
+		<Russian>Hide individual units</Russian>
+		<Japanese>Hide individual units</Japanese>
+		<Chinese>Hide individual units</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_SAVE_FILE_CORRUPT</Tag>
+		<English>You are attempting to load a corrupt save file. The game will now exit.</English>
+		<French>You are attempting to load a corrupt save file. The game will now exit.</French>
+		<German>You are attempting to load a corrupt save file. The game will now exit.</German>
+		<Italian>You are attempting to load a corrupt save file. The game will now exit.</Italian>
+		<Spanish>You are attempting to load a corrupt save file. The game will now exit.</Spanish>
+		<Russian>You are attempting to load a corrupt save file. The game will now exit.</Russian>
+		<Japanese>You are attempting to load a corrupt save file. The game will now exit.</Japanese>
+		<Chinese>You are attempting to load a corrupt save file. The game will now exit.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_DEFAULT_GAMENAME</Tag>
+		<English>My Game</English>
+		<French>My Game</French>
+		<German>My Game</German>
+		<Italian>My Game</Italian>
+		<Spanish>My Game</Spanish>
+		<Russian>My Game</Russian>
+		<Japanese>My Game</Japanese>
+		<Chinese>My Game</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_USER_GAMENAME</Tag>
+		<English>'s Game</English>
+		<French>'s Game</French>
+		<German>'s Game</German>
+		<Italian>'s Game</Italian>
+		<Spanish>'s Game</Spanish>
+		<Russian>'s Game</Russian>
+		<Japanese>'s Game</Japanese>
+		<Chinese>'s Game</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_FOREIGN_ADVISOR_GOLD_FOR_TRADE</Tag>
+		<English>%d1 Gold Available For Trade</English>
+		<French>%d1 Gold Available For Trade</French>
+		<German>%d1 Gold Available For Trade</German>
+		<Italian>%d1 Gold Available For Trade</Italian>
+		<Spanish>%d1 Gold Available For Trade</Spanish>
+		<Russian>%d1 Gold Available For Trade</Russian>
+		<Japanese>%d1 Gold Available For Trade</Japanese>
+		<Chinese>%d1 Gold Available For Trade</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_FOREIGN_ADVISOR_GOLD_PER_TURN_FOR_TRADE</Tag>
+		<English>%d1 Gold Per Turn Available For Trade</English>
+		<French>%d1 Gold Per Turn Available For Trade</French>
+		<German>%d1 Gold Per Turn Available For Trade</German>
+		<Italian>%d1 Gold Per Turn Available For Trade</Italian>
+		<Spanish>%d1 Gold Per Turn Available For Trade</Spanish>
+		<Russian>%d1 Gold Per Turn Available For Trade</Russian>
+		<Japanese>%d1 Gold Per Turn Available For Trade</Japanese>
+		<Chinese>%d1 Gold Per Turn Available For Trade</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAIN_MENU_NEW</Tag>
+		<English>New</English>
+		<French>New</French>
+		<German>New</German>
+		<Italian>New</Italian>
+		<Spanish>New</Spanish>
+		<Russian>New</Russian>
+		<Japanese>New</Japanese>
+		<Chinese>New</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAIN_MENU_COLUMN_PITBOSS</Tag>
+		<English>PB</English>
+		<French>PB</French>
+		<German>PB</German>
+		<Italian>PB</Italian>
+		<Spanish>PB</Spanish>
+		<Russian>PB</Russian>
+		<Japanese>PB</Japanese>
+		<Chinese>PB</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GAME_OPTION_NEW_RANDOM_SEED_HELP</Tag>
+		<English>A new random seed is generated every time the game is reloaded - which, for example, will lead to different combat results</English>
+		<French>A new random seed is generated every time the game is reloaded - which, for example, will lead to different combat results</French>
+		<German>A new random seed is generated every time the game is reloaded - which, for example, will lead to different combat results</German>
+		<Italian>A new random seed is generated every time the game is reloaded - which, for example, will lead to different combat results</Italian>
+		<Spanish>A new random seed is generated every time the game is reloaded - which, for example, will lead to different combat results</Spanish>
+		<Russian>A new random seed is generated every time the game is reloaded - which, for example, will lead to different combat results</Russian>
+		<Japanese>A new random seed is generated every time the game is reloaded - which, for example, will lead to different combat results</Japanese>
+		<Chinese>A new random seed is generated every time the game is reloaded - which, for example, will lead to different combat results</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GAME_OPTION_NEW_RANDOM_SEED</Tag>
+		<English>New Random Seed on Reload</English>
+		<French>New Random Seed on Reload</French>
+		<German>New Random Seed on Reload</German>
+		<Italian>New Random Seed on Reload</Italian>
+		<Spanish>New Random Seed on Reload</Spanish>
+		<Russian>New Random Seed on Reload</Russian>
+		<Japanese>New Random Seed on Reload</Japanese>
+		<Chinese>New Random Seed on Reload</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GAME_OPTION_NO_CHEATING_HELP</Tag>
+		<English>Debug tools cannot be used, and the game assets cannot be modified. Useful for competitive single-player games.</English>
+		<French>Debug tools cannot be used, and the game assets cannot be modified. Useful for competitive single-player games.</French>
+		<German>Debug tools cannot be used, and the game assets cannot be modified. Useful for competitive single-player games.</German>
+		<Italian>Debug tools cannot be used, and the game assets cannot be modified. Useful for competitive single-player games.</Italian>
+		<Spanish>Debug tools cannot be used, and the game assets cannot be modified. Useful for competitive single-player games.</Spanish>
+		<Russian>Debug tools cannot be used, and the game assets cannot be modified. Useful for competitive single-player games.</Russian>
+		<Japanese>Debug tools cannot be used, and the game assets cannot be modified. Useful for competitive single-player games.</Japanese>
+		<Chinese>Debug tools cannot be used, and the game assets cannot be modified. Useful for competitive single-player games.</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GAME_OPTION_NO_CHEATING</Tag>
+		<English>No Cheating</English>
+		<French>No Cheating</French>
+		<German>No Cheating</German>
+		<Italian>No Cheating</Italian>
+		<Spanish>No Cheating</Spanish>
+		<Russian>No Cheating</Russian>
+		<Japanese>No Cheating</Japanese>
+		<Chinese>No Cheating</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAIN_MENU_STAGING_NAME</Tag>
+		<English>Staging Room</English>
+		<French>Staging Room</French>
+		<German>Staging Room</German>
+		<Italian>Staging Room</Italian>
+		<Spanish>Staging Room</Spanish>
+		<Russian>Staging Room</Russian>
+		<Japanese>Staging Room</Japanese>
+		<Chinese>Staging Room</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_BUDDY_LIST_STATUS_LOBBY</Tag>
+		<English>Lobby</English>
+		<French>Lobby</French>
+		<German>Lobby</German>
+		<Italian>Lobby</Italian>
+		<Spanish>Lobby</Spanish>
+		<Russian>Lobby</Russian>
+		<Japanese>Lobby</Japanese>
+		<Chinese>Lobby</Chinese>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MEMORY_SAVER_ERROR</Tag>
+		<English>Using the MemorySaver option in your configuration does not allow device loss. Exiting program.</English>
+		<French>Using the MemorySaver option in your configuration does not allow device loss. Exiting program.</French>
+		<German>Using the MemorySaver option in your configuration does not allow device loss. Exiting program.</German>
+		<Italian>Using the MemorySaver option in your configuration does not allow device loss. Exiting program.</Italian>
+		<Spanish>Using the MemorySaver option in your configuration does not allow device loss. Exiting program.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_FATAL_ERROR</Tag>
+		<English>Fatal Error</English>
+		<French>Fatal Error</French>
+		<German>Fatal Error</German>
+		<Italian>Fatal Error</Italian>
+		<Spanish>Fatal Error</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_OUT_OF_VRAM</Tag>
+		<English>Your system has run out of video memory. Please trying reducing your video settings.</English>
+		<French>Your system has run out of video memory. Please trying reducing your video settings.</French>
+		<German>Your system has run out of video memory. Please trying reducing your video settings.</German>
+		<Italian>Your system has run out of video memory. Please trying reducing your video settings.</Italian>
+		<Spanish>Your system has run out of video memory. Please trying reducing your video settings.</Spanish>
 	</TEXT>
 </Civ4GameText>

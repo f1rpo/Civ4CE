@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Soren Johnson (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by XMLSPY 2004 Professional Ed. Release 2, Installed Multi + SMP for 3 users (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -28,6 +28,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Mo&#239;se</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Mo&#239;se</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Mo&#239;se</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_MAHAVIRA</Tag>
@@ -52,6 +67,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Mah&#226;v&#238;ra</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Mah&#226;v&#238;ra</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Mah&#226;v&#238;ra</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ZOROASTER</Tag>
@@ -76,6 +106,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Zoroastre</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Zoroastre</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Zoroastre</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ANANDA</Tag>
@@ -100,6 +145,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Ananda</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Ananda</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Ananda</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_CHUANG_TZU</Tag>
@@ -124,6 +184,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Chuang-Tzu</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Chuang-Tzu</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Chuang-Tzu</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_MENCIUS</Tag>
@@ -148,6 +223,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Meng Tzeu</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Meng Tzeu</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Meng Tzeu</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_MO_TZU</Tag>
@@ -172,6 +262,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Mo-Tzu</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Mo-Tzu</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Mo-Tzu</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ST_JOHN</Tag>
@@ -196,6 +301,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Saint Jean</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Saint Jean</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Saint Jean</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ST_PETER</Tag>
@@ -220,6 +340,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Saint Pierre</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Saint Pierre</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Saint Pierre</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ST_PAUL</Tag>
@@ -244,6 +379,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Saint Paul</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Saint Paul</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Saint Paul</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_RABBI_AKIVA</Tag>
@@ -268,6 +418,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Akiva</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Akiva</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Akiva</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_MANI</Tag>
@@ -292,6 +457,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Mani</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Mani</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Mani</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ST_AUGUSTINE</Tag>
@@ -316,6 +496,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Saint Augustin</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Saint Augustin</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Saint Augustin</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ST_PATRICK</Tag>
@@ -340,6 +535,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Saint Patrick</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Saint Patrick</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Saint Patrick</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ABU_BAKR</Tag>
@@ -364,6 +574,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Abu Bakr</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Abu Bakr</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Abu Bakr</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_SHANKARA</Tag>
@@ -388,6 +613,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Shankara</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Shankara</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Shankara</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_KOBO_DAISHI</Tag>
@@ -412,6 +652,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Kobo-Daishi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Kobo-Daishi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Kobo-Daishi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ATISHA</Tag>
@@ -436,6 +691,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Atisha</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Atisha</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Atisha</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ST_THOMAS_AQUINAS</Tag>
@@ -460,6 +730,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Saint Thomas d'Aquin</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Saint Thomas d'Aquin</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Saint Thomas d'Aquin</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_MOHAMMED_SHAH</Tag>
@@ -484,6 +769,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Mohammad Shah</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Mohammad Shah</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Mohammad Shah</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_TSONGKHAPA</Tag>
@@ -508,6 +808,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Tsongkhapa</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Tsongkhapa</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Tsongkhapa</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_JEANNE_ARC</Tag>
@@ -532,6 +847,21 @@
 			<Gender>Female</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Jeanne d'Arc</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Jeanne d'Arc</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Jeanne d'Arc</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_NARAK</Tag>
@@ -556,6 +886,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Narak</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Narak</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Narak</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_TIPU_SULTAN</Tag>
@@ -580,6 +925,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Sultan Tipu</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Sultan Tipu</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Sultan Tipu</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_RAMAKRISHNA</Tag>
@@ -604,6 +964,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Ramakrishna</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Ramakrishna</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Ramakrishna</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_NARAYANA_GURU</Tag>
@@ -628,6 +1003,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Narayana</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Narayana</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Narayana</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_SOJOURNER_TRUTH</Tag>
@@ -652,6 +1042,21 @@
 			<Gender>Female</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Sojourner Truth</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Sojourner Truth</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Sojourner Truth</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_HOMER</Tag>
@@ -676,6 +1081,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Hom&#232;re</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Hom&#232;re</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Hom&#232;re</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_THESPIS</Tag>
@@ -700,6 +1120,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Thespis</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Thespis</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Thespis</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_LING_LUN</Tag>
@@ -724,6 +1159,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Ling Lun</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Ling Lun</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Ling Lun</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_WANG_XIZHI</Tag>
@@ -748,6 +1198,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Wang Xizhi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Wang Xizhi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Wang Xizhi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_VALMIKI</Tag>
@@ -772,6 +1237,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Valmiki</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Valmiki</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Valmiki</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_VIRGIL</Tag>
@@ -796,6 +1276,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Virgile</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Virgile</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Virgile</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_KALIDAS</Tag>
@@ -820,6 +1315,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Kalidas</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Kalidas</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Kalidas</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_LI_PO</Tag>
@@ -844,6 +1354,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Li Bo</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Li Bo</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Li Bo</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_DU_FU</Tag>
@@ -868,6 +1393,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Du Fu</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Du Fu</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Du Fu</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_JALAL_ALDIN_RUMI</Tag>
@@ -892,6 +1432,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Jalal al-Din Rumi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Jalal al-Din Rumi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Jalal al-Din Rumi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_DANTE_ALIGHIERI</Tag>
@@ -916,6 +1471,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Dante Alighieri</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Dante Alighieri</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Dante Alighieri</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_YUNUS_EMRE</Tag>
@@ -940,6 +1510,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Yunus Emre</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Yunus Emre</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Yunus Emre</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_AMIR_KHUSRO</Tag>
@@ -964,6 +1549,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Amir Khusraw</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Amir Khusraw</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Amir Khusraw</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_IBN_MUQLAH</Tag>
@@ -988,6 +1588,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Ibn Muqlah</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Ibn Muqlah</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Ibn Muqlah</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_MICHAELANGELO</Tag>
@@ -1012,6 +1627,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Michel-Ange</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Michel-Ange</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Michel-Ange</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_RAPHAEL</Tag>
@@ -1036,6 +1666,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Rapha&#235;l</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Rapha&#235;l</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Rapha&#235;l</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_WILLIAM_SHAKESPEARE</Tag>
@@ -1060,6 +1705,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>William Shakespeare</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>William Shakespeare</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>William Shakespeare</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_MIGUEL_DE_CERVANTES</Tag>
@@ -1084,6 +1744,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Miguel de Cervant&#232;s</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Miguel de Cervant&#232;s</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Miguel de Cervant&#232;s</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_REMBRANDT</Tag>
@@ -1108,6 +1783,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Rembrandt van Rijn</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Rembrandt van Rijn</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Rembrandt van Rijn</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_JOHANNES_VERMEER</Tag>
@@ -1132,6 +1822,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Johannes Vermeer</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Johannes Vermeer</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Johannes Vermeer</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_JS_BACH</Tag>
@@ -1156,6 +1861,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>J. S. Bach</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>J. S. Bach</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>J. S. Bach</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_WOLFGANG_MOZART</Tag>
@@ -1180,6 +1900,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Wolfgang Amadeus Mozart</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Wolfgang Amadeus Mozart</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Wolfgang Amadeus Mozart</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_JOHANN_GOETHE</Tag>
@@ -1204,6 +1939,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Johann Wolfgang von Goethe</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Johann Wolfgang von Goethe</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Johann Wolfgang von Goethe</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_LUDWIG_VAN_BEETHOVEN</Tag>
@@ -1228,6 +1978,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Ludwig van Beethoven</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Ludwig van Beethoven</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Ludwig van Beethoven</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_VICTOR_HUGO</Tag>
@@ -1252,6 +2017,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Victor Hugo</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Victor Hugo</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Victor Hugo</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_VINCENT_VAN_GOGH</Tag>
@@ -1276,6 +2056,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Vincent van Gogh</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Vincent van Gogh</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Vincent van Gogh</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_JOHANNES_BRAHMS</Tag>
@@ -1300,6 +2095,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Johannes Brahms</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Johannes Brahms</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Johannes Brahms</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_DVORAK</Tag>
@@ -1324,6 +2134,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Antonin Dvorak</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Antonin Dvorak</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Antonin Dvorak</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_MARK_TWAIN</Tag>
@@ -1348,6 +2173,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Mark Twain</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Mark Twain</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Mark Twain</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_CLAUDE_MONET</Tag>
@@ -1372,6 +2212,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Claude Monet</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Claude Monet</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Claude Monet</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_JOSEPH_CONRAD</Tag>
@@ -1396,6 +2251,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Joseph Conrad</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Joseph Conrad</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Joseph Conrad</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_FRANK_KAFKA</Tag>
@@ -1420,6 +2290,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Franz Kafka</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Franz Kafka</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Franz Kafka</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_LOUIS_ARMSTRONG</Tag>
@@ -1444,6 +2329,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Louis Armstrong</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Louis Armstrong</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Louis Armstrong</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_DUKE_ELLINGTON</Tag>
@@ -1468,6 +2368,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Duke Ellington</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Duke Ellington</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Duke Ellington</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_PABLO_PICASSO</Tag>
@@ -1492,6 +2407,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Pablo Picasso</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Pablo Picasso</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Pablo Picasso</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_MILES_DAVIS</Tag>
@@ -1516,6 +2446,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Miles Davis</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Miles Davis</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Miles Davis</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_MERIT_PTAH</Tag>
@@ -1540,6 +2485,21 @@
 			<Gender>Female</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Merit Ptah</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Merit Ptah</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Merit Ptah</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_XI_LING_SHI</Tag>
@@ -1564,6 +2524,21 @@
 			<Gender>Female</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Xi Ling Shi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Xi Ling Shi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Xi Ling Shi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_NABU_RIMANNI</Tag>
@@ -1588,6 +2563,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Nabu-rimanni</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Nabu-rimanni</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Nabu-rimanni</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_SOCRATES</Tag>
@@ -1612,6 +2602,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Socrate</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Socrate</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Socrate</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_PLATO</Tag>
@@ -1636,6 +2641,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Platon</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Platon</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Platon</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ARISTOTLE</Tag>
@@ -1660,6 +2680,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Aristote</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Aristote</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Aristote</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_EUCLID</Tag>
@@ -1684,6 +2719,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Euclide</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Euclide</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Euclide</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_PTOLEMY</Tag>
@@ -1708,6 +2758,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Ptol&#233;m&#233;e</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Ptol&#233;m&#233;e</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Ptol&#233;m&#233;e</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_HYPATIA</Tag>
@@ -1732,6 +2797,21 @@
 			<Gender>Female</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Hypathie</Text>
+			<Gender>Female</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Hypathie</Text>
+			<Gender>Female</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Hypathie</Text>
+			<Gender>Female</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ZU_CHONGZHI</Tag>
@@ -1756,6 +2836,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Zu Chongzhi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Zu Chongzhi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Zu Chongzhi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ARYABHATA</Tag>
@@ -1780,6 +2875,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Aryabhata</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Aryabhata</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Aryabhata</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_AL_KINDI</Tag>
@@ -1804,6 +2914,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Al-Kindi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Al-Kindi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Al-Kindi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_AL_KHWARIZMI</Tag>
@@ -1828,6 +2953,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Al-Khwarizmi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Al-Khwarizmi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Al-Khwarizmi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_AL_RAZI</Tag>
@@ -1852,6 +2992,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Al-Razi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Al-Razi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Al-Razi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ALHAZEN</Tag>
@@ -1876,6 +3031,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Alhazen</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Alhazen</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Alhazen</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_NICOLAUS_COPERNICUS</Tag>
@@ -1900,6 +3070,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Nicolas Copernic</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Nicolas Copernic</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Nicolas Copernic</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_FRANCIS_BACON</Tag>
@@ -1924,6 +3109,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Francis Bacon</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Francis Bacon</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Francis Bacon</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_TYCHO_BRAHE</Tag>
@@ -1948,6 +3148,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Tycho Brahe</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Tycho Brahe</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Tycho Brahe</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_JOHANNES_KEPLER</Tag>
@@ -1972,6 +3187,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Johannes Kepler</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Johannes Kepler</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Johannes Kepler</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ISAAC_NEWTON</Tag>
@@ -1996,6 +3226,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Isaac Newton</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Isaac Newton</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Isaac Newton</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_GALILEO_GALILEI</Tag>
@@ -2020,6 +3265,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Galil&#233;e</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Galil&#233;e</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Galil&#233;e</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_RENE_DESCARTES</Tag>
@@ -2044,6 +3304,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Ren&#233; Descartes</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Ren&#233; Descartes</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Ren&#233; Descartes</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ANTONY_VAN_LEEUWENHOEK</Tag>
@@ -2068,6 +3343,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Antoine van Leeuwenhoek</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Antoine van Leeuwenhoek</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Antoine van Leeuwenhoek</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_GOTTFRIED_LEIBNIZ</Tag>
@@ -2092,6 +3382,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Gottfried Leibniz</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Gottfried Leibniz</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Gottfried Leibniz</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_MIKHAIL_LOMONOSOV</Tag>
@@ -2116,6 +3421,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Michel Lomonosov</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Michel Lomonosov</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Michel Lomonosov</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ANTOINE_LAURENT_lAVOISIER</Tag>
@@ -2140,6 +3460,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Antoine Laurent Lavoisier</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Antoine Laurent Lavoisier</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Antoine Laurent Lavoisier</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_CARL_FRIEDRICH_GAUSS</Tag>
@@ -2164,6 +3499,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Carl Friedrich Gauss</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Carl Friedrich Gauss</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Carl Friedrich Gauss</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_JOHN_DALTON</Tag>
@@ -2188,6 +3538,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>John Dalton</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>John Dalton</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>John Dalton</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_MICHAEL_FARADAY</Tag>
@@ -2212,6 +3577,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Michael Faraday</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Michael Faraday</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Michael Faraday</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_JAMES_CLERK_MAXWELL</Tag>
@@ -2236,6 +3616,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>James Clerk Maxwell</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>James Clerk Maxwell</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>James Clerk Maxwell</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_LOUIS_PASTEUR</Tag>
@@ -2260,6 +3655,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Louis Pasteur</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Louis Pasteur</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Louis Pasteur</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_CHARLES_DARWIN</Tag>
@@ -2284,6 +3694,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Charles Darwin</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Charles Darwin</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Charles Darwin</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ERNEST_RUTHERFORD</Tag>
@@ -2308,6 +3733,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Ernest Rutherford</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Ernest Rutherford</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Ernest Rutherford</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_MARIE_CURIE</Tag>
@@ -2332,6 +3772,21 @@
 			<Gender>Female</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Marie Curie</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Marie Curie</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Marie Curie</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ALBERT_EINSTEIN</Tag>
@@ -2356,6 +3811,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Albert Einstein</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Albert Einstein</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Albert Einstein</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_NIELS_BOHR</Tag>
@@ -2380,6 +3850,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Niels Bohr</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Niels Bohr</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Niels Bohr</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_WERNER_HEISENBERG</Tag>
@@ -2404,6 +3889,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Werner Heisenberg</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Werner Heisenberg</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Werner Heisenberg</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ENRICO_FERMI</Tag>
@@ -2428,6 +3928,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Enrico Fermi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Enrico Fermi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Enrico Fermi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ROSALIND_FRANKLIN</Tag>
@@ -2452,6 +3967,21 @@
 			<Gender>Female</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Rosalind Franklin</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Rosalind Franklin</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Rosalind Franklin</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ANDREI_SAKHAROV</Tag>
@@ -2476,6 +4006,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Andre&#239; Sakharov</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Andre&#239; Sakharov</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Andre&#239; Sakharov</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_HARKUF</Tag>
@@ -2500,6 +4045,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Harkuf</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Harkuf</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Harkuf</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_HANNO</Tag>
@@ -2524,6 +4084,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Hanno</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Hanno</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Hanno</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_PYTHEAS</Tag>
@@ -2548,6 +4123,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Pyth&#233;as</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Pyth&#233;as</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Pyth&#233;as</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ZHANG_QIAN</Tag>
@@ -2572,6 +4162,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Zhang Qian</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Zhang Qian</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Zhang Qian</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ARETAS_III</Tag>
@@ -2596,6 +4201,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Aretas III</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Aretas III</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Aretas III</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_LEIF_ERICKSON</Tag>
@@ -2606,7 +4226,7 @@
 			<Plural>0</Plural>
 		</French>
 		<German>
-			<Text>Leif Eriksson</Text>
+			<Text>Leif Erikson</Text>
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</German>
@@ -2620,6 +4240,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Leif Erickson</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Leif Erickson</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Leif Erickson</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_WANG_ANSHI</Tag>
@@ -2644,6 +4279,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Wang Anshi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Wang Anshi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Wang Anshi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ENRICO_DANDOLO</Tag>
@@ -2668,6 +4318,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Enrico Dandolo</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Enrico Dandolo</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Enrico Dandolo</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_MARCO_POLO</Tag>
@@ -2692,6 +4357,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Marco Polo</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Marco Polo</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Marco Polo</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_IBN_BATTUTA</Tag>
@@ -2716,6 +4396,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Ibn Battuta</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Ibn Battuta</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Ibn Battuta</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_RRICHARD_WHITTINGTON</Tag>
@@ -2740,6 +4435,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Richard Whittington</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Richard Whittington</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Richard Whittington</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_GIOVANNI_DE_MEDICI</Tag>
@@ -2764,6 +4474,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Jean de M&#233;dicis</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Jean de M&#233;dicis</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Jean de M&#233;dicis</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ZHENG_HE</Tag>
@@ -2788,6 +4513,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Zheng He</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Zheng He</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Zheng He</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_VASCO_DA_GAMA</Tag>
@@ -2812,6 +4552,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Vasco de Gama</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Vasco de Gama</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Vasco de Gama</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_CHRISTOPHER_COLUMBUS</Tag>
@@ -2836,6 +4591,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Christophe Colomb</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Christophe Colomb</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Christophe Colomb</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_FERDINAND_MAGELLAN</Tag>
@@ -2860,6 +4630,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Ferdinand Magellan</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Ferdinand Magellan</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Ferdinand Magellan</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_JACQUES_CARTIER</Tag>
@@ -2884,6 +4669,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Jacques Cartier</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Jacques Cartier</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Jacques Cartier</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_RAJA_TODAR_MAL</Tag>
@@ -2908,6 +4708,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Rajah Todar Mal</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Rajah Todar Mal</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Rajah Todar Mal</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ANTONY_VAN_DIEMEN</Tag>
@@ -2932,6 +4747,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Anthony van Diemen</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Anthony van Diemen</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Anthony van Diemen</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_SIR_THOMAS_ROE</Tag>
@@ -2956,6 +4786,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Sir Thomas Roe</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Sir Thomas Roe</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Sir Thomas Roe</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_SHAH_JAHAN</Tag>
@@ -2980,6 +4825,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Shah Jahan</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Shah Jahan</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Shah Jahan</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ADAM_SMITH</Tag>
@@ -3004,6 +4864,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Adam Smith</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Adam Smith</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Adam Smith</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_JAMES_COOK</Tag>
@@ -3028,6 +4903,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>James Cook</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>James Cook</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>James Cook</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_CORNELIUS_VANDERBILT</Tag>
@@ -3052,6 +4942,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Cornelius Vanderbilt</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Cornelius Vanderbilt</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Cornelius Vanderbilt</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_SIR_ALEXANDER_MACKENZIE</Tag>
@@ -3076,6 +4981,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Sir Alexander Mackenzie</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Sir Alexander Mackenzie</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Sir Alexander Mackenzie</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_JOHN_STUART_MILL</Tag>
@@ -3100,6 +5020,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>John Stuart Mill</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>John Stuart Mill</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>John Stuart Mill</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ANDREW_CARNEGIE</Tag>
@@ -3124,6 +5059,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Andrew Carnegie</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Andrew Carnegie</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Andrew Carnegie</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_JOHN_D_ROCKEFELLER</Tag>
@@ -3148,6 +5098,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>John D. Rockefeller</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>John D. Rockefeller</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>John D. Rockefeller</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_JOHN_MAYNARD_KEYNES</Tag>
@@ -3172,6 +5137,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>John Maynard Keynes</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>John Maynard Keynes</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>John Maynard Keynes</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_COCO_CHANEL</Tag>
@@ -3196,6 +5176,21 @@
 			<Gender>Female</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Coco Chanel</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Coco Chanel</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Coco Chanel</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_IMHOTEP</Tag>
@@ -3220,6 +5215,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Imhotep</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Imhotep</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Imhotep</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ARCHIMEDES</Tag>
@@ -3244,6 +5254,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Archim&#232;de</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Archim&#232;de</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Archim&#232;de</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_HERON</Tag>
@@ -3268,6 +5293,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>H&#233;ron</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>H&#233;ron</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>H&#233;ron</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_CAI_LUN</Tag>
@@ -3292,6 +5332,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Cai Lun</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Cai Lun</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Cai Lun</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ZHANG_HENG</Tag>
@@ -3316,6 +5371,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Zhang Heng</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Zhang Heng</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Zhang Heng</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_BI_SHENG</Tag>
@@ -3340,6 +5410,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Bi Sheng</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Bi Sheng</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Bi Sheng</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_LEONARDO_DA_VINCI</Tag>
@@ -3364,6 +5449,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>L&#233;onard de Vinci</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>L&#233;onard de Vinci</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>L&#233;onard de Vinci</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_SINAN</Tag>
@@ -3388,6 +5488,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Sinan</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Sinan</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Sinan</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_WILHELM_SCHICKARD</Tag>
@@ -3412,6 +5527,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Wilhelm Schickard</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Wilhelm Schickard</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Wilhelm Schickard</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_BLAISE_PASCAL</Tag>
@@ -3436,6 +5566,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Blaise Pascal</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Blaise Pascal</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Blaise Pascal</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_BENJAMIN_FRANKLIN</Tag>
@@ -3460,6 +5605,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Benjamin Franklin</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Benjamin Franklin</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Benjamin Franklin</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_CHARLES_AUGUSTIN_DE_COULOMB</Tag>
@@ -3484,6 +5644,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Charles Augustin Coulomb</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Charles Augustin Coulomb</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Charles Augustin Coulomb</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_JAMES_WATT</Tag>
@@ -3508,6 +5683,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>James Watt</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>James Watt</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>James Watt</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_JOSEPH_MARIE_JACQUARD</Tag>
@@ -3532,6 +5722,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Joseph-Marie Jacquard</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Joseph-Marie Jacquard</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Joseph-Marie Jacquard</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ISAMBARD_KINGDOM_BRUNEL</Tag>
@@ -3556,6 +5761,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Isambard Kingdom Brunel</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Isambard Kingdom Brunel</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Isambard Kingdom Brunel</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_WILLIAN_MORTON</Tag>
@@ -3580,6 +5800,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>William T. G. Morton</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>William T. G. Morton</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>William T. G. Morton</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_LOUIS_DAGUERRE</Tag>
@@ -3604,6 +5839,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Louis Daguerre</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Louis Daguerre</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Louis Daguerre</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_FERDINAND_DE_LESSEPS</Tag>
@@ -3628,6 +5878,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Ferdinand de Lesseps</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Ferdinand de Lesseps</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Ferdinand de Lesseps</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_JOHN_ROEBLING</Tag>
@@ -3652,6 +5917,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>John Roebling</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>John Roebling</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>John Roebling</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_NOBERT_RILLIEUX</Tag>
@@ -3676,6 +5956,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Norbert Rillieux</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Norbert Rillieux</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Norbert Rillieux</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_HENRY_BESSEMER</Tag>
@@ -3700,6 +5995,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Henry Bessemer</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Henry Bessemer</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Henry Bessemer</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_NAIN_SINGH</Tag>
@@ -3724,6 +6034,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Nain Singh</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Nain Singh</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Nain Singh</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ALEXANDER_GRAHM_BELL</Tag>
@@ -3748,6 +6073,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Alexander Graham Bell</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Alexander Graham Bell</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Alexander Graham Bell</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_NIKOLAUS_AUGUST_OTTO</Tag>
@@ -3772,6 +6112,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Nikolaus August Otto</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Nikolaus August Otto</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Nikolaus August Otto</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_NICHOLA_TESLA</Tag>
@@ -3796,6 +6151,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Nikola Tesla</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Nikola Tesla</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Nikola Tesla</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_THOMAS_EDISON</Tag>
@@ -3820,6 +6190,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Thomas Edison</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Thomas Edison</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Thomas Edison</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_GUGLIELMO_MARCONI</Tag>
@@ -3844,6 +6229,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Guglielmo Marconi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Guglielmo Marconi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Guglielmo Marconi</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ALEXANDRE_GUSTAVE_EIFFEL</Tag>
@@ -3868,6 +6268,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Alexandre Gustave Eiffel</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Alexandre Gustave Eiffel</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Alexandre Gustave Eiffel</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_GEORGE_WASHINGTON_GOETHALS</Tag>
@@ -3892,6 +6307,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>George Washington Goethals</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>George Washington Goethals</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>George Washington Goethals</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_HENRY_FORD</Tag>
@@ -3916,6 +6346,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Henry Ford</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Henry Ford</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Henry Ford</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_WILBUR_WRIGHT</Tag>
@@ -3940,6 +6385,21 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Wilbur Wright</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Wilbur Wright</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Wilbur Wright</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_ORVILLE_WRIGHT</Tag>
@@ -3964,5 +6424,20 @@
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Spanish>
+		<Russian>
+			<Text>Orville Wright</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Russian>
+		<Japanese>
+			<Text>Orville Wright</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Japanese>
+		<Chinese>
+			<Text>Orville Wright</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</Chinese>
 	</TEXT>
 </Civ4GameText>
