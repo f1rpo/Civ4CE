@@ -78,6 +78,8 @@ CvPlayer::CvPlayer()
 	m_ppaaiSpecialistExtraYield = NULL;
 	m_ppaaiImprovementYieldChange = NULL;
 
+	constructCache();
+
 	reset(NO_PLAYER, true);
 }
 
@@ -85,6 +87,8 @@ CvPlayer::CvPlayer()
 CvPlayer::~CvPlayer()
 {
 	uninit();
+
+	destructCache();
 
 	SAFE_DELETE_ARRAY(m_aiSeaPlotYield);
 	SAFE_DELETE_ARRAY(m_aiYieldRateModifier);
@@ -255,12 +259,16 @@ void CvPlayer::init(PlayerTypes eID)
 	}
 
 	AI_init();
+
+	initCache();
 }
 
 
 void CvPlayer::uninit()
 {
 	int iI;
+
+	uninitCache();
 
 	SAFE_DELETE_ARRAY(m_paiBonusExport);
 	SAFE_DELETE_ARRAY(m_paiBonusImport);
@@ -644,6 +652,8 @@ void CvPlayer::reset(PlayerTypes eID, bool bConstructorCall)
 	{
 		AI_reset();
 	}
+
+	resetCache(bConstructorCall);
 }
 
 
@@ -847,7 +857,7 @@ void CvPlayer::addFreeUnit(UnitTypes eUnit, UnitAITypes eUnitAI)
 
 						if (pLoopPlot != NULL)
 						{
-							if (pLoopPlot->area() == pStartingPlot->area())
+							if (pLoopPlot->getArea() == pStartingPlot->getArea())
 							{
 								if (!(pLoopPlot->isImpassable()))
 								{
@@ -905,10 +915,15 @@ int CvPlayer::startingPlotRange()
 bool CvPlayer::startingPlotWithinRange(CvPlot* pPlot, PlayerTypes ePlayer, int iRange, int iPass)
 {
 	PROFILE_FUNC();
+	
+	//XXX changes to AI_foundValue (which are far more flexible) make this function 
+	//    redundant but it is still called from Python. 
+	//    The Python scripts should probably be rewritten.
+	return false;
 
 	CvPlot* pStartingPlot;
 
-	iRange -= iPass;
+	iRange -= (1 + iPass * 2);
 
 	if (pPlot->getMinOriginalStartDist() == -1)
 	{
@@ -920,11 +935,12 @@ bool CvPlayer::startingPlotWithinRange(CvPlot* pPlot, PlayerTypes ePlayer, int i
 		return false;
 	}
 
-	pStartingPlot = getStartingPlot();
+
+	pStartingPlot = getStartingPlot(); 
 
 	if (pStartingPlot != NULL)
 	{
-		if (pStartingPlot->area() == pPlot->area())
+		if (pStartingPlot->getArea() == pPlot->getArea())
 		{
 			if (GC.getGameINLINE().isTeamGame())
 			{
@@ -950,6 +966,55 @@ bool CvPlayer::startingPlotWithinRange(CvPlot* pPlot, PlayerTypes ePlayer, int i
 	return false;
 }
 
+int CvPlayer::startingPlotDistanceFactor(CvPlot* pPlot, PlayerTypes ePlayer, int iRange)
+{
+	PROFILE_FUNC();
+	
+	FAssert(ePlayer != getID());
+
+	CvPlot* pStartingPlot;
+	
+	int iValue = 100;
+
+//	if (pPlot->getMinOriginalStartDist() == -1)
+//	{
+//		return 100;
+//	}
+
+	pStartingPlot = getStartingPlot();
+
+	if (pStartingPlot != NULL)
+	{
+		if (GC.getGameINLINE().isTeamGame())
+		{
+			if (GET_PLAYER(ePlayer).getTeam() == getTeam())
+			{
+				iRange *= GC.getDefineINT("OWN_TEAM_STARTING_MODIFIER");
+				iRange /= 100;
+			}
+			else
+			{
+				iRange *= GC.getDefineINT("RIVAL_TEAM_STARTING_MODIFIER");
+				iRange /= 100;
+			}
+		}
+
+		int iDistance = plotDistance(pPlot->getX_INLINE(), pPlot->getY_INLINE(), pStartingPlot->getX_INLINE(), pStartingPlot->getY_INLINE());
+		if (pStartingPlot->getArea() != pPlot->getArea())
+		{
+			iDistance *= 4;            	
+			iDistance /= 3;
+		}
+
+		iValue *= iDistance;
+		iValue /= iRange ;
+
+	}
+    
+	return max(1, iValue);
+
+}
+
 
 // Returns the id of the best area, or -1 if it doesn't matter:
 int CvPlayer::findStartingArea()
@@ -973,6 +1038,7 @@ int CvPlayer::findStartingArea()
 	int iBestArea = -1;
 	int iValue;
 	int iLoop = 0;
+	int iMinRange = startingPlotRange();
 
 	CvArea *pLoopArea = NULL;
 
@@ -983,15 +1049,18 @@ int CvPlayer::findStartingArea()
 		{
 			// iNumPlayersOnArea is the number of players starting on the area, plus this player
 			int iNumPlayersOnArea = (pLoopArea->getNumStartingPlots() + 1);
-			int iTileValue = ((pLoopArea->calculateTotalBestNatureYield() + (pLoopArea->countCoastalLand() * 2) + pLoopArea->getNumRiverEdges() + (pLoopArea->getNumTiles() / 2)) + 1);
+			int iTileValue = ((pLoopArea->calculateTotalBestNatureYield() + (pLoopArea->countCoastalLand() * 2) + pLoopArea->getNumRiverEdges() + (pLoopArea->getNumTiles())) + 1);
 			iValue = iTileValue / iNumPlayersOnArea;
+			
+			iValue *= min(NUM_CITY_PLOTS + 1, pLoopArea->getNumTiles() + 1);
+			iValue /= (NUM_CITY_PLOTS + 1);
 
-			if (iNumPlayersOnArea == 1)
+			if (iNumPlayersOnArea <= 2)
 			{
 				iValue *= 4;
 				iValue /= 3;
 			}
-
+			
 			if (iValue > iBestValue)
 			{
 				iBestValue = iValue;
@@ -1030,9 +1099,9 @@ CvPlot* CvPlayer::findStartingPlot()
 	int iBestValue;
 	int iRange;
 	int iPass;
-	int iI, iJ;
+	int iI;
 
-	AI_updateFoundValues(true);
+	AI_updateFoundValues(true);//this sets all plots found values to -1
 
 	iBestArea = findStartingArea();
 
@@ -1050,26 +1119,12 @@ CvPlot* CvPlayer::findStartingPlot()
 
 			if ((iBestArea == -1) || (pLoopPlot->getArea() == iBestArea))
 			{
+				//the distance factor is now done inside foundValue
 				iValue = pLoopPlot->getFoundValue(getID());
 
 				if (iValue > iBestValue)
 				{
 					bValid = true;
-
-					for (iJ = 0; iJ < MAX_CIV_PLAYERS; iJ++)
-					{
-						if (GET_PLAYER((PlayerTypes)iJ).isAlive())
-						{
-							if (iJ != getID())
-							{
-								if (GET_PLAYER((PlayerTypes)iJ).startingPlotWithinRange(pLoopPlot, getID(), iRange, iPass))
-								{
-									bValid = false;
-									break;
-								}
-							}
-						}
-					}
 
 					if (bValid)
 					{
@@ -1083,6 +1138,11 @@ CvPlot* CvPlayer::findStartingPlot()
 		if (pBestPlot != NULL)
 		{
 			break;
+		}
+		
+		if (iPass > 0)
+		{
+			FAssertMsg(false,"CvPlayer::findStartingPlot - stuck in an infinite loop?");
 		}
 
 		if (iPass > GC.getMapINLINE().maxPlotDistance())
@@ -2238,6 +2298,8 @@ void CvPlayer::doTurn()
 	FAssertMsg(!hasBusyUnit() || GC.getGameINLINE().isMPOption(MPOPTION_SIMULTANEOUS_TURNS), "End of turn with busy units in a sequential-turn game");
 
 	gDLL->getEventReporterIFace()->beginPlayerTurn( GC.getGameINLINE().getGameTurn(),  getID());
+	
+	doUpdateCacheOnTurn();
 
 	GC.getGameINLINE().verifyDeals();
 
@@ -2602,6 +2664,15 @@ void CvPlayer::updateTimers()
 	{
 		pLoopSelectionGroup->updateTimers(); // could destroy the selection group...
 	}
+	
+	// if a unit was busy, perhaps it was not quite deleted yet, give it one more try
+	if (getNumSelectionGroups() > getNumUnits())
+	{
+		for(pLoopSelectionGroup = firstSelectionGroup(&iLoop); pLoopSelectionGroup; pLoopSelectionGroup = nextSelectionGroup(&iLoop))
+		{
+			pLoopSelectionGroup->doDelayedDeath(); // could destroy the selection group...
+		}
+	}
 
 	FAssertMsg(getNumSelectionGroups() <= getNumUnits(), "The number of Units is expected not to exceed the number of Selection Groups");
 }
@@ -2656,6 +2727,12 @@ bool CvPlayer::hasBusyUnit()
 	{
 		if (pLoopSelectionGroup->isBusy())
 		{
+		    if (pLoopSelectionGroup->getNumUnits() == 0)
+		    {
+		        pLoopSelectionGroup->kill();
+		        return false;
+		    }
+
 			return true;
 		}
 	}
@@ -2758,7 +2835,7 @@ int CvPlayer::countReligionSpreadUnits(CvArea* pArea, ReligionTypes eReligion)
 
 	for (pLoopUnit = firstUnit(&iLoop); pLoopUnit != NULL; pLoopUnit = nextUnit(&iLoop))
 	{
-		if (pLoopUnit->area() == pArea)
+		if (pLoopUnit->getArea() == pArea->getID())
 		{
 			if (GC.getUnitInfo(pLoopUnit->getUnitType()).getReligionSpreads(eReligion))
 			{
@@ -2798,12 +2875,13 @@ int CvPlayer::countNumCoastalCitiesByArea(CvArea* pArea)
 	int iLoop;
 
 	iCount = 0;
-
+	
+	int iAreaID = pArea->getID();
 	for (pLoopCity = firstCity(&iLoop); pLoopCity != NULL; pLoopCity = nextCity(&iLoop))
 	{
 		if (pLoopCity->isCoastal(GC.getDefineINT("MIN_WATER_SIZE_FOR_OCEAN")))
 		{
-			if ((pLoopCity->area() == pArea) || pLoopCity->plot()->isAdjacentToArea(pArea))
+			if ((pLoopCity->getArea() == iAreaID) || pLoopCity->plot()->isAdjacentToArea(iAreaID))
 			{
 				iCount++;
 			}
@@ -2834,24 +2912,34 @@ int CvPlayer::countTotalCulture()
 int CvPlayer::countOwnedBonuses(BonusTypes eBonus)
 {
 	PROFILE("CvPlayer::countOwnedBonuses");
-
+    CvCity* pLoopCity;
 	CvPlot* pLoopPlot;
 	int iCount;
 	int iI;
+    int iLoop;
 
 	iCount = 0;
-
+	
+	//count bonuses outside city radius
 	for (iI = 0; iI < GC.getMapINLINE().numPlotsINLINE(); iI++)
 	{
 		pLoopPlot = GC.getMapINLINE().plotByIndexINLINE(iI);
 
-		if (pLoopPlot->getOwnerINLINE() == getID())
+		if ((pLoopPlot->getOwnerINLINE() == getID()) && !pLoopPlot->isCityRadius())
 		{
 			if (pLoopPlot->getBonusType(getTeam()) == eBonus)
 			{
 				iCount++;
 			}
 		}
+	}
+	
+
+
+	//count bonuses inside city radius or easily claimed
+	for (pLoopCity = firstCity(&iLoop); pLoopCity != NULL; pLoopCity = nextCity(&iLoop))
+	{
+		iCount += pLoopCity->AI_countNumBonuses(eBonus, true, pLoopCity->getCommerceRate(COMMERCE_CULTURE) > 0, -1);
 	}
 
 	return iCount;
@@ -3010,8 +3098,6 @@ int CvPlayer::countPotentialForeignTradeCities(CvArea* pIgnoreArea)
 			{
 				if (GET_TEAM(getTeam()).isFreeTrade((TeamTypes)iI))
 				{
-					FAssert(iI != getID());
-
 					iTempValue = GET_TEAM((TeamTypes)iI).getNumCities();
 
 					if (pIgnoreArea != NULL)
@@ -5146,13 +5232,24 @@ int CvPlayer::getProductionNeeded(ProjectTypes eProject)
 
 int CvPlayer::getBuildingClassPrereqBuilding(BuildingTypes eBuilding, BuildingClassTypes ePrereqBuildingClass, int iExtra)
 {
-	int iPrereqs;
+	CvBuildingInfo& kBuilding = GC.getBuildingInfo(eBuilding);
 
-	iPrereqs = ((GC.getBuildingInfo(eBuilding).getPrereqNumOfBuildingClass(ePrereqBuildingClass) * max(0, (GC.getWorldInfo(GC.getMapINLINE().getWorldSize()).getBuildingClassPrereqModifier() + 100))) / 100);
-
-	if (!isLimitedWonderClass((BuildingClassTypes)(GC.getBuildingInfo(eBuilding).getBuildingClassType())))
+	int iPrereqs = kBuilding.getPrereqNumOfBuildingClass(ePrereqBuildingClass);
+	
+	// dont bother with the rest of the calcs if we have no prereqs
+	if (iPrereqs < 1)
 	{
-		return (iPrereqs * (getBuildingClassCount((BuildingClassTypes)(GC.getBuildingInfo(eBuilding).getBuildingClassType())) + iExtra + 1));
+		return 0;
+	}
+	
+	BuildingClassTypes eBuildingClass = (BuildingClassTypes)kBuilding.getBuildingClassType();
+
+	iPrereqs *= max(0, (GC.getWorldInfo(GC.getMapINLINE().getWorldSize()).getBuildingClassPrereqModifier() + 100));
+	iPrereqs /= 100;
+
+	if (!isLimitedWonderClass(eBuildingClass))
+	{
+		return (iPrereqs * (getBuildingClassCount(eBuildingClass) + 1 + iExtra));
 	}
 
 	if (GC.getGameINLINE().isOption(GAMEOPTION_ONE_CITY_CHALLENGE) && isHuman())
@@ -5992,6 +6089,53 @@ int CvPlayer::getResearchTurnsLeft(TechTypes eTech, bool bOverflow)
 	}
 
 	return max(1, iTurnsLeft);
+}
+
+int CvPlayer::getResearchTurnsLeftTimes100(TechTypes eTech, bool bOverflow)
+{
+    int iResearchRate;
+	int iOverflow;
+	int iResearchLeft;
+	int iTurnsLeft;
+	int iI;
+
+	iResearchRate = 0;
+	iOverflow = 0;
+
+	for (iI = 0; iI < MAX_PLAYERS; iI++)
+	{
+		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		{
+			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getTeam())
+			{
+				if ((iI == getID()) || (GET_PLAYER((PlayerTypes)iI).getCurrentResearch() == eTech))
+				{
+					iResearchRate += GET_PLAYER((PlayerTypes)iI).calculateResearchRate(eTech);
+					iOverflow += (GET_PLAYER((PlayerTypes)iI).getOverflowResearch() * calculateResearchModifier(eTech)) / 100;
+				}
+			}
+		}
+	}
+
+	if (iResearchRate == 0)
+	{
+		return MAX_INT;
+	}
+	
+	iResearchLeft = GET_TEAM(getTeam()).getResearchLeft(eTech);
+
+	if (bOverflow)
+	{
+		iResearchLeft -= iOverflow;
+	}
+	
+	iResearchLeft *= 100;
+
+	iTurnsLeft = (iResearchLeft / iResearchRate);
+
+	return max(1, iTurnsLeft);
+    
+    
 }
 
 
@@ -9211,6 +9355,8 @@ void CvPlayer::changeYieldRateModifier(YieldTypes eIndex, int iChange)
 	{
 		m_aiYieldRateModifier[eIndex] = (m_aiYieldRateModifier[eIndex] + iChange);
 
+		invalidateYieldRankCache(eIndex);
+		
 		if (eIndex == YIELD_COMMERCE)
 		{
 			updateCommerce();
@@ -9244,6 +9390,8 @@ void CvPlayer::changeCapitalYieldRateModifier(YieldTypes eIndex, int iChange)
 	if (iChange != 0)
 	{
 		m_aiCapitalYieldRateModifier[eIndex] = (m_aiCapitalYieldRateModifier[eIndex] + iChange);
+		
+		invalidateYieldRankCache(eIndex);
 
 		pCapitalCity = getCapitalCity();
 
@@ -9985,14 +10133,31 @@ bool CvPlayer::canHurry(HurryTypes eIndex)
 }
 
 
+bool CvPlayer::canPopRush()
+{
+	return (m_iPopRushHurryCount > 0);
+}
+
 void CvPlayer::changeHurryCount(HurryTypes eIndex, int iChange)										
 {
 	FAssert(eIndex >= 0);
 	FAssert(eIndex < GC.getNumHurryInfos());
+
+	int oldHurryCount = m_paiHurryCount[eIndex];
 	m_paiHurryCount[eIndex] = (m_paiHurryCount[eIndex] + iChange);
 	FAssert(getHurryCount(eIndex) >= 0);
+	
+	// if we just went from 0 to 1 (or the reverse)
+	if ((oldHurryCount > 0) != (m_paiHurryCount[eIndex] > 0))
+	{
+		// does this hurry reduce population?
+		if (GC.getHurryInfo(eIndex).getProductionPerPopulation() > 0)
+		{
+			m_iPopRushHurryCount += iChange;
+			FAssert(m_iPopRushHurryCount >= 0);
+		}
+	}
 }
-
 
 int CvPlayer::getSpecialBuildingNotRequiredCount(SpecialBuildingTypes eIndex)														
 {
@@ -10549,12 +10714,14 @@ void CvPlayer::removeGroupCycle(int iID)
 	CLLNode<int>* pSelectionGroupNode;
 
 	pSelectionGroupNode = headGroupCycleNode();
-
+	
+	bool bRemoved = false;
 	while (pSelectionGroupNode != NULL)
 	{
 		if (pSelectionGroupNode->m_data == iID)
 		{
 			pSelectionGroupNode = deleteGroupCycleNode(pSelectionGroupNode);
+			bRemoved = true;
 			break;
 		}
 		else
@@ -10596,6 +10763,7 @@ CLLNode<int>* CvPlayer::tailGroupCycleNode()
 
 
 //	Finds the path length from this tech type to one you already know
+// iustus: add caching for findPathLength
 int CvPlayer::findPathLength(TechTypes eTech, bool bCost)
 {
 	int i;
@@ -11038,7 +11206,9 @@ CvSelectionGroup* CvPlayer::addSelectionGroup()
 
 void CvPlayer::deleteSelectionGroup(int iID)
 {
-	m_selectionGroups.removeAt(iID);
+	bool bRemoved = m_selectionGroups.removeAt(iID);
+	
+	FAssertMsg(bRemoved, "could not find group, delete failed");
 }
 
 
@@ -11907,6 +12077,53 @@ void CvPlayer::read(FDataStreamBase* pStream)
 		// Get the NetID from the initialization structure
 		setNetID(gDLL->getAssignedNetworkID(getID()));
 	}
+	
+	// do sanity check on selection groups
+#ifdef FASSERT_ENABLE
+	if (true)
+	{
+		CLLNode<int>* pCurrUnitNode = headGroupCycleNode();
+		while (pCurrUnitNode != NULL)
+		{
+			CvSelectionGroup* pLoopSelectionGroup = getSelectionGroup(pCurrUnitNode->m_data);
+			FAssertMsg(pLoopSelectionGroup != NULL, "(SaveFile) selection group node with NULL selection group");
+			
+			// debugging
+			if (pLoopSelectionGroup != NULL)
+			{
+				CvUnit* pHeadUnit = pLoopSelectionGroup->getHeadUnit();
+
+				//FAssertMsg(pHeadUnit != NULL, "(SaveFile) selection group with no units");
+				
+				if (true)
+				{
+					CLLNode<IDInfo>* pUnitNode = pLoopSelectionGroup->headUnitNode();
+					
+					while (pUnitNode != NULL)
+					{
+						CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
+						
+						FAssertMsg(pLoopUnit != NULL, "(SaveFile) unit in selection group node does not exist (corrupt save)");
+						
+						pUnitNode = pLoopSelectionGroup->nextUnitNode(pUnitNode);
+					}
+				}
+			}
+
+			pCurrUnitNode = nextGroupCycleNode(pCurrUnitNode);
+		}
+	}
+#endif
+
+	// set the pop rush count cache
+	m_iPopRushHurryCount = 0;
+	for (iI = 0; iI < GC.getNumHurryInfos(); iI++)
+	{
+		if (GC.getHurryInfo((HurryTypes)iI).getProductionPerPopulation() > 0 && getHurryCount((HurryTypes)iI) > 0)
+		{
+			m_iPopRushHurryCount++;
+		}
+	}
 }
 
 //
@@ -12309,4 +12526,111 @@ void CvPlayer::createGreatPeople(UnitTypes eGreatPersonUnit, bool bIncrementThre
 
 }
 
+// CACHE: cache frequently used values
+///////////////////////////////////////
+bool CvPlayer::hasShrine(ReligionTypes eReligion)
+{
+	bool bHasShrine = false;
+	
+	if (eReligion != NO_RELIGION)
+	{
+		CvCity* pHolyCity = GC.getGameINLINE().getHolyCity(eReligion);
+		
+		// if the holy city exists, and we own it
+		if (pHolyCity != NULL && pHolyCity->getOwnerINLINE() == getID())
+			bHasShrine = pHolyCity->hasShrine(eReligion);
+	}
 
+	return bHasShrine;
+}
+
+void CvPlayer::invalidatePopulationRankCache()
+{
+	int iLoop;
+	CvCity* pLoopCity;
+	for (pLoopCity = firstCity(&iLoop); pLoopCity != NULL; pLoopCity = nextCity(&iLoop))
+	{
+		pLoopCity->invalidatePopulationRankCache();
+	}
+}
+
+void CvPlayer::invalidateYieldRankCache(YieldTypes eYield)
+{
+	int iLoop;
+	CvCity* pLoopCity;
+	for (pLoopCity = firstCity(&iLoop); pLoopCity != NULL; pLoopCity = nextCity(&iLoop))
+	{
+		pLoopCity->invalidateYieldRankCache();
+	}
+}
+
+void CvPlayer::invalidateCommerceRankCache(CommerceTypes eCommerce)
+{
+	int iLoop;
+	CvCity* pLoopCity;
+	for (pLoopCity = firstCity(&iLoop); pLoopCity != NULL; pLoopCity = nextCity(&iLoop))
+	{
+		pLoopCity->invalidateCommerceRankCache();
+	}
+}
+
+void CvPlayer::constructCache()
+{
+	// allocate known constants
+
+	// zero everything out, just to be safe
+	m_iPlaceholderCount = 0;
+	m_aiPlaceholderArray = NULL;
+
+	m_iPopRushHurryCount = 0;
+	
+	// note resetCache(/*bConstructorCall*/ true) will be called by CvPlayer::CvPlayer
+}
+
+void CvPlayer::destructCache()
+{
+	uninitCache(); // note, will be called by CvPlayer::~CvPlayer as well
+
+	// deallocate anything allocated in constructor
+}
+
+void CvPlayer::initCache()
+{
+	// init non-saved data
+
+	// note resetCache(/*bConstructorCall*/ false) will be called by CvPlayer::init
+}
+
+void CvPlayer::uninitCache()
+{
+	m_iPopRushHurryCount = 0;
+	
+	m_iPlaceholderCount = 0;
+
+	SAFE_DELETE_ARRAY(m_aiPlaceholderArray);
+}
+
+void CvPlayer::resetCache(bool bConstructorCall)
+{
+	int	iI;
+	
+	uninitCache(); // note, will be called by CvPlayer::reset as well
+	
+	if (!bConstructorCall)
+	{
+		FAssertMsg(m_aiPlaceholderArray==NULL, "about to leak memory, CvGame::m_aiShrineBuilding");
+		m_aiPlaceholderArray = new int[GC.getNumBuildingInfos()];
+		for (iI = 0; iI < GC.getNumBuildingInfos(); iI++)
+		{
+			m_aiPlaceholderArray[iI] = (int) 0;
+		}
+	}
+}
+
+
+void CvPlayer::doUpdateCacheOnTurn()
+{
+	// add this back, after testing without it
+	// invalidateYieldRankCache();
+
+}

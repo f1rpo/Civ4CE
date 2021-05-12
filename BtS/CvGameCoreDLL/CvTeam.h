@@ -370,6 +370,22 @@ protected:
 	virtual void read(FDataStreamBase* pStream);
 	virtual void write(FDataStreamBase* pStream);
 
+// CACHE: cache frequently used values
+///////////////////////////////////////
+public:
+	bool hasShrine(ReligionTypes eReligion);
+
+protected:
+	int		m_iPlaceholderCount;
+	int*	m_aiPlaceholderArray;
+
+	void constructCache();	// called from constructor
+	void destructCache();	// called from destructor
+	void initCache();
+	void uninitCache();
+	void resetCache(bool bConstructorCall = false);
+
+	void doUpdateCacheOnTurn();	
 };
 
 #endif

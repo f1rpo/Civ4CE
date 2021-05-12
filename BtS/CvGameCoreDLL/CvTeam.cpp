@@ -55,6 +55,8 @@ CvTeam::CvTeam()
 
 	m_ppaaiImprovementYieldChange = NULL;
 
+	constructCache();
+
 	reset((TeamTypes)0, true);
 }
 
@@ -62,6 +64,8 @@ CvTeam::CvTeam()
 CvTeam::~CvTeam()
 {
 	uninit();
+
+	destructCache();
 
 	SAFE_DELETE_ARRAY(m_aiStolenVisibilityTimer);
 	SAFE_DELETE_ARRAY(m_aiWarWeariness);
@@ -90,12 +94,16 @@ void CvTeam::init(TeamTypes eID)
 	//--------------------------------
 	// Init other game data
 	AI_init();
+
+	initCache();
 }
 
 
 void CvTeam::uninit()
 {
 	int iI;
+
+	uninitCache();
 
 	SAFE_DELETE_ARRAY(m_paiRouteChange);
 	SAFE_DELETE_ARRAY(m_paiProjectCount);
@@ -267,6 +275,8 @@ void CvTeam::reset(TeamTypes eID, bool bConstructorCall)
 
 		AI_reset();
 	}
+
+	resetCache(bConstructorCall);
 }
 
 
@@ -544,8 +554,15 @@ void CvTeam::addTeam(TeamTypes eTeam)
 
 			if (GET_TEAM((TeamTypes)iI).isAlive())
 			{
-				GET_TEAM((TeamTypes)iI).AI_setWarPlan(getID(), NO_WARPLAN);
-				GET_TEAM((TeamTypes)iI).AI_setWarPlan(eTeam, NO_WARPLAN);
+				if (!GET_TEAM((TeamTypes)iI).isAtWar(getID()))
+				{
+					GET_TEAM((TeamTypes)iI).AI_setWarPlan(getID(), NO_WARPLAN);
+				}
+
+				if (!GET_TEAM((TeamTypes)iI).isAtWar(eTeam))
+				{
+					GET_TEAM((TeamTypes)iI).AI_setWarPlan(eTeam, NO_WARPLAN);
+				}
 			}
 		}
 	}
@@ -673,8 +690,11 @@ void CvTeam::shareCounters(TeamTypes eTeam)
 			{
 				AI_setEnemyPeacetimeGrantValue(((TeamTypes)iI), GET_TEAM(eTeam).AI_getEnemyPeacetimeGrantValue((TeamTypes)iI));
 			}
-
-			GET_TEAM(eTeam).AI_setWarPlan(((TeamTypes)iI), NO_WARPLAN);
+			
+			if (!GET_TEAM((TeamTypes)eTeam).isAtWar((TeamTypes)iI))
+			{
+				GET_TEAM(eTeam).AI_setWarPlan(((TeamTypes)iI), NO_WARPLAN);
+			}
 		}
 	}
 
@@ -738,6 +758,8 @@ void CvTeam::doTurn()
 	int iI, iJ;
 
 	FAssertMsg(isAlive(), "isAlive is expected to be true");
+
+	doUpdateCacheOnTurn();
 
 	AI_doTurnPre();
 
@@ -938,7 +960,7 @@ void CvTeam::declareWar(TeamTypes eTeam, bool bNewDiplo)
 
 	if (!isAtWar(eTeam))
 	{
-		FAssertMsg((isHuman() || isMinorCiv() || GET_TEAM(eTeam).isMinorCiv() || isBarbarian() || GET_TEAM(eTeam).isBarbarian() || AI_isSneakAttackReady(eTeam) || (GET_TEAM(eTeam).getAtWarCount(true) > 0) || !(GC.getGameINLINE().isFinalInitialized()) || gDLL->GetWorldBuilderMode() || getVassalCount() > 0  || isAVassal() || getDefensivePactCount() > 0), "Possibly accidental AI war!!!");
+		FAssertMsg((isHuman() || isMinorCiv() || GET_TEAM(eTeam).isMinorCiv() || isBarbarian() || GET_TEAM(eTeam).isBarbarian() || AI_isSneakAttackReady(eTeam) || (GET_TEAM(eTeam).getAtWarCount(true) > 0) || !(GC.getGameINLINE().isFinalInitialized()) || gDLL->GetWorldBuilderMode() || getVassalCount() > 0  || isAVassal() || GET_TEAM(eTeam).getVassalCount() > 0  || GET_TEAM(eTeam).isAVassal() || getDefensivePactCount() > 0), "Possibly accidental AI war!!!");
 
 		for (pLoopDeal = GC.getGameINLINE().firstDeal(&iLoop); pLoopDeal != NULL; pLoopDeal = GC.getGameINLINE().nextDeal(&iLoop))
 		{
@@ -983,7 +1005,7 @@ void CvTeam::declareWar(TeamTypes eTeam, bool bNewDiplo)
 		{
 			if (GET_TEAM((TeamTypes)iI).isAlive())
 			{
-				if (GET_TEAM(eTeam).AI_isSneakAttackPreparing((TeamTypes)iI))
+				if (!GET_TEAM(eTeam).isAtWar((TeamTypes)iI) && GET_TEAM(eTeam).AI_isChosenWar((TeamTypes)iI))
 				{
 					GET_TEAM(eTeam).AI_setWarPlan(((TeamTypes)iI), NO_WARPLAN);
 				}
@@ -3315,6 +3337,16 @@ void CvTeam::setVassal(TeamTypes eIndex, bool bNewValue, bool bCapitulated)
 				}
 			}
 
+			// clear warplans for wars that are not already started
+			for (int iI = 0; iI < MAX_TEAMS; iI++)
+			{
+				if (!isAtWar((TeamTypes)iI))
+				{
+					AI_setWarPlan((TeamTypes) iI, NO_WARPLAN);
+					GET_TEAM((TeamTypes) iI).AI_setWarPlan(getID(), NO_WARPLAN);
+				}
+			}
+
 			// All our vassals now become free
 			for (int iI = 0; iI < MAX_TEAMS; iI++)
 			{
@@ -4101,6 +4133,11 @@ void CvTeam::setHasTech(TechTypes eIndex, bool bNewValue, PlayerTypes ePlayer, b
 					{
 						GET_PLAYER((PlayerTypes)iI).popResearch(eIndex);
 					}
+					
+					// notify the player they now have the tech, if they want to make immediate changes
+					GET_PLAYER((PlayerTypes)iI).AI_nowHasTech(eIndex);
+
+					GET_PLAYER((PlayerTypes)iI).invalidateYieldRankCache();
 				}
 			}
 
@@ -4435,22 +4472,7 @@ void CvTeam::testCircumnavigated()
 		return;
 	}
 
-	if (GC.getGameINLINE().isCircumnavigated())
-	{
-		return;
-	}
-
-	if (GC.getDefineINT("CIRCUMNAVIGATE_FREE_MOVES") == 0)
-	{
-		return;
-	}
-
-	if (!(GC.getMapINLINE().isWrapXINLINE()) && !(GC.getMapINLINE().isWrapYINLINE()))
-	{
-		return;
-	}
-
-	if (GC.getMapINLINE().getLandPlots() > ((GC.getMapINLINE().numPlotsINLINE() * 2) / 3))
+	if (!GC.getGameINLINE().circumnavigationAvailable())
 	{
 		return;
 	}
@@ -4930,3 +4952,77 @@ void CvTeam::write(FDataStreamBase* pStream)
 		pStream->Write(NUM_YIELD_TYPES, m_ppaaiImprovementYieldChange[iI]);
 	}
 }
+
+// CACHE: cache frequently used values
+///////////////////////////////////////
+bool CvTeam::hasShrine(ReligionTypes eReligion)
+{
+	bool bHasShrine = false;
+	
+	if (eReligion != NO_RELIGION)
+	{
+		CvCity* pHolyCity = GC.getGameINLINE().getHolyCity(eReligion);
+		
+		// if the holy city exists, and we own it
+		if (pHolyCity != NULL && GET_PLAYER(pHolyCity->getOwnerINLINE()).getTeam() == getID())
+			bHasShrine = pHolyCity->hasShrine(eReligion);
+	}
+
+	return bHasShrine;
+}
+
+void CvTeam::constructCache()
+{
+	// allocate known constants
+
+	// zero everything out, just to be safe
+	m_iPlaceholderCount = 0;
+	m_aiPlaceholderArray = NULL;
+	
+	// note resetCache(/*bConstructorCall*/ true) will be called by CvTeam::CvTeam
+}
+
+void CvTeam::destructCache()
+{
+	uninitCache(); // note, will be called by CvTeam::~CvTeam as well
+
+	// deallocate anything allocated in constructor
+}
+
+void CvTeam::initCache()
+{
+	// init non-saved data
+
+	// note resetCache(/*bConstructorCall*/ false) will be called by CvTeam::init
+}
+
+void CvTeam::uninitCache()
+{
+	m_iPlaceholderCount = 0;
+
+	SAFE_DELETE_ARRAY(m_aiPlaceholderArray);
+}
+
+void CvTeam::resetCache(bool bConstructorCall)
+{
+	int	iI;
+	
+	uninitCache(); // note, will be called by CvTeam::reset as well
+	
+	if (!bConstructorCall)
+	{
+		FAssertMsg(m_aiPlaceholderArray==NULL, "about to leak memory, CvGame::m_aiShrineBuilding");
+		m_aiPlaceholderArray = new int[GC.getNumBuildingInfos()];
+		for (iI = 0; iI < GC.getNumBuildingInfos(); iI++)
+		{
+			m_aiPlaceholderArray[iI] = (int) 0;
+		}
+	}
+}
+
+
+void CvTeam::doUpdateCacheOnTurn()
+{
+
+}
+

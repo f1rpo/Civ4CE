@@ -144,9 +144,11 @@ public:
 	DllExport void buildSingleLineTechTreeString(CvWString &szBuffer, TechTypes eTech, bool bPlayerContext);
 	DllExport void buildTechTreeString(CvWString &szBuffer, TechTypes eTech, bool bPlayerContext, TechTypes eFromTech);
 
+	void getWarplanString(CvWString& szString, WarPlanTypes eWarPlan);
 	DllExport void getAttitudeString(CvWString& szBuffer, PlayerTypes ePlayer, PlayerTypes eTargetPlayer);
 	DllExport void getTradeString(CvWString& szBuffer, const TradeData& tradeData, PlayerTypes ePlayer1, PlayerTypes ePlayer2);
 	DllExport void getDealString(CvWString& szString, CvDeal& deal, PlayerTypes ePlayerPerspective = NO_PLAYER);
+	void getDealString(CvWString& szBuffer, PlayerTypes ePlayer1, PlayerTypes ePlayer2, const CLinkList<TradeData>* pListPlayer1, const CLinkList<TradeData>* pListPlayer2, PlayerTypes ePlayerPerspective = NO_PLAYER);
 	DllExport void getActiveDealsString(CvWString& szString, PlayerTypes eThisPlayer, PlayerTypes eOtherPlayer);
 
 	DllExport void buildFinanceInflationString(CvWString& szDetails, PlayerTypes ePlayer);
@@ -155,6 +157,8 @@ public:
 	DllExport void buildFinanceCityMaintString(CvWString& szDetails, PlayerTypes ePlayer);
 	DllExport void buildFinanceCivicUpkeepString(CvWString& szDetails, PlayerTypes ePlayer);
 	DllExport void buildFinanceForeignIncomeString(CvWString& szDetails, PlayerTypes ePlayer);
+
+	void setCityWorkMatrixString(CvWString &szString, CvCity* pCity);
 
 private:
 
@@ -169,6 +173,9 @@ private:
 	int m_iNumDiplomacyTextInfos;
 	CvDiplomacyTextInfo* m_paDiplomacyTextInfo;
 	std::vector<int*> m_apbPromotion;
+
+	void setCityPlotYieldValueString(CvWString &szString, CvCity* pCity, int iIndex, bool bAvoidGrowth, bool bIgnoreGrowth, bool bIgnoreFood = false);
+	void setYieldValueString(CvWString &szString, int iValue, bool bActive = false, bool bHighlight = false, bool bMakeWhitespace = false);
 };
 
 // Singleton Accessor

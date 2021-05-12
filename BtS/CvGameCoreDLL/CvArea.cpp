@@ -771,6 +771,8 @@ void CvArea::changeYieldRateModifier(PlayerTypes eIndex1, YieldTypes eIndex2, in
 	if (iChange != 0)
 	{
 		m_aaiYieldRateModifier[eIndex1][eIndex2] = (m_aaiYieldRateModifier[eIndex1][eIndex2] + iChange);
+		
+		GET_PLAYER(eIndex1).invalidateYieldRankCache(eIndex2);
 
 		if (eIndex2 == YIELD_COMMERCE)
 		{

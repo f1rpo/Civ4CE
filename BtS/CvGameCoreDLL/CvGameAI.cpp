@@ -112,7 +112,7 @@ int CvGameAI::AI_combatValue(UnitTypes eUnit)
 	{
 		iValue *= GC.getUnitInfo(eUnit).getCombat();
 
-		iValue *= ((((GC.getUnitInfo(eUnit).getFirstStrikes() * 2) + GC.getUnitInfo(eUnit).getChanceFirstStrikes()) * ((GC.getDefineINT("COMBAT_DAMAGE") * 2) / 5)) + 100);
+		iValue *= ((((GC.getUnitInfo(eUnit).getFirstStrikes() * 2) + GC.getUnitInfo(eUnit).getChanceFirstStrikes()) * (GC.getDefineINT("COMBAT_DAMAGE") / 5)) + 100);
 		iValue /= 100;
 	}
 

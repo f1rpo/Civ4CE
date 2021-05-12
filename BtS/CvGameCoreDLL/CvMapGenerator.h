@@ -26,6 +26,7 @@ public:
 	void addLakes();																			// Exposed to Python
 	DllExport void addRivers();														// Exposed to Python
 	void doRiver(CvPlot* pStartPlot, CardinalDirectionTypes eLastCardinalDirection=NO_CARDINALDIRECTION, CardinalDirectionTypes eOriginalCardinalDirection=NO_CARDINALDIRECTION, int iThisRiverID=-1);	// Exposed to Python
+	bool addRiver(CvPlot *pFreshWaterPlot);
 	DllExport void addFeatures();													// Exposed to Python
 	DllExport void addBonuses();													// Exposed to Python
 	void addUniqueBonusType(BonusTypes eBonusType);				// Exposed to Python

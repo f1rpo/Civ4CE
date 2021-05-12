@@ -4,6 +4,9 @@
 #define CIV4_PLAYER_AI_H
 
 #include "CvPlayer.h"
+#include "AI_defines.h"
+
+class CvExtraSaveData;
 
 class CvPlayerAI : public CvPlayer
 {
@@ -15,11 +18,11 @@ public:
 
   // inlined for performance reasons
 #ifdef _USRDLL
-  static CvPlayerAI& getPlayer(PlayerTypes ePlayer) 
+  static CvPlayerAI& getPlayer(PlayerTypes ePlayer)
   {
 	  FAssertMsg(ePlayer != NO_PLAYER, "Player is not assigned a valid value");
 	  FAssertMsg(ePlayer < MAX_PLAYERS, "Player is not assigned a valid value");
-	  return m_aPlayers[ePlayer]; 
+	  return m_aPlayers[ePlayer];
   }
 #endif
   DllExport static CvPlayerAI& getPlayerNonInl(PlayerTypes ePlayer);
@@ -75,6 +78,7 @@ public:
 
 	bool AI_isCommercePlot(CvPlot* pPlot);
 	int AI_getPlotDanger(CvPlot* pPlot, int iRange = -1, bool bTestMoves = true);
+	int AI_getUnitDanger(CvUnit* pUnit, int iRange = -1, bool bTestMoves = true, bool bAnyDanger = true);
 
 	bool AI_avoidScience();
 	bool AI_isFinancialTrouble();
@@ -155,7 +159,11 @@ public:
 	int AI_totalMissionAIs(MissionAITypes eMissionAI, CvSelectionGroup* pSkipSelectionGroup = NULL);
 	int AI_areaMissionAIs(CvArea* pArea, MissionAITypes eMissionAI, CvSelectionGroup* pSkipSelectionGroup = NULL);
 	int AI_plotTargetMissionAIs(CvPlot* pPlot, MissionAITypes eMissionAI, CvSelectionGroup* pSkipSelectionGroup = NULL, int iRange = 0);
+	int AI_plotTargetMissionAIs(CvPlot* pPlot, MissionAITypes eMissionAI, int& iClosestTargetRange, CvSelectionGroup* pSkipSelectionGroup = NULL, int iRange = 0);
+	int AI_plotTargetMissionAIs(CvPlot* pPlot, MissionAITypes* aeMissionAI, int iMissionAICount, int& iClosestTargetRange, CvSelectionGroup* pSkipSelectionGroup = NULL, int iRange = 0);
 	int AI_unitTargetMissionAIs(CvUnit* pUnit, MissionAITypes eMissionAI, CvSelectionGroup* pSkipSelectionGroup = NULL);
+	int AI_unitTargetMissionAIs(CvUnit* pUnit, MissionAITypes* aeMissionAI, int iMissionAICount, CvSelectionGroup* pSkipSelectionGroup = NULL);
+	int AI_wakePlotTargetMissionAIs(CvPlot* pPlot, MissionAITypes eMissionAI, CvSelectionGroup* pSkipSelectionGroup = NULL);
 
 	CivicTypes AI_bestCivic(CivicOptionTypes eCivicOption);
 	int AI_civicValue(CivicTypes eCivic);
@@ -217,8 +225,45 @@ public:
 	int AI_getMemoryCount(PlayerTypes eIndex1, MemoryTypes eIndex2);
 	void AI_changeMemoryCount(PlayerTypes eIndex1, MemoryTypes eIndex2, int iChange);
 
+	int AI_calculateGoldenAgeValue();
+
 	void AI_doCommerce();
 
+	int AI_getCultureVictoryStage();
+	
+	int AI_cultureVictoryTechValue(TechTypes eTech);
+	
+	bool AI_isDoStrategy(int iStrategy);
+	void AI_forceUpdateStrategies();
+
+	void AI_nowHasTech(TechTypes eTech);
+	
+    int AI_countDeadlockedBonuses(CvPlot* pPlot);
+    
+    int AI_getOurPlotStrength(CvPlot* pPlot, int iRange, bool bDefensiveBonuses, bool bTestMoves);
+    int AI_getEnemyPlotStrength(CvPlot* pPlot, int iRange, bool bDefensiveBonuses, bool bTestMoves);
+
+	int AI_goldToUpgradeAllUnits(int iExpThreshold = 0);
+
+	int AI_goldTradeValuePercent();
+	
+	int AI_averageYieldMultiplier(YieldTypes eYield);
+	int AI_averageCommerceMultiplier(CommerceTypes eCommerce);
+	int AI_averageGreatPeopleMultiplier();
+	int AI_averageCommerceExchange(CommerceTypes eCommerce);
+	
+	int AI_playerCloseness(PlayerTypes eIndex, int iMaxDistance);
+	
+	int AI_getTotalCityThreat();
+	int AI_getTotalFloatingDefenseNeeded();
+	
+	
+	int AI_getTotalAreaCityThreat(CvArea* pArea);
+	int AI_countNumAreaHostileUnits(CvArea* pArea, bool bLand = true, bool bWater = false);
+	int AI_getTotalFloatingDefendersNeeded(CvArea* pArea);
+	int AI_getTotalFloatingDefenders(CvArea* pArea);
+
+	
 	// for serialization
   virtual void read(FDataStreamBase* pStream);
   virtual void write(FDataStreamBase* pStream);
@@ -231,7 +276,24 @@ protected:
 	int m_iAttackOddsChange;
 	int m_iCivicTimer;
 	int m_iReligionTimer;
-
+	
+	int m_iStrategyHash;
+	int m_iStrategyHashCacheTurn;
+	
+	
+	int m_iAveragesCacheTurn;
+	
+	int m_iAverageGreatPeopleMultiplier;
+	
+	int *m_aiAverageYieldMultiplier;
+	int *m_aiAverageCommerceMultiplier;
+	int *m_aiAverageCommerceExchange;
+	
+	int m_iUpgradeUnitsCacheTurn;
+	int m_iUpgradeUnitsCachedExpThreshold;
+	int m_iUpgradeUnitsCachedGold;
+	
+	
 	int *m_aiNumTrainAIUnits;
 	int *m_aiNumAIUnits;
 	int* m_aiSameReligionCounter;
@@ -248,13 +310,25 @@ protected:
 	int** m_aaiContactTimer;
 	int** m_aaiMemoryCount;
 
+	bool m_bWasFinancialTrouble;
+	int m_iTurnLastProductionDirty;
+
 	void AI_doCounter();
 	void AI_doMilitary();
 	void AI_doResearch();
 	void AI_doCivics();
 	void AI_doReligion();
 	void AI_doDiplo();
+	void AI_doCheckFinancialTrouble();
 
+	
+	int AI_getStrategyHash();
+	void AI_calculateAverages();
+	
+	void AI_convertUnitAITypesForCrush();
+
+	void writeExtraSaveData(CvExtraSaveData& extraSaveData);
+	friend CvExtraSaveData;
 };
 
 // helper for accessing static functions

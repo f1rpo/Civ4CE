@@ -18,14 +18,21 @@ public:
 	void AI_reset();
 
 	void AI_separate();
+	void AI_seperateNonAI(UnitAITypes eUnitAI);
 
 	bool AI_update();
 
 	int AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy) const;
-	CvUnit* AI_getBestGroupAttacker(const CvPlot* pPlot, bool bPotentialEnemy, bool bForce = false, bool bNoBlitz = false) const;
+	CvUnit* AI_getBestGroupAttacker(const CvPlot* pPlot, bool bPotentialEnemy, int& iUnitOdds, bool bForce = false, bool bNoBlitz = false) const;
+	CvUnit* AI_getBestGroupSacrifice(const CvPlot* pPlot, bool bPotentialEnemy, bool bForce = false, bool bNoBlitz = false) const;
+	int AI_compareStacks(const CvPlot* pPlot, bool bPotentialEnemy, bool bCheckCanAttack = false, bool bCheckCanMove = false) const;
+	int AI_sumStrength(const CvPlot* pAttackedPlot = NULL, DomainTypes eDomainType = NO_DOMAIN, bool bCheckCanAttack = false, bool bCheckCanMove = false) const;
+	void AI_queueGroupAttack(int iX, int iY);
+	void AI_cancelGroupAttack();
+	bool AI_isGroupAttack();
 
 	bool AI_isControlled();
-	bool AI_isDeclareWar();
+	bool AI_isDeclareWar(const CvPlot* pPlot = NULL);
 
 	CvPlot* AI_getMissionAIPlot();
 
@@ -51,6 +58,9 @@ protected:
 
 	IDInfo m_missionAIUnit;
 
+	bool m_bGroupAttack;
+	int m_iGroupAttackX;
+	int m_iGroupAttackY;
 };
 
 #endif

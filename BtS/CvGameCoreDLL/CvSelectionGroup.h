@@ -9,6 +9,8 @@
 class CvPlot;
 class CvArea;
 class FAStarNode;
+class CvPlotRegion;
+class CvPlotDataRegion;
 
 class CvSelectionGroup
 {
@@ -19,7 +21,7 @@ public:
 	virtual ~CvSelectionGroup();
 
 	DllExport void init(int iID, PlayerTypes eOwner);
-	DllExport void uninit();			
+	DllExport void uninit();
 	DllExport void reset(int iID = 0, PlayerTypes eOwner = NO_PLAYER, bool bConstructorCall = false);
 
 	void kill();
@@ -49,10 +51,12 @@ public:
 	bool isHuman();																																											// Exposed to Python
 	DllExport bool isBusy();
 	bool isCargoBusy();
-	int baseMoves();																																										// Exposed to Python 
+	int baseMoves();																																										// Exposed to Python
 	bool isWaiting() const;																																							// Exposed to Python
-	bool isFull();																																											// Exposed to Python
+	bool isFull();																																										// Exposed to Python
 	bool hasCargo();																																										// Exposed to Python
+	int getCargo() const;
+	bool buildCargoUnitList(CLinkList<IDInfo>& unitList) const;
 	DllExport bool canAllMove();																																				// Exposed to Python
 	bool canAnyMove();																																									// Exposed to Python
 	bool hasMoved();																																										// Exposed to Python
@@ -61,12 +65,17 @@ public:
 	DllExport bool canMoveInto(CvPlot* pPlot, bool bAttack = false);																		// Exposed to Python
 	DllExport bool canMoveOrAttackInto(CvPlot* pPlot, bool bDeclareWar = false);												// Exposed to Python
 	bool canMoveThrough(CvPlot* pPlot);																																	// Exposed to Python
-	bool canFight();																																										// Exposed to Python 
+	bool canFight();																																										// Exposed to Python
 	bool canDefend();																																										// Exposed to Python
+	bool canBombard(const CvPlot* pPlot);
+	bool visibilityRange();
+
+	void unloadAll();
 	bool alwaysInvisible();																																							// Exposed to Python
 	int countNumUnitAIType(UnitAITypes eUnitAI);																												// Exposed to Python
 	bool hasWorker();																																										// Exposed to Python
 	bool IsSelected();
+
 	void NotifyEntity(MissionTypes eMission);
 	void airCircle(bool bStart);
 
@@ -75,27 +84,29 @@ public:
 	bool at(int iX, int iY) const;																																								// Exposed to Python
 	bool atPlot(const CvPlot* pPlot) const;																																				// Exposed to Python
 	DllExport CvPlot* plot() const;																																								// Exposed to Python
-	CvArea* area() const;																																													// Exposed to Python 
+	int getArea() const;
+	CvArea* area() const;																																													// Exposed to Python
 	DomainTypes getDomainType() const;
 
 	RouteTypes getBestBuildRoute(CvPlot* pPlot, BuildTypes* peBestBuild = NULL);	// Exposed to Python
 
-	bool groupDeclareWar(CvPlot* pPlot);
-	bool groupAttack(int iX, int iY, int iFlags);
+	bool groupDeclareWar(CvPlot* pPlot, bool bForce = false);
+	bool groupAttack(int iX, int iY, int iFlags, bool& bFailedAlreadyFighting);
 	void groupMove(CvPlot* pPlot, bool bCombat, CvUnit* pCombatUnit = NULL);
 	bool groupPathTo(int iX, int iY, int iFlags);
 	bool groupRoadTo(int iX, int iY, int iFlags);
 	bool groupBuild(BuildTypes eBuild);
+	void setTransportUnit(CvUnit* pTransportUnit);
 
 	bool isAmphibPlot(CvPlot* pPlot);																																		// Exposed to Python
 	bool groupAmphibMove(CvPlot* pPlot, int iFlags);
 
 	DllExport bool readyToSelect(bool bAny = false);																										// Exposed to Python
 	bool readyToMove(bool bAny = false);																																// Exposed to Python
-	bool readyToAuto();																																									// Exposed to Python 
+	bool readyToAuto();																																									// Exposed to Python
 
 	int getID();																																												// Exposed to Python
-	void setID(int iID);																			
+	void setID(int iID);
 
 	int getMissionTimer();
 	void setMissionTimer(int iNewValue);
@@ -130,6 +141,9 @@ public:
 	DllExport void clearUnits();
 	DllExport bool addUnit(CvUnit* pUnit);
 	void removeUnit(CvUnit* pUnit);
+	void mergeIntoGroup(CvSelectionGroup* pSelectionGroup);
+	CvSelectionGroup* splitGroup(int iSplitSize, CvUnit* pNewHeadUnit = NULL);
+
 	DllExport CLLNode<IDInfo>* deleteUnitNode(CLLNode<IDInfo>* pNode);
 	DllExport CLLNode<IDInfo>* nextUnitNode(CLLNode<IDInfo>* pNode) const;
 	DllExport int getNumUnits() const;																												// Exposed to Python
@@ -139,6 +153,9 @@ public:
 	UnitAITypes getHeadUnitAI() const;
 	PlayerTypes getHeadOwner() const;
 	TeamTypes getHeadTeam() const;
+
+	void buildVisibilityRegion(CvPlotRegion& visiblePlots, const CvPlot* atPlot = NULL) const;
+	void buildVisibilityRegion(CvPlotDataRegion& visiblePlots, const CvPlot* atPlot = NULL) const;
 
 	void clearMissionQueue();																																	// Exposed to Python
 	DllExport int getLengthMissionQueue();																											// Exposed to Python
@@ -162,23 +179,33 @@ public:
 	virtual void AI_separate() = 0;
 	virtual bool AI_update() = 0;
 	virtual int AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy) const = 0;
-	virtual CvUnit* AI_getBestGroupAttacker(const CvPlot* pPlot, bool bPotentialEnemy, bool bForce = false, bool bNoBlitz = false) const = 0;
+	virtual CvUnit* AI_getBestGroupAttacker(const CvPlot* pPlot, bool bPotentialEnemy, int& iUnitOdds, bool bForce = false, bool bNoBlitz = false) const = 0;
+	virtual CvUnit* AI_getBestGroupSacrifice(const CvPlot* pPlot, bool bPotentialEnemy, bool bForce = false, bool bNoBlitz = false) const = 0;
+	virtual int AI_compareStacks(const CvPlot* pPlot, bool bPotentialEnemy, bool bCheckCanAttack = false, bool bCheckCanMove = false) const = 0;
+	virtual int AI_sumStrength(const CvPlot* pAttackedPlot = NULL, DomainTypes eDomainType = NO_DOMAIN, bool bCheckCanAttack = false, bool bCheckCanMove = false) const = 0;
+	virtual void AI_queueGroupAttack(int iX, int iY) = 0;
+	virtual void AI_cancelGroupAttack() = 0;
+	virtual bool AI_isGroupAttack() = 0;
+
 	virtual bool AI_isControlled() = 0;
-	virtual bool AI_isDeclareWar() = 0;
+	virtual bool AI_isDeclareWar(const CvPlot* pPlot = NULL) = 0;
 	virtual CvPlot* AI_getMissionAIPlot() = 0;
 	virtual bool AI_isForceSeparate() = 0;
 	virtual void AI_makeForceSeparate() = 0;
 	virtual MissionAITypes AI_getMissionAIType() = 0;
 	virtual void AI_setMissionAI(MissionAITypes eNewMissionAI, CvPlot* pNewPlot, CvUnit* pNewUnit) = 0;
 	virtual CvUnit* AI_getMissionAIUnit() = 0;
+	
+	virtual void AI_seperateNonAI(UnitAITypes eUnitAI) = 0;
 
 protected:
+	// WARNING: adding to this class will cause the civ4 exe to crash
 
 	int m_iID;
 	int m_iMissionTimer;
 
 	bool m_bForceUpdate;
-
+	
 	PlayerTypes m_eOwner;
 	ActivityTypes m_eActivityType;
 	AutomateTypes m_eAutomateType;
@@ -189,7 +216,6 @@ protected:
 
 	void activateHeadMission();
 	void deactivateHeadMission();
-
 };
 
 #endif
