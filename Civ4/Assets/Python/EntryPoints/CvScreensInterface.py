@@ -34,7 +34,8 @@ import CvWorldBuilderDiplomacyScreen
 
 import CvDebugTools
 import CvDebugInfoScreen
-#import CvDiplomacy
+
+import CvDemoVictoryScreen
 
 import CvUtil
 import CvEventInterface
@@ -56,7 +57,9 @@ def toggleSetScreenOn(argsList):
 	print "%s SCREEN TURNED ON" %(argsList[0],)
 	g_bIsScreenActive = argsList[0]
 
-#diplomacyScreen = CvDiplomacy.CvDiplomacy()
+demoVictoryScreen = CvDemoVictoryScreen.CvDemoVictoryScreen()
+def showDemoVictoryScreen():
+	demoVictoryScreen.interfaceScreen()
 	
 mainInterface = CvMainInterface.CvMainInterface()
 def showMainInterface():
@@ -108,6 +111,7 @@ def showIntroMovie(argsList):
 	
 victoryMovie = CvVictoryMovieScreen.CvVictoryMovieScreen()
 def showVictoryMovie(argsList):
+	return
 	victoryMovie.interfaceScreen(argsList[0])
 	
 wonderMovie = CvWonderMovieScreen.CvWonderMovieScreen()
@@ -120,27 +124,33 @@ def showEraMovie(argsList):
 	
 replayScreen = CvReplayScreen.CvReplayScreen(REPLAY_SCREEN)
 def showReplay(argsList):
+	return
 	replayScreen.showScreen(argsList[4])
 
 danQuayleScreen = CvDanQuayle.CvDanQuayle()
 def showDanQuayleScreen(argsList):
+	return
 	danQuayleScreen.interfaceScreen()
 
 unVictoryScreen = CvUnVictoryScreen.CvUnVictoryScreen()
 def showUnVictoryScreen(argsList):
+	return
 	unVictoryScreen.interfaceScreen()
 
 topCivs = CvTopCivs.CvTopCivs()
 def showTopCivs():
+	return
 	topCivs.showScreen()
 
 infoScreen = CvInfoScreen.CvInfoScreen(INFO_SCREEN)
 def showInfoScreen(argsList):
+	return
 	iTabID = argsList[0]
 	infoScreen.showScreen(-1, iTabID)
 
 debugInfoScreen = CvDebugInfoScreen.CvDebugInfoScreen()
 def showDebugInfoScreen():
+	return
 	debugInfoScreen.interfaceScreen()
 
 techSplashScreen = CvTechSplashScreen.CvTechSplashScreen(TECH_SPLASH)
@@ -149,6 +159,7 @@ def showTechSplash(argsList):
 
 victoryScreen = CvVictoryScreen.CvVictoryScreen(VICTORY_SCREEN)
 def showVictoryScreen():
+	return
 	victoryScreen.interfaceScreen()
 
 #################################################
@@ -180,30 +191,39 @@ def pediaJumpToBuilding(argsList):
 	pediaMainScreen.pediaJump(PEDIA_BUILDING, argsList[0], True)
 	
 def pediaJumpToProject(argsList):
+	return
 	pediaMainScreen.pediaJump(PEDIA_PROJECT, argsList[0], True)
 	
 def pediaJumpToReligion(argsList):
+	return
 	pediaMainScreen.pediaJump(PEDIA_RELIGION, argsList[0], True)
 	
 def pediaJumpToPromotion(argsList):
+	return
 	pediaMainScreen.pediaJump(PEDIA_PROMOTION, argsList[0], True)
 	
 def pediaJumpToUnitChart(argsList):
+	return
 	pediaMainScreen.pediaJump(PEDIA_UNIT_CHART, argsList[0], True)
 
 def pediaJumpToBonus(argsList):
+	return
 	pediaMainScreen.pediaJump(PEDIA_BONUS, argsList[0], True)
 	
 def pediaJumpToTerrain(argsList):
+	return
 	pediaMainScreen.pediaJump(PEDIA_TERRAIN, argsList[0], True)
 	
 def pediaJumpToFeature(argsList):
+	return
 	pediaMainScreen.pediaJump(PEDIA_FEATURE, argsList[0], True)
 	
 def pediaJumpToImprovement(argsList):
+	return
 	pediaMainScreen.pediaJump(PEDIA_IMPROVEMENT, argsList[0], True)
 
 def pediaJumpToCivic(argsList):
+	return
 	pediaMainScreen.pediaJump(PEDIA_CIVIC, argsList[0], True)
 
 def pediaJumpToCiv(argsList):
@@ -213,9 +233,11 @@ def pediaJumpToLeader(argsList):
 	pediaMainScreen.pediaJump(PEDIA_LEADER, argsList[0], True)
 
 def pediaJumpToSpecialist(argsList):
+	return
 	pediaMainScreen.pediaJump(PEDIA_SPECIALIST, argsList[0], True)
 	
 def pediaShowHistorical(argsList):
+	return
 	iEntryId = pediaMainScreen.pediaHistorical.getIdFromEntryInfo(argsList[0], argsList[1])
 	pediaMainScreen.pediaJump(PEDIA_HISTORY, iEntryId, True)
 	return
@@ -228,6 +250,7 @@ def getWorldBuilderScreen():
 	return worldBuilderScreen
 
 def showWorldBuilderScreen():
+	return
 	worldBuilderScreen.interfaceScreen()
 
 def hideWorldBuilderScreen():
@@ -727,6 +750,7 @@ HandleInputMap = {  MAIN_INTERFACE : mainInterface,
 					WORLDBUILDER_DIPLOMACY_SCREEN : worldBuilderDiplomacyScreen,
 					
 					DEBUG_INFO_SCREEN : debugInfoScreen,
+					DEMO_VICTORY_SCREEN : demoVictoryScreen,
 				
 				# add new screens here
 				}

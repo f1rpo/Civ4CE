@@ -1250,7 +1250,7 @@ class CvWBDesc:
 		fileName,ext = os.path.splitext(fileName)
 		CvUtil.pyPrint( 'saveDesc:%s, curDir:%s' %(fileName,os.getcwd()) )
 
-		f = file(self.getDescFileName(fileName), "w")		# open text file		
+		f = file(self.getDescFileName(fileName), "w")
 		f.write("Version=%d\n" %(self.getVersion(),))		
 		self.gameDesc.write(f)	# write game info
 

@@ -63,30 +63,6 @@
 					<FootstepAudioScript>AS3D_UN_CHARIOT_END</FootstepAudioScript>
 				</FootstepSound>
 				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_WHEELS_2</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_WAR_CHARIOT_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_WHEELS_2</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_WAR_CHARIOT_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_TANK</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TANK_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_TANK</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TANK_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_MOD_ARMOUR</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_MOD_ARMOUR_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_MOD_ARMOUR</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_MOD_ARMOUR_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
 					<FootstepAudioType>LOOPSTEP_OCEAN1</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_OCEAN_LOOP1</FootstepAudioScript>
 				</FootstepSound>
@@ -101,54 +77,6 @@
 				<FootstepSound>
 					<FootstepAudioType>ENDSTEP_OCEAN2</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_OCEAN_END2</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_DESTOYER</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_DESTROYER_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_DESTROYER</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_DESTROYER_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_IRONCLAD</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_IRONCLAD_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_IRONCLAD</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_IRONCLAD_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_TRANSPORT</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TRANSPORT_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_TRANSPORT</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TRANSPORT_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_SUBMARINE</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_SUBMARINE_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_SUBMARINE</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_SUBMARINE_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_GUNSHIP</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_GUNSHIP_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_GUNSHIP</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_GUNSHIP_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_ARTILLERY</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_END</FootstepAudioScript>
 				</FootstepSound>
 			</FootstepSounds>
 			<WorldSoundscapeAudioScript>ASSS_GRASSLAND_SELECT_AMB</WorldSoundscapeAudioScript>
@@ -211,30 +139,6 @@
 					<FootstepAudioScript>AS3D_UN_CHARIOT_END</FootstepAudioScript>
 				</FootstepSound>
 				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_WHEELS_2</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_WAR_CHARIOT_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_WHEELS_2</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_WAR_CHARIOT_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_TANK</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TANK_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_TANK</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TANK_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_MOD_ARMOUR</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_MOD_ARMOUR_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_MOD_ARMOUR</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_MOD_ARMOUR_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
 					<FootstepAudioType>LOOPSTEP_OCEAN1</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_OCEAN_LOOP1</FootstepAudioScript>
 				</FootstepSound>
@@ -249,54 +153,6 @@
 				<FootstepSound>
 					<FootstepAudioType>ENDSTEP_OCEAN2</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_OCEAN_END2</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_DESTOYER</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_DESTROYER_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_DESTROYER</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_DESTROYER_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_IRONCLAD</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_IRONCLAD_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_IRONCLAD</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_IRONCLAD_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_TRANSPORT</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TRANSPORT_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_TRANSPORT</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TRANSPORT_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_SUBMARINE</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_SUBMARINE_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_SUBMARINE</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_SUBMARINE_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_GUNSHIP</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_GUNSHIP_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_GUNSHIP</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_GUNSHIP_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_ARTILLERY</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_END</FootstepAudioScript>
 				</FootstepSound>
 			</FootstepSounds>
 			<WorldSoundscapeAudioScript>ASSS_PLAINS_SELECT_AMB</WorldSoundscapeAudioScript>
@@ -355,30 +211,6 @@
 					<FootstepAudioScript>AS3D_UN_CHARIOT_END</FootstepAudioScript>
 				</FootstepSound>
 				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_WHEELS_2</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_WAR_CHARIOT_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_WHEELS_2</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_WAR_CHARIOT_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_TANK</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TANK_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_TANK</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TANK_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_MOD_ARMOUR</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_MOD_ARMOUR_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_MOD_ARMOUR</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_MOD_ARMOUR_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
 					<FootstepAudioType>LOOPSTEP_OCEAN1</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_OCEAN_LOOP1</FootstepAudioScript>
 				</FootstepSound>
@@ -393,54 +225,6 @@
 				<FootstepSound>
 					<FootstepAudioType>ENDSTEP_OCEAN2</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_OCEAN_END2</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_DESTOYER</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_DESTROYER_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_DESTROYER</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_DESTROYER_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_IRONCLAD</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_IRONCLAD_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_IRONCLAD</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_IRONCLAD_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_TRANSPORT</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TRANSPORT_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_TRANSPORT</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TRANSPORT_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_SUBMARINE</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_SUBMARINE_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_SUBMARINE</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_SUBMARINE_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_GUNSHIP</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_GUNSHIP_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_GUNSHIP</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_GUNSHIP_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_ARTILLERY</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_END</FootstepAudioScript>
 				</FootstepSound>
 			</FootstepSounds>
 			<WorldSoundscapeAudioScript>ASSS_DESERT_SELECT_AMB</WorldSoundscapeAudioScript>
@@ -503,30 +287,6 @@
 					<FootstepAudioScript>AS3D_UN_CHARIOT_END</FootstepAudioScript>
 				</FootstepSound>
 				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_WHEELS_2</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_WAR_CHARIOT_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_WHEELS_2</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_WAR_CHARIOT_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_TANK</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TANK_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_TANK</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TANK_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_MOD_ARMOUR</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_MOD_ARMOUR_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_MOD_ARMOUR</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_MOD_ARMOUR_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
 					<FootstepAudioType>LOOPSTEP_OCEAN1</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_OCEAN_LOOP1</FootstepAudioScript>
 				</FootstepSound>
@@ -541,54 +301,6 @@
 				<FootstepSound>
 					<FootstepAudioType>ENDSTEP_OCEAN2</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_OCEAN_END2</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_DESTOYER</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_DESTROYER_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_DESTROYER</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_DESTROYER_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_IRONCLAD</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_IRONCLAD_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_IRONCLAD</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_IRONCLAD_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_TRANSPORT</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TRANSPORT_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_TRANSPORT</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TRANSPORT_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_SUBMARINE</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_SUBMARINE_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_SUBMARINE</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_SUBMARINE_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_GUNSHIP</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_GUNSHIP_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_GUNSHIP</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_GUNSHIP_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_ARTILLERY</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_END</FootstepAudioScript>
 				</FootstepSound>
 			</FootstepSounds>
 			<WorldSoundscapeAudioScript>ASSS_TUNDRA_SELECT_AMB</WorldSoundscapeAudioScript>
@@ -643,30 +355,6 @@
 					<FootstepAudioScript>AS3D_UN_CHARIOT_END</FootstepAudioScript>
 				</FootstepSound>
 				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_WHEELS_2</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_WAR_CHARIOT_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_WHEELS_2</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_WAR_CHARIOT_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_TANK</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TANK_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_TANK</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TANK_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_MOD_ARMOUR</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_MOD_ARMOUR_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_MOD_ARMOUR</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_MOD_ARMOUR_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
 					<FootstepAudioType>LOOPSTEP_OCEAN1</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_OCEAN_LOOP1</FootstepAudioScript>
 				</FootstepSound>
@@ -681,54 +369,6 @@
 				<FootstepSound>
 					<FootstepAudioType>ENDSTEP_OCEAN2</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_OCEAN_END2</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_DESTOYER</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_DESTROYER_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_DESTROYER</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_DESTROYER_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_IRONCLAD</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_IRONCLAD_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_IRONCLAD</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_IRONCLAD_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_TRANSPORT</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TRANSPORT_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_TRANSPORT</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TRANSPORT_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_SUBMARINE</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_SUBMARINE_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_SUBMARINE</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_SUBMARINE_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_GUNSHIP</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_GUNSHIP_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_GUNSHIP</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_GUNSHIP_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_ARTILLERY</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_END</FootstepAudioScript>
 				</FootstepSound>
 			</FootstepSounds>
 			<WorldSoundscapeAudioScript>ASSS_TUNDRA_SELECT_AMB</WorldSoundscapeAudioScript>
@@ -787,30 +427,6 @@
 					<FootstepAudioScript>AS3D_UN_CHARIOT_END</FootstepAudioScript>
 				</FootstepSound>
 				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_WHEELS_2</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_WAR_CHARIOT_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_WHEELS_2</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_WAR_CHARIOT_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_TANK</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TANK_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_TANK</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TANK_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_MOD_ARMOUR</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_MOD_ARMOUR_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_MOD_ARMOUR</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_MOD_ARMOUR_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
 					<FootstepAudioType>LOOPSTEP_OCEAN1</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_OCEAN_LOOP1</FootstepAudioScript>
 				</FootstepSound>
@@ -825,54 +441,6 @@
 				<FootstepSound>
 					<FootstepAudioType>ENDSTEP_OCEAN2</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_OCEAN_END2</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_DESTOYER</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_DESTROYER_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_DESTROYER</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_DESTROYER_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_IRONCLAD</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_IRONCLAD_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_IRONCLAD</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_IRONCLAD_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_TRANSPORT</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TRANSPORT_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_TRANSPORT</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TRANSPORT_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_SUBMARINE</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_SUBMARINE_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_SUBMARINE</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_SUBMARINE_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_GUNSHIP</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_GUNSHIP_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_GUNSHIP</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_GUNSHIP_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_ARTILLERY</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_END</FootstepAudioScript>
 				</FootstepSound>
 			</FootstepSounds>
 			<WorldSoundscapeAudioScript>ASSS_COAST_SELECT_AMB</WorldSoundscapeAudioScript>
@@ -931,30 +499,6 @@
 					<FootstepAudioScript>AS3D_UN_CHARIOT_END</FootstepAudioScript>
 				</FootstepSound>
 				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_WHEELS_2</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_WAR_CHARIOT_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_WHEELS_2</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_WAR_CHARIOT_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_TANK</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TANK_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_TANK</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TANK_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_MOD_ARMOUR</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_MOD_ARMOUR_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_MOD_ARMOUR</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_MOD_ARMOUR_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
 					<FootstepAudioType>LOOPSTEP_OCEAN1</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_OCEAN_LOOP1</FootstepAudioScript>
 				</FootstepSound>
@@ -969,54 +513,6 @@
 				<FootstepSound>
 					<FootstepAudioType>ENDSTEP_OCEAN2</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_OCEAN_END2</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_DESTOYER</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_DESTROYER_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_DESTROYER</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_DESTROYER_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_IRONCLAD</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_IRONCLAD_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_IRONCLAD</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_IRONCLAD_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_TRANSPORT</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TRANSPORT_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_TRANSPORT</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_TRANSPORT_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_SUBMARINE</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_SUBMARINE_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_SUBMARINE</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_SUBMARINE_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_GUNSHIP</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_GUNSHIP_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_GUNSHIP</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_GUNSHIP_RUN_END</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_ARTILLERY</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_LOOP</FootstepAudioScript>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
-					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_END</FootstepAudioScript>
 				</FootstepSound>
 			</FootstepSounds>
 			<WorldSoundscapeAudioScript>ASSS_OCEAN_SELECT_AMB</WorldSoundscapeAudioScript>
@@ -1071,30 +567,6 @@
 					<FootstepAudioScript/>
 				</FootstepSound>
 				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_WHEELS_2</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_WHEELS_2</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_TANK</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_TANK</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_MOD_ARMOUR</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_MOD_ARMOUR</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
 					<FootstepAudioType>LOOPSTEP_OCEAN1</FootstepAudioType>
 					<FootstepAudioScript/>
 				</FootstepSound>
@@ -1108,54 +580,6 @@
 				</FootstepSound>
 				<FootstepSound>
 					<FootstepAudioType>ENDSTEP_OCEAN2</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_DESTOYER</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_DESTROYER</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_IRONCLAD</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_IRONCLAD</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_TRANSPORT</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_TRANSPORT</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_SUBMARINE</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_SUBMARINE</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_GUNSHIP</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_GUNSHIP</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_ARTILLERY</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
 					<FootstepAudioScript/>
 				</FootstepSound>
 			</FootstepSounds>
@@ -1210,30 +634,6 @@
 					<FootstepAudioScript/>
 				</FootstepSound>
 				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_WHEELS_2</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_WHEELS_2</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_TANK</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_TANK</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_MOD_ARMOUR</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_MOD_ARMOUR</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
 					<FootstepAudioType>LOOPSTEP_OCEAN1</FootstepAudioType>
 					<FootstepAudioScript/>
 				</FootstepSound>
@@ -1247,54 +647,6 @@
 				</FootstepSound>
 				<FootstepSound>
 					<FootstepAudioType>ENDSTEP_OCEAN2</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_DESTOYER</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_DESTROYER</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_IRONCLAD</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_IRONCLAD</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_TRANSPORT</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_TRANSPORT</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_SUBMARINE</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_SUBMARINE</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_GUNSHIP</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_GUNSHIP</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>LOOPSTEP_ARTILLERY</FootstepAudioType>
-					<FootstepAudioScript/>
-				</FootstepSound>
-				<FootstepSound>
-					<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
 					<FootstepAudioScript/>
 				</FootstepSound>
 			</FootstepSounds>

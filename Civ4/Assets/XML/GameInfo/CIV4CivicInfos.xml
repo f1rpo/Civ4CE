@@ -129,7 +129,7 @@
 			<Civilopedia>TXT_KEY_CIVIC_REPRESENTATION_PEDIA</Civilopedia>
 			<Strategy>TXT_KEY_CIVIC_REPRESENTATION_STRATEGY</Strategy>
 			<Button>,Art/Interface/Buttons/Civics/Representation.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,6,2</Button>
-			<TechPrereq>TECH_CONSTITUTION</TechPrereq>
+			<TechPrereq>TECH_FUTURE_TECH</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
 			<Upkeep>UPKEEP_LOW</Upkeep>
 			<iAIWeight>0</iAIWeight>
@@ -191,7 +191,7 @@
 			<Civilopedia>TXT_KEY_CIVIC_POLICE_STATE_PEDIA</Civilopedia>
 			<Strategy>TXT_KEY_CIVIC_POLICE_STATE_STRATEGY</Strategy>
 			<Button>,Art/Interface/Buttons/Civics/Police_State.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,5,2</Button>
-			<TechPrereq>TECH_FASCISM</TechPrereq>
+			<TechPrereq>TECH_FUTURE_TECH</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
 			<Upkeep>UPKEEP_HIGH</Upkeep>
 			<iAIWeight>0</iAIWeight>
@@ -249,7 +249,7 @@
 			<Civilopedia>TXT_KEY_CIVIC_UNIVERSAL_SUFFRAGE_PEDIA</Civilopedia>
 			<Strategy>TXT_KEY_CIVIC_UNIVERSAL_SUFFRAGE_STRATEGY</Strategy>
 			<Button>,Art/Interface/Buttons/Civics/Universal_Sufferage.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,8,3</Button>
-			<TechPrereq>TECH_DEMOCRACY</TechPrereq>
+			<TechPrereq>TECH_FUTURE_TECH</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
 			<Upkeep>UPKEEP_MEDIUM</Upkeep>
 			<iAIWeight>0</iAIWeight>
@@ -499,7 +499,7 @@
 			<Civilopedia>TXT_KEY_CIVIC_NATIONHOOD_PEDIA</Civilopedia>
 			<Strategy>TXT_KEY_CIVIC_NATIONHOOD_STRATEGY</Strategy>
 			<Button>,Art/Interface/Buttons/Civics/Nationhood.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,1,2</Button>
-			<TechPrereq>TECH_NATIONALISM</TechPrereq>
+			<TechPrereq>TECH_FUTURE_TECH</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
 			<Upkeep>UPKEEP_LOW</Upkeep>
 			<iAIWeight>0</iAIWeight>
@@ -562,7 +562,7 @@
 			<Civilopedia>TXT_KEY_CIVIC_FREE_SPEECH_PEDIA</Civilopedia>
 			<Strategy>TXT_KEY_CIVIC_FREE_SPEECH_STRATEGY</Strategy>
 			<Button>,Art/Interface/Buttons/Civics/Free_Speech.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,2,3</Button>
-			<TechPrereq>TECH_LIBERALISM</TechPrereq>
+			<TechPrereq>TECH_FUTURE_TECH</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
 			<Upkeep>NONE</Upkeep>
 			<iAIWeight>0</iAIWeight>
@@ -883,7 +883,7 @@
 			<Civilopedia>TXT_KEY_CIVIC_EMANCIPATION_PEDIA</Civilopedia>
 			<Strategy>TXT_KEY_CIVIC_EMANCIPATION_STRATEGY</Strategy>
 			<Button>,Art/Interface/Buttons/Civics/Emancipation.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,6,1</Button>
-			<TechPrereq>TECH_DEMOCRACY</TechPrereq>
+			<TechPrereq>TECH_FUTURE_TECH</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
 			<Upkeep>NONE</Upkeep>
 			<iAIWeight>0</iAIWeight>
@@ -999,7 +999,7 @@
 			<Civilopedia>TXT_KEY_CIVIC_MERCANTILISM_PEDIA</Civilopedia>
 			<Strategy>TXT_KEY_CIVIC_MERCANTILISM_STRATEGY</Strategy>
 			<Button>,Art/Interface/Buttons/Civics/Mercantilism.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,4,3</Button>
-			<TechPrereq>TECH_BANKING</TechPrereq>
+			<TechPrereq>TECH_FUTURE_TECH</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
 			<Upkeep>UPKEEP_MEDIUM</Upkeep>
 			<iAIWeight>0</iAIWeight>
@@ -1057,7 +1057,7 @@
 			<Civilopedia>TXT_KEY_CIVIC_FREE_MARKET_PEDIA</Civilopedia>
 			<Strategy>TXT_KEY_CIVIC_FREE_MARKET_STRATEGY</Strategy>
 			<Button>,Art/Interface/Buttons/Civics/Free_Market.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,8,1</Button>
-			<TechPrereq>TECH_ECONOMICS</TechPrereq>
+			<TechPrereq>TECH_FUTURE_TECH</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
 			<Upkeep>UPKEEP_LOW</Upkeep>
 			<iAIWeight>0</iAIWeight>
@@ -1115,7 +1115,7 @@
 			<Civilopedia>TXT_KEY_CIVIC_STATE_PROPERTY_PEDIA</Civilopedia>
 			<Strategy>TXT_KEY_CIVIC_STATE_PROPERTY_STRATEGY</Strategy>
 			<Button>,Art/Interface/Buttons/Civics/State_Property.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,5,3</Button>
-			<TechPrereq>TECH_COMMUNISM</TechPrereq>
+			<TechPrereq>TECH_FUTURE_TECH</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
 			<Upkeep>NONE</Upkeep>
 			<iAIWeight>0</iAIWeight>
@@ -1190,7 +1190,7 @@
 			<Civilopedia>TXT_KEY_CIVIC_ENVIRONMENTALISM_PEDIA</Civilopedia>
 			<Strategy>TXT_KEY_CIVIC_ENVIRONMENTALISM_STRATEGY</Strategy>
 			<Button>,Art/Interface/Buttons/Civics/Environmentalism.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,7,1</Button>
-			<TechPrereq>TECH_ECOLOGY</TechPrereq>
+			<TechPrereq>TECH_FUTURE_TECH</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
 			<Upkeep>UPKEEP_HIGH</Upkeep>
 			<iAIWeight>0</iAIWeight>
@@ -1494,7 +1494,7 @@
 			<Civilopedia>TXT_KEY_CIVIC_FREE_RELIGION_PEDIA</Civilopedia>
 			<Strategy>TXT_KEY_CIVIC_FREE_RELIGION_STRATEGY</Strategy>
 			<Button>,Art/Interface/Buttons/Civics/Free_Religion.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,1,3</Button>
-			<TechPrereq>TECH_LIBERALISM</TechPrereq>
+			<TechPrereq>TECH_FUTURE_TECH</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
 			<Upkeep>UPKEEP_LOW</Upkeep>
 			<iAIWeight>0</iAIWeight>

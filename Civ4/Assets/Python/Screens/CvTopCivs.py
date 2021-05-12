@@ -19,6 +19,7 @@ class CvTopCivs:
 	"The Greatest Civilizations screen"
 	
 	def __init__(self):
+		return
 		
 		self.X_SCREEN = 0#205
 		self.Y_SCREEN = 0#27
@@ -61,6 +62,7 @@ class CvTopCivs:
 		self.H_EXIT = 30
 
 	def showScreen(self):
+		return
 			  
 		'Use a popup to display the opening text'
 		if ( CyGame().isPitbossHost() ):

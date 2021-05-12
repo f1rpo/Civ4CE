@@ -69,6 +69,7 @@ class CvHallOfFameScreen:
 		
 	# Screen construction function
 	def interfaceScreen(self, bAllowReplay):
+		return
 						
 		# Create a new screen
 		screen = self.getScreen()

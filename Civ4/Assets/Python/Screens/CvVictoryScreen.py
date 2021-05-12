@@ -22,6 +22,7 @@ class CvVictoryScreen:
 	"Keeps track of victory conditions"
 
 	def __init__(self, screenId):
+		return
 		self.screenId = screenId
 		self.SCREEN_NAME = "VictoryScreen"
 		self.DEBUG_DROPDOWN_ID =  "VictoryScreenDropdownWidget"
@@ -109,6 +110,7 @@ class CvVictoryScreen:
 		screen.hideScreen()
 										
 	def interfaceScreen(self):
+		return
 
 		# Create a new screen
 		screen = self.getScreen()

@@ -712,7 +712,7 @@
 		</InterfaceArtInfo>
 		<InterfaceArtInfo>
 			<Type>INTRO_LOGOS</Type>
-			<Path>Art/Interface/Screens/Credits/Logos.dds</Path>
+			<Path>Art/Interface/Logos.dds</Path>
 		</InterfaceArtInfo>
 		<InterfaceArtInfo>
 			<Type>MAINMENU_LOADGAME</Type>
@@ -1026,6 +1026,60 @@
 			<Type>WIDGET_SCROLLBAR_UP_CTR</Type>
 			<Path>Art/Interface/ScrollBar/ScrollBarUP_ctr.kfm</Path>
 		</InterfaceArtInfo>
+		<!-- globeview ui art -->
+		<InterfaceArtInfo>
+			<Type>INTERFACE_GLOBE_TOGGLE</Type>
+			<Path>Art/Interface/MainScreen/GlobeButton.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>INTERFACE_GLOBE_TOGGLE_HILIGHT</Type>
+			<Path>Art/Interface/MainScreen/GlobeButton_Hilight.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>INTERFACE_GLOBELAYER_BUTTON_HILIGHT</Type>
+			<Path>Art/Interface/Globeview/Overlay.dds</Path>
+		</InterfaceArtInfo>
+		<!-- GlobeLayer icons -->
+		<InterfaceArtInfo>
+			<Type>INTERFACE_GLOBELAYER_RESOURCES</Type>
+			<Path>Art/Interface/Globeview/ResourceLayer.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>INTERFACE_GLOBELAYER_CULTURE</Type>
+			<Path>Art/Interface/Globeview/CultureLayer.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>INTERFACE_GLOBELAYER_TRADE</Type>
+			<Path>Art/Interface/Globeview/TradeLayer.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>INTERFACE_GLOBELAYER_UNITS</Type>
+			<Path>Art/Interface/Globeview/UnitsLayer.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>INTERFACE_GLOBELAYER_RELIGION</Type>
+			<Path>Art/Interface/Globeview/ReligionLayer.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>INTERFACE_GLOBELAYER_PLOTDEBUG</Type>
+			<Path>Art/Interface/Globeview/PlotDebugLayer.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>INTERFACE_GLOBELAYER_STRATEGY</Type>
+			<Path>Art/Interface/Globeview/StrategyLayer.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>INTERFACE_TUTORIAL_HIGHLIGHT</Type>
+			<Path>Art/Interface/Widgets/AreaHilite.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>INTERFACE_TUTORIAL_HIGHLIGHT_LARGE</Type>
+			<Path>Art/Interface/Widgets/AreaHilite256.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>SCREEN_UN_BG</Type>
+			<Path>Art/Interface/Screens/Reward/UN_BG.dds</Path>
+		</InterfaceArtInfo>
 		<InterfaceArtInfo>
 			<Type>WORLDBUILDER_CITY_EDIT</Type>
 			<Path>Art/Interface/Buttons/WorldBuilder/Palette_City.dds</Path>
@@ -1134,59 +1188,5 @@
 			<Type>WORLDBUILDER_DIPLOMACY_MODE</Type>
 			<Path>Art/Interface/Buttons/WorldBuilder/DIPLOMACY_MODE.dds</Path>
 		</InterfaceArtInfo>
-		<!-- globeview ui art -->
-		<InterfaceArtInfo>
-			<Type>INTERFACE_GLOBE_TOGGLE</Type>
-			<Path>Art/Interface/MainScreen/GlobeButton.dds</Path>
-		</InterfaceArtInfo>
-		<InterfaceArtInfo>
-			<Type>INTERFACE_GLOBE_TOGGLE_HILIGHT</Type>
-			<Path>Art/Interface/MainScreen/GlobeButton_Hilight.dds</Path>
-		</InterfaceArtInfo>
-		<InterfaceArtInfo>
-			<Type>INTERFACE_GLOBELAYER_BUTTON_HILIGHT</Type>
-			<Path>Art/Interface/Globeview/Overlay.dds</Path>
-		</InterfaceArtInfo>
-		<!-- GlobeLayer icons -->
-		<InterfaceArtInfo>
-			<Type>INTERFACE_GLOBELAYER_RESOURCES</Type>
-			<Path>Art/Interface/Globeview/ResourceLayer.dds</Path>
-		</InterfaceArtInfo>
-		<InterfaceArtInfo>
-			<Type>INTERFACE_GLOBELAYER_CULTURE</Type>
-			<Path>Art/Interface/Globeview/CultureLayer.dds</Path>
-		</InterfaceArtInfo>
-		<InterfaceArtInfo>
-			<Type>INTERFACE_GLOBELAYER_TRADE</Type>
-			<Path>Art/Interface/Globeview/TradeLayer.dds</Path>
-		</InterfaceArtInfo>
-		<InterfaceArtInfo>
-			<Type>INTERFACE_GLOBELAYER_UNITS</Type>
-			<Path>Art/Interface/Globeview/UnitsLayer.dds</Path>
-		</InterfaceArtInfo>
-		<InterfaceArtInfo>
-			<Type>INTERFACE_GLOBELAYER_RELIGION</Type>
-			<Path>Art/Interface/Globeview/ReligionLayer.dds</Path>
-		</InterfaceArtInfo>
-		<InterfaceArtInfo>
-			<Type>INTERFACE_GLOBELAYER_PLOTDEBUG</Type>
-			<Path>Art/Interface/Globeview/PlotDebugLayer.dds</Path>
-		</InterfaceArtInfo>
-		<InterfaceArtInfo>
-			<Type>INTERFACE_GLOBELAYER_STRATEGY</Type>
-			<Path>Art/Interface/Globeview/StrategyLayer.dds</Path>
-		</InterfaceArtInfo>
-		<InterfaceArtInfo>
-			<Type>INTERFACE_TUTORIAL_HIGHLIGHT</Type>
-			<Path>Art/Interface/Widgets/AreaHilite.dds</Path>
-		</InterfaceArtInfo>
-		<InterfaceArtInfo>
-			<Type>INTERFACE_TUTORIAL_HIGHLIGHT_LARGE</Type>
-			<Path>Art/Interface/Widgets/AreaHilite256.dds</Path>
-		</InterfaceArtInfo>
-		<InterfaceArtInfo>
-			<Type>SCREEN_UN_BG</Type>
-			<Path>Art/Interface/Screens/Reward/UN_BG.dds</Path>
-		</InterfaceArtInfo>
-	</InterfaceArtInfos>
+</InterfaceArtInfos>
 </Civ4ArtDefines>

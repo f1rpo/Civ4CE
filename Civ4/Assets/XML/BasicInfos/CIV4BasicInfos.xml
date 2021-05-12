@@ -12,11 +12,6 @@
 			<Civilopedia>TXT_KEY_CONCEPT_ANIMALS_PEDIA</Civilopedia>
 		</ConceptInfo>
 		<ConceptInfo>
-			<Type>CONCEPT_AIR_UNITS</Type>
-			<Description>TXT_KEY_CONCEPT_AIR_UNITS</Description>
-			<Civilopedia>TXT_KEY_CONCEPT_AIR_UNITS_PEDIA</Civilopedia>
-		</ConceptInfo>
-		<ConceptInfo>
 			<Type>CONCEPT_BARBARIANS</Type>
 			<Description>TXT_KEY_CONCEPT_BARBARIANS</Description>
 			<Civilopedia>TXT_KEY_CONCEPT_BARBARIANS_PEDIA</Civilopedia>
@@ -65,11 +60,6 @@
 			<Type>CONCEPT_DIPLOMACY</Type>
 			<Description>TXT_KEY_CONCEPT_DIPLOMACY</Description>
 			<Civilopedia>TXT_KEY_CONCEPT_DIPLOMACY_PEDIA</Civilopedia>
-		</ConceptInfo>
-		<ConceptInfo>
-			<Type>CONCEPT_DRAFT</Type>
-			<Description>TXT_KEY_CONCEPT_DRAFT</Description>
-			<Civilopedia>TXT_KEY_CONCEPT_DRAFT_PEDIA</Civilopedia>
 		</ConceptInfo>
 		<ConceptInfo>
 			<Type>CONCEPT_EXPLORATION</Type>
@@ -132,11 +122,6 @@
 			<Civilopedia>TXT_KEY_CONCEPT_MOVEMENT_PEDIA</Civilopedia>
 		</ConceptInfo>
 		<ConceptInfo>
-			<Type>CONCEPT_NUKES</Type>
-			<Description>TXT_KEY_CONCEPT_NUKES</Description>
-			<Civilopedia>TXT_KEY_CONCEPT_NUKES_PEDIA</Civilopedia>
-		</ConceptInfo>
-		<ConceptInfo>
 			<Type>CONCEPT_PRODUCTION</Type>
 			<Description>TXT_KEY_CONCEPT_PRODUCTION</Description>
 			<Civilopedia>TXT_KEY_CONCEPT_PRODUCTION_PEDIA</Civilopedia>
@@ -172,19 +157,9 @@
 			<Civilopedia>TXT_KEY_CONCEPT_REVOLUTION_PEDIA</Civilopedia>
 		</ConceptInfo>
 		<ConceptInfo>
-			<Type>CONCEPT_SPACESHIP</Type>
-			<Description>TXT_KEY_CONCEPT_SPACESHIP</Description>
-			<Civilopedia>TXT_KEY_CONCEPT_SPACESHIP_PEDIA</Civilopedia>
-		</ConceptInfo>
-		<ConceptInfo>
 			<Type>CONCEPT_SPECIALISTS</Type>
 			<Description>TXT_KEY_CONCEPT_SPECIALISTS</Description>
 			<Civilopedia>TXT_KEY_CONCEPT_SPECIALISTS_PEDIA</Civilopedia>
-		</ConceptInfo>
-		<ConceptInfo>
-			<Type>CONCEPT_SPIES</Type>
-			<Description>TXT_KEY_CONCEPT_SPIES</Description>
-			<Civilopedia>TXT_KEY_CONCEPT_SPIES_PEDIA</Civilopedia>
 		</ConceptInfo>
 		<ConceptInfo>
 			<Type>CONCEPT_TECHNOLOGY</Type>
@@ -215,11 +190,6 @@
 			<Type>CONCEPT_UNITS</Type>
 			<Description>TXT_KEY_CONCEPT_UNITS</Description>
 			<Civilopedia>TXT_KEY_CONCEPT_UNITS_PEDIA</Civilopedia>
-		</ConceptInfo>
-		<ConceptInfo>
-			<Type>CONCEPT_UNITED_NATIONS</Type>
-			<Description>TXT_KEY_CONCEPT_UNITED_NATIONS</Description>
-			<Civilopedia>TXT_KEY_CONCEPT_UNITED_NATIONS_PEDIA</Civilopedia>
 		</ConceptInfo>
 		<ConceptInfo>
 			<Type>CONCEPT_VICTORY</Type>
@@ -479,21 +449,6 @@
 			<Type>UNITCOMBAT_SIEGE</Type>
 			<Description>TXT_KEY_UNITCOMBAT_SIEGE</Description>
 			<Button>,Art/Interface/Buttons/Promotions/Charge.dds,Art/Interface/Buttons/Promotions_Atlas.dds,1,5</Button>
-		</UnitCombatInfo>
-		<UnitCombatInfo>
-			<Type>UNITCOMBAT_GUN</Type>
-			<Description>TXT_KEY_UNITCOMBAT_GUN</Description>
-			<Button>,Art/Interface/Buttons/Promotions/Pinch.dds,Art/Interface/Buttons/Promotions_Atlas.dds,3,5</Button>
-		</UnitCombatInfo>
-		<UnitCombatInfo>
-			<Type>UNITCOMBAT_ARMOR</Type>
-			<Description>TXT_KEY_UNITCOMBAT_ARMOR</Description>
-			<Button>,Art/Interface/Buttons/Promotions/Ambush.dds,Art/Interface/Buttons/Promotions_Atlas.dds,2,1</Button>
-		</UnitCombatInfo>
-		<UnitCombatInfo>
-			<Type>UNITCOMBAT_HELICOPTER</Type>
-			<Description>TXT_KEY_UNITCOMBAT_HELICOPTER</Description>
-			<Button>,Art/Interface/Buttons/Promotions/Helicopter_Units.dds,Art/Interface/Buttons/Promotions_Atlas.dds,2,7</Button>
 		</UnitCombatInfo>
 		<UnitCombatInfo>
 			<Type>UNITCOMBAT_NAVAL</Type>

@@ -102,28 +102,10 @@
 		<FootstepAudioType>FOOTSTEP_AUDIO_HORSE</FootstepAudioType>
 		<FootstepAudioType>LOOPSTEP_WHEELS</FootstepAudioType>
 		<FootstepAudioType>ENDSTEP_WHEELS</FootstepAudioType>
-		<FootstepAudioType>LOOPSTEP_WHEELS_2</FootstepAudioType>
-		<FootstepAudioType>ENDSTEP_WHEELS_2</FootstepAudioType>
-		<FootstepAudioType>LOOPSTEP_TANK</FootstepAudioType>
-		<FootstepAudioType>ENDSTEP_TANK</FootstepAudioType>
-		<FootstepAudioType>LOOPSTEP_MOD_ARMOUR</FootstepAudioType>
-		<FootstepAudioType>ENDSTEP_MOD_ARMOUR</FootstepAudioType>
 		<FootstepAudioType>LOOPSTEP_OCEAN1</FootstepAudioType>
 		<FootstepAudioType>ENDSTEP_OCEAN1</FootstepAudioType>
 		<FootstepAudioType>LOOPSTEP_OCEAN2</FootstepAudioType>
 		<FootstepAudioType>ENDSTEP_OCEAN2</FootstepAudioType>
-		<FootstepAudioType>LOOPSTEP_DESTOYER</FootstepAudioType>
-		<FootstepAudioType>ENDSTEP_DESTROYER</FootstepAudioType>
-		<FootstepAudioType>LOOPSTEP_IRONCLAD</FootstepAudioType>
-		<FootstepAudioType>ENDSTEP_IRONCLAD</FootstepAudioType>
-		<FootstepAudioType>LOOPSTEP_TRANSPORT</FootstepAudioType>
-		<FootstepAudioType>ENDSTEP_TRANSPORT</FootstepAudioType>
-		<FootstepAudioType>LOOPSTEP_SUBMARINE</FootstepAudioType>
-		<FootstepAudioType>ENDSTEP_SUBMARINE</FootstepAudioType>
-		<FootstepAudioType>LOOPSTEP_GUNSHIP</FootstepAudioType>
-		<FootstepAudioType>ENDSTEP_GUNSHIP</FootstepAudioType>
-		<FootstepAudioType>LOOPSTEP_ARTILLERY</FootstepAudioType>
-		<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
 	</FootstepAudioTypes>
 	<FootstepAudioTags>
 		<FootstepAudioTag>
@@ -155,30 +137,6 @@
 			<FootstepAudioTagString>AS3D_ENDSTEP_WHEELS</FootstepAudioTagString>
 		</FootstepAudioTag>
 		<FootstepAudioTag>
-			<FootstepAudioType>LOOPSTEP_WHEELS_2</FootstepAudioType>
-			<FootstepAudioTagString>AS3D_LOOPSTEP_WHEELS_2</FootstepAudioTagString>
-		</FootstepAudioTag>
-		<FootstepAudioTag>
-			<FootstepAudioType>ENDSTEP_WHEELS_2</FootstepAudioType>
-			<FootstepAudioTagString>AS3D_ENDSTEP_WHEELS_2</FootstepAudioTagString>
-		</FootstepAudioTag>
-		<FootstepAudioTag>
-			<FootstepAudioType>LOOPSTEP_TANK</FootstepAudioType>
-			<FootstepAudioTagString>AS3D_LOOPSTEP_TANK</FootstepAudioTagString>
-		</FootstepAudioTag>
-		<FootstepAudioTag>
-			<FootstepAudioType>ENDSTEP_TANK</FootstepAudioType>
-			<FootstepAudioTagString>AS3D_ENDSTEP_TANK</FootstepAudioTagString>
-		</FootstepAudioTag>
-		<FootstepAudioTag>
-			<FootstepAudioType>LOOPSTEP_MOD_ARMOUR</FootstepAudioType>
-			<FootstepAudioTagString>AS3D_LOOPSTEP_MOD_ARMOUR</FootstepAudioTagString>
-		</FootstepAudioTag>
-		<FootstepAudioTag>
-			<FootstepAudioType>ENDSTEP_MOD_ARMOUR</FootstepAudioType>
-			<FootstepAudioTagString>AS3D_ENDSTEP_MOD_ARMOUR</FootstepAudioTagString>
-		</FootstepAudioTag>
-		<FootstepAudioTag>
 			<FootstepAudioType>LOOPSTEP_OCEAN1</FootstepAudioType>
 			<FootstepAudioTagString>AS3D_LOOPSTEP_OCEAN1</FootstepAudioTagString>
 		</FootstepAudioTag>
@@ -193,54 +151,6 @@
 		<FootstepAudioTag>
 			<FootstepAudioType>ENDSTEP_OCEAN2</FootstepAudioType>
 			<FootstepAudioTagString>AS3D_ENDSTEP_OCEAN2</FootstepAudioTagString>
-		</FootstepAudioTag>
-		<FootstepAudioTag>
-			<FootstepAudioType>LOOPSTEP_DESTOYER</FootstepAudioType>
-			<FootstepAudioTagString>AS3D_LOOPSTEP_DESTOYER</FootstepAudioTagString>
-		</FootstepAudioTag>
-		<FootstepAudioTag>
-			<FootstepAudioType>ENDSTEP_DESTROYER</FootstepAudioType>
-			<FootstepAudioTagString>AS3D_ENDSTEP_DESTROYER</FootstepAudioTagString>
-		</FootstepAudioTag>
-		<FootstepAudioTag>
-			<FootstepAudioType>LOOPSTEP_IRONCLAD</FootstepAudioType>
-			<FootstepAudioTagString>AS3D_LOOPSTEP_IRONCLAD</FootstepAudioTagString>
-		</FootstepAudioTag>
-		<FootstepAudioTag>
-			<FootstepAudioType>ENDSTEP_IRONCLAD</FootstepAudioType>
-			<FootstepAudioTagString>AS3D_ENDSTEP_IRONCLAD</FootstepAudioTagString>
-		</FootstepAudioTag>
-		<FootstepAudioTag>
-			<FootstepAudioType>LOOPSTEP_TRANSPORT</FootstepAudioType>
-			<FootstepAudioTagString>AS3D_LOOPSTEP_TRANSPORT</FootstepAudioTagString>
-		</FootstepAudioTag>
-		<FootstepAudioTag>
-			<FootstepAudioType>ENDSTEP_TRANSPORT</FootstepAudioType>
-			<FootstepAudioTagString>AS3D_ENDSTEP_TRANSPORT</FootstepAudioTagString>
-		</FootstepAudioTag>
-		<FootstepAudioTag>
-			<FootstepAudioType>LOOPSTEP_SUBMARINE</FootstepAudioType>
-			<FootstepAudioTagString>AS3D_LOOPSTEP_SUBMARINE</FootstepAudioTagString>
-		</FootstepAudioTag>
-		<FootstepAudioTag>
-			<FootstepAudioType>ENDSTEP_SUBMARINE</FootstepAudioType>
-			<FootstepAudioTagString>AS3D_ENDSTEP_SUBMARINE</FootstepAudioTagString>
-		</FootstepAudioTag>
-		<FootstepAudioTag>
-			<FootstepAudioType>LOOPSTEP_GUNSHIP</FootstepAudioType>
-			<FootstepAudioTagString>AS3D_LOOPSTEP_GUNSHIP</FootstepAudioTagString>
-		</FootstepAudioTag>
-		<FootstepAudioTag>
-			<FootstepAudioType>ENDSTEP_GUNSHIP</FootstepAudioType>
-			<FootstepAudioTagString>AS3D_ENDSTEP_GUNSHIP</FootstepAudioTagString>
-		</FootstepAudioTag>
-		<FootstepAudioTag>
-			<FootstepAudioType>LOOPSTEP_ARTILLERY</FootstepAudioType>
-			<FootstepAudioTagString>AS3D_LOOPSTEP_ARTILLERY</FootstepAudioTagString>
-		</FootstepAudioTag>
-		<FootstepAudioTag>
-			<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
-			<FootstepAudioTagString>AS3D_ENDSTEP_ARTILLERY</FootstepAudioTagString>
 		</FootstepAudioTag>
 	</FootstepAudioTags>
 	<InterfaceVisibilityTypes>

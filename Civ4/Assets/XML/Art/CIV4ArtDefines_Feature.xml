@@ -61,16 +61,5 @@
 			<KFM/>
 			<Button>,Art/Interface/Buttons/TerrainFeatures/Forest.dds,Art/Interface/Buttons/BaseTerrain_TerrainFeatures_Atlas.dds,3,3</Button>
 		</FeatureArtInfo>
-		<FeatureArtInfo>
-			<Type>ART_DEF_FEATURE_FALLOUT</Type>
-			<bAnimated>1</bAnimated>
-			<bRiverArt>0</bRiverArt>
-			<bTileArt>0</bTileArt>
-			<fScale>1.0</fScale>
-			<fInterfaceScale>1.0</fInterfaceScale>
-			<NIF/>
-			<KFM/>
-			<Button>,Art/Interface/Buttons/TerrainFeatures/Fallout.dds,Art/Interface/Buttons/BaseTerrain_TerrainFeatures_Atlas.dds,1,3</Button>
-		</FeatureArtInfo>
 	</FeatureArtInfos>
 </Civ4ArtDefines>

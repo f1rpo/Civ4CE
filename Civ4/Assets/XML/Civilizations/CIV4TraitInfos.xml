@@ -50,10 +50,6 @@
 					<UnitCombatType>UNITCOMBAT_MELEE</UnitCombatType>
 					<bFreePromotionUnitCombat>1</bFreePromotionUnitCombat>
 				</FreePromotionUnitCombat>
-				<FreePromotionUnitCombat>
-					<UnitCombatType>UNITCOMBAT_GUN</UnitCombatType>
-					<bFreePromotionUnitCombat>1</bFreePromotionUnitCombat>
-				</FreePromotionUnitCombat>
 			</FreePromotionUnitCombats>
 		</TraitInfo>
 		<TraitInfo>

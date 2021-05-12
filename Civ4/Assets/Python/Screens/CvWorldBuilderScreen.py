@@ -17,6 +17,8 @@ class CvWorldBuilderScreen:
 	"World Builder Screen"
 
 	def __init__ (self) :
+		return
+
 		self.m_normalPlayerTabCtrl = 0
 		self.m_normalMapTabCtrl = 0
 		self.m_tabCtrlEdit = 0
@@ -84,6 +86,8 @@ class CvWorldBuilderScreen:
 
 	def interfaceScreen (self):
 		# This is the main interface screen, create it as such
+		return
+
 		self.initVars()
 		screen = CyGInterfaceScreen( "WorldBuilderScreen", CvScreenEnums.WORLDBUILDER_SCREEN )
 		screen.setCloseOnEscape(False)

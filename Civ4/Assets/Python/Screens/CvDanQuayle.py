@@ -82,7 +82,7 @@ class CvDanQuayle:
 		return CyGInterfaceScreen(self.SCREEN_NAME, CvScreenEnums.DAN_QUAYLE_SCREEN)
 
 	def interfaceScreen (self):
-
+		return
 		replayInfo = CyGame().getReplayInfo()
 		if replayInfo.isNone():
 			replayInfo = CyReplayInfo()

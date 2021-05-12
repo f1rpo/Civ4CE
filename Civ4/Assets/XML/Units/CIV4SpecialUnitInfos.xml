@@ -7,18 +7,6 @@
 <Civ4SpecialUnitInfos xmlns="x-schema:CIV4UnitSchema.xml">
 	<SpecialUnitInfos>
 		<SpecialUnitInfo>
-			<Type>SPECIALUNIT_NUKE</Type>
-			<Description>TXT_KEY_SPECIALUNIT_NUKE</Description>
-			<bValid>0</bValid>
-			<ProductionTraits/>
-		</SpecialUnitInfo>
-		<SpecialUnitInfo>
-			<Type>SPECIALUNIT_FIGHTER</Type>
-			<Description>TXT_KEY_SPECIALUNIT_FIGHTER</Description>
-			<bValid>1</bValid>
-			<ProductionTraits/>
-		</SpecialUnitInfo>
-		<SpecialUnitInfo>
 			<Type>SPECIALUNIT_PEOPLE</Type>
 			<Description>TXT_KEY_SPECIALUNIT_PEOPLE</Description>
 			<bValid>1</bValid>

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Jesse Smith (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by XMLSPY 2004 Professional Ed. Release 2, Installed Multi + SMP for 3 users (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -8,7 +8,7 @@
 	<MovieArtInfos>
 		<MovieArtInfo>
 			<Type>ART_DEF_MOVIE_INTRO</Type>
-			<Path>Assets/Art/Movies/Intros/intro.bik</Path>
+			<Path>Assets/Art/Movies/Intros/Firaxis.bik</Path>
 		</MovieArtInfo>
 		<MovieArtInfo>
 			<Type>ART_DEF_MOVIE_2K_INTRO</Type>
@@ -19,24 +19,8 @@
 			<Path>Assets/Art/Movies/Placeholder.bik</Path>
 		</MovieArtInfo>
 		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_ANGKOR_WAT</Type>
-			<Path>Assets/Art/Movies/Wonders/AngkorWat.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_BROADWAY</Type>
-			<Path>Assets/Art/Movies/Wonders/Broadway.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_CHICHEN_ITZA</Type>
-			<Path>Assets/Art/Movies/Wonders/ChichenItza.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
 			<Type>ART_DEF_MOVIE_COLOSSUS</Type>
 			<Path>Assets/Art/Movies/Wonders/Colossus.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_EIFFEL_TOWER</Type>
-			<Path>Assets/Art/Movies/Wonders/EiffelTower.bik</Path>
 		</MovieArtInfo>
 		<MovieArtInfo>
 			<Type>ART_DEF_MOVIE_GREAT_LIBRARY</Type>
@@ -47,32 +31,8 @@
 			<Path>Assets/Art/Movies/Wonders/GreatLighthouse.bik</Path>
 		</MovieArtInfo>
 		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_HAGIA_SOPHIA</Type>
-			<Path>Assets/Art/Movies/Wonders/HagiaSophia.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
 			<Type>ART_DEF_MOVIE_HANGING_GARDENS</Type>
 			<Path>Assets/Art/Movies/Wonders/HangingGardens.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_HOLLYWOOD</Type>
-			<Path>Assets/Art/Movies/Wonders/Hollywood.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_INTERNET</Type>
-			<Path>Assets/Art/Movies/Wonders/Internet.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_KREMLIN</Type>
-			<Path>Assets/Art/Movies/Wonders/Kremlin.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_MANHATTAN_PROJECT</Type>
-			<Path>Assets/Art/Movies/Wonders/ManhattanProject.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_NOTRE_DAME</Type>
-			<Path>Assets/Art/Movies/Wonders/NotreDame.bik</Path>
 		</MovieArtInfo>
 		<MovieArtInfo>
 			<Type>ART_DEF_MOVIE_ORACLE</Type>
@@ -83,68 +43,12 @@
 			<Path>Assets/Art/Movies/Wonders/Parthenon.bik</Path>
 		</MovieArtInfo>
 		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_PENTAGON</Type>
-			<Path>Assets/Art/Movies/Wonders/Pentagon.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
 			<Type>ART_DEF_MOVIE_PYRAMIDS</Type>
 			<Path>Assets/Art/Movies/Wonders/GreatPyramids.bik</Path>
 		</MovieArtInfo>
 		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_ROCK_AND_ROLL</Type>
-			<Path>Assets/Art/Movies/Wonders/RockAndRoll.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_SISTINE_CHAPEL</Type>
-			<Path>Assets/Art/Movies/Wonders/SistineChapel.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_SPACE_ELEVATOR</Type>
-			<Path>Assets/Art/Movies/Wonders/SpaceElevator.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_SPIRAL_MINARET</Type>
-			<Path>Assets/Art/Movies/Wonders/SpiralMinaret.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_STATUE_OF_LIBERTY</Type>
-			<Path>Assets/Art/Movies/Wonders/StatueOfLiberty.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
 			<Type>ART_DEF_MOVIE_STONEHENGE</Type>
 			<Path>Assets/Art/Movies/Wonders/Stonehenge.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_TAJ_MAHAL</Type>
-			<Path>Assets/Art/Movies/Wonders/TajMahal.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_THREE_GORGES_DAM</Type>
-			<Path>Assets/Art/Movies/Wonders/ThreeGorgesDam.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_UNITED_NATIONS</Type>
-			<Path>Assets/Art/Movies/Wonders/UnitedNations.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_VERSAILLES</Type>
-			<Path>Assets/Art/Movies/Wonders/Versailles.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_VICTORY_CONQUEST</Type>
-			<Path>Assets/Art/Movies/Victory/Conquest.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_VICTORY_DOMINATION</Type>
-			<Path>Assets/Art/Movies/Victory/Domination.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_VICTORY_SPACE_RACE</Type>
-			<Path>Assets/Art/Movies/Victory/SpaceRace.bik</Path>
-		</MovieArtInfo>
-		<MovieArtInfo>
-			<Type>ART_DEF_MOVIE_VICTORY_CULTURAL</Type>
-			<Path>Assets/Art/Movies/Victory/Cultural.bik</Path>
 		</MovieArtInfo>
 		<MovieArtInfo>
 			<Type>ART_DEF_MOVIE_SHRINE_JEWISH</Type>
@@ -173,7 +77,6 @@
 		<MovieArtInfo>
 			<Type>ART_DEF_MOVIE_SHRINE_TAOIST</Type>
 			<Path>Assets/Art/Movies/Religion/Taoism/Shrine_Tao_dwg_512.dds</Path>
-			<KFM>None</KFM>
 		</MovieArtInfo>
 	</MovieArtInfos>
 </Civ4ArtDefines>

@@ -15,7 +15,8 @@ class CvGameUtils:
 		pass
 	
 	def isVictoryTest(self):
-		if ( gc.getGame().getElapsedGameTurns() > 10 ):
+		if ( gc.getGame().getElapsedGameTurns() > 99 ):
+		#if ( gc.getGame().getElapsedGameTurns() > 0 ):
 			return True
 		else:
 			return False

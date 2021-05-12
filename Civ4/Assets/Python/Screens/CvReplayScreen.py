@@ -16,6 +16,8 @@ class CvReplayScreen:
 	"Replay Screen for end of game"
 
 	def __init__(self, screenId):
+		return
+
 		self.screenId = screenId
 		self.REPLAY_SCREEN_NAME = "ReplayScreen"
 		self.INTERFACE_ART_INFO = "TECH_BG"
@@ -86,6 +88,7 @@ class CvReplayScreen:
 		
 	# Screen construction function
 	def showScreen(self, bFromHallOfFame):
+		return
 	
 		# Create a new screen
 		screen = self.getScreen()

@@ -1,4 +1,4 @@
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Rob McLaughlin (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by XMLSPY 2004 Professional Ed. Release 2, Installed Multi + SMP for 3 users (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -8,6 +8,9 @@
 	<ElementType name="SymbolMeshPath" content="textOnly"/>
 	<ElementType name="SymbolMeshPaths" content="eltOnly">
 		<element type="SymbolMeshPath" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="Civ4SymbolMeshPaths" content="eltOnly">
+		<element type="SymbolMeshPaths" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="iYield" content="textOnly" dt:type="int"/>
 	<ElementType name="Yields" content="eltOnly">

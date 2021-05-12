@@ -126,43 +126,27 @@
 			<iAnarchyPercent>55</iAnarchyPercent>
 			<iSoundtrackSpace>200</iSoundtrackSpace>
 			<EraInfoSoundtracks>
-				<EraInfoSoundtrack>AS2D_ALLEGRI_MISERERE</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_ANONYMOUS_AY_SANTA_MARIA</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_ANONYMOUS_LA_GAMBA</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BRUMEL_GLORIA</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_CHANT_DEUS</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_CHANT_LAUDATE</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_CHANT_REGEN</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_DE_LA_TORRE_ALTA</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_DESPREZ_EL_GRILLO</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_DESPREZ_LAMENT</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_LASSUS_ALMA_REDEMPTORIS</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_OCKEGHEM_INTEMERATA</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_OCKEGHEM_KYRIE</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_ORTIZ_RECERCADA</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_PALESTRINA_CREDO</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_PALESTRINA_GLORIA</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_PRAETORIUS_BALLET</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_PRAETORIUS_BRANSLE</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_PRAETORIUS_VOLTE</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_SHEPPARD_MEDIA_VITA</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_1</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_2</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_3</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_4</EraInfoSoundtrack>
 			</EraInfoSoundtracks>
 			<CitySoundscapes>
 				<CitySoundscape>
 					<CitySizeType>CITYSIZE_SMALL</CitySizeType>
-					<SoundscapeScript>ASSS_CITY_MIDDLE_SMALL_SELECT_AMB</SoundscapeScript>
+					<SoundscapeScript>ASSS_CITY_ANCIENT_SMALL_SELECT_AMB</SoundscapeScript>
 				</CitySoundscape>
 				<CitySoundscape>
 					<CitySizeType>CITYSIZE_MEDIUM</CitySizeType>
-					<SoundscapeScript>ASSS_CITY_MIDDLE_SMALL_SELECT_AMB</SoundscapeScript>
+					<SoundscapeScript>ASSS_CITY_ANCIENT_SMALL_SELECT_AMB</SoundscapeScript>
 				</CitySoundscape>
 				<CitySoundscape>
 					<CitySizeType>CITYSIZE_LARGE</CitySizeType>
-					<SoundscapeScript>ASSS_CITY_MIDDLE_LARGE_SELECT_AMB</SoundscapeScript>
+					<SoundscapeScript>ASSS_CITY_ANCIENT_LARGE_SELECT_AMB</SoundscapeScript>
 				</CitySoundscape>
 			</CitySoundscapes>
-			<AudioUnitVictoryScript>AS2D_VICTORY_MIDDLE</AudioUnitVictoryScript>
-			<AudioUnitDefeatScript>AS2D_LOSS_MIDDLE</AudioUnitDefeatScript>
+			<AudioUnitVictoryScript>AS2D_VICTORY_EARLY</AudioUnitVictoryScript>
+			<AudioUnitDefeatScript>AS2D_LOSS_EARLY</AudioUnitDefeatScript>
 		</EraInfo>
 		<EraInfo>
 			<Type>ERA_RENAISSANCE</Type>
@@ -191,42 +175,27 @@
 			<iAnarchyPercent>50</iAnarchyPercent>
 			<iSoundtrackSpace>160</iSoundtrackSpace>
 			<EraInfoSoundtracks>
-				<EraInfoSoundtrack>AS2D_BACH_ALLEGRO</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BACH_ALLEGRO_ASSAI</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BACH_ALLEMANDE</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BACH_BOUREE</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BACH_BRANDENBURG_2_3</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BACH_BRANDENBURG_3_1</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BACH_BRANDENBURG_4_1</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BACH_BRANDENBURG_6_1</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BACH_BRANDENBURG_6_3</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BACH_GIGUE</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BACH_LARGO</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BACH_MENUET</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BACH_SARABANDE</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BEETHOVEN_ALLEGRETTO</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BEETHOVEN_ANDANTE</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BEETHOVEN_ROMANCE_1</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_MOZART_ADAGIO</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_MOZART_ANDANTE</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_MOZART_ROMANCE</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_1</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_2</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_3</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_4</EraInfoSoundtrack>
 			</EraInfoSoundtracks>
 			<CitySoundscapes>
 				<CitySoundscape>
 					<CitySizeType>CITYSIZE_SMALL</CitySizeType>
-					<SoundscapeScript>ASSS_CITY_MIDDLE_SMALL_SELECT_AMB</SoundscapeScript>
+					<SoundscapeScript>ASSS_CITY_ANCIENT_SMALL_SELECT_AMB</SoundscapeScript>
 				</CitySoundscape>
 				<CitySoundscape>
 					<CitySizeType>CITYSIZE_MEDIUM</CitySizeType>
-					<SoundscapeScript>ASSS_CITY_MIDDLE_SMALL_SELECT_AMB</SoundscapeScript>
+					<SoundscapeScript>ASSS_CITY_ANCIENT_SMALL_SELECT_AMB</SoundscapeScript>
 				</CitySoundscape>
 				<CitySoundscape>
 					<CitySizeType>CITYSIZE_LARGE</CitySizeType>
-					<SoundscapeScript>ASSS_CITY_MIDDLE_LARGE_SELECT_AMB</SoundscapeScript>
+					<SoundscapeScript>ASSS_CITY_ANCIENT_LARGE_SELECT_AMB</SoundscapeScript>
 				</CitySoundscape>
 			</CitySoundscapes>
-			<AudioUnitVictoryScript>AS2D_VICTORY_MIDDLE</AudioUnitVictoryScript>
-			<AudioUnitDefeatScript>AS2D_LOSS_MIDDLE</AudioUnitDefeatScript>
+			<AudioUnitVictoryScript>AS2D_VICTORY_EARLY</AudioUnitVictoryScript>
+			<AudioUnitDefeatScript>AS2D_LOSS_EARLY</AudioUnitDefeatScript>
 		</EraInfo>
 		<EraInfo>
 			<Type>ERA_INDUSTRIAL</Type>
@@ -255,39 +224,27 @@
 			<iAnarchyPercent>45</iAnarchyPercent>
 			<iSoundtrackSpace>120</iSoundtrackSpace>
 			<EraInfoSoundtracks>
-				<EraInfoSoundtrack>AS2D_BEETHOVEN_5_2</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BEETHOVEN_6_1</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BEETHOVEN_6_2</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BRAHMS_3_2</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BRAHMS_3_3</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BRAHMS_HUNGARIAN_1</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BRAHMS_HUNGARIAN_3</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_BRAHMS_HUNGARIAN_16</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_DVORAK_9_2</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_DVORAK_AMERICAN_1</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_DVORAK_SLAVONIC_3</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_DVORAK_SLAVONIC_7</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_DVORAK_SLAVONIC_10</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_DVORAK_SLAVONIC_12</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_RIMSKY_KORSAKOV_SCHEHERAZADE_3</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_SAINT_SAENS_ALLEGRETTO</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_1</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_2</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_3</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_4</EraInfoSoundtrack>
 			</EraInfoSoundtracks>
 			<CitySoundscapes>
 				<CitySoundscape>
 					<CitySizeType>CITYSIZE_SMALL</CitySizeType>
-					<SoundscapeScript>ASSS_CITY_MIDDLE_SMALL_SELECT_AMB</SoundscapeScript>
+					<SoundscapeScript>ASSS_CITY_ANCIENT_SMALL_SELECT_AMB</SoundscapeScript>
 				</CitySoundscape>
 				<CitySoundscape>
 					<CitySizeType>CITYSIZE_MEDIUM</CitySizeType>
-					<SoundscapeScript>ASSS_CITY_MIDDLE_SMALL_SELECT_AMB</SoundscapeScript>
+					<SoundscapeScript>ASSS_CITY_ANCIENT_SMALL_SELECT_AMB</SoundscapeScript>
 				</CitySoundscape>
 				<CitySoundscape>
 					<CitySizeType>CITYSIZE_LARGE</CitySizeType>
-					<SoundscapeScript>ASSS_CITY_MIDDLE_LARGE_SELECT_AMB</SoundscapeScript>
+					<SoundscapeScript>ASSS_CITY_ANCIENT_LARGE_SELECT_AMB</SoundscapeScript>
 				</CitySoundscape>
 			</CitySoundscapes>
-			<AudioUnitVictoryScript>AS2D_VICTORY_MIDDLE</AudioUnitVictoryScript>
-			<AudioUnitDefeatScript>AS2D_LOSS_MIDDLE</AudioUnitDefeatScript>
+			<AudioUnitVictoryScript>AS2D_VICTORY_EARLY</AudioUnitVictoryScript>
+			<AudioUnitDefeatScript>AS2D_LOSS_EARLY</AudioUnitDefeatScript>
 		</EraInfo>
 		<EraInfo>
 			<Type>ERA_MODERN</Type>
@@ -316,37 +273,27 @@
 			<iAnarchyPercent>40</iAnarchyPercent>
 			<iSoundtrackSpace>80</iSoundtrackSpace>
 			<EraInfoSoundtracks>
-				<EraInfoSoundtrack>AS2D_ANFORTAS_WOUND</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_CHAIRMAN_DANCES</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_CHCONNE</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_CHRISTIAN_ZEAL</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_COMMON_TONES</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_GRAND_PIANOLA_1</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_GRAND_PIANOLA_2</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_HARMONIELEHRE</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_HYMING_SLEWS</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_LOOPS_AND_VERSES</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_MEISTER_ECKHARDT</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_SHAKING_AND_TREMBLING</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_THE_PEOPLE_ARE_HEROES</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_TROMBA_LONTANA</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_1</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_2</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_3</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_4</EraInfoSoundtrack>
 			</EraInfoSoundtracks>
 			<CitySoundscapes>
 				<CitySoundscape>
 					<CitySizeType>CITYSIZE_SMALL</CitySizeType>
-					<SoundscapeScript>ASSS_CITY_LATE_SMALL_SELECT_AMB</SoundscapeScript>
+					<SoundscapeScript>ASSS_CITY_ANCIENT_SMALL_SELECT_AMB</SoundscapeScript>
 				</CitySoundscape>
 				<CitySoundscape>
 					<CitySizeType>CITYSIZE_MEDIUM</CitySizeType>
-					<SoundscapeScript>ASSS_CITY_LATE_SMALL_SELECT_AMB</SoundscapeScript>
+					<SoundscapeScript>ASSS_CITY_ANCIENT_SMALL_SELECT_AMB</SoundscapeScript>
 				</CitySoundscape>
 				<CitySoundscape>
 					<CitySizeType>CITYSIZE_LARGE</CitySizeType>
-					<SoundscapeScript>ASSS_CITY_LATE_LARGE_SELECT_AMB</SoundscapeScript>
+					<SoundscapeScript>ASSS_CITY_ANCIENT_LARGE_SELECT_AMB</SoundscapeScript>
 				</CitySoundscape>
 			</CitySoundscapes>
-			<AudioUnitVictoryScript>AS2D_VICTORY_LATE</AudioUnitVictoryScript>
-			<AudioUnitDefeatScript>AS2D_LOSS_LATE</AudioUnitDefeatScript>
+			<AudioUnitVictoryScript>AS2D_VICTORY_EARLY</AudioUnitVictoryScript>
+			<AudioUnitDefeatScript>AS2D_LOSS_EARLY</AudioUnitDefeatScript>
 		</EraInfo>
 		<EraInfo>
 			<Type>ERA_FUTURE</Type>
@@ -375,37 +322,27 @@
 			<iAnarchyPercent>30</iAnarchyPercent>
 			<iSoundtrackSpace>40</iSoundtrackSpace>
 			<EraInfoSoundtracks>
-				<EraInfoSoundtrack>AS2D_ANFORTAS_WOUND</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_CHAIRMAN_DANCES</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_CHCONNE</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_CHRISTIAN_ZEAL</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_COMMON_TONES</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_GRAND_PIANOLA_1</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_GRAND_PIANOLA_2</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_HARMONIELEHRE</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_HYMING_SLEWS</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_LOOPS_AND_VERSES</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_MEISTER_ECKHARDT</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_SHAKING_AND_TREMBLING</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_THE_PEOPLE_ARE_HEROES</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_TROMBA_LONTANA</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_1</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_2</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_3</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_4</EraInfoSoundtrack>
 			</EraInfoSoundtracks>
 			<CitySoundscapes>
 				<CitySoundscape>
 					<CitySizeType>CITYSIZE_SMALL</CitySizeType>
-					<SoundscapeScript>ASSS_CITY_LATE_SMALL_SELECT_AMB</SoundscapeScript>
+					<SoundscapeScript>ASSS_CITY_ANCIENT_SMALL_SELECT_AMB</SoundscapeScript>
 				</CitySoundscape>
 				<CitySoundscape>
 					<CitySizeType>CITYSIZE_MEDIUM</CitySizeType>
-					<SoundscapeScript>ASSS_CITY_LATE_SMALL_SELECT_AMB</SoundscapeScript>
+					<SoundscapeScript>ASSS_CITY_ANCIENT_SMALL_SELECT_AMB</SoundscapeScript>
 				</CitySoundscape>
 				<CitySoundscape>
 					<CitySizeType>CITYSIZE_LARGE</CitySizeType>
-					<SoundscapeScript>ASSS_CITY_LATE_LARGE_SELECT_AMB</SoundscapeScript>
+					<SoundscapeScript>ASSS_CITY_ANCIENT_LARGE_SELECT_AMB</SoundscapeScript>
 				</CitySoundscape>
 			</CitySoundscapes>
-			<AudioUnitVictoryScript>AS2D_VICTORY_LATE</AudioUnitVictoryScript>
-			<AudioUnitDefeatScript>AS2D_LOSS_LATE</AudioUnitDefeatScript>
+			<AudioUnitVictoryScript>AS2D_VICTORY_EARLY</AudioUnitVictoryScript>
+			<AudioUnitDefeatScript>AS2D_LOSS_EARLY</AudioUnitDefeatScript>
 		</EraInfo>
 	</EraInfos>
 </Civ4EraInfos>

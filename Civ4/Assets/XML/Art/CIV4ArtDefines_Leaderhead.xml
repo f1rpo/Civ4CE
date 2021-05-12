@@ -23,84 +23,12 @@
 			<BackgroundKFM>art/LeaderHeads/Alexander_the _Great/alexander_BG.kfm</BackgroundKFM>
 		</LeaderheadArtInfo>
 		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_ASOKA</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_India_Asoka.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,7,12</Button>
-			<NIF>art/LeaderHeads/Asoka/asoka.nif</NIF>
-			<KFM>art/LeaderHeads/Asoka/asoka.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Asoka/asoka_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Asoka/Asoka_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_BISMARCK</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_Germany_Bismark.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,5,13</Button>
-			<NIF>art/LeaderHeads/Bismarck/bismarck.nif</NIF>
-			<KFM>art/LeaderHeads/Bismarck/bismarck.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Bismarck/bismarck_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Bismarck/bismarck_bg.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_CATHERINE</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_Russia_Catherine.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,8,12</Button>
-			<NIF>art/LeaderHeads/catherine/catherine.nif</NIF>
-			<KFM>art/LeaderHeads/catherine/catherine.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/catherine/catherine_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/catherine/Catherine_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_CYRUS</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_Persia_Cyrus.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,1,13</Button>
-			<NIF>art/LeaderHeads/Cyrus/Cyrus.nif</NIF>
-			<KFM>art/LeaderHeads/Cyrus/Cyrus.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Cyrus/cyrus_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Cyrus/Cyrus_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_ELIZABETH</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_England_ElizabethI.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,8,10</Button>
-			<NIF>art/LeaderHeads/Elizabeth/elizabeth.nif</NIF>
-			<KFM>art/LeaderHeads/Elizabeth/elizabeth.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Elizabeth/elizabeth_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Elizabeth/elizabeth_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_FRANKLIN_ROOSEVELT</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_America_Roosevelt.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,2,12</Button>
-			<NIF>art/LeaderHeads/FDR/fdr.nif</NIF>
-			<KFM>art/LeaderHeads/FDR/fdr.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/FDR/fdr_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/FDR/fdr_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_FREDERICK</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_Germany_Frederick.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,8,11</Button>
-			<NIF>art/LeaderHeads/Frederick_the_Great/frederick_the_great.nif</NIF>
-			<KFM>art/LeaderHeads/Frederick_the_Great/frederick_the_great.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Frederick_the_Great/frederick_the_great_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Frederick_the_Great/frederick_the_great_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
 			<Type>ART_DEF_LEADER_GANDHI</Type>
 			<Button>,Art/interface/LeaderHeads/Btn_LH_India_Gandhi.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,4,11</Button>
 			<NIF>art/LeaderHeads/Gandhi/Gandhi.nif</NIF>
 			<KFM>art/LeaderHeads/Gandhi/Gandhi.kfm</KFM>
 			<NoShaderNIF>art/LeaderHeads/Gandhi/Gandhi_noshader.nif</NoShaderNIF>
 			<BackgroundKFM>art/LeaderHeads/Gandhi/Gandhi_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_GENGHIS_KHAN</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_Mongol_Genghis.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,6,12</Button>
-			<NIF>art/LeaderHeads/Genghis_Khan/genghis_khan.nif</NIF>
-			<KFM>art/LeaderHeads/Genghis_Khan/genghis_khan.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Genghis_Khan/genghis_khan_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Genghis_Khan/Genghis_Khan_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_HATSHEPSUT</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_Egypt_Hatshepsut.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,3,11</Button>
-			<NIF>art/LeaderHeads/Hatshepsut/hatshepsut.nif</NIF>
-			<KFM>art/LeaderHeads/Hatshepsut/hatshepsut.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Hatshepsut/hatshepsut_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Hatshepsut/hatshepsut_BG.kfm</BackgroundKFM>
 		</LeaderheadArtInfo>
 		<LeaderheadArtInfo>
 			<Type>ART_DEF_LEADER_HUAYNA_CAPAC</Type>
@@ -111,116 +39,12 @@
 			<BackgroundKFM>art/LeaderHeads/Huayna_Capac/huayna_capac_BG.kfm</BackgroundKFM>
 		</LeaderheadArtInfo>
 		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_ISABELLA</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_Spain_Isabella.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,1,12</Button>
-			<NIF>art/LeaderHeads/Isabella/isabella.nif</NIF>
-			<KFM>art/LeaderHeads/Isabella/isabella.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Isabella/isabella_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Isabella/Isabella_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
 			<Type>ART_DEF_LEADER_JULIUS_CAESAR</Type>
 			<Button>,Art/interface/LeaderHeads/Btn_LH_Rome_JuliusCaesar.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,2,11</Button>
 			<NIF>art/Leaderheads/Julius_Caesar/Julius_Caesar.nif</NIF>
 			<KFM>art/Leaderheads/Julius_Caesar/Julius_Caesar.kfm</KFM>
 			<NoShaderNIF>art/Leaderheads/Julius_Caesar/julius_caesar_noshader.nif</NoShaderNIF>
 			<BackgroundKFM>art/LeaderHeads/Julius_Caesar/Julius_Caesar_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_KUBLAI_KHAN</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_Mongol_Kublai.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,4,13</Button>
-			<NIF>art/LeaderHeads/Kublai_Khan/kublai_khan.nif</NIF>
-			<KFM>art/LeaderHeads/Kublai_Khan/kublai_khan.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Kublai_Khan/kublai_khan_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Kublai_Khan/Kublai_Khan_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_LOUIS_XIV</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_France_LouisXIV.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,5,11</Button>
-			<NIF>art/LeaderHeads/Louis_XIV/louis_xiv.nif</NIF>
-			<KFM>art/LeaderHeads/Louis_XIV/louis_xiv.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Louis_XIV/louis_xiv_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Louis_XIV/louis_xiv_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_MANSA_MUSA</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_Mali_MansaMusa.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,7,13</Button>
-			<NIF>art/LeaderHeads/Mansa_Musa/mansa_musa.nif</NIF>
-			<KFM>art/LeaderHeads/Mansa_Musa/mansa_musa.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Mansa_Musa/mansa_musa_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Mansa_Musa/Mansa_Musa_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_MAO_ZEDONG</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_China_MaoZedong.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,7,11</Button>
-			<NIF>art/LeaderHeads/Mao/Mao_tse_tung.nif</NIF>
-			<KFM>art/LeaderHeads/Mao/Mao_tse_tung.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Mao/mao_tse_tung_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Mao/Mao_tse_tung_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_MONTEZUMA</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_Aztec_Montezuma.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,6,10</Button>
-			<NIF>art/LeaderHeads/Montezuma/montezuma.nif</NIF>
-			<KFM>art/LeaderHeads/Montezuma/montezuma.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Montezuma/montezuma_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Montezuma/montezuma_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_NAPOLEON</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_France_Napoleon.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,3,12</Button>
-			<NIF>art/LeaderHeads/Napoleon/napoleon.nif</NIF>
-			<KFM>art/LeaderHeads/Napoleon/napoleon.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Napoleon/napoleon_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Napoleon/napoleon_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_PETER</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_Russia_Peter.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,5,10</Button>
-			<NIF>art/Leaderheads/Peter_the_Great/peter.nif</NIF>
-			<KFM>art/Leaderheads/Peter_the_Great/peter.kfm</KFM>
-			<NoShaderNIF>art/Leaderheads/Peter_the_Great/peter_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Peter_the_Great/peter_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_QIN_SHI_HUANG</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_China_ShihHuangTi.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,3,13</Button>
-			<NIF>art/LeaderHeads/Qin_Shi_Huang/qin_shi_huang.nif</NIF>
-			<KFM>art/LeaderHeads/Qin_Shi_Huang/qin_shi_huang.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Qin_Shi_Huang/qin_shi_huang_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Qin_Shi_Huang/qin_shi_huang_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_SALADIN</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_Arabia_Saladin.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,6,11</Button>
-			<NIF>art/LeaderHeads/Saladin/saladin.nif</NIF>
-			<KFM>art/LeaderHeads/Saladin/saladin.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Saladin/saladin_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Saladin/saladin_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_TOKUGAWA</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_Japan_Tokugawa.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,4,12</Button>
-			<NIF>art/LeaderHeads/Tokugawa/tokugawa.nif</NIF>
-			<KFM>art/LeaderHeads/Tokugawa/tokugawa.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Tokugawa/tokugawa_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Tokugawa/tokugawa_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_VICTORIA</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_England_Victoria.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,6,13</Button>
-			<NIF>art/LeaderHeads/Victoria/victoria.nif</NIF>
-			<KFM>art/LeaderHeads/Victoria/victoria.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Victoria/victoria_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Victoria/Victoria_BG.kfm</BackgroundKFM>
-		</LeaderheadArtInfo>
-		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_WASHINGTON</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_America_Washington.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,5,12</Button>
-			<NIF>art/LeaderHeads/Washington/george_washington.nif</NIF>
-			<KFM>art/LeaderHeads/Washington/george_washington.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Washington/george_washington_noshader.nif</NoShaderNIF>
-			<BackgroundKFM>art/LeaderHeads/Washington/Washington_BG.kfm</BackgroundKFM>
 		</LeaderheadArtInfo>
 	</LeaderheadArtInfos>
 </Civ4ArtDefines>

@@ -61,15 +61,6 @@
 			<Button>,Art/Interface/Buttons/Builds/BuildFishingBoats.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,7,7</Button>
 		</ImprovementArtInfo>
 		<ImprovementArtInfo>
-			<Type>ART_DEF_IMPROVEMENT_WHALING_BOATS</Type>
-			<bExtraAnimations>0</bExtraAnimations>
-			<fScale>1.0</fScale>
-			<fInterfaceScale>1.0</fInterfaceScale>
-			<NIF>Art/Structures/Improvements/Whalingboat_Ancient/Whalingboat_Ancient.nif</NIF>
-			<KFM>Art/Structures/Improvements/Whalingboat_Ancient/Whalingboat_Ancient.kfm</KFM>
-			<Button>,Art/Interface/Buttons/Builds/BuildWhalingBoats.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,6,9</Button>
-		</ImprovementArtInfo>
-		<ImprovementArtInfo>
 			<Type>ART_DEF_IMPROVEMENT_MINE</Type>
 			<bExtraAnimations>0</bExtraAnimations>
 			<fScale>1.0</fScale>
@@ -86,15 +77,6 @@
 			<NIF>Art/Structures/Improvements/Workshop/Workshop.nif</NIF>
 			<KFM>Art/Structures/Improvements/Workshop/Workshop.kfm</KFM>
 			<Button>,Art/Interface/Buttons/Builds/BuildWorkshop.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,8,8</Button>
-		</ImprovementArtInfo>
-		<ImprovementArtInfo>
-			<Type>ART_DEF_IMPROVEMENT_LUMBERMILL</Type>
-			<bExtraAnimations>0</bExtraAnimations>
-			<fScale>1.0</fScale>
-			<fInterfaceScale>1.0</fInterfaceScale>
-			<NIF>Art/Structures/Improvements/Lumbermill/Lumbermill.nif</NIF>
-			<KFM>Art/Structures/Improvements/Lumbermill/Lumbermill.kfm</KFM>
-			<Button>,Art/Interface/Buttons/Builds/BuildLumberMill.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,5,7</Button>
 		</ImprovementArtInfo>
 		<ImprovementArtInfo>
 			<Type>ART_DEF_IMPROVEMENT_WINDMILL</Type>
@@ -149,24 +131,6 @@
 			<NIF>Art/Structures/Improvements/Camp/Camp.nif</NIF>
 			<KFM>Art/Structures/Improvements/Camp/Camp.kfm</KFM>
 			<Button>,Art/Interface/Buttons/Builds/BuildCamp.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,1,7</Button>
-		</ImprovementArtInfo>
-		<ImprovementArtInfo>
-			<Type>ART_DEF_IMPROVEMENT_WELL</Type>
-			<bExtraAnimations>0</bExtraAnimations>
-			<fScale>1.0</fScale>
-			<fInterfaceScale>1.0</fInterfaceScale>
-			<NIF>Art/Structures/Improvements/OilWell/OilWell.nif</NIF>
-			<KFM>Art/Structures/Improvements/OilWell/OilWell.kfm</KFM>
-			<Button>,Art/Interface/Buttons/Builds/BuildWell.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,4,8</Button>
-		</ImprovementArtInfo>
-		<ImprovementArtInfo>
-			<Type>ART_DEF_IMPROVEMENT_OFFSHORE_PLATFORM</Type>
-			<bExtraAnimations>0</bExtraAnimations>
-			<fScale>1.0</fScale>
-			<fInterfaceScale>0.4</fInterfaceScale>
-			<NIF>Art/Structures/Improvements/OilRig/OilRig.nif</NIF>
-			<KFM>Art/Structures/Improvements/OilRig/OilRig.kfm</KFM>
-			<Button>,Art/Interface/Buttons/Builds/BuildOffshorePlatform.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,4,9</Button>
 		</ImprovementArtInfo>
 		<ImprovementArtInfo>
 			<Type>ART_DEF_IMPROVEMENT_WINERY</Type>

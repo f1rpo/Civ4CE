@@ -19,6 +19,7 @@ class CvInfoScreen:
 	"Info Screen! Contains the Demographics, Wonders / Top Cities and Statistics Screens"
 	
 	def __init__(self, screenId):
+		return
 		
 		self.screenId = screenId
 		self.DEMO_SCREEN_NAME = "DemographicsScreen"

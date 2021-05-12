@@ -123,61 +123,7 @@ def unitBuiltFeats(pCity, pUnit):
 				popupInfo.addPythonButton(localText.getText("TXT_KEY_FEAT_ACCOMPLISHED_OK", ()), "")
 				popupInfo.addPythonButton(localText.getText("TXT_KEY_FEAT_ACCOMPLISHED_MORE", ()), "")
 				popupInfo.addPopup(pCity.getOwner())
-	
-	if (not gc.getPlayer(pCity.getOwner()).isFeatAccomplished(FeatTypes.FEAT_UNITCOMBAT_GUN)):
-
-		if (pUnit.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_GUN")):
 		
-			gc.getPlayer(pCity.getOwner()).setFeatAccomplished(FeatTypes.FEAT_UNITCOMBAT_GUN, True)
-			
-			if (featPopup(pCity.getOwner()) and (gc.getGame().getStartYear() == gc.getDefineINT("START_YEAR"))):
-				popupInfo = CyPopupInfo()
-				popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-				popupInfo.setData1(FeatTypes.FEAT_UNITCOMBAT_GUN)
-				popupInfo.setData2(pCity.getID())
-				popupInfo.setText(localText.getText("TXT_KEY_FEAT_UNITCOMBAT_GUN", (pUnit.getNameKey(), pCity.getNameKey(), )))
-				popupInfo.setOnClickedPythonCallback("featAccomplishedOnClickedCallback")
-				popupInfo.setOnFocusPythonCallback("featAccomplishedOnFocusCallback")
-				popupInfo.addPythonButton(localText.getText("TXT_KEY_FEAT_ACCOMPLISHED_OK", ()), "")
-				popupInfo.addPythonButton(localText.getText("TXT_KEY_FEAT_ACCOMPLISHED_MORE", ()), "")
-				popupInfo.addPopup(pCity.getOwner())
-	
-	if (not gc.getPlayer(pCity.getOwner()).isFeatAccomplished(FeatTypes.FEAT_UNITCOMBAT_ARMOR)):
-
-		if (pUnit.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_ARMOR")):
-		
-			gc.getPlayer(pCity.getOwner()).setFeatAccomplished(FeatTypes.FEAT_UNITCOMBAT_ARMOR, True)
-			
-			if (featPopup(pCity.getOwner()) and (gc.getGame().getStartYear() == gc.getDefineINT("START_YEAR"))):
-				popupInfo = CyPopupInfo()
-				popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-				popupInfo.setData1(FeatTypes.FEAT_UNITCOMBAT_ARMOR)
-				popupInfo.setData2(pCity.getID())
-				popupInfo.setText(localText.getText("TXT_KEY_FEAT_UNITCOMBAT_ARMOR", (pUnit.getNameKey(), pCity.getNameKey(), )))
-				popupInfo.setOnClickedPythonCallback("featAccomplishedOnClickedCallback")
-				popupInfo.setOnFocusPythonCallback("featAccomplishedOnFocusCallback")
-				popupInfo.addPythonButton(localText.getText("TXT_KEY_FEAT_ACCOMPLISHED_OK", ()), "")
-				popupInfo.addPythonButton(localText.getText("TXT_KEY_FEAT_ACCOMPLISHED_MORE", ()), "")
-				popupInfo.addPopup(pCity.getOwner())
-	
-	if (not gc.getPlayer(pCity.getOwner()).isFeatAccomplished(FeatTypes.FEAT_UNITCOMBAT_HELICOPTER)):
-
-		if (pUnit.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_HELICOPTER")):
-		
-			gc.getPlayer(pCity.getOwner()).setFeatAccomplished(FeatTypes.FEAT_UNITCOMBAT_HELICOPTER, True)
-			
-			if (featPopup(pCity.getOwner()) and (gc.getGame().getStartYear() == gc.getDefineINT("START_YEAR"))):
-				popupInfo = CyPopupInfo()
-				popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-				popupInfo.setData1(FeatTypes.FEAT_UNITCOMBAT_HELICOPTER)
-				popupInfo.setData2(pCity.getID())
-				popupInfo.setText(localText.getText("TXT_KEY_FEAT_UNITCOMBAT_HELICOPTER", (pUnit.getNameKey(), pCity.getNameKey(), )))
-				popupInfo.setOnClickedPythonCallback("featAccomplishedOnClickedCallback")
-				popupInfo.setOnFocusPythonCallback("featAccomplishedOnFocusCallback")
-				popupInfo.addPythonButton(localText.getText("TXT_KEY_FEAT_ACCOMPLISHED_OK", ()), "")
-				popupInfo.addPythonButton(localText.getText("TXT_KEY_FEAT_ACCOMPLISHED_MORE", ()), "")
-				popupInfo.addPopup(pCity.getOwner())
-	
 	if (not gc.getPlayer(pCity.getOwner()).isFeatAccomplished(FeatTypes.FEAT_UNITCOMBAT_NAVAL)):
 
 		if (pUnit.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_NAVAL")):

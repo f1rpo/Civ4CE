@@ -18,12 +18,12 @@
 			<Help>TXT_KEY_PLAYER_OPTION_SHOW_HEALTH_BARS_HELP</Help>
 			<bDefault>0</bDefault>
 		</GraphicOptionInfo>
-		<PlayerOptionInfo>
+		<GraphicOptionInfo>
 			<Type>GRAPHICOPTION_CITY_DETAIL</Type>
 			<Description>TXT_KEY_PLAYER_OPTION_DETAILED_CITY_INFO</Description>
 			<Help>TXT_KEY_PLAYER_OPTION_DETAILED_CITY_INFO_HELP</Help>
 			<bDefault>0</bDefault>
-		</PlayerOptionInfo>
+		</GraphicOptionInfo>
 		<GraphicOptionInfo>
 			<Type>GRAPHICOPTION_NO_COMBAT_ZOOM</Type>
 			<Description>TXT_KEY_PLAYER_OPTION_NO_COMBAT_ZOOM</Description>

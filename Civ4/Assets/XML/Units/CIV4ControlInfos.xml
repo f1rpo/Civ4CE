@@ -341,7 +341,7 @@
 			<Type>CONTROL_GLOBELAYER</Type>
 			<Description>TXT_KEY_GLOBE_VIEW</Description>
 			<Help>TXT_KEY_GLOBEVIEW_TOGGLE</Help>
-			<HotKey></HotKey>
+			<HotKey/>
 			<bAltDown>0</bAltDown>
 			<bShiftDown>0</bShiftDown>
 			<bCtrlDown>0</bCtrlDown>
@@ -356,7 +356,7 @@
 			<Type>CONTROL_SCORES</Type>
 			<Description>TXT_KEY_ACTION_SCORES</Description>
 			<Help>TXT_KEY_ACTION_SCORES_HELP</Help>
-			<HotKey></HotKey>
+			<HotKey/>
 			<bAltDown>0</bAltDown>
 			<bShiftDown>0</bShiftDown>
 			<bCtrlDown>0</bCtrlDown>
@@ -689,7 +689,7 @@
 			<HotKey>KB_TAB</HotKey>
 			<bAltDown>0</bAltDown>
 			<bShiftDown>0</bShiftDown>
-			<bCtrlDown>1</bCtrlDown>
+			<bCtrlDown>0</bCtrlDown>
 			<iHotKeyPriority>0</iHotKeyPriority>
 			<HotKeyAlt/>
 			<bAltDownAlt>0</bAltDownAlt>
@@ -701,11 +701,11 @@
 			<Type>CONTROL_CHAT_ALL</Type>
 			<Description>TXT_KEY_CHAT_LOG</Description>
 			<Help/>
-			<HotKey>KB_TAB</HotKey>
+			<HotKey/>
 			<bAltDown>0</bAltDown>
 			<bShiftDown>1</bShiftDown>
-			<bCtrlDown>0</bCtrlDown>
-			<iHotKeyPriority>0</iHotKeyPriority>
+			<bCtrlDown>1</bCtrlDown>
+			<iHotKeyPriority>1</iHotKeyPriority>
 			<HotKeyAlt/>
 			<bAltDownAlt>0</bAltDownAlt>
 			<bShiftDownAlt>0</bShiftDownAlt>
@@ -716,11 +716,11 @@
 			<Type>CONTROL_CHAT_TEAM</Type>
 			<Description>TXT_KEY_CHAT_LOG</Description>
 			<Help/>
-			<HotKey>KB_TAB</HotKey>
+			<HotKey/>
 			<bAltDown>0</bAltDown>
-			<bShiftDown>0</bShiftDown>
-			<bCtrlDown>0</bCtrlDown>
-			<iHotKeyPriority>0</iHotKeyPriority>
+			<bShiftDown>1</bShiftDown>
+			<bCtrlDown>1</bCtrlDown>
+			<iHotKeyPriority>1</iHotKeyPriority>
 			<HotKeyAlt/>
 			<bAltDownAlt>0</bAltDownAlt>
 			<bShiftDownAlt>0</bShiftDownAlt>
@@ -746,7 +746,7 @@
 			<Type>CONTROL_VICTORY_SCREEN</Type>
 			<Description>TXT_KEY_VICTORY_SCREEN_TITLE</Description>
 			<Help/>
-			<HotKey>KB_F8</HotKey>
+			<HotKey/>
 			<bAltDown>0</bAltDown>
 			<bShiftDown>0</bShiftDown>
 			<bCtrlDown>0</bCtrlDown>
@@ -806,7 +806,7 @@
 			<Type>CONTROL_ADMIN_DETAILS</Type>
 			<Description>TXT_KEY_POPUP_GAME_DETAILS</Description>
 			<Help/>
-			<HotKey>KB_D</HotKey>
+			<HotKey/>
 			<bAltDown>1</bAltDown>
 			<bShiftDown>1</bShiftDown>
 			<bCtrlDown>0</bCtrlDown>
@@ -836,7 +836,7 @@
 			<Type>CONTROL_WORLD_BUILDER</Type>
 			<Description>TXT_KEY_WORLD_BUILDER</Description>
 			<Help/>
-			<HotKey>KB_W</HotKey>
+			<HotKey/>
 			<bAltDown>0</bAltDown>
 			<bShiftDown>0</bShiftDown>
 			<bCtrlDown>1</bCtrlDown>

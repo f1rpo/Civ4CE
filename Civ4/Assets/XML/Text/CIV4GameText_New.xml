@@ -11,7 +11,7 @@
 		<French>Sauvegarde automatique...</French>
 		<German>Automatisches Speichern ...</German>
 		<Italian>Salvataggio automatico...</Italian>
-		<Spanish>Guardado automático...</Spanish>
+		<Spanish>Guardado autom&#225;tico...</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MOVE_FOCUS_BACK_TO</Tag>
@@ -43,7 +43,7 @@
 		<French>Vraiment ?</French>
 		<German>Sind Sie sicher?</German>
 		<Italian>Sei sicuro?</Italian>
-		<Spanish>¿Seguro?</Spanish>
+		<Spanish>&#191;Seguro?</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ENGLISH</Tag>
@@ -51,7 +51,7 @@
 		<French>Anglais</French>
 		<German>English</German>
 		<Italian>Inglese</Italian>
-		<Spanish>Inglés</Spanish>
+		<Spanish>Ingl&#233;s</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_FRENCH</Tag>
@@ -59,7 +59,7 @@
 		<French>Fran&#231;ais</French>
 		<German>Fran&#231;ais</German>
 		<Italian>Francese</Italian>
-		<Spanish>Francés</Spanish>
+		<Spanish>Franc&#233;s</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GERMAN</Tag>
@@ -67,7 +67,7 @@
 		<French>Allemand</French>
 		<German>Deutsch</German>
 		<Italian>Tedesco</Italian>
-		<Spanish>Alemán</Spanish>
+		<Spanish>Alem&#225;n</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ITALIAN</Tag>
@@ -83,7 +83,7 @@
 		<French>Espagnol</French>
 		<German>Espa&#241;ol</German>
 		<Italian>Spagnolo</Italian>
-		<Spanish>Español</Spanish>
+		<Spanish>Espa&#241;ol</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_CANCEL_PATCH_DOWNLOAD</Tag>
@@ -163,7 +163,7 @@
 		<French>Maj gauche</French>
 		<German>Umschalten links</German>
 		<Italian>Maiusc sinistro</Italian>
-		<Spanish>Mayús izq.</Spanish>
+		<Spanish>May&#250;s izq.</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_KEYBOARD_RIGHT_SHIFT_KEY</Tag>
@@ -171,7 +171,7 @@
 		<French>Maj droite</French>
 		<German>Umschalten rechts</German>
 		<Italian>Maiusc destro</Italian>
-		<Spanish>Mayús der.</Spanish>
+		<Spanish>May&#250;s der.</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_KEYBOARD_NUM_PAD_STAR</Tag>
@@ -203,7 +203,7 @@
 		<French>Verr.Maj</French>
 		<German>Feststelltaste</German>
 		<Italian>Bloc Maiusc</Italian>
-		<Spanish>Bloq Mayús</Spanish>
+		<Spanish>Bloq May&#250;s</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_KEYBOARD_NUM_LOCK</Tag>
@@ -355,7 +355,7 @@
 		<French>Page Haut</French>
 		<German>Bild auf</German>
 		<Italian>PagSu</Italian>
-		<Spanish>Re Pág</Spanish>
+		<Spanish>Re P&#225;g</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_KEYBOARD_LEFT_ARROW</Tag>
@@ -386,7 +386,7 @@
 		<English>Down Arrow</English>
 		<French>Fl&#232;che bas</French>
 		<German>Pfeil nach unten</German>
-		<Italian>Freccia giù</Italian>
+		<Italian>Freccia gi&#249;</Italian>
 		<Spanish>Flecha abajo</Spanish>
 	</TEXT>
 	<TEXT>
@@ -394,8 +394,8 @@
 		<English>Page Down</English>
 		<French>Page Bas</French>
 		<German>Bild ab</German>
-		<Italian>PagGiù</Italian>
-		<Spanish>Av Pág</Spanish>
+		<Italian>PagGi&#249;</Italian>
+		<Spanish>Av P&#225;g</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_KEYBOARD_INSERT_KEY</Tag>
@@ -442,7 +442,7 @@
 		<English>Choose Unit</English>
 		<French>Choisir unit&#233;</French>
 		<German>Einheit w&#228;hlen</German>
-		<Italian>Scegli unità</Italian>
+		<Italian>Scegli unit&#224;</Italian>
 		<Spanish>Elegir unidad</Spanish>
 	</TEXT>
 	<TEXT>
@@ -458,7 +458,7 @@
 		<English>Units</English>
 		<French>Unit&#233;s</French>
 		<German>Einheiten</German>
-		<Italian>Unità</Italian>
+		<Italian>Unit&#224;</Italian>
 		<Spanish>Unidades</Spanish>
 	</TEXT>
 	<TEXT>
@@ -475,7 +475,7 @@
 		<French>Technologies</French>
 		<German>Technologien</German>
 		<Italian>Tecnologie</Italian>
-		<Spanish>Tecnologías</Spanish>
+		<Spanish>Tecnolog&#237;as</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_WB_CHANGE_ALL_PLOTS</Tag>
@@ -491,7 +491,7 @@
 		<French>Ajouter montagne</French>
 		<German>Berg hinzuf&#252;gen</German>
 		<Italian>Aggiungi montagna</Italian>
-		<Spanish>Agregar montaña</Spanish>
+		<Spanish>Agregar monta&#241;a</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_WB_ADD_HILL</Tag>
@@ -515,7 +515,7 @@
 		<French>Ajouter oc&#233;an</French>
 		<German>Ozean hinzuf&#252;gen</German>
 		<Italian>Aggiungi oceano </Italian>
-		<Spanish>Agregar océano</Spanish>
+		<Spanish>Agregar oc&#233;ano</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_WB_EXPERIENCE</Tag>
@@ -547,7 +547,7 @@
 		<French>Population :</French>
 		<German>Bev&#246;lkerung:</German>
 		<Italian>Popolazione:</Italian>
-		<Spanish>Población:</Spanish>
+		<Spanish>Poblaci&#243;n:</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_WB_CULTURE</Tag>
@@ -570,7 +570,7 @@
 		<English>Edit City</English>
 		<French>Modifier ville</French>
 		<German>Stadt bearbeiten:</German>
-		<Italian>Modifica città</Italian>
+		<Italian>Modifica citt&#224;</Italian>
 		<Spanish>Editar ciudad</Spanish>
 	</TEXT>
 	<TEXT>
@@ -587,7 +587,7 @@
 		<French>Change ann&#233;e de d&#233;part</French>
 		<German>Startjahr &#228;ndern</German>
 		<Italian>Cambia l'anno iniziale</Italian>
-		<Spanish>Cambiar año de comienzo</Spanish>
+		<Spanish>Cambiar a&#241;o de comienzo</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_WB_1_BY_1</Tag>
@@ -618,7 +618,7 @@
 		<English>Player Mode</English>
 		<French>Mode Joueur</French>
 		<German>Spielermodus</German>
-		<Italian>Modalità giocatore</Italian>
+		<Italian>Modalit&#224; giocatore</Italian>
 		<Spanish>Modo Jugador</Spanish>
 	</TEXT>
 	<TEXT>
@@ -626,7 +626,7 @@
 		<English>Map Mode</English>
 		<French>Mode Carte</French>
 		<German>Kartenmodus</German>
-		<Italian>Modalità mappa</Italian>
+		<Italian>Modalit&#224; mappa</Italian>
 		<Spanish>Modo Mapa</Spanish>
 	</TEXT>
 	<TEXT>
@@ -635,7 +635,7 @@
 		<French>Commande Editeur de monde </French>
 		<German>Weltenbauer-Bearbeitungssteuerung</German>
 		<Italian>Comandi dell'editor</Italian>
-		<Spanish>Control de edición del Creador de mundos</Spanish>
+		<Spanish>Control de edici&#243;n del Creador de mundos</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_WB_PROMOTIONS</Tag>
@@ -659,7 +659,7 @@
 		<French>D&#233;sactive les effets de particule</French>
 		<German>Schaltet Partikeleffekte aus</German>
 		<Italian>Disattiva effetti particellari</Italian>
-		<Spanish>Desactiva los efectos de partículas.</Spanish>
+		<Spanish>Desactiva los efectos de part&#237;culas.</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GRAPHICOPTION_GLOBE_VIEW_BUILDINGS_DISABLED</Tag>
@@ -675,22 +675,22 @@
 		<French>Les mod&#232;les des b&#226;timents ne s'affichent pas en vue du globe</French>
 		<German>Geb&#228;udemodelle erscheinen nicht in Globusansicht</German>
 		<Italian>I modelli degli edifici non verranno mostrati nella visuale globale</Italian>
-		<Spanish>Los modelos de los edificios no se mostrarán en la vista global.</Spanish>
+		<Spanish>Los modelos de los edificios no se mostrar&#225;n en la vista global.</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_LEGAL_LINE_1</Tag>
-		<English>©2005 Firaxis Games, Inc. All Rights Reserved. Manufactured and marketed by Take Two Interactive, New York, NY.</English>
+		<English>&#169;2005 Firaxis Games, Inc. All Rights Reserved. Manufactured and marketed by Take Two Interactive, New York, NY.</English>
 		<French>&#169;2005 Firaxis Games, Inc. Tous droits r&#233;serv&#233;s. Fabriqu&#233; et commercialis&#233; par Take Two Interactive, New York, NY.</French>
 		<German>&#169; 2005 Firaxis Games, Inc. Alle Rechte vorbehalten. Herstellung und Vermarktung durch Take Two Interactive, New York, NY.</German>
-		<Italian>© 2005 Firaxis Games, Inc. Tutti i diritti riservati. Fabbricato e prodotto da Take Two Interactive, New York, NY.</Italian>
-		<Spanish>©2005 Firaxis Games, Inc. Reservados todos los derechos. Fabricado y comercializado por Take Two Interactive, New York, NY.</Spanish>
+		<Italian>&#169; 2005 Firaxis Games, Inc. Tutti i diritti riservati. Fabbricato e prodotto da Take Two Interactive, New York, NY.</Italian>
+		<Spanish>&#169;2005 Firaxis Games, Inc. Reservados todos los derechos. Fabricado y comercializado por Take Two Interactive, New York, NY.</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_LEGAL_LINE_2</Tag>
 		<English>All trademarks are the property of their respective owners.</English>
 		<French>Toutes les marques commerciales sont la propri&#233;t&#233; de leurs d&#233;tenteurs respectifs.</French>
 		<German>Alle Warenzeichen sind Eigentum der jeweiligen Inhaber.</German>
-		<Italian>Tutti i marchi registrati sono proprietà dei rispettivi detentori.</Italian>
+		<Italian>Tutti i marchi registrati sono propriet&#224; dei rispettivi detentori.</Italian>
 		<Spanish>Todas las marcas comerciales pertenecen a sus respectivos titulares.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -745,7 +745,7 @@
 		<Tag>TXT_KEY_DOWNLOAD_MAP_WAIT</Tag>
 		<English>Waiting for peers to complete map transfer</English>
 		<French>En attente de peer pour terminer le transfert de la carte</French>
-		<German>Warten, dass Peers Kartentranfer abschließen</German>
+		<German>Warten, dass Peers Kartentranfer abschlie&#223;en</German>
 		<Italian>In attesa che i peer completino il trasferimento della mappa</Italian>
 		<Spanish>Esperando a que los interlocutores completen la transferencia del mapa</Spanish>
 	</TEXT>
@@ -780,5 +780,69 @@
 		<German>You have selected an unusable voice playback device.  Voice playback disabled.</German>
 		<Italian>You have selected an unusable voice playback device.  Voice playback disabled.</Italian>
 		<Spanish>You have selected an unusable voice playback device.  Voice playback disabled.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAIN_MENU_DEMO</Tag>
+		<English>PLAY THE DEMO</English>
+		<French>Jouer &#224; la d&#233;mo</French>
+		<German>Demo spielen</German>
+		<Italian>Gioca la demo</Italian>
+		<Spanish>Jugar a la demo</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAIN_MENU_INVALID_DEMO_TITLE</Tag>
+		<English>Error</English>
+		<French>Error</French>
+		<German>Error</German>
+		<Italian>Error</Italian>
+		<Spanish>Error</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAIN_MENU_INVALID_DEMO_DESC</Tag>
+		<English>Your demo file is invalid.  Unable to play.</English>
+		<French>Your demo file is invalid.  Unable to play.</French>
+		<German>Your demo file is invalid.  Unable to play.</German>
+		<Italian>Your demo file is invalid.  Unable to play.</Italian>
+		<Spanish>Your demo file is invalid.  Unable to play.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAIN_MENU_NO_DEMO_TITLE</Tag>
+		<English>Error</English>
+		<French>Error</French>
+		<German>Error</German>
+		<Italian>Error</Italian>
+		<Spanish>Error</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAIN_MENU_NO_DEMO_TITLE</Tag>
+		<English>The demo file could not be found.  Unable to play.</English>
+		<French>The demo file could not be found.  Unable to play.</French>
+		<German>The demo file could not be found.  Unable to play.</German>
+		<Italian>The demo file could not be found.  Unable to play.</Italian>
+		<Spanish>The demo file could not be found.  Unable to play.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAIN_MENU_INVALID_TUTORIAL_TITLE</Tag>
+		<English>Error</English>
+		<French>Error</French>
+		<German>Error</German>
+		<Italian>Error</Italian>
+		<Spanish>Error</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAIN_MENU_INVALID_TUTORIAL_DESC</Tag>
+		<English>Your tutorial is invalid.  Unable to play.</English>
+		<French>Your tutorial is invalid.  Unable to play.</French>
+		<German>Your tutorial is invalid.  Unable to play.</German>
+		<Italian>Your tutorial is invalid.  Unable to play.</Italian>
+		<Spanish>Your tutorial is invalid.  Unable to play.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_DEMO_CIV4_INSTORES_NOW</Tag>
+		<English>Sid Meier's Civilization IV In Stores Now!</English>
+		<French>Sid Meier's Civilization IV est disponible d&#232;s aujourd&#146;hui !</French>
+		<German>Sid Meier's Civilization IV jetzt im Handel!</German>
+		<Italian>Sid Meier's Civilization IV &#232; gi&#224; in vendita!</Italian>
+		<Spanish>Sid Meier's Civilization IV ya a la venta</Spanish>
 	</TEXT>
 </Civ4GameText>

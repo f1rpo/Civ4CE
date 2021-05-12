@@ -297,7 +297,7 @@ class CvEventManager:
 
 	def onGameEnd(self, argsList):
 		'Called at the End of the game'
-		print("Game is ending")
+		#print("Game is ending")			
 		return
 
 	def onBeginGameTurn(self, argsList):

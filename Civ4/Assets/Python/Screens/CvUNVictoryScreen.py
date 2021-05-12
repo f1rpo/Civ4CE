@@ -16,6 +16,8 @@ localText = CyTranslator()
 class CvUnVictoryScreen:
 
 	def __init__(self):
+		return
+
 		self.iScreen = -1
 		self.nWidgetCount = 0
 		self.WIDGET_ID = "UNVictoryWidget"
@@ -61,6 +63,7 @@ class CvUnVictoryScreen:
 		return CyGInterfaceScreen(self.SCREEN_NAME + str(self.iScreen), CvScreenEnums.UN_SCREEN)
 
 	def interfaceScreen (self):
+		return
 	
 		self.EXIT_TEXT = u"<font=4>" + localText.getText("TXT_KEY_PEDIA_SCREEN_EXIT", ()).upper() + u"</font>"
 

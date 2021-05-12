@@ -7,11 +7,11 @@
 <Civ4Defines xmlns="x-schema:CIV4GlobalDefinesSchema.xml">
 	<Define>
 		<DefineName>CIV4_VERSION</DefineName>
-		<iDefineIntVal>100</iDefineIntVal>
+		<iDefineIntVal>04</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>SAVE_VERSION</DefineName>
-		<iDefineIntVal>100</iDefineIntVal>
+		<iDefineIntVal>01</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>LAND_TERRAIN</DefineName>
@@ -39,7 +39,7 @@
 	</Define>
 	<Define>
 		<DefineName>NUKE_FEATURE</DefineName>
-		<DefineTextVal>FEATURE_FALLOUT</DefineTextVal>
+		<DefineTextVal>FEATURE_JUNGLE</DefineTextVal>
 	</Define>
 	<Define>
 		<DefineName>GLOBAL_WARMING_TERRAIN</DefineName>

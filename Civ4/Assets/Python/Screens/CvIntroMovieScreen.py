@@ -88,7 +88,7 @@ class CvIntroMovieScreen:
 			elif self.bMovieState == 1:
 				print "MS 2"
 				self.bMovieState = 2
-				self.currentMovie = "ART_DEF_MOVIE_INTRO"
+				self.currentMovie = "ART_DEF_MOVIE_2K_INTRO"
 				self.closeScreen()
 				self.createMovieScreen( "ART_DEF_MOVIE_INTRO" )
 			else:

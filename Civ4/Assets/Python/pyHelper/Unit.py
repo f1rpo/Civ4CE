@@ -42,6 +42,6 @@ class PyUnit:
 	
 	############## G E N E R A L ##############
 
-	def NotifyEntity( self, iEvent )
+	def NotifyEntity( self, iEvent ):
 		"none - tells this unit's entity to perform the given action"
 		self.unit.NotifyEntity( iEvent )
