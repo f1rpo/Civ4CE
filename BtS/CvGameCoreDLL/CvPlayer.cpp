@@ -1549,12 +1549,10 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade)
 
 	if (bProduction)
 	{
-		if (!(pNewCity->isOccupation()))
+		if (isHuman())
 		{
-			if (isHuman())
-			{
-				pNewCity->chooseProduction();
-			}
+			pNewCity->chooseProduction();
+			gDLL->getEventReporterIFace()->cityAcquiredAndKept(GC.getGameINLINE().getActivePlayer(), pNewCity);
 		}
 	}
 }
@@ -2287,7 +2285,7 @@ void CvPlayer::doTurn()
 
 	updateWarWearinessPercentAnger();
 
-	updateEconomyHistory(GC.getGameINLINE().getGameTurn(), calculateTotalYield(YIELD_COMMERCE) - calculateInflatedCosts());
+	updateEconomyHistory(GC.getGameINLINE().getGameTurn(), calculateTotalCommerce());
 	updateIndustryHistory(GC.getGameINLINE().getGameTurn(), calculateTotalYield(YIELD_PRODUCTION));
 	updateAgricultureHistory(GC.getGameINLINE().getGameTurn(), calculateTotalYield(YIELD_FOOD));
 	updatePowerHistory(GC.getGameINLINE().getGameTurn(), getPower());
@@ -5152,7 +5150,7 @@ int CvPlayer::getBuildingClassPrereqBuilding(BuildingTypes eBuilding, BuildingCl
 
 	if (!isLimitedWonderClass((BuildingClassTypes)(GC.getBuildingInfo(eBuilding).getBuildingClassType())))
 	{
-		return (iPrereqs * (getBuildingClassCount((BuildingClassTypes)(GC.getBuildingInfo(eBuilding).getBuildingClassType())) + iExtra + 1));
+		iPrereqs *= (getBuildingClassCount((BuildingClassTypes)(GC.getBuildingInfo(eBuilding).getBuildingClassType())) + iExtra + 1);
 	}
 
 	if (GC.getGameINLINE().isOption(GAMEOPTION_ONE_CITY_CHALLENGE) && isHuman())
@@ -5767,6 +5765,20 @@ int CvPlayer::calculateResearchRate(TechTypes eTech)
 	return iRate;
 }
 
+int CvPlayer::calculateTotalCommerce()
+{
+	int iTotalCommerce = calculateBaseNetGold() + calculateBaseNetResearch();
+
+	for (int i = 0; i < NUM_COMMERCE_TYPES; ++i)
+	{
+		if (COMMERCE_GOLD != i && COMMERCE_RESEARCH != i)
+		{
+			iTotalCommerce += getCommerceRate((CommerceTypes)i);
+		}
+	}
+
+	return iTotalCommerce;
+}
 
 bool CvPlayer::isResearch()
 {
@@ -11889,7 +11901,7 @@ void CvPlayer::read(FDataStreamBase* pStream)
 	}
 
 	{
-		m_mapAgricultureHistory.clear();
+		m_mapCultureHistory.clear();
 		uint iSize;
 		pStream->Read(&iSize);
 		for (uint i = 0; i < iSize; i++)

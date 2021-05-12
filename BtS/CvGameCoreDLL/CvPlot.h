@@ -148,7 +148,7 @@ public:
 	bool isRevealedGoody(TeamTypes eTeam = NO_TEAM) const;																						// Exposed to Python
 	void removeGoody();																																								// Exposed to Python
 
-	DllExport bool isCity(bool bCheckImprovement = false) const;																																		// Exposed to Python
+	DllExport bool isCity(bool bCheckImprovement = false, TeamTypes eForTeam = NO_TEAM) const;																																		// Exposed to Python
 	bool isFriendlyCity(TeamTypes eTeam) const;																												// Exposed to Python
 	bool isEnemyCity(TeamTypes eTeam) const;																													// Exposed to Python
 

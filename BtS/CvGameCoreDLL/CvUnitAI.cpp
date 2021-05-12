@@ -974,17 +974,20 @@ void CvUnitAI::AI_workerMove()
 
 	if (bCanRoute)
 	{
-		BonusTypes eNonObsoleteBonus = plot()->getNonObsoleteBonusType(getTeam());
-		if (NO_BONUS != eNonObsoleteBonus)
+		if (plot()->getOwnerINLINE() == getOwnerINLINE()) // XXX team???
 		{
-			if (!(plot()->isConnectedToCapital()))
+			BonusTypes eNonObsoleteBonus = plot()->getNonObsoleteBonusType(getTeam());
+			if (NO_BONUS != eNonObsoleteBonus)
 			{
-				ImprovementTypes eImprovement = plot()->getImprovementType();
-				if (NO_IMPROVEMENT != eImprovement && GC.getImprovementInfo(eImprovement).isImprovementBonusTrade(eNonObsoleteBonus))
+				if (!(plot()->isConnectedToCapital()))
 				{
-					if (AI_connectPlot(plot()))
+					ImprovementTypes eImprovement = plot()->getImprovementType();
+					if (NO_IMPROVEMENT != eImprovement && GC.getImprovementInfo(eImprovement).isImprovementBonusTrade(eNonObsoleteBonus))
 					{
-						return;
+						if (AI_connectPlot(plot()))
+						{
+							return;
+						}
 					}
 				}
 			}
@@ -2166,30 +2169,30 @@ void CvUnitAI::AI_exploreMove()
 {
 	PROFILE_FUNC();
 
-	if (AI_cityAttack(1, 60))
-	{
-		return;
-	}
+		if (AI_cityAttack(1, 60))
+		{
+			return;
+		}
 
-	if (AI_anyAttack(1, 70))
-	{
-		return;
-	}
+		if (AI_anyAttack(1, 70))
+		{
+			return;
+		}
 
 	if (AI_heal())
 	{
 		return;
 	}
 
-	if (AI_pillageRange(1))
-	{
-		return;
-	}
+		if (AI_pillageRange(1))
+		{
+			return;
+		}
 
-	if (AI_cityAttack(3, 80))
-	{
-		return;
-	}
+		if (AI_cityAttack(3, 80))
+		{
+			return;
+		}
 
 	if (AI_goody(4))
 	{
@@ -2201,20 +2204,20 @@ void CvUnitAI::AI_exploreMove()
 		return;
 	}
 
-	if (AI_pillageRange(3))
-	{
-		return;
-	}
+		if (AI_pillageRange(3))
+		{
+			return;
+		}
 
 	if (AI_explore())
 	{
 		return;
 	}
 
-	if (AI_pillage())
-	{
-		return;
-	}
+		if (AI_pillage())
+		{
+			return;
+		}
 
 	if (!(isHuman()) && (AI_getUnitAIType() == UNITAI_EXPLORE))
 	{
@@ -2709,8 +2712,8 @@ void CvUnitAI::AI_ICBMMove()
 	}
 
 	getGroup()->pushMission(MISSION_SKIP);
-	return;
-}
+		return;
+	}
 
 
 void CvUnitAI::AI_workerSeaMove()
@@ -3074,40 +3077,40 @@ void CvUnitAI::AI_exploreSeaMove()
 
 	CvArea* pWaterArea;
 
-	if (AI_anyAttack(1, 70))
-	{
-		return;
-	}
+		if (AI_anyAttack(1, 70))
+		{
+			return;
+		}
 
 	if (AI_heal())
 	{
 		return;
 	}
 
-	if (AI_pillageRange(1))
-	{
-		return;
-	}
+		if (AI_pillageRange(1))
+		{
+			return;
+		}
 
 	if (AI_exploreRange(4))
 	{
 		return;
 	}
 
-	if (AI_pillageRange(4))
-	{
-		return;
-	}
+		if (AI_pillageRange(4))
+		{
+			return;
+		}
 
 	if (AI_explore())
 	{
 		return;
 	}
 
-	if (AI_pillage())
-	{
-		return;
-	}
+		if (AI_pillage())
+		{
+			return;
+		}
 
 	if (!(isHuman()) && (AI_getUnitAIType() == UNITAI_EXPLORE_SEA))
 	{
@@ -3426,21 +3429,21 @@ void CvUnitAI::AI_attackAirMove()
 		return;
 	}
 
-	pCity = plot()->getPlotCity();
+		pCity = plot()->getPlotCity();
 
-	if (pCity != NULL)
-	{
-		if (pCity->AI_isDanger())
+		if (pCity != NULL)
 		{
-			if (!(pCity->AI_isDefended()))
+			if (pCity->AI_isDanger())
 			{
-				if (AI_airOffensiveCity())
+				if (!(pCity->AI_isDefended()))
 				{
-					return;
+					if (AI_airOffensiveCity())
+					{
+						return;
+					}
 				}
 			}
 		}
-	}
 
 	if (GC.getGameINLINE().getSorenRandNum(2, "AI Air Attack Move") == 0)
 	{
@@ -3460,10 +3463,10 @@ void CvUnitAI::AI_attackAirMove()
 		return;
 	}
 
-	if (AI_airOffensiveCity())
-	{
-		return;
-	}
+		if (AI_airOffensiveCity())
+		{
+			return;
+		}
 
 	if (canAirDefend())
 	{
@@ -3973,8 +3976,8 @@ int CvUnitAI::AI_promotionValue(PromotionTypes ePromotion)
 
 	iTemp = GC.getPromotionInfo(ePromotion).getCombatPercent();
 	if ((AI_getUnitAIType() == UNITAI_ATTACK) ||
-		  (AI_getUnitAIType() == UNITAI_ATTACK_SEA) ||
-		  (AI_getUnitAIType() == UNITAI_RESERVE_SEA) ||
+			(AI_getUnitAIType() == UNITAI_ATTACK_SEA) ||
+			(AI_getUnitAIType() == UNITAI_RESERVE_SEA) ||
 			(AI_getUnitAIType() == UNITAI_ESCORT_SEA) ||
 			(AI_getUnitAIType() == UNITAI_CARRIER_SEA))
 	{
@@ -7016,7 +7019,7 @@ bool CvUnitAI::AI_cityAttack(int iRange, int iOddsThreshold, bool bFollow)
 			{
 				if (AI_plotValid(pLoopPlot))
 				{
-					if (pLoopPlot->isCity() || (pLoopPlot->isCity(true) && pLoopPlot->isVisibleEnemyUnit(getOwnerINLINE())))
+					if (pLoopPlot->isCity() || (pLoopPlot->isCity(true, getTeam()) && pLoopPlot->isVisibleEnemyUnit(getOwnerINLINE())))
 					{
 						if (AI_potentialEnemy(pLoopPlot->getTeam()))
 						{
@@ -7249,8 +7252,8 @@ bool CvUnitAI::AI_pillage()
 		{
 			if (atWar(getTeam(), pLoopPlot->getTeam()))
 			{
-				if (canPillage(pLoopPlot))
-				{
+			if (canPillage(pLoopPlot))
+			{
 					if (!(pLoopPlot->isVisibleEnemyUnit(getOwnerINLINE())))
 					{
 						if (GET_PLAYER(getOwnerINLINE()).AI_plotTargetMissionAIs(pLoopPlot, MISSIONAI_PILLAGE, getGroup(), 1) == 0)
@@ -7328,8 +7331,8 @@ bool CvUnitAI::AI_pillageRange(int iRange)
 				{
 					if (atWar(getTeam(), pLoopPlot->getTeam()))
 					{
-						if (canPillage(pLoopPlot))
-						{
+					if (canPillage(pLoopPlot))
+					{
 							if (!(pLoopPlot->isVisibleEnemyUnit(getOwnerINLINE())))
 							{
 								if (GET_PLAYER(getOwnerINLINE()).AI_plotTargetMissionAIs(pLoopPlot, MISSIONAI_PILLAGE, getGroup()) == 0)
@@ -9761,46 +9764,46 @@ int CvUnitAI::AI_pillageValue(CvPlot* pPlot)
 		}
 	}
 
-	if (pPlot->getImprovementDuration() > ((pPlot->isWater()) ? 20 : 5))
-	{
-		eImprovement = pPlot->getImprovementType();
-	}
-	else
-	{
-		eImprovement = pPlot->getRevealedImprovementType(getTeam(), false);
-	}
-
-	if (eImprovement != NO_IMPROVEMENT)
-	{
-		if (pPlot->getWorkingCity() != NULL)
+		if (pPlot->getImprovementDuration() > ((pPlot->isWater()) ? 20 : 5))
 		{
-			iValue += (pPlot->calculateImprovementYieldChange(eImprovement, YIELD_FOOD, pPlot->getOwnerINLINE()) * 5);
-			iValue += (pPlot->calculateImprovementYieldChange(eImprovement, YIELD_PRODUCTION, pPlot->getOwnerINLINE()) * 4);
-			iValue += (pPlot->calculateImprovementYieldChange(eImprovement, YIELD_COMMERCE, pPlot->getOwnerINLINE()) * 3);
+			eImprovement = pPlot->getImprovementType();
+		}
+		else
+		{
+			eImprovement = pPlot->getRevealedImprovementType(getTeam(), false);
 		}
 
-		if (getDomainType() != DOMAIN_AIR)
+		if (eImprovement != NO_IMPROVEMENT)
 		{
-			iValue += GC.getImprovementInfo(eImprovement).getPillageGold();
-		}
-
-		eNonObsoleteBonus = pPlot->getNonObsoleteBonusType(pPlot->getTeam());
-
-		if (eNonObsoleteBonus != NO_BONUS)
-		{
-			if (GC.getImprovementInfo(eImprovement).isImprovementBonusTrade(eNonObsoleteBonus))
+			if (pPlot->getWorkingCity() != NULL)
 			{
-				iTempValue = (GET_PLAYER(pPlot->getOwnerINLINE()).AI_bonusVal(eNonObsoleteBonus) * 4);
+				iValue += (pPlot->calculateImprovementYieldChange(eImprovement, YIELD_FOOD, pPlot->getOwnerINLINE()) * 5);
+				iValue += (pPlot->calculateImprovementYieldChange(eImprovement, YIELD_PRODUCTION, pPlot->getOwnerINLINE()) * 4);
+				iValue += (pPlot->calculateImprovementYieldChange(eImprovement, YIELD_COMMERCE, pPlot->getOwnerINLINE()) * 3);
+			}
 
-				if (pPlot->isConnectedToCapital() && (pPlot->getPlotGroupConnectedBonus(pPlot->getOwnerINLINE(), eNonObsoleteBonus) == 1))
+			if (getDomainType() != DOMAIN_AIR)
+			{
+				iValue += GC.getImprovementInfo(eImprovement).getPillageGold();
+			}
+
+			eNonObsoleteBonus = pPlot->getNonObsoleteBonusType(pPlot->getTeam());
+
+			if (eNonObsoleteBonus != NO_BONUS)
+			{
+				if (GC.getImprovementInfo(eImprovement).isImprovementBonusTrade(eNonObsoleteBonus))
 				{
-					iTempValue *= 2;
-				}
+					iTempValue = (GET_PLAYER(pPlot->getOwnerINLINE()).AI_bonusVal(eNonObsoleteBonus) * 4);
 
-				iValue += iTempValue;
+					if (pPlot->isConnectedToCapital() && (pPlot->getPlotGroupConnectedBonus(pPlot->getOwnerINLINE(), eNonObsoleteBonus) == 1))
+					{
+						iTempValue *= 2;
+					}
+
+					iValue += iTempValue;
+				}
 			}
 		}
-	}
 
 	return iValue;
 }

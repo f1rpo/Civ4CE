@@ -199,6 +199,7 @@ public:
 	int calculateResearchModifier(TechTypes eTech);   // Exposed to Python
 	int calculateGoldRate();																																				// Exposed to Python
 	int calculateResearchRate(TechTypes eTech = NO_TECH);																						// Exposed to Python
+	int calculateTotalCommerce();
 
 	bool isResearch();																																							// Exposed to Python
 	DllExport bool canEverResearch(TechTypes eTech);																								// Exposed to Python

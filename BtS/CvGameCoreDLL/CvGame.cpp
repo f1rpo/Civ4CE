@@ -6686,21 +6686,85 @@ void CvGame::createBarbarianUnits()
 
 							for (iJ = 0; iJ < GC.getNumUnitClassInfos(); iJ++)
 							{
+								bool bValid = false;
 								eLoopUnit = ((UnitTypes)(GC.getCivilizationInfo(GET_PLAYER(BARBARIAN_PLAYER).getCivilizationType()).getCivilizationUnits(iJ)));
 
 								if (eLoopUnit != NO_UNIT)
 								{
-									if (GC.getUnitInfo(eLoopUnit).getUnitAIType(eBarbUnitAI))
-									{
-										if (GET_PLAYER(BARBARIAN_PLAYER).canTrain(eLoopUnit))
-										{
-											iValue = (1 + getSorenRandNum(1000, "Barb Unit Selection"));
+									CvUnitInfo& kUnit = GC.getUnitInfo(eLoopUnit);
 
-											if (iValue > iBestValue)
+									bValid = (kUnit.getCombat() > 0 && !kUnit.isOnlyDefensive());
+
+									if (bValid)
+									{
+										if (pLoopArea->isWater() && kUnit.getDomainType() != DOMAIN_SEA)
+										{
+											bValid = false;
+										}
+										else if (!pLoopArea->isWater() && kUnit.getDomainType() != DOMAIN_LAND)
+										{
+											bValid = false;
+										}
+									}
+
+									if (bValid)
+									{
+										if (!GET_PLAYER(BARBARIAN_PLAYER).canTrain(eLoopUnit))
+										{
+											bValid = false;
+										}
+									}
+
+									if (bValid)
+									{
+										if (NO_BONUS != kUnit.getPrereqAndBonus())
+										{
+											if (!GET_TEAM(BARBARIAN_TEAM).isHasTech((TechTypes)GC.getBonusInfo((BonusTypes)kUnit.getPrereqAndBonus()).getTechCityTrade()))
 											{
-												eBestUnit = eLoopUnit;
-												iBestValue = iValue;
+												bValid = false;
 											}
+										}
+									}
+
+									if (bValid)
+									{
+										bool bFound = false;
+										bool bRequires = false;
+										for (int i = 0; i < GC.getNUM_UNIT_PREREQ_OR_BONUSES(); ++i)
+										{
+											TechTypes eTech = (TechTypes)kUnit.getPrereqOrBonuses(i);
+
+											if (NO_TECH != eTech)
+											{
+												bRequires = true;
+
+												if (GET_TEAM(BARBARIAN_TEAM).isHasTech(eTech))
+												{
+													bFound = true;
+													break;
+												}
+											}
+										}
+
+										if (bRequires && !bFound)
+										{
+											bValid = false;
+										}
+									}
+
+									if (bValid)
+									{
+										iValue = (1 + getSorenRandNum(1000, "Barb Unit Selection"));
+
+										if (kUnit.getUnitAIType(eBarbUnitAI))
+										{
+											iValue += 200;
+										}
+
+										if (iValue > iBestValue)
+										{
+											eBestUnit = eLoopUnit;
+											iBestValue = iValue;
 										}
 									}
 								}

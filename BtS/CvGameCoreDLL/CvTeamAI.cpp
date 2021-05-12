@@ -893,8 +893,11 @@ int CvTeamAI::AI_endWarVal(TeamTypes eTeam) const
 
 	iValue += (GET_TEAM(eTeam).AI_getWarSuccess(getID()) * 20);
 
-	iValue *= (GET_TEAM(eTeam).getPower(true) + 10);
-	iValue /= max(1, (getPower(true) + GET_TEAM(eTeam).getPower(true) + 10));
+	int iOurPower = getPower(true);
+	int iTheirPower = GET_TEAM(eTeam).getDefensivePower();
+
+	iValue *= iTheirPower + 10;
+	iValue /= max(1, iOurPower + iTheirPower + 10);
 
 	// XXX count units in enemy territory...
 
