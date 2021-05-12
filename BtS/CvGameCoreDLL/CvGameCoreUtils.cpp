@@ -163,6 +163,241 @@ float directionAngle( DirectionTypes eDirection )
 	}
 }
 
+// addVisiblePlots adds all plots visible from (iX, iY) at iRange to visiblePlots if they do not already exist in it,
+void addVisiblePlots(CvPlotRegion& visiblePlots, int iX, int iY, int iRange, TeamTypes eTeam)
+{
+	PROFILE_FUNC();
+
+	// iterate over	all	the	plots potentially visible
+	int	iCenterX = iX;
+	int	iCenterY = iY;
+	for	(int iDX = -(iRange	+ 1); iDX <= (iRange + 1); iDX++)
+	{
+		for	(int iDY = -(iRange	+ 1); iDY <= (iRange + 1); iDY++)
+		{
+			PROFILE("addVisiblePlots(CvPlotRegion) 1");
+
+			CvPlot*	pLoopPlot =	plotXY(iCenterX, iCenterY, iDX,	iDY);
+			if (pLoopPlot != NULL)
+			{
+				bool bPlotVisible =	false;
+
+				// if interior,	then it	is visible
+				if (abs(iDX) <=	abs(iRange)	&& abs(iDY)	<= abs(iRange))
+				{
+					bPlotVisible = true;
+				}
+				// if outer	edge, check	if it would	be visible
+				// uses	reverse	of logic found in CvPlot::changeAdjacentSight
+				else
+				{
+					int	iEdgePlotSeeFromLevel =	pLoopPlot->seeFromLevel(eTeam);
+
+					// for every adjacent inner	plot, check	its	adjacent inner plots
+					CvPlot*	pAdjacentPlot;
+					int	iAdjacentPlotIndex = 0;
+					while (!bPlotVisible &&	(pAdjacentPlot = getIndexedInnerPlot(iCenterX, iCenterY, iDX, iDY, iAdjacentPlotIndex++)) != NULL)
+					{
+						int	iAdjacentPlotSeeThroughLevel = pAdjacentPlot->seeThroughLevel();
+
+						CvPlot*	pInnerPlot;
+						int	iInnerPlotIndex	= 0;
+						int	iAdjacentDX	= dxWrap(pAdjacentPlot->getX_INLINE() - iCenterX);
+						int	iAdjacentDY	= dyWrap(pAdjacentPlot->getY_INLINE() - iCenterY);
+						while (!bPlotVisible &&	(pInnerPlot	= getIndexedInnerPlot(iCenterX,	iCenterY, iAdjacentDX, iAdjacentDY,	iInnerPlotIndex++, iDX,	iDY)) != NULL)
+						{
+							int	iInnerSeeFromLevel = pInnerPlot->seeFromLevel(eTeam);
+
+							if ((iInnerSeeFromLevel	> iAdjacentPlotSeeThroughLevel)	||
+								(iInnerSeeFromLevel	== iAdjacentPlotSeeThroughLevel	&& iEdgePlotSeeFromLevel > iInnerSeeFromLevel))
+							{
+								bPlotVisible = true;
+							}
+						}
+					}
+				}
+
+				if (bPlotVisible)
+				{
+					visiblePlots.insert(XYCoords(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE()));
+				}
+			}
+		}
+	}
+}
+
+// addVisiblePlots adds all plots visible from (iX, iY) at iRange to visiblePlots if they do not already exist in it,
+// and adds the (*iObserverCount*visibility) value to the int value for each plot
+void addVisiblePlots(CvPlotDataRegion& visiblePlots, int iX, int iY, int iRange, int iObserverCount, TeamTypes eTeam)
+{
+	PROFILE_FUNC();
+
+	// special case range 0
+	if (iRange == 0)
+	{
+		// increment value, adding plot if it does not exist
+		visiblePlots[XYCoords(iX, iY)] += iObserverCount;
+		return;
+	}
+
+	for	(int iDX = -(iRange	- 1); iDX <= (iRange - 1); iDX++)
+	{
+		for	(int iDY = -(iRange	- 1); iDY <= (iRange - 1); iDY++)
+		{
+			CvPlot*	pLoopPlot =	plotXY(iX, iY, iDX, iDY);
+			if (pLoopPlot != NULL)
+			{
+				// increment value, adding plot if it does not exist
+				visiblePlots[XYCoords(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE())] += iObserverCount;
+
+				int iFromLevel = pLoopPlot->seeFromLevel(eTeam);
+
+				for	(int iI	= 0; iI	< NUM_DIRECTION_TYPES; iI++)
+				{
+					CvPlot*	pAdjacentPlot =	plotDirection(pLoopPlot->getX_INLINE(),	pLoopPlot->getY_INLINE(), ((DirectionTypes)iI));
+					if (pAdjacentPlot != NULL)
+					{
+						XYCoords adjacentXY(pAdjacentPlot->getX_INLINE(), pAdjacentPlot->getY_INLINE());
+						
+						// increment value, adding plot if it does not exist
+						visiblePlots[adjacentXY] += iObserverCount;
+						
+						// add the 3 downsight plots if height right
+						for (int iJ = 0; iJ < 3; iJ++)
+						{
+							DirectionTypes eDirection;
+							switch (iJ)
+							{
+							case 0: eDirection = (DirectionTypes) iI; break;
+							case 1: eDirection = GC.getTurnLeftDirection(iI); break;
+							case 2: eDirection = GC.getTurnRightDirection(iI); break;
+							default: FAssert(false); break;
+							}
+
+							int iThroughLevel = pAdjacentPlot->seeThroughLevel();
+							if (iFromLevel >= iThroughLevel)
+							{
+								CvPlot* pSeeThroughPlot = plotDirection(adjacentXY.iX, adjacentXY.iY, eDirection);
+								if (pSeeThroughPlot != NULL)
+								{
+									if ((iFromLevel	> iThroughLevel) ||	(pSeeThroughPlot->seeFromLevel(eTeam) > iFromLevel))
+									{
+										// increment value, adding plot if it does not exist
+										visiblePlots[XYCoords(pSeeThroughPlot->getX_INLINE(), pSeeThroughPlot->getY_INLINE())] += iObserverCount;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+int _getNextLowerUnitRange(const CLinkList<IDInfo>& unitList, TeamTypes eTeam, int iLastRange, int& iUnitCount)
+{
+	int iNextRange = -1;
+	iUnitCount = 0;
+
+	CLLNode<IDInfo>* pUnitNode = unitList.head();
+	while (pUnitNode !=	NULL)
+	{
+		CvUnit*	pLoopUnit =	::getUnit(pUnitNode->m_data);
+		pUnitNode =	unitList.next(pUnitNode);
+		
+		if (eTeam == NO_TEAM || pLoopUnit->getTeam() == eTeam)
+		{
+			int iUnitRange = pLoopUnit->visibilityRange();
+
+			// is the range in bounds
+			if (iUnitRange >= 0 && iUnitRange < iLastRange)
+			{
+				// is this range the highest valid one?
+				if (iUnitRange > iNextRange)
+				{
+					iNextRange = iUnitRange;
+					iUnitCount = 1;
+				}
+				// otherwise, is it equal?
+				else if (iUnitRange == iNextRange)
+				{
+					iUnitCount++;
+				}
+			}
+		}
+	}
+	
+	return iNextRange;
+}
+
+void buildVisibilityRegion(CvPlotRegion& visiblePlots, int iX, int iY, const CLinkList<IDInfo>& unitList, TeamTypes eTeam)
+{
+	if (unitList.head() == NULL)
+	{
+		return;
+	}
+
+	TeamTypes eVisibilityTeam = eTeam;
+	if (eVisibilityTeam == NO_TEAM)
+	{
+		CLLNode<IDInfo>* pHeadUnitNode = unitList.head();
+		eVisibilityTeam = ::getUnit(pHeadUnitNode->m_data)->getTeam();
+	}
+	
+	// only call addVisiblePlots once for each range, starting at highest range
+	int iLastRange = MAX_INT;
+	while (iLastRange >= 0)
+	{
+		int iNextObserverCount;
+		int iNextRange = _getNextLowerUnitRange(unitList, eTeam, iLastRange, iNextObserverCount);
+
+		// do we have more to add?
+		if (iNextRange >= 0)
+		{
+			FAssert(iNextObserverCount > 0);
+			addVisiblePlots(visiblePlots, iX, iY, iNextRange, eVisibilityTeam);
+		}
+
+		// set last range
+		iLastRange = iNextRange;
+	}
+
+}
+
+void buildVisibilityRegion(CvPlotDataRegion& visiblePlots, int iX, int iY, const CLinkList<IDInfo>& unitList, TeamTypes eTeam)
+{
+	if (unitList.head() == NULL)
+	{
+		return;
+	}
+
+	TeamTypes eVisibilityTeam = eTeam;
+	if (eVisibilityTeam == NO_TEAM)
+	{
+		CLLNode<IDInfo>* pHeadUnitNode = unitList.head();
+		eVisibilityTeam = ::getUnit(pHeadUnitNode->m_data)->getTeam();
+	}
+	
+	// only call addVisiblePlots once for each range, starting at highest range
+	int iLastRange = MAX_INT;
+	while (iLastRange >= 0)
+	{
+		int iNextObserverCount;
+		int iNextRange = _getNextLowerUnitRange(unitList, eTeam, iLastRange, iNextObserverCount);
+
+		// do we have more to add?
+		if (iNextRange >= 0)
+		{
+			FAssert(iNextObserverCount > 0);
+			addVisiblePlots(visiblePlots, iX, iY, iNextRange, iNextObserverCount, eVisibilityTeam);
+		}
+
+		// set last range
+		iLastRange = iNextRange;
+	}
+}
+
 bool atWar(TeamTypes eTeamA, TeamTypes eTeamB)
 {
 	if ((eTeamA == NO_TEAM) || (eTeamB == NO_TEAM))
@@ -484,6 +719,36 @@ bool isNationalWonderClass(BuildingClassTypes eBuildingClass)
 bool isLimitedWonderClass(BuildingClassTypes eBuildingClass)
 {
 	return (isWorldWonderClass(eBuildingClass) || isTeamWonderClass(eBuildingClass) || isNationalWonderClass(eBuildingClass));
+}
+
+int limitedWonderClassLimit(BuildingClassTypes eBuildingClass)
+{
+	int iMax;
+	int iCount = 0;
+	bool bIsLimited = false;
+
+	iMax = GC.getBuildingClassInfo(eBuildingClass).getMaxGlobalInstances();
+	if (iMax != -1)
+	{
+		iCount += iMax;
+		bIsLimited = true;
+	}
+
+	iMax = GC.getBuildingClassInfo(eBuildingClass).getMaxTeamInstances();
+	if (iMax != -1)
+	{
+		iCount += iMax;
+		bIsLimited = true;
+	}
+
+	iMax = GC.getBuildingClassInfo(eBuildingClass).getMaxPlayerInstances();
+	if (iMax != -1)
+	{
+		iCount += iMax;
+		bIsLimited = true;
+	}
+
+	return bIsLimited ? iCount : -1;
 }
 
 bool isWorldProject(ProjectTypes eProject)
@@ -1103,9 +1368,10 @@ int pathDestValid(int iToX, int iToY, const void* pointer, FAStar* finder)
 
 		if (pSelectionGroup->getDomainType() == DOMAIN_LAND)
 		{
-			if (pToPlot->area() != pSelectionGroup->area())
+			int iGroupAreaID = pSelectionGroup->getArea();
+			if (pToPlot->getArea() != iGroupAreaID)
 			{
-				if (!(pToPlot->isAdjacentToArea(pSelectionGroup->area())))
+				if (!(pToPlot->isAdjacentToArea(iGroupAreaID)))
 				{
 					return FALSE;
 				}
@@ -1139,7 +1405,7 @@ int pathDestValid(int iToX, int iToY, const void* pointer, FAStar* finder)
 						{
 							if (pLoopUnit2->isGroupHead())
 							{
-								if (pLoopUnit2->getGroup()->canMoveOrAttackInto(pToPlot, (pSelectionGroup->AI_isDeclareWar() || (gDLL->getFAStarIFace()->GetInfo(finder) & MOVE_DECLARE_WAR))))
+								if (pLoopUnit2->getGroup()->canMoveOrAttackInto(pToPlot, (pSelectionGroup->AI_isDeclareWar(pToPlot) || (gDLL->getFAStarIFace()->GetInfo(finder) & MOVE_DECLARE_WAR))))
 								{
 									bValid = true;
 									break;
@@ -1159,7 +1425,7 @@ int pathDestValid(int iToX, int iToY, const void* pointer, FAStar* finder)
 		}
 		else
 		{
-			if (!(pSelectionGroup->canMoveOrAttackInto(pToPlot, (pSelectionGroup->AI_isDeclareWar() || (gDLL->getFAStarIFace()->GetInfo(finder) & MOVE_DECLARE_WAR)))))
+			if (!(pSelectionGroup->canMoveOrAttackInto(pToPlot, (pSelectionGroup->AI_isDeclareWar(pToPlot) || (gDLL->getFAStarIFace()->GetInfo(finder) & MOVE_DECLARE_WAR)))))
 			{
 				return FALSE;
 			}
@@ -1815,5 +2081,181 @@ void stringToBools(const char* szString, int* iNumBools, bool** ppBools)
 		{
 			(*ppBools)[i] = (szString[i]=='1');
 		}
+	}
+}
+
+// these string functions should only be used under chipotle cheat code (not internationalized)
+
+void getCardinalDirectionTypeString(CvWString& szString, CardinalDirectionTypes eDirectionType)
+{
+	getDirectionTypeString(szString, cardinalDirectionToDirection(eDirectionType));
+}
+
+void getDirectionTypeString(CvWString& szString, DirectionTypes eDirectionType)
+{
+	switch (eDirectionType)
+	{
+	case NO_DIRECTION: szString = L"NO_DIRECTION"; break;
+
+	case DIRECTION_NORTH: szString = L"north"; break;
+	case DIRECTION_NORTHEAST: szString = L"northeast"; break;
+	case DIRECTION_EAST: szString = L"east"; break;
+	case DIRECTION_SOUTHEAST: szString = L"southeast"; break;
+	case DIRECTION_SOUTH: szString = L"south"; break;
+	case DIRECTION_SOUTHWEST: szString = L"southwest"; break;
+	case DIRECTION_WEST: szString = L"west"; break;
+	case DIRECTION_NORTHWEST: szString = L"northwest"; break;
+
+	default: szString = CvWString::format(L"UNKNOWN_DIRECTION(%d)", eDirectionType); break;
+	}
+}
+
+void getActivityTypeString(CvWString& szString, ActivityTypes eActivityType)
+{
+	switch (eActivityType)
+	{
+	case NO_ACTIVITY: szString = L"NO_ACTIVITY"; break;
+
+	case ACTIVITY_AWAKE: szString = L"ACTIVITY_AWAKE"; break;
+	case ACTIVITY_HOLD: szString = L"ACTIVITY_HOLD"; break;
+	case ACTIVITY_SLEEP: szString = L"ACTIVITY_SLEEP"; break;
+	case ACTIVITY_HEAL: szString = L"ACTIVITY_HEAL"; break;
+	case ACTIVITY_SENTRY: szString = L"ACTIVITY_SENTRY"; break;
+	case ACTIVITY_INTERCEPT: szString = L"ACTIVITY_SENTRY"; break;
+	case ACTIVITY_MISSION: szString = L"ACTIVITY_MISSION"; break;
+
+	default: szString = CvWString::format(L"UNKNOWN_ACTIVITY(%d)", eActivityType); break;
+	}
+}
+
+void getMissionTypeString(CvWString& szString, MissionTypes eMissionType)
+{
+	switch (eMissionType)
+	{
+	case NO_MISSION: szString = L"NO_MISSION"; break;
+
+	case MISSION_MOVE_TO: szString = L"MISSION_MOVE_TO"; break;
+	case MISSION_ROUTE_TO: szString = L"MISSION_ROUTE_TO"; break;
+	case MISSION_MOVE_TO_UNIT: szString = L"MISSION_MOVE_TO_UNIT"; break;
+	case MISSION_SKIP: szString = L"MISSION_SKIP"; break;
+	case MISSION_SLEEP: szString = L"MISSION_SLEEP"; break;
+	case MISSION_FORTIFY: szString = L"MISSION_FORTIFY"; break;
+	case MISSION_AIRPATROL: szString = L"MISSION_AIRPATROL"; break;
+	case MISSION_HEAL: szString = L"MISSION_HEAL"; break;
+	case MISSION_SENTRY: szString = L"MISSION_SENTRY"; break;
+	case MISSION_AIRLIFT: szString = L"MISSION_AIRLIFT"; break;
+	case MISSION_NUKE: szString = L"MISSION_NUKE"; break;
+	case MISSION_RECON: szString = L"MISSION_RECON"; break;
+	case MISSION_AIRBOMB: szString = L"MISSION_AIRBOMB"; break;
+	case MISSION_BOMBARD: szString = L"MISSION_BOMBARD"; break;
+	case MISSION_PILLAGE: szString = L"MISSION_PILLAGE"; break;
+	case MISSION_SABOTAGE: szString = L"MISSION_SABOTAGE"; break;
+	case MISSION_DESTROY: szString = L"MISSION_DESTROY"; break;
+	case MISSION_STEAL_PLANS: szString = L"MISSION_STEAL_PLANS"; break;
+	case MISSION_FOUND: szString = L"MISSION_FOUND"; break;
+	case MISSION_SPREAD: szString = L"MISSION_SPREAD"; break;
+	case MISSION_JOIN: szString = L"MISSION_JOIN"; break;
+	case MISSION_CONSTRUCT: szString = L"MISSION_CONSTRUCT"; break;
+	case MISSION_DISCOVER: szString = L"MISSION_DISCOVER"; break;
+	case MISSION_HURRY: szString = L"MISSION_HURRY"; break;
+	case MISSION_TRADE: szString = L"MISSION_TRADE"; break;
+	case MISSION_GREAT_WORK: szString = L"MISSION_GREAT_WORK"; break;
+	case MISSION_GOLDEN_AGE: szString = L"MISSION_GOLDEN_AGE"; break;
+	case MISSION_BUILD: szString = L"MISSION_BUILD"; break;
+	case MISSION_LEAD: szString = L"MISSION_LEAD"; break;
+
+	case MISSION_BEGIN_COMBAT: szString = L"MISSION_BEGIN_COMBAT"; break;
+	case MISSION_END_COMBAT: szString = L"MISSION_END_COMBAT"; break;
+	case MISSION_AIRSTRIKE: szString = L"MISSION_AIRSTRIKE"; break;
+	case MISSION_SURRENDER: szString = L"MISSION_SURRENDER"; break;
+	case MISSION_CAPTURED: szString = L"MISSION_CAPTURED"; break;
+	case MISSION_IDLE: szString = L"MISSION_IDLE"; break;
+	case MISSION_DIE: szString = L"MISSION_DIE"; break;
+	case MISSION_DAMAGE: szString = L"MISSION_DAMAGE"; break;
+	case MISSION_MULTI_SELECT: szString = L"MISSION_MULTI_SELECT"; break;
+	case MISSION_MULTI_DESELECT: szString = L"MISSION_MULTI_DESELECT"; break;
+
+	default: szString = CvWString::format(L"UNKOWN_MISSION(%d)", eMissionType); break;
+	}
+}
+
+void getMissionAIString(CvWString& szString, MissionAITypes eMissionAI)
+{
+	switch (eMissionAI)
+	{
+	case NO_MISSIONAI: szString = L"NO_MISSIONAI"; break;
+
+	case MISSIONAI_SHADOW: szString = L"MISSIONAI_SHADOW"; break;
+	case MISSIONAI_GROUP: szString = L"MISSIONAI_GROUP"; break;
+	case MISSIONAI_LOAD_ASSAULT: szString = L"MISSIONAI_LOAD_ASSAULT"; break;
+	case MISSIONAI_LOAD_SETTLER: szString = L"MISSIONAI_LOAD_SETTLER"; break;
+	case MISSIONAI_LOAD_SPECIAL: szString = L"MISSIONAI_LOAD_SPECIAL"; break;
+	case MISSIONAI_GUARD_CITY: szString = L"MISSIONAI_GUARD_CITY"; break;
+	case MISSIONAI_GUARD_BONUS: szString = L"MISSIONAI_GUARD_BONUS"; break;
+	case MISSIONAI_GUARD_SPY: szString = L"MISSIONAI_GUARD_SPY"; break;
+	case MISSIONAI_ATTACK_SPY: szString = L"MISSIONAI_ATTACK_SPY"; break;
+	case MISSIONAI_SPREAD: szString = L"MISSIONAI_SPREAD"; break;
+	case MISSIONAI_CONSTRUCT: szString = L"MISSIONAI_CONSTRUCT"; break;
+	case MISSIONAI_HURRY: szString = L"MISSIONAI_HURRY"; break;
+	case MISSIONAI_GREAT_WORK: szString = L"MISSIONAI_GREAT_WORK"; break;
+	case MISSIONAI_EXPLORE: szString = L"MISSIONAI_EXPLORE"; break;
+	case MISSIONAI_BLOCKADE: szString = L"MISSIONAI_BLOCKADE"; break;
+	case MISSIONAI_PILLAGE: szString = L"MISSIONAI_PILLAGE"; break;
+	case MISSIONAI_FOUND: szString = L"MISSIONAI_FOUND"; break;
+	case MISSIONAI_BUILD: szString = L"MISSIONAI_BUILD"; break;
+	case MISSIONAI_ASSAULT: szString = L"MISSIONAI_ASSAULT"; break;
+	case MISSIONAI_CARRIER: szString = L"MISSIONAI_CARRIER"; break;
+	case MISSIONAI_PICKUP: szString = L"MISSIONAI_PICKUP"; break;
+
+	default: szString = CvWString::format(L"UNKOWN_MISSION_AI(%d)", eMissionAI); break;
+	}
+}
+
+void getUnitAIString(CvWString& szString, UnitAITypes eUnitAI)
+{
+	// note, GC.getUnitAIInfo(eUnitAI).getDescription() is a international friendly way to get string (but it will be longer)
+	
+	switch (eUnitAI)
+	{
+	case NO_UNITAI: szString = L"no unitAI"; break;
+
+	case UNITAI_UNKNOWN: szString = L"unknown"; break;
+	case UNITAI_ANIMAL: szString = L"animal"; break;
+	case UNITAI_SETTLE: szString = L"settle"; break;
+	case UNITAI_WORKER: szString = L"worker"; break;
+	case UNITAI_ATTACK: szString = L"attack"; break;
+	case UNITAI_ATTACK_CITY: szString = L"attack city"; break;
+	case UNITAI_COLLATERAL: szString = L"collateral"; break;
+	case UNITAI_PILLAGE: szString = L"pillage"; break;
+	case UNITAI_RESERVE: szString = L"reserve"; break;
+	case UNITAI_COUNTER: szString = L"counter"; break;
+	case UNITAI_CITY_DEFENSE: szString = L"city defense"; break;
+	case UNITAI_CITY_COUNTER: szString = L"city counter"; break;
+	case UNITAI_CITY_SPECIAL: szString = L"city special"; break;
+	case UNITAI_EXPLORE: szString = L"explore"; break;
+	case UNITAI_MISSIONARY: szString = L"missionary"; break;
+	case UNITAI_PROPHET: szString = L"prophet"; break;
+	case UNITAI_ARTIST: szString = L"artist"; break;
+	case UNITAI_SCIENTIST: szString = L"scientist"; break;
+	case UNITAI_GENERAL: szString = L"general"; break;
+	case UNITAI_MERCHANT: szString = L"merchant"; break;
+	case UNITAI_ENGINEER: szString = L"engineer"; break;
+	case UNITAI_SPY: szString = L"spy"; break;
+	case UNITAI_ICBM: szString = L"icbm"; break;
+	case UNITAI_WORKER_SEA: szString = L"worker sea"; break;
+	case UNITAI_ATTACK_SEA: szString = L"attack sea"; break;
+	case UNITAI_RESERVE_SEA: szString = L"reserve sea"; break;
+	case UNITAI_ESCORT_SEA: szString = L"escort sea"; break;
+	case UNITAI_EXPLORE_SEA: szString = L"explore sea"; break;
+	case UNITAI_ASSAULT_SEA: szString = L"assault sea"; break;
+	case UNITAI_SETTLER_SEA: szString = L"settler sea"; break;
+	case UNITAI_MISSIONARY_SEA: szString = L"missionary sea"; break;
+	case UNITAI_SPY_SEA: szString = L"spy sea"; break;
+	case UNITAI_CARRIER_SEA: szString = L"carrier sea"; break;
+	case UNITAI_ATTACK_AIR: szString = L"attack air"; break;
+	case UNITAI_DEFENSE_AIR: szString = L"defense air"; break;
+	case UNITAI_CARRIER_AIR: szString = L"carrier air"; break;
+
+	default: szString = CvWString::format(L"unknown(%d)", eUnitAI); break;
 	}
 }

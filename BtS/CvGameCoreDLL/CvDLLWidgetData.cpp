@@ -2780,40 +2780,641 @@ void CvDLLWidgetData::parseChangePercentHelp(CvWidgetDataStruct &widgetDataStruc
 
 void CvDLLWidgetData::parseContactCivHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer)
 {
-	//	Do not execute this if we are trying to contact ourselves...
-	if (widgetDataStruct.m_iData1 >= MAX_PLAYERS || GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).getCivilizationType() == NO_CIVILIZATION)
+	// do not execute if player is out of range
+	PlayerTypes ePlayer = (PlayerTypes) widgetDataStruct.m_iData1;
+	if (ePlayer >= MAX_PLAYERS)
 	{
 		return;
 	}
-	if (GC.getGameINLINE().getActivePlayer() == widgetDataStruct.m_iData1)
+	
+	// do not execute if player is not a real civ
+	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	if (kPlayer.getCivilizationType() == NO_CIVILIZATION)
+	{
+		return;
+	}
+	
+	// make sure its empty to start
+	szBuffer = "";
+
+	TeamTypes eTeam = (TeamTypes) kPlayer.getTeam();
+	CvTeamAI& kTeam = GET_TEAM(eTeam);
+
+	PlayerTypes eActivePlayer = GC.getGameINLINE().getActivePlayer();
+	TeamTypes eActiveTeam = (TeamTypes) GET_PLAYER(eActivePlayer).getTeam();
+	CvTeamAI& kActiveTeam = GET_TEAM(eActiveTeam);
+	
+	// if alt down and cheat on, show extra info
+	if (gDLL->altKey() && gDLL->getChtLvl() > 0)
+	{
+		// show everyones power for the active player
+		if (eActivePlayer == ePlayer)
+		{
+			for (int iI = 0; iI < MAX_PLAYERS; iI++)
+			{
+				CvPlayer& kLoopPlayer = GET_PLAYER((PlayerTypes)iI);
+				if (kLoopPlayer.isAlive())
+				{
+					CvTeam& kLoopTeam = GET_TEAM((TeamTypes) kLoopPlayer.getTeam());
+
+					szBuffer += CvWString::format(SETCOLR L"%s(%d): %d (%d) power" ENDCOLR, TEXT_COLOR("COLOR_HIGHLIGHT_TEXT"),
+						kLoopPlayer.getName(), kLoopPlayer.getTeam(), kLoopPlayer.getPower(), kLoopTeam.getDefensivePower());
+					
+					// if in financial trouble, show that
+					if (kLoopPlayer.AI_isFinancialTrouble())
+					{
+						szBuffer += CvWString::format(SETCOLR L" ($$$)" ENDCOLR, TEXT_COLOR("COLOR_NEGATIVE_TEXT"));
+					}
+
+					szBuffer += NEWLINE;
+				}
+			}
+		}
+		// only should this one power if not active player
+		else
+		{
+			szBuffer += CvWString::format(SETCOLR L"%d (%d) power" ENDCOLR, TEXT_COLOR("COLOR_HIGHLIGHT_TEXT"), kPlayer.getPower(), kTeam.getPower(true));
+			
+			// if in financial trouble, show that
+			if (kPlayer.AI_isFinancialTrouble())
+			{
+				szBuffer += CvWString::format(SETCOLR L" ($$$)" ENDCOLR, TEXT_COLOR("COLOR_NEGATIVE_TEXT"));
+			}
+
+			szBuffer += NEWLINE;
+		}
+		
+		// skip a line
+		szBuffer += NEWLINE;
+
+		// show peace values
+		bool bHadAny = false;
+		bool bFirst = true;
+		for (int iTeamIndex = 0; iTeamIndex < MAX_TEAMS; iTeamIndex++)
+		{
+			TeamTypes eLoopTeam = (TeamTypes) iTeamIndex;
+			CvTeamAI& kLoopTeam = GET_TEAM(eLoopTeam);
+			if (eLoopTeam != eTeam && kLoopTeam.isAlive() && !kLoopTeam.isBarbarian())
+			{
+				if (kTeam.isAtWar(eLoopTeam))
+				{
+					if (bFirst)
+					{
+						szBuffer += CvWString::format(SETCOLR L"Current War:\n" ENDCOLR, TEXT_COLOR("COLOR_UNIT_TEXT"));
+						bFirst = false;
+					}
+
+					bHadAny = true;
+					
+					WarPlanTypes eWarPlan = kTeam.AI_getWarPlan(eLoopTeam);
+					CvWString szWarplan;
+					GAMETEXT.getWarplanString(szWarplan, eWarPlan);
+
+					int iOtherValue = kTeam.AI_endWarVal(eLoopTeam);
+					int iTheirValue = kLoopTeam.AI_endWarVal(eTeam);
+					
+					szBuffer += CvWString::format(SETCOLR L" %s " ENDCOLR SETCOLR L"(%d, %d)" ENDCOLR SETCOLR L" with %s " ENDCOLR  SETCOLR L"(%d, %d)\n" ENDCOLR, 
+						TEXT_COLOR((iOtherValue < iTheirValue) ? "COLOR_POSITIVE_TEXT" : "COLOR_NEGATIVE_TEXT"),
+						szWarplan.GetCString(),
+						TEXT_COLOR((iOtherValue < iTheirValue) ? "COLOR_POSITIVE_TEXT" : "COLOR_NEGATIVE_TEXT"),
+						iOtherValue, kTeam.AI_getWarSuccess(eLoopTeam),
+						TEXT_COLOR((iOtherValue < iTheirValue) ? "COLOR_POSITIVE_TEXT" : "COLOR_NEGATIVE_TEXT"),
+						kLoopTeam.getName().GetCString(),
+						TEXT_COLOR((iTheirValue < iOtherValue) ? "COLOR_POSITIVE_TEXT" : "COLOR_NEGATIVE_TEXT"),
+						iTheirValue, kLoopTeam.AI_getWarSuccess(eTeam));
+				}
+			}
+		}
+		
+		// double space if had any war
+		if (bHadAny)
+		{
+			szBuffer += NEWLINE;
+		}
+		
+		// show warplan values
+		bHadAny = false;
+		bFirst = true;
+		for (int iTeamIndex = 0; iTeamIndex < MAX_TEAMS; iTeamIndex++)
+		{
+			TeamTypes eLoopTeam = (TeamTypes) iTeamIndex;
+			CvTeamAI& kLoopTeam = GET_TEAM(eLoopTeam);
+			if (eLoopTeam != eTeam && kLoopTeam.isAlive() && !kLoopTeam.isBarbarian())
+			{
+				WarPlanTypes eWarPlan = kTeam.AI_getWarPlan(eLoopTeam);
+				if (!kTeam.isAtWar(eLoopTeam) && eWarPlan != NO_WARPLAN)
+				{
+					if (bFirst)
+					{
+						szBuffer += CvWString::format(SETCOLR L"Imminent War:\n" ENDCOLR, TEXT_COLOR("COLOR_UNIT_TEXT"));
+						bFirst = false;
+					}
+
+					bHadAny = true;
+					
+					CvWString szWarplan;
+					GAMETEXT.getWarplanString(szWarplan, eWarPlan);
+					szBuffer += CvWString::format(SETCOLR L" %s (%d) with %s\n" ENDCOLR, TEXT_COLOR("COLOR_NEGATIVE_TEXT"),
+						szWarplan.GetCString(), 
+						kTeam.AI_startWarVal(eLoopTeam), 
+						kLoopTeam.getName().GetCString());
+
+				}
+			}
+		}
+		
+		// double space if had any war plan
+		if (bHadAny)
+		{
+			szBuffer += NEWLINE;
+		}
+		
+		// calculate war percentages
+		float fOverallWarPercentage = 0;
+		bool bAggressive = GC.getGameINLINE().isOption(GAMEOPTION_AGGRESSIVE_AI);
+		
+		// team power (if agressive, we use higher value)
+		int iTeamPower = kTeam.getPower(true);
+		if (bAggressive)
+		{
+			iTeamPower *= 4;
+			iTeamPower /= 3;
+		}
+		
+		bool bIsAnyCapitalAreaAlone = kTeam.AI_isAnyCapitalAreaAlone();
+
+		int iFinancialTroubleCount = 0;
+		int iDaggerCount = 0;
+		for (int iI = 0; iI < MAX_PLAYERS; iI++)
+		{
+			if (GET_PLAYER((PlayerTypes)iI).isAlive())
+			{
+				if (GET_PLAYER((PlayerTypes)iI).getTeam() == eTeam)
+				{
+					if (GET_PLAYER((PlayerTypes)iI).AI_isDoStrategy(AI_STRATEGY_DAGGER))
+					{
+						iDaggerCount++;
+						bAggressive = true;
+					}
+					
+					if (GET_PLAYER((PlayerTypes)iI).AI_isFinancialTrouble())
+					{
+						iFinancialTroubleCount++;
+					}
+				}
+			}
+		}
+
+		// calculate unit spending for use in iTotalWarRandThreshold
+		int iNumMembers = kTeam.getNumMembers();
+		int iHighUnitSpendingPercent = 0;
+
+		for (iI = 0; iI < MAX_PLAYERS; iI++)
+		{
+			CvPlayerAI& kPlayer = GET_PLAYER((PlayerTypes) iI);
+			if (kPlayer.isAlive())
+			{
+				if (kPlayer.getTeam() == eTeam)
+				{
+					int iUnitSpendingPercent = (kPlayer.calculateUnitCost() * 100) / max(1, kPlayer.calculatePreInflatedCosts());
+					iHighUnitSpendingPercent += (max(0, iUnitSpendingPercent - 7) / 2);
+				}			
+			}
+		}
+
+		iHighUnitSpendingPercent /= iNumMembers;
+
+		// calculate war threshold
+		int iTotalWarRandThreshold = iHighUnitSpendingPercent * (GC.getGameINLINE().isOption(GAMEOPTION_AGGRESSIVE_AI) ? 4 : 2);
+		iTotalWarRandThreshold /= 3;
+
+		// if random in this range is 0, we go to war of this type (so lower numbers are higher probablity)
+		// average of everyone on our team
+		int iMaxWarRand = kTeam.AI_maxWarRand();
+	    int iLimitedWarRand = kTeam.AI_limitedWarRand();
+	    int iDogpileWarRand = kTeam.AI_dogpileWarRand();
+		
+		// we oppose war if half the non-dagger teammates in financial trouble
+		bool bFinancesOpposeWar = false;
+		if ((iFinancialTroubleCount - iDaggerCount) >= max(1, kTeam.getNumMembers() / 2 ))
+		{
+			// this can be overridden by by the pro-war booleans
+			bFinancesOpposeWar = true;
+		}
+
+		// if agressive, we may start a war to get money
+		bool bFinancesProMaxWar = false;
+		bool bFinancesProLimitedWar = false;
+		bool bFinancesProDogpileWar = false;
+		if (iFinancialTroubleCount > 0)
+		{
+			// do we like all out wars?
+			if (iDaggerCount > 0 || iMaxWarRand < 100)
+			{
+				bFinancesProMaxWar = true;
+			}
+
+			// do we like limited wars?
+			if (iLimitedWarRand < 100)
+			{
+				bFinancesProLimitedWar = true;
+			}
+			
+			// do we like dogpile wars?
+			if (iDogpileWarRand < 100)
+			{
+				bFinancesProDogpileWar = true;
+			}
+		}
+		bool bFinancialProWar = (bFinancesProMaxWar || bFinancesProLimitedWar || bFinancesProDogpileWar);
+		
+		// overall war check (quite frequently true)
+		if (bFinancialProWar || !bFinancesOpposeWar)
+		{
+			fOverallWarPercentage = (float) GC.getHandicapInfo(GC.getGameINLINE().getHandicapType()).getAIDeclareWarProb();
+			
+			// if non-agressive, random based on number of cities (the more cities, the less war)
+			if (!(bAggressive || bFinancialProWar))
+			{
+				fOverallWarPercentage /= kTeam.getNumCities();
+			}
+		}
+		
+		// we will put the values into an array, then sort it for display
+		int iBestPossibleMaxWarPass = MAX_INT;
+		struct CvStartWarInfo
+		{
+			int		iStartWarValue;
+			int		iNoWarAttitudeProb;
+			int		iPossibleMaxWarPass;
+			bool	bPossibleLimitedWar;
+			bool	bPossibleDogpileWar;
+
+			bool	bValid;
+			bool	bIsLandTarget;
+			bool	bIsAnyCapitalAreaAlone;
+			bool	bAdjacentCheckPassed;
+			bool	bIsMaxWarNearbyPowerRatio;
+			bool	bIsMaxWarDistantPowerRatio;
+		} aStartWarInfo[MAX_TEAMS];
+		
+		// first calculate all the values and put into array
+		for (int iTeamIndex = 0; iTeamIndex < MAX_TEAMS; iTeamIndex++)
+		{
+			aStartWarInfo[iTeamIndex].bValid = false;
+			
+			TeamTypes eLoopTeam = (TeamTypes) iTeamIndex;
+			CvTeamAI& kLoopTeam = GET_TEAM(eLoopTeam);
+			if (eLoopTeam != eTeam && kLoopTeam.isAlive() && !kLoopTeam.isBarbarian())
+			{
+				WarPlanTypes eWarPlan = kTeam.AI_getWarPlan(eLoopTeam);
+				if (!kTeam.isAtWar(eLoopTeam) && (eWarPlan == NO_WARPLAN))
+				{
+					if (kTeam.canDeclareWar(eLoopTeam) && kTeam.isHasMet(eLoopTeam))
+					{
+						aStartWarInfo[iTeamIndex].bValid = true;
+						
+						int iLoopTeamPower = kLoopTeam.getDefensivePower();
+						bool bIsLandTarget = kTeam.AI_isLandTarget(eLoopTeam);
+						aStartWarInfo[iTeamIndex].bIsLandTarget = bIsLandTarget; 
+
+						int iNoWarAttitudeProb = kTeam.AI_noWarAttitudeProb(kTeam.AI_getAttitude(eLoopTeam));
+						aStartWarInfo[iTeamIndex].iNoWarAttitudeProb = iNoWarAttitudeProb;
+
+						// total war
+						aStartWarInfo[iTeamIndex].iPossibleMaxWarPass = MAX_INT;
+						if (iNoWarAttitudeProb < 100 && (bFinancesProMaxWar || !bFinancesOpposeWar))
+						{
+							int iNoWarChance = max(0, iNoWarAttitudeProb - (bAggressive ? 10 : 0) - (bFinancesProMaxWar ? 10 : 0));
+							if (iNoWarChance < 100)
+							{
+								bool bIsMaxWarNearbyPowerRatio = (iLoopTeamPower < ((iTeamPower * kTeam.AI_maxWarNearbyPowerRatio()) / 100));
+								bool bIsMaxWarDistantPowerRatio = (iLoopTeamPower < ((iTeamPower * kTeam.AI_maxWarDistantPowerRatio()) / 100));
+								aStartWarInfo[iTeamIndex].bIsMaxWarNearbyPowerRatio = bIsMaxWarNearbyPowerRatio;
+								aStartWarInfo[iTeamIndex].bIsMaxWarDistantPowerRatio = bIsMaxWarDistantPowerRatio;
+
+								bool bAdjacentCheckPassed = true;
+								int iMaxWarMinAdjacentPercent = kTeam.AI_maxWarMinAdjacentLandPercent();
+								if (iMaxWarMinAdjacentPercent > 0)
+								{
+									int iMinAdjacentPlots = ((kTeam.getTotalLand() * iMaxWarMinAdjacentPercent) / 100);
+									if (iMinAdjacentPlots > 0)
+									{
+										bAdjacentCheckPassed = (kTeam.AI_calculateAdjacentLandPlots(eLoopTeam) >= iMinAdjacentPlots);
+									}
+								}
+								aStartWarInfo[iTeamIndex].bAdjacentCheckPassed = bAdjacentCheckPassed;
+
+								// check to see which mass war pass, if any is valid for this loop team
+								int iPossibleMaxWarPass = MAX_INT;
+								if (bIsMaxWarNearbyPowerRatio && bAdjacentCheckPassed)
+								{
+									iPossibleMaxWarPass = 0;
+								}
+								else if (bIsMaxWarNearbyPowerRatio && (bIsLandTarget || bIsAnyCapitalAreaAlone))
+								{
+									iPossibleMaxWarPass = 1;
+								}
+
+								else if (bIsMaxWarDistantPowerRatio)
+								{
+									iPossibleMaxWarPass = 2;
+								}
+								aStartWarInfo[iTeamIndex].iPossibleMaxWarPass = iPossibleMaxWarPass;
+								
+								// if this team is valid on a lower pass, then it is the best pass
+								if (iPossibleMaxWarPass < iBestPossibleMaxWarPass)
+								{
+									iBestPossibleMaxWarPass = iPossibleMaxWarPass;
+								}
+							}
+						}
+
+						// limited war
+						aStartWarInfo[iTeamIndex].bPossibleLimitedWar = false;
+						if (iNoWarAttitudeProb < 100 && (bFinancesProLimitedWar || !bFinancesOpposeWar))
+						{
+							int iNoWarChance = max(0, iNoWarAttitudeProb + 10 - (bAggressive ? 10 : 0) - (bFinancesProLimitedWar ? 10 : 0));
+							if (iNoWarChance < 100)
+							{
+								bool bIsLimitedPowerRatio = (iLoopTeamPower < ((iTeamPower * kTeam.AI_limitedWarPowerRatio()) / 100));
+								bool bIsAnyLoopTeamCapitalAreaAlone = kLoopTeam.AI_isAnyCapitalAreaAlone();
+								
+								if (bIsLimitedPowerRatio && (bIsLandTarget || (bIsAnyCapitalAreaAlone && bIsAnyLoopTeamCapitalAreaAlone)))
+								{
+									aStartWarInfo[iTeamIndex].bPossibleLimitedWar = true;
+								}
+							}
+						}
+
+						// dogpile war
+						aStartWarInfo[iTeamIndex].bPossibleDogpileWar = false;
+						if (iNoWarAttitudeProb < 100 && (bFinancesProDogpileWar || !bFinancesOpposeWar))
+						{
+							int iNoWarChance = max(0, iNoWarAttitudeProb + 20 - (bAggressive ? 10 : 0) - (bFinancesProDogpileWar ? 10 : 0));
+							if (iNoWarChance < 100)
+							{
+								int iDogpilePower = 0;
+								for (int iTeamIndex2 = 0; iTeamIndex2 < MAX_CIV_TEAMS; iTeamIndex2++)
+								{
+									TeamTypes eDogpileLoopTeam = (TeamTypes) iTeamIndex2;
+									CvTeamAI& kDogpileLoopTeam = GET_TEAM(eDogpileLoopTeam);
+									if (kDogpileLoopTeam.isAlive())
+									{
+										if (eDogpileLoopTeam != eLoopTeam)
+										{
+											if (atWar(eDogpileLoopTeam, eLoopTeam))
+											{
+												iDogpilePower += kDogpileLoopTeam.getPower(false);
+											}
+										}
+									}
+								}
+
+								bool bIsDogpilePowerRatio = (((iLoopTeamPower * 3) / 2) < iDogpilePower);
+								
+								if (bIsDogpilePowerRatio)
+								{
+									aStartWarInfo[iTeamIndex].bPossibleDogpileWar = true;
+								}
+							}
+						}
+						
+						// if this team can have any war, calculate the start war value
+						aStartWarInfo[iTeamIndex].iStartWarValue = 0;
+						if (aStartWarInfo[iTeamIndex].iPossibleMaxWarPass < MAX_INT || aStartWarInfo[iTeamIndex].bPossibleLimitedWar || aStartWarInfo[iTeamIndex].bPossibleDogpileWar)
+						{
+							aStartWarInfo[iTeamIndex].iStartWarValue = kTeam.AI_startWarVal(eLoopTeam);
+						}
+					}
+				}
+			}
+		}
+
+		// display total war items, sorting the list
+		bHadAny = false;
+		bFirst = true;
+		int iBestValue;
+		int iLastValue = MAX_INT;
+		do
+		{
+			// find the highest value item left to do
+			iBestValue = 0;
+			for (int iTeamIndex = 0; iTeamIndex < MAX_TEAMS; iTeamIndex++)
+			{
+				if (aStartWarInfo[iTeamIndex].bValid && aStartWarInfo[iTeamIndex].iPossibleMaxWarPass < MAX_INT)
+				{
+					if (aStartWarInfo[iTeamIndex].iStartWarValue > iBestValue && aStartWarInfo[iTeamIndex].iStartWarValue < iLastValue)
+					{
+						iBestValue = aStartWarInfo[iTeamIndex].iStartWarValue;
+					}
+				}
+			}
+			
+			// did we find one?
+			if (iBestValue > 0)
+			{
+				// setup for next loop
+				iLastValue = iBestValue;
+
+				// now display every team that has that value
+				for (int iTeamIndex = 0; iTeamIndex < MAX_TEAMS; iTeamIndex++)
+				{
+					if (aStartWarInfo[iTeamIndex].bValid && aStartWarInfo[iTeamIndex].iStartWarValue == iBestValue)
+					{
+						CvTeamAI& kLoopTeam = GET_TEAM((TeamTypes) iTeamIndex);
+
+						if (bFirst)
+						{
+							float fMaxWarPercentage = (fOverallWarPercentage * (iTotalWarRandThreshold + 1)) / iMaxWarRand;
+							szBuffer += CvWString::format(SETCOLR L"%.2f%% [%d/%d] Total War:\n" ENDCOLR, TEXT_COLOR("COLOR_UNIT_TEXT"), fMaxWarPercentage, (iTotalWarRandThreshold + 1), iMaxWarRand);
+							bFirst = false;
+						}
+
+						bHadAny = true;
+						
+						int iNoWarChance = max(0, aStartWarInfo[iTeamIndex].iNoWarAttitudeProb - (bAggressive ? 10 : 0) - (bFinancesProMaxWar ? 10 : 0));
+						int iTeamWarPercentage = (100 - iNoWarChance);
+						
+						if (aStartWarInfo[iTeamIndex].iPossibleMaxWarPass <= iBestPossibleMaxWarPass)
+						{
+							szBuffer += CvWString::format(SETCOLR L" %d%% %s war (%d) with %s\n" ENDCOLR, TEXT_COLOR("COLOR_ALT_HIGHLIGHT_TEXT"),
+								iTeamWarPercentage,
+								(aStartWarInfo[iTeamIndex].bIsLandTarget) ? L"land" : L"sea",
+								aStartWarInfo[iTeamIndex].iStartWarValue, 
+								kLoopTeam.getName().GetCString());
+						}
+						else
+						{
+							szBuffer += CvWString::format(SETCOLR L" (%d%% %s war (%d) with %s [%s%s])\n" ENDCOLR, TEXT_COLOR("COLOR_HIGHLIGHT_TEXT"),
+								iTeamWarPercentage,
+								(aStartWarInfo[iTeamIndex].bIsLandTarget) ? L"land" : L"sea",
+								aStartWarInfo[iTeamIndex].iStartWarValue, 
+								kLoopTeam.getName().GetCString(),
+								(iBestPossibleMaxWarPass == 0) ? ((aStartWarInfo[iTeamIndex].bIsMaxWarNearbyPowerRatio) ? L"not adjacent" : L"low power") : L"",
+								(iBestPossibleMaxWarPass == 1) ? ((aStartWarInfo[iTeamIndex].bIsMaxWarNearbyPowerRatio) ? L"not land" : L"low power") : L"");
+						}
+					}
+				}
+			}
+		}
+		while (iBestValue > 0);
+
+		// double space if had any war
+		if (bHadAny)
+		{
+			szBuffer += NEWLINE;
+		}
+		
+		// display limited war items, sorting the list
+		bHadAny = false;
+		bFirst = true;
+		iLastValue = MAX_INT;
+		do
+		{
+			// find the highest value item left to do
+			iBestValue = 0;
+			for (int iTeamIndex = 0; iTeamIndex < MAX_TEAMS; iTeamIndex++)
+			{
+				if (aStartWarInfo[iTeamIndex].bValid && aStartWarInfo[iTeamIndex].bPossibleLimitedWar)
+				{
+					if (aStartWarInfo[iTeamIndex].iStartWarValue > iBestValue && aStartWarInfo[iTeamIndex].iStartWarValue < iLastValue)
+					{
+						iBestValue = aStartWarInfo[iTeamIndex].iStartWarValue;
+					}
+				}
+			}
+			
+			// did we find one?
+			if (iBestValue > 0)
+			{
+				// setup for next loop
+				iLastValue = iBestValue;
+
+				// now display every team that has that value
+				for (int iTeamIndex = 0; iTeamIndex < MAX_TEAMS; iTeamIndex++)
+				{
+					if (aStartWarInfo[iTeamIndex].bValid && aStartWarInfo[iTeamIndex].iStartWarValue == iBestValue)
+					{
+						if (bFirst)
+						{
+							float fLimitedWarPercentage = fOverallWarPercentage / iLimitedWarRand;
+							szBuffer += CvWString::format(SETCOLR L"%.2f%% Limited War:\n" ENDCOLR, TEXT_COLOR("COLOR_UNIT_TEXT"), fLimitedWarPercentage);
+							bFirst = false;
+						}
+
+						bHadAny = true;
+						
+						int iNoWarChance = max(0, aStartWarInfo[iTeamIndex].iNoWarAttitudeProb + 10 - (bAggressive ? 10 : 0) - (bFinancesProLimitedWar ? 10 : 0));
+						int iTeamWarPercentage = (100 - iNoWarChance);
+						
+						szBuffer += CvWString::format(SETCOLR L" %d%% %s war (%d) with %s\n" ENDCOLR, TEXT_COLOR("COLOR_ALT_HIGHLIGHT_TEXT"),
+							iTeamWarPercentage,
+							(aStartWarInfo[iTeamIndex].bIsLandTarget) ? L"land" : L"sea",
+							aStartWarInfo[iTeamIndex].iStartWarValue, 
+							GET_TEAM((TeamTypes) iTeamIndex).getName().GetCString());
+					}
+				}
+			}
+		}
+		while (iBestValue > 0);
+
+		// double space if had any war
+		if (bHadAny)
+		{
+			szBuffer += NEWLINE;
+		}
+		
+		// display dogpile war items, sorting the list
+		bHadAny = false;
+		bFirst = true;
+		iLastValue = MAX_INT;
+		do
+		{
+			// find the highest value item left to do
+			iBestValue = 0;
+			for (int iTeamIndex = 0; iTeamIndex < MAX_TEAMS; iTeamIndex++)
+			{
+				if (aStartWarInfo[iTeamIndex].bValid && aStartWarInfo[iTeamIndex].bPossibleDogpileWar)
+				{
+					if (aStartWarInfo[iTeamIndex].iStartWarValue > iBestValue && aStartWarInfo[iTeamIndex].iStartWarValue < iLastValue)
+					{
+						iBestValue = aStartWarInfo[iTeamIndex].iStartWarValue;
+					}
+				}
+			}
+			
+			// did we find one?
+			if (iBestValue > 0)
+			{
+				// setup for next loop
+				iLastValue = iBestValue;
+
+				// now display every team that has that value
+				for (int iTeamIndex = 0; iTeamIndex < MAX_TEAMS; iTeamIndex++)
+				{
+					if (aStartWarInfo[iTeamIndex].bValid && aStartWarInfo[iTeamIndex].iStartWarValue == iBestValue)
+					{
+						if (bFirst)
+						{
+							float fDogpileWarPercentage = fOverallWarPercentage / iDogpileWarRand;
+							szBuffer += CvWString::format(SETCOLR L"%.2f%% Dogpile War:\n" ENDCOLR, TEXT_COLOR("COLOR_UNIT_TEXT"), fDogpileWarPercentage);
+							bFirst = false;
+						}
+
+						bHadAny = true;
+						
+						int iNoWarChance = max(0, aStartWarInfo[iTeamIndex].iNoWarAttitudeProb + 20 - (bAggressive ? 10 : 0) - (bFinancesProDogpileWar ? 10 : 0));
+						int iTeamWarPercentage = (100 - iNoWarChance);
+						
+						szBuffer += CvWString::format(SETCOLR L" %d%% %s war (%d) with %s\n" ENDCOLR, TEXT_COLOR("COLOR_ALT_HIGHLIGHT_TEXT"),
+							iTeamWarPercentage,
+							(aStartWarInfo[iTeamIndex].bIsLandTarget) ? L"land" : L"sea",
+							aStartWarInfo[iTeamIndex].iStartWarValue, 
+							GET_TEAM((TeamTypes) iTeamIndex).getName().GetCString());
+					}
+				}
+			}
+		}
+		while (iBestValue > 0);
+
+		// double space if had any war
+		if (bHadAny)
+		{
+			szBuffer += NEWLINE;
+		}
+	}
+
+	//	Show score info instead if we are trying to contact ourselves...
+	if (eActivePlayer == ePlayer)
 	{
 		parseScoreHelp(widgetDataStruct, szBuffer);
 		return;
 	}
 
-	szBuffer = gDLL->getText("TXT_KEY_MISC_CONTACT_LEADER", GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).getNameKey(), GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).getCivilizationShortDescription());
+	szBuffer += gDLL->getText("TXT_KEY_MISC_CONTACT_LEADER", kPlayer.getNameKey(), kPlayer.getCivilizationShortDescription());
 
-	if (!(GET_TEAM(GC.getGameINLINE().getActiveTeam()).isHasMet(GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).getTeam())))
+	if (!(kActiveTeam.isHasMet(eTeam)))
 	{
 		szBuffer += NEWLINE + gDLL->getText("TXT_KEY_MISC_HAVENT_MET_CIV");
 	}
 	else
 	{
-		if (!(GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).isHuman()))
+		if (!(kPlayer.isHuman()))
 		{
-			if (!(GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).AI_isWillingToTalk(GC.getGameINLINE().getActivePlayer())))
+			if (!(kPlayer.AI_isWillingToTalk(eActivePlayer)))
 			{
 				szBuffer += NEWLINE + gDLL->getText("TXT_KEY_MISC_REFUSES_TO_TALK");
 			}
 
 			szBuffer += NEWLINE;
-			GAMETEXT.getAttitudeString(szBuffer, ((PlayerTypes)widgetDataStruct.m_iData1), GC.getGameINLINE().getActivePlayer());
+			GAMETEXT.getAttitudeString(szBuffer, ePlayer, eActivePlayer);
 			szBuffer += NEWLINE + gDLL->getText("TXT_KEY_MISC_CTRL_TRADE");
 		}
 
-		if ((GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).getTeam() != GC.getGameINLINE().getActiveTeam()) && !(GET_TEAM(GC.getGameINLINE().getActiveTeam()).isAtWar(GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).getTeam())))
+		if (eTeam != eActiveTeam && !(kActiveTeam.isAtWar(eTeam)))
 		{
-			if (GET_TEAM(GC.getGameINLINE().getActiveTeam()).canDeclareWar(GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).getTeam()))
+			if (kActiveTeam.canDeclareWar(eTeam))
 			{
 				szBuffer += NEWLINE + gDLL->getText("TXT_KEY_MISC_ALT_DECLARE_WAR");
 			}
@@ -2824,7 +3425,7 @@ void CvDLLWidgetData::parseContactCivHelp(CvWidgetDataStruct &widgetDataStruct, 
 		}
 	}
 
-	if (GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).isHuman())
+	if (kPlayer.isHuman())
 	{
 //		szBuffer += "\n(<SHIFT> to Send Chat Message)";
 		szBuffer += NEWLINE + gDLL->getText("TXT_KEY_MISC_SHIFT_SEND_CHAT");
@@ -3258,6 +3859,13 @@ void CvDLLWidgetData::parsePopulationHelp(CvWidgetDataStruct &widgetDataStruct, 
 	if (pHeadSelectedCity != NULL)
 	{
 		szBuffer = gDLL->getText("TXT_KEY_MISC_FOOD_THRESHOLD", pHeadSelectedCity->getFood(), pHeadSelectedCity->growthThreshold());
+
+		// if chipotle and alt key down, show extra info
+		if (gDLL->altKey() && gDLL->getChtLvl() > 0)
+		{
+			szBuffer += NEWLINE;
+			GAMETEXT.setCityWorkMatrixString(szBuffer, pHeadSelectedCity);
+		}
 	}
 }
 
@@ -3273,6 +3881,13 @@ void CvDLLWidgetData::parseProductionHelp(CvWidgetDataStruct &widgetDataStruct, 
 		if (pHeadSelectedCity->getProductionNeeded() != MAX_INT)
 		{
 			szBuffer.Format(L"%s: %d/%d %c", pHeadSelectedCity->getProductionName(), pHeadSelectedCity->getProduction(), pHeadSelectedCity->getProductionNeeded(), GC.getYieldInfo(YIELD_PRODUCTION).getChar());
+		}
+
+		// if chipotle and alt key down, show extra info
+		if (gDLL->altKey() && gDLL->getChtLvl() > 0)
+		{
+			szBuffer += NEWLINE;
+			GAMETEXT.setCityWorkMatrixString(szBuffer, pHeadSelectedCity);
 		}
 	}
 }

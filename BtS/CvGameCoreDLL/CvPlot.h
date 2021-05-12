@@ -20,6 +20,9 @@ class CvFeature;
 class CvUnit;
 class CvSymbol;
 class CvFlagEntity;
+class CvExtraSaveData;
+class CvPlotRegion;
+class CvPlotDataRegion;
 
 typedef bool (*ConstPlotUnitFunc)( const CvUnit* pUnit, int iData1, int iData2);
 typedef bool (*PlotUnitFunc)(CvUnit* pUnit, int iData1, int iData2);
@@ -76,6 +79,7 @@ public:
 	DllExport bool isAdjacentPlotGroupConnectedBonus(PlayerTypes ePlayer, BonusTypes eBonus) const;				// Exposed to Python
 	void updatePlotGroupBonus(bool bAdd);
 
+	bool isAdjacentToArea(int iAreaID) const;
 	bool isAdjacentToArea(const CvArea* pArea) const;																						// Exposed to Python
 	bool shareAdjacentArea( const CvPlot* pPlot) const;																					// Exposed to Python
 	bool isAdjacentToLand() const;																															// Exposed to Python 
@@ -107,6 +111,12 @@ public:
 	void updateSight(bool bIncrement);
 	void updateSeeFromSight(bool bIncrement);
 
+	void addVisiblePlots(CvPlotRegion& visiblePlots, int iRange, TeamTypes eTeam) const;
+	void addVisiblePlots(CvPlotDataRegion& visiblePlots, int iRange, int iObserverCount, TeamTypes eTeam) const;
+	
+	void buildVisibilityRegion(CvPlotRegion& visiblePlots, TeamTypes eTeam) const;
+	void buildVisibilityRegion(CvPlotDataRegion& visiblePlots, TeamTypes eTeam) const;
+
 	DllExport bool canHaveBonus(BonusTypes eBonus, bool bIgnoreLatitude = false) const;																						// Exposed to Python
 	DllExport bool canHaveImprovement(ImprovementTypes eImprovement, TeamTypes eTeam = NO_TEAM, bool bPotential = false) const;		// Exposed to Python
 
@@ -116,6 +126,7 @@ public:
 	DllExport int getFeatureProduction(BuildTypes eBuild, TeamTypes eTeam, CvCity** ppCity) const;																// Exposed to Python
 
 	DllExport CvUnit* getBestDefender(PlayerTypes eOwner, PlayerTypes eAttackingPlayer = NO_PLAYER, const CvUnit* pAttacker = NULL, bool bTestAtWar = false, bool bTestPotentialEnemy = false, bool bTestCanMove = false) const;		// Exposed to Python
+	int AI_sumStrength(PlayerTypes eOwner, PlayerTypes eAttackingPlayer = NO_PLAYER, DomainTypes eDomainType = NO_DOMAIN, bool bDefensiveBonuses = true, bool bTestAtWar = false, bool bTestPotentialEnemy = false) const;	
 	CvUnit* getSelectedUnit() const;																																// Exposed to Python				
 	int getUnitPower(PlayerTypes eOwner = NO_PLAYER) const;																					// Exposed to Python				
 
@@ -350,6 +361,8 @@ public:
 	int getStolenVisibilityCount(TeamTypes eTeam) const;																								// Exposed to Python
 	void changeStolenVisibilityCount(TeamTypes eTeam, int iChange);
 
+	void clearAllVisibility();
+
 	DllExport PlayerTypes getRevealedOwner(TeamTypes eTeam, bool bDebug) const;													// Exposed to Python
 	DllExport TeamTypes getRevealedTeam(TeamTypes eTeam, bool bDebug) const;														// Exposed to Python
 	void setRevealedOwner(TeamTypes eTeam, PlayerTypes eNewValue);
@@ -515,6 +528,12 @@ protected:
 	void processArea(CvArea* pArea, int iChange);
 
 	ColorTypes plotMinimapColor();
+	
+	// let CvExtraSaveData read m_aiFoundValue directly
+	friend CvExtraSaveData;
+
+	// added so under cheat mode we can access protected stuff
+	friend class CvGameTextMgr;
 };
 
 #endif

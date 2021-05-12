@@ -233,6 +233,7 @@ public:
 
 	DllExport bool isCircumnavigated() const;																// Exposed to Python
 	DllExport void makeCircumnavigated();																		// Exposed to Python
+	bool circumnavigationAvailable() const;
 
 	DllExport bool isDiploVote() const;																			// Exposed to Python
 	DllExport void makeDiploVote();																					// Exposed to Python
@@ -542,6 +543,35 @@ protected:
 	void normalizeAddExtras();
 
 	void showEndGameSequence();
+
+// CACHE: cache frequently used values
+///////////////////////////////////////
+public:
+	int getShrineBuildingCount(ReligionTypes eReligion = NO_RELIGION);
+	BuildingTypes getShrineBuilding(int eIndex, ReligionTypes eReligion = NO_RELIGION);
+	void changeShrineBuilding(BuildingTypes eBuilding, ReligionTypes eReligion, bool bRemove = false);
+
+	bool culturalVictoryValid();
+	int culturalVictoryNumCultureCities();
+	CultureLevelTypes culturalVictoryCultureLevel();
+
+protected:
+	CvPlot* normalizeFindLakePlot(PlayerTypes ePlayer);
+
+	int		m_iShrineBuildingCount;
+	int*	m_aiShrineBuilding;
+	int*	m_aiShrineReligion;
+
+	int		m_iNumCultureVictoryCities;
+	int		m_eCultureVictoryCultureLevel;
+
+	void constructCache();	// called from constructor
+	void destructCache();	// called from destructor
+	void initCache();
+	void uninitCache();
+	void resetCache(bool bConstructorCall = false);
+
+	void doUpdateCacheOnTurn();
 
 };
 

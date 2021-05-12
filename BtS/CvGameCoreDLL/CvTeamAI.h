@@ -5,6 +5,8 @@
 
 #include "CvTeam.h"
 
+class CvExtraSaveData;
+
 class CvTeamAI : public CvTeam
 {
 
@@ -139,6 +141,8 @@ public:
 	bool AI_isSneakAttackPreparing(TeamTypes eIndex) const;
 	bool AI_isSneakAttackReady(TeamTypes eIndex) const;
 	void AI_setWarPlan(TeamTypes eIndex, WarPlanTypes eNewValue);
+	
+	int AI_teamCloseness(TeamTypes eIndex, int iMaxDistance = -1) const;
 
 	virtual void read(FDataStreamBase* pStream);
 	virtual void write(FDataStreamBase* pStream);
@@ -177,6 +181,12 @@ protected:
 	void AI_doCounter();
 	void AI_doWar();
 
+	void writeExtraSaveData(CvExtraSaveData& extraSaveData);
+	friend CvExtraSaveData;
+
+	// added so under cheat mode we can call protected functions for testing
+	friend class CvGameTextMgr;
+	friend class CvDLLWidgetData;
 };
 
 // helper for accessing static functions

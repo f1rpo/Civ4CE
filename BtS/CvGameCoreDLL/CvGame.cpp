@@ -22,12 +22,19 @@
 #include "FProfiler.h"
 #include "CvReplayInfo.h"
 #include "CyPlot.h"
+#include "CvGameTextMgr.h"
 
 // interface uses
 #include "CvDLLInterfaceIFaceBase.h"
 #include "CvDLLEngineIFaceBase.h"
 #include "CvDLLEventReporterIFaceBase.h"
 #include "CvDLLPythonIFaceBase.h"
+
+// for testing only
+#ifndef FINAL_RELEASE
+//#define DEBUG_OUT_OF_SYNCS
+#endif
+
 
 // Public Functions...
 
@@ -66,6 +73,8 @@ CvGame::CvGame()
 
 	m_pReplayInfo = NULL;
 
+	constructCache();
+
 	reset(NO_HANDICAP, true);
 }
 
@@ -73,6 +82,8 @@ CvGame::CvGame()
 CvGame::~CvGame()
 {
 	uninit();
+
+	destructCache();
 
 	SAFE_DELETE_ARRAY(m_aiEndTurnMessagesReceived);
 	SAFE_DELETE_ARRAY(m_aiRankPlayer);
@@ -260,6 +271,8 @@ void CvGame::init(HandicapTypes eHandicap)
 	}
 
 	AI_init();
+
+	initCache();
 }
 
 //
@@ -340,6 +353,8 @@ void CvGame::regenerateMap()
 void CvGame::uninit()
 {
 	int iI;
+
+	uninitCache();
 
 	SAFE_DELETE_ARRAY(m_paiUnitCreatedCount);
 	SAFE_DELETE_ARRAY(m_paiUnitClassCreatedCount);
@@ -537,6 +552,8 @@ void CvGame::reset(HandicapTypes eHandicap, bool bConstructorCall)
 	{
 		AI_reset();
 	}
+
+	resetCache(bConstructorCall);
 }
 
 
@@ -967,7 +984,16 @@ void CvGame::normalizeAddRiver()
 			{
 				if (!pStartingPlot->isFreshWater())
 				{
-					CvMapGenerator::GetInstance().doRiver(pStartingPlot);
+					// if we will be able to add a lake, then use old river code
+					if (normalizeFindLakePlot((PlayerTypes)iI) != NULL)
+					{
+						CvMapGenerator::GetInstance().doRiver(pStartingPlot);
+					}
+					// otherwise, use new river code which is much more likely to succeed
+					else
+					{
+						CvMapGenerator::GetInstance().addRiver(pStartingPlot);
+					}
 				}
 			}
 		}
@@ -1013,58 +1039,64 @@ void CvGame::normalizeRemovePeaks()
 	}
 }
 
-
 void CvGame::normalizeAddLakes()
 {
-	CvPlot* pStartingPlot;
-	CvPlot* pLoopPlot;
-	bool bStartingPlot;
-	int iI, iJ, iK;
-
-	for (iI = 0; iI < MAX_CIV_PLAYERS; iI++)
+	for (int iI = 0; iI < MAX_CIV_PLAYERS; iI++)
 	{
 		if (GET_PLAYER((PlayerTypes)iI).isAlive())
 		{
-			pStartingPlot = GET_PLAYER((PlayerTypes)iI).getStartingPlot();
-
-			if (pStartingPlot != NULL)
+			CvPlot* pLakePlot = normalizeFindLakePlot((PlayerTypes)iI);
+			if (pLakePlot != NULL)
 			{
-				if (!(pStartingPlot->isFreshWater()))
+				pLakePlot->setPlotType(PLOT_OCEAN);
+			}
+		}
+	}
+}
+
+CvPlot* CvGame::normalizeFindLakePlot(PlayerTypes ePlayer)
+{
+	if (!GET_PLAYER(ePlayer).isAlive())
+	{
+		return NULL;
+	}
+
+	CvPlot* pStartingPlot = GET_PLAYER(ePlayer).getStartingPlot();
+	if (pStartingPlot != NULL)
+	{
+		if (!(pStartingPlot->isFreshWater()))
+		{
+			for (int iJ = 0; iJ < NUM_CITY_PLOTS; iJ++)
+			{
+				CvPlot* pLoopPlot = plotCity(pStartingPlot->getX_INLINE(), pStartingPlot->getY_INLINE(), iJ);
+
+				if (pLoopPlot != NULL)
 				{
-					for (iJ = 0; iJ < NUM_CITY_PLOTS; iJ++)
+					if (!(pLoopPlot->isWater()))
 					{
-						pLoopPlot = plotCity(pStartingPlot->getX_INLINE(), pStartingPlot->getY_INLINE(), iJ);
-
-						if (pLoopPlot != NULL)
+						if (!(pLoopPlot->isCoastalLand()))
 						{
-							if (!(pLoopPlot->isWater()))
+							if (!(pLoopPlot->isRiver()))
 							{
-								if (!(pLoopPlot->isCoastalLand()))
+								if (pLoopPlot->getBonusType() == NO_BONUS)
 								{
-									if (!(pLoopPlot->isRiver()))
+									bool bStartingPlot = false;
+
+									for (int iK = 0; iK < MAX_CIV_PLAYERS; iK++)
 									{
-										if (pLoopPlot->getBonusType() == NO_BONUS)
+										if (GET_PLAYER((PlayerTypes)iK).isAlive())
 										{
-											bStartingPlot = false;
-
-											for (iK = 0; iK < MAX_CIV_PLAYERS; iK++)
+											if (GET_PLAYER((PlayerTypes)iK).getStartingPlot() == pLoopPlot)
 											{
-												if (GET_PLAYER((PlayerTypes)iK).isAlive())
-												{
-													if (GET_PLAYER((PlayerTypes)iK).getStartingPlot() == pLoopPlot)
-													{
-														bStartingPlot = true;
-														break;
-													}
-												}
-											}
-
-											if (!bStartingPlot)
-											{
-												pLoopPlot->setPlotType(PLOT_OCEAN);
+												bStartingPlot = true;
 												break;
 											}
 										}
+									}
+
+									if (!bStartingPlot)
+									{
+										return pLoopPlot;
 									}
 								}
 							}
@@ -1074,6 +1106,8 @@ void CvGame::normalizeAddLakes()
 			}
 		}
 	}
+
+	return NULL;
 }
 
 
@@ -1108,7 +1142,48 @@ void CvGame::normalizeRemoveBadFeatures()
 					}
 				}
 			}
-		}
+			
+			int iX, iY;
+            int iCityRange = CITY_PLOTS_RADIUS;
+            int iExtraRange = 2;
+            int iMaxRange = iCityRange + iExtraRange;
+			
+            for (iX = -iMaxRange; iX <= iMaxRange; iX++)
+            {
+                for (iY = -iMaxRange; iY <= iMaxRange; iY++)
+                {
+                    pLoopPlot = plotXY(pStartingPlot->getX_INLINE(), pStartingPlot->getY_INLINE(), iX, iY);
+                    if (pLoopPlot != NULL)
+                    {
+                        int iDistance = plotDistance(pStartingPlot->getX_INLINE(), pStartingPlot->getY_INLINE(), pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE());			
+                        if (iDistance <= iMaxRange)
+                        {
+                            if (pLoopPlot->getFeatureType() != NO_FEATURE)
+                            {
+                                if ((GC.getFeatureInfo(pLoopPlot->getFeatureType()).getYieldChange(YIELD_FOOD) <= 0) &&
+                                    (GC.getFeatureInfo(pLoopPlot->getFeatureType()).getYieldChange(YIELD_PRODUCTION) <= 0))
+                                {
+                                    if (pLoopPlot->isWater())
+                                    {
+                                        if (pLoopPlot->isAdjacentToLand() || (!(iDistance == iMaxRange) && (getSorenRandNum(2, "Remove Bad Feature") == 0)))
+                                        {
+                                            pLoopPlot->setFeatureType(NO_FEATURE);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (!(iDistance == iMaxRange) && (getSorenRandNum((2 + (pLoopPlot->getBonusType() == NO_BONUS) ? 0 : 2), "Remove Bad Feature") == 0))
+                                        {
+                                            pLoopPlot->setFeatureType(NO_FEATURE);                                            
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 	}
 }
 
@@ -1117,7 +1192,18 @@ void CvGame::normalizeRemoveBadTerrain()
 {
 	CvPlot* pStartingPlot;
 	CvPlot* pLoopPlot;
-	int iI, iJ, iK;
+	int iI, iK;
+	int iX, iY;
+	
+	int iTargetFood;
+	int iTargetTotal;
+	int iPlotFood;
+	int iPlotProduction;
+	
+	
+	int iCityRange = CITY_PLOTS_RADIUS;
+	int iExtraRange = 1;
+	int iMaxRange = iCityRange + iExtraRange;
 
 	for (iI = 0; iI < MAX_CIV_PLAYERS; iI++)
 	{
@@ -1127,32 +1213,60 @@ void CvGame::normalizeRemoveBadTerrain()
 
 			if (pStartingPlot != NULL)
 			{
-				for (iJ = 0; iJ < NUM_CITY_PLOTS; iJ++)
-				{
-					pLoopPlot = plotCity(pStartingPlot->getX_INLINE(), pStartingPlot->getY_INLINE(), iJ);
-
-					if (pLoopPlot != NULL)
-					{
-						if (!(pLoopPlot->isWater()))
-						{
-							if ((GC.getTerrainInfo(pLoopPlot->getTerrainType()).getYield(YIELD_FOOD) + GC.getTerrainInfo(pLoopPlot->getTerrainType()).getYield(YIELD_PRODUCTION)) <= 1)
-							{
-								for (iK = 0; iK < GC.getNumTerrainInfos(); iK++)
-								{
-									if (!(GC.getTerrainInfo((TerrainTypes)iK).isWater()))
-									{
-										if ((GC.getTerrainInfo((TerrainTypes)iK).getYield(YIELD_FOOD) + GC.getTerrainInfo((TerrainTypes)iK).getYield(YIELD_PRODUCTION)) > 1)
-										{
-											if ((pLoopPlot->getFeatureType() == NO_FEATURE) || GC.getFeatureInfo(pLoopPlot->getFeatureType()).isTerrain(iK))
-											{
-												pLoopPlot->setTerrainType((TerrainTypes)iK);
-											}
-										}
-									}
-								}
-							}
-						}
-					}
+			    for (iX = -iMaxRange; iX <= iMaxRange; iX++)
+			    {
+			        for (iY = -iMaxRange; iY <= iMaxRange; iY++)
+			        {
+			            pLoopPlot = plotXY(pStartingPlot->getX_INLINE(), pStartingPlot->getY_INLINE(), iX, iY);
+                        if (pLoopPlot != NULL)
+                        {
+                            int iDistance = plotDistance(pStartingPlot->getX_INLINE(), pStartingPlot->getY_INLINE(), pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE());
+                            if (iDistance <= iMaxRange)
+                            {
+                                if (!(pLoopPlot->isWater()) && ((iDistance <= iCityRange) || (pLoopPlot->isCoastalLand()) || (0 == getSorenRandNum(1 + iDistance - iCityRange, "Map Upgrade Terrain Food"))))
+                                {
+                                    iPlotFood = GC.getTerrainInfo(pLoopPlot->getTerrainType()).getYield(YIELD_FOOD);
+                                    iPlotProduction = GC.getTerrainInfo(pLoopPlot->getTerrainType()).getYield(YIELD_PRODUCTION);
+                                    if ((iPlotFood + iPlotProduction) <= 1)
+                                    {
+                                        iTargetFood = 1;
+                                        iTargetTotal = 1;
+                                        if (pLoopPlot->getBonusType(GET_PLAYER((PlayerTypes)iI).getTeam()) != NO_BONUS)
+                                        {
+                                            iTargetFood = 1;
+                                            iTargetTotal = 2;
+                                        }
+                                        else if ((iPlotFood == 1) || (iDistance <= iCityRange))
+                                        {
+                                            iTargetFood = 1 + getSorenRandNum(2, "Map Upgrade Terrain Food");
+                                            iTargetTotal = 2;
+                                        }
+                                        else
+                                        {
+                                            iTargetFood = pLoopPlot->isCoastalLand() ? 2 : 1;
+                                            iTargetTotal = 2;
+                                        }
+                                        
+                                        for (iK = 0; iK < GC.getNumTerrainInfos(); iK++)
+                                        {
+                                            if (!(GC.getTerrainInfo((TerrainTypes)iK).isWater()))
+                                            {
+                                                if ((GC.getTerrainInfo((TerrainTypes)iK).getYield(YIELD_FOOD) >= iTargetFood) && 
+                                                    (GC.getTerrainInfo((TerrainTypes)iK).getYield(YIELD_FOOD) + GC.getTerrainInfo((TerrainTypes)iK).getYield(YIELD_PRODUCTION)) == iTargetTotal)
+                                                {
+                                                    if ((pLoopPlot->getFeatureType() == NO_FEATURE) || GC.getFeatureInfo(pLoopPlot->getFeatureType()).isTerrain(iK))
+                                                    {
+                                                        pLoopPlot->setTerrainType((TerrainTypes)iK);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+  
+			            }
+			        }
 				}
 			}
 		}
@@ -1167,6 +1281,7 @@ void CvGame::normalizeAddFoodBonuses()
 	BonusTypes eBonus;
 	bool bIgnoreLatitude;
 	int iFoodBonus;
+	int iGoodNatureTileCount;
 	int iI, iJ, iK;
 
 	bIgnoreLatitude = false;
@@ -1181,6 +1296,7 @@ void CvGame::normalizeAddFoodBonuses()
 			if (pStartingPlot != NULL)
 			{
 				iFoodBonus = 0;
+				iGoodNatureTileCount = 0;
 
 				for (iJ = 0; iJ < NUM_CITY_PLOTS; iJ++)
 				{
@@ -1189,30 +1305,45 @@ void CvGame::normalizeAddFoodBonuses()
 					if (pLoopPlot != NULL)
 					{
 						eBonus = pLoopPlot->getBonusType(GET_PLAYER((PlayerTypes)iI).getTeam());
+						
 
 						if (eBonus != NO_BONUS)
 						{
+						    if (pLoopPlot->calculateBestNatureYield(YIELD_FOOD, GET_PLAYER((PlayerTypes)iI).getTeam()) >= 2)
+						    {
+						        iGoodNatureTileCount++;
+						    }
 							if (GC.getBonusInfo(eBonus).getYieldChange(YIELD_FOOD) > 0)
 							{
 								if ((GC.getBonusInfo(eBonus).getTechCityTrade() == NO_TECH) || (GC.getTechInfo((TechTypes)(GC.getBonusInfo(eBonus).getTechCityTrade())).getEra() <= getStartEra()))
 								{
 									if (pLoopPlot->isWater())
 									{
-										iFoodBonus++;
+										iFoodBonus += 2;
 									}
 									else
 									{
-										iFoodBonus += 2;
+										iFoodBonus += 3;
 									}
 								}
 							}
 						}
+						else
+						{
+                            if (pLoopPlot->calculateBestNatureYield(YIELD_FOOD, GET_PLAYER((PlayerTypes)iI).getTeam()) >= 3)
+						    {
+						        iGoodNatureTileCount++;
+						    }
+						}
 					}
 				}
+				
+				int iTargetFoodBonusCount = 3;
+				iTargetFoodBonusCount += (iGoodNatureTileCount == 0) ? 2 : 0;
 
 				for (iJ = 0; iJ < NUM_CITY_PLOTS; iJ++)
 				{
-					if (iFoodBonus >= 2)
+					if (iFoodBonus >= iTargetFoodBonusCount)
 					{
 						break;
 					}
@@ -1240,11 +1371,11 @@ void CvGame::normalizeAddFoodBonuses()
 														pLoopPlot->setBonusType((BonusTypes)iK);
 														if (pLoopPlot->isWater())
 														{
-															iFoodBonus++;
+															iFoodBonus += 2;
 														}
 														else
 														{
-															iFoodBonus += 2;
+															iFoodBonus += 3;
 														}
 														break;
 													}
@@ -1374,16 +1505,26 @@ void CvGame::normalizeAddExtras()
 	CvPlot* pLoopPlot;
 	bool bIgnoreLatitude;
 	int iValue;
-	int iMaxValue;
+	int iTotalValue;
+	int iBestValue;
+	int iWorstValue;
 	int iTargetValue;
 	int iCount;
 	int iPass;
+	int iPlayerCount;
 	int iI, iJ, iK;
+	
+	int iOceanFoodCount;
+	int iCoastFoodCount;
+	bool bLandBias;
 
 	bIgnoreLatitude = false;
 	gDLL->getPythonIFace()->pythonIsBonusIgnoreLatitudes(&bIgnoreLatitude);
 
-	iMaxValue = 0;
+	iTotalValue = 0;
+	iPlayerCount = 0;
+	iBestValue = 0;
+	iWorstValue = MAX_INT;
 
 	for (iI = 0; iI < MAX_CIV_PLAYERS; iI++)
 	{
@@ -1394,13 +1535,20 @@ void CvGame::normalizeAddExtras()
 			if (pStartingPlot != NULL)
 			{
 				iValue = GET_PLAYER((PlayerTypes)iI).AI_foundValue(pStartingPlot->getX_INLINE(), pStartingPlot->getY_INLINE(), -1, true);
-
-				iMaxValue = max(iMaxValue, iValue);
+				iTotalValue += iValue;
+                iPlayerCount++;
+                
+                iBestValue = max(iValue, iBestValue);
+                iWorstValue = min(iValue, iWorstValue);
+                
 			}
 		}
 	}
 
-	iTargetValue = ((iMaxValue * 4) / 5);
+	//iTargetValue = (iTotalValue + iBestValue) / (iPlayerCount + 1);
+	
+	iTargetValue = (iBestValue * 4) / 5;
+		
 
 	for (iI = 0; iI < MAX_CIV_PLAYERS; iI++)
 	{
@@ -1411,7 +1559,9 @@ void CvGame::normalizeAddExtras()
 
 			if (pStartingPlot != NULL)
 			{
-				iCount = 0;
+			    
+                iCount = 0;
+				int iFeatureCount = 0;
 
 				for (iJ = 0; iJ < NUM_CITY_PLOTS; iJ++)
 				{
@@ -1419,6 +1569,8 @@ void CvGame::normalizeAddExtras()
 					{
 						break;
 					}
+					
+
 
 					if (getSorenRandNum((iCount + 2), "Setting Feature Type") <= 1)
 					{
@@ -1445,28 +1597,68 @@ void CvGame::normalizeAddExtras()
 											}
 										}
 									}
+									
+									iFeatureCount += (pLoopPlot->getFeatureType() != NO_FEATURE) ? 1 : 0;
 								}
 							}
 						}
 					}
 				}
+				
+				iCoastFoodCount = 0;
+				iOceanFoodCount = 0;
+				int iWaterCount = 0;
+				for (iJ = 0; iJ < NUM_CITY_PLOTS; iJ++)
+				{
+					pLoopPlot = plotCity(pStartingPlot->getX_INLINE(), pStartingPlot->getY_INLINE(), iJ);
+					if (pLoopPlot != NULL)
+					{
+						if (pLoopPlot != pStartingPlot)
+						{
+							iWaterCount++;
+							if (pLoopPlot->isWater())
+							{
+								if (pLoopPlot->getBonusType() != NO_BONUS)
+								{
+									if (pLoopPlot->isAdjacentToLand())
+									{
+										iCoastFoodCount++;
+									}
+									else
+									{
+										iOceanFoodCount++;                                        
+									}
+								}
+							}
+						}
+					}
+				}
+				
+				if (iWaterCount > NUM_CITY_PLOTS / 2)
+				{
+				    bLandBias = true;
+				}
 
-				iCount = 0;
+                iCount = 0;
 
 				for (iJ = 0; iJ < NUM_CITY_PLOTS; iJ++)
 				{
-					if (GET_PLAYER((PlayerTypes)iI).AI_foundValue(pStartingPlot->getX_INLINE(), pStartingPlot->getY_INLINE(), -1, true) >= iTargetValue)
-					{
-						break;
-					}
+				    pLoopPlot = plotCity(pStartingPlot->getX_INLINE(), pStartingPlot->getY_INLINE(), iJ);
 
-					if (getSorenRandNum(((iCount * 4) + 1), "Placing Bonuses") == 0)
-					{
-						pLoopPlot = plotCity(pStartingPlot->getX_INLINE(), pStartingPlot->getY_INLINE(), iJ);
+                    if ((pLoopPlot != NULL) && (pLoopPlot != pStartingPlot))
+                    {
+                        if (getSorenRandNum((((iCount * 3) + 1) * ((bLandBias && pLoopPlot->isWater()) ? 2 : 1)), "Placing Bonuses") == 0)
+                        {
+                            if (GET_PLAYER((PlayerTypes)iI).AI_foundValue(pStartingPlot->getX_INLINE(), pStartingPlot->getY_INLINE(), -1, true) >= iTargetValue)
+                            {
+                                break;
+                            }
 
-						if (pLoopPlot != NULL)
-						{
-							if (pLoopPlot != pStartingPlot)
+						    bool bCoast = (pLoopPlot->isWater() && pLoopPlot->isAdjacentToLand());
+						    bool bOcean = (pLoopPlot->isWater() && !bCoast);
+							if ((pLoopPlot != pStartingPlot)
+                                && !(bCoast && (iCoastFoodCount > 2))
+                                && !(bOcean && (iOceanFoodCount > 2)))
 							{
 								for (iPass = 0; iPass < 2; iPass++)
 								{
@@ -1476,6 +1668,7 @@ void CvGame::normalizeAddExtras()
 										{
 											if (GC.getBonusInfo((BonusTypes)iK).isNormalize())
 											{
+											    //???no bonuses with negative yields?
 												if ((GC.getBonusInfo((BonusTypes)iK).getYieldChange(YIELD_FOOD) >= 0) &&
 													  (GC.getBonusInfo((BonusTypes)iK).getYieldChange(YIELD_PRODUCTION) >= 0))
 												{
@@ -1487,12 +1680,48 @@ void CvGame::normalizeAddExtras()
 															{
 																pLoopPlot->setBonusType((BonusTypes)iK);
 																iCount++;
+																iCoastFoodCount += bCoast ? 1 : 0;
+																iOceanFoodCount += bOcean ? 1 : 0;
 																break;
 															}
 														}
 													}
 												}
 											}
+										}
+										
+										if (bLandBias && !(pLoopPlot->isWater()) && pLoopPlot->getBonusType() != NO_BONUS)
+										{
+											if (((iFeatureCount > 4) && (pLoopPlot->getFeatureType() != NO_FEATURE))
+												&& ((iCoastFoodCount + iOceanFoodCount) > 2))
+											{
+												pLoopPlot->setFeatureType(NO_FEATURE);
+												if (getSorenRandNum(2, "Clear feature do add bonus") == 0)
+												{
+													for (iK = 0; iK < GC.getNumBonusInfos(); iK++)
+													{
+														if (GC.getBonusInfo((BonusTypes)iK).isNormalize())
+														{
+															//???no bonuses with negative yields?
+															if ((GC.getBonusInfo((BonusTypes)iK).getYieldChange(YIELD_FOOD) >= 0) &&
+																  (GC.getBonusInfo((BonusTypes)iK).getYieldChange(YIELD_PRODUCTION) >= 0))
+															{
+																if ((GC.getBonusInfo((BonusTypes)iK).getTechCityTrade() == NO_TECH) || (GC.getTechInfo((TechTypes)(GC.getBonusInfo((BonusTypes)iK).getTechCityTrade())).getEra() <= getStartEra()))
+																{
+																	if ((iPass == 0) ? CvMapGenerator::GetInstance().canPlaceBonusAt(((BonusTypes)iK), pLoopPlot->getX(), pLoopPlot->getY(), bIgnoreLatitude) : pLoopPlot->canHaveBonus(((BonusTypes)iK), bIgnoreLatitude))
+																	{
+																		pLoopPlot->setBonusType((BonusTypes)iK);
+																		iCount++;
+																		iCoastFoodCount += bCoast ? 1 : 0;
+																		iOceanFoodCount += bOcean ? 1 : 0;
+																		break;
+																	}
+																}
+															}
+														}
+													}
+												}
+											}										
 										}
 									}
 								}
@@ -1852,6 +2081,138 @@ void CvGame::updateColoredPlots()
 	}
 	else if (pHeadSelectedUnit != NULL)
 	{
+#ifdef ITS_FULL_OF_STARS
+		// testing
+		static bool bDrawVisibility = true;
+		if (bDrawVisibility)
+		{
+			TeamTypes eTeam = pHeadSelectedUnit->getTeam();
+			int iRange = pHeadSelectedUnit->visibilityRange();
+
+			CvPlotDataRegion visiblePlotDataRegion;
+			pHeadSelectedUnit->getGroup()->buildVisibilityRegion(visiblePlotDataRegion);
+			for(CvPlotDataRegionIterator it = visiblePlotDataRegion.begin(); it != visiblePlotDataRegion.end(); it++)
+			{
+				XYCoords xy(getXYCoords(it));
+				CvPlot* pLoopPlot = GC.getMapINLINE().plotSorenINLINE(xy.iX, xy.iY);
+				FAssert(pLoopPlot != NULL);
+				gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_NEGATIVE_TEXT")).getColor(), PLOT_STYLE_BOX_OUTLINE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+			}
+
+			CvPlotRegion visiblePlotRegion;
+			pHeadSelectedUnit->getGroup()->buildVisibilityRegion(visiblePlotRegion);
+			for(CvPlotRegionIterator it = visiblePlotRegion.begin(); it != visiblePlotRegion.end(); it++)
+			{
+				XYCoords xy(getXYCoords(it));
+				CvPlot* pLoopPlot = GC.getMapINLINE().plotSorenINLINE(xy.iX, xy.iY);
+				FAssert(pLoopPlot != NULL);
+				gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_UNIT_TEXT")).getColor(), PLOT_STYLE_BOX_OUTLINE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+			}
+
+			/*CvPlotDataRegion visiblePlotRegion;
+			pHeadSelectedUnit->getGroup()->buildVisibilityRegion(visiblePlotRegion);
+			for(CvPlotDataRegionIterator it = visiblePlotRegion.begin(); it != visiblePlotRegion.end(); it++)
+			{
+				XYCoords xy(getXYCoords(it));
+				CvPlot* pLoopPlot = GC.getMapINLINE().plotSorenINLINE(xy.iX, xy.iY);
+				FAssert(pLoopPlot != NULL);
+				CvUnitAI* pUnit = static_cast<CvUnitAI*>(pHeadSelectedUnit);
+				if (pUnit->AI_fogbustPlotValue(pLoopPlot, getRegionValue(it)) > 0)
+				{
+					gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_UNIT_TEXT")).getColor(), PLOT_STYLE_BOX_OUTLINE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+				}
+			}*/
+
+			/*CvPlotDataRegion visibilityValues;
+			pHeadSelectedUnit->plot()->addVisiblePlots(visibilityValues, iRange, 1, eTeam);
+			
+			if (pHeadSelectedUnit->getDomainType() == DOMAIN_LAND)
+			{
+				CvPlotDataRegion adjacentPlots;
+				bool bIncludeOriginal = (pHeadSelectedUnit->getDomainType() == DOMAIN_AIR);
+				int iRange = (pHeadSelectedUnit->getDomainType() == DOMAIN_LAND) ? 2 : 1;
+				findAdjacentPlots(visibilityValues, adjacentPlots, bIncludeOriginal, iRange);
+				for(CvPlotDataRegionIterator it = adjacentPlots.begin(); it != adjacentPlots.end(); it++)
+				{
+					CvPlot* pLoopPlot = GC.getMapINLINE().plotSorenINLINE(it->first.iX, it->first.iY);
+					FAssert(pLoopPlot != NULL);
+					gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_POSITIVE_TEXT")).getColor(), PLOT_STYLE_BOX_OUTLINE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+				}
+
+				CvPlotDataRegion furtherAdjacentPlots;
+				bIncludeOriginal = false;
+				iRange = 1;
+				findAdjacentPlots(adjacentPlots, furtherAdjacentPlots, bIncludeOriginal, iRange);
+				for(CvPlotDataRegionIterator it = furtherAdjacentPlots.begin(); it != furtherAdjacentPlots.end(); it++)
+				{
+					CvPlot* pLoopPlot = GC.getMapINLINE().plotSorenINLINE(it->first.iX, it->first.iY);
+					FAssert(pLoopPlot != NULL);
+					gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_NEGATIVE_TEXT")).getColor(), PLOT_STYLE_BOX_OUTLINE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+				}
+			}
+			else
+			{
+				CvPlotRegion adjacentPlots;
+				bool bIncludeOriginal = (pHeadSelectedUnit->getDomainType() == DOMAIN_AIR);
+				int iRange = (pHeadSelectedUnit->getDomainType() == DOMAIN_LAND) ? 2 : 1;
+				findAdjacentPlots(visiblePlotRegion, adjacentPlots, bIncludeOriginal, iRange);
+				for(CvPlotRegionIterator it = adjacentPlots.begin(); it != adjacentPlots.end(); it++)
+				{
+					CvPlot* pLoopPlot = GC.getMapINLINE().plotSorenINLINE(it->iX, it->iY);
+					FAssert(pLoopPlot != NULL);
+					gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_POSITIVE_TEXT")).getColor(), PLOT_STYLE_BOX_OUTLINE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+				}
+
+				CvPlotRegion furtherAdjacentPlots;
+				bIncludeOriginal = false;
+				iRange = 1;
+				findAdjacentPlots(adjacentPlots, furtherAdjacentPlots, bIncludeOriginal, iRange);
+				for(CvPlotRegionIterator it = furtherAdjacentPlots.begin(); it != furtherAdjacentPlots.end(); it++)
+				{
+					CvPlot* pLoopPlot = GC.getMapINLINE().plotSorenINLINE(it->iX, it->iY);
+					FAssert(pLoopPlot != NULL);
+					gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_NEGATIVE_TEXT")).getColor(), PLOT_STYLE_BOX_OUTLINE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+				}
+
+			}*/
+
+			//CLinkList<CvPlot*> visiblePlotList;
+			//pHeadSelectedUnit->plot()->getVisiblePlotsList(visiblePlotList, eTeam, iRange);
+			/*for (CLLNode<CvPlot*>* pNode = visiblePlotList.head(); (pNode != NULL); pNode = visiblePlotList.next(pNode))
+			{
+				CvPlot* pLoopPlot = pNode->m_data;
+				CvPlotDataRegionIterator itValue = visibilityValues.find(XYCoords(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE()));
+				gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString(itValue != visibilityValues.end() ? "COLOR_UNIT_TEXT" : "COLOR_NEGATIVE_TEXT")).getColor(), PLOT_STYLE_BOX_OUTLINE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+			}*/
+
+			//// check size
+			//FAssert(visiblePlotList.getLength() == visiblePlotRegion.size());
+
+			//// compare
+			//for (CLLNode<CvPlot*>* pNode = visiblePlotList.head(); (pNode != NULL); pNode = visiblePlotList.next(pNode))
+			//{
+			//	CvPlotRegionIterator itPlot = visiblePlotRegion.find(XYCoords(pNode->m_data->getX_INLINE(), pNode->m_data->getY_INLINE()));
+			//	FAssert(itPlot != visiblePlotRegion.end());
+			//}
+
+			/*CLinkList<CvPlot*> furtherPlotList;
+			pHeadSelectedUnit->plot()->getVisiblePlotsList(furtherPlotList, eTeam, iRange + 2, &visiblePlotList);
+			for (CLLNode<CvPlot*>* pNode = furtherPlotList.head(); (pNode != NULL); pNode = furtherPlotList.next(pNode))
+			{
+				CvPlot* pLoopPlot = pNode->m_data;
+				gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_NEGATIVE_TEXT")).getColor(), PLOT_STYLE_BOX_OUTLINE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+			}
+
+			pHeadSelectedUnit->plot()->getVisiblePlotsList(furtherPlotList, eTeam, iRange + 1, &visiblePlotList);
+			for (CLLNode<CvPlot*>* pNode = furtherPlotList.head(); (pNode != NULL); pNode = furtherPlotList.next(pNode))
+			{
+				CvPlot* pLoopPlot = pNode->m_data;
+				gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_POSITIVE_TEXT")).getColor(), PLOT_STYLE_BOX_OUTLINE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+			}*/
+
+		}
+#endif
+
 		if (gDLL->getGraphicOption(GRAPHICOPTION_CITY_RADIUS))
 		{
 			if (gDLL->getInterfaceIFace()->canSelectionListFound())
@@ -1916,6 +2277,8 @@ void CvGame::updateColoredPlots()
 
 		if (!(GET_PLAYER(getActivePlayer()).isOption(PLAYEROPTION_NO_UNIT_RECOMMENDATIONS)))
 		{
+			bool bFoundRecommendation = false;
+
 			if ((pHeadSelectedUnit->AI_getUnitAIType() == UNITAI_WORKER) || (pHeadSelectedUnit->AI_getUnitAIType() == UNITAI_WORKER_SEA))
 			{
 				if (pHeadSelectedUnit->plot()->getOwnerINLINE() == pHeadSelectedUnit->getOwnerINLINE())
@@ -1926,6 +2289,8 @@ void CvGame::updateColoredPlots()
 					{
 						if (pHeadSelectedUnit->AI_bestCityBuild(pCity, &pBestPlot))
 						{
+							bFoundRecommendation = true;
+
 							FAssert(pBestPlot != NULL);
 							gDLL->getEngineIFace()->addColoredPlot(pBestPlot->getX_INLINE(), pBestPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT")).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
 
@@ -1959,6 +2324,7 @@ void CvGame::updateColoredPlots()
 									{
 										if (pLoopPlot->isBestAdjacentFound(pHeadSelectedUnit->getOwnerINLINE()))
 										{
+											bFoundRecommendation = true;
 											gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT")).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
 										}
 									}
@@ -1967,6 +2333,7 @@ void CvGame::updateColoredPlots()
 									{
 										if (pLoopPlot->isRevealedGoody(pHeadSelectedUnit->getTeam()))
 										{
+											bFoundRecommendation = true;
 											gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT")).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
 										}
 									}
@@ -1976,6 +2343,33 @@ void CvGame::updateColoredPlots()
 					}
 				}
 			}
+
+#ifdef GIVE_EXPLORER_SUGGESTIONS
+			if (!bFoundRecommendation && (pHeadSelectedUnit->isNoBadGoodies() || pHeadSelectedUnit->getDomainType() == DOMAIN_SEA))
+			{
+				CvPlot* pBestExplorePlotThisTurn = NULL;
+				CvPlot* pBestExplorePlot = pHeadSelectedUnit->AI_getBestExplorePlot((pHeadSelectedUnit->getDomainType() == DOMAIN_SEA) ? 4 : 3, &pBestExplorePlotThisTurn, /*bNoRandom*/ true);
+				if (pBestExplorePlotThisTurn != NULL)
+				{
+					if (pBestExplorePlotThisTurn != pHeadSelectedUnit->plot())
+					{
+						gDLL->getEngineIFace()->addColoredPlot(pBestExplorePlotThisTurn->getX_INLINE(), pBestExplorePlotThisTurn->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT")).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+					}
+					else if (pBestExplorePlot != NULL && pBestExplorePlotThisTurn != pBestExplorePlot)
+					{
+						gDLL->getEngineIFace()->addColoredPlot(pBestExplorePlot->getX_INLINE(), pBestExplorePlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT")).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+					}
+
+#ifdef FASSERT_ENABLE
+					if (pBestExplorePlot != NULL && pBestExplorePlotThisTurn != pBestExplorePlot)
+					{
+						gDLL->getEngineIFace()->addColoredPlot(pBestExplorePlot->getX_INLINE(), pBestExplorePlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_NEGATIVE_TEXT")).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+					}
+#endif
+				}
+			}
+#endif
+
 		}
 	}
 }
@@ -3607,15 +4001,48 @@ void CvGame::doControl(ControlTypes eControl)
 
 void CvGame::implementDeal(PlayerTypes eWho, PlayerTypes eOtherWho, CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirList, bool bForce)
 {
-	CvDeal* pDeal;
-
 	FAssertMsg(eWho != NO_PLAYER, "Who is not assigned a valid value");
 	FAssertMsg(eOtherWho != NO_PLAYER, "OtherWho is not assigned a valid value");
 	FAssertMsg(eWho != eOtherWho, "eWho is not expected to be equal with eOtherWho");
 
-	pDeal = addDeal();
+	// if debug mode (ctrl-z under chipotle), then notify the human that a deal was made
+	if (GC.getGameINLINE().isDebugMode())
+	{
+		FAssertMsg(((pOurList->getLength() > 0) || (pTheirList->getLength() > 0)), "Empty trade implemented?!");
+
+		PlayerTypes iActivePlayer = GC.getGameINLINE().getActivePlayer();
+		
+		if (iActivePlayer != eWho && iActivePlayer != eOtherWho)
+		{
+			bool bReportTrade = true;
+			
+			// special check for the triple open borders issue
+			CLLNode<TradeData>* pNode = pOurList->head();
+			if (pNode != NULL)
+			{
+				if (pNode->m_data.m_eItemType == TRADE_OPEN_BORDERS && pNode->m_data.m_iData != 0)
+				{
+					bReportTrade = false;
+				}
+			}
+			
+			if (bReportTrade)
+			{
+				CvWString szString;
+				CvWString szDealString;
+
+				szDealString.clear();
+				GAMETEXT.getDealString(szDealString, eWho, eOtherWho, pOurList, pTheirList, iActivePlayer);
+				szString.Format(L"%s", szDealString.GetCString());
+				gDLL->getInterfaceIFace()->addMessage(iActivePlayer, true, GC.getDefineINT("EVENT_MESSAGE_TIME"), szString);
+			}
+		}
+	}
+
+	CvDeal* pDeal = addDeal();
 	pDeal->init(pDeal->getID(), eWho, eOtherWho);
 	pDeal->addTrades(pOurList, pTheirList, !bForce);
+
 	if ((pDeal->getLengthFirstTrades() == 0) && (pDeal->getLengthSecondTrades() == 0))
 	{
 		pDeal->kill();
@@ -4958,6 +5385,32 @@ void CvGame::makeCircumnavigated()
 	m_bCircumnavigated = true;
 }
 
+bool CvGame::circumnavigationAvailable() const
+{
+	if (isCircumnavigated())
+	{
+		return false;
+	}
+
+	if (GC.getDefineINT("CIRCUMNAVIGATE_FREE_MOVES") == 0)
+	{
+		return false;
+	}
+
+	CvMap& kMap = GC.getMapINLINE();
+
+	if (!(kMap.isWrapXINLINE()) && !(kMap.isWrapYINLINE()))
+	{
+		return false;
+	}
+
+	if (kMap.getLandPlots() > ((kMap.numPlotsINLINE() * 2) / 3))
+	{
+		return false;
+	}
+
+	return true;
+}
 
 bool CvGame::isDiploVote() const
 {
@@ -5058,6 +5511,9 @@ void CvGame::setFinalInitialized(bool bNewValue)
 
 		if (isFinalInitialized())
 		{
+			//GC.getMapINLINE().updateSight(false);
+			//GC.getMapINLINE().updateSight(true);
+
 			updatePlotGroups();
 
 			GC.getMapINLINE().updateIrrigated();
@@ -6099,6 +6555,8 @@ void CvGame::doTurn()
 
 	// END OF TURN
 	gDLL->getEventReporterIFace()->beginGameTurn( getGameTurn() );
+
+	doUpdateCacheOnTurn();
 
 	updateScore();
 
@@ -7583,6 +8041,143 @@ int CvGame::calculateSyncChecksum()
 		}
 	}
 
+#ifdef DEBUG_OUT_OF_SYNCS
+	if (GC.getLogging())
+	{
+		TCHAR szOut[1024];
+		sprintf(szOut, "SyncChecksum = %d on %d\n", iValue, GC.getGameINLINE().getTurnSlice());
+		gDLL->messageControlLog(szOut);
+
+		sprintf(szOut, "m=%d, s=%d, c=%d, p=%d, d=%d, o=%d, a=%d\n", 
+			getMapRand().getSeed(),
+			getSorenRand().getSeed(),
+			getNumCities(),
+			getTotalPopulation(),
+			getNumDeals(),
+			GC.getMapINLINE().getOwnedPlots(),
+			GC.getMapINLINE().getNumAreas());
+		gDLL->messageControlLog(szOut);
+
+		sprintf(szOut, "m=%d, s=%d, c=%d, p=%d, d=%d, o=%d, a=%d\n", 
+			getMapRand().getSeed(),
+			getSorenRand().getSeed(),
+			getNumCities(),
+			getTotalPopulation(),
+			getNumDeals(),
+			GC.getMapINLINE().getOwnedPlots(),
+			GC.getMapINLINE().getNumAreas());
+		gDLL->messageControlLog(szOut);
+
+		for (iI = 0; iI < MAX_PLAYERS; iI++)
+		{
+			if (GET_PLAYER((PlayerTypes)iI).isEverAlive())
+			{
+				sprintf(szOut, "%S: s=%d, p=%d, L=%d, g=%d, a=%d, pw=%d, c=%d, u=%d, sg=%d\n", 
+					GET_PLAYER((PlayerTypes)iI).getName(),
+					getPlayerScore((PlayerTypes)iI),
+					GET_PLAYER((PlayerTypes)iI).getTotalPopulation(),
+					GET_PLAYER((PlayerTypes)iI).getTotalLand(),
+					GET_PLAYER((PlayerTypes)iI).getGold(),
+					GET_PLAYER((PlayerTypes)iI).getAssets(),
+					GET_PLAYER((PlayerTypes)iI).getPower(),
+					GET_PLAYER((PlayerTypes)iI).getNumCities(),
+					GET_PLAYER((PlayerTypes)iI).getNumUnits(),
+					GET_PLAYER((PlayerTypes)iI).getNumSelectionGroups());
+				gDLL->messageControlLog(szOut);
+
+				sprintf(szOut, " yield: f=%d, p=%d, c=%d; commerce: g=%d, r=%d, c=%d\n", 
+					GET_PLAYER((PlayerTypes)iI).calculateTotalYield(YIELD_FOOD),
+					GET_PLAYER((PlayerTypes)iI).calculateTotalYield(YIELD_PRODUCTION),
+					GET_PLAYER((PlayerTypes)iI).calculateTotalYield(YIELD_COMMERCE),
+					GET_PLAYER((PlayerTypes)iI).getCommerceRate(COMMERCE_GOLD),
+					GET_PLAYER((PlayerTypes)iI).getCommerceRate(COMMERCE_RESEARCH),
+					GET_PLAYER((PlayerTypes)iI).getCommerceRate(COMMERCE_CULTURE));
+				gDLL->messageControlLog(szOut);
+
+				sprintf(szOut, " bonuses: ");
+				gDLL->messageControlLog(szOut);
+				for (iJ = 0; iJ < GC.getNumBonusInfos(); iJ++)
+				{
+					int iAvailableBonuses = GET_PLAYER((PlayerTypes)iI).getNumAvailableBonuses((BonusTypes)iJ);
+					int iBonusImport = GET_PLAYER((PlayerTypes)iI).getBonusImport((BonusTypes)iJ);
+					int iBonusExport = GET_PLAYER((PlayerTypes)iI).getBonusExport((BonusTypes)iJ);
+
+					if (iAvailableBonuses != 0 || iBonusImport != 0 || iBonusExport != 0)
+					{
+						sprintf(szOut, "%S: f=%d, p=%d, c=%d; ", GC.getBonusInfo((BonusTypes)iJ).getDescription(), iAvailableBonuses, iBonusImport, iBonusExport);
+						gDLL->messageControlLog(szOut);
+					}
+				}
+
+				sprintf(szOut, "\n imrovements: ");
+				gDLL->messageControlLog(szOut);
+				for (iJ = 0; iJ < GC.getNumImprovementInfos(); iJ++)
+				{
+					int iImprovementCount = GET_PLAYER((PlayerTypes)iI).getImprovementCount((ImprovementTypes)iJ);
+					if (iImprovementCount != 0)
+					{
+						sprintf(szOut, "%S=%d, ", GC.getImprovementInfo((ImprovementTypes)iJ).getDescription(), iImprovementCount);
+						gDLL->messageControlLog(szOut);
+					}
+				}
+
+				sprintf(szOut, "\n buildings: ");
+				gDLL->messageControlLog(szOut);
+				for (iJ = 0; iJ < GC.getNumBuildingClassInfos(); iJ++)
+				{
+					int iBuildingCount = GET_PLAYER((PlayerTypes)iI).getBuildingClassCountPlusMaking((BuildingClassTypes)iJ);
+					if (iBuildingCount != 0)
+					{
+						sprintf(szOut, "%S=%d, ", GC.getBuildingClassInfo((BuildingClassTypes)iJ).getDescription(), iBuildingCount);
+						gDLL->messageControlLog(szOut);
+					}
+				}
+
+				sprintf(szOut, "\n unitclasses: ");
+				gDLL->messageControlLog(szOut);
+				for (iJ = 0; iJ < GC.getNumUnitClassInfos(); iJ++)
+				{
+					int iUnitCount = GET_PLAYER((PlayerTypes)iI).getUnitClassCountPlusMaking((UnitClassTypes)iJ);
+					if (iUnitCount != 0)
+					{
+						sprintf(szOut, "%S=%d, ", GC.getUnitClassInfo((UnitClassTypes)iJ).getDescription(), iUnitCount);
+						gDLL->messageControlLog(szOut);
+					}
+				}
+
+				sprintf(szOut, "\n unitais: ");
+				gDLL->messageControlLog(szOut);
+				for (iJ = 0; iJ < NUM_UNITAI_TYPES; iJ++)
+				{
+					int iUnitAICount = GET_PLAYER((PlayerTypes)iI).AI_totalUnitAIs((UnitAITypes)iJ);
+					if (iUnitAICount != 0)
+					{
+						sprintf(szOut, "%S=%d, ", GC.getUnitAIInfo((UnitAITypes)iJ).getDescription(), iUnitAICount);
+						gDLL->messageControlLog(szOut);
+					}
+				}
+
+				sprintf(szOut, "\n units: ");
+				gDLL->messageControlLog(szOut);
+				for (pLoopUnit = GET_PLAYER((PlayerTypes)iI).firstUnit(&iLoop); pLoopUnit != NULL; pLoopUnit = GET_PLAYER((PlayerTypes)iI).nextUnit(&iLoop))
+				{
+					sprintf(szOut, "%S(%d,%d), d=%d, %dexp, l=%d; ", 
+						pLoopUnit->getName().GetCString(),
+						pLoopUnit->getX_INLINE(),
+						pLoopUnit->getY_INLINE(),
+						pLoopUnit->getDamage(),
+						pLoopUnit->getExperience(),
+						pLoopUnit->getLevel());
+					gDLL->messageControlLog(szOut);
+				}
+				
+				sprintf(szOut, "\n\n");
+				gDLL->messageControlLog(szOut);
+			}
+		}
+	}
+#endif
+
 	return iValue;
 }
 
@@ -7900,6 +8495,8 @@ void CvGame::read(FDataStreamBase* pStream)
 			m_sorenRand.reseed(timeGetTime());
 		}
 	}
+
+	doUpdateCacheOnTurn();
 }
 
 
@@ -8148,4 +8745,222 @@ void CvGame::setReplayInfo(CvReplayInfo* pReplay)
 bool CvGame::hasSkippedSaveChecksum() const
 {
 	return gDLL->hasSkippedSaveChecksum();
+}
+
+// CACHE: cache frequently used values
+///////////////////////////////////////
+
+
+int CvGame::getShrineBuildingCount(ReligionTypes eReligion)
+{
+	int	iShrineBuildingCount = 0;
+
+	if (eReligion == NO_RELIGION)
+		iShrineBuildingCount = m_iShrineBuildingCount;
+	else for (int iI = 0; iI < m_iShrineBuildingCount; iI++)
+		if (m_aiShrineReligion[iI] == eReligion)
+			iShrineBuildingCount++;
+
+	return iShrineBuildingCount;
+}
+
+BuildingTypes CvGame::getShrineBuilding(int eIndex, ReligionTypes eReligion)
+{
+	FAssertMsg(eIndex >= 0 && eIndex < m_iShrineBuildingCount, "invalid index to CvGame::getShrineBuilding");
+
+	BuildingTypes eBuilding = NO_BUILDING;
+
+	if (eIndex >= 0 && eIndex < m_iShrineBuildingCount)
+	{
+		if (eReligion == NO_RELIGION)
+			eBuilding = (BuildingTypes) m_aiShrineBuilding[eIndex];
+		else for (int iI = 0, iReligiousBuilding = 0; iI < m_iShrineBuildingCount; iI++)
+			if (m_aiShrineReligion[iI] == (int) eReligion)
+			{
+				if (iReligiousBuilding == eIndex)
+				{
+					// found it
+					eBuilding = (BuildingTypes) m_aiShrineBuilding[iI];
+					break;
+				}
+
+				iReligiousBuilding++;
+			}
+	}
+
+	return eBuilding;
+}
+
+void CvGame::changeShrineBuilding(BuildingTypes eBuilding, ReligionTypes eReligion, bool bRemove)
+{
+	FAssertMsg(eBuilding >= 0 && eBuilding < GC.getNumBuildingInfos(), "invalid index to CvGame::changeShrineBuilding");
+	FAssertMsg(bRemove || m_iShrineBuildingCount < GC.getNumBuildingInfos(), "trying to add too many buildings to CvGame::changeShrineBuilding");
+
+	if (bRemove)
+	{
+		bool bFound = false;
+
+		for (int iI = 0; iI < m_iShrineBuildingCount; iI++)
+		{
+			if (!bFound)
+			{
+				// note, eReligion is not important if we removing, since each building is always one religion
+				if (m_aiShrineBuilding[iI] == (int) eBuilding)
+					bFound = true;
+			}
+			
+			if (bFound)
+			{
+				int iToMove = iI + 1;
+				if (iToMove < m_iShrineBuildingCount)
+				{
+					m_aiShrineBuilding[iI] = m_aiShrineBuilding[iToMove];
+					m_aiShrineReligion[iI] = m_aiShrineReligion[iToMove];
+				}
+				else
+				{
+					m_aiShrineBuilding[iI] = (int) NO_BUILDING;
+					m_aiShrineReligion[iI] = (int) NO_RELIGION;
+				}
+			}
+
+		if (bFound)
+			m_iShrineBuildingCount--;
+
+		}
+	}
+	else if (m_iShrineBuildingCount < GC.getNumBuildingInfos())
+	{
+		// add this item to the end
+		m_aiShrineBuilding[m_iShrineBuildingCount] = eBuilding;
+		m_aiShrineReligion[m_iShrineBuildingCount] = eReligion;
+		m_iShrineBuildingCount++;
+	}
+	
+}
+
+bool CvGame::culturalVictoryValid()
+{
+	if (m_iNumCultureVictoryCities > 0)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+int CvGame::culturalVictoryNumCultureCities()
+{
+	return m_iNumCultureVictoryCities;
+}
+
+CultureLevelTypes CvGame::culturalVictoryCultureLevel()
+{
+	if (m_iNumCultureVictoryCities > 0)
+	{
+		return (CultureLevelTypes) m_eCultureVictoryCultureLevel;
+	}
+	
+	return NO_CULTURELEVEL;
+}
+
+
+void CvGame::constructCache()
+{
+	// allocate known constants
+
+	// zero everything out, just to be safe
+	m_iShrineBuildingCount = 0;
+	m_aiShrineBuilding = NULL;
+	m_aiShrineReligion = NULL;
+
+	m_iNumCultureVictoryCities = 0;
+	
+	// note resetCache(/*bConstructorCall*/ true) will be called by CvGame::CvGame
+}
+
+void CvGame::destructCache()
+{
+	uninitCache(); // note, will be called by CvGame::~CvGame as well
+
+	// deallocate anything allocated in constructor
+}
+
+void CvGame::initCache()
+{
+	// init non-saved data
+
+	// note resetCache(/*bConstructorCall*/ false) will be called by CvGame::init
+
+	doUpdateCacheOnTurn();
+}
+
+void CvGame::uninitCache()
+{
+	m_iShrineBuildingCount = 0;
+
+	SAFE_DELETE_ARRAY(m_aiShrineBuilding);
+	SAFE_DELETE_ARRAY(m_aiShrineReligion);
+
+	m_iNumCultureVictoryCities = 0;
+}
+
+void CvGame::resetCache(bool bConstructorCall)
+{
+	int	iI;
+	
+	uninitCache(); // note, will be called by CvGame::reset as well
+	
+	if (!bConstructorCall)
+	{
+		FAssertMsg(m_aiShrineBuilding==NULL, "about to leak memory, CvGame::m_aiShrineBuilding");
+		FAssertMsg(m_aiShrineReligion==NULL, "about to leak memory, CvGame::m_aiShrineReligion");
+		m_aiShrineBuilding = new int[GC.getNumBuildingInfos()];
+		m_aiShrineReligion = new int[GC.getNumBuildingInfos()];
+		for (iI = 0; iI < GC.getNumBuildingInfos(); iI++)
+		{
+			m_aiShrineBuilding[iI] = (int) NO_BUILDING;
+			m_aiShrineReligion[iI] = (int) NO_RELIGION;
+		}
+	}
+}
+
+
+void CvGame::doUpdateCacheOnTurn()
+{
+	int	iI;
+	
+	// reset shrine count
+	m_iShrineBuildingCount = 0;
+
+	for (iI = 0; iI < GC.getNumBuildingInfos(); iI++)
+	{
+		CvBuildingInfo&	kBuildingInfo = GC.getBuildingInfo((BuildingTypes) iI);
+		
+		// if it is for holy city, then its a shrine-thing, add it
+		if (kBuildingInfo.getHolyCity() != NO_RELIGION)
+		{
+			changeShrineBuilding((BuildingTypes) iI, (ReligionTypes) kBuildingInfo.getReligionType());
+		}
+	}
+
+	// reset cultural victories
+	m_iNumCultureVictoryCities = 0;
+	for (iI = 0; iI < GC.getNumVictoryInfos(); iI++)
+	{
+		if (isVictoryValid((VictoryTypes) iI))
+		{
+			CvVictoryInfo& kVictoryInfo = GC.getVictoryInfo((VictoryTypes) iI);
+			if (kVictoryInfo.getCityCulture() > 0)
+			{
+				int iNumCultureCities = kVictoryInfo.getNumCultureCities();
+				if (iNumCultureCities > m_iNumCultureVictoryCities)
+				{
+					m_iNumCultureVictoryCities = iNumCultureCities;
+					m_eCultureVictoryCultureLevel = kVictoryInfo.getCityCulture();
+				}
+			}
+		}
+	}
+
 }

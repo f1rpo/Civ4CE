@@ -1,0 +1,1307 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="5" />
+	<Project>
+		<Option title="CvGameCoreDLL" />
+		<Option pch_mode="2" />
+		<Option default_target="" />
+		<Option compiler="msvctk" />
+		<Option virtualFolders="" />
+		<Build>
+			<Target title="Final Release|Win32">
+				<Option output="..\Assets\CvGameCoreDLL.dll" prefix_auto="1" extension_auto="1" />
+				<Option object_output="FinalReleaseWin32" />
+				<Option type="3" />
+				<Option compiler="msvctk" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="/MD" />
+					<Add option="/GR" />
+					<Add option="/O2" />
+					<Add option="/W3" />
+					<Add option="/EHsc" />
+					<Add option="/DWIN32" />
+					<Add option="/DNDEBUG" />
+					<Add option="/D_WINDOWS" />
+					<Add option="/D_USRDLL" />
+					<Add option="/DCVGAMECOREDLL_EXPORTS" />
+					<Add option="/DFINAL_RELEASE" />
+					<Add directory="Boost-1.32.0\include" />
+					<Add directory="Python24\include" />
+				</Compiler>
+				<Linker>
+					<Add option="/debug" />
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="boost_python-vc71-mt-1_32" />
+					<Add library="winmm" />
+					<Add library="user32" />
+					<Add directory="Python24\libs" />
+					<Add directory="boost-1.32.0\libs\" />
+				</Linker>
+			</Target>
+			<Target title="Final Release|Win32|Asserts">
+				<Option output="..\Assets\CvGameCoreDLL.dll" prefix_auto="1" extension_auto="1" />
+				<Option object_output="FinalReleaseWin32Asserts" />
+				<Option type="3" />
+				<Option compiler="msvctk" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="/MD" />
+					<Add option="/GR" />
+					<Add option="/O2" />
+					<Add option="/W3" />
+					<Add option="/EHsc" />
+					<Add option="/DWIN32" />
+					<Add option="/DNDEBUG" />
+					<Add option="/D_WINDOWS" />
+					<Add option="/D_USRDLL" />
+					<Add option="/DCVGAMECOREDLL_EXPORTS" />
+					<Add option="/DFINAL_RELEASE" />
+					<Add option="/DFASSERT_ENABLE" />
+					<Add directory="Boost-1.32.0\include" />
+					<Add directory="Python24\include" />
+				</Compiler>
+				<Linker>
+					<Add option="/debug" />
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="boost_python-vc71-mt-1_32" />
+					<Add library="winmm" />
+					<Add library="user32" />
+					<Add directory="Python24\libs" />
+					<Add directory="boost-1.32.0\libs\" />
+				</Linker>
+			</Target>
+			<Target title="Release|Win32">
+				<Option output="..\Assets\CvGameCoreDLL.dll" prefix_auto="1" extension_auto="1" />
+				<Option object_output="ReleaseWin32" />
+				<Option type="3" />
+				<Option compiler="msvctk" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="/MD" />
+					<Add option="/GR" />
+					<Add option="/O2" />
+					<Add option="/W3" />
+					<Add option="/EHsc" />
+					<Add option="/DWIN32" />
+					<Add option="/DNDEBUG" />
+					<Add option="/D_WINDOWS" />
+					<Add option="/D_USRDLL" />
+					<Add option="/DCVGAMECOREDLL_EXPORTS" />
+					<Add option="/DFASSERT_ENABLE" />
+					<Add directory="Boost-1.32.0\include" />
+					<Add directory="Python24\include" />
+				</Compiler>
+				<Linker>
+					<Add option="/debug" />
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="boost_python-vc71-mt-1_32" />
+					<Add library="winmm" />
+					<Add library="user32" />
+					<Add directory="Python24\libs" />
+					<Add directory="boost-1.32.0\libs\" />
+				</Linker>
+			</Target>
+		</Build>
+		<Unit filename="AI_Defines.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvArea.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvArea.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvArtFileMgr.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvArtFileMgr.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvCity.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvCity.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvCityAI.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvCityAI.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLButtonPopup.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLButtonPopup.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLDataStreamIFaceBase.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLEngineIFaceBase.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLEntity.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLEntity.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLEntityIFaceBase.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLEventReporterIFaceBase.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLFAStarIFaceBase.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLFlagEntityIFaceBase.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLIniParserIFaceBase.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLInterfaceIFaceBase.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLPlotBuilderIFaceBase.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLPython.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLPythonIFaceBase.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLSymbolIFaceBase.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLUtilityIFaceBase.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLWidgetData.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLWidgetData.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDLLXMLIFaceBase.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDeal.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDeal.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDefines.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDiploParameters.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvDiploParameters.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvEnums.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvExtraSaveData.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvExtraSaveData.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvFractal.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvFractal.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvGame.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvGame.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvGameAI.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvGameAI.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvGameCoreDLL.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvGameCoreDLL.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvGameCoreDLLDefNew.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvGameCoreDLLUndefNew.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvGameCoreUtils.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvGameCoreUtils.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvGameTextMgr.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvGameTextMgr.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvGlobals.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvGlobals.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvHallOfFameInfo.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvHallOfFameInfo.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvInfoWater.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvInfoWater.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvInfos.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvInfos.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvInitCore.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvInitCore.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvMap.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvMap.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvMapGenerator.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvMapGenerator.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvPlayer.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvPlayer.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvPlayerAI.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvPlayerAI.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvPlot.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvPlot.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvPlotGroup.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvPlotGroup.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvPopupInfo.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvPopupInfo.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvPopupReturn.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvPopupReturn.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvRandom.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvRandom.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvReplayInfo.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvReplayInfo.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvReplayMessage.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvReplayMessage.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvSelectionGroup.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvSelectionGroup.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvSelectionGroupAI.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvSelectionGroupAI.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvString.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvStructs.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvStructs.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvTalkingHeadMessage.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvTalkingHeadMessage.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvTeam.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvTeam.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvTeamAI.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvTeamAI.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvUnit.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvUnit.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvUnitAI.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvUnitAI.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvXMLLoadUtility.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvXMLLoadUtility.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvXMLLoadUtilityGet.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvXMLLoadUtilityInit.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CvXMLLoadUtilitySet.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyArea.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyArea.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyAreaInterface.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyArgsList.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyArgsList.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyArtFileMgr.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyArtFileMgr.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyArtFileMgrInterface.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyCity.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyCity.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyCityInterface1.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyDeal.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyDeal.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyEnumsInterface.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyGame.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyGame.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyGameCoreUtils.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyGameCoreUtils.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyGameCoreUtilsInterface.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyGameInterface.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyGameTextMgr.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyGameTextMgr.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyGameTextMgrInterface.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyGlobalContext.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyGlobalContext.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyGlobalContextInterface1.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyGlobalContextInterface2.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyGlobalContextInterface3.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyGlobalContextInterface4.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyHallOfFameInfo.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyHallOfFameInfo.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyHallOfFameInterface.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyInfoInterface1.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyInfoInterface2.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyInfoInterface3.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyMap.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyMap.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyMapGenerator.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyMapGenerator.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyMapGeneratorInterface.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyMapInterface.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyPlayer.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyPlayer.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyPlayerInterface1.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyPlot.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyPlot.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyPlotInterface1.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyRandomInterface.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyReplayInfo.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyReplayInfo.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CySelectionGroup.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CySelectionGroup.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CySelectionGroupInterface.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyStructsInterface1.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyTeam.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyTeam.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyTeamInterface.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyUnit.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyUnit.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="CyUnitInterface1.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="FAssert.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="FAssert.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="FDialogTemplate.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="FDialogTemplate.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="FProfiler.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="LinkedList.h">
+			<Option compilerVar="CPP" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Unit filename="_precompile.cpp">
+			<Option compilerVar="CPP" />
+			<Option target="Final Release|Win32" />
+			<Option target="Final Release|Win32|Asserts" />
+			<Option target="Release|Win32" />
+		</Unit>
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>

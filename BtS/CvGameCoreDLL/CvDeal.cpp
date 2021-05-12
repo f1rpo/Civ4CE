@@ -80,6 +80,20 @@ void CvDeal::kill(bool bKillTeam)
 		GAMETEXT.getDealString(szDealString, *this, getSecondPlayer());
 		szString.Format(L"%s: %s", szCancelString.GetCString(), szDealString.GetCString());
 		gDLL->getInterfaceIFace()->addMessage((PlayerTypes)getSecondPlayer(), true, GC.getDefineINT("EVENT_MESSAGE_TIME"), szString, "AS2D_DEAL_CANCELLED");
+		
+		// if debug mode (ctrl-z under chipotle), then notify the human that a deal was canceled
+		if (GC.getGameINLINE().isDebugMode())
+		{
+			PlayerTypes iActivePlayer = GC.getGameINLINE().getActivePlayer();
+			
+			if (iActivePlayer != getFirstPlayer() && iActivePlayer != getFirstPlayer())
+			{
+				szDealString.clear();
+				GAMETEXT.getDealString(szDealString, *this, iActivePlayer);
+				szString.Format(L"%s: %s", szCancelString.GetCString(), szDealString.GetCString());
+				gDLL->getInterfaceIFace()->addMessage((PlayerTypes)iActivePlayer, true, GC.getDefineINT("EVENT_MESSAGE_TIME"), szString);
+			}
+		}
 	}
 
 	CLLNode<TradeData>* pNode;
@@ -733,15 +747,36 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 		break;
 
 	case TRADE_WAR:
-		GET_TEAM(GET_PLAYER(eFromPlayer).getTeam()).declareWar(((TeamTypes)trade.m_iData), true);
-
-		for (iI = 0; iI < MAX_PLAYERS; iI++)
+		// creating scope for some variables
 		{
-			if (GET_PLAYER((PlayerTypes)iI).isAlive())
+			TeamTypes eFromTeam = GET_PLAYER(eFromPlayer).getTeam();
+			CvTeamAI& kFromTeam = GET_TEAM(eFromTeam);
+			TeamTypes eDataTeam = (TeamTypes) trade.m_iData;
+
+			// set the warplan prior to declareWar(), to avoid the assert
+			if (kFromTeam.AI_getWarPlan(eDataTeam) == NO_WARPLAN)
 			{
-				if (GET_PLAYER((PlayerTypes)iI).getTeam() == ((TeamTypes)trade.m_iData))
+				if (GET_TEAM(eDataTeam).getAtWarCount(true) == 0)
 				{
-					GET_PLAYER((PlayerTypes)iI).AI_changeMemoryCount(eToPlayer, MEMORY_HIRED_WAR_ALLY, 1);
+					kFromTeam.AI_setWarPlan(eDataTeam, WARPLAN_LIMITED);
+				}
+				else
+				{
+					kFromTeam.AI_setWarPlan(eDataTeam, WARPLAN_DOGPILE);
+				}
+			}
+			
+			// actually declare war
+			kFromTeam.declareWar(eDataTeam, true);
+
+			for (iI = 0; iI < MAX_PLAYERS; iI++)
+			{
+				if (GET_PLAYER((PlayerTypes)iI).isAlive())
+				{
+					if (GET_PLAYER((PlayerTypes)iI).getTeam() == eDataTeam)
+					{
+						GET_PLAYER((PlayerTypes)iI).AI_changeMemoryCount(eToPlayer, MEMORY_HIRED_WAR_ALLY, 1);
+					}
 				}
 			}
 		}

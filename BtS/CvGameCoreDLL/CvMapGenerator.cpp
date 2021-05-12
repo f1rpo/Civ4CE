@@ -500,6 +500,116 @@ void CvMapGenerator::doRiver(CvPlot *pStartPlot, CardinalDirectionTypes eLastCar
 	}
 }
 
+// pFreshWaterPlot = the plot we want to give a fresh water river
+// 
+bool CvMapGenerator::addRiver(CvPlot* pFreshWaterPlot)
+{
+	FAssertMsg(pFreshWaterPlot != NULL, "NULL plot parameter");
+	
+	// cannot have a river flow next to water
+	if (pFreshWaterPlot->isWater())
+	{
+		return false;
+	}
+	
+	// if it already has a fresh water river, then success! we done
+	if (pFreshWaterPlot->isRiver())
+	{
+		return true;
+	}
+	
+	bool bSuccess = false;
+
+	// randomize the order of directions
+	int aiShuffle[NUM_CARDINALDIRECTION_TYPES];
+	shuffleArray(aiShuffle, NUM_CARDINALDIRECTION_TYPES, GC.getGameINLINE().getMapRand());
+
+	// make two passes, once for each flow direction of the river
+	int iNWFlowPass = GC.getGameINLINE().getMapRandNum(2, "addRiver");
+	for (int iPass = 0; !bSuccess && iPass <= 1; iPass++)
+	{
+		// try placing a river edge in each direction, in random order
+		for (int iI = 0; !bSuccess && iI < NUM_CARDINALDIRECTION_TYPES; iI++)
+		{
+			CardinalDirectionTypes eRiverDirection = NO_CARDINALDIRECTION;
+			CvPlot *pRiverPlot = NULL;
+			
+			switch (aiShuffle[iI])
+			{
+			case CARDINALDIRECTION_NORTH:
+				if (iPass == iNWFlowPass)
+				{
+					pRiverPlot = plotDirection(pFreshWaterPlot->getX_INLINE(), pFreshWaterPlot->getY_INLINE(), DIRECTION_NORTH);
+					eRiverDirection = CARDINALDIRECTION_WEST;
+				}
+				else 
+				{
+					pRiverPlot = plotDirection(pFreshWaterPlot->getX_INLINE(), pFreshWaterPlot->getY_INLINE(), DIRECTION_NORTHWEST);
+					eRiverDirection = CARDINALDIRECTION_EAST;
+				}
+				break;
+
+			case CARDINALDIRECTION_EAST:
+				if (iPass == iNWFlowPass)
+				{
+					pRiverPlot = pFreshWaterPlot;
+					eRiverDirection = CARDINALDIRECTION_NORTH;
+				}
+				else 
+				{
+					pRiverPlot = plotDirection(pFreshWaterPlot->getX_INLINE(), pFreshWaterPlot->getY_INLINE(), DIRECTION_NORTH);
+					eRiverDirection = CARDINALDIRECTION_SOUTH;
+				}
+				break;
+
+			case CARDINALDIRECTION_SOUTH:
+				if (iPass == iNWFlowPass)
+				{
+					pRiverPlot = pFreshWaterPlot;
+					eRiverDirection = CARDINALDIRECTION_WEST;
+				}
+				else 
+				{
+					pRiverPlot = plotDirection(pFreshWaterPlot->getX_INLINE(), pFreshWaterPlot->getY_INLINE(), DIRECTION_WEST);
+					eRiverDirection = CARDINALDIRECTION_EAST;
+				}
+				break;
+
+			case CARDINALDIRECTION_WEST:
+				if (iPass == iNWFlowPass)
+				{
+					pRiverPlot = plotDirection(pFreshWaterPlot->getX_INLINE(), pFreshWaterPlot->getY_INLINE(), DIRECTION_WEST);
+					eRiverDirection = CARDINALDIRECTION_NORTH;
+				}
+				else 
+				{
+					pRiverPlot = plotDirection(pFreshWaterPlot->getX_INLINE(), pFreshWaterPlot->getY_INLINE(), DIRECTION_NORTHWEST);
+					eRiverDirection = CARDINALDIRECTION_SOUTH;
+				}
+				break;
+
+			default:
+				FAssertMsg(false, "invalid cardinal direction");
+			}
+			
+			if (pRiverPlot != NULL && !pRiverPlot->hasCoastAtSECorner())
+			{
+				// try to make the river
+				doRiver(pRiverPlot, eRiverDirection, eRiverDirection, -1);
+
+				// if it succeeded, then we will be a river now!
+				if (pFreshWaterPlot->isRiver())
+				{
+					bSuccess = true;
+				}
+			}
+		}
+	}
+
+	return bSuccess;
+}
+
+
 void CvMapGenerator::addFeatures()
 {
 	PROFILE("CvMapGenerator::addFeatures");

@@ -4,6 +4,7 @@
 #define CIV4_UNIT_AI_H
 
 #include "CvUnit.h"
+#include "CvPlotRegion.h"
 
 class CvCity;
 
@@ -19,7 +20,7 @@ public:
 	void AI_uninit();
 	void AI_reset(UnitAITypes eUnitAI = NO_UNITAI);
 
-	void AI_update();
+	bool AI_update();
 	bool AI_follow();
 
 	void AI_upgrade();
@@ -38,17 +39,24 @@ public:
 	int AI_getBirthmark() const;
 	void AI_setBirthmark(int iNewValue);
 
-  UnitAITypes AI_getUnitAIType() const;
-  void AI_setUnitAIType(UnitAITypes eNewValue);
+	UnitAITypes AI_getUnitAIType() const;
+	void AI_setUnitAIType(UnitAITypes eNewValue);
 
-  void read(FDataStreamBase* pStream);
-  void write(FDataStreamBase* pStream);
+	int AI_sacrificeValue(const CvPlot* pPlot) const;
+	
+	CvPlot* AI_getBestExplorePlot(int iRange, CvPlot** pThisTurnPlot = NULL, bool bNoRandom = false);
+	CvPlot* AI_getBestGoodyPlot(CvPlot* pStartPlot, int iRange, CvPlot** pThisTurnPlot = NULL, bool bNoRandom = false);
+
+	void read(FDataStreamBase* pStream);
+	void write(FDataStreamBase* pStream);
 
 protected:
 
 	int m_iBirthmark;
 
-  UnitAITypes m_eUnitAIType;
+	UnitAITypes m_eUnitAIType;
+
+	int m_iAutomatedAbortTurn;
 
 	void AI_animalMove();
 	void AI_settleMove();
@@ -86,6 +94,7 @@ protected:
 	void AI_attackAirMove();
 	void AI_defenseAirMove();
 	void AI_carrierAirMove();
+	void AI_exploreAirMove();
 
 	void AI_networkAutomated();
 	void AI_cityAutomated();
@@ -108,30 +117,41 @@ protected:
 	bool AI_afterAttack();
 	bool AI_goldenAge();
 	bool AI_spreadReligion();
-	bool AI_discover(bool bThisTurnOnly = false, bool bFirstReseachOnly = false);
+	bool AI_discover(bool bThisTurnOnly = false, bool bFirstResearchOnly = false);
 	bool AI_lead(std::vector<UnitAITypes>& aeAIUnitTypes);
-	bool AI_join();
-	bool AI_construct();
+	bool AI_join(int iMaxCount = MAX_INT);
+	bool AI_construct(int iMaxCount = MAX_INT);
 	bool AI_switchHurry();
 	bool AI_hurry();
 	bool AI_greatWork();
 	bool AI_offensiveAirlift();
 	bool AI_protect(int iOddsThreshold);
+	int AI_fogbustPlotValue(const CvPlot* pPlot, int iNumObservers) const;
+	int AI_fogbustRegionValue(const CvPlotRegion& plotRegion, bool* pbAdjacentOurTerritory = NULL, const CvPlotRegion* pVisibleRegion = NULL) const;
+	int AI_fogbustDataRegionValue(const CvPlotDataRegion& plotRegion, bool bRegionIsVisible = true, bool* pbAdjacentOurTerritory = NULL, const CvPlotDataRegion* pVisibleRegion = NULL) const;
+	bool AI_fogbustPlotDifference(const CvPlot* pNewPlot, const CvPlotDataRegion& visiblePlotRegion, int& iFogbustingLostValue, int& iFogbustingGainedValue) const;
+	bool AI_fogbust();
+	bool AI_airFogbust();
 	bool AI_patrol();
 	bool AI_defend();
 	bool AI_safety();
 	bool AI_hide();
 	bool AI_goody(int iRange);
+	int AI_explorePlotValue(const CvPlot* pPlot, bool bAddRandom = false, bool bIgnoreGoodies = false) const;
+	int AI_exploreTurnPathValue(void) const;
 	bool AI_explore();
 	bool AI_exploreRange(int iRange);
+	bool AI_airExplore();
 	bool AI_targetCity();
 	bool AI_targetBarbCity();
 	bool AI_bombardCity();
 	bool AI_cityAttack(int iRange, int iOddsThreshold, bool bFollow = false);
 	bool AI_anyAttack(int iRange, int iOddsThreshold, int iMinStack = 0, bool bFollow = false);
+	bool AI_leaveAttack(int iRange, int iThreshold, int iStrengthThreshold);
 	bool AI_blockade();
-	bool AI_pillage();
-	bool AI_pillageRange(int iRange);
+	bool AI_seaBombardRange(int iMaxRange);
+	bool AI_pillage(int iBonusValueThreshold = 0);
+	bool AI_pillageRange(int iRange, int iBonusValueThreshold = 0);
 	bool AI_found();
 	bool AI_foundRange(int iRange, bool bFollow = false);
 	bool AI_assaultSeaTransport();
@@ -149,6 +169,7 @@ protected:
 	bool AI_connectCity();
 	bool AI_routeCity();
 	bool AI_routeTerritory(bool bImprovementOnly = false);
+	bool AI_travelToUpgradeCity();
 	bool AI_retreatToCity(bool bPrimary = false, bool bAirlift = false, int iMaxPath = MAX_INT);
 	bool AI_pickup(UnitAITypes eUnitAI);
 	bool AI_airOffensiveCity();
@@ -157,13 +178,15 @@ protected:
 	bool AI_airStrike();
 	bool AI_airBomb();
 	bool AI_nuke();
+	bool AI_trade(int iValueThreshold);
+	bool AI_moveToStagingCity();
 
 	bool AI_followBombard();
 
-	bool AI_potentialEnemy(TeamTypes eTeam);
+	bool AI_potentialEnemy(TeamTypes eTeam, const CvPlot* pPlot = NULL);
 
 	bool AI_defendPlot(CvPlot* pPlot);
-	int AI_pillageValue(CvPlot* pPlot);
+	int AI_pillageValue(CvPlot* pPlot, int iBonusValueThreshold = 0);
 	int AI_nukeValue(CvCity* pCity);
 
 	int AI_searchRange(int iRange);
@@ -173,6 +196,17 @@ protected:
 
 	int AI_stackOfDoomExtra();
 
+    bool AI_stackAttackCity(int iRange, int iPowerThreshold, bool bFollow = true);
+    bool AI_moveIntoCity(int iRange);
+    bool AI_groupMergeRange(UnitAITypes eUnitAI, int iRange, bool bBiggerOnly = true, bool bAllowRegrouping = false);
+    
+    bool AI_artistCultureVictoryMove();
+
+	// added so under cheat mode we can call protected functions for testing
+	friend class CvGameTextMgr;
+#ifdef FASSERT_ENABLE
+	friend class CvGame;
+#endif
 };
 
 #endif
