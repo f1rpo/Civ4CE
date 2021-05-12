@@ -165,6 +165,11 @@ bool CvMapGenerator::canPlaceGoodyAt(ImprovementTypes eImprovement, int iX, int 
 	FAssertMsg(eImprovement != NO_IMPROVEMENT, "Improvement is not assigned a valid value");
 	FAssertMsg(GC.getImprovementInfo(eImprovement).isGoody(), "ImprovementType eImprovement is expected to be a goody");
 
+	if (GC.getGameINLINE().isOption(GAMEOPTION_NO_GOODY_HUTS))
+	{
+		return false;
+	}
+
 	pPlot = GC.getMapINLINE().plotINLINE(iX, iY);
 
 	if (!(pPlot->canHaveImprovement(eImprovement, NO_TEAM))) 

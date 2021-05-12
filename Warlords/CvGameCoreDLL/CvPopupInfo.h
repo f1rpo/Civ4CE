@@ -17,8 +17,8 @@ public:
 	DllExport CvPopupInfo(ButtonPopupTypes eButtonPopupType = BUTTONPOPUP_TEXT, int iData1 = -1, int iData2 = -1, int iData3 = -1, int iFlags = 0, bool bOption1 = false, bool bOption2 = false);
 	DllExport virtual ~CvPopupInfo();
 
-	void read(FDataStreamBase& stream);
-	void write(FDataStreamBase& stream) const;
+	DllExport void read(FDataStreamBase& stream);
+	DllExport void write(FDataStreamBase& stream) const;
 
 	DllExport const CvPopupInfo& operator=(const CvPopupInfo& other);
 

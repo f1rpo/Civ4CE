@@ -100,7 +100,7 @@ public:
 	virtual bool isDirty(InterfaceDirtyBits eDirtyItem) = 0;
 	virtual void setDirty(InterfaceDirtyBits eDirtyItem, bool bNewValue) = 0;
 	virtual void makeInterfaceDirty() = 0;
-	virtual void updateCursorType() = 0;
+	virtual bool updateCursorType() = 0;
 
 	virtual void lookAt(NiPoint3 pt3Target, CameraLookAtTypes type, NiPoint3 attackDirection = NiPoint3(0, 1, 0)) = 0;
 	virtual void centerCamera(CvUnit*) = 0;
@@ -121,6 +121,8 @@ public:
 	virtual void setInterfaceMode(InterfaceModeTypes eNewValue) = 0;
 	virtual void setFlashing(PlayerTypes eWho, bool bFlashing = true) = 0;
 	virtual bool isFlashing(PlayerTypes eWho) = 0;
+	virtual void setDiplomacyLocked(bool bLocked) = 0;
+	virtual bool isDiplomacyLocked() = 0;
 
 	virtual void setMinimapColor(MinimapModeTypes eMinimapMode, int iX, int iY, ColorTypes eColor, float fAlpha) = 0;
 	virtual unsigned char* getMinimapBaseTexture() const = 0;
@@ -140,6 +142,7 @@ public:
 
 	virtual int getPlotListColumn() = 0;
 	virtual void verifyPlotListColumn() = 0;
+	virtual int getPlotListOffset() = 0;
 
 	virtual void unlockPopupHelp() = 0;
 

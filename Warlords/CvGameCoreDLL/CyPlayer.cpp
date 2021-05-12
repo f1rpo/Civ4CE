@@ -527,6 +527,11 @@ int CyPlayer::calculateResearchModifier(int /*TechTypes*/ eTech)
 	return m_pPlayer ? m_pPlayer->calculateResearchModifier((TechTypes)eTech) : -1;
 }
 
+int CyPlayer::calculateBaseNetResearch()
+{
+	return m_pPlayer ? m_pPlayer->calculateBaseNetResearch() : -1;
+}
+
 bool CyPlayer::isResearch()
 {
 	return m_pPlayer ? m_pPlayer->isResearch() : false;
@@ -655,9 +660,9 @@ int CyPlayer::unitsGoldenAgeReady()
 	return m_pPlayer ? m_pPlayer->unitsGoldenAgeReady() : -1;
 }
 
-int CyPlayer::greatPeopleThreshold()
+int CyPlayer::greatPeopleThreshold(bool bMilitary)
 {
-	return m_pPlayer ? m_pPlayer->greatPeopleThreshold() : -1;
+	return m_pPlayer ? m_pPlayer->greatPeopleThreshold(bMilitary) : -1;
 }
 
 int CyPlayer::specialistYield(int /*SpecialistTypes*/ eSpecialist, int /*YieldTypes*/ eCommerce)
@@ -802,9 +807,23 @@ int CyPlayer::getHurryModifier()
 	return m_pPlayer ? m_pPlayer->getHurryModifier() : -1;
 }
 
+void CyPlayer::createGreatPeople(int eGreatPersonUnit, bool bIncrementThreshold, bool bIncrementExperience, int iX, int iY)
+{
+	if (m_pPlayer)
+	{
+		m_pPlayer->createGreatPeople((UnitTypes)eGreatPersonUnit, bIncrementThreshold, bIncrementExperience, iX, iY);
+	}
+
+}
+
 int CyPlayer::getGreatPeopleCreated()
 {
 	return m_pPlayer ? m_pPlayer->getGreatPeopleCreated() : -1;
+}
+
+int CyPlayer::getGreatGeneralsCreated()
+{
+	return m_pPlayer ? m_pPlayer->getGreatGeneralsCreated() : -1;
 }
 
 int CyPlayer::getGreatPeopleThresholdModifier()
@@ -812,9 +831,24 @@ int CyPlayer::getGreatPeopleThresholdModifier()
 	return m_pPlayer ? m_pPlayer->getGreatPeopleThresholdModifier() : -1;
 }
 
+int CyPlayer::getGreatGeneralsThresholdModifier()
+{
+	return m_pPlayer ? m_pPlayer->getGreatGeneralsThresholdModifier() : -1;
+}
+
 int CyPlayer::getGreatPeopleRateModifier()
 {
 	return m_pPlayer ? m_pPlayer->getGreatPeopleRateModifier() : -1;
+}
+
+int CyPlayer::getGreatGeneralRateModifier()
+{
+	return m_pPlayer ? m_pPlayer->getGreatGeneralRateModifier() : -1;
+}
+
+int CyPlayer::getDomesticGreatGeneralRateModifier()
+{
+	return m_pPlayer ? m_pPlayer->getDomesticGreatGeneralRateModifier() : -1;
 }
 
 int CyPlayer::getStateReligionGreatPeopleRateModifier()
@@ -969,6 +1003,11 @@ bool CyPlayer::isNoUnhealthyPopulation()
 	return m_pPlayer ? m_pPlayer->isNoUnhealthyPopulation() : false;
 }
 
+bool CyPlayer::getExpInBorderModifier()
+{
+	return m_pPlayer ? m_pPlayer->getExpInBorderModifier() : false;
+}
+
 bool CyPlayer::isBuildingOnlyHealthy()
 {
 	return m_pPlayer ? m_pPlayer->isBuildingOnlyHealthy() : false;
@@ -992,6 +1031,11 @@ int CyPlayer::getTotalMaintenance()
 int CyPlayer::getUpkeepModifier()
 {
 	return m_pPlayer ? m_pPlayer->getUpkeepModifier() : -1;
+}
+
+int CyPlayer::getLevelExperienceModifier() const
+{
+	return m_pPlayer ? m_pPlayer->getLevelExperienceModifier() : -1;
 }
 
 int CyPlayer::getExtraHealth()
@@ -1243,11 +1287,6 @@ void CyPlayer::setPersonalityType(int /*LeaderHeadTypes*/ eNewValue)
 int /*ErasTypes*/ CyPlayer::getCurrentEra()
 {
 	return m_pPlayer ? (int) m_pPlayer->getCurrentEra() : NO_ERA;
-}
-
-bool CyPlayer::isLateEra()
-{
-	return m_pPlayer ? m_pPlayer->isLateEra() : false;
 }
 
 void CyPlayer::setCurrentEra(int /*EraTypes*/ iNewValue)
@@ -1566,6 +1605,33 @@ void CyPlayer::setCivics(int /*CivicOptionTypes*/ eIndex, int /*CivicTypes*/ eNe
 {
 	if (m_pPlayer)
 		m_pPlayer->setCivics((CivicOptionTypes) eIndex, (CivicTypes) eNewValue);
+}
+
+int CyPlayer::getCombatExperience() const
+{
+	if (m_pPlayer)
+	{
+		return m_pPlayer->getCombatExperience();
+	}
+	return -1;
+}
+
+void CyPlayer::changeCombatExperience(int iChange)
+{
+	if (m_pPlayer)
+	{
+		m_pPlayer->changeCombatExperience(iChange);
+	}
+	
+}
+
+void CyPlayer::setCombatExperience(int iExperience)
+{
+	if (m_pPlayer)
+	{
+		m_pPlayer->setCombatExperience(iExperience);
+	}
+
 }
 
 int CyPlayer::getSpecialistExtraYield(int /*SpecialistTypes*/ eIndex1, int /*YieldTypes*/ eIndex2)

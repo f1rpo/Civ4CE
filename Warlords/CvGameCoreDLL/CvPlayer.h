@@ -21,16 +21,6 @@ typedef stdext::hash_map<int, int> CvTurnScoreMap;
 class CvPlayer
 {
 public:
-	enum SaveBits
-	{
-		SAVEDATA_HAS_LEAVE_FOREST_OPTION = 0x01,
-		SAVEDATA_TOTAL_LAND_SCORED = 0x02,
-		SAVEDATA_IMPROVEMENT_YIELD_CHANGE = 0x04,
-		SAVEDATA_PBEM_NEW_TURN = 0x08,
-		SAVEDATA_FEATURE_PRODUCTION_MODIFIER = 0x10,
-		SAVEDATA_SIMPLE_CIVICS = 0x20
-	};
-
 	CvPlayer();
 	virtual ~CvPlayer();
 
@@ -56,7 +46,7 @@ public:
 
 	CvPlotGroup* initPlotGroup(CvPlot* pPlot);													
 
-	DllExport CvCity* initCity(int iX, int iY);																																// Exposed to Python
+	DllExport CvCity* initCity(int iX, int iY, bool bBumpUnits = true);																																// Exposed to Python
 	void acquireCity(CvCity* pCity, bool bConquest, bool bTrade);																							// Exposed to Python
 	void killCities();																																												// Exposed to Python
 	CvWString getNewCityName();																																								// Exposed to Python
@@ -205,7 +195,7 @@ public:
 	int calculateInflatedCosts();																																		// Exposed to Python
 
 	int calculateBaseNetGold();
-	int calculateBaseNetResearch(TechTypes eTech = NO_TECH);
+	int calculateBaseNetResearch(TechTypes eTech = NO_TECH);   // Exposed to Python
 	int calculateResearchModifier(TechTypes eTech);   // Exposed to Python
 	int calculateGoldRate();																																				// Exposed to Python
 	int calculateResearchRate(TechTypes eTech = NO_TECH);																						// Exposed to Python
@@ -240,7 +230,7 @@ public:
 	DllExport int unitsGoldenAgeReady();																														// Exposed to Python
 	void killGoldenAgeUnits(CvUnit* pUnitAlive);
 
-	DllExport int greatPeopleThreshold();																														// Exposed to Python
+	DllExport int greatPeopleThreshold(bool bMilitary = false);																														// Exposed to Python
 	int specialistYield(SpecialistTypes eSpecialist, YieldTypes eYield);														// Exposed to Python
 	int specialistCommerce(SpecialistTypes eSpecialist, CommerceTypes eCommerce);										// Exposed to Python
 
@@ -287,14 +277,28 @@ public:
 	int getHurryModifier();																																					// Exposed to Python
 	void changeHurryModifier(int iChange);
 
+	void createGreatPeople(UnitTypes eGreatPersonUnit, bool bIncrementThreshold, bool bIncrementExperience, int iX, int iY);
+
 	int getGreatPeopleCreated();																																		// Exposed to Python
 	void incrementGreatPeopleCreated();
+
+	int getGreatGeneralsCreated();																																		// Exposed to Python
+	void incrementGreatGeneralsCreated();
 
 	int getGreatPeopleThresholdModifier();																													// Exposed to Python
 	void changeGreatPeopleThresholdModifier(int iChange);										
 
+	int getGreatGeneralsThresholdModifier();																													// Exposed to Python
+	void changeGreatGeneralsThresholdModifier(int iChange);										
+
 	int getGreatPeopleRateModifier();																																// Exposed to Python
 	void changeGreatPeopleRateModifier(int iChange);
+
+	int getGreatGeneralRateModifier();																																// Exposed to Python
+	void changeGreatGeneralRateModifier(int iChange);
+
+	int getDomesticGreatGeneralRateModifier();																																// Exposed to Python
+	void changeDomesticGreatGeneralRateModifier(int iChange);
 
 	int getStateReligionGreatPeopleRateModifier();																									// Exposed to Python
 	void changeStateReligionGreatPeopleRateModifier(int iChange);
@@ -384,6 +388,9 @@ public:
 	bool isNoUnhealthyPopulation();																																			// Exposed to Python
 	void changeNoUnhealthyPopulationCount(int iChange);
 
+	int getExpInBorderModifier() const;
+	void changeExpInBorderModifier(int iChange);
+
 	int getBuildingOnlyHealthyCount();
 	bool isBuildingOnlyHealthy();																																				// Exposed to Python
 	void changeBuildingOnlyHealthyCount(int iChange);
@@ -399,6 +406,9 @@ public:
 
 	int getUpkeepModifier();																																						// Exposed to Python
 	void changeUpkeepModifier(int iChange);
+
+	int getLevelExperienceModifier() const;																																						// Exposed to Python
+	void changeLevelExperienceModifier(int iChange);
 
 	DllExport int getExtraHealth();																																			// Exposed to Python
 	void changeExtraHealth(int iChange);
@@ -483,14 +493,18 @@ public:
 	DllExport int getPower();																																						// Exposed to Python
 	void changePower(int iChange);
 
-	DllExport int getPopScore();																																				// Exposed to Python
+	DllExport int getPopScore(bool bCheckVassal = true);																																				// Exposed to Python
 	void changePopScore(int iChange);																																		// Exposed to Python  
-	DllExport int getLandScore();																																				// Exposed to Python
+	DllExport int getLandScore(bool bCheckVassal = true);																																				// Exposed to Python
 	void changeLandScore(int iChange);																																	// Exposed to Python  
 	DllExport int getTechScore();																																				// Exposed to Python
 	void changeTechScore(int iChange);																																	// Exposed to Python  
 	DllExport int getWondersScore();																																		// Exposed to Python
-	void changeWondersScore(int iChange);																																// Exposed to Python  
+	void changeWondersScore(int iChange);	// Exposed to Python  
+
+	int getCombatExperience() const; 	// Exposed to Python  
+	void setCombatExperience(int iExperience);   // Exposed to Python
+	void changeCombatExperience(int iChange);   // Exposed to Python
 
 	DllExport bool isConnected();
 	DllExport int getNetID();
@@ -544,7 +558,6 @@ public:
 	void setPersonalityType(LeaderHeadTypes eNewValue);																					// Exposed to Python									
 																																																				
 	DllExport EraTypes getCurrentEra() const;																										// Exposed to Python									
-	DllExport bool isLateEra() const;																														// Exposed to Python									
 	void setCurrentEra(EraTypes eNewValue);																											
 																																															
 	ReligionTypes getLastStateReligion();																												
@@ -677,6 +690,9 @@ public:
 	DllExport bool isResearchingTech(TechTypes eIndex);																					// Exposed to Python					
 	void setResearchingTech(TechTypes eIndex, bool bNewValue);																	
 																																															
+	DllExport bool isTributePaid(PlayerTypes eMaster) const;
+	void setTributePaid(PlayerTypes eMaster, bool bNewValue);
+
 	DllExport CivicTypes getCivics(CivicOptionTypes eIndex);																		// Exposed to Python					
 	int getSingleCivicUpkeep(CivicTypes eCivic, bool bIgnoreAnarchy = false);										// Exposed to Python					
 	int getCivicUpkeep(CivicTypes* paeCivics = NULL, bool bIgnoreAnarchy = false);							// Exposed to Python					
@@ -804,11 +820,11 @@ public:
 	virtual bool AI_isWillingToTalk(PlayerTypes ePlayer) = 0;
 	virtual bool AI_demandRebukedSneak(PlayerTypes ePlayer) = 0;
 	virtual bool AI_demandRebukedWar(PlayerTypes ePlayer) = 0;																		// Exposed to Python
-	virtual AttitudeTypes AI_getAttitude(PlayerTypes ePlayer) = 0;																// Exposed to Python
+	virtual AttitudeTypes AI_getAttitude(PlayerTypes ePlayer, bool bForced = true) = 0;																// Exposed to Python
 	virtual int AI_diploVote(VoteTypes eVote) = 0;
-	virtual int AI_dealVal(PlayerTypes ePlayer, CLinkList<TradeData>* pList, bool bIgnoreAnnual = false) = 0;
-	virtual bool AI_considerOffer(PlayerTypes ePlayer, CLinkList<TradeData>* pTheirList, CLinkList<TradeData>* pOurList) = 0;
-	virtual bool AI_counterPropose(PlayerTypes ePlayer, CLinkList<TradeData>* pTheirList, CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirInventory, CLinkList<TradeData>* pOurInventory, CLinkList<TradeData>* pTheirCounter, CLinkList<TradeData>* pOurCounter) = 0;
+	virtual int AI_dealVal(PlayerTypes ePlayer, const CLinkList<TradeData>* pList, bool bIgnoreAnnual = false) = 0;
+	virtual bool AI_considerOffer(PlayerTypes ePlayer, const CLinkList<TradeData>* pTheirList, const CLinkList<TradeData>* pOurList) = 0;
+	virtual bool AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeData>* pTheirList, const CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirInventory, CLinkList<TradeData>* pOurInventory, CLinkList<TradeData>* pTheirCounter, CLinkList<TradeData>* pOurCounter) = 0;
 	virtual int AI_bonusVal(BonusTypes eBonus) = 0;
 	virtual int AI_bonusTradeVal(BonusTypes eBonus, PlayerTypes ePlayer) = 0;
 	virtual DenialTypes AI_bonusTrade(BonusTypes eBonus, PlayerTypes ePlayer) = 0;
@@ -833,6 +849,7 @@ public:
 	virtual void AI_setFirstContact(PlayerTypes eIndex, bool bNewValue) = 0;
 	virtual int AI_getMemoryCount(PlayerTypes eIndex1, MemoryTypes eIndex2) = 0;
 	virtual void AI_changeMemoryCount(PlayerTypes eIndex1, MemoryTypes eIndex2, int iChange) = 0;
+	virtual void AI_doCommerce() = 0;
 	
 protected:
 
@@ -851,8 +868,12 @@ protected:
 	int m_iAnarchyModifier;
 	int m_iGlobalHurryModifier;
 	int m_iGreatPeopleCreated;
+	int m_iGreatGeneralsCreated;
 	int m_iGreatPeopleThresholdModifier;
+	int m_iGreatGeneralsThresholdModifier;
 	int m_iGreatPeopleRateModifier;
+	int m_iGreatGeneralRateModifier;
+	int m_iDomesticGreatGeneralRateModifier;
 	int m_iStateReligionGreatPeopleRateModifier;
 	int m_iMaxGlobalBuildingProductionModifier;
 	int m_iMaxTeamBuildingProductionModifier;
@@ -881,11 +902,13 @@ protected:
 	int m_iHighestUnitLevel;
 	int m_iOverflowResearch;
 	int m_iNoUnhealthyPopulationCount;
+	int m_iExpInBorderModifier;
 	int m_iBuildingOnlyHealthyCount;
 	int m_iDistanceMaintenanceModifier;
 	int m_iNumCitiesMaintenanceModifier;
 	int m_iTotalMaintenance;
 	int m_iUpkeepModifier;
+	int m_iLevelExperienceModifier;
 	int m_iExtraHealth;
 	int m_iBuildingGoodHealth;
 	int m_iBuildingBadHealth;
@@ -916,6 +939,7 @@ protected:
 	int m_iLandScore;
 	int m_iTechScore;
 	int m_iWondersScore;
+	int m_iCombatExperience;
 
 	uint m_uiStartTime;  // XXX save these?
 
@@ -934,23 +958,23 @@ protected:
 	EraTypes m_eCurrentEra;
 	ReligionTypes m_eLastStateReligion;
 
-	int m_aiSeaPlotYield[NUM_YIELD_TYPES];
-	int m_aiYieldRateModifier[NUM_YIELD_TYPES];
-	int m_aiCapitalYieldRateModifier[NUM_YIELD_TYPES];
-	int m_aiExtraYieldThreshold[NUM_YIELD_TYPES];
-	int m_aiTradeYieldModifier[NUM_YIELD_TYPES];
-	int m_aiFreeCityCommerce[NUM_COMMERCE_TYPES];
-	int m_aiCommercePercent[NUM_COMMERCE_TYPES];
-	int m_aiCommerceRate[NUM_COMMERCE_TYPES];
-	int m_aiCommerceRateModifier[NUM_COMMERCE_TYPES];
-	int m_aiCapitalCommerceRateModifier[NUM_COMMERCE_TYPES];
-	int m_aiStateReligionBuildingCommerce[NUM_COMMERCE_TYPES];
-	int m_aiSpecialistExtraCommerce[NUM_COMMERCE_TYPES];
-	int m_aiCommerceFlexibleCount[NUM_COMMERCE_TYPES];
-	int m_aiGoldPerTurnByPlayer[MAX_PLAYERS];
+	int* m_aiSeaPlotYield;
+	int* m_aiYieldRateModifier;
+	int* m_aiCapitalYieldRateModifier;
+	int* m_aiExtraYieldThreshold;
+	int* m_aiTradeYieldModifier;
+	int* m_aiFreeCityCommerce;
+	int* m_aiCommercePercent;
+	int* m_aiCommerceRate;
+	int* m_aiCommerceRateModifier;
+	int* m_aiCapitalCommerceRateModifier;
+	int* m_aiStateReligionBuildingCommerce;
+	int* m_aiSpecialistExtraCommerce;
+	int* m_aiCommerceFlexibleCount;
+	int* m_aiGoldPerTurnByPlayer;
 
-	bool m_abFeatAccomplished[NUM_FEAT_TYPES];
-	bool m_abOptions[NUM_PLAYEROPTION_TYPES];
+	bool* m_abFeatAccomplished;
+	bool* m_abOptions;
 
 	CvString m_szScriptData;
 
@@ -973,6 +997,7 @@ protected:
 	int* m_paiSpecialistValidCount;
 
 	bool* m_pabResearchingTech;
+	bool* m_pabTributePaid;
 
 	CivicTypes* m_paeCivics;
 

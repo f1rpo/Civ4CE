@@ -34,6 +34,7 @@ class CvDiploParameters;
 class CvAudioGame;
 struct ProfileSample;
 class CvReplayInfo;
+class CvPopupInfo;
 
 class CvDLLUtilityIFaceBase
 {
@@ -121,6 +122,7 @@ public:
 	virtual void sendClearTableMessage(PlayerTypes eWhoTradingWith) = 0;
 	virtual void sendImplementDealMessage(PlayerTypes eOtherWho, CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirList) = 0;
 	virtual void sendChangeWar(TeamTypes iRivalTeam, bool bWar) = 0;
+	virtual void sendChangeVassal(TeamTypes iMasterTeam, bool bVassal, bool bCapitulated) = 0;
 	virtual void sendChooseElection(VoteTypes eVote) = 0;
 	virtual void sendDiploVote(VoteTypes eVote, int iChoice) = 0;
 	virtual void sendContactCiv(NetContactTypes eContactType, PlayerTypes eWho) = 0;
@@ -132,6 +134,7 @@ public:
 	virtual void sendKillDeal(int iDealID) = 0;
 	virtual void sendUpdateCivics(CivicTypes* paeCivics) = 0;
 	virtual void sendDiplomacy(PlayerTypes ePlayer, CvDiploParameters* pParams) = 0;
+	virtual void sendPopup(PlayerTypes ePlayer, CvPopupInfo* pInfo) = 0;
 
 	virtual int getMillisecsPerTurn() = 0;
 	virtual float getSecsPerTurn() = 0;
@@ -156,6 +159,7 @@ public:
 	virtual const wchar* getCivShortDescKey(int iIndex) = 0;
 	virtual const wchar* getCivAdjective(int iIndex, uint uiForm = 0) = 0;
 	virtual const wchar* getCivAdjectiveKey(int iIndex) = 0;
+	virtual void stripSpecialCharacters(CvWString& szName) = 0;
 
 	virtual void initGlobals() = 0;
 	virtual void uninitGlobals() = 0;
@@ -217,7 +221,7 @@ public:
 	virtual int getSymbolID(int iID) = 0;
 
 	virtual CvWString getText(CvWString szIDTag, ...) = 0;
-	virtual CvWString getObjectText(CvWString szIDTag, uint uiForm) = 0;
+	virtual CvWString getObjectText(CvWString szIDTag, uint uiForm, bool bNoSubs = false) = 0;
 	virtual void addText(const TCHAR* szIDTag, const wchar* szString, const char* szGender = "N", const char* szPlural = "false") = 0;		
 	virtual uint getNumForms(CvWString szIDTag) = 0;
 

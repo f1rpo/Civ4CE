@@ -23,6 +23,7 @@ public:
 	DllExport void AI_updateAssignWork();
 
 	DllExport bool AI_avoidGrowth();
+	DllExport bool AI_ignoreGrowth();
 	DllExport int AI_specialistValue(SpecialistTypes eSpecialist, bool bAvoidGrowth, bool bRemove);
 
 	DllExport void AI_chooseProduction();
@@ -92,8 +93,8 @@ protected:
 
 	IDInfo m_routeToCity;
 
-	int m_aiEmphasizeYieldCount[NUM_YIELD_TYPES];
-	int m_aiEmphasizeCommerceCount[NUM_COMMERCE_TYPES];
+	int* m_aiEmphasizeYieldCount;
+	int* m_aiEmphasizeCommerceCount;
 	int m_aiBestBuildValue[NUM_CITY_PLOTS];
 
 	BuildTypes m_aeBestBuild[NUM_CITY_PLOTS];
@@ -116,8 +117,8 @@ protected:
 
 	bool AI_potentialPlot(short* piYields);
 	bool AI_foodAvailable(int iExtra = 0);
-	int AI_yieldValue(short* piYields, bool bAvoidGrowth, bool bRemove, bool bIgnoreFood = false);
-	int AI_plotValue(CvPlot* pPlot, bool bAvoidGrowth, bool bRemove, bool bIgnoreFood = false);
+	int AI_yieldValue(short* piYields, bool bAvoidGrowth, bool bRemove, bool bIgnoreFood = false, bool bIgnoreGrowth = false);
+	int AI_plotValue(CvPlot* pPlot, bool bAvoidGrowth, bool bRemove, bool bIgnoreFood = false, bool bIgnoreGrowth = false);
 
 	int AI_experienceWeight();
 	int AI_buildUnitProb();

@@ -5,6 +5,16 @@
 #include "CyCity.h"
 #include "CyUnit.h"
 
+int cyIntRange(int iNum, int iLow, int iHigh)
+{
+	return range(iNum, iLow, iHigh);
+}
+
+float cyFloatRange(float fNum, float fLow, float fHigh)
+{
+	return range(fNum, fLow, fHigh);
+}
+
 int cyDxWrap(int iDX)
 {
 	return dxWrap(iDX);

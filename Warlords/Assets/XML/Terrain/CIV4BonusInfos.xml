@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
 <!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by Soren Johnson (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
@@ -22,6 +23,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>10</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>2</iPlacementOrder>
@@ -78,6 +80,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>2</iPlacementOrder>
@@ -130,6 +133,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>10</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>1</iPlacementOrder>
@@ -194,6 +198,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>1</iPlacementOrder>
@@ -250,6 +255,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>10</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>0</iPlacementOrder>
@@ -314,6 +320,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>3</iPlacementOrder>
@@ -370,6 +377,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>20</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>0</iPlacementOrder>
@@ -440,6 +448,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>3</iPlacementOrder>
@@ -484,7 +493,7 @@
 			<BonusClassType>BONUSCLASS_MODERN</BonusClassType>
 			<ArtDefineTag>ART_DEF_BONUS_URANIUM</ArtDefineTag>
 			<TechReveal>TECH_PHYSICS</TechReveal>
-			<TechCityTrade>TECH_MINING</TechCityTrade>
+			<TechCityTrade>TECH_FISSION</TechCityTrade>
 			<TechObsolete>NONE</TechObsolete>
 			<YieldChanges>
 				<iYieldChange>0</iYieldChange>
@@ -492,6 +501,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>30</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>2</iPlacementOrder>
@@ -586,6 +596,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>1</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>4</iPlacementOrder>
@@ -639,6 +650,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>1</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>6</iPlacementOrder>
@@ -687,6 +699,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>1</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>4</iPlacementOrder>
@@ -736,6 +749,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>1</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>4</iPlacementOrder>
@@ -788,6 +802,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>1</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>6</iPlacementOrder>
@@ -836,6 +851,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>1</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>4</iPlacementOrder>
@@ -894,6 +910,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>1</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>6</iPlacementOrder>
@@ -946,6 +963,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>1</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>4</iPlacementOrder>
@@ -1004,6 +1022,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>1</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>4</iPlacementOrder>
@@ -1062,6 +1081,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>1</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>4</iPlacementOrder>
@@ -1114,6 +1134,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>1</iHealth>
 			<iHappiness>0</iHappiness>
 			<iPlacementOrder>4</iPlacementOrder>
@@ -1163,6 +1184,7 @@
 				<iYieldChange>1</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>1</iHappiness>
 			<iPlacementOrder>5</iPlacementOrder>
@@ -1216,6 +1238,7 @@
 				<iYieldChange>1</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>1</iHappiness>
 			<iPlacementOrder>5</iPlacementOrder>
@@ -1282,6 +1305,7 @@
 				<iYieldChange>1</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>1</iHappiness>
 			<iPlacementOrder>5</iPlacementOrder>
@@ -1335,6 +1359,7 @@
 				<iYieldChange>1</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>1</iHappiness>
 			<iPlacementOrder>5</iPlacementOrder>
@@ -1387,6 +1412,7 @@
 				<iYieldChange>1</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>1</iHappiness>
 			<iPlacementOrder>5</iPlacementOrder>
@@ -1435,6 +1461,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>1</iHappiness>
 			<iPlacementOrder>5</iPlacementOrder>
@@ -1493,6 +1520,7 @@
 				<iYieldChange>1</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>1</iHappiness>
 			<iPlacementOrder>5</iPlacementOrder>
@@ -1551,6 +1579,7 @@
 				<iYieldChange>1</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>1</iHappiness>
 			<iPlacementOrder>5</iPlacementOrder>
@@ -1603,6 +1632,7 @@
 				<iYieldChange>1</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>1</iHappiness>
 			<iPlacementOrder>5</iPlacementOrder>
@@ -1664,6 +1694,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>1</iHappiness>
 			<iPlacementOrder>5</iPlacementOrder>
@@ -1717,6 +1748,7 @@
 				<iYieldChange>1</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>1</iHappiness>
 			<iPlacementOrder>5</iPlacementOrder>
@@ -1766,6 +1798,7 @@
 				<iYieldChange>0</iYieldChange>
 			</YieldChanges>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>1</iHappiness>
 			<iPlacementOrder>6</iPlacementOrder>
@@ -1810,6 +1843,7 @@
 			<TechObsolete>NONE</TechObsolete>
 			<YieldChanges/>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>1</iHappiness>
 			<iPlacementOrder>-1</iPlacementOrder>
@@ -1849,6 +1883,7 @@
 			<TechObsolete>NONE</TechObsolete>
 			<YieldChanges/>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>1</iHappiness>
 			<iPlacementOrder>-1</iPlacementOrder>
@@ -1888,6 +1923,7 @@
 			<TechObsolete>NONE</TechObsolete>
 			<YieldChanges/>
 			<iAITradeModifier>0</iAITradeModifier>
+			<iAIObjective>0</iAIObjective>
 			<iHealth>0</iHealth>
 			<iHappiness>1</iHappiness>
 			<iPlacementOrder>-1</iPlacementOrder>

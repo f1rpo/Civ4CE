@@ -1,4 +1,4 @@
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Rob McLaughlin (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -185,6 +185,7 @@
 	<ElementType name="TechCityTrade" content="textOnly"/>
 	<ElementType name="TechObsolete" content="textOnly"/>
 	<ElementType name="iAITradeModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iAIObjective" content="textOnly" dt:type="int"/>
 	<ElementType name="iHealth" content="textOnly" dt:type="int"/>
 	<ElementType name="iHappiness" content="textOnly" dt:type="int"/>
 	<ElementType name="iPlacementOrder" content="textOnly" dt:type="int"/>
@@ -241,6 +242,7 @@
 		<element type="TechObsolete"/>
 		<element type="YieldChanges"/>
 		<element type="iAITradeModifier"/>
+		<element type="iAIObjective"/>
 		<element type="iHealth"/>
 		<element type="iHappiness"/>
 		<element type="iPlacementOrder"/>
@@ -367,6 +369,7 @@
 	</ElementType>
 	<ElementType name="ImprovementPillage" content="textOnly"/>
 	<ElementType name="ImprovementUpgrade" content="textOnly"/>
+	<ElementType name="bActsAsCity" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bHillsMakesValid" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bFreshWaterMakesValid" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bRiverSideMakesValid" content="textOnly" dt:type="boolean"/>
@@ -408,6 +411,7 @@
 		<element type="RiverSideYieldChange" minOccurs="0"/>
 		<element type="HillsYieldChange" minOccurs="0"/>
 		<element type="IrrigatedYieldChange" minOccurs="0"/>
+		<element type="bActsAsCity"/>
 		<element type="bHillsMakesValid"/>
 		<element type="bFreshWaterMakesValid"/>
 		<element type="bRiverSideMakesValid"/>

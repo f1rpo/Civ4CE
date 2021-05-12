@@ -205,7 +205,7 @@ int CvSelectionGroupAI::AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy)
 }
 
 
-CvUnit* CvSelectionGroupAI::AI_getBestGroupAttacker(const CvPlot* pPlot, bool bPotentialEnemy, bool bForce) const
+CvUnit* CvSelectionGroupAI::AI_getBestGroupAttacker(const CvPlot* pPlot, bool bPotentialEnemy, bool bForce, bool bNoBlitz) const
 {
 	CLLNode<IDInfo>* pUnitNode;
 	CvUnit* pLoopUnit;
@@ -224,30 +224,48 @@ CvUnit* CvSelectionGroupAI::AI_getBestGroupAttacker(const CvPlot* pPlot, bool bP
 		pLoopUnit = ::getUnit(pUnitNode->m_data);
 		pUnitNode = nextUnitNode(pUnitNode);
 
-		if ((pLoopUnit->getDomainType() == DOMAIN_AIR) ? pLoopUnit->canAirAttack() : pLoopUnit->canAttack())
+		if (!pLoopUnit->isDead())
 		{
-			if (pLoopUnit->canMove() || bForce)
+			bool bCanAttack = false;
+			if (pLoopUnit->getDomainType() == DOMAIN_AIR)
 			{
-				if (pLoopUnit->canMoveInto(pPlot, true) || bForce)
+				bCanAttack = pLoopUnit->canAirAttack();
+			}
+			else
+			{
+				bCanAttack = pLoopUnit->canAttack();
+
+				if (bCanAttack && bNoBlitz && pLoopUnit->isBlitz() && pLoopUnit->isMadeAttack())
 				{
-					iValue = pLoopUnit->AI_attackOdds(pPlot, bPotentialEnemy);
-					FAssertMsg(iValue > 0, "iValue is expected to be greater than 0");
+					bCanAttack = false;
+				}
+			}
 
-					if (pLoopUnit->collateralDamage() > 0)
+			if (bCanAttack)
+			{
+				if (pLoopUnit->canMove() || bForce)
+				{
+					if (pLoopUnit->canMoveInto(pPlot, true) || bForce)
 					{
-						iPossibleTargets = min((pPlot->getNumVisibleEnemyDefenders(pLoopUnit->getOwnerINLINE()) - 1), pLoopUnit->collateralDamageMaxUnits());
+						iValue = pLoopUnit->AI_attackOdds(pPlot, bPotentialEnemy);
+						FAssertMsg(iValue > 0, "iValue is expected to be greater than 0");
 
-						if (iPossibleTargets > 0)
+						if (pLoopUnit->collateralDamage() > 0)
 						{
-							iValue *= (100 + ((pLoopUnit->collateralDamage() * iPossibleTargets) / 5));
-							iValue /= 100;
-						}
-					}
+							iPossibleTargets = min((pPlot->getNumVisibleEnemyDefenders(pLoopUnit->getOwnerINLINE()) - 1), pLoopUnit->collateralDamageMaxUnits());
 
-					if (iValue > iBestValue)
-					{
-						iBestValue = iValue;
-						pBestUnit = pLoopUnit;
+							if (iPossibleTargets > 0)
+							{
+								iValue *= (100 + ((pLoopUnit->collateralDamage() * iPossibleTargets) / 5));
+								iValue /= 100;
+							}
+						}
+
+						if (iValue > iBestValue)
+						{
+							iBestValue = iValue;
+							pBestUnit = pLoopUnit;
+						}
 					}
 				}
 			}
@@ -305,6 +323,7 @@ bool CvSelectionGroupAI::AI_isDeclareWar()
 			case UNITAI_PROPHET:
 			case UNITAI_ARTIST:
 			case UNITAI_SCIENTIST:
+			case UNITAI_GENERAL:
 			case UNITAI_MERCHANT:
 			case UNITAI_ENGINEER:
 			case UNITAI_SPY:

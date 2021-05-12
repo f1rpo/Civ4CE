@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Bart Muzzin (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Ed Lynch (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -221,6 +221,86 @@
 			<KFM>art/LeaderHeads/Washington/george_washington.kfm</KFM>
 			<NoShaderNIF>art/LeaderHeads/Washington/george_washington_noshader.nif</NoShaderNIF>
 			<BackgroundKFM>art/LeaderHeads/Washington/Washington_BG.kfm</BackgroundKFM>
+		</LeaderheadArtInfo>
+		<LeaderheadArtInfo>
+			<Type>ART_DEF_LEADER_CHURCHILL</Type>
+			<Button>,Art/interface/LeaderHeads/Btn_LH_America_Washington.dds,Art/Interface/Buttons/Warlords_Atlas_2.dds,1,7</Button>
+			<NIF>art/LeaderHeads/WinstonChurchill/winston_churchill.nif</NIF>
+			<KFM>art/LeaderHeads/WinstonChurchill/winston_churchill.kfm</KFM>
+			<NoShaderNIF>art/LeaderHeads/WinstonChurchill/winston_churchill_noshader.nif</NoShaderNIF>
+			<BackgroundKFM>art/LeaderHeads/WinstonChurchill/winston_churchill_BG.kfm</BackgroundKFM>
+		</LeaderheadArtInfo>
+		<LeaderheadArtInfo>
+			<Type>ART_DEF_LEADER_AUGUSTUS</Type>
+			<Button>,Art/interface/LeaderHeads/Btn_LH_America_Washington.dds,Art/Interface/Buttons/Warlords_Atlas_2.dds,2,7</Button>
+			<NIF>art/LeaderHeads/Augustus_Caesar/augustus_caesar.nif</NIF>
+			<KFM>art/LeaderHeads/Augustus_Caesar/augustus_caesar.kfm</KFM>
+			<NoShaderNIF>art/LeaderHeads/Augustus_Caesar/augustus_caesar_noshader.nif</NoShaderNIF>
+			<BackgroundKFM>art/LeaderHeads/Augustus_Caesar/augustus_caesar_BG.kfm</BackgroundKFM>
+		</LeaderheadArtInfo>
+		<LeaderheadArtInfo>
+			<Type>ART_DEF_LEADER_STALIN</Type>
+			<Button>,Art/interface/LeaderHeads/Btn_LH_America_Washington.dds,Art/Interface/Buttons/Warlords_Atlas_2.dds,1,8</Button>
+			<NIF>art/LeaderHeads/Stalin/josef_stalin.nif</NIF>
+			<KFM>art/LeaderHeads/Stalin/josef_stalin.kfm</KFM>
+			<NoShaderNIF>art/LeaderHeads/Stalin/josef_stalin_noshader.nif</NoShaderNIF>
+			<BackgroundKFM>art/LeaderHeads/Stalin/josef_stalin_BG.kfm</BackgroundKFM>
+		</LeaderheadArtInfo>
+		<LeaderheadArtInfo>
+			<Type>ART_DEF_LEADER_SHAKA</Type>
+			<Button>,Art/interface/LeaderHeads/Btn_LH_America_Washington.dds,Art/Interface/Buttons/Warlords_Atlas_2.dds,3,7</Button>
+			<NIF>art/LeaderHeads/Shaka/shaka.nif</NIF>
+			<KFM>art/LeaderHeads/Shaka/shaka.kfm</KFM>
+			<NoShaderNIF>art/LeaderHeads/Shaka/shaka_noshader.nif</NoShaderNIF>
+			<BackgroundKFM>art/LeaderHeads/Shaka/shaka_BG.kfm</BackgroundKFM>
+		</LeaderheadArtInfo>
+		<LeaderheadArtInfo>
+			<Type>ART_DEF_LEADER_BRENNUS</Type>
+			<Button>,Art/interface/LeaderHeads/Btn_LH_America_Washington.dds,Art/Interface/Buttons/Warlords_Atlas_2.dds,5,7</Button>
+			<NIF>art/LeaderHeads/Brennus/brennus.nif</NIF>
+			<KFM>art/LeaderHeads/Brennus/brennus.kfm</KFM>
+			<NoShaderNIF>art/LeaderHeads/Brennus/brennus_noshader.nif</NoShaderNIF>
+			<BackgroundKFM>art/LeaderHeads/Brennus/brennus_BG.kfm</BackgroundKFM>
+		</LeaderheadArtInfo>
+		<LeaderheadArtInfo>
+			<Type>ART_DEF_LEADER_HANNIBAL</Type>
+			<Button>,Art/interface/LeaderHeads/Btn_LH_America_Washington.dds,Art/Interface/Buttons/Warlords_Atlas_2.dds,4,7</Button>
+			<NIF>art/LeaderHeads/Hannibal/hannibal.nif</NIF>
+			<KFM>art/LeaderHeads/Hannibal/hannibal.kfm</KFM>
+			<NoShaderNIF>art/LeaderHeads/Hannibal/hannibal_noshader.nif</NoShaderNIF>
+			<BackgroundKFM>art/LeaderHeads/Hannibal/hannibal_BG.kfm</BackgroundKFM>
+		</LeaderheadArtInfo>
+		<LeaderheadArtInfo>
+			<Type>ART_DEF_LEADER_RAMESSES</Type>
+			<Button>,Art/interface/LeaderHeads/Btn_LH_America_Washington.dds,Art/Interface/Buttons/Warlords_Atlas_2.dds,6,7</Button>
+			<NIF>art/LeaderHeads/RamassesII/ramassesii.nif</NIF>
+			<KFM>art/LeaderHeads/RamassesII/ramassesii.kfm</KFM>
+			<NoShaderNIF>art/LeaderHeads/RamassesII/ramassesii_noshader.nif</NoShaderNIF>
+			<BackgroundKFM>art/LeaderHeads/RamassesII/ramassesii_BG.kfm</BackgroundKFM>
+		</LeaderheadArtInfo>
+		<LeaderheadArtInfo>
+			<Type>ART_DEF_LEADER_RAGNAR</Type>
+			<Button>,Art/interface/LeaderHeads/Btn_LH_America_Washington.dds,Art/Interface/Buttons/Warlords_Atlas_2.dds,7,7</Button>
+			<NIF>art/LeaderHeads/RagnarLodbrok/ragnar_lodbrok.nif</NIF>
+			<KFM>art/LeaderHeads/RagnarLodbrok/ragnar_lodbrok.kfm</KFM>
+			<NoShaderNIF>art/LeaderHeads/RagnarLodbrok/ragnar_lodbrok_noshader.nif</NoShaderNIF>
+			<BackgroundKFM>art/LeaderHeads/RagnarLodbrok/Ragnar_BG.kfm</BackgroundKFM>
+		</LeaderheadArtInfo>
+		<LeaderheadArtInfo>
+			<Type>ART_DEF_LEADER_WANGKON</Type>
+			<Button>,Art/interface/LeaderHeads/Btn_LH_America_Washington.dds,Art/Interface/Buttons/Warlords_Atlas_2.dds,8,7</Button>
+			<NIF>art/LeaderHeads/WangKon/wang_kon.nif</NIF>
+			<KFM>art/LeaderHeads/WangKon/wang_kon.kfm</KFM>
+			<NoShaderNIF>art/LeaderHeads/WangKon/wang_kon_noshader.nif</NoShaderNIF>
+			<BackgroundKFM>art/LeaderHeads/WangKon/Wang_Kon_BG.kfm</BackgroundKFM>
+		</LeaderheadArtInfo>
+		<LeaderheadArtInfo>
+			<Type>ART_DEF_LEADER_MEHMED</Type>
+			<Button>,Art/interface/LeaderHeads/Btn_LH_America_Washington.dds,Art/Interface/Buttons/Warlords_Atlas_2.dds,2,8</Button>
+			<NIF>art/LeaderHeads/MehmedII/mehmed.nif</NIF>
+			<KFM>art/LeaderHeads/MehmedII/mehmed.kfm</KFM>
+			<NoShaderNIF>art/LeaderHeads/MehmedII/mehmed_noshader.nif</NoShaderNIF>
+			<BackgroundKFM>art/LeaderHeads/MehmedII/MehmedII_BG.kfm</BackgroundKFM>
 		</LeaderheadArtInfo>
 	</LeaderheadArtInfos>
 </Civ4ArtDefines>

@@ -29,6 +29,7 @@ public:
 	virtual void toggleGlobeview() = 0;
 	virtual bool isGlobeviewUp() = 0;
 	virtual void toggleResourceLayer() = 0;
+	virtual void setResourceLayer(bool bOn) = 0;
 
 	virtual void MoveBaseTurnRight(float increment = 45) = 0;
 	virtual void MoveBaseTurnLeft(float increment = 45) = 0;
@@ -80,6 +81,8 @@ public:
 	virtual FogOfWarModeTypes PopFogOfWar() = 0;
 	virtual void setFogOfWarFromStack() = 0;
 	virtual void MarkBridgesDirty() = 0;
+	virtual void AddGreatWall(CvCity *city) = 0;
+	virtual void RemoveGreatWall(CvCity *city) = 0;
 };
 
 #endif	// CvDLLEngineIFaceBase_h

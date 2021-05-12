@@ -41,6 +41,7 @@ public:
 	bool canAnyMove();
 	bool hasMoved();
 	bool canEnterTerritory(int /*TeamTypes*/ eTeam, bool bIgnoreRightOfPassage);
+	bool canEnterArea(int /*TeamTypes*/ eTeam, CyArea* pArea, bool bIgnoreRightOfPassage);
 	bool canMoveInto(CyPlot* pPlot, bool bAttack);
 	bool canMoveOrAttackInto(CyPlot* pPlot, bool bDeclareWar);
 	bool canMoveThrough(CyPlot* pPlot);
@@ -78,6 +79,7 @@ public:
 	int getLengthMissionQueue();
 	int getMissionType( int iNode );
 	int getMissionData1( int iNode );
+	int getMissionData2( int iNode );
 	MissionData* getMissionFromQueue(int iIndex);
 	CyUnit* getHeadUnit();
 

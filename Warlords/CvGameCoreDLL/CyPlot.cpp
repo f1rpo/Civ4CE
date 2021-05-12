@@ -209,9 +209,9 @@ int CyPlot::movementCost(CyUnit* pUnit, CyPlot* pFromPlot)
 	return m_pPlot ? m_pPlot->movementCost(pUnit->getUnit(), pFromPlot->getPlot()) : -1;
 }
 
-int CyPlot::defenseModifier(bool bIgnoreBuilding, bool bHelp)
+int CyPlot::defenseModifier(int iDefendTeam, bool bIgnoreBuilding, bool bHelp)
 {
-	return m_pPlot ? m_pPlot->defenseModifier(bIgnoreBuilding, bHelp) : -1;
+	return m_pPlot ? m_pPlot->defenseModifier((TeamTypes)iDefendTeam, bIgnoreBuilding, bHelp) : -1;
 }
 
 bool CyPlot::isAdjacentOwned()

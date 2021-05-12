@@ -14,12 +14,17 @@
 #include "CvGameCoreDLL.h"
 //#include "CvStructs.h"
 
-CvBattleRound::CvBattleRound() :
-	iWaveSize(0),
-	bRangedRound( false) 
+void checkBattleUnitType(BattleUnitTypes unitType)
 {
-	iKilled[BDU_ATTACKER] = iKilled[BDU_DEFENDER] = 0;
-	iAlive[BDU_ATTACKER] = iAlive[BDU_DEFENDER] = 0;
+	FAssertMsg((unitType >= 0) && (unitType < BATTLE_UNIT_COUNT), "[Jason] Invalid battle unit type.");
+}
+
+CvBattleRound::CvBattleRound() :
+	m_iWaveSize(0),
+	m_bRangedRound(false) 
+{
+	m_aNumKilled[BATTLE_UNIT_ATTACKER] = m_aNumKilled[BATTLE_UNIT_DEFENDER] = 0;
+	m_aNumAlive[BATTLE_UNIT_ATTACKER] = m_aNumAlive[BATTLE_UNIT_DEFENDER] = 0;
 }
 
 bool CvBattleRound::isValid() const
@@ -27,10 +32,60 @@ bool CvBattleRound::isValid() const
 	bool bValid = true;
 
 	// Valid if no more than the wave size was killed, and didn't kill more attackers than were defenders or vv.
-	bValid &= (iKilled[BDU_ATTACKER] + iKilled[BDU_DEFENDER] <= iWaveSize);
-	bValid &= (iKilled[BDU_ATTACKER] <= iAlive[BDU_DEFENDER]);
-	bValid &= (iKilled[BDU_DEFENDER] <= iAlive[BDU_ATTACKER]);
+	bValid &= (m_aNumKilled[BATTLE_UNIT_ATTACKER] + m_aNumKilled[BATTLE_UNIT_DEFENDER] <= m_iWaveSize);
+	bValid &= (m_aNumKilled[BATTLE_UNIT_ATTACKER] <= m_aNumAlive[BATTLE_UNIT_DEFENDER]);
+	bValid &= (m_aNumKilled[BATTLE_UNIT_DEFENDER] <= m_aNumAlive[BATTLE_UNIT_ATTACKER]);
 	return bValid;
+}
+
+bool CvBattleRound::isRangedRound() const
+{
+	return m_bRangedRound;
+}
+
+void CvBattleRound::setRangedRound(bool value)
+{
+	m_bRangedRound = value;
+}
+
+int CvBattleRound::getWaveSize() const
+{
+	return m_iWaveSize;
+}
+
+void CvBattleRound::setWaveSize(int size)
+{
+	m_iWaveSize = size;
+}
+
+int CvBattleRound::getNumKilled(BattleUnitTypes unitType) const
+{
+	checkBattleUnitType(unitType);
+	return m_aNumKilled[unitType];
+}
+
+void CvBattleRound::setNumKilled(BattleUnitTypes unitType, int value)
+{
+	checkBattleUnitType(unitType);
+	m_aNumKilled[unitType] = value;
+}
+
+void CvBattleRound::addNumKilled(BattleUnitTypes unitType, int increment)
+{
+	checkBattleUnitType(unitType);
+	m_aNumKilled[unitType] += increment;
+}
+
+int CvBattleRound::getNumAlive(BattleUnitTypes unitType) const
+{
+	checkBattleUnitType(unitType);
+	return m_aNumAlive[unitType];
+}
+
+void CvBattleRound::setNumAlive(BattleUnitTypes unitType, int value)
+{
+	checkBattleUnitType(unitType);
+	m_aNumAlive[unitType] = value;
 }
 
 //------------------------------------------------------------------------------------------------
@@ -38,10 +93,54 @@ bool CvBattleRound::isValid() const
 //! \brief      Default constructor.
 //------------------------------------------------------------------------------------------------
 CvMissionDefinition::CvMissionDefinition() :
-	fMissionTime(0.0f),
-	eMissionType(NO_MISSION),
-	pkPlot(NULL)
+	m_fMissionTime(0.0f),
+	m_eMissionType(NO_MISSION),
+	m_pPlot(NULL)
 {
+	for(int i=0;i<BATTLE_UNIT_COUNT;i++)
+		m_aUnits[i] = NULL;
+}
+
+MissionTypes CvMissionDefinition::getMissionType() const
+{
+	return m_eMissionType;
+}
+
+void CvMissionDefinition::setMissionType(MissionTypes missionType)
+{
+	m_eMissionType = missionType;
+}
+
+float CvMissionDefinition::getMissionTime() const
+{
+	return m_fMissionTime;
+}
+
+void CvMissionDefinition::setMissionTime(float time)
+{
+	m_fMissionTime = time;
+}
+
+CvUnit *CvMissionDefinition::getUnit(BattleUnitTypes unitType) const
+{
+	checkBattleUnitType(unitType);
+	return m_aUnits[unitType];
+}
+
+void CvMissionDefinition::setUnit(BattleUnitTypes unitType, CvUnit *unit)
+{
+	checkBattleUnitType(unitType);
+	m_aUnits[unitType] = unit;
+}
+
+const CvPlot *CvMissionDefinition::getPlot() const
+{
+	return m_pPlot;
+}
+
+void CvMissionDefinition::setPlot(const CvPlot *plot)
+{
+	m_pPlot = plot;
 }
 
 //------------------------------------------------------------------------------------------------
@@ -49,19 +148,17 @@ CvMissionDefinition::CvMissionDefinition() :
 //! \brief      Constructor.
 //------------------------------------------------------------------------------------------------
 CvBattleDefinition::CvBattleDefinition() : 
-	bAdvanceSquare( false ), 
+	m_bAdvanceSquare(false), 
 	CvMissionDefinition()
 {
-	fMissionTime = 0.0f;
-	eMissionType = MISSION_BEGIN_COMBAT;
-	for ( int i = 0; i < BDU_COUNT; i++ )
+	m_fMissionTime = 0.0f;
+	m_eMissionType = MISSION_BEGIN_COMBAT;
+	for(int i=0;i<BATTLE_UNIT_COUNT;i++)
 	{
-		pkUnits[i] = NULL;
-		for ( int j = 0; j < BDT_COUNT; j++ )
-		{
-			iDamage[i][j] = 0;
-		}
-		iFirstStrikes[i] = 0;
+		m_aUnits[i] = NULL;
+		m_aFirstStrikes[i] = 0;
+		for(int j=0;j<BATTLE_TIME_COUNT;j++)
+			m_aDamage[i][j] = 0;
 	}
 }
 
@@ -71,22 +168,141 @@ CvBattleDefinition::CvBattleDefinition() :
 //! \param      kCopy The object to copy
 //------------------------------------------------------------------------------------------------
 CvBattleDefinition::CvBattleDefinition( const CvBattleDefinition & kCopy ) :
-	bAdvanceSquare( kCopy.bAdvanceSquare )
+	m_bAdvanceSquare( kCopy.m_bAdvanceSquare )
 {
-	fMissionTime = kCopy.fMissionTime;
-	eMissionType = MISSION_BEGIN_COMBAT;
+	m_fMissionTime = kCopy.m_fMissionTime;
+	m_eMissionType = MISSION_BEGIN_COMBAT;
 
-	for ( int i = 0; i < BDU_COUNT; i++ )
+	for(int i=0;i<BATTLE_UNIT_COUNT;i++)
 	{
-		pkUnits[i] = kCopy.pkUnits[i];
-		for ( int j = 0; j < BDT_COUNT; j++ )
-		{
-			iDamage[i][j] = kCopy.iDamage[i][j];
-		}
-		iFirstStrikes[i] = kCopy.iFirstStrikes[i];
+		m_aUnits[i] = kCopy.m_aUnits[i];
+		m_aFirstStrikes[i] = kCopy.m_aFirstStrikes[i];
+		for(int j=0;j<BATTLE_TIME_COUNT;j++)
+			m_aDamage[i][j] = kCopy.m_aDamage[i][j];
 	}
 
-	vctBattlePlan.assign( kCopy.vctBattlePlan.begin(), kCopy.vctBattlePlan.end() );
+	m_aBattleRounds.assign(kCopy.m_aBattleRounds.begin(), kCopy.m_aBattleRounds.end());
+}
+
+int CvBattleDefinition::getDamage(BattleUnitTypes unitType, BattleTimeTypes timeType) const
+{
+	checkBattleUnitType(unitType);
+	checkBattleTimeType(timeType);
+	return m_aDamage[unitType][timeType];
+}
+
+void CvBattleDefinition::setDamage(BattleUnitTypes unitType, BattleTimeTypes timeType, int damage)
+{
+	checkBattleUnitType(unitType);
+	checkBattleTimeType(timeType);
+	m_aDamage[unitType][timeType] = damage;
+}
+
+void CvBattleDefinition::addDamage(BattleUnitTypes unitType, BattleTimeTypes timeType, int increment)
+{
+	checkBattleUnitType(unitType);
+	checkBattleTimeType(timeType);
+	m_aDamage[unitType][timeType] += increment;
+}
+
+int CvBattleDefinition::getFirstStrikes(BattleUnitTypes unitType) const
+{
+	checkBattleUnitType(unitType);
+	return m_aFirstStrikes[unitType];
+}
+
+void CvBattleDefinition::setFirstStrikes(BattleUnitTypes unitType, int firstStrikes)
+{
+	checkBattleUnitType(unitType);
+	m_aFirstStrikes[unitType] = firstStrikes;
+}
+
+void CvBattleDefinition::addFirstStrikes(BattleUnitTypes unitType, int increment)
+{
+	checkBattleUnitType(unitType);
+	m_aFirstStrikes[unitType] += increment;
+}
+
+bool CvBattleDefinition::isAdvanceSquare() const
+{
+	return m_bAdvanceSquare;
+}
+
+void CvBattleDefinition::setAdvanceSquare(bool advanceSquare)
+{
+	m_bAdvanceSquare = advanceSquare;
+}
+
+int CvBattleDefinition::getNumRangedRounds() const
+{
+	return m_iNumRangedRounds;
+}
+
+void CvBattleDefinition::setNumRangedRounds(int count)
+{
+	m_iNumRangedRounds = count;
+}
+
+void CvBattleDefinition::addNumRangedRounds(int increment)
+{
+	m_iNumRangedRounds += increment;
+}
+
+int CvBattleDefinition::getNumMeleeRounds() const
+{
+	return m_iNumMeleeRounds;
+}
+
+void CvBattleDefinition::setNumMeleeRounds(int count)
+{
+	m_iNumMeleeRounds = count;
+}
+
+void CvBattleDefinition::addNumMeleeRounds(int increment)
+{
+	m_iNumMeleeRounds += increment;
+}
+
+int CvBattleDefinition::getNumBattleRounds() const
+{
+	return m_aBattleRounds.size();
+}
+
+void CvBattleDefinition::clearBattleRounds()
+{
+	m_aBattleRounds.clear();
+}
+
+CvBattleRound &CvBattleDefinition::getBattleRound(int index)
+{
+	checkBattleRound(index);
+	return m_aBattleRounds[index];
+}
+
+const CvBattleRound &CvBattleDefinition::getBattleRound(int index) const
+{
+	checkBattleRound(index);
+	return m_aBattleRounds[index];
+}
+
+void CvBattleDefinition::addBattleRound(const CvBattleRound &round)
+{
+	m_aBattleRounds.push_back(round);
+}
+
+void CvBattleDefinition::setBattleRound(int index, const CvBattleRound &round)
+{
+	m_aBattleRounds.assign(index, round);
+}
+
+void CvBattleDefinition::checkBattleTimeType(BattleTimeTypes timeType) const
+{
+	FAssertMsg((timeType >= 0) && (timeType < BATTLE_TIME_COUNT), "[Jason] Invalid battle time type.");
+}
+
+void CvBattleDefinition::checkBattleRound(int index) const
+{
+	FAssertMsg((index >= 0) && (index < (int)m_aBattleRounds.size()), "[Jason] Invalid battle round index.");
 }
 
 //------------------------------------------------------------------------------------------------
@@ -96,8 +312,8 @@ CvBattleDefinition::CvBattleDefinition( const CvBattleDefinition & kCopy ) :
 CvAirMissionDefinition::CvAirMissionDefinition() :
 	CvMissionDefinition()
 {
-	fMissionTime = 0.0f;
-	eMissionType = MISSION_AIRPATROL;
+	m_fMissionTime = 0.0f;
+	m_eMissionType = MISSION_AIRPATROL;
 }
 
 //------------------------------------------------------------------------------------------------
@@ -107,14 +323,38 @@ CvAirMissionDefinition::CvAirMissionDefinition() :
 //------------------------------------------------------------------------------------------------
 CvAirMissionDefinition::CvAirMissionDefinition( const CvAirMissionDefinition & kCopy )
 {
-	fMissionTime = kCopy.fMissionTime;
-	eMissionType = kCopy.eMissionType;
-	pkPlot = kCopy.pkPlot;
+	m_fMissionTime = kCopy.m_fMissionTime;
+	m_eMissionType = kCopy.m_eMissionType;
+	m_pPlot = kCopy.m_pPlot;
 
-	int i;
-	for ( i = 0; i < BDU_COUNT; i++ )
+	for(int i=0;i<BATTLE_UNIT_COUNT;i++)
 	{
-		iDamage[i] = kCopy.iDamage[i];
-		pkUnits[i] = kCopy.pkUnits[i];
+		m_aDamage[i] = kCopy.m_aDamage[i];
+		m_aUnits[i] = kCopy.m_aUnits[i];
 	}
 }
+
+int CvAirMissionDefinition::getDamage(BattleUnitTypes unitType) const
+{
+	checkBattleUnitType(unitType);
+	return m_aDamage[unitType];
+}
+
+void CvAirMissionDefinition::setDamage(BattleUnitTypes unitType, int damage)
+{
+	checkBattleUnitType(unitType);
+	m_aDamage[unitType] = damage;
+}
+
+PBGameSetupData::PBGameSetupData()
+{
+	for (int i = 0; i < NUM_GAMEOPTION_TYPES; i++)
+	{
+		abOptions.push_back(false);
+	}
+	for (int i = 0; i < NUM_MPOPTION_TYPES; i++)
+	{
+		abMPOptions.push_back(false);
+	}
+}
+

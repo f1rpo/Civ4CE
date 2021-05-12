@@ -108,7 +108,8 @@ class CvPediaLeader:
 		listName = self.top.getNextWidgetName()
 		
 		szSpecialText = CyGameTextMgr().parseLeaderTraits(self.iLeader, -1, False, True)
-		screen.addMultilineText(listName, szSpecialText, self.X_TRAITS+5, self.Y_TRAITS+5, self.W_TRAITS-10, self.H_TRAITS-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
+		szSpecialText = szSpecialText[1:]
+		screen.addMultilineText(listName, szSpecialText, self.X_TRAITS+5, self.Y_TRAITS+30, self.W_TRAITS-10, self.H_TRAITS-35, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
 		
 	def placeCivic(self):		
 		screen = self.top.getScreen()
@@ -164,13 +165,28 @@ class CvPediaLeader:
 
 	# Will handle the input for this screen...
 	def handleInput (self, inputClass):
-		if (inputClass.getData() == int(InputTypes.KB_RETURN) or inputClass.getData() == int(InputTypes.KB_ESCAPE)):
-			self.top.getScreen().hideScreen()
-			return 1
-		if (inputClass.getNotifyCode() == NotifyCode.NOTIFY_CLICKED):
-			if (inputClass.getFunctionName() == self.LEADER_WIDGET):
-				if (inputClass.getFlags() & MouseFlags.MOUSE_LBUTTONUP):
-					self.top.getScreen().performLeaderheadAction(self.LEADER_WIDGET, 0)
+		if (inputClass.getNotifyCode() == NotifyCode.NOTIFY_CHARACTER):
+			if (inputClass.getData() == int(InputTypes.KB_0)):
+				self.top.getScreen().performLeaderheadAction(self.leaderWidget, LeaderheadAction.LEADERANIM_GREETING)
+			elif (inputClass.getData() == int(InputTypes.KB_6)):
+				self.top.getScreen().performLeaderheadAction(self.leaderWidget, LeaderheadAction.LEADERANIM_DISAGREE)
+			elif (inputClass.getData() == int(InputTypes.KB_7)):
+				self.top.getScreen().performLeaderheadAction(self.leaderWidget, LeaderheadAction.LEADERANIM_AGREE)
+			elif (inputClass.getData() == int(InputTypes.KB_1)):
+				self.top.getScreen().setLeaderheadMood(self.leaderWidget, AttitudeTypes.ATTITUDE_FRIENDLY)
+				self.top.getScreen().performLeaderheadAction(self.leaderWidget, LeaderheadAction.NO_LEADERANIM)
+			elif (inputClass.getData() == int(InputTypes.KB_2)):
+				self.top.getScreen().setLeaderheadMood(self.leaderWidget, AttitudeTypes.ATTITUDE_PLEASED)
+				self.top.getScreen().performLeaderheadAction(self.leaderWidget, LeaderheadAction.NO_LEADERANIM)
+			elif (inputClass.getData() == int(InputTypes.KB_3)):
+				self.top.getScreen().setLeaderheadMood(self.leaderWidget, AttitudeTypes.ATTITUDE_CAUTIOUS)
+				self.top.getScreen().performLeaderheadAction(self.leaderWidget, LeaderheadAction.NO_LEADERANIM)
+			elif (inputClass.getData() == int(InputTypes.KB_4)):
+				self.top.getScreen().setLeaderheadMood(self.leaderWidget, AttitudeTypes.ATTITUDE_ANNOYED)
+				self.top.getScreen().performLeaderheadAction(self.leaderWidget, LeaderheadAction.NO_LEADERANIM)
+			elif (inputClass.getData() == int(InputTypes.KB_5)):
+				self.top.getScreen().setLeaderheadMood(self.leaderWidget, AttitudeTypes.ATTITUDE_FURIOUS)
+				self.top.getScreen().performLeaderheadAction(self.leaderWidget, LeaderheadAction.NO_LEADERANIM)
 		return 0
 
 

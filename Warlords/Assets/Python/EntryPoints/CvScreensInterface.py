@@ -69,10 +69,6 @@ techChooser = CvTechChooser.CvTechChooser()
 def showTechChooser():
 	techChooser.interfaceScreen()
 
-def recreateTechChooser():
-	# Tech chooser screen is persistent
-	techChooser = CvTechChooser.CvTechChooser()
-
 hallOfFameScreen = CvHallOfFameScreen.CvHallOfFameScreen(HALL_OF_FAME)
 def showHallOfFame(argsList):
 	hallOfFameScreen.interfaceScreen(argsList[0])
@@ -484,6 +480,9 @@ def hideWorldBuilderDiplomacyScreen():
 def handleWorldBuilderDiplomacyPlayerPullDownCB(argsList):
 	worldBuilderDiplomacyScreen.handlePlayerPullDownCB(int(argsList[0]))
 
+def handleWorldBuilderDiplomacyVassalPullDownCB(argsList):
+	worldBuilderDiplomacyScreen.handleVassalPullDownCB(int(argsList[0]))
+
 def handleWorldBuilderDiplomacyAtWarPullDownCB(argsList):
 	worldBuilderDiplomacyScreen.handleAtWarPullDownCB(argsList)
 
@@ -567,6 +566,10 @@ def onClose (argsList):
 	# allows overides for mods
 	if (CvScreenUtilsInterface.getScreenUtils().onClose(argsList)):
 		return
+
+	if (HandleCloseMap.has_key(argsList[0])):
+		screen = HandleCloseMap.get(argsList[0])
+		screen.onClose()
 		
 # Forced screen update
 def forceScreenUpdate (argsList):
@@ -620,9 +623,7 @@ def minimapClicked (argsList):
 def handleBack(screens):
 	for iScreen in screens:
 		if (HandleNavigationMap.has_key(iScreen)):
-			print iScreen
 			screen = HandleNavigationMap.get( iScreen )
-			print screen
 			screen.back()
 	print "Mouse BACK"
 	return 0
@@ -630,9 +631,7 @@ def handleBack(screens):
 def handleForward(screens):
 	for iScreen in screens:
 		if (HandleNavigationMap.has_key(iScreen)):
-			print iScreen
 			screen = HandleNavigationMap.get( iScreen )
-			print screen
 			screen.forward()
 	print "Mouse FWD"
 	return 0
@@ -642,6 +641,8 @@ def refreshMilitaryAdvisor (argsList):
 		militaryAdvisor.refreshSelectedGroup(argsList[1])
 	elif (2 == argsList[0]):
 		militaryAdvisor.refreshSelectedLeader(argsList[1])
+	elif (3 == argsList[0]):
+		militaryAdvisor.drawCombatExperience()
 	elif (argsList[0] <= 0):
 		militaryAdvisor.refreshSelectedUnit(-argsList[0], argsList[1])
 	
@@ -715,6 +716,13 @@ def featAccomplishedOnFocusCallback(argsList):
 		
 	return 0
 
+
+#######################################################################################
+## Handle Close Map
+#######################################################################################
+HandleCloseMap = {  DAWN_OF_MAN : dawnOfMan,				
+				# add new screens here
+				}
 
 #######################################################################################
 ## Handle Input Map

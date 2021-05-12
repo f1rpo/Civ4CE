@@ -134,6 +134,7 @@ public:
 	int calculateGoldRate();
 	int calculateResearchRate(int /*TechTypes*/ eTech);
 	int calculateResearchModifier(int /*TechTypes*/ eTech);
+	int calculateBaseNetResearch();
 	bool isResearch();
 	bool canEverResearch(int /*TechTypes*/ eTech);
 	bool canResearch(int /*TechTypes*/ eTech, bool bTrade);
@@ -162,7 +163,7 @@ public:
 	int unitsRequiredForGoldenAge();
 	int unitsGoldenAgeCapable();
 	int unitsGoldenAgeReady();
-	int greatPeopleThreshold();
+	int greatPeopleThreshold(bool bMilitary);
 	int specialistYield(int /*SpecialistTypes*/ eSpecialist, int /*YieldTypes*/ eCommerce);
 	int specialistCommerce(int /*SpecialistTypes*/ eSpecialist, int /*CommerceTypes*/ eCommerce);
 
@@ -191,9 +192,14 @@ public:
 	int getMaxAnarchyTurns();
 	int getAnarchyModifier();
 	int getHurryModifier();
+	void createGreatPeople(int eGreatPersonUnit, bool bIncrementThreshold, bool bIncrementExperience, int iX, int iY);
 	int getGreatPeopleCreated();
+	int getGreatGeneralsCreated();
 	int getGreatPeopleThresholdModifier();
+	int getGreatGeneralsThresholdModifier();
 	int getGreatPeopleRateModifier();
+	int getGreatGeneralRateModifier();
+	int getDomesticGreatGeneralRateModifier();
 	int getStateReligionGreatPeopleRateModifier();
 
 	int getMaxGlobalBuildingProductionModifier();
@@ -228,12 +234,14 @@ public:
 	int getMaxConscript();
 	int getOverflowResearch();
 	bool isNoUnhealthyPopulation();
+	bool getExpInBorderModifier();
 	bool isBuildingOnlyHealthy();
 
 	int getDistanceMaintenanceModifier();
 	int getNumCitiesMaintenanceModifier();
 	int getTotalMaintenance();
 	int getUpkeepModifier();
+	int getLevelExperienceModifier() const;
 
 	int getExtraHealth();
 	int getBuildingGoodHealth();
@@ -291,7 +299,6 @@ public:
 	int /*LeaderHeadTypes*/ getPersonalityType();
 	void setPersonalityType(int /*LeaderHeadTypes*/ eNewValue);
 	int /*ErasTypes*/ getCurrentEra();
-	bool isLateEra();
 	void setCurrentEra(int /*EraTypes*/ iNewValue);
 
 	int /*ReligonTypes*/ getStateReligion();
@@ -363,6 +370,10 @@ public:
 	int getSingleCivicUpkeep(int /*CivicTypes*/ eCivic, bool bIgnoreAnarchy);
 	int getCivicUpkeep(boost::python::list&  /*CivicTypes*/ paiCivics, bool bIgnoreAnarchy);
 	void setCivics(int /*CivicOptionTypes*/ eIndex, int /*CivicTypes*/ eNewValue);
+
+	int getCombatExperience() const;
+	void changeCombatExperience(int iChange);
+	void setCombatExperience(int iExperience);
 
 	int getSpecialistExtraYield(int /*SpecialistTypes*/ eIndex1, int /*YieldTypes*/ eIndex2);
 

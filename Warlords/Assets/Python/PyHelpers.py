@@ -688,7 +688,7 @@ class PyCity:
 		
 	def isConnectedToCapital(self, iPlayer):
 		return self.city.isConnectedToCapital(iPlayer)
-
+	
 class PyGame:
 	"requires Nothing"
 	def __init__(self):

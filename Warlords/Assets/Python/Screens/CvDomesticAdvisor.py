@@ -19,6 +19,9 @@ PyCity = PyHelpers.PyCity
 #	the background widget.  Do NOT use 'Background' to name any widget, but
 #	when attaching to the background, please use the 'Background' keyword.
 
+#  Thanks to Lee Reeves, AKA Taelis on civfanatics.com
+
+
 # globals
 gc = CyGlobalContext()
 ArtFileMgr = CyArtFileMgr()
@@ -38,6 +41,7 @@ PRODUCTION_COLUMN = FOOD_COLUMN + 40
 GOLD_COLUMN = PRODUCTION_COLUMN + 40
 GREATPEOPLE_COLUMN = GOLD_COLUMN + 40
 PRODUCING_COLUMN = GREATPEOPLE_COLUMN + 170
+
 
 # Sorting information
 DATE = 0
@@ -73,6 +77,22 @@ class CvDomesticAdvisor:
 	"Domestic Advisor Screen"
 	def __init__(self):
 		self.listSelectedCities = []
+		
+		self.nFirstSpecialistX = 30
+		self.nSpecialistY = 540
+		self.nSpecialistWidth = 32
+		self.nSpecialistLength = 32
+		self.nSpecialistDistance = 100
+
+		# Offset from Specialist Image/Size for the Specialist Plus/Minus buttons
+		self.nPlusOffsetX = -4
+		self.nMinusOffsetX = 16
+		self.nPlusOffsetY = self.nMinusOffsetY = 30
+		self.nPlusWidth = self.nPlusHeight = self.nMinusWidth = self.nMinusHeight = 20
+
+		# Offset from Specialist Image for the Specialist Text
+		self.nSpecTextOffsetX = 40
+		self.nSpecTextOffsetY = 10
 
 	# Screen construction function
 	def interfaceScreen(self):
@@ -117,23 +137,23 @@ class CvDomesticAdvisor:
 		# Population Column
 		screen.setTableColumnHeader( "CityListBackground", 3, "<font=2>" + localText.getText("TXT_KEY_POPULATION", ()) + "</font>", 40 )
 		
+		# Angry Column
+		screen.setTableColumnHeader( "CityListBackground", 4, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.ANGRY_POP_CHAR)) + "</font>", 40 )
+		
 		# Happiness Column
-		screen.setTableColumnHeader( "CityListBackground", 4, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.HAPPY_CHAR)) + "</font>", 40 )
+		screen.setTableColumnHeader( "CityListBackground", 5, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.HAPPY_CHAR)) + "</font>", 40 )
 		
 		# Unhappiness Column
-		screen.setTableColumnHeader( "CityListBackground", 5, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.UNHAPPY_CHAR)) + "</font>", 40 )
-		
-		# Angry Column
-		screen.setTableColumnHeader( "CityListBackground", 6, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.ANGRY_POP_CHAR)) + "</font>", 40 )
-		
-		# Food Column
-		screen.setTableColumnHeader( "CityListBackground", 7, "<font=2>" + (u"%c" % gc.getYieldInfo(YieldTypes.YIELD_FOOD).getChar()) + "</font>", 40 )
+		screen.setTableColumnHeader( "CityListBackground", 6, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.UNHAPPY_CHAR)) + "</font>", 40 )
 		
 		# Health Column
-		screen.setTableColumnHeader( "CityListBackground", 8, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.HEALTHY_CHAR)) + "</font>", 40 )
+		screen.setTableColumnHeader( "CityListBackground", 7, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.HEALTHY_CHAR)) + "</font>", 40 )
 		
 		# Bad Health Column
-		screen.setTableColumnHeader( "CityListBackground", 9, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.UNHEALTHY_CHAR)) + "</font>", 40 )
+		screen.setTableColumnHeader( "CityListBackground", 8, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.UNHEALTHY_CHAR)) + "</font>", 40 )
+		
+		# Food Column
+		screen.setTableColumnHeader( "CityListBackground", 9, "<font=2>" + (u"%c" % gc.getYieldInfo(YieldTypes.YIELD_FOOD).getChar()) + "</font>", 40 )
 		
 		# Food Consumed Column
 		screen.setTableColumnHeader( "CityListBackground", 10, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.EATEN_FOOD_CHAR)) + "</font>", 40 )
@@ -173,7 +193,7 @@ class CvDomesticAdvisor:
 		screen.moveToFront( "Background" )
 		
 		# Build the table	
-		screen.addTableControlGFC( "CityListBackground", 19, 22, 61, 980, 476, True, False, 32, 32, TableStyles.TABLE_STYLE_STANDARD )
+		screen.addTableControlGFC( "CityListBackground", 19, 22, 61, 980, 476, True, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD )
 		screen.enableSelect( "CityListBackground", True )
 		screen.enableSort( "CityListBackground" )
 		screen.setStyle("CityListBackground", "Table_StandardCiv_Style")
@@ -188,9 +208,7 @@ class CvDomesticAdvisor:
 			if (pLoopCity.getName() in self.listSelectedCities):
 				screen.selectRow( "CityListBackground", i, True )
 
-			szWidgetName = "ZoomCity" + str(i)
-			screen.setImageButton( szWidgetName, ArtFileMgr.getInterfaceArtInfo("INTERFACE_BUTTONS_CITYSELECTION").getPath(), 0, 0, 24, 24, WidgetTypes.WIDGET_ZOOM_CITY, pLoopCity.getOwner(), pLoopCity.getID() )
-			screen.attachControlToTableCell( szWidgetName, "CityListBackground", i, 0 )
+			screen.setTableText( "CityListBackground", 0, i, "", ArtFileMgr.getInterfaceArtInfo("INTERFACE_BUTTONS_CITYSELECTION").getPath(), WidgetTypes.WIDGET_ZOOM_CITY, pLoopCity.getOwner(), pLoopCity.getID(), CvUtil.FONT_LEFT_JUSTIFY);
 			
 			# Founded date first...
 			szIDText = "Date" + str(pLoopCity.getID())
@@ -209,10 +227,13 @@ class CvDomesticAdvisor:
 		
 		self.drawHeaders()
 		
+		self.drawSpecialists()
+		
 		screen.moveToBack( "DomesticAdvisorBG" )
 		
 		self.updateAppropriateCitySelection(len(cityList))
-
+		
+		CyInterface().setDirty(InterfaceDirtyBits.Domestic_Advisor_DIRTY_BIT, true)
 
 	def updateTable(self, pLoopCity, i):
 
@@ -224,24 +245,24 @@ class CvDomesticAdvisor:
 		# Population
 		screen.setTableInt( "CityListBackground", 3, i, unicode(pLoopCity.getPopulation()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
+		# Angry...	
+		screen.setTableInt( "CityListBackground", 4, i, unicode(pLoopCity.getAngryPopulation()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+
 		# Happiness...
-		screen.setTableInt( "CityListBackground", 4, i, unicode(pLoopCity.getHappyPopulation()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		screen.setTableInt( "CityListBackground", 5, i, unicode(pLoopCity.getHappyPopulation()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
 		# Unhappiness...
-		screen.setTableInt( "CityListBackground", 5, i, unicode(pLoopCity.getUnhappyPopulation()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		screen.setTableInt( "CityListBackground", 6, i, unicode(pLoopCity.getUnhappyPopulation()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
-		# Angry...	
-		screen.setTableInt( "CityListBackground", 6, i, unicode(pLoopCity.getAngryPopulation()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
-
-		# Food status...
-		screen.setTableInt( "CityListBackground", 7, i, unicode(pLoopCity.getFoodRate()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
-		
 		# Health...
-		screen.setTableInt( "CityListBackground", 8, i, unicode(pLoopCity.getGoodHealth()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		screen.setTableInt( "CityListBackground", 7, i, unicode(pLoopCity.getGoodHealth()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
 		# Unhealthy...			
-		screen.setTableInt( "CityListBackground", 9, i, unicode(pLoopCity.getBadHealth()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		screen.setTableInt( "CityListBackground", 8, i, unicode(pLoopCity.getBadHealth()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
+		# Food status...
+		screen.setTableInt( "CityListBackground", 9, i, unicode(pLoopCity.getFoodRate()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		
 		# Food consumed
 		screen.setTableInt( "CityListBackground", 10, i, unicode(pLoopCity.foodConsumption( False, 0 )), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
@@ -268,19 +289,93 @@ class CvDomesticAdvisor:
 
 		# Producing	
 		screen.setTableText( "CityListBackground", 18, i, pLoopCity.getProductionName() + " (" + str(pLoopCity.getGeneralProductionTurnsLeft()) + ")", "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
-
 		
+		
+	# Draw the specialist and their increase and decrease buttons
+	def drawSpecialists(self):
+		screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
+
+		for i in range( gc.getNumSpecialistInfos() ):
+			if (gc.getSpecialistInfo(i).isVisible()):			
+				szName = "SpecialistImage" + str(i)
+				screen.setImageButton( szName, gc.getSpecialistInfo(i).getTexture(), self.nFirstSpecialistX + (self.nSpecialistDistance * i), self.nSpecialistY, self.nSpecialistWidth, self.nSpecialistLength, WidgetTypes.WIDGET_CITIZEN, i, -1 )
+				screen.hide(szName)
+
+				szName = "SpecialistPlus" + str(i)
+				screen.setButtonGFC( szName, u"", "", self.nFirstSpecialistX + (self.nSpecialistDistance * i) + self.nPlusOffsetX, self.nSpecialistY + self.nPlusOffsetY, self.nPlusWidth, self.nPlusHeight, WidgetTypes.WIDGET_CHANGE_SPECIALIST, i, 1, ButtonStyles.BUTTON_STYLE_CITY_PLUS )
+				screen.hide(szName)
+
+				szName = "SpecialistMinus" + str(i)
+				screen.setButtonGFC( szName, u"", "", self.nFirstSpecialistX + (self.nSpecialistDistance * i) + self.nMinusOffsetX, self.nSpecialistY + self.nMinusOffsetY, self.nMinusWidth, self.nMinusHeight, WidgetTypes.WIDGET_CHANGE_SPECIALIST, i, -1, ButtonStyles.BUTTON_STYLE_CITY_MINUS )
+				screen.hide(szName)
+
+				szName = "SpecialistText" + str(i)
+				screen.setLabel(szName, "Background", "", CvUtil.FONT_LEFT_JUSTIFY, self.nFirstSpecialistX + (self.nSpecialistDistance * i) + self.nSpecTextOffsetX, self.nSpecialistY + self.nSpecTextOffsetY, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
+				screen.hide(szName)
+
+	def hideSpecialists(self):
+		screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
+		for i in range( gc.getNumSpecialistInfos() ):
+			if (gc.getSpecialistInfo(i).isVisible()):			
+				screen.hide("SpecialistImage" + str(i))
+				screen.hide("SpecialistPlus" + str(i))
+				screen.hide("SpecialistMinus" + str(i))
+				screen.hide("SpecialistText" + str(i))
+
+	def updateSpecialists(self):
+		""" Function which shows the specialists."""
+		screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
+
+		if (CyInterface().isOneCitySelected()):
+		
+			city = CyInterface().getHeadSelectedCity()
+			nPopulation = city.getPopulation()
+			nFreeSpecial = city.totalFreeSpecialists()
+
+			for i in range( gc.getNumSpecialistInfos() ):
+				if (gc.getSpecialistInfo(i).isVisible()):	
+					szName = "SpecialistImage" + str(i)
+					screen.show(szName)
+					
+					szName = "SpecialistText" + str(i)
+					screen.setLabel(szName, "Background", str (city.getSpecialistCount(i)) + "/" + str(city.getMaxSpecialistCount(i)), CvUtil.FONT_LEFT_JUSTIFY, self.nFirstSpecialistX + (self.nSpecialistDistance * i) + self.nSpecTextOffsetX, self.nSpecialistY + self.nSpecTextOffsetY, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
+					screen.show(szName)
+
+					# If the specialist is valid and we can increase it
+					szName = "SpecialistPlus" + str(i)
+					if (city.isSpecialistValid(i, 1) and (city.getForceSpecialistCount(i) < (nPopulation + nFreeSpecial))):
+						screen.show(szName)
+					else:
+						screen.hide(szName)
+
+					# if we HAVE specialists already and they're not forced.
+					szName = "SpecialistMinus" + str(i)
+					if (city.getSpecialistCount(i) > 0 or city.getForceSpecialistCount(i) > 0):
+						screen.show(szName)
+					else:
+						screen.hide(szName)
+		else:
+			self.hideSpecialists()
+				
 	# Will handle the input for this screen...
 	def handleInput (self, inputClass):
 		' Calls function mapped in DomesticAdvisorInputMap'
 		# only get from the map if it has the key
 		
 		if ( inputClass.getNotifyCode() == NotifyCode.NOTIFY_LISTBOX_ITEM_SELECTED ):
-			self.updateAppropriateCitySelection(len(PyPlayer(CyGame().getActivePlayer()).getCityList()))
-		elif ( inputClass.getNotifyCode() == NotifyCode.NOTIFY_CLICKED ):
-			if ( inputClass.getFunctionName() == "ZoomCity" ):
+			if (inputClass.getMouseX() == 0):
 				screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
 				screen.hideScreen()
+				
+				CyInterface().selectCity(gc.getPlayer(inputClass.getData1()).getCity(inputClass.getData2()), true);
+				
+				popupInfo = CyPopupInfo()
+				popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON_SCREEN)
+				popupInfo.setText(u"showDomesticAdvisor")
+				popupInfo.addPopup(inputClass.getData1())		
+			else:
+				self.updateAppropriateCitySelection(len(PyPlayer(CyGame().getActivePlayer()).getCityList()))
+				self.updateSpecialists()
 			
 		return 0
 	
@@ -306,5 +401,7 @@ class CvDomesticAdvisor:
 
 				#screen.setTableTextKey( "CityListBackground", 18, pLoopCity.getName(), 2, pLoopCity.getProductionName() + " (" + str(pLoopCity.getGeneralProductionTurnsLeft()) + ")", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY, len(cityList) )	
 				self.updateTable(pLoopCity, i)
+				
+			self.updateSpecialists()
 		
 		return

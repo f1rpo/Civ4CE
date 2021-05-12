@@ -24,6 +24,10 @@ class CvGameUtils:
 		ePlayer = argsList[0]
 		return True
 
+	def getExtraCost(self, argsList):
+		ePlayer = argsList[0]
+		return 0
+
 	def createBarbarianCities(self):
 		return False
 		
@@ -260,3 +264,40 @@ class CvGameUtils:
 	def doMeltdown(self,argsList):
 		pCity = argsList[0]
 		return False
+	
+	def doReviveActivePlayer(self,argsList):
+		"allows you to perform an action after an AIAutoPlay"
+		iPlayer = argsList[0]
+		return False
+	
+	def doPillageGold(self, argsList):
+		"controls the gold result of pillaging"
+		pPlot = argsList[0]
+		pUnit = argsList[1]
+		
+		iPillageGold = 0
+		iPillageGold = CyGame().getSorenRandNum(gc.getImprovementInfo(pPlot.getImprovementType()).getPillageGold(), "Pillage Gold 1")
+		iPillageGold += CyGame().getSorenRandNum(gc.getImprovementInfo(pPlot.getImprovementType()).getPillageGold(), "Pillage Gold 2")
+
+		iPillageGold += (pUnit.getPillageChange() * iPillageGold) / 100
+		
+		return iPillageGold
+	
+	def doCityCaptureGold(self, argsList):
+		"controls the gold result of capturing a city"
+		
+		pOldCity = argsList[0]
+		
+		iCaptureGold = 0
+		
+		iCaptureGold += gc.getDefineINT("BASE_CAPTURE_GOLD")
+		iCaptureGold += (pOldCity.getPopulation() * gc.getDefineINT("CAPTURE_GOLD_PER_POPULATION"))
+		iCaptureGold += CyGame().getSorenRandNum(gc.getDefineINT("CAPTURE_GOLD_RAND1"), "Capture Gold 1")
+		iCaptureGold += CyGame().getSorenRandNum(gc.getDefineINT("CAPTURE_GOLD_RAND2"), "Capture Gold 2")
+
+		if (gc.getDefineINT("CAPTURE_GOLD_MAX_TURNS") > 0):
+			iCaptureGold *= cyIntRange((CyGame().getGameTurn() - pOldCity.getGameTurnAcquired()), 0, gc.getDefineINT("CAPTURE_GOLD_MAX_TURNS"))
+			iCaptureGold /= gc.getDefineINT("CAPTURE_GOLD_MAX_TURNS")
+		
+		return iCaptureGold
+

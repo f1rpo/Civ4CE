@@ -126,7 +126,7 @@ class CvPediaSpecialist:
 		i = 0
 		iSelected = 0			
 		for iI in range(gc.getNumSpecialistInfos()):
-			if (not gc.getSpecialistInfo(iI).isGraphicalOnly()):
+			if (not gc.getSpecialistInfo(listSorted[iI][1]).isGraphicalOnly()):
 				if bRedraw:
 					screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_SPECIALIST, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
 				if listSorted[iI][1] == self.iSpecialist:

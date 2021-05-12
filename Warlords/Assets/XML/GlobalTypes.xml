@@ -124,6 +124,8 @@
 		<FootstepAudioType>ENDSTEP_GUNSHIP</FootstepAudioType>
 		<FootstepAudioType>LOOPSTEP_ARTILLERY</FootstepAudioType>
 		<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
+		<FootstepAudioType>LOOPSTEP_WHEELS_3</FootstepAudioType>
+		<FootstepAudioType>ENDSTEP_WHEELS_3</FootstepAudioType>
 	</FootstepAudioTypes>
 	<FootstepAudioTags>
 		<FootstepAudioTag>
@@ -241,6 +243,14 @@
 		<FootstepAudioTag>
 			<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
 			<FootstepAudioTagString>AS3D_ENDSTEP_ARTILLERY</FootstepAudioTagString>
+		</FootstepAudioTag>
+		<FootstepAudioTag>
+			<FootstepAudioType>LOOPSTEP_WHEELS_3</FootstepAudioType>
+			<FootstepAudioTagString>AS3D_UN_TREBUCHET_RUN</FootstepAudioTagString>
+		</FootstepAudioTag>
+		<FootstepAudioTag>
+			<FootstepAudioType>ENDSTEP_WHEELS_3</FootstepAudioType>
+			<FootstepAudioTagString>AS3D_UN_TREBUCHET_STOP</FootstepAudioTagString>
 		</FootstepAudioTag>
 	</FootstepAudioTags>
 	<InterfaceVisibilityTypes>

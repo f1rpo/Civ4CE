@@ -2757,11 +2757,32 @@ void CvGlobals::setInfoTypeFromString(const char* szType, int idx)
 	m_infosMap[szType] = idx;
 }
 
+int CvGlobals::getNumDirections() const { return NUM_DIRECTION_TYPES; }
+int CvGlobals::getNumGameOptions() const { return NUM_GAMEOPTION_TYPES; }
+int CvGlobals::getNumMPOptions() const { return NUM_MPOPTION_TYPES; }
+int CvGlobals::getNumSpecialOptions() const { return NUM_SPECIALOPTION_TYPES; }
+int CvGlobals::getNumGraphicOptions() const { return NUM_GRAPHICOPTION_TYPES; }
+int CvGlobals::getNumTradeableItems() const { return NUM_TRADEABLE_ITEMS; }
+int CvGlobals::getNumBasicItems() const { return NUM_BASIC_ITEMS; }
+int CvGlobals::getNumTradeableHeadings() const { return NUM_TRADEABLE_HEADINGS; }
+int CvGlobals::getNumCommandInfos() const { return NUM_COMMAND_TYPES; }
+int CvGlobals::getNumControlInfos() const { return NUM_CONTROL_TYPES; }
+int CvGlobals::getNumMissionInfos() const { return NUM_MISSION_TYPES; }
+int CvGlobals::getNumPlayerOptionInfos() const { return NUM_PLAYEROPTION_TYPES; }
+int CvGlobals::getMaxNumSymbols() const { return MAX_NUM_SYMBOLS; }
+int CvGlobals::getNumGraphicLevels() const { return NUM_GRAPHICLEVELS; }
+
+
 //
 // non-inline versions
 //
 CvMap& CvGlobals::getMap() { return *m_map; }
 CvGameAI& CvGlobals::getGame() { return *m_game; }
+
+int CvGlobals::getMaxCivPlayers() const
+{
+	return MAX_CIV_PLAYERS;
+}
 
 bool CvGlobals::IsGraphicsInitialized() const { return m_bGraphicsInitialized;}
 void CvGlobals::SetGraphicsInitialized(bool bVal) { m_bGraphicsInitialized = bVal;}

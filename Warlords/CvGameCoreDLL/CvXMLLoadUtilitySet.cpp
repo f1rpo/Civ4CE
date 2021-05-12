@@ -2222,7 +2222,6 @@ void CvXMLLoadUtility::SetGlobalBuildingInfo(CvBuildingInfo** ppBuildingInfo, ch
 	PROFILE_FUNC();
 	logMsg("SetGlobalBuildingInfo %s\n", szTagName);
 	int i=0;						//loop counter
-	CvString *paszFreeBuilding; // holds the free building for checking after all the buildings are in
 	CvBuildingInfo* pBuildingInfo;	// local pointer to the building info memory
 
 	// null out the local pointer so that it can be checked at the end of this function
@@ -2238,9 +2237,6 @@ void CvXMLLoadUtility::SetGlobalBuildingInfo(CvBuildingInfo** ppBuildingInfo, ch
 		// set the local pointer to the memory we just allocated
 		pBuildingInfo = *ppBuildingInfo;
 
-		// we also need to allocate memory for the free buildings
-		paszFreeBuilding = new CvString[*iNumVals];
-
 		gDLL->getXMLIFace()->SetToParent(m_pFXml);
 		gDLL->getXMLIFace()->SetToChild(m_pFXml);
 
@@ -2249,7 +2245,6 @@ void CvXMLLoadUtility::SetGlobalBuildingInfo(CvBuildingInfo** ppBuildingInfo, ch
 		{
 			SkipToNextVal();	// skip to the next non-comment node
 
-			GetChildXmlValByName(paszFreeBuilding[i], "FreeBuilding");
 			if (!pBuildingInfo[i].read(this))
 				break;
 			GC.setInfoTypeFromString(pBuildingInfo[i].getType(), i);	// add type to global info type hash map
@@ -2258,15 +2253,6 @@ void CvXMLLoadUtility::SetGlobalBuildingInfo(CvBuildingInfo** ppBuildingInfo, ch
 				break;
 			}
 		}
-
-		// call the find in list function to return either -1 if no value is found
-		// or the index in the list the match is found at
-		for (i=0;i<*iNumVals;i++)
-		{
-			pBuildingInfo[i].setFreeBuilding(FindInInfoClass(paszFreeBuilding[i], pBuildingInfo, sizeof(pBuildingInfo[0]), *iNumVals));
-		}
-
-		SAFE_DELETE_ARRAY(paszFreeBuilding);
 	}
 
 	// if we didn't find the tag name in the xml then we never set the local pointer to the 
@@ -2344,11 +2330,16 @@ void CvXMLLoadUtility::SetGlobalProjectInfo(CvProjectInfo** ppProjectInfo, char*
 
 		SAFE_DELETE_ARRAY(paszAnyonePrereqProject);
 	}
+	else
+	{
+		*iNumVals = 0;
+		*ppProjectInfo = new CvProjectInfo[*iNumVals];
+	}
 
 	// if we didn't find the tag name in the xml then we never set the local pointer to the 
 	// newly allocated memory and there for we will FAssert to let people know this most
 	// interesting fact
-	if(!pProjectInfo)
+	if (NULL == *ppProjectInfo)
 	{
 		char	szMessage[1024];
 		sprintf( szMessage, "Error finding tag node in SetGlobalProjectInfo function \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
@@ -2773,6 +2764,7 @@ void CvXMLLoadUtility::SetGlobalPromotionInfo(CvPromotionInfo **ppPromotionInfos
 
 	int i=0;					//loop counter
 	CvPromotionInfo* pPromotionInfo;	// local pointer to the building info memory
+	CvString* pszPrereq = NULL;
 	CvString* pszPrereqOr1 = NULL;
 	CvString* pszPrereqOr2 = NULL;
 
@@ -2782,6 +2774,7 @@ void CvXMLLoadUtility::SetGlobalPromotionInfo(CvPromotionInfo **ppPromotionInfos
 		// get the number of times the szTagName tag appears in the xml file
 		*iNumVals = gDLL->getXMLIFace()->NumOfElementsByTagName(m_pFXml,szTagName);
 
+		pszPrereq = new CvString[*iNumVals];
 		pszPrereqOr1 = new CvString[*iNumVals];
 		pszPrereqOr2 = new CvString[*iNumVals];
 
@@ -2801,6 +2794,7 @@ void CvXMLLoadUtility::SetGlobalPromotionInfo(CvPromotionInfo **ppPromotionInfos
 			if (!pPromotionInfo[i].read(this))
 				break;
 			GC.setInfoTypeFromString(pPromotionInfo[i].getType(), i);	// add type to global info type hash map
+			GetChildXmlValByName(pszPrereq[i], "PromotionPrereq");
 			GetChildXmlValByName(pszPrereqOr1[i], "PromotionPrereqOr1");
 			GetChildXmlValByName(pszPrereqOr2[i], "PromotionPrereqOr2");
 
@@ -2813,10 +2807,12 @@ void CvXMLLoadUtility::SetGlobalPromotionInfo(CvPromotionInfo **ppPromotionInfos
 
 	for (i=0;i<GC.getNumPromotionInfos();i++)
 	{
+		GC.getPromotionInfo((PromotionTypes) i).setPrereqPromotion(FindInInfoClass(pszPrereq[i], GC.getPromotionInfo(), sizeof(GC.getPromotionInfo((PromotionTypes) i)), GC.getNumPromotionInfos()));
 		GC.getPromotionInfo((PromotionTypes) i).setPrereqOrPromotion1(FindInInfoClass(pszPrereqOr1[i], GC.getPromotionInfo(), sizeof(GC.getPromotionInfo((PromotionTypes) i)), GC.getNumPromotionInfos()));
 		GC.getPromotionInfo((PromotionTypes) i).setPrereqOrPromotion2(FindInInfoClass(pszPrereqOr2[i], GC.getPromotionInfo(), sizeof(GC.getPromotionInfo((PromotionTypes) i)), GC.getNumPromotionInfos()));
 	}
 
+	SAFE_DELETE_ARRAY(pszPrereq);
 	SAFE_DELETE_ARRAY(pszPrereqOr1);
 	SAFE_DELETE_ARRAY(pszPrereqOr2);
 

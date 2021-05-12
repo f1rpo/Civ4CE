@@ -1903,14 +1903,14 @@ with GFC_Control_TitleBar
 												
 			with .ToolTip						
 			{								
-				.MinimizeButton					=	"Minimize";
-				.MaximizeButton					=	"Maximize";
-				.CollapseButton					=	"Collapse";
-				.CollapseRestoreButton			=	"Expand";
-				.MinimizeRestoreButton			=	"Restore Up";
-				.MaximizeRestoreButton			=	"Restore Down";
-				.CloseButton					=	"Close";
-				.HelpButton						=	"Help";
+				.MinimizeButton					=	"";
+				.MaximizeButton					=	"";
+				.CollapseButton					=	"";
+				.CollapseRestoreButton			=	"";
+				.MinimizeRestoreButton			=	"";
+				.MaximizeRestoreButton			=	"";
+				.CloseButton					=	"";
+				.HelpButton						=	"";
 			}							
 		}								
 		

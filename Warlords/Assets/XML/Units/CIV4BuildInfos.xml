@@ -15,7 +15,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>NONE</ImprovementType>
 			<RouteType>ROUTE_ROAD</RouteType>
-			<EntityEvent>ENTEVENT_SHOVEL</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_SHOVEL</EntityEvent>
 			<FeatureStructs/>
 			<HotKey>KB_R</HotKey>
 			<bAltDown>0</bAltDown>
@@ -33,7 +33,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>NONE</ImprovementType>
 			<RouteType>ROUTE_RAILROAD</RouteType>
-			<EntityEvent>ENTEVENT_RAILROAD</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_RAILROAD</EntityEvent>
 			<FeatureStructs/>
 			<HotKey>KB_R</HotKey>
 			<bAltDown>0</bAltDown>
@@ -51,7 +51,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>IMPROVEMENT_FARM</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_IRRIGATE</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_IRRIGATE</EntityEvent>
 			<FeatureStructs>
 				<FeatureStruct>
 					<FeatureType>FEATURE_JUNGLE</FeatureType>
@@ -84,7 +84,7 @@
 			<bKill>1</bKill>
 			<ImprovementType>IMPROVEMENT_FISHING_BOATS</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_BUILD</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_BUILD</EntityEvent>
 			<FeatureStructs/>
 			<HotKey>KB_F</HotKey>
 			<bAltDown>0</bAltDown>
@@ -102,7 +102,7 @@
 			<bKill>1</bKill>
 			<ImprovementType>IMPROVEMENT_WHALING_BOATS</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_BUILD</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_BUILD</EntityEvent>
 			<FeatureStructs/>
 			<HotKey>KB_W</HotKey>
 			<bAltDown>0</bAltDown>
@@ -120,7 +120,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>IMPROVEMENT_MINE</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_MINE</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_MINE</EntityEvent>
 			<FeatureStructs>
 				<FeatureStruct>
 					<FeatureType>FEATURE_JUNGLE</FeatureType>
@@ -153,7 +153,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>IMPROVEMENT_WORKSHOP</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_MINE</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_MINE</EntityEvent>
 			<FeatureStructs>
 				<FeatureStruct>
 					<FeatureType>FEATURE_JUNGLE</FeatureType>
@@ -186,7 +186,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>IMPROVEMENT_LUMBERMILL</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_BUILD</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_BUILD</EntityEvent>
 			<FeatureStructs/>
 			<HotKey>KB_L</HotKey>
 			<bAltDown>0</bAltDown>
@@ -204,7 +204,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>IMPROVEMENT_WINDMILL</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_BUILD</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_BUILD</EntityEvent>
 			<FeatureStructs>
 				<FeatureStruct>
 					<FeatureType>FEATURE_JUNGLE</FeatureType>
@@ -237,7 +237,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>IMPROVEMENT_WATERMILL</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_BUILD</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_BUILD</EntityEvent>
 			<FeatureStructs>
 				<FeatureStruct>
 					<FeatureType>FEATURE_JUNGLE</FeatureType>
@@ -270,7 +270,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>IMPROVEMENT_PLANTATION</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_BUILD</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_BUILD</EntityEvent>
 			<FeatureStructs>
 				<FeatureStruct>
 					<FeatureType>FEATURE_JUNGLE</FeatureType>
@@ -303,7 +303,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>IMPROVEMENT_QUARRY</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_BUILD</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_BUILD</EntityEvent>
 			<FeatureStructs>
 				<FeatureStruct>
 					<FeatureType>FEATURE_JUNGLE</FeatureType>
@@ -336,7 +336,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>IMPROVEMENT_PASTURE</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_BUILD</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_BUILD</EntityEvent>
 			<FeatureStructs>
 				<FeatureStruct>
 					<FeatureType>FEATURE_JUNGLE</FeatureType>
@@ -369,7 +369,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>IMPROVEMENT_CAMP</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_BUILD</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_BUILD</EntityEvent>
 			<FeatureStructs/>
 			<HotKey>KB_H</HotKey>
 			<bAltDown>0</bAltDown>
@@ -387,7 +387,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>IMPROVEMENT_WELL</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_BUILD</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_BUILD</EntityEvent>
 			<FeatureStructs>
 				<FeatureStruct>
 					<FeatureType>FEATURE_JUNGLE</FeatureType>
@@ -420,7 +420,7 @@
 			<bKill>1</bKill>
 			<ImprovementType>IMPROVEMENT_OFFSHORE_PLATFORM</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_BUILD</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_BUILD</EntityEvent>
 			<FeatureStructs/>
 			<HotKey>KB_O</HotKey>
 			<bAltDown>0</bAltDown>
@@ -438,7 +438,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>IMPROVEMENT_WINERY</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_BUILD</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_BUILD</EntityEvent>
 			<FeatureStructs>
 				<FeatureStruct>
 					<FeatureType>FEATURE_JUNGLE</FeatureType>
@@ -471,7 +471,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>IMPROVEMENT_COTTAGE</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_BUILD</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_BUILD</EntityEvent>
 			<FeatureStructs>
 				<FeatureStruct>
 					<FeatureType>FEATURE_JUNGLE</FeatureType>
@@ -504,7 +504,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>IMPROVEMENT_FORT</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_BUILD</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_BUILD</EntityEvent>
 			<FeatureStructs/>
 			<HotKey>KB_F</HotKey>
 			<bAltDown>0</bAltDown>
@@ -522,7 +522,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>NONE</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_CHOP</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_CHOP</EntityEvent>
 			<FeatureStructs>
 				<FeatureStruct>
 					<FeatureType>FEATURE_JUNGLE</FeatureType>
@@ -548,7 +548,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>NONE</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_CHOP</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_CHOP</EntityEvent>
 			<FeatureStructs>
 				<FeatureStruct>
 					<FeatureType>FEATURE_FOREST</FeatureType>
@@ -574,7 +574,7 @@
 			<bKill>0</bKill>
 			<ImprovementType>NONE</ImprovementType>
 			<RouteType>NONE</RouteType>
-			<EntityEvent>ENTEVENT_IRRIGATE</EntityEvent>
+			<EntityEvent>ENTITY_EVENT_IRRIGATE</EntityEvent>
 			<FeatureStructs>
 				<FeatureStruct>
 					<FeatureType>FEATURE_FALLOUT</FeatureType>

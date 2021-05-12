@@ -459,17 +459,17 @@ CvWString CvXMLLoadUtility::CreateHotKeyFromDescription(const TCHAR* pszHotKey, 
 
 		if (bShift)
 		{
-			szHotKey += L"Shift+";
+			szHotKey += gDLL->getText("TXT_KEY_SHIFT");
 		}
 
 		if (bAlt)
 		{
-			szHotKey += L"Alt+";
+			szHotKey += gDLL->getText("TXT_KEY_ALT");
 		}
 
 		if (bCtrl)
 		{
-			szHotKey += L"Ctrl+";
+			szHotKey += gDLL->getText("TXT_KEY_CTRL");
 		}
 
 		szHotKey = szHotKey + CreateKeyStringFromKBCode(pszHotKey);

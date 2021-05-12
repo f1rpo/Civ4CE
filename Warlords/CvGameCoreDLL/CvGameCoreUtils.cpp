@@ -266,7 +266,8 @@ bool isPromotionValid(PromotionTypes ePromotion, UnitTypes eUnit)
 			  (GC.getPromotionInfo(ePromotion).getCollateralDamageChange() != 0) ||
 			  (GC.getPromotionInfo(ePromotion).isBlitz()) ||
 			  (GC.getPromotionInfo(ePromotion).isAmphib()) ||
-			  (GC.getPromotionInfo(ePromotion).isRiver()))
+			  (GC.getPromotionInfo(ePromotion).isRiver()) ||
+			  (GC.getPromotionInfo(ePromotion).getHillsAttackPercent() != 0))
 		{
 			return false;
 		}
@@ -504,25 +505,20 @@ bool isLimitedProject(ProjectTypes eProject)
 // Needed for getCombatOdds
 // Returns int value, being the possible number of combinations 
 // of k draws out of a population of n
-// Written by DeepO
+// Written by DeepO 
+// Modified by Jason Winokur to keep the intermediate factorials small
 __int64 getBinomialCoefficient(int iN, int iK)
 {
 	__int64 iTemp = 1;
-	int iI;
-
-	for (iI = iN; iI > iK; iI--)
-	{
-		iTemp *= iI;
-	}
+	//take advantage of symmetry in combination, eg. 15C12 = 15C3
+	iK = min(iK, iN - iK);
+	
+	//eg. 15C3 = (15 * 14 * 13) / (1 * 2 * 3) = 15 / 1 * 14 / 2 * 13 / 3 = 455
+	for(int i=1;i<=iK;i++)
+		iTemp = (iTemp * (iN - i + 1)) / i;
 
 	// Make sure iTemp fits in an integer (and thus doesn't overflow)
 	FAssert(iTemp < MAX_INT);
-
-	for (iI = 2; iI < (iN-iK+1); iI++)
-	{
-		// integer math. no roundings will occur.
-		iTemp /= iI;
-	}
 
 	return iTemp;
 }
@@ -1250,7 +1246,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 				{
 					if (iMovesLeft == 0)
 					{
-						iCost += (PATH_DEFENSE_WEIGHT * max(0, (200 - ((pLoopUnit->noDefensiveBonus()) ? 0 : pToPlot->defenseModifier(false)))));
+						iCost += (PATH_DEFENSE_WEIGHT * max(0, (200 - ((pLoopUnit->noDefensiveBonus()) ? 0 : pToPlot->defenseModifier(pLoopUnit->getTeam(), false)))));
 					}
 
 					if (pSelectionGroup->AI_isControlled())
@@ -1261,7 +1257,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 							{
 								if (pToPlot->isVisibleEnemyDefender(pLoopUnit->getOwnerINLINE()))
 								{
-									iCost += (PATH_DEFENSE_WEIGHT * max(0, (200 - ((pLoopUnit->noDefensiveBonus()) ? 0 : pFromPlot->defenseModifier(false)))));
+									iCost += (PATH_DEFENSE_WEIGHT * max(0, (200 - ((pLoopUnit->noDefensiveBonus()) ? 0 : pFromPlot->defenseModifier(pLoopUnit->getTeam(), false)))));
 
 									if (!(pFromPlot->isCity()))
 									{
@@ -1763,6 +1759,10 @@ int getTurnYearForGame(int iGameTurn, int iStartYear, CalendarTypes eCalendar, G
 		{
 			iTurnYear += (GC.getGameSpeedInfo(eSpeed).getGameTurnInfo(GC.getGameSpeedInfo(eSpeed).getNumTurnIncrements() - 1).iYearIncrement * (iGameTurn - iTurnCount));
 		}
+		break;
+
+	case CALENDAR_BI_YEARLY:
+		iTurnYear += (2 * iGameTurn);
 		break;
 
 	case CALENDAR_YEARS:

@@ -20,6 +20,7 @@
 #include "CvDLLEntityIFaceBase.h"
 #include "CvGameCoreUtils.h"
 #include "CvDLLEngineIFaceBase.h"
+#include "CvDLLEventReporterIFaceBase.h"
 
 // Public Functions...
 
@@ -223,6 +224,44 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 		}
 		break;
 
+	case BUTTONPOPUP_LEADUNIT:
+		if (pPopupReturn->getButtonClicked() != 0)
+		{
+			CLLNode<IDInfo>* pUnitNode;
+			CvSelectionGroup* pSelectionGroup;
+			CvUnit* pLoopUnit;
+			CvPlot* pPlot;
+			int iCount;
+
+			pSelectionGroup = gDLL->getInterfaceIFace()->getSelectionList();
+
+			if (NULL != pSelectionGroup)
+			{
+				pPlot = pSelectionGroup->plot();
+
+				iCount = pPopupReturn->getButtonClicked();
+
+				pUnitNode = pPlot->headUnitNode();
+
+				while (pUnitNode != NULL)
+				{
+					pLoopUnit = ::getUnit(pUnitNode->m_data);
+					pUnitNode = pPlot->nextUnitNode(pUnitNode);
+
+					if (pLoopUnit->canPromote((PromotionTypes) info.getData1(), info.getData2()))
+					{
+						iCount--;
+						if (iCount == 0)
+						{
+							GC.getGameINLINE().selectionListGameNetMessage(GAMEMESSAGE_PUSH_MISSION, MISSION_LEAD, pLoopUnit->getID());
+							break;
+						}
+					}
+				}
+			}
+		}
+		break;
+
 	case BUTTONPOPUP_CHOOSETECH:
 		if (pPopupReturn->getButtonClicked() == GC.getNumTechInfos())
 		{
@@ -238,6 +277,12 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 		}
 		else if (pPopupReturn->getButtonClicked() == 2)
 		{
+			CvCity* pCity = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCity(info.getData1());
+			if (NULL != pCity)
+			{
+				gDLL->getEventReporterIFace()->cityAcquiredAndKept(GC.getGameINLINE().getActivePlayer(), pCity);
+			}
+
 			gDLL->sendDoTask(info.getData1(), TASK_GIFT, info.getData2(), -1, false);
 		}
 		else if (pPopupReturn->getButtonClicked() == 0)
@@ -245,10 +290,8 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 			CvCity* pCity = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCity(info.getData1());
 			if (NULL != pCity)
 			{
-				if (!(pCity->isOccupation()))
-				{
-					pCity->chooseProduction();
-				}
+				pCity->chooseProduction();
+				gDLL->getEventReporterIFace()->cityAcquiredAndKept(GC.getGameINLINE().getActivePlayer(), pCity);
 			}
 		}
 		break;
@@ -263,10 +306,7 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 			CvCity* pCity = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCity(info.getData1());
 			if (NULL != pCity)
 			{
-				if (!(pCity->isOccupation()))
-				{
-					pCity->chooseProduction();
-				}
+				pCity->chooseProduction();
 			}
 		}
 		break;
@@ -579,6 +619,66 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 		gDLL->getInterfaceIFace()->exitingToMainMenu();
 		break;
 
+	case BUTTONPOPUP_VASSAL_DEMAND_TRIBUTE:
+		if (pPopupReturn->getButtonClicked() < GC.getNumBonusInfos())
+		{
+			PlayerTypes eVassal = (PlayerTypes)info.getData1();
+			if (GET_PLAYER(eVassal).isHuman())
+			{
+				CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_VASSAL_GRANT_TRIBUTE, GC.getGameINLINE().getActivePlayer(), pPopupReturn->getButtonClicked());
+				if (NULL != pInfo)
+				{
+					gDLL->sendPopup(eVassal, pInfo);
+				}
+			}
+			else
+			{
+				TradeData item;
+				setTradeItem(&item, TRADE_RESOURCES, pPopupReturn->getButtonClicked());
+
+				CLinkList<TradeData> ourList;
+				CLinkList<TradeData> theirList;
+				theirList.insertAtEnd(item);
+
+				if (GET_PLAYER(eVassal).AI_considerOffer(GC.getGameINLINE().getActivePlayer(), &ourList, &theirList))
+				{
+					gDLL->sendImplementDealMessage(eVassal, &ourList, &theirList);
+
+					CvWString szBuffer = gDLL->getText("TXT_KEY_VASSAL_GRANT_TRIBUTE_ACCEPTED", GET_PLAYER(eVassal).getNameKey(), GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getNameKey(), GC.getBonusInfo((BonusTypes)pPopupReturn->getButtonClicked()).getTextKeyWide());
+					gDLL->getInterfaceIFace()->addMessage(GC.getGameINLINE().getActivePlayer(), false, GC.getDefineINT("EVENT_MESSAGE_TIME"), szBuffer);
+				}
+				else
+				{
+					gDLL->sendChangeWar(GET_PLAYER(eVassal).getTeam(), true);
+				}
+			}
+		}
+		break;
+
+	case BUTTONPOPUP_VASSAL_GRANT_TRIBUTE:
+		if (pPopupReturn->getButtonClicked() == 0)
+		{
+			TradeData item;
+			setTradeItem(&item, TRADE_RESOURCES, info.getData2());
+
+			CLinkList<TradeData> ourList;
+			CLinkList<TradeData> theirList;
+			ourList.insertAtEnd(item);
+			
+			gDLL->sendImplementDealMessage((PlayerTypes)info.getData1(), &ourList, &theirList);
+
+			CvWString szBuffer = gDLL->getText("TXT_KEY_VASSAL_GRANT_TRIBUTE_ACCEPTED", GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getNameKey(), GET_PLAYER((PlayerTypes)info.getData1()).getNameKey(), GC.getBonusInfo((BonusTypes)info.getData2()).getTextKeyWide());
+			gDLL->getInterfaceIFace()->addMessage((PlayerTypes)info.getData1(), false, GC.getDefineINT("EVENT_MESSAGE_TIME"), szBuffer);
+		}
+		else
+		{
+			gDLL->sendChangeWar(GET_PLAYER((PlayerTypes)info.getData1()).getTeam(), true);
+		}
+
+		GET_PLAYER(GC.getGameINLINE().getActivePlayer()).setTributePaid((PlayerTypes)info.getData1(), true);
+
+		break;
+
 	default:
 		FAssert(false);
 		break;
@@ -726,6 +826,9 @@ bool CvDLLButtonPopup::launchButtonPopup(CvPopup* pPopup, CvPopupInfo &info)
 	case BUTTONPOPUP_LOADUNIT:
 		bLaunched = launchLoadUnitPopup(pPopup, info);
 		break;
+	case BUTTONPOPUP_LEADUNIT:
+		bLaunched = launchLeadUnitPopup(pPopup, info);
+		break;
 	case BUTTONPOPUP_MAIN_MENU:
 		bLaunched = launchMainMenuPopup(pPopup, info);
 		break;
@@ -767,6 +870,12 @@ bool CvDLLButtonPopup::launchButtonPopup(CvPopup* pPopup, CvPopupInfo &info)
 		break;
 	case BUTTONPOPUP_KICKED:
 		bLaunched = launchKickedPopup(pPopup, info);
+		break;
+	case BUTTONPOPUP_VASSAL_DEMAND_TRIBUTE:
+		bLaunched = launchVassalDemandTributePopup(pPopup, info);
+		break;
+	case BUTTONPOPUP_VASSAL_GRANT_TRIBUTE:
+		bLaunched = launchVassalGrantTributePopup(pPopup, info);
 		break;
 	default:
 		FAssert(false);
@@ -1024,7 +1133,7 @@ bool CvDLLButtonPopup::launchProductionPopup(CvPopup* pPopup, CvPopupInfo &info)
 	switch (info.getData2())
 	{
 	case ORDER_TRAIN:
-		gDLL->getInterfaceIFace()->playGeneralSound(GC.getUnitInfo((UnitTypes)info.getData3()).getArtInfo(0, GET_PLAYER(pCity->getOwner()).isLateEra())->getTrainSound());
+		gDLL->getInterfaceIFace()->playGeneralSound(GC.getUnitInfo((UnitTypes)info.getData3()).getArtInfo(0, GET_PLAYER(pCity->getOwner()).getCurrentEra())->getTrainSound());
 		break;
 
 	case ORDER_CONSTRUCT:
@@ -1124,6 +1233,9 @@ bool CvDLLButtonPopup::launchDiploVotePopup(CvPopup* pPopup, CvPopupInfo &info)
 		return (false);
 	}
 
+	TeamTypes eVassalOfTeam = NO_TEAM;
+	bool bEligible = false;
+
 	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_POPUP_DIPLO_VOTE", GC.getVoteInfo(eVote).getTextKeyWide(), GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getTotalPopulation(), GC.getGameINLINE().getVoteRequired(eVote), GC.getGameINLINE().countPossibleVote()));
 	if (GC.getGameINLINE().isTeamVote(eVote))
 	{
@@ -1133,7 +1245,26 @@ bool CvDLLButtonPopup::launchDiploVotePopup(CvPopup* pPopup, CvPopupInfo &info)
 			{
 				if (GC.getGameINLINE().isTeamVoteEligible((TeamTypes)iI))
 				{
-					gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, GET_TEAM((TeamTypes)iI).getName().GetCString(), NULL, WIDGET_GENERAL, iI);
+					if (GET_TEAM(GC.getGameINLINE().getActiveTeam()).isVassal((TeamTypes)iI))
+					{
+						eVassalOfTeam = (TeamTypes)iI;
+						break;
+					}
+				}
+			}
+		}
+
+		for (int iI = 0; iI < MAX_CIV_TEAMS; iI++)
+		{
+			if (GET_TEAM((TeamTypes)iI).isAlive())
+			{
+				if (GC.getGameINLINE().isTeamVoteEligible((TeamTypes)iI))
+				{
+					if (eVassalOfTeam == NO_TEAM || eVassalOfTeam == iI || iI == GC.getGameINLINE().getActiveTeam())
+					{
+						gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, GET_TEAM((TeamTypes)iI).getName().GetCString(), NULL, WIDGET_GENERAL, iI);
+						bEligible = true;
+					}
 				}
 			}
 		}
@@ -1142,8 +1273,14 @@ bool CvDLLButtonPopup::launchDiploVotePopup(CvPopup* pPopup, CvPopupInfo &info)
 	{
 		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_YES").c_str(), NULL, WIDGET_GENERAL, 1);
 		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_NO").c_str(), NULL, WIDGET_GENERAL, 0);
+		bEligible = true;
 	}
-	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_ABSTAIN").c_str(), NULL, WIDGET_GENERAL, MAX_CIV_TEAMS);
+
+	if (eVassalOfTeam == NO_TEAM || !bEligible)
+	{
+		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_ABSTAIN").c_str(), NULL, WIDGET_GENERAL, MAX_CIV_TEAMS);
+	}
+
 	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
 	return (true);
 }
@@ -1237,13 +1374,19 @@ bool CvDLLButtonPopup::launchRazeCityPopup(CvPopup* pPopup, CvPopupInfo &info)
 		return (false);
 	}
 
+	if (0 != GC.getDefineINT("PLAYER_ALWAYS_RAZES_CITIES"))
+	{
+		player.raze(pNewCity);
+		return false;
+	}
+
 	PlayerTypes eHighestCulturePlayer = (PlayerTypes)info.getData2();
 
 	int iCaptureGold = info.getData3();
 	bool bRaze = player.canRaze(pNewCity);
 	bool bGift = ((eHighestCulturePlayer != NO_PLAYER) 
 		&& (eHighestCulturePlayer != player.getID()) 
-		&& ((player.getTeam() == GET_PLAYER(eHighestCulturePlayer).getTeam()) || GET_TEAM(player.getTeam()).isOpenBorders(GET_PLAYER(eHighestCulturePlayer).getTeam())));
+		&& ((player.getTeam() == GET_PLAYER(eHighestCulturePlayer).getTeam()) || GET_TEAM(player.getTeam()).isOpenBorders(GET_PLAYER(eHighestCulturePlayer).getTeam()) || GET_TEAM(GET_PLAYER(eHighestCulturePlayer).getTeam()).isVassal(player.getTeam())));
 	
 	CvWString szBuffer;
 	if (iCaptureGold > 0)
@@ -1547,6 +1690,7 @@ bool CvDLLButtonPopup::launchLoadUnitPopup(CvPopup* pPopup, CvPopupInfo &info)
 	CvPlot* pPlot;
 	CvWString szBuffer;
 	int iCount;
+	CvUnit* pFirstUnit = NULL;
 
 	pSelectionGroup = gDLL->getInterfaceIFace()->getSelectionList();
 
@@ -1570,6 +1714,10 @@ bool CvDLLButtonPopup::launchLoadUnitPopup(CvPopup* pPopup, CvPopupInfo &info)
 
 		if (pSelectionGroup->canDoCommand(COMMAND_LOAD_UNIT, pLoopUnit->getOwnerINLINE(), pLoopUnit->getID()))
 		{
+			if (!pFirstUnit)
+			{
+				pFirstUnit = pLoopUnit;
+			}
 			szBuffer.clear();
 			GAMETEXT.setUnitHelp(szBuffer, pLoopUnit, true);
 			szBuffer += L", " + gDLL->getText("TXT_KEY_UNIT_HELP_CARGO_SPACE", pLoopUnit->getCargo(), pLoopUnit->cargoSpace());
@@ -1578,8 +1726,77 @@ bool CvDLLButtonPopup::launchLoadUnitPopup(CvPopup* pPopup, CvPopupInfo &info)
 		}
 	}
 
-	if (iCount == 1)
+	if (iCount <= 2)
 	{
+		if (pFirstUnit)
+		{
+			GC.getGameINLINE().selectionListGameNetMessage(GAMEMESSAGE_DO_COMMAND, COMMAND_LOAD_UNIT, pFirstUnit->getOwnerINLINE(), pFirstUnit->getID());
+		}
+		return (false);
+	}
+
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_NEVER_MIND"), NULL, WIDGET_GENERAL, 0);
+
+	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
+
+	return (true);
+}
+
+
+bool CvDLLButtonPopup::launchLeadUnitPopup(CvPopup* pPopup, CvPopupInfo &info)
+{
+	CLLNode<IDInfo>* pUnitNode;
+	CvSelectionGroup* pSelectionGroup;
+	CvUnit* pLoopUnit;
+	CvPlot* pPlot;
+	CvWString szBuffer;
+	int iCount;
+	CvUnit* pFirstUnit = NULL;
+
+	pSelectionGroup = gDLL->getInterfaceIFace()->getSelectionList();
+
+	if (NULL == pSelectionGroup)
+	{
+		return (false);
+	}
+
+	pPlot = pSelectionGroup->plot();
+	if (NULL == pPlot)
+	{
+		return (false);
+	}
+
+	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_CHOOSE_UNIT_TO_LEAD"));
+
+
+	iCount = 1;
+
+	pUnitNode = pPlot->headUnitNode();
+
+	while (pUnitNode != NULL)
+	{
+		pLoopUnit = ::getUnit(pUnitNode->m_data);
+		pUnitNode = pPlot->nextUnitNode(pUnitNode);
+
+		if (pLoopUnit->canPromote((PromotionTypes) info.getData1(), info.getData2()))
+		{
+			if (!pFirstUnit)
+			{
+				pFirstUnit = pLoopUnit;
+			}
+			szBuffer.clear();
+			GAMETEXT.setUnitHelp(szBuffer, pLoopUnit, true);
+			gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, NULL, WIDGET_GENERAL, iCount);
+			iCount++;
+		}
+	}
+
+	if (iCount <= 2)
+	{
+		if (pFirstUnit)
+		{
+			GC.getGameINLINE().selectionListGameNetMessage(GAMEMESSAGE_PUSH_MISSION, MISSION_LEAD, pFirstUnit->getID());
+		}
 		return (false);
 	}
 
@@ -1610,9 +1827,25 @@ bool CvDLLButtonPopup::launchMainMenuPopup(CvPopup* pPopup, CvPopupInfo &info)
 		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_RETIRE").c_str(), NULL, WIDGET_GENERAL, 2, 0, true, POPUP_LAYOUT_STRETCH, DLL_FONT_CENTER_JUSTIFY);
 	}
 
-	if ((GC.getGameINLINE().getElapsedGameTurns() == 0) && !(GC.getGameINLINE().isGameMultiPlayer()) && !(GC.getInitCore().getWBMapScript()))
+	if ((GC.getGameINLINE().getGameTurn() == 0) && !(GC.getGameINLINE().isGameMultiPlayer()) && !(GC.getInitCore().getWBMapScript()))
 	{
-		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_REGENERATE_MAP").c_str(), NULL, WIDGET_GENERAL, 3, 0, true, POPUP_LAYOUT_STRETCH, DLL_FONT_CENTER_JUSTIFY);
+		// Don't allow if there has already been diplomacy
+		bool bShow = true;
+		for (int i = 0; bShow && i < MAX_CIV_TEAMS; i++)
+		{
+			for (int j = i+1; bShow && j < MAX_CIV_TEAMS; j++)
+			{
+				if (GET_TEAM((TeamTypes)i).isHasMet((TeamTypes)j))
+				{
+					bShow = false;
+				}
+			}
+		}
+
+		if (bShow)
+		{
+			gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_REGENERATE_MAP").c_str(), NULL, WIDGET_GENERAL, 3, 0, true, POPUP_LAYOUT_STRETCH, DLL_FONT_CENTER_JUSTIFY);
+		}
 	}
 
 	if (GC.getGameINLINE().canDoControl(CONTROL_LOAD_GAME))
@@ -1722,7 +1955,7 @@ bool CvDLLButtonPopup::launchDetailsPopup(CvPopup* pPopup, CvPopupInfo &info)
 		// the purpose of the popup with the option set to true is to ask for the civ password if it's not set
 		return false;
 	}
-	if (GC.getGameINLINE().isPbem() || GC.getGameINLINE().isHotSeat())
+	if (GC.getGameINLINE().isPbem() || GC.getGameINLINE().isHotSeat() || GC.getGameINLINE().isPitboss())
 	{
 		gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_MAIN_MENU_PASSWORD"));
 		gDLL->getInterfaceIFace()->popupCreateEditBox(pPopup, PASSWORD_DEFAULT, WIDGET_GENERAL, gDLL->getText("TXT_KEY_MAIN_MENU_PASSWORD"), 4, POPUP_LAYOUT_STRETCH, 0, MAX_PASSWORD_CHAR_COUNT);
@@ -1863,4 +2096,76 @@ bool CvDLLButtonPopup::launchKickedPopup(CvPopup* pPopup, CvPopupInfo &info)
 	gDLL->getInterfaceIFace()->popupSetHeaderString( pPopup, gDLL->getText("TXT_KEY_POPUP_KICKED") );
 	gDLL->getInterfaceIFace()->popupLaunch(pPopup, true);
 	return (true);
+}
+
+bool CvDLLButtonPopup::launchVassalDemandTributePopup(CvPopup* pPopup, CvPopupInfo &info)
+{
+	if (info.getData1() == NO_PLAYER)
+	{
+		return false;
+	}
+
+	CvPlayer& kVassal = GET_PLAYER((PlayerTypes)info.getData1());
+	if (!GET_TEAM(kVassal.getTeam()).isVassal(GC.getGameINLINE().getActiveTeam()))
+	{
+		return false;
+	}
+
+	int iNumResources = 0;
+	if (kVassal.canTradeNetworkWith(GC.getGameINLINE().getActivePlayer()))
+	{
+		gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_VASSAL_DEMAND_TRIBUTE", kVassal.getNameKey()));
+
+		if (!kVassal.isTributePaid(GC.getGameINLINE().getActivePlayer()))
+		{
+			for (int iBonus = 0; iBonus < GC.getNumBonusInfos(); iBonus++)
+			{
+				if (kVassal.getNumTradeableBonuses((BonusTypes)iBonus) > 0 && GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getNumAvailableBonuses((BonusTypes)iBonus) == 0)
+				{
+					CvBonusInfo& info = GC.getBonusInfo((BonusTypes)iBonus);
+					gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, info.getDescription(), info.getButton(), WIDGET_GENERAL, iBonus, -1, true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY);
+					++iNumResources;
+				}
+			}
+		}
+	}
+
+	if (iNumResources > 0)
+	{
+		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_NEVER_MIND"), ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CANCEL")->getPath(), WIDGET_GENERAL, GC.getNumBonusInfos());
+	}
+	else
+	{
+		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_VASSAL_TRIBUTE_NOT_POSSIBLE"), ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CANCEL")->getPath(), WIDGET_GENERAL, GC.getNumBonusInfos());
+	}
+
+	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
+
+	return true;
+}
+
+bool CvDLLButtonPopup::launchVassalGrantTributePopup(CvPopup* pPopup, CvPopupInfo &info)
+{
+	if (info.getData1() == NO_PLAYER)
+	{
+		return false;
+	}
+
+	CvPlayer& kMaster = GET_PLAYER((PlayerTypes)info.getData1());
+	if (!GET_TEAM(GC.getGameINLINE().getActiveTeam()).isVassal(kMaster.getTeam()))
+	{
+		return false;
+	}
+
+	if (info.getData2() == NO_BONUS)
+	{
+		return false;
+	}
+
+	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_VASSAL_GRANT_TRIBUTE", kMaster.getCivilizationDescriptionKey(), kMaster.getNameKey(), GC.getBonusInfo((BonusTypes)info.getData2()).getTextKeyWide()));
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_VASSAL_GRANT_TRIBUTE_YES"), NULL, WIDGET_GENERAL, 0);
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_VASSAL_GRANT_TRIBUTE_NO"), NULL, WIDGET_GENERAL, 1);
+	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
+
+	return true;
 }

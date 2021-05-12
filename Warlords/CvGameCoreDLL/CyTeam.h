@@ -29,7 +29,7 @@ public:
 	void signDefensivePact(int /*TeamTypes*/ eTeam);
 
 	int getAssets();
-	int getPower();
+	int getPower(bool bIncludeVassals);
 	int getDefensivePower();
 	int getNumNukeUnits();
 
@@ -40,6 +40,7 @@ public:
 	int getHasMetCivCount(bool bIgnoreMinors);
 	bool hasMetHuman();
 	int getDefensivePactCount();
+	bool isAVassal() const;
 
 	int getUnitClassMaking(int /*UnitClassTypes*/ eUnitClass);
 	int getUnitClassCountPlusMaking(int /*UnitClassTypes*/ eUnitClass);
@@ -103,6 +104,9 @@ public:
 	int getPermanentAllianceTradingCount();
 	bool isPermanentAllianceTrading();
 	void changePermanentAllianceTradingCount(int iChange);													
+	int getVassalTradingCount();
+	bool isVassalStateTrading();
+	void changeVassalTradingCount(int iChange);													
 	int getBridgeBuildingCount();
 	bool isBridgeBuilding();
 	void changeBridgeBuildingCount(int iChange);																		
@@ -115,6 +119,11 @@ public:
 	int getWaterWorkCount();
 	bool isWaterWork();
 	void changeWaterWorkCount(int iChange);																	
+
+	int getVassalPower() const;
+	void setVassalPower(int iPower);
+	int getMasterPower() const;
+	void setMasterPower(int iPower);
 
 	bool isMapCentering();
 	void setMapCentering(bool bNewValue);
@@ -143,6 +152,10 @@ public:
 	bool isFreeTrade(int /*TeamTypes*/ eIndex);
 	bool isOpenBorders(int /*TeamTypes*/ eIndex);
 	bool isForcePeace(int /*TeamTypes*/ eIndex);
+	bool isVassal(int /*TeamTypes*/ eIndex);
+	void setVassal(int /*TeamTypes*/ eIndex, bool bVassal, bool bCapitulated);
+	void assignVassal(int /*TeamTypes*/ eIndex, bool bSurrender);
+	void freeVassal(int /*TeamTypes*/ eIndex);
 	bool isDefensivePact(int /*TeamTypes*/ eIndex);
 	int getRouteChange(int /*RouteTypes*/ eIndex);
 	void changeRouteChange(int /*RouteTypes*/ eIndex, int iChange);

@@ -35,6 +35,7 @@ public:
 	bool generatePath(CyPlot* pToPlot, int iFlags = 0, bool bReuse = false, int* piPathTurns = NULL);
 
 	bool canEnterTerritory(int /*TeamTypes*/ eTeam, bool bIgnoreRightOfPassage);
+	bool canEnterArea(int /*TeamTypes*/ eTeam, CyArea* pArea, bool bIgnoreRightOfPassage);
 	int /*TeamTypes*/ getDeclareWarMove(CyPlot* pPlot);																						 
 	bool canMoveInto(CyPlot* pPlot, bool bAttack, bool bDeclareWar, bool bIgnoreLoad); 
 	bool canMoveOrAttackInto(CyPlot* pPlot, bool bDeclareWar);		 
@@ -103,9 +104,13 @@ public:
 	bool canGreatWork(CyPlot* pPlot);
 	bool canGoldenAge(CyPlot* pPlot, bool bTestVisible);
 	bool canBuild(CyPlot* pPlot, int /*BuildTypes*/ eBuild, bool bTestVisible);
+	int canLead(CyPlot* pPlot, int iUnitId) const;
+	bool lead(int iUnitId);
+	int canGiveExperience(CyPlot* pPlot) const;
+	bool giveExperience();
 
-	bool canPromote(int /*PromotionTypes*/ ePromotion);		 
-	void promote(int /*PromotionTypes*/ ePromotion);				 
+	bool canPromote(int /*PromotionTypes*/ ePromotion, int iLeaderUnitId);		 
+	void promote(int /*PromotionTypes*/ ePromotion, int iLeaderUnitId);				 
 
 	int upgradePrice(int /*UnitTypes*/ eUnit);
 	bool upgradeAvailable(int /*UnitTypes*/ eFromUnit, int /*UnitClassTypes*/ eToUnitClass, int iCount);
@@ -216,6 +221,7 @@ public:
 	int cityAttackModifier();
 	int cityDefenseModifier();
 	int animalCombatModifier();
+	int hillsAttackModifier();
 	int hillsDefenseModifier();
 	int terrainDefenseModifier(int /*TerrainTypes*/ eTerrain);
 	int featureDefenseModifier(int /*FeatureTypes*/ eFeature);
@@ -268,7 +274,7 @@ public:
 	void finishMoves();
 	int getExperience();
 	void setExperience(int iNewValue, int iMax);	 
-	void changeExperience(int iChange, int iMax);	 
+	void changeExperience(int iChange, int iMax, bool bFromCombat, bool bInBorders);	 
 	int getLevel();
 	void setLevel(int iNewLevel);
 	void changeLevel(int iChange);
@@ -301,8 +307,15 @@ public:
 	int getExtraCombatPercent();
 	int getExtraCityAttackPercent();
 	int getExtraCityDefensePercent();
+	int getExtraHillsAttackPercent();
 	int getExtraHillsDefensePercent();
-	
+	int getRevoltProtection() const;
+	int getCollateralDamageProtection() const;
+	int getPillageChange() const;
+	int getUpgradeDiscount() const;
+	int getExperiencePercent() const;
+	int getKamikazePercent() const;
+
 	bool isMadeAttack();																							 
 	void setMadeAttack(bool bNewValue);															 
 	bool isMadeInterception();																							 
@@ -315,6 +328,8 @@ public:
 
 	int /*UnitTypes*/ getUnitType();
 	int /*UnitClassTypes*/ getUnitClassType();
+	int /*UnitTypes*/ getLeaderUnitType();
+	void setLeaderUnitType(int /*UnitTypes*/ leaderUnitType);
 
 	CyUnit* getTransportUnit() const;
 	bool isCargo();
@@ -337,6 +352,7 @@ public:
 
 	bool canAcquirePromotion(int /*PromotionTypes*/ ePromotion);
 	bool canAcquirePromotionAny();
+	bool isPromotionValid(int /*PromotionTypes*/ ePromotion);
 	bool isHasPromotion(int /*PromotionTypes*/ ePromotion);
 	void setHasPromotion(int /*PromotionTypes*/ eIndex, bool bNewValue);
 

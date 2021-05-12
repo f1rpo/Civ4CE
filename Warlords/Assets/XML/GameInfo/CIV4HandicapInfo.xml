@@ -11,7 +11,7 @@
 			<Description>TXT_KEY_HANDICAP_SETTLER</Description>
 			<Help>TXT_KEY_HANDICAP_SETTLER_HELP</Help>
 			<iFreeWinsVsBarbs>5</iFreeWinsVsBarbs>
-			<iAnimalAttackProb>0</iAnimalAttackProb>
+			<iAnimalAttackProb>25</iAnimalAttackProb>
 			<iStartingLocPercent>10</iStartingLocPercent>
 			<iGold>0</iGold>
 			<iFreeUnits>24</iFreeUnits>
@@ -105,7 +105,7 @@
 			<Description>TXT_KEY_HANDICAP_CHIEFTAIN</Description>
 			<Help>TXT_KEY_HANDICAP_CHIEFTAIN_HELP</Help>
 			<iFreeWinsVsBarbs>4</iFreeWinsVsBarbs>
-			<iAnimalAttackProb>25</iAnimalAttackProb>
+			<iAnimalAttackProb>50</iAnimalAttackProb>
 			<iStartingLocPercent>20</iStartingLocPercent>
 			<iGold>0</iGold>
 			<iFreeUnits>18</iFreeUnits>
@@ -195,7 +195,7 @@
 			<Description>TXT_KEY_HANDICAP_WARLORD</Description>
 			<Help>TXT_KEY_HANDICAP_WARLORD_HELP</Help>
 			<iFreeWinsVsBarbs>3</iFreeWinsVsBarbs>
-			<iAnimalAttackProb>50</iAnimalAttackProb>
+			<iAnimalAttackProb>75</iAnimalAttackProb>
 			<iStartingLocPercent>30</iStartingLocPercent>
 			<iGold>0</iGold>
 			<iFreeUnits>12</iFreeUnits>
@@ -281,7 +281,7 @@
 			<Description>TXT_KEY_HANDICAP_NOBLE</Description>
 			<Help>TXT_KEY_HANDICAP_NOBLE_HELP</Help>
 			<iFreeWinsVsBarbs>2</iFreeWinsVsBarbs>
-			<iAnimalAttackProb>75</iAnimalAttackProb>
+			<iAnimalAttackProb>85</iAnimalAttackProb>
 			<iStartingLocPercent>40</iStartingLocPercent>
 			<iGold>0</iGold>
 			<iFreeUnits>8</iFreeUnits>
@@ -443,7 +443,7 @@
 			<Description>TXT_KEY_HANDICAP_MONARCH</Description>
 			<Help>TXT_KEY_HANDICAP_MONARCH_HELP</Help>
 			<iFreeWinsVsBarbs>0</iFreeWinsVsBarbs>
-			<iAnimalAttackProb>95</iAnimalAttackProb>
+			<iAnimalAttackProb>90</iAnimalAttackProb>
 			<iStartingLocPercent>60</iStartingLocPercent>
 			<iGold>0</iGold>
 			<iFreeUnits>4</iFreeUnits>
@@ -529,7 +529,7 @@
 			<Description>TXT_KEY_HANDICAP_EMPEROR</Description>
 			<Help>TXT_KEY_HANDICAP_EMPEROR_HELP</Help>
 			<iFreeWinsVsBarbs>0</iFreeWinsVsBarbs>
-			<iAnimalAttackProb>98</iAnimalAttackProb>
+			<iAnimalAttackProb>90</iAnimalAttackProb>
 			<iStartingLocPercent>70</iStartingLocPercent>
 			<iGold>0</iGold>
 			<iFreeUnits>3</iFreeUnits>
@@ -619,7 +619,7 @@
 			<Description>TXT_KEY_HANDICAP_IMMORTAL</Description>
 			<Help>TXT_KEY_HANDICAP_IMMORTAL_HELP</Help>
 			<iFreeWinsVsBarbs>0</iFreeWinsVsBarbs>
-			<iAnimalAttackProb>99</iAnimalAttackProb>
+			<iAnimalAttackProb>90</iAnimalAttackProb>
 			<iStartingLocPercent>80</iStartingLocPercent>
 			<iGold>0</iGold>
 			<iFreeUnits>2</iFreeUnits>
@@ -713,7 +713,7 @@
 			<Description>TXT_KEY_HANDICAP_DEITY</Description>
 			<Help>TXT_KEY_HANDICAP_DEITY_HELP</Help>
 			<iFreeWinsVsBarbs>0</iFreeWinsVsBarbs>
-			<iAnimalAttackProb>100</iAnimalAttackProb>
+			<iAnimalAttackProb>90</iAnimalAttackProb>
 			<iStartingLocPercent>90</iStartingLocPercent>
 			<iGold>0</iGold>
 			<iFreeUnits>1</iFreeUnits>

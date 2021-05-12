@@ -24,39 +24,73 @@ def isAdvancedMap():
 	return 1
 
 def getNumCustomMapOptions():
+	return 2
+
+def getNumHiddenCustomMapOptions():
 	return 1
-	
+
 def getCustomMapOptionName(argsList):
-	translated_text = unicode(CyTranslator().getText("TXT_KEY_MAP_SCRIPT_RESOURCE_APPEARANCE", ()))
+	[iOption] = argsList
+	option_names = {
+		0:	"TXT_KEY_MAP_SCRIPT_RESOURCE_APPEARANCE",
+		1:	"TXT_KEY_MAP_WORLD_WRAP"
+		}
+	translated_text = unicode(CyTranslator().getText(option_names[iOption], ()))
 	return translated_text
 	
 def getNumCustomMapOptionValues(argsList):
-	return 3
+	[iOption] = argsList
+	option_values = {
+		0:	3,
+		1:	3
+		}
+	return option_values[iOption]
 	
 def getCustomMapOptionDescAt(argsList):
-	iSelection = argsList[1]
-	selection_names = ["TXT_KEY_MAP_SCRIPT_LOGICAL",
-	                   "TXT_KEY_MAP_SCRIPT_IRRATIONAL",
-	                   "TXT_KEY_MAP_SCRIPT_CRAZY"]
-	translated_text = unicode(CyTranslator().getText(selection_names[iSelection], ()))
+	[iOption, iSelection] = argsList
+	selection_names = {
+		0:	{
+			0: "TXT_KEY_MAP_SCRIPT_LOGICAL",
+			1: "TXT_KEY_MAP_SCRIPT_IRRATIONAL",
+			2: "TXT_KEY_MAP_SCRIPT_CRAZY"
+			},
+		1:	{
+			0: "TXT_KEY_MAP_WRAP_FLAT",
+			1: "TXT_KEY_MAP_WRAP_CYLINDER",
+			2: "TXT_KEY_MAP_WRAP_TOROID"
+			}
+		}
+	translated_text = unicode(CyTranslator().getText(selection_names[iOption][iSelection], ()))
 	return translated_text
 	
 def getCustomMapOptionDefault(argsList):
-	return 1
+	[iOption] = argsList
+	option_defaults = {
+		0:	1,
+		1:	2
+		}
+	return option_defaults[iOption]
 
 def isRandomCustomMapOption(argsList):
-	# Disable default Random and implement custom "weighted" Random.
-	return false
+	[iOption] = argsList
+	option_random = {
+		0:	false,
+		1:	false
+		}
+	return option_random[iOption]
 
+def getWrapX():
+	map = CyMap()
+	return (map.getCustomMapOption(1) == 1 or map.getCustomMapOption(1) == 2)
+	
+def getWrapY():
+	map = CyMap()
+	return (map.getCustomMapOption(1) == 2)
+	
 def isClimateMap():
 	return 0
 
 def isBonusIgnoreLatitude():
-	return True
-
-def getWrapX():
-	return True
-def getWrapY():
 	return True
 
 def getGridSize(argsList):
@@ -81,7 +115,8 @@ def minStartingDistanceModifier():
 def findStartingArea(argsList):
 	"make sure all players are on the biggest area"
 	[playerID] = argsList
-	return CyGlobalContext().getMap().findBiggestArea(False).getID()
+	gc = CyGlobalContext()
+	return gc.getMap().findBiggestArea(False).getID()
 
 def beforeGeneration():
 	global crazy_food, crazy_luxury, crazy_strategic, crazy_late_game

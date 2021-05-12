@@ -41,6 +41,7 @@ void CyGameTextMgrInterface()
 		.def("getAttitudeString", &CyGameTextMgr::getAttitudeString, "wstring (int iPlayer, int iTargetPlayer)")
 		.def("setConvertHelp", &CyGameTextMgr::setConvertHelp, "wstring (int iPlayer, int iReligion)")
 		.def("setRevolutionHelp", &CyGameTextMgr::setRevolutionHelp, "wstring (int iPlayer)")
+		.def("setVassalRevoltHelp", &CyGameTextMgr::setVassalRevoltHelp, "wstring (int iMaster, int iVassal)")
 		.def("getActiveDealsString", &CyGameTextMgr::getActiveDealsString, "wstring (int iThisPlayer, int iOtherPlayer)")
 		.def("getDealString", &CyGameTextMgr::getDealString, "wstring (CyDeal* pDeal, int iPlayerPerspective)")
 	;

@@ -67,6 +67,7 @@ protected:
 	void AI_prophetMove();
 	void AI_artistMove();
 	void AI_scientistMove();
+	void AI_generalMove();
 	void AI_merchantMove();
 	void AI_engineerMove();
 	void AI_spyMove();
@@ -108,6 +109,7 @@ protected:
 	bool AI_goldenAge();
 	bool AI_spreadReligion();
 	bool AI_discover(bool bThisTurnOnly = false, bool bFirstReseachOnly = false);
+	bool AI_lead(std::vector<UnitAITypes>& aeAIUnitTypes);
 	bool AI_join();
 	bool AI_construct();
 	bool AI_switchHurry();

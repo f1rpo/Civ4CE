@@ -335,14 +335,17 @@ class CvMainInterface:
 		# PLOT LIST BUTTONS
 		# *********************************************************************************
 
-		for i in range(self.numPlotListButtons()):
-			szString = "PlotListButton" + str(i)
-			screen.addCheckBoxGFC( szString, ArtFileMgr.getInterfaceArtInfo("INTERFACE_BUTTONS_GOVERNOR").getPath(), ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(), 315 + (i * 34), yResolution - 169, 32, 32, WidgetTypes.WIDGET_PLOT_LIST, i, -1, ButtonStyles.BUTTON_STYLE_LABEL )
-			screen.hide( szString )
-			
-			szStringHealth = szString + "Health"
-			screen.addStackedBarGFC( szStringHealth, 315 + (i * 34), yResolution - 146, 32, 11, InfoBarTypes.NUM_INFOBAR_TYPES, WidgetTypes.WIDGET_GENERAL, i, -1 )
-			screen.hide( szStringHealth )
+		for j in range(gc.getDefineINT("MAX_PLOT_LIST_ROWS")):
+			for i in range(self.numPlotListButtons()):
+				k = j*self.numPlotListButtons()+i
+				yRow = (j - gc.getDefineINT("MAX_PLOT_LIST_ROWS") + 1) * 34
+				szString = "PlotListButton" + str(k)
+				screen.addCheckBoxGFC( szString, ArtFileMgr.getInterfaceArtInfo("INTERFACE_BUTTONS_GOVERNOR").getPath(), ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(), 315 + (i * 34), yResolution - 169 + yRow, 32, 32, WidgetTypes.WIDGET_PLOT_LIST, k, -1, ButtonStyles.BUTTON_STYLE_LABEL )
+				screen.hide( szString )
+				
+				szStringHealth = szString + "Health"
+				screen.addStackedBarGFC( szStringHealth, 315 + (i * 34), yResolution - 146 + yRow, 32, 11, InfoBarTypes.NUM_INFOBAR_TYPES, WidgetTypes.WIDGET_GENERAL, k, -1 )
+				screen.hide( szStringHealth )
 
 		# End Turn Text		
 		screen.setLabel( "EndTurnText", "Background", u"", CvUtil.FONT_CENTER_JUSTIFY, 0, yResolution - 188, -0.1, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
@@ -980,25 +983,36 @@ class CvMainInterface:
 		
 		screen.hide( "PlotListMinus" )
 		screen.hide( "PlotListPlus" )
+		
+		for j in range(gc.getDefineINT("MAX_PLOT_LIST_ROWS")):
+			for i in range(self.numPlotListButtons()):
+				szString = "PlotListButton" + str(j*self.numPlotListButtons()+i)
+				screen.hide( szString )
+				
+				szStringHealth = szString + "Health"
+				screen.hide( szStringHealth )
 
-		for i in range(self.numPlotListButtons()):
-			szString = "PlotListButton" + str(i)
-			screen.hide( szString )
-			
-			szStringHealth = szString + "Health"
-			screen.hide( szStringHealth )
-
-			# SF CHANGE
-			szStringIcon = szString + "Icon"
-			screen.hide( szStringIcon )
+				# SF CHANGE
+				szStringIcon = szString + "Icon"
+				screen.hide( szStringIcon )
 
 		if ( pPlot and CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_HIDE_ALL and CyEngine().isGlobeviewUp() == False):
 
 			iVisibleUnits = CyInterface().getNumVisibleUnits()
 			iCount = -(CyInterface().getPlotListColumn())
+				
 
 			bLeftArrow = False
 			bRightArrow = False
+			
+			if (CyInterface().isCityScreenUp()):
+				iMaxRows = 1
+				iSkipped = (gc.getDefineINT("MAX_PLOT_LIST_ROWS") - 1) * self.numPlotListButtons()
+				iCount += iSkipped
+			else:
+				iMaxRows = gc.getDefineINT("MAX_PLOT_LIST_ROWS")
+				iCount += CyInterface().getPlotListOffset()
+				iSkipped = 0
 
 			for i in range(pPlot.getNumUnits()):
 				pLoopUnit = CyInterface().getInterfacePlotUnit(pPlot, i)
@@ -1006,10 +1020,10 @@ class CvMainInterface:
 
 					if ((iCount == 0) and (CyInterface().getPlotListColumn() > 0)):
 						bLeftArrow = True
-					elif ((iCount == (self.numPlotListButtons() - 1)) and ((iVisibleUnits - iCount - CyInterface().getPlotListColumn()) > 1)):
+					elif ((iCount == (gc.getDefineINT("MAX_PLOT_LIST_ROWS") * self.numPlotListButtons() - 1)) and ((iVisibleUnits - iCount - CyInterface().getPlotListColumn() + iSkipped) > 1)):
 						bRightArrow = True
-
-					if ((iCount >= 0) and (iCount <  self.numPlotListButtons())):
+						
+					if ((iCount >= 0) and (iCount <  self.numPlotListButtons() * gc.getDefineINT("MAX_PLOT_LIST_ROWS"))):
 						if ((pLoopUnit.getTeam() != gc.getGame().getActiveTeam()) or pLoopUnit.isWaiting()):
 							szFileName = ArtFileMgr.getInterfaceArtInfo("OVERLAY_FORTIFY").getPath()
 							
@@ -1058,12 +1072,12 @@ class CvMainInterface:
 						# SF CHANGE 
 						# Adds the overlay first
 						szStringIcon = szString + "Icon"
-						screen.addDDSGFC( szStringIcon, szFileName, 312 + (iCount * 34), yResolution - 172, 12, 12, WidgetTypes.WIDGET_PLOT_LIST, iCount, -1 )
+						screen.addDDSGFC( szStringIcon, szFileName, 312 + ((iCount % self.numPlotListButtons()) * 34), yResolution - 172 + (iCount / self.numPlotListButtons() - gc.getDefineINT("MAX_PLOT_LIST_ROWS") + 1) * 34, 12, 12, WidgetTypes.WIDGET_PLOT_LIST, iCount, -1 )
 						screen.show( szStringIcon )
 
 					iCount = iCount + 1
 
-			if (iVisibleUnits > self.numPlotListButtons()):
+			if (iVisibleUnits > self.numPlotListButtons() * iMaxRows):
 				screen.enable("PlotListMinus", bLeftArrow)
 				screen.show( "PlotListMinus" )
 	
@@ -1484,19 +1498,35 @@ class CvMainInterface:
 					bHandled = True
 					szName = "AngryCitizen" + str(i)
 					screen.show( szName )
-					
+
+				iFreeSpecialistCount = 0
+				for i in range(gc.getNumSpecialistInfos()):
+					iFreeSpecialistCount += pHeadSelectedCity.getFreeSpecialistCount(i)
+
 				iCount = 0
 
 				bHandled = False
-				for i in range(gc.getNumSpecialistInfos()):
-					for j in range( pHeadSelectedCity.getFreeSpecialistCount(i) ):
-						if (iCount < MAX_CITIZEN_BUTTONS):
-							szName = "FreeSpecialist" + str(iCount)
-							screen.setImageButton( szName, gc.getSpecialistInfo(i).getTexture(), (xResolution - 74  - (34 * iCount)), yResolution - 216, 32, 32, WidgetTypes.WIDGET_CITIZEN, i, -1 )
-							screen.show( szName )
-							bHandled = true
+				
+				if (iFreeSpecialistCount > MAX_CITIZEN_BUTTONS):
+					for i in range(gc.getNumSpecialistInfos()):
+						if (pHeadSelectedCity.getFreeSpecialistCount(i) > 0):
+							if (iCount < MAX_CITIZEN_BUTTONS):
+								szName = "FreeSpecialist" + str(iCount)
+								screen.setImageButton( szName, gc.getSpecialistInfo(i).getTexture(), (xResolution - 74  - (34 * iCount)), yResolution - 216, 32, 32, WidgetTypes.WIDGET_FREE_CITIZEN, i, 1 )
+								screen.show( szName )
+								bHandled = true
+							iCount += 1
+							
+				else:				
+					for i in range(gc.getNumSpecialistInfos()):
+						for j in range( pHeadSelectedCity.getFreeSpecialistCount(i) ):
+							if (iCount < MAX_CITIZEN_BUTTONS):
+								szName = "FreeSpecialist" + str(iCount)
+								screen.setImageButton( szName, gc.getSpecialistInfo(i).getTexture(), (xResolution - 74  - (34 * iCount)), yResolution - 216, 32, 32, WidgetTypes.WIDGET_FREE_CITIZEN, i, -1 )
+								screen.show( szName )
+								bHandled = true
 
-						iCount = iCount + 1
+							iCount = iCount + 1
 
 				for i in range( gc.getNumSpecialistInfos() ):
 				
@@ -1509,7 +1539,7 @@ class CvMainInterface:
 						else:
 							iSpecialistCount = pHeadSelectedCity.getSpecialistCount(i)
 					
-						if (pHeadSelectedCity.isSpecialistValid(i, 1) and iSpecialistCount < (pHeadSelectedCity.getPopulation() + pHeadSelectedCity.totalFreeSpecialists())):
+						if (pHeadSelectedCity.isSpecialistValid(i, 1) and (pHeadSelectedCity.isCitizensAutomated() or iSpecialistCount < (pHeadSelectedCity.getPopulation() + pHeadSelectedCity.totalFreeSpecialists()))):
 							szName = "IncreaseSpecialist" + str(i)
 							screen.show( szName )
 							szName = "CitizenDisabledButton" + str(i)
@@ -1870,7 +1900,7 @@ class CvMainInterface:
 					screen.show( "ProductionText" )
 				
 				if (pHeadSelectedCity.isProductionProcess()):
-					szBuffer = u"%d%c" %(pHeadSelectedCity.getBaseYieldRate(YieldTypes.YIELD_PRODUCTION), gc.getYieldInfo(YieldTypes.YIELD_PRODUCTION).getChar())
+					szBuffer = u"%d%c" %(pHeadSelectedCity.getYieldRate(YieldTypes.YIELD_PRODUCTION), gc.getYieldInfo(YieldTypes.YIELD_PRODUCTION).getChar())
 				elif (pHeadSelectedCity.isFoodProduction() and (iProductionDiffJustFood > 0)):
 					szBuffer = u"%d%c + %d%c" %(iProductionDiffJustFood, gc.getYieldInfo(YieldTypes.YIELD_FOOD).getChar(), iProductionDiffNoFood, gc.getYieldInfo(YieldTypes.YIELD_PRODUCTION).getChar())
 				else:
@@ -1914,7 +1944,7 @@ class CvMainInterface:
 					eCommerce = (i + 1) % CommerceTypes.NUM_COMMERCE_TYPES
 
 					if ((gc.getPlayer(pHeadSelectedCity.getOwner()).isCommerceFlexible(eCommerce)) or (eCommerce == CommerceTypes.COMMERCE_GOLD)):
-						szBuffer = u"%d%c" %(pHeadSelectedCity.getCommerceRate(eCommerce), gc.getCommerceInfo(eCommerce).getChar())
+						szBuffer = u"%d.%02d %c" %(pHeadSelectedCity.getCommerceRate(eCommerce), pHeadSelectedCity.getCommerceRateTimes100(eCommerce)%100, gc.getCommerceInfo(eCommerce).getChar())
 
 						iHappiness = pHeadSelectedCity.getCommerceHappinessByType(eCommerce)
 
@@ -2141,14 +2171,14 @@ class CvMainInterface:
 				g_iNumCenterBonus = iCenterCount
 				g_iNumRightBonus = iRightCount
 				
-				iMaintenance = pHeadSelectedCity.getMaintenance()
+				iMaintenance = pHeadSelectedCity.getMaintenanceTimes100()
 
 				szBuffer = localText.getText("INTERFACE_CITY_MAINTENANCE", ())
 				
 				screen.setLabel( "MaintenanceText", "Background", szBuffer, CvUtil.FONT_LEFT_JUSTIFY, 15, 107, -0.3, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_HELP_MAINTENANCE, -1, -1 )
 				screen.show( "MaintenanceText" )
 				
-				szBuffer = u"%d%c" %(-(pHeadSelectedCity.getMaintenance()), gc.getCommerceInfo(CommerceTypes.COMMERCE_GOLD).getChar())
+				szBuffer = u"-%d.%02d %c" %(iMaintenance/100, iMaintenance%100, gc.getCommerceInfo(CommerceTypes.COMMERCE_GOLD).getChar())
 				screen.setLabel( "MaintenanceAmountText", "Background", szBuffer, CvUtil.FONT_RIGHT_JUSTIFY, 220, 106, -0.3, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_HELP_MAINTENANCE, -1, -1 )
 				screen.show( "MaintenanceAmountText" )
 
@@ -2212,11 +2242,11 @@ class CvMainInterface:
 				screen.show( "NationalityText" )
 				iRemainder = 0
 				iWhichBar = 0
-				for h in range( gc.getMAX_CIV_PLAYERS() ):
+				for h in range( gc.getMAX_PLAYERS() ):
 					if ( gc.getPlayer(h).isAlive() ):
 						fPercent = pHeadSelectedCity.plot().calculateCulturePercent(h)
-						fPercent = fPercent / 100.0
 						if ( fPercent != 0 ):
+							fPercent = fPercent / 100.0
 							screen.setStackedBarColorsRGB( "NationalityBar", iWhichBar, gc.getPlayer(h).getPlayerTextColorR(), gc.getPlayer(h).getPlayerTextColorG(), gc.getPlayer(h).getPlayerTextColorB(), gc.getPlayer(h).getPlayerTextColorA() )
 							if ( iRemainder == 1 ):
 								screen.setBarPercentage( "NationalityBar", iWhichBar, fPercent )
@@ -2241,7 +2271,12 @@ class CvMainInterface:
 					screen.show( "DefenseText" )
 
 				if ( pHeadSelectedCity.getCultureLevel != CultureLevelTypes.NO_CULTURELEVEL ):
-					szBuffer = localText.getText("INTERFACE_CITY_COMMERCE_RATE", (gc.getCommerceInfo(CommerceTypes.COMMERCE_CULTURE).getChar(), gc.getCultureLevelInfo(pHeadSelectedCity.getCultureLevel()).getTextKey(), pHeadSelectedCity.getCommerceRate(CommerceTypes.COMMERCE_CULTURE)))
+					iRate = pHeadSelectedCity.getCommerceRateTimes100(CommerceTypes.COMMERCE_CULTURE)
+					if (iRate%100 == 0):
+						szBuffer = localText.getText("INTERFACE_CITY_COMMERCE_RATE", (gc.getCommerceInfo(CommerceTypes.COMMERCE_CULTURE).getChar(), gc.getCultureLevelInfo(pHeadSelectedCity.getCultureLevel()).getTextKey(), iRate/100))
+					else:
+						szRate = u"+%d.%02d" % (iRate/100, iRate%100)
+						szBuffer = localText.getText("INTERFACE_CITY_COMMERCE_RATE_FLOAT", (gc.getCommerceInfo(CommerceTypes.COMMERCE_CULTURE).getChar(), gc.getCultureLevelInfo(pHeadSelectedCity.getCultureLevel()).getTextKey(), szRate))
 					screen.setLabel( "CultureText", "Background", szBuffer, CvUtil.FONT_CENTER_JUSTIFY, 125, yResolution - 184, -1.3, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 					screen.setHitTest( "CultureText", HitTestTypes.HITTEST_NOHIT )
 					screen.show( "CultureText" )
@@ -2253,15 +2288,15 @@ class CvMainInterface:
 					screen.setHitTest( "GreatPeopleText", HitTestTypes.HITTEST_NOHIT )
 					screen.show( "GreatPeopleText" )
 
-					iFirst = float(pHeadSelectedCity.getGreatPeopleProgress()) / float( gc.getPlayer( pHeadSelectedCity.getOwner() ).greatPeopleThreshold() )
+					iFirst = float(pHeadSelectedCity.getGreatPeopleProgress()) / float( gc.getPlayer( pHeadSelectedCity.getOwner() ).greatPeopleThreshold(false) )
 					screen.setBarPercentage( "GreatPeopleBar", InfoBarTypes.INFOBAR_STORED, iFirst )
 					if ( iFirst == 1 ):
-						screen.setBarPercentage( "GreatPeopleBar", InfoBarTypes.INFOBAR_RATE, ( float(pHeadSelectedCity.getGreatPeopleRate()) / float( gc.getPlayer( pHeadSelectedCity.getOwner() ).greatPeopleThreshold() ) ) )
+						screen.setBarPercentage( "GreatPeopleBar", InfoBarTypes.INFOBAR_RATE, ( float(pHeadSelectedCity.getGreatPeopleRate()) / float( gc.getPlayer( pHeadSelectedCity.getOwner() ).greatPeopleThreshold(false) ) ) )
 					else:
-						screen.setBarPercentage( "GreatPeopleBar", InfoBarTypes.INFOBAR_RATE, ( ( float(pHeadSelectedCity.getGreatPeopleRate()) / float( gc.getPlayer( pHeadSelectedCity.getOwner() ).greatPeopleThreshold() ) ) ) / ( 1 - iFirst ) )
+						screen.setBarPercentage( "GreatPeopleBar", InfoBarTypes.INFOBAR_RATE, ( ( float(pHeadSelectedCity.getGreatPeopleRate()) / float( gc.getPlayer( pHeadSelectedCity.getOwner() ).greatPeopleThreshold(false) ) ) ) / ( 1 - iFirst ) )
 					screen.show( "GreatPeopleBar" )
 
-				iFirst = float(pHeadSelectedCity.getCulture(pHeadSelectedCity.getOwner())) / float(pHeadSelectedCity.getCultureThreshold())
+				iFirst = float(pHeadSelectedCity.getCultureTimes100(pHeadSelectedCity.getOwner())) / float(100 * pHeadSelectedCity.getCultureThreshold())
 				screen.setBarPercentage( "CultureBar", InfoBarTypes.INFOBAR_STORED, iFirst )
 				if ( iFirst == 1 ):
 					screen.setBarPercentage( "CultureBar", InfoBarTypes.INFOBAR_RATE, ( float(pHeadSelectedCity.getCommerceRate(CommerceTypes.COMMERCE_CULTURE)) / float(pHeadSelectedCity.getCultureThreshold()) ) )
@@ -2408,6 +2443,8 @@ class CvMainInterface:
 					szBuffer = localText.getText("INTERFACE_PANE_UNIT_NAME", (pHeadSelectedUnit.getName(), ))
 				else:
 					szBuffer = localText.getText("INTERFACE_PANE_UNIT_NAME_HOT_KEY", (pHeadSelectedUnit.getHotKeyNumber(), pHeadSelectedUnit.getName()))
+				if (len(szBuffer) > 60):
+					szBuffer = "<font=2>" + szBuffer + "</font>"
 				screen.setText( "SelectedUnitLabel", "Background", szBuffer, CvUtil.FONT_LEFT_JUSTIFY, 18, yResolution - 137, -0.1, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_UNIT_NAME, -1, -1 )
 			
 				if ((pSelectedGroup == 0) or (pSelectedGroup.getLengthMissionQueue() <= 1)):
@@ -2601,7 +2638,7 @@ class CvMainInterface:
 											szTempBuffer = u"%c" %(gc.getReligionInfo(gc.getPlayer(ePlayer).getStateReligion()).getChar())
 											szBuffer = szBuffer + szTempBuffer
 												
-								if (((gc.getPlayer(ePlayer).getTeam() == gc.getGame().getActiveTeam()) and (gc.getTeam(gc.getGame().getActiveTeam()).getNumMembers() > 1)) or gc.getGame().isDebugMode()):
+								if (((gc.getPlayer(ePlayer).getTeam() == gc.getGame().getActiveTeam()) and (gc.getTeam(gc.getGame().getActiveTeam()).getNumMembers() > 1)) or (gc.getTeam(gc.getPlayer(ePlayer).getTeam()).isVassal(gc.getGame().getActiveTeam())) or gc.getGame().isDebugMode()):
 									if (gc.getPlayer(ePlayer).getCurrentResearch() != -1):
 										szTempBuffer = u"-%s (%d)" %(gc.getTechInfo(gc.getPlayer(ePlayer).getCurrentResearch()).getDescription(), gc.getPlayer(ePlayer).getResearchTurnsLeft(gc.getPlayer(ePlayer).getCurrentResearch(), True))
 										szBuffer = szBuffer + szTempBuffer

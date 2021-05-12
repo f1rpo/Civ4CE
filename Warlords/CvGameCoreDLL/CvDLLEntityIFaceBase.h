@@ -10,7 +10,7 @@ class CvEntity;
 class CvUnitEntity;
 class CvCity;
 class CvUnit;
-struct CvMissionDefinition;
+class CvMissionDefinition;
 class CvPlot;
 class CvRiver;
 
@@ -39,7 +39,9 @@ public:
 	virtual void AddMission(const CvMissionDefinition & kDefinition) { FAssertMsg(false, "can't get here"); };
 	virtual void RemoveUnitFromBattle(CvUnit* pUnit) { FAssertMsg(false, "can't get here"); };
 	virtual void showPromotionGlow(CvUnitEntity* pEntity, bool show) { FAssertMsg(false, "can't get here"); };
-	virtual void updateGraphicEra(CvUnitEntity* pEntity) { FAssertMsg(false, "can't get here"); };
+	virtual void updateGraphicEra(CvUnitEntity* pEntity, EraTypes eOldEra = NO_ERA) { FAssertMsg(false, "can't get here"); };
+	virtual void SetSiegeTower(CvUnitEntity *pEntity, bool show) { FAssertMsg(false, "can't get here"); };
+	virtual bool GetSiegeTower(CvUnitEntity *pEntity) { FAssertMsg(false, "can't get here"); return false; };
 };
 
 #endif	// CvDLLEntityIFaceBase_h

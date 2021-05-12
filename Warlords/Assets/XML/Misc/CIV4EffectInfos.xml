@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Firaxis Games (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Greg Cunningham (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -184,6 +184,36 @@
 			<fArcValue>0.0</fArcValue>
 		</EffectInfo>
 		<EffectInfo>
+			<Type>EFFECT_CHINESEARROW</Type>
+			<Description>ChineseArcherArrow</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Units/Archer_Chinese/Archer_Chinese_Arrow.nif</Path>
+			<bIsProjectile>1</bIsProjectile>
+			<fSpeed>500.0</fSpeed>
+			<fArcValue>0.0</fArcValue>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_EGYPTIANARROW</Type>
+			<Description>EgyptianArcherArrow</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Units/Archer_Egyptian/Archer_Egyptian_Arrow.nif</Path>
+			<bIsProjectile>1</bIsProjectile>
+			<fSpeed>500.0</fSpeed>
+			<fArcValue>0.0</fArcValue>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_EURASIANARROW</Type>
+			<Description>EurasianArcherArrow</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Units/Archer_Eurasian/Archer_Eurasian_Arrow.nif</Path>
+			<bIsProjectile>1</bIsProjectile>
+			<fSpeed>500.0</fSpeed>
+			<fArcValue>0.0</fArcValue>
+		</EffectInfo>
+		<EffectInfo>
 			<Type>EFFECT_GALLEY_FIREARROW</Type>
 			<Description>Galley Fire Arrow Effect</Description>
 			<fScale>0.7</fScale>
@@ -244,6 +274,16 @@
 			<fArcValue>4.0</fArcValue>
 		</EffectInfo>
 		<EffectInfo>
+			<Type>EFFECT_HWACHA_ROCKET</Type>
+			<Description>Hwacha Rocket fire</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Units/Hwacha_Korean/Hwacha_Rocket.kfm</Path>
+			<bIsProjectile>1</bIsProjectile>
+			<fSpeed>350.0</fSpeed>
+			<fArcValue>4.0</fArcValue>
+		</EffectInfo>
+		<EffectInfo>
 			<Type>EFFECT_SAM_ANTI_AIR_MISSLE</Type>
 			<Description>Sam_Infantry missle</Description>
 			<fScale>1.0</fScale>
@@ -253,6 +293,36 @@
 			<fSpeed>600.0</fSpeed>
 			<fArcValue>0.0</fArcValue>
 		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_STONE_THROW</Type>
+			<Description>Peltast Sling Stone</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Units/Peltast/Peltast_Stone_Throw.kfm</Path>
+			<bIsProjectile>1</bIsProjectile>
+			<fSpeed>350.0</fSpeed>
+			<fArcValue>4.0</fArcValue>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_MONGOL_JAV</Type>
+			<Description>Mongolian Javelin</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Units/Mongolian_JavelinThrower/Mongolian_Javelin.nif</Path>
+			<bIsProjectile>1</bIsProjectile>
+			<fSpeed>500.0</fSpeed>
+			<fArcValue>2.0</fArcValue>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_TREBUCHET_ROCK</Type>
+			<Description>Trebuchet Rock</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Units/Trebuchet/TrebuchetRock.kfm</Path>
+			<bIsProjectile>1</bIsProjectile>
+			<fSpeed>400</fSpeed>
+			<fArcValue>6</fArcValue>
+		</EffectInfo>
 		<!-- Misc Unit Effects:-->
 		<EffectInfo>
 			<Type>EFFECT_SETTLERSMOKE</Type>
@@ -260,6 +330,14 @@
 			<fScale>1.0</fScale>
 			<fUpdateRate>1.0</fUpdateRate>
 			<Path>Art/Effects/settler_smoke/SettlerSmoke.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_PACK_UP</Type>
+			<Description>Goody hut pop dust and hay Used for Yert to Mongol Settler </Description>
+			<fScale>1.5</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Effects/improvement_goody_hut_pop/fx_goodyhut_pop.nif</Path>
 			<bIsProjectile>0</bIsProjectile>
 		</EffectInfo>
 		<EffectInfo>
@@ -300,6 +378,22 @@
 			<fScale>.2</fScale>
 			<fUpdateRate>2.0</fUpdateRate>
 			<Path>Art/Effects/explosion_large_001/fx_explosion_large_001.NIF</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_OMEN_HORSEMAN</Type>
+			<Description>Omen Horsemen attack</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Effects/Omen_Horseman/OMEN_HORSEMAN_EFFECT.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_SIEGE_TOWER_DIE</Type>
+			<Description>Dust as the Siege tower dies</Description>
+			<fScale>2</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Effects/settler_smoke/SettlerSmoke.nif</Path>
 			<bIsProjectile>0</bIsProjectile>
 		</EffectInfo>
 		<!-- This section of explosions needs dirt explosion and smoke plume added if Jesse gets multiple NIFs working -->
@@ -1864,6 +1958,30 @@
 			<fScale>1.0</fScale>
 			<fUpdateRate>1.0</fUpdateRate>
 			<Path>Art/Effects/unit_greatpeople/fx_GreatPeople_Tycoon_Highlight.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_GREATPEOPLE_ACTIVE_WARLORD</Type>
+			<Description>Activation effect for the warlord general</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>2.5</fUpdateRate>
+			<Path>Art/Effects/unit_greatpeople/fx_GreatPeople_Warlord_Activate.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_GREATPEOPLE_BIRTH_WARLORD</Type>
+			<Description>Birth of the Warlord</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>2.5</fUpdateRate>
+			<Path>Art/Effects/unit_greatpeople/fx_GreatPeople_Warlord_Birth.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_GREATPEOPLE_HIGHLIGHT_WARLORD</Type>
+			<Description>Highlight effect for the Warlord</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Effects/unit_greatpeople/fx_GreatPeople_Warlord_Highlight.nif</Path>
 			<bIsProjectile>0</bIsProjectile>
 		</EffectInfo>
 		<!-- Water and Ship Effects:-->

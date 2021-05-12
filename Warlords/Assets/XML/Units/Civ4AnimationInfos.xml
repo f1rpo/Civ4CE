@@ -7,99 +7,98 @@
 <Civ4AnimationInfos xmlns="x-schema:CIV4UnitSchema.xml">
 	<EntityEventInfos>
 		<EntityEventInfo>
-			<Type>ENTEVENT_IDLE</Type>
+			<Type>ENTITY_EVENT_IDLE</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_IDLE</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_DIE</Type>
+			<Type>ENTITY_EVENT_DIE</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_DIE</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_DAMAGE</Type>
+			<Type>ENTITY_EVENT_DAMAGE</Type>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_BEGIN_COMBAT</Type>
+			<Type>ENTITY_EVENT_BEGIN_COMBAT</Type>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_END_COMBAT</Type>
-			<bUpdateFormation>0</bUpdateFormation>
+			<Type>ENTITY_EVENT_END_COMBAT</Type>
+			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_SURRENDER</Type>
+			<Type>ENTITY_EVENT_SURRENDER</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_SURRENDER</AnimationPathType>
-				<AnimationPathType>ANIMATIONPATH_MELEE_FORTIFIED</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>0</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_CAPTURED</Type>
+			<Type>ENTITY_EVENT_CAPTURED</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_HEAL</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>0</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_AIRPATROL</Type>
+			<Type>ENTITY_EVENT_AIRPATROL</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_AIRPATROL</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_AIRINTERCEPTION</Type>
+			<Type>ENTITY_EVENT_AIRINTERCEPTION</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_IDLE</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_AIRBOMB</Type>
+			<Type>ENTITY_EVENT_AIRBOMB</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_AIRBOMB</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_AIRSTRIKE</Type>
+			<Type>ENTITY_EVENT_AIRSTRIKE</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_AIRSTRIKE</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_AIRRECON</Type>
+			<Type>ENTITY_EVENT_AIRRECON</Type>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_NUKE</Type>
+			<Type>ENTITY_EVENT_NUKE</Type>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_MULTI_SELECT</Type>
+			<Type>ENTITY_EVENT_MULTI_SELECT</Type>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_MULTI_DESELECT</Type>
+			<Type>ENTITY_EVENT_MULTI_DESELECT</Type>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_GREAT_EVENT</Type>
+			<Type>ENTITY_EVENT_GREAT_EVENT</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_GREAT_EVENT</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>0</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_PILLAGE</Type>
+			<Type>ENTITY_EVENT_PILLAGE</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_PILLAGE</AnimationPathType>
 			</AnimationPathTypes>
@@ -109,28 +108,28 @@
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_SABOTAGE</Type>
+			<Type>ENTITY_EVENT_SABOTAGE</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_SABOTAGE</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_DESTROY</Type>
+			<Type>ENTITY_EVENT_DESTROY</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_DESTROY</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_STEAL_PLANS</Type>
+			<Type>ENTITY_EVENT_STEAL_PLANS</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_STEAL_PLANS</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_BOMBARD</Type>
+			<Type>ENTITY_EVENT_BOMBARD</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_BOMBARD</AnimationPathType>
 			</AnimationPathTypes>
@@ -140,77 +139,77 @@
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_FOUND</Type>
+			<Type>ENTITY_EVENT_FOUND</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_FOUND</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_FORTIFY</Type>
+			<Type>ENTITY_EVENT_FORTIFY</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_FORTIFY</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_SENTRY</Type>
+			<Type>ENTITY_EVENT_SENTRY</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_SENTRY</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_HEAL</Type>
+			<Type>ENTITY_EVENT_HEAL</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_HEAL</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_SLEEP</Type>
+			<Type>ENTITY_EVENT_SLEEP</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_SLEEP</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_SHOVEL</Type>
+			<Type>ENTITY_EVENT_SHOVEL</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_SHOVEL</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_BUILD</Type>
+			<Type>ENTITY_EVENT_BUILD</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_BUILD</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_IRRIGATE</Type>
+			<Type>ENTITY_EVENT_IRRIGATE</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_IRRIGATE</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_MINE</Type>
+			<Type>ENTITY_EVENT_MINE</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_MINE</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_CHOP</Type>
+			<Type>ENTITY_EVENT_CHOP</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_CHOP</AnimationPathType>
 			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTEVENT_RAILROAD</Type>
+			<Type>ENTITY_EVENT_RAILROAD</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_RAILROAD</AnimationPathType>
 			</AnimationPathTypes>
@@ -444,6 +443,16 @@
 			<BaseID>40</BaseID>
 		</AnimationCategory>
 		<AnimationCategory>
+			<Type>ANIMCAT_LEADER_COMMAND</Type>
+			<DefaultTo>ANIMCAT_MELEE_FORTIFY</DefaultTo>
+			<BaseID>80</BaseID>
+		</AnimationCategory>
+		<AnimationCategory>
+			<Type>ANIMCAT_LEADER_COMMAND_IDLE</Type>
+			<DefaultTo>ANIMCAT_MELEE_FORTIFIED</DefaultTo>
+			<BaseID>81</BaseID>
+		</AnimationCategory>		
+		<AnimationCategory>
 			<Type>ANIMCAT_DAMAGE_0</Type>
 			<DefaultTo>ANIMCAT_NONE</DefaultTo>
 			<BaseID>500</BaseID>
@@ -586,6 +595,9 @@
 			<Type>ANIMATIONPATH_MELEE_FORTIFIED</Type>
 			<bMissionPath>1</bMissionPath>
 			<PathEntry>
+				<Category>ANIMCAT_MELEE_FORTIFY</Category>
+			</PathEntry>
+			<PathEntry>
 				<Category>ANIMCAT_MELEE_FORTIFIED</Category>
 			</PathEntry>
 		</AnimationPath>
@@ -689,6 +701,16 @@
 			<PathEntry>
 				<Operator>RAND_FPR</Operator>
 				<Parameter>0.0</Parameter>
+			</PathEntry>
+		</AnimationPath>
+		<AnimationPath>
+			<Type>ANIMATIONPATH_LEADER_COMMAND</Type>
+			<bMissionPath>1</bMissionPath>
+			<PathEntry>
+				<Category>ANIMCAT_LEADER_COMMAND</Category>
+			</PathEntry>
+			<PathEntry>
+				<Category>ANIMCAT_LEADER_COMMAND_IDLE</Category>
 			</PathEntry>
 		</AnimationPath>
 		<AnimationPath>
@@ -827,7 +849,7 @@
 			<Type>ANIMATIONPATH_BOMBARD</Type>
 			<bMissionPath>0</bMissionPath>
 			<PathEntry>
-				<Category>ANIMCAT_MELEE_STRIKE</Category>
+				<Category>ANIMCAT_RANGED_STRIKE</Category>
 			</PathEntry>
 		</AnimationPath>
 		<AnimationPath>

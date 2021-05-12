@@ -23,15 +23,6 @@ class CvInitCore
 {
 
 public:
-	enum SaveBits
-	{
-		SAVEDATA_HAS_SLOTS_CLAIMED	= 0x01,
-		SAVEDATA_NEW_RANDOM_SEED		= 0x02,
-		SAVEDATA_GAMESPEED_MARATHON = 0x04,
-		SAVEDATA_LOCK_MODS					= 0x08,
-		SAVEDATA_COMPLETE_KILLS			= 0x10
-	};
-
 	DllExport CvInitCore();
 	DllExport virtual ~CvInitCore();
 
@@ -135,6 +126,7 @@ public:
 
 
 	DllExport int getNumCustomMapOptions() const	{ return m_iNumCustomMapOptions; }
+	DllExport int getNumHiddenCustomMapOptions() const	{ return m_iNumHiddenCustomMapOptions; }
 
 	DllExport const CustomMapOptionTypes * getCustomMapOptions() const	{ return m_aeCustomMapOptions; }
 	DllExport void setCustomMapOptions(int iNumCustomMapOptions, const CustomMapOptionTypes * aeCustomMapOptions);
@@ -317,14 +309,15 @@ protected:
 
 	// Map-specific custom parameters
 	int m_iNumCustomMapOptions;
+	int m_iNumHiddenCustomMapOptions;
 	CustomMapOptionTypes * m_aeCustomMapOptions;
 
 	// Standard game options
-	bool m_abOptions[NUM_GAMEOPTION_TYPES];
-	bool m_abMPOptions[NUM_MPOPTION_TYPES];
+	bool* m_abOptions;
+	bool* m_abMPOptions;
 	bool m_bStatReporting;
 
-	bool m_abForceControls[NUM_FORCECONTROL_TYPES];
+	bool* m_abForceControls;
 
 	// Dynamic victory condition setting
 	int m_iNumVictories;
@@ -355,38 +348,38 @@ protected:
 	// ***
 
 	// Civ details
-	CvWString m_aszLeaderName[MAX_PLAYERS];
-	CvWString m_aszCivDescription[MAX_PLAYERS];
-	CvWString m_aszCivShortDesc[MAX_PLAYERS];
-	CvWString m_aszCivAdjective[MAX_PLAYERS];
-	CvWString m_aszCivPassword[MAX_PLAYERS];
-	CvString m_aszEmail[MAX_PLAYERS];
-	CvString m_aszSmtpHost[MAX_PLAYERS];
+	CvWString* m_aszLeaderName;
+	CvWString* m_aszCivDescription;
+	CvWString* m_aszCivShortDesc;
+	CvWString* m_aszCivAdjective;
+	CvWString* m_aszCivPassword;
+	CvString* m_aszEmail;
+	CvString* m_aszSmtpHost;
 
-	bool m_abWhiteFlag[MAX_PLAYERS];
-	CvWString m_aszFlagDecal[MAX_PLAYERS];
+	bool* m_abWhiteFlag;
+	CvWString* m_aszFlagDecal;
 
-	CivilizationTypes m_aeCiv[MAX_PLAYERS];
-	LeaderHeadTypes m_aeLeader[MAX_PLAYERS];
-	TeamTypes m_aeTeam[MAX_PLAYERS];
-	HandicapTypes m_aeHandicap[MAX_PLAYERS];
-	PlayerColorTypes m_aeColor[MAX_PLAYERS];
-	ArtStyleTypes m_aeArtStyle[MAX_PLAYERS];
+	CivilizationTypes* m_aeCiv;
+	LeaderHeadTypes* m_aeLeader;
+	TeamTypes* m_aeTeam;
+	HandicapTypes* m_aeHandicap;
+	PlayerColorTypes* m_aeColor;
+	ArtStyleTypes* m_aeArtStyle;
 
 	// Slot data
-	SlotStatus m_aeSlotStatus[MAX_PLAYERS];
-	SlotClaim m_aeSlotClaim[MAX_PLAYERS];
+	SlotStatus* m_aeSlotStatus;
+	SlotClaim* m_aeSlotClaim;
 
 	// Civ flags
-	bool m_abPlayableCiv[MAX_PLAYERS];
-	bool m_abMinorNationCiv[MAX_PLAYERS];
+	bool* m_abPlayableCiv;
+	bool* m_abMinorNationCiv;
 
 	// Unsaved player data
-	int m_aiNetID[MAX_PLAYERS];
-	bool m_abReady[MAX_PLAYERS];
+	int* m_aiNetID;
+	bool* m_abReady;
 
-	CvString m_aszPythonCheck[MAX_PLAYERS];
-	CvString m_aszXMLCheck[MAX_PLAYERS];
+	CvString* m_aszPythonCheck;
+	CvString* m_aszXMLCheck;
 	mutable CvString m_szTempCheck;
 };
 

@@ -141,7 +141,7 @@ class CvPediaReligion:
 		iSelected = 0
 		i = 0
 		for iI in range(gc.getNumReligionInfos()):
-			if (not gc.getReligionInfo(iI).isGraphicalOnly()):
+			if (not gc.getReligionInfo(listSorted[iI][1]).isGraphicalOnly()):
 				if bRedraw:
 					screen.appendListBoxString( self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_RELIGION, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
 				if listSorted[iI][1] == self.iReligion:

@@ -110,6 +110,11 @@ bool CySelectionGroup::canEnterTerritory(int /*TeamTypes*/ eTeam, bool bIgnoreRi
 	return m_pSelectionGroup ? m_pSelectionGroup->canEnterTerritory((TeamTypes) eTeam, bIgnoreRightOfPassage) : false;
 }
 
+bool CySelectionGroup::canEnterArea(int /*TeamTypes*/ eTeam, CyArea* pArea, bool bIgnoreRightOfPassage)
+{
+	return m_pSelectionGroup ? m_pSelectionGroup->canEnterArea((TeamTypes) eTeam, pArea->getArea(), bIgnoreRightOfPassage) : false;
+}
+
 bool CySelectionGroup::canMoveInto(CyPlot* pPlot, bool bAttack)
 {
 	return m_pSelectionGroup ? m_pSelectionGroup->canMoveInto(pPlot->getPlot(), bAttack) : false;
@@ -291,4 +296,9 @@ int CySelectionGroup::getMissionType( int iNode )
 int CySelectionGroup::getMissionData1( int iNode )
 {
 	return m_pSelectionGroup ? m_pSelectionGroup->getMissionData1( iNode ) : -1;
+}
+
+int CySelectionGroup::getMissionData2( int iNode )
+{
+	return m_pSelectionGroup ? m_pSelectionGroup->getMissionData2( iNode ) : -1;
 }

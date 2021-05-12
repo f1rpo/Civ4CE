@@ -101,6 +101,7 @@ class CvGameDesc:
 		self.iStartYear = -4000
 		self.szDescription = ""
 		self.szModPath = ""
+		self.iRandom = 0
 		
 	def apply(self):
 		"after reading, apply the game data"
@@ -140,8 +141,8 @@ class CvGameDesc:
 		f.write("\tTargetScore=%d\n" %(gc.getGame().getTargetScore(),))
 		
 		f.write("\tStartYear=%d\n" %(gc.getGame().getStartYear(),))
-		f.write("\tDescription=\n")
-		f.write("\tModPath=\n")
+		f.write("\tDescription=%s\n" % (self.szDescription,))
+		f.write("\tModPath=%s\n" % (self.szModPath,))
 		f.write("EndGame\n")
 		
 	def read(self, f):
@@ -226,6 +227,11 @@ class CvGameDesc:
 					self.szModPath = v
 					continue
 
+				v = parser.findTokenValue(toks, "Random")
+				if v!=-1:
+					self.iRandom = int(v)
+					continue
+
 				if parser.findTokenValue(toks, "EndGame") != -1:
 					break
 		
@@ -238,8 +244,11 @@ class CvTeamDesc:
 		self.bPermanentWarPeaceList = ()
 		self.bOpenBordersWithTeamList = ()
 		self.bDefensivePactWithTeamList = ()
+		self.bVassalOfTeamList = ()
 		self.projectType = []
 		self.bRevealMap = 0
+		self.iMasterPower = 0
+		self.iVassalPower = 0
 		
 	def write(self, f, idx):
 		"write out team data"
@@ -275,11 +284,21 @@ class CvTeamDesc:
 			if (gc.getTeam(idx).isDefensivePact(i)):
 				f.write("\tDefensivePactWithTeam=%d\n" %(i))
 		
+		# write vassal state
+		for i in range(gc.getMAX_CIV_TEAMS()):
+			if (gc.getTeam(idx).isVassal(i)):
+				f.write("\tVassalOfTeam=%d\n" %(i))
+
 		for i in range(gc.getNumProjectInfos()):
 			for j in range(gc.getTeam(idx).getProjectCount(i)):
 				f.write("\tProjectType=%s\n" %(gc.getProjectInfo(i).getType()))
 
 		f.write("\tRevealMap=%d\n" %(0))
+
+		if gc.getTeam(idx).getVassalPower() != 0:
+			f.write("\tVassalPower=%d\n" %(gc.getTeam(idx).getVassalPower()))
+		if gc.getTeam(idx).getMasterPower() != 0:
+			f.write("\tMasterPower=%d\n" %(gc.getTeam(idx).getMasterPower()))
 		
 		f.write("EndTeam\n")
 		
@@ -325,6 +344,11 @@ class CvTeamDesc:
 					self.bDefensivePactWithTeamList = self.bDefensivePactWithTeamList + (int(v),)
 					continue
 				
+				v = parser.findTokenValue(toks, "VassalOfTeam")
+				if v!=-1:
+					self.bVassalOfTeamList = self.bVassalOfTeamList + (int(v),)
+					continue
+
 				v = parser.findTokenValue(toks, "ProjectType")
 				if v!=-1:
 					self.projectType.append(v)
@@ -335,6 +359,16 @@ class CvTeamDesc:
 					self.bRevealMap = int(v)
 					continue
 				
+				v = parser.findTokenValue(toks, "VassalPower")
+				if v!=-1:
+					self.iVassalPower = int(v)
+					continue
+
+				v = parser.findTokenValue(toks, "MasterPower")
+				if v!=-1:
+					self.iMasterPower = int(v)
+					continue
+
 				if parser.findTokenValue(toks, "EndTeam") != -1:
 					return true		# completed successfully
 
@@ -576,6 +610,7 @@ class CvUnitDesc:
 		self.plotX = -1
 		self.plotY = -1
 		self.unitType = None
+		self.leaderUnitType = None
 		self.owner =-1
 		self.damage = 0
 		self.level = -1
@@ -603,6 +638,13 @@ class CvUnitDesc:
 					
 				unit = player.initUnit(unitTypeNum, self.plotX, self.plotY, UnitAITypes(eUnitAI))#UnitAITypes.NO_UNITAI)
 			if (unit):
+				#leader unit type
+				if(self.leaderUnitType != None):
+					leaderUnitTypeNum = CvUtil.findInfoTypeNum(gc.getUnitInfo, gc.getNumUnitInfos(), self.leaderUnitType)
+					if leaderUnitTypeNum >= 0:
+						unit.setLeaderUnitType(leaderUnitTypeNum);
+						
+				#other properties
 				if self.damage != 0:
 					unit.setDamage(self.damage, PlayerTypes.NO_PLAYER)
 				if self.level != -1:
@@ -638,6 +680,11 @@ class CvUnitDesc:
 			if (v!=-1 and vOwner != -1):
 				self.unitType = v
 				self.owner = int(vOwner)
+				continue
+				
+			v = parser.findTokenValue(toks, "LeaderUnitType")
+			if (v != -1):
+				self.leaderUnitType = v
 				continue
 
 			v = parser.findTokenValue(toks, "Damage")
@@ -685,6 +732,8 @@ class CvUnitDesc:
 		unitOwner= unit.getOwner()
 		f.write("\tBeginUnit\n")
 		f.write("\t\tUnitType=%s, UnitOwner=%d\n" %(unitType,unitOwner))
+		if unit.getLeaderUnitType() != -1:
+			f.write("\t\tLeaderUnitType=%s\n" %(gc.getUnitInfo(unit.getLeaderUnitType()).getType()))
 		f.write("\t\tDamage=%d\n" %(unit.getDamage(),))
 		f.write("\t\tLevel=%d, Experience=%d\n" %(unit.getLevel(), unit.getExperience()))
 		for i in range(gc.getNumPromotionInfos()):
@@ -1458,6 +1507,10 @@ class CvWBDesc:
 					for defensivePactTeam in self.teamsDesc[iTeamLoop].bDefensivePactWithTeamList:
 						gc.getTeam(iTeamLoop).signDefensivePact(defensivePactTeam)
 					
+					# Vassals
+					for vassalTeam in self.teamsDesc[iTeamLoop].bVassalOfTeamList:
+						gc.getTeam(vassalTeam).assignVassal(iTeamLoop, true)
+					
 					# Projects
 					for project in (self.teamsDesc[iTeamLoop].projectType):
 						projectTypeNum = CvUtil.findInfoTypeNum(gc.getProjectInfo, gc.getNumProjectInfos(), project)
@@ -1526,6 +1579,12 @@ class CvWBDesc:
 							    pPlot = CyMap().plot(iPlotX,iPlotY)
 							    pPlot.setRevealed(pTeam.getID(), True, False, TeamTypes.NO_TEAM)
 
+					# Vassal
+					if (pWBTeam.iVassalPower != 0):
+						pTeam.setVassalPower(pWBTeam.iVassalPower)
+					if (pWBTeam.iMasterPower != 0):
+						pTeam.setMasterPower(pWBTeam.iMasterPower)
+						
 		# Per plot stuff
 		for iPlotLoop in range(self.mapDesc.numPlotsWritten):
 			
@@ -1600,9 +1659,7 @@ class CvWBDesc:
 		self.signDesc = []
 		for i in range(self.mapDesc.numSignsWritten):
 			pDesc = CvSignDesc()
-			print "Jason1"
 			if pDesc.read(f)==True:
-				print "Jason2"
 				self.signDesc.append(pDesc)
 			else:
 				break		

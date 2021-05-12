@@ -7,6 +7,27 @@
 <Civ4ArtDefines xmlns="x-schema:CIV4ArtDefinesSchema.xml">
 	<MiscArtInfos>
 		<MiscArtInfo>
+			<Type>ART_GREAT_WALL_POST</Type>
+			<Path>Art/Structures/Buildings/Great_Wall/Great_Wall_Tower.nif</Path>
+			<fScale>1.0</fScale>
+			<NIF/>
+			<KFM/>
+		</MiscArtInfo>
+		<MiscArtInfo>
+			<Type>ART_GREAT_WALL_SEGMENT</Type>
+			<Path>Art/Structures/Buildings/Great_Wall/Great_Wall_1Unit.nif</Path>
+			<fScale>1.0</fScale>
+			<NIF/>
+			<KFM/>
+		</MiscArtInfo>
+		<MiscArtInfo>
+			<Type>ART_GREAT_WALL_SHADOW_TEXTURE</Type>
+			<Path>Art/Structures/Buildings/Great_Wall/poopshadow.dds</Path>
+			<fScale>1.0</fScale>
+			<NIF/>
+			<KFM/>
+		</MiscArtInfo>
+		<MiscArtInfo>
 			<Type>ART_AQUEDUCT_ENDPIECE</Type>
 			<Path>Art/Structures/Buildings/Aqueduct/Aqueduct.nif::1x1_end</Path>
 			<fScale>1.0</fScale>
@@ -254,6 +275,15 @@
 		<MiscArtInfo>
 			<Type>WAYPOINT_BEAM_TEXTURE</Type>
 			<Path>Art/Shared/DashedLine_Vertical_NoCaps.dds</Path>
+			<fScale>1.0</fScale>
+			<NIF>None</NIF>
+			<KFM>None</KFM>
+		</MiscArtInfo>
+		<MiscArtInfo>
+			<Type>CITY_BILLBOARDS</Type>
+			<Path>None</Path>
+			<!-- positive scale: city billboards use fonts from GameFont.tga -->
+			<!-- negative scale: GFC billboards (uses the interface font) -->
 			<fScale>1.0</fScale>
 			<NIF>None</NIF>
 			<KFM>None</KFM>

@@ -82,3 +82,13 @@ void CvDLLEntity::NotifyEntity( MissionTypes eMission )
 {
 	gDLL->getEntityIFace()->NotifyEntity( getUnitEntity(), eMission );
 }
+
+void CvDLLEntity::SetSiegeTower(bool show)
+{
+	gDLL->getEntityIFace()->SetSiegeTower( getUnitEntity(), show );
+}
+
+bool CvDLLEntity::GetSiegeTower()
+{
+	return gDLL->getEntityIFace()->GetSiegeTower(getUnitEntity());
+}

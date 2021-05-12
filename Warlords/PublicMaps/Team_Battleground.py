@@ -21,20 +21,29 @@ def getDescription():
 	return "TXT_KEY_MAP_SCRIPT_TEAM_BATTLEGROUND_DESCR"
 
 def getNumCustomMapOptions():
-	return 2
+	return 3
 	
+def getNumHiddenCustomMapOptions():
+	return 1
+
 def getCustomMapOptionName(argsList):
 	[iOption] = argsList
 	option_names = {
 		0:	"TXT_KEY_MAP_SCRIPT_TEAM_PLACEMENT",
-		1:	"TXT_KEY_MAP_SCRIPT_TEAM_SETTING"
+		1:	"TXT_KEY_MAP_SCRIPT_TEAM_SETTING",
+		2:  "TXT_KEY_MAP_WORLD_WRAP"
 		}
 	translated_text = unicode(CyTranslator().getText(option_names[iOption], ()))
 	return translated_text
 	
 def getNumCustomMapOptionValues(argsList):
-	# Both options have three selections.
-	return 3
+	[iOption] = argsList
+	option_values = {
+		0:	3,
+		1:	3,
+		2:	3
+		}
+	return option_values[iOption]
 	
 def getCustomMapOptionDescAt(argsList):
 	[iOption, iSelection] = argsList
@@ -48,6 +57,11 @@ def getCustomMapOptionDescAt(argsList):
 			0: "TXT_KEY_MAP_SCRIPT_START_TOGETHER",
 			1: "TXT_KEY_MAP_SCRIPT_START_SEPARATED",
 			2: "TXT_KEY_MAP_SCRIPT_START_ANYWHERE"
+			},
+		2:	{
+			0: "TXT_KEY_MAP_WRAP_FLAT",
+			1: "TXT_KEY_MAP_WRAP_CYLINDER",
+			2: "TXT_KEY_MAP_WRAP_TOROID"
 			}
 		}
 	translated_text = unicode(CyTranslator().getText(selection_names[iOption][iSelection], ()))
@@ -57,7 +71,8 @@ def getCustomMapOptionDefault(argsList):
 	[iOption] = argsList
 	option_defaults = {
 		0:	1,
-		1:	0
+		1:	0,
+		2:  0
 		}
 	return option_defaults[iOption]
 
@@ -65,7 +80,8 @@ def isRandomCustomMapOption(argsList):
 	[iOption] = argsList
 	option_random = {
 		0:	true,
-		1:	false
+		1:	false,
+		2:  false
 		}
 	return option_random[iOption]
 
@@ -77,9 +93,12 @@ def isSeaLevelMap():
 	return 0
 
 def getWrapX():
-	return False
+	map = CyMap()
+	return (map.getCustomMapOption(2) == 1 or map.getCustomMapOption(2) == 2)
+	
 def getWrapY():
-	return False
+	map = CyMap()
+	return (map.getCustomMapOption(2) == 2)
 	
 def getTopLatitude():
 	return 80

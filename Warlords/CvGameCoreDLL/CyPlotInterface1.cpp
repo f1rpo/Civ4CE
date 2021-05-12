@@ -62,7 +62,7 @@ void CyPlotPythonInterface1(python::class_<CyPlot>& x)
 		.def("getSelectedUnit", &CyPlot::getSelectedUnit, python::return_value_policy<python::manage_new_object>(), "CyUnit* ()")
 		.def("getUnitPower", &CyPlot::getUnitPower, "int (int /*PlayerTypes*/ eOwner)")
 
-		.def("defenseModifier", &CyPlot::defenseModifier, "int (bool bIgnoreBuilding, bool bHelp)")
+		.def("defenseModifier", &CyPlot::defenseModifier, "int (int /*TeamTypes*/, bool bIgnoreBuilding, bool bHelp)")
 		.def("movementCost", &CyPlot::movementCost, "int (CyUnit* pUnit, CyPlot* pFromPlot)")
 
 		.def("isAdjacentOwned", &CyPlot::isAdjacentOwned, "bool ()")

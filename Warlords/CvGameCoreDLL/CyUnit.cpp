@@ -83,6 +83,11 @@ bool CyUnit::canEnterTerritory(int /*TeamTypes*/ eTeam, bool bIgnoreRightOfPassa
 	return m_pUnit ? (int) m_pUnit->canEnterTerritory((TeamTypes) eTeam, bIgnoreRightOfPassage) : false;
 }
 
+bool CyUnit::canEnterArea(int /*TeamTypes*/ eTeam, CyArea* pArea, bool bIgnoreRightOfPassage)
+{
+	return m_pUnit ? (int) m_pUnit->canEnterArea((TeamTypes) eTeam, pArea->getArea(), bIgnoreRightOfPassage) : false;
+}
+
 int /*TeamTypes*/ CyUnit::getDeclareWarMove(CyPlot* pPlot)																					 
 {
 	return m_pUnit ? (int) m_pUnit->getDeclareWarMove(pPlot->getPlot()) : (int) NO_TEAM;
@@ -359,15 +364,35 @@ bool CyUnit::canBuild(CyPlot* pPlot, int /*BuildTypes*/ eBuild, bool bTestVisibl
 	return m_pUnit ? m_pUnit->canBuild(pPlot->getPlot(), (BuildTypes) eBuild, bTestVisible) : false;
 }
 
-bool CyUnit::canPromote(int /*PromotionTypes*/ ePromotion)
+int CyUnit::canLead(CyPlot* pPlot, int iUnitId) const
 {
-	return m_pUnit ? m_pUnit->canPromote((PromotionTypes) ePromotion) : false;
+	return m_pUnit ? m_pUnit->canLead(pPlot->getPlot(), iUnitId) : 0;
 }
 
-void CyUnit::promote(int /*PromotionTypes*/ ePromotion)
+bool CyUnit::lead(int iUnitId)
+{
+	return m_pUnit ? m_pUnit->lead(iUnitId) : false;
+}
+
+int CyUnit::canGiveExperience(CyPlot* pPlot) const
+{
+	return m_pUnit ? m_pUnit->canGiveExperience(pPlot->getPlot()) : 0;
+}
+
+bool CyUnit::giveExperience()
+{
+	return m_pUnit ? m_pUnit->giveExperience() : false;
+}
+
+bool CyUnit::canPromote(int /*PromotionTypes*/ ePromotion, int iLeaderUnitId)
+{
+	return m_pUnit ? m_pUnit->canPromote((PromotionTypes) ePromotion, iLeaderUnitId) : false;
+}
+
+void CyUnit::promote(int /*PromotionTypes*/ ePromotion, int iLeaderUnitId)
 {
 	if (m_pUnit)
-		m_pUnit->promote((PromotionTypes) ePromotion);
+		m_pUnit->promote((PromotionTypes) ePromotion, iLeaderUnitId);
 }
 
 int CyUnit::upgradePrice(int /*UnitTypes*/ eUnit)
@@ -845,6 +870,11 @@ int CyUnit::animalCombatModifier()
 	return m_pUnit ? m_pUnit->animalCombatModifier() : -1;
 }
 
+int CyUnit::hillsAttackModifier()
+{
+	return m_pUnit ? m_pUnit->hillsAttackModifier() : -1;
+}
+
 int CyUnit::hillsDefenseModifier()
 {
 	return m_pUnit ? m_pUnit->hillsDefenseModifier() : -1;
@@ -1079,10 +1109,10 @@ void CyUnit::setExperience(int iNewValue, int iMax)
 		m_pUnit->setExperience(iNewValue, iMax);
 }
 
-void CyUnit::changeExperience(int iChange, int iMax)
+void CyUnit::changeExperience(int iChange, int iMax, bool bFromCombat, bool bInBorders)
 {
 	if (m_pUnit)
-		m_pUnit->changeExperience(iChange, iMax);
+		m_pUnit->changeExperience(iChange, iMax, bFromCombat, bInBorders);
 }
 
 int CyUnit::getLevel()
@@ -1232,10 +1262,46 @@ int CyUnit::getExtraCityDefensePercent()
 	return m_pUnit ? m_pUnit->getExtraCityDefensePercent() : -1;
 }
 
+int CyUnit::getExtraHillsAttackPercent()
+{
+	return m_pUnit ? m_pUnit->getExtraHillsAttackPercent() : -1;
+}
+
 int CyUnit::getExtraHillsDefensePercent()
 {
 	return m_pUnit ? m_pUnit->getExtraHillsDefensePercent() : -1;
 }
+
+int CyUnit::getRevoltProtection() const
+{
+	return m_pUnit ? m_pUnit->getExtraHillsDefensePercent() : -1;
+}
+
+int CyUnit::getCollateralDamageProtection() const
+{
+	return m_pUnit ? m_pUnit->getCollateralDamageProtection() : -1;
+}
+
+int CyUnit::getPillageChange() const
+{
+	return m_pUnit ? m_pUnit->getPillageChange() : -1;
+}
+
+int CyUnit::getUpgradeDiscount() const
+{
+	return m_pUnit ? m_pUnit->getUpgradeDiscount() : -1;
+}
+
+int CyUnit::getExperiencePercent() const
+{
+	return m_pUnit ? m_pUnit->getExperiencePercent() : -1;
+}
+
+int CyUnit::getKamikazePercent() const
+{
+	return m_pUnit ? m_pUnit->getKamikazePercent() : -1;
+}
+
 
 bool CyUnit::isMadeAttack()	 
 {
@@ -1288,6 +1354,17 @@ int /*UnitTypes*/ CyUnit::getUnitType()
 int /*UnitClassTypes*/ CyUnit::getUnitClassType()
 {
 	return m_pUnit ? (int)m_pUnit->getUnitClassType() : -1;
+}
+
+int /*UnitTypes*/ CyUnit::getLeaderUnitType()
+{
+	return m_pUnit ? (int)m_pUnit->getLeaderUnitType() : -1;
+}
+
+void CyUnit::setLeaderUnitType(int leaderUnitType)
+{
+	if (m_pUnit)
+		m_pUnit->setLeaderUnitType((UnitTypes) leaderUnitType);
 }
 
 CyUnit* CyUnit::getTransportUnit() const
@@ -1375,6 +1452,11 @@ bool CyUnit::canAcquirePromotion(int /*PromotionTypes*/ ePromotion)
 bool CyUnit::canAcquirePromotionAny()
 {
 	return m_pUnit ? m_pUnit->canAcquirePromotionAny() : false;
+}
+
+bool CyUnit::isPromotionValid(int /*PromotionTypes*/ ePromotion)
+{
+	return m_pUnit ? m_pUnit->isPromotionValid((PromotionTypes) ePromotion) : false;
 }
 
 bool CyUnit::isHasPromotion(int /*PromotionTypes*/eIndex)

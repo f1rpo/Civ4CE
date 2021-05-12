@@ -42,7 +42,8 @@ class CvDiplomacy:
 			self.diploScreen.endTrade()
 
 		# If this is the first time we are being contacted by the AI
-		elif (self.isComment(eComment, "AI_DIPLOCOMMENT_FIRST_CONTACT") ):
+		# Or if the AI is no longer a vassal
+		elif (self.isComment(eComment, "AI_DIPLOCOMMENT_FIRST_CONTACT") or self.isComment(eComment, "AI_DIPLOCOMMENT_NO_VASSAL")):
 
 			# if you are on different teams and NOT at war, give the user the option to declare war
 			if (gc.getTeam(gc.getGame().getActiveTeam()).canDeclareWar(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam())):
@@ -72,7 +73,8 @@ class CvDiplomacy:
 
 		# If the AI is offering a deal
 		elif (self.isComment(eComment, "AI_DIPLOCOMMENT_OFFER_PEACE") or
-					self.isComment(eComment, "AI_DIPLOCOMMENT_OFFER_DEAL")):
+					self.isComment(eComment, "AI_DIPLOCOMMENT_OFFER_DEAL") or
+					self.isComment(eComment, "AI_DIPLOCOMMENT_OFFER_VASSAL")):
 
 			# We can accept their offer
 			self.addUserComment("USER_DIPLOCOMMENT_ACCEPT_OFFER", -1, -1)
@@ -138,12 +140,18 @@ class CvDiplomacy:
 			self.addUserComment("USER_DIPLOCOMMENT_NO_STOP_TRADING", -1, -1)
 
 		# If we are viewing our current deals or
+		elif (self.isComment(eComment, "AI_DIPLOCOMMENT_CURRENT_DEALS")):
+
+			# Exit option
+			self.addUserComment("USER_DIPLOCOMMENT_NEVERMIND", -1, -1)
+			self.addUserComment("USER_DIPLOCOMMENT_EXIT", -1, -1)
+			self.diploScreen.startTrade( eComment, true)
+
 		# If we are trading or
 		# If we are trying another proposal or
 		# If they reject our offer or
 		# If they reject our demand
-		elif (self.isComment(eComment, "AI_DIPLOCOMMENT_CURRENT_DEALS") or
-					self.isComment(eComment, "AI_DIPLOCOMMENT_TRADING") or 
+		elif (self.isComment(eComment, "AI_DIPLOCOMMENT_TRADING") or 
 					self.isComment(eComment, "AI_DIPLOCOMMENT_REJECT") or
 					self.isComment(eComment, "AI_DIPLOCOMMENT_SORRY") or
 					self.isComment(eComment, "AI_DIPLOCOMMENT_TRY_THIS_DEAL") or 
@@ -175,14 +183,13 @@ class CvDiplomacy:
 					# This is a two way deal
 					if (self.diploScreen.ourOfferEmpty() == 0 and self.diploScreen.theirOfferEmpty() == 0):
 					
-						if (not self.isComment(eComment, "AI_DIPLOCOMMENT_CURRENT_DEALS")):
-							# Insert the propose trade button
-							self.addUserComment("USER_DIPLOCOMMENT_PROPOSE", -1, -1)
+						# Insert the propose trade button
+						self.addUserComment("USER_DIPLOCOMMENT_PROPOSE", -1, -1)
 
-							# During peace, see what we can get for these items
-							if (not self.diploScreen.atWar()):
-								if (gc.getGame().getActiveTeam() != gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()):
-									self.addUserComment("USER_DIPLOCOMMENT_COMPLETE_DEAL", -1, -1)
+						# During peace, see what we can get for these items
+						if (not self.diploScreen.atWar()):
+							if (gc.getGame().getActiveTeam() != gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()):
+								self.addUserComment("USER_DIPLOCOMMENT_COMPLETE_DEAL", -1, -1)
 
 					# Otherwise they have something on the table and we dont
 					elif (self.diploScreen.theirOfferEmpty() == 0):
@@ -199,9 +206,11 @@ class CvDiplomacy:
 							else:
 								self.addUserComment("USER_DIPLOCOMMENT_OFFER", -1, -1)
 
-								if (gc.getPlayer(self.diploScreen.getWhoTradingWith()).AI_getAttitude(gc.getGame().getActivePlayer()) >= AttitudeTypes.ATTITUDE_PLEASED):
+								if (gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).isVassal(gc.getGame().getActiveTeam()) and self.diploScreen.theirVassalTribute()):
+									self.addUserComment("USER_DIPLOCOMMENT_VASSAL_TRIBUTE", -1, -1)
+								elif (gc.getPlayer(self.diploScreen.getWhoTradingWith()).AI_getAttitude(gc.getGame().getActivePlayer()) >= AttitudeTypes.ATTITUDE_PLEASED):
 									self.addUserComment("USER_DIPLOCOMMENT_ASK", -1, -1)
-								elif (gc.getTeam(gc.getGame().getActiveTeam()).canDeclareWar(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam())):
+								elif (gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).isVassal(gc.getGame().getActiveTeam()) or gc.getTeam(gc.getGame().getActiveTeam()).canDeclareWar(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam())):
 									self.addUserComment("USER_DIPLOCOMMENT_DEMAND", -1, -1)
 	
 					# Otherwise we have something on the table and they dont
@@ -221,7 +230,7 @@ class CvDiplomacy:
 			# Exit option
 			self.addUserComment("USER_DIPLOCOMMENT_NEVERMIND", -1, -1)
 			self.addUserComment("USER_DIPLOCOMMENT_EXIT", -1, -1)
-			self.diploScreen.startTrade( eComment, self.isComment(eComment, "AI_DIPLOCOMMENT_CURRENT_DEALS") )
+			self.diploScreen.startTrade( eComment, false )
 
 		elif (self.isComment(eComment, "AI_DIPLOCOMMENT_SOMETHING_ELSE")):
 			if (gc.getTeam(gc.getGame().getActiveTeam()).canDeclareWar(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam())):
@@ -229,7 +238,7 @@ class CvDiplomacy:
 
 			self.addUserComment("USER_DIPLOCOMMENT_ATTITUDE", -1, -1)
 
-			if (gc.getGame().getActiveTeam() == gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()):
+			if (gc.getGame().getActiveTeam() == gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam() or gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).isVassal(gc.getGame().getActiveTeam())):
 				self.addUserComment("USER_DIPLOCOMMENT_RESEARCH", -1, -1)
 
 			if (gc.getTeam(gc.getGame().getActiveTeam()).AI_shareWar(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam())):
@@ -338,6 +347,7 @@ class CvDiplomacy:
 		       eComment == self.getCommentID("AI_DIPLOCOMMENT_UNIT_BRAG") or
 		       eComment == self.getCommentID("AI_DIPLOCOMMENT_NUKES") or
 		       eComment == self.getCommentID("AI_DIPLOCOMMENT_OFFER_PEACE") or
+		       eComment == self.getCommentID("AI_DIPLOCOMMENT_OFFER_VASSAL") or
 		       eComment == self.getCommentID("AI_DIPLOCOMMENT_OFFER_CITY") or
 		       eComment == self.getCommentID("AI_DIPLOCOMMENT_OFFER_DEAL") or
 		       eComment == self.getCommentID("AI_DIPLOCOMMENT_GIVE_HELP") or
@@ -536,6 +546,16 @@ class CvDiplomacy:
 				self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ACCEPT_DEMAND"))
 			else:
 				self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_REJECT_DEMAND"))
+
+		# if we are demanding something with the threat of war
+		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_VASSAL_TRIBUTE")):
+			diploScreen.diploEvent(DiploEventTypes.DIPLOEVENT_MADE_DEMAND_VASSAL, -1, -1)
+			if (diploScreen.offerDeal()):
+				self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ACCEPT_DEMAND"))
+			else:
+				self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_DECLARE_WAR"))
+				diploScreen.diploEvent(DiploEventTypes.DIPLOEVENT_DEMAND_WAR, -1, -1)
+
 
 		# if we are demanding something from our teammate
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_DEMAND_TEAM")):

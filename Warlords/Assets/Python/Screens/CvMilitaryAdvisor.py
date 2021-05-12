@@ -35,6 +35,8 @@ class CvMilitaryAdvisor:
 		self.UNIT_BUTTON_LABEL_ID = "MilitaryAdvisorUnitButtonLabel"
 		self.LEADER_PANEL_ID = "MilitaryAdvisorLeaderPanel"
 		self.UNIT_LIST_ID = "MilitaryAdvisorUnitList"
+		self.GREAT_GENERAL_BAR_ID = "MilitaryAdvisorGreatGeneralBar"
+		self.GREAT_GENERAL_LABEL_ID = "MilitaryAdvisorGreatGeneralLabel"
 
 		self.Z_BACKGROUND = -2.1
 		self.Z_CONTROLS = self.Z_BACKGROUND - 0.2
@@ -50,6 +52,11 @@ class CvMilitaryAdvisor:
 		
 		self.X_EXIT = 994
 		self.Y_EXIT = 726
+		
+		self.X_GREAT_GENERAL_BAR = 20
+		self.Y_GREAT_GENERAL_BAR = 730
+		self.W_GREAT_GENERAL_BAR = 300
+		self.H_GREAT_GENERAL_BAR = 30
 								
 		self.nWidgetCount = 0
 		self.nRefreshWidgetCount = 0
@@ -135,13 +142,30 @@ class CvMilitaryAdvisor:
 		CyInterface().setShowInterface(iOldMode)
 					
 		self.iActivePlayer = gc.getGame().getActivePlayer()
-		
+
 		self.unitsList = [(0, 0, [], 0)] * gc.getNumUnitInfos()
 		self.selectedUnitList = []
 		self.selectedPlayerList.append(self.iActivePlayer)
 
+		self.drawCombatExperience()
+
 		self.refresh(true)
 		
+	def drawCombatExperience(self):
+	
+		if (gc.getPlayer(self.iActivePlayer).greatPeopleThreshold(true) > 0):
+		
+			iExperience = gc.getPlayer(self.iActivePlayer).getCombatExperience()
+			
+			screen = self.getScreen()
+			screen.addStackedBarGFC(self.GREAT_GENERAL_BAR_ID, self.X_GREAT_GENERAL_BAR, self.Y_GREAT_GENERAL_BAR, self.W_GREAT_GENERAL_BAR, self.H_GREAT_GENERAL_BAR, InfoBarTypes.NUM_INFOBAR_TYPES, WidgetTypes.WIDGET_HELP_GREAT_GENERAL, -1, -1)
+			screen.setStackedBarColors(self.GREAT_GENERAL_BAR_ID, InfoBarTypes.INFOBAR_STORED, gc.getInfoTypeForString("COLOR_GREAT_PEOPLE_STORED"))
+			screen.setStackedBarColors(self.GREAT_GENERAL_BAR_ID, InfoBarTypes.INFOBAR_RATE, gc.getInfoTypeForString("COLOR_GREAT_PEOPLE_RATE"))
+			screen.setStackedBarColors(self.GREAT_GENERAL_BAR_ID, InfoBarTypes.INFOBAR_RATE_EXTRA, gc.getInfoTypeForString("COLOR_EMPTY"))
+			screen.setStackedBarColors(self.GREAT_GENERAL_BAR_ID, InfoBarTypes.INFOBAR_EMPTY, gc.getInfoTypeForString("COLOR_EMPTY"))
+			screen.setBarPercentage(self.GREAT_GENERAL_BAR_ID, InfoBarTypes.INFOBAR_STORED, float(iExperience) / float(gc.getPlayer(self.iActivePlayer).greatPeopleThreshold(true)))
+			screen.setLabel(self.GREAT_GENERAL_LABEL_ID, "", localText.getText("TXT_KEY_MISC_COMBAT_EXPERIENCE", ()), CvUtil.FONT_CENTER_JUSTIFY, self.X_GREAT_GENERAL_BAR + self.W_GREAT_GENERAL_BAR/2, self.Y_GREAT_GENERAL_BAR + 6, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_GREAT_GENERAL, -1, -1)
+					
 																									
 	# returns a unique ID for a widget in this screen
 	def getNextWidgetName(self):
@@ -406,6 +430,7 @@ class CvMilitaryAdvisor:
 				screen.setState(self.getLeaderButton(iLoopPlayer), (iLoopPlayer in self.selectedPlayerList))				
 		
 		self.refreshUnitSelection(bReload)
+		
 		
 		
 		

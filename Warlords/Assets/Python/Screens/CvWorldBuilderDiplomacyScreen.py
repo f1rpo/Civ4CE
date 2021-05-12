@@ -159,7 +159,24 @@ class CvWorldBuilderDiplomacyScreen:
 		tab.attachLabel(vbox1, "AtWar", szLabel)
 
 		# AI Attitude Weight
-		tab.attachLabel(vbox1, "AIAttitudeWeight", "AI Attitude Weight")
+		tab.attachLabel(vbox1, "AIAttitudeWeight", localText.getText("TXT_KEY_WB_AI_ATTITUDE", ()))
+		
+		# Vassal Dropdown
+		szDropdownDesc = "VassalDropdownBox"
+		aszDropdownElements = (localText.getText("TXT_KEY_WB_NOT_A_VASSAL", ()),)
+		iInitialSelection = 0
+		iTeamCount = 0
+		for i in range( gc.getMAX_CIV_TEAMS() ):
+			if ( gc.getTeam(i).isEverAlive() ):
+				if (i != gc.getPlayer(self.m_iActivePlayer).getTeam() and not gc.getTeam(i).isAVassal()):
+					iTeamCount += 1
+					aszDropdownElements = aszDropdownElements + (localText.getText("TXT_KEY_ATTITUDE_VASSAL_OF", (gc.getTeam(i).getName(), )),)
+					if (gc.getTeam(gc.getPlayer(self.m_iActivePlayer).getTeam()).isVassal(i)):
+						iInitialSelection = iTeamCount
+		szCallbackFunction = "handleWorldBuilderDiplomacyVassalPullDownCB"
+		szWidgetName = "WBDChangeVassalDropdownBox"
+		tab.attachDropDown(vbox1, szWidgetName, szDropdownDesc, aszDropdownElements, self.callbackIFace, szCallbackFunction, szWidgetName, iInitialSelection)
+		
 
 		########## EXIT
 
@@ -241,18 +258,19 @@ class CvWorldBuilderDiplomacyScreen:
 			iInitialSelection = 0
 		else:
 			iInitialSelection = 1
-
+			
 		szWidgetName = "WBDAtWarDropdownBox_" + str(iPanelNumber)
 		if (gc.getPlayer(iPlayer).getTeam() == gc.getPlayer(self.m_iActivePlayer).getTeam()):
-			tab.attachLabel(vbox, szWidgetName, "Same Team")
+			tab.attachLabel(vbox, szWidgetName, localText.getText("TXT_KEY_PITBOSS_TEAM", ()))
+		elif (gc.getTeam(gc.getPlayer(self.m_iActivePlayer).getTeam()).isAVassal() or gc.getTeam(gc.getPlayer(iPlayer).getTeam()).isAVassal()):
+			tab.attachLabel(vbox, szWidgetName, localText.getText("TXT_KEY_WB_WAR_PEACE_NOT_ALLOWED_VASSAL", ()))
 		else:
 			szDropdownDesc = "AtWarDropdownBox" + str(iPanelNumber)
 			aszDropdownElements = ()
 			aszDropdownElements = aszDropdownElements + (unicode(localText.getText("TXT_KEY_TRADE_WAR_WITH", ())),)
 			aszDropdownElements = aszDropdownElements + (unicode(localText.getText("TXT_KEY_TRADE_PEACE_WITH", ())),)
 			szCallbackFunction = "handleWorldBuilderDiplomacyAtWarPullDownCB"
-			tab.attachDropDown(vbox, szWidgetName, szDropdownDesc, aszDropdownElements, self.callbackIFace, szCallbackFunction, szWidgetName, iInitialSelection)
-		return
+			tab.attachDropDown(vbox, szWidgetName, szDropdownDesc, aszDropdownElements, self.callbackIFace, szCallbackFunction, szWidgetName, iInitialSelection)						
 
 	def addOtherAIAttitude(self, iPlayer, iPanelNumber):
 		tab = self.getTabControl()
@@ -284,7 +302,6 @@ class CvWorldBuilderDiplomacyScreen:
 
 		szSliderText = self.getSliderTextMiddle(-100, 100, gc.getPlayer(iPlayer).AI_getAttitudeExtra(self.m_iActivePlayer))
 		szTextName = "WorldBuilderDiplomacySliderTextMiddle" + str(iPanelNumber)
-		print(szTextName)
 		tab.attachLabel(vbox, szTextName, szSliderText)
 		tab.setLayoutFlag(szTextName, "LAYOUT_SIZE_HEXPANDING")
 		tab.setLayoutFlag(szTextName, "LAYOUT_HCENTER")
@@ -301,6 +318,7 @@ class CvWorldBuilderDiplomacyScreen:
 			setDiplomacySettings()
 			self.pTabControl = getWBToolDiplomacyTabCtrl()
 			szTab = self.getDiplomacyTabName()
+			self.getTabControl().setSize(self.m_iScreenWidth,self.m_iScreenHeight)
 		else:
 			initWBDiplomacyCtrl(self.szTabControlName, True, False)
 			self.pTabControl = getWBToolDiplomacyTabCtrl()
@@ -330,16 +348,35 @@ class CvWorldBuilderDiplomacyScreen:
 					return
 		return
 
+	def handleVassalPullDownCB ( self, iIndex ) :
+
+		for i in range(gc.getMAX_CIV_TEAMS()):
+			if ( gc.getTeam(i).isEverAlive() ):
+				gc.getTeam(i).freeVassal(gc.getPlayer(self.m_iActivePlayer).getTeam())			
+
+		iCount = 0
+		for i in range( gc.getMAX_CIV_TEAMS() ):
+			if (gc.getTeam(i).isEverAlive() and gc.getPlayer(self.m_iActivePlayer).getTeam() != i and not gc.getTeam(i).isAVassal()):
+				iCount = iCount + 1
+				if (iCount == iIndex):
+					gc.getTeam(gc.getPlayer(self.m_iActivePlayer).getTeam()).makePeace(i)
+					gc.getTeam(i).assignVassal(gc.getPlayer(self.m_iActivePlayer).getTeam(), True)
+					break
+					
+		self.refreshCtrl()
+
 	def handleAtWarPullDownCB ( self, argList ) :
 		iSelection, szWidget = argList
 		iPlayer = int(szWidget[szWidget.find("_")+1:])
 		iActualPlayer = self.getActualPlayer(iPlayer)
 		if (iSelection == 0):
 			gc.getTeam(gc.getPlayer(self.m_iActivePlayer).getTeam()).declareWar(gc.getPlayer(iActualPlayer).getTeam(), False)
-		else:
+		elif (iSelection == 1):
 			gc.getTeam(gc.getPlayer(self.m_iActivePlayer).getTeam()).makePeace(gc.getPlayer(iActualPlayer).getTeam())
-		return
 
+		#refresh to update teams
+		self.refreshCtrl()
+		
 	def handleAIWeightResetAll(self):
 		for i in range( gc.getMAX_CIV_PLAYERS() ):
 			if ( gc.getPlayer(i).isEverAlive() ):
@@ -356,9 +393,6 @@ class CvWorldBuilderDiplomacyScreen:
 		iActualPlayer = self.getActualPlayer(iPlayer)
 
 		szTextName = "WorldBuilderDiplomacySliderTextMiddle" + str(iPlayer)
-		print (szWidget)
-		print (iValue)
-		print (szTextName)
 
 		gc.getPlayer(iActualPlayer).AI_setAttitudeExtra(self.m_iActivePlayer, iValue)
 

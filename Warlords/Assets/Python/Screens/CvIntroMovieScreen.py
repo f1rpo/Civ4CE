@@ -33,6 +33,10 @@ class CvIntroMovieScreen:
 		self.createMovieScreen(self.currentMovie)
 	
 	def createMovieScreen(self, movieArtDef):
+	
+		if CyUserProfile().getGraphicOption(GraphicOptionTypes.GRAPHICOPTION_NO_MOVIES):
+			return
+		
 		# Create a new screen, called IntroMovieScreen, using the file CvIntroMovieScreen.py for input
 		screen = CyGInterfaceScreen( "IntroMovieScreen", CvScreenEnums.INTRO_MOVIE_SCREEN )
 		screen.setDimensions(screen.centerX(0), screen.centerY(0), -1, -1)
@@ -48,12 +52,10 @@ class CvIntroMovieScreen:
 		
 		# Play the movie
 		movieFilePath = CyArtFileMgr().getMovieArtInfo(movieArtDef).getPath()
-		print "PLAY", movieFilePath
 		screen.playMovie( movieFilePath, -1, -1, -1, -1, 0)
 		
 	def createLogoScreen(self):
 		screen = CyGInterfaceScreen( "IntroMovieScreen", CvScreenEnums.INTRO_MOVIE_SCREEN )
-		screen.setDimensions(screen.centerX(0), screen.centerY(0), 1024, 768)
 		screen.setRenderInterfaceOnly(True)
 		screen.showWindowBackground( False )
 		
@@ -61,14 +63,13 @@ class CvIntroMovieScreen:
 		screen.showScreen(PopupStates.POPUPSTATE_IMMEDIATE, False)
 		
 		# Background First
-		screen.setImageButton( "LogoBackground", ArtFileMgr.getInterfaceArtInfo("MAINMENU_LOAD").getPath(), -2, -2, 1028, 776, WidgetTypes.WIDGET_GENERAL, -1, -1 )
+		screen.setImageButton( "LogoBackground", ArtFileMgr.getInterfaceArtInfo("MAINMENU_LOAD").getPath(), screen.centerX(0)-2, screen.centerY(0)-2, 1028, 776, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 		
 		# Logos
-		screen.setImageButton( "Logos", ArtFileMgr.getInterfaceArtInfo("INTRO_LOGOS").getPath(), 256, 328, 512, 256, WidgetTypes.WIDGET_GENERAL, -1, -1 )
+		screen.setImageButton( "Logos", ArtFileMgr.getInterfaceArtInfo("INTRO_LOGOS").getPath(), screen.centerX(0)+233, screen.centerY(0)+331, 549, 294, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 		
-		screen.setLabel( "LegalText1", "Background", "<font=2>" + localText.getText("TXT_LEGAL_LINE_1", ()) + "</font>", CvUtil.FONT_CENTER_JUSTIFY, 512, 654, -0.1, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-		screen.setLabel( "LegalText2", "Background", "<font=2>" + localText.getText("TXT_LEGAL_LINE_2", ()) + "</font>", CvUtil.FONT_CENTER_JUSTIFY, 512, 674, -0.1, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-		print "LOGO"
+		screen.setLabel( "LegalText1", "Background", "<font=2>" + localText.getText("TXT_LEGAL_LINE_1", ()) + "</font>", CvUtil.FONT_CENTER_JUSTIFY, screen.centerX(0)+512, screen.centerY(0)+654, -0.1, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
+		screen.setLabel( "LegalText2", "Background", "<font=2>" + localText.getText("TXT_LEGAL_LINE_2", ()) + "</font>", CvUtil.FONT_CENTER_JUSTIFY, screen.centerX(0)+512, screen.centerY(0)+674, -0.1, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 		screen.setShowFor( 4000 )
 
 	def closeScreen(self):

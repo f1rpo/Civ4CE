@@ -24,6 +24,7 @@ public:
 	CvGame* getGame() { return m_pGame;	}	// Call from C++
 	bool isNone() { return (m_pGame==NULL); }
 
+	void updateScore(bool bForce);
 	void cycleCities(bool bForward, bool bAdd);
 	void cycleSelectionGroups(bool bClear, bool bForward, bool bWorkers);
 	bool cyclePlotUnits(CyPlot* pPlot, bool bForward, bool bAuto, int iCount);
@@ -128,6 +129,9 @@ public:
 	int getInitTech() const;
 	int getInitWonders() const;
 
+	int getAIAutoPlay() const;
+	void setAIAutoPlay(int iNewValue);
+
 	bool isScoreDirty() const;
 	void setScoreDirty(bool bNewValue);
 	bool isCircumnavigated() const;
@@ -166,6 +170,7 @@ public:
 	int getTeamRank(int /*TeamTypes*/ iIndex);
 	int getTeamScore(int /*TeamTypes*/ iIndex);
 	bool isOption(int /*GameOptionTypes*/ eIndex);
+	void setOption(int /*GameOptionTypes*/ eIndex, bool bEnabled);
 	bool isMPOption(int /*MultiplayerOptionTypes*/ eIndex);
 	bool isForcedControl(int /*ForceControlTypes*/ eIndex);
 	int getUnitCreatedCount(int /*UnitTypes*/ eIndex);

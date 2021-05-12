@@ -12,6 +12,8 @@ void CyGameCoreUtilsPythonInterface()
 {
 	OutputDebugString("Python Extension Module - CyGameCoreUtilsPythonInterface\n");
 
+	python::def("cyIntRange", cyIntRange,"int (int iNum, int iLow, int iHigh)");
+	python::def("cyFloatRange", cyFloatRange,"float (float fNum, float fLow, float fHigh)");
 	python::def("dxWrap", cyDxWrap,"int (int iDX)");
 	python::def("dyWrap", cyDyWrap,"int (int iDY)");
 	python::def("plotDistance", cyPlotDistance,"int (int iX1, int iY1, int iX2, int iY2)");

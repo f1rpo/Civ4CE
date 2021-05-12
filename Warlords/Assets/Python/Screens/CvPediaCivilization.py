@@ -30,8 +30,13 @@ class CvPediaCivilization:
 
 		self.X_TECH = 330
 		self.Y_TECH = 70
-		self.W_TECH = 425
+		self.W_TECH = 200
 		self.H_TECH = 110
+
+		self.X_BUILDING = 555
+		self.Y_BUILDING = 190
+		self.W_BUILDING = 200
+		self.H_BUILDING = 110
 
 		self.X_UNIT = 330
 		self.Y_UNIT = 190
@@ -39,7 +44,7 @@ class CvPediaCivilization:
 		self.H_UNIT = 110
 
 		self.X_LEADER = 555
-		self.Y_LEADER = 190
+		self.Y_LEADER = 70
 		self.W_LEADER = 200
 		self.H_LEADER = 110
 
@@ -84,6 +89,7 @@ class CvPediaCivilization:
 		    self.X_ICON + self.W_ICON/2 - self.ICON_SIZE/2, self.Y_ICON + self.H_ICON/2 - self.ICON_SIZE/2, self.ICON_SIZE, self.ICON_SIZE, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 
 		self.placeTech()
+		self.placeBuilding()
 		self.placeUnit()
 		self.placeLeader()
 		self.placeText()
@@ -102,7 +108,22 @@ class CvPediaCivilization:
 		for iTech in range(gc.getNumTechInfos()):
 			if (gc.getCivilizationInfo(self.iCivilization).isCivilizationFreeTechs(iTech)):
 				screen.attachImageButton( panelName, "", gc.getTechInfo(iTech).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iTech, 1, False )
-			
+	
+	def placeBuilding(self):
+		
+		screen = self.top.getScreen()
+		
+		panelName = self.top.getNextWidgetName()
+		screen.addPanel( panelName, localText.getText("TXT_KEY_UNIQUE_BUILDINGS", ()), "", false, true,
+				self.X_BUILDING, self.Y_BUILDING, self.W_BUILDING, self.H_BUILDING, PanelStyles.PANEL_STYLE_BLUE50 )
+		screen.attachLabel(panelName, "", "  ")
+		
+		for iBuilding in range(gc.getNumBuildingClassInfos()):
+			iUniqueBuilding = gc.getCivilizationInfo(self.iCivilization).getCivilizationBuildings(iBuilding);
+			iDefaultBuilding = gc.getBuildingClassInfo(iBuilding).getDefaultBuildingIndex();
+			if (iDefaultBuilding > -1 and iUniqueBuilding > -1 and iDefaultBuilding != iUniqueBuilding):
+				screen.attachImageButton( panelName, "", gc.getBuildingInfo(iUniqueBuilding).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, iUniqueBuilding, 1, False )
+				
 	def placeUnit(self):
 		
 		screen = self.top.getScreen()

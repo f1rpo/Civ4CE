@@ -4,6 +4,7 @@
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
 <!-- World Infos -->
+<!-- NOTE: If you remove any of these you need to update Interface/WorldPickerInfos.xml -->
 <Civ4WorldInfo xmlns="x-schema:CIV4GameInfoSchema.xml">
 	<WorldInfos>
 		<WorldInfo>

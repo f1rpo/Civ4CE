@@ -29,6 +29,14 @@ CyGame::CyGame(CvGameAI* pGame) : m_pGame(pGame)
 
 }
 
+void CyGame::updateScore(bool bForce)
+{
+	if (m_pGame)
+	{
+		m_pGame->updateScore(bForce);
+	}
+}
+
 void CyGame::cycleCities(bool bForward, bool bAdd)
 {
 	if (m_pGame)
@@ -492,6 +500,17 @@ int CyGame::getInitWonders() const
 	return (NULL != m_pGame ? m_pGame->getInitWonders() : 0);
 }
 
+int CyGame::getAIAutoPlay() const
+{
+	return (NULL != m_pGame ? m_pGame->getAIAutoPlay() : 0);
+}
+
+void CyGame::setAIAutoPlay(int iNewValue)
+{
+	if (m_pGame)
+		m_pGame->setAIAutoPlay(iNewValue);
+}
+
 bool CyGame::isScoreDirty() const
 {
 	return m_pGame ? m_pGame->isScoreDirty() : false;
@@ -666,6 +685,12 @@ int CyGame::getTeamScore(int /*TeamTypes*/ eTeam)
 bool CyGame::isOption(int /*GameOptionTypes*/ eIndex)
 {
 	return m_pGame ? m_pGame->isOption((GameOptionTypes)eIndex) : -1;
+}
+
+void CyGame::setOption(int /*GameOptionTypes*/ eIndex, bool bEnabled)
+{
+	if (m_pGame)
+		m_pGame->setOption((GameOptionTypes)eIndex, bEnabled);
 }
 
 bool CyGame::isMPOption(int /*MultiplayerOptionTypes*/ eIndex)

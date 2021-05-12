@@ -1,3 +1,4 @@
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -35,6 +36,7 @@
 	<ElementType name="bOpenBordersTrading" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bDefensivePactTrading" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bPermanentAllianceTrading" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bVassalTrading" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bBridgeBuilding" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bIrrigation" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bIgnoreIrrigation" content="textOnly" dt:type="boolean"/>
@@ -122,6 +124,7 @@
 		<element type="bOpenBordersTrading"/>
 		<element type="bDefensivePactTrading"/>
 		<element type="bPermanentAllianceTrading"/>
+		<element type="bVassalTrading"/>
 		<element type="bBridgeBuilding"/>
 		<element type="bIrrigation"/>
 		<element type="bIgnoreIrrigation"/>

@@ -9,6 +9,7 @@
 class CvUnit;
 class CvCity;
 class CvPlot;
+class CvSelectionGroup;
 
 class CvDLLEventReporterIFaceBase
 {
@@ -29,6 +30,7 @@ public:
 	virtual void firstContact(TeamTypes eTeamID1, TeamTypes eTeamID2) = 0;						
 	virtual void combatResult(CvUnit* pWinner, CvUnit* pLoser) = 0;					
 	virtual void improvementBuilt(int iImprovementType, int iX, int iY) = 0;	
+	virtual void improvementDestroyed(int iImprovementType, int iPlayer, int iX, int iY) = 0;	
 	virtual void routeBuilt(int RouteType, int iX, int iY) = 0;	
 
 	virtual void plotRevealed(CvPlot *pPlot, TeamTypes eTeam) = 0;
@@ -36,6 +38,7 @@ public:
 	virtual void cityBuilt(CvCity *pCity) = 0;
 	virtual void cityRazed(CvCity *pCity, PlayerTypes ePlayer) = 0;
 	virtual void cityAcquired(PlayerTypes eOldOwner, PlayerTypes ePlayer, CvCity* pCity, bool bConquest, bool bTrade) = 0;
+	virtual void cityAcquiredAndKept(PlayerTypes ePlayer, CvCity* pCity) = 0;
 	virtual void cityLost(CvCity *pCity) = 0;
 	virtual void cultureExpansion( CvCity *pCity, PlayerTypes ePlayer) = 0;
 	virtual void cityGrowth(CvCity *pCity, PlayerTypes ePlayer) = 0;
@@ -43,6 +46,8 @@ public:
 	virtual void cityBuildingUnit(CvCity* pCity, UnitTypes eUnitType) = 0;
 	virtual void cityBuildingBuilding(CvCity* pCity, BuildingTypes eBuildingType) = 0;
 	virtual void cityRename(CvCity* pCity) = 0;
+
+	virtual void selectionGroupPushMission(CvSelectionGroup* pSelectionGroup, MissionTypes eMission) = 0;
 
 	virtual void unitMove(CvPlot* pPlot, CvUnit* pUnit) = 0;					
 	virtual void unitSetXY(CvPlot* pPlot, CvUnit* pUnit) = 0;					
@@ -53,6 +58,7 @@ public:
 	virtual void unitPromoted(CvUnit *pUnit, PromotionTypes ePromotion) = 0;
 	virtual void unitSelected(CvUnit *pUnit) = 0;
 	virtual void unitRename(CvUnit* pUnit) = 0;
+	virtual void unitPillage(CvUnit* pUnit, ImprovementTypes eImprovement, RouteTypes eRoute, PlayerTypes ePlayer) = 0;
 
 	virtual void goodyReceived(PlayerTypes ePlayer, CvPlot *pGoodyPlot, CvUnit *pGoodyUnit, GoodyTypes eGoodyType) = 0;
 
@@ -66,15 +72,19 @@ public:
 
 	virtual void religionFounded(ReligionTypes eType, PlayerTypes ePlayer) = 0;
 	virtual void religionSpread(ReligionTypes eType, PlayerTypes ePlayer, CvCity* pSpreadCity) = 0;
+	virtual void religionRemove(ReligionTypes eType, PlayerTypes ePlayer, CvCity* pSpreadCity) = 0;
 
 	virtual void goldenAge(PlayerTypes ePlayer) = 0;
 	virtual void endGoldenAge(PlayerTypes ePlayer) = 0;
+	virtual void changeWar(bool bWar, TeamTypes eTeam, TeamTypes eOtherTeam) = 0;
 
 	virtual void setPlayerAlive(PlayerTypes ePlayerID, bool bNewValue) = 0;
 
 	virtual void chat(char *szString) = 0;		
 
 	virtual void victory(TeamTypes eNewWinner, VictoryTypes eNewVictory) = 0;
+
+	virtual void vassalState(TeamTypes eMaster, TeamTypes eVassal, bool bVassal) = 0;
 };
 
 #endif	// CvDLLEventReporterIFaceBase_h

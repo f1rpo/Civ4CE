@@ -533,5 +533,29 @@
 		<SlideShowRandomInfo>
 			<Path>Art/Interface/Screens/Credits/Cred_064.dds</Path>
 		</SlideShowRandomInfo>
+		<SlideShowRandomInfo>
+			<Path>Art/Interface/Screens/Credits/Cred_065.dds</Path>
+		</SlideShowRandomInfo>
+		<SlideShowRandomInfo>
+			<Path>Art/Interface/Screens/Credits/Cred_066.dds</Path>
+		</SlideShowRandomInfo>
+		<SlideShowRandomInfo>
+			<Path>Art/Interface/Screens/Credits/Cred_067.dds</Path>
+		</SlideShowRandomInfo>
+		<SlideShowRandomInfo>
+			<Path>Art/Interface/Screens/Credits/Cred_068.dds</Path>
+		</SlideShowRandomInfo>
+		<SlideShowRandomInfo>
+			<Path>Art/Interface/Screens/Credits/Cred_069.dds</Path>
+		</SlideShowRandomInfo>
+		<SlideShowRandomInfo>
+			<Path>Art/Interface/Screens/Credits/Cred_070.dds</Path>
+		</SlideShowRandomInfo>
+		<SlideShowRandomInfo>
+			<Path>Art/Interface/Screens/Credits/Cred_071.dds</Path>
+		</SlideShowRandomInfo>
+		<SlideShowRandomInfo>
+			<Path>Art/Interface/Screens/Credits/Cred_072.dds</Path>
+		</SlideShowRandomInfo>
 	</SlideShowRandomInfos>
 </Civ4SlideShowInfos>

@@ -115,7 +115,7 @@ void CvReplayInfo::createInfo(PlayerTypes ePlayer)
 	for (int iPlayer = 0; iPlayer < MAX_PLAYERS; iPlayer++)
 	{
 		CvPlayer& player = GET_PLAYER((PlayerTypes)iPlayer);
-		if (player.isEverAlive() && !player.isBarbarian())
+		if (player.isEverAlive())
 		{
 			mapPlayers[(PlayerTypes)iPlayer] = iPlayerIndex;
 			if ((PlayerTypes)iPlayer == game.getActivePlayer())

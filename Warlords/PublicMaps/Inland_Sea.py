@@ -14,6 +14,10 @@ import CvUtil
 import CvMapGeneratorUtil
 import sys
 from CvMapGeneratorUtil import HintedWorld
+from CvMapGeneratorUtil import BonusBalancer
+
+balancer = BonusBalancer()
+
 
 hinted_world = None
 
@@ -23,6 +27,83 @@ def getDescription():
 def isAdvancedMap():
 	"This map should show up in simple mode"
 	return 0
+
+def getNumCustomMapOptions():
+	return 2
+
+def getNumHiddenCustomMapOptions():
+	return 2
+
+def getCustomMapOptionName(argsList):
+	[iOption] = argsList
+	option_names = {
+		0:	"TXT_KEY_MAP_WORLD_WRAP",
+		1:  "TXT_KEY_CONCEPT_RESOURCES"
+		}
+	translated_text = unicode(CyTranslator().getText(option_names[iOption], ()))
+	return translated_text
+
+def getNumCustomMapOptionValues(argsList):
+	[iOption] = argsList
+	option_values = {
+		0:	2,
+		1:	2
+		}
+	return option_values[iOption]
+	
+def getCustomMapOptionDescAt(argsList):
+	[iOption, iSelection] = argsList
+	selection_names = {
+		0:	{
+			0: "TXT_KEY_MAP_WRAP_FLAT",
+			1: "TXT_KEY_MAP_WRAP_CYLINDER"
+		},
+		1:	{
+			0: "TXT_KEY_WORLD_STANDARD",
+			1: "TXT_KEY_MAP_BALANCED"
+			}
+		}
+	translated_text = unicode(CyTranslator().getText(selection_names[iOption][iSelection], ()))
+	return translated_text
+	
+def getCustomMapOptionDefault(argsList):
+	[iOption] = argsList
+	option_defaults = {
+		0:	0,
+		1:  0
+		}
+	return option_defaults[iOption]
+
+def isRandomCustomMapOption(argsList):
+	[iOption] = argsList
+	option_random = {
+		0:	false,
+		1:  false
+		}
+	return option_random[iOption]
+
+def getWrapX():
+	map = CyMap()
+	return (map.getCustomMapOption(0) == 1)
+	
+def getWrapY():
+	return false
+
+def normalizeAddExtras():
+	if (CyMap().getCustomMapOption(1) == 1):
+		balancer.normalizeAddExtras()
+	CyPythonMgr().allowDefaultImpl()	# do the rest of the usual normalizeStartingPlots stuff, don't overrride
+
+def addBonusType(argsList):
+	[iBonusType] = argsList
+	gc = CyGlobalContext()
+	type_string = gc.getBonusInfo(iBonusType).getType()
+
+	if (CyMap().getCustomMapOption(1) == 1):
+		if (type_string in balancer.resourcesToBalance) or (type_string in balancer.resourcesToEliminate):
+			return None # don't place any of this bonus randomly
+		
+	CyPythonMgr().allowDefaultImpl() # pretend we didn't implement this method, and let C handle this bonus in the default way
 
 def beforeGeneration():
 	"Set up global variables for start point templates"
@@ -497,11 +578,6 @@ def getStartingPlot(playerID, validFn = None):
 		iPass += 1
 
 	return -1
-
-def getWrapX():
-	return False
-def getWrapY():
-	return False
 
 def getTopLatitude():
 	return 60

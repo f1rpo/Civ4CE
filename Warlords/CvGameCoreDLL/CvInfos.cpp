@@ -523,18 +523,15 @@ void CvHotkeyInfo::read(FDataStreamBase* pStream)
 	pStream->Read(&m_bCtrlDownAlt);
 	pStream->ReadString(m_szHotKey);
 	pStream->ReadString(m_szHotKeyDescriptionKey);
-	if (uiFlag & SAVEDATA_LOCALIZED)
-	{
-		pStream->ReadString(m_szHotKeyAltDescriptionKey);
-		pStream->ReadString(m_szHotKeyString);
-	}
+	pStream->ReadString(m_szHotKeyAltDescriptionKey);
+	pStream->ReadString(m_szHotKeyString);
 }
 
 void CvHotkeyInfo::write(FDataStreamBase* pStream)
 {
 	CvInfoBase::write(pStream);
 
-	uint uiFlag = SAVEDATA_LOCALIZED;
+	uint uiFlag = 0;
 	pStream->Write(uiFlag);		// flag for expansion
 
 	pStream->Write(m_iHotKeyVal);
@@ -929,7 +926,8 @@ m_iMissionType(NO_MISSION),
 m_bVisible(false), 
 m_piYieldChange(NULL), 
 m_piCommerceChange(NULL), 
-m_piFlavorValue(NULL)
+m_piFlavorValue(NULL),
+m_iExperience(0)
 {
 }
 
@@ -970,6 +968,11 @@ void CvSpecialistInfo::setMissionType(int iNewType)
 bool CvSpecialistInfo::isVisible() const		
 {
 	return m_bVisible;
+}
+
+int CvSpecialistInfo::getExperience() const
+{
+	return m_iExperience;
 }
 
 // Arrays
@@ -1051,6 +1054,8 @@ bool CvSpecialistInfo::read(CvXMLLoadUtility* pXML)
 		pXML->InitList(&m_piCommerceChange, NUM_COMMERCE_TYPES);
 	}
 
+	pXML->GetChildXmlValByName(&m_iExperience, "iExperience");
+
 	pXML->SetVariableListTagPair(&m_piFlavorValue, "Flavors", GC.getFlavorTypes(), GC.getNumFlavorTypes());
 
 	return true;
@@ -1097,6 +1102,7 @@ m_bGoldTrading(false),
 m_bOpenBordersTrading(false),
 m_bDefensivePactTrading(false),
 m_bPermanentAllianceTrading(false),
+m_bVassalStateTrading(false),
 m_bBridgeBuilding(false),
 m_bIrrigation(false),
 m_bIgnoreIrrigation(false),
@@ -1272,6 +1278,11 @@ bool CvTechInfo::isPermanentAllianceTrading() const
 	return m_bPermanentAllianceTrading;
 }
 
+bool CvTechInfo::isVassalStateTrading() const
+{
+	return m_bVassalStateTrading;
+}
+
 bool CvTechInfo::isBridgeBuilding() const
 {
 	return m_bBridgeBuilding;
@@ -1393,6 +1404,7 @@ void CvTechInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_bOpenBordersTrading);
 	stream->Read(&m_bDefensivePactTrading);
 	stream->Read(&m_bPermanentAllianceTrading);
+	stream->Read(&m_bVassalStateTrading);
 	stream->Read(&m_bBridgeBuilding);
 	stream->Read(&m_bIrrigation);
 	stream->Read(&m_bIgnoreIrrigation);
@@ -1463,6 +1475,7 @@ void CvTechInfo::write(FDataStreamBase* stream)
 	stream->Write(m_bOpenBordersTrading);
 	stream->Write(m_bDefensivePactTrading);
 	stream->Write(m_bPermanentAllianceTrading);
+	stream->Write(m_bVassalStateTrading);
 	stream->Write(m_bBridgeBuilding);
 	stream->Write(m_bIrrigation);
 	stream->Write(m_bIgnoreIrrigation);
@@ -1524,6 +1537,7 @@ bool CvTechInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_bOpenBordersTrading, "bOpenBordersTrading");
 	pXML->GetChildXmlValByName(&m_bDefensivePactTrading, "bDefensivePactTrading");
 	pXML->GetChildXmlValByName(&m_bPermanentAllianceTrading, "bPermanentAllianceTrading");
+	pXML->GetChildXmlValByName(&m_bVassalStateTrading, "bVassalTrading");
 	pXML->GetChildXmlValByName(&m_bBridgeBuilding, "bBridgeBuilding");
 	pXML->GetChildXmlValByName(&m_bIrrigation, "bIrrigation");
 	pXML->GetChildXmlValByName(&m_bIgnoreIrrigation, "bIgnoreIrrigation");
@@ -1569,6 +1583,7 @@ bool CvTechInfo::read(CvXMLLoadUtility* pXML)
 //
 //------------------------------------------------------------------------------------------------------
 CvPromotionInfo::CvPromotionInfo() :
+m_iPrereqPromotion(NO_PROMOTION),
 m_iPrereqOrPromotion1(NO_PROMOTION),
 m_iPrereqOrPromotion2(NO_PROMOTION),
 m_iTechPrereq(NO_TECH),
@@ -1588,8 +1603,16 @@ m_iAdjacentTileHealChange(0),
 m_iCombatPercent(0),
 m_iCityAttackPercent(0),
 m_iCityDefensePercent(0),
+m_iHillsAttackPercent(0),
 m_iHillsDefensePercent(0),
 m_iCommandType(NO_COMMAND),
+m_iRevoltProtection(0),
+m_iCollateralDamageProtection(0),
+m_iPillageChange(0),
+m_iUpgradeDiscount(0),
+m_iExperiencePercent(0),
+m_iKamikazePercent(0),
+m_bLeader(false),  // Warlords
 m_bBlitz(false),
 m_bAmphib(false),
 m_bRiver(false),
@@ -1623,6 +1646,16 @@ CvPromotionInfo::~CvPromotionInfo()
 	SAFE_DELETE_ARRAY(m_pbTerrainDoubleMove);
 	SAFE_DELETE_ARRAY(m_pbFeatureDoubleMove);
 	SAFE_DELETE_ARRAY(m_pbUnitCombat);
+}
+
+int CvPromotionInfo::getPrereqPromotion() const			
+{
+	return m_iPrereqPromotion;
+}
+
+void CvPromotionInfo::setPrereqPromotion(int i)				
+{
+	m_iPrereqPromotion = i;
 }
 
 int CvPromotionInfo::getPrereqOrPromotion1() const			
@@ -1730,6 +1763,11 @@ int CvPromotionInfo::getCityDefensePercent() const
 	return m_iCityDefensePercent;
 }
 
+int CvPromotionInfo::getHillsAttackPercent() const
+{
+	return m_iHillsAttackPercent;
+}
+
 int CvPromotionInfo::getHillsDefensePercent() const
 {
 	return m_iHillsDefensePercent;
@@ -1743,6 +1781,41 @@ int CvPromotionInfo::getCommandType() const
 void CvPromotionInfo::setCommandType(int iNewType)
 {
 	m_iCommandType = iNewType;
+}
+
+int CvPromotionInfo::getRevoltProtection() const
+{
+	return m_iRevoltProtection;
+}
+
+int CvPromotionInfo::getCollateralDamageProtection() const
+{
+	return m_iCollateralDamageProtection;
+}
+
+int CvPromotionInfo::getPillageChange() const
+{
+	return m_iPillageChange;
+}
+
+int CvPromotionInfo::getUpgradeDiscount() const
+{
+	return m_iUpgradeDiscount;
+}
+
+int CvPromotionInfo::getExperiencePercent() const
+{
+	return m_iExperiencePercent;
+}
+
+int CvPromotionInfo::getKamikazePercent() const			
+{
+	return m_iKamikazePercent;
+}
+
+bool CvPromotionInfo::isLeader() const			
+{
+	return m_bLeader;
 }
 
 bool CvPromotionInfo::isBlitz() const			
@@ -1848,6 +1921,7 @@ void CvPromotionInfo::read(FDataStreamBase* stream)
 	uint uiFlag=0;
 	stream->Read(&uiFlag);		// flag for expansion
 	
+	stream->Read(&m_iPrereqPromotion);			
 	stream->Read(&m_iPrereqOrPromotion1);			
 	stream->Read(&m_iPrereqOrPromotion2);			
 
@@ -1868,9 +1942,17 @@ void CvPromotionInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iCombatPercent);
 	stream->Read(&m_iCityAttackPercent);
 	stream->Read(&m_iCityDefensePercent);
+	stream->Read(&m_iHillsAttackPercent);
 	stream->Read(&m_iHillsDefensePercent);
 	stream->Read(&m_iCommandType);
+	stream->Read(&m_iRevoltProtection);
+	stream->Read(&m_iCollateralDamageProtection);
+	stream->Read(&m_iPillageChange);
+	stream->Read(&m_iUpgradeDiscount);
+	stream->Read(&m_iExperiencePercent);
+	stream->Read(&m_iKamikazePercent);
 
+	stream->Read(&m_bLeader);
 	stream->Read(&m_bBlitz);
 	stream->Read(&m_bAmphib);
 	stream->Read(&m_bRiver);
@@ -1916,9 +1998,10 @@ void CvPromotionInfo::write(FDataStreamBase* stream)
 {
 	CvHotkeyInfo::write(stream);
 
-	uint uiFlag=0;
+	uint uiFlag = 0;
 	stream->Write(uiFlag);		// flag for expansion
 
+	stream->Write(m_iPrereqPromotion);			
 	stream->Write(m_iPrereqOrPromotion1);			
 	stream->Write(m_iPrereqOrPromotion2);			
 
@@ -1939,9 +2022,17 @@ void CvPromotionInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iCombatPercent);
 	stream->Write(m_iCityAttackPercent);
 	stream->Write(m_iCityDefensePercent);
+	stream->Write(m_iHillsAttackPercent);
 	stream->Write(m_iHillsDefensePercent);
 	stream->Write(m_iCommandType);
+	stream->Write(m_iRevoltProtection);
+	stream->Write(m_iCollateralDamageProtection);
+	stream->Write(m_iPillageChange);
+	stream->Write(m_iUpgradeDiscount);
+	stream->Write(m_iExperiencePercent);
+	stream->Write(m_iKamikazePercent);
 
+	stream->Write(m_bLeader);
 	stream->Write(m_bBlitz);
 	stream->Write(m_bAmphib);
 	stream->Write(m_bRiver);
@@ -1977,6 +2068,11 @@ bool CvPromotionInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(szTextVal, "TechPrereq");
 	m_iTechPrereq = pXML->FindInInfoClass(szTextVal, GC.getTechInfo(), sizeof(GC.getTechInfo((TechTypes)0)), GC.getNumTechInfos());
 
+	pXML->GetChildXmlValByName(&m_bLeader, "bLeader");
+	if (m_bLeader)
+	{
+		m_bGraphicalOnly = true;  // don't show in Civilopedia list of promotions
+	}
 	pXML->GetChildXmlValByName(&m_bBlitz, "bBlitz");
 	pXML->GetChildXmlValByName(&m_bAmphib, "bAmphib");
 	pXML->GetChildXmlValByName(&m_bRiver, "bRiver");
@@ -2000,7 +2096,14 @@ bool CvPromotionInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iCombatPercent, "iCombatPercent");
 	pXML->GetChildXmlValByName(&m_iCityAttackPercent, "iCityAttack");
 	pXML->GetChildXmlValByName(&m_iCityDefensePercent, "iCityDefense");
+	pXML->GetChildXmlValByName(&m_iHillsAttackPercent, "iHillsAttack");
 	pXML->GetChildXmlValByName(&m_iHillsDefensePercent, "iHillsDefense");
+	pXML->GetChildXmlValByName(&m_iRevoltProtection, "iRevoltProtection");
+	pXML->GetChildXmlValByName(&m_iCollateralDamageProtection, "iCollateralDamageProtection");
+	pXML->GetChildXmlValByName(&m_iPillageChange, "iPillageChange");
+	pXML->GetChildXmlValByName(&m_iUpgradeDiscount, "iUpgradeDiscount");
+	pXML->GetChildXmlValByName(&m_iExperiencePercent, "iExperiencePercent");
+	pXML->GetChildXmlValByName(&m_iKamikazePercent, "iKamikazePercent");
 
 	pXML->SetVariableListTagPair(&m_piTerrainDefensePercent, "TerrainDefenses", GC.getTerrainInfo(), sizeof(GC.getTerrainInfo((TerrainTypes)0)), GC.getNumTerrainInfos());
 	pXML->SetVariableListTagPair(&m_piFeatureDefensePercent, "FeatureDefenses", GC.getFeatureInfo(), sizeof(GC.getFeatureInfo((FeatureTypes)0)), GC.getNumFeatureInfos());
@@ -2030,7 +2133,7 @@ m_bSound(false),
 m_bTarget(false),
 m_bBuild(false),
 m_bVisible(false),
-m_eEntityEvent(ENTEVENT_NONE)
+m_eEntityEvent(ENTITY_EVENT_NONE)
 {
 }
 
@@ -2102,7 +2205,7 @@ bool CvMissionInfo::read(CvXMLLoadUtility* pXML)
 	}
 	else
 	{
-		m_eEntityEvent = ENTEVENT_NONE;
+		m_eEntityEvent = ENTITY_EVENT_NONE;
 	}
 
 	return true;
@@ -2813,6 +2916,7 @@ m_iCollateralDamageMaxUnits(0),
 m_iCityAttackModifier(0),
 m_iCityDefenseModifier(0),
 m_iAnimalCombatModifier(0),
+m_iHillsAttackModifier(0),
 m_iHillsDefenseModifier(0),
 m_iBombRate(0),
 m_iBombardRate(0),
@@ -2877,6 +2981,10 @@ m_bMechanized(false),
 m_bRenderBelowWater(false),
 m_fUnitMaxSpeed(0.0f),
 m_pbUpgradeUnitClass(NULL),
+m_pbTargetUnitClass(NULL),
+m_pbTargetUnitCombat(NULL),
+m_pbDefenderUnitClass(NULL),
+m_pbDefenderUnitCombat(NULL),
 m_pbUnitAIType(NULL),
 m_pbNotUnitAIType(NULL),
 m_pbBuilds(NULL),
@@ -2895,6 +3003,7 @@ m_piFeatureDefenseModifier(NULL),
 m_piUnitClassAttackModifier(NULL),
 m_piUnitClassDefenseModifier(NULL),
 m_piUnitCombatModifier(NULL),
+m_piUnitCombatCollateralImmune(NULL),
 m_piDomainModifier(NULL),
 m_piBonusProductionModifier(NULL),
 m_piUnitGroupRequired(NULL),
@@ -2903,6 +3012,7 @@ m_pbFeatureNative(NULL),
 m_pbFreePromotions(NULL),
 m_paszEarlyArtDefineTags(NULL),
 m_paszLateArtDefineTags(NULL),
+m_paszMiddleArtDefineTags(NULL),
 m_paszUnitNames(NULL)
 {
 }
@@ -2917,6 +3027,10 @@ m_paszUnitNames(NULL)
 CvUnitInfo::~CvUnitInfo()
 {
 	SAFE_DELETE_ARRAY(m_pbUpgradeUnitClass);
+	SAFE_DELETE_ARRAY(m_pbTargetUnitClass);
+	SAFE_DELETE_ARRAY(m_pbTargetUnitCombat);
+	SAFE_DELETE_ARRAY(m_pbDefenderUnitClass);
+	SAFE_DELETE_ARRAY(m_pbDefenderUnitCombat);
 	SAFE_DELETE_ARRAY(m_pbUnitAIType);
 	SAFE_DELETE_ARRAY(m_pbNotUnitAIType);
 	SAFE_DELETE_ARRAY(m_pbBuilds);
@@ -2935,6 +3049,7 @@ CvUnitInfo::~CvUnitInfo()
 	SAFE_DELETE_ARRAY(m_piUnitClassAttackModifier);
 	SAFE_DELETE_ARRAY(m_piUnitClassDefenseModifier);
 	SAFE_DELETE_ARRAY(m_piUnitCombatModifier);
+	SAFE_DELETE_ARRAY(m_piUnitCombatCollateralImmune);
 	SAFE_DELETE_ARRAY(m_piDomainModifier);
 	SAFE_DELETE_ARRAY(m_piBonusProductionModifier);
 	SAFE_DELETE_ARRAY(m_piUnitGroupRequired);
@@ -2943,6 +3058,7 @@ CvUnitInfo::~CvUnitInfo()
 	SAFE_DELETE_ARRAY(m_pbFreePromotions);
 	SAFE_DELETE_ARRAY(m_paszEarlyArtDefineTags);
 	SAFE_DELETE_ARRAY(m_paszLateArtDefineTags);
+	SAFE_DELETE_ARRAY(m_paszMiddleArtDefineTags);
 	SAFE_DELETE_ARRAY(m_paszUnitNames);
 }
 
@@ -3026,6 +3142,11 @@ int CvUnitInfo::getCombat() const
 	return m_iCombat;
 }
 
+void CvUnitInfo::setCombat(int iNum)
+{
+	m_iCombat = iNum;
+}
+
 int CvUnitInfo::getAirCombat() const
 {
 	return m_iAirCombat;
@@ -3099,6 +3220,11 @@ int CvUnitInfo::getCityDefenseModifier() const
 int CvUnitInfo::getAnimalCombatModifier() const
 {
 	return m_iAnimalCombatModifier;
+}
+
+int CvUnitInfo::getHillsAttackModifier() const
+{
+	return m_iHillsAttackModifier;
 }
 
 int CvUnitInfo::getHillsDefenseModifier() const
@@ -3351,6 +3477,11 @@ bool CvUnitInfo::isInvisible() const
 	return m_bInvisible;
 }
 
+void CvUnitInfo::setInvisible(bool bEnable)
+{
+	m_bInvisible = bEnable;
+}
+
 bool CvUnitInfo::isFirstStrikeImmune() const
 {
 	return m_bFirstStrikeImmune;
@@ -3486,6 +3617,13 @@ int CvUnitInfo::getUnitCombatModifier(int i) const
 	return m_piUnitCombatModifier ? m_piUnitCombatModifier[i] : -1;
 }
 
+int CvUnitInfo::getUnitCombatCollateralImmune(int i) const
+{
+	FAssertMsg(i < GC.getNumUnitCombatInfos(), "Index out of bounds");
+	FAssertMsg(i > -1, "Index out of bounds");
+	return m_piUnitCombatCollateralImmune ? m_piUnitCombatCollateralImmune[i] : -1;
+}
+
 int CvUnitInfo::getDomainModifier(int i) const
 {
 	FAssertMsg(i < NUM_DOMAIN_TYPES, "Index out of bounds");
@@ -3512,6 +3650,34 @@ bool CvUnitInfo::getUpgradeUnitClass(int i) const
 	FAssertMsg(i < GC.getNumUnitClassInfos(), "Index out of bounds");
 	FAssertMsg(i > -1, "Index out of bounds");
 	return m_pbUpgradeUnitClass ? m_pbUpgradeUnitClass[i] : false;
+}
+
+bool CvUnitInfo::getTargetUnitClass(int i) const
+{
+	FAssertMsg(i < GC.getNumUnitClassInfos(), "Index out of bounds");
+	FAssertMsg(i > -1, "Index out of bounds");
+	return m_pbTargetUnitClass ? m_pbTargetUnitClass[i] : false;
+}
+
+bool CvUnitInfo::getTargetUnitCombat(int i) const
+{
+	FAssertMsg(i < GC.getNumUnitCombatInfos(), "Index out of bounds");
+	FAssertMsg(i > -1, "Index out of bounds");
+	return m_pbTargetUnitCombat ? m_pbTargetUnitCombat[i] : false;
+}
+
+bool CvUnitInfo::getDefenderUnitClass(int i) const
+{
+	FAssertMsg(i < GC.getNumUnitClassInfos(), "Index out of bounds");
+	FAssertMsg(i > -1, "Index out of bounds");
+	return m_pbDefenderUnitClass ? m_pbDefenderUnitClass[i] : false;
+}
+
+bool CvUnitInfo::getDefenderUnitCombat(int i) const
+{
+	FAssertMsg(i < GC.getNumUnitCombatInfos(), "Index out of bounds");
+	FAssertMsg(i > -1, "Index out of bounds");
+	return m_pbDefenderUnitCombat ? m_pbDefenderUnitCombat[i] : false;
 }
 
 bool CvUnitInfo::getUnitAIType(int i) const			
@@ -3598,6 +3764,16 @@ bool CvUnitInfo::getFreePromotions(int i) const
 	return m_pbFreePromotions ? m_pbFreePromotions[i] : false;
 }
 
+int CvUnitInfo::getLeaderPromotion() const
+{
+	return m_iLeaderPromotion;
+}
+
+int CvUnitInfo::getLeaderExperience() const
+{
+	return m_iLeaderExperience;
+}
+
 const TCHAR* CvUnitInfo::getEarlyArtDefineTag(int i) const
 {
 	FAssertMsg(i < getGroupDefinitions(), "Index out of bounds");
@@ -3626,6 +3802,20 @@ void CvUnitInfo::setLateArtDefineTag(int i, const TCHAR* szVal)
 	m_paszLateArtDefineTags[i] = szVal;
 }
 
+const TCHAR* CvUnitInfo::getMiddleArtDefineTag(int i) const
+{
+	FAssertMsg(i < getGroupDefinitions(), "Index out of bounds");
+	FAssertMsg(i > -1, "Index out of bounds");
+	return (m_paszMiddleArtDefineTags) ? m_paszMiddleArtDefineTags[i] : NULL;
+}
+
+void CvUnitInfo::setMiddleArtDefineTag(int i, const TCHAR* szVal)
+{
+	FAssertMsg(i < getGroupDefinitions(), "Index out of bounds");
+	FAssertMsg(i > -1, "Index out of bounds");
+	m_paszMiddleArtDefineTags[i] = szVal;
+}
+
 const TCHAR* CvUnitInfo::getUnitNames(int i) const
 {
 	FAssertMsg(i < getNumUnitNames(), "Index out of bounds");
@@ -3634,15 +3824,19 @@ const TCHAR* CvUnitInfo::getUnitNames(int i) const
 }
 
 
-const CvArtInfoUnit* CvUnitInfo::getArtInfo(int i, bool bLate) const
+const CvArtInfoUnit* CvUnitInfo::getArtInfo(int i, EraTypes eEra) const
 {
-	if (bLate && !isEmpty(getLateArtDefineTag(i)))
+	if (!isEmpty(getLateArtDefineTag(i)) && eEra > GC.getNumEraInfos() / 2)
 	{
-		return ARTFILEMGR.getUnitArtInfo( getLateArtDefineTag(i));
+		return ARTFILEMGR.getUnitArtInfo(getLateArtDefineTag(i));
+	}
+	else if (!isEmpty(getMiddleArtDefineTag(i)) && eEra > GC.getNumEraInfos() / 4)
+	{
+		return ARTFILEMGR.getUnitArtInfo(getMiddleArtDefineTag(i));
 	}
 	else
 	{
-		return ARTFILEMGR.getUnitArtInfo( getEarlyArtDefineTag(i));
+		return ARTFILEMGR.getUnitArtInfo(getEarlyArtDefineTag(i));
 	}
 }
 
@@ -3684,6 +3878,7 @@ void CvUnitInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iCityAttackModifier);
 	stream->Read(&m_iCityDefenseModifier);
 	stream->Read(&m_iAnimalCombatModifier);
+	stream->Read(&m_iHillsAttackModifier);
 	stream->Read(&m_iHillsDefenseModifier);
 	stream->Read(&m_iBombRate);
 	stream->Read(&m_iBombardRate);
@@ -3786,6 +3981,10 @@ void CvUnitInfo::read(FDataStreamBase* stream)
 	m_piUnitCombatModifier = new int[GC.getNumUnitCombatInfos()];
 	stream->Read(GC.getNumUnitCombatInfos(), m_piUnitCombatModifier);
 
+	SAFE_DELETE_ARRAY(m_piUnitCombatCollateralImmune);
+	m_piUnitCombatCollateralImmune = new int[GC.getNumUnitCombatInfos()];
+	stream->Read(GC.getNumUnitCombatInfos(), m_piUnitCombatCollateralImmune);
+
 	SAFE_DELETE_ARRAY(m_piDomainModifier);
 	m_piDomainModifier = new int[NUM_DOMAIN_TYPES];
 	stream->Read(NUM_DOMAIN_TYPES, m_piDomainModifier);
@@ -3801,6 +4000,22 @@ void CvUnitInfo::read(FDataStreamBase* stream)
 	SAFE_DELETE_ARRAY(m_pbUpgradeUnitClass);
 	m_pbUpgradeUnitClass = new bool[GC.getNumUnitClassInfos()];
 	stream->Read(GC.getNumUnitClassInfos(), m_pbUpgradeUnitClass);
+
+	SAFE_DELETE_ARRAY(m_pbTargetUnitClass);
+	m_pbTargetUnitClass = new bool[GC.getNumUnitClassInfos()];
+	stream->Read(GC.getNumUnitClassInfos(), m_pbTargetUnitClass);
+
+	SAFE_DELETE_ARRAY(m_pbTargetUnitCombat);
+	m_pbTargetUnitCombat = new bool[GC.getNumUnitCombatInfos()];
+	stream->Read(GC.getNumUnitCombatInfos(), m_pbTargetUnitCombat);
+
+	SAFE_DELETE_ARRAY(m_pbDefenderUnitClass);
+	m_pbDefenderUnitClass = new bool[GC.getNumUnitClassInfos()];
+	stream->Read(GC.getNumUnitClassInfos(), m_pbDefenderUnitClass);
+
+	SAFE_DELETE_ARRAY(m_pbDefenderUnitCombat);
+	m_pbDefenderUnitCombat = new bool[GC.getNumUnitCombatInfos()];
+	stream->Read(GC.getNumUnitCombatInfos(), m_pbDefenderUnitCombat);
 
 	SAFE_DELETE_ARRAY(m_pbUnitAIType);
 	m_pbUnitAIType = new bool[NUM_UNITAI_TYPES];
@@ -3850,6 +4065,9 @@ void CvUnitInfo::read(FDataStreamBase* stream)
 	m_pbFreePromotions = new bool[GC.getNumPromotionInfos()];
 	stream->Read(GC.getNumPromotionInfos(), m_pbFreePromotions);
 
+	stream->Read(&m_iLeaderPromotion);
+	stream->Read(&m_iLeaderExperience);
+
 	SAFE_DELETE_ARRAY(m_paszEarlyArtDefineTags);
 	m_paszEarlyArtDefineTags = new CvString [m_iGroupDefinitions];
 	stream->ReadString(m_iGroupDefinitions, m_paszEarlyArtDefineTags);
@@ -3857,6 +4075,10 @@ void CvUnitInfo::read(FDataStreamBase* stream)
 	SAFE_DELETE_ARRAY(m_paszLateArtDefineTags);
 	m_paszLateArtDefineTags = new CvString [m_iGroupDefinitions];
 	stream->ReadString(m_iGroupDefinitions, m_paszLateArtDefineTags);
+
+	SAFE_DELETE_ARRAY(m_paszMiddleArtDefineTags);
+	m_paszMiddleArtDefineTags = new CvString [m_iGroupDefinitions];
+	stream->ReadString(m_iGroupDefinitions, m_paszMiddleArtDefineTags);
 
 	SAFE_DELETE_ARRAY(m_paszUnitNames);
 	m_paszUnitNames = new CvString[m_iNumUnitNames];
@@ -3901,6 +4123,7 @@ void CvUnitInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iCityAttackModifier);
 	stream->Write(m_iCityDefenseModifier);
 	stream->Write(m_iAnimalCombatModifier);
+	stream->Write(m_iHillsAttackModifier);
 	stream->Write(m_iHillsDefenseModifier);
 	stream->Write(m_iBombRate);
 	stream->Write(m_iBombardRate);
@@ -3976,11 +4199,16 @@ void CvUnitInfo::write(FDataStreamBase* stream)
 	stream->Write(GC.getNumUnitClassInfos(), m_piUnitClassAttackModifier);
 	stream->Write(GC.getNumUnitClassInfos(), m_piUnitClassDefenseModifier);
 	stream->Write(GC.getNumUnitCombatInfos(), m_piUnitCombatModifier);
+	stream->Write(GC.getNumUnitCombatInfos(), m_piUnitCombatCollateralImmune);
 	stream->Write(NUM_DOMAIN_TYPES, m_piDomainModifier);
 	stream->Write(GC.getNumBonusInfos(), m_piBonusProductionModifier);
 	stream->Write(m_iGroupDefinitions, m_piUnitGroupRequired);
 
 	stream->Write(GC.getNumUnitClassInfos(), m_pbUpgradeUnitClass);
+	stream->Write(GC.getNumUnitClassInfos(), m_pbTargetUnitClass);
+	stream->Write(GC.getNumUnitCombatInfos(), m_pbTargetUnitCombat);
+	stream->Write(GC.getNumUnitClassInfos(), m_pbDefenderUnitClass);
+	stream->Write(GC.getNumUnitCombatInfos(), m_pbDefenderUnitCombat);
 	stream->Write(NUM_UNITAI_TYPES, m_pbUnitAIType);
 	stream->Write(NUM_UNITAI_TYPES, m_pbNotUnitAIType);
 	stream->Write(GC.getNumBuildInfos(), m_pbBuilds);
@@ -3993,9 +4221,12 @@ void CvUnitInfo::write(FDataStreamBase* stream)
 	stream->Write(GC.getNumTerrainInfos(), m_pbTerrainImpassable);
 	stream->Write(GC.getNumFeatureInfos(), m_pbFeatureImpassable);
 	stream->Write(GC.getNumPromotionInfos(), m_pbFreePromotions);
+	stream->Write(m_iLeaderPromotion);
+	stream->Write(m_iLeaderExperience);
 
 	stream->WriteString(m_iGroupDefinitions, m_paszEarlyArtDefineTags);
 	stream->WriteString(m_iGroupDefinitions, m_paszLateArtDefineTags);
+	stream->WriteString(m_iGroupDefinitions, m_paszMiddleArtDefineTags);
 	stream->WriteString(m_iNumUnitNames, m_paszUnitNames);
 }
 
@@ -4073,6 +4304,10 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_bRenderBelowWater,"bRenderBelowWater",false);
 
 	pXML->SetVariableListTagPair(&m_pbUpgradeUnitClass, "UnitClassUpgrades", GC.getUnitClassInfo(), sizeof(GC.getUnitClassInfo((UnitClassTypes)0)), GC.getNumUnitClassInfos());
+	pXML->SetVariableListTagPair(&m_pbTargetUnitClass, "UnitClassTargets", GC.getUnitClassInfo(), sizeof(GC.getUnitClassInfo((UnitClassTypes)0)), GC.getNumUnitClassInfos());
+	pXML->SetVariableListTagPair(&m_pbTargetUnitCombat, "UnitCombatTargets", GC.getUnitCombatInfo(), sizeof(GC.getUnitCombatInfo((UnitCombatTypes)0)), GC.getNumUnitCombatInfos());
+	pXML->SetVariableListTagPair(&m_pbDefenderUnitClass, "UnitClassDefenders", GC.getUnitClassInfo(), sizeof(GC.getUnitClassInfo((UnitClassTypes)0)), GC.getNumUnitClassInfos());
+	pXML->SetVariableListTagPair(&m_pbDefenderUnitCombat, "UnitCombatDefenders", GC.getUnitCombatInfo(), sizeof(GC.getUnitCombatInfo((UnitCombatTypes)0)), GC.getNumUnitCombatInfos());
 	pXML->SetVariableListTagPair(&m_pbUnitAIType, "UnitAIs", GC.getUnitAIInfo(), sizeof(GC.getUnitAIInfo((UnitAITypes)0)), NUM_UNITAI_TYPES);
 	pXML->SetVariableListTagPair(&m_pbNotUnitAIType, "NotUnitAIs", GC.getUnitAIInfo(), sizeof(GC.getUnitAIInfo((UnitAITypes)0)), NUM_UNITAI_TYPES);
 
@@ -4205,6 +4440,7 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iCityAttackModifier, "iCityAttack");
 	pXML->GetChildXmlValByName(&m_iCityDefenseModifier, "iCityDefense");
 	pXML->GetChildXmlValByName(&m_iAnimalCombatModifier, "iAnimalCombat");
+	pXML->GetChildXmlValByName(&m_iHillsAttackModifier, "iHillsAttack");
 	pXML->GetChildXmlValByName(&m_iHillsDefenseModifier, "iHillsDefense");
 
 	pXML->SetVariableListTagPair(&m_pbTerrainNative, "TerrainNatives", GC.getTerrainInfo(), sizeof(GC.getTerrainInfo((TerrainTypes)0)), GC.getNumTerrainInfos());
@@ -4217,7 +4453,7 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 	pXML->SetVariableListTagPair(&m_piUnitClassDefenseModifier, "UnitClassDefenseMods", GC.getUnitClassInfo(), sizeof(GC.getUnitClassInfo((UnitClassTypes)0)), GC.getNumUnitClassInfos());
 
 	pXML->SetVariableListTagPair(&m_piUnitCombatModifier, "UnitCombatMods", GC.getUnitCombatInfo(), sizeof(GC.getUnitCombatInfo((UnitCombatTypes)0)), GC.getNumUnitCombatInfos());
-
+	pXML->SetVariableListTagPair(&m_piUnitCombatCollateralImmune, "UnitCombatCollateralImmunes", GC.getUnitCombatInfo(), sizeof(GC.getUnitCombatInfo((UnitCombatTypes)0)), GC.getNumUnitCombatInfos());
 	pXML->SetVariableListTagPair(&m_piDomainModifier, "DomainMods", GC.getDomainInfo(), sizeof(GC.getDomainInfo((DomainTypes)0)), NUM_DOMAIN_TYPES);
 
 	pXML->SetVariableListTagPair(&m_piBonusProductionModifier, "BonusProductionModifiers", GC.getBonusInfo(), sizeof(GC.getBonusInfo((BonusTypes)0)), GC.getNumBonusInfos());
@@ -4249,6 +4485,7 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 		pXML->GetChildXmlValByName( &m_fUnitMaxSpeed, "fMaxSpeed");
 		m_paszEarlyArtDefineTags = new CvString[ iIndexVal ];
 		m_paszLateArtDefineTags = new CvString[ iIndexVal ];
+		m_paszMiddleArtDefineTags = new CvString[ iIndexVal ];
 
 		gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(), "UnitMeshGroup");
 		for ( k = 0; k < iIndexVal; k++ )
@@ -4258,6 +4495,8 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 			setEarlyArtDefineTag(k, szTextVal);
 			pXML->GetChildXmlValByName(szTextVal, "LateArtDefineTag");
 			setLateArtDefineTag(k, szTextVal);
+			pXML->GetChildXmlValByName(szTextVal, "MiddleArtDefineTag");
+			setMiddleArtDefineTag(k, szTextVal);
 			gDLL->getXMLIFace()->NextSibling(pXML->GetXML());
 		}
 		gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
@@ -4271,6 +4510,11 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 	}
 
 	pXML->SetVariableListTagPair(&m_pbFreePromotions, "FreePromotions", GC.getPromotionInfo(), sizeof(GC.getPromotionInfo((PromotionTypes)0)), GC.getNumPromotionInfos());
+
+	pXML->GetChildXmlValByName(szTextVal, "LeaderPromotion");
+	m_iLeaderPromotion = pXML->FindInInfoClass(szTextVal, GC.getPromotionInfo(), sizeof(GC.getPromotionInfo((PromotionTypes)0)), GC.getNumPromotionInfos());
+
+	pXML->GetChildXmlValByName(&m_iLeaderExperience, "iLeaderExperience");
 
 	return true;
 }
@@ -4289,13 +4533,7 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 CvUnitFormationInfo::CvUnitFormationInfo() :
 m_uiDirectionMask(0),
 m_eDirectionType(NO_DIRECTION),
-m_bUseFacingDirection(false),
-m_iNumUnits(0),
-m_afPosX(NULL),
-m_afPosY(NULL),
-m_afPosRadius(NULL),
-m_afFacingDir(NULL),
-m_afFacingVar(NULL)
+m_bUseFacingDirection(false)
 {
 }
 
@@ -4308,11 +4546,6 @@ m_afFacingVar(NULL)
 //------------------------------------------------------------------------------------------------------
 CvUnitFormationInfo::~CvUnitFormationInfo()
 {
-	SAFE_DELETE_ARRAY(m_afPosX);
-	SAFE_DELETE_ARRAY(m_afPosY);
-	SAFE_DELETE_ARRAY(m_afPosRadius);
-	SAFE_DELETE_ARRAY(m_afFacingDir);
-	SAFE_DELETE_ARRAY(m_afFacingVar);
 }
 
 const std::vector<EntityEventTypes> & CvUnitFormationInfo::getEventTypes() const
@@ -4342,12 +4575,13 @@ DirectionTypes CvUnitFormationInfo::getDirectionType() const
 
 int CvUnitFormationInfo::getNumUnits() const	// The number of units in the formation
 {
-	return m_iNumUnits;
+	return m_vctUnitEntries.size();
 }
 
 void CvUnitFormationInfo::setNumUnits(int i)		// The number of units in the formation
 {
-	m_iNumUnits = i;
+	while((int) m_vctUnitEntries.size() < i)
+		m_vctUnitEntries.push_back(UnitEntry());
 }
 
 bool CvUnitFormationInfo::getUseFacing() const
@@ -4357,99 +4591,214 @@ bool CvUnitFormationInfo::getUseFacing() const
 
 // Arrays
 
-float CvUnitFormationInfo::getPosX(int i) const		// The normalized x positions of the units
+float CvUnitFormationInfo::getUnitPosX(int i) const		// The normalized x positions of the units
 {
-	FAssertMsg(i < getNumUnits(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_afPosX[i];
+	FAssertMsg((i >= 0) && (i < getNumUnits()), "Index out of bounds");
+	return m_vctUnitEntries[i].m_position.x;
 }
 
-void CvUnitFormationInfo::setPosXArray(float* f)
+void CvUnitFormationInfo::setUnitPosX(int i, float f)
 {
-	m_afPosX = f;
+	FAssertMsg((i >= 0) && (i < getNumUnits()), "Index out of bounds");
+	m_vctUnitEntries[i].m_position.x = f;
 }
 
-void CvUnitFormationInfo::setPosX(int i, float f)
+float CvUnitFormationInfo::getUnitPosY(int i) const		// The normalized y positions of the units
 {
-	FAssertMsg(i < getNumUnits(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	m_afPosX[i] = f;
+	FAssertMsg((i >= 0) && (i < getNumUnits()), "Index out of bounds");
+	return m_vctUnitEntries[i].m_position.y;
 }
 
-float CvUnitFormationInfo::getPosY(int i) const		// The normalized y positions of the units
+void CvUnitFormationInfo::setUnitPosY(int i, float f)
 {
-	FAssertMsg(i < getNumUnits(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_afPosY[i];
+	FAssertMsg((i >= 0) && (i < getNumUnits()), "Index out of bounds");
+	m_vctUnitEntries[i].m_position.y = f;
 }
 
-void CvUnitFormationInfo::setPosYArray(float* f)
+float CvUnitFormationInfo::getUnitPosRadius(int i) const	// The (normalized) variance radius of the units position
 {
-	m_afPosY = f;
+	FAssertMsg((i >= 0) && (i < getNumUnits()), "Index out of bounds");
+	return m_vctUnitEntries[i].m_fRadius;
 }
 
-void CvUnitFormationInfo::setPosY(int i, float f)
+void CvUnitFormationInfo::setUnitPosRadius(int i, float f)
 {
-	FAssertMsg(i < getNumUnits(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	m_afPosY[i] = f;
+	FAssertMsg((i >= 0) && (i < getNumUnits()), "Index out of bounds");
+	m_vctUnitEntries[i].m_fRadius = f;
 }
 
-float CvUnitFormationInfo::getPosRadius(int i) const	// The (normalized) variance radius of the units position
+float CvUnitFormationInfo::getUnitFacingDir(int i) const	// The facing direction of the units
 {
-	FAssertMsg(i < getNumUnits(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_afPosRadius[i];
+	FAssertMsg((i >= 0) && (i < getNumUnits()), "Index out of bounds");
+	return m_vctUnitEntries[i].m_fFacingDirection;
 }
 
-void CvUnitFormationInfo::setPosRadiusArray(float* f)
+void CvUnitFormationInfo::setUnitFacingDir(int i, float f)
 {
-	m_afPosRadius = f;
+	FAssertMsg((i >= 0) && (i < getNumUnits()), "Index out of bounds");
+	m_vctUnitEntries[i].m_fFacingDirection = f;
 }
 
-void CvUnitFormationInfo::setPosRadius(int i, float f)
+float CvUnitFormationInfo::getUnitFacingVar(int i) const	// The variance of the facing direction of the units
 {
-	FAssertMsg(i < getNumUnits(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	m_afPosRadius[i] = f;
+	FAssertMsg((i >= 0) && (i < getNumUnits()), "Index out of bounds");
+	return m_vctUnitEntries[i].m_fFacingVariance;
 }
 
-float CvUnitFormationInfo::getFacingDir(int i) const	// The facing direction of the units
+void CvUnitFormationInfo::setUnitFacingVar(int i, float f)
 {
-	FAssertMsg(i < getNumUnits(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_afFacingDir[i];
+	FAssertMsg((i >= 0) && (i < getNumUnits()), "Index out of bounds");
+	m_vctUnitEntries[i].m_fFacingVariance = f;
 }
 
-void CvUnitFormationInfo::setFacingDirArray(float* f)
+//great unit entries
+
+int CvUnitFormationInfo::getNumGreatUnits() const	// The number of units in the formation
 {
-	m_afFacingDir = f;
+	return m_vctGreatUnitEntries.size();
 }
 
-void CvUnitFormationInfo::setFacingDir(int i, float f)
+void CvUnitFormationInfo::setNumGreatUnits(int i)		// The number of units in the formation
 {
-	FAssertMsg(i < getNumUnits(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	m_afFacingDir[i] = f;
+	while((int) m_vctGreatUnitEntries.size() < i)
+		m_vctGreatUnitEntries.push_back(UnitEntry());
 }
 
-float CvUnitFormationInfo::getFacingVar(int i) const	// The variance of the facing direction of the units
+// Arrays
+
+float CvUnitFormationInfo::getGreatUnitPosX(int i) const		// The normalized x positions of the units
 {
-	FAssertMsg(i < getNumUnits(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_afFacingVar[i];
+	FAssertMsg((i >= 0) && (i < getNumGreatUnits()), "Index out of bounds");
+	return m_vctGreatUnitEntries[i].m_position.x;
 }
 
-void CvUnitFormationInfo::setFacingVarArray(float* f)
+void CvUnitFormationInfo::setGreatUnitPosX(int i, float f)
 {
-	m_afFacingVar = f;
+	FAssertMsg((i >= 0) && (i < getNumGreatUnits()), "Index out of bounds");
+	m_vctGreatUnitEntries[i].m_position.x = f;
 }
 
-void CvUnitFormationInfo::setFacingVar(int i, float f)
+float CvUnitFormationInfo::getGreatUnitPosY(int i) const		// The normalized y positions of the units
 {
-	FAssertMsg(i < getNumUnits(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	m_afFacingVar[i] = f;
+	FAssertMsg((i >= 0) && (i < getNumGreatUnits()), "Index out of bounds");
+	return m_vctGreatUnitEntries[i].m_position.y;
+}
+
+void CvUnitFormationInfo::setGreatUnitPosY(int i, float f)
+{
+	FAssertMsg((i >= 0) && (i < getNumGreatUnits()), "Index out of bounds");
+	m_vctGreatUnitEntries[i].m_position.y = f;
+}
+
+float CvUnitFormationInfo::getGreatUnitPosRadius(int i) const	// The (normalized) variance radius of the units position
+{
+	FAssertMsg((i >= 0) && (i < getNumGreatUnits()), "Index out of bounds");
+	return m_vctGreatUnitEntries[i].m_fRadius;
+}
+
+void CvUnitFormationInfo::setGreatUnitPosRadius(int i, float f)
+{
+	FAssertMsg((i >= 0) && (i < getNumGreatUnits()), "Index out of bounds");
+	m_vctGreatUnitEntries[i].m_fRadius = f;
+}
+
+float CvUnitFormationInfo::getGreatUnitFacingDir(int i) const	// The facing direction of the units
+{
+	FAssertMsg((i >= 0) && (i < getNumGreatUnits()), "Index out of bounds");
+	return m_vctGreatUnitEntries[i].m_fFacingDirection;
+}
+
+void CvUnitFormationInfo::setGreatUnitFacingDir(int i, float f)
+{
+	FAssertMsg((i >= 0) && (i < getNumGreatUnits()), "Index out of bounds");
+	m_vctGreatUnitEntries[i].m_fFacingDirection = f;
+}
+
+float CvUnitFormationInfo::getGreatUnitFacingVar(int i) const	// The variance of the facing direction of the units
+{
+	FAssertMsg((i >= 0) && (i < getNumGreatUnits()), "Index out of bounds");
+	return m_vctGreatUnitEntries[i].m_fFacingVariance;
+}
+
+void CvUnitFormationInfo::setGreatUnitFacingVar(int i, float f)
+{
+	FAssertMsg((i >= 0) && (i < getNumGreatUnits()), "Index out of bounds");
+	m_vctGreatUnitEntries[i].m_fFacingVariance = f;
+}
+
+//siege unit entries
+
+int CvUnitFormationInfo::getNumSiegeUnits() const	// The number of units in the formation
+{
+	return m_vctSiegeUnitEntries.size();
+}
+
+void CvUnitFormationInfo::setNumSiegeUnits(int i)		// The number of units in the formation
+{
+	while((int) m_vctSiegeUnitEntries.size() < i)
+		m_vctSiegeUnitEntries.push_back(UnitEntry());
+}
+
+// Arrays
+
+float CvUnitFormationInfo::getSiegeUnitPosX(int i) const		// The normalized x positions of the units
+{
+	FAssertMsg((i >= 0) && (i < getNumSiegeUnits()), "Index out of bounds");
+	return m_vctSiegeUnitEntries[i].m_position.x;
+}
+
+void CvUnitFormationInfo::setSiegeUnitPosX(int i, float f)
+{
+	FAssertMsg((i >= 0) && (i < getNumSiegeUnits()), "Index out of bounds");
+	m_vctSiegeUnitEntries[i].m_position.x = f;
+}
+
+float CvUnitFormationInfo::getSiegeUnitPosY(int i) const		// The normalized y positions of the units
+{
+	FAssertMsg((i >= 0) && (i < getNumSiegeUnits()), "Index out of bounds");
+	return m_vctSiegeUnitEntries[i].m_position.y;
+}
+
+void CvUnitFormationInfo::setSiegeUnitPosY(int i, float f)
+{
+	FAssertMsg((i >= 0) && (i < getNumSiegeUnits()), "Index out of bounds");
+	m_vctSiegeUnitEntries[i].m_position.y = f;
+}
+
+float CvUnitFormationInfo::getSiegeUnitPosRadius(int i) const	// The (normalized) variance radius of the units position
+{
+	FAssertMsg((i >= 0) && (i < getNumSiegeUnits()), "Index out of bounds");
+	return m_vctSiegeUnitEntries[i].m_fRadius;
+}
+
+void CvUnitFormationInfo::setSiegeUnitPosRadius(int i, float f)
+{
+	FAssertMsg((i >= 0) && (i < getNumSiegeUnits()), "Index out of bounds");
+	m_vctSiegeUnitEntries[i].m_fRadius = f;
+}
+
+float CvUnitFormationInfo::getSiegeUnitFacingDir(int i) const	// The facing direction of the units
+{
+	FAssertMsg((i >= 0) && (i < getNumSiegeUnits()), "Index out of bounds");
+	return m_vctSiegeUnitEntries[i].m_fFacingDirection;
+}
+
+void CvUnitFormationInfo::setSiegeUnitFacingDir(int i, float f)
+{
+	FAssertMsg((i >= 0) && (i < getNumSiegeUnits()), "Index out of bounds");
+	m_vctSiegeUnitEntries[i].m_fFacingDirection = f;
+}
+
+float CvUnitFormationInfo::getSiegeUnitFacingVar(int i) const	// The variance of the facing direction of the units
+{
+	FAssertMsg((i >= 0) && (i < getNumSiegeUnits()), "Index out of bounds");
+	return m_vctSiegeUnitEntries[i].m_fFacingVariance;
+}
+
+void CvUnitFormationInfo::setSiegeUnitFacingVar(int i, float f)
+{
+	FAssertMsg((i >= 0) && (i < getNumSiegeUnits()), "Index out of bounds");
+	m_vctSiegeUnitEntries[i].m_fFacingVariance = f;
 }
 
 //------------------------------------------------------------------------------------------------------
@@ -4543,41 +4892,70 @@ bool CvUnitFormationInfo::read(CvXMLLoadUtility* pXML)
 		gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
 	}
 
-	m_iNumUnits = gDLL->getXMLIFace()->NumOfChildrenByTagName( pXML->GetXML(), "UnitEntry");
-
-	if ( m_iNumUnits > 0 )
+	// Read the entries
+	if ( gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(), "UnitEntry" ) )
 	{
-		// Create the arrays
-		m_afPosX = new float[m_iNumUnits];
-		m_afPosY = new float[m_iNumUnits];
-		m_afPosRadius = new float[m_iNumUnits];
-		m_afFacingDir = new float[m_iNumUnits];
-		m_afFacingVar = new float[m_iNumUnits];
-
-		// Read the entries
-		int iIndex = 0;
-		if ( gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(), "UnitEntry" ) )
+		do 
 		{
-			do 
+			UnitEntry unitEntry;
+			if ( gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(), "Position" ) )
 			{
-				if ( gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(), "Position" ) )
-				{
-					pXML->GetChildXmlValByName( &m_afPosX[iIndex], "x");
-					pXML->GetChildXmlValByName( &m_afPosY[iIndex], "y");
-					gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
-				}
-				pXML->GetChildXmlValByName( &m_afPosRadius[iIndex], "PositionRadius");
-				pXML->GetChildXmlValByName( &m_afFacingDir[iIndex], "Direction");
-				pXML->GetChildXmlValByName( &m_afFacingVar[iIndex], "DirVariation");
-				iIndex++;
+				pXML->GetChildXmlValByName( &unitEntry.m_position.x, "x");
+				pXML->GetChildXmlValByName( &unitEntry.m_position.y, "y");
+				gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
 			}
-			while ( gDLL->getXMLIFace()->NextSibling(pXML->GetXML() ));
+			pXML->GetChildXmlValByName( &unitEntry.m_fRadius, "PositionRadius");
+			pXML->GetChildXmlValByName( &unitEntry.m_fFacingDirection, "Direction");
+			pXML->GetChildXmlValByName( &unitEntry.m_fFacingVariance, "DirVariation");
+			
+			m_vctUnitEntries.push_back(unitEntry);
 		}
+		while ( gDLL->getXMLIFace()->LocateNextSiblingNodeByTagName(pXML->GetXML(), "UnitEntry"));
 		gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
 	}
-	else
+
+	// Read the entries
+	if ( gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(), "GreatUnitEntry" ) )
 	{
-		m_iNumUnits = 0;
+		do 
+		{
+			UnitEntry unitEntry;
+			if ( gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(), "Position" ) )
+			{
+				pXML->GetChildXmlValByName( &unitEntry.m_position.x, "x");
+				pXML->GetChildXmlValByName( &unitEntry.m_position.y, "y");
+				gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
+			}
+			pXML->GetChildXmlValByName( &unitEntry.m_fRadius, "PositionRadius");
+			pXML->GetChildXmlValByName( &unitEntry.m_fFacingDirection, "Direction");
+			pXML->GetChildXmlValByName( &unitEntry.m_fFacingVariance, "DirVariation");
+
+			m_vctGreatUnitEntries.push_back(unitEntry);
+		}
+		while ( gDLL->getXMLIFace()->LocateNextSiblingNodeByTagName(pXML->GetXML(), "GreatUnitEntry"));
+		gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
+	}
+
+	// Read the entries
+	if ( gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(), "SiegeUnitEntry" ) )
+	{
+		do 
+		{
+			UnitEntry unitEntry;
+			if ( gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(), "Position" ) )
+			{
+				pXML->GetChildXmlValByName( &unitEntry.m_position.x, "x");
+				pXML->GetChildXmlValByName( &unitEntry.m_position.y, "y");
+				gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
+			}
+			pXML->GetChildXmlValByName( &unitEntry.m_fRadius, "PositionRadius");
+			pXML->GetChildXmlValByName( &unitEntry.m_fFacingDirection, "Direction");
+			pXML->GetChildXmlValByName( &unitEntry.m_fFacingVariance, "DirVariation");
+
+			m_vctSiegeUnitEntries.push_back(unitEntry);
+		}
+		while ( gDLL->getXMLIFace()->LocateNextSiblingNodeByTagName(pXML->GetXML(), "SiegeUnitEntry"));
+		gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
 	}
 
 	return true;
@@ -4705,6 +5083,8 @@ m_iAnarchyLength(0),
 m_iUpkeep(0),
 m_iAIWeight(0),
 m_iGreatPeopleRateModifier(0),
+m_iGreatGeneralRateModifier(0),
+m_iDomesticGreatGeneralRateModifier(0),
 m_iStateReligionGreatPeopleRateModifier(0),
 m_iDistanceMaintenanceModifier(0),
 m_iNumCitiesMaintenanceModifier(0),
@@ -4732,6 +5112,7 @@ m_iNonStateReligionHappiness(0),
 m_iStateReligionUnitProductionModifier(0),
 m_iStateReligionBuildingProductionModifier(0),
 m_iStateReligionFreeExperience(0),
+m_iExpInBorderModifier(0),
 m_bMilitaryFoodProduction(false),
 m_bNoUnhealthyPopulation(false),
 m_bBuildingOnlyHealthy(false),
@@ -4808,6 +5189,16 @@ int CvCivicInfo::getAIWeight() const
 int CvCivicInfo::getGreatPeopleRateModifier() const	
 {
 	return m_iGreatPeopleRateModifier;
+}
+
+int CvCivicInfo::getGreatGeneralRateModifier() const	
+{
+	return m_iGreatGeneralRateModifier;
+}
+
+int CvCivicInfo::getDomesticGreatGeneralRateModifier() const	
+{
+	return m_iDomesticGreatGeneralRateModifier;
 }
 
 int CvCivicInfo::getStateReligionGreatPeopleRateModifier() const
@@ -4943,6 +5334,11 @@ int CvCivicInfo::getStateReligionBuildingProductionModifier() const
 int CvCivicInfo::getStateReligionFreeExperience() const
 {
 	return m_iStateReligionFreeExperience;
+}
+
+int CvCivicInfo::getExpInBorderModifier() const
+{
+	return m_iExpInBorderModifier;
 }
 
 bool CvCivicInfo::isMilitaryFoodProduction() const
@@ -5116,6 +5512,8 @@ void CvCivicInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iUpkeep);
 	stream->Read(&m_iAIWeight);
 	stream->Read(&m_iGreatPeopleRateModifier);					
+	stream->Read(&m_iGreatGeneralRateModifier);					
+	stream->Read(&m_iDomesticGreatGeneralRateModifier);					
 	stream->Read(&m_iStateReligionGreatPeopleRateModifier);					
 	stream->Read(&m_iDistanceMaintenanceModifier);					
 	stream->Read(&m_iNumCitiesMaintenanceModifier);					
@@ -5143,6 +5541,7 @@ void CvCivicInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iStateReligionUnitProductionModifier);			
 	stream->Read(&m_iStateReligionBuildingProductionModifier);	
 	stream->Read(&m_iStateReligionFreeExperience);	
+	stream->Read(&m_iExpInBorderModifier);
 
 	stream->Read(&m_bMilitaryFoodProduction);
 	stream->Read(&m_bNoUnhealthyPopulation);
@@ -5228,6 +5627,8 @@ void CvCivicInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iUpkeep);
 	stream->Write(m_iAIWeight);
 	stream->Write(m_iGreatPeopleRateModifier);					
+	stream->Write(m_iGreatGeneralRateModifier);					
+	stream->Write(m_iDomesticGreatGeneralRateModifier);					
 	stream->Write(m_iStateReligionGreatPeopleRateModifier);					
 	stream->Write(m_iDistanceMaintenanceModifier);					
 	stream->Write(m_iNumCitiesMaintenanceModifier);					
@@ -5255,6 +5656,7 @@ void CvCivicInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iStateReligionUnitProductionModifier);			
 	stream->Write(m_iStateReligionBuildingProductionModifier);	
 	stream->Write(m_iStateReligionFreeExperience);	
+	stream->Write(m_iExpInBorderModifier);
 
 	stream->Write(m_bMilitaryFoodProduction);
 	stream->Write(m_bNoUnhealthyPopulation);
@@ -5311,6 +5713,8 @@ bool CvCivicInfo::read(CvXMLLoadUtility* pXML)
 
 	pXML->GetChildXmlValByName(&m_iAIWeight, "iAIWeight");
 	pXML->GetChildXmlValByName(&m_iGreatPeopleRateModifier, "iGreatPeopleRateModifier");
+	pXML->GetChildXmlValByName(&m_iGreatGeneralRateModifier, "iGreatGeneralRateModifier");
+	pXML->GetChildXmlValByName(&m_iDomesticGreatGeneralRateModifier, "iDomesticGreatGeneralRateModifier");
 	pXML->GetChildXmlValByName(&m_iStateReligionGreatPeopleRateModifier, "iStateReligionGreatPeopleRateModifier");
 	pXML->GetChildXmlValByName(&m_iDistanceMaintenanceModifier, "iDistanceMaintenanceModifier");
 	pXML->GetChildXmlValByName(&m_iNumCitiesMaintenanceModifier, "iNumCitiesMaintenanceModifier");
@@ -5343,6 +5747,7 @@ bool CvCivicInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iStateReligionUnitProductionModifier, "iStateReligionUnitProductionModifier");
 	pXML->GetChildXmlValByName(&m_iStateReligionBuildingProductionModifier, "iStateReligionBuildingProductionModifier");
 	pXML->GetChildXmlValByName(&m_iStateReligionFreeExperience, "iStateReligionFreeExperience");
+	pXML->GetChildXmlValByName(&m_iExpInBorderModifier, "iExpInBorderModifier");
 
 	if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(),"YieldModifiers"))
 	{
@@ -5727,12 +6132,13 @@ m_iPrereqAndTech(NO_TECH),
 m_iPowerBonus(NO_BONUS),
 m_iFreeBonus(NO_BONUS),
 m_iNumFreeBonuses(0),
-m_iFreeBuilding(NO_BUILDING),
+m_iFreeBuildingClass(NO_BUILDINGCLASS),
 m_iFreePromotion(NO_PROMOTION),
 m_iCivicOption(NO_CIVICOPTION),
 m_iAIWeight(0),
 m_iProductionCost(0),
 m_iHurryCostModifier(0),							
+m_iHurryAngerModifier(0),
 m_iMinAreaSize(0),									
 m_iNumCitiesPrereq(0),							
 m_iNumTeamsPrereq(0),							
@@ -5740,6 +6146,8 @@ m_iUnitLevelPrereq(0),
 m_iMinLatitude(0),									
 m_iMaxLatitude(0),									
 m_iGreatPeopleRateModifier(0),				
+m_iGreatGeneralRateModifier(0),				
+m_iDomesticGreatGeneralRateModifier(0),				
 m_iGlobalGreatPeopleRateModifier(0),	
 m_iAnarchyModifier(0),							
 m_iGlobalHurryModifier(0),						
@@ -5788,6 +6196,7 @@ m_iGlobalHealth(0),
 m_iGlobalPopulationChange(0),
 m_iFreeTechs(0),
 m_iDefenseModifier(0),
+m_iBombardDefenseModifier(0),
 m_iAllCityDefenseModifier(0),
 m_iMissionType(NO_MISSION),
 m_fVisibilityPriority(0.0f),
@@ -5797,6 +6206,7 @@ m_bRiver(false),
 m_bPower(false),								
 m_bDirtyPower(false),
 m_bAreaCleanPower(false),
+m_bAreaBorderObstacle(false),
 m_bDiploVote(false),
 m_bForceTeamVoteEligible(false),
 m_bCapital(false),
@@ -5813,6 +6223,7 @@ m_bCenterInCity(false),
 m_piPrereqAndTechs(NULL),
 m_piPrereqOrBonuses(NULL),
 m_piProductionTraits(NULL),
+m_piHappinessTraits(NULL),
 m_piSeaPlotYieldChange(NULL),
 m_piGlobalSeaPlotYieldChange(NULL),
 m_piYieldChange(NULL),
@@ -5860,6 +6271,7 @@ CvBuildingInfo::~CvBuildingInfo()
 	SAFE_DELETE_ARRAY(m_piPrereqAndTechs);
 	SAFE_DELETE_ARRAY(m_piPrereqOrBonuses);
 	SAFE_DELETE_ARRAY(m_piProductionTraits);
+	SAFE_DELETE_ARRAY(m_piHappinessTraits);
 	SAFE_DELETE_ARRAY(m_piSeaPlotYieldChange);
 	SAFE_DELETE_ARRAY(m_piGlobalSeaPlotYieldChange);
 	SAFE_DELETE_ARRAY(m_piYieldChange);
@@ -5955,14 +6367,14 @@ int CvBuildingInfo::getNumFreeBonuses() const
 	return m_iNumFreeBonuses;
 }
 
-int CvBuildingInfo::getFreeBuilding() const			
+int CvBuildingInfo::getFreeBuildingClass() const			
 {
-	return m_iFreeBuilding;
+	return m_iFreeBuildingClass;
 }
 
-void CvBuildingInfo::setFreeBuilding(int i)
+void CvBuildingInfo::setFreeBuildingClass(int i)
 {
-	m_iFreeBuilding = i;
+	m_iFreeBuildingClass = i;
 }
 
 int CvBuildingInfo::getFreePromotion() const			
@@ -5988,6 +6400,11 @@ int CvBuildingInfo::getProductionCost() const
 int CvBuildingInfo::getHurryCostModifier() const	
 {
 	return m_iHurryCostModifier;
+}
+
+int CvBuildingInfo::getHurryAngerModifier() const	
+{
+	return m_iHurryAngerModifier;
 }
 
 int CvBuildingInfo::getMinAreaSize() const				
@@ -6023,6 +6440,16 @@ int CvBuildingInfo::getMaxLatitude() const
 int CvBuildingInfo::getGreatPeopleRateModifier() const
 {
 	return m_iGreatPeopleRateModifier;
+}
+
+int CvBuildingInfo::getGreatGeneralRateModifier() const
+{
+	return m_iGreatGeneralRateModifier;
+}
+
+int CvBuildingInfo::getDomesticGreatGeneralRateModifier() const
+{
+	return m_iDomesticGreatGeneralRateModifier;
 }
 
 int CvBuildingInfo::getGlobalGreatPeopleRateModifier() const	
@@ -6265,6 +6692,11 @@ int CvBuildingInfo::getDefenseModifier() const
 	return m_iDefenseModifier;
 }
 
+int CvBuildingInfo::getBombardDefenseModifier() const	
+{
+	return m_iBombardDefenseModifier;
+}
+
 int CvBuildingInfo::getAllCityDefenseModifier() const			
 {
 	return m_iAllCityDefenseModifier;
@@ -6313,6 +6745,11 @@ bool CvBuildingInfo::isDirtyPower() const
 bool CvBuildingInfo::isAreaCleanPower() const
 {
 	return m_bAreaCleanPower;
+}
+
+bool CvBuildingInfo::isAreaBorderObstacle() const
+{
+	return m_bAreaBorderObstacle;
 }
 
 bool CvBuildingInfo::isDiploVote() const
@@ -6666,6 +7103,13 @@ int CvBuildingInfo::getProductionTraits(int i) const
 	return m_piProductionTraits ? m_piProductionTraits[i] : -1;
 }
 
+int CvBuildingInfo::getHappinessTraits(int i) const		
+{
+	FAssertMsg(i < GC.getNumTraitInfos(), "Index out of bounds");
+	FAssertMsg(i > -1, "Index out of bounds");
+	return m_piHappinessTraits ? m_piHappinessTraits[i] : -1;
+}
+
 int CvBuildingInfo::getBuildingHappinessChanges(int i) const
 {
 	FAssertMsg(i < GC.getNumBuildingInfos(), "Index out of bounds");
@@ -6798,12 +7242,13 @@ void CvBuildingInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iPowerBonus);
 	stream->Read(&m_iFreeBonus);
 	stream->Read(&m_iNumFreeBonuses);
-	stream->Read(&m_iFreeBuilding);
+	stream->Read(&m_iFreeBuildingClass);
 	stream->Read(&m_iFreePromotion);
 	stream->Read(&m_iCivicOption);
 	stream->Read(&m_iAIWeight);
 	stream->Read(&m_iProductionCost);
 	stream->Read(&m_iHurryCostModifier);
+	stream->Read(&m_iHurryAngerModifier);
 	stream->Read(&m_iMinAreaSize);
 	stream->Read(&m_iNumCitiesPrereq);
 	stream->Read(&m_iNumTeamsPrereq);
@@ -6811,6 +7256,8 @@ void CvBuildingInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iMinLatitude);
 	stream->Read(&m_iMaxLatitude);
 	stream->Read(&m_iGreatPeopleRateModifier);
+	stream->Read(&m_iGreatGeneralRateModifier);
+	stream->Read(&m_iDomesticGreatGeneralRateModifier);
 	stream->Read(&m_iGlobalGreatPeopleRateModifier);
 	stream->Read(&m_iAnarchyModifier);
 	stream->Read(&m_iGlobalHurryModifier);
@@ -6859,6 +7306,7 @@ void CvBuildingInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iGlobalPopulationChange);
 	stream->Read(&m_iFreeTechs);
 	stream->Read(&m_iDefenseModifier);
+	stream->Read(&m_iBombardDefenseModifier);
 	stream->Read(&m_iAllCityDefenseModifier);
 	stream->Read(&m_iMissionType);
 
@@ -6870,6 +7318,7 @@ void CvBuildingInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_bPower);
 	stream->Read(&m_bDirtyPower);
 	stream->Read(&m_bAreaCleanPower);
+	stream->Read(&m_bAreaBorderObstacle);
 	stream->Read(&m_bDiploVote);
 	stream->Read(&m_bForceTeamVoteEligible);
 	stream->Read(&m_bCapital);
@@ -6899,6 +7348,10 @@ void CvBuildingInfo::read(FDataStreamBase* stream)
 	SAFE_DELETE_ARRAY(m_piProductionTraits);
 	m_piProductionTraits = new int[GC.getNumTraitInfos()];
 	stream->Read(GC.getNumTraitInfos(), m_piProductionTraits);
+
+	SAFE_DELETE_ARRAY(m_piHappinessTraits);
+	m_piHappinessTraits = new int[GC.getNumTraitInfos()];
+	stream->Read(GC.getNumTraitInfos(), m_piHappinessTraits);
 
 	SAFE_DELETE_ARRAY(m_piSeaPlotYieldChange);
 	m_piSeaPlotYieldChange = new int[NUM_YIELD_TYPES];
@@ -7073,12 +7526,13 @@ void CvBuildingInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iPowerBonus);
 	stream->Write(m_iFreeBonus);
 	stream->Write(m_iNumFreeBonuses);
-	stream->Write(m_iFreeBuilding);
+	stream->Write(m_iFreeBuildingClass);
 	stream->Write(m_iFreePromotion);
 	stream->Write(m_iCivicOption);
 	stream->Write(m_iAIWeight);
 	stream->Write(m_iProductionCost);
 	stream->Write(m_iHurryCostModifier);
+	stream->Write(m_iHurryAngerModifier);
 	stream->Write(m_iMinAreaSize);
 	stream->Write(m_iNumCitiesPrereq);
 	stream->Write(m_iNumTeamsPrereq);
@@ -7086,6 +7540,8 @@ void CvBuildingInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iMinLatitude);
 	stream->Write(m_iMaxLatitude);
 	stream->Write(m_iGreatPeopleRateModifier);
+	stream->Write(m_iGreatGeneralRateModifier);
+	stream->Write(m_iDomesticGreatGeneralRateModifier);
 	stream->Write(m_iGlobalGreatPeopleRateModifier);
 	stream->Write(m_iAnarchyModifier);
 	stream->Write(m_iGlobalHurryModifier);
@@ -7134,6 +7590,7 @@ void CvBuildingInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iGlobalPopulationChange);
 	stream->Write(m_iFreeTechs);
 	stream->Write(m_iDefenseModifier);
+	stream->Write(m_iBombardDefenseModifier);
 	stream->Write(m_iAllCityDefenseModifier);
 	stream->Write(m_iMissionType);
 
@@ -7145,6 +7602,7 @@ void CvBuildingInfo::write(FDataStreamBase* stream)
 	stream->Write(m_bPower);
 	stream->Write(m_bDirtyPower);
 	stream->Write(m_bAreaCleanPower);
+	stream->Write(m_bAreaBorderObstacle);
 	stream->Write(m_bDiploVote);
 	stream->Write(m_bForceTeamVoteEligible);
 	stream->Write(m_bCapital);
@@ -7166,6 +7624,7 @@ void CvBuildingInfo::write(FDataStreamBase* stream)
 	stream->Write(GC.getDefineINT("NUM_BUILDING_AND_TECH_PREREQS"), m_piPrereqAndTechs);
 	stream->Write(GC.getNUM_BUILDING_PREREQ_OR_BONUSES(), m_piPrereqOrBonuses);
 	stream->Write(GC.getNumTraitInfos(), m_piProductionTraits);
+	stream->Write(GC.getNumTraitInfos(), m_piHappinessTraits);
 	stream->Write(NUM_YIELD_TYPES, m_piSeaPlotYieldChange);
 	stream->Write(NUM_YIELD_TYPES, m_piGlobalSeaPlotYieldChange);
 	stream->Write(NUM_YIELD_TYPES, m_piYieldChange);
@@ -7350,12 +7809,17 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 
 	pXML->SetVariableListTagPair(&m_piProductionTraits, "ProductionTraits", GC.getTraitInfo(), sizeof(GC.getTraitInfo((TraitTypes)0)), GC.getNumTraitInfos());
 
+	pXML->SetVariableListTagPair(&m_piHappinessTraits, "HappinessTraits", GC.getTraitInfo(), sizeof(GC.getTraitInfo((TraitTypes)0)), GC.getNumTraitInfos());
+
 	pXML->GetChildXmlValByName(szTextVal, "PowerBonus");
 	m_iPowerBonus = pXML->FindInInfoClass(szTextVal, GC.getBonusInfo(), sizeof(GC.getBonusInfo((BonusTypes)0)), GC.getNumBonusInfos());
 
 	pXML->GetChildXmlValByName(szTextVal, "FreeBonus");
 	m_iFreeBonus = pXML->FindInInfoClass(szTextVal, GC.getBonusInfo(), sizeof(GC.getBonusInfo((BonusTypes)0)), GC.getNumBonusInfos());
 	pXML->GetChildXmlValByName(&m_iNumFreeBonuses, "iNumFreeBonuses");
+
+	pXML->GetChildXmlValByName(szTextVal, "FreeBuilding");
+	m_iFreeBuildingClass = pXML->FindInInfoClass(szTextVal, GC.getBuildingClassInfo(), sizeof(GC.getBuildingClassInfo((BuildingClassTypes)0)), GC.getNumBuildingClassInfos());
 
 	pXML->GetChildXmlValByName(szTextVal, "FreePromotion");
 	m_iFreePromotion = pXML->FindInInfoClass(szTextVal, GC.getPromotionInfo(), sizeof(GC.getPromotionInfo((PromotionTypes)0)), GC.getNumPromotionInfos());
@@ -7373,6 +7837,7 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_bPower, "bPower");
 	pXML->GetChildXmlValByName(&m_bDirtyPower, "bDirtyPower");
 	pXML->GetChildXmlValByName(&m_bAreaCleanPower, "bAreaCleanPower");
+	pXML->GetChildXmlValByName(&m_bAreaBorderObstacle, "bBorderObstacle");
 	pXML->GetChildXmlValByName(&m_bDiploVote, "bDiploVote");
 	pXML->GetChildXmlValByName(&m_bForceTeamVoteEligible, "bForceTeamVoteEligible");
 	pXML->GetChildXmlValByName(&m_bCapital, "bCapital");
@@ -7389,6 +7854,7 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iAIWeight, "iAIWeight");
 	pXML->GetChildXmlValByName(&m_iProductionCost, "iCost");
 	pXML->GetChildXmlValByName(&m_iHurryCostModifier, "iHurryCostModifier");
+	pXML->GetChildXmlValByName(&m_iHurryAngerModifier, "iHurryAngerModifier");
 	pXML->GetChildXmlValByName(&m_iMinAreaSize, "iMinAreaSize");
 	pXML->GetChildXmlValByName(&m_iConquestProbability, "iConquestProb");
 	pXML->GetChildXmlValByName(&m_iNumCitiesPrereq, "iCitiesPrereq");
@@ -7397,6 +7863,8 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iMinLatitude, "iMinLatitude");
 	pXML->GetChildXmlValByName(&m_iMaxLatitude, "iMaxLatitude");
 	pXML->GetChildXmlValByName(&m_iGreatPeopleRateModifier, "iGreatPeopleRateModifier");
+	pXML->GetChildXmlValByName(&m_iGreatGeneralRateModifier, "iGreatGeneralRateModifier");
+	pXML->GetChildXmlValByName(&m_iDomesticGreatGeneralRateModifier, "iDomesticGreatGeneralRateModifier");
 	pXML->GetChildXmlValByName(&m_iGlobalGreatPeopleRateModifier, "iGlobalGreatPeopleRateModifier");
 	pXML->GetChildXmlValByName(&m_iAnarchyModifier, "iAnarchyModifier");
 	pXML->GetChildXmlValByName(&m_iGlobalHurryModifier, "iGlobalHurryModifier");
@@ -7432,6 +7900,7 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iGlobalPopulationChange, "iGlobalPopulationChange");
 	pXML->GetChildXmlValByName(&m_iFreeTechs, "iFreeTechs");
 	pXML->GetChildXmlValByName(&m_iDefenseModifier, "iDefense");
+	pXML->GetChildXmlValByName(&m_iBombardDefenseModifier, "iBombardDefense");	
 	pXML->GetChildXmlValByName(&m_iAllCityDefenseModifier, "iAllCityDefense");
 	pXML->GetChildXmlValByName(&m_iAssetValue, "iAsset");
 	pXML->GetChildXmlValByName(&m_iPowerValue, "iPower");
@@ -7817,6 +8286,7 @@ m_iMaxPlayerInstances(0),
 m_iExtraPlayerInstances(0),
 m_iDefaultBuildingIndex(NO_BUILDING),
 m_bNoLimit(false),
+m_bMonument(false),
 m_piVictoryThreshold(NULL)
 {
 }
@@ -7868,6 +8338,11 @@ bool CvBuildingClassInfo::isNoLimit() const
 	return m_bNoLimit;
 }
 
+bool CvBuildingClassInfo::isMonument() const				
+{
+	return m_bMonument;
+}
+
 // Arrays
 
 int CvBuildingClassInfo::getVictoryThreshold(int i) const
@@ -7890,6 +8365,7 @@ bool CvBuildingClassInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iExtraPlayerInstances, "iExtraPlayerInstances");
 
 	pXML->GetChildXmlValByName(&m_bNoLimit, "bNoLimit");
+	pXML->GetChildXmlValByName(&m_bMonument, "bMonument");
 
 	pXML->SetVariableListTagPair(&m_piVictoryThreshold, "VictoryThresholds", GC.getVictoryInfo(), sizeof(GC.getVictoryInfo((VictoryTypes)0)), GC.getNumVictoryInfos());
 
@@ -8255,14 +8731,14 @@ void CvCivilizationInfo::setArtDefineTag(const TCHAR* szVal)
 
 int CvCivilizationInfo::getCivilizationBuildings(int i) const		
 {
-	FAssertMsg(i < GC.getNumBuildingInfos(), "Index out of bounds");
+	FAssertMsg(i < GC.getNumBuildingClassInfos(), "Index out of bounds");
 	FAssertMsg(i > -1, "Index out of bounds");
 	return m_piCivilizationBuildings ? m_piCivilizationBuildings[i] : -1;
 }
 
 int CvCivilizationInfo::getCivilizationUnits(int i) const
 {
-	FAssertMsg(i < GC.getNumUnitInfos(), "Index out of bounds");
+	FAssertMsg(i < GC.getNumUnitClassInfos(), "Index out of bounds");
 	FAssertMsg(i > -1, "Index out of bounds");
 	return m_piCivilizationUnits ? m_piCivilizationUnits[i] : -1;
 }
@@ -8350,12 +8826,12 @@ void CvCivilizationInfo::read(FDataStreamBase* stream)
 	// Arrays
 
 	SAFE_DELETE_ARRAY(m_piCivilizationBuildings);
-	m_piCivilizationBuildings = new int[GC.getNumBuildingInfos()];
-	stream->Read(GC.getNumBuildingInfos(), m_piCivilizationBuildings);
+	m_piCivilizationBuildings = new int[GC.getNumBuildingClassInfos()];
+	stream->Read(GC.getNumBuildingClassInfos(), m_piCivilizationBuildings);
 
 	SAFE_DELETE_ARRAY(m_piCivilizationUnits);
-	m_piCivilizationUnits = new int[GC.getNumUnitInfos()];
-	stream->Read(GC.getNumUnitInfos(), m_piCivilizationUnits);
+	m_piCivilizationUnits = new int[GC.getNumUnitClassInfos()];
+	stream->Read(GC.getNumUnitClassInfos(), m_piCivilizationUnits);
 
 	SAFE_DELETE_ARRAY(m_piCivilizationFreeUnitsClass);
 	m_piCivilizationFreeUnitsClass = new int[GC.getNumUnitClassInfos()];
@@ -8409,8 +8885,8 @@ void CvCivilizationInfo::write(FDataStreamBase* stream)
 
 	// Arrays
 
-	stream->Write(GC.getNumBuildingInfos(), m_piCivilizationBuildings);
-	stream->Write(GC.getNumUnitInfos(), m_piCivilizationUnits);
+	stream->Write(GC.getNumBuildingClassInfos(), m_piCivilizationBuildings);
+	stream->Write(GC.getNumUnitClassInfos(), m_piCivilizationUnits);
 	stream->Write(GC.getNumUnitClassInfos(), m_piCivilizationFreeUnitsClass);
 	stream->Write(GC.getNumCivicOptionInfos(), m_piCivilizationInitialCivics);
 	stream->Write(GC.getNumLeaderHeadInfos(), m_pbLeaders);
@@ -9743,7 +10219,7 @@ m_iTime(0),
 m_iTechPrereq(NO_TECH),
 m_iImprovement(NO_IMPROVEMENT),
 m_iRoute(NO_ROUTE),
-m_iEntityEvent(ENTEVENT_NONE),
+m_iEntityEvent(ENTITY_EVENT_NONE),
 m_iMissionType(NO_MISSION),
 m_bKill(false),
 m_paiFeatureTech(NULL),
@@ -10238,6 +10714,7 @@ m_iDefenseModifier(0),
 m_iPillageGold(0),
 m_iImprovementPillage(NO_IMPROVEMENT),
 m_iImprovementUpgrade(NO_IMPROVEMENT),
+m_bActsAsCity(true),				
 m_bHillsMakesValid(false),				
 m_bFreshWaterMakesValid(false),	
 m_bRiverSideMakesValid(false),	
@@ -10356,6 +10833,11 @@ int CvImprovementInfo::getImprovementUpgrade() const
 void CvImprovementInfo::setImprovementUpgrade(int i)
 {
 	m_iImprovementUpgrade = i; 
+}
+
+bool CvImprovementInfo::isActsAsCity() const
+{
+	return m_bActsAsCity; 
 }
 
 bool CvImprovementInfo::isHillsMakesValid() const
@@ -10638,6 +11120,7 @@ void CvImprovementInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iImprovementPillage);
 	stream->Read(&m_iImprovementUpgrade);
 
+	stream->Read(&m_bActsAsCity);				
 	stream->Read(&m_bHillsMakesValid);				
 	stream->Read(&m_bFreshWaterMakesValid);	
 	stream->Read(&m_bRiverSideMakesValid);	
@@ -10745,6 +11228,7 @@ void CvImprovementInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iImprovementPillage);
 	stream->Write(m_iImprovementUpgrade);
 
+	stream->Write(m_bActsAsCity);				
 	stream->Write(m_bHillsMakesValid);				
 	stream->Write(m_bFreshWaterMakesValid);	
 	stream->Write(m_bRiverSideMakesValid);	
@@ -10859,6 +11343,7 @@ bool CvImprovementInfo::read(CvXMLLoadUtility* pXML)
 		pXML->InitList(&m_piIrrigatedChange, NUM_YIELD_TYPES);
 	}
 
+	pXML->GetChildXmlValByName(&m_bActsAsCity, "bActsAsCity");
 	pXML->GetChildXmlValByName(&m_bHillsMakesValid, "bHillsMakesValid");
 	pXML->GetChildXmlValByName(&m_bFreshWaterMakesValid, "bFreshWaterMakesValid");
 	pXML->GetChildXmlValByName(&m_bRiverSideMakesValid, "bRiverSideMakesValid");
@@ -11068,6 +11553,7 @@ m_iTechReveal(0),
 m_iTechCityTrade(0),
 m_iTechObsolete(0),
 m_iAITradeModifier(0),
+m_iAIObjective(0),
 m_iHealth(0),
 m_iHappiness(0),
 m_iMinAreaSize(0),
@@ -11148,6 +11634,11 @@ int CvBonusInfo::getTechObsolete() const
 int CvBonusInfo::getAITradeModifier() const
 {
 	return m_iAITradeModifier; 
+}
+
+int CvBonusInfo::getAIObjective() const
+{
+	return m_iAIObjective; 
 }
 
 int CvBonusInfo::getHealth() const
@@ -11349,6 +11840,7 @@ void CvBonusInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iTechCityTrade);
 	stream->Read(&m_iTechObsolete);
 	stream->Read(&m_iAITradeModifier);
+	stream->Read(&m_iAIObjective);
 	stream->Read(&m_iHealth);
 	stream->Read(&m_iHappiness);
 	stream->Read(&m_iMinAreaSize);
@@ -11412,6 +11904,7 @@ void CvBonusInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iTechCityTrade);
 	stream->Write(m_iTechObsolete);
 	stream->Write(m_iAITradeModifier);
+	stream->Write(m_iAIObjective);
 	stream->Write(m_iHealth);
 	stream->Write(m_iHappiness);
 	stream->Write(m_iMinAreaSize);
@@ -11482,6 +11975,7 @@ bool CvBonusInfo::read(CvXMLLoadUtility* pXML)
 	}
 
 	pXML->GetChildXmlValByName(&m_iAITradeModifier, "iAITradeModifier");
+	pXML->GetChildXmlValByName(&m_iAIObjective, "iAIObjective");
 	pXML->GetChildXmlValByName(&m_iHealth, "iHealth");
 	pXML->GetChildXmlValByName(&m_iHappiness, "iHappiness");
 	pXML->GetChildXmlValByName(&m_iMinAreaSize, "iMinAreaSize");
@@ -12623,6 +13117,8 @@ m_iConvertReligionRefuseAttitudeThreshold(NO_ATTITUDE),
 m_iOpenBordersRefuseAttitudeThreshold(NO_ATTITUDE),
 m_iDefensivePactRefuseAttitudeThreshold(NO_ATTITUDE),
 m_iPermanentAllianceRefuseAttitudeThreshold(NO_ATTITUDE),
+m_iVassalRefuseAttitudeThreshold(NO_ATTITUDE),
+m_iVassalPowerModifier(0),
 m_iFavoriteCivic(NO_CIVIC),
 m_pbTraits(NULL),
 m_piFlavorValue(NULL),
@@ -13013,6 +13509,16 @@ int CvLeaderHeadInfo::getPermanentAllianceRefuseAttitudeThreshold() const
 	return m_iPermanentAllianceRefuseAttitudeThreshold; 
 }
 
+int CvLeaderHeadInfo::getVassalRefuseAttitudeThreshold() const
+{
+	return m_iVassalRefuseAttitudeThreshold; 
+}
+
+int CvLeaderHeadInfo::getVassalPowerModifier() const
+{
+	return m_iVassalPowerModifier; 
+}
+
 int CvLeaderHeadInfo::getFavoriteCivic() const
 {
 	return m_iFavoriteCivic; 
@@ -13209,6 +13715,8 @@ void CvLeaderHeadInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iOpenBordersRefuseAttitudeThreshold);
 	stream->Read(&m_iDefensivePactRefuseAttitudeThreshold);
 	stream->Read(&m_iPermanentAllianceRefuseAttitudeThreshold);
+	stream->Read(&m_iVassalRefuseAttitudeThreshold);
+	stream->Read(&m_iVassalPowerModifier);
 	stream->Read(&m_iFavoriteCivic);
 
 	stream->ReadString(m_szArtDefineTag);
@@ -13342,6 +13850,8 @@ void CvLeaderHeadInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iOpenBordersRefuseAttitudeThreshold);
 	stream->Write(m_iDefensivePactRefuseAttitudeThreshold);
 	stream->Write(m_iPermanentAllianceRefuseAttitudeThreshold);
+	stream->Write(m_iVassalRefuseAttitudeThreshold);
+	stream->Write(m_iVassalPowerModifier);
 	stream->Write(m_iFavoriteCivic);
 
 	stream->WriteString(m_szArtDefineTag);
@@ -13432,6 +13942,7 @@ bool CvLeaderHeadInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iFavoriteCivicAttitudeChange, "iFavoriteCivicAttitudeChange");
 	pXML->GetChildXmlValByName(&m_iFavoriteCivicAttitudeDivisor, "iFavoriteCivicAttitudeDivisor");
 	pXML->GetChildXmlValByName(&m_iFavoriteCivicAttitudeChangeLimit, "iFavoriteCivicAttitudeChangeLimit");
+	pXML->GetChildXmlValByName(&m_iVassalPowerModifier, "iVassalPowerModifier");
 
 	pXML->GetChildXmlValByName(szTextVal, "DemandTributeAttitudeThreshold");
 	m_iDemandTributeAttitudeThreshold = pXML->FindInInfoClass( szTextVal, GC.getAttitudeInfo(), sizeof(GC.getAttitudeInfo((AttitudeTypes)0)), NUM_ATTITUDE_TYPES);
@@ -13480,6 +13991,9 @@ bool CvLeaderHeadInfo::read(CvXMLLoadUtility* pXML)
 
 	pXML->GetChildXmlValByName(szTextVal, "PermanentAllianceRefuseAttitudeThreshold");
 	m_iPermanentAllianceRefuseAttitudeThreshold = pXML->FindInInfoClass( szTextVal, GC.getAttitudeInfo(), sizeof(GC.getAttitudeInfo((AttitudeTypes)0)), NUM_ATTITUDE_TYPES);
+
+	pXML->GetChildXmlValByName(szTextVal, "VassalRefuseAttitudeThreshold");
+	m_iVassalRefuseAttitudeThreshold = pXML->FindInInfoClass( szTextVal, GC.getAttitudeInfo(), sizeof(GC.getAttitudeInfo((AttitudeTypes)0)), NUM_ATTITUDE_TYPES);
 
 	pXML->GetChildXmlValByName(szTextVal, "FavoriteCivic");
 	m_iFavoriteCivic = pXML->FindInInfoClass(szTextVal, GC.getCivicInfo(), sizeof(GC.getCivicInfo((CivicTypes)0)), GC.getNumCivicInfos());
@@ -14372,9 +14886,13 @@ bool CvReligionInfo::read(CvXMLLoadUtility* pXML)
 //------------------------------------------------------------------------------------------------------
 CvTraitInfo::CvTraitInfo() :
 m_iHealth(0),													
+m_iHappiness(0),													
 m_iMaxAnarchy(0),											
 m_iUpkeepModifier(0),									
+m_iLevelExperienceModifier(0),									
 m_iGreatPeopleRateModifier(0),						
+m_iGreatGeneralRateModifier(0),						
+m_iDomesticGreatGeneralRateModifier(0),						
 m_iMaxGlobalBuildingProductionModifier(0),	
 m_iMaxTeamBuildingProductionModifier(0),		
 m_iMaxPlayerBuildingProductionModifier(0),
@@ -14409,6 +14927,11 @@ int CvTraitInfo::getHealth() const
 	return m_iHealth; 
 }
 
+int CvTraitInfo::getHappiness() const									
+{
+	return m_iHappiness; 
+}
+
 int CvTraitInfo::getMaxAnarchy() const							
 {
 	return m_iMaxAnarchy; 
@@ -14419,9 +14942,24 @@ int CvTraitInfo::getUpkeepModifier() const
 	return m_iUpkeepModifier; 
 }
 
+int CvTraitInfo::getLevelExperienceModifier() const					
+{
+	return m_iLevelExperienceModifier; 
+}
+
 int CvTraitInfo::getGreatPeopleRateModifier() const	
 {
 	return m_iGreatPeopleRateModifier; 
+}
+
+int CvTraitInfo::getGreatGeneralRateModifier() const	
+{
+	return m_iGreatGeneralRateModifier; 
+}
+
+int CvTraitInfo::getDomesticGreatGeneralRateModifier() const	
+{
+	return m_iDomesticGreatGeneralRateModifier; 
 }
 
 int CvTraitInfo::getMaxGlobalBuildingProductionModifier() const	
@@ -14493,9 +15031,13 @@ bool CvTraitInfo::read(CvXMLLoadUtility* pXML)
 	setShortDescription(szTextVal);
 
 	pXML->GetChildXmlValByName(&m_iHealth, "iHealth");
+	pXML->GetChildXmlValByName(&m_iHappiness, "iHappiness");
 	pXML->GetChildXmlValByName(&m_iMaxAnarchy, "iMaxAnarchy");
 	pXML->GetChildXmlValByName(&m_iUpkeepModifier, "iUpkeepModifier");
+	pXML->GetChildXmlValByName(&m_iLevelExperienceModifier, "iLevelExperienceModifier");
 	pXML->GetChildXmlValByName(&m_iGreatPeopleRateModifier, "iGreatPeopleRateModifier");
+	pXML->GetChildXmlValByName(&m_iGreatGeneralRateModifier, "iGreatGeneralRateModifier");
+	pXML->GetChildXmlValByName(&m_iDomesticGreatGeneralRateModifier, "iDomesticGreatGeneralRateModifier");
 	pXML->GetChildXmlValByName(&m_iMaxGlobalBuildingProductionModifier, "iMaxGlobalBuildingProductionModifier");
 	pXML->GetChildXmlValByName(&m_iMaxTeamBuildingProductionModifier, "iMaxTeamBuildingProductionModifier");
 	pXML->GetChildXmlValByName(&m_iMaxPlayerBuildingProductionModifier, "iMaxPlayerBuildingProductionModifier");
@@ -16249,6 +16791,7 @@ m_bNoGoodies(false),
 m_bNoAnimals(false),
 m_bNoBarbUnits(false),
 m_bNoBarbCities(false),
+m_bFirstSoundtrackFirst(false),
 m_paiCitySoundscapeSciptIds(NULL),
 m_paiSoundtracks(NULL)
 {
@@ -16345,6 +16888,11 @@ int CvEraInfo::getSoundtrackSpace() const
 	return m_iSoundtrackSpace; 
 }
 
+bool CvEraInfo::isFirstSoundtrackFirst() const
+{
+	return m_bFirstSoundtrackFirst; 
+}
+
 int CvEraInfo::getNumSoundtracks() const
 {
 	return m_iNumSoundtracks; 
@@ -16424,6 +16972,7 @@ bool CvEraInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iGreatPeoplePercent, "iGreatPeoplePercent");
 	pXML->GetChildXmlValByName(&m_iAnarchyPercent, "iAnarchyPercent");
 	pXML->GetChildXmlValByName(&m_iSoundtrackSpace, "iSoundtrackSpace");
+	pXML->GetChildXmlValByName(&m_bFirstSoundtrackFirst, "bFirstSoundtrackFirst");
 	pXML->GetChildXmlValByName(m_szAudioUnitVictoryScript, "AudioUnitVictoryScript");
 	pXML->GetChildXmlValByName(m_szAudioUnitDefeatScript, "AudioUnitDefeatScript");
 

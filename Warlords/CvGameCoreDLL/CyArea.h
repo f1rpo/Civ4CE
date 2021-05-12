@@ -47,6 +47,7 @@ public:
 	int getNumUnrevealedTiles(int /*TeamTypes*/ eIndex);
 
 	bool isCleanPower(int /*TeamTypes*/ eIndex);
+	bool isBorderObstacle(int /*TeamTypes*/ eIndex);
 
 	int /*AreaAITypes*/ getAreaAIType(int /*TeamTypes*/ eIndex);
 	CyCity* getTargetCity(int /*PlayerTypes*/ eIndex);

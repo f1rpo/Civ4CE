@@ -37,9 +37,9 @@ class CvDawnOfMan:
 		
 #		iWHeaderPanelRemainingAfterLeader = self.W_HEADER_PANEL - self.W_LEADER_ICON + (self.iMarginSpace * 3)
 #		iXHeaderPanelRemainingAfterLeader = self.X_LEADER_ICON + self.W_LEADER_ICON + self.iMarginSpace
-		self.X_LEADER_TITLE_TEXT = 510#iXHeaderPanelRemainingAfterLeader + (iWHeaderPanelRemainingAfterLeader / 2)
+		self.X_LEADER_TITLE_TEXT = 505#iXHeaderPanelRemainingAfterLeader + (iWHeaderPanelRemainingAfterLeader / 2)
 		self.Y_LEADER_TITLE_TEXT = self.Y_HEADER_PANEL + self.iMarginSpace + 6
-		self.W_LEADER_TITLE_TEXT = self.W_HEADER_PANEL / 3
+		self.W_LEADER_TITLE_TEXT = self.W_HEADER_PANEL / 3 + 10
 		self.H_LEADER_TITLE_TEXT = self.H_HEADER_PANEL / 2
 		
 		self.X_FANCY_ICON1 = self.X_HEADER_PANEL + 170
@@ -49,8 +49,8 @@ class CvDawnOfMan:
 		
 		self.X_STATS_TEXT = self.X_FANCY_ICON1# + self.W_LEADER_ICON + (self.iMarginSpace * 2) + 5
 		self.Y_STATS_TEXT = self.Y_LEADER_TITLE_TEXT + 75
-		self.W_STATS_TEXT = int(self.W_HEADER_PANEL * (5 / 7.0))
-		self.H_STATS_TEXT = int(self.H_HEADER_PANEL * (3 / 5.0))
+		self.W_STATS_TEXT = int(self.W_HEADER_PANEL * (5.25 / 7.0))
+		self.H_STATS_TEXT =  int(self.H_HEADER_PANEL * (2.25 / 5.0))
 		
 		self.X_TEXT_PANEL = self.X_HEADER_PANEL
 		self.Y_TEXT_PANEL = self.Y_HEADER_PANEL + self.H_HEADER_PANEL + self.iMarginSpace - 10 #10 is the fudge factor
@@ -137,3 +137,9 @@ class CvDawnOfMan:
 	
 	def update(self, fDelta):
 		return
+		
+	def onClose(self):
+		CyInterface().setSoundSelectionReady(true)		
+		return 0
+	
+		

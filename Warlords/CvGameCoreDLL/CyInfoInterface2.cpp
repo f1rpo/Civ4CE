@@ -18,6 +18,7 @@ void CyInfoPythonInterface2()
 		.def("getDefaultBuildingIndex", &CvBuildingClassInfo::getDefaultBuildingIndex, "int ()")
 
 		.def("isNoLimit", &CvBuildingClassInfo::isNoLimit, "bool ()")
+		.def("isMonument", &CvBuildingClassInfo::isMonument, "bool ()")
 
 		// Arrays
 
@@ -265,6 +266,7 @@ void CyInfoPythonInterface2()
 		.def("getImprovementPillage", &CvImprovementInfo::getImprovementPillage, "int ()")
 		.def("getImprovementUpgrade", &CvImprovementInfo::getImprovementUpgrade, "int ()")
 
+		.def("isActsAsCity", &CvImprovementInfo::isActsAsCity, "bool ()")
 		.def("isHillsMakesValid", &CvImprovementInfo::isHillsMakesValid, "bool ()")
 		.def("isFreshWaterMakesValid", &CvImprovementInfo::isFreshWaterMakesValid, "bool ()")
 		.def("isRiverSideMakesValid", &CvImprovementInfo::isRiverSideMakesValid, "bool ()")
@@ -311,6 +313,7 @@ void CyInfoPythonInterface2()
 		.def("getTechCityTrade", &CvBonusInfo::getTechCityTrade, "int ()")
 		.def("getTechObsolete", &CvBonusInfo::getTechObsolete, "int ()")
 		.def("getAITradeModifier", &CvBonusInfo::getAITradeModifier, "int ()")
+		.def("getAIObjective", &CvBonusInfo::getAIObjective, "int ()")
 		.def("getHealth", &CvBonusInfo::getHealth, "int ()")
 		.def("getHappiness", &CvBonusInfo::getHappiness, "int ()")
 		.def("getMinAreaSize", &CvBonusInfo::getMinAreaSize, "int ()")

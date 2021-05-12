@@ -71,9 +71,9 @@ int CyTeam::getAssets()
 	return m_pTeam ? m_pTeam->getAssets() : -1;
 }
 
-int CyTeam::getPower()
+int CyTeam::getPower(bool bIncludeVassals)
 {
-	return m_pTeam ? m_pTeam->getPower() : -1;
+	return m_pTeam ? m_pTeam->getPower(bIncludeVassals) : -1;
 }
 
 int CyTeam::getDefensivePower()
@@ -119,6 +119,11 @@ bool CyTeam::hasMetHuman()
 int CyTeam::getDefensivePactCount()
 {
 	return m_pTeam ? m_pTeam->getDefensivePactCount() : -1;
+}
+
+bool CyTeam::isAVassal() const
+{
+	return m_pTeam ? m_pTeam->isAVassal() : false;
 }
 
 int CyTeam::getUnitClassMaking(int /*UnitClassTypes*/ eUnitClass)
@@ -403,6 +408,22 @@ void CyTeam::changePermanentAllianceTradingCount(int iChange)
 		m_pTeam->changePermanentAllianceTradingCount(iChange);
 }
 
+int CyTeam::getVassalTradingCount()
+{
+	return m_pTeam ? m_pTeam->getVassalTradingCount() : -1;
+}
+
+bool CyTeam::isVassalStateTrading()
+{
+	return m_pTeam ? m_pTeam->isVassalStateTrading() : false;
+}
+
+void CyTeam::changeVassalTradingCount(int iChange)
+{
+	if (m_pTeam)
+		m_pTeam->changeVassalTradingCount(iChange);
+}
+
 int CyTeam::getBridgeBuildingCount()
 {
 	return m_pTeam ? m_pTeam->getBridgeBuildingCount() : -1;
@@ -466,6 +487,33 @@ void CyTeam::changeWaterWorkCount(int iChange)
 	if (m_pTeam)
 		m_pTeam->changeWaterWorkCount(iChange);
 }
+
+int CyTeam::getVassalPower() const
+{
+	return (m_pTeam ? m_pTeam->getVassalPower() : -1);
+}
+
+void CyTeam::setVassalPower(int iPower)
+{
+	if (m_pTeam)
+	{
+		m_pTeam->setVassalPower(iPower);
+	}
+}
+
+int CyTeam::getMasterPower() const
+{
+	return (m_pTeam ? m_pTeam->getMasterPower() : -1);
+}
+
+void CyTeam::setMasterPower(int iPower)
+{
+	if (m_pTeam)
+	{
+		m_pTeam->setMasterPower(iPower);
+	}
+}
+
 
 bool CyTeam::isMapCentering()
 {
@@ -583,6 +631,35 @@ bool CyTeam::isOpenBorders(int /*TeamTypes*/ eIndex)
 bool CyTeam::isForcePeace(int /*TeamTypes*/ eIndex)				 
 {
 	return m_pTeam ? m_pTeam->isForcePeace((TeamTypes)eIndex) : false;
+}
+
+bool CyTeam::isVassal(int /*TeamTypes*/ eIndex)				 
+{
+	return m_pTeam ? m_pTeam->isVassal((TeamTypes)eIndex) : false;
+}
+
+void CyTeam::setVassal(int /*TeamTypes*/ eIndex, bool bVassal, bool bCapitulated)				 
+{
+	if (m_pTeam)
+	{
+		m_pTeam->setVassal((TeamTypes)eIndex, bVassal, bCapitulated);
+	}
+}
+
+void CyTeam::assignVassal(int /*TeamTypes*/ eIndex, bool bSurrender)				 
+{
+	if (m_pTeam)
+	{
+		m_pTeam->assignVassal((TeamTypes)eIndex, bSurrender);
+	}
+}
+
+void CyTeam::freeVassal(int /*TeamTypes*/ eIndex)				 
+{
+	if (m_pTeam)
+	{
+		m_pTeam->freeVassal((TeamTypes)eIndex);
+	}
 }
 
 bool CyTeam::isDefensivePact(int /*TeamTypes*/ eIndex)				 

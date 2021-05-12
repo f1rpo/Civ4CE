@@ -19,7 +19,12 @@
 #define RANDPLOT_NOT_VISIBLE_TO_CIV						(0x00000020)
 #define RANDPLOT_NOT_CITY											(0x00000040)
 
+#ifdef _USRDLL
 #define MAX_CIV_PLAYERS												(18)
+#else
+#define MAX_CIV_PLAYERS												(CvGlobals::getInstance().getMaxCivPlayers())
+#endif
+
 #define MAX_CIV_TEAMS													(MAX_CIV_PLAYERS)
 #define MAX_PLAYERS														(MAX_CIV_PLAYERS + 1)
 #define MAX_TEAMS															(MAX_PLAYERS)
@@ -32,7 +37,7 @@
 #define MAX_PLAYERINFO_CHAR_COUNT							(32)
 #define MAX_PLAYEREMAIL_CHAR_COUNT						(64)
 #define MAX_PASSWORD_CHAR_COUNT								(32)
-#define MAX_GSLOGIN_CHAR_COUNT								(20)
+#define MAX_GSLOGIN_CHAR_COUNT								(30)
 #define MAX_GSEMAIL_CHAR_COUNT								(30)
 #define MAX_GSPASSWORD_CHAR_COUNT							(30)
 #define MAX_CHAT_CHAR_COUNT										(256)
@@ -53,8 +58,8 @@
 #define Z_ORDER_LAYER													(-0.1f)
 #define Z_ORDER_LEVEL													(-0.3f)
 
-#define CIV4_GUID															"civ4"
-#define CIV4_PRODUCT_ID												10435
+#define CIV4_GUID															"civ4wrld"
+#define CIV4_PRODUCT_ID												10763
 #define CIV4_NAMESPACE_ID											17
 #define CIV4_NAMESPACE_EXT										"-tk"
 
@@ -70,10 +75,10 @@
 
 // Version Verification files and folders
 #ifdef _DEBUG
-#define CIV4_EXE_FILE													".\\Civilization4_DEBUG.exe"
+#define CIV4_EXE_FILE													".\\Civ4Warlords_DEBUG.exe"
 #define CIV4_DLL_FILE													".\\Assets\\CvGameCoreDLL_dbg.dll"
 #else
-#define CIV4_EXE_FILE													".\\CivilizationIV.exe"
+#define CIV4_EXE_FILE													".\\Civ4Warlords.exe"
 #define CIV4_DLL_FILE													".\\Assets\\CvGameCoreDLL.dll"
 #endif
 #define CIV4_SHADERS													".\\Shaders\\FXO"

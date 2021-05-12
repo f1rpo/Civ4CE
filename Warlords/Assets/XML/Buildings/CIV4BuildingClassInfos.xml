@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Soren Johnson (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -14,6 +14,7 @@
 			<iMaxPlayerInstances>1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>1</iExtraPlayerInstances>
 			<bNoLimit>1</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_PALACE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -25,6 +26,7 @@
 			<iMaxPlayerInstances>1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_GREAT_PALACE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -36,6 +38,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_VERSAILLES</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -47,6 +50,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_WALLS</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -58,6 +62,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_CASTLE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -69,7 +74,20 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_BARRACKS</DefaultBuilding>
+			<VictoryThresholds/>
+		</BuildingClassInfo>
+		<BuildingClassInfo>
+			<Type>BUILDINGCLASS_STABLE</Type>
+			<Description>TXT_KEY_BUILDING_STABLE</Description>
+			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
+			<iMaxTeamInstances>-1</iMaxTeamInstances>
+			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
+			<iExtraPlayerInstances>0</iExtraPlayerInstances>
+			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
+			<DefaultBuilding>BUILDING_STABLE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
 		<BuildingClassInfo>
@@ -80,6 +98,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_BUNKER</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -91,6 +110,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_BOMB_SHELTER</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -102,6 +122,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_GRANARY</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -113,6 +134,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_AQUEDUCT</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -124,17 +146,19 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_HOSPITAL</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
 		<BuildingClassInfo>
 			<Type>BUILDINGCLASS_RECYCLING_CENTER</Type>
-			<Description>TXT_KEY_RECYCLING_CENTER</Description>
+			<Description>TXT_KEY_BUILDING_RECYCLING_CENTER</Description>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>-1</iMaxTeamInstances>
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_RECYCLING_CENTER</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -146,6 +170,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_LIGHTHOUSE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -157,6 +182,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_HARBOR</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -168,6 +194,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_DRYDOCK</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -179,6 +206,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_AIRPORT</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -190,6 +218,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_FORGE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -201,6 +230,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_FACTORY</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -212,6 +242,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_COAL_PLANT</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -223,6 +254,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_HYDRO_PLANT</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -234,6 +266,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_NUCLEAR_PLANT</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -245,6 +278,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>1</bMonument>
 			<DefaultBuilding>BUILDING_OBELISK</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -256,6 +290,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_ACADEMY</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -267,6 +302,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_LIBRARY</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -278,6 +314,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_UNIVERSITY</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -289,6 +326,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_OBSERVATORY</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -300,6 +338,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_LABORATORY</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -311,6 +350,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_THEATRE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -322,6 +362,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>1</bMonument>
 			<DefaultBuilding>BUILDING_COLOSSEUM</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -333,6 +374,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_BROADCAST_TOWER</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -344,6 +386,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_MARKET</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -355,6 +398,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_GROCER</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -366,6 +410,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_BANK</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -377,6 +422,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_SUPERMARKET</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -388,6 +434,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_COURTHOUSE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -399,6 +446,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_JAIL</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -410,6 +458,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>1</bMonument>
 			<DefaultBuilding>BUILDING_JEWISH_TEMPLE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -421,6 +470,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>1</bMonument>
 			<DefaultBuilding>BUILDING_JEWISH_CATHEDRAL</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -432,6 +482,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_JEWISH_MONASTERY</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -443,6 +494,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_JEWISH_SHRINE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -454,6 +506,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>1</bMonument>
 			<DefaultBuilding>BUILDING_CHRISTIAN_TEMPLE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -465,6 +518,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>1</bMonument>
 			<DefaultBuilding>BUILDING_CHRISTIAN_CATHEDRAL</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -476,6 +530,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_CHRISTIAN_MONASTERY</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -487,6 +542,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_CHRISTIAN_SHRINE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -498,6 +554,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>1</bMonument>
 			<DefaultBuilding>BUILDING_ISLAMIC_TEMPLE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -509,6 +566,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>1</bMonument>
 			<DefaultBuilding>BUILDING_ISLAMIC_CATHEDRAL</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -520,6 +578,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_ISLAMIC_MONASTERY</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -531,6 +590,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_ISLAMIC_SHRINE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -542,6 +602,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>1</bMonument>
 			<DefaultBuilding>BUILDING_HINDU_TEMPLE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -553,6 +614,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>1</bMonument>
 			<DefaultBuilding>BUILDING_HINDU_CATHEDRAL</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -564,6 +626,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_HINDU_MONASTERY</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -575,6 +638,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_HINDU_SHRINE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -586,6 +650,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>1</bMonument>
 			<DefaultBuilding>BUILDING_BUDDHIST_TEMPLE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -597,6 +662,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>1</bMonument>
 			<DefaultBuilding>BUILDING_BUDDHIST_CATHEDRAL</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -608,6 +674,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_BUDDHIST_MONASTERY</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -619,6 +686,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_BUDDHIST_SHRINE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -630,6 +698,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>1</bMonument>
 			<DefaultBuilding>BUILDING_CONFUCIAN_TEMPLE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -641,6 +710,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>1</bMonument>
 			<DefaultBuilding>BUILDING_CONFUCIAN_CATHEDRAL</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -652,6 +722,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_CONFUCIAN_MONASTERY</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -663,6 +734,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_CONFUCIAN_SHRINE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -674,6 +746,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>1</bMonument>
 			<DefaultBuilding>BUILDING_TAOIST_TEMPLE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -685,6 +758,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>1</bMonument>
 			<DefaultBuilding>BUILDING_TAOIST_CATHEDRAL</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -696,6 +770,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_TAOIST_MONASTERY</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -707,6 +782,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_TAOIST_SHRINE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -718,6 +794,7 @@
 			<iMaxPlayerInstances>1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>1</bMonument>
 			<DefaultBuilding>BUILDING_HEROIC_EPIC</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -729,6 +806,7 @@
 			<iMaxPlayerInstances>1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>1</bMonument>
 			<DefaultBuilding>BUILDING_NATIONAL_EPIC</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -740,6 +818,7 @@
 			<iMaxPlayerInstances>1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_GLOBE_THEATRE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -751,6 +830,7 @@
 			<iMaxPlayerInstances>1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_HERMITAGE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -762,6 +842,7 @@
 			<iMaxPlayerInstances>1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_OXFORD_UNIVERSITY</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -773,6 +854,7 @@
 			<iMaxPlayerInstances>1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_WALL_STREET</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -784,6 +866,7 @@
 			<iMaxPlayerInstances>1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_IRON_WORKS</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -795,6 +878,7 @@
 			<iMaxPlayerInstances>1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_WEST_POINT</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -806,6 +890,7 @@
 			<iMaxPlayerInstances>1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_MT_RUSHMORE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -817,6 +902,7 @@
 			<iMaxPlayerInstances>1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_RED_CROSS</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -828,6 +914,7 @@
 			<iMaxPlayerInstances>1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_SCOTLAND_YARD</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -839,6 +926,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_PYRAMID</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -850,6 +938,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_STONEHENGE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -861,6 +950,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_GREAT_LIBRARY</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -872,6 +962,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_GREAT_LIGHTHOUSE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -883,6 +974,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_HANGING_GARDEN</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -894,6 +986,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_COLOSSUS</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -905,6 +998,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_ORACLE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -916,6 +1010,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_PARTHENON</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -927,6 +1022,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_ANGKOR_WAT</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -938,6 +1034,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_HAGIA_SOPHIA</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -949,6 +1046,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_CHICHEN_ITZA</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -960,6 +1058,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_SISTINE_CHAPEL</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -971,6 +1070,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_NOTRE_DAME</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -982,6 +1082,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_SPIRAL_MINARET</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -993,6 +1094,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_TAJ_MAHAL</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -1004,6 +1106,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_KREMLIN</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -1015,6 +1118,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_EIFFEL_TOWER</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -1026,6 +1130,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_STATUE_OF_LIBERTY</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -1037,6 +1142,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_BROADWAY</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -1048,6 +1154,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_ROCKNROLL</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -1059,6 +1166,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_HOLLYWOOD</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -1070,6 +1178,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_GREAT_DAM</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -1081,6 +1190,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_PENTAGON</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -1092,6 +1202,7 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_UNITED_NATIONS</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
@@ -1103,7 +1214,56 @@
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
 			<DefaultBuilding>BUILDING_SPACE_ELEVATOR</DefaultBuilding>
+			<VictoryThresholds/>
+		</BuildingClassInfo>
+		<BuildingClassInfo>
+			<Type>BUILDINGCLASS_MILITARY_ACADEMY</Type>
+			<Description>TXT_KEY_BUILDING_MILITARY_ACADEMY</Description>
+			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
+			<iMaxTeamInstances>-1</iMaxTeamInstances>
+			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
+			<iExtraPlayerInstances>0</iExtraPlayerInstances>
+			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
+			<DefaultBuilding>BUILDING_MILITARY_ACADEMY</DefaultBuilding>
+			<VictoryThresholds/>
+		</BuildingClassInfo>
+		<BuildingClassInfo>
+			<Type>BUILDINGCLASS_ARTEMIS</Type>
+			<Description>TXT_KEY_BUILDING_ARTEMIS</Description>
+			<iMaxGlobalInstances>1</iMaxGlobalInstances>
+			<iMaxTeamInstances>-1</iMaxTeamInstances>
+			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
+			<iExtraPlayerInstances>0</iExtraPlayerInstances>
+			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
+			<DefaultBuilding>BUILDING_ARTEMIS</DefaultBuilding>
+			<VictoryThresholds/>
+		</BuildingClassInfo>
+		<BuildingClassInfo>
+			<Type>BUILDINGCLASS_SANKORE</Type>
+			<Description>TXT_KEY_BUILDING_SANKORE</Description>
+			<iMaxGlobalInstances>1</iMaxGlobalInstances>
+			<iMaxTeamInstances>-1</iMaxTeamInstances>
+			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
+			<iExtraPlayerInstances>0</iExtraPlayerInstances>
+			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
+			<DefaultBuilding>BUILDING_SANKORE</DefaultBuilding>
+			<VictoryThresholds/>
+		</BuildingClassInfo>
+		<BuildingClassInfo>
+			<Type>BUILDINGCLASS_GREAT_WALL</Type>
+			<Description>TXT_KEY_BUILDING_GREAT_WALL</Description>
+			<iMaxGlobalInstances>1</iMaxGlobalInstances>
+			<iMaxTeamInstances>-1</iMaxTeamInstances>
+			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
+			<iExtraPlayerInstances>0</iExtraPlayerInstances>
+			<bNoLimit>0</bNoLimit>
+			<bMonument>0</bMonument>
+			<DefaultBuilding>BUILDING_GREAT_WALL</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
 	</BuildingClassInfos>

@@ -304,8 +304,8 @@ class AdminFrame(wx.Frame):
 		"'save' event handler"
 		dlg = wx.FileDialog(
 			self, message=(localText.getText("TXT_KEY_PITBOSS_SAVE_AS", ())), defaultDir=".\saves\multi",
-			defaultFile="Pitboss_"+PB.getGamedate(True)+".Civ4SavedGame", 
-			wildcard=(localText.getText("TXT_KEY_PITBOSS_SAVE_AS_TEXT", ())) + " (*.Civ4SavedGame)|*.Civ4SavedGame", style=wx.SAVE | wx.OVERWRITE_PROMPT
+			defaultFile="Pitboss_"+PB.getGamedate(True)+".CivWarlordsSave", 
+			wildcard=(localText.getText("TXT_KEY_PITBOSS_SAVE_AS_TEXT", ())) + " (*.CivWarlordsSave)|*.CivWarlordsSave", style=wx.SAVE | wx.OVERWRITE_PROMPT
 			)
 			
 		if dlg.ShowModal() == wx.ID_OK:

@@ -16,6 +16,7 @@
 #include "FAStarNode.h"
 #include "CvInfos.h"
 #include "FProfiler.h"
+#include "CvDLLEventReporterIFaceBase.h"
 
 // Public Functions...
 
@@ -262,7 +263,7 @@ void CvSelectionGroup::playActionSound()
 		pUnitInfo = &GC.getUnitInfo( pHeadUnit->getUnitType() );
 		if ( pUnitInfo )
 		{
-			iScriptId = pUnitInfo->getArtInfo(0, GET_PLAYER(getOwner()).isLateEra())->getActionSoundScriptId();
+			iScriptId = pUnitInfo->getArtInfo(0, GET_PLAYER(getOwner()).getCurrentEra())->getActionSoundScriptId();
 		}
 	}
 
@@ -333,6 +334,8 @@ void CvSelectionGroup::pushMission(MissionTypes eMission, int iData1, int iData2
 
 			gDLL->getInterfaceIFace()->setHasMovedUnit(true);
 		}
+
+		gDLL->getEventReporterIFace()->selectionGroupPushMission(this, eMission);
 
 		doDelayedDeath();
 	}
@@ -458,6 +461,7 @@ CvPlot* CvSelectionGroup::lastMissionPlot()
 		case MISSION_GREAT_WORK:
 		case MISSION_GOLDEN_AGE:
 		case MISSION_BUILD:
+		case MISSION_LEAD:
 			break;
 
 		default:
@@ -695,6 +699,13 @@ bool CvSelectionGroup::canStartMission(int iMission, int iData1, int iData2, CvP
 			}
 			break;
 
+		case MISSION_LEAD:
+			if (pLoopUnit->canLead(pPlot, iData1))
+			{
+				return true;
+			}
+			break;
+
 		case MISSION_BEGIN_COMBAT:
 		case MISSION_END_COMBAT:
 		case MISSION_AIRSTRIKE:
@@ -820,6 +831,7 @@ void CvSelectionGroup::startMission()
 		case MISSION_GREAT_WORK:
 		case MISSION_GOLDEN_AGE:
 		case MISSION_BUILD:
+		case MISSION_LEAD:
 			break;
 
 		default:
@@ -986,6 +998,13 @@ void CvSelectionGroup::startMission()
 					break;
 
 				case MISSION_BUILD:
+					break;
+
+				case MISSION_LEAD:
+					if (pLoopUnit->lead(headMissionQueueNode()->m_data.iData1))
+					{
+						bAction = true;
+					}
 					break;
 
 				default:
@@ -1168,6 +1187,7 @@ void CvSelectionGroup::continueMission(int iSteps)
 				case MISSION_TRADE:
 				case MISSION_GREAT_WORK:
 				case MISSION_GOLDEN_AGE:
+				case MISSION_LEAD:
 					break;
 
 				case MISSION_BUILD:
@@ -1243,6 +1263,7 @@ void CvSelectionGroup::continueMission(int iSteps)
 			case MISSION_TRADE:
 			case MISSION_GREAT_WORK:
 			case MISSION_GOLDEN_AGE:
+			case MISSION_LEAD:
 				bDone = true;
 				break;
 
@@ -1834,6 +1855,32 @@ bool CvSelectionGroup::canEnterTerritory(TeamTypes eTeam, bool bIgnoreRightOfPas
 	return false;
 }
 
+bool CvSelectionGroup::canEnterArea(TeamTypes eTeam, const CvArea* pArea, bool bIgnoreRightOfPassage) const
+{
+	CLLNode<IDInfo>* pUnitNode;
+	CvUnit* pLoopUnit;
+
+	if (getNumUnits() > 0)
+	{
+		pUnitNode = headUnitNode();
+
+		while (pUnitNode != NULL)
+		{
+			pLoopUnit = ::getUnit(pUnitNode->m_data);
+			pUnitNode = nextUnitNode(pUnitNode);
+
+			if (!(pLoopUnit->canEnterArea(eTeam, pArea, bIgnoreRightOfPassage)))
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
 
 bool CvSelectionGroup::canMoveInto(CvPlot* pPlot, bool bAttack)
 {
@@ -1849,13 +1896,11 @@ bool CvSelectionGroup::canMoveInto(CvPlot* pPlot, bool bAttack)
 			pLoopUnit = ::getUnit(pUnitNode->m_data);
 			pUnitNode = nextUnitNode(pUnitNode);
 
-			if (!(pLoopUnit->canMoveInto(pPlot, bAttack)))
+			if (pLoopUnit->canMoveInto(pPlot, bAttack))
 			{
-				return false;
+				return true;
 			}
 		}
-
-		return true;
 	}
 
 	return false;
@@ -1876,13 +1921,11 @@ bool CvSelectionGroup::canMoveOrAttackInto(CvPlot* pPlot, bool bDeclareWar)
 			pLoopUnit = ::getUnit(pUnitNode->m_data);
 			pUnitNode = nextUnitNode(pUnitNode);
 
-			if (!(pLoopUnit->canMoveOrAttackInto(pPlot, bDeclareWar)))
+			if (pLoopUnit->canMoveOrAttackInto(pPlot, bDeclareWar))
 			{
-				return false;
+				return true;
 			}
 		}
-
-		return true;
 	}
 
 	return false;
@@ -2234,7 +2277,7 @@ bool CvSelectionGroup::groupDeclareWar(CvPlot* pPlot)
 
 	iNumUnits = getNumUnits();
 
-	if (!canEnterTerritory(pPlot->getTeam(), ((pPlot->getTeam() != NO_TEAM) && GET_TEAM(getTeam()).AI_isSneakAttackReady(pPlot->getTeam()))))
+	if (!canEnterArea(pPlot->getTeam(), pPlot->area(), (pPlot->getTeam() != NO_TEAM) && GET_TEAM(getTeam()).AI_isSneakAttackReady(pPlot->getTeam())))
 	{
 		if (GET_TEAM(getTeam()).canDeclareWar(pPlot->getTeam()))
 		{
@@ -2267,8 +2310,12 @@ bool CvSelectionGroup::groupAttack(int iX, int iY, int iFlags)
 		{
 			if ((iFlags & MOVE_DIRECT_ATTACK) || (getDomainType() == DOMAIN_AIR) || (generatePath(plot(), pDestPlot, iFlags) && (getPathFirstPlot() == pDestPlot)))
 			{
-				if (AI_getBestGroupAttacker(pDestPlot, true) != NULL)
+				pBestAttackUnit = AI_getBestGroupAttacker(pDestPlot, true);
+
+				if (pBestAttackUnit)
 				{
+					bool bNoBlitz = (!pBestAttackUnit->isBlitz() || !pBestAttackUnit->isMadeAttack());
+
 					if (groupDeclareWar(pDestPlot))
 					{
 						return true;
@@ -2276,7 +2323,7 @@ bool CvSelectionGroup::groupAttack(int iX, int iY, int iFlags)
 
 					while (true)
 					{
-						pBestAttackUnit = AI_getBestGroupAttacker(pDestPlot, false);
+						pBestAttackUnit = AI_getBestGroupAttacker(pDestPlot, false, false, bNoBlitz);
 
 						if (pBestAttackUnit == NULL)
 						{
@@ -3221,6 +3268,29 @@ int CvSelectionGroup::getMissionData1(int iNode)
 		if ( iNode == iCount )
 		{
 			return pMissionNode->m_data.iData1;
+		}
+
+		iCount++;
+
+		pMissionNode = nextMissionQueueNode(pMissionNode);
+	}
+
+	return -1;
+}
+
+
+int CvSelectionGroup::getMissionData2(int iNode)
+{
+	int iCount = 0;
+	CLLNode<MissionData>* pMissionNode;
+
+	pMissionNode = headMissionQueueNode();
+
+	while (pMissionNode != NULL)
+	{
+		if ( iNode == iCount )
+		{
+			return pMissionNode->m_data.iData2;
 		}
 
 		iCount++;

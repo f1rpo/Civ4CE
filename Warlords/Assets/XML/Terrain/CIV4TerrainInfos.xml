@@ -150,6 +150,14 @@
 					<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_END</FootstepAudioScript>
 				</FootstepSound>
+				<FootstepSound>
+					<FootstepAudioType>LOOPSTEP_WHEELS_3</FootstepAudioType>
+					<FootstepAudioScript>AS3D_UN_TREBUCHET_RUN</FootstepAudioScript>
+				</FootstepSound>
+				<FootstepSound>
+					<FootstepAudioType>ENDSTEP_WHEELS_3</FootstepAudioType>
+					<FootstepAudioScript>AS3D_UN_TREBUCHET_STOP</FootstepAudioScript>
+				</FootstepSound>
 			</FootstepSounds>
 			<WorldSoundscapeAudioScript>ASSS_GRASSLAND_SELECT_AMB</WorldSoundscapeAudioScript>
 			<bGraphicalOnly>0</bGraphicalOnly>
@@ -298,6 +306,14 @@
 					<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_END</FootstepAudioScript>
 				</FootstepSound>
+				<FootstepSound>
+					<FootstepAudioType>LOOPSTEP_WHEELS_3</FootstepAudioType>
+					<FootstepAudioScript>AS3D_UN_TREBUCHET_RUN</FootstepAudioScript>
+				</FootstepSound>
+				<FootstepSound>
+					<FootstepAudioType>ENDSTEP_WHEELS_3</FootstepAudioType>
+					<FootstepAudioScript>AS3D_UN_TREBUCHET_STOP</FootstepAudioScript>
+				</FootstepSound>
 			</FootstepSounds>
 			<WorldSoundscapeAudioScript>ASSS_PLAINS_SELECT_AMB</WorldSoundscapeAudioScript>
 			<bGraphicalOnly>0</bGraphicalOnly>
@@ -441,6 +457,14 @@
 				<FootstepSound>
 					<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_END</FootstepAudioScript>
+				</FootstepSound>
+				<FootstepSound>
+					<FootstepAudioType>LOOPSTEP_WHEELS_3</FootstepAudioType>
+					<FootstepAudioScript>AS3D_UN_TREBUCHET_RUN</FootstepAudioScript>
+				</FootstepSound>
+				<FootstepSound>
+					<FootstepAudioType>ENDSTEP_WHEELS_3</FootstepAudioType>
+					<FootstepAudioScript>AS3D_UN_TREBUCHET_STOP</FootstepAudioScript>
 				</FootstepSound>
 			</FootstepSounds>
 			<WorldSoundscapeAudioScript>ASSS_DESERT_SELECT_AMB</WorldSoundscapeAudioScript>
@@ -590,6 +614,14 @@
 					<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_END</FootstepAudioScript>
 				</FootstepSound>
+				<FootstepSound>
+					<FootstepAudioType>LOOPSTEP_WHEELS_3</FootstepAudioType>
+					<FootstepAudioScript>AS3D_UN_TREBUCHET_RUN</FootstepAudioScript>
+				</FootstepSound>
+				<FootstepSound>
+					<FootstepAudioType>ENDSTEP_WHEELS_3</FootstepAudioType>
+					<FootstepAudioScript>AS3D_UN_TREBUCHET_STOP</FootstepAudioScript>
+				</FootstepSound>
 			</FootstepSounds>
 			<WorldSoundscapeAudioScript>ASSS_TUNDRA_SELECT_AMB</WorldSoundscapeAudioScript>
 			<bGraphicalOnly>0</bGraphicalOnly>
@@ -729,6 +761,14 @@
 				<FootstepSound>
 					<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_END</FootstepAudioScript>
+				</FootstepSound>
+				<FootstepSound>
+					<FootstepAudioType>LOOPSTEP_WHEELS_3</FootstepAudioType>
+					<FootstepAudioScript>AS3D_UN_TREBUCHET_RUN</FootstepAudioScript>
+				</FootstepSound>
+				<FootstepSound>
+					<FootstepAudioType>ENDSTEP_WHEELS_3</FootstepAudioType>
+					<FootstepAudioScript>AS3D_UN_TREBUCHET_STOP</FootstepAudioScript>
 				</FootstepSound>
 			</FootstepSounds>
 			<WorldSoundscapeAudioScript>ASSS_TUNDRA_SELECT_AMB</WorldSoundscapeAudioScript>
@@ -874,6 +914,14 @@
 					<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_END</FootstepAudioScript>
 				</FootstepSound>
+				<FootstepSound>
+					<FootstepAudioType>LOOPSTEP_WHEELS_3</FootstepAudioType>
+					<FootstepAudioScript>AS3D_UN_TREBUCHET_RUN</FootstepAudioScript>
+				</FootstepSound>
+				<FootstepSound>
+					<FootstepAudioType>ENDSTEP_WHEELS_3</FootstepAudioType>
+					<FootstepAudioScript>AS3D_UN_TREBUCHET_STOP</FootstepAudioScript>
+				</FootstepSound>
 			</FootstepSounds>
 			<WorldSoundscapeAudioScript>ASSS_COAST_SELECT_AMB</WorldSoundscapeAudioScript>
 			<bGraphicalOnly>0</bGraphicalOnly>
@@ -1018,6 +1066,14 @@
 					<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
 					<FootstepAudioScript>AS3D_UN_ARTILLERY_RUN_END</FootstepAudioScript>
 				</FootstepSound>
+				<FootstepSound>
+					<FootstepAudioType>LOOPSTEP_WHEELS_3</FootstepAudioType>
+					<FootstepAudioScript>AS3D_UN_TREBUCHET_RUN</FootstepAudioScript>
+				</FootstepSound>
+				<FootstepSound>
+					<FootstepAudioType>ENDSTEP_WHEELS_3</FootstepAudioType>
+					<FootstepAudioScript>AS3D_UN_TREBUCHET_STOP</FootstepAudioScript>
+				</FootstepSound>
 			</FootstepSounds>
 			<WorldSoundscapeAudioScript>ASSS_OCEAN_SELECT_AMB</WorldSoundscapeAudioScript>
 			<bGraphicalOnly>0</bGraphicalOnly>
@@ -1158,6 +1214,14 @@
 					<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
 					<FootstepAudioScript/>
 				</FootstepSound>
+				<FootstepSound>
+					<FootstepAudioType>LOOPSTEP_WHEELS_3</FootstepAudioType>
+					<FootstepAudioScript/>
+				</FootstepSound>
+				<FootstepSound>
+					<FootstepAudioType>ENDSTEP_WHEELS_3</FootstepAudioType>
+					<FootstepAudioScript/>
+				</FootstepSound>
 			</FootstepSounds>
 			<bGraphicalOnly>1</bGraphicalOnly>
 		</TerrainInfo>
@@ -1295,6 +1359,14 @@
 				</FootstepSound>
 				<FootstepSound>
 					<FootstepAudioType>ENDSTEP_ARTILLERY</FootstepAudioType>
+					<FootstepAudioScript/>
+				</FootstepSound>
+				<FootstepSound>
+					<FootstepAudioType>LOOPSTEP_WHEELS_3</FootstepAudioType>
+					<FootstepAudioScript/>
+				</FootstepSound>
+				<FootstepSound>
+					<FootstepAudioType>ENDSTEP_WHEELS_3</FootstepAudioType>
 					<FootstepAudioScript/>
 				</FootstepSound>
 			</FootstepSounds>

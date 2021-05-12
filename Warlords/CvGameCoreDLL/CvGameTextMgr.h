@@ -21,6 +21,7 @@
 class CvCity;
 class CvDeal;
 class CvPopupInfo;
+class CvPlayer;
 
 //
 // Class:		CvGameTextMgr
@@ -33,7 +34,7 @@ public:
 	DllExport static CvGameTextMgr& GetInstance();
 
 	DllExport CvGameTextMgr();
-	DllExport virtual ~CvGameTextMgr() {}
+	DllExport virtual ~CvGameTextMgr();
 
 	DllExport void Initialize();
 	DllExport void DeInitialize();
@@ -62,11 +63,13 @@ public:
 	DllExport void parseLeaderShortTraits(CvWString &szInfoText, LeaderHeadTypes eLeader);
 	DllExport void parseCivInfos(CvWString &szHelpString, CivilizationTypes eCivilization, bool bDawnOfMan = false);
 	DllExport void parseSpecialistHelp(CvWString &szHelpString, SpecialistTypes eSpecialist, CvCity* pCity, bool bCivilopediaText = false);
-	DllExport void parsePromotionHelp(CvWString &szBuffer, PromotionTypes ePromotion);
+	DllExport void parseFreeSpecialistHelp(CvWString &szHelpString, const CvCity& kCity);
+	DllExport void parsePromotionHelp(CvWString &szBuffer, PromotionTypes ePromotion, const wchar* pcNewline = NEWLINE);
 	DllExport void parseCivicInfo(CvWString &szBuffer, CivicTypes eCivic, bool bCivilopediaText = false, bool bPlayerContext = false, bool bSkipName = false);
 	DllExport void parseLeaderHeadHelp(CvWString &szBuffer, PlayerTypes eThisPlayer, PlayerTypes eOtherPlayer);
 	DllExport void parseLeaderLineHelp(CvWString &szBuffer, PlayerTypes eThisPlayer, PlayerTypes eOtherPlayer);
 	DllExport void parseGreatPeopleHelp(CvWString &szBuffer, CvCity& city);
+	DllExport void parseGreatGeneralHelp(CvWString &szBuffer, CvPlayer& kPlayer);
 
 	DllExport void setTechHelp(CvWString &szBuffer, TechTypes eTech, bool bCivilopediaText = false, bool bPlayerContext = false, bool bStrategyText = false, bool bTreeInfo = true, TechTypes eFromTech = NO_TECH);
 	DllExport void setBasicUnitHelp(CvWString &szBuffer, UnitTypes eUnit, bool bCivilopediaText = false);
@@ -93,6 +96,7 @@ public:
 	DllExport void setYieldHelp(CvWString &szBuffer, CvCity& city, YieldTypes eYieldType);
 	DllExport void setConvertHelp(CvWString& szBuffer, PlayerTypes ePlayer, ReligionTypes eReligion);
 	DllExport void setRevolutionHelp(CvWString& szBuffer, PlayerTypes ePlayer);
+	DllExport void setVassalRevoltHelp(CvWString& szBuffer, TeamTypes eMaster, TeamTypes eVassal);
 
 	DllExport void buildObsoleteString( CvWString& szBuffer, int iItem, bool bList = false, bool bPlayerContext = false );
 	DllExport void buildObsoleteBonusString( CvWString& szBuffer, int iItem, bool bList = false, bool bPlayerContext = false);
@@ -114,6 +118,7 @@ public:
 	DllExport void buildOpenBordersString( CvWString& szBuffer, TechTypes eTech, bool bList = false, bool bPlayerContext = false );
 	DllExport void buildDefensivePactString( CvWString& szBuffer, TechTypes eTech, bool bList = false, bool bPlayerContext = false );
 	DllExport void buildPermanentAllianceString( CvWString& szBuffer, TechTypes eTech, bool bList = false, bool bPlayerContext = false );
+	DllExport void buildVassalStateString( CvWString& szBuffer, TechTypes eTech, bool bList = false, bool bPlayerContext = false );
 	DllExport void buildBridgeString( CvWString& szBuffer, TechTypes eTech, bool bList = false, bool bPlayerContext = false );
 	DllExport void buildIrrigationString( CvWString& szBuffer, TechTypes eTech, bool bList = false, bool bPlayerContext = false );
 	DllExport void buildIgnoreIrrigationString( CvWString& szBuffer, TechTypes eTech, bool bList = false, bool bPlayerContext = false );
@@ -128,6 +133,7 @@ public:
 	DllExport bool buildCivicRevealString( CvWString& szBuffer, TechTypes eTech, int iCivicType, bool bFirst, bool bList = false, bool bPlayerContext = false );
 	DllExport bool buildProcessInfoString( CvWString& szBuffer, TechTypes eTech, int iProcessType, bool bFirst, bool bList = false, bool bPlayerContext = false );
 	DllExport bool buildFoundReligionString( CvWString& szBuffer, TechTypes eTech, int iReligionType, bool bFirst, bool bList = false, bool bPlayerContext = false );
+	DllExport bool buildPromotionString( CvWString& szBuffer, TechTypes eTech, int iPromotionType, bool bFirst, bool bList = false, bool bPlayerContext = false );
 	DllExport void buildHintsList(CvWString& szBuffer);
 
 	DllExport void buildCityBillboardIconString( CvWString& szBuffer, CvCity* pCity);
@@ -162,6 +168,7 @@ private:
 	
 	int m_iNumDiplomacyTextInfos;
 	CvDiplomacyTextInfo* m_paDiplomacyTextInfo;
+	std::vector<int*> m_apbPromotion;
 };
 
 // Singleton Accessor

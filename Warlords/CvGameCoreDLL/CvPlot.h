@@ -28,13 +28,6 @@ class CvPlot
 {
 
 public:
-	enum SaveBits
-	{
-		SAVEDATA_NO_LANDMARK = 0x01,
-		SAVEDATA_IMPROVEMENT_DURATION = 0x02,
-		SAVEDATA_OWNERSHIP_DURATION = 0x04
-	};
-
 	CvPlot();
 	virtual ~CvPlot();
 
@@ -59,7 +52,7 @@ public:
 
 	void doImprovement();
 
-	void updateCulture();
+	void updateCulture(bool bBumpUnits = true);
 
 	void updateFog();
 	void updateVisibility();
@@ -86,7 +79,7 @@ public:
 	bool isAdjacentToArea(const CvArea* pArea) const;																						// Exposed to Python
 	bool shareAdjacentArea( const CvPlot* pPlot) const;																					// Exposed to Python
 	bool isAdjacentToLand() const;																															// Exposed to Python 
-	bool isCoastalLand() const;																																	// Exposed to Python
+	bool isCoastalLand(int iMinWaterSize = -1) const;																																	// Exposed to Python
 
 	bool isVisibleWorked() const;
 	bool isWithinTeamCityRadius(TeamTypes eTeam, PlayerTypes eIgnorePlayer = NO_PLAYER) const;	// Exposed to Python
@@ -126,7 +119,7 @@ public:
 	CvUnit* getSelectedUnit() const;																																// Exposed to Python				
 	int getUnitPower(PlayerTypes eOwner = NO_PLAYER) const;																					// Exposed to Python				
 
-	DllExport int defenseModifier(bool bIgnoreBuilding, bool bHelp = false) const;									// Exposed to Python				
+	DllExport int defenseModifier(TeamTypes eDefender, bool bIgnoreBuilding, bool bHelp = false) const;									// Exposed to Python				
 	int movementCost(const CvUnit* pUnit, const CvPlot* pFromPlot) const;														// Exposed to Python				
 
 	bool isAdjacentOwned() const;																																		// Exposed to Python
@@ -155,7 +148,7 @@ public:
 	bool isRevealedGoody(TeamTypes eTeam = NO_TEAM) const;																						// Exposed to Python
 	void removeGoody();																																								// Exposed to Python
 
-	DllExport bool isCity() const;																																		// Exposed to Python
+	DllExport bool isCity(bool bCheckImprovement = false) const;																																		// Exposed to Python
 	bool isFriendlyCity(TeamTypes eTeam) const;																												// Exposed to Python
 	bool isEnemyCity(TeamTypes eTeam) const;																													// Exposed to Python
 
@@ -205,7 +198,7 @@ public:
 	int getLatitude() const;																																					// Exposed to Python  
 	int getFOWIndex() const;
 
-	CvArea* area() const;																																							// Exposed to Python
+	DllExport CvArea* area() const;																																							// Exposed to Python
 	CvArea* waterArea() const;																																				// Exposed to Python
 	DllExport int getArea() const;																																		// Exposed to Python
 	void setArea(int iNewValue);			
@@ -271,7 +264,7 @@ public:
 		return (PlayerTypes)m_eOwner;
 	}
 #endif
-	void setOwner(PlayerTypes eNewValue);
+	void setOwner(PlayerTypes eNewValue, bool bCheckUnits = true);
 
 	DllExport PlotTypes getPlotType() const;																																			// Exposed to Python
 	DllExport bool isWater() const;																																								// Exposed to Python
@@ -481,20 +474,20 @@ protected:
 	IDInfo m_workingCity;
 	IDInfo m_workingCityOverride;
 
-	short m_aiYield[NUM_YIELD_TYPES];
-	int m_aiCulture[MAX_PLAYERS];
-	short m_aiFoundValue[MAX_PLAYERS];
-	char m_aiPlayerCityRadiusCount[MAX_PLAYERS];
-	int m_aiPlotGroup[MAX_PLAYERS];			// IDs - keep as int
-	short m_aiVisibilityCount[MAX_TEAMS];
-	short m_aiStolenVisibilityCount[MAX_TEAMS];
-	char m_aiRevealedOwner[MAX_TEAMS];
+	short* m_aiYield;
+	int* m_aiCulture;
+	short* m_aiFoundValue;
+	char* m_aiPlayerCityRadiusCount;
+	int* m_aiPlotGroup;			// IDs - keep as int
+	short* m_aiVisibilityCount;
+	short* m_aiStolenVisibilityCount;
+	char* m_aiRevealedOwner;
 
-	std::bitset<NUM_DIRECTION_TYPES> m_abRiverCrossing;	// bit vector
-	std::bitset<MAX_TEAMS> m_abRevealed;			// bit vector
+	bool* m_abRiverCrossing;	// bit vector
+	bool* m_abRevealed;
 
-	short /*ImprovementTypes*/ m_aeRevealedImprovementType[MAX_TEAMS];
-	short /*RouteTypes*/ m_aeRevealedRouteType[MAX_TEAMS];
+	short* /*ImprovementTypes*/ m_aeRevealedImprovementType;
+	short* /*RouteTypes*/ m_aeRevealedRouteType;
 
 	char* m_szScriptData;
 
@@ -509,8 +502,8 @@ protected:
 
 	CvPlotBuilder* m_pPlotBuilder;		// builds bonuses and improvements
 
-	char* m_apaiCultureRangeCities[MAX_PLAYERS];
-	short* m_apaiInvisibleVisibilityCount[MAX_TEAMS];
+	char** m_apaiCultureRangeCities;
+	short** m_apaiInvisibleVisibilityCount;
 
 	CLinkList<IDInfo> m_units;
 

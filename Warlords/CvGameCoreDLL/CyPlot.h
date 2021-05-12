@@ -63,7 +63,7 @@ public:
 	CyUnit* getSelectedUnit();
 	int getUnitPower(int /* PlayerTypes */ eOwner);
 
-	int defenseModifier(bool bIgnoreBuilding, bool bHelp);
+	int defenseModifier(int /*TeamTypes*/ iDefendTeam, bool bIgnoreBuilding, bool bHelp);
 	int movementCost(CyUnit* pUnit, CyPlot* pFromPlot);
 
 	bool isAdjacentOwned();

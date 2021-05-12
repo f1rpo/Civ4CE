@@ -16,19 +16,27 @@ from math import sqrt
 from CvMapGeneratorUtil import FractalWorld
 from CvMapGeneratorUtil import TerrainGenerator
 from CvMapGeneratorUtil import FeatureGenerator
+from CvMapGeneratorUtil import BonusBalancer
+
+balancer = BonusBalancer()
 
 def getDescription():
 	return "TXT_KEY_MAP_SCRIPT_HIGHLANDS_DESCR"
 
 def getNumCustomMapOptions():
-	return 3
+	return 5
 	
+def getNumHiddenCustomMapOptions():
+	return 2
+
 def getCustomMapOptionName(argsList):
 	[iOption] = argsList
 	option_names = {
 		0:	"TXT_KEY_MAP_SCRIPT_MOUNTAIN_PATTERN",
 		1:	"TXT_KEY_MAP_SCRIPT_MOUNTAIN_DENSITY",
-		2:	"TXT_KEY_MAP_SCRIPT_WATER_SETTING"
+		2:	"TXT_KEY_MAP_SCRIPT_WATER_SETTING",
+		3:  "TXT_KEY_MAP_WORLD_WRAP",
+		4:  "TXT_KEY_CONCEPT_RESOURCES"
 		}
 	translated_text = unicode(CyTranslator().getText(option_names[iOption], ()))
 	return translated_text
@@ -38,7 +46,9 @@ def getNumCustomMapOptionValues(argsList):
 	option_values = {
 		0:	3,
 		1:	3,
-		2:	3
+		2:	3,
+		3:  3,
+		4:  2
 		}
 	return option_values[iOption]
 	
@@ -59,6 +69,15 @@ def getCustomMapOptionDescAt(argsList):
 			0: "TXT_KEY_MAP_SCRIPT_SMALL_LAKES",
 			1: "TXT_KEY_MAP_SCRIPT_LARGE_LAKES",
 			2: "TXT_KEY_MAP_SCRIPT_SEAS"
+			},
+		3:	{
+			0: "TXT_KEY_MAP_WRAP_FLAT",
+			1: "TXT_KEY_MAP_WRAP_CYLINDER",
+			2: "TXT_KEY_MAP_WRAP_TOROID"
+			},
+		4:	{
+			0: "TXT_KEY_WORLD_STANDARD",
+			1: "TXT_KEY_MAP_BALANCED"
 			}
 		}
 	translated_text = unicode(CyTranslator().getText(selection_names[iOption][iSelection], ()))
@@ -69,9 +88,22 @@ def getCustomMapOptionDefault(argsList):
 	option_defaults = {
 		0:	1,
 		1:	1,
-		2:	0
+		2:	0,
+		3:  0,
+		4:  0
 		}
 	return option_defaults[iOption]
+
+def isRandomCustomMapOption(argsList):
+	[iOption] = argsList
+	option_random = {
+		0:	true,
+		1:	true,
+		2:	true,
+		3:	false,
+		4:  false
+		}
+	return option_random[iOption]
 
 def isAdvancedMap():
 	"This map should show up in simple mode"
@@ -96,9 +128,28 @@ def beforeInit():
 	return 0
 
 def getWrapX():
-	return False
+	map = CyMap()
+	return (map.getCustomMapOption(3) == 1 or map.getCustomMapOption(3) == 2)
+	
 def getWrapY():
-	return False
+	map = CyMap()
+	return (map.getCustomMapOption(3) == 2)
+
+def normalizeAddExtras():
+	if (CyMap().getCustomMapOption(4) == 1):
+		balancer.normalizeAddExtras()
+	CyPythonMgr().allowDefaultImpl()	# do the rest of the usual normalizeStartingPlots stuff, don't overrride
+
+def addBonusType(argsList):
+	[iBonusType] = argsList
+	gc = CyGlobalContext()
+	type_string = gc.getBonusInfo(iBonusType).getType()
+
+	if (CyMap().getCustomMapOption(4) == 1):
+		if (type_string in balancer.resourcesToBalance) or (type_string in balancer.resourcesToEliminate):
+			return None # don't place any of this bonus randomly
+		
+	CyPythonMgr().allowDefaultImpl() # pretend we didn't implement this method, and let C handle this bonus in the default way
 
 def getTopLatitude():
 	global shiftMultiplier

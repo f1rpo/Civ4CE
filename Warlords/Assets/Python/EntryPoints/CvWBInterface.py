@@ -109,6 +109,10 @@ def getMapDescriptionKey():
 	"Returns the TXT_KEY Description of the map to be displayed in the map/mod selection screen"
 	return (WBDesc.gameDesc.szDescription)
 	
+def isRandomMap():
+	"If true, this is really a mod, not a scenario"
+	return (WBDesc.gameDesc.iRandom)
+	
 def getPlayerData():
 	"after reading a save file, return player data as a tuple, terminated by -1"
 	t=()

@@ -4,6 +4,7 @@
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
 <!-- Game Speed -->
+<!-- NOTE: If you remove any of these you need to update GameInfo/CultureLevelInfos.xml. Also you will need to update the GlobalDefines.xml if you remove GAMESPEED_STANDARD -->
 <Civ4GameSpeedInfo xmlns="x-schema:CIV4GameInfoSchema.xml">
 	<GameSpeedInfos>
 		<GameSpeedInfo>
@@ -79,7 +80,7 @@
 			<iUnitTradePercent>150</iUnitTradePercent>
 			<iUnitGreatWorkPercent>150</iUnitGreatWorkPercent>
 			<iGoldenAgePercent>125</iGoldenAgePercent>
-			<iHurryPercent>67</iHurryPercent>
+			<iHurryPercent>66</iHurryPercent>
 			<iHurryConscriptAngerPercent>150</iHurryConscriptAngerPercent>
 			<iInflationPercent>20</iInflationPercent>
 			<iInflationOffset>-160</iInflationOffset>

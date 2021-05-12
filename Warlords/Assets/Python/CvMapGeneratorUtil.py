@@ -1195,7 +1195,7 @@ class FeatureGenerator:
 				pPlot.setFeatureType(self.featureIce, -1)
 			elif (self.map.isWrapY() and not self.map.isWrapX()) and (iX == 0 or iX == self.iGridW - 1):
 				pPlot.setFeatureType(self.featureIce, -1)
-			else:
+			elif (not self.map.isWrapY()):
 				rand = self.mapRand.get(100, "Add Ice PYTHON")/100.0
 				if rand < 8 * (lat - (1.0 - (self.gc.getClimateInfo(self.map.getClimate()).getRandIceLatitude() / 2.0))):
 					pPlot.setFeatureType(self.featureIce, -1)
@@ -1289,3 +1289,77 @@ def pointInRect(point, rect):
 		if recty <= y < recty + recth:
 			return True
 	return False
+
+
+class BonusBalancer:
+	def __init__(self):
+		self.gc = CyGlobalContext()
+		self.map = CyMap()
+		
+		self.resourcesToBalance = ('BONUS_ALUMINUM', 'BONUS_COAL', 'BONUS_COPPER', 'BONUS_HORSE', 'BONUS_IRON', 'BONUS_OIL', 'BONUS_URANIUM')
+		self.resourcesToEliminate = ('BONUS_MARBLE', )
+		
+	def isSkipBonus(self, iBonusType):
+		type_string = self.gc.getBonusInfo(iBonusType).getType()
+
+		return ((type_string in self.resourcesToBalance) or (type_string in self.resourcesToEliminate))
+
+		
+	def isBonusValid(self, eBonus, pPlot, bIgnoreUniqueRange, bIgnoreOneArea, bIgnoreAdjacent):
+		"Returns true if we can place a bonus here"
+
+		iX, iY = pPlot.getX(), pPlot.getY()
+
+		if (not bIgnoreOneArea) and self.gc.getBonusInfo(eBonus).isOneArea():
+			if self.map.getNumBonuses(eBonus) > 0:
+				if self.map.getArea(pPlot.getArea()).getNumBonuses(eBonus) == 0:
+					return False
+					
+		if not bIgnoreAdjacent:
+			for iI in range(DirectionTypes.NUM_DIRECTION_TYPES):
+				pLoopPlot = plotDirection(iX, iY, DirectionTypes(iI))
+				if not pLoopPlot.isNone():
+					if (pLoopPlot.getBonusType(-1) != -1) and (pLoopPlot.getBonusType(-1) != eBonus):
+						return False
+
+		if not bIgnoreUniqueRange:
+			uniqueRange = self.gc.getBonusInfo(eBonus).getUniqueRange()
+			for iDX in range(-uniqueRange, uniqueRange+1):
+				for iDY in range(-uniqueRange, uniqueRange+1):
+					pLoopPlot = plotXY(iX, iY, iDX, iDY)
+					if not pLoopPlot.isNone() and pLoopPlot.getBonusType(-1) == eBonus:
+						return False
+		
+		return True
+
+	def normalizeAddExtras(self):
+	
+		for i in range(self.gc.getMAX_CIV_PLAYERS()):
+			if (self.gc.getPlayer(i).isAlive()):
+				start_plot = self.gc.getPlayer(i).getStartingPlot() # returns a CyPlot
+				startx, starty = start_plot.getX(), start_plot.getY()
+				
+				plots = [] # build a list of the plots near the starting plot
+				for dx in range(-5,6):
+					for dy in range(-5,6):
+						x,y = startx+dx, starty+dy
+						pLoopPlot = self.map.plot(x,y)
+						if not pLoopPlot.isNone():
+							plots.append(pLoopPlot)
+				
+				resources_placed = []
+				for pass_num in range(4):
+					bIgnoreUniqueRange  = pass_num >= 1
+					bIgnoreOneArea 		= pass_num >= 2
+					bIgnoreAdjacent 	= pass_num >= 3
+					
+					for bonus in range(self.gc.getNumBonusInfos()):
+						type_string = self.gc.getBonusInfo(bonus).getType()
+						if (type_string not in resources_placed) and (type_string in self.resourcesToBalance):
+							for (pLoopPlot) in plots:
+								if (pLoopPlot.canHaveBonus(bonus, True)):
+									if self.isBonusValid(bonus, pLoopPlot, bIgnoreUniqueRange, bIgnoreOneArea, bIgnoreAdjacent):
+										pLoopPlot.setBonusType(bonus)
+										resources_placed.append(type_string)
+										#print "placed", type_string, "on pass", pass_num
+										break # go to the next bonus

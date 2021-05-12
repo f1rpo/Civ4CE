@@ -297,7 +297,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		# Create and place a tech pane									
 		list = self.pediaBuildingScreen.getBuildingSortedList(false)
 
-		nColumns = 3
+		nColumns = 4
 		nEntries = len(list)
 		nRows = nEntries // nColumns
 		if (nEntries % nColumns):
@@ -667,7 +667,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		# Create and place a tech pane									
 		list = self.getSortedList( gc.getNumConceptInfos(), gc.getConceptInfo )
 
-		nColumns = 2
+		nColumns = 3
 		nEntries = len(list)
 		nRows = nEntries // nColumns
 		if (nEntries % nColumns):
@@ -799,7 +799,6 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 			self.pediaHistorical.interfaceScreen(iEntry)	
 
 	def back(self):
-		print "pedia back"
 		if (len(self.pediaHistory) > 1):
 			self.pediaFuture.append(self.pediaHistory.pop())
 			current = self.pediaHistory.pop()
@@ -807,7 +806,6 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		return 1
 		
 	def forward(self):
-		print "pedia fwd"
 		if (self.pediaFuture):
 			current = self.pediaFuture.pop()
 			self.pediaJump(current[0], current[1], False)
@@ -925,37 +923,37 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 	# Will handle the input for this screen...
 	def handleInput (self, inputClass):
 		# redirect to proper screen if necessary
-		if (inputClass.getPythonFile() == CvScreenEnums.PEDIA_TECH):
-			return self.pediaTechScreen.handleInput(inputClass)
-		if (inputClass.getPythonFile() == CvScreenEnums.PEDIA_UNIT):
+		if (self.iLastScreen == CvScreenEnums.PEDIA_UNIT):
 			return self.pediaUnitScreen.handleInput(inputClass)
-		if (inputClass.getPythonFile() == CvScreenEnums.PEDIA_BUILDING):
+		if (self.iLastScreen == CvScreenEnums.PEDIA_TECH):
+			return self.pediaTechScreen.handleInput(inputClass)
+		if (self.iLastScreen == CvScreenEnums.PEDIA_BUILDING):
 			return self.pediaBuildingScreen.handleInput(inputClass)
-		if (inputClass.getPythonFile() == CvScreenEnums.PEDIA_PROMOTION):
+		if (self.iLastScreen == CvScreenEnums.PEDIA_PROMOTION):
 			return self.pediaPromotionScreen.handleInput(inputClass)
-		if (inputClass.getPythonFile() == CvScreenEnums.PEDIA_UNIT_CHART):
+		if (self.iLastScreen == CvScreenEnums.PEDIA_UNIT_CHART):
 			return self.pediaUnitChart.handleInput(inputClass)
-		if (inputClass.getPythonFile() == CvScreenEnums.PEDIA_BONUS):
+		if (self.iLastScreen == CvScreenEnums.PEDIA_BONUS):
 			return self.pediaBonus.handleInput(inputClass)
-		if (inputClass.getPythonFile() == CvScreenEnums.PEDIA_TERRAIN):
+		if (self.iLastScreen == CvScreenEnums.PEDIA_TERRAIN):
 			return self.pediaTerrain.handleInput(inputClass)
-		if (inputClass.getPythonFile() == CvScreenEnums.PEDIA_FEATURE):
+		if (self.iLastScreen == CvScreenEnums.PEDIA_FEATURE):
 			return self.pediaFeature.handleInput(inputClass)
-		if (inputClass.getPythonFile() == CvScreenEnums.PEDIA_IMPROVEMENT):
+		if (self.iLastScreen == CvScreenEnums.PEDIA_IMPROVEMENT):
 			return self.pediaImprovement.handleInput(inputClass)
-		if (inputClass.getPythonFile() == CvScreenEnums.PEDIA_CIVIC):
+		if (self.iLastScreen == CvScreenEnums.PEDIA_CIVIC):
 			return self.pediaCivic.handleInput(inputClass)
-		if (inputClass.getPythonFile() == CvScreenEnums.PEDIA_CIVILIZATION):
+		if (self.iLastScreen == CvScreenEnums.PEDIA_CIVILIZATION):
 			return self.pediaCivilization.handleInput(inputClass)
-		if (inputClass.getPythonFile() == CvScreenEnums.PEDIA_LEADER):
+		if (self.iLastScreen == CvScreenEnums.PEDIA_LEADER):
 			return self.pediaLeader.handleInput(inputClass)
-		if (inputClass.getPythonFile() == CvScreenEnums.PEDIA_SPECIALIST):
+		if (self.iLastScreen == CvScreenEnums.PEDIA_SPECIALIST):
 			return self.pediaSpecialist.handleInput(inputClass)
-		if (inputClass.getPythonFile() == CvScreenEnums.PEDIA_PROJECT):
+		if (self.iLastScreen == CvScreenEnums.PEDIA_PROJECT):
 			return self.pediaProjectScreen.handleInput(inputClass)
-		if (inputClass.getPythonFile() == CvScreenEnums.PEDIA_RELIGION):
+		if (self.iLastScreen == CvScreenEnums.PEDIA_RELIGION):
 			return self.pediaReligion.handleInput(inputClass)
-		if (inputClass.getPythonFile() == CvScreenEnums.PEDIA_HISTORY):
+		if (self.iLastScreen == CvScreenEnums.PEDIA_HISTORY):
 			return self.pediaHistorical.handleInput(inputClass)
 						
 		return 0

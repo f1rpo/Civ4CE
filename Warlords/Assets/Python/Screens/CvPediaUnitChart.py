@@ -137,7 +137,7 @@ class CvPediaUnitChart:
 
 		i = 1
 		for iI in range(gc.getNumUnitCombatInfos()):
-			if (not gc.getUnitCombatInfo(iI).isGraphicalOnly()):
+			if (not gc.getUnitCombatInfo(listSorted[iI][1]).isGraphicalOnly()):
 				if bRedraw:
 					screen.appendListBoxString( self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT_COMBAT, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
 				if listSorted[iI][1] == self.iGroup:

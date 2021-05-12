@@ -225,6 +225,13 @@ std::wstring CyGameTextMgr::setRevolutionHelp(int iPlayer)
 	return szBuffer;
 }
 
+std::wstring CyGameTextMgr::setVassalRevoltHelp(int iMaster, int iVassal)
+{
+	CvWString szBuffer;
+	GAMETEXT.setVassalRevoltHelp(szBuffer, (TeamTypes)iMaster, (TeamTypes)iVassal);
+	return szBuffer;
+}
+
 std::wstring CyGameTextMgr::getActiveDealsString(int iThisPlayer, int iOtherPlayer)
 {
 	CvWString szBuffer;

@@ -44,11 +44,11 @@ public:
 	void AI_updateAreaTargets();
 
 	int AI_movementPriority(CvSelectionGroup* pGroup);
-  void AI_unitUpdate();
+	void AI_unitUpdate();
 
 	void AI_makeAssignWorkDirty();
 	void AI_assignWorkingPlots();
-  void AI_updateAssignWork();
+	void AI_updateAssignWork();
 
 	void AI_makeProductionDirty();
 
@@ -90,8 +90,9 @@ public:
 	bool AI_demandRebukedWar(PlayerTypes ePlayer);
 	DllExport bool AI_hasTradedWithTeam(TeamTypes eTeam);
 
-	AttitudeTypes AI_getAttitude(PlayerTypes ePlayer);
-	int AI_getAttitudeVal(PlayerTypes ePlayer);
+	AttitudeTypes AI_getAttitude(PlayerTypes ePlayer, bool bForced = true);
+	int AI_getAttitudeVal(PlayerTypes ePlayer, bool bForced = true);
+	static AttitudeTypes AI_getAttitude(int iAttitudeVal);
 
 	int AI_calculateStolenCityRadiusPlots(PlayerTypes ePlayer) const;
 	int AI_getCloseBordersAttitude(PlayerTypes ePlayer);
@@ -104,6 +105,7 @@ public:
 	int AI_getOpenBordersAttitude(PlayerTypes ePlayer);
 	int AI_getDefensivePactAttitude(PlayerTypes ePlayer);
 	int AI_getRivalDefensivePactAttitude(PlayerTypes ePlayer);
+	int AI_getRivalVassalAttitude(PlayerTypes ePlayer);
 	int AI_getShareWarAttitude(PlayerTypes ePlayer);
 	int AI_getFavoriteCivicAttitude(PlayerTypes ePlayer);
 	int AI_getTradeAttitude(PlayerTypes ePlayer);
@@ -112,10 +114,10 @@ public:
 
 	int AI_diploVote(VoteTypes eVote);
 
-	int AI_dealVal(PlayerTypes ePlayer, CLinkList<TradeData>* pList, bool bIgnoreAnnual = false);
-	bool AI_goldDeal(CLinkList<TradeData>* pList);
-	bool AI_considerOffer(PlayerTypes ePlayer, CLinkList<TradeData>* pTheirList, CLinkList<TradeData>* pOurList);
-	bool AI_counterPropose(PlayerTypes ePlayer, CLinkList<TradeData>* pTheirList, CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirInventory, CLinkList<TradeData>* pOurInventory, CLinkList<TradeData>* pTheirCounter, CLinkList<TradeData>* pOurCounter);
+	int AI_dealVal(PlayerTypes ePlayer, const CLinkList<TradeData>* pList, bool bIgnoreAnnual = false);
+	bool AI_goldDeal(const CLinkList<TradeData>* pList);
+	bool AI_considerOffer(PlayerTypes ePlayer, const CLinkList<TradeData>* pTheirList, const CLinkList<TradeData>* pOurList);
+	bool AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeData>* pTheirList, const CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirInventory, CLinkList<TradeData>* pOurInventory, CLinkList<TradeData>* pTheirCounter, CLinkList<TradeData>* pOurCounter);
 
 	DllExport int AI_maxGoldTrade(PlayerTypes ePlayer);
 
@@ -175,11 +177,11 @@ public:
 	void AI_setReligionTimer(int iNewValue);
 	void AI_changeReligionTimer(int iChange);
 
-  int AI_getNumTrainAIUnits(UnitAITypes eIndex);
-  void AI_changeNumTrainAIUnits(UnitAITypes eIndex, int iChange);
+	int AI_getNumTrainAIUnits(UnitAITypes eIndex);
+	void AI_changeNumTrainAIUnits(UnitAITypes eIndex, int iChange);
 
-  int AI_getNumAIUnits(UnitAITypes eIndex);
-  void AI_changeNumAIUnits(UnitAITypes eIndex, int iChange);
+	int AI_getNumAIUnits(UnitAITypes eIndex);
+	void AI_changeNumAIUnits(UnitAITypes eIndex, int iChange);
 
 	int AI_getSameReligionCounter(PlayerTypes eIndex);
 	void AI_changeSameReligionCounter(PlayerTypes eIndex, int iChange);
@@ -206,8 +208,8 @@ public:
 	void AI_setAttitudeExtra(PlayerTypes eIndex, int iNewValue);
 	void AI_changeAttitudeExtra(PlayerTypes eIndex, int iChange);
 
-  bool AI_isFirstContact(PlayerTypes eIndex);
-  void AI_setFirstContact(PlayerTypes eIndex, bool bNewValue);
+	bool AI_isFirstContact(PlayerTypes eIndex);
+	void AI_setFirstContact(PlayerTypes eIndex, bool bNewValue);
 
 	int AI_getContactTimer(PlayerTypes eIndex1, ContactTypes eIndex2);
 	void AI_changeContactTimer(PlayerTypes eIndex1, ContactTypes eIndex2, int iChange);
@@ -215,7 +217,9 @@ public:
 	int AI_getMemoryCount(PlayerTypes eIndex1, MemoryTypes eIndex2);
 	void AI_changeMemoryCount(PlayerTypes eIndex1, MemoryTypes eIndex2, int iChange);
 
-  // for serialization
+	void AI_doCommerce();
+
+	// for serialization
   virtual void read(FDataStreamBase* pStream);
   virtual void write(FDataStreamBase* pStream);
 
@@ -228,26 +232,25 @@ protected:
 	int m_iCivicTimer;
 	int m_iReligionTimer;
 
-	int m_aiNumTrainAIUnits[NUM_UNITAI_TYPES];
-	int m_aiNumAIUnits[NUM_UNITAI_TYPES];
-	int m_aiSameReligionCounter[MAX_PLAYERS];
-	int m_aiDifferentReligionCounter[MAX_PLAYERS];
-	int m_aiFavoriteCivicCounter[MAX_PLAYERS];
-	int m_aiBonusTradeCounter[MAX_PLAYERS];
-	int m_aiPeacetimeTradeValue[MAX_PLAYERS];
-	int m_aiPeacetimeGrantValue[MAX_PLAYERS];
-	int m_aiGoldTradedTo[MAX_PLAYERS];
-	int m_aiAttitudeExtra[MAX_PLAYERS];
+	int *m_aiNumTrainAIUnits;
+	int *m_aiNumAIUnits;
+	int* m_aiSameReligionCounter;
+	int* m_aiDifferentReligionCounter;
+	int* m_aiFavoriteCivicCounter;
+	int* m_aiBonusTradeCounter;
+	int* m_aiPeacetimeTradeValue;
+	int* m_aiPeacetimeGrantValue;
+	int* m_aiGoldTradedTo;
+	int* m_aiAttitudeExtra;
 
-	bool m_abFirstContact[MAX_PLAYERS];
+	bool* m_abFirstContact;
 
-	int m_aaiContactTimer[MAX_PLAYERS][NUM_CONTACT_TYPES];
-	int m_aaiMemoryCount[MAX_PLAYERS][NUM_MEMORY_TYPES];
+	int** m_aaiContactTimer;
+	int** m_aaiMemoryCount;
 
 	void AI_doCounter();
 	void AI_doMilitary();
 	void AI_doResearch();
-	void AI_doCommerce();
 	void AI_doCivics();
 	void AI_doReligion();
 	void AI_doDiplo();

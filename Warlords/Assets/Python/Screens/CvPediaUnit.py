@@ -292,7 +292,7 @@ class CvPediaUnit:
 		i = 0
 		iSelected = 0
 		for iI in range(gc.getNumUnitInfos()):
-			if (not gc.getUnitInfo(iI).isGraphicalOnly()):
+			if (not gc.getUnitInfo(unitsList[iI][1]).isGraphicalOnly()):
 				if bRedraw:
 					screen.appendListBoxString( self.top.LIST_ID, unitsList[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, unitsList[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
 				if unitsList[iI][1] == self.iUnit:
@@ -310,10 +310,10 @@ class CvPediaUnit:
 				
 		# add promotion buttons
 		rowListName = self.top.getNextWidgetName()
-		screen.addMultiListControlGFC(rowListName, "", self.X_PROMO_PANE+15, self.Y_PROMO_PANE+40, self.W_PROMO_PANE-20, self.H_PROMO_PANE-20, 1, self.PROMOTION_ICON_SIZE, self.PROMOTION_ICON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
+		screen.addMultiListControlGFC(rowListName, "", self.X_PROMO_PANE+15, self.Y_PROMO_PANE+40, self.W_PROMO_PANE-20, self.H_PROMO_PANE-40, 1, self.PROMOTION_ICON_SIZE, self.PROMOTION_ICON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
 	
 		for k in range(gc.getNumPromotionInfos()):
-			if (isPromotionValid(k, self.iUnit)):
+			if (isPromotionValid(k, self.iUnit) and not gc.getPromotionInfo(k).isGraphicalOnly()):
 				screen.appendMultiListButton( rowListName, gc.getPromotionInfo(k).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, k, -1, false )
 								
 	# Will handle the input for this screen...

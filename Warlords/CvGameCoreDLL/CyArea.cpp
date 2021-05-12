@@ -154,6 +154,11 @@ bool CyArea::isCleanPower(int /*TeamTypes*/ eIndex)
 	return m_pArea ? m_pArea->isCleanPower((TeamTypes)eIndex) : false;
 }
 
+bool CyArea::isBorderObstacle(int /*TeamTypes*/ eIndex)
+{
+	return m_pArea ? m_pArea->isBorderObstacle((TeamTypes)eIndex) : false;
+}
+
 int /*AreaAITypes*/ CyArea::getAreaAIType(int /*TeamTypes*/ eIndex)
 {
 	return m_pArea ? (AreaAITypes) m_pArea->getAreaAIType((TeamTypes)eIndex) : -1;

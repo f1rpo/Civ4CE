@@ -74,7 +74,9 @@ enum DllExport DirectionTypes					// Exposed to Python
 	DIRECTION_WEST,
 	DIRECTION_NORTHWEST,
 
+#ifdef _USRDLL
 	NUM_DIRECTION_TYPES
+#endif
 };
 
 enum DllExport CardinalDirectionTypes			// Exposed to Python
@@ -86,7 +88,9 @@ enum DllExport CardinalDirectionTypes			// Exposed to Python
 	CARDINALDIRECTION_SOUTH,
 	CARDINALDIRECTION_WEST,
 
+#ifdef _USRDLL
 	NUM_CARDINALDIRECTION_TYPES
+#endif
 };
 
 enum DllExport RotationTypes
@@ -113,7 +117,10 @@ enum DllExport WrapDirection
 	WRAP_RIGHT,
 	WRAP_UP,
 	WRAP_DOWN,
+
+#ifdef _USRDLL
 	NUM_WRAP_DIRECTIONS
+#endif
 };
 
 enum DllExport ColorTypes						// Exposed to Python
@@ -209,7 +216,9 @@ enum DllExport InterfaceModeTypes			// Exposed to Python
 	INTERFACEMODE_AIRSTRIKE,
 	INTERFACEMODE_REBASE,
 
+#ifdef _USRDLL
 	NUM_INTERFACEMODE_TYPES
+#endif
 };
 
 enum DllExport InterfaceMessageTypes	// Exposed to Python
@@ -223,7 +232,9 @@ enum DllExport InterfaceMessageTypes	// Exposed to Python
 	MESSAGE_TYPE_CHAT,
 	MESSAGE_TYPE_COMBAT_MESSAGE,
 
+#ifdef _USRDLL
 	NUM_INTERFACE_MESSAGE_TYPES
+#endif
 };
 
 enum DllExport FlyoutTypes
@@ -253,7 +264,9 @@ enum DllExport MinimapModeTypes		// Exposed to Python
 	MINIMAPMODE_REPLAY,
 	MINIMAPMODE_MILITARY,
 
+#ifdef _USRDLL
 	NUM_MINIMAPMODE_TYPES
+#endif
 };
 
 enum DllExport EngineDirtyBits		// Exposed to Python
@@ -263,8 +276,11 @@ enum DllExport EngineDirtyBits		// Exposed to Python
 	MinimapTexture_DIRTY_BIT,
 	FogOfWar_DIRTY_BIT,
 	CultureBorders_DIRTY_BIT,
+	GreatWall_DIRTY_BIT,
 
+#ifdef _USRDLL
 	NUM_ENGINE_DIRTY_BITS
+#endif
 };
 
 enum DllExport InterfaceDirtyBits // Exposed to Python
@@ -302,7 +318,9 @@ enum DllExport InterfaceDirtyBits // Exposed to Python
 	Soundtrack_DIRTY_BIT,
 	Domestic_Advisor_DIRTY_BIT,
 
+#ifdef _USRDLL
 	NUM_INTERFACE_DIRTY_BITS
+#endif
 };
 
 enum DllExport CityTabTypes			// Exposed to Python
@@ -313,7 +331,9 @@ enum DllExport CityTabTypes			// Exposed to Python
 	CITYTAB_BUILDINGS,
 	CITYTAB_WONDERS,
 
+#ifdef _USRDLL
 	NUM_CITYTAB_TYPES
+#endif
 };
 
 enum DllExport WidgetTypes					// Exposed to Python
@@ -335,6 +355,7 @@ enum DllExport WidgetTypes					// Exposed to Python
 	WIDGET_ACTION,
 	WIDGET_DISABLED_CITIZEN,
 	WIDGET_CITIZEN,
+	WIDGET_FREE_CITIZEN,
 	WIDGET_ANGRY_CITIZEN,
 	WIDGET_CHANGE_SPECIALIST,
 	WIDGET_RESEARCH,
@@ -391,6 +412,7 @@ enum DllExport WidgetTypes					// Exposed to Python
 	WIDGET_HELP_PRODUCTION,
 	WIDGET_HELP_CULTURE,
 	WIDGET_HELP_GREAT_PEOPLE,
+	WIDGET_HELP_GREAT_GENERAL,
 	WIDGET_HELP_SELECTED,
 	WIDGET_HELP_BUILDING,
 	WIDGET_HELP_TECH_ENTRY,
@@ -415,6 +437,7 @@ enum DllExport WidgetTypes					// Exposed to Python
 	WIDGET_HELP_OPEN_BORDERS,
 	WIDGET_HELP_DEFENSIVE_PACT,
 	WIDGET_HELP_PERMANENT_ALLIANCE,
+	WIDGET_HELP_VASSAL_STATE,
 	WIDGET_HELP_BUILD_BRIDGE,
 	WIDGET_HELP_IRRIGATION,
 	WIDGET_HELP_IGNORE_IRRIGATION,
@@ -439,6 +462,7 @@ enum DllExport WidgetTypes					// Exposed to Python
 	WIDGET_HELP_FINANCE_GROSS_INCOME,
 	WIDGET_HELP_FINANCE_NET_GOLD,
 	WIDGET_HELP_FINANCE_GOLD_RESERVE,
+	WIDGET_HELP_PROMOTION,
 
 	WIDGET_PEDIA_JUMP_TO_TECH,
 	WIDGET_PEDIA_JUMP_TO_UNIT,
@@ -476,7 +500,9 @@ enum DllExport WidgetTypes					// Exposed to Python
 	WIDGET_GLOBELAYER_OPTION,
 	WIDGET_GLOBELAYER_TOGGLE,
 
+#ifdef _USRDLL
 	NUM_WIDGET_TYPES
+#endif
 };
 
 enum DllExport ButtonPopupTypes			// Exposed to Python
@@ -487,6 +513,7 @@ enum DllExport ButtonPopupTypes			// Exposed to Python
 	BUTTONPOPUP_DECLAREWARMOVE,
 	BUTTONPOPUP_CONFIRMCOMMAND,
 	BUTTONPOPUP_LOADUNIT,
+	BUTTONPOPUP_LEADUNIT,
 	BUTTONPOPUP_CHOOSETECH,
 	BUTTONPOPUP_RAZECITY,
 	BUTTONPOPUP_DISBANDCITY,
@@ -509,8 +536,12 @@ enum DllExport ButtonPopupTypes			// Exposed to Python
 	BUTTONPOPUP_FORCED_DISCONNECT,
 	BUTTONPOPUP_PITBOSS_DISCONNECT,
 	BUTTONPOPUP_KICKED,
+	BUTTONPOPUP_VASSAL_DEMAND_TRIBUTE,
+	BUTTONPOPUP_VASSAL_GRANT_TRIBUTE,
 
+#ifdef _USRDLL
 	NUM_BUTTONPOPUP_TYPES
+#endif
 };
 
 enum DllExport ClimateTypes					// Exposed to Python
@@ -539,7 +570,9 @@ enum DllExport WorldSizeTypes				// Exposed to Python
 	WORLDSIZE_LARGE,
 	WORLDSIZE_HUGE,
 
+#ifdef _USRDLL
 	NUM_WORLDSIZE_TYPES
+#endif
 };
 
 // This is our current relationship with each 
@@ -574,7 +607,9 @@ enum DllExport PlotTypes							// Exposed to Python
 	PLOT_LAND,
 	PLOT_OCEAN,
 
-	NUM_PLOT_TYPES,
+#ifdef _USRDLL
+	NUM_PLOT_TYPES
+#endif
 };
 
 enum DllExport YieldTypes							// Exposed to Python
@@ -585,7 +620,9 @@ enum DllExport YieldTypes							// Exposed to Python
 	YIELD_PRODUCTION,
 	YIELD_COMMERCE,
 
+#ifdef _USRDLL
 	NUM_YIELD_TYPES
+#endif
 };
 
 enum DllExport CommerceTypes					// Exposed to Python
@@ -596,7 +633,9 @@ enum DllExport CommerceTypes					// Exposed to Python
 	COMMERCE_RESEARCH,
 	COMMERCE_CULTURE,
 
+#ifdef _USRDLL
 	NUM_COMMERCE_TYPES
+#endif
 };
 
 enum DllExport AdvisorTypes						// Exposed to Python
@@ -634,8 +673,12 @@ enum DllExport GameOptionTypes				// Exposed to Python
 	GAMEOPTION_NEW_RANDOM_SEED,
 	GAMEOPTION_LOCK_MODS,
 	GAMEOPTION_COMPLETE_KILLS,
+	GAMEOPTION_NO_VASSAL_STATES,
+	GAMEOPTION_NO_GOODY_HUTS,
 
+#ifdef _USRDLL
 	NUM_GAMEOPTION_TYPES
+#endif
 };
 
 enum DllExport MultiplayerOptionTypes		// Exposed to Python
@@ -644,9 +687,13 @@ enum DllExport MultiplayerOptionTypes		// Exposed to Python
 
 	MPOPTION_SIMULTANEOUS_TURNS,
 	MPOPTION_TAKEOVER_AI,
+	MPOPTION_SHUFFLE_TEAMS,
+	MPOPTION_ANONYMOUS,
 	MPOPTION_TURN_TIMER,
 
+#ifdef _USRDLL
 	NUM_MPOPTION_TYPES
+#endif
 };
 
 enum DllExport SpecialOptionTypes			// Exposed to Python
@@ -655,7 +702,9 @@ enum DllExport SpecialOptionTypes			// Exposed to Python
 
 	SPECIALOPTION_REPORT_STATS,
 
-	NUM_SPECIALOPTION_TYPES,
+#ifdef _USRDLL
+	NUM_SPECIALOPTION_TYPES
+#endif
 };
 
 enum DllExport PlayerOptionTypes			// Exposed to Python
@@ -681,7 +730,9 @@ enum DllExport PlayerOptionTypes			// Exposed to Python
 	PLAYEROPTION_RIGHT_CLICK_MENU,
 	PLAYEROPTION_LEAVE_FORESTS,
 
+#ifdef _USRDLL
 	NUM_PLAYEROPTION_TYPES
+#endif
 };
 
 enum DllExport GraphicOptionTypes			// Exposed to Python
@@ -701,7 +752,9 @@ enum DllExport GraphicOptionTypes			// Exposed to Python
 	GRAPHICOPTION_NO_MOVIES,
 	GRAPHICOPTION_CITY_RADIUS,
 
+#ifdef _USRDLL
 	NUM_GRAPHICOPTION_TYPES
+#endif
 };
 
 enum DllExport ForceControlTypes			// Exposed to Python
@@ -715,7 +768,9 @@ enum DllExport ForceControlTypes			// Exposed to Python
 	FORCECONTROL_MAX_TURNS,
 	FORCECONTROL_MAX_CITY_ELIMINATION,
 
+#ifdef _USRDLL
 	NUM_FORCECONTROL_TYPES
+#endif
 };
 
 enum DllExport VictoryTypes					// Exposed to Python
@@ -795,7 +850,9 @@ enum DllExport FontSymbols					// Exposed to Python
 	OCCUPATION_CHAR,
 	POWER_CHAR,
 
+#ifdef _USRDLL
 	MAX_NUM_SYMBOLS
+#endif
 };
 
 enum DllExport HandicapTypes				// Exposed to Python
@@ -842,7 +899,9 @@ enum DllExport CitySizeTypes				// Exposed to Python
 	CITYSIZE_MEDIUM,
 	CITYSIZE_LARGE,
 
+#ifdef _USRDLL
 	NUM_CITYSIZE_TYPES
+#endif
 };
 
 enum DllExport FootstepAudioTypes		// Exposed to Python
@@ -870,7 +929,9 @@ enum DllExport VoiceTargetTypes			// Exposed to Python
 	VOICETARGET_TEAM,
 	VOICETARGET_ALL,
 
+#ifdef _USRDLL
 	NUM_VOICETARGETS
+#endif
 };
 
 enum DllExport TeamTypes					// Exposed to Python
@@ -897,7 +958,9 @@ enum DllExport OrderTypes					// Exposed to Python
 	ORDER_CREATE,
 	ORDER_MAINTAIN,
 
+#ifdef _USRDLL
 	NUM_ORDER_TYPES
+#endif
 };
 
 enum DllExport TaskTypes				// Exposed to Python
@@ -917,7 +980,9 @@ enum DllExport TaskTypes				// Exposed to Python
 	TASK_RALLY_PLOT,
 	TASK_CLEAR_RALLY_PLOT,
 
+#ifdef _USRDLL
 	NUM_TASK_TYPES
+#endif
 };
 
 enum DllExport BuildingClassTypes				// Exposed to Python 
@@ -957,7 +1022,9 @@ enum DllExport InfoBarTypes				// Exposed to Python
 	INFOBAR_RATE_EXTRA,
 	INFOBAR_EMPTY,
 
+#ifdef _USRDLL
 	NUM_INFOBAR_TYPES
+#endif
 };
 
 enum DllExport HealthBarTypes			// Exposed to Python
@@ -966,7 +1033,9 @@ enum DllExport HealthBarTypes			// Exposed to Python
 	HEALTHBAR_ALIVE_DEFEND,
 	HEALTHBAR_DEAD,
 
+#ifdef _USRDLL
 	NUM_HEALTHBAR_TYPES
+#endif
 };
 
 enum DllExport ConceptTypes				// Exposed to Python
@@ -979,6 +1048,7 @@ enum DllExport CalendarTypes			// Exposed to Python
 	NO_CALENDAR = -1, 
 
 	CALENDAR_DEFAULT,
+	CALENDAR_BI_YEARLY,
 	CALENDAR_YEARS,
 	CALENDAR_TURNS,
 	CALENDAR_SEASONS,
@@ -1022,8 +1092,16 @@ enum DllExport DenialTypes				// Exposed to Python
 	DENIAL_NOT_ALLIED,
 	DENIAL_RECENT_CANCEL,
 	DENIAL_WORST_ENEMY,
+	DENIAL_POWER_YOUR_ENEMIES,
+	DENIAL_TOO_FAR,
+	DENIAL_VASSAL,
+	DENIAL_WAR_NOT_POSSIBLE_US,
+	DENIAL_WAR_NOT_POSSIBLE_YOU,
 
+
+#ifdef _USRDLL
 	NUM_DENIAL_TYPES
+#endif
 };
 
 enum DllExport DomainTypes			// Exposed to Python
@@ -1035,7 +1113,9 @@ enum DllExport DomainTypes			// Exposed to Python
 	DOMAIN_LAND,
 	DOMAIN_IMMOBILE,
 
+#ifdef _USRDLL
 	NUM_DOMAIN_TYPES
+#endif
 };
 
 enum DllExport UnitClassTypes		// Exposed to Python
@@ -1080,6 +1160,7 @@ enum DllExport UnitAITypes			// Exposed to Python
 	UNITAI_PROPHET,
 	UNITAI_ARTIST,
 	UNITAI_SCIENTIST,
+	UNITAI_GENERAL,
 	UNITAI_MERCHANT,
 	UNITAI_ENGINEER,
 	UNITAI_SPY,
@@ -1098,7 +1179,9 @@ enum DllExport UnitAITypes			// Exposed to Python
 	UNITAI_DEFENSE_AIR,
 	UNITAI_CARRIER_AIR,
 
+#ifdef _USRDLL
 	NUM_UNITAI_TYPES
+#endif
 };
 
 enum DllExport InvisibleTypes			// Exposed to Python
@@ -1114,7 +1197,9 @@ enum DllExport ProbabilityTypes		// Exposed to Python
 	PROBABILITY_REAL,
 	PROBABILITY_HIGH,
 
+#ifdef _USRDLL
 	NUM_PROBABILITY_TYPES
+#endif
 };
 
 enum DllExport ActivityTypes			// Exposed to Python
@@ -1129,7 +1214,9 @@ enum DllExport ActivityTypes			// Exposed to Python
 	ACTIVITY_INTERCEPT,
 	ACTIVITY_MISSION,
 
+#ifdef _USRDLL
 	NUM_ACTIVITY_TYPES
+#endif
 };
 
 enum DllExport AutomateTypes			// Exposed to Python
@@ -1141,7 +1228,9 @@ enum DllExport AutomateTypes			// Exposed to Python
 	AUTOMATE_CITY,
 	AUTOMATE_EXPLORE,
 
+#ifdef _USRDLL
 	NUM_AUTOMATE_TYPES
+#endif
 };
 
 // any additions need to be reflected in GlobalTypes.xml
@@ -1177,6 +1266,7 @@ enum DllExport MissionTypes				// Exposed to Python
 	MISSION_GREAT_WORK,
 	MISSION_GOLDEN_AGE,
 	MISSION_BUILD,
+	MISSION_LEAD,
 
 	MISSION_BEGIN_COMBAT,
 	MISSION_END_COMBAT,
@@ -1189,7 +1279,9 @@ enum DllExport MissionTypes				// Exposed to Python
 	MISSION_MULTI_SELECT,
 	MISSION_MULTI_DESELECT,
 
+#ifdef _USRDLL
 	NUM_MISSION_TYPES
+#endif
 };
 
 enum DllExport MissionAITypes		// Exposed to Python
@@ -1218,7 +1310,9 @@ enum DllExport MissionAITypes		// Exposed to Python
 	MISSIONAI_CARRIER,
 	MISSIONAI_PICKUP,
 
+#ifdef _USRDLL
 	NUM_MISSIONAI_TYPES
+#endif
 };
 
 // any additions need to be reflected in GlobalTypes.xml
@@ -1241,7 +1335,9 @@ enum DllExport CommandTypes					// Exposed to Python
 	COMMAND_UNLOAD_ALL,
 	COMMAND_HOTKEY,
 
+#ifdef _USRDLL
 	NUM_COMMAND_TYPES
+#endif
 };
 
 enum DllExport ControlTypes					// Exposed to Python
@@ -1306,8 +1402,11 @@ enum DllExport ControlTypes					// Exposed to Python
 	CONTROL_HALL_OF_FAME,
 	CONTROL_WORLD_BUILDER,
 	CONTROL_DIPLOMACY,
+	CONTROL_SELECT_HEALTHY,
 
+#ifdef _USRDLL
 	NUM_CONTROL_TYPES
+#endif
 };
 
 enum DllExport PromotionTypes				// Exposed to Python
@@ -1367,7 +1466,9 @@ enum DllExport WarPlanTypes					// Exposed to Python
 	WARPLAN_TOTAL,
 	WARPLAN_DOGPILE,
 
+#ifdef _USRDLL
 	NUM_WARPLAN_TYPES
+#endif
 };
 
 enum DllExport AreaAITypes					// Exposed to Python
@@ -1380,7 +1481,9 @@ enum DllExport AreaAITypes					// Exposed to Python
 	AREAAI_ASSAULT,
 	AREAAI_NEUTRAL,
 
+#ifdef _USRDLL
 	NUM_AREAAI_TYPES
+#endif
 };
 
 enum DllExport EndTurnButtonStates	// Exposed to Python
@@ -1389,7 +1492,9 @@ enum DllExport EndTurnButtonStates	// Exposed to Python
 	END_TURN_OVER_HIGHLIGHT,
 	END_TURN_OVER_DARK,
 
-	NUM_END_TURN_STATES,
+#ifdef _USRDLL
+	NUM_END_TURN_STATES
+#endif
 };
 
 enum DllExport FogOfWarModeTypes		// Exposed to Python
@@ -1399,7 +1504,9 @@ enum DllExport FogOfWarModeTypes		// Exposed to Python
 	FOGOFWARMODE_UNEXPLORED,
 	FOGOFWARMODE_NOVIS,
 
+#ifdef _USRDLL
 	NUM_FOGOFWARMODE_TYPES
+#endif
 };
 
 // AnimationTypes is depreciated, and will be eventually removed.
@@ -1424,7 +1531,7 @@ enum DllExport AnimationTypes			// Exposed to Python
 
 enum DllExport EntityEventTypes		// Exposed to Python
 {
-	ENTEVENT_NONE = -1,			//!< Invalid event
+	ENTITY_EVENT_NONE = -1,			//!< Invalid event
 };
 
 enum DllExport AnimationPathTypes	// Exposed to Python
@@ -1457,12 +1564,34 @@ enum DllExport AnimationPathTypes	// Exposed to Python
 	ANIMATIONPATH_RANGED_RUNDIE,
 	ANIMATIONPATH_RANGED_DIE_FADE,		//!< Used only in combat. The colateral damage die should have a fade integrated.
 	ANIMATIONPATH_RANGED_END,
+	ANIMATIONPATH_LEADER_COMMAND,
 
 	// Air Units animation paths
 	ANIMATIONPATH_AIRFADEIN,
 	ANIMATIONPATH_AIRFADEOUT,
 	ANIMATIONPATH_AIRSTRIKE,
 	ANIMATIONPATH_AIRBOMB,
+
+	//mission related animation paths
+	ANIMATIONPATH_HEAL,
+	ANIMATIONPATH_SLEEP,
+	ANIMATIONPATH_FORTIFY,
+	ANIMATIONPATH_PILLAGE,
+	ANIMATIONPATH_BOMBARD,
+	ANIMATIONPATH_SENTRY,
+	ANIMATIONPATH_FOUND,
+	ANIMATIONPATH_IRRIGATE,
+	ANIMATIONPATH_BUILD,
+	ANIMATIONPATH_MINE,
+	ANIMATIONPATH_CHOP,
+	ANIMATIONPATH_SHOVEL,
+	ANIMATIONPATH_RAILROAD,
+	ANIMATIONPATH_SABOTAGE,
+	ANIMATIONPATH_DESTROY,
+	ANIMATIONPATH_STEAL_PLANS,
+	ANIMATIONPATH_GREAT_EVENT,
+	ANIMATIONPATH_SURRENDER,
+	ANIMATIONPATH_AIRPATROL,
 };
 
 //!<  Enumeration for the animation category types.
@@ -1506,7 +1635,9 @@ enum DllExport FunctionTypes
 	FUNC_EULERKEY,	// = NiAnimationKey::EULERKEY,
 	FUNC_STEPKEY,	// = NiAnimationKey::STEPKEY,
 
+#ifdef _USRDLL
 	NUM_FUNC_TYPES	// = NiAnimationKey::NUMKEYTYPES
+#endif
 };
 
 enum DllExport TradeableItems						// Exposed to Python
@@ -1516,14 +1647,21 @@ enum DllExport TradeableItems						// Exposed to Python
 	TRADE_GOLD,
 	TRADE_GOLD_PER_TURN,
 	TRADE_MAPS,
+	TRADE_VASSAL,
+	TRADE_SURRENDER,
 	TRADE_OPEN_BORDERS,
 	TRADE_DEFENSIVE_PACT,
 	TRADE_PERMANENT_ALLIANCE,
 	TRADE_PEACE_TREATY,
 
+#ifdef _USRDLL
 	NUM_BASIC_ITEMS,
 
 	TRADE_TECHNOLOGIES = NUM_BASIC_ITEMS,
+#else
+	TRADE_TECHNOLOGIES,
+#endif
+
 	TRADE_RESOURCES,
 	TRADE_CITIES,
 	TRADE_PEACE,
@@ -1532,9 +1670,11 @@ enum DllExport TradeableItems						// Exposed to Python
 	TRADE_CIVIC,
 	TRADE_RELIGION,
 
+#ifdef _USRDLL
 	NUM_TRADEABLE_HEADINGS,
 
 	NUM_TRADEABLE_ITEMS = NUM_TRADEABLE_HEADINGS,
+#endif
 };
 
 enum DllExport DiploEventTypes					// Exposed to Python
@@ -1561,8 +1701,11 @@ enum DllExport DiploEventTypes					// Exposed to Python
 	DIPLOEVENT_MADE_DEMAND,
 	DIPLOEVENT_RESEARCH_TECH,
 	DIPLOEVENT_TARGET_CITY,
+	DIPLOEVENT_MADE_DEMAND_VASSAL,
 
+#ifdef _USRDLL
 	NUM_DIPLOEVENT_TYPES
+#endif
 };
 
 enum DllExport DiploCommentTypes				// Exposed to Python 
@@ -1572,10 +1715,15 @@ enum DllExport DiploCommentTypes				// Exposed to Python
 
 enum DllExport NetContactTypes					// Exposed to Python 
 {
+	NO_NETCONTACT = -1,
 	NETCONTACT_INITIAL,
 	NETCONTACT_RESPONSE,
+	NETCONTACT_ESTABLISHED,
+	NETCONTACT_BUSY,
 
-	NUM_NETCONTACT_TYPES,
+#ifdef _USRDLL
+	NUM_NETCONTACT_TYPES
+#endif
 };
 
 enum DllExport ContactTypes							// Exposed to Python 
@@ -1595,7 +1743,9 @@ enum DllExport ContactTypes							// Exposed to Python
 	CONTACT_TRADE_BONUS,
 	CONTACT_TRADE_MAP,
 
+#ifdef _USRDLL
 	NUM_CONTACT_TYPES
+#endif
 };
 
 enum DllExport MemoryTypes							// Exposed to Python 
@@ -1629,7 +1779,9 @@ enum DllExport MemoryTypes							// Exposed to Python
 	MEMORY_TRADED_TECH_TO_US,
 	MEMORY_RECEIVED_TECH_FROM_ANY,
 
+#ifdef _USRDLL
 	NUM_MEMORY_TYPES
+#endif
 };
 
 enum DllExport AttitudeTypes				// Exposed to Python 
@@ -1642,7 +1794,9 @@ enum DllExport AttitudeTypes				// Exposed to Python
 	ATTITUDE_PLEASED,
 	ATTITUDE_FRIENDLY,
 
+#ifdef _USRDLL
 	NUM_ATTITUDE_TYPES
+#endif
 };
 
 //! Enumeration for playing events with CvLeaderheadWidget
@@ -1659,7 +1813,9 @@ enum DllExport LeaderheadAction			// Exposed to Python
 	LEADERANIM_DISAGREE,		//!< The leaderhead makes a disagree gesture
 	LEADERANIM_AGREE,				//!< The leaderhead makes an agree gesture
 
+#ifdef _USRDLL
 	NUM_LEADERANIM_TYPES			//!< The number of leaderhead event types
+#endif
 };
 
 enum DllExport DiplomacyPowerTypes	// Exposed to Python
@@ -1669,7 +1825,9 @@ enum DllExport DiplomacyPowerTypes	// Exposed to Python
 	DIPLOMACYPOWER_EQUAL,
 	DIPLOMACYPOWER_STRONGER,
 
+#ifdef _USRDLL
 	NUM_DIPLOMACYPOWER_TYPES
+#endif
 };
 
 enum DllExport FeatTypes						// Exposed to Python
@@ -1703,7 +1861,9 @@ enum DllExport FeatTypes						// Exposed to Python
 	FEAT_POPULATION_2_BILLION,
 	FEAT_PAD,
 
+#ifdef _USRDLL
 	NUM_FEAT_TYPES
+#endif
 };
 
 enum DllExport SaveGameTypes			// Exposed to Python
@@ -1720,7 +1880,9 @@ enum DllExport SaveGameTypes			// Exposed to Python
 	SAVEGAME_PBEM,
 	SAVEGAME_REPLAY,
 
+#ifdef _USRDLL
 	NUM_SAVEGAME_TYPES
+#endif
 };
 
 enum DllExport InitializationStates
@@ -1728,7 +1890,9 @@ enum DllExport InitializationStates
 	INIT_OK,
 	INIT_FAILED,
 
-	NUM_INIT_STATES,
+#ifdef _USRDLL
+	NUM_INIT_STATES
+#endif
 };
 
 enum DllExport GameType				// Exposed to Python
@@ -1749,7 +1913,9 @@ enum DllExport GameType				// Exposed to Python
 	GAME_PBEM_LOAD,
 	GAME_REPLAY,
 
-	NUM_GAMETYPES,
+#ifdef _USRDLL
+	NUM_GAMETYPES
+#endif
 };
 
 enum DllExport GameMode				// Exposed to Python
@@ -1759,7 +1925,9 @@ enum DllExport GameMode				// Exposed to Python
 	GAMEMODE_NORMAL,
 	GAMEMODE_PITBOSS,
 
+#ifdef _USRDLL
 	NUM_GAMEMODES
+#endif
 };
 
 enum DllExport GamePwdTypes
@@ -1770,7 +1938,9 @@ enum DllExport GamePwdTypes
 	PWD_SCENARIO,
 	PWD_JOINGAME,
 
-	NUM_PWDTYPES,
+#ifdef _USRDLL
+	NUM_PWDTYPES
+#endif
 };
 
 enum DllExport SlotClaim
@@ -1779,7 +1949,9 @@ enum DllExport SlotClaim
 	SLOTCLAIM_RESERVED,
 	SLOTCLAIM_ASSIGNED,
 
-	NUM_SLOTCLAIMS,
+#ifdef _USRDLL
+	NUM_SLOTCLAIMS
+#endif
 };
 
 enum DllExport SlotStatus
@@ -1872,7 +2044,9 @@ enum DllExport WorldBuilderPopupTypes			// Exposed to Python
 	WBPOPUP_IMPROVEMENT,
 	WBPOPUP_GAME,
 
-	NUM_WBPOPUP,
+#ifdef _USRDLL
+	NUM_WBPOPUP
+#endif
 };
 
 enum DllExport EventType									// Exposed to Python
@@ -2071,7 +2245,9 @@ enum DllExport TabGroupTypes				// Exposed to Python
 	TABGROUP_AUDIO,
 	TABGROUP_CLOCK,
 
+#ifdef _USRDLL
 	NUM_TABGROUPS
+#endif
 };
 
 enum DllExport ReplayMessageTypes		// Exposed to Python
@@ -2082,7 +2258,9 @@ enum DllExport ReplayMessageTypes		// Exposed to Python
 	REPLAY_MESSAGE_CITY_FOUNDED,
 	REPLAY_MESSAGE_PLOT_OWNER_CHANGE,
 
+#ifdef _USRDLL
 	NUM_REPLAY_MESSAGE_TYPES
+#endif
 };
 
 /*------------------------------------------------------------------------------------
@@ -2127,7 +2305,9 @@ enum DllExport CivilopediaPageTypes		// Exposed to Python
 	CIVILOPEDIA_PAGE_CONCEPT,
 	CIVILOPEDIA_PAGE_HINTS,
 
+#ifdef _USRDLL
 	NUM_CIVILOPEDIA_PAGE_TYPES
+#endif
 };
 
 enum DllExport ActionSubTypes					// Exposed to Python
@@ -2146,7 +2326,9 @@ enum DllExport ActionSubTypes					// Exposed to Python
 	ACTIONSUBTYPE_AUTOMATE,
 	ACTIONSUBTYPE_MISSION,
 
+#ifdef _USRDLL
 	NUM_ACTIONSUBTYPES
+#endif
 };
 
 enum DllExport GameMessageTypes				// Exposed to Python
@@ -2204,6 +2386,7 @@ enum DllExport GameMessageTypes				// Exposed to Python
 	GAMEMESSAGE_LINE_ENTITY,
 	GAMEMESSAGE_SIGN_DELETE,
 	GAMEMESSAGE_LINE_ENTITY_DELETE,
+	GAMEMESSAGE_LINE_GROUP_DELETE,
 	GAMEMESSAGE_PAUSE,
 	GAMEMESSAGE_MP_KICK,
 	GAMEMESSAGE_MP_RETIRE,
@@ -2217,6 +2400,7 @@ enum DllExport GameMessageTypes				// Exposed to Python
 	GAMEMESSAGE_TOGGLE_TRADE,
 	GAMEMESSAGE_IMPLEMENT_OFFER,
 	GAMEMESSAGE_CHANGE_WAR,
+	GAMEMESSAGE_CHANGE_VASSAL,
 	GAMEMESSAGE_CHOOSE_ELECTION,
 	GAMEMESSAGE_DIPLO_VOTE,
 	GAMEMESSAGE_APPLY_EVENT,
@@ -2236,6 +2420,7 @@ enum DllExport GameMessageTypes				// Exposed to Python
 	GAMEMESSAGE_HOT_JOIN_NOTICE,
 	GAMEMESSAGE_HOT_DROP_NOTICE,
 	GAMEMESSAGE_DIPLOMACY,
+	GAMEMESSAGE_POPUP,
 };
 
 enum DllExport PopupControlLayout		// Exposed to Python
@@ -2304,7 +2489,9 @@ enum DllExport GraphicLevelTypes		// Exposed to Python
 	GRAPHICLEVEL_LOW,
 	GRAPHICLEVEL_CURRENT,
 
+#ifdef _USRDLL
 	NUM_GRAPHICLEVELS
+#endif
 };
 
 #endif	// CVENUMS_h

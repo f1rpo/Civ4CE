@@ -15,6 +15,9 @@ import sys
 from CvMapGeneratorUtil import FractalWorld
 from CvMapGeneratorUtil import TerrainGenerator
 from CvMapGeneratorUtil import FeatureGenerator
+from CvMapGeneratorUtil import BonusBalancer
+
+balancer = BonusBalancer()
 
 gc = CyGlobalContext()
 
@@ -24,6 +27,85 @@ def getDescription():
 def isAdvancedMap():
 	"This map should show up in simple mode"
 	return 0
+
+def getNumCustomMapOptions():
+	return 2
+
+def getNumHiddenCustomMapOptions():
+	return 2
+
+def getCustomMapOptionName(argsList):
+	[iOption] = argsList
+	option_names = {
+		0:	"TXT_KEY_MAP_WORLD_WRAP",
+		1:  "TXT_KEY_CONCEPT_RESOURCES"
+		}
+	translated_text = unicode(CyTranslator().getText(option_names[iOption], ()))
+	return translated_text
+
+def getNumCustomMapOptionValues(argsList):
+	[iOption] = argsList
+	option_values = {
+		0:	3,
+		1:	2
+		}
+	return option_values[iOption]
+	
+def getCustomMapOptionDescAt(argsList):
+	[iOption, iSelection] = argsList
+	selection_names = {
+		0:	{
+			0: "TXT_KEY_MAP_WRAP_FLAT",
+			1: "TXT_KEY_MAP_WRAP_CYLINDER",
+			2: "TXT_KEY_MAP_WRAP_TOROID"
+			},
+		1:	{
+			0: "TXT_KEY_WORLD_STANDARD",
+			1: "TXT_KEY_MAP_BALANCED"
+			}
+		}
+	translated_text = unicode(CyTranslator().getText(selection_names[iOption][iSelection], ()))
+	return translated_text
+	
+def getCustomMapOptionDefault(argsList):
+	[iOption] = argsList
+	option_defaults = {
+		0:	1,
+		1:  0
+		}
+	return option_defaults[iOption]
+
+def isRandomCustomMapOption(argsList):
+	[iOption] = argsList
+	option_random = {
+		0:	false,
+		1:  false
+		}
+	return option_random[iOption]
+
+def getWrapX():
+	map = CyMap()
+	return (map.getCustomMapOption(0) == 1 or map.getCustomMapOption(0) == 2)
+	
+def getWrapY():
+	map = CyMap()
+	return (map.getCustomMapOption(0) == 2)
+
+def normalizeAddExtras():
+	if (CyMap().getCustomMapOption(1) == 1):
+		balancer.normalizeAddExtras()
+	CyPythonMgr().allowDefaultImpl()	# do the rest of the usual normalizeStartingPlots stuff, don't overrride
+
+def addBonusType(argsList):
+	[iBonusType] = argsList
+	gc = CyGlobalContext()
+	type_string = gc.getBonusInfo(iBonusType).getType()
+
+	if (CyMap().getCustomMapOption(1) == 1):
+		if (type_string in balancer.resourcesToBalance) or (type_string in balancer.resourcesToEliminate):
+			return None # don't place any of this bonus randomly
+		
+	CyPythonMgr().allowDefaultImpl() # pretend we didn't implement this method, and let C handle this bonus in the default way
 
 def getGridSize(argsList):
 	"Because this is such a land-heavy map, override getGridSize() to make the map smaller"
@@ -40,9 +122,6 @@ def getGridSize(argsList):
 		return []
 	[eWorldSize] = argsList
 	return grid_sizes[eWorldSize]
-
-def getWrapX(): return True
-def getWrapY(): return False
 
 def minStartingDistanceModifier():
 	return -15

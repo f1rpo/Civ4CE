@@ -162,12 +162,17 @@ class CvPediaBuilding:
 				szText2 = szText1 + (u"%c" % (gc.getCommerceInfo(k).getChar()))
 				screen.appendListBoxString(panelName, u"<font=4>" + szText2 + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
-		if (buildingInfo.getHappiness() > 0):
-			szText = localText.getText("TXT_KEY_PEDIA_HAPPY", (buildingInfo.getHappiness(),)).upper()
+		iHappiness = buildingInfo.getHappiness()
+		if self.top.iActivePlayer != -1:
+			if (self.iBuilding == gc.getCivilizationInfo(gc.getPlayer(self.top.iActivePlayer).getCivilizationType()).getCivilizationBuildings(buildingInfo.getBuildingClassType())):
+				iHappiness += gc.getPlayer(self.top.iActivePlayer).getExtraBuildingHappiness(self.iBuilding)
+			
+		if (iHappiness > 0):
+			szText = localText.getText("TXT_KEY_PEDIA_HAPPY", (iHappiness,)).upper()
 			screen.appendListBoxString(panelName, u"<font=4>" + szText + u"%c" % CyGame().getSymbolID(FontSymbols.HAPPY_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 			
-		elif (buildingInfo.getHappiness() < 0):
-			szText = localText.getText("TXT_KEY_PEDIA_UNHAPPY", (-buildingInfo.getHappiness(),)).upper()
+		elif (iHappiness < 0):
+			szText = localText.getText("TXT_KEY_PEDIA_UNHAPPY", (-iHappiness,)).upper()
 			screen.appendListBoxString(panelName, u"<font=4>" + szText + u"%c" % CyGame().getSymbolID(FontSymbols.UNHAPPY_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
 		if (buildingInfo.getHealth() > 0):

@@ -9,6 +9,8 @@ class CyCity;
 class CyPlot;
 class CyUnit;
 
+int cyIntRange(int iNum, int iLow, int iHigh);
+float cyFloatRange(float fNum, float fLow, float fHigh);
 int cyDxWrap(int iDX);
 int cyDyWrap(int iDY);
 int cyPlotDistance(int iX1, int iY1, int iX2, int iY2);

@@ -1,4 +1,4 @@
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Jesse Smith (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -75,6 +75,8 @@
 	<ElementType name="OpenBordersRefuseAttitudeThreshold" content="textOnly"/>
 	<ElementType name="DefensivePactRefuseAttitudeThreshold" content="textOnly"/>
 	<ElementType name="PermanentAllianceRefuseAttitudeThreshold" content="textOnly"/>
+	<ElementType name="VassalRefuseAttitudeThreshold" content="textOnly"/>
+	<ElementType name="iVassalPowerModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="FavoriteCivic" content="textOnly"/>
 	<ElementType name="TraitType" content="textOnly"/>
 	<ElementType name="bTrait" content="textOnly" dt:type="boolean"/>
@@ -248,6 +250,8 @@
 		<element type="OpenBordersRefuseAttitudeThreshold"/>
 		<element type="DefensivePactRefuseAttitudeThreshold"/>
 		<element type="PermanentAllianceRefuseAttitudeThreshold"/>
+		<element type="VassalRefuseAttitudeThreshold"/>
+		<element type="iVassalPowerModifier"/>
 		<element type="FavoriteCivic"/>
 		<element type="Traits"/>
 		<element type="Flavors"/>
@@ -269,9 +273,13 @@
 	<ElementType name="Type" content="textOnly"/>
 	<ElementType name="ShortDescription" content="textOnly"/>
 	<ElementType name="iHealth" content="textOnly" dt:type="int"/>
+	<ElementType name="iHappiness" content="textOnly" dt:type="int"/>
 	<ElementType name="iMaxAnarchy" content="textOnly" dt:type="int"/>
 	<ElementType name="iUpkeepModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iLevelExperienceModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iGreatPeopleRateModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iGreatGeneralRateModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iDomesticGreatGeneralRateModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iMaxGlobalBuildingProductionModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iMaxTeamBuildingProductionModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iMaxPlayerBuildingProductionModifier" content="textOnly" dt:type="int"/>
@@ -313,9 +321,13 @@
 		<element type="Description"/>
 		<element type="ShortDescription"/>
 		<element type="iHealth"/>
+		<element type="iHappiness"/>
 		<element type="iMaxAnarchy"/>
 		<element type="iUpkeepModifier"/>
+		<element type="iLevelExperienceModifier"/>
 		<element type="iGreatPeopleRateModifier"/>
+		<element type="iGreatGeneralRateModifier"/>
+		<element type="iDomesticGreatGeneralRateModifier"/>
 		<element type="iMaxGlobalBuildingProductionModifier"/>
 		<element type="iMaxTeamBuildingProductionModifier"/>
 		<element type="iMaxPlayerBuildingProductionModifier"/>

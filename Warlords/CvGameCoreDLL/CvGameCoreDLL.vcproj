@@ -47,7 +47,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="boost_python-vc71-mt-gd-1_32.lib winmm.lib"
-				OutputFile="../Assets/CvGameCoreDLL_DEBUG.dll"
+				OutputFile="../Warlords/Assets/CvGameCoreDLL_DEBUG.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="Python24\libs;&quot;boost-1.32.0\libs\&quot;"
 				GenerateDebugInformation="TRUE"
@@ -109,7 +109,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="boost_python-vc71-mt-1_32.lib  winmm.lib"
-				OutputFile="../Assets/CvGameCoreDLL_RELEASE.dll"
+				OutputFile="../Warlords/Assets/CvGameCoreDLL_RELEASE.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="Python24\libs;&quot;boost-1.32.0\libs\&quot;"
 				GenerateDebugInformation="TRUE"
@@ -173,7 +173,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="boost_python-vc71-mt-1_32.lib  winmm.lib"
-				OutputFile="../Assets/CvGameCoreDLL_RELEASE_MEM.dll"
+				OutputFile="../Warlords/Assets/CvGameCoreDLL_RELEASE_MEM.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="Python24\libs;&quot;boost-1.32.0\libs\&quot;"
 				GenerateDebugInformation="TRUE"
@@ -235,7 +235,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="boost_python-vc71-mt-gd-1_32.lib  winmm.lib"
-				OutputFile="../Assets/CvGameCoreDLL_DEBUG_MEM.dll"
+				OutputFile="../Warlords/Assets/CvGameCoreDLL_DEBUG_MEM.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="Python24\libs;&quot;boost-1.32.0\libs\&quot;"
 				GenerateDebugInformation="TRUE"
@@ -297,7 +297,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="boost_python-vc71-mt-1_32.lib  winmm.lib"
-				OutputFile="../Assets/CvGameCoreDLL.dll"
+				OutputFile="../Warlords/Assets/CvGameCoreDLL.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="Python24\libs;&quot;boost-1.32.0\libs\&quot;"
 				GenerateDebugInformation="TRUE"

@@ -51,6 +51,8 @@ public:
 	void ExecuteMove( float fTimeToExecute );
 	void SetPosition( const CvPlot * pkPlot );
 	void NotifyEntity( MissionTypes eMission );
+	void SetSiegeTower(bool show);
+	bool GetSiegeTower();
 
 protected:
 	CvEntity* m_pEntity;

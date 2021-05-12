@@ -29,13 +29,44 @@ def isClimateMap():
 def isSeaLevelMap():
 	return 0
 
+def getNumCustomMapOptions():
+	return 1
+
+def getNumHiddenCustomMapOptions():
+	return 1
+
+def getCustomMapOptionName(argsList):
+	translated_text = unicode(CyTranslator().getText("TXT_KEY_MAP_WORLD_WRAP", ()))
+	return translated_text
+	
+def getNumCustomMapOptionValues(argsList):
+	return 3
+	
+def getCustomMapOptionDescAt(argsList):
+	iSelection = argsList[1]
+	selection_names = ["TXT_KEY_MAP_WRAP_FLAT",
+	                   "TXT_KEY_MAP_WRAP_CYLINDER",
+	                   "TXT_KEY_MAP_WRAP_TOROID"]
+	translated_text = unicode(CyTranslator().getText(selection_names[iSelection], ()))
+	return translated_text
+	
+def getCustomMapOptionDefault(argsList):
+	return 0
+
+def isRandomCustomMapOption(argsList):
+	return false
+
 def getWrapX():
-	return False
+	map = CyMap()
+	return (map.getCustomMapOption(0) == 1 or map.getCustomMapOption(0) == 2)
+	
 def getWrapY():
-	return False
+	map = CyMap()
+	return (map.getCustomMapOption(0) == 2)
 
 def getTopLatitude():
 	return 45
+	
 def getBottomLatitude():
 	return 25
 

@@ -505,7 +505,7 @@ class LoadSelectPage(wx.wizard.PyWizardPage):
 				bScenario = false
 				dlg = wx.FileDialog(
 					self, message=(localText.getText("TXT_KEY_PITBOSS_CHOOSE_SAVE", ())), defaultDir=".\saves\multi",
-					defaultFile="", wildcard=localText.getText("TXT_KEY_PITBOSS_SAVE_FILES", ("(*.Civ4SavedGame)|*.Civ4SavedGame", )), style=wx.OPEN
+					defaultFile="", wildcard=localText.getText("TXT_KEY_PITBOSS_SAVE_FILES", ("(*.CivWarlordsSave)|*.CivWarlordsSave", )), style=wx.OPEN
 					)
 				
 				# Show the modal dialog and get the response

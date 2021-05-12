@@ -11,6 +11,7 @@
 
 class CvPlot;
 class CvArea;
+class CvUnitInfo;
 class CvSelectionGroup;
 class FAStarNode;
 
@@ -29,6 +30,7 @@ struct DllExport CombatDetails					// Exposed to Python
 	int iPlotDefenseModifier;
 	int iFortifyModifier;
 	int iCityDefenseModifier;
+	int iHillsAttackModifier;
 	int iHillsDefenseModifier;
 	int iFeatureDefenseModifier;
 	int iTerrainDefenseModifier;
@@ -45,6 +47,7 @@ struct DllExport CombatDetails					// Exposed to Python
 	int iAnimalCombatModifierT;
 	int iRiverAttackModifier;
 	int iAmphibAttackModifier;
+	int iKamikazeModifier;
 	int iModifierTotal;
 	int iBaseCombatStr;
 	int iCombat;
@@ -63,7 +66,8 @@ public:
 
 	CvUnit();
 	virtual ~CvUnit();
-
+	
+	void reloadEntity();
 	void init(int iID, UnitTypes eUnit, UnitAITypes eUnitAI, PlayerTypes eOwner, int iX, int iY);
 	void uninit();
 	void reset(int iID = 0, UnitTypes eUnit = NO_UNIT, PlayerTypes eOwner = NO_PLAYER, bool bConstructorCall = false);
@@ -90,6 +94,7 @@ public:
 	bool generatePath(const CvPlot* pToPlot, int iFlags = 0, bool bReuse = false, int* piPathTurns = NULL) const;	// Exposed to Python
 
 	bool canEnterTerritory(TeamTypes eTeam, bool bIgnoreRightOfPassage = false) const;						// Exposed to Python
+	bool canEnterArea(TeamTypes eTeam, const CvArea* pArea, bool bIgnoreRightOfPassage = false) const;						// Exposed to Python
 	DllExport TeamTypes getDeclareWarMove(const CvPlot* pPlot) const;															// Exposed to Python
 	bool canMoveInto(const CvPlot* pPlot, bool bAttack = false, bool bDeclareWar = false, bool bIgnoreLoad = false) const;	// Exposed to Python
 	bool canMoveOrAttackInto(const CvPlot* pPlot, bool bDeclareWar = false) const;								// Exposed to Python
@@ -104,8 +109,8 @@ public:
 	bool canScrap() const;																																				// Exposed to Python
 	void scrap();
 
-	bool canGift(bool bTestVisible = false);																											// Exposed to Python 
-	void gift();
+	bool canGift(bool bTestVisible = false, bool bTestTransport = true);																											// Exposed to Python 
+	void gift(bool bTestTransport = true);
 
 	bool canLoadUnit(const CvUnit* pUnit, const CvPlot* pPlot) const;															// Exposed to Python
 	void loadUnit(CvUnit* pUnit);
@@ -207,8 +212,15 @@ public:
 	DllExport bool canBuild(const CvPlot* pPlot, BuildTypes eBuild, bool bTestVisible = false) const;				// Exposed to Python
 	bool build(BuildTypes eBuild);
 
-	bool canPromote(PromotionTypes ePromotion) const;																												// Exposed to Python 
-	void promote(PromotionTypes ePromotion);																																// Exposed to Python 
+	bool canPromote(PromotionTypes ePromotion, int iLeaderUnitId) const;																												// Exposed to Python 
+	void promote(PromotionTypes ePromotion, int iLeaderUnitId);																																// Exposed to Python 
+
+	int canLead(const CvPlot* pPlot, int iUnitId) const;
+	bool lead(int iUnitId);
+
+	int canGiveExperience(const CvPlot* pPlot) const;																												// Exposed to Python 
+	bool giveExperience();																																// Exposed to Python 
+	int getStackExperienceToGive(int iNumUnits) const;
 
 	DllExport int upgradePrice(UnitTypes eUnit) const;																											// Exposed to Python
 	bool upgradeAvailable(UnitTypes eFromUnit, UnitClassTypes eToUnitClass, int iCount = 0) const;					// Exposed to Python
@@ -326,6 +338,7 @@ public:
 	DllExport int cityAttackModifier() const;																					// Exposed to Python
 	DllExport int cityDefenseModifier() const;																				// Exposed to Python
 	DllExport int animalCombatModifier() const;																				// Exposed to Python
+	DllExport int hillsAttackModifier() const;																				// Exposed to Python
 	DllExport int hillsDefenseModifier() const;																				// Exposed to Python
 	DllExport int terrainDefenseModifier(TerrainTypes eTerrain) const;								// Exposed to Python
 	DllExport int featureDefenseModifier(FeatureTypes eFeature) const;								// Exposed to Python
@@ -404,7 +417,7 @@ public:
 
 	DllExport int getExperience() const;																											// Exposed to Python
 	DllExport void setExperience(int iNewValue, int iMax = -1);																// Exposed to Python
-	void changeExperience(int iChange, int iMax = -1);																				// Exposed to Python
+	void changeExperience(int iChange, int iMax = -1, bool bFromCombat = false, bool bInBorders = false);																				// Exposed to Python
 
 	DllExport int getLevel() const;																														// Exposed to Python					
 	void setLevel(int iNewValue);
@@ -506,8 +519,29 @@ public:
 	int getExtraCityDefensePercent() const;																										// Exposed to Python
 	void changeExtraCityDefensePercent(int iChange);
 
+	int getExtraHillsAttackPercent() const;																									// Exposed to Python
+	void changeExtraHillsAttackPercent(int iChange);
+
 	int getExtraHillsDefensePercent() const;																									// Exposed to Python
 	void changeExtraHillsDefensePercent(int iChange);
+
+	int getRevoltProtection() const;																									// Exposed to Python
+	void changeRevoltProtection(int iChange);
+
+	int getCollateralDamageProtection() const;																									// Exposed to Python
+	void changeCollateralDamageProtection(int iChange);
+
+	int getPillageChange() const;																									// Exposed to Python
+	void changePillageChange(int iChange);
+
+	int getUpgradeDiscount() const;																									// Exposed to Python
+	void changeUpgradeDiscount(int iChange);
+
+	int getExperiencePercent() const;																									// Exposed to Python
+	void changeExperiencePercent(int iChange);
+
+	int getKamikazePercent() const;																									// Exposed to Python
+	void changeKamikazePercent(int iChange);
 
 	bool isMadeAttack() const;																																// Exposed to Python
 	DllExport void setMadeAttack(bool bNewValue);																							// Exposed to Python
@@ -541,7 +575,10 @@ public:
 	void setCapturingPlayer(PlayerTypes eNewValue);
 
 	DllExport const UnitTypes getUnitType() const;																					// Exposed to Python
-	UnitClassTypes getUnitClassType() const;																								// Exposed to Python
+	UnitClassTypes getUnitClassType() const;	// Exposed to Python
+
+	DllExport const UnitTypes getLeaderUnitType() const;
+	void setLeaderUnitType(UnitTypes leaderUnitType);
 
 	DllExport CvUnit* getCombatUnit() const;
 	void setCombatUnit(CvUnit* pUnit, bool bAttacking = false);
@@ -581,12 +618,15 @@ public:
 
 	bool canAcquirePromotion(PromotionTypes ePromotion) const;															// Exposed to Python 
 	bool canAcquirePromotionAny() const;																										// Exposed to Python
+	bool isPromotionValid(PromotionTypes ePromotion) const;															// Exposed to Python 
 	DllExport bool isHasPromotion(PromotionTypes eIndex) const;															// Exposed to Python
 	DllExport void setHasPromotion(PromotionTypes eIndex, bool bNewValue);									// Exposed to Python
 
 	DllExport int getSubUnitCount() const;
 	DllExport int getSubUnitsAlive() const;
 	int getSubUnitsAlive(int iDamage) const;
+
+	bool isTargetOf(const CvUnit& attacker) const;
 
 	void read(FDataStreamBase* pStream);
 	void write(FDataStreamBase* pStream);
@@ -652,7 +692,14 @@ protected:
 	int m_iExtraCombatPercent;
 	int m_iExtraCityAttackPercent;
 	int m_iExtraCityDefensePercent;
+	int m_iExtraHillsAttackPercent;
 	int m_iExtraHillsDefensePercent;
+	int m_iRevoltProtection;
+	int m_iCollateralDamageProtection;
+	int m_iPillageChange;
+	int m_iUpgradeDiscount;
+	int m_iExperiencePercent;
+	int m_iKamikazePercent;
 
 	bool m_bMadeAttack;
 	bool m_bMadeInterception;
@@ -664,11 +711,12 @@ protected:
 	PlayerTypes m_eOwner;
 	PlayerTypes m_eCapturingPlayer;
 	UnitTypes m_eUnitType;
+	UnitTypes m_eLeaderUnitType;
 
 	IDInfo m_combatUnit;
 	IDInfo m_transportUnit;
 
-	int m_aiExtraDomainModifier[NUM_DOMAIN_TYPES];
+	int* m_aiExtraDomainModifier;
 
 	CvWString m_szName;
 	CvString m_szScriptData;
@@ -690,9 +738,9 @@ protected:
 	void airStrike(CvPlot* pPlot);
 
 	int planBattle( CvBattleDefinition & kBattleDefinition ) const;
-	int computeUnitsToDie( const CvBattleDefinition & kDefinition, bool bRanged, int iUnit ) const;
-	bool verifyRoundsValid( const CvBattlePlanVector & vctBattlePlan ) const;
-	void increaseBattleRounds( CvBattleDefinition & vctBattlePlan ) const;
+	int computeUnitsToDie( const CvBattleDefinition & kDefinition, bool bRanged, BattleUnitTypes iUnit ) const;
+	bool verifyRoundsValid( const CvBattleDefinition & battleDefinition ) const;
+	void increaseBattleRounds( CvBattleDefinition & battleDefinition ) const;
 	int computeWaveSize( bool bRangedRound, int iAttackerMax, int iDefenderMax ) const;
 };
 

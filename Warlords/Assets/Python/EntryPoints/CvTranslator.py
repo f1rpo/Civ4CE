@@ -141,7 +141,7 @@ def finishText(argsList):
 				color = gc.getColorInfo(iColor).getColor()
 				szReplacement = (u"<color=%d,%d,%d,%d>" % (int(color.r * 255), int(color.g * 255), int(color.b * 255), int(color.a * 255)))	# GFC style
 			else:
-				szReplacement = u"<color=255,0,0,255>"	# temporary proxy
+				szReplacement = u""	# temporary proxy
 						
 		if len(szReplacement) > 0:		
 			szString = szString.replace(szMatch, szReplacement)

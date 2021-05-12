@@ -14,6 +14,43 @@
 
 CvInitCore::CvInitCore()
 {
+	m_abOptions = new bool[NUM_GAMEOPTION_TYPES];
+	m_abMPOptions = new bool[NUM_MPOPTION_TYPES];
+	m_abForceControls = new bool[NUM_FORCECONTROL_TYPES];
+
+	m_aszLeaderName = new CvWString[MAX_PLAYERS];
+	m_aszCivDescription = new CvWString[MAX_PLAYERS];
+	m_aszCivShortDesc = new CvWString[MAX_PLAYERS];
+	m_aszCivAdjective = new CvWString[MAX_PLAYERS];
+	m_aszCivPassword = new CvWString[MAX_PLAYERS];
+	m_aszEmail = new CvString[MAX_PLAYERS];
+	m_aszSmtpHost = new CvString[MAX_PLAYERS];
+
+	m_abWhiteFlag = new bool[MAX_PLAYERS];
+	m_aszFlagDecal = new CvWString[MAX_PLAYERS];
+
+	m_aeCiv = new CivilizationTypes[MAX_PLAYERS];
+	m_aeLeader = new LeaderHeadTypes[MAX_PLAYERS];
+	m_aeTeam = new TeamTypes[MAX_PLAYERS];
+	m_aeHandicap = new HandicapTypes[MAX_PLAYERS];
+	m_aeColor = new PlayerColorTypes[MAX_PLAYERS];
+	m_aeArtStyle = new ArtStyleTypes[MAX_PLAYERS];
+
+	// Slot data
+	m_aeSlotStatus = new SlotStatus[MAX_PLAYERS];
+	m_aeSlotClaim = new SlotClaim[MAX_PLAYERS];
+
+	// Civ flags
+	m_abPlayableCiv = new bool[MAX_PLAYERS];
+	m_abMinorNationCiv = new bool[MAX_PLAYERS];
+
+	// Unsaved player data
+	m_aiNetID = new int[MAX_PLAYERS];
+	m_abReady = new bool[MAX_PLAYERS];
+
+	m_aszPythonCheck = new CvString[MAX_PLAYERS];
+	m_aszXMLCheck = new CvString[MAX_PLAYERS];
+
 	m_aeCustomMapOptions = NULL;
 	m_abVictories = NULL;
 
@@ -24,6 +61,33 @@ CvInitCore::CvInitCore()
 CvInitCore::~CvInitCore()
 {
 	uninit();
+
+	SAFE_DELETE_ARRAY(m_abOptions);
+	SAFE_DELETE_ARRAY(m_abMPOptions);
+	SAFE_DELETE_ARRAY(m_abForceControls);
+	SAFE_DELETE_ARRAY(m_aszLeaderName);
+	SAFE_DELETE_ARRAY(m_aszCivDescription);
+	SAFE_DELETE_ARRAY(m_aszCivShortDesc);
+	SAFE_DELETE_ARRAY(m_aszCivAdjective);
+	SAFE_DELETE_ARRAY(m_aszCivPassword);
+	SAFE_DELETE_ARRAY(m_aszEmail);
+	SAFE_DELETE_ARRAY(m_aszSmtpHost);
+	SAFE_DELETE_ARRAY(m_abWhiteFlag);
+	SAFE_DELETE_ARRAY(m_aszFlagDecal);
+	SAFE_DELETE_ARRAY(m_aeCiv);
+	SAFE_DELETE_ARRAY(m_aeLeader);
+	SAFE_DELETE_ARRAY(m_aeTeam);
+	SAFE_DELETE_ARRAY(m_aeHandicap);
+	SAFE_DELETE_ARRAY(m_aeColor);
+	SAFE_DELETE_ARRAY(m_aeArtStyle);
+	SAFE_DELETE_ARRAY(m_aeSlotStatus);
+	SAFE_DELETE_ARRAY(m_aeSlotClaim);
+	SAFE_DELETE_ARRAY(m_abPlayableCiv);
+	SAFE_DELETE_ARRAY(m_abMinorNationCiv);
+	SAFE_DELETE_ARRAY(m_aiNetID);
+	SAFE_DELETE_ARRAY(m_abReady);
+	SAFE_DELETE_ARRAY(m_aszPythonCheck);
+	SAFE_DELETE_ARRAY(m_aszXMLCheck);
 }
 
 void CvInitCore::init(GameMode eMode)
@@ -376,6 +440,8 @@ void CvInitCore::closeInactiveSlots()
 				setSlotStatus(eID, SS_CLOSED);
 			}
 			setSlotClaim(eID, SLOTCLAIM_UNASSIGNED);
+
+			gDLL->sendPlayerInfo(eID);
 		}
 	}
 }
@@ -498,6 +564,7 @@ void CvInitCore::resetGame(CvInitCore * pSource, bool bClear, bool bSaveGameType
 
 		// Map-specific custom parameters
 		setCustomMapOptions(pSource->getNumCustomMapOptions(), pSource->getCustomMapOptions());
+		m_iNumHiddenCustomMapOptions = pSource->getNumHiddenCustomMapOptions();
 		setVictories(pSource->getNumVictories(), pSource->getVictories());
 
 		// Standard game options
@@ -855,6 +922,9 @@ void CvInitCore::refreshCustomMapOptions()
 			bool bOK;
 			long iNumOptions = 0;
 
+			gDLL->getPythonIFace()->callFunction(CvString(getMapScriptName()).GetCString(), "getNumHiddenCustomMapOptions", NULL, &iNumOptions);
+			m_iNumHiddenCustomMapOptions = iNumOptions;
+
 			bOK = gDLL->getPythonIFace()->callFunction(CvString(getMapScriptName()).GetCString(), "getNumCustomMapOptions", NULL, &iNumOptions);
 			if (bOK)
 			{
@@ -1086,24 +1156,14 @@ const CvWString & CvInitCore::getLeaderName(PlayerTypes eID, uint uiForm) const
 	FASSERT_BOUNDS(0, MAX_PLAYERS, eID, "CvInitCore::getLeaderName");
 	if ( checkBounds(eID, 0, MAX_PLAYERS) )
 	{
-		// Assume we have stored the key
-		m_szTemp = gDLL->getObjectText(CvString(m_aszLeaderName[eID]).GetCString(), uiForm);
-		if (m_szTemp == m_aszLeaderName[eID])
-		{
-			// We have the actual text stored
-			return m_aszLeaderName[eID];
-		}
-		else
-		{
-			// We have a key stored
-			return m_szTemp;
-		}
+		m_szTemp = gDLL->getObjectText(CvString(m_aszLeaderName[eID]).GetCString(), uiForm, true);
 	}
 	else
 	{
 		m_szTemp = "";
-		return m_szTemp;
 	}
+
+	return m_szTemp;
 }
 
 void CvInitCore::setLeaderName(PlayerTypes eID, const CvWString & szLeaderName)
@@ -1111,7 +1171,9 @@ void CvInitCore::setLeaderName(PlayerTypes eID, const CvWString & szLeaderName)
 	FASSERT_BOUNDS(0, MAX_PLAYERS, eID, "CvInitCore::setLeaderName");
 	if ( checkBounds(eID, 0, MAX_PLAYERS) )
 	{
-		m_aszLeaderName[eID] = szLeaderName;
+		CvWString szName = szLeaderName;
+		gDLL->stripSpecialCharacters(szName);
+		m_aszLeaderName[eID] = szName;
 	}
 }
 
@@ -1135,24 +1197,14 @@ const CvWString & CvInitCore::getCivDescription(PlayerTypes eID, uint uiForm) co
 
 	if ( checkBounds(eID, 0, MAX_PLAYERS) )
 	{
-		// Assume we have stored the key
-		m_szTemp = gDLL->getObjectText(CvString(m_aszCivDescription[eID]).GetCString(), uiForm);
-		if (m_szTemp == m_aszCivDescription[eID])
-		{
-			// We have the actual text stored
-			return m_aszCivDescription[eID];
-		}
-		else
-		{
-			// We have a key stored
-			return m_szTemp;
-		}
+		m_szTemp = gDLL->getObjectText(CvString(m_aszCivDescription[eID]).GetCString(), uiForm, true);
 	}
 	else
 	{
 		m_szTemp = "";
-		return m_szTemp;
 	}
+
+	return m_szTemp;
 }
 
 void CvInitCore::setCivDescription(PlayerTypes eID, const CvWString & szCivDescription)
@@ -1160,7 +1212,9 @@ void CvInitCore::setCivDescription(PlayerTypes eID, const CvWString & szCivDescr
 	FASSERT_BOUNDS(0, MAX_PLAYERS, eID, "CvInitCore::setCivDescription");
 	if ( checkBounds(eID, 0, MAX_PLAYERS) )
 	{
-		m_aszCivDescription[eID] = szCivDescription;
+		CvWString szName = szCivDescription;
+		gDLL->stripSpecialCharacters(szName);
+		m_aszCivDescription[eID] = szName;
 	}
 }
 
@@ -1185,23 +1239,14 @@ const CvWString & CvInitCore::getCivShortDesc(PlayerTypes eID, uint uiForm) cons
 	if ( checkBounds(eID, 0, MAX_PLAYERS) )
 	{
 		// Assume we have stored the key
-		m_szTemp = gDLL->getObjectText(CvString(m_aszCivShortDesc[eID]).GetCString(), uiForm);
-		if (m_szTemp == m_aszCivShortDesc[eID])
-		{
-			// We have the actual text stored
-			return m_aszCivShortDesc[eID];
-		}
-		else
-		{
-			// We have a key stored
-			return m_szTemp;
-		}
+		m_szTemp = gDLL->getObjectText(CvString(m_aszCivShortDesc[eID]).GetCString(), uiForm, true);
 	}
 	else
 	{
 		m_szTemp = "";
-		return m_szTemp;
 	}
+
+	return m_szTemp;
 }
 
 void CvInitCore::setCivShortDesc(PlayerTypes eID, const CvWString & szCivShortDesc)
@@ -1209,7 +1254,9 @@ void CvInitCore::setCivShortDesc(PlayerTypes eID, const CvWString & szCivShortDe
 	FASSERT_BOUNDS(0, MAX_PLAYERS, eID, "CvInitCore::setCivShortDesc");
 	if ( checkBounds(eID, 0, MAX_PLAYERS) )
 	{
-		m_aszCivShortDesc[eID] = szCivShortDesc;
+		CvWString szName = szCivShortDesc;
+		gDLL->stripSpecialCharacters(szName);
+		m_aszCivShortDesc[eID] = szName;
 	}
 }
 
@@ -1234,23 +1281,14 @@ const CvWString & CvInitCore::getCivAdjective(PlayerTypes eID, uint uiForm) cons
 	if ( checkBounds(eID, 0, MAX_PLAYERS) )
 	{
 		// Assume we have stored the key
-		m_szTemp = gDLL->getObjectText(CvString(m_aszCivAdjective[eID]).GetCString(), uiForm);
-		if (m_szTemp == m_aszCivAdjective[eID])
-		{
-			// We have the actual text stored
-			return m_aszCivAdjective[eID];
-		}
-		else
-		{
-			// We have a key stored
-			return m_szTemp;
-		}
+		m_szTemp = gDLL->getObjectText(CvString(m_aszCivAdjective[eID]).GetCString(), uiForm, true);
 	}
 	else
 	{
 		m_szTemp = "";
-		return m_szTemp;
 	}
+
+	return m_szTemp;
 }
 
 void CvInitCore::setCivAdjective(PlayerTypes eID, const CvWString & szCivAdjective)
@@ -1258,7 +1296,9 @@ void CvInitCore::setCivAdjective(PlayerTypes eID, const CvWString & szCivAdjecti
 	FASSERT_BOUNDS(0, MAX_PLAYERS, eID, "CvInitCore::setCivAdjective");
 	if ( checkBounds(eID, 0, MAX_PLAYERS) )
 	{
-		m_aszCivAdjective[eID] = szCivAdjective;
+		CvWString szName = szCivAdjective;
+		gDLL->stripSpecialCharacters(szName);
+		m_aszCivAdjective[eID] = szName;
 	}
 }
 
@@ -1762,15 +1802,12 @@ void CvInitCore::read(FDataStreamBase* pStream)
 	pStream->Read((int*)&m_eSeaLevel);
 	pStream->Read((int*)&m_eEra);
 	pStream->Read((int*)&m_eGameSpeed);
-	if (!(uiSaveFlag & SAVEDATA_GAMESPEED_MARATHON))
-	{
-		m_eGameSpeed = ((GameSpeedTypes)(range((m_eGameSpeed + 1), 0, (GC.getNumGameSpeedInfos() - 1))));
-	}
 	pStream->Read((int*)&m_eTurnTimer);
 	pStream->Read((int*)&m_eCalendar);
 
 	SAFE_DELETE_ARRAY(m_aeCustomMapOptions);
 	pStream->Read(&m_iNumCustomMapOptions);
+	pStream->Read(&m_iNumHiddenCustomMapOptions);
 	if (m_iNumCustomMapOptions > 0)
 	{
 		m_aeCustomMapOptions = new CustomMapOptionTypes[m_iNumCustomMapOptions];
@@ -1785,22 +1822,7 @@ void CvInitCore::read(FDataStreamBase* pStream)
 		pStream->Read(m_iNumVictories, m_abVictories);
 	}
 
-	{
-		int iOptions = NUM_GAMEOPTION_TYPES;
-		if (!(uiSaveFlag & SAVEDATA_NEW_RANDOM_SEED))
-		{
-			iOptions--;
-		}
-		if (!(uiSaveFlag & SAVEDATA_LOCK_MODS))
-		{
-			iOptions--;
-		}
-		if (!(uiSaveFlag & SAVEDATA_COMPLETE_KILLS))
-		{
-			iOptions--;
-		}
-		pStream->Read(iOptions, m_abOptions);
-	}
+	pStream->Read(NUM_GAMEOPTION_TYPES, m_abOptions);
 	pStream->Read(NUM_MPOPTION_TYPES, m_abMPOptions);
 
 	pStream->Read(&m_bStatReporting);
@@ -1833,28 +1855,13 @@ void CvInitCore::read(FDataStreamBase* pStream)
 
 	pStream->Read(MAX_PLAYERS, (int*)m_aeSlotStatus);
 
-	if (uiSaveFlag & SAVEDATA_HAS_SLOTS_CLAIMED)
-	{
-		pStream->Read(MAX_PLAYERS, (int*)m_aeSlotClaim);
+	pStream->Read(MAX_PLAYERS, (int*)m_aeSlotClaim);
 
-		int i;
-		for (i=0;i<MAX_PLAYERS;i++)
-		{
-			if (m_aeSlotClaim[i] == SLOTCLAIM_ASSIGNED)
-			{
-				m_aeSlotClaim[i] = SLOTCLAIM_RESERVED;
-			}
-		}
-	}
-	else
+	for (int i=0;i<MAX_PLAYERS;i++)
 	{
-		bool abSlotAssigned[MAX_PLAYERS];
-		pStream->Read(MAX_PLAYERS, abSlotAssigned);
-
-		int i;
-		for (i=0;i<MAX_PLAYERS;i++)
+		if (m_aeSlotClaim[i] == SLOTCLAIM_ASSIGNED)
 		{
-			m_aeSlotClaim[i] = (abSlotAssigned[i]) ? SLOTCLAIM_RESERVED : SLOTCLAIM_UNASSIGNED;
+			m_aeSlotClaim[i] = SLOTCLAIM_RESERVED;
 		}
 	}
 
@@ -1866,11 +1873,6 @@ void CvInitCore::read(FDataStreamBase* pStream)
 void CvInitCore::write(FDataStreamBase* pStream)
 {
 	uint uiSaveFlag=0;
-	uiSaveFlag |= SAVEDATA_HAS_SLOTS_CLAIMED;
-	uiSaveFlag |= SAVEDATA_NEW_RANDOM_SEED;
-	uiSaveFlag |= SAVEDATA_GAMESPEED_MARATHON;
-	uiSaveFlag |= SAVEDATA_LOCK_MODS;
-	uiSaveFlag |= SAVEDATA_COMPLETE_KILLS;
 	pStream->Write(uiSaveFlag);		// flag for expansion, see SaveBits)
 
 	// GAME DATA
@@ -1891,6 +1893,7 @@ void CvInitCore::write(FDataStreamBase* pStream)
 	pStream->Write(m_eCalendar);
 
 	pStream->Write(m_iNumCustomMapOptions);
+	pStream->Write(m_iNumHiddenCustomMapOptions);
 	pStream->Write(m_iNumCustomMapOptions, (int*)m_aeCustomMapOptions);
 
 	pStream->Write(m_iNumVictories);

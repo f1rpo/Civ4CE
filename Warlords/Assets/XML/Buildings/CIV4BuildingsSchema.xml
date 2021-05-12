@@ -3,7 +3,7 @@
 <!-- -->
 <!-- Building Schema -->
 <!-- -->
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Jesse Smith (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Pat Dawson (Firaxis Games) -->
 <Schema xmlns="urn:schemas-microsoft-com:xml-data" xmlns:dt="urn:schemas-microsoft-com:datatypes">
 	<ElementType name="Type" content="textOnly"/>
 	<ElementType name="iMaxGlobalInstances" content="textOnly" dt:type="int"/>
@@ -11,6 +11,7 @@
 	<ElementType name="iMaxPlayerInstances" content="textOnly" dt:type="int"/>
 	<ElementType name="iExtraPlayerInstances" content="textOnly" dt:type="int"/>
 	<ElementType name="bNoLimit" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bMonument" content="textOnly" dt:type="boolean"/>
 	<ElementType name="DefaultBuilding" content="textOnly"/>
 	<ElementType name="VictoryType" content="textOnly"/>
 	<ElementType name="iThreshold" content="textOnly" dt:type="int"/>
@@ -29,6 +30,7 @@
 		<element type="iMaxPlayerInstances"/>
 		<element type="iExtraPlayerInstances"/>
 		<element type="bNoLimit"/>
+		<element type="bMonument"/>
 		<element type="DefaultBuilding"/>
 		<element type="VictoryThresholds"/>
 	</ElementType>
@@ -70,6 +72,15 @@
 	<ElementType name="ProductionTraits" content="eltOnly">
 		<element type="ProductionTrait" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
+	<ElementType name="HappinessTraitType" content="textOnly"/>
+	<ElementType name="iHappinessTrait" content="textOnly" dt:type="int"/>
+	<ElementType name="HappinessTrait" content="eltOnly">
+		<element type="HappinessTraitType"/>
+		<element type="iHappinessTrait"/>
+	</ElementType>
+	<ElementType name="HappinessTraits" content="eltOnly">
+		<element type="HappinessTrait" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
 	<ElementType name="PowerBonus" content="textOnly"/>
 	<ElementType name="FreeBonus" content="textOnly"/>
 	<ElementType name="iNumFreeBonuses" content="textOnly" dt:type="int"/>
@@ -104,6 +115,8 @@
 	<ElementType name="iMinLatitude" content="textOnly" dt:type="int"/>
 	<ElementType name="iMaxLatitude" content="textOnly" dt:type="int"/>
 	<ElementType name="iGreatPeopleRateModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iGreatGeneralRateModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iDomesticGreatGeneralRateModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iGlobalGreatPeopleRateModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iAnarchyModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iGlobalHurryModifier" content="textOnly" dt:type="int"/>
@@ -139,6 +152,7 @@
 	<ElementType name="iGlobalPopulationChange" content="textOnly" dt:type="int"/>
 	<ElementType name="iFreeTechs" content="textOnly" dt:type="int"/>
 	<ElementType name="iDefense" content="textOnly" dt:type="int"/>
+	<ElementType name="iBombardDefense" content="textOnly" dt:type="int"/>
 	<ElementType name="iAllCityDefense" content="textOnly" dt:type="int"/>
 	<ElementType name="iAsset" content="textOnly" dt:type="int"/>
 	<ElementType name="iPower" content="textOnly" dt:type="int"/>
@@ -147,6 +161,8 @@
 	<ElementType name="CivicOption" content="textOnly"/>
 	<ElementType name="GreatPeopleUnitClass" content="textOnly"/>
 	<ElementType name="iGreatPeopleRateChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iHurryAngerModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="bBorderObstacle" content="textOnly" dt:type="boolean"/>
 	<ElementType name="iYield" content="textOnly" dt:type="int"/>
 	<ElementType name="SeaPlotYieldChanges" content="eltOnly">
 		<element type="iYield" minOccurs="0" maxOccurs="*"/>
@@ -363,6 +379,7 @@
 		<element type="Bonus"/>
 		<element type="PrereqBonuses"/>
 		<element type="ProductionTraits"/>
+		<element type="HappinessTraits"/>
 		<element type="PowerBonus"/>
 		<element type="FreeBonus"/>
 		<element type="iNumFreeBonuses"/>
@@ -371,6 +388,8 @@
 		<element type="CivicOption"/>
 		<element type="GreatPeopleUnitClass"/>
 		<element type="iGreatPeopleRateChange"/>
+		<element type="iHurryAngerModifier"/>
+		<element type="bBorderObstacle"/>
 		<element type="bTeamShare"/>
 		<element type="bWater"/>
 		<element type="bRiver"/>
@@ -401,6 +420,8 @@
 		<element type="iMinLatitude"/>
 		<element type="iMaxLatitude"/>
 		<element type="iGreatPeopleRateModifier"/>
+		<element type="iGreatGeneralRateModifier"/>
+		<element type="iDomesticGreatGeneralRateModifier"/>
 		<element type="iGlobalGreatPeopleRateModifier"/>
 		<element type="iAnarchyModifier"/>
 		<element type="iGlobalHurryModifier"/>
@@ -436,6 +457,7 @@
 		<element type="iGlobalPopulationChange"/>
 		<element type="iFreeTechs"/>
 		<element type="iDefense"/>
+		<element type="iBombardDefense"/>
 		<element type="iAllCityDefense"/>
 		<element type="iAsset"/>
 		<element type="iPower"/>

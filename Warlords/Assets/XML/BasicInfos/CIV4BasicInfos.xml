@@ -246,6 +246,21 @@
 			<Description>TXT_KEY_CONCEPT_WONDERS</Description>
 			<Civilopedia>TXT_KEY_CONCEPT_WONDERS_PEDIA</Civilopedia>
 		</ConceptInfo>
+		<ConceptInfo>
+			<Type>CONCEPT_GREAT_GENERALS</Type>
+			<Description>TXT_KEY_CONCEPT_GREAT_GENERALS</Description>
+			<Civilopedia>TXT_KEY_CONCEPT_GREAT_GENERALS_PEDIA</Civilopedia>
+		</ConceptInfo>
+		<ConceptInfo>
+			<Type>CONCEPT_VASSAL_STATES</Type>
+			<Description>TXT_KEY_CONCEPT_VASSAL_STATES</Description>
+			<Civilopedia>TXT_KEY_CONCEPT_VASSAL_STATES_PEDIA</Civilopedia>
+		</ConceptInfo>
+		<ConceptInfo>
+			<Type>CONCEPT_IRRIGATION</Type>
+			<Description>TXT_KEY_CONCEPT_IRRIGATION</Description>
+			<Civilopedia>TXT_KEY_CONCEPT_IRRIGATION_PEDIA</Civilopedia>
+		</ConceptInfo>
 	</ConceptInfos>
 	<CityTabInfos>
 		<CityTabInfo>
@@ -268,6 +283,10 @@
 		<CalendarInfo>
 			<Type>CALENDAR_DEFAULT</Type>
 			<Description>TXT_KEY_CALENDAR_DEFAULT</Description>
+		</CalendarInfo>
+		<CalendarInfo>
+			<Type>CALENDAR_BI_YEARLY</Type>
+			<Description>TXT_KEY_CALENDAR_BI_YEARLY</Description>
 		</CalendarInfo>
 		<CalendarInfo>
 			<Type>CALENDAR_YEARS</Type>
@@ -447,6 +466,26 @@
 			<Type>DENIAL_WORST_ENEMY</Type>
 			<Description>TXT_KEY_DENIAL_WORST_ENEMY</Description>
 		</DenialInfo>
+		<DenialInfo>
+			<Type>DENIAL_POWER_YOUR_ENEMIES</Type>
+			<Description>TXT_KEY_DENIAL_POWER_YOUR_ENEMIES</Description>
+		</DenialInfo>
+		<DenialInfo>
+			<Type>DENIAL_TOO_FAR</Type>
+			<Description>TXT_KEY_DENIAL_TOO_FAR</Description>
+		</DenialInfo>
+		<DenialInfo>
+			<Type>DENIAL_VASSAL</Type>
+			<Description>TXT_KEY_DENIAL_VASSAL</Description>
+		</DenialInfo>
+		<DenialInfo>
+			<Type>DENIAL_WAR_NOT_POSSIBLE_US</Type>
+			<Description>TXT_KEY_DENIAL_WAR_NOT_POSSIBLE_US</Description>
+		</DenialInfo>
+		<DenialInfo>
+			<Type>DENIAL_WAR_NOT_POSSIBLE_YOU</Type>
+			<Description>TXT_KEY_DENIAL_WAR_NOT_POSSIBLE_YOU</Description>
+		</DenialInfo>
 	</DenialInfos>
 	<InvisibleInfos>
 		<InvisibleInfo>
@@ -591,6 +630,10 @@
 		<UnitAIInfo>
 			<Type>UNITAI_SCIENTIST</Type>
 			<Description>UNITAI_SCIENTIST</Description>
+		</UnitAIInfo>
+		<UnitAIInfo>
+			<Type>UNITAI_GENERAL</Type>
+			<Description>UNITAI_GENERAL</Description>
 		</UnitAIInfo>
 		<UnitAIInfo>
 			<Type>UNITAI_MERCHANT</Type>

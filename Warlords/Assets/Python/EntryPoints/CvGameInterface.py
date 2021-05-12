@@ -5,16 +5,19 @@
 ## 
 ## The app specifically calls the functions as they are named. Use this file to pass 
 ## args to another file that contains your modifications
+##
+## MODDERS - If you create a GameUtils file, update the CvGameInterfaceFile reference to point to your new file
 
 #
 import CvUtil
 import CvGameUtils
+import CvGameInterfaceFile
 import CvEventInterface
 from CvPythonExtensions import *
 
 # globals
 gc = CyGlobalContext()
-normalGameUtils = CvGameUtils.CvGameUtils()
+normalGameUtils = CvGameInterfaceFile.GameUtils
 
 def gameUtils():
 	' replace normalGameUtils with your mod version'
@@ -27,6 +30,10 @@ def isVictoryTest():
 def isPlayerResearch(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.isPlayerResearch" )
 	return gameUtils().isPlayerResearch(argsList)
+
+def getExtraCost(argsList):
+	#CvUtil.pyPrint( "CvGameInterface.getExtraCost" )
+	return gameUtils().getExtraCost(argsList)
 
 def createBarbarianCities():
 	#CvUtil.pyPrint( "CvGameInterface.createBarbarianCities" )
@@ -166,7 +173,6 @@ def AI_doDiplo(argsList):
 	return gameUtils().AI_doDiplo(argsList)
 
 def calculateScore(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.calculateScore" )
 	return gameUtils().calculateScore(argsList)
 
 def doHolyCity():
@@ -217,3 +223,11 @@ def doMeltdown(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.doMeltdown" )
 	return gameUtils().doMeltdown(argsList)
 
+def doReviveActivePlayer(argsList):
+	return gameUtils().doReviveActivePlayer(argsList)
+
+def doPillageGold(argsList):
+	return gameUtils().doPillageGold(argsList)
+
+def doCityCaptureGold(argsList):
+	return gameUtils().doCityCaptureGold(argsList)

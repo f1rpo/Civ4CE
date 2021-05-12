@@ -102,5 +102,17 @@
 			<Help>TXT_KEY_GAME_OPTION_COMPLETE_KILLS_HELP</Help>
 			<bDefault>0</bDefault>
 		</GameOptionInfo>
+		<GameOptionInfo>
+			<Type>GAMEOPTION_NO_VASSAL_STATES</Type>
+			<Description>TXT_KEY_GAME_OPTION_NO_VASSAL_STATES</Description>
+			<Help>TXT_KEY_GAME_OPTION_NO_VASSAL_STATES_HELP</Help>
+			<bDefault>0</bDefault>
+		</GameOptionInfo>
+		<GameOptionInfo>
+			<Type>GAMEOPTION_NO_GOODY_HUTS</Type>
+			<Description>TXT_KEY_GAME_OPTION_NO_GOODY_HUTS</Description>
+			<Help>TXT_KEY_GAME_OPTION_NO_GOODY_HUTS_HELP</Help>
+			<bDefault>0</bDefault>
+		</GameOptionInfo>
 	</GameOptionInfos>
 </Civ4GameOptionInfos>

@@ -88,6 +88,7 @@ public:
 	void parseConscriptHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
 	void parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
 	void parseCitizenHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
+	void parseFreeCitizenHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
 	void parseDisabledCitizenHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
 	void parseAngryCitizenHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
 	void parseChangeSpecialistHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
@@ -113,6 +114,7 @@ public:
 	void parseProductionHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
 	void parseCultureHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
 	void parseGreatPeopleHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
+	void parseGreatGeneralHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
 	void parseSelectedHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
 	void parseBuildingHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
 	void parseProjectHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
@@ -141,6 +143,7 @@ public:
 	void parseOpenBordersHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
 	void parseDefensivePactHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
 	void parsePermanentAllianceHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
+	void parseVassalStateHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
 	void parseBuildBridgeHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
 	void parseIrrigationHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);
 	void parseIgnoreIrrigationHelp(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer);

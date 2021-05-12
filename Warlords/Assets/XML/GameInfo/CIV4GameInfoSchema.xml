@@ -1,4 +1,4 @@
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Firaxis Games (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -434,7 +434,7 @@
 		<element type="BonusProductionModifier" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="CreateSound" content="textOnly"/>
-	<ElementType name="MovieDefineTag" content="textOnly"/>	
+	<ElementType name="MovieDefineTag" content="textOnly"/>
 	<ElementType name="ProjectInfo" content="eltOnly">
 		<element type="Type"/>
 		<element type="Description"/>
@@ -459,7 +459,7 @@
 		<element type="MovieDefineTag"/>
 	</ElementType>
 	<ElementType name="ProjectInfos" content="eltOnly">
-		<element type="ProjectInfo" maxOccurs="*"/>
+		<element type="ProjectInfo" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="iGoldPerProduction" content="textOnly" dt:type="int"/>
 	<ElementType name="iProductionPerPopulation" content="textOnly" dt:type="int"/>
@@ -513,6 +513,8 @@
 	<ElementType name="iAnarchyLength" content="textOnly" dt:type="int"/>
 	<ElementType name="iAIWeight" content="textOnly" dt:type="int"/>
 	<ElementType name="iGreatPeopleRateModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iGreatGeneralRateModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iDomesticGreatGeneralRateModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iStateReligionGreatPeopleRateModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iDistanceMaintenanceModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iNumCitiesMaintenanceModifier" content="textOnly" dt:type="int"/>
@@ -531,6 +533,7 @@
 	<ElementType name="bMilitaryFoodProduction" content="textOnly" dt:type="boolean"/>
 	<ElementType name="iMaxConscript" content="textOnly" dt:type="int"/>
 	<ElementType name="bNoUnhealthyPopulation" content="textOnly" dt:type="boolean"/>
+	<ElementType name="iExpInBorderModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="bBuildingOnlyHealthy" content="textOnly" dt:type="boolean"/>
 	<ElementType name="iLargestCityHappiness" content="textOnly" dt:type="int"/>
 	<ElementType name="iFreeSpecialist" content="textOnly" dt:type="int"/>
@@ -632,6 +635,8 @@
 		<element type="Upkeep"/>
 		<element type="iAIWeight"/>
 		<element type="iGreatPeopleRateModifier"/>
+		<element type="iGreatGeneralRateModifier"/>
+		<element type="iDomesticGreatGeneralRateModifier"/>
 		<element type="iStateReligionGreatPeopleRateModifier"/>
 		<element type="iDistanceMaintenanceModifier"/>
 		<element type="iNumCitiesMaintenanceModifier"/>
@@ -650,6 +655,7 @@
 		<element type="bMilitaryFoodProduction"/>
 		<element type="iMaxConscript"/>
 		<element type="bNoUnhealthyPopulation"/>
+		<element type="iExpInBorderModifier"/>
 		<element type="bBuildingOnlyHealthy"/>
 		<element type="iLargestCityHappiness"/>
 		<element type="iWarWearinessModifier"/>
@@ -831,6 +837,7 @@
 		<element type="iGreatPeopleRateChange"/>
 		<element type="Yields"/>
 		<element type="Commerces"/>
+		<element type="iExperience"/>
 		<element type="Flavors"/>
 		<element type="HotKey"/>
 		<element type="bAltDown"/>
@@ -909,6 +916,7 @@
 	<ElementType name="iFreePopulation" content="textOnly" dt:type="int"/>
 	<ElementType name="iStartPercent" content="textOnly" dt:type="int"/>
 	<ElementType name="iSoundtrackSpace" content="textOnly" dt:type="int"/>
+	<ElementType name="bFirstSoundtrackFirst" content="textOnly" dt:type="boolean"/>
 	<ElementType name="EraInfoSoundtrack" content="textOnly"/>
 	<ElementType name="EraInfoSoundtracks" content="eltOnly">
 		<element type="EraInfoSoundtrack" minOccurs="0" maxOccurs="*"/>
@@ -950,6 +958,7 @@
 		<element type="iCulturePercent"/>
 		<element type="iAnarchyPercent"/>
 		<element type="iSoundtrackSpace"/>
+		<element type="bFirstSoundtrackFirst"/>
 		<element type="EraInfoSoundtracks"/>
 		<element type="CitySoundscapes"/>
 		<element type="AudioUnitVictoryScript"/>

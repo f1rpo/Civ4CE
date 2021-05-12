@@ -93,7 +93,7 @@ with GFC_Control_Button
 			.FocusMargin_Content				=	GRectMargin(4,4,4,4);
 			.FocusMargin_Control				=	GRectMargin(4,4,4,4);
 			.ContentOffset						=	GPoint(0,0);
-			.TextOffset							=	GPoint(0,-2);
+			.TextOffset							=	GPoint(0,-1);
 			.DownOffset_Content					=	GPoint(0,1);
 			.DownOffset_Text					=	GPoint(0,1);
 			.DownOffset_Image					=	GPoint(0,1);

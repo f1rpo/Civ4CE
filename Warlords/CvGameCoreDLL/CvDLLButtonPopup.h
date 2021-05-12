@@ -42,6 +42,7 @@ private:
 	bool launchDeclareWarMovePopup(CvPopup* pPopup, CvPopupInfo &info);
 	bool launchConfirmCommandPopup(CvPopup* pPopup, CvPopupInfo &info);
 	bool launchLoadUnitPopup(CvPopup* pPopup, CvPopupInfo &info);
+	bool launchLeadUnitPopup(CvPopup* pPopup, CvPopupInfo &info);
 	bool launchMainMenuPopup(CvPopup* pPopup, CvPopupInfo &info);
 	bool launchConfirmMenu(CvPopup *pPopup, CvPopupInfo &info);
 	bool launchPythonScreen(CvPopup* pPopup, CvPopupInfo &info);
@@ -56,7 +57,8 @@ private:
 	bool launchForcedDisconnectPopup(CvPopup* pPopup, CvPopupInfo &info);
 	bool launchPitbossDisconnectPopup(CvPopup* pPopup, CvPopupInfo &info);
 	bool launchKickedPopup(CvPopup* pPopup, CvPopupInfo &info);
-
+	bool launchVassalDemandTributePopup(CvPopup* pPopup, CvPopupInfo &info);
+	bool launchVassalGrantTributePopup(CvPopup* pPopup, CvPopupInfo &info);
 };
 
 #endif

@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Bart Muzzin (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -7,11 +6,11 @@
 <Civ4Defines xmlns="x-schema:CIV4GlobalDefinesSchema.xml">
 	<Define>
 		<DefineName>CIV4_VERSION</DefineName>
-		<iDefineIntVal>161</iDefineIntVal>
+		<iDefineIntVal>200</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>SAVE_VERSION</DefineName>
-		<iDefineIntVal>103</iDefineIntVal>
+		<iDefineIntVal>200</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>MAX_NUM_LANGUAGES</DefineName>
@@ -111,6 +110,10 @@
 	</Define>
 	<Define>
 		<DefineName>MAX_PLOT_LIST_SIZE</DefineName>
+		<iDefineIntVal>10</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>MAX_PLOT_LIST_ROWS</DefineName>
 		<iDefineIntVal>10</iDefineIntVal>
 	</Define>
 	<Define>
@@ -413,10 +416,25 @@
 		<DefineName>GREAT_PEOPLE_THRESHOLD_INCREASE</DefineName>
 		<iDefineIntVal>50</iDefineIntVal>
 	</Define>
-	<Define><DefineName>GREAT_PEOPLE_THRESHOLD_INCREASE_TEAM</DefineName><iDefineIntVal>50</iDefineIntVal>(</Define>
+	<Define>
+		<DefineName>GREAT_PEOPLE_THRESHOLD_INCREASE_TEAM</DefineName>
+		<iDefineIntVal>50</iDefineIntVal>
+	</Define>
 	<Define>
 		<DefineName>GREAT_PEOPLE_THRESHOLD</DefineName>
 		<iDefineIntVal>100</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>GREAT_GENERALS_THRESHOLD_INCREASE</DefineName>
+		<iDefineIntVal>50</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>GREAT_GENERALS_THRESHOLD_INCREASE_TEAM</DefineName>
+		<iDefineIntVal>50</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>GREAT_GENERALS_THRESHOLD</DefineName>
+		<iDefineIntVal>30</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>BASE_SPY_SABOTAGE_COST</DefineName>
@@ -537,6 +555,10 @@
 	<Define>
 		<DefineName>FOREIGN_TRADE_MODIFIER</DefineName>
 		<iDefineIntVal>150</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>FOREIGN_TRADE_FULL_CREDIT_PEACE_TURNS</DefineName>
+		<iDefineIntVal>50</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>OUR_POPULATION_TRADE_MODIFIER</DefineName>
@@ -1217,5 +1239,53 @@
 	<Define>
 		<DefineName>SINGLE_UNIT_GFX_EXTRA_SCALE</DefineName>
 		<fDefineFloatVal>1.25</fDefineFloatVal>
+	</Define>
+	<Define>
+		<DefineName>VASSAL_REVOLT_OWN_LOSSES_FACTOR</DefineName>
+		<iDefineIntVal>50</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>VASSAL_REVOLT_MASTER_LOSSES_FACTOR</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>VASSAL_HAPPINESS</DefineName>
+		<iDefineIntVal>1</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>FREE_VASSAL_LAND_PERCENT</DefineName>
+		<iDefineIntVal>50</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>FREE_VASSAL_POPULATION_PERCENT</DefineName>
+		<iDefineIntVal>50</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>WARLORD_EXTRA_EXPERIENCE_PER_UNIT_PERCENT</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>COMBAT_EXPERIENCE_IN_BORDERS_PERCENT</DefineName>
+		<iDefineIntVal>100</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>VICTORY_SOUNDTRACK_AVAILABLE</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>MAX_WITHDRAWAL_PROBABILITY</DefineName>
+		<iDefineIntVal>90</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>PLAYER_ALWAYS_RAZES_CITIES</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>MIN_WATER_SIZE_FOR_OCEAN</DefineName>
+		<iDefineIntVal>10</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>MIN_CITY_ATTACK_MODIFIER_FOR_SIEGE_TOWER</DefineName>
+		<iDefineIntVal>10</iDefineIntVal>
 	</Define>
 </Civ4Defines>

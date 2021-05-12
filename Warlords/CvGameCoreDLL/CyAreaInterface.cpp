@@ -43,6 +43,7 @@ void CyAreaPythonInterface()
 		.def("getNumUnrevealedTiles", &CyArea::getNumUnrevealedTiles, "int (int (TeamTypes) iIndex) - Returns the number of unrevealed tiles for this team")
 
 		.def("isCleanPower", &CyArea::isCleanPower, "bool (int (TeamTypes) iIndex)")
+		.def("isBorderObstacle", &CyArea::isBorderObstacle, "bool (int (TeamTypes) iIndex)")
 
 		.def("getAreaAIType", &CyArea::getAreaAIType, "int (AreaAITypes) (int (TeamTypes) eIndex) - Returns the AreaAIType for this team in this area")
 		.def("getTargetCity", &CyArea::getTargetCity, python::return_value_policy<python::reference_existing_object>(), "CyCity* (int (PlayerTypes) eIndex) - Returns ?")

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by XMLSPY 2004 Professional Ed. Release 2, Installed Multi + SMP for 3 users (Firaxis Games) -->
+<!-- Sid Meier's Civilization 4 -->
+<!-- Copyright Firaxis Games 2005 -->
+<!-- -->
+<!-- Game Text - New -->
+<Civ4GameText xmlns="http://www.firaxis.com">
+	<!--Please place any new text entries into this file-->
+	<TEXT>
+		<Tag>TXT_KEY_ALEXANDER_UNIT_PELTASTS_STRATEGY</Tag>
+		<English>Build this low powered melee combat unit to provide your army with quick response defensive units.</English>
+		<French>Produisez cette unit&#233; peu puissante de combat rapproch&#233; pour fournir rapidement &#224; votre arm&#233;e des unit&#233;s d&#233;fensives.</French>
+		<German>Mit diesen ansonsten eher schwachen Nahkampfeinheiten stellen Sie Ihren Truppen Defensivkämpfer für schnelle Gegenangriffe zur Seite.</German>
+		<Italian>Costruisci questa unità da combattimento in mischia poco potente per integrare il tuo esercito con unità di difesa a risposta rapida.</Italian>
+		<Spanish>Construye esta unidad de combate cuerpo a cuerpo, poco poderosa, para dotar a tu ej&#233;rcito con unidades defensivas de respuesta rápida.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ALEXANDER_UNIT_PRODROMOI_STRATEGY</Tag>
+		<English>This mounted unit is very powerful for early in the game and is a great counter to an enemy with catapults.</English>
+		<French>Cette unit&#233; mont&#233;e est particuli&#232;rement efficace dans les premi&#232;res phases du jeu et s'av&#232;re tr&#232;s utile face &#224; un ennemi disposant de catapultes.</French>
+		<German>Diese berittene Einheit ist in den frühen Phasen des Spiels sehr effizient und eignet sich hervorragend für Angriffe auf feindliche Katapulte.</German>
+		<Italian>Questa unità montante è molto potente nelle prime fasi della partita ed è ottima per contrastare le catapulte nemiche.</Italian>
+		<Spanish>Esta unidad montada es muy poderosa al principio del juego, y sirve para contrarrestar a un enemigo que disponga de catapultas.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_BUILDING_MILITARY_ACADEMY_STRATEGY</Tag>
+		<English>[COLOR_BUILDING_TEXT]Military Academies[COLOR_REVERT] increase a city's military unit production.</English>
+		<French>Les [COLOR_BUILDING_TEXT]acad&#233;mies militaires[COLOR_REVERT] augmentent la production d'unit&#233;s militaires de la ville.</French>
+		<German>Die [COLOR_BUILDING_TEXT]Militärakademie[COLOR_REVERT] erhöht die städtische Produktion militärischer Einheiten.</German>
+		<Italian>Questa [COLOR_BUILDING_TEXT]Accademia militare[COLOR_REVERT] incrementa la produzione di unità militari della città.</Italian>
+		<Spanish>Las [COLOR_BUILDING_TEXT]Academias militares[COLOR_REVERT] aumentan la producción de unidades militares de una ciudad.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_BUILDING_STABLE_STRATEGY</Tag>
+		<English>[COLOR_BUILDING_TEXT]Stables[COLOR_REVERT] provide your mounted units with additional experience.</English>
+		<French>Les [COLOR_BUILDING_TEXT]&#233;curies[COLOR_REVERT] octroient de l'exp&#233;rience suppl&#233;mentaire &#224; vos unit&#233;s montées.</French>
+		<German>Durch die [COLOR_BUILDING_TEXT]Stallungen[COLOR_REVERT] erhalten Ihre berittenen Einheiten zusätzliche Erfahrungspunkte.</German>
+		<Italian>Queste [COLOR_BUILDING_TEXT]Stalle[COLOR_REVERT] danno un bonus di esperienza alle unità a cavallo.</Italian>
+		<Spanish>Los [COLOR_BUILDING_TEXT]Establos[COLOR_REVERT] otorgan más experiencia a tus unidades montadas.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GREEKWAR_IMPROVEMENT_OLIVE_PRESS_STRATEGY</Tag>
+		<English>This improvement allows you to harvest [COLOR_HIGHLIGHT_TEXT]Olives[COLOR_REVERT].</English>
+		<French>Cette am&#233;lioration vous permet de cultiver des [COLOR_HIGHLIGHT_TEXT]olives[COLOR_REVERT].</French>
+		<German>Diese Modernisierung ermöglicht die Verarbeitung von [COLOR_HIGHLIGHT_TEXT]Oliven[COLOR_REVERT].</German>
+		<Italian>Questo miglioramento ti consente di raccogliere le [COLOR_HIGHLIGHT_TEXT]olive[COLOR_REVERT].</Italian>
+		<Spanish>Esta mejora te permite cosechar [COLOR_HIGHLIGHT_TEXT]Aceitunas[COLOR_REVERT].</Spanish>
+	</TEXT>
+</Civ4GameText>

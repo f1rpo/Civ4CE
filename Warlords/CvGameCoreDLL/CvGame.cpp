@@ -35,6 +35,16 @@ CvGame::CvGame()
 {
 	int iI;
 
+	m_aiEndTurnMessagesReceived = new int[MAX_PLAYERS];
+	m_aiRankPlayer = new int[MAX_PLAYERS];        // Ordered by rank...
+	m_aiPlayerRank = new int[MAX_PLAYERS];        // Ordered by player ID...
+	m_aiPlayerScore = new int[MAX_PLAYERS];       // Ordered by player ID...
+	m_aiRankTeam = new int[MAX_TEAMS];						// Ordered by rank...
+	m_aiTeamRank = new int[MAX_TEAMS];						// Ordered by team ID...
+	m_aiTeamScore = new int[MAX_TEAMS];						// Ordered by team ID...
+
+	m_apaiPlayerVote = new int*[MAX_CIV_PLAYERS];
+
 	m_paiUnitCreatedCount = NULL;
 	m_paiUnitClassCreatedCount = NULL;
 	m_paiBuildingClassCreatedCount = NULL;
@@ -63,6 +73,15 @@ CvGame::CvGame()
 CvGame::~CvGame()
 {
 	uninit();
+
+	SAFE_DELETE_ARRAY(m_aiEndTurnMessagesReceived);
+	SAFE_DELETE_ARRAY(m_aiRankPlayer);
+	SAFE_DELETE_ARRAY(m_aiPlayerRank);
+	SAFE_DELETE_ARRAY(m_aiPlayerScore);
+	SAFE_DELETE_ARRAY(m_aiRankTeam);
+	SAFE_DELETE_ARRAY(m_aiTeamRank);
+	SAFE_DELETE_ARRAY(m_aiTeamScore);
+	SAFE_DELETE_ARRAY(m_apaiPlayerVote);
 }
 
 void CvGame::init(HandicapTypes eHandicap)
@@ -108,6 +127,43 @@ void CvGame::init(HandicapTypes eHandicap)
 	if (isPitboss() && getPitbossTurnTime() == 0)
 	{
 		setMPOption(MPOPTION_TURN_TIMER, false);
+	}
+
+	if (isMPOption(MPOPTION_SHUFFLE_TEAMS))
+	{
+		int aiTeams[MAX_CIV_PLAYERS];
+
+		int iNumPlayers = 0;
+		for (int i = 0; i < MAX_CIV_PLAYERS; i++)
+		{
+			if (GC.getInitCore().getSlotStatus((PlayerTypes)i) == SS_TAKEN)
+			{
+				aiTeams[iNumPlayers] = GC.getInitCore().getTeam((PlayerTypes)i);
+				++iNumPlayers;
+			}
+		}
+
+		for (int i = 0; i < iNumPlayers; i++)
+		{
+			int j = (getSorenRand().get(iNumPlayers - i, NULL) + i);
+
+			if (i != j)
+			{
+				int iTemp = aiTeams[i];
+				aiTeams[i] = aiTeams[j];
+				aiTeams[j] = iTemp;
+			}
+		}
+
+		iNumPlayers = 0;
+		for (int i = 0; i < MAX_CIV_PLAYERS; i++)
+		{
+			if (GC.getInitCore().getSlotStatus((PlayerTypes)i) == SS_TAKEN)
+			{
+				GC.getInitCore().setTeam((PlayerTypes)i, (TeamTypes)aiTeams[iNumPlayers]);
+				++iNumPlayers;
+			}
+		}
 	}
 
 	if (isOption(GAMEOPTION_LOCK_MODS))
@@ -302,7 +358,8 @@ void CvGame::uninit()
 		SAFE_DELETE_ARRAY(m_apaiPlayerVote[iI]);
 	}
 
-	m_destroyedCities.clear();
+	m_aszDestroyedCities.clear();
+	m_aszGreatPeopleBorn.clear();
 
 	m_deals.uninit();
 
@@ -2569,7 +2626,10 @@ void CvGame::selectedCitiesGameNetMessage(int eMessage, int iData2, int iData3, 
 					break;
 
 				case GAMEMESSAGE_POP_ORDER:
-					gDLL->sendPopOrder(pSelectedCity->getID(), iData2);
+					if (pSelectedCity->getOrderQueueLength() > 1)
+					{
+						gDLL->sendPopOrder(pSelectedCity->getID(), iData2);
+					}
 					break;
 
 				case GAMEMESSAGE_DO_TASK:
@@ -2700,9 +2760,12 @@ void CvGame::selectGroup(CvUnit* pUnit, bool bShift, bool bCtrl, bool bAlt)
 			{
 				if (pLoopUnit->canMove())
 				{
-					if (bAlt || (pLoopUnit->getUnitType() == pUnit->getUnitType()))
+					if (!isMPOption(MPOPTION_SIMULTANEOUS_TURNS) || getTurnSlice() - pLoopUnit->getLastMoveTurn() > GC.getDefineINT("MIN_TIMER_UNIT_DOUBLE_MOVES"))
 					{
-						gDLL->getInterfaceIFace()->insertIntoSelectionList(pLoopUnit, false, false, bGroup);
+						if (bAlt || (pLoopUnit->getUnitType() == pUnit->getUnitType()))
+						{
+							gDLL->getInterfaceIFace()->insertIntoSelectionList(pLoopUnit, false, false, bGroup);
+						}
 					}
 				}
 			}
@@ -2992,10 +3055,9 @@ bool CvGame::canDoControl(ControlTypes eControl)
 	{
 	case CONTROL_SELECTYUNITTYPE:
 	case CONTROL_SELECTYUNITALL:
+	case CONTROL_SELECT_HEALTHY:
 	case CONTROL_SELECTCITY:
 	case CONTROL_SELECTCAPITAL:
-	case CONTROL_NEXTCITY:
-	case CONTROL_PREVCITY:
 	case CONTROL_NEXTUNIT:
 	case CONTROL_PREVUNIT:
 	case CONTROL_CYCLEUNIT:
@@ -3004,17 +3066,7 @@ bool CvGame::canDoControl(ControlTypes eControl)
 	case CONTROL_LASTUNIT:
 	case CONTROL_FORCEENDTURN:
 	case CONTROL_AUTOMOVES:
-	case CONTROL_PING:
-	case CONTROL_SIGN:
-	case CONTROL_GRID:
-	case CONTROL_BARE_MAP:
-	case CONTROL_YIELDS:
-	case CONTROL_RESOURCE_ALL:
-	case CONTROL_GLOBELAYER:
-	case CONTROL_SCORES:
-	case CONTROL_OPTIONS_SCREEN:
 	case CONTROL_SAVE_GROUP:
-	case CONTROL_SAVE_NORMAL:
 	case CONTROL_QUICK_SAVE:
 	case CONTROL_QUICK_LOAD:
 	case CONTROL_ORTHO_CAMERA:
@@ -3024,6 +3076,33 @@ bool CvGame::canDoControl(ControlTypes eControl)
 	case CONTROL_FLYING_CAMERA:
 	case CONTROL_MOUSE_FLYING_CAMERA:
 	case CONTROL_TOP_DOWN_CAMERA:
+	case CONTROL_TURN_LOG:
+	case CONTROL_CHAT_ALL:
+	case CONTROL_CHAT_TEAM:
+	case CONTROL_GLOBE_VIEW:
+		if (!gDLL->getInterfaceIFace()->isFocused())
+		{
+			return true;
+		}
+		break;
+
+	case CONTROL_PING:
+	case CONTROL_SIGN:
+	case CONTROL_GRID:
+	case CONTROL_BARE_MAP:
+	case CONTROL_YIELDS:
+	case CONTROL_RESOURCE_ALL:
+	case CONTROL_GLOBELAYER:
+	case CONTROL_SCORES:
+		if (!gDLL->getInterfaceIFace()->isFocusedWidget())
+		{
+			return true;
+		}
+		break;
+
+	case CONTROL_OPTIONS_SCREEN:
+	case CONTROL_DOMESTIC_SCREEN:
+	case CONTROL_VICTORY_SCREEN:
 	case CONTROL_CIVILOPEDIA:
 	case CONTROL_RELIGION_SCREEN:
 	case CONTROL_CIVICS_SCREEN:
@@ -3031,16 +3110,13 @@ bool CvGame::canDoControl(ControlTypes eControl)
 	case CONTROL_FINANCIAL_SCREEN:
 	case CONTROL_MILITARY_SCREEN:
 	case CONTROL_TECH_CHOOSER:
-	case CONTROL_TURN_LOG:
-	case CONTROL_CHAT_ALL:
-	case CONTROL_CHAT_TEAM:
-	case CONTROL_DOMESTIC_SCREEN:
-	case CONTROL_VICTORY_SCREEN:
-	case CONTROL_INFO:
-	case CONTROL_GLOBE_VIEW:
-	case CONTROL_DETAILS:
-	case CONTROL_HALL_OF_FAME:
 	case CONTROL_DIPLOMACY:
+	case CONTROL_HALL_OF_FAME:
+	case CONTROL_INFO:
+	case CONTROL_DETAILS:
+	case CONTROL_SAVE_NORMAL:
+	case CONTROL_NEXTCITY:
+	case CONTROL_PREVCITY:
 		return true;
 		break;
 
@@ -3131,6 +3207,42 @@ void CvGame::doControl(ControlTypes eControl)
 		if (pHeadSelectedUnit != NULL)
 		{
 			gDLL->getInterfaceIFace()->selectGroup(pHeadSelectedUnit, false, false, true);
+		}
+		break;
+
+	case CONTROL_SELECT_HEALTHY:
+		{
+			CvSelectionGroup* pGroup = NULL;
+			pHeadSelectedUnit = gDLL->getInterfaceIFace()->getHeadSelectedUnit();
+			gDLL->getInterfaceIFace()->clearSelectionList();
+			if (pHeadSelectedUnit != NULL)
+			{
+				CvPlot* pPlot = pHeadSelectedUnit->plot();
+				for (int iI = 0; iI < pPlot->getNumUnits(); iI++)
+				{
+					pUnit = gDLL->getInterfaceIFace()->getInterfacePlotUnit(pPlot, iI);
+
+					if (pUnit->getOwner() == getActivePlayer())
+					{
+						if (!isMPOption(MPOPTION_SIMULTANEOUS_TURNS) || getTurnSlice() - pUnit->getLastMoveTurn() > GC.getDefineINT("MIN_TIMER_UNIT_DOUBLE_MOVES"))
+						{
+							if (pUnit->isHurt())
+							{
+								if (pGroup)
+								{
+									pUnit->joinGroup(pGroup);
+								}
+								else
+								{
+									pGroup = pUnit->getGroup();
+								}
+
+								gDLL->getInterfaceIFace()->insertIntoSelectionList(pUnit, false, false, true, true);
+							}
+						}
+					}
+				}
+			}
 		}
 		break;
 
@@ -3278,6 +3390,7 @@ void CvGame::doControl(ControlTypes eControl)
 		if (!isGameMultiPlayer())
 		{
 			setGameState(GAMESTATE_OVER);
+			gDLL->getInterfaceIFace()->setDirty(Soundtrack_DIRTY_BIT, true);
 		}
 		else
 		{
@@ -3480,7 +3593,7 @@ void CvGame::doControl(ControlTypes eControl)
 }
 
 
-void CvGame::implementDeal(PlayerTypes eWho, PlayerTypes eOtherWho, CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirList)
+void CvGame::implementDeal(PlayerTypes eWho, PlayerTypes eOtherWho, CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirList, bool bForce)
 {
 	CvDeal* pDeal;
 
@@ -3490,7 +3603,7 @@ void CvGame::implementDeal(PlayerTypes eWho, PlayerTypes eOtherWho, CLinkList<Tr
 
 	pDeal = addDeal();
 	pDeal->init(pDeal->getID(), eWho, eOtherWho);
-	pDeal->addTrades(pOurList, pTheirList);
+	pDeal->addTrades(pOurList, pTheirList, !bForce);
 	if ((pDeal->getLengthFirstTrades() == 0) && (pDeal->getLengthSecondTrades() == 0))
 	{
 		pDeal->kill();
@@ -3937,7 +4050,7 @@ int CvGame::countKnownTechNumTeams(TechTypes eTech)
 
 	for (iI = 0; iI < MAX_TEAMS; iI++)
 	{
-		if (GET_TEAM((TeamTypes)iI).isAlive())
+		if (GET_TEAM((TeamTypes)iI).isEverAlive())
 		{
 			if (GET_TEAM((TeamTypes)iI).isHasTech(eTech))
 			{
@@ -4199,6 +4312,18 @@ void CvGame::reviveActivePlayer()
 		setAIAutoPlay(0);
 
 		GC.getInitCore().setSlotStatus(getActivePlayer(), SS_TAKEN);
+		
+		// Let Python handle it
+		long lResult=0;
+		CyArgsList argsList;
+		argsList.add(getActivePlayer());
+
+		gDLL->getPythonIFace()->callFunction(PYGameModule, "doReviveActivePlayer", argsList.makeFunctionArgs(), &lResult);
+		if (lResult == 1)
+		{
+			return;
+		}
+
 		GET_PLAYER(getActivePlayer()).initUnit(((UnitTypes)0), 0, 0);
 	}
 }
@@ -5154,6 +5279,8 @@ void CvGame::setWinner(TeamTypes eNewWinner, VictoryTypes eNewVictory)
 		gDLL->getInterfaceIFace()->setDirty(Center_DIRTY_BIT, true);
 
 		gDLL->getEventReporterIFace()->victory(eNewWinner, eNewVictory);
+
+		gDLL->getInterfaceIFace()->setDirty(Soundtrack_DIRTY_BIT, true);
 	}
 }
 
@@ -5909,28 +6036,44 @@ void CvGame::setName(const TCHAR* szName)
 
 bool CvGame::isDestroyedCityName(CvWString& szName) const
 {
-	CLLNode<CvWString>* pNode;
+	std::vector<CvWString>::const_iterator it;
 
-	pNode = m_destroyedCities.head();
-
-	while (pNode != NULL)
+	for (it = m_aszDestroyedCities.begin(); it != m_aszDestroyedCities.end(); it++)
 	{
-		if (pNode->m_data == szName)
+		if (*it == szName)
 		{
 			return true;
 		}
-
-		pNode = m_destroyedCities.next(pNode);
 	}
 
 	return false;
 }
 
-
 void CvGame::addDestroyedCityName(const CvWString& szName)
 {
-	m_destroyedCities.insertAtEnd(szName);
+	m_aszDestroyedCities.push_back(szName);
 }
+
+bool CvGame::isGreatPersonBorn(CvWString& szName) const
+{
+	std::vector<CvWString>::const_iterator it;
+
+	for (it = m_aszGreatPeopleBorn.begin(); it != m_aszGreatPeopleBorn.end(); it++)
+	{
+		if (*it == szName)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void CvGame::addGreatPersonBornName(const CvWString& szName)
+{
+	m_aszGreatPeopleBorn.push_back(szName);
+}
+
 
 // Protected Functions...
 
@@ -6181,7 +6324,17 @@ void CvGame::doHolyCity()
 
 							for (iK = 0; iK < GC.getNumReligionInfos(); iK++)
 							{
-								iValue += (GET_TEAM((TeamTypes)iJ).getHasReligionCount((ReligionTypes)iK) * 20);
+								int iReligionCount = GET_TEAM((TeamTypes)iJ).getHasReligionCount((ReligionTypes)iK);
+
+								if (iReligionCount > 0)
+								{
+									iValue += iReligionCount * 20;
+									if (GC.getReligionInfo((ReligionTypes)iK).getFreeUnitClass() != -1 
+										&& GC.getReligionInfo((ReligionTypes)iI).getFreeUnitClass() != -1)
+									{
+										iValue += 20;
+									}
+								}
 							}
 
 							if (iValue < iBestValue)
@@ -6216,7 +6369,17 @@ void CvGame::doHolyCity()
 
 								for (iK = 0; iK < GC.getNumReligionInfos(); iK++)
 								{
-									iValue += (GET_PLAYER((PlayerTypes)iJ).getHasReligionCount((ReligionTypes)iK) * 20);
+									int iReligionCount = GET_PLAYER((PlayerTypes)iJ).getHasReligionCount((ReligionTypes)iK);
+
+									if (iReligionCount > 0)
+									{
+										iValue += iReligionCount * 20;
+										if (GC.getReligionInfo((ReligionTypes)iK).getFreeUnitClass() != -1 
+											&& GC.getReligionInfo((ReligionTypes)iI).getFreeUnitClass() != -1)
+										{
+											iValue += 20;
+										}
+									}
 								}
 
 								if (iValue < iBestValue)
@@ -6458,7 +6621,7 @@ void CvGame::createBarbarianUnits()
 		bAnimals = true;
 	}
 
-	if (getNumCivCities() < ((countCivPlayersAlive() * 3) / 2))
+	if (getNumCivCities() < ((countCivPlayersAlive() * 3) / 2) && !isOption(GAMEOPTION_ONE_CITY_CHALLENGE))
 	{
 		bAnimals = true;
 	}
@@ -6940,7 +7103,7 @@ void CvGame::testVictory()
 									{
 										if (GET_TEAM((TeamTypes)iK).isAlive())
 										{
-											if (iK != iI)
+											if (iK != iI && !GET_TEAM((TeamTypes)iK).isVassal((TeamTypes)iI))
 											{
 												if (GET_TEAM((TeamTypes)iK).getNumCities() > 0)
 												{
@@ -7597,11 +7760,19 @@ void CvGame::read(FDataStreamBase* pStream)
 	{
 		CvWString szBuffer;
 		uint iSize;
+
 		pStream->Read(&iSize);
 		for (uint i = 0; i < iSize; i++)
 		{
 			pStream->ReadString(szBuffer);
-			m_destroyedCities.insertAtEnd(szBuffer);
+			m_aszDestroyedCities.push_back(szBuffer);
+		}
+
+		pStream->Read(&iSize);
+		for (uint i = 0; i < iSize; i++)
+		{
+			pStream->ReadString(szBuffer);
+			m_aszGreatPeopleBorn.push_back(szBuffer);
 		}
 	}
 
@@ -7737,14 +7908,18 @@ void CvGame::write(FDataStreamBase* pStream)
 	}
 
 	{
-		CLLNode<CvWString>* pNode;
-		uint iSize = m_destroyedCities.getLength();
-		pStream->Write(iSize);
-		pNode = m_destroyedCities.head();
-		while (pNode != NULL)
+		std::vector<CvWString>::iterator it;
+
+		pStream->Write(m_aszDestroyedCities.size());
+		for (it = m_aszDestroyedCities.begin(); it != m_aszDestroyedCities.end(); it++)
 		{
-			pStream->WriteString(pNode->m_data);
-			pNode = m_destroyedCities.next(pNode);
+			pStream->WriteString(*it);
+		}
+
+		pStream->Write(m_aszGreatPeopleBorn.size());
+		for (it = m_aszGreatPeopleBorn.begin(); it != m_aszGreatPeopleBorn.end(); it++)
+		{
+			pStream->WriteString(*it);
 		}
 	}
 

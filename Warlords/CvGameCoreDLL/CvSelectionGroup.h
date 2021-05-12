@@ -57,6 +57,7 @@ public:
 	bool canAnyMove();																																									// Exposed to Python
 	bool hasMoved();																																										// Exposed to Python
 	bool canEnterTerritory(TeamTypes eTeam, bool bIgnoreRightOfPassage = false) const;									// Exposed to Python
+	bool canEnterArea(TeamTypes eTeam, const CvArea* pArea, bool bIgnoreRightOfPassage = false) const;									// Exposed to Python
 	DllExport bool canMoveInto(CvPlot* pPlot, bool bAttack = false);																		// Exposed to Python
 	DllExport bool canMoveOrAttackInto(CvPlot* pPlot, bool bDeclareWar = false);												// Exposed to Python
 	bool canMoveThrough(CvPlot* pPlot);																																	// Exposed to Python
@@ -150,6 +151,7 @@ public:
 	CLLNode<MissionData>* tailMissionQueueNode() const;
 	int getMissionType(int iNode);																														// Exposed to Python
 	int getMissionData1(int iNode);																														// Exposed to Python
+	int getMissionData2(int iNode);																														// Exposed to Python
 
 	// for serialization
 	virtual void read(FDataStreamBase* pStream);
@@ -160,7 +162,7 @@ public:
 	virtual void AI_separate() = 0;
 	virtual bool AI_update() = 0;
 	virtual int AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy) const = 0;
-	virtual CvUnit* AI_getBestGroupAttacker(const CvPlot* pPlot, bool bPotentialEnemy, bool bForce = false) const = 0;
+	virtual CvUnit* AI_getBestGroupAttacker(const CvPlot* pPlot, bool bPotentialEnemy, bool bForce = false, bool bNoBlitz = false) const = 0;
 	virtual bool AI_isControlled() = 0;
 	virtual bool AI_isDeclareWar() = 0;
 	virtual CvPlot* AI_getMissionAIPlot() = 0;

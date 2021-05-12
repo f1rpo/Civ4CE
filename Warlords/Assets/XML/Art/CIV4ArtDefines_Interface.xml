@@ -599,6 +599,10 @@
 			<Path>Art/Interface/Screens/TechTree/Permanent_Alliances.dds</Path>
 		</InterfaceArtInfo>
 		<InterfaceArtInfo>
+			<Type>INTERFACE_TECH_VASSAL</Type>
+			<Path>Art/Interface/Buttons/Civics/Vassalage.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
 			<Type>INTERFACE_TECH_TECHTRADING</Type>
 			<Path>Art/Interface/Screens/TechTree/Tech_Trading.dds</Path>
 		</InterfaceArtInfo>
@@ -719,6 +723,14 @@
 			<Path>Art/Interface/Screens/Loading/LoadingScreenBGslideshow.dds</Path>
 		</InterfaceArtInfo>
 		<InterfaceArtInfo>
+			<Type>MAINMENU_LOAD_WARLORDS</Type>
+			<Path>Art/Interface/Screens/Loading/LoadingScreenBGWarlords.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>MAINMENU_SLIDESHOW_LOAD_WARLORDS</Type>
+			<Path>Art/Interface/Screens/Loading/LoadingScreenBGslideshowWarlords.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
 			<Type>INTRO_LOGOS</Type>
 			<Path>Art/Interface/Screens/Credits/Logos.dds</Path>
 		</InterfaceArtInfo>
@@ -756,7 +768,11 @@
 		</InterfaceArtInfo>
 		<InterfaceArtInfo>
 			<Type>MAINMENU_SCENE</Type>
-			<Path>Art/Interface/Main Menu/CIV4MainMenuBG.nif</Path>
+			<Path>Art/Interface/Main Menu/CIV4MainMenuBG.kfm</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>MAINMENU_SCENE_NO_SHADER</Type>
+			<Path>Art/Interface/Main Menu/CIV4MainMenuBG_noshader.kfm</Path>
 		</InterfaceArtInfo>
 		<InterfaceArtInfo>
 			<Type>MAINMENU_SP</Type>

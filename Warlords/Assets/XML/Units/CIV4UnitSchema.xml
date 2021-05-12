@@ -1,4 +1,4 @@
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Bart Muzzin (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -138,6 +138,42 @@
 	<ElementType name="UnitClassUpgrades" content="eltOnly">
 		<element type="UnitClassUpgrade" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
+	<ElementType name="UnitClassTargetType" content="textOnly"/>
+	<ElementType name="bUnitClassTarget" content="textOnly" dt:type="boolean"/>
+	<ElementType name="UnitClassTarget" content="eltOnly">
+		<element type="UnitClassTargetType"/>
+		<element type="bUnitClassTarget"/>
+	</ElementType>
+	<ElementType name="UnitClassTargets" content="eltOnly">
+		<element type="UnitClassTarget" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="UnitCombatTargetType" content="textOnly"/>
+	<ElementType name="bUnitCombatTarget" content="textOnly" dt:type="boolean"/>
+	<ElementType name="UnitCombatTarget" content="eltOnly">
+		<element type="UnitCombatTargetType"/>
+		<element type="bUnitCombatTarget"/>
+	</ElementType>
+	<ElementType name="UnitCombatTargets" content="eltOnly">
+		<element type="UnitCombatTarget" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="UnitClassDefenderType" content="textOnly"/>
+	<ElementType name="bUnitClassDefender" content="textOnly" dt:type="boolean"/>
+	<ElementType name="UnitClassDefender" content="eltOnly">
+		<element type="UnitClassDefenderType"/>
+		<element type="bUnitClassDefender"/>
+	</ElementType>
+	<ElementType name="UnitClassDefenders" content="eltOnly">
+		<element type="UnitClassDefender" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="UnitCombatDefenderType" content="textOnly"/>
+	<ElementType name="bUnitCombatDefender" content="textOnly" dt:type="boolean"/>
+	<ElementType name="UnitCombatDefender" content="eltOnly">
+		<element type="UnitCombatDefenderType"/>
+		<element type="bUnitCombatDefender"/>
+	</ElementType>
+	<ElementType name="UnitCombatDefenders" content="eltOnly">
+		<element type="UnitCombatDefender" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
 	<ElementType name="UnitAIType" content="textOnly"/>
 	<ElementType name="bUnitAI" content="textOnly" dt:type="boolean"/>
 	<ElementType name="UnitAI" content="eltOnly">
@@ -269,7 +305,14 @@
 	<ElementType name="iCityAttack" content="textOnly" dt:type="int"/>
 	<ElementType name="iCityDefense" content="textOnly" dt:type="int"/>
 	<ElementType name="iAnimalCombat" content="textOnly" dt:type="int"/>
+	<ElementType name="iHillsAttack" content="textOnly" dt:type="int"/>
 	<ElementType name="iHillsDefense" content="textOnly" dt:type="int"/>
+	<ElementType name="iKamikazePercent" content="textOnly" dt:type="int"/>
+	<ElementType name="iRevoltProtection" content="textOnly" dt:type="int"/>
+	<ElementType name="iCollateralDamageProtection" content="textOnly" dt:type="int"/>
+	<ElementType name="iPillageChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iUpgradeDiscount" content="textOnly" dt:type="int"/>
+	<ElementType name="iExperiencePercent" content="textOnly" dt:type="int"/>
 	<ElementType name="bTerrainNative" content="textOnly" dt:type="boolean"/>
 	<ElementType name="TerrainNative" content="eltOnly">
 		<element type="TerrainType"/>
@@ -327,6 +370,14 @@
 	<ElementType name="UnitCombatMods" content="eltOnly">
 		<element type="UnitCombatMod" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
+	<ElementType name="iUnitCombatCollateralImmune" content="textOnly" dt:type="int"/>
+	<ElementType name="UnitCombatCollateralImmune" content="eltOnly">
+		<element type="UnitCombatType"/>
+		<element type="iUnitCombatCollateralImmune"/>
+	</ElementType>
+	<ElementType name="UnitCombatCollateralImmunes" content="eltOnly">
+		<element type="UnitCombatCollateralImmune" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
 	<ElementType name="iDomainMod" content="textOnly" dt:type="int"/>
 	<ElementType name="DomainMod" content="eltOnly">
 		<element type="DomainType"/>
@@ -355,6 +406,7 @@
 	<ElementType name="iPower" content="textOnly" dt:type="int"/>
 	<ElementType name="EarlyArtDefineTag" content="textOnly"/>
 	<ElementType name="LateArtDefineTag" content="textOnly"/>
+	<ElementType name="MiddleArtDefineTag" content="textOnly"/>
 	<ElementType name="iGroupSize" content="textOnly" dt:type="int"/>
 	<ElementType name="iRequired" content="textOnly" dt:type="int"/>
 	<ElementType name="fMaxSpeed" content="textOnly"/>
@@ -364,6 +416,7 @@
 		<element type="iRequired" maxOccurs="1" minOccurs="1"/>
 		<element type="EarlyArtDefineTag" maxOccurs="1" minOccurs="1"/>
 		<element type="LateArtDefineTag" maxOccurs="1" minOccurs="0"/>
+		<element type="MiddleArtDefineTag" maxOccurs="1" minOccurs="0"/>
 	</ElementType>
 	<ElementType name="UnitMeshGroups" content="eltOnly">
 		<element type="iGroupSize" maxOccurs="1" minOccurs="1"/>
@@ -382,6 +435,8 @@
 	<ElementType name="FreePromotions" content="eltOnly">
 		<element type="FreePromotion" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
+	<ElementType name="LeaderPromotion" content="textOnly"/>
+	<ElementType name="iLeaderExperience" content="textOnly" dt:type="int"/>
 	<ElementType name="UnitInfo" content="eltOnly">
 		<element type="Class"/>
 		<element type="Type"/>
@@ -427,6 +482,10 @@
 		<element type="bMechanized"/>
 		<element type="bRenderBelowWater" minOccurs="0"/>
 		<element type="UnitClassUpgrades"/>
+		<element type="UnitClassTargets"/>
+		<element type="UnitCombatTargets"/>
+		<element type="UnitClassDefenders"/>
+		<element type="UnitCombatDefenders"/>
 		<element type="UnitAIs"/>
 		<element type="NotUnitAIs"/>
 		<element type="Builds"/>
@@ -478,6 +537,7 @@
 		<element type="iCityAttack"/>
 		<element type="iCityDefense"/>
 		<element type="iAnimalCombat"/>
+		<element type="iHillsAttack"/>
 		<element type="iHillsDefense"/>
 		<element type="TerrainNatives"/>
 		<element type="FeatureNatives"/>
@@ -486,6 +546,7 @@
 		<element type="UnitClassAttackMods"/>
 		<element type="UnitClassDefenseMods"/>
 		<element type="UnitCombatMods"/>
+		<element type="UnitCombatCollateralImmunes"/>
 		<element type="DomainMods"/>
 		<element type="BonusProductionModifiers"/>
 		<element type="iBombRate"/>
@@ -506,6 +567,8 @@
 		<element type="bCtrlDown"/>
 		<element type="iHotKeyPriority"/>
 		<element type="FreePromotions"/>
+		<element type="LeaderPromotion"/>
+		<element type="iLeaderExperience"/>
 		<element type="iOrderPriority" minOccurs="0"/>
 	</ElementType>
 	<ElementType name="UnitInfos" content="eltOnly">
@@ -614,9 +677,11 @@
 	<ElementType name="AutomateInfos" content="eltOnly">
 		<element type="AutomateInfo" maxOccurs="*"/>
 	</ElementType>
+	<ElementType name="PromotionPrereq" content="textOnly"/>
 	<ElementType name="PromotionPrereqOr1" content="textOnly"/>
 	<ElementType name="PromotionPrereqOr2" content="textOnly"/>
 	<ElementType name="TechPrereq" content="textOnly"/>
+	<ElementType name="bLeader" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bBlitz" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bAmphib" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bRiver" content="textOnly" dt:type="boolean"/>
@@ -666,9 +731,11 @@
 		<element type="Type"/>
 		<element type="Description"/>
 		<element type="Sound"/>
+		<element type="PromotionPrereq"/>
 		<element type="PromotionPrereqOr1"/>
 		<element type="PromotionPrereqOr2"/>
 		<element type="TechPrereq"/>
+		<element type="bLeader"/>
 		<element type="bBlitz"/>
 		<element type="bAmphib"/>
 		<element type="bRiver"/>
@@ -692,7 +759,14 @@
 		<element type="iCombatPercent"/>
 		<element type="iCityAttack"/>
 		<element type="iCityDefense"/>
+		<element type="iHillsAttack"/>
 		<element type="iHillsDefense"/>
+		<element type="iKamikazePercent"/>
+		<element type="iRevoltProtection"/>
+		<element type="iCollateralDamageProtection"/>
+		<element type="iPillageChange"/>
+		<element type="iUpgradeDiscount"/>
+		<element type="iExperiencePercent"/>
 		<element type="TerrainDefenses"/>
 		<element type="FeatureDefenses"/>
 		<element type="UnitCombatMods"/>

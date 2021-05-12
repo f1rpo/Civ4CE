@@ -170,6 +170,13 @@ def getNumCustomMapOptions():
 	"""
 	return 0
 	
+def getNumHiddenCustomMapOptions():
+	"""
+	Number of different user-defined options for this map
+	Return an integer
+	"""
+	return 0
+	
 def getCustomMapOptionName(argsList):
 	"""
 	Returns name of specified option

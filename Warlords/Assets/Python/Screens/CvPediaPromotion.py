@@ -113,11 +113,8 @@ class CvPediaPromotion:
 		screen.attachLabel(panelName, "", "  ")
 		
 		for j in range(gc.getNumPromotionInfos()):
-			iPrereq = gc.getPromotionInfo(j).getPrereqOrPromotion1()
-			if (iPrereq == self.iPromotion):
-				screen.attachImageButton( panelName, "", gc.getPromotionInfo(j).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, j, 1, False )
-			iPrereq = gc.getPromotionInfo(j).getPrereqOrPromotion2()
-			if (iPrereq == self.iPromotion):
+			iPrereq = gc.getPromotionInfo(j).getPrereqPromotion()
+			if (gc.getPromotionInfo(j).getPrereqPromotion() == self.iPromotion or gc.getPromotionInfo(j).getPrereqOrPromotion1() == self.iPromotion or gc.getPromotionInfo(j).getPrereqOrPromotion2() == self.iPromotion):
 				screen.attachImageButton( panelName, "", gc.getPromotionInfo(j).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, j, 1, False )
 				
 	# Place prereqs...
@@ -131,14 +128,27 @@ class CvPediaPromotion:
 		
 		screen.attachLabel(panelName, "", "  ")
 
-		ePromo = gc.getPromotionInfo(self.iPromotion).getPrereqOrPromotion1()
+		ePromo = gc.getPromotionInfo(self.iPromotion).getPrereqPromotion()
 		if (ePromo > -1):
 			screen.attachImageButton( panelName, "", gc.getPromotionInfo(ePromo).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, ePromo, 1, False )
 
-			ePromo = gc.getPromotionInfo(self.iPromotion).getPrereqOrPromotion2()
+		ePromoOr1 = gc.getPromotionInfo(self.iPromotion).getPrereqOrPromotion1()
+		ePromoOr2 = gc.getPromotionInfo(self.iPromotion).getPrereqOrPromotion2()
+		if (ePromoOr1 > -1):
 			if (ePromo > -1):
-	        		screen.attachTextGFC(panelName, "", localText.getText("TXT_KEY_OR", ()), FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-				screen.attachImageButton( panelName, "", gc.getPromotionInfo(ePromo).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, ePromo, 1, False )
+				screen.attachLabel(panelName, "", localText.getText("TXT_KEY_AND", ()))
+			
+				if (ePromoOr2 > -1):
+					screen.attachLabel(panelName, "", "(")
+
+			screen.attachImageButton( panelName, "", gc.getPromotionInfo(ePromoOr1).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, ePromoOr1, 1, False )
+
+			if (ePromoOr2 > -1):
+				screen.attachLabel(panelName, "", localText.getText("TXT_KEY_OR", ()))
+				screen.attachImageButton( panelName, "", gc.getPromotionInfo(ePromoOr2).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, ePromoOr2, 1, False )
+
+				if (ePromo > -1):
+					screen.attachLabel(panelName, "", ")")
 								
 		eTech = gc.getPromotionInfo(self.iPromotion).getTechPrereq()
 		if (eTech > -1):
@@ -191,7 +201,7 @@ class CvPediaPromotion:
 		i = 0
 		iSelected = 0
 		for iI in range(gc.getNumPromotionInfos()):
-			if (not gc.getPromotionInfo(iI).isGraphicalOnly()):
+			if (not gc.getPromotionInfo(listSorted[iI][1]).isGraphicalOnly()):
 				if bRedraw:
 					screen.appendListBoxString( self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
 				if listSorted[iI][1] == self.iPromotion:

@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by Soren Johnson (Firaxis Games) -->
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Jesse Smith (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Ed Piper (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -80,7 +79,12 @@
 				<City>TXT_KEY_CITY_NAME_COLUMBUS</City>
 				<City>TXT_KEY_CITY_NAME_LE_BAM</City>
 			</Cities>
-			<Buildings/>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_SUPERMARKET</BuildingClassType>
+					<BuildingType>BUILDING_AMERICAN_MALL</BuildingType>
+				</Building>
+			</Buildings>
 			<Units>
 				<Unit>
 					<UnitClassType>UNITCLASS_MARINE</UnitClassType>
@@ -136,7 +140,7 @@
 			<ShortDescription>TXT_KEY_CIV_ARABIA_SHORT_DESC</ShortDescription>
 			<Adjective>TXT_KEY_CIV_ARABIA_ADJECTIVE</Adjective>
 			<Civilopedia>TXT_KEY_CIV_ARABIA_PEDIA</Civilopedia>
-			<DefaultPlayerColor>PLAYERCOLOR_DARK_GREEN</DefaultPlayerColor>
+			<DefaultPlayerColor>PLAYERCOLOR_LIGHT_GREEN</DefaultPlayerColor>
 			<ArtDefineTag>ART_DEF_CIVILIZATION_ARABIA</ArtDefineTag>
 			<ArtStyleType>ARTSTYLE_MIDDLE_EAST</ArtStyleType>
 			<bPlayable>1</bPlayable>
@@ -171,7 +175,12 @@
 				<City>TXT_KEY_CITY_NAME_SANAA</City>
 				<City>TXT_KEY_CITY_NAME_SHIHR</City>
 			</Cities>
-			<Buildings/>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_LIBRARY</BuildingClassType>
+					<BuildingType>BUILDING_ARABIAN_MADRASSA</BuildingType>
+				</Building>
+			</Buildings>
 			<Units>
 				<Unit>
 					<UnitClassType>UNITCLASS_KNIGHT</UnitClassType>
@@ -266,7 +275,12 @@
 				<City>TXT_KEY_CITY_NAME_AYOTZINCO</City>
 				<City>TXT_KEY_CITY_NAME_IZTAPAM</City>
 			</Cities>
-			<Buildings/>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_COURTHOUSE</BuildingClassType>
+					<BuildingType>BUILDING_AZTEC_SACRIFICIAL_ALTAR</BuildingType>
+				</Building>
+			</Buildings>
 			<Units>
 				<Unit>
 					<UnitClassType>UNITCLASS_SWORDSMAN</UnitClassType>
@@ -311,6 +325,216 @@
 			</Leaders>
 			<CivilizationSelectionSound>AS3D_AZTEC_SELECT</CivilizationSelectionSound>
 			<CivilizationActionSound>AS3D_AZTEC_ORDER</CivilizationActionSound>
+		</CivilizationInfo>
+		<CivilizationInfo>
+			<Type>CIVILIZATION_CARTHAGE</Type>
+			<Description>TXT_KEY_CIV_CARTHAGE_DESC</Description>
+			<ShortDescription>TXT_KEY_CIV_CARTHAGE_SHORT_DESC</ShortDescription>
+			<Adjective>TXT_KEY_CIV_CARTHAGE_ADJECTIVE</Adjective>
+			<Civilopedia>TXT_KEY_CIV_CARTHAGE_PEDIA</Civilopedia>
+			<DefaultPlayerColor>PLAYERCOLOR_ORANGE</DefaultPlayerColor>
+			<ArtDefineTag>ART_DEF_CIVILIZATION_CARTHAGE</ArtDefineTag>
+			<ArtStyleType>ARTSTYLE_GRECO_ROMAN</ArtStyleType>
+			<bPlayable>1</bPlayable>
+			<bAIPlayable>1</bAIPlayable>
+			<Cities>
+				<City>TXT_KEY_CITY_NAME_CARTHAGE</City>
+				<City>TXT_KEY_CITY_NAME_UTICA</City>
+				<City>TXT_KEY_CITY_NAME_HADRUMETUM</City>
+				<City>TXT_KEY_CITY_NAME_HIPPO</City>
+				<City>TXT_KEY_CITY_NAME_KERKOUANE</City>				
+				<City>TXT_KEY_CITY_NAME_LEPTIS</City>
+				<City>TXT_KEY_CITY_NAME_THAPSUS</City>
+				<City>TXT_KEY_CITY_NAME_SICCA</City>
+				<City>TXT_KEY_CITY_NAME_THAENAE</City>
+				<City>TXT_KEY_CITY_NAME_TACAPE</City>
+				<City>TXT_KEY_CITY_NAME_SABRATHA</City>
+				<City>TXT_KEY_CITY_NAME_OEA</City>
+				<City>TXT_KEY_CITY_NAME_MALACA</City>
+				<City>TXT_KEY_CITY_NAME_ABDERA</City>
+				<City>TXT_KEY_CITY_NAME_SEXI</City>
+				<City>TXT_KEY_CITY_NAME_BARIA</City>
+				<City>TXT_KEY_CITY_NAME_CARMONA</City>
+				<City>TXT_KEY_CITY_NAME_ONOBA</City>
+				<City>TXT_KEY_CITY_NAME_CARTHAGO_NOVO</City>
+				<City>TXT_KEY_CITY_NAME_IBROSSIM</City>
+				<City>TXT_KEY_CITY_NAME_SARIM_BATIM</City>
+				<City>TXT_KEY_CITY_NAME_TIPASA</City>
+				<City>TXT_KEY_CITY_NAME_IOL</City>
+				<City>TXT_KEY_CITY_NAME_SIGA</City>
+				<City>TXT_KEY_CITY_NAME_RUSADDIR</City>
+				<City>TXT_KEY_CITY_NAME_TINGIS</City>
+				<City>TXT_KEY_CITY_NAME_LIXUS</City>
+				<City>TXT_KEY_CITY_NAME_MOGADOR</City>
+				<City>TXT_KEY_CITY_NAME_ZIS</City>
+				<City>TXT_KEY_CITY_NAME_MOTYA</City>
+				<City>TXT_KEY_CITY_NAME_SOLUS</City>
+				<City>TXT_KEY_CITY_NAME_LILYBAEUM</City>
+				<City>TXT_KEY_CITY_NAME_KARALIS</City>
+				<City>TXT_KEY_CITY_NAME_NORA</City>
+				<City>TXT_KEY_CITY_NAME_BITHIA</City>
+				<City>TXT_KEY_CITY_NAME_SULCIS</City>
+				<City>TXT_KEY_CITY_NAME_THARROS</City>
+				<City>TXT_KEY_CITY_NAME_OLBIA</City>
+				<City>TXT_KEY_CITY_NAME_MELITA</City>
+				<City>TXT_KEY_CITY_NAME_KOSSYRA</City>
+				<City>TXT_KEY_CITY_NAME_ZAMA</City>
+			</Cities>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_HARBOR</BuildingClassType>
+					<BuildingType>BUILDING_CARTHAGE_COTHON</BuildingType>
+				</Building>
+			</Buildings>
+			<Units>
+				<Unit>
+					<UnitClassType>UNITCLASS_HORSE_ARCHER</UnitClassType>
+					<UnitType>UNIT_CARTHAGE_NUMIDIAN_CAVALRY</UnitType>
+				</Unit>
+			</Units>
+			<FreeUnitClasses>
+				<FreeUnitClass>
+					<UnitClassType>UNITCLASS_SETTLER</UnitClassType>
+					<iFreeUnits>1</iFreeUnits>
+				</FreeUnitClass>
+			</FreeUnitClasses>
+			<FreeBuildingClasses>
+				<FreeBuildingClass>
+					<BuildingClassType>BUILDINGCLASS_PALACE</BuildingClassType>
+					<bFreeBuildingClass>1</bFreeBuildingClass>
+				</FreeBuildingClass>
+			</FreeBuildingClasses>
+			<FreeTechs>
+				<FreeTech>
+					<TechType>TECH_FISHING</TechType>
+					<bFreeTech>1</bFreeTech>
+				</FreeTech>
+				<FreeTech>
+					<TechType>TECH_MINING</TechType>
+					<bFreeTech>1</bFreeTech>
+				</FreeTech>
+			</FreeTechs>
+			<DisableTechs/>
+			<InitialCivics>
+				<CivicType>CIVIC_DESPOTISM</CivicType>
+				<CivicType>CIVIC_BARBARISM</CivicType>
+				<CivicType>CIVIC_TRIBALISM</CivicType>
+				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
+				<CivicType>CIVIC_PAGANISM</CivicType>
+			</InitialCivics>
+			<Leaders>
+				<Leader>
+					<LeaderName>LEADER_HANNIBAL</LeaderName>
+					<bLeaderAvailability>1</bLeaderAvailability>
+				</Leader>
+			</Leaders>
+			<CivilizationSelectionSound>AS3D_CARTHAGE_SELECT</CivilizationSelectionSound>
+			<CivilizationActionSound>AS3D_CARTHAGE_ORDER</CivilizationActionSound>
+		</CivilizationInfo>
+		<CivilizationInfo>
+			<Type>CIVILIZATION_CELT</Type>
+			<Description>TXT_KEY_CIV_CELT_DESC</Description>
+			<ShortDescription>TXT_KEY_CIV_CELT_SHORT_DESC</ShortDescription>
+			<Adjective>TXT_KEY_CIV_CELT_ADJECTIVE</Adjective>
+			<Civilopedia>TXT_KEY_CIV_CELT_PEDIA</Civilopedia>
+			<DefaultPlayerColor>PLAYERCOLOR_LIGHT_ORANGE</DefaultPlayerColor>
+			<ArtDefineTag>ART_DEF_CIVILIZATION_CELTS</ArtDefineTag>
+			<ArtStyleType>ARTSTYLE_EUROPEAN</ArtStyleType>
+			<bPlayable>1</bPlayable>
+			<bAIPlayable>1</bAIPlayable>
+			<Cities>
+				<City>TXT_KEY_CITY_NAME_BIBRACTE</City>
+				<City>TXT_KEY_CITY_NAME_VIENNE</City>
+				<City>TXT_KEY_CITY_NAME_TOLOSA</City>
+				<City>TXT_KEY_CITY_NAME_GERGOVIA</City>
+				<City>TXT_KEY_CITY_NAME_CAMULODUNUM</City>
+				<City>TXT_KEY_CITY_NAME_VERLAMION</City>
+				<City>TXT_KEY_CITY_NAME_DURNOVARIA</City>
+				<City>TXT_KEY_CITY_NAME_ISCA</City>
+				<City>TXT_KEY_CITY_NAME_DUROCORTORUM</City>
+				<City>TXT_KEY_CITY_NAME_BAGACUM</City>
+				<City>TXT_KEY_CITY_NAME_NEMETOCENNA</City>
+				<City>TXT_KEY_CITY_NAME_CALLEVA</City>
+				<City>TXT_KEY_CITY_NAME_VENTA</City>
+				<City>TXT_KEY_CITY_NAME_ISURIUM</City>
+				<City>TXT_KEY_CITY_NAME_RATAE</City>
+				<City>TXT_KEY_CITY_NAME_LUTETIA</City>
+				<City>TXT_KEY_CITY_NAME_ENTREMONT</City>
+				<City>TXT_KEY_CITY_NAME_BURDIGALA</City>
+				<City>TXT_KEY_CITY_NAME_NEMAUSUS</City>
+				<City>TXT_KEY_CITY_NAME_SAMAROBRIVA</City>
+				<City>TXT_KEY_CITY_NAME_BRIXIA</City>
+				<City>TXT_KEY_CITY_NAME_MEDIOLANUM</City>
+				<City>TXT_KEY_CITY_NAME_CREMONA</City>
+				<City>TXT_KEY_CITY_NAME_TAURASIA</City>
+				<City>TXT_KEY_CITY_NAME_SINIGAGLIA</City>
+				<City>TXT_KEY_CITY_NAME_NOVIOMAGUS</City>
+				<City>TXT_KEY_CITY_NAME_DUROVERNUM</City>
+				<City>TXT_KEY_CITY_NAME_LUGUVALIO</City>
+				<City>TXT_KEY_CITY_NAME_LINDINIS</City>
+				<City>TXT_KEY_CITY_NAME_OKILIS</City>
+				<City>TXT_KEY_CITY_NAME_NUMANTIA</City>
+				<City>TXT_KEY_CITY_NAME_TIERNES</City>
+				<City>TXT_KEY_CITY_NAME_BOTORRITA</City>
+				<City>TXT_KEY_CITY_NAME_MORIDUNUM</City>
+				<City>TXT_KEY_CITY_NAME_TARA</City>
+				<City>TXT_KEY_CITY_NAME_EBLANA</City>
+				<City>TXT_KEY_CITY_NAME_ALESIA</City>
+				<City>TXT_KEY_CITY_NAME_ANDEMATUNUM</City>
+				<City>TXT_KEY_CITY_NAME_UBIORUM</City>
+				<City>TXT_KEY_CITY_NAME_GENEVA</City>
+				<City>TXT_KEY_CITY_NAME_ANCYRA</City>
+			</Cities>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_WALLS</BuildingClassType>
+					<BuildingType>BUILDING_CELTIC_DUN</BuildingType>
+				</Building>
+			</Buildings>
+			<Units>
+				<Unit>
+					<UnitClassType>UNITCLASS_SWORDSMAN</UnitClassType>
+					<UnitType>UNIT_CELTIC_GALLIC_WARRIOR</UnitType>
+				</Unit>
+			</Units>
+			<FreeUnitClasses>
+				<FreeUnitClass>
+					<UnitClassType>UNITCLASS_SETTLER</UnitClassType>
+					<iFreeUnits>1</iFreeUnits>
+				</FreeUnitClass>
+			</FreeUnitClasses>
+			<FreeBuildingClasses>
+				<FreeBuildingClass>
+					<BuildingClassType>BUILDINGCLASS_PALACE</BuildingClassType>
+					<bFreeBuildingClass>1</bFreeBuildingClass>
+				</FreeBuildingClass>
+			</FreeBuildingClasses>
+			<FreeTechs>
+				<FreeTech>
+					<TechType>TECH_HUNTING</TechType>
+					<bFreeTech>1</bFreeTech>
+				</FreeTech>
+				<FreeTech>
+					<TechType>TECH_MYSTICISM</TechType>
+					<bFreeTech>1</bFreeTech>
+				</FreeTech>
+			</FreeTechs>
+			<DisableTechs/>
+			<InitialCivics>
+				<CivicType>CIVIC_DESPOTISM</CivicType>
+				<CivicType>CIVIC_BARBARISM</CivicType>
+				<CivicType>CIVIC_TRIBALISM</CivicType>
+				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
+				<CivicType>CIVIC_PAGANISM</CivicType>
+			</InitialCivics>
+			<Leaders>
+				<Leader>
+					<LeaderName>LEADER_BRENNUS</LeaderName>
+					<bLeaderAvailability>1</bLeaderAvailability>
+				</Leader>
+			</Leaders>
+			<CivilizationSelectionSound>AS3D_CELTS_SELECT</CivilizationSelectionSound>
+			<CivilizationActionSound>AS3D_CELTS_ORDER</CivilizationActionSound>
 		</CivilizationInfo>
 		<CivilizationInfo>
 			<Type>CIVILIZATION_CHINA</Type>
@@ -369,7 +593,12 @@
 				<City>TXT_KEY_CITY_NAME_WEIFANG</City>
 				<City>TXT_KEY_CITY_NAME_XIKANG</City>
 			</Cities>
-			<Buildings/>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_THEATRE</BuildingClassType>
+					<BuildingType>BUILDING_CHINESE_PAVILLION</BuildingType>
+				</Building>
+			</Buildings>
 			<Units>
 				<Unit>
 					<UnitClassType>UNITCLASS_CROSSBOWMAN</UnitClassType>
@@ -439,7 +668,7 @@
 				<City>TXT_KEY_CITY_NAME_PIRAMESSES</City>
 				<City>TXT_KEY_CITY_NAME_GIZA</City>
 				<City>TXT_KEY_CITY_NAME_BYBLOS</City>
-				<City>TXT_KEY_CITY_NAME_ELAMARNA</City>
+				<City>TXT_KEY_CITY_NAME_AKHETATEN</City>
 				<City>TXT_KEY_CITY_NAME_HIERACONPOLIS</City>
 				<City>TXT_KEY_CITY_NAME_ABYDOS</City>
 				<City>TXT_KEY_CITY_NAME_ASYUT</City>
@@ -488,7 +717,12 @@
 				<City>TXT_KEY_CITY_NAME_SEMNA</City>
 				<City>TXT_KEY_CITY_NAME_AMARA</City>
 			</Cities>
-			<Buildings/>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_OBELISK</BuildingClassType>
+					<BuildingType>BUILDING_EGYPTIAN_OBELISK</BuildingType>
+				</Building>
+			</Buildings>
 			<Units>
 				<Unit>
 					<UnitClassType>UNITCLASS_CHARIOT</UnitClassType>
@@ -528,6 +762,10 @@
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_HATSHEPSUT</LeaderName>
+					<bLeaderAvailability>1</bLeaderAvailability>
+				</Leader>
+				<Leader>
+					<LeaderName>LEADER_RAMESSES</LeaderName>
 					<bLeaderAvailability>1</bLeaderAvailability>
 				</Leader>
 			</Leaders>
@@ -576,7 +814,12 @@
 				<City>TXT_KEY_CITY_NAME_BATH</City>
 				<City>TXT_KEY_CITY_NAME_MUMBLES</City>
 			</Cities>
-			<Buildings/>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_BANK</BuildingClassType>
+					<BuildingType>BUILDING_ENGLISH_STOCK_EXCHANGE</BuildingType>
+				</Building>
+			</Buildings>
 			<Units>
 				<Unit>
 					<UnitClassType>UNITCLASS_RIFLEMAN</UnitClassType>
@@ -622,6 +865,10 @@
 					<LeaderName>LEADER_VICTORIA</LeaderName>
 					<bLeaderAvailability>1</bLeaderAvailability>
 				</Leader>
+				<Leader>
+					<LeaderName>LEADER_CHURCHILL</LeaderName>
+					<bLeaderAvailability>1</bLeaderAvailability>
+				</Leader>
 			</Leaders>
 			<CivilizationSelectionSound>AS3D_ENGLAND_SELECT</CivilizationSelectionSound>
 			<CivilizationActionSound>AS3D_ENGLAND_ORDER</CivilizationActionSound>
@@ -660,7 +907,12 @@
 				<City>TXT_KEY_CITY_NAME_BORDEAUX</City>
 				<City>TXT_KEY_CITY_NAME_RENNES</City>
 			</Cities>
-			<Buildings/>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_OBSERVATORY</BuildingClassType>
+					<BuildingType>BUILDING_FRENCH_SALON</BuildingType>
+				</Building>
+			</Buildings>
 			<Units>
 				<Unit>
 					<UnitClassType>UNITCLASS_MUSKETMAN</UnitClassType>
@@ -787,7 +1039,12 @@
 				<City>TXT_KEY_CITY_NAME_ERLANGEN</City>
 				<City>TXT_KEY_CITY_NAME_TRIER</City>
 			</Cities>
-			<Buildings/>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_FACTORY</BuildingClassType>
+					<BuildingType>BUILDING_GERMAN_ASSEMBLY_PLANT</BuildingType>
+				</Building>
+			</Buildings>
 			<Units>
 				<Unit>
 					<UnitClassType>UNITCLASS_TANK</UnitClassType>
@@ -843,7 +1100,7 @@
 			<ShortDescription>TXT_KEY_CIV_GREECE_SHORT_DESC</ShortDescription>
 			<Adjective>TXT_KEY_CIV_GREECE_ADJECTIVE</Adjective>
 			<Civilopedia>TXT_KEY_CIV_GREECE_PEDIA</Civilopedia>
-			<DefaultPlayerColor>PLAYERCOLOR_DARK_CYAN</DefaultPlayerColor>
+			<DefaultPlayerColor>PLAYERCOLOR_LIGHT_BLUE</DefaultPlayerColor>
 			<ArtDefineTag>ART_DEF_CIVILIZATION_GREECE</ArtDefineTag>
 			<ArtStyleType>ARTSTYLE_GRECO_ROMAN</ArtStyleType>
 			<bPlayable>1</bPlayable>
@@ -851,35 +1108,51 @@
 			<Cities>
 				<City>TXT_KEY_CITY_NAME_ATHENS</City>
 				<City>TXT_KEY_CITY_NAME_SPARTA</City>
-				<City>TXT_KEY_CITY_NAME_THERMOPYLAE</City>
 				<City>TXT_KEY_CITY_NAME_CORINTH</City>
-				<City>TXT_KEY_CITY_NAME_DELPHI</City>
-				<City>TXT_KEY_CITY_NAME_PHARSALOS</City>
-				<City>TXT_KEY_CITY_NAME_KNOSSOS</City>
+				<City>TXT_KEY_CITY_NAME_THEBES</City>
 				<City>TXT_KEY_CITY_NAME_ARGOS</City>
+				<City>TXT_KEY_CITY_NAME_KNOSSOS</City>
 				<City>TXT_KEY_CITY_NAME_MYCENAE</City>
-				<City>TXT_KEY_CITY_NAME_HERAKLEIA</City>
+				<City>TXT_KEY_CITY_NAME_PHARSALOS</City>
 				<City>TXT_KEY_CITY_NAME_EPHESUS</City>
-				<City>TXT_KEY_CITY_NAME_THESSALONICA</City>
+				<City>TXT_KEY_CITY_NAME_HALICARNASSUS</City>
 				<City>TXT_KEY_CITY_NAME_RHODES</City>
 				<City>TXT_KEY_CITY_NAME_ERETRIA</City>
-				<City>TXT_KEY_CITY_NAME_TROY</City>
-				<City>TXT_KEY_CITY_NAME_MARATHON</City>
-				<City>TXT_KEY_CITY_NAME_HALICARNASSUS</City>
 				<City>TXT_KEY_CITY_NAME_PERGAMON</City>
 				<City>TXT_KEY_CITY_NAME_MILETOS</City>
-				<City>TXT_KEY_CITY_NAME_ARTEMISIUM</City>
 				<City>TXT_KEY_CITY_NAME_MEGARA</City>
 				<City>TXT_KEY_CITY_NAME_PHOCAEA</City>
 				<City>TXT_KEY_CITY_NAME_SICYON</City>
-				<City>TXT_KEY_CITY_NAME_GORTYN</City>
+				<City>TXT_KEY_CITY_NAME_TIRYNS</City>
+				<City>TXT_KEY_CITY_NAME_SAMOS</City>
 				<City>TXT_KEY_CITY_NAME_MYTILENE</City>
+				<City>TXT_KEY_CITY_NAME_CHIOS</City>
+				<City>TXT_KEY_CITY_NAME_PAROS</City>
 				<City>TXT_KEY_CITY_NAME_TEGEA</City>
+				<City>TXT_KEY_CITY_NAME_ELIS</City>
 				<City>TXT_KEY_CITY_NAME_SYRACUSE</City>
+				<City>TXT_KEY_CITY_NAME_HERAKLEIA</City>
+				<City>TXT_KEY_CITY_NAME_GORTYN</City>
+				<City>TXT_KEY_CITY_NAME_CHALKIS</City>
+				<City>TXT_KEY_CITY_NAME_PYLOS</City>
+				<City>TXT_KEY_CITY_NAME_PELLA</City>
+				<City>TXT_KEY_CITY_NAME_NAXOS</City>
+				<City>TXT_KEY_CITY_NAME_THESSALONICA</City>
+				<City>TXT_KEY_CITY_NAME_SMYRNA</City>
+				<City>TXT_KEY_CITY_NAME_LARISSA</City>
+				<City>TXT_KEY_CITY_NAME_PATRAS</City>
+				<City>TXT_KEY_CITY_NAME_LAMIA</City>
+				<City>TXT_KEY_CITY_NAME_MARATHON</City>
 				<City>TXT_KEY_CITY_NAME_APOLLONIA</City>
+				<City>TXT_KEY_CITY_NAME_NAFPLION</City>
 				<City>TXT_KEY_CITY_NAME_APOLYTON</City>
 			</Cities>
-			<Buildings/>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_COLOSSEUM</BuildingClassType>
+					<BuildingType>BUILDING_GREEK_ODEON</BuildingType>
+				</Building>
+			</Buildings>
 			<Units>
 				<Unit>
 					<UnitClassType>UNITCLASS_SPEARMAN</UnitClassType>
@@ -963,7 +1236,12 @@
 				<City>TXT_KEY_CITY_NAME_TAMBOCOLORADO</City>
 				<City>TXT_KEY_CITY_NAME_HUACA</City>
 			</Cities>
-			<Buildings/>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_GRANARY</BuildingClassType>
+					<BuildingType>BUILDING_INCAN_TERRACE</BuildingType>
+				</Building>
+			</Buildings>
 			<Units>
 				<Unit>
 					<UnitClassType>UNITCLASS_WARRIOR</UnitClassType>
@@ -1073,7 +1351,12 @@
 				<City>TXT_KEY_CITY_NAME_VIJAYAWEDA</City>
 				<City>TXT_KEY_CITY_NAME_BANSWARA</City>
 			</Cities>
-			<Buildings/>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_JAIL</BuildingClassType>
+					<BuildingType>BUILDING_INDIAN_MAUSOLEUM</BuildingType>
+				</Building>
+			</Buildings>
 			<Units>
 				<Unit>
 					<UnitClassType>UNITCLASS_WORKER</UnitClassType>
@@ -1138,7 +1421,6 @@
 				<City>TXT_KEY_CITY_NAME_KYOTO</City>
 				<City>TXT_KEY_CITY_NAME_OSAKA</City>
 				<City>TXT_KEY_CITY_NAME_TOKYO</City>
-				<City>TXT_KEY_CITY_NAME_EDO</City>
 				<City>TXT_KEY_CITY_NAME_SATSUMA</City>
 				<City>TXT_KEY_CITY_NAME_KAGOSHIMA</City>
 				<City>TXT_KEY_CITY_NAME_NARA</City>
@@ -1162,7 +1444,12 @@
 				<City>TXT_KEY_CITY_NAME_KOZUKE</City>
 				<City>TXT_KEY_CITY_NAME_SADO</City>
 			</Cities>
-			<Buildings/>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_COAL_PLANT</BuildingClassType>
+					<BuildingType>BUILDING_JAPANESE_SHALE_PLANT</BuildingType>
+				</Building>
+			</Buildings>
 			<Units>
 				<Unit>
 					<UnitClassType>UNITCLASS_MACEMAN</UnitClassType>
@@ -1209,6 +1496,100 @@
 			<CivilizationActionSound>AS3D_JAPAN_ORDER</CivilizationActionSound>
 		</CivilizationInfo>
 		<CivilizationInfo>
+			<Type>CIVILIZATION_KOREA</Type>
+			<Description>TXT_KEY_CIV_KOREA_DESC</Description>
+			<ShortDescription>TXT_KEY_CIV_KOREA_SHORT_DESC</ShortDescription>
+			<Adjective>TXT_KEY_CIV_KOREA_ADJECTIVE</Adjective>
+			<Civilopedia>TXT_KEY_CIV_KOREA_PEDIA</Civilopedia>
+			<DefaultPlayerColor>PLAYERCOLOR_DARK_CYAN</DefaultPlayerColor>
+			<ArtDefineTag>ART_DEF_CIVILIZATION_KOREA</ArtDefineTag>
+			<ArtStyleType>ARTSTYLE_ASIAN</ArtStyleType>
+			<bPlayable>1</bPlayable>
+			<bAIPlayable>1</bAIPlayable>
+			<Cities>
+				<City>TXT_KEY_CITY_NAME_SEOUL</City>
+				<City>TXT_KEY_CITY_NAME_PYONGYANG</City>
+				<City>TXT_KEY_CITY_NAME_WONSAN</City>
+				<City>TXT_KEY_CITY_NAME_PUSAN</City>
+				<City>TXT_KEY_CITY_NAME_NAMPO</City>
+				<City>TXT_KEY_CITY_NAME_CHEJU</City>
+				<City>TXT_KEY_CITY_NAME_HYANGSAN</City>
+				<City>TXT_KEY_CITY_NAME_ULSAN</City>
+				<City>TXT_KEY_CITY_NAME_INCHON</City>
+				<City>TXT_KEY_CITY_NAME_PYONGSONG</City>
+				<City>TXT_KEY_CITY_NAME_TAEJON</City>
+				<City>TXT_KEY_CITY_NAME_PAEGAM</City>
+				<City>TXT_KEY_CITY_NAME_MANPO</City>
+				<City>TXT_KEY_CITY_NAME_KAESONG</City>
+				<City>TXT_KEY_CITY_NAME_CHONJU</City>
+				<City>TXT_KEY_CITY_NAME_SARIWON</City>
+				<City>TXT_KEY_CITY_NAME_SUWON</City>
+				<City>TXT_KEY_CITY_NAME_HAEJU</City>
+				<City>TXT_KEY_CITY_NAME_TAEGU</City>
+				<City>TXT_KEY_CITY_NAME_CHINJE</City>
+				<City>TXT_KEY_CITY_NAME_TOKCHON</City>
+				<City>TXT_KEY_CITY_NAME_CHONGFU</City>
+				<City>TXT_KEY_CITY_NAME_TAEGWON</City>
+				<City>TXT_KEY_CITY_NAME_SOKCHO</City>
+				<City>TXT_KEY_CITY_NAME_HAMHUNG</City>
+				<City>TXT_KEY_CITY_NAME_IRI</City>
+				<City>TXT_KEY_CITY_NAME_HUICHON</City>
+				<City>TXT_KEY_CITY_NAME_NAMWON</City>
+				<City>TXT_KEY_CITY_NAME_KUMGANG</City>
+				<City>TXT_KEY_CITY_NAME_OIJONGBU</City>
+			</Cities>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_UNIVERSITY</BuildingClassType>
+					<BuildingType>BUILDING_KOREAN_SEOWON</BuildingType>
+				</Building>
+			</Buildings>
+			<Units>
+				<Unit>
+					<UnitClassType>UNITCLASS_CATAPULT</UnitClassType>
+					<UnitType>UNIT_KOREAN_HWACHA</UnitType>
+				</Unit>
+			</Units>
+			<FreeUnitClasses>
+				<FreeUnitClass>
+					<UnitClassType>UNITCLASS_SETTLER</UnitClassType>
+					<iFreeUnits>1</iFreeUnits>
+				</FreeUnitClass>
+			</FreeUnitClasses>
+			<FreeBuildingClasses>
+				<FreeBuildingClass>
+					<BuildingClassType>BUILDINGCLASS_PALACE</BuildingClassType>
+					<bFreeBuildingClass>1</bFreeBuildingClass>
+				</FreeBuildingClass>
+			</FreeBuildingClasses>
+			<FreeTechs>
+				<FreeTech>
+					<TechType>TECH_MINING</TechType>
+					<bFreeTech>1</bFreeTech>
+				</FreeTech>
+				<FreeTech>
+					<TechType>TECH_MYSTICISM</TechType>
+					<bFreeTech>1</bFreeTech>
+				</FreeTech>
+			</FreeTechs>
+			<DisableTechs/>
+			<InitialCivics>
+				<CivicType>CIVIC_DESPOTISM</CivicType>
+				<CivicType>CIVIC_BARBARISM</CivicType>
+				<CivicType>CIVIC_TRIBALISM</CivicType>
+				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
+				<CivicType>CIVIC_PAGANISM</CivicType>
+			</InitialCivics>
+			<Leaders>
+				<Leader>
+					<LeaderName>LEADER_WANGKON</LeaderName>
+					<bLeaderAvailability>1</bLeaderAvailability>
+				</Leader>
+			</Leaders>
+			<CivilizationSelectionSound>AS3D_KOREA_SELECT</CivilizationSelectionSound>
+			<CivilizationActionSound>AS3D_KOREA_ORDER</CivilizationActionSound>
+		</CivilizationInfo>
+		<CivilizationInfo>
 			<Type>CIVILIZATION_MALI</Type>
 			<Description>TXT_KEY_CIV_MALI_DESC</Description>
 			<ShortDescription>TXT_KEY_CIV_MALI_SHORT_DESC</ShortDescription>
@@ -1240,7 +1621,12 @@
 				<City>TXT_KEY_CITY_NAME_BILMA</City>
 				<City>TXT_KEY_CITY_NAME_NGAZARGUMU</City>
 			</Cities>
-			<Buildings/>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_FORGE</BuildingClassType>
+					<BuildingType>BUILDING_MALI_MINT</BuildingType>
+				</Building>
+			</Buildings>
 			<Units>
 				<Unit>
 					<UnitClassType>UNITCLASS_ARCHER</UnitClassType>
@@ -1332,7 +1718,12 @@
 				<City>TXT_KEY_CITY_NAME_NALAYH</City>
 				<City>TXT_KEY_CITY_NAME_TES</City>
 			</Cities>
-			<Buildings/>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_STABLE</BuildingClassType>
+					<BuildingType>BUILDING_MONGOL_GER</BuildingType>
+				</Building>
+			</Buildings>
 			<Units>
 				<Unit>
 					<UnitClassType>UNITCLASS_HORSE_ARCHER</UnitClassType>
@@ -1383,6 +1774,99 @@
 			<CivilizationActionSound>AS3D_MONGOL_ORDER</CivilizationActionSound>
 		</CivilizationInfo>
 		<CivilizationInfo>
+			<Type>CIVILIZATION_OTTOMAN</Type>
+			<Description>TXT_KEY_CIV_OTTOMAN_DESC</Description>
+			<ShortDescription>TXT_KEY_CIV_OTTOMAN_SHORT_DESC</ShortDescription>
+			<Adjective>TXT_KEY_CIV_OTTOMAN_ADJECTIVE</Adjective>
+			<Civilopedia>TXT_KEY_CHANGED_CIV_OTTOMAN_PEDIA</Civilopedia>
+			<DefaultPlayerColor>PLAYERCOLOR_DARK_GREEN</DefaultPlayerColor>
+			<ArtDefineTag>ART_DEF_CIVILIZATION_OTTOMANS</ArtDefineTag>
+			<ArtStyleType>ARTSTYLE_MIDDLE_EAST</ArtStyleType>
+			<bPlayable>1</bPlayable>
+			<bAIPlayable>1</bAIPlayable>
+			<Cities>
+				<City>TXT_KEY_CITY_NAME_ISTANBUL</City>
+				<City>TXT_KEY_CITY_NAME_EDIRNE</City>
+				<City>TXT_KEY_CITY_NAME_ANKARA</City>
+				<City>TXT_KEY_CITY_NAME_BURSA</City>
+				<City>TXT_KEY_CITY_NAME_KONYA</City>
+				<City>TXT_KEY_CITY_NAME_SAMSUN</City>
+				<City>TXT_KEY_CITY_NAME_GAZIANTEP</City>
+				<City>TXT_KEY_CITY_NAME_DIYARBAKIR</City>
+				<City>TXT_KEY_CITY_NAME_IZMIR</City>
+				<City>TXT_KEY_CITY_NAME_KAYSERI</City>
+				<City>TXT_KEY_CITY_NAME_MALATYA</City>
+				<City>TXT_KEY_CITY_NAME_MARSIN</City>
+				<City>TXT_KEY_CITY_NAME_ANTALYA</City>
+				<City>TXT_KEY_CITY_NAME_ZONGULDAK</City>
+				<City>TXT_KEY_CITY_NAME_DENIZLI</City>
+				<City>TXT_KEY_CITY_NAME_OIDU</City>
+				<City>TXT_KEY_CITY_NAME_MUGLA</City>
+				<City>TXT_KEY_CITY_NAME_ESKISEHIR</City>
+				<City>TXT_KEY_CITY_NAME_INEBOLU</City>
+				<City>TXT_KEY_CITY_NAME_SINOP</City>
+				<City>TXT_KEY_CITY_NAME_ADANA</City>
+				<City>TXT_KEY_CITY_NAME_TARSUS</City>
+				<City>TXT_KEY_CITY_NAME_ARTUIN</City>
+				<City>TXT_KEY_CITY_NAME_BODRUM</City>
+				<City>TXT_KEY_CITY_NAME_EREGLI</City>
+				<City>TXT_KEY_CITY_NAME_SILIFKE</City>
+				<City>TXT_KEY_CITY_NAME_SIVAS</City>
+				<City>TXT_KEY_CITY_NAME_AMASYA</City>
+				<City>TXT_KEY_CITY_NAME_MARMARIS</City>
+			</Cities>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_AQUEDUCT</BuildingClassType>
+					<BuildingType>BUILDING_OTTOMAN_HAMMAM</BuildingType>
+				</Building>
+			</Buildings>
+			<Units>
+				<Unit>
+					<UnitClassType>UNITCLASS_MUSKETMAN</UnitClassType>
+					<UnitType>UNIT_OTTOMAN_JANISSARY</UnitType>
+				</Unit>
+			</Units>
+			<FreeUnitClasses>
+				<FreeUnitClass>
+					<UnitClassType>UNITCLASS_SETTLER</UnitClassType>
+					<iFreeUnits>1</iFreeUnits>
+				</FreeUnitClass>
+			</FreeUnitClasses>
+			<FreeBuildingClasses>
+				<FreeBuildingClass>
+					<BuildingClassType>BUILDINGCLASS_PALACE</BuildingClassType>
+					<bFreeBuildingClass>1</bFreeBuildingClass>
+				</FreeBuildingClass>
+			</FreeBuildingClasses>
+			<FreeTechs>
+				<FreeTech>
+					<TechType>TECH_THE_WHEEL</TechType>
+					<bFreeTech>1</bFreeTech>
+				</FreeTech>
+				<FreeTech>
+					<TechType>TECH_AGRICULTURE</TechType>
+					<bFreeTech>1</bFreeTech>
+				</FreeTech>
+			</FreeTechs>
+			<DisableTechs/>
+			<InitialCivics>
+				<CivicType>CIVIC_DESPOTISM</CivicType>
+				<CivicType>CIVIC_BARBARISM</CivicType>
+				<CivicType>CIVIC_TRIBALISM</CivicType>
+				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
+				<CivicType>CIVIC_PAGANISM</CivicType>
+			</InitialCivics>
+			<Leaders>
+				<Leader>
+					<LeaderName>LEADER_MEHMED</LeaderName>
+					<bLeaderAvailability>1</bLeaderAvailability>
+				</Leader>
+			</Leaders>
+			<CivilizationSelectionSound>AS3D_OTTOMAN_SELECT</CivilizationSelectionSound>
+			<CivilizationActionSound>AS3D_OTTOMAN_ORDER</CivilizationActionSound>
+		</CivilizationInfo>
+		<CivilizationInfo>
 			<Type>CIVILIZATION_PERSIA</Type>
 			<Description>TXT_KEY_CIV_PERSIA_DESC</Description>
 			<ShortDescription>TXT_KEY_CIV_PERSIA_SHORT_DESC</ShortDescription>
@@ -1397,14 +1881,12 @@
 				<City>TXT_KEY_CITY_NAME_PERSEPOLIS</City>
 				<City>TXT_KEY_CITY_NAME_PASARGADAE</City>
 				<City>TXT_KEY_CITY_NAME_SUSA</City>
+				<City>TXT_KEY_CITY_NAME_ECBATANA</City>
 				<City>TXT_KEY_CITY_NAME_ARBELA</City>
 				<City>TXT_KEY_CITY_NAME_TARSUS</City>
 				<City>TXT_KEY_CITY_NAME_GORDIUM</City>
 				<City>TXT_KEY_CITY_NAME_BACTRA</City>
-				<City>TXT_KEY_CITY_NAME_SIDON</City>
-				<City>TXT_KEY_CITY_NAME_TYRE</City>
 				<City>TXT_KEY_CITY_NAME_SARDIS</City>
-				<City>TXT_KEY_CITY_NAME_SAMARIA</City>
 				<City>TXT_KEY_CITY_NAME_ERGILI</City>
 				<City>TXT_KEY_CITY_NAME_DARIUSHKABIR</City>
 				<City>TXT_KEY_CITY_NAME_GHULAMAN</City>
@@ -1416,6 +1898,11 @@
 				<City>TXT_KEY_CITY_NAME_DAKYANUS</City>
 				<City>TXT_KEY_CITY_NAME_BAMPUR</City>
 				<City>TXT_KEY_CITY_NAME_TURENGTEPE</City>
+				<City>TXT_KEY_CITY_NAME_REY</City>
+				<City>TXT_KEY_CITY_NAME_SHIRAZ</City>
+				<City>TXT_KEY_CITY_NAME_TUSHPA</City>
+				<City>TXT_KEY_CITY_NAME_HASANLU</City>
+				<City>TXT_KEY_CITY_NAME_GABAE</City>
 				<City>TXT_KEY_CITY_NAME_MERV</City>
 				<City>TXT_KEY_CITY_NAME_BEHISTUN</City>
 				<City>TXT_KEY_CITY_NAME_KANDAHAR</City>
@@ -1447,7 +1934,7 @@
 				<City>TXT_KEY_CITY_NAME_GANDUTAVA</City>
 				<City>TXT_KEY_CITY_NAME_GAUGAMELA</City>
 				<City>TXT_KEY_CITY_NAME_HARMOZEIA</City>
-				<City>TXT_KEY_CITY_NAME_HEKATOMPYLOS</City>
+				<City>TXT_KEY_CITY_NAME_EKATOMPYLOS</City>
 				<City>TXT_KEY_CITY_NAME_IZATA</City>
 				<City>TXT_KEY_CITY_NAME_KAMPADA</City>
 				<City>TXT_KEY_CITY_NAME_KAPISA</City>
@@ -1459,7 +1946,12 @@
 				<City>TXT_KEY_CITY_NAME_PATIGRBANA</City>
 				<City>TXT_KEY_CITY_NAME_PHRADA</City>
 			</Cities>
-			<Buildings/>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_GROCER</BuildingClassType>
+					<BuildingType>BUILDING_PERSIAN_APOTHECARY</BuildingType>
+				</Building>
+			</Buildings>
 			<Units>
 				<Unit>
 					<UnitClassType>UNITCLASS_CHARIOT</UnitClassType>
@@ -1524,6 +2016,7 @@
 				<City>TXT_KEY_CITY_NAME_PISAE</City>
 				<City>TXT_KEY_CITY_NAME_RAVENNA</City>
 				<City>TXT_KEY_CITY_NAME_ARRETIUM</City>
+				<City>TXT_KEY_CITY_NAME_MEDIOLANUM</City>
 				<City>TXT_KEY_CITY_NAME_ARPINUM</City>
 				<City>TXT_KEY_CITY_NAME_CIRCEI</City>
 				<City>TXT_KEY_CITY_NAME_SETIA</City>
@@ -1545,21 +2038,16 @@
 				<City>TXT_KEY_CITY_NAME_PLACENTIA</City>
 				<City>TXT_KEY_CITY_NAME_HISPALIS</City>
 				<City>TXT_KEY_CITY_NAME_NICOMEDIA</City>
-				<City>TXT_KEY_CITY_NAME_SELEUCIA</City>
 				<City>TXT_KEY_CITY_NAME_ARTAXATA</City>
 				<City>TXT_KEY_CITY_NAME_AURELIANORUM</City>
-				<City>TXT_KEY_CITY_NAME_HIPPOREGIUS</City>
 				<City>TXT_KEY_CITY_NAME_NICOPOLIS</City>
 				<City>TXT_KEY_CITY_NAME_LONDINIUM</City>
 				<City>TXT_KEY_CITY_NAME_EBURACUM</City>
 				<City>TXT_KEY_CITY_NAME_GORDION</City>
 				<City>TXT_KEY_CITY_NAME_AGRIPPINA</City>
 				<City>TXT_KEY_CITY_NAME_LUGDUNUM</City>
-				<City>TXT_KEY_CITY_NAME_BYZANTIUM</City>
-				<City>TXT_KEY_CITY_NAME_TYRUS</City>
 				<City>TXT_KEY_CITY_NAME_VERONA</City>
 				<City>TXT_KEY_CITY_NAME_CORFINIUM</City>
-				<City>TXT_KEY_CITY_NAME_MEDIOLANUM</City>
 				<City>TXT_KEY_CITY_NAME_TREVERI</City>
 				<City>TXT_KEY_CITY_NAME_SIRMIUM</City>
 				<City>TXT_KEY_CITY_NAME_AUGUSTADORUM</City>
@@ -1579,7 +2067,12 @@
 				<City>TXT_KEY_CITY_NAME_CASTRUMNOVUM</City>
 				<City>TXT_KEY_CITY_NAME_HADRIA</City>
 			</Cities>
-			<Buildings/>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_MARKET</BuildingClassType>
+					<BuildingType>BUILDING_ROMAN_FORUM</BuildingType>
+				</Building>
+			</Buildings>
 			<Units>
 				<Unit>
 					<UnitClassType>UNITCLASS_SWORDSMAN</UnitClassType>
@@ -1621,6 +2114,10 @@
 					<LeaderName>LEADER_JULIUS_CAESAR</LeaderName>
 					<bLeaderAvailability>1</bLeaderAvailability>
 				</Leader>
+				<Leader>
+					<LeaderName>LEADER_AUGUSTUS</LeaderName>
+					<bLeaderAvailability>1</bLeaderAvailability>
+				</Leader>
 			</Leaders>
 			<CivilizationSelectionSound>AS3D_ROME_SELECT</CivilizationSelectionSound>
 			<CivilizationActionSound>AS3D_ROME_ORDER</CivilizationActionSound>
@@ -1631,7 +2128,7 @@
 			<ShortDescription>TXT_KEY_CIV_RUSSIA_SHORT_DESC</ShortDescription>
 			<Adjective>TXT_KEY_CIV_RUSSIA_ADJECTIVE</Adjective>
 			<Civilopedia>TXT_KEY_CIV_RUSSIA_PEDIA</Civilopedia>
-			<DefaultPlayerColor>PLAYERCOLOR_ORANGE</DefaultPlayerColor>
+			<DefaultPlayerColor>PLAYERCOLOR_DARK_RED</DefaultPlayerColor>
 			<ArtDefineTag>ART_DEF_CIVILIZATION_RUSSIA</ArtDefineTag>
 			<ArtStyleType>ARTSTYLE_EUROPEAN</ArtStyleType>
 			<bPlayable>1</bPlayable>
@@ -1676,7 +2173,12 @@
 				<City>TXT_KEY_CITY_NAME_SUZDAL</City>
 				<City>TXT_KEY_CITY_NAME_MAGNITOGORSK</City>
 			</Cities>
-			<Buildings/>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_LABORATORY</BuildingClassType>
+					<BuildingType>BUILDING_RUSSIAN_RESEARCH_INSTITUTE</BuildingType>
+				</Building>
+			</Buildings>
 			<Units>
 				<Unit>
 					<UnitClassType>UNITCLASS_CAVALRY</UnitClassType>
@@ -1720,6 +2222,10 @@
 				</Leader>
 				<Leader>
 					<LeaderName>LEADER_CATHERINE</LeaderName>
+					<bLeaderAvailability>1</bLeaderAvailability>
+				</Leader>
+				<Leader>
+					<LeaderName>LEADER_STALIN</LeaderName>
 					<bLeaderAvailability>1</bLeaderAvailability>
 				</Leader>
 			</Leaders>
@@ -1770,7 +2276,12 @@
 				<City>TXT_KEY_CITY_NAME_VIGO</City>
 				<City>TXT_KEY_CITY_NAME_BADAJOZ</City>
 			</Cities>
-			<Buildings/>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_CASTLE</BuildingClassType>
+					<BuildingType>BUILDING_SPANISH_CITADEL</BuildingType>
+				</Building>
+			</Buildings>
 			<Units>
 				<Unit>
 					<UnitClassType>UNITCLASS_KNIGHT</UnitClassType>
@@ -1815,6 +2326,209 @@
 			</Leaders>
 			<CivilizationSelectionSound>AS3D_SPAIN_SELECT</CivilizationSelectionSound>
 			<CivilizationActionSound>AS3D_SPAIN_ORDER</CivilizationActionSound>
+		</CivilizationInfo>
+		<CivilizationInfo>
+			<Type>CIVILIZATION_VIKING</Type>
+			<Description>TXT_KEY_CIV_VIKING_DESC</Description>
+			<ShortDescription>TXT_KEY_CIV_VIKING_SHORT_DESC</ShortDescription>
+			<Adjective>TXT_KEY_CIV_VIKING_ADJECTIVE</Adjective>
+			<Civilopedia>TXT_KEY_CHANGED_CIV_VIKING_PEDIA</Civilopedia>
+			<DefaultPlayerColor>PLAYERCOLOR_LIGHT_PURPLE</DefaultPlayerColor>
+			<ArtDefineTag>ART_DEF_CIVILIZATION_VIKINGS</ArtDefineTag>
+			<ArtStyleType>ARTSTYLE_EUROPEAN</ArtStyleType>
+			<bPlayable>1</bPlayable>
+			<bAIPlayable>1</bAIPlayable>
+			<Cities>
+				<City>TXT_KEY_CITY_NAME_NIDAROS</City>
+				<City>TXT_KEY_CITY_NAME_UPPSALA</City>
+				<City>TXT_KEY_CITY_NAME_HAITHABU</City>
+				<City>TXT_KEY_CITY_NAME_BIRKA</City>
+				<City>TXT_KEY_CITY_NAME_BJORGVIN</City>
+				<City>TXT_KEY_CITY_NAME_JELLING</City>
+				<City>TXT_KEY_CITY_NAME_ROSKILDE</City>
+				<City>TXT_KEY_CITY_NAME_TONSBERG</City>
+				<City>TXT_KEY_CITY_NAME_SIGTUNA</City>
+				<City>TXT_KEY_CITY_NAME_LODOSE</City>
+				<City>TXT_KEY_CITY_NAME_ODENSE</City>
+				<City>TXT_KEY_CITY_NAME_OSLO</City>
+				<City>TXT_KEY_CITY_NAME_RIBE</City>
+				<City>TXT_KEY_CITY_NAME_LINDHOLM</City>
+				<City>TXT_KEY_CITY_NAME_VASTERAS</City>
+				<City>TXT_KEY_CITY_NAME_AARHUS</City>
+				<City>TXT_KEY_CITY_NAME_LUND</City>
+				<City>TXT_KEY_CITY_NAME_KAUPANG</City>
+				<City>TXT_KEY_CITY_NAME_REYKJAVIK</City>
+				<City>TXT_KEY_CITY_NAME_THINGVELLIR</City>
+				<City>TXT_KEY_CITY_NAME_JORVIK</City>
+				<City>TXT_KEY_CITY_NAME_LINCOLN</City>
+				<City>TXT_KEY_CITY_NAME_DEORABY</City>
+				<City>TXT_KEY_CITY_NAME_STAMFORD</City>
+				<City>TXT_KEY_CITY_NAME_DYFLIN</City>
+				<City>TXT_KEY_CITY_NAME_VADREJFORD</City>
+				<City>TXT_KEY_CITY_NAME_LIMERICK</City>
+				<City>TXT_KEY_CITY_NAME_ROWANE</City>
+				<City>TXT_KEY_CITY_NAME_KONUGARD</City>
+				<City>TXT_KEY_CITY_NAME_HOLMGARD</City>
+				<City>TXT_KEY_CITY_NAME_ALDEIGJUBORG</City>
+				<City>TXT_KEY_CITY_NAME_KIRKJUVAGR</City>
+				<City>TXT_KEY_CITY_NAME_TYNWALD</City>
+				<City>TXT_KEY_CITY_NAME_LEIRVIK</City>
+				<City>TXT_KEY_CITY_NAME_TINGANES</City>
+				<City>TXT_KEY_CITY_NAME_KIRKJUBOUR</City>
+				<City>TXT_KEY_CITY_NAME_BRATTAHLID</City>
+				<City>TXT_KEY_CITY_NAME_VINLAND</City>
+				<City>TXT_KEY_CITY_NAME_THUNDERFALL</City>
+			</Cities>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_LIGHTHOUSE</BuildingClassType>
+					<BuildingType>BUILDING_VIKING_TRADING_POST</BuildingType>
+				</Building>
+			</Buildings>
+			<Units>
+				<Unit>
+					<UnitClassType>UNITCLASS_MACEMAN</UnitClassType>
+					<UnitType>UNIT_VIKING_BESERKER</UnitType>
+				</Unit>
+			</Units>
+			<FreeUnitClasses>
+				<FreeUnitClass>
+					<UnitClassType>UNITCLASS_SETTLER</UnitClassType>
+					<iFreeUnits>1</iFreeUnits>
+				</FreeUnitClass>
+			</FreeUnitClasses>
+			<FreeBuildingClasses>
+				<FreeBuildingClass>
+					<BuildingClassType>BUILDINGCLASS_PALACE</BuildingClassType>
+					<bFreeBuildingClass>1</bFreeBuildingClass>
+				</FreeBuildingClass>
+			</FreeBuildingClasses>
+			<FreeTechs>
+				<FreeTech>
+					<TechType>TECH_FISHING</TechType>
+					<bFreeTech>1</bFreeTech>
+				</FreeTech>
+				<FreeTech>
+					<TechType>TECH_HUNTING</TechType>
+					<bFreeTech>1</bFreeTech>
+				</FreeTech>
+			</FreeTechs>
+			<DisableTechs/>
+			<InitialCivics>
+				<CivicType>CIVIC_DESPOTISM</CivicType>
+				<CivicType>CIVIC_BARBARISM</CivicType>
+				<CivicType>CIVIC_TRIBALISM</CivicType>
+				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
+				<CivicType>CIVIC_PAGANISM</CivicType>
+			</InitialCivics>
+			<Leaders>
+				<Leader>
+					<LeaderName>LEADER_RAGNAR</LeaderName>
+					<bLeaderAvailability>1</bLeaderAvailability>
+				</Leader>
+			</Leaders>
+			<CivilizationSelectionSound>AS3D_VIKING_SELECT</CivilizationSelectionSound>
+			<CivilizationActionSound>AS3D_VIKING_ORDER</CivilizationActionSound>
+		</CivilizationInfo>
+		<CivilizationInfo>
+			<Type>CIVILIZATION_ZULU</Type>
+			<Description>TXT_KEY_CIV_ZULU_DESC</Description>
+			<ShortDescription>TXT_KEY_CIV_ZULU_SHORT_DESC</ShortDescription>
+			<Adjective>TXT_KEY_CIV_ZULU_ADJECTIVE</Adjective>
+			<Civilopedia>TXT_KEY_CIV_ZULU_PEDIA</Civilopedia>
+			<DefaultPlayerColor>PLAYERCOLOR_LIGHT_YELLOW</DefaultPlayerColor>
+			<ArtDefineTag>ART_DEF_CIVILIZATION_ZULU</ArtDefineTag>
+			<ArtStyleType>ARTSTYLE_MIDDLE_EAST</ArtStyleType>
+			<bPlayable>1</bPlayable>
+			<bAIPlayable>1</bAIPlayable>
+			<Cities>
+				<City>TXT_KEY_CITY_NAME_ULUNDI</City>
+				<City>TXT_KEY_CITY_NAME_UMGUNGUNDLOVU</City>
+				<City>TXT_KEY_CITY_NAME_NOBAMBA</City>
+				<City>TXT_KEY_CITY_NAME_BULAWAYO</City>
+				<City>TXT_KEY_CITY_NAME_KWADUKUZA</City>
+				<City>TXT_KEY_CITY_NAME_NONGOMA</City>
+				<City>TXT_KEY_CITY_NAME_ONDINI</City>
+				<City>TXT_KEY_CITY_NAME_NODWENGU</City>
+				<City>TXT_KEY_CITY_NAME_NDONDAKUSUKA</City>
+				<City>TXT_KEY_CITY_NAME_BABANANGO</City>
+				<City>TXT_KEY_CITY_NAME_KHANGELA</City>
+				<City>TXT_KEY_CITY_NAME_KWAHLOMENDLINI</City>
+				<City>TXT_KEY_CITY_NAME_HLOBANE</City>
+				<City>TXT_KEY_CITY_NAME_ETHEKWINI</City>
+				<City>TXT_KEY_CITY_NAME_MLAMBONGWENYA</City>
+				<City>TXT_KEY_CITY_NAME_EZIQWAQWENI</City>
+				<City>TXT_KEY_CITY_NAME_EMANGWENI</City>
+				<City>TXT_KEY_CITY_NAME_ISIPHEZI</City>
+				<City>TXT_KEY_CITY_NAME_MASOTSHENI</City>
+				<City>TXT_KEY_CITY_NAME_MTUNZINI</City>
+				<City>TXT_KEY_CITY_NAME_NYAKAMUBI</City>
+				<City>TXT_KEY_CITY_NAME_DUMAZULU</City>
+				<City>TXT_KEY_CITY_NAME_HLATIKULU</City>
+				<City>TXT_KEY_CITY_NAME_MTHONJANENI</City>
+				<City>TXT_KEY_CITY_NAME_EMPANGENI</City>
+				<City>TXT_KEY_CITY_NAME_PONGOLA</City>
+				<City>TXT_KEY_CITY_NAME_TUNGELA</City>
+				<City>TXT_KEY_CITY_NAME_KWAMASHU</City>
+				<City>TXT_KEY_CITY_NAME_INGWAVUMA</City>
+				<City>TXT_KEY_CITY_NAME_HLUHLUWE</City>
+				<City>TXT_KEY_CITY_NAME_MTUBATUBA</City>
+				<City>TXT_KEY_CITY_NAME_MHLAHLANDLELA</City>
+				<City>TXT_KEY_CITY_NAME_MTHATHA</City>
+				<City>TXT_KEY_CITY_NAME_MASERU</City>
+				<City>TXT_KEY_CITY_NAME_LOBAMBA</City>
+				<City>TXT_KEY_CITY_NAME_QUNU</City>
+			</Cities>
+			<Buildings>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_BARRACKS</BuildingClassType>
+					<BuildingType>BUILDING_ZULU_IKHANDA</BuildingType>
+				</Building>
+			</Buildings>
+			<Units>
+				<Unit>
+					<UnitClassType>UNITCLASS_SPEARMAN</UnitClassType>
+					<UnitType>UNIT_ZULU_IMPI</UnitType>
+				</Unit>
+			</Units>
+			<FreeUnitClasses>
+				<FreeUnitClass>
+					<UnitClassType>UNITCLASS_SETTLER</UnitClassType>
+					<iFreeUnits>1</iFreeUnits>
+				</FreeUnitClass>
+			</FreeUnitClasses>
+			<FreeBuildingClasses>
+				<FreeBuildingClass>
+					<BuildingClassType>BUILDINGCLASS_PALACE</BuildingClassType>
+					<bFreeBuildingClass>1</bFreeBuildingClass>
+				</FreeBuildingClass>
+			</FreeBuildingClasses>
+			<FreeTechs>
+				<FreeTech>
+					<TechType>TECH_AGRICULTURE</TechType>
+					<bFreeTech>1</bFreeTech>
+				</FreeTech>
+				<FreeTech>
+					<TechType>TECH_HUNTING</TechType>
+					<bFreeTech>1</bFreeTech>
+				</FreeTech>
+			</FreeTechs>
+			<DisableTechs/>
+			<InitialCivics>
+				<CivicType>CIVIC_DESPOTISM</CivicType>
+				<CivicType>CIVIC_BARBARISM</CivicType>
+				<CivicType>CIVIC_TRIBALISM</CivicType>
+				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
+				<CivicType>CIVIC_PAGANISM</CivicType>
+			</InitialCivics>
+			<Leaders>
+				<Leader>
+					<LeaderName>LEADER_SHAKA</LeaderName>
+					<bLeaderAvailability>1</bLeaderAvailability>
+				</Leader>
+			</Leaders>
+			<CivilizationSelectionSound>AS3D_ZULU_SELECT</CivilizationSelectionSound>
+			<CivilizationActionSound>AS3D_ZULU_ORDER</CivilizationActionSound>
 		</CivilizationInfo>
 		<CivilizationInfo>
 			<Type>CIVILIZATION_MINOR</Type>
@@ -2310,6 +3024,30 @@
 					<BuildingClassType>BUILDINGCLASS_SPACE_ELEVATOR</BuildingClassType>
 					<BuildingType>NONE</BuildingType>
 				</Building>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_COLOSSUS</BuildingClassType>
+					<BuildingType>BUILDING_COLOSSUS</BuildingType>
+				</Building>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_HANGING_GARDEN</BuildingClassType>
+					<BuildingType>BUILDING_HANGING_GARDEN</BuildingType>
+				</Building>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_PYRAMID</BuildingClassType>
+					<BuildingType>BUILDING_PYRAMID</BuildingType>
+				</Building>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_GREAT_WALL</BuildingClassType>
+					<BuildingType>BUILDING_GREAT_WALL</BuildingType>
+				</Building>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_SANKORE</BuildingClassType>
+					<BuildingType>BUILDING_SANKORE</BuildingType>
+				</Building>
+				<Building>
+					<BuildingClassType>BUILDINGCLASS_ARTEMIS</BuildingClassType>
+					<BuildingType>BUILDING_ARTEMIS</BuildingType>
+				</Building>
 			</Buildings>
 			<Units>
 				<Unit>
@@ -2421,6 +3159,10 @@
 					<UnitType>NONE</UnitType>
 				</Unit>
 				<Unit>
+					<UnitClassType>UNITCLASS_TREBUCHET</UnitClassType>
+					<UnitType>NONE</UnitType>
+				</Unit>
+				<Unit>
 					<UnitClassType>UNITCLASS_CANNON</UnitClassType>
 					<UnitType>NONE</UnitType>
 				</Unit>
@@ -2434,6 +3176,10 @@
 				</Unit>
 				<Unit>
 					<UnitClassType>UNITCLASS_WORKBOAT</UnitClassType>
+					<UnitType>NONE</UnitType>
+				</Unit>
+				<Unit>
+					<UnitClassType>UNITCLASS_TRIREME</UnitClassType>
 					<UnitType>NONE</UnitType>
 				</Unit>
 				<Unit>

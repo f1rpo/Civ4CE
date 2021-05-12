@@ -344,9 +344,7 @@ def handleProfilesDropdownInput ( argsList ):
 def handleNewProfileButtonInput ( argsList ):
 	"Handles New Profile Button clicked input"
 	szName = argsList
-	
-	saveProfile()
-	
+		
 	szNewProfileName = getOptionsScreen().getProfileEditCtrlText()
 	szNarrow = szNewProfileName.encode("latin_1")
 	UserProfile.setProfileName(szNarrow)

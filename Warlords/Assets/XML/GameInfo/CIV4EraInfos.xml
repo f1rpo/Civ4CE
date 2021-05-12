@@ -4,6 +4,14 @@
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
 <!-- EraInfo - This structure describes the name and soundtracks for each era. -->
+<!-- -->
+<!-- MODDERS: Removing ERA's can cause problems if you are not careful. If you must remove them, you need to do the following: -->
+<!-- 1. Clean up the references to the ERA's in CIV4BuildingInfos -->
+<!-- 2. Clean up the references to the ERA's in CIV4TechInfos -->
+<!-- 3. Clean up the references to the ERA's in CIV4LeaderHeadInfos -->
+<!-- 4. Clean up the references to the ERA's in CIV4CityLSystem -->
+<!-- 5. Clean up the references to the ERA's in CIV4PlotLSystem -->
+<!-- Good luck! -->
 <Civ4EraInfos xmlns="x-schema:CIV4GameInfoSchema.xml">
 	<EraInfos>
 		<EraInfo>
@@ -32,7 +40,13 @@
 			<iCulturePercent>100</iCulturePercent>
 			<iAnarchyPercent>50</iAnarchyPercent>
 			<iSoundtrackSpace>0</iSoundtrackSpace>
-			<EraInfoSoundtracks/>
+			<bFirstSoundtrackFirst>0</bFirstSoundtrackFirst>
+			<EraInfoSoundtracks>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_1</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_2</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_3</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_4</EraInfoSoundtrack>
+			</EraInfoSoundtracks>
 			<CitySoundscapes>
 				<CitySoundscape>
 					<CitySizeType>CITYSIZE_SMALL</CitySizeType>
@@ -76,11 +90,27 @@
 			<iCulturePercent>100</iCulturePercent>
 			<iAnarchyPercent>50</iAnarchyPercent>
 			<iSoundtrackSpace>400</iSoundtrackSpace>
+			<bFirstSoundtrackFirst>0</bFirstSoundtrackFirst>
 			<EraInfoSoundtracks>
-				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_1</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_2</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_3</EraInfoSoundtrack>
-				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_4</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_ALEXANDER</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_VIKING</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_ROME</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_PELOPONNESIAN</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_CIV_III_MID_ROME</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_CIV_III_ANC_EUROPE</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_CIV_III_ANC_ROME</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_CIV_III_MID_EUROPE</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_CIV_III_MOD_CELTIC</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_CONQUESTS_FANTASY1</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_CONQUESTS_FANTASY2</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_CONQUESTS_ROMAN</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_DIP_EC_EARLY_PEACE</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_DIP_EC_EARLY_WAR</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_DIP_EU_LATE_PEACE</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_DIP_EU_LATE_WAR</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_DIP_GR_EARLY_PEACE</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_BARBARIAN</EraInfoSoundtrack>
+				<EraInfoSoundtrack>AS2D_SONG_DIP_GR_EARLY_WAR</EraInfoSoundtrack>
 			</EraInfoSoundtracks>
 			<CitySoundscapes>
 				<CitySoundscape>
@@ -125,6 +155,7 @@
 			<iCulturePercent>100</iCulturePercent>
 			<iAnarchyPercent>40</iAnarchyPercent>
 			<iSoundtrackSpace>200</iSoundtrackSpace>
+			<bFirstSoundtrackFirst>0</bFirstSoundtrackFirst>
 			<EraInfoSoundtracks>
 				<EraInfoSoundtrack>AS2D_ALLEGRI_MISERERE</EraInfoSoundtrack>
 				<EraInfoSoundtrack>AS2D_ANONYMOUS_AY_SANTA_MARIA</EraInfoSoundtrack>
@@ -190,6 +221,7 @@
 			<iCulturePercent>90</iCulturePercent>
 			<iAnarchyPercent>40</iAnarchyPercent>
 			<iSoundtrackSpace>160</iSoundtrackSpace>
+			<bFirstSoundtrackFirst>0</bFirstSoundtrackFirst>
 			<EraInfoSoundtracks>
 				<EraInfoSoundtrack>AS2D_BACH_ALLEGRO</EraInfoSoundtrack>
 				<EraInfoSoundtrack>AS2D_BACH_ALLEGRO_ASSAI</EraInfoSoundtrack>
@@ -254,6 +286,7 @@
 			<iCulturePercent>80</iCulturePercent>
 			<iAnarchyPercent>34</iAnarchyPercent>
 			<iSoundtrackSpace>120</iSoundtrackSpace>
+			<bFirstSoundtrackFirst>0</bFirstSoundtrackFirst>
 			<EraInfoSoundtracks>
 				<EraInfoSoundtrack>AS2D_BEETHOVEN_5_2</EraInfoSoundtrack>
 				<EraInfoSoundtrack>AS2D_BEETHOVEN_6_1</EraInfoSoundtrack>
@@ -315,6 +348,7 @@
 			<iCulturePercent>70</iCulturePercent>
 			<iAnarchyPercent>34</iAnarchyPercent>
 			<iSoundtrackSpace>80</iSoundtrackSpace>
+			<bFirstSoundtrackFirst>0</bFirstSoundtrackFirst>
 			<EraInfoSoundtracks>
 				<EraInfoSoundtrack>AS2D_ANFORTAS_WOUND</EraInfoSoundtrack>
 				<EraInfoSoundtrack>AS2D_CHAIRMAN_DANCES</EraInfoSoundtrack>
@@ -374,6 +408,7 @@
 			<iCulturePercent>60</iCulturePercent>
 			<iAnarchyPercent>34</iAnarchyPercent>
 			<iSoundtrackSpace>40</iSoundtrackSpace>
+			<bFirstSoundtrackFirst>0</bFirstSoundtrackFirst>
 			<EraInfoSoundtracks>
 				<EraInfoSoundtrack>AS2D_ANFORTAS_WOUND</EraInfoSoundtrack>
 				<EraInfoSoundtrack>AS2D_CHAIRMAN_DANCES</EraInfoSoundtrack>

@@ -23,7 +23,7 @@ public:
 	bool isNone() { return (m_pCity==NULL); }
 	void kill();
 
-	void createGreatPeople(int /*UnitTypes*/ eGreatPersonUnit, bool bIncrementThreshold);
+	void createGreatPeople(int /*UnitTypes*/ eGreatPersonUnit, bool bIncrementThreshold, bool bIncrementExperience);
 	
 	void doTask(int /*TaskTypes*/ eTask, int iData1, int iData2, bool bOption);
 	void chooseProduction(int /*UnitTypes*/ eTrainUnit, int /*BuildingTypes*/ eConstructBuilding, int /*ProjectTypes*/ eCreateProject, bool bFinish, bool bFront);
@@ -116,7 +116,7 @@ public:
 	bool isVisible(int /*TeamTypes*/ eTeam, bool bDebug);
 
 	bool isCapital();
-	bool isCoastal();
+	bool isCoastal(int iMinWaterSize);
 	bool isDisorder();
 	bool isHolyCityByType(int /*ReligionTypes*/ iIndex);
 	bool isHolyCity();
@@ -192,11 +192,15 @@ public:
 	int getNumNationalWonders();
 	int getNumBuildings();
 	bool isGovernmentCenter();
-	int getMaintenance();
-	int calculateDistanceMaintenance();														 
-	int calculateNumCitiesMaintenance();													 
+	int getMaintenance() const;
+	int getMaintenanceTimes100() const;
+	int calculateDistanceMaintenance() const;														 
+	int calculateDistanceMaintenanceTimes100() const;														 
+	int calculateNumCitiesMaintenance() const;													 
+	int calculateNumCitiesMaintenanceTimes100() const;													 
 	int getMaintenanceModifier();
 	int getWarWearinessModifier();
+	int getHurryAngerModifier();
 	void changeHealRate(int iChange);
 	int getFreshWaterGoodHealth();
 	int getFreshWaterBadHealth();
@@ -241,11 +245,14 @@ public:
 	int getMaxFoodKeptPercent();
 	int getOverflowProduction();
 	void setOverflowProduction(int iNewValue);
+	int getFeatureProduction();
+	void setFeatureProduction(int iNewValue);
 	int getMilitaryProductionModifier();
 	int getSpaceProductionModifier();
 	int getExtraTradeRoutes();
 	int getTradeRouteModifier();
 	int getBuildingDefense();
+	int getBuildingBombardDefense();
 	int getFreeExperience();
 	int getCurrAirlift();
 	int getMaxAirlift();
@@ -304,8 +311,10 @@ public:
 	int getExtraSpecialistYieldOfType(int /*YieldTypes*/ eIndex, int /*SpecialistTypes*/ eSpecialist);
 
 	int getCommerceRate(int /*CommerceTypes*/ eIndex);
+	int getCommerceRateTimes100(int /*CommerceTypes*/ eIndex);
 	int getCommerceFromPercent(int /*CommerceTypes*/ eIndex, int iYieldRate);
 	int getBaseCommerceRate(int /*CommerceTypes*/ eIndex);
+	int getBaseCommerceRateTimes100(int /*CommerceTypes*/ eIndex);
 	int getTotalCommerceRateModifier(int /*CommerceTypes*/ eIndex);
 	int getProductionToCommerceModifier(int /*CommerceTypes*/ eIndex);
 	int getBuildingCommerce(int /*CommerceTypes*/ eIndex);
@@ -321,12 +330,15 @@ public:
 	int getDomainFreeExperience(int /*DomainTypes*/ eIndex);
 	int getDomainProductionModifier(int /*DomainTypes*/ eIndex);
 	int getCulture(int /*PlayerTypes*/ eIndex);
-	int countTotalCulture();
+	int getCultureTimes100(int /*PlayerTypes*/ eIndex);
+	int countTotalCultureTimes100();
 	PlayerTypes findHighestCulture();
 	int calculateCulturePercent(int eIndex);
 	int calculateTeamCulturePercent(int /*TeamTypes*/ eIndex);
 	void setCulture(int /*PlayerTypes*/ eIndex, int iNewValue, bool bPlots);
+	void setCultureTimes100(int /*PlayerTypes*/ eIndex, int iNewValue, bool bPlots);
 	void changeCulture(int /*PlayerTypes*/ eIndex, int iChange, bool bPlots);
+	void changeCultureTimes100(int /*PlayerTypes*/ eIndex, int iChange, bool bPlots);
 
 	bool isTradeRoute(int /*PlayerTypes*/ eIndex);
 	bool isEverOwned(int /*PlayerTypes*/ eIndex);
@@ -376,6 +388,7 @@ public:
 	int getUnitCombatFreeExperience(int /*UnitCombatTypes*/ eIndex);	
 	int getFreePromotionCount(int /*PromotionTypes*/ eIndex);	
 	bool isFreePromotion(int /*PromotionTypes*/ eIndex);
+	int getSpecialistFreeExperience() const;	
 
 	bool isWorkingPlotByIndex(int iIndex);
 	bool isWorkingPlot(CyPlot* pPlot);

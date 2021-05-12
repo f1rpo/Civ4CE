@@ -79,7 +79,7 @@ public:
 	DllExport bool canDoControl(ControlTypes eControl);
 	DllExport void doControl(ControlTypes eControl);
 
-	DllExport void implementDeal(PlayerTypes eWho, PlayerTypes eOtherWho, CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirList);
+	DllExport void implementDeal(PlayerTypes eWho, PlayerTypes eOtherWho, CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirList, bool bForce = false);
 	DllExport void verifyDeals();
 
 	DllExport void getGlobeviewConfigurationParameters(TeamTypes eTeam, bool& bStarsVisible, bool& bWorldIsRound);
@@ -221,8 +221,8 @@ public:
 	DllExport int getInitWonders() const;																		// Exposed to Python
 	DllExport void initScoreCalculation();
 
-	DllExport int getAIAutoPlay();
-	DllExport void setAIAutoPlay(int iNewValue);
+	DllExport int getAIAutoPlay();																				// Exposed to Python
+	DllExport void setAIAutoPlay(int iNewValue);																// Exposed to Python
 	DllExport void changeAIAutoPlay(int iChange);
 
 	DllExport unsigned int getInitialTime();
@@ -374,6 +374,9 @@ public:
 	DllExport bool isDestroyedCityName(CvWString& szName) const;													
 	DllExport void addDestroyedCityName(const CvWString& szName);													
 																																												
+	DllExport bool isGreatPersonBorn(CvWString& szName) const;													
+	DllExport void addGreatPersonBornName(const CvWString& szName);													
+
 	DllExport int getIndexAfterLastDeal();																								// Exposed to Python	
 	DllExport int getNumDeals();																													// Exposed to Python	
 	DllExport CvDeal* getDeal(int iID);																										// Exposed to Python	
@@ -467,13 +470,13 @@ protected:
 
 	CvString m_szScriptData;
 
-	int m_aiEndTurnMessagesReceived[MAX_PLAYERS];
-	int m_aiRankPlayer[MAX_PLAYERS];        // Ordered by rank...
-	int m_aiPlayerRank[MAX_PLAYERS];        // Ordered by player ID...
-	int m_aiPlayerScore[MAX_PLAYERS];       // Ordered by player ID...
-	int m_aiRankTeam[MAX_TEAMS];						// Ordered by rank...
-	int m_aiTeamRank[MAX_TEAMS];						// Ordered by team ID...
-	int m_aiTeamScore[MAX_TEAMS];						// Ordered by team ID...
+	int* m_aiEndTurnMessagesReceived;
+	int* m_aiRankPlayer;        // Ordered by rank...
+	int* m_aiPlayerRank;        // Ordered by player ID...
+	int* m_aiPlayerScore;       // Ordered by player ID...
+	int* m_aiRankTeam;						// Ordered by rank...
+	int* m_aiTeamRank;						// Ordered by team ID...
+	int* m_aiTeamScore;						// Ordered by team ID...
 
 	int* m_paiUnitCreatedCount;
 	int* m_paiUnitClassCreatedCount;
@@ -489,9 +492,11 @@ protected:
 
 	IDInfo* m_paHolyCity;
 
-	int* m_apaiPlayerVote[MAX_CIV_PLAYERS];
+	int** m_apaiPlayerVote;
 
-	CLinkList<CvWString> m_destroyedCities;
+	std::vector<CvWString> m_aszDestroyedCities;
+	std::vector<CvWString> m_aszGreatPeopleBorn;
+
 
 	FFreeListTrashArray<CvDeal> m_deals;
 

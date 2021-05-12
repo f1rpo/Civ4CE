@@ -47,6 +47,7 @@ public:
 	std::wstring getAttitudeString(int iPlayer, int iTargetPlayer);
 	std::wstring setConvertHelp(int iPlayer, int iReligion);
 	std::wstring setRevolutionHelp(int iPlayer);
+	std::wstring setVassalRevoltHelp(int iMaster, int iVassal);
 	std::wstring getActiveDealsString(int iThisPlayer, int iOtherPlayer);
 	std::wstring getDealString(CyDeal* pDeal, int iPlayerPerspective);
 

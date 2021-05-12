@@ -152,6 +152,7 @@ public:
 	DllExport CvStatsReporter* getStatsReporterPtr();
 	DllExport CvInterface& getInterface();
 	DllExport CvInterface* getInterfacePtr();
+	DllExport int getMaxCivPlayers() const;
 #ifdef _USRDLL
 	CvMap& getMapINLINE() { return *m_map; }				// inlined for perf reasons, do not use outside of dll
 	CvGameAI& getGameINLINE() { return *m_game; }			// inlined for perf reasons, do not use outside of dll
@@ -733,6 +734,22 @@ public:
 	DllExport void setAreaFinder(FAStar* pVal);
 	DllExport void setPlotGroupFinder(FAStar* pVal);
 
+	// So that CvEnums are moddable in the DLL
+	DllExport int getNumDirections() const;
+	DllExport int getNumGameOptions() const;
+	DllExport int getNumMPOptions() const;
+	DllExport int getNumSpecialOptions() const;
+	DllExport int getNumGraphicOptions() const;
+	DllExport int getNumTradeableItems() const;
+	DllExport int getNumBasicItems() const;
+	DllExport int getNumTradeableHeadings() const;
+	DllExport int getNumCommandInfos() const;
+	DllExport int getNumControlInfos() const;
+	DllExport int getNumMissionInfos() const;
+	DllExport int getNumPlayerOptionInfos() const;
+	DllExport int getMaxNumSymbols() const;
+	DllExport int getNumGraphicLevels() const;
+
 protected:
 
 	bool m_bGraphicsInitialized;
@@ -1158,7 +1175,7 @@ inline CvGlobals& CvGlobals::getInstance()
 
 
 //
-// helper
+// helpers
 //
 #define GC CvGlobals::getInstance()
 #ifndef _USRDLL
@@ -1166,4 +1183,22 @@ inline CvGlobals& CvGlobals::getInstance()
 #else
 #define gDLL GC.getDLLIFace()
 #endif
+
+#ifndef _USRDLL
+#define NUM_DIRECTION_TYPES (GC.getNumDirections())
+#define NUM_GAMEOPTION_TYPES (GC.getNumGameOptions())
+#define NUM_MPOPTION_TYPES (GC.getNumMPOptions())
+#define NUM_SPECIALOPTION_TYPES (GC.getNumSpecialOptions())
+#define NUM_GRAPHICOPTION_TYPES (GC.getNumGraphicOptions())
+#define NUM_TRADEABLE_ITEMS (GC.getNumTradeableItems())
+#define NUM_BASIC_ITEMS (GC.getNumBasicItems())
+#define NUM_TRADEABLE_HEADINGS (GC.getNumTradeableHeadings())
+#define NUM_COMMAND_TYPES (GC.getNumCommandInfos())
+#define NUM_CONTROL_TYPES (GC.getNumControlInfos())
+#define NUM_MISSION_TYPES (GC.getNumMissionInfos())
+#define NUM_PLAYEROPTION_TYPES (GC.getNumPlayerOptionInfos())
+#define MAX_NUM_SYMBOLS (GC.getMaxNumSymbols())
+#define NUM_GRAPHICLEVELS (GC.getNumGraphicLevels())
+#endif
+
 #endif

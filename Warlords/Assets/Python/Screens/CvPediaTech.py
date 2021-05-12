@@ -277,7 +277,7 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 		iSelected = 0			
 		i = 0
 		for iI in range(gc.getNumTechInfos()):
-			if (not gc.getTechInfo(iI).isGraphicalOnly()): 
+			if (not gc.getTechInfo(techsList[iI][1]).isGraphicalOnly()): 
 				if bRedraw:
 					screen.appendListBoxString(self.top.LIST_ID, techsList[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, techsList[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
 				if techsList[iI][1] == self.iTech:

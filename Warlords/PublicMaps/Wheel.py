@@ -15,6 +15,9 @@ import math
 from CvMapGeneratorUtil import MultilayeredFractal
 from CvMapGeneratorUtil import TerrainGenerator
 from CvMapGeneratorUtil import FeatureGenerator
+from CvMapGeneratorUtil import BonusBalancer
+
+balancer = BonusBalancer()
 
 def getDescription():
 	return "TXT_KEY_MAP_SCRIPT_WHEEL_DESCR"
@@ -23,8 +26,11 @@ def getNumCustomMapOptions():
 	"""
 	Number of different user-defined options for this map
 	"""
-	return 4
+	return 6
 	
+def getNumHiddenCustomMapOptions():
+	return 2
+
 def getCustomMapOptionName(argsList):
 	"""
 	Returns name of specified option
@@ -35,7 +41,9 @@ def getCustomMapOptionName(argsList):
 		0:	"TXT_KEY_MAP_SCRIPT_AREAS_PER_PLAYER",
 		1:	"TXT_KEY_MAP_SCRIPT_LAND_SHAPE",
 		2:	"TXT_KEY_MAP_SCRIPT_RING_WIDTH",
-		3:	"TXT_KEY_MAP_SCRIPT_SPOKE_WIDTH"
+		3:	"TXT_KEY_MAP_SCRIPT_SPOKE_WIDTH",
+		4:  "TXT_KEY_MAP_WORLD_WRAP",
+		5:  "TXT_KEY_CONCEPT_RESOURCES"
 		}
 	translated_text = unicode(CyTranslator().getText(option_names[iOption], ()))
 	return translated_text
@@ -46,7 +54,9 @@ def getNumCustomMapOptionValues(argsList):
 		0:	2,
 		1:	3,
 		2:	3,
-		3:	3
+		3:	3,
+		4:  3,
+		5:  2
 		}
 	return option_values[iOption]
 	
@@ -71,6 +81,15 @@ def getCustomMapOptionDescAt(argsList):
 			0: "TXT_KEY_MAP_SCRIPT_1_PLOT_WIDE",
 			1: "TXT_KEY_MAP_SCRIPT_2_PLOTS_WIDE",
 			2: "TXT_KEY_MAP_SCRIPT_3_PLOTS_WIDE"
+			},
+		4:	{
+			0: "TXT_KEY_MAP_WRAP_FLAT",
+			1: "TXT_KEY_MAP_WRAP_CYLINDER",
+			2: "TXT_KEY_MAP_WRAP_TOROID"
+			},
+		5:	{
+			0: "TXT_KEY_WORLD_STANDARD",
+			1: "TXT_KEY_MAP_BALANCED"
 			}
 		}
 	translated_text = unicode(CyTranslator().getText(selection_names[iOption][iSelection], ()))
@@ -82,14 +101,47 @@ def getCustomMapOptionDefault(argsList):
 		0:	0,
 		1:	-1,
 		2:	1,
-		3:	1
+		3:	1,
+		4:  0,
+		5:  0
 		}
 	return option_defaults[iOption]
 
 def getWrapX():
-	return False
+	map = CyMap()
+	return (map.getCustomMapOption(4) == 1 or map.getCustomMapOption(4) == 2)
+	
 def getWrapY():
-	return False
+	map = CyMap()
+	return (map.getCustomMapOption(4) == 2)
+
+def isRandomCustomMapOption(argsList):
+	[iOption] = argsList
+	option_random = {
+		0:	true,
+		1:	true,
+		2:	true,
+		3:	true,
+		4:  false,
+		5:  false
+		}
+	return option_random[iOption]
+
+def normalizeAddExtras():
+	if (CyMap().getCustomMapOption(5) == 1):
+		balancer.normalizeAddExtras()
+	CyPythonMgr().allowDefaultImpl()	# do the rest of the usual normalizeStartingPlots stuff, don't overrride
+
+def addBonusType(argsList):
+	[iBonusType] = argsList
+	gc = CyGlobalContext()
+	type_string = gc.getBonusInfo(iBonusType).getType()
+
+	if (CyMap().getCustomMapOption(5) == 1):
+		if (type_string in balancer.resourcesToBalance) or (type_string in balancer.resourcesToEliminate):
+			return None # don't place any of this bonus randomly
+		
+	CyPythonMgr().allowDefaultImpl() # pretend we didn't implement this method, and let C handle this bonus in the default way
 
 def isBonusIgnoreLatitude():
 	return True

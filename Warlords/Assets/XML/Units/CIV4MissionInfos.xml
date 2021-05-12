@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Bart Muzzin (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Jon Shafer (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -65,7 +65,7 @@
 			<Description>TXT_KEY_MISSION_SLEEP</Description>
 			<Help>TXT_KEY_MISSION_SLEEP_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_SLEEP</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_SLEEP</EntityEventType>
 			<iTime>0</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -89,7 +89,7 @@
 			<Description>TXT_KEY_MISSION_FORTIFY</Description>
 			<Help>TXT_KEY_MISSION_FORTIFY_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_FORTIFY</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_FORTIFY</EntityEventType>
 			<iTime>0</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -113,7 +113,7 @@
 			<Description>TXT_KEY_MISSION_INTERCEPT</Description>
 			<Help>TXT_KEY_MISSION_INTERCEPT_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_AIRPATROL</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_AIRPATROL</EntityEventType>
 			<iTime>0</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -137,7 +137,7 @@
 			<Description>TXT_KEY_MISSION_HEAL</Description>
 			<Help>TXT_KEY_MISSION_HEAL_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_HEAL</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_HEAL</EntityEventType>
 			<iTime>0</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -161,7 +161,7 @@
 			<Description>TXT_KEY_MISSION_SENTRY</Description>
 			<Help>TXT_KEY_MISSION_SENTRY_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_SENTRY</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_SENTRY</EntityEventType>
 			<iTime>0</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -191,7 +191,7 @@
 			<Description>TXT_KEY_MISSION_NUKE</Description>
 			<Help>TXT_KEY_MISSION_NUKE_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_NUKE</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_NUKE</EntityEventType>
 			<iTime>40</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -203,7 +203,7 @@
 			<Description>TXT_KEY_MISSION_RECON</Description>
 			<Help>TXT_KEY_MISSION_RECON_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_AIRRECON</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_AIRRECON</EntityEventType>
 			<iTime>20</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -215,7 +215,7 @@
 			<Description>TXT_KEY_MISSION_AIRBOMB</Description>
 			<Help>TXT_KEY_MISSION_AIRBOMB_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_AIRBOMB</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_AIRBOMB</EntityEventType>
 			<iTime>20</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -227,7 +227,7 @@
 			<Description>TXT_KEY_MISSION_BOMBARD</Description>
 			<Help>TXT_KEY_MISSION_BOMBARD_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_BOMBARD</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_BOMBARD</EntityEventType>
 			<iTime>16</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -250,7 +250,7 @@
 			<Description>TXT_KEY_MISSION_PILLAGE</Description>
 			<Help>TXT_KEY_MISSION_PILLAGE_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_PILLAGE</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_PILLAGE</EntityEventType>
 			<iTime>10</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -273,7 +273,7 @@
 			<Description>TXT_KEY_MISSION_SABOTAGE</Description>
 			<Help>TXT_KEY_MISSION_SABOTAGE_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_SABOTAGE</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_SABOTAGE</EntityEventType>
 			<iTime>20</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -296,7 +296,7 @@
 			<Description>TXT_KEY_MISSION_DESTROY</Description>
 			<Help>TXT_KEY_MISSION_DESTROY_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_DESTROY</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_DESTROY</EntityEventType>
 			<iTime>20</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -319,7 +319,7 @@
 			<Description>TXT_KEY_MISSION_STEAL_PLANS</Description>
 			<Help>TXT_KEY_MISSION_STEAL_PLANS_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_STEAL_PLANS</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_STEAL_PLANS</EntityEventType>
 			<iTime>20</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -342,7 +342,7 @@
 			<Description>TXT_KEY_MISSION_BUILD_CITY</Description>
 			<Help>TXT_KEY_MISSION_BUILD_CITY_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_FOUND</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_FOUND</EntityEventType>
 			<iTime>10</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -365,7 +365,7 @@
 			<Description>TXT_KEY_MISSION_SPREAD</Description>
 			<Help>TXT_KEY_MISSION_SPREAD_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_GREAT_EVENT</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_GREAT_EVENT</EntityEventType>
 			<iTime>16</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -376,7 +376,7 @@
 			<Description>TXT_KEY_MISSION_JOIN_CITY</Description>
 			<Help>TXT_KEY_MISSION_JOIN_CITY_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_GREAT_EVENT</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_GREAT_EVENT</EntityEventType>
 			<iTime>18</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -387,7 +387,7 @@
 			<Description>TXT_KEY_MISSION_CONSTRUCT</Description>
 			<Help>TXT_KEY_MISSION_CONSTRUCT_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_GREAT_EVENT</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_GREAT_EVENT</EntityEventType>
 			<iTime>18</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -398,7 +398,7 @@
 			<Description>TXT_KEY_MISSION_DISCOVER_TECH</Description>
 			<Help>TXT_KEY_MISSION_DISCOVER_TECH_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_GREAT_EVENT</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_GREAT_EVENT</EntityEventType>
 			<iTime>18</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -421,7 +421,7 @@
 			<Description>TXT_KEY_MISSION_HURRY_PRODUCTION</Description>
 			<Help>TXT_KEY_MISSION_HURRY_PRODUCTION_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_GREAT_EVENT</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_GREAT_EVENT</EntityEventType>
 			<iTime>18</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -444,7 +444,7 @@
 			<Description>TXT_KEY_MISSION_CONDUCT_TRADE_MISSION</Description>
 			<Help>TXT_KEY_MISSION_CONDUCT_TRADE_MISSION_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_GREAT_EVENT</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_GREAT_EVENT</EntityEventType>
 			<iTime>18</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -467,7 +467,7 @@
 			<Description>TXT_KEY_MISSION_CREATE_GREAT_WORK</Description>
 			<Help>TXT_KEY_MISSION_CREATE_GREAT_WORK_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_GREAT_EVENT</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_GREAT_EVENT</EntityEventType>
 			<iTime>18</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -490,7 +490,7 @@
 			<Description>TXT_KEY_MISSION_START_GOLDENAGE</Description>
 			<Help>TXT_KEY_MISSION_START_GOLDENAGE_HELP</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_GREAT_EVENT</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_GREAT_EVENT</EntityEventType>
 			<iTime>18</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -518,13 +518,36 @@
 			<bBuild>1</bBuild>
 			<bSound>1</bSound>
 		</MissionInfo>
+		<MissionInfo>
+			<Type>MISSION_LEAD</Type>
+			<Description>TXT_KEY_MISSION_LEAD_TROOPS</Description>
+			<Help/>
+			<Waypoint>NONE</Waypoint>
+			<EntityEventType>ENTITY_EVENT_GREAT_EVENT</EntityEventType>
+			<iTime>14</iTime>
+			<bTarget>0</bTarget>
+			<bBuild>0</bBuild>
+			<bSound>0</bSound>
+			<HotKey/>
+			<bAltDown>0</bAltDown>
+			<bShiftDown>0</bShiftDown>
+			<bCtrlDown>0</bCtrlDown>
+			<iHotKeyPriority>0</iHotKeyPriority>
+			<HotKeyAlt/>
+			<bAltDownAlt>0</bAltDownAlt>
+			<bShiftDownAlt>0</bShiftDownAlt>
+			<bCtrlDownAlt>0</bCtrlDownAlt>
+			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
+			<bVisible>1</bVisible>
+			<Button>,Art/Interface/Buttons/TechTree/Nationalism.dds,Art/Interface/Buttons/Warlords_Atlas_1.dds,5,10</Button>
+		</MissionInfo>
 		<!--The following missions are simply to link to entity events-->
 		<MissionInfo>
 			<Type>MISSION_BEGIN_COMBAT</Type>
 			<Description>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Description>
 			<Help>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_BEGIN_COMBAT</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_BEGIN_COMBAT</EntityEventType>
 			<iTime>0</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -535,7 +558,7 @@
 			<Description>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Description>
 			<Help>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_END_COMBAT</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_END_COMBAT</EntityEventType>
 			<iTime>0</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -546,7 +569,7 @@
 			<Description>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Description>
 			<Help>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_AIRSTRIKE</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_AIRSTRIKE</EntityEventType>
 			<iTime>16</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -557,7 +580,7 @@
 			<Description>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Description>
 			<Help>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_SURRENDER</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_SURRENDER</EntityEventType>
 			<iTime>10</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -568,7 +591,7 @@
 			<Description>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Description>
 			<Help>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_CAPTURED</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_CAPTURED</EntityEventType>
 			<iTime>8</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -579,7 +602,7 @@
 			<Description>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Description>
 			<Help>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_IDLE</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_IDLE</EntityEventType>
 			<iTime>0</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -590,7 +613,7 @@
 			<Description>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Description>
 			<Help>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_DIE</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_DIE</EntityEventType>
 			<iTime>0</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -601,7 +624,7 @@
 			<Description>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Description>
 			<Help>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_DAMAGE</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_DAMAGE</EntityEventType>
 			<iTime>0</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -612,7 +635,7 @@
 			<Description>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Description>
 			<Help>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_MULTI_SELECT</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_MULTI_SELECT</EntityEventType>
 			<iTime>0</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
@@ -623,7 +646,7 @@
 			<Description>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Description>
 			<Help>TXT_KEY_MISSION_BUILD_IMPROVEMENT</Help>
 			<Waypoint>NONE</Waypoint>
-			<EntityEventType>ENTEVENT_MULTI_DESELECT</EntityEventType>
+			<EntityEventType>ENTITY_EVENT_MULTI_DESELECT</EntityEventType>
 			<iTime>0</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
