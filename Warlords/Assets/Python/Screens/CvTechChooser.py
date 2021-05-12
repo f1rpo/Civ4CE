@@ -61,7 +61,7 @@ class CvTechChooser:
 		else:
 			screen.hide( "CivDropDown" )
 			
-		if ( screen.isPersistent() ):
+		if ( screen.isPersistent() and self.iCivSelected == gc.getGame().getActivePlayer()):
 			self.updateTechRecords(false)
 			return
 		
