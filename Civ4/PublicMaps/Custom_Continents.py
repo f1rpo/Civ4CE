@@ -955,8 +955,10 @@ def findStartingPlot(argsList):
 
 	# One Per Team
 	[playerID] = argsList
+	global yShiftRoll
 	global shuffledTeams
 	global team_num
+	global cont_data
 	global iWestX, iEastX, iSouthY, iNorthY
 	map = CyMap()
 	iW = map.getGridWidth()
@@ -965,11 +967,26 @@ def findStartingPlot(argsList):
 	teamID = team_num[thisTeamID]
 	contNum = shuffledTeams[teamID]
 	[fWestLon, fEastLon, fSouthLat, fNorthLat] = cont_data[contNum][1][0:4]
+	vertVar = cont_data[contNum][1][5]
+	yVar = int(iH * vertVar)
+	#print cont_data[contNum][1][0:4]
+	#print "Shift: ", yShiftRoll, "Amount: ", yVar
 	iWestX = int(iW * fWestLon)
 	iEastX = int(iW * fEastLon) - 1
-	iSouthY = int(iH * fSouthLat)
-	iNorthY = int(iH * fNorthLat) -1
-	
+	if numTeams == 2:
+		iSouthY = 1
+		iNorthY = iH - 2
+	elif (numTeams == 3 or numTeams == 5) and yShiftRoll:
+		iSouthY = int(iH * fSouthLat) + yVar
+		iNorthY = int(iH * fNorthLat) + yVar - 1
+	else:
+		iSouthY = int(iH * fSouthLat)
+		iNorthY = int(iH * fNorthLat) - 1
+	#print "West X: ", iWestX
+	#print "East X: ", iEastX
+	#print "South Y: ", iSouthY
+	#print "North Y: ", iNorthY
+
 	def isValid(playerID, x, y):
 		global iWestX, iEastX, iSouthY, iNorthY
 		if x >= iWestX and x <= iEastX and y >= iSouthY and y <= iNorthY:

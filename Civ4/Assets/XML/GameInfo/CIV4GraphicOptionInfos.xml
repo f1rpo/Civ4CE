@@ -46,10 +46,10 @@
 			<Type>GRAPHICOPTION_GLOBE_VIEW_BUILDINGS_DISABLED</Type>
 			<Description>TXT_KEY_GRAPHICOPTION_GLOBE_VIEW_BUILDINGS_DISABLED</Description>
 			<Help>TXT_KEY_GRAPHICOPTION_GLOBE_VIEW_BUILDINGS_DISABLED_HELP</Help>
-			<bDefault>0</bDefault>
+			<bDefault>1</bDefault>
 		</GraphicOptionInfo>
 		<GraphicOptionInfo>
-			<Type>GRAPHICOPTION_FULSCREEN</Type>
+			<Type>GRAPHICOPTION_FULLSCREEN</Type>
 			<Description>TXT_KEY_GRAPHICOPTION_FULLSCREEN</Description>
 			<Help>TXT_KEY_GRAPHICOPTION_FULLSCREEN_HELP</Help>
 			<bDefault>1</bDefault>
@@ -58,6 +58,24 @@
 			<Type>GRAPHICOPTION_LOWRES_TEXTURES</Type>
 			<Description>TXT_KEY_GRAPHICOPTION_LOWRES_TEXTURES</Description>
 			<Help>TXT_KEY_GRAPHICOPTION_LOWRES_TEXTURES_HELP</Help>
+			<bDefault>0</bDefault>
+		</GraphicOptionInfo>
+		<GraphicOptionInfo>
+			<Type>GRAPHICOPTION_HIRES_TERRAIN</Type>
+			<Description>TXT_KEY_GRAPHICOPTION_HIRES_TERRAIN</Description>
+			<Help>TXT_KEY_GRAPHICOPTION_HIRES_TERRAIN_HELP</Help>
+			<bDefault>0</bDefault>
+		</GraphicOptionInfo>
+		<GraphicOptionInfo>
+			<Type>GRAPHICOPTION_NO_MOVIES</Type>
+			<Description>TXT_KEY_GRAPHICOPTION_NO_MOVIES</Description>
+			<Help>TXT_KEY_GRAPHICOPTION_NO_MOVIES_HELP</Help>
+			<bDefault>0</bDefault>
+		</GraphicOptionInfo>
+		<GraphicOptionInfo>
+			<Type>GRAPHICOPTION_CITY_RADIUS</Type>
+			<Description>TXT_KEY_GRAPHICOPTION_CITY_RADIUS</Description>
+			<Help>TXT_KEY_GRAPHICOPTION_CITY_RADIUS_HELP</Help>
 			<bDefault>0</bDefault>
 		</GraphicOptionInfo>
 	</GraphicOptionInfos>

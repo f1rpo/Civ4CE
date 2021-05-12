@@ -281,7 +281,11 @@ class CvDiplomacy:
 				# Allow us to begin another proposal
 				self.addUserComment("USER_DIPLOCOMMENT_PROPOSAL", -1, -1)
 
-			if (not self.isComment(eComment, "AI_DIPLOCOMMENT_PEACE") and not self.isComment(eComment, "AI_DIPLOCOMMENT_NO_PEACE")):
+			if (self.isComment(eComment, "AI_DIPLOCOMMENT_GREETINGS") or
+					self.isComment(eComment, "AI_DIPLOCOMMENT_UNIT_BRAG") or
+					self.isComment(eComment, "AI_DIPLOCOMMENT_NUKES") or
+					self.isComment(eComment, "AI_DIPLOCOMMENT_WORST_ENEMY") or 
+					self.isComment(eComment, "AI_DIPLOCOMMENT_WORST_ENEMY_TRADING")):
 				# If we are at war, allow to suggest peace
 				if (self.diploScreen.atWar()):
 					self.addUserComment("USER_DIPLOCOMMENT_SUGGEST_PEACE", -1, -1)
@@ -493,7 +497,6 @@ class CvDiplomacy:
 		elif(self.isComment(eComment, "USER_DIPLOCOMMENT_SUGGEST_PEACE")):
 			if (diploScreen.offerDeal() == 1):
 				self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_PEACE"))
-	
 			else:
 				self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_NO_PEACE"))
 	

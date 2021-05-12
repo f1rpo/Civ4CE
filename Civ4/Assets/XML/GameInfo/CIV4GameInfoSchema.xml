@@ -25,13 +25,13 @@
 	<ElementType name="iJungleLatitude" content="textOnly" dt:type="int"/>
 	<ElementType name="iHillRange" content="textOnly" dt:type="int"/>
 	<ElementType name="iPeakPercent" content="textOnly" dt:type="int"/>
-	<ElementType name="fSnowLatitudeChange" content="textOnly" dt:type="float"/>
-	<ElementType name="fTundraLatitudeChange" content="textOnly" dt:type="float"/>
-	<ElementType name="fGrassLatitudeChange" content="textOnly" dt:type="float"/>
-	<ElementType name="fDesertBottomLatitudeChange" content="textOnly" dt:type="float"/>
-	<ElementType name="fDesertTopLatitudeChange" content="textOnly" dt:type="float"/>
-	<ElementType name="fIceLatitude" content="textOnly" dt:type="float"/>
-	<ElementType name="fRandIceLatitude" content="textOnly" dt:type="float"/>
+	<ElementType name="fSnowLatitudeChange" content="textOnly"/>
+	<ElementType name="fTundraLatitudeChange" content="textOnly"/>
+	<ElementType name="fGrassLatitudeChange" content="textOnly"/>
+	<ElementType name="fDesertBottomLatitudeChange" content="textOnly"/>
+	<ElementType name="fDesertTopLatitudeChange" content="textOnly"/>
+	<ElementType name="fIceLatitude" content="textOnly"/>
+	<ElementType name="fRandIceLatitude" content="textOnly"/>
 	<ElementType name="ClimateInfo" content="eltOnly">
 		<element type="Type"/>
 		<element type="Description"/>
@@ -397,6 +397,7 @@
 		<element type="VictoryInfo" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="VictoryPrereq" content="textOnly"/>
+	<ElementType name="AnyonePrereqProject" content="textOnly"/>
 	<ElementType name="iMaxGlobalInstances" content="textOnly" dt:type="int"/>
 	<ElementType name="iMaxTeamInstances" content="textOnly" dt:type="int"/>
 	<ElementType name="iCost" content="textOnly" dt:type="int"/>
@@ -441,6 +442,7 @@
 		<element type="Strategy"/>
 		<element type="VictoryPrereq"/>
 		<element type="TechPrereq"/>
+		<element type="AnyonePrereqProject" minOccurs="0"/>
 		<element type="iMaxGlobalInstances"/>
 		<element type="iMaxTeamInstances"/>
 		<element type="iCost"/>

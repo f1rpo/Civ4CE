@@ -54,6 +54,11 @@ class CvScreenUtils:
                 return screen.handleInput(inputClass)
         return 0
 
+    # Screen closing
+    def onClose (self, argsList):
+        screenEnum = argsList[0]
+        return 0
+
     # Forced screen update
     def forceScreenUpdate (self, argsList):
         screenEnum = argsList[0]

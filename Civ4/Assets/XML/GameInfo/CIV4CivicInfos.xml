@@ -73,7 +73,7 @@
 			<Button>,Art/Interface/Buttons/Civics/Hereditary_Rule.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,3,3</Button>
 			<TechPrereq>TECH_MONARCHY</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
-			<Upkeep>UPKEEP_MEDIUM</Upkeep>
+			<Upkeep>UPKEEP_LOW</Upkeep>
 			<iAIWeight>0</iAIWeight>
 			<iGreatPeopleRateModifier>0</iGreatPeopleRateModifier>
 			<iStateReligionGreatPeopleRateModifier>0</iStateReligionGreatPeopleRateModifier>
@@ -131,7 +131,7 @@
 			<Button>,Art/Interface/Buttons/Civics/Representation.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,6,2</Button>
 			<TechPrereq>TECH_CONSTITUTION</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
-			<Upkeep>UPKEEP_LOW</Upkeep>
+			<Upkeep>UPKEEP_MEDIUM</Upkeep>
 			<iAIWeight>0</iAIWeight>
 			<iGreatPeopleRateModifier>0</iGreatPeopleRateModifier>
 			<iStateReligionGreatPeopleRateModifier>0</iStateReligionGreatPeopleRateModifier>
@@ -153,7 +153,7 @@
 			<iMaxConscript>0</iMaxConscript>
 			<bNoUnhealthyPopulation>0</bNoUnhealthyPopulation>
 			<bBuildingOnlyHealthy>0</bBuildingOnlyHealthy>
-			<iLargestCityHappiness>3</iLargestCityHappiness>
+			<iLargestCityHappiness>2</iLargestCityHappiness>
 			<iWarWearinessModifier>0</iWarWearinessModifier>
 			<iFreeSpecialist>0</iFreeSpecialist>
 			<iTradeRoutes>0</iTradeRoutes>
@@ -501,7 +501,7 @@
 			<Button>,Art/Interface/Buttons/Civics/Nationhood.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,1,2</Button>
 			<TechPrereq>TECH_NATIONALISM</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
-			<Upkeep>UPKEEP_LOW</Upkeep>
+			<Upkeep>NONE</Upkeep>
 			<iAIWeight>0</iAIWeight>
 			<iGreatPeopleRateModifier>0</iGreatPeopleRateModifier>
 			<iStateReligionGreatPeopleRateModifier>0</iStateReligionGreatPeopleRateModifier>
@@ -693,7 +693,7 @@
 			<Button>,Art/Interface/Buttons/Civics/Slavery.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,8,2</Button>
 			<TechPrereq>TECH_BRONZE_WORKING</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
-			<Upkeep>NONE</Upkeep>
+			<Upkeep>UPKEEP_LOW</Upkeep>
 			<iAIWeight>0</iAIWeight>
 			<iGreatPeopleRateModifier>0</iGreatPeopleRateModifier>
 			<iStateReligionGreatPeopleRateModifier>0</iStateReligionGreatPeopleRateModifier>
@@ -1059,7 +1059,7 @@
 			<Button>,Art/Interface/Buttons/Civics/Free_Market.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,8,1</Button>
 			<TechPrereq>TECH_ECONOMICS</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
-			<Upkeep>UPKEEP_LOW</Upkeep>
+			<Upkeep>UPKEEP_MEDIUM</Upkeep>
 			<iAIWeight>0</iAIWeight>
 			<iGreatPeopleRateModifier>0</iGreatPeopleRateModifier>
 			<iStateReligionGreatPeopleRateModifier>0</iStateReligionGreatPeopleRateModifier>
@@ -1115,9 +1115,9 @@
 			<Civilopedia>TXT_KEY_CIVIC_STATE_PROPERTY_PEDIA</Civilopedia>
 			<Strategy>TXT_KEY_CIVIC_STATE_PROPERTY_STRATEGY</Strategy>
 			<Button>,Art/Interface/Buttons/Civics/State_Property.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,5,3</Button>
-			<TechPrereq>TECH_COMMUNISM</TechPrereq>
+			<TechPrereq>TECH_UTOPIA</TechPrereq>
 			<iAnarchyLength>1</iAnarchyLength>
-			<Upkeep>NONE</Upkeep>
+			<Upkeep>UPKEEP_LOW</Upkeep>
 			<iAIWeight>0</iAIWeight>
 			<iGreatPeopleRateModifier>0</iGreatPeopleRateModifier>
 			<iStateReligionGreatPeopleRateModifier>0</iStateReligionGreatPeopleRateModifier>

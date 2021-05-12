@@ -333,6 +333,7 @@ def generatePlotTypes():
 	NiTextOut("Setting Plot Types (Python Pangaea) ...")
 	global pangaea_type
 	gc = CyGlobalContext()
+	mapgen = CyMapGenerator()
 	map = CyMap()
 	dice = gc.getGame().getMapRand()
 	hinted_world = PangaeaHintedWorld()
@@ -345,10 +346,22 @@ def generatePlotTypes():
 	if userInputLandmass == 3: # Solid
 		# Roll for type selection.
 		typeRoll = dice.get(3, "PlotGen Chooser - Pangaea PYTHON")
-		if typeRoll == 2:
-			return hinted_world.generateAndysHintedPangaea()
-		else:
-			return hinted_world.generateSorensHintedPangaea()
+		# Solid Shoreline cohesion check and catch - patched Dec 30, 2005 - Sirian
+		# Error catching for non-cohesive results.
+		cohesive = False
+		while not cohesive:
+			plotTypes = []
+			if typeRoll == 2:
+				plotTypes = hinted_world.generateAndysHintedPangaea()
+			else:
+				plotTypes = hinted_world.generateSorensHintedPangaea()
+			mapgen.setPlotTypes(plotTypes)
+			biggest_area = map.findBiggestArea(false)
+			iTotalLandPlots = map.getLandPlots()
+			iBiggestAreaPlots = biggest_area.getNumTiles()
+			if iBiggestAreaPlots >= 0.9 * iTotalLandPlots:
+				cohesive = True
+		return plotTypes
 
 	elif userInputLandmass == 2: # Pressed
 		# Roll for type selection.
@@ -372,10 +385,23 @@ def generatePlotTypes():
 		# 7,8 = Solid, Irregular
 		# 9 = Solid, Round
 		
-		if terrainRoll == 9:
-			return hinted_world.generateAndysHintedPangaea()
-		elif terrainRoll == 7 or terrainRoll == 8:
-			return hinted_world.generateSorensHintedPangaea()
+		if terrainRoll > 6:
+			# Solid Shoreline cohesion check and catch - patched Dec 30, 2005 - Sirian
+			cohesive = False
+			while not cohesive:
+				plotTypes = []
+				if terrainRoll == 9:
+					plotTypes = hinted_world.generateAndysHintedPangaea()
+				else:
+					plotTypes = hinted_world.generateSorensHintedPangaea()
+				mapgen.setPlotTypes(plotTypes)
+				biggest_area = map.findBiggestArea(false)
+				iTotalLandPlots = map.getLandPlots()
+				iBiggestAreaPlots = biggest_area.getNumTiles()
+				if iBiggestAreaPlots >= 0.9 * iTotalLandPlots:
+					cohesive = True
+			return plotTypes
+
 		elif terrainRoll == 5 or terrainRoll == 6:
 			pangaea_type = 2
 			return fractal_world.generatePlotsByRegion(pangaea_type)
@@ -388,9 +414,9 @@ def generatePlotTypes():
 
 def generateTerrainTypes():
 	# Run a check for cohesion failure.
-	# If the largest land area contains less than 80% of the land, add 
-	# a third layer of fractal terrain to try to link the main landmasses 
-	# in to a true Pangaea.
+	# If the largest land area contains less than 80% of the land (Natural/Pressed),
+	# or less than 90% of the land (Solid), add a third layer of fractal terrain 
+	# to try to link the main landmasses in to a true Pangaea.
 	gc = CyGlobalContext()
 	map = CyMap()
 	dice = gc.getGame().getMapRand()

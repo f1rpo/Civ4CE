@@ -92,6 +92,9 @@ def handleGraphicOptionsClicked ( argsList ):
 		iGraphicOption == GraphicOptionTypes.GRAPHICOPTION_FULLSCREEN):
 		restartPopup(true)
 		
+	if (iGraphicOption == GraphicOptionTypes.GRAPHICOPTION_HIRES_TERRAIN):
+		restartPopup(false)
+		
 	return 1
 	
 def handleGraphicsLevelDropdownBoxInput ( argsList ):
@@ -195,7 +198,7 @@ def handleCustomMusicPathCheckboxInput ( argsList ):
 	bValue, szName = argsList
 	
 	if (bValue):
-		UserProfile.setMusicPath(str(getOptionsScreen().getMusicPath()))
+		UserProfile.setMusicPath(CvUtil.convertToStr(getOptionsScreen().getMusicPath()))
 	else:
 		UserProfile.setMusicPath("")
 	

@@ -105,14 +105,14 @@
 					<Civilizations/>
 					<Leaders>
 						<Leader>
-							<LeaderType>LEADER_MAO_ZEDONG</LeaderType>
+							<LeaderType>LEADER_CHINESE_LEADER</LeaderType>
 							<bLeaderType>1</bLeaderType>
 						</Leader>
 					</Leaders>
 					<Attitudes/>
 					<DiplomacyPowers/>
 					<DiplomacyText>
-						<Text>AI_DIPLO_FIRST_CONTACT_LEADER_MAO_ZEDONG_1</Text>
+						<Text>AI_DIPLO_FIRST_CONTACT_LEADER_CHINESE_LEADER_1</Text>
 					</DiplomacyText>
 				</Response>
 				<Response>
@@ -408,20 +408,6 @@
 					<Civilizations/>
 					<Leaders>
 						<Leader>
-							<LeaderType>LEADER_FRANKLIN_ROOSEVELT</LeaderType>
-							<bLeaderType>1</bLeaderType>
-						</Leader>
-					</Leaders>
-					<Attitudes/>
-					<DiplomacyPowers/>
-					<DiplomacyText>
-						<Text>AI_DIPLO_REFUSE_TO_TALK_LEADER_FRANKLIN_ROOSEVELT_1</Text>
-					</DiplomacyText>
-				</Response>
-				<Response>
-					<Civilizations/>
-					<Leaders>
-						<Leader>
 							<LeaderType>LEADER_WASHINGTON</LeaderType>
 							<bLeaderType>1</bLeaderType>
 						</Leader>
@@ -478,14 +464,14 @@
 					<Civilizations/>
 					<Leaders>
 						<Leader>
-							<LeaderType>LEADER_MAO_ZEDONG</LeaderType>
+							<LeaderType>LEADER_CHINESE_LEADER</LeaderType>
 							<bLeaderType>1</bLeaderType>
 						</Leader>
 					</Leaders>
 					<Attitudes/>
 					<DiplomacyPowers/>
 					<DiplomacyText>
-						<Text>AI_DIPLO_REFUSE_TO_TALK_LEADER_MAO_ZEDONG_1</Text>
+						<Text>AI_DIPLO_REFUSE_TO_TALK_LEADER_CHINESE_LEADER_1</Text>
 					</DiplomacyText>
 				</Response>
 				<Response>
@@ -758,6 +744,20 @@
 						<Text>AI_DIPLO_REFUSE_TO_TALK_LEADER_ISABELLA_1</Text>
 					</DiplomacyText>
 				</Response>
+				<Response>
+					<Civilizations/>
+					<Leaders>
+						<Leader>
+							<LeaderType>LEADER_FRANKLIN_ROOSEVELT</LeaderType>
+							<bLeaderType>1</bLeaderType>
+						</Leader>
+					</Leaders>
+					<Attitudes/>
+					<DiplomacyPowers/>
+					<DiplomacyText>
+						<Text>AI_DIPLO_REFUSE_TO_TALK_LEADER_FRANKLIN_ROOSEVELT_1</Text>
+					</DiplomacyText>
+				</Response>
 			</Responses>
 		</DiplomacyInfo>
 		<DiplomacyInfo>
@@ -884,14 +884,14 @@
 					<Civilizations/>
 					<Leaders>
 						<Leader>
-							<LeaderType>LEADER_MAO_ZEDONG</LeaderType>
+							<LeaderType>LEADER_CHINESE_LEADER</LeaderType>
 							<bLeaderType>1</bLeaderType>
 						</Leader>
 					</Leaders>
 					<Attitudes/>
 					<DiplomacyPowers/>
 					<DiplomacyText>
-						<Text>AI_DIPLO_NO_PEACE_LEADER_MAO_ZEDONG_1</Text>
+						<Text>AI_DIPLO_NO_PEACE_LEADER_CHINESE_LEADER_1</Text>
 					</DiplomacyText>
 				</Response>
 				<Response>
@@ -1345,7 +1345,7 @@
 					<Civilizations/>
 					<Leaders>
 						<Leader>
-							<LeaderType>LEADER_MAO_ZEDONG</LeaderType>
+							<LeaderType>LEADER_CHINESE_LEADER</LeaderType>
 							<bLeaderType>1</bLeaderType>
 						</Leader>
 					</Leaders>
@@ -1365,7 +1365,7 @@
 					</Attitudes>
 					<DiplomacyPowers/>
 					<DiplomacyText>
-						<Text>AI_DIPLO_GREETINGS_ATT_FR_LEADER_MAO_ZEDONG_1</Text>
+						<Text>AI_DIPLO_GREETINGS_ATT_FR_LEADER_CHINESE_LEADER_1</Text>
 					</DiplomacyText>
 				</Response>
 				<Response>
@@ -2037,7 +2037,7 @@
 					<Civilizations/>
 					<Leaders>
 						<Leader>
-							<LeaderType>LEADER_MAO_ZEDONG</LeaderType>
+							<LeaderType>LEADER_CHINESE_LEADER</LeaderType>
 							<bLeaderType>1</bLeaderType>
 						</Leader>
 					</Leaders>
@@ -2053,7 +2053,7 @@
 					</Attitudes>
 					<DiplomacyPowers/>
 					<DiplomacyText>
-						<Text>AI_DIPLO_GREETINGS_ATT_FUR_LEADER_MAO_ZEDONG_1</Text>
+						<Text>AI_DIPLO_GREETINGS_ATT_FUR_LEADER_CHINESE_LEADER_1</Text>
 					</DiplomacyText>
 				</Response>
 				<Response>
@@ -3395,7 +3395,7 @@
 					<Civilizations/>
 					<Leaders>
 						<Leader>
-							<LeaderType>LEADER_MAO_ZEDONG</LeaderType>
+							<LeaderType>LEADER_CHINESE_LEADER</LeaderType>
 							<bLeaderType>1</bLeaderType>
 						</Leader>
 					</Leaders>
@@ -3407,7 +3407,7 @@
 						</DiplomacyPower>
 					</DiplomacyPowers>
 					<DiplomacyText>
-						<Text>AI_DIPLO_DEMAND_TRIBUTE_POWER_WEAKER_MAO_ZEDONG_1</Text>
+						<Text>AI_DIPLO_DEMAND_TRIBUTE_POWER_WEAKER_CHINESE_LEADER_1</Text>
 					</DiplomacyText>
 				</Response>
 				<Response>
@@ -3833,7 +3833,7 @@
 					<Civilizations/>
 					<Leaders>
 						<Leader>
-							<LeaderType>LEADER_MAO_ZEDONG</LeaderType>
+							<LeaderType>LEADER_CHINESE_LEADER</LeaderType>
 							<bLeaderType>1</bLeaderType>
 						</Leader>
 					</Leaders>
@@ -3845,7 +3845,7 @@
 						</DiplomacyPower>
 					</DiplomacyPowers>
 					<DiplomacyText>
-						<Text>AI_DIPLO_DEMAND_TRIBUTE_POWER_EQUAL_MAO_ZEDONG_1</Text>
+						<Text>AI_DIPLO_DEMAND_TRIBUTE_POWER_EQUAL_CHINESE_LEADER_1</Text>
 					</DiplomacyText>
 				</Response>
 				<Response>
@@ -4295,7 +4295,7 @@
 					<Civilizations/>
 					<Leaders>
 						<Leader>
-							<LeaderType>LEADER_MAO_ZEDONG</LeaderType>
+							<LeaderType>LEADER_CHINESE_LEADER</LeaderType>
 							<bLeaderType>1</bLeaderType>
 						</Leader>
 					</Leaders>
@@ -4307,7 +4307,7 @@
 						</DiplomacyPower>
 					</DiplomacyPowers>
 					<DiplomacyText>
-						<Text>AI_DIPLO_DEMAND_TRIBUTE_POWER_STRONGER_MAO_ZEDONG_1</Text>
+						<Text>AI_DIPLO_DEMAND_TRIBUTE_POWER_STRONGER_CHINESE_LEADER_1</Text>
 					</DiplomacyText>
 				</Response>
 				<Response>

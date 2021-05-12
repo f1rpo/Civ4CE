@@ -62,9 +62,16 @@ mainInterface = CvMainInterface.CvMainInterface()
 def showMainInterface():
 	mainInterface.interfaceScreen()
 
+def numPlotListButtons():
+	return mainInterface.numPlotListButtons()
+
 techChooser = CvTechChooser.CvTechChooser()
 def showTechChooser():
 	techChooser.interfaceScreen()
+
+def recreateTechChooser():
+	# Tech chooser screen is persistent
+	techChooser = CvTechChooser.CvTechChooser()
 
 hallOfFameScreen = CvHallOfFameScreen.CvHallOfFameScreen(HALL_OF_FAME)
 def showHallOfFame(argsList):
@@ -120,6 +127,8 @@ def showEraMovie(argsList):
 	
 replayScreen = CvReplayScreen.CvReplayScreen(REPLAY_SCREEN)
 def showReplay(argsList):
+	if argsList[0] > -1:
+		CyGame().saveReplay(argsList[0])
 	replayScreen.showScreen(argsList[4])
 
 danQuayleScreen = CvDanQuayle.CvDanQuayle()
@@ -554,6 +563,11 @@ def update (argsList):
 		screen = HandleInputMap.get(argsList[0])
 		screen.update(argsList[1])
 
+def onClose (argsList):
+	# allows overides for mods
+	if (CvScreenUtilsInterface.getScreenUtils().onClose(argsList)):
+		return
+		
 # Forced screen update
 def forceScreenUpdate (argsList):
 	# allows overides for mods
@@ -562,11 +576,9 @@ def forceScreenUpdate (argsList):
 		
 	# Tech chooser update (forced from net message)
 	if ( argsList[0] == TECH_CHOOSER ):
-		#CvTechChooser.CvTechChooser().updateTechRecords()
-		techChooser.updateTechRecords()
+		techChooser.updateTechRecords(false)
 	# Main interface Screen
 	elif ( argsList[0] == MAIN_INTERFACE ):
-		#CvMainInterface.CvMainInterface().updateScreen()
 		mainInterface.updateScreen()
 	# world builder Screen
 	elif ( argsList[0] == WORLDBUILDER_SCREEN ):
@@ -583,12 +595,14 @@ def forceScreenRedraw (argsList):
 	
 	# Main Interface Screen
 	if ( argsList[0] == MAIN_INTERFACE ):
-		#CvMainInterface.CvMainInterface().redraw()
 		mainInterface.redraw()
 	elif ( argsList[0] == WORLDBUILDER_SCREEN ):
 		worldBuilderScreen.redraw()
 	elif ( argsList[0] == WORLDBUILDER_DIPLOMACY_SCREEN ):
 		worldBuilderDiplomacyScreen.redraw()
+	elif ( argsList[0] == TECH_CHOOSER ):
+		techChooser.updateTechRecords(true)
+
 
 def minimapClicked (argsList):
 	# allows overides for mods
@@ -679,9 +693,11 @@ def featAccomplishedOnClickedCallback(argsList):
 			showMilitaryAdvisor()
 		elif ((iData1 >= FeatTypes.FEAT_COPPER_CONNECTED) and (iData1 <= FeatTypes.FEAT_FOOD_CONNECTED)):
 			showForeignAdvisorScreen([0])
-		elif ((iData1 == FeatTypes.FEAT_NATIONAL_WONDER) or
-		      ((iData1 >= FeatTypes.FEAT_POPULATION_HALF_MILLION) and (iData1 <= FeatTypes.FEAT_POPULATION_2_BILLION))):
-		  # 1 is for the wonder tab...
+		elif ((iData1 == FeatTypes.FEAT_NATIONAL_WONDER)):
+		  # 2 is for the wonder tab...
+			showInfoScreen([2, 0])
+		elif ((iData1 >= FeatTypes.FEAT_POPULATION_HALF_MILLION) and (iData1 <= FeatTypes.FEAT_POPULATION_2_BILLION)):
+		  # 1 is for the demographics tab...
 			showInfoScreen([1, 0])
 
 def featAccomplishedOnFocusCallback(argsList):

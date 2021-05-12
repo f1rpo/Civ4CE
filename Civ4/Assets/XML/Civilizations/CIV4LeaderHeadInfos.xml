@@ -35,7 +35,7 @@
 			<iRazeCityProb>10</iRazeCityProb>
 			<iBuildUnitProb>50</iBuildUnitProb>
 			<iBaseAttackOddsChange>0</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>20</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>16</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>0</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>0</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>0</iCloseBordersAttitudeChange>
@@ -224,7 +224,7 @@
 			<iRazeCityProb>25</iRazeCityProb>
 			<iBuildUnitProb>35</iBuildUnitProb>
 			<iBaseAttackOddsChange>4</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>-2</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>0</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-4</iCloseBordersAttitudeChange>
@@ -707,7 +707,7 @@
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>0</iWarmongerRespect>
 			<iRefuseToTalkWarThreshold>6</iRefuseToTalkWarThreshold>
-			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
+			<iNoTechTradeThreshold>10</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>20</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>10</iMaxGoldTradePercent>
 			<iMaxGoldPerTurnTradePercent>10</iMaxGoldPerTurnTradePercent>
@@ -725,7 +725,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>20</iBuildUnitProb>
 			<iBaseAttackOddsChange>0</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>0</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>3</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-2</iCloseBordersAttitudeChange>
@@ -1242,7 +1242,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>30</iBuildUnitProb>
 			<iBaseAttackOddsChange>0</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>-1</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>0</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-4</iCloseBordersAttitudeChange>
@@ -1734,7 +1734,7 @@
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>2</iWarmongerRespect>
 			<iRefuseToTalkWarThreshold>6</iRefuseToTalkWarThreshold>
-			<iNoTechTradeThreshold>10</iNoTechTradeThreshold>
+			<iNoTechTradeThreshold>15</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>20</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
 			<iMaxGoldPerTurnTradePercent>10</iMaxGoldPerTurnTradePercent>
@@ -1752,7 +1752,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>25</iBuildUnitProb>
 			<iBaseAttackOddsChange>2</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>-2</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>0</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-4</iCloseBordersAttitudeChange>
@@ -2253,7 +2253,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>30</iBuildUnitProb>
 			<iBaseAttackOddsChange>2</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>0</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>2</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-2</iCloseBordersAttitudeChange>
@@ -2752,7 +2752,7 @@
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>0</iWarmongerRespect>
 			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
-			<iNoTechTradeThreshold>10</iNoTechTradeThreshold>
+			<iNoTechTradeThreshold>15</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>40</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
 			<iMaxGoldPerTurnTradePercent>10</iMaxGoldPerTurnTradePercent>
@@ -2770,7 +2770,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>20</iBuildUnitProb>
 			<iBaseAttackOddsChange>0</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>0</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>1</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-3</iCloseBordersAttitudeChange>
@@ -3257,7 +3257,7 @@
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>0</iWarmongerRespect>
 			<iRefuseToTalkWarThreshold>6</iRefuseToTalkWarThreshold>
-			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
+			<iNoTechTradeThreshold>10</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>30</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>10</iMaxGoldTradePercent>
 			<iMaxGoldPerTurnTradePercent>10</iMaxGoldPerTurnTradePercent>
@@ -3275,7 +3275,7 @@
 			<iRazeCityProb>50</iRazeCityProb>
 			<iBuildUnitProb>20</iBuildUnitProb>
 			<iBaseAttackOddsChange>0</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>0</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>2</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-2</iCloseBordersAttitudeChange>
@@ -3765,7 +3765,7 @@
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>0</iWarmongerRespect>
 			<iRefuseToTalkWarThreshold>6</iRefuseToTalkWarThreshold>
-			<iNoTechTradeThreshold>10</iNoTechTradeThreshold>
+			<iNoTechTradeThreshold>15</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>20</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>10</iMaxGoldTradePercent>
 			<iMaxGoldPerTurnTradePercent>10</iMaxGoldPerTurnTradePercent>
@@ -3783,7 +3783,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>15</iBuildUnitProb>
 			<iBaseAttackOddsChange>0</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>0</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>1</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-2</iCloseBordersAttitudeChange>
@@ -4255,7 +4255,7 @@
 			<iRazeCityProb>75</iRazeCityProb>
 			<iBuildUnitProb>35</iBuildUnitProb>
 			<iBaseAttackOddsChange>4</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>-1</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>2</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-4</iCloseBordersAttitudeChange>
@@ -4765,7 +4765,7 @@
 			<iRazeCityProb>50</iRazeCityProb>
 			<iBuildUnitProb>20</iBuildUnitProb>
 			<iBaseAttackOddsChange>0</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>-1</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>2</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-2</iCloseBordersAttitudeChange>
@@ -5272,7 +5272,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>25</iBuildUnitProb>
 			<iBaseAttackOddsChange>0</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>-1</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>1</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-3</iCloseBordersAttitudeChange>
@@ -5775,7 +5775,7 @@
 			<iRazeCityProb>25</iRazeCityProb>
 			<iBuildUnitProb>25</iBuildUnitProb>
 			<iBaseAttackOddsChange>0</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>-1</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>1</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-3</iCloseBordersAttitudeChange>
@@ -6283,7 +6283,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>30</iBuildUnitProb>
 			<iBaseAttackOddsChange>2</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>-1</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>0</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-4</iCloseBordersAttitudeChange>
@@ -6779,7 +6779,7 @@
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>2</iWarmongerRespect>
 			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
-			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
+			<iNoTechTradeThreshold>10</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>30</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
 			<iMaxGoldPerTurnTradePercent>10</iMaxGoldPerTurnTradePercent>
@@ -6797,7 +6797,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>25</iBuildUnitProb>
 			<iBaseAttackOddsChange>0</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>0</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>3</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-3</iCloseBordersAttitudeChange>
@@ -7307,7 +7307,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>30</iBuildUnitProb>
 			<iBaseAttackOddsChange>2</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>-2</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>1</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-4</iCloseBordersAttitudeChange>
@@ -7808,7 +7808,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>25</iBuildUnitProb>
 			<iBaseAttackOddsChange>0</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>0</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>4</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-2</iCloseBordersAttitudeChange>
@@ -8285,10 +8285,10 @@
 			</DiplomacyMusicWar>
 		</LeaderHeadInfo>
 		<LeaderHeadInfo>
-			<Type>LEADER_MAO_ZEDONG</Type>
-			<Description>TXT_KEY_LEADER_MAO_ZEDONG</Description>
-			<Civilopedia>TXT_KEY_LEADER_MAO_ZEDONG_PEDIA</Civilopedia>
-			<ArtDefineTag>ART_DEF_LEADER_MAO_ZEDONG</ArtDefineTag>
+			<Type>LEADER_CHINESE_LEADER</Type>
+			<Description>TXT_KEY_LEADER_CHINESE_LEADER</Description>
+			<Civilopedia>TXT_KEY_LEADER_CHINESE_LEADER_PEDIA</Civilopedia>
+			<ArtDefineTag>ART_DEF_LEADER_CHINESE_LEADER</ArtDefineTag>
 			<iWonderConstructRand>10</iWonderConstructRand>
 			<iBaseAttitude>0</iBaseAttitude>
 			<iBasePeaceWeight>1</iBasePeaceWeight>
@@ -8313,7 +8313,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>25</iBuildUnitProb>
 			<iBaseAttackOddsChange>0</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>0</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>0</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-2</iCloseBordersAttitudeChange>
@@ -8823,7 +8823,7 @@
 			<iRazeCityProb>50</iRazeCityProb>
 			<iBuildUnitProb>35</iBuildUnitProb>
 			<iBaseAttackOddsChange>4</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>-3</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>0</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-4</iCloseBordersAttitudeChange>
@@ -9313,7 +9313,7 @@
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>2</iWarmongerRespect>
 			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
-			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
+			<iNoTechTradeThreshold>10</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>60</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
 			<iMaxGoldPerTurnTradePercent>10</iMaxGoldPerTurnTradePercent>
@@ -9331,7 +9331,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>40</iBuildUnitProb>
 			<iBaseAttackOddsChange>6</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>-1</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>1</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-3</iCloseBordersAttitudeChange>
@@ -9827,7 +9827,7 @@
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>2</iWarmongerRespect>
 			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
-			<iNoTechTradeThreshold>10</iNoTechTradeThreshold>
+			<iNoTechTradeThreshold>15</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>10</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>10</iMaxGoldTradePercent>
 			<iMaxGoldPerTurnTradePercent>10</iMaxGoldPerTurnTradePercent>
@@ -9845,7 +9845,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>30</iBuildUnitProb>
 			<iBaseAttackOddsChange>4</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>-2</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>2</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-3</iCloseBordersAttitudeChange>
@@ -10357,7 +10357,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>20</iBuildUnitProb>
 			<iBaseAttackOddsChange>2</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>-1</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>0</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-4</iCloseBordersAttitudeChange>
@@ -10840,7 +10840,7 @@
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>0</iWarmongerRespect>
 			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
-			<iNoTechTradeThreshold>10</iNoTechTradeThreshold>
+			<iNoTechTradeThreshold>15</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>30</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>10</iMaxGoldTradePercent>
 			<iMaxGoldPerTurnTradePercent>10</iMaxGoldPerTurnTradePercent>
@@ -10858,7 +10858,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>20</iBuildUnitProb>
 			<iBaseAttackOddsChange>0</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>-1</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>2</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-3</iCloseBordersAttitudeChange>
@@ -11350,7 +11350,7 @@
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>1</iWarmongerRespect>
 			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
-			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
+			<iNoTechTradeThreshold>10</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>40</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
 			<iMaxGoldPerTurnTradePercent>10</iMaxGoldPerTurnTradePercent>
@@ -11368,7 +11368,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>30</iBuildUnitProb>
 			<iBaseAttackOddsChange>0</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>0</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>2</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-3</iCloseBordersAttitudeChange>
@@ -11880,7 +11880,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>30</iBuildUnitProb>
 			<iBaseAttackOddsChange>0</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>0</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>1</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-3</iCloseBordersAttitudeChange>
@@ -12369,7 +12369,7 @@
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>0</iWarmongerRespect>
 			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
-			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
+			<iNoTechTradeThreshold>10</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>30</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
 			<iMaxGoldPerTurnTradePercent>10</iMaxGoldPerTurnTradePercent>
@@ -12387,7 +12387,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>25</iBuildUnitProb>
 			<iBaseAttackOddsChange>0</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>-1</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>0</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-2</iCloseBordersAttitudeChange>
@@ -12879,7 +12879,7 @@
 			<iPeaceWeightRand>3</iPeaceWeightRand>
 			<iWarmongerRespect>0</iWarmongerRespect>
 			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
-			<iNoTechTradeThreshold>5</iNoTechTradeThreshold>
+			<iNoTechTradeThreshold>10</iNoTechTradeThreshold>
 			<iTechTradeKnownPercent>30</iTechTradeKnownPercent>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
 			<iMaxGoldPerTurnTradePercent>10</iMaxGoldPerTurnTradePercent>
@@ -12897,7 +12897,7 @@
 			<iRazeCityProb>0</iRazeCityProb>
 			<iBuildUnitProb>25</iBuildUnitProb>
 			<iBaseAttackOddsChange>2</iBaseAttackOddsChange>
-			<iAttackOddsChangeRand>10</iAttackOddsChangeRand>
+			<iAttackOddsChangeRand>8</iAttackOddsChangeRand>
 			<iWorseRankDifferenceAttitudeChange>0</iWorseRankDifferenceAttitudeChange>
 			<iBetterRankDifferenceAttitudeChange>1</iBetterRankDifferenceAttitudeChange>
 			<iCloseBordersAttitudeChange>-2</iCloseBordersAttitudeChange>

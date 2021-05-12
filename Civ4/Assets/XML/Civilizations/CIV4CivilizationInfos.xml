@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by Soren Johnson (Firaxis Games) -->
 <!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Jesse Smith (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
@@ -116,13 +117,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_WASHINGTON</LeaderName>
@@ -214,13 +208,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_SALADIN</LeaderName>
@@ -316,13 +303,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_MONTEZUMA</LeaderName>
@@ -426,20 +406,13 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_QIN_SHI_HUANG</LeaderName>
 					<bLeaderAvailability>1</bLeaderAvailability>
 				</Leader>
 				<Leader>
-					<LeaderName>LEADER_MAO_ZEDONG</LeaderName>
+					<LeaderName>LEADER_CHINESE_LEADER</LeaderName>
 					<bLeaderAvailability>1</bLeaderAvailability>
 				</Leader>
 			</Leaders>
@@ -552,13 +525,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_HATSHEPSUT</LeaderName>
@@ -647,13 +613,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_ELIZABETH</LeaderName>
@@ -738,13 +697,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_LOUIS_XIV</LeaderName>
@@ -872,13 +824,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_FREDERICK</LeaderName>
@@ -971,13 +916,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_ALEXANDER</LeaderName>
@@ -1062,13 +1000,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_HUAYNA_CAPAC</LeaderName>
@@ -1179,13 +1110,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_ASOKA</LeaderName>
@@ -1275,13 +1199,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_TOKUGAWA</LeaderName>
@@ -1360,13 +1277,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_MANSA_MUSA</LeaderName>
@@ -1459,13 +1369,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_GENGHIS_KHAN</LeaderName>
@@ -1593,13 +1496,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_CYRUS</LeaderName>
@@ -1720,13 +1616,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_JULIUS_CAESAR</LeaderName>
@@ -1824,13 +1713,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_PETER</LeaderName>
@@ -1925,13 +1807,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_ISABELLA</LeaderName>
@@ -2067,13 +1942,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_BARBARIAN</LeaderName>
@@ -2167,7 +2035,7 @@
 					<BuildingType>NONE</BuildingType>
 				</Building>
 				<Building>
-					<BuildingClassType>BUILDINGCLASS_FORBIDDEN_PALACE</BuildingClassType>
+					<BuildingClassType>BUILDINGCLASS_GREAT_PALACE</BuildingClassType>
 					<BuildingType>NONE</BuildingType>
 				</Building>
 				<Building>
@@ -2427,7 +2295,7 @@
 					<BuildingType>NONE</BuildingType>
 				</Building>
 				<Building>
-					<BuildingClassType>BUILDINGCLASS_THREEGORGESDAM</BuildingClassType>
+					<BuildingClassType>BUILDINGCLASS_GREAT_DAM</BuildingClassType>
 					<BuildingType>NONE</BuildingType>
 				</Building>
 				<Building>
@@ -2573,7 +2441,7 @@
 					<UnitType>NONE</UnitType>
 				</Unit>
 				<Unit>
-					<UnitClassType>UNITCLASS_FRIGATE</UnitClassType>
+					<UnitClassType>UNITCLASS_GALLEON</UnitClassType>
 					<UnitType>NONE</UnitType>
 				</Unit>
 				<Unit>
@@ -2652,13 +2520,6 @@
 				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
 				<CivicType>CIVIC_PAGANISM</CivicType>
 			</InitialCivics>
-			<AnarchyCivics>
-				<CivicType>CIVIC_DESPOTISM</CivicType>
-				<CivicType>CIVIC_BARBARISM</CivicType>
-				<CivicType>CIVIC_TRIBALISM</CivicType>
-				<CivicType>CIVIC_DECENTRALIZATION</CivicType>
-				<CivicType>CIVIC_PAGANISM</CivicType>
-			</AnarchyCivics>
 			<Leaders>
 				<Leader>
 					<LeaderName>LEADER_BARBARIAN</LeaderName>

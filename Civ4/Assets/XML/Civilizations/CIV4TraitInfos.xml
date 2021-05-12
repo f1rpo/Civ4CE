@@ -78,7 +78,7 @@
 			<Type>TRAIT_EXPANSIVE</Type>
 			<Description>TXT_KEY_TRAIT_EXPANSIVE</Description>
 			<ShortDescription>TXT_KEY_TRAIT_EXPANSIVE_SHORT</ShortDescription>
-			<iHealth>2</iHealth>
+			<iHealth>3</iHealth>
 			<iMaxAnarchy>-1</iMaxAnarchy>
 			<iUpkeepModifier>0</iUpkeepModifier>
 			<iGreatPeopleRateModifier>0</iGreatPeopleRateModifier>

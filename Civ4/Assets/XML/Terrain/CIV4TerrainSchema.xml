@@ -301,17 +301,17 @@
 	<ElementType name="iFogR" content="textOnly" dt:type="int"/>
 	<ElementType name="iFogG" content="textOnly" dt:type="int"/>
 	<ElementType name="iFogB" content="textOnly" dt:type="int"/>
-	<ElementType name="fTextureScaleX" content="textOnly" dt:type="float"/>
-	<ElementType name="fTextureScaleY" content="textOnly" dt:type="float"/>
+	<ElementType name="fTextureScaleX" content="textOnly"/>
+	<ElementType name="fTextureScaleY" content="textOnly"/>
 	<ElementType name="iPlotsPerCellX" content="textOnly" dt:type="int"/>
 	<ElementType name="iPlotsPerCellY" content="textOnly" dt:type="int"/>
 	<ElementType name="iGameCellSizeX" content="textOnly" dt:type="int"/>
 	<ElementType name="iGameCellSizeY" content="textOnly" dt:type="int"/>
-	<ElementType name="fZScale" content="textOnly" dt:type="float"/>
+	<ElementType name="fZScale" content="textOnly"/>
 	<ElementType name="bTerrainShader" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bUseLightmap" content="textOnly" dt:type="boolean"/>
-	<ElementType name="fPeakScale" content="textOnly" dt:type="float"/>
-	<ElementType name="fHillScale" content="textOnly" dt:type="float"/>
+	<ElementType name="fPeakScale" content="textOnly"/>
+	<ElementType name="fHillScale" content="textOnly"/>
 	<ElementType name="TerrainTextureInfo" content="eltOnly">
 		<element type="Type"/>
 		<element type="Description"/>

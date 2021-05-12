@@ -427,7 +427,7 @@
 		<element type="FreeTechs"/>
 		<element type="DisableTechs"/>
 		<element type="InitialCivics"/>
-		<element type="AnarchyCivics"/>
+		<element type="AnarchyCivics" minOccurs="0"/>
 		<element type="Leaders" minOccurs="0"/>
 		<element type="CivilizationSelectionSound"/>
 		<element type="CivilizationActionSound"/>

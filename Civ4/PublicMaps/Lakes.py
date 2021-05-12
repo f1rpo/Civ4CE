@@ -47,24 +47,10 @@ def getWrapY(): return False
 def minStartingDistanceModifier():
 	return -15
 
-best_area = -1
-
 def findStartingArea(argsList):
 	"make sure all players are on the biggest area"
-	global best_area
 	[playerID] = argsList
-	map = gc.getMap()
-	
-	if (best_area == -1):
-		best_value = 0
-		for i in range(map.getIndexAfterLastArea()):
-			area = map.getArea(i)
-			if not area.isNone() and not area.isWater():
-				value = area.getNumTiles()
-				if value > best_value:
-					best_value = value
-					best_area = area.getID()
-	return best_area
+	return gc.getMap().findBiggestArea(False).getID()
 
 # Subclass to customize sea level effects.
 class LakesFractalWorld(CvMapGeneratorUtil.FractalWorld):

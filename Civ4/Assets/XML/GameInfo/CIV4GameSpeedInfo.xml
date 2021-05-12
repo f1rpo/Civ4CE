@@ -19,8 +19,8 @@
 			<iImprovementPercent>300</iImprovementPercent>
 			<iGreatPeoplePercent>300</iGreatPeoplePercent>
 			<iCulturePercent>300</iCulturePercent>
-			<iAnarchyPercent>300</iAnarchyPercent>
-			<iBarbPercent>300</iBarbPercent>
+			<iAnarchyPercent>200</iAnarchyPercent>
+			<iBarbPercent>400</iBarbPercent>
 			<iFeatureProductionPercent>300</iFeatureProductionPercent>
 			<iUnitDiscoverPercent>300</iUnitDiscoverPercent>
 			<iUnitHurryPercent>300</iUnitHurryPercent>
@@ -33,24 +33,28 @@
 			<iInflationOffset>-200</iInflationOffset>
 			<GameTurnInfos>
 				<GameTurnInfo>
-					<iYearIncrement>20</iYearIncrement>
-					<iTurnsPerIncrement>100</iTurnsPerIncrement>
+					<iYearIncrement>15</iYearIncrement>
+					<iTurnsPerIncrement>200</iTurnsPerIncrement>
 				</GameTurnInfo>
 				<GameTurnInfo>
 					<iYearIncrement>10</iYearIncrement>
-					<iTurnsPerIncrement>200</iTurnsPerIncrement>
+					<iTurnsPerIncrement>150</iTurnsPerIncrement>
+				</GameTurnInfo>
+				<GameTurnInfo>
+					<iYearIncrement>8</iYearIncrement>
+					<iTurnsPerIncrement>40</iTurnsPerIncrement>
 				</GameTurnInfo>
 				<GameTurnInfo>
 					<iYearIncrement>5</iYearIncrement>
-					<iTurnsPerIncrement>200</iTurnsPerIncrement>
+					<iTurnsPerIncrement>90</iTurnsPerIncrement>
 				</GameTurnInfo>
 				<GameTurnInfo>
 					<iYearIncrement>2</iYearIncrement>
-					<iTurnsPerIncrement>350</iTurnsPerIncrement>
+					<iTurnsPerIncrement>60</iTurnsPerIncrement>
 				</GameTurnInfo>
 				<GameTurnInfo>
 					<iYearIncrement>1</iYearIncrement>
-					<iTurnsPerIncrement>350</iTurnsPerIncrement>
+					<iTurnsPerIncrement>660</iTurnsPerIncrement>
 				</GameTurnInfo>
 			</GameTurnInfos>
 		</GameSpeedInfo>
@@ -59,7 +63,7 @@
 			<Description>TXT_KEY_GAMESPEED_EPIC</Description>
 			<Help>TXT_KEY_GAMESPEED_EPIC_HELP</Help>
 			<iGrowthPercent>150</iGrowthPercent>
-			<iTrainPercent>125</iTrainPercent>
+			<iTrainPercent>150</iTrainPercent>
 			<iConstructPercent>150</iConstructPercent>
 			<iCreatePercent>150</iCreatePercent>
 			<iResearchPercent>150</iResearchPercent>
@@ -81,32 +85,28 @@
 			<iInflationOffset>-160</iInflationOffset>
 			<GameTurnInfos>
 				<GameTurnInfo>
-					<iYearIncrement>40</iYearIncrement>
-					<iTurnsPerIncrement>50</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iYearIncrement>25</iYearIncrement>
-					<iTurnsPerIncrement>40</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iYearIncrement>20</iYearIncrement>
-					<iTurnsPerIncrement>60</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iYearIncrement>10</iYearIncrement>
-					<iTurnsPerIncrement>80</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iYearIncrement>5</iYearIncrement>
-					<iTurnsPerIncrement>130</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iYearIncrement>2</iYearIncrement>
+					<iYearIncrement>30</iYearIncrement>
 					<iTurnsPerIncrement>100</iTurnsPerIncrement>
 				</GameTurnInfo>
 				<GameTurnInfo>
+					<iYearIncrement>15</iYearIncrement>
+					<iTurnsPerIncrement>140</iTurnsPerIncrement>
+				</GameTurnInfo>
+				<GameTurnInfo>
+					<iYearIncrement>6</iYearIncrement>
+					<iTurnsPerIncrement>70</iTurnsPerIncrement>
+				</GameTurnInfo>
+				<GameTurnInfo>
+					<iYearIncrement>3</iYearIncrement>
+					<iTurnsPerIncrement>70</iTurnsPerIncrement>
+				</GameTurnInfo>
+				<GameTurnInfo>
+					<iYearIncrement>2</iYearIncrement>
+					<iTurnsPerIncrement>40</iTurnsPerIncrement>
+				</GameTurnInfo>
+				<GameTurnInfo>
 					<iYearIncrement>1</iYearIncrement>
-					<iTurnsPerIncrement>200</iTurnsPerIncrement>
+					<iTurnsPerIncrement>240</iTurnsPerIncrement>
 				</GameTurnInfo>
 			</GameTurnInfos>
 		</GameSpeedInfo>
@@ -171,7 +171,7 @@
 			<Description>TXT_KEY_GAMESPEED_QUICK</Description>
 			<Help>TXT_KEY_GAMESPEED_QUICK_HELP</Help>
 			<iGrowthPercent>67</iGrowthPercent>
-			<iTrainPercent>80</iTrainPercent>
+			<iTrainPercent>67</iTrainPercent>
 			<iConstructPercent>67</iConstructPercent>
 			<iCreatePercent>67</iCreatePercent>
 			<iResearchPercent>67</iResearchPercent>
@@ -193,32 +193,36 @@
 			<iInflationOffset>-70</iInflationOffset>
 			<GameTurnInfos>
 				<GameTurnInfo>
-					<iYearIncrement>50</iYearIncrement>
-					<iTurnsPerIncrement>60</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iYearIncrement>40</iYearIncrement>
+					<iYearIncrement>60</iYearIncrement>
 					<iTurnsPerIncrement>50</iTurnsPerIncrement>
 				</GameTurnInfo>
 				<GameTurnInfo>
-					<iYearIncrement>25</iYearIncrement>
-					<iTurnsPerIncrement>20</iTurnsPerIncrement>
+					<iYearIncrement>35</iYearIncrement>
+					<iTurnsPerIncrement>30</iTurnsPerIncrement>
 				</GameTurnInfo>
 				<GameTurnInfo>
-					<iYearIncrement>10</iYearIncrement>
-					<iTurnsPerIncrement>15</iTurnsPerIncrement>
+					<iYearIncrement>30</iYearIncrement>
+					<iTurnsPerIncrement>30</iTurnsPerIncrement>
 				</GameTurnInfo>
 				<GameTurnInfo>
-					<iYearIncrement>5</iYearIncrement>
-					<iTurnsPerIncrement>50</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iYearIncrement>2</iYearIncrement>
+					<iYearIncrement>15</iYearIncrement>
 					<iTurnsPerIncrement>25</iTurnsPerIncrement>
 				</GameTurnInfo>
 				<GameTurnInfo>
+					<iYearIncrement>10</iYearIncrement>
+					<iTurnsPerIncrement>30</iTurnsPerIncrement>
+				</GameTurnInfo>
+				<GameTurnInfo>
+					<iYearIncrement>5</iYearIncrement>
+					<iTurnsPerIncrement>55</iTurnsPerIncrement>
+				</GameTurnInfo>
+				<GameTurnInfo>
+					<iYearIncrement>2</iYearIncrement>
+					<iTurnsPerIncrement>50</iTurnsPerIncrement>
+				</GameTurnInfo>
+				<GameTurnInfo>
 					<iYearIncrement>1</iYearIncrement>
-					<iTurnsPerIncrement>100</iTurnsPerIncrement>
+					<iTurnsPerIncrement>50</iTurnsPerIncrement>
 				</GameTurnInfo>
 			</GameTurnInfos>
 		</GameSpeedInfo>

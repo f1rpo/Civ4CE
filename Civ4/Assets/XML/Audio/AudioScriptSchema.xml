@@ -30,10 +30,10 @@
 	<ElementType name="iMaxLeftPan" content="textOnly" dt:type="int"/>
 	<ElementType name="iMinRightPan" content="textOnly" dt:type="int"/>
 	<ElementType name="iMaxRightPan" content="textOnly" dt:type="int"/>
-	<ElementType name="fMinDryLevel" content="textOnly" dt:type="float"/>
-	<ElementType name="fMaxDryLevel" content="textOnly" dt:type="float"/>
-	<ElementType name="fMinWetLevel" content="textOnly" dt:type="float"/>
-	<ElementType name="fMaxWetLevel" content="textOnly" dt:type="float"/>
+	<ElementType name="fMinDryLevel" content="textOnly"/>
+	<ElementType name="fMaxDryLevel" content="textOnly"/>
+	<ElementType name="fMinWetLevel" content="textOnly"/>
+	<ElementType name="fMaxWetLevel" content="textOnly"/>
 	<ElementType name="ScriptType" content="textOnly"/>
 	<ElementType name="SoundscapeElement" content="eltOnly">
 		<element type="ScriptType"/>

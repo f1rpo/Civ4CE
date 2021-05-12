@@ -142,7 +142,7 @@
 	<ElementType name="iAllCityDefense" content="textOnly" dt:type="int"/>
 	<ElementType name="iAsset" content="textOnly" dt:type="int"/>
 	<ElementType name="iPower" content="textOnly" dt:type="int"/>
-	<ElementType name="fVisibilityPriority" content="textOnly" dt:type="float"/>
+	<ElementType name="fVisibilityPriority" content="textOnly"/>
 	<ElementType name="FreePromotion" content="textOnly"/>
 	<ElementType name="CivicOption" content="textOnly"/>
 	<ElementType name="GreatPeopleUnitClass" content="textOnly"/>
@@ -488,7 +488,7 @@
 	<ElementType name="TechPrereq" content="textOnly"/>
 	<ElementType name="ArtStyleType" content="textOnly"/>
 	<ElementType name="iRequiredPopulation" content="textOnly" dt:type="int"/>
-	<ElementType name="fScale" content="textOnly" dt:type="float"/>
+	<ElementType name="fScale" content="textOnly"/>
 	<ElementType name="bValid" content="textOnly" dt:type="boolean"/>
 	<ElementType name="Button" content="textOnly"/>
 	<ElementType name="SpecialBuildingInfo" content="eltOnly">

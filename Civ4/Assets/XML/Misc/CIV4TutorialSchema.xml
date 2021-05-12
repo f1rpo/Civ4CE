@@ -5,7 +5,7 @@
 <!-- Tutorial Schema -->
 <Schema xmlns="urn:schemas-microsoft-com:xml-data" xmlns:dt="urn:schemas-microsoft-com:datatypes">
 	<ElementType name="bHideSelectionCursor" content="textOnly" dt:type="boolean"/>
-	<ElementType name="fArgumentFloatVal" content="textOnly" dt:type="float"/>
+	<ElementType name="fArgumentFloatVal" content="textOnly"/>
 	<ElementType name="iArgumentIntVal" content="textOnly" dt:type="int"/>
 	<ElementType name="Type" content="textOnly"/>
 	<ElementType name="Description" content="textOnly"/>

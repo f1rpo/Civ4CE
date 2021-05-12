@@ -380,5 +380,21 @@
 				<WaterLevelGlossPath>Art/Interface/Screens/WorldPicker/MapBlank.dds</WaterLevelGlossPath> <!-- Random -->
 			</WaterLevelGloss>
 		</WorldPickerInfo>
+		<WorldPickerInfo>
+			<MapName>Earth18Civs</MapName>
+			<ModelFile>Art/Interface/Screens/WorldPicker/Globe.nif</ModelFile>
+			<Sizes>
+				<Size>1.0</Size> <!-- Random -->
+			</Sizes>
+			<Climates>
+				<ClimatePath>Art/Interface/Screens/WorldPicker/MapBlank.dds</ClimatePath> <!-- Random -->
+			</Climates>
+			<WaterLevelDecals>
+				<WaterLevelDecalPath>Art/Interface/Screens/WorldPicker/FLAT_WORLD.dds</WaterLevelDecalPath> <!-- Random -->
+			</WaterLevelDecals>
+			<WaterLevelGloss>
+				<WaterLevelGlossPath>Art/Interface/Screens/WorldPicker/MapBlank.dds</WaterLevelGlossPath> <!-- Random -->
+			</WaterLevelGloss>
+		</WorldPickerInfo>
 	</WorldPickerInfos>
 </Civ4WorldPickerInfos>

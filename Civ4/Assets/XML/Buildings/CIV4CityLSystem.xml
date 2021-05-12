@@ -724,7 +724,7 @@
 			<Attribute Class="Rotation">0,90,180</Attribute>
 			<Scale>2.1</Scale>
 		</ArtRef>
-		<ArtRef Name="building:BUILDING_FORBIDDEN_PALACE">
+		<ArtRef Name="building:BUILDING_GREAT_PALACE">
 			<Attribute Class="Rotation">0,180</Attribute>
 		</ArtRef>
 		<ArtRef Name="building:BUILDING_LIBRARY">
@@ -880,7 +880,7 @@
 		<ArtRef Name="building:BUILDING_PYRAMID">
 			<Scale>2.75</Scale>
 		</ArtRef>
-		<ArtRef Name="building:BUILDING_THREEGORGESDAM">
+		<ArtRef Name="building:BUILDING_GREAT_DAM">
 			<Scale>1.4</Scale>
 		</ArtRef>
 		<ArtRef Name="building:BUILDING_ISLAMIC_CATHEDRAL">

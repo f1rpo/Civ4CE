@@ -9,11 +9,11 @@
 	<ElementType name="EventType" content="textOnly"/>
 	<ElementType name="UnitType" content="textOnly"/>
 	<ElementType name="PromotionType" content="textOnly"/>
-	<ElementType name="x" content="textOnly" dt:type="float"/>
-	<ElementType name="y" content="textOnly" dt:type="float"/>
-	<ElementType name="PositionRadius" content="textOnly" dt:type="float"/>
-	<ElementType name="Direction" content="textOnly" dt:type="float"/>
-	<ElementType name="DirVariation" content="textOnly" dt:type="float"/>
+	<ElementType name="x" content="textOnly"/>
+	<ElementType name="y" content="textOnly"/>
+	<ElementType name="PositionRadius" content="textOnly"/>
+	<ElementType name="Direction" content="textOnly"/>
+	<ElementType name="DirVariation" content="textOnly"/>
 	<ElementType name="DirectionType" content="textOnly"/>
 	<ElementType name="RotationMask" content="textOnly" dt:type="int"/>
 	<ElementType name="UseFacing" content="textOnly" dt:type="int"/>

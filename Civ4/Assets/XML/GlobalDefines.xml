@@ -7,15 +7,15 @@
 <Civ4Defines xmlns="x-schema:CIV4GlobalDefinesSchema.xml">
 	<Define>
 		<DefineName>CIV4_VERSION</DefineName>
-		<iDefineIntVal>152</iDefineIntVal>
+		<iDefineIntVal>161</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>SAVE_VERSION</DefineName>
-		<iDefineIntVal>102</iDefineIntVal>
+		<iDefineIntVal>103</iDefineIntVal>
 	</Define>
 	<Define>
-		<DefineName>NUM_LANGUAGES</DefineName>
-		<iDefineIntVal>8</iDefineIntVal>
+		<DefineName>MAX_NUM_LANGUAGES</DefineName>
+		<iDefineIntVal>100</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>LAND_TERRAIN</DefineName>
@@ -235,7 +235,7 @@
 	</Define>
 	<Define>
 		<DefineName>BASE_CIVIC_ANARCHY_LENGTH</DefineName>
-		<iDefineIntVal>0</iDefineIntVal>
+		<iDefineIntVal>1</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>BASE_RELIGION_ANARCHY_LENGTH</DefineName>
@@ -771,6 +771,18 @@
 		<iDefineIntVal>1000</iDefineIntVal>
 	</Define>
 	<Define>
+		<DefineName>BASE_FEATURE_PRODUCTION_PERCENT</DefineName>
+		<iDefineIntVal>67</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>FEATURE_PRODUCTION_PERCENT_MULTIPLIER</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>DIFFERENT_TEAM_FEATURE_PRODUCTION_PERCENT</DefineName>
+		<iDefineIntVal>67</iDefineIntVal>
+	</Define>
+	<Define>
 		<DefineName>UNIT_PRODUCTION_PERCENT</DefineName>
 		<iDefineIntVal>100</iDefineIntVal>
 	</Define>
@@ -880,7 +892,7 @@
 	</Define>
 	<Define>
 		<DefineName>BASE_UNIT_UPGRADE_COST</DefineName>
-		<iDefineIntVal>25</iDefineIntVal>
+		<iDefineIntVal>20</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>UNIT_UPGRADE_COST_PER_PRODUCTION</DefineName>

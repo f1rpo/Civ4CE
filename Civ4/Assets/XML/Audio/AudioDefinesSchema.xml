@@ -15,11 +15,11 @@
 	<ElementType name="LoadType" content="textOnly"/>
 	<ElementType name="EffectType" content="textOnly"/>
 	<ElementType name="SpeakerConfig" content="textOnly"/>
-	<ElementType name="fReverbTime" content="textOnly" dt:type="float"/>
-	<ElementType name="fReverbPredelay" content="textOnly" dt:type="float"/>
-	<ElementType name="fReverbDamping" content="textOnly" dt:type="float"/>
-	<ElementType name="fReverbDryLevel" content="textOnly" dt:type="float"/>
-	<ElementType name="fReverbWetLevel" content="textOnly" dt:type="float"/>
+	<ElementType name="fReverbTime" content="textOnly"/>
+	<ElementType name="fReverbPredelay" content="textOnly"/>
+	<ElementType name="fReverbDamping" content="textOnly"/>
+	<ElementType name="fReverbDryLevel" content="textOnly"/>
+	<ElementType name="fReverbWetLevel" content="textOnly"/>
 	<ElementType name="iSampleRate" content="textOnly" dt:type="int"/>
 	<ElementType name="iSampleBits" content="textOnly" dt:type="int"/>
 	<ElementType name="iMultiChannelPref" content="textOnly" dt:type="int"/>
@@ -27,7 +27,7 @@
 	<ElementType name="iNum3DSamples" content="textOnly" dt:type="int"/>
 	<ElementType name="iNum2DStreams" content="textOnly" dt:type="int"/>
 	<ElementType name="iNum3DStreams" content="textOnly" dt:type="int"/>
-	<ElementType name="fPercentSamplesFor3D" content="textOnly" dt:type="float"/>
+	<ElementType name="fPercentSamplesFor3D" content="textOnly"/>
 	<ElementType name="AudioSystemInit" content="eltOnly">
 		<element type="iSampleRate" maxOccurs="1"/>
 		<element type="iSampleBits" maxOccurs="1"/>

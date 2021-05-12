@@ -151,7 +151,7 @@
 			<BackgroundKFM>art/LeaderHeads/Mansa_Musa/Mansa_Musa_BG.kfm</BackgroundKFM>
 		</LeaderheadArtInfo>
 		<LeaderheadArtInfo>
-			<Type>ART_DEF_LEADER_MAO_ZEDONG</Type>
+			<Type>ART_DEF_LEADER_CHINESE_LEADER</Type>
 			<Button>,Art/interface/LeaderHeads/Btn_LH_China_MaoZedong.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,7,11</Button>
 			<NIF>art/LeaderHeads/Mao/Mao_tse_tung.nif</NIF>
 			<KFM>art/LeaderHeads/Mao/Mao_tse_tung.kfm</KFM>

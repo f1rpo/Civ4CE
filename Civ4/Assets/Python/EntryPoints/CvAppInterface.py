@@ -62,11 +62,12 @@ def preGameStart():
 		# Load dynamic font icons into the icon map
 		CvUtil.initDynamicFontIcons()
 
-	# Preload the tech chooser..., only do this release builds, in debug build we may not be raising the tech chooser
-	if (not gc.isDebugBuild()):
-		NiTextOut("Preloading tech chooser")
-		CvScreensInterface.showTechChooser()
-		CvScreensInterface.techChooser.hideScreen()
+	if not CyGame().isPitbossHost():
+		# Preload the tech chooser..., only do this release builds, in debug build we may not be raising the tech chooser
+		if (not gc.isDebugBuild()):
+			NiTextOut("Preloading tech chooser")
+			CvScreensInterface.showTechChooser()
+			CvScreensInterface.techChooser.hideScreen()
 		
 	NiTextOut("Loading main interface...")
 	CvScreensInterface.showMainInterface()	

@@ -6498,7 +6498,29 @@
 	</Script2DSound>
 	<Script2DSound>
 		<ScriptID>AS2D_THEIRDECLAREWAR</ScriptID>
-		<SoundID>SND_DECLAREWAR</SoundID>
+		<SoundID>SND_THEIRDECLAREWAR</SoundID>
+		<SoundType>GAME_INTERFACE</SoundType>
+		<iMinVolume>80</iMinVolume>
+		<iMaxVolume>80</iMaxVolume>
+		<iPitchChangeDown>0</iPitchChangeDown>
+		<iPitchChangeUp>0</iPitchChangeUp>
+		<iMinLeftPan>-1</iMinLeftPan>
+		<iMaxLeftPan>-1</iMaxLeftPan>
+		<iMinRightPan>-1</iMinRightPan>
+		<iMaxRightPan>-1</iMaxRightPan>
+		<bLooping>0</bLooping>
+		<iMinTimeDelay>0</iMinTimeDelay>
+		<iMaxTimeDelay>0</iMaxTimeDelay>
+		<bTaperForSoundtracks>0</bTaperForSoundtracks>
+		<iLengthOfSound>0</iLengthOfSound>
+		<fMinDryLevel>1.0</fMinDryLevel>
+		<fMaxDryLevel>1.0</fMaxDryLevel>
+		<fMinWetLevel>0.0</fMinWetLevel>
+		<fMaxWetLevel>0.0</fMaxWetLevel>
+	</Script2DSound>
+	<Script2DSound>
+		<ScriptID>AS2D_MAKEPEACE</ScriptID>
+		<SoundID>SND_MAKEPEACE</SoundID>
 		<SoundType>GAME_INTERFACE</SoundType>
 		<iMinVolume>80</iMinVolume>
 		<iMaxVolume>80</iMaxVolume>
@@ -8411,8 +8433,8 @@
 		<fMaxWetLevel>0.0</fMaxWetLevel>
 	</Script2DSound>
 	<Script2DSound>
-		<ScriptID>AS2D_TECH_COMMUNISM</ScriptID>
-		<SoundID>SND_TECH_COMMUNISM</SoundID>
+		<ScriptID>AS2D_TECH_UTOPIA</ScriptID>
+		<SoundID>SND_TECH_UTOPIA</SoundID>
 		<SoundType>GAME_SPEECH</SoundType>
 		<iMinVolume>100</iMinVolume>
 		<iMaxVolume>100</iMaxVolume>
@@ -9139,6 +9161,28 @@
 	<Script2DSound>
 		<ScriptID>AS2D_TECH_FUSION</ScriptID>
 		<SoundID>SND_TECH_FUSION</SoundID>
+		<SoundType>GAME_SPEECH</SoundType>
+		<iMinVolume>100</iMinVolume>
+		<iMaxVolume>100</iMaxVolume>
+		<iPitchChangeDown>0</iPitchChangeDown>
+		<iPitchChangeUp>0</iPitchChangeUp>
+		<iMinLeftPan>-1</iMinLeftPan>
+		<iMaxLeftPan>-1</iMaxLeftPan>
+		<iMinRightPan>-1</iMinRightPan>
+		<iMaxRightPan>-1</iMaxRightPan>
+		<bLooping>0</bLooping>
+		<iMinTimeDelay>0</iMinTimeDelay>
+		<iMaxTimeDelay>0</iMaxTimeDelay>
+		<bTaperForSoundtracks>0</bTaperForSoundtracks>
+		<iLengthOfSound>0</iLengthOfSound>
+		<fMinDryLevel>1.0</fMinDryLevel>
+		<fMaxDryLevel>1.0</fMaxDryLevel>
+		<fMinWetLevel>0.0</fMinWetLevel>
+		<fMaxWetLevel>0.0</fMaxWetLevel>
+	</Script2DSound>
+	<Script2DSound>
+		<ScriptID>AS2D_TECH_FUTURE</ScriptID>
+		<SoundID>SND_TECH_FUTURE</SoundID>
 		<SoundType>GAME_SPEECH</SoundType>
 		<iMinVolume>100</iMinVolume>
 		<iMaxVolume>100</iMaxVolume>
@@ -10281,8 +10325,8 @@
 		<fMaxWetLevel>0.0</fMaxWetLevel>
 	</Script2DSound>
 	<Script2DSound>
-		<ScriptID>AS2D_TECH_MP_COMMUNISM</ScriptID>
-		<SoundID>SND_TECH_MP_COMMUNISM</SoundID>
+		<ScriptID>AS2D_TECH_MP_UTOPIA</ScriptID>
+		<SoundID>SND_TECH_MP_UTOPIA</SoundID>
 		<SoundType>GAME_SPEECH</SoundType>
 		<iMinVolume>100</iMinVolume>
 		<iMaxVolume>100</iMaxVolume>
@@ -11009,6 +11053,28 @@
 	<Script2DSound>
 		<ScriptID>AS2D_TECH_MP_FUSION</ScriptID>
 		<SoundID>SND_TECH_MP_FUSION</SoundID>
+		<SoundType>GAME_SPEECH</SoundType>
+		<iMinVolume>100</iMinVolume>
+		<iMaxVolume>100</iMaxVolume>
+		<iPitchChangeDown>0</iPitchChangeDown>
+		<iPitchChangeUp>0</iPitchChangeUp>
+		<iMinLeftPan>-1</iMinLeftPan>
+		<iMaxLeftPan>-1</iMaxLeftPan>
+		<iMinRightPan>-1</iMinRightPan>
+		<iMaxRightPan>-1</iMaxRightPan>
+		<bLooping>0</bLooping>
+		<iMinTimeDelay>0</iMinTimeDelay>
+		<iMaxTimeDelay>0</iMaxTimeDelay>
+		<bTaperForSoundtracks>0</bTaperForSoundtracks>
+		<iLengthOfSound>0</iLengthOfSound>
+		<fMinDryLevel>1.0</fMinDryLevel>
+		<fMaxDryLevel>1.0</fMaxDryLevel>
+		<fMinWetLevel>0.0</fMinWetLevel>
+		<fMaxWetLevel>0.0</fMaxWetLevel>
+	</Script2DSound>
+	<Script2DSound>
+		<ScriptID>AS2D_TECH_MP_FUTURE</ScriptID>
+		<SoundID>SND_TECH_MP_FUTURE</SoundID>
 		<SoundType>GAME_SPEECH</SoundType>
 		<iMinVolume>100</iMinVolume>
 		<iMaxVolume>100</iMaxVolume>

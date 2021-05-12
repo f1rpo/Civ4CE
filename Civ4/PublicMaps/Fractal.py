@@ -15,26 +15,26 @@ from CvMapGeneratorUtil import TerrainGenerator
 from CvMapGeneratorUtil import FeatureGenerator
 
 def getDescription():
-	return "TXT_KEY_MAP_SCRIPT_CONTINENTS_DESCR"
+	return "TXT_KEY_MAP_SCRIPT_FRACTAL_DESCR"
 	
 def isAdvancedMap():
 	"This map should show up in simple mode"
 	return 0
 
 def generatePlotTypes():
-	NiTextOut("Setting Plot Types (Python Continents) ...")
+	NiTextOut("Setting Plot Types (Python Fractal) ...")
 	fractal_world = FractalWorld()
-	fractal_world.initFractal(polar = True)
-	return fractal_world.generatePlotTypes(water_percent=75)
+	fractal_world.initFractal(rift_grain = -1, has_center_rift = False, polar = True)
+	return fractal_world.generatePlotTypes()
 
 def generateTerrainTypes():
-	NiTextOut("Generating Terrain (Python Continents) ...")
+	NiTextOut("Generating Terrain (Python Fractal) ...")
 	terraingen = TerrainGenerator()
 	terrainTypes = terraingen.generateTerrain()
 	return terrainTypes
 
 def addFeatures():
-	NiTextOut("Adding Features (Python Continents) ...")
+	NiTextOut("Adding Features (Python Fractal) ...")
 	featuregen = FeatureGenerator()
 	featuregen.addFeatures()
 	return 0

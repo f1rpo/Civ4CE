@@ -2249,10 +2249,8 @@
 			<Attribute Class="Era">ERA_INDUSTRIAL,ERA_MODERN,ERA_FUTURE</Attribute>
 			<Attribute Class="Scalar">bIsPartOfImprovement:1</Attribute>
 			<Attribute Class="Scalar">bApplyRotation:1</Attribute>
-			<!-- Uncomment this when the modern WhalingBoat asset arrives
 			<Attribute Class="Scalar">NIF:Art/Structures/Improvements/Whalingboat_Modern/WhalingBoat_Modern.nif</Attribute>
 			<Attribute Class="Scalar">KFM:Art/Structures/Improvements/Whalingboat_Modern/WhalingBoat_Modern.kfm</Attribute>
-			-->
 		</ArtRef>
 	</LNode>
 	

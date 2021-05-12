@@ -581,6 +581,8 @@ class CvUnitDesc:
 		self.level = -1
 		self.experience = -1
 		self.promotionType = []
+		self.isSleep = False
+		self.isIntercept = False
 		self.szUnitAIType = "NO_UNITAI"
 		self.szScriptData = "NONE"
 		
@@ -594,7 +596,6 @@ class CvUnitDesc:
 			if (unitTypeNum < 0):
 				unit = None
 			else:
-#				eUnitAI = gc.getTypesEnum(self.szUnitAIType)
 				if (self.szUnitAIType != "NO_UNITAI"):
 					eUnitAI = CvUtil.findInfoTypeNum(gc.getUnitAIInfo, UnitAITypes.NUM_UNITAI_TYPES, self.szUnitAIType) #pUnitAI.getType()
 				else:
@@ -611,6 +612,10 @@ class CvUnitDesc:
 				for promo in self.promotionType:
 					promotionTypeNum = CvUtil.findInfoTypeNum(gc.getPromotionInfo, gc.getNumPromotionInfos(), promo)
 					unit.setHasPromotion(promotionTypeNum, True)
+				if self.isSleep:
+					unit.getGroup().setActivityType(ActivityTypes.ACTIVITY_SLEEP)
+				elif self.isIntercept:
+					unit.getGroup().setActivityType(ActivityTypes.ACTIVITY_INTERCEPT)
 				if self.szScriptData != "NONE":
 					unit.setScriptData(self.szScriptData)
 					
@@ -652,6 +657,14 @@ class CvUnitDesc:
 				self.promotionType.append(v)
 				continue
 				
+			if (parser.findTokenValue(toks, "Sleep"))!=-1:
+				self.isSleep = True
+				continue
+
+			if (parser.findTokenValue(toks, "Intercept"))!=-1:
+				self.isIntercept = True
+				continue
+
 			v = parser.findTokenValue(toks, "UnitAIType")
 			if (v != -1):
 				self.szUnitAIType = v
@@ -677,6 +690,10 @@ class CvUnitDesc:
 		for i in range(gc.getNumPromotionInfos()):
 			if unit.isHasPromotion(i):
 				f.write("\t\tPromotionType=%s\n" %(gc.getPromotionInfo(i).getType()))
+		if (unit.getGroup().getActivityType() == ActivityTypes.ACTIVITY_SLEEP):
+			f.write("\t\tSleep\n")
+		elif (unit.getGroup().getActivityType() == ActivityTypes.ACTIVITY_INTERCEPT):
+			f.write("\t\tIntercept\n")
 		f.write("\t\tUnitAIType=%s\n" %(gc.getUnitAIInfo(unit.getUnitAIType()).getType()))
 		if unit.getScriptData():
 			f.write("\t\tScriptData=%s\n" %unit.getScriptData() )

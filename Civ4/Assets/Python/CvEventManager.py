@@ -293,7 +293,16 @@ class CvEventManager:
 					popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON_SCREEN)
 					popupInfo.setText(u"showDawnOfMan")
 					popupInfo.addPopup(iPlayer)
-
+					
+		if gc.getGame().isPbem():
+			for iPlayer in range(gc.getMAX_PLAYERS()):
+				player = gc.getPlayer(iPlayer)
+				if (player.isAlive() and player.isHuman()):
+					popupInfo = CyPopupInfo()
+					popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_DETAILS)
+					popupInfo.setOption1(true)
+					popupInfo.addPopup(iPlayer)
+					
 	def onGameEnd(self, argsList):
 		'Called at the End of the game'
 		print("Game is ending")
@@ -545,7 +554,7 @@ class CvEventManager:
 		
 		# Show tech splash when applicable
 		if (iPlayer > -1 and bAnnounce and not CyInterface().noTechSplash()):
-			if (gc.getGame().isFinalInitialized() and not gc.getGame().GetWorldBuilder2Mode()):
+			if (gc.getGame().isFinalInitialized() and not gc.getGame().GetWorldBuilderMode()):
 				if ((not CyGame().isNetworkMultiPlayer()) and (iPlayer == CyGame().getActivePlayer())):
 					popupInfo = CyPopupInfo()
 					popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON_SCREEN)
@@ -571,7 +580,7 @@ class CvEventManager:
 		player = PyPlayer(iFounder)
 		
 		iCityId = gc.getGame().getHolyCity(iReligion).getID()
-		if (gc.getGame().isFinalInitialized() and not gc.getGame().GetWorldBuilder2Mode()):
+		if (gc.getGame().isFinalInitialized() and not gc.getGame().GetWorldBuilderMode()):
 			if ((not CyGame().isNetworkMultiPlayer()) and (iFounder == CyGame().getActivePlayer())):
 				popupInfo = CyPopupInfo()
 				popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON_SCREEN)

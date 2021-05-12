@@ -3,7 +3,8 @@
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
-<!-- Project -->
+<!-- Project Infos -->
+<!-- You must have atleast one project in order for the game to load properly. -->
 <Civ4ProjectInfo xmlns="x-schema:CIV4GameInfoSchema.xml">
 	<ProjectInfos>
 		<ProjectInfo>
@@ -13,6 +14,7 @@
 			<Strategy>TXT_KEY_PROJECT_MANHATTAN_PROJECT_STRATEGY</Strategy>
 			<VictoryPrereq>NONE</VictoryPrereq>
 			<TechPrereq>TECH_FISSION</TechPrereq>
+			<AnyonePrereqProject>NONE</AnyonePrereqProject>
 			<iMaxGlobalInstances>1</iMaxGlobalInstances>
 			<iMaxTeamInstances>-1</iMaxTeamInstances>
 			<iCost>1500</iCost>
@@ -40,6 +42,7 @@
 			<Strategy>TXT_KEY_PROJECT_THE_INTERNET_STRATEGY</Strategy>
 			<VictoryPrereq>NONE</VictoryPrereq>
 			<TechPrereq>TECH_FIBER_OPTICS</TechPrereq>
+			<AnyonePrereqProject>NONE</AnyonePrereqProject>
 			<iMaxGlobalInstances>1</iMaxGlobalInstances>
 			<iMaxTeamInstances>-1</iMaxTeamInstances>
 			<iCost>2000</iCost>
@@ -67,9 +70,10 @@
 			<Strategy>TXT_KEY_PROJECT_SDI_STRATEGY</Strategy>
 			<VictoryPrereq>NONE</VictoryPrereq>
 			<TechPrereq>TECH_SATELLITES</TechPrereq>
+			<AnyonePrereqProject>PROJECT_MANHATTAN_PROJECT</AnyonePrereqProject>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>1</iMaxTeamInstances>
-			<iCost>750</iCost>
+			<iCost>1000</iCost>
 			<iNukeInterception>75</iNukeInterception>
 			<iTechShare>0</iTechShare>
 			<EveryoneSpecialUnit>NONE</EveryoneSpecialUnit>
@@ -94,6 +98,7 @@
 			<Strategy>TXT_KEY_PROJECT_APOLLO_PROGRAM_STRATEGY</Strategy>
 			<VictoryPrereq>VICTORY_SPACE_RACE</VictoryPrereq>
 			<TechPrereq>TECH_ROCKETRY</TechPrereq>
+			<AnyonePrereqProject>NONE</AnyonePrereqProject>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>1</iMaxTeamInstances>
 			<iCost>1600</iCost>
@@ -121,9 +126,10 @@
 			<Strategy>TXT_KEY_PROJECT_SPACE_SHIP_STRATEGY</Strategy>
 			<VictoryPrereq>VICTORY_SPACE_RACE</VictoryPrereq>
 			<TechPrereq>TECH_ROCKETRY</TechPrereq>
+			<AnyonePrereqProject>NONE</AnyonePrereqProject>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>5</iMaxTeamInstances>
-			<iCost>600</iCost>
+			<iCost>800</iCost>
 			<iNukeInterception>0</iNukeInterception>
 			<iTechShare>0</iTechShare>
 			<EveryoneSpecialUnit>NONE</EveryoneSpecialUnit>
@@ -158,9 +164,10 @@
 			<Strategy>TXT_KEY_PROJECT_SPACE_SHIP_STRATEGY</Strategy>
 			<VictoryPrereq>VICTORY_SPACE_RACE</VictoryPrereq>
 			<TechPrereq>TECH_SATELLITES</TechPrereq>
+			<AnyonePrereqProject>NONE</AnyonePrereqProject>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>3</iMaxTeamInstances>
-			<iCost>1000</iCost>
+			<iCost>1200</iCost>
 			<iNukeInterception>0</iNukeInterception>
 			<iTechShare>0</iTechShare>
 			<EveryoneSpecialUnit>NONE</EveryoneSpecialUnit>
@@ -195,9 +202,10 @@
 			<Strategy>TXT_KEY_PROJECT_SPACE_SHIP_STRATEGY</Strategy>
 			<VictoryPrereq>VICTORY_SPACE_RACE</VictoryPrereq>
 			<TechPrereq>TECH_FUSION</TechPrereq>
+			<AnyonePrereqProject>NONE</AnyonePrereqProject>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>1</iMaxTeamInstances>
-			<iCost>1200</iCost>
+			<iCost>1600</iCost>
 			<iNukeInterception>0</iNukeInterception>
 			<iTechShare>0</iTechShare>
 			<EveryoneSpecialUnit>NONE</EveryoneSpecialUnit>
@@ -227,9 +235,10 @@
 			<Strategy>TXT_KEY_PROJECT_SPACE_SHIP_STRATEGY</Strategy>
 			<VictoryPrereq>VICTORY_SPACE_RACE</VictoryPrereq>
 			<TechPrereq>TECH_ROBOTICS</TechPrereq>
+			<AnyonePrereqProject>NONE</AnyonePrereqProject>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>1</iMaxTeamInstances>
-			<iCost>1600</iCost>
+			<iCost>2000</iCost>
 			<iNukeInterception>0</iNukeInterception>
 			<iTechShare>0</iTechShare>
 			<EveryoneSpecialUnit>NONE</EveryoneSpecialUnit>
@@ -264,6 +273,7 @@
 			<Strategy>TXT_KEY_PROJECT_SPACE_SHIP_STRATEGY</Strategy>
 			<VictoryPrereq>VICTORY_SPACE_RACE</VictoryPrereq>
 			<TechPrereq>TECH_FIBER_OPTICS</TechPrereq>
+			<AnyonePrereqProject>NONE</AnyonePrereqProject>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>1</iMaxTeamInstances>
 			<iCost>1000</iCost>
@@ -301,9 +311,10 @@
 			<Strategy>TXT_KEY_PROJECT_SPACE_SHIP_STRATEGY</Strategy>
 			<VictoryPrereq>VICTORY_SPACE_RACE</VictoryPrereq>
 			<TechPrereq>TECH_ECOLOGY</TechPrereq>
+			<AnyonePrereqProject>NONE</AnyonePrereqProject>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>1</iMaxTeamInstances>
-			<iCost>800</iCost>
+			<iCost>1000</iCost>
 			<iNukeInterception>0</iNukeInterception>
 			<iTechShare>0</iTechShare>
 			<EveryoneSpecialUnit>NONE</EveryoneSpecialUnit>
@@ -338,6 +349,7 @@
 			<Strategy>TXT_KEY_PROJECT_SPACE_SHIP_STRATEGY</Strategy>
 			<VictoryPrereq>VICTORY_SPACE_RACE</VictoryPrereq>
 			<TechPrereq>TECH_GENETICS</TechPrereq>
+			<AnyonePrereqProject>NONE</AnyonePrereqProject>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>1</iMaxTeamInstances>
 			<iCost>1200</iCost>

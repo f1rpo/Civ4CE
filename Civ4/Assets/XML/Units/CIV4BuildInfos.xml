@@ -63,7 +63,7 @@
 				<FeatureStruct>
 					<FeatureType>FEATURE_FOREST</FeatureType>
 					<PrereqTech>TECH_BRONZE_WORKING</PrereqTech>
-					<iTime>250</iTime>
+					<iTime>300</iTime>
 					<iProduction>30</iProduction>
 					<bRemove>1</bRemove>
 				</FeatureStruct>
@@ -132,7 +132,7 @@
 				<FeatureStruct>
 					<FeatureType>FEATURE_FOREST</FeatureType>
 					<PrereqTech>TECH_BRONZE_WORKING</PrereqTech>
-					<iTime>250</iTime>
+					<iTime>300</iTime>
 					<iProduction>30</iProduction>
 					<bRemove>1</bRemove>
 				</FeatureStruct>
@@ -165,7 +165,7 @@
 				<FeatureStruct>
 					<FeatureType>FEATURE_FOREST</FeatureType>
 					<PrereqTech>TECH_BRONZE_WORKING</PrereqTech>
-					<iTime>250</iTime>
+					<iTime>300</iTime>
 					<iProduction>30</iProduction>
 					<bRemove>1</bRemove>
 				</FeatureStruct>
@@ -216,7 +216,7 @@
 				<FeatureStruct>
 					<FeatureType>FEATURE_FOREST</FeatureType>
 					<PrereqTech>TECH_BRONZE_WORKING</PrereqTech>
-					<iTime>250</iTime>
+					<iTime>300</iTime>
 					<iProduction>30</iProduction>
 					<bRemove>1</bRemove>
 				</FeatureStruct>
@@ -249,7 +249,7 @@
 				<FeatureStruct>
 					<FeatureType>FEATURE_FOREST</FeatureType>
 					<PrereqTech>TECH_BRONZE_WORKING</PrereqTech>
-					<iTime>250</iTime>
+					<iTime>300</iTime>
 					<iProduction>30</iProduction>
 					<bRemove>1</bRemove>
 				</FeatureStruct>
@@ -282,7 +282,7 @@
 				<FeatureStruct>
 					<FeatureType>FEATURE_FOREST</FeatureType>
 					<PrereqTech>TECH_BRONZE_WORKING</PrereqTech>
-					<iTime>250</iTime>
+					<iTime>300</iTime>
 					<iProduction>30</iProduction>
 					<bRemove>1</bRemove>
 				</FeatureStruct>
@@ -315,7 +315,7 @@
 				<FeatureStruct>
 					<FeatureType>FEATURE_FOREST</FeatureType>
 					<PrereqTech>TECH_BRONZE_WORKING</PrereqTech>
-					<iTime>250</iTime>
+					<iTime>300</iTime>
 					<iProduction>30</iProduction>
 					<bRemove>1</bRemove>
 				</FeatureStruct>
@@ -348,7 +348,7 @@
 				<FeatureStruct>
 					<FeatureType>FEATURE_FOREST</FeatureType>
 					<PrereqTech>TECH_BRONZE_WORKING</PrereqTech>
-					<iTime>250</iTime>
+					<iTime>300</iTime>
 					<iProduction>30</iProduction>
 					<bRemove>1</bRemove>
 				</FeatureStruct>
@@ -399,7 +399,7 @@
 				<FeatureStruct>
 					<FeatureType>FEATURE_FOREST</FeatureType>
 					<PrereqTech>TECH_BRONZE_WORKING</PrereqTech>
-					<iTime>250</iTime>
+					<iTime>300</iTime>
 					<iProduction>30</iProduction>
 					<bRemove>1</bRemove>
 				</FeatureStruct>
@@ -450,7 +450,7 @@
 				<FeatureStruct>
 					<FeatureType>FEATURE_FOREST</FeatureType>
 					<PrereqTech>TECH_BRONZE_WORKING</PrereqTech>
-					<iTime>250</iTime>
+					<iTime>300</iTime>
 					<iProduction>30</iProduction>
 					<bRemove>1</bRemove>
 				</FeatureStruct>
@@ -483,7 +483,7 @@
 				<FeatureStruct>
 					<FeatureType>FEATURE_FOREST</FeatureType>
 					<PrereqTech>TECH_BRONZE_WORKING</PrereqTech>
-					<iTime>250</iTime>
+					<iTime>300</iTime>
 					<iProduction>30</iProduction>
 					<bRemove>1</bRemove>
 				</FeatureStruct>
@@ -505,22 +505,7 @@
 			<ImprovementType>IMPROVEMENT_FORT</ImprovementType>
 			<RouteType>NONE</RouteType>
 			<EntityEvent>ENTEVENT_BUILD</EntityEvent>
-			<FeatureStructs>
-				<FeatureStruct>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<PrereqTech>TECH_IRON_WORKING</PrereqTech>
-					<iTime>400</iTime>
-					<iProduction>0</iProduction>
-					<bRemove>1</bRemove>
-				</FeatureStruct>
-				<FeatureStruct>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<PrereqTech>TECH_BRONZE_WORKING</PrereqTech>
-					<iTime>250</iTime>
-					<iProduction>30</iProduction>
-					<bRemove>1</bRemove>
-				</FeatureStruct>
-			</FeatureStructs>
+			<FeatureStructs/>
 			<HotKey>KB_F</HotKey>
 			<bAltDown>0</bAltDown>
 			<bShiftDown>0</bShiftDown>
@@ -568,7 +553,7 @@
 				<FeatureStruct>
 					<FeatureType>FEATURE_FOREST</FeatureType>
 					<PrereqTech>TECH_BRONZE_WORKING</PrereqTech>
-					<iTime>250</iTime>
+					<iTime>300</iTime>
 					<iProduction>30</iProduction>
 					<bRemove>1</bRemove>
 				</FeatureStruct>

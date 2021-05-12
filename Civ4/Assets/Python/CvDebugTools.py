@@ -26,12 +26,6 @@ def adjustUnitMovement(iPlayer, iUnitType, iNumMoves):
 		if ( int(unit.getUnitType()) == iUnitType ):
 			unit.setMoves(iNumMoves)
 
-def toggleFogOfWar():
-	global g_bToggleFog
-	g_bToggleFog = not g_bToggleFog
-	CyEngine().setFogOfWar(g_bToggleFog)
-	CyInterfaceScreen("MainInterface", CvScreenEnums.MAIN_INTERFACE).updateMinimapSection(True)
-
 def giveUnitsLotsOfMoves():
 	playerTeam = gc.getActivePlayer().getTeam(0)
 	playerTeam.changeExtraMoves(DomainTypes.DOMAIN_LAND, 1000)
@@ -98,7 +92,8 @@ class CvDebugTools:
 		px,py = argsList
 		pPlot = CyMap().plot(px,py)
 		popup = PyPopup.PyPopup( CvUtil.EventPlaceObject, EventContextTypes.EVENTCONTEXT_ALL )
-		#popup.setSize(1000,800)
+		popup.setSize(400,600)
+		popup.setPosition(600,25)
 		popup.setUserData( (px,py) )
 		popup.setHeaderString( "Python Debug Tools: Object Placer" )
 		#popup.setBodyString( "Choose Player:" )
@@ -288,34 +283,3 @@ class CvDebugTools:
 					player.initUnit( (x + y * map.getGridWidth())%iNUnits, x, y, UnitAITypes.NO_UNITAI )
 
 g_CvDebugTools = CvDebugTools()
-#class DemoScripts:
-#	def __init__(self):
-#		self.iCurrentStep = 0
-#	
-#	def demoStart(self):
-#		CyGame().toggleDebugMode()
-#		#preLoadUnits()
-#		#preloadImprovements()
-#		#preloadBonuses()
-#		
-#		CyInterfaceScreen("MainInterface", CvScreenEnums.MAIN_INTERFACE).updateMinimapSection(True)
-#		CyInterface().setShowInterface(InterfaceVisibility.INTERFACE_HIDE_ALL)
-#		Globe.zoom(1.0)
-#		Globe.rotate(True, -180)
-#		toggleScreenCleanup()
-#		
-#	def incrementStep(self):
-#		self.iCurrentStep += 1
-#		
-#		if self.iCurrentStep == 1:
-#			self.demoStart()
-#		elif self.iCurrentStep == 2:
-#			Globe.stopGlobe()
-#			CyEngine().JustLookAt(gc.getPlayer(0).getCity(1).plot().getPoint())
-#			CyEngine().SetCameraMovementSpeed(int(CameraMovementSpeeds.CAMERAMOVEMENTSPEED_SLOW))
-#		elif self.iCurrentStep == 3:
-#			Globe.zoom(0.01, 0.05, 0.0)
-#			Globe.rotate()
-#		
-#g_DemoScript = DemoScripts()
-#

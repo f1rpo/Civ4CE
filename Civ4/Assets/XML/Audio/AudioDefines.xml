@@ -2205,6 +2205,13 @@
 			<bInGeneric>1</bInGeneric>
 		</SoundData>
 		<SoundData>
+			<SoundID>SND_MAKEPEACE</SoundID>
+			<Filename>Sounds/TheirMakePeace</Filename>
+			<LoadType>DYNAMIC_RES</LoadType>
+			<bIsCompressed>1</bIsCompressed>
+			<bInGeneric>1</bInGeneric>
+		</SoundData>
+		<SoundData>
 			<SoundID>SND_THEIRMAKEPEACE</SoundID>
 			<Filename>Sounds/TheirMakePeace</Filename>
 			<LoadType>DYNAMIC_RES</LoadType>
@@ -5950,7 +5957,7 @@
 			<bInGeneric>1</bInGeneric>
 		</SoundData>
 		<SoundData>
-			<SoundID>SND_TECH_COMMUNISM</SoundID>
+			<SoundID>SND_TECH_UTOPIA</SoundID>
 			<Filename>Sounds/Tech/Tech_Communism</Filename>
 			<LoadType>DYNAMIC_RES</LoadType>
 			<bIsCompressed>1</bIsCompressed>
@@ -6183,6 +6190,13 @@
 		<SoundData>
 			<SoundID>SND_TECH_FUSION</SoundID>
 			<Filename>Sounds/Tech/Tech_Fusion</Filename>
+			<LoadType>DYNAMIC_RES</LoadType>
+			<bIsCompressed>1</bIsCompressed>
+			<bInGeneric>1</bInGeneric>
+		</SoundData>
+		<SoundData>
+			<SoundID>SND_TECH_FUTURE</SoundID>
+			<Filename>Sounds/Tech/Tech_FutureTech</Filename>
 			<LoadType>DYNAMIC_RES</LoadType>
 			<bIsCompressed>1</bIsCompressed>
 			<bInGeneric>1</bInGeneric>
@@ -6545,7 +6559,7 @@
 			<bInGeneric>1</bInGeneric>
 		</SoundData>
 		<SoundData>
-			<SoundID>SND_TECH_MP_COMMUNISM</SoundID>
+			<SoundID>SND_TECH_MP_UTOPIA</SoundID>
 			<Filename>Sounds/Tech/Tech_MP_Communism</Filename>
 			<LoadType>DYNAMIC_RES</LoadType>
 			<bIsCompressed>1</bIsCompressed>
@@ -6778,6 +6792,13 @@
 		<SoundData>
 			<SoundID>SND_TECH_MP_FUSION</SoundID>
 			<Filename>Sounds/Tech/Tech_MP_Fusion</Filename>
+			<LoadType>DYNAMIC_RES</LoadType>
+			<bIsCompressed>1</bIsCompressed>
+			<bInGeneric>1</bInGeneric>
+		</SoundData>
+		<SoundData>
+			<SoundID>SND_TECH_MP_FUTURE</SoundID>
+			<Filename>Sounds/Tech/Tech_MP_FutureTech</Filename>
 			<LoadType>DYNAMIC_RES</LoadType>
 			<bIsCompressed>1</bIsCompressed>
 			<bInGeneric>1</bInGeneric>

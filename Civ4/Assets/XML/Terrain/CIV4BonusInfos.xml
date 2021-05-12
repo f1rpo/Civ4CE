@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by Soren Johnson (Firaxis Games) -->
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Soren Johnson (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
 <!-- Bonus Infos -->
+<!-- WARNING: It is not recommended that you remove Bonuses due to complications with the LSystem -->
 <Civ4BonusInfos xmlns="x-schema:CIV4TerrainSchema.xml">
 	<BonusInfos>
 		<BonusInfo>
@@ -1379,7 +1379,7 @@
 			<BonusClassType>BONUSCLASS_GENERAL</BonusClassType>
 			<ArtDefineTag>ART_DEF_BONUS_INCENSE</ArtDefineTag>
 			<TechReveal>NONE</TechReveal>
-			<TechCityTrade>TECH_MINING</TechCityTrade>
+			<TechCityTrade>TECH_CALENDAR</TechCityTrade>
 			<TechObsolete>NONE</TechObsolete>
 			<YieldChanges>
 				<iYieldChange>0</iYieldChange>

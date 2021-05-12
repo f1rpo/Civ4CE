@@ -56,26 +56,6 @@ def getGridSize(argsList):
 	[eWorldSize] = argsList
 	return grid_sizes[eWorldSize]
 	
-# Make sure everyone starts on the mainland.
-best_area = -1
-
-def findStartingArea(argsList):
-	global best_area
-	[playerID] = argsList
-	gc = CyGlobalContext()
-	map = gc.getMap()
-
-	if (best_area == -1):
-		best_value = 0
-		for i in range(map.getIndexAfterLastArea()):
-			area = map.getArea(i)
-			if not area.isNone() and not area.isWater():
-				value = area.getNumTiles()
-				if value > best_value:
-					best_value = value
-					best_area = area.getID()
-	return best_area
-	
 def findStartingPlot(argsList):
 	[playerID] = argsList
 

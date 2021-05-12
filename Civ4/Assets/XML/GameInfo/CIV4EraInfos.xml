@@ -30,7 +30,7 @@
 			<iImprovementPercent>100</iImprovementPercent>
 			<iGreatPeoplePercent>100</iGreatPeoplePercent>
 			<iCulturePercent>100</iCulturePercent>
-			<iAnarchyPercent>65</iAnarchyPercent>
+			<iAnarchyPercent>50</iAnarchyPercent>
 			<iSoundtrackSpace>0</iSoundtrackSpace>
 			<EraInfoSoundtracks/>
 			<CitySoundscapes>
@@ -74,7 +74,7 @@
 			<iImprovementPercent>100</iImprovementPercent>
 			<iGreatPeoplePercent>100</iGreatPeoplePercent>
 			<iCulturePercent>100</iCulturePercent>
-			<iAnarchyPercent>60</iAnarchyPercent>
+			<iAnarchyPercent>50</iAnarchyPercent>
 			<iSoundtrackSpace>400</iSoundtrackSpace>
 			<EraInfoSoundtracks>
 				<EraInfoSoundtrack>AS2D_ANCIENT_SOUNDTRACK_1</EraInfoSoundtrack>
@@ -123,7 +123,7 @@
 			<iImprovementPercent>100</iImprovementPercent>
 			<iGreatPeoplePercent>100</iGreatPeoplePercent>
 			<iCulturePercent>100</iCulturePercent>
-			<iAnarchyPercent>55</iAnarchyPercent>
+			<iAnarchyPercent>40</iAnarchyPercent>
 			<iSoundtrackSpace>200</iSoundtrackSpace>
 			<EraInfoSoundtracks>
 				<EraInfoSoundtrack>AS2D_ALLEGRI_MISERERE</EraInfoSoundtrack>
@@ -188,7 +188,7 @@
 			<iImprovementPercent>90</iImprovementPercent>
 			<iGreatPeoplePercent>90</iGreatPeoplePercent>
 			<iCulturePercent>90</iCulturePercent>
-			<iAnarchyPercent>50</iAnarchyPercent>
+			<iAnarchyPercent>40</iAnarchyPercent>
 			<iSoundtrackSpace>160</iSoundtrackSpace>
 			<EraInfoSoundtracks>
 				<EraInfoSoundtrack>AS2D_BACH_ALLEGRO</EraInfoSoundtrack>
@@ -252,7 +252,7 @@
 			<iImprovementPercent>80</iImprovementPercent>
 			<iGreatPeoplePercent>80</iGreatPeoplePercent>
 			<iCulturePercent>80</iCulturePercent>
-			<iAnarchyPercent>45</iAnarchyPercent>
+			<iAnarchyPercent>34</iAnarchyPercent>
 			<iSoundtrackSpace>120</iSoundtrackSpace>
 			<EraInfoSoundtracks>
 				<EraInfoSoundtrack>AS2D_BEETHOVEN_5_2</EraInfoSoundtrack>
@@ -313,7 +313,7 @@
 			<iImprovementPercent>70</iImprovementPercent>
 			<iGreatPeoplePercent>70</iGreatPeoplePercent>
 			<iCulturePercent>70</iCulturePercent>
-			<iAnarchyPercent>40</iAnarchyPercent>
+			<iAnarchyPercent>34</iAnarchyPercent>
 			<iSoundtrackSpace>80</iSoundtrackSpace>
 			<EraInfoSoundtracks>
 				<EraInfoSoundtrack>AS2D_ANFORTAS_WOUND</EraInfoSoundtrack>
@@ -372,7 +372,7 @@
 			<iImprovementPercent>60</iImprovementPercent>
 			<iGreatPeoplePercent>60</iGreatPeoplePercent>
 			<iCulturePercent>60</iCulturePercent>
-			<iAnarchyPercent>30</iAnarchyPercent>
+			<iAnarchyPercent>34</iAnarchyPercent>
 			<iSoundtrackSpace>40</iSoundtrackSpace>
 			<EraInfoSoundtracks>
 				<EraInfoSoundtrack>AS2D_ANFORTAS_WOUND</EraInfoSoundtrack>

@@ -359,27 +359,6 @@ def assignStartingPlots():
 			del team_list[iChooseTeam]
 	CyPythonMgr().allowDefaultImpl()
 	
-def findStartingArea(argsList):
-	best_area = -1
-	[playerID] = argsList
-	gc = CyGlobalContext()
-	map = CyMap()
-	userInputPlots = map.getCustomMapOption(0)
-	userInputProximity = map.getCustomMapOption(1)
-	if userInputPlots == 0: # Left vs Right
-		return -1
-	else: # The other two map types will only have one primary area.
-		if (best_area == -1):
-			best_value = 0
-			for i in range(map.getIndexAfterLastArea()):
-				area = map.getArea(i)
-				if not area.isNone() and not area.isWater():
-					value = area.getNumTiles()
-					if value > best_value:
-						best_value = value
-						best_area = area.getID()
-		return best_area
-	
 def findStartingPlot(argsList):
 	[playerID] = argsList
 	global assignedPlayers

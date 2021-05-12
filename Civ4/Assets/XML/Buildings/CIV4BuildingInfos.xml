@@ -151,14 +151,14 @@
 			<iHotKeyPriority>0</iHotKeyPriority>
 		</BuildingInfo>
 		<BuildingInfo>
-			<BuildingClass>BUILDINGCLASS_FORBIDDEN_PALACE</BuildingClass>
-			<Type>BUILDING_FORBIDDEN_PALACE</Type>
+			<BuildingClass>BUILDINGCLASS_GREAT_PALACE</BuildingClass>
+			<Type>BUILDING_GREAT_PALACE</Type>
 			<SpecialBuildingType>NONE</SpecialBuildingType>
-			<Description>TXT_KEY_BUILDING_FORBIDDEN_PALACE</Description>
-			<Civilopedia>TXT_KEY_BUILDING_FORBIDDEN_PALACE_PEDIA</Civilopedia>
-			<Strategy>TXT_KEY_BUILDING_FORBIDDEN_PALACE_STRATEGY</Strategy>
+			<Description>TXT_KEY_BUILDING_GREAT_PALACE</Description>
+			<Civilopedia>TXT_KEY_BUILDING_GREAT_PALACE_PEDIA</Civilopedia>
+			<Strategy>TXT_KEY_BUILDING_GREAT_PALACE_STRATEGY</Strategy>
 			<Advisor>ADVISOR_ECONOMY</Advisor>
-			<ArtDefineTag>ART_DEF_BUILDING_FORBIDDEN_PALACE</ArtDefineTag>
+			<ArtDefineTag>ART_DEF_BUILDING_GREAT_PALACE</ArtDefineTag>
 			<MovieDefineTag>NONE</MovieDefineTag>
 			<HolyCity>NONE</HolyCity>
 			<ReligionType>NONE</ReligionType>
@@ -4919,12 +4919,7 @@
 			<TechTypes/>
 			<Bonus>NONE</Bonus>
 			<PrereqBonuses/>
-			<ProductionTraits>
-				<ProductionTrait>
-					<ProductionTraitType>TRAIT_FINANCIAL</ProductionTraitType>
-					<iProductionTrait>100</iProductionTrait>
-				</ProductionTrait>
-			</ProductionTraits>
+			<ProductionTraits/>
 			<PowerBonus>NONE</PowerBonus>
 			<FreeBonus>NONE</FreeBonus>
 			<iNumFreeBonuses>0</iNumFreeBonuses>
@@ -6018,7 +6013,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>-1</iCost>
-			<iHurryCostModifier>50</iHurryCostModifier>
+			<iHurryCostModifier>0</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>100</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -6652,7 +6647,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>-1</iCost>
-			<iHurryCostModifier>50</iHurryCostModifier>
+			<iHurryCostModifier>0</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>100</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -7286,7 +7281,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>-1</iCost>
-			<iHurryCostModifier>50</iHurryCostModifier>
+			<iHurryCostModifier>0</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>100</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -7920,7 +7915,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>-1</iCost>
-			<iHurryCostModifier>50</iHurryCostModifier>
+			<iHurryCostModifier>0</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>100</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -8554,7 +8549,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>-1</iCost>
-			<iHurryCostModifier>50</iHurryCostModifier>
+			<iHurryCostModifier>0</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>100</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -9188,7 +9183,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>-1</iCost>
-			<iHurryCostModifier>50</iHurryCostModifier>
+			<iHurryCostModifier>0</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>100</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -9822,7 +9817,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>-1</iCost>
-			<iHurryCostModifier>50</iHurryCostModifier>
+			<iHurryCostModifier>0</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>100</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -10789,7 +10784,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>600</iCost>
-			<iHurryCostModifier>50</iHurryCostModifier>
+			<iHurryCostModifier>100</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>0</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -10947,7 +10942,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>700</iCost>
-			<iHurryCostModifier>50</iHurryCostModifier>
+			<iHurryCostModifier>100</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>0</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -11120,7 +11115,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>800</iCost>
-			<iHurryCostModifier>50</iHurryCostModifier>
+			<iHurryCostModifier>100</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>0</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -11266,7 +11261,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>500</iCost>
-			<iHurryCostModifier>50</iHurryCostModifier>
+			<iHurryCostModifier>100</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>0</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -11420,7 +11415,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>600</iCost>
-			<iHurryCostModifier>50</iHurryCostModifier>
+			<iHurryCostModifier>100</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>0</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -11540,7 +11535,7 @@
 			<FreeStartEra>NONE</FreeStartEra>
 			<MaxStartEra>NONE</MaxStartEra>
 			<ObsoleteTech>NONE</ObsoleteTech>
-			<PrereqTech>TECH_COMMUNISM</PrereqTech>
+			<PrereqTech>TECH_UTOPIA</PrereqTech>
 			<TechTypes/>
 			<Bonus>NONE</Bonus>
 			<PrereqBonuses/>
@@ -11574,7 +11569,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>500</iCost>
-			<iHurryCostModifier>50</iHurryCostModifier>
+			<iHurryCostModifier>100</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>0</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -11990,7 +11985,7 @@
 			<GlobalReligionCommerce>NONE</GlobalReligionCommerce>
 			<VictoryPrereq>NONE</VictoryPrereq>
 			<FreeStartEra>NONE</FreeStartEra>
-			<MaxStartEra>ERA_CLASSICAL</MaxStartEra>
+			<MaxStartEra>ERA_MEDIEVAL</MaxStartEra>
 			<ObsoleteTech>TECH_SCIENTIFIC_METHOD</ObsoleteTech>
 			<PrereqTech>TECH_LITERATURE</PrereqTech>
 			<TechTypes/>
@@ -12316,7 +12311,7 @@
 			<GlobalReligionCommerce>NONE</GlobalReligionCommerce>
 			<VictoryPrereq>NONE</VictoryPrereq>
 			<FreeStartEra>NONE</FreeStartEra>
-			<MaxStartEra>ERA_CLASSICAL</MaxStartEra>
+			<MaxStartEra>ERA_MEDIEVAL</MaxStartEra>
 			<ObsoleteTech>NONE</ObsoleteTech>
 			<PrereqTech>TECH_MATHEMATICS</PrereqTech>
 			<TechTypes/>
@@ -12479,7 +12474,7 @@
 			<GlobalReligionCommerce>NONE</GlobalReligionCommerce>
 			<VictoryPrereq>NONE</VictoryPrereq>
 			<FreeStartEra>NONE</FreeStartEra>
-			<MaxStartEra>ERA_CLASSICAL</MaxStartEra>
+			<MaxStartEra>ERA_MEDIEVAL</MaxStartEra>
 			<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 			<PrereqTech>TECH_METAL_CASTING</PrereqTech>
 			<TechTypes/>
@@ -12957,7 +12952,7 @@
 			<GlobalReligionCommerce>NONE</GlobalReligionCommerce>
 			<VictoryPrereq>NONE</VictoryPrereq>
 			<FreeStartEra>NONE</FreeStartEra>
-			<MaxStartEra>ERA_MEDIEVAL</MaxStartEra>
+			<MaxStartEra>ERA_RENAISSANCE</MaxStartEra>
 			<ObsoleteTech>TECH_COMPUTERS</ObsoleteTech>
 			<PrereqTech>TECH_PHILOSOPHY</PrereqTech>
 			<TechTypes/>
@@ -13445,7 +13440,7 @@
 			<GlobalReligionCommerce>NONE</GlobalReligionCommerce>
 			<VictoryPrereq>NONE</VictoryPrereq>
 			<FreeStartEra>NONE</FreeStartEra>
-			<MaxStartEra>ERA_MEDIEVAL</MaxStartEra>
+			<MaxStartEra>ERA_RENAISSANCE</MaxStartEra>
 			<ObsoleteTech>NONE</ObsoleteTech>
 			<PrereqTech>TECH_THEOLOGY</PrereqTech>
 			<TechTypes/>
@@ -13607,7 +13602,7 @@
 			<GlobalReligionCommerce>NONE</GlobalReligionCommerce>
 			<VictoryPrereq>NONE</VictoryPrereq>
 			<FreeStartEra>NONE</FreeStartEra>
-			<MaxStartEra>ERA_MEDIEVAL</MaxStartEra>
+			<MaxStartEra>ERA_RENAISSANCE</MaxStartEra>
 			<ObsoleteTech>TECH_COMPUTERS</ObsoleteTech>
 			<PrereqTech>TECH_DIVINE_RIGHT</PrereqTech>
 			<TechTypes/>
@@ -13767,7 +13762,7 @@
 			<GlobalReligionCommerce>NONE</GlobalReligionCommerce>
 			<VictoryPrereq>NONE</VictoryPrereq>
 			<FreeStartEra>NONE</FreeStartEra>
-			<MaxStartEra>ERA_MEDIEVAL</MaxStartEra>
+			<MaxStartEra>ERA_RENAISSANCE</MaxStartEra>
 			<ObsoleteTech>NONE</ObsoleteTech>
 			<PrereqTech>TECH_MUSIC</PrereqTech>
 			<TechTypes/>
@@ -13925,7 +13920,7 @@
 			<GlobalReligionCommerce>NONE</GlobalReligionCommerce>
 			<VictoryPrereq>NONE</VictoryPrereq>
 			<FreeStartEra>NONE</FreeStartEra>
-			<MaxStartEra>ERA_RENAISSANCE</MaxStartEra>
+			<MaxStartEra>ERA_INDUSTRIAL</MaxStartEra>
 			<ObsoleteTech>NONE</ObsoleteTech>
 			<PrereqTech>TECH_NATIONALISM</PrereqTech>
 			<TechTypes/>
@@ -14085,7 +14080,7 @@
 			<FreeStartEra>NONE</FreeStartEra>
 			<MaxStartEra>NONE</MaxStartEra>
 			<ObsoleteTech>TECH_FIBER_OPTICS</ObsoleteTech>
-			<PrereqTech>TECH_COMMUNISM</PrereqTech>
+			<PrereqTech>TECH_UTOPIA</PrereqTech>
 			<TechTypes/>
 			<Bonus>NONE</Bonus>
 			<PrereqBonuses/>
@@ -14118,8 +14113,8 @@
 			<bPrereqReligion>0</bPrereqReligion>
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
-			<iCost>1000</iCost>
-			<iHurryCostModifier>100</iHurryCostModifier>
+			<iCost>800</iCost>
+			<iHurryCostModifier>200</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>100</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -14130,7 +14125,7 @@
 			<iGreatPeopleRateModifier>0</iGreatPeopleRateModifier>
 			<iGlobalGreatPeopleRateModifier>0</iGlobalGreatPeopleRateModifier>
 			<iAnarchyModifier>0</iAnarchyModifier>
-			<iGlobalHurryModifier>-50</iGlobalHurryModifier>
+			<iGlobalHurryModifier>-33</iGlobalHurryModifier>
 			<iExperience>0</iExperience>
 			<iGlobalExperience>0</iGlobalExperience>
 			<iFoodKept>0</iFoodKept>
@@ -14269,7 +14264,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>1250</iCost>
-			<iHurryCostModifier>100</iHurryCostModifier>
+			<iHurryCostModifier>200</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>100</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -14396,7 +14391,7 @@
 			<GlobalReligionCommerce>NONE</GlobalReligionCommerce>
 			<VictoryPrereq>NONE</VictoryPrereq>
 			<FreeStartEra>NONE</FreeStartEra>
-			<MaxStartEra>ERA_RENAISSANCE</MaxStartEra>
+			<MaxStartEra>ERA_INDUSTRIAL</MaxStartEra>
 			<ObsoleteTech>NONE</ObsoleteTech>
 			<PrereqTech>TECH_DEMOCRACY</PrereqTech>
 			<TechTypes/>
@@ -14432,7 +14427,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>1500</iCost>
-			<iHurryCostModifier>100</iHurryCostModifier>
+			<iHurryCostModifier>200</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>100</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -14595,7 +14590,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>800</iCost>
-			<iHurryCostModifier>100</iHurryCostModifier>
+			<iHurryCostModifier>200</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>100</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -14744,7 +14739,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>800</iCost>
-			<iHurryCostModifier>100</iHurryCostModifier>
+			<iHurryCostModifier>200</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>100</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -14893,7 +14888,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>1000</iCost>
-			<iHurryCostModifier>100</iHurryCostModifier>
+			<iHurryCostModifier>200</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>100</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -14990,14 +14985,14 @@
 			<iHotKeyPriority>0</iHotKeyPriority>
 		</BuildingInfo>
 		<BuildingInfo>
-			<BuildingClass>BUILDINGCLASS_THREEGORGESDAM</BuildingClass>
-			<Type>BUILDING_THREEGORGESDAM</Type>
+			<BuildingClass>BUILDINGCLASS_GREAT_DAM</BuildingClass>
+			<Type>BUILDING_GREAT_DAM</Type>
 			<SpecialBuildingType>NONE</SpecialBuildingType>
-			<Description>TXT_KEY_BUILDING_THREEGORGESDAM</Description>
-			<Civilopedia>TXT_KEY_BUILDING_THREEGORGESDAM_PEDIA</Civilopedia>
-			<Strategy>TXT_KEY_BUILDING_THREEGORGESDAM_STRATEGY</Strategy>
+			<Description>TXT_KEY_BUILDING_GREAT_DAM</Description>
+			<Civilopedia>TXT_KEY_BUILDING_GREAT_DAM_PEDIA</Civilopedia>
+			<Strategy>TXT_KEY_BUILDING_GREAT_DAM_STRATEGY</Strategy>
 			<Advisor>ADVISOR_ECONOMY</Advisor>
-			<ArtDefineTag>ART_DEF_BUILDING_THREEGORGESDAM</ArtDefineTag>
+			<ArtDefineTag>ART_DEF_BUILDING_GREAT_DAM</ArtDefineTag>
 			<MovieDefineTag>ART_DEF_MOVIE_THREE_GORGES_DAM</MovieDefineTag>
 			<HolyCity>NONE</HolyCity>
 			<ReligionType>NONE</ReligionType>
@@ -15042,7 +15037,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>1750</iCost>
-			<iHurryCostModifier>100</iHurryCostModifier>
+			<iHurryCostModifier>200</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>100</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -15187,7 +15182,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>1250</iCost>
-			<iHurryCostModifier>100</iHurryCostModifier>
+			<iHurryCostModifier>200</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>100</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -15332,7 +15327,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>1000</iCost>
-			<iHurryCostModifier>100</iHurryCostModifier>
+			<iHurryCostModifier>300</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>100</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>
@@ -15476,7 +15471,7 @@
 			<bCenterInCity>0</bCenterInCity>
 			<iAIWeight>0</iAIWeight>
 			<iCost>2000</iCost>
-			<iHurryCostModifier>100</iHurryCostModifier>
+			<iHurryCostModifier>300</iHurryCostModifier>
 			<iMinAreaSize>-1</iMinAreaSize>
 			<iConquestProb>100</iConquestProb>
 			<iCitiesPrereq>0</iCitiesPrereq>

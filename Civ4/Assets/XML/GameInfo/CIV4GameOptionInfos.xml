@@ -91,9 +91,15 @@
 			<bDefault>0</bDefault>
 		</GameOptionInfo>
 		<GameOptionInfo>
-			<Type>GAMEOPTION_NO_CHEATING</Type>
-			<Description>TXT_KEY_GAME_OPTION_NO_CHEATING</Description>
-			<Help>TXT_KEY_GAME_OPTION_NO_CHEATING_HELP</Help>
+			<Type>GAMEOPTION_LOCK_MODS</Type>
+			<Description>TXT_KEY_GAME_OPTION_LOCK_MODS</Description>
+			<Help>TXT_KEY_GAME_OPTION_LOCK_MODS_HELP</Help>
+			<bDefault>0</bDefault>
+		</GameOptionInfo>
+		<GameOptionInfo>
+			<Type>GAMEOPTION_COMPLETE_KILLS</Type>
+			<Description>TXT_KEY_GAME_OPTION_COMPLETE_KILLS</Description>
+			<Help>TXT_KEY_GAME_OPTION_COMPLETE_KILLS_HELP</Help>
 			<bDefault>0</bDefault>
 		</GameOptionInfo>
 	</GameOptionInfos>

@@ -25,7 +25,7 @@
 			<iTradeProfitPercent>80</iTradeProfitPercent>
 			<iDistanceMaintenancePercent>50</iDistanceMaintenancePercent>
 			<iNumCitiesMaintenancePercent>45</iNumCitiesMaintenancePercent>
-			<iNumCitiesAnarchyPercent>10</iNumCitiesAnarchyPercent>
+			<iNumCitiesAnarchyPercent>11</iNumCitiesAnarchyPercent>
 		</WorldInfo>
 		<WorldInfo>
 			<Type>WORLDSIZE_TINY</Type>
@@ -46,7 +46,7 @@
 			<iTradeProfitPercent>70</iTradeProfitPercent>
 			<iDistanceMaintenancePercent>60</iDistanceMaintenancePercent>
 			<iNumCitiesMaintenancePercent>40</iNumCitiesMaintenancePercent>
-			<iNumCitiesAnarchyPercent>9</iNumCitiesAnarchyPercent>
+			<iNumCitiesAnarchyPercent>10</iNumCitiesAnarchyPercent>
 		</WorldInfo>
 		<WorldInfo>
 			<Type>WORLDSIZE_SMALL</Type>
@@ -67,7 +67,7 @@
 			<iTradeProfitPercent>60</iTradeProfitPercent>
 			<iDistanceMaintenancePercent>70</iDistanceMaintenancePercent>
 			<iNumCitiesMaintenancePercent>35</iNumCitiesMaintenancePercent>
-			<iNumCitiesAnarchyPercent>8</iNumCitiesAnarchyPercent>
+			<iNumCitiesAnarchyPercent>9</iNumCitiesAnarchyPercent>
 		</WorldInfo>
 		<WorldInfo>
 			<Type>WORLDSIZE_STANDARD</Type>
@@ -88,7 +88,7 @@
 			<iTradeProfitPercent>50</iTradeProfitPercent>
 			<iDistanceMaintenancePercent>80</iDistanceMaintenancePercent>
 			<iNumCitiesMaintenancePercent>30</iNumCitiesMaintenancePercent>
-			<iNumCitiesAnarchyPercent>7</iNumCitiesAnarchyPercent>
+			<iNumCitiesAnarchyPercent>8</iNumCitiesAnarchyPercent>
 		</WorldInfo>
 		<WorldInfo>
 			<Type>WORLDSIZE_LARGE</Type>
@@ -109,7 +109,7 @@
 			<iTradeProfitPercent>40</iTradeProfitPercent>
 			<iDistanceMaintenancePercent>90</iDistanceMaintenancePercent>
 			<iNumCitiesMaintenancePercent>25</iNumCitiesMaintenancePercent>
-			<iNumCitiesAnarchyPercent>6</iNumCitiesAnarchyPercent>
+			<iNumCitiesAnarchyPercent>7</iNumCitiesAnarchyPercent>
 		</WorldInfo>
 		<WorldInfo>
 			<Type>WORLDSIZE_HUGE</Type>
@@ -130,7 +130,7 @@
 			<iTradeProfitPercent>30</iTradeProfitPercent>
 			<iDistanceMaintenancePercent>100</iDistanceMaintenancePercent>
 			<iNumCitiesMaintenancePercent>20</iNumCitiesMaintenancePercent>
-			<iNumCitiesAnarchyPercent>5</iNumCitiesAnarchyPercent>
+			<iNumCitiesAnarchyPercent>6</iNumCitiesAnarchyPercent>
 		</WorldInfo>
 	</WorldInfos>
 </Civ4WorldInfo>

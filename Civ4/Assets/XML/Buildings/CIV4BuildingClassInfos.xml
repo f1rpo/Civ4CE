@@ -18,14 +18,14 @@
 			<VictoryThresholds/>
 		</BuildingClassInfo>
 		<BuildingClassInfo>
-			<Type>BUILDINGCLASS_FORBIDDEN_PALACE</Type>
-			<Description>TXT_KEY_BUILDING_FORBIDDEN_PALACE</Description>
+			<Type>BUILDINGCLASS_GREAT_PALACE</Type>
+			<Description>TXT_KEY_BUILDING_GREAT_PALACE</Description>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>-1</iMaxTeamInstances>
 			<iMaxPlayerInstances>1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
-			<DefaultBuilding>BUILDING_FORBIDDEN_PALACE</DefaultBuilding>
+			<DefaultBuilding>BUILDING_GREAT_PALACE</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
 		<BuildingClassInfo>
@@ -1063,14 +1063,14 @@
 			<VictoryThresholds/>
 		</BuildingClassInfo>
 		<BuildingClassInfo>
-			<Type>BUILDINGCLASS_THREEGORGESDAM</Type>
-			<Description>TXT_KEY_BUILDING_THREEGORGESDAM</Description>
+			<Type>BUILDINGCLASS_GREAT_DAM</Type>
+			<Description>TXT_KEY_BUILDING_GREAT_DAM</Description>
 			<iMaxGlobalInstances>1</iMaxGlobalInstances>
 			<iMaxTeamInstances>-1</iMaxTeamInstances>
 			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iExtraPlayerInstances>0</iExtraPlayerInstances>
 			<bNoLimit>0</bNoLimit>
-			<DefaultBuilding>BUILDING_THREEGORGESDAM</DefaultBuilding>
+			<DefaultBuilding>BUILDING_GREAT_DAM</DefaultBuilding>
 			<VictoryThresholds/>
 		</BuildingClassInfo>
 		<BuildingClassInfo>

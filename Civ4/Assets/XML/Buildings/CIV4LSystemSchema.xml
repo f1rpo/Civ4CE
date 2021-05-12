@@ -8,15 +8,15 @@
 <Schema xmlns="urn:schemas-microsoft-com:xml-data" xmlns:dt="urn:schemas-microsoft-com:datatypes">
 	<!-- base types-->
 	<ElementType name="Filename" content="textOnly"/>
-	<ElementType name="Scale" content="textOnly" dt:type="float"/>
-	<ElementType name="Rotate" content="textOnly" dt:type="float"/>
+	<ElementType name="Scale" content="textOnly"/>
+	<ElementType name="Rotate" content="textOnly"/>
 	<ElementType name="Translate" content="textOnly"/>
 	<ElementType name="Class" content="textOnly"/>
 	<ElementType name="Name" content="textOnly"/>
 	<ElementType name="Child" content="textOnly"/>
 	<ElementType name="From" content="textOnly"/>
-	<ElementType name="Width" content="textOnly" dt:type="float"/>
-	<ElementType name="Height" content="textOnly" dt:type="float"/>
+	<ElementType name="Width" content="textOnly"/>
+	<ElementType name="Height" content="textOnly"/>
 	<ElementType name="Attribute" content="textOnly">
 		<AttributeType name="Class" required="no" default="Scalar"/>
 		<attribute type="Class"/>

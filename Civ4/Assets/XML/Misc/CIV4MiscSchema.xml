@@ -24,7 +24,7 @@
 	<ElementType name="iValue" content="textOnly" dt:type="int"/>
 	<ElementType name="iMovement" content="textOnly" dt:type="int"/>
 	<ElementType name="iFlatMovement" content="textOnly" dt:type="int"/>
-	<ElementType name="fZBias" content="textOnly" dt:type="float"/>
+	<ElementType name="fZBias" content="textOnly"/>
 	<ElementType name="RouteInfo" content="eltOnly">
 		<element type="Type"/>
 		<element type="Description"/>
@@ -65,25 +65,25 @@
 	<ElementType name="RiverModelInfos" content="eltOnly">
 		<element type="RiverModelInfo" minOccurs="1" maxOccurs="*"/>
 	</ElementType>
-	<ElementType name="ZOffset" content="textOnly" dt:type="float"/>
+	<ElementType name="ZOffset" content="textOnly"/>
 	<ElementType name="ContainsGrid" content="textOnly" dt:type="int"/>
 	<ElementType name="TextureFile" content="textOnly"/>
-	<ElementType name="TextureScaling" content="textOnly" dt:type="float"/>
-	<ElementType name="URate" content="textOnly" dt:type="float"/>
-	<ElementType name="VRate" content="textOnly" dt:type="float"/>
+	<ElementType name="TextureScaling" content="textOnly"/>
+	<ElementType name="URate" content="textOnly"/>
+	<ElementType name="VRate" content="textOnly"/>
 	<ElementType name="FunctionType" content="textOnly"/>
-	<ElementType name="Time" content="textOnly" dt:type="float"/>
-	<ElementType name="Value" content="textOnly" dt:type="float"/>
-	<ElementType name="r" content="textOnly" dt:type="float"/>
-	<ElementType name="g" content="textOnly" dt:type="float"/>
-	<ElementType name="b" content="textOnly" dt:type="float"/>
-	<ElementType name="MaterialAlpha" content="textOnly" dt:type="float"/>
-	<ElementType name="fScale" content="textOnly" dt:type="float"/>
-	<ElementType name="fUpdateRate" content="textOnly" dt:type="float"/>
+	<ElementType name="Time" content="textOnly"/>
+	<ElementType name="Value" content="textOnly"/>
+	<ElementType name="r" content="textOnly"/>
+	<ElementType name="g" content="textOnly"/>
+	<ElementType name="b" content="textOnly"/>
+	<ElementType name="MaterialAlpha" content="textOnly"/>
+	<ElementType name="fScale" content="textOnly"/>
+	<ElementType name="fUpdateRate" content="textOnly"/>
 	<ElementType name="bIsProjectile" content="textOnly" dt:type="int"/>
 	<ElementType name="bSticky" content="textOnly" dt:type="boolean"/>
-	<ElementType name="fSpeed" content="textOnly" dt:type="float"/>
-	<ElementType name="fArcValue" content="textOnly" dt:type="float"/>
+	<ElementType name="fSpeed" content="textOnly"/>
+	<ElementType name="fArcValue" content="textOnly"/>
 	<ElementType name="DiffuseMaterialColor" content="eltOnly">
 		<element type="r"/>
 		<element type="g"/>
@@ -208,15 +208,15 @@
 	<ElementType name="ScriptCameraInfos" content="eltOnly">
 		<element type="ScriptCameraInfo" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
-	<ElementType name="fZoomDistance" content="textOnly" dt:type="float"/>
-	<ElementType name="fZoomSpeed" content="textOnly" dt:type="float"/>
-	<ElementType name="fRotateDistance" content="textOnly" dt:type="float"/>
-	<ElementType name="fRotateSpeed" content="textOnly" dt:type="float"/>
-	<ElementType name="fPitchDistance" content="textOnly" dt:type="float"/>
-	<ElementType name="fPitchSpeed" content="textOnly" dt:type="float"/>
-	<ElementType name="fTurnDistance" content="textOnly" dt:type="float"/>
-	<ElementType name="fTurnSpeed" content="textOnly" dt:type="float"/>
-	<ElementType name="fPauseDuration" content="textOnly" dt:type="float"/>
+	<ElementType name="fZoomDistance" content="textOnly"/>
+	<ElementType name="fZoomSpeed" content="textOnly"/>
+	<ElementType name="fRotateDistance" content="textOnly"/>
+	<ElementType name="fRotateSpeed" content="textOnly"/>
+	<ElementType name="fPitchDistance" content="textOnly"/>
+	<ElementType name="fPitchSpeed" content="textOnly"/>
+	<ElementType name="fTurnDistance" content="textOnly"/>
+	<ElementType name="fTurnSpeed" content="textOnly"/>
+	<ElementType name="fPauseDuration" content="textOnly"/>
 	<ElementType name="ScriptCameraInfo" content="eltOnly">
 		<element type="Type"/>
 		<element type="fZoomDistance"/>
@@ -290,7 +290,7 @@
 		<element type="fArgumentFloatVal" minOccurs="0"/>
 		<element type="ArgumentTextVal" minOccurs="0"/>
 	</ElementType>
-	<ElementType name="fArgumentFloatVal" content="textOnly" dt:type="float"/>
+	<ElementType name="fArgumentFloatVal" content="textOnly"/>
 	<ElementType name="iArgumentIntVal" content="textOnly" dt:type="int"/>
 	<ElementType name="ArgumentTextVal" content="textOnly"/>
 	<ElementType name="ArgumentName" content="textOnly"/>

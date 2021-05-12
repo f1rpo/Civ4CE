@@ -357,7 +357,7 @@
 	<ElementType name="LateArtDefineTag" content="textOnly"/>
 	<ElementType name="iGroupSize" content="textOnly" dt:type="int"/>
 	<ElementType name="iRequired" content="textOnly" dt:type="int"/>
-	<ElementType name="fMaxSpeed" content="textOnly" dt:type="float"/>
+	<ElementType name="fMaxSpeed" content="textOnly"/>
 	<ElementType name="iMeleeWaveSize" content="textOnly" dt:type="int"/>
 	<ElementType name="iRangedWaveSize" content="textOnly" dt:type="int"/>
 	<ElementType name="UnitMeshGroup" content="eltOnly">
@@ -766,7 +766,7 @@
 	<ElementType name="Operator" content="textOnly"/>
 	<ElementType name="BaseID" content="textOnly" dt:type="int"/>
 	<ElementType name="SetIncrement" content="textOnly" dt:type="int"/>
-	<ElementType name="Parameter" content="textOnly" dt:type="float"/>
+	<ElementType name="Parameter" content="textOnly"/>
 	<ElementType name="PathEntry" content="eltOnly">
 		<element type="Category" maxOccurs="1" minOccurs="0"/>
 		<group order="seq" minOccurs="0">

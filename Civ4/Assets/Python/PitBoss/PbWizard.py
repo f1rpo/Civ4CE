@@ -13,16 +13,128 @@ import string
 
 bPublic = True
 bSaved = False
+bScenario = False
 bPatchConfirmed = False
 bPatchOK = False
 szPatchName = None
+msgBox = None
 PB = CyPitboss()
 gc = CyGlobalContext()
 localText = CyTranslator()
 curPage = None
 
 #
-# SMTP Login Page (first page of wizard)
+# Mod Select Page (first page of wizard)
+#
+class ModSelectPage(wx.wizard.PyWizardPage):
+	def __init__(self, parent):
+		wx.wizard.PyWizardPage.__init__(self, parent)
+		self.next = self.prev = None
+		self.myParent = parent
+
+		pageSizer = wx.BoxSizer(wx.VERTICAL)
+			
+		modPanel = wx.lib.scrolledpanel.ScrolledPanel(self, -1, size=(300, 600), style = wx.SUNKEN_BORDER)
+		sizer = wx.BoxSizer(wx.VERTICAL)
+		
+		header = wx.StaticText(self, -1, localText.getText("TXT_KEY_PITBOSS_CHOOSE_MOD", ()))
+		pageSizer.Add(header, 0, wx.ALL, 5)
+		
+		# Place the radio buttons
+		self.currentMod = 0
+		self.rbs = []
+		
+		# First choice is no mod
+		self.rbs.append( wx.RadioButton(
+			modPanel, -1, localText.getText("TXT_KEY_MAIN_MENU_NONE", ()), wx.DefaultPosition, wx.DefaultSize, wx.RB_GROUP
+			) )
+		sizer.Add(self.rbs[0], 0, wx.ALL, 3)
+			
+		if (PB.getModName() == ""):
+			self.rbs[0].SetValue(True)
+		
+		index = 0
+		for index in range(PB.getNumMods()):
+			self.rbs.append( wx.RadioButton(
+				modPanel, -1, PB.getModAt(index), wx.DefaultPosition, wx.DefaultSize
+				) )
+			sizer.Add(self.rbs[index+1], 0, wx.ALL, 3)
+			
+			if (PB.isCurrentMod(index)):
+				self.currentMod = index+1
+				self.rbs[index+1].SetValue(True)
+		
+		modPanel.SetSizer(sizer)
+		modPanel.SetAutoLayout(1)
+		modPanel.SetupScrolling()
+		
+		pageSizer.Add(modPanel, 0, wx.ALL, 5)
+		
+		self.SetSizer(pageSizer)
+		
+		self.Bind(wx.wizard.EVT_WIZARD_PAGE_CHANGED, self.OnPageChanged)
+		self.Bind(wx.wizard.EVT_WIZARD_PAGE_CHANGING, self.OnPageChanging)
+		
+	def enableButtons(self):
+		self.myParent.FindWindowById(wx.ID_FORWARD).Enable(True)
+		self.myParent.FindWindowById(wx.ID_BACKWARD).Enable(False)
+		
+	def OnPageChanged(self, event):
+		global curPage
+		global bPatchConfirmed
+		global bPatchOK
+		
+		bPatchConfirmed = False
+		bPatchOK = False
+
+		# Determine what buttons should be enabled
+		self.enableButtons()
+		
+		# We are the current page
+		curPage = self
+			
+	def OnPageChanging(self, event):
+		# Check direction
+		if event.GetDirection():
+			# We are trying to move forward - have we selected another mod?
+			
+			# Determine our selection
+			iSelection = 0
+			while (not self.rbs[iSelection].GetValue() and iSelection < PB.getNumMods()):
+				iSelection = iSelection+1
+				
+			# Do we need to load a mod
+			if (iSelection != self.currentMod):
+				# Yep.
+				PB.loadMod(iSelection-1)
+				PB.quit()
+	
+	def SetNext(self, next):
+		self.next = next
+		
+	def SetPrev(self, prev):
+		self.prev = prev
+		
+	def GetNext(self):
+		"Select which next page to show based on network selected"
+		next = self.next
+		
+		# Determine our selection
+		iSelection = 0
+		while (not self.rbs[iSelection].GetValue() and iSelection < PB.getNumMods()):
+			iSelection = iSelection+1
+			
+		# Do we need to load a mod
+		if (iSelection != self.currentMod):
+			next = None
+			
+		return next
+		
+	def GetPrev(self):
+		return self.prev
+		
+#
+# SMTP Login Page
 #
 class SMTPLoginPage(wx.wizard.WizardPageSimple):
 	def __init__(self, parent):
@@ -44,6 +156,10 @@ class SMTPLoginPage(wx.wizard.WizardPageSimple):
 		self.password = wx.TextCtrl(self, -1, "", size=(125,-1), style=wx.TE_PASSWORD)
 		self.password.SetHelpText(localText.getText("TXT_KEY_PITBOSS_SMTP_PASSWORD_HELP", ()))
 		
+		emailLbl = wx.StaticText(self, -1, localText.getText("TXT_KEY_POPUP_DETAILS_EMAIL", ()))
+		self.email = wx.TextCtrl(self, -1, PB.getEmail(), size=(125,-1))
+		self.email.SetHelpText(localText.getText("TXT_KEY_POPUP_DETAILS_EMAIL", ()))
+		
 		self.Bind(wx.wizard.EVT_WIZARD_PAGE_CHANGING, self.OnPageChanging)
 		self.Bind(wx.wizard.EVT_WIZARD_PAGE_CHANGED, self.OnPageChanged)
 		
@@ -51,6 +167,7 @@ class SMTPLoginPage(wx.wizard.WizardPageSimple):
 		sizer.AddMany([ hostLbl, self.host,
 						usernameLbl, self.username,
 						passwordLbl, self.password,
+						emailLbl, self.email,
 						])
 		border = wx.BoxSizer(wx.VERTICAL)
 		border.Add(sizer, 0, wx.ALL, 25)
@@ -63,11 +180,6 @@ class SMTPLoginPage(wx.wizard.WizardPageSimple):
 		
 	def OnPageChanged(self, event):
 		global curPage
-		global bPatchConfirmed
-		global bPatchOK
-		
-		bPatchConfirmed = False
-		bPatchOK = False
 
 		# Determine what buttons should be enabled
 		self.enableButtons()
@@ -79,7 +191,8 @@ class SMTPLoginPage(wx.wizard.WizardPageSimple):
 		# Check direction
 		if event.GetDirection():
 			# We are trying to move forward - set the SMTP values
-			PB.setSMTPValues( self.host.GetValue(), self.username.GetValue(), self.password.GetValue() )
+			PB.setSMTPValues( self.host.GetValue(), self.username.GetValue(), self.password.GetValue(), self.email.GetValue() )			
+		
 			
 #
 # Network Selection Page
@@ -278,7 +391,7 @@ class LoadSelectPage(wx.wizard.PyWizardPage):
 		self.myParent = parent
 		
 		# Place the radio buttons
-		selections = [localText.getText("TXT_KEY_PITBOSS_NEWGAME", ()), localText.getText("TXT_KEY_PITBOSS_LOADGAME", ())]
+		selections = [localText.getText("TXT_KEY_PITBOSS_NEWGAME", ()), localText.getText("TXT_KEY_PITBOSS_SCENARIO", ()), localText.getText("TXT_KEY_PITBOSS_LOADGAME", ())]
 		sizer = wx.BoxSizer(wx.VERTICAL)
 		self.rb = wx.RadioBox(
 					self, -1, (localText.getText("TXT_KEY_PITBOSS_SELECT_INIT", ())), wx.DefaultPosition, wx.DefaultSize,
@@ -363,12 +476,15 @@ class LoadSelectPage(wx.wizard.PyWizardPage):
 		self.prev = prev
 		
 	def GetNext(self):
-		"Determine whether to skip the staging page"
-		
+		"Determine which page to display next"
 		next = self.next
 		
-		if (self.rb.GetSelection() == 1):
-			next = NULL
+		if (self.rb.GetSelection() == 0):
+			# If it's a new game, skip the scenario selector
+			next = next.GetNext()
+		if (self.rb.GetSelection() == 2):
+			# If it's a loaded game, launch now
+			next = None
 			
 		return next
 		
@@ -378,11 +494,88 @@ class LoadSelectPage(wx.wizard.PyWizardPage):
 	def OnPageChanging(self, event):
 		
 		global bSaved
+		global bScenario
 		
 		# Check direction
 		if event.GetDirection():
-			# We are trying to move forward - are we trying to start a new game?
-			if (self.rb.GetSelection() == 0):
+		
+			# We are trying to move forward - are we trying to init'ing or loading game?
+			if (self.rb.GetSelection() == 2):
+				# Loading a game - popup the file browser
+				bScenario = false
+				dlg = wx.FileDialog(
+					self, message=(localText.getText("TXT_KEY_PITBOSS_CHOOSE_SAVE", ())), defaultDir=".\saves\multi",
+					defaultFile="", wildcard=localText.getText("TXT_KEY_PITBOSS_SAVE_FILES", ("(*.Civ4SavedGame)|*.Civ4SavedGame", )), style=wx.OPEN
+					)
+				
+				# Show the modal dialog and get the response
+				if dlg.ShowModal() == wx.ID_OK:
+					# Get the file name
+					path = dlg.GetPath()
+					if (path != ""):
+						# Prompt for admin password
+						dlg = wx.TextEntryDialog(
+							self, localText.getText("TXT_KEY_MAIN_MENU_CIV_ADMINPWD_DESC", ()),
+							localText.getText("TXT_MAIN_MENU_CIV_PASSWORD_TITLEBAR", ()))
+							
+						# Show the modal dialog and get the response
+						if dlg.ShowModal() == wx.ID_OK:
+							# Check the game name
+							adminPwd = dlg.GetValue()
+								
+							# We got a save file - try to load the setup info
+							iResult = PB.load(path, adminPwd)
+							if ( iResult != 0 ):
+								# Loading setup info failed.  Clean up and exit
+								if (iResult == 1):
+									msg = wx.MessageBox((localText.getText("TXT_KEY_PITBOSS_ERROR_LOADING", ())), (localText.getText("TXT_KEY_PITBOSS_LOAD_ERROR", ())), wx.ICON_ERROR )
+								elif (iResult == -1):
+									msg = wx.MessageBox((localText.getText("TXT_MAIN_MENU_CIV_PASSWORD_RETRY_DESC", ())), (localText.getText("TXT_KEY_BAD_PASSWORD_TITLE", ())), wx.ICON_ERROR )
+								PB.reset()
+								event.Veto()
+							else:
+								# Successfully loaded, try hosting
+								PB.setLoadFileName(path)
+								if ( not PB.host(bPublic, bScenario) ):
+									msg = wx.MessageBox( (localText.getText("TXT_KEY_PITBOSS_ERROR_HOSTING", ())), (localText.getText("TXT_KEY_PITBOSS_HOST_ERROR", ())), wx.ICON_ERROR )
+									PB.reset()
+									event.Veto()
+								else:
+									bSaved = True
+						else:
+							# User cancelled admin password
+							PB.reset()
+							event.Veto()
+							
+					else:
+						# Didn't get a save file - veto the page change
+						event.Veto()
+						
+				else:
+					#User hit cancel - veto the page change
+					event.Veto()
+					
+				# Destroy the dialog
+				dlg.Destroy()
+				
+			else:
+				bSaved = false
+				
+				# Check to make sure this is a valid option
+				if (self.rb.GetSelection() == 0):
+					# New game - check maps
+					if (PB.getNumMapScripts() == 0):
+						msg = wx.MessageBox((localText.getText("TXT_KEY_PITBOSS_NO_MAPS_DESC", ())), (localText.getText("TXT_KEY_PITBOSS_NO_MAPS_TITLE", ())), wx.ICON_EXCLAMATION)
+						event.Veto()
+						return
+						
+				if (self.rb.GetSelection() == 1):
+					# New game - check scenarios
+					if (PB.getNumScenarios() == 0):
+						msg = wx.MessageBox((localText.getText("TXT_KEY_PITBOSS_NO_SCENARIOS_DESC", ())), (localText.getText("TXT_KEY_PITBOSS_NO_SCENARIOS_TITLE", ())), wx.ICON_EXCLAMATION)
+						event.Veto()
+						return
+				
 				# Hosting a new game - pop the gamename dialog
 				dlg = wx.TextEntryDialog(
 					self, localText.getText("TXT_KEY_PITBOSS_NAME_GAME_DESC", ()),
@@ -408,15 +601,14 @@ class LoadSelectPage(wx.wizard.PyWizardPage):
 								PB.setGamePassword( dlg.GetValue() )
 								
 						if bOK:	
-							# Now host!
-							if ( not PB.host(bPublic) ):
-								# Hosting failed for some reason.  Clean up and exit
-								msg = wx.MessageBox((localText.getText("TXT_KEY_PITBOSS_ERROR_HOSTING", ())), (localText.getText("TXT_KEY_PITBOSS_HOST_ERROR", ())), wx.ICON_ERROR)
-								PB.reset()
-								event.Veto()
-							else:
-								bSaved = False
-								
+							# If we are starting a new game, host
+							if (self.rb.GetSelection() == 0):		
+								bScenario = false		
+								if ( not PB.host(bPublic, bScenario) ):
+									# Hosting failed for some reason.  Clean up and exit
+									msg = wx.MessageBox((localText.getText("TXT_KEY_PITBOSS_ERROR_HOSTING", ())), (localText.getText("TXT_KEY_PITBOSS_HOST_ERROR", ())), wx.ICON_ERROR)
+									PB.reset()
+									event.Veto()
 						else:
 							# User hit cancel
 							event.Veto()
@@ -430,51 +622,96 @@ class LoadSelectPage(wx.wizard.PyWizardPage):
 					event.Veto()
 					
 				dlg.Destroy()
-					
-			else:
-				# Loading a game - popup the file browser
-				dlg = wx.FileDialog(
-					self, message=(localText.getText("TXT_KEY_PITBOSS_CHOOSE_SAVE", ())), defaultDir=".\saves\multi",
-					defaultFile="", wildcard=localText.getText("TXT_KEY_PITBOSS_SAVE_FILES", ("(*.Civ4SavedGame)|*.Civ4SavedGame", )), style=wx.OPEN
-					)
-				
-				# Show the modal dialog and get the response
-				if dlg.ShowModal() == wx.ID_OK:
-					# Get the file name
-					path = dlg.GetPath()
-					if (path != ""):
-						# We got a save file - try to load the setup info
-						if ( not PB.load(path) ):
-							# Loading setup info failed.  Clean up and exit
-							msg = wx.MessageBox((localText.getText("TXT_KEY_PITBOSS_ERROR_LOADING", ())), (localText.getText("TXT_KEY_PITBOSS_LOAD_ERROR", wx.ICON_ERROR)))
-							PB.reset()
-							event.Veto()
-						else:
-							# Successfully loaded, try hosting
-							PB.setLoadFileName(path)
-							if ( not PB.host(bPublic) ):
-								msg = wx.MessageBox((localText.getText("TXT_KEY_PITBOSS_ERROR_HOSTING", ())), (localText.getText("TXT_KEY_PITBOSS_HOST_ERROR", wx.ICON_ERROR)))
-								PB.reset()
-								event.Veto()
-							else:
-								bSaved = True
-							
-					else:
-						# Didn't get a save file - veto the page change
-						event.Veto()
-						
-				else:
-					#User hit cancel - veto the page change
-					event.Veto()
-					
-				# Destroy the dialog
-				dlg.Destroy()
 		
 		else:
 			# We are moving backward - reset the network layer
 			PB.reset()
 			PB.logout()
 			
+#
+# Scenario Selection page (optional 4th page)
+#
+class ScenarioSelectPage(wx.wizard.WizardPageSimple):
+	def __init__(self, parent):
+		wx.wizard.WizardPageSimple.__init__(self, parent)
+		
+		self.myParent = parent
+		pageSizer = wx.BoxSizer(wx.VERTICAL)
+			
+		scenarioPanel = wx.lib.scrolledpanel.ScrolledPanel(self, -1, size=(300, 600), style = wx.SUNKEN_BORDER)
+		sizer = wx.BoxSizer(wx.VERTICAL)
+		
+		header = wx.StaticText(self, -1, localText.getText("TXT_KEY_PITBOSS_CHOOSE_SCENARIO", ()))
+		pageSizer.Add(header, 0, wx.ALL, 5)
+		
+		# Place the radio buttons
+		self.rbs = []
+		index = 0
+		for index in range(PB.getNumScenarios()):
+			# We need to start a group on the first one
+			if (index == 0):
+				self.rbs.append( wx.RadioButton(
+					scenarioPanel, -1, PB.getScenarioAt(index), wx.DefaultPosition, wx.DefaultSize, wx.RB_GROUP
+					) )
+			else:
+				self.rbs.append( wx.RadioButton(
+					scenarioPanel, -1, PB.getScenarioAt(index), wx.DefaultPosition, wx.DefaultSize
+					) )
+				
+			sizer.Add(self.rbs[index], 0, wx.ALL, 3)
+		
+		scenarioPanel.SetSizer(sizer)
+		scenarioPanel.SetAutoLayout(1)
+		scenarioPanel.SetupScrolling()
+		
+		pageSizer.Add(scenarioPanel, 0, wx.ALL, 5)
+		
+		self.SetSizer(pageSizer)
+		
+		self.Bind(wx.wizard.EVT_WIZARD_PAGE_CHANGED, self.OnPageChanged)
+		self.Bind(wx.wizard.EVT_WIZARD_PAGE_CHANGING, self.OnPageChanging)
+	
+	def enableButtons(self):
+		self.myParent.FindWindowById(wx.ID_FORWARD).Enable(True)
+		self.myParent.FindWindowById(wx.ID_BACKWARD).Enable(True)
+		
+	def OnPageChanged(self, event):
+		global curPage
+		
+		# Determine what buttons should be enabled
+		self.enableButtons()
+		curPage = self
+			
+	def OnPageChanging(self, event):
+		global bPublic
+		global bScenario
+		
+		# Check direction
+		if event.GetDirection():
+			# Determine our selection
+			iSelection = 0
+			while (not self.rbs[iSelection].GetValue() and iSelection < PB.getNumScenarios()):
+				iSelection = iSelection+1
+			
+			# We are trying to move forward - Set the selected scenario
+			if ( PB.loadScenarioInfo(PB.getScenarioAt(iSelection)) ):
+				bScenario = true
+				if ( not PB.host(bPublic, bScenario) ):
+					# Hosting failed for some reason.  Clean up and exit
+					msg = wx.MessageBox((localText.getText("TXT_KEY_PITBOSS_ERROR_HOSTING", ())), (localText.getText("TXT_KEY_PITBOSS_HOST_ERROR", ())), wx.ICON_ERROR)
+					PB.reset()
+					event.Veto()
+			else:
+				# Loading the scenario failed
+					msg = wx.MessageBox((localText.getText("TXT_KEY_PITBOSS_SCENARIO_ERROR", ())), (localText.getText("TXT_KEY_PITBOSS_SCENARIO_ERROR_TITLE", ())), wx.ICON_ERROR)
+					PB.reset()
+					event.Veto()
+		else:
+			# We are moving backward
+			PB.reset()
+			
+		
+		
 #
 # Staging room (last page before launch)
 #
@@ -489,6 +726,7 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		# Create our array of controls
 		self.optionArray = []
 		self.mpOptionArray = []
+		self.victoriesArray = []
 		self.whoArray = []
 		self.civArray = []
 		self.leaderArray = []
@@ -548,11 +786,12 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		self.pageSizer = wx.BoxSizer(wx.VERTICAL)
 		
 		# Create the game options area
-		border = wx.StaticBox(self, -1, ((localText.getText("TXT_KEY_PITBOSS_GAME_OPTIONS", ()))))
-		self.optionsSizer = wx.StaticBoxSizer(border, wx.HORIZONTAL)
+		masterBorder = wx.StaticBox(self, -1, ((localText.getText("TXT_KEY_PITBOSS_GAME_SETUP", ()))))
+		self.optionsSizer = wx.StaticBoxSizer(masterBorder, wx.HORIZONTAL)
 		
 		# Create the drop down side
-		self.dropDownSizer = wx.BoxSizer(wx.VERTICAL)
+		settingsBorder = wx.StaticBox(self, -1, ((localText.getText("TXT_KEY_PITBOSS_GAME_SETTINGS", ()))))
+		self.dropDownSizer = wx.StaticBoxSizer(settingsBorder, wx.VERTICAL)
 		
 		# Create label/control pairs for map
 		itemSizer = wx.BoxSizer(wx.VERTICAL)
@@ -614,15 +853,27 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		itemSizer.Add(self.speedChoice)
 		self.dropDownSizer.Add(itemSizer, 0, wx.TOP, 3)
 		self.Bind(wx.EVT_CHOICE, self.OnGameChoice, self.speedChoice)
-		
+
 		# Create label/control pairs for custom map options
 		self.buildCustomMapOptions( gameData.getMapName() )
 		
 		self.optionsSizer.Add(self.dropDownSizer, 0, wx.RIGHT, 10)
 		
 		# Create the multiplayer option column
-		mpOptionsSizer = wx.BoxSizer(wx.VERTICAL)
+		centerSizer = wx.BoxSizer(wx.VERTICAL)
 		
+		mpOptionsBorder = wx.StaticBox(self, -1, ((localText.getText("TXT_KEY_PITBOSS_GAME_MPOPTIONS", ()))))
+		mpOptionsSizer = wx.StaticBoxSizer(mpOptionsBorder, wx.VERTICAL)
+		
+		# Create and add Multiplayer option checkboxes
+		rowNum = 0
+		for rowNum in range(PB.getNumMPOptions()):
+			mpCheckBox = wx.CheckBox(self, (rowNum+1000), (PB.getMPOptionDescAt(rowNum)))
+			mpCheckBox.SetValue(gameData.getMPOptionAt(rowNum))
+			mpOptionsSizer.Add(mpCheckBox, 0, wx.TOP, 5)
+			self.mpOptionArray.append(mpCheckBox)
+			self.Bind(wx.EVT_CHECKBOX, self.OnOptionChoice, mpCheckBox)
+			
 		# Entry box to set turn timer time
 		timerOutputSizer = wx.BoxSizer(wx.HORIZONTAL)
 		timerPreText = wx.StaticText(self, -1, localText.getText("TXT_KEY_PITBOSS_TURNTIMER_A", ()))
@@ -635,19 +886,56 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		
 		mpOptionsSizer.Add(timerOutputSizer, 0, wx.ALL, 5)
 		
-		# Create and add Multiplayer option checkboxes
+		# Entry box for game turn limit
+		maxTurnsSizer = wx.BoxSizer(wx.HORIZONTAL)
+		maxTurnsText = wx.StaticText(self, -1, localText.getText("TXT_KEY_PITBOSS_MAX_TURN", ()))
+		self.maxTurnsEdit = wx.TextCtrl(self, -1, str(gameData.iMaxTurns), size=(30,-1))
+		maxTurnsSizer.Add(maxTurnsText, 0, wx.TOP, 5)
+		maxTurnsSizer.Add(self.maxTurnsEdit, 0, wx.TOP, 5)
+		self.Bind(wx.EVT_TEXT, self.OnMaxTurnsEntered, self.maxTurnsEdit)
+		
+		mpOptionsSizer.Add(maxTurnsSizer, 0, wx.ALL, 5)
+		
+		# Entry box for city elimination limit
+		cityEliminationSizer = wx.BoxSizer(wx.HORIZONTAL)
+		cityEliminationText = wx.StaticText(self, -1, localText.getText("TXT_KEY_PITBOSS_CITY_ELIMINATION", ()))
+		self.cityEliminationEdit = wx.TextCtrl(self, -1, str(gameData.iCityElimination), size=(30,-1))
+		cityEliminationSizer.Add(cityEliminationText, 0, wx.TOP, 5)
+		cityEliminationSizer.Add(self.cityEliminationEdit, 0, wx.TOP, 5)
+		self.Bind(wx.EVT_TEXT, self.OnCityEliminationEntered, self.cityEliminationEdit)
+		
+		mpOptionsSizer.Add(cityEliminationSizer, 0, wx.ALL, 5)
+		
+		centerSizer.Add(mpOptionsSizer, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.LEFT|wx.RIGHT|wx.BOTTOM, 5)
+		
+		victoriesBorder = wx.StaticBox(self, -1, ((localText.getText("TXT_KEY_PITBOSS_GAME_VICTORIES", ()))))
+		victoriesSizer = wx.StaticBoxSizer(victoriesBorder, wx.VERTICAL)
+		
+		# Create and add Victory option checkboxes
 		rowNum = 0
-		for rowNum in range(PB.getNumMPOptions()):
-			mpCheckBox = wx.CheckBox(self, (rowNum+1000), (PB.getMPOptionDescAt(rowNum)))
-			mpCheckBox.SetValue(gameData.getMPOptionAt(rowNum))
-			mpOptionsSizer.Add(mpCheckBox, 0, wx.TOP, 5)
-			self.mpOptionArray.append(mpCheckBox)
-			self.Bind(wx.EVT_CHECKBOX, self.OnOptionChoice, mpCheckBox)
+		for rowNum in range(PB.getNumVictories()):
+			victoryCheckBox = wx.CheckBox(self, (rowNum+2000), (PB.getVictoryDescAt(rowNum)))
+			victoryCheckBox.SetValue(gameData.getVictory(rowNum))
+			victoriesSizer.Add(victoryCheckBox, 0, wx.TOP, 5)
+			self.victoriesArray.append(victoryCheckBox)
+			self.Bind(wx.EVT_CHECKBOX, self.OnOptionChoice, victoryCheckBox)
+		
+		centerSizer.Add(victoriesSizer, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5)
 			
-		self.optionsSizer.Add(mpOptionsSizer, 0, wx.ALL, 10)
-			
+		# Entry box for admin password
+		itemSizer = wx.BoxSizer(wx.VERTICAL)
+		txt = wx.StaticText(self, -1, (localText.getText("TXT_KEY_POPUP_ADMIN_PASSWORD", ())))
+		self.adminPasswordEdit = wx.TextCtrl(self, -1, "", size=(100,-1))
+		itemSizer.Add(txt)
+		itemSizer.Add(self.adminPasswordEdit)
+		mpOptionsSizer.Add(itemSizer, 0, wx.TOP, 5)
+		self.Bind(wx.EVT_TEXT, self.OnAdminPasswordEntered, self.adminPasswordEdit)
+
+		self.optionsSizer.Add(centerSizer, 0, wx.ALIGN_CENTER_HORIZONTAL)
+					
 		# Create the CheckBox side
-		checkBoxSizer = wx.BoxSizer(wx.VERTICAL)
+		optionsBorder = wx.StaticBox(self, -1, ((localText.getText("TXT_KEY_PITBOSS_GAME_OPTIONS", ()))))
+		checkBoxSizer = wx.StaticBoxSizer(optionsBorder, wx.VERTICAL)
 		
 		# Create and add the Options checkboxes
 		rowNum = 0
@@ -658,7 +946,7 @@ class StagingPage(wx.wizard.WizardPageSimple):
 			self.optionArray.append(checkBox)
 			self.Bind(wx.EVT_CHECKBOX, self.OnOptionChoice, checkBox)
 			
-		self.optionsSizer.Add(checkBoxSizer, 0, wx.ALIGN_CENTER_VERTICAL|wx.LEFT, 10)
+		self.optionsSizer.Add(checkBoxSizer, 0, wx.LEFT, 10)
 		
 		# Add our options box to the page
 		self.pageSizer.Add(self.optionsSizer, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5)
@@ -693,7 +981,7 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		rowNum = 0
 		for rowNum in range(gc.getMAX_CIV_PLAYERS()):
 			# Create the border box
-			border = wx.StaticBox(playerPanel, -1, (localText.getText("TXT_KEY_PITBOSS_PLAYER", (rowNum, ))), (0,(rowNum*30)))
+			border = wx.StaticBox(playerPanel, -1, (localText.getText("TXT_KEY_PITBOSS_PLAYER", (rowNum+1, ))), (0,(rowNum*30)))
 			# Create the layout mgr
 			rowSizer = wx.StaticBoxSizer(border, wx.HORIZONTAL)
 			
@@ -788,15 +1076,26 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		self.ChangeGameParam()
 		
 	def ChangeGameParam(self):
+		maxTurnsValue = 0
+		cityEliminationValue = 0
+		turnTimerValue = 0
+		
+		strValue = self.maxTurnsEdit.GetValue()
+		if (len(strValue) > 0):
+			maxTurnsValue = (int)(self.maxTurnsEdit.GetValue())
+			
+		strValue = self.cityEliminationEdit.GetValue()
+		if (len(strValue) > 0):
+			cityEliminationValue = (int)(self.cityEliminationEdit.GetValue())
+			
 		strValue = self.turnTimerEdit.GetValue()
 		if (len(strValue) > 0):
-			intValue = (int)(self.turnTimerEdit.GetValue())
-		else:
-			intValue = 0
+			turnTimerValue = (int)(self.turnTimerEdit.GetValue())
 			
 		PB.gameParamChanged( self.mapChoice.GetStringSelection(), self.sizeChoice.GetSelection(),
 			self.climateChoice.GetSelection(), self.seaLevelChoice.GetSelection(),
-			self.eraChoice.GetSelection(), self.speedChoice.GetSelection(), intValue )
+			self.eraChoice.GetSelection(), self.speedChoice.GetSelection(), maxTurnsValue, cityEliminationValue,
+			turnTimerValue, self.adminPasswordEdit.GetValue() )
 			
 	def OnCustomMapOptionChoice(self, event):
 		# Get the option ID
@@ -808,6 +1107,48 @@ class StagingPage(wx.wizard.WizardPageSimple):
 			if myChar not in string.digits:
 				return False
 		return True
+		
+	def OnMaxTurnsEntered(self, event):
+		# Check to see if there is a turn string
+		if ( (self.maxTurnsEdit.GetValue() != "")  ):
+			# There is, make sure it's a number
+			if ( not self.IsNumericString(self.maxTurnsEdit.GetValue()) ):
+				# It's not - lay the smack down				
+				dlg = wx.MessageDialog(
+					self, localText.getText("TXT_KEY_PITBOSS_MAXTURN_ERROR_DESC", ()),
+					localText.getText("TXT_KEY_PITBOSS_MAXTURN_ERROR_TITLE", ()), wx.OK|wx.ICON_EXCLAMATION)
+					
+				# Show the modal dialog and get the response
+				if dlg.ShowModal() == wx.ID_OK:
+					# Clear out the MaxTurns Edit box
+					self.maxTurnsEdit.SetValue("")
+			else:
+				# It's a number
+				self.ChangeGameParam()
+		else:
+			# It's been cleared
+			self.ChangeGameParam()
+		
+	def OnCityEliminationEntered(self, event):
+		# Check to see if there is an elimination string
+		if ( (self.cityEliminationEdit.GetValue() != "")  ):
+			# There is, make sure it's a number
+			if ( not self.IsNumericString(self.cityEliminationEdit.GetValue()) ):
+				# It's not - lay the smack down				
+				dlg = wx.MessageDialog(
+					self, localText.getText("TXT_KEY_PITBOSS_CITYELIMINATION_ERROR_DESC", ()),
+					localText.getText("TXT_KEY_PITBOSS_CITYELIMINATION_ERROR_TITLE", ()), wx.OK|wx.ICON_EXCLAMATION)
+					
+				# Show the modal dialog and get the response
+				if dlg.ShowModal() == wx.ID_OK:
+					# Clear out the MaxTurns Edit box
+					self.cityEliminationEdit.SetValue("")
+			else:
+				# It's a number
+				self.ChangeGameParam()
+		else:
+			# It's been cleared
+			self.ChangeGameParam()
 		
 	def OnTurnTimeEntered(self, event):
 		# Check to see if there is a time string
@@ -830,12 +1171,18 @@ class StagingPage(wx.wizard.WizardPageSimple):
 			# It's been cleared
 			self.ChangeGameParam()
 			
+	def OnAdminPasswordEntered(self, event):
+		self.ChangeGameParam()
+
 	def OnOptionChoice(self, event):
 		# Get the option ID
 		optionID = event.GetId()
 		
+		# Values >= 2000 are victories
+		if  (optionID >= 2000):
+			PB.victoriesChanged( (optionID-2000), self.victoriesArray[(optionID-2000)].GetValue() )
 		# Values >= 1000 are MP options
-		if  (optionID >= 1000):
+		elif  (optionID >= 1000):
 			PB.mpOptionChanged( (optionID-1000), self.mpOptionArray[(optionID-1000)].GetValue() )
 		else:
 			PB.gameOptionChanged( optionID, self.optionArray[optionID].GetValue() )
@@ -846,6 +1193,13 @@ class StagingPage(wx.wizard.WizardPageSimple):
 	def OnPlayerChoice(self, event):
 		# Get the row for the player modified
 		rowNum = event.GetId()
+		
+		# See if the slot status is valid
+		if (bScenario and not PB.getNoPlayersScenario()):
+			if (PB.getWho(rowNum) != self.whoArray[rowNum].GetSelection()):
+				# Closed status is not permitted - change to AI
+				if (self.whoArray[rowNum].GetSelection() == 2):
+					self.whoArray[rowNum].SetSelection(1)
 		
 		# See if we need to update the leader box
 		if (not self.leaderRefresh):
@@ -859,7 +1213,6 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		if (not event.GetDirection()):
 			# We are trying to move backward - reset the network resources
 			PB.reset()
-			PB.logout()
 			
 	def OnPageChanged(self, event):
 		global curPage
@@ -874,28 +1227,39 @@ class StagingPage(wx.wizard.WizardPageSimple):
 	def setDefaults(self):
 		# Display the current initialization information
 		global bSaved
+		global bScenario
 		
 		# Get game data first
 		gameData = PB.getGameSetupData()
 		
+		self.refreshCustomMapOptions(gameData.getMapName())
+		
 		# Set the selections currently in our init structure
+		if (self.mapChoice.FindString(gameData.getMapName()) == wx.NOT_FOUND):
+			self.mapChoice.Append(gameData.getMapName())
 		self.mapChoice.SetStringSelection(gameData.getMapName())
-		self.mapChoice.Enable(not bSaved)
+		self.mapChoice.Enable(not bSaved and not bScenario)
 		
 		self.sizeChoice.SetSelection(gameData.iSize)
-		self.sizeChoice.Enable(not bSaved)
+		self.sizeChoice.Enable(not bSaved and not bScenario)
 		
 		self.climateChoice.SetSelection(gameData.iClimate)
-		self.climateChoice.Enable(not bSaved)
+		self.climateChoice.Enable(not bSaved and not bScenario)
 		
 		self.seaLevelChoice.SetSelection(gameData.iSeaLevel)
-		self.seaLevelChoice.Enable(not bSaved)
+		self.seaLevelChoice.Enable(not bSaved and not bScenario)
 		
 		self.eraChoice.SetSelection(gameData.iEra)
-		self.eraChoice.Enable(not bSaved)
+		self.eraChoice.Enable(not bSaved and not bScenario)
 		
 		self.speedChoice.SetSelection(gameData.iSpeed)
-		self.speedChoice.Enable(not bSaved)
+		self.speedChoice.Enable(not bSaved and not PB.forceSpeed())
+		
+		self.maxTurnsEdit.SetValue(str(gameData.iMaxTurns))
+		self.maxTurnsEdit.Enable(not bSaved and not PB.forceMaxTurns())
+		
+		self.cityEliminationEdit.SetValue(str(gameData.iCityElimination))
+		self.cityEliminationEdit.Enable(not bSaved and not PB.forceCityElimination())
 		
 		self.turnTimerEdit.SetValue(str(gameData.iTurnTime))
 		if (not bSaved):
@@ -908,19 +1272,25 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		optionNum = 0
 		for optionNum in range(PB.getNumCustomMapOptions(gameData.getMapName())):
 			self.customMapOptionArray[optionNum].SetSelection(gameData.getCustomMapOption(optionNum))
-			self.customMapOptionArray[optionNum].Enable(not bSaved)	
+			self.customMapOptionArray[optionNum].Enable(not bSaved and not bScenario)	
 				
 		# set the mp options selection
 		rowNum = 0
 		for rowNum in range(PB.getNumMPOptions()):
 			self.mpOptionArray[rowNum].SetValue(gameData.getMPOptionAt(rowNum))
 			self.mpOptionArray[rowNum].Enable(not bSaved)
+			
+		# set the victories selected
+		rowNum = 0
+		for rowNum in range(PB.getNumVictories()):
+			self.victoriesArray[rowNum].SetValue(gameData.getVictory(rowNum))
+			self.victoriesArray[rowNum].Enable(not bSaved and not PB.forceVictories() and not PB.isPermanentVictory(rowNum))
 		
 		# Set the options selected
 		rowNum = 0
 		for rowNum in range(PB.getNumOptions()):
 			self.optionArray[rowNum].SetValue(gameData.getOptionAt(rowNum))
-			self.optionArray[rowNum].Enable(not bSaved)
+			self.optionArray[rowNum].Enable(not bSaved and not PB.forceOptions())
 				
 		# Have the app suggest number of players based on map size
 		PB.suggestPlayerSetup()
@@ -933,25 +1303,27 @@ class StagingPage(wx.wizard.WizardPageSimple):
 			# We may need to add/remove items from who box
 			self.refreshWhoBox(rowNum, playerData.iWho)
 			self.whoArray[rowNum].SetSelection(playerData.iWho)
-			self.whoArray[rowNum].Enable(not bSaved)
+			if (playerData.iWho == 1):	# AI
+				self.whoArray[rowNum].Enable( not bSaved and PB.isPlayableCiv(rowNum) )
 			
 			# Civ choices are static inside the instance
 			civChoice = playerData.iCiv+1
 			self.civArray[rowNum].SetSelection(civChoice)
-			self.civArray[rowNum].Enable(not bSaved)
+			self.civArray[rowNum].Enable( not bSaved and (not bScenario or PB.getNoPlayersScenario()) )
 			
 			# We may need to add/remove items from the leader box
 			self.refreshLeaderBox(rowNum, playerData.iCiv)
 			self.leaderRefresh = False
 			self.leaderArray[rowNum].SetSelection(PB.getCivLeaderIndex(civChoice-1, playerData.iLeader)+1)
-			self.leaderArray[rowNum].Enable(not bSaved)
+			self.leaderArray[rowNum].Enable( not bSaved and (not bScenario or PB.getNoPlayersScenario()) )
 			
 			# Team choices are static
 			self.teamArray[rowNum].SetSelection(playerData.iTeam)
-			self.teamArray[rowNum].Enable(not bSaved)
+			self.teamArray[rowNum].Enable( not bSaved and (not bScenario or PB.getNoPlayersScenario()) )
 		
 			# Difficulty choices are static
-			self.diffArray[rowNum].SetLabel((PB.getHandicapAt(playerData.iDifficulty)))
+			self.diffArray[rowNum].SetSelection(playerData.iDifficulty)
+			self.diffArray[rowNum].Enable( not bSaved and not PB.forceDifficulty() )
 			
 			# Status is static
 			self.statusArray[rowNum].SetLabel(playerData.getStatusText())
@@ -1166,24 +1538,30 @@ class StartupIFace(wx.App):
 		self.wizard = wx.wizard.Wizard(None, -1, (localText.getText("TXT_KEY_PITBOSS_TITLE", ())))
 		
 		# Create each wizard page
+		self.modSelect = ModSelectPage(self.wizard)
 		self.smtpLogin = SMTPLoginPage(self.wizard)
 		self.netSelect = NetSelectPage(self.wizard)
 		self.login = LoginPage(self.wizard)
 		self.loadSelect = LoadSelectPage(self.wizard)
+		self.scenarioSelect = ScenarioSelectPage(self.wizard)
 		self.staging = StagingPage(self.wizard)
 		
+		self.modSelect.SetNext(self.smtpLogin)
+		self.smtpLogin.SetPrev(self.modSelect)
 		self.smtpLogin.SetNext(self.netSelect)
 		self.netSelect.SetPrev(self.smtpLogin)
 		self.netSelect.SetNext(self.login)
 		self.login.SetPrev(self.netSelect)
 		self.login.SetNext(self.loadSelect)
 		self.loadSelect.SetPrev(self.netSelect)
-		self.loadSelect.SetNext(self.staging)
-		self.staging.SetPrev(self.netSelect)
+		self.loadSelect.SetNext(self.scenarioSelect)
+		self.scenarioSelect.SetPrev(self.loadSelect)
+		self.scenarioSelect.SetNext(self.staging)
+		self.staging.SetPrev(self.loadSelect)
 		
 		self.progressDlg = None
 		
-		curPage = self.smtpLogin
+		curPage = self.modSelect
 		
 		self.wizard.FitToPage(curPage)
 		
@@ -1199,7 +1577,7 @@ class StartupIFace(wx.App):
 		global curPage
 		
 		# Try starting the wizard
-		if (self.wizard.RunWizard(curPage)):
+		if (self.wizard.RunWizard(curPage) and not PB.getDone()):
 			# launch game here
 			self.updateTimer.Stop()
 			PB.launch()
@@ -1213,6 +1591,13 @@ class StartupIFace(wx.App):
 	def OnTimedUpdate(self, event):
 		# Handle received net messages
 		PB.handleMessages()
+		
+	def displayMessageBox(self, title, desc):
+		#global msgBox
+		#msgBox = wx.MessageDialog( self, desc, title, wx.OK )
+		#msgBox.Show(True)
+		outMsg = title + ":\n" + desc
+		PB.consoleOut(outMsg)
 		
 	def patchAvailable(self, patchName, patchUrl):
 		global curPage

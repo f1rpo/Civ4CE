@@ -81,6 +81,12 @@ def addChatMessage(argsList):
 	szMessage = argsList[0]
 	app.addChatMessage(szMessage)
 	
+def displayMessageBox(argsList):
+	global app
+	szTitle = argsList[0]
+	szDesc = argsList[1]
+	app.displayMessageBox(szTitle, szDesc)
+	
 def sendEmail(argsList):
 	import sys, smtplib, MimeWriter, base64, StringIO
 			
@@ -91,43 +97,44 @@ def sendEmail(argsList):
 	szGameName = argsList[4]	
 	bUseTimer = argsList[5]
 	iTimeLeft = argsList[6]
-	
-	print 'sending e-mail'
-	print 'To:', szAddr
-	print 'Server:', szHost
-	print 'Login:', szLogin
+	szFrom = argsList[7]
+	szYear = argsList[8]
 	
 	if len(szAddr) == 0 or len(szHost) == 0:
 		print 'host or address empty'
 		return 1
 
+	print "sending e-mail"
+	print "To: %s" % (szAddr, )
+	print "From: %s" % (szFrom, )
+	print "Server: %s" % (szHost, )
+	if len(szLogin) > 0:
+		print "Login: %s" % (szLogin, )
+	else:
+		print "Not using authentication"
+	
 	message = StringIO.StringIO()
 	writer = MimeWriter.MimeWriter(message)
 
 	writer.addheader('To', szAddr)
-	writer.addheader('From', localText.getText("TXT_KEY_PITBOSS_EMAIL_FROM", ()))
-	writer.addheader('Subject', localText.getText("TXT_KEY_PITBOSS_EMAIL_SUBJECT", ()))
+	writer.addheader('From', szFrom)
+	writer.addheader('Subject', localText.getText("TXT_KEY_PITBOSS_EMAIL_SUBJECT", (szGameName, szYear)))
 	writer.addheader('MIME-Version', '1.0')
-	writer.startmultipartbody('mixed')
 	
 	szBody = localText.getText("TXT_KEY_PITBOSS_EMAIL_BODY", (szGameName,))
 	if (bUseTimer):
+		szBody += u"\n"
 		szBody += localText.getText("TXT_KEY_PITBOSS_EMAIL_TIMER", (iTimeLeft,))
 
-	part = writer.nextpart()
-	body = part.startbody('text/plain')
-	body.write(szBody)
-
-	# finish off
-	writer.lastpart()
-	
+	body = writer.startbody('text/plain')
+	body.write(szBody)	
 
 	# send the mail
 	try:
 		smtp = smtplib.SMTP(szHost)
 		if len(szLogin) > 0:
 			smtp.login(szLogin, szPassword)
-		smtp.sendmail(localText.getText("TXT_KEY_PITBOSS_EMAIL_FROM", ()), szAddr, message.getvalue())
+		smtp.sendmail(szFrom, szAddr, message.getvalue())
 		smtp.quit()
 	except smtplib.SMTPAuthenticationError, e:
 		print "Authentication Error: The server didn't accept the username/password combination provided."	

@@ -65,7 +65,7 @@ class FractalWorld:
 			iFlags += CyFractal.FracVals.FRAC_POLAR
 		if rift_grain >= 0:
 			self.riftsFrac = CyFractal()
-			self.riftsFrac.fracInit(self.iNumPlotsX, self.iNumPlotsY, rift_grain, self.mapRand, iFlags, self.fracXExp, self.fracYExp)
+			self.riftsFrac.fracInit(self.iNumPlotsX, self.iNumPlotsY, rift_grain, self.mapRand, 0, self.fracXExp, self.fracYExp)
 			if has_center_rift:
 				iFlags += CyFractal.FracVals.FRAC_CENTER_RIFT
 			self.continentsFrac.fracInitRifts(self.iNumPlotsX, self.iNumPlotsY, continent_grain, self.mapRand, iFlags, self.riftsFrac, self.fracXExp, self.fracYExp)
@@ -971,7 +971,7 @@ class TerrainGenerator:
 	"If iDesertPercent=35, then about 35% of all land will be desert. Plains is similar. \
 	Note that all percentages are approximate, as values have to be roughened to achieve a natural look."
 	
-	def __init__(self, iDesertPercent=35, iPlainsPercent=20,
+	def __init__(self, iDesertPercent=32, iPlainsPercent=18,
 	             fSnowLatitude=0.7, fTundraLatitude=0.6,
 	             fGrassLatitude=0.1, fDesertBottomLatitude=0.2,
 	             fDesertTopLatitude=0.5, fracXExp=-1,

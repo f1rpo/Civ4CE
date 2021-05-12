@@ -12,6 +12,7 @@ import time
 PB = CyPitboss()
 gc = CyGlobalContext()
 localText = CyTranslator()
+msgBox = None
 
 #
 # resource IDs
@@ -36,7 +37,9 @@ class AdminFrame(wx.Frame):
 		menu.Append(ID_SAVE, (localText.getText("TXT_KEY_PITBOSS_SAVE", ())), (localText.getText("TXT_KEY_PITBOSS_SAVE_TEXT", ())))
 		menu.Append(ID_EXIT, (localText.getText("TXT_KEY_PITBOSS_EXIT", ())), (localText.getText("TXT_KEY_PITBOSS_EXIT_TEXT", ())))
 		menuBar = wx.MenuBar()
-		menuBar.Append(menu, (localText.getText("TXT_KEY_PITBOSS_FILE", ())));
+		strFile = localText.getText("TXT_KEY_PITBOSS_FILE", ())
+		strFile = localText.stripHTML(strFile)
+		menuBar.Append(menu, strFile);
 		self.SetMenuBar(menuBar)
 		
 		# Create our arrays of information and controls
@@ -74,7 +77,7 @@ class AdminFrame(wx.Frame):
 		for rowNum in range(gc.getMAX_CIV_PLAYERS()):
 			if (gc.getPlayer(rowNum).isEverAlive()):
 				# Create the border box
-				border = wx.StaticBox(playerPanel, -1, (localText.getText("TXT_KEY_PITBOSS_PLAYER", (rowNum, ))), (0,(rowNum*30)))
+				border = wx.StaticBox(playerPanel, -1, (localText.getText("TXT_KEY_PITBOSS_PLAYER", (rowNum+1, ))), (0,(rowNum*30)))
 				# Create the layout mgr
 				rowSizer = wx.StaticBoxSizer(border, wx.HORIZONTAL)
 				
@@ -259,8 +262,12 @@ class AdminFrame(wx.Frame):
 				playerData = PB.getPlayerAdminData(rowNum)
 				
 				# Set the values
-				if ((playerData.getName()) != self.nameArray[rowNum].GetLabel()):
-					self.nameArray[rowNum].SetLabel((playerData.getName()))
+				nameDisplay = ""
+				if (not playerData.bTurnActive):
+					nameDisplay += "*"
+				nameDisplay += playerData.getName()
+				if (nameDisplay != self.nameArray[rowNum].GetLabel()):
+					self.nameArray[rowNum].SetLabel(nameDisplay)
 					
 				if ((playerData.getPing()) != self.pingArray[rowNum].GetLabel()):
 					self.pingArray[rowNum].SetLabel((playerData.getPing()))
@@ -289,7 +296,7 @@ class AdminFrame(wx.Frame):
 		
 	def OnAbout(self, event):
 		"'about' event handler"
-		dlg = wx.MessageDialog(self, (localText.getText("TXT_KEY_PITBOSS_ABOUT_BOX", ())), (localText.getText("TXT_KEY_PITBOSS_ABOUT_BOX_TITLE", ())), wx.OK | wx.ICON_INFORMATION)
+		dlg = wx.MessageDialog(self, (localText.getText("TXT_KEY_PITBOSS_VERSION", (PB.getVersion(), ))), (localText.getText("TXT_KEY_PITBOSS_ABOUT_BOX_TITLE", ())), wx.OK | wx.ICON_INFORMATION)
 		dlg.ShowModal()
 		dlg.Destroy()
 		
@@ -343,7 +350,7 @@ class AdminFrame(wx.Frame):
 	def OnCloseWindow(self, event):
 		"'close window' event handler"
 		PB.quit()
-		self.Destroy(True)
+		self.Destroy()
 
 #
 # main app class
@@ -392,5 +399,13 @@ class AdminIFace(wx.App):
 			return ""
 			
 	def addChatMessage(self, message):
+		message = localText.stripHTML(message)
 		self.adminFrame.chatLog.AppendText("\n")
 		self.adminFrame.chatLog.AppendText(message)
+		
+	def displayMessageBox(self, title, desc):
+		#global msgBox
+		#msgBox = wx.MessageDialog( self, desc, title, wx.OK )
+		#msgBox.Show(True)
+		outMsg = title + ":\n" + desc
+		PB.consoleOut(outMsg)

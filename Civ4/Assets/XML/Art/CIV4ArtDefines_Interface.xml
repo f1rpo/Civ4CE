@@ -79,6 +79,10 @@
 			<Path>Art/Interface/Screens/Civilopedia/WaterEnvironment/WaterEnvironment.nif</Path>
 		</InterfaceArtInfo>
 		<InterfaceArtInfo>
+			<Type>CIVILOPEDIA_AMPHIB_ENVIRONMENT</Type>
+			<Path>Art/Interface/Screens/Civilopedia/Amphibious/AmphibiousBG.nif</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
 			<Type>DAWNOFMAN</Type>
 			<Path>Art/Interface/Screens/DawnOfMan/DawnOfManBG.nif</Path>
 		</InterfaceArtInfo>
@@ -613,6 +617,10 @@
 		<InterfaceArtInfo>
 			<Type>INTERFACE_TECH_WATERWORK</Type>
 			<Path>Art/Interface/Screens/TechTree/Work_Water_Tiles.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>INTERFACE_TECH_FEATURE_PRODUCTION</Type>
+			<Path>Art/Interface/Screens/TechTree/Build_Faster.dds</Path>
 		</InterfaceArtInfo>
 		<InterfaceArtInfo>
 			<Type>INTERFACE_TECH_WORKER_SPEED</Type>
