@@ -1448,4 +1448,12 @@
 			<Plural>0:1</Plural>
 		</Spanish>
 	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_UNIT_RIFLEMAN_STRATEGY</Tag>
+		<English>Build this moderate-strength gunpowder unit as a counter against mounted enemies like [COLOR_UNIT_TEXT]Cavalry[COLOR_REVERT].</English>
+		<French>Produisez cette unit&#233; de force moyenne et &#233;quip&#233;e d'une arme &#224; feu pour contrer des unit&#233;s ennemies mont&#233;es, telles que les unit&#233;s de [COLOR_UNIT_TEXT]cavalerie[COLOR_REVERT].</French>
+		<German>Bilden Sie diese mittelstarke Schie&#223;pulver-Einheit aus, um berittene Gegner wie die [COLOR_UNIT_TEXT]Kavallerie[COLOR_REVERT] aufzuhalten.</German>
+		<Italian>Realizza questa unit&#224; con armi da fuoco di forza moderata per contrastare le unit&#224; montate (come la [COLOR_UNIT_TEXT]cavalleria[COLOR_REVERT]).</Italian>
+		<Spanish>Esta unidad con armas de p&#243;lvora, de fuerza moderada, sirve para contrarrestar las unidades montadas del enemigo, como la [COLOR_UNIT_TEXT]Caballer&#237;a[COLOR_REVERT]).</Spanish>
+	</TEXT>
 </Civ4GameText>

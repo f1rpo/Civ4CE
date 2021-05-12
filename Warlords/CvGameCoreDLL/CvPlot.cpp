@@ -823,9 +823,9 @@ void CvPlot::verifyUnitValidPlot()
 				{
 					if (pLoopUnit->getTeam() != getTeam() && (getTeam() == NO_TEAM || !GET_TEAM(getTeam()).isVassal(pLoopUnit->getTeam())))
 					{
-						if (plotCheck(PUF_isEnemy, pLoopUnit->getOwnerINLINE()) != NULL)
+						if (isVisibleEnemyUnit(pLoopUnit->getOwnerINLINE()))
 						{
-							if (!(pLoopUnit->alwaysInvisible()))
+							if (!(pLoopUnit->isInvisible(getTeam(), false)))
 							{
 								pLoopUnit->jumpToNearestValidPlot();
 							}
@@ -2923,13 +2923,16 @@ void CvPlot::removeGoody()
 }
 
 
-bool CvPlot::isCity(bool bCheckImprovement) const
+bool CvPlot::isCity(bool bCheckImprovement, TeamTypes eForTeam) const
 {
 	if (bCheckImprovement && NO_IMPROVEMENT != getImprovementType())
 	{
 		if (GC.getImprovementInfo(getImprovementType()).isActsAsCity())
 		{
-			return true;
+			if (NO_TEAM == eForTeam || GET_TEAM(eForTeam).isFriendlyTerritory(getTeam()))
+			{
+				return true;
+			}
 		}
 	}
 
@@ -6238,113 +6241,115 @@ void CvPlot::updateRiverCrossing(DirectionTypes eIndex)
 
 	pCornerPlot = NULL;
 	bValid = false;
+	pPlot = plotDirection(getX_INLINE(), getY_INLINE(), eIndex);
 
-	switch (eIndex)
+	if ((NULL == pPlot || !pPlot->isWater()) && !isWater())
 	{
-	case DIRECTION_NORTH:
-		pPlot = plotDirection(getX_INLINE(), getY_INLINE(), DIRECTION_NORTH);
-		if (pPlot != NULL)
+		switch (eIndex)
 		{
-			bValid = pPlot->isNOfRiver();
-		}
-		break;
-
-	case DIRECTION_NORTHEAST:
-		pCornerPlot = plotDirection(getX_INLINE(), getY_INLINE(), DIRECTION_NORTH);
-		break;
-
-	case DIRECTION_EAST:
-		bValid = isWOfRiver();
-		break;
-
-	case DIRECTION_SOUTHEAST:
-		pCornerPlot = this;
-		break;
-
-	case DIRECTION_SOUTH:
-		bValid = isNOfRiver();
-		break;
-
-	case DIRECTION_SOUTHWEST:
-		pCornerPlot = plotDirection(getX_INLINE(), getY_INLINE(), DIRECTION_WEST);
-		break;
-
-	case DIRECTION_WEST:
-		pPlot = plotDirection(getX_INLINE(), getY_INLINE(), DIRECTION_WEST);
-		if (pPlot != NULL)
-		{
-			bValid = pPlot->isWOfRiver();
-		}
-		break;
-
-	case DIRECTION_NORTHWEST:
-		pCornerPlot = plotDirection(getX_INLINE(), getY_INLINE(), DIRECTION_NORTHWEST);
-		break;
-
-	default:
-		FAssert(false);
-		break;
-	}
-
-	if (pCornerPlot != NULL)
-	{
-		pNorthEastPlot = plotDirection(pCornerPlot->getX_INLINE(), pCornerPlot->getY_INLINE(), DIRECTION_EAST);
-		pSouthEastPlot = plotDirection(pCornerPlot->getX_INLINE(), pCornerPlot->getY_INLINE(), DIRECTION_SOUTHEAST);
-		pSouthWestPlot = plotDirection(pCornerPlot->getX_INLINE(), pCornerPlot->getY_INLINE(), DIRECTION_SOUTH);
-		pNorthWestPlot = pCornerPlot;
-
-		if (pSouthWestPlot && pNorthWestPlot && pSouthEastPlot && pNorthEastPlot)
-		{
-			if (pSouthWestPlot->isWOfRiver() && pNorthWestPlot->isWOfRiver())
+		case DIRECTION_NORTH:
+			if (pPlot != NULL)
 			{
-				bValid = true;
+				bValid = pPlot->isNOfRiver();
 			}
-			else if (pNorthEastPlot->isNOfRiver() && pNorthWestPlot->isNOfRiver())
-			{
-				bValid = true;
-			}
-			else if ((eIndex == DIRECTION_NORTHEAST) || (eIndex == DIRECTION_SOUTHWEST))
-			{
-				if (pNorthEastPlot->isNOfRiver() && (pNorthWestPlot->isWOfRiver() || pNorthWestPlot->isWater()))
-				{
-					bValid = true;
-				}
-				else if ((pNorthEastPlot->isNOfRiver() || pSouthEastPlot->isWater()) && pNorthWestPlot->isWOfRiver())
-				{
-					bValid = true;
-				}
-				else if (pSouthWestPlot->isWOfRiver() && (pNorthWestPlot->isNOfRiver() || pNorthWestPlot->isWater()))
-				{
-					bValid = true;
-				}
-				else if ((pSouthWestPlot->isWOfRiver() || pSouthEastPlot->isWater()) && pNorthWestPlot->isNOfRiver())
-				{
-					bValid = true;
-				}
-			}
-			else
-			{
-				FAssert((eIndex == DIRECTION_SOUTHEAST) || (eIndex == DIRECTION_NORTHWEST));
+			break;
 
-				if (pNorthWestPlot->isNOfRiver() && (pNorthWestPlot->isWOfRiver() || pNorthEastPlot->isWater()))
-				{
-					bValid = true;
-				}
-				else if ((pNorthWestPlot->isNOfRiver() || pSouthWestPlot->isWater()) && pNorthWestPlot->isWOfRiver())
-				{
-					bValid = true;
-				}
-				else if (pNorthEastPlot->isNOfRiver() && (pSouthWestPlot->isWOfRiver() || pSouthWestPlot->isWater()))
-				{
-					bValid = true;
-				}
-				else if ((pNorthEastPlot->isNOfRiver() || pNorthEastPlot->isWater()) && pSouthWestPlot->isWOfRiver())
-				{
-					bValid = true;
-				}
+		case DIRECTION_NORTHEAST:
+			pCornerPlot = plotDirection(getX_INLINE(), getY_INLINE(), DIRECTION_NORTH);
+			break;
+
+		case DIRECTION_EAST:
+			bValid = isWOfRiver();
+			break;
+
+		case DIRECTION_SOUTHEAST:
+			pCornerPlot = this;
+			break;
+
+		case DIRECTION_SOUTH:
+			bValid = isNOfRiver();
+			break;
+
+		case DIRECTION_SOUTHWEST:
+			pCornerPlot = plotDirection(getX_INLINE(), getY_INLINE(), DIRECTION_WEST);
+			break;
+
+		case DIRECTION_WEST:
+			if (pPlot != NULL)
+			{
+				bValid = pPlot->isWOfRiver();
 			}
+			break;
+
+		case DIRECTION_NORTHWEST:
+			pCornerPlot = plotDirection(getX_INLINE(), getY_INLINE(), DIRECTION_NORTHWEST);
+			break;
+
+		default:
+			FAssert(false);
+			break;
 		}
 
+		if (pCornerPlot != NULL)
+		{
+			pNorthEastPlot = plotDirection(pCornerPlot->getX_INLINE(), pCornerPlot->getY_INLINE(), DIRECTION_EAST);
+			pSouthEastPlot = plotDirection(pCornerPlot->getX_INLINE(), pCornerPlot->getY_INLINE(), DIRECTION_SOUTHEAST);
+			pSouthWestPlot = plotDirection(pCornerPlot->getX_INLINE(), pCornerPlot->getY_INLINE(), DIRECTION_SOUTH);
+			pNorthWestPlot = pCornerPlot;
+
+			if (pSouthWestPlot && pNorthWestPlot && pSouthEastPlot && pNorthEastPlot)
+			{
+				if (pSouthWestPlot->isWOfRiver() && pNorthWestPlot->isWOfRiver())
+				{
+					bValid = true;
+				}
+				else if (pNorthEastPlot->isNOfRiver() && pNorthWestPlot->isNOfRiver())
+				{
+					bValid = true;
+				}
+				else if ((eIndex == DIRECTION_NORTHEAST) || (eIndex == DIRECTION_SOUTHWEST))
+				{
+					if (pNorthEastPlot->isNOfRiver() && (pNorthWestPlot->isWOfRiver() || pNorthWestPlot->isWater()))
+					{
+						bValid = true;
+					}
+					else if ((pNorthEastPlot->isNOfRiver() || pSouthEastPlot->isWater()) && pNorthWestPlot->isWOfRiver())
+					{
+						bValid = true;
+					}
+					else if (pSouthWestPlot->isWOfRiver() && (pNorthWestPlot->isNOfRiver() || pNorthWestPlot->isWater()))
+					{
+						bValid = true;
+					}
+					else if ((pSouthWestPlot->isWOfRiver() || pSouthEastPlot->isWater()) && pNorthWestPlot->isNOfRiver())
+					{
+						bValid = true;
+					}
+				}
+				else
+				{
+					FAssert((eIndex == DIRECTION_SOUTHEAST) || (eIndex == DIRECTION_NORTHWEST));
+
+					if (pNorthWestPlot->isNOfRiver() && (pNorthWestPlot->isWOfRiver() || pNorthEastPlot->isWater()))
+					{
+						bValid = true;
+					}
+					else if ((pNorthWestPlot->isNOfRiver() || pSouthWestPlot->isWater()) && pNorthWestPlot->isWOfRiver())
+					{
+						bValid = true;
+					}
+					else if (pNorthEastPlot->isNOfRiver() && (pSouthWestPlot->isWOfRiver() || pSouthWestPlot->isWater()))
+					{
+						bValid = true;
+					}
+					else if ((pNorthEastPlot->isNOfRiver() || pNorthEastPlot->isWater()) && pSouthWestPlot->isWOfRiver())
+					{
+						bValid = true;
+					}
+				}
+			}
+
+		}
 	}
 
 	if (isRiverCrossing(eIndex) != bValid)

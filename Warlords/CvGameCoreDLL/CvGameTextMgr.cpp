@@ -1208,19 +1208,19 @@ bool CvGameTextMgr::setCombatPlotHelp(CvWString &szString, CvPlot* pPlot)
 			if (pAttacker->getDomainType() != DOMAIN_AIR)
 			{
 				int iCombatOdds = getCombatOdds(pAttacker, pDefender);
-				if (iCombatOdds > 999)
-				{
+					if (iCombatOdds > 999)
+					{
 					szTempBuffer = "&gt; 99.9";
-				}
-				else if (iCombatOdds < 1)
-				{
+					}
+					else if (iCombatOdds < 1)
+					{
 					szTempBuffer = "&lt; 0.1";
-				}
-				else
-				{
-					szTempBuffer.Format(L"%.1f", ((float)iCombatOdds) / 10.0f);
-				}
-				szString += gDLL->getText("TXT_KEY_COMBAT_PLOT_ODDS", szTempBuffer.GetCString());
+					}
+					else
+					{
+						szTempBuffer.Format(L"%.1f", ((float)iCombatOdds) / 10.0f);
+					}
+					szString += gDLL->getText("TXT_KEY_COMBAT_PLOT_ODDS", szTempBuffer.GetCString());
 
 				if (pAttacker->withdrawalProbability() > 0)
 				{
@@ -1273,7 +1273,7 @@ bool CvGameTextMgr::setCombatPlotHelp(CvWString &szString, CvPlot* pPlot)
 				szString += NEWLINE + gDLL->getText("TXT_KEY_COMBAT_PLOT_MOD_VS_TYPE", iModifier, GC.getDomainInfo(pDefender->getDomainType()).getTextKeyWide());
 			}
 
-			if (pPlot->isCity(true))
+			if (pPlot->isCity(true, pDefender->getTeam()))
 			{
 				iModifier = pAttacker->cityAttackModifier();
 
@@ -1430,7 +1430,7 @@ bool CvGameTextMgr::setCombatPlotHelp(CvWString &szString, CvPlot* pPlot)
 				szString += NEWLINE + gDLL->getText("TXT_KEY_COMBAT_PLOT_FORTIFY_MOD", iModifier);
 			}
 
-			if (pPlot->isCity(true))
+			if (pPlot->isCity(true, pDefender->getTeam()))
 			{
 				iModifier = pDefender->cityDefenseModifier();
 
@@ -3811,7 +3811,7 @@ void CvGameTextMgr::setBasicUnitHelp(CvWString &szBuffer, UnitTypes eUnit, bool 
 		if (GC.getUnitInfo(eUnit).getTerrainImpassable(iI))
 		{
 			CvWString szTerrain;
-			szTerrain.Format(L"<link=literal>%s</link>", GC.getTerrainInfo((TerrainTypes)iI).getDescription());
+				szTerrain.Format(L"<link=literal>%s</link>", GC.getTerrainInfo((TerrainTypes)iI).getDescription());
 			setListHelp(szBuffer, szTempBuffer, szTerrain, L", ", bFirst);
 			bFirst = false;
 		}
@@ -3822,7 +3822,7 @@ void CvGameTextMgr::setBasicUnitHelp(CvWString &szBuffer, UnitTypes eUnit, bool 
 		if (GC.getUnitInfo(eUnit).getFeatureImpassable(iI))
 		{
 			CvWString szFeature;
-			szFeature.Format(L"<link=literal>%s</link>", GC.getFeatureInfo((FeatureTypes)iI).getDescription());
+				szFeature.Format(L"<link=literal>%s</link>", GC.getFeatureInfo((FeatureTypes)iI).getDescription());
 			setListHelp(szBuffer, szTempBuffer, szFeature, L", ", bFirst);
 			bFirst = false;
 		}
@@ -4867,8 +4867,8 @@ void CvGameTextMgr::setBuildingHelp(CvWString &szBuffer, BuildingTypes eBuilding
 
 	if (GC.getBuildingInfo(eBuilding).getAnarchyModifier() != 0)
 	{
-		szBuffer += NEWLINE + gDLL->getText("TXT_KEY_BUILDING_ANARCHY_MOD", GC.getBuildingInfo(eBuilding).getAnarchyModifier());
-	}
+			szBuffer += NEWLINE + gDLL->getText("TXT_KEY_BUILDING_ANARCHY_MOD", GC.getBuildingInfo(eBuilding).getAnarchyModifier());
+		}
 
 	if (GC.getBuildingInfo(eBuilding).getGlobalHurryModifier() != 0)
 	{
@@ -5741,14 +5741,14 @@ void CvGameTextMgr::setProjectHelp(CvWString &szBuffer, ProjectTypes eProject, b
 					{
 						if (GC.getUnitInfo((UnitTypes)iI).getSpecialUnitType() == GC.getProjectInfo(eProject).getEveryoneSpecialUnit())
 						{
-							if (GC.getUnitInfo((UnitTypes)iI).getNukeRange() != -1)
-							{
-								szBuffer += NEWLINE + gDLL->getText("TXT_KEY_PROJECT_NO_NUKES");
-							}
+						if (GC.getUnitInfo((UnitTypes)iI).getNukeRange() != -1)
+						{
+							szBuffer += NEWLINE + gDLL->getText("TXT_KEY_PROJECT_NO_NUKES");
 						}
 					}
 				}
 			}
+		}
 		}
 
 		if (GC.getProjectInfo(eProject).getAnyoneProjectPrereq() != NO_PROJECT)
@@ -8528,34 +8528,34 @@ void CvGameTextMgr::setCommerceHelp(CvWString &szBuffer, CvCity& city, CommerceT
 	if (0 != iSpecialistCommerce)
 	{
 		szBuffer += gDLL->getText("TXT_KEY_MISC_HELP_SPECIALIST_COMMERCE", iSpecialistCommerce, info.getChar(), L"TXT_KEY_CONCEPT_SPECIALISTS") + NEWLINE;
-		iBaseCommerceRate += 100*iSpecialistCommerce;
+		iBaseCommerceRate += 100 * iSpecialistCommerce;
 	}
 
 	int iReligionCommerce = city.getReligionCommerce(eCommerceType);
 	if (0 != iReligionCommerce)
 	{
 		szBuffer += gDLL->getText("TXT_KEY_MISC_HELP_RELIGION_COMMERCE", iReligionCommerce, info.getChar()) + NEWLINE;
-		iBaseCommerceRate += 100*iReligionCommerce;
+		iBaseCommerceRate += 100 * iReligionCommerce;
 	}
 
 	int iBuildingCommerce = city.getBuildingCommerce(eCommerceType);
 	if (0 != iBuildingCommerce)
 	{
 		szBuffer += gDLL->getText("TXT_KEY_MISC_HELP_BUILDING_COMMERCE", iBuildingCommerce, info.getChar()) + NEWLINE;
-		iBaseCommerceRate += 100*iBuildingCommerce;
+		iBaseCommerceRate += 100 * iBuildingCommerce;
 	}
 
 	int iFreeCityCommerce = owner.getFreeCityCommerce(eCommerceType);
 	if (0 != iFreeCityCommerce)
 	{
 		szBuffer += gDLL->getText("TXT_KEY_MISC_HELP_FREE_CITY_COMMERCE", iFreeCityCommerce, info.getChar()) + NEWLINE;
-		iBaseCommerceRate += 100*iFreeCityCommerce;
+		iBaseCommerceRate += 100 * iFreeCityCommerce;
 	}
 
 
 	FAssertMsg(city.getBaseCommerceRateTimes100(eCommerceType) == iBaseCommerceRate, "Base Commerce rate does not agree with actual value");
 	//szBuffer += gDLL->getText("TXT_KEY_MISC_HELP_COMMERCE_BASE", info.getTextKeyWide(), iBaseYield, info.getChar()) + NEWLINE;
-
+	
 	int iModifier = 100;
 
 	// Buildings
