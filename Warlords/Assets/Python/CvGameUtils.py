@@ -50,7 +50,11 @@ class CvGameUtils:
 		ePlayer = argsList[0]
 		eFirstTech = argsList[1]
 		return TechTypes.NO_TECH
-
+	
+	def canRazeCity(self,argsList):
+		iRazingPlayer, pCity = argsList
+		return True
+	
 	def skipProductionPopup(self,argsList):
 		pCity = argsList[0]
 		return False

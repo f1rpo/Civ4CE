@@ -104,6 +104,10 @@ protected:
 	void AI_doDraft();
 	void AI_doHurry();
 	void AI_doEmphasize();
+	int AI_getHappyFromHurry(HurryTypes eHurry);
+	int AI_getHappyFromHurry(HurryTypes eHurry, UnitTypes eUnit, bool bIgnoreNew);
+	int AI_getHappyFromHurry(HurryTypes eHurry, BuildingTypes eBuilding, bool bIgnoreNew);
+	int AI_getHappyFromHurry(int iHurryPopulation);
 
 	bool AI_chooseUnit(UnitAITypes eUnitAI = NO_UNITAI);
 	bool AI_chooseDefender();
@@ -123,8 +127,7 @@ protected:
 	int AI_experienceWeight();
 	int AI_buildUnitProb();
 
-	void AI_bestPlotBuild(CvPlot* pPlot, int* piBestValue, BuildTypes* peBestBuild);
-
+	void AI_bestPlotBuild(CvPlot* pPlot, int* piBestValue, BuildTypes* peBestBuild, int iFoodPriority, int iProductionPriority, int iCommercePriority);
 };
 
 #endif

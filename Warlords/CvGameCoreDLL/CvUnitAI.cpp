@@ -80,7 +80,7 @@ void CvUnitAI::AI_update()
 	argsList.add(gDLL->getPythonIFace()->makePythonObject(pyUnit));	// pass in unit class
 	long lResult=0;
 	gDLL->getPythonIFace()->callFunction(PYGameModule, "AI_unitUpdate", argsList.makeFunctionArgs(), &lResult);
-	delete pyUnit;	// python fxn must not hold on to this pointer 
+	delete pyUnit;	// python fxn must not hold on to this pointer
 	if (lResult == 1)
 	{
 		return;
@@ -651,7 +651,7 @@ int CvUnitAI::AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy) const
 	FAssert((iOurStrength + iTheirStrength) > 0);
 	FAssert((iOurFirepower + iTheirFirepower) > 0);
 
-	iBaseOdds = (100 * iOurStrength) / (iOurStrength + iTheirStrength);	
+	iBaseOdds = (100 * iOurStrength) / (iOurStrength + iTheirStrength);
 	if (iBaseOdds == 0)
 	{
 		return 1;
@@ -723,7 +723,7 @@ bool CvUnitAI::AI_bestCityBuild(CvCity* pCity, CvPlot** ppBestPlot, BuildTypes* 
 			{
 				if (pLoopPlot != pIgnorePlot)
 				{
-					if ((pLoopPlot->getImprovementType() == NO_IMPROVEMENT) || !(GET_PLAYER(getOwnerINLINE()).isOption(PLAYEROPTION_SAFE_AUTOMATION)))
+					if ((pLoopPlot->getImprovementType() == NO_IMPROVEMENT) || !(GET_PLAYER(getOwnerINLINE()).isOption(PLAYEROPTION_SAFE_AUTOMATION)) || (pLoopPlot->getNonObsoleteBonusType(getTeam()) != NO_BONUS))
 					{
 						iValue = pCity->AI_getBestBuildValue(iI);
 
@@ -972,16 +972,22 @@ void CvUnitAI::AI_workerMove()
 		return;
 	}
 
-	if (AI_improveBonus(10))
-	{
-		return;
-	}
-
 	if (bCanRoute)
 	{
-		if (AI_connectBonus())
+		BonusTypes eNonObsoleteBonus = plot()->getNonObsoleteBonusType(getTeam());
+		if (NO_BONUS != eNonObsoleteBonus)
 		{
-			return;
+			if (!(plot()->isConnectedToCapital()))
+			{
+				ImprovementTypes eImprovement = plot()->getImprovementType();
+				if (NO_IMPROVEMENT != eImprovement && GC.getImprovementInfo(eImprovement).isImprovementBonusTrade(eNonObsoleteBonus))
+				{
+					if (AI_connectPlot(plot()))
+					{
+						return;
+					}
+				}
+			}
 		}
 
 		if (AI_connectCity())
@@ -990,6 +996,7 @@ void CvUnitAI::AI_workerMove()
 		}
 	}
 
+
 	pCity = NULL;
 
 	if (plot()->getOwnerINLINE() == getOwnerINLINE())
@@ -997,13 +1004,18 @@ void CvUnitAI::AI_workerMove()
 		pCity = plot()->getWorkingCity();
 	}
 
-	if (pCity == NULL)
-	{
-		pCity = GC.getMapINLINE().findCity(getX_INLINE(), getY_INLINE(), getOwnerINLINE()); // XXX do team???
-	}
-
 	if ((pCity == NULL) || (pCity->countNumImprovedPlots() > pCity->getPopulation()))
 	{
+		if (AI_improveBonus(10))
+		{
+			return;
+		}
+
+		if (pCity == NULL)
+		{
+			pCity = GC.getMapINLINE().findCity(getX_INLINE(), getY_INLINE(), getOwnerINLINE()); // XXX do team???
+		}
+
 		if (AI_improveBonus())
 		{
 			return;
@@ -4038,7 +4050,7 @@ int CvUnitAI::AI_promotionValue(PromotionTypes ePromotion)
 	iTemp = GC.getPromotionInfo(ePromotion).getCollateralDamageProtection();
 	if ((AI_getUnitAIType() == UNITAI_CITY_DEFENSE) ||
 		(AI_getUnitAIType() == UNITAI_CITY_COUNTER) ||
-		(AI_getUnitAIType() == UNITAI_CITY_SPECIAL) || 
+		(AI_getUnitAIType() == UNITAI_CITY_SPECIAL) ||
 		(AI_getUnitAIType() == UNITAI_ATTACK_CITY))
 	{
 		iValue += (iTemp / 2);
@@ -8266,13 +8278,22 @@ bool CvUnitAI::AI_improveCity(CvCity* pCity)
 
 	CvPlot* pBestPlot;
 	BuildTypes eBestBuild;
+	MissionTypes eMission;
 
 	if (AI_bestCityBuild(pCity, &pBestPlot, &eBestBuild))
 	{
 		FAssertMsg(pBestPlot != NULL, "BestPlot is not assigned a valid value");
 		FAssertMsg(eBestBuild != NO_BUILD, "BestBuild is not assigned a valid value");
+		if (plot()->getWorkingCity() != pCity)
+		{
+			eMission = MISSION_ROUTE_TO;
+		}
+		else
+		{
+			eMission = MISSION_MOVE_TO;
+		}
 
-		getGroup()->pushMission(MISSION_ROUTE_TO, pBestPlot->getX_INLINE(), pBestPlot->getY_INLINE(), 0, false, false, MISSIONAI_BUILD, pBestPlot);
+		getGroup()->pushMission(eMission, pBestPlot->getX_INLINE(), pBestPlot->getY_INLINE(), 0, false, false, MISSIONAI_BUILD, pBestPlot);
 		getGroup()->pushMission(MISSION_BUILD, eBestBuild, -1, 0, (getGroup()->getLengthMissionQueue() > 0), false, MISSIONAI_BUILD, pBestPlot);
 
 		return true;
@@ -8317,6 +8338,12 @@ bool CvUnitAI::AI_nextCityToImprove(CvCity* pCity)
 					iValue *= (max(0, (pLoopCity->getPopulation() - pLoopCity->countNumImprovedPlots())) + 1);
 
 					iValue *= 1000;
+
+					if (pLoopCity->isCapital())
+					{
+					    iValue *= 2;
+					}
+
 
 					generatePath(pPlot, 0, true, &iPathTurns);
 					iValue /= (iPathTurns + 1);
@@ -8635,6 +8662,11 @@ bool CvUnitAI::AI_improveBonus(int iMinValue)
 
 												iValue /= (iPathTurns + 1);
 
+												if (pLoopPlot->isCityRadius())
+												{
+													iValue *= 2;
+												}
+
 												if (iValue > iBestValue)
 												{
 													iBestValue = iValue;
@@ -8657,7 +8689,7 @@ bool CvUnitAI::AI_improveBonus(int iMinValue)
 	{
 		FAssertMsg(eBestBuild != NO_BUILD, "BestBuild is not assigned a valid value");
 
-		getGroup()->pushMission(MISSION_ROUTE_TO, pBestPlot->getX_INLINE(), pBestPlot->getY_INLINE(), 0, false, false, MISSIONAI_BUILD, pBestPlot);
+		getGroup()->pushMission(MISSION_MOVE_TO, pBestPlot->getX_INLINE(), pBestPlot->getY_INLINE(), 0, false, false, MISSIONAI_BUILD, pBestPlot);
 		getGroup()->pushMission(MISSION_BUILD, eBestBuild, -1, 0, (getGroup()->getLengthMissionQueue() > 0), false, MISSIONAI_BUILD, pBestPlot);
 
 		return true;
@@ -9522,7 +9554,7 @@ bool CvUnitAI::AI_nuke()
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (GET_PLAYER((PlayerTypes)iI).isAlive() && !GET_PLAYER((PlayerTypes)iI).isBarbarian())
 		{
 			if (atWar(getTeam(), GET_PLAYER((PlayerTypes)iI).getTeam()))
 			{

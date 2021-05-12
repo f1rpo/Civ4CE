@@ -572,7 +572,7 @@ int getCombatOdds(CvUnit* pAttacker, CvUnit* pDefender)
 	{
 		return 1000;
 	}
-	iAttackerOdds = ((GC.getDefineINT("COMBAT_DIE_SIDES") * iAttackerStrength) / (iAttackerStrength + iDefenderStrength));	
+	iAttackerOdds = GC.getDefineINT("COMBAT_DIE_SIDES") - iDefenderOdds;	
 	if (iAttackerOdds == 0)
 	{
 		return 0;

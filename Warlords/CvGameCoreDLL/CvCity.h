@@ -161,8 +161,8 @@ public:
 	int getNoMilitaryPercentAnger() const;																	// Exposed to Python 
 	int getCulturePercentAnger() const;																			// Exposed to Python
 	int getReligionPercentAnger() const;																		// Exposed to Python
-	int getHurryPercentAnger() const;																				// Exposed to Python
-	int getConscriptPercentAnger() const;																		// Exposed to Python
+	int getHurryPercentAnger(int iExtra = 0) const;																				// Exposed to Python
+	int getConscriptPercentAnger(int iExtra = 0) const;																		// Exposed to Python
 	int getWarWearinessPercentAnger() const;																// Exposed to Python
 	int getLargestCityHappiness() const;																		// Exposed to Python
 	int getVassalHappiness() const;																		// Exposed to Python
@@ -929,11 +929,27 @@ protected:
 	void doGrowth();
 	void doCulture();
 	void doPlotCulture(bool bUpdate);
-	void doProduction();
+	void doProduction(bool bAllowNoProduction);
 	void doDecay();
 	void doReligion();
 	void doGreatPeople();
 	void doMeltdown();
+	bool doCheckProduction();
+
+	int getExtraProductionDifference(int iExtra, UnitTypes eUnit) const;
+	int getExtraProductionDifference(int iExtra, BuildingTypes eBuilding) const;
+	int getExtraProductionDifference(int iExtra, ProjectTypes eProject) const;
+	int getExtraProductionDifference(int iExtra, int iModifier) const;
+	int getHurryCostModifier(UnitTypes eUnit, bool bIgnoreNew) const;
+	int getHurryCostModifier(BuildingTypes eBuilding, bool bIgnoreNew) const;
+	int getHurryCostModifier(int iBaseModifier, int iProduction, bool bIgnoreNew) const;
+	int getHurryCost(bool bExtra, UnitTypes eUnit, bool bIgnoreNew) const;
+	int getHurryCost(bool bExtra, BuildingTypes eBuilding, bool bIgnoreNew) const;
+	int getHurryCost(bool bExtra, int iProductionLeft, int iHurryModifier, int iModifier) const;
+	int getHurryPopulation(HurryTypes eHurry, int iHurryCost) const;
+	int getHurryGold(HurryTypes eHurry, int iHurryCost) const;
+	bool canHurryUnit(HurryTypes eHurry, UnitTypes eUnit, bool bIgnoreNew) const;
+	bool canHurryBuilding(HurryTypes eHurry, BuildingTypes eBuilding, bool bIgnoreNew) const;
 
 	virtual bool AI_addBestCitizen(bool bWorkers, bool bSpecialists) = 0;
 	virtual bool AI_removeWorstCitizen(SpecialistTypes eIgnoreSpecialist = NO_SPECIALIST) = 0;

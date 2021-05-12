@@ -483,6 +483,10 @@
 				<City>TXT_KEY_CITY_NAME_ANDEMATUNUM</City>
 				<City>TXT_KEY_CITY_NAME_UBIORUM</City>
 				<City>TXT_KEY_CITY_NAME_GENEVA</City>
+				<City>TXT_KEY_CITY_NAME_VINDOBONA</City>
+				<City>TXT_KEY_CITY_NAME_PISONIUM</City>
+				<City>TXT_KEY_CITY_NAME_ACQUINCUM</City>
+				<City>TXT_KEY_CITY_NAME_TYLIS</City>
 				<City>TXT_KEY_CITY_NAME_ANCYRA</City>
 			</Cities>
 			<Buildings>
@@ -2950,7 +2954,7 @@
 				</Building>
 				<Building>
 					<BuildingClassType>BUILDINGCLASS_ORACLE</BuildingClassType>
-					<BuildingType>BUILDING_ORACLE</BuildingType>
+					<BuildingType>NONE</BuildingType>
 				</Building>
 				<Building>
 					<BuildingClassType>BUILDINGCLASS_PARTHENON</BuildingClassType>
@@ -3026,27 +3030,27 @@
 				</Building>
 				<Building>
 					<BuildingClassType>BUILDINGCLASS_COLOSSUS</BuildingClassType>
-					<BuildingType>BUILDING_COLOSSUS</BuildingType>
+					<BuildingType>NONE</BuildingType>
 				</Building>
 				<Building>
 					<BuildingClassType>BUILDINGCLASS_HANGING_GARDEN</BuildingClassType>
-					<BuildingType>BUILDING_HANGING_GARDEN</BuildingType>
+					<BuildingType>NONE</BuildingType>
 				</Building>
 				<Building>
 					<BuildingClassType>BUILDINGCLASS_PYRAMID</BuildingClassType>
-					<BuildingType>BUILDING_PYRAMID</BuildingType>
+					<BuildingType>NONE</BuildingType>
 				</Building>
 				<Building>
 					<BuildingClassType>BUILDINGCLASS_GREAT_WALL</BuildingClassType>
-					<BuildingType>BUILDING_GREAT_WALL</BuildingType>
+					<BuildingType>NONE</BuildingType>
 				</Building>
 				<Building>
 					<BuildingClassType>BUILDINGCLASS_SANKORE</BuildingClassType>
-					<BuildingType>BUILDING_SANKORE</BuildingType>
+					<BuildingType>NONE</BuildingType>
 				</Building>
 				<Building>
 					<BuildingClassType>BUILDINGCLASS_ARTEMIS</BuildingClassType>
-					<BuildingType>BUILDING_ARTEMIS</BuildingType>
+					<BuildingType>NONE</BuildingType>
 				</Building>
 			</Buildings>
 			<Units>
@@ -3092,10 +3096,6 @@
 				</Unit>
 				<Unit>
 					<UnitClassType>UNITCLASS_TAOIST_MISSIONARY</UnitClassType>
-					<UnitType>NONE</UnitType>
-				</Unit>
-				<Unit>
-					<UnitClassType>UNITCLASS_SPEARMAN</UnitClassType>
 					<UnitType>NONE</UnitType>
 				</Unit>
 				<Unit>

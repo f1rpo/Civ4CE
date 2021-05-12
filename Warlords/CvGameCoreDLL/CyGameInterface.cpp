@@ -61,6 +61,8 @@ void CyGamePythonInterface()
 		.def("getImprovementUpgradeTime", &CyGame::getImprovementUpgradeTime, "int (int /*ImprovementTypes*/ eImprovement)")
 		.def("canTrainNukes", &CyGame::canTrainNukes, "bool ()")
 
+		.def("getCurrentEra", &CyGame::getCurrentEra, "int /*EratTypes*/ ()")
+
 		.def("getActiveTeam", &CyGame::getActiveTeam, "int () - returns ID for the group")
 		.def("getActiveCivilizationType", &CyGame::getActiveCivilizationType, "int () - returns CivilizationID" )
 		.def("isNetworkMultiPlayer", &CyGame::isNetworkMultiPlayer, "bool () - NetworkMultiplayer()? ")

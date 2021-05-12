@@ -28,8 +28,6 @@ void CyPlayerPythonInterface1(python::class_<CyPlayer>& x)
 		.def("killCities", &CyPlayer::killCities, "void ()")
 
 		.def("getNewCityName", &CyPlayer::getNewCityName, "wstring ()")
-//		.def("getCivilizationCityName", &CyPlayer::getCivilizationCityName, "void (wstring szBuffer, int /*CivilizationTypes*/ eCivilization)")
-//		.def("isCityNameValid", &CyPlayer::isCityNameValid, "bool (wstring szName, bool bTestDestroyed)")
 
 		.def("initUnit", &CyPlayer::initUnit, python::return_value_policy<python::manage_new_object>(), "CyUnit* initUnit(UnitTypes iIndex, plotX, plotY, UnitAITypes iIndex)  - place Unit at X,Y   NOTE: Always use UnitAITypes.NO_UNITAI")
 		.def("disbandUnit", &CyPlayer::disbandUnit, "void (bool bAnnounce)")

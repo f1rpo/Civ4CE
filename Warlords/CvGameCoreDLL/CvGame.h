@@ -120,7 +120,7 @@ public:
 
 	DllExport bool canTrainNukes() const;																		// Exposed to Python
 	DllExport bool showAllMoves(TeamTypes eTeam) const;
-	DllExport EraTypes getCurrentEra() const;
+	DllExport EraTypes getCurrentEra() const;											// Exposed to Python
 
 	DllExport TeamTypes getActiveTeam();																		// Exposed to Python
 	DllExport CivilizationTypes getActiveCivilizationType();								// Exposed to Python
@@ -330,7 +330,7 @@ public:
 
 	DllExport int getProjectCreatedCount(ProjectTypes eIndex);														// Exposed to Python
 	DllExport bool isProjectMaxedOut(ProjectTypes eIndex, int iExtra = 0);								// Exposed to Python
-	DllExport void incrementProjectCreatedCount(ProjectTypes eIndex);
+	DllExport void incrementProjectCreatedCount(ProjectTypes eIndex, int iExtra = 1);
 
 	DllExport int getForceCivicCount(CivicTypes eIndex) const;														// Exposed to Python
 	DllExport bool isForceCivic(CivicTypes eIndex) const;																	// Exposed to Python

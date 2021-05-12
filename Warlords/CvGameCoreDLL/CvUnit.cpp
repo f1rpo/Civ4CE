@@ -394,8 +394,12 @@ void CvUnit::convert(CvUnit* pUnit)
 	setGameTurnCreated(pUnit->getGameTurnCreated());
 	setDamage(pUnit->getDamage());
 	setMoves(pUnit->getMoves());
-	setExperience(pUnit->getExperience());
+
 	setLevel(pUnit->getLevel());
+	int iOldModifier = max(1, 100 + GET_PLAYER(pUnit->getOwnerINLINE()).getLevelExperienceModifier());
+	int iOurModifier = max(1, 100 + GET_PLAYER(getOwnerINLINE()).getLevelExperienceModifier());
+	setExperience(max(0, (pUnit->getExperience() * iOurModifier) / iOldModifier));
+
 	setName(pUnit->getNameNoDesc());
 	setLeaderUnitType(pUnit->getLeaderUnitType());
 
@@ -591,7 +595,7 @@ void CvUnit::kill(bool bDelay, PlayerTypes ePlayer)
 				kMission.setUnit(BATTLE_UNIT_DEFENDER, NULL);
 				kMission.setPlot(pPlot);
 				kMission.setMissionType(MISSION_CAPTURED);
-				gDLL->getEntityIFace()->AddMission(kMission);
+				gDLL->getEntityIFace()->AddMission(&kMission);
 
 				pkCapturedUnit->finishMoves();
 
@@ -832,7 +836,7 @@ void CvUnit::updateCombat(bool bQuick)
 					int iTurns = planBattle( kBattle );
 					kBattle.setMissionTime(iTurns * gDLL->getSecsPerTurn());
 
-					gDLL->getEntityIFace()->AddMission(kBattle);
+					gDLL->getEntityIFace()->AddMission(&kBattle);
 
 					setCombatTimer(iTurns);
 				}
@@ -845,7 +849,7 @@ void CvUnit::updateCombat(bool bQuick)
 					kMission.setUnit(BATTLE_UNIT_ATTACKER, this);
 					kMission.setUnit(BATTLE_UNIT_DEFENDER, pDefender);
 					kMission.setPlot(pPlot);
-					gDLL->getEntityIFace()->AddMission(kMission);
+					gDLL->getEntityIFace()->AddMission(&kMission);
 
 					// Surrender mission
 					setCombatTimer(GC.getMissionInfo(MISSION_SURRENDER).getTime());
@@ -918,7 +922,7 @@ void CvUnit::updateCombat(bool bQuick)
 					collateralCombat(pPlot, pDefender);
 				}
 
-				if (GC.getGameINLINE().getSorenRandNum(GC.getDefineINT("COMBAT_DIE_SIDES"), "Combat") <= iDefenderOdds)
+				if (GC.getGameINLINE().getSorenRandNum(GC.getDefineINT("COMBAT_DIE_SIDES"), "Combat") < iDefenderOdds)
 				{
 					if (getCombatFirstStrikes() == 0)
 					{
@@ -1040,7 +1044,7 @@ void CvUnit::updateCombat(bool bQuick)
 				if (pPlot->isActiveVisible(false))
 				{
 					ExecuteMove(0.0f);
-					gDLL->getEntityIFace()->AddMission(kBattle);
+					gDLL->getEntityIFace()->AddMission(&kBattle);
 				}
 			}
 			else
@@ -1429,19 +1433,21 @@ bool CvUnit::isBetterDefenderThan(const CvUnit* pDefender, const CvUnit* pAttack
 
 	iOurDefense = currCombatStr(plot(), pAttacker);
 
-	if (pDefender->collateralDamage() > 0)
+	if (NULL == pAttacker)
 	{
-		iOurDefense *= (100 + pDefender->collateralDamage());
-		iOurDefense /= 100;
-	}
+		if (pDefender->collateralDamage() > 0)
+		{
+			iOurDefense *= (100 + pDefender->collateralDamage());
+			iOurDefense /= 100;
+		}
 
-	if (pDefender->currInterceptionProbability() > 0)
-	{
-		iOurDefense *= (100 + pDefender->currInterceptionProbability());
-		iOurDefense /= 100;
+		if (pDefender->currInterceptionProbability() > 0)
+		{
+			iOurDefense *= (100 + pDefender->currInterceptionProbability());
+			iOurDefense /= 100;
+		}
 	}
-
-	if (pAttacker != NULL)
+	else
 	{
 		if (!(pAttacker->immuneToFirstStrikes()))
 		{
@@ -1460,19 +1466,21 @@ bool CvUnit::isBetterDefenderThan(const CvUnit* pDefender, const CvUnit* pAttack
 
 	iTheirDefense = pDefender->currCombatStr(plot(), pAttacker);
 
-	if (collateralDamage() > 0)
+	if (NULL == pAttacker)
 	{
-		iTheirDefense *= (100 + collateralDamage());
-		iTheirDefense /= 100;
-	}
+		if (collateralDamage() > 0)
+		{
+			iTheirDefense *= (100 + collateralDamage());
+			iTheirDefense /= 100;
+		}
 
-	if (currInterceptionProbability() > 0)
-	{
-		iTheirDefense *= (100 + currInterceptionProbability());
-		iTheirDefense /= 100;
+		if (currInterceptionProbability() > 0)
+		{
+			iTheirDefense *= (100 + currInterceptionProbability());
+			iTheirDefense /= 100;
+		}
 	}
-
-	if (pAttacker != NULL)
+	else
 	{
 		if (!(pAttacker->immuneToFirstStrikes()))
 		{
@@ -1509,11 +1517,11 @@ bool CvUnit::isBetterDefenderThan(const CvUnit* pDefender, const CvUnit* pAttack
 }
 
 
-bool CvUnit::canDoCommand(CommandTypes eCommand, int iData1, int iData2, bool bTestVisible)
+bool CvUnit::canDoCommand(CommandTypes eCommand, int iData1, int iData2, bool bTestVisible, bool bTestBusy)
 {
 	CvUnit* pUnit;
 
-	if (getGroup()->isBusy())
+	if (bTestBusy && getGroup()->isBusy())
 	{
 		return false;
 	}
@@ -2145,7 +2153,7 @@ void CvUnit::jumpToNearestValidPlot()
 		{
 			if (canMoveInto(pLoopPlot))
 			{
-				if (canEnterArea(pLoopPlot->getTeam(), pLoopPlot->area()))
+				if (canEnterArea(pLoopPlot->getTeam(), pLoopPlot->area()) && !atWar(pLoopPlot->getTeam(), getTeam()))
 				{
 					FAssertMsg(!atPlot(pLoopPlot), "atPlot(pLoopPlot) did not return false as expected");
 
@@ -2303,6 +2311,16 @@ bool CvUnit::canGift(bool bTestVisible, bool bTestTransport)
 
 	if (!bTestVisible)
 	{
+		if (GET_TEAM(pPlot->getTeam()).isUnitClassMaxedOut(getUnitClassType(), GET_TEAM(pPlot->getTeam()).getUnitClassMaking(getUnitClassType())))
+		{
+			return false;
+		}
+
+		if (GET_PLAYER(pPlot->getOwnerINLINE()).isUnitClassMaxedOut(getUnitClassType(), GET_PLAYER(pPlot->getOwnerINLINE()).getUnitClassMaking(getUnitClassType())))
+		{
+			return false;
+		}
+
 		if (!(GET_PLAYER(pPlot->getOwnerINLINE()).AI_acceptUnit(this)))
 		{
 			return false;
@@ -2627,7 +2645,7 @@ void CvUnit::airCircle(bool bStart)
 		kDefinition.setMissionType(MISSION_AIRPATROL);
 		kDefinition.setMissionTime(1.0f); // patrol is indefinite - time is ignored
 
-		gDLL->getEntityIFace()->AddMission( kDefinition );
+		gDLL->getEntityIFace()->AddMission( &kDefinition );
 	}
 	else
 	{
@@ -2872,7 +2890,7 @@ bool CvUnit::canAirliftAt(const CvPlot* pPlot, int iX, int iY) const
 		return false;
 	}
 
-	if (pTargetCity->getTeam() != getTeam())
+	if (pTargetCity->getTeam() != getTeam() && !GET_TEAM(pTargetCity->getTeam()).isVassal(getTeam()))
 	{
 		return false;
 	}
@@ -3059,7 +3077,7 @@ bool CvUnit::nuke(int iX, int iY)
 			kDefiniton.setUnit(BATTLE_UNIT_DEFENDER, this);
 
 			// Add the intercepted mission (defender is not NULL)
-			gDLL->getEntityIFace()->AddMission(kDefiniton);
+			gDLL->getEntityIFace()->AddMission(&kDefiniton);
 		}
 
 		kill(true);
@@ -3077,7 +3095,7 @@ bool CvUnit::nuke(int iX, int iY)
 		kDefiniton.setUnit(BATTLE_UNIT_DEFENDER, NULL);
 
 		// Add the non-intercepted mission (defender is NULL)
-		gDLL->getEntityIFace()->AddMission(kDefiniton);
+		gDLL->getEntityIFace()->AddMission(&kDefiniton);
 	}
 
 	setMadeAttack(true);
@@ -3219,7 +3237,7 @@ bool CvUnit::recon(int iX, int iY)
 		kAirMission.setDamage(BATTLE_UNIT_ATTACKER, 0);
 		kAirMission.setPlot(pPlot);
 		kAirMission.setMissionTime(GC.getMissionInfo((MissionTypes)MISSION_RECON).getTime() * gDLL->getSecsPerTurn());
-		gDLL->getEntityIFace()->AddMission(kAirMission);
+		gDLL->getEntityIFace()->AddMission(&kAirMission);
 	}
 
 	return true;
@@ -3375,7 +3393,7 @@ bool CvUnit::airBomb(int iX, int iY)
 		kAirMission.setPlot(pPlot);
 		kAirMission.setMissionTime(GC.getMissionInfo((MissionTypes)MISSION_AIRBOMB).getTime() * gDLL->getSecsPerTurn());
 
-		gDLL->getEntityIFace()->AddMission(kAirMission);
+		gDLL->getEntityIFace()->AddMission(&kAirMission);
 	}
 
 	return true;
@@ -3490,7 +3508,7 @@ bool CvUnit::bombard()
 		kDefiniton.setPlot(pBombardCity->plot());
 		kDefiniton.setUnit(BATTLE_UNIT_ATTACKER, this);
 		kDefiniton.setUnit(BATTLE_UNIT_DEFENDER, NULL);
-		gDLL->getEntityIFace()->AddMission(kDefiniton);
+		gDLL->getEntityIFace()->AddMission(&kDefiniton);
 	}
 
 	return true;
@@ -3617,7 +3635,7 @@ bool CvUnit::pillage()
 		kDefiniton.setPlot(pPlot);
 		kDefiniton.setUnit(BATTLE_UNIT_ATTACKER, this);
 		kDefiniton.setUnit(BATTLE_UNIT_DEFENDER, NULL);
-		gDLL->getEntityIFace()->AddMission(kDefiniton);
+		gDLL->getEntityIFace()->AddMission(&kDefiniton);
 	}
 
 	if (eTempImprovement != NO_IMPROVEMENT || eTempRoute != NO_ROUTE)
@@ -4900,7 +4918,10 @@ void CvUnit::promote(PromotionTypes ePromotion, int iLeaderUnitId)
 		if (pWarlord)
 		{
 			pWarlord->giveExperience();
-			setName(pWarlord->getNameKey());
+			if (!pWarlord->getNameNoDesc().empty())
+			{
+				setName(pWarlord->getNameKey());
+			}
 
 			//update graphics models
 			m_eLeaderUnitType = pWarlord->getUnitType();
@@ -6354,8 +6375,6 @@ bool CvUnit::isNeverInvisible() const
 
 bool CvUnit::isInvisible(TeamTypes eTeam, bool bDebug) const
 {
-	CvUnit* pTransportUnit;
-
 	if (bDebug && GC.getGameINLINE().isDebugMode())
 	{
 		return false;
@@ -6371,14 +6390,9 @@ bool CvUnit::isInvisible(TeamTypes eTeam, bool bDebug) const
 		return true;
 	}
 
-	pTransportUnit = getTransportUnit();
-
-	if (pTransportUnit != NULL)
+	if (isCargo())
 	{
-		if (pTransportUnit->isInvisible(eTeam, bDebug))
-		{
-			return true;
-		}
+		return true;
 	}
 
 	if (getInvisibleType() == NO_INVISIBLE)
@@ -7048,7 +7062,7 @@ void CvUnit::setXY(int iX, int iY, bool bGroup, bool bUpdate, bool bShow)
 			pOldPlot->area()->changeAnimalsPerPlayer(getOwnerINLINE(), -1);
 		}
 
-		if (pOldPlot->getTeam() != getTeam())
+		if (pOldPlot->getTeam() != getTeam() && (pOldPlot->getTeam() == NO_TEAM || !GET_TEAM(pOldPlot->getTeam()).isVassal(getTeam())))
 		{
 			GET_PLAYER(getOwnerINLINE()).changeNumOutsideUnits(-1);
 		}
@@ -7144,7 +7158,7 @@ void CvUnit::setXY(int iX, int iY, bool bGroup, bool bUpdate, bool bShow)
 			pNewPlot->area()->changeAnimalsPerPlayer(getOwnerINLINE(), 1);
 		}
 
-		if (pNewPlot->getTeam() != getTeam())
+		if (pNewPlot->getTeam() != getTeam() && (pNewPlot->getTeam() == NO_TEAM || !GET_TEAM(pNewPlot->getTeam()).isVassal(getTeam())))
 		{
 			GET_PLAYER(getOwnerINLINE()).changeNumOutsideUnits(1);
 		}
@@ -8204,9 +8218,12 @@ void CvUnit::setPromotionReady(bool bNewValue)
 	{
 		m_bPromotionReady = bNewValue;
 
-		getGroup()->setAutomateType(NO_AUTOMATE);
-		getGroup()->clearMissionQueue();
-		getGroup()->setActivityType(ACTIVITY_AWAKE);
+		if (m_bPromotionReady)
+		{
+			getGroup()->setAutomateType(NO_AUTOMATE);
+			getGroup()->clearMissionQueue();
+			getGroup()->setActivityType(ACTIVITY_AWAKE);
+		}
 
 		gDLL->getEntityIFace()->showPromotionGlow(getUnitEntity(), bNewValue);
 
@@ -8360,7 +8377,7 @@ void CvUnit::setCombatUnit(CvUnit* pCombatUnit, bool bAttacking)
 		FAssertMsg(!(plot()->isFighting()), "(plot()->isFighting()) did not return false as expected");
 		m_bCombatFocus = (bAttacking && !(gDLL->getInterfaceIFace()->isFocusedWidget()) && ((getOwnerINLINE() == GC.getGameINLINE().getActivePlayer()) || ((pCombatUnit->getOwnerINLINE() == GC.getGameINLINE().getActivePlayer()) && !(GC.getGameINLINE().isMPOption(MPOPTION_SIMULTANEOUS_TURNS)))));
 		m_combatUnit = pCombatUnit->getIDInfo();
-		setCombatFirstStrikes((pCombatUnit->immuneToFirstStrikes()) ? 0 : (firstStrikes() + GC.getGameINLINE().getSorenRandNum(chanceFirstStrikes(), "First Strike")));
+		setCombatFirstStrikes((pCombatUnit->immuneToFirstStrikes()) ? 0 : (firstStrikes() + GC.getGameINLINE().getSorenRandNum(chanceFirstStrikes() + 1, "First Strike")));
 		setCombatDamage(0);
 	}
 	else
@@ -9195,7 +9212,7 @@ bool CvUnit::interceptTest(const CvPlot* pPlot)
 					kAirMission.setDamage(BATTLE_UNIT_DEFENDER, iTheirDamage);
 					kAirMission.setPlot(pPlot);
 					kAirMission.setMissionTime(GC.getMissionInfo(MISSION_AIRSTRIKE).getTime() * gDLL->getSecsPerTurn());
-					gDLL->getEntityIFace()->AddMission(kAirMission);
+					gDLL->getEntityIFace()->AddMission(&kAirMission);
 				}
 
 				changeDamage(iOurDamage, pInterceptor->getOwnerINLINE());
@@ -9351,7 +9368,7 @@ void CvUnit::airStrike(CvPlot* pPlot)
 		kAirMission.setDamage(BATTLE_UNIT_ATTACKER, 0);
 		kAirMission.setPlot(pPlot);
 		kAirMission.setMissionTime(getCombatTimer() * gDLL->getSecsPerTurn());
-		gDLL->getEntityIFace()->AddMission(kAirMission);
+		gDLL->getEntityIFace()->AddMission(&kAirMission);
 	}
 
 	pDefender->setDamage(iUnitDamage, getOwnerINLINE());

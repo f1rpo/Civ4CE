@@ -177,6 +177,7 @@ class AdminFrame(wx.Frame):
 		
 		# Chat edit
 		self.chatEdit = wx.TextCtrl(self, -1, "", size=(225,-1), style=wx.TE_PROCESS_ENTER)
+		self.chatEdit.SetMaxLength(300)
 		self.chatEdit.SetHelpText(localText.getText("TXT_KEY_PITBOSS_CHAT_EDIT_HELP", ()))
 		dialogSizer.Add(self.chatEdit, 0, wx.ALL, 5)
 		self.Bind(wx.EVT_TEXT_ENTER, self.OnSendChat, self.chatEdit)

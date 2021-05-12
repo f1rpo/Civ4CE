@@ -530,7 +530,7 @@ class CvMainInterface:
 		screen.addPanel( "ScoreBackground", u"", u"", True, False, 0, 0, 0, 0, PanelStyles.PANEL_STYLE_HUD_HELP )
 		screen.hide( "ScoreBackground" )
 
-		for i in range( 20 ):
+		for i in range( gc.getMAX_PLAYERS() ):
 			szName = "ScoreText" + str(i)
 			screen.setText( szName, "Background", u"", CvUtil.FONT_RIGHT_JUSTIFY, 996, 622, -0.3, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_CONTACT_CIV, i, -1 )
 			screen.hide( szName )
@@ -594,12 +594,18 @@ class CvMainInterface:
 			elif (messageControl.GetFirstBadConnection() != -1):
 				# Waiting on a bad connection to resolve
 				if (messageControl.GetConnState(messageControl.GetFirstBadConnection()) == 1):
-					acOutput = localText.getText("SYSTEM_WAITING_FOR_PLAYER", (gc.getPlayer(messageControl.GetFirstBadConnection()).getNameKey(), (messageControl.GetFirstBadConnection() + 1)))
+					if (gc.getGame().isMPOption(MultiplayerOptionTypes.MPOPTION_ANONYMOUS)):
+						acOutput = localText.getText("SYSTEM_WAITING_FOR_PLAYER", (gc.getPlayer(messageControl.GetFirstBadConnection()).getNameKey(), 0))
+					else:
+						acOutput = localText.getText("SYSTEM_WAITING_FOR_PLAYER", (gc.getPlayer(messageControl.GetFirstBadConnection()).getNameKey(), (messageControl.GetFirstBadConnection() + 1)))
 					#screen.modifyLabel( "EndTurnText", acOutput, CvUtil.FONT_CENTER_JUSTIFY )
 					screen.setEndTurnState( "EndTurnText", acOutput )
 					bShow = True
 				elif (messageControl.GetConnState(messageControl.GetFirstBadConnection()) == 2):
-					acOutput = localText.getText("SYSTEM_PLAYER_JOINING", (gc.getPlayer(messageControl.GetFirstBadConnection()).getNameKey(), (messageControl.GetFirstBadConnection() + 1)))
+					if (gc.getGame().isMPOption(MultiplayerOptionTypes.MPOPTION_ANONYMOUS)):
+						acOutput = localText.getText("SYSTEM_PLAYER_JOINING", (gc.getPlayer(messageControl.GetFirstBadConnection()).getNameKey(), 0))
+					else:
+						acOutput = localText.getText("SYSTEM_PLAYER_JOINING", (gc.getPlayer(messageControl.GetFirstBadConnection()).getNameKey(), (messageControl.GetFirstBadConnection() + 1)))
 					#screen.modifyLabel( "EndTurnText", acOutput, CvUtil.FONT_CENTER_JUSTIFY )
 					screen.setEndTurnState( "EndTurnText", acOutput )
 					bShow = True
@@ -2579,7 +2585,7 @@ class CvMainInterface:
 		
 		screen.hide( "ScoreBackground" )
 		
-		for i in range( 20 ):
+		for i in range( gc.getMAX_PLAYERS() ):
 			szName = "ScoreText" + str(i)
 			screen.hide( szName )
 

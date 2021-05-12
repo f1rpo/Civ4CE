@@ -215,6 +215,11 @@ bool CyGame::canTrainNukes()
 	return m_pGame ? m_pGame->canTrainNukes() : false;
 }
 
+int CyGame::getCurrentEra()
+{
+	return m_pGame ? (int) m_pGame->getCurrentEra() : (int) NO_ERA;
+}
+
 int CyGame::getActiveTeam()
 {
 	return m_pGame ? (int) m_pGame->getActiveTeam() : (int) NO_TEAM;

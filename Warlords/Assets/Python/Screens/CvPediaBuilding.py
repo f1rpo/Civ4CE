@@ -149,16 +149,32 @@ class CvPediaBuilding:
 				szCost = localText.getText("TXT_KEY_PEDIA_COST", (gc.getPlayer(self.top.iActivePlayer).getBuildingProductionNeeded(self.iBuilding),))
 			screen.appendListBoxString(panelName, u"<font=4>" + szCost.upper() + u"%c" % gc.getYieldInfo(YieldTypes.YIELD_PRODUCTION).getChar() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
+		for k in range(YieldTypes.NUM_YIELD_TYPES):
+			if (buildingInfo.getYieldChange(k) != 0):
+				if (buildingInfo.getYieldChange(k) > 0):
+					szSign = "+"
+				else:
+					szSign = ""
+					
+				szYield = gc.getYieldInfo(k).getDescription() + ": "
+				
+				szText1 = szYield.upper() + szSign + str(buildingInfo.getYieldChange(k))
+				szText2 = szText1 + (u"%c" % (gc.getYieldInfo(k).getChar()))
+				screen.appendListBoxString(panelName, u"<font=4>" + szText2 + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+
+			
 		for k in range(CommerceTypes.NUM_COMMERCE_TYPES):
-			if (buildingInfo.getObsoleteSafeCommerceChange(k) != 0):
-				if (buildingInfo.getObsoleteSafeCommerceChange(k) > 0):
+		
+			iTotalCommerce = buildingInfo.getObsoleteSafeCommerceChange(k) + buildingInfo.getCommerceChange(k)
+			if (iTotalCommerce != 0):
+				if (iTotalCommerce > 0):
 					szSign = "+"
 				else:
 					szSign = ""
 					
 				szCommerce = gc.getCommerceInfo(k).getDescription() + ": "
 				
-				szText1 = szCommerce.upper() + szSign + str(buildingInfo.getObsoleteSafeCommerceChange(k))
+				szText1 = szCommerce.upper() + szSign + str(iTotalCommerce)
 				szText2 = szText1 + (u"%c" % (gc.getCommerceInfo(k).getChar()))
 				screen.appendListBoxString(panelName, u"<font=4>" + szText2 + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 

@@ -752,13 +752,15 @@ void CvCity::doTurn()
 		setWeLoveTheKingDay(false);
 	}
 
+	bool bAllowNoProduction = !doCheckProduction();
+
 	doGrowth();
 
 	doCulture();
 
 	doPlotCulture(false);
 
-	doProduction();
+	doProduction(bAllowNoProduction);
 
 	doDecay();
 
@@ -2933,7 +2935,27 @@ int CvCity::getCurrentProductionDifference(bool bIgnoreFood, bool bOverflow) con
 
 int CvCity::getExtraProductionDifference(int iExtra) const
 {
-	return ((iExtra * getBaseYieldRateModifier(YIELD_PRODUCTION, getProductionModifier())) / 100);
+	return getExtraProductionDifference(iExtra, getProductionModifier());
+}
+
+int CvCity::getExtraProductionDifference(int iExtra, UnitTypes eUnit) const
+{
+	return getExtraProductionDifference(iExtra, getProductionModifier(eUnit));
+}
+
+int CvCity::getExtraProductionDifference(int iExtra, BuildingTypes eBuilding) const
+{
+	return getExtraProductionDifference(iExtra, getProductionModifier(eBuilding));
+}
+
+int CvCity::getExtraProductionDifference(int iExtra, ProjectTypes eProject) const
+{
+	return getExtraProductionDifference(iExtra, getProductionModifier(eProject));
+}
+
+int CvCity::getExtraProductionDifference(int iExtra, int iModifier) const
+{
+	return ((iExtra * getBaseYieldRateModifier(YIELD_PRODUCTION, iModifier)) / 100);
 }
 
 
@@ -2970,6 +2992,66 @@ bool CvCity::canHurry(HurryTypes eHurry, bool bTestVisible) const
 		{
 			return false;
 		}
+	}
+
+	return true;
+}
+
+bool CvCity::canHurryUnit(HurryTypes eHurry, UnitTypes eUnit, bool bIgnoreNew) const
+{
+	if (!(GET_PLAYER(getOwnerINLINE()).canHurry(eHurry)))
+	{
+		return false;
+	}
+
+	if (isDisorder())
+	{
+		return false;
+	}
+
+	if (getUnitProduction(eUnit) >= GET_PLAYER(getOwnerINLINE()).getProductionNeeded(eUnit))
+	{
+		return false;
+	}
+
+	if (GET_PLAYER(getOwnerINLINE()).getGold() < getHurryGold(eHurry, getHurryCost(false, eUnit, bIgnoreNew)))
+	{
+		return false;
+	}
+
+	if (maxHurryPopulation() < getHurryPopulation(eHurry, getHurryCost(true, eUnit, bIgnoreNew)))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool CvCity::canHurryBuilding(HurryTypes eHurry, BuildingTypes eBuilding, bool bIgnoreNew) const
+{
+	if (!(GET_PLAYER(getOwnerINLINE()).canHurry(eHurry)))
+	{
+		return false;
+	}
+
+	if (isDisorder())
+	{
+		return false;
+	}
+
+	if (getBuildingProduction(eBuilding) >= GET_PLAYER(getOwnerINLINE()).getProductionNeeded(eBuilding))
+	{
+		return false;
+	}
+
+	if (GET_PLAYER(getOwnerINLINE()).getGold() < getHurryGold(eHurry, getHurryCost(false, eBuilding, bIgnoreNew)))
+	{
+		return false;
+	}
+
+	if (maxHurryPopulation() < getHurryPopulation(eHurry, getHurryCost(true, eBuilding, bIgnoreNew)))
+	{
+		return false;
 	}
 
 	return true;
@@ -3145,10 +3227,14 @@ void CvCity::conscript()
 
 	eConscriptUnit = getConscriptUnit();
 
-	if (GET_PLAYER(getOwnerINLINE()).AI_unitValue(eConscriptUnit, UNITAI_CITY_DEFENSE, area()) > 0)
-	{
-		eCityAI = UNITAI_CITY_DEFENSE;
-	}
+	if (GET_PLAYER(getOwnerINLINE()).AI_unitValue(eConscriptUnit, UNITAI_ATTACK, area()) > 0) 
+	{ 
+		eCityAI = UNITAI_ATTACK; 
+	} 
+	else if (GET_PLAYER(getOwnerINLINE()).AI_unitValue(eConscriptUnit, UNITAI_CITY_DEFENSE, area()) > 0) 
+	{ 
+		eCityAI = UNITAI_CITY_DEFENSE; 
+	} 
 	else if (GET_PLAYER(getOwnerINLINE()).AI_unitValue(eConscriptUnit, UNITAI_CITY_COUNTER, area()) > 0)
 	{
 		eCityAI = UNITAI_CITY_COUNTER;
@@ -3729,25 +3815,25 @@ int CvCity::getReligionPercentAnger() const
 }
 
 
-int CvCity::getHurryPercentAnger() const
+int CvCity::getHurryPercentAnger(int iExtra) const
 {
 	if (getHurryAngerTimer() == 0)
 	{
 		return 0;
 	}
 
-	return ((((((getHurryAngerTimer() - 1) / flatHurryAngerLength()) + 1) * GC.getDefineINT("HURRY_POP_ANGER") * GC.getDefineINT("PERCENT_ANGER_DIVISOR")) / max(1, getPopulation())) + 1);
+	return ((((((getHurryAngerTimer() - 1) / flatHurryAngerLength()) + 1) * GC.getDefineINT("HURRY_POP_ANGER") * GC.getDefineINT("PERCENT_ANGER_DIVISOR")) / max(1, getPopulation() + iExtra)) + 1);
 }
 
 
-int CvCity::getConscriptPercentAnger() const
+int CvCity::getConscriptPercentAnger(int iExtra) const
 {
 	if (getConscriptAngerTimer() == 0)
 	{
 		return 0;
 	}
 
-	return ((((((getConscriptAngerTimer() - 1) / flatConscriptAngerLength()) + 1) * GC.getDefineINT("CONSCRIPT_POP_ANGER") * GC.getDefineINT("PERCENT_ANGER_DIVISOR")) / max(1, getPopulation())) + 1);
+	return ((((((getConscriptAngerTimer() - 1) / flatConscriptAngerLength()) + 1) * GC.getDefineINT("CONSCRIPT_POP_ANGER") * GC.getDefineINT("PERCENT_ANGER_DIVISOR")) / max(1, getPopulation() + iExtra)) + 1);
 }
 
 
@@ -3827,8 +3913,8 @@ int CvCity::unhappyLevel(int iExtra) const
 		iAngerPercent += getNoMilitaryPercentAnger();
 		iAngerPercent += getCulturePercentAnger();
 		iAngerPercent += getReligionPercentAnger();
-		iAngerPercent += getHurryPercentAnger();
-		iAngerPercent += getConscriptPercentAnger();
+		iAngerPercent += getHurryPercentAnger(iExtra);
+		iAngerPercent += getConscriptPercentAnger(iExtra);
 		iAngerPercent += getWarWearinessPercentAnger();
 
 		for (iI = 0; iI < GC.getNumCivicInfos(); iI++)
@@ -3877,7 +3963,7 @@ int CvCity::happyLevel() const
 	iHappiness += max(0, GET_PLAYER(getOwnerINLINE()).getBuildingHappiness());
 	iHappiness += max(0, (getExtraHappiness() + GET_PLAYER(getOwnerINLINE()).getExtraHappiness()));
 	iHappiness += max(0, GC.getHandicapInfo(getHandicapType()).getHappyBonus());
-	iHappiness += max(0, getVassalUnhappiness());
+	iHappiness += max(0, getVassalHappiness());
 
 	return max(0, iHappiness);
 }
@@ -4144,13 +4230,11 @@ int CvCity::getHurryCostModifier() const
 		switch (pOrderNode->m_data.eOrderType)
 		{
 		case ORDER_TRAIN:
-			iModifier *= max(0, (GC.getUnitInfo((UnitTypes) pOrderNode->m_data.iData1).getHurryCostModifier() + 100));
-			iModifier /= 100;
+			iModifier = getHurryCostModifier((UnitTypes) pOrderNode->m_data.iData1, false);
 			break;
 
 		case ORDER_CONSTRUCT:
-			iModifier *= max(0, (GC.getBuildingInfo((BuildingTypes) pOrderNode->m_data.iData1).getHurryCostModifier() + 100));
-			iModifier /= 100;
+			iModifier = getHurryCostModifier((BuildingTypes) pOrderNode->m_data.iData1, false);
 			break;
 
 		case ORDER_CREATE:
@@ -4163,7 +4247,26 @@ int CvCity::getHurryCostModifier() const
 		}
 	}
 
-	if (getProduction() == 0)
+	return iModifier;
+}
+
+int CvCity::getHurryCostModifier(UnitTypes eUnit, bool bIgnoreNew) const
+{
+	return getHurryCostModifier(GC.getUnitInfo(eUnit).getHurryCostModifier(), getUnitProduction(eUnit), bIgnoreNew);
+}
+
+int CvCity::getHurryCostModifier(BuildingTypes eBuilding, bool bIgnoreNew) const
+{
+	return getHurryCostModifier(GC.getBuildingInfo(eBuilding).getHurryCostModifier(), getBuildingProduction(eBuilding), bIgnoreNew);
+}
+
+int CvCity::getHurryCostModifier(int iBaseModifier, int iProduction, bool bIgnoreNew) const
+{
+	int iModifier = 100;
+	iModifier *= max(0, iBaseModifier + 100);
+	iModifier /= 100;
+
+	if (iProduction == 0 && !bIgnoreNew)
 	{
 		iModifier *= max(0, (GC.getDefineINT("NEW_HURRY_MODIFIER") + 100));
 		iModifier /= 100;
@@ -4178,17 +4281,30 @@ int CvCity::getHurryCostModifier() const
 
 int CvCity::hurryCost(bool bExtra) const
 {
-	int iExtraProduction;
-	int iProduction;
+	return (getHurryCost(bExtra, productionLeft(), getHurryCostModifier(), getProductionModifier()));
+}
 
-	iProduction = productionLeft();
+int CvCity::getHurryCost(bool bExtra, UnitTypes eUnit, bool bIgnoreNew) const
+{
+	int iProductionLeft = GET_PLAYER(getOwnerINLINE()).getProductionNeeded(eUnit) - getUnitProduction(eUnit);
 
-	iProduction *= getHurryCostModifier();
-	iProduction /= 100;
+	return getHurryCost(bExtra, iProductionLeft, getHurryCostModifier(eUnit, bIgnoreNew), getProductionModifier(eUnit));
+}
+
+int CvCity::getHurryCost(bool bExtra, BuildingTypes eBuilding, bool bIgnoreNew) const
+{
+	int iProductionLeft = GET_PLAYER(getOwnerINLINE()).getProductionNeeded(eBuilding) - getBuildingProduction(eBuilding);
+
+	return getHurryCost(bExtra, iProductionLeft, getHurryCostModifier(eBuilding, bIgnoreNew), getProductionModifier(eBuilding));
+}
+
+int CvCity::getHurryCost(bool bExtra, int iProductionLeft, int iHurryModifier, int iModifier) const
+{
+	int iProduction = (iProductionLeft * iHurryModifier) / 100;
 
 	if (bExtra)
 	{
-		iExtraProduction = getExtraProductionDifference(iProduction);
+		int iExtraProduction = getExtraProductionDifference(iProduction, iModifier);
 		if (iExtraProduction > 0)
 		{
 			int iAdjustedProd = iProduction * iProduction;
@@ -4203,8 +4319,12 @@ int CvCity::hurryCost(bool bExtra) const
 	return max(0, iProduction);
 }
 
-
 int CvCity::hurryGold(HurryTypes eHurry) const
+{
+	return getHurryGold(eHurry, hurryCost(false));
+}
+
+int CvCity::getHurryGold(HurryTypes eHurry, int iHurryCost) const
 {
 	int iGold;
 
@@ -4213,7 +4333,7 @@ int CvCity::hurryGold(HurryTypes eHurry) const
 		return 0;
 	}
 
-	iGold = (hurryCost(false) * GC.getHurryInfo(eHurry).getGoldPerProduction());
+	iGold = (iHurryCost * GC.getHurryInfo(eHurry).getGoldPerProduction());
 
 	return max(1, iGold);
 }
@@ -4221,18 +4341,20 @@ int CvCity::hurryGold(HurryTypes eHurry) const
 
 int CvCity::hurryPopulation(HurryTypes eHurry) const
 {
-	int iPopulation;
+	return (getHurryPopulation(eHurry, hurryCost(true)));
+}
 
+int CvCity::getHurryPopulation(HurryTypes eHurry, int iHurryCost) const
+{
 	if (GC.getHurryInfo(eHurry).getProductionPerPopulation() == 0)
 	{
 		return 0;
 	}
 
-	iPopulation = (hurryCost(true) - 1) / GC.getGameINLINE().getProductionPerPopulation(eHurry);
+	int iPopulation = (iHurryCost - 1) / GC.getGameINLINE().getProductionPerPopulation(eHurry);
 
 	return max(1, (iPopulation + 1));
 }
-
 
 int CvCity::hurryProduction(HurryTypes eHurry) const
 {
@@ -6169,12 +6291,7 @@ bool CvCity::isBombardable(TeamTypes eTeam) const
 		return false;
 	}
 
-	if (getTotalDefense(false) == 0)
-	{
-		return false;
-	}
-
-	return (getDefenseDamage() < GC.getMAX_CITY_DEFENSE_DAMAGE());
+	return (getDefenseModifier(false) > 0);
 }
 
 
@@ -9189,7 +9306,6 @@ void CvCity::popOrder(int iNum, bool bFinish, bool bChoose)
 			// Event reported to Python before the project is built, so that we can show the movie before awarding free techs, for example
 			gDLL->getEventReporterIFace()->projectBuilt(this, eCreateProject);
 
-			GC.getGameINLINE().incrementProjectCreatedCount(eCreateProject);
 			GET_TEAM(getTeam()).changeProjectCount(eCreateProject, 1);
 
 			iProductionNeeded = GET_PLAYER(getOwnerINLINE()).getProductionNeeded(eCreateProject);
@@ -9516,35 +9632,16 @@ void CvCity::doPlotCulture(bool bUpdate)
 	}
 }
 
-
-void CvCity::doProduction()
+bool CvCity::doCheckProduction()
 {
 	CLLNode<OrderData>* pOrderNode;
 	OrderData* pOrder;
-	CvWString szBuffer;
 	UnitTypes eUpgradeUnit;
-	int iProductionGold;
 	int iUpgradeProduction;
+	int iProductionGold;
+	CvWString szBuffer;
 	int iI;
-
-	CyCity* pyCity = new CyCity(this);
-	CyArgsList argsList;
-	argsList.add(gDLL->getPythonIFace()->makePythonObject(pyCity));	// pass in city class
-	long lResult=0;
-	gDLL->getPythonIFace()->callFunction(PYGameModule, "doProduction", argsList.makeFunctionArgs(), &lResult);
-	delete pyCity;	// python fxn must not hold on to this pointer 
-	if (lResult == 1)
-	{
-		return;
-	}
-
-	if (!isHuman() || isProductionAutomated())
-	{
-		if (!isProduction() || isProductionProcess() || AI_isChooseProductionDirty())
-		{
-			AI_chooseProduction();
-		}
-	}
+	bool bOK = true;
 
 	for (iI = 0; iI < GC.getNumUnitInfos(); iI++)
 	{
@@ -9609,11 +9706,6 @@ void CvCity::doProduction()
 		}
 	}
 
-	if (!isProduction() || isProductionProcess())
-	{
-		return;
-	}
-
 	for (iI = 0; iI < GC.getNumUnitInfos(); iI++)
 	{
 		if (getFirstUnitOrder((UnitTypes)iI) != -1)
@@ -9664,8 +9756,39 @@ void CvCity::doProduction()
 			if (!canContinueProduction(*pOrder))
 			{
 				popOrder(iI, false, true);
+				bOK = false;
 			}
 		}
+	}
+
+	return bOK;
+}
+
+
+void CvCity::doProduction(bool bAllowNoProduction)
+{
+	CyCity* pyCity = new CyCity(this);
+	CyArgsList argsList;
+	argsList.add(gDLL->getPythonIFace()->makePythonObject(pyCity));	// pass in city class
+	long lResult=0;
+	gDLL->getPythonIFace()->callFunction(PYGameModule, "doProduction", argsList.makeFunctionArgs(), &lResult);
+	delete pyCity;	// python fxn must not hold on to this pointer 
+	if (lResult == 1)
+	{
+		return;
+	}
+
+	if (!isHuman() || isProductionAutomated())
+	{
+		if (!isProduction() || isProductionProcess() || AI_isChooseProductionDirty())
+		{
+			AI_chooseProduction();
+		}
+	}
+
+	if (!bAllowNoProduction && !isProduction())
+	{
+		return;
 	}
 
 	if (isProductionProcess())
@@ -9828,6 +9951,11 @@ void CvCity::doGreatPeople()
 	gDLL->getPythonIFace()->callFunction(PYGameModule, "doGreatPeople", argsList.makeFunctionArgs(), &lResult);
 	delete pyCity;	// python fxn must not hold on to this pointer 
 	if (lResult == 1)
+	{
+		return;
+	}
+
+	if (isDisorder())
 	{
 		return;
 	}

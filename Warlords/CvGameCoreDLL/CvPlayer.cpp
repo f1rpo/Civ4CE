@@ -1141,8 +1141,8 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade)
 	bool* pabHasRealBuilding;
 	int* paiBuildingOriginalOwner;
 	int* paiBuildingOriginalTime;
-	wchar szBuffer[1024];
-	wchar szName[1024];
+	CvWString szBuffer;
+	CvWString szName;
 	bool abEverOwned[MAX_PLAYERS];
 	int aiCulture[MAX_PLAYERS];
 	PlayerTypes eOldOwner;
@@ -1166,6 +1166,7 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade)
 	int iDamage;
 	int iDX, iDY;
 	int iI;
+	CLinkList<IDInfo> oldUnits;
 
 	pCityPlot = pOldCity->plot();
 
@@ -1173,10 +1174,18 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade)
 
 	while (pUnitNode != NULL)
 	{
-		pLoopUnit = ::getUnit(pUnitNode->m_data);
+		oldUnits.insertAtEnd(pUnitNode->m_data);
 		pUnitNode = pCityPlot->nextUnitNode(pUnitNode);
+	}
 
-		if (pLoopUnit->getTeam() != getTeam())
+	pUnitNode = oldUnits.head();
+
+	while (pUnitNode != NULL)
+	{
+		pLoopUnit = ::getUnit(pUnitNode->m_data);
+		pUnitNode = oldUnits.next(pUnitNode);
+
+		if (pLoopUnit && pLoopUnit->getTeam() != getTeam())
 		{
 			if (pLoopUnit->getDomainType() == DOMAIN_IMMOBILE)
 			{
@@ -1243,8 +1252,10 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade)
 
 	if (bConquest)
 	{
-		swprintf(szBuffer, gDLL->getText("TXT_KEY_MISC_CAPTURED_CITY", pOldCity->getNameKey()).GetCString());
+		szBuffer = gDLL->getText("TXT_KEY_MISC_CAPTURED_CITY", pOldCity->getNameKey()).GetCString();
 		gDLL->getInterfaceIFace()->addMessage(getID(), true, GC.getDefineINT("EVENT_MESSAGE_TIME"), szBuffer, "AS2D_CITYCAPTURE", MESSAGE_TYPE_MAJOR_EVENT, ARTFILEMGR.getInterfaceArtInfo("WORLDBUILDER_CITY_EDIT")->getPath(), (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pOldCity->getX_INLINE(), pOldCity->getY_INLINE(), true, true);
+
+		szName.Format(L"%s (%s)", pOldCity->getName().GetCString(), GET_PLAYER(pOldCity->getOwnerINLINE()).getName());
 
 		for (iI = 0; iI < MAX_PLAYERS; iI++)
 		{
@@ -1254,14 +1265,14 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade)
 				{
 					if (pOldCity->isRevealed(GET_PLAYER((PlayerTypes)iI).getTeam(), false))
 					{
-						swprintf(szBuffer, gDLL->getText("TXT_KEY_MISC_CITY_CAPTURED_BY", pOldCity->getNameKey(), getCivilizationDescriptionKey()).GetCString());
+						szBuffer = gDLL->getText("TXT_KEY_MISC_CITY_CAPTURED_BY", szName.GetCString(), getCivilizationDescriptionKey());
 						gDLL->getInterfaceIFace()->addMessage(((PlayerTypes)iI), false, GC.getDefineINT("EVENT_MESSAGE_TIME"), szBuffer, "AS2D_CITYCAPTURED", MESSAGE_TYPE_MAJOR_EVENT, ARTFILEMGR.getInterfaceArtInfo("WORLDBUILDER_CITY_EDIT")->getPath(), (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pOldCity->getX_INLINE(), pOldCity->getY_INLINE(), true, true);
 					}
 				}
 			}
 		}
 
-		swprintf(szBuffer, gDLL->getText("TXT_KEY_MISC_CITY_WAS_CAPTURED_BY", pOldCity->getNameKey(), getCivilizationDescriptionKey()).GetCString());
+		szBuffer = gDLL->getText("TXT_KEY_MISC_CITY_WAS_CAPTURED_BY", szName.GetCString(), getCivilizationDescriptionKey());
 		GC.getGameINLINE().addReplayMessage(REPLAY_MESSAGE_MAJOR_EVENT, getID(), szBuffer, pOldCity->getX_INLINE(), pOldCity->getY_INLINE(), (ColorTypes)GC.getInfoTypeForString("COLOR_WARNING_TEXT"));
 	}
 
@@ -1289,45 +1300,56 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade)
 
 	if (bConquest)
 	{
-		if (((pOldCity->getHighestPopulation() == 1) && !(GC.getGameINLINE().isOption(GAMEOPTION_NO_CITY_RAZING))) ||
-			  ((GC.getGameINLINE().getMaxCityElimination() > 0) && !(GC.getGameINLINE().isOption(GAMEOPTION_NO_CITY_RAZING))) ||
-			  (GC.getGameINLINE().isOption(GAMEOPTION_ONE_CITY_CHALLENGE) && isHuman()))
-		{
-			if (iCaptureGold > 0)
-			{
-				swprintf(szBuffer, gDLL->getText("TXT_KEY_MISC_PILLAGED_CITY", iCaptureGold, pOldCity->getNameKey()).GetCString());
-			}
-			else
-			{
-				swprintf(szBuffer, gDLL->getText("TXT_KEY_MISC_DESTROYED_CITY", pOldCity->getNameKey()).GetCString());
-			}
-			gDLL->getInterfaceIFace()->addMessage(getID(), true, GC.getDefineINT("EVENT_MESSAGE_TIME"), szBuffer, "AS2D_CITYRAZE", MESSAGE_TYPE_MAJOR_EVENT, ARTFILEMGR.getInterfaceArtInfo("WORLDBUILDER_CITY_EDIT")->getPath(), (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pOldCity->getX_INLINE(), pOldCity->getY_INLINE(), true, true);
+		CyCity* pyCity = new CyCity(pOldCity);
+		CyArgsList argsList;
+		argsList.add(getID());	// Player ID
+		argsList.add(gDLL->getPythonIFace()->makePythonObject(pyCity));	// pass in city class
+		long lResult=0;
+		gDLL->getPythonIFace()->callFunction(PYGameModule, "canRazeCity", argsList.makeFunctionArgs(), &lResult);
+		delete pyCity;	// python fxn must not hold on to this pointer 
 
-			for (iI = 0; iI < MAX_PLAYERS; iI++)
+		if (lResult == 1)
+		{
+			if (((pOldCity->getHighestPopulation() == 1) && !(GC.getGameINLINE().isOption(GAMEOPTION_NO_CITY_RAZING))) ||
+				((GC.getGameINLINE().getMaxCityElimination() > 0) && !(GC.getGameINLINE().isOption(GAMEOPTION_NO_CITY_RAZING))) ||
+				(GC.getGameINLINE().isOption(GAMEOPTION_ONE_CITY_CHALLENGE) && isHuman()))
 			{
-				if (GET_PLAYER((PlayerTypes)iI).isAlive())
+				if (iCaptureGold > 0)
 				{
-					if (iI != getID())
+					szBuffer = gDLL->getText("TXT_KEY_MISC_PILLAGED_CITY", iCaptureGold, pOldCity->getNameKey());
+				}
+				else
+				{
+					szBuffer = gDLL->getText("TXT_KEY_MISC_DESTROYED_CITY", pOldCity->getNameKey());
+				}
+				gDLL->getInterfaceIFace()->addMessage(getID(), true, GC.getDefineINT("EVENT_MESSAGE_TIME"), szBuffer, "AS2D_CITYRAZE", MESSAGE_TYPE_MAJOR_EVENT, ARTFILEMGR.getInterfaceArtInfo("WORLDBUILDER_CITY_EDIT")->getPath(), (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pOldCity->getX_INLINE(), pOldCity->getY_INLINE(), true, true);
+
+				for (iI = 0; iI < MAX_PLAYERS; iI++)
+				{
+					if (GET_PLAYER((PlayerTypes)iI).isAlive())
 					{
-						if (pOldCity->isRevealed(GET_PLAYER((PlayerTypes)iI).getTeam(), false))
+						if (iI != getID())
 						{
-							swprintf(szBuffer, gDLL->getText("TXT_KEY_MISC_CITY_HAS_BEEN_RAZED_BY", pOldCity->getNameKey(), getCivilizationDescriptionKey()).GetCString());
-							gDLL->getInterfaceIFace()->addMessage(((PlayerTypes)iI), false, GC.getDefineINT("EVENT_MESSAGE_TIME"), szBuffer, "AS2D_CITYRAZED", MESSAGE_TYPE_MAJOR_EVENT, ARTFILEMGR.getInterfaceArtInfo("WORLDBUILDER_CITY_EDIT")->getPath(), (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pOldCity->getX_INLINE(), pOldCity->getY_INLINE(), true, true);
+							if (pOldCity->isRevealed(GET_PLAYER((PlayerTypes)iI).getTeam(), false))
+							{
+								szBuffer = gDLL->getText("TXT_KEY_MISC_CITY_HAS_BEEN_RAZED_BY", pOldCity->getNameKey(), getCivilizationDescriptionKey());
+								gDLL->getInterfaceIFace()->addMessage(((PlayerTypes)iI), false, GC.getDefineINT("EVENT_MESSAGE_TIME"), szBuffer, "AS2D_CITYRAZED", MESSAGE_TYPE_MAJOR_EVENT, ARTFILEMGR.getInterfaceArtInfo("WORLDBUILDER_CITY_EDIT")->getPath(), (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pOldCity->getX_INLINE(), pOldCity->getY_INLINE(), true, true);
+							}
 						}
 					}
 				}
+
+				szBuffer = gDLL->getText("TXT_KEY_MISC_CITY_RAZED_BY", pOldCity->getNameKey(), getCivilizationDescriptionKey());
+				GC.getGameINLINE().addReplayMessage(REPLAY_MESSAGE_MAJOR_EVENT, getID(), szBuffer, pOldCity->getX_INLINE(), pOldCity->getY_INLINE(), (ColorTypes)GC.getInfoTypeForString("COLOR_WARNING_TEXT"));
+
+				GC.getGameINLINE().addDestroyedCityName(pOldCity->getName());
+
+				// Report this event
+				gDLL->getEventReporterIFace()->cityRazed(pOldCity, getID());
+
+				pOldCity->kill();
+				return;
 			}
-
-			swprintf(szBuffer, gDLL->getText("TXT_KEY_MISC_CITY_RAZED_BY", pOldCity->getNameKey(), getCivilizationDescriptionKey()).GetCString());
-			GC.getGameINLINE().addReplayMessage(REPLAY_MESSAGE_MAJOR_EVENT, getID(), szBuffer, pOldCity->getX_INLINE(), pOldCity->getY_INLINE(), (ColorTypes)GC.getInfoTypeForString("COLOR_WARNING_TEXT"));
-
-			GC.getGameINLINE().addDestroyedCityName(pOldCity->getName());
-
-			// Report this event
-			gDLL->getEventReporterIFace()->cityRazed(pOldCity, getID());
-
-			pOldCity->kill();
-			return;
 		}
 	}
 
@@ -1346,7 +1368,7 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade)
 	iHurryAngerTimer = pOldCity->getHurryAngerTimer();
 	iConscriptAngerTimer = pOldCity->getConscriptAngerTimer();
 	iOccupationTimer = pOldCity->getOccupationTimer();
-	wcscpy(szName, pOldCity->getNameKey());
+	szName = pOldCity->getNameKey();
 	iDamage = pOldCity->getDefenseDamage();
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
@@ -1558,7 +1580,7 @@ CvWString CvPlayer::getNewCityName()
 
 	for (pNode = headCityNameNode(); (pNode != NULL); pNode = nextCityNameNode(pNode))
 	{
-		if (isCityNameValid(gDLL->getText(pNode->m_data)))
+		if (isCityNameValid(gDLL->getText(pNode->m_data), true))
 		{
 			szName = pNode->m_data;
 			break;
@@ -1615,7 +1637,7 @@ void CvPlayer::getCivilizationCityName(CvWString& szBuffer, CivilizationTypes eC
 	{
 		iLoopName = ((iI + iRandOffset) % GC.getCivilizationInfo(eCivilization).getNumCityNames());
 
-		if (isCityNameValid(gDLL->getText(GC.getCivilizationInfo(eCivilization).getCityNames(iLoopName))))
+		if (isCityNameValid(gDLL->getText(GC.getCivilizationInfo(eCivilization).getCityNames(iLoopName)), true))
 		{
 			szBuffer = GC.getCivilizationInfo(eCivilization).getCityNames(iLoopName);
 			break;
@@ -1628,7 +1650,6 @@ bool CvPlayer::isCityNameValid(CvWString& szName, bool bTestDestroyed)
 {
 	CvCity* pLoopCity;
 	int iLoop;
-	int iI;
 
 	if (bTestDestroyed)
 	{
@@ -1636,18 +1657,26 @@ bool CvPlayer::isCityNameValid(CvWString& szName, bool bTestDestroyed)
 		{
 			return false;
 		}
-	}
 
-	for (iI = 0; iI < MAX_PLAYERS; iI++)
-	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		for (int iPlayer = 0; iPlayer < MAX_PLAYERS; ++iPlayer)
 		{
-			for (pLoopCity = GET_PLAYER((PlayerTypes)iI).firstCity(&iLoop); pLoopCity != NULL; pLoopCity = GET_PLAYER((PlayerTypes)iI).nextCity(&iLoop))
+			CvPlayer& kLoopPlayer = GET_PLAYER((PlayerTypes)iPlayer);
+			for (pLoopCity = kLoopPlayer.firstCity(&iLoop); pLoopCity != NULL; pLoopCity = kLoopPlayer.nextCity(&iLoop))
 			{
 				if (pLoopCity->getName() == szName)
 				{
 					return false;
 				}
+			}
+		}
+	}
+	else
+	{
+		for (pLoopCity = firstCity(&iLoop); pLoopCity != NULL; pLoopCity = nextCity(&iLoop))
+		{
+			if (pLoopCity->getName() == szName)
+			{
+				return false;
 			}
 		}
 	}
@@ -1906,7 +1935,7 @@ CvSelectionGroup* CvPlayer::cycleSelectionGroups(CvUnit* pUnit, bool bForward, b
 			{
 				if (!bWorkers || pLoopSelectionGroup->hasWorker())
 				{
-					if (pLoopSelectionGroup == pUnit->getGroup())
+					if (pUnit && pLoopSelectionGroup == pUnit->getGroup())
 					{
 						if (pbWrap != NULL)
 						{
@@ -1985,7 +2014,7 @@ bool CvPlayer::isBarbarian()
 
 const wchar* CvPlayer::getName(uint uiForm)
 {
-	if (isEmpty(gDLL->getPlayerName(getID(), uiForm)) || (GC.getGameINLINE().isMPOption(MPOPTION_ANONYMOUS) && isAlive()))
+	if (isEmpty(gDLL->getPlayerName(getID(), uiForm)) || (GC.getGameINLINE().isMPOption(MPOPTION_ANONYMOUS) && isAlive() && GC.getGameINLINE().getGameState() == GAMESTATE_ON))
 	{
 		return GC.getLeaderHeadInfo(getLeaderType()).getDescription(uiForm);
 	}
@@ -2167,7 +2196,7 @@ const wchar* CvPlayer::getBestAttackUnitKey()
 	{
 		for (pLoopCity = firstCity(&iLoop); pLoopCity != NULL; pLoopCity = nextCity(&iLoop))
 		{
-			eBestUnit = pCapitalCity->AI_bestUnitAI(UNITAI_ATTACK, true);
+			eBestUnit = pLoopCity->AI_bestUnitAI(UNITAI_ATTACK, true);
 
 			if (eBestUnit != NO_UNIT)
 			{
@@ -3505,11 +3534,14 @@ bool CvPlayer::canTradeItem(PlayerTypes eWhoTo, TradeData item, bool bTestDenial
 		{
 			if (!(GET_TEAM(getTeam()).isAVassal()))
 			{
-				if (GET_TEAM(getTeam()).isHasMet((TeamTypes)(item.m_iData)) && GET_TEAM(GET_PLAYER(eWhoTo).getTeam()).isHasMet((TeamTypes)(item.m_iData)))
+				if (!GET_TEAM((TeamTypes)item.m_iData).isVassal(GET_PLAYER(eWhoTo).getTeam()))
 				{
-					if (GET_TEAM(getTeam()).canDeclareWar((TeamTypes)(item.m_iData)))
+					if (GET_TEAM(getTeam()).isHasMet((TeamTypes)(item.m_iData)) && GET_TEAM(GET_PLAYER(eWhoTo).getTeam()).isHasMet((TeamTypes)(item.m_iData)))
 					{
-						return true;
+						if (GET_TEAM(getTeam()).canDeclareWar((TeamTypes)(item.m_iData)))
+						{
+							return true;
+						}
 					}
 				}
 			}
@@ -3578,7 +3610,7 @@ bool CvPlayer::canTradeItem(PlayerTypes eWhoTo, TradeData item, bool bTestDenial
 		break;
 
 	case TRADE_DEFENSIVE_PACT:
-		if (!(GET_TEAM(getTeam()).isAVassal()))
+		if (!(GET_TEAM(getTeam()).isAVassal()) && !(GET_TEAM(GET_PLAYER(eWhoTo).getTeam()).isAVassal()))
 		{
 			if (getTeam() != GET_PLAYER(eWhoTo).getTeam() && !GET_TEAM(GET_PLAYER(eWhoTo).getTeam()).isVassal(getTeam()))
 			{
@@ -3600,7 +3632,7 @@ bool CvPlayer::canTradeItem(PlayerTypes eWhoTo, TradeData item, bool bTestDenial
 		break;
 
 	case TRADE_PERMANENT_ALLIANCE:
-		if (!(GET_TEAM(getTeam()).isAVassal()))
+		if (!(GET_TEAM(getTeam()).isAVassal()) && !(GET_TEAM(GET_PLAYER(eWhoTo).getTeam()).isAVassal()))
 		{
 			if (getTeam() != GET_PLAYER(eWhoTo).getTeam() && !GET_TEAM(GET_PLAYER(eWhoTo).getTeam()).isVassal(getTeam()))
 			{
@@ -3965,6 +3997,18 @@ bool CvPlayer::canRaze(CvCity* pCity)
 	if (pCity->calculateTeamCulturePercent(getTeam()) >= GC.getDefineINT("RAZING_CULTURAL_PERCENT_THRESHOLD"))
 	{
 		return false;
+	}
+
+	CyCity* pyCity = new CyCity(pCity);
+	CyArgsList argsList;
+	argsList.add(getID());	// Player ID
+	argsList.add(gDLL->getPythonIFace()->makePythonObject(pyCity));	// pass in city class
+	long lResult=0;
+	gDLL->getPythonIFace()->callFunction(PYGameModule, "canRazeCity", argsList.makeFunctionArgs(), &lResult);
+	delete pyCity;	// python fxn must not hold on to this pointer 
+	if (lResult == 0)
+	{
+		return (false);
 	}
 
 	return true;
@@ -6530,10 +6574,18 @@ int CvPlayer::greatPeopleThreshold(bool bMilitary)
 	}
 
 	iThreshold *= GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getGreatPeoplePercent();
-	iThreshold /= 100;
+	if (bMilitary)
+	{
+		iThreshold /= max(1, GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getTrainPercent());
+	}
+	else
+	{
+		iThreshold /= 100;
+	}
 
 	iThreshold *= GC.getEraInfo(GC.getGameINLINE().getStartEra()).getGreatPeoplePercent();
 	iThreshold /= 100;
+
 
 	return max(1, iThreshold);
 }
@@ -8466,6 +8518,9 @@ void CvPlayer::setAlive(bool bNewValue)
 			killAllDeals();
 
 			setTurnActive(false);
+
+			gDLL->endMPDiplomacy();
+			gDLL->endDiplomacy();
 
 			if (!isHuman())
 			{
@@ -11329,15 +11384,17 @@ void CvPlayer::doResearch()
 			}
 		}
 
-		if (getCurrentResearch() == NO_TECH)
+		TechTypes eCurrentTech = getCurrentResearch();
+		if (eCurrentTech == NO_TECH)
 		{
-			changeOverflowResearch(calculateResearchRate());
+			int iOverflow = (100 * calculateResearchRate()) / max(1, calculateResearchModifier(eCurrentTech));
+			changeOverflowResearch(iOverflow);
 		}
 		else
 		{
-			iOverflowResearch = getOverflowResearch();
+			iOverflowResearch = (getOverflowResearch() * calculateResearchModifier(eCurrentTech)) / 100;
 			setOverflowResearch(0);
-			GET_TEAM(getTeam()).changeResearchProgress(getCurrentResearch(), (calculateResearchRate() + iOverflowResearch), getID());
+			GET_TEAM(getTeam()).changeResearchProgress(eCurrentTech, (calculateResearchRate() + iOverflowResearch), getID());
 		}
 
 		if (bForceResearchChoice)
@@ -11376,14 +11433,17 @@ void CvPlayer::doWarnings()
 					CvUnit *pUnit = pLoopPlot->getVisibleEnemyDefender(getID());
 					if (pUnit != NULL)
 					{
-						pNearestCity = GC.getMapINLINE().findCity(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), getID(), NO_TEAM, !(pLoopPlot->isWater()));
-
-						if (pNearestCity != NULL)
+						if (!pUnit->isAnimal())
 						{
-							swprintf(szBuffer, gDLL->getText("TXT_KEY_MISC_ENEMY_TROOPS_SPOTTED", pNearestCity->getNameKey()).GetCString());
-							gDLL->getInterfaceIFace()->addMessage(getID(), true, GC.getDefineINT("EVENT_MESSAGE_TIME"), szBuffer, "AS2D_ENEMY_TROOPS", MESSAGE_TYPE_INFO, GC.getUnitInfo(pUnit->getUnitType()).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), true, true);
+							pNearestCity = GC.getMapINLINE().findCity(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), getID(), NO_TEAM, !(pLoopPlot->isWater()));
 
-							iMaxCount--;
+							if (pNearestCity != NULL)
+							{
+								swprintf(szBuffer, gDLL->getText("TXT_KEY_MISC_ENEMY_TROOPS_SPOTTED", pNearestCity->getNameKey()).GetCString());
+								gDLL->getInterfaceIFace()->addMessage(getID(), true, GC.getDefineINT("EVENT_MESSAGE_TIME"), szBuffer, "AS2D_ENEMY_TROOPS", MESSAGE_TYPE_INFO, GC.getUnitInfo(pUnit->getUnitType()).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), true, true);
+
+								iMaxCount--;
+							}
 						}
 					}
 				}
@@ -11702,6 +11762,7 @@ void CvPlayer::read(FDataStreamBase* pStream)
 	m_researchQueue.Read(pStream);
 
 	{
+		m_cityNames.clear();
 		CvWString szBuffer;
 		uint iSize;
 		pStream->Read(&iSize);
@@ -11729,6 +11790,7 @@ void CvPlayer::read(FDataStreamBase* pStream)
 	}
 
 	{
+		clearPopups();
 		CvPopupQueue::_Alloc::size_type iSize;
 		pStream->Read(&iSize);
 		for (CvPopupQueue::_Alloc::size_type i = 0; i < iSize; i++)
@@ -11743,6 +11805,7 @@ void CvPlayer::read(FDataStreamBase* pStream)
 	}
 
 	{
+		clearDiplomacy();
 		CvDiploQueue::_Alloc::size_type iSize;
 		pStream->Read(&iSize);
 		for (CvDiploQueue::_Alloc::size_type i = 0; i < iSize; i++)
@@ -11770,6 +11833,7 @@ void CvPlayer::read(FDataStreamBase* pStream)
 	}
 
 	{
+		m_mapEconomyHistory.clear();
 		uint iSize;
 		pStream->Read(&iSize);
 		for (uint i = 0; i < iSize; i++)
@@ -11783,6 +11847,7 @@ void CvPlayer::read(FDataStreamBase* pStream)
 	}
 
 	{
+		m_mapIndustryHistory.clear();
 		uint iSize;
 		pStream->Read(&iSize);
 		for (uint i = 0; i < iSize; i++)
@@ -11796,6 +11861,7 @@ void CvPlayer::read(FDataStreamBase* pStream)
 	}
 
 	{
+		m_mapAgricultureHistory.clear();
 		uint iSize;
 		pStream->Read(&iSize);
 		for (uint i = 0; i < iSize; i++)
@@ -11809,6 +11875,7 @@ void CvPlayer::read(FDataStreamBase* pStream)
 	}
 
 	{
+		m_mapPowerHistory.clear();
 		uint iSize;
 		pStream->Read(&iSize);
 		for (uint i = 0; i < iSize; i++)
@@ -11822,6 +11889,7 @@ void CvPlayer::read(FDataStreamBase* pStream)
 	}
 
 	{
+		m_mapAgricultureHistory.clear();
 		uint iSize;
 		pStream->Read(&iSize);
 		for (uint i = 0; i < iSize; i++)
@@ -12206,7 +12274,9 @@ void CvPlayer::createGreatPeople(UnitTypes eGreatPersonUnit, bool bIncrementThre
 	{
 		if (pCity)
 		{
-			szReplayMessage = gDLL->getText("TXT_KEY_MISC_GP_BORN", pGreatPeopleUnit->getName().GetCString(), pCity->getNameKey());
+			CvWString szCity;
+			szCity.Format(L"%s (%s)", pCity->getName().GetCString(), GET_PLAYER(pCity->getOwnerINLINE()).getName());
+			szReplayMessage = gDLL->getText("TXT_KEY_MISC_GP_BORN", pGreatPeopleUnit->getName().GetCString(), szCity.GetCString());
 		}
 		else
 		{

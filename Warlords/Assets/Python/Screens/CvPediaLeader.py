@@ -153,7 +153,7 @@ class CvPediaLeader:
 		i = 0
 		iSelected = 0
 		for iI in range(gc.getNumLeaderHeadInfos()):
-			if (gc.getLeaderHeadInfo(rowListName[iI][1]).getFavoriteCivic() != -1 and not gc.getLeaderHeadInfo(rowListName[iI][1]).isGraphicalOnly()):
+			if (rowListName[iI][1] != gc.getDefineINT("BARBARIAN_LEADER") and not gc.getLeaderHeadInfo(rowListName[iI][1]).isGraphicalOnly()):
 				if bRedraw:
 					screen.appendListBoxString(self.top.LIST_ID, rowListName[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_LEADER, rowListName[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY)
 				if rowListName[iI][1] == self.iLeader:

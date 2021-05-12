@@ -303,7 +303,7 @@ void CyInfoPythonInterface2()
 		;
 
 	python::class_<CvBonusClassInfo, python::bases<CvInfoBase> >("CvBonusClassInfo")
-		.def_readwrite("getUniqueRange", &CvBonusClassInfo::getUniqueRange)
+		.def("getUniqueRange", &CvBonusClassInfo::getUniqueRange)
 		;
 
 	python::class_<CvBonusInfo, python::bases<CvInfoBase> >("CvBonusInfo")

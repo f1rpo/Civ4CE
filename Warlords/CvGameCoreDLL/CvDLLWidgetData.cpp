@@ -3941,6 +3941,7 @@ void CvDLLWidgetData::doDealKill(CvWidgetDataStruct &widgetDataStruct)
 			if (NULL != pInfo)
 			{
 				pInfo->setData1(pDeal->getID());
+				pInfo->setOption1(false);
 				gDLL->getInterfaceIFace()->addPopup(pInfo, GC.getGameINLINE().getActivePlayer(), true);
 			}
 		}

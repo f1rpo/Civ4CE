@@ -936,7 +936,7 @@ void CvPlayerAI::AI_unitUpdate()
 		}
 	}
 }
-        
+
 
 void CvPlayerAI::AI_makeAssignWorkDirty()
 {
@@ -1215,7 +1215,7 @@ int CvPlayerAI::AI_commerceWeight(CommerceTypes eCommerce, CvCity* pCity)
 	return iWeight;
 }
 
-
+// Improved as per Blake - thanks!
 int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStartingLoc)
 {
 	PROFILE("CvPlayerAI::AI_foundValue()");
@@ -1226,6 +1226,7 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 	CvPlot* pLoopPlot;
 	FeatureTypes eFeature;
 	BonusTypes eBonus;
+	ImprovementTypes eBonusImprovement;
 	bool bHasGoodBonus;
 	int iOwnedTiles;
 	int iBadTile;
@@ -1239,6 +1240,13 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 	int iRange;
 	int iDX, iDY;
 	int iI;
+	bool bIsCoastal;
+	int iResourceValue = 0;
+	int iSpecialFood = 0;
+	int iSpecialFoodPlus = 0;
+	int iSpecialFoodMinus = 0;
+	int iSpecialProduction = 0;
+	int iSpecialCommerce = 0;
 
 	if (!canFound(iX, iY))
 	{
@@ -1247,6 +1255,7 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 
 	pPlot = GC.getMapINLINE().plotINLINE(iX, iY);
 	pArea = pPlot->area();
+	bIsCoastal = pPlot->isCoastalLand(GC.getDefineINT("MIN_WATER_SIZE_FOR_OCEAN"));
 
 	if (iMinRivalRange != -1)
 	{
@@ -1295,16 +1304,13 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 		{
 			iOwnedTiles++;
 		}
-		else
-		{
-			if (pLoopPlot->isOwned())
-			{
-				if (pLoopPlot->getTeam() != getTeam())
-				{
-					iOwnedTiles++;
-				}
-			}
-		}
+		else if (pLoopPlot->isOwned())
+        {
+            if (pLoopPlot->getTeam() != getTeam())
+            {
+                iOwnedTiles++;
+            }
+        }
 	}
 
 	if (iOwnedTiles > (NUM_CITY_PLOTS / 3))
@@ -1320,20 +1326,33 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 
 		pLoopPlot = plotCity(iX, iY, iI);
 
-		if ((pLoopPlot == NULL) || pLoopPlot->isImpassable())
+		if (iI != CITY_HOME_PLOT)
 		{
-			iBadTile += 2;
-		}
-		else if (!(pLoopPlot->isFreshWater()) && !(pLoopPlot->isHills()))
-		{
-			if ((pLoopPlot->calculateBestNatureYield(YIELD_FOOD, getTeam()) == 0) || (pLoopPlot->calculateTotalBestNatureYield(getTeam()) <= 1))
+			if ((pLoopPlot == NULL) || pLoopPlot->isImpassable())
 			{
 				iBadTile += 2;
 			}
-			else if (pLoopPlot->isWater() && (pLoopPlot->calculateBestNatureYield(YIELD_FOOD, getTeam()) <= 1))
+			else if (!(pLoopPlot->isFreshWater()) && !(pLoopPlot->isHills()))
 			{
-				iBadTile++;
+				if ((pLoopPlot->calculateBestNatureYield(YIELD_FOOD, getTeam()) == 0) || (pLoopPlot->calculateTotalBestNatureYield(getTeam()) <= 1))
+				{
+					iBadTile += 2;
+				}
+				else if (pLoopPlot->isWater() && !bIsCoastal && (pLoopPlot->calculateBestNatureYield(YIELD_FOOD, getTeam()) <= 1))
+				{
+					iBadTile++;
+				}
 			}
+            else if (pLoopPlot->isOwned())
+            {
+                if (pLoopPlot->getTeam() == getTeam())
+                {
+                    if (pLoopPlot->isCityRadius())
+                    {
+                        iBadTile++;
+                    }
+                }
+            }
 		}
 	}
 
@@ -1341,7 +1360,7 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 
 	if (!bStartingLoc)
 	{
-		if (iBadTile > (NUM_CITY_PLOTS / 3))
+		if (iBadTile > (NUM_CITY_PLOTS / 2))
 		{
 			bHasGoodBonus = false;
 
@@ -1407,28 +1426,82 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 
 			iTempValue = 0;
 
-			if (pLoopPlot->getYield(YIELD_FOOD) >= GC.getFOOD_CONSUMPTION_PER_POPULATION())
+			eFeature = pLoopPlot->getFeatureType();
+			eBonus = pLoopPlot->getBonusType((bStartingLoc) ? NO_TEAM : getTeam());
+			eBonusImprovement = NO_IMPROVEMENT;
+
+			if (eBonus != NO_BONUS)
 			{
-				iTempValue += (pLoopPlot->getYield(YIELD_FOOD) * 20);
-				iTempValue += (pLoopPlot->getYield(YIELD_PRODUCTION) * 80);
-				iTempValue += (pLoopPlot->getYield(YIELD_COMMERCE) * 40);
+				for (int iImprovement = 0; iImprovement < GC.getNumImprovementInfos(); ++iImprovement)
+				{
+					CvImprovementInfo& kImprovement = GC.getImprovementInfo((ImprovementTypes)iImprovement);
+
+					if (kImprovement.isImprovementBonusMakesValid(eBonus))
+					{
+						eBonusImprovement = (ImprovementTypes)iImprovement;
+						break;
+					}
+				}
+			}
+
+			int aiYield[NUM_YIELD_TYPES];
+
+			for (int iYieldType = 0; iYieldType < NUM_YIELD_TYPES; ++iYieldType)
+			{
+				YieldTypes eYield = (YieldTypes)iYieldType;
+				aiYield[eYield] = pLoopPlot->getYield(eYield);
+
+				if (iI == CITY_HOME_PLOT)
+				{
+					aiYield[eYield] += GC.getYieldInfo(eYield).getCityChange();
+
+					if (eFeature != NO_FEATURE)
+					{
+						aiYield[eYield] -= GC.getFeatureInfo(eFeature).getYieldChange(eYield);
+					}
+
+					aiYield[eYield] = max(aiYield[eYield], GC.getYieldInfo(eYield).getMinCity());
+
+					if (eBonusImprovement != NO_IMPROVEMENT)
+					{
+						aiYield[eYield] -= GC.getImprovementInfo(eBonusImprovement).getImprovementBonusYield(eBonus, eYield);
+					}
+				}
+			}
+
+			if (iI == CITY_HOME_PLOT)
+			{
+				iTempValue += aiYield[YIELD_FOOD] * 60;
+				iTempValue += aiYield[YIELD_PRODUCTION] * 60;
+				iTempValue += aiYield[YIELD_COMMERCE] * 40;
+			}
+			else if (aiYield[YIELD_FOOD] >= GC.getFOOD_CONSUMPTION_PER_POPULATION())
+			{
+				iTempValue += aiYield[YIELD_FOOD] * 40;
+				iTempValue += aiYield[YIELD_PRODUCTION] * 40;
+				iTempValue += aiYield[YIELD_COMMERCE] * 30;
 
 				if (bStartingLoc)
 				{
 					iTempValue *= 2;
 				}
 			}
-			else if (pLoopPlot->getYield(YIELD_FOOD) == (GC.getFOOD_CONSUMPTION_PER_POPULATION() - 1))
+			else if (aiYield[YIELD_FOOD] == GC.getFOOD_CONSUMPTION_PER_POPULATION() - 1)
 			{
-				iTempValue += (pLoopPlot->getYield(YIELD_FOOD) * 10);
-				iTempValue += (pLoopPlot->getYield(YIELD_PRODUCTION) * 40);
-				iTempValue += (pLoopPlot->getYield(YIELD_COMMERCE) * 20);
+				iTempValue += aiYield[YIELD_FOOD] * 25;
+				iTempValue += aiYield[YIELD_PRODUCTION] * 25;
+				iTempValue += aiYield[YIELD_COMMERCE] * 20;
 			}
 			else
 			{
-				iTempValue += (pLoopPlot->getYield(YIELD_FOOD) * 10);
-				iTempValue += (pLoopPlot->getYield(YIELD_PRODUCTION) * 20);
-				iTempValue += (pLoopPlot->getYield(YIELD_COMMERCE) * 10);
+				iTempValue += aiYield[YIELD_FOOD] * 15;
+				iTempValue += aiYield[YIELD_PRODUCTION] * 15;
+				iTempValue += aiYield[YIELD_COMMERCE] * 10;
+			}
+
+			if (bIsCoastal && pLoopPlot->isWater() && aiYield[YIELD_COMMERCE] > 1)
+			{
+				iTempValue += 40;
 			}
 
 			if (pLoopPlot->isRiver())
@@ -1448,14 +1521,15 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 
 			iValue += iTempValue;
 
-			eFeature = pLoopPlot->getFeatureType();
-
 			if (eFeature != NO_FEATURE)
 			{
-				iHealth += GC.getFeatureInfo(eFeature).getHealthPercent();
-			}
+				if (iI != CITY_HOME_PLOT)
+				{
+					iHealth += GC.getFeatureInfo(eFeature).getHealthPercent();
 
-			eBonus = pLoopPlot->getBonusType((bStartingLoc) ? NO_TEAM : getTeam());
+					iSpecialFoodPlus += max(0, aiYield[YIELD_FOOD] - GC.getFOOD_CONSUMPTION_PER_POPULATION());
+				}
+			}
 
 			if (eBonus != NO_BONUS)
 			{
@@ -1463,11 +1537,46 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 
 				iValue += (AI_bonusVal(eBonus) * (((getNumTradeableBonuses(eBonus) == 0) && !bStartingLoc) ? 80 : 20));
 				iValue += 10;
+				if (pLoopPlot->isWater())
+				{
+					iValue += (bIsCoastal ? 150 : -150);
+				}
+
+				if (iI != CITY_HOME_PLOT)
+				{
+					if (eBonusImprovement != NO_IMPROVEMENT)
+					{
+						int iSpecialFoodTemp;
+						iSpecialFoodTemp = pLoopPlot->calculateBestNatureYield(YIELD_FOOD, getTeam()) + GC.getImprovementInfo(eBonusImprovement).getImprovementBonusYield(eBonus, YIELD_FOOD);
+
+						iSpecialFood += iSpecialFoodTemp;
+
+						iSpecialFoodTemp -= GC.getFOOD_CONSUMPTION_PER_POPULATION();
+
+						iSpecialFoodPlus += max(0,iSpecialFoodTemp);
+						iSpecialFoodMinus -= min(0,iSpecialFoodTemp);
+						iSpecialProduction += pLoopPlot->calculateBestNatureYield(YIELD_PRODUCTION, getTeam()) + GC.getImprovementInfo(eBonusImprovement).getImprovementBonusYield(eBonus, YIELD_PRODUCTION);
+						iSpecialCommerce += pLoopPlot->calculateBestNatureYield(YIELD_COMMERCE, getTeam()) + GC.getImprovementInfo(eBonusImprovement).getImprovementBonusYield(eBonus, YIELD_COMMERCE);
+					}
+
+					if (eFeature != NO_FEATURE)
+					{
+						if (GC.getFeatureInfo(eFeature).getYieldChange(YIELD_FOOD) < 0)
+						{
+							iResourceValue -= 30;
+						}
+					}
+				}
 			}
 		}
 	}
 
-	if (iTakenTiles > (NUM_CITY_PLOTS / 3))
+	iResourceValue += iSpecialFood * 50;
+	iResourceValue += iSpecialProduction * 50;
+	iResourceValue += iSpecialCommerce * 50;
+	iValue += max(0, iResourceValue);
+
+	if (iTakenTiles > (NUM_CITY_PLOTS / 3) && iResourceValue < 250)
 	{
 		return 0;
 	}
@@ -1477,11 +1586,11 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 		return 0;
 	}
 
-	iValue += (iHealth / 10);
+	iValue += (iHealth / 5);
 
-	if (pPlot->isCoastalLand())
+	if (bIsCoastal)
 	{
-		iValue += 600;
+		iValue += 300;
 
 		if (!bStartingLoc)
 		{
@@ -1501,13 +1610,13 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 
 	if (pPlot->isRiver())
 	{
-		iValue += 60;
+		iValue += 40;
 	}
 
 	if (pPlot->isFreshWater())
 	{
 		iValue += 40;
-		iValue += (GC.getDefineINT("FRESH_WATER_HEALTH_CHANGE") * 20);
+		iValue += (GC.getDefineINT("FRESH_WATER_HEALTH_CHANGE") * 30);
 	}
 
 	if (bStartingLoc)
@@ -1589,12 +1698,10 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 		}
 	}
 
-	iValue /= (max(0, (iBadTile - (NUM_CITY_PLOTS / 4))) + 3);
+	iValue *= 100 + 20 * max(0, min(iSpecialFoodPlus, 4 * GC.getFOOD_CONSUMPTION_PER_POPULATION()));
+	iValue /= 100 + 10 * max(0, iSpecialFoodMinus);
 
-	if (pPlot->getBonusType() != NO_BONUS)
-	{
-		iValue /= 4;
-	}
+	iValue /= (max(0, (iBadTile - (NUM_CITY_PLOTS / 4))) + 3);
 
 	if (bStartingLoc)
 	{
@@ -1604,7 +1711,7 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 		{
 			pLoopPlot = plotCity(iX, iY, iI);
 
-			if ((pLoopPlot == NULL) || (pLoopPlot->area() != pArea))
+			if ((pLoopPlot == NULL) || !(pLoopPlot->isWater() || pLoopPlot->area() == pArea))
 			{
 				iDifferentAreaTile++;
 			}
@@ -1794,7 +1901,7 @@ CvCity* CvPlayerAI::AI_findTargetCity(CvArea* pArea)
 
 bool CvPlayerAI::AI_isCommercePlot(CvPlot* pPlot)
 {
-	return ((pPlot->getX_INLINE() % 2) == (pPlot->getY_INLINE() % 2));
+	return (pPlot->getYield(YIELD_FOOD) >= GC.getFOOD_CONSUMPTION_PER_POPULATION());
 }
 
 
@@ -2026,13 +2133,13 @@ TechTypes CvPlayerAI::AI_bestTech(int iMaxPathLength, bool bIgnoreCost, bool bAs
 									}
 								}
 
-								if (GC.getTechInfo((TechTypes)iI).isTechTrading())
+								if (GC.getTechInfo((TechTypes)iI).isTechTrading() && !GC.getGameINLINE().isOption(GAMEOPTION_NO_TECH_TRADING))
 								{
-									iValue += 300;
+									iValue += 500;
 
 									if (iHasMetCount > 0)
 									{
-										iValue += 700;
+										iValue += 1000;
 									}
 								}
 
@@ -2165,7 +2272,11 @@ TechTypes CvPlayerAI::AI_bestTech(int iMaxPathLength, bool bIgnoreCost, bool bAs
 									{
 										iBuildValue += 200;
 
-										eImprovement = ((ImprovementTypes)(GC.getBuildInfo((BuildTypes)iJ).getImprovement()));
+										eImprovement = (ImprovementTypes)(GC.getBuildInfo((BuildTypes)iJ).getImprovement());
+										if (eImprovement != NO_IMPROVEMENT)
+										{
+											eImprovement = finalImprovementUpgrade(eImprovement);
+										}
 
 										if (eImprovement != NO_IMPROVEMENT)
 										{
@@ -2179,12 +2290,12 @@ TechTypes CvPlayerAI::AI_bestTech(int iMaxPathLength, bool bIgnoreCost, bool bAs
 
 											for (iK = 0; iK < GC.getNumTerrainInfos(); iK++)
 											{
-												iBuildValue += ((GC.getImprovementInfo(eImprovement).getTerrainMakesValid((TerrainTypes)iK)) ? 50 : 0);
+												iBuildValue += (GC.getImprovementInfo(eImprovement).getTerrainMakesValid(iK) ? 50 : 0);
 											}
 
 											for (iK = 0; iK < GC.getNumFeatureInfos(); iK++)
 											{
-												iBuildValue += ((GC.getImprovementInfo(eImprovement).getTerrainMakesValid((FeatureTypes)iK)) ? 50 : 0);
+												iBuildValue += (GC.getImprovementInfo(eImprovement).getFeatureMakesValid(iK) ? 50 : 0);
 											}
 
 											for (iK = 0; iK < NUM_YIELD_TYPES; iK++)
@@ -2544,6 +2655,12 @@ TechTypes CvPlayerAI::AI_bestTech(int iMaxPathLength, bool bIgnoreCost, bool bAs
 												iValue += ((bCapitalAlone) ? 400 : 100);
 											}
 
+											//the granary effect is SO powerful it deserves special code
+											if (GC.getBuildingInfo(eLoopBuilding).getFoodKept() > 0)
+											{
+												iValue += (10 * GC.getBuildingInfo(eLoopBuilding).getFoodKept());
+											}
+
 											if (GC.getBuildingInfo(eLoopBuilding).getPrereqAndTech() == iI)
 											{
 												if (iPathLength <= 1)
@@ -2620,9 +2737,12 @@ TechTypes CvPlayerAI::AI_bestTech(int iMaxPathLength, bool bIgnoreCost, bool bAs
 									{
 										iValue += 200;
 
-										if (AI_civicValue((CivicTypes)iJ) > ((AI_civicValue(getCivics((CivicOptionTypes)(GC.getCivicInfo((CivicTypes)iJ).getCivicOptionType()))) * 4) / 3))
+										int iCurrentCivicValue = AI_civicValue(getCivics((CivicOptionTypes)(GC.getCivicInfo((CivicTypes)iJ).getCivicOptionType())));
+										int iNewCivicValue = AI_civicValue((CivicTypes)iJ);
+
+										if (iNewCivicValue > iCurrentCivicValue)
 										{
-											iValue += 800;
+											iValue += min(1200, (2400 * (iNewCivicValue - iCurrentCivicValue)) / max(1, iCurrentCivicValue));
 										}
 									}
 								}
@@ -2637,19 +2757,15 @@ TechTypes CvPlayerAI::AI_bestTech(int iMaxPathLength, bool bIgnoreCost, bool bAs
 											{
 												if (!(GC.getGameINLINE().isReligionFounded((ReligionTypes)iJ)))
 												{
-													iValue += ((bAsync) ? GC.getASyncRand().get(2400, "AI Research Religion ASYNC") : GC.getGameINLINE().getSorenRandNum(2400, "AI Research Religion"));
-
-													if (countHolyCities() == 0)
-													{
-														iValue += 600;
-													}
+													int iReligionValue = ((bAsync) ? GC.getASyncRand().get(2400, "AI Research Religion ASYNC") : GC.getGameINLINE().getSorenRandNum(2400, "AI Research Religion"));
+													iReligionValue /= (1 + countHolyCities());
 
 													if (countTotalHasReligion() == 0)
 													{
-														iValue += 300;
+														iReligionValue += 500;
 													}
 
-													iValue += 100;
+													iValue += (100 + iReligionValue);
 												}
 											}
 										}
@@ -2834,7 +2950,9 @@ bool CvPlayerAI::AI_isWillingToTalk(PlayerTypes ePlayer)
 	FAssertMsg(getPersonalityType() != NO_LEADER, "getPersonalityType() is not expected to be equal with NO_LEADER");
 	FAssertMsg(ePlayer != getID(), "shouldn't call this function on ourselves");
 
-	if (GET_PLAYER(ePlayer).getTeam() == getTeam())
+	if (GET_PLAYER(ePlayer).getTeam() == getTeam()
+		|| GET_TEAM(GET_PLAYER(ePlayer).getTeam()).isVassal(getTeam())
+		|| GET_TEAM(getTeam()).isVassal(GET_PLAYER(ePlayer).getTeam()))
 	{
 		return true;
 	}
@@ -2905,7 +3023,7 @@ bool CvPlayerAI::AI_demandRebukedWar(PlayerTypes ePlayer)
 	{
 		if (GET_TEAM(getTeam()).getPower(true) > GET_TEAM(GET_PLAYER(ePlayer).getTeam()).getDefensivePower())
 		{
-			if (GET_TEAM(getTeam()).AI_isLandTarget(GET_PLAYER(ePlayer).getTeam()))
+			if (GET_TEAM(getTeam()).AI_isAllyLandTarget(GET_PLAYER(ePlayer).getTeam()))
 			{
 				return true;
 			}
@@ -3097,7 +3215,7 @@ int CvPlayerAI::AI_getCloseBordersAttitude(PlayerTypes ePlayer)
 {
 	int iPercent;
 
-	if (getTeam() == GET_PLAYER(ePlayer).getTeam())
+	if (getTeam() == GET_PLAYER(ePlayer).getTeam() || GET_TEAM(getTeam()).isVassal(GET_PLAYER(ePlayer).getTeam()) || GET_TEAM(GET_PLAYER(ePlayer).getTeam()).isVassal(getTeam()))
 	{
 		return 0;
 	}
@@ -3241,6 +3359,11 @@ int CvPlayerAI::AI_getDefensivePactAttitude(PlayerTypes ePlayer)
 {
 	int iAttitudeChange;
 
+	if (getTeam() != GET_PLAYER(ePlayer).getTeam() && (GET_TEAM(getTeam()).isVassal(GET_PLAYER(ePlayer).getTeam()) || GET_TEAM(GET_PLAYER(ePlayer).getTeam()).isVassal(getTeam())))
+	{
+		return GC.getLeaderHeadInfo(getPersonalityType()).getDefensivePactAttitudeChangeLimit();
+	}
+
 	if (!atWar(getTeam(), GET_PLAYER(ePlayer).getTeam()))
 	{
 		if (GC.getLeaderHeadInfo(getPersonalityType()).getDefensivePactAttitudeDivisor() != 0)
@@ -3256,9 +3379,12 @@ int CvPlayerAI::AI_getDefensivePactAttitude(PlayerTypes ePlayer)
 
 int CvPlayerAI::AI_getRivalDefensivePactAttitude(PlayerTypes ePlayer)
 {
-	int iAttitude;
+	int iAttitude = 0;
 
-	iAttitude = 0;
+	if (getTeam() == GET_PLAYER(ePlayer).getTeam() || GET_TEAM(getTeam()).isVassal(GET_PLAYER(ePlayer).getTeam()) || GET_TEAM(GET_PLAYER(ePlayer).getTeam()).isVassal(getTeam()))
+	{
+		return iAttitude;
+	}
 
 	if (!(GET_TEAM(getTeam()).isDefensivePact(GET_PLAYER(ePlayer).getTeam())))
 	{
@@ -3271,13 +3397,16 @@ int CvPlayerAI::AI_getRivalDefensivePactAttitude(PlayerTypes ePlayer)
 
 int CvPlayerAI::AI_getRivalVassalAttitude(PlayerTypes ePlayer)
 {
-	int iAttitude;
+	int iAttitude = 0;
 
-	iAttitude = 0;
-
-	if (!(GET_TEAM(getTeam()).isVassal(GET_PLAYER(ePlayer).getTeam())))
+	if (getTeam() == GET_PLAYER(ePlayer).getTeam() || GET_TEAM(getTeam()).isVassal(GET_PLAYER(ePlayer).getTeam()) || GET_TEAM(GET_PLAYER(ePlayer).getTeam()).isVassal(getTeam()))
 	{
-		iAttitude -= GET_TEAM(GET_PLAYER(ePlayer).getTeam()).getVassalCount(GET_PLAYER(ePlayer).getTeam());
+		return iAttitude;
+	}
+
+	if (GET_TEAM(GET_PLAYER(ePlayer).getTeam()).getVassalCount(getTeam()) > 0)
+	{
+		iAttitude -= (6 * GET_TEAM(GET_PLAYER(ePlayer).getTeam()).getPower(true)) / max(1, GC.getGameINLINE().countTotalCivPower());
 	}
 
 	return iAttitude;
@@ -3654,7 +3783,7 @@ bool CvPlayerAI::AI_considerOffer(PlayerTypes ePlayer, const CLinkList<TradeData
 	int iOurValue = GET_PLAYER(ePlayer).AI_dealVal(getID(), pOurList);
 	int iTheirValue = AI_dealVal(ePlayer, pTheirList);
 
-	if (iOurValue > 0 && iTheirValue == 0)
+	if (iOurValue > 0 && 0 == pTheirList->getLength() && 0 == iTheirValue)
 	{
 		if (GET_TEAM(getTeam()).isVassal(GET_PLAYER(ePlayer).getTeam()) && CvDeal::isVassalTributeDeal(pOurList) && !isTributePaid(ePlayer))
 		{
@@ -4237,7 +4366,7 @@ int CvPlayerAI::AI_maxGoldTrade(PlayerTypes ePlayer)
 
 	FAssert(ePlayer != getID());
 
-	if (isHuman() || (GET_PLAYER(ePlayer).getTeam() == getTeam()) || GET_TEAM(getTeam()).isVassal(GET_PLAYER(ePlayer).getTeam()))
+	if (isHuman() || (GET_PLAYER(ePlayer).getTeam() == getTeam()))
 	{
 		iMaxGold = getGold();
 	}
@@ -4267,7 +4396,7 @@ int CvPlayerAI::AI_maxGoldPerTurnTrade(PlayerTypes ePlayer)
 
 	FAssert(ePlayer != getID());
 
-	if (isHuman() || (GET_PLAYER(ePlayer).getTeam() == getTeam()) || GET_TEAM(getTeam()).isVassal(GET_PLAYER(ePlayer).getTeam()))
+	if (isHuman() || (GET_PLAYER(ePlayer).getTeam() == getTeam()))
 	{
 		iMaxGoldPerTurn = (calculateGoldRate() + (getGold() / GC.getDefineINT("PEACE_TREATY_LENGTH")));
 	}
@@ -5764,8 +5893,8 @@ int CvPlayerAI::AI_neededWorkers(CvArea* pArea)
 
 	if (iCount > 0)
 	{
-		iCount /= 8;
-		iCount = max(iCount, ((pArea->getCitiesPerPlayer(getID()) / 2) + 1));
+		iCount /= 4;
+		iCount = min(iCount, 3 * pArea->getCitiesPerPlayer(getID()));
 	}
 
 	return iCount;
@@ -5986,8 +6115,16 @@ CivicTypes CvPlayerAI::AI_bestCivic(CivicOptionTypes eCivicOption)
 
 				if (isCivic((CivicTypes)iI))
 				{
-					iValue *= 6;
-					iValue /= 5;
+					if (getMaxAnarchyTurns() > 0)
+					{
+						iValue *= 6;
+						iValue /= 5;
+					}
+					else
+					{
+						iValue *= 16;
+						iValue /= 15;
+					}
 				}
 
 				if (iValue > iBestValue)
@@ -6011,6 +6148,7 @@ int CvPlayerAI::AI_civicValue(CivicTypes eCivic)
 	int iConnectedForeignCities;
 	int iTotalReligonCount;
 	int iHighestReligionCount;
+	int iWarmongerPercent;
 	int iHappiness;
 	int iValue;
 	int iTempValue;
@@ -6024,6 +6162,7 @@ int CvPlayerAI::AI_civicValue(CivicTypes eCivic)
 	iConnectedForeignCities = countPotentialForeignTradeCitiesConnected();
 	iTotalReligonCount = countTotalHasReligion();
 	iHighestReligionCount = findHighestHasReligionCount();
+	iWarmongerPercent = 25000 / max(100, (100 + GC.getLeaderHeadInfo(getPersonalityType()).getMaxWarRand())); 
 
 	iValue = (getNumCities() * 6);
 
@@ -6040,30 +6179,31 @@ int CvPlayerAI::AI_civicValue(CivicTypes eCivic)
 	iValue += ((GC.getCivicInfo(eCivic).getDomesticGreatGeneralRateModifier() * getNumMilitaryUnits()) / 100);
 	iValue += -((GC.getCivicInfo(eCivic).getDistanceMaintenanceModifier() * max(0, (getNumCities() - 3))) / 8);
 	iValue += -((GC.getCivicInfo(eCivic).getNumCitiesMaintenanceModifier() * max(0, (getNumCities() - 3))) / 8);
-	iValue += ((GC.getCivicInfo(eCivic).getExtraHealth() * getTotalPopulation()) / 16);
-	iValue += (GC.getCivicInfo(eCivic).getFreeExperience() * getNumCities() * ((bWarPlan) ? 6 : 2));
-	iValue += ((GC.getCivicInfo(eCivic).getWorkerSpeedModifier() * AI_getNumAIUnits(UNITAI_WORKER)) / 4);
+	iValue += ((GC.getCivicInfo(eCivic).getExtraHealth() * getTotalPopulation()) / 8);
+	iValue += (GC.getCivicInfo(eCivic).getFreeExperience() * getNumCities() * (bWarPlan ? 8 : 5) * iWarmongerPercent) / 100; 
+	iValue += ((GC.getCivicInfo(eCivic).getWorkerSpeedModifier() * AI_getNumAIUnits(UNITAI_WORKER)) / 18);
 	iValue += ((GC.getCivicInfo(eCivic).getImprovementUpgradeRateModifier() * getNumCities()) / 50);
-	iValue += ((GC.getCivicInfo(eCivic).getMilitaryProductionModifier() * getNumCities()) / ((bWarPlan) ? 5 : 20));
+	iValue += (GC.getCivicInfo(eCivic).getMilitaryProductionModifier() * getNumCities() * iWarmongerPercent) / (bWarPlan ? 300 : 500 ); 
 	iValue += (GC.getCivicInfo(eCivic).getBaseFreeUnits() / 2);
 	iValue += (GC.getCivicInfo(eCivic).getBaseFreeMilitaryUnits() / 3);
 	iValue += ((GC.getCivicInfo(eCivic).getFreeUnitsPopulationPercent() * getTotalPopulation()) / 200);
 	iValue += ((GC.getCivicInfo(eCivic).getFreeMilitaryUnitsPopulationPercent() * getTotalPopulation()) / 300);
 	iValue += -(GC.getCivicInfo(eCivic).getGoldPerUnit() * getNumUnits());
-	iValue += -(GC.getCivicInfo(eCivic).getGoldPerMilitaryUnit() * getNumMilitaryUnits());
-	iValue += ((GC.getCivicInfo(eCivic).getHappyPerMilitaryUnit() * getTotalPopulation()) / 5);
+	iValue += -(GC.getCivicInfo(eCivic).getGoldPerMilitaryUnit() * getNumMilitaryUnits() * iWarmongerPercent) / 200;
+
+	iValue += ((GC.getCivicInfo(eCivic).getHappyPerMilitaryUnit() * getNumCities()) * 8);
 	//iValue += ((GC.getCivicInfo(eCivic).isMilitaryFoodProduction()) ? 0 : 0);
-	iValue += (getWorldSizeMaxConscript(eCivic) * ((bWarPlan) ? 8 : 2));
+	iValue += (getWorldSizeMaxConscript(eCivic) * ((bWarPlan) ? (20 + getNumCities()) : ((8 + getNumCities()) / 2)));
 	iValue += ((GC.getCivicInfo(eCivic).isNoUnhealthyPopulation()) ? (getTotalPopulation() / 3) : 0);
 	if (bWarPlan)
 	{
 		iValue += ((GC.getCivicInfo(eCivic).getExpInBorderModifier() * getNumMilitaryUnits()) / 200);
 	}
 	iValue += ((GC.getCivicInfo(eCivic).isBuildingOnlyHealthy()) ? (getNumCities() * 3) : 0);
-	iValue += (GC.getCivicInfo(eCivic).getLargestCityHappiness() * min(getNumCities(), GC.getWorldInfo(GC.getMapINLINE().getWorldSize()).getTargetNumCities()) * 6);
-	iValue += -((GC.getCivicInfo(eCivic).getWarWearinessModifier() * getNumCities()) / ((bWarPlan) ? 20 : 100));
+	iValue += (GC.getCivicInfo(eCivic).getLargestCityHappiness() * min(getNumCities(), GC.getWorldInfo(GC.getMapINLINE().getWorldSize()).getTargetNumCities()) * 4);
+	iValue += -((GC.getCivicInfo(eCivic).getWarWearinessModifier() * getNumCities()) / ((bWarPlan) ? 10 : 50));
 	iValue += (GC.getCivicInfo(eCivic).getFreeSpecialist() * getNumCities() * 12);
-	iValue += (GC.getCivicInfo(eCivic).getTradeRoutes() * max(getNumCities(), iConnectedForeignCities) * 6);
+	iValue += ((GC.getCivicInfo(eCivic).getTradeRoutes() * max(0, iConnectedForeignCities - getNumCities() * 3) * 6) + (getNumCities() * 2)); 
 	iValue += -((GC.getCivicInfo(eCivic).isNoForeignTrade()) ? (iConnectedForeignCities * 3) : 0);
 	iValue += ((GC.getCivicInfo(eCivic).getCivicPercentAnger() * (GC.getGameINLINE().getNumCities() - getNumCities())) / 10);
 	iValue += (GC.getCivicInfo(eCivic).getNonStateReligionHappiness() * (iTotalReligonCount - iHighestReligionCount) * 5);
@@ -6076,7 +6216,8 @@ int CvPlayerAI::AI_civicValue(CivicTypes eCivic)
 
 			iValue += ((GC.getCivicInfo(eCivic).isNoNonStateReligionSpread()) ? ((getNumCities() - iHighestReligionCount) * 2) : 0);
 			iValue += (GC.getCivicInfo(eCivic).getStateReligionHappiness() * iHighestReligionCount * 4);
-			iValue += ((GC.getCivicInfo(eCivic).getStateReligionGreatPeopleRateModifier() * iHighestReligionCount) / 8);
+			iValue += ((GC.getCivicInfo(eCivic).getStateReligionGreatPeopleRateModifier() * iHighestReligionCount) / 20);
+			iValue += (GC.getCivicInfo(eCivic).getStateReligionGreatPeopleRateModifier() / 4);
 			iValue += ((GC.getCivicInfo(eCivic).getStateReligionUnitProductionModifier() * iHighestReligionCount) / 4);
 			iValue += ((GC.getCivicInfo(eCivic).getStateReligionBuildingProductionModifier() * iHighestReligionCount) / 3);
 			iValue += (GC.getCivicInfo(eCivic).getStateReligionFreeExperience() * iHighestReligionCount * ((bWarPlan) ? 6 : 2));
@@ -6089,15 +6230,30 @@ int CvPlayerAI::AI_civicValue(CivicTypes eCivic)
 
 		iTempValue += ((GC.getCivicInfo(eCivic).getYieldModifier(iI) * getNumCities()) / 2);
 		iTempValue += ((GC.getCivicInfo(eCivic).getCapitalYieldModifier(iI) * 3) / 4);
+		CvCity* pCapital = getCapitalCity(); 
+		if (pCapital) 
+		{
+			iTempValue += ((GC.getCivicInfo(eCivic).getCapitalYieldModifier(iI) * pCapital->getBaseYieldRate((YieldTypes)iI)) / 80); 
+		}
 		iTempValue += ((GC.getCivicInfo(eCivic).getTradeYieldModifier(iI) * getNumCities()) / 6);
 
 		for (iJ = 0; iJ < GC.getNumImprovementInfos(); iJ++)
 		{
-			iTempValue += (GC.getCivicInfo(eCivic).getImprovementYieldChanges(iJ, iI) * getImprovementCount((ImprovementTypes)iJ) * 3);
+			iTempValue += (GC.getCivicInfo(eCivic).getImprovementYieldChanges(iJ, iI) * getImprovementCount((ImprovementTypes)iJ) * 1);
 		}
 
-		iTempValue *= AI_yieldWeight((YieldTypes)iI);
-		iTempValue /= 100;
+		if (iI == YIELD_FOOD) 
+		{ 
+			iTempValue *= 3; 
+		} 
+		else if (iI == YIELD_PRODUCTION) 
+		{ 
+			iTempValue *= ((AI_avoidScience()) ? 6 : 2); 
+		} 
+		else if (iI == YIELD_COMMERCE) 
+		{ 
+			iTempValue *= 2; 
+		} 
 
 		iValue += iTempValue;
 	}
@@ -6108,7 +6264,7 @@ int CvPlayerAI::AI_civicValue(CivicTypes eCivic)
 
 		iTempValue += ((GC.getCivicInfo(eCivic).getCommerceModifier(iI) * getNumCities()) / 3);
 		iTempValue += (GC.getCivicInfo(eCivic).getCapitalCommerceModifier(iI) / 2);
-		iTempValue += ((GC.getCivicInfo(eCivic).getSpecialistExtraCommerce(iI) * getTotalPopulation()) / 6);
+		iTempValue += ((GC.getCivicInfo(eCivic).getSpecialistExtraCommerce(iI) * getTotalPopulation()) / 15);
 
 		iTempValue *= AI_commerceWeight((CommerceTypes)iI);
 		iTempValue /= 100;
@@ -6120,7 +6276,7 @@ int CvPlayerAI::AI_civicValue(CivicTypes eCivic)
 	{
 		if (GC.getCivicInfo(eCivic).getBuildingHappinessChanges(iI) != 0)
 		{
-			iValue += (GC.getCivicInfo(eCivic).getBuildingHappinessChanges(iI) * countNumBuildings((BuildingTypes)iI) * 4);
+			iValue += (GC.getCivicInfo(eCivic).getBuildingHappinessChanges(iI) * countNumBuildings((BuildingTypes)iI) * 3);
 		}
 	}
 
@@ -6130,7 +6286,7 @@ int CvPlayerAI::AI_civicValue(CivicTypes eCivic)
 
 		if (iHappiness != 0)
 		{
-			iValue += (iHappiness * countCityFeatures((FeatureTypes)iI) * 3);
+			iValue += (iHappiness * countCityFeatures((FeatureTypes)iI) * 5);
 		}
 	}
 
@@ -6144,8 +6300,7 @@ int CvPlayerAI::AI_civicValue(CivicTypes eCivic)
 			{
 				iTempValue += ((((AI_avoidScience()) ? 50 : 25) * getNumCities()) / GC.getHurryInfo((HurryTypes)iI).getGoldPerProduction());
 			}
-			iTempValue += ((GC.getHurryInfo((HurryTypes)iI).getProductionPerPopulation() * getNumCities()) / 5);
-
+			iTempValue += (GC.getHurryInfo((HurryTypes)iI).getProductionPerPopulation() * getNumCities() * (bWarPlan ? 2 : 1)) / 5;
 			iValue += iTempValue;
 		}
 	}
@@ -6158,17 +6313,24 @@ int CvPlayerAI::AI_civicValue(CivicTypes eCivic)
 		}
 	}
 
-	for (iI = 0; iI < GC.getNumSpecialistInfos(); iI++)
-	{
-		if (GC.getCivicInfo(eCivic).isSpecialistValid(iI))
-		{
-			iValue += ((getNumCities() / 3) + 1); // XXX
-		}
-	}
+	for (iI = 0; iI < GC.getNumSpecialistInfos(); iI++) 
+	{ 
+		iTempValue = 0; 
+		if (GC.getCivicInfo(eCivic).isSpecialistValid(iI)) 
+		{ 
+			iTempValue += ((getNumCities()) + 6); // XXX 
+		} 
+		iValue += (iTempValue / 2); 
+	} 
 
 	if (GC.getLeaderHeadInfo(getPersonalityType()).getFavoriteCivic() == eCivic)
 	{
-		iValue += (getNumCities() * 25);
+		if (!GC.getCivicInfo(eCivic).isStateReligion() || iHighestReligionCount > 0)
+		{
+			iValue *= 5; 
+			iValue /= 4; 
+			iValue += 20; 
+		}
 	}
 
 	return iValue;
@@ -8390,6 +8552,7 @@ void CvPlayerAI::AI_doDiplo()
 		}
 	}
 }
+
 
 //
 // read object from a stream

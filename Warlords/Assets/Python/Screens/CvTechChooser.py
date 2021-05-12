@@ -48,8 +48,6 @@ class CvTechChooser:
 		if ( CyGame().isPitbossHost() ):
 			return
 
-		self.iCivSelected = gc.getGame().getActivePlayer()
-
 		# Create a new screen, called TechChooser, using the file CvTechChooser.py for input
 		screen = CyGInterfaceScreen( "TechChooser", CvScreenEnums.TECH_CHOOSER )
 		screen.showScreen(PopupStates.POPUPSTATE_IMMEDIATE, False)
@@ -68,7 +66,7 @@ class CvTechChooser:
 			return
 		
 		self.nWidgetCount = 0
-		self.iCivSelected = 0
+		self.iCivSelected = gc.getGame().getActivePlayer()
 		self.aiCurrentState = []
 		screen.setPersistent( True )
 		

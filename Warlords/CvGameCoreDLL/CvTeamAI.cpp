@@ -615,6 +615,24 @@ bool CvTeamAI::AI_isLandTarget(TeamTypes eTeam) const
 }
 
 
+bool CvTeamAI::AI_isAllyLandTarget(TeamTypes eTeam) const
+{
+	for (int iTeam = 0; iTeam < MAX_CIV_TEAMS; iTeam++)
+	{
+		CvTeam& kLoopTeam = GET_TEAM((TeamTypes)iTeam);
+		if (iTeam == eTeam || kLoopTeam.isVassal(eTeam) || GET_TEAM(eTeam).isVassal((TeamTypes)iTeam) || kLoopTeam.isDefensivePact(eTeam))
+		{
+			if (AI_isLandTarget((TeamTypes)iTeam))
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+
 bool CvTeamAI::AI_shareWar(TeamTypes eTeam) const
 {
 	int iI;
@@ -656,9 +674,10 @@ AttitudeTypes CvTeamAI::AI_getAttitude(TeamTypes eTeam, bool bForced) const
 			{
 				for (iJ = 0; iJ < MAX_PLAYERS; iJ++)
 				{
-					if (GET_PLAYER((PlayerTypes)iJ).isAlive())
+					if (GET_PLAYER((PlayerTypes)iJ).isAlive() && iI != iJ)
 					{
-						if (GET_PLAYER((PlayerTypes)iJ).getTeam() == eTeam)
+						TeamTypes eTeamLoop = GET_PLAYER((PlayerTypes)iJ).getTeam();
+						if (eTeamLoop == eTeam || GET_TEAM(eTeamLoop).isVassal(eTeam) || GET_TEAM(eTeam).isVassal(eTeamLoop))
 						{
 							iAttitude += GET_PLAYER((PlayerTypes)iI).AI_getAttitude((PlayerTypes)iJ, bForced);
 							iCount++;
@@ -1222,7 +1241,7 @@ DenialTypes CvTeamAI::AI_vassalTrade(TeamTypes eTeam) const
 {
 	FAssertMsg(eTeam != getID(), "shouldn't call this function on ourselves");
 
-	CvTeam& kMasterTeam = GET_TEAM(eTeam);
+	CvTeamAI& kMasterTeam = GET_TEAM(eTeam);
 
 	for (int iLoopTeam = 0; iLoopTeam < MAX_TEAMS; iLoopTeam++)
 	{
@@ -1234,6 +1253,15 @@ DenialTypes CvTeamAI::AI_vassalTrade(TeamTypes eTeam) const
 				if (kMasterTeam.isForcePeace((TeamTypes)iLoopTeam) || !kMasterTeam.canChangeWarPeace((TeamTypes)iLoopTeam))
 				{
 					if (!kLoopTeam.isAVassal())
+					{
+						return DENIAL_WAR_NOT_POSSIBLE_YOU;
+					}
+				}
+
+				if (!kMasterTeam.isHuman())
+				{
+					DenialTypes eWarDenial = kMasterTeam.AI_declareWarTrade((TeamTypes)iLoopTeam, getID(), true);
+					if (NO_DENIAL != eWarDenial)
 					{
 						return DENIAL_WAR_NOT_POSSIBLE_YOU;
 					}
@@ -1320,7 +1348,7 @@ DenialTypes CvTeamAI::AI_surrenderTrade(TeamTypes eTeam, int iPowerMultiplier) c
 	}
 	else
 	{
-		if (!AI_isLandTarget(eTeam))
+		if (!GET_TEAM(eTeam).AI_isLandTarget(getID()))
 		{
 			iMasterPower /= 2;
 		}
@@ -1441,7 +1469,7 @@ DenialTypes CvTeamAI::AI_surrenderTrade(TeamTypes eTeam, int iPowerMultiplier) c
 			return DENIAL_WORST_ENEMY;
 		}
 
-		if (!AI_hasCitiesInPrimaryArea(eTeam))
+		if (!AI_hasCitiesInPrimaryArea(eTeam) && AI_calculateAdjacentLandPlots(eTeam) == 0)
 		{
 			return DENIAL_TOO_FAR;
 		}
@@ -1551,7 +1579,12 @@ DenialTypes CvTeamAI::AI_makePeaceTrade(TeamTypes ePeaceTeam, TeamTypes eTeam) c
 
 	if (GET_TEAM(ePeaceTeam).isHuman())
 	{
-		return DENIAL_UNKNOWN;
+		return DENIAL_CONTACT_THEM;
+	}
+
+	if (GET_TEAM(ePeaceTeam).isAVassal())
+	{
+		return DENIAL_VASSAL;
 	}
 
 	if (isHuman())
@@ -1622,7 +1655,7 @@ int CvTeamAI::AI_declareWarTradeVal(TeamTypes eWarTeam, TeamTypes eTeam) const
 	iValue *= (GET_TEAM(eWarTeam).getDefensivePower() + 100);
 	iValue /= (GET_TEAM(eTeam).getPower(true) + 100);
 
-	if (!(GET_TEAM(eTeam).AI_isLandTarget(eWarTeam)))
+	if (!(GET_TEAM(eTeam).AI_isAllyLandTarget(eWarTeam)))
 	{
 		iValue *= 3;
 	}
@@ -1659,6 +1692,11 @@ DenialTypes CvTeamAI::AI_declareWarTrade(TeamTypes eWarTeam, TeamTypes eTeam, bo
 	FAssertMsg(GET_TEAM(eWarTeam).isAlive(), "GET_TEAM(eWarTeam).isAlive is expected to be true");
 	FAssertMsg(!isAtWar(eWarTeam), "should be at peace with eWarTeam");
 
+	if (GET_TEAM(eWarTeam).isVassal(eTeam) || GET_TEAM(eWarTeam).isDefensivePact(eTeam))
+	{
+		return DENIAL_JOKING;
+	}
+
 	if (isHuman())
 	{
 		return NO_DENIAL;
@@ -1676,7 +1714,7 @@ DenialTypes CvTeamAI::AI_declareWarTrade(TeamTypes eWarTeam, TeamTypes eTeam, bo
 
 	if (bConsiderPower)
 	{
-		bLandTarget = AI_isLandTarget(eWarTeam);
+		bLandTarget = AI_isAllyLandTarget(eWarTeam);
 
 		if ((GET_TEAM(eWarTeam).getDefensivePower() / ((bLandTarget) ? 2 : 1)) >
 			(getPower(true) + ((atWar(eWarTeam, eTeam)) ? GET_TEAM(eTeam).getPower(true) : 0)))

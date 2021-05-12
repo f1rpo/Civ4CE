@@ -1536,7 +1536,7 @@
 			<iVisibilityChange>0</iVisibilityChange>
 			<iMovesChange>0</iMovesChange>
 			<iMoveDiscountChange>0</iMoveDiscountChange>
-			<iWithdrawalChange>0</iWithdrawalChange>
+			<iWithdrawalChange>30</iWithdrawalChange>
 			<iCollateralDamageChange>0</iCollateralDamageChange>
 			<iBombardRateChange>0</iBombardRateChange>
 			<iFirstStrikesChange>0</iFirstStrikesChange>
@@ -3059,7 +3059,7 @@
 			<Type>PROMOTION_NAVIGATION2</Type>
 			<Description>TXT_KEY_PROMOTION_NAVIGATION2</Description>
 			<Sound>AS2D_IF_LEVELUP</Sound>
-			<PromotionPrereq>NONE</PromotionPrereq>
+			<PromotionPrereq>PROMOTION_FLANKING1</PromotionPrereq>
 			<PromotionPrereqOr1>PROMOTION_NAVIGATION1</PromotionPrereqOr1>
 			<PromotionPrereqOr2>NONE</PromotionPrereqOr2>
 			<TechPrereq>NONE</TechPrereq>
@@ -3244,7 +3244,7 @@
 			<iCollateralDamageProtection>0</iCollateralDamageProtection>
 			<iPillageChange>0</iPillageChange>
 			<iUpgradeDiscount>0</iUpgradeDiscount>
-			<iExperiencePercent>50</iExperiencePercent>
+			<iExperiencePercent>100</iExperiencePercent>
 			<TerrainDefenses/>
 			<FeatureDefenses/>
 			<UnitCombatMods/>

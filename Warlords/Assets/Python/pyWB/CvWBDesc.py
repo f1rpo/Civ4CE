@@ -254,6 +254,9 @@ class CvTeamDesc:
 		"write out team data"
 		f.write("BeginTeam\n")
 		
+		# Team ID (to make things easier to mess with in the text)
+		f.write("\tTeamID=%d\n" %(idx))
+		
 		# write techs
 		for i in range(gc.getNumTechInfos()):
 			if (gc.getTeam(idx).isHasTech(i)):
@@ -1607,14 +1610,16 @@ class CvWBDesc:
 	def read(self, fileName):
 		"Load in a high-level desc of the world, and height/terrainmaps"		
 		fileName = os.path.normpath(fileName)
-		fileName,ext=os.path.splitext(fileName)			
+		fileName,ext=os.path.splitext(fileName)	
+		if len(ext) == 0:
+			ext = getWBSaveExtension()		
 		CvUtil.pyPrint( 'loadDesc:%s, curDir:%s' %(fileName,os.getcwd()) )
 	
-		if (not os.path.isfile(self.getDescFileName(fileName))):
-			CvUtil.pyPrint("Error: file %s does not exist" %(self.getDescFileName(fileName),))
+		if (not os.path.isfile(fileName+ext)):
+			CvUtil.pyPrint("Error: file %s does not exist" %(fileName+ext,))
 			return -1	# failed
 				
-		f=file(self.getDescFileName(fileName), "r")		# open text file		
+		f=file(fileName+ext, "r")		# open text file		
 
 		parser = CvWBParser()
 		version = int(parser.findNextTokenValue(f, "Version"))

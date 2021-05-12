@@ -3244,8 +3244,8 @@
 		<ScriptID>AS2D_DIPLO_SHAKA_EARLY</ScriptID>
 		<SoundID>DIPLO_SHAKA_EARLY</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>65</iMinVolume>
+		<iMaxVolume>65</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -3266,8 +3266,8 @@
 		<ScriptID>AS2D_DIPLO_SHAKA_MIDDLE</ScriptID>
 		<SoundID>DIPLO_SHAKA_MIDDLE</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>65</iMinVolume>
+		<iMaxVolume>65</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -3288,8 +3288,8 @@
 		<ScriptID>AS2D_DIPLO_SHAKA_LATE</ScriptID>
 		<SoundID>DIPLO_SHAKA_LATE</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>65</iMinVolume>
+		<iMaxVolume>65</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -3310,8 +3310,8 @@
 		<ScriptID>AS2D_DIPLO_MEHMED_LATE</ScriptID>
 		<SoundID>DIPLO_MEHMED_LATE</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>55</iMinVolume>
+		<iMaxVolume>55</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -3332,8 +3332,8 @@
 		<ScriptID>AS2D_DIPLO_MEHMED_EARLY</ScriptID>
 		<SoundID>DIPLO_MEHMED_EARLY</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>55</iMinVolume>
+		<iMaxVolume>55</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -3354,8 +3354,8 @@
 		<ScriptID>AS2D_DIPLO_MEHMED_MIDDLE</ScriptID>
 		<SoundID>DIPLO_MEHMED_MIDDLE</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>55</iMinVolume>
+		<iMaxVolume>55</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -3376,8 +3376,8 @@
 		<ScriptID>AS2D_DIPLO_CHINA_DIPLO1</ScriptID>
 		<SoundID>DIPLO_CHINA_DIPLO1</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>55</iMinVolume>
+		<iMaxVolume>55</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -3398,8 +3398,8 @@
 		<ScriptID>AS2D_DIPLO_CHINA_DIPLO2</ScriptID>
 		<SoundID>DIPLO_CHINA_DIPLO2</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>55</iMinVolume>
+		<iMaxVolume>55</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -3420,8 +3420,8 @@
 		<ScriptID>AS2D_DIPLO_BRENNUS_EARLY</ScriptID>
 		<SoundID>DIPLO_BRENNUS_EARLY</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>65</iMinVolume>
+		<iMaxVolume>65</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -3442,8 +3442,8 @@
 		<ScriptID>AS2D_DIPLO_BRENNUS_MIDDLE</ScriptID>
 		<SoundID>DIPLO_BRENNUS_MIDDLE</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>65</iMinVolume>
+		<iMaxVolume>65</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -3464,8 +3464,8 @@
 		<ScriptID>AS2D_DIPLO_BRENNUS_LATE</ScriptID>
 		<SoundID>DIPLO_BRENNUS_LATE</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>65</iMinVolume>
+		<iMaxVolume>65</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -3750,8 +3750,8 @@
 		<ScriptID>AS2D_DIPLO_HANNIBAL_EARLY</ScriptID>
 		<SoundID>DIPLO_HANNIBAL_EARLY</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>55</iMinVolume>
+		<iMaxVolume>55</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -3772,8 +3772,8 @@
 		<ScriptID>AS2D_DIPLO_HANNIBAL_MIDDLE</ScriptID>
 		<SoundID>DIPLO_HANNIBAL_MIDDLE</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>55</iMinVolume>
+		<iMaxVolume>55</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -3794,8 +3794,8 @@
 		<ScriptID>AS2D_DIPLO_HANNIBAL_LATE</ScriptID>
 		<SoundID>DIPLO_HANNIBAL_LATE</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>55</iMinVolume>
+		<iMaxVolume>55</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -5598,8 +5598,8 @@
 		<ScriptID>AS2D_DIPLO_RAGNAR_EARLY</ScriptID>
 		<SoundID>DIPLO_RAGNAR_EARLY</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>65</iMinVolume>
+		<iMaxVolume>65</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -5620,8 +5620,8 @@
 		<ScriptID>AS2D_DIPLO_RAGNAR_MIDDLE</ScriptID>
 		<SoundID>DIPLO_RAGNAR_MIDDLE</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>65</iMinVolume>
+		<iMaxVolume>65</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -5642,8 +5642,8 @@
 		<ScriptID>AS2D_DIPLO_RAGNAR_LATE</ScriptID>
 		<SoundID>DIPLO_RAGNAR_LATE</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>65</iMinVolume>
+		<iMaxVolume>65</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -5664,8 +5664,8 @@
 		<ScriptID>AS2D_DIPLO_WANGKON_EARLY</ScriptID>
 		<SoundID>DIPLO_WANGKON_EARLY</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>55</iMinVolume>
+		<iMaxVolume>55</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -5686,8 +5686,8 @@
 		<ScriptID>AS2D_DIPLO_WANGKON_MIDDLE</ScriptID>
 		<SoundID>DIPLO_WANGKON_MIDDLE</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>55</iMinVolume>
+		<iMaxVolume>55</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>
@@ -5708,8 +5708,8 @@
 		<ScriptID>AS2D_DIPLO_WANGKON_LATE</ScriptID>
 		<SoundID>DIPLO_WANGKON_LATE</SoundID>
 		<SoundType>GAME_MUSIC</SoundType>
-		<iMinVolume>75</iMinVolume>
-		<iMaxVolume>75</iMaxVolume>
+		<iMinVolume>55</iMinVolume>
+		<iMaxVolume>55</iMaxVolume>
 		<iPitchChangeDown>0</iPitchChangeDown>
 		<iPitchChangeUp>0</iPitchChangeUp>
 		<iMinLeftPan>-1</iMinLeftPan>

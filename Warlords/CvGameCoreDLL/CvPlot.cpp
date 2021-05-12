@@ -821,7 +821,7 @@ void CvPlot::verifyUnitValidPlot()
 			{
 				if (!(pLoopUnit->isCombat()))
 				{
-					if (pLoopUnit->getTeam() != getTeam())
+					if (pLoopUnit->getTeam() != getTeam() && (getTeam() == NO_TEAM || !GET_TEAM(getTeam()).isVassal(pLoopUnit->getTeam())))
 					{
 						if (plotCheck(PUF_isEnemy, pLoopUnit->getOwnerINLINE()) != NULL)
 						{
@@ -2630,7 +2630,7 @@ PlayerTypes CvPlot::calculateCulturalOwner() const
 
 					if (pLoopCity != NULL)
 					{
-						if (pLoopCity->getTeam() == GET_PLAYER(eBestPlayer).getTeam())
+						if (pLoopCity->getTeam() == GET_PLAYER(eBestPlayer).getTeam() || GET_TEAM(GET_PLAYER(eBestPlayer).getTeam()).isVassal(pLoopCity->getTeam()))
 						{
 							if (getCulture(pLoopCity->getOwnerINLINE()) > 0)
 							{
@@ -4075,17 +4075,30 @@ void CvPlot::setOwner(PlayerTypes eNewValue, bool bCheckUnits)
 
 			if (pNewCity != NULL)
 			{
+				CLinkList<IDInfo> oldUnits;
+
 				pUnitNode = headUnitNode();
 
 				while (pUnitNode != NULL)
 				{
-					pLoopUnit = ::getUnit(pUnitNode->m_data);
+					oldUnits.insertAtEnd(pUnitNode->m_data);
 					pUnitNode = nextUnitNode(pUnitNode);
+				}
 
-					if (atWar(pLoopUnit->getTeam(), GET_PLAYER(eNewValue).getTeam()))
+				pUnitNode = oldUnits.head();
+
+				while (pUnitNode != NULL)
+				{
+					pLoopUnit = ::getUnit(pUnitNode->m_data);
+					pUnitNode = oldUnits.next(pUnitNode);
+
+					if (pLoopUnit)
 					{
-						FAssert(pLoopUnit->getTeam() != GET_PLAYER(eNewValue).getTeam());
-						pLoopUnit->kill(false, eNewValue);
+						if (atWar(pLoopUnit->getTeam(), GET_PLAYER(eNewValue).getTeam()))
+						{
+							FAssert(pLoopUnit->getTeam() != GET_PLAYER(eNewValue).getTeam());
+							pLoopUnit->kill(false, eNewValue);
+						}
 					}
 				}
 
@@ -4158,7 +4171,7 @@ void CvPlot::setOwner(PlayerTypes eNewValue, bool bCheckUnits)
 				pLoopUnit = ::getUnit(pUnitNode->m_data);
 				pUnitNode = nextUnitNode(pUnitNode);
 
-				if (pLoopUnit->getTeam() != getTeam())
+				if (pLoopUnit->getTeam() != getTeam() && (getTeam() == NO_TEAM || !GET_TEAM(getTeam()).isVassal(pLoopUnit->getTeam())))
 				{
 					GET_PLAYER(pLoopUnit->getOwnerINLINE()).changeNumOutsideUnits(-1);
 				}
@@ -4216,7 +4229,7 @@ void CvPlot::setOwner(PlayerTypes eNewValue, bool bCheckUnits)
 				pLoopUnit = ::getUnit(pUnitNode->m_data);
 				pUnitNode = nextUnitNode(pUnitNode);
 
-				if (pLoopUnit->getTeam() != getTeam())
+				if (pLoopUnit->getTeam() != getTeam() && (getTeam() == NO_TEAM || !GET_TEAM(getTeam()).isVassal(pLoopUnit->getTeam())))
 				{
 					GET_PLAYER(pLoopUnit->getOwnerINLINE()).changeNumOutsideUnits(1);
 				}
@@ -4267,6 +4280,8 @@ void CvPlot::setOwner(PlayerTypes eNewValue, bool bCheckUnits)
 				gDLL->getEngineIFace()->SetDirty(CultureBorders_DIRTY_BIT, true);
 			}
 		}
+
+		updateSymbols();
 	}
 }
 
@@ -7330,21 +7345,35 @@ void CvPlot::doCulture()
 
 						if ((GC.getGameINLINE().getSorenRandNum(iCityStrength, "Revolt #2") > iGarrison) || pCity->isBarbarian())
 						{
+							CLinkList<IDInfo> oldUnits;
+
 							pUnitNode = headUnitNode();
+
+							while (pUnitNode != NULL)
+							{
+								oldUnits.insertAtEnd(pUnitNode->m_data);
+								pUnitNode = nextUnitNode(pUnitNode);
+							}
+
+							pUnitNode = oldUnits.head();
 
 							while (pUnitNode != NULL)
 							{
 								pLoopUnit = ::getUnit(pUnitNode->m_data);
 								pUnitNode = nextUnitNode(pUnitNode);
 
-								if (pLoopUnit->isBarbarian())
+								if (pLoopUnit)
 								{
-									pLoopUnit->kill(false, eCulturalOwner);
+									if (pLoopUnit->isBarbarian())
+									{
+										pLoopUnit->kill(false, eCulturalOwner);
+									}
+									else if (pLoopUnit->canDefend())
+									{
+										pLoopUnit->changeDamage((pLoopUnit->currHitPoints() / 2), eCulturalOwner);
+									}
 								}
-								else if (pLoopUnit->canDefend())
-								{
-									pLoopUnit->changeDamage((pLoopUnit->currHitPoints() / 2), eCulturalOwner);
-								}
+
 							}
 
 							if (pCity->isBarbarian() || (!(GC.getGameINLINE().isOption(GAMEOPTION_NO_CITY_FLIPPING)) && (GC.getGameINLINE().isOption(GAMEOPTION_FLIPPING_AFTER_CONQUEST) || !(pCity->isEverOwned(eCulturalOwner))) && (pCity->getNumRevolts(eCulturalOwner) >= GC.getDefineINT("NUM_WARNING_REVOLTS"))))

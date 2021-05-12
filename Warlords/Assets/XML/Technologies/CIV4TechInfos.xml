@@ -922,7 +922,9 @@
 				<PrereqTech>TECH_CODE_OF_LAWS</PrereqTech>
 				<PrereqTech>TECH_FEUDALISM</PrereqTech>
 			</OrPreReqs>
-			<AndPreReqs/>
+			<AndPreReqs>
+				<PrereqTech>TECH_MATHEMATICS</PrereqTech>
+			</AndPreReqs>
 			<Quote>TXT_KEY_TECH_CIVIL_SERVICE_QUOTE</Quote>
 			<Sound>AS2D_TECH_CIVIL_SERVICE</Sound>
 			<SoundMP>AS2D_TECH_MP_CIVIL_SERVICE</SoundMP>
@@ -4178,7 +4180,7 @@
 				</Flavor>
 				<Flavor>
 					<FlavorType>FLAVOR_RELIGION</FlavorType>
-					<iFlavor>1</iFlavor>
+					<iFlavor>8</iFlavor>
 				</Flavor>
 				<Flavor>
 					<FlavorType>FLAVOR_PRODUCTION</FlavorType>

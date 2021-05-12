@@ -2794,7 +2794,7 @@
 		</SoundData>
 		<SoundData>
 			<SoundID>SND_MARCH</SoundID>
-			<Filename>Sounds/March</Filename>
+			<Filename>Sounds/Units/March</Filename>
 			<LoadType>DYNAMIC_RES</LoadType>
 			<bIsCompressed>1</bIsCompressed>
 			<bInGeneric>1</bInGeneric>
@@ -2948,7 +2948,7 @@
 		</SoundData>
 		<SoundData>
 			<SoundID>SND_COLLATERAL</SoundID>
-			<Filename>Sounds/Collateral</Filename>
+			<Filename>Sounds/Units/Collateral</Filename>
 			<LoadType>DYNAMIC_RES</LoadType>
 			<bIsCompressed>1</bIsCompressed>
 			<bInGeneric>1</bInGeneric>

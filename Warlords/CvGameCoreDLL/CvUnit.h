@@ -86,7 +86,7 @@ public:
 
 	bool isBetterDefenderThan(const CvUnit* pDefender, const CvUnit* pAttacker) const;						// Exposed to Python 
 
-	DllExport bool canDoCommand(CommandTypes eCommand, int iData1, int iData2, bool bTestVisible = false);	// Exposed to Python
+	DllExport bool canDoCommand(CommandTypes eCommand, int iData1, int iData2, bool bTestVisible = false, bool bTestBusy = true);	// Exposed to Python
 	DllExport void doCommand(CommandTypes eCommand, int iData1, int iData2);																// Exposed to Python
 
 	FAStarNode* getPathLastNode() const;

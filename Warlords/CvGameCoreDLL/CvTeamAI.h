@@ -53,6 +53,7 @@ public:
 
 	bool AI_isWarPossible() const;
 	bool AI_isLandTarget(TeamTypes eTeam) const;
+	bool AI_isAllyLandTarget(TeamTypes eTeam) const;
 	bool AI_shareWar(TeamTypes eTeam) const;
 
 	AttitudeTypes AI_getAttitude(TeamTypes eTeam, bool bForced = true) const;

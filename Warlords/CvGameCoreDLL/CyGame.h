@@ -69,6 +69,8 @@ public:
 	int getImprovementUpgradeTime(int /* ImprovementTypes*/ eImprovement);
 	bool canTrainNukes();
 
+	int /* EraTypes */ getCurrentEra();
+
 	int getActiveTeam();
 	int /* CivilizationTypes */ getActiveCivilizationType();
 	bool isNetworkMultiPlayer();

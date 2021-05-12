@@ -28,8 +28,6 @@ public:
 	void killCities();
 
 	std::wstring getNewCityName();
-//	void getCivilizationCityName(std::wstring szBuffer, int /*CivilizationTypes*/ eCivilization);
-//	bool isCityNameValid(std::wstring szName, bool bTestDestroyed);
 
 	CyUnit* initUnit(int /*UnitTypes*/ iIndex, int iX, int iY, UnitAITypes eUnitAI);
 	void disbandUnit(bool bAnnounce);

@@ -4377,7 +4377,7 @@
 		<ScriptID>AS3D_UN_YAWN_VOX_LOW</ScriptID>
 		<SoundID>SND_YAWN_VOX</SoundID>
 		<SoundType>GAME_SFX</SoundType>
-		<iMinVolume>75</iMinVolume>
+		<iMinVolume>45</iMinVolume>
 		<iMaxVolume>70</iMaxVolume>
 		<iPitchChangeDown>-3000</iPitchChangeDown>
 		<iPitchChangeUp>3000</iPitchChangeUp>

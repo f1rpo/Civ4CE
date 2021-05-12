@@ -28,9 +28,10 @@ def init():
 	# dump Civ python module directory
 	if PythonHelp:		
 		import CvPythonExtensions
-		helpFile=file("log\CvPythonExtensions.hlp.txt", "w")
+		helpFile=file("CvPythonExtensions.hlp.txt", "w")
 		sys.stdout=helpFile
-		help(CvPythonExtensions)
+		import pydoc                  
+		pydoc.help(CvPythonExtensions)
 		helpFile.close()
 	
 	sys.stderr=CvUtil.RedirectError()

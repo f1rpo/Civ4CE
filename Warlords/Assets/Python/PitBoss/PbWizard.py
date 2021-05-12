@@ -1345,6 +1345,9 @@ class StagingPage(wx.wizard.WizardPageSimple):
 						# Don't allow a launch
 						bAllReady = False
 						break
+			if (bAllReady and PB.isPendingInit()):
+				bAllReady = False
+				
 					
 		self.myParent.FindWindowById(wx.ID_FORWARD).Enable(bAllReady)
 					

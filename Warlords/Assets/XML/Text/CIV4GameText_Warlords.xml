@@ -2632,7 +2632,7 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_CONCEPT_GREAT_GENERALS_PEDIA</Tag>
-		<English>[H1]Great Generals[\H1][PARAGRAPH:2]Great Generals are military leaders that emerge as your civilization gains combat experience. When you have won enough battles to reach a certain threshold of total experience, a [LINK=UNIT_GREAT_GENERAL]Great General[\LINK] appears in your capital city. Each Great General requires twice the amount of combat experience that was needed to generate the one before.[PARAGRAPH:2]Once generated, you can turn your Great General into a Warlord by joining him with another unit in the field. That action also distributes a one-time experience bonus to units in the same tile. The unit receiving the Warlord can be upgraded at no cost, and retains all of its experience when doing so. The unit also gains access to some special promotions not normally available, such as [LINK=PROMOTION_COMBAT6]Combat VI[\LINK], [LINK=PROMOTION_MEDIC3]Medic III[\LINK], [LINK=PROMOTION_TACTICS]Tactics[\LINK], [LINK=PROMOTION_LEADERSHIP]Leadership[\LINK], and [LINK=PROMOTION_MORALE]Morale[\LINK].[PARAGRAPH:2]Alternatively, you can use your Great General to construct a [LINK=BUILDING_MILITARY_ACADEMY]military academy[\LINK] in a city. That city receives a production bonus when building military units.[PARAGRAPH:2]Finally, a Great General can join a city as a [LINK=SPECIALIST_GREAT_GENERAL]Great Military Instructor[\LINK]. New units constructed in that city immediately receive bonus experience points.</English>
+		<English>[H1]Great Generals[\H1][PARAGRAPH:2]Great Generals are military leaders that emerge as your civilization gains combat experience. When you have won enough battles to reach a certain threshold of total experience, a [LINK=UNIT_GREAT_GENERAL]Great General[\LINK] appears in one of your cities. Each Great General requires twice the amount of combat experience that was needed to generate the one before.[PARAGRAPH:2]Once generated, you can turn your Great General into a Warlord by joining him with another unit in the field. That action also distributes a one-time experience bonus to units in the same tile. The unit receiving the Warlord can be upgraded at no cost, and retains all of its experience when doing so. The unit also gains access to some special promotions not normally available, such as [LINK=PROMOTION_COMBAT6]Combat VI[\LINK], [LINK=PROMOTION_MEDIC3]Medic III[\LINK], [LINK=PROMOTION_TACTICS]Tactics[\LINK], [LINK=PROMOTION_LEADERSHIP]Leadership[\LINK], and [LINK=PROMOTION_MORALE]Morale[\LINK].[PARAGRAPH:2]Alternatively, you can use your Great General to construct a [LINK=BUILDING_MILITARY_ACADEMY]military academy[\LINK] in a city. That city receives a production bonus when building military units.[PARAGRAPH:2]Finally, a Great General can join a city as a [LINK=SPECIALIST_GREAT_GENERAL]Great Military Instructor[\LINK]. New units constructed in that city immediately receive bonus experience points.</English>
 		<French>[H1]G&#233;n&#233;raux illustres[\H1][PARAGRAPH:2]Les g&#233;n&#233;raux illustres sont des chefs militaires qui &#233;mergent au fur et &#224; mesure que votre civilisation gagne de l'exp&#233;rience au combat. Une fois que vous avez remport&#233; suffisamment de victoires pour atteindre un certain seuil d'exp&#233;rience, un [LINK=UNIT_GREAT_GENERAL]g&#233;n&#233;ral illustre[\LINK] appara&#238;t dans votre capitale. Chaque nouveau g&#233;n&#233;ral illustre n&#233;cessite deux fois plus d'exp&#233;rience que le pr&#233;c&#233;dent.[PARAGRAPH:2]Une fois g&#233;n&#233;r&#233;, un g&#233;n&#233;ral illustre peut devenir un Seigneur de guerre en rejoignant une autre unit&#233; sur le champ de bataille. Les unit&#233;s plac&#233;es sur la m&#234;me case obtiennent dans le processus un bonus ponctuel d'exp&#233;rience. L'unit&#233; qui accueille le Seigneur de guerre peut &#234;tre am&#233;lior&#233;e gratuitement, tout en conservant l'int&#233;gralit&#233; de son exp&#233;rience acquise. L'unit&#233; a aussi acc&#232;s &#224; des promotions sp&#233;ciales, telles que [LINK=PROMOTION_COMBAT6]Combat VI[\LINK], [LINK=PROMOTION_MEDIC3]Infirmier III[\LINK], [LINK=PROMOTION_TACTICS]Tactiques[\LINK], [LINK=PROMOTION_LEADERSHIP]Commandement[\LINK] et [LINK=PROMOTION_MORALE]Moral[\LINK].[PARAGRAPH:2]Votre g&#233;n&#233;ral illustre peut aussi construire dans une ville une [LINK=BUILDING_MILITARY_ACADEMY]Acad&#233;mie militaire[\LINK]. La ville re&#231;oit alors un bonus de production pour la cr&#233;ation d'unit&#233;s militaires.[PARAGRAPH:2]Enfin, un g&#233;n&#233;ral illustre peut rejoindre une ville en tant qu'[LINK=SPECIALIST_GREAT_GENERAL]Instructeur militaire illustre[\LINK]. Les unit&#233;s de cette ville re&#231;oivent alors, lors de leur cr&#233;ation, un bonus de points d'exp&#233;rience.</French>
 		<German>[H1]Gro&#223;e Gener&#228;le[\H1][PARAGRAPH:2]Gro&#223;e Gener&#228;le sind Milit&#228;rf&#252;hrer, die Ihre Zivilisation mit fortschreitender Kampferfahrung hervorbringt. Sobald Sie gen&#252;gend Schlachten gewonnen und damit hinreichend Erfahrung angesammelt haben, wird in Ihrer Hauptstadt zun&#228;chst ein [LINK=UNIT_GREAT_GENERAL]Gro&#223;er General[\LINK] zur Verf&#252;gung gestellt. F&#252;r jeden weiteren Gro&#223;en General ist die doppelte Erfahrungspunktzahl des vorherigen erforderlich.[PARAGRAPH:2]Nach seiner Bereitstellung k&#246;nnen Sie Ihren Gro&#223;en General zum Kriegsherrn ernennen, indem Sie ihn mit einer anderen Einheit im Feld vereinigen. Dadurch erhalten alle auf demselben Gel&#228;ndefeld befindlichen Einheiten einen einmaligen Erfahrungsbonus. Die Einheit, die mit dem Kriegsherrn vereinigt wird, kann kostenlos bef&#246;rdert werden und beh&#228;lt dar&#252;ber hinaus alle ihre bis zu diesem Zeitpunkt angesammelten Erfahrungspunkte. Au&#223;erdem werden speziell f&#252;r diese Einheit einige besondere Bef&#246;rderungsoptionen angeboten, die normalerweise nicht verf&#252;gbar sind, wie zum Beispiel [LINK=PROMOTION_COMBAT6]Kampf VI[\LINK], [LINK=PROMOTION_MEDIC3]Arzt III[\LINK], [LINK=PROMOTION_TACTICS]Taktik[\LINK], [LINK=PROMOTION_LEADERSHIP]F&#252;hrerschaft[\LINK] und [LINK=PROMOTION_MORALE]Kampfmoral[\LINK].[PARAGRAPH:2]Alternativ k&#246;nnen Sie Ihren Gro&#223;en General auch zur Errichtung einer [LINK=BUILDING_MILITARY_ACADEMY]Milit&#228;rakademie[\LINK] in einer Stadt einsetzen. Diese Stadt erh&#228;lt daraufhin einen Produktionsbonus f&#252;r die Ausbildung von Milit&#228;reinheiten.[PARAGRAPH:2]Und die dritte Einsatzm&#246;glichkeit eines Gro&#223;en Generals besteht schlie&#223;lich darin, dass er sich als [LINK=SPECIALIST_GREAT_GENERAL]Gro&#223;er Milit&#228;rausbilder[\LINK] in einer Stadt niederl&#228;sst, wodurch die hier ausgebildeten neuen Einheiten automatisch von einem Erfahrungsbonus profitieren.</German>
 		<Italian>[H1]Grandi Generali[\H1][PARAGRAPH:2]I Grandi Generali sono condottieri militari che emergono dalle fila del tuo esercito man mano che vinci degli scontri e superi certe soglie di esperienza: a quel punto nella capitale verr&#224; generato un [LINK=UNIT_GREAT_GENERAL]Grande Generale[\LINK]. I punti esperienza necessari per generare il Grande Generale successivo si raddoppiano di volta in volta.[PARAGRAPH:2]Una volta che hai a disposizione un Grande Generale, puoi trasformarlo in un Guerriero unendolo a un'altra unit&#224; sul campo. Cos&#236; agendo distribuirai un bonus una tantum di esperienza alle unit&#224; presenti nella stessa casella. L'unit&#224; che riceve il Guerriero pu&#242; essere aggiornata gratuitamente e mantenendo al contempo la propria esperienza. L'unit&#224; d&#224; inoltre accesso a una serie di promozioni normalmente non disponibili, quali [LINK=PROMOTION_COMBAT6]Combattimento VI[\LINK], [LINK=PROMOTION_MEDIC3]Medico III[\LINK], [LINK=PROMOTION_TACTICS]Tattica[\LINK], [LINK=PROMOTION_LEADERSHIP]Comando[\LINK] e [LINK=PROMOTION_MORALE]Morale[\LINK].[PARAGRAPH:2]In alternativa, puoi sfruttare il Grande Generale per costruire una [LINK=BUILDING_MILITARY_ACADEMY]accademia militare[\LINK] in una citt&#224;, che ricever&#224; cos&#236; un bonus di produzione relativamente alle unit&#224; militari.[PARAGRAPH:2]Infine, i Grandi Generali possono diventare[LINK=SPECIALIST_GREAT_GENERAL]grandi istruttori militari[\LINK] in una citt&#224;. Le nuove unit&#224; costruite in quella citt&#224; riceveranno sin da subito un bonus di punti esperienza.</Italian>
@@ -4680,11 +4680,13 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_LEADER_HAGNON</Tag>
-		<English>Hagnon</English>
-		<Text>Pittacus</Text>
-		<Gender>Male</Gender>
-		<French>Hagnon
-			<Text>Pittacus</Text>
+		<English>
+			<Text>Hagnon</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</English>
+		<French>
+			<Text>Hagnon</Text>
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</French>
@@ -4876,11 +4878,13 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_LEADER_EPAMINONDAS</Tag>
-		<English>Epaminondas</English>
-		<Text>Pittacus</Text>
-		<Gender>Male</Gender>
-		<French>Epaminondas
-			<Text>Pittacus</Text>
+		<English>
+			<Text>Epaminondas</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</English>
+		<French>
+			<Text>Epaminondas</Text>
 			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</French>
@@ -5934,7 +5938,7 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_BUILDING_CHINESE_PAVILLION</Tag>
-		<English>Pavillion</English>
+		<English>Pavilion</English>
 		<French>Pavillon</French>
 		<German>Pavillon</German>
 		<Italian>Padiglione</Italian>
@@ -19651,5 +19655,109 @@
 		<German>Die Spannungen zwischen Neufrankreich und Gro&#223;britannien drohen in einer milit&#228;rischen Auseinandersetzung um die Region am Fluss Ohio zu eskalieren. Dieses Gebiet war in den vergangenen knapp 100 Jahren unbewohnt und verf&#252;gt &#252;ber einen umfangreichen Wildbestand, den sich bislang fast 3.000 Shawnee- und Lenape-Indianer zunutze machten, um ihren Lebensunterhalt durch den Handel mit Fellen zu bestreiten, die sie gegen Waffen und andere Waren eintauschten.[NEWLINE][NEWLINE]Die bevorstehenden Ereignisse k&#246;nnen zwar von den tats&#228;chlichen historischen Begebenheiten abweichen, dennoch werden Ihre Handlungen als Gouverneur von Neufrankreich oder junger Major der britischen Armee zu den vielen Faktoren geh&#246;ren, die einen massiven internationalen Konflikt ausl&#246;sen werden.</German>
 		<Italian>Nel bacino del fiume Ohio, privo di popolazione da quasi 100 anni e quindi ricco di selvaggina, le tensioni tra la Nuova Francia e la Bretagna non fanno che crescere e questa tempesta in arrivo sta giocando a favore di 3.000 Shawnee e Lenape che scambiano pellicce con armi e altri beni.[NEWLINE][NEWLINE]Anche se gli eventi che si scateneranno potranno essere diversi da quelli realmente accaduti, nei panni del governatore della Nuova Francia o di un curioso maggiore ventunenne dell'esercito britannico ti ritroverai a essere uno dei fattori che determineranno lo scoppio di un grande conflitto internazionale.</Italian>
 		<Spanish>Van en aumento las tensiones entre Gran Breta&#241;a y Nueva Francia, situada alrededor del r&#237;o Ohio, que no ha sido hollado por el hombre en un siglo y, por ello, cuenta con abundante caza. En medio de esta tormenta en ciernes, casi 3.000 indios shawnee y lenape (o "delaware") han conseguido una gran baza comercial con el intercambio de pieles por armas y otras mercanc&#237;as.[NEWLINE][NEWLINE]Aunque es posible que el desarrollo de los hechos difiera de la historia real, como gobernador de Nueva Francia o mayor con 21 a&#241;os de experiencia en el ej&#233;rcito brit&#225;nico, tus acciones pueden ser el detonante de un conflicto internacional a gran escala.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CITY_NAME_VINDOBONA</Tag>
+		<English>Vindobona</English>
+		<French>
+			<Text>Vindobona</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</French>
+		<German>
+			<Text>Vindobona</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</German>
+		<Italian>
+			<Text>Vindobona</Text>
+			<Gender>Female</Gender>
+			<Plural>0</Plural>
+		</Italian>
+		<Spanish>
+			<Text>Vindobona</Text>
+			<Gender>Female</Gender>
+			<Plural>0</Plural>
+		</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CITY_NAME_PISONIUM</Tag>
+		<English>Pisonium</English>
+		<French>
+			<Text>Pisonium</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</French>
+		<German>
+			<Text>Pisonium</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</German>
+		<Italian>
+			<Text>Pisonium</Text>
+			<Gender>Female</Gender>
+			<Plural>0</Plural>
+		</Italian>
+		<Spanish>
+			<Text>Pisonio</Text>
+			<Gender>Female</Gender>
+			<Plural>0</Plural>
+		</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CITY_NAME_ACQUINCUM</Tag>
+		<English>Acquincum</English>
+		<French>
+			<Text>Acquincum</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</French>
+		<German>
+			<Text>Acquincum</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</German>
+		<Italian>
+			<Text>Acquincum</Text>
+			<Gender>Female</Gender>
+			<Plural>0</Plural>
+		</Italian>
+		<Spanish>
+			<Text>Acquinco</Text>
+			<Gender>Female</Gender>
+			<Plural>0</Plural>
+		</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CITY_NAME_TYLIS</Tag>
+		<English>Tylis</English>
+		<French>
+			<Text>Tylis</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</French>
+		<German>
+			<Text>Tylis</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</German>
+		<Italian>
+			<Text>Tylis</Text>
+			<Gender>Female</Gender>
+			<Plural>0</Plural>
+		</Italian>
+		<Spanish>
+			<Text>Tylis</Text>
+			<Gender>Female</Gender>
+			<Plural>0</Plural>
+		</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_LOGGING_WARNING_DESC</Tag>
+		<English>Player %d1_ID has logging enabled.[NEWLINE]Verify that this is a trusted player.</English>
+		<French>Le joueur %d1_ID: LoggingEnabled=1.[NEWLINE]Veuillez v&#233;rifier qu'il s'agit d'un joueur fiable.</French>
+		<German>Spieler %d1_ID: LoggingEnabled=1.[NEWLINE]Stellen Sie sicher, dass er vertrauensw&#252;rdig ist.</German>
+		<Italian>Giocatore %d1_ID: LoggingEnabled=1.[NEWLINE]Assicurati che il giocatore sia affidabile.</Italian>
+		<Spanish>Jugador %d1_ID: LoggingEnabled=1.[NEWLINE]Comprueba si se trata de un jugador de confianza.</Spanish>
 	</TEXT>
 </Civ4GameText>

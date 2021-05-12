@@ -1444,6 +1444,7 @@
 			<Scale>1.25</Scale>
 		</ArtRef>
 		<ArtRef Name="building:BUILDING_HARBOR">
+			<Attribute Class="Era">ERA_ANCIENT,ERA_CLASSICAL,ERA_MEDIEVAL,ERA_RENAISSANCE</Attribute>
 			<Attribute Class="Scalar">bNoWaterTest:1</Attribute>
 			<!-- this bypasses water testing -->
 			<Attribute Class="Scalar">szSpecialLayout:Coast</Attribute>
@@ -1454,13 +1455,34 @@
 			<!-- To debug the placement of the alignpoints, uncomment this next line
 			<Attribute Class="Scalar">fAlignerOverride:0.0</Attribute>
 			-->
-			<Attribute Class="ScalarList">lAlignerPointsX:		-0.40,	-0.60,	-0.20,	1.00,	1.0</Attribute>
-			<Attribute Class="ScalarList">lAlignerPointsY:		1.50,	0.2,	-1.50,	-.50,	1.1</Attribute>
-			<Attribute Class="ScalarList">lAlignerPointsWet:	0,		0,		0,		1,		1</Attribute>
-			<Attribute Class="ScalarList">lAlignerPointsWeight:	.33,	.33,	.33,	.5,		.5</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsX: -0.40, -0.60, -0.20, 1.00, 1.0</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsY: 1.50, 0.2, -1.50, -.50, 1.1</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsWet: 0, 0, 0, 1, 1</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsWeight: .33, .33, .33, .5, .5</Attribute>
 			<Attribute Class="Scalar">bForceWaterHeight:1</Attribute>
 			<Rotate>-60</Rotate>
 			<Scale>2.5</Scale>
+		</ArtRef>
+		<ArtRef Name="building:BUILDING_HARBOR">
+			<Attribute Class="Scalar">szNIF:Art/Structures/Buildings/Harbor/HarborModern.nif</Attribute>
+			<Attribute Class="Era">ERA_INDUSTRIAL,ERA_MODERN,ERA_FUTURE</Attribute>
+			<Attribute Class="Scalar">bNoWaterTest:1</Attribute>
+			<!-- this bypasses water testing -->
+			<Attribute Class="Scalar">szSpecialLayout:Coast</Attribute>
+			<Attribute Class="Scalar">bHasNoShadow:1</Attribute>
+			<Attribute Class="Scalar">bUseCostAligner:1</Attribute>
+			<Attribute Class="Scalar">fAlignerBoxSize:25</Attribute>
+			<Attribute Class="Scalar">fPushX:0</Attribute>
+			<!-- To debug the placement of the alignpoints, uncomment this next line
+			<Attribute Class="Scalar">fAlignerOverride:0.0</Attribute>
+			-->
+			<Attribute Class="ScalarList">lAlignerPointsX: -0.40, -0.60, -0.20, 1.00, 1.0</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsY: 1.50, 0.2, -1.50, -.50, 1.1</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsWet: 0, 0, 0, 1, 1</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsWeight: .33, .33, .33, .5, .5</Attribute>
+			<Attribute Class="Scalar">bForceWaterHeight:1</Attribute>
+			<Rotate>-60</Rotate>
+			<Scale>1.1</Scale>
 		</ArtRef>
 		<ArtRef Name="building:BUILDING_VIKING_TRADING_POST">
 			<Attribute Class="Scalar">bNoWaterTest:1</Attribute>
@@ -1482,6 +1504,7 @@
 			<Scale>2.5</Scale>
 		</ArtRef>
 		<ArtRef Name="building:BUILDING_CARTHAGE_COTHON">
+			<Attribute Class="Era">ERA_ANCIENT,ERA_CLASSICAL,ERA_MEDIEVAL,ERA_RENAISSANCE</Attribute>
 			<Attribute Class="Scalar">bNoWaterTest:1</Attribute>
 			<!-- this bypasses water testing -->
 			<Attribute Class="Scalar">szSpecialLayout:Coast</Attribute>
@@ -1499,6 +1522,27 @@
 			<Attribute Class="Scalar">bForceWaterHeight:1</Attribute>
 			<Rotate>-60</Rotate>
 			<Scale>2.5</Scale>
+		</ArtRef>
+		<ArtRef Name="building:BUILDING_CARTHAGE_COTHON">
+			<Attribute Class="Scalar">szNIF:Art/Structures/Buildings/Harbor/HarborModern.nif</Attribute>
+			<Attribute Class="Era">ERA_INDUSTRIAL,ERA_MODERN,ERA_FUTURE</Attribute>
+			<Attribute Class="Scalar">bNoWaterTest:1</Attribute>
+			<!-- this bypasses water testing -->
+			<Attribute Class="Scalar">szSpecialLayout:Coast</Attribute>
+			<Attribute Class="Scalar">bHasNoShadow:1</Attribute>
+			<Attribute Class="Scalar">bUseCostAligner:1</Attribute>
+			<Attribute Class="Scalar">fAlignerBoxSize:25</Attribute>
+			<Attribute Class="Scalar">fPushX:0</Attribute>
+			<!-- To debug the placement of the alignpoints, uncomment this next line
+			<Attribute Class="Scalar">fAlignerOverride:0.0</Attribute>
+			-->
+			<Attribute Class="ScalarList">lAlignerPointsX:		-0.40,	-0.60,	-0.20,	1.00,	1.0</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsY:		1.50,	0.2,	-1.50,	-.50,	1.1</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsWet:	0,		0,		0,		1,		1</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsWeight:	.33,	.33,	.33,	.5,		.5</Attribute>
+			<Attribute Class="Scalar">bForceWaterHeight:1</Attribute>
+			<Rotate>-60</Rotate>
+			<Scale>1.1</Scale>
 		</ArtRef>
 		<ArtRef Name="building:BUILDING_DRYDOCK">
 			<Attribute Class="Scalar">bNoWaterTest:1</Attribute>

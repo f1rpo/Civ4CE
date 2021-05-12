@@ -207,20 +207,7 @@ class CvDomesticAdvisor:
 	
 			if (pLoopCity.getName() in self.listSelectedCities):
 				screen.selectRow( "CityListBackground", i, True )
-
-			screen.setTableText( "CityListBackground", 0, i, "", ArtFileMgr.getInterfaceArtInfo("INTERFACE_BUTTONS_CITYSELECTION").getPath(), WidgetTypes.WIDGET_ZOOM_CITY, pLoopCity.getOwner(), pLoopCity.getID(), CvUtil.FONT_LEFT_JUSTIFY);
-			
-			# Founded date first...
-			szIDText = "Date" + str(pLoopCity.getID())
-			
-			iTurnTime = pLoopCity.getGameTurnFounded()
-			szFounded = ""
-			szFounded = szFounded + unicode(CyGameTextMgr().getTimeStr(iTurnTime, false))
-			if pLoopCity.isCapital():
-				szFounded = szFounded + (u"%c" % CyGame().getSymbolID(FontSymbols.STAR_CHAR))
-			
-			screen.setTableDate( "CityListBackground", 1, i, szFounded, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
-			
+						
 			self.updateTable(pLoopCity, i)
 
 			i += 1
@@ -239,6 +226,19 @@ class CvDomesticAdvisor:
 
 		screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
 
+		screen.setTableText( "CityListBackground", 0, i, "", ArtFileMgr.getInterfaceArtInfo("INTERFACE_BUTTONS_CITYSELECTION").getPath(), WidgetTypes.WIDGET_ZOOM_CITY, pLoopCity.getOwner(), pLoopCity.getID(), CvUtil.FONT_LEFT_JUSTIFY);
+
+		# Founded date first...
+		szIDText = "Date" + str(pLoopCity.getID())
+		
+		iTurnTime = pLoopCity.getGameTurnFounded()
+		szFounded = ""
+		szFounded = szFounded + unicode(CyGameTextMgr().getTimeStr(iTurnTime, false))
+		if pLoopCity.isCapital():
+			szFounded = szFounded + (u"%c" % CyGame().getSymbolID(FontSymbols.STAR_CHAR))
+		
+		screen.setTableDate( "CityListBackground", 1, i, szFounded, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		
 		# City name...
 		screen.setTableText( "CityListBackground", 2, i, pLoopCity.getName(), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 		

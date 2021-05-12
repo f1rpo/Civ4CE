@@ -495,7 +495,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		list = self.getSortedList( gc.getNumLeaderHeadInfos(), gc.getLeaderHeadInfo )
 		listCopy = list[:]
 		for item in listCopy:
-			if gc.getLeaderHeadInfo(item[1]).getFavoriteCivic() == -1:
+			if item[1] == gc.getDefineINT("BARBARIAN_LEADER"):
 				list.remove(item)
 
 		nColumns = 2

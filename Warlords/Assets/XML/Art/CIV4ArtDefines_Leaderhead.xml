@@ -128,10 +128,10 @@
 		</LeaderheadArtInfo>
 		<LeaderheadArtInfo>
 			<Type>ART_DEF_LEADER_KUBLAI_KHAN</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_Mongol_Kublai.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,4,13</Button>
-			<NIF>art/LeaderHeads/Kublai_Khan/kublai_khan.nif</NIF>
-			<KFM>art/LeaderHeads/Kublai_Khan/kublai_khan.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Kublai_Khan/kublai_khan_noshader.nif</NoShaderNIF>
+			<Button>,Art/interface/LeaderHeads/Btn_LH_China_ShihHuangTi.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,3,13</Button>
+			<NIF>art/LeaderHeads/Qin_Shi_Huang/qin_shi_huang.nif</NIF>
+			<KFM>art/LeaderHeads/Qin_Shi_Huang/qin_shi_huang.kfm</KFM>
+			<NoShaderNIF>art/LeaderHeads/Qin_Shi_Huang/qin_shi_huang_noshader.nif</NoShaderNIF>
 			<BackgroundKFM>art/LeaderHeads/Kublai_Khan/Kublai_Khan_BG.kfm</BackgroundKFM>
 		</LeaderheadArtInfo>
 		<LeaderheadArtInfo>
@@ -184,10 +184,10 @@
 		</LeaderheadArtInfo>
 		<LeaderheadArtInfo>
 			<Type>ART_DEF_LEADER_QIN_SHI_HUANG</Type>
-			<Button>,Art/interface/LeaderHeads/Btn_LH_China_ShihHuangTi.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,3,13</Button>
-			<NIF>art/LeaderHeads/Qin_Shi_Huang/qin_shi_huang.nif</NIF>
-			<KFM>art/LeaderHeads/Qin_Shi_Huang/qin_shi_huang.kfm</KFM>
-			<NoShaderNIF>art/LeaderHeads/Qin_Shi_Huang/qin_shi_huang_noshader.nif</NoShaderNIF>
+			<Button>,Art/interface/LeaderHeads/Btn_LH_Mongol_Kublai.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,4,13</Button>
+			<NIF>art/LeaderHeads/Kublai_Khan/kublai_khan.nif</NIF>
+			<KFM>art/LeaderHeads/Kublai_Khan/kublai_khan.kfm</KFM>
+			<NoShaderNIF>art/LeaderHeads/Kublai_Khan/kublai_khan_noshader.nif</NoShaderNIF>
 			<BackgroundKFM>art/LeaderHeads/Qin_Shi_Huang/qin_shi_huang_BG.kfm</BackgroundKFM>
 		</LeaderheadArtInfo>
 		<LeaderheadArtInfo>

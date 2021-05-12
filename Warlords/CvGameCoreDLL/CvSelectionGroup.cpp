@@ -170,6 +170,17 @@ void CvSelectionGroup::doTurn()
 				}
 
 				setMissionTimer(max(iBestWaitTurns, getMissionTimer()));
+
+				if (iBestWaitTurns > 0)
+				{
+					// Cycle selection if the current group is selected
+					CvUnit* pSelectedUnit = gDLL->getInterfaceIFace()->getHeadSelectedUnit();
+					if (pSelectedUnit && pSelectedUnit->getGroup() == this)
+					{
+						gDLL->getInterfaceIFace()->selectGroup(pSelectedUnit, false, false, false);
+					}
+				}
+
 			}
 		}
 	}
@@ -367,13 +378,20 @@ void CvSelectionGroup::autoMission()
 		{
 			if (!isBusy())
 			{
-				if (getActivityType() == ACTIVITY_MISSION)
+				if (isHuman() && GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 1) > 0)
 				{
-					continueMission();
+					clearMissionQueue();
 				}
 				else
 				{
-					startMission();
+					if (getActivityType() == ACTIVITY_MISSION)
+					{
+						continueMission();
+					}
+					else
+					{
+						startMission();
+					}
 				}
 			}
 		}
@@ -756,7 +774,15 @@ void CvSelectionGroup::startMission()
 		}
 	}
 
-	setActivityType(ACTIVITY_MISSION);
+	if (canAllMove())
+	{
+		setActivityType(ACTIVITY_MISSION);
+	}
+	else
+	{
+		setActivityType(ACTIVITY_HOLD);
+	}
+
 
 	bDelete = false;
 	bAction = false;
@@ -1357,6 +1383,11 @@ bool CvSelectionGroup::canDoCommand(CommandTypes eCommand, int iData1, int iData
 	CLLNode<IDInfo>* pUnitNode;
 	CvUnit* pLoopUnit;
 
+	if (isBusy())
+	{
+		return false;
+	}
+
 	pUnitNode = headUnitNode();
 
 	while (pUnitNode != NULL)
@@ -1364,7 +1395,7 @@ bool CvSelectionGroup::canDoCommand(CommandTypes eCommand, int iData1, int iData
 		pLoopUnit = ::getUnit(pUnitNode->m_data);
 		pUnitNode = nextUnitNode(pUnitNode);
 
-		if (pLoopUnit->canDoCommand(eCommand, iData1, iData2, bTestVisible))
+		if (pLoopUnit->canDoCommand(eCommand, iData1, iData2, bTestVisible, false))
 		{
 			return true;
 		}
@@ -2277,11 +2308,14 @@ bool CvSelectionGroup::groupDeclareWar(CvPlot* pPlot)
 
 	iNumUnits = getNumUnits();
 
-	if (!canEnterArea(pPlot->getTeam(), pPlot->area(), (pPlot->getTeam() != NO_TEAM) && GET_TEAM(getTeam()).AI_isSneakAttackReady(pPlot->getTeam())))
+	if (!canEnterArea(pPlot->getTeam(), pPlot->area(), true))
 	{
-		if (GET_TEAM(getTeam()).canDeclareWar(pPlot->getTeam()))
+		if (pPlot->getTeam() != NO_TEAM && GET_TEAM(getTeam()).AI_isSneakAttackReady(pPlot->getTeam()))
 		{
-			GET_TEAM(getTeam()).declareWar(pPlot->getTeam(), true);
+			if (GET_TEAM(getTeam()).canDeclareWar(pPlot->getTeam()))
+			{
+				GET_TEAM(getTeam()).declareWar(pPlot->getTeam(), true);
+			}
 		}
 	}
 

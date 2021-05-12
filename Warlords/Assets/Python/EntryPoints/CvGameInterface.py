@@ -63,6 +63,10 @@ def skipProductionPopup(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.skipProductionPopup" )
 	return gameUtils().skipProductionPopup(argsList)
 
+def canRazeCity(argsList):
+	#CvUtil.pyPrint( "CvGameInterface.canRazeCity" )
+	return gameUtils().canRazeCity(argsList)
+
 def showExamineCityButton(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.showExamineCityButton" )
 	return gameUtils().showExamineCityButton(argsList)

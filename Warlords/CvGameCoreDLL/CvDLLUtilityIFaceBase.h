@@ -131,7 +131,7 @@ public:
 	virtual void sendRenegotiate(PlayerTypes eWhoTradingWith) = 0;
 	virtual void sendRenegotiateThisItem(PlayerTypes ePlayer2, TradeableItems eItemType, int iData) = 0;
 	virtual void sendExitTrade() = 0;
-	virtual void sendKillDeal(int iDealID) = 0;
+	virtual void sendKillDeal(int iDealID, bool bFromDiplomacy) = 0;
 	virtual void sendUpdateCivics(CivicTypes* paeCivics) = 0;
 	virtual void sendDiplomacy(PlayerTypes ePlayer, CvDiploParameters* pParams) = 0;
 	virtual void sendPopup(PlayerTypes ePlayer, CvPopupInfo* pInfo) = 0;
@@ -184,6 +184,7 @@ public:
 	virtual bool isMPDiplomacyScreenUp() = 0;
 	virtual int getMPDiplomacyPlayer() = 0;
 	virtual void beginMPDiplomacy( PlayerTypes eWhoTalkingTo, bool bRenegotiate = false, bool bSimultaneous = true) = 0;
+	virtual void endMPDiplomacy() = 0;
 
 	virtual bool getAudioDisabled() = 0;
 	virtual int getAudioTagIndex(const TCHAR* szTag, int iScriptType = -1) = 0;
@@ -265,6 +266,7 @@ public:
 
 	virtual const char* getModName(bool bFullPath = true) const = 0;
 	virtual bool hasSkippedSaveChecksum() const = 0;
+	virtual void resetStatistics() = 0;
 };
 
 #endif	// CvDLLUtilityIFaceBase_h

@@ -320,6 +320,8 @@ void CvGame::regenerateMap()
 
 	gDLL->getEngineIFace()->RebuildAllPlots();
 
+	gDLL->resetStatistics();
+
 	setInitialItems();
 
 	initScoreCalculation();
@@ -1666,7 +1668,7 @@ void CvGame::update()
 
 		testAlive();
 
-		if ((getAIAutoPlay() == 0) && !(gDLL->GetAutorun()))
+		if ((getAIAutoPlay() == 0) && !(gDLL->GetAutorun()) && GAMESTATE_EXTENDED != getGameState())
 		{
 			if (countHumanPlayersAlive() == 0)
 			{
@@ -3146,7 +3148,17 @@ bool CvGame::canDoControl(ControlTypes eControl)
 		{
 			if (GET_PLAYER(getActivePlayer()).isAlive())
 			{
-				return true;
+				if (GC.getGameINLINE().isPbem() || GC.getGameINLINE().isHotSeat())
+				{
+					if (!GET_PLAYER(getActivePlayer()).isEndTurn())
+					{
+						return true;
+					}
+				}
+				else
+				{
+					return true;
+				}
 			}
 		}
 		break;
@@ -3387,7 +3399,7 @@ void CvGame::doControl(ControlTypes eControl)
 		break;
 
 	case CONTROL_RETIRE:
-		if (!isGameMultiPlayer())
+		if (!isGameMultiPlayer() || countHumanPlayersAlive() == 1)
 		{
 			setGameState(GAMESTATE_OVER);
 			gDLL->getInterfaceIFace()->setDirty(Soundtrack_DIRTY_BIT, true);
@@ -5617,11 +5629,11 @@ bool CvGame::isProjectMaxedOut(ProjectTypes eIndex, int iExtra)
 }
 
 
-void CvGame::incrementProjectCreatedCount(ProjectTypes eIndex)
+void CvGame::incrementProjectCreatedCount(ProjectTypes eIndex, int iExtra)
 {
 	FAssertMsg(eIndex >= 0, "eIndex is expected to be non-negative (invalid Index)");
 	FAssertMsg(eIndex < GC.getNumProjectInfos(), "eIndex is expected to be within maximum bounds (invalid Index)");
-	m_paiProjectCreatedCount[eIndex]++;
+	m_paiProjectCreatedCount[eIndex] += iExtra;
 }
 
 
@@ -7761,6 +7773,7 @@ void CvGame::read(FDataStreamBase* pStream)
 		CvWString szBuffer;
 		uint iSize;
 
+		m_aszDestroyedCities.clear();
 		pStream->Read(&iSize);
 		for (uint i = 0; i < iSize; i++)
 		{
@@ -7768,6 +7781,7 @@ void CvGame::read(FDataStreamBase* pStream)
 			m_aszDestroyedCities.push_back(szBuffer);
 		}
 
+		m_aszGreatPeopleBorn.clear();
 		pStream->Read(&iSize);
 		for (uint i = 0; i < iSize; i++)
 		{
@@ -7781,6 +7795,7 @@ void CvGame::read(FDataStreamBase* pStream)
 	m_mapRand.read(pStream);
 	m_sorenRand.read(pStream);
 
+	clearReplayMessageMap();
 	ReplayMessageList::_Alloc::size_type iSize;
 	pStream->Read(&iSize);
 	for (ReplayMessageList::_Alloc::size_type i = 0; i < iSize; i++)

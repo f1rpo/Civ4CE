@@ -65,17 +65,6 @@ std::wstring CyPlayer::getNewCityName()
 	return m_pPlayer ? m_pPlayer->getNewCityName() : std::wstring();
 }
 
-/*void CyPlayer::getCivilizationCityName(std::wstring szBuffer, int /*CivilizationTypes* eCivilization)
-{
-	if (m_pPlayer)
-		m_pPlayer->getCivilizationCityName(szBuffer, (CivilizationTypes) eCivilization);
-}
-
-bool CyPlayer::isCityNameValid(std::wstring szName, bool bTestDestroyed)
-{
-	return m_pPlayer ? m_pPlayer->isCityNameValid(szName, bTestDestroyed) : false;
-}*/
-
 CyUnit* CyPlayer::initUnit(int /*UnitTypes*/ iIndex, int iX, int iY, UnitAITypes eUnitAI)
 {
 	return m_pPlayer ? new CyUnit(m_pPlayer->initUnit((UnitTypes) iIndex, iX, iY, eUnitAI)) : NULL;

@@ -384,7 +384,7 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 	case BUTTONPOPUP_DEAL_CANCELED:
 		if (pPopupReturn->getButtonClicked() == 0)
 		{
-			gDLL->sendKillDeal(info.getData1());
+			gDLL->sendKillDeal(info.getData1(), info.getOption1());
 		}
 		break;
 
@@ -1702,6 +1702,10 @@ bool CvDLLButtonPopup::launchLoadUnitPopup(CvPopup* pPopup, CvPopupInfo &info)
 	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_CHOOSE_TRANSPORT"));
 
 	pPlot = pSelectionGroup->plot();
+	if (NULL == pPlot)
+	{
+		return (false);
+	}
 
 	iCount = 1;
 
