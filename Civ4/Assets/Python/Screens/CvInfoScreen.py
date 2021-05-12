@@ -254,7 +254,8 @@ class CvInfoScreen:
 		
 		self.X_STATS_BOTTOM_CHART = 45
 		self.Y_STATS_BOTTOM_CHART = 280
-		self.W_STATS_BOTTOM_CHART = 935
+		self.W_STATS_BOTTOM_CHART_UNITS = 545
+		self.W_STATS_BOTTOM_CHART_BUILDINGS = 390
 		self.H_STATS_BOTTOM_CHART = 410
 		
 		self.reset()
@@ -386,7 +387,7 @@ class CvInfoScreen:
 		return (gc.getGame().getReplayMessageTurn(gc.getGame().getNumReplayMessages()-1))
 		
 	# Screen construction function
-	def showScreen(self, iTurn, iTabID):
+	def showScreen(self, iTurn, iTabID, iEndGame):
 		
 		self.initText();
 		
@@ -451,7 +452,7 @@ class CvInfoScreen:
 			pLoopPlayer = gc.getPlayer(iLoopPlayer)
 			iLoopPlayerTeam = pLoopPlayer.getTeam()
 			if (gc.getTeam(iLoopPlayerTeam).isEverAlive()):
-				if (self.pActiveTeam.isHasMet(iLoopPlayerTeam) or CyGame().isDebugMode()):
+				if (self.pActiveTeam.isHasMet(iLoopPlayerTeam) or CyGame().isDebugMode() or iEndGame != 0):
 					self.aiPlayersMet.append(iLoopPlayer)
 					self.iNumPlayersMet += 1
 		
@@ -1745,8 +1746,10 @@ class CvInfoScreen:
 		iNumUnits = gc.getNumUnitInfos()
 		iNumBuildings = gc.getNumBuildingInfos()
 		
-		self.iNumStatsChartCols = 7
-		self.iNumStatsChartRows = max(iNumUnits, iNumBuildings)
+		self.iNumUnitStatsChartCols = 5
+		self.iNumBuildingStatsChartCols = 2
+		self.iNumUnitStatsChartRows = iNumUnits
+		self.iNumBuildingStatsChartRows = iNumBuildings
 		
 ################################################### CALCULATE STATS ###################################################
 		
@@ -1857,35 +1860,45 @@ class CvInfoScreen:
 		
 ################################################### BOTTOM PANEL ###################################################
 		
-		# Create Table
-		szTable = self.getNextWidgetName()
-		screen.addTableControlGFC(szTable, self.iNumStatsChartCols, self.X_STATS_BOTTOM_CHART, self.Y_STATS_BOTTOM_CHART, self.W_STATS_BOTTOM_CHART, self.H_STATS_BOTTOM_CHART,
+		# Create Tables
+		szUnitsTable = self.getNextWidgetName()
+		screen.addTableControlGFC(szUnitsTable, self.iNumUnitStatsChartCols, self.X_STATS_BOTTOM_CHART, self.Y_STATS_BOTTOM_CHART, self.W_STATS_BOTTOM_CHART_UNITS, self.H_STATS_BOTTOM_CHART,
 					  True, True, 32,32, TableStyles.TABLE_STYLE_STANDARD)
-		screen.enableSort(szTable)
+		screen.enableSort(szUnitsTable)
+
+		szBuildingsTable = self.getNextWidgetName()
+		screen.addTableControlGFC(szBuildingsTable, self.iNumBuildingStatsChartCols, self.X_STATS_BOTTOM_CHART + self.W_STATS_BOTTOM_CHART_UNITS, self.Y_STATS_BOTTOM_CHART, self.W_STATS_BOTTOM_CHART_BUILDINGS, self.H_STATS_BOTTOM_CHART,
+					  True, True, 32,32, TableStyles.TABLE_STYLE_STANDARD)
+		screen.enableSort(szBuildingsTable)
+
 		
 		# Reducing the width a bit to leave room for the vertical scrollbar, preventing a horizontal scrollbar from also being created
-		iChartWidth = self.W_STATS_BOTTOM_CHART - 12
+		iChartWidth = self.W_STATS_BOTTOM_CHART_UNITS + self.W_STATS_BOTTOM_CHART_BUILDINGS - 24
 		
 		# Add Columns
 		iColWidth = int((iChartWidth / 12 * 3))
-		screen.setTableColumnHeader(szTable, 0, self.TEXT_UNITS, iColWidth)
+		screen.setTableColumnHeader(szUnitsTable, 0, self.TEXT_UNITS, iColWidth)
 		iColWidth = int((iChartWidth / 12 * 1))
-		screen.setTableColumnHeader(szTable, 1, self.TEXT_CURRENT, iColWidth)
+		screen.setTableColumnHeader(szUnitsTable, 1, self.TEXT_CURRENT, iColWidth)
 		iColWidth = int((iChartWidth / 12 * 1))
-		screen.setTableColumnHeader(szTable, 2, self.TEXT_BUILT, iColWidth)
+		screen.setTableColumnHeader(szUnitsTable, 2, self.TEXT_BUILT, iColWidth)
 		iColWidth = int((iChartWidth / 12 * 1))
-		screen.setTableColumnHeader(szTable, 3, self.TEXT_KILLED, iColWidth)
+		screen.setTableColumnHeader(szUnitsTable, 3, self.TEXT_KILLED, iColWidth)
 		iColWidth = int((iChartWidth / 12 * 1))
-		screen.setTableColumnHeader(szTable, 4, self.TEXT_LOST, iColWidth)
+		screen.setTableColumnHeader(szUnitsTable, 4, self.TEXT_LOST, iColWidth)
 		iColWidth = int((iChartWidth / 12 * 4))
-		screen.setTableColumnHeader(szTable, 5, self.TEXT_BUILDINGS, iColWidth)
+		screen.setTableColumnHeader(szBuildingsTable, 0, self.TEXT_BUILDINGS, iColWidth)
 		iColWidth = int((iChartWidth / 12 * 1))
-		screen.setTableColumnHeader(szTable, 6, self.TEXT_BUILT, iColWidth)
+		screen.setTableColumnHeader(szBuildingsTable, 1, self.TEXT_BUILT, iColWidth)
 		
 		# Add Rows
-		for i in range(self.iNumStatsChartRows - 1):
-			screen.appendTableRow(szTable)
-		iNumRows = screen.getTableNumRows(szTable)
+		for i in range(self.iNumUnitStatsChartRows - 1):
+			screen.appendTableRow(szUnitsTable)
+		iNumUnitRows = screen.getTableNumRows(szUnitsTable)
+
+		for i in range(self.iNumBuildingStatsChartRows - 1):
+			screen.appendTableRow(szBuildingsTable)
+		iNumBuildingRows = screen.getTableNumRows(szBuildingsTable)
 		
 		# Add Units to table
 		for iUnitLoop in range(iNumUnits):
@@ -1893,34 +1906,34 @@ class CvInfoScreen:
 			
 			iCol = 0
 			szUnitName = gc.getUnitInfo(iUnitLoop).getDescription()
-			screen.setTableText(szTable, iCol, iRow, szUnitName, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+			screen.setTableText(szUnitsTable, iCol, iRow, szUnitName, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 			
 			iCol = 1
 			iNumUnitsCurrent = aiUnitsCurrent[iUnitLoop]
-			screen.setTableInt(szTable, iCol, iRow, str(iNumUnitsCurrent), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+			screen.setTableInt(szUnitsTable, iCol, iRow, str(iNumUnitsCurrent), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 			
 			iCol = 2
 			iNumUnitsBuilt = aiUnitsBuilt[iUnitLoop]
-			screen.setTableInt(szTable, iCol, iRow, str(iNumUnitsBuilt), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+			screen.setTableInt(szUnitsTable, iCol, iRow, str(iNumUnitsBuilt), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 			
 			iCol = 3
 			iNumUnitsKilled = aiUnitsKilled[iUnitLoop]
-			screen.setTableInt(szTable, iCol, iRow, str(iNumUnitsKilled), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+			screen.setTableInt(szUnitsTable, iCol, iRow, str(iNumUnitsKilled), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 			
 			iCol = 4
 			iNumUnitsLost = aiUnitsLost[iUnitLoop]
-			screen.setTableInt(szTable, iCol, iRow, str(iNumUnitsLost), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+			screen.setTableInt(szUnitsTable, iCol, iRow, str(iNumUnitsLost), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		
 		# Add Buildings to table
 		for iBuildingLoop in range(iNumBuildings):
 			iRow = iBuildingLoop
 			
-			iCol = 5
+			iCol = 0
 			szBuildingName = gc.getBuildingInfo(iBuildingLoop).getDescription()
-			screen.setTableText(szTable, iCol, iRow, szBuildingName, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
-			iCol = 6
+			screen.setTableText(szBuildingsTable, iCol, iRow, szBuildingName, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+			iCol = 1
 			iNumBuildingsBuilt = aiBuildingsBuilt[iBuildingLoop]
-			screen.setTableInt(szTable, iCol, iRow, str(iNumBuildingsBuilt), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+			screen.setTableInt(szBuildingsTable, iCol, iRow, str(iNumBuildingsBuilt), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		
 #############################################################################################################
 ##################################################### OTHER #################################################

@@ -2297,14 +2297,14 @@
 		</SoundData>
 		<SoundData>
 			<SoundID>SND_PILLAGE</SoundID>
-			<Filename>Sounds/CityRevolt</Filename>
+			<Filename>Sounds/Pillage</Filename>
 			<LoadType>DYNAMIC_RES</LoadType>
 			<bIsCompressed>1</bIsCompressed>
 			<bInGeneric>1</bInGeneric>
 		</SoundData>
 		<SoundData>
 			<SoundID>SND_PILLAGED</SoundID>
-			<Filename>Sounds/CityRevolt</Filename>
+			<Filename>Sounds/Pillage</Filename>
 			<LoadType>DYNAMIC_RES</LoadType>
 			<bIsCompressed>1</bIsCompressed>
 			<bInGeneric>1</bInGeneric>
@@ -2515,6 +2515,13 @@
 		<SoundData>
 			<SoundID>SND_PING</SoundID>
 			<Filename>Sounds/Ping</Filename>
+			<LoadType>DYNAMIC_RES</LoadType>
+			<bIsCompressed>1</bIsCompressed>
+			<bInGeneric>1</bInGeneric>
+		</SoundData>
+		<SoundData>
+			<SoundID>SND_CHAT</SoundID>
+			<Filename>Sounds/Chat</Filename>
 			<LoadType>DYNAMIC_RES</LoadType>
 			<bIsCompressed>1</bIsCompressed>
 			<bInGeneric>1</bInGeneric>
@@ -8438,10 +8445,10 @@
 		</GameEnvironmentMap>
 	</Effects>
 	<SpeakerConfigs>
-		<SpeakerConfig>Mono</SpeakerConfig>
-		<SpeakerConfig>Stereo</SpeakerConfig>
-		<SpeakerConfig>Use System Config</SpeakerConfig>
-		<SpeakerConfig>Headphones</SpeakerConfig>
+		<SpeakerConfig>TXT_KEY_OPTION_SOUND_MONO</SpeakerConfig>
+		<SpeakerConfig>TXT_KEY_OPTION_SOUND_STEREO</SpeakerConfig>
+		<SpeakerConfig>TXT_KEY_OPTION_SOUND_SYSTEM_CONFIG</SpeakerConfig>
+		<SpeakerConfig>TXT_KEY_OPTION_SOUND_HEADPHONES</SpeakerConfig>
 		<SpeakerConfig>Dolby Surround</SpeakerConfig>
 		<SpeakerConfig>SRS Circle Surround</SpeakerConfig>
 		<SpeakerConfig>4.0 Discrete</SpeakerConfig>

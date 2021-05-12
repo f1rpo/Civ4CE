@@ -48,6 +48,7 @@ BeginTeam
 	ContactWithTeam=0
 	ContactWithTeam=1
 	ContactWithTeam=2
+	ContactWithTeam=3
 	RevealMap=0
 EndTeam
 BeginTeam
@@ -56,6 +57,7 @@ BeginTeam
 	Tech=TECH_ARMY_SUPPORT
 	ContactWithTeam=0
 	ContactWithTeam=1
+	ContactWithTeam=2
 	ContactWithTeam=3
 	RevealMap=0
 EndTeam

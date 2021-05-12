@@ -42,11 +42,11 @@
 				</GameTurnInfo>
 				<GameTurnInfo>
 					<iYearIncrement>20</iYearIncrement>
-					<iTurnsPerIncrement>70</iTurnsPerIncrement>
+					<iTurnsPerIncrement>60</iTurnsPerIncrement>
 				</GameTurnInfo>
 				<GameTurnInfo>
 					<iYearIncrement>10</iYearIncrement>
-					<iTurnsPerIncrement>60</iTurnsPerIncrement>
+					<iTurnsPerIncrement>80</iTurnsPerIncrement>
 				</GameTurnInfo>
 				<GameTurnInfo>
 					<iYearIncrement>5</iYearIncrement>
@@ -110,11 +110,11 @@
 				</GameTurnInfo>
 				<GameTurnInfo>
 					<iYearIncrement>2</iYearIncrement>
-					<iTurnsPerIncrement>50</iTurnsPerIncrement>
+					<iTurnsPerIncrement>40</iTurnsPerIncrement>
 				</GameTurnInfo>
 				<GameTurnInfo>
 					<iYearIncrement>1</iYearIncrement>
-					<iTurnsPerIncrement>100</iTurnsPerIncrement>
+					<iTurnsPerIncrement>120</iTurnsPerIncrement>
 				</GameTurnInfo>
 			</GameTurnInfos>
 		</GameSpeedInfo>
@@ -166,11 +166,11 @@
 				</GameTurnInfo>
 				<GameTurnInfo>
 					<iYearIncrement>2</iYearIncrement>
-					<iTurnsPerIncrement>45</iTurnsPerIncrement>
+					<iTurnsPerIncrement>25</iTurnsPerIncrement>
 				</GameTurnInfo>
 				<GameTurnInfo>
 					<iYearIncrement>1</iYearIncrement>
-					<iTurnsPerIncrement>60</iTurnsPerIncrement>
+					<iTurnsPerIncrement>100</iTurnsPerIncrement>
 				</GameTurnInfo>
 			</GameTurnInfos>
 		</GameSpeedInfo>

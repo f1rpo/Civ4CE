@@ -1489,6 +1489,7 @@ class CvWorldBuilderScreen:
 		screen.deleteWidget("WorldBuilderPlayerChoice")
 		screen.deleteWidget("WorldBuilderTechByEra")
 		screen.deleteWidget("WorldBuilderBrushSize")
+		screen.deleteWidget("WorldBuilderRegenerateMap")
 		screen.deleteWidget("WorldBuilderTeamChoice")
 
 		screen.deleteWidget("WorldBuilderRevealAll")
@@ -1642,6 +1643,7 @@ class CvWorldBuilderScreen:
 		screen.deleteWidget("WorldBuilderPlayerChoice")
 		screen.deleteWidget("WorldBuilderTechByEra")
 		screen.deleteWidget("WorldBuilderBrushSize")
+		screen.deleteWidget("WorldBuilderRegenerateMap")
 		screen.deleteWidget("WorldBuilderTeamChoice")
 
 		screen.deleteWidget("WorldBuilderRevealAll")
@@ -1680,8 +1682,14 @@ class CvWorldBuilderScreen:
 				screen.addPullDownString(szDropdownName, szPullDownString, i, i, True )
 			screen.addPullDownString(szDropdownName, localText.getText("TXT_KEY_WB_ADD_ERA_TECH_DESC",()), i, i, True )
 		elif(self.m_bNormalMap and (not self.m_bUnitEdit) and (not self.m_bCityEdit)):
+			iButtonWidth = 32
+			iButtonHeight = 32
+			iButtonX = 0
+			iButtonY = 0
+			screen.setImageButton( "WorldBuilderRegenerateMap", ArtFileMgr.getInterfaceArtInfo("WORLDBUILDER_REVEAL_ALL_TILES").getPath(), (iMaxScreenWidth-self.iScreenWidth)+8+iButtonX, (10+36+36), iButtonWidth, iButtonHeight, WidgetTypes.WIDGET_WB_REGENERATE_MAP, -1, -1)
+
 			szDropdownName = str("WorldBuilderBrushSize")
-			screen.addDropDownBoxGFC(szDropdownName, (iMaxScreenWidth-self.iScreenWidth)+8, (10+36+36), iPanelWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
+			screen.addDropDownBoxGFC(szDropdownName, (iMaxScreenWidth-self.iScreenWidth)+48, (10+36+36), iPanelWidth-40, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
 			bActive = False
 			if (self.m_iBrushWidth == 1):
 				bActive = True
@@ -1698,6 +1706,7 @@ class CvWorldBuilderScreen:
 			else:
 				bActive = False
 			screen.addPullDownString(szDropdownName, localText.getText("TXT_KEY_WB_5_BY_5",()), 3, 3, bActive )
+			
 		elif(self.m_bReveal):
 			iPanelWidth = 35*6
 			iButtonWidth = 32

@@ -312,104 +312,6 @@ class CvMainInterface:
 
 		self.createMinimapButtons()
 	
-		iBtnSX = xResolution - 284
-		
-		iBtnX = iBtnSX
-		iBtnY = yResolution - 140
-		iBtnW = 64
-		iBtnH = 30
-
-		# Conscript button
-		szText = "<font=1>" + localText.getText("TXT_KEY_DRAFT", ()) + "</font>"
-		screen.setButtonGFC( "Conscript", szText, "", iBtnX, iBtnY, iBtnW, iBtnH, WidgetTypes.WIDGET_CONSCRIPT, -1, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
-		screen.setStyle( "Conscript", "Button_CityT1_Style" )
-		screen.hide( "Conscript" )
-
-		iBtnY += iBtnH
-		iBtnW = 32
-		iBtnH = 28
-		
-		# Hurry Buttons		
-		screen.setButtonGFC( "Hurry0", "", "", iBtnX, iBtnY, iBtnW, iBtnH, WidgetTypes.WIDGET_HURRY, 0, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
-		screen.setStyle( "Hurry0", "Button_CityC1_Style" )
-		screen.hide( "Hurry0" )
-
-		iBtnX += iBtnW
-
-		screen.setButtonGFC( "Hurry1", "", "", iBtnX, iBtnY, iBtnW, iBtnH, WidgetTypes.WIDGET_HURRY, 1, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
-		screen.setStyle( "Hurry1", "Button_CityC2_Style" )
-		screen.hide( "Hurry1" )
-	
-		iBtnX = iBtnSX
-		iBtnY += iBtnH
-	
-		# Automate Production Button
-		#screen.addCheckBoxGFC( "AutomateProduction", ArtFileMgr.getInterfaceArtInfo("INTERFACE_BUTTONS_GOVERNOR_PRODUCTION").getPath(), ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(), xResolution - 284, yResolution - 80, 30, 30, WidgetTypes.WIDGET_AUTOMATE_PRODUCTION, -1, -1, ButtonStyles.BUTTON_STYLE_CITY_B02BL )
-		screen.addCheckBoxGFC( "AutomateProduction", "", "", iBtnX, iBtnY, iBtnW, iBtnH, WidgetTypes.WIDGET_AUTOMATE_PRODUCTION, -1, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
-		screen.setStyle( "AutomateProduction", "Button_CityC3_Style" )
-		screen.hide( "AutomateProduction" )
-
-		iBtnX += iBtnW
-
-		# Automate Citizens Button
-		#screen.addCheckBoxGFC( "AutomateCitizens", ArtFileMgr.getInterfaceArtInfo("INTERFACE_BUTTONS_GOVERNOR").getPath(), ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(), xResolution - 254, yResolution - 80, 30, 30, WidgetTypes.WIDGET_AUTOMATE_CITIZENS, -1, -1, ButtonStyles.BUTTON_STYLE_CITY_B02BR )
-		screen.addCheckBoxGFC( "AutomateCitizens", "", "", iBtnX, iBtnY, iBtnW, iBtnH, WidgetTypes.WIDGET_AUTOMATE_CITIZENS, -1, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
-		screen.setStyle( "AutomateCitizens", "Button_CityC4_Style" )
-		screen.hide( "AutomateCitizens" )
-
-		iBtnY += iBtnH
-		iBtnX = iBtnSX
-
-		iBtnW	= 22
-		iBtnWa	= 20
-		iBtnH	= 24
-		iBtnHa	= 27
-	
-		# Set Emphasize buttons
-		i = 0
-		szButtonID = "Emphasize" + str(i)
-		screen.addCheckBoxGFC( szButtonID, "", "", iBtnX, iBtnY, iBtnW, iBtnH, WidgetTypes.WIDGET_EMPHASIZE, i, -1, ButtonStyles.BUTTON_STYLE_LABEL )
-		szStyle = "Button_CityB" + str(i+1) + "_Style"
-		screen.setStyle( szButtonID, szStyle )
-		screen.hide( szButtonID )
-
-		i+=1
-		szButtonID = "Emphasize" + str(i)
-		screen.addCheckBoxGFC( szButtonID, "", "", iBtnX+iBtnW, iBtnY, iBtnWa, iBtnH, WidgetTypes.WIDGET_EMPHASIZE, i, -1, ButtonStyles.BUTTON_STYLE_LABEL )
-		szStyle = "Button_CityB" + str(i+1) + "_Style"
-		screen.setStyle( szButtonID, szStyle )
-		screen.hide( szButtonID )
-
-		i+=1
-		szButtonID = "Emphasize" + str(i)
-		screen.addCheckBoxGFC( szButtonID, "", "", iBtnX+iBtnW+iBtnWa, iBtnY, iBtnW, iBtnH, WidgetTypes.WIDGET_EMPHASIZE, i, -1, ButtonStyles.BUTTON_STYLE_LABEL )
-		szStyle = "Button_CityB" + str(i+1) + "_Style"
-		screen.setStyle( szButtonID, szStyle )
-		screen.hide( szButtonID )
-
-		iBtnY += iBtnH
-		
-		i+=1
-		szButtonID = "Emphasize" + str(i)
-		screen.addCheckBoxGFC( szButtonID, "", "", iBtnX, iBtnY, iBtnW, iBtnHa, WidgetTypes.WIDGET_EMPHASIZE, i, -1, ButtonStyles.BUTTON_STYLE_LABEL )
-		szStyle = "Button_CityB" + str(i+1) + "_Style"
-		screen.setStyle( szButtonID, szStyle )
-		screen.hide( szButtonID )
-
-		i+=1
-		szButtonID = "Emphasize" + str(i)
-		screen.addCheckBoxGFC( szButtonID, "", "", iBtnX+iBtnW, iBtnY, iBtnWa, iBtnHa, WidgetTypes.WIDGET_EMPHASIZE, i, -1, ButtonStyles.BUTTON_STYLE_LABEL )
-		szStyle = "Button_CityB" + str(i+1) + "_Style"
-		screen.setStyle( szButtonID, szStyle )
-		screen.hide( szButtonID )
-
-		i+=1
-		szButtonID = "Emphasize" + str(i)
-		screen.addCheckBoxGFC( szButtonID, "", "", iBtnX+iBtnW+iBtnWa, iBtnY, iBtnW, iBtnHa, WidgetTypes.WIDGET_EMPHASIZE, i, -1, ButtonStyles.BUTTON_STYLE_LABEL )
-		szStyle = "Button_CityB" + str(i+1) + "_Style"
-		screen.setStyle( szButtonID, szStyle )
-		screen.hide( szButtonID )
-		
 		# Help button (always visible)
 		screen.setImageButton( "InterfaceHelpButton", ArtFileMgr.getInterfaceArtInfo("INTERFACE_GENERAL_CIVILOPEDIA_ICON").getPath(), xResolution - 28, 2, 24, 24, WidgetTypes.WIDGET_ACTION, gc.getControlInfo(ControlTypes.CONTROL_CIVILOPEDIA).getActionInfoIndex(), -1 )
 		screen.hide( "InterfaceHelpButton" )
@@ -636,21 +538,6 @@ class CvMainInterface:
 			szButtonID = "CityTab" + str(i)
 			szHideList.append( szButtonID )
 					
-		# Automate Production Button
-		szHideList.append( "AutomateProduction" )
-
-		# Automate Citizens Button
-		szHideList.append( "AutomateCitizens" )
-
-		# Set Emphasize buttons
-		i = 0
-		for i in range (g_NumEmphasizeInfos):
-			szButtonID = "Emphasize" + str(i)
-			szHideList.append( szButtonID )
-
-		# Conscript button
-		szHideList.append( "Conscript" )
-
 		for i in range( g_NumHurryInfos ):
 			szButtonID = "Hurry" + str(i)
 			szHideList.append( szButtonID )
@@ -1205,15 +1092,121 @@ class CvMainInterface:
 
 		screen.hideList( 0 )
 
+		for i in range (g_NumEmphasizeInfos):
+			szButtonID = "Emphasize" + str(i)
+			screen.hide( szButtonID )
+
+		# Hurry button show...
+		for i in range( g_NumHurryInfos ):
+			szButtonID = "Hurry" + str(i)
+			screen.hide( szButtonID )
+
+		# Conscript Button Show
+		screen.hide( "Conscript" )
+		screen.hide( "AutomateProduction" )
+		screen.hide( "AutomateCitizens" )
+
 		if (not CyEngine().isGlobeviewUp() and pHeadSelectedCity):
 		
 			self.setMinimapButtonVisibility(True)
 
 			if ((pHeadSelectedCity.getOwner() == gc.getGame().getActivePlayer()) or gc.getGame().isDebugMode()):
 			
+				iBtnSX = xResolution - 284
+				
+				iBtnX = iBtnSX
+				iBtnY = yResolution - 140
+				iBtnW = 64
+				iBtnH = 30
+
+				# Conscript button
+				szText = "<font=1>" + localText.getText("TXT_KEY_DRAFT", ()) + "</font>"
+				screen.setButtonGFC( "Conscript", szText, "", iBtnX, iBtnY, iBtnW, iBtnH, WidgetTypes.WIDGET_CONSCRIPT, -1, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
+				screen.setStyle( "Conscript", "Button_CityT1_Style" )
+				screen.hide( "Conscript" )
+
+				iBtnY += iBtnH
+				iBtnW = 32
+				iBtnH = 28
+				
+				# Hurry Buttons		
+				screen.setButtonGFC( "Hurry0", "", "", iBtnX, iBtnY, iBtnW, iBtnH, WidgetTypes.WIDGET_HURRY, 0, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
+				screen.setStyle( "Hurry0", "Button_CityC1_Style" )
+				screen.hide( "Hurry0" )
+
+				iBtnX += iBtnW
+
+				screen.setButtonGFC( "Hurry1", "", "", iBtnX, iBtnY, iBtnW, iBtnH, WidgetTypes.WIDGET_HURRY, 1, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
+				screen.setStyle( "Hurry1", "Button_CityC2_Style" )
+				screen.hide( "Hurry1" )
+			
+				iBtnX = iBtnSX
+				iBtnY += iBtnH
+			
+				# Automate Production Button
+				screen.addCheckBoxGFC( "AutomateProduction", "", "", iBtnX, iBtnY, iBtnW, iBtnH, WidgetTypes.WIDGET_AUTOMATE_PRODUCTION, -1, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
+				screen.setStyle( "AutomateProduction", "Button_CityC3_Style" )
+
+				iBtnX += iBtnW
+
+				# Automate Citizens Button
+				screen.addCheckBoxGFC( "AutomateCitizens", "", "", iBtnX, iBtnY, iBtnW, iBtnH, WidgetTypes.WIDGET_AUTOMATE_CITIZENS, -1, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
+				screen.setStyle( "AutomateCitizens", "Button_CityC4_Style" )
+
+				iBtnY += iBtnH
+				iBtnX = iBtnSX
+
+				iBtnW	= 22
+				iBtnWa	= 20
+				iBtnH	= 24
+				iBtnHa	= 27
+			
+				# Set Emphasize buttons
+				i = 0
+				szButtonID = "Emphasize" + str(i)
+				screen.addCheckBoxGFC( szButtonID, "", "", iBtnX, iBtnY, iBtnW, iBtnH, WidgetTypes.WIDGET_EMPHASIZE, i, -1, ButtonStyles.BUTTON_STYLE_LABEL )
+				szStyle = "Button_CityB" + str(i+1) + "_Style"
+				screen.setStyle( szButtonID, szStyle )
+				screen.hide( szButtonID )
+
+				i+=1
+				szButtonID = "Emphasize" + str(i)
+				screen.addCheckBoxGFC( szButtonID, "", "", iBtnX+iBtnW, iBtnY, iBtnWa, iBtnH, WidgetTypes.WIDGET_EMPHASIZE, i, -1, ButtonStyles.BUTTON_STYLE_LABEL )
+				szStyle = "Button_CityB" + str(i+1) + "_Style"
+				screen.setStyle( szButtonID, szStyle )
+				screen.hide( szButtonID )
+
+				i+=1
+				szButtonID = "Emphasize" + str(i)
+				screen.addCheckBoxGFC( szButtonID, "", "", iBtnX+iBtnW+iBtnWa, iBtnY, iBtnW, iBtnH, WidgetTypes.WIDGET_EMPHASIZE, i, -1, ButtonStyles.BUTTON_STYLE_LABEL )
+				szStyle = "Button_CityB" + str(i+1) + "_Style"
+				screen.setStyle( szButtonID, szStyle )
+				screen.hide( szButtonID )
+
+				iBtnY += iBtnH
+				
+				i+=1
+				szButtonID = "Emphasize" + str(i)
+				screen.addCheckBoxGFC( szButtonID, "", "", iBtnX, iBtnY, iBtnW, iBtnHa, WidgetTypes.WIDGET_EMPHASIZE, i, -1, ButtonStyles.BUTTON_STYLE_LABEL )
+				szStyle = "Button_CityB" + str(i+1) + "_Style"
+				screen.setStyle( szButtonID, szStyle )
+				screen.hide( szButtonID )
+
+				i+=1
+				szButtonID = "Emphasize" + str(i)
+				screen.addCheckBoxGFC( szButtonID, "", "", iBtnX+iBtnW, iBtnY, iBtnWa, iBtnHa, WidgetTypes.WIDGET_EMPHASIZE, i, -1, ButtonStyles.BUTTON_STYLE_LABEL )
+				szStyle = "Button_CityB" + str(i+1) + "_Style"
+				screen.setStyle( szButtonID, szStyle )
+				screen.hide( szButtonID )
+
+				i+=1
+				szButtonID = "Emphasize" + str(i)
+				screen.addCheckBoxGFC( szButtonID, "", "", iBtnX+iBtnW+iBtnWa, iBtnY, iBtnW, iBtnHa, WidgetTypes.WIDGET_EMPHASIZE, i, -1, ButtonStyles.BUTTON_STYLE_LABEL )
+				szStyle = "Button_CityB" + str(i+1) + "_Style"
+				screen.setStyle( szButtonID, szStyle )
+				screen.hide( szButtonID )
+				
 				g_pSelectedUnit = 0
-				screen.show( "AutomateCitizens" )
-				screen.show( "AutomateProduction" )
 				screen.setState( "AutomateCitizens", pHeadSelectedCity.isCitizensAutomated() )
 				screen.setState( "AutomateProduction", pHeadSelectedCity.isProductionAutomated() )
 				
@@ -1473,7 +1466,7 @@ class CvMainInterface:
 
 					if ( pHeadSelectedCity.getOwner() == gc.getGame().getActivePlayer() or gc.getGame().isDebugMode() ):
 					
-						if ( pHeadSelectedCity.isSpecialistValid(i, 1) and ( pHeadSelectedCity.getForceSpecialistCount(i) < ( pHeadSelectedCity.getPopulation() - pHeadSelectedCity.angryPopulation(0) ) ) ):
+						if ( pHeadSelectedCity.isSpecialistValid(i, 1) and ( pHeadSelectedCity.getForceSpecialistCount(i) < ( pHeadSelectedCity.getPopulation() + pHeadSelectedCity.totalFreeSpecialists() ) ) ):
 							szName = "IncreaseSpecialist" + str(i)
 							screen.show( szName )
 							szName = "CitizenDisabledButton" + str(i)
@@ -2559,6 +2552,10 @@ class CvMainInterface:
 								if (CyInterface().isNetStatsVisible()):
 									szBuffer = szBuffer + CyGameTextMgr().getNetStats(ePlayer)
 									
+								if (gc.getPlayer(ePlayer).isHuman() and CyInterface().isOOSVisible()):
+									szTempBuffer = u" <color=255,0,0>* %s *</color>" %(CyGameTextMgr().getOOSSeeds(ePlayer))
+									szBuffer = szBuffer + szTempBuffer
+									
 								szBuffer = szBuffer + "</font>"
 
 								if ( CyInterface().determineWidth( szBuffer ) > iWidth ):
@@ -2691,7 +2688,7 @@ class CvMainInterface:
 					szName = "GlobeLayerOption" + str(iOption)
 					szCaption = kLayer.getOptionName(iOption)			
 					if(iOption == iCurOption):
-						szBuffer = "  <color=255,0,0>%s</color>  " % (szCaption)
+						szBuffer = "  <color=0,255,0>%s</color>  " % (szCaption)
 					else:
 						szBuffer = "  %s  " % (szCaption)
 					iTextWidth = CyInterface().determineWidth( szBuffer )
@@ -2704,10 +2701,12 @@ class CvMainInterface:
 					if iTextWidth > iMaxTextWidth:
 						iMaxTextWidth = iTextWidth
 
+				#make extra space
+				iCurY -= iGlobeLayerOptionHeight;
 				iPanelWidth = iMaxTextWidth + 32
-				iPanelHeight = iY - iCurY + 4
+				iPanelHeight = iY - iCurY
 				iPanelX = xResolution - 14 - iPanelWidth
-				iPanelY = iCurY - 8
+				iPanelY = iCurY
 				screen.setPanelSize( "ScoreBackground", iPanelX, iPanelY, iPanelWidth, iPanelHeight )
 				screen.show( "ScoreBackground" )
 

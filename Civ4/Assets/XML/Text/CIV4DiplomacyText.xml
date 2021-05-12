@@ -4735,7 +4735,7 @@
 	</TEXT>
 	<TEXT>
 		<Tag>AI_DIPLO_RELIGION_PRESSURE_STRONGER_2</Tag>
-		<English>Abandon your heathenish ways and join [OUR_STATE_RELIGION], [CT_NAME]. YOur people's survival depends on it!</English>
+		<English>Abandon your heathenish ways and join [OUR_STATE_RELIGION], [CT_NAME]. Your people's survival depends on it!</English>
 		<French>[CT_NAME], abandonnez vos croyances pa&#239;ennes et adoptez notre religion : ([OUR_STATE_RELIGION]). La survie de votre peuple en d&#233;pend !</French>
 		<German>Verlasst Eure heidnischen Pfade und nehmt unsere Religion [OUR_STATE_RELIGION] an, [CT_NAME]. Das &#220;berleben Eures Volkes h&#228;ngt davon ab!</German>
 		<Italian>Abbandonate i vostri costumi pagani e convertitevi alla religione [OUR_STATE_RELIGION:2], [CT_NAME]. La sopravvivenza della tua popolazione dipende da te!</Italian>

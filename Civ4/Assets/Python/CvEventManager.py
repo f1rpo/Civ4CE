@@ -548,7 +548,7 @@ class CvEventManager:
 		# Note that iPlayer may be NULL (-1) and not a refer to a player object
 		
 		# Show tech splash when applicable
-		if (iPlayer > -1 and bAnnounce):
+		if (iPlayer > -1 and bAnnounce and not CyInterface().noMovies()):
 			if (gc.getGame().isFinalInitialized() and not gc.getGame().GetWorldBuilder2Mode()):
 				if ((not self.bMultiPlayer) and (iPlayer == CyGame().getActivePlayer())):
 					popupInfo = CyPopupInfo()

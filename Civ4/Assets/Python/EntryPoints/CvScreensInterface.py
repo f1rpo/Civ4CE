@@ -137,7 +137,8 @@ def showTopCivs():
 infoScreen = CvInfoScreen.CvInfoScreen(INFO_SCREEN)
 def showInfoScreen(argsList):
 	iTabID = argsList[0]
-	infoScreen.showScreen(-1, iTabID)
+	iEndGame = argsList[1]
+	infoScreen.showScreen(-1, iTabID, iEndGame)
 
 debugInfoScreen = CvDebugInfoScreen.CvDebugInfoScreen()
 def showDebugInfoScreen():
@@ -665,7 +666,7 @@ def featAccomplishedOnClickedCallback(argsList):
 		elif ((iData1 == FeatTypes.FEAT_NATIONAL_WONDER) or
 		      ((iData1 >= FeatTypes.FEAT_POPULATION_HALF_MILLION) and (iData1 <= FeatTypes.FEAT_POPULATION_5_BILLION))):
 		  # 1 is for the wonder tab...
-			showInfoScreen([1])
+			showInfoScreen([1, 0])
 
 def featAccomplishedOnFocusCallback(argsList):
 	iData1 = argsList[0]

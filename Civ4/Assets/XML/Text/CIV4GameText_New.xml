@@ -6,6 +6,94 @@
 <!-- Game Text - New -->
 <Civ4GameText xmlns="http://www.firaxis.com">
 	<TEXT>
+		<Tag>TXT_KEY_OPTION_SOUND_MONO</Tag>
+		<English>Mono</English>		
+		<French>Mono</French>
+		<German>Mono</German>
+		<Italian>Mono</Italian>
+		<Spanish>Mono</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_OPTION_SOUND_STEREO</Tag>
+		<English>Stereo</English>		
+		<French>Stereo</French>
+		<German>Stereo</German>
+		<Italian>Stereo</Italian>
+		<Spanish>Stereo</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_OPTION_SOUND_SYSTEM_CONFIG</Tag>
+		<English>Use System Config</English>		
+		<French>Utiliser Config. Système</French>
+		<German>Systemkonfiguration verwenden</German>
+		<Italian>Usa configurazione di sistema</Italian>
+		<Spanish>Usar config. sistema</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_OPTION_SOUND_HEADPHONES</Tag>
+		<English>Headphones</English>		
+		<French>Casque</French>
+		<German>Lautsprecher</German>
+		<Italian>Cuffie</Italian>
+		<Spanish>Auriculares</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MOD_REQUIRED</Tag>
+		<English>The save file you have selected requires the following mod to be loaded:[NEWLINE][BOLD]%s1[\BOLD][NEWLINE]The application must restart, ok?</English>
+		<French>La sauvegardé sélectionnée nécessite le chargement du mod suivant : [NEWLINE][BOLD]%s1[\BOLD][NEWLINE] L'application doit être relancée. Confirmer ?</French>
+		<German>Für den von Ihnen gewählten Spielstand muss das folgende Mod geladen werden: [NEWLINE][BOLD]%s1[\BOLD][NEWLINE] Die Anwendung wird neu gestartet, okay? </German>
+		<Italian>Il salvataggio selezionato richiede il caricamento del seguente mod: [NEWLINE][BOLD]%s1[\BOLD][NEWLINE] Il gioco deve essere riavviato, continuare?</Italian>
+		<Spanish>La partida guardada que has seleccionado requiere que se cargue el siguiente mod: [NEWLINE][BOLD]%s1[\BOLD][NEWLINE] La aplicación debe reiniciarse. ¿Aceptar? </Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_OVERWRITE_FILE</Tag>
+		<English>The file %s1 already exists.[NEWLINE]Press OK to proceed, overwriting the file.</English>
+		<French>Le fichier %s1 existe déjà.[NEWLINE]Cliquez sur OK pour continuer et écraser ce fichier.</French>
+		<German>Die Datei %s1 besteht bereits.[NEWLINE]Wählen Sie OK, um fortzufahren und die Datei zu überschreiben.</German>
+		<Italian>File di salvataggio di Civilization IV %s1 già esistente.[NEWLINE]Premi OK per continuare e sovrascrivere il file.</Italian>
+		<Spanish>Ya existe el archivo %s1.[NEWLINE]Pulsa 'Aceptar' para continuar y sobrescribirlo.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CIVILOPEDIA_HISTORY</Tag>
+		<English>History</English>
+		<French>Histoire</French>
+		<German>Geschichte</German>
+		<Italian>Storia</Italian>
+		<Spanish>Historia</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CHOOSE_TECH</Tag>
+		<English>Please choose a technology</English>
+		<French>Choisir une technologie</French>
+		<German>Bitte eine Technologie wählen</German>
+		<Italian>Scegli una tecnologia</Italian>
+		<Spanish>Elige una tecnología</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_OPTIONS_SCREEN_OTHER</Tag>
+		<English>Other</English>
+		<French>Autre</French>
+		<German>Sonstige</German>
+		<Italian>Altro</Italian>
+		<Spanish>Otros</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_SAVING_GAME</Tag>
+		<English>Saving Game...</English>
+		<French>Sauvegarde en cours...</French>
+		<German>Speichervorgang ...</German>
+		<Italian>Salvataggio in corso...</Italian>
+		<Spanish>Guardando la partida...</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_QUICK_SAVING</Tag>
+		<English>Quick Saving...</English>
+		<French>Sauvegarde rapide en cours...</French>
+		<German>Schnellspeichern ...</German>
+		<Italian>Salvataggio rapido in corso...</Italian>
+		<Spanish>Guardado r&#225;pido...</Spanish>
+	</TEXT>
+	<TEXT>
 		<Tag>TXT_KEY_AUTOSAVING</Tag>
 		<English>Autosaving...</English>
 		<French>Sauvegarde automatique...</French>
@@ -774,11 +862,395 @@
 		<Spanish>You have selected an unusable voice capture device.  Voice capture disabled.</Spanish>
 	</TEXT>
 	<TEXT>
+		<Tag>TXT_KEY_INVALID_PLAYBACK_TITLE</Tag>
+		<English>Invalid Device</English>
+		<French>Invalid Device</French>
+		<German>Invalid Device</German>
+		<Italian>Invalid Device</Italian>
+		<Spanish>Invalid Device</Spanish>
+	</TEXT>
+	<TEXT>
 		<Tag>TXT_KEY_INVALID_PLAYBACK_DESC</Tag>
 		<English>You have selected an unusable voice playback device.  Voice playback disabled.</English>
 		<French>You have selected an unusable voice playback device.  Voice playback disabled.</French>
 		<German>You have selected an unusable voice playback device.  Voice playback disabled.</German>
 		<Italian>You have selected an unusable voice playback device.  Voice playback disabled.</Italian>
 		<Spanish>You have selected an unusable voice playback device.  Voice playback disabled.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_SIZE_TAG</Tag>
+		<English>Map Size: %s1_size</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GAME_LIST_FIREWALL_PING</Tag>
+		<English>[Firewalled]</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_REGENERATE_MAP</Tag>
+		<English>Regenerate Map Using Current Map Script</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PLAYER_OOS</Tag>
+		<English>OOS Values: Sync=%d1_Num; Options=%d2_Num</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_OOS_TITLE</Tag>
+		<English>The game has gone Out Of Sync.[NEWLINE]Please check OOS values (next to scores).[NEWLINE]The player with different values should reconnect in order to resync.</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INVALID_LOGIN_TITLE</Tag>
+		<English>Invalid Login Name</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INVALID_LOGIN_DESC</Tag>
+		<English>Nicknames may not begin with a number, '$', '#', '%%', '&amp;', or '@'</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GAME_LIST_FIREWALL_PING</Tag>
+		<English>[Firewalled]</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MEMBERS_IGNORE_MEMBER</Tag>
+		<English>Ignore User</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MEMBERS_UNIGNORE_MEMBER</Tag>
+		<English>Stop Ignoring User</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_POPUP_KICKED</Tag>
+		<English>We are being kicked from the game!  Exiting to main menu...</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_LOGIN_TIMEOUT_TITLE</Tag>
+		<English>Login Error</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_LOGIN_TIMEOUT_DESC</Tag>
+		<English>Our login attempt has timed out.  The authentication server may be down.</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_BAD_NEW_PASSWORD_TITLE</Tag>
+		<English>Bad Password</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_BAD_NEW_PASSWORD_DESC</Tag>
+		<English>The password is incorrect for the provided E-Mail address.</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_NICKNAME_INUSE_TITLE</Tag>
+		<English>Bad Login</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_NICKNAME_INUSE_DESC</Tag>
+		<English>This login name has already been claimed by another account.</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_BUDDY_LIST_STATUS_ONLINE</Tag>
+		<English>Online</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_BUDDY_LIST_STATUS_NA</Tag>
+		<English>Not Available</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_BUDDY_LIST_STATUS_STAGING</Tag>
+		<English>Staging</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_BUDDY_LIST_STATUS_PLAYING</Tag>
+		<English>Playing</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_BUDDY_LIST_STATUS_OFFLINE</Tag>
+		<English>Offline</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MIN_LATITUDE</Tag>
+		<English>[ICON_BULLET]Can build at a minimum latitude of %d1 degrees</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAX_LATITUDE</Tag>
+		<English>[ICON_BULLET]Can build at a maximum latitude of %d1 degrees</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_REGENERATE_MAP</Tag>
+		<English>Regenerate Map Using Current Map Script</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CHANGE_PRODUCTION</Tag>
+		<English>Change Production</English>
+		<French>Change Production</French>
+		<German>Change Production</German>
+		<Italian>Change Production</Italian>
+		<Spanish>Change Production</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_DRAFT_UNIT</Tag>
+		<English>Draft %s1_Unit, %d2 Pop</English>
+		<French>Draft %s1_Unit, %d2 Pop</French>
+		<German>Draft %s1_Unit, %d2 Pop</German>
+		<Italian>Draft %s1_Unit, %d2 Pop</Italian>
+		<Spanish>Draft %s1_Unit, %d2 Pop</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_HURRY_PRODUCTION</Tag>
+		<English>Hurry Production</English>
+		<French>Hurry Production</French>
+		<German>Hurry Production</German>
+		<Italian>Hurry Production</Italian>
+		<Spanish>Hurry Production</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_HURRY_PRODUCTION_GOLD</Tag>
+		<English>, %d1 Gold</English>
+		<French>, %d1 Gold</French>
+		<German>, %d1 Gold</German>
+		<Italian>, %d1 Gold</Italian>
+		<Spanish>, %d1 Gold</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_HURRY_PRODUCTION_POP</Tag>
+		<English>, %d1 Pop</English>
+		<French>, %d1 Pop</French>
+		<German>, %d1 Pop</German>
+		<Italian>, %d1 Pop</Italian>
+		<Spanish>, %d1 Pop</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_TRADE_RESOURCE</Tag>
+		<English>%s1_Bonus (1 of %d2)</English>
+		<French>%s1_Bonus (1 of %d2)</French>
+		<German>%s1_Bonus (1 of %d2)</German>
+		<Italian>%s1_Bonus (1 of %d2)</Italian>
+		<Spanish>%s1_Bonus (1 of %d2)</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_UNIT_STACK</Tag>
+		<English>Unit Stack (%d1):</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_UNIT_CAN_MOVE_IMPASSABLE</Tag>
+		<English>[ICON_BULLET]Can Move through Impassable Terrain</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_POPUP_FLIPPED_CITY_KEEP</Tag>
+		<English>The people of %s1_CityName wish to join our illustrious empire! Shall we welcome them?</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_POPUP_KEEP_FLIPPED_CITY</Tag>
+		<English>Yes! Install a new Governor...</English>
+		<French>Oui ! Qu'on installe un nouveau gouverneur...</French>
+		<German>Ja! Benennt einen neuen Statthalter ...</German>
+		<Italian>S&#236;! Instaura un nuovo governatore...</Italian>
+		<Spanish>S&#237;. Que tome posesi&#243;n un nuevo gobernante.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_POPUP_DISBAND_FLIPPED_CITY</Tag>
+		<English>No. Disband the city!</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ZOOM_TO_CITY_DOMESTIC</Tag>
+		<English>Zoom</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ZOOM_CITY_HELP</Tag>
+		<English>Enter the city screen for this City</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_BELOW_MIN_SPECS_MESSAGE</Tag>
+		<English>Your machine is below minimum specifications. Civ4 will not run on this hardware setup.</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_OPTIONS_SCREEN_TEXTURE_QUALITY_LEVEL</Tag>
+		<English>Texture Quality Level</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_OPTIONS_SCREEN_TEXTURE_QUALITY_LEVEL_HELP</Tag>
+		<English>Determines the quality of texture displayed in-game.</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GRAPHICOPTION_FULLSCREEN</Tag>
+		<English>Full-screen Mode</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GRAPHICOPTION_FULLSCREEN_HELP</Tag>
+		<English>The game will run in a window when not set.</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GRAPHICOPTION_LOWRES_TEXTURES_HELP</Tag>
+		<English>Lower resolution textures will be used</English>		
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_LOADSAVE_ALL_FILES</Tag>
+		<English>All files (*.*)</English>		
+		<French>All files (*.*)</French>
+		<German>All files (*.*)</German>
+		<Italian>All files (*.*)</Italian>
+		<Spanish>All files (*.*)</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_LOADSAVE_FILE_NOT_EXIST</Tag>
+		<English>The specified file does not exist.[NEWLINE]Please select a valid file name.</English>		
+		<French>The specified file does not exist.[NEWLINE]Please select a valid file name.</French>
+		<German>The specified file does not exist.[NEWLINE]Please select a valid file name.</German>
+		<Italian>The specified file does not exist.[NEWLINE]Please select a valid file name.</Italian>
+		<Spanish>The specified file does not exist.[NEWLINE]Please select a valid file name.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GRAPHICOPTION_LOWRES_TEXTURES</Tag>
+		<English>Low Resolution Textures</English>
+		<French>French</French>
+		<German>German</German>
+		<Italian>Italian</Italian>
+		<Spanish>Spanish</Spanish>
 	</TEXT>
 </Civ4GameText>

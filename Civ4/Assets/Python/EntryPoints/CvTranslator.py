@@ -71,7 +71,7 @@ def finishText(argsList):
 		iEnd = szMatch.find(']')
 		iCase = 0
 		if (iSeparator != -1 and iEnd > iSeparator + 1):
-			szCase = szMatch[iSeparator+1:iEnd-1]
+			szCase = szMatch[iSeparator+1:iEnd]
 			if (szCase.isdigit()):
 				iCase = max(0, int(szCase) - 1)
 		player = gc.getPlayer(CyDiplomacy().getWhoTradingWith())
@@ -102,7 +102,7 @@ def finishText(argsList):
 		iEnd = szMatch.find(']')
 		iCase = 0
 		if (iSeparator != -1 and iEnd > iSeparator + 1):
-			szCase = szMatch[iSeparator+1:iEnd-1]
+			szCase = szMatch[iSeparator+1:iEnd]
 			if (szCase.isdigit()):
 				iCase = max(0, int(szCase) - 1)
 		player = gc.getPlayer(gc.getGame().getActivePlayer())

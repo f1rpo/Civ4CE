@@ -1490,11 +1490,11 @@
 	<TEXT>
 		<Tag>TXT_KEY_FEATURE_BAD_HEALTH</Tag>
 		<!-- %s1 = TXT_KEY_FEATURE_ -->
-		<English>[NEWLINE][ICON_BULLET]%s1[ICON_UNHEALTHY] in nearby cities</English>
-		<French>[NEWLINE][ICON_BULLET]%s1[ICON_UNHEALTHY] dans les villes voisines</French>
-		<German>[NEWLINE][ICON_BULLET]%s1[ICON_UNHEALTHY] in umliegenden St&#228;dten</German>
-		<Italian>[NEWLINE][ICON_BULLET]%s1[ICON_UNHEALTHY] nelle citt&#224; vicine</Italian>
-		<Spanish>[NEWLINE][ICON_BULLET]%s1 [ICON_UNHEALTHY] a las ciudades cercanas</Spanish>
+		<English>[NEWLINE][ICON_BULLET]+%s1[ICON_UNHEALTHY] in nearby cities</English>
+		<French>[NEWLINE][ICON_BULLET]+%s1[ICON_UNHEALTHY] dans les villes voisines</French>
+		<German>[NEWLINE][ICON_BULLET]+%s1[ICON_UNHEALTHY] in umliegenden St&#228;dten</German>
+		<Italian>[NEWLINE][ICON_BULLET]+%s1[ICON_UNHEALTHY] nelle citt&#224; vicine</Italian>
+		<Spanish>[NEWLINE][ICON_BULLET]+%s1 [ICON_UNHEALTHY] a las ciudades cercanas</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_FEATURE_ADDS_FRESH_WATER</Tag>
@@ -9689,9 +9689,9 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISC_WARNING</Tag>
-		<English>Warning!!!</English>
+		<English>Warning!</English>
 		<French>Attention !</French>
-		<German>Warnung!!!</German>
+		<German>Warnung!</German>
 		<Italian>Attenzione!</Italian>
 		<Spanish>&#161;Aviso!</Spanish>
 	</TEXT>

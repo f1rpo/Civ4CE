@@ -21,10 +21,10 @@
 			<iGridHeight>6</iGridHeight>
 			<iTerrainGrainChange>-1</iTerrainGrainChange>
 			<iFeatureGrainChange>-1</iFeatureGrainChange>
-			<iResearchPercent>100</iResearchPercent>
+			<iResearchPercent>110</iResearchPercent>
 			<iTradeProfitPercent>80</iTradeProfitPercent>
 			<iDistanceMaintenancePercent>50</iDistanceMaintenancePercent>
-			<iNumCitiesMaintenancePercent>40</iNumCitiesMaintenancePercent>
+			<iNumCitiesMaintenancePercent>45</iNumCitiesMaintenancePercent>
 			<iNumCitiesAnarchyPercent>10</iNumCitiesAnarchyPercent>
 		</WorldInfo>
 		<WorldInfo>
@@ -42,10 +42,10 @@
 			<iGridHeight>8</iGridHeight>
 			<iTerrainGrainChange>-1</iTerrainGrainChange>
 			<iFeatureGrainChange>-1</iFeatureGrainChange>
-			<iResearchPercent>110</iResearchPercent>
+			<iResearchPercent>120</iResearchPercent>
 			<iTradeProfitPercent>70</iTradeProfitPercent>
 			<iDistanceMaintenancePercent>60</iDistanceMaintenancePercent>
-			<iNumCitiesMaintenancePercent>35</iNumCitiesMaintenancePercent>
+			<iNumCitiesMaintenancePercent>40</iNumCitiesMaintenancePercent>
 			<iNumCitiesAnarchyPercent>9</iNumCitiesAnarchyPercent>
 		</WorldInfo>
 		<WorldInfo>
@@ -63,10 +63,10 @@
 			<iGridHeight>10</iGridHeight>
 			<iTerrainGrainChange>0</iTerrainGrainChange>
 			<iFeatureGrainChange>0</iFeatureGrainChange>
-			<iResearchPercent>120</iResearchPercent>
+			<iResearchPercent>130</iResearchPercent>
 			<iTradeProfitPercent>60</iTradeProfitPercent>
 			<iDistanceMaintenancePercent>70</iDistanceMaintenancePercent>
-			<iNumCitiesMaintenancePercent>30</iNumCitiesMaintenancePercent>
+			<iNumCitiesMaintenancePercent>35</iNumCitiesMaintenancePercent>
 			<iNumCitiesAnarchyPercent>8</iNumCitiesAnarchyPercent>
 		</WorldInfo>
 		<WorldInfo>
@@ -84,10 +84,10 @@
 			<iGridHeight>13</iGridHeight>
 			<iTerrainGrainChange>0</iTerrainGrainChange>
 			<iFeatureGrainChange>0</iFeatureGrainChange>
-			<iResearchPercent>130</iResearchPercent>
+			<iResearchPercent>140</iResearchPercent>
 			<iTradeProfitPercent>50</iTradeProfitPercent>
 			<iDistanceMaintenancePercent>80</iDistanceMaintenancePercent>
-			<iNumCitiesMaintenancePercent>25</iNumCitiesMaintenancePercent>
+			<iNumCitiesMaintenancePercent>30</iNumCitiesMaintenancePercent>
 			<iNumCitiesAnarchyPercent>7</iNumCitiesAnarchyPercent>
 		</WorldInfo>
 		<WorldInfo>
@@ -105,10 +105,10 @@
 			<iGridHeight>16</iGridHeight>
 			<iTerrainGrainChange>1</iTerrainGrainChange>
 			<iFeatureGrainChange>1</iFeatureGrainChange>
-			<iResearchPercent>140</iResearchPercent>
+			<iResearchPercent>150</iResearchPercent>
 			<iTradeProfitPercent>40</iTradeProfitPercent>
 			<iDistanceMaintenancePercent>90</iDistanceMaintenancePercent>
-			<iNumCitiesMaintenancePercent>20</iNumCitiesMaintenancePercent>
+			<iNumCitiesMaintenancePercent>25</iNumCitiesMaintenancePercent>
 			<iNumCitiesAnarchyPercent>6</iNumCitiesAnarchyPercent>
 		</WorldInfo>
 		<WorldInfo>
@@ -126,10 +126,10 @@
 			<iGridHeight>20</iGridHeight>
 			<iTerrainGrainChange>1</iTerrainGrainChange>
 			<iFeatureGrainChange>1</iFeatureGrainChange>
-			<iResearchPercent>150</iResearchPercent>
+			<iResearchPercent>160</iResearchPercent>
 			<iTradeProfitPercent>30</iTradeProfitPercent>
 			<iDistanceMaintenancePercent>100</iDistanceMaintenancePercent>
-			<iNumCitiesMaintenancePercent>15</iNumCitiesMaintenancePercent>
+			<iNumCitiesMaintenancePercent>20</iNumCitiesMaintenancePercent>
 			<iNumCitiesAnarchyPercent>5</iNumCitiesAnarchyPercent>
 		</WorldInfo>
 	</WorldInfos>

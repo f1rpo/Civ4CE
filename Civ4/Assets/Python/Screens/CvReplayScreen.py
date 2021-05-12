@@ -179,12 +179,12 @@ class CvReplayScreen:
 
 		self.iTurn = iTurn
 		screen = self.getScreen()
-		
+				
 		if (iTurn < self.replayInfo.getInitialTurn()):
 			self.iTurn = self.replayInfo.getInitialTurn()
 			self.iLastTurnShown = -1
 			return
-		elif iTurn >= self.replayInfo.getFinalTurn() and self.iLastTurnShown > self.replayInfo.getFinalTurn():
+		elif iTurn > self.replayInfo.getFinalTurn():
 			self.iTurn = self.replayInfo.getInitialTurn()
 			self.iLastTurnShown = -1
 			self.resetData()
@@ -351,6 +351,7 @@ class CvReplayScreen:
 				iTurnJump = int(self.fLastUpdate / self.TIME_STEP[self.iSpeed - 1])
 					
 				if (iTurnJump > 0):
+					iTurnJump = 1  # we used to allow showing multiple turns at once, but it didn't work very well
 					self.fLastUpdate = 0.0
 					self.showEvents(self.iTurn + iTurnJump, False)
 

@@ -259,7 +259,7 @@ class CvTechChooser:
 			# Free unit
 			if ( gc.getTechInfo(i).getFirstFreeUnitClass() != UnitClassTypes.NO_UNITCLASS ):
 				szFreeUnitButton = "FreeUnit" + str(i)
-				screen.addDDSGFCAt( szFreeUnitButton, "TechList", gc.getUnitInfo(gc.getUnitClassInfo(gc.getTechInfo(i).getFirstFreeUnitClass()).getDefaultUnitIndex()).getButton(), iX + fX, iY + Y_ROW, TEXTURE_SIZE, TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_FREE_UNIT, i, -1, False )
+				screen.addDDSGFCAt( szFreeUnitButton, "TechList", gc.getUnitInfo(gc.getUnitClassInfo(gc.getTechInfo(i).getFirstFreeUnitClass()).getDefaultUnitIndex()).getButton(), iX + fX, iY + Y_ROW, TEXTURE_SIZE, TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_FREE_UNIT, gc.getUnitClassInfo(gc.getTechInfo(i).getFirstFreeUnitClass()).getDefaultUnitIndex(), i, False )
 				fX += X_INCREMENT
 
 			j = 0
@@ -520,7 +520,7 @@ class CvTechChooser:
 			for j in range( gc.getNumCivicInfos() ):
 				if (gc.getCivicInfo(j).getTechPrereq() == i):
 					szCivicReveal = "CivicRevealButton" + str( ( i * 1000 ) + j )
-					screen.addDDSGFCAt( szCivicReveal, "TechList", gc.getCivicInfo(j).getButton(), iX + fX, iY + Y_ROW, TEXTURE_SIZE, TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_CIVIC_REVEAL, j, j, False )
+					screen.addDDSGFCAt( szCivicReveal, "TechList", gc.getCivicInfo(j).getButton(), iX + fX, iY + Y_ROW, TEXTURE_SIZE, TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_CIVIC_REVEAL, i, j, False )
 					fX += X_INCREMENT
 
 			j = 0

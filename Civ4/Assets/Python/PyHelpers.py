@@ -535,6 +535,9 @@ class PyCity:
 	def getProductionName(self):
 		"str - Current Productions Name"
 		return self.city.getProductionName()
+		
+	def getGeneralProductionTurnsLeft(self):
+		return self.city.getGeneralProductionTurnsLeft()
 	
 	def getProductionNameKey(self):
 		"str - Current Productions Name"

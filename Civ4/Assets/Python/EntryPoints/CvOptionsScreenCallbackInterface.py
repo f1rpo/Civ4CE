@@ -88,7 +88,8 @@ def handleGraphicOptionsClicked ( argsList ):
 	
 	UserProfile.setGraphicOption(iGraphicOption, bValue)
 	
-	if (iGraphicOption == GraphicOptionTypes.GRAPHICOPTION_SINGLE_UNIT_GRAPHICS):
+	if (iGraphicOption == GraphicOptionTypes.GRAPHICOPTION_SINGLE_UNIT_GRAPHICS or
+		iGraphicOption == GraphicOptionTypes.GRAPHICOPTION_FULLSCREEN):
 		restartPopup(true)
 		
 	return 1
@@ -116,6 +117,14 @@ def handleGlobeViewDropdownBoxInput ( argsList ):
 	iValue, szName = argsList
 	
 	UserProfile.setGlobeViewRenderLevel(iValue)
+	
+	return 1
+	
+def handleTextureQualityDropdownBoxInput ( argsList ):
+	"Handles Texture Quality Dropdown Box input"
+	iValue, szName = argsList
+	
+	UserProfile.setTextureQualityLevel(iValue)
 	
 	return 1
 	

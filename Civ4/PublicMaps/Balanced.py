@@ -21,7 +21,12 @@ def getDescription():
 
 resourcesToBalance = ('BONUS_ALUMINUM', 'BONUS_COAL', 'BONUS_COPPER', 'BONUS_HORSE', 'BONUS_IRON', 'BONUS_OIL', 'BONUS_URANIUM')
 resourcesToEliminate = ('BONUS_MARBLE', 'BONUS_OIL')
-	
+
+def getTopLatitude():
+	return 70
+def getBottomLatitude():
+	return -70
+
 def generatePlotTypes():
 	NiTextOut("Setting Plot Types (Python Balanced) ...")
 	global hinted_world
@@ -42,15 +47,33 @@ def generatePlotTypes():
 		hinted_world.buildAllContinents()
 		return hinted_world.generatePlotTypes(shift_plot_types=True)
 
+# subclass TerrainGenerator to eliminate arctic, equatorial latitudes
+
+class BTerrainGenerator(CvMapGeneratorUtil.TerrainGenerator):
+	def getLatitudeAtPlot(self, iX, iY):
+		"returns 0.0 for tropical, up to 1.0 for polar"
+		lat = CvMapGeneratorUtil.TerrainGenerator.getLatitudeAtPlot(self, iX, iY) 	# range [0,1]
+		lat = 0.05 + 0.75*lat				# range [0.05, 0.75]
+		return lat
+
 def generateTerrainTypes():
 	NiTextOut("Generating Terrain (Python Balanced) ...")
-	terraingen = TerrainGenerator()
+	terraingen = BTerrainGenerator()
 	terrainTypes = terraingen.generateTerrain()
 	return terrainTypes
 
+# subclass FeatureGenerator to eliminate arctic, equatorial latitudes
+	
+class BFeatureGenerator(CvMapGeneratorUtil.FeatureGenerator):
+	def getLatitudeAtPlot(self, iX, iY):
+		"returns 0.0 for tropical, up to 1.0 for polar"
+		lat = CvMapGeneratorUtil.FeatureGenerator.getLatitudeAtPlot(self, iX, iY) 	# range [0,1]
+		lat = 0.05 + 0.75*lat				# range [0.05, 0.75]
+		return lat
+	
 def addFeatures():
 	NiTextOut("Adding Features (Python Balanced) ...")
-	featuregen = FeatureGenerator()
+	featuregen = BFeatureGenerator()
 	featuregen.addFeatures()
 	return 0
 

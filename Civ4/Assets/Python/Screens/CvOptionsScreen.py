@@ -73,7 +73,7 @@ class CvOptionsScreen:
 		self.szGameOptionsTabName = localText.getText("TXT_KEY_OPTIONS_GAME", ())
 		self.szGraphicsOptionsTabName = localText.getText("TXT_KEY_OPTIONS_GRAPHICS", ())
 		self.szAudioOptionsTabName = localText.getText("TXT_KEY_OPTIONS_AUDIO", ())
-		self.szOtherOptionsTabName = "Other" #localText.getText("TXT_KEY_OPTIONS_SCREEN_OTHER", ())
+		self.szOtherOptionsTabName = localText.getText("TXT_KEY_OPTIONS_SCREEN_OTHER", ())
 		
 	def refreshScreen (self):
 		
@@ -99,6 +99,7 @@ class CvOptionsScreen:
 		self.getTabControl().setValue("GraphicsLevelDropdownBox", UserProfile.getGraphicsLevel() )
 		self.getTabControl().setValue("RenderQualityDropdownBox", UserProfile.getRenderQualityLevel() )
 		self.getTabControl().setValue("GlobeViewDropdownBox", UserProfile.getGlobeViewRenderLevel() )
+		self.getTabControl().setValue("TextureQualityDropdownBox", UserProfile.getTextureQualityLevel() )
 		
 		# Graphic Option Checkboxes
 		for iOptionLoop in range(GraphicOptionTypes.NUM_GRAPHICOPTION_TYPES):
@@ -157,6 +158,7 @@ class CvOptionsScreen:
 		self.getTabControl().setValue("VoiceChatCheckbox", UserProfile.useVoice())
 		
 		# Speaker config
+		iInitialSelection = 0
 		for iSpeakerConfigLoop in range(16):
 			szActiveConfig = UserProfile.getSpeakerConfigFromList(iSpeakerConfigLoop)
 			if (UserProfile.getSpeakerConfig() == szActiveConfig):
@@ -174,7 +176,7 @@ class CvOptionsScreen:
 		# Custom Music Path Editbox
 		szEditBoxDesc = ""
 		if (UserProfile.getMusicPath() != ""):
-			szEditBoxDesc = unicode(UserProfile.getMusicPath())
+			szEditBoxDesc = CvUtil.convertToStr(UserProfile.getMusicPath())
 		self.getTabControl().setText("CustomMusicEditBox", szEditBoxDesc)
 		
 		#################### CLOCK ####################
@@ -378,7 +380,7 @@ class CvOptionsScreen:
 		szDropdownDesc = "ResolutionDropdownBox"
 		aszDropdownElements = ()
 		for iResLoop in range(UserProfile.getResolutionMaxModes()):
-			aszDropdownElements = aszDropdownElements + (unicode(UserProfile.getResolutionString(iResLoop)),)
+			aszDropdownElements = aszDropdownElements + (CvUtil.convertToStr(UserProfile.getResolutionString(iResLoop)),)
 		szCallbackFunction = "handleResolutionDropdownInput"
 		szWidgetName = self.szResolutionComboBoxName = "ResolutionDropdownBox"
 		iInitialSelection = UserProfile.getResolution()
@@ -436,6 +438,16 @@ class CvOptionsScreen:
 		szCallbackFunction = "handleGlobeViewDropdownBoxInput"
 		szWidgetName = self.szGlobeViewDropdownBoxName = "GlobeViewDropdownBox"
 		iInitialSelection = UserProfile.getGlobeViewRenderLevel()
+		tab.attachDropDown(vbox2, szWidgetName, szDropdownDesc, aszDropdownElements, self.callbackIFace, szCallbackFunction, szWidgetName, iInitialSelection)
+		
+		# Texture Quality level
+		tab.attachLabel(vbox1, "GraphicsQualityLabel", localText.getText("TXT_KEY_OPTIONS_SCREEN_TEXTURE_QUALITY_LEVEL", ()))	# Label
+		tab.setControlFlag("GraphicsQualityLabel", "CF_LABEL_DEFAULTSIZE")
+		szDropdownDesc = "TextureQualityDropdownBox"
+		aszDropdownElements = (localText.getText("TXT_KEY_SEALEVEL_HIGH", ()), localText.getText("TXT_KEY_SEALEVEL_MEDIUM", ()), localText.getText("TXT_KEY_SEALEVEL_LOW", ()))
+		szCallbackFunction = "handleTextureQualityDropdownBoxInput"
+		szWidgetName = self.szTextureQualityDropdownBoxName = "TextureQualityDropdownBox"
+		iInitialSelection = UserProfile.getTextureQualityLevel()
 		tab.attachDropDown(vbox2, szWidgetName, szDropdownDesc, aszDropdownElements, self.callbackIFace, szCallbackFunction, szWidgetName, iInitialSelection)
 
 
@@ -592,7 +604,7 @@ class CvOptionsScreen:
 		szDropdownDesc = "CaptureDeviceDropdownBox"
 		aszDropdownElements = ()
 		for iCaptureDevice in range(UserProfile.getNumCaptureDevices()):
-			aszDropdownElements = aszDropdownElements + (unicode(UserProfile.getCaptureDeviceDesc(iCaptureDevice)),)
+			aszDropdownElements = aszDropdownElements + (CvUtil.convertToStr(UserProfile.getCaptureDeviceDesc(iCaptureDevice)),)
 		szCallbackFunction = "handleCaptureDeviceDropdownInput"
 		szWidgetName = "CaptureDeviceDropdownBox"
 		iInitialSelection = UserProfile.getCaptureDeviceIndex()
@@ -614,7 +626,7 @@ class CvOptionsScreen:
 		szDropdownDesc = "PlaybackDeviceDropdownBox"
 		aszDropdownElements = ()
 		for iPlaybackDevice in range(UserProfile.getNumPlaybackDevices()):
-			aszDropdownElements = aszDropdownElements + (unicode(UserProfile.getPlaybackDeviceDesc(iPlaybackDevice)),)
+			aszDropdownElements = aszDropdownElements + (CvUtil.convertToStr(UserProfile.getPlaybackDeviceDesc(iPlaybackDevice)),)
 		szCallbackFunction = "handlePlaybackDeviceDropdownInput"
 		szWidgetName = "PlaybackDeviceDropdownBox"
 		iInitialSelection = UserProfile.getPlaybackDeviceIndex()
@@ -648,10 +660,11 @@ class CvOptionsScreen:
 		szDropdownDesc = "SpeakerConfigDropdownBox"
 		aszDropdownElements = ()
 		iInitialSelection = 0
-		for iSpeakerConfigLoop in range(16):
-			szActiveConfig = UserProfile.getSpeakerConfigFromList(iSpeakerConfigLoop)
-			aszDropdownElements = aszDropdownElements + (unicode(szActiveConfig),)
-			if (UserProfile.getSpeakerConfig() == szActiveConfig):
+		for iSpeakerConfigLoop in range(15):
+			szActiveConfigKey = UserProfile.getSpeakerConfigFromList(iSpeakerConfigLoop)
+			szActiveConfig = localText.getText(szActiveConfigKey, ())
+			aszDropdownElements = aszDropdownElements + (szActiveConfig,)
+			if (UserProfile.getSpeakerConfig() == szActiveConfigKey):
 				iInitialSelection = iSpeakerConfigLoop
 			
 		szCallbackFunction = "handleSpeakerConfigDropdownInput"
@@ -685,7 +698,7 @@ class CvOptionsScreen:
 		# Edit Box
 		szEditBoxDesc = ""
 		if (UserProfile.getMusicPath() != ""):
-			szEditBoxDesc = unicode(UserProfile.getMusicPath())
+			szEditBoxDesc = CvUtil.convertToStr(UserProfile.getMusicPath())
 		szWidgetName = "CustomMusicEditBox"
 		szCallbackFunction = "DummyCallback"
 		tab.attachEdit("AudioPathHBox", szWidgetName, szEditBoxDesc, self.callbackIFace, szCallbackFunction, szWidgetName)

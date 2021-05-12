@@ -11,21 +11,21 @@
 			<Description>TXT_KEY_UPKEEP_LOW</Description>
 			<Strategy>TXT_KEY_UPKEEP_LOW_HELP</Strategy>
 			<iPopulationPercent>5</iPopulationPercent>
-			<iCityPercent>15</iCityPercent>
+			<iCityPercent>20</iCityPercent>
 		</UpkeepInfo>
 		<UpkeepInfo>
 			<Type>UPKEEP_MEDIUM</Type>
 			<Description>TXT_KEY_UPKEEP_MEDIUM</Description>
 			<Strategy>TXT_KEY_UPKEEP_MEDIUM_HELP</Strategy>
 			<iPopulationPercent>10</iPopulationPercent>
-			<iCityPercent>30</iCityPercent>
+			<iCityPercent>40</iCityPercent>
 		</UpkeepInfo>
 		<UpkeepInfo>
 			<Type>UPKEEP_HIGH</Type>
 			<Description>TXT_KEY_UPKEEP_HIGH</Description>
 			<Strategy>TXT_KEY_UPKEEP_HIGH_HELP</Strategy>
 			<iPopulationPercent>15</iPopulationPercent>
-			<iCityPercent>45</iCityPercent>
+			<iCityPercent>60</iCityPercent>
 		</UpkeepInfo>
 	</UpkeepInfos>
 </Civ4UpkeepInfo>

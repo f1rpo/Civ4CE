@@ -185,7 +185,7 @@
 			<Civilopedia>TXT_KEY_BONUS_HORSE_PEDIA</Civilopedia>
 			<BonusClassType>BONUSCLASS_RUSH</BonusClassType>
 			<ArtDefineTag>ART_DEF_BONUS_HORSE</ArtDefineTag>
-			<TechReveal>NONE</TechReveal>
+			<TechReveal>TECH_ANIMAL_HUSBANDRY</TechReveal>
 			<TechCityTrade>TECH_ANIMAL_HUSBANDRY</TechCityTrade>
 			<TechObsolete>NONE</TechObsolete>
 			<YieldChanges>

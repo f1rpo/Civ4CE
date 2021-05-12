@@ -504,9 +504,9 @@ def getWrapY():
 	return False
 
 def getTopLatitude():
-	return 70
+	return 60
 def getBottomLatitude():
-	return -70
+	return -60
 
 def getGridSize(argsList):
 	"Because this is such a land-heavy map, override getGridSize() to make the map smaller"
@@ -632,7 +632,7 @@ class ISTerrainGenerator(CvMapGeneratorUtil.TerrainGenerator):
 	def getLatitudeAtPlot(self, iX, iY):
 		"returns 0.0 for tropical, up to 1.0 for polar"
 		lat = CvMapGeneratorUtil.TerrainGenerator.getLatitudeAtPlot(self, iX, iY) 	# range [0,1]
-		lat = 0.07 + 0.56*lat				# range [0.07, 0.63]
+		lat = 0.07 + 0.56*lat				# range [0.07, 0.56]
 		return lat
 
 def generateTerrainTypes():
@@ -647,7 +647,7 @@ class ISFeatureGenerator(CvMapGeneratorUtil.FeatureGenerator):
 	def getLatitudeAtPlot(self, iX, iY):
 		"returns 0.0 for tropical, up to 1.0 for polar"
 		lat = CvMapGeneratorUtil.FeatureGenerator.getLatitudeAtPlot(self, iX, iY) 	# range [0,1]
-		lat = 0.07 + 0.56*lat				# range [0.07, 0.63]
+		lat = 0.07 + 0.56*lat				# range [0.07, 0.56]
 		return lat
 	
 def addFeatures():

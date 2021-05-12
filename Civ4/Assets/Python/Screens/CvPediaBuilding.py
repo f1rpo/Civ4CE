@@ -230,7 +230,7 @@ class CvPediaBuilding:
 		screen = self.top.getScreen()
 		
 		panelName = self.top.getNextWidgetName()
-		screen.addPanel( panelName, "History", "", True, True,
+		screen.addPanel( panelName, localText.getText("TXT_KEY_CIVILOPEDIA_HISTORY", ()), "", True, True,
 						self.X_HISTORY_PANE, self.Y_HISTORY_PANE,
 						self.W_HISTORY_PANE, self.H_HISTORY_PANE,
 						PanelStyles.PANEL_STYLE_BLUE50 )

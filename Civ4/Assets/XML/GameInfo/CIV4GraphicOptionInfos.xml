@@ -48,5 +48,17 @@
 			<Help>TXT_KEY_GRAPHICOPTION_GLOBE_VIEW_BUILDINGS_DISABLED_HELP</Help>
 			<bDefault>0</bDefault>
 		</GraphicOptionInfo>
+		<GraphicOptionInfo>
+			<Type>GRAPHICOPTION_FULSCREEN</Type>
+			<Description>TXT_KEY_GRAPHICOPTION_FULLSCREEN</Description>
+			<Help>TXT_KEY_GRAPHICOPTION_FULLSCREEN_HELP</Help>
+			<bDefault>1</bDefault>
+		</GraphicOptionInfo>
+		<GraphicOptionInfo>
+			<Type>GRAPHICOPTION_LOWRES_TEXTURES</Type>
+			<Description>TXT_KEY_GRAPHICOPTION_LOWRES_TEXTURES</Description>
+			<Help>TXT_KEY_GRAPHICOPTION_LOWRES_TEXTURES_HELP</Help>
+			<bDefault>0</bDefault>
+		</GraphicOptionInfo>
 	</GraphicOptionInfos>
 </Civ4GraphicOptionInfos>

@@ -253,7 +253,6 @@ class CvReligionScreen:
 
 
 		szArea = self.RELIGION_PANEL_ID
-		xLoop = self.X_RELIGION_START
 		for i in range(gc.getNumReligionInfos()):
 			if (self.iReligionSelected == i):
 				screen.setState(self.getReligionButtonName(i), True)
@@ -270,9 +269,8 @@ class CvReligionScreen:
 		cityList = iPlayer.getCityList()
 		
 		# Loop through the cities
-		yLoop = 10
-		xLoop = self.X_CITY
-		xBorderLoop = 0
+		szLeftCities = u""
+		szRightCities = u""
 		for i in range(len(cityList)):
 		
 			bFirstColumn = (i % 2 == 0)
@@ -310,19 +308,13 @@ class CvReligionScreen:
 				szCityName += CyGameTextMgr().getReligionHelpCity(iLinkReligion, pLoopCity.GetCy(), False, False, True)
 
 			if bFirstColumn:
-				szArea = self.AREA1_ID
+				szLeftCities += u"<font=3>" + szCityName + u"</font>\n"
 			else:
-				szArea = self.AREA2_ID			
-			screen.setLabelAt("", szArea, u"<font=3>" + szCityName + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, xLoop, yLoop, self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-			
-			if (bFirstColumn):
-				xLoop = self.X_CITY + 10
-				xBorderLoop = 10
-			else:
-				xLoop = self.X_CITY
-				xBorderLoop = 0
-				yLoop += self.DY_CITY
-			
+				szRightCities += u"<font=3>" + szCityName + u"</font>\n"
+		
+		screen.addMultilineText("Child" + self.AREA1_ID, szLeftCities, self.X_CITY1_AREA+5, self.Y_CITY_AREA+5, self.W_CITY_AREA-10, self.H_CITY_AREA-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+		screen.addMultilineText("Child" + self.AREA2_ID, szRightCities, self.X_CITY2_AREA+5, self.Y_CITY_AREA+5, self.W_CITY_AREA-10, self.H_CITY_AREA-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+						
 		# Convert Button....
 		iLink = 0
 		if (gc.getPlayer(self.iActivePlayer).canChangeReligion()):

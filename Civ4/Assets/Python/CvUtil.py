@@ -146,6 +146,9 @@ def getScoreComponent(iRawScore, iInitial, iMax, iFactor, bExponential, bFinal, 
 	if bVictory:
 		iScore = ((100 + gc.getDefineINT("SCORE_VICTORY_PERCENT")) * iScore) / 100
 
+	if bFinal:
+		iScore = ((100 + gc.getDefineINT("SCORE_HANDICAP_PERCENT_OFFSET") + (gc.getGame().getHandicapType() * gc.getDefineINT("SCORE_HANDICAP_PERCENT_PER"))) * iScore) / 100
+
 	return int(iScore)
 	
 def getOppositeCardinalDirection(dir):

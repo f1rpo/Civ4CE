@@ -29,6 +29,9 @@ class CvEraMovieScreen:
 		self.Y_EXIT = self.Y_SCREEN + self.H_SCREEN - 50
 		self.W_EXIT = 120
 		self.H_EXIT = 30
+		
+		if (CyInterface().noMovies()):
+			return 0
 				
 		player = PyPlayer(CyGame().getActivePlayer())
 			

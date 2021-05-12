@@ -7,11 +7,11 @@
 <Civ4Defines xmlns="x-schema:CIV4GlobalDefinesSchema.xml">
 	<Define>
 		<DefineName>CIV4_VERSION</DefineName>
-		<iDefineIntVal>100</iDefineIntVal>
+		<iDefineIntVal>109</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>SAVE_VERSION</DefineName>
-		<iDefineIntVal>100</iDefineIntVal>
+		<iDefineIntVal>101</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>LAND_TERRAIN</DefineName>
@@ -290,6 +290,10 @@
 		<iDefineIntVal>1</iDefineIntVal>
 	</Define>
 	<Define>
+		<DefineName>INITIAL_AI_CITY_PRODUCTION</DefineName>
+		<iDefineIntVal>10</iDefineIntVal>
+	</Define>
+	<Define>
 		<DefineName>BASE_CITY_GROWTH_THRESHOLD</DefineName>
 		<iDefineIntVal>20</iDefineIntVal>
 	</Define>
@@ -387,11 +391,11 @@
 	</Define>
 	<Define>
 		<DefineName>FRIENDLY_HEAL_RATE</DefineName>
-		<iDefineIntVal>16</iDefineIntVal>
+		<iDefineIntVal>15</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>CITY_HEAL_RATE</DefineName>
-		<iDefineIntVal>22</iDefineIntVal>
+		<iDefineIntVal>20</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>FOUND_RELIGION_CITY_RAND</DefineName>
@@ -519,7 +523,7 @@
 	</Define>
 	<Define>
 		<DefineName>TRADE_PROFIT_PERCENT</DefineName>
-		<iDefineIntVal>25</iDefineIntVal>
+		<iDefineIntVal>20</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>EXTRA_YIELD</DefineName>
@@ -1141,6 +1145,16 @@
 		<DefineName>SCORE_VICTORY_PERCENT</DefineName>
 		<!--Percentage of your score that gets added if you win the game-->
 		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>SCORE_HANDICAP_PERCENT_OFFSET</DefineName>
+		<!--Offset to the score handicap modifier-->
+		<iDefineIntVal>-60</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>SCORE_HANDICAP_PERCENT_PER</DefineName>
+		<!--The amount of the score modifier per handicap level-->
+		<iDefineIntVal>20</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>MINIMAP_RENDER_SIZE</DefineName>

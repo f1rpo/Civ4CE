@@ -177,12 +177,8 @@ class CvDiplomacy:
 						# Insert the propose trade button
 						self.addUserComment("USER_DIPLOCOMMENT_PROPOSE", -1, -1)
 
-						# If we are at war, use these items to fish for peace
-						if (self.diploScreen.atWar()):
-							self.addUserComment("USER_DIPLOCOMMENT_OFFER_PEACE", -1, -1)
-
 						# During peace, see what we can get for these items
-						else:
+						if (not self.diploScreen.atWar()):
 							if (gc.getGame().getActiveTeam() != gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()):
 								self.addUserComment("USER_DIPLOCOMMENT_COMPLETE_DEAL", -1, -1)
 
@@ -192,7 +188,6 @@ class CvDiplomacy:
 						# If we are at war, demand the items for peace or ask what they want
 						if (self.diploScreen.atWar()):
 							self.addUserComment("USER_DIPLOCOMMENT_PROPOSE", -1, -1)
-							self.addUserComment("USER_DIPLOCOMMENT_OFFER_PEACE", -1, -1)
 
 						# Otherwise (during peacetime) ask what they want for our item or demand they give it to us
 						else:
@@ -213,7 +208,6 @@ class CvDiplomacy:
 						# If we are at war, use this item to fish for peace or propose peace with the items
 						if (self.diploScreen.atWar()):
 							self.addUserComment("USER_DIPLOCOMMENT_PROPOSE", -1, -1)
-							self.addUserComment("USER_DIPLOCOMMENT_OFFER_PEACE", -1, -1)
 
 						# During peace, see what we can get for these items or simply gift them to the AI
 						else:

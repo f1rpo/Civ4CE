@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by Soren Johnson (Firaxis Games) -->
 <!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Soren Johnson (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
@@ -1670,7 +1671,7 @@
 			<Advisor>ADVISOR_GROWTH</Advisor>
 			<iAIWeight>0</iAIWeight>
 			<iAITradeModifier>10</iAITradeModifier>
-			<iCost>3500</iCost>
+			<iCost>4000</iCost>
 			<Era>ERA_MODERN</Era>
 			<FirstFreeUnitClass>NONE</FirstFreeUnitClass>
 			<iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -2899,7 +2900,7 @@
 			<Advisor>ADVISOR_MILITARY</Advisor>
 			<iAIWeight>0</iAIWeight>
 			<iAITradeModifier>0</iAITradeModifier>
-			<iCost>2000</iCost>
+			<iCost>1400</iCost>
 			<Era>ERA_RENAISSANCE</Era>
 			<FirstFreeUnitClass>NONE</FirstFreeUnitClass>
 			<iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -3234,7 +3235,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<iAIWeight>0</iAIWeight>
 			<iAITradeModifier>10</iAITradeModifier>
-			<iCost>2800</iCost>
+			<iCost>3000</iCost>
 			<Era>ERA_INDUSTRIAL</Era>
 			<FirstFreeUnitClass>NONE</FirstFreeUnitClass>
 			<iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -3366,7 +3367,7 @@
 			<Advisor>ADVISOR_MILITARY</Advisor>
 			<iAIWeight>0</iAIWeight>
 			<iAITradeModifier>10</iAITradeModifier>
-			<iCost>3500</iCost>
+			<iCost>4000</iCost>
 			<Era>ERA_INDUSTRIAL</Era>
 			<FirstFreeUnitClass>NONE</FirstFreeUnitClass>
 			<iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -3430,7 +3431,7 @@
 			<Advisor>ADVISOR_MILITARY</Advisor>
 			<iAIWeight>0</iAIWeight>
 			<iAITradeModifier>10</iAITradeModifier>
-			<iCost>3000</iCost>
+			<iCost>3500</iCost>
 			<Era>ERA_MODERN</Era>
 			<FirstFreeUnitClass>NONE</FirstFreeUnitClass>
 			<iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -3503,7 +3504,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<iAIWeight>0</iAIWeight>
 			<iAITradeModifier>0</iAITradeModifier>
-			<iCost>4000</iCost>
+			<iCost>4500</iCost>
 			<Era>ERA_MODERN</Era>
 			<FirstFreeUnitClass>NONE</FirstFreeUnitClass>
 			<iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -3569,7 +3570,7 @@
 			<Advisor>ADVISOR_MILITARY</Advisor>
 			<iAIWeight>0</iAIWeight>
 			<iAITradeModifier>10</iAITradeModifier>
-			<iCost>5000</iCost>
+			<iCost>5500</iCost>
 			<Era>ERA_MODERN</Era>
 			<FirstFreeUnitClass>NONE</FirstFreeUnitClass>
 			<iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -3631,7 +3632,7 @@
 			<Advisor>ADVISOR_GROWTH</Advisor>
 			<iAIWeight>0</iAIWeight>
 			<iAITradeModifier>10</iAITradeModifier>
-			<iCost>5500</iCost>
+			<iCost>7000</iCost>
 			<Era>ERA_MODERN</Era>
 			<FirstFreeUnitClass>NONE</FirstFreeUnitClass>
 			<iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -3697,7 +3698,7 @@
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<iAIWeight>0</iAIWeight>
 			<iAITradeModifier>10</iAITradeModifier>
-			<iCost>5500</iCost>
+			<iCost>6000</iCost>
 			<Era>ERA_MODERN</Era>
 			<FirstFreeUnitClass>NONE</FirstFreeUnitClass>
 			<iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -3760,7 +3761,7 @@
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<iAIWeight>0</iAIWeight>
 			<iAITradeModifier>10</iAITradeModifier>
-			<iCost>6000</iCost>
+			<iCost>8000</iCost>
 			<Era>ERA_MODERN</Era>
 			<FirstFreeUnitClass>UNITCLASS_ENGINEER</FirstFreeUnitClass>
 			<iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -4941,7 +4942,7 @@
 			<Advisor>ADVISOR_MILITARY</Advisor>
 			<iAIWeight>0</iAIWeight>
 			<iAITradeModifier>10</iAITradeModifier>
-			<iCost>1400</iCost>
+			<iCost>2000</iCost>
 			<Era>ERA_RENAISSANCE</Era>
 			<FirstFreeUnitClass>NONE</FirstFreeUnitClass>
 			<iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -5350,7 +5351,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<iAIWeight>0</iAIWeight>
 			<iAITradeModifier>10</iAITradeModifier>
-			<iCost>3000</iCost>
+			<iCost>3500</iCost>
 			<Era>ERA_INDUSTRIAL</Era>
 			<FirstFreeUnitClass>NONE</FirstFreeUnitClass>
 			<iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -5555,7 +5556,7 @@
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<iAIWeight>0</iAIWeight>
 			<iAITradeModifier>0</iAITradeModifier>
-			<iCost>4500</iCost>
+			<iCost>5000</iCost>
 			<Era>ERA_MODERN</Era>
 			<FirstFreeUnitClass>NONE</FirstFreeUnitClass>
 			<iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -5682,7 +5683,7 @@
 			<Advisor>ADVISOR_MILITARY</Advisor>
 			<iAIWeight>0</iAIWeight>
 			<iAITradeModifier>10</iAITradeModifier>
-			<iCost>3500</iCost>
+			<iCost>4000</iCost>
 			<Era>ERA_MODERN</Era>
 			<FirstFreeUnitClass>NONE</FirstFreeUnitClass>
 			<iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -5748,7 +5749,7 @@
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<iAIWeight>0</iAIWeight>
 			<iAITradeModifier>10</iAITradeModifier>
-			<iCost>5000</iCost>
+			<iCost>6000</iCost>
 			<Era>ERA_MODERN</Era>
 			<FirstFreeUnitClass>NONE</FirstFreeUnitClass>
 			<iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -5818,7 +5819,7 @@
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<iAIWeight>0</iAIWeight>
 			<iAITradeModifier>0</iAITradeModifier>
-			<iCost>6000</iCost>
+			<iCost>8000</iCost>
 			<Era>ERA_FUTURE</Era>
 			<FirstFreeUnitClass>NONE</FirstFreeUnitClass>
 			<iWorkerSpeedModifier>0</iWorkerSpeedModifier>
