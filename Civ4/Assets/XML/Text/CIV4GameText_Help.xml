@@ -1,0 +1,890 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Jesse Smith (Firaxis Games) -->
+<!-- Sid Meier's Civilization 4 -->
+<!-- Copyright Firaxis Games 2005 -->
+<!-- -->
+<!-- Game Text Help -->
+<Civ4GameText xmlns="http://www.firaxis.com">
+	<TEXT>
+		<Tag>TXT_KEY_HANDICAP_SETTLER_HELP</Tag>
+		<English>The easiest difficulty level and a great way to start your very first game or when you want to try a new strategy.  As a Settler leader, you will notice that: barbarians and wild animals are less aggressive, your citizens stay happy and healthy longer, and there are many production bonuses to help you.</English>
+		<French>C'est le niveau de difficult&#233; le plus facile et le choix id&#233;al pour votre premi&#232;re partie ou pour essayer une nouvelle strat&#233;gie. Au niveau Chef tribal, les barbares et les animaux sauvages sont moins agressifs, vos citoyens restent heureux et en bonne sant&#233; plus longtemps et de nombreux bonus de production sont pr&#233;vus pour vous aider.</French>
+		<German>Die einfachste Schwierigkeitsstufe ist eine gute Wahl, wenn Sie Ihr allererstes Spiel starten oder eine neue Strategie ausprobieren m&#246;chten. Als Siedleranf&#252;hrer werden Sie feststellen: Barbaren und wilde Tiere sind weniger aggressiv, Ihre B&#252;rger bleiben l&#228;nger gesund und zufrieden und Sie erhalten dar&#252;ber hinaus viele Produktionsboni.</German>
+		<Italian>Il livello di difficolt&#224; pi&#249; semplice e il modo migliore per iniziare la tua prima partita oppure se desideri provare una nuova strategia. Giocando al livello Colono, i Barbari e gli animali selvaggi saranno meno aggressivi, i tuoi cittadini saranno pi&#249; felici, godranno di buona salute pi&#249; a lungo e potrai contare su molti bonus produttivi.</Italian>
+		<Spanish>El nivel de dificultad m&#225;s f&#225;cil y una manera excelente de empezar con vuestra primera partida o probar una estrategia nueva.  Como Colono, ver&#233;is que los b&#225;rbaros y animales salvajes son menos agresivos, que los ciudadanos est&#225;n m&#225;s felices y sanos y que habr&#225; muchas bonificaciones a la producci&#243;n para ayudaros.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_HANDICAP_CHIEFTAIN_HELP</Tag>
+		<English>A relatively easy difficulty level - good for when you want to try a new strategy.  Barbarians and wild animals are stronger and more aggressive and you don't get as many bonuses.</English>
+		<French>C'est un niveau de difficult&#233; relativement facile et un bon choix pour essayer une nouvelle strat&#233;gie. Les barbares et les animaux sauvages sont plus agressifs et vous ne disposez d'aucun bonus.</French>
+		<German>Diesen relativ einfachen Schwierigkeitsgrad sollten Sie w&#228;hlen, wenn Sie eine neue Strategie testen m&#246;chten. Barbaren und wilde Tiere sind in diesem Fall st&#228;rker und aggressiver. Au&#223;erdem erhalten Sie weniger Boni.</German>
+		<Italian>Un livello di difficolt&#224; abbastanza basso, utile per provare una nuova strategia. I barbari e gli animali selvaggi sono pi&#249; forti e aggressivi, inoltre non otterrai molti bonus.</Italian>
+		<Spanish>Un nivel de dificultad relativamente bajo, bueno para probar nuevas estrategias.  Los b&#225;rbaros y animales salvajes son m&#225;s fuertes y agresivos y no se reciben tantas bonificaciones.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_HANDICAP_WARLORD_HELP</Tag>
+		<English>Warlords have a slightly tougher time of it.  Your opponents are less forgiving and more aggressive - watch your back!</English>
+		<French>Les Seigneurs de guerre rencontreront davantage de difficult&#233;s. Vos adversaires sont plus coriaces et agressifs. Surveillez vos arri&#232;res !</French>
+		<German>Kriegsherren haben es etwas schwerer, da Barbaren und wilde Tiere st&#228;rker und aggressiver sind. Au&#223;erdem erhalten Sie als Kriegsherr weniger Boni.</German>
+		<Italian>I guerrieri hanno una vita un po' pi&#249; difficile: i tuoi avversari sono meno permissivi e pi&#249; aggressivi. Fai attenzione!</Italian>
+		<Spanish>Los Caudillos lo tienen un poco m&#225;s crudo.  Los oponentes son menos clementes y m&#225;s peligrosos. &#161;Mucho cuidado!</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_HANDICAP_NOBLE_HELP</Tag>
+		<English>Nobles need to balance their many responsibilities so this is the most balanced level.  Civ veterans will find this level to be a great place to start.</English>
+		<French>Les R&#233;gents doivent faire face &#224; leurs nombreuses responsabilit&#233;s. Il s'agit donc d'un niveau de difficult&#233; tr&#232;s &#233;quilibr&#233; et id&#233;al comme point de d&#233;part pour les v&#233;t&#233;rans de Civilization.</French>
+		<German>Da Adlige sehr viele Pflichten wahrnehmen m&#252;ssen, ist dieser Schwierigkeitsgrad sehr ausgewogen und eignet sich vor allem f&#252;r erfahrene Civilization-Spieler.</German>
+		<Italian>I Nobili devono saper bilanciare le loro grandi responsabilit&#224; e, per questo motivo, questo &#232; il livello pi&#249; equilibrato. I veterani di Civilization lo troveranno il livello ideale per iniziare.</Italian>
+		<Spanish>Los Nobles tienen que equilibrar sus diversas responsabilidades, as&#237; que &#233;ste es el nivel m&#225;s equilibrado.  Los veteranos del Civi comprobar&#225;n que este nivel es un punto estupendo por el que empezar. </Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_HANDICAP_PRINCE_HELP</Tag>
+		<English>As a Prince you will need to truly prove you are of royal stock so this is the first level where you are handicapped vs. the AI.  The AI can produce and research slightly faster than you so you will have to play a much better game to be victorious.</English>
+		<French>En tant que Prince, vous devrez prouver que vous avez du sang royal. Ils 'agit du premier niveau de difficult&#233; avec un handicap contre l'I.A., dont la production et la recherche sont bien plus rapides que les v&#244;tres. Il faudra tr&#232;s bien jouer pour remporter la victoire.</French>
+		<German>Als Prinz m&#252;ssen Sie beweisen, dass Sie wirklich von k&#246;niglichem Blut sind. Um Ihnen das Leben schwer zu machen, produziert und forscht die KI des Spiels in diesem Schwierigkeitsgrad etwas schneller als Sie. Sie m&#252;ssen sich also anstrengen, wenn Sie das Spiel gewinnen m&#246;chten.</German>
+		<Italian>Come Principe, dovrai saper dimostrare di essere di vera stirpe reale, poich&#233; questo &#232; il primo livello nel quale parti con uno svantaggio nei confronti dell'IA. Quest'ultima pu&#242; produrre e fare ricerche pi&#249; velocemente di te, pertanto dovrai giocare con maggior impegno per poter vincere.</Italian>
+		<Spanish>Como Pr&#237;ncipe, tendr&#233;is que demostrar que ten&#233;is sangre real de verdad, por lo que &#233;ste es el primer nivel en el que sufrir&#233;is una desventaja respecto a la IA.  La IA producir&#225; e investigar&#225; algo m&#225;s deprisa que vos, por lo que tendr&#233;is que jugar mucho mejor para lograr la victoria.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_HANDICAP_MONARCH_HELP</Tag>
+		<English>For Monarchs, the challenges definitely start to ramp up on this level.  Upkeep is higher, research is slower, your people are harder to please, and your computer opponents are just plain smarter.</English>
+		<French>Pour les Monarques, les d&#233;fis qui se pr&#233;sentent sont d'une toute autre ampleur. L'entretien est plus cher, la recherche plus lente, votre peuple plus exigeant et vos adversaires I.A. tout simplement plus intelligents.</French>
+		<German>Dieser Schwierigkeitsgrad ist wahrlich k&#246;niglich. Ihre Unterhaltskosten erreichen nun schwindelnde H&#246;hen, Ihre Forschungen kommen nur langsam voran und Ihr Volk ist alles andere als gen&#252;gsam. Zu allem &#220;berfluss m&#252;ssen Sie sich mit &#252;beraus geschickten Computergegnern herumschlagen.</German>
+		<Italian>Per i Monarchi, la sfida comincia a farsi impegnativa. Il costo di mantenimento &#232; superiore, la ricerca pi&#249; lenta, la gente pi&#249; difficile da accontentare e gli avversari computerizzati pi&#249; scaltri.</Italian>
+		<Spanish>Para los Monarcas, el reto empieza a ponerse serio en este nivel.  El mantenimiento es m&#225;s alto, la investigaci&#243;n, m&#225;s lenta, vuestro pueblo es m&#225;s dif&#237;cil de complacer y los oponentes que lleva el ordenador son m&#225;s astutos.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_HANDICAP_EMPEROR_HELP</Tag>
+		<English>Are you ready to be an Emperor?  If so, you will need to prove your mettle by overcoming opponents that are both fast and aggressive while dealing with a population that is harder to motivate and please. This is a true test for Civ experts.</English>
+		<French>Vous vous sentez l'&#226;me d'un empereur ? Si tel est le cas, vous devrez le prouver en terrassant des ennemis rapides et agressifs et en r&#233;gnant sur une population de plus en plus difficile &#224; motiver et &#224; satisfaire. C'est un vrai d&#233;fi pour les experts de Civilization.</French>
+		<German>Sie sind der geborene Kaiser? Beweisen Sie es, indem Sie Ihre schnellen und aggressiven Gegner bezwingen, w&#228;hrend Sie Ihr notorisch unzufriedenes Volk gl&#252;cklich machen. Dieser Herausforderung sind nur wahre Civilization-Experten gewachsen.</German>
+		<Italian>Sei pronto per diventare Imperatore? Se s&#236;, dovrai affrontare con coraggio gli avversari, rapidi e aggressivi, e allo stesso tempo cercare di soddisfare la tua popolazione, pi&#249; difficile da compiacere e motivare. Una vera sfida per gli esperti di Civilization.</Italian>
+		<Spanish>&#191;Est&#225;is listo para ser emperador?  De ser as&#237;, tendr&#233;is que demostrar vuestra val&#237;a derrotando a adversarios m&#225;s r&#225;pidos y agresivos a la vez que cuid&#225;is de una poblaci&#243;n m&#225;s dif&#237;cil de motivar y complacer. Esto es una prueba de verdad para los expertos en Civilization.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_HANDICAP_IMMORTAL_HELP</Tag>
+		<English>Only a few can claim memberships among the ranks of the Immortals.  This is a bruising test for all but the most experienced.</English>
+		<French>Peu nombreux sont ceux qui peuvent revendiquer une place parmi les Immortels. C'est l&#224; un d&#233;fi que seuls les plus exp&#233;riment&#233;s sauront relever.</French>
+		<German>Nur wenige Herrscher werden durch ihre Leistungen unsterblich. Dieser Herausforderung sind nur die Besten der Besten gewachsen.</German>
+		<Italian>Solo in pochi possono appartenere alla schiera degli Immortali. Una prova molto impegnativa, anche per i pi&#249; esperti.</Italian>
+		<Spanish>Solo unos cuantos pueden contarse entre las filas de los inmortales.  Esto resulta una prueba demoledora para todos, excepto para los m&#225;s experimentados.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_HANDICAP_DIETY_HELP</Tag>
+		<English>The ultimate test for only the best Civ players. Can it be beat?</English>
+		<French>L'ultime &#233;preuve, r&#233;serv&#233;e aux meilleurs joueurs. Serez-vous &#224; la hauteur ?</French>
+		<German>Diese ultimative Pr&#252;fung bestehen nur die besten Civ-Spieler aller Zeiten. Geh&#246;ren auch Sie dazu?</German>
+		<Italian>La prova definitiva per i migliori giocatori di Civilization. Ce la farai?</Italian>
+		<Spanish>La prueba definitiva, solo para los mejores jugadores del Civi. &#191;Podr&#225; superarla alguien?</Spanish>
+	</TEXT>
+	<!-- WORLDSIZEINFO - HELP -->
+	<TEXT>
+		<Tag>TXT_KEY_WORLDSIZE_DUEL_HELP</Tag>
+		<English>A very tiny map with only one opponent.  This is tougher than it sounds because you will have to work extra hard at research without the benefit of multiple trading partners.</English>
+		<French>Cette carte minuscule n'abrite qu'un seul adversaire. Elle est plus difficile qu'il n'y para&#238;t, car vous devrez mener vos recherches sans le recours &#224; plusieurs partenaires commerciaux.</French>
+		<German>Eine winzige Karte mit nur einem Gegner. Allerdings ist Ihre Aufgabe schwieriger, als Sie denken. Schlie&#223;lich m&#252;ssen Sie sich auf die Forschung konzentrieren und k&#246;nnen nicht auf mehrere Handelspartner zur&#252;ckgreifen.</German>
+		<Italian>Una mappa molto piccola con un solo avversario. &#200; pi&#249; dura di quanto possa sembrare, poich&#233; dovrai svolgere del lavoro extra per sopperire alla mancanza di civilt&#224; con cui commerciare.</Italian>
+		<Spanish>Un mapa muy diminuto, con un solo adversario.  Es m&#225;s dif&#237;cil de lo que parece porque tendr&#233;is que trabajar m&#225;s duro e investigar sin el beneficio de tener varios socios con los que realizar intercambios.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WORLDSIZE_TINY_HELP</Tag>
+		<English>A very small map with two opponents.  Expect to find other Civs rather quickly and for Conquest games to go more quickly.</English>
+		<French>Une carte tr&#232;s petite avec deux adversaires. Vous d&#233;couvrirez vite les autres civilisations et les parties de type Conqu&#234;te sont plus rapides.</French>
+		<German>Eine sehr kleine Karte mit zwei Gegnern. Da Sie die anderen Zivilisationen relativ schnell finden, d&#252;rften Eroberungsspiele nicht allzu lange dauern.</German>
+		<Italian>Una mappa molto piccola con due avversari. Incontrerai presto le altre civilt&#224;, perci&#242; le partite a conquista sono pi&#249; rapide.</Italian>
+		<Spanish>Un mapa muy peque&#241;o, con dos oponentes.  Os encontrar&#233;is a otras civilizaciones enseguida y las partidas de conquista ir&#225;n m&#225;s r&#225;pido.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WORLDSIZE_SMALL_HELP</Tag>
+		<English>A slightly larger map sized to have 4 opponents for you.</English>
+		<French>Une carte l&#233;g&#232;rement plus grande pouvant accueillir 4 adversaires.</French>
+		<German>Eine etwas gr&#246;&#223;ere Karte mit 4 Gegnern.</German>
+		<Italian>Una mappa leggermente pi&#249; grande, studiata per ospitare fino a quattro rivali per te.</Italian>
+		<Spanish>Un mapa algo mayor, con el tama&#241;o justo para albergar a cuatro rivales.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WORLDSIZE_STANDARD_HELP</Tag>
+		<English>This map size is the default choice and is designed to have 7 total Civs.  There's a lot of opportunity for exploration but you shouldn't feel alone for very long.</English>
+		<French>C'est la taille de carte par d&#233;faut, con&#231;ue pour abriter 7 civilisations. Vous avez de grandes &#233;tendues &#224; explorer, mais la solitude ne vous p&#232;sera pas tr&#232;s longtemps.</French>
+		<German>Eine Standardkarte f&#252;r bis zu 7 Zivilisationen. Sie haben zahlreiche Erkundungsm&#246;glichkeiten, bleiben aber nicht allzu lange allein.</German>
+		<Italian>Questa &#232; la mappa predefinita, disegnata per ospitare un totale di sette civilt&#224;. Ci sono molte opportunit&#224; di esplorazione, ma presto non ti sentirai pi&#249; solo.</Italian>
+		<Spanish>Este mapa es la elecci&#243;n predeterminada y est&#225; dise&#241;ado para albergar a siete civilizaciones en total.  Hay muchas posibilidades de explorar, pero es posible que no tard&#233;is mucho en dejar de sentiros solo.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WORLDSIZE_LARGE_HELP</Tag>
+		<English>For people who want to have some extra room to spread out and explore.  This map size will support 9 Civs comfortably.</English>
+		<French>Pour ceux qui aiment l'exploration et qui veulent beaucoup d'espace. La taille de cette carte lui permet d'accueillir 9 civilisations.</French>
+		<German>F&#252;r Spieler, die gerne etwas mehr Platz haben, um sich auszubreiten. Diese Karte bietet Platz f&#252;r bis zu 9 Zivilisationen.</German>
+		<Italian>Per gente che vuole spazio per espandersi ed esplorare. Questa mappa supporta tranquillamente fino a nove civilt&#224;.</Italian>
+		<Spanish>Para los que quieran tener m&#225;s espacio que explorar y por el que expandirse.  El tama&#241;o de este mapa permite albergar nueve civilizaciones con facilidad.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WORLDSIZE_HUGE_HELP</Tag>
+		<English>If you are looking for a truly epic experience, this map size is for you.  It has room for you and 10 opponents.</English>
+		<French>Si vous voulez vivre une v&#233;ritable &#233;pop&#233;e, cette carte est faite pour vous. Elle est immense et oppose 10 adversaires.</French>
+		<German>Wenn Sie eine unvergessliche Erfahrung suchen, ist diese Karte Ihre erste Wahl. Immerhin treffen Sie hier auf bis zu 10 Gegner!</German>
+		<Italian>Se sei alla ricerca di un'esperienza davvero epica, la dimensione di questa mappa &#232; quello che fa per te, poich&#233; oltre a te c'&#232; posto per altri dieci rivali.</Italian>
+		<Spanish>Si quer&#233;is una experiencia &#233;pica de verdad, el tama&#241;o de este mapa es lo que and&#225;is buscando.  Tiene espacio suficiente para vos y para otros diez rivales.</Spanish>
+	</TEXT>
+	<!-- SEALEVELINFO - HELP -->
+	<TEXT>
+		<Tag>TXT_KEY_SEALEVEL_LOW_HELP</Tag>
+		<English>When the sea level is low, large continents will appear on the map.</English>
+		<French>Si le niveau de la mer est bas, de grands continents appara&#238;tront sur la carte.</French>
+		<German>Ist der Meeresspiegel niedrig, erscheinen auf der Karte gro&#223;e Kontinente.</German>
+		<Italian>Quando il livello delle acque del mare &#232; basso, sulla mappa appaiono grandi continenti.</Italian>
+		<Spanish>Cuando el nivel del mar es bajo, aparecen en el mapa grandes continentes.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_SEALEVEL_MEDIUM_HELP</Tag>
+		<English>This is the default setting with the normal mix of land and water.</English>
+		<French>Le r&#233;glage par d&#233;faut, avec une proportion normale de terres et d'eau.</French>
+		<German>Die Standardeinstellung mit einer normalen Kombination aus Wasser und Land.</German>
+		<Italian>Questa &#232; l'impostazione predefinita per le normali quantit&#224; di terra e acqua. </Italian>
+		<Spanish>&#201;ste es el ajuste predeterminado, con la mezcla normal de agua y tierra.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_SEALEVEL_HIGH_HELP</Tag>
+		<English>You will need a strong Navy when playing with high seas and lots of islands.</English>
+		<French>Vous aurez besoin d'une flotte puissante si les oc&#233;ans sont vastes et parsem&#233;s de nombreuses &#238;les.</French>
+		<German>Wenn Sie auf einer Hochseekarte mit vielen Inseln spielen, brauchen Sie eine starke Flotte!</German>
+		<Italian>Avrai bisogno di una flotta molto potente per affrontare l'alto mare e raggiungere la moltitudine di isole.</Italian>
+		<Spanish>Necesitar&#233;is una gran armada para jugar con todos estos mares e islas.</Spanish>
+	</TEXT>
+	<!-- CLIMATE INFO TEXT -->
+	<TEXT>
+		<Tag>TXT_KEY_CLIMATE_TEMPERATE_HELP</Tag>
+		<English>This is the default Climate.  Everything is balanced exactly as designed for the world type chosen.</English>
+		<French>Le climat par d&#233;faut. Tout est parfaitement &#233;quilibr&#233; pour le type de monde choisi.</French>
+		<German>Das Standardklima. Alles ist exakt auf die gew&#228;hlte Welt ausgerichtet.</German>
+		<Italian>Questo &#232; il clima predefinito: tutto &#232; bilanciato esattamente sul tipo di mondo scelto.</Italian>
+		<Spanish>&#201;ste es el clima predeterminado.  Todo est&#225; equilibrado exactamente para el tipo de mundo escogido.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CLIMATE_TROPICAL_HELP</Tag>
+		<English>This climate is warmer and wetter so expect to see a lot more jungle.  Your workers will have their hands full but there is rich soil underneath.</English>
+		<French>Sous ce climat plus chaud et plus humide, la jungle couvre une grande partie du monde. Vos ouvriers auront beaucoup de travail, mais la terre est riche et fertile.</French>
+		<German>Das Klima ist w&#228;rmer und feuchter. Rechnen Sie also mit zahlreichen Urw&#228;ldern. Ihre Bautrupps haben auf den fruchtbaren B&#246;den alle H&#228;nde voll zu tun.</German>
+		<Italian>Questo clima &#232; pi&#249; caldo e umido, perci&#242; dovrai affrontare molte giungle. I tuoi lavoratori avranno molto da fare, ma il suolo &#232; molto ricco di risorse.</Italian>
+		<Spanish>Este clima es m&#225;s c&#225;lido y h&#250;medo, as&#237; que os encontrar&#233;is muchas selvas.  Vuestros trabajadores estar&#225;n ataread&#237;simos gracias a la f&#233;rtil tierra que pisan.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CLIMATE_ARID_HELP</Tag>
+		<English>A warm and dry climate means you will have to contend with more deserts.  You will want to settle along rivers and take advantage of the flood plains.</English>
+		<French>Un climat chaud et sec entra&#238;ne une plus grande proportion de d&#233;serts. Il faudra vous installer pr&#232;s des rivi&#232;res et tirer profit des plaines inondables.</French>
+		<German>Angesichts des warmen und trockenen Klimas sollten Sie mit zahlreichen W&#252;sten rechnen. Gr&#252;nden Sie Ihre St&#228;dte an Fl&#252;ssen und nutzen Sie auch Sumpfgebiete.</German>
+		<Italian>Un clima asciutto e temperato significa avere a che fare con pi&#249; deserti. Dovrai colonizzare le rive dei fiumi e trarre vantaggio dalle pianure allagate.</Italian>
+		<Spanish>Un clima m&#225;s c&#225;lido y seco supone que tendr&#233;is que v&#233;roslas con m&#225;s desiertos.  Os convendr&#225; instalaros junto a r&#237;os y aprovechar al m&#225;ximo los terrenos de aluvi&#243;n.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CLIMATE_ROCKY_HELP</Tag>
+		<English>You will find many more hills and mountains when you choose this climate.  That means growth may be tougher but there should be no shortage of mineral resources.</English>
+		<French>Si vous choisissez ce climat, il y aura beaucoup de collines et de montagnes. Votre expansion sera donc plus difficile, mais vous ne manquerez pas de ressources min&#233;rales.</French>
+		<German>W&#228;hlen Sie dieses Klima, ist das Gel&#228;nde vergleichsweise gebirgig. Ihre Zivilisation w&#228;chst also nur langsam, muss sich aber keine Sorgen um fehlende mineralische Ressourcen machen.</German>
+		<Italian>Scegliendo questo clima, ti troverai ad affrontare pi&#249; colline e montagne; ci&#242; significa che la crescita potrebbe risultare pi&#249; difficile, ma non dovrebbe esserci carenza di risorse minerarie.</Italian>
+		<Spanish>Cuando elij&#225;is este clima encontrar&#233;is m&#225;s colinas y monta&#241;as.  Eso supone que el crecimiento ser&#225; m&#225;s dif&#237;cil, aunque no habr&#225; escasez de recursos minerales.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CLIMATE_COLD_HELP</Tag>
+		<English>Expect to find an excess of tundra in this climate type.  </English>
+		<French>Sous ce type de climat, le monde sera recouvert en grande partie de toundras.</French>
+		<German>Entscheiden Sie sich f&#252;r dieses Klima, ist die Tundra die vorherrschende Landschaftsform.</German>
+		<Italian>Con questo clima, aspettati di trovare vaste aree di tundra.</Italian>
+		<Spanish>Encontrar&#233;is un exceso de tundra en este tipo de clima.  </Spanish>
+	</TEXT>
+	<!--GAMESPEEDINFO - HELP-->
+	<TEXT>
+		<Tag>TXT_KEY_GAMESPEED_EPIC_HELP</Tag>
+		<English>Experience the full sweep of time when you choose this speed.  The game is balanced to take longer but still feel like a normal game.</English>
+		<French>Si vous choisissez cette vitesse, le temps passera tr&#232;s lentement. Le jeu est &#233;quilibr&#233; pour durer plus longtemps, mais vous aurez l'impression de jouer &#224; une partie normale.</French>
+		<German>W&#228;hlen Sie diese Geschwindigkeit, erleben Sie die gesamte Zeitspanne. Das Spiel dauert dadurch zwar l&#228;nger, ist aber trotzdem ausgewogen.</German>
+		<Italian>Scegliendo questa velocit&#224;, potrai provare l'esperienza dello scorrere del tempo. Il gioco &#232; bilanciato per durare pi&#249; a lungo, ma avrai la sensazione di giocare una partita normale.</Italian>
+		<Spanish>Experimentar&#233;is todo el transcurso del tiempo si escog&#233;is esta velocidad.  La partida est&#225; equilibrada para durar m&#225;s, aunque seguir&#225; pareciendo normal.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GAMESPEED_NORMAL_HELP</Tag>
+		<English>This is the traditional game speed for Civ.</English>
+		<French>La vitesse par d&#233;faut utilis&#233;e dans le jeu.</French>
+		<German>Die traditionelle Spielgeschwindigkeit von Civilization.</German>
+		<Italian>Questa &#232; la velocit&#224; di gioco tradizionale di Civilization.</Italian>
+		<Spanish>Es la velocidad de juego tradicional del Civi.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GAMESPEED_QUICK_HELP</Tag>
+		<English>Choose this for a game where everything happens a bit quicker.  The game will be faster but is balanced to still feel like a normal game.</English>
+		<French>Tout se d&#233;roulera plus vite &#224; cette vitesse. Le jeu sera plus rapide, mais toujours &#233;quilibr&#233; pour conserver l'impression d'une partie normale.</French>
+		<German>W&#228;hlen Sie diese Geschwindigkeit, l&#228;uft das Spiel etwas schneller. Es ist dadurch zwar schneller vorbei, aber trotzdem ausgewogen.</German>
+		<Italian>Scegli questa opzione per avviare una partita nella quale le cose avvengono pi&#249; rapidamente. La partita sar&#224; pi&#249; veloce, ma bilanciata in modo da sembrare una partita normale.</Italian>
+		<Spanish>Escoged &#233;sta si quer&#233;is una partida en la que todo suceda un poco m&#225;s deprisa.  La partida ser&#225; m&#225;s r&#225;pida pero estar&#225; equilibrada para seguir pareciendo normal.</Spanish>
+	</TEXT>
+	<!--AUTOMATEINFO - HELP-->
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_AUTOMATE_BUILD_HELP</Tag>
+		<English>Automate all [COLOR_UNIT_TEXT]Worker[COLOR_REVERT] actions. The unit will continue working until you cancel its automation.</English>
+		<French>Automatise toutes les actions des [COLOR_UNIT_TEXT]ouvriers[COLOR_REVERT]. L'unit&#233; continue &#224; travailler tant qu'elle reste automatis&#233;e.</French>
+		<German>Automatisiert alle Aktionen Ihres [COLOR_UNIT_TEXT]Bautrupps[COLOR_REVERT]. Die Einheit arbeitet, bis Sie die Automatisierung beenden.</German>
+		<Italian>Automatizza tutte le azioni del [COLOR_UNIT_TEXT]lavoratore[COLOR_REVERT]. L'unit&#224; continuer&#224; a lavorare finch&#233; non annullerai l'automazione.</Italian>
+		<Spanish>Automatizar todas las acciones del [COLOR_UNIT_TEXT]Trabajador[COLOR_REVERT]. La unidad seguir&#225; trabajando hasta que cancel&#233;is la automatizaci&#243;n.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_AUTOMATE_NETWORK_HELP</Tag>
+		<English>The unit will create a trade network connecting all your cities and resources. It will continue working until you cancel its automation.</English>
+		<French>L'unit&#233; cr&#233;e un r&#233;seau commercial desservant toutes vos villes et ressources. Elle continue &#224; travailler tant qu'elle reste automatis&#233;e.</French>
+		<German>Die Einheit verbindet alle St&#228;dte und Ressourcen &#252;ber ein Handelsnetz und arbeitet weiter, bis Sie die Automatisierung beenden.</German>
+		<Italian>L'unit&#224; creer&#224; una rete commerciale per collegare tutte le tue citt&#224; e le risorse e continuer&#224; a lavorare finch&#233; non annullerai l'automazione.</Italian>
+		<Spanish>La unidad crear&#225; una red comercial que comunicar&#225; todas vuestras ciudades y recursos. Seguir&#225; trabajando hasta que cancel&#233;is la automatizaci&#243;n.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_AUTOMATE_CITY_HELP</Tag>
+		<English>The unit will improve its closest city only. It will continue working until you cancel its automation.</English>
+		<French>L'unit&#233; n'am&#233;nage que le territoire de la ville la plus proche. Elle continue &#224; travailler tant qu'elle reste automatis&#233;e.</French>
+		<German>Die Einheit modernisiert nur die n&#228;chstgelegene Stadt und arbeitet weiter, bis Sie die Automatisierung beenden.</German>
+		<Italian>L'unit&#224; migliorer&#224; solamente la citt&#224; pi&#249; vicina e continuer&#224; a lavorare finch&#233; non annullerai l'automazione.</Italian>
+		<Spanish>La unidad solo mejorar&#225; la ciudad que tenga m&#225;s cerca. Seguir&#225; trabajando hasta que cancel&#233;is la automatizaci&#243;n.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_AUTOMATE_EXPLORE_HELP</Tag>
+		<English>This order tells the unit to explore the uncharted regions on the map. The unit will continue to move until it has run out of places to explore.</English>
+		<French>L'unit&#233; d&#233;couvre les zones inconnues de la carte et continue &#224; le faire jusqu'&#224; ce qu'elle n'ait plus rien &#224; explorer.</French>
+		<German>Erteilen Sie einer Einheit diesen Befehl, erforscht diese alle unbekannten Gebiete, bis sie auch den entlegensten Winkel der Karte erkundet hat.</German>
+		<Italian>Questo ordine comanda all'unit&#224; di esplorare le regioni ancora inesplorate della mappa. L'unit&#224; continuer&#224; a muoversi finch&#233; ci saranno luoghi da esplorare.</Italian>
+		<Spanish>Con esta orden le dec&#237;s a la unidad que explore las zonas del mapa que est&#233;n sin cartografiar. Seguir&#225; movi&#233;ndose hasta que se quede sin lugares que explorar.</Spanish>
+	</TEXT>
+	<!-- CONTROLINFO - HELP-->
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_CONTROL_CENTER_SELECTION_HELP</Tag>
+		<English>Centers camera on the selected unit.</English>
+		<French>Centrer la cam&#233;ra sur l'unit&#233; s&#233;lectionn&#233;e.</French>
+		<German>Zentriert die Kamera &#252;ber der gew&#228;hlten Einheit.</German>
+		<Italian>Centra la visuale sull'unit&#224; selezionata.</Italian>
+		<Spanish>Centra la c&#225;mara en la unidad seleccionada.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_CONTROL_NEXT_CITY_HELP</Tag>
+		<English>Cycle to the next city screen.</English>
+		<French>Ouvrir l'&#233;cran de la ville suivante.</French>
+		<German>Zum n&#228;chsten Stadt-Bildschirm.</German>
+		<Italian>Scorre alla schermata della citt&#224; successiva.</Italian>
+		<Spanish>Para pasar a la siguiente pantalla de ciudad.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_CONTROL_PREVIOUS_CITY_HELP</Tag>
+		<English>Cycle to previous city screen.</English>
+		<French>Ouvrir l'&#233;cran de la ville pr&#233;c&#233;dente.</French>
+		<German>Zum vorherigen Stadt-Bildschirm.</German>
+		<Italian>Scorre alla schermata della citt&#224; precedente.</Italian>
+		<Spanish>Para pasar a la anterior pantalla de ciudad.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_CONTROL_NEXT_PLOT_UNIT_HELP</Tag>
+		<English>Cycle unit selection to the next unit on the plot.</English>
+		<French>Faire d&#233;filer les unit&#233;s jusqu'&#224; l'unit&#233; suivante sur la case.</French>
+		<German>Zur n&#228;chsten Einheit auf dem Gel&#228;ndefeld.</German>
+		<Italian>Passa la selezione dell'unit&#224; a quella successiva sulla casella.</Italian>
+		<Spanish>La unidad seleccionada pasa a ser la siguiente en la casilla.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_CONTROL_PREVIOUS_PLOT_UNIT_HELP</Tag>
+		<English>Cycle unit selection to the previous unit on the plot.</English>
+		<French>Faire d&#233;filer les unit&#233;s jusqu'&#224; l'unit&#233; pr&#233;c&#233;dente sur la case.</French>
+		<German>Zur vorherigen Einheit auf dem Gel&#228;ndefeld.</German>
+		<Italian>Passa la selezione dell'unit&#224; a quella precedente sulla casella.</Italian>
+		<Spanish>La unidad seleccionada pasa a ser la anterior en la casilla.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_CONTROL_CYCLES_UNIT_HELP</Tag>
+		<English>Cycle unit selection to one that still needs to perform an action this turn.</English>
+		<French>Faire d&#233;filer les unit&#233;s jusqu'&#224; une unit&#233; devant encore effectuer une action pendant ce tour.</French>
+		<German>Zu einer Einheit, die in der aktuellen Runde noch eine Aktion ausf&#252;hren muss.</German>
+		<Italian>Passa la selezione dell'unit&#224; a una che deve ancora compiere un'azione in questo turno.</Italian>
+		<Spanish>La unidad seleccionada pasa a ser una que a&#250;n tenga que realizar una acci&#243;n en este turno.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_CONTROL_CYCLE_UNIT_ALT_HELP</Tag>
+		<English>Cycle unit selection to one that still needs to perform an action this turn.</English>
+		<French>Faire d&#233;filer les unit&#233;s jusqu'&#224; une unit&#233; devant encore effectuer une action pendant ce tour.</French>
+		<German>Zu einer Einheit, die in der aktuellen Runde noch eine Aktion ausf&#252;hren muss.</German>
+		<Italian>Passa dall'unit&#224; selezionata a una che deve ancora compiere azioni durante questo turno.</Italian>
+		<Spanish>La unidad seleccionada pasa a ser una que a&#250;n tenga que realizar una acci&#243;n en este turno.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_CONTROL_WORKERS_HELP</Tag>
+		<English>Cycle unit selection to a worker that still needs to perform an action this turn.</English>
+		<French>Faire d&#233;filer les unit&#233;s jusqu'&#224; un ouvrier devant encore effectuer une action pendant ce tour.</French>
+		<German>Zu einem Bautrupp, der in dieser Runde noch eine Aktion ausf&#252;hren muss.</German>
+		<Italian>Passa la selezione dell'unit&#224; a lavoratore che deve ancora compiere un'azione in questo turno.</Italian>
+		<Spanish>La unidad seleccionada pasa a ser un Trabajador que a&#250;n tenga que realizar una acci&#243;n en este turno.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_CONTROL_ENDTURN_HELP</Tag>
+		<English>End your turn</English>
+		<French>Fin de votre tour.</French>
+		<German>Runde beenden.</German>
+		<Italian>Termina il tuo turno</Italian>
+		<Spanish>Para terminar el turno.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_CONTROL_ENDTURN_ALT_HELP</Tag>
+		<English>End your turn</English>
+		<French>Fin de votre tour.</French>
+		<German>Runde beenden.</German>
+		<Italian>Termina il tuo turno</Italian>
+		<Spanish>Para terminar el turno.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_CONTROL_FORCE_ENDTURN_HELP</Tag>
+		<English>Forces the turn to end even though units may still need to receive orders</English>
+		<French>Forcer la fin du tour m&#234;me si des unit&#233;s peuvent encore recevoir des ordres.</French>
+		<German>Runde beenden, obwohl m&#246;glicherweise noch Einheiten auf Befehle warten.</German>
+		<Italian>Impone la fine del turno, anche se ci sono ancora unit&#224; che devono ricevere ordini.</Italian>
+		<Spanish>Para hacer que termine el turno aunque a&#250;n haya unidades que tengan que recibir &#243;rdenes.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_CONTROL_AUTOMOVES_HELP</Tag>
+		<English>Forces all units with queued actions to make their moves</English>
+		<French>Forcer toutes les unit&#233;s ayant des actions en attente &#224; effectuer leurs t&#226;ches.</French>
+		<German>Zwingt alle Einheiten mit offenen Aktionen, diese auszuf&#252;hren.</German>
+		<Italian>Impone a tutte le unit&#224; con azioni in coda a compiere i propri movimenti.</Italian>
+		<Spanish>Para obligar a todas las unidades con acciones en cola a que hagan sus movimientos.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_SHOW_RELIGION_SCREEN_HELP</Tag>
+		<English>Display the Religion Screen</English>
+		<French>Ouvrir l'&#233;cran de Religion</French>
+		<German>Religionen-Bildschirm einblenden.</German>
+		<Italian>Visualizza la schermata della religione.</Italian>
+		<Spanish>Muestra la pantalla de religi&#243;n.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_SHOW_CIVICS_SCREEN_HELP</Tag>
+		<English>Display the Civics Screen</English>
+		<French>Ouvrir l'&#233;cran de doctrine</French>
+		<German>Staatsformen-Bildschirm einblenden.</German>
+		<Italian>Visualizza la schermata della politica.</Italian>
+		<Spanish>Muestra la pantalla de principios.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_PING_HELP</Tag>
+		<English>Ping a plot to bring it to the attention of your team mates</English>
+		<French>D&#233;signer un terrain pour y attirer l'attention de vos co&#233;quipiers</French>
+		<German>Pingen Sie ein Gel&#228;ndefeld an, um Ihre Mitstreiter darauf aufmerksam zu machen.</German>
+		<Italian>Segnala un punto per richiamare l'attenzione dei tuoi compagni di squadra.</Italian>
+		<Spanish>Hac&#233;is que destaque una casilla para llamar la atenci&#243;n sobre ella a vuestros compa&#241;eros de equipo.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_GRID_HELP</Tag>
+		<English>Toggle Gridlines On / Off</English>
+		<French>Afficher/masquer la grille</French>
+		<German>Rasterlinien ein-/ausblenden.</German>
+		<Italian>Attiva/disattiva la griglia</Italian>
+		<Spanish>Activar cuadr&#237;cula</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_BARE_MAP_HELP</Tag>
+		<English>Makes it easier to see the landscape</English>
+		<French>Facilite l'inspection du terrain</French>
+		<German>Erleichtert die Sicht auf die Landschaft.</German>
+		<Italian>Agevola la visione del panorama.</Italian>
+		<Spanish>Hace que ver el paisaje sea m&#225;s f&#225;cil</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_YIELDS_HELP</Tag>
+		<English>Toggle Food / Production / Commerce icon visibility</English>
+		<French>Alterner entre l'affichage des icones Nourriture / Production / Commerce</French>
+		<German>Nahrungs-/Produktions-/Wirtschaftssymbole ein-/ausblenden.</German>
+		<Italian>Attiva/disattiva la visibilit&#224; delle icone Cibo/Produzione/Commercio.</Italian>
+		<Spanish>Activa la visibilidad de iconos de alimentos / producci&#243;n / comercio</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_SHOW_RESOURCES_HELP</Tag>
+		<English>Makes finding resources easier</English>
+		<French>Facilite la recherche de ressources</French>
+		<German>Erleichtert die Suche nach Ressourcen.</German>
+		<Italian>Agevola la ricerca di risorse.</Italian>
+		<Spanish>Hace que sea m&#225;s f&#225;cil encontrar recursos</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_SCORES_HELP</Tag>
+		<English>Toggle Score Visibility</English>
+		<French>Afficher/masquer les scores.</French>
+		<German>Punktestand ein-/ausblenden.</German>
+		<Italian>Attiva/disattiva la visibilit&#224; del punteggio.</Italian>
+		<Spanish>Activa la visibilidad de la puntuaci&#243;n</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_CONTROL_LOAD_GAME_HELP</Tag>
+		<English>Display the Load Game Screen</English>
+		<French>Ouvrir l'&#233;cran de chargement.</French>
+		<German>Laden-Bildschirm einblenden.</German>
+		<Italian>Visualizza la schermata di caricamento della partita.</Italian>
+		<Spanish>Muestra la pantalla de cargar partida</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_CONTROL_OPTIONS_SCREEN_HELP</Tag>
+		<English>Display the Options Screen</English>
+		<French>Afficher l'&#233;cran des options.</French>
+		<German>Optionen-Bildschirm aufrufen.</German>
+		<Italian>Mostra la schermata delle opzioni.</Italian>
+		<Spanish>Muestra la pantalla de opciones.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_CONTROL_RETIRE_HELP</Tag>
+		<English>Retire from the game. When done in multiplayer, the AI will take over the player's Civilization.</English>
+		<French>Abandonner la partie. En mode Multijoueur, l'I.A. prend le contr&#244;le de la civilisation du joueur.</French>
+		<German>Spiel beenden. Im Multiplayer-Modus &#252;bernimmt in diesem Fall die KI die Zivilisation des entsprechenden Spielers.</German>
+		<Italian>Ritirati dal gioco. Se ci si ritira durante una partita in multigiocatore, l'IA rilever&#224; la civilt&#224; del giocatore.</Italian>
+		<Spanish>Para retirarse de la partida. Cuando se haga en multijugador, la IA llevar&#225; a la civilizaci&#243;n del jugador que abandone.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_CONTROL_SAVE_GROUP_HELP</Tag>
+		<English>Save the Game on all computers (for multi-player)</English>
+		<French>Sauvegarder la partie sur tous les ordinateurs (en mode Multijoueur).</French>
+		<German>Spiel auf allen Computern speichern (Multiplayer-Modus).</German>
+		<Italian>Salva la partita su tutti i computer (per il multiplayer).</Italian>
+		<Spanish>Guarda la partida en todos los ordenadores (para multijugador)</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_CONTROL_SAVE_GAME_HELP</Tag>
+		<English>Save the Game</English>
+		<French>Sauvegarder la partie.</French>
+		<German>Spiel speichern.</German>
+		<Italian>Salva la partita</Italian>
+		<Spanish>Guarda la partida</Spanish>
+	</TEXT>
+	<!-- COMMANDINFO - HELP-->
+	<TEXT>
+		<Tag>TXT_KEY_COMMAND_WAKE_HELP</Tag>
+		<English>This will wake the unit up so that it can be issued orders. Waking a unit does not remove its fortification bonus.</English>
+		<French>R&#233;veiller l'unit&#233; pour lui donner des ordres. Cette action ne modifie pas le bonus de retranchement de l'unit&#233;.</French>
+		<German>Wecken Sie eine Einheit auf und erteilen Sie ihr Befehle. Die Einheit verliert dadurch nicht ihren Befestigungsbonus.</German>
+		<Italian>Questo comando sveglier&#224; l'unit&#224;, in modo che possa ricevere ordini. Svegliando un'unit&#224; non si perde il bonus della sua fortificazione.</Italian>
+		<Spanish>Esto despertar&#225; a la unidad para que se le puedan dar &#243;rdenes. Despertar a una unidad no elimina las bonificaciones que tenga por fortificaci&#243;n.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_COMMAND_CANCEL_HELP</Tag>
+		<English>This will cancel the last order in the unit's mission queue. You will find this to be very useful if you accidentally queue the wrong order.</English>
+		<French>Annuler le dernier ordre de la liste d'attente. Cette option est tr&#232;s utile pour corriger une erreur.</French>
+		<German>L&#246;schen Sie den letzten Befehl in der Befehlsliste der Einheit. Haben Sie dieser versehentlich einen falschen Befehl erteilt, ist diese Funktion sehr n&#252;tzlich.</German>
+		<Italian>Questo comando annulla l'ultimo ordine nella coda delle azioni dell'unit&#224;. Estremamente utile se si sbaglia a impostare la coda degli ordini.</Italian>
+		<Spanish>Esto cancelar&#225; la &#250;ltima orden en la cola de &#243;rdenes de la unidad. Es muy &#250;til si pon&#233;is sin querer una orden incorrecta en la cola.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_COMMAND_CANCEL_ALL_HELP</Tag>
+		<English>This will cancel all queued orders for the currently selected unit.</English>
+		<French>Annuler tous les ordres en attente de l'unit&#233; s&#233;lectionn&#233;e.</French>
+		<German>L&#246;schen Sie alle Befehle der aktuellen Einheit.</German>
+		<Italian>Per annullare tutti gli ordini in coda dell'unit&#224; selezionata.</Italian>
+		<Spanish>Esto cancelar&#225; todas las &#243;rdenes que haya en cola para la unidad que teng&#225;is seleccionada.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_COMMAND_STOP_AUTOMATION_HELP</Tag>
+		<English>This will cancel the order for the unit to automate itself. It will then rely on you for all orders.</English>
+		<French>Annuler l'automatisation de l'unit&#233;. Vous pouvez ensuite lui donner de nouveaux ordres.</French>
+		<German>Widerrufen Sie den Automatisierungsbefehl der Einheit. Diese wartet anschlie&#223;end auf weitere Befehle. </German>
+		<Italian>Per annullare l'ordine di automazione di un'unit&#224; e riprenderne completamente il controllo.</Italian>
+		<Spanish>Sirve para cancelar la orden de automatizarse de la unidad. &#201;sta pasar&#225; a obedecer solo las &#243;rdenes que le deis.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_COMMAND_DELETE_HELP</Tag>
+		<English>Click on this order to remove the unit from play.</English>
+		<French>Retirer l'unit&#233; de la partie.</French>
+		<German>Klicken Sie hier, um die Einheit aus dem Spiel zu entfernen.</German>
+		<Italian>Clicca su questo ordine per rimuovere l'unit&#224; dalla partita.</Italian>
+		<Spanish>Hacer clic en esta orden para eliminar a la unidad de la partida.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_COMMAND_GIFT_HELP</Tag>
+		<English>This will give the currently selected unit to the player who controls the land the unit is standing on. To give the unit to a different player you must first move the unit into their territory.</English>
+		<French>Transf&#233;rer l'unit&#233; s&#233;lectionn&#233;e au joueur contr&#244;lant le terrain sur laquelle elle se trouve. Pour transf&#233;rer une unit&#233; &#224; un joueur, vous devez d'abord placer cette unit&#233; sur son territoire.</French>
+		<German>&#220;bergeben Sie die aktuelle Einheit dem Spieler, der ihren Standort kontrolliert. M&#246;chten Sie die Einheit einem anderen Spieler &#252;bergeben, m&#252;ssen Sie sie zuerst in dessen Territorium verlegen.</German>
+		<Italian>Questo comando serve per consegnare l'unit&#224; attualmente selezionata al giocatore che controlla il territorio sul quale si trova l'unit&#224;. Per dare l'unit&#224; a un altro giocatore devi prima muovere l'unit&#224; nel territorio prescelto.</Italian>
+		<Spanish>Con esto le dar&#233;is la unidad seleccionada al jugador que controle la tierra en la que se encuentre dicha unidad. Para darle la unidad a otro jugador, antes tendr&#233;is que moverla a un territorio que le pertenezca.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_COMMAND_LOAD_HELP</Tag>
+		<English>This will move the unit into a transport.</English>
+		<French>Embarquer l'unit&#233; &#224; bord d'un transport.</French>
+		<German>Schicken Sie die Einheit in ein Transportschiff.</German>
+		<Italian>Per muovere un'unit&#224; a bordo di un trasporto.</Italian>
+		<Spanish>Con esto subir&#233;is la unidad a un transporte.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_COMMAND_UNLOAD_HELP</Tag>
+		<English>This will unload a previously loaded unit from its transport.</English>
+		<French>D&#233;charger une unit&#233; d'un transport.</French>
+		<German>Entladen Sie eine zuvor eingeladene Einheit.</German>
+		<Italian>Per scaricare un'unit&#224; precedentemente caricata su un trasporto.</Italian>
+		<Spanish>Con esto bajar&#233;is del transporte a una unidad previamente embarcada en &#233;l.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_COMMAND_UNLOAD_ALL_HELP</Tag>
+		<English>This will unload all transported units.</English>
+		<French>D&#233;charger toutes les unit&#233;s transport&#233;es.</French>
+		<German>Entladen Sie alle transportierten Einheiten.</German>
+		<Italian>Per scaricare tutte le unit&#224; a bordo del trasporto.</Italian>
+		<Spanish>Con esto desembarcar&#225;n todas las unidades transportadas.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_COMMAND_HOTKEY_HELP</Tag>
+		<English>Allows you to assign a hot-key to this unit.</English>
+		<French>Assigner un raccourci-clavier &#224; cette unit&#233;.</French>
+		<German>Weisen Sie dieser Einheit eine Schnelltaste zu.</German>
+		<Italian>Ti permette di assegnare un tasto di scelta rapida a questa unit&#224;.</Italian>
+		<Spanish>Permite asignarle una tecla de acceso a esta unidad.</Spanish>
+	</TEXT>
+	<!-- MISSION TEXT -->
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_PATROL_TO_HELP</Tag>
+		<English>Set your unit to patrol (repeats a goto path indefinitely)</English>
+		<French>Ordonner &#224; l'unit&#233; de patrouiller entre sa position et le point indiqu&#233; (l'unit&#233; ob&#233;it &#224; deux ordres Aller &#224; ind&#233;finiment).</French>
+		<German>Versetzen Sie die Einheit in den Patrouillenmodus.</German>
+		<Italian>Ordina all'unit&#224; di pattugliare la zona (ripetendo lo stesso percorso a tempo indeterminato).</Italian>
+		<Spanish>Para poner la unidad a patrullar (recorrer indefinidamente un camino)</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_MOVE_TO_HELP</Tag>
+		<English>Set your unit to move to a specific plot</English>
+		<French>Ordonner &#224; l'unit&#233; de rejoindre une position sur la carte.</French>
+		<German>Schicken Sie Ihre Einheit auf ein bestimmtes Gel&#228;ndefeld.</German>
+		<Italian>Ordina alla tua unit&#224; di muoversi in una casella specifica.</Italian>
+		<Spanish>Para decirle a la unidad que vaya a una casilla concreta.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_ROUTE_TO_HELP</Tag>
+		<English>This order causes the worker to build a road (or railroad) to the location selected. The worker will follow the shortest path to the location. The worker wakes when it has completed the assignment.</English>
+		<French>Ordonner &#224; l'ouvrier de construire une route (ou une voie ferr&#233;e) vers l'endroit indiqu&#233;. Il suivra le chemin le plus court et sera &#224; nouveau disponible lorsqu'il aura termin&#233; sa mission.</French>
+		<German>Befehlen Sie einem Bautrupp, eine Stra&#223;e (oder Eisenbahnstrecke) zur gew&#228;hlten Position zu bauen. Ihr Bautrupp w&#228;hlt nun den k&#252;rzesten Weg und wartet nach dem Bau der Stra&#223;e/Eisenbahnstrecke auf weitere Befehle.</German>
+		<Italian>Con questo ordine, si obbliga un lavoratore a costruire una strada (o una ferrovia) nel luogo prescelto. Il lavoratore far&#224; il percorso pi&#249; breve per raggiungere il punto e si sveglier&#224; quando avr&#224; completato il proprio incarico.</Italian>
+		<Spanish>Con esta orden hac&#233;is que un trabajador construya una carretera (o ferrocarril) al lugar seleccionado. El trabajador seguir&#225; el camino m&#225;s corto hasta dicho lugar. Se despertar&#225; cuando haya cumplido su cometido.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_MOVE_TO_UNIT_HELP</Tag>
+		<English>Set your unit to move to a unit</English>
+		<French>Ordonner &#224; l'unit&#233; de rejoindre une autre unit&#233;.</French>
+		<German>Schicken Sie Ihre Einheit zu einer anderen Einheit.</German>
+		<Italian>Ordina alla tua unit&#224; di muoversi verso un'altra unit&#224;.</Italian>
+		<Spanish>Para decirle a la unidad que vaya hasta otra unidad.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_SKIP_HELP</Tag>
+		<English>Do nothing. The unit will awake and ask again for orders the next turn.</English>
+		<French>Ne rien faire. L'unit&#233; attend le tour suivant pour demander de nouveaux ordres.</French>
+		<German>Tun Sie gar nichts, wartet die Einheit in der n&#228;chsten Runde auf weitere Befehle.</German>
+		<Italian>Nessun ordine. L'unit&#224; si sveglier&#224; e attender&#224; altri ordini al turno successivo.</Italian>
+		<Spanish>La unidad no har&#225; nada, despertar&#225; y volver&#225; a solicitar &#243;rdenes al turno siguiente.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_SLEEP_HELP</Tag>
+		<English>Order the unit to sleep until activated by the player</English>
+		<French>Ordonner &#224; l'unit&#233; de s emettre en sommeil tant qu'elle n'est pas r&#233;activ&#233;e par la joueur.</French>
+		<German>Versetzen Sie die Einheit in den Ausruhmodus, bis Sie sie wieder aktivieren.</German>
+		<Italian>Ordina all'unit&#224; di riposare finch&#233; non viene attivata dal giocatore</Italian>
+		<Spanish>Para ordenarle a la unidad que duerma hasta que la activ&#233;is.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_FORTIFY_HELP</Tag>
+		<English>The unit "digs in" to better withstand enemy attack. A unit gets a 5%% defensive bonus for each turn it is fortified, to a maximum bonus of 25%%.</English>
+		<French>L'unit&#233; se retranche pour mieux r&#233;sister aux attaques ennemies. Une unit&#233; retranch&#233;e b&#233;n&#233;ficie d'un bonus de d&#233;fense de 5%% pour chaque tour pass&#233; &#224; se r&#233;g&#233;n&#233;rer, avec un maximum de 25%%.</French>
+		<German>Die Einheit "gr&#228;bt sich ein", um dem Feind besser standhalten zu k&#246;nnen. Befestigte Einheiten erhalten pro Runde 5%% Defensivbonus (maximal 25%%).</German>
+		<Italian>L'unit&#224; si "trincera" per poter fronteggiare meglio l'attacco nemico. Un'unit&#224; guadagna il 5%% di bonus difensivo per ogni turno che rimane fortificata, fino a un massimo del 25%%.</Italian>
+		<Spanish>La unidad se "atrinchera" para aguantar mejor los ataques del enemigo. Obtiene una bonificaci&#243;n defensiva del 5%% por cada turno que se fortifique hasta un m&#225;ximo de un 25%%.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_INTERCEPT_HELP</Tag>
+		<English>This air unit order will tell the craft to attempt interception with any incoming air attacks.</English>
+		<French>Ordonner &#224; l'unit&#233; de tenter d'intercepter toutes les raids a&#233;riens ennemis.</French>
+		<German>Befehlen Sie einer Lufteinheit, alle Luftangriffe abzufangen.</German>
+		<Italian>Questo ordine serve per dire al velivolo di intercettare qualsiasi tentativo di attacco aereo.</Italian>
+		<Spanish>Esta orden es para unidades a&#233;reas y les dice que intenten interceptar todos los ataques a&#233;reos que lleguen.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_HEAL_HELP</Tag>
+		<English>The unit remains inactive until it reaches full strength.</English>
+		<French>L'unit&#233; reste inactive tant que son niveau de sant&#233; n'est pas au maximum.</French>
+		<German>Die Einheit bleibt inaktiv, bis sie wieder ihre volle St&#228;rke erreicht hat.</German>
+		<Italian>L'unit&#224; rimane inattiva finch&#233; non ritorna al massimo delle forze.</Italian>
+		<Spanish>La unidad permanecer&#225; inactiva hasta que recobre el total de su fuerza.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_SENTRY_HELP</Tag>
+		<English>The unit remains inactive until an enemy unit enters any adjacent square.</English>
+		<French>L'unit&#233; reste inactive tant qu'une autre unit&#233; ne p&#233;n&#232;tre pas dans une case adjacente.</French>
+		<German>Die Einheit bleibt inaktiv, bis eine feindliche Einheit ein benachbartes Gel&#228;ndefeld betritt.</German>
+		<Italian>L'unit&#224; rimane inattiva finch&#233; un'unit&#224; nemica non passa in una delle caselle adiacenti.</Italian>
+		<Spanish>La unidad permanecer&#225; inactiva hasta que una unidad enemiga entre en cualquier casilla adyacente.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_AIRLIFT_HELP</Tag>
+		<English>Airlifts the unit to another city.</English>
+		<French>Transport a&#233;rien de l'unit&#233; vers une autre ville.</French>
+		<German>Fliegen Sie die Einheit in eine andere Stadt.</German>
+		<Italian>L'unit&#224; viene trasportata in aereo verso un'altra citt&#224;.</Italian>
+		<Spanish>Para aerotransportar a la unidad a otra ciudad.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_NUKE_HELP</Tag>
+		<English>Drops a nuclear device onto the selected space.</English>
+		<French>Larguer une arme nucl&#233;aire sur la case s&#233;lectionn&#233;e.</French>
+		<German>Werfen Sie im Zielgebiet eine Atombombe ab.</German>
+		<Italian>Lancia una bomba nucleare nella casella selezionata.</Italian>
+		<Spanish>Deja caer una bomba nuclear en la casilla seleccionada.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_RECON_HELP</Tag>
+		<English>Clears the fog of war from around the selected space for one turn.</English>
+		<French>Lever le brouillard de guerre autour de la case s&#233;lectionn&#233;e pendant un tour.</French>
+		<German>Der Nebel des Krieges lichtet sich im Zielgebiet eine Runde lang.</German>
+		<Italian>Elimina la nebbia di guerra dallo spazio selezionato per un turno.</Italian>
+		<Spanish>Despeja durante un turno la niebla de la guerra que haya alrededor de la casilla seleccionada.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_AIRBOMB_HELP</Tag>
+		<English>Destroys city fortifications and tile improvements.</English>
+		<French>D&#233;truire les fortifications de la ville et les am&#233;nagements des cases.</French>
+		<German>Zerst&#246;ren Sie Befestigungen und Modernisierungen.</German>
+		<Italian>Distrugge le fortificazioni delle citt&#224; e i miglioramenti delle caselle.</Italian>
+		<Spanish>Destruye fortificaciones de ciudades y mejoras de casillas.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_BOMBARD_HELP</Tag>
+		<English>Destroys fortifications and reduces the cities defensive bonus.</English>
+		<French>D&#233;truire les fortifications de la ville et r&#233;duire ses bonus de d&#233;fense.</French>
+		<German>Zerst&#246;ren Sie die Befestigungen einer Stadt und senken Sie deren Defensivbonus.</German>
+		<Italian>Distrugge le fortificazioni e riduce i bonus difensivi delle citt&#224;.</Italian>
+		<Spanish>Destruye las fortificaciones y reduce la bonificaci&#243;n defensiva de las ciudades.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_PILLAGE_HELP</Tag>
+		<English>The unit destroys an improvement or route in the tile it occupies.</English>
+		<French>L'unit&#233; d&#233;truit une un am&#233;nagement ou une route/voie ferr&#233;e dans la case qu'elle occupe.</French>
+		<German>Die Einheit zerst&#246;rt eine Modernisierung oder Stra&#223;e auf ihrem Gel&#228;ndefeld.</German>
+		<Italian>L'unit&#224; distrugge un miglioramento o un collegamento sulla casella che occupa.</Italian>
+		<Spanish>La unidad destruye una mejora o ruta en la casilla en que se encuentre.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_SABOTAGE_HELP</Tag>
+		<English>The [COLOR_UNIT_TEXT]Spy[COLOR_REVERT] will attempt to sabotage the tile's improvement.</English>
+		<French>L'[COLOR_UNIT_TEXT]espion[COLOR_REVERT] tente de saboter un am&#233;nagement sur cette case.</French>
+		<German>Der [COLOR_UNIT_TEXT]Spion[COLOR_REVERT] versucht, alle Modernisierungen eines Gel&#228;ndefelds zu sabotieren.</German>
+		<Italian>La [COLOR_UNIT_TEXT]spia[COLOR_REVERT] tenter&#224; di sabotare il miglioramento della casella.</Italian>
+		<Spanish>El [COLOR_UNIT_TEXT]Esp&#237;a[COLOR_REVERT] intentar&#225; sabotear la mejora que haya en la casilla.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_DESTROY_HELP</Tag>
+		<English>The [COLOR_UNIT_TEXT]Spy[COLOR_REVERT] will attempt to destroy the city's current production.</English>
+		<French>L'[COLOR_UNIT_TEXT]espion[COLOR_REVERT] tentera de saboter la production en cours de la ville.</French>
+		<German>Der [COLOR_UNIT_TEXT]Spion[COLOR_REVERT] versucht, die aktuelle Produktion der Stadt zu zerst&#246;ren.</German>
+		<Italian>La [COLOR_UNIT_TEXT]spia[COLOR_REVERT] tenter&#224; di distruggere la produzione attuale della citt&#224;.</Italian>
+		<Spanish>El [COLOR_UNIT_TEXT]Esp&#237;a[COLOR_REVERT] intentar&#225; destruir la producci&#243;n que haya en ese momento en la ciudad.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_STEAL_PLANS_HELP</Tag>
+		<English>The [COLOR_UNIT_TEXT]Spy[COLOR_REVERT] will attempt to steal plans, which will reveal all of the target civilization's units.</English>
+		<French>L'[COLOR_UNIT_TEXT]espion[COLOR_REVERT] tentera de voler des plans, qui r&#233;v&#232;lent toutes les unit&#233;s de la civilisation vis&#233;e.</French>
+		<German>Der [COLOR_UNIT_TEXT]Spion[COLOR_REVERT] versucht, Pl&#228;ne zu stehlen, die alle Einheiten der gew&#252;nschten Zivilisation enth&#252;llen.</German>
+		<Italian>La [COLOR_UNIT_TEXT]spia[COLOR_REVERT] tenter&#224; di rubare dei documenti per rivelare tutte le unit&#224; della civilt&#224; bersaglio.</Italian>
+		<Spanish>El [COLOR_UNIT_TEXT]Esp&#237;a[COLOR_REVERT] intentar&#225; robar los planos, que revelar&#225;n todas las unidades de la civilizaci&#243;n objetivo.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_BUILD_CITY_HELP</Tag>
+		<English>This order causes the [COLOR_UNIT_TEXT]Settler[COLOR_REVERT] to build a city in its current location. The [COLOR_UNIT_TEXT]Settler[COLOR_REVERT] is consumed in the process.</English>
+		<French>Ordonne au [COLOR_UNIT_TEXT]colon[COLOR_REVERT] de s'installer et de fonder une ville. Le [COLOR_UNIT_TEXT]colon[COLOR_REVERT] s'autod&#233;truit dans l'op&#233;ration.</French>
+		<German>Opfern Sie einen [COLOR_UNIT_TEXT]Siedler[COLOR_REVERT], damit dieser an seinem aktuellen Standort eine Stadt gr&#252;ndet.</German>
+		<Italian>Con questo comando, si ordina al [COLOR_UNIT_TEXT]colono[COLOR_REVERT] di costruire una citt&#224; nel punto in cui si trova. Il [COLOR_UNIT_TEXT]colono[COLOR_REVERT] viene sacrificato durante il procedimento.</Italian>
+		<Spanish>Esta orden hace que el [COLOR_UNIT_TEXT]Colono[COLOR_REVERT] construya una ciudad en el lugar en que se encuentre. El [COLOR_UNIT_TEXT]Colono[COLOR_REVERT] se consumir&#225; en el proceso.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_SPREAD_HELP</Tag>
+		<English>This order will consume the [COLOR_UNIT_TEXT]Missionary[COLOR_REVERT] unit but spread their religion to the city.</English>
+		<French>Cet ordre d&#233;truit le [COLOR_UNIT_TEXT]missionnaire[COLOR_REVERT], mais sa religion sera propag&#233;e &#224; la ville.</French>
+		<German>Opfern Sie einen [COLOR_UNIT_TEXT]Missionar[COLOR_REVERT], damit dieser seine Religion in der Welt verbreitet.</German>
+		<Italian>Con questo ordine, si sacrifica un [COLOR_UNIT_TEXT]missionario[COLOR_REVERT], ma viene diffusa la religione nella citt&#224;.</Italian>
+		<Spanish>Esta orden har&#225; que se consuma la unidad de [COLOR_UNIT_TEXT]Misionero[COLOR_REVERT], pero propagar&#225; la religi&#243;n por la ciudad.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_JOIN_CITY_HELP</Tag>
+		<English>This order will make the Great Person join the city as a super specialist. It will consume the Great Person.</English>
+		<French>Ordonner &#224; ce personnage illustre de rejoindre la ville en tant que super-sp&#233;cialiste. Il est alors d&#233;truit.</French>
+		<German>Opfern Sie eine Gro&#223;e Pers&#246;nlichkeit und befehlen Sie ihr, sich als Super-Spezialist in der Stadt anzusiedeln.</German>
+		<Italian>Con questo ordine, i Grandi Personaggi possono unirsi alla citt&#224; in veste di super specialisti, venendo sacrificati nel procedimento.</Italian>
+		<Spanish>Esta orden hace que el gran personaje se quede en la ciudad como un superespecialista, consumi&#233;ndose en el proceso.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_CONSTRUCT_HELP</Tag>
+		<English>This will have the Great Person create their special building. It consumes the Great Person.</English>
+		<French>Ordonner au personnage illustre de construire son &#233;difice sp&#233;cial. Le personnage illustre est alors d&#233;truit.</French>
+		<German>Opfern Sie die Gro&#223;e Pers&#246;nlichkeit, damit diese ihr Spezialgeb&#228;ude errichtet.</German>
+		<Italian>Con questo comando, ordini a un Grande Personaggio di creare un edificio speciale. L'unit&#224; viene sacrificata nel procedimento.</Italian>
+		<Spanish>Hace que el gran personaje cree su edificio especial, consumi&#233;ndose en el proceso.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_DISCOVER_TECH_HELP</Tag>
+		<English>This will have the Great Person automatically discover a technology. It consumes the Great Person.</English>
+		<French>Ordonner au personnage illustre de d&#233;couvrir automatiquement une nouvelle technologie. Le personnage illustre est alors d&#233;truit.</French>
+		<German>Opfern Sie die Gro&#223;e Pers&#246;nlichkeit, damit diese automatisch eine Technologie entdeckt.</German>
+		<Italian>Con questo comando, un Grande Personaggio scopre automaticamente una tecnologia. L'unit&#224; viene sacrificata nel procedimento.</Italian>
+		<Spanish>Hace que el gran personaje descubra autom&#225;ticamente una tecnolog&#237;a, consumi&#233;ndose en el proceso.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_HURRY_PRODUCTION_HELP</Tag>
+		<English>This order will hurry production on the city's current effort. It consumes the Great Person.</English>
+		<French>Acc&#233;l&#233;rer la production en cours de la ville, ce qui d&#233;truit le personnage illustre.</French>
+		<German>Opfern Sie die Gro&#223;e Pers&#246;nlichkeit, um die aktuelle Produktion der Stadt zu beschleunigen.</German>
+		<Italian>Con questo ordine, la produzione attuale di una citt&#224; viene accelerata. L'unit&#224; viene sacrificata nel procedimento.</Italian>
+		<Spanish>El gran personaje acelera la producci&#243;n que la ciudad est&#233; llevando a cabo, consumi&#233;ndose en el proceso.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_CONDUCT_TRADE_MISSION_HELP</Tag>
+		<English>This order will have the Great Merchant conduct a trade mission with a foreign city. The amount of gold created is relative to the size of the city and its distance from your capital. It consumes the Great Person.</English>
+		<French>Ordonner au marchand illustre d'&#233;tablir une liaison commerciale avec une autre ville. La quantit&#233; d'or g&#233;n&#233;r&#233;e d&#233;pend de la taille de la ville et de son &#233;loignement de votre capitale. Ceci d&#233;truit le personnage illustre.</French>
+		<German>Opfern Sie die Gro&#223;e Pers&#246;nlichkeit, damit ein Gro&#223;er H&#228;ndler in einer anderen Stadt eine Handelsmission gr&#252;ndet. Die auf diese Weise erzeugte Goldmenge ist von der Gr&#246;&#223;e der Stadt und der Entfernung von Ihrer Hauptstadt abh&#228;ngig.</German>
+		<Italian>Ordina a un Grande Mercante di eseguire una missione commerciale in una citt&#224; straniera. Il quantitativo d'oro generato &#232; relativo alla dimensione della citt&#224; e alla distanza dalla tua capitale. L'unit&#224; viene sacrificata nel procedimento.</Italian>
+		<Spanish>Esta orden hace que el gran mercader lleve a cabo una misi&#243;n comercial en una ciudad extranjera. La cantidad de oro que se genera va en relaci&#243;n al tama&#241;o de la ciudad y la distancia que la separe de la capital. El gran mercader se sacrifica, consumi&#233;ndose en el proceso.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_CREATE_GREAT_WORK_HELP</Tag>
+		<English>This order will have the Great Artist create a Great Work in the city they are currently in. It consumes the Great Person.</English>
+		<French>Ordonner &#224; l'artiste illustre de cr&#233;er un chef d'oeuvre dans la ville o&#249; il se trouve. Ceci d&#233;truit le personnage illustre.</French>
+		<German>Opfern Sie die Gro&#223;e Pers&#246;nlichkeit, damit ein Gro&#223;er K&#252;nstler in der aktuellen Stadt ein gro&#223;es Kunstwerk erschafft.</German>
+		<Italian>Ordina a un Grande Artista di creare una Grande Opera nella citt&#224; in cui si trova. L'unit&#224; viene sacrificata nel procedimento.</Italian>
+		<Spanish>Esta orden hace que el gran artista cree una gran obra en la ciudad en la que se encuentre, consumi&#233;ndose en el proceso.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MISSION_START_GOLDENAGE_HELP</Tag>
+		<English>This order will consume multiple Great People (of different types) and initiate a Golden Age (extra [ICON_PRODUCTION] &amp; [ICON_COMMERCE]).</English>
+		<French>Ordonner &#224; plusieurs personnages illustres (de types diff&#233;rents) de d&#233;clencher un &#226;ge d'or ([ICON_PRODUCTION] &amp; [ICON_COMMERCE] suppl&#233;mentaires)</French>
+		<German>Opfern Sie mehrere Gro&#223;e Pers&#246;nlichkeiten (unterschiedlicher Klassen), um ein goldenes Zeitalter (zus&#228;tzliche [ICON_PRODUCTION] &amp; [ICON_COMMERCE]) zu begr&#252;nden.</German>
+		<Italian>Con questo ordine, si sacrificano svariati grandi personaggi (di tipi differenti) e si avvia l'Et&#224; dell'Oro ([ICON_PRODUCTION] &amp; [ICON_COMMERCE] supplementari).</Italian>
+		<Spanish>Esta orden consumir&#225; a varios grandes personajes (de diferentes tipos) e iniciar&#225; una edad de oro ([ICON_PRODUCTION] y [ICON_COMMERCE] mayores).</Spanish>
+	</TEXT>
+	<!-- EMPHASIZEINFO - HELP -->
+	<TEXT>
+		<Tag>TXT_KEY_EMPHASIZE_FOOD_HELP</Tag>
+		<English>Select this to have a city obtain high levels of food (bread) each turn. Food is necessary to help cities gain population.</English>
+		<French>Favoriser la production de nourriture (pain) dans la ville &#224; chaque tour. Indispensable &#224; la croissance de votre population.</French>
+		<German>Konzentrieren Sie sich auf die Nahrungsproduktion (Brot). Ausreichend Nahrung ist f&#252;r das Bev&#246;lkerungswachstum entscheidend.</German>
+		<Italian>Seleziona questo comando per ottenere a ogni turno grandi quantit&#224; di cibo (pane) nella citt&#224; selezionata. Il cibo &#232; necessario per aiutare l'aumento della popolazione nelle citt&#224;.</Italian>
+		<Spanish>Seleccionad esto para hacer que la ciudad obtenga grandes cantidades de alimentos (panes) cada turno. Los alimentos son necesarios para que se incremente la poblaci&#243;n de las ciudades.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EMPHASIZE_PRODUCTION_HELP</Tag>
+		<English>Select this to have a city obtain high levels of production (hammers) each turn. Focusing the city on production will slow growth but ensure that the cities are producing as quickly as possible.</English>
+		<French>Favoriser la production (marteaux) dans la ville &#224; chaque tour. Sa croissance sera plus lente, mais la construction aussi rapide que possible.</French>
+		<German>Konzentrieren Sie sich auf die Produktion (H&#228;mmer). Dadurch w&#228;chst Ihre Bev&#246;lkerung zwar langsamer, Ihre St&#228;dte produzieren allerdings mit maximaler Geschwindigkeit.</German>
+		<Italian>Seleziona questo comando per ottenere a ogni turno grandi quantit&#224; di produzione (scudi) nella citt&#224; selezionata. Concentrando gli sforzi della citt&#224; nella produzione, la crescita demografica verr&#224; ridotta, ma le opere verranno realizzate pi&#249; rapidamente.</Italian>
+		<Spanish>Seleccionad esto para hacer que la ciudad obtenga grandes cantidades de producci&#243;n (martillos) cada turno. Centrar una ciudad en la producci&#243;n har&#225; que crezca lentamente, pero asegura que produzca lo m&#225;s r&#225;pido posible.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EMPHASIZE_COMMERCE_HELP</Tag>
+		<English>Select this to have a city obtain high levels of commerce (gold) each turn. Commerce translates into gold which allows you to research, expand, and build your empire.</English>
+		<French>Favoriser le commerce (or) dans la ville &#224; chaque tour. G&#233;n&#232;re l'or qui finance vos recherches et l'expansion de votre empire.</French>
+		<German>Konzentrieren Sie sich auf die Wirtschaft (Gold) einer Stadt. Investieren Sie das erwirtschaftete Gold anschlie&#223;end in die Forschung und die Vergr&#246;&#223;erung Ihres Imperiums.</German>
+		<Italian>Seleziona questo comando per ottenere a ogni turno grandi quantit&#224; di commercio (oro) nella citt&#224; selezionata. Il commercio viene trasformato in oro, necessario per compiere ricerche, espandersi e costruire il tuo impero.</Italian>
+		<Spanish>Seleccionad esto para hacer que la ciudad obtenga grandes cantidades de comercio (oro) cada turno. El comercio se traduce en oro, lo que os permite investigar, as&#237; como expandir y construir vuestro imperio.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EMPHASIZE_RESEARCH_HELP</Tag>
+		<English>Select this to have a city focus on achieving the highest amount of research possible. This will activate specialists if they are available to help facilitate the city's tech research.</English>
+		<French>Favoriser au maximum la recherche dans la ville. Cette action activera les sp&#233;cialistes disponibles pour l'acc&#233;l&#233;rer.</French>
+		<German>Konzentrieren Sie sich auf die Forschung. Dadurch bringen Ihre St&#228;dte Spezialisten hervor. Diese beschleunigen die Erforschung von Technologien.</German>
+		<Italian>Seleziona questo comando per concentrare al massimo gli sforzi della citt&#224; sulla ricerca. Cos&#236; attiverai degli specialisti che, se disponibili, aiuteranno lo sviluppo tecnologico all'interno delle citt&#224;.</Italian>
+		<Spanish>Seleccionad esto para hacer que la ciudad se concentre en lograr la mayor cantidad posible de investigaci&#243;n. Esto activar&#225; a los especialistas, si est&#225;n disponibles, para ayudar a facilitar la investigaci&#243;n tecnol&#243;gica de la ciudad.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EMPHASIZE_GREAT_PEOPLE_HELP</Tag>
+		<English>Select this to have the city focus on creating a great person. The governor will use specialists to try and create a Great Person as quickly as possible.</English>
+		<French>Choisissez cette option pour que la ville se concentre sur la cr&#233;ation d'un personnage illustre. Le gouverneur utilisera les sp&#233;cialistes &#224; sa disposition pour le cr&#233;er aussi vite que possible.</French>
+		<German>Konzentrieren Sie sich auf die Schaffung Gro&#223;er Pers&#246;nlichkeiten. Der Statthalter der Stadt setzt in diesem Fall Spezialisten ein, um m&#246;glichst schnell eine Gro&#223;e Pers&#246;nlichkeit hervorzubringen.</German>
+		<Italian>Seleziona questo comando per concentrare al massimo gli sforzi della citt&#224; sulla realizzazione di un Grande Personaggio. Il governatore cercher&#224; di utilizzare degli specialisti per tentare di realizzare il pi&#249; velocemente possibile un Grande Personaggio.</Italian>
+		<Spanish>Seleccionad esto para hacer que la ciudad se concentre en crear un gran personaje. El gobernante usar&#225; a los especialistas para que intenten crear un gran personaje lo m&#225;s r&#225;pidamente posible.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EMPHASIZE_AVOID_GROWTH_HELP</Tag>
+		<English>Typically the governor will try to meet your demands while allowing for some growth to continue in the city. Select this option to indicate that growth should be avoided with all focus being on the appropriate emphasis.</English>
+		<French>Le gouverneur essaiera toujours de satisfaire vos d&#233;sirs, mais sans p&#233;naliser la croissance de la ville. Choisissez cette option pour stopper toute croissance de la ville pendant qu'elle se concentre sur autre chose.</French>
+		<German>Normalerweise versuchen Statthalter, Ihre Forderungen zu erf&#252;llen und die Stadt gleichzeitig zu vergr&#246;&#223;ern. W&#228;hlen Sie diese Option, wenn Sie das Wachstum vernachl&#228;ssigen und sich auf das Wesentliche konzentrieren m&#246;chten.</German>
+		<Italian>In genere, i governatori cercheranno di soddisfare le tue richieste, permettendo comunque una leggera crescita delle citt&#224;. Seleziona questa opzione per indicare che bisogna evitare la crescita e per concentrare tutti gli sforzi sugli ordini appropriati.</Italian>
+		<Spanish>Normalmente, el gobernante intentar&#225; cumplir vuestras exigencias permitiendo que, a la vez, la ciudad siga creciendo a menor velocidad. Seleccionad esta opci&#243;n para indicarle que prescinda del crecimiento y se concentre en lo que hag&#225;is hincapi&#233;.</Spanish>
+	</TEXT>
+	<!-- EMPHASIZEINFO - HELP -->
+	<TEXT>
+		<Tag>TXT_KEY_INTERFACEMODE_GO_TO_HELP</Tag>
+		<English>Order the selected unit to move to a tile</English>
+		<French>Ordonner &#224; l'unit&#233; s&#233;lectionn&#233;e de se d&#233;placer vers une case.</French>
+		<German>Schicken Sie die gew&#228;hlte Einheit auf ein bestimmtes Gel&#228;ndefeld.</German>
+		<Italian>Ordina all'unit&#224; selezionata di muoversi su una casella</Italian>
+		<Spanish>Ordena a la unidad seleccionada que se mueva hasta una casilla.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INTERFACEMODE_GO_TO_TYPE_HELP</Tag>
+		<English>Orders all units of the currently selected unit's type to move</English>
+		<French>Ordonner &#224; toutes les unit&#233;s du type s&#233;lectionn&#233; de se d&#233;placer.</French>
+		<German>Erteilen Sie allen Einheiten des gew&#228;hlten Typs den Marschbefehl.</German>
+		<Italian>Ordina a tutte le unit&#224; dello stesso tipo di quella selezionata di muoversi</Italian>
+		<Spanish>Ordena moverse a todas las unidades del tipo seleccionado actualmente.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INTERFACEMODE_GO_TO_ALL_HELP</Tag>
+		<English>Order all units on the currently selected unit's tile to move</English>
+		<French>Ordonner &#224; toutes les unit&#233;s sur la case de l'unit&#233; s&#233;lectionn&#233;e de se d&#233;placer.</French>
+		<German>Erteilen Sie allen Einheiten auf dem Feld der gew&#228;hlten Einheit den Marschbefehl.</German>
+		<Italian>Ordina a tutte le unit&#224; attualmente sulla casella selezionata di muoversi</Italian>
+		<Spanish>Ordena moverse a todas las unidades de la casilla seleccionada actualmente.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INTERFACEMODE_ROUTE_TO_HELP</Tag>
+		<English>Order the unit to build roads or railroads to the selected tile</English>
+		<French>Ordonner &#224; l'unit&#233; s&#233;lectionn&#233;e de construire des routes ou des voies ferr&#233;es vers la case s&#233;lectionn&#233;e.</French>
+		<German>Befehlen Sie der Einheit, Stra&#223;en oder Eisenbahnstrecken zum gew&#228;hlten Gel&#228;ndefeld zu bauen.</German>
+		<Italian>Ordina all'unit&#224; di costruire strade e ferrovie sulla casella selezionata</Italian>
+		<Spanish>Ordena a la unidad que construya carreteras o ferrocarriles hasta la casilla seleccionada.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INTERFACEMODE_AIRLIFT_HELP</Tag>
+		<English>Order the unit airlifted to the selected tile</English>
+		<French>Ordonner le transport a&#233;rien de l'unit&#233; vers la case s&#233;lectionn&#233;e.</French>
+		<German>Fliegen Sie die Einheit zum gew&#228;hlten Gel&#228;ndefeld.</German>
+		<Italian>Ordina il trasporto aereo dell'unit&#224; sulla casella selezionata</Italian>
+		<Spanish>Ordena a la unidad que se aerotransporte hasta la casilla seleccionada.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INTERFACEMODE_NUKE_HELP</Tag>
+		<English>Order a nuclear missile strike on the selected tile</English>
+		<French>Ordonner une frappe nucl&#233;aire sur la case s&#233;lectionn&#233;e</French>
+		<German>Befehlen Sie einen Atomschlag auf das gew&#228;hlte Gel&#228;ndefeld.</German>
+		<Italian>Ordina un attacco missilistico nucleare sulla casella selezionata</Italian>
+		<Spanish>Ordena un ataque con misil nuclear a la casilla seleccionada.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INTERFACEMODE_RECON_HELP</Tag>
+		<English>Order the air unit to perform a recon sweep on an area</English>
+		<French>Ordonner &#224; l'unit&#233; a&#233;rienne d'effectuer une reconnaissance sur un secteur donn&#233;.</French>
+		<German>Schicken Sie die Lufteinheit zu einem Aufkl&#228;rungsflug in das Zielgebiet.</German>
+		<Italian>Ordina all'unit&#224; aerea di eseguire un giro di ricognizione sulla zona</Italian>
+		<Spanish>Ordena a la unidad a&#233;rea que lleve a cabo un barrido de reconocimiento en un &#225;rea.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INTERFACEMODE_AIRBOMB_HELP</Tag>
+		<English>Order the air unit to bomb the city or improvement in the selected tile</English>
+		<French>Ordonner &#224; l'unit&#233; a&#233;rienne de bombarder la ville ou l'am&#233;nagement de la case s&#233;lectionn&#233;e.</French>
+		<German>Befehlen Sie der Lufteinheit, die Modernisierung des gew&#228;hlten Gel&#228;ndefelds zu bombardieren.</German>
+		<Italian>Ordina all'unit&#224; aerea di bombardare la citt&#224; o il miglioramento sulla casella selezionata</Italian>
+		<Spanish>Ordena a la unidad a&#233;rea que bombardee la ciudad o la mejora que haya en la casilla seleccionada.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INTERFACEMODE_AIRSTRIKE_HELP</Tag>
+		<English>Order the air unit to attack enemy units in the selected tile</English>
+		<French>Ordonner &#224; l'unit&#233; a&#233;rienne d'attaquer les unit&#233;s ennemies sur la case s&#233;lectionn&#233;e.</French>
+		<German>Befehlen Sie der Lufteinheit, feindliche Einheiten auf dem gew&#228;hlten Gel&#228;ndefeld zu bombardieren.</German>
+		<Italian>Ordina all'unit&#224; aerea di attaccare le unit&#224; nemiche sulla casella selezionata</Italian>
+		<Spanish>Ordena a la unidad a&#233;rea que ataque a las unidades enemigas que haya en la casilla seleccionada.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INTERFACEMODE_REBASE_HELP</Tag>
+		<English>Order the air unit to rebase to another city</English>
+		<French>R&#233;affecter un unit&#233; a&#233;rienne &#224; une autre ville.</French>
+		<German>Befehlen Sie der Lufteinheit, in einer anderen Stadt zu landen.</German>
+		<Italian>Ordina all'unit&#224; aerea di tornare alla base in un'altra citt&#224;</Italian>
+		<Spanish>Ordena a la unidad a&#233;rea que cambie de base y se vaya a otra ciudad.</Spanish>
+	</TEXT>
+</Civ4GameText>

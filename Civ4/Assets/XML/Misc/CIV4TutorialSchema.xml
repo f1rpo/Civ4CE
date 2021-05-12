@@ -1,0 +1,44 @@
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Jesse Smith (Firaxis Games) -->
+<!-- Sid Meier's Civilization 4 -->
+<!-- Copyright Firaxis Games 2005 -->
+<!-- -->
+<!-- Tutorial Schema -->
+<Schema xmlns="urn:schemas-microsoft-com:xml-data" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+	<ElementType name="bHideSelectionCursor" content="textOnly" dt:type="boolean"/>
+	<ElementType name="fArgumentFloatVal" content="textOnly" dt:type="float"/>
+	<ElementType name="iArgumentIntVal" content="textOnly" dt:type="int"/>
+	<ElementType name="Type" content="textOnly"/>
+	<ElementType name="Description" content="textOnly"/>
+	<ElementType name="TutorialMessageText" content="textOnly"/>
+	<ElementType name="TutorialMessageImage" content="textOnly"/>
+	<ElementType name="TutorialMessageSound" content="textOnly"/>
+	<ElementType name="TutorialScript" content="textOnly"/>
+	<ElementType name="Script" content="textOnly"/>
+	<ElementType name="Civ4TutorialInfos" content="eltOnly">
+		<element type="TutorialInfos" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="TutorialInfos" content="eltOnly">
+		<element type="TutorialInfo" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="TutorialInfo" content="eltOnly">
+		<element type="Type" minOccurs="0" maxOccurs="*"/>
+		<element type="Description" minOccurs="0" maxOccurs="*"/>
+		<element type="TutorialMessages" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="TutorialMessages" content="eltOnly">
+		<element type="TutorialMessage" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="TutorialScripts" content="eltOnly">
+		<element type="Script" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="TutorialMessage" content="eltOnly">
+		<element type="TutorialMessageText" minOccurs="0" maxOccurs="*"/>
+		<element type="TutorialMessageImage" minOccurs="0" maxOccurs="*"/>
+		<element type="TutorialMessageSound" minOccurs="0" maxOccurs="*"/>
+		<element type="TutorialScript" minOccurs="0" maxOccurs="*"/>
+		<element type="TutorialScripts" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="Civ4Tutorial" content="eltOnly">
+		<element type="TutorialInfos" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+</Schema>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Jesse Smith (Firaxis Games) -->
+<!-- Sid Meier's Civilization 4 -->
+<!-- Copyright Firaxis Games 2005 -->
+<!-- -->
+<!-- Special Unit Infos -->
+<Civ4SpecialUnitInfos xmlns="x-schema:CIV4UnitSchema.xml">
+	<SpecialUnitInfos>
+		<SpecialUnitInfo>
+			<Type>SPECIALUNIT_NUKE</Type>
+			<Description>TXT_KEY_SPECIALUNIT_NUKE</Description>
+			<bValid>0</bValid>
+			<ProductionTraits/>
+		</SpecialUnitInfo>
+		<SpecialUnitInfo>
+			<Type>SPECIALUNIT_FIGHTER</Type>
+			<Description>TXT_KEY_SPECIALUNIT_FIGHTER</Description>
+			<bValid>1</bValid>
+			<ProductionTraits/>
+		</SpecialUnitInfo>
+		<SpecialUnitInfo>
+			<Type>SPECIALUNIT_PEOPLE</Type>
+			<Description>TXT_KEY_SPECIALUNIT_PEOPLE</Description>
+			<bValid>1</bValid>
+			<ProductionTraits/>
+		</SpecialUnitInfo>
+	</SpecialUnitInfos>
+</Civ4SpecialUnitInfos>

@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by tomw (Firaxis Games) -->
+<!-- Sid Meier's Civilization 4 -->
+<!-- Copyright Firaxis Games 2005 -->
+<!-- -->
+<!-- River art path information -->
+<Civ4RiverModelInfos xmlns="x-schema:CIV4ArtDefinesSchema.xml">
+	<RiverModelInfos>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River00a.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border00a.dds</BorderFile>
+			<TextureIndex>0</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>S</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River00b.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border00a.dds</BorderFile>
+			<TextureIndex>1</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>S</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River00c.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border00a.dds</BorderFile>
+			<TextureIndex>2</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>S</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River00d.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border00a.dds</BorderFile>
+			<TextureIndex>3</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>S</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River01a.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border01a.dds</BorderFile>
+			<TextureIndex>4</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>N S</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River01b.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border01b.dds</BorderFile>
+			<TextureIndex>5</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>N S</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River01c.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border01c.dds</BorderFile>
+			<TextureIndex>6</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>N S</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River01d.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border01d.dds</BorderFile>
+			<TextureIndex>7</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>N S</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River01e.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border01e.dds</BorderFile>
+			<TextureIndex>8</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>N S</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River01f.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border01f.dds</BorderFile>
+			<TextureIndex>9</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>N S</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River01g.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border01g.dds</BorderFile>
+			<TextureIndex>10</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>N S</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River01h.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border01h.dds</BorderFile>
+			<TextureIndex>11</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>N S</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River02a.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border02a.dds</BorderFile>
+			<TextureIndex>12</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>S W</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River02b.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border02b.dds</BorderFile>
+			<TextureIndex>13</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>S W</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River02c.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border02c.dds</BorderFile>
+			<TextureIndex>14</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>S W</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River02d.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border02d.dds</BorderFile>
+			<TextureIndex>15</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>S W</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River02e.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border02e.dds</BorderFile>
+			<TextureIndex>16</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>S E</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River02f.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border02f.dds</BorderFile>
+			<TextureIndex>17</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>S E</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River02g.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border02g.dds</BorderFile>
+			<TextureIndex>18</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>S E</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River02h.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border02h.dds</BorderFile>
+			<TextureIndex>19</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>S E</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River03a.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border03a.dds</BorderFile>
+			<TextureIndex>20</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>N S W</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River03b.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border03b.dds</BorderFile>
+			<TextureIndex>21</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>N S W</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River03c.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border03c.dds</BorderFile>
+			<TextureIndex>22</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>N E S</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River03d.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border03d.dds</BorderFile>
+			<TextureIndex>23</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>W S E</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River04a.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border04a.dds</BorderFile>
+			<TextureIndex>24</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>N S E W</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River04b.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border04b.dds</BorderFile>
+			<TextureIndex>25</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>N S E W</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River04c.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border04c.dds</BorderFile>
+			<TextureIndex>26</TextureIndex>
+			<DeltaType>DELTA_NONE</DeltaType>
+			<Connections>N S E W</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River04d.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border04d.dds</BorderFile>
+			<TextureIndex>27</TextureIndex>
+			<DeltaType>DELTA_COUNTER_CLOCKWISE</DeltaType>
+			<Connections>N W</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River05a.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border05a.dds</BorderFile>
+			<TextureIndex>28</TextureIndex>
+			<DeltaType>DELTA_STRAIGHT</DeltaType>
+			<Connections>N</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River05b.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border05b.dds</BorderFile>
+			<TextureIndex>29</TextureIndex>
+			<DeltaType>DELTA_CLOCKWISE</DeltaType>
+			<Connections>N</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River05c.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border05c.dds</BorderFile>
+			<TextureIndex>30</TextureIndex>
+			<DeltaType>DELTA_COUNTER_CLOCKWISE</DeltaType>
+			<Connections>N</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+		<RiverModelInfo>
+			<ModelFile>Art/Terrain/Routes/Rivers/River05d.nif</ModelFile>
+			<BorderFile>Art/Terrain/Routes/Rivers/Border05d.dds</BorderFile>
+			<TextureIndex>31</TextureIndex>
+			<DeltaType>DELTA_CLOCKWISE</DeltaType>
+			<Connections>N E</Connections>
+			<Rotations>0 90 180 270</Rotations>
+		</RiverModelInfo>
+	</RiverModelInfos>
+</Civ4RiverModelInfos>

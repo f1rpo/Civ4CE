@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- Sid Meier's Civilization 4 -->
+<!-- Copyright Firaxis Games 2005 -->
+<!-- -->
+<!-- Camera Infos -->
+<Civ4CameraInfos xmlns="x-schema:CIV4InterfaceSchema.xml">
+	<CameraInfos>
+		<CameraInfo>
+			<Type>CAMERA_ZOOM_OUT_360</Type>
+			<Description>none</Description>
+			<Path>art/Cameras/ZoomOut360.nif</Path>
+		</CameraInfo>
+	</CameraInfos>
+</Civ4CameraInfos>

@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Ed Piper (Firaxis Games) -->
+<!-- Sid Meier's Civilization 4 -->
+<!-- Copyright Firaxis Games 2005 -->
+<!-- -->
+<!-- Game Text - New -->
+<Civ4GameText xmlns="http://www.firaxis.com">
+	<TEXT>
+		<Tag>TXT_KEY_AUTOSAVING</Tag>
+		<English>Autosaving...</English>
+		<French>Sauvegarde automatique...</French>
+		<German>Automatisches Speichern ...</German>
+		<Italian>Salvataggio automatico...</Italian>
+		<Spanish>Guardado automático...</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MOVE_FOCUS_BACK_TO</Tag>
+		<English>Move focus back to[SPACE]</English>
+		<French>Centrer la vue sur[SPACE] </French>
+		<German>Fokus zur&#252;cksetzen auf[SPACE]</German>
+		<Italian>Torna su[SPACE]</Italian>
+		<Spanish>Volver a centrarse en[SPACE]</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PEDIA_BONUS_APPEARANCE</Tag>
+		<English>Reveals</English>
+		<French>R&#233;v&#232;le</French>
+		<German>Enth&#252;llt</German>
+		<Italian>Rivela</Italian>
+		<Spanish>Revela</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PEDIA_BONUS_TRADE</Tag>
+		<English>Enables</English>
+		<French>Active</French>
+		<German>Erm&#246;glicht</German>
+		<Italian>Abilita</Italian>
+		<Spanish>Permite</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_POPUP_ARE_YOU_SURE</Tag>
+		<English>Are you sure?</English>
+		<French>Vraiment ?</French>
+		<German>Sind Sie sicher?</German>
+		<Italian>Sei sicuro?</Italian>
+		<Spanish>¿Seguro?</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ENGLISH</Tag>
+		<English>English</English>
+		<French>Anglais</French>
+		<German>English</German>
+		<Italian>Inglese</Italian>
+		<Spanish>Inglés</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_FRENCH</Tag>
+		<English>French</English>
+		<French>Fran&#231;ais</French>
+		<German>Fran&#231;ais</German>
+		<Italian>Francese</Italian>
+		<Spanish>Francés</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GERMAN</Tag>
+		<English>German</English>
+		<French>Allemand</French>
+		<German>Deutsch</German>
+		<Italian>Tedesco</Italian>
+		<Spanish>Alemán</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ITALIAN</Tag>
+		<English>Italian</English>
+		<French>Italien</French>
+		<German>Italiano</German>
+		<Italian>Italiano</Italian>
+		<Spanish>Italiano</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_SPANISH</Tag>
+		<English>Spanish</English>
+		<French>Espagnol</French>
+		<German>Espa&#241;ol</German>
+		<Italian>Spagnolo</Italian>
+		<Spanish>Español</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CANCEL_PATCH_DOWNLOAD</Tag>
+		<English>Cancel the patch download</English>
+		<French>Annuler le t&#233;l&#233;chargement de la mise &#224; jour</French>
+		<German>Patch-Download abbrechen</German>
+		<Italian>Annulla il download della patch</Italian>
+		<Spanish>Cancelar la descarga del parche</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_HOST_GAME</Tag>
+		<English>Host Game</English>
+		<French>H&#233;berger</French>
+		<German>Spiel erstellen</German>
+		<Italian>Ospita partita</Italian>
+		<Spanish>Alojar partida</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_HOST_GAME</Tag>
+		<English>Host Game</English>
+		<French>H&#233;berger</French>
+		<German>Spiel erstellen</German>
+		<Italian>Ospita partita</Italian>
+		<Spanish>Alojar partida</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_LOAD_FILE</Tag>
+		<English>Load File</English>
+		<French>Charger fichier</French>
+		<German>Datei laden</German>
+		<Italian>Carica file</Italian>
+		<Spanish>Cargar archivo</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_SAVE_FILE</Tag>
+		<English>Save File</English>
+		<French>Sauvegarder fichier</French>
+		<German>Datei speichern</German>
+		<Italian>Salva file</Italian>
+		<Spanish>Guardar archivo</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_ESCAPE</Tag>
+		<English>Escape</English>
+		<French>Echap</French>
+		<German>Esc</German>
+		<Italian>Esc</Italian>
+		<Spanish>Esc</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_BACKSPACE</Tag>
+		<English>Backspace</English>
+		<French>Retour arri&#232;re</French>
+		<German>R&#252;cktaste</German>
+		<Italian>Indietro</Italian>
+		<Spanish>Retroceso</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_ENTER</Tag>
+		<English>Enter</English>
+		<French>Entr&#233;e</French>
+		<German>Eingabetaste</German>
+		<Italian>Invio</Italian>
+		<Spanish>Intro</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_LEFT_CONTROL_KEY</Tag>
+		<English>Left Control Key</English>
+		<French>Ctrl gauche</French>
+		<German>Strg links</German>
+		<Italian>Ctrl sinistro</Italian>
+		<Spanish>Ctrl izq.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_LEFT_SHIFT_KEY</Tag>
+		<English>Left Shift Key</English>
+		<French>Maj gauche</French>
+		<German>Umschalten links</German>
+		<Italian>Maiusc sinistro</Italian>
+		<Spanish>Mayús izq.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_RIGHT_SHIFT_KEY</Tag>
+		<English>Right Shift Key</English>
+		<French>Maj droite</French>
+		<German>Umschalten rechts</German>
+		<Italian>Maiusc destro</Italian>
+		<Spanish>Mayús der.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_NUM_PAD_STAR</Tag>
+		<English>Num Pad *</English>
+		<French>* pav&#233; num</French>
+		<German>Ziffernblock *</German>
+		<Italian>TastNum *</Italian>
+		<Spanish>* (num.)</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_LEFT_ALT_KEY</Tag>
+		<English>Left Alt Key</English>
+		<French>Alt gauche</French>
+		<German>Alt</German>
+		<Italian>Alt sinistro</Italian>
+		<Spanish>Alt izq.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_SPACE_KEY</Tag>
+		<English>Space Key</English>
+		<French>Espace</French>
+		<German>Leertaste</German>
+		<Italian>Barra spaziatrice</Italian>
+		<Spanish>Espacio</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_CAPS_LOCK</Tag>
+		<English>Caps Lock</English>
+		<French>Verr.Maj</French>
+		<German>Feststelltaste</German>
+		<Italian>Bloc Maiusc</Italian>
+		<Spanish>Bloq Mayús</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_NUM_LOCK</Tag>
+		<English>Num Lock</English>
+		<French>Verr.Num</French>
+		<German>Num</German>
+		<Italian>Bloc Num</Italian>
+		<Spanish>Bloq Num</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_SCROLL_KEY</Tag>
+		<English>Scroll Key</English>
+		<French>Arr&#234;t d&#233;fil</French>
+		<German>Rollen</German>
+		<Italian>Bloc Scorr</Italian>
+		<Spanish>Bloq Despl</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_NUMPAD_NUMBER</Tag>
+		<English>Numpad %d1_Num</English>
+		<French>%d1_Num pav&#233; num</French>
+		<German>Ziffernblock %d1_Num</German>
+		<Italian>TastNum %d1_Num</Italian>
+		<Spanish>%d1_Num (num.)</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_NUMPAD_MINUS</Tag>
+		<English>Numpad Minus</English>
+		<French>Moins pav&#233; num</French>
+		<German>Zifferblock Minus</German>
+		<Italian>TastNum -</Italian>
+		<Spanish>- (num.)</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_NUMPAD_PLUS</Tag>
+		<English>Numpas Plus</English>
+		<French>Plus pav&#233; num</French>
+		<German>Ziffernblock Plus</German>
+		<Italian>TastNum +</Italian>
+		<Spanish>+ (num.)</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_NUMPAD_PERIOD</Tag>
+		<English>Numpad .</English>
+		<French>. pav&#233; num</French>
+		<German>Ziffernblock ,</German>
+		<Italian>TastNum .</Italian>
+		<Spanish>. (num.)</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_NUMPAD_EQUALS</Tag>
+		<English>Numpad =</English>
+		<French>= pav&#233; num</French>
+		<German>Ziffernblock =</German>
+		<Italian>TastNum =</Italian>
+		<Spanish>= (num.)</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_NUMPAD_ENTER_KEY</Tag>
+		<English>Numpad Enter Key</English>
+		<French>Entr&#233;e pav&#233; num</French>
+		<German>Ziffernblock Enter</German>
+		<Italian>TastNum Invio</Italian>
+		<Spanish>Intro (num.)</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_RIGHT_CONTROL_KEY</Tag>
+		<English>Right Control Key</English>
+		<French>Ctrl droite</French>
+		<German>Strg rechts</German>
+		<Italian>Ctrl destro</Italian>
+		<Spanish>Ctrl der.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_VOLUME_DOWN</Tag>
+		<English>Volume Down</English>
+		<French>Volume -</French>
+		<German>Leiser</German>
+		<Italian>Abbassa volume</Italian>
+		<Spanish>Volumen -</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_VOLUME_UP</Tag>
+		<English>Volume Up</English>
+		<French>Volume +</French>
+		<German>Lauter</German>
+		<Italian>Alza volume</Italian>
+		<Spanish>Volumen +</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_NUMPAD_COMMA</Tag>
+		<English>Numpad ,</English>
+		<French>, pav&#233; num</French>
+		<German>Ziffernblock .</German>
+		<Italian>TastNum .</Italian>
+		<Spanish>, (num.)</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_NUMPAD_SLASH</Tag>
+		<English>Numpad /</English>
+		<French>/ pav&#233; num</French>
+		<German>Ziffernblock /</German>
+		<Italian>TastNum /</Italian>
+		<Spanish>/ (num.)</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_SYSRQ</Tag>
+		<English>SYSRQ</English>
+		<French>Syst</French>
+		<German>S-Abf</German>
+		<Italian>Stamp/R Sist</Italian>
+		<Spanish>Impr Pant</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_RIGHT_ALT_KEY</Tag>
+		<English>Right Alt Key</English>
+		<French>Alt droite</French>
+		<German>Alt Gr</German>
+		<Italian>Alt Gr</Italian>
+		<Spanish>Alt der.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_PAUSE_KEY</Tag>
+		<English>Pause Key</English>
+		<French>Pause</French>
+		<German>Pause</German>
+		<Italian>Pausa</Italian>
+		<Spanish>Pausa</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_HOME_KEY</Tag>
+		<English>Home Key</English>
+		<French>Orig</French>
+		<German>Pos1</German>
+		<Italian>Home</Italian>
+		<Spanish>Inicio</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_UP_ARROW</Tag>
+		<English>Up Arrow</English>
+		<French>Fl&#232;che haut</French>
+		<German>Pfeil nach oben</German>
+		<Italian>Freccia su</Italian>
+		<Spanish>Flecha arriba</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_PAGE_UP</Tag>
+		<English>Page Up</English>
+		<French>Page Haut</French>
+		<German>Bild auf</German>
+		<Italian>PagSu</Italian>
+		<Spanish>Re Pág</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_LEFT_ARROW</Tag>
+		<English>Left Arrow</English>
+		<French>Fl&#232;che gauche</French>
+		<German>Pfeil nach links</German>
+		<Italian>Freccia sinistra</Italian>
+		<Spanish>Flecha izq.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_RIGHT_ARROW</Tag>
+		<English>Right Arrow</English>
+		<French>Fl&#232;che droite</French>
+		<German>Pfeil nach rechts</German>
+		<Italian>Freccia destra</Italian>
+		<Spanish>Flecha der.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_END_KEY</Tag>
+		<English>End Key</English>
+		<French>Fin</French>
+		<German>Ende</German>
+		<Italian>Fine</Italian>
+		<Spanish>Fin</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_DOWN_ARROW</Tag>
+		<English>Down Arrow</English>
+		<French>Fl&#232;che bas</French>
+		<German>Pfeil nach unten</German>
+		<Italian>Freccia giù</Italian>
+		<Spanish>Flecha abajo</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_PAGE_DOWN</Tag>
+		<English>Page Down</English>
+		<French>Page Bas</French>
+		<German>Bild ab</German>
+		<Italian>PagGiù</Italian>
+		<Spanish>Av Pág</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_INSERT_KEY</Tag>
+		<English>Insert Key</English>
+		<French>Inser</French>
+		<German>Einfg</German>
+		<Italian>Ins</Italian>
+		<Spanish>Insert</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_KEYBOARD_DELETE_KEY</Tag>
+		<English>Delete</English>
+		<French>Suppr</French>
+		<German>Entf</German>
+		<Italian>Canc</Italian>
+		<Spanish>Supr</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_IMPROVEMENTS</Tag>
+		<English>Improvements</English>
+		<French>Am&#233;nagements</French>
+		<German>Modernisierungen</German>
+		<Italian>Miglioramenti</Italian>
+		<Spanish>Mejoras</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_BONUSES</Tag>
+		<English>Bonuses</English>
+		<French>Bonus</French>
+		<German>Boni</German>
+		<Italian>Bonus</Italian>
+		<Spanish>Bonificaciones</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_TERRAINS</Tag>
+		<English>Terrains</English>
+		<French>Terrains</French>
+		<German>Gel&#228;nde</German>
+		<Italian>Terreni</Italian>
+		<Spanish>Terrenos</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_CHOOSE_UNIT</Tag>
+		<English>Choose Unit</English>
+		<French>Choisir unit&#233;</French>
+		<German>Einheit w&#228;hlen</German>
+		<Italian>Scegli unità</Italian>
+		<Spanish>Elegir unidad</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_ADD_BUILDINGS</Tag>
+		<English>Add Buildings</English>
+		<French>Ajouter b&#226;timents</French>
+		<German>Geb&#228;ude</German>
+		<Italian>Aggiungi edifici</Italian>
+		<Spanish>Agregar edificios</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_UNITS</Tag>
+		<English>Units</English>
+		<French>Unit&#233;s</French>
+		<German>Einheiten</German>
+		<Italian>Unità</Italian>
+		<Spanish>Unidades</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_BUILDINGS</Tag>
+		<English>Buildings</English>
+		<French>B&#226;timents</French>
+		<German>Geb&#228;ude</German>
+		<Italian>Edifici</Italian>
+		<Spanish>Edificios</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_TECHNOLOGIES</Tag>
+		<English>Technologies</English>
+		<French>Technologies</French>
+		<German>Technologien</German>
+		<Italian>Tecnologie</Italian>
+		<Spanish>Tecnologías</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_CHANGE_ALL_PLOTS</Tag>
+		<English>Change all plots</English>
+		<French>Changer toutes les cases</French>
+		<German>Alle Gel&#228;ndefelder &#228;ndern</German>
+		<Italian>Cambia tutti i terreni</Italian>
+		<Spanish>Cambiar todas las casillas</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_ADD_MOUNTAIN</Tag>
+		<English>Add Mountain</English>
+		<French>Ajouter montagne</French>
+		<German>Berg hinzuf&#252;gen</German>
+		<Italian>Aggiungi montagna</Italian>
+		<Spanish>Agregar montaña</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_ADD_HILL</Tag>
+		<English>Add Hill</English>
+		<French>Ajouter colline</French>
+		<German>H&#252;gel hinzuf&#252;gen</German>
+		<Italian>Aggiungi collina</Italian>
+		<Spanish>Agregar colina</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_ADD_GRASS</Tag>
+		<English>Add Grass</English>
+		<French>Ajouter prairie</French>
+		<German>Gras hinzuf&#252;gen</German>
+		<Italian>Aggiungi prato</Italian>
+		<Spanish>Agregar pradera</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_ADD_OCEAN</Tag>
+		<English>Add Ocean</English>
+		<French>Ajouter oc&#233;an</French>
+		<German>Ozean hinzuf&#252;gen</German>
+		<Italian>Aggiungi oceano </Italian>
+		<Spanish>Agregar océano</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_EXPERIENCE</Tag>
+		<English>Experience:</English>
+		<French>Exp&#233;rience :</French>
+		<German>Erfahrung:</German>
+		<Italian>Esperienza:</Italian>
+		<Spanish>Experiencia:</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_LEVEL</Tag>
+		<English>Level:</English>
+		<French>Niveau :</French>
+		<German>Stufe:</German>
+		<Italian>Livello:</Italian>
+		<Spanish>Nivel:</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_ADD_SCRIPT</Tag>
+		<English>Add Script</English>
+		<French>Ajouter script</French>
+		<German>Skript hinzuf&#252;gen</German>
+		<Italian>Aggiungi script</Italian>
+		<Spanish>Agregar secuencia de comandos</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_POPULATION</Tag>
+		<English>Population:</English>
+		<French>Population :</French>
+		<German>Bev&#246;lkerung:</German>
+		<Italian>Popolazione:</Italian>
+		<Spanish>Población:</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_CULTURE</Tag>
+		<English>Culture:</English>
+		<French>Culture :</French>
+		<German>Kultur:</German>
+		<Italian>Cultura:</Italian>
+		<Spanish>Cultura:</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_GOLD</Tag>
+		<English>Gold:</English>
+		<French>Or :</French>
+		<German>Gold:</German>
+		<Italian>Oro:</Italian>
+		<Spanish>Oro:</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_EDIT_CITY</Tag>
+		<English>Edit City</English>
+		<French>Modifier ville</French>
+		<German>Stadt bearbeiten:</German>
+		<Italian>Modifica città</Italian>
+		<Spanish>Editar ciudad</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_ADD_SCRIPT_TO_PLOT</Tag>
+		<English>Add script to plot</English>
+		<French>Ajouter script &#224; la case</French>
+		<German>Skript zum Gel&#228;ndefeld hinzuf&#252;gen</German>
+		<Italian>Aggiungi script alla casella</Italian>
+		<Spanish>Agregar secuencia de comandos a la casilla</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_CHANGE_START_YEAR</Tag>
+		<English>Change start year</English>
+		<French>Change ann&#233;e de d&#233;part</French>
+		<German>Startjahr &#228;ndern</German>
+		<Italian>Cambia l'anno iniziale</Italian>
+		<Spanish>Cambiar año de comienzo</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_1_BY_1</Tag>
+		<English>1x1</English>
+		<French>1x1</French>
+		<German>1x1</German>
+		<Italian>1x1</Italian>
+		<Spanish>1x1</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_3_BY_3</Tag>
+		<English>3x3</English>
+		<French>3x3</French>
+		<German>3x3</German>
+		<Italian>3x3</Italian>
+		<Spanish>3x3</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_5_BY_5</Tag>
+		<English>5x5</English>
+		<French>5x5</French>
+		<German>5x5</German>
+		<Italian>5x5</Italian>
+		<Spanish>5x5</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_PLAYER_MODE</Tag>
+		<English>Player Mode</English>
+		<French>Mode Joueur</French>
+		<German>Spielermodus</German>
+		<Italian>Modalità giocatore</Italian>
+		<Spanish>Modo Jugador</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_MAP_MODE</Tag>
+		<English>Map Mode</English>
+		<French>Mode Carte</French>
+		<German>Kartenmodus</German>
+		<Italian>Modalità mappa</Italian>
+		<Spanish>Modo Mapa</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_WORLD_BUILDER_EDIT_CONTROL</Tag>
+		<English>World Builder Edit Control</English>
+		<French>Commande Editeur de monde </French>
+		<German>Weltenbauer-Bearbeitungssteuerung</German>
+		<Italian>Comandi dell'editor</Italian>
+		<Spanish>Control de edición del Creador de mundos</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WB_PROMOTIONS</Tag>
+		<English>Promotions</English>
+		<French>Promotions</French>
+		<German>Bef&#246;rderungen</German>
+		<Italian>Promozioni</Italian>
+		<Spanish>Ascensos</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GRAPHICOPTION_EFFECTS_DISABLED</Tag>
+		<English>Effects Disabled</English>
+		<French>Effets d&#233;sactiv&#233;s</French>
+		<German>Effekte deaktiviert</German>
+		<Italian>Effetti disattivati</Italian>
+		<Spanish>Efectos desactivados</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GRAPHICOPTION_EFFECTS_DISABLED_HELP</Tag>
+		<English>Turns off particle effects</English>
+		<French>D&#233;sactive les effets de particule</French>
+		<German>Schaltet Partikeleffekte aus</German>
+		<Italian>Disattiva effetti particellari</Italian>
+		<Spanish>Desactiva los efectos de partículas.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GRAPHICOPTION_GLOBE_VIEW_BUILDINGS_DISABLED</Tag>
+		<English>Globe View Buildings Disabled</English>
+		<French>B&#226;timents de la vue du globe d&#233;sactiv&#233;s</French>
+		<German>Globusansicht Geb&#228;ude deaktiviert</German>
+		<Italian>Edifici disattivati nella visuale globale</Italian>
+		<Spanish>Edificios desactivados en vista global</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_GRAPHICOPTION_GLOBE_VIEW_BUILDINGS_DISABLED_HELP</Tag>
+		<English>Building models won't be displayed in Globe View</English>
+		<French>Les mod&#232;les des b&#226;timents ne s'affichent pas en vue du globe</French>
+		<German>Geb&#228;udemodelle erscheinen nicht in Globusansicht</German>
+		<Italian>I modelli degli edifici non verranno mostrati nella visuale globale</Italian>
+		<Spanish>Los modelos de los edificios no se mostrarán en la vista global.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_LEGAL_LINE_1</Tag>
+		<English>©2005 Firaxis Games, Inc. All Rights Reserved. Manufactured and marketed by Take Two Interactive, New York, NY.</English>
+		<French>&#169;2005 Firaxis Games, Inc. Tous droits r&#233;serv&#233;s. Fabriqu&#233; et commercialis&#233; par Take Two Interactive, New York, NY.</French>
+		<German>&#169; 2005 Firaxis Games, Inc. Alle Rechte vorbehalten. Herstellung und Vermarktung durch Take Two Interactive, New York, NY.</German>
+		<Italian>© 2005 Firaxis Games, Inc. Tutti i diritti riservati. Fabbricato e prodotto da Take Two Interactive, New York, NY.</Italian>
+		<Spanish>©2005 Firaxis Games, Inc. Reservados todos los derechos. Fabricado y comercializado por Take Two Interactive, New York, NY.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_LEGAL_LINE_2</Tag>
+		<English>All trademarks are the property of their respective owners.</English>
+		<French>Toutes les marques commerciales sont la propri&#233;t&#233; de leurs d&#233;tenteurs respectifs.</French>
+		<German>Alle Warenzeichen sind Eigentum der jeweiligen Inhaber.</German>
+		<Italian>Tutti i marchi registrati sono proprietà dei rispettivi detentori.</Italian>
+		<Spanish>Todas las marcas comerciales pertenecen a sus respectivos titulares.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_TUTORIAL_EXIT_RESTART_TITLE</Tag>
+		<English>Relaunching Game</English>
+		<French>Red&#233;marrage du jeu</French>
+		<German>Spiel wird neu gestartet</German>
+		<Italian>Riavvio del gioco in corso</Italian>
+		<Spanish>Reiniciando el juego</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_TUTORIAL_EXIT_RESTART_DESC</Tag>
+		<English>Restarting in order to exit tutorial...</English>
+		<French>Red&#233;marrage pour quitter l'initiation...</French>
+		<German>Neustart, um das Tutorial zu verlassen ...</German>
+		<Italian>Riavvio in corso per uscire dal tutorial...</Italian>
+		<Spanish>Reiniciando para salir del tutorial...</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAP_UPDATE_TITLE</Tag>
+		<English>Map Transfer</English>
+		<French>Transfert carte</French>
+		<German>Kartentransfer</German>
+		<Italian>Trasferimento mappa</Italian>
+		<Spanish>Transferencia de mapa</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAP_UPDATE_SEND</Tag>
+		<English>SENDING MAP...</English>
+		<French>ENVOI CARTE...</French>
+		<German>KARTE WIRD GESENDET ...</German>
+		<Italian>INVIO MAPPA IN CORSO...</Italian>
+		<Spanish>ENVIANDO MAPA...</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAP_UPDATE_RECV</Tag>
+		<English>RECEIVING MAP...</English>
+		<French>RECEPTION CARTE...</French>
+		<German>KARTE WIRD ERHALTEN ...</German>
+		<Italian>RICEZIONE MAPPA IN CORSO...</Italian>
+		<Spanish>RECIBIENDO MAPA...</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAP_NAME_TAG</Tag>
+		<English>Map Name:  %s1_Name</English>
+		<French>Nom de la carte : %s1_Name</French>
+		<German>Kartenname:  %s1_Name</German>
+		<Italian>Nome mappa:  %s1_Name</Italian>
+		<Spanish>Nombre del mapa:  %s1_Name</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_DOWNLOAD_MAP_WAIT</Tag>
+		<English>Waiting for peers to complete map transfer</English>
+		<French>En attente de peer pour terminer le transfert de la carte</French>
+		<German>Warten, dass Peers Kartentranfer abschließen</German>
+		<Italian>In attesa che i peer completino il trasferimento della mappa</Italian>
+		<Spanish>Esperando a que los interlocutores completen la transferencia del mapa</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_SEND_MAP_WAIT</Tag>
+		<English>Sending map to clients.  Please wait...</English>
+		<French>Envoi de la carte aux clients. Veuillez patienter...</French>
+		<German>Karte wird an Clients gesendet. Bitte warten ...</German>
+		<Italian>Invio della mappa ai client in corso.  Attendere...</Italian>
+		<Spanish>Enviando el mapa a los clientes.  Un momento...</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INVALID_CAPTURE_TITLE</Tag>
+		<English>Invalid Device</English>
+		<French>Invalid Device</French>
+		<German>Invalid Device</German>
+		<Italian>Invalid Device</Italian>
+		<Spanish>Invalid Device</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INVALID_CAPTURE_DESC</Tag>
+		<English>You have selected an unusable voice capture device.  Voice capture disabled.</English>
+		<French>You have selected an unusable voice capture device.  Voice capture disabled.</French>
+		<German>You have selected an unusable voice capture device.  Voice capture disabled.</German>
+		<Italian>You have selected an unusable voice capture device.  Voice capture disabled.</Italian>
+		<Spanish>You have selected an unusable voice capture device.  Voice capture disabled.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_INVALID_PLAYBACK_DESC</Tag>
+		<English>You have selected an unusable voice playback device.  Voice playback disabled.</English>
+		<French>You have selected an unusable voice playback device.  Voice playback disabled.</French>
+		<German>You have selected an unusable voice playback device.  Voice playback disabled.</German>
+		<Italian>You have selected an unusable voice playback device.  Voice playback disabled.</Italian>
+		<Spanish>You have selected an unusable voice playback device.  Voice playback disabled.</Spanish>
+	</TEXT>
+</Civ4GameText>
