@@ -1041,8 +1041,11 @@ DomainTypes CvPlayerAI::AI_unitAIDomainType(UnitAITypes eUnitAI)
 	case UNITAI_MERCHANT:
 	case UNITAI_ENGINEER:
 	case UNITAI_SPY:
-	case UNITAI_ICBM:
 		return DOMAIN_LAND;
+		break;
+
+	case UNITAI_ICBM:
+		return DOMAIN_IMMOBILE;
 		break;
 
 	case UNITAI_WORKER_SEA:

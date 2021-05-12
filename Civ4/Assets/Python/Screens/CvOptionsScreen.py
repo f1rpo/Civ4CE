@@ -175,7 +175,7 @@ class CvOptionsScreen:
 		# Custom Music Path Editbox
 		szEditBoxDesc = ""
 		if (UserProfile.getMusicPath() != ""):
-			szEditBoxDesc = CvUtil.convertToStr(UserProfile.getMusicPath())
+			szEditBoxDesc = CvUtil.convertToUnicode(UserProfile.getMusicPath())
 		self.getTabControl().setText("CustomMusicEditBox", szEditBoxDesc)
 		
 		#################### CLOCK ####################
@@ -297,12 +297,10 @@ class CvOptionsScreen:
 		tab.attachSpacer("LangHBox")
 		
 		aszDropdownElements = ()
-		aszDropdownElements = aszDropdownElements + (localText.getText("TXT_KEY_ENGLISH", ()),)
-		aszDropdownElements = aszDropdownElements + (localText.getText("TXT_KEY_FRENCH", ()),)
-		aszDropdownElements = aszDropdownElements + (localText.getText("TXT_KEY_GERMAN", ()),)
-		aszDropdownElements = aszDropdownElements + (localText.getText("TXT_KEY_ITALIAN", ()),)
-		aszDropdownElements = aszDropdownElements + (localText.getText("TXT_KEY_SPANISH", ()),)
-		
+		for i in range(CvGameText().getNumLanguages()):
+			szKey = "TXT_KEY_LANGUAGE_%d" % i
+			aszDropdownElements = aszDropdownElements + (localText.getText(szKey, ()),)
+					
 		szCallbackFunction = "handleLanguagesDropdownBoxInput"
 		szWidgetName = "LanguagesDropdownBox"
 		iInitialSelection = CyGame().getCurrentLanguage()
@@ -381,7 +379,7 @@ class CvOptionsScreen:
 		szDropdownDesc = "ResolutionDropdownBox"
 		aszDropdownElements = ()
 		for iResLoop in range(UserProfile.getResolutionMaxModes()):
-			aszDropdownElements = aszDropdownElements + (CvUtil.convertToStr(UserProfile.getResolutionString(iResLoop)),)
+			aszDropdownElements = aszDropdownElements + (UserProfile.getResolutionString(iResLoop),)
 		szCallbackFunction = "handleResolutionDropdownInput"
 		szWidgetName = self.szResolutionComboBoxName = "ResolutionDropdownBox"
 		iInitialSelection = UserProfile.getResolution()
@@ -595,7 +593,7 @@ class CvOptionsScreen:
 		szDropdownDesc = "CaptureDeviceDropdownBox"
 		aszDropdownElements = ()
 		for iCaptureDevice in range(UserProfile.getNumCaptureDevices()):
-			aszDropdownElements = aszDropdownElements + (CvUtil.convertToStr(UserProfile.getCaptureDeviceDesc(iCaptureDevice)),)
+			aszDropdownElements = aszDropdownElements + (UserProfile.getCaptureDeviceDesc(iCaptureDevice),)
 		szCallbackFunction = "handleCaptureDeviceDropdownInput"
 		szWidgetName = "CaptureDeviceDropdownBox"
 		iInitialSelection = UserProfile.getCaptureDeviceIndex()
@@ -617,7 +615,7 @@ class CvOptionsScreen:
 		szDropdownDesc = "PlaybackDeviceDropdownBox"
 		aszDropdownElements = ()
 		for iPlaybackDevice in range(UserProfile.getNumPlaybackDevices()):
-			aszDropdownElements = aszDropdownElements + (CvUtil.convertToStr(UserProfile.getPlaybackDeviceDesc(iPlaybackDevice)),)
+			aszDropdownElements = aszDropdownElements + (UserProfile.getPlaybackDeviceDesc(iPlaybackDevice),)
 		szCallbackFunction = "handlePlaybackDeviceDropdownInput"
 		szWidgetName = "PlaybackDeviceDropdownBox"
 		iInitialSelection = UserProfile.getPlaybackDeviceIndex()
@@ -687,11 +685,12 @@ class CvOptionsScreen:
 		tab.attachButton("AudioPathHBox", szWidgetName, szOptionDesc, self.callbackIFace, szCallbackFunction, szWidgetName)
 
 		# Edit Box
-		szEditBoxDesc = ""
+		szEditBoxDesc = u""
 		if (UserProfile.getMusicPath() != ""):
-			szEditBoxDesc = CvUtil.convertToStr(UserProfile.getMusicPath())
+			szEditBoxDesc = CvUtil.convertToUnicode(UserProfile.getMusicPath())
 		szWidgetName = "CustomMusicEditBox"
 		szCallbackFunction = "DummyCallback"
+		
 		tab.attachEdit("AudioPathHBox", szWidgetName, szEditBoxDesc, self.callbackIFace, szCallbackFunction, szWidgetName)
 
 		########## EXIT

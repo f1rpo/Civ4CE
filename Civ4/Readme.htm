@@ -8,10 +8,16 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <meta name=ProgId content=Word.Document>
 <meta name=Generator content="Microsoft Word 11">
 <meta name=Originator content="Microsoft Word 11">
-<link rel=File-List href="README_files/filelist.xml">
+<link rel=File-List href="Readme_files/filelist.xml">
 <title>ENGLISH README</title>
 <o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="PostalCode"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
  name="country-region"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="Street"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="address"/>
 <o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
  name="PlaceType"/>
 <o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
@@ -19,21 +25,19 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
  name="place"/>
 <o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
- name="address"/>
-<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
- name="Street"/>
-<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
  name="City"/>
-<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
- name="PostalCode"/>
 <!--[if gte mso 9]><xml>
  <w:WordDocument>
   <w:Zoom>75</w:Zoom>
   <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
   <w:ValidateAgainstSchemas/>
   <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
   <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
   <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:Compatibility>
+   <w:UseFELayout/>
+  </w:Compatibility>
   <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
  </w:WordDocument>
 </xml><![endif]--><!--[if gte mso 9]><xml>
@@ -49,6 +53,13 @@ st1\:*{behavior:url(#ieooui) }
 <!--
  /* Font Definitions */
  @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:2;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:0 268435456 0 0 -2147483648 0;}
+@font-face
 	{font-family:"MS Mincho";
 	panose-1:2 2 6 9 4 2 5 8 3 4;
 	mso-font-alt:"\FF2D\FF33 \660E\671D";
@@ -56,6 +67,14 @@ st1\:*{behavior:url(#ieooui) }
 	mso-generic-font-family:modern;
 	mso-font-pitch:fixed;
 	mso-font-signature:-1610612033 1757936891 16 0 131231 0;}
+@font-face
+	{font-family:SimSun;
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-alt:\5B8B\4F53;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 135135232 16 0 262145 0;}
 @font-face
 	{font-family:Verdana;
 	panose-1:2 11 6 4 3 5 4 4 2 4;
@@ -79,6 +98,13 @@ st1\:*{behavior:url(#ieooui) }
 	mso-font-format:other;
 	mso-font-pitch:auto;
 	mso-font-signature:3 0 0 0 1 0;}
+@font-face
+	{font-family:"\@SimSun";
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 135135232 16 0 262145 0;}
  /* Style Definitions */
  p.MsoNormal, li.MsoNormal, div.MsoNormal
 	{mso-style-parent:"";
@@ -97,6 +123,7 @@ h1
 	mso-outline-level:1;
 	font-size:24.0pt;
 	font-family:"Times New Roman";
+	mso-fareast-font-family:SimSun;
 	font-weight:bold;}
 h2
 	{mso-margin-top-alt:auto;
@@ -107,6 +134,7 @@ h2
 	mso-outline-level:2;
 	font-size:18.0pt;
 	font-family:"Times New Roman";
+	mso-fareast-font-family:SimSun;
 	color:black;
 	font-weight:bold;}
 h3
@@ -119,6 +147,7 @@ h3
 	background:#F0F0F0;
 	font-size:12.0pt;
 	font-family:Verdana;
+	mso-fareast-font-family:SimSun;
 	color:blue;
 	font-weight:bold;}
 h4
@@ -130,6 +159,7 @@ h4
 	mso-outline-level:4;
 	font-size:10.0pt;
 	font-family:Verdana;
+	mso-fareast-font-family:SimSun;
 	color:maroon;
 	font-weight:bold;}
 h6
@@ -141,6 +171,7 @@ h6
 	mso-outline-level:6;
 	font-size:7.5pt;
 	font-family:"Times New Roman";
+	mso-fareast-font-family:SimSun;
 	font-weight:bold;}
 a:link, span.MsoHyperlink
 	{color:blue;
@@ -190,6 +221,9 @@ span.genmed
 span.SpellE
 	{mso-style-name:"";
 	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
 @page Section1
 	{size:8.5in 11.0in;
 	margin:1.0in 1.25in 1.0in 1.25in;
@@ -200,16 +234,16 @@ div.Section1
 	{page:Section1;}
  /* List Definitions */
  @list l0
-	{mso-list-id:1133252717;
-	mso-list-template-ids:-985615984;}
+	{mso-list-id:307593032;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1562225916 67698693 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
 @list l0:level1
 	{mso-level-number-format:bullet;
-	mso-level-text:\F0B7;
+	mso-level-text:\F0A7;
 	mso-level-tab-stop:.5in;
 	mso-level-number-position:left;
 	text-indent:-.25in;
-	mso-ansi-font-size:10.0pt;
-	font-family:Symbol;}
+	font-family:Wingdings;}
 @list l0:level2
 	{mso-level-tab-stop:1.0in;
 	mso-level-number-position:left;
@@ -243,12 +277,16 @@ div.Section1
 	mso-level-number-position:left;
 	text-indent:-.25in;}
 @list l1
-	{mso-list-id:1160730848;
-	mso-list-template-ids:-2086652472;}
+	{mso-list-id:1133252717;
+	mso-list-template-ids:-985615984;}
 @list l1:level1
-	{mso-level-tab-stop:.5in;
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
 	mso-level-number-position:left;
-	text-indent:-.25in;}
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
 @list l1:level2
 	{mso-level-tab-stop:1.0in;
 	mso-level-number-position:left;
@@ -282,8 +320,8 @@ div.Section1
 	mso-level-number-position:left;
 	text-indent:-.25in;}
 @list l2
-	{mso-list-id:1635135386;
-	mso-list-template-ids:-835053220;}
+	{mso-list-id:1160730848;
+	mso-list-template-ids:-2086652472;}
 @list l2:level1
 	{mso-level-tab-stop:.5in;
 	mso-level-number-position:left;
@@ -321,8 +359,8 @@ div.Section1
 	mso-level-number-position:left;
 	text-indent:-.25in;}
 @list l3
-	{mso-list-id:1741713811;
-	mso-list-template-ids:-1131148634;}
+	{mso-list-id:1635135386;
+	mso-list-template-ids:-835053220;}
 @list l3:level1
 	{mso-level-tab-stop:.5in;
 	mso-level-number-position:left;
@@ -359,6 +397,45 @@ div.Section1
 	{mso-level-tab-stop:4.5in;
 	mso-level-number-position:left;
 	text-indent:-.25in;}
+@list l4
+	{mso-list-id:1741713811;
+	mso-list-template-ids:-1131148634;}
+@list l4:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
 ol
 	{margin-bottom:0in;}
 ul
@@ -380,6 +457,7 @@ ul
 	mso-pagination:widow-orphan;
 	font-size:10.0pt;
 	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
 	mso-ansi-language:#0400;
 	mso-fareast-language:#0400;
 	mso-bidi-language:#0400;}
@@ -393,9 +471,52 @@ ul
 
 <h1>README</h1>
 
-<h6>Last updated 16 - March – 2006</h6>
+<h6>Last updated 21-May-2007</h6>
 
-<h3>&nbsp;v161</h3>
+<h3>&nbsp;v174</h3>
+
+<ul style='margin-top:0in' type=square>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list .5in'><span
+     style='font-size:10.0pt;font-family:Verdana'>Can no longer upgrade Marines
+     and SAM Infantry to <span class=SpellE>Mech</span> Infantry <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list .5in'><span
+     style='font-size:10.0pt;font-family:Verdana'>Fixed MP Retire crash<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list .5in'><span
+     style='font-size:10.0pt;font-family:Verdana'>MP - Can no longer bypass the
+     delay timer <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list .5in'><span
+     class=SpellE><span style='font-size:10.0pt;font-family:Verdana'>Pitboss</span></span><span
+     style='font-size:10.0pt;font-family:Verdana'> fix for the bug where you
+     would not get the free tech from the Oracle if you were not online <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list .5in'><span
+     style='font-size:10.0pt;font-family:Verdana'>Fixed forced specialist bug <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list .5in'><span
+     style='font-size:10.0pt;font-family:Verdana'>Fixed bug preventing AI from
+     building ICBMs<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list .5in'><span
+     style='font-size:10.0pt;font-family:Verdana'>Fixed exploit allowing you to
+     build unique unit of a different <span class=SpellE>civ</span> by saving
+     it in your build queue from a different game<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list .5in'><span
+     style='font-size:10.0pt;font-family:Verdana'>Game no longer crashes when
+     you load a save with the diplomacy screen open<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list .5in'><span
+     style='font-size:10.0pt;font-family:Verdana'>First strike combat bug fix<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list .5in'><span
+     style='font-size:10.0pt;font-family:Verdana'>Fixed transported unit
+     gifting bug<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list .5in'><span
+     style='font-size:10.0pt;font-family:Verdana'>Fixed pop-rush rounding bug<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list .5in'><span
+     style='font-size:10.0pt;font-family:Verdana'>Widescreen Laptop video
+     resolution 1280x720 is supported<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list .5in'><span
+     style='font-size:10.0pt;font-family:Verdana'>Fixed multiple missions
+     exploit from the same Great Person<o:p></o:p></span></li>
+</ul>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:10.0pt;font-family:Verdana'><o:p>&nbsp;</o:p></span></b></p>
 
 <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
 style='font-size:10.0pt;font-family:Verdana'>Changes<o:p></o:p></span></b></p>
@@ -407,13 +528,14 @@ order when multiple players try to move on the same turn slice...<o:p></o:p></sp
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>only the host can set
-the admin password...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>only</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> the host can set the admin
+password...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>Horseback Riding now
-a classical tech...<o:p></o:p></span></p>
+</span><span style='font-size:10.0pt;font-family:Verdana'>Horseback <span
+class=GramE>Riding</span> now a classical tech...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -427,8 +549,9 @@ foreign cities...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>expanded subject for <span
-class=SpellE>PitBoss</span> e-mail...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>expanded</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> subject for <span class=SpellE>PitBoss</span>
+e-mail...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -437,17 +560,20 @@ of some <span class=SpellE>civs</span>' text...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>mp retire fix...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>mp</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> retire fix...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>less hammers from
-chops the farther away from a city...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>less</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> hammers from chops the farther
+away from a city...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>reduced hammer yield
-from forest chops to 20…<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>reduced</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> hammer yield from forest chops to
+20…<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -462,32 +588,37 @@ Project...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>increased SDI cost...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>increased</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> SDI cost...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>marines and SAM
-Infantry now upgrade to <span class=SpellE>Mech</span> Infantry...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>marines</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> and SAM Infantry now upgrade to <span
+class=SpellE>Mech</span> Infantry...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>better AI-to-human <span
-class=SpellE>diplo</span> in team games...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>better</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> AI-to-human <span class=SpellE>diplo</span>
+in team games...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>no more <span
-class=SpellE>diplo</span> penalty for helping to end wars...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>no</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> more <span class=SpellE>diplo</span>
+penalty for helping to end wars...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>city production
-popups stay on city when entering/exiting...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>city</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> production popups stay on city
+when entering/exiting...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span><span style='font-size:10.0pt;font-family:Verdana'>can now set units to
-Sleep and Intercept in <span class=SpellE>wbs</span>...<o:p></o:p></span></p>
+Sleep and Intercept in <span class=SpellE><span class=GramE>wbs</span></span>...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -496,13 +627,14 @@ now produces large continents<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>game options and
-victory conditions now saved in ini file...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>game</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> options and victory conditions
+now saved in ini file...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>invalid buildings now
-removed from city queues...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>invalid</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> buildings now removed from city queues...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -539,8 +671,9 @@ style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>firepower is now
-average of <span class=SpellE>curr</span> and max strength...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>firepower</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> is now average of <span
+class=SpellE>curr</span> and max strength...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -554,12 +687,14 @@ renamed to Lock Modified Assets...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>city management no
-longer uses &quot;forced&quot; specialist states when not automated...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>city</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> management no longer uses &quot;forced&quot;
+specialist states when not automated...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>Expansive: +3 Health<o:p></o:p></span></p>
+</span><span style='font-size:10.0pt;font-family:Verdana'>Expansive: +3 <span
+class=GramE>Health</span><o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -610,8 +745,8 @@ improvements<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>Number keys perform <span
-class=SpellE>leaderhead</span> actions on Civilopedia leader screen.<o:p></o:p></span></p>
+</span><span style='font-size:10.0pt;font-family:Verdana'>Number keys perform
+leaderhead actions on Civilopedia leader screen.<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -648,8 +783,9 @@ shows Barbarians<o:p></o:p></span></p>
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span><span style='font-size:10.0pt;font-family:Verdana'>Tech chooser screen
-now observes <span class=SpellE>CvGameInterface.cannotResearch</span>() and
-shows the tech in a red pane if the function returns true<o:p></o:p></span></p>
+now observes <span class=SpellE><span class=GramE>CvGameInterface.cannotResearch</span></span><span
+class=GramE>(</span>) and shows the tech in a red pane if the function returns
+true<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -700,8 +836,9 @@ generation from Wonders continues after Wonder has become obsolete<o:p></o:p></s
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span class=SpellE><span style='font-size:10.0pt;font-family:Verdana'>quicksave</span></span><span
-style='font-size:10.0pt;font-family:Verdana'> doesn't prompt for overwrite<o:p></o:p></span></p>
+</span><span class=SpellE><span class=GramE><span style='font-size:10.0pt;
+font-family:Verdana'>quicksave</span></span></span><span style='font-size:10.0pt;
+font-family:Verdana'> doesn't prompt for overwrite<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
 
@@ -721,23 +858,24 @@ for peers on same computer<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>fixed <span
-class=SpellE>gunships</span> capturing cities bug... <o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>fixed</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> <span class=SpellE>gunships</span>
+capturing cities bug... <o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>game doesn't end on ties...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>game</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> doesn't end on ties...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>fixed mp UN voting
-bug...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>fixed</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> mp UN voting bug...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span class=SpellE><span style='font-size:10.0pt;font-family:Verdana'>Leaderheads</span></span><span
-style='font-size:10.0pt;font-family:Verdana'> on a <span class=SpellE>radeon</span>
-9000 64mb - fix for strange skin shading.<o:p></o:p></span></p>
+</span><span style='font-size:10.0pt;font-family:Verdana'>Leaderheads on a <span
+class=SpellE>radeon</span> 9000 64mb - fix for strange skin shading.<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -766,8 +904,9 @@ anarchy/specialist resetting bug...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>fixed bug where
-environmentalism doesn't affect new cities...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>fixed</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> bug where environmentalism
+doesn't affect new cities...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -776,13 +915,15 @@ mission crash...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>fixed stack attack
-bug with groups of units with more than one move...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>fixed</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> stack attack bug with groups of
+units with more than one move...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>fixed premature
-end-turn unit cycle bug...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>fixed</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> premature end-turn unit cycle
+bug...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -791,8 +932,9 @@ class=SpellE>Porperty</span> cumulative effect in team game...<o:p></o:p></span>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>fixed plot list
-button scrolling for multiple resolutions...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>fixed</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> plot list button scrolling for
+multiple resolutions...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -854,7 +996,7 @@ screen &quot;rival worst&quot; calculation<o:p></o:p></span></p>
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span><span style='font-size:10.0pt;font-family:Verdana'>End of game sequence
-plays correctly for <span class=SpellE>hotseat/pbem</span><o:p></o:p></span></p>
+plays correctly for <span class=SpellE><span class=GramE>hotseat/pbem</span></span><o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -880,7 +1022,7 @@ scenarios<o:p></o:p></span></p>
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span><span style='font-size:10.0pt;font-family:Verdana'>Fixed PBEM infinite
-movement exploit<o:p></o:p></span></p>
+movement <span class=GramE>exploit</span><o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -895,7 +1037,8 @@ consistent with demographics table<o:p></o:p></span></p>
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span><span style='font-size:10.0pt;font-family:Verdana'>Fix Gunship being
-almost <span class=SpellE>invisibile</span> in Frozen mode<o:p></o:p></span></p>
+almost <span class=SpellE>invisibile</span> in <span class=GramE>Frozen</span>
+mode<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -959,9 +1102,9 @@ LAN fix<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>fixed <span
-class=SpellE>pedia</span> and menu buttons disappearing after leaving tech
-chooser<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>fixed</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> <span class=SpellE>pedia</span>
+and menu buttons disappearing after leaving tech chooser<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -986,8 +1129,8 @@ missing from the southern ice and from trees/jungle on the dateline<o:p></o:p></
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span><span style='font-size:10.0pt;font-family:Verdana'>Pushing &quot;go
-back&quot; while joining a mp game, no longer causes background music to
-disappear<o:p></o:p></span></p>
+back&quot; while joining <span class=GramE>a</span> mp game, no longer causes
+background music to disappear<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1011,8 +1154,8 @@ order difference between NTFS and FAT32 <span class=SpellE>filesystems</span><o:
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>Many <span
-class=SpellE>worldbuilder</span> issues fixed…<o:p></o:p></span></p>
+</span><span style='font-size:10.0pt;font-family:Verdana'>Many worldbuilder
+issues fixed…<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1021,9 +1164,8 @@ shadows<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>Fix: Some <span
-class=SpellE>leaderheads</span> appear to have white eyes when the low-res
-textures option is on<o:p></o:p></span></p>
+</span><span style='font-size:10.0pt;font-family:Verdana'>Fix: Some leaderheads
+appear to have white eyes when the low-res textures option is on<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1047,8 +1189,8 @@ quick <span class=SpellE>quickload</span><o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>fixed city yields
-being revealed in FOW<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>fixed</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> city yields being revealed in FOW<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1062,8 +1204,8 @@ upside-down when fortified/awaken<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>Fix for combat bug
-across a map seam<o:p></o:p></span></p>
+</span><span style='font-size:10.0pt;font-family:Verdana'>Fix for combat bug across
+a map seam<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
 
@@ -1073,12 +1215,13 @@ style='font-size:10.0pt;font-family:Verdana'>Additions<o:p></o:p></span></b></p>
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span><span class=SpellE><span style='font-size:10.0pt;font-family:Verdana'>PitBossSleep</span></span><span
-style='font-size:10.0pt;font-family:Verdana'> ini setting...<o:p></o:p></span></p>
+style='font-size:10.0pt;font-family:Verdana'> <span class=SpellE>ini</span>
+setting...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>unit cycling
-optimization...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>unit</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> cycling optimization...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1092,8 +1235,9 @@ style='font-size:10.0pt;font-family:Verdana'>, Fractal, and Shuffle map scripts<
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>unit health bar for
-plot list buttons...<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>unit</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> health bar for plot list
+buttons...<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1159,12 +1303,13 @@ field in PBEM/<span class=SpellE>Hotseat</span> staging screens<o:p></o:p></span
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span><span style='font-size:10.0pt;font-family:Verdana'>Added <span
-class=SpellE>HideMovieBackground</span> ini option for further movie speedup<o:p></o:p></span></p>
+class=SpellE>HideMovieBackground</span> <span class=SpellE>ini</span> option
+for further movie speedup<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span><span style='font-size:10.0pt;font-family:Verdana'>Added <span
-class=SpellE>HideOutOfVRamWarning</span> ini option<o:p></o:p></span></p>
+class=SpellE>HideOutOfVRamWarning</span> <span class=SpellE>ini</span> option<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1178,8 +1323,9 @@ whaling boats<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;tab-stops:list .5in'><span
 style='font-size:10.0pt'>-</span><span style='font-size:7.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span><span style='font-size:10.0pt;font-family:Verdana'>support for movies in
-<span class=SpellE>customAssets</span> folder<o:p></o:p></span></p>
+</span><span class=GramE><span style='font-size:10.0pt;font-family:Verdana'>support</span></span><span
+style='font-size:10.0pt;font-family:Verdana'> for movies in <span class=SpellE>customAssets</span>
+folder<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.25in'><span style='font-size:10.0pt;
 font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
@@ -1188,13 +1334,13 @@ font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
 style='font-size:10.0pt;font-family:Verdana'>Troubleshooting Connectivity<o:p></o:p></span></b></p>
 
 <p class=MsoNormal style='margin-left:.25in'><span style='font-size:10.0pt;
-font-family:Verdana'>If you are encountering problems when connecting to
-multiplayer games over the internet, chances are strong that you are not the
-cause of the problem.<span style='mso-spacerun:yes'>  </span>It is likely that
-players running firewall software that rejects incoming connection attempts may
-have already joined the game.<span style='mso-spacerun:yes'>  </span>Since
-these players do not have their firewall configured correctly, their computers
-are rejecting your attempt to connect.<span style='mso-spacerun:yes'> 
+font-family:Verdana'>If you are encountering problems when connecting to multiplayer
+games over the internet, chances are strong that you are not the cause of the
+problem.<span style='mso-spacerun:yes'>  </span>It is likely that players
+running firewall software that rejects incoming connection attempts may have
+already joined the game.<span style='mso-spacerun:yes'>  </span>Since these
+players do not have their firewall configured correctly, their computers are
+rejecting your attempt to connect.<span style='mso-spacerun:yes'> 
 </span>Therefore, it is vital that all players who wish to play multiplayer
 games ensure that their firewall is set up to allow Civilization IV to
 construct the necessary peer-to-peer network.<o:p></o:p></span></p>
@@ -1232,8 +1378,9 @@ LAN.<o:p></o:p></span></p>
 
 </div>
 
-<pre><span style='font-family:Verdana'>v1.52 is a major upgrade to Civ IV and includes numerous optimizations for memory usage that should help performance on<o:p></o:p></span></pre><pre><span
-style='font-family:Verdana'> all machines but are tailored to especially improve performance on machines at or near the minimum specification.</span></pre><pre><span
+<pre><span class=GramE><span style='font-family:Verdana'>v1.52</span></span><span
+style='font-family:Verdana'> is a major upgrade to Civ IV and includes numerous optimizations for memory usage that should help performance on<o:p></o:p></span></pre><pre><span
+style='font-family:Verdana'> <span class=GramE>all</span> machines but are tailored to especially improve performance on machines at or near the minimum specification.</span></pre><pre><span
 style='font-family:Verdana'>&nbsp;</span></pre><pre><span style='font-family:
 Verdana'>Major memory reductions include:</span></pre><pre><span
 style='font-family:Verdana'>&nbsp;</span></pre><pre><span style='font-family:
@@ -1257,8 +1404,8 @@ style='font-family:Verdana'>Turn off <span class=SpellE>Antialiasing</span> in y
 style='font-family:Verdana'>Changes:</span></b></pre><pre><span
 style='font-family:Verdana'>- Tech cost rebalancing</span></pre><pre><span
 style='font-family:Verdana'>- Improved city attack AI</span></pre><pre><span
-style='font-family:Verdana'>- Moved <span class=SpellE>MaxAutosaves</span> to ini file</span></pre><pre><span
-style='font-family:Verdana'>- Slower Great People name generation</span></pre><pre><span
+style='font-family:Verdana'>- Moved <span class=SpellE>MaxAutosaves</span> to <span
+class=SpellE>ini</span> file</span></pre><pre><span style='font-family:Verdana'>- Slower Great People name generation</span></pre><pre><span
 style='font-family:Verdana'>- Hide health bars during combat</span></pre><pre><span
 style='font-family:Verdana'>- Increased late-game tech costs</span></pre><pre><span
 style='font-family:Verdana'>- Waypoints now invisible when city screen is up</span></pre><pre><span
@@ -1272,8 +1419,8 @@ style='font-family:Verdana'>- Better invasion AI</span></pre><pre><span
 style='font-family:Verdana'>- Slavery: No Upkeep</span></pre><pre><span
 style='font-family:Verdana'>- Emancipation: Low Upkeep</span></pre><pre><span
 style='font-family:Verdana'>- Tweaked AI civic values</span></pre><pre><span
-style='font-family:Verdana'>- Filled in missing <span class=SpellE>diplo</span> entries for <st1:City
-w:st="on"><st1:place w:st="on">Frederick</st1:place></st1:City></span></pre><pre><span
+style='font-family:Verdana'>- Filled in missing <span class=SpellE>diplo</span> entries for <st1:place
+w:st="on"><st1:City w:st="on">Frederick</st1:City></st1:place></span></pre><pre><span
 style='font-family:Verdana'>- Praetorians: 40-&gt;45 hammers</span></pre><pre><span
 style='font-family:Verdana'>- Jaguars: 40-&gt;35 hammers</span></pre><pre><span
 style='font-family:Verdana'>- AI turn optimizations</span></pre><pre><span
@@ -1282,10 +1429,11 @@ style='font-family:Verdana'>- Environmentalism moved to Medicine</span></pre><pr
 style='font-family:Verdana'>- Increased industrial era tech costs</span></pre><pre><span
 style='font-family:Verdana'>- Environmentalism is medium upkeep</span></pre><pre><span
 style='font-family:Verdana'>- Free Speech is low upkeep</span></pre><pre><span
-style='font-family:Verdana'>- Forests give 0.5 health</span></pre><pre><span
+style='font-family:Verdana'>- Forests give 0.5 <span class=GramE>health</span></span></pre><pre><span
 style='font-family:Verdana'>- Firepower in combat now based on max strength</span></pre><pre><span
 style='font-family:Verdana'>- Lobby sorting improvements</span></pre><pre><span
-style='font-family:Verdana'>- Clearing the table in the MP diplomacy screen resets the &quot;They accept/They do not accept&quot; text</span></pre><pre><span
+style='font-family:Verdana'>- Clearing the table in the MP diplomacy screen resets the &quot;They accept/<span
+class=GramE>They</span> do not accept&quot; text</span></pre><pre><span
 style='font-family:Verdana'>- Dawn of man screen closes with ESCAPE just like all the other interface screens</span></pre><pre><span
 style='font-family:Verdana'>- The hall of fame now shows only games that have been played with the currently-loaded mod</span></pre><pre><span
 style='font-family:Verdana'>- When trying to build an item that it not allowed in a city, you will get a production popup asking for a build instead of leaving production empty</span></pre><pre><span
@@ -1299,12 +1447,14 @@ style='font-family:Verdana'>- ALT-S now allows you to place signs</span></pre><p
 style='font-family:Verdana'>- Added &quot;<st1:place w:st="on"><st1:PlaceName
  w:st="on">Leave</st1:PlaceName> <st1:PlaceType w:st="on">Forest</st1:PlaceType></st1:place>&quot; option for automated workers</span></pre><pre><span
 style='font-family:Verdana'>- Added <st1:place w:st="on">Marathon</st1:place> game speed (longer than Epic)</span></pre><pre><span
-style='font-family:Verdana'>- Added <span class=SpellE>NoTechSplash</span> ini setting</span></pre><pre><span
-style='font-family:Verdana'>- More communication about <span class=SpellE>autopatch</span> failures</span></pre><pre><span
-style='font-family:Verdana'>- Domestic advisor remembers which cities you had selected last time screen was up.</span></pre><pre><span
+style='font-family:Verdana'>- Added <span class=SpellE>NoTechSplash</span> <span
+class=SpellE>ini</span> setting</span></pre><pre><span style='font-family:Verdana'>- More communication about <span
+class=SpellE>autopatch</span> failures</span></pre><pre><span style='font-family:
+Verdana'>- Domestic advisor remembers which cities you had selected last time screen was up.</span></pre><pre><span
 style='font-family:Verdana'>- Added &quot;no cheating&quot; game option for single-player</span></pre><pre><span
 style='font-family:Verdana'>- In addition to <span class=SpellE>tradeable</span> techs, techs that are not allowed to be traded to you are also shown, <o:p></o:p></span></pre><pre><span
-style='font-family:Verdana'>provided that you can research them yourself at the moment</span></pre><pre><span
+class=GramE><span style='font-family:Verdana'>provided</span></span><span
+style='font-family:Verdana'> that you can research them yourself at the moment</span></pre><pre><span
 style='font-family:Verdana'>- Added event and replay messages when a human founds a city. This got broken when we added city renaming</span></pre><pre><span
 style='font-family:Verdana'>- Support for Logitech G15 Gaming Keyboard</span></pre><pre><span
 style='font-family:Verdana'>- When you zoom to a city from the domestic advisor, you return to the domestic advisor after you exit the city screen</span></pre><pre><span
@@ -1352,12 +1502,14 @@ style='font-family:Verdana'>- Two-palaces-from-culture-flipping-capital bug</spa
 style='font-family:Verdana'>- Foreign Advisor: Gold available for trade does not show up when there cannot be a trade for gold</span></pre><pre><span
 style='font-family:Verdana'>- Diplomacy screen fix for gold popups not appearing properly</span></pre><pre><span
 style='font-family:Verdana'>- Foreign advisor: Resources for active player are shown multiple times if you have more <o:p></o:p></span></pre><pre><span
-style='font-family:Verdana'>than one instance of a resource to trade.</span></pre><pre><span
+class=GramE><span style='font-family:Verdana'>than</span></span><span
+style='font-family:Verdana'> one instance of a resource to trade.</span></pre><pre><span
 style='font-family:Verdana'>- Fixed weird little bug with Unit Categories page in Civilopedia</span></pre><pre><span
 style='font-family:Verdana'>- Diplomacy bug for PBEM/<span class=SpellE>Hotsesat</span></span></pre><pre><span
 style='font-family:Verdana'>- Removed some cheats from password-protected games that should not have been allowed in the first place</span></pre><pre><span
 style='font-family:Verdana'>- Fix for competitive games: Password-protected saves can no longer be easily stripped of their passwords, <o:p></o:p></span></pre><pre><span
-style='font-family:Verdana'>and the assets checksum in the save can no longer be modified by external means</span></pre><pre><span
+class=GramE><span style='font-family:Verdana'>and</span></span><span
+style='font-family:Verdana'> the assets checksum in the save can no longer be modified by external means</span></pre><pre><span
 style='font-family:Verdana'>- Fixed vanishing yield symbols in multiplayer</span></pre><pre><span
 style='font-family:Verdana'>- Fixed some PBEM/<span class=SpellE>Hotseat</span> issues when there is just one human player</span></pre><pre><span
 style='font-family:Verdana'>- River and Wind sounds are now properly classified as ambience. This fixes inconsistent behavior in audio options</span></pre><pre><span
@@ -1381,12 +1533,12 @@ name=starting>v109</a></h3>
 class=SpellE>PAKs</span>. Please be patient as this will take some time.</span></pre><pre><span
 style='font-family:Verdana'>&nbsp;</span></pre><pre><b><span style='font-family:
 Verdana'>Changes:</span></b></pre><pre><span style='font-family:Verdana'>- increased cost of Apollo Program... </span></pre><pre><span
-style='font-family:Verdana'>- increased SS parts cost... </span></pre><pre><span
+style='font-family:Verdana'>- <span class=GramE>increased</span> SS parts cost... </span></pre><pre><span
 style='font-family:Verdana'>- Animal Husbandry reveals Horses </span></pre><pre><span
 style='font-family:Verdana'>- tweaked Rifling, Chemistry, Steel, and Railroad tech costs... </span></pre><pre><span
 style='font-family:Verdana'>- increased late-game tech costs... </span></pre><pre><span
 style='font-family:Verdana'>- can now add two specialists in size 1 city with Mercantilism... </span></pre><pre><span
-style='font-family:Verdana'>- final score is now modified by difficulty level... </span></pre><pre><span
+style='font-family:Verdana'>- <span class=GramE>final</span> score is now modified by difficulty level... </span></pre><pre><span
 style='font-family:Verdana'>- Speed up load times</span></pre><pre><span
 style='font-family:Verdana'>- Global performance enhancements</span></pre><pre><span
 style='font-family:Verdana'>&nbsp;</span></pre><pre><b><span style='font-family:
@@ -1394,18 +1546,19 @@ Verdana'>Added:</span></b></pre><pre><span style='font-family:Verdana'>- Include
 style='font-family:Verdana'>- Save login name </span></pre><pre><span
 style='font-family:Verdana'>- Added password encryption </span></pre><pre><span
 style='font-family:Verdana'>- Added regenerate Map Button to World builder Map Mode... </span></pre><pre><span
-style='font-family:Verdana'>- checkbox for using low resolution textures</span></pre><pre><span
-style='font-family:Verdana'>- more logging for init failure </span></pre><pre><span
-style='font-family:Verdana'>- <span class=SpellE>minspec</span> / video memory checking </span></pre><pre><span
+style='font-family:Verdana'>- <span class=GramE>checkbox</span> for using low resolution textures</span></pre><pre><span
+style='font-family:Verdana'>- <span class=GramE>more</span> logging for init failure </span></pre><pre><span
+style='font-family:Verdana'>- <span class=SpellE><span class=GramE>minspec</span></span> / video memory checking </span></pre><pre><span
 style='font-family:Verdana'>- Added ability to change to and from <span
 class=SpellE>fullscreen</span> while in-game </span></pre><pre><span
-style='font-family:Verdana'>- holding &lt;shift&gt; during startup will clean out the cache </span></pre><pre><span
-style='font-family:Verdana'>- improved <span class=SpellE>bink</span> playback, added ini options </span></pre><pre><span
+style='font-family:Verdana'>- <span class=GramE>holding</span> &lt;shift&gt; during startup will clean out the cache </span></pre><pre><span
+style='font-family:Verdana'>- <span class=GramE>improved</span> <span
+class=SpellE>bink</span> playback, added ini options </span></pre><pre><span
 style='font-family:Verdana'>&nbsp;</span></pre><pre><b><span style='font-family:
 Verdana'>Fixes:</span></b></pre><pre><span style='font-family:Verdana'>- ATI issue Failed to Init Renderer Fixed</span></pre><pre><span
 style='font-family:Verdana'>- Multiplayer Lobby list jump problem and lobby crash fixed</span></pre><pre><span
-style='font-family:Verdana'>- fixed war weariness calculation bug... </span></pre><pre><span
-style='font-family:Verdana'>- units maintain their name when upgraded </span></pre><pre><span
+style='font-family:Verdana'>- <span class=GramE>fixed</span> war weariness calculation bug... </span></pre><pre><span
+style='font-family:Verdana'>- <span class=GramE>units</span> maintain their name when upgraded </span></pre><pre><span
 style='font-family:Verdana'>- fixed Gold-for-Gold <span class=SpellE>diplo</span> exploit... </span></pre><pre><span
 style='font-family:Verdana'>- fixed no research choice overflow exploit... </span></pre><pre><span
 style='font-family:Verdana'>- Fix for voice initialization crash </span></pre><pre><span
@@ -1413,24 +1566,26 @@ style='font-family:Verdana'>- Fix addressing takeover AI and retirement OOS.</sp
 style='font-family:Verdana'>- Fixed issue with diplomacy text being always used in its first form in the translator. </span></pre><pre><span
 style='font-family:Verdana'>- Popups, screens, and diplomacy properly cleared when exiting from main menu. </span></pre><pre><span
 style='font-family:Verdana'>- Games protected by admin passwords (only) cannot be loaded if the version is different <o:p></o:p></span></pre><pre><span
-style='font-family:Verdana'>from the one that created the save</span></pre><pre><span
+class=GramE><span style='font-family:Verdana'>from</span></span><span
+style='font-family:Verdana'> the one that created the save</span></pre><pre><span
 style='font-family:Verdana'>- Fixed bug where player could not offer any deal to other human in PBEM/<span
 class=SpellE>Hotseat</span> </span></pre><pre><span style='font-family:Verdana'>- Sorting by date on domestic advisor now works. </span></pre><pre><span
-style='font-family:Verdana'>- fixed bug where settlers could not move if the strategy layer was selected </span></pre><pre><span
+style='font-family:Verdana'>- <span class=GramE>fixed</span> bug where settlers could not move if the strategy layer was selected </span></pre><pre><span
 style='font-family:Verdana'>- fixed Ironworks... </span></pre><pre><span
 style='font-family:Verdana'>- fixed AI units not obeying open borders rules on declaration of war... </span></pre><pre><span
-style='font-family:Verdana'>- fixed bug that prevent placing of units in world-builder </span></pre><pre><span
-style='font-family:Verdana'>- fixed bug that prevented gifting of units to a human player</span></pre><pre><span
+style='font-family:Verdana'>- <span class=GramE>fixed</span> bug that prevent placing of units in world-builder </span></pre><pre><span
+style='font-family:Verdana'>- <span class=GramE>fixed</span> bug that prevented gifting of units to a human player</span></pre><pre><span
 style='font-family:Verdana'>- stack attack infinite loop fixed</span></pre><pre><span
 style='font-family:Verdana'>- Civic screen update fix (wasn’t showing the right maintenance and anarchy values) </span></pre><pre><span
-style='font-family:Verdana'>- ctrl-g crash fix, optimized city bar art </span></pre><pre><span
+style='font-family:Verdana'>- <span class=GramE>ctrl-g</span> crash fix, optimized city bar art </span></pre><pre><span
 style='font-family:Verdana'>- fixed right-click menu crash </span></pre><pre><span
 style='font-family:Verdana'>- Intro movie crashing problems <o:p></o:p></span></pre><pre><span
 style='font-family:Verdana'><o:p>&nbsp;</o:p></span></pre>
 
 <p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b
 style='mso-bidi-font-weight:normal'><span style='font-size:18.0pt'>Civilization
-IV’s Persistent Turn-Based Server, The “<span class=SpellE>PitBoss</span>”<o:p></o:p></span></b></p>
+IV’s Persistent Turn-Based Server, <span class=GramE>The</span> “<span
+class=SpellE>PitBoss</span>”<o:p></o:p></span></b></p>
 
 <p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 style='font-size:10.0pt;font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
@@ -1469,11 +1624,11 @@ Civilization IV may play a bit differently from classic multiplayer games.<span
 style='mso-spacerun:yes'>  </span>If all participants are currently logged into
 the game, it will play exactly the same as a classic Civilization IV
 multiplayer game.<span style='mso-spacerun:yes'>  </span>You are free to move
-as soon as it is your turn, you are free to chat to the other players, you are
-free to conquer the world!<span style='mso-spacerun:yes'>  </span>However, the
-most important difference when playing a <span class=SpellE>PitBoss</span> game
-is that all other participants may not always be logged in.<span
-style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+as soon as it is your turn, you are free to chat to the other players, <span
+class=GramE>you</span> are free to conquer the world!<span
+style='mso-spacerun:yes'>  </span>However, the most important difference when
+playing a <span class=SpellE>PitBoss</span> game is that all other participants
+may not always be logged in.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 style='font-size:10.0pt;font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
@@ -1588,10 +1743,10 @@ style='mso-spacerun:yes'>  </span>Select the game type<o:p></o:p></span></p>
 
 <p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 style='font-size:10.0pt;font-family:Verdana'>This page allows you to specify
-whether you’d like to start a new game using a random map, start a new scenario,
-or load a saved multiplayer game.<span style='mso-spacerun:yes'>  </span>Note
-that the <span class=SpellE>PitBoss</span> is able to load other types of
-multiplayer games, not just former <span class=SpellE>PitBoss</span>
+whether you’d like to start a new game using a random map, start a new
+scenario, or load a saved multiplayer game.<span style='mso-spacerun:yes'> 
+</span>Note that the <span class=SpellE>PitBoss</span> is able to load other
+types of multiplayer games, not just former <span class=SpellE>PitBoss</span>
 games!<span style='mso-spacerun:yes'>  </span>Depending on your choice, you
 will either be asked to provide a game name (for new games) or to choose a game
 to load (for saved games).<span style='mso-spacerun:yes'>  </span>For new games
@@ -1672,7 +1827,7 @@ style='font-size:10.0pt;font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 style='font-size:10.0pt;font-family:Verdana'>The staging room marks the end of
-the setup interface wizard. <span style='mso-spacerun:yes'> </span>Once
+the setup interface wizard.<span style='mso-spacerun:yes'>  </span>Once
 “Finish” is clicked, the wizard will disappear and the game will launch.<span
 style='mso-spacerun:yes'>  </span>Once the game has finished launching, the
 administrator is presented with an Admin screen.<o:p></o:p></span></p>
@@ -1887,8 +2042,7 @@ name=install>Recommended System Requirements</a></h3>
   </td>
   <td style='padding:.75pt .75pt .75pt .75pt'>
   <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>1.8 GHz
-  Intel Pentium 4 or AMD <span class=SpellE>Athlon</span> processor or
-  equivalent</span></p>
+  Intel Pentium 4 or AMD <span class=SpellE>Athlon</span> processor or equivalent</span></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:2'>
@@ -2021,8 +2175,8 @@ to Installing the Game&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h4>
 <p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 class=bodytext1><span style='font-size:10.0pt'>Before attempting to install </span></span><em><span
 style='font-size:10.0pt;font-family:Verdana'>Sid Meier’s Civilization IV</span></em><span
-class=bodytext1><span style='font-size:10.0pt'>, please verify that your computer
-meets the minimum requirements listed above. </span></span><span
+class=bodytext1><span style='font-size:10.0pt'>, please verify that your
+computer meets the minimum requirements listed above. </span></span><span
 style='font-size:10.0pt;font-family:Verdana'><br>
 <br>
 <span class=bodytext1>We also recommend that you preparing your hard drive for
@@ -2035,22 +2189,22 @@ which could hinder installation and/or playing of the game. </span><br>
 drive: </span></span></p>
 
 <ol style='margin-top:0in' start=1 type=1>
- <li class=MsoNormal style='mso-list:l3 level1 lfo1;tab-stops:list .5in'><span
+ <li class=MsoNormal style='mso-list:l4 level1 lfo2;tab-stops:list .5in'><span
      style='font-size:10.0pt;font-family:Verdana'>Open &quot;My Computer&quot;.</span>
      </li>
- <li class=MsoNormal style='mso-list:l3 level1 lfo1;tab-stops:list .5in'><span
+ <li class=MsoNormal style='mso-list:l4 level1 lfo2;tab-stops:list .5in'><span
      style='font-size:10.0pt;font-family:Verdana'>Right-click the disk drive
-     you wish to install the game onto (usually C:). </span></li>
- <li class=MsoNormal style='mso-list:l3 level1 lfo1;tab-stops:list .5in'><span
+     you wish to install the game onto (usually <span class=GramE>C:</span>). </span></li>
+ <li class=MsoNormal style='mso-list:l4 level1 lfo2;tab-stops:list .5in'><span
      style='font-size:10.0pt;font-family:Verdana'>Click on
      &quot;Properties&quot;.</span> </li>
- <li class=MsoNormal style='mso-list:l3 level1 lfo1;tab-stops:list .5in'><span
+ <li class=MsoNormal style='mso-list:l4 level1 lfo2;tab-stops:list .5in'><span
      style='font-size:10.0pt;font-family:Verdana'>Select the &quot;Tools&quot;
      tab.</span> </li>
- <li class=MsoNormal style='mso-list:l3 level1 lfo1;tab-stops:list .5in'><span
-     style='font-size:10.0pt;font-family:Verdana'>Click &quot;Check Now&quot;
-     to launch Scandisk.</span> </li>
- <li class=MsoNormal style='mso-list:l3 level1 lfo1;tab-stops:list .5in'><span
+ <li class=MsoNormal style='mso-list:l4 level1 lfo2;tab-stops:list .5in'><span
+     style='font-size:10.0pt;font-family:Verdana'>Click &quot;Check <span
+     class=GramE>Now</span>&quot; to launch Scandisk.</span> </li>
+ <li class=MsoNormal style='mso-list:l4 level1 lfo2;tab-stops:list .5in'><span
      style='font-size:10.0pt;font-family:Verdana'>When Scandisk has completed,
      follow steps 1-3 and click &quot;<span class=SpellE>Defragment</span>
      Now&quot; to launch Disk Defragmenter.</span> </li>
@@ -2070,18 +2224,19 @@ style='font-size:10.0pt;font-family:Verdana'>Civilization IV</span></em><span
 class=bodytext1><span style='font-size:10.0pt'>, </span></span></p>
 
 <ol style='margin-top:0in' start=1 type=1>
- <li class=MsoNormal style='mso-list:l2 level1 lfo2;tab-stops:list .5in'><span
+ <li class=MsoNormal style='mso-list:l3 level1 lfo3;tab-stops:list .5in'><span
      style='font-size:10.0pt;font-family:Verdana'>Insert Disc One of <em><span
      style='font-family:Verdana'>Sid Meier’s Civilization IV</span></em> (the
      &quot;Install Disc&quot;) into your <st1:Street w:st="on"><st1:address
       w:st="on">CD-ROM Drive</st1:address></st1:Street>.</span> </li>
- <li class=MsoNormal style='mso-list:l2 level1 lfo2;tab-stops:list .5in'><span
+ <li class=MsoNormal style='mso-list:l3 level1 lfo3;tab-stops:list .5in'><span
      style='font-size:10.0pt;font-family:Verdana'>If <span class=SpellE>Autoplay</span>
-     is enabled on your system, a window will appear, giving you the option to
-     Install the game. If nothing happens when you insert the CD into the
-     drive, you will need to open &quot;My Computer&quot;, double-click your
-     CD-ROM drive letter, then double-click Setup.exe.</span> </li>
- <li class=MsoNormal style='mso-list:l2 level1 lfo2;tab-stops:list .5in'><span
+     is enabled on your system, a window will appear, giving you the option to <span
+     class=GramE>Install</span> the game. If nothing happens when you insert
+     the CD into the drive, you will need to open &quot;My Computer&quot;,
+     double-click your CD-ROM drive letter, <span class=GramE>then</span>
+     double-click Setup.exe.</span> </li>
+ <li class=MsoNormal style='mso-list:l3 level1 lfo3;tab-stops:list .5in'><span
      style='font-size:10.0pt;font-family:Verdana'>Once the setup process
      begins, follow the on-screen prompts to install the game.</span> </li>
 </ol>
@@ -2133,16 +2288,16 @@ class=bodytext1><span style='font-size:10.0pt'>There are a few ways to start
 the game. </span></span></p>
 
 <ol style='margin-top:0in' start=1 type=1>
- <li class=MsoNormal style='mso-list:l1 level1 lfo3;tab-stops:list .5in'><span
+ <li class=MsoNormal style='mso-list:l2 level1 lfo4;tab-stops:list .5in'><span
      style='font-size:10.0pt;font-family:Verdana'>Insert Disc One of <em><span
      style='font-family:Verdana'>Sid Meier’s Civilization IV</span></em> into
      your <st1:Street w:st="on"><st1:address w:st="on">CD-ROM Drive</st1:address></st1:Street>
      and click on the Play button.</span> </li>
- <li class=MsoNormal style='mso-list:l1 level1 lfo3;tab-stops:list .5in'><span
+ <li class=MsoNormal style='mso-list:l2 level1 lfo4;tab-stops:list .5in'><span
      style='font-size:10.0pt;font-family:Verdana'>If you answered yes when the
      installer asked you whether you wanted to create a desktop shortcut, you
      can double-click that shortcut.</span> </li>
- <li class=MsoNormal style='mso-list:l1 level1 lfo3;tab-stops:list .5in'><span
+ <li class=MsoNormal style='mso-list:l2 level1 lfo4;tab-stops:list .5in'><span
      style='font-size:10.0pt;font-family:Verdana'>Go to Start -&gt; Programs
      -&gt; Firaxis Games -&gt; Sid Meier’s Civilization 4 and click on Launch
      Sid Meier’s Civilization 4.</span> </li>
@@ -2178,8 +2333,8 @@ name=videoissues>Video Issues</a></h3>
 
 </div>
 
-<h4 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>General
-Video Troubleshooting.</h4>
+<h4 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+class=GramE>General Video Troubleshooting.</span></h4>
 
 <p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 class=bodytext1><span style='font-size:10.0pt'>Outdated or incorrect video
@@ -2188,26 +2343,26 @@ support, ensure you have the latest production (release) drivers for your video
 card. </span></span></p>
 
 <ul style='margin-top:0in' type=disc>
- <li class=MsoNormal style='mso-list:l0 level1 lfo4;tab-stops:list .5in'><span
+ <li class=MsoNormal style='mso-list:l1 level1 lfo5;tab-stops:list .5in'><span
      style='font-size:10.0pt;font-family:Verdana'><a
      href="http://www.ati.com/support/driver.html" target="_newwin">ATI
      Technologies</a></span> </li>
- <li class=MsoNormal style='mso-list:l0 level1 lfo4;tab-stops:list .5in'><span
+ <li class=MsoNormal style='mso-list:l1 level1 lfo5;tab-stops:list .5in'><span
      style='font-size:10.0pt;font-family:Verdana'><a
      href="http://downloadfinder.intel.com/scripts-df/support_intel.asp"
      target="_newwin">Intel</a></span> </li>
- <li class=MsoNormal style='mso-list:l0 level1 lfo4;tab-stops:list .5in'><span
+ <li class=MsoNormal style='mso-list:l1 level1 lfo5;tab-stops:list .5in'><span
      style='font-size:10.0pt;font-family:Verdana'><a
      href="http://www.matrox.com/mga/support/drivers/home.cfm" target="_newwin"><span
      class=SpellE>Matrox</span></a></span> </li>
- <li class=MsoNormal style='mso-list:l0 level1 lfo4;tab-stops:list .5in'><span
+ <li class=MsoNormal style='mso-list:l1 level1 lfo5;tab-stops:list .5in'><span
      style='font-size:10.0pt;font-family:Verdana'><a
      href="http://www.nvidia.com/content/drivers/drivers.asp" target="_newwin">NVIDIA</a></span>
      </li>
- <li class=MsoNormal style='mso-list:l0 level1 lfo4;tab-stops:list .5in'><span
+ <li class=MsoNormal style='mso-list:l1 level1 lfo5;tab-stops:list .5in'><span
      style='font-size:10.0pt;font-family:Verdana'><a
      href="http://www.s3graphics.com/" target="_newwin">S3 Graphics</a></span> </li>
- <li class=MsoNormal style='mso-list:l0 level1 lfo4;tab-stops:list .5in'><span
+ <li class=MsoNormal style='mso-list:l1 level1 lfo5;tab-stops:list .5in'><span
      style='font-size:10.0pt;font-family:Verdana'><a
      href="http://download.sis.com/" target="_newwin"><span class=SpellE>SiS</span></a></span>
      </li>
@@ -2237,8 +2392,8 @@ name=soundissues>Sound issues</a></h3>
 <p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 class=bodytext1><span style='font-size:10.0pt'>If you are experiencing sound
 problems, including volume issues, missing audio channels (i.e., no sound comes
-through your center speaker channel), crashes, or any other audio issues, we
-recommend switching your sound driver to the default MILES Fast 2D Driver. </span></span></p>
+through your center speaker channel), crashes, or any other audio issues, we recommend
+switching your sound driver to the default MILES Fast 2D Driver. </span></span></p>
 
 <p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
 
@@ -2351,11 +2506,11 @@ folder can be located by navigating to &quot;My Documents&quot;, then selecting
 IV&quot;. </span></span><span style='font-size:10.0pt;font-family:Verdana'><br>
 <br>
 <em><span style='font-family:Verdana'>Civilization IV</span></em><span
-class=bodytext1> saved games has the extension &quot;.Civ4SaveGame&quot; and <span
-class=SpellE>Worldbuilder</span> saves have the extension “.Civ4WorldbuilderSaves”.
-You may copy or delete these files as you would any other files. Renaming saved
-games is not recommended, as the game will only recognize specific filenames as
-valid for loading. </span><br>
+class=bodytext1> saved games has the extension &quot;.Civ4SaveGame&quot; and
+Worldbuilder saves have the extension “.Civ4WorldbuilderSaves”. You may copy or
+delete these files as you would any other files. Renaming saved games is not
+recommended, as the game will only recognize specific filenames as valid for
+loading. </span><br>
 <br>
 <span class=bodytext1>Double-clicking a saved game will launch the game and
 load that saved game. </span></span><a name=usercontent></a></p>
@@ -2376,9 +2531,10 @@ class=bodytext1><span style='font-size:10.0pt'>Advanced users can change
 various </span></span><em><span style='font-size:10.0pt;font-family:Verdana'>Civilization
 IV</span></em><span class=bodytext1><span style='font-size:10.0pt'> settings
 and options by editing your INI file. To locate the INI files, navigate to
-&quot;My Documents&quot;, &quot;My Games&quot;, &quot;Sid Meier’s Civilization
-IV&quot; and open the “CivilizationIV.ini” file. This file is a standard text
-files that can be edited with Notepad (included with Windows®). </span></span></p>
+&quot;My Documents&quot;, &quot;My Games&quot;, <span class=GramE>&quot;</span>Sid
+Meier’s Civilization IV&quot; and open the “CivilizationIV.ini” file. This file
+is a standard text files that can be edited with Notepad (included with
+Windows®). </span></span></p>
 
 <h4 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 class=bodytext1>Civilization4.ini holds the values of all user-controllable
@@ -2589,7 +2745,7 @@ lang=EN-GB style='mso-ansi-language:EN-GB'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b
 style='mso-bidi-font-weight:normal'><span lang=EN-GB style='mso-ansi-language:
-EN-GB'>The information that we will require is as follows :<o:p></o:p></span></b></p>
+EN-GB'>The information that we will require is as <span class=GramE>follows :</span><o:p></o:p></span></b></p>
 
 <p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b
 style='mso-bidi-font-weight:normal'><span lang=EN-GB style='mso-ansi-language:
@@ -2691,9 +2847,9 @@ EN-GB'>Post:</span></b><span lang=EN-GB style='mso-ansi-language:EN-GB'><span
 style='mso-tab-count:1'>       </span>Take 2 Interactive Technical Support<o:p></o:p></span></p>
 
 <p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
-lang=EN-GB style='mso-ansi-language:EN-GB'><span style='mso-tab-count:2'>                               </span>Unit
-A, <st1:place w:st="on"><st1:PlaceName w:st="on">Sovereign</st1:PlaceName> <st1:PlaceType
- w:st="on">Park</st1:PlaceType></st1:place><o:p></o:p></span></p>
+lang=EN-GB style='mso-ansi-language:EN-GB'><span style='mso-tab-count:1'>               </span><span
+style='mso-tab-count:1'>               </span>Unit A, <st1:place w:st="on"><st1:PlaceName
+ w:st="on">Sovereign</st1:PlaceName> <st1:PlaceType w:st="on">Park</st1:PlaceType></st1:place><o:p></o:p></span></p>
 
 <p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 lang=EN-GB style='mso-ansi-language:EN-GB'><span style='mso-tab-count:2'>                               </span><st1:Street
@@ -2719,7 +2875,8 @@ national rate<o:p></o:p></span></p>
 
 <p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 lang=EN-GB style='mso-ansi-language:EN-GB'><span style='mso-tab-count:2'>                               </span>(7
-days a week from 8am to 10pm (GMT) excluding bank holidays)<o:p></o:p></span></p>
+days a week from 8<span class=GramE>am</span> to 10pm (GMT) excluding bank
+holidays)<o:p></o:p></span></p>
 
 <p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 lang=EN-GB style='mso-ansi-language:EN-GB'><span style='mso-tab-count:2'>                               </span><st1:place
@@ -2743,7 +2900,8 @@ style='mso-tab-count:2'>                        </span>01429 233677 <o:p></o:p><
 lang=EN-GB style='font-size:8.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
 EN-GB'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
 mso-layout-grid-align:none;text-autospace:none'><b style='mso-bidi-font-weight:
 normal'><span lang=EN-GB style='mso-ansi-language:EN-GB'>E-mail</span></b><span
 lang=EN-GB style='mso-ansi-language:EN-GB'>: <span style='mso-tab-count:1'>   </span>take2@europesupport.com<o:p></o:p></span></p>
@@ -2772,12 +2930,15 @@ User License Agreement</h3>
 
 </div>
 
-<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
 
-<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
 style='font-size:14.0pt'>LIMITED SOFTWARE WARRANTY AND LICENSE AGREEMENT</span></b></p>
 
-<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
@@ -2786,62 +2947,67 @@ mso-ansi-language:EN-GB'>This LIMITED SOFTWARE WARRANTY AND LICENSE AGREEMENT
 provisions, is a legal agreement between You (either an individual or an
 entity) and 2K Europe (the &quot;Owner&quot;) regarding this software product
 and the materials contained therein and related thereto. Your act of installing
-and/or otherwise using the software constitutes Your agreement to be bound by
-the terms of this Agreement. If You do not agree to the terms of this
-Agreement, promptly return the software packaging and the accompanying
-materials (including any hardware, manuals, other written materials and
-packaging) to the place You obtained them, along with your receipt, for a full
-refund. <o:p></o:p></span></p>
+and/or otherwise using the software constitutes <span class=GramE>Your</span>
+agreement to be bound by the terms of this Agreement. If <span class=GramE>You</span>
+do not agree to the terms of this Agreement, promptly return the software
+packaging and the accompanying materials (including any hardware, manuals,
+other written materials and packaging) to the place You obtained them, along
+with your receipt, for a full refund. <o:p></o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
 mso-ansi-language:EN-GB'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+class=GramE><span lang=EN-GB style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho";mso-ansi-language:EN-GB'>Grant of Limited Non-Exclusive License.</span></span><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
-mso-ansi-language:EN-GB'>Grant of Limited Non-Exclusive License. This Agreement
-permits You to use one (1) copy of the software program(s) (the
-&quot;SOFTWARE&quot;) included in this package for your personal use on a
-single home or portable computer. The SOFTWARE is in &quot;use&quot; on a
-computer when it is loaded into temporary memory (i.e., RAM) or installed into
-the permanent memory (e.g., hard disk, CD-ROM, or other storage device) of that
-computer. Installation on a network server is strictly<span
-style='mso-spacerun:yes'>  </span>prohibited, except under a special and
-separate network license obtained from Owner; this Agreement shall not serve as
-such necessary special network license. Installation on a network server
-constitutes &quot;use&quot; that must comply with the terms of this Agreement.
-This license is not a sale of the original SOFTWARE or any copy thereof.<o:p></o:p></span></p>
+mso-ansi-language:EN-GB'> This Agreement permits <span class=GramE>You</span>
+to use one (1) copy of the software program(s) (the &quot;SOFTWARE&quot;)
+included in this package for your personal use on a single home or portable
+computer. The SOFTWARE is in &quot;use&quot; on a computer when it is loaded
+into temporary memory (i.e., RAM) or installed into the permanent memory (e.g.,
+hard disk, CD-ROM, or other storage device) of that computer. Installation on a
+network server is <span class=GramE>strictly<span style='mso-spacerun:yes'> 
+</span>prohibited</span>, except under a special and separate network license
+obtained from Owner; this Agreement shall not serve as such necessary special
+network license. Installation on a network server constitutes &quot;use&quot;
+that must comply with the terms of this Agreement. This license is not a sale
+of the original SOFTWARE or any copy thereof.<o:p></o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
 mso-ansi-language:EN-GB'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+class=GramE><span lang=EN-GB style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho";mso-ansi-language:EN-GB'>Intellectual Property Ownership.</span></span><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
-mso-ansi-language:EN-GB'>Intellectual Property Ownership. Owner retains all
-right, title and interest to this SOFTWARE and the accompanying manual(s),
-packaging and other written materials (collectively, the &quot;ACCOMPANYING
-MATERIALS&quot;), including, but not limited to, all copyrights, trademarks,
-trade secrets, trade names, proprietary rights, patents, titles, computer
-codes, audiovisual effects, themes, characters, character names, stories,
-dialog, settings, artwork, sounds effects, musical works, and moral rights. The
-SOFTWARE and ACCOMPANYING MATERIALS are protected by <st1:place w:st="on"><st1:country-region
- w:st="on">United States</st1:country-region></st1:place> copyright law and
-applicable copyright laws and treaties throughout the World. All rights are
-reserved. The SOFTWARE and ACCOMPANYING MATERIALS may not be copied or
-reproduced in any manner or medium, in whole or in part, without prior written
-consent from Owner. Any persons copying or reproducing all or any portion of
-the SOFTWARE or ACCOMPANYING MATERIALS, in any manner or medium, will be
-wilfully violating the copyright laws and may be subject to civil or criminal
-penalties.<o:p></o:p></span></p>
+mso-ansi-language:EN-GB'> Owner retains all right, title and interest to this
+SOFTWARE and the accompanying manual(s), packaging and other written materials
+(collectively, the &quot;ACCOMPANYING MATERIALS&quot;), including, but not
+limited to, all copyrights, trademarks, trade secrets, trade names, proprietary
+rights, patents, titles, computer codes, audiovisual effects, themes,
+characters, character names, stories, dialog, settings, artwork, sounds
+effects, musical works, and moral rights. The SOFTWARE and ACCOMPANYING MATERIALS
+are protected by <st1:place w:st="on"><st1:country-region w:st="on">United
+  States</st1:country-region></st1:place> copyright law and applicable
+copyright laws and treaties throughout the World. All rights are reserved. The
+SOFTWARE and ACCOMPANYING MATERIALS may not be copied or reproduced in any
+manner or medium, in whole or in part, without prior written consent from
+Owner. Any persons copying or reproducing all or any portion of the SOFTWARE or
+ACCOMPANYING MATERIALS, in any manner or medium, will be wilfully violating the
+copyright laws and may be subject to civil or criminal penalties.<o:p></o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
 mso-ansi-language:EN-GB'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+class=GramE><span lang=EN-GB style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho";mso-ansi-language:EN-GB'>SOFTWARE Backup or Archiving.</span></span><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
-mso-ansi-language:EN-GB'>SOFTWARE Backup or Archiving. After You install the
+mso-ansi-language:EN-GB'> After <span class=GramE>You</span> install the
 SOFTWARE into the permanent memory of a computer, You may keep and use the
 original disk(s) and/or CD-ROM (the &quot;Storage Media&quot;) only for backup
 or archival purposes <o:p></o:p></span></p>
@@ -2851,35 +3017,37 @@ lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
 mso-ansi-language:EN-GB'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+class=GramE><span lang=EN-GB style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho";mso-ansi-language:EN-GB'>Restrictions.</span></span><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
-mso-ansi-language:EN-GB'>Restrictions. Other than as provided specifically in
-this Agreement, You are not permitted to copy or otherwise reproduce the
-SOFTWARE or ACCOMPANYING MATERIALS; modify or prepare derivative copies based
-on the SOFTWARE or ACCOMPANYING MATERIALS; distribute copies of the SOFTWARE or
-ACCOMPANYING MATERIALS by sale or other transfer of ownership; rent, lease, or
-lend the SOFTWARE or ACCOMPANYING MATERIALS; or to display the SOFTWARE or
-ACCOMPANYING MATERIALS publicly. You are expressly prohibited from transmitting
-the SOFTWARE or ACCOMPANYING MATERIALS electronically or otherwise over the
-Internet or through any other media or to any other party. You are expressly
-prohibited from selling or using any characters or other components of the game
-for any purpose. You are expressly prohibited from selling or otherwise
-profiting from any levels, add-on packs, sequels or other items based upon or
-related to the SOFTWARE and ACCOMPANYING MATERIALS or created by utilization of
-the <span class=SpellE>SOFTWARE's</span> level editor. If you create levels,
-add-on packs, sequels or other items to the Software using the <span
-class=SpellE>SOFTWARE's</span> level editor, including the construction of new
-levels (collectively, the &quot;Modifications&quot;), you are subject to the
-following restrictions: (<span class=SpellE>i</span>) the <span class=SpellE>SOFTWARE's</span>
-level editor and associated development tools and documentation (collectively
+mso-ansi-language:EN-GB'> Other than as provided specifically in this
+Agreement, You are not permitted to copy or otherwise reproduce the SOFTWARE or
+ACCOMPANYING MATERIALS; modify or prepare derivative copies based on the
+SOFTWARE or ACCOMPANYING MATERIALS; distribute copies of the SOFTWARE or ACCOMPANYING
+MATERIALS by sale or other transfer of ownership; rent, lease, or lend the
+SOFTWARE or ACCOMPANYING MATERIALS; or to display the SOFTWARE or ACCOMPANYING
+MATERIALS publicly. You are expressly prohibited from transmitting the SOFTWARE
+or ACCOMPANYING MATERIALS electronically or otherwise over the Internet or
+through any other media or to any other party. You are expressly prohibited
+from selling or using any characters or other components of the game for any
+purpose. You are expressly prohibited from selling or otherwise profiting from
+any levels, add-on packs, sequels or other items based upon or related to the
+SOFTWARE and ACCOMPANYING MATERIALS or created by utilization of the <span
+class=SpellE>SOFTWARE's</span> level editor. If you create levels, add-on
+packs, sequels or other items to the Software using the <span class=SpellE>SOFTWARE's</span>
+level editor, including the construction of new levels (collectively, the
+&quot;Modifications&quot;), you are subject to the following restrictions: (<span
+class=SpellE>i</span>) the <span class=SpellE>SOFTWARE's</span> level editor
+and associated development tools and documentation (collectively
 &quot;SDK&quot;) are considered separate from the SOFTWARE in the sense that
 they are not guaranteed or supported by the OWNER. However, the OWNER retains
-all copyrights and intellectual rights to the SDK, as stated in this license.
-(ii) your Modifications must require a full, registered copy of the Software to
-run; (iii) you may not distribute a Modification that contains an executable
-file which has been changed or modified in any way; (iv) your Modifications
-must not contain any <span class=SpellE>libelous</span>, defamatory or other
-illegal material, material that is scandalous or invades the rights of privacy
-or publicity of any third party, or contain any trademarks, copyright-protected
+all copyrights and intellectual rights to the SDK, as stated in this license. (ii)
+your Modifications must require a full, registered copy of the Software to run;
+(iii) you may not distribute a Modification that contains an executable file
+which has been changed or modified in any way; (iv) your Modifications must not
+contain any <span class=SpellE>libelous</span>, defamatory or other illegal
+material, material that is scandalous or invades the rights of privacy or
+publicity of any third party, or contain any trademarks, copyright-protected
 work or other property of third parties; (v) your Modifications must be
 distributed solely for free. Neither you nor any other person or party may sell
 them to anyone, commercially exploit them in any way, or charge anyone for
@@ -2887,32 +3055,37 @@ using them without a license from the OWNER. OWNER encourages <span
 class=SpellE>noncommercial</span> distribution of quality Modifications. If you
 desire to commercially distribute your Modifications, please contact OWNER at
 the address below for the terms and conditions under which the Modifications
-may be commercially distributed; (vi) your Modifications shall not be supported
-by the OWNER. The prohibitions and restrictions in this Section apply to anyone
-in possession of the Software or any of your Modifications. YOU ARE NOT
-PERMITTED TO REVERSE ENGINEER, DECOMPILE OR DISASSEMBLE THE SOFTWARE IN ANY
-WAY. Any copying of the SOFTWARE or ACCOMPANYING MATERIALS not specifically
-allowed in this Agreement is a violation of this Agreement. <o:p></o:p></span></p>
+may be commercially distributed; (<span class=GramE>vi</span>) your
+Modifications shall not be supported by the OWNER. The prohibitions and
+restrictions in this Section apply to anyone in possession of the Software or
+any of your Modifications. YOU ARE NOT PERMITTED TO REVERSE ENGINEER, DECOMPILE
+OR DISASSEMBLE THE SOFTWARE IN ANY WAY. Any copying of the SOFTWARE or
+ACCOMPANYING MATERIALS not specifically allowed in this Agreement is a
+violation of this Agreement. <o:p></o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
 mso-ansi-language:EN-GB'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+class=GramE><span lang=EN-GB style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho";mso-ansi-language:EN-GB'>LIMITED WARRANTY AND WARRANTY DISCLAIMERS.</span></span><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
-mso-ansi-language:EN-GB'>LIMITED WARRANTY AND WARRANTY DISCLAIMERS.<o:p></o:p></span></p>
+mso-ansi-language:EN-GB'><o:p></o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+class=GramE><span lang=EN-GB style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho";mso-ansi-language:EN-GB'>LIMITED WARRANTY.</span></span><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
-mso-ansi-language:EN-GB'>LIMITED WARRANTY. Owner warrants that the original
-Storage Media holding the SOFTWARE is free from defects in materials and
-workmanship under normal use and service for a period of ninety (90) days from
-the date of purchase as evidenced by Your receipt. If for any reason You find
-defects in the Storage Media, or if you are unable to install the SOFTWARE on
-your home or portable computer, You may return the SOFTWARE and all
-ACCOMPANYING MATERIALS to the place You obtained it for a full refund. This
-limited warranty does not apply if You have damaged the SOFTWARE by accident or
-abuse. <o:p></o:p></span></p>
+mso-ansi-language:EN-GB'> Owner warrants that the original Storage Media
+holding the SOFTWARE is free from defects in materials and workmanship under
+normal use and service for a period of ninety (90) days from the date of
+purchase as evidenced by <span class=GramE>Your</span> receipt. If for any
+reason <span class=GramE>You</span> find defects in the Storage Media, or if
+you are unable to install the SOFTWARE on your home or portable computer, You
+may return the SOFTWARE and all ACCOMPANYING MATERIALS to the place You
+obtained it for a full refund. This limited warranty does not apply if <span
+class=GramE>You</span> have damaged the SOFTWARE by accident or abuse. <o:p></o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
@@ -2926,9 +3099,9 @@ of any original Storage Media with the SOFTWARE or (ii) full refund of the
 price paid for this SOFTWARE. By opening the sealed software packaging,
 installing and/or otherwise using the SOFTWARE or ACCOMPANYING MATERIALS, you
 hereby agree to waive any and all other remedies you may have at law or in
-equity. Any such remedies you<span style='mso-spacerun:yes'>  </span>may not
-waive as a matter of public policy, you hereby assign, or shall assign as they
-become available, over to Owner. <o:p></o:p></span></p>
+equity. Any such remedies <span class=GramE>you<span style='mso-spacerun:yes'> 
+</span>may</span> not waive as a matter of public policy, you hereby assign, or
+shall assign as they become available, over to Owner. <o:p></o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
@@ -2949,114 +3122,128 @@ SOFTWARE OR ACCOMPANYING MATERIALS' CAPABILITIES WILL MEET YOUR NEEDS OR THAT
 THE SOFTWARE<o:p></o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
-lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
-mso-ansi-language:EN-GB'>WILL CONTINUOUSLY OPERATE, BE ERROR FREE, OR THAT
-PROBLEMS WILL BE CORRECTED. OWNER DOES NOT REPRESENT THAT THE SOFTWARE WILL
-OPERATE IN A MULTI-USER ENVIRONMENT. NO ORAL OR WRITTEN INFORMATION OR ADVICE
-GIVEN BY OWNER, ITS DEALERS, DISTRIBUTORS, DIRECTORS, OFFICERS, EMPLOYEES,
-AGENTS, CONTRACTORS OR AFFILIATES SHALL CREATE ANY OTHER WARRANTY OR EXTEND OR
-EXPAND THE SCOPE OF THIS WARRANTY. YOU MAY NOT RELY ON ANY SUCH INFORMATION OR
-ADVICE. SOME TERRITORIES DO NOT ALLOW LIMITATIONS ON HOW LONG AN IMPLIED
-WARRANTY LASTS, SO THE ABOVE LIMITATION MAY NOT APPLY TO YOU. THIS LIMITED
-WARRANTY GIVES YOU SPECIFIC LEGAL RIGHTS AND YOU MAY ALSO HAVE OTHER RIGHTS
-WHICH MAY VARY FROM TERRITORY TO TERRITORY. <o:p></o:p></span></p>
+class=GramE><span lang=EN-GB style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho";mso-ansi-language:EN-GB'>WILL CONTINUOUSLY OPERATE, BE ERROR FREE,
+OR THAT PROBLEMS WILL BE CORRECTED.</span></span><span lang=EN-GB
+style='font-family:Arial;mso-fareast-font-family:"MS Mincho";mso-ansi-language:
+EN-GB'> OWNER DOES NOT REPRESENT THAT THE SOFTWARE WILL OPERATE IN A MULTI-USER
+ENVIRONMENT. NO ORAL OR WRITTEN INFORMATION OR ADVICE GIVEN BY OWNER, ITS
+DEALERS, DISTRIBUTORS, DIRECTORS, OFFICERS, EMPLOYEES, AGENTS, CONTRACTORS OR
+AFFILIATES SHALL CREATE ANY OTHER WARRANTY OR EXTEND OR EXPAND THE SCOPE OF
+THIS WARRANTY. YOU MAY NOT RELY ON ANY SUCH INFORMATION OR ADVICE. SOME
+TERRITORIES DO NOT ALLOW LIMITATIONS ON HOW LONG AN IMPLIED WARRANTY LASTS, SO
+THE ABOVE LIMITATION MAY NOT APPLY TO YOU. THIS LIMITED WARRANTY GIVES YOU
+SPECIFIC LEGAL RIGHTS AND YOU MAY ALSO HAVE OTHER RIGHTS WHICH MAY VARY FROM
+TERRITORY TO TERRITORY. <o:p></o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
 mso-ansi-language:EN-GB'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+class=GramE><span lang=EN-GB style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho";mso-ansi-language:EN-GB'>LIABILITY LIMITATION.</span></span><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
-mso-ansi-language:EN-GB'>LIABILITY LIMITATION. To the maximum extent permitted
-by applicable law, and regardless of whether any remedy set forth herein fails
-of its essential purpose, IN NO EVENT WILL OWNER, ITS DIRECTORS, OFFICERS,
-EMPLOYEES, AGENTS OR AFFILIATES NOR ANYONE ELSE INVOLVED IN THE DEVELOPMENT,
-MANUFACTURE OR DISTRIBUTION OF THE SOFTWARE OR THE ACCOMPANYING MATERIALS BE
-LIABLE FOR ANY DAMAGES WHATSOEVER, INCLUDING WITHOUT LIMITATION, DIRECT OR
-INDIRECT; INCIDENTAL; OR CONSEQUENTIAL DAMAGES FOR PERSONAL INJURY, PERSONAL
-PROPERTY, LOSS OF BUSINESS PROFITS, BUSINESS INTERRUPTION, LOSS OF BUSINESS INFORMATION,
+mso-ansi-language:EN-GB'> To the maximum extent permitted by applicable law,
+and regardless of whether any remedy set forth herein fails of its essential
+purpose, IN NO EVENT WILL OWNER, ITS DIRECTORS, OFFICERS, EMPLOYEES, AGENTS OR
+AFFILIATES NOR ANYONE ELSE INVOLVED IN THE DEVELOPMENT, MANUFACTURE OR
+DISTRIBUTION OF THE SOFTWARE OR THE ACCOMPANYING MATERIALS BE LIABLE FOR ANY
+DAMAGES WHATSOEVER, INCLUDING WITHOUT LIMITATION, DIRECT OR INDIRECT;
+INCIDENTAL; OR CONSEQUENTIAL DAMAGES FOR PERSONAL INJURY, PERSONAL PROPERTY,
+LOSS OF BUSINESS PROFITS, BUSINESS INTERRUPTION, LOSS OF BUSINESS INFORMATION,
 LOSS OF TEXT OR DATA STORED IN OR USED WITH THE SOFTWARE INCLUDING THE COST OF
 RECOVERING OR REPRODUCING THE TEXT OR DATA, OR ANY OTHER PECUNIARY LOSS,
 ARISING FROM OR OUT OF THE USE OR INABILITY TO USE THIS SOFTWARE. THIS
 LIABILITY LIMITATION APPLIES EVEN IF YOU OR ANYONE ELSE HAS ADVISED OWNER OR
 ANY OF ITS AUTHORIZED REPRESENTATIVES OF THE POSSIBILITY OF SUCH DAMAGES. EVEN
 IF SUCH IS CAUSED BY, ARISES OUT OF OR RESULTS FROM THE ORDINARY, STRICT, SOLE
-OR CONTRIBUTORY NEGLIGENCE OF OWNER OR ITS DIRECTORS, OFFICERS, EMPLOYEES,
-AGENTS, CONTRACTORS OR AFFILIATES. SOME TERRITORIES DO NOT ALLOW THE EXCLUSION
-OR LIMITATION OF INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THE ABOVE LIMITATION
-OR EXCLUSION MAY NOT APPLY TO YOU. <o:p></o:p></span></p>
+OR CONTRIBUTORY NEGLIGENCE OF OWNER OR ITS DIRECTORS, OFFICERS, EMPLOYEES, AGENTS,
+CONTRACTORS OR AFFILIATES. SOME TERRITORIES DO NOT ALLOW THE EXCLUSION OR
+LIMITATION OF INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THE ABOVE LIMITATION OR
+EXCLUSION MAY NOT APPLY TO YOU. <o:p></o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
 mso-ansi-language:EN-GB'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+class=GramE><span lang=EN-GB style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho";mso-ansi-language:EN-GB'>Product Support and Updates.</span></span><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
-mso-ansi-language:EN-GB'>Product Support and Updates. This SOFTWARE is intended
-to be user-friendly and limited product support is provided by Owner as
-specified in the ACCOMPANYING MATERIALS. <o:p></o:p></span></p>
+mso-ansi-language:EN-GB'> This SOFTWARE is intended to be user-friendly and
+limited product support is provided by Owner as specified in the ACCOMPANYING
+MATERIALS. <o:p></o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
 mso-ansi-language:EN-GB'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+class=GramE><span lang=EN-GB style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho";mso-ansi-language:EN-GB'>Jurisdiction.</span></span><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
-mso-ansi-language:EN-GB'>Jurisdiction. ENGLISH LAWS GOVERN THIS AGREEMENT,
-REGARDLESS OF EACH COUNTRY’S CHOICE OF LAW PRINCIPLES, WITH A FORUM AND VENUE
-OF <st1:place w:st="on"><st1:City w:st="on">LONDON</st1:City>, <st1:country-region
- w:st="on">ENGLAND</st1:country-region></st1:place>. This Agreement may be
-modified only by a written instrument specifying the modification and executed
-by both parties. In the event that any provision of this Agreement shall be
-held to be unenforceable, such provision shall be enforced to the greatest
-possible extent, with the other provisions of this Agreement to remain in full
-force and effect. <o:p></o:p></span></p>
+mso-ansi-language:EN-GB'> ENGLISH LAWS GOVERN THIS AGREEMENT, REGARDLESS OF
+EACH COUNTRY’S CHOICE OF LAW PRINCIPLES, WITH A FORUM AND VENUE OF <st1:place
+w:st="on"><st1:City w:st="on">LONDON</st1:City>, <st1:country-region w:st="on">ENGLAND</st1:country-region></st1:place>.
+This Agreement may be modified only by a written instrument specifying the
+modification and executed by both parties. In the event that any provision of
+this Agreement shall be held to be unenforceable, such provision shall be
+enforced to the greatest possible extent, with the other provisions of this
+Agreement to remain in full force and effect. <o:p></o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
 mso-ansi-language:EN-GB'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+class=GramE><span lang=EN-GB style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho";mso-ansi-language:EN-GB'>Entire Agreement.</span></span><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
-mso-ansi-language:EN-GB'>Entire Agreement. This Agreement represents the entire
-agreement between the parties, and supersedes any oral or written
-communications, proposals or prior agreements between the parties or any
-dealers, distributors, agents or employees. <o:p></o:p></span></p>
+mso-ansi-language:EN-GB'> This Agreement represents the entire agreement
+between the parties, and supersedes any oral or written communications,
+proposals or prior agreements between the parties or any dealers, distributors,
+agents or employees. <o:p></o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
 mso-ansi-language:EN-GB'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+class=GramE><span lang=EN-GB style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho";mso-ansi-language:EN-GB'>Termination.</span></span><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
-mso-ansi-language:EN-GB'>Termination. This Agreement is valid until terminated.<o:p></o:p></span></p>
+mso-ansi-language:EN-GB'> This Agreement is valid until terminated.<o:p></o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
 mso-ansi-language:EN-GB'>This Agreement ceases automatically (without any form
-of notice) if You do not comply with any Agreement provision. You can also end
-this Agreement by destroying the SOFTWARE and ACCOMPANYING MATERIALS and all
-copies and reproductions of the SOFTWARE and ACCOMPANYING MATERIALS and
-deleting and permanently purging the SOFTWARE from any client server or
-computer on which it has been installed. Program Transfer. You may permanently
-transfer all of your rights under this Agreement, provided that the recipient
-agrees to all of the terms of this Agreement, and You agree to transfer all ACCOMPANYING
-MATERIALS and related documents and components and remove the SOFTWARE from
-Your computer prior. Transferring the SOFTWARE automatically terminates Your
-license under this Agreement. Equitable Remedies You hereby agree that if the
-terms of this Agreement are not specifically enforced, Owner will be
-irreparably damaged, and therefore you agree that Owner shall be entitled,
-without bond, other security, proof of damages, to appropriate equitable
-remedies with respect any of this Agreement, in addition to any other available
-remedies. <o:p></o:p></span></p>
+of notice) if <span class=GramE>You</span> do not comply with any Agreement
+provision. You can also end this Agreement by destroying the SOFTWARE and
+ACCOMPANYING MATERIALS and all copies and reproductions of the SOFTWARE and
+ACCOMPANYING MATERIALS and deleting and permanently purging the SOFTWARE from
+any client server or computer on which it has been installed. <span
+class=GramE>Program Transfer.</span> You may permanently transfer all of your
+rights under this Agreement, provided that the recipient agrees to all of the
+terms of this Agreement, and <span class=GramE>You</span> agree to transfer all
+ACCOMPANYING MATERIALS and related documents and components and remove the
+SOFTWARE from Your computer prior. Transferring the SOFTWARE automatically
+terminates <span class=GramE>Your</span> license under this Agreement.
+Equitable Remedies You hereby agree that if the terms of this Agreement are not
+specifically enforced, Owner will be irreparably damaged, and therefore you
+agree that Owner shall be entitled, without bond, other security, proof of
+damages, to appropriate equitable remedies with respect any of this Agreement,
+in addition to any other available remedies. <o:p></o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
 lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
 mso-ansi-language:EN-GB'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
-lang=EN-GB style='font-family:Arial;mso-fareast-font-family:"MS Mincho";
-mso-ansi-language:EN-GB'>Owner. If You have any questions regarding this
+class=GramE><span lang=EN-GB style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho";mso-ansi-language:EN-GB'>Owner.</span></span><span lang=EN-GB
+style='font-family:Arial;mso-fareast-font-family:"MS Mincho";mso-ansi-language:
+EN-GB'> If <span class=GramE>You</span> have any questions regarding this
 Agreement, the enclosed materials, or otherwise, please contact in writing:<o:p></o:p></span></p>
 
 <p class=MsoPlainText style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
@@ -3073,7 +3260,8 @@ mso-ansi-language:EN-GB'>8th Floor, 26-28 Hammersmith Grove, <st1:place w:st="on
  w:st="on">London</st1:City>, <st1:PostalCode w:st="on">W6 7BA</st1:PostalCode></st1:place></span><span
 lang=EN-GB style='mso-ansi-language:EN-GB'><o:p></o:p></span></p>
 
-<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
 
 <div style='border:solid black 1.0pt;padding:2.0pt 2.0pt 2.0pt 2.0pt'>
 
@@ -3083,17 +3271,18 @@ name=trademark>Trademark and Copyright</a></h3>
 </div>
 
 <p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
-class=bodytext1><span style='font-size:10.0pt'>Portions of this software are
-included under license. ©2005 Numerical Design, Ltd. All rights reserved. </span></span><span
-style='font-size:10.0pt;font-family:Verdana'><br>
+class=bodytext1><span style='font-size:10.0pt'>Portions of this software are included
+under license. <span class=GramE>©2005 Numerical Design, Ltd.</span> All rights
+reserved. </span></span><span style='font-size:10.0pt;font-family:Verdana'><br>
 <br>
-<span class=bodytext1>Uses Bink Video. Copyright ©1997-2005 by <st1:place
-w:st="on"><st1:PlaceName w:st="on">RAD</st1:PlaceName> <st1:PlaceName w:st="on">Game</st1:PlaceName>
- <st1:PlaceName w:st="on">Tools</st1:PlaceName><st1:PlaceName w:st="on">,</st1:PlaceName>
- <st1:PlaceName w:st="on">Inc.</st1:PlaceName><br>
+<span class=GramE><span class=bodytext1>Uses Bink Video.</span></span><span
+class=bodytext1> Copyright ©1997-2005 by <st1:place w:st="on"><st1:PlaceName
+ w:st="on">RAD</st1:PlaceName> <st1:PlaceName w:st="on">Game</st1:PlaceName> <st1:PlaceName
+ w:st="on">Tools</st1:PlaceName><st1:PlaceName w:st="on">,</st1:PlaceName> <st1:PlaceName
+ w:st="on">Inc<span class=GramE>.</span></st1:PlaceName><br>
 <st1:PlaceName w:st="on">Uses</st1:PlaceName> <st1:PlaceName w:st="on">Miles</st1:PlaceName>
- <st1:PlaceName w:st="on">Sound</st1:PlaceName></st1:place> System. Copyright
-©1991-2005 by RAD Game Tools, Inc. </span></span></p>
+ <st1:PlaceName w:st="on">Sound</st1:PlaceName></st1:place> System. <span
+class=GramE>Copyright ©1991-2005 by RAD Game Tools, Inc.</span> </span></span></p>
 
 <p class=MsoNormal style='margin-bottom:12.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
 name=betathanks></a><br>

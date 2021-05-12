@@ -236,15 +236,14 @@ class CvTopCivs:
 	def turnChecker(self, iTurnNum):
 
 		# Check to see if this is a turn when the screen should pop up (every 50 turns)
-		if (CyGame().getActivePlayer()>=0):
-			print("iTurn: %d" %(iTurnNum))
+		if (not CyGame().isNetworkMultiPlayer() and CyGame().getActivePlayer()>=0):
 			if (iTurnNum % 50 == 0 and iTurnNum > 0 and gc.getPlayer(CyGame().getActivePlayer()).isAlive()):
 				self.showScreen()
 
 	#####################################################################################################################################
 	      
 	def handleInput( self, inputClass ):
-		self.screen = CyInterfaceScreen( "CvTopCivs", CvScreenEnums.TOP_CIVS )		
+		self.screen = CyGInterfaceScreen( "CvTopCivs", CvScreenEnums.TOP_CIVS )		
 
 		if ( inputClass.getFunctionName() == "Exit" and inputClass.getNotifyCode() == NotifyCode.NOTIFY_CLICKED ):
 			self.screen.hideScreen()

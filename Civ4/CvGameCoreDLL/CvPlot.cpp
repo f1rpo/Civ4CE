@@ -3997,17 +3997,30 @@ void CvPlot::setOwner(PlayerTypes eNewValue)
 
 			if (pNewCity != NULL)
 			{
+				CLinkList<IDInfo> oldUnits;
+
 				pUnitNode = headUnitNode();
 
 				while (pUnitNode != NULL)
 				{
-					pLoopUnit = ::getUnit(pUnitNode->m_data);
+					oldUnits.insertAtEnd(pUnitNode->m_data);
 					pUnitNode = nextUnitNode(pUnitNode);
+				}
 
-					if (atWar(pLoopUnit->getTeam(), GET_PLAYER(eNewValue).getTeam()))
+				pUnitNode = oldUnits.head();
+
+				while (pUnitNode != NULL)
+				{
+					pLoopUnit = ::getUnit(pUnitNode->m_data);
+					pUnitNode = oldUnits.next(pUnitNode);
+
+					if (pLoopUnit)
 					{
-						FAssert(pLoopUnit->getTeam() != GET_PLAYER(eNewValue).getTeam());
-						pLoopUnit->kill(false, eNewValue);
+						if (atWar(pLoopUnit->getTeam(), GET_PLAYER(eNewValue).getTeam()))
+						{
+							FAssert(pLoopUnit->getTeam() != GET_PLAYER(eNewValue).getTeam());
+							pLoopUnit->kill(false, eNewValue);
+						}
 					}
 				}
 
@@ -7217,21 +7230,35 @@ void CvPlot::doCulture()
 
 						if ((GC.getGameINLINE().getSorenRandNum(iCityStrength, "Revolt #2") > iGarrison) || pCity->isBarbarian())
 						{
+							CLinkList<IDInfo> oldUnits;
+
 							pUnitNode = headUnitNode();
+
+							while (pUnitNode != NULL)
+							{
+								oldUnits.insertAtEnd(pUnitNode->m_data);
+								pUnitNode = nextUnitNode(pUnitNode);
+							}
+
+							pUnitNode = oldUnits.head();
 
 							while (pUnitNode != NULL)
 							{
 								pLoopUnit = ::getUnit(pUnitNode->m_data);
 								pUnitNode = nextUnitNode(pUnitNode);
 
-								if (pLoopUnit->isBarbarian())
+								if (pLoopUnit)
 								{
-									pLoopUnit->kill(false, eCulturalOwner);
+									if (pLoopUnit->isBarbarian())
+									{
+										pLoopUnit->kill(false, eCulturalOwner);
+									}
+									else if (pLoopUnit->canDefend())
+									{
+										pLoopUnit->changeDamage((pLoopUnit->currHitPoints() / 2), eCulturalOwner);
+									}
 								}
-								else if (pLoopUnit->canDefend())
-								{
-									pLoopUnit->changeDamage((pLoopUnit->currHitPoints() / 2), eCulturalOwner);
-								}
+
 							}
 
 							if (pCity->isBarbarian() || (!(GC.getGameINLINE().isOption(GAMEOPTION_NO_CITY_FLIPPING)) && (GC.getGameINLINE().isOption(GAMEOPTION_FLIPPING_AFTER_CONQUEST) || !(pCity->isEverOwned(eCulturalOwner))) && (pCity->getNumRevolts(eCulturalOwner) >= GC.getDefineINT("NUM_WARNING_REVOLTS"))))

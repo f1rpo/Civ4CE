@@ -185,9 +185,10 @@ class CvEventManager:
 
 	def reportEvent(self, entry, context, argsList):
 		'Report an Event to Events.log '
-		message = "DEBUG Event: %s (%s)" %(entry[0], gc.getActivePlayer().getName())
-		CyInterface().addImmediateMessage(message,"")
-		CvUtil.pyPrint(message)
+		if (gc.getGame().getActivePlayer() != -1):
+			message = "DEBUG Event: %s (%s)" %(entry[0], gc.getActivePlayer().getName())
+			CyInterface().addImmediateMessage(message,"")
+			CvUtil.pyPrint(message)
 		return 0
 		
 #################### ON EVENTS ######################

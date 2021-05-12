@@ -298,14 +298,14 @@ class CvReligionScreen:
 			if (iLinkReligion == -1):
 				bFirst = True
 				for iI in range(len(lReligions)):
-					szTempBuffer = CyGameTextMgr().getReligionHelpCity(lReligions[iI], pLoopCity.GetCy(), False, False, False)
+					szTempBuffer = CyGameTextMgr().getReligionHelpCity(lReligions[iI], pLoopCity.GetCy(), False, False, False, True)
 					if (szTempBuffer):
 						if (not bFirst):
 							szCityName += u", "
 						szCityName += szTempBuffer
 						bFirst = False
 			else:
-				szCityName += CyGameTextMgr().getReligionHelpCity(iLinkReligion, pLoopCity.GetCy(), False, False, True)
+				szCityName += CyGameTextMgr().getReligionHelpCity(iLinkReligion, pLoopCity.GetCy(), False, False, True, False)
 
 			if bFirstColumn:
 				szLeftCities += u"<font=3>" + szCityName + u"</font>\n"

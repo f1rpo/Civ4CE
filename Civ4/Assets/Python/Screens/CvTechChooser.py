@@ -49,8 +49,10 @@ class CvTechChooser:
 	
 		global g_civSelected
 
-		if ( not CyGame().isPitbossHost() ):
-			g_civSelected = gc.getGame().getActivePlayer()
+		if ( CyGame().isPitbossHost() ):
+			return
+
+		g_civSelected = gc.getGame().getActivePlayer()
 
 		# Create a new screen, called TechChooser, using the file CvTechChooser.py for input
 		screen = CyGInterfaceScreen( "TechChooser", CvScreenEnums.TECH_CHOOSER )
@@ -66,7 +68,7 @@ class CvTechChooser:
 			screen.hide( "CivDropDown" )
 	
 		if ( screen.isPersistent() ):
-			self.updateTechRecords()
+			self.updateTechRecords(false)
 			return
 		
 		screen.setPersistent( True )
@@ -260,6 +262,15 @@ class CvTechChooser:
 			if ( gc.getTechInfo(i).getFirstFreeUnitClass() != UnitClassTypes.NO_UNITCLASS ):
 				szFreeUnitButton = "FreeUnit" + str(i)
 				screen.addDDSGFCAt( szFreeUnitButton, "TechList", gc.getUnitInfo(gc.getUnitClassInfo(gc.getTechInfo(i).getFirstFreeUnitClass()).getDefaultUnitIndex()).getButton(), iX + fX, iY + Y_ROW, TEXTURE_SIZE, TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_FREE_UNIT, gc.getUnitClassInfo(gc.getTechInfo(i).getFirstFreeUnitClass()).getDefaultUnitIndex(), i, False )
+				fX += X_INCREMENT
+
+			j = 0
+			k = 0
+
+			# Feature production modifier
+			if ( gc.getTechInfo(i).getFeatureProductionModifier() != 0 ):
+				szFeatureProductionButton = "FeatureProduction" + str(i)
+				screen.addDDSGFCAt( szFeatureProductionButton, "TechList", ArtFileMgr.getInterfaceArtInfo("INTERFACE_TECH_FEATURE_PRODUCTION").getPath(), iX + fX, iY + Y_ROW, TEXTURE_SIZE, TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_FEATURE_PRODUCTION, i, -1, False )
 				fX += X_INCREMENT
 
 			j = 0
@@ -561,7 +572,7 @@ class CvTechChooser:
 		
 
 	# Will update the tech records based on color, researching, researched, queued, etc.
-	def updateTechRecords (self):
+	def updateTechRecords (self, bForce):
 
 		global g_civSelected
 		global g_iCurrentState
@@ -573,33 +584,43 @@ class CvTechChooser:
 		# Get the screen
 		screen = CyGInterfaceScreen( "TechChooser", CvScreenEnums.TECH_CHOOSER )
 	
+		abChanged = []
+		bAnyChanged = 0
+	
 		# Go through all the techs
 		for i in range(gc.getNumTechInfos()):
 		
-			bChanged = 0
+			abChanged.append(0)
 		
 			if ( gc.getTeam(gc.getPlayer(g_civSelected).getTeam()).isHasTech(i) ):
 				if ( g_iCurrentState[i] != CIV_HAS_TECH ):
 					g_iCurrentState[i] = CIV_HAS_TECH
-					bChanged = 1;
+					abChanged[i] = 1
+					bAnyChanged = 1
 			elif ( gc.getPlayer(g_civSelected).getCurrentResearch() == i ):
 				if ( g_iCurrentState[i] != CIV_IS_RESEARCHING ):
 					g_iCurrentState[i] = CIV_IS_RESEARCHING
-					bChanged = 1;
+					abChanged[i] = 1
+					bAnyChanged = 1
 			elif ( gc.getPlayer(g_civSelected).isResearchingTech(i) ):
 				if ( g_iCurrentState[i] != CIV_IS_RESEARCHING ):
 					g_iCurrentState[i] = CIV_IS_RESEARCHING
-					bChanged = 1;
+					abChanged[i] = 1
+					bAnyChanged = 1
 			elif ( gc.getPlayer(g_civSelected).canEverResearch(i) ):
 				if ( g_iCurrentState[i] != CIV_NO_RESEARCH ):
 					g_iCurrentState[i] = CIV_NO_RESEARCH
-					bChanged = 1;
+					abChanged[i] = 1
+					bAnyChanged = 1
 			else:
 				if ( g_iCurrentState[i] != CIV_TECH_AVAILABLE ):
 					g_iCurrentState[i] = CIV_TECH_AVAILABLE
-					bChanged = 1;
+					bChanged[i] = 1
+					bAnyChanged = 1
 
-			if ( bChanged ):
+		for i in range(gc.getNumTechInfos()):
+
+			if (abChanged[i] or bForce or (bAnyChanged and gc.getPlayer(g_civSelected).isResearchingTech(i))):
 				# Create and place a tech in its proper location
 				szTechRecord = "TechRecord" + str(i)
 				szTechID = "TechID" + str(i)
@@ -622,19 +643,14 @@ class CvTechChooser:
 
 				if ( gc.getTeam(gc.getPlayer(g_civSelected).getTeam()).isHasTech(i) ):
 					screen.setPanelColor(szTechRecord, 85, 150, 87)
-					g_iCurrentState.append(CIV_HAS_TECH)
 				elif ( gc.getPlayer(g_civSelected).getCurrentResearch() == i ):
 					screen.setPanelColor(szTechRecord, 104, 158, 165)
-					g_iCurrentState.append(CIV_IS_RESEARCHING)
 				elif ( gc.getPlayer(g_civSelected).isResearchingTech(i) ):
 					screen.setPanelColor(szTechRecord, 104, 158, 165)
-					g_iCurrentState.append(CIV_IS_RESEARCHING)
 				elif ( gc.getPlayer(g_civSelected).canEverResearch(i) ):
 					screen.setPanelColor(szTechRecord, 100, 104, 160)
-					g_iCurrentState.append(CIV_NO_RESEARCH)
 				else:
 					screen.setPanelColor(szTechRecord, 206, 65, 69)
-					g_iCurrentState.append(CIV_TECH_AVAILABLE)
 
 	# Will draw the arrows
 	def drawArrows (self):
@@ -757,7 +773,7 @@ class CvTechChooser:
 			screen = CyGInterfaceScreen( "TechChooser", CvScreenEnums.TECH_CHOOSER )			
 			iIndex = screen.getSelectedPullDownID("CivDropDown")
 			g_civSelected = screen.getPullDownData("CivDropDown", iIndex)
-			self.updateTechRecords()
+			self.updateTechRecords(false)
 
 	# Will handle the input for this screen...
 	def handleInput (self, inputClass):
@@ -811,6 +827,7 @@ class TechChooserMaps:
 		'ObsoleteX'				: CvTechChooser().ParentClick,
 		'Move'					: CvTechChooser().ParentClick,
 		'FreeUnit'				: CvTechChooser().ParentClick,
+		'FeatureProduction'			: CvTechChooser().ParentClick,
 		'Worker'				: CvTechChooser().ParentClick,
 		'TradeRoutes'			: CvTechChooser().ParentClick,
 		'HealthRate'			: CvTechChooser().ParentClick,

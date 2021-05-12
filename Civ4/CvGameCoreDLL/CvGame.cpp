@@ -2700,9 +2700,12 @@ void CvGame::selectGroup(CvUnit* pUnit, bool bShift, bool bCtrl, bool bAlt)
 			{
 				if (pLoopUnit->canMove())
 				{
-					if (bAlt || (pLoopUnit->getUnitType() == pUnit->getUnitType()))
+					if (!isMPOption(MPOPTION_SIMULTANEOUS_TURNS) || getTurnSlice() - pLoopUnit->getLastMoveTurn() > GC.getDefineINT("MIN_TIMER_UNIT_DOUBLE_MOVES"))
 					{
-						gDLL->getInterfaceIFace()->insertIntoSelectionList(pLoopUnit, false, false, bGroup);
+						if (bAlt || (pLoopUnit->getUnitType() == pUnit->getUnitType()))
+						{
+							gDLL->getInterfaceIFace()->insertIntoSelectionList(pLoopUnit, false, false, bGroup);
+						}
 					}
 				}
 			}

@@ -56,9 +56,9 @@ class CvInfoScreen:
 		self.Y_EXIT = 730
 
 		self.X_GRAPH_TAB	= 30
-		self.X_DEMOGRAPHICS_TAB = 145
-		self.X_TOP_CITIES_TAB	= 360
-		self.X_STATS_TAB	= 663
+		self.X_DEMOGRAPHICS_TAB = 195
+		self.X_TOP_CITIES_TAB	= 410
+		self.X_STATS_TAB	= 713
 		self.Y_TABS		= 730
 		self.W_BUTTON		= 200
 		self.H_BUTTON		= 30
@@ -96,6 +96,10 @@ class CvInfoScreen:
 
 		self.xSelPt = 0
 		self.ySelPt = 0
+		
+		self.graphLeftButtonID = ""
+		self.graphRightButtonID = ""
+		
 
 ################################################## GRAPH ###################################################
 
@@ -337,7 +341,7 @@ class CvInfoScreen:
 		self.SCREEN_TITLE = u"<font=4b>" + localText.getText("TXT_KEY_INFO_SCREEN", ()).upper() + u"</font>"
 		self.SCREEN_GRAPH_TITLE = u"<font=4b>" + localText.getText("TXT_KEY_INFO_GRAPH", ()).upper() + u"</font>"
 		self.SCREEN_DEMOGRAPHICS_TITLE = u"<font=4b>" + localText.getText("TXT_KEY_DEMO_SCREEN_TITLE", ()).upper() + u"</font>"
-		self.SCREEN_TOP_CITIES_TITLE = u"<font=4b>" + localText.getText("TXT_KEY_CONCEPT_WONDERS", ()).upper() + " / " + localText.getText("TXT_KEY_WONDERS_SCREEN_TOP_CITIES_TEXT", ()).upper() + u"</font>"
+		self.SCREEN_TOP_CITIES_TITLE = u"<font=4b>" + localText.getText("TXT_KEY_WONDERS_SCREEN_TOP_CITIES_TEXT", ()).upper() + u"</font>"
 		self.SCREEN_STATS_TITLE = u"<font=4b>" + localText.getText("TXT_KEY_INFO_SCREEN_STATISTICS_TITLE", ()).upper() + u"</font>"
 
 		self.EXIT_TEXT = u"<font=4>" + localText.getText("TXT_KEY_PEDIA_SCREEN_EXIT", ()).upper() + u"</font>"
@@ -345,11 +349,11 @@ class CvInfoScreen:
 		self.TEXT_GRAPH = u"<font=4>" + localText.getText("TXT_KEY_INFO_GRAPH", ()).upper() + u"</font>"
 		self.TEXT_DEMOGRAPHICS = u"<font=4>" + localText.getText("TXT_KEY_DEMO_SCREEN_TITLE", ()).upper() + u"</font>"
 		self.TEXT_DEMOGRAPHICS_SMALL = localText.getText("TXT_KEY_DEMO_SCREEN_TITLE", ())
-		self.TEXT_TOP_CITIES = u"<font=4>" + localText.getText("TXT_KEY_CONCEPT_WONDERS", ()).upper() + " / " + localText.getText("TXT_KEY_WONDERS_SCREEN_TOP_CITIES_TEXT", ()).upper() + u"</font>"
+		self.TEXT_TOP_CITIES = u"<font=4>" + localText.getText("TXT_KEY_WONDERS_SCREEN_TOP_CITIES_TEXT", ()).upper() + u"</font>"
 		self.TEXT_STATS = u"<font=4>" + localText.getText("TXT_KEY_INFO_SCREEN_STATISTICS_TITLE", ()).upper() + u"</font>"
-		self.TEXT_GRAPH_YELLOW = u"<font=4><color=255,255,0,0>GRAPH</color></font>"
+		self.TEXT_GRAPH_YELLOW = u"<font=4>" + localText.getColorText("TXT_KEY_INFO_GRAPH", (), gc.getInfoTypeForString("COLOR_YELLOW")).upper() + u"</font>"
 		self.TEXT_DEMOGRAPHICS_YELLOW = u"<font=4>" + localText.getColorText("TXT_KEY_DEMO_SCREEN_TITLE", (), gc.getInfoTypeForString("COLOR_YELLOW")).upper() + u"</font>"
-		self.TEXT_TOP_CITIES_YELLOW = u"<font=4>" + localText.getColorText("TXT_KEY_CONCEPT_WONDERS", (), gc.getInfoTypeForString("COLOR_YELLOW")).upper() + " / " + localText.getColorText("TXT_KEY_WONDERS_SCREEN_TOP_CITIES_TEXT", (), gc.getInfoTypeForString("COLOR_YELLOW")).upper() + u"</font>"
+		self.TEXT_TOP_CITIES_YELLOW = u"<font=4>" + localText.getColorText("TXT_KEY_WONDERS_SCREEN_TOP_CITIES_TEXT", (), gc.getInfoTypeForString("COLOR_YELLOW")).upper() + u"</font>"
 		self.TEXT_STATS_YELLOW = u"<font=4>" + localText.getColorText("TXT_KEY_INFO_SCREEN_STATISTICS_TITLE", (), gc.getInfoTypeForString("COLOR_YELLOW")).upper() + u"</font>"
 
 		self.TEXT_SHOW_ALL_PLAYERS =  localText.getText("TXT_KEY_SHOW_ALL_PLAYERS", ())
@@ -458,6 +462,7 @@ class CvInfoScreen:
 		self.aiWonderListBoxIDs = []
 		self.aiTurnYearBuilt = []
 		self.aiWonderBuiltBy = []
+		self.aszWonderCity = []
 
 	def getScreen(self):
 		return CyGInterfaceScreen(self.DEMO_SCREEN_NAME, self.screenId)
@@ -1157,7 +1162,7 @@ class CvInfoScreen:
 			iHappinessGameBest	= aiGroupHappiness[ix(iHappinessRank)]
 			iHealthGameBest		= aiGroupHealth[ix(iHealthRank)]
 
-			ix = lambda x: iff(x == iNumActivePlayers - 1, iNumActivePlayers - 2, iNumActivePlayers - 1)
+			ix = lambda x: iff(x == iNumActivePlayers, iNumActivePlayers - 2, iNumActivePlayers - 1)
 
 			iEconomyGameWorst	= aiGroupEconomy[ix(iEconomyRank)]
 			iIndustryGameWorst	= aiGroupIndustry[ix(iIndustryRank)]
@@ -1311,7 +1316,9 @@ class CvInfoScreen:
 				iDistance = 350
 
 			self.szCityAnimWidgets.append(self.getNextWidgetName())
-			screen.addPlotGraphicGFC(self.szCityAnimWidgets[iWidgetLoop], self.X_CITY_ANIMATION, self.Y_ROWS_CITIES[iWidgetLoop] + self.Y_CITY_ANIMATION_BUFFER - self.H_CITY_ANIMATION / 2, self.W_CITY_ANIMATION, self.H_CITY_ANIMATION, pPlot, iDistance, false, WidgetTypes.WIDGET_GENERAL, -1, -1)
+			
+			if (pCity.isRevealed(gc.getGame().getActiveTeam(), false)):			
+				screen.addPlotGraphicGFC(self.szCityAnimWidgets[iWidgetLoop], self.X_CITY_ANIMATION, self.Y_ROWS_CITIES[iWidgetLoop] + self.Y_CITY_ANIMATION_BUFFER - self.H_CITY_ANIMATION / 2, self.W_CITY_ANIMATION, self.H_CITY_ANIMATION, pPlot, iDistance, false, WidgetTypes.WIDGET_GENERAL, -1, -1)
 
 		# Draw Wonder icons
 		self.drawCityWonderIcons();
@@ -1379,9 +1386,9 @@ class CvInfoScreen:
 		for iPlayerLoop in range(gc.getMAX_PLAYERS()):
 
 			apCityList = PyPlayer(iPlayerLoop).getCityList()
-
+			
 			for pCity in apCityList:
-
+			
 				iTotalCityValue = ((pCity.getCulture() / 5) + (pCity.getFoodRate() + pCity.getProductionRate() \
 					+ pCity.calculateGoldRate())) * pCity.getPopulation()
 
@@ -1439,9 +1446,13 @@ class CvInfoScreen:
 				else:
 					szTurnFounded = localText.getText("TXT_KEY_TIME_AD", (iTurnYear,))#"%d %s" %(iTurnYear, self.TEXT_AD)
 
-				self.szCityNames[iRankLoop] = pCity.getName().upper()
+				if (pCity.isRevealed(gc.getGame().getActiveTeam()) or gc.getTeam(pPlayer.getTeam()).isHasMet(gc.getGame().getActiveTeam())):
+					self.szCityNames[iRankLoop] = pCity.getName().upper()
+					self.szCityDescs[iRankLoop] = ("%s, %s" %(pPlayer.getCivilizationAdjective(0), localText.getText("TXT_KEY_MISC_FOUNDED_IN", (szTurnFounded,))))
+				else:
+					self.szCityNames[iRankLoop] = localText.getText("TXT_KEY_UNKNOWN", ()).upper()
+					self.szCityDescs[iRankLoop] = ("%s" %(localText.getText("TXT_KEY_MISC_FOUNDED_IN", (szTurnFounded,)), ))
 				self.iCitySizes[iRankLoop] = pCity.getPopulation()
-				self.szCityDescs[iRankLoop] = ("%s, %s" %(pPlayer.getCivilizationAdjective(0), localText.getText("TXT_KEY_MISC_FOUNDED_IN", (szTurnFounded,))))
 				self.aaCitiesXY[iRankLoop] = [pCity.getX(), pCity.getY()]
 
 				self.iNumCities += 1
@@ -1514,6 +1525,7 @@ class CvInfoScreen:
 		self.aiWonderListBoxIDs = []
 		self.aiTurnYearBuilt = []
 		self.aiWonderBuiltBy = []
+		self.aszWonderCity = []
 
 		if (self.szWonderDisplayMode == "Projects"):
 
@@ -1529,6 +1541,8 @@ class CvInfoScreen:
 				self.aiTurnYearBuilt.append(-6666)
 				szWonderBuiltBy = self.aaWondersBeingBuilt[iWonderLoop][1]
 				self.aiWonderBuiltBy.append(szWonderBuiltBy)
+				szWonderCity = ""
+				self.aszWonderCity.append(szWonderCity)
 
 				screen.appendListBoxString( self.szWondersListBox, szProjectName + " (" + szWonderBuiltBy + ")", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
@@ -1542,6 +1556,8 @@ class CvInfoScreen:
 				self.aiTurnYearBuilt.append(-9999)
 				szWonderBuiltBy = self.aaWondersBuilt[iWonderLoop][2]
 				self.aiWonderBuiltBy.append(szWonderBuiltBy)
+				szWonderCity = self.aaWondersBuilt[iWonderLoop][3]
+				self.aszWonderCity.append(szWonderCity)
 
 				screen.appendListBoxString( self.szWondersListBox, szProjectName + " (" + szWonderBuiltBy + ")", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
@@ -1559,6 +1575,8 @@ class CvInfoScreen:
 				self.aiTurnYearBuilt.append(-9999)
 				szWonderBuiltBy = self.aaWondersBeingBuilt[iWonderLoop][1]
 				self.aiWonderBuiltBy.append(szWonderBuiltBy)
+				szWonderCity = ""
+				self.aszWonderCity.append(szWonderCity)
 
 				screen.appendListBoxString( self.szWondersListBox, szWonderName + " (" + szWonderBuiltBy + ")", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
@@ -1572,6 +1590,8 @@ class CvInfoScreen:
 				self.aiTurnYearBuilt.append(self.aaWondersBuilt[iWonderLoop][0])
 				szWonderBuiltBy = self.aaWondersBuilt[iWonderLoop][2]
 				self.aiWonderBuiltBy.append(szWonderBuiltBy)
+				szWonderCity = self.aaWondersBuilt[iWonderLoop][3]
+				self.aszWonderCity.append(szWonderCity)
 
 				screen.appendListBoxString( self.szWondersListBox, szWonderName + " (" + szWonderBuiltBy + ")", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
@@ -1625,7 +1645,12 @@ class CvInfoScreen:
 					szTempText = localText.getText("TXT_KEY_INFO_SCREEN_BUILT", ())
 
 				szWonderDesc = "%s, %s" %(self.aiWonderBuiltBy[self.iActiveWonderCounter], szTempText)
-				szStatsText += szWonderDesc + "\n\n"
+				szStatsText += szWonderDesc + "\n"
+				
+				if (self.aszWonderCity[self.iActiveWonderCounter] != ""):
+					szStatsText += self.aszWonderCity[self.iActiveWonderCounter] + "\n\n"
+				else:
+					szStatsText += "\n"
 
 				if (pProjectInfo.getProductionCost() > 0):
 					szCost = localText.getText("TXT_KEY_PEDIA_COST", (gc.getActivePlayer().getProjectProductionNeeded(self.iWonderID),))
@@ -1701,7 +1726,12 @@ class CvInfoScreen:
 					szDateBuilt = (", %s" %(localText.getText("TXT_KEY_BEING_BUILT", ())))
 
 				szWonderDesc = "%s%s" %(self.aiWonderBuiltBy[self.iActiveWonderCounter], szDateBuilt)
-				szStatsText += szWonderDesc + "\n\n"
+				szStatsText += szWonderDesc + "\n"
+				
+				if (self.aszWonderCity[self.iActiveWonderCounter] != ""):
+					szStatsText += self.aszWonderCity[self.iActiveWonderCounter] + "\n\n"
+				else:
+					szStatsText += "\n"
 
 				# Building attributes
 
@@ -1790,6 +1820,13 @@ class CvInfoScreen:
 				apCityList = PyPlayer(iPlayerLoop).getCityList()
 				for pCity in apCityList:
 
+					pCityPlot = CyMap().plot(pCity.getX(), pCity.getY())
+					
+					# Check to see if active player can see this city
+					szCityName = ""
+					if (pCityPlot.isActiveVisible(false)):
+						szCityName = pCity.getName()
+					
 					# Loop through projects to find any under construction
 					if (self.szWonderDisplayMode == "Projects"):
 						for iProjectLoop in range(gc.getNumProjectInfos()):
@@ -1821,13 +1858,15 @@ class CvInfoScreen:
 								if (iBuildingProd == iBuildingLoop):
 
 									# Only show our wonders under construction
-									if (iPlayerTeam == gc.getTeam(gc.getPlayer(self.iActivePlayer).getTeam()).getID()):
+									if (iPlayerTeam == gc.getPlayer(self.iActivePlayer).getTeam()):
 
 										self.aaWondersBeingBuilt.append([iBuildingProd, pPlayer.getCivilizationShortDescription(0)])
 
 								if (pCity.hasBuilding(iBuildingLoop)):
-
-									self.aaWondersBuilt.append([pCity.getBuildingOriginalTime(iBuildingLoop),iBuildingLoop,pPlayer.getCivilizationShortDescription(0)])
+									if (iPlayerTeam == gc.getPlayer(self.iActivePlayer).getTeam() or gc.getTeam(gc.getPlayer(self.iActivePlayer).getTeam()).isHasMet(iPlayerTeam)):								
+										self.aaWondersBuilt.append([pCity.getBuildingOriginalTime(iBuildingLoop),iBuildingLoop,pPlayer.getCivilizationShortDescription(0),szCityName])
+									else:
+										self.aaWondersBuilt.append([pCity.getBuildingOriginalTime(iBuildingLoop),iBuildingLoop,localText.getText("TXT_KEY_UNKNOWN", ()),localText.getText("TXT_KEY_UNKNOWN", ())])
 	#								print("Adding World wonder to list: %s, %d, %s" %(pCity.getBuildingOriginalTime(iBuildingLoop),iBuildingLoop,pPlayer.getCivilizationAdjective(0)))
 									self.iNumWonders += 1
 
@@ -1838,14 +1877,17 @@ class CvInfoScreen:
 								if (iBuildingProd == iBuildingLoop):
 
 									# Only show our wonders under construction
-									if (iPlayerTeam == gc.getTeam(gc.getPlayer(self.iActivePlayer).getTeam()).getID()):
+									if (iPlayerTeam == gc.getPlayer(self.iActivePlayer).getTeam()):
 
 										self.aaWondersBeingBuilt.append([iBuildingProd, pPlayer.getCivilizationShortDescription(0)])
 
 								if (pCity.hasBuilding(iBuildingLoop)):
 
 	#								print("Adding National wonder to list: %s, %d, %s" %(pCity.getBuildingOriginalTime(iBuildingLoop),iBuildingLoop,pPlayer.getCivilizationAdjective(0)))
-									self.aaWondersBuilt.append([pCity.getBuildingOriginalTime(iBuildingLoop),iBuildingLoop,pPlayer.getCivilizationShortDescription(0)])
+									if (iPlayerTeam == gc.getPlayer(self.iActivePlayer).getTeam() or gc.getTeam(gc.getPlayer(self.iActivePlayer).getTeam()).isHasMet(iPlayerTeam)):								
+										self.aaWondersBuilt.append([pCity.getBuildingOriginalTime(iBuildingLoop),iBuildingLoop,pPlayer.getCivilizationShortDescription(0), szCityName])
+									else:
+										self.aaWondersBuilt.append([pCity.getBuildingOriginalTime(iBuildingLoop),iBuildingLoop,localText.getText("TXT_KEY_UNKNOWN", ()), localText.getText("TXT_KEY_UNKNOWN", ())])
 									self.iNumWonders += 1
 
 		# This array used to store which players have already used up a team's slot so team projects don't get added to list more than once
@@ -1866,7 +1908,6 @@ class CvInfoScreen:
 					aiTeamsUsed.append(iTeamLoop)
 					pTeam = gc.getTeam(iTeamLoop)
 
-					# No barbs and only display national wonders for the active player's team
 					if (pTeam.isAlive() and not pTeam.isBarbarian()):
 
 						# Loop through projects
@@ -1874,7 +1915,10 @@ class CvInfoScreen:
 
 							for iI in range(pTeam.getProjectCount(iProjectLoop)):
 
-								self.aaWondersBuilt.append([-9999,iProjectLoop,gc.getPlayer(iPlayerLoop).getCivilizationShortDescription(0)])
+								if (iTeamLoop == gc.getPlayer(self.iActivePlayer).getTeam() or gc.getTeam(gc.getPlayer(self.iActivePlayer).getTeam()).isHasMet(iTeamLoop)):								
+									self.aaWondersBuilt.append([-9999,iProjectLoop,gc.getPlayer(iPlayerLoop).getCivilizationShortDescription(0),szCityName])
+								else:
+									self.aaWondersBuilt.append([-9999,iProjectLoop,localText.getText("TXT_KEY_UNKNOWN", ()),localText.getText("TXT_KEY_UNKNOWN", ())])
 								self.iNumWonders += 1
 
 		# Sort wonders in order of date built

@@ -29,17 +29,25 @@ class CvWonderMovieScreen:
 	def interfaceScreen (self, iMovieItem, iCityId, iMovieType):
 		# iMovieItem is either the WonderID, the ReligionID, or the ProjectID, depending on iMovieType
 		
+		if CyUserProfile().getGraphicOption(GraphicOptionTypes.GRAPHICOPTION_NO_MOVIES):
+			return
+		
 		self.Z_CONTROLS = -2.2
 
-		self.X_SCREEN = 250
-		self.Y_SCREEN = 40
-		self.W_SCREEN = 760
-		self.H_SCREEN = 590
-		self.Y_TITLE = self.Y_SCREEN + 20
+		self.X_SCREEN = 0
+		self.Y_SCREEN = 0
+		self.W_SCREEN = 1024
+		self.H_SCREEN = 768
+
+		self.X_WINDOW = 250
+		self.Y_WINDOW = 40
+		self.W_WINDOW = 760
+		self.H_WINDOW = 590
+		self.Y_TITLE = self.Y_WINDOW + 20
 		self.iWonderId = iMovieItem
 		
-		self.X_EXIT = self.X_SCREEN + self.W_SCREEN/2 - 50
-		self.Y_EXIT = self.Y_SCREEN + self.H_SCREEN - 50
+		self.X_EXIT = self.X_WINDOW + self.W_WINDOW/2 - 50
+		self.Y_EXIT = self.Y_WINDOW + self.H_WINDOW - 50
 		self.W_EXIT = 120
 		self.H_EXIT = 30
 		
@@ -70,13 +78,14 @@ class CvWonderMovieScreen:
 		
 		screen = CyGInterfaceScreen( "WonderMovieScreen" + str(iMovieItem), CvScreenEnums.WONDER_MOVIE_SCREEN )
 		screen.addPanel("WonderMoviePanel", "", "", true, true,
-			self.X_SCREEN, self.Y_SCREEN, self.W_SCREEN, self.H_SCREEN, PanelStyles.PANEL_STYLE_MAIN)
+			self.X_WINDOW, self.Y_WINDOW, self.W_WINDOW, self.H_WINDOW, PanelStyles.PANEL_STYLE_MAIN)
 		
 		screen.showWindowBackground( True )
+		screen.setDimensions(screen.centerX(self.X_SCREEN), screen.centerY(self.Y_SCREEN), self.W_SCREEN, self.H_SCREEN)
 		screen.setRenderInterfaceOnly(False)
 		screen.showScreen(PopupStates.POPUPSTATE_IMMEDIATE, False)
 		screen.enableWorldSounds( false )
-                		
+		                		
 		# Header...
 		szHeaderId = "WonderTitleHeader" + str(iMovieItem)
 		if self.iMovieType == MOVIE_SCREEN_RELIGION:
@@ -87,7 +96,7 @@ class CvWonderMovieScreen:
 			szHeader = gc.getProjectInfo(iMovieItem).getDescription()
 
 		screen.setText(szHeaderId, "Background", szHeader, CvUtil.FONT_CENTER_JUSTIFY,
-				self.X_SCREEN + self.W_SCREEN / 2, self.Y_TITLE, self.Z_CONTROLS, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
+				self.X_WINDOW + self.W_WINDOW / 2, self.Y_TITLE, self.Z_CONTROLS, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 				
 		screen.hide("Background")
 
@@ -101,13 +110,13 @@ class CvWonderMovieScreen:
 
 		# Play the movie
 		if self.iMovieType == MOVIE_SCREEN_RELIGION:
-			screen.addReligionMovieWidgetGFC( "ReligionMovie", gc.getReligionInfo(self.iWonderId).getMovieFile(), self.X_SCREEN + self.X_MOVIE, self.Y_SCREEN + self.Y_MOVIE, self.W_MOVIE, self.H_MOVIE, WidgetTypes.WIDGET_GENERAL, -1, -1)
+			screen.addReligionMovieWidgetGFC( "ReligionMovie", gc.getReligionInfo(self.iWonderId).getMovieFile(), self.X_WINDOW + self.X_MOVIE, self.Y_WINDOW + self.Y_MOVIE, self.W_MOVIE, self.H_MOVIE, WidgetTypes.WIDGET_GENERAL, -1, -1)
 			CyInterface().playGeneralSound(gc.getReligionInfo(self.iWonderId).getMovieSound())		
 		elif self.iMovieType == MOVIE_SCREEN_WONDER:		
-			screen.playMovie(gc.getBuildingInfo(self.iWonderId).getMovie(), self.X_SCREEN + self.X_MOVIE, self.Y_SCREEN + self.Y_MOVIE, self.W_MOVIE, self.H_MOVIE, -2.3 )
+			screen.playMovie(gc.getBuildingInfo(self.iWonderId).getMovie(), self.X_WINDOW + self.X_MOVIE, self.Y_WINDOW + self.Y_MOVIE, self.W_MOVIE, self.H_MOVIE, -2.3 )
 		elif self.iMovieType == MOVIE_SCREEN_PROJECT:
 			szArtDef = gc.getProjectInfo(self.iWonderId).getMovieArtDef()
-			screen.playMovie(CyArtFileMgr().getMovieArtInfo(szArtDef).getPath(), self.X_SCREEN + self.X_MOVIE, self.Y_SCREEN + self.Y_MOVIE, self.W_MOVIE, self.H_MOVIE, -2.3 )
+			screen.playMovie(CyArtFileMgr().getMovieArtInfo(szArtDef).getPath(), self.X_WINDOW + self.X_MOVIE, self.Y_WINDOW + self.Y_MOVIE, self.W_MOVIE, self.H_MOVIE, -2.3 )
 			
 		screen.setButtonGFC("WonderExit" + str(self.iWonderId), localText.getText("TXT_KEY_MAIN_MENU_OK", ()), "", self.X_EXIT, self.Y_EXIT, self.W_EXIT, self.H_EXIT, WidgetTypes.WIDGET_CLOSE_SCREEN, -1, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
 
@@ -124,7 +133,8 @@ class CvWonderMovieScreen:
 					szHelp = ""
 				
 				if len(szHelp) > 0:
-					screen.addMultilineText("MonkeyText", szHelp, self.X_SCREEN + self.X_MOVIE + self.W_MOVIE / 8, self.Y_SCREEN + self.Y_MOVIE + 100, 3 * self.W_MOVIE / 4, self.H_MOVIE - 100, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
+					screen.addPanel("MonkeyPanel", "", "", true, true, self.X_WINDOW + self.X_MOVIE + self.W_MOVIE / 8 - 10, self.Y_WINDOW + self.Y_MOVIE + 90, 3 * self.W_MOVIE / 4 + 20, self.H_MOVIE - 180, PanelStyles.PANEL_STYLE_MAIN_BLACK50)	
+					screen.addMultilineText("MonkeyText", szHelp, self.X_WINDOW + self.X_MOVIE + self.W_MOVIE / 8, self.Y_WINDOW + self.Y_MOVIE + 100, 3 * self.W_MOVIE / 4, self.H_MOVIE - 200, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
 				self.bDone = true
 
 		return 0
@@ -137,4 +147,3 @@ class CvWonderMovieScreen:
 				self.playMovie()
 				self.fDelay = -1
 		return
-

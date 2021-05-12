@@ -169,6 +169,16 @@ void CvSelectionGroup::doTurn()
 				}
 
 				setMissionTimer(max(iBestWaitTurns, getMissionTimer()));
+
+				if (iBestWaitTurns > 0)
+				{
+					// Cycle selection if the current group is selected
+					CvUnit* pSelectedUnit = gDLL->getInterfaceIFace()->getHeadSelectedUnit();
+					if (pSelectedUnit && pSelectedUnit->getGroup() == this)
+					{
+						gDLL->getInterfaceIFace()->selectGroup(pSelectedUnit, false, false, false);
+					}
+				}
 			}
 		}
 	}

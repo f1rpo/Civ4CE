@@ -355,7 +355,7 @@ class CvWorldBuilderScreen:
 	def handleUnitEditNameCB (self, argsList) :
 		if ((len(argsList[0]) < 1) or (self.m_pActivePlot == 0) or (self.m_iCurrentUnit < 0) or (self.m_pActivePlot.getNumUnits() <= self.m_iCurrentUnit)):
 			return 1
-		szNewName = str(argsList[0])
+		szNewName = argsList[0]
 		unit = self.m_pActivePlot.getUnit(self.m_iCurrentUnit)
 		if (unit):
 			unit.setName(szNewName)
@@ -379,7 +379,7 @@ class CvWorldBuilderScreen:
 	def handleCityEditNameCB (self, argsList) :
 		if ((len(argsList[0]) < 1) or (not self.m_pActivePlot.isCity())):
 			return 1
-		szNewName = str(argsList[0])
+		szNewName = argsList[0]
 		city = self.m_pActivePlot.getPlotCity()
 		if (city):
 			city.setName(szNewName, False)
@@ -792,9 +792,9 @@ class CvWorldBuilderScreen:
 		self.m_tabCtrlEdit.addSectionDropdown("Current_Unit", strTest, "CvScreensInterface", "WorldBuilderHandleUnitEditPullDownCB", "UnitEditPullDown", 0, self.m_iCurrentUnit)
 
 		if (len(self.m_pActivePlot.getUnit(self.m_iCurrentUnit).getNameNoDesc())):
-			strName = str(self.m_pActivePlot.getUnit(self.m_iCurrentUnit).getNameNoDesc())
+			strName = self.m_pActivePlot.getUnit(self.m_iCurrentUnit).getNameNoDesc()
 		else:
-			strName = str(self.m_pActivePlot.getUnit(self.m_iCurrentUnit).getName())
+			strName = self.m_pActivePlot.getUnit(self.m_iCurrentUnit).getName()
 		self.m_tabCtrlEdit.addSectionEditCtrl(strName, "CvScreensInterface", "WorldBuilderHandleUnitEditNameCB", "UnitEditName", 0)
 		self.m_tabCtrlEdit.addSectionLabel(localText.getText("TXT_KEY_WB_EXPERIENCE",()),  0)
 		strExperience = str("UnitEditExperienceCB")
@@ -854,8 +854,8 @@ class CvWorldBuilderScreen:
 
 		self.m_tabCtrlEdit.setNumColumns((gc.getNumBuildingInfos()/10)+2)
 		self.m_tabCtrlEdit.setColumnLength(20)
-		self.m_tabCtrlEdit.addTabSection(localText.getText("TXT_KEY_WB_ADD_BUILDINGS",()))
-		strName = str(self.m_pActivePlot.getPlotCity().getName())
+		self.m_tabCtrlEdit.addTabSection(localText.getText("TXT_KEY_WB_CITY_DATA",()))
+		strName = self.m_pActivePlot.getPlotCity().getName()
 		self.m_tabCtrlEdit.addSectionEditCtrl(strName, "CvScreensInterface", "WorldBuilderHandleCityEditNameCB", "CityEditName", 0)
 		self.m_tabCtrlEdit.addSectionLabel(localText.getText("TXT_KEY_WB_POPULATION",()),  0)
 		strPopulation = str("CityEditPopulationCB")
@@ -1120,9 +1120,9 @@ class CvWorldBuilderScreen:
 		if (self.m_pFlyoutPlot.getNumUnits() > 0):
 			for i in range( self.m_pFlyoutPlot.getNumUnits() ):
 				if (len(self.m_pFlyoutPlot.getUnit(i).getNameNoDesc())):
-					strName = str(self.m_pFlyoutPlot.getUnit(i).getNameNoDesc())
+					strName = self.m_pFlyoutPlot.getUnit(i).getNameNoDesc()
 				else:
-					strName = str(self.m_pFlyoutPlot.getUnit(i).getName())
+					strName = self.m_pFlyoutPlot.getUnit(i).getName()
 				self.m_flyoutMenu.addTextItem(strName, "CvScreensInterface", "WorldBuilderHandleFlyoutMenuCB", i+1)
 		if (self.m_pFlyoutPlot.isCity()):
 			self.m_flyoutMenu.addTextItem(localText.getText("TXT_KEY_WB_EDIT_CITY",()), "CvScreensInterface", "WorldBuilderHandleFlyoutMenuCB", self.m_iFlyoutEditCity)
@@ -1196,7 +1196,6 @@ class CvWorldBuilderScreen:
 		if (not bOn):
 			gc.getGame().clearHolyCity(iReligion)
 
-		self.refreshPlayerTabCtrl()
 		refreshWBEditCtrlReligionButtons(True)
 		return 1
 

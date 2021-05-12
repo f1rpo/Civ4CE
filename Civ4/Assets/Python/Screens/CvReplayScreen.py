@@ -111,7 +111,7 @@ class CvReplayScreen:
 			self.replayInfo = CyGame().getReplayInfo()
 			if self.replayInfo.isNone():
 				self.replayInfo = CyReplayInfo()
-				self.replayInfo.createInfo()
+				self.replayInfo.createInfo(gc.getGame().getActivePlayer())
 				
 		self.iTurn = self.replayInfo.getInitialTurn()
 					
@@ -140,7 +140,7 @@ class CvReplayScreen:
 			self.H_MAP = self.H_MAP_MAX
 			
 		screen.setMinimapMap(self.replayInfo, self.X_MAP, self.X_MAP + self.W_MAP, self.Y_MAP, self.Y_MAP + self.H_MAP, self.Z_CONTROLS)
-		screen.updateMinimapSection(True)
+		screen.updateMinimapSection(True, False)
 		screen.setMinimapMode(MinimapModeTypes.MINIMAPMODE_REPLAY)
 
 		# add pane for text

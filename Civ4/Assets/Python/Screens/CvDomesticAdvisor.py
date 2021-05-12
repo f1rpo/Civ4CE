@@ -109,13 +109,13 @@ class CvDomesticAdvisor:
 		screen.setTableColumnHeader( "CityListBackground", 0, "", 30 )
 		
 		# Date Founded Column
-		screen.setTableColumnHeader( "CityListBackground", 1, "<font=2>" + localText.getText("TXT_KEY_DOMESTIC_ADVISOR_FOUNDED", ()).upper() + "</font>", 90 )
+		screen.setTableColumnHeader( "CityListBackground", 1, "<font=2>" + localText.getText("TXT_KEY_DOMESTIC_ADVISOR_FOUNDED", ()) + "</font>", 85 )
 		
 		# Name Column
-		screen.setTableColumnHeader( "CityListBackground", 2, "<font=2>" + localText.getText("TXT_KEY_DOMESTIC_ADVISOR_NAME", ()).upper() + "</font>", 106 )
+		screen.setTableColumnHeader( "CityListBackground", 2, "<font=2>" + localText.getText("TXT_KEY_DOMESTIC_ADVISOR_NAME", ()) + "</font>", 101 )
 		
 		# Population Column
-		screen.setTableColumnHeader( "CityListBackground", 3, "<font=2>" + localText.getText("TXT_KEY_POPULATION", ()).upper() + "</font>", 55 )
+		screen.setTableColumnHeader( "CityListBackground", 3, "<font=2>" + localText.getText("TXT_KEY_POPULATION", ()) + "</font>", 40 )
 		
 		# Happiness Column
 		screen.setTableColumnHeader( "CityListBackground", 4, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.HAPPY_CHAR)) + "</font>", 40 )
@@ -152,16 +152,16 @@ class CvDomesticAdvisor:
 		screen.setTableColumnHeader( "CityListBackground", 14, "<font=2>" + (u"%c" % gc.getCommerceInfo(CommerceTypes.COMMERCE_CULTURE).getChar()) + "</font>", 40 )
 		
 		# Culture Column
-		screen.setTableColumnHeader( "CityListBackground", 15, "<font=2>" + localText.getText("TXT_KEY_TOTAL", ()).upper() + "</font>", 55 )
+		screen.setTableColumnHeader( "CityListBackground", 15, "<font=2>" + localText.getText("TXT_KEY_TOTAL", ()) + "</font>", 55 )
 		
 		# Great Person Column
 		screen.setTableColumnHeader( "CityListBackground", 16, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.GREAT_PEOPLE_CHAR)) + "</font>", 40 )
 		
 		# Great Person Column
-		screen.setTableColumnHeader( "CityListBackground", 17, "<font=2>" + localText.getText("TXT_KEY_TOTAL", ()).upper() + "</font>", 55 )
+		screen.setTableColumnHeader( "CityListBackground", 17, "<font=2>" + localText.getText("TXT_KEY_TOTAL", ()) + "</font>", 55 )
 		
 		# Production Column
-		screen.setTableColumnHeader( "CityListBackground", 18, "<font=2>" + localText.getText("TXT_KEY_DOMESTIC_ADVISOR_PRODUCING", ()).upper() + "</font>", 107 )
+		screen.setTableColumnHeader( "CityListBackground", 18, "<font=2>" + localText.getText("TXT_KEY_DOMESTIC_ADVISOR_PRODUCING", ()) + "</font>", 132 )
 	
 	# Function to draw the contents of the cityList passed in
 	def drawContents (self):

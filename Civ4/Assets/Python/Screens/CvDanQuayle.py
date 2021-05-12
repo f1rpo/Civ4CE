@@ -86,7 +86,7 @@ class CvDanQuayle:
 		replayInfo = CyGame().getReplayInfo()
 		if replayInfo.isNone():
 			replayInfo = CyReplayInfo()
-			replayInfo.createInfo()
+			replayInfo.createInfo(gc.getGame().getActivePlayer())
 		
 		screen = self.getScreen()
 		if screen.isActive():

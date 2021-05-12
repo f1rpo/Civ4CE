@@ -104,8 +104,8 @@ public:
 	bool canScrap() const;																																				// Exposed to Python
 	void scrap();
 
-	bool canGift(bool bTestVisible = false);																											// Exposed to Python 
-	void gift();
+	bool canGift(bool bTestVisible = false, bool bTestTransport = true);																											// Exposed to Python 
+	void gift(bool bTestTransport = true);
 
 	bool canLoadUnit(const CvUnit* pUnit, const CvPlot* pPlot) const;															// Exposed to Python
 	void loadUnit(CvUnit* pUnit);

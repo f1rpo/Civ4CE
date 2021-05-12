@@ -4207,8 +4207,15 @@ int CvCity::hurryCost(bool bExtra)
 	if (bExtra)
 	{
 		iExtraProduction = getExtraProductionDifference(iProduction);
-		iProduction *= max(1, iProduction);
-		iProduction /= max(1, iExtraProduction);
+		if (iExtraProduction > 0)
+		{
+			int iAdjustedProd = iProduction * iProduction;
+			iProduction = iAdjustedProd / iExtraProduction;
+			if (iAdjustedProd % iExtraProduction > 0)  // round up
+			{
+				++iProduction;
+			}
+		}
 	}
 
 	return max(0, iProduction);
@@ -4254,11 +4261,12 @@ int CvCity::hurryProduction(HurryTypes eHurry)
 
 	if (GC.getHurryInfo(eHurry).getProductionPerPopulation() > 0)
 	{
-		iExtraProduction = (iProduction % GC.getGameINLINE().getProductionPerPopulation(eHurry));
+		int iProductionPerPop = getExtraProductionDifference(GC.getGameINLINE().getProductionPerPopulation(eHurry));
+		iExtraProduction = (iProduction % iProductionPerPop);
 
 		if (iExtraProduction > 0)
 		{
-			iProduction += (GC.getGameINLINE().getProductionPerPopulation(eHurry) - iExtraProduction);
+			iProduction += (iProductionPerPop - iExtraProduction);
 		}
 	}
 
@@ -8477,7 +8485,7 @@ void CvCity::setHasRealBuildingTimed(BuildingTypes eIndex, bool bNewValue, bool 
 								GET_PLAYER(getOwnerINLINE()).AI_chooseFreeTech();
 							}
 						}
-						else if (getOwnerINLINE() == GC.getGameINLINE().getActivePlayer())
+						else
 						{
 							szBuffer = gDLL->getText("TXT_KEY_MISC_COMPLETED_WONDER_CHOOSE_TECH", GC.getBuildingInfo(eIndex).getTextKeyWide());
 							GET_PLAYER(getOwnerINLINE()).chooseTech(GC.getBuildingInfo(eIndex).getFreeTechs(), szBuffer.GetCString());

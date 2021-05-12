@@ -2121,11 +2121,10 @@ void CvUnit::scrap()
 }
 
 
-bool CvUnit::canGift(bool bTestVisible)
+bool CvUnit::canGift(bool bTestVisible, bool bTestTransport)
 {
-	CvPlot* pPlot;
-
-	pPlot = plot();
+	CvPlot* pPlot = plot();
+	CvUnit* pTransport = getTransportUnit();
 
 	if (!(pPlot->isOwned()))
 	{
@@ -2142,13 +2141,31 @@ bool CvUnit::canGift(bool bTestVisible)
 		return false;
 	}
 
-	if (!(pPlot->isValidDomainForLocation(getDomainType())))
+	if (!(pPlot->isValidDomainForLocation(getDomainType())) && NULL == pTransport)
 	{
 		return false;
 	}
 
+	if (bTestTransport)
+	{
+		if (pTransport && pTransport->getTeam() != pPlot->getTeam())
+		{
+			return false;
+		}
+	}
+
 	if (!bTestVisible)
 	{
+		if (GET_TEAM(pPlot->getTeam()).isUnitClassMaxedOut(getUnitClassType(), GET_TEAM(pPlot->getTeam()).getUnitClassMaking(getUnitClassType())))
+		{
+			return false;
+		}
+
+		if (GET_PLAYER(pPlot->getOwnerINLINE()).isUnitClassMaxedOut(getUnitClassType(), GET_PLAYER(pPlot->getOwnerINLINE()).getUnitClassMaking(getUnitClassType())))
+		{
+			return false;
+		}
+
 		if (!(GET_PLAYER(pPlot->getOwnerINLINE()).AI_acceptUnit(this)))
 		{
 			return false;
@@ -2158,8 +2175,7 @@ bool CvUnit::canGift(bool bTestVisible)
 	return !atWar(pPlot->getTeam(), getTeam());
 }
 
-
-void CvUnit::gift()
+void CvUnit::gift(bool bTestTransport)
 {
 	CLLNode<IDInfo>* pUnitNode;
 	CvUnit* pGiftUnit;
@@ -2168,7 +2184,7 @@ void CvUnit::gift()
 	CvWString szBuffer;
 	PlayerTypes eOwner;
 
-	if (!canGift())
+	if (!canGift(false, bTestTransport))
 	{
 		return;
 	}
@@ -2184,7 +2200,7 @@ void CvUnit::gift()
 
 		if (pLoopUnit->getTransportUnit() == this)
 		{
-			pLoopUnit->gift();
+			pLoopUnit->gift(false);
 		}
 	}
 
@@ -2202,7 +2218,6 @@ void CvUnit::gift()
 	szBuffer = gDLL->getText("TXT_KEY_MISC_GIFTED_UNIT_TO_YOU", GET_PLAYER(eOwner).getNameKey(), pGiftUnit->getNameKey());
 	gDLL->getInterfaceIFace()->addMessage(pGiftUnit->getOwnerINLINE(), false, GC.getDefineINT("EVENT_MESSAGE_TIME"), szBuffer, "AS2D_UNITGIFTED", MESSAGE_TYPE_INFO, GC.getUnitInfo(pGiftUnit->getUnitType()).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), pGiftUnit->getX_INLINE(), pGiftUnit->getY_INLINE(), true, true);
 }
-
 
 bool CvUnit::canLoadUnit(const CvUnit* pUnit, const CvPlot* pPlot) const
 {
@@ -4099,6 +4114,11 @@ bool CvUnit::canJoin(const CvPlot* pPlot, SpecialistTypes eSpecialist) const
 		return false;
 	}
 
+	if (isDelayedDeath())
+	{
+		return false;
+	}
+
 	return true;
 }
 
@@ -4162,6 +4182,11 @@ bool CvUnit::canConstruct(const CvPlot* pPlot, BuildingTypes eBuilding, bool bTe
 		{
 			return false;
 		}
+	}
+
+	if (isDelayedDeath())
+	{
+		return false;
 	}
 
 	return true;
@@ -4261,6 +4286,11 @@ bool CvUnit::canDiscover(const CvPlot* pPlot) const
 		return false;
 	}
 
+	if (isDelayedDeath())
+	{
+		return false;
+	}
+
 	return true;
 }
 
@@ -4325,6 +4355,11 @@ int CvUnit::getHurryProduction(const CvPlot* pPlot) const
 
 bool CvUnit::canHurry(const CvPlot* pPlot, bool bTestVisible) const
 {
+	if (isDelayedDeath())
+	{
+		return false;
+	}
+
 	CvCity* pCity;
 
 	if (getHurryProduction(pPlot) == 0)
@@ -4408,9 +4443,12 @@ int CvUnit::getTradeGold(const CvPlot* pPlot) const
 
 bool CvUnit::canTrade(const CvPlot* pPlot, bool bTestVisible) const
 {
-	CvCity* pCity;
+	if (isDelayedDeath())
+	{
+		return false;
+	}
 
-	pCity = pPlot->getPlotCity();
+	CvCity* pCity = pPlot->getPlotCity();
 
 	if (pCity == NULL)
 	{
@@ -4474,9 +4512,12 @@ int CvUnit::getGreatWorkCulture(const CvPlot* pPlot) const
 
 bool CvUnit::canGreatWork(const CvPlot* pPlot) const
 {
-	CvCity* pCity;
+	if (isDelayedDeath())
+	{
+		return false;
+	}
 
-	pCity = pPlot->getPlotCity();
+	CvCity* pCity = pPlot->getPlotCity();
 
 	if (pCity == NULL)
 	{
@@ -5098,6 +5139,11 @@ bool CvUnit::isFound() const
 
 bool CvUnit::isGoldenAge() const
 {
+	if (isDelayedDeath())
+	{
+		return false;
+	}
+
 	return GC.getUnitInfo(getUnitType()).isGoldenAge();
 }
 
@@ -7746,7 +7792,7 @@ void CvUnit::setCombatUnit(CvUnit* pCombatUnit, bool bAttacking)
 		FAssertMsg(!(plot()->isFighting()), "(plot()->isFighting()) did not return false as expected");
 		m_bCombatFocus = (bAttacking && !(gDLL->getInterfaceIFace()->isFocusedWidget()) && ((getOwnerINLINE() == GC.getGameINLINE().getActivePlayer()) || ((pCombatUnit->getOwnerINLINE() == GC.getGameINLINE().getActivePlayer()) && !(GC.getGameINLINE().isMPOption(MPOPTION_SIMULTANEOUS_TURNS)))));
 		m_combatUnit = pCombatUnit->getIDInfo();
-		setCombatFirstStrikes((pCombatUnit->immuneToFirstStrikes()) ? 0 : (firstStrikes() + GC.getGameINLINE().getSorenRandNum(chanceFirstStrikes(), "First Strike")));
+		setCombatFirstStrikes((pCombatUnit->immuneToFirstStrikes()) ? 0 : (firstStrikes() + GC.getGameINLINE().getSorenRandNum(chanceFirstStrikes() + 1, "First Strike")));
 		setCombatDamage(0);
 	}
 	else

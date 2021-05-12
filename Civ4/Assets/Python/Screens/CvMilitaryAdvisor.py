@@ -79,6 +79,7 @@ class CvMilitaryAdvisor:
 		
 		self.LEADER_COLUMNS = int(self.W_LEADERS / (self.LEADER_BUTTON_SIZE + self.LEADER_MARGIN))
 		self.bUnitDetails = False
+		self.iShiftKeyDown = 0
 		
 						
 	def getScreen(self):
@@ -122,7 +123,7 @@ class CvMilitaryAdvisor:
 			self.H_MAP = self.H_MAP_MAX
 		screen.addPanel("", u"", "", False, False, self.X_MAP, self.Y_MAP, self.W_MAP, self.H_MAP, PanelStyles.PANEL_STYLE_MAIN)
 		screen.initMinimap(self.X_MAP + self.MAP_MARGIN, self.X_MAP + self.W_MAP - self.MAP_MARGIN, self.Y_MAP + self.MAP_MARGIN, self.Y_MAP + self.H_MAP - self.MAP_MARGIN, self.Z_CONTROLS)
-		screen.updateMinimapSection(False)
+		screen.updateMinimapSection(False, False)
 
 		screen.updateMinimapColorFromMap(MinimapModeTypes.MINIMAPMODE_TERRITORY, 0.3)
 
@@ -137,6 +138,7 @@ class CvMilitaryAdvisor:
 		
 		self.unitsList = [(0, 0, [], 0)] * gc.getNumUnitInfos()
 		self.selectedUnitList = []
+		self.selectedPlayerList.append(self.iActivePlayer)
 
 		self.refresh(true)
 		
@@ -158,6 +160,10 @@ class CvMilitaryAdvisor:
 		if ( inputClass.getNotifyCode() == NotifyCode.NOTIFY_CLICKED and inputClass.getFunctionName() == self.UNIT_BUTTON_ID) :
 			self.bUnitDetails = not self.bUnitDetails
 			self.refreshUnitSelection(True)
+		elif (inputClass.getNotifyCode() == NotifyCode.NOTIFY_CHARACTER):
+			if (inputClass.getData() == int(InputTypes.KB_LSHIFT) or inputClass.getData() == int(InputTypes.KB_RSHIFT)):
+				self.iShiftKeyDown = inputClass.getID() 
+		
 		return 0
 
 	def update(self, fDelta):
@@ -195,10 +201,15 @@ class CvMilitaryAdvisor:
 		return ((iPlayer, iUnitId) in self.selectedUnitList)
 		
 	def refreshSelectedLeader(self, iPlayer):
-		if (iPlayer in self.selectedPlayerList):
-			self.selectedPlayerList.remove(iPlayer)
+		if self.iShiftKeyDown == 1:
+			if (iPlayer in self.selectedPlayerList):
+				self.selectedPlayerList.remove(iPlayer)
+			else:
+				self.selectedPlayerList.append(iPlayer)
 		else:
-			self.selectedPlayerList.append(iPlayer)
+			self.selectedPlayerList = []
+			self.selectedPlayerList.append(iPlayer)	
+	
 		self.refresh(True)
 				
 	def getLeaderButton(self, iPlayer):
@@ -251,13 +262,13 @@ class CvMilitaryAdvisor:
 						bVisible = False
 						plot = loopUnit.plot()
 						if (not plot.isNone()):
-							bVisible = plot.isVisible(gc.getPlayer(self.iActivePlayer).getTeam(), False)
+							bVisible = plot.isVisible(gc.getPlayer(self.iActivePlayer).getTeam(), False) and not loopUnit.isInvisible(gc.getPlayer(self.iActivePlayer).getTeam(), False)
 
 						if unitType >= 0 and unitType < gc.getNumUnitInfos() and bVisible:
 							iNumUnits = self.unitsList[unitType][3]
 							if (iPlayer == self.iActivePlayer):
 								iNumUnits += 1
-							if loopUnit.getOwner() not in self.selectedPlayerList:
+							if loopUnit.getOwner() in self.selectedPlayerList:
 								self.unitsList[unitType][2].append(loopUnit)							
 							
 							self.unitsList[unitType] = (self.unitsList[unitType][0], self.unitsList[unitType][1], self.unitsList[unitType][2], iNumUnits)
@@ -316,6 +327,9 @@ class CvMilitaryAdvisor:
 						listMatches = re.findall("<.*?color.*?>", szDescription)	
 						for szMatch in listMatches:
 							szDescription = szDescription.replace(szMatch, u"")
+						
+						if (loopUnit.isWaiting()):
+							szDescription = '*' + szDescription
 							
 						if (self.isSelectedUnit(loopUnit.getOwner(), loopUnit.getID(), False)):
 							szDescription = u"         <u>" + szDescription + u"</u>"
@@ -335,7 +349,7 @@ class CvMilitaryAdvisor:
 					player = PyPlayer(iPlayer)
 					iColor = gc.getPlayerColorInfo(gc.getPlayer(iPlayer).getPlayerColor()).getColorTypePrimary()
 					screen.setMinimapColor(MinimapModeTypes.MINIMAPMODE_MILITARY, loopUnit.getX(), loopUnit.getY(), iColor, 0.6)
-					if (self.isSelectedUnit(loopUnit.getOwner(), loopUnit.getID(), True) and (iPlayer not in self.selectedPlayerList)):
+					if (self.isSelectedUnit(loopUnit.getOwner(), loopUnit.getID(), True) and (iPlayer in self.selectedPlayerList)):
 						
 						if (player.getTeam().isAtWar(gc.getPlayer(self.iActivePlayer).getTeam())):
 							iColor = gc.getInfoTypeForString("COLOR_RED")
@@ -364,7 +378,7 @@ class CvMilitaryAdvisor:
 		listLeaders = []
 		for iLoopPlayer in range(gc.getMAX_PLAYERS()):
 			player = gc.getPlayer(iLoopPlayer)
-			if (player.isAlive() and (gc.getTeam(player.getTeam()).isHasMet(gc.getPlayer(self.iActivePlayer).getTeam()) or gc.getGame().isDebugMode()) and not player.isBarbarian() and not player.isMinorCiv()):
+			if (player.isAlive() and (gc.getTeam(player.getTeam()).isHasMet(gc.getPlayer(self.iActivePlayer).getTeam()) or gc.getGame().isDebugMode())):
 				listLeaders.append(iLoopPlayer)
 				
 		iNumLeaders = len(listLeaders)
@@ -384,8 +398,12 @@ class CvMilitaryAdvisor:
 			y = self.Y_LEADERS + self.LEADER_MARGIN + (iIndex // iColumns) * (iButtonSize + self.LEADER_MARGIN)
 
 			if (bReload):
-				screen.addCheckBoxGFC(self.getLeaderButton(iLoopPlayer), gc.getLeaderHeadInfo(gc.getPlayer(iLoopPlayer).getLeaderType()).getButton(), ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(), x, y, iButtonSize, iButtonSize, WidgetTypes.WIDGET_MINIMAP_HIGHLIGHT, 2, iLoopPlayer, ButtonStyles.BUTTON_STYLE_LABEL)
-				screen.setState(self.getLeaderButton(iLoopPlayer), (iLoopPlayer not in self.selectedPlayerList))				
+				if player.isBarbarian():
+					szButton = "Art/Interface/Buttons/Civilizations/Barbarian.dds"
+				else:
+					szButton = gc.getLeaderHeadInfo(gc.getPlayer(iLoopPlayer).getLeaderType()).getButton()
+				screen.addCheckBoxGFC(self.getLeaderButton(iLoopPlayer), szButton, ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(), x, y, iButtonSize, iButtonSize, WidgetTypes.WIDGET_MINIMAP_HIGHLIGHT, 2, iLoopPlayer, ButtonStyles.BUTTON_STYLE_LABEL)
+				screen.setState(self.getLeaderButton(iLoopPlayer), (iLoopPlayer in self.selectedPlayerList))				
 		
 		self.refreshUnitSelection(bReload)
 		

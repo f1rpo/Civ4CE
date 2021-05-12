@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Bart Muzzin (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -7,7 +7,7 @@
 <Civ4Defines xmlns="x-schema:CIV4GlobalDefinesSchema.xml">
 	<Define>
 		<DefineName>CIV4_VERSION</DefineName>
-		<iDefineIntVal>161</iDefineIntVal>
+		<iDefineIntVal>174</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>SAVE_VERSION</DefineName>
@@ -413,7 +413,10 @@
 		<DefineName>GREAT_PEOPLE_THRESHOLD_INCREASE</DefineName>
 		<iDefineIntVal>50</iDefineIntVal>
 	</Define>
-	<Define><DefineName>GREAT_PEOPLE_THRESHOLD_INCREASE_TEAM</DefineName><iDefineIntVal>50</iDefineIntVal>(</Define>
+	<Define>
+		<DefineName>GREAT_PEOPLE_THRESHOLD_INCREASE_TEAM</DefineName>
+		<iDefineIntVal>50</iDefineIntVal>
+	</Define>
 	<Define>
 		<DefineName>GREAT_PEOPLE_THRESHOLD</DefineName>
 		<iDefineIntVal>100</iDefineIntVal>

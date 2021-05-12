@@ -173,28 +173,21 @@ class CvVictoryScreen:
 			xLink += self.DX_LINK
 	
 	def showVotingScreen(self):
-
+	
 		self.deleteAllWidgets()
 	
 		activePlayer = gc.getPlayer(self.iActivePlayer)
 		iActiveTeam = activePlayer.getTeam()
 		
-		screen = self.getScreen()
-
-		screen.addPanel(self.getNextWidgetName(), "", "", False, False, self.X_AREA-10, self.Y_AREA-15, self.W_AREA+20, self.H_AREA+30, PanelStyles.PANEL_STYLE_BLUE50)
-		szTable = self.getNextWidgetName()
-		screen.addTableControlGFC(szTable, 2, self.X_AREA, self.Y_AREA, self.W_AREA, self.H_AREA, False, False, 32,32, TableStyles.TABLE_STYLE_STANDARD)
-		screen.enableSelect(szTable, False)		
-		screen.setTableColumnHeader(szTable, 0, "", self.TABLE2_WIDTH_0)
-		screen.setTableColumnHeader(szTable, 1, "", self.TABLE2_WIDTH_1)
-
-
 		nVoteBuildings = 0
 		iVoteBuildingClass = -1
 		for i in range(gc.getNumBuildingInfos()):
 			if (gc.getBuildingInfo(i).isDiploVote()):
 				iVoteBuildingClass = gc.getBuildingInfo(i).getBuildingClassType()
 				nVoteBuildings += 1
+				
+		if (iVoteBuildingClass == -1):
+			return
 
 		iUNTeam = -1
 		if (nVoteBuildings == 1 and isWorldWonderClass(iVoteBuildingClass)):
@@ -203,6 +196,15 @@ class CvVictoryScreen:
 					if (iLoopTeam == iActiveTeam or gc.getTeam(activePlayer.getTeam()).isHasMet(iLoopTeam) or gc.getGame().isDebugMode()):
 						if (gc.getTeam(iLoopTeam).getBuildingClassCount(iVoteBuildingClass) > 0):
 							iUNTeam = iLoopTeam
+
+		screen = self.getScreen()
+
+		screen.addPanel(self.getNextWidgetName(), "", "", False, False, self.X_AREA-10, self.Y_AREA-15, self.W_AREA+20, self.H_AREA+30, PanelStyles.PANEL_STYLE_BLUE50)
+		szTable = self.getNextWidgetName()
+		screen.addTableControlGFC(szTable, 2, self.X_AREA, self.Y_AREA, self.W_AREA, self.H_AREA, False, False, 32,32, TableStyles.TABLE_STYLE_STANDARD)
+		screen.enableSelect(szTable, False)		
+		screen.setTableColumnHeader(szTable, 0, "", self.TABLE2_WIDTH_0)
+		screen.setTableColumnHeader(szTable, 1, "", self.TABLE2_WIDTH_1)
 
 		iRow = screen.appendTableRow(szTable)
 		screen.setTableText(szTable, 0, iRow, localText.getText("TXT_KEY_VICTORY_SCREEN_ELECTION", (gc.getBuildingClassInfo(iVoteBuildingClass).getTextKey(), )), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
@@ -297,14 +299,26 @@ class CvVictoryScreen:
 		screen.addListBoxGFC(szOptionsTable, "", self.SETTINGS_PANEL_X2 + self.MARGIN, self.SETTINGS_PANEL_Y + self.MARGIN, self.SETTINGS_PANEL_WIDTH - 2*self.MARGIN, self.SETTINGS_PANEL_HEIGHT - 2*self.MARGIN, TableStyles.TABLE_STYLE_EMPTY)
 		screen.enableSelect(szOptionsTable, False)
 
-		bOptionFound = False
 		for i in range(GameOptionTypes.NUM_GAMEOPTION_TYPES):
 			if gc.getGame().isOption(i):
 				screen.appendListBoxString(szOptionsTable, gc.getGameOptionInfo(i).getDescription(), WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)		
-				bOptionFound = True
-		if not bOptionFound:
-			screen.appendListBoxString(szOptionsTable, localText.getText("TXT_KEY_OPTIONS_DEFAULT", ()), WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)		
-			
+
+		if (gc.getGame().isGameMultiPlayer()):
+			for i in range(gc.getNumMPOptionInfos()):
+				if (gc.getGame().isMPOption(i)):
+					screen.appendListBoxString(szOptionsTable, gc.getMPOptionInfo(i).getDescription(), WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+		
+			if (gc.getGame().getMaxTurns() > 0):
+				szMaxTurns = u"%s %d" % (localText.getText("TXT_KEY_TURN_LIMIT_TAG", ()), gc.getGame().getMaxTurns())
+				screen.appendListBoxString(szOptionsTable, szMaxTurns, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)		
+				
+			if (gc.getGame().getMaxCityElimination() > 0):
+				szMaxCityElimination = u"%s %d" % (localText.getText("TXT_KEY_CITY_ELIM_TAG", ()), gc.getGame().getMaxCityElimination())
+				screen.appendListBoxString(szOptionsTable, szMaxCityElimination, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)		
+
+		if (gc.getGame().hasSkippedSaveChecksum()):
+			screen.appendListBoxString(szOptionsTable, "Skipped Checksum", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)		
+
 		szCivsPanel = self.getNextWidgetName()
 		screen.addPanel(szCivsPanel, localText.getText("TXT_KEY_RIVALS_MET", ()).upper(), "", True, True, self.SETTINGS_PANEL_X3, self.SETTINGS_PANEL_Y - 10, self.SETTINGS_PANEL_WIDTH, self.SETTINGS_PANEL_HEIGHT, PanelStyles.PANEL_STYLE_MAIN)
 
@@ -590,7 +604,7 @@ class CvVictoryScreen:
 							screen.setTableText(szTable, 4, iRow, unicode(gc.getTeam(iBestProjectTeam).getProjectCount(i)), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 						bEntriesFound = True
 						
-				if (victory.isDiploVote()):						
+				if (victory.isDiploVote() and iVoteBuildingClass != -1):						
 					iRow = screen.appendTableRow(szTable)
 					screen.setTableText(szTable, 0, iRow, localText.getText("TXT_KEY_VICTORY_SCREEN_ELECTION", (gc.getBuildingClassInfo(iVoteBuildingClass).getTextKey(), )), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 					if (iUNTeam != -1):

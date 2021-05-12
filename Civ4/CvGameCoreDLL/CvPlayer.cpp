@@ -1105,6 +1105,7 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade)
 	int iTeamCulturePercent;
 	int iDX, iDY;
 	int iI;
+	CLinkList<IDInfo> oldUnits;
 
 	pCityPlot = pOldCity->plot();
 
@@ -1112,10 +1113,18 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade)
 
 	while (pUnitNode != NULL)
 	{
-		pLoopUnit = ::getUnit(pUnitNode->m_data);
+		oldUnits.insertAtEnd(pUnitNode->m_data);
 		pUnitNode = pCityPlot->nextUnitNode(pUnitNode);
+	}
 
-		if (pLoopUnit->getTeam() != getTeam())
+	pUnitNode = oldUnits.head();
+
+	while (pUnitNode != NULL)
+	{
+		pLoopUnit = ::getUnit(pUnitNode->m_data);
+		pUnitNode = oldUnits.next(pUnitNode);
+
+		if (pLoopUnit && pLoopUnit->getTeam() != getTeam())
 		{
 			if (pLoopUnit->getDomainType() == DOMAIN_IMMOBILE)
 			{

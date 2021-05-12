@@ -9120,7 +9120,7 @@ bool CvUnitAI::AI_nuke()
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (GET_PLAYER((PlayerTypes)iI).isAlive() && !GET_PLAYER((PlayerTypes)iI).isBarbarian())
 		{
 			if (atWar(getTeam(), GET_PLAYER((PlayerTypes)iI).getTeam()))
 			{

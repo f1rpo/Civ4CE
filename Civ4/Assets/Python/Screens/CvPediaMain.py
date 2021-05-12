@@ -242,6 +242,10 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		list = self.getSortedList( gc.getNumTechInfos(), gc.getTechInfo )
 
 		nColumns = 4
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
 		tableName = self.getNextWidgetName()
 		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
@@ -251,8 +255,8 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		iCounter = 0
 		iNumRows = 0
 		for item in list:
-			iColumn = iCounter % nColumns
-			iRow = iCounter // nColumns
+			iRow = iCounter % nRows
+			iColumn = iCounter // nRows
 			if iRow >= iNumRows:
 				iNumRows += 1
 				screen.appendTableRow(tableName)
@@ -266,6 +270,10 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		list = self.getSortedList( gc.getNumUnitInfos(), gc.getUnitInfo )
 
 		nColumns = 4
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
 		tableName = self.getNextWidgetName()
 		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
@@ -275,8 +283,8 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		iCounter = 0
 		iNumRows = 0
 		for item in list:
-			iColumn = iCounter % nColumns
-			iRow = iCounter // nColumns
+			iRow = iCounter % nRows
+			iColumn = iCounter // nRows
 			if iRow >= iNumRows:
 				iNumRows += 1
 				screen.appendTableRow(tableName)
@@ -290,6 +298,10 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		list = self.pediaBuildingScreen.getBuildingSortedList(false)
 
 		nColumns = 3
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
 		tableName = self.getNextWidgetName()
 		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
@@ -299,8 +311,8 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		iCounter = 0
 		iNumRows = 0
 		for item in list:
-			iColumn = iCounter % nColumns
-			iRow = iCounter // nColumns
+			iRow = iCounter % nRows
+			iColumn = iCounter // nRows
 			if iRow >= iNumRows:
 				iNumRows += 1
 				screen.appendTableRow(tableName)
@@ -314,6 +326,10 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		list = self.pediaBuildingScreen.getBuildingSortedList(true)
 
 		nColumns = 2
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
 		tableName = self.getNextWidgetName()
 		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
@@ -323,8 +339,8 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		iCounter = 0
 		iNumRows = 0
 		for item in list:
-			iColumn = iCounter % nColumns
-			iRow = iCounter // nColumns
+			iRow = iCounter % nRows
+			iColumn = iCounter // nRows
 			if iRow >= iNumRows:
 				iNumRows += 1
 				screen.appendTableRow(tableName)
@@ -338,6 +354,10 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		list = self.getSortedList( gc.getNumBonusInfos(), gc.getBonusInfo )
 
 		nColumns = 2
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
 		tableName = self.getNextWidgetName()
 		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
@@ -347,8 +367,8 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		iCounter = 0
 		iNumRows = 0
 		for item in list:
-			iColumn = iCounter % nColumns
-			iRow = iCounter // nColumns
+			iRow = iCounter % nRows
+			iColumn = iCounter // nRows
 			if iRow >= iNumRows:
 				iNumRows += 1
 				screen.appendTableRow(tableName)
@@ -362,6 +382,10 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		list = self.getSortedList( gc.getNumImprovementInfos(), gc.getImprovementInfo )
 
 		nColumns = 1
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
 		tableName = self.getNextWidgetName()
 		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
@@ -371,8 +395,8 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		iCounter = 0
 		iNumRows = 0
 		for item in list:
-			iColumn = iCounter % nColumns
-			iRow = iCounter // nColumns
+			iRow = iCounter % nRows
+			iColumn = iCounter // nRows
 			if iRow >= iNumRows:
 				iNumRows += 1
 				screen.appendTableRow(tableName)
@@ -386,6 +410,10 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		list = self.getSortedList( gc.getNumPromotionInfos(), gc.getPromotionInfo )
 
 		nColumns = 2
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
 		tableName = self.getNextWidgetName()
 		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
@@ -395,8 +423,8 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		iCounter = 0
 		iNumRows = 0
 		for item in list:
-			iColumn = iCounter % nColumns
-			iRow = iCounter // nColumns
+			iRow = iCounter % nRows
+			iColumn = iCounter // nRows
 			if iRow >= iNumRows:
 				iNumRows += 1
 				screen.appendTableRow(tableName)
@@ -410,6 +438,10 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		list = self.getSortedList( gc.getNumUnitCombatInfos(), gc.getUnitCombatInfo )
 
 		nColumns = 1
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
 		tableName = self.getNextWidgetName()
 		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
@@ -419,8 +451,8 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		iCounter = 0
 		iNumRows = 0
 		for item in list:
-			iColumn = iCounter % nColumns
-			iRow = iCounter // nColumns
+			iRow = iCounter % nRows
+			iColumn = iCounter // nRows
 			if iRow >= iNumRows:
 				iNumRows += 1
 				screen.appendTableRow(tableName)
@@ -434,6 +466,10 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		list = self.getSortedList( gc.getNumCivilizationInfos(), gc.getCivilizationInfo )
 
 		nColumns = 1
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
 		tableName = self.getNextWidgetName()
 		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
@@ -443,8 +479,8 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		iCounter = 0
 		iNumRows = 0
 		for item in list:
-			iColumn = iCounter % nColumns
-			iRow = iCounter // nColumns
+			iRow = iCounter % nRows
+			iColumn = iCounter // nRows
 			if (gc.getCivilizationInfo(item[1]).isPlayable()):
 				if iRow >= iNumRows:
 					iNumRows += 1
@@ -457,8 +493,16 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		
 		# Create and place a tech pane									
 		list = self.getSortedList( gc.getNumLeaderHeadInfos(), gc.getLeaderHeadInfo )
+		listCopy = list[:]
+		for item in listCopy:
+			if gc.getLeaderHeadInfo(item[1]).getFavoriteCivic() == -1:
+				list.remove(item)
 
 		nColumns = 2
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
 		tableName = self.getNextWidgetName()
 		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
@@ -468,14 +512,13 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		iCounter = 0
 		iNumRows = 0
 		for item in list:
-			iColumn = iCounter % nColumns
-			iRow = iCounter // nColumns
-			if gc.getLeaderHeadInfo(item[1]).getFavoriteCivic() != -1:
-				if iRow >= iNumRows:
-					iNumRows += 1
-					screen.appendTableRow(tableName)
-				screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getLeaderHeadInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_LEADER, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
-				iCounter += 1
+			iRow = iCounter % nRows
+			iColumn = iCounter // nRows
+			if iRow >= iNumRows:
+				iNumRows += 1
+				screen.appendTableRow(tableName)
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getLeaderHeadInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_LEADER, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+			iCounter += 1
 
 	def placeReligions(self):
 		screen = self.getScreen()
@@ -484,6 +527,10 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		list = self.getSortedList( gc.getNumReligionInfos(), gc.getReligionInfo )
 
 		nColumns = 1
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
 		tableName = self.getNextWidgetName()
 		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
@@ -493,8 +540,8 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		iCounter = 0
 		iNumRows = 0
 		for item in list:
-			iColumn = iCounter % nColumns
-			iRow = iCounter // nColumns
+			iRow = iCounter % nRows
+			iColumn = iCounter // nRows
 			if iRow >= iNumRows:
 				iNumRows += 1
 				screen.appendTableRow(tableName)
@@ -508,6 +555,10 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		list = self.getSortedList( gc.getNumCivicInfos(), gc.getCivicInfo )
 
 		nColumns = 1
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
 		tableName = self.getNextWidgetName()
 		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
@@ -517,8 +568,8 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		iCounter = 0
 		iNumRows = 0
 		for item in list:
-			iColumn = iCounter % nColumns
-			iRow = iCounter // nColumns
+			iRow = iCounter % nRows
+			iColumn = iCounter // nRows
 			if iRow >= iNumRows:
 				iNumRows += 1
 				screen.appendTableRow(tableName)
@@ -532,6 +583,10 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		list = self.pediaProjectScreen.getProjectSortedList()
 
 		nColumns = 1
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
 		tableName = self.getNextWidgetName()
 		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
@@ -541,8 +596,8 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		iCounter = 0
 		iNumRows = 0
 		for item in list:
-			iColumn = iCounter % nColumns
-			iRow = iCounter // nColumns
+			iRow = iCounter % nRows
+			iColumn = iCounter // nRows
 			if iRow >= iNumRows:
 				iNumRows += 1
 				screen.appendTableRow(tableName)
@@ -556,6 +611,10 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		list = self.getSortedList( gc.getNumTerrainInfos(), gc.getTerrainInfo )
 
 		nColumns = 1
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
 		tableName = self.getNextWidgetName()
 		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
@@ -565,8 +624,8 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		iCounter = 0
 		iNumRows = 0
 		for item in list:
-			iColumn = iCounter % nColumns
-			iRow = iCounter // nColumns
+			iColumn = iCounter // nRows
+			iRow = iCounter % nRows
 			if iRow >= iNumRows:
 				iNumRows += 1
 				screen.appendTableRow(tableName)
@@ -581,6 +640,10 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		list = self.getSortedList( gc.getNumFeatureInfos(), gc.getFeatureInfo )
 
 		nColumns = 1
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
 		tableName = self.getNextWidgetName()
 		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
@@ -590,8 +653,8 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		iCounter = 0
 		iNumRows = 0
 		for item in list:
-			iColumn = iCounter % nColumns
-			iRow = iCounter // nColumns
+			iColumn = iCounter // nRows
+			iRow = iCounter % nRows
 			if iRow >= iNumRows:
 				iNumRows += 1
 				screen.appendTableRow(tableName)
@@ -605,6 +668,10 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		list = self.getSortedList( gc.getNumConceptInfos(), gc.getConceptInfo )
 
 		nColumns = 2
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
 		tableName = self.getNextWidgetName()
 		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
@@ -614,8 +681,8 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		iCounter = 0
 		iNumRows = 0
 		for item in list:
-			iColumn = iCounter % nColumns
-			iRow = iCounter // nColumns
+			iColumn = iCounter // nRows
+			iRow = iCounter % nRows
 			if iRow >= iNumRows:
 				iNumRows += 1
 				screen.appendTableRow(tableName)
@@ -630,6 +697,10 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		list = self.getSortedList( gc.getNumSpecialistInfos(), gc.getSpecialistInfo )
 
 		nColumns = 1
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
 		tableName = self.getNextWidgetName()
 		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
@@ -639,8 +710,8 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		iCounter = 0
 		iNumRows = 0
 		for item in list:
-			iColumn = iCounter % nColumns
-			iRow = iCounter // nColumns
+			iColumn = iCounter // nRows
+			iRow = iCounter % nRows
 			if iRow >= iNumRows:
 				iNumRows += 1
 				screen.appendTableRow(tableName)

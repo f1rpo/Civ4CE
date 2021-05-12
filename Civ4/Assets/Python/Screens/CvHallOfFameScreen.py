@@ -87,7 +87,10 @@ class CvHallOfFameScreen:
 		self.iEraFilter = -1
 		self.iSpeedFilter = -1
 		self.iVictoryFilter = -1
-		self.iMultiplayerFilter = 0
+		if gc.getGame().isGameMultiPlayer():
+			self.iMultiplayerFilter = 1
+		else:
+			self.iMultiplayerFilter = 0
 		self.iSortBy = SORT_BY_NORMALIZED_SCORE
 
 		self.EXIT_TEXT = u"<font=4>" + localText.getText("TXT_KEY_PEDIA_SCREEN_EXIT", ()).upper() + u"</font>"
@@ -198,14 +201,18 @@ class CvHallOfFameScreen:
 
 		# Multiplayer dropdown initialization
 		screen.addDropDownBoxGFC(self.MULTIPLAYER_DROPDOWN_ID, xDropDown, yDropDown, self.DROPDOWN_WIDTH, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-		screen.addPullDownString(self.MULTIPLAYER_DROPDOWN_ID, localText.getText("TXT_KEY_MAIN_MENU_SINGLE_PLAYER", ()), 0, 0, True)
-		screen.addPullDownString(self.MULTIPLAYER_DROPDOWN_ID, localText.getText("TXT_KEY_MAIN_MENU_MULTIPLAYER", ()), 1, 1, False)
+		if self.iMultiplayerFilter == 1:
+			screen.addPullDownString(self.MULTIPLAYER_DROPDOWN_ID, localText.getText("TXT_KEY_MAIN_MENU_MULTIPLAYER", ()), 1, 1, True)
+			screen.addPullDownString(self.MULTIPLAYER_DROPDOWN_ID, localText.getText("TXT_KEY_MAIN_MENU_SINGLE_PLAYER", ()), 0, 0, False)
+		else:
+			screen.addPullDownString(self.MULTIPLAYER_DROPDOWN_ID, localText.getText("TXT_KEY_MAIN_MENU_SINGLE_PLAYER", ()), 0, 0, True)
+			screen.addPullDownString(self.MULTIPLAYER_DROPDOWN_ID, localText.getText("TXT_KEY_MAIN_MENU_MULTIPLAYER", ()), 1, 1, False)
 		iNumDropDowns += 1
 			
 		yDropDown = self.DROPDOWN_SPACING_Y * (iNumDropDowns % 2) + self.DROPDOWN_Y
 		xDropDown = (self.DROPDOWN_WIDTH  + self.DROPDOWN_SPACING_X) * (iNumDropDowns / 2) + self.DROPDOWN_SPACING_X
 
-		# Multiplayer dropdown initialization
+		# Score dropdown initialization
 		screen.addDropDownBoxGFC(self.SORT_DROPDOWN_ID, xDropDown, yDropDown, self.DROPDOWN_WIDTH, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
 		screen.addPullDownString(self.SORT_DROPDOWN_ID, localText.getText("TXT_KEY_HALL_OF_FAME_SORT_BY_NORMALIZED_SCORE", ()), SORT_BY_NORMALIZED_SCORE, SORT_BY_NORMALIZED_SCORE, True)
 		screen.addPullDownString(self.SORT_DROPDOWN_ID, localText.getText("TXT_KEY_HALL_OF_FAME_SORT_BY_DATE", ()), SORT_BY_FINISH_DATE, SORT_BY_FINISH_DATE, False)
@@ -234,17 +241,15 @@ class CvHallOfFameScreen:
 		screen.enableSelect(self.TABLE_ID, False)
 		screen.enableSort(self.TABLE_ID)
 		screen.setTableColumnHeader(self.TABLE_ID, 0, "", 20)
-		screen.setTableColumnHeader(self.TABLE_ID, 1, localText.getText("TXT_KEY_PITBOSS_LEADER", ()), 200)
-		screen.setTableColumnHeader(self.TABLE_ID, 2, localText.getText("TXT_KEY_NORMALIZED_SCORE", ()), 85)
-		screen.setTableColumnHeader(self.TABLE_ID, 3, localText.getText("TXT_KEY_HALL_OF_FAME_SORT_BY_DATE", ()), 100)
+		screen.setTableColumnHeader(self.TABLE_ID, 1, localText.getText("TXT_KEY_PITBOSS_LEADER", ()), 202)
+		screen.setTableColumnHeader(self.TABLE_ID, 2, localText.getText("TXT_KEY_NORMALIZED_SCORE", ()), 100)
+		screen.setTableColumnHeader(self.TABLE_ID, 3, localText.getText("TXT_KEY_HALL_OF_FAME_SORT_BY_DATE", ()), 88)
 		screen.setTableColumnHeader(self.TABLE_ID, 4, localText.getText("TXT_KEY_GAME_SCORE", ()), 100)
-		screen.setTableColumnHeader(self.TABLE_ID, 5, localText.getText("TXT_KEY_CONCEPT_VICTORY", ()), 102)
-		screen.setTableColumnHeader(self.TABLE_ID, 6, localText.getText("TXT_KEY_PITBOSS_DIFFICULTY", ()), 102)
-		screen.setTableColumnHeader(self.TABLE_ID, 7, localText.getText("TXT_KEY_SETTINGS_MAP_SIZE", (u"", )), 102)
-#		screen.setTableColumnHeader(self.TABLE_ID, , localText.getText("TXT_KEY_SETTINGS_CLIMATE", (u"", )), 102)
-#		screen.setTableColumnHeader(self.TABLE_ID, , localText.getText("TXT_KEY_SETTINGS_SEA_LEVEL", (u"", )), 102)
-		screen.setTableColumnHeader(self.TABLE_ID, 8, localText.getText("TXT_KEY_SETTINGS_STARTING_ERA", (u"", )), 102)
-		screen.setTableColumnHeader(self.TABLE_ID, 9, localText.getText("TXT_KEY_SETTINGS_GAME_SPEED", (u"", )), 102)
+		screen.setTableColumnHeader(self.TABLE_ID, 5, localText.getText("TXT_KEY_CONCEPT_VICTORY", ()), 100)
+		screen.setTableColumnHeader(self.TABLE_ID, 6, localText.getText("TXT_KEY_PITBOSS_DIFFICULTY", ()), 100)
+		screen.setTableColumnHeader(self.TABLE_ID, 7, localText.getText("TXT_KEY_HOF_SCREEN_SIZE", ()), 100)
+		screen.setTableColumnHeader(self.TABLE_ID, 8, localText.getText("TXT_KEY_HOF_SCREEN_STARTING_ERA", ()), 100)
+		screen.setTableColumnHeader(self.TABLE_ID, 9, localText.getText("TXT_KEY_HOF_SCREEN_GAME_SPEED", ()), 105)
 #		screen.setTableColumnHeader(self.TABLE_ID, , "", 73)
 
 		# count the filtered replays
