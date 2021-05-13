@@ -74,14 +74,14 @@ struct VS_OUTPUT
 //				The direction/color of the lights are used as globals in this file. If they
 //				are going to change, then they should be put in the global shader constant map
 //------------------------------------------------------------------------------------------------
-float ComputeCiv4Lighting( float3 f3Normal )
+float3 ComputeCiv4Lighting( float3 f3Normal )
 {
 	// Calculate the diffuse light color, based on three lights	
-	float fDiffuse = 0.0;
-	fDiffuse += dot( f3Normal.xyz, -f3LightDir1 ) * f3LightColor1;
-	fDiffuse += dot( f3Normal.xyz, -f3LightDir2 ) * f3LightColor2;
-	fDiffuse += dot( f3Normal.xyz, -f3LightDir3 ) * f3LightColor3;
-	return fDiffuse;
+	float3 f3Diffuse = 0;
+	f3Diffuse += dot( f3Normal.xyz, -f3LightDir1 ) * f3LightColor1;
+	f3Diffuse += dot( f3Normal.xyz, -f3LightDir2 ) * f3LightColor2;
+	f3Diffuse += dot( f3Normal.xyz, -f3LightDir3 ) * f3LightColor3;
+	return f3Diffuse;
 }
 
 

@@ -382,6 +382,7 @@ technique TRiver_FixedFunction< string shadername = "River_Shader"; int implemen
     }
 }
 
+/*
 technique TRiver_FixedFunction_2TPP< string shadername = "River_Shader"; int implementation=2;>
 {
     pass P0
@@ -391,6 +392,8 @@ technique TRiver_FixedFunction_2TPP< string shadername = "River_Shader"; int imp
         ZWriteEnable   = FALSE;
         ZFunc          = LESSEQUAL;
         
+        // Enable lighting
+        Lighting       = FALSE;
         
         // Enable alpha blending & testing
         AlphaBlendEnable = TRUE;
@@ -460,5 +463,54 @@ technique TRiver_FixedFunction_2TPP< string shadername = "River_Shader"; int imp
 		VertexShader     = NULL;
 		PixelShader      = NULL;
     }
+}
+*/
 
+technique TRiver_FixedFunction_2TPP< string shadername = "River_Shader"; int implementation=2;>
+{
+    pass P0
+    {
+        // Enable depth writing
+        ZEnable        = TRUE;
+        ZWriteEnable   = FALSE;
+        ZFunc          = LESSEQUAL;
+        
+        // Enable lighting
+        Lighting       = FALSE;
+        
+        // Enable alpha blending & testing
+        AlphaBlendEnable = TRUE;
+        AlphaTestEnable	 = TRUE;
+        AlphaRef		 = 0;
+        AlphaFunc		 = GREATER;
+        SrcBlend         = SRCALPHA;
+        DestBlend        = INVSRCALPHA;
+        
+        // textures
+		Texture[0] = (BaseTexture);
+		Texture[1] = (RiverFOWTexture);
+
+		TexCoordIndex[0] = 1;
+		TexCoordIndex[1] = CAMERASPACEPOSITION;
+		
+		TextureTransform[0] = <mtxBaseTextureMat>;
+		TextureTransform[1] = <mtxFOW>;
+        
+		// texture stage 0 - Base Texture
+		ColorOp[0]       = SelectArg1;
+		ColorArg1[0]     = Texture;
+		AlphaOp[0]		 = SelectArg1;
+		AlphaArg1[0]	 = Texture;
+		
+		// texture stage 1	- FoW
+		ColorOp[1]       = Modulate;
+		ColorArg1[1]     = Texture;
+		ColorArg2[1]     = Current;
+		AlphaOp[1]		 = SelectArg1;
+		AlphaArg1[1]	 = Current;
+				
+		// shaders
+		VertexShader     = NULL;
+		PixelShader      = NULL;
+    }
 }

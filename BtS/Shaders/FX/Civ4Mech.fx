@@ -13,13 +13,12 @@
 //Include Civ4's generic lighting equation, used in several shaders
 #include "ComputeCiv4Lighting.fx"
 
-
-float4x4 SkinWorldViewProj : SKINWORLDVIEWPROJ;
-float4x4 mtxSkinWorldView  : SKINWORLDVIEW;
-static const int MAX_BONES = 20;
-float4x3 mtxBones[MAX_BONES] : BONEMATRIX3;
-float4x4 mtxWorld : WORLD;
+float4x4 mtxViewProj : VIEWPROJ;
+float4x4 mtxInvView : INVVIEW;
 float4x4 mtxDecalTexture : TEXTRANSFORMDECAL;
+
+static const int MAX_BONES = 20;						 
+float4x3 mtxWorldBones[MAX_BONES] : SKINBONEMATRIX3; //world space bone matrix
 
 float3 f3TeamColor: GLOBAL = {0.0f, 1.0f, 0.0f};
 dword dwTeamColor: GLOBAL = 0xFF0000FF;
@@ -52,7 +51,7 @@ struct VS_OUTPUTGLOSS
 };
 
 //------------------------------------------------------------------------------------------------  
-float4x3 ComputeBoneTransform( float4 f4BlendIndices, float4 f4BlendWeights )
+float4x3 ComputeWorldBoneTransform( float4 f4BlendIndices, float4 f4BlendWeights )
 {
 	// Compensate for lack of UBYTE4 on Geforce3
     int4 indices = D3DCOLORtoUBYTE4(f4BlendIndices);
@@ -63,10 +62,10 @@ float4x3 ComputeBoneTransform( float4 f4BlendIndices, float4 f4BlendWeights )
 
     // Calculate bone transform
     float4x3 BoneTransform;
-	BoneTransform = weights[0] * mtxBones[indices[0]];
-	BoneTransform += weights[1] * mtxBones[indices[1]];
-	BoneTransform += weights[2] * mtxBones[indices[2]];
-	BoneTransform += weights[3] * mtxBones[indices[3]];
+	BoneTransform = weights[0] * mtxWorldBones[indices[0]];
+	BoneTransform += weights[1] * mtxWorldBones[indices[1]];
+	BoneTransform += weights[2] * mtxWorldBones[indices[2]];
+	BoneTransform += weights[3] * mtxWorldBones[indices[3]];
 	return BoneTransform;
 }
 
@@ -75,10 +74,10 @@ VS_OUTPUT SkinningDecalVS_11(VS_INPUT vIn)
 {
 	VS_OUTPUT Out = (VS_OUTPUT)0;
 
-	float4x3 mtxBoneTransform = ComputeBoneTransform( vIn.BlendIndices, vIn.BlendWeights );
-	float3 BoneSpacePos = mul(vIn.Pos, mtxBoneTransform);
+	float4x3 mtxBoneTransform = ComputeWorldBoneTransform( vIn.BlendIndices, vIn.BlendWeights );
+	float3 worldPosition = mul(vIn.Pos, mtxBoneTransform);
 
-	Out.Pos = mul(float4(BoneSpacePos, 1.0), SkinWorldViewProj);
+	Out.Pos = mul(float4(worldPosition, 1.0), mtxViewProj);
 	Out.TexBase = vIn.TexCoord0;
 	Out.TexDecal= mul(float4(vIn.TexCoord0,1,1), mtxDecalTexture);
 	
@@ -95,10 +94,10 @@ VS_OUTPUTGLOSS SkinningDecalGlossVS_11(VS_INPUT vIn)
 {
 	VS_OUTPUTGLOSS Out = (VS_OUTPUTGLOSS)0;
 
-	float4x3 mtxBoneTransform = ComputeBoneTransform( vIn.BlendIndices, vIn.BlendWeights );
-	float3 BoneSpacePos = mul(vIn.Pos, mtxBoneTransform);
+	float4x3 mtxBoneTransform = ComputeWorldBoneTransform( vIn.BlendIndices, vIn.BlendWeights );
+	float3 worldPosition = mul(vIn.Pos, mtxBoneTransform);
 
-	Out.Pos = mul(float4(BoneSpacePos, 1.0), SkinWorldViewProj);
+	Out.Pos = mul(float4(worldPosition, 1.0), mtxViewProj);
 	Out.TexBase = vIn.TexCoord0;
 	Out.TexDecal= mul(float4(vIn.TexCoord0,1,1), mtxDecalTexture);
 	
@@ -109,10 +108,12 @@ VS_OUTPUTGLOSS SkinningDecalGlossVS_11(VS_INPUT vIn)
    	Out.f4Diff.a = 1.0f;
    	
    	// Environment map coordiantes	
-   	float4x4 mtxBoneWorldView = mul( mtxBoneTransform, mtxSkinWorldView);
-	float3 temp = mul(float4(vIn.f3Normal,0.0), mtxBoneWorldView );
-	Out.f3Normal.x = temp.x / 2.0 + 0.5;
-	Out.f3Normal.y = -temp.y / 2.0 + 0.5;	
+   	float3 cameraPosition = mul(float4(0, 0, 0, 1), mtxInvView);
+   	float3 cameraVector = worldPosition - cameraPosition;
+   	cameraVector = normalize(cameraVector);
+   	cameraVector = reflect(cameraVector, wsNormal);
+   	Out.f3Normal.x = 0.5 * cameraVector.x + 0.5;
+	Out.f3Normal.y = 0.5 * cameraVector.z + 0.5;
 
 	return Out;
 }
@@ -151,14 +152,15 @@ float4 MechTeamColorDecalGlossPS_14(VS_OUTPUTGLOSS vIn) : COLOR
 {
 	float4	f4FinalColor = tex2D(BaseSampler, vIn.TexBase);
 	float4  f4Decal = tex2D(DecalSampler,vIn.TexDecal);
-	float3 f3EnvironmentMap = tex2D( EnvironmentMapSampler, float2( vIn.f3Normal.x, vIn.f3Normal.y ) );
+	float3 f3EnvironmentMap = tex2D( EnvironmentMapSampler, float2( vIn.f3Normal.x, -vIn.f3Normal.y ) );
 	float3 f3GlossMask = tex2D( GlossSampler, vIn.TexBase );
 	
 	f4FinalColor.rgb = lerp(f3TeamColor,f4FinalColor.rgb, f4FinalColor.a);
 	f4FinalColor.rgb = lerp(f4FinalColor.rgb,f4Decal.rgb, f4Decal.a);
 		
 	float3 f3EnvMap = f3EnvironmentMap * f3GlossMask;
-	f4FinalColor.rgb *= (vIn.f4Diff.rgb + f3EnvMap);	
+	f4FinalColor.rgb *= vIn.f4Diff.rgb;
+	f4FinalColor.rgb += f3EnvMap;
 	f4FinalColor.a = fUnitFade.a;
 	return f4FinalColor;
 }
@@ -193,20 +195,20 @@ technique TCiv4MechNonShader
         // Set the smaplers
 		Sampler[0] = <BaseSampler>;
         Sampler[1] = <DecalSampler>;
-		Sampler[2] = <GlossSampler>;
+		//Sampler[2] = <GlossSampler>;
 
 	    // transforms
         TexCoordIndex[0] = 0;
         TexCoordIndex[1] = 0;
-        TexCoordIndex[2] = 0;	
+        //TexCoordIndex[2] = 0;	
         
         TextureTransform[0] = 0;
 		TextureTransform[1] = <mtxDecalTexture>;	
-		TextureTransform[2] = 0;
+		//TextureTransform[2] = 0;
         
         TextureTransformFlags[0] = 0;
 		TextureTransformFlags[1] = Count2;	
-		TextureTransformFlags[2] = 0;	
+		//TextureTransformFlags[2] = 0;	
         
 		TextureFactor = <dwTeamColor>;
            
@@ -214,9 +216,9 @@ technique TCiv4MechNonShader
         ColorOp[0]       = BlendTextureAlpha;
         ColorArg1[0]     = Texture;
         ColorArg2[0]	 = TFactor;
-       	AlphaOp[0]		 = Disable;
+       	AlphaOp[0]		 = SelectArg2;
 		AlphaArg1[0]	 = Texture;
-		AlphaArg2[0]	 = Current;
+		AlphaArg2[0]	 = TFactor;
 
         // texture stage 1 - Decal
         ColorOp[1]       = BlendTextureAlpha;

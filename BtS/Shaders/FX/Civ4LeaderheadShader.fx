@@ -24,6 +24,7 @@ float4x4	mtxSkinWorld			: WORLD;
 float4x4	mtxWorldViewProj		: WORLDVIEWPROJECTION;
 float4x4    mtxWorldView			: WORLDVIEW;
 float4x4	mtxWorldInv				: WORLDINVERSE;
+float4x4 mtxBaseTransform : TEXTRANSFORMBASE;
 
 static const int LEADER_MAX_BONES = 16;
 float4x3 mtxBones[LEADER_MAX_BONES] : BONEMATRIX3;
@@ -44,6 +45,7 @@ float3		f3CameraPos			: GLOBAL;	// Camera world position
 //							TEXTURES
 //------------------------------------------------------------------------------------------------  
 texture BaseTexture <string NTM = "base";>;
+texture DecalTexture <string NTM = "decal"; int NTMIndex = 0;>;
 texture NormalMap < string NTM = "shader"; int NTMIndex = 1;>;
 texture SpecularIntensity < string NTM = "shader"; int NTMIndex = 2;>;
 texture EnvironmentIntensity < string NTM = "shader"; int NTMIndex = 3;>;
@@ -55,6 +57,16 @@ texture EnvironmentMap< string NTM = "shader"; int NTMIndex = 0;>;			// must be 
 sampler BaseSampler = sampler_state
 {
     Texture = (BaseTexture);
+    AddressU  = WRAP;
+    AddressV  = WRAP;
+    MagFilter = LINEAR;
+    MinFilter = LINEAR;
+    MipFilter = LINEAR;
+};
+
+sampler DecalSampler = sampler_state
+{
+    Texture = (DecalTexture);
     AddressU  = WRAP;
     AddressV  = WRAP;
     MagFilter = LINEAR;
@@ -181,14 +193,16 @@ struct LHOUTPUT_11_2x
 	float3	f3LightHalfAng	: COLOR0;
 	float3	f3LightVec		: COLOR1;
 	float2	f2TexCoord1		: TEXCOORD0;
-	float2	f2TexCoord2		: TEXCOORD1;
+	float2	f2TexCoord1b	: TEXCOORD1;
+	float2	f2TexCoord2		: TEXCOORD2;
 };
 
 struct LHOUTPUT_11_3
 {
 	float4	f4Position		: POSITION;
 	float2	f2TexCoord1		: TEXCOORD0;
-	float3	f3Normal		: TEXCOORD1;
+	float2	f2TexCoord1b	: TEXCOORD1;
+	float3	f3Normal		: TEXCOORD2;
 };
 
 struct LHPOUTPUT_20
@@ -197,9 +211,45 @@ struct LHPOUTPUT_20
 	float2	f2TexCoord		: TEXCOORD0;	
 };
 
+struct LHINPUT_ALPHA_DECAL
+{
+	float4 f4Position	: POSITION;
+	float2 f2TexCoord	: TEXCOORD;
+};
+
+struct LHOUTPUT_ALPHA_DECAL
+{
+	float4	f4Position		: POSITION;
+	float2	f2TexCoord0		: TEXCOORD0;
+	float2	f2TexCoord1		: TEXCOORD1;
+};
+
 //------------------------------------------------------------------------------------------------
 //                          Shaders
 //------------------------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------------------------
+//                         Alpha Decal Shaders
+//------------------------------------------------------------------------------------------------
+
+LHOUTPUT_ALPHA_DECAL VSLeaderheadAlphaDecal11(LHINPUT_ALPHA_DECAL input)
+{
+	LHOUTPUT_ALPHA_DECAL output = (LHOUTPUT_ALPHA_DECAL) 0;
+	output.f4Position = mul(input.f4Position, mtxWorldViewProj);
+	output.f2TexCoord0 = mul(float4(input.f2TexCoord, 1, 1), mtxBaseTransform);
+	output.f2TexCoord1 = input.f2TexCoord;
+	return output;
+}
+
+float4 PSLeaderheadAlphaDecal11(LHOUTPUT_ALPHA_DECAL input) : COLOR
+{
+	//textures
+	float4 f4BaseColor = tex2D(BaseSampler, input.f2TexCoord0);
+	float4 f4DecalColor = tex2D(DecalSampler, input.f2TexCoord1);
+	float4 f4FinalColor = f4DecalColor + f4BaseColor * f4BaseColor.a;
+	f4FinalColor.a = f4BaseColor.a * f4DecalColor.a;
+	return f4FinalColor;
+}
 
 float4x3 ComputeBoneTransform( float4 f4BlendIndices, float4 f4BlendWeights )
 {
@@ -368,9 +418,8 @@ float4 PSLeaderhead20( LHOUTPUT_20 kOutput ) : COLOR
 	float3 f3DiffuseTotal = saturate(f3Diffuse1 + f3Diffuse2 + f3Diffuse3);
 	float3 f3EnvMap = f3EnvironmentMap * f3EnvironmentMask;
 	
-	
 	// Final summation
-	return float4(  f3SpecularTotal + f3EnvMap + ( f3DiffuseTotal + f3Ambient) * f4BaseColor, 1.0 );
+	return float4(  f3SpecularTotal + f3EnvMap + ( f3DiffuseTotal + f3Ambient) * f4BaseColor, f4BaseColor.a );
 }
 
 //------------------------------------------------------------------------------------------------
@@ -389,7 +438,7 @@ LHOUTPUT_11_1 VSLeaderhead11_1( LHINPUT_11_1 kInput )
 	float4x4 mtxBoneWorldView = mul( mtxBoneTransform, mtxSkinWorldView);
 	
 	float4 f4VertNormLightVec;
-	float f4ObjectViewDir;
+	float4 f4ObjectViewDir;
 	float3x3 mtxObjToTangentSpace;
 
 	// Copy texture coordinates
@@ -438,7 +487,7 @@ LHOUTPUT_11_1 VSLeaderheadNoSkin11_1( LHINPUT_11_1 kInput )
 	kOutput.f4Position = mul(kInput.f4Position, mtxWorldViewProj );
 
 	float4 f4VertNormLightVec;
-	float f4ObjectViewDir;
+	float4 f4ObjectViewDir;
 	float3x3 mtxObjToTangentSpace;
 
 	// Copy texture coordinates
@@ -495,6 +544,7 @@ LHOUTPUT_11_2x VSLeaderhead11_2x( LHINPUT_11_2x kInput, uniform float3 f3LightPo
 	float3x3 mtxObjToTangentSpace;
 
 	kOutput.f2TexCoord1 = kInput.f2TexCoord;
+	kOutput.f2TexCoord1b = kInput.f2TexCoord;
 	kOutput.f2TexCoord2 = kInput.f2TexCoord;
 	
 	// Make the world-space to tangent-space matrix
@@ -530,6 +580,7 @@ LHOUTPUT_11_2x VSLeaderheadNoSkin11_2x( LHINPUT_11_2x kInput, uniform float3 f3L
 	float3x3 mtxObjToTangentSpace;
 
 	kOutput.f2TexCoord1 = kInput.f2TexCoord;
+	kOutput.f2TexCoord1b = kInput.f2TexCoord;
 	kOutput.f2TexCoord2 = kInput.f2TexCoord;
 	
 	// Make the world-space to tangent-space matrix
@@ -564,6 +615,7 @@ LHOUTPUT_11_3 VSLeaderhead11_3( LHINPUT_11_3 kInput )
 	float4x4 mtxBoneWorldView = mul( mtxBoneTransform, mtxSkinWorldView);
 
 	kOutput.f2TexCoord1 = kInput.f2TexCoord;
+	kOutput.f2TexCoord1b = kInput.f2TexCoord;
 	float3 temp = mul(float4(kInput.f3Normal,0.0), mtxBoneWorldView );
 	kOutput.f3Normal.x = temp.x / 2.0 + 0.5;
 	kOutput.f3Normal.y = -temp.y / 2.0 + 0.5;	
@@ -581,6 +633,7 @@ LHOUTPUT_11_3 VSLeaderheadNoSkin11_3( LHINPUT_11_3 kInput )
 	kOutput.f4Position = mul(kInput.f4Position, mtxWorldViewProj );
 
 	kOutput.f2TexCoord1 = kInput.f2TexCoord;
+	kOutput.f2TexCoord1b = kInput.f2TexCoord;
 	float3 temp = mul(float4(kInput.f3Normal,0.0), mtxWorldView );
 	kOutput.f3Normal.x = temp.x / 2.0 + 0.5;
 	kOutput.f3Normal.y = -temp.y / 2.0 + 0.5;	
@@ -607,15 +660,15 @@ float4 PSLeaderhead11_1( LHOUTPUT_11_1 kOutput, uniform float3 f3AmbientColor ) 
 	f3ExpLightDir1 = ( kOutput.f3LightVec1 - 0.5 ) * 2.0;
 	f3ExpLightDir2 = ( kOutput.f3LightVec2 - 0.5 ) * 2.0;
 	f3ExpLightDir3 = ( kOutput.f3LightVec3 - 0.5 ) * 2.0;
-	f3Diffuse1 = saturate(dot( f3NormalSample.xyz, f3ExpLightDir1 )) * f3DiffuseColor1;
-	f3Diffuse2 = saturate(dot( f3NormalSample.xyz, f3ExpLightDir2 )) * f3DiffuseColor2;
-	f3Diffuse3 = saturate(dot( f3NormalSample.xyz, f3ExpLightDir3 )) * f3DiffuseColor3;
+	f3Diffuse1 = saturate(dot( f3NormalSample, f3ExpLightDir1 )) * f3DiffuseColor1;
+	f3Diffuse2 = saturate(dot( f3NormalSample, f3ExpLightDir2 )) * f3DiffuseColor2;
+	f3Diffuse3 = saturate(dot( f3NormalSample, f3ExpLightDir3 )) * f3DiffuseColor3;
 	
 	// Diffuse lighting = (N.L) * Cs
 	float3 f3DiffuseTotal = f4BaseColor * (saturate(f3Diffuse1 + f3Diffuse2 + f3Diffuse3) + f3AmbientColor);
 	
 	// Final summation
-	return float4( f3DiffuseTotal, 1.0 );
+	return float4( f3DiffuseTotal, f4BaseColor.a );
 }
 
 
@@ -624,6 +677,7 @@ float4 PSLeaderhead11_2x( LHOUTPUT_11_2x kOutput, uniform float4 f4SpecularColor
 {
 	float3 f3NormalSample = tex2D( NormalSampler, kOutput.f2TexCoord1 );
 	float3 f3SpecularMask = tex2D( SpecularMaskSampler, kOutput.f2TexCoord2 );
+	float4 f4BaseColor = tex2D( BaseSampler, kOutput.f2TexCoord1b );
 	float3 f3ExpHalfAng;
 	f3NormalSample = ( f3NormalSample - 0.5 ) * 2.0;
 	
@@ -634,7 +688,7 @@ float4 PSLeaderhead11_2x( LHOUTPUT_11_2x kOutput, uniform float4 f4SpecularColor
 	float3 f3Specular = saturate(fNdH * f4SpecularColor.xyz);
 	
 	// Final summation
-	return float4( f3SpecularMask * f3Specular, 1.0 );
+	return float4( f3SpecularMask * f3Specular, f4BaseColor.a );
 }
 
 //------------------------------------------------------------------------------------------------
@@ -644,13 +698,15 @@ float4 PSLeaderhead11_3( LHOUTPUT_11_3 kOutput ) : COLOR
 {
 	float3 f3EnvironmentMask = tex2D( EnvironmentMaskSampler, kOutput.f2TexCoord1 );
 	float3 f3EnvironmentMap = tex2D( EnvironmentMapSampler, float2( kOutput.f3Normal.x, kOutput.f3Normal.y ) );	
+	float4 f4BaseColor = tex2D( BaseSampler, kOutput.f2TexCoord1b );
 	float3 f3EnvMap = f3EnvironmentMap * f3EnvironmentMask;
-	return float4(f3EnvMap,1.0);
+	return float4(f3EnvMap, f4BaseColor.a);
 }
 
 //------------------------------------------------------------------------------------------------
 //                          TECHNIQUES
 //------------------------------------------------------------------------------------------------
+
 technique TLeaderheadShader_20
 < 
 	string shadername= "TLeaderheadShader_20"; 
@@ -667,8 +723,10 @@ technique TLeaderheadShader_20
         ZFunc          = LESSEQUAL;
         
         // Disable alpha blending & testing - everything is opaque
-        AlphaBlendEnable = FALSE;
+        AlphaBlendEnable = TRUE;
         AlphaTestEnable	 = FALSE;
+        SrcBlend		 = SRCALPHA;
+        DestBlend		 = INVSRCALPHA;
         
    		// Allow the use of multiple texcoord indices
         TexCoordIndex[0] = 0;
@@ -706,8 +764,10 @@ technique TLeaderheadShaderNoSkin_20
         ZFunc          = LESSEQUAL;
         
         // Disable alpha blending & testing - everything is opaque
-        AlphaBlendEnable = FALSE;
+        AlphaBlendEnable = TRUE;
         AlphaTestEnable	 = FALSE;
+		SrcBlend		 = SRCALPHA;
+        DestBlend		 = INVSRCALPHA;
         
    		// Allow the use of multiple texcoord indices
         TexCoordIndex[0] = 0;
@@ -747,8 +807,10 @@ technique TLeaderheadShader_11
         ZFunc          = LESSEQUAL;
         
         // Disable alpha blending & testing - everything is opaque
-        AlphaBlendEnable = FALSE;
+        AlphaBlendEnable = TRUE;
         AlphaTestEnable	 = FALSE;
+        SrcBlend		 = SRCALPHA;
+        DestBlend		 = INVSRCALPHA;
         
    		// Allow the use of multiple texcoord indices
         TexCoordIndex[0] = 0;
@@ -818,8 +880,10 @@ technique TLeaderheadShaderNoSkin_11
         ZFunc          = LESSEQUAL;
         
         // Disable alpha blending & testing - everything is opaque
-        AlphaBlendEnable = FALSE;
+        AlphaBlendEnable = TRUE;
         AlphaTestEnable	 = FALSE;
+        SrcBlend		 = SRCALPHA;
+        DestBlend		 = INVSRCALPHA;
         
    		// Allow the use of multiple texcoord indices
         TexCoordIndex[0] = 0;
@@ -878,4 +942,18 @@ technique TLeaderheadShaderNoSkin_11
 		VertexShader = compile vs_1_1 VSLeaderheadNoSkin11_3( );
 		PixelShader = compile ps_1_1 PSLeaderhead11_3( );
 	}	
+}
+
+technique TLeaderheadAlphaDecal
+<
+	string shadername = "TLeaderheadAlphaDecal";
+	bool UsesNiRenderState = true;
+	int implementation=0;
+>
+{
+  	pass P0
+	{
+		VertexShader = compile vs_1_1 VSLeaderheadAlphaDecal11();
+		PixelShader = compile ps_1_1 PSLeaderheadAlphaDecal11();
+	}
 }

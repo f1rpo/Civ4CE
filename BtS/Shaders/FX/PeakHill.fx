@@ -37,7 +37,7 @@ texture TerrainLightmapTexture <string NTM = "shader";  int NTMIndex = 2;>;
 //                          SAMPLERS
 //------------------------------------------------------------------------------------------------  
 sampler DecalBase	   = sampler_state{ Texture = (DecalBaseTexture);		AddressU = wrap;  AddressV = wrap;  MagFilter = LINEAR; MinFilter = LINEAR; MipFilter = LINEAR;};
-sampler FOWar          = sampler_state{ Texture = (TerrainFOWarTexture);	AddressU = Clamp; AddressV = Clamp;	MagFilter = Linear;	MipFilter = Linear;	MinFilter = Linear; };
+sampler FOWar          = sampler_state{ Texture = (TerrainFOWarTexture);	AddressU = Wrap; AddressV = Wrap;	MagFilter = Linear;	MipFilter = Linear;	MinFilter = Linear; };
 sampler TerrainLightmap= sampler_state{ Texture = (TerrainLightmapTexture); AddressU = Wrap;  AddressV = Wrap;  MagFilter = Linear; MipFilter = Linear; MinFilter = Linear; };
 
 //------------------------------------------------------------------------------------------------

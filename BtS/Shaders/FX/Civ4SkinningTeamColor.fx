@@ -10,14 +10,13 @@
 //  Copyright (c) 2005 Firaxis Games, Inc. All rights reserved.
 //------------------------------------------------------------------------------------------------
 
-float4x4 SkinWorldViewProj : SKINWORLDVIEWPROJ;
-float4x4 mtxSkinWorldView		: SKINWORLDVIEW;
-static const int MAX_BONES = 20;
-float4x3 mtxBones[MAX_BONES] : BONEMATRIX3;
-float4x4 mtxWorld : WORLD;
+float4x4 mtxViewProj : VIEWPROJ;
+float4x4 mtxInvView : INVVIEW;
 float4x4 mtxDecalTexture : TEXTRANSFORMDECAL;
 float4x4 mtxFOW  : GLOBAL;
-						   
+
+static const int MAX_BONES = 20;						 
+float4x3 mtxWorldBones[MAX_BONES] : SKINBONEMATRIX3; //world space bone matrix
 
 float3 f3TeamColor: GLOBAL = {0.0f, 1.0f, 0.0f};
 float4 fUnitFade: MATERIALDIFFUSE = (1.0.xxxx);
@@ -33,8 +32,6 @@ struct VS_INPUT
     float4 BlendWeights : BLENDWEIGHT;
     float4 BlendIndices : BLENDINDICES;
 };
-
-
 
 struct VS_OUTPUT
 {
@@ -55,14 +52,13 @@ struct VS_OUTPUTGLOSS
 {
     float4 Pos		 : POSITION;
     float2 TexCoords : TEXCOORD0;
-    float2 f2FowTex  : TEXCOORD1;
-  	float3 f3Normal	 : TEXCOORD2;
+    float3 f3Normal	 : TEXCOORD2;
     float4 f4Diff	 : COLOR0;
 };
 
 
 //------------------------------------------------------------------------------------------------  
-float4x3 ComputeBoneTransform( float4 f4BlendIndices, float4 f4BlendWeights )
+float4x3 ComputeWorldBoneTransform( float4 f4BlendIndices, float4 f4BlendWeights )
 {
 	// Compensate for lack of UBYTE4 on Geforce3
     int4 indices = D3DCOLORtoUBYTE4(f4BlendIndices);
@@ -73,10 +69,10 @@ float4x3 ComputeBoneTransform( float4 f4BlendIndices, float4 f4BlendWeights )
 
     // Calculate bone transform
     float4x3 BoneTransform;
-	BoneTransform = weights[0] * mtxBones[indices[0]];
-	BoneTransform += weights[1] * mtxBones[indices[1]];
-	BoneTransform += weights[2] * mtxBones[indices[2]];
-	BoneTransform += weights[3] * mtxBones[indices[3]];
+	BoneTransform = weights[0] * mtxWorldBones[indices[0]];
+	BoneTransform += weights[1] * mtxWorldBones[indices[1]];
+	BoneTransform += weights[2] * mtxWorldBones[indices[2]];
+	BoneTransform += weights[3] * mtxWorldBones[indices[3]];
 	return BoneTransform;
 }
 //------------------------------------------------------------------------------------------------  
@@ -84,14 +80,14 @@ VS_OUTPUT SkinningVS_11(VS_INPUT vIn)
 {
 	VS_OUTPUT Out = (VS_OUTPUT)0;
 
-	float4x3 mtxBoneTransform = ComputeBoneTransform( vIn.BlendIndices, vIn.BlendWeights );
-	float3 BoneSpacePos = mul(vIn.Pos, mtxBoneTransform);
+	float4x3 mtxBoneTransform = ComputeWorldBoneTransform( vIn.BlendIndices, vIn.BlendWeights );
+	float3 worldPosition = mul(vIn.Pos, mtxBoneTransform);
 
-	Out.Pos = mul(float4(BoneSpacePos, 1.0), SkinWorldViewProj);
+	Out.Pos = mul(float4(worldPosition, 1.0), mtxViewProj);
 	Out.TexCoords = vIn.TexCoords;
 
 	float3 wsNormal = mul(vIn.f3Normal, (float3x3)mtxBoneTransform );
-    wsNormal  = normalize(wsNormal );
+    wsNormal  = normalize(wsNormal);
 	
    	Out.f4Diff.rgb = ComputeCiv4UnitLighting( wsNormal );	// L.N
    	Out.f4Diff.a = 1.0f;
@@ -103,23 +99,25 @@ VS_OUTPUTGLOSS SkinningGlossVS_11(VS_INPUT vIn)
 {
 	VS_OUTPUTGLOSS Out = (VS_OUTPUTGLOSS)0;
 
-	float4x3 mtxBoneTransform = ComputeBoneTransform( vIn.BlendIndices, vIn.BlendWeights );
-	float3 BoneSpacePos = mul(vIn.Pos, mtxBoneTransform);
+	float4x3 mtxBoneTransform = ComputeWorldBoneTransform( vIn.BlendIndices, vIn.BlendWeights );
+	float3 worldPosition = mul(vIn.Pos, mtxBoneTransform);
 
-	Out.Pos = mul(float4(BoneSpacePos, 1.0), SkinWorldViewProj);
+	Out.Pos = mul(float4(worldPosition, 1.0), mtxViewProj);
 	Out.TexCoords = vIn.TexCoords;
 
 	float3 wsNormal = mul(vIn.f3Normal, (float3x3)mtxBoneTransform );
-    wsNormal  = normalize(wsNormal );
+    wsNormal = normalize(wsNormal);
 	
    	Out.f4Diff.rgb = ComputeCiv4UnitLighting( wsNormal );	// L.N
    	Out.f4Diff.a = 1.0f;
    	
    	// Environment map coordiantes	
-   	float4x4 mtxBoneWorldView = mul( mtxBoneTransform, mtxSkinWorldView);
-	float3 temp = mul(float4(vIn.f3Normal,0.0), mtxBoneWorldView );
-	Out.f3Normal.x = temp.x / 2.0 + 0.5;
-	Out.f3Normal.y = -temp.y / 2.0 + 0.5;	
+   	float3 cameraPosition = mul(float4(0, 0, 0, 1), mtxInvView);
+   	float3 cameraVector = worldPosition - cameraPosition;
+   	cameraVector = normalize(cameraVector);
+   	cameraVector = reflect(cameraVector, wsNormal);
+   	Out.f3Normal.x = 0.5 * cameraVector.x + 0.5;
+	Out.f3Normal.y = 0.5 * cameraVector.z + 0.5;
 
 	return Out;
 }
@@ -128,17 +126,16 @@ VS_OUTPUTFOW SkinningFOWVS_11(VS_INPUT vIn)
 {
 	VS_OUTPUTFOW Out = (VS_OUTPUTFOW)0;
 
-	float4x3 mtxBoneTransform = ComputeBoneTransform( vIn.BlendIndices, vIn.BlendWeights );
-	float3 BoneSpacePos = mul(vIn.Pos, mtxBoneTransform);
+	float4x3 mtxBoneTransform = ComputeWorldBoneTransform( vIn.BlendIndices, vIn.BlendWeights );
+	float3 worldPosition = mul(vIn.Pos, mtxBoneTransform);
 
-	Out.Pos = mul(float4(BoneSpacePos, 1.0), SkinWorldViewProj);
+	Out.Pos = mul(float4(worldPosition, 1.0), mtxViewProj);
 	Out.TexCoords = vIn.TexCoords;
 
-	float3 worldPos = mul(float4(vIn.Pos), (float4x3)mtxWorld);	
-	Out.f2FowTex   = mul(float4(worldPos,1),mtxFOW);
+	Out.f2FowTex   = mul(float4(worldPosition,1),mtxFOW);
 
-	float3 wsNormal = mul(vIn.f3Normal, (float3x3)mtxBoneTransform );
-    wsNormal  = normalize(wsNormal );
+	float3 wsNormal = mul(vIn.f3Normal, (float3x3)mtxBoneTransform);
+    wsNormal = normalize(wsNormal);
 	
    	Out.f4Diff.rgb = ComputeCiv4UnitLighting( wsNormal );	// L.N
    	Out.f4Diff.a = 1.0f;
@@ -165,7 +162,7 @@ sampler Fog = sampler_state  { Texture = (FOGTexture);	   AddressU = Clamp;  Add
 float4 SkinningTeamColorPS_11(VS_OUTPUT vIn) : COLOR
 {
 	float4	f4FinalColor = tex2D(BaseSampler, vIn.TexCoords);
-	f4FinalColor.rgb = lerp(f3TeamColor,f4FinalColor.rgb, f4FinalColor.a);
+	f4FinalColor.rgb = lerp(f3TeamColor, f4FinalColor.rgb, f4FinalColor.a);
 	f4FinalColor.rgb *= vIn.f4Diff.rgb;	 
 	f4FinalColor.a = fUnitFade.a;
 	return f4FinalColor;
@@ -193,12 +190,13 @@ float4 SkinningFOWPS_11(VS_OUTPUTFOW vIn) : COLOR
 float4 SkinningTeamColorGlossPS_14(VS_OUTPUTGLOSS vIn) : COLOR
 {
 	float4	f4FinalColor = tex2D(BaseSampler, vIn.TexCoords);
-	float3 f3EnvironmentMap = tex2D( EnvironmentMapSampler, float2( vIn.f3Normal.x, vIn.f3Normal.y ) );
+	float3 f3EnvironmentMap = tex2D( EnvironmentMapSampler, float2( vIn.f3Normal.x, -vIn.f3Normal.y ) );
 	float3 f3GlossMask = tex2D( GlossSampler, vIn.TexCoords );
 	float3 f3EnvMap = f3EnvironmentMap * f3GlossMask;
 	
 	f4FinalColor.rgb = lerp(f3TeamColor,f4FinalColor.rgb, f4FinalColor.a);
-	f4FinalColor.rgb *= (vIn.f4Diff.rgb + f3EnvMap);	
+	f4FinalColor.rgb *= vIn.f4Diff.rgb;
+	f4FinalColor.rgb += f3EnvMap;	
 	f4FinalColor.a = fUnitFade.a;
 	return f4FinalColor;
 }

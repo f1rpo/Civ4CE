@@ -80,7 +80,7 @@ texture FOGTexture		 <string NTM = "shader";  int NTMIndex = 2;>;
 //------------------------------------------------------------------------------------------------  
 sampler WaterBase = sampler_state  { Texture = (BaseTexture);	   AddressU = Wrap; AddressV = Wrap; MagFilter = Linear; MipFilter = Linear; MinFilter = Linear; };
 sampler CoastFade = sampler_state  { Texture = (CoastFadeTexture); AddressU = Wrap; AddressV = Wrap; MagFilter = Linear; MipFilter = None; MinFilter = Linear; };
-sampler Fog    	  = sampler_state  { Texture = (FOGTexture);	   AddressU = Clamp;  AddressV = Clamp;  MagFilter = Linear; MipFilter = Linear; MinFilter = Linear; };
+sampler Fog    	  = sampler_state  { Texture = (FOGTexture);	   AddressU = Wrap;  AddressV = Wrap;  MagFilter = Linear; MipFilter = Linear; MinFilter = Linear; };
 //------------------------------------------------------------------------------------------------
 float4 WaterPS_11( VS_OUTPUT vIn ) : COLOR
 {
