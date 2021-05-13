@@ -34,6 +34,8 @@ void CyArgsList::add(const wchar* s)
 {
 	if (s)
 		push_back(PyUnicode_FromWideChar(s, wcslen(s)));
+	else
+		push_back(PyUnicode_FromWideChar(L"", 0));
 }
 
 // add data string

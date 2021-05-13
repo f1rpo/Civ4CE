@@ -10,6 +10,7 @@
 #include "CvGameCoreUtils.h"
 #include "CvGameTextMgr.h"
 #include "CvDLLInterfaceIFaceBase.h"
+#include "CvDLLEventReporterIFaceBase.h"
 
 // Public Functions...
 
@@ -68,31 +69,23 @@ void CvDeal::kill(bool bKillTeam)
 	if ((getLengthFirstTrades() > 0) || (getLengthSecondTrades() > 0))
 	{
 		CvWString szString;
-		CvWString szDealString;
+		CvWStringBuffer szDealString;
 		CvWString szCancelString = gDLL->getText("TXT_KEY_POPUP_DEAL_CANCEL");
 
-		szDealString.clear();
-		GAMETEXT.getDealString(szDealString, *this, getFirstPlayer());
-		szString.Format(L"%s: %s", szCancelString.GetCString(), szDealString.GetCString());
-		gDLL->getInterfaceIFace()->addMessage((PlayerTypes)getFirstPlayer(), true, GC.getDefineINT("EVENT_MESSAGE_TIME"), szString, "AS2D_DEAL_CANCELLED");
-
-		szDealString.clear();
-		GAMETEXT.getDealString(szDealString, *this, getSecondPlayer());
-		szString.Format(L"%s: %s", szCancelString.GetCString(), szDealString.GetCString());
-		gDLL->getInterfaceIFace()->addMessage((PlayerTypes)getSecondPlayer(), true, GC.getDefineINT("EVENT_MESSAGE_TIME"), szString, "AS2D_DEAL_CANCELLED");
-		
-		// if debug mode (ctrl-z under chipotle), then notify the human that a deal was canceled
-		if (GC.getGameINLINE().isDebugMode())
+		if (GET_TEAM(GET_PLAYER(getFirstPlayer()).getTeam()).isHasMet(GET_PLAYER(getSecondPlayer()).getTeam()))
 		{
-			PlayerTypes iActivePlayer = GC.getGameINLINE().getActivePlayer();
-			
-			if (iActivePlayer != getFirstPlayer() && iActivePlayer != getFirstPlayer())
-			{
-				szDealString.clear();
-				GAMETEXT.getDealString(szDealString, *this, iActivePlayer);
-				szString.Format(L"%s: %s", szCancelString.GetCString(), szDealString.GetCString());
-				gDLL->getInterfaceIFace()->addMessage((PlayerTypes)iActivePlayer, true, GC.getDefineINT("EVENT_MESSAGE_TIME"), szString);
-			}
+			szDealString.clear();
+			GAMETEXT.getDealString(szDealString, *this, getFirstPlayer());
+			szString.Format(L"%s: %s", szCancelString.GetCString(), szDealString.getCString());
+			gDLL->getInterfaceIFace()->addMessage((PlayerTypes)getFirstPlayer(), true, GC.getEVENT_MESSAGE_TIME(), szString, "AS2D_DEAL_CANCELLED");
+		}
+
+		if (GET_TEAM(GET_PLAYER(getSecondPlayer()).getTeam()).isHasMet(GET_PLAYER(getFirstPlayer()).getTeam()))
+		{
+			szDealString.clear();
+			GAMETEXT.getDealString(szDealString, *this, getSecondPlayer());
+			szString.Format(L"%s: %s", szCancelString.GetCString(), szDealString.getCString());
+			gDLL->getInterfaceIFace()->addMessage((PlayerTypes)getSecondPlayer(), true, GC.getEVENT_MESSAGE_TIME(), szString, "AS2D_DEAL_CANCELLED");
 		}
 	}
 
@@ -384,6 +377,7 @@ bool CvDeal::isVassalTrade(const CLinkList<TradeData>* pList)
 bool CvDeal::isUncancelableVassalDeal(PlayerTypes eByPlayer, CvWString* pszReason) const
 {
 	CLLNode<TradeData>* pNode;
+	CvWStringBuffer szBuffer;
 
 	for (pNode = headFirstTradesNode(); (pNode != NULL); pNode = nextFirstTradesNode(pNode))
 	{
@@ -409,7 +403,9 @@ bool CvDeal::isUncancelableVassalDeal(PlayerTypes eByPlayer, CvWString* pszReaso
 			{
 				if (pszReason)
 				{
-					GAMETEXT.setVassalRevoltHelp(*pszReason, eMaster, GET_PLAYER(getFirstPlayer()).getTeam());
+					szBuffer.clear();
+					GAMETEXT.setVassalRevoltHelp(szBuffer, eMaster, GET_PLAYER(getFirstPlayer()).getTeam());
+					*pszReason = szBuffer.getCString();
 				}
 
 				return true;
@@ -443,7 +439,9 @@ bool CvDeal::isUncancelableVassalDeal(PlayerTypes eByPlayer, CvWString* pszReaso
 				{
 					if (pszReason)
 					{
-						GAMETEXT.setVassalRevoltHelp(*pszReason, eMaster, GET_PLAYER(getFirstPlayer()).getTeam());
+						szBuffer.clear();
+						GAMETEXT.setVassalRevoltHelp(szBuffer, eMaster, GET_PLAYER(getFirstPlayer()).getTeam());
+						*pszReason = szBuffer.getCString();
 					}
 				}
 
@@ -457,30 +455,15 @@ bool CvDeal::isUncancelableVassalDeal(PlayerTypes eByPlayer, CvWString* pszReaso
 
 bool CvDeal::isVassalTributeDeal(const CLinkList<TradeData>* pList)
 {
-	bool bResources = false;
-
 	for (CLLNode<TradeData>* pNode = pList->head(); pNode != NULL; pNode = pList->next(pNode))
 	{
-		if (pNode->m_data.m_eItemType == TRADE_RESOURCES)
+		if (pNode->m_data.m_eItemType != TRADE_RESOURCES)
 		{
-			if (!bResources)
-			{
-				bResources = true;
-			}
-			else
-			{
-				bResources = false;
-				break;
-			}
-		}
-		else
-		{
-			bResources = false;
-			break;
+			return false;
 		}
 	}
 
-	return bResources;
+	return true;
 }
 
 bool CvDeal::isPeaceDealBetweenOthers(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* pSecondList) const
@@ -699,7 +682,14 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 		pCity = GET_PLAYER(eFromPlayer).getCity(trade.m_iData);
 		if (pCity != NULL)
 		{
-			pCity->doTask(TASK_GIFT, eToPlayer);
+			if (pCity->getLiberationPlayer() == eToPlayer)
+			{
+				pCity->doTask(TASK_LIBERATE);
+			}
+			else
+			{
+				pCity->doTask(TASK_GIFT, eToPlayer);
+			}
 		}
 		break;
 
@@ -707,6 +697,10 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 		GET_PLAYER(eFromPlayer).changeGold(-(trade.m_iData));
 		GET_PLAYER(eToPlayer).changeGold(trade.m_iData);
 		GET_PLAYER(eFromPlayer).AI_changeGoldTradedTo(eToPlayer, trade.m_iData);
+
+		// Python Event
+		gDLL->getEventReporterIFace()->playerGoldTrade(eFromPlayer, eToPlayer, trade.m_iData);
+
 		break;
 
 	case TRADE_GOLD_PER_TURN:
@@ -722,9 +716,20 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 
 			if (pLoopPlot->isRevealed(GET_PLAYER(eFromPlayer).getTeam(), false))
 			{
-				pLoopPlot->setRevealed(GET_PLAYER(eToPlayer).getTeam(), true, false, GET_PLAYER(eFromPlayer).getTeam());
+				pLoopPlot->setRevealed(GET_PLAYER(eToPlayer).getTeam(), true, false, GET_PLAYER(eFromPlayer).getTeam(), false);
 			}
 		}
+
+		for (iI = 0; iI < MAX_PLAYERS; iI++) 
+		{ 
+			if (GET_PLAYER((PlayerTypes)iI).isAlive()) 
+			{ 
+				if (GET_PLAYER((PlayerTypes)iI).getTeam() == GET_PLAYER(eToPlayer).getTeam()) 
+				{ 
+					GET_PLAYER((PlayerTypes)iI).updatePlotGroups(); 
+				} 
+			} 
+		} 
 		break;
 
 	case TRADE_SURRENDER:
@@ -747,36 +752,15 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 		break;
 
 	case TRADE_WAR:
-		// creating scope for some variables
+		GET_TEAM(GET_PLAYER(eFromPlayer).getTeam()).declareWar(((TeamTypes)trade.m_iData), true);
+
+		for (iI = 0; iI < MAX_PLAYERS; iI++)
 		{
-			TeamTypes eFromTeam = GET_PLAYER(eFromPlayer).getTeam();
-			CvTeamAI& kFromTeam = GET_TEAM(eFromTeam);
-			TeamTypes eDataTeam = (TeamTypes) trade.m_iData;
-
-			// set the warplan prior to declareWar(), to avoid the assert
-			if (kFromTeam.AI_getWarPlan(eDataTeam) == NO_WARPLAN)
+			if (GET_PLAYER((PlayerTypes)iI).isAlive())
 			{
-				if (GET_TEAM(eDataTeam).getAtWarCount(true) == 0)
+				if (GET_PLAYER((PlayerTypes)iI).getTeam() == ((TeamTypes)trade.m_iData))
 				{
-					kFromTeam.AI_setWarPlan(eDataTeam, WARPLAN_LIMITED);
-				}
-				else
-				{
-					kFromTeam.AI_setWarPlan(eDataTeam, WARPLAN_DOGPILE);
-				}
-			}
-			
-			// actually declare war
-			kFromTeam.declareWar(eDataTeam, true);
-
-			for (iI = 0; iI < MAX_PLAYERS; iI++)
-			{
-				if (GET_PLAYER((PlayerTypes)iI).isAlive())
-				{
-					if (GET_PLAYER((PlayerTypes)iI).getTeam() == eDataTeam)
-					{
-						GET_PLAYER((PlayerTypes)iI).AI_changeMemoryCount(eToPlayer, MEMORY_HIRED_WAR_ALLY, 1);
-					}
+					GET_PLAYER((PlayerTypes)iI).AI_changeMemoryCount(eToPlayer, MEMORY_HIRED_WAR_ALLY, 1);
 				}
 			}
 		}

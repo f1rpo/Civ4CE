@@ -499,7 +499,11 @@ void CvMapGenerator::doRiver(CvPlot *pStartPlot, CardinalDirectionTypes eLastCar
 		doRiver(pRiverPlot, eBestCardinalDirection, eOriginalCardinalDirection, iThisRiverID);
 	}
 }
-
+//Note from Blake:
+//Iustus wrote this function, it ensures that a new river actually
+//creates fresh water on the passed plot. Quite useful really
+//Altouh I veto'd it's use since I like that you don't always 
+//get fresh water starts.
 // pFreshWaterPlot = the plot we want to give a fresh water river
 // 
 bool CvMapGenerator::addRiver(CvPlot* pFreshWaterPlot)

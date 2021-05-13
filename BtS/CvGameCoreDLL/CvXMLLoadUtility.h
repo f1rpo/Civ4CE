@@ -45,7 +45,7 @@ public:
 	DllExport void DestroyFXml();
 
 	FXml* GetXML() { return m_pFXml; }
- 
+
 	DllExport bool LoadPostMenuGlobals();
 	DllExport bool LoadPreMenuGlobals();
 	DllExport bool LoadBasicInfos();
@@ -53,7 +53,7 @@ public:
 	DllExport bool LoadGraphicOptions();
 
 	// read the global defines from a specific file
-	DllExport bool ReadGlobalDefines(char* szXMLFileName, CvCacheObject* cache);
+	DllExport bool ReadGlobalDefines(const TCHAR* szXMLFileName, CvCacheObject* cache);
 	// loads globaldefines.xml and calls various other functions to load relevant global variables
 	DllExport bool SetGlobalDefines();
 	// loads globaltypes.xml and calls various other functions to load relevant global variables
@@ -70,8 +70,6 @@ public:
 	DllExport void ResetLandscapeInfo();
 	DllExport bool SetupGlobalLandscapeInfo();
 	DllExport bool SetGlobalArtDefines();
-	template <class T>	
-	DllExport bool SetGlobalArtDefineInfo(T **ppArtDefneInfos, char* szXMLFileName, char* szTagName, int& iNumVals);
 	DllExport bool LoadGlobalText();
 	DllExport bool SetHelpText();
 	DllExport void ResetGlobalEffectInfo();
@@ -158,7 +156,7 @@ public:
 
 	// loads the local yield from the xml file
 	int SetYields(int** ppiYield);
-	
+
 	template <class T>
 	int SetCommerce(T** ppiCommerce);
 
@@ -172,7 +170,7 @@ public:
 
 	// check through the pszList parameter for the pszVal and returns the location a match
 	// is found if one is found
-	static int FindInInfoClass(const TCHAR* pszVal, CvInfoBase* pInfos, int iClassSize, int iListLen);
+	static int FindInInfoClass(const TCHAR* pszVal, bool hideAssert = false);
 
 	void setActionInfoFromHotkeyInfo(
 						CvActionInfo* pActionInfo, CvHotkeyInfo* pHotkeyInfo, CvString szDescriptionPrefix, CvString szHelp,
@@ -202,22 +200,18 @@ public:
 
 	// allocate and initialize a list from a tag pair in the xml
 	void SetVariableListTagPair(int **ppiList, const TCHAR* szRootTagName,
-		CvInfoBase* pCvInfoBase,
 		int iInfoBaseSize, int iInfoBaseLength, int iDefaultListVal = 0);
 
 	// allocate and initialize a list from a tag pair in the xml
 	void SetVariableListTagPair(bool **ppbList, const TCHAR* szRootTagName,
-		CvInfoBase* pCvInfoBase,
 		int iInfoBaseSize, int iInfoBaseLength, bool bDefaultListVal = false);
 
 	// allocate and initialize a list from a tag pair in the xml
 	void SetVariableListTagPair(float **ppfList, const TCHAR* szRootTagName,
-		CvInfoBase* pCvInfoBase,
 		int iInfoBaseSize, int iInfoBaseLength, float fDefaultListVal = 0.0f);
 
 	// allocate and initialize a list from a tag pair in the xml
 	void SetVariableListTagPair(CvString **ppszList, const TCHAR* szRootTagName,
-		CvInfoBase* pCvInfoBase,
 		int iInfoBaseSize, int iInfoBaseLength, CvString szDefaultListVal = "");
 
 	// allocate and initialize a list from a tag pair in the xml
@@ -230,7 +224,7 @@ public:
 
 	// allocate and initialize a list from a tag pair in the xml
 	void SetVariableListTagPairForAudioScripts(int **ppiList, const TCHAR* szRootTagName,
-		CvInfoBase* pCvInfoBase, int iInfoBaseSize, int iInfoBaseLength, int iDefaultListVal = -1);
+		int iInfoBaseLength, int iDefaultListVal = -1);
 
 	// allocate and initialize a list from a tag pair in the xml
 	void SetVariableListTagPair(bool **ppbList, const TCHAR* szRootTagName,
@@ -286,25 +280,22 @@ private:
 	//
 	// template which can handle all info classes
 	//
-	// bUseEnum is set to true if we are going to be sending in an enum value instead of getting 
+	// bUseEnum is set to true if we are going to be sending in an enum value instead of getting
 	// a dynamic value for the list size
 	template <class T>
-	void SetGlobalClassInfo(T **ppEmphasizeInfos, char* szTagName, int* iNumVals, bool bUseEnum=false);	
+	void SetGlobalClassInfo(std::vector<T*>& aInfos, const char* szTagName, bool bTwoPass);
+	template <class T>
+	void LoadGlobalClassInfo(std::vector<T*>& aInfos, const char* szFileRoot, const char* szFileDirectory, const char* szXmlPath, bool bTwoPass, CvCacheObject* (CvDLLUtilityIFaceBase::*pArgFunction) (const TCHAR*) = NULL);
+
+	void SetDiplomacyInfo(std::vector<CvDiplomacyInfo*>& DiploInfos, const char* szTagName);
+	void LoadDiplomacyInfo(std::vector<CvDiplomacyInfo*>& DiploInfos, const char* szFileRoot, const char* szFileDirectory, const char* szXmlPath, CvCacheObject* (CvDLLUtilityIFaceBase::*pArgFunction) (const TCHAR*));
 
 	//
 	// special cases of set class info which don't use the template because of extra code they have
 	//
-	void SetGlobalRiverInfo(CvRiverInfo **ppRiverInfos, char* szTagName, int* iNumVals,float *fZBias);
-	void SetGlobalBuildingClassInfo(CvBuildingClassInfo** ppBuildingClassInfo, char* szTagName, int* iNumVals, CvString** ppszDefualtBuildingList);
-	void SetGlobalBuildingInfo(CvBuildingInfo** ppBuildingInfo, char* szTagName, int* iNumVals);
-	void SetGlobalProjectInfo(CvProjectInfo** ppProjectInfo, char* szTagName, int* iNumVals);
-	void SetGlobalUnitClassInfo(CvUnitClassInfo** ppUnitClassInfo, char* szTagName, int* iNumVals, CvString **ppszDefualtUnitList);
-	void SetGlobalActionInfo(CvActionInfo** ppActionInfo, int* iNumVals);
+	void SetGlobalActionInfo();
 	void SetGlobalAnimationPathInfo(CvAnimationPathInfo** ppAnimationPathInfo, char* szTagName, int* iNumVals);
-	void SetGlobalRouteInfo(CvRouteInfo **ppRouteInfos, char* szTagName, int* iNumVals, float *fZbias);
-	void SetGlobalPromotionInfo(CvPromotionInfo **ppPromotionInfos, char* szTagName, int* iNumVals);
 	void SetGameText(const char* szTextGroup, const char* szTagName);
-	void SetGlobalTechInfo(CvTechInfo** ppTechInfo, char* szTagName, int* iNumVals);
 
 	// create a keyboard string from a KB code, Delete would be returned for KB_DELETE
 	CvWString CreateKeyStringFromKBCode(const TCHAR* pszHotKey);
@@ -329,7 +320,7 @@ void CvXMLLoadUtility::InitList(T **ppList, int iListLen, T val)
 {
 	int i;	// loop counter
 
-	FAssertMsg((0 < iListLen),"list size to allocate is less than 1");
+	FAssertMsg((0 <= iListLen),"list size to allocate is less than 0");
 	*ppList = new T[iListLen];
 
 	for (i=0;i<iListLen;i++)

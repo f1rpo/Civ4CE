@@ -12,7 +12,196 @@
 //------------------------------------------------------------------------------------------------
 
 #include "CvGameCoreDLL.h"
+#include "CvUnit.h"
 //#include "CvStructs.h"
+
+int EventTriggeredData::getID() const 
+{ 
+	return m_iId; 
+}
+
+void EventTriggeredData::setID(int iID) 
+{ 
+	m_iId = iID; 
+}
+
+void EventTriggeredData::read(FDataStreamBase* pStream)
+{
+	pStream->Read(&m_iId);
+	pStream->Read((int*)&m_eTrigger);
+	pStream->Read(&m_iTurn);
+	pStream->Read((int*)&m_ePlayer);
+	pStream->Read(&m_iCityId);
+	pStream->Read(&m_iPlotX);
+	pStream->Read(&m_iPlotY);
+	pStream->Read(&m_iUnitId);
+	pStream->Read((int*)&m_eOtherPlayer);
+	pStream->Read(&m_iOtherPlayerCityId);
+	pStream->Read((int*)&m_eReligion);
+	pStream->Read((int*)&m_eCorporation);
+	pStream->Read((int*)&m_eBuilding);
+	pStream->ReadString(m_szText);
+	pStream->ReadString(m_szGlobalText);
+}
+
+void EventTriggeredData::write(FDataStreamBase* pStream)
+{
+	pStream->Write(m_iId);
+	pStream->Write(m_eTrigger);
+	pStream->Write(m_iTurn);
+	pStream->Write(m_ePlayer);
+	pStream->Write(m_iCityId);
+	pStream->Write(m_iPlotX);
+	pStream->Write(m_iPlotY);
+	pStream->Write(m_iUnitId);
+	pStream->Write(m_eOtherPlayer);
+	pStream->Write(m_iOtherPlayerCityId);
+	pStream->Write(m_eReligion);
+	pStream->Write(m_eCorporation);
+	pStream->Write(m_eBuilding);
+	pStream->WriteString(m_szText);
+	pStream->WriteString(m_szGlobalText);
+}
+
+int VoteSelectionData::getID() const 
+{ 
+	return iId; 
+}
+
+void VoteSelectionData::setID(int iID) 
+{ 
+	iId = iID; 
+}
+
+void VoteSelectionData::read(FDataStreamBase* pStream)
+{
+	pStream->Read(&iId);
+	pStream->Read((int*)&eVoteSource);
+	int iSize;
+	pStream->Read(&iSize);
+	for (int i = 0; i < iSize; ++i)
+	{
+		VoteSelectionSubData kData;
+		pStream->Read((int*)&kData.eVote);
+		pStream->Read((int*)&kData.ePlayer);
+		pStream->Read(&kData.iCityId);
+		pStream->Read((int*)&kData.eOtherPlayer);
+		pStream->ReadString(kData.szText);
+		aVoteOptions.push_back(kData);
+	}
+}
+
+void VoteSelectionData::write(FDataStreamBase* pStream)
+{
+	pStream->Write(iId);
+	pStream->Write(eVoteSource);
+	pStream->Write(aVoteOptions.size());
+	for (std::vector<VoteSelectionSubData>::iterator it = aVoteOptions.begin(); it != aVoteOptions.end(); ++it)
+	{
+		pStream->Write((*it).eVote);
+		pStream->Write((*it).ePlayer);
+		pStream->Write((*it).iCityId);
+		pStream->Write((*it).eOtherPlayer);
+		pStream->WriteString((*it).szText);
+	}
+}
+
+int VoteTriggeredData::getID() const 
+{ 
+	return iId; 
+}
+
+void VoteTriggeredData::setID(int iID) 
+{ 
+	iId = iID; 
+}
+
+void VoteTriggeredData::read(FDataStreamBase* pStream)
+{
+	pStream->Read(&iId);
+	pStream->Read((int*)&eVoteSource);
+	pStream->Read((int*)&kVoteOption.eVote);
+	pStream->Read((int*)&kVoteOption.ePlayer);
+	pStream->Read(&kVoteOption.iCityId);
+	pStream->Read((int*)&kVoteOption.eOtherPlayer);
+	pStream->ReadString(kVoteOption.szText);
+}
+
+void VoteTriggeredData::write(FDataStreamBase* pStream)
+{
+	pStream->Write(iId);
+	pStream->Write(eVoteSource);
+	pStream->Write(kVoteOption.eVote);
+	pStream->Write(kVoteOption.ePlayer);
+	pStream->Write(kVoteOption.iCityId);
+	pStream->Write(kVoteOption.eOtherPlayer);
+	pStream->WriteString(kVoteOption.szText);
+}
+
+void PlotExtraYield::read(FDataStreamBase* pStream)
+{
+	pStream->Read(&m_iX);
+	pStream->Read(&m_iY);
+	m_aeExtraYield.clear();
+	for (int i = 0; i < NUM_YIELD_TYPES; ++i)
+	{
+		int iYield;
+		pStream->Read(&iYield);
+		m_aeExtraYield.push_back(iYield);
+	}
+}
+
+void PlotExtraYield::write(FDataStreamBase* pStream)
+{
+	pStream->Write(m_iX);
+	pStream->Write(m_iY);
+	for (int i = 0; i < NUM_YIELD_TYPES; ++i)
+	{
+		pStream->Write(m_aeExtraYield[i]);
+	}
+}
+
+void PlotExtraCost::read(FDataStreamBase* pStream)
+{
+	pStream->Read(&m_iX);
+	pStream->Read(&m_iY);
+	pStream->Read(&m_iCost);
+}
+
+void PlotExtraCost::write(FDataStreamBase* pStream)
+{
+	pStream->Write(m_iX);
+	pStream->Write(m_iY);
+	pStream->Write(m_iCost);
+}
+
+void BuildingYieldChange::read(FDataStreamBase* pStream)
+{
+	pStream->Read((int*)&eBuildingClass);
+	pStream->Read((int*)&eYield);
+	pStream->Read(&iChange);
+}
+
+void BuildingYieldChange::write(FDataStreamBase* pStream)
+{
+	pStream->Write(eBuildingClass);
+	pStream->Write(eYield);
+	pStream->Write(iChange);
+}
+
+void BuildingCommerceChange::read(FDataStreamBase* pStream)
+{
+	pStream->Read((int*)&eBuildingClass);
+	pStream->Read((int*)&eCommerce);
+	pStream->Read(&iChange);
+}
+
+void BuildingCommerceChange::write(FDataStreamBase* pStream)
+{
+	pStream->Write(eBuildingClass);
+	pStream->Write(eCommerce);
+	pStream->Write(iChange);
+}
 
 void checkBattleUnitType(BattleUnitTypes unitType)
 {
@@ -153,6 +342,9 @@ CvBattleDefinition::CvBattleDefinition() :
 {
 	m_fMissionTime = 0.0f;
 	m_eMissionType = MISSION_BEGIN_COMBAT;
+	m_iNumMeleeRounds = 0;
+	m_iNumRangedRounds = 0;
+
 	for(int i=0;i<BATTLE_UNIT_COUNT;i++)
 	{
 		m_aUnits[i] = NULL;
@@ -172,6 +364,8 @@ CvBattleDefinition::CvBattleDefinition( const CvBattleDefinition & kCopy ) :
 {
 	m_fMissionTime = kCopy.m_fMissionTime;
 	m_eMissionType = MISSION_BEGIN_COMBAT;
+	m_iNumMeleeRounds = kCopy.m_iNumMeleeRounds;
+	m_iNumRangedRounds = kCopy.m_iNumRangedRounds;
 
 	for(int i=0;i<BATTLE_UNIT_COUNT;i++)
 	{
@@ -344,6 +538,16 @@ void CvAirMissionDefinition::setDamage(BattleUnitTypes unitType, int damage)
 {
 	checkBattleUnitType(unitType);
 	m_aDamage[unitType] = damage;
+}
+
+bool CvAirMissionDefinition::isDead(BattleUnitTypes unitType) const
+{
+	checkBattleUnitType(unitType);
+	FAssertMsg(getUnit(unitType) != NULL, "[Jason] Invalid battle unit type.");
+	if(getDamage(unitType) >= getUnit(unitType)->maxHitPoints())
+		return true;
+	else
+		return false;
 }
 
 PBGameSetupData::PBGameSetupData()

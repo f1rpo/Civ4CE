@@ -113,10 +113,10 @@ void CvPlotGroup::recalculatePlots()
 {
 	PROFILE("CvPlotGroup::recalculatePlots()");
 
-  CLLNode<XYCoords>* pPlotNode;
-  CvPlot* pPlot;
-  CLinkList<XYCoords> oldPlotGroup;
-  XYCoords xy;
+	CLLNode<XYCoords>* pPlotNode;
+	CvPlot* pPlot;
+	CLinkList<XYCoords> oldPlotGroup;
+	XYCoords xy;
 	PlayerTypes eOwner;
 	int iCount;
 
@@ -143,23 +143,23 @@ void CvPlotGroup::recalculatePlots()
 
 	pPlotNode = headPlotsNode();
 
-  while (pPlotNode != NULL)
-  {
-    pPlot = GC.getMapINLINE().plotSorenINLINE(pPlotNode->m_data.iX, pPlotNode->m_data.iY);
+	while (pPlotNode != NULL)
+	{
+		pPlot = GC.getMapINLINE().plotSorenINLINE(pPlotNode->m_data.iX, pPlotNode->m_data.iY);
 
-    FAssertMsg(pPlot != NULL, "Plot is not assigned a valid value");
+		FAssertMsg(pPlot != NULL, "Plot is not assigned a valid value");
 
-    xy.iX = pPlot->getX_INLINE();
-    xy.iY = pPlot->getY_INLINE();
+		xy.iX = pPlot->getX_INLINE();
+		xy.iY = pPlot->getY_INLINE();
 
-    oldPlotGroup.insertAtEnd(xy);
+		oldPlotGroup.insertAtEnd(xy);
 
-    pPlot->setPlotGroup(eOwner, NULL);
+		pPlot->setPlotGroup(eOwner, NULL);
 
 		pPlotNode = deletePlotsNode(pPlotNode); // will delete this PlotGroup...
-  }
+	}
 
-  pPlotNode = oldPlotGroup.head();
+	pPlotNode = oldPlotGroup.head();
 
 	while (pPlotNode != NULL)
 	{
@@ -167,7 +167,7 @@ void CvPlotGroup::recalculatePlots()
 
 		FAssertMsg(pPlot != NULL, "Plot is not assigned a valid value");
 
-		pPlot->updatePlotGroup(eOwner);
+		pPlot->updatePlotGroup(eOwner, true);
 
 		pPlotNode = oldPlotGroup.deleteNode(pPlotNode);
 	}

@@ -34,6 +34,10 @@ public:
 	virtual void routeBuilt(int RouteType, int iX, int iY) = 0;	
 
 	virtual void plotRevealed(CvPlot *pPlot, TeamTypes eTeam) = 0;
+	virtual void plotFeatureRemoved(CvPlot *pPlot, FeatureTypes eFeature, CvCity* pCity) = 0;
+	virtual void plotPicked(CvPlot *pPlot) = 0;
+	virtual void nukeExplosion(CvPlot *pPlot, CvUnit* pNukeUnit) = 0;
+	virtual void gotoPlotSet(CvPlot *pPlot, PlayerTypes ePlayer) = 0;
 
 	virtual void cityBuilt(CvCity *pCity) = 0;
 	virtual void cityRazed(CvCity *pCity, PlayerTypes ePlayer) = 0;
@@ -46,10 +50,11 @@ public:
 	virtual void cityBuildingUnit(CvCity* pCity, UnitTypes eUnitType) = 0;
 	virtual void cityBuildingBuilding(CvCity* pCity, BuildingTypes eBuildingType) = 0;
 	virtual void cityRename(CvCity* pCity) = 0;
+	virtual void cityHurry(CvCity* pCity, HurryTypes eHurry) = 0;
 
 	virtual void selectionGroupPushMission(CvSelectionGroup* pSelectionGroup, MissionTypes eMission) = 0;
 
-	virtual void unitMove(CvPlot* pPlot, CvUnit* pUnit) = 0;					
+	virtual void unitMove(CvPlot* pPlot, CvUnit* pUnit, CvPlot* pOldPlot) = 0;					
 	virtual void unitSetXY(CvPlot* pPlot, CvUnit* pUnit) = 0;					
 	virtual void unitCreated(CvUnit *pUnit) = 0;
 	virtual void unitBuilt(CvCity *pCity, CvUnit *pUnit) = 0;
@@ -59,6 +64,9 @@ public:
 	virtual void unitSelected(CvUnit *pUnit) = 0;
 	virtual void unitRename(CvUnit* pUnit) = 0;
 	virtual void unitPillage(CvUnit* pUnit, ImprovementTypes eImprovement, RouteTypes eRoute, PlayerTypes ePlayer) = 0;
+	virtual void unitSpreadReligionAttempt(CvUnit* pUnit, ReligionTypes eReligion, bool bSuccess) = 0;
+	virtual void unitGifted(CvUnit* pUnit, PlayerTypes eGiftingPlayer, CvPlot* pPlotLocation) = 0;
+	virtual void unitBuildImprovement(CvUnit* pUnit, BuildTypes eBuild, bool bFinished) = 0;
 
 	virtual void goodyReceived(PlayerTypes ePlayer, CvPlot *pGoodyPlot, CvUnit *pGoodyUnit, GoodyTypes eGoodyType) = 0;
 
@@ -74,11 +82,17 @@ public:
 	virtual void religionSpread(ReligionTypes eType, PlayerTypes ePlayer, CvCity* pSpreadCity) = 0;
 	virtual void religionRemove(ReligionTypes eType, PlayerTypes ePlayer, CvCity* pSpreadCity) = 0;
 
+	virtual void corporationFounded(CorporationTypes eType, PlayerTypes ePlayer) = 0;
+	virtual void corporationSpread(CorporationTypes eType, PlayerTypes ePlayer, CvCity* pSpreadCity) = 0;
+	virtual void corporationRemove(CorporationTypes eType, PlayerTypes ePlayer, CvCity* pSpreadCity) = 0;
+
 	virtual void goldenAge(PlayerTypes ePlayer) = 0;
 	virtual void endGoldenAge(PlayerTypes ePlayer) = 0;
 	virtual void changeWar(bool bWar, TeamTypes eTeam, TeamTypes eOtherTeam) = 0;
 
 	virtual void setPlayerAlive(PlayerTypes ePlayerID, bool bNewValue) = 0;
+	virtual void playerChangeStateReligion(PlayerTypes ePlayerID, ReligionTypes eNewReligion, ReligionTypes eOldReligion) = 0;
+	virtual void playerGoldTrade(PlayerTypes eFromPlayer, PlayerTypes eToPlayer, int iAmount) = 0;
 
 	virtual void chat(char *szString) = 0;		
 

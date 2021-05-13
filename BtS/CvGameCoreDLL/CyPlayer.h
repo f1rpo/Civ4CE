@@ -23,13 +23,16 @@ public:
 
 	int startingPlotRange();
 	bool startingPlotWithinRange(CyPlot *pPlot, int /*PlayerTypes*/ ePlayer, int iRange, int iPass);
+
+	CyPlot* findStartingPlot(bool bRandomize);
+
 	CyCity* initCity(int x, int y);
 	void acquireCity(CyCity* pCity, bool bConquest, bool bTrade);
 	void killCities();
 
 	std::wstring getNewCityName();
 
-	CyUnit* initUnit(int /*UnitTypes*/ iIndex, int iX, int iY, UnitAITypes eUnitAI);
+	CyUnit* initUnit(int /*UnitTypes*/ iIndex, int iX, int iY, UnitAITypes eUnitAI, DirectionTypes eFacingDirection);
 	void disbandUnit(bool bAnnounce);
 
 	void killUnits();
@@ -79,6 +82,8 @@ public:
 	int getNumAvailableBonuses(int /*BonusTypes*/ eBonus);
 	int getNumTradeableBonuses(int /*BonusTypes*/ eBonus);
 	int getNumTradeBonusImports(int /*PlayerTypes*/ ePlayer);
+	bool hasBonus(int /*BonusTypes*/ eBonus);
+
 	bool canStopTradingWithTeam(int /*TeamTypes*/ eTeam);
 	void stopTradingWithTeam(int /*TeamTypes*/ eTeam);
 	void killAllDeals();
@@ -130,6 +135,7 @@ public:
 	int calculateInflationRate();
 	int calculateInflatedCosts();
 	int calculateGoldRate();
+	int calculateTotalCommerce();
 	int calculateResearchRate(int /*TechTypes*/ eTech);
 	int calculateResearchModifier(int /*TechTypes*/ eTech);
 	int calculateBaseNetResearch();
@@ -154,9 +160,14 @@ public:
 	bool hasHolyCity(int /*ReligionTypes*/ eReligion);
 	int countHolyCities();
 
-	void foundReligion(int /*ReligionTypes*/ eReligion);
+	void foundReligion(int /*ReligionTypes*/ eReligion, int /*ReligionTypes*/ iSlotReligion, bool bAward);
 	int getCivicAnarchyLength(boost::python::list& /*CivicTypes**/ paeNewCivics);
 	int getReligionAnarchyLength();
+
+	bool hasHeadquarters(int /*CorporationTypes*/ eCorporation);
+	int countHeadquarters();
+	int countCorporations(int /*CorporationTypes*/ eCorporation);
+	void foundCorporation(int /*CorporationTypes*/ eCorporation);
 
 	int unitsRequiredForGoldenAge();
 	int unitsGoldenAgeCapable();
@@ -173,12 +184,36 @@ public:
 
 	int getTotalLand();
 	int getTotalLandScored();
+
 	int getGold();
 	void setGold(int iNewValue);
 	void changeGold(int iChange);
 	int getGoldPerTurn();
 
+	int getAdvancedStartPoints();
+	void setAdvancedStartPoints(int iNewValue);
+	void changeAdvancedStartPoints(int iChange);
+	int getAdvancedStartUnitCost(int /*UnitTypes*/ eUnit, bool bAdd, CyPlot* pPlot);
+	int getAdvancedStartCityCost(bool bAdd, CyPlot* pPlot);
+	int getAdvancedStartPopCost(bool bAdd, CyCity* pCity);
+	int getAdvancedStartCultureCost(bool bAdd, CyCity* pCity);
+	int getAdvancedStartBuildingCost(int /*BuildingTypes*/ eBuilding, bool bAdd, CyCity* pCity);
+	int getAdvancedStartImprovementCost(int /*ImprovementTypes*/ eImprovement, bool bAdd, CyPlot* pPlot);
+	int getAdvancedStartRouteCost(int /*RouteTypes*/ eRoute, bool bAdd, CyPlot* pPlot);
+	int getAdvancedStartTechCost(int /*TechTypes*/ eTech, bool bAdd);
+	int getAdvancedStartVisibilityCost(bool bAdd, CyPlot* pPlot);
+
+	int getEspionageSpending(int /*PlayerTypes*/ ePlayer);
+	bool canDoEspionageMission(int /*EspionageMissionTypes*/ eMission, int /*PlayerTypes*/ eTargetPlayer, CyPlot* pPlot, int iExtraData);
+	int getEspionageMissionCost(int /*EspionageMissionTypes*/ eMission, int /*PlayerTypes*/ eTargetPlayer, CyPlot* pPlot, int iExtraData);
+	void doEspionageMission(int /*EspionageMissionTypes*/ eMission, int /*PlayerTypes*/ eTargetPlayer, CyPlot* pPlot, int iExtraData, CyUnit* pUnit);
+
+	int getEspionageSpendingWeightAgainstTeam(int /*TeamTypes*/ eIndex);
+	void setEspionageSpendingWeightAgainstTeam(int /*TeamTypes*/ eIndex, int iValue);
+	void changeEspionageSpendingWeightAgainstTeam(int /*TeamTypes*/ eIndex, int iChange);
+
 	int getGoldenAgeTurns();
+	int getGoldenAgeLength();
 	bool isGoldenAge();
 	void changeGoldenAgeTurns(int iChange);	
 	int getNumUnitGoldenAges();
@@ -189,6 +224,7 @@ public:
 	int getStrikeTurns();
 	int getMaxAnarchyTurns();
 	int getAnarchyModifier();
+	int getGoldenAgeModifier();
 	int getHurryModifier();
 	void createGreatPeople(int eGreatPersonUnit, bool bIncrementThreshold, bool bIncrementExperience, int iX, int iY);
 	int getGreatPeopleCreated();
@@ -237,6 +273,7 @@ public:
 
 	int getDistanceMaintenanceModifier();
 	int getNumCitiesMaintenanceModifier();
+	int getCorporationMaintenanceModifier();
 	int getTotalMaintenance();
 	int getUpkeepModifier();
 	int getLevelExperienceModifier() const;
@@ -254,6 +291,8 @@ public:
 	int getWarWearinessModifier();
 	int getFreeSpecialist();
 	bool isNoForeignTrade();
+	bool isNoCorporations();
+	bool isNoForeignCorporations();
 	int getCoastalTradeRoutes();
 	void changeCoastalTradeRoutes(int iChange);
 	int getTradeRoutes();
@@ -327,10 +366,17 @@ public:
 
 	bool isCommerceFlexible(int /*CommerceTypes*/ eIndex);
 	int getGoldPerTurnByPlayer(int /*PlayerTypes*/ eIndex);
+	void setGoldPerTurnByPlayer(int /*PlayerTypes*/ eIndex, int iValue);
+
 	bool isFeatAccomplished(int /*FeatTypes*/ eIndex);	
 	void setFeatAccomplished(int /*FeatTypes*/ eIndex, bool bNewValue);
 	bool isOption(int /*PlayerOptionTypes*/ eIndex);	
 	void setOption(int /*PlayerOptionTypes*/ eIndex, bool bNewValue);
+	bool isLoyalMember(int /*VoteSourceTypes*/ eIndex);	
+	void setLoyalMember(int /*VoteSourceTypes*/ eIndex, bool bNewValue);
+	int getVotes(int /*VoteTypes*/ eVote, int /*VoteSourceTypes*/ eVoteSource);
+	bool isFullMember(int /*VoteSourceTypes*/ eVoteSource) const;
+	bool isVotingMember(int /*VoteSourceTypes*/ eVoteSource) const;
 	bool isPlayable();
 	void setPlayable(bool bNewValue);
 	int getBonusExport(int /*BonusTypes*/ iIndex);
@@ -340,6 +386,7 @@ public:
 
 	bool isBuildingFree(int /*BuildingTypes*/ iIndex);
 	int getExtraBuildingHappiness(int /*BuildingTypes*/ iIndex);
+	int getExtraBuildingHealth(int /*BuildingTypes*/ iIndex);
 	int getFeatureHappiness(int /*FeatureTypes*/ iIndex);
 	int getUnitClassCount(int /*UnitClassTypes*/ eIndex);
 	bool isUnitClassMaxedOut(int /*UnitClassTypes*/ eIndex, int iExtra);
@@ -360,6 +407,8 @@ public:
 	int getHasReligionCount(int /*ReligionTypes*/ eIndex);
 	int countTotalHasReligion();
 	int findHighestHasReligionCount();
+	int getHasCorporationCount(int /*CorporationTypes*/ eIndex);
+	int countTotalHasCorporation();
 
 	int getUpkeepCount(int /*UpkeepTypes*/ eIndex);
 	bool isSpecialistValid(int /*SpecialistTypes*/ iIndex);
@@ -398,12 +447,20 @@ public:
 	int getNumSelectionGroups();
 	CySelectionGroup* getSelectionGroup(int iID);
 
+	void trigger(/*EventTriggerTypes*/int eEventTrigger);
+	const EventTriggeredData* getEventOccured(int /*EventTypes*/ eEvent) const;
+	void resetEventOccured(/*EventTypes*/ int eEvent);
+	EventTriggeredData* getEventTriggered(int iID) const;
+	EventTriggeredData* initTriggeredData(int /*EventTriggerTypes*/ eEventTrigger, bool bFire, int iCityId, int iPlotX, int iPlotY, int /*PlayerTypes*/ eOtherPlayer, int iOtherPlayerCityId, int /*ReligionTypes*/ eReligion, int /*CorporationTypes*/ eCorporation, int iUnitId, int /*BuildingTypes*/ eBuilding);
+	int getEventTriggerWeight(int /*EventTriggerTypes*/ eTrigger);
+
 	void AI_updateFoundValues(bool bStartingLoc);
 	int AI_foundValue(int iX, int iY, int iMinUnitRange/* = -1*/, bool bStartingLoc/* = false*/);
 	bool AI_isFinancialTrouble();
 	bool AI_demandRebukedWar(int /*PlayerTypes*/ ePlayer);
 	AttitudeTypes AI_getAttitude(int /*PlayerTypes*/ ePlayer);
 	int AI_unitValue(int /*UnitTypes*/ eUnit, int /*UnitAITypes*/ eUnitAI, CyArea* pArea);
+	int AI_civicValue(int /*CivicTypes*/ eCivic);
 	int AI_totalUnitAIs(int /*UnitAITypes*/ eUnitAI);
 	int AI_totalAreaUnitAIs(CyArea* pArea, int /*UnitAITypes*/ eUnitAI);
 	int AI_totalWaterAreaUnitAIs(CyArea* pArea, int /*UnitAITypes*/ eUnitAI);
@@ -411,6 +468,11 @@ public:
 	int AI_getAttitudeExtra(int /*PlayerTypes*/ eIndex);
 	void AI_setAttitudeExtra(int /*PlayerTypes*/ eIndex, int iNewValue);
 	void AI_changeAttitudeExtra(int /*PlayerTypes*/ eIndex, int iChange);
+	int AI_getMemoryCount(int /*PlayerTypes*/ eIndex1, int /*MemoryTypes*/ eIndex2);
+	void AI_changeMemoryCount(int /*PlayerTypes*/ eIndex1, int /*MemoryTypes*/ eIndex2, int iChange);
+	int AI_getExtraGoldTarget() const;
+	void AI_setExtraGoldTarget(int iNewValue);
+
 
 	int getScoreHistory(int iTurn) const;
 	int getEconomyHistory(int iTurn) const;
@@ -418,12 +480,20 @@ public:
 	int getAgricultureHistory(int iTurn) const;
 	int getPowerHistory(int iTurn) const;
 	int getCultureHistory(int iTurn) const;
+	int getEspionageHistory(int iTurn) const;
 
 	std::string getScriptData() const;
 	void setScriptData(std::string szNewValue);
 
 	int AI_maxGoldTrade(int iPlayer);
 	int AI_maxGoldPerTurnTrade(int iPlayer);
+
+	bool splitEmpire(int iAreaId);
+	bool canSplitEmpire() const;
+
+	bool canHaveTradeRoutesWith(int iPlayer);
+
+	void forcePeace(int iPlayer);
 
 private:
 	CvPlayer* m_pPlayer;

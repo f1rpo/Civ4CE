@@ -34,7 +34,7 @@ public:
 	void updatePowerHealth();
 	void updateCommerce();
 
-	bool canChangeWarPeace(TeamTypes eTeam) const;																			// Exposed to Python
+	bool canChangeWarPeace(TeamTypes eTeam, bool bAllowVassal = false) const;																			// Exposed to Python
 	DllExport bool canDeclareWar(TeamTypes eTeam) const;																// Exposed to Python
 	DllExport void declareWar(TeamTypes eTeam, bool bNewDiplo);										// Exposed to Python
 	DllExport void makePeace(TeamTypes eTeam, bool bBumpUnits = true);																		// Exposed to Python
@@ -42,11 +42,16 @@ public:
 	void meet(TeamTypes eTeam, bool bNewDiplo);																		// Exposed to Python
 	void signOpenBorders(TeamTypes eTeam);																				// Exposed to Python
 	void signDefensivePact(TeamTypes eTeam);																			// Exposed to Python
+	bool canSignDefensivePact(TeamTypes eTeam);
 
 	int getAssets() const;																															// Exposed to Python
 	int getPower(bool bIncludeVassals) const;																																// Exposed to Python
 	int getDefensivePower() const;																											// Exposed to Python
+	int getEnemyPower() const;
 	int getNumNukeUnits() const;																												// Exposed to Python
+	int getVotes(VoteTypes eVote, VoteSourceTypes eVoteSource) const;
+	bool isVotingMember(VoteSourceTypes eVoteSource) const;
+	bool isFullMember(VoteSourceTypes eVoteSource) const;
 
 	int getAtWarCount(bool bIgnoreMinors) const;																				// Exposed to Python
 	int getWarPlanCount(WarPlanTypes eWarPlan, bool bIgnoreMinors) const;								// Exposed to Python
@@ -64,6 +69,7 @@ public:
 	int getBuildingClassMaking(BuildingClassTypes eBuildingClass) const;								// Exposed to Python
 	int getBuildingClassCountPlusMaking(BuildingClassTypes eIndex) const;								// Exposed to Python
 	int getHasReligionCount(ReligionTypes eReligion) const;															// Exposed to Python
+	int getHasCorporationCount(CorporationTypes eCorporation) const;															// Exposed to Python
 
 	int countTotalCulture();																											// Exposed to Python
 
@@ -79,6 +85,8 @@ public:
 	DllExport int getResearchLeft(TechTypes eTech) const;																// Exposed to Python
 
 	bool hasHolyCity(ReligionTypes eReligion) const;																		// Exposed to Python
+	bool hasHeadquarters(CorporationTypes eCorporation) const;																		// Exposed to Python
+	bool hasBonus(BonusTypes eBonus) const;
 
 	bool isHuman() const;																																// Exposed to Python
 	bool isBarbarian() const;																														// Exposed to Python
@@ -91,7 +99,7 @@ public:
 	DllExport int getNumMembers() const;																								// Exposed to Python
 	DllExport void changeNumMembers(int iChange);
 
-	int getAliveCount() const;
+	DllExport int getAliveCount() const;
 	DllExport int isAlive() const;																											// Exposed to Python
 	void changeAliveCount(int iChange);
 
@@ -111,9 +119,9 @@ public:
 	int getNukeInterception() const;																										// Exposed to Python
 	void changeNukeInterception(int iChange);																			// Exposed to Python
 
-	int getForceTeamVoteEligibilityCount() const;																				// Exposed to Python	
-	bool isForceTeamVoteEligible() const;																								// Exposed to Python	
-	void changeForceTeamVoteEligibilityCount(int iChange);												// Exposed to Python	
+	int getForceTeamVoteEligibilityCount(VoteSourceTypes eVoteSource) const;																				// Exposed to Python	
+	bool isForceTeamVoteEligible(VoteSourceTypes eVoteSource) const;																								// Exposed to Python	
+	void changeForceTeamVoteEligibilityCount(VoteSourceTypes eVoteSource, int iChange);												// Exposed to Python	
 																																								
 	int getExtraWaterSeeFromCount() const;																							// Exposed to Python	
 	bool isExtraWaterSeeFrom() const;																										// Exposed to Python	
@@ -167,6 +175,10 @@ public:
 	void setVassalPower(int iPower);																					// Exposed to Python	
 	int getMasterPower() const;																							// Exposed to Python	
 	void setMasterPower(int iPower);																					// Exposed to Python	
+
+	int getEnemyWarWearinessModifier() const;																																			// Exposed to Python
+	void changeEnemyWarWearinessModifier(int iChange);						// Exposed to Python
+	void changeWarWeariness(TeamTypes eOtherTeam, const CvPlot& kPlot, int iFactor);
 
 	DllExport bool isMapCentering() const;																							// Exposed to Python	
 	void setMapCentering(bool bNewValue);																					// Exposed to Python	
@@ -224,8 +236,14 @@ public:
 	void changeRouteChange(RouteTypes eIndex, int iChange);												// Exposed to Python
 
 	DllExport int getProjectCount(ProjectTypes eIndex) const;														// Exposed to Python
-	bool isProjectMaxedOut(ProjectTypes eIndex, int iExtra = 0) const;									// Exposed to Python
-	void changeProjectCount(ProjectTypes eIndex, int iChange);										// Exposed to Python
+	DllExport int getProjectDefaultArtType(ProjectTypes eIndex) const;
+	DllExport void setProjectDefaultArtType(ProjectTypes eIndex, int value);
+	DllExport int getProjectArtType(ProjectTypes eIndex, int number) const;
+	DllExport void setProjectArtType(ProjectTypes eIndex, int number, int value);
+	DllExport bool isProjectMaxedOut(ProjectTypes eIndex, int iExtra = 0) const;									// Exposed to Python
+	DllExport bool isProjectAndArtMaxedOut(ProjectTypes eIndex) const;
+	DllExport void changeProjectCount(ProjectTypes eIndex, int iChange);		// Exposed to Python
+	DllExport void finalizeProjectArtTypes();
 
 	int getProjectMaking(ProjectTypes eIndex) const;																		// Exposed to Python
 	void changeProjectMaking(ProjectTypes eIndex, int iChange);
@@ -245,12 +263,17 @@ public:
 	DllExport int getResearchProgress(TechTypes eIndex) const;																						// Exposed to Python
 	void setResearchProgress(TechTypes eIndex, int iNewValue, PlayerTypes ePlayer);									// Exposed to Python
 	void changeResearchProgress(TechTypes eIndex, int iChange, PlayerTypes ePlayer);								// Exposed to Python
+	int changeResearchProgressPercent(TechTypes eIndex, int iPercent, PlayerTypes ePlayer);
 
 	DllExport int getTechCount(TechTypes eIndex) const;																										// Exposed to Python
 
 	int getTerrainTradeCount(TerrainTypes eIndex) const;
 	bool isTerrainTrade(TerrainTypes eIndex) const;																												// Exposed to Python
 	void changeTerrainTradeCount(TerrainTypes eIndex, int iChange);
+
+	int getRiverTradeCount() const;
+	bool isRiverTrade() const;																												// Exposed to Python
+	void changeRiverTradeCount(int iChange);
 
 	DllExport bool isHasTech(TechTypes eIndex) const;																																			// Exposed to Python
 	DllExport void setHasTech(TechTypes eIndex, bool bNewValue, PlayerTypes ePlayer, bool bFirst, bool bAnnounce);	// Exposed to Python
@@ -263,15 +286,53 @@ public:
 
 	bool isFriendlyTerritory(TeamTypes eTeam) const;
 
+	DllExport int getVictoryCountdown(VictoryTypes eIndex) const;																							// Exposed to Python
+	DllExport void setVictoryCountdown(VictoryTypes eIndex, int iTurnsLeft);
+	void changeVictoryCountdown(VictoryTypes eIndex, int iChange);
+	DllExport int getVictoryDelay(VictoryTypes eVictory) const;
+	DllExport bool canLaunch(VictoryTypes eVictory) const;		// Exposed to Python 
+	void setCanLaunch(VictoryTypes eVictory, bool bCan);
+	int getLaunchSuccessRate(VictoryTypes eVictory) const;		// Exposed to Python
+	void resetVictoryProgress();
+
+	bool isParent(TeamTypes eTeam) const;		// Exposed to Python 
+
+	int getEspionagePointsAgainstTeam(TeamTypes eIndex) const;																							// Exposed to Python
+	void setEspionagePointsAgainstTeam(TeamTypes eIndex, int iValue);																							// Exposed to Python
+	void changeEspionagePointsAgainstTeam(TeamTypes eIndex, int iChange);																				// Exposed to Python
+
+	int getEspionagePointsEver() const;																							// Exposed to Python
+	void setEspionagePointsEver(int iValue);																							// Exposed to Python
+	void changeEspionagePointsEver(int iChange);																				// Exposed to Python
+
+	int getCounterespionageTurnsLeftAgainstTeam(TeamTypes eIndex) const;																							// Exposed to Python
+	void setCounterespionageTurnsLeftAgainstTeam(TeamTypes eIndex, int iValue);																		// Exposed to Python
+	DllExport void changeCounterespionageTurnsLeftAgainstTeam(TeamTypes eIndex, int iChange);																// Exposed to Python
+
+	int getCounterespionageModAgainstTeam(TeamTypes eIndex) const;																							// Exposed to Python
+	void setCounterespionageModAgainstTeam(TeamTypes eIndex, int iValue);																		// Exposed to Python
+	DllExport void changeCounterespionageModAgainstTeam(TeamTypes eIndex, int iChange);																// Exposed to Python
+
+	void verifySpyUnitsValidPlot();
+
+	void setForceRevealedBonus(BonusTypes eBonus, bool bRevealed);
+	bool isForceRevealedBonus(BonusTypes eBonus) const;
+
+	DllExport int countNumHumanGameTurnActive() const;
+	void setTurnActive(bool bNewValue, bool bTurn = true);
+	bool isTurnActive() const;
+
+	bool hasShrine(ReligionTypes eReligion);
+
 	virtual void AI_init() = 0;
 	virtual void AI_reset() = 0;
 	virtual void AI_doTurnPre() = 0;
 	virtual void AI_doTurnPost() = 0;
 	virtual void AI_makeAssignWorkDirty() = 0;
 	virtual void AI_updateAreaStragies(bool bTargets = true) = 0;
-	virtual bool AI_shareWar(TeamTypes eTeam) const = 0;																									// Exposed to Python
+	virtual bool AI_shareWar(TeamTypes eTeam) const = 0;			// Exposed to Python
 	virtual void AI_updateWorstEnemy() = 0;
-	virtual int AI_getAtWarCounter(TeamTypes eIndex) const = 0;
+	virtual int AI_getAtWarCounter(TeamTypes eIndex) const = 0;     // Exposed to Python
 	virtual void AI_setAtWarCounter(TeamTypes eIndex, int iNewValue) = 0;
 	virtual int AI_getAtPeaceCounter(TeamTypes eIndex) const = 0;
 	virtual void AI_setAtPeaceCounter(TeamTypes eIndex, int iNewValue) = 0;
@@ -283,7 +344,7 @@ public:
 	virtual void AI_setDefensivePactCounter(TeamTypes eIndex, int iNewValue) = 0;
 	virtual int AI_getShareWarCounter(TeamTypes eIndex) const = 0;
 	virtual void AI_setShareWarCounter(TeamTypes eIndex, int iNewValue) = 0;
-	virtual int AI_getWarSuccess(TeamTypes eIndex) const = 0;
+	virtual int AI_getWarSuccess(TeamTypes eIndex) const = 0;    // Exposed to Python
 	virtual void AI_setWarSuccess(TeamTypes eIndex, int iNewValue) = 0;
 	virtual void AI_changeWarSuccess(TeamTypes eIndex, int iChange) = 0;
 	virtual int AI_getEnemyPeacetimeTradeValue(TeamTypes eIndex) const = 0;
@@ -294,7 +355,7 @@ public:
 	virtual bool AI_isChosenWar(TeamTypes eIndex) const = 0;
 	virtual bool AI_isSneakAttackPreparing(TeamTypes eIndex) const = 0;
 	virtual bool AI_isSneakAttackReady(TeamTypes eIndex) const = 0;
-	virtual void AI_setWarPlan(TeamTypes eIndex, WarPlanTypes eNewValue) = 0;
+	virtual void AI_setWarPlan(TeamTypes eIndex, WarPlanTypes eNewValue, bool bWar = true) = 0;
 
 protected:
 
@@ -305,7 +366,6 @@ protected:
 	int m_iTotalPopulation;
 	int m_iTotalLand;
 	int m_iNukeInterception;
-	int m_iForceTeamVoteEligibilityCount;
 	int m_iExtraWaterSeeFromCount;
 	int m_iMapTradingCount;
 	int m_iTechTradingCount;
@@ -320,6 +380,9 @@ protected:
 	int m_iWaterWorkCount;
 	int m_iVassalPower;
 	int m_iMasterPower;
+	int m_iEnemyWarWearinessModifier;
+	int m_iRiverTradeCount;
+	int m_iEspionagePointsEver;
 
 	bool m_bMapCentering;
 	bool m_bCapitulated;
@@ -331,6 +394,7 @@ protected:
 	int* m_aiTechShareCount;
 	int* m_aiCommerceFlexibleCount;
 	int* m_aiExtraMoves;
+	int* m_aiForceTeamVoteEligibilityCount;
 
 	bool* m_abAtWar;
 	bool* m_abHasMet;
@@ -339,9 +403,12 @@ protected:
 	bool* m_abDefensivePact;
 	bool* m_abForcePeace;
 	bool* m_abVassal;
+	bool* m_abCanLaunch;
 
 	int* m_paiRouteChange;
 	int* m_paiProjectCount;
+	int* m_paiProjectDefaultArtTypes;
+	std::vector<int> *m_pavProjectArtTypes;
 	int* m_paiProjectMaking;
 	int* m_paiUnitClassCount;
 	int* m_paiBuildingClassCount;
@@ -349,11 +416,18 @@ protected:
 	int* m_paiResearchProgress;
 	int* m_paiTechCount;
 	int* m_paiTerrainTradeCount;
+	int* m_aiVictoryCountdown;
+
+	int* m_aiEspionagePointsAgainstTeam;
+	int* m_aiCounterespionageTurnsLeftAgainstTeam;
+	int* m_aiCounterespionageModAgainstTeam;
 
 	bool* m_pabHasTech;
 	bool* m_pabNoTradeTech;
 
 	int** m_ppaaiImprovementYieldChange;
+
+	std::vector<BonusTypes> m_aeRevealedBonuses;
 
 	void doWarWeariness();
 
@@ -365,27 +439,10 @@ protected:
 	void processTech(TechTypes eTech, int iChange);
 
 	void cancelDefensivePacts();
-	void announceTechToPlayers(TechTypes eIndex);
+	void announceTechToPlayers(TechTypes eIndex, bool bPartial = false);
 
 	virtual void read(FDataStreamBase* pStream);
 	virtual void write(FDataStreamBase* pStream);
-
-// CACHE: cache frequently used values
-///////////////////////////////////////
-public:
-	bool hasShrine(ReligionTypes eReligion);
-
-protected:
-	int		m_iPlaceholderCount;
-	int*	m_aiPlaceholderArray;
-
-	void constructCache();	// called from constructor
-	void destructCache();	// called from destructor
-	void initCache();
-	void uninitCache();
-	void resetCache(bool bConstructorCall = false);
-
-	void doUpdateCacheOnTurn();	
 };
 
 #endif

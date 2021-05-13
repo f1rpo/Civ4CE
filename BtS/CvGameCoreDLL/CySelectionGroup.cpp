@@ -145,6 +145,11 @@ bool CySelectionGroup::alwaysInvisible()
 	return m_pSelectionGroup ? m_pSelectionGroup->alwaysInvisible() : false;
 }
 
+bool CySelectionGroup::isInvisible(int /*TeamTypes*/ eTeam)
+{
+	return m_pSelectionGroup ? m_pSelectionGroup->isInvisible((TeamTypes) eTeam) : false;
+}
+
 int CySelectionGroup::countNumUnitAIType(UnitAITypes eUnitAI)
 {
 	return m_pSelectionGroup ? m_pSelectionGroup->countNumUnitAIType(eUnitAI) : -1;
@@ -286,6 +291,11 @@ MissionData* CySelectionGroup::getMissionFromQueue(int iIndex)
 CyUnit* CySelectionGroup::getHeadUnit()
 {
 	return m_pSelectionGroup ? new CyUnit(m_pSelectionGroup->getHeadUnit()) : NULL;
+}
+
+CyUnit* CySelectionGroup::getUnitAt(int index)
+{
+	return m_pSelectionGroup ? new CyUnit(m_pSelectionGroup->getUnitAt(index)) : NULL;
 }
 
 int CySelectionGroup::getMissionType( int iNode )

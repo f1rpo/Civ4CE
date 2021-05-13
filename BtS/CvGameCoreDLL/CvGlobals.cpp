@@ -30,34 +30,56 @@
 			dst[i] = src[i]; \
 	}
 
-template <typename T>
-bool readInfoArray(FDataStreamBase* pStream, int& num, T*& array, const char* szClassName)
+template <class T>
+void deleteInfoArray(std::vector<T*>& array)
 {
+	for (std::vector<T*>::iterator it = array.begin(); it != array.end(); ++it)
+	{
+		SAFE_DELETE(*it);
+	}
+
+	array.clear();
+}
+
+template <class T>
+bool readInfoArray(FDataStreamBase* pStream, std::vector<T*>& array, const char* szClassName)
+{
+	GC.addToInfosVectors(&array);
+
 	int iSize;
 	pStream->Read(&iSize);
 	FAssertMsg(iSize==sizeof(T), CvString::format("class size doesn't match cache size - check info read/write functions:%s", szClassName).c_str());
 	if (iSize!=sizeof(T))
 		return false;
-	pStream->Read(&num);
-	SAFE_DELETE_ARRAY(array);
-	array = new T[num]; 
-	for(int i=0;i<num;i++)
+	pStream->Read(&iSize);
+
+	deleteInfoArray(array);
+
+	for (int i = 0; i < iSize; ++i)
 	{
-		array[i].read(pStream);
-		GC.setInfoTypeFromString(array[i].getType(), i);
+		array.push_back(new T);
 	}
+
+	int iIndex = 0;
+	for (std::vector<T*>::iterator it = array.begin(); it != array.end(); ++it)
+	{
+		(*it)->read(pStream);
+		GC.setInfoTypeFromString((*it)->getType(), iIndex);
+		++iIndex;
+	}
+
 	return true;
 }
 
-template <typename T>
-bool writeInfoArray(FDataStreamBase* pStream, int num, T* array)
+template <class T>
+bool writeInfoArray(FDataStreamBase* pStream,  std::vector<T*>& array)
 {
 	int iSize = sizeof(T);
 	pStream->Write(iSize);
-	pStream->Write(num);
-	for(int i=0;i<num;i++)
+	pStream->Write(array.size());
+	for (std::vector<T*>::iterator it = array.begin(); it != array.end(); ++it)
 	{
-		array[i].write(pStream);
+		(*it)->write(pStream);
 	}
 	return true;
 }
@@ -72,15 +94,6 @@ CvGlobals gGlobals;
 //
 CvGlobals::CvGlobals() :
 m_bGraphicsInitialized(false),
-m_iNumRouteInfos(0),
-m_iNumTechInfos(0),
-m_iNumBuildingInfos(0),
-m_iNumTraitInfos(0),
-m_iNumProcessInfos(0),
-m_iNumVoteInfos(0),
-m_iNumBuildingClassInfos(0),
-m_iNumUnitClassInfos(0),
-m_iNumReligionInfos(0),
 m_bLogging(false),
 m_bRandLogging(false),
 m_bOverwriteLogs(false),
@@ -107,7 +120,6 @@ m_statsReporter(NULL),
 m_map(NULL),
 m_diplomacyScreen(NULL),
 m_mpDiplomacyScreen(NULL),
-m_pLightDebugScreen(NULL),
 m_pathFinder(NULL),
 m_interfacePathFinder(NULL),
 m_stepFinder(NULL),
@@ -134,13 +146,75 @@ m_iNUM_UNIT_PREREQ_OR_BONUSES(0),
 m_iNUM_BUILDING_PREREQ_OR_BONUSES(0),
 m_iFOOD_CONSUMPTION_PER_POPULATION(0),
 m_iMAX_HIT_POINTS(0),
+m_iPATH_DAMAGE_WEIGHT(0),
 m_iHILLS_EXTRA_DEFENSE(0),
 m_iRIVER_ATTACK_MODIFIER(0),
 m_iAMPHIB_ATTACK_MODIFIER(0),
 m_iHILLS_EXTRA_MOVEMENT(0),
+m_iMAX_PLOT_LIST_ROWS(0),
+m_iUNIT_MULTISELECT_MAX(0),
+m_iPERCENT_ANGER_DIVISOR(0),
+m_iEVENT_MESSAGE_TIME(0),
+m_iROUTE_FEATURE_GROWTH_MODIFIER(0),
+m_iFEATURE_GROWTH_MODIFIER(0),
+m_iMIN_CITY_RANGE(0),
+m_iCITY_MAX_NUM_BUILDINGS(0),
+m_iNUM_UNIT_AND_TECH_PREREQS(0),
+m_iNUM_AND_TECH_PREREQS(0),
+m_iNUM_OR_TECH_PREREQS(0),
+m_iLAKE_MAX_AREA_SIZE(0),
+m_iNUM_ROUTE_PREREQ_OR_BONUSES(0),
+m_iNUM_BUILDING_AND_TECH_PREREQS(0),
+m_iMIN_WATER_SIZE_FOR_OCEAN(0),
 m_iFORTIFY_MODIFIER_PER_TURN(0),
 m_iMAX_CITY_DEFENSE_DAMAGE(0),
-m_paHints(NULL)
+m_iNUM_CORPORATION_PREREQ_BONUSES(0),
+m_iPEAK_SEE_THROUGH_CHANGE(0),
+m_iHILLS_SEE_THROUGH_CHANGE(0),
+m_iSEAWATER_SEE_FROM_CHANGE(0),
+m_iPEAK_SEE_FROM_CHANGE(0),
+m_iHILLS_SEE_FROM_CHANGE(0),
+m_fCAMERA_MIN_YAW(0),
+m_fCAMERA_MAX_YAW(0),
+m_fCAMERA_FAR_CLIP_Z_HEIGHT(0),
+m_fCAMERA_MAX_TRAVEL_DISTANCE(0),
+m_fCAMERA_START_DISTANCE(0),
+m_fAIR_BOMB_HEIGHT(0),
+m_fPLOT_SIZE(0),
+m_fCAMERA_SPECIAL_PITCH(0),
+m_fCAMERA_MAX_TURN_OFFSET(0),
+m_fCAMERA_MIN_DISTANCE(0),
+m_fCAMERA_UPPER_PITCH(0),
+m_fCAMERA_LOWER_PITCH(0),
+m_fFIELD_OF_VIEW(0),
+m_fSHADOW_SCALE(0),
+m_fUNIT_MULTISELECT_DISTANCE(0),
+m_iUSE_CANNOT_FOUND_CITY_CALLBACK(0),
+m_iUSE_CAN_FOUND_CITIES_ON_WATER_CALLBACK(0),
+m_iUSE_IS_PLAYER_RESEARCH_CALLBACK(0),
+m_iUSE_CAN_RESEARCH_CALLBACK(0),
+m_iUSE_CANNOT_DO_CIVIC_CALLBACK(0),
+m_iUSE_CAN_DO_CIVIC_CALLBACK(0),
+m_iUSE_CANNOT_CONSTRUCT_CALLBACK(0),
+m_iUSE_CAN_CONSTRUCT_CALLBACK(0),
+m_iUSE_CAN_DECLARE_WAR_CALLBACK(0),
+m_iUSE_CANNOT_RESEARCH_CALLBACK(0),
+m_iUSE_GET_UNIT_COST_MOD_CALLBACK(0),
+m_iUSE_GET_CITY_FOUND_VALUE_CALLBACK(0),
+m_iUSE_CANNOT_HANDLE_ACTION_CALLBACK(0),
+m_iUSE_CAN_BUILD_CALLBACK(0),
+m_iUSE_CANNOT_TRAIN_CALLBACK(0),
+m_iUSE_CAN_TRAIN_CALLBACK(0),
+m_iUSE_UNIT_CANNOT_MOVE_INTO_CALLBACK(0),
+m_iUSE_USE_CANNOT_SPREAD_RELIGION_CALLBACK(0),
+m_iUSE_FINISH_TEXT_CALLBACK(0),
+m_iUSE_ON_UNIT_SET_XY_CALLBACK(0),
+m_iUSE_ON_UNIT_SELECTED_CALLBACK(0),
+m_iUSE_ON_UPDATE_CALLBACK(0),
+m_iUSE_ON_UNIT_CREATED_CALLBACK(0),
+m_iUSE_ON_UNIT_LOST_CALLBACK(0),
+m_paHints(NULL),
+m_paMainMenus(NULL)
 {
 }
 
@@ -231,7 +305,7 @@ void CvGlobals::init()
 		{-1, 13, 12, 11, -1,}
 	};
 
-	DirectionTypes aeTurnLeftDirection[NUM_DIRECTION_TYPES] =
+	DirectionTypes aeTurnRightDirection[NUM_DIRECTION_TYPES] =
 	{
 		DIRECTION_NORTHEAST,	// DIRECTION_NORTH
 		DIRECTION_EAST,				// DIRECTION_NORTHEAST
@@ -243,7 +317,7 @@ void CvGlobals::init()
 		DIRECTION_NORTH,			// DIRECTION_NORTHWEST
 	};
 
-	DirectionTypes aeTurnRightDirection[NUM_DIRECTION_TYPES] =
+	DirectionTypes aeTurnLeftDirection[NUM_DIRECTION_TYPES] =
 	{
 		DIRECTION_NORTHWEST,	// DIRECTION_NORTH
 		DIRECTION_NORTH,			// DIRECTION_NORTHEAST
@@ -313,7 +387,7 @@ void CvGlobals::uninit()
 
 	SAFE_DELETE(m_game);
 	SAFE_DELETE(m_map);
-	
+
 	CvPlayerAI::freeStatics();
 	CvTeamAI::freeStatics();
 
@@ -336,7 +410,6 @@ void CvGlobals::uninit()
 	m_interface=NULL;
 	m_diplomacyScreen=NULL;
 	m_mpDiplomacyScreen=NULL;
-	m_pLightDebugScreen=NULL;
 	m_pathFinder=NULL;
 	m_interfacePathFinder=NULL;
 	m_stepFinder=NULL;
@@ -346,6 +419,7 @@ void CvGlobals::uninit()
 	m_plotGroupFinder=NULL;
 
 	m_typesMap.clear();
+	m_aInfoVectors.clear();
 }
 
 void CvGlobals::clearTypesMap()
@@ -366,11 +440,6 @@ CvDiplomacyScreen* CvGlobals::getDiplomacyScreen()
 CMPDiplomacyScreen* CvGlobals::getMPDiplomacyScreen()
 {
 	return m_mpDiplomacyScreen;
-}
-
-CvLightDebugScreen *CvGlobals::getLightDebugScreenPtr()
-{
-	return m_pLightDebugScreen;
 }
 
 CvMessageCodeTranslator& CvGlobals::getMessageCodes()
@@ -493,7 +562,7 @@ NiPoint3& CvGlobals::getPt3Origin()
 	return m_pt3Origin;
 }
 
-CvInterfaceModeInfo*& CvGlobals::getInterfaceModeInfo()		// For Moose - XML Load Util and CvInfos
+std::vector<CvInterfaceModeInfo*>& CvGlobals::getInterfaceModeInfo()		// For Moose - XML Load Util and CvInfos
 {
 	return m_paInterfaceModeInfo;
 }
@@ -502,7 +571,7 @@ CvInterfaceModeInfo& CvGlobals::getInterfaceModeInfo(InterfaceModeTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < NUM_INTERFACEMODE_TYPES);
-	return m_paInterfaceModeInfo[e];
+	return *(m_paInterfaceModeInfo[e]);
 }
 
 NiPoint3& CvGlobals::getPt3CameraDir()
@@ -607,12 +676,12 @@ DirectionTypes CvGlobals::getXYDirection(int i, int j)
 	return m_aaeXYDirection[i][j];
 }
 
-int& CvGlobals::getNumWorldInfos()
+int CvGlobals::getNumWorldInfos()
 {
-	return m_iNumWorldInfos;
+	return (int)m_paWorldInfo.size();
 }
 
-CvWorldInfo*& CvGlobals::getWorldInfo()
+std::vector<CvWorldInfo*>& CvGlobals::getWorldInfo()
 {
 	return m_paWorldInfo;
 }
@@ -621,19 +690,19 @@ CvWorldInfo& CvGlobals::getWorldInfo(WorldSizeTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumWorldInfos());
-	return m_paWorldInfo[e];
+	return *(m_paWorldInfo[e]);
 }
 
 /////////////////////////////////////////////
 // CLIMATE
 /////////////////////////////////////////////
 
-int& CvGlobals::getNumClimateInfos()
+int CvGlobals::getNumClimateInfos()
 {
-	return m_iNumClimateInfos;
+	return (int)m_paClimateInfo.size();
 }
 
-CvClimateInfo*& CvGlobals::getClimateInfo()
+std::vector<CvClimateInfo*>& CvGlobals::getClimateInfo()
 {
 	return m_paClimateInfo;
 }
@@ -642,19 +711,19 @@ CvClimateInfo& CvGlobals::getClimateInfo(ClimateTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumClimateInfos());
-	return m_paClimateInfo[e];
+	return *(m_paClimateInfo[e]);
 }
 
 /////////////////////////////////////////////
 // SEALEVEL
 /////////////////////////////////////////////
 
-int& CvGlobals::getNumSeaLevelInfos()
+int CvGlobals::getNumSeaLevelInfos()
 {
-	return m_iNumSeaLevelInfos;
+	return (int)m_paSeaLevelInfo.size();
 }
 
-CvSeaLevelInfo*& CvGlobals::getSeaLevelInfo()
+std::vector<CvSeaLevelInfo*>& CvGlobals::getSeaLevelInfo()
 {
 	return m_paSeaLevelInfo;
 }
@@ -663,30 +732,50 @@ CvSeaLevelInfo& CvGlobals::getSeaLevelInfo(SeaLevelTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumSeaLevelInfos());
-	return m_paSeaLevelInfo[e];
+	return *(m_paSeaLevelInfo[e]);
 }
 
-int& CvGlobals::getNumHints()
+int CvGlobals::getNumHints()
 {
-	return m_iNumHints;
+	return (int)m_paHints.size();
 }
 
-CvInfoBase*& CvGlobals::getHints()
+std::vector<CvInfoBase*>& CvGlobals::getHints()
 {
 	return m_paHints;
 }
 
 CvInfoBase& CvGlobals::getHints(int i)
 {
-	return m_paHints[i];
+	return *(m_paHints[i]);
 }
 
-int& CvGlobals::getNumColorInfos()
+int CvGlobals::getNumMainMenus()
 {
-	return m_iNumColorInfos;
+	return (int)m_paMainMenus.size();
 }
 
-CvColorInfo*& CvGlobals::getColorInfo()
+std::vector<CvMainMenuInfo*>& CvGlobals::getMainMenus()
+{
+	return m_paMainMenus;
+}
+
+CvMainMenuInfo& CvGlobals::getMainMenus(int i)
+{
+	if (i >= getNumMainMenus())
+	{
+		return *(m_paMainMenus[0]);
+	}
+
+	return *(m_paMainMenus[i]);
+}
+
+int CvGlobals::getNumColorInfos()
+{
+	return (int)m_paColorInfo.size();
+}
+
+std::vector<CvColorInfo*>& CvGlobals::getColorInfo()
 {
 	return m_paColorInfo;
 }
@@ -695,16 +784,16 @@ CvColorInfo& CvGlobals::getColorInfo(ColorTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumColorInfos());
-	return m_paColorInfo[e];
+	return *(m_paColorInfo[e]);
 }
 
 
-int& CvGlobals::getNumPlayerColorInfos()
+int CvGlobals::getNumPlayerColorInfos()
 {
-	return m_iNumPlayerColorInfos;
+	return (int)m_paPlayerColorInfo.size();
 }
 
-CvPlayerColorInfo*& CvGlobals::getPlayerColorInfo()
+std::vector<CvPlayerColorInfo*>& CvGlobals::getPlayerColorInfo()
 {
 	return m_paPlayerColorInfo;
 }
@@ -713,15 +802,15 @@ CvPlayerColorInfo& CvGlobals::getPlayerColorInfo(PlayerColorTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumPlayerColorInfos());
-	return m_paPlayerColorInfo[e];
+	return *(m_paPlayerColorInfo[e]);
 }
 
-int& CvGlobals::getNumAdvisorInfos()
+int CvGlobals::getNumAdvisorInfos()
 {
-	return m_iNumAdvisorInfos;
+	return (int)m_paAdvisorInfo.size();
 }
 
-CvAdvisorInfo*& CvGlobals::getAdvisorInfo()
+std::vector<CvAdvisorInfo*>& CvGlobals::getAdvisorInfo()
 {
 	return m_paAdvisorInfo;
 }
@@ -730,15 +819,15 @@ CvAdvisorInfo& CvGlobals::getAdvisorInfo(AdvisorTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumAdvisorInfos());
-	return m_paAdvisorInfo[e];
+	return *(m_paAdvisorInfo[e]);
 }
 
-int& CvGlobals::getNumRouteModelInfos()
+int CvGlobals::getNumRouteModelInfos()
 {
-	return m_iNumRouteModelInfos;
+	return (int)m_paRouteModelInfo.size();
 }
 
-CvRouteModelInfo*& CvGlobals::getRouteModelInfo()
+std::vector<CvRouteModelInfo*>& CvGlobals::getRouteModelInfo()
 {
 	return m_paRouteModelInfo;
 }
@@ -747,20 +836,15 @@ CvRouteModelInfo& CvGlobals::getRouteModelInfo(int i)
 {
 	FAssert(i > -1);
 	FAssert(i < GC.getNumRouteModelInfos());
-	return m_paRouteModelInfo[i];
+	return *(m_paRouteModelInfo[i]);
 }
 
-float& CvGlobals::getRouteZBias()
+int CvGlobals::getNumRiverInfos()
 {
-	return m_fRouteZBias;
+	return (int)m_paRiverInfo.size();
 }
 
-int& CvGlobals::getNumRiverInfos()
-{
-	return m_iNumRiverInfos;
-}
-
-CvRiverInfo*& CvGlobals::getRiverInfo()
+std::vector<CvRiverInfo*>& CvGlobals::getRiverInfo()
 {
 	return m_paRiverInfo;
 }
@@ -769,20 +853,15 @@ CvRiverInfo& CvGlobals::getRiverInfo(RiverTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumRiverInfos());
-	return m_paRiverInfo[e];
+	return *(m_paRiverInfo[e]);
 }
 
-float& CvGlobals::getRiverZBias()
+int CvGlobals::getNumRiverModelInfos()
 {
-	return m_fRiverZBias;
+	return (int)m_paRiverModelInfo.size();
 }
 
-int& CvGlobals::getNumRiverModelInfos()
-{
-	return m_iNumRiverModelInfos;
-}
-
-CvRiverModelInfo*& CvGlobals::getRiverModelInfo()
+std::vector<CvRiverModelInfo*>& CvGlobals::getRiverModelInfo()
 {
 	return m_paRiverModelInfo;
 }
@@ -791,15 +870,15 @@ CvRiverModelInfo& CvGlobals::getRiverModelInfo(int i)
 {
 	FAssert(i > -1);
 	FAssert(i < GC.getNumRiverModelInfos());
-	return m_paRiverModelInfo[i];
+	return *(m_paRiverModelInfo[i]);
 }
 
-int& CvGlobals::getNumWaterPlaneInfos()
+int CvGlobals::getNumWaterPlaneInfos()
 {
-	return m_iNumWaterPlaneInfos;
+	return (int)m_paWaterPlaneInfo.size();
 }
 
-CvWaterPlaneInfo*& CvGlobals::getWaterPlaneInfo()		// For Moose - CvDecal and CvWater
+std::vector<CvWaterPlaneInfo*>& CvGlobals::getWaterPlaneInfo()		// For Moose - CvDecal and CvWater
 {
 	return m_paWaterPlaneInfo;
 }
@@ -808,15 +887,49 @@ CvWaterPlaneInfo& CvGlobals::getWaterPlaneInfo(int i)
 {
 	FAssert(i > -1);
 	FAssert(i < GC.getNumWaterPlaneInfos());
-	return m_paWaterPlaneInfo[i];
+	return *(m_paWaterPlaneInfo[i]);
 }
 
-int& CvGlobals::getNumAnimationPathInfos()
+int CvGlobals::getNumTerrainPlaneInfos()
 {
-	return m_iNumAnimationPathInfos;
+	return (int)m_paTerrainPlaneInfo.size();
 }
 
-CvAnimationPathInfo*& CvGlobals::getAnimationPathInfo()
+std::vector<CvTerrainPlaneInfo*>& CvGlobals::getTerrainPlaneInfo()
+{
+	return m_paTerrainPlaneInfo;
+}
+
+CvTerrainPlaneInfo& CvGlobals::getTerrainPlaneInfo(int i)
+{
+	FAssert(i > -1);
+	FAssert(i < GC.getNumTerrainPlaneInfos());
+	return *(m_paTerrainPlaneInfo[i]);
+}
+
+int CvGlobals::getNumCameraOverlayInfos()
+{
+	return (int)m_paCameraOverlayInfo.size();
+}
+
+std::vector<CvCameraOverlayInfo*>& CvGlobals::getCameraOverlayInfo()
+{
+	return m_paCameraOverlayInfo;
+}
+
+CvCameraOverlayInfo& CvGlobals::getCameraOverlayInfo(int i)
+{
+	FAssert(i > -1);
+	FAssert(i < GC.getNumCameraOverlayInfos());
+	return *(m_paCameraOverlayInfo[i]);
+}
+
+int CvGlobals::getNumAnimationPathInfos()
+{
+	return (int)m_paAnimationPathInfo.size();
+}
+
+std::vector<CvAnimationPathInfo*>& CvGlobals::getAnimationPathInfo()
 {
 	return m_paAnimationPathInfo;
 }
@@ -825,15 +938,15 @@ CvAnimationPathInfo& CvGlobals::getAnimationPathInfo(AnimationPathTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumAnimationPathInfos());
-	return m_paAnimationPathInfo[e];
+	return *(m_paAnimationPathInfo[e]);
 }
 
-int& CvGlobals::getNumAnimationCategoryInfos()
+int CvGlobals::getNumAnimationCategoryInfos()
 {
-	return m_iNumAnimationCategoryInfos;
+	return (int)m_paAnimationCategoryInfo.size();
 }
 
-CvAnimationCategoryInfo*& CvGlobals::getAnimationCategoryInfo()
+std::vector<CvAnimationCategoryInfo*>& CvGlobals::getAnimationCategoryInfo()
 {
 	return m_paAnimationCategoryInfo;
 }
@@ -842,15 +955,15 @@ CvAnimationCategoryInfo& CvGlobals::getAnimationCategoryInfo(AnimationCategoryTy
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumAnimationCategoryInfos());
-	return m_paAnimationCategoryInfo[e];
+	return *(m_paAnimationCategoryInfo[e]);
 }
 
-int& CvGlobals::getNumEntityEventInfos()
+int CvGlobals::getNumEntityEventInfos()
 {
-	return m_iNumEntityEventInfos;
+	return (int)m_paEntityEventInfo.size();
 }
 
-CvEntityEventInfo*& CvGlobals::getEntityEventInfo()
+std::vector<CvEntityEventInfo*>& CvGlobals::getEntityEventInfo()
 {
 	return m_paEntityEventInfo;
 }
@@ -859,15 +972,15 @@ CvEntityEventInfo& CvGlobals::getEntityEventInfo(EntityEventTypes e)
 {
 	FAssert( e > -1 );
 	FAssert( e < GC.getNumEntityEventInfos() );
-	return m_paEntityEventInfo[e];
+	return *(m_paEntityEventInfo[e]);
 }
 
-int& CvGlobals::getNumEffectInfos()
+int CvGlobals::getNumEffectInfos()
 {
-	return m_iNumEffectInfos;
+	return (int)m_paEffectInfo.size();
 }
 
-CvEffectInfo*& CvGlobals::getEffectInfo()
+std::vector<CvEffectInfo*>& CvGlobals::getEffectInfo()
 {
 	return m_paEffectInfo;
 }
@@ -876,16 +989,16 @@ CvEffectInfo& CvGlobals::getEffectInfo(int i)
 {
 	FAssert(i > -1);
 	FAssert(i < GC.getNumEffectInfos());
-	return m_paEffectInfo[i];
+	return *(m_paEffectInfo[i]);
 }
 
 
-int& CvGlobals::getNumAttachableInfos()
+int CvGlobals::getNumAttachableInfos()
 {
-	return m_iNumAttachableInfos;
+	return (int)m_paAttachableInfo.size();
 }
 
-CvAttachableInfo*& CvGlobals::getAttachableInfo()
+std::vector<CvAttachableInfo*>& CvGlobals::getAttachableInfo()
 {
 	return m_paAttachableInfo;
 }
@@ -894,30 +1007,30 @@ CvAttachableInfo& CvGlobals::getAttachableInfo(int i)
 {
 	FAssert(i > -1);
 	FAssert(i < GC.getNumAttachableInfos());
-	return m_paAttachableInfo[i];
+	return *(m_paAttachableInfo[i]);
 }
 
-int& CvGlobals::getNumCameraInfos()
+int CvGlobals::getNumCameraInfos()
 {
-	return m_iNumCameraInfos;
+	return (int)m_paCameraInfo.size();
 }
 
-CvCameraInfo*& CvGlobals::getCameraInfo()
+std::vector<CvCameraInfo*>& CvGlobals::getCameraInfo()
 {
 	return m_paCameraInfo;
 }
 
 CvCameraInfo& CvGlobals::getCameraInfo(CameraAnimationTypes eCameraAnimationNum)
 {
-	return m_paCameraInfo[eCameraAnimationNum];
+	return *(m_paCameraInfo[eCameraAnimationNum]);
 }
 
-int& CvGlobals::getNumUnitFormationInfos()
+int CvGlobals::getNumUnitFormationInfos()
 {
-	return m_iNumUnitFormationInfos;
+	return (int)m_paUnitFormationInfo.size();
 }
 
-CvUnitFormationInfo*& CvGlobals::getUnitFormationInfo()		// For Moose - CvUnitEntity
+std::vector<CvUnitFormationInfo*>& CvGlobals::getUnitFormationInfo()		// For Moose - CvUnitEntity
 {
 	return m_paUnitFormationInfo;
 }
@@ -926,27 +1039,27 @@ CvUnitFormationInfo& CvGlobals::getUnitFormationInfo(int i)
 {
 	FAssert(i > -1);
 	FAssert(i < GC.getNumUnitFormationInfos());
-	return m_paUnitFormationInfo[i];
+	return *(m_paUnitFormationInfo[i]);
 }
 
 // TEXT
-int& CvGlobals::getNumGameTextXML()
+int CvGlobals::getNumGameTextXML()
 {
-	return m_iNumGameTextXML;
+	return (int)m_paGameTextXML.size();
 }
 
-CvGameText*& CvGlobals::getGameTextXML()
+std::vector<CvGameText*>& CvGlobals::getGameTextXML()
 {
 	return m_paGameTextXML;
 }
 
 // Landscape INFOS
-int& CvGlobals::getNumLandscapeInfos()
+int CvGlobals::getNumLandscapeInfos()
 {
-	return m_iNumLandscapeInfos;
+	return (int)m_paLandscapeInfo.size();
 }
 
-CvLandscapeInfo*& CvGlobals::getLandscapeInfo()
+std::vector<CvLandscapeInfo*>& CvGlobals::getLandscapeInfo()
 {
 	return m_paLandscapeInfo;
 }
@@ -955,7 +1068,7 @@ CvLandscapeInfo& CvGlobals::getLandscapeInfo(int iIndex)
 {
 	FAssert(iIndex > -1);
 	FAssert(iIndex < GC.getNumLandscapeInfos());
-	return m_paLandscapeInfo[iIndex];
+	return *(m_paLandscapeInfo[iIndex]);
 }
 
 int CvGlobals::getActiveLandscapeID()
@@ -969,12 +1082,12 @@ void CvGlobals::setActiveLandscapeID(int iLandscapeID)
 }
 
 
-int& CvGlobals::getNumTerrainInfos()
+int CvGlobals::getNumTerrainInfos()
 {
-	return m_iNumTerrainInfos;
+	return (int)m_paTerrainInfo.size();
 }
 
-CvTerrainInfo*& CvGlobals::getTerrainInfo()		// For Moose - XML Load Util, CvInfos, CvTerrainTypeWBPalette
+std::vector<CvTerrainInfo*>& CvGlobals::getTerrainInfo()		// For Moose - XML Load Util, CvInfos, CvTerrainTypeWBPalette
 {
 	return m_paTerrainInfo;
 }
@@ -983,15 +1096,15 @@ CvTerrainInfo& CvGlobals::getTerrainInfo(TerrainTypes eTerrainNum)
 {
 	FAssert(eTerrainNum > -1);
 	FAssert(eTerrainNum < GC.getNumTerrainInfos());
-	return m_paTerrainInfo[eTerrainNum];
+	return *(m_paTerrainInfo[eTerrainNum]);
 }
 
-int& CvGlobals::getNumBonusClassInfos()
+int CvGlobals::getNumBonusClassInfos()
 {
-	return m_iNumBonusClassInfos;
+	return (int)m_paBonusClassInfo.size();
 }
 
-CvBonusClassInfo*& CvGlobals::getBonusClassInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvBonusClassInfo*>& CvGlobals::getBonusClassInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paBonusClassInfo;
 }
@@ -1000,16 +1113,16 @@ CvBonusClassInfo& CvGlobals::getBonusClassInfo(BonusClassTypes eBonusNum)
 {
 	FAssert(eBonusNum > -1);
 	FAssert(eBonusNum < GC.getNumBonusClassInfos());
-	return m_paBonusClassInfo[eBonusNum];
+	return *(m_paBonusClassInfo[eBonusNum]);
 }
 
 
-int& CvGlobals::getNumBonusInfos()
+int CvGlobals::getNumBonusInfos()
 {
-	return m_iNumBonusInfos;
+	return (int)m_paBonusInfo.size();
 }
 
-CvBonusInfo*& CvGlobals::getBonusInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvBonusInfo*>& CvGlobals::getBonusInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paBonusInfo;
 }
@@ -1018,15 +1131,15 @@ CvBonusInfo& CvGlobals::getBonusInfo(BonusTypes eBonusNum)
 {
 	FAssert(eBonusNum > -1);
 	FAssert(eBonusNum < GC.getNumBonusInfos());
-	return m_paBonusInfo[eBonusNum];
+	return *(m_paBonusInfo[eBonusNum]);
 }
 
-int& CvGlobals::getNumFeatureInfos()
+int CvGlobals::getNumFeatureInfos()
 {
-	return m_iNumFeatureInfos;
+	return (int)m_paFeatureInfo.size();
 }
 
-CvFeatureInfo*& CvGlobals::getFeatureInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvFeatureInfo*>& CvGlobals::getFeatureInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paFeatureInfo;
 }
@@ -1035,7 +1148,7 @@ CvFeatureInfo& CvGlobals::getFeatureInfo(FeatureTypes eFeatureNum)
 {
 	FAssert(eFeatureNum > -1);
 	FAssert(eFeatureNum < GC.getNumFeatureInfos());
-	return m_paFeatureInfo[eFeatureNum];
+	return *(m_paFeatureInfo[eFeatureNum]);
 }
 
 int& CvGlobals::getNumPlayableCivilizationInfos()
@@ -1048,12 +1161,12 @@ int& CvGlobals::getNumAIPlayableCivilizationInfos()
 	return m_iNumAIPlayableCivilizationInfos;
 }
 
-int& CvGlobals::getNumCivilizationInfos()
+int CvGlobals::getNumCivilizationInfos()
 {
-	return m_iNumCivilizationInfos;
+	return (int)m_paCivilizationInfo.size();
 }
 
-CvCivilizationInfo*& CvGlobals::getCivilizationInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvCivilizationInfo*>& CvGlobals::getCivilizationInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paCivilizationInfo;
 }
@@ -1062,16 +1175,16 @@ CvCivilizationInfo& CvGlobals::getCivilizationInfo(CivilizationTypes eCivilizati
 {
 	FAssert(eCivilizationNum > -1);
 	FAssert(eCivilizationNum < GC.getNumCivilizationInfos());
-	return m_paCivilizationInfo[eCivilizationNum];
+	return *(m_paCivilizationInfo[eCivilizationNum]);
 }
 
 
-int& CvGlobals::getNumLeaderHeadInfos()
+int CvGlobals::getNumLeaderHeadInfos()
 {
-	return m_iNumLeaderHeadInfos;
+	return (int)m_paLeaderHeadInfo.size();
 }
 
-CvLeaderHeadInfo*& CvGlobals::getLeaderHeadInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvLeaderHeadInfo*>& CvGlobals::getLeaderHeadInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paLeaderHeadInfo;
 }
@@ -1080,16 +1193,16 @@ CvLeaderHeadInfo& CvGlobals::getLeaderHeadInfo(LeaderHeadTypes eLeaderHeadNum)
 {
 	FAssert(eLeaderHeadNum > -1);
 	FAssert(eLeaderHeadNum < GC.getNumLeaderHeadInfos());
-	return m_paLeaderHeadInfo[eLeaderHeadNum];
+	return *(m_paLeaderHeadInfo[eLeaderHeadNum]);
 }
 
 
-int& CvGlobals::getNumTraitInfos()
+int CvGlobals::getNumTraitInfos()
 {
-	return m_iNumTraitInfos;
+	return (int)m_paTraitInfo.size();
 }
 
-CvTraitInfo*& CvGlobals::getTraitInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvTraitInfo*>& CvGlobals::getTraitInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paTraitInfo;
 }
@@ -1098,16 +1211,16 @@ CvTraitInfo& CvGlobals::getTraitInfo(TraitTypes eTraitNum)
 {
 	FAssert(eTraitNum > -1);
 	FAssert(eTraitNum < GC.getNumTraitInfos());
-	return m_paTraitInfo[eTraitNum];
+	return *(m_paTraitInfo[eTraitNum]);
 }
 
 
-int& CvGlobals::getNumCursorInfos()
+int CvGlobals::getNumCursorInfos()
 {
-	return m_iNumCursorInfos;
+	return (int)m_paCursorInfo.size();
 }
 
-CvCursorInfo*& CvGlobals::getCursorInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvCursorInfo*>& CvGlobals::getCursorInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paCursorInfo;
 }
@@ -1116,15 +1229,15 @@ CvCursorInfo& CvGlobals::getCursorInfo(CursorTypes eCursorNum)
 {
 	FAssert(eCursorNum > -1);
 	FAssert(eCursorNum < GC.getNumCursorInfos());
-	return m_paCursorInfo[eCursorNum];
+	return *(m_paCursorInfo[eCursorNum]);
 }
 
-int& CvGlobals::getNumThroneRoomCameras()
+int CvGlobals::getNumThroneRoomCameras()
 {
-	return m_iNumThroneRoomCameras;
+	return (int)m_paThroneRoomCamera.size();
 }
 
-CvThroneRoomCamera*& CvGlobals::getThroneRoomCamera()	// For Moose - XML Load Util, CvInfos
+std::vector<CvThroneRoomCamera*>& CvGlobals::getThroneRoomCamera()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paThroneRoomCamera;
 }
@@ -1133,15 +1246,15 @@ CvThroneRoomCamera& CvGlobals::getThroneRoomCamera(int iIndex)
 {
 	FAssert(iIndex > -1);
 	FAssert(iIndex < GC.getNumThroneRoomCameras());
-	return m_paThroneRoomCamera[iIndex];
+	return *(m_paThroneRoomCamera[iIndex]);
 }
 
-int& CvGlobals::getNumThroneRoomInfos()
+int CvGlobals::getNumThroneRoomInfos()
 {
-	return m_iNumThroneRoomInfos;
+	return (int)m_paThroneRoomInfo.size();
 }
 
-CvThroneRoomInfo*& CvGlobals::getThroneRoomInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvThroneRoomInfo*>& CvGlobals::getThroneRoomInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paThroneRoomInfo;
 }
@@ -1150,15 +1263,15 @@ CvThroneRoomInfo& CvGlobals::getThroneRoomInfo(int iIndex)
 {
 	FAssert(iIndex > -1);
 	FAssert(iIndex < GC.getNumThroneRoomInfos());
-	return m_paThroneRoomInfo[iIndex];
+	return *(m_paThroneRoomInfo[iIndex]);
 }
 
-int& CvGlobals::getNumThroneRoomStyleInfos()
+int CvGlobals::getNumThroneRoomStyleInfos()
 {
-	return m_iNumThroneRoomStyleInfos;
+	return (int)m_paThroneRoomStyleInfo.size();
 }
 
-CvThroneRoomStyleInfo*& CvGlobals::getThroneRoomStyleInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvThroneRoomStyleInfo*>& CvGlobals::getThroneRoomStyleInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paThroneRoomStyleInfo;
 }
@@ -1167,15 +1280,15 @@ CvThroneRoomStyleInfo& CvGlobals::getThroneRoomStyleInfo(int iIndex)
 {
 	FAssert(iIndex > -1);
 	FAssert(iIndex < GC.getNumThroneRoomStyleInfos());
-	return m_paThroneRoomStyleInfo[iIndex];
+	return *(m_paThroneRoomStyleInfo[iIndex]);
 }
 
-int& CvGlobals::getNumSlideShowInfos()
+int CvGlobals::getNumSlideShowInfos()
 {
-	return m_iNumSlideShowInfos;
+	return (int)m_paSlideShowInfo.size();
 }
 
-CvSlideShowInfo*& CvGlobals::getSlideShowInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvSlideShowInfo*>& CvGlobals::getSlideShowInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paSlideShowInfo;
 }
@@ -1184,15 +1297,15 @@ CvSlideShowInfo& CvGlobals::getSlideShowInfo(int iIndex)
 {
 	FAssert(iIndex > -1);
 	FAssert(iIndex < GC.getNumSlideShowInfos());
-	return m_paSlideShowInfo[iIndex];
+	return *(m_paSlideShowInfo[iIndex]);
 }
 
-int& CvGlobals::getNumSlideShowRandomInfos()
+int CvGlobals::getNumSlideShowRandomInfos()
 {
-	return m_iNumSlideShowRandomInfos;
+	return (int)m_paSlideShowRandomInfo.size();
 }
 
-CvSlideShowRandomInfo*& CvGlobals::getSlideShowRandomInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvSlideShowRandomInfo*>& CvGlobals::getSlideShowRandomInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paSlideShowRandomInfo;
 }
@@ -1201,15 +1314,15 @@ CvSlideShowRandomInfo& CvGlobals::getSlideShowRandomInfo(int iIndex)
 {
 	FAssert(iIndex > -1);
 	FAssert(iIndex < GC.getNumSlideShowRandomInfos());
-	return m_paSlideShowRandomInfo[iIndex];
+	return *(m_paSlideShowRandomInfo[iIndex]);
 }
 
-int& CvGlobals::getNumWorldPickerInfos()
+int CvGlobals::getNumWorldPickerInfos()
 {
-	return m_iNumWorldPickerInfos;
+	return (int)m_paWorldPickerInfo.size();
 }
 
-CvWorldPickerInfo*& CvGlobals::getWorldPickerInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvWorldPickerInfo*>& CvGlobals::getWorldPickerInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paWorldPickerInfo;
 }
@@ -1218,15 +1331,32 @@ CvWorldPickerInfo& CvGlobals::getWorldPickerInfo(int iIndex)
 {
 	FAssert(iIndex > -1);
 	FAssert(iIndex < GC.getNumWorldPickerInfos());
-	return m_paWorldPickerInfo[iIndex];
+	return *(m_paWorldPickerInfo[iIndex]);
 }
 
-int& CvGlobals::getNumUnitInfos()
+int CvGlobals::getNumSpaceShipInfos()
 {
-	return m_iNumUnitInfos;
+	return (int)m_paSpaceShipInfo.size();
 }
 
-CvUnitInfo*& CvGlobals::getUnitInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvSpaceShipInfo*>& CvGlobals::getSpaceShipInfo()	// For Moose - XML Load Util, CvInfos
+{
+	return m_paSpaceShipInfo;
+}
+
+CvSpaceShipInfo& CvGlobals::getSpaceShipInfo(int iIndex)
+{
+	FAssert(iIndex > -1);
+	FAssert(iIndex < GC.getNumSpaceShipInfos());
+	return *(m_paSpaceShipInfo[iIndex]);
+}
+
+int CvGlobals::getNumUnitInfos()
+{
+	return (int)m_paUnitInfo.size();
+}
+
+std::vector<CvUnitInfo*>& CvGlobals::getUnitInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paUnitInfo;
 }
@@ -1235,15 +1365,15 @@ CvUnitInfo& CvGlobals::getUnitInfo(UnitTypes eUnitNum)
 {
 	FAssert(eUnitNum > -1);
 	FAssert(eUnitNum < GC.getNumUnitInfos());
-	return m_paUnitInfo[eUnitNum];
+	return *(m_paUnitInfo[eUnitNum]);
 }
 
-int& CvGlobals::getNumSpecialUnitInfos()
+int CvGlobals::getNumSpecialUnitInfos()
 {
-	return m_iNumSpecialUnitInfos;
+	return (int)m_paSpecialUnitInfo.size();
 }
 
-CvSpecialUnitInfo*& CvGlobals::getSpecialUnitInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvSpecialUnitInfo*>& CvGlobals::getSpecialUnitInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paSpecialUnitInfo;
 }
@@ -1252,16 +1382,16 @@ CvSpecialUnitInfo& CvGlobals::getSpecialUnitInfo(SpecialUnitTypes eSpecialUnitNu
 {
 	FAssert(eSpecialUnitNum > -1);
 	FAssert(eSpecialUnitNum < GC.getNumSpecialUnitInfos());
-	return m_paSpecialUnitInfo[eSpecialUnitNum];
+	return *(m_paSpecialUnitInfo[eSpecialUnitNum]);
 }
 
 
-int& CvGlobals::getNumConceptInfos()
+int CvGlobals::getNumConceptInfos()
 {
-	return m_iNumConceptInfos;
+	return (int)m_paConceptInfo.size();
 }
 
-CvInfoBase*& CvGlobals::getConceptInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvInfoBase*>& CvGlobals::getConceptInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paConceptInfo;
 }
@@ -1270,16 +1400,34 @@ CvInfoBase& CvGlobals::getConceptInfo(ConceptTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumConceptInfos());
-	return m_paConceptInfo[e];
+	return *(m_paConceptInfo[e]);
 }
 
 
-int& CvGlobals::getNumCityTabInfos()
+int CvGlobals::getNumNewConceptInfos()
 {
-	return m_iNumCityTabInfos;
+	return (int)m_paNewConceptInfo.size();
 }
 
-CvInfoBase*& CvGlobals::getCityTabInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvInfoBase*>& CvGlobals::getNewConceptInfo()	// For Moose - XML Load Util, CvInfos
+{
+	return m_paNewConceptInfo;
+}
+
+CvInfoBase& CvGlobals::getNewConceptInfo(NewConceptTypes e)
+{
+	FAssert(e > -1);
+	FAssert(e < GC.getNumNewConceptInfos());
+	return *(m_paNewConceptInfo[e]);
+}
+
+
+int CvGlobals::getNumCityTabInfos()
+{
+	return (int)m_paCityTabInfo.size();
+}
+
+std::vector<CvInfoBase*>& CvGlobals::getCityTabInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paCityTabInfo;
 }
@@ -1288,16 +1436,16 @@ CvInfoBase& CvGlobals::getCityTabInfo(CityTabTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumCityTabInfos());
-	return m_paCityTabInfo[e];
+	return *(m_paCityTabInfo[e]);
 }
 
 
-int& CvGlobals::getNumCalendarInfos()
+int CvGlobals::getNumCalendarInfos()
 {
-	return m_iNumCalendarInfos;
+	return (int)m_paCalendarInfo.size();
 }
 
-CvInfoBase*& CvGlobals::getCalendarInfo()
+std::vector<CvInfoBase*>& CvGlobals::getCalendarInfo()
 {
 	return m_paCalendarInfo;
 }
@@ -1306,16 +1454,16 @@ CvInfoBase& CvGlobals::getCalendarInfo(CalendarTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumCalendarInfos());
-	return m_paCalendarInfo[e];
+	return *(m_paCalendarInfo[e]);
 }
 
 
-int& CvGlobals::getNumSeasonInfos()
+int CvGlobals::getNumSeasonInfos()
 {
-	return m_iNumSeasonInfos;
+	return (int)m_paSeasonInfo.size();
 }
 
-CvInfoBase*& CvGlobals::getSeasonInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvInfoBase*>& CvGlobals::getSeasonInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paSeasonInfo;
 }
@@ -1324,16 +1472,16 @@ CvInfoBase& CvGlobals::getSeasonInfo(SeasonTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumSeasonInfos());
-	return m_paSeasonInfo[e];
+	return *(m_paSeasonInfo[e]);
 }
 
 
-int& CvGlobals::getNumMonthInfos()
+int CvGlobals::getNumMonthInfos()
 {
-	return m_iNumMonthInfos;
+	return (int)m_paMonthInfo.size();
 }
 
-CvInfoBase*& CvGlobals::getMonthInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvInfoBase*>& CvGlobals::getMonthInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paMonthInfo;
 }
@@ -1342,16 +1490,16 @@ CvInfoBase& CvGlobals::getMonthInfo(MonthTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumMonthInfos());
-	return m_paMonthInfo[e];
+	return *(m_paMonthInfo[e]);
 }
 
 
-int& CvGlobals::getNumDenialInfos()
+int CvGlobals::getNumDenialInfos()
 {
-	return m_iNumDenialInfos;
+	return (int)m_paDenialInfo.size();
 }
 
-CvInfoBase*& CvGlobals::getDenialInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvInfoBase*>& CvGlobals::getDenialInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paDenialInfo;
 }
@@ -1360,16 +1508,16 @@ CvInfoBase& CvGlobals::getDenialInfo(DenialTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumDenialInfos());
-	return m_paDenialInfo[e];
+	return *(m_paDenialInfo[e]);
 }
 
 
-int& CvGlobals::getNumInvisibleInfos()
+int CvGlobals::getNumInvisibleInfos()
 {
-	return m_iNumInvisibleInfos;
+	return (int)m_paInvisibleInfo.size();
 }
 
-CvInfoBase*& CvGlobals::getInvisibleInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvInfoBase*>& CvGlobals::getInvisibleInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paInvisibleInfo;
 }
@@ -1378,16 +1526,34 @@ CvInfoBase& CvGlobals::getInvisibleInfo(InvisibleTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumInvisibleInfos());
-	return m_paInvisibleInfo[e];
+	return *(m_paInvisibleInfo[e]);
 }
 
 
-int& CvGlobals::getNumUnitCombatInfos()
+int CvGlobals::getNumVoteSourceInfos()
 {
-	return m_iNumUnitCombatInfos;
+	return (int)m_paVoteSourceInfo.size();
 }
 
-CvInfoBase*& CvGlobals::getUnitCombatInfo()
+std::vector<CvVoteSourceInfo*>& CvGlobals::getVoteSourceInfo()	// For Moose - XML Load Util, CvInfos
+{
+	return m_paVoteSourceInfo;
+}
+
+CvVoteSourceInfo& CvGlobals::getVoteSourceInfo(VoteSourceTypes e)
+{
+	FAssert(e > -1);
+	FAssert(e < GC.getNumVoteSourceInfos());
+	return *(m_paVoteSourceInfo[e]);
+}
+
+
+int CvGlobals::getNumUnitCombatInfos()
+{
+	return (int)m_paUnitCombatInfo.size();
+}
+
+std::vector<CvInfoBase*>& CvGlobals::getUnitCombatInfo()
 {
 	return m_paUnitCombatInfo;
 }
@@ -1396,11 +1562,11 @@ CvInfoBase& CvGlobals::getUnitCombatInfo(UnitCombatTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumUnitCombatInfos());
-	return m_paUnitCombatInfo[e];
+	return *(m_paUnitCombatInfo[e]);
 }
 
 
-CvInfoBase*& CvGlobals::getDomainInfo()
+std::vector<CvInfoBase*>& CvGlobals::getDomainInfo()
 {
 	return m_paDomainInfo;
 }
@@ -1409,11 +1575,11 @@ CvInfoBase& CvGlobals::getDomainInfo(DomainTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < NUM_DOMAIN_TYPES);
-	return m_paDomainInfo[e];
+	return *(m_paDomainInfo[e]);
 }
 
 
-CvInfoBase*& CvGlobals::getUnitAIInfo()
+std::vector<CvInfoBase*>& CvGlobals::getUnitAIInfo()
 {
 	return m_paUnitAIInfos;
 }
@@ -1422,11 +1588,11 @@ CvInfoBase& CvGlobals::getUnitAIInfo(UnitAITypes eUnitAINum)
 {
 	FAssert(eUnitAINum >= 0);
 	FAssert(eUnitAINum < NUM_UNITAI_TYPES);
-	return m_paUnitAIInfos[eUnitAINum];
+	return *(m_paUnitAIInfos[eUnitAINum]);
 }
 
 
-CvInfoBase*& CvGlobals::getAttitudeInfo()
+std::vector<CvInfoBase*>& CvGlobals::getAttitudeInfo()
 {
 	return m_paAttitudeInfos;
 }
@@ -1435,11 +1601,11 @@ CvInfoBase& CvGlobals::getAttitudeInfo(AttitudeTypes eAttitudeNum)
 {
 	FAssert(eAttitudeNum >= 0);
 	FAssert(eAttitudeNum < NUM_ATTITUDE_TYPES);
-	return m_paAttitudeInfos[eAttitudeNum];
+	return *(m_paAttitudeInfos[eAttitudeNum]);
 }
 
 
-CvInfoBase*& CvGlobals::getMemoryInfo()
+std::vector<CvInfoBase*>& CvGlobals::getMemoryInfo()
 {
 	return m_paMemoryInfos;
 }
@@ -1448,17 +1614,16 @@ CvInfoBase& CvGlobals::getMemoryInfo(MemoryTypes eMemoryNum)
 {
 	FAssert(eMemoryNum >= 0);
 	FAssert(eMemoryNum < NUM_MEMORY_TYPES);
-	return m_paMemoryInfos[eMemoryNum];
+	return *(m_paMemoryInfos[eMemoryNum]);
 }
 
 
-int& CvGlobals::getNumGameOptionInfos()
+int CvGlobals::getNumGameOptionInfos()
 {
-	m_iNumGameOptionInfos = NUM_GAMEOPTION_TYPES;
-	return m_iNumGameOptionInfos;
+	return (int)m_paGameOptionInfos.size();
 }
 
-CvGameOptionInfo*& CvGlobals::getGameOptionInfo()
+std::vector<CvGameOptionInfo*>& CvGlobals::getGameOptionInfo()
 {
 	return m_paGameOptionInfos;
 }
@@ -1467,16 +1632,15 @@ CvGameOptionInfo& CvGlobals::getGameOptionInfo(GameOptionTypes eGameOptionNum)
 {
 	FAssert(eGameOptionNum >= 0);
 	FAssert(eGameOptionNum < GC.getNumGameOptionInfos());
-	return m_paGameOptionInfos[eGameOptionNum];
+	return *(m_paGameOptionInfos[eGameOptionNum]);
 }
 
-int& CvGlobals::getNumMPOptionInfos()
+int CvGlobals::getNumMPOptionInfos()
 {
-	m_iNumMPOptionInfos = NUM_MPOPTION_TYPES;
-	return m_iNumMPOptionInfos;
+	return (int)m_paMPOptionInfos.size();
 }
 
-CvMPOptionInfo*& CvGlobals::getMPOptionInfo()
+std::vector<CvMPOptionInfo*>& CvGlobals::getMPOptionInfo()
 {
 	 return m_paMPOptionInfos;
 }
@@ -1485,16 +1649,15 @@ CvMPOptionInfo& CvGlobals::getMPOptionInfo(MultiplayerOptionTypes eMPOptionNum)
 {
 	FAssert(eMPOptionNum >= 0);
 	FAssert(eMPOptionNum < GC.getNumMPOptionInfos());
-	return m_paMPOptionInfos[eMPOptionNum];
+	return *(m_paMPOptionInfos[eMPOptionNum]);
 }
 
-int& CvGlobals::getNumForceControlInfos()
+int CvGlobals::getNumForceControlInfos()
 {
-	m_iNumForceControlInfos = NUM_FORCECONTROL_TYPES;
-	return m_iNumForceControlInfos;
+	return (int)m_paForceControlInfos.size();
 }
 
-CvForceControlInfo*& CvGlobals::getForceControlInfo()
+std::vector<CvForceControlInfo*>& CvGlobals::getForceControlInfo()
 {
 	return m_paForceControlInfos;
 }
@@ -1503,10 +1666,10 @@ CvForceControlInfo& CvGlobals::getForceControlInfo(ForceControlTypes eForceContr
 {
 	FAssert(eForceControlNum >= 0);
 	FAssert(eForceControlNum < GC.getNumForceControlInfos());
-	return m_paForceControlInfos[eForceControlNum];
+	return *(m_paForceControlInfos[eForceControlNum]);
 }
 
-CvPlayerOptionInfo*& CvGlobals::getPlayerOptionInfo()
+std::vector<CvPlayerOptionInfo*>& CvGlobals::getPlayerOptionInfo()
 {
 	return m_paPlayerOptionInfos;
 }
@@ -1515,10 +1678,10 @@ CvPlayerOptionInfo& CvGlobals::getPlayerOptionInfo(PlayerOptionTypes ePlayerOpti
 {
 	FAssert(ePlayerOptionNum >= 0);
 	FAssert(ePlayerOptionNum < NUM_PLAYEROPTION_TYPES);
-	return m_paPlayerOptionInfos[ePlayerOptionNum];
+	return *(m_paPlayerOptionInfos[ePlayerOptionNum]);
 }
 
-CvGraphicOptionInfo*& CvGlobals::getGraphicOptionInfo()
+std::vector<CvGraphicOptionInfo*>& CvGlobals::getGraphicOptionInfo()
 {
 	return m_paGraphicOptionInfos;
 }
@@ -1527,11 +1690,11 @@ CvGraphicOptionInfo& CvGlobals::getGraphicOptionInfo(GraphicOptionTypes eGraphic
 {
 	FAssert(eGraphicOptionNum >= 0);
 	FAssert(eGraphicOptionNum < NUM_GRAPHICOPTION_TYPES);
-	return m_paGraphicOptionInfos[eGraphicOptionNum];
+	return *(m_paGraphicOptionInfos[eGraphicOptionNum]);
 }
 
 
-CvYieldInfo*& CvGlobals::getYieldInfo()	// For Moose - XML Load Util
+std::vector<CvYieldInfo*>& CvGlobals::getYieldInfo()	// For Moose - XML Load Util
 {
 	return m_paYieldInfo;
 }
@@ -1540,11 +1703,11 @@ CvYieldInfo& CvGlobals::getYieldInfo(YieldTypes eYieldNum)
 {
 	FAssert(eYieldNum > -1);
 	FAssert(eYieldNum < NUM_YIELD_TYPES);
-	return m_paYieldInfo[eYieldNum];
+	return *(m_paYieldInfo[eYieldNum]);
 }
 
 
-CvCommerceInfo*& CvGlobals::getCommerceInfo()	// For Moose - XML Load Util
+std::vector<CvCommerceInfo*>& CvGlobals::getCommerceInfo()	// For Moose - XML Load Util
 {
 	return m_paCommerceInfo;
 }
@@ -1553,15 +1716,15 @@ CvCommerceInfo& CvGlobals::getCommerceInfo(CommerceTypes eCommerceNum)
 {
 	FAssert(eCommerceNum > -1);
 	FAssert(eCommerceNum < NUM_COMMERCE_TYPES);
-	return m_paCommerceInfo[eCommerceNum];
+	return *(m_paCommerceInfo[eCommerceNum]);
 }
 
-int& CvGlobals::getNumRouteInfos()
+int CvGlobals::getNumRouteInfos()
 {
-	return m_iNumRouteInfos;
+	return (int)m_paRouteInfo.size();
 }
 
-CvRouteInfo*& CvGlobals::getRouteInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvRouteInfo*>& CvGlobals::getRouteInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paRouteInfo;
 }
@@ -1570,15 +1733,15 @@ CvRouteInfo& CvGlobals::getRouteInfo(RouteTypes eRouteNum)
 {
 	FAssert(eRouteNum > -1);
 	FAssert(eRouteNum < GC.getNumRouteInfos());
-	return m_paRouteInfo[eRouteNum];
+	return *(m_paRouteInfo[eRouteNum]);
 }
 
-int& CvGlobals::getNumImprovementInfos()
+int CvGlobals::getNumImprovementInfos()
 {
-	return m_iNumImprovementInfos;
+	return (int)m_paImprovementInfo.size();
 }
 
-CvImprovementInfo*& CvGlobals::getImprovementInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvImprovementInfo*>& CvGlobals::getImprovementInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paImprovementInfo;
 }
@@ -1587,15 +1750,15 @@ CvImprovementInfo& CvGlobals::getImprovementInfo(ImprovementTypes eImprovementNu
 {
 	FAssert(eImprovementNum > -1);
 	FAssert(eImprovementNum < GC.getNumImprovementInfos());
-	return m_paImprovementInfo[eImprovementNum];
+	return *(m_paImprovementInfo[eImprovementNum]);
 }
 
-int& CvGlobals::getNumGoodyInfos()
+int CvGlobals::getNumGoodyInfos()
 {
-	return m_iNumGoodyInfos;
+	return (int)m_paGoodyInfo.size();
 }
 
-CvGoodyInfo*& CvGlobals::getGoodyInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvGoodyInfo*>& CvGlobals::getGoodyInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paGoodyInfo;
 }
@@ -1604,15 +1767,15 @@ CvGoodyInfo& CvGlobals::getGoodyInfo(GoodyTypes eGoodyNum)
 {
 	FAssert(eGoodyNum > -1);
 	FAssert(eGoodyNum < GC.getNumGoodyInfos());
-	return m_paGoodyInfo[eGoodyNum];
+	return *(m_paGoodyInfo[eGoodyNum]);
 }
 
-int& CvGlobals::getNumBuildInfos()
+int CvGlobals::getNumBuildInfos()
 {
-	return m_iNumBuildInfos;
+	return (int)m_paBuildInfo.size();
 }
 
-CvBuildInfo*& CvGlobals::getBuildInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvBuildInfo*>& CvGlobals::getBuildInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paBuildInfo;
 }
@@ -1621,15 +1784,15 @@ CvBuildInfo& CvGlobals::getBuildInfo(BuildTypes eBuildNum)
 {
 	FAssert(eBuildNum > -1);
 	FAssert(eBuildNum < GC.getNumBuildInfos());
-	return m_paBuildInfo[eBuildNum];
+	return *(m_paBuildInfo[eBuildNum]);
 }
 
-int& CvGlobals::getNumHandicapInfos()
+int CvGlobals::getNumHandicapInfos()
 {
-	return m_iNumHandicapInfos;
+	return (int)m_paHandicapInfo.size();
 }
 
-CvHandicapInfo*& CvGlobals::getHandicapInfo()	// Do NOT export outside of the DLL	// For Moose - XML Load Util
+std::vector<CvHandicapInfo*>& CvGlobals::getHandicapInfo()	// Do NOT export outside of the DLL	// For Moose - XML Load Util
 {
 	return m_paHandicapInfo;
 }
@@ -1638,15 +1801,15 @@ CvHandicapInfo& CvGlobals::getHandicapInfo(HandicapTypes eHandicapNum)
 {
 	FAssert(eHandicapNum > -1);
 	FAssert(eHandicapNum < GC.getNumHandicapInfos());
-	return m_paHandicapInfo[eHandicapNum];
+	return *(m_paHandicapInfo[eHandicapNum]);
 }
 
-int& CvGlobals::getNumGameSpeedInfos()
+int CvGlobals::getNumGameSpeedInfos()
 {
-	return m_iNumGameSpeedInfos;
+	return (int)m_paGameSpeedInfo.size();
 }
 
-CvGameSpeedInfo*& CvGlobals::getGameSpeedInfo()	// Do NOT export outside of the DLL	// For Moose - XML Load Util
+std::vector<CvGameSpeedInfo*>& CvGlobals::getGameSpeedInfo()	// Do NOT export outside of the DLL	// For Moose - XML Load Util
 {
 	return m_paGameSpeedInfo;
 }
@@ -1655,15 +1818,15 @@ CvGameSpeedInfo& CvGlobals::getGameSpeedInfo(GameSpeedTypes eGameSpeedNum)
 {
 	FAssert(eGameSpeedNum > -1);
 	FAssert(eGameSpeedNum < GC.getNumGameSpeedInfos());
-	return m_paGameSpeedInfo[eGameSpeedNum];
+	return *(m_paGameSpeedInfo[eGameSpeedNum]);
 }
 
-int& CvGlobals::getNumTurnTimerInfos()
+int CvGlobals::getNumTurnTimerInfos()
 {
-	return m_iNumTurnTimerInfos;
+	return (int)m_paTurnTimerInfo.size();
 }
 
-CvTurnTimerInfo*& CvGlobals::getTurnTimerInfo()	// Do NOT export outside of the DLL	// For Moose - XML Load Util
+std::vector<CvTurnTimerInfo*>& CvGlobals::getTurnTimerInfo()	// Do NOT export outside of the DLL	// For Moose - XML Load Util
 {
 	return m_paTurnTimerInfo;
 }
@@ -1672,15 +1835,15 @@ CvTurnTimerInfo& CvGlobals::getTurnTimerInfo(TurnTimerTypes eTurnTimerNum)
 {
 	FAssert(eTurnTimerNum > -1);
 	FAssert(eTurnTimerNum < GC.getNumTurnTimerInfos());
-	return m_paTurnTimerInfo[eTurnTimerNum];
+	return *(m_paTurnTimerInfo[eTurnTimerNum]);
 }
 
-int& CvGlobals::getNumProcessInfos()
+int CvGlobals::getNumProcessInfos()
 {
-	return m_iNumProcessInfos;
+	return (int)m_paProcessInfo.size();
 }
 
-CvProcessInfo*& CvGlobals::getProcessInfo()
+std::vector<CvProcessInfo*>& CvGlobals::getProcessInfo()
 {
 	return m_paProcessInfo;
 }
@@ -1689,15 +1852,15 @@ CvProcessInfo& CvGlobals::getProcessInfo(ProcessTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumProcessInfos());
-	return m_paProcessInfo[e];
+	return *(m_paProcessInfo[e]);
 }
 
-int& CvGlobals::getNumVoteInfos()
+int CvGlobals::getNumVoteInfos()
 {
-	return m_iNumVoteInfos;
+	return (int)m_paVoteInfo.size();
 }
 
-CvVoteInfo*& CvGlobals::getVoteInfo()
+std::vector<CvVoteInfo*>& CvGlobals::getVoteInfo()
 {
 	return m_paVoteInfo;
 }
@@ -1706,15 +1869,15 @@ CvVoteInfo& CvGlobals::getVoteInfo(VoteTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumVoteInfos());
-	return m_paVoteInfo[e];
+	return *(m_paVoteInfo[e]);
 }
 
-int& CvGlobals::getNumProjectInfos()
+int CvGlobals::getNumProjectInfos()
 {
-	return m_iNumProjectInfos;
+	return (int)m_paProjectInfo.size();
 }
 
-CvProjectInfo*& CvGlobals::getProjectInfo()
+std::vector<CvProjectInfo*>& CvGlobals::getProjectInfo()
 {
 	return m_paProjectInfo;
 }
@@ -1723,15 +1886,15 @@ CvProjectInfo& CvGlobals::getProjectInfo(ProjectTypes e)
 {
 	FAssert(e > -1);
 	FAssert(e < GC.getNumProjectInfos());
-	return m_paProjectInfo[e];
+	return *(m_paProjectInfo[e]);
 }
 
-int& CvGlobals::getNumBuildingClassInfos()
+int CvGlobals::getNumBuildingClassInfos()
 {
-	return m_iNumBuildingClassInfos;
+	return (int)m_paBuildingClassInfo.size();
 }
 
-CvBuildingClassInfo*& CvGlobals::getBuildingClassInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvBuildingClassInfo*>& CvGlobals::getBuildingClassInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paBuildingClassInfo;
 }
@@ -1740,15 +1903,15 @@ CvBuildingClassInfo& CvGlobals::getBuildingClassInfo(BuildingClassTypes eBuildin
 {
 	FAssert(eBuildingClassNum > -1);
 	FAssert(eBuildingClassNum < GC.getNumBuildingClassInfos());
-	return m_paBuildingClassInfo[eBuildingClassNum];
+	return *(m_paBuildingClassInfo[eBuildingClassNum]);
 }
 
-int& CvGlobals::getNumBuildingInfos()
+int CvGlobals::getNumBuildingInfos()
 {
-	return m_iNumBuildingInfos;
+	return (int)m_paBuildingInfo.size();
 }
 
-CvBuildingInfo*& CvGlobals::getBuildingInfo()	// For Moose - XML Load Util, CvInfos, CvCacheObject
+std::vector<CvBuildingInfo*>& CvGlobals::getBuildingInfo()	// For Moose - XML Load Util, CvInfos, CvCacheObject
 {
 	return m_paBuildingInfo;
 }
@@ -1757,15 +1920,15 @@ CvBuildingInfo& CvGlobals::getBuildingInfo(BuildingTypes eBuildingNum)
 {
 	FAssert(eBuildingNum > -1);
 	FAssert(eBuildingNum < GC.getNumBuildingInfos());
-	return m_paBuildingInfo[eBuildingNum];
+	return *(m_paBuildingInfo[eBuildingNum]);
 }
 
-int& CvGlobals::getNumSpecialBuildingInfos()
+int CvGlobals::getNumSpecialBuildingInfos()
 {
-	return m_iNumSpecialBuildingInfos;
+	return (int)m_paSpecialBuildingInfo.size();
 }
 
-CvSpecialBuildingInfo*& CvGlobals::getSpecialBuildingInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvSpecialBuildingInfo*>& CvGlobals::getSpecialBuildingInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paSpecialBuildingInfo;
 }
@@ -1774,15 +1937,15 @@ CvSpecialBuildingInfo& CvGlobals::getSpecialBuildingInfo(SpecialBuildingTypes eS
 {
 	FAssert(eSpecialBuildingNum > -1);
 	FAssert(eSpecialBuildingNum < GC.getNumSpecialBuildingInfos());
-	return m_paSpecialBuildingInfo[eSpecialBuildingNum];
+	return *(m_paSpecialBuildingInfo[eSpecialBuildingNum]);
 }
 
-int& CvGlobals::getNumUnitClassInfos()
+int CvGlobals::getNumUnitClassInfos()
 {
-	return m_iNumUnitClassInfos;
+	return (int)m_paUnitClassInfo.size();
 }
 
-CvUnitClassInfo*& CvGlobals::getUnitClassInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvUnitClassInfo*>& CvGlobals::getUnitClassInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paUnitClassInfo;
 }
@@ -1791,15 +1954,15 @@ CvUnitClassInfo& CvGlobals::getUnitClassInfo(UnitClassTypes eUnitClassNum)
 {
 	FAssert(eUnitClassNum > -1);
 	FAssert(eUnitClassNum < GC.getNumUnitClassInfos());
-	return m_paUnitClassInfo[eUnitClassNum];
+	return *(m_paUnitClassInfo[eUnitClassNum]);
 }
 
-int& CvGlobals::getNumActionInfos()
+int CvGlobals::getNumActionInfos()
 {
-	return m_iNumActionInfos;
+	return (int)m_paActionInfo.size();
 }
 
-CvActionInfo*& CvGlobals::getActionInfo()	// For Moose - XML Load Util
+std::vector<CvActionInfo*>& CvGlobals::getActionInfo()	// For Moose - XML Load Util
 {
 	return m_paActionInfo;
 }
@@ -1808,10 +1971,10 @@ CvActionInfo& CvGlobals::getActionInfo(int i)
 {
 	FAssertMsg(i < getNumActionInfos(), "Index out of bounds");
 	FAssertMsg(i > -1, "Index out of bounds");
-	return m_paActionInfo[i];
+	return *(m_paActionInfo[i]);
 }
 
-CvMissionInfo*& CvGlobals::getMissionInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvMissionInfo*>& CvGlobals::getMissionInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paMissionInfo;
 }
@@ -1820,10 +1983,10 @@ CvMissionInfo& CvGlobals::getMissionInfo(MissionTypes eMissionNum)
 {
 	FAssert(eMissionNum > -1);
 	FAssert(eMissionNum < NUM_MISSION_TYPES);
-	return m_paMissionInfo[eMissionNum];
+	return *(m_paMissionInfo[eMissionNum]);
 }
 
-CvControlInfo*& CvGlobals::getControlInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvControlInfo*>& CvGlobals::getControlInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paControlInfo;
 }
@@ -1832,11 +1995,11 @@ CvControlInfo& CvGlobals::getControlInfo(ControlTypes eControlNum)
 {
 	FAssert(eControlNum > -1);
 	FAssert(eControlNum < NUM_CONTROL_TYPES);
-	FAssertMsg(m_paControlInfo, "accessing null array");
-	return m_paControlInfo[eControlNum];
+	FAssert(m_paControlInfo.size() > 0);
+	return *(m_paControlInfo[eControlNum]);
 }
 
-CvCommandInfo*& CvGlobals::getCommandInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvCommandInfo*>& CvGlobals::getCommandInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paCommandInfo;
 }
@@ -1845,15 +2008,15 @@ CvCommandInfo& CvGlobals::getCommandInfo(CommandTypes eCommandNum)
 {
 	FAssert(eCommandNum > -1);
 	FAssert(eCommandNum < NUM_COMMAND_TYPES);
-	return m_paCommandInfo[eCommandNum];
+	return *(m_paCommandInfo[eCommandNum]);
 }
 
-int& CvGlobals::getNumAutomateInfos()
+int CvGlobals::getNumAutomateInfos()
 {
-	return m_iNumAutomateInfos;
+	return (int)m_paAutomateInfo.size();
 }
 
-CvAutomateInfo*& CvGlobals::getAutomateInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvAutomateInfo*>& CvGlobals::getAutomateInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paAutomateInfo;
 }
@@ -1862,15 +2025,15 @@ CvAutomateInfo& CvGlobals::getAutomateInfo(int iAutomateNum)
 {
 	FAssertMsg(iAutomateNum < getNumAutomateInfos(), "Index out of bounds");
 	FAssertMsg(iAutomateNum > -1, "Index out of bounds");
-	return m_paAutomateInfo[iAutomateNum];
+	return *(m_paAutomateInfo[iAutomateNum]);
 }
 
-int& CvGlobals::getNumPromotionInfos()
+int CvGlobals::getNumPromotionInfos()
 {
-	return m_iNumPromotionInfos;
+	return (int)m_paPromotionInfo.size();
 }
 
-CvPromotionInfo*& CvGlobals::getPromotionInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvPromotionInfo*>& CvGlobals::getPromotionInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paPromotionInfo;
 }
@@ -1879,15 +2042,15 @@ CvPromotionInfo& CvGlobals::getPromotionInfo(PromotionTypes ePromotionNum)
 {
 	FAssert(ePromotionNum > -1);
 	FAssert(ePromotionNum < GC.getNumPromotionInfos());
-	return m_paPromotionInfo[ePromotionNum];
+	return *(m_paPromotionInfo[ePromotionNum]);
 }
 
-int& CvGlobals::getNumTechInfos()
+int CvGlobals::getNumTechInfos()
 {
-	return m_iNumTechInfos;
+	return (int)m_paTechInfo.size();
 }
 
-CvTechInfo*& CvGlobals::getTechInfo()	// For Moose - XML Load Util, CvInfos, CvCacheObject
+std::vector<CvTechInfo*>& CvGlobals::getTechInfo()	// For Moose - XML Load Util, CvInfos, CvCacheObject
 {
 	return m_paTechInfo;
 }
@@ -1896,15 +2059,15 @@ CvTechInfo& CvGlobals::getTechInfo(TechTypes eTechNum)
 {
 	FAssert(eTechNum > -1);
 	FAssert(eTechNum < GC.getNumTechInfos());
-	return m_paTechInfo[eTechNum];
+	return *(m_paTechInfo[eTechNum]);
 }
 
-int& CvGlobals::getNumReligionInfos()
+int CvGlobals::getNumReligionInfos()
 {
-	return m_iNumReligionInfos;
+	return (int)m_paReligionInfo.size();
 }
 
-CvReligionInfo*& CvGlobals::getReligionInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvReligionInfo*>& CvGlobals::getReligionInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paReligionInfo;
 }
@@ -1913,15 +2076,32 @@ CvReligionInfo& CvGlobals::getReligionInfo(ReligionTypes eReligionNum)
 {
 	FAssert(eReligionNum > -1);
 	FAssert(eReligionNum < GC.getNumReligionInfos());
-	return m_paReligionInfo[eReligionNum];
+	return *(m_paReligionInfo[eReligionNum]);
 }
 
-int& CvGlobals::getNumSpecialistInfos()
+int CvGlobals::getNumCorporationInfos()
 {
-	return m_iNumSpecialistInfos;
+	return (int)m_paCorporationInfo.size();
 }
 
-CvSpecialistInfo*& CvGlobals::getSpecialistInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvCorporationInfo*>& CvGlobals::getCorporationInfo()	// For Moose - XML Load Util, CvInfos
+{
+	return m_paCorporationInfo;
+}
+
+CvCorporationInfo& CvGlobals::getCorporationInfo(CorporationTypes eCorporationNum)
+{
+	FAssert(eCorporationNum > -1);
+	FAssert(eCorporationNum < GC.getNumCorporationInfos());
+	return *(m_paCorporationInfo[eCorporationNum]);
+}
+
+int CvGlobals::getNumSpecialistInfos()
+{
+	return (int)m_paSpecialistInfo.size();
+}
+
+std::vector<CvSpecialistInfo*>& CvGlobals::getSpecialistInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paSpecialistInfo;
 }
@@ -1930,15 +2110,15 @@ CvSpecialistInfo& CvGlobals::getSpecialistInfo(SpecialistTypes eSpecialistNum)
 {
 	FAssert(eSpecialistNum > -1);
 	FAssert(eSpecialistNum < GC.getNumSpecialistInfos());
-	return m_paSpecialistInfo[eSpecialistNum];
+	return *(m_paSpecialistInfo[eSpecialistNum]);
 }
 
-int& CvGlobals::getNumCivicOptionInfos()
+int CvGlobals::getNumCivicOptionInfos()
 {
-	return m_iNumCivicOptionInfos;
+	return (int)m_paCivicOptionInfo.size();
 }
 
-CvCivicOptionInfo*& CvGlobals::getCivicOptionInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvCivicOptionInfo*>& CvGlobals::getCivicOptionInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paCivicOptionInfo;
 }
@@ -1947,15 +2127,15 @@ CvCivicOptionInfo& CvGlobals::getCivicOptionInfo(CivicOptionTypes eCivicOptionNu
 {
 	FAssert(eCivicOptionNum > -1);
 	FAssert(eCivicOptionNum < GC.getNumCivicOptionInfos());
-	return m_paCivicOptionInfo[eCivicOptionNum];
+	return *(m_paCivicOptionInfo[eCivicOptionNum]);
 }
 
-int& CvGlobals::getNumCivicInfos()
+int CvGlobals::getNumCivicInfos()
 {
-	return m_iNumCivicInfos;
+	return (int)m_paCivicInfo.size();
 }
 
-CvCivicInfo*& CvGlobals::getCivicInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvCivicInfo*>& CvGlobals::getCivicInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paCivicInfo;
 }
@@ -1964,15 +2144,15 @@ CvCivicInfo& CvGlobals::getCivicInfo(CivicTypes eCivicNum)
 {
 	FAssert(eCivicNum > -1);
 	FAssert(eCivicNum < GC.getNumCivicInfos());
-	return m_paCivicInfo[eCivicNum];
+	return *(m_paCivicInfo[eCivicNum]);
 }
 
-int& CvGlobals::getNumDiplomacyInfos()
+int CvGlobals::getNumDiplomacyInfos()
 {
-	return m_iNumDiplomacyInfos;
+	return (int)m_paDiplomacyInfo.size();
 }
 
-CvDiplomacyInfo*& CvGlobals::getDiplomacyInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvDiplomacyInfo*>& CvGlobals::getDiplomacyInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paDiplomacyInfo;
 }
@@ -1981,15 +2161,15 @@ CvDiplomacyInfo& CvGlobals::getDiplomacyInfo(int iDiplomacyNum)
 {
 	FAssertMsg(iDiplomacyNum < getNumDiplomacyInfos(), "Index out of bounds");
 	FAssertMsg(iDiplomacyNum > -1, "Index out of bounds");
-	return m_paDiplomacyInfo[iDiplomacyNum];
+	return *(m_paDiplomacyInfo[iDiplomacyNum]);
 }
 
-int& CvGlobals::getNumEraInfos()
+int CvGlobals::getNumEraInfos()
 {
-	return m_iNumEraInfos;
+	return (int)m_aEraInfo.size();
 }
 
-CvEraInfo*& CvGlobals::getEraInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvEraInfo*>& CvGlobals::getEraInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_aEraInfo;
 }
@@ -1998,15 +2178,15 @@ CvEraInfo& CvGlobals::getEraInfo(EraTypes eEraNum)
 {
 	FAssert(eEraNum > -1);
 	FAssert(eEraNum < GC.getNumEraInfos());
-	return m_aEraInfo[eEraNum];
+	return *(m_aEraInfo[eEraNum]);
 }
 
-int& CvGlobals::getNumHurryInfos()
+int CvGlobals::getNumHurryInfos()
 {
-	return m_iNumHurryInfos;
+	return (int)m_paHurryInfo.size();
 }
 
-CvHurryInfo*& CvGlobals::getHurryInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvHurryInfo*>& CvGlobals::getHurryInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paHurryInfo;
 }
@@ -2015,15 +2195,15 @@ CvHurryInfo& CvGlobals::getHurryInfo(HurryTypes eHurryNum)
 {
 	FAssert(eHurryNum > -1);
 	FAssert(eHurryNum < GC.getNumHurryInfos());
-	return m_paHurryInfo[eHurryNum];
+	return *(m_paHurryInfo[eHurryNum]);
 }
 
-int& CvGlobals::getNumEmphasizeInfos()
+int CvGlobals::getNumEmphasizeInfos()
 {
-	return m_iNumEmphasizeInfos;
+	return (int)m_paEmphasizeInfo.size();
 }
 
-CvEmphasizeInfo*& CvGlobals::getEmphasizeInfo()	// For Moose - XML Load Util
+std::vector<CvEmphasizeInfo*>& CvGlobals::getEmphasizeInfo()	// For Moose - XML Load Util
 {
 	return m_paEmphasizeInfo;
 }
@@ -2032,15 +2212,15 @@ CvEmphasizeInfo& CvGlobals::getEmphasizeInfo(EmphasizeTypes eEmphasizeNum)
 {
 	FAssert(eEmphasizeNum > -1);
 	FAssert(eEmphasizeNum < GC.getNumEmphasizeInfos());
-	return m_paEmphasizeInfo[eEmphasizeNum];
+	return *(m_paEmphasizeInfo[eEmphasizeNum]);
 }
 
-int& CvGlobals::getNumUpkeepInfos()
+int CvGlobals::getNumUpkeepInfos()
 {
-	return m_iNumUpkeepInfos;
+	return (int)m_paUpkeepInfo.size();
 }
 
-CvUpkeepInfo*& CvGlobals::getUpkeepInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvUpkeepInfo*>& CvGlobals::getUpkeepInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paUpkeepInfo;
 }
@@ -2049,15 +2229,15 @@ CvUpkeepInfo& CvGlobals::getUpkeepInfo(UpkeepTypes eUpkeepNum)
 {
 	FAssert(eUpkeepNum > -1);
 	FAssert(eUpkeepNum < GC.getNumUpkeepInfos());
-	return m_paUpkeepInfo[eUpkeepNum];
+	return *(m_paUpkeepInfo[eUpkeepNum]);
 }
 
-int& CvGlobals::getNumCultureLevelInfos()
+int CvGlobals::getNumCultureLevelInfos()
 {
-	return m_iNumCultureLevelInfos;
+	return (int)m_paCultureLevelInfo.size();
 }
 
-CvCultureLevelInfo*& CvGlobals::getCultureLevelInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvCultureLevelInfo*>& CvGlobals::getCultureLevelInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paCultureLevelInfo;
 }
@@ -2066,15 +2246,15 @@ CvCultureLevelInfo& CvGlobals::getCultureLevelInfo(CultureLevelTypes eCultureLev
 {
 	FAssert(eCultureLevelNum > -1);
 	FAssert(eCultureLevelNum < GC.getNumCultureLevelInfos());
-	return m_paCultureLevelInfo[eCultureLevelNum];
+	return *(m_paCultureLevelInfo[eCultureLevelNum]);
 }
 
-int& CvGlobals::getNumVictoryInfos()
+int CvGlobals::getNumVictoryInfos()
 {
-	return m_iNumVictoryInfos;
+	return (int)m_paVictoryInfo.size();
 }
 
-CvVictoryInfo*& CvGlobals::getVictoryInfo()	// For Moose - XML Load Util, CvInfos
+std::vector<CvVictoryInfo*>& CvGlobals::getVictoryInfo()	// For Moose - XML Load Util, CvInfos
 {
 	return m_paVictoryInfo;
 }
@@ -2083,39 +2263,15 @@ CvVictoryInfo& CvGlobals::getVictoryInfo(VictoryTypes eVictoryNum)
 {
 	FAssert(eVictoryNum > -1);
 	FAssert(eVictoryNum < GC.getNumVictoryInfos());
-	return m_paVictoryInfo[eVictoryNum];
+	return *(m_paVictoryInfo[eVictoryNum]);
 }
 
-/*GameOptionInfo* CvGlobals::getGameOptionsInfo()
+int CvGlobals::getNumQuestInfos()
 {
-	return m_aGameOptionsInfo;
+	return (int)m_paQuestInfo.size();
 }
 
-GameOptionInfo& CvGlobals::getGameOptionsInfo(GameOptionTypes eGameOptionNum)
-{
-	FAssert(eGameOptionNum > -1);
-	FAssert(eGameOptionNum < NUM_GAMEOPTION_TYPES);
-	return m_aGameOptionsInfo[eGameOptionNum];
-}
-
-PlayerOptionInfo* CvGlobals::getPlayerOptionsInfo()
-{
-	return m_aPlayerOptionsInfo;
-}
-
-PlayerOptionInfo& CvGlobals::getPlayerOptionsInfoByIndex(PlayerOptionTypes ePlayerOptionNum)
-{
-	FAssert(ePlayerOptionNum > -1);
-	FAssert(ePlayerOptionNum < NUM_PLAYEROPTION_TYPES);
-	return m_aPlayerOptionsInfo[ePlayerOptionNum];
-}*/
-
-int& CvGlobals::getNumQuestInfos()
-{
-	return m_iNumQuestInfos;
-}
-
-CvQuestInfo*& CvGlobals::getQuestInfo()
+std::vector<CvQuestInfo*>& CvGlobals::getQuestInfo()
 {
 	return m_paQuestInfo;
 }
@@ -2124,15 +2280,15 @@ CvQuestInfo& CvGlobals::getQuestInfo(int iIndex)
 {
 	FAssert(iIndex > -1);
 	FAssert(iIndex < GC.getNumQuestInfos());
-	return m_paQuestInfo[iIndex];
+	return *(m_paQuestInfo[iIndex]);
 }
 
-int& CvGlobals::getNumTutorialInfos()
+int CvGlobals::getNumTutorialInfos()
 {
-	return m_iNumTutorialInfos;
+	return (int)m_paTutorialInfo.size();
 }
 
-CvTutorialInfo*& CvGlobals::getTutorialInfo()
+std::vector<CvTutorialInfo*>& CvGlobals::getTutorialInfo()
 {
 	return m_paTutorialInfo;
 }
@@ -2141,7 +2297,58 @@ CvTutorialInfo& CvGlobals::getTutorialInfo(int iIndex)
 {
 	FAssert(iIndex > -1);
 	FAssert(iIndex < GC.getNumTutorialInfos());
-	return m_paTutorialInfo[iIndex];
+	return *(m_paTutorialInfo[iIndex]);
+}
+
+int CvGlobals::getNumEventTriggerInfos()
+{
+	return (int)m_paEventTriggerInfo.size();
+}
+
+std::vector<CvEventTriggerInfo*>& CvGlobals::getEventTriggerInfo()
+{
+	return m_paEventTriggerInfo;
+}
+
+CvEventTriggerInfo& CvGlobals::getEventTriggerInfo(EventTriggerTypes eEventTrigger)
+{
+	FAssert(eEventTrigger > -1);
+	FAssert(eEventTrigger < GC.getNumEventTriggerInfos());
+	return *(m_paEventTriggerInfo[eEventTrigger]);
+}
+
+int CvGlobals::getNumEventInfos()
+{
+	return (int)m_paEventInfo.size();
+}
+
+std::vector<CvEventInfo*>& CvGlobals::getEventInfo()
+{
+	return m_paEventInfo;
+}
+
+CvEventInfo& CvGlobals::getEventInfo(EventTypes eEvent)
+{
+	FAssert(eEvent > -1);
+	FAssert(eEvent < GC.getNumEventInfos());
+	return *(m_paEventInfo[eEvent]);
+}
+
+int CvGlobals::getNumEspionageMissionInfos()
+{
+	return (int)m_paEspionageMissionInfo.size();
+}
+
+std::vector<CvEspionageMissionInfo*>& CvGlobals::getEspionageMissionInfo()
+{
+	return m_paEspionageMissionInfo;
+}
+
+CvEspionageMissionInfo& CvGlobals::getEspionageMissionInfo(EspionageMissionTypes eEspionageMissionNum)
+{
+	FAssert(eEspionageMissionNum > -1);
+	FAssert(eEspionageMissionNum < GC.getNumEspionageMissionInfos());
+	return *(m_paEspionageMissionInfo[eEspionageMissionNum]);
 }
 
 int& CvGlobals::getNumEntityEventTypes()
@@ -2222,6 +2429,23 @@ CvString& CvGlobals::getArtStyleTypes(ArtStyleTypes e)
 	FAssert(e > -1);
 	FAssert(e < GC.getNumArtStyleTypes());
 	return m_paszArtStyleTypes[e];
+}
+
+int CvGlobals::getNumUnitArtStyleTypeInfos()
+{
+    return (int)m_paUnitArtStyleTypeInfo.size();
+}
+
+std::vector<CvUnitArtStyleTypeInfo*>& CvGlobals::getUnitArtStyleTypeInfo()
+{
+	return m_paUnitArtStyleTypeInfo;
+}
+
+CvUnitArtStyleTypeInfo& CvGlobals::getUnitArtStyleTypeInfo(UnitArtStyleTypes eUnitArtStyleTypeNum)
+{
+	FAssert(eUnitArtStyleTypeNum > -1);
+	FAssert(eUnitArtStyleTypeNum < GC.getNumUnitArtStyleTypeInfos());
+	return *(m_paUnitArtStyleTypeInfo[eUnitArtStyleTypeNum]);
 }
 
 int& CvGlobals::getNumCitySizeTypes()
@@ -2361,17 +2585,80 @@ void CvGlobals::cacheGlobals()
 	m_iNUM_BUILDING_PREREQ_OR_BONUSES = getDefineINT("NUM_BUILDING_PREREQ_OR_BONUSES");
 	m_iFOOD_CONSUMPTION_PER_POPULATION = getDefineINT("FOOD_CONSUMPTION_PER_POPULATION");
 	m_iMAX_HIT_POINTS = getDefineINT("MAX_HIT_POINTS");
+	m_iPATH_DAMAGE_WEIGHT = getDefineINT("PATH_DAMAGE_WEIGHT");
 	m_iHILLS_EXTRA_DEFENSE = getDefineINT("HILLS_EXTRA_DEFENSE");
 	m_iRIVER_ATTACK_MODIFIER = getDefineINT("RIVER_ATTACK_MODIFIER");
 	m_iAMPHIB_ATTACK_MODIFIER = getDefineINT("AMPHIB_ATTACK_MODIFIER");
 	m_iHILLS_EXTRA_MOVEMENT = getDefineINT("HILLS_EXTRA_MOVEMENT");
+	m_iMAX_PLOT_LIST_ROWS = getDefineINT("MAX_PLOT_LIST_ROWS");
+	m_iUNIT_MULTISELECT_MAX = getDefineINT("UNIT_MULTISELECT_MAX");
+	m_iPERCENT_ANGER_DIVISOR = getDefineINT("PERCENT_ANGER_DIVISOR");
+	m_iEVENT_MESSAGE_TIME = getDefineINT("EVENT_MESSAGE_TIME");
+	m_iROUTE_FEATURE_GROWTH_MODIFIER = getDefineINT("ROUTE_FEATURE_GROWTH_MODIFIER");
+	m_iFEATURE_GROWTH_MODIFIER = getDefineINT("FEATURE_GROWTH_MODIFIER");
+	m_iMIN_CITY_RANGE = getDefineINT("MIN_CITY_RANGE");
+	m_iCITY_MAX_NUM_BUILDINGS = getDefineINT("CITY_MAX_NUM_BUILDINGS");
+	m_iNUM_UNIT_AND_TECH_PREREQS = getDefineINT("NUM_UNIT_AND_TECH_PREREQS");
+	m_iNUM_AND_TECH_PREREQS = getDefineINT("NUM_AND_TECH_PREREQS");
+	m_iNUM_OR_TECH_PREREQS = getDefineINT("NUM_OR_TECH_PREREQS");
+	m_iLAKE_MAX_AREA_SIZE = getDefineINT("LAKE_MAX_AREA_SIZE");
+	m_iNUM_ROUTE_PREREQ_OR_BONUSES = getDefineINT("NUM_ROUTE_PREREQ_OR_BONUSES");
+	m_iNUM_BUILDING_AND_TECH_PREREQS = getDefineINT("NUM_BUILDING_AND_TECH_PREREQS");
+	m_iMIN_WATER_SIZE_FOR_OCEAN = getDefineINT("MIN_WATER_SIZE_FOR_OCEAN");
 	m_iFORTIFY_MODIFIER_PER_TURN = getDefineINT("FORTIFY_MODIFIER_PER_TURN");
 	m_iMAX_CITY_DEFENSE_DAMAGE = getDefineINT("MAX_CITY_DEFENSE_DAMAGE");
+	m_iNUM_CORPORATION_PREREQ_BONUSES = getDefineINT("NUM_CORPORATION_PREREQ_BONUSES");
+	m_iPEAK_SEE_THROUGH_CHANGE = getDefineINT("PEAK_SEE_THROUGH_CHANGE");
+	m_iHILLS_SEE_THROUGH_CHANGE = getDefineINT("HILLS_SEE_THROUGH_CHANGE");
+	m_iSEAWATER_SEE_FROM_CHANGE = getDefineINT("SEAWATER_SEE_FROM_CHANGE");
+	m_iPEAK_SEE_FROM_CHANGE = getDefineINT("PEAK_SEE_FROM_CHANGE");
+	m_iHILLS_SEE_FROM_CHANGE = getDefineINT("HILLS_SEE_FROM_CHANGE");
+	
+	m_fCAMERA_MIN_YAW = getDefineFLOAT("CAMERA_MIN_YAW");
+	m_fCAMERA_MAX_YAW = getDefineFLOAT("CAMERA_MAX_YAW");
+	m_fCAMERA_FAR_CLIP_Z_HEIGHT = getDefineFLOAT("CAMERA_FAR_CLIP_Z_HEIGHT");
+	m_fCAMERA_MAX_TRAVEL_DISTANCE = getDefineFLOAT("CAMERA_MAX_TRAVEL_DISTANCE");
+	m_fCAMERA_START_DISTANCE = getDefineFLOAT("CAMERA_START_DISTANCE");
+	m_fAIR_BOMB_HEIGHT = getDefineFLOAT("AIR_BOMB_HEIGHT");
+	m_fPLOT_SIZE = getDefineFLOAT("PLOT_SIZE");
+	m_fCAMERA_SPECIAL_PITCH = getDefineFLOAT("CAMERA_SPECIAL_PITCH");
+	m_fCAMERA_MAX_TURN_OFFSET = getDefineFLOAT("CAMERA_MAX_TURN_OFFSET");
+	m_fCAMERA_MIN_DISTANCE = getDefineFLOAT("CAMERA_MIN_DISTANCE");
+	m_fCAMERA_UPPER_PITCH = getDefineFLOAT("CAMERA_UPPER_PITCH");
+	m_fCAMERA_LOWER_PITCH = getDefineFLOAT("CAMERA_LOWER_PITCH");
+	m_fFIELD_OF_VIEW = getDefineFLOAT("FIELD_OF_VIEW");
+	m_fSHADOW_SCALE = getDefineFLOAT("SHADOW_SCALE");
+	m_fUNIT_MULTISELECT_DISTANCE = getDefineFLOAT("UNIT_MULTISELECT_DISTANCE");
+
+	m_iUSE_CANNOT_FOUND_CITY_CALLBACK = getDefineINT("USE_CANNOT_FOUND_CITY_CALLBACK");
+	m_iUSE_CAN_FOUND_CITIES_ON_WATER_CALLBACK = getDefineINT("USE_CAN_FOUND_CITIES_ON_WATER_CALLBACK");
+	m_iUSE_IS_PLAYER_RESEARCH_CALLBACK = getDefineINT("USE_IS_PLAYER_RESEARCH_CALLBACK");
+	m_iUSE_CAN_RESEARCH_CALLBACK = getDefineINT("USE_CAN_RESEARCH_CALLBACK");
+	m_iUSE_CANNOT_DO_CIVIC_CALLBACK = getDefineINT("USE_CANNOT_DO_CIVIC_CALLBACK");
+	m_iUSE_CAN_DO_CIVIC_CALLBACK = getDefineINT("USE_CAN_DO_CIVIC_CALLBACK");
+	m_iUSE_CANNOT_CONSTRUCT_CALLBACK = getDefineINT("USE_CANNOT_CONSTRUCT_CALLBACK");
+	m_iUSE_CAN_CONSTRUCT_CALLBACK = getDefineINT("USE_CAN_CONSTRUCT_CALLBACK");
+	m_iUSE_CAN_DECLARE_WAR_CALLBACK = getDefineINT("USE_CAN_DECLARE_WAR_CALLBACK");
+	m_iUSE_CANNOT_RESEARCH_CALLBACK = getDefineINT("USE_CANNOT_RESEARCH_CALLBACK");
+	m_iUSE_GET_UNIT_COST_MOD_CALLBACK = getDefineINT("USE_GET_UNIT_COST_MOD_CALLBACK");
+	m_iUSE_GET_BUILDING_COST_MOD_CALLBACK = getDefineINT("USE_GET_BUILDING_COST_MOD_CALLBACK");
+	m_iUSE_GET_CITY_FOUND_VALUE_CALLBACK = getDefineINT("USE_GET_CITY_FOUND_VALUE_CALLBACK");
+	m_iUSE_CANNOT_HANDLE_ACTION_CALLBACK = getDefineINT("USE_CANNOT_HANDLE_ACTION_CALLBACK");
+	m_iUSE_CAN_BUILD_CALLBACK = getDefineINT("USE_CAN_BUILD_CALLBACK");
+	m_iUSE_CANNOT_TRAIN_CALLBACK = getDefineINT("USE_CANNOT_TRAIN_CALLBACK");
+	m_iUSE_CAN_TRAIN_CALLBACK = getDefineINT("USE_CAN_TRAIN_CALLBACK");
+	m_iUSE_UNIT_CANNOT_MOVE_INTO_CALLBACK = getDefineINT("USE_UNIT_CANNOT_MOVE_INTO_CALLBACK");
+	m_iUSE_USE_CANNOT_SPREAD_RELIGION_CALLBACK = getDefineINT("USE_USE_CANNOT_SPREAD_RELIGION_CALLBACK");
+	m_iUSE_FINISH_TEXT_CALLBACK = getDefineINT("USE_FINISH_TEXT_CALLBACK");
+	m_iUSE_ON_UNIT_SET_XY_CALLBACK = getDefineINT("USE_ON_UNIT_SET_XY_CALLBACK");
+	m_iUSE_ON_UNIT_SELECTED_CALLBACK = getDefineINT("USE_ON_UNIT_SELECTED_CALLBACK");
+	m_iUSE_ON_UPDATE_CALLBACK = getDefineINT("USE_ON_UPDATE_CALLBACK");
+	m_iUSE_ON_UNIT_CREATED_CALLBACK = getDefineINT("USE_ON_UNIT_CREATED_CALLBACK");
+	m_iUSE_ON_UNIT_LOST_CALLBACK = getDefineINT("USE_ON_UNIT_LOST_CALLBACK");
 }
 
 int CvGlobals::getDefineINT( const char * szName ) const
 {
-	PROFILE_FUNC();
 	int iReturn = 0;
 	GC.getDefinesVarSystem()->GetValue( szName, iReturn );
 	return iReturn;
@@ -2379,7 +2666,6 @@ int CvGlobals::getDefineINT( const char * szName ) const
 
 float CvGlobals::getDefineFLOAT( const char * szName ) const
 {
-	PROFILE_FUNC();
 	float fReturn = 0;
 	GC.getDefinesVarSystem()->GetValue( szName, fReturn );
 	return fReturn;
@@ -2387,7 +2673,6 @@ float CvGlobals::getDefineFLOAT( const char * szName ) const
 
 const char * CvGlobals::getDefineSTRING( const char * szName ) const
 {
-	PROFILE_FUNC();
 	const char * szReturn = NULL;
 	GC.getDefinesVarSystem()->GetValue( szName, szReturn );
 	return szReturn;
@@ -2396,16 +2681,19 @@ const char * CvGlobals::getDefineSTRING( const char * szName ) const
 void CvGlobals::setDefineINT( const char * szName, int iValue )
 {
 	GC.getDefinesVarSystem()->SetValue( szName, iValue );
+	cacheGlobals();
 }
 
 void CvGlobals::setDefineFLOAT( const char * szName, float fValue )
 {
 	GC.getDefinesVarSystem()->SetValue( szName, fValue );
+	cacheGlobals();
 }
 
 void CvGlobals::setDefineSTRING( const char * szName, const char * szValue )
 {
 	GC.getDefinesVarSystem()->SetValue( szName, szValue );
+	cacheGlobals();
 }
 
 int CvGlobals::getMOVE_DENOMINATOR()
@@ -2433,6 +2721,11 @@ int CvGlobals::getMAX_HIT_POINTS()
 	return m_iMAX_HIT_POINTS;
 }
 
+int CvGlobals::getPATH_DAMAGE_WEIGHT()
+{
+	return m_iPATH_DAMAGE_WEIGHT;
+}
+
 int CvGlobals::getHILLS_EXTRA_DEFENSE()
 {
 	return m_iHILLS_EXTRA_DEFENSE;
@@ -2453,6 +2746,81 @@ int CvGlobals::getHILLS_EXTRA_MOVEMENT()
 	return m_iHILLS_EXTRA_MOVEMENT;
 }
 
+int CvGlobals::getMAX_PLOT_LIST_ROWS()
+{
+	return m_iMAX_PLOT_LIST_ROWS;
+}
+
+int CvGlobals::getUNIT_MULTISELECT_MAX()
+{
+	return m_iUNIT_MULTISELECT_MAX;
+}
+
+int CvGlobals::getPERCENT_ANGER_DIVISOR()
+{
+	return m_iPERCENT_ANGER_DIVISOR;
+}
+
+int CvGlobals::getEVENT_MESSAGE_TIME()
+{
+	return m_iEVENT_MESSAGE_TIME;
+}
+
+int CvGlobals::getROUTE_FEATURE_GROWTH_MODIFIER()
+{
+	return m_iROUTE_FEATURE_GROWTH_MODIFIER;
+}
+
+int CvGlobals::getFEATURE_GROWTH_MODIFIER()
+{
+	return m_iFEATURE_GROWTH_MODIFIER;
+}
+
+int CvGlobals::getMIN_CITY_RANGE()
+{
+	return m_iMIN_CITY_RANGE;
+}
+
+int CvGlobals::getCITY_MAX_NUM_BUILDINGS()
+{
+	return m_iCITY_MAX_NUM_BUILDINGS;
+}
+
+int CvGlobals::getNUM_UNIT_AND_TECH_PREREQS()
+{
+	return m_iNUM_UNIT_AND_TECH_PREREQS;
+}
+
+int CvGlobals::getNUM_AND_TECH_PREREQS()
+{
+	return m_iNUM_AND_TECH_PREREQS;
+}
+
+int CvGlobals::getNUM_OR_TECH_PREREQS()
+{
+	return m_iNUM_OR_TECH_PREREQS;
+}
+
+int CvGlobals::getLAKE_MAX_AREA_SIZE()
+{
+	return m_iLAKE_MAX_AREA_SIZE;
+}
+
+int CvGlobals::getNUM_ROUTE_PREREQ_OR_BONUSES()
+{
+	return m_iNUM_ROUTE_PREREQ_OR_BONUSES;
+}
+
+int CvGlobals::getNUM_BUILDING_AND_TECH_PREREQS()
+{
+	return m_iNUM_BUILDING_AND_TECH_PREREQS;
+}
+
+int CvGlobals::getMIN_WATER_SIZE_FOR_OCEAN()
+{
+	return m_iMIN_WATER_SIZE_FOR_OCEAN;
+}
+
 int CvGlobals::getFORTIFY_MODIFIER_PER_TURN()
 {
 	return m_iFORTIFY_MODIFIER_PER_TURN;
@@ -2461,6 +2829,236 @@ int CvGlobals::getFORTIFY_MODIFIER_PER_TURN()
 int CvGlobals::getMAX_CITY_DEFENSE_DAMAGE()
 {
 	return m_iMAX_CITY_DEFENSE_DAMAGE;
+}
+
+int CvGlobals::getPEAK_SEE_THROUGH_CHANGE()
+{
+	return m_iPEAK_SEE_THROUGH_CHANGE;
+}
+
+int CvGlobals::getHILLS_SEE_THROUGH_CHANGE()
+{
+	return m_iHILLS_SEE_THROUGH_CHANGE;
+}
+
+int CvGlobals::getSEAWATER_SEE_FROM_CHANGE()
+{
+	return m_iSEAWATER_SEE_FROM_CHANGE;
+}
+
+int CvGlobals::getPEAK_SEE_FROM_CHANGE()
+{
+	return m_iPEAK_SEE_FROM_CHANGE;
+}
+
+int CvGlobals::getHILLS_SEE_FROM_CHANGE()
+{
+	return m_iHILLS_SEE_FROM_CHANGE;
+}
+
+int CvGlobals::getNUM_CORPORATION_PREREQ_BONUSES()
+{
+	return m_iNUM_CORPORATION_PREREQ_BONUSES;
+}
+
+float CvGlobals::getCAMERA_MIN_YAW()
+{
+	return m_fCAMERA_MIN_YAW;
+}
+
+float CvGlobals::getCAMERA_MAX_YAW()
+{
+	return m_fCAMERA_MAX_YAW;
+}
+
+float CvGlobals::getCAMERA_FAR_CLIP_Z_HEIGHT()
+{
+	return m_fCAMERA_FAR_CLIP_Z_HEIGHT;
+}
+
+float CvGlobals::getCAMERA_MAX_TRAVEL_DISTANCE()
+{
+	return m_fCAMERA_MAX_TRAVEL_DISTANCE;
+}
+
+float CvGlobals::getCAMERA_START_DISTANCE()
+{
+	return m_fCAMERA_START_DISTANCE;
+}
+
+float CvGlobals::getAIR_BOMB_HEIGHT()
+{
+	return m_fAIR_BOMB_HEIGHT;
+}
+
+float CvGlobals::getPLOT_SIZE()
+{
+	return m_fPLOT_SIZE;
+}
+
+float CvGlobals::getCAMERA_SPECIAL_PITCH()
+{
+	return m_fCAMERA_SPECIAL_PITCH;
+}
+
+float CvGlobals::getCAMERA_MAX_TURN_OFFSET()
+{
+	return m_fCAMERA_MAX_TURN_OFFSET;
+}
+
+float CvGlobals::getCAMERA_MIN_DISTANCE()
+{
+	return m_fCAMERA_MIN_DISTANCE;
+}
+
+float CvGlobals::getCAMERA_UPPER_PITCH()
+{
+	return m_fCAMERA_UPPER_PITCH;
+}
+
+float CvGlobals::getCAMERA_LOWER_PITCH()
+{
+	return m_fCAMERA_LOWER_PITCH;
+}
+
+float CvGlobals::getFIELD_OF_VIEW()
+{
+	return m_fFIELD_OF_VIEW;
+}
+
+float CvGlobals::getSHADOW_SCALE()
+{
+	return m_fSHADOW_SCALE;
+}
+
+float CvGlobals::getUNIT_MULTISELECT_DISTANCE()
+{
+	return m_fUNIT_MULTISELECT_DISTANCE;
+}
+
+int CvGlobals::getUSE_CANNOT_FOUND_CITY_CALLBACK()
+{
+	return m_iUSE_CANNOT_FOUND_CITY_CALLBACK;
+}
+
+int CvGlobals::getUSE_CAN_FOUND_CITIES_ON_WATER_CALLBACK()
+{
+	return m_iUSE_CAN_FOUND_CITIES_ON_WATER_CALLBACK;
+}
+
+int CvGlobals::getUSE_IS_PLAYER_RESEARCH_CALLBACK()
+{
+	return m_iUSE_IS_PLAYER_RESEARCH_CALLBACK;
+}
+
+int CvGlobals::getUSE_CAN_RESEARCH_CALLBACK()
+{
+	return m_iUSE_CAN_RESEARCH_CALLBACK;
+}
+
+int CvGlobals::getUSE_CANNOT_DO_CIVIC_CALLBACK()
+{
+	return m_iUSE_CANNOT_DO_CIVIC_CALLBACK;
+}
+
+int CvGlobals::getUSE_CAN_DO_CIVIC_CALLBACK()
+{
+	return m_iUSE_CAN_DO_CIVIC_CALLBACK;
+}
+
+int CvGlobals::getUSE_CANNOT_CONSTRUCT_CALLBACK()
+{
+	return m_iUSE_CANNOT_CONSTRUCT_CALLBACK;
+}
+
+int CvGlobals::getUSE_CAN_CONSTRUCT_CALLBACK()
+{
+	return m_iUSE_CAN_CONSTRUCT_CALLBACK;
+}
+
+int CvGlobals::getUSE_CAN_DECLARE_WAR_CALLBACK()
+{
+	return m_iUSE_CAN_DECLARE_WAR_CALLBACK;
+}
+
+int CvGlobals::getUSE_CANNOT_RESEARCH_CALLBACK()
+{
+	return m_iUSE_CANNOT_RESEARCH_CALLBACK;
+}
+
+int CvGlobals::getUSE_GET_UNIT_COST_MOD_CALLBACK()
+{
+	return m_iUSE_GET_UNIT_COST_MOD_CALLBACK;
+}
+
+int CvGlobals::getUSE_GET_BUILDING_COST_MOD_CALLBACK()
+{
+	return m_iUSE_GET_BUILDING_COST_MOD_CALLBACK;
+}
+
+int CvGlobals::getUSE_GET_CITY_FOUND_VALUE_CALLBACK()
+{
+	return m_iUSE_GET_CITY_FOUND_VALUE_CALLBACK;
+}
+
+int CvGlobals::getUSE_CANNOT_HANDLE_ACTION_CALLBACK()
+{
+	return m_iUSE_CANNOT_HANDLE_ACTION_CALLBACK;
+}
+
+int CvGlobals::getUSE_CAN_BUILD_CALLBACK()
+{
+	return m_iUSE_CAN_BUILD_CALLBACK;
+}
+
+int CvGlobals::getUSE_CANNOT_TRAIN_CALLBACK()
+{
+	return m_iUSE_CANNOT_TRAIN_CALLBACK;
+}
+
+int CvGlobals::getUSE_CAN_TRAIN_CALLBACK()
+{
+	return m_iUSE_CAN_TRAIN_CALLBACK;
+}
+
+int CvGlobals::getUSE_UNIT_CANNOT_MOVE_INTO_CALLBACK()
+{
+	return m_iUSE_UNIT_CANNOT_MOVE_INTO_CALLBACK;
+}
+
+int CvGlobals::getUSE_USE_CANNOT_SPREAD_RELIGION_CALLBACK()
+{
+	return m_iUSE_USE_CANNOT_SPREAD_RELIGION_CALLBACK;
+}
+
+int CvGlobals::getUSE_FINISH_TEXT_CALLBACK()
+{
+	return m_iUSE_FINISH_TEXT_CALLBACK;
+}
+
+int CvGlobals::getUSE_ON_UNIT_SET_XY_CALLBACK()
+{
+	return m_iUSE_ON_UNIT_SET_XY_CALLBACK;
+}
+
+int CvGlobals::getUSE_ON_UNIT_SELECTED_CALLBACK()
+{
+	return m_iUSE_ON_UNIT_SELECTED_CALLBACK;
+}
+
+int CvGlobals::getUSE_ON_UPDATE_CALLBACK()
+{
+	return m_iUSE_ON_UPDATE_CALLBACK;
+}
+
+int CvGlobals::getUSE_ON_UNIT_CREATED_CALLBACK()
+{
+	return m_iUSE_ON_UNIT_CREATED_CALLBACK;
+}
+
+int CvGlobals::getUSE_ON_UNIT_LOST_CALLBACK()
+{
+	return m_iUSE_ON_UNIT_LOST_CALLBACK;
 }
 
 int CvGlobals::getMAX_CIV_PLAYERS()
@@ -2520,7 +3118,7 @@ void CvGlobals::setDLLProfiler(FProfiler* prof)
 
 FProfiler* CvGlobals::getDLLProfiler()
 {
-	return m_Profiler;	
+	return m_Profiler;
 }
 
 void CvGlobals::enableDLLProfiler(bool bEnable)
@@ -2534,124 +3132,145 @@ bool CvGlobals::isDLLProfilerEnabled() const
 }
 
 bool CvGlobals::readBuildingInfoArray(FDataStreamBase* pStream)
-{	
-	return readInfoArray(pStream, m_iNumBuildingInfos, m_paBuildingInfo, "CvBuildingInfo");
+{
+	return readInfoArray(pStream, m_paBuildingInfo, "CvBuildingInfo");
 }
 
 void CvGlobals::writeBuildingInfoArray(FDataStreamBase* pStream)
-{	
-	writeInfoArray(pStream, m_iNumBuildingInfos, m_paBuildingInfo);
+{
+	writeInfoArray(pStream, m_paBuildingInfo);
 }
 
 bool CvGlobals::readTechInfoArray(FDataStreamBase* pStream)
-{	
-	return readInfoArray(pStream, m_iNumTechInfos, m_paTechInfo, "CvTechInfo");
+{
+	return readInfoArray(pStream, m_paTechInfo, "CvTechInfo");
 }
 
 void CvGlobals::writeTechInfoArray(FDataStreamBase* pStream)
-{	
-	writeInfoArray(pStream, m_iNumTechInfos, m_paTechInfo);
+{
+	writeInfoArray(pStream, m_paTechInfo);
 }
 
 bool CvGlobals::readUnitInfoArray(FDataStreamBase* pStream)
-{	
-	return readInfoArray(pStream, m_iNumUnitInfos, m_paUnitInfo, "CvUnitInfo");
+{
+	return readInfoArray(pStream, m_paUnitInfo, "CvUnitInfo");
 }
 
 void CvGlobals::writeUnitInfoArray(FDataStreamBase* pStream)
-{	
-	writeInfoArray(pStream, m_iNumUnitInfos, m_paUnitInfo);
+{
+	writeInfoArray(pStream, m_paUnitInfo);
 }
 
 bool CvGlobals::readLeaderHeadInfoArray(FDataStreamBase* pStream)
-{	
-	return readInfoArray(pStream, m_iNumLeaderHeadInfos, m_paLeaderHeadInfo, "CvLeaderHeadInfo");
+{
+	return readInfoArray(pStream, m_paLeaderHeadInfo, "CvLeaderHeadInfo");
 }
 
 void CvGlobals::writeLeaderHeadInfoArray(FDataStreamBase* pStream)
-{	
-	writeInfoArray(pStream, m_iNumLeaderHeadInfos, m_paLeaderHeadInfo);
+{
+	writeInfoArray(pStream, m_paLeaderHeadInfo);
 }
 
 bool CvGlobals::readCivilizationInfoArray(FDataStreamBase* pStream)
-{	
-	return readInfoArray(pStream, m_iNumCivilizationInfos, m_paCivilizationInfo, "CvCivilizationInfo");
+{
+	return readInfoArray(pStream, m_paCivilizationInfo, "CvCivilizationInfo");
 }
 
 void CvGlobals::writeCivilizationInfoArray(FDataStreamBase* pStream)
-{	
-	writeInfoArray(pStream, m_iNumCivilizationInfos, m_paCivilizationInfo);
+{
+	writeInfoArray(pStream, m_paCivilizationInfo);
 }
 
 bool CvGlobals::readPromotionInfoArray(FDataStreamBase* pStream)
-{	
-	return readInfoArray(pStream, m_iNumPromotionInfos, m_paPromotionInfo, "CvPromotionInfo");
+{
+	return readInfoArray(pStream, m_paPromotionInfo, "CvPromotionInfo");
 }
 
 void CvGlobals::writePromotionInfoArray(FDataStreamBase* pStream)
-{	
-	writeInfoArray(pStream, m_iNumPromotionInfos, m_paPromotionInfo);
+{
+	writeInfoArray(pStream, m_paPromotionInfo);
 }
 
 bool CvGlobals::readDiplomacyInfoArray(FDataStreamBase* pStream)
-{	
-	return readInfoArray(pStream, m_iNumDiplomacyInfos, m_paDiplomacyInfo, "CvDiplomacyInfo");
+{
+	return readInfoArray(pStream, m_paDiplomacyInfo, "CvDiplomacyInfo");
 }
 
 void CvGlobals::writeDiplomacyInfoArray(FDataStreamBase* pStream)
-{	
-	writeInfoArray(pStream, m_iNumDiplomacyInfos, m_paDiplomacyInfo);
+{
+	writeInfoArray(pStream, m_paDiplomacyInfo);
 }
 
 bool CvGlobals::readDiploTextInfoArray(FDataStreamBase* pStream)
-{	
-	return readInfoArray(pStream, GAMETEXT.m_iNumDiplomacyTextInfos, GAMETEXT.m_paDiplomacyTextInfo, "DiplomacyTextInfo");
+{
+	return readInfoArray(pStream, GAMETEXT.m_paDiplomacyTextInfo, "DiplomacyTextInfo");
 }
 
 void CvGlobals::writeDiploTextInfoArray(FDataStreamBase* pStream)
-{	
-	writeInfoArray(pStream, GAMETEXT.m_iNumDiplomacyTextInfos, GAMETEXT.m_paDiplomacyTextInfo);
+{
+	writeInfoArray(pStream, GAMETEXT.m_paDiplomacyTextInfo);
 }
 
 bool CvGlobals::readCivicInfoArray(FDataStreamBase* pStream)
-{	
-	return readInfoArray(pStream, m_iNumCivicInfos, m_paCivicInfo, "CvCivicInfo");
+{
+	return readInfoArray(pStream, m_paCivicInfo, "CvCivicInfo");
 }
 
 void CvGlobals::writeCivicInfoArray(FDataStreamBase* pStream)
-{	
-	writeInfoArray(pStream, m_iNumCivicInfos, m_paCivicInfo);
+{
+	writeInfoArray(pStream, m_paCivicInfo);
 }
 
 bool CvGlobals::readHandicapInfoArray(FDataStreamBase* pStream)
-{	
-	return readInfoArray(pStream, m_iNumHandicapInfos, m_paHandicapInfo, "CvHandicapInfo");
+{
+	return readInfoArray(pStream, m_paHandicapInfo, "CvHandicapInfo");
 }
 
 void CvGlobals::writeHandicapInfoArray(FDataStreamBase* pStream)
-{	
-	writeInfoArray(pStream, m_iNumHandicapInfos, m_paHandicapInfo);
+{
+	writeInfoArray(pStream, m_paHandicapInfo);
 }
 
 bool CvGlobals::readBonusInfoArray(FDataStreamBase* pStream)
-{	
-	return readInfoArray(pStream, m_iNumBonusInfos, m_paBonusInfo, "CvBonusInfo");
+{
+	return readInfoArray(pStream, m_paBonusInfo, "CvBonusInfo");
 }
 
 void CvGlobals::writeBonusInfoArray(FDataStreamBase* pStream)
-{	
-	writeInfoArray(pStream, m_iNumBonusInfos, m_paBonusInfo);
+{
+	writeInfoArray(pStream, m_paBonusInfo);
 }
 
 bool CvGlobals::readImprovementInfoArray(FDataStreamBase* pStream)
-{	
-	return readInfoArray(pStream, m_iNumImprovementInfos, m_paImprovementInfo, "CvImprovementInfo");
+{
+	return readInfoArray(pStream, m_paImprovementInfo, "CvImprovementInfo");
 }
 
 void CvGlobals::writeImprovementInfoArray(FDataStreamBase* pStream)
-{	
-	writeInfoArray(pStream, m_iNumImprovementInfos, m_paImprovementInfo);
+{
+	writeInfoArray(pStream, m_paImprovementInfo);
 }
+
+bool CvGlobals::readEventInfoArray(FDataStreamBase* pStream)
+{
+	return readInfoArray(pStream, m_paEventInfo, "CvEventInfo");
+}
+
+void CvGlobals::writeEventInfoArray(FDataStreamBase* pStream)
+{
+	writeInfoArray(pStream, m_paEventInfo);
+}
+
+bool CvGlobals::readEventTriggerInfoArray(FDataStreamBase* pStream)
+{
+	return readInfoArray(pStream, m_paEventTriggerInfo, "CvEventTriggerInfo");
+}
+
+void CvGlobals::writeEventTriggerInfoArray(FDataStreamBase* pStream)
+{
+	writeInfoArray(pStream, m_paEventTriggerInfo);
+}
+
 
 //
 // Global Types Hash Map
@@ -2666,7 +3285,7 @@ int CvGlobals::getTypesEnum(const char* szType) const
 		return it->second;
 	}
 
-	FAssertMsg(strcmp(szType, "NONE")==0, CvString::format("type %s not found", szType).c_str());
+	FAssertMsg(strcmp(szType, "NONE")==0 || strcmp(szType, "")==0, CvString::format("type %s not found", szType).c_str());
 	return -1;
 }
 
@@ -2724,13 +3343,149 @@ int CvGlobals::getNUM_LEADERANIM_TYPES() const
 }
 
 
+void CvGlobals::deleteInfoArrays()
+{
+	deleteInfoArray(m_paBuildingClassInfo);
+	deleteInfoArray(m_paBuildingInfo);
+	deleteInfoArray(m_paSpecialBuildingInfo);
+
+	deleteInfoArray(m_paLeaderHeadInfo);
+	deleteInfoArray(m_paTraitInfo);
+	deleteInfoArray(m_paCivilizationInfo);
+	deleteInfoArray(m_paUnitArtStyleTypeInfo);
+
+	deleteInfoArray(m_paVoteSourceInfo);
+	deleteInfoArray(m_paHints);
+	deleteInfoArray(m_paMainMenus);
+	deleteInfoArray(m_paGoodyInfo);
+	deleteInfoArray(m_paHandicapInfo);
+	deleteInfoArray(m_paGameSpeedInfo);
+	deleteInfoArray(m_paTurnTimerInfo);
+	deleteInfoArray(m_paVictoryInfo);
+	deleteInfoArray(m_paHurryInfo);
+	deleteInfoArray(m_paWorldInfo);
+	deleteInfoArray(m_paSeaLevelInfo);
+	deleteInfoArray(m_paClimateInfo);
+	deleteInfoArray(m_paProcessInfo);
+	deleteInfoArray(m_paVoteInfo);
+	deleteInfoArray(m_paProjectInfo);
+	deleteInfoArray(m_paReligionInfo);
+	deleteInfoArray(m_paCorporationInfo);
+	deleteInfoArray(m_paCommerceInfo);
+	deleteInfoArray(m_paEmphasizeInfo);
+	deleteInfoArray(m_paUpkeepInfo);
+	deleteInfoArray(m_paCultureLevelInfo);
+
+	deleteInfoArray(m_paColorInfo);
+	deleteInfoArray(m_paPlayerColorInfo);
+	deleteInfoArray(m_paInterfaceModeInfo);
+	deleteInfoArray(m_paCameraInfo);
+	deleteInfoArray(m_paAdvisorInfo);
+	deleteInfoArray(m_paThroneRoomCamera);
+	deleteInfoArray(m_paThroneRoomInfo);
+	deleteInfoArray(m_paThroneRoomStyleInfo);
+	deleteInfoArray(m_paSlideShowInfo);
+	deleteInfoArray(m_paSlideShowRandomInfo);
+	deleteInfoArray(m_paWorldPickerInfo);
+	deleteInfoArray(m_paSpaceShipInfo);
+
+	deleteInfoArray(m_paCivicInfo);
+	deleteInfoArray(m_paImprovementInfo);
+
+	deleteInfoArray(m_paRouteInfo);
+	deleteInfoArray(m_paRouteModelInfo);
+	deleteInfoArray(m_paRiverInfo);
+	deleteInfoArray(m_paRiverModelInfo);
+
+	deleteInfoArray(m_paWaterPlaneInfo);
+	deleteInfoArray(m_paTerrainPlaneInfo);
+	deleteInfoArray(m_paCameraOverlayInfo);
+
+	deleteInfoArray(m_aEraInfo);
+	deleteInfoArray(m_paEffectInfo);
+	deleteInfoArray(m_paAttachableInfo);
+
+	deleteInfoArray(m_paTechInfo);
+	deleteInfoArray(m_paDiplomacyInfo);
+
+	deleteInfoArray(m_paBuildInfo);
+	deleteInfoArray(m_paUnitClassInfo);
+	deleteInfoArray(m_paUnitInfo);
+	deleteInfoArray(m_paSpecialUnitInfo);
+	deleteInfoArray(m_paSpecialistInfo);
+	deleteInfoArray(m_paActionInfo);
+	deleteInfoArray(m_paMissionInfo);
+	deleteInfoArray(m_paControlInfo);
+	deleteInfoArray(m_paCommandInfo);
+	deleteInfoArray(m_paAutomateInfo);
+	deleteInfoArray(m_paPromotionInfo);
+
+	deleteInfoArray(m_paConceptInfo);
+	deleteInfoArray(m_paNewConceptInfo);
+	deleteInfoArray(m_paCityTabInfo);
+	deleteInfoArray(m_paCalendarInfo);
+	deleteInfoArray(m_paSeasonInfo);
+	deleteInfoArray(m_paMonthInfo);
+	deleteInfoArray(m_paDenialInfo);
+	deleteInfoArray(m_paInvisibleInfo);
+	deleteInfoArray(m_paUnitCombatInfo);
+	deleteInfoArray(m_paDomainInfo);
+	deleteInfoArray(m_paUnitAIInfos);
+	deleteInfoArray(m_paAttitudeInfos);
+	deleteInfoArray(m_paMemoryInfos);
+	deleteInfoArray(m_paGameOptionInfos);
+	deleteInfoArray(m_paMPOptionInfos);
+	deleteInfoArray(m_paForceControlInfos);
+	deleteInfoArray(m_paPlayerOptionInfos);
+	deleteInfoArray(m_paGraphicOptionInfos);
+
+	deleteInfoArray(m_paYieldInfo);
+	deleteInfoArray(m_paTerrainInfo);
+	deleteInfoArray(m_paFeatureInfo);
+	deleteInfoArray(m_paBonusClassInfo);
+	deleteInfoArray(m_paBonusInfo);
+	deleteInfoArray(m_paLandscapeInfo);
+
+	deleteInfoArray(m_paUnitFormationInfo);
+	deleteInfoArray(m_paCivicOptionInfo);
+	deleteInfoArray(m_paCursorInfo);
+
+	SAFE_DELETE_ARRAY(GC.getEntityEventTypes());
+	SAFE_DELETE_ARRAY(GC.getAnimationOperatorTypes());
+	SAFE_DELETE_ARRAY(GC.getFunctionTypes());
+	SAFE_DELETE_ARRAY(GC.getFlavorTypes());
+	SAFE_DELETE_ARRAY(GC.getArtStyleTypes());
+	SAFE_DELETE_ARRAY(GC.getCitySizeTypes());
+	SAFE_DELETE_ARRAY(GC.getContactTypes());
+	SAFE_DELETE_ARRAY(GC.getDiplomacyPowerTypes());
+	SAFE_DELETE_ARRAY(GC.getAutomateTypes());
+	SAFE_DELETE_ARRAY(GC.getDirectionTypes());
+	SAFE_DELETE_ARRAY(GC.getFootstepAudioTypes());
+	SAFE_DELETE_ARRAY(GC.getFootstepAudioTags());
+	deleteInfoArray(m_paQuestInfo);
+	deleteInfoArray(m_paHints);
+	deleteInfoArray(m_paMainMenus);
+	deleteInfoArray(m_paTutorialInfo);
+
+	deleteInfoArray(m_paEventInfo);
+	deleteInfoArray(m_paEventTriggerInfo);
+	deleteInfoArray(m_paEspionageMissionInfo);
+
+	deleteInfoArray(m_paEntityEventInfo);
+	deleteInfoArray(m_paAnimationCategoryInfo);
+	deleteInfoArray(m_paAnimationPathInfo);
+
+	clearTypesMap();
+	m_aInfoVectors.clear();
+}
+
 
 //
 // Global Infos Hash Map
 //
 
-int CvGlobals::getInfoTypeForString(const char* szType) const
-{
+int CvGlobals::getInfoTypeForString(const char* szType, bool hideAssert) const
+	{
 	FAssertMsg(szType, "null info type string");
 	InfosMap::const_iterator it = m_infosMap.find(szType);
 	if (it!=m_infosMap.end())
@@ -2738,10 +3493,13 @@ int CvGlobals::getInfoTypeForString(const char* szType) const
 		return it->second;
 	}
 
-	CvString szError;
-	szError.Format("info type %s not found, Current XML file is: %s", szType, GC.getCurrentXMLFile().GetCString());
-	FAssertMsg(strcmp(szType, "NONE")==0, szError.c_str());
-	gDLL->logMsg("xml.log", szError);
+	if(!hideAssert)
+	{
+		CvString szError;
+		szError.Format("info type %s not found, Current XML file is: %s", szType, GC.getCurrentXMLFile().GetCString());
+		FAssertMsg(strcmp(szType, "NONE")==0 || strcmp(szType, "")==0, szError.c_str());
+		gDLL->logMsg("xml.log", szError);
+	}
 
 	return -1;
 }
@@ -2755,6 +3513,22 @@ void CvGlobals::setInfoTypeFromString(const char* szType, int idx)
 	FAssertMsg(iExisting==-1 || iExisting==idx || strcmp(szType, "ERROR")==0, CvString::format("xml info type entry %s already exists", szType).c_str());
 #endif
 	m_infosMap[szType] = idx;
+}
+
+void CvGlobals::addToInfosVectors(void *infoVector)
+{
+	std::vector<CvInfoBase *> *infoBaseVector = (std::vector<CvInfoBase *> *) infoVector;
+	m_aInfoVectors.push_back(infoBaseVector);
+}
+
+void CvGlobals::infosReset()
+{
+	for(int i=0;i<(int)m_aInfoVectors.size();i++)
+	{
+		std::vector<CvInfoBase *> *infoBaseVector = m_aInfoVectors[i];
+		for(int j=0;j<(int)infoBaseVector->size();j++)
+			infoBaseVector->at(j)->reset();
+	}
 }
 
 int CvGlobals::getNumDirections() const { return NUM_DIRECTION_TYPES; }
@@ -2778,6 +3552,7 @@ int CvGlobals::getNumGraphicLevels() const { return NUM_GRAPHICLEVELS; }
 //
 CvMap& CvGlobals::getMap() { return *m_map; }
 CvGameAI& CvGlobals::getGame() { return *m_game; }
+CvGameAI *CvGlobals::getGamePointer(){ return m_game; }
 
 int CvGlobals::getMaxCivPlayers() const
 {
@@ -2797,7 +3572,6 @@ void CvGlobals::setMessageCodeTranslator(CvMessageCodeTranslator* pVal) { m_mess
 void CvGlobals::setDropMgr(CvDropMgr* pVal) { m_dropMgr = pVal; }
 void CvGlobals::setPortal(CvPortal* pVal) { m_portal = pVal; }
 void CvGlobals::setStatsReport(CvStatsReporter* pVal) { m_statsReporter = pVal; }
-void CvGlobals::setLightDebugScreen(CvLightDebugScreen* pVal) { m_pLightDebugScreen = pVal; }
 void CvGlobals::setPathFinder(FAStar* pVal) { m_pathFinder = pVal; }
 void CvGlobals::setInterfacePathFinder(FAStar* pVal) { m_interfacePathFinder = pVal; }
 void CvGlobals::setStepFinder(FAStar* pVal) { m_stepFinder = pVal; }

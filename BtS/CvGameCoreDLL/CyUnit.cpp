@@ -10,6 +10,7 @@
 #include "CvUnit.h"
 #include "CyPlot.h"
 #include "CyArea.h"
+#include "CvArtFileMgr.h"
 #include "CySelectionGroup.h"
 #include "CvDLLInterfaceIFaceBase.h"
 #include "CvGlobals.h"
@@ -164,9 +165,19 @@ bool CyUnit::canFortify(CyPlot* pPlot)
 	return m_pUnit ? m_pUnit->canFortify(pPlot->getPlot()) : false;
 }
 
+bool CyUnit::canPlunder(CyPlot* pPlot)
+{
+	return m_pUnit ? m_pUnit->canPlunder(pPlot->getPlot()) : false;
+}
+
 bool CyUnit::canAirPatrol(CyPlot* pPlot)
 {
 	return m_pUnit ? m_pUnit->canAirPatrol(pPlot->getPlot()) : false;
+}
+
+bool CyUnit::canSeaPatrol(CyPlot* pPlot)
+{
+	return m_pUnit ? m_pUnit->canSeaPatrol(pPlot->getPlot()) : false;
 }
 
 bool CyUnit::canHeal(CyPlot* pPlot)
@@ -212,6 +223,16 @@ bool CyUnit::canRecon(CyPlot* pPlot)
 bool CyUnit::canReconAt(CyPlot* pPlot, int iX, int iY)
 {
 	return m_pUnit ? m_pUnit->canReconAt(pPlot->getPlot(), iX, iY) : false;
+}
+
+bool CyUnit::canParadrop(CyPlot* pPlot)
+{
+	return m_pUnit ? m_pUnit->canParadrop(pPlot->getPlot()) : false;
+}
+
+bool CyUnit::canParadropAt(CyPlot* pPlot, int iX, int iY)
+{
+	return m_pUnit ? m_pUnit->canParadropAt(pPlot->getPlot(), iX, iY) : false;
 }
 
 bool CyUnit::canAirBomb(CyPlot* pPlot)
@@ -354,6 +375,21 @@ bool CyUnit::canGreatWork(CyPlot* pPlot)
 	return m_pUnit ? m_pUnit->canGreatWork(pPlot->getPlot()) : false;
 }
 
+int CyUnit::getEspionagePoints(CyPlot* pPlot)
+{
+	return m_pUnit ? m_pUnit->getEspionagePoints(pPlot->getPlot()) : -1;
+}
+
+bool CyUnit::canInfiltrate(CyPlot* pPlot, bool bTestVisible)
+{
+	return m_pUnit ? m_pUnit->canInfiltrate(pPlot->getPlot(), bTestVisible) : false;
+}
+
+bool CyUnit::canEspionage(CyPlot* pPlot)
+{
+	return m_pUnit ? m_pUnit->canEspionage(pPlot->getPlot()) : false;
+}
+
 bool CyUnit::canGoldenAge(CyPlot* pPlot, bool bTestVisible)
 {
 	return m_pUnit ? m_pUnit->canGoldenAge(pPlot->getPlot(), bTestVisible) : false;
@@ -408,6 +444,11 @@ bool CyUnit::upgradeAvailable(int /*UnitTypes*/ eFromUnit, int /*UnitClassTypes*
 bool CyUnit::canUpgrade(int /*UnitTypes*/ eUnit, bool bTestVisible)			
 {
 	return m_pUnit ? m_pUnit->canUpgrade((UnitTypes)eUnit, bTestVisible) : false;
+}
+
+bool CyUnit::hasUpgrade(bool bSearch)			
+{
+	return m_pUnit ? m_pUnit->hasUpgrade(bSearch) : false;
 }
 
 int /*HandicapTypes*/ CyUnit::getHandicapType()
@@ -570,6 +611,11 @@ bool CyUnit::isGoldenAge()
 	return m_pUnit ? m_pUnit->isGoldenAge() : false;
 }
 
+bool CyUnit::canCoexistWithEnemyUnit()
+{
+	return m_pUnit ? m_pUnit->canCoexistWithEnemyUnit() : false;
+}
+
 bool CyUnit::isFighting()
 {
 	return m_pUnit ? m_pUnit->isFighting() : false;
@@ -608,6 +654,14 @@ bool CyUnit::isHurt()
 bool CyUnit::isDead()
 {
 	return m_pUnit ? m_pUnit->isDead() : false;
+}
+
+void CyUnit::setBaseCombatStr(int iCombat)
+{
+	if (m_pUnit)
+	{
+		m_pUnit->setBaseCombatStr(iCombat);
+	}
 }
 
 int CyUnit::baseCombatStr()
@@ -665,24 +719,29 @@ int CyUnit::airBaseCombatStr()
 	return m_pUnit ? m_pUnit->airBaseCombatStr() : -1;
 }
 
-int CyUnit::airMaxCombatStr()
+int CyUnit::airMaxCombatStr(CyUnit* pOther)
 {
-	return m_pUnit ? m_pUnit->airMaxCombatStr() : -1;
+	return m_pUnit ? m_pUnit->airMaxCombatStr(pOther->getUnit()) : -1;
 }
 
-int CyUnit::airCurrCombatStr()
+int CyUnit::airCurrCombatStr(CyUnit* pOther)
 {
-	return m_pUnit ? m_pUnit->airCurrCombatStr() : -1;
+	return m_pUnit ? m_pUnit->airCurrCombatStr(pOther->getUnit()) : -1;
 }
 
-float CyUnit::airMaxCombatStrFloat()
+float CyUnit::airMaxCombatStrFloat(CyUnit* pOther)
 {
-	return m_pUnit ? m_pUnit->airMaxCombatStrFloat() : -1;
+	return m_pUnit ? m_pUnit->airMaxCombatStrFloat(pOther->getUnit()) : -1;
 }
 
-float CyUnit::airCurrCombatStrFloat()
+float CyUnit::airCurrCombatStrFloat(CyUnit* pOther)
 {
-	return m_pUnit ? m_pUnit->airCurrCombatStrFloat() : -1;
+	return m_pUnit ? m_pUnit->airCurrCombatStrFloat(pOther->getUnit()) : -1;
+}
+
+int CyUnit::combatLimit()
+{
+	return m_pUnit ? m_pUnit->combatLimit() : -1;
 }
 
 int CyUnit::airCombatLimit()
@@ -708,6 +767,11 @@ int CyUnit::airCombatDamage(CyUnit* pDefender)
 CyUnit* CyUnit::bestInterceptor(CyPlot* pPlot)
 {
 	return m_pUnit ? new CyUnit(m_pUnit->bestInterceptor(pPlot->getPlot())) : false;
+}
+
+CyUnit* CyUnit::bestSeaPillageInterceptor(CyPlot* pPlot)
+{
+	return m_pUnit ? new CyUnit(m_pUnit->bestSeaPillageInterceptor(pPlot->getPlot())) : false;
 }
 
 bool CyUnit::isAutomated()
@@ -795,6 +859,11 @@ bool CyUnit::canMoveImpassable()
 	return m_pUnit ? m_pUnit->canMoveImpassable() : false;
 }
 
+bool CyUnit::canMoveAllTerrain()
+{
+	return m_pUnit ? m_pUnit->canMoveAllTerrain() : false;
+}
+
 bool CyUnit::flatMovementCost()
 {
 	return m_pUnit ? m_pUnit->flatMovementCost() : false;
@@ -880,9 +949,19 @@ int CyUnit::hillsDefenseModifier()
 	return m_pUnit ? m_pUnit->hillsDefenseModifier() : -1;
 }
 
+int CyUnit::terrainAttackModifier(int /*TerrainTypes*/ eTerrain)
+{
+	return m_pUnit ? m_pUnit->terrainAttackModifier((TerrainTypes) eTerrain) : -1;
+}
+
 int CyUnit::terrainDefenseModifier(int /*TerrainTypes*/ eTerrain)
 {
 	return m_pUnit ? m_pUnit->terrainDefenseModifier((TerrainTypes) eTerrain) : -1;
+}
+
+int CyUnit::featureAttackModifier(int /*FeatureTypes*/ eFeature)
+{
+	return m_pUnit ? m_pUnit->featureAttackModifier((FeatureTypes) eFeature) : -1;
 }
 
 int CyUnit::featureDefenseModifier(int /*FeatureTypes*/ eFeature)
@@ -938,6 +1017,12 @@ int /*DomainTypes*/ CyUnit::domainCargo()
 int CyUnit::cargoSpace()
 {
 	return m_pUnit ? m_pUnit->cargoSpace() : -1;
+}
+
+void CyUnit::changeCargoSpace(int iChange)
+{
+	if (m_pUnit)
+		m_pUnit->changeCargoSpace(iChange);
 }
 
 bool CyUnit::isFull()
@@ -1011,10 +1096,10 @@ int CyUnit::getY()
 	return m_pUnit ? m_pUnit->getY_INLINE() : -1;
 }
 
-void CyUnit::setXY(int iX, int iY)
+void CyUnit::setXY(int iX, int iY, bool bGroup, bool bUpdate, bool bShow)
 {
 	if (m_pUnit)
-		return m_pUnit->setXY(iX, iY);
+		return m_pUnit->setXY(iX, iY, bGroup, bUpdate, bShow);
 }
 
 bool CyUnit::at(int iX, int iY)
@@ -1042,15 +1127,10 @@ CyPlot* CyUnit::getReconPlot()
 	return m_pUnit ? new CyPlot(m_pUnit->getReconPlot()) : NULL;
 }
 
-int CyUnit::getReconRange()
-{
-	return m_pUnit ? m_pUnit->getReconRange() : -1;
-}
-
-void CyUnit::setReconPlot(CyPlot* pNewValue, int iRange)
+void CyUnit::setReconPlot(CyPlot* pNewValue)
 {
 	if (m_pUnit)
-		m_pUnit->setReconPlot(pNewValue->getPlot(), iRange);
+		m_pUnit->setReconPlot(pNewValue->getPlot());
 }
 
 int CyUnit::getGameTurnCreated()
@@ -1109,10 +1189,10 @@ void CyUnit::setExperience(int iNewValue, int iMax)
 		m_pUnit->setExperience(iNewValue, iMax);
 }
 
-void CyUnit::changeExperience(int iChange, int iMax, bool bFromCombat, bool bInBorders)
+void CyUnit::changeExperience(int iChange, int iMax, bool bFromCombat, bool bInBorders, bool bUpdateGlobal)
 {
 	if (m_pUnit)
-		m_pUnit->changeExperience(iChange, iMax, bFromCombat, bInBorders);
+		m_pUnit->changeExperience(iChange, iMax, bFromCombat, bInBorders, bUpdateGlobal);
 }
 
 int CyUnit::getLevel()
@@ -1130,6 +1210,26 @@ void CyUnit::changeLevel(int iChange)
 {
 	if (m_pUnit)
 		m_pUnit->changeLevel(iChange);
+}
+
+int CyUnit::getFacingDirection()
+{
+	if(m_pUnit)
+		return m_pUnit->getFacingDirection(false);
+	else
+		return NO_DIRECTION;
+}
+
+void CyUnit::rotateFacingDirectionClockwise()
+{
+	if(m_pUnit)
+		return m_pUnit->rotateFacingDirectionClockwise();
+}
+
+void CyUnit::rotateFacingDirectionCounterClockwise()
+{
+	if(m_pUnit)
+		return m_pUnit->rotateFacingDirectionCounterClockwise();
 }
 
 int CyUnit::getCargo()
@@ -1200,6 +1300,21 @@ int CyUnit::getExtraMoves()
 int CyUnit::getExtraMoveDiscount()
 {
 	return m_pUnit ? m_pUnit->getExtraMoveDiscount() : -1;
+}
+
+int CyUnit::getExtraAirRange()
+{
+	return m_pUnit ? m_pUnit->getExtraAirRange() : -1;
+}
+
+int CyUnit::getExtraIntercept()
+{
+	return m_pUnit ? m_pUnit->getExtraIntercept() : -1;
+}
+
+int CyUnit::getExtraEvasion()
+{
+	return m_pUnit ? m_pUnit->getExtraEvasion() : -1;
 }
 
 int CyUnit::getExtraFirstStrikes()
@@ -1302,6 +1417,18 @@ int CyUnit::getKamikazePercent() const
 	return m_pUnit ? m_pUnit->getKamikazePercent() : -1;
 }
 
+int CyUnit::getImmobileTimer() const
+{
+	return m_pUnit ? m_pUnit->getImmobileTimer() : -1;
+}
+
+void CyUnit::setImmobileTimer(int iNewValue)
+{
+	if (m_pUnit)
+	{
+		m_pUnit->setImmobileTimer(iNewValue);
+	}
+}
 
 bool CyUnit::isMadeAttack()	 
 {
@@ -1339,6 +1466,16 @@ void CyUnit::setPromotionReady(bool bNewValue)
 int CyUnit::getOwner()
 {
 	return m_pUnit ? m_pUnit->getOwnerINLINE() : -1;
+}
+
+int CyUnit::getVisualOwner()
+{
+	return m_pUnit ? m_pUnit->getVisualOwner() : -1;
+}
+
+int CyUnit::getCombatOwner(int iForTeam)
+{
+	return m_pUnit ? m_pUnit->getCombatOwner((TeamTypes)iForTeam) : -1;
 }
 
 int CyUnit::getTeam()
@@ -1429,9 +1566,19 @@ bool CyUnit:: isFeatureDoubleMove(int /*FeatureTypes*/ eIndex)
 	return m_pUnit ? m_pUnit->isFeatureDoubleMove((FeatureTypes) eIndex): false;
 }
 
+int CyUnit::getExtraTerrainAttackPercent(int /*TerrainTypes*/ eIndex)
+{
+	return m_pUnit ? m_pUnit->getExtraTerrainAttackPercent((TerrainTypes) eIndex) : -1;
+}
+
 int CyUnit::getExtraTerrainDefensePercent(int /*TerrainTypes*/ eIndex)
 {
 	return m_pUnit ? m_pUnit->getExtraTerrainDefensePercent((TerrainTypes) eIndex) : -1;
+}
+
+int CyUnit::getExtraFeatureAttackPercent(int /*FeatureTypes*/ eIndex)
+{
+	return m_pUnit ? m_pUnit->getExtraFeatureAttackPercent((FeatureTypes) eIndex) : -1;
 }
 
 int CyUnit::getExtraFeatureDefensePercent(int /*FeatureTypes*/ eIndex)
@@ -1495,4 +1642,25 @@ void CyUnit::centerCamera()
 	{
 		gDLL->getInterfaceIFace()->centerCamera(m_pUnit);
 	}
+}
+
+void CyUnit::attackForDamage(CyUnit *defender, int attakerDamageChange, int defenderDamageChange)
+{
+	if(m_pUnit != NULL)
+	{
+		m_pUnit->attackForDamage(defender->m_pUnit, attakerDamageChange, defenderDamageChange);
+	}
+}
+
+void CyUnit::rangeStrike(int iX, int iY)
+{
+	if(m_pUnit != NULL)
+	{
+		m_pUnit->rangeStrike(iX, iY);
+	}
+}
+
+const CvArtInfoUnit* CyUnit::getArtInfo(int i, EraTypes eEra) const
+{
+	return m_pUnit ? m_pUnit->getArtInfo(i, eEra) : NULL;
 }

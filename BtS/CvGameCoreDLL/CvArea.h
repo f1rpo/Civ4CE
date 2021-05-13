@@ -25,6 +25,7 @@ public:
 	int countCoastalLand() const;																							// Exposed to Python
 	int countNumUniqueBonusTypes() const;																			// Exposed to Python
 	int countHasReligion(ReligionTypes eReligion, PlayerTypes eOwner = NO_PLAYER) const;		// Exposed to Python
+	int countHasCorporation(CorporationTypes eCorporation, PlayerTypes eOwner = NO_PLAYER) const;		// Exposed to Python
 
 	DllExport int getID() const;																							// Exposed to Python
 	void setID(int iID);

@@ -47,12 +47,13 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="boost_python-vc71-mt-gd-1_32.lib winmm.lib"
-				OutputFile="../Warlords/Assets/CvGameCoreDLL_DEBUG.dll"
+				OutputFile="../Beyond the Sword/Assets/CvGameCoreDLL_DEBUG.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="Python24\libs;&quot;boost-1.32.0\libs\&quot;"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/CvGameCoreDLL_DEBUG.pdb"
 				SubSystem="2"
+				LargeAddressAware="2"
 				ImportLibrary="$(OutDir)/CvGameCoreDLL.lib"
 				TargetMachine="1"/>
 			<Tool
@@ -109,12 +110,13 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="boost_python-vc71-mt-1_32.lib  winmm.lib"
-				OutputFile="../Warlords/Assets/CvGameCoreDLL_RELEASE.dll"
+				OutputFile="../Beyond the Sword/Assets/CvGameCoreDLL_RELEASE.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="Python24\libs;&quot;boost-1.32.0\libs\&quot;"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/CvGameCoreDLL_RELEASE.pdb"
 				SubSystem="2"
+				LargeAddressAware="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				ImportLibrary="$(OutDir)/CvGameCoreDLL.lib"
@@ -173,12 +175,13 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="boost_python-vc71-mt-1_32.lib  winmm.lib"
-				OutputFile="../Warlords/Assets/CvGameCoreDLL_RELEASE_MEM.dll"
+				OutputFile="../Beyond the Sword/Assets/CvGameCoreDLL_RELEASE_MEM.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="Python24\libs;&quot;boost-1.32.0\libs\&quot;"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/CvGameCoreDLL_RELEASE_MEM.pdb"
 				SubSystem="2"
+				LargeAddressAware="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				ImportLibrary="$(OutDir)/CvGameCoreDLL.lib"
@@ -235,12 +238,13 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="boost_python-vc71-mt-gd-1_32.lib  winmm.lib"
-				OutputFile="../Warlords/Assets/CvGameCoreDLL_DEBUG_MEM.dll"
+				OutputFile="../Beyond the Sword/Assets/CvGameCoreDLL_DEBUG_MEM.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="Python24\libs;&quot;boost-1.32.0\libs\&quot;"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/CvGameCoreDLL_DEBUG_MEM.pdb"
 				SubSystem="2"
+				LargeAddressAware="2"
 				ImportLibrary="$(OutDir)/CvGameCoreDLL.lib"
 				TargetMachine="1"/>
 			<Tool
@@ -297,12 +301,13 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="boost_python-vc71-mt-1_32.lib  winmm.lib"
-				OutputFile="../Warlords/Assets/CvGameCoreDLL.dll"
+				OutputFile="../Beyond the Sword/Assets/CvGameCoreDLL.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="Python24\libs;&quot;boost-1.32.0\libs\&quot;"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/CvGameCoreDLL.pdb"
 				SubSystem="2"
+				LargeAddressAware="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				ImportLibrary="$(OutDir)/CvGameCoreDLL.lib"
@@ -329,7 +334,7 @@
 				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 		<Configuration
-			Name="Debug with Release exe|Win32"
+			Name="Final Debug|Win32"
 			OutputDirectory="$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
@@ -339,10 +344,10 @@
 				Optimization="0"
 				OptimizeForProcessor="3"
 				AdditionalIncludeDirectories="&quot;Boost-1.32.0\include&quot;;Python24\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;FASSERT_ENABLE;_WINDOWS;_USRDLL;CVGAMECOREDLL_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;CVGAMECOREDLL_EXPORTS"
 				MinimalRebuild="FALSE"
 				ExceptionHandling="TRUE"
-				BasicRuntimeChecks="3"
+				BasicRuntimeChecks="0"
 				RuntimeLibrary="2"
 				BufferSecurityCheck="FALSE"
 				EnableFunctionLevelLinking="TRUE"
@@ -359,141 +364,15 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="boost_python-vc71-mt-1_32.lib winmm.lib"
-				OutputFile="../Warlords/Assets/CvGameCoreDLL.dll"
+				AdditionalDependencies="boost_python-vc71-mt-1_32.lib winmm.lib msvcprt.lib"
+				OutputFile="../Beyond the Sword/Assets/CvGameCoreDLL.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="Python24\libs;&quot;boost-1.32.0\libs\&quot;"
+				IgnoreDefaultLibraryNames="msvcprtd.lib"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/CvGameCoreDLL.pdb"
+				ProgramDatabaseFile="$(OutDir)/CvGameCoreDLL_DEBUG.pdb"
 				SubSystem="2"
-				ImportLibrary="$(OutDir)/CvGameCoreDLL.lib"
-				TargetMachine="1"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
-			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCWebDeploymentTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
-		</Configuration>
-		<Configuration
-			Name="Assert|Win32"
-			OutputDirectory="$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="2"
-			CharacterSet="2">
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="2"
-				GlobalOptimizations="TRUE"
-				EnableIntrinsicFunctions="TRUE"
-				OmitFramePointers="TRUE"
-				OptimizeForProcessor="3"
-				AdditionalIncludeDirectories="&quot;Boost-1.32.0\include&quot;;Python24\include"
-				PreprocessorDefinitions="FASSERT_ENABLE;WIN32;NDEBUG;_WINDOWS;_USRDLL;CVGAMECOREDLL_EXPORTS"
-				MinimalRebuild="FALSE"
-				ExceptionHandling="TRUE"
-				RuntimeLibrary="2"
-				BufferSecurityCheck="FALSE"
-				EnableFunctionLevelLinking="TRUE"
-				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="3"
-				PrecompiledHeaderThrough="CvGameCoreDLL.h"
-				ProgramDataBaseFileName="$(IntDir)/vc70.pdb"
-				WarningLevel="3"
-				Detect64BitPortabilityProblems="FALSE"
-				DebugInformationFormat="3"
-				CallingConvention="0"/>
-			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="boost_python-vc71-mt-1_32.lib  winmm.lib"
-				OutputFile="../Warlords/Assets/CvGameCoreDLL.dll"
-				LinkIncremental="1"
-				AdditionalLibraryDirectories="Python24\libs;&quot;boost-1.32.0\libs\&quot;"
-				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/CvGameCoreDLL_RELEASE.pdb"
-				SubSystem="2"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/CvGameCoreDLL.lib"
-				TargetMachine="1"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
-			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCWebDeploymentTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
-		</Configuration>
-		<Configuration
-			Name="Profile Final Release|Win32"
-			OutputDirectory="$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="2"
-			CharacterSet="2">
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="2"
-				GlobalOptimizations="TRUE"
-				EnableIntrinsicFunctions="TRUE"
-				OmitFramePointers="TRUE"
-				OptimizeForProcessor="3"
-				AdditionalIncludeDirectories="&quot;Boost-1.32.0\include&quot;;Python24\include"
-				PreprocessorDefinitions="FP_PROFILE_ENABLE;WIN32;NDEBUG;_WINDOWS;_USRDLL;CVGAMECOREDLL_EXPORTS;FINAL_RELEASE"
-				MinimalRebuild="FALSE"
-				ExceptionHandling="TRUE"
-				RuntimeLibrary="2"
-				BufferSecurityCheck="FALSE"
-				EnableFunctionLevelLinking="TRUE"
-				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="3"
-				PrecompiledHeaderThrough="CvGameCoreDLL.h"
-				ProgramDataBaseFileName="$(IntDir)/vc70.pdb"
-				WarningLevel="3"
-				Detect64BitPortabilityProblems="FALSE"
-				DebugInformationFormat="3"
-				CallingConvention="0"/>
-			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="boost_python-vc71-mt-1_32.lib  winmm.lib"
-				OutputFile="../Warlords/Assets/CvGameCoreDLL.dll"
-				LinkIncremental="1"
-				AdditionalLibraryDirectories="Python24\libs;&quot;boost-1.32.0\libs\&quot;"
-				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/CvGameCoreDLL.pdb"
-				SubSystem="2"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
+				LargeAddressAware="2"
 				ImportLibrary="$(OutDir)/CvGameCoreDLL.lib"
 				TargetMachine="1"/>
 			<Tool
@@ -558,19 +437,7 @@
 						UsePrecompiledHeader="1"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="1"/>
@@ -609,19 +476,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -663,19 +518,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -714,19 +557,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -765,19 +596,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -822,19 +641,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -845,9 +652,6 @@
 			</File>
 			<File
 				RelativePath=".\CvDLLWidgetData.cpp">
-			</File>
-			<File
-				RelativePath=".\CvExtraSaveData.cpp">
 			</File>
 			<File
 				RelativePath=".\CvFractal.cpp">
@@ -882,19 +686,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -933,19 +725,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -984,19 +764,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -1035,19 +803,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -1092,19 +848,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -1146,19 +890,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -1203,19 +935,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -1254,19 +974,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -1305,19 +1013,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -1356,19 +1052,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -1407,19 +1091,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -1458,19 +1130,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -1515,19 +1175,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -1572,19 +1220,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -1632,19 +1268,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -1683,19 +1307,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -1734,19 +1346,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -1785,19 +1385,7 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Assert|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Profile Final Release|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -1902,9 +1490,6 @@
 				RelativePath=".\CvEnums.h">
 			</File>
 			<File
-				RelativePath=".\CvExtraSaveData.h">
-			</File>
-			<File
 				RelativePath=".\CvFractal.h">
 			</File>
 			<File
@@ -1960,9 +1545,6 @@
 			</File>
 			<File
 				RelativePath=".\CvPlotGroup.h">
-			</File>
-			<File
-				RelativePath=".\CvPlotRegion.h">
 			</File>
 			<File
 				RelativePath=".\CvPopupInfo.h">
@@ -2023,13 +1605,16 @@
 						Name="VCCustomBuildTool"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug with Release exe|Win32">
+					Name="Final Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"/>
 				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\LinkedList.h">
+			</File>
+			<File
+				RelativePath=".\resource.h">
 			</File>
 		</Filter>
 		<Filter
@@ -2124,6 +1709,9 @@
 				</File>
 				<File
 					RelativePath=".\CyPlayerInterface1.cpp">
+				</File>
+				<File
+					RelativePath=".\CyPlayerInterface2.cpp">
 				</File>
 				<File
 					RelativePath=".\CyPlot.cpp">
@@ -2224,6 +1812,9 @@
 				</File>
 			</Filter>
 		</Filter>
+		<File
+			RelativePath=".\CvGameCoreDLL.rc">
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

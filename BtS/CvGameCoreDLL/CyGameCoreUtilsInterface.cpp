@@ -40,7 +40,7 @@ void CyGameCoreUtilsPythonInterface()
 	python::def("getCity", cyGetCity, python::return_value_policy<python::manage_new_object>(), "CyPlot* (IDInfo city)");
 	python::def("getUnit", cyGetUnit, python::return_value_policy<python::manage_new_object>(), "CyUnit* (IDInfo unit)");
 
-	python::def("isPromotionValid", cyIsPromotionValid, "bool (int /*PromotionTypes*/ ePromotion, int /*UnitTypes*/ eUnit)");
+	python::def("isPromotionValid", cyIsPromotionValid, "bool (int /*PromotionTypes*/ ePromotion, int /*UnitTypes*/ eUnit, bool bLeader)");
 	python::def("getPopulationAsset", cyGetPopulationAsset, "int (int iPopulation)");
 	python::def("getLandPlotsAsset", cyGetLandPlotsAsset, "int (int iLandPlots)");
 	python::def("getPopulationPower", cyGetPopulationPower, "int (int iPopulation)");
@@ -68,4 +68,5 @@ void CyGameCoreUtilsPythonInterface()
 	python::def("isTeamProject", cyIsTeamProject, "bool (int /*ProjectTypes*/ eProject)");
 	python::def("isLimitedProject", cyIsLimitedProject, "bool (int /*ProjectTypes*/ eProject)");
 	python::def("getCombatOdds", cyGetCombatOdds, "int (CyUnit* pAttacker, CyUnit* pDefender)");
+	python::def("getEspionageModifier", cyGetEspionageModifier, "int (int /*TeamTypes*/ iOurTeam, int /*TeamTypes*/ iTargetTeam)");
 }

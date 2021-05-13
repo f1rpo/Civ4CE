@@ -56,6 +56,8 @@ void CyInfoPythonInterface2()
 		.def("getArtDefineTag", &CvCivilizationInfo::getArtDefineTag, "string ()")
 		.def("getButton", &CvCivilizationInfo::getButton, "string ()")
 
+		.def("getDerivativeCiv", &CvCivilizationInfo::getDerivativeCiv, "int ()")
+
 		// Arrays
 
 		.def("getCivilizationBuildings", &CvCivilizationInfo::getCivilizationBuildings, "int (int i)")
@@ -79,6 +81,7 @@ void CyInfoPythonInterface2()
 		.def("getCityCulture", &CvVictoryInfo::getCityCulture, "int ()")
 		.def("getNumCultureCities", &CvVictoryInfo::getNumCultureCities, "int ()")
 		.def("getTotalCultureRatio", &CvVictoryInfo::getTotalCultureRatio, "int ()")
+		.def("getVictoryDelayTurns", &CvVictoryInfo::getVictoryDelayTurns, "int ()")
 
 		.def("isTargetScore", &CvVictoryInfo::isTargetScore, "bool ()")
 		.def("isEndScore", &CvVictoryInfo::isEndScore, "bool ()")
@@ -107,6 +110,9 @@ void CyInfoPythonInterface2()
 		.def("getDistanceMaintenancePercent", &CvHandicapInfo::getDistanceMaintenancePercent, "int ()")
 		.def("getNumCitiesMaintenancePercent", &CvHandicapInfo::getNumCitiesMaintenancePercent, "int ()")
 		.def("getMaxNumCitiesMaintenance", &CvHandicapInfo::getMaxNumCitiesMaintenance, "int ()")
+		.def("getColonyMaintenancePercent", &CvHandicapInfo::getColonyMaintenancePercent, "int ()")
+		.def("getMaxColonyMaintenance", &CvHandicapInfo::getMaxColonyMaintenance, "int ()")
+		.def("getCorporationMaintenancePercent", &CvHandicapInfo::getCorporationMaintenancePercent, "int ()")
 		.def("getCivicUpkeepPercent", &CvHandicapInfo::getCivicUpkeepPercent, "int ()")
 		.def("getInflationPercent", &CvHandicapInfo::getInflationPercent, "int ()")
 		.def("getHealthBonus", &CvHandicapInfo::getHealthBonus, "int ()")
@@ -150,6 +156,7 @@ void CyInfoPythonInterface2()
 		.def("getAIInflationPercent", &CvHandicapInfo::getAIInflationPercent, "int ()")
 		.def("getAIWarWearinessPercent", &CvHandicapInfo::getAIWarWearinessPercent, "int ()")
 		.def("getAIPerEraModifier", &CvHandicapInfo::getAIPerEraModifier, "int ()")
+		.def("getAIAdvancedStartPercent", &CvHandicapInfo::getAIAdvancedStartPercent, "int ()")
 		.def("getNumGoodies", &CvHandicapInfo::getNumGoodies, "int ()")
 
 		// Arrays
@@ -180,6 +187,7 @@ void CyInfoPythonInterface2()
 		.def("getHurryConscriptAngerPercent", &CvGameSpeedInfo::getHurryConscriptAngerPercent, "int ()")
 		.def("getInflationOffset", &CvGameSpeedInfo::getInflationOffset, "int ()")
 		.def("getInflationPercent", &CvGameSpeedInfo::getInflationPercent, "int ()")
+		.def("getVictoryDelayPercent", &CvGameSpeedInfo::getVictoryDelayPercent, "int ()")
 		.def("getNumTurnIncrements", &CvGameSpeedInfo::getNumTurnIncrements, "int ()")
 
 		.def("getGameTurnInfo", &CvGameSpeedInfo::getGameTurnInfo, python::return_value_policy<python::reference_existing_object>(), "GameTurnInfo ()")
@@ -194,6 +202,7 @@ void CyInfoPythonInterface2()
 
 	python::class_<CvBuildInfo, python::bases<CvInfoBase> >("CvBuildInfo")
 		.def("getTime", &CvBuildInfo::getTime, "int ()")
+		.def("getCost", &CvBuildInfo::getCost, "int ()")
 		.def("getTechPrereq", &CvBuildInfo::getTechPrereq, "int ()")
 		.def("getImprovement", &CvBuildInfo::getImprovement, "int ()")
 		.def("getRoute", &CvBuildInfo::getRoute, "int ()")
@@ -242,6 +251,7 @@ void CyInfoPythonInterface2()
 
 		.def("getYieldChange", &CvRouteInfo::getYieldChange, "int (int i)")
 		.def("getTechMovementChange", &CvRouteInfo::getTechMovementChange, "int (int i)")
+		.def("getPrereqOrBonus", &CvRouteInfo::getPrereqOrBonus, "int (int i)")
 		;
 
 	python::class_<CvImprovementBonusInfo, python::bases<CvInfoBase> >("CvImprovementBonusInfo")
@@ -259,9 +269,11 @@ void CyInfoPythonInterface2()
 
 		.def("getTilesPerGoody", &CvImprovementInfo::getTilesPerGoody, "int ()")
 		.def("getGoodyUniqueRange", &CvImprovementInfo::getGoodyUniqueRange, "int ()")
+		.def("getFeatureGrowthProbability", &CvImprovementInfo::getFeatureGrowthProbability, "int ()")
 		.def("getUpgradeTime", &CvImprovementInfo::getUpgradeTime, "int ()")
 		.def("getAirBombDefense", &CvImprovementInfo::getAirBombDefense, "int ()")
 		.def("getDefenseModifier", &CvImprovementInfo::getDefenseModifier, "int ()")
+		.def("getHappiness", &CvImprovementInfo::getDefenseModifier, "int ()")
 		.def("getPillageGold", &CvImprovementInfo::getPillageGold, "int ()")
 		.def("getImprovementPillage", &CvImprovementInfo::getImprovementPillage, "int ()")
 		.def("getImprovementUpgrade", &CvImprovementInfo::getImprovementUpgrade, "int ()")
@@ -279,6 +291,7 @@ void CyInfoPythonInterface2()
 		.def("isWater", &CvImprovementInfo::isWater, "bool ()")
 		.def("isGoody", &CvImprovementInfo::isGoody, "bool ()")
 		.def("isPermanent", &CvImprovementInfo::isPermanent, "bool ()")
+		.def("isOutsideBorders", &CvImprovementInfo::isOutsideBorders, "bool ()")
 
 		.def("getArtDefineTag", &CvImprovementInfo::getArtDefineTag, "string ()")
 
@@ -362,8 +375,9 @@ void CyInfoPythonInterface2()
 		.def("getDisappearanceProbability", &CvFeatureInfo::getDisappearanceProbability, "int ()")
 		.def("getGrowthProbability", &CvFeatureInfo::getGrowthProbability, "int ()")
 		.def("getDefenseModifier", &CvFeatureInfo::getDefenseModifier, "int ()")
-		.def("getNumVarieties", &CvFeatureInfo::getNumVarieties, "int ()")
-
+		.def("getAdvancedStartRemoveCost", &CvFeatureInfo::getAdvancedStartRemoveCost, "int ()")
+		.def("getTurnDamage", &CvFeatureInfo::getTurnDamage, "int ()")
+		
 		.def("isNoCoast", &CvFeatureInfo::isNoCoast, "bool ()")
 		.def("isNoRiver", &CvFeatureInfo::isNoRiver, "bool ()")
 		.def("isNoAdjacent", &CvFeatureInfo::isNoAdjacent, "bool ()")
@@ -373,6 +387,8 @@ void CyInfoPythonInterface2()
 		.def("isImpassable", &CvFeatureInfo::isImpassable, "bool ()")
 		.def("isNoCity", &CvFeatureInfo::isNoCity, "bool ()")
 		.def("isNoImprovement", &CvFeatureInfo::isNoImprovement, "bool ()")
+		.def("isVisibleAlways", &CvFeatureInfo::isVisibleAlways, "bool ()")
+		.def("isNukeImmune", &CvFeatureInfo::isNukeImmune, "bool ()")
 
 		// Arrays
 
@@ -381,8 +397,7 @@ void CyInfoPythonInterface2()
 		.def("getHillsYieldChange", &CvFeatureInfo::getHillsYieldChange, "int (int i)")
 
 		.def("isTerrain", &CvFeatureInfo::isTerrain, "bool (int i)")
-
-		.def("getVarietyButton", &CvFeatureInfo::getVarietyButton, "string (int i)")
+		.def("getNumVarieties", &CvFeatureInfo::getNumVarieties, "int ()")
 		;
 
 	python::class_<CvCommerceInfo, python::bases<CvInfoBase> >("CvCommerceInfo")

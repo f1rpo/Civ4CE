@@ -37,7 +37,7 @@ bool cyIsPotentialEnemy(int /*TeamTypes*/ eOurPlayer, int /*TeamTypes*/ eTheirPl
 CyCity* cyGetCity(IDInfo city);
 CyUnit* cyGetUnit(IDInfo unit);
 
-bool cyIsPromotionValid(int /*PromotionTypes*/ ePromotion, int /*UnitTypes*/ eUnit);
+bool cyIsPromotionValid(int /*PromotionTypes*/ ePromotion, int /*UnitTypes*/ eUnit, bool bLeader);
 int cyGetPopulationAsset(int iPopulation);
 int cyGetLandPlotsAsset(int iLandPlots);
 int cyGetPopulationPower(int iPopulation);
@@ -66,5 +66,6 @@ bool cyIsWorldProject(int /*ProjectTypes*/ eProject);
 bool cyIsTeamProject(int /*ProjectTypes*/ eProject);
 bool cyIsLimitedProject(int /*ProjectTypes*/ eProject);
 int cyGetCombatOdds(CyUnit* pAttacker, CyUnit* pDefender);
+int cyGetEspionageModifier(int /*TeamTypes*/ iOurTeam, int /*TeamTypes*/ iTargetTeam);
 
 #endif	// CyGameCoreUtils_h

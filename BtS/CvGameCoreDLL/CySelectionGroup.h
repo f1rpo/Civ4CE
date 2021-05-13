@@ -48,6 +48,7 @@ public:
 	bool canFight();
 	bool canDefend();	
 	bool alwaysInvisible();	
+	bool isInvisible(int /*TeamTypes*/ eTeam);	
 	int countNumUnitAIType(UnitAITypes eUnitAI);
 	bool hasWorker();
 
@@ -82,6 +83,7 @@ public:
 	int getMissionData2( int iNode );
 	MissionData* getMissionFromQueue(int iIndex);
 	CyUnit* getHeadUnit();
+	CyUnit* getUnitAt(int index);
 
 protected:
 	CvSelectionGroup* m_pSelectionGroup;

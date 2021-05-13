@@ -48,7 +48,7 @@ public:
 	void StopAnimation(AnimationTypes eAnim);
 	void MoveTo( const CvPlot * pkPlot );
 	void QueueMove( const CvPlot * pkPlot );
-	void ExecuteMove( float fTimeToExecute );
+	void ExecuteMove( float fTimeToExecute, bool bCombat );
 	void SetPosition( const CvPlot * pkPlot );
 	void NotifyEntity( MissionTypes eMission );
 	void SetSiegeTower(bool show);

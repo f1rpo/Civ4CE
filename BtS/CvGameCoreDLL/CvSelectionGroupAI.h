@@ -19,6 +19,7 @@ public:
 
 	void AI_separate();
 	void AI_seperateNonAI(UnitAITypes eUnitAI);
+	void AI_seperateAI(UnitAITypes eUnitAI);
 
 	bool AI_update();
 
@@ -41,8 +42,11 @@ public:
 
 	MissionAITypes AI_getMissionAIType();
 	void AI_setMissionAI(MissionAITypes eNewMissionAI, CvPlot* pNewPlot, CvUnit* pNewUnit);
+	CvUnit* AI_ejectBestDefender(CvPlot* pTargetPlot);
 
 	CvUnit* AI_getMissionAIUnit();
+	
+	bool AI_isFull();
 
 	void read(FDataStreamBase* pStream);
 	void write(FDataStreamBase* pStream);

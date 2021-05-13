@@ -25,7 +25,7 @@ public:
 	CyGlobalContext();
 	virtual ~CyGlobalContext();
 
-	static CyGlobalContext& getInstance();		// singleton accessor 
+	static CyGlobalContext& getInstance();		// singleton accessor
 
 	bool isDebugBuild() const;
 	CyGame* getCyGame() const;
@@ -45,6 +45,7 @@ public:
 	CvLeaderHeadInfo* getLeaderHeadInfo(int i) const;
 	CvTraitInfo* getTraitInfo(int i) const;
 	CvUnitInfo* getUnitInfo(int i) const;
+	CvSpecialUnitInfo* getSpecialUnitInfo(int i) const;
 	CvYieldInfo* getYieldInfo(int i) const;
 	CvCommerceInfo* getCommerceInfo(int i) const;
 	CvRouteInfo* getRouteInfo(int i) const;
@@ -71,6 +72,7 @@ public:
 	CvProcessInfo* getProcessInfo(int i) const;
 	CvSpecialistInfo* getSpecialistInfo(int i) const;
 	CvReligionInfo* getReligionInfo(int i) const;
+	CvCorporationInfo* getCorporationInfo(int i) const;
 	CvControlInfo* getControlInfo(int i) const;
 	CvTechInfo* getTechInfo(int i) const;
 	CvSpecialBuildingInfo* getSpecialBuildingInfo(int i) const;
@@ -86,6 +88,7 @@ public:
 	CvSeaLevelInfo * getSeaLevelInfo(int i) const;
 	CvInfoBase * getUnitAIInfo(int i) const;
 	CvColorInfo* getColorInfo(int i) const;
+    CvUnitArtStyleTypeInfo* getUnitArtStyleTypeInfo(int i) const;
 
 	int getInfoTypeForString(const char* szInfoType) const;
 	int getTypesEnum(const char* szType) const;
@@ -94,9 +97,13 @@ public:
 	CvPlayerColorInfo* getPlayerColorInfo(int i) const;
 
 	CvInfoBase* getHints(int i) const;
+	CvMainMenuInfo* getMainMenus(int i) const;
+	CvInfoBase* getInvisibleInfo(int i) const;
+	CvVoteSourceInfo* getVoteSourceInfo(int i) const;
 	CvInfoBase* getAttitudeInfo(int i) const;
 	CvInfoBase* getMemoryInfo(int i) const;
 	CvInfoBase* getConceptInfo(int i) const;
+	CvInfoBase* getNewConceptInfo(int i) const;
 	CvInfoBase* getCityTabInfo(int i) const;
 	CvInfoBase* getCalendarInfo(int i) const;
 	CvInfoBase* getGameOptionInfo(int i) const;
@@ -107,6 +114,9 @@ public:
 	CvInfoBase* getDenialInfo(int i) const;
 	CvQuestInfo* getQuestInfo(int i) const;
 	CvTutorialInfo* getTutorialInfo(int i) const;
+	CvEventTriggerInfo* getEventTriggerInfo(int i) const;
+	CvEventInfo* getEventInfo(int i) const;
+	CvEspionageMissionInfo* getEspionageMissionInfo(int i) const;
 	CvHurryInfo* getHurryInfo(int i) const;
 	CvPlayerOptionInfo* getPlayerOptionInfo(int i) const;
 	CvPlayerOptionInfo* getPlayerOptionsInfoByIndex(int i) const;
@@ -126,6 +136,7 @@ public:
 	CvArtInfoImprovement* getImprovementArtInfo(int i) const;
 	CvArtInfoTerrain* getTerrainArtInfo(int i) const;
 	CvArtInfoFeature* getFeatureArtInfo(int i) const;
+
 
 	// Structs
 
@@ -149,6 +160,7 @@ public:
 	int getNumLeaderHeadInfos() const { return GC.getNumLeaderHeadInfos(); }
 	int getNumTraitInfos() const { return GC.getNumTraitInfos(); }
 	int getNumUnitInfos() const { return GC.getNumUnitInfos(); }
+	int getNumSpecialUnitInfos() const { return GC.getNumSpecialUnitInfos(); }
 	int getNumRouteInfos() const { return GC.getNumRouteInfos(); }
 	int getNumFeatureInfos() const { return GC.getNumFeatureInfos(); }
 	int getNumImprovementInfos() const { return GC.getNumImprovementInfos(); }
@@ -169,6 +181,7 @@ public:
 	int getNumPromotionInfos() const { return GC.getNumPromotionInfos(); }
 	int getNumTechInfos() const { return GC.getNumTechInfos(); }
 	int getNumReligionInfos() const { return GC.getNumReligionInfos(); }
+	int getNumCorporationInfos() const { return GC.getNumCorporationInfos(); }
 	int getNumSpecialistInfos() const { return GC.getNumSpecialistInfos(); }
 	int getNumCivicInfos() const { return GC.getNumCivicInfos(); }
 	int getNumDiplomacyInfos() const { return GC.getNumDiplomacyInfos(); }
@@ -186,6 +199,7 @@ public:
 	int getNumSeaLevelInfos() const { return GC.getNumSeaLevelInfos(); }
 	int getNumClimateInfos() const { return GC.getNumClimateInfos(); }
 	int getNumConceptInfos() const { return GC.getNumConceptInfos(); }
+	int getNumNewConceptInfos() const { return GC.getNumNewConceptInfos(); }
 	int getNumCityTabInfos() const { return GC.getNumCityTabInfos(); }
 	int getNumCalendarInfos() const { return GC.getNumCalendarInfos(); }
 	int getNumPlayerOptionInfos() const { return GC.getNumPlayerOptionInfos(); }
@@ -197,7 +211,13 @@ public:
 	int getNumDenialInfos() const { return GC.getNumDenialInfos(); }
 	int getNumQuestInfos() const { return GC.getNumQuestInfos(); }
 	int getNumTutorialInfos() const { return GC.getNumTutorialInfos(); }
+	int getNumEventTriggerInfos() const { return GC.getNumEventTriggerInfos(); }
+	int getNumEventInfos() const { return GC.getNumEventInfos(); }
+	int getNumEspionageMissionInfos() const { return GC.getNumEspionageMissionInfos(); }
 	int getNumHints() const { return GC.getNumHints(); }
+	int getNumMainMenus() const { return GC.getNumMainMenus(); }
+	int getNumInvisibleInfos() const { return GC.getNumInvisibleInfos(); }
+	int getNumVoteSourceInfos() const { return GC.getNumVoteSourceInfos(); }
 
 	// ArtInfos
 	int getNumInterfaceArtInfos() const { return ARTFILEMGR.getNumInterfaceArtInfos(); }
@@ -213,6 +233,8 @@ public:
 	int getNumFeatureArtInfos() const { return ARTFILEMGR.getNumFeatureArtInfos(); }
 	int getNumAnimationPathInfos() const { return GC.getNumAnimationPathInfos(); }
 	int getNumAnimationCategoryInfos() const { return GC.getNumAnimationCategoryInfos(); }
+    int getNumUnitArtStyleTypeInfos() const { return GC.getNumUnitArtStyleTypeInfos(); }
+
 
 	int getNumEntityEventTypes() const { return GC.getNumEntityEventTypes(); }
 	int getNumAnimationOperatorTypes() const { return GC.getNumAnimationOperatorTypes(); }
@@ -242,8 +264,45 @@ public:
 	int getRIVER_ATTACK_MODIFIER() const { return GC.getRIVER_ATTACK_MODIFIER(); }
 	int getAMPHIB_ATTACK_MODIFIER() const { return GC.getAMPHIB_ATTACK_MODIFIER(); }
 	int getHILLS_EXTRA_MOVEMENT() const { return GC.getHILLS_EXTRA_MOVEMENT(); }
+	int getMAX_PLOT_LIST_ROWS() const { return GC.getMAX_PLOT_LIST_ROWS(); }
+	int getUNIT_MULTISELECT_MAX() const { return GC.getUNIT_MULTISELECT_MAX(); }
+	int getPERCENT_ANGER_DIVISOR() const { return GC.getPERCENT_ANGER_DIVISOR(); }
+	int getEVENT_MESSAGE_TIME() const { return GC.getEVENT_MESSAGE_TIME(); }
+	int getROUTE_FEATURE_GROWTH_MODIFIER() const { return GC.getROUTE_FEATURE_GROWTH_MODIFIER(); }
+	int getFEATURE_GROWTH_MODIFIER() const { return GC.getFEATURE_GROWTH_MODIFIER(); }
+	int getMIN_CITY_RANGE() const { return GC.getMIN_CITY_RANGE(); }
+	int getCITY_MAX_NUM_BUILDINGS() const { return GC.getCITY_MAX_NUM_BUILDINGS(); }
+	int getNUM_UNIT_AND_TECH_PREREQS() const { return GC.getNUM_UNIT_AND_TECH_PREREQS(); }
+	int getNUM_AND_TECH_PREREQS() const { return GC.getNUM_AND_TECH_PREREQS(); }
+	int getNUM_OR_TECH_PREREQS() const { return GC.getNUM_OR_TECH_PREREQS(); }
+	int getLAKE_MAX_AREA_SIZE() const { return GC.getLAKE_MAX_AREA_SIZE(); }
+	int getNUM_ROUTE_PREREQ_OR_BONUSES() const { return GC.getNUM_ROUTE_PREREQ_OR_BONUSES(); }
+	int getNUM_BUILDING_AND_TECH_PREREQS() const { return GC.getNUM_BUILDING_AND_TECH_PREREQS(); }
+	int getMIN_WATER_SIZE_FOR_OCEAN() const { return GC.getMIN_WATER_SIZE_FOR_OCEAN(); }
 	int getFORTIFY_MODIFIER_PER_TURN() const { return GC.getFORTIFY_MODIFIER_PER_TURN(); }
 	int getMAX_CITY_DEFENSE_DAMAGE() const { return GC.getMAX_CITY_DEFENSE_DAMAGE(); }
+	int getNUM_CORPORATION_PREREQ_BONUSES() const { return GC.getNUM_CORPORATION_PREREQ_BONUSES(); }
+	int getPEAK_SEE_THROUGH_CHANGE() const { return GC.getPEAK_SEE_THROUGH_CHANGE(); }
+	int getHILLS_SEE_THROUGH_CHANGE() const { return GC.getHILLS_SEE_THROUGH_CHANGE(); }
+	int getSEAWATER_SEE_FROM_CHANGE() const { return GC.getSEAWATER_SEE_FROM_CHANGE(); }
+	int getPEAK_SEE_FROM_CHANGE() const { return GC.getPEAK_SEE_FROM_CHANGE(); }
+	int getHILLS_SEE_FROM_CHANGE() const { return GC.getHILLS_SEE_FROM_CHANGE(); }
+
+	float getCAMERA_MIN_YAW() const { return GC.getCAMERA_MIN_YAW(); }
+	float getCAMERA_MAX_YAW() const { return GC.getCAMERA_MAX_YAW(); }
+	float getCAMERA_FAR_CLIP_Z_HEIGHT() const { return GC.getCAMERA_FAR_CLIP_Z_HEIGHT(); }
+	float getCAMERA_MAX_TRAVEL_DISTANCE() const { return GC.getCAMERA_MAX_TRAVEL_DISTANCE(); }
+	float getCAMERA_START_DISTANCE() const { return GC.getCAMERA_START_DISTANCE(); }
+	float getAIR_BOMB_HEIGHT() const { return GC.getAIR_BOMB_HEIGHT(); }
+	float getPLOT_SIZE() const { return GC.getPLOT_SIZE(); }
+	float getCAMERA_SPECIAL_PITCH() const { return GC.getCAMERA_SPECIAL_PITCH(); }
+	float getCAMERA_MAX_TURN_OFFSET() const { return GC.getCAMERA_MAX_TURN_OFFSET(); }
+	float getCAMERA_MIN_DISTANCE() const { return GC.getCAMERA_MIN_DISTANCE(); }
+	float getCAMERA_UPPER_PITCH() const { return GC.getCAMERA_UPPER_PITCH(); }
+	float getCAMERA_LOWER_PITCH() const { return GC.getCAMERA_LOWER_PITCH(); }
+	float getFIELD_OF_VIEW() const { return GC.getFIELD_OF_VIEW(); }
+	float getSHADOW_SCALE() const { return GC.getSHADOW_SCALE(); }
+	float getUNIT_MULTISELECT_DISTANCE() const { return GC.getUNIT_MULTISELECT_DISTANCE(); }
 
 	int getMAX_CIV_PLAYERS() const { return GC.getMAX_CIV_PLAYERS(); }
 	int getMAX_PLAYERS() const { return GC.getMAX_PLAYERS(); }

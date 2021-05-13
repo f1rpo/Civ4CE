@@ -30,6 +30,7 @@ const CvPopupInfo& CvPopupInfo::operator=(const CvPopupInfo& other)
 	setPendingDelete(other.getPendingDelete());
 	setOnFocusPythonCallback(other.getOnFocusPythonCallback());
 	setOnClickedPythonCallback(other.getOnClickedPythonCallback());
+	setPythonModule(other.getPythonModule());
 	m_aPythonButtons.clear();
 	for (int i = 0; i < other.getNumPythonButtons(); i++)
 	{
@@ -88,6 +89,11 @@ const CvString& CvPopupInfo::getOnFocusPythonCallback() const
 const CvString& CvPopupInfo::getOnClickedPythonCallback() const
 {
 	return m_szOnClickedPythonCallback;
+}
+
+const CvString& CvPopupInfo::getPythonModule() const
+{
+	return m_szPythonModule;
 }
 
 const CvWString& CvPopupInfo::getPythonButtonText(int i) const
@@ -163,6 +169,11 @@ void CvPopupInfo::setOnClickedPythonCallback(const char* pszCallback)
 	m_szOnClickedPythonCallback = pszCallback;
 }
 
+void CvPopupInfo::setPythonModule(const char* pszModule)
+{
+	m_szPythonModule = pszModule;
+}
+
 void CvPopupInfo::addPythonButton(const wchar* szText, const char* szArt)
 {
 	CvPopupButtonPython button;
@@ -193,6 +204,7 @@ void CvPopupInfo::read(FDataStreamBase& stream)
 
 	stream.ReadString(m_szOnFocusPythonCallback);
 	stream.ReadString(m_szOnClickedPythonCallback);
+	stream.ReadString(m_szPythonModule);
 	uint iSize;
 	stream.Read(&iSize);
 	for (uint i = 0; i < iSize; i++)
@@ -218,6 +230,7 @@ void CvPopupInfo::write(FDataStreamBase& stream) const
 
 	stream.WriteString(m_szOnFocusPythonCallback);
 	stream.WriteString(m_szOnClickedPythonCallback);
+	stream.WriteString(m_szPythonModule);
 	uint iSize = m_aPythonButtons.size();
 	stream.Write(iSize);
 	for (uint i = 0; i < iSize; i++)

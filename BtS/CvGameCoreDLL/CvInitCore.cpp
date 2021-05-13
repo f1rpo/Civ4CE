@@ -519,6 +519,8 @@ void CvInitCore::resetGame()
 	// City Elimination
 	m_iMaxCityElimination = 0;
 
+	m_iNumAdvancedStartPoints = 0;
+
 	// Unsaved game data
 	m_uiSyncRandSeed = 0;
 	m_uiMapRandSeed = 0;
@@ -588,6 +590,8 @@ void CvInitCore::resetGame(CvInitCore * pSource, bool bClear, bool bSaveGameType
 
 		// City Elimination
 		setMaxCityElimination(pSource->getMaxCityElimination());
+
+		setNumAdvancedStartPoints(pSource->getNumAdvancedStartPoints());
 
 		setSyncRandSeed(pSource->getSyncRandSeed());
 		setMapRandSeed(pSource->getMapRandSeed());
@@ -1782,6 +1786,30 @@ void CvInitCore::setAdminPassword(const CvWString & szAdminPassword, bool bEncry
 	}
 }
 
+void CvInitCore::resetAdvancedStartPoints()
+{
+	int iPoints = 0;
+
+	if (NO_ERA != getEra())
+	{
+		iPoints += GC.getEraInfo(getEra()).getAdvancedStartPoints();
+	}
+	
+	if (NO_WORLDSIZE != getWorldSize())
+	{
+		iPoints *= GC.getWorldInfo(getWorldSize()).getAdvancedStartPointsMod();
+		iPoints /= 100;
+	}
+	
+	if (NO_GAMESPEED != getGameSpeed())
+	{
+		iPoints *= GC.getGameSpeedInfo(getGameSpeed()).getGrowthPercent();
+		iPoints /= 100;
+	}
+
+	setNumAdvancedStartPoints(iPoints);
+}
+
 
 void CvInitCore::read(FDataStreamBase* pStream)
 {
@@ -1833,6 +1861,7 @@ void CvInitCore::read(FDataStreamBase* pStream)
 	pStream->Read(&m_iTargetScore);
 
 	pStream->Read(&m_iMaxCityElimination);
+	pStream->Read(&m_iNumAdvancedStartPoints);
 
 	// PLAYER DATA
 	pStream->ReadString(MAX_PLAYERS, m_aszLeaderName);
@@ -1910,6 +1939,7 @@ void CvInitCore::write(FDataStreamBase* pStream)
 	pStream->Write(m_iTargetScore);
 
 	pStream->Write(m_iMaxCityElimination);
+	pStream->Write(m_iNumAdvancedStartPoints);
 
 	// PLAYER DATA
 	pStream->WriteString(MAX_PLAYERS, m_aszLeaderName);

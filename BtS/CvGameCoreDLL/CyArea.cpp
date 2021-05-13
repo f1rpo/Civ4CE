@@ -34,6 +34,11 @@ int CyArea::countHasReligion(int /*ReligionTypes*/ eReligion, int /*PlayerTypes*
 	return m_pArea ? m_pArea->countHasReligion((ReligionTypes)eReligion, (PlayerTypes)eOwner) : -1;
 }
 
+int CyArea::countHasCorporation(int /*CorporationTypes*/ eCorporation, int /*PlayerTypes*/ eOwner)
+{
+	return m_pArea ? m_pArea->countHasCorporation((CorporationTypes)eCorporation, (PlayerTypes)eOwner) : -1;
+}
+
 int CyArea::getID()
 {
 	return m_pArea ? m_pArea->getID() : -1;

@@ -66,6 +66,9 @@ public:
 	int defenseModifier(int /*TeamTypes*/ iDefendTeam, bool bIgnoreBuilding, bool bHelp);
 	int movementCost(CyUnit* pUnit, CyPlot* pFromPlot);
 
+	int getExtraMovePathCost();
+	void changeExtraMovePathCost(int iChange);
+
 	bool isAdjacentOwned();
 	bool isAdjacentPlayer(int /*PlayerTypes*/ ePlayer, bool bLandOnly);
 	bool isAdjacentTeam(int /*TeamTypes*/ eTeam, bool bLandOnly);
@@ -80,23 +83,26 @@ public:
 	bool isActiveVisible(bool bDebug);
 	bool isVisibleToWatchingHuman();
 	bool isAdjacentVisible(int /*TeamTypes*/ eTeam, bool bDebug);
+	bool isAdjacentNonvisible(int /*TeamTypes*/ eTeam);
+	bool isAdjacentRevealed(int /*TeamTypes*/ eTeam);
+	bool isAdjacentNonrevealed(int /*TeamTypes*/ eTeam);
 
 	void removeGoody();
 	bool isGoody();
 	bool isRevealedGoody(int /*TeamTypes*/ eTeam);
 
 	bool isCity();
-	bool isFriendlyCity(int /*TeamTypes*/ eTeam);														
-	bool isEnemyCity(int /*TeamTypes*/ eTeam);															
+	bool isFriendlyCity(CyUnit* pUnit, bool bCheckImprovement);														
+	bool isEnemyCity(CyUnit* pUnit);															
 	bool isOccupation();
 	bool isBeingWorked();
 
 	bool isUnit();
 	bool isInvestigate(int /*TeamTypes*/ eTeam);
-	bool isVisibleEnemyDefender(int /*PlayerTypes*/ ePlayer);
+	bool isVisibleEnemyDefender(CyUnit* pUnit);
 	int getNumDefenders(int /*PlayerTypes*/ ePlayer);
-	int getNumVisibleEnemyDefenders(int /*PlayerTypes*/ ePlayer);
-	int getNumVisiblePotentialEnemyDefenders(int /*PlayerTypes*/ ePlayer);
+	int getNumVisibleEnemyDefenders(CyUnit* pUnit);
+	int getNumVisiblePotentialEnemyDefenders(CyUnit* pUnit);
 	bool isVisibleEnemyUnit(int /*PlayerTypes*/ ePlayer);
 	bool isVisibleOtherUnit(int /*PlayerTypes*/ ePlayer);
 	bool isFighting();
@@ -106,11 +112,11 @@ public:
 	bool isNetworkTerrain(int /*TeamTypes*/ eTeam);
 	bool isBonusNetwork(int /*TeamTypes*/ eTeam);
 
-	bool isTradeNetworkImpassable();
+	bool isTradeNetworkImpassable(int /*TeamTypes*/ eTeam);
 	bool isTradeNetwork(int /*TeamTypes*/ eTeam);
 	bool isTradeNetworkConnected(CyPlot* pPlot, int /*TeamTypes*/ eTeam);
-	bool isValidDomainForLocation(DomainTypes eDomain);
-	bool isValidDomainForAction(DomainTypes eDomain);
+	bool isValidDomainForLocation(CyUnit* pUnit) const;
+	bool isValidDomainForAction(CyUnit* pUnit) const;
 	bool isImpassable();
 
 	int getX();
@@ -174,6 +180,11 @@ public:
 	void setTerrainType(int /*TerrainTypes*/ eNewValue, bool bRecalculate, bool bRebuildGraphics);
 	int /*FeatureTypes*/ getFeatureType();
 	void setFeatureType(int /*FeatureTypes*/ eNewValue, int iVariety);
+	void setFeatureDummyVisibility(std::string dummyTag, bool show); 
+	void addFeatureDummyModel(std::string dummyTag, std::string modelTag);
+	void setFeatureDummyTexture(std::string dummyTag, std::string textureTag);
+	std::string pickFeatureDummyTag(int mouseX, int mouseY);
+	void resetFeatureModel();
 	int /* BonusTypes */ getBonusType(int /*TeamTypes*/ eTeam); 
 	int /* BonusTypes */ getNonObsoleteBonusType(int /*TeamTypes*/ eTeam); 
 	void setBonusType(int /* BonusTypes */ eNewValue);
@@ -206,6 +217,8 @@ public:
 	int calculateTeamCulturePercent(int /*TeamTypes*/ eIndex);	
 	void setCulture(int /*PlayerTypes*/ eIndex, int iNewValue, bool bUpdate);
 	void changeCulture(int /*PlayerTypes*/ eIndex, int iChange, bool bUpdate);
+
+	int countNumAirUnits(int /*TeamTypes*/ ePlayer);
 
 	int getFoundValue(int /*PlayerTypes*/ eIndex);
 	bool isBestAdjacentFound(int /*PlayerTypes*/ eIndex);

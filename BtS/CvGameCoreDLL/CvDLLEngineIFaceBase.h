@@ -18,6 +18,7 @@ public:
 	virtual void AutoSave(bool bInitial = false) = 0;
 	virtual void SaveReplay(PlayerTypes ePlayer = NO_PLAYER) = 0;
 	virtual void SaveGame(const TCHAR* pszFilename = NULL, SaveGameTypes eType = SAVEGAME_NORMAL) = 0;
+	virtual void DoTurn() = 0;
 	virtual void ClearMinimap()	 = 0;
 	virtual byte GetLandscapePlotTerrainData(uint uiX, uint uiY, uint uiPointX, uint uiPointY) = 0;
 	virtual byte GetLandscapePlotHeightData(uint uiX, uint uiY, uint uiPointX, uint uiPointY) = 0;
@@ -29,6 +30,7 @@ public:
 	virtual void toggleGlobeview() = 0;
 	virtual bool isGlobeviewUp() = 0;
 	virtual void toggleResourceLayer() = 0;
+	virtual void toggleUnitLayer() = 0;
 	virtual void setResourceLayer(bool bOn) = 0;
 
 	virtual void MoveBaseTurnRight(float increment = 45) = 0;
@@ -57,8 +59,6 @@ public:
 	virtual void LightenVisibility(uint) = 0;
 	virtual void DarkenVisibility(uint) = 0;
 	virtual void BlackenVisibility(uint) = 0;
-	virtual uint GetNumGameCellsX() = 0;
-	virtual uint GetNumGameCellsY() = 0;
 	virtual void RebuildAllPlots() = 0;
 	virtual void RebuildPlot(int plotX, int plotY, bool bRebuildHeights, bool bRebuildTextures) = 0;
 	virtual void RebuildRiverPlotTile(int plotX, int plotY, bool bRebuildHeights, bool bRebuildTextures) = 0;
@@ -70,9 +70,13 @@ public:
 
 	virtual void addColoredPlot(int plotX, int plotY, const NiColorA &color, PlotStyles plotStyle, PlotLandscapeLayers layer) = 0;
 	virtual void clearColoredPlots(PlotLandscapeLayers layer) = 0;
+	virtual void fillAreaBorderPlot(int plotX, int plotY, const NiColorA &color, AreaBorderLayers layer) = 0;
+	virtual void clearAreaBorderPlots(AreaBorderLayers layer) = 0;
+	virtual void updateFoundingBorder() = 0;
 	virtual void addLandmark(CvPlot *plot, const wchar *caption) = 0; 
 
 	virtual void TriggerEffect(int iEffect, NiPoint3 pt3Point, float rotation = 0.0f) = 0;
+	virtual void printProfileText() = 0;
 
 	// dirty bits
 	virtual void SetDirty(EngineDirtyBits eBit, bool bNewValue) = 0;
@@ -81,8 +85,10 @@ public:
 	virtual FogOfWarModeTypes PopFogOfWar() = 0;
 	virtual void setFogOfWarFromStack() = 0;
 	virtual void MarkBridgesDirty() = 0;
+	virtual void AddLaunch(PlayerTypes playerType) = 0;
 	virtual void AddGreatWall(CvCity *city) = 0;
 	virtual void RemoveGreatWall(CvCity *city) = 0;
+	virtual void MarkPlotTextureAsDirty(int plotX, int plotY) = 0;
 };
 
 #endif	// CvDLLEngineIFaceBase_h

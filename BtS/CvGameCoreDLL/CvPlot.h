@@ -20,9 +20,6 @@ class CvFeature;
 class CvUnit;
 class CvSymbol;
 class CvFlagEntity;
-class CvExtraSaveData;
-class CvPlotRegion;
-class CvPlotDataRegion;
 
 typedef bool (*ConstPlotUnitFunc)( const CvUnit* pUnit, int iData1, int iData2);
 typedef bool (*PlotUnitFunc)(CvUnit* pUnit, int iData1, int iData2);
@@ -38,6 +35,7 @@ public:
 	void uninit();
 	void reset(int iX = 0, int iY = 0, bool bConstructorCall=false);
 	void setupGraphical();
+	void updateGraphicEra();
 
 	DllExport void erase();																																								// Exposed to Python
 
@@ -107,15 +105,12 @@ public:
 	int seeFromLevel(TeamTypes eTeam) const;																										// Exposed to Python  
 	int seeThroughLevel() const;																																// Exposed to Python
 	void changeSeeFromSight(TeamTypes eTeam, DirectionTypes eDirection, int iFromLevel, bool bIncrement, InvisibleTypes eSeeInvisible);
-	void changeAdjacentSight(TeamTypes eTeam, int iRange, bool bIncrement, InvisibleTypes eSeeInvisible);
+	void changeAdjacentSight(TeamTypes eTeam, int iRange, bool bIncrement, InvisibleTypes eSeeInvisible, DirectionTypes eFacingDirection);
+	bool canSeePlot(CvPlot *plot, TeamTypes eTeam, int iRange, DirectionTypes eFacingDirection) const;
+	bool canSeeDisplacementPlot(TeamTypes eTeam, int dx, int dy, int originalDX, int originalDY, bool firstPlot, bool outerRing) const;
+	bool shouldProcessDisplacementPlot(int dx, int dy, int range, DirectionTypes eFacingDirection) const;
 	void updateSight(bool bIncrement);
 	void updateSeeFromSight(bool bIncrement);
-
-	void addVisiblePlots(CvPlotRegion& visiblePlots, int iRange, TeamTypes eTeam) const;
-	void addVisiblePlots(CvPlotDataRegion& visiblePlots, int iRange, int iObserverCount, TeamTypes eTeam) const;
-	
-	void buildVisibilityRegion(CvPlotRegion& visiblePlots, TeamTypes eTeam) const;
-	void buildVisibilityRegion(CvPlotDataRegion& visiblePlots, TeamTypes eTeam) const;
 
 	DllExport bool canHaveBonus(BonusTypes eBonus, bool bIgnoreLatitude = false) const;																						// Exposed to Python
 	DllExport bool canHaveImprovement(ImprovementTypes eImprovement, TeamTypes eTeam = NO_TEAM, bool bPotential = false) const;		// Exposed to Python
@@ -132,6 +127,9 @@ public:
 
 	DllExport int defenseModifier(TeamTypes eDefender, bool bIgnoreBuilding, bool bHelp = false) const;									// Exposed to Python				
 	int movementCost(const CvUnit* pUnit, const CvPlot* pFromPlot) const;														// Exposed to Python				
+
+	int getExtraMovePathCost() const;																																// Exposed to Python
+	void changeExtraMovePathCost(int iChange);																																// Exposed to Python
 
 	bool isAdjacentOwned() const;																																		// Exposed to Python
 	bool isAdjacentPlayer(PlayerTypes ePlayer, bool bLandOnly = false) const;												// Exposed to Python
@@ -154,26 +152,28 @@ public:
 	bool isVisibleToCivTeam() const;																																	// Exposed to Python
 	bool isVisibleToWatchingHuman() const;																														// Exposed to Python
 	bool isAdjacentVisible(TeamTypes eTeam, bool bDebug) const;																				// Exposed to Python
+	bool isAdjacentNonvisible(TeamTypes eTeam) const;																				// Exposed to Python
 
 	DllExport bool isGoody(TeamTypes eTeam = NO_TEAM) const;																					// Exposed to Python
 	bool isRevealedGoody(TeamTypes eTeam = NO_TEAM) const;																						// Exposed to Python
 	void removeGoody();																																								// Exposed to Python
 
 	DllExport bool isCity(bool bCheckImprovement = false, TeamTypes eForTeam = NO_TEAM) const;																																		// Exposed to Python
-	bool isFriendlyCity(TeamTypes eTeam) const;																												// Exposed to Python
-	bool isEnemyCity(TeamTypes eTeam) const;																													// Exposed to Python
+	DllExport bool isFriendlyCity(const CvUnit& kUnit, bool bCheckImprovement) const;																												// Exposed to Python
+	bool isEnemyCity(const CvUnit& kUnit) const;																													// Exposed to Python
 
 	bool isOccupation() const;																																				// Exposed to Python
 	DllExport bool isBeingWorked() const;																															// Exposed to Python
 
 	bool isUnit() const;																																							// Exposed to Python
 	bool isInvestigate(TeamTypes eTeam) const;																												// Exposed to Python
-	bool isVisibleEnemyDefender(PlayerTypes ePlayer) const;																						// Exposed to Python
+	bool isVisibleEnemyDefender(const CvUnit* pUnit) const;																						// Exposed to Python
 	CvUnit *getVisibleEnemyDefender(PlayerTypes ePlayer) const;
 	int getNumDefenders(PlayerTypes ePlayer) const;																										// Exposed to Python
-	int getNumVisibleEnemyDefenders(PlayerTypes ePlayer) const;																				// Exposed to Python
-	int getNumVisiblePotentialEnemyDefenders(PlayerTypes ePlayer) const;															// Exposed to Python
+	int getNumVisibleEnemyDefenders(const CvUnit* pUnit) const;																				// Exposed to Python
+	int getNumVisiblePotentialEnemyDefenders(const CvUnit* pUnit) const;															// Exposed to Python
 	DllExport bool isVisibleEnemyUnit(PlayerTypes ePlayer) const;																			// Exposed to Python
+	bool isVisibleEnemyUnit(const CvUnit* pUnit) const;
 	bool isVisibleOtherUnit(PlayerTypes ePlayer) const;																								// Exposed to Python
 	DllExport bool isFighting() const;																																// Exposed to Python
 
@@ -181,14 +181,15 @@ public:
 
 	DllExport bool isRoute() const;																																		// Exposed to Python
 	bool isValidRoute(const CvUnit* pUnit) const;																											// Exposed to Python
-	bool isTradeNetworkImpassable() const;																														// Exposed to Python
+	bool isTradeNetworkImpassable(TeamTypes eTeam) const;																														// Exposed to Python
 	bool isNetworkTerrain(TeamTypes eTeam) const;																											// Exposed to Python
 	bool isBonusNetwork(TeamTypes eTeam) const;																												// Exposed to Python
 	bool isTradeNetwork(TeamTypes eTeam) const;																												// Exposed to Python
 	bool isTradeNetworkConnected(const CvPlot * pPlot, TeamTypes eTeam) const;												// Exposed to Python
+	bool isRiverNetwork(TeamTypes eTeam) const;
 
-	bool isValidDomainForLocation(DomainTypes eDomain) const;																					// Exposed to Python
-	bool isValidDomainForAction(DomainTypes eDomain) const;																						// Exposed to Python
+	bool isValidDomainForLocation(const CvUnit& unit) const;																					// Exposed to Python
+	bool isValidDomainForAction(const CvUnit& unit) const;																						// Exposed to Python
 	DllExport bool isImpassable() const;																															// Exposed to Python
 
 	DllExport int getX() const;																																				// Exposed to Python
@@ -210,7 +211,8 @@ public:
 	int getFOWIndex() const;
 
 	DllExport CvArea* area() const;																																							// Exposed to Python
-	CvArea* waterArea() const;																																				// Exposed to Python
+	CvArea* waterArea() const;
+	CvArea* secondWaterArea() const;
 	DllExport int getArea() const;																																		// Exposed to Python
 	void setArea(int iNewValue);			
 
@@ -289,6 +291,11 @@ public:
 
 	DllExport FeatureTypes getFeatureType() const;																																	// Exposed to Python
 	DllExport void setFeatureType(FeatureTypes eNewValue, int iVariety = -1);																				// Exposed to Python
+	DllExport void setFeatureDummyVisibility(const char *dummyTag, bool show);																				// Exposed to Python
+	DllExport void addFeatureDummyModel(const char *dummyTag, const char *modelTag);
+	DllExport void setFeatureDummyTexture(const char *dummyTag, const char *textureTag);
+	DllExport CvString pickFeatureDummyTag(int mouseX, int mouseY);
+	DllExport void resetFeatureModel();
 
 	DllExport BonusTypes getBonusType(TeamTypes eTeam = NO_TEAM) const;																							// Exposed to Python
 	DllExport BonusTypes getNonObsoleteBonusType(TeamTypes eTeam = NO_TEAM) const;																	// Exposed to Python
@@ -332,14 +339,19 @@ public:
 	DllExport bool hasYield() const;																																		// Exposed to Python
 	void updateYield();
 	int calculateMaxYield(YieldTypes eYield) const;
+	int getYieldWithBuild(BuildTypes eBuild, YieldTypes eYield, bool bWithUpgrade) const;
 
 	DllExport int getCulture(PlayerTypes eIndex) const;																									// Exposed to Python
 	DllExport int countTotalCulture() const;																														// Exposed to Python
+	int countFriendlyCulture(TeamTypes eTeam) const;
 	TeamTypes findHighestCultureTeam() const;																														// Exposed to Python
+	PlayerTypes findHighestCulturePlayer() const;
 	DllExport int calculateCulturePercent(PlayerTypes eIndex) const;																		// Exposed to Python
 	int calculateTeamCulturePercent(TeamTypes eIndex) const;																						// Exposed to Python
 	void setCulture(PlayerTypes eIndex, int iNewValue, bool bUpdate);																		// Exposed to Python
 	void changeCulture(PlayerTypes eIndex, int iChange, bool bUpdate);																	// Exposed to Python
+
+	DllExport int countNumAirUnits(TeamTypes eTeam) const;																					// Exposed to Python
 
 	int getFoundValue(PlayerTypes eIndex);																															// Exposed to Python
 	bool isBestAdjacentFound(PlayerTypes eIndex);																												// Exposed to Python
@@ -356,12 +368,13 @@ public:
 	void updatePlotGroup(PlayerTypes ePlayer, bool bRecalculate = true);
 
 	int getVisibilityCount(TeamTypes eTeam) const;																											// Exposed to Python
-	void changeVisibilityCount(TeamTypes eTeam, int iChange, InvisibleTypes eSeeInvisible);							// Exposed to Python
+	DllExport void changeVisibilityCount(TeamTypes eTeam, int iChange, InvisibleTypes eSeeInvisible);							// Exposed to Python
 
 	int getStolenVisibilityCount(TeamTypes eTeam) const;																								// Exposed to Python
 	void changeStolenVisibilityCount(TeamTypes eTeam, int iChange);
 
-	void clearAllVisibility();
+	int getBlockadedCount(TeamTypes eTeam) const;																								// Exposed to Python
+	void changeBlockadedCount(TeamTypes eTeam, int iChange);
 
 	DllExport PlayerTypes getRevealedOwner(TeamTypes eTeam, bool bDebug) const;													// Exposed to Python
 	DllExport TeamTypes getRevealedTeam(TeamTypes eTeam, bool bDebug) const;														// Exposed to Python
@@ -373,7 +386,9 @@ public:
 	void updateRiverCrossing();
 
 	DllExport bool isRevealed(TeamTypes eTeam, bool bDebug) const;																								// Exposed to Python
-	void setRevealed(TeamTypes eTeam, bool bNewValue, bool bTerrainOnly = false, TeamTypes eFromTeam = NO_TEAM);	// Exposed to Python
+	DllExport void setRevealed(TeamTypes eTeam, bool bNewValue, bool bTerrainOnly = false, TeamTypes eFromTeam = NO_TEAM, bool bUpdatePlotGroup = true);	// Exposed to Python
+	bool isAdjacentRevealed(TeamTypes eTeam) const;																				// Exposed to Python
+	bool isAdjacentNonrevealed(TeamTypes eTeam) const;																				// Exposed to Python
 
 	DllExport ImprovementTypes getRevealedImprovementType(TeamTypes eTeam, bool bDebug) const;					// Exposed to Python
 	void setRevealedImprovementType(TeamTypes eTeam, ImprovementTypes eNewValue);			
@@ -424,7 +439,7 @@ public:
 	void changeInvisibleVisibilityCount(TeamTypes eTeam, InvisibleTypes eInvisible, int iChange);					// Exposed to Python
 
 	DllExport int getNumUnits() const;																																		// Exposed to Python
-	DllExport CvUnit* getUnit(int iIndex) const;																													// Exposed to Python
+	DllExport CvUnit* getUnitByIndex(int iIndex) const;																													// Exposed to Python
 	void addUnit(CvUnit* pUnit, bool bUpdate = true);
 	void removeUnit(CvUnit* pUnit, bool bUpdate = true);
 	DllExport CLLNode<IDInfo>* nextUnitNode(CLLNode<IDInfo>* pNode) const;
@@ -442,6 +457,14 @@ public:
 	// Script data needs to be a narrow string for pickling in Python
 	CvString getScriptData() const;																											// Exposed to Python
 	void setScriptData(const char* szNewValue);																					// Exposed to Python
+
+	bool canTrigger(EventTriggerTypes eTrigger, PlayerTypes ePlayer) const;
+	bool canApplyEvent(EventTypes eEvent) const;
+	void applyEvent(EventTypes eEvent);
+
+	bool canTrain(UnitTypes eUnit, bool bContinue, bool bTestVisible) const;
+
+	bool isEspionageCounterSpy(TeamTypes eTeam) const;
 
 	void read(FDataStreamBase* pStream);
 	void write(FDataStreamBase* pStream);
@@ -494,6 +517,7 @@ protected:
 	int* m_aiPlotGroup;			// IDs - keep as int
 	short* m_aiVisibilityCount;
 	short* m_aiStolenVisibilityCount;
+	short* m_aiBlockadedCount;
 	char* m_aiRevealedOwner;
 
 	bool* m_abRiverCrossing;	// bit vector
@@ -526,11 +550,9 @@ protected:
 	void doCulture();
 
 	void processArea(CvArea* pArea, int iChange);
+	void doImprovementUpgrade();
 
 	ColorTypes plotMinimapColor();
-	
-	// let CvExtraSaveData read m_aiFoundValue directly
-	friend CvExtraSaveData;
 
 	// added so under cheat mode we can access protected stuff
 	friend class CvGameTextMgr;

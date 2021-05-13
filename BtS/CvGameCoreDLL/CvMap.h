@@ -13,7 +13,6 @@
 
 #include "CvArea.h"
 #include "CvPlot.h"
-#include "CvExtraSaveData.h"
 
 
 class FAStar;
@@ -76,7 +75,7 @@ public:
 
 	DllExport void init(CvMapInitData* pInitData=NULL);
 	DllExport void setupGraphical();
-	DllExport void reset(CvMapInitData* pInitInfo);
+	DllExport void reset(CvMapInitData* pInitData);
 
 protected:
 
@@ -266,10 +265,6 @@ public:
 
 	void rebuild(int iGridW, int iGridH, int iTopLatitude, int iBottomLatitude, bool bWrapX, bool bWrapY, WorldSizeTypes eWorldSize, ClimateTypes eClimate, SeaLevelTypes eSeaLevel, int iNumCustomMapOptions, CustomMapOptionTypes * eCustomMapOptions);		// Exposed to Python
 
-	inline CvExtraSaveData& getExtraSaveDataClass(void)
-	{
-		return m_extraSaveData;
-	}
 protected:
 
 	int m_iGridWidth;
@@ -290,37 +285,8 @@ protected:
 
 	FFreeListTrashArray<CvArea> m_areas;
 
-	CvExtraSaveData m_extraSaveData;
-
 	void calculateAreas();
-	
-	void writeExtraSaveData(CvExtraSaveData& extraSaveData);
-	friend CvExtraSaveData;
 
-// CACHE: cache frequently used values
-///////////////////////////////////////
-public:
-	// public cache functions here
-	int getCachedExploreValue(const CvPlot* pPlot, const CvUnit* pUnit);
-	void setCachedExploreValue(const CvPlot* pPlot, const CvUnit* pUnit, int iValue);
-
-protected:
-	bool	m_bConstructorCall;	// hack, because CvMap::reset does not have this parameter, and we cannot add it
-
-	int		m_iLastExplorePlayerID;
-	int		m_iLastExploreUnitID;
-	int		m_iLastExploreTurnSlice;
-
-	int		m_iCachedExploreValuesSize;
-	int*	m_paiCachedExploreValues;
-
-	void constructCache();	// called from constructor
-	void destructCache();	// called from destructor
-	void initCache();
-	void uninitCache();
-	void resetCache(bool bConstructorCall = false);
-
-	void doUpdateCacheOnTurn();	
 };
 
 #endif

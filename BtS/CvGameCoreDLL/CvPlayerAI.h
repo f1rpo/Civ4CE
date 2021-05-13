@@ -6,33 +6,33 @@
 #include "CvPlayer.h"
 #include "AI_defines.h"
 
-class CvExtraSaveData;
+class CvEventTriggerInfo;
 
 class CvPlayerAI : public CvPlayer
 {
 
 public:
 
-  CvPlayerAI();
-  virtual ~CvPlayerAI();
+	CvPlayerAI();
+	virtual ~CvPlayerAI();
 
   // inlined for performance reasons
 #ifdef _USRDLL
-  static CvPlayerAI& getPlayer(PlayerTypes ePlayer)
+  static CvPlayerAI& getPlayer(PlayerTypes ePlayer) 
   {
 	  FAssertMsg(ePlayer != NO_PLAYER, "Player is not assigned a valid value");
 	  FAssertMsg(ePlayer < MAX_PLAYERS, "Player is not assigned a valid value");
-	  return m_aPlayers[ePlayer];
+	  return m_aPlayers[ePlayer]; 
   }
 #endif
-  DllExport static CvPlayerAI& getPlayerNonInl(PlayerTypes ePlayer);
+	DllExport static CvPlayerAI& getPlayerNonInl(PlayerTypes ePlayer);
 
-  static void initStatics();
-  static void freeStatics();
+	static void initStatics();
+	static void freeStatics();
 
-  void AI_init();
-  void AI_uninit();
-  void AI_reset();
+	void AI_init();
+	void AI_uninit();
+	void AI_reset();
 
 	int AI_getFlavorValue(FlavorTypes eFlavor);
 
@@ -73,12 +73,14 @@ public:
 
 	int AI_militaryWeight(CvArea* pArea);
 
-	int AI_targetCityValue(CvCity* pCity, bool bRandomize);
+	int AI_targetCityValue(CvCity* pCity, bool bRandomize, bool bIgnoreAttackers = false);
 	CvCity* AI_findTargetCity(CvArea* pArea);
 
 	bool AI_isCommercePlot(CvPlot* pPlot);
 	int AI_getPlotDanger(CvPlot* pPlot, int iRange = -1, bool bTestMoves = true);
 	int AI_getUnitDanger(CvUnit* pUnit, int iRange = -1, bool bTestMoves = true, bool bAnyDanger = true);
+	int AI_getSpyDanger(CvPlot* pPlot, int iRange, bool bTestMoves = true);
+	int AI_getWaterDanger(CvPlot* pPlot, int iRange, bool bTestMoves = true);
 
 	bool AI_avoidScience();
 	bool AI_isFinancialTrouble();
@@ -115,12 +117,13 @@ public:
 	int AI_getTradeAttitude(PlayerTypes ePlayer);
 	int AI_getRivalTradeAttitude(PlayerTypes ePlayer);
 	int AI_getMemoryAttitude(PlayerTypes ePlayer, MemoryTypes eMemory);
+	int AI_getColonyAttitude(PlayerTypes ePlayer);
 
-	int AI_diploVote(VoteTypes eVote);
+	PlayerVoteTypes AI_diploVote(const VoteSelectionSubData& kVoteData, VoteSourceTypes eVoteSource);
 
-	int AI_dealVal(PlayerTypes ePlayer, const CLinkList<TradeData>* pList, bool bIgnoreAnnual = false);
+	int AI_dealVal(PlayerTypes ePlayer, const CLinkList<TradeData>* pList, bool bIgnoreAnnual = false, int iExtra = 1);
 	bool AI_goldDeal(const CLinkList<TradeData>* pList);
-	bool AI_considerOffer(PlayerTypes ePlayer, const CLinkList<TradeData>* pTheirList, const CLinkList<TradeData>* pOurList);
+	bool AI_considerOffer(PlayerTypes ePlayer, const CLinkList<TradeData>* pTheirList, const CLinkList<TradeData>* pOurList, int iChange = 1);
 	bool AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeData>* pTheirList, const CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirInventory, CLinkList<TradeData>* pOurInventory, CLinkList<TradeData>* pTheirCounter, CLinkList<TradeData>* pOurCounter);
 
 	DllExport int AI_maxGoldTrade(PlayerTypes ePlayer);
@@ -128,9 +131,11 @@ public:
 	DllExport int AI_maxGoldPerTurnTrade(PlayerTypes ePlayer);
 	int AI_goldPerTurnTradeVal(int iGoldPerTurn);
 
-	int AI_bonusVal(BonusTypes eBonus);
-	int AI_bonusTradeVal(BonusTypes eBonus, PlayerTypes ePlayer);
+	int AI_bonusVal(BonusTypes eBonus, int iChange = 1);
+	int AI_baseBonusVal(BonusTypes eBonus);
+	int AI_bonusTradeVal(BonusTypes eBonus, PlayerTypes ePlayer, int iChange);
 	DenialTypes AI_bonusTrade(BonusTypes eBonus, PlayerTypes ePlayer);
+	int AI_corporationBonusVal(BonusTypes eBonus);
 
 	int AI_cityTradeVal(CvCity* pCity);
 	DenialTypes AI_cityTrade(CvCity* pCity, PlayerTypes ePlayer);
@@ -144,7 +149,7 @@ public:
 	int AI_religionTradeVal(ReligionTypes eReligion, PlayerTypes ePlayer);
 	DenialTypes AI_religionTrade(ReligionTypes eReligion, PlayerTypes ePlayer);
 
-	bool AI_unitImpassable(UnitTypes eUnit);
+	int AI_unitImpassableCount(UnitTypes eUnit);
 	int AI_unitValue(UnitTypes eUnit, UnitAITypes eUnitAI, CvArea* pArea);
 	int AI_totalUnitAIs(UnitAITypes eUnitAI);
 	int AI_totalAreaUnitAIs(CvArea* pArea, UnitAITypes eUnitAI);
@@ -154,7 +159,13 @@ public:
 	int AI_neededExplorers(CvArea* pArea);
 	int AI_neededWorkers(CvArea* pArea);
 	int AI_neededMissionaries(CvArea* pArea, ReligionTypes eReligion);
-
+	int AI_neededExecutives(CvArea* pArea, CorporationTypes eCorporation);
+	
+	int AI_missionaryValue(CvArea* pArea, ReligionTypes eReligion, PlayerTypes* peBestPlayer = NULL);
+	int AI_executiveValue(CvArea* pArea, CorporationTypes eCorporation, PlayerTypes* peBestPlayer = NULL);
+	
+	int AI_corporationValue(CorporationTypes eCorporation, CvCity* pCity = NULL);
+	
 	int AI_adjacentPotentialAttackers(CvPlot* pPlot, bool bTestCanMove = false);
 	int AI_totalMissionAIs(MissionAITypes eMissionAI, CvSelectionGroup* pSkipSelectionGroup = NULL);
 	int AI_areaMissionAIs(CvArea* pArea, MissionAITypes eMissionAI, CvSelectionGroup* pSkipSelectionGroup = NULL);
@@ -163,7 +174,10 @@ public:
 	int AI_plotTargetMissionAIs(CvPlot* pPlot, MissionAITypes* aeMissionAI, int iMissionAICount, int& iClosestTargetRange, CvSelectionGroup* pSkipSelectionGroup = NULL, int iRange = 0);
 	int AI_unitTargetMissionAIs(CvUnit* pUnit, MissionAITypes eMissionAI, CvSelectionGroup* pSkipSelectionGroup = NULL);
 	int AI_unitTargetMissionAIs(CvUnit* pUnit, MissionAITypes* aeMissionAI, int iMissionAICount, CvSelectionGroup* pSkipSelectionGroup = NULL);
+	int AI_enemyTargetMissionAIs(MissionAITypes eMissionAI, CvSelectionGroup* pSkipSelectionGroup = NULL);
+	int AI_enemyTargetMissionAIs(MissionAITypes* aeMissionAI, int iMissionAICount, CvSelectionGroup* pSkipSelectionGroup = NULL);
 	int AI_wakePlotTargetMissionAIs(CvPlot* pPlot, MissionAITypes eMissionAI, CvSelectionGroup* pSkipSelectionGroup = NULL);
+	
 
 	CivicTypes AI_bestCivic(CivicOptionTypes eCivicOption);
 	int AI_civicValue(CivicTypes eCivic);
@@ -171,8 +185,15 @@ public:
 	ReligionTypes AI_bestReligion();
 	int AI_religionValue(ReligionTypes eReligion);
 
+	EspionageMissionTypes AI_bestEspionage(PlayerTypes& eTargetPlayer, CvPlot*& pPlot, int& iData);
+	EspionageMissionTypes AI_bestPlotEspionage(CvPlot* pSpyPlot, PlayerTypes& eTargetPlayer, CvPlot*& pPlot, int& iData);
+	int AI_espionageVal(PlayerTypes eTargetPlayer, EspionageMissionTypes eMission, CvPlot* pPlot, int iData);
+
 	int AI_getPeaceWeight();
 	void AI_setPeaceWeight(int iNewValue);
+
+	int AI_getEspionageWeight();
+	void AI_setEspionageWeight(int iNewValue);
 
 	int AI_getAttackOddsChange();
 	void AI_setAttackOddsChange(int iNewValue);
@@ -184,6 +205,9 @@ public:
 	int AI_getReligionTimer();
 	void AI_setReligionTimer(int iNewValue);
 	void AI_changeReligionTimer(int iChange);
+
+	int AI_getExtraGoldTarget() const;
+	void AI_setExtraGoldTarget(int iNewValue);
 
 	int AI_getNumTrainAIUnits(UnitAITypes eIndex);
 	void AI_changeNumTrainAIUnits(UnitAITypes eIndex, int iChange);
@@ -229,6 +253,9 @@ public:
 
 	void AI_doCommerce();
 
+	EventTypes AI_chooseEvent(int iTriggeredId);
+	virtual void AI_launch(VictoryTypes eVictory);
+
 	int AI_getCultureVictoryStage();
 	
 	int AI_cultureVictoryTechValue(TechTypes eTech);
@@ -259,11 +286,53 @@ public:
 	
 	
 	int AI_getTotalAreaCityThreat(CvArea* pArea);
-	int AI_countNumAreaHostileUnits(CvArea* pArea, bool bLand = true, bool bWater = false);
+	int AI_countNumAreaHostileUnits(CvArea* pArea, bool bPlayer, bool bTeam, bool bNeutral, bool bHostile);
 	int AI_getTotalFloatingDefendersNeeded(CvArea* pArea);
 	int AI_getTotalFloatingDefenders(CvArea* pArea);
 
+	RouteTypes AI_bestAdvancedStartRoute(CvPlot* pPlot, int* piYieldValue = NULL);
+	UnitTypes AI_bestAdvancedStartUnitAI(CvPlot* pPlot, UnitAITypes eUnitAI);
+	CvPlot* AI_advancedStartFindCapitalPlot();
 	
+	bool AI_advancedStartPlaceExploreUnits(bool bLand);
+	void AI_advancedStartRevealRadius(CvPlot* pPlot, int iRadius);
+	bool AI_advancedStartPlaceCity(CvPlot* pPlot);
+	bool AI_advancedStartDoRoute(CvPlot* pFromPlot, CvPlot* pToPlot);
+	void AI_advancedStartRouteTerritory();
+	void AI_doAdvancedStart(bool bNoExit = false);
+	
+	int AI_getMinFoundValue();
+	
+	void AI_recalculateFoundValues(int iX, int iY, int iInnerRadius, int iOuterRadius);
+	
+	void AI_updateCitySites(int iMinFoundValueThreshold, int iMaxSites);
+	void AI_invalidateCitySites(int iMinFoundValueThreshold);
+	bool AI_isPlotCitySite(CvPlot* pPlot);
+	int AI_getNumAreaCitySites(int iAreaID, int& iBestValue);
+	int AI_getNumAdjacentAreaCitySites(int iWaterAreaID, int iExcludeArea, int& iBestValue);
+	
+	int AI_getNumCitySites();
+	CvPlot* AI_getCitySite(int iIndex);
+	
+	int AI_bestAreaUnitAIValue(UnitAITypes eUnitAI, CvArea* pArea, UnitTypes* peBestUnitType = NULL);
+	int AI_bestCityUnitAIValue(UnitAITypes eUnitAI, CvCity* pCity, UnitTypes* peBestUnitType = NULL);
+	
+	int AI_calculateTotalBombard(DomainTypes eDomain);
+	
+	int AI_getUnitClassWeight(UnitClassTypes eUnitClass);
+	int AI_getUnitCombatWeight(UnitCombatTypes eUnitCombat);
+	int AI_calculateUnitAIViability(UnitAITypes eUnitAI, DomainTypes eDomain);
+	
+	void AI_updateBonusValue();
+	void AI_updateBonusValue(BonusTypes eBonus);
+	
+	int AI_getAttitudeWeight(PlayerTypes ePlayer);
+
+	ReligionTypes AI_chooseReligion();
+	
+	int AI_getPlotAirbaseValue(CvPlot* pPlot);
+	int AI_getPlotCanalValue(CvPlot* pPlot);
+
 	// for serialization
   virtual void read(FDataStreamBase* pStream);
   virtual void write(FDataStreamBase* pStream);
@@ -273,9 +342,11 @@ protected:
 	static CvPlayerAI* m_aPlayers;
 
 	int m_iPeaceWeight;
+	int m_iEspionageWeight;
 	int m_iAttackOddsChange;
 	int m_iCivicTimer;
 	int m_iReligionTimer;
+	int m_iExtraGoldTarget;
 	
 	int m_iStrategyHash;
 	int m_iStrategyHashCacheTurn;
@@ -304,12 +375,20 @@ protected:
 	int* m_aiPeacetimeGrantValue;
 	int* m_aiGoldTradedTo;
 	int* m_aiAttitudeExtra;
+	int* m_aiBonusValue;
+	int* m_aiUnitClassWeights;
+	int* m_aiUnitCombatWeights;
+
+	mutable int* m_aiCloseBordersAttitudeCache;
+
 
 	bool* m_abFirstContact;
 
 	int** m_aaiContactTimer;
 	int** m_aaiMemoryCount;
-
+	
+	std::vector<int> m_aiAICitySites;
+	
 	bool m_bWasFinancialTrouble;
 	int m_iTurnLastProductionDirty;
 
@@ -318,17 +397,26 @@ protected:
 	void AI_doResearch();
 	void AI_doCivics();
 	void AI_doReligion();
+	void AI_doEspionage();
 	void AI_doDiplo();
+	void AI_doSplit();
 	void AI_doCheckFinancialTrouble();
-
+	
+	bool AI_disbandUnit(int iExpThreshold, bool bObsolete);
 	
 	int AI_getStrategyHash();
 	void AI_calculateAverages();
 	
+	int AI_getHappinessWeight(int iHappy, int iExtraPop);
+	int AI_getHealthWeight(int iHealth, int iExtraPop);
+	
 	void AI_convertUnitAITypesForCrush();
-
-	void writeExtraSaveData(CvExtraSaveData& extraSaveData);
-	friend CvExtraSaveData;
+	int AI_eventValue(EventTypes eEvent, const EventTriggeredData& kTriggeredData);
+		
+	void AI_doEnemyUnitData();
+	void AI_invalidateCloseBordersAttitudeCache();
+	
+	friend class CvGameTextMgr;
 };
 
 // helper for accessing static functions

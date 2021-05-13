@@ -20,7 +20,7 @@ public:
 	DllExport const CvString& getIcon() const;
 	void setIcon(LPCTSTR pszIcon);
 	DllExport int getLength() const;
-	void setLength(int iLength);
+	DllExport void setLength(int iLength);
 	DllExport ColorTypes getFlashColor() const;
 	void setFlashColor(ColorTypes eColor);
 	DllExport int getX() const;

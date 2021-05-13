@@ -7,8 +7,6 @@
 // SINGLETON
 //
 
-
-struct FOWInfo;
 class CyPlot;
 class CvMap;
 class CyCity;

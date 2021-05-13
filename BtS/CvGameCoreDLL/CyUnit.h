@@ -11,6 +11,7 @@ class CyPlot;
 class CyCity;
 class CvUnit;
 class CySelectionGroup;
+class CvArtInfoUnit;
 //class CyUnitEntity;
 class CyUnit
 {
@@ -52,7 +53,9 @@ public:
 	bool canHold(CyPlot* pPlot);
 	bool canSleep(CyPlot* pPlot);
 	bool canFortify(CyPlot* pPlot);
+	bool canPlunder(CyPlot* pPlot);
 	bool canAirPatrol(CyPlot* pPlot);
+	bool canSeaPatrol(CyPlot* pPlot);
 	bool canHeal(CyPlot* pPlot);
 	bool canSentry(CyPlot* pPlot);
 
@@ -65,6 +68,9 @@ public:
 
 	bool canRecon(CyPlot* pPlot);
 	bool canReconAt(CyPlot* pPlot, int iX, int iY);
+
+	bool canParadrop(CyPlot* pPlot);
+	bool canParadropAt(CyPlot* pPlot, int iX, int iY);
 
 	bool canAirBomb(CyPlot* pPlot);
 	bool canAirBombAt(CyPlot* pPlot, int iX, int iY);
@@ -102,6 +108,10 @@ public:
 	bool canTrade(CyPlot* pPlot, bool bTestVisible);
 	int getGreatWorkCulture(CyPlot* pPlot);
 	bool canGreatWork(CyPlot* pPlot);
+	int getEspionagePoints(CyPlot* pPlot);
+	bool canInfiltrate(CyPlot* pPlot, bool bTestVisible);
+	bool canEspionage(CyPlot* pPlot);
+
 	bool canGoldenAge(CyPlot* pPlot, bool bTestVisible);
 	bool canBuild(CyPlot* pPlot, int /*BuildTypes*/ eBuild, bool bTestVisible);
 	int canLead(CyPlot* pPlot, int iUnitId) const;
@@ -115,6 +125,7 @@ public:
 	int upgradePrice(int /*UnitTypes*/ eUnit);
 	bool upgradeAvailable(int /*UnitTypes*/ eFromUnit, int /*UnitClassTypes*/ eToUnitClass, int iCount);
 	bool canUpgrade(int /*UnitTypes*/ eUnit, bool bTestVisible);			
+	bool hasUpgrade(bool bSearch);
 
 	int /*HandicapTypes*/ getHandicapType();
 	int /*CivilizationTypes*/ getCivilizationType();
@@ -154,6 +165,7 @@ public:
 	bool isCounterSpy();
 	bool isFound();
 	bool isGoldenAge();
+	bool canCoexistWithEnemyUnit();
 
 	bool isFighting();
 	bool isAttacking();
@@ -164,6 +176,7 @@ public:
 	int currHitPoints();
 	bool isHurt();
 	bool isDead();
+	void setBaseCombatStr(int iCombat);
 	int baseCombatStr();
 	int maxCombatStr(CyPlot* pPlot, CyUnit* pAttacker);
 	int currCombatStr(CyPlot* pPlot, CyUnit* pAttacker);
@@ -177,15 +190,17 @@ public:
 	bool canSiege(int /*TeamTypes*/ eTeam);
 
 	int airBaseCombatStr();
-	int airMaxCombatStr();
-	int airCurrCombatStr();
-	float airMaxCombatStrFloat();
-	float airCurrCombatStrFloat();
+	int airMaxCombatStr(CyUnit* pOther);
+	int airCurrCombatStr(CyUnit* pOther);
+	float airMaxCombatStrFloat(CyUnit* pOther);
+	float airCurrCombatStrFloat(CyUnit* pOther);
+	int combatLimit();
 	int airCombatLimit();
 	bool canAirAttack();																				 
 	bool canAirDefend(CyPlot* pPlot);																				 
 	int airCombatDamage( CyUnit* pDefender);
 	CyUnit* bestInterceptor( CyPlot* pPlot);
+	CyUnit* bestSeaPillageInterceptor( CyPlot* pPlot);
 
 	bool isAutomated();																		 
 	bool isWaiting();																		 
@@ -204,6 +219,7 @@ public:
 	bool noDefensiveBonus();
 	bool ignoreBuildingDefense();
 	bool canMoveImpassable();
+	bool canMoveAllTerrain();
 	bool flatMovementCost();
 	bool ignoreTerrainCost();
 	bool isNeverInvisible();
@@ -223,7 +239,9 @@ public:
 	int animalCombatModifier();
 	int hillsAttackModifier();
 	int hillsDefenseModifier();
+	int terrainAttackModifier(int /*TerrainTypes*/ eTerrain);
 	int terrainDefenseModifier(int /*TerrainTypes*/ eTerrain);
+	int featureAttackModifier(int /*FeatureTypes*/ eFeature);
 	int featureDefenseModifier(int /*FeatureTypes*/ eFeature);
 	int unitClassAttackModifier(int /*UnitClassTypes*/ eUnitClass);
 	int unitClassDefenseModifier(int /*UnitClassTypes*/ eUnitClass);
@@ -237,6 +255,7 @@ public:
 	int /*SpecialUnitTypes*/ specialCargo();													 
 	int /*DomainTypes*/ domainCargo();																 
 	int cargoSpace();
+	void changeCargoSpace(int iChange);
 	bool isFull();
 	int cargoSpaceAvailable(int /*SpecialUnitTypes*/ eSpecialCargo, int /*DomainTypes*/ eDomainCargo);	 
 	bool hasCargo();
@@ -254,14 +273,13 @@ public:
 
 	int getX();
 	int getY();
-	void setXY(int iX, int iY);
+	void setXY(int iX, int iY, bool bGroup, bool bUpdate, bool bShow);
 	bool at(int iX, int iY);
 	bool atPlot(CyPlot* pPlot);
 	CyPlot* plot();
 	CyArea* area();
 	CyPlot* getReconPlot();
-	int getReconRange();
-	void setReconPlot(CyPlot* pNewValue, int iRange);										 
+	void setReconPlot(CyPlot* pNewValue);										 
 
 	int getGameTurnCreated();
 
@@ -274,10 +292,13 @@ public:
 	void finishMoves();
 	int getExperience();
 	void setExperience(int iNewValue, int iMax);	 
-	void changeExperience(int iChange, int iMax, bool bFromCombat, bool bInBorders);	 
+	void changeExperience(int iChange, int iMax, bool bFromCombat, bool bInBorders, bool bUpdateGlobal);	 
 	int getLevel();
 	void setLevel(int iNewLevel);
 	void changeLevel(int iChange);
+	int getFacingDirection();
+	void rotateFacingDirectionClockwise();
+	void rotateFacingDirectionCounterClockwise();
 	int getCargo();
 	int getFortifyTurns();
 	int getBlitzCount();			
@@ -293,6 +314,9 @@ public:
 	int getExtraVisibilityRange();
 	int getExtraMoves();
 	int getExtraMoveDiscount();
+	int getExtraAirRange();
+	int getExtraIntercept();
+	int getExtraEvasion();
 	int getExtraFirstStrikes();
 	int getExtraChanceFirstStrikes();															 
 	int getExtraWithdrawal();
@@ -316,6 +340,9 @@ public:
 	int getExperiencePercent() const;
 	int getKamikazePercent() const;
 
+	int getImmobileTimer() const;
+	void setImmobileTimer(int iNewValue);
+
 	bool isMadeAttack();																							 
 	void setMadeAttack(bool bNewValue);															 
 	bool isMadeInterception();																							 
@@ -324,6 +351,8 @@ public:
 	bool isPromotionReady();																					 
 	void setPromotionReady(bool bNewValue);													 
 	int getOwner();
+	int getVisualOwner();
+	int getCombatOwner(int /* TeamTypes*/ iForTeam);
 	int getTeam();
 
 	int /*UnitTypes*/ getUnitType();
@@ -346,7 +375,9 @@ public:
 	bool isTerrainDoubleMove(int /*TerrainTypes*/ eIndex);
 	bool isFeatureDoubleMove(int /*FeatureTypes*/ eIndex);
 
+	int getExtraTerrainAttackPercent(int /*TerrainTypes*/ eIndex);
 	int getExtraTerrainDefensePercent(int /*TerrainTypes*/ eIndex);
+	int getExtraFeatureAttackPercent(int /*FeatureTypes*/ eIndex);
 	int getExtraFeatureDefensePercent(int /*FeatureTypes*/ eIndex);
 	int getExtraUnitCombatModifier(int /*UnitCombatTypes*/ eIndex);
 
@@ -359,9 +390,13 @@ public:
 	int /*UnitAITypes*/ getUnitAIType();
 	void setUnitAIType(int /*UnitAITypes*/ iNewValue);
 
+	const CvArtInfoUnit* getArtInfo(int i, EraTypes eEra) const;
+
 	// Python Helper Functions
 
 	void centerCamera();
+	void attackForDamage(CyUnit *defender, int attakerDamageChange, int defenderDamageChange);
+	void rangeStrike(int iX, int iY);
 
 protected:
 	CvUnit* m_pUnit;

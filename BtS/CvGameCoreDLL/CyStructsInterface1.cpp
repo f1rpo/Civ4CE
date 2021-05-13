@@ -13,11 +13,6 @@ void CyStructsPythonInterface1()
 {
 	OutputDebugString("Python Extension Module - CyStructsPythonInterface1\n");
 
-	python::class_<FOWInfo>("FOWInfo")
-		.def_readwrite("ucFogValue", &FOWInfo::ucFogValue)
-		.def_readwrite("bDirty", &FOWInfo::bDirty)
-		;
-
 	python::class_<NiPoint3>("NiPoint3")
 		.def(python::init<float, float, float>())	// ctor which takes 3 floats
 		.def_readwrite("x", &NiPoint3::x)
@@ -56,7 +51,7 @@ void CyStructsPythonInterface1()
 		;
 
 	python::class_<GameTurnInfo>("GameTurnInfo")
-		.def_readwrite("iYearIncrement", &GameTurnInfo::iYearIncrement)
+		.def_readwrite("iMonthIncrement", &GameTurnInfo::iMonthIncrement)
 		.def_readwrite("iNumGameTurnsPerIncrement", &GameTurnInfo::iNumGameTurnsPerIncrement)
 		;
 
@@ -82,6 +77,22 @@ void CyStructsPythonInterface1()
 		.def_readwrite("bHidden", &TradeData::m_bHidden)
 		;
 
+	python::class_<EventTriggeredData>("EventTriggeredData")
+		.def_readwrite("iId", &EventTriggeredData::m_iId)
+		.def_readwrite("eTrigger", &EventTriggeredData::m_eTrigger)
+		.def_readwrite("iTurn", &EventTriggeredData::m_iTurn)
+		.def_readwrite("ePlayer", &EventTriggeredData::m_ePlayer)
+		.def_readwrite("iCityId", &EventTriggeredData::m_iCityId)
+		.def_readwrite("iPlotX", &EventTriggeredData::m_iPlotX)
+		.def_readwrite("iPlotY", &EventTriggeredData::m_iPlotY)
+		.def_readwrite("iUnitId", &EventTriggeredData::m_iUnitId)
+		.def_readwrite("eOtherPlayer", &EventTriggeredData::m_eOtherPlayer)
+		.def_readwrite("iOtherPlayerCityId", &EventTriggeredData::m_iOtherPlayerCityId)
+		.def_readwrite("eReligion", &EventTriggeredData::m_eReligion)
+		.def_readwrite("eCorporation", &EventTriggeredData::m_eCorporation)
+		.def_readwrite("eBuilding", &EventTriggeredData::m_eBuilding)
+		;
+
 	python::class_<EventMessage>("EventMessage")
 		.def_readwrite("iExpirationTurn", &EventMessage::iExpirationTurn)
 		.def("getDescription", &EventMessage::getDescription)
@@ -105,6 +116,7 @@ void CyStructsPythonInterface1()
 		.def("getMapName", &PBGameSetupData::getMapName)
 		.def_readwrite("iMaxTurns", &PBGameSetupData::iMaxTurns)
 		.def_readwrite("iCityElimination", &PBGameSetupData::iCityElimination)
+		.def_readwrite("iAdvancedStartPoints", &PBGameSetupData::iAdvancedStartPoints)
 		.def_readwrite("iTurnTime", &PBGameSetupData::iTurnTime)
 		.def("getOptionAt", &PBGameSetupData::getOptionAt)
 		.def("getMPOptionAt", &PBGameSetupData::getMPOptionAt)
@@ -143,7 +155,9 @@ void CyStructsPythonInterface1()
 		.def_readwrite("iCityDefenseModifier", &CombatDetails::iCityDefenseModifier)
 		.def_readwrite("iHillsAttackModifier", &CombatDetails::iHillsAttackModifier)
 		.def_readwrite("iHillsDefenseModifier", &CombatDetails::iHillsDefenseModifier)
+		.def_readwrite("iFeatureAttackModifier", &CombatDetails::iFeatureAttackModifier)
 		.def_readwrite("iFeatureDefenseModifier", &CombatDetails::iFeatureDefenseModifier)
+		.def_readwrite("iTerrainAttackModifier", &CombatDetails::iTerrainAttackModifier)
 		.def_readwrite("iTerrainDefenseModifier", &CombatDetails::iTerrainDefenseModifier)
 		.def_readwrite("iCityAttackModifier", &CombatDetails::iCityAttackModifier)
 		.def_readwrite("iDomainDefenseModifier", &CombatDetails::iDomainDefenseModifier)

@@ -27,7 +27,6 @@ public:
 
 	virtual CvPlot* getLookAtPlot() = 0;
 	virtual CvPlot* getSelectionPlot() = 0;
-	virtual CvUnit* getSelectionPlotUnit(int iIndex) = 0;
 	virtual CvUnit* getInterfacePlotUnit(const CvPlot* pPlot, int iIndex) = 0;
 	virtual CvUnit* getSelectionUnit(int iIndex) = 0;
 	virtual CvUnit* getHeadSelectedUnit() = 0;
@@ -58,7 +57,9 @@ public:
 
 	virtual CvSelectionGroup* getSelectionList() = 0;
 	virtual void clearSelectionList() = 0;
-	virtual void insertIntoSelectionList(CvUnit* pUnit, bool bClear, bool bToggle, bool bGroup = false, bool bSound = false) = 0;
+	virtual void insertIntoSelectionList(CvUnit* pUnit, bool bClear, bool bToggle, bool bGroup = false, bool bSound = false, bool bMinimalChange = false) = 0;
+	virtual void selectionListPostChange() = 0;
+	virtual void selectionListPreChange() = 0;
 	virtual int getSymbolID(int iSymbol) = 0;
 	virtual CLLNode<IDInfo>* deleteSelectionListNode(CLLNode<IDInfo>* pNode) = 0;
 	virtual CLLNode<IDInfo>* nextSelectionListNode(CLLNode<IDInfo>* pNode) = 0;
@@ -79,6 +80,7 @@ public:
 		InterfaceMessageTypes eType = MESSAGE_TYPE_INFO, LPCSTR pszIcon = NULL, ColorTypes eFlashColor = NO_COLOR,
 		int iFlashX = -1, int iFlashY = -1, bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false) = 0;
 	virtual void addCombatMessage(PlayerTypes ePlayer, CvWString szString) = 0;
+	virtual void addQuestMessage(PlayerTypes ePlayer, CvWString szString, int iQuestId) = 0;
 	virtual void showMessage(CvTalkingHeadMessage& msg) = 0;
 	virtual void flushTalkingHeadMessages() = 0;
 	virtual void clearEventMessages() = 0;
@@ -113,6 +115,8 @@ public:
 	virtual void toggleYieldVisibleMode() = 0;
 	virtual bool isScoresVisible() = 0;
 	virtual void toggleScoresVisible() = 0;
+	virtual bool isScoresMinimized() = 0;
+	virtual void toggleScoresMinimized() = 0;
 	virtual bool isNetStatsVisible() = 0;
 
 	virtual int getOriginalPlotCount() = 0;
@@ -172,7 +176,7 @@ public:
 
 	virtual void popupAddSeparator( CvPopup* pPopup, int iSpace = 0) = 0;
 
-	virtual void popupAddGenericButton( CvPopup* pPopup, CvWString szText, const char* szIcon = 0, WidgetTypes eWidgetType = WIDGET_GENERAL, int iData1 = MAX_INT, int iData2 = MAX_INT, 
+	virtual void popupAddGenericButton( CvPopup* pPopup, CvWString szText, const char* szIcon = 0, int iButtonId = -1, WidgetTypes eWidgetType = WIDGET_GENERAL, int iData1 = MAX_INT, int iData2 = MAX_INT, 
 		bool bOption = true, PopupControlLayout ctrlLayout = POPUP_LAYOUT_CENTER, unsigned int textJustifcation = DLL_FONT_LEFT_JUSTIFY ) = 0;
 
 	virtual void popupCreateEditBox( CvPopup* pPopup, CvWString szDefaultString = "", WidgetTypes eWidgetType = WIDGET_GENERAL, CvWString szHelpText = "", int iGroup = 0, 
@@ -192,6 +196,15 @@ public:
 
 	virtual bool noTechSplash() = 0;
 
+	virtual EspionageMissionTypes getEspionageActiveMission() = 0;
+	virtual void setEspionageActiveMission(EspionageMissionTypes eMission) = 0;
+	virtual PlayerTypes getEspionageTargetPlayer() = 0;
+	virtual void setEspionageTargetPlayer(PlayerTypes ePlayer) = 0;
+
+	virtual bool isInAdvancedStart() const = 0;
+	virtual void setInAdvancedStart(bool bAdvancedStart) = 0;
+
+	virtual void setBusy(bool bBusy) = 0;
 };
 
 

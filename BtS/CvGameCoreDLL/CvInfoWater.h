@@ -15,6 +15,7 @@
 #define CV_WATERINFO_H
 
 #include "CvInfos.h"
+#include "CvEnums.h"
 
 #pragma warning( disable: 4251 )		// needs to have dll-interface to be used by clients of class
 
@@ -67,6 +68,82 @@ protected:
 	float m_fVRate;
 };
 
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//
+//  class : CvTerrainPlaneInfo
+//
+//  DESC:   
+//
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+class CvTerrainPlaneInfo :public CvInfoBase
+{
+public:
+
+	DllExport CvTerrainPlaneInfo();
+	DllExport virtual ~CvTerrainPlaneInfo();
+
+	DllExport bool isVisible() const;				// The terrain plane's material alpha
+	DllExport float getMaterialAlpha() const;				// The terrain plane's material alpha
+	DllExport float getCloseAlpha() const;				// The terrain plane's material alpha
+
+	DllExport float getTextureScalingU() const;				// The terrain plane's texture scale
+	DllExport float getTextureScalingV() const;				// The terrain plane's texture scale
+	DllExport float getTextureScrollRateU() const;			// The terrain plane's texture scroll rate in U
+	DllExport float getTextureScrollRateV() const;			// The terrain plane's texture scroll rate in V
+	DllExport float getZHeight() const;						// The terrain plane's z height in world units
+	DllExport FogTypes getFogType() const;
+
+	DllExport const TCHAR * getBaseTexture() const;
+	DllExport void setBaseTexture(const TCHAR* szVal);		// The filename of the base texture
+
+	DllExport bool read(CvXMLLoadUtility*);
+
+protected:
+
+	bool m_bVisible;
+	float m_fMaterialAlpha;			// The terrain plane's material alpha
+	float m_fCloseAlpha;
+
+	CvString m_szBaseTexture;		// The filename of the base texture
+
+	float m_BaseTextureScaleU;		// Texture scaling
+	float m_BaseTextureScaleV;		// Texture scaling
+	float m_fURate;					// Texture scroll rate
+	float m_fVRate;
+	float m_fZHeight;
+	FogTypes m_eFogType;
+};
+
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//
+//  class : CvTerrainPlaneInfo
+//
+//  DESC:   
+//
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+class CvCameraOverlayInfo :public CvInfoBase
+{
+public:
+
+	DllExport CvCameraOverlayInfo();
+	DllExport virtual ~CvCameraOverlayInfo();
+
+	DllExport bool isVisible() const;				// The terrain plane's material alpha
+	DllExport CameraOverlayTypes getCameraOverlayType() const;
+
+	DllExport const TCHAR * getBaseTexture() const;
+	DllExport void setBaseTexture(const TCHAR* szVal);		// The filename of the base texture
+
+	DllExport bool read(CvXMLLoadUtility*);
+
+protected:
+
+	bool m_bVisible;
+	CvString m_szBaseTexture;		// The filename of the base texture
+	CameraOverlayTypes m_eCameraOverlayType;
+};
 
 
 #endif

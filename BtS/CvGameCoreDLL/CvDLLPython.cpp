@@ -10,6 +10,7 @@
 void CyCityPythonInterface1(python::class_<CyCity>& x);
 void CyPlotPythonInterface1(python::class_<CyPlot>& x);
 void CyPlayerPythonInterface1(python::class_<CyPlayer>& x);
+void CyPlayerPythonInterface2(python::class_<CyPlayer>& x);
 void CyUnitPythonInterface1(python::class_<CyUnit>& x);
 void CyGlobalContextPythonInterface1(python::class_<CyGlobalContext>& x);
 void CyGlobalContextPythonInterface2(python::class_<CyGlobalContext>& x);
@@ -62,6 +63,7 @@ DllExport void DLLPublishToPython()
 
 	python::class_<CyPlayer> player ("CyPlayer");	// define player class
 	CyPlayerPythonInterface1(player);				// publish it's methods
+	CyPlayerPythonInterface2(player);				// publish it's methods
 
 	python::class_<CyUnit> unit ("CyUnit");		// define unit class
 	CyUnitPythonInterface1(unit);				// publish it's methods

@@ -33,6 +33,7 @@ public:
 	void clearWorkingOverride(int iIndex);
 	int countNumImprovedPlots();
 	int countNumWaterPlots();
+	int countNumRiverPlots();
 
 	int findPopulationRank();
 	int findBaseYieldRateRank(int /*YieldTypes*/ eYield);
@@ -120,6 +121,8 @@ public:
 	bool isDisorder();
 	bool isHolyCityByType(int /*ReligionTypes*/ iIndex);
 	bool isHolyCity();
+	bool isHeadquartersByType(int /*CorporationTypes*/ iIndex);
+	bool isHeadquarters();
 	int getOvercrowdingPercentAnger(int iExtra);
 	int getNoMilitaryPercentAnger();
 	int getCulturePercentAnger();
@@ -154,8 +157,9 @@ public:
 	int cultureDistance(int iDX, int iDY);
 	int cultureStrength(int /*PlayerTypes*/ ePlayer);
 	int cultureGarrison(int /*PlayerTypes*/ ePlayer);	
-	bool hasBuilding(int /*BuildingTypes*/ iIndex);
-	bool hasActiveBuilding(int /*BuildingTypes*/ iIndex);
+	int getNumBuilding(int /*BuildingTypes*/ iIndex);
+	bool isHasBuilding(int /*BuildingTypes*/ iIndex);		// This is a function to help modders out, since it was replaced with getNumBuildings() in the C++
+	int getNumActiveBuilding(int /*BuildingTypes*/ iIndex);
 	int getID();
 	int getX();
 	int getY();
@@ -198,10 +202,20 @@ public:
 	int calculateDistanceMaintenanceTimes100() const;														 
 	int calculateNumCitiesMaintenance() const;													 
 	int calculateNumCitiesMaintenanceTimes100() const;													 
+	int calculateColonyMaintenanceTimes100() const;													 
+	int calculateColonyMaintenance() const;													 
+	int calculateCorporationMaintenanceTimes100() const;													 
+	int calculateCorporationMaintenance() const;													 
 	int getMaintenanceModifier();
 	int getWarWearinessModifier();
 	int getHurryAngerModifier();
 	void changeHealRate(int iChange);
+
+	int getEspionageHealthCounter();
+	void changeEspionageHealthCounter(int iChange);
+	int getEspionageHappinessCounter();
+	void changeEspionageHappinessCounter(int iChange);
+
 	int getFreshWaterGoodHealth();
 	int getFreshWaterBadHealth();
 	int getBuildingGoodHealth();
@@ -228,11 +242,18 @@ public:
 	int getReligionBadHappiness();
 	int getReligionHappiness(int iReligion);
 	int getExtraHappiness();
+	int getExtraHealth();
 	void changeExtraHappiness(int iChange);
+	void changeExtraHealth(int iChange);
 	int getHurryAngerTimer();
 	void changeHurryAngerTimer(int iChange);
 	int getConscriptAngerTimer();
 	void changeConscriptAngerTimer(int iChange);
+	int getDefyResolutionAngerTimer();
+	void changeDefyResolutionAngerTimer(int iChange);
+	int flatDefyResolutionAngerLength();
+	int getHappinessTimer();
+	void changeHappinessTimer(int iChange);
 	bool isNoUnhappiness();
 	bool isNoUnhealthyPopulation();
 
@@ -250,13 +271,16 @@ public:
 	int getMilitaryProductionModifier();
 	int getSpaceProductionModifier();
 	int getExtraTradeRoutes();
+	void changeExtraTradeRoutes(int iChange);
 	int getTradeRouteModifier();
+	int getForeignTradeRouteModifier();
 	int getBuildingDefense();
 	int getBuildingBombardDefense();
 	int getFreeExperience();
 	int getCurrAirlift();
 	int getMaxAirlift();
 	int getAirModifier();
+	int getAirUnitCapacity(int /*TeamTypes*/ eTeam);
 	int getNukeModifier();
 	int getFreeSpecialist();
 	bool isPower();
@@ -264,7 +288,7 @@ public:
 	bool isDirtyPower();
 	int getDefenseDamage();
 	void changeDefenseDamage(int iChange);
-	bool isBombardable(int iTeam);
+	bool isBombardable(CyUnit* pUnit);
 	int getNaturalDefense();
 	int getTotalDefense(bool bIgnoreBuilding);
 	int getDefenseModifier(bool bIgnoreBuilding);
@@ -275,6 +299,8 @@ public:
 	bool isOccupation();
 	void setOccupationTimer(int iNewValue);
 	void changeOccupationTimer(int iChange);
+	int getCultureUpdateTimer();
+	void changeCultureUpdateTimer(int iChange);
 	bool isNeverLost();
 	void setNeverLost(int iNewValue);
 	bool isBombarded();
@@ -290,6 +316,8 @@ public:
 	bool isWallOverride() const;
 	void setWallOverride(bool bOverride);
 	void setCitySizeBoost(int iBoost);
+	bool isPlundered();
+	void setPlundered(bool bNewValue);
 	int /*PlayerTypes*/getOwner();
 	int /*TeamTypes*/getTeam();
 	int /*PlayerTypes*/getPreviousOwner();
@@ -297,7 +325,12 @@ public:
 	int /*CultureLevelTypes*/ getCultureLevel();
 	int getCultureThreshold();
 	int getSeaPlotYield(int /*YieldTypes*/ eIndex);
+	int getRiverPlotYield(int /*YieldTypes*/ eIndex);
+
 	int getBaseYieldRate(int /*YieldTypes*/ eIndex);
+	void setBaseYieldRate(int /*YieldTypes*/ eIndex, int iNewValue);
+	void changeBaseYieldRate(int /*YieldTypes*/ eIndex, int iNewValue);
+
 	int getBaseYieldRateModifier(int /*YieldTypes*/ eIndex, int iExtra);
 	int getYieldRate(int /*YieldTypes*/ eIndex);
 	int getYieldRateModifier(int /*YieldTypes*/ eIndex);
@@ -323,6 +356,10 @@ public:
 	void changeSpecialistCommerce(int /*CommerceTypes*/ eIndex, int iChange);
 	int getReligionCommerce(int /*CommerceTypes*/ eIndex);
 	int getReligionCommerceByReligion(int /*CommerceTypes*/ eIndex, int /*ReligionTypes*/ iReligion);
+	int getCorporationCommerce(int /*CommerceTypes*/ eIndex);
+	int getCorporationCommerceByCorporation(int /*CommerceTypes*/ eIndex, int /*CorporationTypes*/ iCorporation);
+	int getCorporationYield(int /*YieldTypes*/ eIndex);
+	int getCorporationYieldByCorporation(int /*YieldTypes*/ eIndex, int /*CorporationTypes*/ iCorporation);
 	int getCommerceRateModifier(int /*CommerceTypes*/ eIndex);
 	int getCommerceHappinessPer(int /*CommerceTypes*/ eIndex);
 	int getCommerceHappinessByType(int /*CommerceTypes*/ eIndex);
@@ -345,11 +382,15 @@ public:
 
 	bool isRevealed(int /*TeamTypes*/ eIndex, bool bDebug);	
 	void setRevealed(int /*TeamTypes*/ eIndex, bool bNewValue);	
+	bool getEspionageVisibility(int /*TeamTypes*/ eIndex);
 	std::wstring getName();
 	std::wstring getNameForm(int iForm);
 	std::wstring getNameKey();
 	void setName(std::wstring szNewValue, bool bFound);
+	void changeNoBonusCount(int /*BonusTypes*/ eBonus, int iChange);
+	bool isNoBonus(int /*BonusTypes*/ eBonus);
 	int getFreeBonus(int /*BonusTypes*/ eIndex);
+	void changeFreeBonus(int /*BonusTypes*/ eIndex, int iChange);
 	int getNumBonuses(int /*BonusTypes*/ iBonus);
 	bool hasBonus(int /*BonusTypes */ iBonus);
 	int getBuildingProduction(int /*BuildingTypes*/ iIndex);
@@ -378,6 +419,8 @@ public:
 	int getFreeSpecialistCount(int /*SpecialistTypes*/ eIndex);
 	void setFreeSpecialistCount(int /*SpecialistTypes*/ eIndex, int iNewValue);
 	void changeFreeSpecialistCount(int /*SpecialistTypes*/ eIndex, int iChange);
+	int getImprovementFreeSpecialists(int /*ImprovementTypes*/ iIndex);
+	void changeImprovementFreeSpecialists(int /*ImprovementTypes*/ iIndex, int iChange);
 	int getReligionInfluence(int /*ReligionTypes*/ iIndex);
 	void changeReligionInfluence(int /*ReligionTypes*/ iIndex, int iChange);
 
@@ -389,15 +432,19 @@ public:
 	int getFreePromotionCount(int /*PromotionTypes*/ eIndex);	
 	bool isFreePromotion(int /*PromotionTypes*/ eIndex);
 	int getSpecialistFreeExperience() const;	
+	int getEspionageDefenseModifier() const;	
 
 	bool isWorkingPlotByIndex(int iIndex);
 	bool isWorkingPlot(CyPlot* pPlot);
 	void alterWorkingPlot(int iIndex);
-	bool isHasRealBuilding(int /*BuildingTypes*/ iIndex);
-	void setHasRealBuilding(int /*BuildingTypes*/ iIndex, bool bNewValue);
-	bool isFreeBuilding(int /*BuildingTypes*/ iIndex);
+	int getNumRealBuilding(int /*BuildingTypes*/ iIndex);
+	void setNumRealBuilding(int /*BuildingTypes*/ iIndex, int iNewValue);
+	int getNumFreeBuilding(int /*BuildingTypes*/ iIndex);
 	bool isHasReligion(int /*ReligionTypes*/ iIndex);
 	void setHasReligion(int /*ReligionTypes*/ iIndex, bool bNewValue, bool bAnnounce, bool bArrows);
+	bool isHasCorporation(int /*CorporationTypes*/ iIndex);
+	void setHasCorporation(int /*CorporationTypes*/ iIndex, bool bNewValue, bool bAnnounce, bool bArrows);
+	bool isActiveCorporation(int /*CorporationTypes*/ eCorporation);
 	CyCity* getTradeCity(int iIndex);
 	int getTradeRoutes();
 
@@ -410,8 +457,21 @@ public:
 	void setWallOverridePoints(const python::tuple& kPoints); /* points are given in world space ... i.e. PlotXToPointX, etc */
 	python::tuple getWallOverridePoints() const;
 
+	int getBuildingYieldChange(int /*BuildingClassTypes*/ eBuildingClass, int /*YieldTypes*/ eYield) const;
+	void setBuildingYieldChange(int /*BuildingClassTypes*/ eBuildingClass, int /*YieldTypes*/ eYield, int iChange);
+	int getBuildingCommerceChange(int /*BuildingClassTypes*/ eBuildingClass, int /*CommerceTypes*/ eCommerce) const;
+	void setBuildingCommerceChange(int /*BuildingClassTypes*/ eBuildingClass, int /*CommerceTypes*/ eCommerce, int iChange);
+	int getBuildingHappyChange(int /*BuildingClassTypes*/ eBuildingClass) const;
+	void setBuildingHappyChange(int /*BuildingClassTypes*/ eBuildingClass, int iChange);
+	int getBuildingHealthChange(int /*BuildingClassTypes*/ eBuildingClass) const;
+	void setBuildingHealthChange(int /*BuildingClassTypes*/ eBuildingClass, int iChange);
+
+	int getLiberationPlayer();
+	void liberate();
+
 	bool AI_isEmphasize(int iEmphasizeType);
 	int AI_countBestBuilds(CyArea* pArea);
+	int AI_cityValue();
 
 	std::string getScriptData() const;
 	void setScriptData(std::string szNewValue);

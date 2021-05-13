@@ -176,6 +176,8 @@ public:
 	DllExport int getMaxCityElimination() const	{ return m_iMaxCityElimination; }
 	DllExport void setMaxCityElimination(int iMaxCityElimination)	{ m_iMaxCityElimination = iMaxCityElimination; }
 
+	DllExport int getNumAdvancedStartPoints() const	{ return m_iNumAdvancedStartPoints; }
+	DllExport void setNumAdvancedStartPoints(int iNumPoints)	{ m_iNumAdvancedStartPoints = iNumPoints; }
 
 	DllExport unsigned int getSyncRandSeed() const	{ return m_uiSyncRandSeed; }
 	DllExport void setSyncRandSeed(unsigned int uiSyncRandSeed)	{ m_uiSyncRandSeed = uiSyncRandSeed; }
@@ -271,6 +273,7 @@ public:
 	DllExport const CvString & getXMLCheck(PlayerTypes eID) const;
 	DllExport void setXMLCheck(PlayerTypes eID, const CvString & iXMLCheck);
 									
+	DllExport void resetAdvancedStartPoints();
 
 	DllExport virtual void read(FDataStreamBase* pStream);
 	DllExport virtual void write(FDataStreamBase* pStream);
@@ -331,6 +334,8 @@ protected:
 
 	// Number of city eliminations permitted
 	int m_iMaxCityElimination;
+
+	int m_iNumAdvancedStartPoints;
 
 	// Unsaved data
 	unsigned int m_uiSyncRandSeed;

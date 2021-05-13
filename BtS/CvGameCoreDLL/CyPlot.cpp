@@ -214,6 +214,17 @@ int CyPlot::defenseModifier(int iDefendTeam, bool bIgnoreBuilding, bool bHelp)
 	return m_pPlot ? m_pPlot->defenseModifier((TeamTypes)iDefendTeam, bIgnoreBuilding, bHelp) : -1;
 }
 
+int CyPlot::getExtraMovePathCost()
+{
+	return m_pPlot ? m_pPlot->getExtraMovePathCost() : -1;
+}
+
+void CyPlot::changeExtraMovePathCost(int iChange)
+{
+	if (m_pPlot)
+		m_pPlot->changeExtraMovePathCost(iChange);
+}
+
 bool CyPlot::isAdjacentOwned()
 {
 	return m_pPlot ? m_pPlot->isAdjacentOwned() : false;
@@ -279,6 +290,21 @@ bool CyPlot::isAdjacentVisible(int /*TeamTypes*/ eTeam, bool bDebug)
 	return m_pPlot ? m_pPlot->isAdjacentVisible((TeamTypes) eTeam, bDebug) : false;
 }
 
+bool CyPlot::isAdjacentNonvisible(int /*TeamTypes*/ eTeam)
+{
+	return m_pPlot ? m_pPlot->isAdjacentNonvisible((TeamTypes) eTeam) : false;
+}
+
+bool CyPlot::isAdjacentRevealed(int /*TeamTypes*/ eTeam)
+{
+	return m_pPlot ? m_pPlot->isAdjacentRevealed((TeamTypes) eTeam) : false;
+}
+
+bool CyPlot::isAdjacentNonrevealed(int /*TeamTypes*/ eTeam)
+{
+	return m_pPlot ? m_pPlot->isAdjacentNonrevealed((TeamTypes) eTeam) : false;
+}
+
 void CyPlot::removeGoody()
 {
 	if (m_pPlot)
@@ -302,14 +328,14 @@ bool CyPlot::isCity()
 	return m_pPlot ? m_pPlot->isCity() : false;
 }
 
-bool CyPlot::isFriendlyCity(int /*TeamTypes*/  eTeam)													
+bool CyPlot::isFriendlyCity(CyUnit* pUnit, bool bCheckImprovement)													
 {
-	return m_pPlot ? m_pPlot->isFriendlyCity((TeamTypes)eTeam) : false;
+	return m_pPlot ? m_pPlot->isFriendlyCity(*(pUnit->getUnit()), bCheckImprovement) : false;
 }
 
-bool CyPlot::isEnemyCity(int /*TeamTypes*/  eTeam)														
+bool CyPlot::isEnemyCity(CyUnit* pUnit)														
 {
-	return m_pPlot ? m_pPlot->isEnemyCity((TeamTypes)eTeam) : false;
+	return m_pPlot ? m_pPlot->isEnemyCity(*(pUnit->getUnit())) : false;
 }
 
 bool CyPlot::isOccupation()
@@ -332,9 +358,9 @@ bool CyPlot::isInvestigate(int /*TeamTypes*/ eTeam)
 	return m_pPlot ? m_pPlot->isInvestigate((TeamTypes) eTeam) : false;
 }
 
-bool CyPlot::isVisibleEnemyDefender(int /*PlayerTypes*/ ePlayer)
+bool CyPlot::isVisibleEnemyDefender(CyUnit* pUnit)
 {
-	return m_pPlot ? m_pPlot->isVisibleEnemyDefender((PlayerTypes) ePlayer) : false;
+	return m_pPlot ? m_pPlot->isVisibleEnemyDefender(pUnit->getUnit()) : false;
 }
 
 int CyPlot::getNumDefenders(int /*PlayerTypes*/ ePlayer)
@@ -342,14 +368,14 @@ int CyPlot::getNumDefenders(int /*PlayerTypes*/ ePlayer)
 	return m_pPlot ? m_pPlot->getNumDefenders((PlayerTypes) ePlayer) : -1;
 }
 
-int CyPlot::getNumVisibleEnemyDefenders(int /*PlayerTypes*/ ePlayer)
+int CyPlot::getNumVisibleEnemyDefenders(CyUnit* pUnit)
 {
-	return m_pPlot ? m_pPlot->getNumVisibleEnemyDefenders((PlayerTypes) ePlayer) : -1;
+	return m_pPlot ? m_pPlot->getNumVisibleEnemyDefenders(pUnit->getUnit()) : -1;
 }
 
-int CyPlot::getNumVisiblePotentialEnemyDefenders(int /*PlayerTypes*/ ePlayer)
+int CyPlot::getNumVisiblePotentialEnemyDefenders(CyUnit* pUnit)
 {
-	return m_pPlot ? m_pPlot->getNumVisiblePotentialEnemyDefenders((PlayerTypes) ePlayer) : -1;
+	return m_pPlot ? m_pPlot->getNumVisiblePotentialEnemyDefenders(pUnit->getUnit()) : -1;
 }
 
 bool CyPlot::isVisibleEnemyUnit(int /*PlayerTypes*/ ePlayer)
@@ -386,9 +412,9 @@ bool CyPlot::isBonusNetwork(int /*TeamTypes*/ eTeam)
 {
 	return m_pPlot ? m_pPlot->isBonusNetwork((TeamTypes) eTeam) : false;
 }
-bool CyPlot::isTradeNetworkImpassable()
+bool CyPlot::isTradeNetworkImpassable(int /*TeamTypes*/ eTeam)
 {
-	return m_pPlot ? m_pPlot->isTradeNetworkImpassable() : false;
+	return m_pPlot ? m_pPlot->isTradeNetworkImpassable((TeamTypes) eTeam) : false;
 }
 
 bool CyPlot::isTradeNetwork(int /*TeamTypes*/ eTeam)
@@ -401,14 +427,14 @@ bool CyPlot::isTradeNetworkConnected(CyPlot* pPlot, int /*TeamTypes*/ eTeam)
 	return m_pPlot ? m_pPlot->isTradeNetworkConnected(pPlot->getPlot(), (TeamTypes)eTeam) : false;
 }
 
-bool CyPlot::isValidDomainForLocation(DomainTypes eDomain)
+bool CyPlot::isValidDomainForLocation(CyUnit* pUnit) const
 {
-	return m_pPlot ? m_pPlot->isValidDomainForLocation(eDomain) : false;
+	return (m_pPlot && pUnit && pUnit->getUnit()) ? m_pPlot->isValidDomainForLocation(*(pUnit->getUnit())) : false;
 }
 
-bool CyPlot::isValidDomainForAction(DomainTypes eDomain)
+bool CyPlot::isValidDomainForAction(CyUnit* pUnit) const
 {
-	return m_pPlot ? m_pPlot->isValidDomainForAction(eDomain) : false;
+	return (m_pPlot && pUnit && pUnit->getUnit()) ? m_pPlot->isValidDomainForAction(*(pUnit->getUnit())) : false;
 }
 
 bool CyPlot::isImpassable()
@@ -644,6 +670,38 @@ void CyPlot::setFeatureType(int /*FeatureTypes*/ eNewValue, int iVariety)
 		m_pPlot->setFeatureType((FeatureTypes)eNewValue, iVariety);
 }
 
+void CyPlot::setFeatureDummyVisibility(std::string dummyTag, bool show)
+{
+	if(m_pPlot)
+		m_pPlot->setFeatureDummyVisibility(dummyTag.c_str(), show);
+}
+
+void CyPlot::addFeatureDummyModel(std::string dummyTag, std::string modelTag)
+{
+	if(m_pPlot)
+		m_pPlot->addFeatureDummyModel(dummyTag.c_str(), modelTag.c_str());
+}
+
+void CyPlot::setFeatureDummyTexture(std::string dummyTag, std::string textureTag)
+{
+	if(m_pPlot)
+		m_pPlot->setFeatureDummyTexture(dummyTag.c_str(), textureTag.c_str());
+}
+
+std::string CyPlot::pickFeatureDummyTag(int mouseX, int mouseY)
+{
+	if(m_pPlot)
+		return m_pPlot->pickFeatureDummyTag(mouseX, mouseY);
+	else
+		return "";
+}
+
+void CyPlot::resetFeatureModel()
+{
+	if(m_pPlot)
+		m_pPlot->resetFeatureModel();
+}
+
 int CyPlot::getFeatureVariety()
 {
 	return m_pPlot ? m_pPlot->getFeatureVariety() : -1;
@@ -839,6 +897,11 @@ void CyPlot::changeCulture(int /*PlayerTypes*/ eIndex, int iChange, bool bUpdate
 		m_pPlot->changeCulture((PlayerTypes)eIndex, iChange, bUpdate);
 }
 
+int CyPlot::countNumAirUnits(int /*TeamTypes*/ eTeam)
+{
+	return m_pPlot ? m_pPlot->countNumAirUnits((TeamTypes)eTeam) : -1;
+}
+
 int CyPlot::getFoundValue(int /*PlayerTypes*/ eIndex)	
 {
 	return m_pPlot ? m_pPlot->getFoundValue((PlayerTypes)eIndex) : -1;
@@ -954,7 +1017,7 @@ int CyPlot::getNumUnits()
 
 CyUnit* CyPlot::getUnit(int iIndex)
 {
-	return m_pPlot ? new CyUnit(m_pPlot->getUnit(iIndex)) : NULL;
+	return m_pPlot ? new CyUnit(m_pPlot->getUnitByIndex(iIndex)) : NULL;
 }
 
 std::string CyPlot::getScriptData() const

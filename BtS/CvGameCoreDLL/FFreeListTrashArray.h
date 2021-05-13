@@ -36,7 +36,7 @@ public:
 
 	virtual void init(int iNumSlots = 8);
 	virtual void uninit();
-	virtual T* getAt(int iID);
+	virtual T* getAt(int iID) const;
 
 	T* add();
 	bool remove(T* pData);
@@ -244,7 +244,7 @@ T* FFreeListTrashArray<T>::add()
 
 
 template <class T>
-T* FFreeListTrashArray<T>::getAt(int iID)
+T* FFreeListTrashArray<T>::getAt(int iID) const
 {
 	int iIndex;
 

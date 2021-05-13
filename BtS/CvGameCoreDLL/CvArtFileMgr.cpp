@@ -54,7 +54,7 @@
 class Cv##name##ArtInfoItem : public CvArtFileMgr::ArtInfoItem \
 { \
 	void init() { ARTFILEMGR.m_map##name##ArtInfos = new CvArtFileMgr::ArtInfo##name##MapType; } \
-	void deInit() { SAFE_DELETE(ARTFILEMGR.m_map##name##ArtInfos); SAFE_DELETE_ARRAY(ARTFILEMGR.m_pa##name##ArtInfo); } \
+	void deInit(); \
 	void buildMap() { BUILD_INFO_MAP(*ARTFILEMGR.m_map##name##ArtInfos, ARTFILEMGR.get##name##ArtInfo, ARTFILEMGR.getNum##name##ArtInfos()); } \
 }; \
 \
@@ -80,7 +80,16 @@ CvArtInfo##name##* CvArtFileMgr::get##name##ArtInfo( const char *szArtDefineTag 
 	} \
 	return it->second; \
 } \
-CvArtInfo##name##& CvArtFileMgr::get##name##ArtInfo(int i) { return m_pa##name##ArtInfo[i]; }
+void Cv##name##ArtInfoItem::deInit() \
+{ \
+	SAFE_DELETE(ARTFILEMGR.m_map##name##ArtInfos); \
+	for (uint i = 0; i < ARTFILEMGR.m_pa##name##ArtInfo.size(); ++i) \
+	{ \
+		SAFE_DELETE(ARTFILEMGR.m_pa##name##ArtInfo[i]); \
+	} \
+	ARTFILEMGR.m_pa##name##ArtInfo.clear(); \
+} \
+CvArtInfo##name##& CvArtFileMgr::get##name##ArtInfo(int i) { return *(m_pa##name##ArtInfo[i]); }
 
 //----------------------------------------------------------------------------
 //

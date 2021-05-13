@@ -305,9 +305,40 @@ int CvArea::countHasReligion(ReligionTypes eReligion, PlayerTypes eOwner) const
 			{
 				for (pLoopCity = GET_PLAYER((PlayerTypes)iI).firstCity(&iLoop); pLoopCity != NULL; pLoopCity = GET_PLAYER((PlayerTypes)iI).nextCity(&iLoop))
 				{
-					if (pLoopCity->isHasReligion(eReligion))
+					if (pLoopCity->area()->getID() == getID())
 					{
-						iCount++;
+						if (pLoopCity->isHasReligion(eReligion))
+						{
+							iCount++;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return iCount;
+}
+
+int CvArea::countHasCorporation(CorporationTypes eCorporation, PlayerTypes eOwner) const
+{
+	int iCount = 0;
+
+	for (int iI = 0; iI < MAX_PLAYERS; ++iI)
+	{
+		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		{
+			if ((eOwner == NO_PLAYER) || (iI == eOwner))
+			{
+				int iLoop;
+				for (CvCity* pLoopCity = GET_PLAYER((PlayerTypes)iI).firstCity(&iLoop); NULL != pLoopCity; pLoopCity = GET_PLAYER((PlayerTypes)iI).nextCity(&iLoop))
+				{
+					if (pLoopCity->area()->getID() == getID())
+					{
+						if (pLoopCity->isHasCorporation(eCorporation))
+						{
+							++iCount;
+						}
 					}
 				}
 			}
@@ -326,7 +357,7 @@ int CvArea::getNumTiles() const
 
 bool CvArea::isLake() const							
 {
-	return (isWater() && (getNumTiles() <= GC.getDefineINT("LAKE_MAX_AREA_SIZE")));
+	return (isWater() && (getNumTiles() <= GC.getLAKE_MAX_AREA_SIZE()));
 }
 
 

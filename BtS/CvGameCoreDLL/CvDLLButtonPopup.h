@@ -33,7 +33,6 @@ private:
 	bool launchChangeReligionPopup(CvPopup* pPopup, CvPopupInfo &info);
 	bool launchChooseElectionPopup(CvPopup* pPopup, CvPopupInfo &info);
 	bool launchDiploVotePopup(CvPopup* pPopup, CvPopupInfo &info);
-	bool launchDiploVoteResults(CvPopup* pPopup, CvPopupInfo &info);
 	bool launchRazeCityPopup(CvPopup* pPopup, CvPopupInfo &info);
 	bool launchDisbandCityPopup(CvPopup* pPopup, CvPopupInfo &info);
 	bool launchChooseTechPopup(CvPopup* pPopup, CvPopupInfo &info);
@@ -43,6 +42,8 @@ private:
 	bool launchConfirmCommandPopup(CvPopup* pPopup, CvPopupInfo &info);
 	bool launchLoadUnitPopup(CvPopup* pPopup, CvPopupInfo &info);
 	bool launchLeadUnitPopup(CvPopup* pPopup, CvPopupInfo &info);
+	bool launchDoEspionagePopup(CvPopup* pPopup, CvPopupInfo &info);
+	bool launchDoEspionageTargetPopup(CvPopup* pPopup, CvPopupInfo &info);
 	bool launchMainMenuPopup(CvPopup* pPopup, CvPopupInfo &info);
 	bool launchConfirmMenu(CvPopup *pPopup, CvPopupInfo &info);
 	bool launchPythonScreen(CvPopup* pPopup, CvPopupInfo &info);
@@ -59,6 +60,10 @@ private:
 	bool launchKickedPopup(CvPopup* pPopup, CvPopupInfo &info);
 	bool launchVassalDemandTributePopup(CvPopup* pPopup, CvPopupInfo &info);
 	bool launchVassalGrantTributePopup(CvPopup* pPopup, CvPopupInfo &info);
+	bool launchEventPopup(CvPopup* pPopup, CvPopupInfo &info);
+	bool launchFreeColonyPopup(CvPopup* pPopup, CvPopupInfo &info);
+	bool launchLaunchPopup(CvPopup* pPopup, CvPopupInfo &info);
+	bool launchFoundReligionPopup(CvPopup* pPopup, CvPopupInfo &info);
 };
 
 #endif

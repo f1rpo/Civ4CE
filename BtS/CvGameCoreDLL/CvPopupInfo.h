@@ -34,6 +34,7 @@ public:
 	DllExport bool getPendingDelete() const;
 	DllExport const CvString& getOnFocusPythonCallback() const;
 	DllExport const CvString& getOnClickedPythonCallback() const;
+	DllExport const CvString& getPythonModule() const;
 	DllExport const CvWString& getPythonButtonText(int i) const;
 	DllExport const CvString& getPythonButtonArt(int i) const;
 	DllExport int getNumPythonButtons() const;
@@ -49,6 +50,7 @@ public:
 	DllExport void setPendingDelete(bool bDelete);
 	DllExport void setOnFocusPythonCallback(const char* szOnFocus);
 	DllExport void setOnClickedPythonCallback(const char* szOnClicked);
+	DllExport void setPythonModule(const char* szModule);
 	DllExport void addPythonButton(const wchar* szText, const char* szArt);
 
 protected:
@@ -64,6 +66,7 @@ protected:
 	std::vector<CvPopupButtonPython> m_aPythonButtons;
 	CvString m_szOnFocusPythonCallback;
 	CvString m_szOnClickedPythonCallback;
+	CvString m_szPythonModule;
 
 	bool m_bPendingDelete;
 };

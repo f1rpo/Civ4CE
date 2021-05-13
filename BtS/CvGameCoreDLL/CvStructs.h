@@ -43,7 +43,7 @@ struct DllExport IDInfo
 
 struct DllExport GameTurnInfo				// Exposed to Python
 {
-	int iYearIncrement;
+	int iMonthIncrement;
 	int iNumGameTurnsPerIncrement;
 };
 
@@ -72,7 +72,64 @@ struct DllExport TradeData					// Exposed to Python
 	bool m_bHidden;										//	Are we hidden?
 };
 
-struct DllExport EventMessage
+struct EventTriggeredData
+{
+	int m_iId;
+	EventTriggerTypes m_eTrigger;
+	int m_iTurn;
+	PlayerTypes m_ePlayer;
+	int m_iCityId;
+	int m_iPlotX;
+	int m_iPlotY;
+	int m_iUnitId;
+	PlayerTypes m_eOtherPlayer;
+	int m_iOtherPlayerCityId;
+	ReligionTypes m_eReligion;
+	CorporationTypes m_eCorporation;
+	BuildingTypes m_eBuilding;
+	CvWString m_szText;
+	CvWString m_szGlobalText;
+
+	int getID() const;
+	void setID(int iID);
+	void read(FDataStreamBase* pStream);
+	void write(FDataStreamBase* pStream);
+};
+
+struct VoteSelectionSubData
+{
+	VoteTypes eVote;
+	PlayerTypes ePlayer;
+	int iCityId;
+	PlayerTypes eOtherPlayer;
+	CvWString szText;
+};
+
+struct VoteSelectionData
+{
+	int iId;
+	VoteSourceTypes eVoteSource;
+	std::vector<VoteSelectionSubData> aVoteOptions;
+
+	int getID() const;
+	void setID(int iID);
+	void read(FDataStreamBase* pStream);
+	void write(FDataStreamBase* pStream);
+};
+
+struct VoteTriggeredData
+{
+	int iId;
+	VoteSourceTypes eVoteSource;
+	VoteSelectionSubData kVoteOption;
+
+	int getID() const;
+	void setID(int iID);
+	void read(FDataStreamBase* pStream);
+	void write(FDataStreamBase* pStream);
+};
+
+struct EventMessage
 {
 	CvWString szDescription;
 	int iExpirationTurn;
@@ -83,6 +140,49 @@ struct DllExport EventMessage
 	std::wstring getDescription() const { return szDescription;	}
 };
 
+struct PlotExtraYield
+{
+	int m_iX;
+	int m_iY;
+	std::vector<int> m_aeExtraYield;
+
+	void read(FDataStreamBase* pStream);
+	void write(FDataStreamBase* pStream);
+};
+
+struct PlotExtraCost
+{
+	int m_iX;
+	int m_iY;
+	int m_iCost;
+
+	void read(FDataStreamBase* pStream);
+	void write(FDataStreamBase* pStream);
+};
+
+typedef std::vector< std::pair<BuildingClassTypes, int> > BuildingChangeArray;
+
+struct BuildingYieldChange
+{
+	BuildingClassTypes eBuildingClass;
+	YieldTypes eYield;
+	int iChange;
+
+	void read(FDataStreamBase* pStream);
+	void write(FDataStreamBase* pStream);
+};
+
+struct BuildingCommerceChange
+{
+	BuildingClassTypes eBuildingClass;
+	CommerceTypes eCommerce;
+	int iChange;
+
+	void read(FDataStreamBase* pStream);
+	void write(FDataStreamBase* pStream);
+};
+
+
 struct DllExport FOWVis
 {
 	uint uiCount;
@@ -90,12 +190,6 @@ struct DllExport FOWVis
 
 	// python friendly accessors
 	POINT getOffsets(int i) const { return pOffsets[i]; }
-};
-
-struct DllExport FOWInfo
-{
-	unsigned char ucFogValue;							// Value drawn to texture
-	bool bDirty;								// Set to true of the FOW texture does not reflect this information.
 };
 
 struct DllExport PBGameSetupData
@@ -110,6 +204,7 @@ struct DllExport PBGameSetupData
 
 	int iMaxTurns;
 	int iCityElimination;
+	int iAdvancedStartPoints;
 	int iTurnTime;
 
 	int iNumCustomMapOptions;
@@ -299,6 +394,7 @@ public:
 
 	int getDamage(BattleUnitTypes unitType) const;
 	void setDamage(BattleUnitTypes unitType, int damage);
+	bool isDead(BattleUnitTypes unitType) const;
 
 private:
 	int					m_aDamage[BATTLE_UNIT_COUNT];		//!< The ending damage of the units

@@ -19,6 +19,11 @@
 #define AI_STRATEGY_PRODUCTION          (1 << 12)
 #define AI_STRATEGY_PEACE				(1 << 13)  //lucky... neglect defenses.
 #define AI_STRATEGY_GET_BETTER_UNITS	(1 << 14)
+#define AI_STRATEGY_LAND_BLITZ			(1 << 15)
+#define AI_STRATEGY_AIR_BLITZ			(1 << 16)
+#define AI_STRATEGY_LAST_STAND			(1 << 17)
+#define AI_STRATEGY_FINAL_WAR			(1 << 18)
+#define AI_STRATEGY_OWABWNW				(1 << 19)
 
 
 #define AI_CITY_ROLE_VALID              (1 <<  1)    //zero is bad

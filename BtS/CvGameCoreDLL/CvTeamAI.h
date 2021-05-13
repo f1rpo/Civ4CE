@@ -5,8 +5,6 @@
 
 #include "CvTeam.h"
 
-class CvExtraSaveData;
-
 class CvTeamAI : public CvTeam
 {
 
@@ -62,7 +60,7 @@ public:
 	int AI_getAttitudeVal(TeamTypes eTeam, bool bForced = true) const;
 	int AI_getMemoryCount(TeamTypes eTeam, MemoryTypes eMemory) const;
 
-	VoteTypes AI_chooseElection() const;
+	int AI_chooseElection(const VoteSelectionData& kVoteSelectionData) const;
 
 	int AI_startWarVal(TeamTypes eTeam) const;
 	int AI_endWarVal(TeamTypes eTeam) const;
@@ -140,10 +138,20 @@ public:
 	bool AI_isChosenWar(TeamTypes eIndex) const;
 	bool AI_isSneakAttackPreparing(TeamTypes eIndex) const;
 	bool AI_isSneakAttackReady(TeamTypes eIndex) const;
-	void AI_setWarPlan(TeamTypes eIndex, WarPlanTypes eNewValue);
-	
-	int AI_teamCloseness(TeamTypes eIndex, int iMaxDistance = -1) const;
+	void AI_setWarPlan(TeamTypes eIndex, WarPlanTypes eNewValue, bool bWar = true);
 
+	int AI_teamCloseness(TeamTypes eIndex, int iMaxDistance = -1) const;
+	
+	bool AI_performNoWarRolls(TeamTypes eTeam);
+	
+	int AI_getAttitudeWeight(TeamTypes eTeam);
+	
+	int AI_getLowestVictoryCountdown() const;
+
+	int AI_getTechMonopolyValue(TechTypes eTech, TeamTypes eTeam) const;
+	
+	bool AI_isWaterAreaRelevant(CvArea* pArea);
+	
 	virtual void read(FDataStreamBase* pStream);
 	virtual void write(FDataStreamBase* pStream);
 
@@ -181,8 +189,6 @@ protected:
 	void AI_doCounter();
 	void AI_doWar();
 
-	void writeExtraSaveData(CvExtraSaveData& extraSaveData);
-	friend CvExtraSaveData;
 
 	// added so under cheat mode we can call protected functions for testing
 	friend class CvGameTextMgr;

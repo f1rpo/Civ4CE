@@ -43,7 +43,7 @@ bool CvXMLLoadUtility::CreateFXml()
 		sprintf( szMessage, "Caught unhandled exception creating XML parser object \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
 		gDLL->MessageBox( szMessage, "Loading Error" );
 		return false;
-	} 
+	}
 	return true;
 }
 
@@ -60,7 +60,7 @@ void CvXMLLoadUtility::DestroyFXml()
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvXMLLoadUtility::CvXMLLoadUtility() : 	
+CvXMLLoadUtility::CvXMLLoadUtility() :
 m_iCurProgressStep(0),
 m_pCBFxn(NULL),
 m_pFXml(NULL)
@@ -89,7 +89,13 @@ CvXMLLoadUtility::~CvXMLLoadUtility(void)
 //------------------------------------------------------------------------------------------------------
 void CvXMLLoadUtility::ResetLandscapeInfo()
 {
-	SAFE_DELETE_ARRAY(GC.getLandscapeInfo());
+	for (int i = 0; i < GC.getNumLandscapeInfos(); ++i)
+	{
+		SAFE_DELETE(GC.getLandscapeInfo()[i]);
+	}
+
+	GC.getLandscapeInfo().clear();
+
 	SetupGlobalLandscapeInfo();
 }
 
@@ -102,22 +108,14 @@ void CvXMLLoadUtility::ResetLandscapeInfo()
 //------------------------------------------------------------------------------------------------------
 void CvXMLLoadUtility::ResetGlobalEffectInfo()
 {
-	bool bLoaded;
-
-	SAFE_DELETE_ARRAY(GC.getEffectInfo());
-	
-	// Load the effect infos
-	bLoaded = LoadCivXml(m_pFXml, "Misc/CIV4EffectInfos.xml");
-	// FAssert if the load failed
-	FAssertMsg(bLoaded,"LoadXml call failed for Misc/CIV4EffectInfos.xml");
-	// if the xml file was loaded correctly
-	if (bLoaded)
+	for (int i = 0; i < GC.getNumEffectInfos(); ++i)
 	{
-		if (Validate())
-		{
-			SetGlobalClassInfo(&GC.getEffectInfo(), "Civ4EffectInfos/EffectInfos/EffectInfo", &GC.getNumEffectInfos());
-		}
-	}	
+		SAFE_DELETE(GC.getEffectInfo()[i]);
+	}
+
+	GC.getEffectInfo().clear();
+
+	LoadGlobalClassInfo(GC.getEffectInfo(), "CIV4EffectInfos", "Misc", "Civ4EffectInfos/EffectInfos/EffectInfo", false, false);
 }
 
 
@@ -313,9 +311,9 @@ bool CvXMLLoadUtility::SkipToNextVal()
 //				returns -1 if no match is found
 //
 //------------------------------------------------------------------------------------------------------
-int CvXMLLoadUtility::FindInInfoClass(const TCHAR* pszVal, CvInfoBase* pInfos, int iClassSize, int iListLen)
+int CvXMLLoadUtility::FindInInfoClass(const TCHAR* pszVal, bool hideAssert)
 {
-	int idx = GC.getInfoTypeForString(pszVal);
+	int idx = GC.getInfoTypeForString(pszVal, hideAssert);
 
 	// if we found a match in the list we will return the value of the loop counter
 	// which will hold the location of the match in the list
@@ -323,13 +321,17 @@ int CvXMLLoadUtility::FindInInfoClass(const TCHAR* pszVal, CvInfoBase* pInfos, i
 	{
 		return idx;
 	}
-	
-	if (_tcscmp(pszVal,"NONE")!=0)
+
+	if(!hideAssert)
 	{
-		char errorMsg[1024];
-		sprintf(errorMsg, "Tag: %s in Info class was incorrect \n Current XML file is: %s", pszVal, GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(errorMsg, "XML Error");
+		if (_tcscmp(pszVal,"NONE")!=0 && _tcscmp(pszVal,"")!=0)
+		{
+			char errorMsg[1024];
+			sprintf(errorMsg, "Tag: %s in Info class was incorrect \n Current XML file is: %s", pszVal, GC.getCurrentXMLFile().GetCString());
+			gDLL->MessageBox(errorMsg, "XML Error");
+		}
 	}
+
 	return idx;
 }
 
@@ -352,8 +354,8 @@ int CvXMLLoadUtility::FindInInfoClass(const TCHAR* pszVal, CvInfoBase* pInfos, i
 //!							iAutomateType is the automate type for this action info
 //!							bConfirmCommand indicates if the command should be confirmed with a popup or not
 //!							bVisible indicates if the action is visible to the user or not
-//!							
-//! \retval     
+//!
+//! \retval
 //------------------------------------------------------------------------------------------------
 void CvXMLLoadUtility::setActionInfoFromHotkeyInfo(
 		 CvActionInfo* pActionInfo, CvHotkeyInfo* pHotkeyInfo, CvString szDescriptionPrefix, CvString szHelp,
@@ -416,10 +418,6 @@ bool CvXMLLoadUtility::LoadCivXml(FXml* pFXml, const TCHAR* szFilename)
 
 	CvString szPath = szFilename;
 	CvString fsFilename = szFilename;
-	if (fsFilename.CompareNoCase("xml\\", 4) && fsFilename.CompareNoCase("xml/", 4))
-	{	// if fileName doesn't begin with 'xml/' then prepend it
-		szPath = "XML\\" + fsFilename;
-	}
 
 	if (!gDLL->fileManagerEnabled())
 	{
@@ -438,7 +436,6 @@ bool CvXMLLoadUtility::LoadCivXml(FXml* pFXml, const TCHAR* szFilename)
 	GC.setCurrentXMLFile(szFilename);
 	return true;	// success
 }
-
 
 //------------------------------------------------------------------------------------------------------
 //
@@ -544,7 +541,7 @@ CvWString CvXMLLoadUtility::CreateKeyStringFromKBCode(const TCHAR* pszHotKey)
 		{"KB_7","7"},
 		{"KB_8","8"},
 		{"KB_9","9"},
-		{"KB_MINUS","-"},	    /* - on main keyboard */	
+		{"KB_MINUS","-"},	    /* - on main keyboard */
 		{"KB_A","A"},
 		{"KB_B","B"},
 		{"KB_C","C"},
@@ -615,7 +612,7 @@ CvWString CvXMLLoadUtility::CreateKeyStringFromKBCode(const TCHAR* pszHotKey)
 		{"KB_NUMPAD2",gDLL->getText("TXT_KEY_KEYBOARD_NUMPAD_NUMBER", 2)},
 		{"KB_NUMPAD3",gDLL->getText("TXT_KEY_KEYBOARD_NUMPAD_NUMBER", 3)},
 		{"KB_NUMPAD0",gDLL->getText("TXT_KEY_KEYBOARD_NUMPAD_NUMBER", 0)},
-		{"KB_NUMPADPERIOD",gDLL->getText("TXT_KEY_KEYBOARD_NUMPAD_PERIOD")}, 
+		{"KB_NUMPADPERIOD",gDLL->getText("TXT_KEY_KEYBOARD_NUMPAD_PERIOD")},
 		{"KB_F11","F11"},
 		{"KB_F12","F12"},
 		{"KB_NUMPADEQUALS",gDLL->getText("TXT_KEY_KEYBOARD_NUMPAD_EQUALS")},
@@ -666,7 +663,7 @@ void CvXMLLoadUtility::UpdateProgressCB(const char* szMessage)
 
 	if (m_pCBFxn)
 	{
-		m_pCBFxn(++m_iCurProgressStep, GetNumProgressSteps(), CvString::format("Reading XML %s", 
+		m_pCBFxn(++m_iCurProgressStep, GetNumProgressSteps(), CvString::format("Reading XML %s",
 			szMessage ? szMessage : "").c_str());
 	}
 }

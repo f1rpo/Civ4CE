@@ -68,9 +68,9 @@ void CvDLLEntity::QueueMove( const CvPlot * pkPlot )
 	gDLL->getEntityIFace()->QueueMove(getUnitEntity(), pkPlot );
 }
 
-void CvDLLEntity::ExecuteMove( float fTimeToExecute )
+void CvDLLEntity::ExecuteMove( float fTimeToExecute, bool bCombat )
 {
-	gDLL->getEntityIFace()->ExecuteMove(getUnitEntity(), fTimeToExecute );
+	gDLL->getEntityIFace()->ExecuteMove(getUnitEntity(), fTimeToExecute, bCombat );
 }
 
 void CvDLLEntity::SetPosition( const CvPlot * pkPlot )

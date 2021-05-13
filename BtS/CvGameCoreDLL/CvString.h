@@ -84,6 +84,117 @@ inline CvWString operator+( const CvWString& s, const wchar* t) { return (std::w
 inline CvWString operator+( const wchar* s, const CvWString& t) { return std::wstring(s) + std::wstring(t); }
 //CvString operator+( const CvString& s, const CvString& t) { return (std::string&)s + (std::string&)t; }
 
+class CvWStringBuffer
+{
+public:
+	CvWStringBuffer()
+	{
+		m_pBuffer = NULL;
+		m_iLength = 0;
+		m_iCapacity = 0;
+	}
+
+	~CvWStringBuffer()
+	{
+		SAFE_DELETE_ARRAY(m_pBuffer);
+	}
+
+	void append(wchar character)
+	{
+		int newLength = m_iLength + 1;
+		ensureCapacity(newLength + 1);
+		m_pBuffer[m_iLength] = character;
+		m_pBuffer[m_iLength + 1] = 0; //null character
+		m_iLength = newLength;
+	}
+
+	void append(const wchar *szCharacters)
+	{
+		if(szCharacters == NULL)
+			return;
+
+		int inputLength = wcslen(szCharacters);
+		int newLength = m_iLength + inputLength;
+		ensureCapacity(newLength + 1);
+
+		//append data
+		memcpy(m_pBuffer + m_iLength, szCharacters, sizeof(wchar) * (inputLength + 1)); //null character
+		m_iLength = newLength;
+	}
+    
+	void append(const CvWString &szString)
+	{
+		append(szString.GetCString());
+	}
+
+	void append(const CvWStringBuffer &szStringBuffer)
+	{
+		append(szStringBuffer.m_pBuffer);
+	}
+
+	void assign(const CvWString &szString)
+	{
+		assign(szString.GetCString());
+	}
+
+	void assign(const wchar *szCharacters)
+	{
+		clear();
+		append(szCharacters);
+	}
+
+	void clear()
+	{
+		if(m_pBuffer != NULL)
+		{
+			m_iLength = 0;
+			m_pBuffer[0] = 0; //null character
+		}
+	}
+
+	bool isEmpty() const
+	{
+		if(m_iLength == 0)
+			return true;
+		else
+			return false;
+	}
+
+	const wchar *getCString()
+	{
+		ensureCapacity(1);
+		return m_pBuffer;
+	}
+
+private:
+	void ensureCapacity(int newCapacity)
+	{
+		if(newCapacity > m_iCapacity)
+		{
+			m_iCapacity = 2 * newCapacity; //grow by %100
+			wchar *newBuffer = new wchar [m_iCapacity];
+			
+			//copy data
+			if(m_pBuffer != NULL)
+			{
+				memcpy(newBuffer, m_pBuffer, sizeof(wchar) * (m_iLength + 1)); //null character
+				//erase old memory
+				SAFE_DELETE_ARRAY(m_pBuffer);
+			}
+			else
+			{
+				newBuffer[0] = 0; //null character
+			}
+
+			m_pBuffer = newBuffer;
+		}
+	}
+
+	wchar *m_pBuffer;
+	int m_iLength;
+	int m_iCapacity;
+};
+
 //
 class CvString : public std::string
 {
@@ -341,7 +452,6 @@ inline void CvString::Format( LPCSTR lpszFormat, ... )
 	va_end(args);
 	*this = result;
 }
-
 
 #endif	// CvString_h
 

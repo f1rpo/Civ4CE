@@ -15,10 +15,9 @@
 #include "CvGameCoreUtils.h"
 
 // Macro for Setting Global Art Defines
-#define INIT_ART_DEFINE_XML_LOAD(xmlFile, xmlInfoPath, infoArray, numInfos) SetGlobalArtDefineInfo(xmlFile, xmlInfoPath, infoArray, numInfos);
 #define INIT_XML_GLOBAL_LOAD(xmlInfoPath, infoArray, numInfos)  SetGlobalClassInfo(infoArray, xmlInfoPath, numInfos);
 
-bool CvXMLLoadUtility::ReadGlobalDefines(char* szXMLFileName, CvCacheObject* cache)
+bool CvXMLLoadUtility::ReadGlobalDefines(const TCHAR* szXMLFileName, CvCacheObject* cache)
 {
 	bool bLoaded = false;	// used to make sure that the xml file was loaded correctly
 
@@ -63,7 +62,7 @@ bool CvXMLLoadUtility::ReadGlobalDefines(char* szXMLFileName, CvCacheObject* cac
 						// Skip any comments and stop at the next value we might want
 						if (SkipToNextVal())
 						{
-							// call the function that sets the FXml pointer to the first non-comment child of 
+							// call the function that sets the FXml pointer to the first non-comment child of
 							// the current tag and gets the value of that new node
 							if (GetChildXmlVal(szName))
 							{
@@ -79,7 +78,7 @@ bool CvXMLLoadUtility::ReadGlobalDefines(char* szXMLFileName, CvCacheObject* cac
 											// if the node type of the current tag isn't null
 											if (strcmp(szNodeType,"")!=0)
 											{
-												// if the node type of the current tag is a float then 
+												// if the node type of the current tag is a float then
 												if (strcmp(szNodeType,"float")==0)
 												{
 													// get the float value for the define
@@ -96,7 +95,7 @@ bool CvXMLLoadUtility::ReadGlobalDefines(char* szXMLFileName, CvCacheObject* cac
 													GC.getDefinesVarSystem()->SetValue(szName, iVal);
 												}
 												// else if the node type of the current tag is a boolean then
-												else if (strcmp(szNodeType,"bool")==0)
+												else if (strcmp(szNodeType,"boolean")==0)
 												{
 													// get the boolean value for the define
 													bool bVal;
@@ -196,6 +195,37 @@ bool CvXMLLoadUtility::SetGlobalDefines()
 		return false;
 	}
 
+	if (!ReadGlobalDefines("xml\\PythonCallbackDefines.xml", cache))
+	{
+		return false;
+	}
+
+	if (gDLL->isModularXMLLoading())
+	{
+		std::vector<CvString> aszFiles;
+		gDLL->enumerateFiles(aszFiles, "modules\\*_GlobalDefines.xml");
+
+		for (std::vector<CvString>::iterator it = aszFiles.begin(); it != aszFiles.end(); ++it)
+		{
+			if (!ReadGlobalDefines(*it, cache))
+			{
+				return false;
+			}
+		}
+
+		std::vector<CvString> aszModularFiles;
+		gDLL->enumerateFiles(aszModularFiles, "modules\\*_PythonCallbackDefines.xml");
+
+		for (std::vector<CvString>::iterator it = aszModularFiles.begin(); it != aszModularFiles.end(); ++it)
+		{
+			if (!ReadGlobalDefines(*it, cache))
+			{
+				return false;
+			}
+		}
+	}
+
+
 	gDLL->destroyCache(cache);
 	////////////////////////////////////////////////////////////////////////
 
@@ -220,96 +250,96 @@ bool CvXMLLoadUtility::SetPostGlobalsGlobalDefines()
 
 	if (GC.getDefinesVarSystem()->GetSize() > 0)
 	{
-		SetGlobalDefine("LAND_TERRAIN", szVal); 
-		idx = FindInInfoClass(szVal, GC.getTerrainInfo(), sizeof(GC.getTerrainInfo((TerrainTypes) 0)), GC.getNumTerrainInfos());
+		SetGlobalDefine("LAND_TERRAIN", szVal);
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("LAND_TERRAIN", idx);
 
-		SetGlobalDefine("DEEP_WATER_TERRAIN", szVal); 
-		idx = FindInInfoClass(szVal, GC.getTerrainInfo(), sizeof(GC.getTerrainInfo((TerrainTypes) 0)), GC.getNumTerrainInfos());
+		SetGlobalDefine("DEEP_WATER_TERRAIN", szVal);
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("DEEP_WATER_TERRAIN", idx);
 
 		SetGlobalDefine("SHALLOW_WATER_TERRAIN", szVal);
-		idx = FindInInfoClass(szVal, GC.getTerrainInfo(), sizeof(GC.getTerrainInfo((TerrainTypes) 0)), GC.getNumTerrainInfos());
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("SHALLOW_WATER_TERRAIN", idx);
 
-		SetGlobalDefine("LAND_IMPROVEMENT", szVal); 
-		idx = FindInInfoClass(szVal, GC.getImprovementInfo(), sizeof(GC.getImprovementInfo((ImprovementTypes) 0)), GC.getNumImprovementInfos());
+		SetGlobalDefine("LAND_IMPROVEMENT", szVal);
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("LAND_IMPROVEMENT", idx);
 
-		SetGlobalDefine("WATER_IMPROVEMENT", szVal); 
-		idx = FindInInfoClass(szVal, GC.getImprovementInfo(), sizeof(GC.getImprovementInfo((ImprovementTypes) 0)), GC.getNumImprovementInfos());
+		SetGlobalDefine("WATER_IMPROVEMENT", szVal);
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("WATER_IMPROVEMENT", idx);
 
-		SetGlobalDefine("RUINS_IMPROVEMENT", szVal); 
-		idx = FindInInfoClass(szVal, GC.getImprovementInfo(), sizeof(GC.getImprovementInfo((ImprovementTypes) 0)), GC.getNumImprovementInfos());
+		SetGlobalDefine("RUINS_IMPROVEMENT", szVal);
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("RUINS_IMPROVEMENT", idx);
 
 		SetGlobalDefine("NUKE_FEATURE", szVal);
-		idx = FindInInfoClass(szVal, GC.getFeatureInfo(), sizeof(GC.getFeatureInfo((FeatureTypes) 0)), GC.getNumFeatureInfos());
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("NUKE_FEATURE", idx);
 
 		SetGlobalDefine("GLOBAL_WARMING_TERRAIN", szVal);
-		idx = FindInInfoClass(szVal, GC.getTerrainInfo(), sizeof(GC.getTerrainInfo((TerrainTypes) 0)), GC.getNumTerrainInfos());
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("GLOBAL_WARMING_TERRAIN", idx);
 
-		SetGlobalDefine("CAPITAL_BUILDINGCLASS", szVal); 
-		idx = FindInInfoClass(szVal, GC.getBuildingClassInfo(), sizeof(GC.getBuildingClassInfo((BuildingClassTypes) 0)), GC.getNumBuildingClassInfos());
+		SetGlobalDefine("CAPITAL_BUILDINGCLASS", szVal);
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("CAPITAL_BUILDINGCLASS", idx);
 
-		SetGlobalDefine("DEFAULT_SPECIALIST", szVal); 
-		idx = FindInInfoClass(szVal, GC.getSpecialistInfo(), sizeof(GC.getSpecialistInfo((SpecialistTypes) 0)), GC.getNumSpecialistInfos());
+		SetGlobalDefine("DEFAULT_SPECIALIST", szVal);
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("DEFAULT_SPECIALIST", idx);
 
 		SetGlobalDefine("INITIAL_CITY_ROUTE_TYPE", szVal);
-		idx = FindInInfoClass(szVal, GC.getRouteInfo(), sizeof(GC.getRouteInfo((RouteTypes) 0)), GC.getNumRouteInfos());
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("INITIAL_CITY_ROUTE_TYPE", idx);
 
 		SetGlobalDefine("STANDARD_HANDICAP", szVal);
-		idx = FindInInfoClass(szVal, GC.getHandicapInfo(), sizeof(GC.getHandicapInfo((HandicapTypes) 0)), GC.getNumHandicapInfos());
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("STANDARD_HANDICAP", idx);
 
 		SetGlobalDefine("STANDARD_HANDICAP_QUICK", szVal);
-		idx = FindInInfoClass(szVal, GC.getHandicapInfo(), sizeof(GC.getHandicapInfo((HandicapTypes) 0)), GC.getNumHandicapInfos());
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("STANDARD_HANDICAP_QUICK", idx);
 
 		SetGlobalDefine("STANDARD_GAMESPEED", szVal);
-		idx = FindInInfoClass(szVal, GC.getGameSpeedInfo(), sizeof(GC.getGameSpeedInfo((GameSpeedTypes) 0)), GC.getNumGameSpeedInfos());
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("STANDARD_GAMESPEED", idx);
 
 		SetGlobalDefine("STANDARD_TURNTIMER", szVal);
-		idx = FindInInfoClass(szVal, GC.getTurnTimerInfo(), sizeof(GC.getTurnTimerInfo((TurnTimerTypes) 0)), GC.getNumTurnTimerInfos());
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("STANDARD_TURNTIMER", idx);
 
 		SetGlobalDefine("STANDARD_CLIMATE", szVal);
-		idx = FindInInfoClass(szVal, GC.getClimateInfo(), sizeof(GC.getClimateInfo((ClimateTypes) 0)), GC.getNumClimateInfos());
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("STANDARD_CLIMATE", idx);
 
 		SetGlobalDefine("STANDARD_SEALEVEL", szVal);
-		idx = FindInInfoClass(szVal, GC.getSeaLevelInfo(), sizeof(GC.getSeaLevelInfo((SeaLevelTypes) 0)), GC.getNumSeaLevelInfos());
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("STANDARD_SEALEVEL", idx);
 
 		SetGlobalDefine("STANDARD_ERA", szVal);
-		idx = FindInInfoClass(szVal, GC.getEraInfo(), sizeof(GC.getEraInfo((EraTypes) 0)), GC.getNumEraInfos());
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("STANDARD_ERA", idx);
 
 		SetGlobalDefine("STANDARD_CALENDAR", szVal);
-		idx = FindInInfoClass(szVal, GC.getCalendarInfo(), sizeof(GC.getCalendarInfo((CalendarTypes) 0)), GC.getNumCalendarInfos());
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("STANDARD_CALENDAR", idx);
 
 		SetGlobalDefine("AI_HANDICAP", szVal);
-		idx = FindInInfoClass(szVal, GC.getHandicapInfo(), sizeof(GC.getHandicapInfo((HandicapTypes) 0)), GC.getNumHandicapInfos());
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("AI_HANDICAP", idx);
 
 		SetGlobalDefine("BARBARIAN_HANDICAP", szVal);
-		idx = FindInInfoClass(szVal, GC.getHandicapInfo(), sizeof(GC.getHandicapInfo((HandicapTypes) 0)), GC.getNumHandicapInfos());
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("BARBARIAN_HANDICAP", idx);
 
 		SetGlobalDefine("BARBARIAN_CIVILIZATION", szVal);
-		idx = FindInInfoClass(szVal, GC.getCivilizationInfo(), sizeof(GC.getCivilizationInfo((CivilizationTypes) 0)), GC.getNumCivilizationInfos());
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("BARBARIAN_CIVILIZATION", idx);
 
 		SetGlobalDefine("BARBARIAN_LEADER", szVal);
-		idx = FindInInfoClass(szVal, GC.getLeaderHeadInfo(), sizeof(GC.getLeaderHeadInfo((LeaderHeadTypes) 0)), GC.getNumLeaderHeadInfos());
+		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("BARBARIAN_LEADER", idx);
 
 		return true;
@@ -341,7 +371,7 @@ bool CvXMLLoadUtility::SetGlobalTypes()
 	}
 
 	// load the new FXml variable with the GlobalTypes.xml file
-	bLoaded = LoadCivXml(m_pFXml, "GlobalTypes.xml");
+	bLoaded = LoadCivXml(m_pFXml, "xml/GlobalTypes.xml");
 	if (!bLoaded)
 	{
 		char	szMessage[1024];
@@ -388,7 +418,7 @@ bool CvXMLLoadUtility::SetGlobalTypes()
 //  FUNCTION:   SetDiplomacyCommentTypes()
 //
 //  PURPOSE :   Creates a full list of Diplomacy Comments
-//				
+//
 //
 //------------------------------------------------------------------------------------------------------
 void CvXMLLoadUtility::SetDiplomacyCommentTypes(CvString** ppszString, int* iNumVals)
@@ -406,31 +436,16 @@ void CvXMLLoadUtility::SetDiplomacyCommentTypes(CvString** ppszString, int* iNum
 //------------------------------------------------------------------------------------------------------
 bool CvXMLLoadUtility::SetupGlobalLandscapeInfo()
 {
-	bool bLoaded = false;	// used to make sure that the xml file was loaded correctly
 	if (!CreateFXml())
 	{
 		return false;
 	}
 
-	// load the new FXml variable with the CIV4TerrainSettings.xml file
-	bLoaded = LoadCivXml(m_pFXml, "Terrain/CIV4TerrainSettings.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4TerrainSettings.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
+	LoadGlobalClassInfo(GC.getLandscapeInfo(), "CIV4TerrainSettings", "Terrain", "Civ4TerrainSettings/LandscapeInfos/LandscapeInfo", false);
 
-	if (bLoaded)
-	{
-		// if the xml is successfully validated
-		if (Validate())
-		{
-			SetGlobalClassInfo(&GC.getLandscapeInfo(), "Civ4TerrainSettings/LandscapeInfos/LandscapeInfo", &GC.getNumLandscapeInfos());
-		}
-	}
 	// delete the pointer to the FXml variable
 	DestroyFXml();
+
 	return true;
 }
 
@@ -444,48 +459,33 @@ bool CvXMLLoadUtility::SetupGlobalLandscapeInfo()
 //------------------------------------------------------------------------------------------------------
 bool CvXMLLoadUtility::SetGlobalArtDefines()
 {
-		INIT_ART_DEFINE_XML_LOAD(&ARTFILEMGR.getInterfaceArtInfo(), "Art/CIV4ArtDefines_Interface.xml", "Civ4ArtDefines/InterfaceArtInfos/InterfaceArtInfo", ARTFILEMGR.getNumInterfaceArtInfos())	
-		INIT_ART_DEFINE_XML_LOAD(&ARTFILEMGR.getMovieArtInfo(), "Art/CIV4ArtDefines_Movie.xml", "Civ4ArtDefines/MovieArtInfos/MovieArtInfo", ARTFILEMGR.getNumMovieArtInfos())	
-		INIT_ART_DEFINE_XML_LOAD(&ARTFILEMGR.getMiscArtInfo(), "Art/CIV4ArtDefines_Misc.xml", "Civ4ArtDefines/MiscArtInfos/MiscArtInfo",  ARTFILEMGR.getNumMiscArtInfos())	
-		INIT_ART_DEFINE_XML_LOAD(&ARTFILEMGR.getUnitArtInfo(), "Art/CIV4ArtDefines_Unit.xml", "Civ4ArtDefines/UnitArtInfos/UnitArtInfo",  ARTFILEMGR.getNumUnitArtInfos())	
-		INIT_ART_DEFINE_XML_LOAD(&ARTFILEMGR.getBuildingArtInfo(), "Art/CIV4ArtDefines_Building.xml", "Civ4ArtDefines/BuildingArtInfos/BuildingArtInfo",  ARTFILEMGR.getNumBuildingArtInfos())	
-		INIT_ART_DEFINE_XML_LOAD(&ARTFILEMGR.getCivilizationArtInfo(), "Art/CIV4ArtDefines_Civilization.xml", "Civ4ArtDefines/CivilizationArtInfos/CivilizationArtInfo",  ARTFILEMGR.getNumCivilizationArtInfos())	
-		INIT_ART_DEFINE_XML_LOAD(&ARTFILEMGR.getLeaderheadArtInfo(), "Art/CIV4ArtDefines_Leaderhead.xml", "Civ4ArtDefines/LeaderheadArtInfos/LeaderheadArtInfo",  ARTFILEMGR.getNumLeaderheadArtInfos())	
-		INIT_ART_DEFINE_XML_LOAD(&ARTFILEMGR.getBonusArtInfo(), "Art/CIV4ArtDefines_Bonus.xml", "Civ4ArtDefines/BonusArtInfos/BonusArtInfo", ARTFILEMGR.getNumBonusArtInfos())	
-		INIT_ART_DEFINE_XML_LOAD(&ARTFILEMGR.getImprovementArtInfo(), "Art/CIV4ArtDefines_Improvement.xml", "Civ4ArtDefines/ImprovementArtInfos/ImprovementArtInfo", ARTFILEMGR.getNumImprovementArtInfos())	
-		INIT_ART_DEFINE_XML_LOAD(&ARTFILEMGR.getTerrainArtInfo(), "Art/CIV4ArtDefines_Terrain.xml", "Civ4ArtDefines/TerrainArtInfos/TerrainArtInfo", ARTFILEMGR.getNumTerrainArtInfos())	
-		INIT_ART_DEFINE_XML_LOAD(&ARTFILEMGR.getFeatureArtInfo(), "Art/CIV4ArtDefines_Feature.xml", "Civ4ArtDefines/FeatureArtInfos/FeatureArtInfo", ARTFILEMGR.getNumFeatureArtInfos())	
-	return true;
-}
-
-
-template <class T>
-bool CvXMLLoadUtility::SetGlobalArtDefineInfo(T **ppArtDefneInfos, char* szXMLFileName, char* szTagName, int& iNumVals)
-{
 	if (!CreateFXml())
-		return false;
-
-	bool bLoaded = LoadCivXml(m_pFXml, szXMLFileName); 
-	if (!bLoaded)
 	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Art/CIV4ArtDefines.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
+		return false;
 	}
 
-	if (bLoaded && Validate()) 
-	{ 
-		INIT_XML_GLOBAL_LOAD(szTagName, &*ppArtDefneInfos, &iNumVals)	
-	}
+	LoadGlobalClassInfo(ARTFILEMGR.getInterfaceArtInfo(), "CIV4ArtDefines_Interface", "Art", "Civ4ArtDefines/InterfaceArtInfos/InterfaceArtInfo", false);
+	LoadGlobalClassInfo(ARTFILEMGR.getMovieArtInfo(), "CIV4ArtDefines_Movie", "Art", "Civ4ArtDefines/MovieArtInfos/MovieArtInfo", false);
+	LoadGlobalClassInfo(ARTFILEMGR.getMiscArtInfo(), "CIV4ArtDefines_Misc", "Art", "Civ4ArtDefines/MiscArtInfos/MiscArtInfo", false);
+	LoadGlobalClassInfo(ARTFILEMGR.getUnitArtInfo(), "CIV4ArtDefines_Unit", "Art", "Civ4ArtDefines/UnitArtInfos/UnitArtInfo", false);
+	LoadGlobalClassInfo(ARTFILEMGR.getBuildingArtInfo(), "CIV4ArtDefines_Building", "Art", "Civ4ArtDefines/BuildingArtInfos/BuildingArtInfo", false);
+	LoadGlobalClassInfo(ARTFILEMGR.getCivilizationArtInfo(), "CIV4ArtDefines_Civilization", "Art", "Civ4ArtDefines/CivilizationArtInfos/CivilizationArtInfo", false);
+	LoadGlobalClassInfo(ARTFILEMGR.getLeaderheadArtInfo(), "CIV4ArtDefines_Leaderhead", "Art", "Civ4ArtDefines/LeaderheadArtInfos/LeaderheadArtInfo", false);
+	LoadGlobalClassInfo(ARTFILEMGR.getBonusArtInfo(), "CIV4ArtDefines_Bonus", "Art", "Civ4ArtDefines/BonusArtInfos/BonusArtInfo", false);
+	LoadGlobalClassInfo(ARTFILEMGR.getImprovementArtInfo(), "CIV4ArtDefines_Improvement", "Art", "Civ4ArtDefines/ImprovementArtInfos/ImprovementArtInfo", false);
+	LoadGlobalClassInfo(ARTFILEMGR.getTerrainArtInfo(), "CIV4ArtDefines_Terrain", "Art", "Civ4ArtDefines/TerrainArtInfos/TerrainArtInfo", false);
+	LoadGlobalClassInfo(ARTFILEMGR.getFeatureArtInfo(), "CIV4ArtDefines_Feature", "Art", "Civ4ArtDefines/FeatureArtInfos/FeatureArtInfo", false);
+
 	DestroyFXml();
-	return bLoaded;
+
+	return true;
 }
 
 //------------------------------------------------------------------------------------------------------
 //
 //  FUNCTION:   SetGlobalText()
 //
-//  PURPOSE :   Handles all Global Text Infos 
+//  PURPOSE :   Handles all Global Text Infos
 //
 //------------------------------------------------------------------------------------------------------
 bool CvXMLLoadUtility::LoadGlobalText()
@@ -503,16 +503,24 @@ bool CvXMLLoadUtility::LoadGlobalText()
 		//
 		// load all files in the xml text directory
 		//
-		std::vector<CvString> files;
-		gDLL->enumerateFiles(files, "xml\\text\\*.xml");
-		int i;
-		for(i=0;i<(int)files.size();i++)
+		std::vector<CvString> aszFiles;
+		std::vector<CvString> aszModfiles;
+
+		gDLL->enumerateFiles(aszFiles, "xml\\text\\*.xml");
+
+		if (gDLL->isModularXMLLoading())
 		{
-			bLoaded = LoadCivXml(m_pFXml, files[i]);	// Load the XML
+			gDLL->enumerateFiles(aszModfiles, "modules\\*_CIV4GameText.xml");
+			aszFiles.insert(aszFiles.end(), aszModfiles.begin(), aszModfiles.end());
+		}
+
+		for(std::vector<CvString>::iterator it = aszFiles.begin(); it != aszFiles.end(); ++it)
+		{
+			bLoaded = LoadCivXml(m_pFXml, *it); // Load the XML
 			if (!bLoaded)
 			{
 				char	szMessage[1024];
-				sprintf( szMessage, "LoadXML call failed for %s. \n Current XML file is: %s", files[i].c_str(), GC.getCurrentXMLFile().GetCString());
+				sprintf( szMessage, "LoadXML call failed for %s. \n Current XML file is: %s", (*it).c_str(), GC.getCurrentXMLFile().GetCString());
 				gDLL->MessageBox(szMessage, "XML Load Error");
 			}
 			if (bLoaded)
@@ -557,40 +565,22 @@ bool CvXMLLoadUtility::LoadBasicInfos()
 		return false;
 	}
 
-	bool bLoaded = LoadCivXml(m_pFXml, "BasicInfos/CIV4BasicInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for BasicInfos/CIV4BasicInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getConceptInfo(), "Civ4BasicInfos/ConceptInfos/ConceptInfo", &GC.getNumConceptInfos());
-		SetGlobalClassInfo(&GC.getCityTabInfo(), "Civ4BasicInfos/CityTabInfos/CityTabInfo", &GC.getNumCityTabInfos());
-		SetGlobalClassInfo(&GC.getCalendarInfo(), "Civ4BasicInfos/CalendarInfos/CalendarInfo", &GC.getNumCalendarInfos());
-		SetGlobalClassInfo(&GC.getSeasonInfo(), "Civ4BasicInfos/SeasonInfos/SeasonInfo", &GC.getNumSeasonInfos());
-		SetGlobalClassInfo(&GC.getMonthInfo(), "Civ4BasicInfos/MonthInfos/MonthInfo", &GC.getNumMonthInfos());
-		SetGlobalClassInfo(&GC.getDenialInfo(), "Civ4BasicInfos/DenialInfos/DenialInfo", &GC.getNumDenialInfos());
-		SetGlobalClassInfo(&GC.getInvisibleInfo(), "Civ4BasicInfos/InvisibleInfos/InvisibleInfo", &GC.getNumInvisibleInfos());
-		SetGlobalClassInfo(&GC.getUnitCombatInfo(), "Civ4BasicInfos/UnitCombatInfos/UnitCombatInfo", &GC.getNumUnitCombatInfos());
-
-		int iEnumVal = NUM_DOMAIN_TYPES;
-		SetGlobalClassInfo(&GC.getDomainInfo(), "Civ4BasicInfos/DomainInfos/DomainInfo", &iEnumVal, true);
-
-		iEnumVal = NUM_UNITAI_TYPES;
-		SetGlobalClassInfo(&GC.getUnitAIInfo(), "Civ4BasicInfos/UnitAIInfos/UnitAIInfo", &iEnumVal, true);
-
-		iEnumVal = NUM_ATTITUDE_TYPES;
-		SetGlobalClassInfo(&GC.getAttitudeInfo(), "Civ4BasicInfos/AttitudeInfos/AttitudeInfo", &iEnumVal, true);
-
-		iEnumVal = NUM_MEMORY_TYPES;
-		SetGlobalClassInfo(&GC.getMemoryInfo(), "Civ4BasicInfos/MemoryInfos/MemoryInfo", &iEnumVal, true);
-	}
+	LoadGlobalClassInfo(GC.getConceptInfo(), "CIV4BasicInfos", "BasicInfos", "Civ4BasicInfos/ConceptInfos/ConceptInfo", false);
+	LoadGlobalClassInfo(GC.getNewConceptInfo(), "CIV4NewConceptInfos", "BasicInfos", "Civ4NewConceptInfos/NewConceptInfos/NewConceptInfo", false);
+	LoadGlobalClassInfo(GC.getCityTabInfo(), "CIV4CityTabInfos", "BasicInfos", "Civ4CityTabInfos/CityTabInfos/CityTabInfo", false);
+	LoadGlobalClassInfo(GC.getCalendarInfo(), "CIV4CalendarInfos", "BasicInfos", "Civ4CalendarInfos/CalendarInfos/CalendarInfo", false);
+	LoadGlobalClassInfo(GC.getSeasonInfo(), "CIV4SeasonInfos", "BasicInfos", "Civ4SeasonInfos/SeasonInfos/SeasonInfo", false);
+	LoadGlobalClassInfo(GC.getMonthInfo(), "CIV4MonthInfos", "BasicInfos", "Civ4MonthInfos/MonthInfos/MonthInfo", false);
+	LoadGlobalClassInfo(GC.getDenialInfo(), "CIV4DenialInfos", "BasicInfos", "Civ4DenialInfos/DenialInfos/DenialInfo", false);
+	LoadGlobalClassInfo(GC.getInvisibleInfo(), "CIV4InvisibleInfos", "BasicInfos", "Civ4InvisibleInfos/InvisibleInfos/InvisibleInfo", false);
+	LoadGlobalClassInfo(GC.getUnitCombatInfo(), "CIV4UnitCombatInfos", "BasicInfos", "Civ4UnitCombatInfos/UnitCombatInfos/UnitCombatInfo", false);
+	LoadGlobalClassInfo(GC.getDomainInfo(), "CIV4DomainInfos", "BasicInfos", "Civ4DomainInfos/DomainInfos/DomainInfo", false);
+	LoadGlobalClassInfo(GC.getUnitAIInfo(), "CIV4UnitAIInfos", "BasicInfos", "Civ4UnitAIInfos/UnitAIInfos/UnitAIInfo", false);
+	LoadGlobalClassInfo(GC.getAttitudeInfo(), "CIV4AttitudeInfos", "BasicInfos", "Civ4AttitudeInfos/AttitudeInfos/AttitudeInfo", false);
+	LoadGlobalClassInfo(GC.getMemoryInfo(), "CIV4MemoryInfos", "BasicInfos", "Civ4MemoryInfos/MemoryInfos/MemoryInfo", false);
 
 	DestroyFXml();
-	return bLoaded;
+	return true;
 }
 
 //
@@ -605,894 +595,94 @@ bool CvXMLLoadUtility::LoadPreMenuGlobals()
 		return false;
 	}
 
-	int i;
-	CvString* pszDefaultBuildings=NULL;		// this will hold the default buildings for the building classes
-	CvString *pszDefaultUnits = NULL;		// this will hold the default units for the unit classes
-	CvCacheObject* cache;
-	bool bLoaded;
+	LoadGlobalClassInfo(GC.getGameSpeedInfo(), "CIV4GameSpeedInfo", "GameInfo", "Civ4GameSpeedInfo/GameSpeedInfos/GameSpeedInfo", false);
+	LoadGlobalClassInfo(GC.getTurnTimerInfo(), "CIV4TurnTimerInfo", "GameInfo", "Civ4TurnTimerInfo/TurnTimerInfos/TurnTimerInfo", false);
+	LoadGlobalClassInfo(GC.getWorldInfo(), "CIV4WorldInfo", "GameInfo", "Civ4WorldInfo/WorldInfos/WorldInfo", false);
+	LoadGlobalClassInfo(GC.getClimateInfo(), "CIV4ClimateInfo", "GameInfo", "Civ4ClimateInfo/ClimateInfos/ClimateInfo", false);
+	LoadGlobalClassInfo(GC.getSeaLevelInfo(), "CIV4SeaLevelInfo", "GameInfo", "Civ4SeaLevelInfo/SeaLevelInfos/SeaLevelInfo", false);
+	LoadGlobalClassInfo(GC.getAdvisorInfo(), "CIV4AdvisorInfos", "Interface", "Civ4AdvisorInfos/AdvisorInfos/AdvisorInfo", false);
+	LoadGlobalClassInfo(GC.getTerrainInfo(), "CIV4TerrainInfos", "Terrain", "Civ4TerrainInfos/TerrainInfos/TerrainInfo", false);
+	LoadGlobalClassInfo(GC.getEraInfo(), "CIV4EraInfos", "GameInfo", "Civ4EraInfos/EraInfos/EraInfo", false);
+	LoadGlobalClassInfo(GC.getUnitClassInfo(), "CIV4UnitClassInfos", "Units", "Civ4UnitClassInfos/UnitClassInfos/UnitClassInfo", false);
+	LoadGlobalClassInfo(GC.getSpecialistInfo(), "CIV4SpecialistInfos", "GameInfo", "Civ4SpecialistInfos/SpecialistInfos/SpecialistInfo", false);
+	LoadGlobalClassInfo(GC.getVoteSourceInfo(), "CIV4VoteSourceInfos", "GameInfo", "Civ4VoteSourceInfos/VoteSourceInfos/VoteSourceInfo", false);
+	LoadGlobalClassInfo(GC.getTechInfo(), "CIV4TechInfos", "Technologies", "Civ4TechInfos/TechInfos/TechInfo", true, &CvDLLUtilityIFaceBase::createTechInfoCacheObject);
+	LoadGlobalClassInfo(GC.getFeatureInfo(), "Civ4FeatureInfos", "Terrain", "Civ4FeatureInfos/FeatureInfos/FeatureInfo", false);
+	LoadGlobalClassInfo(GC.getReligionInfo(), "CIV4ReligionInfo", "GameInfo", "Civ4ReligionInfo/ReligionInfos/ReligionInfo", false);
+	LoadGlobalClassInfo(GC.getAnimationCategoryInfo(), "CIV4AnimationInfos", "Units", "Civ4AnimationInfos/AnimationCategories/AnimationCategory", false);
+	LoadGlobalClassInfo(GC.getAnimationPathInfo(), "CIV4AnimationPathInfos", "Units", "Civ4AnimationPathInfos/AnimationPaths/AnimationPath", false);
+	LoadGlobalClassInfo(GC.getPromotionInfo(), "CIV4PromotionInfos", "Units", "Civ4PromotionInfos/PromotionInfos/PromotionInfo", true, &CvDLLUtilityIFaceBase::createPromotionInfoCacheObject);
+	LoadGlobalClassInfo(GC.getTraitInfo(), "CIV4TraitInfos", "Civilizations", "Civ4TraitInfos/TraitInfos/TraitInfo", false);
+	LoadGlobalClassInfo(GC.getGoodyInfo(), "CIV4GoodyInfo", "GameInfo", "Civ4GoodyInfo/GoodyInfos/GoodyInfo", false);
+	LoadGlobalClassInfo(GC.getHandicapInfo(), "CIV4HandicapInfo", "GameInfo", "Civ4HandicapInfo/HandicapInfos/HandicapInfo", false, &CvDLLUtilityIFaceBase::createHandicapInfoCacheObject);
+	LoadGlobalClassInfo(GC.getCursorInfo(), "CIV4CursorInfo", "GameInfo", "Civ4CursorInfo/CursorInfos/CursorInfo", false);
+	LoadGlobalClassInfo(GC.getCivicOptionInfo(), "CIV4CivicOptionInfos", "GameInfo", "Civ4CivicOptionInfos/CivicOptionInfos/CivicOptionInfo", false);
+	LoadGlobalClassInfo(GC.getUpkeepInfo(), "CIV4UpkeepInfo", "GameInfo", "Civ4UpkeepInfo/UpkeepInfos/UpkeepInfo", false);
+	LoadGlobalClassInfo(GC.getHurryInfo(), "CIV4HurryInfo", "GameInfo", "Civ4HurryInfo/HurryInfos/HurryInfo", false);
+	LoadGlobalClassInfo(GC.getSpecialBuildingInfo(), "CIV4SpecialBuildingInfos", "Buildings", "Civ4SpecialBuildingInfos/SpecialBuildingInfos/SpecialBuildingInfo", false);
+	LoadGlobalClassInfo(GC.getCultureLevelInfo(), "CIV4CultureLevelInfo", "GameInfo", "Civ4CultureLevelInfo/CultureLevelInfos/CultureLevelInfo", false);
+	LoadGlobalClassInfo(GC.getBonusClassInfo(), "CIV4BonusClassInfos", "Terrain", "Civ4BonusClassInfos/BonusClassInfos/BonusClassInfo", false);
+	LoadGlobalClassInfo(GC.getVictoryInfo(), "CIV4VictoryInfo", "GameInfo", "Civ4VictoryInfo/VictoryInfos/VictoryInfo", false);
+	LoadGlobalClassInfo(GC.getBonusInfo(), "CIV4BonusInfos", "Terrain", "Civ4BonusInfos/BonusInfos/BonusInfo", false, &CvDLLUtilityIFaceBase::createBonusInfoCacheObject);
+	LoadGlobalClassInfo(GC.getCorporationInfo(), "CIV4CorporationInfo", "GameInfo", "Civ4CorporationInfo/CorporationInfos/CorporationInfo", false);
+	LoadGlobalClassInfo(GC.getRouteInfo(), "Civ4RouteInfos", "Misc", "Civ4RouteInfos/RouteInfos/RouteInfo", false);
+	LoadGlobalClassInfo(GC.getImprovementInfo(), "CIV4ImprovementInfos", "Terrain", "Civ4ImprovementInfos/ImprovementInfos/ImprovementInfo", true, &CvDLLUtilityIFaceBase::createImprovementInfoCacheObject);
+	LoadGlobalClassInfo(GC.getBuildingClassInfo(), "CIV4BuildingClassInfos", "Buildings", "Civ4BuildingClassInfos/BuildingClassInfos/BuildingClassInfo", false);
+	LoadGlobalClassInfo(GC.getBuildingInfo(), "CIV4BuildingInfos", "Buildings", "Civ4BuildingInfos/BuildingInfos/BuildingInfo", false, &CvDLLUtilityIFaceBase::createBuildingInfoCacheObject);
+	for (int i=0; i < GC.getNumBuildingClassInfos(); ++i)
+	{
+		GC.getBuildingClassInfo((BuildingClassTypes)i).readPass3();
+	}
+	LoadGlobalClassInfo(GC.getSpecialUnitInfo(), "CIV4SpecialUnitInfos", "Units", "Civ4SpecialUnitInfos/SpecialUnitInfos/SpecialUnitInfo", false);
+	LoadGlobalClassInfo(GC.getProjectInfo(), "CIV4ProjectInfo", "GameInfo", "Civ4ProjectInfo/ProjectInfos/ProjectInfo", true);
+	LoadGlobalClassInfo(GC.getCivicInfo(), "CIV4CivicInfos", "GameInfo", "Civ4CivicInfos/CivicInfos/CivicInfo", false, &CvDLLUtilityIFaceBase::createCivicInfoCacheObject);
+	for (int i=0; i < GC.getNumVoteSourceInfos(); ++i)
+	{
+		GC.getVoteSourceInfo((VoteSourceTypes)i).readPass3();
+	}
+	LoadGlobalClassInfo(GC.getLeaderHeadInfo(), "CIV4LeaderHeadInfos", "Civilizations", "Civ4LeaderHeadInfos/LeaderHeadInfos/LeaderHeadInfo", false, &CvDLLUtilityIFaceBase::createLeaderHeadInfoCacheObject);
+	LoadGlobalClassInfo(GC.getColorInfo(), "CIV4ColorVals", "Interface", "Civ4ColorVals/ColorVals/ColorVal", false);
+	LoadGlobalClassInfo(GC.getPlayerColorInfo(), "CIV4PlayerColorInfos", "Interface", "Civ4PlayerColorInfos/PlayerColorInfos/PlayerColorInfo", false);
+	LoadGlobalClassInfo(GC.getEffectInfo(), "CIV4EffectInfos", "Misc", "Civ4EffectInfos/EffectInfos/EffectInfo", false);
+	LoadGlobalClassInfo(GC.getEntityEventInfo(), "CIV4EntityEventInfos", "Units", "Civ4EntityEventInfos/EntityEventInfos/EntityEventInfo", false);
+	LoadGlobalClassInfo(GC.getBuildInfo(), "CIV4BuildInfos", "Units", "Civ4BuildInfos/BuildInfos/BuildInfo", false);
+	LoadGlobalClassInfo(GC.getUnitInfo(), "CIV4UnitInfos", "Units", "Civ4UnitInfos/UnitInfos/UnitInfo", false, &CvDLLUtilityIFaceBase::createUnitInfoCacheObject);
+	for (int i=0; i < GC.getNumUnitClassInfos(); ++i)
+	{
+		GC.getUnitClassInfo((UnitClassTypes)i).readPass3();
+	}
+	LoadGlobalClassInfo(GC.getUnitArtStyleTypeInfo(), "CIV4UnitArtStyleTypeInfos", "Civilizations", "Civ4UnitArtStyleTypeInfos/UnitArtStyleTypeInfos/UnitArtStyleTypeInfo", false);
+	LoadGlobalClassInfo(GC.getCivilizationInfo(), "CIV4CivilizationInfos", "Civilizations", "Civ4CivilizationInfos/CivilizationInfos/CivilizationInfo", true, &CvDLLUtilityIFaceBase::createCivilizationInfoCacheObject);
+	LoadGlobalClassInfo(GC.getHints(), "CIV4Hints", "GameInfo", "Civ4Hints/HintInfos/HintInfo", false);
+	LoadGlobalClassInfo(GC.getMainMenus(), "CIV4MainMenus", "Art", "Civ4MainMenus/MainMenus/MainMenu", false);
+	LoadGlobalClassInfo(GC.getSlideShowInfo(), "CIV4SlideShowInfos", "Interface", "Civ4SlideShowInfos/SlideShowInfos/SlideShowInfo", false);
+	LoadGlobalClassInfo(GC.getSlideShowRandomInfo(), "CIV4SlideShowRandomInfos", "Interface", "Civ4SlideShowRandomInfos/SlideShowRandomInfos/SlideShowRandomInfo", false);
+	LoadGlobalClassInfo(GC.getWorldPickerInfo(), "CIV4WorldPickerInfos", "Interface", "Civ4WorldPickerInfos/WorldPickerInfos/WorldPickerInfo", false);
+	LoadGlobalClassInfo(GC.getSpaceShipInfo(), "Civ4SpaceShipInfos", "Interface", "Civ4SpaceShipInfos/SpaceShipInfos/SpaceShipInfo", false);
 
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4GameSpeedInfo.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4GameSpeedInfo.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getGameSpeedInfo(), "Civ4GameSpeedInfo/GameSpeedInfos/GameSpeedInfo", &GC.getNumGameSpeedInfos());
-	}
 
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4TurnTimerInfo.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4TurnTimerInfo.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getTurnTimerInfo(), "Civ4TurnTimerInfo/TurnTimerInfos/TurnTimerInfo", &GC.getNumTurnTimerInfos());
-	}
+	LoadGlobalClassInfo(GC.getYieldInfo(), "CIV4YieldInfos", "Terrain", "Civ4YieldInfos/YieldInfos/YieldInfo", false);
+	LoadGlobalClassInfo(GC.getCommerceInfo(), "CIV4CommerceInfo", "GameInfo", "Civ4CommerceInfo/CommerceInfos/CommerceInfo", false);
+	LoadGlobalClassInfo(GC.getGameOptionInfo(), "CIV4GameOptionInfos", "GameInfo", "Civ4GameOptionInfos/GameOptionInfos/GameOptionInfo", false);
+	LoadGlobalClassInfo(GC.getMPOptionInfo(), "CIV4MPOptionInfos", "GameInfo", "Civ4MPOptionInfos/MPOptionInfos/MPOptionInfo", false);
+	LoadGlobalClassInfo(GC.getForceControlInfo(), "CIV4ForceControlInfos", "GameInfo", "Civ4ForceControlInfos/ForceControlInfos/ForceControlInfo", false);
 
-	// load the new FXml variable with the CIV4WorldInfo.xml file
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4WorldInfo.xml");
-	if (!bLoaded)
+	// add types to global var system
+	for (int i = 0; i < GC.getNumCursorInfos(); ++i)
 	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4WorldInfo.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getWorldInfo(), "Civ4WorldInfo/WorldInfos/WorldInfo", &GC.getNumWorldInfos());
-	}
-
-	// load the new FXml variable with the CIV4ClimateInfo.xml file
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4ClimateInfo.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4ClimateInfo.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getClimateInfo(), "Civ4ClimateInfo/ClimateInfos/ClimateInfo", &GC.getNumClimateInfos());
-	}
-
-	// load the new FXml variable with the CIV4SeaLevelInfo.xml file
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4SeaLevelInfo.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4SeaLevelInfo.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getSeaLevelInfo(), "Civ4SeaLevelInfo/SeaLevelInfos/SeaLevelInfo", &GC.getNumSeaLevelInfos());
-	}
-
-	// load the new FXml variable with the CIV4AdvisorInfos.xml file
-	bLoaded = LoadCivXml(m_pFXml, "Interface/CIV4AdvisorInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4AdvisorInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getAdvisorInfo(), "Civ4AdvisorInfos/AdvisorInfos/AdvisorInfo", &GC.getNumAdvisorInfos());
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "Terrain/CIV4TerrainInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4TerrainInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getTerrainInfo(), "Civ4TerrainInfos/TerrainInfos/TerrainInfo", &GC.getNumTerrainInfos());
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4EraInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4EraInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getEraInfo(), "Civ4EraInfos/EraInfos/EraInfo", &GC.getNumEraInfos());
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "Units/CIV4UnitClassInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4UnitClassInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalUnitClassInfo(&GC.getUnitClassInfo(), "Civ4UnitClassInfos/UnitClassInfos/UnitClassInfo", &GC.getNumUnitClassInfos(), &pszDefaultUnits);
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4SpecialistInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4SpecialistInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getSpecialistInfo(), "Civ4SpecialistInfos/SpecialistInfos/SpecialistInfo", &GC.getNumSpecialistInfos());
-	}
-
-	/////////////////////////////////
-	// use disk cache if possible.
-	// if no cache or cache is older than xml file, use xml file like normal, else read from cache
-	//
-	cache = gDLL->createTechInfoCacheObject("CIV4TechInfos.dat");	// cache file name
-	if (!gDLL->cacheRead(cache, "xml\\Technologies\\CIV4TechInfos.xml"))			// src data file name
-	{
-		// load normally
-		bLoaded = LoadCivXml(m_pFXml, "Technologies/CIV4TechInfos.xml");
-		if (!bLoaded)
+		int iVal;
+		CvString szType = GC.getCursorInfo((CursorTypes)i).getType();
+		if (GC.getDefinesVarSystem()->GetValue(szType, iVal))
 		{
-			char	szMessage[1024];
-			sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4TechInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-			gDLL->MessageBox(szMessage, "XML Load Error");
+			char szMessage[1024];
+			sprintf(szMessage, "cursor type already set? \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
+			gDLL->MessageBox(szMessage, "XML Error");
 		}
-
-		if (bLoaded)
-		{
-			// if the xml is successfully validated
-			if (Validate())
-			{
-				SetGlobalTechInfo(&GC.getTechInfo(), "Civ4TechInfos/TechInfos/TechInfo", &GC.getNumTechInfos());
-
-				// write tech info to cache
-				bool bOk = gDLL->cacheWrite(cache);
-				if (!bOk)
-				{
-					char	szMessage[1024];
-					sprintf( szMessage, "Failed writing to TechInfos cache. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-					gDLL->MessageBox(szMessage, "XML Caching Error");
-				}
-				if (bOk)
-				{
-					logMsg("Wrote Civ4TechInfos to cache");
-				}
-			}
-		}
+		GC.getDefinesVarSystem()->SetValue(szType, i);
 	}
-	else
-	{
-		logMsg("Read Civ4TechInfos from cache");
-	}
-	gDLL->destroyCache(cache);
-
-	bLoaded = LoadCivXml(m_pFXml, "Terrain/CIV4FeatureInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4FeatureInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getFeatureInfo(), "Civ4FeatureInfos/FeatureInfos/FeatureInfo", &GC.getNumFeatureInfos());
-	}
-
-	/////////////////////////////////
-
-	cache = gDLL->createPromotionInfoCacheObject("CIV4PromotionInfos.dat");		// cache file name
-	if (!gDLL->cacheRead(cache, "xml\\Units\\CIV4PromotionInfos.xml"))	// src data file name
-	{
-		// load the new FXml variable with the CIV4Promotions xml file
-		bLoaded = LoadCivXml(m_pFXml, "Units/CIV4PromotionInfos.xml");
-		if (!bLoaded)
-		{
-			char	szMessage[1024];
-			sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4PromotionInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-			gDLL->MessageBox(szMessage, "XML Load Error");
-		}
-		if (bLoaded)
-		{
-			if (Validate())
-			{
-				SetGlobalPromotionInfo(&GC.getPromotionInfo(), "Civ4PromotionInfos/PromotionInfos/PromotionInfo", &GC.getNumPromotionInfos());
-
-				// write civ info to cache
-				bool bOk = gDLL->cacheWrite(cache);
-				if (!bLoaded)
-				{
-					char	szMessage[1024];
-					sprintf( szMessage, "Failed writing to PromotionInfos cache. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-					gDLL->MessageBox(szMessage, "XML Caching Error");
-				}
-				if (bOk)
-				{
-					logMsg("Wrote Civ4PromotionInfos to cache");
-				}
-			}
-		}
-	}
-	else
-	{
-		logMsg("Read CIV4PromotionInfos from cache");
-		bLoaded	= true;
-	}
-	gDLL->destroyCache(cache);
-//////////////
-
-	// load the new FXml variable with the CIV4TraitInfos.xml file
-	bLoaded = LoadCivXml(m_pFXml, "Civilizations/CIV4TraitInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4TraitInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getTraitInfo(), "Civ4TraitInfos/TraitInfos/TraitInfo", &GC.getNumTraitInfos());
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4GoodyInfo.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4GoodyInfo.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getGoodyInfo(), "Civ4GoodyInfo/GoodyInfos/GoodyInfo", &GC.getNumGoodyInfos());
-	}
-
-	/////////////////////////////////
-
-	cache = gDLL->createHandicapInfoCacheObject("CIV4HandicapInfos.dat");		// cache file name
-	if (!gDLL->cacheRead(cache, "xml\\GameInfo\\CIV4HandicapInfos.xml"))	// src data file name
-	{
-		// load the new FXml variable with the CIV4Handicaps xml file
-		bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4HandicapInfo.xml");
-		if (!bLoaded)
-		{
-			char	szMessage[1024];
-			sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4HandicapInfo.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-			gDLL->MessageBox(szMessage, "XML Load Error");
-		}
-		if (bLoaded)
-		{
-			if (Validate())
-			{
-				SetGlobalClassInfo(&GC.getHandicapInfo(), "Civ4HandicapInfo/HandicapInfos/HandicapInfo", &GC.getNumHandicapInfos());
-
-				// write civ info to cache
-				bool bOk = gDLL->cacheWrite(cache);
-				if (!bLoaded)
-				{
-					char	szMessage[1024];
-					sprintf( szMessage, "Failed writing to HandicapInfos cache. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-					gDLL->MessageBox(szMessage, "XML Caching Error");
-				}
-				if (bOk)
-				{
-					logMsg("Wrote Civ4HandicapInfos to cache");
-				}
-			}
-		}
-	}
-	else
-	{
-		logMsg("Read CIV4HandicapInfos from cache");
-		bLoaded	= true;
-	}
-	gDLL->destroyCache(cache);
-
-	//////////////
-
-	// load the new FXml variable with the CIV4CursorInfo.xml file
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4CursorInfo.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4CursorInfo.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded)
-	{
-		if (Validate())
-		{
-			SetGlobalClassInfo(&GC.getCursorInfo(), "Civ4CursorInfo/CursorInfos/CursorInfo", &GC.getNumCursorInfos());
-
-			// add types to global var system
-			int i, iVal;
-			for(i=0;i<GC.getNumCursorInfos();i++)
-			{
-				CvString szType = GC.getCursorInfo((CursorTypes)i).getType();
-				if (GC.getDefinesVarSystem()->GetValue(szType, iVal)==true)
-				{
-					char	szMessage[1024];
-					sprintf( szMessage, "cursor type already set? \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-					gDLL->MessageBox(szMessage, "XML Error");
-				}
-				GC.getDefinesVarSystem()->SetValue(szType, i);
-			}
-		}
-	}
-/*	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4Infos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}*/
-
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4CivicOptionInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4CivicOptionInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getCivicOptionInfo(), "Civ4CivicOptionInfos/CivicOptionInfos/CivicOptionInfo", &GC.getNumCivicOptionInfos());
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4UpkeepInfo.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4UpkeepInfo.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getUpkeepInfo(), "Civ4UpkeepInfo/UpkeepInfos/UpkeepInfo", &GC.getNumUpkeepInfos());
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4HurryInfo.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4HurryInfo.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getHurryInfo(), "Civ4HurryInfo/HurryInfos/HurryInfo", &GC.getNumHurryInfos());
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "Buildings/CIV4SpecialBuildingInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Buildings/CIV4SpecialBuildingInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getSpecialBuildingInfo(), "Civ4SpecialBuildingInfos/SpecialBuildingInfos/SpecialBuildingInfo", &GC.getNumSpecialBuildingInfos());
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4ReligionInfo.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4ReligionInfo.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getReligionInfo(), "Civ4ReligionInfo/ReligionInfos/ReligionInfo", &GC.getNumReligionInfos());
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4CultureLevelInfo.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4CultureLevelInfo.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getCultureLevelInfo(), "Civ4CultureLevelInfo/CultureLevelInfos/CultureLevelInfo", &GC.getNumCultureLevelInfos());
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "Terrain/CIV4BonusClassInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Terrain/CIV4BonusClassInfos.xml.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getBonusClassInfo(), "Civ4BonusClassInfos/BonusClassInfos/BonusClassInfo", &GC.getNumBonusClassInfos());
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4VictoryInfo.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4VictoryInfo.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getVictoryInfo(), "Civ4VictoryInfo/VictoryInfos/VictoryInfo", &GC.getNumVictoryInfos());
-	}
-
-	/////////////////////////////////
-
-	cache = gDLL->createBonusInfoCacheObject("CIV4BonusInfos.dat");		// cache file name
-	if (!gDLL->cacheRead(cache, "xml\\Terrain\\CIV4BonusInfos.xml"))	// src data file name
-	{
-		// load the new FXml variable with the CIV4Bonuss xml file
-		bLoaded = LoadCivXml(m_pFXml, "Terrain/CIV4BonusInfos.xml");
-		if (!bLoaded)
-		{
-			char	szMessage[1024];
-			sprintf( szMessage, "LoadXML call failed for Terrain/CIV4BonusInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-			gDLL->MessageBox(szMessage, "XML Load Error");
-		}
-		if (bLoaded)
-		{
-			if (Validate())
-			{
-				SetGlobalClassInfo(&GC.getBonusInfo(), "Civ4BonusInfos/BonusInfos/BonusInfo", &GC.getNumBonusInfos());
-
-				// write civ info to cache
-				bool bOk = gDLL->cacheWrite(cache);
-				if (!bLoaded)
-				{
-					char	szMessage[1024];
-					sprintf( szMessage, "Failed writing to BonusInfos cache. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-					gDLL->MessageBox(szMessage, "XML Caching Error");
-				}
-				if (bOk)
-				{
-					logMsg("Wrote Civ4BonusInfos to cache");
-				}
-			}
-		}
-	}
-	else
-	{
-		logMsg("Read CIV4BonusInfos from cache");
-		bLoaded	= true;
-	}
-	gDLL->destroyCache(cache);
-
-	//////////////
-
-	bLoaded = LoadCivXml(m_pFXml, "Buildings/CIV4BuildingClassInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Buildings/CIV4BuildingClassInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalBuildingClassInfo(&GC.getBuildingClassInfo(), "Civ4BuildingClassInfos/BuildingClassInfos/BuildingClassInfo", &GC.getNumBuildingClassInfos(), &pszDefaultBuildings);
-	}
-
-	//////////////////////////////////
-	// use disk cache if possible
-	// -if no cache or cache is older than xml file, use xml file like normal, else read from cache
-
-	cache = gDLL->createBuildingInfoCacheObject("CIV4BuildingInfos.dat");				// cache file name
-	if (!gDLL->cacheRead(cache, "xml\\Buildings\\CIV4BuildingInfos.xml"))		// source data file name	
-	{
-		// load normally
-		bLoaded = LoadCivXml(m_pFXml, "Buildings/CIV4BuildingInfos.xml");
-		if (!bLoaded)
-		{
-			char	szMessage[1024];
-			sprintf( szMessage, "LoadXML call failed for Buildings/CIV4BuildingInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-			gDLL->MessageBox(szMessage, "XML Load Error");
-		}
-
-		if (bLoaded)
-		{
-			if (Validate())
-			{
-				SetGlobalBuildingInfo(&GC.getBuildingInfo(), "Civ4BuildingInfos/BuildingInfos/BuildingInfo", &GC.getNumBuildingInfos());	// SLOW
-				// write building info to cache				
-				bool bOk = gDLL->cacheWrite(cache);
-				if (!bOk)
-				{
-					char	szMessage[1024];
-					sprintf( szMessage, "Failed writing to building cache. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-					gDLL->MessageBox(szMessage, "XML Caching Error");
-				}
-				if (bOk)
-				{
-					logMsg("Wrote CIV4BuildingInfos to cache");
-				}
-			}
-			else
-			{
-				bLoaded = false;
-			}
-		}
-	}
-	else
-	{
-		bLoaded = true;
-		logMsg("Read CIV4BuildingInfos from cache");
-	}
-	gDLL->destroyCache(cache);
-
-	if (bLoaded)
-	{
-		for (i=0;i<GC.getNumBuildingClassInfos();i++)
-		{
-			GC.getBuildingClassInfo((BuildingClassTypes) i).setDefaultBuildingIndex(FindInInfoClass(pszDefaultBuildings[i], GC.getBuildingInfo(), sizeof(GC.getBuildingInfo((BuildingTypes) 0)), GC.getNumBuildingInfos()));
-		}
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "Units/CIV4SpecialUnitInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Units/CIV4SpecialUnitInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getSpecialUnitInfo(), "Civ4SpecialUnitInfos/SpecialUnitInfos/SpecialUnitInfo", &GC.getNumSpecialUnitInfos());
-	}
-
-	// load the new FXml variable with the CIV4ProjectInfo.xml file
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4ProjectInfo.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Units/CIV4ProjectInfo.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalProjectInfo(&GC.getProjectInfo(), "Civ4ProjectInfo/ProjectInfos/ProjectInfo", &GC.getNumProjectInfos());
-	}
-
-
-	bLoaded = LoadCivXml(m_pFXml, "Misc/CIV4RouteInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Misc/CIV4RouteInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalRouteInfo(&GC.getRouteInfo(), "Civ4RouteInfos/RouteInfos/RouteInfo", &GC.getNumRouteInfos(), &GC.getRouteZBias());
-	}
-
-	/////////////////////////////////
-
-	cache = gDLL->createImprovementInfoCacheObject("CIV4ImprovementInfos.dat");		// cache file name
-	if (!gDLL->cacheRead(cache, "xml\\Terrain\\CIV4ImprovementInfos.xml"))	// src data file name
-	{
-		// load the new FXml variable with the CIV4Improvements xml file
-		bLoaded = LoadCivXml(m_pFXml, "Terrain/CIV4ImprovementInfos.xml");
-		if (!bLoaded)
-		{
-			char	szMessage[1024];
-			sprintf( szMessage, "LoadXML call failed for Terrain/CIV4ImprovementInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-			gDLL->MessageBox(szMessage, "XML Load Error");
-		}
-		if (bLoaded)
-		{
-			if (Validate())
-			{
-				SetGlobalClassInfo(&GC.getImprovementInfo(), "Civ4ImprovementInfos/ImprovementInfos/ImprovementInfo", &GC.getNumImprovementInfos());
-
-				// now that we are done reading in the improvement infos we need to check if any of them have pillages/upgrades
-				// loop through all of the improvment infos
-				int i,j;
-				for (i=0;i<GC.getNumImprovementInfos();i++)
-				{
-					GC.getImprovementInfo((ImprovementTypes) i).setImprovementPillage(NO_IMPROVEMENT);
-					GC.getImprovementInfo((ImprovementTypes) i).setImprovementUpgrade(NO_IMPROVEMENT);
-
-					// loop through the improvement infos again comparing the i'th improvement infos' szImprovementPillage/Upgrade
-					// variable with the j'th improvementinfos' szDescription, which is really the improvement's type
-					for (j=0;j<GC.getNumImprovementInfos();j++)
-					{
-						// if the improvement pillage string matches the type string
-						if (_tcscmp(GC.getImprovementInfo((ImprovementTypes) i).getImprovementPillageString(),GC.getImprovementInfo((ImprovementTypes) j).getType()) == 0)
-						{
-							// set the improvement pillage integer value to the inner loop variable j
-							GC.getImprovementInfo((ImprovementTypes) i).setImprovementPillage(j);
-						}
-						// if the improvement upgrade string matches the type string
-						if (_tcscmp(GC.getImprovementInfo((ImprovementTypes) i).getImprovementUpgradeString(),GC.getImprovementInfo((ImprovementTypes) j).getType()) == 0)
-						{
-							// set the improvement upgrade integer value to the inner loop variable j
-							GC.getImprovementInfo((ImprovementTypes) i).setImprovementUpgrade(j);
-						}
-					}
-				}
-
-				// write civ info to cache
-				bool bOk = gDLL->cacheWrite(cache);
-				if (!bLoaded)
-				{
-					char	szMessage[1024];
-					sprintf( szMessage, "Failed writing to ImprovementInfos cache. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-					gDLL->MessageBox(szMessage, "XML Caching Error");
-				}
-				if (bOk)
-				{
-					logMsg("Wrote Civ4ImprovementInfos to cache");
-				}
-			}
-		}
-	}
-	else
-	{
-		logMsg("Read CIV4ImprovementInfos from cache");
-		bLoaded	= true;
-	}
-	gDLL->destroyCache(cache);
-
-	/////////////////////////////////
-
-	cache = gDLL->createCivicInfoCacheObject("CIV4CivicInfos.dat");		// cache file name
-	if (!gDLL->cacheRead(cache, "xml\\GameInfo\\CIV4CivicInfos.xml"))	// src data file name
-	{
-		// load the new FXml variable with the CIV4Civics xml file
-		bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4CivicInfos.xml");
-		if (!bLoaded)
-		{
-			char	szMessage[1024];
-			sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4CivicInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-			gDLL->MessageBox(szMessage, "XML Load Error");
-		}
-		if (bLoaded)
-		{
-			if (Validate())
-			{
-				SetGlobalClassInfo(&GC.getCivicInfo(), "Civ4CivicInfos/CivicInfos/CivicInfo", &GC.getNumCivicInfos());
-
-				// write civ info to cache
-				bool bOk = gDLL->cacheWrite(cache);
-				if (!bLoaded)
-				{
-					char	szMessage[1024];
-					sprintf( szMessage, "Failed writing to CivicInfos cache. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-					gDLL->MessageBox(szMessage, "XML Caching Error");
-				}
-				if (bOk)
-				{
-					logMsg("Wrote Civ4CivicInfos to cache");
-				}
-			}
-		}
-	}
-	else
-	{
-		logMsg("Read CIV4CivicInfos from cache");
-		bLoaded	= true;
-	}
-	gDLL->destroyCache(cache);
-
-	//////////////
-
-	//
-	// use disk cache if possible
-	//
-	// -if no cache or cache is older than xml file, use xml file like normal, else read from cache
-	//
-	cache = gDLL->createLeaderHeadInfoCacheObject("CIV4LeaderHeadInfos.dat");		// cache file name
-	if (!gDLL->cacheRead(cache, "xml\\Civilizations\\CIV4LeaderHeadInfos.xml"))	// src data file name
-	{
-		// load normally
-		bLoaded = LoadCivXml(m_pFXml, "Civilizations/CIV4LeaderHeadInfos.xml");
-		if (!bLoaded)
-		{
-			char	szMessage[1024];
-			sprintf( szMessage, "LoadXML call failed for Civilizations/CIV4LeaderHeadInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-			gDLL->MessageBox(szMessage, "XML Load Error");
-		}
-
-		if (bLoaded)
-		{
-			SetGlobalClassInfo(&GC.getLeaderHeadInfo(), "Civ4LeaderHeadInfos/LeaderHeadInfos/LeaderHeadInfo", &GC.getNumLeaderHeadInfos());
-
-			// write unit info to cache
-			bool bOk = gDLL->cacheWrite(cache);
-			if (!bOk)
-			{
-				char	szMessage[1024];
-				sprintf( szMessage, "Failed writing to LeaderHead cache. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-				gDLL->MessageBox(szMessage, "XML Caching Error");
-			}
-			if (bOk)
-			{
-				logMsg("Wrote Civ4LeaderHeadInfos to cache");
-			}
-		}
-	}
-	else
-	{
-		logMsg("Read CIV4LeaderHeadInfos from cache");
-		bLoaded	= true;
-	}
-	gDLL->destroyCache(cache);
-
-	bLoaded = LoadCivXml(m_pFXml, "Interface/CIV4ColorVals.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Interface/CIV4ColorVals.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getColorInfo(), "Civ4ColorVals/ColorVals/ColorVal", &GC.getNumColorInfos());
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "Interface/CIV4PlayerColorInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Interface/CIV4PlayerColorInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getPlayerColorInfo(), "Civ4PlayerColorInfos/PlayerColorInfos/PlayerColorInfo", &GC.getNumPlayerColorInfos());
-	}
-
-	// Load the effect infos
-	bLoaded = LoadCivXml(m_pFXml, "Misc/CIV4EffectInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Misc/CIV4EffectInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getEffectInfo(), "Civ4EffectInfos/EffectInfos/EffectInfo", &GC.getNumEffectInfos());
-	}
-
-	bLoaded = LoadCivXml( m_pFXml, "Units/CIV4AnimationInfos.xml" );
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Units/CIV4AnimationInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if ( bLoaded )
-	{
-		if (Validate())
-		{
-			SetGlobalClassInfo( &GC.getAnimationCategoryInfo(), "Civ4AnimationInfos/AnimationCategories/AnimationCategory", &GC.getNumAnimationCategoryInfos() );
-			SetGlobalClassInfo( &GC.getAnimationPathInfo(), "Civ4AnimationInfos/AnimationPaths/AnimationPath", &GC.getNumAnimationPathInfos() );
-			SetGlobalClassInfo( &GC.getEntityEventInfo(), "Civ4AnimationInfos/EntityEventInfos/EntityEventInfo", &GC.getNumEntityEventInfos() );
-		}
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "Units/CIV4BuildInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Units/CIV4BuildInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getBuildInfo(), "Civ4BuildInfos/BuildInfos/BuildInfo", &GC.getNumBuildInfos());
-	}
-
-	//
-	// use disk cache if possible
-	//
-	// -if no cache or cache is older than xml file, use xml file like normal, else read from cache
-	//
-	cache = gDLL->createUnitInfoCacheObject("CIV4UnitInfos.dat");		// cache file name
-	if (!gDLL->cacheRead(cache, "xml\\Units\\CIV4UnitInfos.xml"))	// src data file name
-	{
-		// load normally
-		bLoaded = LoadCivXml(m_pFXml, "Units/CIV4UnitInfos.xml");
-		if (!bLoaded)
-		{
-			char	szMessage[1024];
-			sprintf( szMessage, "LoadXML call failed for Units/CIV4UnitInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-			gDLL->MessageBox(szMessage, "XML Load Error");
-		}
-
-		if (bLoaded)
-		{
-			SetGlobalClassInfo(&GC.getUnitInfo(), "Civ4UnitInfos/UnitInfos/UnitInfo", &GC.getNumUnitInfos());
-
-			// write unit info to cache
-			bool bOk = gDLL->cacheWrite(cache);
-			if (!bOk)
-			{
-				char	szMessage[1024];
-				sprintf( szMessage, "Failed writing to Unit cache. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-				gDLL->MessageBox(szMessage, "XML Caching Error");
-			}
-			if (bOk)
-			{
-				logMsg("Wrote Civ4UnitInfos to cache");
-			}
-		}
-	}
-	else
-	{
-		logMsg("Read CIV4UnitInfos from cache");
-		bLoaded	= true;
-	}
-	gDLL->destroyCache(cache);
-
-	if (bLoaded)
-	{
-		for (i=0;i<GC.getNumUnitClassInfos();i++)
-		{
-			GC.getUnitClassInfo((UnitClassTypes) i).setDefaultUnitIndex(FindInInfoClass(pszDefaultUnits[i], GC.getUnitInfo(), sizeof(GC.getUnitInfo((UnitTypes) 0)), GC.getNumUnitInfos()));
-		}
-	}
-
-	//////////////////////////////////
-
-	cache = gDLL->createCivilizationInfoCacheObject("CIV4CivilizationInfos.dat");		// cache file name
-	if (!gDLL->cacheRead(cache, "xml\\Civilizations\\CIV4CivilizationInfos.xml"))	// src data file name
-	{
-		// load the new FXml variable with the CIV4Buildings.xml file
-		bLoaded = LoadCivXml(m_pFXml, "Civilizations/CIV4CivilizationInfos.xml");
-		if (!bLoaded)
-		{
-			char	szMessage[1024];
-			sprintf( szMessage, "LoadXML call failed for Civilizations/CIV4CivilizationInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-			gDLL->MessageBox(szMessage, "XML Load Error");
-		}
-		if (bLoaded)
-		{
-			if (Validate())
-			{
-				SetGlobalClassInfo(&GC.getCivilizationInfo(), "Civ4CivilizationInfos/CivilizationInfos/CivilizationInfo", &GC.getNumCivilizationInfos());
-
-				// write civ info to cache
-				bool bOk = gDLL->cacheWrite(cache);
-				if (!bOk)
-				{
-					char	szMessage[1024];
-					sprintf( szMessage, "Failed writing to Civilization cache. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-					gDLL->MessageBox(szMessage, "XML Caching Error");
-				}
-				if (bOk)
-				{
-					logMsg("Wrote Civ4CivilizationInfos to cache");
-				}
-			}
-		}
-	}
-	else
-	{
-		logMsg("Read CIV4CivilizationInfos from cache");
-		bLoaded	= true;
-	}
-	gDLL->destroyCache(cache);
 
 	// Check Playables
-	for (i=0;i<GC.getNumCivilizationInfos();i++)
+	for (int i=0; i < GC.getNumCivilizationInfos(); ++i)
 	{
 		// if the civilization is playable we will increment the playable var
 		if (GC.getCivilizationInfo((CivilizationTypes) i).isPlayable())
@@ -1507,114 +697,9 @@ bool CvXMLLoadUtility::LoadPreMenuGlobals()
 		}
 	}
 
-	bLoaded = LoadCivXml(m_pFXml, "Terrain/CIV4YieldInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Terrain/CIV4YieldInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		int iEnumVal = NUM_YIELD_TYPES;
-		SetGlobalClassInfo(&GC.getYieldInfo(), "Civ4YieldInfos/YieldInfos/YieldInfo", &iEnumVal, true);
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4CommerceInfo.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4CommerceInfo.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		int iEnumVal = NUM_COMMERCE_TYPES;
-		SetGlobalClassInfo(&GC.getCommerceInfo(), "Civ4CommerceInfo/CommerceInfos/CommerceInfo", &iEnumVal, true);
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4Hints.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4Hints.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getHints(), "Civ4Hints/HintInfos/HintInfo", &GC.getNumHints());
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4GameOptionInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4GameOptionInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		int iEnumVal = NUM_GAMEOPTION_TYPES;
-		SetGlobalClassInfo(&GC.getGameOptionInfo(), "Civ4GameOptionInfos/GameOptionInfos/GameOptionInfo", &iEnumVal, true);
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4MPOptionInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4MPOptionInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		int iEnumVal = NUM_MPOPTION_TYPES;
-		SetGlobalClassInfo(&GC.getMPOptionInfo(), "Civ4MPOptionInfos/MPOptionInfos/MPOptionInfo", &iEnumVal, true);
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4ForceControlInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4ForceControlInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		int iEnumVal = NUM_FORCECONTROL_TYPES;
-		SetGlobalClassInfo(&GC.getForceControlInfo(), "Civ4ForceControlInfos/ForceControlInfos/ForceControlInfo", &iEnumVal, true);
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "Interface/CIV4SlideShowInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Interface/CIV4SlideShowInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getSlideShowInfo(), "Civ4SlideShowInfos/SlideShowInfos/SlideShowInfo", &GC.getNumSlideShowInfos());
-		SetGlobalClassInfo(&GC.getSlideShowRandomInfo(), "Civ4SlideShowInfos/SlideShowRandomInfos/SlideShowRandomInfo", &GC.getNumSlideShowRandomInfos());
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "Interface/CIV4WorldPickerInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Interface/CIV4WorldPickerInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getWorldPickerInfo(), "Civ4WorldPickerInfos/WorldPickerInfos/WorldPickerInfo", &GC.getNumWorldPickerInfos());
-	}
-
 	UpdateProgressCB("GlobalOther");
 
 	DestroyFXml();
-
-	SAFE_DELETE_ARRAY(pszDefaultUnits);
-	SAFE_DELETE_ARRAY(pszDefaultBuildings);
 
 	return true;
 }
@@ -1635,330 +720,74 @@ bool CvXMLLoadUtility::LoadPostMenuGlobals()
 		return false;
 	}
 
-	CvString *pszDefaultUnits = NULL;		// this will hold the default units for the unit classes
-	bool bLoaded = false;	// used to make sure that the xml file was loaded correctly
-	CvCacheObject* cache;
-
 	//throne room disabled
-	/*UpdateProgressCB("GlobalOther");
+	UpdateProgressCB("Global Throne Room");
 
-	// load the new FXml variable with the CIV4ThroneRoomInfos.xml file
-	bLoaded = LoadCivXml(m_pFXml, "Interface/CIV4ThroneRoomInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Interface/CIV4ThroneRoomInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getThroneRoomCamera(), "Civ4ThroneRoomInfos/ThroneRoomInfos/ThroneRoomCamera", &GC.getNumThroneRoomCameras());
-		SetGlobalClassInfo(&GC.getThroneRoomInfo(), "Civ4ThroneRoomInfos/ThroneRoomInfos/ThroneRoomInfo", &GC.getNumThroneRoomInfos());
-	}
+	LoadGlobalClassInfo(GC.getThroneRoomCamera(), "CIV4ThroneRoomCameraInfos", "Interface", "Civ4ThroneRoomCameraInfos/ThroneRoomCameraInfos/ThroneRoomCamera", false);
+	LoadGlobalClassInfo(GC.getThroneRoomInfo(), "CIV4ThroneRoomInfos", "Interface", "Civ4ThroneRoomInfos/ThroneRoomInfos/ThroneRoomInfo", false);
+	LoadGlobalClassInfo(GC.getThroneRoomStyleInfo(), "CIV4ThroneRoomStyleInfos", "Interface", "Civ4ThroneRoomStyleInfos/ThroneRoomStyleInfos/ThroneRoomStyleInfo", false);
 
-	UpdateProgressCB("GlobalOther");
+	UpdateProgressCB("Global Events");
 
-	// load the new FXml variable with the CIV4ThroneRoomStyleInfos.xml file
-	bLoaded = LoadCivXml(m_pFXml, "Interface/CIV4ThroneRoomStyleInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Interface/CIV4ThroneRoomStyleInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getThroneRoomStyleInfo(), "Civ4ThroneRoomStyleInfos/ThroneRoomStyleInfos/ThroneRoomStyleInfo", &GC.getNumThroneRoomStyleInfos());
-	}
-	*/
+	LoadGlobalClassInfo(GC.getEventInfo(), "CIV4EventInfos", "Events", "Civ4EventInfos/EventInfos/EventInfo", true, &CvDLLUtilityIFaceBase::createEventInfoCacheObject);
+	LoadGlobalClassInfo(GC.getEventTriggerInfo(), "CIV4EventTriggerInfos", "Events", "Civ4EventTriggerInfos/EventTriggerInfos/EventTriggerInfo", false, &CvDLLUtilityIFaceBase::createEventTriggerInfoCacheObject);
 
-	UpdateProgressCB("GlobalOther");
+	UpdateProgressCB("Global Routes");
 
-	// load the new FXml variable with the CIV4RouteModelInfos.xml file
-	bLoaded = LoadCivXml(m_pFXml, "Art/CIV4RouteModelInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Art/CIV4RouteModelInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getRouteModelInfo(), "Civ4RouteModelInfos/RouteModelInfos/RouteModelInfo", &GC.getNumRouteModelInfos());
-	}
+	LoadGlobalClassInfo(GC.getRouteModelInfo(), "Civ4RouteModelInfos", "Art", "Civ4RouteModelInfos/RouteModelInfos/RouteModelInfo", false);
 
-	UpdateProgressCB("GlobalOther");
+	UpdateProgressCB("Global Rivers");
 
-	// load the new FXml variable with the CIV4RiverInfos.xml file
-	bLoaded = LoadCivXml(m_pFXml, "Misc/CIV4RiverInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Misc/CIV4RiverInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalRiverInfo(&GC.getRiverInfo(), "Civ4RiverInfos/RiverInfos/RiverInfo", &GC.getNumRiverInfos(), &GC.getRiverZBias());
-	}
+	LoadGlobalClassInfo(GC.getRiverInfo(), "CIV4RiverInfos", "Misc", "Civ4RiverInfos/RiverInfos/RiverInfo", false);
+	LoadGlobalClassInfo(GC.getRiverModelInfo(), "CIV4RiverModelInfos", "Art", "Civ4RiverModelInfos/RiverModelInfos/RiverModelInfo", false);
 
-	// load the new FXml variable with the CIV4Buildings.xml file
-	bLoaded = LoadCivXml(m_pFXml, "Art/CIV4RiverModelInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Art/CIV4RiverModelInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getRiverModelInfo(), "Civ4RiverModelInfos/RiverModelInfos/RiverModelInfo", &GC.getNumRiverModelInfos());
-	}
+	UpdateProgressCB("Global Other");
 
-	// load the new FXml variable with the CIV4Buildings.xml file
-	bLoaded = LoadCivXml(m_pFXml, "Misc/CIV4WaterPlaneInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Misc/CIV4WaterPlaneInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getWaterPlaneInfo(), "Civ4WaterPlaneInfos/WaterPlaneInfos/WaterPlaneInfo", &GC.getNumWaterPlaneInfos());
-	}
+	LoadGlobalClassInfo(GC.getWaterPlaneInfo(), "CIV4WaterPlaneInfos", "Misc", "Civ4WaterPlaneInfos/WaterPlaneInfos/WaterPlaneInfo", false);
+	LoadGlobalClassInfo(GC.getTerrainPlaneInfo(), "CIV4TerrainPlaneInfos", "Misc", "Civ4TerrainPlaneInfos/TerrainPlaneInfos/TerrainPlaneInfo", false);
+	LoadGlobalClassInfo(GC.getCameraOverlayInfo(), "CIV4CameraOverlayInfos", "Misc", "Civ4CameraOverlayInfos/CameraOverlayInfos/CameraOverlayInfo", false);
 
-	UpdateProgressCB("GlobalOther");
-	// load the new FXml variable with the CIV4ProcessInfo.xml file
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4ProcessInfo.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4ProcessInfo.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getProcessInfo(), "Civ4ProcessInfo/ProcessInfos/ProcessInfo", &GC.getNumProcessInfos());
-	}
 
-	UpdateProgressCB("GlobalOther");
+	UpdateProgressCB("Global Process");
 
-	// load the new FXml variable with the CIV4Buildings.xml file
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4EmphasizeInfo.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4EmphasizeInfo.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getEmphasizeInfo(), "Civ4EmphasizeInfo/EmphasizeInfos/EmphasizeInfo", &GC.getNumEmphasizeInfos());
-	}
+	LoadGlobalClassInfo(GC.getProcessInfo(), "CIV4ProcessInfo", "GameInfo", "Civ4ProcessInfo/ProcessInfos/ProcessInfo", false);
 
-	UpdateProgressCB("GlobalOther");
+	UpdateProgressCB("Global Emphasize");
 
-	bLoaded = LoadCivXml(m_pFXml, "Units/CIV4MissionInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Units/CIV4MissionInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		int iEnumVal = NUM_MISSION_TYPES;
-		SetGlobalClassInfo(&GC.getMissionInfo(), "Civ4MissionInfos/MissionInfos/MissionInfo", &iEnumVal, true);
-	}
+	LoadGlobalClassInfo(GC.getEmphasizeInfo(), "CIV4EmphasizeInfo", "GameInfo", "Civ4EmphasizeInfo/EmphasizeInfos/EmphasizeInfo", false);
 
-	bLoaded = LoadCivXml(m_pFXml, "Units/CIV4ControlInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Units/CIV4ControlInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		int iEnumVal = NUM_CONTROL_TYPES;
-		SetGlobalClassInfo(&GC.getControlInfo(), "Civ4ControlInfos/ControlInfos/ControlInfo", &iEnumVal, true);
-	}
+	UpdateProgressCB("Global Other");
 
-	bLoaded = LoadCivXml(m_pFXml, "Units/CIV4CommandInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Units/CIV4CommandInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded)
-	{
-		if (Validate())
-		{
-			int iEnumVal = NUM_COMMAND_TYPES;
-			SetGlobalClassInfo(&GC.getCommandInfo(), "Civ4CommandInfos/CommandInfos/CommandInfo", &iEnumVal, true);
-		}
-	}
+	LoadGlobalClassInfo(GC.getMissionInfo(), "CIV4MissionInfos", "Units", "Civ4MissionInfos/MissionInfos/MissionInfo", false);
+	LoadGlobalClassInfo(GC.getControlInfo(), "CIV4ControlInfos", "Units", "Civ4ControlInfos/ControlInfos/ControlInfo", false);
+	LoadGlobalClassInfo(GC.getCommandInfo(), "CIV4CommandInfos", "Units", "Civ4CommandInfos/CommandInfos/CommandInfo", false);
+	LoadGlobalClassInfo(GC.getAutomateInfo(), "CIV4AutomateInfos", "Units", "Civ4AutomateInfos/AutomateInfos/AutomateInfo", false);
 
-	bLoaded = LoadCivXml(m_pFXml, "Units/CIV4AutomateInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Units/CIV4AutomateInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getAutomateInfo(), "Civ4AutomateInfos/AutomateInfos/AutomateInfo", &GC.getNumAutomateInfos());
-	}
+	UpdateProgressCB("Global Vote");
 
-	UpdateProgressCB("GlobalOther");
+	LoadGlobalClassInfo(GC.getVoteInfo(), "CIV4VoteInfo", "GameInfo", "Civ4VoteInfo/VoteInfos/VoteInfo", false);
 
-	// load the new FXml variable with the CIV4VoteInfo.xml file
-	bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4VoteInfo.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Units/CIV4VoteInfo.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getVoteInfo(), "Civ4VoteInfo/VoteInfos/VoteInfo", &GC.getNumVoteInfos());
-	}
+	UpdateProgressCB("Global Interface");
 
-	UpdateProgressCB("GlobalOther");
+	LoadGlobalClassInfo(GC.getCameraInfo(), "CIV4CameraInfos", "Interface", "Civ4CameraInfos/CameraInfos/CameraInfo", false);
+	LoadGlobalClassInfo(GC.getInterfaceModeInfo(), "CIV4InterfaceModeInfos", "Interface", "Civ4InterfaceModeInfos/InterfaceModeInfos/InterfaceModeInfo", false);
 
-	bLoaded = LoadCivXml(m_pFXml, "Interface/CIV4CameraInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Interface/CIV4CameraInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getCameraInfo(), "Civ4CameraInfos/CameraInfos/CameraInfo", &GC.getNumCameraInfos());
-	}
-
-	bLoaded = LoadCivXml(m_pFXml, "Interface/CIV4InterfaceModeInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Interface/CIV4InterfaceModeInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded)
-	{
-		if (Validate())
-		{
-			int iEnumVal = NUM_INTERFACEMODE_TYPES;
-			SetGlobalClassInfo(&GC.getInterfaceModeInfo(), "Civ4InterfaceModeInfos/InterfaceModeInfos/InterfaceModeInfo", &iEnumVal, true);
-		}
-	}
-
-	if (bLoaded && Validate())
-	{
-		SetGlobalActionInfo(&GC.getActionInfo(), &GC.getNumActionInfos());
-	}
+	SetGlobalActionInfo();
 
 
 	// Load the formation info
-	bLoaded = LoadCivXml(m_pFXml, "Units/CIV4FormationInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Units/CIV4FormationInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded)
-	{
-		if (Validate())
-		{
-			SetGlobalClassInfo(&GC.getUnitFormationInfo(), "UnitFormations/UnitFormation", &GC.getNumUnitFormationInfos());
-		}
-	}
+	LoadGlobalClassInfo(GC.getUnitFormationInfo(), "CIV4FormationInfos", "Units", "UnitFormations/UnitFormation", false);
 
 	// Load the attachable infos
-	bLoaded = LoadCivXml(m_pFXml, "Misc/CIV4AttachableInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Misc/CIV4AttachableInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getAttachableInfo(), "Civ4AttachableInfos/AttachableInfos/AttachableInfo", &GC.getNumAttachableInfos());
-	}
+	LoadGlobalClassInfo(GC.getAttachableInfo(), "CIV4AttachableInfos", "Misc", "Civ4AttachableInfos/AttachableInfos/AttachableInfo", false);
 
-	cache = gDLL->createDiplomacyInfoCacheObject("CIV4DiplomacyInfos.dat");		// cache file name
-	if (!gDLL->cacheRead(cache, "xml\\GameInfo\\CIV4DiplomacyInfos.xml"))	// src data file name
-	{
-		// load the new FXml variable with the CIV4Buildings.xml file
-		bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4DiplomacyInfos.xml");
-		if (!bLoaded)
-		{
-			char	szMessage[1024];
-			sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4DiplomacyInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-			gDLL->MessageBox(szMessage, "XML Load Error");
-		}
-		if (bLoaded)
-		{
-			if (Validate())
-			{
-				SetGlobalClassInfo(&GC.getDiplomacyInfo(), "Civ4DiplomacyInfos/DiplomacyInfos/DiplomacyInfo", &GC.getNumDiplomacyInfos());
+	// Specail Case Diplomacy Info due to double vectored nature and appending of Responses
+	LoadDiplomacyInfo(GC.getDiplomacyInfo(), "CIV4DiplomacyInfos", "GameInfo", "Civ4DiplomacyInfos/DiplomacyInfos/DiplomacyInfo", &CvDLLUtilityIFaceBase::createDiplomacyInfoCacheObject);
 
-				// write civ info to cache
-				bool bOk = gDLL->cacheWrite(cache);
-				if (!bOk)
-				{
-					char	szMessage[1024];
-					sprintf( szMessage, "Failed writing to Diplomacy cache. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-					gDLL->MessageBox(szMessage, "XML Caching Error");
-				}
-				if (bOk)
-				{
-					logMsg("Wrote Civ4DiplomacyInfos to cache");
-				}
-			}
-		}
-	}
-	else
-	{
-		logMsg("Read CIV4DiplomacyInfos from cache");
-		bLoaded	= true;
-	}
-	gDLL->destroyCache(cache);
+	LoadGlobalClassInfo(GC.getQuestInfo(), "Civ4QuestInfos", "Misc", "Civ4QuestInfos/QuestInfo", false);
+	LoadGlobalClassInfo(GC.getTutorialInfo(), "Civ4TutorialInfos", "Misc", "Civ4TutorialInfos/TutorialInfo", false);
 
-	// load the new FXml variable with the Civ4QuestInfos.xml file
-	bLoaded = LoadCivXml(m_pFXml, "Misc/Civ4QuestInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Misc/Civ4QuestInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getQuestInfo(), "Civ4QuestInfos/QuestInfo", &GC.getNumQuestInfos());
-	}
-
-	// load the new FXml variable with the Civ4TutorialInfos.xml file
-	bLoaded = LoadCivXml(m_pFXml, "Misc/Civ4TutorialInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for Misc/Civ4TutorialInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Load Error");
-	}
-	if (bLoaded && Validate())
-	{
-		SetGlobalClassInfo(&GC.getTutorialInfo(), "Civ4TutorialInfos/TutorialInfo", &GC.getNumTutorialInfos());
-	}
-
-	SAFE_DELETE_ARRAY(pszDefaultUnits);
+	LoadGlobalClassInfo(GC.getEspionageMissionInfo(), "CIV4EspionageMissionInfo", "GameInfo", "Civ4EspionageMissionInfo/EspionageMissionInfos/EspionageMissionInfo", false);
 
 	DestroyFXml();
 	return true;
@@ -2023,394 +852,8 @@ void CvXMLLoadUtility::SetGlobalStringArray(CvString **ppszString, char* szTagNa
 	}
 }
 
-//------------------------------------------------------------------------------------------------------
-//
-//  FUNCTION:   SetGlobalRouteInfo(CvRouteInfo **ppRouteInfos, char* szTagName, int* iNumVals)
-//
-//  PURPOSE :   Takes the szTagName parameter and if it exists in the xml it loads the ppRouteInfos
-//				with the value under it and sets the value of the iNumVals parameter to the total number
-//				of occurances of the szTagName tag in the xml.   
-//
-//------------------------------------------------------------------------------------------------------
-void CvXMLLoadUtility::SetGlobalRouteInfo(CvRouteInfo **ppRouteInfos, char* szTagName, int* iNumVals, float *fZbias)
-{
-	PROFILE_FUNC();
-	logMsg("SetGlobalRouteInfo %s\n", szTagName);
-	int i=0;				//loop counter
-	CvRouteInfo* pRouteInfos;	// local pointer to the route info memory
-
-	// null the local pointer so it can be checked at the end of the function
-	pRouteInfos = NULL;
-
-	// if we successfully locate the szTagName node
-	if (gDLL->getXMLIFace()->LocateNode(m_pFXml,szTagName))
-	{
-		// get the number of times the szTagName tag appears in the xml file
-		*iNumVals = gDLL->getXMLIFace()->NumOfElementsByTagName(m_pFXml,szTagName);
-		// allocate memory for the route infos based on the number of tags in the xml
-		*ppRouteInfos = new CvRouteInfo[*iNumVals];
-		// set the local pointer to the memory we just allocated
-		pRouteInfos = *ppRouteInfos;
-		// set the current xml node to it's parent node since we are on the first child of the root tag group
-		gDLL->getXMLIFace()->SetToParent(m_pFXml);
-		GetChildXmlValByName(fZbias,  "fZBias");
-		gDLL->getXMLIFace()->LocateNode(m_pFXml,szTagName);
-
-		// loop through each tag
-		for (i=0;i<*iNumVals;i++)
-		{
-			SkipToNextVal();	// skip to the next non-comment node
-
-			if (!pRouteInfos[i].read(this))
-				break;
-
-			GC.setInfoTypeFromString(pRouteInfos[i].getType(), i);	// add type to global info type hash map
-			if (!gDLL->getXMLIFace()->NextSibling(m_pFXml))
-			{
-				break;
-			}
-		}
-	}
-
-	// if we didn't find the tag name in the xml then we never set the local pointer to the 
-	// newly allocated memory and there for we will FAssert to let people know this most
-	// interesting fact
-	if(!pRouteInfos)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "Error finding tag node in SetGlobalRouteInfo function \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Error");
-	}
-}
 
 
-//------------------------------------------------------------------------------------------------------
-//
-//  FUNCTION:   SetGlobalRiverInfo(CvRiverInfo **ppRiverInfos, char* szTagName, int* iNumVals)
-//
-//  PURPOSE :   Takes the szTagName parameter and if it exists in the xml it loads the ppRiverInfos
-//				with the value under it and sets the value of the iNumVals parameter to the total number
-//				of occurances of the szTagName tag in the xml.   
-//
-//------------------------------------------------------------------------------------------------------
-void CvXMLLoadUtility::SetGlobalRiverInfo(CvRiverInfo **ppRiverInfos, char* szTagName, int* iNumVals,float *fZBias)
-{
-	PROFILE_FUNC();
-	logMsg("SetGlobalRiverInfo %s\n", szTagName);
-	int i=0;							// loop counter
-	CvRiverInfo* pRiverInfos;	// local pointer to the River info memory
-
-	// null the local pointer so it can be checked at the end of the function
-	pRiverInfos = NULL;
-
-	// if we successfully locate the szTagName node
-	if (gDLL->getXMLIFace()->LocateNode(m_pFXml,szTagName))
-	{
-		// get the number of times the szTagName tag appears in the xml file
-		*iNumVals = gDLL->getXMLIFace()->NumOfElementsByTagName(m_pFXml,szTagName);
-		// allocate memory for the River infos based on the number of tags in the xml
-		*ppRiverInfos = new CvRiverInfo[*iNumVals];
-		// set the local pointer to the memory we just allocated
-		pRiverInfos = *ppRiverInfos;
-		// set the current xml node to it's parent node since we are on the first child of the root tag group
-		gDLL->getXMLIFace()->SetToParent(m_pFXml);
-		GetChildXmlValByName(fZBias,  "fZBias");
-		gDLL->getXMLIFace()->LocateNode(m_pFXml,szTagName);
-
-		// loop through each tag
-		for (i=0;i<*iNumVals;i++)
-		{
-			SkipToNextVal();	// skip to the next non-comment node
-
-			if (!pRiverInfos[i].read(this))
-				break;
-
-			GC.setInfoTypeFromString(pRiverInfos[i].getType(), i);	// add type to global info type hash map
-			if (!gDLL->getXMLIFace()->NextSibling(m_pFXml))
-			{
-				break;
-			}
-		}
-	}
-
-	// if we didn't find the tag name in the xml then we never set the local pointer to the 
-	// newly allocated memory and there for we will FAssert to let people know this most
-	// interesting fact
-	if(!pRiverInfos)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "Error finding tag node in SetGlobalRiverInfo function \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Error");
-	}
-}
-
-//------------------------------------------------------------------------------------------------------
-//
-//  FUNCTION:   SetGlobalBuildingClassInfo(CvBuildingClassInfo** ppBuildingClassInfo, char* szTagName, int* iNumVals, TCHAR (**ppszDefualtBuildingList)[256])
-//
-//  PURPOSE :   Takes the szTagName parameter and if it exists in the xml it loads the ppBuildingInfo
-//				with the value under it and sets the value of the iNumVals parameter to the total number
-//				of occurances of the szTagName tag in the xml.   
-//
-//------------------------------------------------------------------------------------------------------
-void CvXMLLoadUtility::SetGlobalBuildingClassInfo(CvBuildingClassInfo** ppBuildingClassInfo, char* szTagName, int* iNumVals, CvString** ppszDefualtBuildingList)
-{
-	PROFILE_FUNC();
-	logMsg("SetGlobalBuildingClassInfo %s\n", szTagName);
-	int i=0;								//loop counter
-	CvBuildingClassInfo* pBuildingClassInfo;	// local pointer to the building info memory
-	CvString *pszDefaultBuildingList;
-
-	// null out the local pointer so that it can be checked at the end of this function
-	pBuildingClassInfo = NULL;
-
-	// if we successfully locate the szTagName node
-	if (gDLL->getXMLIFace()->LocateNode(m_pFXml,szTagName))
-	{
-		// get the number of times the szTagName tag appears in the xml file
-		*iNumVals = gDLL->getXMLIFace()->NumOfElementsByTagName(m_pFXml,szTagName);
-		// allocate memory for the building info based on the number above
-		*ppBuildingClassInfo = new CvBuildingClassInfo[*iNumVals];
-		// set the local pointer to the memory we just allocated
-		pBuildingClassInfo = *ppBuildingClassInfo;
-		// allocate memory for the default building list
-		*ppszDefualtBuildingList = new CvString[*iNumVals];
-		// set the local pointer to the memory we just allocated
-		pszDefaultBuildingList = *ppszDefualtBuildingList;
-
-		gDLL->getXMLIFace()->SetToParent(m_pFXml);
-		gDLL->getXMLIFace()->SetToChild(m_pFXml);
-
-		// loop through each tag
-		for (i=0;i<*iNumVals;i++)
-		{			
-			SkipToNextVal();	// skip to the next non-comment node
-
-			GetChildXmlValByName(pszDefaultBuildingList[i], "DefaultBuilding");
-			if (!pBuildingClassInfo[i].read(this))
-				break;
-			GC.setInfoTypeFromString(pBuildingClassInfo[i].getType(), i);	// add type to global info type hash map
-			if (!gDLL->getXMLIFace()->NextSibling(m_pFXml))
-			{
-				break;
-			}
-		}
-	}
-
-	// if we didn't find the tag name in the xml then we never set the local pointer to the 
-	// newly allocated memory and there for we will FAssert to let people know this most
-	// interesting fact
-	if(!pBuildingClassInfo)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "Error finding tag node in SetGlobalBuildingClassInfo function \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Error");
-	}
-}
-
-//------------------------------------------------------------------------------------------------------
-//
-//  FUNCTION:   SetGlobalBuildingInfo(CvBuildingInfo** ppBuildingInfo, char* szTagName, int* iNumVals)
-//
-//  PURPOSE :   Takes the szTagName parameter and if it exists in the xml it loads the ppBuildingInfo
-//				with the value under it and sets the value of the iNumVals parameter to the total number
-//				of occurances of the szTagName tag in the xml.   
-//
-//------------------------------------------------------------------------------------------------------
-void CvXMLLoadUtility::SetGlobalBuildingInfo(CvBuildingInfo** ppBuildingInfo, char* szTagName, int* iNumVals)
-{
-	PROFILE_FUNC();
-	logMsg("SetGlobalBuildingInfo %s\n", szTagName);
-	int i=0;						//loop counter
-	CvBuildingInfo* pBuildingInfo;	// local pointer to the building info memory
-
-	// null out the local pointer so that it can be checked at the end of this function
-	pBuildingInfo = NULL;
-
-	// if we successfully locate the szTagName node
-	if (gDLL->getXMLIFace()->LocateNode(m_pFXml,szTagName))
-	{
-		// get the number of times the szTagName tag appears in the xml file
-		*iNumVals = gDLL->getXMLIFace()->NumOfElementsByTagName(m_pFXml,szTagName);
-		// allocate memory for the building info based on the number above
-		*ppBuildingInfo = new CvBuildingInfo[*iNumVals];
-		// set the local pointer to the memory we just allocated
-		pBuildingInfo = *ppBuildingInfo;
-
-		gDLL->getXMLIFace()->SetToParent(m_pFXml);
-		gDLL->getXMLIFace()->SetToChild(m_pFXml);
-
-		// loop through each tag
-		for (i=0;i<*iNumVals;i++)
-		{
-			SkipToNextVal();	// skip to the next non-comment node
-
-			if (!pBuildingInfo[i].read(this))
-				break;
-			GC.setInfoTypeFromString(pBuildingInfo[i].getType(), i);	// add type to global info type hash map
-			if (!gDLL->getXMLIFace()->NextSibling(m_pFXml))
-			{
-				break;
-			}
-		}
-	}
-
-	// if we didn't find the tag name in the xml then we never set the local pointer to the 
-	// newly allocated memory and there for we will FAssert to let people know this most
-	// interesting fact
-	if(!pBuildingInfo)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "Error finding tag node in SetGlobalBuildingInfo function \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Error");
-	}
-}
-
-//------------------------------------------------------------------------------------------------------
-//
-//  FUNCTION:   SetGlobalProjectInfo(CvProjectInfo** ppProjectInfo, char* szTagName, int* iNumVals)
-//
-//  PURPOSE :   Takes the szTagName parameter and if it exists in the xml it loads the ppProjectInfo
-//				with the value under it and sets the value of the iNumVals parameter to the total number
-//				of occurances of the szTagName tag in the xml.   
-//
-//------------------------------------------------------------------------------------------------------
-void CvXMLLoadUtility::SetGlobalProjectInfo(CvProjectInfo** ppProjectInfo, char* szTagName, int* iNumVals)
-{
-	PROFILE_FUNC();
-	logMsg("SetGlobalProjectInfo %s\n", szTagName);
-	int i=0;						//loop counter
-	CvString *paszAnyonePrereqProject; // holds the anyone prereq project for checking after all the projects are in
-	CvProjectInfo* pProjectInfo;	// local pointer to the project info memory
-
-	// null out the local pointer so that it can be checked at the end of this function
-	pProjectInfo = NULL;
-
-	// if we successfully locate the szTagName node
-	if (gDLL->getXMLIFace()->LocateNode(m_pFXml,szTagName))
-	{
-		// get the number of times the szTagName tag appears in the xml file
-		*iNumVals = gDLL->getXMLIFace()->NumOfElementsByTagName(m_pFXml,szTagName);
-		// allocate memory for the project info based on the number above
-		*ppProjectInfo = new CvProjectInfo[*iNumVals];
-		// set the local pointer to the memory we just allocated
-		pProjectInfo = *ppProjectInfo;
-
-		// we also need to allocate memory for the anyone prereq projects
-		paszAnyonePrereqProject = new CvString[*iNumVals];
-
-		gDLL->getXMLIFace()->SetToParent(m_pFXml);
-		gDLL->getXMLIFace()->SetToChild(m_pFXml);
-
-		// loop through each tag
-		for (i=0;i<*iNumVals;i++)
-		{
-			SkipToNextVal();	// skip to the next non-comment node
-
-			GetChildXmlValByName(paszAnyonePrereqProject[i], "AnyonePrereqProject");
-			if (isEmpty(paszAnyonePrereqProject[i]))
-			{
-				paszAnyonePrereqProject[i] = "NONE";
-			}
-			if (!pProjectInfo[i].read(this))
-				break;
-			GC.setInfoTypeFromString(pProjectInfo[i].getType(), i);	// add type to global info type hash map
-			if (!gDLL->getXMLIFace()->NextSibling(m_pFXml))
-			{
-				break;
-			}
-		}
-
-		// call the find in list function to return either -1 if no value is found
-		// or the index in the list the match is found at
-		for (i=0;i<*iNumVals;i++)
-		{
-			pProjectInfo[i].setAnyoneProjectPrereq(FindInInfoClass(paszAnyonePrereqProject[i], pProjectInfo, sizeof(pProjectInfo[0]), *iNumVals));
-		}
-
-		SAFE_DELETE_ARRAY(paszAnyonePrereqProject);
-	}
-	else
-	{
-		*iNumVals = 0;
-		*ppProjectInfo = new CvProjectInfo[*iNumVals];
-	}
-
-	// if we didn't find the tag name in the xml then we never set the local pointer to the 
-	// newly allocated memory and there for we will FAssert to let people know this most
-	// interesting fact
-	if (NULL == *ppProjectInfo)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "Error finding tag node in SetGlobalProjectInfo function \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Error");
-	}
-}
-
-//------------------------------------------------------------------------------------------------------
-//
-//  FUNCTION:   SetGlobalUnitClassInfo(CvUnitClassInfo** ppUnitClassInfo, char* szTagName, int* iNumVals, TCHAR (**ppszDefualtUnitList)[256])
-//
-//  PURPOSE :   Takes the szTagName parameter and if it exists in the xml it loads the ppUnitClassInfo
-//				with the value under it and sets the value of the iNumVals parameter to the total number
-//				of occurances of the szTagName tag in the xml.   
-//
-//------------------------------------------------------------------------------------------------------
-void CvXMLLoadUtility::SetGlobalUnitClassInfo(CvUnitClassInfo** ppUnitClassInfo, char* szTagName, int* iNumVals, 
-											  CvString **ppszDefualtUnitList)
-{
-	PROFILE_FUNC();
-	logMsg("SetGlobalUnitClassInfo %s\n", szTagName);
-	int i=0;				//loop counter
-	CvUnitClassInfo* pUnitClassInfo;	// local pointer to the unit class info memory
-	CvString *pszDefaultUnitList;
-
-	// null out the local pointer so it can be checked at the end of the function
-	pUnitClassInfo = NULL;
-
-	// if we successfully locate the szTagName node
-	if (gDLL->getXMLIFace()->LocateNode(m_pFXml,szTagName))
-	{
-		// get the number of times the szTagName tag appears in the xml file
-		*iNumVals = gDLL->getXMLIFace()->NumOfElementsByTagName(m_pFXml,szTagName);
-		// allocate memory for the unit class info based on the number above
-		*ppUnitClassInfo = new CvUnitClassInfo[*iNumVals];
-		// set the local pointer to the memory we just allocated
-		pUnitClassInfo = *ppUnitClassInfo;
-		// allocate memory for the default unit list
-		*ppszDefualtUnitList = new CvString[*iNumVals];
-		// set the local pointer to the memory we just allocated
-		pszDefaultUnitList = *ppszDefualtUnitList;
-
-		gDLL->getXMLIFace()->SetToParent(m_pFXml);
-		gDLL->getXMLIFace()->SetToChild(m_pFXml);
-
-		// loop through each tag
-		for (i=0;i<*iNumVals;i++)
-		{
-			SkipToNextVal();	// skip to the next non-comment node
-
-			GetChildXmlValByName(pszDefaultUnitList[i], "DefaultUnit");
-			if (!pUnitClassInfo[i].read(this))
-				break;
-			GC.setInfoTypeFromString(pUnitClassInfo[i].getType(), i);	// add type to global info type hash map
-			if (!gDLL->getXMLIFace()->NextSibling(m_pFXml))
-			{
-				break;
-			}
-		}
-	}
-
-	// if we didn't find the tag name in the xml then we never set the local pointer to the 
-	// newly allocated memory and there for we will FAssert to let people know this most
-	// interesting fact
-	if(!pUnitClassInfo)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "Error finding tag node in SetGlobalUnitClassInfo function \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Error");
-	}
-}
 
 //------------------------------------------------------------------------------------------------------
 //
@@ -2418,21 +861,16 @@ void CvXMLLoadUtility::SetGlobalUnitClassInfo(CvUnitClassInfo** ppUnitClassInfo,
 //
 //  PURPOSE :   Takes the szTagName parameter and if it exists in the xml it loads the ppActionInfo
 //				with the value under it and sets the value of the iNumVals parameter to the total number
-//				of occurances of the szTagName tag in the xml.   
+//				of occurances of the szTagName tag in the xml.
 //
 //------------------------------------------------------------------------------------------------------
-void CvXMLLoadUtility::SetGlobalActionInfo(CvActionInfo** ppActionInfo, int* iNumVals)
+void CvXMLLoadUtility::SetGlobalActionInfo()
 {
 	PROFILE_FUNC();
 	logMsg("SetGlobalActionInfo\n");
 	int i=0;					//loop counter
 	int j=0;					//loop counter
-	CvActionInfo* pActionInfo;	// local pointer to the action info memory
 
-	// null out the local pointer so that it can be checked at the end of this function
-	pActionInfo = NULL;
-
-	*iNumVals = 0;
 	if(!(NUM_INTERFACEMODE_TYPES > 0))
 	{
 		char	szMessage[1024];
@@ -2449,12 +887,6 @@ void CvXMLLoadUtility::SetGlobalActionInfo(CvActionInfo** ppActionInfo, int* iNu
 	{
 		char	szMessage[1024];
 		sprintf( szMessage, "GC.getNumPromotionInfos() is not greater than zero in CvXMLLoadUtility::SetGlobalActionInfo \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Error");
-	}
-	if(!(GC.getNumReligionInfos() > 0) )
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "GC.getNumReligionInfos() is not greater than zero in CvXMLLoadUtility::SetGlobalActionInfo \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
 		gDLL->MessageBox(szMessage, "XML Error");
 	}
 	if(!(GC.getNumUnitClassInfos() > 0) )
@@ -2499,41 +931,31 @@ void CvXMLLoadUtility::SetGlobalActionInfo(CvActionInfo** ppActionInfo, int* iNu
 		sprintf( szMessage, "NUM_MISSION_TYPES is not greater than zero in CvXMLLoadUtility::SetGlobalActionInfo \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
 		gDLL->MessageBox(szMessage, "XML Error");
 	}
-	// allocate memory for the action info based on the number above
-	*ppActionInfo = new CvActionInfo[	(*iNumVals) + 
-		NUM_INTERFACEMODE_TYPES + 
-		GC.getNumBuildInfos() + 
-		GC.getNumPromotionInfos() + 
-		GC.getNumReligionInfos() + 
-		GC.getNumUnitInfos() + 
-		GC.getNumSpecialistInfos() + 
-		GC.getNumBuildingInfos() + 
-		NUM_CONTROL_TYPES +
-		NUM_COMMAND_TYPES +
-		GC.getNumAutomateInfos() +
-		NUM_MISSION_TYPES];
-	// set the local pointer to the memory we just allocated
-	pActionInfo = *ppActionInfo;
 
 	int* piOrderedIndex=NULL;
 
-	int iNumActionInfos =(*iNumVals) + 
-		NUM_INTERFACEMODE_TYPES + 
-		GC.getNumBuildInfos() + 
-		GC.getNumPromotionInfos() + 
-		GC.getNumReligionInfos() + 
-		GC.getNumUnitInfos() + 
-		GC.getNumSpecialistInfos() + 
-		GC.getNumBuildingInfos() + 
+	int iNumOrigVals = GC.getNumActionInfos();
+
+	int iNumActionInfos = iNumOrigVals +
+		NUM_INTERFACEMODE_TYPES +
+		GC.getNumBuildInfos() +
+		GC.getNumPromotionInfos() +
+		GC.getNumReligionInfos() +
+		GC.getNumCorporationInfos() +
+		GC.getNumUnitInfos() +
+		GC.getNumSpecialistInfos() +
+		GC.getNumBuildingInfos() +
 		NUM_CONTROL_TYPES +
 		NUM_COMMAND_TYPES +
 		GC.getNumAutomateInfos() +
 		NUM_MISSION_TYPES;
+
 	int* piIndexList = new int[iNumActionInfos];
 	int* piPriorityList = new int[iNumActionInfos];
 	int* piActionInfoTypeList = new int[iNumActionInfos];
 
-	int iTotalActionInfoCount=0;
+	int iTotalActionInfoCount = 0;
+
 	// loop through control info
 	for (i=0;i<NUM_COMMAND_TYPES;i++)
 	{
@@ -2583,6 +1005,14 @@ void CvXMLLoadUtility::SetGlobalActionInfo(CvActionInfo** ppActionInfo, int* iNu
 		iTotalActionInfoCount++;
 	}
 
+	for (i=0;i<GC.getNumCorporationInfos();i++)
+	{
+		piIndexList[iTotalActionInfoCount] = i;
+		piPriorityList[iTotalActionInfoCount] = GC.getCorporationInfo((CorporationTypes)i).getOrderPriority();
+		piActionInfoTypeList[iTotalActionInfoCount] = ACTIONSUBTYPE_CORPORATION;
+		iTotalActionInfoCount++;
+	}
+
 	for (i=0;i<GC.getNumSpecialistInfos();i++)
 	{
 		piIndexList[iTotalActionInfoCount] = i;
@@ -2629,8 +1059,9 @@ void CvXMLLoadUtility::SetGlobalActionInfo(CvActionInfo** ppActionInfo, int* iNu
 	orderHotkeyInfo(&piOrderedIndex, piPriorityList, iNumActionInfos);
 	for (i=0;i<iNumActionInfos;i++)
 	{
-		pActionInfo[i + *iNumVals].setOriginalIndex(piIndexList[piOrderedIndex[i]]);
-		pActionInfo[i + *iNumVals].setSubType((ActionSubTypes)piActionInfoTypeList[piOrderedIndex[i]]);
+		CvActionInfo* pActionInfo = new CvActionInfo;
+		pActionInfo->setOriginalIndex(piIndexList[piOrderedIndex[i]]);
+		pActionInfo->setSubType((ActionSubTypes)piActionInfoTypeList[piOrderedIndex[i]]);
 		if ((ActionSubTypes)piActionInfoTypeList[piOrderedIndex[i]] == ACTIONSUBTYPE_COMMAND)
 		{
 			GC.getCommandInfo((CommandTypes)piIndexList[piOrderedIndex[i]]).setActionInfoIndex(i);
@@ -2641,36 +1072,42 @@ void CvXMLLoadUtility::SetGlobalActionInfo(CvActionInfo** ppActionInfo, int* iNu
 		}
 		else if ((ActionSubTypes)piActionInfoTypeList[piOrderedIndex[i]] == ACTIONSUBTYPE_BUILD)
 		{
-			GC.getBuildInfo((BuildTypes)piIndexList[piOrderedIndex[i]]).setMissionType(FindInInfoClass("MISSION_BUILD", GC.getMissionInfo(), sizeof(GC.getMissionInfo((MissionTypes) 0)), NUM_MISSION_TYPES));
+			GC.getBuildInfo((BuildTypes)piIndexList[piOrderedIndex[i]]).setMissionType(FindInInfoClass("MISSION_BUILD"));
 			GC.getBuildInfo((BuildTypes)piIndexList[piOrderedIndex[i]]).setActionInfoIndex(i);
 		}
 		else if ((ActionSubTypes)piActionInfoTypeList[piOrderedIndex[i]] == ACTIONSUBTYPE_PROMOTION)
 		{
-			GC.getPromotionInfo((PromotionTypes)piIndexList[piOrderedIndex[i]]).setCommandType(FindInInfoClass("COMMAND_PROMOTION", GC.getCommandInfo(), sizeof(GC.getCommandInfo((CommandTypes) 0)), NUM_COMMAND_TYPES));
+			GC.getPromotionInfo((PromotionTypes)piIndexList[piOrderedIndex[i]]).setCommandType(FindInInfoClass("COMMAND_PROMOTION"));
 			GC.getPromotionInfo((PromotionTypes)piIndexList[piOrderedIndex[i]]).setActionInfoIndex(i);
 			GC.getPromotionInfo((PromotionTypes)piIndexList[piOrderedIndex[i]]).setHotKeyDescription(GC.getPromotionInfo((PromotionTypes)piIndexList[piOrderedIndex[i]]).getTextKeyWide(), GC.getCommandInfo((CommandTypes)(GC.getPromotionInfo((PromotionTypes)piIndexList[piOrderedIndex[i]]).getCommandType())).getTextKeyWide(), CreateHotKeyFromDescription(GC.getPromotionInfo((PromotionTypes)piIndexList[piOrderedIndex[i]]).getHotKey(), GC.getPromotionInfo((PromotionTypes)piIndexList[piOrderedIndex[i]]).isShiftDown(), GC.getPromotionInfo((PromotionTypes)piIndexList[piOrderedIndex[i]]).isAltDown(), GC.getPromotionInfo((PromotionTypes)piIndexList[piOrderedIndex[i]]).isCtrlDown()));
 		}
 		else if ((ActionSubTypes)piActionInfoTypeList[piOrderedIndex[i]] == ACTIONSUBTYPE_UNIT)
 		{
-			GC.getUnitInfo((UnitTypes)piIndexList[piOrderedIndex[i]]).setCommandType(FindInInfoClass("COMMAND_UPGRADE", GC.getCommandInfo(), sizeof(GC.getCommandInfo((CommandTypes) 0)), NUM_COMMAND_TYPES));
+			GC.getUnitInfo((UnitTypes)piIndexList[piOrderedIndex[i]]).setCommandType(FindInInfoClass("COMMAND_UPGRADE"));
 			GC.getUnitInfo((UnitTypes)piIndexList[piOrderedIndex[i]]).setActionInfoIndex(i);
 			GC.getUnitInfo((UnitTypes)piIndexList[piOrderedIndex[i]]).setHotKeyDescription(GC.getUnitInfo((UnitTypes)piIndexList[piOrderedIndex[i]]).getTextKeyWide(), GC.getCommandInfo((CommandTypes)(GC.getUnitInfo((UnitTypes)piIndexList[piOrderedIndex[i]]).getCommandType())).getTextKeyWide(), CreateHotKeyFromDescription(GC.getUnitInfo((UnitTypes)piIndexList[piOrderedIndex[i]]).getHotKey(), GC.getUnitInfo((UnitTypes)piIndexList[piOrderedIndex[i]]).isShiftDown(), GC.getUnitInfo((UnitTypes)piIndexList[piOrderedIndex[i]]).isAltDown(), GC.getUnitInfo((UnitTypes)piIndexList[piOrderedIndex[i]]).isCtrlDown()));
 		}
 		else if ((ActionSubTypes)piActionInfoTypeList[piOrderedIndex[i]] == ACTIONSUBTYPE_RELIGION)
 		{
-			GC.getReligionInfo((ReligionTypes)piIndexList[piOrderedIndex[i]]).setMissionType(FindInInfoClass("MISSION_SPREAD", GC.getMissionInfo(), sizeof(GC.getMissionInfo((MissionTypes) 0)), NUM_MISSION_TYPES));
+			GC.getReligionInfo((ReligionTypes)piIndexList[piOrderedIndex[i]]).setMissionType(FindInInfoClass("MISSION_SPREAD"));
 			GC.getReligionInfo((ReligionTypes)piIndexList[piOrderedIndex[i]]).setActionInfoIndex(i);
 			GC.getReligionInfo((ReligionTypes)piIndexList[piOrderedIndex[i]]).setHotKeyDescription(GC.getReligionInfo((ReligionTypes)piIndexList[piOrderedIndex[i]]).getTextKeyWide(), GC.getMissionInfo((MissionTypes)(GC.getReligionInfo((ReligionTypes)piIndexList[piOrderedIndex[i]]).getMissionType())).getTextKeyWide(), CreateHotKeyFromDescription(GC.getReligionInfo((ReligionTypes)piIndexList[piOrderedIndex[i]]).getHotKey(), GC.getReligionInfo((ReligionTypes)piIndexList[piOrderedIndex[i]]).isShiftDown(), GC.getReligionInfo((ReligionTypes)piIndexList[piOrderedIndex[i]]).isAltDown(), GC.getReligionInfo((ReligionTypes)piIndexList[piOrderedIndex[i]]).isCtrlDown()));
 		}
+		else if ((ActionSubTypes)piActionInfoTypeList[piOrderedIndex[i]] == ACTIONSUBTYPE_CORPORATION)
+		{
+			GC.getCorporationInfo((CorporationTypes)piIndexList[piOrderedIndex[i]]).setMissionType(FindInInfoClass("MISSION_SPREAD_CORPORATION"));
+			GC.getCorporationInfo((CorporationTypes)piIndexList[piOrderedIndex[i]]).setActionInfoIndex(i);
+			GC.getCorporationInfo((CorporationTypes)piIndexList[piOrderedIndex[i]]).setHotKeyDescription(GC.getCorporationInfo((CorporationTypes)piIndexList[piOrderedIndex[i]]).getTextKeyWide(), GC.getMissionInfo((MissionTypes)(GC.getCorporationInfo((CorporationTypes)piIndexList[piOrderedIndex[i]]).getMissionType())).getTextKeyWide(), CreateHotKeyFromDescription(GC.getCorporationInfo((CorporationTypes)piIndexList[piOrderedIndex[i]]).getHotKey(), GC.getCorporationInfo((CorporationTypes)piIndexList[piOrderedIndex[i]]).isShiftDown(), GC.getCorporationInfo((CorporationTypes)piIndexList[piOrderedIndex[i]]).isAltDown(), GC.getCorporationInfo((CorporationTypes)piIndexList[piOrderedIndex[i]]).isCtrlDown()));
+		}
 		else if ((ActionSubTypes)piActionInfoTypeList[piOrderedIndex[i]] == ACTIONSUBTYPE_SPECIALIST)
 		{
-			GC.getSpecialistInfo((SpecialistTypes)piIndexList[piOrderedIndex[i]]).setMissionType(FindInInfoClass("MISSION_JOIN", GC.getMissionInfo(), sizeof(GC.getMissionInfo((MissionTypes) 0)), NUM_MISSION_TYPES));
+			GC.getSpecialistInfo((SpecialistTypes)piIndexList[piOrderedIndex[i]]).setMissionType(FindInInfoClass("MISSION_JOIN"));
 			GC.getSpecialistInfo((SpecialistTypes)piIndexList[piOrderedIndex[i]]).setActionInfoIndex(i);
 			GC.getSpecialistInfo((SpecialistTypes)piIndexList[piOrderedIndex[i]]).setHotKeyDescription(GC.getSpecialistInfo((SpecialistTypes)piIndexList[piOrderedIndex[i]]).getTextKeyWide(), GC.getMissionInfo((MissionTypes)(GC.getSpecialistInfo((SpecialistTypes)piIndexList[piOrderedIndex[i]]).getMissionType())).getTextKeyWide(), CreateHotKeyFromDescription(GC.getSpecialistInfo((SpecialistTypes)piIndexList[piOrderedIndex[i]]).getHotKey(), GC.getSpecialistInfo((SpecialistTypes)piIndexList[piOrderedIndex[i]]).isShiftDown(), GC.getSpecialistInfo((SpecialistTypes)piIndexList[piOrderedIndex[i]]).isAltDown(), GC.getSpecialistInfo((SpecialistTypes)piIndexList[piOrderedIndex[i]]).isCtrlDown()));
 		}
 		else if ((ActionSubTypes)piActionInfoTypeList[piOrderedIndex[i]] == ACTIONSUBTYPE_BUILDING)
 		{
-			GC.getBuildingInfo((BuildingTypes)piIndexList[piOrderedIndex[i]]).setMissionType(FindInInfoClass("MISSION_CONSTRUCT", GC.getMissionInfo(), sizeof(GC.getMissionInfo((MissionTypes) 0)), NUM_MISSION_TYPES));
+			GC.getBuildingInfo((BuildingTypes)piIndexList[piOrderedIndex[i]]).setMissionType(FindInInfoClass("MISSION_CONSTRUCT"));
 			GC.getBuildingInfo((BuildingTypes)piIndexList[piOrderedIndex[i]]).setActionInfoIndex(i);
 			GC.getBuildingInfo((BuildingTypes)piIndexList[piOrderedIndex[i]]).setHotKeyDescription(GC.getBuildingInfo((BuildingTypes)piIndexList[piOrderedIndex[i]]).getTextKeyWide(), GC.getMissionInfo((MissionTypes)(GC.getBuildingInfo((BuildingTypes)piIndexList[piOrderedIndex[i]]).getMissionType())).getTextKeyWide(), CreateHotKeyFromDescription(GC.getBuildingInfo((BuildingTypes)piIndexList[piOrderedIndex[i]]).getHotKey(), GC.getBuildingInfo((BuildingTypes)piIndexList[piOrderedIndex[i]]).isShiftDown(), GC.getBuildingInfo((BuildingTypes)piIndexList[piOrderedIndex[i]]).isAltDown(), GC.getBuildingInfo((BuildingTypes)piIndexList[piOrderedIndex[i]]).isCtrlDown()));
 		}
@@ -2684,11 +1121,11 @@ void CvXMLLoadUtility::SetGlobalActionInfo(CvActionInfo** ppActionInfo, int* iNu
 		}
 		else if ((ActionSubTypes)piActionInfoTypeList[piOrderedIndex[i]] == ACTIONSUBTYPE_MISSION)
 		{
-			GC.getMissionInfo((MissionTypes)piIndexList[piOrderedIndex[i]]).setActionInfoIndex(i + *iNumVals);
+			GC.getMissionInfo((MissionTypes)piIndexList[piOrderedIndex[i]]).setActionInfoIndex(i + iNumOrigVals);
 		}
-	}
 
-	*iNumVals = iNumActionInfos;
+		GC.getActionInfo().push_back(pActionInfo);
+	}
 
 	SAFE_DELETE_ARRAY(piOrderedIndex);
 	SAFE_DELETE_ARRAY(piIndexList);
@@ -2703,7 +1140,7 @@ void CvXMLLoadUtility::SetGlobalActionInfo(CvActionInfo** ppActionInfo, int* iNu
 //
 //  PURPOSE :   Takes the szTagName parameter and if it exists in the xml it loads the ppAnimationPathInfo
 //				with the value under it and sets the value of the iNumVals parameter to the total number
-//				of occurances of the szTagName tag in the xml.   
+//				of occurances of the szTagName tag in the xml.
 //
 //------------------------------------------------------------------------------------------------------
 void CvXMLLoadUtility::SetGlobalAnimationPathInfo(CvAnimationPathInfo** ppAnimationPathInfo, char* szTagName, int* iNumVals)
@@ -2743,7 +1180,7 @@ void CvXMLLoadUtility::SetGlobalAnimationPathInfo(CvAnimationPathInfo** ppAnimat
 		}
 	}
 
-	// if we didn't find the tag name in the xml then we never set the local pointer to the 
+	// if we didn't find the tag name in the xml then we never set the local pointer to the
 	// newly allocated memory and there for we will FAssert to let people know this most
 	// interesting fact
 	if(!pAnimPathInfo )
@@ -2754,86 +1191,13 @@ void CvXMLLoadUtility::SetGlobalAnimationPathInfo(CvAnimationPathInfo** ppAnimat
 	}
 }
 
-//
-// CvPromotionInfo
-//
-void CvXMLLoadUtility::SetGlobalPromotionInfo(CvPromotionInfo **ppPromotionInfos, char* szTagName, int* iNumVals)
-{
-	PROFILE_FUNC();
-	logMsg("SetGlobalPromotionInfo");
-
-	int i=0;					//loop counter
-	CvPromotionInfo* pPromotionInfo;	// local pointer to the building info memory
-	CvString* pszPrereq = NULL;
-	CvString* pszPrereqOr1 = NULL;
-	CvString* pszPrereqOr2 = NULL;
-
-	// if we successfully locate the tag name in the xml file
-	if (gDLL->getXMLIFace()->LocateNode(m_pFXml,szTagName))
-	{
-		// get the number of times the szTagName tag appears in the xml file
-		*iNumVals = gDLL->getXMLIFace()->NumOfElementsByTagName(m_pFXml,szTagName);
-
-		pszPrereq = new CvString[*iNumVals];
-		pszPrereqOr1 = new CvString[*iNumVals];
-		pszPrereqOr2 = new CvString[*iNumVals];
-
-		// allocate memory for the building info based on the number above
-		*ppPromotionInfos = new CvPromotionInfo[*iNumVals];
-		// set the local pointer to the memory we just allocated
-		pPromotionInfo = *ppPromotionInfos;
-
-		gDLL->getXMLIFace()->SetToParent(m_pFXml);
-		gDLL->getXMLIFace()->SetToChild(m_pFXml);
-
-		// loop through each tag
-		for (i=0;i<*iNumVals;i++)
-		{
-			SkipToNextVal();	// skip to the next non-comment node
-
-			if (!pPromotionInfo[i].read(this))
-				break;
-			GC.setInfoTypeFromString(pPromotionInfo[i].getType(), i);	// add type to global info type hash map
-			GetChildXmlValByName(pszPrereq[i], "PromotionPrereq");
-			GetChildXmlValByName(pszPrereqOr1[i], "PromotionPrereqOr1");
-			GetChildXmlValByName(pszPrereqOr2[i], "PromotionPrereqOr2");
-
-			if (!gDLL->getXMLIFace()->NextSibling(m_pFXml))
-			{
-				break;
-			}
-		}
-	}
-
-	for (i=0;i<GC.getNumPromotionInfos();i++)
-	{
-		GC.getPromotionInfo((PromotionTypes) i).setPrereqPromotion(FindInInfoClass(pszPrereq[i], GC.getPromotionInfo(), sizeof(GC.getPromotionInfo((PromotionTypes) i)), GC.getNumPromotionInfos()));
-		GC.getPromotionInfo((PromotionTypes) i).setPrereqOrPromotion1(FindInInfoClass(pszPrereqOr1[i], GC.getPromotionInfo(), sizeof(GC.getPromotionInfo((PromotionTypes) i)), GC.getNumPromotionInfos()));
-		GC.getPromotionInfo((PromotionTypes) i).setPrereqOrPromotion2(FindInInfoClass(pszPrereqOr2[i], GC.getPromotionInfo(), sizeof(GC.getPromotionInfo((PromotionTypes) i)), GC.getNumPromotionInfos()));
-	}
-
-	SAFE_DELETE_ARRAY(pszPrereq);
-	SAFE_DELETE_ARRAY(pszPrereqOr1);
-	SAFE_DELETE_ARRAY(pszPrereqOr2);
-
-	// if we didn't find the tag name in the xml then we never set the pszString to the 
-	// newly allocated memory and there for we will FAssert to let people know this most
-	// interesting fact
-	if(!pPromotionInfo)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "Error finding tag node in SetGlobalPromotionInfo function \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Error");
-	}
-}
-
 //------------------------------------------------------------------------------------------------------
 //
 //  FUNCTION:   SetGlobalUnitScales(float* pfLargeScale, float* pfSmallScale, char* szTagName)
 //
 //  PURPOSE :   Takes the szTagName parameter and if it exists in the xml it loads the ppPromotionInfo
 //				with the value under it and sets the value of the iNumVals parameter to the total number
-//				of occurances of the szTagName tag in the xml.   
+//				of occurances of the szTagName tag in the xml.
 //
 //------------------------------------------------------------------------------------------------------
 void CvXMLLoadUtility::SetGlobalUnitScales(float* pfLargeScale, float* pfSmallScale, char* szTagName)
@@ -2857,7 +1221,7 @@ void CvXMLLoadUtility::SetGlobalUnitScales(float* pfLargeScale, float* pfSmallSc
 	}
 	else
 	{
-		// if we didn't find the tag name in the xml then we never set the local pointer to the 
+		// if we didn't find the tag name in the xml then we never set the local pointer to the
 		// newly allocated memory and there for we will FAssert to let people know this most
 		// interesting fact
 		char	szMessage[1024];
@@ -2866,172 +1230,6 @@ void CvXMLLoadUtility::SetGlobalUnitScales(float* pfLargeScale, float* pfSmallSc
 	}
 }
 
-//------------------------------------------------------------------------------------------------------
-//
-//  FUNCTION:   SetGlobalTechInfo(CvTechInfo** ppTechInfo, char* szTagName, int* iNumVals)
-//
-//  PURPOSE :   Takes the szTagName parameter and if it exists in the xml it loads the ppTechInfo
-//				with the value under it and sets the value of the iNumVals parameter to the total number
-//				of occurances of the szTagName tag in the xml.   
-//
-//------------------------------------------------------------------------------------------------------
-void CvXMLLoadUtility::SetGlobalTechInfo(CvTechInfo** ppTechInfo, char* szTagName, int* iNumVals)
-{
-	PROFILE_FUNC();
-	logMsg("SetGlobalTechInfo %s\n", szTagName);
-	int i=0;				//loop counter
-	int j=0;				//loop counter
-	int k=0;				//loop counter
-	int m=0;				//loop counter
-	int iNumSibs=0;				// the number of siblings the current xml node has
-	char szTextVal[256];	// Holds the value of a retrieved key that is to be interpreted
-
-	CvTechInfo* pTechInfo;	// local pointer to the tech info memory
-
-	// null out the local pointer so it can be checked at the end of this function
-	pTechInfo = NULL;
-
-	// if we successfully locate the szTagName node
-	if (gDLL->getXMLIFace()->LocateNode(m_pFXml,szTagName))
-	{
-		// get the number of times the szTagName tag appears in the xml file
-		*iNumVals = gDLL->getXMLIFace()->NumOfElementsByTagName(m_pFXml,szTagName);
-		// allocate memory for the tech info based on the number above
-		*ppTechInfo = new CvTechInfo[*iNumVals];
-		// set the local pointer to the memory we just allocated
-		pTechInfo = *ppTechInfo;
-
-		gDLL->getXMLIFace()->SetToParent(m_pFXml);
-		gDLL->getXMLIFace()->SetToChild(m_pFXml);
-
-		// loop through each tag
-		for (i=0;i<*iNumVals;i++)
-		{
-			SkipToNextVal();	// skip to the next non-comment node
-
-			if (!pTechInfo[i].read(this))
-			{
-				break;
-			}
-			GC.setInfoTypeFromString(pTechInfo[i].getType(), i);	// add type to global info type hash map
-
-			// if we cannot set the current xml node to it's next sibling then we will break out of the for loop
-			// otherwise we will continue looping
-			if (!gDLL->getXMLIFace()->NextSibling(m_pFXml))
-			{
-				break;
-			}
-		}
-	}
-
-	// if we successfully locate the szTagName node
-	if (gDLL->getXMLIFace()->LocateNode(m_pFXml,szTagName))
-	{
-		gDLL->getXMLIFace()->SetToParent(m_pFXml);
-		gDLL->getXMLIFace()->SetToChild(m_pFXml);
-
-		// loop through each tag
-		for (i=0;i<*iNumVals;i++)
-		{
-			if (gDLL->getXMLIFace()->SetToChildByTagName(m_pFXml,"OrPreReqs"))
-			{
-				if (SkipToNextVal())
-				{
-					iNumSibs = gDLL->getXMLIFace()->GetNumChildren(m_pFXml);
-					if(!(0 < GC.getDefineINT("NUM_OR_TECH_PREREQS")))
-					{
-						char	szMessage[1024];
-						sprintf( szMessage, "Allocating zero or less memory in SetGlobalTechInfo \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-						gDLL->MessageBox(szMessage, "XML Error");
-					}
-					InitList(&pTechInfo[i].m_piPrereqOrTechs, GC.getDefineINT("NUM_OR_TECH_PREREQS"), -1);
-
-					if (0 < iNumSibs)
-					{
-						if (GetChildXmlVal(szTextVal))
-						{
-							if(!(iNumSibs <= GC.getDefineINT("NUM_OR_TECH_PREREQS")))
-							{
-								char	szMessage[1024];
-								sprintf( szMessage, "There are more siblings than memory allocated for them in SetGlobalTechInfo \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-								gDLL->MessageBox(szMessage, "XML Error");
-							}
-							for (j=0;j<iNumSibs;j++)
-							{
-								pTechInfo[i].m_piPrereqOrTechs[j] = FindInInfoClass(szTextVal, GC.getTechInfo(), sizeof(GC.getTechInfo((TechTypes) 0)), GC.getNumTechInfos());
-								if (!GetNextXmlVal(szTextVal))
-								{
-									break;
-								}
-							}
-
-							gDLL->getXMLIFace()->SetToParent(m_pFXml);
-						}
-					}
-				}
-
-				gDLL->getXMLIFace()->SetToParent(m_pFXml);
-			}
-
-			if (gDLL->getXMLIFace()->SetToChildByTagName(m_pFXml,"AndPreReqs"))
-			{
-				if (SkipToNextVal())
-				{
-					iNumSibs = gDLL->getXMLIFace()->GetNumChildren(m_pFXml);
-					if(!(0 < GC.getDefineINT("NUM_AND_TECH_PREREQS")))
-					{
-						char	szMessage[1024];
-						sprintf( szMessage, "Allocating zero or less memory in SetGlobalTechInfo \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-						gDLL->MessageBox(szMessage, "XML Error");
-					}
-					InitList(&pTechInfo[i].m_piPrereqAndTechs, GC.getDefineINT("NUM_AND_TECH_PREREQS"), -1);
-
-					if (0 < iNumSibs)
-					{
-						if (GetChildXmlVal(szTextVal))
-						{
-							if(!(iNumSibs <= GC.getDefineINT("NUM_AND_TECH_PREREQS")))
-							{
-								char	szMessage[1024];
-								sprintf( szMessage, "There are more siblings than memory allocated for them in SetGlobalTechInfo \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-								gDLL->MessageBox(szMessage, "XML Error");
-							}
-							for (j=0;j<iNumSibs;j++)
-							{
-								pTechInfo[i].m_piPrereqAndTechs[j] = FindInInfoClass(szTextVal, GC.getTechInfo(), sizeof(GC.getTechInfo((TechTypes) 0)), GC.getNumTechInfos());
-								if (!GetNextXmlVal(szTextVal))
-								{
-									break;
-								}
-							}
-
-							gDLL->getXMLIFace()->SetToParent(m_pFXml);
-						}
-					}
-				}
-
-				gDLL->getXMLIFace()->SetToParent(m_pFXml);
-			}
-
-			// if we cannot set the current xml node to it's next sibling then we will break out of the for loop
-			// otherwise we will continue looping
-			if (!gDLL->getXMLIFace()->NextSibling(m_pFXml))
-			{
-				break;
-			}
-		}
-	}
-
-	// if we didn't find the tag name in the xml then we never set the local pointer to the 
-	// newly allocated memory and there for we will FAssert to let people know this most
-	// interesting fact
-	if(!pTechInfo)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "Error finding tag node in SetGlobalTechInfo function \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Error");
-	}
-}
 
 //------------------------------------------------------------------------------------------------------
 //
@@ -3046,7 +1244,7 @@ void CvXMLLoadUtility::SetGameText(const char* szTextGroup, const char* szTagNam
 	logMsg("SetGameText %s\n", szTagName);
 	int i=0;		//loop counter - Index into pTextInfo
 
-	if (gDLL->getXMLIFace()->LocateNode(m_pFXml, szTextGroup)) // Get the Text Group 1st 
+	if (gDLL->getXMLIFace()->LocateNode(m_pFXml, szTextGroup)) // Get the Text Group 1st
 	{
 		int iNumVals = gDLL->getXMLIFace()->GetNumChildren(m_pFXml);	// Get the number of Children that the Text Group has
 		gDLL->getXMLIFace()->LocateNode(m_pFXml, szTagName); // Now switch to the TEXT Tag
@@ -3066,7 +1264,7 @@ void CvXMLLoadUtility::SetGameText(const char* szTextGroup, const char* szTagNam
 				sprintf( szMessage, "failed to find sibling \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
 				gDLL->MessageBox(szMessage, "XML Error");
 				break;
-			}		
+			}
 		}
 	}
 }
@@ -3082,56 +1280,283 @@ void CvXMLLoadUtility::SetGameText(const char* szTextGroup, const char* szTagNam
 //
 //------------------------------------------------------------------------------------------------------
 template <class T>
-void CvXMLLoadUtility::SetGlobalClassInfo(T **ppClassInfos, char* szTagName, int* iNumVals, bool bUseEnum)
+void CvXMLLoadUtility::SetGlobalClassInfo(std::vector<T*>& aInfos, const char* szTagName, bool bTwoPass)
 {
 	char szLog[256];
 	sprintf(szLog, "SetGlobalClassInfo (%s)", szTagName);
 	PROFILE(szLog);
 	logMsg(szLog);
 
-	int i=0;					//loop counter
-	T* pClassInfo = NULL;	// local pointer to the building info memory
-
 	// if we successfully locate the tag name in the xml file
-	if (gDLL->getXMLIFace()->LocateNode(m_pFXml,szTagName))
+	if (gDLL->getXMLIFace()->LocateNode(m_pFXml, szTagName))
 	{
-		if (!bUseEnum)
-		{
-			// get the number of times the szTagName tag appears in the xml file
-			*iNumVals = gDLL->getXMLIFace()->NumOfElementsByTagName(m_pFXml,szTagName);
-		}
-
-		// allocate memory for the building info based on the number above
-		*ppClassInfos = new T[*iNumVals];
-		//OutputDebugString(CvString::format("[Jason] %s\t0x%x\n", szTagName, *ppClassInfos));
-		// set the local pointer to the memory we just allocated
-		pClassInfo = *ppClassInfos;
-
 		// loop through each tag
-		for (i=0;i<*iNumVals;i++)
+		do
 		{
 			SkipToNextVal();	// skip to the next non-comment node
 
-			if (!pClassInfo[i].read(this))
+				T* pClassInfo = new T;
+
+				if (NULL == pClassInfo)
+				{
+					FAssert(false);
+					break;
+				}
+
+				if (!pClassInfo->read(this))
+				{
+					FAssert(false);
+					delete pClassInfo;
+					break;
+				}
+
+			int iIndex = -1;
+			if (NULL != pClassInfo->getType())
 			{
-				break;
+				iIndex = GC.getInfoTypeForString(pClassInfo->getType(), true);
 			}
-			GC.setInfoTypeFromString(pClassInfo[i].getType(), i);	// add type to global info type hash map
-			if (!gDLL->getXMLIFace()->NextSibling(m_pFXml))
+
+			if (-1 == iIndex)
 			{
-				break;
+				aInfos.push_back(pClassInfo);
+				if (NULL != pClassInfo->getType())
+				{
+					GC.setInfoTypeFromString(pClassInfo->getType(), (int)aInfos.size() - 1);	// add type to global info type hash map
+				}
+			}
+			else
+			{
+				SAFE_DELETE(aInfos[iIndex]);
+				aInfos[iIndex] = pClassInfo;
+			}
+
+
+		} while (gDLL->getXMLIFace()->NextSibling(m_pFXml));
+
+		if (bTwoPass)
+		{
+			// if we successfully locate the szTagName node
+			if (gDLL->getXMLIFace()->LocateNode(m_pFXml, szTagName))
+			{
+				gDLL->getXMLIFace()->SetToParent(m_pFXml);
+				gDLL->getXMLIFace()->SetToChild(m_pFXml);
+
+				// loop through each tag
+				for (std::vector<T*>::iterator it = aInfos.begin(); it != aInfos.end(); ++it)
+				{
+					(*it)->readPass2(this);
+
+					if (!gDLL->getXMLIFace()->NextSibling(m_pFXml))
+					{
+						break;
+					}
+				}
+			}
+		}
+	}
+}
+
+void CvXMLLoadUtility::SetDiplomacyInfo(std::vector<CvDiplomacyInfo*>& DiploInfos, const char* szTagName)
+{
+	char szLog[256];
+	sprintf(szLog, "SetDiplomacyInfo (%s)", szTagName);
+	PROFILE(szLog);
+	logMsg(szLog);
+
+	// if we successfully locate the tag name in the xml file
+	if (gDLL->getXMLIFace()->LocateNode(m_pFXml, szTagName))
+	{
+		// loop through each tag
+		do
+		{
+			SkipToNextVal();	// skip to the next non-comment node
+
+			CvString szType;
+			GetChildXmlValByName(szType, "Type");
+			int iIndex = GC.getInfoTypeForString(szType, true);
+
+			if (-1 == iIndex)
+			{
+				CvDiplomacyInfo* pClassInfo = new CvDiplomacyInfo;
+
+				if (NULL == pClassInfo)
+				{
+					FAssert(false);
+					break;
+				}
+
+				pClassInfo->read(this);
+				if (NULL != pClassInfo->getType())
+				{
+					GC.setInfoTypeFromString(pClassInfo->getType(), (int)DiploInfos.size());	// add type to global info type hash map
+				}
+				DiploInfos.push_back(pClassInfo);
+			}
+			else
+			{
+				DiploInfos[iIndex]->read(this);
+			}
+
+		} while (gDLL->getXMLIFace()->NextSibling(m_pFXml));
+	}
+}
+
+template <class T>
+void CvXMLLoadUtility::LoadGlobalClassInfo(std::vector<T*>& aInfos, const char* szFileRoot, const char* szFileDirectory, const char* szXmlPath, bool bTwoPass, CvCacheObject* (CvDLLUtilityIFaceBase::*pArgFunction) (const TCHAR*))
+{
+	bool bLoaded = false;
+	bool bWriteCache = true;
+	CvCacheObject* pCache = NULL;
+	GC.addToInfosVectors(&aInfos);
+
+	if (NULL != pArgFunction)
+	{
+		pCache = (gDLL->*pArgFunction)(CvString::format("%s.dat", szFileRoot));	// cache file name
+
+		if (gDLL->cacheRead(pCache, CvString::format("xml\\\\%s\\\\%s.xml", szFileDirectory, szFileRoot)))
+		{
+			logMsg("Read %s from cache", szFileDirectory);
+			bLoaded = true;
+			bWriteCache = false;
+		}
+	}
+
+	if (!bLoaded)
+	{
+		bLoaded = LoadCivXml(m_pFXml, CvString::format("xml\\%s/%s.xml", szFileDirectory, szFileRoot));
+
+		if (!bLoaded)
+		{
+			char szMessage[1024];
+			sprintf(szMessage, "LoadXML call failed for %s.", CvString::format("%s/%s.xml", szFileDirectory, szFileRoot).GetCString());
+			gDLL->MessageBox(szMessage, "XML Load Error");
+		}
+		else if (Validate())
+		{
+			SetGlobalClassInfo(aInfos, szXmlPath, bTwoPass);
+
+			if (gDLL->isModularXMLLoading())
+			{
+				std::vector<CvString> aszFiles;
+				gDLL->enumerateFiles(aszFiles, CvString::format("modules\\*_%s.xml", szFileRoot));  // search for the modular files
+
+				for (std::vector<CvString>::iterator it = aszFiles.begin(); it != aszFiles.end(); ++it)
+				{
+					bLoaded = LoadCivXml(m_pFXml, *it);
+
+					if (!bLoaded)
+					{
+						char szMessage[1024];
+						sprintf(szMessage, "LoadXML call failed for %s.", (*it).GetCString());
+						gDLL->MessageBox(szMessage, "XML Load Error");
+					}
+					else if (Validate())
+					{
+						SetGlobalClassInfo(aInfos, szXmlPath, bTwoPass);
+					}
+				}
+			}
+
+			if (NULL != pArgFunction && bWriteCache)
+			{
+				// write info to cache
+				bool bOk = gDLL->cacheWrite(pCache);
+				if (!bOk)
+				{
+					char szMessage[1024];
+					sprintf(szMessage, "Failed writing to %s cache. \n Current XML file is: %s", szFileDirectory, GC.getCurrentXMLFile().GetCString());
+					gDLL->MessageBox(szMessage, "XML Caching Error");
+				}
+				if (bOk)
+				{
+					logMsg("Wrote %s to cache", szFileDirectory);
+				}
 			}
 		}
 	}
 
-	// if we didn't find the tag name in the xml then we never set the pszString to the 
-	// newly allocated memory and there for we will FAssert to let people know this most
-	// interesting fact
-	if(!pClassInfo)
+	if (NULL != pArgFunction)
 	{
-		char	szMessage[1024];
-		sprintf( szMessage, "Error locating tag node in SetGlobalClassInfo function \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Error");
+		gDLL->destroyCache(pCache);
+	}
+}
+
+
+void CvXMLLoadUtility::LoadDiplomacyInfo(std::vector<CvDiplomacyInfo*>& DiploInfos, const char* szFileRoot, const char* szFileDirectory, const char* szXmlPath, CvCacheObject* (CvDLLUtilityIFaceBase::*pArgFunction) (const TCHAR*))
+{
+	bool bLoaded = false;
+	bool bWriteCache = true;
+	CvCacheObject* pCache = NULL;
+
+	if (NULL != pArgFunction)
+	{
+		pCache = (gDLL->*pArgFunction)(CvString::format("%s.dat", szFileRoot));	// cache file name
+
+		if (gDLL->cacheRead(pCache, CvString::format("xml\\\\%s\\\\%s.xml", szFileDirectory, szFileRoot)))
+		{
+			logMsg("Read %s from cache", szFileDirectory);
+			bLoaded = true;
+			bWriteCache = false;
+		}
+	}
+
+	if (!bLoaded)
+	{
+		bLoaded = LoadCivXml(m_pFXml, CvString::format("xml\\%s/%s.xml", szFileDirectory, szFileRoot));
+
+		if (!bLoaded)
+		{
+			char szMessage[1024];
+			sprintf(szMessage, "LoadXML call failed for %s.", CvString::format("%s/%s.xml", szFileDirectory, szFileRoot).GetCString());
+			gDLL->MessageBox(szMessage, "XML Load Error");
+		}
+		else if (Validate())
+		{
+			SetDiplomacyInfo(DiploInfos, szXmlPath);
+
+			if (gDLL->isModularXMLLoading())
+			{
+				std::vector<CvString> aszFiles;
+				gDLL->enumerateFiles(aszFiles, CvString::format("modules\\*_%s.xml", szFileRoot));  // search for the modular files
+
+				for (std::vector<CvString>::iterator it = aszFiles.begin(); it != aszFiles.end(); ++it)
+				{
+					bLoaded = LoadCivXml(m_pFXml, *it);
+
+					if (!bLoaded)
+					{
+						char szMessage[1024];
+						sprintf(szMessage, "LoadXML call failed for %s.", (*it).GetCString());
+						gDLL->MessageBox(szMessage, "XML Load Error");
+					}
+					else if (Validate())
+					{
+						SetDiplomacyInfo(DiploInfos, szXmlPath);
+					}
+				}
+			}
+
+			if (NULL != pArgFunction && bWriteCache)
+			{
+				// write info to cache
+				bool bOk = gDLL->cacheWrite(pCache);
+				if (!bOk)
+				{
+					char szMessage[1024];
+					sprintf(szMessage, "Failed writing to %s cache. \n Current XML file is: %s", szFileDirectory, GC.getCurrentXMLFile().GetCString());
+					gDLL->MessageBox(szMessage, "XML Caching Error");
+				}
+				if (bOk)
+				{
+					logMsg("Wrote %s to cache", szFileDirectory);
+				}
+			}
+		}
+	}
+
+	if (NULL != pArgFunction)
+	{
+		gDLL->destroyCache(pCache);
 	}
 }
 
@@ -3213,7 +1638,7 @@ return (hotkey1->getOrderPriority() < hotkey2->getOrderPriority());
 //! \brief      order a hotkey info derived class
 //! \param      ppHotkeyInfos is a hotkey info derived class
 //!							iLength is the length of the hotkey info derived class array
-//! \retval     
+//! \retval
 //------------------------------------------------------------------------------------------------
 /*
 template <class T>
@@ -3355,7 +1780,7 @@ void CvXMLLoadUtility::SetFeatureStruct(int** ppiFeatureTech, int** ppiFeatureTi
 				for (i=0;i<iNumSibs;i++)
 				{
 					GetChildXmlValByName(szTextVal, "FeatureType");
-					iFeatureIndex = FindInInfoClass(szTextVal, GC.getFeatureInfo(), sizeof(GC.getFeatureInfo((FeatureTypes) 0)), GC.getNumFeatureInfos());
+					iFeatureIndex = FindInInfoClass(szTextVal);
 					if(!(iFeatureIndex != -1))
 					{
 						char	szMessage[1024];
@@ -3363,7 +1788,7 @@ void CvXMLLoadUtility::SetFeatureStruct(int** ppiFeatureTech, int** ppiFeatureTi
 						gDLL->MessageBox(szMessage, "XML Error");
 					}
 					GetChildXmlValByName(szTextVal, "PrereqTech");
-					paiFeatureTech[iFeatureIndex] = FindInInfoClass(szTextVal, GC.getTechInfo(), sizeof(GC.getTechInfo((TechTypes) 0)), GC.getNumTechInfos());
+					paiFeatureTech[iFeatureIndex] = FindInInfoClass(szTextVal);
 					GetChildXmlValByName(&paiFeatureTime[iFeatureIndex], "iTime");
 					GetChildXmlValByName(&paiFeatureProduction[iFeatureIndex], "iProduction");
 					GetChildXmlValByName(&pabFeatureRemove[iFeatureIndex], "bRemove");
@@ -3423,14 +1848,14 @@ void CvXMLLoadUtility::SetImprovementBonuses(CvImprovementBonusInfo** ppImprovem
 				// skip to the next non-comment node
 				if (SkipToNextVal())
 				{
-					// call the function that sets the FXml pointer to the first non-comment child of 
+					// call the function that sets the FXml pointer to the first non-comment child of
 					// the current tag and gets the value of that new node
 					if (GetChildXmlVal(szNodeVal))
 					{
 						int iBonusIndex;	// index of the match in the bonus types list
 						// call the find in list function to return either -1 if no value is found
 						// or the index in the list the match is found at
-						iBonusIndex = FindInInfoClass(szNodeVal, GC.getBonusInfo(), sizeof(GC.getBonusInfo((BonusTypes) 0)), GC.getNumBonusInfos());
+						iBonusIndex = FindInInfoClass(szNodeVal);
 						// if we found a match we will get the next sibling's boolean value at that match's index
 						if (iBonusIndex >= 0)
 						{
@@ -3494,7 +1919,7 @@ bool CvXMLLoadUtility::SetAndLoadVar(int** ppiVar, int iDefault)
 		// get the total number of children the current xml node has
 		iNumSibs = gDLL->getXMLIFace()->GetNumChildren(m_pFXml);
 
-		// allocate memory 
+		// allocate memory
 		InitList(ppiVar, iNumSibs, iDefault);
 
 		// set the a local pointer to the newly allocated memory
@@ -3526,15 +1951,13 @@ bool CvXMLLoadUtility::SetAndLoadVar(int** ppiVar, int iDefault)
 
 //------------------------------------------------------------------------------------------------------
 //
-//  FUNCTION:   SetVariableListTagPair(	int **ppiList, const TCHAR* szRootTagName, 
-//										CvInfoBase* pCvInfoBase, 
+//  FUNCTION:   SetVariableListTagPair(	int **ppiList, const TCHAR* szRootTagName,
 //										int iInfoBaseSize, int iInfoBaseLength, int iDefaultListVal)
 //
 //  PURPOSE :   allocate and initialize a list from a tag pair in the xml
 //
 //------------------------------------------------------------------------------------------------------
 void CvXMLLoadUtility::SetVariableListTagPair(int **ppiList, const TCHAR* szRootTagName,
-											  CvInfoBase* pCvInfoBase,
 											  int iInfoBaseSize, int iInfoBaseLength, int iDefaultListVal)
 {
 	int i;
@@ -3543,7 +1966,7 @@ void CvXMLLoadUtility::SetVariableListTagPair(int **ppiList, const TCHAR* szRoot
 	TCHAR szTextVal[256];
 	int* piList;
 
-	if(!(0 < iInfoBaseLength))
+	if (0 > iInfoBaseLength)
 	{
 		char	szMessage[1024];
 		sprintf( szMessage, "Allocating zero or less memory in CvXMLLoadUtility::SetVariableListTagPair \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
@@ -3570,7 +1993,7 @@ void CvXMLLoadUtility::SetVariableListTagPair(int **ppiList, const TCHAR* szRoot
 					{
 						if (GetChildXmlVal(szTextVal))
 						{
-							iIndexVal = FindInInfoClass(szTextVal, pCvInfoBase, iInfoBaseSize, iInfoBaseLength);
+							iIndexVal = FindInInfoClass(szTextVal);
 							GetNextXmlVal(&piList[iIndexVal]);
 
 							gDLL->getXMLIFace()->SetToParent(m_pFXml);
@@ -3593,15 +2016,13 @@ void CvXMLLoadUtility::SetVariableListTagPair(int **ppiList, const TCHAR* szRoot
 
 //------------------------------------------------------------------------------------------------------
 //
-//  FUNCTION:   SetVariableListTagPair(	bool **ppbList, const TCHAR* szRootTagName, 
-//										CvInfoBase* pCvInfoBase, 
+//  FUNCTION:   SetVariableListTagPair(	bool **ppbList, const TCHAR* szRootTagName,
 //										int iInfoBaseSize, int iInfoBaseLength, bool bDefaultListVal)
 //
 //  PURPOSE :   allocate and initialize a list from a tag pair in the xml
 //
 //------------------------------------------------------------------------------------------------------
 void CvXMLLoadUtility::SetVariableListTagPair(bool **ppbList, const TCHAR* szRootTagName,
-											  CvInfoBase* pCvInfoBase,
 											  int iInfoBaseSize, int iInfoBaseLength, bool bDefaultListVal)
 {
 	int i;
@@ -3637,7 +2058,7 @@ void CvXMLLoadUtility::SetVariableListTagPair(bool **ppbList, const TCHAR* szRoo
 					{
 						if (GetChildXmlVal(szTextVal))
 						{
-							iIndexVal = FindInInfoClass(szTextVal, pCvInfoBase, iInfoBaseSize, iInfoBaseLength);
+							iIndexVal = FindInInfoClass(szTextVal);
 							GetNextXmlVal(&pbList[iIndexVal]);
 
 							gDLL->getXMLIFace()->SetToParent(m_pFXml);
@@ -3660,15 +2081,13 @@ void CvXMLLoadUtility::SetVariableListTagPair(bool **ppbList, const TCHAR* szRoo
 
 //------------------------------------------------------------------------------------------------------
 //
-//  FUNCTION:   SetVariableListTagPair(	float **ppfList, const TCHAR* szRootTagName, 
-//										CvInfoBase* pCvInfoBase, 
+//  FUNCTION:   SetVariableListTagPair(	float **ppfList, const TCHAR* szRootTagName,
 //										int iInfoBaseSize, int iInfoBaseLength, float fDefaultListVal)
 //
 //  PURPOSE :   allocate and initialize a list from a tag pair in the xml
 //
 //------------------------------------------------------------------------------------------------------
 void CvXMLLoadUtility::SetVariableListTagPair(float **ppfList, const TCHAR* szRootTagName,
-											  CvInfoBase* pCvInfoBase,
 											  int iInfoBaseSize, int iInfoBaseLength, float fDefaultListVal)
 {
 	int i;
@@ -3704,7 +2123,7 @@ void CvXMLLoadUtility::SetVariableListTagPair(float **ppfList, const TCHAR* szRo
 					{
 						if (GetChildXmlVal(szTextVal))
 						{
-							iIndexVal = FindInInfoClass(szTextVal, pCvInfoBase, iInfoBaseSize, iInfoBaseLength);
+							iIndexVal = FindInInfoClass(szTextVal);
 							GetNextXmlVal(&pfList[iIndexVal]);
 
 							gDLL->getXMLIFace()->SetToParent(m_pFXml);
@@ -3727,15 +2146,13 @@ void CvXMLLoadUtility::SetVariableListTagPair(float **ppfList, const TCHAR* szRo
 
 //------------------------------------------------------------------------------------------------------
 //
-//  FUNCTION:   SetVariableListTagPair(	CvString **ppfList, const TCHAR* szRootTagName, 
-//										CvInfoBase* pCvInfoBase, 
+//  FUNCTION:   SetVariableListTagPair(	CvString **ppfList, const TCHAR* szRootTagName,
 //										int iInfoBaseSize, int iInfoBaseLength, CvString szDefaultListVal)
 //
 //  PURPOSE :   allocate and initialize a list from a tag pair in the xml
 //
 //------------------------------------------------------------------------------------------------------
 void CvXMLLoadUtility::SetVariableListTagPair(CvString **ppszList, const TCHAR* szRootTagName,
-											  CvInfoBase* pCvInfoBase,
 											  int iInfoBaseSize, int iInfoBaseLength, CvString szDefaultListVal)
 {
 	int i;
@@ -3771,7 +2188,7 @@ void CvXMLLoadUtility::SetVariableListTagPair(CvString **ppszList, const TCHAR* 
 					{
 						if (GetChildXmlVal(szTextVal))
 						{
-							iIndexVal = FindInInfoClass(szTextVal, pCvInfoBase, iInfoBaseSize, iInfoBaseLength);
+							iIndexVal = FindInInfoClass(szTextVal);
 							GetNextXmlVal(pszList[iIndexVal]);
 
 							gDLL->getXMLIFace()->SetToParent(m_pFXml);
@@ -3794,7 +2211,7 @@ void CvXMLLoadUtility::SetVariableListTagPair(CvString **ppszList, const TCHAR* 
 
 //------------------------------------------------------------------------------------------------------
 //
-//  FUNCTION:   SetVariableListTagPair(int **ppiList, const TCHAR* szRootTagName, 
+//  FUNCTION:   SetVariableListTagPair(int **ppiList, const TCHAR* szRootTagName,
 //										CvString* m_paszTagList, int iTagListLength, int iDefaultListVal)
 //
 //  PURPOSE :   allocate and initialize a list from a tag pair in the xml
@@ -3859,7 +2276,7 @@ void CvXMLLoadUtility::SetVariableListTagPair(int **ppiList, const TCHAR* szRoot
 
 //------------------------------------------------------------------------------------------------------
 //
-//  FUNCTION:   SetVariableListTagPair(int **ppiList, const TCHAR* szRootTagName, 
+//  FUNCTION:   SetVariableListTagPair(int **ppiList, const TCHAR* szRootTagName,
 //										CvString* m_paszTagList, int iTagListLength, int iDefaultListVal)
 //
 //  PURPOSE :   allocate and initialize a list from a tag pair in the xml for audio scripts
@@ -3930,13 +2347,12 @@ void CvXMLLoadUtility::SetVariableListTagPairForAudioScripts(int **ppiList, cons
 //------------------------------------------------------------------------------------------------------
 //
 //  FUNCTION:   SetVariableListTagPairForAudioScripts(int **ppiList, const TCHAR* szRootTagName,
-//										CvInfoBase* pCvInfoBase, int iInfoBaseSize, int iInfoBaseLength, int iDefaultListVal)
+//										int iInfoBaseLength, int iDefaultListVal)
 //
 //  PURPOSE :   allocate and initialize a list from a tag pair in the xml for audio scripts
 //
 //------------------------------------------------------------------------------------------------------
-void CvXMLLoadUtility::SetVariableListTagPairForAudioScripts(int **ppiList, const TCHAR* szRootTagName,
-															 CvInfoBase* pCvInfoBase, int iInfoBaseSize, int iInfoBaseLength, int iDefaultListVal)
+void CvXMLLoadUtility::SetVariableListTagPairForAudioScripts(int **ppiList, const TCHAR* szRootTagName, int iInfoBaseLength, int iDefaultListVal)
 {
 	int i;
 	int iIndexVal;
@@ -3972,7 +2388,7 @@ void CvXMLLoadUtility::SetVariableListTagPairForAudioScripts(int **ppiList, cons
 					{
 						if (GetChildXmlVal(szTextVal))
 						{
-							iIndexVal = FindInInfoClass(szTextVal, pCvInfoBase, iInfoBaseSize, iInfoBaseLength);
+							iIndexVal = FindInInfoClass(szTextVal);
 							GetNextXmlVal(szTemp);
 							if ( szTemp.GetLength() > 0 )
 								piList[iIndexVal] = gDLL->getAudioTagIndex(szTemp);
@@ -3999,7 +2415,7 @@ void CvXMLLoadUtility::SetVariableListTagPairForAudioScripts(int **ppiList, cons
 
 //------------------------------------------------------------------------------------------------------
 //
-//  FUNCTION:   SetVariableListTagPair(bool **ppbList, const TCHAR* szRootTagName, 
+//  FUNCTION:   SetVariableListTagPair(bool **ppbList, const TCHAR* szRootTagName,
 //										CvString* m_paszTagList, int iTagListLength, int iDefaultListVal)
 //
 //  PURPOSE :   allocate and initialize a list from a tag pair in the xml
@@ -4041,7 +2457,7 @@ void CvXMLLoadUtility::SetVariableListTagPair(bool **ppbList, const TCHAR* szRoo
 					{
 						if (GetChildXmlVal(szTextVal))
 						{
-							iIndexVal =	GC.getTypesEnum(szTextVal);	
+							iIndexVal =	GC.getTypesEnum(szTextVal);
 							GetNextXmlVal(&pbList[iIndexVal]);
 
 							gDLL->getXMLIFace()->SetToParent(m_pFXml);
@@ -4106,7 +2522,7 @@ void CvXMLLoadUtility::SetVariableListTagPair(CvString **ppszList, const TCHAR* 
 					{
 						if (GetChildXmlVal(szTextVal))
 						{
-							iIndexVal =	GC.getTypesEnum(szTextVal);	
+							iIndexVal =	GC.getTypesEnum(szTextVal);
 							GetNextXmlVal(pszList[iIndexVal]);
 
 							gDLL->getXMLIFace()->SetToParent(m_pFXml);
@@ -4132,20 +2548,11 @@ DllExport bool CvXMLLoadUtility::LoadPlayerOptions()
 	if (!CreateFXml())
 		return false;
 
-	bool bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4PlayerOptionInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4PlayerOptionInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Error");
-	}
-	if (bLoaded && Validate())
-	{
-		int iEnumVal = NUM_PLAYEROPTION_TYPES;
-		SetGlobalClassInfo(&GC.getPlayerOptionInfo(), "Civ4PlayerOptionInfos/PlayerOptionInfos/PlayerOptionInfo", &iEnumVal, true);
-	}
+	LoadGlobalClassInfo(GC.getPlayerOptionInfo(), "CIV4PlayerOptionInfos", "GameInfo", "Civ4PlayerOptionInfos/PlayerOptionInfos/PlayerOptionInfo", false);
+	FAssert(GC.getNumPlayerOptionInfos() == NUM_PLAYEROPTION_TYPES);
+
 	DestroyFXml();
-	return bLoaded;
+	return true;
 }
 
 DllExport bool CvXMLLoadUtility::LoadGraphicOptions()
@@ -4153,18 +2560,11 @@ DllExport bool CvXMLLoadUtility::LoadGraphicOptions()
 	if (!CreateFXml())
 		return false;
 
-	bool bLoaded = LoadCivXml(m_pFXml, "GameInfo/CIV4GraphicOptionInfos.xml");
-	if (!bLoaded)
-	{
-		char	szMessage[1024];
-		sprintf( szMessage, "LoadXML call failed for GameInfo/CIV4GraphicOptionInfos.xml. \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
-		gDLL->MessageBox(szMessage, "XML Error");
-	}
-	if (bLoaded && Validate())
-	{
-		int iEnumVal = NUM_GRAPHICOPTION_TYPES;
-		SetGlobalClassInfo(&GC.getGraphicOptionInfo(), "Civ4GraphicOptionInfos/GraphicOptionInfos/GraphicOptionInfo", &iEnumVal, true);
-	}
+	LoadGlobalClassInfo(GC.getGraphicOptionInfo(), "CIV4GraphicOptionInfos", "GameInfo", "Civ4GraphicOptionInfos/GraphicOptionInfos/GraphicOptionInfo", false);
+	FAssert(GC.getNumGraphicOptions() == NUM_GRAPHICOPTION_TYPES);
+
 	DestroyFXml();
-	return bLoaded;
+	return true;
 }
+
+

@@ -25,7 +25,6 @@
 #include "FAStarNode.h"
 #include "CvInitCore.h"
 #include "CvInfos.h"
-#include "CvExtraSaveData.h"
 #include "FProfiler.h"
 
 #include "CvDLLEngineIFaceBase.h"
@@ -33,29 +32,6 @@
 #include "CvDLLFAStarIFaceBase.h"
 #include "CvDLLFAStarIFaceBase.h"
 #include "CvDLLPythonIFaceBase.h"
-
-// our own version number on our extra data
-// if we want to reorder what we save, change this number
-// adding to the list should be fine
-#define MAPEXTRADATA_CURRENTVERSION		1
-enum MapExtraDataIndicies
-{
-	MAPEXTRADATA_VERSION = 0,
-	MAPEXTRADATA_MAPVISIONTYPE,
-};
-
-enum MapVisionTypes
-{
-	MAPVISION_STANDARD = 1,
-	MAPVISION_FASTER_VISION = 2,
-};
-
-#define MAPEXTRADATA_MAPVISIONTYPE_CURRENT		MAPVISION_STANDARD
-
-#ifdef FASTER_VISIBILITY_NON_SAVE_COMPATABLE
-#undef MAPEXTRADATA_MAPVISIONTYPE_CURRENT
-#define MAPEXTRADATA_MAPVISIONTYPE_CURRENT		MAPVISION_FASTER_VISION
-#endif
 
 // Public Functions...
 
@@ -67,22 +43,14 @@ CvMap::CvMap()
 	m_paiNumBonusOnLand = NULL;
 
 	m_pMapPlots = NULL;
-	
-	//m_extraSaveData = new CvExtraSaveData;
 
-	constructCache();
-	
-	m_bConstructorCall = true;	// hack, because reset does not have a constructer call parameter, and we cannot add it
 	reset(&defaultMapData);
-	m_bConstructorCall = false;	// hack
 }
 
 
 CvMap::~CvMap()
 {
 	uninit();
-
-	destructCache();
 }
 
 // FUNCTION: init()
@@ -130,15 +98,11 @@ void CvMap::init(CvMapInitData* pInitInfo/*=NULL*/)
 	}
 	calculateAreas();
 	gDLL->logMemState("CvMap after init plots");
-
-	initCache();
 }
 
 
 void CvMap::uninit()
 {
-	uninitCache();
-
 	SAFE_DELETE_ARRAY(m_paiNumBonus);
 	SAFE_DELETE_ARRAY(m_paiNumBonusOnLand);
 
@@ -176,7 +140,7 @@ void CvMap::reset(CvMapInitData* pInitInfo)
 		gDLL->getPythonIFace()->pythonGetGridSize(GC.getInitCore().getWorldSize(), &m_iGridWidth, &m_iGridHeight);
 
 		// convert to plot dimensions
-		if (GC.getLandscapeInfo())
+		if (GC.getNumLandscapeInfos() > 0)
 		{
 			m_iGridWidth *= GC.getLandscapeInfo(GC.getActiveLandscapeID()).getPlotsPerCellX();
 			m_iGridHeight *= GC.getLandscapeInfo(GC.getActiveLandscapeID()).getPlotsPerCellY();
@@ -230,8 +194,6 @@ void CvMap::reset(CvMapInitData* pInitInfo)
 	}
 
 	m_areas.removeAll();
-
-	resetCache(m_bConstructorCall);
 }
 
 
@@ -248,8 +210,6 @@ void CvMap::setup()
 	gDLL->getFAStarIFace()->Initialize(&GC.getBorderFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), NULL, NULL, NULL, borderValid, NULL, NULL, NULL);
 	gDLL->getFAStarIFace()->Initialize(&GC.getAreaFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), NULL, NULL, NULL, areaValid, NULL, joinArea, NULL);
 	gDLL->getFAStarIFace()->Initialize(&GC.getPlotGroupFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), NULL, NULL, NULL, plotGroupValid, NULL, countPlotGroup, NULL);
-	
-	resetCache(false);
 }
 
 
@@ -324,11 +284,6 @@ void CvMap::doTurn()
 	PROFILE("CvMap::doTurn()")
 
 	int iI;
-
-	// the save data is no longer valid, we are done reading or writing
-	getExtraSaveDataClass().invalidate();
-
-	doUpdateCacheOnTurn();
 
 	for (iI = 0; iI < numPlotsINLINE(); iI++)
 	{
@@ -418,14 +373,7 @@ void CvMap::updateSight(bool bIncrement)
 
 	for (iI = 0; iI < numPlotsINLINE(); iI++)
 	{
-		if (bIncrement)
-		{
-			plotByIndexINLINE(iI)->updateSight(true);
-		}
-		else
-		{
-			plotByIndexINLINE(iI)->clearAllVisibility();
-		}
+		plotByIndexINLINE(iI)->updateSight(bIncrement);
 	}
 }
 
@@ -496,12 +444,14 @@ void CvMap::updateMinOriginalStartDist(CvArea* pArea)
 
 					if (pLoopPlot->area() == pArea)
 					{
-						iDist = GC.getMapINLINE().calculatePathDistance(pStartingPlot, pLoopPlot);
+						
+						//iDist = GC.getMapINLINE().calculatePathDistance(pStartingPlot, pLoopPlot);
+						iDist = stepDistance(pStartingPlot->getX_INLINE(), pStartingPlot->getY_INLINE(), pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE());
 
 						if (iDist != -1)
 						{
-						    int iCrowDistance = plotDistance(pStartingPlot->getX_INLINE(), pStartingPlot->getY_INLINE(), pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE());
-						    iDist = min(iDist,  iCrowDistance * 2);
+						    //int iCrowDistance = plotDistance(pStartingPlot->getX_INLINE(), pStartingPlot->getY_INLINE(), pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE());
+						    //iDist = min(iDist,  iCrowDistance * 2);
 							if ((pLoopPlot->getMinOriginalStartDist() == -1) || (iDist < pLoopPlot->getMinOriginalStartDist()))
 							{
 								pLoopPlot->setMinOriginalStartDist(iDist);
@@ -547,9 +497,6 @@ void CvMap::combinePlotGroups(PlayerTypes ePlayer, CvPlotGroup* pPlotGroup1, CvP
 	FAssertMsg(pPlotGroup1 != NULL, "pPlotGroup is not assigned to a valid value");
 	FAssertMsg(pPlotGroup2 != NULL, "pPlotGroup is not assigned to a valid value");
 
-	FAssertMsg(pPlotGroup1 != NULL, "pPlotGroup is not assigned to a valid value");
-	FAssertMsg(pPlotGroup2 != NULL, "pPlotGroup is not assigned to a valid value");
-
 	if (pPlotGroup1 == pPlotGroup2)
 	{
 		return;
@@ -567,13 +514,10 @@ void CvMap::combinePlotGroups(PlayerTypes ePlayer, CvPlotGroup* pPlotGroup1, CvP
 	}
 
 	pPlotNode = pOldPlotGroup->headPlotsNode();
-
 	while (pPlotNode != NULL)
 	{
 		pPlot = plotSorenINLINE(pPlotNode->m_data.iX, pPlotNode->m_data.iY);
-
 		pNewPlotGroup->addPlot(pPlot);
-
 		pPlotNode = pOldPlotGroup->deletePlotsNode(pPlotNode);
 	}
 }
@@ -743,7 +687,7 @@ CvCity* CvMap::findCity(int iX, int iY, PlayerTypes eOwner, TeamTypes eTeam, boo
 					{
 						if (!bSameArea || (pLoopCity->area() == plotINLINE(iX, iY)->area()) || (bCoastalOnly && (pLoopCity->waterArea() == plotINLINE(iX, iY)->area())))
 						{
-							if (!bCoastalOnly || pLoopCity->isCoastal(GC.getDefineINT("MIN_WATER_SIZE_FOR_OCEAN")))
+							if (!bCoastalOnly || pLoopCity->isCoastal(GC.getMIN_WATER_SIZE_FOR_OCEAN()))
 							{
 								if ((eTeamAtWarWith == NO_TEAM) || atWar(GET_PLAYER((PlayerTypes)iI).getTeam(), eTeamAtWarWith))
 								{
@@ -944,7 +888,7 @@ float CvMap::plotXToPointX(int iX)
 {
 	float fWidth, fHeight;
 	gDLL->getEngineIFace()->GetLandscapeGameDimensions(fWidth, fHeight);
-	return ((iX * fWidth) / ((float)getGridWidthINLINE())) - (fWidth / 2.0f) + (GC.getDefineFLOAT( "PLOT_SIZE" ) / 2.0f);
+	return ((iX * fWidth) / ((float)getGridWidthINLINE())) - (fWidth / 2.0f) + (GC.getPLOT_SIZE() / 2.0f);
 }
 
 
@@ -960,19 +904,19 @@ float CvMap::plotYToPointY(int iY)
 {
 	float fWidth, fHeight;
 	gDLL->getEngineIFace()->GetLandscapeGameDimensions(fWidth, fHeight);
-	return ((iY * fHeight) / ((float)getGridHeightINLINE())) - (fHeight / 2.0f) + (GC.getDefineFLOAT( "PLOT_SIZE" ) / 2.0f);
+	return ((iY * fHeight) / ((float)getGridHeightINLINE())) - (fHeight / 2.0f) + (GC.getPLOT_SIZE() / 2.0f);
 }
 
 
 float CvMap::getWidthCoords()																	
 {
-	return (GC.getDefineFLOAT( "PLOT_SIZE" ) * ((float)getGridWidthINLINE()));
+	return (GC.getPLOT_SIZE() * ((float)getGridWidthINLINE()));
 }
 
 
 float CvMap::getHeightCoords()																	
 {
-	return (GC.getDefineFLOAT( "PLOT_SIZE" ) * ((float)getGridHeightINLINE()));
+	return (GC.getPLOT_SIZE() * ((float)getGridHeightINLINE()));
 }
 
 
@@ -1294,47 +1238,11 @@ void CvMap::read(FDataStreamBase* pStream)
 			m_pMapPlots[iI].read(pStream);
 		}
 	}
-	
-
-	// read in the save info from the found values, and set those values to -1 (cleaning them)
-	CvExtraSaveData& extraSaveData = getExtraSaveDataClass();
-	extraSaveData.setupForRead(*this);
-	extraSaveData.cleanPlotValues(*this);
 
 	// call the read of the free list CvArea class allocations
 	ReadStreamableFFreeListTrashArray(m_areas, pStream);
 
 	setup();
-
-	// get the map saved data for ourselves
-	int iVersion;
-	int iMapVisionType = -1;
-	if (extraSaveData.getSaveData(EXTRASAVEDATA_MAP, 0, 0, MAPEXTRADATA_VERSION, iVersion))
-	{
-		if (iVersion == MAPEXTRADATA_CURRENTVERSION)
-		{
-			if (extraSaveData.getSaveData(EXTRASAVEDATA_MAP, 0, 0, MAPEXTRADATA_MAPVISIONTYPE, iMapVisionType))
-			{
-				// dont save vision type, we always save as current vision type
-				// m_iMapVisionType = iMapVisionType;
-			}
-		}
-	}
-
-#ifdef FASTER_VISIBILITY_NON_SAVE_COMPATABLE
-	if (iMapVisionType != MAPEXTRADATA_MAPVISIONTYPE_CURRENT)
-#else
-	if (iMapVisionType > MAPEXTRADATA_MAPVISIONTYPE_CURRENT)
-#endif
-	if (false)
-	{
-		//m_bVisibiltyDirty = false;
-
-		// force refresh of all visibility on a load ,incompatable vision type
-		updateSight(false);
-		updateSight(true);
-	}
-
 }
 
 // save object to a stream
@@ -1360,20 +1268,11 @@ void CvMap::write(FDataStreamBase* pStream)
 	pStream->Write(GC.getNumBonusInfos(), m_paiNumBonus);
 	pStream->Write(GC.getNumBonusInfos(), m_paiNumBonusOnLand);
 
-	// push the extra save info to the plot found values
-	CvExtraSaveData& extraSaveData = getExtraSaveDataClass();
-	extraSaveData.setupForWrite(*this);
-	extraSaveData.writeToPlots(*this);
-
 	int iI;	
 	for (iI = 0; iI < numPlotsINLINE(); iI++)
 	{
 		m_pMapPlots[iI].write(pStream);
 	}
-
-	// restore the plot found values
-	extraSaveData.restorePlotValues(*this);
-	extraSaveData.invalidate();
 
 	// call the read of the free list CvArea class allocations
 	WriteStreamableFFreeListTrashArray(m_areas, pStream);
@@ -1430,133 +1329,5 @@ void CvMap::calculateAreas()
 	}
 }
 
-void CvMap::writeExtraSaveData(CvExtraSaveData& extraSaveData)
-{
-	int iVersion = MAPEXTRADATA_CURRENTVERSION;
-	extraSaveData.setSaveData(EXTRASAVEDATA_MAP, 0, 0, MAPEXTRADATA_VERSION, iVersion);
 
-#ifdef FASTER_VISIBILITY_NON_SAVE_COMPATABLE
-	// for now only save for faster version (works fine if you remove the #ifdef though)
-	int iMapVisionType = MAPEXTRADATA_MAPVISIONTYPE_CURRENT;
-	extraSaveData.setSaveData(EXTRASAVEDATA_MAP, 0, 0, MAPEXTRADATA_MAPVISIONTYPE, iMapVisionType);
-#endif
-}
-
-
-// CACHE: cache frequently used values
-///////////////////////////////////////
-
-// public functions here
-int CvMap::getCachedExploreValue(const CvPlot* pPlot, const CvUnit* pUnit)
-{	
-	// if cache valid, get the value, otherwise, clear the whole cache
-	int iTurnSlice = GC.getGameINLINE().getTurnSlice();
-	if (m_iLastExploreTurnSlice == iTurnSlice && m_iLastExplorePlayerID == pUnit->getOwnerINLINE() && m_iLastExploreUnitID == pUnit->getID())
-	{
-		int iPlotNum = plotNumINLINE(pPlot->getX_INLINE(), pPlot->getY_INLINE());
-		return m_paiCachedExploreValues[iPlotNum];
-	}
-	else
-	{
-		// remember for next time
-		m_iLastExploreTurnSlice = iTurnSlice;
-		m_iLastExplorePlayerID = pUnit->getOwnerINLINE();
-		m_iLastExploreUnitID = pUnit->getID();
-
-		// initialize all values to -1
-		for (int iI = 0; iI < m_iCachedExploreValuesSize; iI++)
-		{
-			m_paiCachedExploreValues[iI] = -1;
-		}
-	}
-	
-	return -1;
-}
-
-void CvMap::setCachedExploreValue(const CvPlot* pPlot, const CvUnit* pUnit, int iValue)
-{
-	FAssertMsg(m_iCachedExploreValuesSize == numPlotsINLINE(), "explore value cache size incorrect");
-	
-	// if cache invalid, clear the whole cache first
-	int iTurnSlice = GC.getGameINLINE().getTurnSlice();
-	if (m_iLastExploreTurnSlice != iTurnSlice || m_iLastExplorePlayerID != pUnit->getOwnerINLINE() || m_iLastExploreUnitID != pUnit->getID())
-	{
-		// remember for next time
-		m_iLastExploreTurnSlice = iTurnSlice;
-		m_iLastExplorePlayerID = pUnit->getOwnerINLINE();
-		m_iLastExploreUnitID = pUnit->getID();
-
-		// initialize all values to -1
-		for (int iI = 0; iI < m_iCachedExploreValuesSize; iI++)
-		{
-			m_paiCachedExploreValues[iI] = -1;
-		}
-	}
-	
-	// store the value
-	int iPlotNum = plotNumINLINE(pPlot->getX_INLINE(), pPlot->getY_INLINE());
-	m_paiCachedExploreValues[iPlotNum] = iValue;
-}
-
-
-void CvMap::constructCache()
-{
-	// allocate known constants
-
-	// zero everything out, just to be safe
-	m_iCachedExploreValuesSize = 0;
-	m_paiCachedExploreValues = NULL;
-	
-	// note resetCache(/*bConstructorCall*/ true) will be called by CvMap::CvMap
-}
-
-void CvMap::destructCache()
-{
-	uninitCache(); // note, will be called by CvMap::~CvMap as well
-
-	// deallocate anything allocated in constructor
-}
-
-void CvMap::initCache()
-{
-	// init non-saved data
-
-	// note resetCache(/*bConstructorCall*/ false) will be called by CvMap::init
-}
-
-void CvMap::uninitCache()
-{
-	m_iLastExplorePlayerID = FFreeList::INVALID_INDEX;
-	m_iLastExploreUnitID = FFreeList::INVALID_INDEX;
-	m_iLastExploreTurnSlice = -1;
-
-	m_iCachedExploreValuesSize = 0;
-	SAFE_DELETE_ARRAY(m_paiCachedExploreValues);
-}
-
-void CvMap::resetCache(bool bConstructorCall)
-{
-	int	iI;
-	
-	uninitCache(); // note, will be called by CvMap::reset as well
-	
-	if (!bConstructorCall)
-	{
-		FAssertMsg(m_paiCachedExploreValues==NULL, "about to leak memory, CvGame::resetCache");
-		m_iCachedExploreValuesSize = numPlotsINLINE();
-		m_paiCachedExploreValues = new int[m_iCachedExploreValuesSize];
-		for (iI = 0; iI < m_iCachedExploreValuesSize; iI++)
-		{
-			m_paiCachedExploreValues[iI] = -1;
-		}
-	}
-}
-
-
-void CvMap::doUpdateCacheOnTurn()
-{
-	// not necessary, but cannot hurt
-	m_iLastExplorePlayerID = FFreeList::INVALID_INDEX;
-	m_iLastExploreUnitID = FFreeList::INVALID_INDEX;
-	m_iLastExploreTurnSlice = -1;
-}
+// Private Functions...

@@ -20,6 +20,7 @@ public:
 	int countCoastalLand();
 	int countNumUniqueBonusTypes();
 	int countHasReligion(int /*ReligionTypes*/ eReligion, int /*PlayerTypes*/ eOwner);
+	int countHasCorporation(int /*CorporationTypes*/ eCorporation, int /*PlayerTypes*/ eOwner);
 	int getID();
 	int getNumTiles();
 	bool isLake();

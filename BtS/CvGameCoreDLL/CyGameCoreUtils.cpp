@@ -128,9 +128,9 @@ CyUnit* cyGetUnit(IDInfo unit)
 	return new CyUnit(getUnit(unit));
 }
 
-bool cyIsPromotionValid(int /*PromotionTypes*/ ePromotion, int /*UnitTypes*/ eUnit)
+bool cyIsPromotionValid(int /*PromotionTypes*/ ePromotion, int /*UnitTypes*/ eUnit, bool bLeader)
 {
-	return isPromotionValid((PromotionTypes) ePromotion, (UnitTypes) eUnit);
+	return isPromotionValid((PromotionTypes) ePromotion, (UnitTypes) eUnit, bLeader);
 }
 
 int cyGetPopulationAsset(int iPopulation)
@@ -256,5 +256,10 @@ bool cyIsLimitedProject(int /*ProjectTypes*/ eProject)
 int cyGetCombatOdds(CyUnit* pAttacker, CyUnit* pDefender)
 {
 	return getCombatOdds(pAttacker->getUnit(), pDefender->getUnit());
+}
+
+int cyGetEspionageModifier(int iOurTeam, int iTargetTeam)
+{
+	return getEspionageModifier((TeamTypes)iOurTeam, (TeamTypes)iTargetTeam);
 }
 

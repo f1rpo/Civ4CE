@@ -1,5 +1,5 @@
 //
-// Python wrapper class for global vars and fxns 
+// Python wrapper class for global vars and fxns
 // Author - Mustafa Thamer
 //
 
@@ -17,7 +17,7 @@
 #include "CvTeamAI.h"
 #include "CyArtFileMgr.h"
 
-CyGlobalContext::CyGlobalContext() 
+CyGlobalContext::CyGlobalContext()
 {
 }
 
@@ -90,7 +90,7 @@ CyTeam* CyGlobalContext::getCyTeam(int i)
 {
 	static CyTeam cyTeams[MAX_TEAMS];
 	static bool bInit=false;
-	
+
 	if (!bInit)
 	{
 		int j;
@@ -152,6 +152,11 @@ CvTraitInfo* CyGlobalContext::getTraitInfo(int i) const
 CvUnitInfo* CyGlobalContext::getUnitInfo(int i) const
 {
 	return (i>=0 && i<GC.getNumUnitInfos()) ? &GC.getUnitInfo((UnitTypes) i) : NULL;
+}
+
+CvSpecialUnitInfo* CyGlobalContext::getSpecialUnitInfo(int i) const
+{
+	return (i>=0 && i<GC.getNumSpecialUnitInfos()) ? &GC.getSpecialUnitInfo((SpecialUnitTypes) i) : NULL;
 }
 
 CvYieldInfo* CyGlobalContext::getYieldInfo(int i) const
@@ -242,7 +247,7 @@ CvCommandInfo* CyGlobalContext::getCommandInfo(int i) const
 
 CvControlInfo* CyGlobalContext::getControlInfo(int i) const
 {
-	return (i>=0 && i<NUM_CONTROL_TYPES) ? &GC.getControlInfo()[i] : NULL;
+	return (i>=0 && i<NUM_CONTROL_TYPES) ? &GC.getControlInfo((ControlTypes)i) : NULL;
 }
 
 CvMissionInfo* CyGlobalContext::getMissionInfo(int i) const
@@ -271,6 +276,12 @@ CvSpecialBuildingInfo* CyGlobalContext::getSpecialBuildingInfo(int i) const
 CvReligionInfo* CyGlobalContext::getReligionInfo(int i) const
 {
 	return (i>=0 && i<GC.getNumReligionInfos()) ? &GC.getReligionInfo((ReligionTypes) i) : NULL;
+}
+
+
+CvCorporationInfo* CyGlobalContext::getCorporationInfo(int i) const
+{
+	return (i>=0 && i<GC.getNumCorporationInfos()) ? &GC.getCorporationInfo((CorporationTypes) i) : NULL;
 }
 
 
@@ -409,6 +420,24 @@ CvInfoBase* CyGlobalContext::getHints(int i) const
 }
 
 
+CvMainMenuInfo* CyGlobalContext::getMainMenus(int i) const
+{
+	return ((i >= 0 && i < GC.getNumMainMenus()) ? &GC.getMainMenus(i) : NULL);
+}
+
+
+CvVoteSourceInfo* CyGlobalContext::getVoteSourceInfo(int i) const
+{
+	return ((i >= 0 && i < GC.getNumVoteSourceInfos()) ? &GC.getVoteSourceInfo((VoteSourceTypes)i) : NULL);
+}
+
+
+CvInfoBase* CyGlobalContext::getInvisibleInfo(int i) const
+{
+	return ((i >= 0 && i < GC.getNumInvisibleInfos()) ? &GC.getInvisibleInfo((InvisibleTypes)i) : NULL);
+}
+
+
 CvInfoBase* CyGlobalContext::getAttitudeInfo(int i) const
 {
 	return (i>=0 && i<NUM_ATTITUDE_TYPES) ? &GC.getAttitudeInfo((AttitudeTypes)i) : NULL;
@@ -436,6 +465,12 @@ CvGraphicOptionInfo* CyGlobalContext::getGraphicOptionsInfoByIndex(int i) const
 CvInfoBase* CyGlobalContext::getConceptInfo(int i) const
 {
 	return (i>=0 && i<GC.getNumConceptInfos()) ? &GC.getConceptInfo((ConceptTypes)i) : NULL;
+}
+
+
+CvInfoBase* CyGlobalContext::getNewConceptInfo(int i) const
+{
+	return (i>=0 && i<GC.getNumNewConceptInfos()) ? &GC.getNewConceptInfo((NewConceptTypes)i) : NULL;
 }
 
 
@@ -499,69 +534,93 @@ CvTutorialInfo* CyGlobalContext::getTutorialInfo(int i) const
 }
 
 
+CvEventTriggerInfo* CyGlobalContext::getEventTriggerInfo(int i) const
+{
+	return (i>=0 && i<GC.getNumEventTriggerInfos()) ? &GC.getEventTriggerInfo((EventTriggerTypes)i) : NULL;
+}
+
+
+CvEventInfo* CyGlobalContext::getEventInfo(int i) const
+{
+	return (i>=0 && i<GC.getNumEventInfos()) ? &GC.getEventInfo((EventTypes)i) : NULL;
+}
+
+
+CvEspionageMissionInfo* CyGlobalContext::getEspionageMissionInfo(int i) const
+{
+	return (i>=0 && i<GC.getNumEspionageMissionInfos()) ? &GC.getEspionageMissionInfo((EspionageMissionTypes)i) : NULL;
+}
+
+
+CvUnitArtStyleTypeInfo* CyGlobalContext::getUnitArtStyleTypeInfo(int i) const
+{
+	return (i>=0 && i<GC.getNumUnitArtStyleTypeInfos()) ? &GC.getUnitArtStyleTypeInfo((UnitArtStyleTypes)i) : NULL;
+}
+
+
 CvArtInfoInterface* CyGlobalContext::getInterfaceArtInfo(int i) const
 {
-	return (i>=0 && i<ARTFILEMGR.getNumInterfaceArtInfos()) ? &ARTFILEMGR.getInterfaceArtInfo()[i] : NULL;
+	return (i>=0 && i<ARTFILEMGR.getNumInterfaceArtInfos()) ? &ARTFILEMGR.getInterfaceArtInfo(i) : NULL;
 }
 
 
 CvArtInfoMovie* CyGlobalContext::getMovieArtInfo(int i) const
 {
-	return (i>=0 && i<ARTFILEMGR.getNumMovieArtInfos()) ? &ARTFILEMGR.getMovieArtInfo()[i] : NULL;
+	return (i>=0 && i<ARTFILEMGR.getNumMovieArtInfos()) ? &ARTFILEMGR.getMovieArtInfo(i) : NULL;
 }
 
 
 CvArtInfoMisc* CyGlobalContext::getMiscArtInfo(int i) const
 {
-	return (i>=0 && i<ARTFILEMGR.getNumMiscArtInfos()) ? &ARTFILEMGR.getMiscArtInfo()[i] : NULL;
+	return (i>=0 && i<ARTFILEMGR.getNumMiscArtInfos()) ? &ARTFILEMGR.getMiscArtInfo(i) : NULL;
 }
 
 
 CvArtInfoUnit* CyGlobalContext::getUnitArtInfo(int i) const
 {
-	return (i>=0 && i<ARTFILEMGR.getNumUnitArtInfos()) ? &ARTFILEMGR.getUnitArtInfo()[i] : NULL;
+	return (i>=0 && i<ARTFILEMGR.getNumUnitArtInfos()) ? &ARTFILEMGR.getUnitArtInfo(i) : NULL;
 }
 
 
 CvArtInfoBuilding* CyGlobalContext::getBuildingArtInfo(int i) const
 {
-	return (i>=0 && i<ARTFILEMGR.getNumBuildingArtInfos()) ? &ARTFILEMGR.getBuildingArtInfo()[i] : NULL;
+	return (i>=0 && i<ARTFILEMGR.getNumBuildingArtInfos()) ? &ARTFILEMGR.getBuildingArtInfo(i) : NULL;
 }
 
 
 CvArtInfoCivilization* CyGlobalContext::getCivilizationArtInfo(int i) const
 {
-	return (i>=0 && i<ARTFILEMGR.getNumCivilizationArtInfos()) ? &ARTFILEMGR.getCivilizationArtInfo()[i] : NULL;
+	return (i>=0 && i<ARTFILEMGR.getNumCivilizationArtInfos()) ? &ARTFILEMGR.getCivilizationArtInfo(i) : NULL;
 }
 
 
 CvArtInfoLeaderhead* CyGlobalContext::getLeaderheadArtInfo(int i) const
 {
-	return (i>=0 && i<ARTFILEMGR.getNumLeaderheadArtInfos()) ? &ARTFILEMGR.getLeaderheadArtInfo()[i] : NULL;
+	return (i>=0 && i<ARTFILEMGR.getNumLeaderheadArtInfos()) ? &ARTFILEMGR.getLeaderheadArtInfo(i) : NULL;
 }
 
 
 CvArtInfoBonus* CyGlobalContext::getBonusArtInfo(int i) const
 {
-	return (i>=0 && i<ARTFILEMGR.getNumBonusArtInfos()) ? &ARTFILEMGR.getBonusArtInfo()[i] : NULL;
+	return (i>=0 && i<ARTFILEMGR.getNumBonusArtInfos()) ? &ARTFILEMGR.getBonusArtInfo(i) : NULL;
 }
 
 
 CvArtInfoImprovement* CyGlobalContext::getImprovementArtInfo(int i) const
 {
-	return (i>=0 && i<ARTFILEMGR.getNumImprovementArtInfos()) ? &ARTFILEMGR.getImprovementArtInfo()[i] : NULL;
+	return (i>=0 && i<ARTFILEMGR.getNumImprovementArtInfos()) ? &ARTFILEMGR.getImprovementArtInfo(i) : NULL;
 }
 
 
 CvArtInfoTerrain* CyGlobalContext::getTerrainArtInfo(int i) const
 {
-	return (i>=0 && i<ARTFILEMGR.getNumTerrainArtInfos()) ? &ARTFILEMGR.getTerrainArtInfo()[i] : NULL;
+	return (i>=0 && i<ARTFILEMGR.getNumTerrainArtInfos()) ? &ARTFILEMGR.getTerrainArtInfo(i) : NULL;
 }
 
 
 CvArtInfoFeature* CyGlobalContext::getFeatureArtInfo(int i) const
 {
-	return (i>=0 && i<ARTFILEMGR.getNumFeatureArtInfos()) ? &ARTFILEMGR.getFeatureArtInfo()[i] : NULL;
+	return (i>=0 && i<ARTFILEMGR.getNumFeatureArtInfos()) ? &ARTFILEMGR.getFeatureArtInfo(i) : NULL;
 }
 
 

@@ -27,7 +27,7 @@
 #define PATH_STEP_WEIGHT											(2)
 #define PATH_STRAIGHT_WEIGHT									(1)
 
-
+#define PATH_DAMAGE_WEIGHT										(500)
 CvPlot* plotCity(int iX, int iY, int iIndex)
 {
 	return GC.getMapINLINE().plotINLINE((iX + GC.getCityPlotX()[iIndex]), (iY + GC.getCityPlotY()[iIndex]));
@@ -86,315 +86,44 @@ bool isCardinalDirection(DirectionTypes eDirection)
 
 DirectionTypes estimateDirection(int iDX, int iDY)
 {
-	bool bXSign, bYSign;
-
-	bXSign = (iDX >= 0);
-	bYSign = (iDY >= 0);
-
-	iDX = abs(iDX);
-	iDY = abs(iDY);
-
-	if (iDX > iDY)
+	const int displacementSize = 8;
+	static float sqrt2 = 1 / sqrt(2.0f);
+	//													N			NE			E			SE				S			SW				W			NW
+	static float displacements[displacementSize][2] = {{0, 1}, {sqrt2, sqrt2}, {1, 0}, {sqrt2, -sqrt2}, {0, -1}, {-sqrt2, -sqrt2}, {-1, 0}, {-sqrt2, sqrt2}};
+	float maximum = 0;
+	int maximumIndex = -1;
+	for(int i=0;i<displacementSize;i++)
 	{
-		if ((iDX * 2) > (iDY * 3))
+		float dotProduct = iDX * displacements[i][0] + iDY * displacements[i][1];
+		if(dotProduct > maximum)
 		{
-			if (bXSign)
-			{
-				return DIRECTION_EAST;
-			}
-			else
-			{
-				return DIRECTION_WEST;
-			}
-		}
-	}
-	else
-	{
-		if ((iDY * 2) > (iDX * 3))
-		{
-			if (bYSign)
-			{
-				return DIRECTION_NORTH;
-			}
-			else
-			{
-				return DIRECTION_SOUTH;
-			}
+			maximum = dotProduct;
+			maximumIndex = i;
 		}
 	}
 
-	if (bXSign)
-	{
-		if (bYSign)
-		{
-			return DIRECTION_NORTHEAST;
-		}
-		else
-		{
-			return DIRECTION_SOUTHEAST;
-		}
-	}
-	else
-	{
-		if (bYSign)
-		{
-			return DIRECTION_NORTHWEST;
-		}
-		else
-		{
-			return DIRECTION_SOUTHWEST;
-		}
-	}
+	return (DirectionTypes) maximumIndex;
 }
+
+DirectionTypes estimateDirection(const CvPlot* pFromPlot, const CvPlot* pToPlot)
+{
+	return estimateDirection(dxWrap(pToPlot->getX_INLINE() - pFromPlot->getX_INLINE()), dyWrap(pToPlot->getY_INLINE() - pFromPlot->getY_INLINE()));
+}
+
 
 float directionAngle( DirectionTypes eDirection )
 {
 	switch( eDirection )
 	{
-	case DIRECTION_NORTHEAST:	return (float)(M_PI * 0.25f);
-	case DIRECTION_EAST:			return (float)(M_PI * 0.5f);
-	case DIRECTION_SOUTHEAST:	return (float)(M_PI * 0.75f);
-	case DIRECTION_SOUTH:			return (float)(M_PI);
-	case DIRECTION_SOUTHWEST:	return (float)(M_PI * 1.25f);
-	case DIRECTION_WEST:			return (float)(M_PI * 1.5f);
-	case DIRECTION_NORTHWEST:	return (float)(M_PI * 1.75f);
+	case DIRECTION_NORTHEAST:	return fM_PI * 0.25f;
+	case DIRECTION_EAST:			return fM_PI * 0.5f;
+	case DIRECTION_SOUTHEAST:	return fM_PI * 0.75f;
+	case DIRECTION_SOUTH:			return fM_PI * 1.0f;
+	case DIRECTION_SOUTHWEST:	return fM_PI * 1.25f;
+	case DIRECTION_WEST:			return fM_PI * 1.5f;
+	case DIRECTION_NORTHWEST:	return fM_PI * 1.75f;
 	default:
 	case DIRECTION_NORTH:			return 0.0f;
-	}
-}
-
-// addVisiblePlots adds all plots visible from (iX, iY) at iRange to visiblePlots if they do not already exist in it,
-void addVisiblePlots(CvPlotRegion& visiblePlots, int iX, int iY, int iRange, TeamTypes eTeam)
-{
-	PROFILE_FUNC();
-
-	// iterate over	all	the	plots potentially visible
-	int	iCenterX = iX;
-	int	iCenterY = iY;
-	for	(int iDX = -(iRange	+ 1); iDX <= (iRange + 1); iDX++)
-	{
-		for	(int iDY = -(iRange	+ 1); iDY <= (iRange + 1); iDY++)
-		{
-			PROFILE("addVisiblePlots(CvPlotRegion) 1");
-
-			CvPlot*	pLoopPlot =	plotXY(iCenterX, iCenterY, iDX,	iDY);
-			if (pLoopPlot != NULL)
-			{
-				bool bPlotVisible =	false;
-
-				// if interior,	then it	is visible
-				if (abs(iDX) <=	abs(iRange)	&& abs(iDY)	<= abs(iRange))
-				{
-					bPlotVisible = true;
-				}
-				// if outer	edge, check	if it would	be visible
-				// uses	reverse	of logic found in CvPlot::changeAdjacentSight
-				else
-				{
-					int	iEdgePlotSeeFromLevel =	pLoopPlot->seeFromLevel(eTeam);
-
-					// for every adjacent inner	plot, check	its	adjacent inner plots
-					CvPlot*	pAdjacentPlot;
-					int	iAdjacentPlotIndex = 0;
-					while (!bPlotVisible &&	(pAdjacentPlot = getIndexedInnerPlot(iCenterX, iCenterY, iDX, iDY, iAdjacentPlotIndex++)) != NULL)
-					{
-						int	iAdjacentPlotSeeThroughLevel = pAdjacentPlot->seeThroughLevel();
-
-						CvPlot*	pInnerPlot;
-						int	iInnerPlotIndex	= 0;
-						int	iAdjacentDX	= dxWrap(pAdjacentPlot->getX_INLINE() - iCenterX);
-						int	iAdjacentDY	= dyWrap(pAdjacentPlot->getY_INLINE() - iCenterY);
-						while (!bPlotVisible &&	(pInnerPlot	= getIndexedInnerPlot(iCenterX,	iCenterY, iAdjacentDX, iAdjacentDY,	iInnerPlotIndex++, iDX,	iDY)) != NULL)
-						{
-							int	iInnerSeeFromLevel = pInnerPlot->seeFromLevel(eTeam);
-
-							if ((iInnerSeeFromLevel	> iAdjacentPlotSeeThroughLevel)	||
-								(iInnerSeeFromLevel	== iAdjacentPlotSeeThroughLevel	&& iEdgePlotSeeFromLevel > iInnerSeeFromLevel))
-							{
-								bPlotVisible = true;
-							}
-						}
-					}
-				}
-
-				if (bPlotVisible)
-				{
-					visiblePlots.insert(XYCoords(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE()));
-				}
-			}
-		}
-	}
-}
-
-// addVisiblePlots adds all plots visible from (iX, iY) at iRange to visiblePlots if they do not already exist in it,
-// and adds the (*iObserverCount*visibility) value to the int value for each plot
-void addVisiblePlots(CvPlotDataRegion& visiblePlots, int iX, int iY, int iRange, int iObserverCount, TeamTypes eTeam)
-{
-	PROFILE_FUNC();
-
-	// special case range 0
-	if (iRange == 0)
-	{
-		// increment value, adding plot if it does not exist
-		visiblePlots[XYCoords(iX, iY)] += iObserverCount;
-		return;
-	}
-
-	for	(int iDX = -(iRange	- 1); iDX <= (iRange - 1); iDX++)
-	{
-		for	(int iDY = -(iRange	- 1); iDY <= (iRange - 1); iDY++)
-		{
-			CvPlot*	pLoopPlot =	plotXY(iX, iY, iDX, iDY);
-			if (pLoopPlot != NULL)
-			{
-				// increment value, adding plot if it does not exist
-				visiblePlots[XYCoords(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE())] += iObserverCount;
-
-				int iFromLevel = pLoopPlot->seeFromLevel(eTeam);
-
-				for	(int iI	= 0; iI	< NUM_DIRECTION_TYPES; iI++)
-				{
-					CvPlot*	pAdjacentPlot =	plotDirection(pLoopPlot->getX_INLINE(),	pLoopPlot->getY_INLINE(), ((DirectionTypes)iI));
-					if (pAdjacentPlot != NULL)
-					{
-						XYCoords adjacentXY(pAdjacentPlot->getX_INLINE(), pAdjacentPlot->getY_INLINE());
-						
-						// increment value, adding plot if it does not exist
-						visiblePlots[adjacentXY] += iObserverCount;
-						
-						// add the 3 downsight plots if height right
-						for (int iJ = 0; iJ < 3; iJ++)
-						{
-							DirectionTypes eDirection;
-							switch (iJ)
-							{
-							case 0: eDirection = (DirectionTypes) iI; break;
-							case 1: eDirection = GC.getTurnLeftDirection(iI); break;
-							case 2: eDirection = GC.getTurnRightDirection(iI); break;
-							default: FAssert(false); break;
-							}
-
-							int iThroughLevel = pAdjacentPlot->seeThroughLevel();
-							if (iFromLevel >= iThroughLevel)
-							{
-								CvPlot* pSeeThroughPlot = plotDirection(adjacentXY.iX, adjacentXY.iY, eDirection);
-								if (pSeeThroughPlot != NULL)
-								{
-									if ((iFromLevel	> iThroughLevel) ||	(pSeeThroughPlot->seeFromLevel(eTeam) > iFromLevel))
-									{
-										// increment value, adding plot if it does not exist
-										visiblePlots[XYCoords(pSeeThroughPlot->getX_INLINE(), pSeeThroughPlot->getY_INLINE())] += iObserverCount;
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
-int _getNextLowerUnitRange(const CLinkList<IDInfo>& unitList, TeamTypes eTeam, int iLastRange, int& iUnitCount)
-{
-	int iNextRange = -1;
-	iUnitCount = 0;
-
-	CLLNode<IDInfo>* pUnitNode = unitList.head();
-	while (pUnitNode !=	NULL)
-	{
-		CvUnit*	pLoopUnit =	::getUnit(pUnitNode->m_data);
-		pUnitNode =	unitList.next(pUnitNode);
-		
-		if (eTeam == NO_TEAM || pLoopUnit->getTeam() == eTeam)
-		{
-			int iUnitRange = pLoopUnit->visibilityRange();
-
-			// is the range in bounds
-			if (iUnitRange >= 0 && iUnitRange < iLastRange)
-			{
-				// is this range the highest valid one?
-				if (iUnitRange > iNextRange)
-				{
-					iNextRange = iUnitRange;
-					iUnitCount = 1;
-				}
-				// otherwise, is it equal?
-				else if (iUnitRange == iNextRange)
-				{
-					iUnitCount++;
-				}
-			}
-		}
-	}
-	
-	return iNextRange;
-}
-
-void buildVisibilityRegion(CvPlotRegion& visiblePlots, int iX, int iY, const CLinkList<IDInfo>& unitList, TeamTypes eTeam)
-{
-	if (unitList.head() == NULL)
-	{
-		return;
-	}
-
-	TeamTypes eVisibilityTeam = eTeam;
-	if (eVisibilityTeam == NO_TEAM)
-	{
-		CLLNode<IDInfo>* pHeadUnitNode = unitList.head();
-		eVisibilityTeam = ::getUnit(pHeadUnitNode->m_data)->getTeam();
-	}
-	
-	// only call addVisiblePlots once for each range, starting at highest range
-	int iLastRange = MAX_INT;
-	while (iLastRange >= 0)
-	{
-		int iNextObserverCount;
-		int iNextRange = _getNextLowerUnitRange(unitList, eTeam, iLastRange, iNextObserverCount);
-
-		// do we have more to add?
-		if (iNextRange >= 0)
-		{
-			FAssert(iNextObserverCount > 0);
-			addVisiblePlots(visiblePlots, iX, iY, iNextRange, eVisibilityTeam);
-		}
-
-		// set last range
-		iLastRange = iNextRange;
-	}
-
-}
-
-void buildVisibilityRegion(CvPlotDataRegion& visiblePlots, int iX, int iY, const CLinkList<IDInfo>& unitList, TeamTypes eTeam)
-{
-	if (unitList.head() == NULL)
-	{
-		return;
-	}
-
-	TeamTypes eVisibilityTeam = eTeam;
-	if (eVisibilityTeam == NO_TEAM)
-	{
-		CLLNode<IDInfo>* pHeadUnitNode = unitList.head();
-		eVisibilityTeam = ::getUnit(pHeadUnitNode->m_data)->getTeam();
-	}
-	
-	// only call addVisiblePlots once for each range, starting at highest range
-	int iLastRange = MAX_INT;
-	while (iLastRange >= 0)
-	{
-		int iNextObserverCount;
-		int iNextRange = _getNextLowerUnitRange(unitList, eTeam, iLastRange, iNextObserverCount);
-
-		// do we have more to add?
-		if (iNextRange >= 0)
-		{
-			FAssert(iNextObserverCount > 0);
-			addVisiblePlots(visiblePlots, iX, iY, iNextRange, iNextObserverCount, eVisibilityTeam);
-		}
-
-		// set last range
-		iLastRange = iNextRange;
 	}
 }
 
@@ -482,9 +211,19 @@ bool isBeforeUnitCycle(const CvUnit* pFirstUnit, const CvUnit* pSecondUnit)
 	return (pFirstUnit->getID() < pSecondUnit->getID());
 }
 
-bool isPromotionValid(PromotionTypes ePromotion, UnitTypes eUnit)
+bool isPromotionValid(PromotionTypes ePromotion, UnitTypes eUnit, bool bLeader)
 {
+	if (GC.getUnitInfo(eUnit).getFreePromotions(ePromotion))
+	{
+		return true;
+	}
+
 	if (GC.getUnitInfo(eUnit).getUnitCombatType() == NO_UNITCOMBAT)
+	{
+		return false;
+	}
+
+	if (!bLeader && GC.getPromotionInfo(ePromotion).isLeader())
 	{
 		return false;
 	}
@@ -527,6 +266,49 @@ bool isPromotionValid(PromotionTypes ePromotion, UnitTypes eUnit)
 	if ((GC.getUnitInfo(eUnit).getCollateralDamageLimit() == 0) || (GC.getUnitInfo(eUnit).getCollateralDamageMaxUnits() == 0))
 	{
 		if (GC.getPromotionInfo(ePromotion).getCollateralDamageChange() != 0)
+		{
+			return false;
+		}
+	}
+
+	if (GC.getUnitInfo(eUnit).getInterceptionProbability() == 0)
+	{
+		if (GC.getPromotionInfo(ePromotion).getInterceptChange() != 0)
+		{
+			return false;
+		}
+	}
+
+	if (NO_PROMOTION != GC.getPromotionInfo(ePromotion).getPrereqPromotion())
+	{
+		if (!isPromotionValid((PromotionTypes)GC.getPromotionInfo(ePromotion).getPrereqPromotion(), eUnit, bLeader))
+		{
+			return false;
+		}
+	}
+
+	PromotionTypes ePrereq1 = (PromotionTypes)GC.getPromotionInfo(ePromotion).getPrereqOrPromotion1();
+	PromotionTypes ePrereq2 = (PromotionTypes)GC.getPromotionInfo(ePromotion).getPrereqOrPromotion2();
+	if (NO_PROMOTION != ePrereq1 || NO_PROMOTION != ePrereq2)
+	{
+		bool bValid = false;
+		if (!bValid)
+		{
+			if (NO_PROMOTION != ePrereq1 && isPromotionValid(ePrereq1, eUnit, bLeader))
+			{
+				bValid = true;
+			}
+		}
+
+		if (!bValid)
+		{
+			if (NO_PROMOTION != ePrereq2 && isPromotionValid(ePrereq2, eUnit, bLeader))
+			{
+				bValid = true;
+			}
+		}
+
+		if (!bValid)
 		{
 			return false;
 		}
@@ -623,6 +405,21 @@ bool isReligionTech(TechTypes eTech)
 	return false;
 }
 
+bool isCorporationTech(TechTypes eTech)
+{
+	int iI;
+
+	for (iI = 0; iI < GC.getNumCorporationInfos(); iI++)
+	{
+		if (GC.getCorporationInfo((CorporationTypes)iI).getTechPrereq() == eTech)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 bool isTechRequiredForUnit(TechTypes eTech, UnitTypes eUnit)
 {
 	int iI;
@@ -633,7 +430,7 @@ bool isTechRequiredForUnit(TechTypes eTech, UnitTypes eUnit)
 		return true;
 	}
 
-	for (iI = 0; iI < GC.getDefineINT("NUM_UNIT_AND_TECH_PREREQS"); iI++)
+	for (iI = 0; iI < GC.getNUM_UNIT_AND_TECH_PREREQS(); iI++)
 	{
 		if (info.getPrereqAndTechs(iI) == eTech)
 		{
@@ -654,7 +451,7 @@ bool isTechRequiredForBuilding(TechTypes eTech, BuildingTypes eBuilding)
 		return true;
 	}
 
-	for (iI = 0; iI < GC.getDefineINT("NUM_BUILDING_AND_TECH_PREREQS"); iI++)
+	for (iI = 0; iI < GC.getNUM_BUILDING_AND_TECH_PREREQS(); iI++)
 	{
 		if (info.getPrereqAndTechs(iI) == eTech)
 		{
@@ -813,6 +610,7 @@ int getCombatOdds(CvUnit* pAttacker, CvUnit* pDefender)
 	int iDefenderLowFS;
 	int iDefenderHighFS;
 	int iFirstStrikes;
+	int iDefenderHitLimit;
 	int iI;
 	int iJ;
 	int iI3;
@@ -855,7 +653,9 @@ int getCombatOdds(CvUnit* pAttacker, CvUnit* pDefender)
 	// Needed rounds = round_up(health/damage)
 	//////
 
-	iNeededRoundsAttacker = (pDefender->currHitPoints() + iDamageToDefender - 1 ) / iDamageToDefender;
+	iDefenderHitLimit = pDefender->maxHitPoints() - pAttacker->combatLimit();
+
+	iNeededRoundsAttacker = (max(0, pDefender->currHitPoints() - iDefenderHitLimit) + iDamageToDefender - 1 ) / iDamageToDefender;
 	iNeededRoundsDefender = (pAttacker->currHitPoints() + iDamageToAttacker - 1 ) / iDamageToAttacker;
 	iMaxRounds = iNeededRoundsAttacker + iNeededRoundsDefender - 1;
 
@@ -1013,6 +813,20 @@ int getCombatOdds(CvUnit* pAttacker, CvUnit* pDefender)
 	return iOdds;
 }
 
+int getEspionageModifier(TeamTypes eOurTeam, TeamTypes eTargetTeam)
+{
+	FAssert(eOurTeam != eTargetTeam);
+	FAssert(eOurTeam != BARBARIAN_TEAM);
+	FAssert(eTargetTeam != BARBARIAN_TEAM);
+
+	int iTargetPoints = GET_TEAM(eTargetTeam).getEspionagePointsEver();
+	int iOurPoints = GET_TEAM(eOurTeam).getEspionagePointsEver();
+
+	int iModifier = GC.getDefineINT("ESPIONAGE_SPENDING_MULTIPLIER") * (2 * iTargetPoints + iOurPoints);
+	iModifier /= max(1, iTargetPoints + 2 * iOurPoints);
+	return iModifier;
+}
+
 void setTradeItem(TradeData* pItem, TradeableItems eItemType, int iData)
 {
 	pItem->m_eItemType = eItemType;
@@ -1020,6 +834,84 @@ void setTradeItem(TradeData* pItem, TradeableItems eItemType, int iData)
 	pItem->m_bOffering = false;
 	pItem->m_bHidden = false;
 }
+
+bool isPlotEventTrigger(EventTriggerTypes eTrigger)
+{
+	CvEventTriggerInfo& kTrigger = GC.getEventTriggerInfo(eTrigger);
+
+	if (kTrigger.getNumPlotsRequired() > 0)
+	{
+		if (kTrigger.getPlotType() != NO_PLOT)
+		{
+			return true;
+		}
+
+		if (kTrigger.getNumFeaturesRequired() > 0)
+		{
+			return true;
+		}
+
+		if (kTrigger.getNumTerrainsRequired() > 0)
+		{
+			return true;
+		}
+
+		if (kTrigger.getNumImprovementsRequired() > 0)
+		{
+			return true;
+		}
+
+		if (kTrigger.getNumBonusesRequired() > 0)
+		{
+			return true;
+		}
+
+		if (kTrigger.getNumRoutesRequired() > 0)
+		{
+			return true;
+		}
+
+		if (kTrigger.isUnitsOnPlot() && kTrigger.getNumUnitsRequired() > 0)
+		{
+			return true;
+		}
+
+		if (kTrigger.isPrereqEventCity() && !kTrigger.isPickCity())
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+TechTypes getDiscoveryTech(UnitTypes eUnit, PlayerTypes ePlayer)
+{
+	TechTypes eBestTech = NO_TECH;
+	int iBestValue = 0;
+
+	for (int iI = 0; iI < GC.getNumTechInfos(); iI++)
+	{
+		if (GET_PLAYER(ePlayer).canResearch((TechTypes)iI))
+		{
+			int iValue = 0;
+
+			for (int iJ = 0; iJ < GC.getNumFlavorTypes(); iJ++)
+			{
+				iValue += (GC.getTechInfo((TechTypes) iI).getFlavorValue(iJ) * GC.getUnitInfo(eUnit).getFlavorValue(iJ));
+			}
+
+			if (iValue > iBestValue)
+			{
+				iBestValue = iValue;
+				eBestTech = ((TechTypes)iI);
+			}
+		}
+	}
+
+	return eBestTech;
+}
+
 
 void clear(char* szString)
 {
@@ -1121,6 +1013,20 @@ void setListHelp(CvWString& szBuffer, const wchar* szStart, const wchar* szItem,
 	szBuffer += szItem;
 }
 
+void setListHelp(CvWStringBuffer& szBuffer, const wchar* szStart, const wchar* szItem, const wchar* szSeparator, bool bFirst)
+{
+	if (bFirst)
+	{
+		szBuffer.append(szStart);
+	}
+	else
+	{
+		szBuffer.append(szSeparator);
+	}
+
+	szBuffer.append(szItem);
+}
+
 bool PUF_isGroupHead(const CvUnit* pUnit, int iData1, int iData2)
 {
 	return (pUnit->isGroupHead());
@@ -1138,6 +1044,14 @@ bool PUF_isTeam(const CvUnit* pUnit, int iData1, int iData2)
 	return (pUnit->getTeam() == iData1);
 }
 
+bool PUF_isCombatTeam(const CvUnit* pUnit, int iData1, int iData2)
+{
+	FAssertMsg(iData1 != -1, "Invalid data argument, should be >= 0");
+	FAssertMsg(iData2 != -1, "Invalid data argument, should be >= 0");
+
+	return (GET_PLAYER(pUnit->getCombatOwner((TeamTypes)iData2)).getTeam() == iData1);
+}
+
 bool PUF_isOtherPlayer(const CvUnit* pUnit, int iData1, int iData2)
 {
 	FAssertMsg(iData1 != -1, "Invalid data argument, should be >= 0");
@@ -1147,13 +1061,28 @@ bool PUF_isOtherPlayer(const CvUnit* pUnit, int iData1, int iData2)
 bool PUF_isOtherTeam(const CvUnit* pUnit, int iData1, int iData2)
 {
 	FAssertMsg(iData1 != -1, "Invalid data argument, should be >= 0");
+	if (pUnit->canCoexistWithEnemyUnit())
+	{
+		return false;
+	}
+
 	return (pUnit->getTeam() != GET_PLAYER((PlayerTypes)iData1).getTeam());
 }
 
 bool PUF_isEnemy(const CvUnit* pUnit, int iData1, int iData2)
 {
 	FAssertMsg(iData1 != -1, "Invalid data argument, should be >= 0");
-	return atWar(GET_PLAYER((PlayerTypes)iData1).getTeam(), pUnit->getTeam());
+	FAssertMsg(iData2 != -1, "Invalid data argument, should be >= 0");
+
+	TeamTypes eOtherTeam = GET_PLAYER((PlayerTypes)iData1).getTeam();
+	TeamTypes eOurTeam = GET_PLAYER(pUnit->getCombatOwner(eOtherTeam)).getTeam();
+
+	if (pUnit->canCoexistWithEnemyUnit())
+	{
+		return false;
+	}
+
+	return (iData2 ? eOtherTeam != eOurTeam : atWar(eOtherTeam, eOurTeam));
 }
 
 bool PUF_isVisible(const CvUnit* pUnit, int iData1, int iData2)
@@ -1177,13 +1106,32 @@ bool PUF_canSiege(const CvUnit* pUnit, int iData1, int iData2)
 bool PUF_isPotentialEnemy(const CvUnit* pUnit, int iData1, int iData2)
 {
 	FAssertMsg(iData1 != -1, "Invalid data argument, should be >= 0");
-	return isPotentialEnemy(GET_PLAYER((PlayerTypes)iData1).getTeam(), pUnit->getTeam());
+	FAssertMsg(iData2 != -1, "Invalid data argument, should be >= 0");
+
+	TeamTypes eOtherTeam = GET_PLAYER((PlayerTypes)iData1).getTeam();
+	TeamTypes eOurTeam = GET_PLAYER(pUnit->getCombatOwner(eOtherTeam)).getTeam();
+
+	if (pUnit->canCoexistWithEnemyUnit())
+	{
+		return false;
+	}
+	return (iData2 ? eOtherTeam != eOurTeam : isPotentialEnemy(eOtherTeam, eOurTeam));
 }
 
 bool PUF_canDeclareWar( const CvUnit* pUnit, int iData1, int iData2)
 {
 	FAssertMsg(iData1 != -1, "Invalid data argument, should be >= 0");
-	return GET_TEAM(GET_PLAYER((PlayerTypes)iData1).getTeam()).canDeclareWar(pUnit->getTeam());
+	FAssertMsg(iData2 != -1, "Invalid data argument, should be >= 0");
+
+	TeamTypes eOtherTeam = GET_PLAYER((PlayerTypes)iData1).getTeam();
+	TeamTypes eOurTeam = GET_PLAYER(pUnit->getCombatOwner(eOtherTeam)).getTeam();
+
+	if (pUnit->canCoexistWithEnemyUnit())
+	{
+		return false;
+	}
+
+	return (iData2 ? false : GET_TEAM(eOtherTeam).canDeclareWar(eOurTeam));
 }
 
 bool PUF_canDefend(const CvUnit* pUnit, int iData1, int iData2)
@@ -1204,6 +1152,7 @@ bool PUF_canDefendGroupHead(const CvUnit* pUnit, int iData1, int iData2)
 bool PUF_canDefendEnemy(const CvUnit* pUnit, int iData1, int iData2)
 {
 	FAssertMsg(iData1 != -1, "Invalid data argument, should be >= 0");
+	FAssertMsg(iData2 != -1, "Invalid data argument, should be >= 0");
 	return (PUF_canDefend(pUnit, iData1, iData2) && PUF_isEnemy(pUnit, iData1, iData2));
 }
 
@@ -1248,6 +1197,11 @@ bool PUF_isCounterSpy(const CvUnit* pUnit, int iData1, int iData2)
 	return pUnit->isCounterSpy();
 }
 
+bool PUF_isSpy(const CvUnit* pUnit, int iData1, int iData2)
+{
+	return pUnit->isSpy();
+}
+
 bool PUF_isDomainType(const CvUnit* pUnit, int iData1, int iData2)
 {
 	FAssertMsg(iData1 != -1, "Invalid data argument, should be >= 0");
@@ -1285,6 +1239,16 @@ bool PUF_makeInfoBarDirty(CvUnit* pUnit, int iData1, int iData2)
 {
 	pUnit->setInfoBarDirty(true);
 	return true;
+}
+
+bool PUF_isNoMission(const CvUnit* pUnit, int iData1, int iData2)
+{
+	return (pUnit->getGroup()->getActivityType() != ACTIVITY_MISSION);
+}
+
+bool PUF_isFiniteRange(const CvUnit* pUnit, int iData1, int iData2)
+{
+	return ((pUnit->getDomainType() != DOMAIN_AIR) || (pUnit->getUnitInfo().getAirRange() > 0));
 }
 
 int potentialIrrigation(FAStarNode* parent, FAStarNode* node, int data, const void* pointer, FAStar* finder)
@@ -1444,8 +1408,6 @@ int pathHeuristic(int iFromX, int iFromY, int iToX, int iToY)
 
 int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer, FAStar* finder)
 {
-	PROFILE_FUNC();
-
 	CLLNode<IDInfo>* pUnitNode;
 	CvSelectionGroup* pSelectionGroup;
 	CvUnit* pLoopUnit;
@@ -1502,6 +1464,20 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 					{
 						iCost += PATH_TERRITORY_WEIGHT;
 					}
+
+					// Damage caused by features (mods)
+					if (0 != GC.getPATH_DAMAGE_WEIGHT())
+					{
+						if (pToPlot->getFeatureType() != NO_FEATURE)
+						{
+							iCost += (GC.getPATH_DAMAGE_WEIGHT() * max(0, GC.getFeatureInfo(pToPlot->getFeatureType()).getTurnDamage())) / GC.getMAX_HIT_POINTS();
+						}
+
+						if (pToPlot->getExtraMovePathCost() > 0)
+						{
+							iCost += (PATH_MOVEMENT_WEIGHT * pToPlot->getExtraMovePathCost());
+						}
+					}
 				}
 				else
 				{
@@ -1521,7 +1497,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 						{
 							if (gDLL->getFAStarIFace()->IsPathDest(finder, pToPlot->getX_INLINE(), pToPlot->getY_INLINE()))
 							{
-								if (pToPlot->isVisibleEnemyDefender(pLoopUnit->getOwnerINLINE()))
+								if (pToPlot->isVisibleEnemyDefender(pLoopUnit))
 								{
 									iCost += (PATH_DEFENSE_WEIGHT * max(0, (200 - ((pLoopUnit->noDefensiveBonus()) ? 0 : pFromPlot->defenseModifier(pLoopUnit->getTeam(), false)))));
 
@@ -1571,8 +1547,6 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 
 int pathValid(FAStarNode* parent, FAStarNode* node, int data, const void* pointer, FAStar* finder)
 {
-	PROFILE_FUNC();
-
 	CvSelectionGroup* pSelectionGroup;
 	CvPlot* pFromPlot;
 	CvPlot* pToPlot;
@@ -1593,8 +1567,6 @@ int pathValid(FAStarNode* parent, FAStarNode* node, int data, const void* pointe
 	// XXX might want to take this out...
 	if (pSelectionGroup->getDomainType() == DOMAIN_SEA)
 	{
-		PROFILE("pathValid 1");
-
 		if (pFromPlot->isWater() && pToPlot->isWater())
 		{
 			if (!(GC.getMapINLINE().plotINLINE(parent->m_iX, node->m_iY)->isWater()) && !(GC.getMapINLINE().plotINLINE(node->m_iX, parent->m_iY)->isWater()))
@@ -1611,8 +1583,6 @@ int pathValid(FAStarNode* parent, FAStarNode* node, int data, const void* pointe
 
 	if (gDLL->getFAStarIFace()->GetInfo(finder) & MOVE_SAFE_TERRITORY)
 	{
-		PROFILE("pathValid 2");
-
 		if (!(pFromPlot->isRevealed(pSelectionGroup->getHeadTeam(), false)))
 		{
 			return FALSE;
@@ -1629,8 +1599,6 @@ int pathValid(FAStarNode* parent, FAStarNode* node, int data, const void* pointe
 
 	if (gDLL->getFAStarIFace()->GetInfo(finder) & MOVE_NO_ENEMY_TERRITORY)
 	{
-		PROFILE("pathValid 3");
-
 		if (pFromPlot->isOwned())
 		{
 			if (atWar(pFromPlot->getTeam(), pSelectionGroup->getHeadTeam()))
@@ -1644,8 +1612,6 @@ int pathValid(FAStarNode* parent, FAStarNode* node, int data, const void* pointe
 
 	if (bAIControl)
 	{
-		PROFILE("pathValid 4");
-
 		if ((parent->m_iData2 > 1) || (parent->m_iData1 == 0))
 		{
 			if (!(gDLL->getFAStarIFace()->GetInfo(finder) & MOVE_IGNORE_DANGER))
@@ -1663,11 +1629,19 @@ int pathValid(FAStarNode* parent, FAStarNode* node, int data, const void* pointe
 
 	if (bAIControl || pFromPlot->isRevealed(pSelectionGroup->getHeadTeam(), false))
 	{
-		PROFILE("pathValid 5");
-
-		if (!(pSelectionGroup->canMoveThrough(pFromPlot)))
+		if (gDLL->getFAStarIFace()->GetInfo(finder) & MOVE_THROUGH_ENEMY)
 		{
-			return FALSE;
+			if (!(pSelectionGroup->canMoveOrAttackInto(pFromPlot)))
+			{
+				return FALSE;
+			}
+		}
+		else
+		{
+			if (!(pSelectionGroup->canMoveThrough(pFromPlot)))
+			{
+				return FALSE;
+			}
 		}
 	}
 
@@ -1992,14 +1966,19 @@ void shuffleArray(int* piShuffle, int iNum, CvRandom& rand)
 	}
 }
 
-
 int getTurnYearForGame(int iGameTurn, int iStartYear, CalendarTypes eCalendar, GameSpeedTypes eSpeed)
 {
-	int iTurnYear;
+	return (getTurnMonthForGame(iGameTurn, iStartYear, eCalendar, eSpeed) / GC.getNumMonthInfos());
+}
+
+
+int getTurnMonthForGame(int iGameTurn, int iStartYear, CalendarTypes eCalendar, GameSpeedTypes eSpeed)
+{
+	int iTurnMonth;
 	int iTurnCount;
 	int iI;
 
-	iTurnYear = iStartYear;
+	iTurnMonth = iStartYear * GC.getNumMonthInfos();
 
 	switch (eCalendar)
 	{
@@ -2010,12 +1989,12 @@ int getTurnYearForGame(int iGameTurn, int iStartYear, CalendarTypes eCalendar, G
 		{
 			if (iGameTurn > (iTurnCount + GC.getGameSpeedInfo(eSpeed).getGameTurnInfo(iI).iNumGameTurnsPerIncrement))
 			{
-				iTurnYear += (GC.getGameSpeedInfo(eSpeed).getGameTurnInfo(iI).iYearIncrement * GC.getGameSpeedInfo(eSpeed).getGameTurnInfo(iI).iNumGameTurnsPerIncrement);
+				iTurnMonth += (GC.getGameSpeedInfo(eSpeed).getGameTurnInfo(iI).iMonthIncrement * GC.getGameSpeedInfo(eSpeed).getGameTurnInfo(iI).iNumGameTurnsPerIncrement);
 				iTurnCount += GC.getGameSpeedInfo(eSpeed).getGameTurnInfo(iI).iNumGameTurnsPerIncrement;
 			}
 			else
 			{
-				iTurnYear += (GC.getGameSpeedInfo(eSpeed).getGameTurnInfo(iI).iYearIncrement * (iGameTurn - iTurnCount));
+				iTurnMonth += (GC.getGameSpeedInfo(eSpeed).getGameTurnInfo(iI).iMonthIncrement * (iGameTurn - iTurnCount));
 				iTurnCount += (iGameTurn - iTurnCount);
 				break;
 			}
@@ -2023,36 +2002,36 @@ int getTurnYearForGame(int iGameTurn, int iStartYear, CalendarTypes eCalendar, G
 
 		if (iGameTurn > iTurnCount)
 		{
-			iTurnYear += (GC.getGameSpeedInfo(eSpeed).getGameTurnInfo(GC.getGameSpeedInfo(eSpeed).getNumTurnIncrements() - 1).iYearIncrement * (iGameTurn - iTurnCount));
+			iTurnMonth += (GC.getGameSpeedInfo(eSpeed).getGameTurnInfo(GC.getGameSpeedInfo(eSpeed).getNumTurnIncrements() - 1).iMonthIncrement * (iGameTurn - iTurnCount));
 		}
 		break;
 
 	case CALENDAR_BI_YEARLY:
-		iTurnYear += (2 * iGameTurn);
+		iTurnMonth += (2 * iGameTurn * GC.getNumMonthInfos());
 		break;
 
 	case CALENDAR_YEARS:
 	case CALENDAR_TURNS:
-		iTurnYear += iGameTurn;
+		iTurnMonth += iGameTurn * GC.getNumMonthInfos();
 		break;
 
 	case CALENDAR_SEASONS:
-		iTurnYear += (iGameTurn / GC.getNumSeasonInfos());
+		iTurnMonth += (iGameTurn * GC.getNumMonthInfos()) / GC.getNumSeasonInfos();
 		break;
 
 	case CALENDAR_MONTHS:
-		iTurnYear += (iGameTurn / GC.getNumMonthInfos());
+		iTurnMonth += iGameTurn;
 		break;
 
 	case CALENDAR_WEEKS:
-		iTurnYear += (iGameTurn / (GC.getNumMonthInfos() * GC.getDefineINT("WEEKS_PER_MONTHS")));
+		iTurnMonth += iGameTurn / GC.getDefineINT("WEEKS_PER_MONTHS");
 		break;
 
 	default:
 		FAssert(false);
 	}
 
-	return iTurnYear;
+	return iTurnMonth;
 }
 
 
@@ -2086,11 +2065,6 @@ void stringToBools(const char* szString, int* iNumBools, bool** ppBools)
 
 // these string functions should only be used under chipotle cheat code (not internationalized)
 
-void getCardinalDirectionTypeString(CvWString& szString, CardinalDirectionTypes eDirectionType)
-{
-	getDirectionTypeString(szString, cardinalDirectionToDirection(eDirectionType));
-}
-
 void getDirectionTypeString(CvWString& szString, DirectionTypes eDirectionType)
 {
 	switch (eDirectionType)
@@ -2108,6 +2082,11 @@ void getDirectionTypeString(CvWString& szString, DirectionTypes eDirectionType)
 
 	default: szString = CvWString::format(L"UNKNOWN_DIRECTION(%d)", eDirectionType); break;
 	}
+}
+
+void getCardinalDirectionTypeString(CvWString& szString, CardinalDirectionTypes eDirectionType)
+{
+	getDirectionTypeString(szString, cardinalDirectionToDirection(eDirectionType));
 }
 
 void getActivityTypeString(CvWString& szString, ActivityTypes eActivityType)
@@ -2140,12 +2119,15 @@ void getMissionTypeString(CvWString& szString, MissionTypes eMissionType)
 	case MISSION_SKIP: szString = L"MISSION_SKIP"; break;
 	case MISSION_SLEEP: szString = L"MISSION_SLEEP"; break;
 	case MISSION_FORTIFY: szString = L"MISSION_FORTIFY"; break;
+	case MISSION_PLUNDER: szString = L"MISSION_PLUNDER"; break;
 	case MISSION_AIRPATROL: szString = L"MISSION_AIRPATROL"; break;
+	case MISSION_SEAPATROL: szString = L"MISSION_SEAPATROL"; break;
 	case MISSION_HEAL: szString = L"MISSION_HEAL"; break;
 	case MISSION_SENTRY: szString = L"MISSION_SENTRY"; break;
 	case MISSION_AIRLIFT: szString = L"MISSION_AIRLIFT"; break;
 	case MISSION_NUKE: szString = L"MISSION_NUKE"; break;
 	case MISSION_RECON: szString = L"MISSION_RECON"; break;
+	case MISSION_PARADROP: szString = L"MISSION_PARADROP"; break;
 	case MISSION_AIRBOMB: szString = L"MISSION_AIRBOMB"; break;
 	case MISSION_BOMBARD: szString = L"MISSION_BOMBARD"; break;
 	case MISSION_PILLAGE: szString = L"MISSION_PILLAGE"; break;
@@ -2154,15 +2136,19 @@ void getMissionTypeString(CvWString& szString, MissionTypes eMissionType)
 	case MISSION_STEAL_PLANS: szString = L"MISSION_STEAL_PLANS"; break;
 	case MISSION_FOUND: szString = L"MISSION_FOUND"; break;
 	case MISSION_SPREAD: szString = L"MISSION_SPREAD"; break;
+	case MISSION_SPREAD_CORPORATION: szString = L"MISSION_SPREAD_CORPORATION"; break;
 	case MISSION_JOIN: szString = L"MISSION_JOIN"; break;
 	case MISSION_CONSTRUCT: szString = L"MISSION_CONSTRUCT"; break;
 	case MISSION_DISCOVER: szString = L"MISSION_DISCOVER"; break;
 	case MISSION_HURRY: szString = L"MISSION_HURRY"; break;
 	case MISSION_TRADE: szString = L"MISSION_TRADE"; break;
 	case MISSION_GREAT_WORK: szString = L"MISSION_GREAT_WORK"; break;
+	case MISSION_INFILTRATE: szString = L"MISSION_INFILTRATE"; break;
 	case MISSION_GOLDEN_AGE: szString = L"MISSION_GOLDEN_AGE"; break;
 	case MISSION_BUILD: szString = L"MISSION_BUILD"; break;
 	case MISSION_LEAD: szString = L"MISSION_LEAD"; break;
+	case MISSION_ESPIONAGE: szString = L"MISSION_ESPIONAGE"; break;
+	case MISSION_DIE_ANIMATION: szString = L"MISSION_DIE_ANIMATION"; break;
 
 	case MISSION_BEGIN_COMBAT: szString = L"MISSION_BEGIN_COMBAT"; break;
 	case MISSION_END_COMBAT: szString = L"MISSION_END_COMBAT"; break;
@@ -2252,9 +2238,13 @@ void getUnitAIString(CvWString& szString, UnitAITypes eUnitAI)
 	case UNITAI_MISSIONARY_SEA: szString = L"missionary sea"; break;
 	case UNITAI_SPY_SEA: szString = L"spy sea"; break;
 	case UNITAI_CARRIER_SEA: szString = L"carrier sea"; break;
+	case UNITAI_MISSILE_CARRIER_SEA: szString = L"missile carrier"; break;
+	case UNITAI_PIRATE_SEA: szString = L"pirate sea"; break;
 	case UNITAI_ATTACK_AIR: szString = L"attack air"; break;
 	case UNITAI_DEFENSE_AIR: szString = L"defense air"; break;
 	case UNITAI_CARRIER_AIR: szString = L"carrier air"; break;
+	case UNITAI_PARADROP: szString = L"paradrop"; break;
+	case UNITAI_ATTACK_CITY_LEMMING: szString = L"attack city lemming"; break;
 
 	default: szString = CvWString::format(L"unknown(%d)", eUnitAI); break;
 	}

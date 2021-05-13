@@ -47,6 +47,7 @@ public:
 	int getBuildingClassMaking(int /*BuildingClassTypes*/ eBuildingClass);
 	int getBuildingClassCountPlusMaking(int /*BuildingClassTypes*/ eUnitClass);
 	int getHasReligionCount(int /*ReligionTypes*/ eReligion);
+	int getHasCorporationCount(int /*CorporationTypes*/ eCorporation);
 
 	int countTotalCulture();
 
@@ -62,6 +63,7 @@ public:
 	int getResearchLeft(int /*TechTypes*/ eTech);
 
 	bool hasHolyCity(int /*ReligionTypes*/ eReligion);
+	bool hasHeadquarters(int /*CorporationTypes*/ eCorporation);
 
 	bool isHuman();
 	bool isBarbarian();
@@ -80,9 +82,9 @@ public:
 	int getNukeInterception();
 	void changeNukeInterception(int iChange);	 
 
-	int getForceTeamVoteEligibilityCount();
-	bool isForceTeamVoteEligible();
-	void changeForceTeamVoteEligibilityCount(int iChange);
+	int getForceTeamVoteEligibilityCount(int /*VoteSourceTypes*/ eVoteSource);
+	bool isForceTeamVoteEligible(int /*VoteSourceTypes*/ eVoteSource);
+	void changeForceTeamVoteEligibilityCount(int /*VoteSourceTypes*/ eVoteSource, int iChange);
 	int getExtraWaterSeeFromCount();
 	bool isExtraWaterSeeFrom();		 
 	void changeExtraWaterSeeFromCount(int iChange);
@@ -125,6 +127,9 @@ public:
 	int getMasterPower() const;
 	void setMasterPower(int iPower);
 
+	int getEnemyWarWearinessModifier() const;																																			// Exposed to Python
+	void changeEnemyWarWearinessModifier(int iChange);
+
 	bool isMapCentering();
 	void setMapCentering(bool bNewValue);
 
@@ -159,8 +164,13 @@ public:
 	bool isDefensivePact(int /*TeamTypes*/ eIndex);
 	int getRouteChange(int /*RouteTypes*/ eIndex);
 	void changeRouteChange(int /*RouteTypes*/ eIndex, int iChange);
-	int getProjectCount(int /*ProjectTypes*/ eIndex);																	 
+	int getProjectCount(int /*ProjectTypes*/ eIndex);
+	int getProjectDefaultArtType(int /*ProjectTypes*/ eIndex);
+	void setProjectDefaultArtType(int /*ProjectTypes*/ eIndex, int value);
+	int getProjectArtType(int /*ProjectTypes*/ eIndex, int number);
+	void setProjectArtType(int /*ProjectTypes*/ eIndex, int number, int value);
 	bool isProjectMaxedOut(int /*ProjectTypes*/ eIndex, int iExtra);
+	bool isProjectAndArtMaxedOut(int /*ProjectTypes*/ eIndex);
 	void changeProjectCount(int /*ProjectTypes*/ eIndex, int iChange);
 	int getProjectMaking(int /*ProjectTypes*/ eIndex);
 	int getUnitClassCount(int /*UnitClassTypes*/ eIndex);
@@ -176,6 +186,7 @@ public:
 	int getTechCount(int /*TechTypes*/ eIndex);
 
 	bool isTerrainTrade(int /*TerrainTypes*/ eIndex);
+	bool isRiverTrade();
 	bool isHasTech(int /*TechTypes*/ iIndex);
 	void setHasTech(int /*TechTypes*/ eIndex, bool bNewValue, int /*PlayerTypes*/ ePlayer, bool bFirst, bool bAnnounce);
 	bool isNoTradeTech(int /*TechType */ iIndex);
@@ -184,7 +195,29 @@ public:
 	int getImprovementYieldChange(int /*ImprovementTypes*/ eIndex, int /*YieldTypes*/ eIndex2);
 	void changeImprovementYieldChange(int /*ImprovementTypes*/ eIndex1, int /*YieldTypes*/ eIndex2, int iChange);
 
+	int getVictoryCountdown(int /*VictoryTypes*/ eVictory);
+	int getVictoryDelay(int /*VictoryTypes*/ eVictory);
+	bool canLaunch(int /*VictoryTypes*/ eVictory);
+	int getLaunchSuccessRate(int /*VictoryTypes*/ eVictory);
+
+	int getEspionagePointsAgainstTeam(int /*TeamTypes*/ eIndex);
+	void setEspionagePointsAgainstTeam(int /*TeamTypes*/ eIndex, int iValue);
+	void changeEspionagePointsAgainstTeam(int /*TeamTypes*/ eIndex, int iChange);
+	int getEspionagePointsEver();
+	void setEspionagePointsEver(int iValue);
+	void changeEspionagePointsEver(int iChange);
+	int getCounterespionageTurnsLeftAgainstTeam(int /*TeamTypes*/ eIndex);
+	void setCounterespionageTurnsLeftAgainstTeam(int /*TeamTypes*/ eIndex, int iValue);
+	void changeCounterespionageTurnsLeftAgainstTeam(int /*TeamTypes*/ eIndex, int iChange);
+	int getCounterespionageModAgainstTeam(int /*TeamTypes*/ eIndex);
+	void setCounterespionageModAgainstTeam(int /*TeamTypes*/ eIndex, int iValue);
+	void changeCounterespionageModAgainstTeam(int /*TeamTypes*/ eIndex, int iChange);
+
 	bool AI_shareWar(int /*TeamTypes*/ eTeam);
+	void AI_setWarPlan(int /*TeamTypes*/ eIndex, int /*WarPlanTypes*/ eNewValue);
+	int AI_getAtWarCounter(int /*TeamTypes*/ eTeam) const;
+	int AI_getAtPeaceCounter(int /*TeamTypes*/ eTeam) const;
+	int AI_getWarSuccess(int /*TeamTypes*/ eIndex) const;
 
 protected:
 
@@ -193,16 +226,3 @@ protected:
 };
 
 #endif	// #ifndef CyTeam
-
-
-
-
-
-
-
-
-
-
-
-
-

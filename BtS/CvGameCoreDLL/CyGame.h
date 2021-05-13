@@ -43,12 +43,13 @@ public:
 
 	bool isTeamVote(int /*VoteTypes*/ eVote) const;
 	bool isChooseElection(int /*VoteTypes*/ eVote) const;
-	bool isTeamVoteEligible(int /*TeamTypes*/ eTeam) const;
-	int countVote(int /*VoteTypes*/ eVote, int iChoice) const;
-	int countPossibleVote() const;
-	int findHighestVoteTeam(int /*VoteTypes*/ eVote) const;
-	int getVoteRequired(int /*VoteTypes*/ eVote) const;
-	int getSecretaryGeneral() const;
+	bool isTeamVoteEligible(int /*TeamTypes*/ eTeam, int /*VoteSourceTypes*/ eVoteSource) const;
+	int countPossibleVote(int /*VoteTypes*/ eVote, int /*VoteSourceTypes*/ eVoteSource) const;
+	int getVoteRequired(int /*VoteTypes*/ eVote, int /*VoteSourceTypes*/ eVoteSource) const;
+	int getSecretaryGeneral(int /*VoteSourceTypes*/ eVoteSource) const;
+	bool canHaveSecretaryGeneral(int /*VoteSourceTypes*/ eVoteSource) const;
+	int getVoteSourceReligion(int /*VoteSourceTypes*/ eVoteSource) const;
+	void setVoteSourceReligion(int /*VoteSourceTypes*/ eVoteSource, int /*ReligionTypes*/ eReligion, bool bAnnounce);
 
 	int countCivPlayersAlive();
 	int countCivPlayersEverAlive();
@@ -64,8 +65,10 @@ public:
 
 	int countReligionLevels(int /*ReligionTypes*/ eReligion);	
 	int calculateReligionPercent(int /* ReligionTypes*/ eReligion);
+	int countCorporationLevels(int /*CorporationTypes*/ eCorporation);	
 
 	int goldenAgeLength();
+	int victoryDelay(int /*VictoryTypes*/ eVictory);
 	int getImprovementUpgradeTime(int /* ImprovementTypes*/ eImprovement);
 	bool canTrainNukes();
 
@@ -94,6 +97,8 @@ public:
 	void changeMaxTurns(int iChange);
 	int getMaxCityElimination() const;
 	void setMaxCityElimination(int iNewValue);
+	int getNumAdvancedStartPoints() const;
+	void setNumAdvancedStartPoints(int iNewValue);
 	int getStartTurn() const;
 	int getStartYear() const;
 	void setStartYear(int iNewValue);
@@ -118,7 +123,8 @@ public:
 	int getNoNukesCount() const;
 	bool isNoNukes() const;
 	void changeNoNukesCount(int iChange);
-	int getSecretaryGeneralTimer() const;
+	int getSecretaryGeneralTimer(int iVoteSource) const;
+	int getVoteTimer(int iVoteSource) const;
 	int getNukesExploded() const;
 	void changeNukesExploded(int iChange);
 
@@ -138,15 +144,17 @@ public:
 	void setScoreDirty(bool bNewValue);
 	bool isCircumnavigated() const;
 	void makeCircumnavigated();
-	bool isDiploVote() const;
-	void makeDiploVote();
+	bool isDiploVote(int /*VoteSourceTypes*/ eVoteSource) const;
+	void changeDiploVote(int /*VoteSourceTypes*/ eVoteSource, int iChange);
 	bool isDebugMode() const;
 	void toggleDebugMode();
 
 	int getPitbossTurnTime();
+	void setPitbossTurnTime(int iHours);
 	bool isHotSeat();
 	bool isPbem();
 	bool isPitboss();
+	bool isSimultaneousTeamTurns();
 
 	bool isFinalInitialized();
 
@@ -192,21 +200,28 @@ public:
 
 	int getReligionGameTurnFounded(int /*ReligionTypes*/ eIndex);
 	bool isReligionFounded(int /*ReligionTypes*/ eIndex);
+	bool isReligionSlotTaken(int /*ReligionTypes*/ eIndex);
+	int getCorporationGameTurnFounded(int /*CorporationTypes*/ eIndex);
+	bool isCorporationFounded(int /*CorporationTypes*/ eIndex);
 	bool isVotePassed(int /*VoteTypes*/ eIndex) const;
 	bool isVictoryValid(int /*VictoryTypes*/ eIndex);
 	bool isSpecialUnitValid(int /*SpecialUnitTypes*/ eSpecialUnitType);
 	void makeSpecialUnitValid(int /*SpecialUnitTypes*/ eSpecialUnitType);
-
 	bool isSpecialBuildingValid(int /*SpecialBuildingTypes*/ eIndex);
 	void makeSpecialBuildingValid(int /*SpecialBuildingTypes*/ eIndex);
-
-	bool isVoteTriggered(int /*VoteTypes*/ eIndex);
+	bool isNukesValid();
+	void makeNukesValid(bool bValid);
+	bool isInAdvancedStart();
 
 	CyCity* getHolyCity(int /*ReligionTypes*/ eIndex);
 	void setHolyCity(int /*ReligionTypes*/ eIndex, CyCity* pNewValue, bool bAnnounce);
 	void clearHolyCity(int /*ReligionTypes*/ eIndex);
 
-	int getPlayerVote(int /*PlayerTypes*/ eOwnerIndex, int /*VoteTypes*/ eVoteIndex);
+	CyCity* getHeadquarters(int /*CorporationTypes*/ eIndex);
+	void setHeadquarters(int /*CorporationTypes*/ eIndex, CyCity* pNewValue, bool bAnnounce);
+	void clearHeadquarters(int /*CorporationTypes*/ eIndex);
+
+	int getPlayerVote(int /*PlayerTypes*/ eOwnerIndex, int iVoteId);
 
 	std::string getScriptData() const;
 	void setScriptData(std::string szNewValue);
@@ -241,6 +256,18 @@ public:
 	bool hasSkippedSaveChecksum() const;
 
 	void saveReplay(int iPlayer);
+
+	void addPlayer(int /*PlayerTypes*/ eNewPlayer, int /*TeamTypes*/ eNewTeam, int /*LeaderHeadTypes*/ eLeader, int /*CivilizationTypes*/ eCiv);
+
+	void setPlotExtraYield(int iX, int iY, int /*YieldTypes*/ eYield, int iExtraYield);
+	void changePlotExtraCost(int iX, int iY, int iExtraCost);
+	
+	bool isCivEverActive(int /*CivilizationTypes*/ eCivilization);
+	bool isLeaderEverActive(int /*LeaderHeadTypes*/ eLeader);
+	bool isUnitEverActive(int /*UnitTypes*/ eUnit);
+	bool isBuildingEverActive(int /*BuildingTypes*/ eBuilding);
+
+	bool isEventActive(int /*EventTriggerTypes*/ eTrigger);
 
 protected:
 	CvGame* m_pGame;

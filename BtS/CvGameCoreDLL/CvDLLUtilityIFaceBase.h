@@ -91,6 +91,7 @@ public:
 	virtual bool GetWorldBuilderMode() = 0;
 	virtual int getCurrentLanguage() const = 0;
 	virtual void setCurrentLanguage(int iNewLanguage) = 0;
+	virtual bool isModularXMLLoading() const = 0;
 
 	virtual bool IsPitbossHost() const = 0;
 	virtual CvString GetPitbossSmtpHost() const = 0;
@@ -110,7 +111,7 @@ public:
 	virtual void sendDoCommand(int iUnitID, CommandTypes eCommand, int iData1, int iData2, bool bAlt) = 0;
 	virtual void sendPushOrder(int iCityID, OrderTypes eOrder, int iData, bool bAlt, bool bShift, bool bCtrl) = 0;
 	virtual void sendPopOrder(int iCity, int iNum) = 0;
-	virtual void sendDoTask(int iCity, TaskTypes eTask, int iData1, int iData2, bool bOption) = 0;
+	virtual void sendDoTask(int iCity, TaskTypes eTask, int iData1, int iData2, bool bOption, bool bAlt, bool bShift, bool bCtrl) = 0;
 	virtual void sendResearch(TechTypes eTech, int iDiscover, bool bShift) = 0;
 	virtual void sendPercentChange(CommerceTypes eCommerce, int iChange) = 0;
 	virtual void sendConvert(ReligionTypes eReligion) = 0;
@@ -123,8 +124,8 @@ public:
 	virtual void sendImplementDealMessage(PlayerTypes eOtherWho, CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirList) = 0;
 	virtual void sendChangeWar(TeamTypes iRivalTeam, bool bWar) = 0;
 	virtual void sendChangeVassal(TeamTypes iMasterTeam, bool bVassal, bool bCapitulated) = 0;
-	virtual void sendChooseElection(VoteTypes eVote) = 0;
-	virtual void sendDiploVote(VoteTypes eVote, int iChoice) = 0;
+	virtual void sendChooseElection(int iSelection, int iVoteId) = 0;
+	virtual void sendDiploVote(int iVoteId, PlayerVoteTypes eChoice) = 0;
 	virtual void sendContactCiv(NetContactTypes eContactType, PlayerTypes eWho) = 0;
 	virtual void sendOffer() = 0;
 	virtual void sendDiploEvent(PlayerTypes eWhoTradingWith, DiploEventTypes eDiploEvent, int iData1, int iData2) = 0;
@@ -135,6 +136,11 @@ public:
 	virtual void sendUpdateCivics(CivicTypes* paeCivics) = 0;
 	virtual void sendDiplomacy(PlayerTypes ePlayer, CvDiploParameters* pParams) = 0;
 	virtual void sendPopup(PlayerTypes ePlayer, CvPopupInfo* pInfo) = 0;
+	virtual void sendEventTriggered(PlayerTypes ePlayer, EventTypes eEvent, int iEventTriggeredId) = 0;
+	virtual void sendEmpireSplit(PlayerTypes ePlayer, int iAreaId) = 0;
+	virtual void sendLaunch(PlayerTypes ePlayer, VictoryTypes eVictory) = 0;
+	virtual void sendAdvancedStartAction(AdvancedStartActionTypes eAction, PlayerTypes ePlayer, int iX, int iY, int iData, bool bAdd) = 0;
+	virtual void sendFoundReligion(PlayerTypes ePlayer, ReligionTypes eReligion, ReligionTypes eSlotReligion) = 0;
 
 	virtual int getMillisecsPerTurn() = 0;
 	virtual float getSecsPerTurn() = 0;
@@ -204,6 +210,8 @@ public:
 	virtual CvCacheObject* createCivilizationInfoCacheObject(const TCHAR* szCacheFileName) = 0;
 	virtual CvCacheObject* createPromotionInfoCacheObject(const TCHAR* szCacheFileName) = 0;
 	virtual CvCacheObject* createDiplomacyInfoCacheObject(const TCHAR* szCacheFileName) = 0;
+	virtual CvCacheObject* createEventInfoCacheObject(const TCHAR* szCacheFileName) = 0;
+	virtual CvCacheObject* createEventTriggerInfoCacheObject(const TCHAR* szCacheFileName) = 0;
 
 	virtual CvCacheObject* createCivicInfoCacheObject(const TCHAR* szCacheFileName) = 0;
 	virtual CvCacheObject* createHandicapInfoCacheObject(const TCHAR* szCacheFileName) = 0;
@@ -223,7 +231,7 @@ public:
 
 	virtual CvWString getText(CvWString szIDTag, ...) = 0;
 	virtual CvWString getObjectText(CvWString szIDTag, uint uiForm, bool bNoSubs = false) = 0;
-	virtual void addText(const TCHAR* szIDTag, const wchar* szString, const char* szGender = "N", const char* szPlural = "false") = 0;		
+	virtual void addText(const TCHAR* szIDTag, const wchar* szString, const wchar* szGender = L"N", const wchar* szPlural = L"false") = 0;		
 	virtual uint getNumForms(CvWString szIDTag) = 0;
 
 	virtual WorldSizeTypes getWorldSize() = 0;
@@ -255,6 +263,7 @@ public:
 
 	virtual bool getGraphicOption(GraphicOptionTypes eGraphicOption) = 0;
 	virtual bool getPlayerOption(PlayerOptionTypes ePlayerOption) = 0;
+	virtual int getMainMenu() = 0;
 	
 	virtual bool isFMPMgrHost() = 0;
 	virtual bool isFMPMgrPublic() = 0;

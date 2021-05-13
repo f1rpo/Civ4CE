@@ -10,6 +10,7 @@
 #define MOVE_NO_ENEMY_TERRITORY								(0x00000004)
 #define MOVE_DECLARE_WAR											(0x00000008)
 #define MOVE_DIRECT_ATTACK										(0x00000010)
+#define MOVE_THROUGH_ENEMY										(0x00000020)
 
 #define RANDPLOT_LAND													(0x00000001)
 #define RANDPLOT_UNOWNED											(0x00000002)
@@ -37,8 +38,8 @@
 #define MAX_PLAYERINFO_CHAR_COUNT							(32)
 #define MAX_PLAYEREMAIL_CHAR_COUNT						(64)
 #define MAX_PASSWORD_CHAR_COUNT								(32)
-#define MAX_GSLOGIN_CHAR_COUNT								(30)
-#define MAX_GSEMAIL_CHAR_COUNT								(30)
+#define MAX_GSLOGIN_CHAR_COUNT								(17)
+#define MAX_GSEMAIL_CHAR_COUNT								(50)
 #define MAX_GSPASSWORD_CHAR_COUNT							(30)
 #define MAX_CHAT_CHAR_COUNT										(256)
 #define MAX_ADDRESS_CHAR_COUNT								(64)
@@ -58,8 +59,8 @@
 #define Z_ORDER_LAYER													(-0.1f)
 #define Z_ORDER_LEVEL													(-0.3f)
 
-#define CIV4_GUID															"civ4wrld"
-#define CIV4_PRODUCT_ID												10763
+#define CIV4_GUID															"civ4bts"
+#define CIV4_PRODUCT_ID												11081
 #define CIV4_NAMESPACE_ID											17
 #define CIV4_NAMESPACE_EXT										"-tk"
 
@@ -75,10 +76,10 @@
 
 // Version Verification files and folders
 #ifdef _DEBUG
-#define CIV4_EXE_FILE													".\\Civ4Warlords_DEBUG.exe"
-#define CIV4_DLL_FILE													".\\Assets\\CvGameCoreDLL_dbg.dll"
+#define CIV4_EXE_FILE													".\\Civ4BeyondSword_DEBUG.exe"
+#define CIV4_DLL_FILE													".\\Assets\\CvGameCoreDLL_DEBUG.dll"
 #else
-#define CIV4_EXE_FILE													".\\Civ4Warlords.exe"
+#define CIV4_EXE_FILE													".\\Civ4BeyondSword.exe"
 #define CIV4_DLL_FILE													".\\Assets\\CvGameCoreDLL.dll"
 #endif
 #define CIV4_SHADERS													".\\Shaders\\FXO"
@@ -108,5 +109,6 @@
 #define PYTranslatorModule		"CvTranslator"
 #define PYGameModule					"CvGameInterface"
 #define PYEventModule					"CvEventInterface"
+#define PYRandomEventModule					"CvRandomEventInterface"
 
 #endif	// CVDEFINES_H

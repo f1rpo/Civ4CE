@@ -3,6 +3,7 @@
 #include "CvGameCoreDLL.h"
 #include "CvGameAI.h"
 #include "CvPlayerAI.h"
+#include "CvTeamAI.h"
 #include "CvGlobals.h"
 #include "CvInfos.h"
 
@@ -62,9 +63,10 @@ void CvGameAI::AI_updateAssignWork()
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		CvPlayer& kLoopPlayer = GET_PLAYER((PlayerTypes)iI);
+		if (GET_TEAM(kLoopPlayer.getTeam()).isHuman() && kLoopPlayer.isAlive())
 		{
-			GET_PLAYER((PlayerTypes)iI).AI_updateAssignWork();
+			kLoopPlayer.AI_updateAssignWork();
 		}
 	}
 }
@@ -78,7 +80,7 @@ bool CvGameAI::AI_isFirstTech(TechTypes eTech)
 	{
 		if (GC.getReligionInfo((ReligionTypes)iI).getTechPrereq() == eTech)
 		{
-			if (!(GC.getGameINLINE().isReligionFounded((ReligionTypes)iI)))
+			if (!(GC.getGameINLINE().isReligionSlotTaken((ReligionTypes)iI)))
 			{
 				return true;
 			}
@@ -124,10 +126,11 @@ int CvGameAI::AI_combatValue(UnitTypes eUnit)
 
 int CvGameAI::AI_turnsPercent(int iTurns, int iPercent)
 {
+	FAssert(iPercent > 0);
 	if (iTurns != MAX_INT)
 	{
-		iTurns *= (iPercent + 100);
-		iTurns /= 200;
+		iTurns *= (iPercent);
+		iTurns /= 100;
 	}
 
 	return max(1, iTurns);
