@@ -7,6 +7,7 @@
 #include "CvInfos.h"
 #include "CvGlobals.h"
 #include "CvDLLUtilityIFaceBase.h"
+#include "CvDLLInterfaceIFaceBase.h"
 #include "CvGameAI.h"
 #include "CvGameCoreUtils.h"
 
@@ -25,9 +26,6 @@ CvInitCore::CvInitCore()
 	m_aszCivPassword = new CvWString[MAX_PLAYERS];
 	m_aszEmail = new CvString[MAX_PLAYERS];
 	m_aszSmtpHost = new CvString[MAX_PLAYERS];
-
-	m_abWhiteFlag = new bool[MAX_PLAYERS];
-	m_aszFlagDecal = new CvWString[MAX_PLAYERS];
 
 	m_aeCiv = new CivilizationTypes[MAX_PLAYERS];
 	m_aeLeader = new LeaderHeadTypes[MAX_PLAYERS];
@@ -72,8 +70,6 @@ CvInitCore::~CvInitCore()
 	SAFE_DELETE_ARRAY(m_aszCivPassword);
 	SAFE_DELETE_ARRAY(m_aszEmail);
 	SAFE_DELETE_ARRAY(m_aszSmtpHost);
-	SAFE_DELETE_ARRAY(m_abWhiteFlag);
-	SAFE_DELETE_ARRAY(m_aszFlagDecal);
 	SAFE_DELETE_ARRAY(m_aeCiv);
 	SAFE_DELETE_ARRAY(m_aeLeader);
 	SAFE_DELETE_ARRAY(m_aeTeam);
@@ -155,7 +151,7 @@ bool CvInitCore::getHuman(PlayerTypes eID) const
 int CvInitCore::getNumHumans() const
 {
 	int iNumHumans = 0;
-	for (int i = 0; i < MAX_CIV_PLAYERS; ++i)
+	for (int i = 0; i < MAX_PLAYERS; ++i)
 	{
 		if (getHuman((PlayerTypes)i))
 		{
@@ -168,7 +164,7 @@ int CvInitCore::getNumHumans() const
 int CvInitCore::getNumDefinedPlayers() const
 {
 	int iCount = 0;
-	for (int i = 0; i < MAX_CIV_PLAYERS; ++i)
+	for (int i = 0; i < MAX_PLAYERS; ++i)
 	{
 		if ((getCiv((PlayerTypes)i) != NO_CIVILIZATION) && (getLeader((PlayerTypes)i) != NO_LEADER))
 		{
@@ -223,6 +219,20 @@ bool CvInitCore::getSavedGame() const
 	}
 }
 
+bool CvInitCore::getScenario() const
+{
+	switch (getType())
+	{
+	case GAME_SP_SCENARIO:
+	case GAME_MP_SCENARIO:
+	case GAME_HOTSEAT_SCENARIO:
+	case GAME_PBEM_SCENARIO:
+		return true;
+	default:
+		return false;
+	}
+}
+
 bool CvInitCore::getPitboss() const
 {
 	return (getMode() == GAMEMODE_PITBOSS);
@@ -255,17 +265,17 @@ bool CvInitCore::checkBounds( int iValue, int iLower, int iUpper ) const
 
 bool CvInitCore::getSlotVacant(PlayerTypes eID) const
 {
-	FASSERT_BOUNDS(0, MAX_CIV_PLAYERS, eID, "CvInitCore::getSlotVacant");
+	FASSERT_BOUNDS(0, MAX_PLAYERS, eID, "CvInitCore::getSlotVacant");
 
 	bool bRetVal = false;
 
-	if ( checkBounds(eID, 0, MAX_CIV_PLAYERS) )
+	if ( checkBounds(eID, 0, MAX_PLAYERS) )
 	{
 		bool bTakeoverAI = getMPOption(MPOPTION_TAKEOVER_AI);
 		SlotStatus eStatus = getSlotStatus(eID);
 
 		// Check the status of this slot
-		if ( (eStatus == SS_OPEN) || (bTakeoverAI && (eStatus == SS_COMPUTER)) )
+		if ( (eStatus == SS_OPEN) || (bTakeoverAI && (eStatus == SS_COMPUTER) && getPlayableCiv(eID)) )
 		{
 			bRetVal = ( getSlotClaim(eID) != SLOTCLAIM_ASSIGNED );
 		}
@@ -280,7 +290,7 @@ PlayerTypes CvInitCore::getAvailableSlot()
 
 	// Get the next ID available ID
 	// First check for open slots only
-	for (i = 0; i < MAX_CIV_PLAYERS; ++i)
+	for (i = 0; i < MAX_PLAYERS; ++i)
 	{
 		PlayerTypes eID = (PlayerTypes)i;
 		if ( (getSlotClaim(eID) == SLOTCLAIM_UNASSIGNED) && (getSlotStatus(eID) == SS_OPEN) )
@@ -293,13 +303,16 @@ PlayerTypes CvInitCore::getAvailableSlot()
 	// That didn't work, check to see if we can assign computer slots
 	if (getMPOption(MPOPTION_TAKEOVER_AI))
 	{
-		for (i = 0; i < MAX_CIV_PLAYERS; ++i)
+		for (i = 0; i < MAX_PLAYERS; ++i)
 		{
 			PlayerTypes eID = (PlayerTypes)i;
 			if ( (getSlotClaim(eID) == SLOTCLAIM_UNASSIGNED) && (getSlotStatus(eID) == SS_COMPUTER) )
 			{
-				setSlotClaim(eID, SLOTCLAIM_ASSIGNED);
-				return eID;
+				if (getPlayableCiv(eID))
+				{
+					setSlotClaim(eID, SLOTCLAIM_ASSIGNED);
+					return eID;
+				}
 			}
 		}
 	}
@@ -310,10 +323,10 @@ PlayerTypes CvInitCore::getAvailableSlot()
 
 void CvInitCore::reassignPlayer(PlayerTypes eOldID, PlayerTypes eNewID)
 {
-	FASSERT_BOUNDS(0, MAX_CIV_PLAYERS, eOldID, "CvInitCore::reassignPlayer (eOldID)");
-	FASSERT_BOUNDS(0, MAX_CIV_PLAYERS, eNewID, "CvInitCore::reassignPlayer (eNewID)");
+	FASSERT_BOUNDS(0, MAX_PLAYERS, eOldID, "CvInitCore::reassignPlayer (eOldID)");
+	FASSERT_BOUNDS(0, MAX_PLAYERS, eNewID, "CvInitCore::reassignPlayer (eNewID)");
 
-	if ( checkBounds(eOldID, 0, MAX_CIV_PLAYERS) && checkBounds(eNewID, 0, MAX_CIV_PLAYERS) )
+	if ( checkBounds(eOldID, 0, MAX_PLAYERS) && checkBounds(eNewID, 0, MAX_PLAYERS) )
 	{
 		// *** SAVE TARGET SLOT DETAILS TEMPORARILY
 		// Temp civ details
@@ -324,8 +337,6 @@ void CvInitCore::reassignPlayer(PlayerTypes eOldID, PlayerTypes eNewID)
 		CvWString szCivPassword = m_aszCivPassword[eNewID];
 		CvString szEmail = m_aszEmail[eNewID];
 		CvString szSmtpHost = m_aszSmtpHost[eNewID];
-		bool bWhiteFlag = m_abWhiteFlag[eNewID];
-		CvWString szFlagDecal = m_aszFlagDecal[eNewID];
 		CivilizationTypes eCiv = m_aeCiv[eNewID];
 		LeaderHeadTypes eLeader = m_aeLeader[eNewID];
 		TeamTypes eTeam = m_aeTeam[eNewID];
@@ -353,8 +364,6 @@ void CvInitCore::reassignPlayer(PlayerTypes eOldID, PlayerTypes eNewID)
 		m_aszCivPassword[eNewID] = m_aszCivPassword[eOldID];
 		m_aszEmail[eNewID] = m_aszEmail[eOldID];
 		m_aszSmtpHost[eNewID] = m_aszSmtpHost[eOldID];
-		m_abWhiteFlag[eNewID] = m_abWhiteFlag[eOldID];
-		m_aszFlagDecal[eNewID] = m_aszFlagDecal[eOldID];
 		m_aeCiv[eNewID] = m_aeCiv[eOldID];
 		m_aeLeader[eNewID] = m_aeLeader[eOldID];
 		m_aeTeam[eNewID] = m_aeTeam[eOldID];
@@ -382,8 +391,6 @@ void CvInitCore::reassignPlayer(PlayerTypes eOldID, PlayerTypes eNewID)
 		m_aszCivPassword[eOldID] = szCivPassword;
 		m_aszEmail[eOldID] = szEmail;
 		m_aszSmtpHost[eOldID] = szSmtpHost;
-		m_abWhiteFlag[eOldID] = bWhiteFlag;
-		m_aszFlagDecal[eOldID] = szFlagDecal;
 		m_aeCiv[eOldID] = eCiv;
 		m_aeLeader[eOldID] = eLeader;
 		m_aeTeam[eOldID] = eTeam;
@@ -427,7 +434,7 @@ void CvInitCore::closeInactiveSlots()
 	// Open inactive slots mean different things to different game modes and types...
 	// Let's figure out what they mean for us
 
-	for (int i = 0; i < MAX_CIV_PLAYERS; i++)
+	for (int i = 0; i < MAX_PLAYERS; i++)
 	{
 		PlayerTypes eID = (PlayerTypes)i;
 		if (getSlotStatus(eID) == SS_OPEN)
@@ -459,7 +466,7 @@ void CvInitCore::reopenInactiveSlots()
 	// "Inactive" open slots will only be in Pitboss and Hotseat
 	if (getPitboss() || getHotseat() || getPbem())
 	{
-		for (int i = 0; i < MAX_CIV_PLAYERS; ++i)
+		for (int i = 0; i < MAX_PLAYERS; ++i)
 		{
 			PlayerTypes eID = (PlayerTypes)i;
 			// Reopen all slots that don't have active connections
@@ -639,9 +646,6 @@ void CvInitCore::resetPlayer(PlayerTypes eID)
 		m_aszEmail[eID].clear();
 		m_aszSmtpHost[eID].clear();
 
-		m_abWhiteFlag[eID] = false;
-		m_aszFlagDecal[eID].clear();
-
 		m_aeCiv[eID] = NO_CIVILIZATION;
 		m_aeLeader[eID] = NO_LEADER;
 		m_aeTeam[eID] = (TeamTypes)eID;
@@ -695,8 +699,6 @@ void CvInitCore::resetPlayer(PlayerTypes eID, CvInitCore * pSource, bool bClear,
 			setCivPassword(eID, pSource->getCivPassword(eID), false);
 			setEmail(eID, pSource->getEmail(eID));
 			setSmtpHost(eID, pSource->getSmtpHost(eID));
-			setFlagDecal(eID, pSource->getFlagDecal(eID));
-			setWhiteFlag(eID, pSource->getWhiteFlag(eID));
 
 			setHandicap(eID, pSource->getHandicap(eID));
 			setCiv(eID, pSource->getCiv(eID));
@@ -990,7 +992,7 @@ void CvInitCore::refreshVictories()
 		m_abVictories = new bool[m_iNumVictories];
 		for (int i = 0; i < m_iNumVictories; ++i)
 		{
-			m_abVictories[i] = true;
+			m_abVictories[i] = GC.getVictoryInfo((VictoryTypes) i).getDefault();
 		}
 	}
 }
@@ -1153,13 +1155,16 @@ void CvInitCore::setActivePlayer(PlayerTypes eActivePlayer)
 
 void CvInitCore::setType(GameType eType)
 {
-	m_eType = eType;
-
-	if(CvPlayerAI::areStaticsInitialized())
+	if (getType() != eType)
 	{
-		for (int i = 0; i < MAX_PLAYERS; ++i)
+		m_eType = eType;
+
+		if(CvPlayerAI::areStaticsInitialized())
 		{
-			GET_PLAYER((PlayerTypes)i).updateHuman();
+			for (int i = 0; i < MAX_PLAYERS; ++i)
+			{
+				GET_PLAYER((PlayerTypes)i).updateHuman();
+			}
 		}
 	}
 }
@@ -1183,13 +1188,16 @@ void CvInitCore::setType(const CvWString & szType)
 
 void CvInitCore::setMode(GameMode eMode)
 {
-	m_eMode = eMode;
-
-	if(CvPlayerAI::areStaticsInitialized())
+	if (getMode() != eMode)
 	{
-		for (int i = 0; i < MAX_PLAYERS; ++i)
+		m_eMode = eMode;
+
+		if(CvPlayerAI::areStaticsInitialized())
 		{
-			GET_PLAYER((PlayerTypes)i).updateHuman();
+			for (int i = 0; i < MAX_PLAYERS; ++i)
+			{
+				GET_PLAYER((PlayerTypes)i).updateHuman();
+			}
 		}
 	}
 }
@@ -1217,6 +1225,7 @@ void CvInitCore::setLeaderName(PlayerTypes eID, const CvWString & szLeaderName)
 	{
 		CvWString szName = szLeaderName;
 		gDLL->stripSpecialCharacters(szName);
+		gDLL->getInterfaceIFace()->dirtyTurnLog(eID);
 
 		m_aszLeaderName[eID] = szName;
 	}
@@ -1442,52 +1451,6 @@ void CvInitCore::setSmtpHost(PlayerTypes eID, const CvString & szHost)
 }
 
 
-bool CvInitCore::getWhiteFlag(PlayerTypes eID) const
-{
-	FASSERT_BOUNDS(0, MAX_PLAYERS, eID, "CvInitCore::getWhiteFlag");
-	if ( checkBounds(eID, 0, MAX_PLAYERS) )
-	{
-		return m_abWhiteFlag[eID];
-	}
-	else
-	{
-		return false;
-	}
-}
-
-void CvInitCore::setWhiteFlag(PlayerTypes eID, bool bWhiteFlag)
-{
-	FASSERT_BOUNDS(0, MAX_PLAYERS, eID, "CvInitCore::setWhiteFlag");
-	if ( checkBounds(eID, 0, MAX_PLAYERS) )
-	{
-		m_abWhiteFlag[eID] = bWhiteFlag;
-	}
-}
-
-const CvWString & CvInitCore::getFlagDecal(PlayerTypes eID) const
-{
-	FASSERT_BOUNDS(0, MAX_PLAYERS, eID, "CvInitCore::getFlagDecal");
-	if ( checkBounds(eID, 0, MAX_PLAYERS) )
-	{
-		return m_aszFlagDecal[eID];
-	}
-	else
-	{
-		m_szTemp = "";
-		return m_szTemp;
-	}
-}
-
-void CvInitCore::setFlagDecal(PlayerTypes eID, const CvWString & szFlagDecal)
-{
-	FASSERT_BOUNDS(0, MAX_PLAYERS, eID, "CvInitCore::setFlagDecal");
-	if ( checkBounds(eID, 0, MAX_PLAYERS) )
-	{
-		m_aszFlagDecal[eID] = szFlagDecal;
-	}
-}
-
-
 CivilizationTypes CvInitCore::getCiv(PlayerTypes eID) const
 {
 	FASSERT_BOUNDS(0, MAX_PLAYERS, eID, "CvInitCore::getCiv");
@@ -1550,11 +1513,14 @@ void CvInitCore::setTeam(PlayerTypes eID, TeamTypes eTeam)
 	FASSERT_BOUNDS(0, MAX_PLAYERS, eID, "CvInitCore::setTeam");
 	if ( checkBounds(eID, 0, MAX_PLAYERS) )
 	{
-		m_aeTeam[eID] = eTeam;
-
-		if(CvPlayerAI::areStaticsInitialized())
+		if (getTeam(eID) != eTeam)
 		{
-			GET_PLAYER(eID).updateTeamType();
+			m_aeTeam[eID] = eTeam;
+
+			if(CvPlayerAI::areStaticsInitialized())
+			{
+				GET_PLAYER(eID).updateTeamType();
+			}
 		}
 	}
 }
@@ -1644,11 +1610,14 @@ void CvInitCore::setSlotStatus(PlayerTypes eID, SlotStatus eSlotStatus)
 	FASSERT_BOUNDS(0, MAX_PLAYERS, eID, "CvInitCore::setSlotStatus");
 	if ( checkBounds(eID, 0, MAX_PLAYERS) )
 	{
-		m_aeSlotStatus[eID] = eSlotStatus;
-
-		if(CvPlayerAI::areStaticsInitialized())
+		if (getSlotStatus(eID) != eSlotStatus)
 		{
-			GET_PLAYER(eID).updateHuman();
+			m_aeSlotStatus[eID] = eSlotStatus;
+
+			if(CvPlayerAI::areStaticsInitialized())
+			{
+				GET_PLAYER(eID).updateHuman();
+			}
 		}
 	}
 }
@@ -1715,8 +1684,7 @@ bool CvInitCore::getPlayableCiv(PlayerTypes eID) const
 			}
 			else
 			{
-				// Don't allow people to play the barb civ
-				return (eID < MAX_CIV_PLAYERS);
+				return (eID < MAX_PLAYERS);
 			}
 		}
 	}
@@ -1861,6 +1829,20 @@ void CvInitCore::resetAdvancedStartPoints()
 	setNumAdvancedStartPoints(iPoints);
 }
 
+int CvInitCore::getMaxEuropePlayers() const
+{
+	int iNumEuropes = 0;
+
+	for (int iCiv = 0; iCiv < GC.getNumCivilizationInfos(); ++iCiv)
+	{
+		if (GC.getCivilizationInfo((CivilizationTypes) iCiv).isEurope())
+		{
+			++iNumEuropes;
+		}
+	}
+
+	return iNumEuropes;
+}
 
 void CvInitCore::read(FDataStreamBase* pStream)
 {
@@ -1922,9 +1904,6 @@ void CvInitCore::read(FDataStreamBase* pStream)
 	pStream->ReadString(MAX_PLAYERS, m_aszCivPassword);
 	pStream->ReadString(MAX_PLAYERS, m_aszEmail);
 	pStream->ReadString(MAX_PLAYERS, m_aszSmtpHost);
-
-	pStream->Read(MAX_PLAYERS, m_abWhiteFlag);
-	pStream->ReadString(MAX_PLAYERS, m_aszFlagDecal);
 
 	pStream->Read(MAX_PLAYERS, (int*)m_aeCiv);
 	pStream->Read(MAX_PLAYERS, (int*)m_aeLeader);
@@ -2010,9 +1989,6 @@ void CvInitCore::write(FDataStreamBase* pStream)
 	pStream->WriteString(MAX_PLAYERS, m_aszCivPassword);
 	pStream->WriteString(MAX_PLAYERS, m_aszEmail);
 	pStream->WriteString(MAX_PLAYERS, m_aszSmtpHost);
-
-	pStream->Write(MAX_PLAYERS, m_abWhiteFlag);
-	pStream->WriteString(MAX_PLAYERS, m_aszFlagDecal);
 
 	pStream->Write(MAX_PLAYERS, (int*)m_aeCiv);
 	pStream->Write(MAX_PLAYERS, (int*)m_aeLeader);

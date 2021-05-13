@@ -40,163 +40,30 @@ void CvXMLLoadUtility::InitStringList(CvString **ppszList, int iListLen, CvStrin
 
 //------------------------------------------------------------------------------------------------------
 //
-//  FUNCTION:   void Init2DFloatList(float*** pppfList, int iSizeX, int iSizeY)
-//
-//  PURPOSE :   allocate and initialize a 2d array of float data
-//
-//------------------------------------------------------------------------------------------------------
-void CvXMLLoadUtility::Init2DFloatList(float*** pppfList, int iSizeX, int iSizeY)
-{
-	// SPEEDUP
-	PROFILE_FUNC();
-	int i,j;	// loop counters
-	float** ppfList;
-
-	FAssertMsg(*pppfList == NULL,"memory leak?");
-	FAssertMsg(((0 < iSizeX) && (0 < iSizeY)), "list size to allocate is less than 1");
-	// allocate the memory for the array of pointers to arrays of floats
-	*pppfList = new float *[iSizeX];
-	// set the local pointer to the newly allocated memory
-	ppfList = *pppfList;
-
-	// loop through each of the pointers
-	for (i=0;i<iSizeX;i++)
-	{
-		// allocate a list of floats for the current pointer
-		ppfList[i] = new float[iSizeY];
-		// loop through all of the current pointer's floats
-		for (j=0;j<iSizeY;j++)
-		{
-			// set the current float to zero
-			ppfList[i][j] = 0.0f;
-		}
-	}
-}
-
-//------------------------------------------------------------------------------------------------------
-//
 //  FUNCTION:   void Init2DIntList(int*** pppiList, int iSizeX, int iSizeY)
 //
 //  PURPOSE :   allocate and initialize a 2d array of int data
 //
 //------------------------------------------------------------------------------------------------------
-void CvXMLLoadUtility::Init2DIntList(int*** pppiList, int iSizeX, int iSizeY)
+void CvXMLLoadUtility::Init2DIntList(std::vector<int*>& aaiList, int iSizeX, int iSizeY)
 {
-	// SPEEDUP
 	PROFILE_FUNC();
-	int i,j;	// loop counters
-	int** ppiList;
-
-	FAssertMsg(*pppiList == NULL,"memory leak?");
 	FAssertMsg(((0 < iSizeX) && (0 < iSizeY)), "list size to allocate is less than 1");
+
 	// allocate the memory for the array of pointers to arrays of ints
-	*pppiList = new int *[iSizeX];
-	// set the local pointer to the newly allocated memory
-	ppiList = *pppiList;
+	aaiList.clear();
+	aaiList.reserve(iSizeX);
 
 	// loop through each of the pointers
-	for (i=0;i<iSizeX;i++)
+	for (int i=0;i<iSizeX;i++)
 	{
 		// allocate a list of ints for the current pointer
-		ppiList[i] = new int[iSizeY];
+		aaiList.push_back(new int[iSizeY]);
 		// loop through all of the current pointer's ints
-		for (j=0;j<iSizeY;j++)
+		for (int j=0;j<iSizeY;j++)
 		{
 			// set the current int to zero
-			ppiList[i][j] = 0;
-		}
-	}
-}
-
-//------------------------------------------------------------------------------------------------------
-//
-//  FUNCTION:   void InitPointerFloatList(float*** pppfList, int iSizeX)
-//
-//  PURPOSE :   allocate and initialize a 2d array of float data
-//
-//------------------------------------------------------------------------------------------------------
-void CvXMLLoadUtility::InitPointerFloatList(float*** pppfList, int iSizeX)
-{
-	// SPEEDUP
-	PROFILE_FUNC();
-	int i;	// loop counters
-	float** ppfList;
-
-	FAssertMsg(*pppfList == NULL,"memory leak?");
-	FAssertMsg((0 < iSizeX), "list size to allocate is less than 1");
-	// allocate the memory for the array of pointers to arrays of floats
-	*pppfList = new float *[iSizeX];
-	// set the local pointer to the newly allocated memory
-	ppfList = *pppfList;
-
-	// loop through each of the pointers
-	for (i=0;i<iSizeX;i++)
-	{
-		// Null each pointer
-		ppfList[i] = NULL;
-	}
-}
-
-//------------------------------------------------------------------------------------------------------
-//
-//  FUNCTION:   void InitPointerIntList(int*** pppiList, int iSizeX)
-//
-//  PURPOSE :   allocate and initialize a 2d array of int data
-//
-//------------------------------------------------------------------------------------------------------
-void CvXMLLoadUtility::InitPointerIntList(int*** pppiList, int iSizeX)
-{
-	// SPEEDUP
-	PROFILE_FUNC();
-	int i;	// loop counters
-	int** ppiList;
-
-	FAssertMsg(*pppiList == NULL,"memory leak?");
-	FAssertMsg((0 < iSizeX), "list size to allocate is less than 1");
-	// allocate the memory for the array of pointers to arrays of ints
-	*pppiList = new int *[iSizeX];
-	// set the local pointer to the newly allocated memory
-	ppiList = *pppiList;
-
-	// loop through each of the pointers
-	for (i=0;i<iSizeX;i++)
-	{
-		// Null each pointer
-		ppiList[i] = NULL;
-	}
-}
-
-//------------------------------------------------------------------------------------------------------
-//
-//  FUNCTION:   void Init2DDirectionTypesList(DirectionTypes*** pppiList, int iSizeX, int iSizeY)
-//
-//  PURPOSE :   allocate and initialize a 2d array of DirectionTypes data
-//
-//------------------------------------------------------------------------------------------------------
-void CvXMLLoadUtility::Init2DDirectionTypesList(DirectionTypes*** pppiList, int iSizeX, int iSizeY)
-{
-	// SPEEDUP
-	PROFILE_FUNC();
-	int i,j;	// loop counters
-	DirectionTypes** ppiList;
-
-	FAssertMsg(*pppiList == NULL,"memory leak?");
-	FAssertMsg(((0 < iSizeX) && (0 < iSizeY)), "list size to allocate is less than 1");
-	// allocate the memory for the array of pointers to arrays of DirectionTypes
-	*pppiList = new DirectionTypes *[iSizeX];
-	// set the local pointer to the newly allocated memory
-	ppiList = *pppiList;
-
-	// loop through each of the pointers
-	for (i=0;i<iSizeX;i++)
-	{
-		// allocate a list of DirectionTypes for the current pointer
-		ppiList[i] = new DirectionTypes[iSizeY];
-		// loop through all of the current pointer's DirectionTypes
-		for (j=0;j<iSizeY;j++)
-		{
-			// set the current DirectionTypes to NO_DIRECTION
-			ppiList[i][j] = NO_DIRECTION;
+			aaiList[i][j] = 0;
 		}
 	}
 }
@@ -226,16 +93,13 @@ void CvXMLLoadUtility::InitImprovementBonusList(CvImprovementBonusInfo** ppImpro
 	for (i=0;i<iListLen;i++)
 	{
 		paImprovementBonus[i].m_bBonusMakesValid = false;
-		paImprovementBonus[i].m_bBonusTrade = false;
 
-#if 1
-		FAssertMsg(paImprovementBonus[i].m_piYieldChange==NULL, "mem leak");
-		paImprovementBonus[i].m_piYieldChange = new int[NUM_YIELD_TYPES];
+		FAssertMsg(paImprovementBonus[i].m_aiYieldChange==NULL, "mem leak");
+		paImprovementBonus[i].m_aiYieldChange = new int[NUM_YIELD_TYPES];
 		for (int j = 0; j < NUM_YIELD_TYPES; j++)
 		{
-			paImprovementBonus[i].m_piYieldChange[j] = 0;
+			paImprovementBonus[i].m_aiYieldChange[j] = 0;
 		}
-#endif
 
 		paImprovementBonus[i].m_iDiscoverRand = 0;
 	}

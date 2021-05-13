@@ -30,7 +30,8 @@ CvReplayInfo::CvReplayInfo() :
 	m_bMultiplayer(false),
 	m_iStartYear(0)
 {
-	m_nMinimapSize = ((GC.getDefineINT("MINIMAP_RENDER_SIZE") * GC.getDefineINT("MINIMAP_RENDER_SIZE")) / 2);
+	int iSize = GC.getDefineINT("MINIMAP_RENDER_SIZE");
+	m_nMinimapSize = (iSize * iSize) / 2;
 }
 
 CvReplayInfo::~CvReplayInfo()
@@ -543,6 +544,11 @@ int CvReplayInfo::getMapWidth() const
 const unsigned char* CvReplayInfo::getMinimapPixels() const
 {
 	return m_pcMinimapPixels;
+}
+
+int CvReplayInfo::getMinimapSizeInBytes() const
+{
+	return m_nMinimapSize;
 }
 
 const char* CvReplayInfo::getModName() const

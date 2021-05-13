@@ -34,16 +34,13 @@ void CyGlobalContextPythonInterface1(python::class_<CyGlobalContext>& x)
 		.def("getNumTerrainInfos", &CyGlobalContext::getNumTerrainInfos, "() - Total Terrain Infos XML\\Terrain\\CIV4TerrainInfos.xml")
 		.def("getTerrainInfo", &CyGlobalContext::getTerrainInfo, python::return_value_policy<python::reference_existing_object>(), "(int (TerrainTypes) eTerrainID) - CvInfo for TerrainID")
 
-		.def("getBonusClassInfo", &CyGlobalContext::getBonusClassInfo, python::return_value_policy<python::reference_existing_object>(), "(int (BonusClassTypes) eBonusClassID) - CvInfo for BonusID")
+		.def("getNumYieldInfos", &CyGlobalContext::getNumYieldInfos, "() - Total Yield Infos XML\\Terrain\\CIV4YieldInfos.xml")
 
 		.def("getNumBonusInfos", &CyGlobalContext::getNumBonusInfos, "() - Total Bonus Infos XML\\Terrain\\CIV4BonusInfos.xml")
 		.def("getBonusInfo", &CyGlobalContext::getBonusInfo, python::return_value_policy<python::reference_existing_object>(), "(BonusID) - CvInfo for BonusID")
 
 		.def("getNumFeatureInfos", &CyGlobalContext::getNumFeatureInfos, "() - Total Feature Infos XML\\Terrain\\CIV4FeatureInfos.xml")
 		.def("getFeatureInfo", &CyGlobalContext::getFeatureInfo, python::return_value_policy<python::reference_existing_object>(), "(FeatureID) - CvInfo for FeatureID")
-
-		.def("getNumUpkeepInfos", &CyGlobalContext::getNumUpkeepInfos, "int () - Number of upkeep infos")
-		.def("getUpkeepInfo", &CyGlobalContext::getUpkeepInfo, python::return_value_policy<python::reference_existing_object>(), "(UpkeepInfoID) - CvInfo for upkeep info")
 
 		.def("getNumCultureLevelInfos", &CyGlobalContext::getNumCultureLevelInfos, "int () - Number of culture level infos")
 		.def("getCultureLevelInfo", &CyGlobalContext::getCultureLevelInfo, python::return_value_policy<python::reference_existing_object>(), "(CultureLevelID) - CvInfo for CultureLevelID")
@@ -60,7 +57,9 @@ void CyGlobalContextPythonInterface1(python::class_<CyGlobalContext>& x)
 		.def("getNumSeaLevelInfos", &CyGlobalContext::getNumSeaLevelInfos, "int () - Number of seal level infos")
 		.def("getSeaLevelInfo", &CyGlobalContext::getSeaLevelInfo, python::return_value_policy<python::reference_existing_object>(), "CvSeaLevelInfo - (SeaLevelTypeID)")
 
-		.def("getNumPlayableCivilizationInfos", &CyGlobalContext::getNumPlayableCivilizationInfos, "() - Total # of Playable Civs")
+		.def("getNumEuropeInfos", &CyGlobalContext::getNumEuropeInfos, "int () - Number of seal level infos")
+		.def("getEuropeInfo", &CyGlobalContext::getEuropeInfo, python::return_value_policy<python::reference_existing_object>(), "CvEuropeInfo - (EuropeTypeID)")
+
 		.def("getNumCivilizationInfos", &CyGlobalContext::getNumCivilizatonInfos, "() - Total Civilization Infos XML\\Civilizations\\CIV4CivilizationInfos.xml")
 		.def("getCivilizationInfo", &CyGlobalContext::getCivilizationInfo, python::return_value_policy<python::reference_existing_object>(), "(CivilizationID) - CvInfo for CivilizationID")
 
@@ -77,8 +76,6 @@ void CyGlobalContextPythonInterface1(python::class_<CyGlobalContext>& x)
 		.def("getSpecialUnitInfo", &CyGlobalContext::getSpecialUnitInfo, python::return_value_policy<python::reference_existing_object>(), "(UnitID) - CvInfo for UnitID")
 
 		.def("getYieldInfo", &CyGlobalContext::getYieldInfo, python::return_value_policy<python::reference_existing_object>(), "(YieldID) - CvInfo for YieldID")
-
-		.def("getCommerceInfo", &CyGlobalContext::getCommerceInfo, python::return_value_policy<python::reference_existing_object>(), "(CommerceID) - CvInfo for CommerceID")
 
 		.def("getNumRouteInfos", &CyGlobalContext::getNumRouteInfos, "() - Total Route Infos XML\\Misc\\CIV4RouteInfos.xml")
 		.def("getRouteInfo", &CyGlobalContext::getRouteInfo, python::return_value_policy<python::reference_existing_object>(), "(RouteID) - CvInfo for RouteID")

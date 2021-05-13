@@ -105,14 +105,14 @@ bool CySelectionGroup::hasMoved()
 	return m_pSelectionGroup ? m_pSelectionGroup->hasMoved() : false;
 }
 
-bool CySelectionGroup::canEnterTerritory(int /*TeamTypes*/ eTeam, bool bIgnoreRightOfPassage)
+bool CySelectionGroup::canEnterTerritory(int /*PlayerTypes*/ ePlayer, bool bIgnoreRightOfPassage)
 {
-	return m_pSelectionGroup ? m_pSelectionGroup->canEnterTerritory((TeamTypes) eTeam, bIgnoreRightOfPassage) : false;
+	return m_pSelectionGroup ? m_pSelectionGroup->canEnterTerritory((PlayerTypes) ePlayer, bIgnoreRightOfPassage) : false;
 }
 
-bool CySelectionGroup::canEnterArea(int /*TeamTypes*/ eTeam, CyArea* pArea, bool bIgnoreRightOfPassage)
+bool CySelectionGroup::canEnterArea(int /*PlayerTypes*/ ePlayer, CyArea* pArea, bool bIgnoreRightOfPassage)
 {
-	return m_pSelectionGroup ? m_pSelectionGroup->canEnterArea((TeamTypes) eTeam, pArea->getArea(), bIgnoreRightOfPassage) : false;
+	return m_pSelectionGroup ? m_pSelectionGroup->canEnterArea((PlayerTypes) ePlayer, pArea->getArea(), bIgnoreRightOfPassage) : false;
 }
 
 bool CySelectionGroup::canMoveInto(CyPlot* pPlot, bool bAttack)
@@ -153,11 +153,6 @@ bool CySelectionGroup::isInvisible(int /*TeamTypes*/ eTeam)
 int CySelectionGroup::countNumUnitAIType(UnitAITypes eUnitAI)
 {
 	return m_pSelectionGroup ? m_pSelectionGroup->countNumUnitAIType(eUnitAI) : -1;
-}
-
-bool CySelectionGroup::hasWorker()
-{
-	return m_pSelectionGroup ? m_pSelectionGroup->hasWorker() : false;
 }
 
 bool CySelectionGroup::at(int iX, int iY)
@@ -265,6 +260,16 @@ void CySelectionGroup::resetPath()
 {
 	if (m_pSelectionGroup)
 		m_pSelectionGroup->resetPath();
+}
+
+bool CySelectionGroup::isAssignedTradeRoute(int iRouteID) const
+{
+	return m_pSelectionGroup ? m_pSelectionGroup->isAssignedTradeRoute(iRouteID) : false;
+}
+
+bool CySelectionGroup::canAssignTradeRoute(int iRouteID) const
+{
+	return m_pSelectionGroup ? m_pSelectionGroup->canAssignTradeRoute(iRouteID) : false;
 }
 
 int CySelectionGroup::getNumUnits()

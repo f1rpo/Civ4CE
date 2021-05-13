@@ -48,6 +48,11 @@ bool CvDLLEntity::IsSelected() const
 	return gDLL->getEntityIFace()->IsSelected(getEntity());
 }
 
+void CvDLLEntity::SetSelected(bool bSelected)
+{
+	gDLL->getEntityIFace()->SetSelected(getEntity(), bSelected);
+}
+
 void CvDLLEntity::PlayAnimation(AnimationTypes eAnim, float fSpeed, bool bQueue, int iLayer, float fStartPct, float fEndPct)
 {
 	gDLL->getEntityIFace()->PlayAnimation(getEntity(), eAnim, fSpeed, bQueue, iLayer, fStartPct, fEndPct);
@@ -81,14 +86,4 @@ void CvDLLEntity::SetPosition( const CvPlot * pkPlot )
 void CvDLLEntity::NotifyEntity( MissionTypes eMission )
 {
 	gDLL->getEntityIFace()->NotifyEntity( getUnitEntity(), eMission );
-}
-
-void CvDLLEntity::SetSiegeTower(bool show)
-{
-	gDLL->getEntityIFace()->SetSiegeTower( getUnitEntity(), show );
-}
-
-bool CvDLLEntity::GetSiegeTower()
-{
-	return gDLL->getEntityIFace()->GetSiegeTower(getUnitEntity());
 }

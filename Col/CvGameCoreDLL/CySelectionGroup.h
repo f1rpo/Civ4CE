@@ -42,8 +42,8 @@ public:
 	bool canAllMove();
 	bool canAnyMove();
 	bool hasMoved();
-	bool canEnterTerritory(int /*TeamTypes*/ eTeam, bool bIgnoreRightOfPassage);
-	bool canEnterArea(int /*TeamTypes*/ eTeam, CyArea* pArea, bool bIgnoreRightOfPassage);
+	bool canEnterTerritory(int /*PlayerTypes*/ ePlayer, bool bIgnoreRightOfPassage);
+	bool canEnterArea(int /*PlayerTypes*/ ePlayer, CyArea* pArea, bool bIgnoreRightOfPassage);
 	bool canMoveInto(CyPlot* pPlot, bool bAttack);
 	bool canMoveOrAttackInto(CyPlot* pPlot, bool bDeclareWar);
 	bool canMoveThrough(CyPlot* pPlot);
@@ -52,7 +52,6 @@ public:
 	bool alwaysInvisible();
 	bool isInvisible(int /*TeamTypes*/ eTeam);
 	int countNumUnitAIType(UnitAITypes eUnitAI);
-	bool hasWorker();
 
 	bool at(int iX, int iY);
 	bool atPlot(CyPlot* pPlot);
@@ -77,6 +76,8 @@ public:
 	CyPlot* getPathEndTurnPlot();
 	bool generatePath(CyPlot* pFromPlot, CyPlot* pToPlot, int iFlags, bool bReuse, int* piPathTurns);
 	void resetPath();
+	bool isAssignedTradeRoute(int iRouteID) const;
+	bool canAssignTradeRoute(int iRouteID) const;
 	int getNumUnits();
 	void clearMissionQueue();
 	int getLengthMissionQueue();

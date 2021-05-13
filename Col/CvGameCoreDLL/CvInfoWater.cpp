@@ -50,29 +50,14 @@ float CvWaterPlaneInfo::getMaterialAlpha() const		// The water plane's material 
 	return m_fMaterialAlpha;
 }
 //------------------------------------------------------------------------------------------------------
-NiColor	CvWaterPlaneInfo::getMaterialDiffuse() const	// The water plane's material diffuse color
-{
-	return m_kMaterialDiffuse;
-}
-//------------------------------------------------------------------------------------------------------
-NiColor	CvWaterPlaneInfo::getMaterialSpecular() const// The water plane's material specular color
-{
-	return m_kMaterialSpecular;
-}
-//------------------------------------------------------------------------------------------------------
-NiColor	CvWaterPlaneInfo::getMaterialEmmisive() const// The water plane's material emmisive color
-{
-	return m_kMaterialEmmisive;
-}
-//------------------------------------------------------------------------------------------------------
 const TCHAR * CvWaterPlaneInfo::getBaseTexture() const
 {
 	return m_szBaseTexture;
 }
 //------------------------------------------------------------------------------------------------------
-void CvWaterPlaneInfo::setBaseTexture(const TCHAR* szVal)			// The filename of the base texture
+const TCHAR * CvWaterPlaneInfo::getNormalTexture() const
 {
-	m_szBaseTexture=szVal;
+	return m_szNormalTexture;
 }
 //------------------------------------------------------------------------------------------------------
 const TCHAR * CvWaterPlaneInfo::getTransitionTexture() const
@@ -80,9 +65,14 @@ const TCHAR * CvWaterPlaneInfo::getTransitionTexture() const
 	return m_szTransitionTexture;
 }
 //------------------------------------------------------------------------------------------------------
-void CvWaterPlaneInfo::setTransitionTexture(const TCHAR* szVal)		// The filename of the detail texture
+const TCHAR * CvWaterPlaneInfo::getEnvironmentTexture() const
 {
-	m_szTransitionTexture=szVal;
+	return m_szEnvironmentTexture;
+}
+//------------------------------------------------------------------------------------------------------
+const TCHAR * CvWaterPlaneInfo::getGridTexture() const
+{
+	return m_szGridTexture;
 }
 //------------------------------------------------------------------------------------------------------
 float CvWaterPlaneInfo::getTextureScaling() const
@@ -106,64 +96,16 @@ bool CvWaterPlaneInfo::read(CvXMLLoadUtility* pXML)
 	if (!CvInfoBase::read(pXML))
 		return false;
 
-	//int j;
-	if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(),"WaterMaterial"))
-	{
-		if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(),"MaterialColors"))
-		{
-			if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(),"DiffuseMaterialColor"))
-			{
-				pXML->GetChildXmlValByName( &m_kMaterialDiffuse.r, "r");
-				pXML->GetChildXmlValByName( &m_kMaterialDiffuse.g, "g");
-				pXML->GetChildXmlValByName( &m_kMaterialDiffuse.b, "b");
-				gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
-			}
-			if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(),"SpecularMaterialColor"))
-			{
-				pXML->GetChildXmlValByName( &m_kMaterialSpecular.r, "r");
-				pXML->GetChildXmlValByName( &m_kMaterialSpecular.g, "g");
-				pXML->GetChildXmlValByName( &m_kMaterialSpecular.b, "b");
-				gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
-			}
-			if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(),"EmmisiveMaterialColor"))
-			{
-				pXML->GetChildXmlValByName( &m_kMaterialEmmisive.r, "r");
-				pXML->GetChildXmlValByName( &m_kMaterialEmmisive.g, "g");
-				pXML->GetChildXmlValByName( &m_kMaterialEmmisive.b, "b");
-				gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
-			}
-			gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
-		}
+	pXML->GetChildXmlValByName( &m_fMaterialAlpha, "MaterialAlpha");
+	pXML->GetChildXmlValByName( &m_BaseTextureScale, "TextureScaling");
+	pXML->GetChildXmlValByName( &m_fURate, "URate");
+	pXML->GetChildXmlValByName( &m_fVRate, "VRate");
+	pXML->GetChildXmlValByName( m_szBaseTexture, "WaterBaseTexture");
+	pXML->GetChildXmlValByName( m_szNormalTexture, "WaterNormalTexture");
+	pXML->GetChildXmlValByName( m_szTransitionTexture, "WaterTransitionTexture");
+	pXML->GetChildXmlValByName( m_szEnvironmentTexture, "WaterEnvironmentTexture");
+	pXML->GetChildXmlValByName( m_szGridTexture, "WaterGridTexture");
 
-		pXML->GetChildXmlValByName( &m_fMaterialAlpha, "MaterialAlpha");
-
-		gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
-	}
-
-	if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(),"WaterTextures"))
-	{
-		if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(),"WaterBaseTexture"))
-		{
-			pXML->GetChildXmlValByName( szTextVal, "TextureFile");
-			setBaseTexture(szTextVal);
-
-			pXML->GetChildXmlValByName( &m_BaseTextureScale, "TextureScaling");
-			pXML->GetChildXmlValByName( &m_fURate, "URate");
-			pXML->GetChildXmlValByName( &m_fVRate, "VRate");
-
-			gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
-
-		}
-		if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(),"WaterTransitionTexture"))
-		{
-			pXML->GetChildXmlValByName( szTextVal, "TextureFile");
-			setTransitionTexture(szTextVal);
-		}
-
-		gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
-	}
-
-	gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
 	return true;
 }
 //------------------------------------------------------------------------------------------------------
@@ -203,6 +145,11 @@ bool CvTerrainPlaneInfo::isVisible() const
 bool CvTerrainPlaneInfo::isGroundPlane() const
 {
 	return m_bGroundPlane;
+}
+//------------------------------------------------------------------------------------------------------
+bool CvTerrainPlaneInfo::isCitySelection() const
+{
+	return m_bCitySelection;
 }
 //------------------------------------------------------------------------------------------------------
 float CvTerrainPlaneInfo::getMaterialAlpha() const		// The water plane's material alpha
@@ -263,6 +210,7 @@ bool CvTerrainPlaneInfo::read(CvXMLLoadUtility* pXML)
 
 	pXML->GetChildXmlValByName( &m_bVisible, "bVisible");
 	pXML->GetChildXmlValByName( &m_bGroundPlane, "bGroundPlane");
+	pXML->GetChildXmlValByName( &m_bCitySelection, "bCitySelection");
 	pXML->GetChildXmlValByName( &m_fMaterialAlpha, "MaterialAlpha");
 	pXML->GetChildXmlValByName( &m_fCloseAlpha, "CloseAlpha");
 

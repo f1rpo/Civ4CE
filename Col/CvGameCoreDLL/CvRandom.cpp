@@ -5,6 +5,8 @@
 #include "CvGlobals.h"
 #include "CyArgsList.h"
 #include "CvGameAI.h"
+#include <numeric>
+#include <limits>
 
 #define RANDOM_A      (1103515245)
 #define RANDOM_C      (12345)
@@ -76,6 +78,90 @@ unsigned short CvRandom::get(unsigned short usNum, const TCHAR* pszLog)
 float CvRandom::getFloat()
 {
 	return (((float)(get(MAX_UNSIGNED_SHORT))) / ((float)MAX_UNSIGNED_SHORT));
+}
+
+/* boxmuller.c           Implements the Polar form of the Box-Muller
+Transformation
+
+(c) Copyright 1994, Everett F. Carter Jr.
+Permission is granted by the author to use
+this software for any application provided this
+copyright notice is preserved.
+
+*/
+
+float CvRandom::getGaussian(float fMean, float fStandardDeviation)
+{
+	float x1, x2, w, y1;
+	static float y2;
+	static int use_last = 0;
+
+	if (use_last)		        /* use value from previous call */
+	{
+		y1 = y2;
+		use_last = 0;
+	}
+	else
+	{
+		do
+		{
+			x1 = 2.0f * getFloat() - 1.0f;
+			x2 = 2.0f * getFloat() - 1.0f;
+			w = x1 * x1 + x2 * x2;
+		} while ( w >= 1.0f );
+
+		w = sqrt( (-2.0f * log( w ) ) / w );
+		y1 = x1 * w;
+		y2 = x2 * w;
+		use_last = 1;
+	}
+
+	return( fMean + y1 * fStandardDeviation );
+}
+
+int CvRandom::pickValue(std::vector<int>& aWeights, const TCHAR* pszLog)
+{
+	int iTotalWeights = std::accumulate(aWeights.begin(), aWeights.end(), 0);
+	FAssert(iTotalWeights >= 0);
+	FAssert(iTotalWeights <= std::numeric_limits<unsigned short>::max());
+
+	int iValue = get(iTotalWeights, pszLog);
+	int iSum = 0;
+	for (int i = 0; i < (int)aWeights.size(); ++i)
+	{
+		iSum += aWeights[i];
+		if (iValue < iSum)
+		{
+			return i;
+		}
+	}
+
+	FAssert(false);
+	return 0;
+}
+
+void CvRandom::shuffleArray(std::vector<int>& aNumbers, const TCHAR* pszLog)
+{
+	for (uint iI = 0; iI < aNumbers.size(); iI++)
+	{
+		int iJ = (get(aNumbers.size() - iI, pszLog) + iI);
+
+		if (iI != iJ)
+		{
+			int iTemp = aNumbers[iI];
+			aNumbers[iI] = aNumbers[iJ];
+			aNumbers[iJ] = iTemp;
+		}
+	}
+}
+
+void CvRandom::shuffleSequence(std::vector<int>& aNumbers, const TCHAR* pszLog)
+{
+	for (uint i = 0; i < aNumbers.size(); ++i)
+	{
+		aNumbers[i] = i;
+	}
+	shuffleArray(aNumbers, pszLog);
 }
 
 

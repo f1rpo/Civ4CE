@@ -66,7 +66,7 @@ void CvFractal::fracInitHinted(int iNewXs, int iNewYs, int iGrain, CvRandom& ran
 
 void CvFractal::fracInitInternal(int iNewXs, int iNewYs, int iGrain, CvRandom& random, byte* pbyHints, int iHintsLength, int iFlags, CvFractal* pRifts, int iFracXExp, int iFracYExp)
 {
-	PROFILE("CvFractal::fracInit()");
+	PROFILE_FUNC();
 	int iSmooth;
 	int iScreen;  // This screens out already marked spots in m_aaiFrac[][];
 	int iPass;
@@ -323,7 +323,7 @@ int CvFractal::getHeight(int iX, int iY)
 
 int CvFractal::getHeightFromPercent(int iPercent)
 {
-	PROFILE("CvFractal::getHeightFromPercent()");
+	PROFILE_FUNC();
 	int iEstimate;
 	int iLowerBound;
 	int iUpperBound;
@@ -403,14 +403,14 @@ void CvFractal::tectonicAction(CvFractal* pRifts)  //  Assumes FRAC_WRAP_X is on
 
 int CvFractal::yieldX(int iBadX)  //  Assumes FRAC_WRAP_X is on.
 {
-	if (iBadX < 0)
+	while (iBadX < 0)
 	{
-		return (iBadX + m_iFracX);
+		iBadX += m_iFracX;
 	}
 
-	if (iBadX >= m_iFracX)
+	while (iBadX >= m_iFracX)
 	{
-		return (iBadX - m_iFracX);
+		iBadX -= m_iFracX;
 	}
 
 	return iBadX;

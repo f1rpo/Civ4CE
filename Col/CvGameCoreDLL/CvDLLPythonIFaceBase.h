@@ -44,6 +44,9 @@ public:
 	virtual bool pythonGetWrapXY(bool *bWrapX, bool *bWrapY) = 0;
 	virtual bool pythonGetLatitudes(int *iTopLatitude, int *iBottomLatitude) = 0;
 	virtual bool pythonIsBonusIgnoreLatitudes(bool *bBonusIgnoreLatitudes) = 0;
+	virtual bool pythonIsEuropeStart(EuropeTypes eEurope, bool *bStart) = 0;
+	virtual bool pythonGetEuropeWidth(EuropeTypes eEurope, int *iWidth) = 0;
+	virtual bool pythonGetEuropeMinLandDistance(EuropeTypes eEurope, int *iDistance) = 0;
 	virtual bool pythonCalculateScore(PlayerTypes id, long* plScore, bool bFinal = false, bool bVictory = false) = 0;
 	virtual bool pythonDoGoody(PlayerTypes id, CvPlot* pGoodyPlot, CvUnit* pGoodyUnit) = 0;
 	virtual bool pythonAssignStartingPlots() = 0;
@@ -63,14 +66,6 @@ public:
 	virtual bool pythonGenerateTerrainTypes(std::vector<int>& terrainTypesOut) = 0;
 	virtual bool pythonGenerateRandomMap() = 0;
 	virtual bool pythonNormalizeStartingPlotLocations() = 0;
-	virtual bool pythonNormalizeAddRiver() = 0;
-	virtual bool pythonNormalizeRemovePeaks() = 0;
-	virtual bool pythonNormalizeAddLakes() = 0;
-	virtual bool pythonNormalizeRemoveBadFeatures() = 0;
-	virtual bool pythonNormalizeRemoveBadTerrain() = 0;
-	virtual bool pythonNormalizeAddFoodBonuses() = 0;
-	virtual bool pythonNormalizeAddGoodTerrain() = 0;
-	virtual bool pythonNormalizeAddExtras() = 0;
 	virtual bool pythonUsingDefaultImpl() = 0;
 };
 

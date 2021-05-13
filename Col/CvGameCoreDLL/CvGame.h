@@ -39,20 +39,19 @@ public:
 	DllExport void initDiplomacy();
 	DllExport void initFreeState();
 	DllExport void initFreeUnits();
+	DllExport void initImmigration();
 
 	DllExport void assignStartingPlots();
 	DllExport void normalizeStartingPlots();
+
+	void assignNativeTerritory();
 
 	DllExport void update();
 	DllExport void updateScore(bool bForce = false);
 
 	DllExport void updateColoredPlots();
-	DllExport void updateBlockadedPlots();
 
-	DllExport void updatePlotGroups();
-	DllExport void updateBuildingCommerce();
 	DllExport void updateCitySight(bool bIncrement);
-	DllExport void updateTradeRoutes();
 
 	DllExport void updateSelectionList();
 	DllExport void updateTestEndTurn();
@@ -61,9 +60,8 @@ public:
 
 	DllExport CvUnit* getPlotUnit(const CvPlot* pPlot, int iIndex);
 	DllExport void getPlotUnits(const CvPlot *pPlot, std::vector<CvUnit *> &plotUnits);
-
 	DllExport void cycleCities(bool bForward = true, bool bAdd = false);
-	DllExport void cycleSelectionGroups(bool bClear, bool bForward = true, bool bWorkers = false);
+	DllExport void cycleSelectionGroups(bool bClear, bool bForward = true);
 	DllExport bool cyclePlotUnits(CvPlot* pPlot, bool bForward = true, bool bAuto = false, int iCount = -1);
 
 	DllExport void selectionListMove(CvPlot* pPlot, bool bAlt, bool bShift, bool bCtrl);
@@ -74,8 +72,6 @@ public:
 	DllExport void selectUnit(CvUnit* pUnit, bool bClear, bool bToggle = false, bool bSound = false);
 	DllExport void selectGroup(CvUnit* pUnit, bool bShift, bool bCtrl, bool bAlt);
 	DllExport void selectAll(CvPlot* pPlot);
-
-	DllExport bool selectionListIgnoreBuildingDefense();
 
 	DllExport bool canHandleAction(int iAction, CvPlot* pPlot = NULL, bool bTestVisible = false, bool bUseCache = false);
 	DllExport void setupActionCache();
@@ -88,25 +84,12 @@ public:
 	DllExport void verifyDeals();
 
 	DllExport void getGlobeviewConfigurationParameters(TeamTypes eTeam, bool& bStarsVisible, bool& bWorldIsRound);
-
 	DllExport int getSymbolID(int iSymbol);
 
 	int getProductionPerPopulation(HurryTypes eHurry);
 
 	int getAdjustedPopulationPercent(VictoryTypes eVictory) const;
 	int getAdjustedLandPercent(VictoryTypes eVictory) const;
-
-	bool isTeamVote(VoteTypes eVote) const;
-	bool isChooseElection(VoteTypes eVote) const;
-	bool isTeamVoteEligible(TeamTypes eTeam, VoteSourceTypes eVoteSource) const;
-	int countVote(const VoteTriggeredData& kData, PlayerVoteTypes eChoice) const;
-	int countPossibleVote(VoteTypes eVote, VoteSourceTypes eVoteSource) const;
-	TeamTypes findHighestVoteTeam(const VoteTriggeredData& kData) const;
-	int getVoteRequired(VoteTypes eVote, VoteSourceTypes eVoteSource) const;
-	TeamTypes getSecretaryGeneral(VoteSourceTypes eVoteSource) const;
-	bool canHaveSecretaryGeneral(VoteSourceTypes eVoteSource) const;
-	void clearSecretaryGeneral(VoteSourceTypes eVoteSource);
-	void updateSecretaryGeneral();
 
 	DllExport int countCivPlayersAlive() const;
 	DllExport int countCivPlayersEverAlive() const;
@@ -116,20 +99,9 @@ public:
 	DllExport int countHumanPlayersEverAlive() const;
 
 	int countTotalCivPower();
-	int countTotalNukeUnits();
-	int countKnownTechNumTeams(TechTypes eTech);
-	int getNumFreeBonuses(BuildingTypes eBuilding);
 
-	DllExport int countReligionLevels(ReligionTypes eReligion);
-	DllExport int calculateReligionPercent(ReligionTypes eReligion) const;
-	DllExport int countCorporationLevels(CorporationTypes eCorporation);
-	void replaceCorporation(CorporationTypes eCorporation1, CorporationTypes eCorporation2);
-
-	DllExport int goldenAgeLength() const;
-	DllExport int victoryDelay(VictoryTypes eVictory) const;
 	DllExport int getImprovementUpgradeTime(ImprovementTypes eImprovement) const;
 
-	DllExport bool canTrainNukes() const;
 	DllExport EraTypes getCurrentEra() const;
 
 	DllExport TeamTypes getActiveTeam();
@@ -142,7 +114,6 @@ public:
 
 	DllExport bool isModem();
 	DllExport void setModem(bool bModem);
-
 	DllExport void reviveActivePlayer();
 
 	DllExport int getNumHumanPlayers();
@@ -158,7 +129,6 @@ public:
 
 	DllExport int getElapsedGameTurns() const;
 	DllExport void incrementElapsedGameTurns();
-
 	DllExport int getMaxTurns() const;
 	DllExport void setMaxTurns(int iNewValue);
 	DllExport void changeMaxTurns(int iChange);
@@ -171,7 +141,6 @@ public:
 
 	DllExport int getStartTurn() const;
 	DllExport void setStartTurn(int iNewValue);
-
 	DllExport int getStartYear() const;
 	DllExport void setStartYear(int iNewValue);
 
@@ -190,78 +159,34 @@ public:
 	DllExport int getTurnSlicesRemaining();
 	DllExport void resetTurnTimer();
 	DllExport void incrementTurnTimer(int iNumTurnSlices);
+	TurnTimerTypes getTurnTimerType() const;
 	DllExport int getMaxTurnLen();
-
-	DllExport int getTargetScore() const;
-	DllExport void setTargetScore(int iNewValue);
+	int getTargetScore() const;
 
 	DllExport int getNumGameTurnActive();
 	DllExport int countNumHumanGameTurnActive();
-	DllExport void changeNumGameTurnActive(int iChange);
-
+	void changeNumGameTurnActive(int iChange);
 	DllExport int getNumCities() const;
-	DllExport int getNumCivCities() const;
-	DllExport void changeNumCities(int iChange);
-
+	void changeNumCities(int iChange);
 	DllExport int getTotalPopulation() const;
-	DllExport void changeTotalPopulation(int iChange);
-
-	DllExport int getTradeRoutes() const;
-	DllExport void changeTradeRoutes(int iChange);
-
-	DllExport int getFreeTradeCount() const;
-	DllExport bool isFreeTrade() const;
-	DllExport void changeFreeTradeCount(int iChange);
-
-	DllExport int getNoNukesCount() const;
-	DllExport bool isNoNukes() const;
-	DllExport void changeNoNukesCount(int iChange);
-
-	DllExport int getSecretaryGeneralTimer(VoteSourceTypes eVoteSource) const;
-	DllExport void setSecretaryGeneralTimer(VoteSourceTypes eVoteSource, int iNewValue);
-	DllExport void changeSecretaryGeneralTimer(VoteSourceTypes eVoteSource, int iChange);
-
-	DllExport int getVoteTimer(VoteSourceTypes eVoteSource) const;
-	DllExport void setVoteTimer(VoteSourceTypes eVoteSource, int iNewValue);
-	DllExport void changeVoteTimer(VoteSourceTypes eVoteSource, int iChange);
-
-	DllExport int getNukesExploded() const;
-	DllExport void changeNukesExploded(int iChange);
-
-	DllExport int getMaxPopulation() const;
-	DllExport int getMaxLand() const;
-	DllExport int getMaxTech() const;
-	DllExport int getMaxWonders() const;
+	int getMaxPopulation() const;
+	int getMaxLand() const;
+	int getMaxFather() const;
 	DllExport int getInitPopulation() const;
 	DllExport int getInitLand() const;
-	DllExport int getInitTech() const;
-	DllExport int getInitWonders() const;
+	DllExport int getInitFather() const;
 	DllExport void initScoreCalculation();
-
 	DllExport int getAIAutoPlay();
 	DllExport void setAIAutoPlay(int iNewValue);
 	DllExport void changeAIAutoPlay(int iChange);
-
 	DllExport unsigned int getInitialTime();
 	DllExport void setInitialTime(unsigned int uiNewValue);
-
 	bool isScoreDirty() const;
 	void setScoreDirty(bool bNewValue);
-
-	DllExport bool isCircumnavigated() const;
-	DllExport void makeCircumnavigated();
-	bool circumnavigationAvailable() const;
-
-	DllExport bool isDiploVote(VoteSourceTypes eVoteSource) const;
-	int getDiploVoteCount(VoteSourceTypes eVoteSource) const;
-	DllExport void changeDiploVote(VoteSourceTypes eVoteSource, int iChange);
-	DllExport bool canDoResolution(VoteSourceTypes eVoteSource, const VoteSelectionSubData& kData) const;
-	bool isValidVoteSelection(VoteSourceTypes eVoteSource, const VoteSelectionSubData& kData) const;
 
 	DllExport bool isDebugMode() const;
 	DllExport void toggleDebugMode();
 	DllExport void updateDebugModeCache();
-
 	DllExport int getPitbossTurnTime() const;
 	DllExport void setPitbossTurnTime(int iHours);
 
@@ -281,125 +206,61 @@ public:
 
 	DllExport bool isPlayerOptionsSent() const;
 	DllExport void sendPlayerOptions(bool bForce = false);
-
 	DllExport PlayerTypes getActivePlayer() const;
 	DllExport void setActivePlayer(PlayerTypes eNewValue, bool bForceHotSeat = false);
 	DllExport void updateUnitEnemyGlow();
 
 	DllExport HandicapTypes getHandicapType() const;
 	DllExport void setHandicapType(HandicapTypes eHandicap);
-
 	DllExport PlayerTypes getPausePlayer();
 	DllExport bool isPaused();
 	DllExport void setPausePlayer(PlayerTypes eNewValue);
-
-	DllExport UnitTypes getBestLandUnit();
 	DllExport int getBestLandUnitCombat();
-	DllExport void setBestLandUnit(UnitTypes eNewValue);
-
+	DllExport void setBestLandUnitCombat(int iNewValue);
 	DllExport TeamTypes getWinner() const;
 	DllExport VictoryTypes getVictory() const;
 	DllExport void setWinner(TeamTypes eNewWinner, VictoryTypes eNewVictory);
 
 	DllExport GameStateTypes getGameState();
 	DllExport void setGameState(GameStateTypes eNewValue);
-
 	DllExport EraTypes getStartEra() const;
 
-	DllExport CalendarTypes getCalendar() const;
+	CalendarTypes getCalendar() const;
 
-	DllExport GameSpeedTypes getGameSpeedType() const;
+	GameSpeedTypes getGameSpeedType() const;
+	int getCultureLevelThreshold(CultureLevelTypes eCultureLevel) const;
+	int getCargoYieldCapacity() const;
 
-	DllExport int getEndTurnMessagesReceived(int iIndex);
-	DllExport void incrementEndTurnMessagesReceived(int iIndex);
-
-	DllExport PlayerTypes getRankPlayer(int iRank);
-	DllExport void setRankPlayer(int iRank, PlayerTypes ePlayer);
-
-	DllExport int getPlayerRank(PlayerTypes ePlayer);
-	DllExport void setPlayerRank(PlayerTypes ePlayer, int iRank);
-
+	PlayerTypes getRankPlayer(int iRank);
+	void setRankPlayer(int iRank, PlayerTypes ePlayer);
 	DllExport int getPlayerScore(PlayerTypes ePlayer);
-	DllExport void setPlayerScore(PlayerTypes ePlayer, int iScore);
-
-	DllExport TeamTypes getRankTeam(int iRank);
-	DllExport void setRankTeam(int iRank, TeamTypes eTeam);
-
-	DllExport int getTeamRank(TeamTypes eTeam);
-	DllExport void setTeamRank(TeamTypes eTeam, int iRank);
-
-	DllExport int getTeamScore(TeamTypes eTeam) const;
-	DllExport void setTeamScore(TeamTypes eTeam, int iScore);
-
+	void setPlayerScore(PlayerTypes ePlayer, int iScore);
+	TeamTypes getRankTeam(int iRank);
+	void setRankTeam(int iRank, TeamTypes eTeam);
+	int getTeamRank(TeamTypes eTeam);
+	void setTeamRank(TeamTypes eTeam, int iRank);
+	int getTeamScore(TeamTypes eTeam) const;
+	void setTeamScore(TeamTypes eTeam, int iScore);
 	DllExport bool isOption(GameOptionTypes eIndex) const;
 	DllExport void setOption(GameOptionTypes eIndex, bool bEnabled);
-
 	DllExport bool isMPOption(MultiplayerOptionTypes eIndex) const;
 	DllExport void setMPOption(MultiplayerOptionTypes eIndex, bool bEnabled);
-
 	DllExport bool isForcedControl(ForceControlTypes eIndex) const;
 	DllExport void setForceControl(ForceControlTypes eIndex, bool bEnabled);
+	int getUnitCreatedCount(UnitTypes eIndex);
+	void incrementUnitCreatedCount(UnitTypes eIndex);
+	int getUnitClassCreatedCount(UnitClassTypes eIndex);
+	void incrementUnitClassCreatedCount(UnitClassTypes eIndex);
+	int getBuildingClassCreatedCount(BuildingClassTypes eIndex);
+	void incrementBuildingClassCreatedCount(BuildingClassTypes eIndex);
+	bool isVictoryValid(VictoryTypes eIndex) const;
+	bool isSpecialUnitValid(SpecialUnitTypes eIndex);
+	void makeSpecialUnitValid(SpecialUnitTypes eIndex);
 
-	DllExport int getUnitCreatedCount(UnitTypes eIndex);
-	DllExport void incrementUnitCreatedCount(UnitTypes eIndex);
-
-	DllExport int getUnitClassCreatedCount(UnitClassTypes eIndex);
-	DllExport bool isUnitClassMaxedOut(UnitClassTypes eIndex, int iExtra = 0);
-	DllExport void incrementUnitClassCreatedCount(UnitClassTypes eIndex);
-
-	DllExport int getBuildingClassCreatedCount(BuildingClassTypes eIndex);
-	DllExport bool isBuildingClassMaxedOut(BuildingClassTypes eIndex, int iExtra = 0);
-	DllExport void incrementBuildingClassCreatedCount(BuildingClassTypes eIndex);
-
-	DllExport int getProjectCreatedCount(ProjectTypes eIndex);
-	DllExport bool isProjectMaxedOut(ProjectTypes eIndex, int iExtra = 0);
-	DllExport void incrementProjectCreatedCount(ProjectTypes eIndex, int iExtra = 1);
-
-	DllExport int getForceCivicCount(CivicTypes eIndex) const;
-	DllExport bool isForceCivic(CivicTypes eIndex) const;
-	DllExport bool isForceCivicOption(CivicOptionTypes eCivicOption) const;
-	DllExport void changeForceCivicCount(CivicTypes eIndex, int iChange);
-
-	DllExport PlayerVoteTypes getVoteOutcome(VoteTypes eIndex) const;
-	DllExport bool isVotePassed(VoteTypes eIndex) const;
-	DllExport void setVoteOutcome(const VoteTriggeredData& kData, PlayerVoteTypes eNewValue);
-
-	DllExport bool isVictoryValid(VictoryTypes eIndex) const;
-	DllExport void setVictoryValid(VictoryTypes eIndex, bool bValid);
-
-	DllExport bool isSpecialUnitValid(SpecialUnitTypes eIndex);
-	DllExport void makeSpecialUnitValid(SpecialUnitTypes eIndex);
-
-	DllExport bool isSpecialBuildingValid(SpecialBuildingTypes eIndex);
-	DllExport void makeSpecialBuildingValid(SpecialBuildingTypes eIndex, bool bAnnounce = false);
-
-	DllExport bool isNukesValid() const;
-	DllExport void makeNukesValid(bool bValid = true);
+	bool isSpecialBuildingValid(SpecialBuildingTypes eIndex);
+	void makeSpecialBuildingValid(SpecialBuildingTypes eIndex, bool bAnnounce = false);
 
 	DllExport bool isInAdvancedStart() const;
-
-	DllExport void setVoteChosen(int iSelection, int iVoteId);
-
-	DllExport int getReligionGameTurnFounded(ReligionTypes eIndex);
-	DllExport bool isReligionFounded(ReligionTypes eIndex);
-	void makeReligionFounded(ReligionTypes eIndex, PlayerTypes ePlayer);
-
-	bool isReligionSlotTaken(ReligionTypes eReligion) const;
-	void setReligionSlotTaken(ReligionTypes eReligion, bool bTaken);
-
-	DllExport CvCity* getHolyCity(ReligionTypes eIndex);
-	DllExport void setHolyCity(ReligionTypes eIndex, CvCity* pNewValue, bool bAnnounce);
-
-	DllExport int getCorporationGameTurnFounded(CorporationTypes eIndex);
-	DllExport bool isCorporationFounded(CorporationTypes eIndex);
-	DllExport void makeCorporationFounded(CorporationTypes eIndex, PlayerTypes ePlayer);
-
-	DllExport CvCity* getHeadquarters(CorporationTypes eIndex);
-	DllExport void setHeadquarters(CorporationTypes eIndex, CvCity* pNewValue, bool bAnnounce);
-
-	DllExport PlayerVoteTypes getPlayerVote(PlayerTypes eOwnerIndex, int iVoteId) const;
-	DllExport void setPlayerVote(PlayerTypes eOwnerIndex, int iVoteId, PlayerVoteTypes eNewValue);
-	DllExport void castVote(PlayerTypes eOwnerIndex, int iVoteId, PlayerVoteTypes ePlayerVote);
 
 	DllExport const CvWString & getName();
 	DllExport void setName(const TCHAR* szName);
@@ -408,11 +269,11 @@ public:
 	std::string getScriptData() const;
 	void setScriptData(std::string szNewValue);
 
-	DllExport bool isDestroyedCityName(CvWString& szName) const;
-	DllExport void addDestroyedCityName(const CvWString& szName);
+	bool isDestroyedCityName(const CvWString& szName) const;
+	void addDestroyedCityName(const CvWString& szName);
 
-	DllExport bool isGreatPersonBorn(CvWString& szName) const;
-	DllExport void addGreatPersonBornName(const CvWString& szName);
+	bool isGreatGeneralBorn(CvWString& szName) const;
+	void addGreatGeneralBornName(const CvWString& szName);
 
 	DllExport int getIndexAfterLastDeal();
 	DllExport int getNumDeals();
@@ -423,22 +284,13 @@ public:
 	DllExport CvDeal* firstDeal(int *pIterIdx, bool bRev=false);
 	DllExport CvDeal* nextDeal(int *pIterIdx, bool bRev=false);
 
-	VoteSelectionData* getVoteSelection(int iID) const;
-	VoteSelectionData* addVoteSelection(VoteSourceTypes eVoteSource);
-	void deleteVoteSelection(int iID);
+	CvRandom& getMapRand();
+	int getMapRandNum(int iNum, const char* pszLog);
 
-	VoteTriggeredData* getVoteTriggered(int iID) const;
-	VoteTriggeredData* addVoteTriggered(const VoteSelectionData& kData, int iChoice);
-	VoteTriggeredData* addVoteTriggered(VoteSourceTypes eVoteSource, const VoteSelectionSubData& kOptionData);
-	void deleteVoteTriggered(int iID);
+	CvRandom& getSorenRand();
+	int getSorenRandNum(int iNum, const char* pszLog);
 
-	DllExport CvRandom& getMapRand();
-	DllExport int getMapRandNum(int iNum, const char* pszLog);
-
-	DllExport CvRandom& getSorenRand();
-	DllExport int getSorenRandNum(int iNum, const char* pszLog);
-
-	DllExport int calculateSyncChecksum();
+	DllExport int calculateSyncChecksum(CvString* pLogString);
 	DllExport int calculateOptionsChecksum();
 
 	DllExport void addReplayMessage(ReplayMessageTypes eType = NO_REPLAY_MESSAGE, PlayerTypes ePlayer = NO_PLAYER, CvWString pszText = L"",
@@ -457,27 +309,19 @@ public:
 	DllExport virtual void write(FDataStreamBase* pStream);
 	DllExport virtual void writeReplay(FDataStreamBase& stream, PlayerTypes ePlayer);
 
-	DllExport virtual void AI_init() = 0;
-	DllExport virtual void AI_reset() = 0;
-	DllExport virtual void AI_makeAssignWorkDirty() = 0;
-	DllExport virtual void AI_updateAssignWork() = 0;
-	DllExport virtual int AI_combatValue(UnitTypes eUnit) = 0;
+	virtual void AI_init() = 0;
+	virtual void AI_reset() = 0;
+	virtual void AI_makeAssignWorkDirty() = 0;
+	virtual void AI_updateAssignWork() = 0;
+	virtual int AI_combatValue(UnitTypes eUnit) = 0;
 
 	CvReplayInfo* getReplayInfo() const;
 	DllExport void setReplayInfo(CvReplayInfo* pReplay);
 	void saveReplay(PlayerTypes ePlayer);
 
-	bool hasSkippedSaveChecksum() const;
-
 	void addPlayer(PlayerTypes eNewPlayer, LeaderHeadTypes eLeader, CivilizationTypes eCiv);
 
 	bool testVictory(VictoryTypes eVictory, TeamTypes eTeam, bool* pbEndScore = NULL) const;
-
-	bool isCompetingCorporation(CorporationTypes eCorporation1, CorporationTypes eCorporation2) const;
-
-	int getShrineBuildingCount(ReligionTypes eReligion = NO_RELIGION);
-	BuildingTypes getShrineBuilding(int eIndex, ReligionTypes eReligion = NO_RELIGION);
-	void changeShrineBuilding(BuildingTypes eBuilding, ReligionTypes eReligion, bool bRemove = false);
 
 	bool culturalVictoryValid();
 	int culturalVictoryNumCultureCities();
@@ -486,23 +330,20 @@ public:
 	int getPlotExtraYield(int iX, int iY, YieldTypes eYield) const;
 	void setPlotExtraYield(int iX, int iY, YieldTypes eYield, int iCost);
 	void removePlotExtraYield(int iX, int iY);
-
-	int getPlotExtraCost(int iX, int iY) const;
-	void changePlotExtraCost(int iX, int iY, int iCost);
-	void removePlotExtraCost(int iX, int iY);
-
-	ReligionTypes getVoteSourceReligion(VoteSourceTypes eVoteSource) const;
-	void setVoteSourceReligion(VoteSourceTypes eVoteSource, ReligionTypes eReligion, bool bAnnounce = false);
-
 	bool isEventActive(EventTriggerTypes eTrigger) const;
 	DllExport void initEvents();
-
 	bool isCivEverActive(CivilizationTypes eCivilization) const;
 	bool isLeaderEverActive(LeaderHeadTypes eLeader) const;
 	bool isUnitEverActive(UnitTypes eUnit) const;
 	bool isBuildingEverActive(BuildingTypes eBuilding) const;
 
-	void processBuilding(BuildingTypes eBuilding, int iChange);
+	TeamTypes getFatherTeam(FatherTypes eFather) const;
+	int getFatherGameTurn(FatherTypes eFather) const;
+	void setFatherTeam(FatherTypes eFather, TeamTypes eTeam);
+	bool getRemainingFathers(FatherPointTypes ePointType, std::vector<FatherTypes>& aFathers);
+	int getFatherCategoryPosition(FatherTypes eFather) const;
+
+	void changeYieldBoughtTotal(PlayerTypes eMainEurope, YieldTypes eYield, int iChange) const;
 
 protected:
 
@@ -515,36 +356,27 @@ protected:
 	int m_iCutoffSlice;
 	int m_iNumGameTurnActive;
 	int m_iNumCities;
-	int m_iTotalPopulation;
-	int m_iTradeRoutes;
-	int m_iFreeTradeCount;
-	int m_iNoNukesCount;
-	int m_iNukesExploded;
 	int m_iMaxPopulation;
 	int m_iMaxLand;
-	int m_iMaxTech;
-	int m_iMaxWonders;
+	int m_iMaxFather;
 	int m_iInitPopulation;
 	int m_iInitLand;
-	int m_iInitTech;
-	int m_iInitWonders;
+	int m_iInitFather;
 	int m_iAIAutoPlay;
+	int m_iBestLandUnitCombat;
 
 	unsigned int m_uiInitialTime;
 
 	bool m_bScoreDirty;
-	bool m_bCircumnavigated;
 	bool m_bDebugMode;
 	bool m_bDebugModeCache;
 	bool m_bFinalInitialized;
 	bool m_bPbemTurnSent;
 	bool m_bHotPbemBetweenTurns;
 	bool m_bPlayerOptionsSent;
-	bool m_bNukesValid;
 
 	HandicapTypes m_eHandicap;
 	PlayerTypes m_ePausePlayer;
-	UnitTypes m_eBestLandUnit;
 	TeamTypes m_eWinner;
 	VictoryTypes m_eVictory;
 	GameStateTypes m_eGameState;
@@ -552,9 +384,7 @@ protected:
 
 	CvString m_szScriptData;
 
-	int* m_aiEndTurnMessagesReceived;
 	int* m_aiRankPlayer;        // Ordered by rank...
-	int* m_aiPlayerRank;        // Ordered by player ID...
 	int* m_aiPlayerScore;       // Ordered by player ID...
 	int* m_aiRankTeam;						// Ordered by rank...
 	int* m_aiTeamRank;						// Ordered by team ID...
@@ -563,64 +393,34 @@ protected:
 	int* m_paiUnitCreatedCount;
 	int* m_paiUnitClassCreatedCount;
 	int* m_paiBuildingClassCreatedCount;
-	int* m_paiProjectCreatedCount;
-	int* m_paiForceCivicCount;
-	PlayerVoteTypes* m_paiVoteOutcome;
-	int* m_paiReligionGameTurnFounded;
-	int* m_paiCorporationGameTurnFounded;
-	int* m_aiSecretaryGeneralTimer;
-	int* m_aiVoteTimer;
-	int* m_aiDiploVote;
+
+	TeamTypes* m_aeFatherTeam;
+	int* m_aiFatherGameTurn;
 
 	bool* m_pabSpecialUnitValid;
 	bool* m_pabSpecialBuildingValid;
-	bool* m_abReligionSlotTaken;
-
-	IDInfo* m_paHolyCity;
-	IDInfo* m_paHeadquarters;
-
-	int** m_apaiPlayerVote;
 
 	std::vector<CvWString> m_aszDestroyedCities;
-	std::vector<CvWString> m_aszGreatPeopleBorn;
+	std::vector<CvWString> m_aszGreatGeneralBorn;
 
 	FFreeListTrashArray<CvDeal> m_deals;
-	FFreeListTrashArray<VoteSelectionData> m_voteSelections;
-	FFreeListTrashArray<VoteTriggeredData> m_votesTriggered;
 
 	CvRandom m_mapRand;
 	CvRandom m_sorenRand;
-
 	ReplayMessageList m_listReplayMessages;
 	CvReplayInfo* m_pReplayInfo;
 
 	int m_iNumSessions;
 
 	std::vector<PlotExtraYield> m_aPlotExtraYields;
-	std::vector<PlotExtraCost> m_aPlotExtraCosts;
-	stdext::hash_map<VoteSourceTypes, ReligionTypes> m_mapVoteSourceReligions;
 	std::vector<EventTriggerTypes> m_aeInactiveTriggers;
 
 	// CACHE: cache frequently used values
-	int		m_iShrineBuildingCount;
-	int*	m_aiShrineBuilding;
-	int*	m_aiShrineReligion;
-
 	int		m_iNumCultureVictoryCities;
 	int		m_eCultureVictoryCultureLevel;
 
 	void doTurn();
 	void doDeals();
-	void doGlobalWarming();
-	void doHolyCity();
-	void doHeadquarters();
-	void doDiploVote();
-	void doVoteResults();
-	void doVoteSelection();
-
-	void createBarbarianCities();
-	void createBarbarianUnits();
-	void createAnimals();
 
 	void verifyCivics();
 
@@ -632,22 +432,12 @@ protected:
 	void testAlive();
 	void testVictory();
 
-	void processVote(const VoteTriggeredData& kData, int iChange);
-
 	int getTeamClosenessScore(int** aaiDistances, int* aiStartingLocs);
 	void normalizeStartingPlotLocations();
-	void normalizeAddRiver();
-	void normalizeRemovePeaks();
-	void normalizeAddLakes();
-	void normalizeRemoveBadFeatures();
-	void normalizeRemoveBadTerrain();
-	void normalizeAddFoodBonuses();
-	void normalizeAddGoodTerrain();
-	void normalizeAddExtras();
 
 	void showEndGameSequence();
 
-	CvPlot* normalizeFindLakePlot(PlayerTypes ePlayer);
+	void updateOceanDistances();
 
 	void doUpdateCacheOnTurn();
 };

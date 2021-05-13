@@ -11,7 +11,6 @@
 #include "CvGameCoreDLL.h"
 #include "CvMap.h"
 #include "CvCity.h"
-#include "CvPlotGroup.h"
 #include "CvGlobals.h"
 #include "CvGameAI.h"
 #include "CvPlayerAI.h"
@@ -61,9 +60,7 @@ CvMap::~CvMap()
 //	nothing.
 void CvMap::init(CvMapInitData* pInitInfo/*=NULL*/)
 {
-	int iX, iY;
-
-	PROFILE("CvMap::init");
+	PROFILE_FUNC();
 	gDLL->logMemState( CvString::format("CvMap::init begin - world size=%s, climate=%s, sealevel=%s, num custom options=%6",
 		GC.getWorldInfo(GC.getInitCore().getWorldSize()).getDescription(),
 		GC.getClimateInfo(GC.getInitCore().getClimate()).getDescription(),
@@ -88,10 +85,10 @@ void CvMap::init(CvMapInitData* pInitInfo/*=NULL*/)
 	// Init other game data
 	gDLL->logMemState("CvMap before init plots");
 	m_pMapPlots = new CvPlot[numPlotsINLINE()];
-	for (iX = 0; iX < getGridWidthINLINE(); iX++)
+	for (int iX = 0; iX < getGridWidthINLINE(); iX++)
 	{
 		gDLL->callUpdater();
-		for (iY = 0; iY < getGridHeightINLINE(); iY++)
+		for (int iY = 0; iY < getGridHeightINLINE(); iY++)
 		{
 			plotSorenINLINE(iX, iY)->init(iX, iY);
 		}
@@ -138,13 +135,6 @@ void CvMap::reset(CvMapInitData* pInitInfo)
 	{
 		// check map script for grid size override
 		gDLL->getPythonIFace()->pythonGetGridSize(GC.getInitCore().getWorldSize(), &m_iGridWidth, &m_iGridHeight);
-
-		// convert to plot dimensions
-		if (GC.getNumLandscapeInfos() > 0)
-		{
-			m_iGridWidth *= GC.getLandscapeInfo(GC.getActiveLandscapeID()).getPlotsPerCellX();
-			m_iGridHeight *= GC.getLandscapeInfo(GC.getActiveLandscapeID()).getPlotsPerCellY();
-		}
 	}
 
 	m_iLandPlots = 0;
@@ -206,7 +196,7 @@ void CvMap::reset(CvMapInitData* pInitInfo)
 // Initializes all data that is not serialized but needs to be initialized after loading.
 void CvMap::setup()
 {
-	PROFILE("CvMap::setup");
+	PROFILE_FUNC();
 
 	gDLL->getFAStarIFace()->Initialize(&GC.getPathFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), pathDestValid, pathHeuristic, pathCost, pathValid, pathAdd, NULL, NULL);
 	gDLL->getFAStarIFace()->Initialize(&GC.getInterfacePathFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), pathDestValid, pathHeuristic, pathCost, pathValid, pathAdd, NULL, NULL);
@@ -214,7 +204,6 @@ void CvMap::setup()
 	gDLL->getFAStarIFace()->Initialize(&GC.getRouteFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), NULL, NULL, NULL, routeValid, NULL, NULL, NULL);
 	gDLL->getFAStarIFace()->Initialize(&GC.getBorderFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), NULL, NULL, NULL, borderValid, NULL, NULL, NULL);
 	gDLL->getFAStarIFace()->Initialize(&GC.getAreaFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), NULL, NULL, NULL, areaValid, NULL, joinArea, NULL);
-	gDLL->getFAStarIFace()->Initialize(&GC.getPlotGroupFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), NULL, NULL, NULL, plotGroupValid, NULL, countPlotGroup, NULL);
 }
 
 
@@ -226,10 +215,12 @@ void CvMap::setupGraphical()
 	if (!GC.IsGraphicsInitialized())
 		return;
 
+	PROFILE_FUNC();
+
 	if (m_pMapPlots != NULL)
 	{
-		int iI;
-		for (iI = 0; iI < numPlotsINLINE(); iI++)
+		gDLL->getEngineIFace()->RebuildAllTileArt();
+		for (int iI = 0; iI < numPlotsINLINE(); iI++)
 		{
 			gDLL->callUpdater();	// allow windows msgs to update
 			plotByIndexINLINE(iI)->setupGraphical();
@@ -240,9 +231,7 @@ void CvMap::setupGraphical()
 
 void CvMap::erasePlots()
 {
-	int iI;
-
-	for (iI = 0; iI < numPlotsINLINE(); iI++)
+	for (int iI = 0; iI < numPlotsINLINE(); iI++)
 	{
 		plotByIndexINLINE(iI)->erase();
 	}
@@ -253,14 +242,10 @@ void CvMap::setRevealedPlots(TeamTypes eTeam, bool bNewValue, bool bTerrainOnly)
 {
 	PROFILE_FUNC();
 
-	int iI;
-
-	for (iI = 0; iI < numPlotsINLINE(); iI++)
+	for (int iI = 0; iI < numPlotsINLINE(); iI++)
 	{
-		plotByIndexINLINE(iI)->setRevealed(eTeam, bNewValue, bTerrainOnly, NO_TEAM, false);
+		plotByIndexINLINE(iI)->setRevealed(eTeam, bNewValue, bTerrainOnly, NO_TEAM);
 	}
-
-	GC.getGameINLINE().updatePlotGroups();
 }
 
 
@@ -290,11 +275,9 @@ void CvMap::setAllPlotTypes(PlotTypes ePlotType)
 // XXX generalize these funcs? (macro?)
 void CvMap::doTurn()
 {
-	PROFILE("CvMap::doTurn()")
+	PROFILE_FUNC();
 
-	int iI;
-
-	for (iI = 0; iI < numPlotsINLINE(); iI++)
+	for (int iI = 0; iI < numPlotsINLINE(); iI++)
 	{
 		plotByIndexINLINE(iI)->doTurn();
 	}
@@ -305,12 +288,9 @@ void CvMap::updateFlagSymbols()
 {
 	PROFILE_FUNC();
 
-	CvPlot* pLoopPlot;
-	int iI;
-
-	for (iI = 0; iI < numPlotsINLINE(); iI++)
+	for (int iI = 0; iI < numPlotsINLINE(); iI++)
 	{
-		pLoopPlot = plotByIndexINLINE(iI);
+		CvPlot* pLoopPlot = plotByIndexINLINE(iI);
 
 		if (pLoopPlot->isFlagDirty())
 		{
@@ -323,9 +303,7 @@ void CvMap::updateFlagSymbols()
 
 void CvMap::updateFog()
 {
-	int iI;
-
-	for (iI = 0; iI < numPlotsINLINE(); iI++)
+	for (int iI = 0; iI < numPlotsINLINE(); iI++)
 	{
 		plotByIndexINLINE(iI)->updateFog();
 	}
@@ -334,9 +312,7 @@ void CvMap::updateFog()
 
 void CvMap::updateVisibility()
 {
-	int iI;
-
-	for (iI = 0; iI < numPlotsINLINE(); iI++)
+	for (int iI = 0; iI < numPlotsINLINE(); iI++)
 	{
 		plotByIndexINLINE(iI)->updateVisibility();
 	}
@@ -345,9 +321,7 @@ void CvMap::updateVisibility()
 
 void CvMap::updateSymbolVisibility()
 {
-	int iI;
-
-	for (iI = 0; iI < numPlotsINLINE(); iI++)
+	for (int iI = 0; iI < numPlotsINLINE(); iI++)
 	{
 		plotByIndexINLINE(iI)->updateSymbolVisibility();
 	}
@@ -356,9 +330,7 @@ void CvMap::updateSymbolVisibility()
 
 void CvMap::updateSymbols()
 {
-	int iI;
-
-	for (iI = 0; iI < numPlotsINLINE(); iI++)
+	for (int iI = 0; iI < numPlotsINLINE(); iI++)
 	{
 		plotByIndexINLINE(iI)->updateSymbols();
 	}
@@ -367,9 +339,7 @@ void CvMap::updateSymbols()
 
 void CvMap::updateMinimapColor()
 {
-	int iI;
-
-	for (iI = 0; iI < numPlotsINLINE(); iI++)
+	for (int iI = 0; iI < numPlotsINLINE(); iI++)
 	{
 		plotByIndexINLINE(iI)->updateMinimapColor();
 	}
@@ -380,29 +350,15 @@ void CvMap::updateSight(bool bIncrement)
 {
 	for (int iI = 0; iI < numPlotsINLINE(); iI++)
 	{
-		plotByIndexINLINE(iI)->updateSight(bIncrement, false);
-	}
-
-	GC.getGameINLINE().updatePlotGroups();
-}
-
-
-void CvMap::updateIrrigated()
-{
-	int iI;
-
-	for (iI = 0; iI < numPlotsINLINE(); iI++)
-	{
-		plotByIndexINLINE(iI)->updateIrrigated();
+		plotByIndexINLINE(iI)->updateSight(bIncrement);
 	}
 }
-
 
 void CvMap::updateCenterUnit()
 {
-	int iI;
+	PROFILE_FUNC();
 
-	for (iI = 0; iI < numPlotsINLINE(); iI++)
+	for (int iI = 0; iI < numPlotsINLINE(); iI++)
 	{
 		plotByIndexINLINE(iI)->updateCenterUnit();
 	}
@@ -411,9 +367,7 @@ void CvMap::updateCenterUnit()
 
 void CvMap::updateWorkingCity()
 {
-	int iI;
-
-	for (iI = 0; iI < numPlotsINLINE(); iI++)
+	for (int iI = 0; iI < numPlotsINLINE(); iI++)
 	{
 		plotByIndexINLINE(iI)->updateWorkingCity();
 	}
@@ -439,7 +393,7 @@ void CvMap::updateMinOriginalStartDist(CvArea* pArea)
 		}
 	}
 
-	for (iI = 0; iI < MAX_CIV_PLAYERS; iI++)
+	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
 		pStartingPlot = GET_PLAYER((PlayerTypes)iI).getStartingPlot();
 
@@ -476,14 +430,19 @@ void CvMap::updateMinOriginalStartDist(CvArea* pArea)
 
 void CvMap::updateYield()
 {
-	int iI;
-
-	for (iI = 0; iI < numPlotsINLINE(); iI++)
+	for (int iI = 0; iI < numPlotsINLINE(); iI++)
 	{
-		plotByIndexINLINE(iI)->updateYield();
+		plotByIndexINLINE(iI)->updateYield(true);
 	}
 }
 
+void CvMap::updateCulture()
+{
+	for (int iI = 0; iI < numPlotsINLINE(); iI++)
+	{
+		plotByIndexINLINE(iI)->updateCulture(true);
+	}
+}
 
 void CvMap::verifyUnitValidPlot()
 {
@@ -493,74 +452,30 @@ void CvMap::verifyUnitValidPlot()
 	}
 }
 
-
-void CvMap::combinePlotGroups(PlayerTypes ePlayer, CvPlotGroup* pPlotGroup1, CvPlotGroup* pPlotGroup2)
-{
-	CLLNode<XYCoords>* pPlotNode;
-	CvPlotGroup* pNewPlotGroup;
-	CvPlotGroup* pOldPlotGroup;
-	CvPlot* pPlot;
-
-	FAssertMsg(pPlotGroup1 != NULL, "pPlotGroup is not assigned to a valid value");
-	FAssertMsg(pPlotGroup2 != NULL, "pPlotGroup is not assigned to a valid value");
-
-	if (pPlotGroup1 == pPlotGroup2)
-	{
-		return;
-	}
-
-	if (pPlotGroup1->getLengthPlots() > pPlotGroup2->getLengthPlots())
-	{
-		pNewPlotGroup = pPlotGroup1;
-		pOldPlotGroup = pPlotGroup2;
-	}
-	else
-	{
-		pNewPlotGroup = pPlotGroup2;
-		pOldPlotGroup = pPlotGroup1;
-	}
-
-	pPlotNode = pOldPlotGroup->headPlotsNode();
-	while (pPlotNode != NULL)
-	{
-		pPlot = plotSorenINLINE(pPlotNode->m_data.iX, pPlotNode->m_data.iY);
-		pNewPlotGroup->addPlot(pPlot);
-		pPlotNode = pOldPlotGroup->deletePlotsNode(pPlotNode);
-	}
-}
-
 CvPlot* CvMap::syncRandPlot(int iFlags, int iArea, int iMinUnitDistance, int iTimeout)
 {
-	CvPlot* pPlot;
-	CvPlot* pTestPlot;
-	CvPlot* pLoopPlot;
-	bool bValid;
-	int iCount;
-	int iDX, iDY;
-
-	pPlot = NULL;
-
-	iCount = 0;
+	CvPlot* pPlot = NULL;
+	int iCount = 0;
 
 	while (iCount < iTimeout)
 	{
-		pTestPlot = plotSorenINLINE(GC.getGameINLINE().getSorenRandNum(getGridWidthINLINE(), "Rand Plot Width"), GC.getGameINLINE().getSorenRandNum(getGridHeightINLINE(), "Rand Plot Height"));
+		CvPlot* pTestPlot = plotSorenINLINE(GC.getGameINLINE().getSorenRandNum(getGridWidthINLINE(), "Rand Plot Width"), GC.getGameINLINE().getSorenRandNum(getGridHeightINLINE(), "Rand Plot Height"));
 
 		FAssertMsg(pTestPlot != NULL, "TestPlot is not assigned a valid value");
 
 		if ((iArea == -1) || (pTestPlot->getArea() == iArea))
 		{
-			bValid = true;
+			bool bValid = true;
 
 			if (bValid)
 			{
 				if (iMinUnitDistance != -1)
 				{
-					for (iDX = -(iMinUnitDistance); iDX <= iMinUnitDistance; iDX++)
+					for (int iDX = -(iMinUnitDistance); iDX <= iMinUnitDistance; iDX++)
 					{
-						for (iDY = -(iMinUnitDistance); iDY <= iMinUnitDistance; iDY++)
+						for (int iDY = -(iMinUnitDistance); iDY <= iMinUnitDistance; iDY++)
 						{
-							pLoopPlot	= plotXY(pTestPlot->getX_INLINE(), pTestPlot->getY_INLINE(), iDX, iDY);
+							CvPlot* pLoopPlot = plotXY(pTestPlot->getX_INLINE(), pTestPlot->getY_INLINE(), iDX, iDY);
 
 							if (pLoopPlot != NULL)
 							{
@@ -667,21 +582,10 @@ CvPlot* CvMap::syncRandPlot(int iFlags, int iArea, int iMinUnitDistance, int iTi
 
 CvCity* CvMap::findCity(int iX, int iY, PlayerTypes eOwner, TeamTypes eTeam, bool bSameArea, bool bCoastalOnly, TeamTypes eTeamAtWarWith, DirectionTypes eDirection, CvCity* pSkipCity)
 {
-	PROFILE_FUNC();
+	int iBestValue = MAX_INT;
+	CvCity* pBestCity = NULL;
 
-	CvCity* pLoopCity;
-	CvCity* pBestCity;
-	int iValue;
-	int iBestValue;
-	int iLoop;
-	int iI;
-
-	// XXX look for barbarian cities???
-
-	iBestValue = MAX_INT;
-	pBestCity = NULL;
-
-	for (iI = 0; iI < MAX_PLAYERS; iI++)
+	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
 		if (GET_PLAYER((PlayerTypes)iI).isAlive())
 		{
@@ -689,7 +593,8 @@ CvCity* CvMap::findCity(int iX, int iY, PlayerTypes eOwner, TeamTypes eTeam, boo
 			{
 				if ((eTeam == NO_TEAM) || (GET_PLAYER((PlayerTypes)iI).getTeam() == eTeam))
 				{
-					for (pLoopCity = GET_PLAYER((PlayerTypes)iI).firstCity(&iLoop); pLoopCity != NULL; pLoopCity = GET_PLAYER((PlayerTypes)iI).nextCity(&iLoop))
+					int iLoop;
+					for (CvCity* pLoopCity = GET_PLAYER((PlayerTypes)iI).firstCity(&iLoop); pLoopCity != NULL; pLoopCity = GET_PLAYER((PlayerTypes)iI).nextCity(&iLoop))
 					{
 						if (!bSameArea || (pLoopCity->area() == plotINLINE(iX, iY)->area()) || (bCoastalOnly && (pLoopCity->waterArea() == plotINLINE(iX, iY)->area())))
 						{
@@ -701,7 +606,7 @@ CvCity* CvMap::findCity(int iX, int iY, PlayerTypes eOwner, TeamTypes eTeam, boo
 									{
 										if ((pSkipCity == NULL) || (pLoopCity != pSkipCity))
 										{
-											iValue = plotDistance(iX, iY, pLoopCity->getX_INLINE(), pLoopCity->getY_INLINE());
+											int iValue = plotDistance(iX, iY, pLoopCity->getX_INLINE(), pLoopCity->getY_INLINE());
 
 											if (iValue < iBestValue)
 											{
@@ -723,39 +628,28 @@ CvCity* CvMap::findCity(int iX, int iY, PlayerTypes eOwner, TeamTypes eTeam, boo
 }
 
 
-CvSelectionGroup* CvMap::findSelectionGroup(int iX, int iY, PlayerTypes eOwner, bool bReadyToSelect, bool bWorkers)
+CvSelectionGroup* CvMap::findSelectionGroup(int iX, int iY, PlayerTypes eOwner, bool bReadyToSelect)
 {
-	CvSelectionGroup* pLoopSelectionGroup;
-	CvSelectionGroup* pBestSelectionGroup;
-	int iValue;
-	int iBestValue;
-	int iLoop;
-	int iI;
+	int iBestValue = MAX_INT;
+	CvSelectionGroup* pBestSelectionGroup = NULL;
 
-	// XXX look for barbarian cities???
-
-	iBestValue = MAX_INT;
-	pBestSelectionGroup = NULL;
-
-	for (iI = 0; iI < MAX_PLAYERS; iI++)
+	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
 		if (GET_PLAYER((PlayerTypes)iI).isAlive())
 		{
 			if ((eOwner == NO_PLAYER) || (iI == eOwner))
 			{
-				for(pLoopSelectionGroup = GET_PLAYER((PlayerTypes)iI).firstSelectionGroup(&iLoop); pLoopSelectionGroup != NULL; pLoopSelectionGroup = GET_PLAYER((PlayerTypes)iI).nextSelectionGroup(&iLoop))
+				int iLoop;
+				for(CvSelectionGroup* pLoopSelectionGroup = GET_PLAYER((PlayerTypes)iI).firstSelectionGroup(&iLoop); pLoopSelectionGroup != NULL; pLoopSelectionGroup = GET_PLAYER((PlayerTypes)iI).nextSelectionGroup(&iLoop))
 				{
 					if (!bReadyToSelect || pLoopSelectionGroup->readyToSelect())
 					{
-						if (!bWorkers || pLoopSelectionGroup->hasWorker())
-						{
-							iValue = plotDistance(iX, iY, pLoopSelectionGroup->getX(), pLoopSelectionGroup->getY());
+						int iValue = plotDistance(iX, iY, pLoopSelectionGroup->getX(), pLoopSelectionGroup->getY());
 
-							if (iValue < iBestValue)
-							{
-								iBestValue = iValue;
-								pBestSelectionGroup = pLoopSelectionGroup;
-							}
+						if (iValue < iBestValue)
+						{
+							iBestValue = iValue;
+							pBestSelectionGroup = pLoopSelectionGroup;
 						}
 					}
 				}
@@ -769,20 +663,15 @@ CvSelectionGroup* CvMap::findSelectionGroup(int iX, int iY, PlayerTypes eOwner, 
 
 CvArea* CvMap::findBiggestArea(bool bWater)
 {
-	CvArea* pLoopArea;
-	CvArea* pBestArea;
-	int iValue;
-	int iBestValue;
+	int iBestValue = 0;
+	CvArea* pBestArea = NULL;
+
 	int iLoop;
-
-	iBestValue = 0;
-	pBestArea = NULL;
-
-	for(pLoopArea = firstArea(&iLoop); pLoopArea != NULL; pLoopArea = nextArea(&iLoop))
+	for (CvArea* pLoopArea = firstArea(&iLoop); pLoopArea != NULL; pLoopArea = nextArea(&iLoop))
 	{
 		if (pLoopArea->isWater() == bWater)
 		{
-			iValue = pLoopArea->getNumTiles();
+			int iValue = pLoopArea->getNumTiles();
 
 			if (iValue > iBestValue)
 			{
@@ -817,22 +706,19 @@ int CvMap::getMapFractalFlags()
 //"Check plots for wetlands or seaWater.  Returns true if found"
 bool CvMap::findWater(CvPlot* pPlot, int iRange, bool bFreshWater)
 {
-	PROFILE("CvMap::findWater()");
+	PROFILE_FUNC();
 
-	CvPlot* pLoopPlot;
-	int iDX, iDY;
-
-	for (iDX = -(iRange); iDX <= iRange; iDX++)
+	for (int iDX = -(iRange); iDX <= iRange; iDX++)
 	{
-		for (iDY = -(iRange); iDY <= iRange; iDY++)
+		for (int iDY = -(iRange); iDY <= iRange; iDY++)
 		{
-			pLoopPlot	= plotXY(pPlot->getX_INLINE(), pPlot->getY_INLINE(), iDX, iDY);
+			CvPlot* pLoopPlot	= plotXY(pPlot->getX_INLINE(), pPlot->getY_INLINE(), iDX, iDY);
 
 			if (pLoopPlot != NULL)
 			{
 				if (bFreshWater)
 				{
-					if (pLoopPlot->isFreshWater())
+					if (pLoopPlot->isRiver())
 					{
 						return true;
 					}
@@ -1163,7 +1049,7 @@ CvArea* CvMap::nextArea(int *pIterIdx, bool bRev)
 
 void CvMap::recalculateAreas()
 {
-	PROFILE("CvMap::recalculateAreas");
+	PROFILE_FUNC();
 
 	int iI;
 
@@ -1309,7 +1195,7 @@ void CvMap::rebuild(int iGridW, int iGridH, int iTopLatitude, int iBottomLatitud
 
 void CvMap::calculateAreas()
 {
-	PROFILE("CvMap::calculateAreas");
+	PROFILE_FUNC();
 	CvPlot* pLoopPlot;
 	CvArea* pArea;
 	int iArea;

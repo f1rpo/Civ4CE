@@ -18,9 +18,8 @@ public:
 
 	void init(int iID, PlayerTypes eFirstPlayer, PlayerTypes eSecondPlayer);
 	void uninit();
-	void reset(int iID = 0, PlayerTypes eFirstPlayer = NO_PLAYER, PlayerTypes eSecondPlayer = NO_PLAYER);
 
-	DllExport void kill(bool bKillTeam = true);
+	DllExport void kill(bool bKillTeam, TeamTypes eKillingTeam);
 
 	void addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* pSecondList, bool bCheckAllowed);
 
@@ -30,9 +29,6 @@ public:
 
 	bool isPeaceDeal() const;
 	bool isPeaceDealBetweenOthers(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* pSecondList) const;
-	bool isVassalDeal() const;
-	bool isUncancelableVassalDeal(PlayerTypes eByPlayer, CvWString* pszReason = NULL) const;
-	DllExport static bool isVassalTributeDeal(const CLinkList<TradeData>* pList);
 
 	DllExport int getID() const;
 	void setID(int iID);
@@ -65,23 +61,20 @@ public:
 	DllExport static bool hasData(TradeableItems eItem);
 	DllExport static bool isGold(TradeableItems eItem);
 	DllExport static bool isEndWar(TradeableItems eItem);
-	DllExport static bool isVassal(TradeableItems eItem);
 	DllExport static TradeableItems getPeaceItem();
 	DllExport static TradeableItems getGoldItem();
-	DllExport static TradeableItems getGoldPerTurnItem();
 
 	void read(FDataStreamBase* pStream);
 	void write(FDataStreamBase* pStream);
 
 protected:
+	void reset(int iID = 0, PlayerTypes eFirstPlayer = NO_PLAYER, PlayerTypes eSecondPlayer = NO_PLAYER);
 
 	bool startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eToPlayer);
-	void endTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eToPlayer, bool bTeam);
+	void endTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eToPlayer, bool bTeam, TeamTypes eEndingTeam);
 
-	void startTeamTrade(TradeableItems eItem, TeamTypes eFromTeam, TeamTypes eToTeam, bool bDual);
-	void endTeamTrade(TradeableItems eItem, TeamTypes eFromTeam, TeamTypes eToTeam);
-
-	static bool isVassalTrade(const CLinkList<TradeData>* pFirstList);
+	void startTeamTrade(TradeableItems eItem, TeamTypes eFromTeam, TeamTypes eToTeam, bool bDual, const IDInfo& kTransport);
+	void endTeamTrade(TradeableItems eItem, TeamTypes eFromTeam, TeamTypes eToTeam, TeamTypes eEndingTeam);
 
 	int m_iID;
 	int m_iInitialGameTurn;
@@ -91,7 +84,6 @@ protected:
 
 	CLinkList<TradeData> m_firstTrades;
 	CLinkList<TradeData> m_secondTrades;
-
 };
 
 #endif

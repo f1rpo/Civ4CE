@@ -27,6 +27,8 @@
 #include <assert.h>
 #include <map>
 #include <hash_map>
+#include <set>
+#include <deque>
 
 #define DllExport   __declspec( dllexport )
 
@@ -151,9 +153,6 @@ __forceinline DWORD FtoDW( float f ) { return *(DWORD*)&f; }
 __forceinline float DWtoF( dword n ) { return *(float*)&n; }
 __forceinline float MaxFloat() { return DWtoF(0x7f7fffff); }
 
-void startProfilingDLL();
-void stopProfilingDLL();
-
 //
 // Boost Python
 //
@@ -173,13 +172,13 @@ namespace python = boost::python;
 #include "FFreeListArrayBase.h"
 #include "FFreeListTrashArray.h"
 #include "FFreeListArray.h"
+#include "CvIdVector.h"
 //#include "FVariableSystem.h"
 #include "CvString.h"
 #include "CvEnums.h"
 #include "CvStructs.h"
 #include "CvDLLUtilityIFaceBase.h"
 
-//jason tests
 #include "CvPlayerAI.h"
 #include "CvGameCoreUtils.h"
 #include "CvMap.h"
@@ -202,7 +201,6 @@ namespace python = boost::python;
 #include "CyGlobalContext.h"
 #include "CvSelectionGroup.h"
 #include "CvTalkingHeadMessage.h"
-#include "CvPlotGroup.h"
 #include "CvCityAI.h"
 #include "CvSelectionGroupAI.h"
 #include "CvUnitAI.h"

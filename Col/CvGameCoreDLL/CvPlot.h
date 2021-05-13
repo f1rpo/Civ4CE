@@ -17,7 +17,6 @@ class CvPlotBuilder;
 class CvRoute;
 class CvRiver;
 class CvCity;
-class CvPlotGroup;
 class CvFeature;
 class CvUnit;
 class CvSymbol;
@@ -37,17 +36,11 @@ public:
 	void uninit();
 	void reset(int iX = 0, int iY = 0, bool bConstructorCall=false);
 	void setupGraphical();
-	void updateGraphicEra();
-
 	DllExport void erase();
 
 	DllExport float getPointX() const;
 	DllExport float getPointY() const;
 	DllExport NiPoint3 getPoint() const;
-
-	float getSymbolSize() const;
-	DllExport float getSymbolOffsetX(int iID) const;
-	DllExport float getSymbolOffsetY(int iID) const;
 
 	DllExport TeamTypes getTeam() const;
 
@@ -55,7 +48,7 @@ public:
 
 	void doImprovement();
 
-	void updateCulture(bool bBumpUnits, bool bUpdatePlotGroups);
+	void updateCulture(bool bBumpUnits);
 
 	void updateFog();
 	void updateVisibility();
@@ -70,29 +63,18 @@ public:
 
 	void verifyUnitValidPlot();
 
-	DllExport void nukeExplosion(int iRange, CvUnit* pNukeUnit = NULL);
-
-	bool isConnectedTo( const CvCity* pCity) const;
-	bool isConnectedToCapital(PlayerTypes ePlayer = NO_PLAYER) const;
-	int getPlotGroupConnectedBonus(PlayerTypes ePlayer, BonusTypes eBonus) const;
-	DllExport bool isPlotGroupConnectedBonus(PlayerTypes ePlayer, BonusTypes eBonus) const;
-	DllExport bool isAdjacentPlotGroupConnectedBonus(PlayerTypes ePlayer, BonusTypes eBonus) const;
-	void updatePlotGroupBonus(bool bAdd);
-
+    bool isAdjacentToPlot(CvPlot* pPlot) const;
 	bool isAdjacentToArea(int iAreaID) const;
 	bool isAdjacentToArea(const CvArea* pArea) const;
 	bool shareAdjacentArea( const CvPlot* pPlot) const;
 	bool isAdjacentToLand() const;
 	bool isCoastalLand(int iMinWaterSize = -1) const;
+	bool isAdjacentWaterPassable(CvPlot* pPlot) const;
 
 	bool isVisibleWorked() const;
 	bool isWithinTeamCityRadius(TeamTypes eTeam, PlayerTypes eIgnorePlayer = NO_PLAYER) const;
 
 	DllExport bool isLake() const;
-	DllExport bool isFreshWater() const;
-	bool isPotentialIrrigation() const;
-	bool canHavePotentialIrrigation() const;
-	DllExport bool isIrrigationAvailable(bool bIgnoreSelf = false) const;
 
 	DllExport bool isRiverMask() const;
 	DllExport bool isRiverCrossingFlowClockwise(DirectionTypes eDirection) const;
@@ -106,31 +88,27 @@ public:
 
 	int seeFromLevel(TeamTypes eTeam) const;
 	int seeThroughLevel() const;
-	void changeAdjacentSight(TeamTypes eTeam, int iRange, bool bIncrement, CvUnit* pUnit, bool bUpdatePlotGroups);
+	void changeAdjacentSight(TeamTypes eTeam, int iRange, bool bIncrement, CvUnit* pUnit);
 	bool canSeePlot(CvPlot *plot, TeamTypes eTeam, int iRange, DirectionTypes eFacingDirection) const;
 	bool canSeeDisplacementPlot(TeamTypes eTeam, int dx, int dy, int originalDX, int originalDY, bool firstPlot, bool outerRing) const;
 	bool shouldProcessDisplacementPlot(int dx, int dy, int range, DirectionTypes eFacingDirection) const;
-	void updateSight(bool bIncrement, bool bUpdatePlotGroups);
-	void updateSeeFromSight(bool bIncrement, bool bUpdatePlotGroups);
-
+	void updateSight(bool bIncrement);
+	void updateSeeFromSight(bool bIncrement);
 	DllExport bool canHaveBonus(BonusTypes eBonus, bool bIgnoreLatitude = false) const;
 	DllExport bool canHaveImprovement(ImprovementTypes eImprovement, TeamTypes eTeam = NO_TEAM, bool bPotential = false) const;
 
 	bool canBuild(BuildTypes eBuild, PlayerTypes ePlayer = NO_PLAYER, bool bTestVisible = false) const;
 	int getBuildTime(BuildTypes eBuild) const;
 	DllExport int getBuildTurnsLeft(BuildTypes eBuild, int iNowExtra, int iThenExtra) const;
-	DllExport int getFeatureProduction(BuildTypes eBuild, TeamTypes eTeam, CvCity** ppCity) const;
+	DllExport int getFeatureYield(BuildTypes eBuild, YieldTypes eYield, TeamTypes eTeam, CvCity** ppCity) const;
 
 	DllExport CvUnit* getBestDefender(PlayerTypes eOwner, PlayerTypes eAttackingPlayer = NO_PLAYER, const CvUnit* pAttacker = NULL, bool bTestAtWar = false, bool bTestPotentialEnemy = false, bool bTestCanMove = false) const;
 	int AI_sumStrength(PlayerTypes eOwner, PlayerTypes eAttackingPlayer = NO_PLAYER, DomainTypes eDomainType = NO_DOMAIN, bool bDefensiveBonuses = true, bool bTestAtWar = false, bool bTestPotentialEnemy = false) const;
 	CvUnit* getSelectedUnit() const;
 	int getUnitPower(PlayerTypes eOwner = NO_PLAYER) const;
 
-	DllExport int defenseModifier(TeamTypes eDefender, bool bIgnoreBuilding, bool bHelp = false) const;
+	DllExport int defenseModifier(TeamTypes eDefender, bool bHelp = false) const;
 	int movementCost(const CvUnit* pUnit, const CvPlot* pFromPlot) const;
-
-	int getExtraMovePathCost() const;
-	void changeExtraMovePathCost(int iChange);
 
 	bool isAdjacentOwned() const;
 	bool isAdjacentPlayer(PlayerTypes ePlayer, bool bLandOnly = false) const;
@@ -139,14 +117,10 @@ public:
 	int getNumCultureRangeCities(PlayerTypes ePlayer) const;
 
 	DllExport PlayerTypes calculateCulturalOwner() const;
-
 	void plotAction(PlotUnitFunc func, int iData1 = -1, int iData2 = -1, PlayerTypes eOwner = NO_PLAYER, TeamTypes eTeam = NO_TEAM);
 	DllExport int plotCount(ConstPlotUnitFunc funcA, int iData1A = -1, int iData2A = -1, PlayerTypes eOwner = NO_PLAYER, TeamTypes eTeam = NO_TEAM, ConstPlotUnitFunc funcB = NULL, int iData1B = -1, int iData2B = -1) const;
 	CvUnit* plotCheck(ConstPlotUnitFunc funcA, int iData1A = -1, int iData2A = -1, PlayerTypes eOwner = NO_PLAYER, TeamTypes eTeam = NO_TEAM, ConstPlotUnitFunc funcB = NULL, int iData1B = -1, int iData2B = -1) const;
-
 	bool isOwned() const;
-	bool isBarbarian() const;
-	bool isRevealedBarbarian() const;
 
 	DllExport bool isVisible(TeamTypes eTeam, bool bDebug) const;
 	DllExport bool isActiveVisible(bool bDebug) const;
@@ -167,7 +141,6 @@ public:
 	DllExport bool isBeingWorked() const;
 
 	bool isUnit() const;
-	bool isInvestigate(TeamTypes eTeam) const;
 	bool isVisibleEnemyDefender(const CvUnit* pUnit) const;
 	CvUnit *getVisibleEnemyDefender(PlayerTypes ePlayer) const;
 	int getNumDefenders(PlayerTypes ePlayer) const;
@@ -182,15 +155,9 @@ public:
 
 	DllExport bool isRoute() const;
 	bool isValidRoute(const CvUnit* pUnit) const;
-	bool isTradeNetworkImpassable(TeamTypes eTeam) const;
-	bool isNetworkTerrain(TeamTypes eTeam) const;
-	bool isBonusNetwork(TeamTypes eTeam) const;
-	bool isTradeNetwork(TeamTypes eTeam) const;
-	bool isTradeNetworkConnected(const CvPlot * pPlot, TeamTypes eTeam) const;
-	bool isRiverNetwork(TeamTypes eTeam) const;
-
 	bool isValidDomainForLocation(const CvUnit& unit) const;
 	bool isValidDomainForAction(const CvUnit& unit) const;
+	bool isValidDomainForAction(UnitTypes eUnit) const;
 	DllExport bool isImpassable() const;
 
 	DllExport int getX() const;
@@ -210,7 +177,6 @@ public:
 	bool at(int iX, int iY) const;
 	int getLatitude() const;
 	int getFOWIndex() const;
-
 	DllExport CvArea* area() const;
 	CvArea* waterArea() const;
 	CvArea* secondWaterArea() const;
@@ -241,7 +207,6 @@ public:
 	int getCityRadiusCount() const;
 	int isCityRadius() const;
 	void changeCityRadiusCount(int iChange);
-
 	bool isStartingPlot() const;
 	void setStartingPlot(bool bNewValue);
 
@@ -253,21 +218,18 @@ public:
 
 	DllExport CardinalDirectionTypes getRiverNSDirection() const;
 	DllExport CardinalDirectionTypes getRiverWEDirection() const;
+	EuropeTypes getEurope() const;
+	void setEurope(EuropeTypes eEurope);
+	EuropeTypes getNearestEurope() const;
+	bool isEuropeAccessable() const;
 
 	CvPlot* getInlandCorner() const;
 	bool hasCoastAtSECorner() const;
-
-	DllExport bool isIrrigated() const;
-	void setIrrigated(bool bNewValue);
-	void updateIrrigated();
-
 	bool isPotentialCityWork() const;
 	bool isPotentialCityWorkForArea(CvArea* pArea) const;
 	void updatePotentialCityWork();
-
 	bool isShowCitySymbols() const;
 	void updateShowCitySymbols();
-
 	bool isFlagDirty() const;
 	void setFlagDirty(bool bNewValue);
 
@@ -278,10 +240,10 @@ public:
 		return (PlayerTypes)m_eOwner;
 	}
 #endif
-	void setOwner(PlayerTypes eNewValue, bool bCheckUnits, bool bUpdatePlotGroup);
-
+	void setOwner(PlayerTypes eNewValue, bool bCheckUnits);
 	DllExport PlotTypes getPlotType() const;
 	DllExport bool isWater() const;
+	DllExport bool isEurope() const;
 	bool isFlatlands() const;
 	DllExport bool isHills() const;
 	DllExport bool isPeak() const;
@@ -292,56 +254,42 @@ public:
 
 	DllExport FeatureTypes getFeatureType() const;
 	DllExport void setFeatureType(FeatureTypes eNewValue, int iVariety = -1);
-	DllExport void setFeatureDummyVisibility(const char *dummyTag, bool show);
-	DllExport void addFeatureDummyModel(const char *dummyTag, const char *modelTag);
-	DllExport void setFeatureDummyTexture(const char *dummyTag, const char *textureTag);
-	DllExport CvString pickFeatureDummyTag(int mouseX, int mouseY);
-	DllExport void resetFeatureModel();
-
-	DllExport BonusTypes getBonusType(TeamTypes eTeam = NO_TEAM) const;
-	DllExport BonusTypes getNonObsoleteBonusType(TeamTypes eTeam = NO_TEAM) const;
+	DllExport BonusTypes getBonusType() const;
 	DllExport void setBonusType(BonusTypes eNewValue);
 
 	DllExport ImprovementTypes getImprovementType() const;
 	DllExport void setImprovementType(ImprovementTypes eNewValue);
 
 	DllExport RouteTypes getRouteType() const;
-	DllExport void setRouteType(RouteTypes eNewValue, bool bUpdatePlotGroup);
-	void updateCityRoute(bool bUpdatePlotGroup);
-
+	DllExport void setRouteType(RouteTypes eNewValue);
+	void updateCityRoute();
 	DllExport CvCity* getPlotCity() const;
 	void setPlotCity(CvCity* pNewValue);
-
 	DllExport CvCity* getWorkingCity() const;
 	void updateWorkingCity();
-
 	CvCity* getWorkingCityOverride() const;
 	void setWorkingCityOverride( const CvCity* pNewValue);
-
 	int getRiverID() const;
 	void setRiverID(int iNewValue);
 
 	int getMinOriginalStartDist() const;
 	void setMinOriginalStartDist(int iNewValue);
-
-	int getReconCount() const;
-	void changeReconCount(int iChange);
-
 	int getRiverCrossingCount() const;
 	void changeRiverCrossingCount(int iChange);
-
 	short* getYield();
 	DllExport int getYield(YieldTypes eIndex) const;
 	int calculateNatureYield(YieldTypes eIndex, TeamTypes eTeam, bool bIgnoreFeature = false) const;
 	int calculateBestNatureYield(YieldTypes eIndex, TeamTypes eTeam) const;
 	int calculateTotalBestNatureYield(TeamTypes eTeam) const;
-	DllExport int calculateImprovementYieldChange(ImprovementTypes eImprovement, YieldTypes eYield, PlayerTypes ePlayer, bool bOptimal = false) const;
-	DllExport int calculateYield(YieldTypes eIndex, bool bDisplay = false) const;
-	DllExport bool hasYield() const;
-	void updateYield();
+	int calculateImprovementYieldChange(ImprovementTypes eImprovement, YieldTypes eYield, PlayerTypes ePlayer, bool bOptimal = false) const;
+	int calculateYield(YieldTypes eIndex, bool bDisplay) const;
+	int calculatePotentialYield(YieldTypes eIndex, const CvUnit* pUnit, bool bDisplay) const;
+	int calculatePotentialYield(YieldTypes eYield, PlayerTypes ePlayer, ImprovementTypes eImprovement, bool bIgnoreFeature, RouteTypes eRoute, UnitTypes eUnit, bool bDisplay) const;
+	int calculatePotentialProfessionYieldAmount(ProfessionTypes eProfession, const CvUnit* pUnit, bool bDisplay) const;
+	bool hasYield() const;
+	void updateYield(bool bUpdateCity);
 	int calculateMaxYield(YieldTypes eYield) const;
 	int getYieldWithBuild(BuildTypes eBuild, YieldTypes eYield, bool bWithUpgrade) const;
-
 	DllExport int getCulture(PlayerTypes eIndex) const;
 	DllExport int countTotalCulture() const;
 	int countFriendlyCulture(TeamTypes eTeam) const;
@@ -349,60 +297,43 @@ public:
 	PlayerTypes findHighestCulturePlayer() const;
 	DllExport int calculateCulturePercent(PlayerTypes eIndex) const;
 	int calculateTeamCulturePercent(TeamTypes eIndex) const;
-	void setCulture(PlayerTypes eIndex, int iNewValue, bool bUpdate, bool bUpdatePlotGroups);
+	void setCulture(PlayerTypes eIndex, int iNewValue, bool bUpdate);
 	void changeCulture(PlayerTypes eIndex, int iChange, bool bUpdate);
-
-	DllExport int countNumAirUnits(TeamTypes eTeam) const;
-	int airUnitSpaceAvailable(TeamTypes eTeam) const;
-
+	int getBuyCultureAmount(PlayerTypes ePlayer) const;
+	int getBuyPrice(PlayerTypes ePlayer) const;
 	int getFoundValue(PlayerTypes eIndex);
 	bool isBestAdjacentFound(PlayerTypes eIndex);
 	void setFoundValue(PlayerTypes eIndex, int iNewValue);
-
 	int getPlayerCityRadiusCount(PlayerTypes eIndex) const;
 	bool isPlayerCityRadius(PlayerTypes eIndex) const;
 	void changePlayerCityRadiusCount(PlayerTypes eIndex, int iChange);
 
-	DllExport CvPlotGroup* getPlotGroup(PlayerTypes ePlayer) const;
-	CvPlotGroup* getOwnerPlotGroup() const;
-	void setPlotGroup(PlayerTypes ePlayer, CvPlotGroup* pNewValue);
-	void updatePlotGroup();
-	void updatePlotGroup(PlayerTypes ePlayer, bool bRecalculate = true);
-
 	int getVisibilityCount(TeamTypes eTeam) const;
-	DllExport void changeVisibilityCount(TeamTypes eTeam, int iChange, InvisibleTypes eSeeInvisible, bool bUpdatePlotGroups);
-
-	int getStolenVisibilityCount(TeamTypes eTeam) const;
-	void changeStolenVisibilityCount(TeamTypes eTeam, int iChange);
-
-	int getBlockadedCount(TeamTypes eTeam) const;
-	void changeBlockadedCount(TeamTypes eTeam, int iChange);
+	void changeVisibilityCount(TeamTypes eTeam, int iChange, InvisibleTypes eSeeInvisible);
 
 	DllExport PlayerTypes getRevealedOwner(TeamTypes eTeam, bool bDebug) const;
 	DllExport TeamTypes getRevealedTeam(TeamTypes eTeam, bool bDebug) const;
 	void setRevealedOwner(TeamTypes eTeam, PlayerTypes eNewValue);
 	void updateRevealedOwner(TeamTypes eTeam);
-
 	DllExport bool isRiverCrossing(DirectionTypes eIndex) const;
 	void updateRiverCrossing(DirectionTypes eIndex);
 	void updateRiverCrossing();
-
 	DllExport bool isRevealed(TeamTypes eTeam, bool bDebug) const;
-	DllExport void setRevealed(TeamTypes eTeam, bool bNewValue, bool bTerrainOnly, TeamTypes eFromTeam, bool bUpdatePlotGroup);
+	DllExport void setRevealed(TeamTypes eTeam, bool bNewValue, bool bTerrainOnly, TeamTypes eFromTeam);
 	bool isAdjacentRevealed(TeamTypes eTeam) const;
 	bool isAdjacentNonrevealed(TeamTypes eTeam) const;
 
-	DllExport ImprovementTypes getRevealedImprovementType(TeamTypes eTeam, bool bDebug) const;
+	ImprovementTypes getRevealedImprovementType(TeamTypes eTeam, bool bDebug) const;
 	void setRevealedImprovementType(TeamTypes eTeam, ImprovementTypes eNewValue);
 
-	DllExport RouteTypes getRevealedRouteType(TeamTypes eTeam, bool bDebug) const;
+	RouteTypes getRevealedRouteType(TeamTypes eTeam, bool bDebug) const;
 	void setRevealedRouteType(TeamTypes eTeam, RouteTypes eNewValue);
 
 	int getBuildProgress(BuildTypes eBuild) const;
 	bool changeBuildProgress(BuildTypes eBuild, int iChange, TeamTypes eTeam = NO_TEAM);
 
 	void updateFeatureSymbolVisibility();
-	void updateFeatureSymbol(bool bForce = false);
+	void updateFeatureSymbol(bool bForce = false, bool bBuildTileArt = true);
 
 	DllExport bool isLayoutDirty() const;							// The plot layout contains bonuses and improvements --- it is, like the city layout, passively computed by LSystems
 	DllExport void setLayoutDirty(bool bDirty);
@@ -420,7 +351,6 @@ public:
 
 	DllExport CvRiver* getRiverSymbol() const;
 	void updateRiverSymbol(bool bForce = false, bool bAdjacent = false);
-	void updateRiverSymbolArt(bool bAdjacent = true);
 
 	CvFeature* getFeatureSymbol() const;
 
@@ -431,11 +361,9 @@ public:
 	DllExport CvUnit* getCenterUnit() const;
 	DllExport CvUnit* getDebugCenterUnit() const;
 	void setCenterUnit(CvUnit* pNewValue);
-
 	int getCultureRangeCities(PlayerTypes eOwnerIndex, int iRangeIndex) const;
 	bool isCultureRangeCity(PlayerTypes eOwnerIndex, int iRangeIndex) const;
-	void changeCultureRangeCities(PlayerTypes eOwnerIndex, int iRangeIndex, int iChange, bool bUpdatePlotGroups);
-
+	void changeCultureRangeCities(PlayerTypes eOwnerIndex, int iRangeIndex, int iChange);
 	int getInvisibleVisibilityCount(TeamTypes eTeam, InvisibleTypes eInvisible) const;
 	bool isInvisibleVisible(TeamTypes eTeam, InvisibleTypes eInvisible) const;
 	void changeInvisibleVisibilityCount(TeamTypes eTeam, InvisibleTypes eInvisible, int iChange);
@@ -449,13 +377,6 @@ public:
 	DllExport CLLNode<IDInfo>* headUnitNode() const;
 	DllExport CLLNode<IDInfo>* tailUnitNode() const;
 
-	DllExport int getNumSymbols() const;
-	CvSymbol* getSymbol(int iID) const;
-	CvSymbol* addSymbol();
-
-	void deleteSymbol(int iID);
-	void deleteAllSymbols();
-
 	// Script data needs to be a narrow string for pickling in Python
 	CvString getScriptData() const;
 	void setScriptData(const char* szNewValue);
@@ -465,13 +386,25 @@ public:
 	void applyEvent(EventTypes eEvent);
 
 	bool canTrain(UnitTypes eUnit, bool bContinue, bool bTestVisible) const;
+	bool isValidYieldChanges(UnitTypes eUnit) const;
 
-	bool isEspionageCounterSpy(TeamTypes eTeam) const;
+	void setDistanceToOcean(int iNewValue);
+	int getDistanceToOcean() const;
+
+	CvPlot* findNearbyOceanPlot(int iRandomization = 25);
+
+	int getCrumbs() const;
+	void addCrumbs(int iQuantity);
+
+	DllExport const char* getResourceLayerIcon(ResourceLayerOptions eOption, CvWStringBuffer& szHelp, PlotIndicatorVisibilityFlags& eVisibilityFlag, ColorTypes& eColor) const;
+	DllExport CvUnit* getUnitLayerUnit(UnitLayerOptionTypes eOption, CvWStringBuffer& szHelp, PlotIndicatorVisibilityFlags& eVisibilityFlag, ColorTypes& eColor, bool& bTestEnemyVisibility) const;
 
 	void read(FDataStreamBase* pStream);
 	void write(FDataStreamBase* pStream);
 
 protected:
+
+	void updateImpassable();
 
 	short m_iX;
 	short m_iY;
@@ -485,19 +418,20 @@ protected:
 	short m_iCityRadiusCount;
 	int m_iRiverID;
 	short m_iMinOriginalStartDist;
-	short m_iReconCount;
 	short m_iRiverCrossingCount;
+	short m_iDistanceToOcean;
+	short m_iCrumbs;
 
 	bool m_bStartingPlot:1;
 	bool m_bHills:1;
 	bool m_bNOfRiver:1;
 	bool m_bWOfRiver:1;
-	bool m_bIrrigated:1;
 	bool m_bPotentialCityWork:1;
 	bool m_bShowCitySymbols:1;
 	bool m_bFlagDirty:1;
 	bool m_bPlotLayoutDirty:1;
 	bool m_bLayoutStateWorked:1;
+	bool m_bImpassable:1;
 
 	char /*PlayerTypes*/ m_eOwner;
 	short /*PlotTypes*/ m_ePlotType;
@@ -508,6 +442,7 @@ protected:
 	short /*RouteTypes*/ m_eRouteType;
 	char /*CardinalDirectionTypes*/ m_eRiverNSDirection;
 	char /*CardinalDirectionTypes*/ m_eRiverWEDirection;
+	char /*EuropeTypes*/ m_eEurope;
 
 	IDInfo m_plotCity;
 	IDInfo m_workingCity;
@@ -515,12 +450,9 @@ protected:
 
 	short* m_aiYield;
 	int* m_aiCulture;
-	short* m_aiFoundValue;
+	int* m_aiFoundValue;
 	char* m_aiPlayerCityRadiusCount;
-	int* m_aiPlotGroup;			// IDs - keep as int
 	short* m_aiVisibilityCount;
-	short* m_aiStolenVisibilityCount;
-	short* m_aiBlockadedCount;
 	char* m_aiRevealedOwner;
 
 	bool* m_abRiverCrossing;	// bit vector
@@ -547,10 +479,7 @@ protected:
 
 	CLinkList<IDInfo> m_units;
 
-	std::vector<CvSymbol*> m_symbols;
-
 	void doFeature();
-	void doCulture();
 
 	void processArea(CvArea* pArea, int iChange);
 	void doImprovementUpgrade();

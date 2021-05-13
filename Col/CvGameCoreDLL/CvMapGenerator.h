@@ -18,7 +18,6 @@ public:
 	DllExport static void FreeInstance() { SAFE_DELETE(m_pInst); }
 	DllExport CvMapGenerator();
 	DllExport virtual ~CvMapGenerator();
-
 	bool canPlaceBonusAt(BonusTypes eBonus, int iX, int iY, bool bIgnoreLatitude);
 	bool canPlaceGoodyAt(ImprovementTypes eImprovement, int iX, int iY);
 
@@ -34,6 +33,7 @@ public:
 	void addUniqueBonusType(BonusTypes eBonusType);
 	void addNonUniqueBonusType(BonusTypes eBonusType);
 	DllExport void addGoodies();
+	DllExport void addEurope();
 
 	DllExport void eraseRivers();
 	DllExport void eraseFeatures();

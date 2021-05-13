@@ -32,7 +32,7 @@ void CvXMLLoadUtility::logMsg(char* format, ... )
 
 bool CvXMLLoadUtility::CreateFXml()
 {
-	PROFILE("CreateFXML");
+	PROFILE_FUNC();
 	try
 	{
 		m_pFXml = gDLL->getXMLIFace()->CreateFXml(m_pSchemaCache);
@@ -49,7 +49,7 @@ bool CvXMLLoadUtility::CreateFXml()
 
 void CvXMLLoadUtility::DestroyFXml()
 {
-	PROFILE("DestroyFXML");
+	PROFILE_FUNC();
 	gDLL->getXMLIFace()->DestroyFXml(m_pFXml);
 }
 
@@ -115,7 +115,7 @@ void CvXMLLoadUtility::ResetGlobalEffectInfo()
 
 	GC.getEffectInfo().clear();
 
-	LoadGlobalClassInfo(GC.getEffectInfo(), "CIV4EffectInfos", "Misc", "Civ4EffectInfos/EffectInfos/EffectInfo", false, false);
+	LoadGlobalClassInfo(GC.getEffectInfo(), "CIV4EffectInfos", "Misc", "Civ4EffectInfos/EffectInfos/EffectInfo", NULL);
 }
 
 
@@ -430,7 +430,7 @@ bool CvXMLLoadUtility::SetStringList(CvString** ppszStringArray, int* piSize)
 		{
 			for (i=1;i<*piSize;i++)
 			{
-				if (!GetNextXmlVal(pszStringArray[i]))
+				if (!GetNextXmlVal(&(pszStringArray[i])))
 				{
 					break;
 				}
@@ -453,7 +453,7 @@ bool CvXMLLoadUtility::SetStringList(CvString** ppszStringArray, int* piSize)
 CvWString CvXMLLoadUtility::CreateKeyStringFromKBCode(const TCHAR* pszHotKey)
 {
 	// SPEEDUP
-	PROFILE("CreateKeyStringFromKBCode");
+	PROFILE_FUNC();
 
 	int i;
 

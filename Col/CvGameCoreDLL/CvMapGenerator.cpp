@@ -86,43 +86,12 @@ bool CvMapGenerator::canPlaceBonusAt(BonusTypes eBonus, int iX, int iY, bool bIg
 	}
 
 	CvBonusInfo& pInfo = GC.getBonusInfo(eBonus);
-	CvBonusClassInfo& pClassInfo = GC.getBonusClassInfo((BonusClassTypes) pInfo.getBonusClassType());
 
 	if (pPlot->isWater())
 	{
 		if (((GC.getMapINLINE().getNumBonusesOnLand(eBonus) * 100) / (GC.getMapINLINE().getNumBonuses(eBonus) + 1)) < pInfo.getMinLandPercent())
 		{
 			return false;
-		}
-	}
-
-	// Make sure there are no bonuses of the same class (but a different type) nearby:
-
-	iRange = pClassInfo.getUniqueRange();
-
-	for (iDX = -(iRange); iDX <= iRange; iDX++)
-	{
-		for (iDY = -(iRange); iDY <= iRange; iDY++)
-		{
-			pLoopPlot	= plotXY(iX, iY, iDX, iDY);
-
-			if (pLoopPlot != NULL)
-			{
-				if (pLoopPlot->area() == pArea)
-				{
-					if (plotDistance(iX, iY, pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE()) <= iRange)
-					{
-						BonusTypes eOtherBonus = pLoopPlot->getBonusType();
-						if (eOtherBonus != NO_BONUS)
-						{
-							if (GC.getBonusInfo(eOtherBonus).getBonusClassType() == pInfo.getBonusClassType())
-							{
-								return false;
-							}
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -239,6 +208,9 @@ void CvMapGenerator::addGameElements()
 	addGoodies();
 	gDLL->logMemState("CvMapGen after add goodies");
 
+	addEurope();
+	gDLL->logMemState("CvMapGen after add Europe");
+
 	// Call for Python to make map modifications after it's been generated
 	afterGeneration();
 }
@@ -246,7 +218,7 @@ void CvMapGenerator::addGameElements()
 
 void CvMapGenerator::addLakes()
 {
-	PROFILE("CvMapGenerator::addLakes");
+	PROFILE_FUNC();
 
 	if (gDLL->getPythonIFace()->pythonAddLakes() && !gDLL->getPythonIFace()->pythonUsingDefaultImpl())
 	{
@@ -281,7 +253,7 @@ void CvMapGenerator::addLakes()
 
 void CvMapGenerator::addRivers()
 {
-	PROFILE("CvMapGenerator::addRivers");
+	PROFILE_FUNC();
 
 	if (gDLL->getPythonIFace()->pythonAddRivers() && !gDLL->getPythonIFace()->pythonUsingDefaultImpl())
 	{
@@ -525,8 +497,8 @@ bool CvMapGenerator::addRiver(CvPlot* pFreshWaterPlot)
 	bool bSuccess = false;
 
 	// randomize the order of directions
-	int aiShuffle[NUM_CARDINALDIRECTION_TYPES];
-	shuffleArray(aiShuffle, NUM_CARDINALDIRECTION_TYPES, GC.getGameINLINE().getMapRand());
+	std::vector<int> aiShuffle(NUM_CARDINALDIRECTION_TYPES);
+	GC.getGameINLINE().getMapRand().shuffleSequence(aiShuffle, NULL);
 
 	// make two passes, once for each flow direction of the river
 	int iNWFlowPass = GC.getGameINLINE().getMapRandNum(2, "addRiver");
@@ -616,7 +588,7 @@ bool CvMapGenerator::addRiver(CvPlot* pFreshWaterPlot)
 
 void CvMapGenerator::addFeatures()
 {
-	PROFILE("CvMapGenerator::addFeatures");
+	PROFILE_FUNC();
 
 	CvPlot* pPlot;
 	int iI, iJ;
@@ -646,7 +618,7 @@ void CvMapGenerator::addFeatures()
 
 void CvMapGenerator::addBonuses()
 {
-	PROFILE("CvMapGenerator::addBonuses");
+	PROFILE_FUNC();
 	gDLL->NiTextOut("Adding Bonuses...");
 
 	if (gDLL->getPythonIFace()->pythonAddBonuses() && !gDLL->getPythonIFace()->pythonUsingDefaultImpl())
@@ -749,11 +721,12 @@ void CvMapGenerator::addUniqueBonusType(BonusTypes eBonusType)
 
 		// Place the bonuses:
 
-		int* piShuffle = shuffle(GC.getMapINLINE().numPlotsINLINE(), GC.getGameINLINE().getMapRand());
+		std::vector<int> aiShuffle(GC.getMapINLINE().numPlotsINLINE());
+		GC.getGameINLINE().getMapRand().shuffleSequence(aiShuffle, "addUniqueBonusType shuffle");
 
 		for (int iI = 0; iI < GC.getMapINLINE().numPlotsINLINE(); iI++)
 		{
-			CvPlot* pPlot = GC.getMapINLINE().plotByIndexINLINE(piShuffle[iI]);
+			CvPlot* pPlot = GC.getMapINLINE().plotByIndexINLINE(aiShuffle[iI]);
 			FAssertMsg(pPlot != NULL, "addUniqueBonusType(): pPlot is null");
 
 			if (GC.getMapINLINE().getNumBonuses(eBonusType) >= iBonusCount)
@@ -791,8 +764,6 @@ void CvMapGenerator::addUniqueBonusType(BonusTypes eBonusType)
 				}
 			}
 		}
-
-		SAFE_DELETE_ARRAY(piShuffle);
 	}
 
 	SAFE_DELETE_ARRAY(piAreaTried);
@@ -807,7 +778,8 @@ void CvMapGenerator::addNonUniqueBonusType(BonusTypes eBonusType)
 		return;
 	}
 
-	int* piShuffle = shuffle(GC.getMapINLINE().numPlotsINLINE(), GC.getGameINLINE().getMapRand());
+	std::vector<int> aiShuffle(GC.getMapINLINE().numPlotsINLINE());
+	GC.getGameINLINE().getMapRand().shuffleSequence(aiShuffle, "addNonUniqueBonusType shuffle");
 
 	CvBonusInfo& pBonusInfo = GC.getBonusInfo(eBonusType);
 
@@ -817,7 +789,7 @@ void CvMapGenerator::addNonUniqueBonusType(BonusTypes eBonusType)
 	CvPlot* pPlot = NULL;
 	for (int iI = 0; iI < GC.getMapINLINE().numPlotsINLINE(); iI++)
 	{
-		pPlot = GC.getMapINLINE().plotByIndexINLINE(piShuffle[iI]);
+		pPlot = GC.getMapINLINE().plotByIndexINLINE(aiShuffle[iI]);
 		if (canPlaceBonusAt(eBonusType, pPlot->getX_INLINE(), pPlot->getY_INLINE(), bIgnoreLatitude))
 		{
 			pPlot->setBonusType(eBonusType);
@@ -854,14 +826,12 @@ void CvMapGenerator::addNonUniqueBonusType(BonusTypes eBonusType)
 			}
 		}
 	}
-
-	SAFE_DELETE_ARRAY(piShuffle);
 }
 
 
 void CvMapGenerator::addGoodies()
 {
-	PROFILE("CvMapGenerator::addGoodies");
+	PROFILE_FUNC();
 
 	if (gDLL->getPythonIFace()->pythonAddGoodies() && !gDLL->getPythonIFace()->pythonUsingDefaultImpl())
 	{
@@ -876,7 +846,8 @@ void CvMapGenerator::addGoodies()
 	}
 
 	int iNumPlots = GC.getMapINLINE().numPlotsINLINE();
-	int* piShuffle = shuffle(iNumPlots, GC.getGameINLINE().getMapRand());
+	std::vector<int> aiShuffle(iNumPlots);
+	GC.getGameINLINE().getMapRand().shuffleSequence(aiShuffle, "addNonUniqueBonusType shuffle");
 
 	for (int iI = 0; iI < GC.getNumImprovementInfos(); iI++)
 	{
@@ -885,7 +856,7 @@ void CvMapGenerator::addGoodies()
 			for (int iJ = 0; iJ < iNumPlots; iJ++)
 			{
 				gDLL->callUpdater();
-				CvPlot *pPlot = GC.getMapINLINE().plotByIndexINLINE(piShuffle[iJ]);
+				CvPlot *pPlot = GC.getMapINLINE().plotByIndexINLINE(aiShuffle[iJ]);
 				FAssertMsg(pPlot, "pPlot is expected not to be NULL");
 				if (!(pPlot->isWater()))
 				{
@@ -902,8 +873,89 @@ void CvMapGenerator::addGoodies()
 			}
 		}
 	}
+}
 
-	SAFE_DELETE_ARRAY(piShuffle);
+void CvMapGenerator::addEurope()
+{
+	PROFILE_FUNC();
+	gDLL->NiTextOut("Adding Europe...");
+
+	for (int iEurope = 0; iEurope < GC.getNumEuropeInfos(); ++iEurope)
+	{
+		EuropeTypes eEurope = (EuropeTypes) iEurope;
+		CvEuropeInfo& kEurope = GC.getEuropeInfo(eEurope);
+		int iWidth = kEurope.getWidth();
+		gDLL->getPythonIFace()->pythonGetEuropeWidth(eEurope, &iWidth);
+		int iMinLandDistance = kEurope.getMinLandDistance();
+		gDLL->getPythonIFace()->pythonGetEuropeMinLandDistance(eEurope, &iMinLandDistance);
+
+		//try several times until at least one start europe is found
+		bool bAnyEuropeFound = false;
+		for ( ; iMinLandDistance >= 0 && !bAnyEuropeFound; iMinLandDistance--)
+		{
+			for (int i = 0; i < GC.getMapINLINE().numPlotsINLINE(); ++i)
+			{
+				CvPlot* pPlot = GC.getMapINLINE().plotByIndexINLINE(i);
+
+				if (pPlot->isWater() && !pPlot->isEurope())
+				{
+					bool bEurope = false;
+					switch (kEurope.getCardinalDirection())
+					{
+					case CARDINALDIRECTION_EAST:
+						bEurope = (pPlot->getX_INLINE() > GC.getMapINLINE().getGridWidthINLINE() - iWidth);
+						break;
+					case CARDINALDIRECTION_WEST:
+						bEurope = (pPlot->getX_INLINE() < iWidth);
+						break;
+					case CARDINALDIRECTION_NORTH:
+						bEurope = (pPlot->getY_INLINE() > GC.getMapINLINE().getGridHeightINLINE() - iWidth);
+						break;
+					case CARDINALDIRECTION_SOUTH:
+						bEurope = (pPlot->getY_INLINE() < iWidth);
+						break;
+					default:
+						FAssertMsg(false, "Invalid direction");
+						break;
+					}
+
+					for (int i = -iMinLandDistance; i <= iMinLandDistance && bEurope; i++)
+					{
+						for (int j = -iMinLandDistance; j <= iMinLandDistance && bEurope; j++)
+						{
+							CvPlot* pLoopPlot = ::plotXY(pPlot->getX_INLINE(), pPlot->getY_INLINE(), i, j);
+							if (pLoopPlot != NULL)
+							{
+								if (!pLoopPlot->isWater())
+								{
+									bEurope = false;
+								}
+							}
+						}
+					}
+
+					if (bEurope)
+					{
+						if (pPlot->getFeatureType() != NO_FEATURE && GC.getFeatureInfo(pPlot->getFeatureType()).isImpassable())
+						{
+							pPlot->setFeatureType(NO_FEATURE);
+						}
+
+						if (pPlot->isImpassable())
+						{
+							bEurope = false;
+						}
+					}
+
+					if (bEurope)
+					{
+						pPlot->setEurope(eEurope);
+						bAnyEuropeFound = true;
+					}
+				}
+			}
+		}
+	}
 }
 
 
@@ -969,7 +1021,7 @@ void CvMapGenerator::eraseGoodies()
 
 void CvMapGenerator::generateRandomMap()
 {
-	PROFILE("generateRandomMap()");
+	PROFILE_FUNC();
 
 	gDLL->getPythonIFace()->callFunction(gDLL->getPythonIFace()->getMapScriptModule(), "beforeGeneration");
 
@@ -1017,7 +1069,7 @@ void CvMapGenerator::generatePlotTypes()
 
 void CvMapGenerator::generateTerrain()
 {
-	PROFILE("generateTerrain()");
+	PROFILE_FUNC();
 
 	std::vector<int> terrainMapOut;
 	if (gDLL->getPythonIFace()->pythonGenerateTerrainTypes(terrainMapOut) && !gDLL->getPythonIFace()->pythonUsingDefaultImpl()) // Python override
@@ -1036,7 +1088,7 @@ void CvMapGenerator::generateTerrain()
 // Allows for user-defined Python Actions for map generation after it's already been created
 void CvMapGenerator::afterGeneration()
 {
-	PROFILE("CvMapGenerator::afterGeneration");
+	PROFILE_FUNC();
 
 	gDLL->getPythonIFace()->callFunction(gDLL->getPythonIFace()->getMapScriptModule(), "afterGeneration");
 }
@@ -1153,7 +1205,7 @@ int CvMapGenerator::calculateNumBonusesToAdd(BonusTypes eBonusType)
 				iNumPossible++;
 			}
 		}
-		iLandTiles += (iNumPossible / pBonusInfo.getTilesPer());
+		iLandTiles = (iNumPossible / pBonusInfo.getTilesPer());
 	}
 
 	int iPlayers = (GC.getGameINLINE().countCivPlayersAlive() * pBonusInfo.getPercentPerPlayer()) / 100;

@@ -18,7 +18,6 @@
 
 
 class FAStar;
-class CvPlotGroup;
 
 
 inline int coordRange(int iCoord, int iRange, bool bWrap)
@@ -85,7 +84,6 @@ protected:
 	void setup();
 
 public:
-
 	DllExport void erasePlots();
 	void setRevealedPlots(TeamTypes eTeam, bool bNewValue, bool bTerrainOnly = false);
 	void setAllPlotTypes(PlotTypes ePlotType);
@@ -100,20 +98,18 @@ public:
 	void updateSymbols();
 	DllExport void updateMinimapColor();
 	void updateSight(bool bIncrement);
-	void updateIrrigated();
 	DllExport void updateCenterUnit();
 	void updateWorkingCity();
 	void updateMinOriginalStartDist(CvArea* pArea);
 	void updateYield();
+	void updateCulture();
 
 	void verifyUnitValidPlot();
-
-	void combinePlotGroups(PlayerTypes ePlayer, CvPlotGroup* pPlotGroup1, CvPlotGroup* pPlotGroup2);
 
 	CvPlot* syncRandPlot(int iFlags = 0, int iArea = -1, int iMinUnitDistance = -1, int iTimeout = 100);
 
 	DllExport CvCity* findCity(int iX, int iY, PlayerTypes eOwner = NO_PLAYER, TeamTypes eTeam = NO_TEAM, bool bSameArea = true, bool bCoastalOnly = false, TeamTypes eTeamAtWarWith = NO_TEAM, DirectionTypes eDirection = NO_DIRECTION, CvCity* pSkipCity = NULL);
-	DllExport CvSelectionGroup* findSelectionGroup(int iX, int iY, PlayerTypes eOwner = NO_PLAYER, bool bReadyToSelect = false, bool bWorkers = false);
+	DllExport CvSelectionGroup* findSelectionGroup(int iX, int iY, PlayerTypes eOwner = NO_PLAYER, bool bReadyToSelect = false);
 
 	CvArea* findBiggestArea(bool bWater);
 
@@ -152,7 +148,6 @@ public:
 
 	float getWidthCoords();
 	float getHeightCoords();
-
 	int maxPlotDistance();
 	int maxStepDistance();
 
@@ -172,10 +167,8 @@ public:
 #endif
 	DllExport int getLandPlots();
 	void changeLandPlots(int iChange);
-
 	DllExport int getOwnedPlots();
 	void changeOwnedPlots(int iChange);
-
 	int getTopLatitude();
 	int getBottomLatitude();
 
@@ -212,10 +205,8 @@ public:
 
 	int getNumBonuses(BonusTypes eIndex);
 	void changeNumBonuses(BonusTypes eIndex, int iChange);
-
 	int getNumBonusesOnLand(BonusTypes eIndex);
 	void changeNumBonusesOnLand(BonusTypes eIndex, int iChange);
-
 	DllExport CvPlot* plotByIndex(int iIndex) const;
 #ifdef _USRDLL
 	inline CvPlot* plotByIndexINLINE(int iIndex) const
@@ -245,7 +236,6 @@ public:
 	}
 #endif
 	DllExport CvPlot* pointToPlot(float fX, float fY);
-
 	int getIndexAfterLastArea();
 	DllExport int getNumAreas();
 	DllExport int getNumLandAreas();
@@ -264,7 +254,6 @@ public:
 	// Serialization:
 	DllExport virtual void read(FDataStreamBase* pStream);
 	DllExport virtual void write(FDataStreamBase* pStream);
-
 	void rebuild(int iGridW, int iGridH, int iTopLatitude, int iBottomLatitude, bool bWrapX, bool bWrapY, WorldSizeTypes eWorldSize, ClimateTypes eClimate, SeaLevelTypes eSeaLevel, int iNumCustomMapOptions, CustomMapOptionTypes * eCustomMapOptions);
 
 protected:

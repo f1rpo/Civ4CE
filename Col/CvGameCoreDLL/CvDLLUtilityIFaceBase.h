@@ -105,8 +105,6 @@ public:
 	virtual void sendGameInfo(const CvWString& szGameName, const CvWString& szAdminPassword) = 0;
 	virtual void sendPlayerOption(PlayerOptionTypes eOption, bool bValue) = 0;
 	virtual void sendExtendedGame() = 0;
-	virtual void sendAutoMoves() = 0;
-	virtual void sendTurnComplete() = 0;
 	virtual void sendJoinGroup(int iUnitID, int iHeadID) = 0;
 	virtual void sendPushMission(int iUnitID, MissionTypes eMission, int iData1, int iData2, int iFlags, bool bShift) = 0;
 	virtual void sendAutoMission(int iUnitID) = 0;
@@ -114,35 +112,26 @@ public:
 	virtual void sendPushOrder(int iCityID, OrderTypes eOrder, int iData, bool bAlt, bool bShift, bool bCtrl) = 0;
 	virtual void sendPopOrder(int iCity, int iNum) = 0;
 	virtual void sendDoTask(int iCity, TaskTypes eTask, int iData1, int iData2, bool bOption, bool bAlt, bool bShift, bool bCtrl) = 0;
-	virtual void sendResearch(TechTypes eTech, int iDiscover, bool bShift) = 0;
-	virtual void sendPercentChange(CommerceTypes eCommerce, int iChange) = 0;
-	virtual void sendConvert(ReligionTypes eReligion) = 0;
 	virtual void sendChat(const CvWString& szChatString, ChatTargetTypes eTarget) = 0;
 	virtual void sendPing(int iX, int iY) = 0;
 	virtual void sendPause(int iPauseID = -1) = 0;
 	virtual void sendMPRetire() = 0;
-	virtual void sendToggleTradeMessage(PlayerTypes eWho, TradeableItems eItemType, int iData, int iOtherWho, bool bAIOffer, bool bSendToAll = false) = 0;
+	virtual void sendToggleTradeMessage(PlayerTypes eWho, const TradeData& kTradeData, int iOtherWho, bool bAIOffer, bool bSendToAll = false) = 0;
 	virtual void sendClearTableMessage(PlayerTypes eWhoTradingWith) = 0;
 	virtual void sendImplementDealMessage(PlayerTypes eOtherWho, CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirList) = 0;
 	virtual void sendChangeWar(TeamTypes iRivalTeam, bool bWar) = 0;
-	virtual void sendChangeVassal(TeamTypes iMasterTeam, bool bVassal, bool bCapitulated) = 0;
-	virtual void sendChooseElection(int iSelection, int iVoteId) = 0;
-	virtual void sendDiploVote(int iVoteId, PlayerVoteTypes eChoice) = 0;
-	virtual void sendContactCiv(NetContactTypes eContactType, PlayerTypes eWho) = 0;
+	virtual void sendContactCiv(NetContactTypes eContactType, PlayerTypes eWho, int iTransportId) = 0;
 	virtual void sendOffer() = 0;
 	virtual void sendDiploEvent(PlayerTypes eWhoTradingWith, DiploEventTypes eDiploEvent, int iData1, int iData2) = 0;
 	virtual void sendRenegotiate(PlayerTypes eWhoTradingWith) = 0;
 	virtual void sendRenegotiateThisItem(PlayerTypes ePlayer2, TradeableItems eItemType, int iData) = 0;
 	virtual void sendExitTrade() = 0;
-	virtual void sendKillDeal(int iDealID, bool bFromDiplomacy) = 0;
+	virtual void sendKillDeal(int iDealID, bool bFromDiplomacy, TeamTypes eEndingTeam) = 0;
 	virtual void sendUpdateCivics(CivicTypes* paeCivics) = 0;
 	virtual void sendDiplomacy(PlayerTypes ePlayer, CvDiploParameters* pParams) = 0;
 	virtual void sendPopup(PlayerTypes ePlayer, CvPopupInfo* pInfo) = 0;
-	virtual void sendEventTriggered(PlayerTypes ePlayer, EventTypes eEvent, int iEventTriggeredId) = 0;
-	virtual void sendEmpireSplit(PlayerTypes ePlayer, int iAreaId) = 0;
-	virtual void sendLaunch(PlayerTypes ePlayer, VictoryTypes eVictory) = 0;
 	virtual void sendAdvancedStartAction(AdvancedStartActionTypes eAction, PlayerTypes ePlayer, int iX, int iY, int iData, bool bAdd) = 0;
-	virtual void sendFoundReligion(PlayerTypes ePlayer, ReligionTypes eReligion, ReligionTypes eSlotReligion) = 0;
+	virtual void sendPlayerAction(PlayerTypes ePlayer, PlayerActionTypes eAction, int iData1, int iData2, int iData3) = 0;
 
 	virtual int getMillisecsPerTurn() = 0;
 	virtual float getSecsPerTurn() = 0;
@@ -187,11 +176,13 @@ public:
 	virtual void endDiplomacy() = 0;
 	virtual bool isDiplomacy() = 0;
 	virtual int getDiplomacyPlayer() = 0;
+	virtual const IDInfo getDiplomacyTransport() const = 0;
 	virtual void updateDiplomacyAttitude(bool bForce = false) = 0;
 	virtual bool isMPDiplomacy() = 0;
 	virtual bool isMPDiplomacyScreenUp() = 0;
 	virtual int getMPDiplomacyPlayer() = 0;
-	virtual void beginMPDiplomacy( PlayerTypes eWhoTalkingTo, bool bRenegotiate = false, bool bSimultaneous = true) = 0;
+	virtual const IDInfo getMPDiplomacyTransport() const = 0;
+	virtual void beginMPDiplomacy( PlayerTypes eWhoTalkingTo, bool bRenegotiate = false, bool bSimultaneous = true, IDInfo kTransport = IDInfo()) = 0;
 	virtual void endMPDiplomacy() = 0;
 
 	virtual bool getAudioDisabled() = 0;
@@ -205,12 +196,14 @@ public:
 
 	virtual CvCacheObject* createGlobalTextCacheObject(const TCHAR* szCacheFileName) = 0;
 	virtual CvCacheObject* createGlobalDefinesCacheObject(const TCHAR* szCacheFileName) = 0;
-	virtual CvCacheObject* createTechInfoCacheObject(const TCHAR* szCacheFileName) = 0;
+	virtual CvCacheObject* createFatherInfoCacheObject(const TCHAR* szCacheFileName) = 0;
 	virtual CvCacheObject* createBuildingInfoCacheObject(const TCHAR* szCacheFileName) = 0;
 	virtual CvCacheObject* createUnitInfoCacheObject(const TCHAR* szCacheFileName) = 0;
 	virtual CvCacheObject* createLeaderHeadInfoCacheObject(const TCHAR* szCacheFileName) = 0;
 	virtual CvCacheObject* createCivilizationInfoCacheObject(const TCHAR* szCacheFileName) = 0;
 	virtual CvCacheObject* createPromotionInfoCacheObject(const TCHAR* szCacheFileName) = 0;
+	virtual CvCacheObject* createProfessionInfoCacheObject(const TCHAR* szCacheFileName) = 0;
+	virtual CvCacheObject* createTraitInfoCacheObject(const TCHAR* szCacheFileName) = 0;
 	virtual CvCacheObject* createDiplomacyInfoCacheObject(const TCHAR* szCacheFileName) = 0;
 	virtual CvCacheObject* createEventInfoCacheObject(const TCHAR* szCacheFileName) = 0;
 	virtual CvCacheObject* createEventTriggerInfoCacheObject(const TCHAR* szCacheFileName) = 0;
@@ -246,8 +239,6 @@ public:
 	virtual bool capsLock() = 0;
 	virtual bool numLock() = 0;
 
-	virtual void ProfilerBegin()=0;
-	virtual void ProfilerEnd()=0;
 	virtual void BeginSample(ProfileSample *pSample)=0;
 	virtual void EndSample(ProfileSample *pSample)=0;
 	virtual bool isGameInitializing() = 0;
@@ -276,7 +267,6 @@ public:
 	virtual char* md5String(char* szString) = 0;
 
 	virtual const char* getModName(bool bFullPath = true) const = 0;
-	virtual bool hasSkippedSaveChecksum() const = 0;
 	virtual void resetStatistics() = 0;
 };
 

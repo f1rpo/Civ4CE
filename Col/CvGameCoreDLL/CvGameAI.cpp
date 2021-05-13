@@ -59,9 +59,7 @@ void CvGameAI::AI_makeAssignWorkDirty()
 
 void CvGameAI::AI_updateAssignWork()
 {
-	int iI;
-
-	for (iI = 0; iI < MAX_PLAYERS; iI++)
+	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
 		CvPlayer& kLoopPlayer = GET_PLAYER((PlayerTypes)iI);
 		if (GET_TEAM(kLoopPlayer.getTeam()).isHuman() && kLoopPlayer.isAlive())
@@ -71,56 +69,29 @@ void CvGameAI::AI_updateAssignWork()
 	}
 }
 
-
-bool CvGameAI::AI_isFirstTech(TechTypes eTech)
-{
-	int iI;
-
-	for (iI = 0; iI < GC.getNumReligionInfos(); iI++)
-	{
-		if (GC.getReligionInfo((ReligionTypes)iI).getTechPrereq() == eTech)
-		{
-			if (!(GC.getGameINLINE().isReligionSlotTaken((ReligionTypes)iI)))
-			{
-				return true;
-			}
-		}
-	}
-
-	if (GC.getGameINLINE().countKnownTechNumTeams(eTech) == 0)
-	{
-		if ((GC.getTechInfo(eTech).getFirstFreeUnitClass() != NO_UNITCLASS) ||
-				(GC.getTechInfo(eTech).getFirstFreeTechs() > 0))
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-
 int CvGameAI::AI_combatValue(UnitTypes eUnit)
 {
 	int iValue;
 
 	iValue = 100;
 
-	if (GC.getUnitInfo(eUnit).getDomainType() == DOMAIN_AIR)
-	{
-		iValue *= GC.getUnitInfo(eUnit).getAirCombat();
-	}
-	else
-	{
-		iValue *= GC.getUnitInfo(eUnit).getCombat();
-
-		iValue *= ((((GC.getUnitInfo(eUnit).getFirstStrikes() * 2) + GC.getUnitInfo(eUnit).getChanceFirstStrikes()) * (GC.getDefineINT("COMBAT_DAMAGE") / 5)) + 100);
-		iValue /= 100;
-	}
+	iValue *= GC.getUnitInfo(eUnit).getCombat();
 
 	iValue /= getBestLandUnitCombat();
 
 	return iValue;
+}
+
+int CvGameAI::AI_adjustedTurn(int iTurn)
+{
+	int iModifier = 0;
+	iModifier += GC.getGameSpeedInfo(getGameSpeedType()).getGrowthPercent() - 100;
+	iModifier += GC.getGameSpeedInfo(getGameSpeedType()).getTrainPercent() - 100;
+	iModifier += GC.getGameSpeedInfo(getGameSpeedType()).getConstructPercent() - 100;
+	iModifier /= 3;
+	
+	return (iTurn * (100 + iModifier)) / 100;
+	
 }
 
 
@@ -134,6 +105,11 @@ int CvGameAI::AI_turnsPercent(int iTurns, int iPercent)
 	}
 
 	return std::max(1, iTurns);
+}
+
+int CvGameAI::AI_gameCompletePercent()
+{
+	return std::min(100, 100 * getGameTurn() / std::max(1,  getEstimateEndTurn()));
 }
 
 

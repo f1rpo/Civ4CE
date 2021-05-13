@@ -10,6 +10,7 @@
 #include "CvPlot.h"
 #include "CvArtFileMgr.h"
 #include "CyCity.h"
+#include "CvTradeRoute.h"
 #include "CyArgsList.h"
 #include "CvPopupReturn.h"
 #include "CvInfos.h"
@@ -54,12 +55,49 @@ CvDLLButtonPopup::~CvDLLButtonPopup()
 
 void CvDLLButtonPopup::OnAltExecute(CvPopup& popup, const PopupReturn& popupReturn, CvPopupInfo &info)
 {
-	CvPopupInfo* pInfo = new CvPopupInfo;
-	if (pInfo)
+	switch (info.getButtonPopupType())
 	{
-		*pInfo = info;
-		gDLL->getInterfaceIFace()->addPopup(pInfo);
+	case BUTTONPOPUP_CHOOSE_PROFESSION:
+		{
+			CvPopupInfo* pInfo = new CvPopupInfo;
+			if (pInfo)
+			{
+				*pInfo = info;
+				gDLL->getInterfaceIFace()->addPopup(pInfo);
+				gDLL->getInterfaceIFace()->popupSetAsCancelled(&popup);
+			}
+		}
+	default:
+		break;
+	}
+}
+
+
+void CvDLLButtonPopup::OnEscape(CvPopup& popup, CvPopupInfo &info)
+{
+	switch (info.getButtonPopupType())
+	{
+	case BUTTONPOPUP_MAIN_MENU:
+	case BUTTONPOPUP_CHOOSE_PROFESSION:
+	case BUTTONPOPUP_PURCHASE_EUROPE_UNIT:
+	case BUTTONPOPUP_LOADUNIT:
+	case BUTTONPOPUP_LOAD_CARGO:
+	case BUTTONPOPUP_LEADUNIT:
+	case BUTTONPOPUP_DIPLOMACY:
+	case BUTTONPOPUP_FREE_COLONY:
+	case BUTTONPOPUP_PROMOTE:
+	case BUTTONPOPUP_SELECT_YIELD_AMOUNT:
+	case BUTTONPOPUP_DETAILS:
+	case BUTTONPOPUP_ADMIN_PASSWORD:
+	case BUTTONPOPUP_ADMIN:
+	case BUTTONPOPUP_TALK_NATIVES:
+	case BUTTONPOPUP_FEAT:
+	case BUTTONPOPUP_CONFIRMTASK:
+	case BUTTONPOPUP_CONFIRMCOMMAND:
 		gDLL->getInterfaceIFace()->popupSetAsCancelled(&popup);
+		break;
+	default:
+		break;
 	}
 }
 
@@ -67,7 +105,6 @@ void CvDLLButtonPopup::OnAltExecute(CvPopup& popup, const PopupReturn& popupRetu
 void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, CvPopupInfo &info)
 {
 	int iExamineCityID;
-	int iI;
 
 	switch (info.getButtonPopupType())
 	{
@@ -186,6 +223,13 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 		}
 		break;
 
+	case BUTTONPOPUP_CONFIRMTASK:
+		if (pPopupReturn->getButtonClicked() == 0)
+		{
+			gDLL->sendDoTask(info.getData1(), (TaskTypes) info.getData3(), info.getData2(), -1, false, false, false, false);
+		}
+		break;
+
 	case BUTTONPOPUP_LOADUNIT:
 		if (pPopupReturn->getButtonClicked() != 0)
 		{
@@ -224,36 +268,26 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 		}
 		break;
 
-	case BUTTONPOPUP_LEADUNIT:
-		if (pPopupReturn->getButtonClicked() != 0)
+	case BUTTONPOPUP_LOAD_CARGO:
+		if (pPopupReturn->getButtonClicked() < NUM_YIELD_TYPES)
 		{
-			CLLNode<IDInfo>* pUnitNode;
-			CvSelectionGroup* pSelectionGroup;
-			CvUnit* pLoopUnit;
-			CvPlot* pPlot;
-			int iCount;
-
-			pSelectionGroup = gDLL->getInterfaceIFace()->getSelectionList();
+			CvSelectionGroup* pSelectionGroup = gDLL->getInterfaceIFace()->getSelectionList();
 
 			if (NULL != pSelectionGroup)
 			{
-				pPlot = pSelectionGroup->plot();
+				YieldTypes eYield = (YieldTypes) pPopupReturn->getButtonClicked();
 
-				iCount = pPopupReturn->getButtonClicked();
-
-				pUnitNode = pPlot->headUnitNode();
-
-				while (pUnitNode != NULL)
+				//find transport that can carry yield
+				int iNumUnits = pSelectionGroup->getNumUnits();
+				for (int i = 0; i < iNumUnits; ++i)
 				{
-					pLoopUnit = ::getUnit(pUnitNode->m_data);
-					pUnitNode = pPlot->nextUnitNode(pUnitNode);
-
-					if (pLoopUnit->canPromote((PromotionTypes) info.getData1(), info.getData2()))
+					CvUnit* pTransport = pSelectionGroup->getUnitAt(i);
+					if (NULL != pTransport)
 					{
-						iCount--;
-						if (iCount == 0)
+						if (pTransport->canLoadYield(pTransport->plot(), eYield, false))
 						{
-							GC.getGameINLINE().selectionListGameNetMessage(GAMEMESSAGE_PUSH_MISSION, MISSION_LEAD, pLoopUnit->getID());
+							gDLL->sendDoCommand(pTransport->getID(), COMMAND_LOAD_YIELD, eYield, -1, false);
+							gDLL->sendDoCommand(pTransport->getID(), COMMAND_LOAD_CARGO, -1, -1, false);
 							break;
 						}
 					}
@@ -262,28 +296,38 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 		}
 		break;
 
-	case BUTTONPOPUP_DOESPIONAGE:
-		if (pPopupReturn->getButtonClicked() != NO_ESPIONAGEMISSION)
+	case BUTTONPOPUP_LEADUNIT:
+		if (pPopupReturn->getButtonClicked() != 0)
 		{
-			GC.getGameINLINE().selectionListGameNetMessage(GAMEMESSAGE_PUSH_MISSION, MISSION_ESPIONAGE, (EspionageMissionTypes) pPopupReturn->getButtonClicked());
+			CvUnit* pLeaderUnit = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(info.getData2());
+			if (pLeaderUnit != NULL)
+			{
+				CvSelectionGroup* pSelectionGroup = pLeaderUnit->getGroup();
+				if (NULL != pSelectionGroup)
+				{
+					CvPlot* pPlot = pSelectionGroup->plot();
+					int iCount = pPopupReturn->getButtonClicked();
+
+					CLLNode<IDInfo>* pUnitNode = pPlot->headUnitNode();
+					while (pUnitNode != NULL)
+					{
+						CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
+						pUnitNode = pPlot->nextUnitNode(pUnitNode);
+
+						if (pLoopUnit->canPromote((PromotionTypes) info.getData1(), info.getData2()))
+						{
+							iCount--;
+							if (iCount == 0)
+							{
+								gDLL->sendPushMission(info.getData2(), MISSION_LEAD, pLoopUnit->getID(), -1, 0, false);
+								break;
+							}
+						}
+					}
+				}
+			}
 		}
 		break;
-
-	case BUTTONPOPUP_DOESPIONAGE_TARGET:
-		if (pPopupReturn->getButtonClicked() != -1)
-		{
-			GC.getGameINLINE().selectionListGameNetMessage(GAMEMESSAGE_PUSH_MISSION, MISSION_ESPIONAGE, (EspionageMissionTypes)info.getData1(), pPopupReturn->getButtonClicked());
-		}
-		break;
-
-	case BUTTONPOPUP_CHOOSETECH:
-		if (pPopupReturn->getButtonClicked() == GC.getNumTechInfos())
-		{
-			gDLL->getPythonIFace()->callFunction("CvScreensInterface", "showTechChooser");
-			GET_PLAYER(GC.getGameINLINE().getActivePlayer()).chooseTech(0, "", true);
-		}
-		break;
-
 	case BUTTONPOPUP_RAZECITY:
 		if (pPopupReturn->getButtonClicked() == 1)
 		{
@@ -310,28 +354,10 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 		}
 		break;
 
-	case BUTTONPOPUP_DISBANDCITY:
-		if (pPopupReturn->getButtonClicked() == 1)
-		{
-			gDLL->sendDoTask(info.getData1(), TASK_DISBAND, -1, -1, false, false, false, false);
-		}
-		else if (pPopupReturn->getButtonClicked() == 0)
-		{
-			CvCity* pCity = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCity(info.getData1());
-			if (NULL != pCity)
-			{
-				pCity->chooseProduction();
-				gDLL->getEventReporterIFace()->cityAcquiredAndKept(GC.getGameINLINE().getActivePlayer(), pCity);
-			}
-		}
-		break;
-
 	case BUTTONPOPUP_CHOOSEPRODUCTION:
 		iExamineCityID = 0;
 		iExamineCityID = std::max(iExamineCityID, GC.getNumUnitInfos());
 		iExamineCityID = std::max(iExamineCityID, GC.getNumBuildingInfos());
-		iExamineCityID = std::max(iExamineCityID, GC.getNumProjectInfos());
-		iExamineCityID = std::max(iExamineCityID, GC.getNumProcessInfos());
 
 		if (pPopupReturn->getButtonClicked() == iExamineCityID)
 		{
@@ -343,47 +369,35 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 		}
 		break;
 
-	case BUTTONPOPUP_CHANGECIVIC:
-		if (pPopupReturn->getButtonClicked() == 0)
+	case BUTTONPOPUP_CHOOSE_YIELD_BUILD:
+		if (pPopupReturn->getButtonClicked() >= GC.getNumUnitInfos())
 		{
-			CivicTypes* paeNewCivics = new CivicTypes[GC.getNumCivicOptionInfos()];
-
-			for (iI = 0; iI < GC.getNumCivicOptionInfos(); iI++)
-			{
-				paeNewCivics[iI] = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivics((CivicOptionTypes)iI);
-			}
-
-			paeNewCivics[info.getData1()] = ((CivicTypes)(info.getData2()));
-
-			gDLL->sendUpdateCivics(paeNewCivics);
-
-			SAFE_DELETE(paeNewCivics);
+			BuildingTypes eBuilding = (BuildingTypes) (pPopupReturn->getButtonClicked() - GC.getNumUnitInfos());
+			gDLL->sendDoTask(info.getData1(), TASK_PUSH_CONSTRUCT_BUILDING, eBuilding, -1, false, false, false, false);
 		}
-		else if (pPopupReturn->getButtonClicked() == 2)
+		else if (pPopupReturn->getButtonClicked() >= 0)
 		{
-			gDLL->getPythonIFace()->callFunction(PYScreensModule, "showCivicsScreen");
+			UnitTypes eUnit = (UnitTypes) pPopupReturn->getButtonClicked();
+			gDLL->sendDoTask(info.getData1(), TASK_PUSH_TRAIN_UNIT, eUnit, NO_UNITAI, false, false, false, false);
 		}
 		break;
 
-	case BUTTONPOPUP_CHANGERELIGION:
-		if (pPopupReturn->getButtonClicked() == 0)
+	case BUTTONPOPUP_CHOOSE_EDUCATION:
+		if (pPopupReturn->getButtonClicked() == GC.getNumUnitInfos())
 		{
-			gDLL->sendConvert((ReligionTypes)(info.getData1()));
-		}
-		break;
-
-	case BUTTONPOPUP_CHOOSEELECTION:
-		{
-			VoteSelectionData* pData = GC.getGameINLINE().getVoteSelection(info.getData1());
-			if (NULL != pData && pPopupReturn->getButtonClicked() < (int)pData->aVoteOptions.size())
+			CvCity* pCity = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCity(info.getData1());
+			if (pCity != NULL)
 			{
-				gDLL->sendChooseElection((VoteTypes)(pPopupReturn->getButtonClicked()), info.getData1());
+				gDLL->getInterfaceIFace()->selectCity(pCity, true);
+
+				CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_CHOOSE_EDUCATION, info.getData1(), info.getData2());
+				gDLL->getInterfaceIFace()->addPopup(pInfo, GC.getGameINLINE().getActivePlayer(), false, true);
 			}
 		}
-		break;
-
-	case BUTTONPOPUP_DIPLOVOTE:
-		gDLL->sendDiploVote(info.getData1(), (PlayerVoteTypes)pPopupReturn->getButtonClicked());
+		else if (pPopupReturn->getButtonClicked() >= 0)
+		{
+			gDLL->sendDoTask(info.getData1(), TASK_EDUCATE, info.getData2(), pPopupReturn->getButtonClicked(), false, false, false, false);
+		}
 		break;
 
 	case BUTTONPOPUP_ALARM:
@@ -392,11 +406,12 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 	case BUTTONPOPUP_DEAL_CANCELED:
 		if (pPopupReturn->getButtonClicked() == 0)
 		{
-			gDLL->sendKillDeal(info.getData1(), info.getOption1());
+			gDLL->sendKillDeal(info.getData1(), info.getOption1(), GC.getGameINLINE().getActiveTeam());
 		}
 		break;
 
 	case BUTTONPOPUP_PYTHON:
+	case BUTTONPOPUP_FEAT:
 		if (!info.getOnClickedPythonCallback().IsEmpty())
 		{
 			FAssertMsg(!GC.getGameINLINE().isNetworkMultiPlayer(), "Danger: Out of Sync");
@@ -507,7 +522,7 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 			}
 			if (!GC.getGameINLINE().isGameMultiPlayer())
 			{
-				if (pPopupReturn->getCheckboxBitfield(2) && pPopupReturn->getCheckboxBitfield(2) > 0)
+				if (pPopupReturn->getCheckboxBitfield(2) > 0)
 				{
 					gDLL->setChtLvl(1);
 				}
@@ -582,7 +597,7 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 		break;
 
 	case BUTTONPOPUP_DIPLOMACY:
-		if (pPopupReturn->getButtonClicked() != MAX_CIV_PLAYERS)
+		if (pPopupReturn->getButtonClicked() != MAX_PLAYERS)
 		{
 			GET_PLAYER(GC.getGameINLINE().getActivePlayer()).contact((PlayerTypes)(pPopupReturn->getButtonClicked()));
 		}
@@ -605,107 +620,230 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 		gDLL->getInterfaceIFace()->exitingToMainMenu();
 		break;
 
-	case BUTTONPOPUP_VASSAL_DEMAND_TRIBUTE:
-		if (pPopupReturn->getButtonClicked() < GC.getNumBonusInfos())
-		{
-			PlayerTypes eVassal = (PlayerTypes)info.getData1();
-			if (GET_PLAYER(eVassal).isHuman())
-			{
-				CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_VASSAL_GRANT_TRIBUTE, GC.getGameINLINE().getActivePlayer(), pPopupReturn->getButtonClicked());
-				if (NULL != pInfo)
-				{
-					gDLL->sendPopup(eVassal, pInfo);
-				}
-			}
-			else
-			{
-				TradeData item;
-				setTradeItem(&item, TRADE_RESOURCES, pPopupReturn->getButtonClicked());
-
-				CLinkList<TradeData> ourList;
-				CLinkList<TradeData> theirList;
-				theirList.insertAtEnd(item);
-
-				if (GET_PLAYER(eVassal).AI_considerOffer(GC.getGameINLINE().getActivePlayer(), &ourList, &theirList))
-				{
-					gDLL->sendImplementDealMessage(eVassal, &ourList, &theirList);
-
-					CvWString szBuffer = gDLL->getText("TXT_KEY_VASSAL_GRANT_TRIBUTE_ACCEPTED", GET_PLAYER(eVassal).getNameKey(), GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getNameKey(), GC.getBonusInfo((BonusTypes)pPopupReturn->getButtonClicked()).getTextKeyWide());
-					gDLL->getInterfaceIFace()->addMessage(GC.getGameINLINE().getActivePlayer(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer);
-				}
-				else
-				{
-					gDLL->sendChangeWar(GET_PLAYER(eVassal).getTeam(), true);
-				}
-			}
-		}
-		break;
-
-	case BUTTONPOPUP_VASSAL_GRANT_TRIBUTE:
-		if (pPopupReturn->getButtonClicked() == 0)
-		{
-			TradeData item;
-			setTradeItem(&item, TRADE_RESOURCES, info.getData2());
-
-			CLinkList<TradeData> ourList;
-			CLinkList<TradeData> theirList;
-			ourList.insertAtEnd(item);
-
-			gDLL->sendImplementDealMessage((PlayerTypes)info.getData1(), &ourList, &theirList);
-
-			CvWString szBuffer = gDLL->getText("TXT_KEY_VASSAL_GRANT_TRIBUTE_ACCEPTED", GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getNameKey(), GET_PLAYER((PlayerTypes)info.getData1()).getNameKey(), GC.getBonusInfo((BonusTypes)info.getData2()).getTextKeyWide());
-			gDLL->getInterfaceIFace()->addMessage((PlayerTypes)info.getData1(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer);
-		}
-		else
-		{
-			gDLL->sendChangeWar(GET_PLAYER((PlayerTypes)info.getData1()).getTeam(), true);
-		}
-
-		break;
-
 	case BUTTONPOPUP_EVENT:
-		if (pPopupReturn->getButtonClicked() == GC.getNumEventInfos())
 		{
 			CvPlayer& kActivePlayer = GET_PLAYER(GC.getGameINLINE().getActivePlayer());
 			EventTriggeredData* pTriggeredData = kActivePlayer.getEventTriggered(info.getData1());
-			if (NULL != pTriggeredData)
+
+			if (pPopupReturn->getButtonClicked() == GC.getNumEventInfos())
 			{
-				CvCity* pCity = kActivePlayer.getCity(pTriggeredData->m_iCityId);
-				if (NULL != pCity)
+				if (NULL != pTriggeredData)
 				{
-					gDLL->getInterfaceIFace()->selectCity(pCity, true);
+					CvCity* pCity = kActivePlayer.getCity(pTriggeredData->m_iCityId);
+					if (NULL != pCity)
+					{
+						gDLL->getInterfaceIFace()->selectCity(pCity, true);
+					}
+				}
+
+				CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_EVENT, info.getData1());
+				gDLL->getInterfaceIFace()->addPopup(pInfo, GC.getGameINLINE().getActivePlayer(), false, true);
+			}
+			else if (-1 != pPopupReturn->getButtonClicked())
+			{
+				if (NULL != pTriggeredData && GC.getEventTriggerInfo(pTriggeredData->m_eTrigger).isSinglePlayer())
+				{
+					GET_PLAYER(GC.getGameINLINE().getActivePlayer()).doAction(PLAYER_ACTION_APPLY_EVENT, pPopupReturn->getButtonClicked(), info.getData1(), -1);
+				}
+				else
+				{
+					gDLL->sendPlayerAction(GC.getGameINLINE().getActivePlayer(), PLAYER_ACTION_APPLY_EVENT, pPopupReturn->getButtonClicked(), info.getData1(), -1);
 				}
 			}
-
-			CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_EVENT, info.getData1());
-			gDLL->getInterfaceIFace()->addPopup(pInfo, GC.getGameINLINE().getActivePlayer(), false, true);
-		}
-		else if (-1 != pPopupReturn->getButtonClicked())
-		{
-			gDLL->sendEventTriggered(GC.getGameINLINE().getActivePlayer(), (EventTypes)pPopupReturn->getButtonClicked(), info.getData1());
 		}
 		break;
 
 	case BUTTONPOPUP_FREE_COLONY:
-		if (pPopupReturn->getButtonClicked() > 0)
+		if (pPopupReturn->getButtonClicked() >= 0)
 		{
-			gDLL->sendEmpireSplit(GC.getGameINLINE().getActivePlayer(), pPopupReturn->getButtonClicked());
-		}
-		else if (pPopupReturn->getButtonClicked() < 0)
-		{
-			gDLL->sendDoTask(-pPopupReturn->getButtonClicked(), TASK_LIBERATE, 0, -1, false, false, false, false);
+			gDLL->sendDoTask(pPopupReturn->getButtonClicked(), TASK_LIBERATE, 0, -1, false, false, false, false);
 		}
 		break;
 
-	case BUTTONPOPUP_LAUNCH:
-		if (0 == pPopupReturn->getButtonClicked())
+	case BUTTONPOPUP_CHOOSE_PROFESSION:
+		if (pPopupReturn->getButtonClicked() == -1)
 		{
-			gDLL->sendLaunch(GC.getGameINLINE().getActivePlayer(), (VictoryTypes)info.getData1());
+			gDLL->sendDoTask(info.getData1(), TASK_SET_CITIZEN_AUTOMATED, info.getData2(), pPopupReturn->getButtonClicked(), false, false, false, false);
+		}
+		else if (pPopupReturn->getButtonClicked() == -2)
+		{
+			CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_CONFIRMTASK, info.getData1(), info.getData2(), TASK_CLEAR_SPECIALTY);
+			pInfo->setText(GC.getCommandInfo(COMMAND_CLEAR_SPECIALTY).getTextKeyWide());
+			gDLL->getInterfaceIFace()->addPopup(pInfo, NO_PLAYER, true);
+		}
+		else if (pPopupReturn->getButtonClicked() < GC.getNumProfessionInfos())
+		{
+			if (GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(info.getData2()) != NULL)
+			{
+				gDLL->sendDoCommand(info.getData2(), COMMAND_PROFESSION, pPopupReturn->getButtonClicked(), -1, false);
+			}
+			else if (GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getEuropeUnitById(info.getData2()) != NULL)
+			{
+				gDLL->sendPlayerAction(GC.getGameINLINE().getActivePlayer(), PLAYER_ACTION_EUROPE_CHANGE_PROFESSION, info.getData2(), pPopupReturn->getButtonClicked(), -1);
+			}
+			else
+			{
+				gDLL->sendDoTask(info.getData1(), TASK_CHANGE_PROFESSION, info.getData2(), pPopupReturn->getButtonClicked(), false, false, false, false);
+			}
 		}
 		break;
 
-	case BUTTONPOPUP_FOUND_RELIGION:
-		gDLL->sendFoundReligion(GC.getGameINLINE().getActivePlayer(), (ReligionTypes)pPopupReturn->getButtonClicked(), (ReligionTypes)info.getData1());
+	case BUTTONPOPUP_PURCHASE_EUROPE_UNIT:
+		if (pPopupReturn->getButtonClicked() < GC.getNumUnitInfos())
+		{
+			gDLL->sendPlayerAction(GC.getGameINLINE().getActivePlayer(), PLAYER_ACTION_BUY_EUROPE_UNIT, pPopupReturn->getButtonClicked(), -1, -1);
+		}
+		break;
+
+	case BUTTONPOPUP_FOUNDING_FATHER:
+		if (pPopupReturn->getButtonClicked() == -1)
+		{
+			CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_FOUNDING_FATHER, info.getData1(), info.getData2(), info.getData3(), info.getFlags(), info.getOption1(), info.getOption2());
+			gDLL->getInterfaceIFace()->addPopup(pInfo, GC.getGameINLINE().getActivePlayer(), false, true);
+
+			pInfo = new CvPopupInfo(BUTTONPOPUP_PYTHON_SCREEN);
+			pInfo->setText(L"showFoundingFatherScreen");
+			pInfo->setData1(GC.getFatherInfo((FatherTypes)info.getData1()).getFatherCategory());
+			gDLL->getInterfaceIFace()->addPopup(pInfo, GC.getGameINLINE().getActivePlayer(), false, true);
+		}
+		else
+		{
+			gDLL->sendPlayerAction(GC.getGameINLINE().getActivePlayer(), PLAYER_ACTION_CONVINCE_FATHER, info.getData1(), pPopupReturn->getButtonClicked(), -1);
+		}
+		break;
+
+	case BUTTONPOPUP_CIVIC_OPTION:
+		if (pPopupReturn->getButtonClicked() == -1)
+		{
+			CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_CIVIC_OPTION, info.getData1(), info.getData2(), info.getData3(), info.getFlags(), info.getOption1(), info.getOption2());
+			gDLL->getInterfaceIFace()->addPopup(pInfo, GC.getGameINLINE().getActivePlayer(), false, true);
+
+			CivicTypes eCivic = NO_CIVIC;
+			for (int iCivic = 0; iCivic < GC.getNumCivicInfos(); ++iCivic)
+			{
+				if (GC.getCivicInfo((CivicTypes) iCivic).getCivicOptionType() == info.getData1())
+				{
+					eCivic = (CivicTypes) iCivic;
+					break;
+				}
+			}
+
+			pInfo = new CvPopupInfo(BUTTONPOPUP_PYTHON_SCREEN);
+			pInfo->setText(L"pediaJumpToCivic");
+			pInfo->setData1(eCivic);
+			gDLL->getInterfaceIFace()->addPopup(pInfo, GC.getGameINLINE().getActivePlayer(), false, true);
+		}
+		else
+		{
+			gDLL->sendPlayerAction(GC.getGameINLINE().getActivePlayer(), PLAYER_ACTION_SET_CIVIC, info.getData1(), pPopupReturn->getButtonClicked(), -1);
+		}
+		break;
+
+	case BUTTONPOPUP_TRADE_ROUTES:
+		{
+			CvPlayer& kPlayer = GET_PLAYER(GC.getGameINLINE().getActivePlayer());
+			std::vector<CvTradeRoute*> aiRoutes;
+			kPlayer.getTradeRoutes(aiRoutes);
+			for (uint i = 0; i < aiRoutes.size(); ++i)
+			{
+				int iRouteID = aiRoutes[i]->getID();
+				bool bAssignRoute = (pPopupReturn->getCheckboxBitfield(iRouteID) != 0);
+				GC.getGameINLINE().selectionListGameNetMessage(GAMEMESSAGE_DO_COMMAND, COMMAND_ASSIGN_TRADE_ROUTE, iRouteID, bAssignRoute);
+			}
+		}
+		break;
+
+	case BUTTONPOPUP_YIELD_IMPORT_EXPORT:
+		{
+			CvPlayer& kPlayer = GET_PLAYER(GC.getGameINLINE().getActivePlayer());
+			CvCity* pCity = kPlayer.getCity(info.getData1());
+			if (pCity != NULL)
+			{
+				for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
+				{
+					YieldTypes eYield = (YieldTypes) iYield;
+					if (GC.getYieldInfo((YieldTypes) iYield).isCargo())
+					{
+						bool bImport = (pPopupReturn->getCheckboxBitfield(iYield) & 0x01);
+						if (bImport != pCity->isImport(eYield))
+						{
+							gDLL->sendDoTask(info.getData1(), TASK_YIELD_IMPORT, iYield, bImport, false, false, false, false);
+						}
+						bool bExport = (pPopupReturn->getCheckboxBitfield(iYield) & 0x02);
+						if (bExport != pCity->isExport(eYield))
+						{
+							gDLL->sendDoTask(info.getData1(), TASK_YIELD_EXPORT, iYield, bExport, false, false, false, false);
+						}
+
+						int iLevel = pPopupReturn->getSpinnerWidgetValue(iYield);
+						if (iLevel != pCity->getMaintainLevel(eYield))
+						{
+							gDLL->sendDoTask(info.getData1(), TASK_YIELD_LEVEL, iYield, iLevel, false, false, false, false);
+						}
+					}
+				}
+			}
+		}
+		break;
+
+	case BUTTONPOPUP_PROMOTE:
+		{
+			CvPlayer& kPlayer = GET_PLAYER(GC.getGameINLINE().getActivePlayer());
+			CvSelectionGroup* pSelectionGroup = gDLL->getInterfaceIFace()->getSelectionList();
+			int iPromotion = pPopupReturn->getButtonClicked();
+			if (iPromotion < GC.getNumPromotionInfos())
+			{
+				if (pSelectionGroup != NULL)
+				{
+					CLLNode<IDInfo>* pUnitNode = pSelectionGroup->headUnitNode();
+					while (pUnitNode != NULL)
+					{
+						CvUnit* ploopUnit = ::getUnit(pUnitNode->m_data);
+						pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode);
+						if (NULL != ploopUnit)
+						{
+							gDLL->sendDoCommand(ploopUnit->getID(), COMMAND_PROMOTION, iPromotion, -1, false);
+							gDLL->sendDoCommand(ploopUnit->getID(), COMMAND_PROMOTE, -1, -1, false);
+						}
+					}
+				}
+			}
+		}
+		break;
+
+	case BUTTONPOPUP_CHOOSE_GOODY:
+		if (pPopupReturn->getButtonClicked() == 1)
+		{
+			gDLL->sendPlayerAction(GC.getGameINLINE().getActivePlayer(), PLAYER_ACTION_RECEIVE_GOODY, info.getData1(), info.getData2(), info.getData3());
+		}
+		break;
+
+	case BUTTONPOPUP_SELECT_YIELD_AMOUNT:
+		{
+			CvUnit* pUnit = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(info.getData2());
+			if (pUnit != NULL)
+			{
+				if (pUnit->getUnitTravelState() == UNIT_TRAVEL_STATE_IN_EUROPE)
+				{
+					gDLL->sendPlayerAction(GC.getGameINLINE().getActivePlayer(), (PlayerActionTypes)info.getData3(), info.getData1(), pPopupReturn->getCurrentSpinBoxValue(0), info.getData2());
+				}
+				else
+				{
+					gDLL->sendDoCommand(info.getData2(), (CommandTypes)info.getData3(), info.getData1(), pPopupReturn->getCurrentSpinBoxValue(0), false);
+				}
+			}
+		}
+		break;
+
+	case BUTTONPOPUP_TALK_NATIVES:
+		if (pPopupReturn->getButtonClicked() >= 0 && pPopupReturn->getButtonClicked() < NUM_COMMAND_TYPES)
+		{
+			gDLL->sendDoCommand(info.getData1(), (CommandTypes) pPopupReturn->getButtonClicked(), -1, -1, false);
+		}
+		else if (pPopupReturn->getButtonClicked() == NUM_COMMAND_TYPES)
+		{
+			gDLL->sendPlayerAction(GC.getGameINLINE().getActivePlayer(), PLAYER_ACTION_FEAT, FEAT_TALK_NATIVES, 1, -1);
+		}
 		break;
 
 	default:
@@ -723,29 +861,7 @@ void CvDLLButtonPopup::OnFocus(CvPopup* pPopup, CvPopupInfo &info)
 
 	switch (info.getButtonPopupType())
 	{
-	case BUTTONPOPUP_CHOOSETECH:
-		if (info.getData1() == 0)
-		{
-			if ((GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCurrentResearch() != NO_TECH) || (GC.getGameINLINE().getGameState() == GAMESTATE_OVER))
-			{
-				gDLL->getInterfaceIFace()->popupSetAsCancelled(pPopup);
-			}
-		}
-		break;
-
-	case BUTTONPOPUP_CHANGERELIGION:
-		if (!(GET_PLAYER(GC.getGameINLINE().getActivePlayer()).canChangeReligion()) || (GC.getGameINLINE().getGameState() == GAMESTATE_OVER))
-		{
-			gDLL->getInterfaceIFace()->popupSetAsCancelled(pPopup);
-		}
-		break;
-
 	case BUTTONPOPUP_CHOOSEPRODUCTION:
-		if (GC.getGameINLINE().getGameState() == GAMESTATE_OVER)
-		{
-			gDLL->getInterfaceIFace()->popupSetAsCancelled(pPopup);
-		}
-		else
 		{
 			PlayerTypes ePlayer = GC.getGameINLINE().getActivePlayer();
 			CvCity* pCity = GET_PLAYER(ePlayer).getCity(info.getData1());
@@ -760,8 +876,23 @@ void CvDLLButtonPopup::OnFocus(CvPopup* pPopup, CvPopupInfo &info)
 		}
 		break;
 
+	case BUTTONPOPUP_CHOOSE_EDUCATION:
+		{
+			PlayerTypes ePlayer = GC.getGameINLINE().getActivePlayer();
+			CvCity* pCity = GET_PLAYER(ePlayer).getCity(info.getData1());
+			if (NULL == pCity || pCity->getOwnerINLINE() != ePlayer)
+			{
+				gDLL->getInterfaceIFace()->popupSetAsCancelled(pPopup);
+			}
+			else
+			{
+				gDLL->getInterfaceIFace()->lookAtCityOffset(pCity->getID());
+			}
+
+		}
+		break;
+
 	case BUTTONPOPUP_RAZECITY:
-	case BUTTONPOPUP_DISBANDCITY:
 		{
 			PlayerTypes ePlayer = GC.getGameINLINE().getActivePlayer();
 			CvCity* pCity = GET_PLAYER(ePlayer).getCity(info.getData1());
@@ -776,15 +907,10 @@ void CvDLLButtonPopup::OnFocus(CvPopup* pPopup, CvPopupInfo &info)
 		}
 		break;
 
-	case BUTTONPOPUP_CHANGECIVIC:
-		if (!(GET_PLAYER(GC.getGameINLINE().getActivePlayer()).canRevolution(NULL)) || (GC.getGameINLINE().getGameState() == GAMESTATE_OVER))
-		{
-			gDLL->getInterfaceIFace()->popupSetAsCancelled(pPopup);
-		}
-		break;
-
 	case BUTTONPOPUP_PYTHON:
+	case BUTTONPOPUP_FEAT:
 	case BUTTONPOPUP_PYTHON_SCREEN:
+	case BUTTONPOPUP_MOVIE:
 		if (!info.getOnFocusPythonCallback().IsEmpty())
 		{
 			long iResult;
@@ -803,6 +929,13 @@ void CvDLLButtonPopup::OnFocus(CvPopup* pPopup, CvPopupInfo &info)
 			}
 		}
 		break;
+
+	case BUTTONPOPUP_FOUNDING_FATHER:
+		if (!GET_TEAM(GC.getGameINLINE().getActiveTeam()).canConvinceFather((FatherTypes) info.getData1()))
+		{
+			gDLL->getInterfaceIFace()->popupSetAsCancelled(pPopup);
+		}
+		break;
 	}
 }
 
@@ -819,26 +952,14 @@ bool CvDLLButtonPopup::launchButtonPopup(CvPopup* pPopup, CvPopupInfo &info)
 	case BUTTONPOPUP_CHOOSEPRODUCTION:
 		bLaunched = launchProductionPopup(pPopup, info);
 		break;
-	case BUTTONPOPUP_CHANGERELIGION:
-		bLaunched = launchChangeReligionPopup(pPopup, info);
+	case BUTTONPOPUP_CHOOSE_YIELD_BUILD:
+		bLaunched = launchChooseYieldBuildPopup(pPopup, info);
 		break;
-	case BUTTONPOPUP_CHOOSEELECTION:
-		bLaunched = launchChooseElectionPopup(pPopup, info);
-		break;
-	case BUTTONPOPUP_DIPLOVOTE:
-		bLaunched = launchDiploVotePopup(pPopup, info);
+	case BUTTONPOPUP_CHOOSE_EDUCATION:
+		bLaunched = launchEducationPopup(pPopup, info);
 		break;
 	case BUTTONPOPUP_RAZECITY:
 		bLaunched = launchRazeCityPopup(pPopup, info);
-		break;
-	case BUTTONPOPUP_DISBANDCITY:
-		bLaunched = launchDisbandCityPopup(pPopup, info);
-		break;
-	case BUTTONPOPUP_CHOOSETECH:
-		bLaunched = launchChooseTechPopup(pPopup, info);
-		break;
-	case BUTTONPOPUP_CHANGECIVIC:
-		bLaunched = launchChangeCivicsPopup(pPopup, info);
 		break;
 	case BUTTONPOPUP_ALARM:
 		bLaunched = launchAlarmPopup(pPopup, info);
@@ -849,17 +970,17 @@ bool CvDLLButtonPopup::launchButtonPopup(CvPopup* pPopup, CvPopupInfo &info)
 	case BUTTONPOPUP_CONFIRMCOMMAND:
 		bLaunched = launchConfirmCommandPopup(pPopup, info);
 		break;
+	case BUTTONPOPUP_CONFIRMTASK:
+		bLaunched = launchConfirmTaskPopup(pPopup, info);
+		break;
 	case BUTTONPOPUP_LOADUNIT:
 		bLaunched = launchLoadUnitPopup(pPopup, info);
 		break;
+	case BUTTONPOPUP_LOAD_CARGO:
+		bLaunched = launchLoadCargoPopup(pPopup, info);
+		break;
 	case BUTTONPOPUP_LEADUNIT:
 		bLaunched = launchLeadUnitPopup(pPopup, info);
-		break;
-	case BUTTONPOPUP_DOESPIONAGE:
-		bLaunched = launchDoEspionagePopup(pPopup, info);
-		break;
-	case BUTTONPOPUP_DOESPIONAGE_TARGET:
-		bLaunched = launchDoEspionageTargetPopup(pPopup, info);
 		break;
 	case BUTTONPOPUP_MAIN_MENU:
 		bLaunched = launchMainMenuPopup(pPopup, info);
@@ -870,10 +991,14 @@ bool CvDLLButtonPopup::launchButtonPopup(CvPopup* pPopup, CvPopupInfo &info)
 	case BUTTONPOPUP_PYTHON_SCREEN:
 		bLaunched = launchPythonScreen(pPopup, info);
 		break;
+	case BUTTONPOPUP_MOVIE:
+		bLaunched = launchMovie(pPopup, info);
+		break;
 	case BUTTONPOPUP_DEAL_CANCELED:
 		bLaunched = launchCancelDeal(pPopup, info);
 		break;
 	case BUTTONPOPUP_PYTHON:
+	case BUTTONPOPUP_FEAT:
 		bLaunched = launchPythonPopup(pPopup, info);
 		break;
 	case BUTTONPOPUP_DETAILS:
@@ -903,23 +1028,41 @@ bool CvDLLButtonPopup::launchButtonPopup(CvPopup* pPopup, CvPopupInfo &info)
 	case BUTTONPOPUP_KICKED:
 		bLaunched = launchKickedPopup(pPopup, info);
 		break;
-	case BUTTONPOPUP_VASSAL_DEMAND_TRIBUTE:
-		bLaunched = launchVassalDemandTributePopup(pPopup, info);
-		break;
-	case BUTTONPOPUP_VASSAL_GRANT_TRIBUTE:
-		bLaunched = launchVassalGrantTributePopup(pPopup, info);
-		break;
 	case BUTTONPOPUP_EVENT:
 		bLaunched = launchEventPopup(pPopup, info);
 		break;
 	case BUTTONPOPUP_FREE_COLONY:
 		bLaunched = launchFreeColonyPopup(pPopup, info);
 		break;
-	case BUTTONPOPUP_LAUNCH:
-		bLaunched = launchLaunchPopup(pPopup, info);
+	case BUTTONPOPUP_CHOOSE_PROFESSION:
+		bLaunched = launchChooseProfessionPopup(pPopup, info);
 		break;
-	case BUTTONPOPUP_FOUND_RELIGION:
-		bLaunched = launchFoundReligionPopup(pPopup, info);
+	case BUTTONPOPUP_PURCHASE_EUROPE_UNIT:
+		bLaunched = launchPurchaseEuropeUnitPopup(pPopup, info);
+		break;
+	case BUTTONPOPUP_FOUNDING_FATHER:
+		bLaunched = launchFoundingFatherPopup(pPopup, info);
+		break;
+	case BUTTONPOPUP_CIVIC_OPTION:
+		bLaunched = launchCivicOptionPopup(pPopup, info);
+		break;
+	case BUTTONPOPUP_TRADE_ROUTES:
+		bLaunched = launchTradeRoutesPopup(pPopup, info);
+		break;
+	case BUTTONPOPUP_YIELD_IMPORT_EXPORT:
+		bLaunched = launchYieldImportExportPopup(pPopup, info);
+		break;
+	case BUTTONPOPUP_PROMOTE:
+		bLaunched = launchPromotionPopup(pPopup, info);
+		break;
+	case BUTTONPOPUP_CHOOSE_GOODY:
+		bLaunched = launchChooseGoodyPopup(pPopup, info);
+		break;
+	case BUTTONPOPUP_SELECT_YIELD_AMOUNT:
+		bLaunched = launchSelectYieldAmountPopup(pPopup, info);
+		break;
+	case BUTTONPOPUP_TALK_NATIVES:
+		bLaunched = launchTalkNativesPopup(pPopup, info);
 		break;
 	default:
 		FAssert(false);
@@ -941,7 +1084,6 @@ bool CvDLLButtonPopup::launchProductionPopup(CvPopup* pPopup, CvPopupInfo &info)
 {
 	CvWString szBuffer;
 	CvString szArtFilename;
-	CvWString szTemp;
 
 	CvCity* pCity = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCity(info.getData1());
 	if (NULL == pCity || pCity->isProductionAutomated())
@@ -964,7 +1106,6 @@ bool CvDLLButtonPopup::launchProductionPopup(CvPopup* pPopup, CvPopupInfo &info)
 
 	UnitTypes eTrainUnit = NO_UNIT;
 	BuildingTypes eConstructBuilding = NO_BUILDING;
-	ProjectTypes eCreateProject = NO_PROJECT;
 	switch (info.getData2())
 	{
 	case (ORDER_TRAIN):
@@ -972,9 +1113,6 @@ bool CvDLLButtonPopup::launchProductionPopup(CvPopup* pPopup, CvPopupInfo &info)
 		break;
 	case (ORDER_CONSTRUCT):
 		eConstructBuilding = (BuildingTypes)info.getData3();
-		break;
-	case (ORDER_CREATE):
-		eCreateProject = (ProjectTypes)info.getData3();
 		break;
 	default:
 		break;
@@ -985,11 +1123,32 @@ bool CvDLLButtonPopup::launchProductionPopup(CvPopup* pPopup, CvPopupInfo &info)
 	{
 		if (bFinish)
 		{
-			szBuffer = gDLL->getText(((isLimitedUnitClass((UnitClassTypes)(GC.getUnitInfo(eTrainUnit).getUnitClassType()))) ? "TXT_KEY_POPUP_TRAINED_WORK_ON_NEXT_LIMITED" : "TXT_KEY_POPUP_TRAINED_WORK_ON_NEXT"), GC.getUnitInfo(eTrainUnit).getTextKeyWide(), pCity->getNameKey());
+			szBuffer = gDLL->getText("TXT_KEY_POPUP_CONSTRUCTED_WORK_ON_NEXT", GC.getUnitInfo(eTrainUnit).getTextKeyWide(), pCity->getNameKey());
 		}
 		else
 		{
-			szBuffer = gDLL->getText(((isLimitedUnitClass((UnitClassTypes)(GC.getUnitInfo(eTrainUnit).getUnitClassType()))) ? "TXT_KEY_POPUP_CANNOT_TRAIN_WORK_NEXT_LIMITED" : "TXT_KEY_POPUP_CANNOT_TRAIN_WORK_NEXT"), GC.getUnitInfo(eTrainUnit).getTextKeyWide(), pCity->getNameKey());
+			CvWString szRequires;
+			for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
+			{
+				if (GC.getYieldInfo((YieldTypes) iYield).isCargo())
+				{
+					int iYieldNeeded = GET_PLAYER(pCity->getOwnerINLINE()).getYieldProductionNeeded(eTrainUnit, (YieldTypes) iYield);
+					if (iYieldNeeded > pCity->getYieldStored((YieldTypes) iYield))
+					{
+						if (!szRequires.empty())
+						{
+							szRequires += L", ";
+						}
+						szRequires += CvWString::format(L"%d %s", iYieldNeeded, GC.getYieldInfo((YieldTypes) iYield).getDescription());
+					}
+				}
+			}
+			if (!szRequires.empty())
+			{
+				szRequires = gDLL->getText("TXT_KEY_POPUP_REQUIRES", szRequires.GetCString());;
+			}
+
+			szBuffer = gDLL->getText("TXT_KEY_POPUP_CANNOT_TRAIN_WORK_NEXT", GC.getUnitInfo(eTrainUnit).getTextKeyWide(), pCity->getNameKey(), szRequires.GetCString());
 		}
 		szArtFilename = GET_PLAYER(pCity->getOwnerINLINE()).getUnitButton(eTrainUnit);
 	}
@@ -997,28 +1156,34 @@ bool CvDLLButtonPopup::launchProductionPopup(CvPopup* pPopup, CvPopupInfo &info)
 	{
 		if (bFinish)
 		{
-			szBuffer = gDLL->getText(((isLimitedWonderClass((BuildingClassTypes)(GC.getBuildingInfo(eConstructBuilding).getBuildingClassType()))) ? "TXT_KEY_POPUP_CONSTRUCTED_WORK_ON_NEXT_LIMITED" : "TXT_KEY_POPUP_CONSTRUCTED_WORK_ON_NEXT"), GC.getBuildingInfo(eConstructBuilding).getTextKeyWide(), pCity->getNameKey());
+			szBuffer = gDLL->getText("TXT_KEY_POPUP_CONSTRUCTED_WORK_ON_NEXT", GC.getBuildingInfo(eConstructBuilding).getTextKeyWide(), pCity->getNameKey());
 		}
 		else
 		{
-			szBuffer = gDLL->getText(((isLimitedWonderClass((BuildingClassTypes)(GC.getBuildingInfo(eConstructBuilding).getBuildingClassType()))) ? "TXT_KEY_POPUP_CANNOT_CONSTRUCT_WORK_NEXT_LIMITED" : "TXT_KEY_POPUP_CANNOT_CONSTRUCT_WORK_NEXT"), GC.getBuildingInfo(eConstructBuilding).getTextKeyWide(), pCity->getNameKey());
+			CvWString szRequires;
+			for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
+			{
+				if (GC.getYieldInfo((YieldTypes) iYield).isCargo())
+				{
+					int iYieldNeeded = GET_PLAYER(pCity->getOwnerINLINE()).getYieldProductionNeeded(eConstructBuilding, (YieldTypes) iYield);
+					if (iYieldNeeded > pCity->getYieldStored((YieldTypes) iYield))
+					{
+						if (!szRequires.empty())
+						{
+							szRequires += L", ";
+						}
+						szRequires += CvWString::format(L"%d %s", iYieldNeeded, GC.getYieldInfo((YieldTypes) iYield).getDescription());
+					}
+				}
+			}
+			if (!szRequires.empty())
+			{
+				szRequires = gDLL->getText("TXT_KEY_POPUP_REQUIRES", szRequires.GetCString());;
+			}
+
+			szBuffer = gDLL->getText("TXT_KEY_POPUP_CANNOT_CONSTRUCT_WORK_NEXT", GC.getBuildingInfo(eConstructBuilding).getTextKeyWide(), pCity->getNameKey(), szRequires.GetCString());
 		}
 		szArtFilename = GC.getBuildingInfo(eConstructBuilding).getButton();
-	}
-	else if (eCreateProject != NO_PROJECT)
-	{
-		if (bFinish)
-		{
-			if(GC.getProjectInfo(eCreateProject).isSpaceship())
-				szBuffer = gDLL->getText("TXT_KEY_POPUP_CREATED_WORK_ON_NEXT_SPACESHIP", GC.getProjectInfo(eCreateProject).getTextKeyWide(), pCity->getNameKey());
-			else
-				szBuffer = gDLL->getText(((isLimitedProject(eCreateProject)) ? "TXT_KEY_POPUP_CREATED_WORK_ON_NEXT_LIMITED" : "TXT_KEY_POPUP_CREATED_WORK_ON_NEXT"), GC.getProjectInfo(eCreateProject).getTextKeyWide(), pCity->getNameKey());
-		}
-		else
-		{
-			szBuffer = gDLL->getText(((isLimitedProject(eCreateProject)) ? "TXT_KEY_POPUP_CANNOT_CREATE_WORK_NEXT_LIMITED" : "TXT_KEY_POPUP_CANNOT_CREATE_WORK_NEXT"), GC.getProjectInfo(eCreateProject).getTextKeyWide(), pCity->getNameKey());
-		}
-		szArtFilename = GC.getProjectInfo(eCreateProject).getButton();
 	}
 	else
 	{
@@ -1039,16 +1204,12 @@ bool CvDLLButtonPopup::launchProductionPopup(CvPopup* pPopup, CvPopupInfo &info)
 		int iExamineCityID = 0;
 		iExamineCityID = std::max(iExamineCityID, GC.getNumUnitInfos());
 		iExamineCityID = std::max(iExamineCityID, GC.getNumBuildingInfos());
-		iExamineCityID = std::max(iExamineCityID, GC.getNumProjectInfos());
-		iExamineCityID = std::max(iExamineCityID, GC.getNumProcessInfos());
 
 		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_EXAMINE_CITY").c_str(), ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CITYSELECTION")->getPath(), iExamineCityID, WIDGET_GENERAL, -1, -1, true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY);
 	}
 
 	UnitTypes eProductionUnit = pCity->getProductionUnit();
 	BuildingTypes eProductionBuilding = pCity->getProductionBuilding();
-	ProjectTypes eProductionProject = pCity->getProductionProject();
-	ProcessTypes eProductionProcess = pCity->getProductionProcess();
 
 	int iNumBuilds = 0;
 
@@ -1067,43 +1228,34 @@ bool CvDLLButtonPopup::launchProductionPopup(CvPopup* pPopup, CvPopupInfo &info)
 
 	if (eProductionUnit == NO_UNIT)
 	{
-		eProductionUnit = pCity->AI_bestUnit(true, ((eProductionBuilding != NO_BUILDING) ? ((AdvisorTypes)(GC.getBuildingInfo(eProductionBuilding).getAdvisorType())) : NO_ADVISOR));
+		eProductionUnit = pCity->AI_bestUnit(true);
 	}
 
 	if (eProductionBuilding == NO_BUILDING)
 	{
-		eProductionBuilding = pCity->AI_bestBuilding(0, 50, true, ((eProductionUnit != NO_UNIT) ? ((AdvisorTypes)(GC.getUnitInfo(eProductionUnit).getAdvisorType())) : NO_ADVISOR));
+		eProductionBuilding = pCity->AI_bestBuilding(0, 50, true);
 	}
 
 	if (eProductionUnit != NO_UNIT)
 	{
-		int iTurns = pCity->getProductionTurnsLeft(eProductionUnit, 0);
-		szBuffer = gDLL->getText("TXT_KEY_POPUP_RECOMMENDED", GC.getUnitInfo(eProductionUnit).getTextKeyWide(), iTurns, GC.getAdvisorInfo((AdvisorTypes)(GC.getUnitInfo(eProductionUnit).getAdvisorType())).getTextKeyWide());
-		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, GC.getUnitInfo(eProductionUnit).getButton(), GC.getUnitInfo(eProductionUnit).getUnitClassType(), WIDGET_TRAIN, GC.getUnitInfo(eProductionUnit).getUnitClassType(), pCity->getID(), true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY );
-		iNumBuilds++;
+		if ((eProductionUnit != eTrainUnit) || bFinish)
+		{
+			int iTurns = pCity->getProductionTurnsLeft(eProductionUnit, 0);
+			szBuffer = gDLL->getText("TXT_KEY_POPUP_RECOMMENDED", GC.getUnitInfo(eProductionUnit).getTextKeyWide(), iTurns);
+			gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, GET_PLAYER(pCity->getOwnerINLINE()).getUnitButton(eProductionUnit), GC.getUnitInfo(eProductionUnit).getUnitClassType(), WIDGET_TRAIN, GC.getUnitInfo(eProductionUnit).getUnitClassType(), pCity->getID(), true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY );
+			iNumBuilds++;
+		}
 	}
 
 	if (eProductionBuilding != NO_BUILDING)
 	{
-		int iTurns = pCity->getProductionTurnsLeft(eProductionBuilding, 0);
-		szBuffer = gDLL->getText("TXT_KEY_POPUP_RECOMMENDED", GC.getBuildingInfo(eProductionBuilding).getTextKeyWide(), iTurns, GC.getAdvisorInfo((AdvisorTypes)(GC.getBuildingInfo(eProductionBuilding).getAdvisorType())).getTextKeyWide());
-		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, GC.getBuildingInfo(eProductionBuilding).getButton(), GC.getBuildingInfo(eProductionBuilding).getBuildingClassType(), WIDGET_CONSTRUCT, GC.getBuildingInfo(eProductionBuilding).getBuildingClassType(), pCity->getID(), true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY );
-		iNumBuilds++;
-	}
-
-	if (eProductionProject != NO_PROJECT)
-	{
-		int iTurns = pCity->getProductionTurnsLeft(eProductionProject, 0);
-		szBuffer = gDLL->getText("TXT_KEY_POPUP_RECOMMENDED_NO_ADV", GC.getProjectInfo(eProductionProject).getTextKeyWide(), iTurns);
-		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, GC.getProjectInfo(eProductionProject).getButton(), eProductionProject, WIDGET_CREATE, eProductionProject, pCity->getID(), true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY );
-		iNumBuilds++;
-	}
-
-	if (eProductionProcess != NO_PROCESS)
-	{
-		szBuffer = gDLL->getText("TXT_KEY_POPUP_RECOMMENDED_NO_ADV_OR_TURNS", GC.getProcessInfo(eProductionProcess).getTextKeyWide());
-		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, GC.getProcessInfo(eProductionProcess).getButton(), eProductionProcess, WIDGET_MAINTAIN, eProductionProcess, pCity->getID(), true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY );
-		iNumBuilds++;
+		if (eProductionBuilding != eConstructBuilding)
+		{
+			int iTurns = pCity->getProductionTurnsLeft(eProductionBuilding, 0);
+			szBuffer = gDLL->getText("TXT_KEY_POPUP_RECOMMENDED", GC.getBuildingInfo(eProductionBuilding).getTextKeyWide(), iTurns);
+			gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, GC.getBuildingInfo(eProductionBuilding).getButton(), GC.getBuildingInfo(eProductionBuilding).getBuildingClassType(), WIDGET_CONSTRUCT, GC.getBuildingInfo(eProductionBuilding).getBuildingClassType(), pCity->getID(), true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY );
+			iNumBuilds++;
+		}
 	}
 
 	for (int iI = 0; iI < GC.getNumUnitClassInfos(); iI++)
@@ -1116,10 +1268,13 @@ bool CvDLLButtonPopup::launchProductionPopup(CvPopup* pPopup, CvPopupInfo &info)
 			{
 				if (pCity->canTrain(eLoopUnit))
 				{
-					int iTurns = pCity->getProductionTurnsLeft(eLoopUnit, 0);
-					szBuffer.Format(L"%s (%d)", GC.getUnitInfo(eLoopUnit).getDescription(), iTurns);
-					gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, GET_PLAYER(pCity->getOwnerINLINE()).getUnitButton(eLoopUnit), iI, WIDGET_TRAIN, iI, pCity->getID(), true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY );
-					iNumBuilds++;
+					if ((eLoopUnit != eTrainUnit) || bFinish)
+					{
+						int iTurns = pCity->getProductionTurnsLeft(eLoopUnit, 0);
+						szBuffer.Format(L"%s (%d)", GC.getUnitInfo(eLoopUnit).getDescription(), iTurns);
+						gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, GET_PLAYER(pCity->getOwnerINLINE()).getUnitButton(eLoopUnit), iI, WIDGET_TRAIN, iI, pCity->getID(), true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY );
+						iNumBuilds++;
+					}
 				}
 			}
 		}
@@ -1134,36 +1289,24 @@ bool CvDLLButtonPopup::launchProductionPopup(CvPopup* pPopup, CvPopupInfo &info)
 			{
 				if (pCity->canConstruct(eLoopBuilding))
 				{
-					int iTurns = pCity->getProductionTurnsLeft(eLoopBuilding, 0);
-					szBuffer.Format(L"%s (%d)", GC.getBuildingInfo(eLoopBuilding).getDescription(), iTurns);
-					gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, GC.getBuildingInfo(eLoopBuilding).getButton(), iI, WIDGET_CONSTRUCT, iI, pCity->getID(), true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY);
-					iNumBuilds++;
+					if (eLoopBuilding != eConstructBuilding)
+					{
+						int iTurns = pCity->getProductionTurnsLeft(eLoopBuilding, 0);
+						szBuffer.Format(L"%s (%d)", GC.getBuildingInfo(eLoopBuilding).getDescription(), iTurns);
+						gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, GC.getBuildingInfo(eLoopBuilding).getButton(), iI, WIDGET_CONSTRUCT, iI, pCity->getID(), true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY);
+						iNumBuilds++;
+					}
 				}
 			}
 		}
 	}
-	for (int iI = 0; iI < GC.getNumProjectInfos(); iI++)
+	for (int iI = 0; iI < GC.getNumFatherPointInfos(); iI++)
 	{
-		if (iI != eProductionProject)
+		FatherPointTypes ePointType = (FatherPointTypes) iI;
+		if (pCity->canConvince(ePointType))
 		{
-			if (pCity->canCreate((ProjectTypes)iI))
-			{
-				int iTurns = pCity->getProductionTurnsLeft((ProjectTypes)iI, 0);
-				szBuffer.Format(L"%s (%d)", GC.getProjectInfo((ProjectTypes) iI).getDescription(), iTurns);
-				gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, GC.getProjectInfo((ProjectTypes) iI).getButton(), iI, WIDGET_CREATE, iI, pCity->getID(), true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY);
-				iNumBuilds++;
-			}
-		}
-	}
-	for (int iI = 0; iI < GC.getNumProcessInfos(); iI++)
-	{
-		if (iI != eProductionProcess)
-		{
-			if (pCity->canMaintain((ProcessTypes)iI))
-			{
-				gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, GC.getProcessInfo((ProcessTypes) iI).getDescription(), GC.getProcessInfo((ProcessTypes) iI).getButton(), iI, WIDGET_MAINTAIN, iI, pCity->getID(), true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY);
-				iNumBuilds++;
-			}
+			gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, GC.getFatherPointInfo(ePointType).getDescription(), GC.getFatherPointInfo(ePointType).getButton(), iI, WIDGET_CONVINCE, iI, pCity->getID(), true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY);
+			iNumBuilds++;
 		}
 	}
 
@@ -1173,6 +1316,77 @@ bool CvDLLButtonPopup::launchProductionPopup(CvPopup* pPopup, CvPopupInfo &info)
 		return (false);
 	}
 
+	CvWStringBuffer szExtraBuilds;
+	bool bFirst = true;
+	for (int iI = 0; iI < GC.getNumUnitClassInfos(); iI++)
+	{
+		UnitTypes eLoopUnit = (UnitTypes)GC.getCivilizationInfo(pCity->getCivilizationType()).getCivilizationUnits(iI);
+		if (eLoopUnit != NO_UNIT)
+		{
+			if (pCity->canTrain(eLoopUnit, false, true) && !pCity->canTrain(eLoopUnit))
+			{
+				if (bFirst)
+				{
+					bFirst = false;
+				}
+				else
+				{
+					szExtraBuilds.append(L", ");
+				}
+				szExtraBuilds.append(GC.getUnitInfo(eLoopUnit).getDescription());
+
+				for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
+				{
+					YieldTypes eYield = (YieldTypes) iYield;
+					if (GC.getYieldInfo(eYield).isCargo())
+					{
+						int iNeeded = pCity->getYieldProductionNeeded(eLoopUnit, eYield) - pCity->getYieldStored(eYield);
+						if (iNeeded > 0)
+						{
+							szExtraBuilds.append(CvWString::format(L" (%d%c)", iNeeded, GC.getYieldInfo(eYield).getChar()));
+						}
+					}
+				}
+			}
+		}
+	}
+	for (int iI = 0; iI < GC.getNumBuildingClassInfos(); iI++)
+	{
+		BuildingTypes eLoopBuilding = ((BuildingTypes)(GC.getCivilizationInfo(pCity->getCivilizationType()).getCivilizationBuildings(iI)));
+		if (eLoopBuilding != NO_BUILDING)
+		{
+			if (pCity->canConstruct(eLoopBuilding, false, true) && !pCity->canConstruct(eLoopBuilding))
+			{
+				if (bFirst)
+				{
+					bFirst = false;
+				}
+				else
+				{
+					szExtraBuilds.append(L", ");
+				}
+				szExtraBuilds.append(GC.getBuildingInfo(eLoopBuilding).getDescription());
+				for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
+				{
+					YieldTypes eYield = (YieldTypes) iYield;
+					if (GC.getYieldInfo(eYield).isCargo())
+					{
+						int iNeeded = pCity->getYieldProductionNeeded(eLoopBuilding, eYield) - pCity->getYieldStored(eYield);
+						if (iNeeded > 0)
+						{
+							szExtraBuilds.append(CvWString::format(L" (%d%c)", iNeeded, GC.getYieldInfo(eYield).getChar()));
+						}
+					}
+				}
+			}
+		}
+	}
+
+	if (!szExtraBuilds.isEmpty())
+	{
+		gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_POPUP_CANNOT_BUILD") + szExtraBuilds.getCString(), DLL_FONT_LEFT_JUSTIFY);
+	}
+
 	gDLL->getInterfaceIFace()->popupSetPopupType(pPopup, POPUPEVENT_PRODUCTION, szArtFilename);
 
 	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_MINIMIZED, 252);
@@ -1180,15 +1394,11 @@ bool CvDLLButtonPopup::launchProductionPopup(CvPopup* pPopup, CvPopupInfo &info)
 	switch (info.getData2())
 	{
 	case ORDER_TRAIN:
-		gDLL->getInterfaceIFace()->playGeneralSound(GC.getUnitInfo((UnitTypes)info.getData3()).getArtInfo(0, GET_PLAYER(pCity->getOwner()).getCurrentEra(), NO_UNIT_ARTSTYLE)->getTrainSound());
+		gDLL->getInterfaceIFace()->playGeneralSound(GC.getUnitInfo((UnitTypes)info.getData3()).getArtInfo(0, NO_PROFESSION)->getTrainSound());
 		break;
 
 	case ORDER_CONSTRUCT:
 		gDLL->getInterfaceIFace()->playGeneralSound(GC.getBuildingInfo((BuildingTypes)info.getData3()).getConstructSound());
-		break;
-
-	case ORDER_CREATE:
-		gDLL->getInterfaceIFace()->playGeneralSound(GC.getProjectInfo((ProjectTypes)info.getData3()).getCreateSound());
 		break;
 
 	default:
@@ -1198,149 +1408,108 @@ bool CvDLLButtonPopup::launchProductionPopup(CvPopup* pPopup, CvPopupInfo &info)
 	return (true);
 }
 
-
-bool CvDLLButtonPopup::launchChangeReligionPopup(CvPopup* pPopup, CvPopupInfo &info)
+bool CvDLLButtonPopup::launchChooseYieldBuildPopup(CvPopup* pPopup, CvPopupInfo &info)
 {
-	CvWString szTemp;
-	ReligionTypes eReligion = (ReligionTypes)info.getData1();
-
-	if (NO_RELIGION == eReligion)
-	{
-		FAssert(false);
-		return (false);
-	}
-
-	CvPlayer& activePlayer = GET_PLAYER(GC.getGameINLINE().getActivePlayer());
-	if (!activePlayer.canConvert(eReligion))
-	{
-		return (false);
-	}
-
-	CvWString szBuffer;
-	szBuffer = gDLL->getText("TXT_KEY_POPUP_RELIGION_SPREAD", GC.getReligionInfo(eReligion).getTextKeyWide());
-	if (activePlayer.getStateReligionHappiness() != 0)
-	{
-		if (activePlayer.getStateReligionHappiness() > 0)
-		{
-			szBuffer += gDLL->getText("TXT_KEY_POPUP_CONVERTING_EFFECTS",
-				activePlayer.getStateReligionHappiness(), gDLL->getSymbolID(HAPPY_CHAR), GC.getReligionInfo(eReligion).getChar());
-		}
-		else
-		{
-			szBuffer += gDLL->getText("TXT_KEY_POPUP_CONVERTING_EFFECTS",
-				-activePlayer.getStateReligionHappiness(), gDLL->getSymbolID(UNHAPPY_CHAR), GC.getReligionInfo(eReligion).getChar());
-		}
-	}
-	szBuffer += gDLL->getText("TXT_KEY_POPUP_LIKE_TO_CONVERT");
-	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, szBuffer);
-
-	szBuffer = gDLL->getText("TXT_KEY_POPUP_CONVERT_RELIGION");
-	int iAnarchyLength = activePlayer.getReligionAnarchyLength();
-	if (iAnarchyLength > 0)
-	{
-		szBuffer += gDLL->getText("TXT_KEY_POPUP_TURNS_OF_ANARCHY", iAnarchyLength);
-	}
-	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, NULL, 0);
-	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_NO_CONVERSION").c_str());
-	gDLL->getInterfaceIFace()->popupSetPopupType(pPopup, POPUPEVENT_RELIGION, ARTFILEMGR.getInterfaceArtInfo("INTERFACE_POPUPBUTTON_RELIGION")->getPath());
-	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_MINIMIZED);
-	return (true);
-}
-
-
-bool CvDLLButtonPopup::launchChooseElectionPopup(CvPopup* pPopup, CvPopupInfo &info)
-{
-	VoteSelectionData* pVoteSelectionData = GC.getGameINLINE().getVoteSelection(info.getData1());
-	if (NULL == pVoteSelectionData)
+	CvCity* pCity = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCity(info.getData1());
+	if (NULL == pCity || pCity->isProductionAutomated())
 	{
 		return false;
 	}
 
-	VoteSourceTypes eVoteSource = pVoteSelectionData->eVoteSource;
+	FAssertMsg(pCity->getOwnerINLINE() == GC.getGameINLINE().getActivePlayer(), "City must belong to Active Player");
 
-	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, GC.getVoteSourceInfo(eVoteSource).getPopupText());
-
-	for (int iI = 0; iI < (int)pVoteSelectionData->aVoteOptions.size(); ++iI)
+	YieldTypes eYield = (YieldTypes) info.getData2();
+	if (eYield == NO_YIELD)
 	{
-		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, pVoteSelectionData->aVoteOptions[iI].szText, NULL, iI, WIDGET_GENERAL);
-	}
-
-	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_NONE").c_str(), NULL, GC.getNumVoteInfos(), WIDGET_GENERAL);
-	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
-	return (true);
-}
-
-
-bool CvDLLButtonPopup::launchDiploVotePopup(CvPopup* pPopup, CvPopupInfo &info)
-{
-	VoteTriggeredData* pVoteTriggered = GC.getGameINLINE().getVoteTriggered(info.getData1());
-	if (NULL == pVoteTriggered)
-	{
-		FAssert(false);
 		return false;
 	}
 
-	VoteTypes eVote = pVoteTriggered->kVoteOption.eVote;
-	VoteSourceTypes eVoteSource = pVoteTriggered->eVoteSource;
+	CvWString szBuffer = gDLL->getText("TXT_KEY_POPUP_CHOOSE_COMLPETED_BUILD", GC.getYieldInfo(eYield).getTextKeyWide(), pCity->getNameKey());
+	gDLL->getInterfaceIFace()->popupSetHeaderString(pPopup, szBuffer, DLL_FONT_LEFT_JUSTIFY);
 
-	TeamTypes eVassalOfTeam = NO_TEAM;
-	bool bEligible = false;
 
-	gDLL->getInterfaceIFace()->popupSetHeaderString(pPopup, GC.getVoteSourceInfo(eVoteSource).getDescription());
-	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, pVoteTriggered->kVoteOption.szText);
-	if (GC.getGameINLINE().isTeamVote(eVote))
+	std::vector< std::pair<OrderTypes, int> > aOrders;
+	pCity->getOrdersWaitingForYield(aOrders, eYield, true, pCity->getYieldStored(eYield) + pCity->getYieldRushed(eYield));
+
+	if (aOrders.empty())
 	{
-		for (int iI = 0; iI < MAX_CIV_TEAMS; iI++)
-		{
-			if (GET_TEAM((TeamTypes)iI).isAlive())
-			{
-				if (GC.getGameINLINE().isTeamVoteEligible((TeamTypes)iI, eVoteSource))
-				{
-					if (GET_TEAM(GC.getGameINLINE().getActiveTeam()).isVassal((TeamTypes)iI))
-					{
-						eVassalOfTeam = (TeamTypes)iI;
-						break;
-					}
-				}
-			}
-		}
-
-		for (int iI = 0; iI < MAX_CIV_TEAMS; iI++)
-		{
-			if (GET_TEAM((TeamTypes)iI).isAlive())
-			{
-				if (GC.getGameINLINE().isTeamVoteEligible((TeamTypes)iI, eVoteSource))
-				{
-					if (eVassalOfTeam == NO_TEAM || eVassalOfTeam == iI || iI == GC.getGameINLINE().getActiveTeam())
-					{
-						gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, GET_TEAM((TeamTypes)iI).getName().GetCString(), NULL, iI, WIDGET_GENERAL);
-						bEligible = true;
-					}
-				}
-			}
-		}
-	}
-	else
-	{
-		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_YES").c_str(), NULL, PLAYER_VOTE_YES, WIDGET_GENERAL);
-		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_NO").c_str(), NULL, PLAYER_VOTE_NO, WIDGET_GENERAL);
-
-		if (GET_PLAYER(GC.getGameINLINE().getActivePlayer()).canDefyResolution(eVoteSource, pVoteTriggered->kVoteOption))
-		{
-			gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_VOTE_NEVER").c_str(), NULL, PLAYER_VOTE_NEVER, WIDGET_GENERAL);
-		}
-		bEligible = true;
+		return false;
 	}
 
-	if (eVassalOfTeam == NO_TEAM || !bEligible)
+	for (uint i = 0; i < aOrders.size(); ++i)
 	{
-		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_ABSTAIN").c_str(), NULL, PLAYER_VOTE_ABSTAIN, WIDGET_GENERAL);
+		if (aOrders[i].first == ORDER_TRAIN)
+		{
+			UnitTypes eUnit = (UnitTypes) aOrders[i].second;
+			gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, GC.getUnitInfo(eUnit).getDescription(), GET_PLAYER(pCity->getOwnerINLINE()).getUnitButton(eUnit), eUnit, WIDGET_GENERAL, -1, -1, true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY );
+		}
+		else if (aOrders[i].first == ORDER_CONSTRUCT)
+		{
+			BuildingTypes eBuilding = (BuildingTypes) aOrders[i].second;
+			gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, GC.getBuildingInfo(eBuilding).getDescription(), GC.getBuildingInfo(eBuilding).getButton(), GC.getNumUnitInfos() + eBuilding, WIDGET_GENERAL, -1, -1, true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY );
+		}
 	}
 
-	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_WB_CITY_NOTHING"), ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CANCEL")->getPath(), -1, WIDGET_GENERAL);
+
+	gDLL->getInterfaceIFace()->popupSetPopupType(pPopup, POPUPEVENT_PRODUCTION, ARTFILEMGR.getInterfaceArtInfo("INTERFACE_POPUPBUTTON_PRODUCTION")->getPath());
+	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_MINIMIZED, 252);
+
 	return (true);
 }
 
+bool CvDLLButtonPopup::launchEducationPopup(CvPopup* pPopup, CvPopupInfo &info)
+{
+	CvPlayer& kPlayer = GET_PLAYER(GC.getGameINLINE().getActivePlayer());
+	CvCity* pCity = kPlayer.getCity(info.getData1());
+	if (NULL == pCity)
+	{
+		return false;
+	}
+	FAssertMsg(pCity->getOwnerINLINE() == GC.getGameINLINE().getActivePlayer(), "City must belong to Active Player");
+
+	CvUnit* pUnit = pCity->getPopulationUnitById(info.getData2());
+	if (pUnit == NULL)
+	{
+		return false;
+	}
+
+	CvWString szText = gDLL->getText("TXT_KEY_CHOOSE_SPECIALTY", pUnit->getNameOrProfessionKey(), pCity->getNameKey());
+	gDLL->getInterfaceIFace()->popupSetHeaderString(pPopup, szText, DLL_FONT_LEFT_JUSTIFY);
+
+	int iNumUnits = 0;
+	UnitTypes eLastUnit = NO_UNIT;
+	for (int iI = 0; iI < GC.getNumUnitInfos(); iI++)
+	{
+		CvUnitInfo& kUnit = GC.getUnitInfo((UnitTypes) iI);
+		int iPrice = pCity->getSpecialistTuition((UnitTypes) iI);
+		if (iPrice >= 0 && iPrice <= kPlayer.getGold())
+		{
+			szText.Format(L"%s", kUnit.getDescription());
+			if (iPrice > 0)
+			{
+				szText += CvWString::format(L" (%d%c)", iPrice, gDLL->getSymbolID(GOLD_CHAR));
+			}
+			gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szText, kUnit.getButton(), iI, WIDGET_GENERAL, -1, -1, true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY);
+			++iNumUnits;
+			eLastUnit = (UnitTypes) iI;
+		}
+	}
+
+	if (iNumUnits <= 1)
+	{
+		if (iNumUnits == 1)
+		{
+			gDLL->sendDoTask(info.getData1(), TASK_EDUCATE, info.getData2(), eLastUnit, false, false, false, false);
+		}
+		return false;
+	}
+
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_EXAMINE_CITY"), ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CITYSELECTION")->getPath(), GC.getNumUnitInfos(), WIDGET_GENERAL, -1, -1);
+
+	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_MINIMIZED, 252);
+	return true;
+}
 
 bool CvDLLButtonPopup::launchRazeCityPopup(CvPopup* pPopup, CvPopupInfo &info)
 {
@@ -1365,7 +1534,7 @@ bool CvDLLButtonPopup::launchRazeCityPopup(CvPopup* pPopup, CvPopupInfo &info)
 	bool bRaze = player.canRaze(pNewCity);
 	bool bGift = ((eHighestCulturePlayer != NO_PLAYER)
 		&& (eHighestCulturePlayer != player.getID())
-		&& ((player.getTeam() == GET_PLAYER(eHighestCulturePlayer).getTeam()) || GET_TEAM(player.getTeam()).isOpenBorders(GET_PLAYER(eHighestCulturePlayer).getTeam()) || GET_TEAM(GET_PLAYER(eHighestCulturePlayer).getTeam()).isVassal(player.getTeam())));
+		&& ((player.getTeam() == GET_PLAYER(eHighestCulturePlayer).getTeam()) || GET_TEAM(player.getTeam()).isOpenBorders(GET_PLAYER(eHighestCulturePlayer).getTeam())));
 
 	CvWString szBuffer;
 	if (iCaptureGold > 0)
@@ -1395,213 +1564,6 @@ bool CvDLLButtonPopup::launchRazeCityPopup(CvPopup* pPopup, CvPopupInfo &info)
 	return (true);
 }
 
-bool CvDLLButtonPopup::launchDisbandCityPopup(CvPopup* pPopup, CvPopupInfo &info)
-{
-	CvPlayer& player = GET_PLAYER(GC.getGameINLINE().getActivePlayer());
-
-	CvCity* pNewCity = player.getCity(info.getData1());
-	if (NULL == pNewCity)
-	{
-		FAssert(false);
-		return (false);
-	}
-
-	CvWString szBuffer;
-	szBuffer = gDLL->getText("TXT_KEY_POPUP_FLIPPED_CITY_KEEP", pNewCity->getNameKey());
-	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, szBuffer);
-	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_KEEP_FLIPPED_CITY").c_str(), NULL, 0, WIDGET_GENERAL);
-	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_DISBAND_FLIPPED_CITY").c_str(), NULL, 1, WIDGET_GENERAL);
-	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
-
-	gDLL->getInterfaceIFace()->playGeneralSound("AS2D_CULTUREFLIP");
-
-	return (true);
-}
-
-bool CvDLLButtonPopup::launchChooseTechPopup(CvPopup* pPopup, CvPopupInfo &info)
-{
-	CyArgsList argsList;
-	argsList.add(GC.getGameINLINE().getActivePlayer());
-	long lResult=0;
-	gDLL->getPythonIFace()->callFunction(PYGameModule, "skipResearchPopup", argsList.makeFunctionArgs(), &lResult);
-	if (lResult == 1)
-	{
-		return false;
-	}
-
-	CvPlayer& player = GET_PLAYER(GC.getGameINLINE().getActivePlayer());
-
-	int iDiscover = info.getData1();
-	CvWString szHeader = info.getText();
-	if (szHeader.empty())
-	{
-		szHeader = (iDiscover > 0) ? gDLL->getText("TXT_KEY_POPUP_CHOOSE_TECH").c_str() : gDLL->getText("TXT_KEY_POPUP_RESEARCH_NEXT").c_str();
-	}
-	gDLL->getInterfaceIFace()->popupSetHeaderString(pPopup, szHeader, DLL_FONT_LEFT_JUSTIFY);
-
-	if (iDiscover == 0)
-	{
-		lResult=1;
-		gDLL->getPythonIFace()->callFunction(PYGameModule, "showTechChooserButton", argsList.makeFunctionArgs(), &lResult);
-		if (lResult == 1)
-		{
-			// Allow user to Jump to the Tech Chooser
-			gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_SEE_BIG_PICTURE").c_str(), ARTFILEMGR.getInterfaceArtInfo("INTERFACE_POPUPBUTTON_TECH")->getPath(), GC.getNumTechInfos(), WIDGET_GENERAL, -1, MAX_INT, true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY);
-			// Note: This button is NOT supposed to close the popup!!
-		}
-	}
-
-	TechTypes eBestTech = NO_TECH;
-	TechTypes eNextBestTech = NO_TECH;
-
-	lResult = -1;
-	gDLL->getPythonIFace()->callFunction(PYGameModule, "getFirstRecommendedTech", argsList.makeFunctionArgs(), &lResult);
-	eBestTech = ((TechTypes)lResult);
-
-	if (eBestTech == NO_TECH)
-	{
-		eBestTech = player.AI_bestTech(1, (iDiscover > 0), true);
-	}
-
-	if (eBestTech != NO_TECH)
-	{
-		argsList.add(eBestTech);
-		lResult = -1;
-		gDLL->getPythonIFace()->callFunction(PYGameModule, "getSecondRecommendedTech", argsList.makeFunctionArgs(), &lResult);
-		eNextBestTech = ((TechTypes)lResult);
-
-		if (eNextBestTech == NO_TECH)
-		{
-			eNextBestTech = player.AI_bestTech(1, (iDiscover > 0), true, eBestTech, ((AdvisorTypes)(GC.getTechInfo(eBestTech).getAdvisorType())));
-		}
-	}
-
-	int iNumTechs = 0;
-	for (int iPass = 0; iPass < 2; iPass++)
-	{
-		for (int iI = 0; iI < GC.getNumTechInfos(); iI++)
-		{
-			if (((iI == eBestTech) || (iI == eNextBestTech)) == (iPass == 0))
-			{
-				if (player.canResearch((TechTypes)iI))
-				{
-					CvWString szBuffer;
-					szBuffer.Format(L"%s (%d)", GC.getTechInfo((TechTypes)iI).getDescription(), ((iDiscover > 0) ? 0 : player.getResearchTurnsLeft(((TechTypes)iI), true)));
-
-					if ((iI == eBestTech) || (iI == eNextBestTech))
-					{
-						szBuffer += gDLL->getText("TXT_KEY_POPUP_RECOMMENDED_ONLY_ADV", GC.getAdvisorInfo((AdvisorTypes)(GC.getTechInfo((TechTypes)iI).getAdvisorType())).getTextKeyWide());
-					}
-
-					CvString szButton = GC.getTechInfo((TechTypes) iI).getButton();
-
-					for (int iJ = 0; iJ < GC.getNumReligionInfos(); iJ++)
-					{
-						if (GC.getReligionInfo((ReligionTypes)iJ).getTechPrereq() == iI)
-						{
-							if (!(GC.getGameINLINE().isReligionSlotTaken((ReligionTypes)iJ)))
-							{
-								szButton = GC.getGameINLINE().isOption(GAMEOPTION_PICK_RELIGION) ? GC.getReligionInfo((ReligionTypes) iJ).getGenericTechButton() : GC.getReligionInfo((ReligionTypes) iJ).getTechButton();
-								break;
-							}
-						}
-					}
-
-					gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, szButton, iI, WIDGET_RESEARCH, iI, iDiscover, true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY);
-					iNumTechs++;
-				}
-			}
-		}
-	}
-	if (0 == iNumTechs)
-	{
-		// player cannot research anything, so don't show this popup after all
-		return (false);
-	}
-
-	gDLL->getInterfaceIFace()->popupSetPopupType(pPopup, POPUPEVENT_TECHNOLOGY, ARTFILEMGR.getInterfaceArtInfo("INTERFACE_POPUPBUTTON_TECH")->getPath());
-
-	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, ((iDiscover > 0) ? POPUPSTATE_QUEUED : POPUPSTATE_MINIMIZED));
-
-	return (true);
-}
-
-bool CvDLLButtonPopup::launchChangeCivicsPopup(CvPopup* pPopup, CvPopupInfo &info)
-{
-	CivicTypes* paeNewCivics = new CivicTypes[GC.getNumCivicOptionInfos()];
-	if (NULL == paeNewCivics)
-	{
-		return (false);
-	}
-
-	CivicOptionTypes eCivicOptionType = (CivicOptionTypes)info.getData1();
-	CivicTypes eCivicType = (CivicTypes)info.getData2();
-	bool bValid = false;
-
-	if (eCivicType != NO_CIVIC)
-	{
-		for (int iI = 0; iI < GC.getNumCivicOptionInfos(); iI++)
-		{
-			if (iI == eCivicOptionType)
-			{
-				paeNewCivics[iI] = eCivicType;
-			}
-			else
-			{
-				paeNewCivics[iI] = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivics((CivicOptionTypes)iI);
-			}
-		}
-
-		if (GET_PLAYER(GC.getGameINLINE().getActivePlayer()).canRevolution(paeNewCivics))
-		{
-			bValid = true;
-		}
-	}
-	else
-	{
-		bValid = true;
-	}
-
-	if (bValid)
-	{
-		CvWString szBuffer;
-		if (eCivicType != NO_CIVIC)
-		{
-			szBuffer = gDLL->getText("TXT_KEY_POPUP_NEW_CIVIC", GC.getCivicInfo(eCivicType).getTextKeyWide());
-			if (!isEmpty(GC.getCivicInfo(eCivicType).getStrategy()))
-			{
-				CvWString szTemp;
-				szTemp.Format(L" (%s)", GC.getCivicInfo(eCivicType).getStrategy());
-				szBuffer += szTemp;
-			}
-			szBuffer += gDLL->getText("TXT_KEY_POPUP_START_REVOLUTION");
-			gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, szBuffer);
-
-			szBuffer = gDLL->getText("TXT_KEY_POPUP_YES_START_REVOLUTION");
-			int iAnarchyLength = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivicAnarchyLength(paeNewCivics);
-			if (iAnarchyLength > 0)
-			{
-				szBuffer += gDLL->getText("TXT_KEY_POPUP_TURNS_OF_ANARCHY", iAnarchyLength);
-			}
-			gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, NULL, 0, WIDGET_GENERAL);
-		}
-		else
-		{
-			gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_POPUP_FIRST_REVOLUTION"));
-		}
-
-		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_OLD_WAYS_BEST").c_str(), NULL, 1, WIDGET_GENERAL);
-		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_SEE_BIG_PICTURE").c_str(), NULL, 2, WIDGET_GENERAL);
-		gDLL->getInterfaceIFace()->popupSetPopupType(pPopup, POPUPEVENT_CIVIC, ARTFILEMGR.getInterfaceArtInfo("INTERFACE_POPUPBUTTON_CIVICS")->getPath());
-		gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_MINIMIZED);
-	}
-
-	SAFE_DELETE(paeNewCivics);
-
-	return (bValid);
-}
-
-
 bool CvDLLButtonPopup::launchAlarmPopup(CvPopup* pPopup, CvPopupInfo &info)
 {
 	gDLL->getInterfaceIFace()->playGeneralSound("AS2D_ALARM");
@@ -1623,9 +1585,10 @@ bool CvDLLButtonPopup::launchDeclareWarMovePopup(CvPopup* pPopup, CvPopupInfo &i
 	FAssert(eRivalTeam != NO_TEAM);
 
 	CvPlot* pPlot = GC.getMapINLINE().plotINLINE(iX, iY);
+	bool bOpenBorders = info.getOption2();
 
 	CvWString szBuffer;
-	if ((pPlot != NULL) && (pPlot->getTeam() == eRivalTeam))
+	if ((pPlot != NULL) && pPlot->isOwned() && !bOpenBorders)
 	{
 		szBuffer = gDLL->getText("TXT_KEY_POPUP_ENTER_LANDS_WAR", GET_PLAYER(pPlot->getOwnerINLINE()).getCivilizationAdjective());
 
@@ -1652,6 +1615,19 @@ bool CvDLLButtonPopup::launchConfirmCommandPopup(CvPopup* pPopup, CvPopupInfo &i
 	int iAction = info.getData1();
 	CvWString szBuffer;
 	szBuffer = gDLL->getText("TXT_KEY_POPUP_ARE_YOU_SURE_ACTION", GC.getActionInfo(iAction).getTextKeyWide());
+	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, szBuffer);
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_YES").c_str(), NULL, 0);
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_NO").c_str());
+	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
+
+	return (true);
+}
+
+bool CvDLLButtonPopup::launchConfirmTaskPopup(CvPopup* pPopup, CvPopupInfo &info)
+{
+	int iAction = info.getData1();
+	CvWString szBuffer;
+	szBuffer = gDLL->getText("TXT_KEY_POPUP_ARE_YOU_SURE_ACTION", info.getText().GetCString());
 	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, szBuffer);
 	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_YES").c_str(), NULL, 0);
 	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_NO").c_str());
@@ -1727,39 +1703,113 @@ bool CvDLLButtonPopup::launchLoadUnitPopup(CvPopup* pPopup, CvPopupInfo &info)
 }
 
 
-bool CvDLLButtonPopup::launchLeadUnitPopup(CvPopup* pPopup, CvPopupInfo &info)
+bool CvDLLButtonPopup::launchLoadCargoPopup(CvPopup* pPopup, CvPopupInfo &info)
 {
-	CLLNode<IDInfo>* pUnitNode;
-	CvSelectionGroup* pSelectionGroup;
-	CvUnit* pLoopUnit;
-	CvPlot* pPlot;
 	CvWStringBuffer szBuffer;
-	int iCount;
 	CvUnit* pFirstUnit = NULL;
 
-	pSelectionGroup = gDLL->getInterfaceIFace()->getSelectionList();
-
+	CvSelectionGroup* pSelectionGroup = gDLL->getInterfaceIFace()->getSelectionList();
 	if (NULL == pSelectionGroup)
 	{
-		return (false);
+		return false;
 	}
 
-	pPlot = pSelectionGroup->plot();
+	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_CHOOSE_GOODS"));
+
+	CvPlot* pPlot = pSelectionGroup->plot();
 	if (NULL == pPlot)
 	{
-		return (false);
+		return false;
+	}
+
+	CvCity* pCity = pPlot->getPlotCity();
+	if (NULL == pCity)
+	{
+		return false;
+	}
+
+	int iNumYields = 0;
+	for (int iYield = 0; iYield <  NUM_YIELD_TYPES; ++iYield)
+	{
+		YieldTypes eYield = (YieldTypes) iYield;
+		CvYieldInfo& kYield = GC.getYieldInfo(eYield);
+		if (kYield.isCargo())
+		{
+			int iYieldStored = pCity->getYieldStored(eYield);
+			if (iYieldStored > 0)
+			{
+				iYieldStored = std::min(iYieldStored, GC.getGameINLINE().getCargoYieldCapacity());
+				UnitTypes eUnit = (UnitTypes)GC.getCivilizationInfo(GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getCivilizationUnits(kYield.getUnitClass());
+				if (NO_UNIT != eUnit)
+				{
+					int iYieldAmountAvailable = 0;
+					for (int i = 0; i < pSelectionGroup->getNumUnits(); ++i)
+					{
+						CvUnit* pLoopUnit = pSelectionGroup->getUnitAt(i);
+						if (pLoopUnit != NULL)
+						{
+							iYieldAmountAvailable = pLoopUnit->getLoadYieldAmount(eYield);
+							if (iYieldAmountAvailable > 0)
+							{
+								break;
+							}
+						}
+					}
+
+					if (iYieldAmountAvailable > 0)
+					{
+						++iNumYields;
+						CvUnitInfo& kUnit = GC.getUnitInfo(eUnit);
+						CvWString szBuffer = gDLL->getText("TXT_KEY_POPUP_LOAD_YIELD", kUnit.getTextKeyWide(), std::min(iYieldStored, iYieldAmountAvailable), pCity->getYieldStored(eYield), kYield.getChar());
+						gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer.GetCString(), kUnit.getButton(), iYield, WIDGET_HELP_YIELD, iYield, pCity->getID());
+					}
+				}
+			}
+		}
+	}
+
+	if (iNumYields == 0)
+	{
+		return false;
+	}
+
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_NEVER_MIND"), ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CANCEL")->getPath(), NUM_YIELD_TYPES, WIDGET_GENERAL);
+
+	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
+
+	return true;
+}
+
+
+bool CvDLLButtonPopup::launchLeadUnitPopup(CvPopup* pPopup, CvPopupInfo &info)
+{
+	CvUnit* pLeaderUnit = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(info.getData2());
+	if (pLeaderUnit == NULL)
+	{
+		return false;
+	}
+
+	CvSelectionGroup* pSelectionGroup = pLeaderUnit->getGroup();
+	if (NULL == pSelectionGroup)
+	{
+		return false;
+	}
+
+	CvPlot* pPlot = pSelectionGroup->plot();
+	if (pPlot == NULL)
+	{
+		return false;
 	}
 
 	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_CHOOSE_UNIT_TO_LEAD"));
 
 
-	iCount = 1;
-
-	pUnitNode = pPlot->headUnitNode();
-
+	int iCount = 1;
+	CvUnit* pFirstUnit = NULL;
+	CLLNode<IDInfo>* pUnitNode = pPlot->headUnitNode();
 	while (pUnitNode != NULL)
 	{
-		pLoopUnit = ::getUnit(pUnitNode->m_data);
+		CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
 		pUnitNode = pPlot->nextUnitNode(pUnitNode);
 
 		if (pLoopUnit->canPromote((PromotionTypes) info.getData1(), info.getData2()))
@@ -1768,9 +1818,9 @@ bool CvDLLButtonPopup::launchLeadUnitPopup(CvPopup* pPopup, CvPopupInfo &info)
 			{
 				pFirstUnit = pLoopUnit;
 			}
-			szBuffer.clear();
+			CvWStringBuffer szBuffer;
 			GAMETEXT.setUnitHelp(szBuffer, pLoopUnit, true);
-			gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, CvWString(szBuffer.getCString()), NULL, iCount, WIDGET_GENERAL);
+			gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer.getCString(), NULL, iCount, WIDGET_GENERAL);
 			iCount++;
 		}
 	}
@@ -1779,9 +1829,9 @@ bool CvDLLButtonPopup::launchLeadUnitPopup(CvPopup* pPopup, CvPopupInfo &info)
 	{
 		if (pFirstUnit)
 		{
-			GC.getGameINLINE().selectionListGameNetMessage(GAMEMESSAGE_PUSH_MISSION, MISSION_LEAD, pFirstUnit->getID());
+			gDLL->sendPushMission(info.getData2(), MISSION_LEAD, pFirstUnit->getID(), -1, 0, false);
 		}
-		return (false);
+		return false;
 	}
 
 	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_NEVER_MIND"), NULL, 0, WIDGET_GENERAL);
@@ -1790,189 +1840,6 @@ bool CvDLLButtonPopup::launchLeadUnitPopup(CvPopup* pPopup, CvPopupInfo &info)
 
 	return (true);
 }
-
-bool CvDLLButtonPopup::launchDoEspionagePopup(CvPopup* pPopup, CvPopupInfo &info)
-{
-	CvUnit* pUnit;
-	CvPlot* pPlot;
-	CvWString szBuffer;
-
-	pUnit = gDLL->getInterfaceIFace()->getHeadSelectedUnit();
-	if (NULL == pUnit)
-	{
-		return (false);
-	}
-
-	pPlot = pUnit->plot();
-	if (NULL == pPlot)
-	{
-		return (false);
-	}
-
-	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_CHOOSE_ESPIONAGE_MISSION"));
-
-	for (int iLoop = 0; iLoop < GC.getNumEspionageMissionInfos(); iLoop++)
-	{
-		if (!GC.getEspionageMissionInfo((EspionageMissionTypes) iLoop).isPassive())
-		{
-			if (GET_PLAYER(pUnit->getOwnerINLINE()).canDoEspionageMission((EspionageMissionTypes) iLoop, pPlot->getOwnerINLINE(), pPlot, -1, pUnit))
-			{
-				if (GC.getEspionageMissionInfo((EspionageMissionTypes) iLoop).isTwoPhases())
-				{
-					szBuffer = GC.getEspionageMissionInfo((EspionageMissionTypes) iLoop).getDescription();
-					gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, ARTFILEMGR.getInterfaceArtInfo("ESPIONAGE_BUTTON")->getPath(), iLoop, WIDGET_GENERAL);
-				}
-				else
-				{
-					int iCost = GET_PLAYER(pUnit->getOwnerINLINE()).getEspionageMissionCost((EspionageMissionTypes) iLoop, pPlot->getOwnerINLINE(), pPlot, -1, pUnit);
-					if (iCost > 0)
-					{
-						szBuffer = gDLL->getText("TXT_KET_ESPIONAGE_MISSION_COST", GC.getEspionageMissionInfo((EspionageMissionTypes) iLoop).getTextKeyWide(), iCost);
-						gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, ARTFILEMGR.getInterfaceArtInfo("ESPIONAGE_BUTTON")->getPath(), iLoop, WIDGET_HELP_ESPIONAGE_COST, iLoop, -1);
-					}
-				}
-			}
-		}
-	}
-
-	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_NEVER_MIND"), ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CANCEL")->getPath(), NO_ESPIONAGEMISSION, WIDGET_GENERAL);
-
-	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
-
-	return (true);
-}
-
-bool CvDLLButtonPopup::launchDoEspionageTargetPopup(CvPopup* pPopup, CvPopupInfo &info)
-{
-	CvUnit* pUnit = gDLL->getInterfaceIFace()->getHeadSelectedUnit();
-	if (NULL == pUnit)
-	{
-		return false;
-	}
-
-	CvPlot* pPlot = pUnit->plot();
-	CvCity* pCity = pPlot->getPlotCity();
-	PlayerTypes eTargetPlayer = pPlot->getOwnerINLINE();
-	CvPlayer& kPlayer = GET_PLAYER(GC.getGameINLINE().getActivePlayer());
-
-	if (NO_PLAYER == eTargetPlayer)
-	{
-		return false;
-	}
-
-	EspionageMissionTypes eMission = (EspionageMissionTypes)info.getData1();
-	if (NO_ESPIONAGEMISSION == eMission)
-	{
-		return false;
-	}
-
-	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_ESPIONAGE_CHOOSE_TARGET"));
-
-	CvEspionageMissionInfo& kMission = GC.getEspionageMissionInfo(eMission);
-	if (kMission.getDestroyBuildingCostFactor() > 0)
-	{
-		if (NULL != pCity)
-		{
-			for (int iBuilding = 0; iBuilding < GC.getNumBuildingInfos(); ++iBuilding)
-			{
-				if (kPlayer.canDoEspionageMission(eMission, eTargetPlayer, pPlot, iBuilding, pUnit))
-				{
-					CvBuildingInfo& kBuilding = GC.getBuildingInfo((BuildingTypes)iBuilding);
-					if (pCity->getNumRealBuilding((BuildingTypes)iBuilding) > 0)
-					{
-						int iCost = kPlayer.getEspionageMissionCost(eMission, eTargetPlayer, pPlot, iBuilding, pUnit);
-						CvWString szBuffer = gDLL->getText("TXT_KET_ESPIONAGE_MISSION_COST", kBuilding.getDescription(), iCost);
-						gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, kBuilding.getButton(), iBuilding, WIDGET_HELP_ESPIONAGE_COST, eMission, iBuilding);
-					}
-				}
-			}
-		}
-	}
-	else if (kMission.getDestroyUnitCostFactor() > 0)
-	{
-		CLLNode<IDInfo>* pUnitNode = pPlot->headUnitNode();
-		while (pUnitNode != NULL)
-		{
-			CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
-			pUnitNode = pPlot->nextUnitNode(pUnitNode);
-
-			if (NULL != pLoopUnit)
-			{
-				if (kPlayer.canDoEspionageMission(eMission, eTargetPlayer, pPlot, pLoopUnit->getUnitType(), pUnit))
-				{
-					if (pLoopUnit->getTeam() == GET_PLAYER(eTargetPlayer).getTeam())
-					{
-						CvUnitInfo& kUnit = pLoopUnit->getUnitInfo();
-						int iCost = kPlayer.getEspionageMissionCost(eMission, eTargetPlayer, pPlot, pLoopUnit->getUnitType(), pUnit);
-						CvWString szBuffer = gDLL->getText("TXT_KET_ESPIONAGE_MISSION_COST", kUnit.getDescription(), iCost);
-						gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, pLoopUnit->getButton(), pLoopUnit->getID(), WIDGET_HELP_ESPIONAGE_COST, eMission, pLoopUnit->getUnitType());
-					}
-				}
-			}
-		}
-	}
-	else if (kMission.getDestroyProjectCostFactor() > 0)
-	{
-		for (int iProject = 0; iProject < GC.getNumProjectInfos(); ++iProject)
-		{
-			if (kPlayer.canDoEspionageMission(eMission, eTargetPlayer, pPlot, iProject, pUnit))
-			{
-				if (GET_TEAM(GET_PLAYER(eTargetPlayer).getTeam()).getProjectCount((ProjectTypes)iProject) > 0)
-				{
-					int iCost = kPlayer.getEspionageMissionCost(eMission, eTargetPlayer, pPlot, iProject, pUnit);
-					CvWString szBuffer = gDLL->getText("TXT_KET_ESPIONAGE_MISSION_COST", GC.getProjectInfo((ProjectTypes)iProject).getDescription(), iCost);
-					gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, GC.getProjectInfo((ProjectTypes)iProject).getButton(), iProject, WIDGET_HELP_ESPIONAGE_COST, eMission, iProject);
-				}
-			}
-		}
-	}
-	else if (kMission.getBuyTechCostFactor() > 0)
-	{
-		for (int iTech = 0; iTech < GC.getNumTechInfos(); ++iTech)
-		{
-			if (kPlayer.canDoEspionageMission(eMission, eTargetPlayer, pPlot, iTech, pUnit))
-			{
-				int iCost = kPlayer.getEspionageMissionCost(eMission, eTargetPlayer, pPlot, iTech, pUnit);
-				CvTechInfo& kTech = GC.getTechInfo((TechTypes)iTech);
-				CvWString szBuffer = gDLL->getText("TXT_KET_ESPIONAGE_MISSION_COST", kTech.getDescription(), iCost);
-				gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, kTech.getButton(), iTech, WIDGET_HELP_ESPIONAGE_COST, eMission, iTech);
-			}
-		}
-	}
-	else if (kMission.getSwitchCivicCostFactor() > 0)
-	{
-		for (int iCivic = 0; iCivic < GC.getNumCivicInfos(); ++iCivic)
-		{
-			if (kPlayer.canDoEspionageMission(eMission, eTargetPlayer, pPlot, iCivic, pUnit))
-			{
-				int iCost = kPlayer.getEspionageMissionCost(eMission, eTargetPlayer, pPlot, iCivic, pUnit);
-				CvCivicInfo& kCivic = GC.getCivicInfo((CivicTypes)iCivic);
-				CvWString szBuffer = gDLL->getText("TXT_KET_ESPIONAGE_MISSION_COST", kCivic.getDescription(), iCost);
-				gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, kCivic.getButton(), iCivic, WIDGET_HELP_ESPIONAGE_COST, eMission, iCivic);
-			}
-		}
-	}
-	else if (kMission.getSwitchReligionCostFactor() > 0)
-	{
-		for (int iReligion = 0; iReligion < GC.getNumReligionInfos(); ++iReligion)
-		{
-			if (kPlayer.canDoEspionageMission(eMission, eTargetPlayer, pPlot, iReligion, pUnit))
-			{
-				int iCost = kPlayer.getEspionageMissionCost(eMission, eTargetPlayer, pPlot, iReligion, pUnit);
-				CvReligionInfo& kReligion = GC.getReligionInfo((ReligionTypes)iReligion);
-				CvWString szBuffer = gDLL->getText("TXT_KET_ESPIONAGE_MISSION_COST", kReligion.getDescription(), iCost);
-				gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, kReligion.getButton(), iReligion, WIDGET_HELP_ESPIONAGE_COST, eMission, iReligion);
-			}
-		}
-	}
-
-	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_NEVER_MIND"), ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CANCEL")->getPath(), NO_ESPIONAGEMISSION, WIDGET_GENERAL);
-
-	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
-
-	return true;
-}
-
 
 bool CvDLLButtonPopup::launchMainMenuPopup(CvPopup* pPopup, CvPopupInfo &info)
 {
@@ -1997,9 +1864,9 @@ bool CvDLLButtonPopup::launchMainMenuPopup(CvPopup* pPopup, CvPopupInfo &info)
 	{
 		// Don't allow if there has already been diplomacy
 		bool bShow = true;
-		for (int i = 0; bShow && i < MAX_CIV_TEAMS; i++)
+		for (int i = 0; bShow && i < MAX_TEAMS; i++)
 		{
-			for (int j = i+1; bShow && j < MAX_CIV_TEAMS; j++)
+			for (int j = i+1; bShow && j < MAX_TEAMS; j++)
 			{
 				if (GET_TEAM((TeamTypes)i).isHasMet((TeamTypes)j))
 				{
@@ -2068,7 +1935,15 @@ bool CvDLLButtonPopup::launchMainMenuPopup(CvPopup* pPopup, CvPopupInfo &info)
 
 bool CvDLLButtonPopup::launchConfirmMenu(CvPopup *pPopup, CvPopupInfo &info)
 {
-	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_POPUP_ARE_YOU_SURE").c_str());
+	if(info.getData1() == 2) //retire
+	{
+		gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_POPUP_ARE_YOU_SURE_ACTION", GC.getControlInfo(CONTROL_RETIRE).getTextKeyWide()).c_str());
+	}
+	else
+	{
+		gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_POPUP_ARE_YOU_SURE").c_str());
+	}
+
 	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_YES").c_str(), NULL, 0, WIDGET_GENERAL);
 	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_NO").c_str(), NULL, 1, WIDGET_GENERAL);
 	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
@@ -2090,6 +1965,18 @@ bool CvDLLButtonPopup::launchPythonScreen(CvPopup* pPopup, CvPopupInfo &info)
 	gDLL->getPythonIFace()->callFunction(PYScreensModule, CvString(info.getText()).GetCString(), argsList.makeFunctionArgs());
 
 	return (false); // return false, so the Popup object is deleted, since it's just a dummy
+}
+
+bool CvDLLButtonPopup::launchMovie(CvPopup* pPopup, CvPopupInfo &info)
+{
+	// this is not really a popup, but a Python screen
+	// we trick the app into thinking that it's a popup so that we can take advantage of the popup queuing system
+
+	CyArgsList argsList;
+	argsList.add(CvString(info.getText()));
+	gDLL->getPythonIFace()->callFunction(PYScreensModule, "showVictoryMovie", argsList.makeFunctionArgs());
+
+	return false; // return false, so the Popup object is deleted, since it's just a dummy
 }
 
 bool CvDLLButtonPopup::launchCancelDeal(CvPopup* pPopup, CvPopupInfo &info)
@@ -2224,20 +2111,21 @@ bool CvDLLButtonPopup::launchExtendedGamePopup(CvPopup* pPopup, CvPopupInfo &inf
 
 bool CvDLLButtonPopup::launchDiplomacyPopup(CvPopup* pPopup, CvPopupInfo &info)
 {
-	int iCount;
-	int iI;
-
 	gDLL->getInterfaceIFace()->popupSetHeaderString(pPopup, gDLL->getText("TXT_KEY_DIPLOMACY_TITLE"));
 
-	iCount = 0;
+	int iCount = 0;
 
-	for (iI = 0; iI < MAX_CIV_PLAYERS; iI++)
+	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		PlayerTypes ePlayer = (PlayerTypes) iI;
+		CvPlayer& kLoopPlayer = GET_PLAYER(ePlayer);
+
+		if (kLoopPlayer.isAlive())
 		{
-			if (GET_PLAYER(GC.getGameINLINE().getActivePlayer()).canContact((PlayerTypes)iI))
+			if (GET_PLAYER(GC.getGameINLINE().getActivePlayer()).canContact(ePlayer))
 			{
-				gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, GET_PLAYER((PlayerTypes)iI).getName(), NULL, iI, WIDGET_GENERAL);
+				CvWString szTempBuffer = CvWString::format(SETCOLR L"%s" ENDCOLR, kLoopPlayer.getPlayerTextColorR(), kLoopPlayer.getPlayerTextColorG(), kLoopPlayer.getPlayerTextColorB(), kLoopPlayer.getPlayerTextColorA(), kLoopPlayer.getName());
+				gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szTempBuffer, GC.getLeaderHeadInfo(kLoopPlayer.getLeaderType()).getButton(), iI, WIDGET_GENERAL);
 				iCount++;
 			}
 		}
@@ -2245,13 +2133,13 @@ bool CvDLLButtonPopup::launchDiplomacyPopup(CvPopup* pPopup, CvPopupInfo &info)
 
 	if (iCount == 0)
 	{
-		return (false);
+		return false;
 	}
 
-	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_NEVER_MIND"), NULL, MAX_CIV_PLAYERS, WIDGET_GENERAL);
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_NEVER_MIND"), ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CANCEL")->getPath(), MAX_PLAYERS, WIDGET_GENERAL);
 
 	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
-	return (true);
+	return true;
 }
 
 
@@ -2283,75 +2171,6 @@ bool CvDLLButtonPopup::launchKickedPopup(CvPopup* pPopup, CvPopupInfo &info)
 	gDLL->getInterfaceIFace()->popupSetHeaderString( pPopup, gDLL->getText("TXT_KEY_POPUP_KICKED") );
 	gDLL->getInterfaceIFace()->popupLaunch(pPopup, true);
 	return (true);
-}
-
-bool CvDLLButtonPopup::launchVassalDemandTributePopup(CvPopup* pPopup, CvPopupInfo &info)
-{
-	if (info.getData1() == NO_PLAYER)
-	{
-		return false;
-	}
-
-	CvPlayer& kVassal = GET_PLAYER((PlayerTypes)info.getData1());
-	if (!GET_TEAM(kVassal.getTeam()).isVassal(GC.getGameINLINE().getActiveTeam()))
-	{
-		return false;
-	}
-
-	int iNumResources = 0;
-	if (kVassal.canTradeNetworkWith(GC.getGameINLINE().getActivePlayer()))
-	{
-		gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_VASSAL_DEMAND_TRIBUTE", kVassal.getNameKey()));
-
-		for (int iBonus = 0; iBonus < GC.getNumBonusInfos(); iBonus++)
-		{
-			if (kVassal.getNumTradeableBonuses((BonusTypes)iBonus) > 0 && GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getNumAvailableBonuses((BonusTypes)iBonus) == 0)
-			{
-				CvBonusInfo& info = GC.getBonusInfo((BonusTypes)iBonus);
-				gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, info.getDescription(), info.getButton(), iBonus, WIDGET_GENERAL, iBonus, -1, true, POPUP_LAYOUT_STRETCH, DLL_FONT_LEFT_JUSTIFY);
-				++iNumResources;
-			}
-		}
-	}
-
-	if (iNumResources > 0)
-	{
-		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_NEVER_MIND"), ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CANCEL")->getPath(), GC.getNumBonusInfos(), WIDGET_GENERAL);
-	}
-	else
-	{
-		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_VASSAL_TRIBUTE_NOT_POSSIBLE"), ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CANCEL")->getPath(), GC.getNumBonusInfos(), WIDGET_GENERAL);
-	}
-
-	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
-
-	return true;
-}
-
-bool CvDLLButtonPopup::launchVassalGrantTributePopup(CvPopup* pPopup, CvPopupInfo &info)
-{
-	if (info.getData1() == NO_PLAYER)
-	{
-		return false;
-	}
-
-	CvPlayer& kMaster = GET_PLAYER((PlayerTypes)info.getData1());
-	if (!GET_TEAM(GC.getGameINLINE().getActiveTeam()).isVassal(kMaster.getTeam()))
-	{
-		return false;
-	}
-
-	if (info.getData2() == NO_BONUS)
-	{
-		return false;
-	}
-
-	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_VASSAL_GRANT_TRIBUTE", kMaster.getCivilizationDescriptionKey(), kMaster.getNameKey(), GC.getBonusInfo((BonusTypes)info.getData2()).getTextKeyWide()));
-	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_VASSAL_GRANT_TRIBUTE_YES"), NULL, 0, WIDGET_GENERAL);
-	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_VASSAL_GRANT_TRIBUTE_NO"), NULL, 1, WIDGET_GENERAL);
-	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
-
-	return true;
 }
 
 bool CvDLLButtonPopup::launchEventPopup(CvPopup* pPopup, CvPopupInfo &info)
@@ -2427,53 +2246,24 @@ bool CvDLLButtonPopup::launchFreeColonyPopup(CvPopup* pPopup, CvPopupInfo &info)
 
 	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_FREE_COLONY"));
 
-	if (GET_PLAYER(ePlayer).canSplitEmpire())
-	{
-		for(CvArea* pLoopArea = GC.getMapINLINE().firstArea(&iLoop); pLoopArea != NULL; pLoopArea = GC.getMapINLINE().nextArea(&iLoop))
-		{
-			if (GET_PLAYER(ePlayer).canSplitArea(pLoopArea->getID()))
-			{
-				CvWString szCityList;
-				int iCityLoop;
-				int iNumCities = 0;
-				for (CvCity* pLoopCity = GET_PLAYER(ePlayer).firstCity(&iCityLoop); pLoopCity != NULL; pLoopCity = GET_PLAYER(ePlayer).nextCity(&iCityLoop))
-				{
-					if (pLoopCity->area()->getID() == pLoopArea->getID())
-					{
-						if (!szCityList.empty())
-						{
-							szCityList += L", ";
-						}
-						++iNumCities;
-
-						szCityList += pLoopCity->getName();
-					}
-				}
-
-				CvWString szBuffer = gDLL->getText("TXT_KEY_SPLIT_EMPIRE", szCityList.GetCString());
-				gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CITYSELECTION")->getPath(), pLoopArea->getID(), WIDGET_GENERAL);
-			}
-		}
-	}
-
 	for (CvCity* pLoopCity = GET_PLAYER(ePlayer).firstCity(&iLoop); pLoopCity != NULL; pLoopCity = GET_PLAYER(ePlayer).nextCity(&iLoop))
 	{
 		PlayerTypes ePlayer = pLoopCity->getLiberationPlayer(false);
 		if (NO_PLAYER != ePlayer)
 		{
 			CvWString szCity = gDLL->getText("TXT_KEY_CITY_LIBERATE", pLoopCity->getNameKey(), GET_PLAYER(ePlayer).getNameKey());
-			gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szCity, ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CITYSELECTION")->getPath(), -pLoopCity->getID(), WIDGET_GENERAL);
+			gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szCity, ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CITYSELECTION")->getPath(), pLoopCity->getID(), WIDGET_GENERAL);
 		}
 	}
 
-	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_NEVER_MIND"), ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CANCEL")->getPath(), 0, WIDGET_GENERAL);
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_NEVER_MIND"), ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CANCEL")->getPath(), -1, WIDGET_GENERAL);
 
 	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
 
 	return true;
 }
 
-bool CvDLLButtonPopup::launchLaunchPopup(CvPopup* pPopup, CvPopupInfo &info)
+bool CvDLLButtonPopup::launchChooseProfessionPopup(CvPopup* pPopup, CvPopupInfo &info)
 {
 	PlayerTypes ePlayer = GC.getGameINLINE().getActivePlayer();
 	if (ePlayer == NO_PLAYER)
@@ -2481,51 +2271,184 @@ bool CvDLLButtonPopup::launchLaunchPopup(CvPopup* pPopup, CvPopupInfo &info)
 		return false;
 	}
 
-	VictoryTypes eVictory = (VictoryTypes)info.getData1();
-	if (NO_VICTORY == eVictory)
+	CvCity* pCity = GET_PLAYER(ePlayer).getCity(info.getData1());
+
+	bool bEuropeUnit = false;
+	CvUnit* pUnit = NULL;
+	if (pCity != NULL)
+	{
+		pUnit = pCity->getPopulationUnitById(info.getData2());
+	}
+	else
+	{
+		pUnit = GET_PLAYER(ePlayer).getEuropeUnitById(info.getData2());
+		bEuropeUnit = (pUnit != NULL);
+	}
+	if (NULL == pUnit)
+	{
+		pUnit = GET_PLAYER(ePlayer).getUnit(info.getData2());
+	}
+	if (NULL == pUnit)
 	{
 		return false;
 	}
 
-	CvTeam& kTeam = GET_TEAM(GET_PLAYER(ePlayer).getTeam());
+	bool bShowOnlyNonCitizens = (info.getData3() == 0);
+	bool bShowOnlyPlotCitizens = (info.getData3() == 1);
 
-	if (kTeam.getVictoryCountdown(eVictory) > 0 || GC.getGameINLINE().getGameState() != GAMESTATE_ON)
+	CvPlot* pWorkingPlot = NULL;
+	if (pCity != NULL)
 	{
-		return false;
+		pWorkingPlot = pCity->getPlotWorkedByUnit(pUnit);
 	}
 
-	CvWString szDate;
-	GAMETEXT.setTimeStr(szDate, GC.getGame().getGameTurn() + kTeam.getVictoryDelay(eVictory), false);
+	ProfessionTypes eProfession = pUnit->getProfession();
+	FAssert(NULL == pWorkingPlot || (NO_PROFESSION != eProfession && GC.getProfessionInfo(eProfession).isWorkPlot()));
 
-	gDLL->getInterfaceIFace()->popupSetHeaderString(pPopup, GC.getVictoryInfo(eVictory).getCivilopedia());
-	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_ESTIMATED_VICTORY_DATE", szDate.GetCString()));
+	CvWString szProfession;
+	if (NO_PROFESSION == eProfession)
+	{
+		szProfession = L"TXT_KEY_PROFESSION_IDLE_CITIZEN";
+	}
+	else
+	{
+		szProfession = GC.getProfessionInfo(eProfession).getTextKeyWide();
+	}
 
-	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_YES"), NULL, 0, WIDGET_GENERAL);
-	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_NO"), NULL, 1, WIDGET_GENERAL);
+	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_CHOOSE_PROFESSION", pUnit->getNameKey(), szProfession.GetCString()));
+
+	if (!bShowOnlyPlotCitizens)
+	{
+		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_NEVER_MIND"), ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CANCEL")->getPath(), GC.getNumProfessionInfos(), WIDGET_GENERAL);
+
+		if(pUnit->isColonistLocked() && !bShowOnlyNonCitizens)
+		{
+			FAssert(pCity != NULL);
+			gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_AUTOMATE_CITIZEN"), ARTFILEMGR.getInterfaceArtInfo("INTERFACE_CITY_AUTOMATE_CITIZENS")->getPath(), -1, WIDGET_GENERAL);
+		}
+	}
+
+	int iNumButtons = 0;
+	for (int iProfession = 0; iProfession < GC.getNumProfessionInfos(); ++iProfession)
+	{
+		ProfessionTypes eLoopProfession = (ProfessionTypes) iProfession;
+		CvProfessionInfo& kProfession = GC.getProfessionInfo(eLoopProfession);
+
+		if ((iProfession != pUnit->getProfession() || bShowOnlyPlotCitizens) && pUnit->canHaveProfession(eLoopProfession, false))
+		{
+			//inside or outside city
+			if (kProfession.isCitizen() && pCity != NULL)
+			{
+				if (!bShowOnlyNonCitizens)
+				{
+					YieldTypes eProfessionYield = (YieldTypes)kProfession.getYieldProduced();
+					if (NO_YIELD != eProfessionYield)
+					{
+						CvWString szText;
+						int iProfessionYieldChar = GC.getYieldInfo(eProfessionYield).getChar();
+						int iBestYieldAmount = pCity->getBestYieldAmountAvailable(eLoopProfession, pUnit);
+						if (kProfession.isWorkPlot() && NULL != pWorkingPlot)
+						{
+							int iYieldAmount = pWorkingPlot->calculatePotentialProfessionYieldAmount(eLoopProfession, pUnit, false);
+							if(iYieldAmount > 0)
+							{
+								++iNumButtons;
+								if (bShowOnlyPlotCitizens)
+								{
+									szText = gDLL->getText("TXT_KEY_CHOOSE_PROFESSION_ITEM", kProfession.getTextKeyWide(), iYieldAmount, iProfessionYieldChar);
+								}
+								else
+								{
+									szText = gDLL->getText("TXT_KEY_CHOOSE_PROFESSION_ITEM_MAX", kProfession.getTextKeyWide(), iYieldAmount, iBestYieldAmount, iProfessionYieldChar);
+								}
+								gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szText, kProfession.getButton(), iProfession, WIDGET_GENERAL);
+							}
+						}
+						else if (!bShowOnlyPlotCitizens)
+						{
+							if(iBestYieldAmount > 0)
+							{
+								++iNumButtons;
+								szText = gDLL->getText("TXT_KEY_CHOOSE_PROFESSION_ITEM", kProfession.getTextKeyWide(), iBestYieldAmount, iProfessionYieldChar);
+								gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szText, kProfession.getButton(), iProfession, WIDGET_GENERAL);
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				if (!bShowOnlyPlotCitizens)
+				{
+					CvWString szText = kProfession.getDescription();
+					if (bEuropeUnit)
+					{
+						int iCost = pUnit->getEuropeProfessionChangeCost(eLoopProfession);
+						if (iCost > 0)
+						{
+							szText += gDLL->getText("TXT_KEY_EUROPE_CHANGE_PROFESSION_COST", iCost);
+						}
+						else if (iCost < 0)
+						{
+							szText += gDLL->getText("TXT_KEY_EUROPE_CHANGE_PROFESSION_REFUND", -iCost);
+						}
+					}
+					else
+					{
+						szText += gDLL->getText("TXT_KEY_PROFESSION_NON_CITIZEN");
+					}
+
+					++iNumButtons;
+					gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szText, kProfession.getButton(), iProfession, WIDGET_GENERAL);
+				}
+			}
+		}
+	}
+
+	if (bShowOnlyPlotCitizens)
+	{
+		if (iNumButtons <= 1)
+		{
+			return false;
+		}
+	}
+
+	if (pUnit->canClearSpecialty() && !bShowOnlyPlotCitizens && !bShowOnlyNonCitizens)
+	{
+		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, GC.getCommandInfo(COMMAND_CLEAR_SPECIALTY).getDescription(), GC.getCommandInfo(COMMAND_CLEAR_SPECIALTY).getButton(), -2, WIDGET_GENERAL);
+	}
 
 	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
 
 	return true;
 }
 
-bool CvDLLButtonPopup::launchFoundReligionPopup(CvPopup* pPopup, CvPopupInfo &info)
+bool CvDLLButtonPopup::launchPurchaseEuropeUnitPopup(CvPopup* pPopup, CvPopupInfo &info)
 {
 	PlayerTypes ePlayer = GC.getGameINLINE().getActivePlayer();
 	if (ePlayer == NO_PLAYER)
 	{
 		return false;
 	}
+	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
 
-	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_FOUNDED_RELIGION"));
+	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_PURCHASE_EUROPE_UNIT"));
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_NEVER_MIND"), ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CANCEL")->getPath(), GC.getNumUnitInfos(), WIDGET_GENERAL);
 
 	bool bFound = false;
-	for (int iReligion = 0; iReligion < GC.getNumReligionInfos(); ++iReligion)
+	for (int iUnitClass = 0; iUnitClass < GC.getNumUnitClassInfos(); ++iUnitClass)
 	{
-		CvReligionInfo& kReligion = GC.getReligionInfo((ReligionTypes)iReligion);
-		if (!GC.getGameINLINE().isReligionFounded((ReligionTypes)iReligion))
+		UnitTypes eUnit = (UnitTypes) GC.getCivilizationInfo(kPlayer.getCivilizationType()).getCivilizationUnits(iUnitClass);
+
+		if (NO_UNIT != eUnit)
 		{
-			gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, kReligion.getDescription(), kReligion.getButton(), iReligion, WIDGET_GENERAL);
-			bFound = true;
+			int iCost = kPlayer.getEuropeUnitBuyPrice(eUnit);
+			if (iCost >= 0)
+			{
+				CvWString szText = gDLL->getText("TXT_KEY_EUROPE_UNIT_BUY_PRICE", GC.getUnitInfo(eUnit).getTextKeyWide(), iCost);
+				gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szText, kPlayer.getUnitButton(eUnit), eUnit, WIDGET_PEDIA_JUMP_TO_UNIT, eUnit, 1);
+				bFound = true;
+			}
 		}
 	}
 
@@ -2533,6 +2456,350 @@ bool CvDLLButtonPopup::launchFoundReligionPopup(CvPopup* pPopup, CvPopupInfo &in
 	{
 		return false;
 	}
+
+	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
+
+	return true;
+}
+
+bool CvDLLButtonPopup::launchFoundingFatherPopup(CvPopup* pPopup, CvPopupInfo &info)
+{
+	FatherTypes eFather = (FatherTypes) info.getData1();
+
+	if (eFather == NO_FATHER)
+	{
+		return false;
+	}
+
+	if (!GET_TEAM(GC.getGameINLINE().getActiveTeam()).canConvinceFather(eFather))
+	{
+		return false;
+	}
+
+	CvWStringBuffer szBody;
+	szBody.assign(gDLL->getText("TXT_KEY_FOUNDING_FATHER_OFFERS_POPUP", GC.getFatherInfo(eFather).getTextKeyWide()));
+	GAMETEXT.setFatherHelp(szBody, eFather, true);
+	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, szBody.getCString());
+
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_YES"), NULL, 1, WIDGET_GENERAL);
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_NO"), NULL, 0, WIDGET_GENERAL);
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_FEAT_ACCOMPLISHED_MORE"), NULL, -1, WIDGET_GENERAL);
+
+	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
+
+	return true;
+}
+
+bool CvDLLButtonPopup::launchCivicOptionPopup(CvPopup* pPopup, CvPopupInfo &info)
+{
+	CivicOptionTypes eCivicOption = (CivicOptionTypes) info.getData1();
+
+	if (eCivicOption == NO_CIVICOPTION)
+	{
+		return false;
+	}
+
+	PlayerTypes ePlayer = GC.getGameINLINE().getActivePlayer();
+	if (ePlayer == NO_PLAYER)
+	{
+		return false;
+	}
+
+	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_CONSTITUTION_POPUP", GC.getCivicOptionInfo(eCivicOption).getTextKeyWide()));
+
+	bool bFoundValid = false;
+	for (int iCivic = 0; iCivic < GC.getNumCivicInfos(); ++iCivic)
+	{
+		CvCivicInfo& kCivicInfo = GC.getCivicInfo((CivicTypes) iCivic);
+		if (kCivicInfo.getCivicOptionType() == eCivicOption)
+		{
+			if (GET_PLAYER(ePlayer).canDoCivics((CivicTypes) iCivic))
+			{
+				bFoundValid = true;
+				CvWStringBuffer szBuffer;
+				GAMETEXT.parseCivicInfo(szBuffer, (CivicTypes) iCivic, false, true, false);
+				gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer.getCString(), kCivicInfo.getButton(), iCivic, WIDGET_GENERAL);
+			}
+		}
+	}
+
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_FEAT_ACCOMPLISHED_MORE"), "", -1, WIDGET_GENERAL);
+
+	if (!bFoundValid)
+	{
+		return false;
+	}
+
+	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
+
+	return true;
+}
+
+bool CvDLLButtonPopup::launchTradeRoutesPopup(CvPopup* pPopup, CvPopupInfo &info)
+{
+	PlayerTypes ePlayer = GC.getGameINLINE().getActivePlayer();
+	if (ePlayer == NO_PLAYER)
+	{
+		return false;
+	}
+
+	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvUnit* pUnit = kPlayer.getUnit(info.getData1());
+	if (pUnit == NULL)
+	{
+		return false;
+	}
+
+	CvSelectionGroup* pGroup = pUnit->getGroup();
+	if (pGroup == NULL)
+	{
+		return false;
+	}
+
+	std::vector< std::pair<int, CvWString> > aTradeRoutes;
+	std::vector<CvTradeRoute*> aiRoutes;
+	kPlayer.getTradeRoutes(aiRoutes);
+	for (uint i = 0; i < aiRoutes.size(); ++i)
+	{
+		CvTradeRoute* pTradeRoute = aiRoutes[i];
+		if (pGroup->canAssignTradeRoute(pTradeRoute->getID()))
+		{
+			CvWString szText = gDLL->getText("TXT_KEY_TRADE_ROUTE_DESCRIPTION", GC.getYieldInfo(pTradeRoute->getYield()).getTextKeyWide(), pTradeRoute->getSourceCityNameKey(), pTradeRoute->getDestinationCityNameKey());
+			aTradeRoutes.push_back(std::make_pair(pTradeRoute->getID(), szText));
+		}
+	}
+
+	if (aTradeRoutes.empty())
+	{
+		return false;
+	}
+
+	for (uint i = 0; i < aTradeRoutes.size(); ++i)
+	{
+		int iRouteId = aTradeRoutes[i].first;
+		gDLL->getInterfaceIFace()->popupCreateCheckBoxes(pPopup, 1, iRouteId, WIDGET_GENERAL, POPUP_LAYOUT_LEFT);
+		gDLL->getInterfaceIFace()->popupSetCheckBoxText(pPopup, 0, aTradeRoutes[i].second, iRouteId);
+		CvUnit* pUnit = gDLL->getInterfaceIFace()->getHeadSelectedUnit();
+		if (pUnit != NULL)
+		{
+			gDLL->getInterfaceIFace()->popupSetCheckBoxState(pPopup, 0, pGroup->isAssignedTradeRoute(iRouteId), iRouteId);
+		}
+	}
+
+	gDLL->getInterfaceIFace()->popupLaunch(pPopup, true, POPUPSTATE_IMMEDIATE);
+
+	return true;
+}
+
+bool CvDLLButtonPopup::launchYieldImportExportPopup(CvPopup* pPopup, CvPopupInfo &info)
+{
+	PlayerTypes ePlayer = GC.getGameINLINE().getActivePlayer();
+	if (ePlayer == NO_PLAYER)
+	{
+		return false;
+	}
+
+	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+
+	CvCity* pCity = kPlayer.getCity(info.getData1());
+	if (pCity == NULL)
+	{
+		return false;
+	}
+
+	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_YIELD_IMPORT_POPUP", pCity->getNameKey()));
+
+	for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
+	{
+		YieldTypes eYield = (YieldTypes) iYield;
+		CvYieldInfo& kYield = GC.getYieldInfo(eYield);
+		if (kYield.isCargo())
+		{
+			gDLL->getInterfaceIFace()->popupStartHLayout(pPopup, 0);
+			gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, L"", kYield.getButton(), -1, WIDGET_HELP_YIELD, iYield);
+			gDLL->getInterfaceIFace()->popupCreateCheckBoxes(pPopup, 2, iYield, WIDGET_GENERAL, POPUP_LAYOUT_TOP);
+			gDLL->getInterfaceIFace()->popupSetCheckBoxText(pPopup, 0, gDLL->getText("TXT_KEY_POPUP_IMPORT"), iYield);
+			gDLL->getInterfaceIFace()->popupSetCheckBoxState(pPopup, 0, pCity->isImport(eYield), iYield);
+			gDLL->getInterfaceIFace()->popupSetCheckBoxText(pPopup, 1, gDLL->getText("TXT_KEY_POPUP_EXPORT"), iYield);
+			gDLL->getInterfaceIFace()->popupSetCheckBoxState(pPopup, 1, pCity->isExport(eYield), iYield);
+			gDLL->getInterfaceIFace()->popupCreateSpinBox(pPopup, iYield, L"", pCity->getMaintainLevel(eYield), 10, 999, 0);
+			gDLL->getInterfaceIFace()->popupEndLayout(pPopup);
+		}
+	}
+
+	gDLL->getInterfaceIFace()->popupLaunch(pPopup, true, POPUPSTATE_IMMEDIATE);
+
+	return true;
+}
+
+bool CvDLLButtonPopup::launchPromotionPopup(CvPopup* pPopup, CvPopupInfo &info)
+{
+	PlayerTypes ePlayer = GC.getGameINLINE().getActivePlayer();
+	if (ePlayer == NO_PLAYER)
+	{
+		return false;
+	}
+
+	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+
+	CvSelectionGroup* pSelectionGroup = kPlayer.getSelectionGroup(info.getData1());
+	if (pSelectionGroup == NULL)
+	{
+		return false;
+	}
+
+	gDLL->getInterfaceIFace()->popupSetHeaderString(pPopup, gDLL->getText("TXT_KEY_CHOOSE_PROMOTION"));
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_NEVER_MIND"), ARTFILEMGR.getInterfaceArtInfo("INTERFACE_BUTTONS_CANCEL")->getPath(), GC.getNumPromotionInfos(), WIDGET_GENERAL);
+
+	int iNumPromotions = 0;
+	for (int iPromotion = 0; iPromotion < GC.getNumPromotionInfos(); iPromotion++)
+	{
+		if (iPromotion != info.getData2())
+		{
+			CLLNode<IDInfo>* pSelectedUnitNode = gDLL->getInterfaceIFace()->headSelectionListNode();
+
+			while (pSelectedUnitNode != NULL)
+			{
+				CvUnit* pSelectedUnit = ::getUnit(pSelectedUnitNode->m_data);
+				pSelectedUnitNode = gDLL->getInterfaceIFace()->nextSelectionListNode(pSelectedUnitNode);
+				if (pSelectedUnit->canPromote((PromotionTypes) iPromotion, info.getData2()))
+				{
+					gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText(GC.getPromotionInfo((PromotionTypes) iPromotion).getTextKeyWide()), GC.getPromotionInfo((PromotionTypes)iPromotion).getButton(), iPromotion, WIDGET_HELP_PROMOTION, iPromotion, -1);
+					++iNumPromotions;
+					break;
+				}
+			}
+		}
+	}
+
+	if (iNumPromotions == 0)
+	{
+		return false;
+	}
+
+	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
+
+	return true;
+}
+
+bool CvDLLButtonPopup::launchChooseGoodyPopup(CvPopup* pPopup, CvPopupInfo &info)
+{
+	GoodyTypes eGoody = (GoodyTypes) info.getData1();
+	if (eGoody == NO_GOODY)
+	{
+		return false;
+	}
+
+	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText(GC.getGoodyInfo(eGoody).getAnnounceTextKey()));
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_YES"), NULL, 1);
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_POPUP_NO"), NULL, 0);
+	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
+
+	return true;
+}
+
+bool CvDLLButtonPopup::launchSelectYieldAmountPopup(CvPopup* pPopup, CvPopupInfo &info)
+{
+	YieldTypes eYield = (YieldTypes) info.getData1();
+	if (eYield == NO_YIELD)
+	{
+		return false;
+	}
+
+	PlayerTypes ePlayer = GC.getGameINLINE().getActivePlayer();
+	if (ePlayer == NO_PLAYER)
+	{
+		return false;
+	}
+	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+
+	CvUnit* pUnit = kPlayer.getUnit(info.getData2());
+	if (pUnit == NULL)
+	{
+		return false;
+	}
+
+	if (pUnit->getUnitTravelState() != UNIT_TRAVEL_STATE_IN_EUROPE)
+	{
+		FAssert(pUnit->getUnitTravelState() == NO_UNIT_TRAVEL_STATE);
+		if (!pUnit->canDoCommand((CommandTypes) info.getData3(), info.getData1(), -1))
+		{
+			return false;
+		}
+	}
+
+	int iMaxAmount = info.getOption1() ? pUnit->getMaxLoadYieldAmount(eYield) : pUnit->getYieldStored();
+	if (iMaxAmount <= 0)
+	{
+		return false;
+	}
+
+	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_SELECT_YIELD_POPUP", GC.getYieldInfo(eYield).getTextKeyWide()));
+	gDLL->getInterfaceIFace()->popupCreateSpinBox(pPopup, 0, L"", iMaxAmount, 1, iMaxAmount, 0);
+	gDLL->getInterfaceIFace()->popupLaunch(pPopup, true, POPUPSTATE_IMMEDIATE);
+
+	return true;
+}
+
+bool CvDLLButtonPopup::launchTalkNativesPopup(CvPopup* pPopup, CvPopupInfo& info)
+{
+	PlayerTypes ePlayer = GC.getGameINLINE().getActivePlayer();
+	if (ePlayer == NO_PLAYER)
+	{
+		return false;
+	}
+
+	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvUnit* pUnit = kPlayer.getUnit(info.getData1());
+	if (pUnit == NULL)
+	{
+		return false;
+	}
+	CvPlot* pPlot = pUnit->plot();
+	if (pPlot == NULL)
+	{
+		return false;
+	}
+	CvCity* pCity = pPlot->getPlotCity();
+	if (pCity == NULL)
+	{
+		return false;
+	}
+
+	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, gDLL->getText("TXT_KEY_TALK_NATIVES_POPUP", pCity->getNameKey()));
+
+	int iNumActions = 0;
+	if (pUnit->canSpeakWithChief(pUnit->plot()))
+	{
+		++iNumActions;
+		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_TALK_NATIVES_POPUP_CHIEF"), NULL, COMMAND_SPEAK_WITH_CHIEF);
+	}
+
+	if (pUnit->canLearn())
+	{
+		++iNumActions;
+		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_TALK_NATIVES_POPUP_LEARN"), NULL, COMMAND_LEARN);
+	}
+
+	if (pUnit->canEstablishMission())
+	{
+		++iNumActions;
+		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_TALK_NATIVES_POPUP_MISSION"), NULL, COMMAND_ESTABLISH_MISSION);
+	}
+
+	if (pUnit->canTradeYield(pUnit->plot()))
+	{
+		++iNumActions;
+		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_TALK_NATIVES_POPUP_TRADE"), NULL, COMMAND_YIELD_TRADE);
+	}
+
+	if (iNumActions == 0)
+	{
+		return false;
+	}
+
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_TALK_NATIVES_POPUP_NOTHING"), NULL, -1);
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_TALK_NATIVES_POPUP_NEVER"), NULL, NUM_COMMAND_TYPES);
 
 	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
 

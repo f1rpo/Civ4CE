@@ -15,6 +15,36 @@
 #include "CvUnit.h"
 //#include "CvStructs.h"
 
+void IDInfo::read(FDataStreamBase* pStream)
+{
+	pStream->Read((int*)&eOwner);
+	pStream->Read(&iID);
+}
+
+void IDInfo::write(FDataStreamBase* pStream) const
+{
+	pStream->Write(eOwner);
+	pStream->Write(iID);
+}
+
+void TradeData::read(FDataStreamBase* pStream)
+{
+	pStream->Read((int*)&m_eItemType);
+	pStream->Read(&m_iData1);
+	m_kTransport.read(pStream);
+	pStream->Read(&m_bOffering);
+	pStream->Read(&m_bHidden);
+}
+
+void TradeData::write(FDataStreamBase* pStream) const
+{
+	pStream->Write(m_eItemType);
+	pStream->Write(m_iData1);
+	m_kTransport.write(pStream);
+	pStream->Write(m_bOffering);
+	pStream->Write(m_bHidden);
+}
+
 int EventTriggeredData::getID() const
 {
 	return m_iId;
@@ -37,8 +67,6 @@ void EventTriggeredData::read(FDataStreamBase* pStream)
 	pStream->Read(&m_iUnitId);
 	pStream->Read((int*)&m_eOtherPlayer);
 	pStream->Read(&m_iOtherPlayerCityId);
-	pStream->Read((int*)&m_eReligion);
-	pStream->Read((int*)&m_eCorporation);
 	pStream->Read((int*)&m_eBuilding);
 	pStream->ReadString(m_szText);
 	pStream->ReadString(m_szGlobalText);
@@ -56,86 +84,9 @@ void EventTriggeredData::write(FDataStreamBase* pStream)
 	pStream->Write(m_iUnitId);
 	pStream->Write(m_eOtherPlayer);
 	pStream->Write(m_iOtherPlayerCityId);
-	pStream->Write(m_eReligion);
-	pStream->Write(m_eCorporation);
 	pStream->Write(m_eBuilding);
 	pStream->WriteString(m_szText);
 	pStream->WriteString(m_szGlobalText);
-}
-
-int VoteSelectionData::getID() const
-{
-	return iId;
-}
-
-void VoteSelectionData::setID(int iID)
-{
-	iId = iID;
-}
-
-void VoteSelectionData::read(FDataStreamBase* pStream)
-{
-	pStream->Read(&iId);
-	pStream->Read((int*)&eVoteSource);
-	int iSize;
-	pStream->Read(&iSize);
-	for (int i = 0; i < iSize; ++i)
-	{
-		VoteSelectionSubData kData;
-		pStream->Read((int*)&kData.eVote);
-		pStream->Read((int*)&kData.ePlayer);
-		pStream->Read(&kData.iCityId);
-		pStream->Read((int*)&kData.eOtherPlayer);
-		pStream->ReadString(kData.szText);
-		aVoteOptions.push_back(kData);
-	}
-}
-
-void VoteSelectionData::write(FDataStreamBase* pStream)
-{
-	pStream->Write(iId);
-	pStream->Write(eVoteSource);
-	pStream->Write(aVoteOptions.size());
-	for (std::vector<VoteSelectionSubData>::iterator it = aVoteOptions.begin(); it != aVoteOptions.end(); ++it)
-	{
-		pStream->Write((*it).eVote);
-		pStream->Write((*it).ePlayer);
-		pStream->Write((*it).iCityId);
-		pStream->Write((*it).eOtherPlayer);
-		pStream->WriteString((*it).szText);
-	}
-}
-
-int VoteTriggeredData::getID() const
-{
-	return iId;
-}
-
-void VoteTriggeredData::setID(int iID)
-{
-	iId = iID;
-}
-
-void VoteTriggeredData::read(FDataStreamBase* pStream)
-{
-	pStream->Read(&iId);
-	pStream->Read((int*)&eVoteSource);
-	pStream->Read((int*)&kVoteOption.eVote);
-	pStream->Read((int*)&kVoteOption.ePlayer);
-	pStream->Read(&kVoteOption.iCityId);
-	pStream->Read((int*)&kVoteOption.eOtherPlayer);
-	pStream->ReadString(kVoteOption.szText);
-}
-
-void VoteTriggeredData::write(FDataStreamBase* pStream)
-{
-	pStream->Write(iId);
-	pStream->Write(eVoteSource);
-	pStream->Write(kVoteOption.eVote);
-	pStream->Write(kVoteOption.ePlayer);
-	pStream->Write(kVoteOption.iCityId);
-	pStream->Write(kVoteOption.eOtherPlayer);
-	pStream->WriteString(kVoteOption.szText);
 }
 
 void PlotExtraYield::read(FDataStreamBase* pStream)
@@ -161,20 +112,6 @@ void PlotExtraYield::write(FDataStreamBase* pStream)
 	}
 }
 
-void PlotExtraCost::read(FDataStreamBase* pStream)
-{
-	pStream->Read(&m_iX);
-	pStream->Read(&m_iY);
-	pStream->Read(&m_iCost);
-}
-
-void PlotExtraCost::write(FDataStreamBase* pStream)
-{
-	pStream->Write(m_iX);
-	pStream->Write(m_iY);
-	pStream->Write(m_iCost);
-}
-
 void BuildingYieldChange::read(FDataStreamBase* pStream)
 {
 	pStream->Read((int*)&eBuildingClass);
@@ -186,20 +123,6 @@ void BuildingYieldChange::write(FDataStreamBase* pStream)
 {
 	pStream->Write(eBuildingClass);
 	pStream->Write(eYield);
-	pStream->Write(iChange);
-}
-
-void BuildingCommerceChange::read(FDataStreamBase* pStream)
-{
-	pStream->Read((int*)&eBuildingClass);
-	pStream->Read((int*)&eCommerce);
-	pStream->Read(&iChange);
-}
-
-void BuildingCommerceChange::write(FDataStreamBase* pStream)
-{
-	pStream->Write(eBuildingClass);
-	pStream->Write(eCommerce);
 	pStream->Write(iChange);
 }
 
@@ -348,7 +271,6 @@ CvBattleDefinition::CvBattleDefinition() :
 	for(int i=0;i<BATTLE_UNIT_COUNT;i++)
 	{
 		m_aUnits[i] = NULL;
-		m_aFirstStrikes[i] = 0;
 		for(int j=0;j<BATTLE_TIME_COUNT;j++)
 			m_aDamage[i][j] = 0;
 	}
@@ -370,7 +292,6 @@ CvBattleDefinition::CvBattleDefinition( const CvBattleDefinition & kCopy ) :
 	for(int i=0;i<BATTLE_UNIT_COUNT;i++)
 	{
 		m_aUnits[i] = kCopy.m_aUnits[i];
-		m_aFirstStrikes[i] = kCopy.m_aFirstStrikes[i];
 		for(int j=0;j<BATTLE_TIME_COUNT;j++)
 			m_aDamage[i][j] = kCopy.m_aDamage[i][j];
 	}
@@ -399,22 +320,24 @@ void CvBattleDefinition::addDamage(BattleUnitTypes unitType, BattleTimeTypes tim
 	m_aDamage[unitType][timeType] += increment;
 }
 
-int CvBattleDefinition::getFirstStrikes(BattleUnitTypes unitType) const
+bool CvBattleDefinition::isOneStrike() const
 {
-	checkBattleUnitType(unitType);
-	return m_aFirstStrikes[unitType];
-}
+	CvUnit* pAttacker = getUnit(BATTLE_UNIT_ATTACKER);
+	CvUnit* pDefender = getUnit(BATTLE_UNIT_DEFENDER);
+	if(pAttacker->isRanged() != pDefender->isRanged())
+	{
+		BattleUnitTypes eMeleeUnitType = pAttacker->isRanged() ? BATTLE_UNIT_DEFENDER : BATTLE_UNIT_ATTACKER;
+		BattleUnitTypes eRangedUnitType = pDefender->isRanged() ? BATTLE_UNIT_DEFENDER : BATTLE_UNIT_ATTACKER;
+		if(getDamage(eMeleeUnitType, BATTLE_TIME_END) >= GC.getMAX_HIT_POINTS())
+		{
+			if((getDamage(eRangedUnitType, BATTLE_TIME_END) == getDamage(eRangedUnitType, BATTLE_TIME_BEGIN)) || (getDamage(eRangedUnitType, BATTLE_TIME_END) < GC.getMAX_HIT_POINTS() / 2))
+			{
+				return true;
+			}
+		}
+	}
 
-void CvBattleDefinition::setFirstStrikes(BattleUnitTypes unitType, int firstStrikes)
-{
-	checkBattleUnitType(unitType);
-	m_aFirstStrikes[unitType] = firstStrikes;
-}
-
-void CvBattleDefinition::addFirstStrikes(BattleUnitTypes unitType, int increment)
-{
-	checkBattleUnitType(unitType);
-	m_aFirstStrikes[unitType] += increment;
+	return false;
 }
 
 bool CvBattleDefinition::isAdvanceSquare() const
@@ -497,57 +420,6 @@ void CvBattleDefinition::checkBattleTimeType(BattleTimeTypes timeType) const
 void CvBattleDefinition::checkBattleRound(int index) const
 {
 	FAssertMsg((index >= 0) && (index < (int)m_aBattleRounds.size()), "[Jason] Invalid battle round index.");
-}
-
-//------------------------------------------------------------------------------------------------
-// FUNCTION:    CvAirMissionDefinition::CvAirMissionDefinition
-//! \brief      Constructor
-//------------------------------------------------------------------------------------------------
-CvAirMissionDefinition::CvAirMissionDefinition() :
-	CvMissionDefinition()
-{
-	m_fMissionTime = 0.0f;
-	m_eMissionType = MISSION_AIRPATROL;
-}
-
-//------------------------------------------------------------------------------------------------
-// FUNCTION:    CvAirMissionDefinition::CvAirMissionDefinition
-//! \brief      Copy constructor
-//! \param      kCopy The object to copy
-//------------------------------------------------------------------------------------------------
-CvAirMissionDefinition::CvAirMissionDefinition( const CvAirMissionDefinition & kCopy )
-{
-	m_fMissionTime = kCopy.m_fMissionTime;
-	m_eMissionType = kCopy.m_eMissionType;
-	m_pPlot = kCopy.m_pPlot;
-
-	for(int i=0;i<BATTLE_UNIT_COUNT;i++)
-	{
-		m_aDamage[i] = kCopy.m_aDamage[i];
-		m_aUnits[i] = kCopy.m_aUnits[i];
-	}
-}
-
-int CvAirMissionDefinition::getDamage(BattleUnitTypes unitType) const
-{
-	checkBattleUnitType(unitType);
-	return m_aDamage[unitType];
-}
-
-void CvAirMissionDefinition::setDamage(BattleUnitTypes unitType, int damage)
-{
-	checkBattleUnitType(unitType);
-	m_aDamage[unitType] = damage;
-}
-
-bool CvAirMissionDefinition::isDead(BattleUnitTypes unitType) const
-{
-	checkBattleUnitType(unitType);
-	FAssertMsg(getUnit(unitType) != NULL, "[Jason] Invalid battle unit type.");
-	if(getDamage(unitType) >= getUnit(unitType)->maxHitPoints())
-		return true;
-	else
-		return false;
 }
 
 PBGameSetupData::PBGameSetupData()

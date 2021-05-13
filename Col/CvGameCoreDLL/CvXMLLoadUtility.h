@@ -103,8 +103,8 @@ public:
 
 	// overloaded function that sets the current xml node to it's next sibling and then
 	//	gets the next non-comment xml node's string value
-	bool GetNextXmlVal(std::string& pszVal, char* pszDefault = NULL);
-	bool GetNextXmlVal(std::wstring& pszVal, wchar* pszDefault = NULL);
+	bool GetNextXmlVal(std::string* pszVal, char* pszDefault = NULL);
+	bool GetNextXmlVal(std::wstring* pszVal, wchar* pszDefault = NULL);
 	// overloaded function that sets the current xml node to it's next sibling and then
 	//	gets the next non-comment xml node's string value
 	bool GetNextXmlVal(char* pszVal, char* pszDefault = NULL);
@@ -156,14 +156,8 @@ public:
 	// value of that name
 	DllExport bool GetChildXmlValByName(bool* pbVal, const TCHAR* szName, bool bDefault = false);
 
-	// loads the local yield from the xml file
-	int SetYields(int** ppiYield);
-
-	template <class T>
-	int SetCommerce(T** ppiCommerce);
-
 	// allocate and set the feature struct variables for the CvBuildInfo class
-	void SetFeatureStruct(int** ppiFeatureTech, int** ppiFeatureTime, int** ppiFeatureProduction, bool** ppbFeatureRemove);
+	void SetFeatureStruct(int** ppiFeatureTime, std::vector<std::vector<int> >& aaiFeatureYield, bool** ppbFeatureRemove);
 	// loads the improvement bonuses from the xml file
 	void SetImprovementBonuses(CvImprovementBonusInfo** ppImprovementBonus);
 
@@ -175,7 +169,7 @@ public:
 	static int FindInInfoClass(const TCHAR* pszVal, bool hideAssert = false);
 
 	template <class T>
-	void InitList(T **ppList, int iListLen, T val = 0);
+	void InitList(T **ppList, int iListLen, T val);
 
 	void InitStringList(CvString **ppszList, int iListLen, CvString szString);
 
@@ -185,51 +179,14 @@ public:
 	// allocate and initialize the civilization's default units
 	void InitUnitDefaults(int **ppiDefaults);
 	// allocate and initialize a 2 dimensional array of int pointers
-	void Init2DIntList(int*** pppiList, int iSizeX, int iSizeY);
-	// allocate and initialize a 2 dimensional array of float pointers
-	void Init2DFloatList(float*** pppfList, int iSizeX, int iSizeY);
-	// allocate and initialize a 2D array of DirectionTypes
-	void Init2DDirectionTypesList(DirectionTypes*** pppiList, int iSizeX, int iSizeY);
-	// allocate an array of int pointers
-	void InitPointerIntList(int*** pppiList, int iSizeX);
-	// allocate an array of float pointers
-	void InitPointerFloatList(float*** pppfList, int iSizeX);
+	void Init2DIntList(std::vector<int*>& aaiList, int iSizeX, int iSizeY);
 
 	// allocate and initialize a list from a tag pair in the xml
-	void SetVariableListTagPair(int **ppiList, const TCHAR* szRootTagName,
-		int iInfoBaseSize, int iInfoBaseLength, int iDefaultListVal = 0);
+	template <class T>
+	void SetVariableListTagPair(T** ppList, const TCHAR* szRootTagName, int iInfoBaseLength, T kDefaultListVal);
 
 	// allocate and initialize a list from a tag pair in the xml
-	void SetVariableListTagPair(bool **ppbList, const TCHAR* szRootTagName,
-		int iInfoBaseSize, int iInfoBaseLength, bool bDefaultListVal = false);
-
-	// allocate and initialize a list from a tag pair in the xml
-	void SetVariableListTagPair(float **ppfList, const TCHAR* szRootTagName,
-		int iInfoBaseSize, int iInfoBaseLength, float fDefaultListVal = 0.0f);
-
-	// allocate and initialize a list from a tag pair in the xml
-	void SetVariableListTagPair(CvString **ppszList, const TCHAR* szRootTagName,
-		int iInfoBaseSize, int iInfoBaseLength, CvString szDefaultListVal = "");
-
-	// allocate and initialize a list from a tag pair in the xml
-	void SetVariableListTagPair(int **ppiList, const TCHAR* szRootTagName,
-		CvString* m_paszTagList, int iTagListLength, int iDefaultListVal = 0);
-
-	// allocate and initialize a list from a tag pair in the xml for audio scripts
-	void SetVariableListTagPairForAudioScripts(int **ppiList, const TCHAR* szRootTagName,
-		CvString* m_paszTagList, int iTagListLength, int iDefaultListVal = -1);
-
-	// allocate and initialize a list from a tag pair in the xml
-	void SetVariableListTagPairForAudioScripts(int **ppiList, const TCHAR* szRootTagName,
-		int iInfoBaseLength, int iDefaultListVal = -1);
-
-	// allocate and initialize a list from a tag pair in the xml
-	void SetVariableListTagPair(bool **ppbList, const TCHAR* szRootTagName,
-		CvString* m_paszTagList, int iTagListLength, bool bDefaultListVal = false);
-
-	// allocate and initialize a list from a tag pair in the xml
-	void SetVariableListTagPair(CvString **ppszList, const TCHAR* szRootTagName,
-		CvString* m_paszTagList, int iTagListLength, CvString szDefaultListVal = "");
+	void SetVariableListTagPairForAudioScripts(int **ppiList, const TCHAR* szRootTagName, int iInfoBaseLength, int iDefaultListVal = -1);
 
 	// create a hot key from a description
 	CvWString CreateHotKeyFromDescription(const TCHAR* pszHotKey, bool bShift = false, bool bAlt = false, bool bCtrl = false);
@@ -280,9 +237,9 @@ private:
 	// bUseEnum is set to true if we are going to be sending in an enum value instead of getting
 	// a dynamic value for the list size
 	template <class T>
-	void SetGlobalClassInfo(std::vector<T*>& aInfos, const char* szTagName, bool bTwoPass);
+	void SetGlobalClassInfo(std::vector<T*>& aInfos, const char* szTagName);
 	template <class T>
-	void LoadGlobalClassInfo(std::vector<T*>& aInfos, const char* szFileRoot, const char* szFileDirectory, const char* szXmlPath, bool bTwoPass, CvCacheObject* (CvDLLUtilityIFaceBase::*pArgFunction) (const TCHAR*) = NULL);
+	void LoadGlobalClassInfo(std::vector<T*>& aInfos, const char* szFileRoot, const char* szFileDirectory, const char* szXmlPath, CvCacheObject* (CvDLLUtilityIFaceBase::*pArgFunction) (const TCHAR*));
 
 	void SetDiplomacyInfo(std::vector<CvDiplomacyInfo*>& DiploInfos, const char* szTagName);
 	void LoadDiplomacyInfo(std::vector<CvDiplomacyInfo*>& DiploInfos, const char* szFileRoot, const char* szFileDirectory, const char* szXmlPath, CvCacheObject* (CvDLLUtilityIFaceBase::*pArgFunction) (const TCHAR*));
@@ -315,51 +272,75 @@ private:
 template <class T>
 void CvXMLLoadUtility::InitList(T **ppList, int iListLen, T val)
 {
-	int i;	// loop counter
-
 	FAssertMsg((0 <= iListLen),"list size to allocate is less than 0");
 	*ppList = new T[iListLen];
 
-	for (i=0;i<iListLen;i++)
+	for (int i=0;i<iListLen;i++)
+	{
 		(*ppList)[i] = val;
+	}
 }
 
+//------------------------------------------------------------------------------------------------------
+//
+//  FUNCTION:   SetVariableListTagPair(T** ppList, const TCHAR* szRootTagName, int iInfoBaseLength, T& kDefaultListVal)
+//
+//  PURPOSE :   allocate and initialize a list from a tag pair in the xml
+//
+//------------------------------------------------------------------------------------------------------
 template <class T>
-int CvXMLLoadUtility::SetCommerce(T** ppbCommerce)
+void CvXMLLoadUtility::SetVariableListTagPair(T** ppList, const TCHAR* szRootTagName, int iInfoBaseLength, T kDefaultListVal)
 {
-	int i=0;			//loop counter
-	int iNumSibs=0;		// the number of siblings the current xml node has
-	T *pbCommerce;	// local pointer for the Commerce memory
-
-	// Skip any comments and stop at the next value we might want
-	if (SkipToNextVal())
+	if (iInfoBaseLength < 0)
 	{
-		// get the total number of children the current xml node has
-		iNumSibs = gDLL->getXMLIFace()->GetNumChildren(m_pFXml);
-		InitList(ppbCommerce, NUM_COMMERCE_TYPES);
-
-		pbCommerce = *ppbCommerce;
-		if (0 < iNumSibs)
-		{
-			// if the call to the function that sets the current xml node to it's first non-comment
-			// child and sets the parameter with the new node's value succeeds
-			if (GetChildXmlVal(&pbCommerce[0]))
-			{
-				FAssertMsg((iNumSibs <= NUM_COMMERCE_TYPES) , "For loop iterator is greater than array size");
-				// loop through all the siblings, we start at 1 since we already have the first value
-				for (i=1;i<iNumSibs;i++)
-				{
-					if (!GetNextXmlVal(&pbCommerce[i]))
-					{
-						break;
-					}
-				}
-				gDLL->getXMLIFace()->SetToParent(m_pFXml);
-			}
-		}
+		char szMessage[1024];
+		sprintf( szMessage, "Allocating zero or less memory in CvXMLLoadUtility::SetVariableListTagPair \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
+		gDLL->MessageBox(szMessage, "XML Error");
 	}
 
-	return iNumSibs;
+	InitList(ppList, iInfoBaseLength, kDefaultListVal);
+
+	if (gDLL->getXMLIFace()->SetToChildByTagName(m_pFXml,szRootTagName))
+	{
+		if (SkipToNextVal())
+		{
+			int iNumSibs = gDLL->getXMLIFace()->GetNumChildren(m_pFXml);
+			T* pList = *ppList;
+			if (iNumSibs > 0)
+			{
+				if (iNumSibs > iInfoBaseLength)
+				{
+					char	szMessage[1024];
+					sprintf( szMessage, "There are more siblings than memory allocated for them in CvXMLLoadUtility::SetVariableListTagPair \n Current XML file is: %s", GC.getCurrentXMLFile().GetCString());
+					gDLL->MessageBox(szMessage, "XML Error");
+				}
+				if (gDLL->getXMLIFace()->SetToChild(m_pFXml))
+				{
+					TCHAR szTextVal[256];
+
+					for (int i = 0; i < iNumSibs; i++)
+					{
+						if (GetChildXmlVal(szTextVal))
+						{
+							int iIndexVal = FindInInfoClass(szTextVal);
+							GetNextXmlVal(&pList[iIndexVal]);
+
+							gDLL->getXMLIFace()->SetToParent(m_pFXml);
+						}
+
+						if (!gDLL->getXMLIFace()->NextSibling(m_pFXml))
+						{
+							break;
+						}
+					}
+
+					gDLL->getXMLIFace()->SetToParent(m_pFXml);
+				}
+			}
+		}
+
+		gDLL->getXMLIFace()->SetToParent(m_pFXml);
+	}
 }
 
 #endif	// XML_LOAD_UTILITY_H

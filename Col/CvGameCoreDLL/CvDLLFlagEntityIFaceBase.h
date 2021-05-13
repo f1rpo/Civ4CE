@@ -36,7 +36,6 @@ class CvDLLFlagEntityIFaceBase : public CvDLLEntityIFaceBase
 		virtual CvPlot* getPlot( CvFlagEntity * pkFlag ) const = 0;
 		virtual void setPlot( CvFlagEntity * pkFlag, CvPlot * pkPlot, bool bOffset ) = 0;
 		virtual void updateUnitInfo( CvFlagEntity * pkFlag, const CvPlot * pkPlot, bool bOffset ) = 0;
-		virtual void updateGraphicEra(CvFlagEntity *pkFlag) = 0;
 		virtual void setVisible(CvFlagEntity* pEnt, bool bVis) { gDLL->getEntityIFace()->setVisible((CvEntity*)pEnt, bVis); }
 		virtual void destroy(CvFlagEntity*& pImp, bool bSafeDelete=true) = 0;
 };

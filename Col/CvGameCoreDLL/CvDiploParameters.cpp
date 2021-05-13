@@ -32,67 +32,37 @@ PlayerTypes CvDiploParameters::getWhoTalkingTo() const
 	return m_eWhoTalkingTo;
 }
 
-void addVar(std::vector<FVariable>& argsList, const wchar *arg)
+void CvDiploParameters::setDiploComment(DiploCommentTypes eCommentType)
 {
-	if (arg)
+	m_eCommentType = eCommentType;
+}
+
+void CvDiploParameters::addDiploCommentVariable(const wchar *szArg)
+{
+	if (szArg != NULL)
 	{
 		FVariable var;
 		var.m_eType = FVARTYPE_WSTRING;
-		var.m_wszValue = new wchar[wcslen(arg)+1];
-		wcscpy(var.m_wszValue, arg);
-		argsList.push_back(var);
+		var.m_wszValue = new wchar[wcslen(szArg)+1];
+		wcscpy(var.m_wszValue, szArg);
+		addDiploCommentVariable(var);
 	}
 }
 
-void addVar(std::vector<FVariable>& argsList, int arg)
+void CvDiploParameters::addDiploCommentVariable(int iArg)
 {
-	if (arg != MAX_INT)
+	if (iArg != MAX_INT)
 	{
 		FVariable var;
 		var.m_eType = FVARTYPE_INT;
-		var.m_iValue = arg;
-		argsList.push_back(var);
+		var.m_iValue = iArg;
+		addDiploCommentVariable(var);
 	}
 }
 
-#define SET_DIPLO_COMMENT_ARGS \
-{ \
-	std::vector<FVariable> argsList; \
-	addVar(argsList, arg1); \
-	addVar(argsList, arg2); \
-	addVar(argsList, arg3); \
-	setDiploComment(eCommentType, argsList.size() ? &argsList : NULL); \
-}
-
-void CvDiploParameters::setDiploComment(DiploCommentTypes eCommentType, CvWString  arg1, CvWString  arg2, CvWString  arg3)
-SET_DIPLO_COMMENT_ARGS
-
-void CvDiploParameters::setDiploComment(DiploCommentTypes eCommentType, CvWString  arg1, CvWString  arg2, int arg3)
-SET_DIPLO_COMMENT_ARGS
-
-void CvDiploParameters::setDiploComment(DiploCommentTypes eCommentType, CvWString  arg1, int arg2, CvWString  arg3)
-SET_DIPLO_COMMENT_ARGS
-
-void CvDiploParameters::setDiploComment(DiploCommentTypes eCommentType, CvWString  arg1, int arg2, int arg3)
-SET_DIPLO_COMMENT_ARGS
-
-void CvDiploParameters::setDiploComment(DiploCommentTypes eCommentType, int arg1, CvWString  arg2, CvWString  arg3)
-SET_DIPLO_COMMENT_ARGS
-
-void CvDiploParameters::setDiploComment(DiploCommentTypes eCommentType, int arg1, CvWString  arg2, int arg3)
-SET_DIPLO_COMMENT_ARGS
-
-void CvDiploParameters::setDiploComment(DiploCommentTypes eCommentType, int arg1, int arg2, CvWString  arg3)
-SET_DIPLO_COMMENT_ARGS
-
-void CvDiploParameters::setDiploComment(DiploCommentTypes eCommentType, int arg1, int arg2, int arg3)
-SET_DIPLO_COMMENT_ARGS
-
-void CvDiploParameters::setDiploComment(DiploCommentTypes eCommentType, const std::vector<FVariable>* args)
+void CvDiploParameters::addDiploCommentVariable(const FVariable& var)
 {
-	m_eCommentType = eCommentType;
-	if (args)
-		m_diploCommentArgs = *args;
+	m_diploCommentArgs.push_back(var);
 }
 
 DiploCommentTypes CvDiploParameters::getDiploComment() const
@@ -216,6 +186,25 @@ const wchar* CvDiploParameters::getChatText() const
 	return m_szChatText;
 }
 
+const IDInfo& CvDiploParameters::getTransport() const
+{
+	return m_kTransport;
+}
+
+void CvDiploParameters::setTransport(const IDInfo& kTransport)
+{
+	m_kTransport = kTransport;
+}
+
+const IDInfo& CvDiploParameters::getCity() const
+{
+	return m_kCity;
+}
+
+void CvDiploParameters::setCity(const IDInfo& kCity)
+{
+	m_kCity = kCity;
+}
 
 void CvDiploParameters::read(FDataStreamBase& stream)
 {
@@ -243,6 +232,9 @@ void CvDiploParameters::read(FDataStreamBase& stream)
 	m_diploCommentArgs.resize(iSize);
 	for(i=0;i<iSize;i++)
 		m_diploCommentArgs[i].Read(&stream);
+
+	m_kTransport.read(&stream);
+	m_kCity.read(&stream);
 }
 
 void CvDiploParameters::write(FDataStreamBase& stream) const
@@ -267,4 +259,7 @@ void CvDiploParameters::write(FDataStreamBase& stream) const
 	stream.Write(iSize);
 	for(i=0;i<iSize;i++)
 		m_diploCommentArgs[i].Write(&stream);
+
+	m_kTransport.write(&stream);
+	m_kCity.write(&stream);
 }

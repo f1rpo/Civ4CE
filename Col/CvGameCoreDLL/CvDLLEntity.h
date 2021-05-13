@@ -45,6 +45,7 @@ public:
 	void destroyEntity();
 
 	bool IsSelected() const;
+	void SetSelected(bool bSelected);
 	void PlayAnimation(AnimationTypes eAnim, float fSpeed = 1.0f, bool bQueue = false, int iLayer = 0,
 		float fStartPct = 0.0f, float fEndPct = 1.0f);
 	void StopAnimation(AnimationTypes eAnim);
@@ -53,8 +54,6 @@ public:
 	void ExecuteMove( float fTimeToExecute, bool bCombat );
 	void SetPosition( const CvPlot * pkPlot );
 	void NotifyEntity( MissionTypes eMission );
-	void SetSiegeTower(bool show);
-	bool GetSiegeTower();
 
 protected:
 	CvEntity* m_pEntity;

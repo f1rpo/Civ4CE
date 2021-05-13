@@ -32,6 +32,7 @@ void CyArtFileMgrPythonInterface();
 void CyGameTextMgrInterface();
 void CyHallOfFameInterface();
 void CyGameCoreUtilsPythonInterface();
+void CyTradeRoutePythonInterface();
 
 //
 //
@@ -54,6 +55,7 @@ DllExport void DLLPublishToPython()
 	CyInfoPythonInterface3();
 	CyHallOfFameInterface();
 	CyGameCoreUtilsPythonInterface();
+	CyTradeRoutePythonInterface();
 
 	//
 	// large interfaces which can be split across files if need be

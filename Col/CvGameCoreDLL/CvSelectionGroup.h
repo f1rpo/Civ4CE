@@ -34,7 +34,6 @@ public:
 	bool doDelayedDeath();
 
 	void playActionSound();
-
 	DllExport void pushMission(MissionTypes eMission, int iData1 = -1, int iData2 = -1, int iFlags = 0, bool bAppend = false, bool bManual = false, MissionAITypes eMissionAI = NO_MISSIONAI, CvPlot* pMissionAIPlot = NULL, CvUnit* pMissionAIUnit = NULL);
 	void popMission();
 	DllExport void autoMission();
@@ -44,14 +43,12 @@ public:
 	DllExport bool canStartMission(int iMission, int iData1, int iData2, CvPlot* pPlot = NULL, bool bTestVisible = false, bool bUseCache = false);
 	void startMission();
 	void continueMission(int iSteps = 0);
-
 	DllExport bool canDoInterfaceMode(InterfaceModeTypes eInterfaceMode);
 	DllExport bool canDoInterfaceModeAt(InterfaceModeTypes eInterfaceMode, CvPlot* pPlot);
 
 	DllExport bool canDoCommand(CommandTypes eCommand, int iData1, int iData2, bool bTestVisible = false, bool bUseCache = false);
 	bool canEverDoCommand(CommandTypes eCommand, int iData1, int iData2, bool bTestVisible, bool bUseCache);
 	void setupActionCache();
-
 	bool isHuman();
 	DllExport bool isBusy();
 	bool isCargoBusy();
@@ -64,8 +61,8 @@ public:
 	DllExport bool canAllMove();
 	bool canAnyMove();
 	bool hasMoved();
-	bool canEnterTerritory(TeamTypes eTeam, bool bIgnoreRightOfPassage = false) const;
-	bool canEnterArea(TeamTypes eTeam, const CvArea* pArea, bool bIgnoreRightOfPassage = false) const;
+	bool canEnterTerritory(PlayerTypes ePlayer, bool bIgnoreRightOfPassage = false) const;
+	bool canEnterArea(PlayerTypes ePlayer, const CvArea* pArea, bool bIgnoreRightOfPassage = false) const;
 	DllExport bool canMoveInto(CvPlot* pPlot, bool bAttack = false);
 	DllExport bool canMoveOrAttackInto(CvPlot* pPlot, bool bDeclareWar = false);
 	bool canMoveThrough(CvPlot* pPlot);
@@ -73,16 +70,15 @@ public:
 	bool canDefend();
 	bool canBombard(const CvPlot* pPlot);
 	bool visibilityRange();
+	bool isPromotionReady() const;
+	bool canChangeProfession() const;
 
 	void unloadAll();
 	bool alwaysInvisible() const;
 	bool isInvisible(TeamTypes eTeam) const;
 	int countNumUnitAIType(UnitAITypes eUnitAI);
-	bool hasWorker();
 	bool IsSelected();
 	DllExport void NotifyEntity(MissionTypes eMission);
-	void airCircle(bool bStart);
-	void setBlockading(bool bStart);
 
 	int getX() const;
 	int getY() const;
@@ -92,7 +88,6 @@ public:
 	int getArea() const;
 	CvArea* area() const;
 	DomainTypes getDomainType() const;
-
 	RouteTypes getBestBuildRoute(CvPlot* pPlot, BuildTypes* peBestBuild = NULL) const;
 
 	bool groupDeclareWar(CvPlot* pPlot, bool bForce = false);
@@ -102,14 +97,12 @@ public:
 	bool groupRoadTo(int iX, int iY, int iFlags);
 	bool groupBuild(BuildTypes eBuild);
 	void setTransportUnit(CvUnit* pTransportUnit);
-
 	bool isAmphibPlot(const CvPlot* pPlot) const;
 	bool groupAmphibMove(CvPlot* pPlot, int iFlags);
-
 	DllExport bool readyToSelect(bool bAny = false);
 	bool readyToMove(bool bAny = false);
 	bool readyToAuto();
-
+	bool isOnMap() const;
 	int getID() const;
 	void setID(int iID);
 
@@ -120,7 +113,6 @@ public:
 
 	bool isForceUpdate();
 	void setForceUpdate(bool bNewValue);
-
 	DllExport PlayerTypes getOwner() const;
 #ifdef _USRDLL
 	inline PlayerTypes getOwnerINLINE() const
@@ -140,7 +132,9 @@ public:
 	FAStarNode* getPathLastNode() const;
 	CvPlot* getPathFirstPlot() const;
 	CvPlot* getPathEndTurnPlot() const;
-	bool generatePath( const CvPlot* pFromPlot, const CvPlot* pToPlot, int iFlags = 0, bool bReuse = false, int* piPathTurns = NULL) const;
+	CvPlot* getPathSecondLastPlot() const;
+	int getPathCost() const;
+	bool generatePath(const CvPlot* pFromPlot, const CvPlot* pToPlot, int iFlags = 0, bool bReuse = false, int* piPathTurns = NULL) const;
 	void resetPath();
 
 	DllExport void clearUnits();
@@ -159,7 +153,6 @@ public:
 	UnitAITypes getHeadUnitAI() const;
 	PlayerTypes getHeadOwner() const;
 	TeamTypes getHeadTeam() const;
-
 	void clearMissionQueue();
 	DllExport int getLengthMissionQueue() const;
 	MissionData* getMissionFromQueue(int iIndex) const;
@@ -172,6 +165,13 @@ public:
 	int getMissionType(int iNode) const;
 	int getMissionData1(int iNode) const;
 	int getMissionData2(int iNode) const;
+
+	bool canAssignTradeRoute(int iRouteID) const;
+	void assignTradeRoute(int iRouteID, bool bAssign);
+	bool isAssignedTradeRoute(int iRouteId) const;
+	void clearTradeRoutes();
+
+	void speakWithChief();
 
 	// for serialization
 	virtual void read(FDataStreamBase* pStream);
@@ -202,6 +202,10 @@ public:
 	virtual void AI_seperateNonAI(UnitAITypes eUnitAI) = 0;
 	virtual void AI_seperateAI(UnitAITypes eUnitAI) = 0;
 	virtual bool AI_isFull() = 0;
+	virtual bool AI_launchAssault(CvPlot* pTargetCityPlot) = 0;
+	virtual void AI_groupBombard() = 0;
+
+	virtual bool AI_tradeRoutes() = 0;
 
 protected:
 	// WARNING: adding to this class will cause the civ4 exe to crash
@@ -216,6 +220,7 @@ protected:
 	AutomateTypes m_eAutomateType;
 
 	CLinkList<IDInfo> m_units;
+	std::set<int> m_aTradeRoutes;
 
 	CLinkList<MissionData> m_missionQueue;
 	std::vector<CvUnit *> m_aDifferentUnitCache;

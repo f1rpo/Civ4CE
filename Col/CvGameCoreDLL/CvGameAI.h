@@ -21,12 +21,11 @@ public:
 
 	void AI_makeAssignWorkDirty();
 	void AI_updateAssignWork();
-
-	bool AI_isFirstTech(TechTypes eTech);
-
 	int AI_combatValue(UnitTypes eUnit);
 
 	int AI_turnsPercent(int iTurns, int iPercent);
+	int AI_adjustedTurn(int iTurn);
+	int AI_gameCompletePercent();
 
 	virtual void read(FDataStreamBase* pStream);
 	virtual void write(FDataStreamBase* pStream);

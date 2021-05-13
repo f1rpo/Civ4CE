@@ -13,6 +13,7 @@
 #define MOVE_DECLARE_WAR											(0x00000008)
 #define MOVE_DIRECT_ATTACK										(0x00000010)
 #define MOVE_THROUGH_ENEMY										(0x00000020)
+#define MOVE_BUST_FOG											(0x00000040)
 
 #define RANDPLOT_LAND													(0x00000001)
 #define RANDPLOT_UNOWNED											(0x00000002)
@@ -23,16 +24,12 @@
 #define RANDPLOT_NOT_CITY											(0x00000040)
 
 #ifdef _USRDLL
-#define MAX_CIV_PLAYERS												(18)
+#define MAX_PLAYERS												(32)
 #else
-#define MAX_CIV_PLAYERS												(CvGlobals::getInstance().getMaxCivPlayers())
+#define MAX_PLAYERS												(CvGlobals::getInstance().getMaxCivPlayers())
 #endif
 
-#define MAX_CIV_TEAMS													(MAX_CIV_PLAYERS)
-#define MAX_PLAYERS														(MAX_CIV_PLAYERS + 1)
-#define MAX_TEAMS															(MAX_PLAYERS)
-#define BARBARIAN_PLAYER											((PlayerTypes)MAX_CIV_PLAYERS)
-#define BARBARIAN_TEAM												((TeamTypes)MAX_CIV_TEAMS)
+#define MAX_TEAMS													(MAX_PLAYERS)
 
 // Char Count limit for edit boxes
 #define PREFERRED_EDIT_CHAR_COUNT							(15)
@@ -49,9 +46,9 @@
 #define INVALID_PLOT_COORD										(-(MAX_INT))	// don't use -1 since that is a valid wrap coordinate
 #define DIRECTION_RADIUS											(1)
 #define DIRECTION_DIAMETER										((DIRECTION_RADIUS * 2) + 1)
-#define NUM_CITY_PLOTS												(21)
+#define NUM_CITY_PLOTS												(9)
 #define CITY_HOME_PLOT												(0)
-#define CITY_PLOTS_RADIUS											(2)
+#define CITY_PLOTS_RADIUS											(1)
 #define CITY_PLOTS_DIAMETER										((CITY_PLOTS_RADIUS*2) + 1)
 
 #define GAME_NAME															("Game")
@@ -61,8 +58,8 @@
 #define Z_ORDER_LAYER													(-0.1f)
 #define Z_ORDER_LEVEL													(-0.3f)
 
-#define CIV4_GUID															"civ4bts"
-#define CIV4_PRODUCT_ID												11081
+#define CIV4_GUID															"civ4colpc"
+#define CIV4_PRODUCT_ID												11476
 #define CIV4_NAMESPACE_ID											17
 #define CIV4_NAMESPACE_EXT										"-tk"
 
@@ -78,17 +75,15 @@
 
 // Version Verification files and folders
 #ifdef _DEBUG
-#define CIV4_EXE_FILE													".\\Civ4BeyondSword_DEBUG.exe"
+#define CIV4_EXE_FILE													".\\Colonization_DEBUG.exe"
 #define CIV4_DLL_FILE													".\\Assets\\CvGameCoreDLL_DEBUG.dll"
 #else
-#define CIV4_EXE_FILE													".\\Civ4BeyondSword.exe"
+#define CIV4_EXE_FILE													".\\Colonization.exe"
 #define CIV4_DLL_FILE													".\\Assets\\CvGameCoreDLL.dll"
 #endif
 #define CIV4_SHADERS													".\\Shaders\\FXO"
 #define CIV4_ASSETS_PYTHON										".\\Assets\\Python"
 #define CIV4_ASSETS_XML												".\\Assets\\XML"
-
-#define TUTORIAL_MOD_NAME											"Mods\\Tutorial\\"
 
 #define MAX_PLAYER_NAME_LEN										(64)
 #define MAX_VOTE_CHOICES											(8)
@@ -101,11 +96,9 @@
 #define PYScreensModule				"CvScreensInterface"
 #define PYCivModule						"CvAppInterface"
 #define PYWorldBuilderModule	"CvWBInterface"
-#define PYPopupModule					"CvPopupInterface"
 #define PYDiplomacyModule			"CvDiplomacyInterface"
 #define PYUnitControlModule		"CvUnitControlInterface"
 #define PYTextMgrModule				"CvTextMgrInterface"
-#define PYPerfTestModule			"CvPerfTest"
 #define PYDebugScriptsModule	"DebugScripts"
 #define PYPitBossModule				"PbMain"
 #define PYTranslatorModule		"CvTranslator"

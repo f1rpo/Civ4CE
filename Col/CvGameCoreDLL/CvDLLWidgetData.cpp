@@ -45,7 +45,10 @@ void CvDLLWidgetData::parseHelp(CvWStringBuffer &szBuffer, CvWidgetDataStruct &w
 		break;
 
 	case WIDGET_PLOT_LIST_SHIFT:
-		szBuffer.assign(gDLL->getText("TXT_KEY_MISC_CTRL_SHIFT", (GC.getDefineINT("MAX_PLOT_LIST_SIZE") - 1)));
+		if (widgetDataStruct.m_iData1 != 0)
+		{
+			szBuffer.assign(gDLL->getText("TXT_KEY_MISC_CTRL_SHIFT", (GC.getDefineINT("MAX_PLOT_LIST_SIZE") - 1)));
+		}
 		break;
 
 	case WIDGET_CITY_SCROLL:
@@ -79,23 +82,20 @@ void CvDLLWidgetData::parseHelp(CvWStringBuffer &szBuffer, CvWidgetDataStruct &w
 		parseConstructHelp(widgetDataStruct, szBuffer);
 		break;
 
-	case WIDGET_CREATE:
-		parseCreateHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_MAINTAIN:
-		parseMaintainHelp(widgetDataStruct, szBuffer);
+	case WIDGET_CONVINCE:
+		parseConvinceHelp(widgetDataStruct, szBuffer);
 		break;
 
 	case WIDGET_HURRY:
 		parseHurryHelp(widgetDataStruct, szBuffer);
 		break;
 
+	case WIDGET_PLAYER_HURRY:
+		parsePlayerHurryHelp(widgetDataStruct, szBuffer);
+		break;
+
 	case WIDGET_MENU_ICON:
 		szBuffer.append(gDLL->getText("TXT_KEY_MAIN_MENU"));
-
-	case WIDGET_CONSCRIPT:
-		parseConscriptHelp(widgetDataStruct, szBuffer);
 		break;
 
 	case WIDGET_ACTION:
@@ -106,42 +106,6 @@ void CvDLLWidgetData::parseHelp(CvWStringBuffer &szBuffer, CvWidgetDataStruct &w
 		parseCitizenHelp(widgetDataStruct, szBuffer);
 		break;
 
-	case WIDGET_FREE_CITIZEN:
-		parseFreeCitizenHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_DISABLED_CITIZEN:
-		parseDisabledCitizenHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_ANGRY_CITIZEN:
-		parseAngryCitizenHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_CHANGE_SPECIALIST:
-		parseChangeSpecialistHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_RESEARCH:
-		parseResearchHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_TECH_TREE:
-		parseTechTreeHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_CHANGE_PERCENT:
-		parseChangePercentHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_CITY_TAB:
-		{
-			CvWString szTemp;
-            szTemp.Format(L"%s", GC.getCityTabInfo((CityTabTypes)widgetDataStruct.m_iData1).getDescription());
-			szBuffer.assign(szTemp);
-		}
-		break;
-
 	case WIDGET_CONTACT_CIV:
 		parseContactCivHelp(widgetDataStruct, szBuffer);
 		break;
@@ -150,16 +114,53 @@ void CvDLLWidgetData::parseHelp(CvWStringBuffer &szBuffer, CvWidgetDataStruct &w
 		parseScoreHelp(widgetDataStruct, szBuffer);
 		break;
 
+	case WIDGET_CREATE_TRADE_ROUTE:
+		szBuffer.append(gDLL->getText("TXT_KEY_CREATE_TRADE_ROUTE"));
+		break;
+
+	case WIDGET_EDIT_TRADE_ROUTE:
+		szBuffer.append(gDLL->getText("TXT_KEY_EDIT_TRADE_ROUTE"));
+		break;
+
+	case WIDGET_YIELD_IMPORT_EXPORT:
+		parseImportExportHelp(widgetDataStruct, szBuffer);
+		break;
+
+	case WIDGET_EJECT_CITIZEN:
+		parseEjectCitizenHelp(widgetDataStruct, szBuffer);
+		break;
+
+	case WIDGET_SHIP_CARGO:
+		parseShipCargoUnitHelp(widgetDataStruct, szBuffer);
+		break;
+
+	case WIDGET_DOCK:
+		parseEuropeUnitHelp(widgetDataStruct, szBuffer);
+		break;
+
+	case WIDGET_SAIL:
+		szBuffer.append(gDLL->getText("TXT_KEY_SAIL"));
+		break;
+
+	case WIDGET_GOTO_CITY:
+		{
+			CvCity* pCity = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCity(widgetDataStruct.m_iData1);
+			if (pCity != NULL)
+			{
+				szBuffer.append(gDLL->getText("TXT_KEY_GO_TO_CITY", pCity->getNameKey()));
+			}
+		}
+		break;
+
+	case WIDGET_ASSIGN_CITIZEN_TO_PLOT:
+		break;
+
 	case WIDGET_ZOOM_CITY:
 		szBuffer.append(gDLL->getText("TXT_KEY_ZOOM_CITY_HELP"));
 		break;
 
 	case WIDGET_END_TURN:
 		szBuffer.append(gDLL->getText("TXT_KEY_WIDGET_END_TURN"));
-		break;
-
-	case WIDGET_LAUNCH_VICTORY:
-		szBuffer.append(gDLL->getText("TXT_KEY_WIDGET_LAUNCH_VICTORY"));
 		break;
 
 	case WIDGET_AUTOMATE_CITIZENS:
@@ -182,55 +183,16 @@ void CvDLLWidgetData::parseHelp(CvWStringBuffer &szBuffer, CvWidgetDataStruct &w
 		parseUnitModelHelp(widgetDataStruct, szBuffer);
 		break;
 
-	case WIDGET_FLAG:
-		parseFlagHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_MAINTENANCE:
-		parseMaintenanceHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_RELIGION:
-		parseReligionHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_RELIGION_CITY:
-		parseReligionHelpCity(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_CORPORATION_CITY:
-		parseCorporationHelpCity(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_NATIONALITY:
-		parseNationalityHelp(widgetDataStruct, szBuffer);
-		break;
-
 	case WIDGET_HELP_DEFENSE:
-		break;
-
-	case WIDGET_HELP_HEALTH:
-		parseHealthHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_HAPPINESS:
-		parseHappinessHelp(widgetDataStruct, szBuffer);
+		parseCityDefenseHelp(widgetDataStruct, szBuffer);
 		break;
 
 	case WIDGET_HELP_POPULATION:
 		parsePopulationHelp(widgetDataStruct, szBuffer);
 		break;
 
-	case WIDGET_HELP_PRODUCTION:
-		parseProductionHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_CULTURE:
-		parseCultureHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_GREAT_PEOPLE:
-		parseGreatPeopleHelp(widgetDataStruct, szBuffer);
+	case WIDGET_HELP_REBEL:
+		parseRebelHelp(widgetDataStruct, szBuffer);
 		break;
 
 	case WIDGET_HELP_GREAT_GENERAL:
@@ -241,224 +203,12 @@ void CvDLLWidgetData::parseHelp(CvWStringBuffer &szBuffer, CvWidgetDataStruct &w
 		parseSelectedHelp(widgetDataStruct, szBuffer);
 		break;
 
-	case WIDGET_HELP_BUILDING:
-		parseBuildingHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_TRADE_ROUTE_CITY:
-		parseTradeRouteCityHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_ESPIONAGE_COST:
-		parseEspionageCostHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_TECH_ENTRY:
-		parseTechEntryHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_TECH_PREPREQ:
-		parseTechPrereqHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_OBSOLETE:
-		parseObsoleteHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_OBSOLETE_BONUS:
-		parseObsoleteBonusString(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_OBSOLETE_SPECIAL:
-		parseObsoleteSpecialHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_MOVE_BONUS:
-		parseMoveHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_FREE_UNIT:
-		parseFreeUnitHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_FEATURE_PRODUCTION:
-		parseFeatureProductionHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_WORKER_RATE:
-		parseWorkerRateHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_TRADE_ROUTES:
-		parseTradeRouteHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_HEALTH_RATE:
-		parseHealthRateHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_HAPPINESS_RATE:
-		parseHappinessRateHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_FREE_TECH:
-		parseFreeTechHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_LOS_BONUS:
-		parseLOSHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_MAP_CENTER:
-		parseMapCenterHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_MAP_REVEAL:
-		parseMapRevealHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_MAP_TRADE:
-		parseMapTradeHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_TECH_TRADE:
-		parseTechTradeHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_GOLD_TRADE:
-		parseGoldTradeHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_OPEN_BORDERS:
-		parseOpenBordersHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_DEFENSIVE_PACT:
-		parseDefensivePactHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_PERMANENT_ALLIANCE:
-		parsePermanentAllianceHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_VASSAL_STATE:
-		parseVassalStateHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_BUILD_BRIDGE:
-		parseBuildBridgeHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_IRRIGATION:
-		parseIrrigationHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_IGNORE_IRRIGATION:
-		parseIgnoreIrrigationHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_WATER_WORK:
-		parseWaterWorkHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_IMPROVEMENT:
-		parseBuildHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_DOMAIN_EXTRA_MOVES:
-		parseDomainExtraMovesHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_ADJUST:
-		parseAdjustHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_TERRAIN_TRADE:
-		parseTerrainTradeHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_SPECIAL_BUILDING:
-		parseSpecialBuildingHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_YIELD_CHANGE:
-		parseYieldChangeHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_BONUS_REVEAL:
-		parseBonusRevealHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_CIVIC_REVEAL:
-		parseCivicRevealHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_PROCESS_INFO:
-		parseProcessInfoHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_FOUND_RELIGION:
-		parseFoundReligionHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_FOUND_CORPORATION:
-		parseFoundCorporationHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_FINANCE_NUM_UNITS:
-		parseFinanceNumUnits(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_FINANCE_UNIT_COST:
-		parseFinanceUnitCost(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_FINANCE_AWAY_SUPPLY:
-		parseFinanceAwaySupply(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_FINANCE_CITY_MAINT:
-		parseFinanceCityMaint(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_FINANCE_CIVIC_UPKEEP:
-		parseFinanceCivicUpkeep(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_FINANCE_FOREIGN_INCOME:
-		parseFinanceForeignIncome(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_FINANCE_INFLATED_COSTS:
-		parseFinanceInflatedCosts(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_FINANCE_GROSS_INCOME:
-		parseFinanceGrossIncome(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_FINANCE_NET_GOLD:
-		parseFinanceNetGold(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_HELP_FINANCE_GOLD_RESERVE:
-		parseFinanceGoldReserve(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_PEDIA_JUMP_TO_TECH:
-		parseTechEntryHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_PEDIA_JUMP_TO_REQUIRED_TECH:
-		parseTechTreePrereq(widgetDataStruct, szBuffer, false);
-		break;
-
-	case WIDGET_PEDIA_JUMP_TO_DERIVED_TECH:
-		parseTechTreePrereq(widgetDataStruct, szBuffer, true);
-		break;
-
 	case WIDGET_PEDIA_JUMP_TO_UNIT:
 		parseUnitHelp(widgetDataStruct, szBuffer);
+		break;
+
+	case WIDGET_PEDIA_JUMP_TO_PROFESSION:
+		parseProfessionHelp(widgetDataStruct, szBuffer);
 		break;
 
 	case WIDGET_PEDIA_JUMP_TO_BUILDING:
@@ -485,12 +235,16 @@ void CvDLLWidgetData::parseHelp(CvWStringBuffer &szBuffer, CvWidgetDataStruct &w
 		parsePromotionHelp(widgetDataStruct, szBuffer);
 		break;
 
-	case WIDGET_CHOOSE_EVENT:
-		parseEventHelp(widgetDataStruct, szBuffer);
+	case WIDGET_HELP_UNIT_PROMOTION:
+		parseUnitPromotionHelp(widgetDataStruct, szBuffer);
 		break;
 
-	case WIDGET_PEDIA_JUMP_TO_UNIT_COMBAT:
-		parseUnitCombatHelp(widgetDataStruct, szBuffer);
+	case WIDGET_HELP_YIELD:
+		parseCityYieldHelp(widgetDataStruct, szBuffer);
+		break;
+
+	case WIDGET_CHOOSE_EVENT:
+		parseEventHelp(widgetDataStruct, szBuffer);
 		break;
 
 	case WIDGET_PEDIA_JUMP_TO_IMPROVEMENT:
@@ -509,33 +263,20 @@ void CvDLLWidgetData::parseHelp(CvWStringBuffer &szBuffer, CvWidgetDataStruct &w
 		parseLeaderHelp(widgetDataStruct, szBuffer);
 		break;
 
-	case WIDGET_PEDIA_JUMP_TO_SPECIALIST:
-		if (widgetDataStruct.m_iData1 != NO_SPECIALIST && widgetDataStruct.m_iData2 != 0)
-		{
-			CvWString szTemp;
-			szTemp.Format(L"%s", GC.getSpecialistInfo((SpecialistTypes)widgetDataStruct.m_iData1).getDescription());
-			szBuffer.assign(szTemp);
-		}
-		break;
-
-	case WIDGET_PEDIA_JUMP_TO_PROJECT:
-		parseProjectHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_PEDIA_JUMP_TO_RELIGION:
-		parseReligionHelp(widgetDataStruct, szBuffer);
-		break;
-
-	case WIDGET_PEDIA_JUMP_TO_CORPORATION:
-		parseCorporationHelp(widgetDataStruct, szBuffer);
-		break;
-
 	case WIDGET_PEDIA_JUMP_TO_TERRAIN:
 		parseTerrainHelp(widgetDataStruct, szBuffer);
 		break;
 
+	case WIDGET_PEDIA_JUMP_TO_YIELDS:
+		parseYieldHelp(widgetDataStruct, szBuffer);
+		break;
+
 	case WIDGET_PEDIA_JUMP_TO_FEATURE:
 		parseFeatureHelp(widgetDataStruct, szBuffer);
+		break;
+
+	case WIDGET_PEDIA_JUMP_TO_FATHER:
+		parseFatherHelp(widgetDataStruct, szBuffer);
 		break;
 
 	case WIDGET_PEDIA_DESCRIPTION:
@@ -569,8 +310,20 @@ void CvDLLWidgetData::parseHelp(CvWStringBuffer &szBuffer, CvWidgetDataStruct &w
 		parseLeaderLineHelp(widgetDataStruct, szBuffer);
 		break;
 
-	case WIDGET_COMMERCE_MOD_HELP:
-		parseCommerceModHelp(widgetDataStruct, szBuffer);
+	case WIDGET_CITY_UNIT_ASSIGN_PROFESSION:
+		parseSpecialBuildingHelp(widgetDataStruct, szBuffer);
+		break;
+
+	case WIDGET_MOVE_CARGO_TO_TRANSPORT:
+		parseCityYieldHelp(widgetDataStruct, szBuffer);
+		break;
+
+	case WIDGET_ASSIGN_TRADE_ROUTE:
+		parseAssignTradeRoute(widgetDataStruct, szBuffer);
+		break;
+
+	case WIDGET_RECEIVE_MOVE_CARGO_TO_TRANSPORT:
+		parseReceiveMoveCargoToTransportHelp(widgetDataStruct, szBuffer);
 		break;
 
 	}
@@ -589,7 +342,14 @@ bool CvDLLWidgetData::executeAction( CvWidgetDataStruct &widgetDataStruct )
 		break;
 
 	case WIDGET_PLOT_LIST_SHIFT:
-		gDLL->getInterfaceIFace()->changePlotListColumn(widgetDataStruct.m_iData1 * ((gDLL->ctrlKey()) ? (GC.getDefineINT("MAX_PLOT_LIST_SIZE") - 1) : 1));
+		if (widgetDataStruct.m_iData1 == 0)
+		{
+			gDLL->getInterfaceIFace()->toggleMultiRowPlotList();
+		}
+		else
+		{
+			gDLL->getInterfaceIFace()->changePlotListColumn(widgetDataStruct.m_iData1 * ((gDLL->ctrlKey()) ? (GC.getDefineINT("MAX_PLOT_LIST_SIZE") - 1) : 1));
+		}
 		break;
 
 	case WIDGET_CITY_SCROLL:
@@ -631,23 +391,20 @@ bool CvDLLWidgetData::executeAction( CvWidgetDataStruct &widgetDataStruct )
 		doConstruct(widgetDataStruct);
 		break;
 
-	case WIDGET_CREATE:
-		doCreate(widgetDataStruct);
-		break;
-
-	case WIDGET_MAINTAIN:
-		doMaintain(widgetDataStruct);
+	case WIDGET_CONVINCE:
+		doConvince(widgetDataStruct);
 		break;
 
 	case WIDGET_HURRY:
 		doHurry(widgetDataStruct);
 		break;
 
+	case WIDGET_PLAYER_HURRY:
+		doPlayerHurry(widgetDataStruct);
+		break;
+
 	case WIDGET_MENU_ICON:
 		doMenu();
-
-	case WIDGET_CONSCRIPT:
-		doConscript();
 		break;
 
 	case WIDGET_ACTION:
@@ -655,32 +412,10 @@ bool CvDLLWidgetData::executeAction( CvWidgetDataStruct &widgetDataStruct )
 		break;
 
 	case WIDGET_CITIZEN:
-		break;
-
-	case WIDGET_FREE_CITIZEN:
-		break;
-
-	case WIDGET_DISABLED_CITIZEN:
-		break;
-
-	case WIDGET_ANGRY_CITIZEN:
-		break;
-
-	case WIDGET_CHANGE_SPECIALIST:
-		doChangeSpecialist(widgetDataStruct);
-		break;
-
-	case WIDGET_RESEARCH:
-	case WIDGET_TECH_TREE:
-		doResearch(widgetDataStruct);
-		break;
-
-	case WIDGET_CHANGE_PERCENT:
-		doChangePercent(widgetDataStruct);
-		break;
-
-	case WIDGET_CITY_TAB:
-		doCityTab(widgetDataStruct);
+		if (widgetDataStruct.m_iData2 != -1)
+		{
+			doDoubleClickCitizen(widgetDataStruct);
+		}
 		break;
 
 	case WIDGET_CONTACT_CIV:
@@ -691,20 +426,8 @@ bool CvDLLWidgetData::executeAction( CvWidgetDataStruct &widgetDataStruct )
 		GC.getGameINLINE().doControl(CONTROL_FORCEENDTURN);
 		break;
 
-	case WIDGET_LAUNCH_VICTORY:
-		doLaunch(widgetDataStruct);
-		break;
-
-	case WIDGET_CONVERT:
-		doConvert(widgetDataStruct);
-		break;
-
-	case WIDGET_REVOLUTION:
-		// handled in Python
-		break;
-
 	case WIDGET_AUTOMATE_CITIZENS:
-		doAutomateCitizens();
+		doAutomateCitizens(widgetDataStruct);
 		break;
 
 	case WIDGET_AUTOMATE_PRODUCTION:
@@ -716,8 +439,6 @@ bool CvDLLWidgetData::executeAction( CvWidgetDataStruct &widgetDataStruct )
 		break;
 
 	case WIDGET_DIPLOMACY_RESPONSE:
-		// CLEANUP -- PD
-//		GC.getDiplomacyScreen().handleClick(m_pWidget);
 		break;
 
 	case WIDGET_TRADE_ITEM:
@@ -727,28 +448,24 @@ bool CvDLLWidgetData::executeAction( CvWidgetDataStruct &widgetDataStruct )
 		doUnitModel();
 		break;
 
-	case WIDGET_FLAG:
-		doFlag();
-		break;
-
 	case WIDGET_HELP_SELECTED:
 		doSelected(widgetDataStruct);
 		break;
 
 	case WIDGET_PEDIA_JUMP_TO_UNIT:
-		doPediaUnitJump(widgetDataStruct);
+		if (widgetDataStruct.m_iData2 != 1)
+		{
+			doPediaUnitJump(widgetDataStruct);
+		}
+		break;
+
+	case WIDGET_PEDIA_JUMP_TO_PROFESSION:
+		doPediaProfessionJump(widgetDataStruct);
 		break;
 
 	case WIDGET_PEDIA_JUMP_TO_BUILDING:
 		doPediaBuildingJump(widgetDataStruct);
 		break;
-
-	case WIDGET_PEDIA_JUMP_TO_TECH:
-	case WIDGET_PEDIA_JUMP_TO_REQUIRED_TECH:
-	case WIDGET_PEDIA_JUMP_TO_DERIVED_TECH:
-		doPediaTechJump(widgetDataStruct);
-		break;
-
 	case WIDGET_PEDIA_BACK:
 		doPediaBack();
 		break;
@@ -768,10 +485,6 @@ bool CvDLLWidgetData::executeAction( CvWidgetDataStruct &widgetDataStruct )
 		doPediaPromotionJump(widgetDataStruct);
 		break;
 
-	case WIDGET_PEDIA_JUMP_TO_UNIT_COMBAT:
-		doPediaUnitCombatJump(widgetDataStruct);
-		break;
-
 	case WIDGET_PEDIA_JUMP_TO_IMPROVEMENT:
 		doPediaImprovementJump(widgetDataStruct);
 		break;
@@ -788,28 +501,23 @@ bool CvDLLWidgetData::executeAction( CvWidgetDataStruct &widgetDataStruct )
 		doPediaLeaderJump(widgetDataStruct);
 		break;
 
-	case WIDGET_PEDIA_JUMP_TO_SPECIALIST:
-		doPediaSpecialistJump(widgetDataStruct);
-		break;
-
-	case WIDGET_PEDIA_JUMP_TO_PROJECT:
-		doPediaProjectJump(widgetDataStruct);
-		break;
-
-	case WIDGET_PEDIA_JUMP_TO_RELIGION:
-		doPediaReligionJump(widgetDataStruct);
-		break;
-
-	case WIDGET_PEDIA_JUMP_TO_CORPORATION:
-		doPediaCorporationJump(widgetDataStruct);
-		break;
-
 	case WIDGET_PEDIA_JUMP_TO_TERRAIN:
 		doPediaTerrainJump(widgetDataStruct);
 		break;
 
+	case WIDGET_PEDIA_JUMP_TO_YIELDS:
+		doPediaYieldJump(widgetDataStruct);
+		break;
+
 	case WIDGET_PEDIA_JUMP_TO_FEATURE:
 		doPediaFeatureJump(widgetDataStruct);
+		break;
+
+	case WIDGET_PEDIA_JUMP_TO_FATHER:
+		if (widgetDataStruct.m_iData2 != 1)
+		{
+			doPediaFatherJump(widgetDataStruct);
+		}
 		break;
 
 	case WIDGET_PEDIA_DESCRIPTION:
@@ -819,10 +527,6 @@ bool CvDLLWidgetData::executeAction( CvWidgetDataStruct &widgetDataStruct )
 
 	case WIDGET_TURN_EVENT:
 		doGotoTurnEvent(widgetDataStruct);
-		break;
-
-	case WIDGET_FOREIGN_ADVISOR:
-		doForeignAdvisor(widgetDataStruct);
 		break;
 
 	case WIDGET_DEAL_KILL:
@@ -838,61 +542,32 @@ bool CvDLLWidgetData::executeAction( CvWidgetDataStruct &widgetDataStruct )
 
 	case WIDGET_ZOOM_CITY:
 		break;
-
-	case WIDGET_HELP_TECH_PREPREQ:
-	case WIDGET_HELP_OBSOLETE:
-	case WIDGET_HELP_OBSOLETE_BONUS:
-	case WIDGET_HELP_OBSOLETE_SPECIAL:
-	case WIDGET_HELP_MOVE_BONUS:
-	case WIDGET_HELP_FREE_UNIT:
-	case WIDGET_HELP_FEATURE_PRODUCTION:
-	case WIDGET_HELP_WORKER_RATE:
-	case WIDGET_HELP_TRADE_ROUTES:
-	case WIDGET_HELP_HEALTH_RATE:
-	case WIDGET_HELP_HAPPINESS_RATE:
-	case WIDGET_HELP_FREE_TECH:
-	case WIDGET_HELP_LOS_BONUS:
-	case WIDGET_HELP_MAP_CENTER:
-	case WIDGET_HELP_MAP_REVEAL:
-	case WIDGET_HELP_MAP_TRADE:
-	case WIDGET_HELP_TECH_TRADE:
-	case WIDGET_HELP_GOLD_TRADE:
-	case WIDGET_HELP_OPEN_BORDERS:
-	case WIDGET_HELP_DEFENSIVE_PACT:
-	case WIDGET_HELP_PERMANENT_ALLIANCE:
-	case WIDGET_HELP_VASSAL_STATE:
-	case WIDGET_HELP_BUILD_BRIDGE:
-	case WIDGET_HELP_IRRIGATION:
-	case WIDGET_HELP_IGNORE_IRRIGATION:
-	case WIDGET_HELP_WATER_WORK:
-	case WIDGET_HELP_IMPROVEMENT:
-	case WIDGET_HELP_DOMAIN_EXTRA_MOVES:
-	case WIDGET_HELP_ADJUST:
-	case WIDGET_HELP_TERRAIN_TRADE:
-	case WIDGET_HELP_SPECIAL_BUILDING:
-	case WIDGET_HELP_YIELD_CHANGE:
-	case WIDGET_HELP_BONUS_REVEAL:
-	case WIDGET_HELP_CIVIC_REVEAL:
-	case WIDGET_HELP_PROCESS_INFO:
-	case WIDGET_HELP_FINANCE_NUM_UNITS:
-	case WIDGET_HELP_FINANCE_UNIT_COST:
-	case WIDGET_HELP_FINANCE_AWAY_SUPPLY:
-	case WIDGET_HELP_FINANCE_CITY_MAINT:
-	case WIDGET_HELP_FINANCE_CIVIC_UPKEEP:
-	case WIDGET_HELP_FINANCE_FOREIGN_INCOME:
-	case WIDGET_HELP_FINANCE_INFLATED_COSTS:
-	case WIDGET_HELP_FINANCE_GROSS_INCOME:
-	case WIDGET_HELP_FINANCE_NET_GOLD:
-	case WIDGET_HELP_FINANCE_GOLD_RESERVE:
-	case WIDGET_HELP_RELIGION_CITY:
-	case WIDGET_HELP_CORPORATION_CITY:
+	case WIDGET_HELP_YIELD:
 	case WIDGET_HELP_PROMOTION:
+	case WIDGET_HELP_UNIT_PROMOTION:
 	case WIDGET_LEADERHEAD:
 	case WIDGET_LEADER_LINE:
 	case WIDGET_CLOSE_SCREEN:
 	case WIDGET_SCORE_BREAKDOWN:
+	case WIDGET_ASSIGN_CITIZEN_TO_PLOT:
 		//	Nothing on clicked
 		break;
+	case WIDGET_CREATE_TRADE_ROUTE:
+		doCreateTradeRoute(widgetDataStruct);
+		break;
+	case WIDGET_EDIT_TRADE_ROUTE:
+		doEditTradeRoute(widgetDataStruct);
+		break;
+	case WIDGET_YIELD_IMPORT_EXPORT:
+		doYieldImportExport(widgetDataStruct);
+		break;
+	case WIDGET_ASSIGN_TRADE_ROUTE:
+		doAssignTradeRoute(widgetDataStruct);
+		break;
+	case WIDGET_GOTO_CITY:
+		doGoToCity(widgetDataStruct);
+		break;
+
 	}
 
 	return bHandled;
@@ -906,36 +581,17 @@ bool CvDLLWidgetData::executeAltAction( CvWidgetDataStruct &widgetDataStruct )
 	bool bHandled = true;
 	switch (widgetDataStruct.m_eWidgetType)
 	{
-	case WIDGET_HELP_TECH_ENTRY:
-	case WIDGET_HELP_TECH_PREPREQ:
-	case WIDGET_RESEARCH:
-	case WIDGET_TECH_TREE:
-		doPediaTechJump(widgetDataStruct);
-		break;
 	case WIDGET_TRAIN:
 		doPediaTrainJump(widgetDataStruct);
 		break;
 	case WIDGET_CONSTRUCT:
 		doPediaConstructJump(widgetDataStruct);
 		break;
-	case WIDGET_CREATE:
-		doPediaProjectJump(widgetDataStruct);
-		break;
 	case WIDGET_PEDIA_JUMP_TO_UNIT:
-	case WIDGET_HELP_FREE_UNIT:
 		doPediaUnitJump(widgetDataStruct);
 		break;
-	case WIDGET_HELP_FOUND_RELIGION:
-		widgetData.m_iData1 = widgetData.m_iData2;
-		//	Intentional fallthrough...
-	case WIDGET_PEDIA_JUMP_TO_RELIGION:
-		doPediaReligionJump(widgetData);
-		break;
-	case WIDGET_HELP_FOUND_CORPORATION:
-		widgetData.m_iData1 = widgetData.m_iData2;
-		//	Intentional fallthrough...
-	case WIDGET_PEDIA_JUMP_TO_CORPORATION:
-		doPediaCorporationJump(widgetData);
+	case WIDGET_PEDIA_JUMP_TO_PROFESSION:
+		doPediaProfessionJump(widgetDataStruct);
 		break;
 	case WIDGET_PEDIA_JUMP_TO_BUILDING:
 		doPediaBuildingJump(widgetDataStruct);
@@ -943,33 +599,69 @@ bool CvDLLWidgetData::executeAltAction( CvWidgetDataStruct &widgetDataStruct )
 	case WIDGET_PEDIA_JUMP_TO_PROMOTION:
 		doPediaPromotionJump(widgetDataStruct);
 		break;
-	case WIDGET_HELP_OBSOLETE:
-		doPediaBuildingJump(widgetDataStruct);
-		break;
-	case WIDGET_HELP_IMPROVEMENT:
-		doPediaBuildJump(widgetDataStruct);
-		break;
-	case WIDGET_HELP_YIELD_CHANGE:
-		doPediaImprovementJump(widgetDataStruct, true);
-		break;
-	case WIDGET_HELP_BONUS_REVEAL:
-	case WIDGET_HELP_OBSOLETE_BONUS:
-		doPediaBonusJump(widgetDataStruct, true);
-		break;
-	case WIDGET_CITIZEN:
-	case WIDGET_FREE_CITIZEN:
-	case WIDGET_DISABLED_CITIZEN:
-		doPediaSpecialistJump(widgetDataStruct);
-		break;
-	case WIDGET_PEDIA_JUMP_TO_PROJECT:
-		doPediaProjectJump(widgetDataStruct);
-		break;
-	case WIDGET_HELP_CIVIC_REVEAL:
-		widgetData.m_iData1 = widgetData.m_iData2;
-		doPediaCivicJump(widgetData);
+	case WIDGET_PEDIA_JUMP_TO_FATHER:
+		doPediaFatherJump(widgetDataStruct);
 		break;
 	case WIDGET_LEADERHEAD:
 		doContactCiv(widgetDataStruct);
+		break;
+
+	default:
+		bHandled = false;
+		break;
+	}
+
+	return (bHandled);
+}
+
+bool CvDLLWidgetData::executeDropOn(const CvWidgetDataStruct& destinationWidgetData, const CvWidgetDataStruct& sourceWidgetData)
+{
+	bool bHandled = true;
+	switch (sourceWidgetData.m_eWidgetType)
+	{
+	case WIDGET_CITIZEN:
+		doCityUnitAssignCitizen(destinationWidgetData, sourceWidgetData);
+		break;
+
+	case WIDGET_MOVE_CARGO_TO_TRANSPORT:
+		doMoveCargoToTransport(destinationWidgetData, sourceWidgetData);
+		break;
+
+	case WIDGET_MOVE_CARGO_TO_CITY:
+		doMoveCargoToCity(destinationWidgetData, sourceWidgetData);
+		break;
+
+	case WIDGET_SHIP_CARGO:
+		doMoveShipCargo(destinationWidgetData, sourceWidgetData);
+		break;
+
+	case WIDGET_DOCK:
+		doMoveDockUnit(destinationWidgetData, sourceWidgetData);
+		break;
+
+	case WIDGET_EJECT_CITIZEN:
+		doUnitIntoCity(destinationWidgetData, sourceWidgetData);
+
+	default:
+		bHandled = false;
+		break;
+	}
+
+	return (bHandled);
+}
+
+//	right clicking action
+bool CvDLLWidgetData::executeDoubleClick(const CvWidgetDataStruct& widgetDataStruct)
+{
+	bool bHandled = true;
+	switch (widgetDataStruct.m_eWidgetType)
+	{
+	case WIDGET_CITIZEN:
+		doDoubleClickCitizen(widgetDataStruct);
+		break;
+
+	case WIDGET_DOCK:
+		doDoubleClickDock(widgetDataStruct);
 		break;
 
 	default:
@@ -985,29 +677,23 @@ bool CvDLLWidgetData::isLink(const CvWidgetDataStruct &widgetDataStruct) const
 	bool bLink = false;
 	switch (widgetDataStruct.m_eWidgetType)
 	{
-	case WIDGET_PEDIA_JUMP_TO_TECH:
-	case WIDGET_PEDIA_JUMP_TO_REQUIRED_TECH:
-	case WIDGET_PEDIA_JUMP_TO_DERIVED_TECH:
 	case WIDGET_PEDIA_JUMP_TO_BUILDING:
 	case WIDGET_PEDIA_JUMP_TO_UNIT:
-	case WIDGET_PEDIA_JUMP_TO_UNIT_COMBAT:
+	case WIDGET_PEDIA_JUMP_TO_PROFESSION:
 	case WIDGET_PEDIA_JUMP_TO_PROMOTION:
 	case WIDGET_PEDIA_JUMP_TO_BONUS:
 	case WIDGET_PEDIA_JUMP_TO_IMPROVEMENT:
 	case WIDGET_PEDIA_JUMP_TO_CIVIC:
 	case WIDGET_PEDIA_JUMP_TO_CIV:
 	case WIDGET_PEDIA_JUMP_TO_LEADER:
-	case WIDGET_PEDIA_JUMP_TO_SPECIALIST:
-	case WIDGET_PEDIA_JUMP_TO_PROJECT:
-	case WIDGET_PEDIA_JUMP_TO_RELIGION:
-	case WIDGET_PEDIA_JUMP_TO_CORPORATION:
 	case WIDGET_PEDIA_JUMP_TO_TERRAIN:
+	case WIDGET_PEDIA_JUMP_TO_YIELDS:
 	case WIDGET_PEDIA_JUMP_TO_FEATURE:
+	case WIDGET_PEDIA_JUMP_TO_FATHER:
 	case WIDGET_PEDIA_FORWARD:
 	case WIDGET_PEDIA_BACK:
 	case WIDGET_PEDIA_MAIN:
 	case WIDGET_TURN_EVENT:
-	case WIDGET_FOREIGN_ADVISOR:
 	case WIDGET_PEDIA_DESCRIPTION:
 	case WIDGET_PEDIA_DESCRIPTION_NO_HELP:
 	case WIDGET_MINIMAP_HIGHLIGHT:
@@ -1019,11 +705,7 @@ bool CvDLLWidgetData::isLink(const CvWidgetDataStruct &widgetDataStruct) const
 			bLink = (NULL != pDeal && pDeal->isCancelable(GC.getGameINLINE().getActivePlayer()));
 		}
 		break;
-	case WIDGET_CONVERT:
-		bLink = (0 != widgetDataStruct.m_iData2);
-		break;
 	case WIDGET_GENERAL:
-	case WIDGET_REVOLUTION:
 		bLink = (1 == widgetDataStruct.m_iData1);
 		break;
 	}
@@ -1036,8 +718,6 @@ void CvDLLWidgetData::doPlotList(CvWidgetDataStruct &widgetDataStruct)
 	PROFILE_FUNC();
 
 	CvUnit* pUnit;
-	bool bWasCityScreenUp;
-
 	int iUnitIndex = widgetDataStruct.m_iData1 + gDLL->getInterfaceIFace()->getPlotListColumn() - gDLL->getInterfaceIFace()->getPlotListOffset();
 
 	CvPlot *selectionPlot = gDLL->getInterfaceIFace()->getSelectionPlot();
@@ -1047,13 +727,13 @@ void CvDLLWidgetData::doPlotList(CvWidgetDataStruct &widgetDataStruct)
 	{
 		if (pUnit->getOwnerINLINE() == GC.getGameINLINE().getActivePlayer())
 		{
-			bWasCityScreenUp = gDLL->getInterfaceIFace()->isCityScreenUp();
-
-			gDLL->getInterfaceIFace()->selectGroup(pUnit, gDLL->shiftKey(), gDLL->ctrlKey(), gDLL->altKey());
-
-			if (bWasCityScreenUp)
+			if(!gDLL->getInterfaceIFace()->isCityScreenUp())
 			{
-				gDLL->getInterfaceIFace()->lookAtSelectionPlot();
+				gDLL->getInterfaceIFace()->selectGroup(pUnit, gDLL->shiftKey(), gDLL->ctrlKey(), gDLL->altKey());
+			}
+			else
+			{
+				pUnit->joinCity();
 			}
 		}
 	}
@@ -1070,10 +750,7 @@ void CvDLLWidgetData::doLiberateCity()
 
 void CvDLLWidgetData::doRenameCity()
 {
-	CvCity* pHeadSelectedCity;
-
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
+	CvCity* pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
 	if (pHeadSelectedCity != NULL)
 	{
 		if (pHeadSelectedCity->getOwnerINLINE() == GC.getGameINLINE().getActivePlayer())
@@ -1086,10 +763,7 @@ void CvDLLWidgetData::doRenameCity()
 
 void CvDLLWidgetData::doRenameUnit()
 {
-	CvUnit* pHeadSelectedUnit;
-
-	pHeadSelectedUnit = gDLL->getInterfaceIFace()->getHeadSelectedUnit();
-
+	CvUnit* pHeadSelectedUnit = gDLL->getInterfaceIFace()->getHeadSelectedUnit();
 	if (pHeadSelectedUnit != NULL)
 	{
 		if (pHeadSelectedUnit->getOwnerINLINE() == GC.getGameINLINE().getActivePlayer())
@@ -1114,9 +788,7 @@ void CvDLLWidgetData::doDeleteGroup()
 
 void CvDLLWidgetData::doTrain(CvWidgetDataStruct &widgetDataStruct)
 {
-	UnitTypes eUnit;
-
-	eUnit = ((UnitTypes)(GC.getCivilizationInfo(GC.getGameINLINE().getActiveCivilizationType()).getCivilizationUnits(widgetDataStruct.m_iData1)));
+	UnitTypes eUnit = (UnitTypes) GC.getCivilizationInfo(GC.getGameINLINE().getActiveCivilizationType()).getCivilizationUnits(widgetDataStruct.m_iData1);
 
 	if (widgetDataStruct.m_iData2 != FFreeList::INVALID_INDEX)
 	{
@@ -1126,8 +798,6 @@ void CvDLLWidgetData::doTrain(CvWidgetDataStruct &widgetDataStruct)
 	{
 		GC.getGameINLINE().selectedCitiesGameNetMessage(GAMEMESSAGE_PUSH_ORDER, ORDER_TRAIN, eUnit, -1, false, gDLL->altKey(), gDLL->shiftKey(), gDLL->ctrlKey());
 	}
-
-	gDLL->getInterfaceIFace()->setCityTabSelectionRow(CITYTAB_UNITS);
 }
 
 
@@ -1145,45 +815,20 @@ void CvDLLWidgetData::doConstruct(CvWidgetDataStruct &widgetDataStruct)
 	{
 		GC.getGameINLINE().selectedCitiesGameNetMessage(GAMEMESSAGE_PUSH_ORDER, ORDER_CONSTRUCT, eBuilding, -1, false, gDLL->altKey(), gDLL->shiftKey(), gDLL->ctrlKey());
 	}
-
-	if (isLimitedWonderClass((BuildingClassTypes)(widgetDataStruct.m_iData1)))
-	{
-		gDLL->getInterfaceIFace()->setCityTabSelectionRow(CITYTAB_WONDERS);
-	}
-	else
-	{
-		gDLL->getInterfaceIFace()->setCityTabSelectionRow(CITYTAB_BUILDINGS);
-	}
 }
 
-
-void CvDLLWidgetData::doCreate(CvWidgetDataStruct &widgetDataStruct)
+void CvDLLWidgetData::doConvince(CvWidgetDataStruct &widgetDataStruct)
 {
+	FatherPointTypes eFatherPointType = (FatherPointTypes) widgetDataStruct.m_iData1;
+
 	if (widgetDataStruct.m_iData2 != FFreeList::INVALID_INDEX)
 	{
-		gDLL->sendPushOrder(widgetDataStruct.m_iData2, ORDER_CREATE, widgetDataStruct.m_iData1, false, false, false);
+		gDLL->sendPushOrder(widgetDataStruct.m_iData2, ORDER_CONVINCE, eFatherPointType, false, false, false);
 	}
 	else
 	{
-		GC.getGameINLINE().selectedCitiesGameNetMessage(GAMEMESSAGE_PUSH_ORDER, ORDER_CREATE, widgetDataStruct.m_iData1, -1, false, gDLL->altKey(), gDLL->shiftKey(), gDLL->ctrlKey());
+		GC.getGameINLINE().selectedCitiesGameNetMessage(GAMEMESSAGE_PUSH_ORDER, ORDER_CONVINCE, eFatherPointType, -1, false, gDLL->altKey(), gDLL->shiftKey(), gDLL->ctrlKey());
 	}
-
-	gDLL->getInterfaceIFace()->setCityTabSelectionRow(CITYTAB_WONDERS);
-}
-
-
-void CvDLLWidgetData::doMaintain(CvWidgetDataStruct &widgetDataStruct)
-{
-	if (widgetDataStruct.m_iData2 != FFreeList::INVALID_INDEX)
-	{
-		gDLL->sendPushOrder(widgetDataStruct.m_iData2, ORDER_MAINTAIN, widgetDataStruct.m_iData1, false, false, false);
-	}
-	else
-	{
-		GC.getGameINLINE().selectedCitiesGameNetMessage(GAMEMESSAGE_PUSH_ORDER, ORDER_MAINTAIN, widgetDataStruct.m_iData1, -1, false, gDLL->altKey(), gDLL->shiftKey(), gDLL->ctrlKey());
-	}
-
-	gDLL->getInterfaceIFace()->setCityTabSelectionRow(CITYTAB_WONDERS);
 }
 
 
@@ -1193,50 +838,15 @@ void CvDLLWidgetData::doHurry(CvWidgetDataStruct &widgetDataStruct)
 }
 
 
-void CvDLLWidgetData::doConscript()
+void CvDLLWidgetData::doPlayerHurry(CvWidgetDataStruct &widgetDataStruct)
 {
-	GC.getGameINLINE().selectedCitiesGameNetMessage(GAMEMESSAGE_DO_TASK, TASK_CONSCRIPT);
+	gDLL->sendPlayerAction(GC.getGameINLINE().getActivePlayer(), PLAYER_ACTION_HURRY, widgetDataStruct.m_iData1, widgetDataStruct.m_iData2, -1);
 }
 
 
 void CvDLLWidgetData::doAction(CvWidgetDataStruct &widgetDataStruct)
 {
 	GC.getGameINLINE().handleAction(widgetDataStruct.m_iData1);
-}
-
-
-void CvDLLWidgetData::doChangeSpecialist(CvWidgetDataStruct &widgetDataStruct)
-{
-	GC.getGameINLINE().selectedCitiesGameNetMessage(GAMEMESSAGE_DO_TASK, TASK_CHANGE_SPECIALIST, widgetDataStruct.m_iData1, widgetDataStruct.m_iData2);
-}
-
-
-void CvDLLWidgetData::doResearch(CvWidgetDataStruct &widgetDataStruct)
-{
-	bool bShift;
-
-	bShift = gDLL->shiftKey();
-
-	if (!bShift)
-	{
-		if ((GetKeyState(VK_LSHIFT) & 0x8000) || (GetKeyState(VK_RSHIFT) & 0x8000))
-		{
-			bShift = true;
-		}
-	}
-
-	gDLL->sendResearch(((TechTypes)widgetDataStruct.m_iData1), widgetDataStruct.m_iData2, bShift);
-}
-
-
-void CvDLLWidgetData::doChangePercent(CvWidgetDataStruct &widgetDataStruct)
-{
-	gDLL->sendPercentChange(((CommerceTypes)widgetDataStruct.m_iData1), widgetDataStruct.m_iData2);
-}
-
-void CvDLLWidgetData::doCityTab(CvWidgetDataStruct &widgetDataStruct)
-{
-	gDLL->getInterfaceIFace()->setCityTabSelectionRow((CityTabTypes)widgetDataStruct.m_iData1);
 }
 
 void CvDLLWidgetData::doContactCiv(CvWidgetDataStruct &widgetDataStruct)
@@ -1249,11 +859,7 @@ void CvDLLWidgetData::doContactCiv(CvWidgetDataStruct &widgetDataStruct)
 	//	Do not execute this if we are trying to contact ourselves...
 	if (GC.getGameINLINE().getActivePlayer() == widgetDataStruct.m_iData1)
 	{
-		if (!gDLL->getInterfaceIFace()->isFocusedWidget())
-		{
-			gDLL->getInterfaceIFace()->toggleScoresMinimized();
-		}
-
+		doFlag();
 		return;
 	}
 
@@ -1275,61 +881,105 @@ void CvDLLWidgetData::doContactCiv(CvWidgetDataStruct &widgetDataStruct)
 		{
 			gDLL->sendChangeWar(GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).getTeam(), true);
 		}
-		else if (GET_TEAM(GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).getTeam()).isVassal(GC.getGameINLINE().getActiveTeam()))
-		{
-			CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_VASSAL_DEMAND_TRIBUTE, widgetDataStruct.m_iData1);
-			if (pInfo)
-			{
-				gDLL->getInterfaceIFace()->addPopup(pInfo, GC.getGameINLINE().getActivePlayer(), true);
-			}
-		}
 		return;
 	}
 
 	GET_PLAYER(GC.getGameINLINE().getActivePlayer()).contact((PlayerTypes)widgetDataStruct.m_iData1);
 }
 
-void CvDLLWidgetData::doConvert(CvWidgetDataStruct &widgetDataStruct)
+void CvDLLWidgetData::doAutomateCitizens(CvWidgetDataStruct &widgetDataStruct)
 {
-	if (widgetDataStruct.m_iData2 != 0)
-	{
-		gDLL->sendConvert((ReligionTypes)(widgetDataStruct.m_iData1));
-	}
-}
-
-void CvDLLWidgetData::doAutomateCitizens()
-{
-	CvCity* pHeadSelectedCity;
-
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
+	CvCity* pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
 	if (pHeadSelectedCity != NULL)
 	{
-		GC.getGameINLINE().selectedCitiesGameNetMessage(GAMEMESSAGE_DO_TASK, TASK_SET_AUTOMATED_CITIZENS, -1, -1, !(pHeadSelectedCity->isCitizensAutomated()));
+		if (pHeadSelectedCity->getOwnerINLINE() == GC.getGameINLINE().getActivePlayer())
+		{
+			GC.getGameINLINE().selectedCitiesGameNetMessage(GAMEMESSAGE_DO_TASK, TASK_SET_ALL_CITIZENS_AUTOMATED, widgetDataStruct.m_iData1, -1);
+		}
 	}
 }
 
 void CvDLLWidgetData::doAutomateProduction()
 {
-	CvCity* pHeadSelectedCity;
-
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
+	CvCity* pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
 	if (pHeadSelectedCity != NULL)
 	{
-		GC.getGameINLINE().selectedCitiesGameNetMessage(GAMEMESSAGE_DO_TASK, TASK_SET_AUTOMATED_PRODUCTION, -1, -1, !pHeadSelectedCity->isProductionAutomated(), gDLL->altKey(), gDLL->shiftKey(), gDLL->ctrlKey());
+		if (pHeadSelectedCity->getOwnerINLINE() == GC.getGameINLINE().getActivePlayer())
+		{
+			GC.getGameINLINE().selectedCitiesGameNetMessage(GAMEMESSAGE_DO_TASK, TASK_SET_AUTOMATED_PRODUCTION, -1, -1, !pHeadSelectedCity->isProductionAutomated(), gDLL->altKey(), gDLL->shiftKey(), gDLL->ctrlKey());
+		}
 	}
 }
 
+EmphasizeTypes CvDLLWidgetData::getNextEmphasis(CvCity* pCity, YieldTypes eYield)
+{
+	int iCurrentEmphasis = pCity->AI_getEmphasizeYieldCount(eYield);
+	if (iCurrentEmphasis == 0)
+	{
+		// No current emphasis - return positive emphasis
+		for (int i = 0; i < GC.getNumEmphasizeInfos(); i++)
+		{
+			EmphasizeTypes eLoopEmphasis = (EmphasizeTypes) i;
+			int iYieldChange = GC.getEmphasizeInfo(eLoopEmphasis).getYieldChange(eYield);
+			if (iYieldChange > 0)
+			{
+				return eLoopEmphasis;
+			}
+		}
+	}
+	else if (iCurrentEmphasis > 0)
+	{
+		// Positive current emphasis - return negative emphasis
+		for (int i = 0; i < GC.getNumEmphasizeInfos(); i++)
+		{
+			EmphasizeTypes eLoopEmphasis = (EmphasizeTypes) i;
+			int iYieldChange = GC.getEmphasizeInfo(eLoopEmphasis).getYieldChange(eYield);
+			if (iYieldChange < 0)
+			{
+				return eLoopEmphasis;
+			}
+		}
+	}
+
+	// Negative current emphasis - return no emphasis
+	return NO_EMPHASIZE;
+}
+
+
 void CvDLLWidgetData::doEmphasize(CvWidgetDataStruct &widgetDataStruct)
 {
-	CvCity* pHeadSelectedCity;
+	CvCity* pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
 
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
+	YieldTypes eYield = (YieldTypes) widgetDataStruct.m_iData1;
 	if (pHeadSelectedCity != NULL)
 	{
-		GC.getGameINLINE().selectedCitiesGameNetMessage(GAMEMESSAGE_DO_TASK, TASK_SET_EMPHASIZE, widgetDataStruct.m_iData1, -1, !(pHeadSelectedCity->AI_isEmphasize((EmphasizeTypes)(widgetDataStruct.m_iData1))));
+		if (eYield == NO_YIELD)
+		{
+			EmphasizeTypes eEmphasize = (EmphasizeTypes) widgetDataStruct.m_iData2;
+			if (eEmphasize != NO_EMPHASIZE)
+			{
+				GC.getGameINLINE().selectedCitiesGameNetMessage(GAMEMESSAGE_DO_TASK, TASK_SET_EMPHASIZE, eEmphasize, -1, !(pHeadSelectedCity->AI_isEmphasize(eEmphasize)));
+			}
+			else
+			{
+				for (int iEmphasize = 0; iEmphasize < GC.getNumEmphasizeInfos(); ++iEmphasize)
+				{
+					GC.getGameINLINE().selectedCitiesGameNetMessage(GAMEMESSAGE_DO_TASK, TASK_SET_EMPHASIZE, iEmphasize, -1, false);
+				}
+			}
+		}
+		else
+		{
+			EmphasizeTypes eNextEmphasis = getNextEmphasis(pHeadSelectedCity, eYield);
+			for (int i = 0; i < GC.getNumEmphasizeInfos(); i++)
+			{
+				// turn off all emphasis except eNextEmphasis
+				if (GC.getEmphasizeInfo((EmphasizeTypes) i).getYieldChange(eYield) != 0)
+				{
+					GC.getGameINLINE().selectedCitiesGameNetMessage(GAMEMESSAGE_DO_TASK, TASK_SET_EMPHASIZE, i, -1, i == eNextEmphasis);
+				}
+			}
+		}
 	}
 }
 
@@ -1352,30 +1002,26 @@ void CvDLLWidgetData::doFlag()
 
 void CvDLLWidgetData::doSelected(CvWidgetDataStruct &widgetDataStruct)
 {
-	CvCity* pHeadSelectedCity;
-
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
+	CvCity* pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
 	if (pHeadSelectedCity != NULL)
 	{
 		GC.getGameINLINE().selectedCitiesGameNetMessage(GAMEMESSAGE_POP_ORDER, widgetDataStruct.m_iData1);
 	}
 }
-
-
-void CvDLLWidgetData::doPediaTechJump(CvWidgetDataStruct &widgetDataStruct)
-{
-	CyArgsList argsList;
-	argsList.add(widgetDataStruct.m_iData1);
-	gDLL->getPythonIFace()->callFunction(PYScreensModule, "pediaJumpToTech", argsList.makeFunctionArgs());
-}
-
 void CvDLLWidgetData::doPediaUnitJump(CvWidgetDataStruct &widgetDataStruct)
 {
 	CyArgsList argsList;
 
 	argsList.add(widgetDataStruct.m_iData1);
 	gDLL->getPythonIFace()->callFunction(PYScreensModule, "pediaJumpToUnit", argsList.makeFunctionArgs());
+}
+
+void CvDLLWidgetData::doPediaProfessionJump(CvWidgetDataStruct &widgetDataStruct)
+{
+	CyArgsList argsList;
+
+	argsList.add(widgetDataStruct.m_iData1);
+	gDLL->getPythonIFace()->callFunction(PYScreensModule, "pediaJumpToProfession", argsList.makeFunctionArgs());
 }
 
 void CvDLLWidgetData::doPediaBuildingJump(CvWidgetDataStruct &widgetDataStruct)
@@ -1385,27 +1031,6 @@ void CvDLLWidgetData::doPediaBuildingJump(CvWidgetDataStruct &widgetDataStruct)
 	gDLL->getPythonIFace()->callFunction(PYScreensModule, "pediaJumpToBuilding", argsList.makeFunctionArgs());
 }
 
-void CvDLLWidgetData::doPediaProjectJump(CvWidgetDataStruct &widgetDataStruct)
-{
-	CyArgsList argsList;
-	argsList.add(widgetDataStruct.m_iData1);
-	gDLL->getPythonIFace()->callFunction(PYScreensModule, "pediaJumpToProject", argsList.makeFunctionArgs());
-}
-
-void CvDLLWidgetData::doPediaReligionJump(CvWidgetDataStruct &widgetDataStruct)
-{
-	CyArgsList argsList;
-	argsList.add(widgetDataStruct.m_iData1);
-	gDLL->getPythonIFace()->callFunction(PYScreensModule, "pediaJumpToReligion", argsList.makeFunctionArgs());
-}
-
-void CvDLLWidgetData::doPediaCorporationJump(CvWidgetDataStruct &widgetDataStruct)
-{
-	CyArgsList argsList;
-	argsList.add(widgetDataStruct.m_iData1);
-	gDLL->getPythonIFace()->callFunction(PYScreensModule, "pediaJumpToCorporation", argsList.makeFunctionArgs());
-}
-
 void CvDLLWidgetData::doPediaTerrainJump(CvWidgetDataStruct &widgetDataStruct)
 {
 	CyArgsList argsList;
@@ -1413,11 +1038,25 @@ void CvDLLWidgetData::doPediaTerrainJump(CvWidgetDataStruct &widgetDataStruct)
 	gDLL->getPythonIFace()->callFunction(PYScreensModule, "pediaJumpToTerrain", argsList.makeFunctionArgs());
 }
 
+void CvDLLWidgetData::doPediaYieldJump(CvWidgetDataStruct &widgetDataStruct)
+{
+	CyArgsList argsList;
+	argsList.add(widgetDataStruct.m_iData1);
+	gDLL->getPythonIFace()->callFunction(PYScreensModule, "pediaJumpToYields", argsList.makeFunctionArgs());
+}
+
 void CvDLLWidgetData::doPediaFeatureJump(CvWidgetDataStruct &widgetDataStruct)
 {
 	CyArgsList argsList;
 	argsList.add(widgetDataStruct.m_iData1);
 	gDLL->getPythonIFace()->callFunction(PYScreensModule, "pediaJumpToFeature", argsList.makeFunctionArgs());
+}
+
+void CvDLLWidgetData::doPediaFatherJump(CvWidgetDataStruct &widgetDataStruct)
+{
+	CyArgsList argsList;
+	argsList.add(widgetDataStruct.m_iData1);
+	gDLL->getPythonIFace()->callFunction(PYScreensModule, "pediaJumpToFather", argsList.makeFunctionArgs());
 }
 
 void CvDLLWidgetData::doPediaTrainJump(CvWidgetDataStruct &widgetDataStruct)
@@ -1462,13 +1101,6 @@ void CvDLLWidgetData::doPediaBonusJump(CvWidgetDataStruct &widgetDataStruct, boo
 	gDLL->getPythonIFace()->callFunction(PYScreensModule, "pediaJumpToBonus", argsList.makeFunctionArgs());
 }
 
-void CvDLLWidgetData::doPediaSpecialistJump(CvWidgetDataStruct &widgetDataStruct)
-{
-	CyArgsList argsList;
-	argsList.add(widgetDataStruct.m_iData1);
-	gDLL->getPythonIFace()->callFunction(PYScreensModule, "pediaJumpToSpecialist", argsList.makeFunctionArgs());
-}
-
 void CvDLLWidgetData::doPediaMain(CvWidgetDataStruct &widgetDataStruct)
 {
 	CyArgsList argsList;
@@ -1481,13 +1113,6 @@ void CvDLLWidgetData::doPediaPromotionJump(CvWidgetDataStruct &widgetDataStruct)
 	CyArgsList argsList;
 	argsList.add(widgetDataStruct.m_iData1);
 	gDLL->getPythonIFace()->callFunction(PYScreensModule, "pediaJumpToPromotion", argsList.makeFunctionArgs());
-}
-
-void CvDLLWidgetData::doPediaUnitCombatJump(CvWidgetDataStruct &widgetDataStruct)
-{
-	CyArgsList argsList;
-	argsList.add(widgetDataStruct.m_iData1);
-	gDLL->getPythonIFace()->callFunction(PYScreensModule, "pediaJumpToUnitChart", argsList.makeFunctionArgs());
 }
 
 void CvDLLWidgetData::doPediaImprovementJump(CvWidgetDataStruct &widgetDataStruct, bool bData2)
@@ -1569,30 +1194,8 @@ void CvDLLWidgetData::doMenu( void )
 	if (!gDLL->isGameInitializing())
 	{
 		CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_MAIN_MENU);
-		if (NULL != pInfo)
-		{
-			gDLL->getInterfaceIFace()->addPopup(pInfo, NO_PLAYER, true);
-		}
+		gDLL->getInterfaceIFace()->addPopup(pInfo, NO_PLAYER, true);
 	}
-}
-
-void CvDLLWidgetData::doLaunch(CvWidgetDataStruct &widgetDataStruct)
-{
-	if (GET_TEAM(GC.getGameINLINE().getActiveTeam()).canLaunch((VictoryTypes)widgetDataStruct.m_iData1) && GC.getGameINLINE().testVictory((VictoryTypes)widgetDataStruct.m_iData1, GC.getGameINLINE().getActiveTeam()))
-	{
-		CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_LAUNCH, widgetDataStruct.m_iData1);
-		if (NULL != pInfo)
-		{
-			gDLL->getInterfaceIFace()->addPopup(pInfo);
-		}
-	}
-}
-
-void CvDLLWidgetData::doForeignAdvisor(CvWidgetDataStruct &widgetDataStruct)
-{
-	CyArgsList argsList;
-	argsList.add(widgetDataStruct.m_iData1);
-	gDLL->getPythonIFace()->callFunction(PYScreensModule, "showForeignAdvisorScreen", argsList.makeFunctionArgs());
 }
 
 //
@@ -1631,11 +1234,7 @@ void CvDLLWidgetData::parsePlotListHelp(CvWidgetDataStruct &widgetDataStruct, Cv
 
 void CvDLLWidgetData::parseLiberateCityHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
-	CvCity* pHeadSelectedCity;
-	CvWString szTempBuffer;
-
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
+	CvCity* pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
 	if (pHeadSelectedCity != NULL)
 	{
 		PlayerTypes ePlayer = pHeadSelectedCity->getLiberationPlayer(false);
@@ -1648,11 +1247,7 @@ void CvDLLWidgetData::parseLiberateCityHelp(CvWidgetDataStruct &widgetDataStruct
 
 void CvDLLWidgetData::parseCityNameHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
-	CvCity* pHeadSelectedCity;
-	CvWString szTempBuffer;
-
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
+	CvCity* pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
 	if (pHeadSelectedCity != NULL)
 	{
 		szBuffer.append(pHeadSelectedCity->getName());
@@ -1660,6 +1255,7 @@ void CvDLLWidgetData::parseCityNameHelp(CvWidgetDataStruct &widgetDataStruct, Cv
 		szBuffer.append(NEWLINE);
 		szBuffer.append(gDLL->getText("TXT_KEY_CITY_POPULATION", pHeadSelectedCity->getRealPopulation()));
 
+		CvWString szTempBuffer;
 		GAMETEXT.setTimeStr(szTempBuffer, pHeadSelectedCity->getGameTurnFounded(), false);
 		szBuffer.append(NEWLINE);
 		szBuffer.append(gDLL->getText("TXT_KEY_CITY_FOUNDED", szTempBuffer.GetCString()));
@@ -1688,8 +1284,7 @@ void CvDLLWidgetData::parseTrainHelp(CvWidgetDataStruct &widgetDataStruct, CvWSt
 	if (pHeadSelectedCity != NULL)
 	{
 		eUnit = (UnitTypes)GC.getCivilizationInfo(pHeadSelectedCity->getCivilizationType()).getCivilizationUnits(widgetDataStruct.m_iData1);
-
-		GAMETEXT.setUnitHelp(szBuffer, eUnit, false, widgetDataStruct.m_bOption, false, pHeadSelectedCity);
+		GAMETEXT.setUnitHelp(szBuffer, eUnit, false, widgetDataStruct.m_bOption, pHeadSelectedCity);
 	}
 }
 
@@ -1711,97 +1306,104 @@ void CvDLLWidgetData::parseConstructHelp(CvWidgetDataStruct &widgetDataStruct, C
 	if (pHeadSelectedCity != NULL)
 	{
 		eBuilding = (BuildingTypes)GC.getCivilizationInfo(pHeadSelectedCity->getCivilizationType()).getCivilizationBuildings(widgetDataStruct.m_iData1);
-
-		GAMETEXT.setBuildingHelp(szBuffer, eBuilding, false, widgetDataStruct.m_bOption, false, pHeadSelectedCity);
+		GAMETEXT.setBuildingHelp(szBuffer, eBuilding, false, widgetDataStruct.m_bOption, pHeadSelectedCity);
 	}
 }
 
-
-void CvDLLWidgetData::parseCreateHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
+void CvDLLWidgetData::parseConvinceHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
-	CvCity* pHeadSelectedCity;
-
-	if (widgetDataStruct.m_iData2 != FFreeList::INVALID_INDEX)
-	{
-		pHeadSelectedCity = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCity(widgetDataStruct.m_iData2);
-	}
-	else
-	{
-		pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-	}
-
-	GAMETEXT.setProjectHelp(szBuffer, ((ProjectTypes)widgetDataStruct.m_iData1), false, pHeadSelectedCity);
-}
-
-
-void CvDLLWidgetData::parseMaintainHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.setProcessHelp(szBuffer, ((ProcessTypes)(widgetDataStruct.m_iData1)));
+	GAMETEXT.setFatherPointHelp(szBuffer, (FatherPointTypes) widgetDataStruct.m_iData1);
 }
 
 
 void CvDLLWidgetData::parseHurryHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
-	CvCity* pHeadSelectedCity;
-	CvWString szTempBuffer;
-	bool bFirst;
-	int iHurryGold;
-	int iHurryPopulation;
-	int iHurryAngerLength;
-	int iI;
-
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
+	HurryTypes eHurry = (HurryTypes) widgetDataStruct.m_iData1;
+	CvCity* pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
 
 	if (pHeadSelectedCity != NULL)
 	{
-		szBuffer.assign(gDLL->getText("TXT_KEY_MISC_HURRY_PROD", pHeadSelectedCity->getProductionNameKey()));
-
-		iHurryGold = pHeadSelectedCity->hurryGold((HurryTypes)(widgetDataStruct.m_iData1));
-
-		if (iHurryGold > 0)
-		{
-			szBuffer.append(NEWLINE);
-			szBuffer.append(gDLL->getText("TXT_KEY_MISC_HURRY_GOLD", iHurryGold));
-		}
-
-		iHurryPopulation = pHeadSelectedCity->hurryPopulation((HurryTypes)(widgetDataStruct.m_iData1));
-
-		if (iHurryPopulation > 0)
-		{
-			szBuffer.append(NEWLINE);
-			szBuffer.append(gDLL->getText("TXT_KEY_MISC_HURRY_POP", iHurryPopulation));
-
-			if (iHurryPopulation > pHeadSelectedCity->maxHurryPopulation())
-			{
-				szBuffer.append(gDLL->getText("TXT_KEY_MISC_MAX_POP_HURRY", pHeadSelectedCity->maxHurryPopulation()));
-			}
-		}
-
-		iHurryAngerLength = pHeadSelectedCity->hurryAngerLength((HurryTypes)(widgetDataStruct.m_iData1));
-
-		if (iHurryAngerLength > 0)
-		{
-			szBuffer.append(NEWLINE);
-			szBuffer.append(gDLL->getText("TXT_KEY_MISC_ANGER_TURNS", GC.getDefineINT("HURRY_POP_ANGER"), (iHurryAngerLength + pHeadSelectedCity->getHurryAngerTimer())));
-		}
-
 		if (!(pHeadSelectedCity->isProductionUnit()) && !(pHeadSelectedCity->isProductionBuilding()))
 		{
 			szBuffer.append(NEWLINE);
-			szBuffer.append(gDLL->getText("TXT_KEY_MISC_UNIT_BUILDING_HURRY"));
+			szBuffer.assign(gDLL->getText("TXT_KEY_MISC_UNIT_BUILDING_HURRY"));
 		}
-
-		if (!(GET_PLAYER(pHeadSelectedCity->getOwnerINLINE()).canHurry((HurryTypes)(widgetDataStruct.m_iData1))))
+		else
 		{
-			bFirst = true;
+			szBuffer.assign(gDLL->getText("TXT_KEY_MISC_HURRY_PROD", pHeadSelectedCity->getProductionNameKey()));
 
-			for (iI = 0; iI < GC.getNumCivicInfos(); iI++)
+			int iHurryGold = pHeadSelectedCity->hurryGold(eHurry);
+			if (iHurryGold > 0)
 			{
-				if (GC.getCivicInfo((CivicTypes)iI).isHurry(widgetDataStruct.m_iData1))
+				szBuffer.append(NEWLINE);
+				szBuffer.append(gDLL->getText("TXT_KEY_MISC_HURRY_GOLD", iHurryGold));
+				szBuffer.append(NEWLINE);
+				szBuffer.append(gDLL->getText("TXT_KEY_FINANCIAL_ADVISOR_TREASURY", GET_PLAYER(pHeadSelectedCity->getOwnerINLINE()).getGold()));
+			}
+
+			int iHurryPopulation = pHeadSelectedCity->hurryPopulation(eHurry);
+			if (iHurryPopulation > 0)
+			{
+				szBuffer.append(NEWLINE);
+				szBuffer.append(gDLL->getText("TXT_KEY_MISC_HURRY_POP", iHurryPopulation));
+
+				if (iHurryPopulation > pHeadSelectedCity->maxHurryPopulation())
 				{
-					szTempBuffer = NEWLINE + gDLL->getText("TXT_KEY_REQUIRES");
-					setListHelp(szBuffer, szTempBuffer, GC.getCivicInfo((CivicTypes)iI).getDescription(), gDLL->getText("TXT_KEY_OR").c_str(), bFirst);
-					bFirst = false;
+					szBuffer.append(gDLL->getText("TXT_KEY_MISC_MAX_POP_HURRY", pHeadSelectedCity->maxHurryPopulation()));
+				}
+			}
+
+			for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
+			{	
+				int iAmountNeeded = pHeadSelectedCity->hurryYield(eHurry, (YieldTypes) iYield);
+				if (iAmountNeeded > 0)
+				{
+					szBuffer.append(NEWLINE);
+					szBuffer.append(gDLL->getText("TXT_KEY_MISC_HURRY_YIELD", iAmountNeeded, GC.getYieldInfo((YieldTypes) iYield).getChar()));
+				}
+			}
+
+			bool bFirst = true;
+			if (!(GET_PLAYER(pHeadSelectedCity->getOwnerINLINE()).canHurry((HurryTypes)(widgetDataStruct.m_iData1))))
+			{
+				for (int iI = 0; iI < GC.getNumCivicInfos(); iI++)
+				{
+					if (GC.getCivicInfo((CivicTypes)iI).isHurry(widgetDataStruct.m_iData1))
+					{
+						CvWString szTempBuffer = NEWLINE + gDLL->getText("TXT_KEY_REQUIRES");
+						setListHelp(szBuffer, szTempBuffer, GC.getCivicInfo((CivicTypes)iI).getDescription(), gDLL->getText("TXT_KEY_OR").c_str(), bFirst);
+						bFirst = false;
+					}
+				}
+
+				for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
+				{
+					YieldTypes eYield = (YieldTypes) iYield;
+					if (GC.getYieldInfo(eYield).isCargo() && !GET_PLAYER(pHeadSelectedCity->getOwnerINLINE()).isYieldEuropeTradable(eYield))
+					{
+						int iAmountNeeded = pHeadSelectedCity->getProductionNeeded(eYield);
+						if (iAmountNeeded > pHeadSelectedCity->getYieldStored(eYield) + pHeadSelectedCity->getYieldRushed(eYield))
+						{
+							szBuffer.append(NEWLINE + gDLL->getText("TXT_KEY_REQUIRES"));
+							szBuffer.append(CvWString::format(L"%d%c", iAmountNeeded, GC.getYieldInfo(eYield).getChar()));
+							bFirst = false;
+						}
+					}
+				}
+			}
+
+			for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
+			{
+				YieldTypes eYield = (YieldTypes) iYield;
+				if (GC.getYieldInfo(eYield).isCargo() && !GET_PLAYER(pHeadSelectedCity->getOwnerINLINE()).isYieldEuropeTradable(eYield))
+				{
+					int iAmountNeeded = pHeadSelectedCity->getProductionNeeded(eYield);
+					if (iAmountNeeded > pHeadSelectedCity->getYieldStored(eYield) + pHeadSelectedCity->getYieldRushed(eYield))
+					{
+						szBuffer.append(NEWLINE + gDLL->getText("TXT_KEY_REQUIRES"));
+						szBuffer.append(CvWString::format(L"%d%c", iAmountNeeded, GC.getYieldInfo(eYield).getChar()));
+						bFirst = false;
+					}
 				}
 			}
 
@@ -1813,80 +1415,17 @@ void CvDLLWidgetData::parseHurryHelp(CvWidgetDataStruct &widgetDataStruct, CvWSt
 	}
 }
 
-
-void CvDLLWidgetData::parseConscriptHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
+void CvDLLWidgetData::parsePlayerHurryHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
-	CvCity* pHeadSelectedCity;
-	CvWString szTempBuffer;
-	int iConscriptPopulation;
-	int iConscriptAngerLength;
-	int iMinCityPopulation;
-	int iMinCulturePercent;
-	int iI;
-	bool bFirst;
+	CvPlayer& kPlayer = GET_PLAYER(GC.getGameINLINE().getActivePlayer());
+	HurryTypes eHurry = (HurryTypes) widgetDataStruct.m_iData1;
+	szBuffer.assign(gDLL->getText("TXT_KEY_MISC_HURRY_PROD", kPlayer.getHurryItemTextKey(eHurry, widgetDataStruct.m_iData2)));
 
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
-	if (pHeadSelectedCity != NULL)
+	int iHurryGold = kPlayer.getHurryGold(eHurry);
+	if (iHurryGold > 0)
 	{
-		if (pHeadSelectedCity->getConscriptUnit() != NO_UNIT)
-		{
-			CvWString szTemp;
-			szTemp.Format(SETCOLR L"%s" ENDCOLR, TEXT_COLOR("COLOR_UNIT_TEXT"), GC.getUnitInfo(pHeadSelectedCity->getConscriptUnit()).getDescription());
-			szBuffer.assign(szTemp);
-
-			iConscriptPopulation = pHeadSelectedCity->getConscriptPopulation();
-
-			if (iConscriptPopulation > 0)
-			{
-				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_MISC_HURRY_POP", iConscriptPopulation));
-			}
-
-			iConscriptAngerLength = pHeadSelectedCity->flatConscriptAngerLength();
-
-			if (iConscriptAngerLength > 0)
-			{
-				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_MISC_ANGER_TURNS", GC.getDefineINT("CONSCRIPT_POP_ANGER"), (iConscriptAngerLength + pHeadSelectedCity->getConscriptAngerTimer())));
-			}
-
-			iMinCityPopulation = pHeadSelectedCity->conscriptMinCityPopulation();
-
-			if (pHeadSelectedCity->getPopulation() < iMinCityPopulation)
-			{
-				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_MISC_MIN_CITY_POP", iMinCityPopulation));
-			}
-
-			iMinCulturePercent = GC.getDefineINT("CONSCRIPT_MIN_CULTURE_PERCENT");
-
-			if (pHeadSelectedCity->plot()->calculateTeamCulturePercent(pHeadSelectedCity->getTeam()) < iMinCulturePercent)
-			{
-				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_MISC_MIN_CULTURE_PERCENT", iMinCulturePercent));
-			}
-
-			if (GET_PLAYER(pHeadSelectedCity->getOwnerINLINE()).getMaxConscript() == 0)
-			{
-				bFirst = true;
-
-				for (iI = 0; iI < GC.getNumCivicInfos(); iI++)
-				{
-					if (getWorldSizeMaxConscript((CivicTypes)iI) > 0)
-					{
-						szTempBuffer = NEWLINE + gDLL->getText("TXT_KEY_REQUIRES");
-						setListHelp(szBuffer, szTempBuffer, GC.getCivicInfo((CivicTypes)iI).getDescription(), gDLL->getText("TXT_KEY_OR").c_str(), bFirst);
-						bFirst = false;
-					}
-				}
-
-				if (!bFirst)
-				{
-					szBuffer.append(ENDCOLR);
-				}
-			}
-		}
+		szBuffer.append(NEWLINE);
+		szBuffer.append(gDLL->getText("TXT_KEY_MISC_HURRY_GOLD", iHurryGold));
 	}
 }
 
@@ -1895,7 +1434,6 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 {
 	CLLNode<IDInfo>* pSelectedUnitNode;
 	CvCity* pMissionCity;
-	CvCity* pCity;
 	CvUnit* pHeadSelectedUnit;
 	CvUnit* pSelectedUnit;
 	CvPlot* pMissionPlot;
@@ -1904,20 +1442,13 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 	CvWString szFirstBuffer;
 	ImprovementTypes eImprovement;
 	ImprovementTypes eFinalImprovement;
-	ReligionTypes eReligion;
-	BuildingTypes eBuilding;
 	PlayerTypes eGiftPlayer;
 	BuildTypes eBuild;
 	RouteTypes eRoute;
-	BonusTypes eBonus;
-	TechTypes eTech;
 	bool bAlt;
 	bool bShift;
 	bool bValid;
 	int iYield;
-	int iUnitConsume;
-	int iUnitDiff;
-	int iProduction;
 	int iMovementCost;
 	int iFlatMovementCost;
 	int iMoves;
@@ -1926,8 +1457,6 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 	int iThenWorkRate;
 	int iTurns;
 	int iPrice;
-	int iLow;
-	int iHigh;
 	int iLast;
 	int iRange;
 	int iDX, iDY;
@@ -1987,127 +1516,6 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 					szBuffer.append(gDLL->getText("TXT_KEY_ACTION_DESTROY_IMP", GC.getRouteInfo(pMissionPlot->getRouteType()).getTextKeyWide()));
 				}
 			}
-			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_PLUNDER)
-			{
-				pMissionPlot = pHeadSelectedUnit->plot();
-
-				if (pMissionPlot->getTeam() == pHeadSelectedUnit->getTeam())
-				{
-					szBuffer.append(NEWLINE);
-					szBuffer.append(gDLL->getText("TXT_KEY_ACTION_PLUNDER_IN_BORDERS"));
-				}
-			}
-			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_SABOTAGE)
-			{
-				pSelectedUnitNode = gDLL->getInterfaceIFace()->headSelectionListNode();
-
-				while (pSelectedUnitNode != NULL)
-				{
-					pSelectedUnit = ::getUnit(pSelectedUnitNode->m_data);
-
-					if (pSelectedUnit->canSabotage(pMissionPlot, true)) // XXX if queuing up this action, use the current plot along the goto...
-					{
-						iPrice = pSelectedUnit->sabotageCost(pMissionPlot);
-						if (iPrice > 0)
-						{
-							szTempBuffer.Format(L"%d %c", iPrice, GC.getCommerceInfo(COMMERCE_GOLD).getChar());
-							szBuffer.append(NEWLINE);
-							szBuffer.append(szTempBuffer);
-						}
-
-						iLow = pSelectedUnit->sabotageProb(pMissionPlot, PROBABILITY_LOW);
-						iHigh = pSelectedUnit->sabotageProb(pMissionPlot, PROBABILITY_HIGH);
-
-						if (iLow == iHigh)
-						{
-							szBuffer.append(NEWLINE);
-							szBuffer.append(gDLL->getText("TXT_KEY_ACTION_PROBABILITY", iHigh));
-						}
-						else
-						{
-							szBuffer.append(NEWLINE);
-							szBuffer.append(gDLL->getText("TXT_KEY_ACTION_PROBABILITY_RANGE", iLow, iHigh));
-						}
-						break;
-					}
-
-					pSelectedUnitNode = gDLL->getInterfaceIFace()->nextSelectionListNode(pSelectedUnitNode);
-				}
-			}
-			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_DESTROY)
-			{
-				pSelectedUnitNode = gDLL->getInterfaceIFace()->headSelectionListNode();
-
-				while (pSelectedUnitNode != NULL)
-				{
-					pSelectedUnit = ::getUnit(pSelectedUnitNode->m_data);
-
-					if (pSelectedUnit->canDestroy(pMissionPlot, true)) // XXX if queuing up this action, use the current plot along the goto...
-					{
-						iPrice = pSelectedUnit->destroyCost(pMissionPlot);
-						if (iPrice > 0)
-						{
-							szTempBuffer.Format(L"%d %c", iPrice, GC.getCommerceInfo(COMMERCE_GOLD).getChar());
-							szBuffer.append(NEWLINE);
-							szBuffer.append(szTempBuffer);
-						}
-
-						iLow = pSelectedUnit->destroyProb(pMissionPlot, PROBABILITY_LOW);
-						iHigh = pSelectedUnit->destroyProb(pMissionPlot, PROBABILITY_HIGH);
-
-						if (iLow == iHigh)
-						{
-							szBuffer.append(NEWLINE);
-							szBuffer.append(gDLL->getText("TXT_KEY_ACTION_PROBABILITY", iHigh));
-						}
-						else
-						{
-							szBuffer.append(NEWLINE);
-							szBuffer.append(gDLL->getText("TXT_KEY_ACTION_PROBABILITY_RANGE", iLow, iHigh));
-						}
-						break;
-					}
-
-					pSelectedUnitNode = gDLL->getInterfaceIFace()->nextSelectionListNode(pSelectedUnitNode);
-				}
-			}
-			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_STEAL_PLANS)
-			{
-				pSelectedUnitNode = gDLL->getInterfaceIFace()->headSelectionListNode();
-
-				while (pSelectedUnitNode != NULL)
-				{
-					pSelectedUnit = ::getUnit(pSelectedUnitNode->m_data);
-
-					if (pSelectedUnit->canStealPlans(pMissionPlot, true)) // XXX if queuing up this action, use the current plot along the goto...
-					{
-						iPrice = pSelectedUnit->stealPlansCost(pMissionPlot);
-						if (iPrice > 0)
-						{
-							szTempBuffer.Format(L"%d %c", iPrice, GC.getCommerceInfo(COMMERCE_GOLD).getChar());
-							szBuffer.append(NEWLINE);
-							szBuffer.append(szTempBuffer);
-						}
-
-						iLow = pSelectedUnit->stealPlansProb(pMissionPlot, PROBABILITY_LOW);
-						iHigh = pSelectedUnit->stealPlansProb(pMissionPlot, PROBABILITY_HIGH);
-
-						if (iLow == iHigh)
-						{
-							szBuffer.append(NEWLINE);
-							szBuffer.append(gDLL->getText("TXT_KEY_ACTION_PROBABILITY", iHigh));
-						}
-						else
-						{
-							szBuffer.append(NEWLINE);
-							szBuffer.append(gDLL->getText("TXT_KEY_ACTION_PROBABILITY_RANGE", iLow, iHigh));
-						}
-						break;
-					}
-
-					pSelectedUnitNode = gDLL->getInterfaceIFace()->nextSelectionListNode(pSelectedUnitNode);
-				}
-			}
 			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_FOUND)
 			{
 				if (!(GET_PLAYER(pHeadSelectedUnit->getOwnerINLINE()).canFound(pMissionPlot->getX_INLINE(), pMissionPlot->getY_INLINE())))
@@ -2139,310 +1547,25 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 					}
 				}
 			}
-			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_SPREAD)
+			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_JOIN_CITY)
 			{
-				eReligion = ((ReligionTypes)(GC.getActionInfo(widgetDataStruct.m_iData1).getMissionData()));
-
-				if (pMissionCity != NULL)
+				if (!pHeadSelectedUnit->canJoinCity(pMissionPlot))
 				{
-					if (pMissionCity->getTeam() != pHeadSelectedUnit->getTeam()) // XXX still true???
-					{
-						if (GET_PLAYER(pMissionCity->getOwnerINLINE()).isNoNonStateReligionSpread())
-						{
-							if (eReligion != GET_PLAYER(pMissionCity->getOwnerINLINE()).getStateReligion())
-							{
-								szBuffer.append(NEWLINE);
-								szBuffer.append(gDLL->getText("TXT_KEY_ACTION_CANNOT_SPREAD_NON_STATE_RELIGION"));
-							}
-						}
-					}
-
-					szBuffer.append(NEWLINE);
-					GAMETEXT.setReligionHelpCity(szBuffer, eReligion, pMissionCity, false, true);
-				}
-			}
-			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_SPREAD_CORPORATION)
-			{
-				CorporationTypes eCorporation = ((CorporationTypes)(GC.getActionInfo(widgetDataStruct.m_iData1).getMissionData()));
-
-				if (pMissionCity != NULL)
-				{
-					szBuffer.append(NEWLINE);
-					GAMETEXT.setCorporationHelpCity(szBuffer, eCorporation, pMissionCity, false, true);
-
-					for (int iCorp = 0; iCorp < GC.getNumCorporationInfos(); ++iCorp)
-					{
-						if (eCorporation != iCorp)
-						{
-							if (pMissionCity->isHasCorporation((CorporationTypes)iCorp))
-							{
-								if (GC.getGameINLINE().isCompetingCorporation(eCorporation, (CorporationTypes)iCorp))
-								{
-									szBuffer.append(NEWLINE);
-									szBuffer.append(gDLL->getText("TXT_KEY_ACTION_WILL_ELIMINATE_CORPORATION", GC.getCorporationInfo((CorporationTypes)iCorp).getTextKeyWide()));
-								}
-							}
-						}
-					}
-
-					szTempBuffer.Format(L"%s%d %c", NEWLINE, pHeadSelectedUnit->spreadCorporationCost(eCorporation, pMissionCity), GC.getCommerceInfo(COMMERCE_GOLD).getChar());
-					szBuffer.append(szTempBuffer);
-
-					if (!pHeadSelectedUnit->canSpreadCorporation(pMissionPlot, eCorporation))
-					{
-						if (!GET_PLAYER(pMissionCity->getOwnerINLINE()).isActiveCorporation(eCorporation))
-						{
-							szBuffer.append(NEWLINE);
-							szBuffer.append(gDLL->getText("TXT_KEY_ACTION_CORPORATION_NOT_ACTIVE", GC.getCorporationInfo(eCorporation).getTextKeyWide(), GET_PLAYER(pMissionCity->getOwnerINLINE()).getCivilizationAdjective()));
-						}
-
-						CorporationTypes eCompetition = NO_CORPORATION;
-						for (int iCorporation = 0; iCorporation < GC.getNumCorporationInfos(); ++iCorporation)
-						{
-							if (pMissionCity->isHeadquarters((CorporationTypes)iCorporation))
-							{
-								if (GC.getGameINLINE().isCompetingCorporation((CorporationTypes)iCorporation, eCorporation))
-								{
-									eCompetition = (CorporationTypes)iCorporation;
-									break;
-								}
-							}
-						}
-
-						if (NO_CORPORATION != eCompetition)
-						{
-							szBuffer.append(NEWLINE);
-							szBuffer.append(gDLL->getText("TXT_KEY_ACTION_CORPORATION_COMPETING_HEADQUARTERS", GC.getCorporationInfo(eCorporation).getTextKeyWide(), GC.getCorporationInfo(eCompetition).getTextKeyWide()));
-						}
-
-						CvWStringBuffer szBonusList;
-						bool bValid = false;
-						bool bFirst = true;
-						for (int i = 0; i < GC.getNUM_CORPORATION_PREREQ_BONUSES(); ++i)
-						{
-							BonusTypes eBonus = (BonusTypes)GC.getCorporationInfo(eCorporation).getPrereqBonus(i);
-							if (NO_BONUS != eBonus)
-							{
-								if (!bFirst)
-								{
-									szBonusList.append(L", ");
-								}
-								else
-								{
-									bFirst = false;
-								}
-								szBonusList.append(GC.getBonusInfo(eBonus).getDescription());
-
-								if (pMissionCity->hasBonus(eBonus))
-								{
-									bValid = true;
-									break;
-								}
-							}
-						}
-
-						if (!bValid)
-						{
-							szBuffer.append(NEWLINE);
-							szBuffer.append(gDLL->getText("TXT_KEY_ACTION_CORPORATION_NO_RESOURCES", pMissionCity->getNameKey(), szBonusList.getCString()));
-						}
-					}
-				}
-			}
-			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_JOIN)
-			{
-				GAMETEXT.parseSpecialistHelp(szBuffer, ((SpecialistTypes)(GC.getActionInfo(widgetDataStruct.m_iData1).getMissionData())), pMissionCity, true);
-			}
-			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_CONSTRUCT)
-			{
-				eBuilding = ((BuildingTypes)(GC.getActionInfo(widgetDataStruct.m_iData1).getMissionData()));
-
-				if (pMissionCity != NULL)
-				{
-					if (!pHeadSelectedUnit->getUnitInfo().getForceBuildings(eBuilding)  && !pMissionCity->canConstruct(eBuilding, false, false, true))
-					{
-						if (!(GC.getGameINLINE().isBuildingClassMaxedOut((BuildingClassTypes)(GC.getBuildingInfo(eBuilding).getBuildingClassType()))))
-						{
-							GAMETEXT.buildBuildingRequiresString(szBuffer, ((BuildingTypes)(GC.getActionInfo(widgetDataStruct.m_iData1).getMissionData())), false, false, pMissionCity);
-						}
-					}
-					else
+					if (pHeadSelectedUnit->hasMoved())
 					{
 						szBuffer.append(NEWLINE);
-						GAMETEXT.setBuildingHelp(szBuffer, ((BuildingTypes)(GC.getActionInfo(widgetDataStruct.m_iData1).getMissionData())), false, false, false, pMissionCity);
+						szBuffer.append(gDLL->getText("TXT_KEY_ACTION_CANNOT_JOIN_MOVE"));
 					}
-				}
-			}
-			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_DISCOVER)
-			{
-				pSelectedUnitNode = gDLL->getInterfaceIFace()->headSelectionListNode();
 
-				while (pSelectedUnitNode != NULL)
-				{
-					pSelectedUnit = ::getUnit(pSelectedUnitNode->m_data);
-
-					if (pSelectedUnit->canDiscover(pMissionPlot))
+					CvCity* pCity = pMissionPlot->getPlotCity();
+					if (pCity != NULL)
 					{
-						eTech = pSelectedUnit->getDiscoveryTech();
-
-						if (pSelectedUnit->getDiscoverResearch(eTech) >= GET_TEAM(pSelectedUnit->getTeam()).getResearchLeft(eTech))
-						{
-							szTempBuffer.Format(SETCOLR L"%s" ENDCOLR, TEXT_COLOR("COLOR_TECH_TEXT"), GC.getTechInfo(eTech).getDescription());
-							szBuffer.append(NEWLINE);
-							szBuffer.append(szTempBuffer);
-						}
-						else
+						if (pCity->foodDifference() < 0 && !pHeadSelectedUnit->canJoinStarvingCity(*pCity))
 						{
 							szBuffer.append(NEWLINE);
-							szBuffer.append(gDLL->getText("TXT_KEY_ACTION_EXTRA_RESEARCH", pSelectedUnit->getDiscoverResearch(eTech), GC.getTechInfo(eTech).getTextKeyWide()));
-						}
-						break;
-					}
-
-					pSelectedUnitNode = gDLL->getInterfaceIFace()->nextSelectionListNode(pSelectedUnitNode);
-				}
-			}
-			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_HURRY)
-			{
-				if (pMissionCity != NULL)
-				{
-					if (!(pMissionCity->isProductionBuilding()))
-					{
-						szBuffer.append(NEWLINE);
-						szBuffer.append(gDLL->getText("TXT_KEY_ACTION_BUILDING_HURRY"));
-					}
-					else
-					{
-						pSelectedUnitNode = gDLL->getInterfaceIFace()->headSelectionListNode();
-
-						while (pSelectedUnitNode != NULL)
-						{
-							pSelectedUnit = ::getUnit(pSelectedUnitNode->m_data);
-
-							if (pSelectedUnit->canHurry(pMissionPlot, true))
-							{
-								const wchar* pcKey = NULL;
-								if (NO_PROJECT != pMissionCity->getProductionProject())
-								{
-									pcKey = GC.getProjectInfo(pMissionCity->getProductionProject()).getTextKeyWide();
-								}
-								else if (NO_BUILDING != pMissionCity->getProductionBuilding())
-								{
-									pcKey = GC.getBuildingInfo(pMissionCity->getProductionBuilding()).getTextKeyWide();
-								}
-								else if (NO_UNIT != pMissionCity->getProductionUnit())
-								{
-									pcKey = GC.getUnitInfo(pMissionCity->getProductionUnit()).getTextKeyWide();
-								}
-								if (NULL != pcKey && pSelectedUnit->getHurryProduction(pMissionPlot) >= pMissionCity->productionLeft())
-								{
-									szBuffer.append(NEWLINE);
-									szBuffer.append(gDLL->getText("TXT_KEY_ACTION_FINISH_CONSTRUCTION", pcKey));
-								}
-								else
-								{
-									szBuffer.append(NEWLINE);
-									szBuffer.append(gDLL->getText("TXT_KEY_ACTION_EXTRA_CONSTRUCTION", pSelectedUnit->getHurryProduction(pMissionPlot), pcKey));
-								}
-								break;
-							}
-
-							pSelectedUnitNode = gDLL->getInterfaceIFace()->nextSelectionListNode(pSelectedUnitNode);
+							szBuffer.append(gDLL->getText("TXT_KEY_ACTION_CANNOT_JOIN_STARVING"));
 						}
 					}
-				}
-			}
-			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_TRADE)
-			{
-				if (pMissionCity != NULL)
-				{
-					if (pMissionCity->getOwnerINLINE() == pHeadSelectedUnit->getOwnerINLINE())
-					{
-						szBuffer.append(NEWLINE);
-						szBuffer.append(gDLL->getText("TXT_KEY_ACTION_TRADE_MISSION_FOREIGN"));
-					}
-					else
-					{
-						pSelectedUnitNode = gDLL->getInterfaceIFace()->headSelectionListNode();
-
-						while (pSelectedUnitNode != NULL)
-						{
-							pSelectedUnit = ::getUnit(pSelectedUnitNode->m_data);
-
-							if (pSelectedUnit->canTrade(pMissionPlot, true))
-							{
-								szTempBuffer.Format(L"%s+%d%c", NEWLINE, pSelectedUnit->getTradeGold(pMissionPlot), GC.getCommerceInfo(COMMERCE_GOLD).getChar());
-								szBuffer.append(szTempBuffer);
-								break;
-							}
-
-							pSelectedUnitNode = gDLL->getInterfaceIFace()->nextSelectionListNode(pSelectedUnitNode);
-						}
-					}
-				}
-			}
-			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_GREAT_WORK)
-			{
-				pSelectedUnitNode = gDLL->getInterfaceIFace()->headSelectionListNode();
-
-				while (pSelectedUnitNode != NULL)
-				{
-					pSelectedUnit = ::getUnit(pSelectedUnitNode->m_data);
-
-					if (pSelectedUnit->canGreatWork(pMissionPlot))
-					{
-						szTempBuffer.Format(L"%s+%d%c", NEWLINE, pSelectedUnit->getGreatWorkCulture(pMissionPlot), GC.getCommerceInfo(COMMERCE_CULTURE).getChar());
-						szBuffer.append(szTempBuffer);
-						break;
-					}
-
-					pSelectedUnitNode = gDLL->getInterfaceIFace()->nextSelectionListNode(pSelectedUnitNode);
-				}
-			}
-			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_INFILTRATE)
-			{
-				if (pMissionCity != NULL)
-				{
-					if (pMissionCity->getOwnerINLINE() == pHeadSelectedUnit->getOwnerINLINE())
-					{
-						szBuffer.append(NEWLINE);
-						szBuffer.append(gDLL->getText("TXT_KEY_ACTION_INFILTRATE_MISSION_FOREIGN"));
-					}
-					else
-					{
-						pSelectedUnitNode = gDLL->getInterfaceIFace()->headSelectionListNode();
-
-						while (pSelectedUnitNode != NULL)
-						{
-							pSelectedUnit = ::getUnit(pSelectedUnitNode->m_data);
-
-							if (pSelectedUnit->canEspionage(pMissionPlot))
-							{
-								szTempBuffer.Format(L"%s+%d%c", NEWLINE, pSelectedUnit->getEspionagePoints(pMissionPlot), GC.getCommerceInfo(COMMERCE_ESPIONAGE).getChar());
-								szBuffer.append(szTempBuffer);
-								break;
-							}
-
-							pSelectedUnitNode = gDLL->getInterfaceIFace()->nextSelectionListNode(pSelectedUnitNode);
-						}
-					}
-				}
-			}
-			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_GOLDEN_AGE)
-			{
-				iUnitConsume = GET_PLAYER(pHeadSelectedUnit->getOwnerINLINE()).unitsRequiredForGoldenAge();
-				iUnitDiff = (iUnitConsume - GET_PLAYER(pHeadSelectedUnit->getOwnerINLINE()).unitsGoldenAgeReady());
-
-				if (iUnitDiff > 0)
-				{
-					szBuffer.append(NEWLINE);
-					szBuffer.append(gDLL->getText("TXT_KEY_ACTION_MORE_GREAT_PEOPLE", iUnitDiff));
-				}
-
-				if (iUnitConsume > 1)
-				{
-					szBuffer.append(NEWLINE);
-					szBuffer.append(gDLL->getText("TXT_KEY_ACTION_CONSUME_GREAT_PEOPLE", iUnitConsume));
 				}
 			}
 			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_LEAD)
@@ -2463,52 +1586,32 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 					GAMETEXT.parsePromotionHelp(szBuffer, (PromotionTypes)pHeadSelectedUnit->getUnitInfo().getLeaderPromotion(), L"\n   ");
 				}
 			}
-			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_ESPIONAGE)
-			{
-				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_ACTION_ESPIONAGE_MISSION"));
-
-				GAMETEXT.setEspionageMissionHelp(szBuffer, pHeadSelectedUnit);
-			}
 			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_BUILD)
 			{
 				eBuild = ((BuildTypes)(GC.getActionInfo(widgetDataStruct.m_iData1).getMissionData()));
 				FAssert(eBuild != NO_BUILD);
-				eImprovement = ((ImprovementTypes)(GC.getBuildInfo(eBuild).getImprovement()));
-				eRoute = ((RouteTypes)(GC.getBuildInfo(eBuild).getRoute()));
-				eBonus = pMissionPlot->getBonusType(pHeadSelectedUnit->getTeam());
-
+				eImprovement = pMissionPlot->getImprovementType();
+				ImprovementTypes eBuildImprovement = (ImprovementTypes) GC.getBuildInfo(eBuild).getImprovement();
+				if (eBuildImprovement != NO_IMPROVEMENT)
+				{
+					eImprovement = eBuildImprovement;
+				}
+				eRoute = pMissionPlot->getRouteType();
+				RouteTypes eBuildRoute = (RouteTypes) GC.getBuildInfo(eBuild).getRoute();
+				if (eBuildRoute != NO_ROUTE)
+				{
+					eRoute = eBuildRoute;
+				}
+				FeatureTypes eFeature = pMissionPlot->getFeatureType();
+				bool bIgnoreFeature = (eFeature != NO_FEATURE && GC.getBuildInfo(eBuild).isFeatureRemove(eFeature));
 				for (iI = 0; iI < NUM_YIELD_TYPES; iI++)
 				{
-					iYield = 0;
-
-					if (eImprovement != NO_IMPROVEMENT)
-					{
-						iYield = pMissionPlot->calculateImprovementYieldChange(eImprovement, ((YieldTypes)iI), pHeadSelectedUnit->getOwnerINLINE());
-					}
-
-					if (NO_FEATURE != pMissionPlot->getFeatureType())
-					{
-						if (GC.getBuildInfo(eBuild).isFeatureRemove(pMissionPlot->getFeatureType()))
-						{
-							iYield -= GC.getFeatureInfo(pMissionPlot->getFeatureType()).getYieldChange(iI);
-						}
-					}
+					iYield = pMissionPlot->calculatePotentialYield((YieldTypes) iI, GC.getGameINLINE().getActivePlayer(), eImprovement, bIgnoreFeature, eRoute, NO_UNIT, false);
+					iYield -= pMissionPlot->calculatePotentialYield((YieldTypes) iI, GC.getGameINLINE().getActivePlayer(), pMissionPlot->getImprovementType(), false, pMissionPlot->getRouteType(), NO_UNIT, false);
 
 					if (iYield != 0)
 					{
-						szTempBuffer.Format(L", %s%d%c", ((iYield > 0) ? "+" : ""), iYield, GC.getYieldInfo((YieldTypes) iI).getChar());
-						szBuffer.append(szTempBuffer);
-					}
-				}
-
-				if (NO_IMPROVEMENT != eImprovement)
-				{
-					int iHappy = GC.getImprovementInfo(eImprovement).getHappiness();
-
-					if (iHappy != 0)
-					{
-						szTempBuffer.Format(L", +%d%c", abs(iHappy), (iHappy > 0 ? gDLL->getSymbolID(HAPPY_CHAR) : gDLL->getSymbolID(UNHAPPY_CHAR)));
+						szTempBuffer.Format(L", %s%d%c", ((iYield > 0) ? L"+" : L""), iYield, GC.getYieldInfo((YieldTypes) iI).getChar());
 						szBuffer.append(szTempBuffer);
 					}
 				}
@@ -2532,11 +1635,11 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 
 				if (!bValid)
 				{
-					if (eImprovement != NO_IMPROVEMENT)
+					if (eBuildImprovement != NO_IMPROVEMENT)
 					{
 						if (pMissionPlot->getTeam() != pHeadSelectedUnit->getTeam())
 						{
-							if (GC.getImprovementInfo(eImprovement).isOutsideBorders())
+							if (GC.getImprovementInfo(eBuildImprovement).isOutsideBorders())
 							{
 								if (pMissionPlot->getTeam() != NO_TEAM)
 								{
@@ -2550,85 +1653,10 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 								szBuffer.append(gDLL->getText("TXT_KEY_ACTION_NEEDS_CULTURE_BORDER"));
 							}
 						}
-
-						if ((eBonus == NO_BONUS) || !(GC.getImprovementInfo(eImprovement).isImprovementBonusTrade(eBonus)))
-						{
-							if (!(GET_TEAM(pHeadSelectedUnit->getTeam()).isIrrigation()) && !(GET_TEAM(pHeadSelectedUnit->getTeam()).isIgnoreIrrigation()))
-							{
-								if (GC.getImprovementInfo(eImprovement).isRequiresIrrigation() && !(pMissionPlot->isIrrigationAvailable()))
-								{
-									for (iI = 0; iI < GC.getNumTechInfos(); iI++)
-									{
-										if (GC.getTechInfo((TechTypes)iI).isIrrigation())
-										{
-											szBuffer.append(NEWLINE);
-											szBuffer.append(gDLL->getText("TXT_KEY_BUILDING_REQUIRES_STRING", GC.getTechInfo((TechTypes)iI).getTextKeyWide()));
-											break;
-										}
-									}
-								}
-							}
-						}
-					}
-
-					if (!(GET_TEAM(pHeadSelectedUnit->getTeam()).isHasTech((TechTypes)GC.getBuildInfo(eBuild).getTechPrereq())))
-					{
-						szBuffer.append(NEWLINE);
-						szBuffer.append(gDLL->getText("TXT_KEY_BUILDING_REQUIRES_STRING", GC.getTechInfo((TechTypes) GC.getBuildInfo(eBuild).getTechPrereq()).getTextKeyWide()));
-					}
-
-					if (eRoute != NO_ROUTE)
-					{
-						if (GC.getRouteInfo(eRoute).getPrereqBonus() != NO_BONUS)
-						{
-							if (!(pMissionPlot->isAdjacentPlotGroupConnectedBonus(pHeadSelectedUnit->getOwnerINLINE(), ((BonusTypes)(GC.getRouteInfo(eRoute).getPrereqBonus())))))
-							{
-								szBuffer.append(NEWLINE);
-								szBuffer.append(gDLL->getText("TXT_KEY_BUILDING_REQUIRES_STRING", GC.getBonusInfo((BonusTypes) GC.getRouteInfo(eRoute).getPrereqBonus()).getTextKeyWide()));
-							}
-						}
-
-						bool bFoundValid = true;
-						std::vector<BonusTypes> aeOrBonuses;
-						for (int i = 0; i < GC.getNUM_ROUTE_PREREQ_OR_BONUSES(); ++i)
-						{
-							if (NO_BONUS != GC.getRouteInfo(eRoute).getPrereqOrBonus(i))
-							{
-								aeOrBonuses.push_back((BonusTypes)GC.getRouteInfo(eRoute).getPrereqOrBonus(i));
-								bFoundValid = false;
-
-								if (pMissionPlot->isAdjacentPlotGroupConnectedBonus(pHeadSelectedUnit->getOwnerINLINE(), ((BonusTypes)(GC.getRouteInfo(eRoute).getPrereqOrBonus(i)))))
-								{
-									bFoundValid = true;
-									break;
-								}
-							}
-						}
-
-						if (!bFoundValid)
-						{
-							bool bFirst = true;
-							for (std::vector<BonusTypes>::iterator it = aeOrBonuses.begin(); it != aeOrBonuses.end(); ++it)
-							{
-								szFirstBuffer = NEWLINE + gDLL->getText("TXT_KEY_BUILDING_REQUIRES_LIST");
-								szTempBuffer.Format( SETCOLR L"<link=literal>%s</link>" ENDCOLR , TEXT_COLOR("COLOR_HIGHLIGHT_TEXT"), GC.getBonusInfo(*it).getDescription());
-								setListHelp(szBuffer, szFirstBuffer.GetCString(), szTempBuffer, gDLL->getText("TXT_KEY_OR").c_str(), bFirst);
-								bFirst = false;
-							}
-						}
-					}
-
-					if (pMissionPlot->getFeatureType() != NO_FEATURE)
-					{
-						if (!(GET_TEAM(pHeadSelectedUnit->getTeam()).isHasTech((TechTypes)GC.getBuildInfo(eBuild).getFeatureTech(pMissionPlot->getFeatureType()))))
-						{
-							szBuffer.append(NEWLINE);
-							szBuffer.append(gDLL->getText("TXT_KEY_BUILDING_REQUIRES_STRING", GC.getTechInfo((TechTypes) GC.getBuildInfo(eBuild).getFeatureTech(pMissionPlot->getFeatureType())).getTextKeyWide()));
-						}
 					}
 				}
 
-				if (eImprovement != NO_IMPROVEMENT)
+				if (eBuildImprovement != NO_IMPROVEMENT)
 				{
 					if (pMissionPlot->getImprovementType() != NO_IMPROVEMENT)
 					{
@@ -2647,12 +1675,19 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 				{
 					if (GC.getBuildInfo(eBuild).isFeatureRemove(pMissionPlot->getFeatureType()))
 					{
-						iProduction = pMissionPlot->getFeatureProduction(eBuild, pHeadSelectedUnit->getTeam(), &pCity);
-
-						if (iProduction > 0)
+						CvCity* pCity = NULL;
+						for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
 						{
-							szBuffer.append(NEWLINE);
-							szBuffer.append(gDLL->getText("TXT_KEY_ACTION_CHANGE_PRODUCTION", iProduction, pCity->getNameKey()));
+							YieldTypes eYield = (YieldTypes) iYield;
+							if (GC.getYieldInfo(eYield).isCargo())
+							{
+								int iYieldProduction = pMissionPlot->getFeatureYield(eBuild, eYield, pHeadSelectedUnit->getTeam(), &pCity);
+								if (iYieldProduction > 0)
+								{
+									szBuffer.append(NEWLINE);
+									szBuffer.append(gDLL->getText("TXT_KEY_ACTION_CHANGE_PRODUCTION", iYieldProduction, pCity->getNameKey(), GC.getYieldInfo(eYield).getChar()));
+								}
+							}
 						}
 
 						szBuffer.append(NEWLINE);
@@ -2661,85 +1696,54 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 
 				}
 
-				if (eImprovement != NO_IMPROVEMENT)
+				if (eBuildImprovement != NO_IMPROVEMENT)
 				{
-					if (eBonus != NO_BONUS)
-					{
-						if ((GC.getBonusInfo(eBonus).getTechObsolete() == NO_TECH) || !(GET_TEAM(pHeadSelectedUnit->getTeam()).isHasTech((TechTypes)(GC.getBonusInfo(eBonus).getTechObsolete()))))
-						{
-							if (GC.getImprovementInfo(eImprovement).isImprovementBonusTrade(eBonus))
-							{
-								szBuffer.append(NEWLINE);
-								szBuffer.append(gDLL->getText("TXT_KEY_ACTION_PROVIDES_BONUS", GC.getBonusInfo(eBonus).getTextKeyWide()));
-
-								if (GC.getBonusInfo(eBonus).getHealth() != 0)
-								{
-									szTempBuffer.Format(L" (+%d%c)", abs(GC.getBonusInfo(eBonus).getHealth()), ((GC.getBonusInfo(eBonus).getHealth() > 0) ? gDLL->getSymbolID(HEALTHY_CHAR) : gDLL->getSymbolID(UNHEALTHY_CHAR)));
-									szBuffer.append(szTempBuffer);
-								}
-
-								if (GC.getBonusInfo(eBonus).getHappiness() != 0)
-								{
-									szTempBuffer.Format(L" (+%d%c)", abs(GC.getBonusInfo(eBonus).getHappiness()), ((GC.getBonusInfo(eBonus).getHappiness() > 0) ? gDLL->getSymbolID(HAPPY_CHAR) : gDLL->getSymbolID(UNHAPPY_CHAR)));
-									szBuffer.append(szTempBuffer);
-								}
-							}
-						}
-					}
-					else
+					if (pMissionPlot->getBonusType() == NO_BONUS)
 					{
 						iLast = 0;
 
 						FAssert((0 < GC.getNumBonusInfos()) && "GC.getNumBonusInfos() is not greater than zero but an array is being allocated in CvDLLWidgetData::parseActionHelp");
 						for (iI = 0; iI < GC.getNumBonusInfos(); iI++)
 						{
-							if (GET_TEAM(pHeadSelectedUnit->getTeam()).isHasTech((TechTypes)(GC.getBonusInfo((BonusTypes) iI).getTechReveal())))
+							if (GC.getImprovementInfo(eBuildImprovement).getImprovementBonusDiscoverRand(iI) > 0)
 							{
-								if (GC.getImprovementInfo(eImprovement).getImprovementBonusDiscoverRand(iI) > 0)
-								{
-									szFirstBuffer.Format(L"%s%s", NEWLINE, gDLL->getText("TXT_KEY_ACTION_CHANCE_DISCOVER").c_str());
-									szTempBuffer.Format(L"%c", GC.getBonusInfo((BonusTypes) iI).getChar());
-									setListHelp(szBuffer, szFirstBuffer, szTempBuffer, L", ", (GC.getImprovementInfo(eImprovement).getImprovementBonusDiscoverRand(iI) != iLast));
-									iLast = GC.getImprovementInfo(eImprovement).getImprovementBonusDiscoverRand(iI);
-								}
+								szFirstBuffer.Format(L"%s%s", NEWLINE, gDLL->getText("TXT_KEY_ACTION_CHANCE_DISCOVER").c_str());
+								szTempBuffer.Format(L"%c", GC.getBonusInfo((BonusTypes) iI).getChar());
+								setListHelp(szBuffer, szFirstBuffer, szTempBuffer, L", ", (GC.getImprovementInfo(eBuildImprovement).getImprovementBonusDiscoverRand(iI) != iLast));
+								iLast = GC.getImprovementInfo(eBuildImprovement).getImprovementBonusDiscoverRand(iI);
 							}
 						}
 					}
 
-					if (!(pMissionPlot->isIrrigationAvailable()))
-					{
-						GAMETEXT.setYieldChangeHelp(szBuffer, gDLL->getText("TXT_KEY_ACTION_IRRIGATED").c_str(), L": ", L"", GC.getImprovementInfo(eImprovement).getIrrigatedYieldChangeArray());
-					}
-
-					if (eRoute == NO_ROUTE)
+					if (eBuildRoute == NO_ROUTE)
 					{
 						for (iI = 0; iI < GC.getNumRouteInfos(); iI++)
 						{
 							if (pMissionPlot->getRouteType() != ((RouteTypes)iI))
 							{
-								GAMETEXT.setYieldChangeHelp(szBuffer, GC.getRouteInfo((RouteTypes)iI).getDescription(), L": ", L"", GC.getImprovementInfo(eImprovement).getRouteYieldChangesArray((RouteTypes)iI));
+								GAMETEXT.setYieldChangeHelp(szBuffer, GC.getRouteInfo((RouteTypes)iI).getDescription(), L": ", L"", GC.getImprovementInfo(eBuildImprovement).getRouteYieldChangesArray((RouteTypes)iI));
 							}
 						}
 					}
 
-					if (GC.getImprovementInfo(eImprovement).getDefenseModifier() != 0)
+					if (GC.getImprovementInfo(eBuildImprovement).getDefenseModifier() != 0)
 					{
 						szBuffer.append(NEWLINE);
-						szBuffer.append(gDLL->getText("TXT_KEY_ACTION_DEFENSE_MODIFIER", GC.getImprovementInfo(eImprovement).getDefenseModifier()));
+						szBuffer.append(gDLL->getText("TXT_KEY_ACTION_DEFENSE_MODIFIER", GC.getImprovementInfo(eBuildImprovement).getDefenseModifier()));
 					}
 
-					if (GC.getImprovementInfo(eImprovement).getImprovementUpgrade() != NO_IMPROVEMENT)
+					if (GC.getImprovementInfo(eBuildImprovement).getImprovementUpgrade() != NO_IMPROVEMENT)
 					{
-						iTurns = pMissionPlot->getUpgradeTimeLeft(eImprovement, pHeadSelectedUnit->getOwnerINLINE());
+						iTurns = pMissionPlot->getUpgradeTimeLeft(eBuildImprovement, pHeadSelectedUnit->getOwnerINLINE());
 
 						szBuffer.append(NEWLINE);
-						szBuffer.append(gDLL->getText("TXT_KEY_ACTION_BECOMES_IMP", GC.getImprovementInfo((ImprovementTypes) GC.getImprovementInfo(eImprovement).getImprovementUpgrade()).getTextKeyWide(), iTurns));
+						szBuffer.append(gDLL->getText("TXT_KEY_ACTION_BECOMES_IMP", GC.getImprovementInfo((ImprovementTypes) GC.getImprovementInfo(eBuildImprovement).getImprovementUpgrade()).getTextKeyWide(), iTurns));
 					}
 				}
 
-				if (eRoute != NO_ROUTE)
+				if (eBuildRoute != NO_ROUTE)
 				{
-					eFinalImprovement = eImprovement;
+					eFinalImprovement = eBuildImprovement;
 
 					if (eFinalImprovement == NO_IMPROVEMENT)
 					{
@@ -2748,11 +1752,11 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 
 					if (eFinalImprovement != NO_IMPROVEMENT)
 					{
-						GAMETEXT.setYieldChangeHelp(szBuffer, GC.getImprovementInfo(eFinalImprovement).getDescription(), L": ", L"", GC.getImprovementInfo(eFinalImprovement).getRouteYieldChangesArray(eRoute));
+						GAMETEXT.setYieldChangeHelp(szBuffer, GC.getImprovementInfo(eFinalImprovement).getDescription(), L": ", L"", GC.getImprovementInfo(eFinalImprovement).getRouteYieldChangesArray(eBuildRoute));
 					}
 
-					iMovementCost = GC.getRouteInfo(eRoute).getMovementCost() + GET_TEAM(pHeadSelectedUnit->getTeam()).getRouteChange(eRoute);
-					iFlatMovementCost = GC.getRouteInfo(eRoute).getFlatMovementCost();
+					iMovementCost = GC.getRouteInfo(eBuildRoute).getMovementCost();
+					iFlatMovementCost = GC.getRouteInfo(eBuildRoute).getFlatMovementCost();
 
 					if (iMovementCost > 0)
 					{
@@ -2795,9 +1799,6 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 							szBuffer.append(gDLL->getText("TXT_KEY_ACTION_FLAT_MOVEMENT_COST", iFlatMoves));
 						}
 					}
-
-					szBuffer.append(NEWLINE);
-					szBuffer.append(gDLL->getText("TXT_KEY_ACTION_CONNECTS_RESOURCES"));
 				}
 
 				iNowWorkRate = 0;
@@ -2807,10 +1808,18 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 
 				if (NULL != pHeadSelectedUnit)
 				{
-					if (GET_PLAYER(pHeadSelectedUnit->getOwnerINLINE()).getBuildCost(pMissionPlot, eBuild) > 0)
+					int iCost = GET_PLAYER(pHeadSelectedUnit->getOwnerINLINE()).getBuildCost(pMissionPlot, eBuild);
+					if (iCost > 0)
 					{
 						szBuffer.append(NEWLINE);
-						szBuffer.append(gDLL->getText("TXT_KEY_BUILD_COST", GET_PLAYER(pHeadSelectedUnit->getOwnerINLINE()).getBuildCost(pMissionPlot, eBuild)));
+						if (GET_PLAYER(pHeadSelectedUnit->getOwnerINLINE()).getGold() < iCost)
+						{
+							szBuffer.append(gDLL->getText("TXT_KEY_BUILD_CANNOT_AFFORD", iCost, gDLL->getSymbolID(GOLD_CHAR)));
+						}
+						else
+						{
+							szBuffer.append(gDLL->getText("TXT_KEY_BUILD_COST", iCost));
+						}
 					}
 				}
 
@@ -2875,7 +1884,7 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 					}
 				}
 
-				szTempBuffer.Format(L"%s%d %c", NEWLINE, iPrice, GC.getCommerceInfo(COMMERCE_GOLD).getChar());
+				szTempBuffer.Format(L"%s%d %c", NEWLINE, iPrice, gDLL->getSymbolID(GOLD_CHAR));
 				szBuffer.append(szTempBuffer);
 			}
 			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getCommandType() == COMMAND_GIFT)
@@ -2904,6 +1913,19 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 						}
 
 						pSelectedUnitNode = gDLL->getInterfaceIFace()->nextSelectionListNode(pSelectedUnitNode);
+					}
+				}
+			}
+			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getCommandType() == COMMAND_LEARN)
+			{
+				CvPlot* pPlot = pHeadSelectedUnit->plot();
+				if (pPlot != NULL)
+				{
+					UnitTypes eLearnUnit = pHeadSelectedUnit->getLearnUnitType(pPlot);
+					if(eLearnUnit != NO_UNIT)
+					{
+						szBuffer.append(NEWLINE);
+						szBuffer.append(gDLL->getText("TXT_KEY_COMMAND_LEARN_HELP_1", GC.getUnitInfo(eLearnUnit).getTextKeyWide()));
 					}
 				}
 			}
@@ -2948,264 +1970,92 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 
 void CvDLLWidgetData::parseCitizenHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
-	CvCity* pHeadSelectedCity;
-	int iCount;
-	int iI;
-
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
-	if (pHeadSelectedCity != NULL)
+	CvCity* pCity = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCity(widgetDataStruct.m_iData2);
+	if (pCity == NULL)
 	{
-		if (widgetDataStruct.m_iData1 != NO_SPECIALIST)
+		pCity =	gDLL->getInterfaceIFace()->getHeadSelectedCity();
+	}
+	if (pCity != NULL)
+	{
+		CvUnit* pUnit = pCity->getPopulationUnitById(widgetDataStruct.m_iData1);
+		if (NULL == pUnit)
 		{
-			GAMETEXT.parseSpecialistHelp(szBuffer, ((SpecialistTypes)(widgetDataStruct.m_iData1)), pHeadSelectedCity);
-
-			if (widgetDataStruct.m_iData2 != -1)
-			{
-				iCount = 0;
-
-				for (iI = 0; iI < GC.getNumSpecialistInfos(); iI++)
-				{
-					if (iI < widgetDataStruct.m_iData1)
-					{
-						iCount += pHeadSelectedCity->getSpecialistCount((SpecialistTypes)iI);
-					}
-					else if (iI == widgetDataStruct.m_iData1)
-					{
-						iCount += widgetDataStruct.m_iData2;
-					}
-				}
-
-				if (iCount < pHeadSelectedCity->totalFreeSpecialists())
-				{
-					szBuffer.append(NEWLINE);
-					szBuffer.append(gDLL->getText("TXT_KEY_MISC_FREE_SPECIALIST"));
-				}
-			}
+			return;
 		}
+
+		GAMETEXT.setCitizenHelp(szBuffer, *pCity, *pUnit);
 	}
 }
-
-
-void CvDLLWidgetData::parseFreeCitizenHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	CvCity* pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
-	if (pHeadSelectedCity != NULL)
-	{
-		SpecialistTypes eSpecialist = (SpecialistTypes)widgetDataStruct.m_iData1;
-		if (NO_SPECIALIST != eSpecialist)
-		{
-			GAMETEXT.parseSpecialistHelp(szBuffer, eSpecialist, pHeadSelectedCity);
-		}
-		if (widgetDataStruct.m_iData2 != -1)
-		{
-			szBuffer.append(SEPARATOR);
-			GAMETEXT.parseFreeSpecialistHelp(szBuffer, *pHeadSelectedCity);
-		}
-	}
-}
-
-
-void CvDLLWidgetData::parseDisabledCitizenHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	CvCity* pHeadSelectedCity;
-	CvWString szTempBuffer;
-	BuildingTypes eLoopBuilding;
-	bool bFirst;
-	int iI;
-
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
-	if (pHeadSelectedCity != NULL)
-	{
-		if (widgetDataStruct.m_iData1 != NO_SPECIALIST)
-		{
-			GAMETEXT.parseSpecialistHelp(szBuffer, ((SpecialistTypes)(widgetDataStruct.m_iData1)), pHeadSelectedCity);
-
-			if (!(pHeadSelectedCity->isSpecialistValid(((SpecialistTypes)(widgetDataStruct.m_iData1)), 1)))
-			{
-				bFirst = true;
-
-				for (iI = 0; iI < GC.getNumBuildingClassInfos(); iI++)
-				{
-					eLoopBuilding = (BuildingTypes)GC.getCivilizationInfo(GC.getGameINLINE().getActiveCivilizationType()).getCivilizationBuildings(iI);
-
-					if (eLoopBuilding != NO_BUILDING)
-					{
-						if (GC.getBuildingInfo(eLoopBuilding).getSpecialistCount(widgetDataStruct.m_iData1) > 0)
-						{
-							if ((pHeadSelectedCity->getNumBuilding(eLoopBuilding) <= 0) && !isLimitedWonderClass((BuildingClassTypes)iI))
-							{
-								if ((GC.getBuildingInfo(eLoopBuilding).getSpecialBuildingType() == NO_SPECIALBUILDING) || pHeadSelectedCity->canConstruct(eLoopBuilding))
-								{
-									szTempBuffer = NEWLINE + gDLL->getText("TXT_KEY_REQUIRES");
-									setListHelp(szBuffer, szTempBuffer, GC.getBuildingInfo(eLoopBuilding).getDescription(), gDLL->getText("TXT_KEY_OR").c_str(), bFirst);
-									bFirst = false;
-								}
-							}
-						}
-					}
-				}
-
-				if (!bFirst)
-				{
-					szBuffer.append(ENDCOLR);
-				}
-			}
-		}
-	}
-}
-
-
-void CvDLLWidgetData::parseAngryCitizenHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	CvCity* pHeadSelectedCity;
-
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
-	if (pHeadSelectedCity != NULL)
-	{
-		szBuffer.assign(gDLL->getText("TXT_KEY_MISC_ANGRY_CITIZEN"));
-		szBuffer.append(NEWLINE);
-
-		GAMETEXT.setAngerHelp(szBuffer, *pHeadSelectedCity);
-	}
-}
-
-
-void CvDLLWidgetData::parseChangeSpecialistHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	CvCity* pHeadSelectedCity;
-
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
-	if (pHeadSelectedCity != NULL)
-	{
-		if (widgetDataStruct.m_iData2 > 0)
-		{
-			GAMETEXT.parseSpecialistHelp(szBuffer, ((SpecialistTypes)(widgetDataStruct.m_iData1)), pHeadSelectedCity);
-
-			if (widgetDataStruct.m_iData1 != GC.getDefineINT("DEFAULT_SPECIALIST"))
-			{
-				if (!(GET_PLAYER(pHeadSelectedCity->getOwnerINLINE()).isSpecialistValid((SpecialistTypes)(widgetDataStruct.m_iData1))))
-				{
-					if (pHeadSelectedCity->getMaxSpecialistCount((SpecialistTypes)(widgetDataStruct.m_iData1)) > 0)
-					{
-						szBuffer.append(NEWLINE);
-						szBuffer.append(gDLL->getText("TXT_KEY_MISC_MAX_SPECIALISTS", pHeadSelectedCity->getMaxSpecialistCount((SpecialistTypes)(widgetDataStruct.m_iData1))));
-					}
-				}
-			}
-		}
-		else
-		{
-			szBuffer.assign(gDLL->getText("TXT_KEY_MISC_REMOVE_SPECIALIST", GC.getSpecialistInfo((SpecialistTypes) widgetDataStruct.m_iData1).getTextKeyWide()));
-
-			if (pHeadSelectedCity->getForceSpecialistCount((SpecialistTypes)(widgetDataStruct.m_iData1)) > 0)
-			{
-				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_MISC_FORCED_SPECIALIST", pHeadSelectedCity->getForceSpecialistCount((SpecialistTypes)(widgetDataStruct.m_iData1))));
-			}
-		}
-	}
-}
-
-
-void CvDLLWidgetData::parseResearchHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	TechTypes eTech;
-
-	eTech = ((TechTypes)(widgetDataStruct.m_iData1));
-
-	if (eTech == NO_TECH)
-	{
-		//	No Technology
-		if (GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCurrentResearch() != NO_TECH)
-		{
-			CvGameAI& game = GC.getGameINLINE();
-			CvPlayer& activePlayer = GET_PLAYER(game.getActivePlayer());
-			szBuffer.assign(gDLL->getText("TXT_KEY_MISC_CHANGE_RESEARCH"));
-			szBuffer.append(NEWLINE);
-			GAMETEXT.setTechHelp(szBuffer, activePlayer.getCurrentResearch(), false, true);
-		}
-	}
-	else
-	{
-		GAMETEXT.setTechHelp(szBuffer, eTech, false, true, widgetDataStruct.m_bOption);
-	}
-}
-
-
-void CvDLLWidgetData::parseTechTreeHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.setTechHelp(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)), false, false, false, false);
-}
-
-
-void CvDLLWidgetData::parseChangePercentHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	if (widgetDataStruct.m_iData2 > 0)
-	{
-		szBuffer.assign(gDLL->getText("TXT_KEY_MISC_INCREASE_RATE", GC.getCommerceInfo((CommerceTypes) widgetDataStruct.m_iData1).getTextKeyWide(), widgetDataStruct.m_iData2));
-	}
-	else
-	{
-		szBuffer.assign(gDLL->getText("TXT_KEY_MISC_DECREASE_RATE", GC.getCommerceInfo((CommerceTypes) widgetDataStruct.m_iData1).getTextKeyWide(), -(widgetDataStruct.m_iData2)));
-	}
-}
-
 
 void CvDLLWidgetData::parseContactCivHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
 	//	Do not execute this if we are trying to contact ourselves...
-	if (widgetDataStruct.m_iData1 >= MAX_PLAYERS || GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).getCivilizationType() == NO_CIVILIZATION)
+	if (widgetDataStruct.m_iData1 >= MAX_PLAYERS)
 	{
 		return;
 	}
-	if (GC.getGameINLINE().getActivePlayer() == widgetDataStruct.m_iData1)
+
+	CvPlayer& otherPlayer = GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1);
+
+	if (otherPlayer.getCivilizationType() == NO_CIVILIZATION)
 	{
+		return;
+	}
+
+	if (GC.getGameINLINE().getActivePlayer() == otherPlayer.getID())
+	{
+		parseFlagHelp(widgetDataStruct, szBuffer);
 		parseScoreHelp(widgetDataStruct, szBuffer);
 		return;
 	}
 
-	szBuffer.assign(gDLL->getText("TXT_KEY_MISC_CONTACT_LEADER", GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).getNameKey(), GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).getCivilizationShortDescription()));
+	CvWString szNameKey;
+	if (otherPlayer.isEurope())
+	{
+		szNameKey = "TXT_KEY_GENERIC_KING";
+	}
+	else
+	{
+		szNameKey = otherPlayer.getNameKey();
+	}
+	szBuffer.assign(gDLL->getText("TXT_KEY_MISC_CONTACT_LEADER", szNameKey.GetCString(), otherPlayer.getCivilizationShortDescription()));
 
 	szBuffer.append(NEWLINE);
-	GAMETEXT.parsePlayerTraits(szBuffer, (PlayerTypes)widgetDataStruct.m_iData1);
+	GAMETEXT.parsePlayerTraits(szBuffer, otherPlayer.getID());
 
-	if (!(GET_TEAM(GC.getGameINLINE().getActiveTeam()).isHasMet(GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).getTeam())))
+	if (!(GET_TEAM(GC.getGameINLINE().getActiveTeam()).isHasMet(otherPlayer.getTeam())))
 	{
 		szBuffer.append(NEWLINE);
 		szBuffer.append(gDLL->getText("TXT_KEY_MISC_HAVENT_MET_CIV"));
 	}
 	else
 	{
-		if (!(GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).isHuman()))
+		if (!otherPlayer.isHuman())
 		{
-			if (!(GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).AI_isWillingToTalk(GC.getGameINLINE().getActivePlayer())))
+			if (!otherPlayer.AI_isWillingToTalk(GC.getGameINLINE().getActivePlayer()))
 			{
 				szBuffer.append(NEWLINE);
 				szBuffer.append(gDLL->getText("TXT_KEY_MISC_REFUSES_TO_TALK"));
 			}
 
 			szBuffer.append(NEWLINE);
-			GAMETEXT.getAttitudeString(szBuffer, ((PlayerTypes)widgetDataStruct.m_iData1), GC.getGameINLINE().getActivePlayer());
+			GAMETEXT.getAttitudeString(szBuffer, otherPlayer.getID(), GC.getGameINLINE().getActivePlayer());
 
-			szBuffer.append(NEWLINE);
-			GAMETEXT.getEspionageString(szBuffer, ((PlayerTypes)widgetDataStruct.m_iData1), GC.getGameINLINE().getActivePlayer());
-
-			szBuffer.append(gDLL->getText("TXT_KEY_MISC_CTRL_TRADE"));
+			if (!GC.getGameINLINE().isOption(GAMEOPTION_ALWAYS_WAR) && !otherPlayer.isEurope())
+			{
+				szBuffer.append(NEWLINE);
+				szBuffer.append(gDLL->getText("TXT_KEY_MISC_CTRL_TRADE"));
+			}
 		}
 
-		if ((GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).getTeam() != GC.getGameINLINE().getActiveTeam()) && !(GET_TEAM(GC.getGameINLINE().getActiveTeam()).isAtWar(GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).getTeam())))
+		if (otherPlayer.getTeam() != GC.getGameINLINE().getActiveTeam() && !::atWar(GC.getGameINLINE().getActiveTeam(), otherPlayer.getTeam()))
 		{
-			if (GET_TEAM(GC.getGameINLINE().getActiveTeam()).canDeclareWar(GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).getTeam()))
+			if (GET_TEAM(GC.getGameINLINE().getActiveTeam()).canDeclareWar(otherPlayer.getTeam()))
 			{
 				szBuffer.append(NEWLINE);
 				szBuffer.append(gDLL->getText("TXT_KEY_MISC_ALT_DECLARE_WAR"));
 			}
-			else
+			else if (!GET_TEAM(otherPlayer.getTeam()).isParentOf(GC.getGameINLINE().getActiveTeam()))
 			{
 				szBuffer.append(NEWLINE);
 				szBuffer.append(gDLL->getText("TXT_KEY_MISC_CANNOT_DECLARE_WAR"));
@@ -3213,118 +2063,87 @@ void CvDLLWidgetData::parseContactCivHelp(CvWidgetDataStruct &widgetDataStruct, 
 		}
 	}
 
-	if (GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).isHuman())
+	if (otherPlayer.isHuman())
 	{
-//		szBuffer += "\n(<SHIFT> to Send Chat Message)";
 		szBuffer.append(NEWLINE);
 		szBuffer.append(gDLL->getText("TXT_KEY_MISC_SHIFT_SEND_CHAT"));
 	}
+
+	if ((gDLL->getChtLvl() > 0) && gDLL->shiftKey())
+	{
+		CvPlayerAI& player = GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1);
+		
+		szBuffer.append(CvWString::format(L"\nPlayer %d, Team %d", player.getID(), player.getTeam()));
+		szBuffer.append(CvWString::format(L"\n%d%c", player.getGold(), gDLL->getSymbolID(GOLD_CHAR)));
+		szBuffer.append(CvWString::format(L"\nCities = %d, Units = %d, Pop = %d, AIPop = %d", player.getNumCities(), player.getNumUnits(), player.getTotalPopulation(), player.AI_getPopulation()));
+		szBuffer.append(CvWString::format(L"\nIncome = %d, Hurry Spending = %d", player.AI_getTotalIncome(), player.AI_getHurrySpending()));
+		
+		//Extra Info
+		ProfessionTypes eBuyProfession;
+		UnitTypes eBuyProfessionUnit;
+		UnitAITypes eBuyProfessionAI;
+		int iBuyProfessionValue;
+		eBuyProfessionUnit = player.AI_nextBuyProfessionUnit(&eBuyProfession, &eBuyProfessionAI, &iBuyProfessionValue);
+
+		szBuffer.append(CvWString::format(SETCOLR L"\n"));
+
+		UnitAITypes eBuyUnitAI;
+		int iBuyUnitValue;
+		UnitTypes eBuyUnit = player.AI_nextBuyUnit(&eBuyUnitAI, &iBuyUnitValue);
+
+		if (eBuyProfession != NO_PROFESSION)
+		{
+			CvWString szTempString;
+			getUnitAIString(szTempString, eBuyProfessionAI);
+			szBuffer.append(CvWString::format(SETCOLR L"\n%s/ %s/ %s/ %d" ENDCOLR , TEXT_COLOR("COLOR_UNIT_TEXT"), (eBuyProfessionUnit == NO_UNIT) ? L"NONE" : GC.getUnitInfo(eBuyProfessionUnit).getDescription(), GC.getProfessionInfo(eBuyProfession).getDescription(), szTempString.GetCString(), iBuyProfessionValue ));
+		}
+		if (eBuyUnit != NO_UNIT)
+		{
+			CvWString szTempString;
+			getUnitAIString(szTempString, eBuyUnitAI);
+			szBuffer.append(CvWString::format(SETCOLR L"\n%s/ %s/ %d" ENDCOLR , TEXT_COLOR("COLOR_UNIT_TEXT"), GC.getUnitInfo(eBuyUnit).getDescription(), szTempString.GetCString(), iBuyUnitValue ));
+		}
+		
+		if (player.isNative())
+		{
+			szBuffer.append(CvWString::format(L"\nOverpopulation : %d", player.AI_getOverpopulationPercent()));
+		}
+		
+		CvTeamAI& kTeam = GET_TEAM(player.getTeam());
+		for (int i = 0; i < MAX_PLAYERS; ++i)
+		{
+			CvPlayer& kLoopPlayer = GET_PLAYER((PlayerTypes)i);
+						
+			if (kLoopPlayer.isAlive())
+			{
+				TeamTypes eLoopTeam = kLoopPlayer.getTeam();
+				if (eLoopTeam != player.getTeam() && GET_TEAM(eLoopTeam).isAlive())
+				{
+					WarPlanTypes eWarplan = kTeam.AI_getWarPlan(eLoopTeam);
+					
+					if (eWarplan != NO_WARPLAN)
+					{
+						CvWStringBuffer szTempString;
+						GAMETEXT.getWarplanString(szTempString, eWarplan);
+						szBuffer.append(CvWString::format(L"\n%s : %s", kLoopPlayer.getName(), szTempString));
+	
+					}
+				}
+			}
+		}
+	}
 }
 
-
-void CvDLLWidgetData::parseConvertHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	if (widgetDataStruct.m_iData2 != 0)
-	{
-		if (widgetDataStruct.m_iData1 == NO_RELIGION)
-		{
-//			szBuffer.Format(L"No State %c", gDLL->getSymbolID(RELIGION_CHAR));
-			szBuffer.assign(gDLL->getText("TXT_KEY_MISC_NO_STATE_REL"));
-		}
-		else
-		{
-//			szBuffer.Format(L"Convert to %s", GC.getReligionInfo((ReligionTypes) widgetDataStruct.m_iData1).getDescription());
-			szBuffer.append(gDLL->getText("TXT_KEY_MISC_CONVERT_TO_REL", GC.getReligionInfo((ReligionTypes) widgetDataStruct.m_iData1).getTextKeyWide()));
-		}
-	}
-	else
-	{
-		GAMETEXT.setConvertHelp(szBuffer, GC.getGameINLINE().getActivePlayer(), (ReligionTypes)widgetDataStruct.m_iData1);
-	}
-}
-
-
-void CvDLLWidgetData::parseRevolutionHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	if (widgetDataStruct.m_iData1 != 0)
-	{
-//		szBuffer = "Change Civics";
-		szBuffer.assign(gDLL->getText("TXT_KEY_MISC_CHANGE_CIVICS"));
-	}
-	else
-	{
-		GAMETEXT.setRevolutionHelp(szBuffer, GC.getGameINLINE().getActivePlayer());
-	}
-}
-
-/*void CvDLLWidgetData::parsePopupQueue(CvWidgetDataStruct &widgetDataStruct, CvWString &szBuffer)
-{
-	PopupEventTypes eEvent;
-
-	if ( m_pPopup || m_pScreen )
-	{
-		if ( m_pPopup )
-		{
-			eEvent = m_pPopup->getPopupType();
-		}
-		else if ( m_pScreen )
-		{
-			eEvent = m_pScreen->getPopupType();
-		}
-
-		switch (eEvent)
-		{
-			case POPUPEVENT_NONE:
-//				szBuffer = "***NO MOUSEOVER TEXT***.  Click to activate popup.";
-				szBuffer = gDLL->getText("TXT_KEY_MISC_NO_MOUSEOVER_TEXT");
-				break;
-
-			case POPUPEVENT_PRODUCTION:
-//				szBuffer = "Production Complete";
-				szBuffer = gDLL->getText("TXT_KEY_MISC_PRODUCTION_COMPLETE");
-				break;
-
-			case POPUPEVENT_TECHNOLOGY:
-//				szBuffer = "Technology Research Complete";
-				szBuffer = gDLL->getText("TXT_KEY_MISC_TECH_RESEARCH_COMPLETE");
-				break;
-
-			case POPUPEVENT_RELIGION:
-//				szBuffer = "New Religion Discovered";
-				szBuffer = gDLL->getText("TXT_KEY_MISC_NEW_REL_DISCOVERED");
-				break;
-
-			case POPUPEVENT_WARNING:
-//				szBuffer = "Warning!!!";
-				szBuffer = gDLL->getText("TXT_KEY_MISC_WARNING");
-				break;
-
-			case POPUPEVENT_CIVIC:
-//				szBuffer = "New Civic Accessible";
-				szBuffer = gDLL->getText("TXT_KEY_MISC_NEW_CIVIC_ACCESSIBLE");
-				break;
-		}
-	}
-}*/
 
 void CvDLLWidgetData::parseAutomateCitizensHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
-	CvCity* pHeadSelectedCity;
-
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
-	if (pHeadSelectedCity != NULL)
+	if (widgetDataStruct.m_iData1 == 0)
 	{
-		if (pHeadSelectedCity->isCitizensAutomated())
-		{
-//			szBuffer = "Turn Off Citizen Automation";
-			szBuffer.assign(gDLL->getText("TXT_KEY_MISC_OFF_CITIZEN_AUTO"));
-		}
-		else
-		{
-//			szBuffer = "Turn On Citizen Automation";
-			szBuffer.assign(gDLL->getText("TXT_KEY_MISC_ON_CITIZEN_AUTO"));
-		}
+		szBuffer.assign(gDLL->getText("TXT_KEY_MISC_OFF_CITIZEN_AUTO"));
+	}
+	else
+	{
+		szBuffer.assign(gDLL->getText("TXT_KEY_MISC_ON_CITIZEN_AUTO"));
 	}
 }
 
@@ -3338,12 +2157,10 @@ void CvDLLWidgetData::parseAutomateProductionHelp(CvWidgetDataStruct &widgetData
 	{
 		if (pHeadSelectedCity->isProductionAutomated())
 		{
-//			szBuffer = "Turn Off Production Automation";
 			szBuffer.assign(gDLL->getText("TXT_KEY_MISC_OFF_PROD_AUTO"));
 		}
 		else
 		{
-//			szBuffer = "Turn On Production Automation";
 			szBuffer.assign(gDLL->getText("TXT_KEY_MISC_ON_PROD_AUTO"));
 		}
 	}
@@ -3351,29 +2168,41 @@ void CvDLLWidgetData::parseAutomateProductionHelp(CvWidgetDataStruct &widgetData
 
 void CvDLLWidgetData::parseEmphasizeHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
-	CvCity* pHeadSelectedCity;
-
 	szBuffer.clear();
 
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
+	CvCity* pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
 
 	if (pHeadSelectedCity != NULL)
 	{
-		if (pHeadSelectedCity->AI_isEmphasize((EmphasizeTypes)widgetDataStruct.m_iData1))
+		YieldTypes eYield = (YieldTypes) widgetDataStruct.m_iData1;
+		if (eYield != NO_YIELD)
 		{
-//			szBuffer += "Turn Off ";
-			szBuffer.append(gDLL->getText("TXT_KEY_MISC_TURN_OFF"));
+			szBuffer.append(gDLL->getText("TXT_KEY_CLICK_TO"));
+			EmphasizeTypes eNextEmphasis = getNextEmphasis(pHeadSelectedCity, eYield);
+			if (eNextEmphasis == NO_EMPHASIZE)
+			{
+				szBuffer.append(gDLL->getText("TXT_KEY_EMPHASIZE_OFF"));
+			}
+			else
+			{
+				szBuffer.append(GC.getEmphasizeInfo(eNextEmphasis).getDescription());
+			}
 		}
 		else
 		{
-//			szBuffer += "Turn On ";
-			szBuffer.append(gDLL->getText("TXT_KEY_MISC_TURN_ON"));
+			EmphasizeTypes eEmphasize = (EmphasizeTypes) widgetDataStruct.m_iData2;
+			if (eEmphasize != NO_EMPHASIZE)
+			{
+				szBuffer.append(GC.getEmphasizeInfo(eEmphasize).getDescription());
+			}
+			else
+			{
+				szBuffer.append(gDLL->getText("TXT_KEY_CLICK_TO"));
+				szBuffer.append(gDLL->getText("TXT_KEY_EMPHASIZE_OFF"));
+			}
 		}
 	}
-
-	szBuffer.append(GC.getEmphasizeInfo((EmphasizeTypes)widgetDataStruct.m_iData1).getDescription());
 }
-
 
 void CvDLLWidgetData::parseTradeItem(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
@@ -3381,7 +2210,6 @@ void CvDLLWidgetData::parseTradeItem(CvWidgetDataStruct &widgetDataStruct, CvWSt
 	TradeData item;
 	PlayerTypes eWhoFrom = NO_PLAYER;
 	PlayerTypes eWhoTo = NO_PLAYER;
-	DenialTypes eDenial;
 	PlayerTypes eWhoDenies;
 
 	szBuffer.clear();
@@ -3413,19 +2241,21 @@ void CvDLLWidgetData::parseTradeItem(CvWidgetDataStruct &widgetDataStruct, CvWSt
 
 	eWhoDenies = eWhoFrom;
 
+	IDInfo kTransport;
+	if ( gDLL->isDiplomacy())
+	{
+		kTransport = gDLL->getDiplomacyTransport();
+	}
+	else if (gDLL->isMPDiplomacyScreenUp())
+	{
+		kTransport = gDLL->getMPDiplomacyTransport();
+	}
+
 	if ((eWhoFrom != NO_PLAYER) && (eWhoTo != NO_PLAYER))
 	{
 		//	Data1 is the heading
 		switch (widgetDataStruct.m_iData1)
 		{
-		case TRADE_TECHNOLOGIES:
-			GAMETEXT.setTechHelp(szBuffer, ((TechTypes)widgetDataStruct.m_iData2));
-			eWhoDenies = (widgetDataStruct.m_bOption ? eWhoFrom : eWhoTo);
-			break;
-		case TRADE_RESOURCES:
-			GAMETEXT.setBonusHelp(szBuffer, ((BonusTypes)widgetDataStruct.m_iData2));
-			eWhoDenies = (widgetDataStruct.m_bOption ? eWhoFrom : eWhoTo);
-			break;
 		case TRADE_CITIES:
 			szBuffer.assign(gDLL->getText("TXT_KEY_TRADE_CITIES"));
 			eWhoDenies = (widgetDataStruct.m_bOption ? eWhoFrom : eWhoTo);
@@ -3439,26 +2269,14 @@ void CvDLLWidgetData::parseTradeItem(CvWidgetDataStruct &widgetDataStruct, CvWSt
 		case TRADE_EMBARGO:
 			szBuffer.append(gDLL->getText("TXT_KEY_TRADE_STOP_TRADING", GET_TEAM(GET_PLAYER(eWhoFrom).getTeam()).getName().GetCString(), GET_TEAM((TeamTypes)widgetDataStruct.m_iData2).getName().GetCString()));
 			break;
-		case TRADE_CIVIC:
-			szBuffer.append(gDLL->getText("TXT_KEY_TRADE_ADOPT_CIVIC", GC.getCivicInfo((CivicTypes)widgetDataStruct.m_iData2).getDescription()));
-			break;
-		case TRADE_RELIGION:
-			szBuffer.append(gDLL->getText("TXT_KEY_TRADE_CONVERT_RELIGION", GC.getReligionInfo((ReligionTypes)widgetDataStruct.m_iData2).getDescription()));
-			break;
 		case TRADE_GOLD:
 			szBuffer.append(gDLL->getText("TXT_KEY_TRADE_GOLD"));
 			break;
-		case TRADE_GOLD_PER_TURN:
-			szBuffer.append(gDLL->getText("TXT_KEY_TRADE_GOLD_PER_TURN"));
+		case TRADE_YIELD:
+			GAMETEXT.setYieldPriceHelp(szBuffer, GC.getGameINLINE().getActivePlayer(), (YieldTypes) widgetDataStruct.m_iData2);
 			break;
 		case TRADE_MAPS:
 			szBuffer.append(gDLL->getText("TXT_KEY_TRADE_MAPS"));
-			break;
-		case TRADE_SURRENDER:
-			szBuffer.append(gDLL->getText("TXT_KEY_TRADE_CAPITULATE"));
-			break;
-		case TRADE_VASSAL:
-			szBuffer.append(gDLL->getText("TXT_KEY_TRADE_VASSAL"));
 			break;
 		case TRADE_OPEN_BORDERS:
 			szBuffer.append(gDLL->getText("TXT_KEY_TRADE_OPEN_BORDERS"));
@@ -3474,10 +2292,9 @@ void CvDLLWidgetData::parseTradeItem(CvWidgetDataStruct &widgetDataStruct, CvWSt
 			break;
 		}
 
-		setTradeItem(&item, ((TradeableItems)(widgetDataStruct.m_iData1)), widgetDataStruct.m_iData2);
+		setTradeItem(&item, ((TradeableItems)(widgetDataStruct.m_iData1)), widgetDataStruct.m_iData2, &kTransport);
 
-		eDenial = GET_PLAYER(eWhoFrom).getTradeDenial(eWhoTo, item);
-
+		DenialTypes eDenial = GET_PLAYER(eWhoFrom).getTradeDenial(eWhoTo, item);
 		if (eDenial != NO_DENIAL)
 		{
 			szTempBuffer.Format(L"%s: " SETCOLR L"%s" ENDCOLR, GET_PLAYER(eWhoDenies).getName(), TEXT_COLOR("COLOR_WARNING_TEXT"), GC.getDenialInfo(eDenial).getDescription());
@@ -3490,13 +2307,19 @@ void CvDLLWidgetData::parseTradeItem(CvWidgetDataStruct &widgetDataStruct, CvWSt
 
 void CvDLLWidgetData::parseUnitModelHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
-	CvUnit* pHeadSelectedUnit;
-
-	pHeadSelectedUnit = gDLL->getInterfaceIFace()->getHeadSelectedUnit();
-
+	CvUnit* pHeadSelectedUnit = gDLL->getInterfaceIFace()->getHeadSelectedUnit();
 	if (pHeadSelectedUnit != NULL)
 	{
 		GAMETEXT.setUnitHelp(szBuffer, pHeadSelectedUnit);
+	}
+}
+
+void CvDLLWidgetData::parseCityDefenseHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
+{
+	CvCity* pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
+	if (pHeadSelectedCity != NULL)
+	{
+		szBuffer.append(gDLL->getText("TXT_KEY_PLOT_BONUS", pHeadSelectedCity->getTotalDefense()));
 	}
 }
 
@@ -3512,159 +2335,6 @@ void CvDLLWidgetData::parseFlagHelp(CvWidgetDataStruct &widgetDataStruct, CvWStr
 	GAMETEXT.parseLeaderTraits(szBuffer, GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getLeaderType(), GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivilizationType());
 }
 
-
-void CvDLLWidgetData::parseMaintenanceHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	CvCity* pHeadSelectedCity;
-	wchar szTempBuffer[1024];
-	int iMaintenanceValue;
-
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
-	if (pHeadSelectedCity != NULL)
-	{
-		if (pHeadSelectedCity->isWeLoveTheKingDay())
-		{
-			szBuffer.append(NEWLINE);
-			szBuffer.append(gDLL->getText("TXT_KEY_MISC_WE_LOVE_KING_MAINT"));
-		}
-		else
-		{
-			//		szBuffer = "Maintenance represents the total cost of governing this city.\n";
-			szBuffer.assign(gDLL->getText("TXT_KEY_MISC_MAINT_INFO"));
-			szBuffer.append(NEWLINE);
-
-			iMaintenanceValue = pHeadSelectedCity->calculateDistanceMaintenanceTimes100();
-			if (iMaintenanceValue != 0)
-			{
-				//			swprintf(szTempBuffer, "\n%s%d%c: %s", ((iMaintenanceValue > 0) ?  "+" : ""), iMaintenanceValue, GC.getCommerceInfo(COMMERCE_GOLD).getChar(), ((GET_PLAYER(pHeadSelectedCity->getOwnerINLINE()).getNumGovernmentCenters() > 0) ? "Distance from Palace" : "No Palace Penalty"));
-				CvWString szMaint = CvWString::format(L"%d.%02d", iMaintenanceValue/100, iMaintenanceValue%100);
-				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_MISC_NUM_MAINT_FLOAT", szMaint.GetCString()) + ((GET_PLAYER(pHeadSelectedCity->getOwnerINLINE()).getNumGovernmentCenters() > 0) ? gDLL->getText("TXT_KEY_MISC_DISTANCE_FROM_PALACE") : gDLL->getText("TXT_KEY_MISC_NO_PALACE_PENALTY")));
-			}
-
-			iMaintenanceValue = pHeadSelectedCity->calculateNumCitiesMaintenanceTimes100();
-			if (iMaintenanceValue != 0)
-			{
-				//			swprintf(szTempBuffer, "\n%s%d%c: Number of Cities", ((iMaintenanceValue > 0) ? "+" : ""), iMaintenanceValue, GC.getCommerceInfo(COMMERCE_GOLD).getChar());
-				CvWString szMaint = CvWString::format(L"%d.%02d", iMaintenanceValue/100, iMaintenanceValue%100);
-				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_MISC_NUM_CITIES_FLOAT", szMaint.GetCString()));
-			}
-
-			iMaintenanceValue = pHeadSelectedCity->calculateColonyMaintenanceTimes100();
-			if (iMaintenanceValue != 0)
-			{
-				CvWString szMaint = CvWString::format(L"%d.%02d", iMaintenanceValue/100, iMaintenanceValue%100);
-				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_MISC_COLONY_MAINT_FLOAT", szMaint.GetCString()));
-			}
-
-			iMaintenanceValue = pHeadSelectedCity->calculateCorporationMaintenanceTimes100();
-			if (iMaintenanceValue != 0)
-			{
-				CvWString szMaint = CvWString::format(L"%d.%02d", iMaintenanceValue/100, iMaintenanceValue%100);
-				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_MISC_CORPORATION_MAINT_FLOAT", szMaint.GetCString()));
-			}
-
-			szBuffer.append(SEPARATOR);
-
-			//		swprintf(szTempBuffer, "\n%d%c Total Maintenance", pHeadSelectedCity->getMaintenance(), GC.getCommerceInfo(COMMERCE_GOLD).getChar());
-			CvWString szMaint = CvWString::format(L"%d.%02d", pHeadSelectedCity->getMaintenanceTimes100()/100, pHeadSelectedCity->getMaintenanceTimes100()%100);
-			szBuffer.append(NEWLINE);
-			szBuffer.append(gDLL->getText("TXT_KEY_MISC_TOTAL_MAINT_FLOAT", szMaint.GetCString()));
-
-			iMaintenanceValue = pHeadSelectedCity->getMaintenanceModifier();
-
-			if (iMaintenanceValue != 0)
-			{
-				swprintf(szTempBuffer, L" (%s%d%%)", ((iMaintenanceValue > 0) ? L"+" : L""), iMaintenanceValue);
-				szBuffer.append(szTempBuffer);
-			}
-		}
-	}
-}
-
-
-void CvDLLWidgetData::parseHealthHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	CvCity* pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-	if (NULL != pHeadSelectedCity)
-	{
-		GAMETEXT.setBadHealthHelp(szBuffer, *pHeadSelectedCity);
-		szBuffer.append(L"\n=======================\n");
-		GAMETEXT.setGoodHealthHelp(szBuffer, *pHeadSelectedCity);
-	}
-}
-
-
-void CvDLLWidgetData::parseNationalityHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	wchar szTempBuffer[1024];
-	CvCity* pHeadSelectedCity;
-	PlayerTypes eCulturalOwner;
-	int iCulturePercent;
-	int iCityStrength;
-	int iGarrison;
-	int iI;
-
-	szBuffer.assign(gDLL->getText("TXT_KEY_MISC_CITY_NATIONALITY"));
-
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
-	if (pHeadSelectedCity != NULL)
-	{
-		for (iI = 0; iI < MAX_PLAYERS; iI++)
-		{
-			if (GET_PLAYER((PlayerTypes)iI).isAlive())
-			{
-				iCulturePercent = pHeadSelectedCity->plot()->calculateCulturePercent((PlayerTypes)iI);
-
-				if (iCulturePercent > 0)
-				{
-					swprintf(szTempBuffer, L"\n%d%% " SETCOLR L"%s" ENDCOLR, iCulturePercent, GET_PLAYER((PlayerTypes)iI).getPlayerTextColorR(), GET_PLAYER((PlayerTypes)iI).getPlayerTextColorG(), GET_PLAYER((PlayerTypes)iI).getPlayerTextColorB(), GET_PLAYER((PlayerTypes)iI).getPlayerTextColorA(), GET_PLAYER((PlayerTypes)iI).getCivilizationAdjective());
-					szBuffer.append(szTempBuffer);
-				}
-			}
-		}
-
-		eCulturalOwner = pHeadSelectedCity->plot()->calculateCulturalOwner();
-
-		if (eCulturalOwner != NO_PLAYER)
-		{
-			if (GET_PLAYER(eCulturalOwner).getTeam() != pHeadSelectedCity->getTeam())
-			{
-				iCityStrength = pHeadSelectedCity->cultureStrength(eCulturalOwner);
-				iGarrison = pHeadSelectedCity->cultureGarrison(eCulturalOwner);
-
-				if (iCityStrength > iGarrison)
-				{
-					swprintf(szTempBuffer, L"%.2f", std::max(0.0f, (1.0f - (((float)iGarrison) / ((float)iCityStrength)))) * ((float)(std::min(100.0f, ((float)pHeadSelectedCity->getRevoltTestProbability())))));
-					szBuffer.append(NEWLINE);
-					szBuffer.append(gDLL->getText("TXT_KEY_MISC_CHANCE_OF_REVOLT", szTempBuffer));
-				}
-			}
-		}
-	}
-}
-
-
-void CvDLLWidgetData::parseHappinessHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	CvCity* pHeadSelectedCity;
-
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
-	if (pHeadSelectedCity != NULL)
-	{
-		GAMETEXT.setAngerHelp(szBuffer, *pHeadSelectedCity);
-		szBuffer.append(L"\n=======================\n");
-		GAMETEXT.setHappyHelp(szBuffer, *pHeadSelectedCity);
-	}
-}
-
-
 void CvDLLWidgetData::parsePopulationHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
 	CvCity* pHeadSelectedCity;
@@ -3677,71 +2347,19 @@ void CvDLLWidgetData::parsePopulationHelp(CvWidgetDataStruct &widgetDataStruct, 
 	}
 }
 
-
-void CvDLLWidgetData::parseProductionHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
+void CvDLLWidgetData::parseRebelHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
-	CvCity* pHeadSelectedCity;
-
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
-	if (pHeadSelectedCity != NULL)
+	if (widgetDataStruct.m_iData1 == 1)
 	{
-		if (pHeadSelectedCity->getProductionNeeded() != MAX_INT)
+		CvCity* pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
+		if (pHeadSelectedCity != NULL)
 		{
-			CvWString szTemp;
-			szTemp.Format(L"%s: %d/%d %c", pHeadSelectedCity->getProductionName(), pHeadSelectedCity->getProduction(), pHeadSelectedCity->getProductionNeeded(), GC.getYieldInfo(YIELD_PRODUCTION).getChar());
-			szBuffer.assign(szTemp);
+			szBuffer.assign(gDLL->getText("TXT_KEY_MISC_REBEL_HELP", pHeadSelectedCity->getRebelPercent()));
 		}
 	}
-}
-
-
-void CvDLLWidgetData::parseCultureHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	CvCity* pHeadSelectedCity;
-
-	pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-
-	if (pHeadSelectedCity != NULL)
+	else
 	{
-		int iCultureTimes100 = pHeadSelectedCity->getCultureTimes100(pHeadSelectedCity->getOwnerINLINE());
-		if (iCultureTimes100%100 == 0)
-		{
-			szBuffer.assign(gDLL->getText("TXT_KEY_MISC_CULTURE", iCultureTimes100/100, pHeadSelectedCity->getCultureThreshold()));
-		}
-		else
-		{
-			CvWString szCulture = CvWString::format(L"%d.%02d", iCultureTimes100/100, iCultureTimes100%100);
-			szBuffer.assign(gDLL->getText("TXT_KEY_MISC_CULTURE_FLOAT", szCulture.GetCString(), pHeadSelectedCity->getCultureThreshold()));
-		}
-
-		int iCultureRateTimes100 = pHeadSelectedCity->getCommerceRateTimes100(COMMERCE_CULTURE);
-		if (iCultureRateTimes100 > 0)
-		{
-			int iCultureLeftTimes100 = 100 * pHeadSelectedCity->getCultureThreshold() - iCultureTimes100;
-
-			if (iCultureLeftTimes100 > 0)
-			{
-				int iTurnsLeft = (iCultureLeftTimes100  + iCultureRateTimes100 - 1) / iCultureRateTimes100;
-
-				szBuffer.append(L' ');
-				szBuffer.append(gDLL->getText("INTERFACE_CITY_TURNS", std::max(1, iTurnsLeft)));
-			}
-		}
-
-
-		szBuffer.append(L"\n=======================\n");
-		GAMETEXT.setCommerceHelp(szBuffer, *pHeadSelectedCity, COMMERCE_CULTURE);
-	}
-}
-
-
-void CvDLLWidgetData::parseGreatPeopleHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	CvCity* pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-	if (NULL != pHeadSelectedCity)
-	{
-		GAMETEXT.parseGreatPeopleHelp(szBuffer, *pHeadSelectedCity);
+		szBuffer.assign(gDLL->getText("TXT_KEY_MISC_REBEL_HELP", GET_TEAM(GC.getGameINLINE().getActiveTeam()).getRebelPercent()));
 	}
 }
 
@@ -3773,19 +2391,13 @@ void CvDLLWidgetData::parseSelectedHelp(CvWidgetDataStruct &widgetDataStruct, Cv
 			switch (pOrder->eOrderType)
 			{
 			case ORDER_TRAIN:
-				GAMETEXT.setUnitHelp(szBuffer, ((UnitTypes)(pOrder->iData1)), false, false, false, pHeadSelectedCity);
+				GAMETEXT.setUnitHelp(szBuffer, ((UnitTypes)(pOrder->iData1)), false, false, pHeadSelectedCity);
 				break;
-
 			case ORDER_CONSTRUCT:
-				GAMETEXT.setBuildingHelp(szBuffer, ((BuildingTypes)(pOrder->iData1)), false, false, false, pHeadSelectedCity);
+				GAMETEXT.setBuildingHelp(szBuffer, ((BuildingTypes)(pOrder->iData1)), false, false, pHeadSelectedCity);
 				break;
-
-			case ORDER_CREATE:
-				GAMETEXT.setProjectHelp(szBuffer, ((ProjectTypes)(pOrder->iData1)), false, pHeadSelectedCity);
-				break;
-
-			case ORDER_MAINTAIN:
-				GAMETEXT.setProcessHelp(szBuffer, ((ProcessTypes)(pOrder->iData1)));
+			case ORDER_CONVINCE:
+				GAMETEXT.setFatherPointHelp(szBuffer, (FatherPointTypes) pOrder->iData1);
 				break;
 
 			default:
@@ -3797,43 +2409,35 @@ void CvDLLWidgetData::parseSelectedHelp(CvWidgetDataStruct &widgetDataStruct, Cv
 }
 
 
-void CvDLLWidgetData::parseTradeRouteCityHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	if (widgetDataStruct.m_iData2 != 0)
-	{
-		GAMETEXT.setTradeRouteHelp(szBuffer, widgetDataStruct.m_iData1, gDLL->getInterfaceIFace()->getHeadSelectedCity());
-	}
-}
-
-void CvDLLWidgetData::parseEspionageCostHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	CvUnit* pUnit = gDLL->getInterfaceIFace()->getHeadSelectedUnit();
-	if (NULL != pUnit)
-	{
-		CvPlot* pPlot = pUnit->plot();
-		if (NULL != pPlot)
-		{
-			GAMETEXT.setEspionageCostHelp(szBuffer, (EspionageMissionTypes)widgetDataStruct.m_iData1, pPlot->getOwnerINLINE(), pPlot, widgetDataStruct.m_iData2, pUnit);
-		}
-	}
-}
-
 void CvDLLWidgetData::parseBuildingHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
 	if (widgetDataStruct.m_iData2 != 0)
 	{
-		GAMETEXT.setBuildingHelp(szBuffer, ((BuildingTypes)(widgetDataStruct.m_iData1)), false, false, widgetDataStruct.m_bOption, gDLL->getInterfaceIFace()->getHeadSelectedCity());
+		GAMETEXT.setBuildingHelp(szBuffer, ((BuildingTypes)(widgetDataStruct.m_iData1)), false, false, gDLL->getInterfaceIFace()->getHeadSelectedCity());
 	}
 }
 
-void CvDLLWidgetData::parseProjectHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
+void CvDLLWidgetData::parseSpecialBuildingHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
-	if (widgetDataStruct.m_iData2 != 0)
+	CvCity* pCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
+	if (pCity != NULL)
 	{
-		GAMETEXT.setProjectHelp(szBuffer, ((ProjectTypes)widgetDataStruct.m_iData1), false, gDLL->getInterfaceIFace()->getHeadSelectedCity());
+		for (int iBuildingClass = 0; iBuildingClass < GC.getNumBuildingClassInfos(); ++iBuildingClass)
+		{
+			BuildingTypes eBuilding = (BuildingTypes) GC.getCivilizationInfo(pCity->getCivilizationType()).getCivilizationBuildings(iBuildingClass);
+			if (eBuilding != NO_BUILDING)
+			{
+				if (GC.getBuildingInfo(eBuilding).getSpecialBuildingType() == widgetDataStruct.m_iData1)
+				{
+					if (pCity->isHasBuilding(eBuilding))
+					{
+						GAMETEXT.setBuildingHelp(szBuffer, eBuilding, false, false, pCity);
+					}
+				}
+			}
+		}
 	}
 }
-
 
 void CvDLLWidgetData::parseTerrainHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
@@ -3843,6 +2447,13 @@ void CvDLLWidgetData::parseTerrainHelp(CvWidgetDataStruct &widgetDataStruct, CvW
 	}
 }
 
+void CvDLLWidgetData::parseYieldHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
+{
+	if (widgetDataStruct.m_iData2 != 0)
+	{
+		GAMETEXT.setYieldsHelp(szBuffer, (YieldTypes)widgetDataStruct.m_iData1);
+	}
+}
 
 void CvDLLWidgetData::parseFeatureHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
@@ -3852,302 +2463,48 @@ void CvDLLWidgetData::parseFeatureHelp(CvWidgetDataStruct &widgetDataStruct, CvW
 	}
 }
 
-
-void CvDLLWidgetData::parseTechEntryHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
+void CvDLLWidgetData::parseFatherHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
 	if (widgetDataStruct.m_iData2 != 0)
 	{
-		GAMETEXT.setTechHelp(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
+		GAMETEXT.setFatherHelp(szBuffer, (FatherTypes)widgetDataStruct.m_iData1, false);
 	}
-}
-
-
-void CvDLLWidgetData::parseTechPrereqHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-//	szBuffer.Format(L"%cThis technology requires the knowledge of %s", gDLL->getSymbolID(BULLET_CHAR), GC.getTechInfo((TechTypes) widgetDataStruct.m_iData1).getDescription());
-	szBuffer.assign(gDLL->getText("TXT_KEY_MISC_TECH_REQUIRES_KNOWLEDGE_OF", GC.getTechInfo((TechTypes) widgetDataStruct.m_iData1).getTextKeyWide()));
-}
-
-void CvDLLWidgetData::parseTechTreePrereq(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer, bool bTreeInfo)
-{
-	GAMETEXT.setTechHelp(szBuffer, (TechTypes)widgetDataStruct.m_iData1, false, false, false, bTreeInfo, (TechTypes)widgetDataStruct.m_iData2);
-}
-
-
-void CvDLLWidgetData::parseObsoleteHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildObsoleteString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseObsoleteBonusString(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildObsoleteBonusString(szBuffer, ((BonusTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseObsoleteSpecialHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildObsoleteSpecialString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseMoveHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildMoveString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseFreeUnitHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildFreeUnitString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData2)));
-}
-
-void CvDLLWidgetData::parseFeatureProductionHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildFeatureProductionString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseWorkerRateHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildWorkerRateString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseTradeRouteHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildTradeRouteString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseHealthRateHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildHealthRateString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseHappinessRateHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildHappinessRateString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseFreeTechHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildFreeTechString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseLOSHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildLOSString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseMapCenterHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildMapCenterString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseMapRevealHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildMapRevealString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseMapTradeHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildMapTradeString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseTechTradeHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildTechTradeString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseGoldTradeHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildGoldTradeString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseOpenBordersHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildOpenBordersString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseDefensivePactHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildDefensivePactString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parsePermanentAllianceHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildPermanentAllianceString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseVassalStateHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildVassalStateString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseBuildBridgeHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildBridgeString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseIrrigationHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildIrrigationString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseIgnoreIrrigationHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildIgnoreIrrigationString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseWaterWorkHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildWaterWorkString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-}
-
-void CvDLLWidgetData::parseBuildHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildImprovementString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)), widgetDataStruct.m_iData2);
-}
-
-void CvDLLWidgetData::parseDomainExtraMovesHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildDomainExtraMovesString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)), widgetDataStruct.m_iData2);
-}
-
-void CvDLLWidgetData::parseAdjustHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildAdjustString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)), widgetDataStruct.m_iData2);
-}
-
-void CvDLLWidgetData::parseTerrainTradeHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	if (widgetDataStruct.m_iData2 < GC.getNumTerrainInfos())
-	{
-		GAMETEXT.buildTerrainTradeString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)), widgetDataStruct.m_iData2);
-	}
-	else if (widgetDataStruct.m_iData2 == GC.getNumTerrainInfos())
-	{
-		GAMETEXT.buildRiverTradeString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)));
-	}
-}
-
-void CvDLLWidgetData::parseSpecialBuildingHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildSpecialBuildingString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)), widgetDataStruct.m_iData2);
-}
-
-void CvDLLWidgetData::parseYieldChangeHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildYieldChangeString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)), widgetDataStruct.m_iData2, false);
-}
-
-void CvDLLWidgetData::parseBonusRevealHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildBonusRevealString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)), widgetDataStruct.m_iData2, true);
-}
-
-void CvDLLWidgetData::parseCivicRevealHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildCivicRevealString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)), widgetDataStruct.m_iData2, true);
-}
-
-void CvDLLWidgetData::parseProcessInfoHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildProcessInfoString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)), widgetDataStruct.m_iData2, true);
-}
-
-void CvDLLWidgetData::parseFoundReligionHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildFoundReligionString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)), widgetDataStruct.m_iData2, true);
-}
-
-void CvDLLWidgetData::parseFoundCorporationHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	GAMETEXT.buildFoundCorporationString(szBuffer, ((TechTypes)(widgetDataStruct.m_iData1)), widgetDataStruct.m_iData2, true);
-}
-
-void CvDLLWidgetData::parseFinanceNumUnits(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-//	szBuffer = "Number of units you are currently supporting";
-	szBuffer.assign(gDLL->getText("TXT_KEY_ECON_NUM_UNITS_SUPPORTING"));
-}
-
-void CvDLLWidgetData::parseFinanceUnitCost(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-//	szBuffer = "The amount of money spent on unit upkeep";
-	szBuffer.assign(gDLL->getText("TXT_KEY_ECON_MONEY_SPENT_UPKEEP"));
-	if (widgetDataStruct.m_iData2 > 0)
-	{
-		GAMETEXT.buildFinanceUnitCostString(szBuffer, (PlayerTypes)widgetDataStruct.m_iData1);
-	}
-}
-
-void CvDLLWidgetData::parseFinanceAwaySupply(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-//	szBuffer = "The amount of money spent on units in enemy territory";
-	szBuffer.assign(gDLL->getText("TXT_KEY_ECON_AMOUNT_MONEY_UNITS_ENEMY_TERRITORY"));
-	if (widgetDataStruct.m_iData2 > 0)
-	{
-		GAMETEXT.buildFinanceAwaySupplyString(szBuffer, (PlayerTypes)widgetDataStruct.m_iData1);
-	}
-}
-
-void CvDLLWidgetData::parseFinanceCityMaint(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-//	szBuffer = "The amount of money spent doing city maintenance";
-	szBuffer.assign(gDLL->getText("TXT_KEY_ECON_AMOUNT_MONEY_CITY_MAINT"));
-	if (widgetDataStruct.m_iData2 > 0)
-	{
-		GAMETEXT.buildFinanceCityMaintString(szBuffer, (PlayerTypes)widgetDataStruct.m_iData1);
-	}
-}
-
-void CvDLLWidgetData::parseFinanceCivicUpkeep(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-//	szBuffer = "The amount of money spent on Civics";
-	szBuffer.assign(gDLL->getText("TXT_KEY_ECON_AMOUNT_MONEY_CIVIC_UPKEEP"));
-	if (widgetDataStruct.m_iData2 > 0)
-	{
-		GAMETEXT.buildFinanceCivicUpkeepString(szBuffer, (PlayerTypes)widgetDataStruct.m_iData1);
-	}
-}
-
-void CvDLLWidgetData::parseFinanceForeignIncome(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	szBuffer.assign(gDLL->getText("TXT_KEY_ECON_AMOUNT_MONEY_FOREIGN"));
-	if (widgetDataStruct.m_iData2 > 0)
-	{
-		GAMETEXT.buildFinanceForeignIncomeString(szBuffer, (PlayerTypes)widgetDataStruct.m_iData1);
-	}
-}
-
-void CvDLLWidgetData::parseFinanceInflatedCosts(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	szBuffer.assign(gDLL->getText("TXT_KEY_ECON_AMOUNT_MONEY_AFTER_INFLATION"));
-	if (widgetDataStruct.m_iData2 > 0)
-	{
-		GAMETEXT.buildFinanceInflationString(szBuffer, (PlayerTypes)widgetDataStruct.m_iData1);
-	}
-}
-
-void CvDLLWidgetData::parseFinanceGrossIncome(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-//	szBuffer = "Your gross income";
-	szBuffer.assign(gDLL->getText("TXT_KEY_ECON_GROSS_INCOME"));
-}
-
-void CvDLLWidgetData::parseFinanceNetGold(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-//	szBuffer = "Net Gold per turn";
-	szBuffer.assign(gDLL->getText("TXT_KEY_ECON_NET_GOLD"));
-}
-
-void CvDLLWidgetData::parseFinanceGoldReserve(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-//	szBuffer = "Amount of money in your gold reserves";
-	szBuffer.assign(gDLL->getText("TXT_KEY_ECON_GOLD_RESERVE"));
 }
 
 void CvDLLWidgetData::parseUnitHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
 	if (widgetDataStruct.m_iData2 != 0)
 	{
-		GAMETEXT.setUnitHelp(szBuffer, (UnitTypes)widgetDataStruct.m_iData1, false, false, widgetDataStruct.m_bOption, gDLL->getInterfaceIFace()->getHeadSelectedCity());
+		GAMETEXT.setUnitHelp(szBuffer, (UnitTypes)widgetDataStruct.m_iData1, false, false, gDLL->getInterfaceIFace()->getHeadSelectedCity());
+	}
+}
+
+void CvDLLWidgetData::parseShipCargoUnitHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
+{
+	CvPlayer& pPlayer = GET_PLAYER(GC.getGameINLINE().getActivePlayer());
+
+	CvUnit* pUnit = pPlayer.getUnit(widgetDataStruct.m_iData1);
+	if (pUnit != NULL)
+	{
+		GAMETEXT.setUnitHelp(szBuffer, pUnit, false, true);
+	}
+}
+
+void CvDLLWidgetData::parseEuropeUnitHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
+{
+	CvPlayer& kPlayer = GET_PLAYER(GC.getGameINLINE().getActivePlayer());
+	CvUnit* pUnit = kPlayer.getEuropeUnitById(widgetDataStruct.m_iData1);
+	if (pUnit != NULL)
+{
+		GAMETEXT.setUnitHelp(szBuffer, pUnit, false, true);
+	}
+}
+
+void CvDLLWidgetData::parseProfessionHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
+{
+	if (widgetDataStruct.m_iData2 != 0)
+	{
+		GAMETEXT.setProfessionHelp(szBuffer, (ProfessionTypes)widgetDataStruct.m_iData1);
 	}
 }
 
@@ -4171,32 +2528,6 @@ void CvDLLWidgetData::parseBonusHelp(CvWidgetDataStruct &widgetDataStruct, CvWSt
 	}
 }
 
-void CvDLLWidgetData::parseReligionHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	if (widgetDataStruct.m_iData2 != 0)
-	{
-		GAMETEXT.setReligionHelp(szBuffer, (ReligionTypes)widgetDataStruct.m_iData1);
-	}
-}
-
-void CvDLLWidgetData::parseReligionHelpCity( CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer )
-{
-	GAMETEXT.setReligionHelpCity(szBuffer, (ReligionTypes)widgetDataStruct.m_iData1, gDLL->getInterfaceIFace()->getHeadSelectedCity(), true);
-}
-
-void CvDLLWidgetData::parseCorporationHelpCity( CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer )
-{
-	GAMETEXT.setCorporationHelpCity(szBuffer, (CorporationTypes)widgetDataStruct.m_iData1, gDLL->getInterfaceIFace()->getHeadSelectedCity(), true);
-}
-
-void CvDLLWidgetData::parseCorporationHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	if (widgetDataStruct.m_iData2 != 0)
-	{
-		GAMETEXT.setCorporationHelp(szBuffer, (CorporationTypes)widgetDataStruct.m_iData1);
-	}
-}
-
 void CvDLLWidgetData::parsePromotionHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
 	if (widgetDataStruct.m_iData2 != 0)
@@ -4205,17 +2536,78 @@ void CvDLLWidgetData::parsePromotionHelp(CvWidgetDataStruct &widgetDataStruct, C
 	}
 }
 
+void CvDLLWidgetData::parseUnitPromotionHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
+{
+	CvUnit* pUnit = ::getUnit(IDInfo((PlayerTypes) widgetDataStruct.m_iData1, widgetDataStruct.m_iData2));
+	if (pUnit != NULL)
+	{
+		GAMETEXT.setUnitPromotionHelp(szBuffer, pUnit);
+	}
+}
+
+void CvDLLWidgetData::parseCityYieldHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
+{
+	YieldTypes eYield = (YieldTypes) widgetDataStruct.m_iData1;
+	CvPlayer& kPlayer = GET_PLAYER(GC.getGameINLINE().getActivePlayer());
+	CvCity* pCity = kPlayer.getCity(widgetDataStruct.m_iData2);
+	if (NULL == pCity)
+	{
+		pCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
+	}
+
+	if (NULL != pCity)
+	{
+		GAMETEXT.setYieldHelp(szBuffer, *pCity, eYield);
+	}
+	else
+	{
+		GAMETEXT.setYieldPriceHelp(szBuffer, GC.getGameINLINE().getActivePlayer(), eYield);
+	}
+
+	PlayerTypes eActivePlayer = GC.getGameINLINE().getActivePlayer();
+	for (int i = 0; i < GC.getNumProfessionInfos(); ++i)
+	{
+		ProfessionTypes eProfession = (ProfessionTypes) i;
+		if (GET_PLAYER(eActivePlayer).isProfessionValid(eProfession, NO_UNIT))
+		{
+			int iNumRequired = GET_PLAYER(eActivePlayer).getYieldEquipmentAmount(eProfession, eYield);
+			if (iNumRequired > 0)
+			{
+				szBuffer.append(NEWLINE);
+				szBuffer.append(gDLL->getText("TXT_KEY_YIELD_NEEDED_FOR_PROFESSION", iNumRequired, GC.getProfessionInfo(eProfession).getTextKeyWide()));
+			}
+		}
+	}
+}
+
+void CvDLLWidgetData::parseAssignTradeRoute(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
+{
+	CvUnit* pUnit = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(widgetDataStruct.m_iData1);
+	if (pUnit != NULL)
+	{
+		if (pUnit->getGroup()->isAssignedTradeRoute(widgetDataStruct.m_iData2))
+		{
+			szBuffer.assign(gDLL->getText("TXT_KEY_ASSIGN_ROUTE"));
+		}
+		else
+		{
+			szBuffer.assign(gDLL->getText("TXT_KEY_UNASSIGN_ROUTE"));
+		}
+	}
+}
+
+void CvDLLWidgetData::parseReceiveMoveCargoToTransportHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
+{
+	CvUnit* pUnit = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(widgetDataStruct.m_iData1);
+	if (pUnit != NULL)
+	{
+		GAMETEXT.setUnitHelp(szBuffer, pUnit, false, false);
+	}
+}
+
 void CvDLLWidgetData::parseEventHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
 	GAMETEXT.setEventHelp(szBuffer, (EventTypes)widgetDataStruct.m_iData1, widgetDataStruct.m_iData2, GC.getGameINLINE().getActivePlayer());
-}
-
-void CvDLLWidgetData::parseUnitCombatHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	if (widgetDataStruct.m_iData2 != 0)
-	{
-		GAMETEXT.setUnitCombatHelp(szBuffer, (UnitCombatTypes)widgetDataStruct.m_iData1);
-	}
 }
 
 void CvDLLWidgetData::parseImprovementHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
@@ -4260,15 +2652,6 @@ void CvDLLWidgetData::parseDescriptionHelp(CvWidgetDataStruct &widgetDataStruct,
 	CivilopediaPageTypes eType = (CivilopediaPageTypes)widgetDataStruct.m_iData1;
 	switch (eType)
 	{
-	case CIVILOPEDIA_PAGE_TECH:
-		{
-			TechTypes eTech = (TechTypes)widgetDataStruct.m_iData2;
-			if (NO_TECH != eTech)
-			{
-				szBuffer.assign(bMinimal ? GC.getTechInfo(eTech).getDescription() : gDLL->getText("TXT_KEY_MISC_HISTORICAL_INFO", GC.getTechInfo(eTech).getTextKeyWide()));
-			}
-		}
-		break;
 	case CIVILOPEDIA_PAGE_UNIT:
 		{
 			UnitTypes eUnit = (UnitTypes)widgetDataStruct.m_iData2;
@@ -4278,8 +2661,16 @@ void CvDLLWidgetData::parseDescriptionHelp(CvWidgetDataStruct &widgetDataStruct,
 			}
 		}
 		break;
+	case CIVILOPEDIA_PAGE_PROFESSION:
+		{
+			ProfessionTypes eProfession = (ProfessionTypes)widgetDataStruct.m_iData2;
+			if (NO_PROFESSION != eProfession)
+			{
+				szBuffer.assign(bMinimal ? GC.getProfessionInfo(eProfession).getDescription() : gDLL->getText("TXT_KEY_MISC_HISTORICAL_INFO", GC.getProfessionInfo(eProfession).getTextKeyWide()));
+			}
+		}
+		break;
 	case CIVILOPEDIA_PAGE_BUILDING:
-	case CIVILOPEDIA_PAGE_WONDER:
 		{
 			BuildingTypes eBuilding = (BuildingTypes)widgetDataStruct.m_iData2;
 			if (NO_BUILDING != eBuilding)
@@ -4303,15 +2694,6 @@ void CvDLLWidgetData::parseDescriptionHelp(CvWidgetDataStruct &widgetDataStruct,
 			if (NO_IMPROVEMENT != eImprovement)
 			{
 				szBuffer.assign(bMinimal ? GC.getImprovementInfo(eImprovement).getDescription() : gDLL->getText("TXT_KEY_MISC_HISTORICAL_INFO", GC.getImprovementInfo(eImprovement).getTextKeyWide()));
-			}
-		}
-		break;
-	case CIVILOPEDIA_PAGE_UNIT_GROUP:
-		{
-			UnitCombatTypes eGroup = (UnitCombatTypes)widgetDataStruct.m_iData2;
-			if (NO_UNITCOMBAT != eGroup)
-			{
-				szBuffer.assign(bMinimal ? GC.getUnitCombatInfo(eGroup).getDescription() : gDLL->getText("TXT_KEY_MISC_HISTORICAL_INFO", GC.getUnitCombatInfo(eGroup).getTextKeyWide()));
 			}
 		}
 		break;
@@ -4342,24 +2724,6 @@ void CvDLLWidgetData::parseDescriptionHelp(CvWidgetDataStruct &widgetDataStruct,
 			}
 		}
 		break;
-	case CIVILOPEDIA_PAGE_RELIGION:
-		{
-			ReligionTypes eReligion = (ReligionTypes)widgetDataStruct.m_iData2;
-			if (NO_RELIGION != eReligion)
-			{
-				szBuffer.assign(bMinimal ? GC.getReligionInfo(eReligion).getDescription() : gDLL->getText("TXT_KEY_MISC_HISTORICAL_INFO", GC.getReligionInfo(eReligion).getTextKeyWide()));
-			}
-		}
-		break;
-	case CIVILOPEDIA_PAGE_CORPORATION:
-		{
-			CorporationTypes eCorporation = (CorporationTypes)widgetDataStruct.m_iData2;
-			if (NO_CORPORATION != eCorporation)
-			{
-				szBuffer.assign(bMinimal ? GC.getCorporationInfo(eCorporation).getDescription() : gDLL->getText("TXT_KEY_MISC_HISTORICAL_INFO", GC.getCorporationInfo(eCorporation).getTextKeyWide()));
-			}
-		}
-		break;
 	case CIVILOPEDIA_PAGE_CIVIC:
 		{
 			CivicTypes eCivic = (CivicTypes)widgetDataStruct.m_iData2;
@@ -4369,39 +2733,12 @@ void CvDLLWidgetData::parseDescriptionHelp(CvWidgetDataStruct &widgetDataStruct,
 			}
 		}
 		break;
-	case CIVILOPEDIA_PAGE_PROJECT:
-		{
-			ProjectTypes eProject = (ProjectTypes)widgetDataStruct.m_iData2;
-			if (NO_PROJECT != eProject)
-			{
-				szBuffer.assign(bMinimal ? GC.getProjectInfo(eProject).getDescription() : gDLL->getText("TXT_KEY_MISC_HISTORICAL_INFO", GC.getProjectInfo(eProject).getTextKeyWide()));
-			}
-		}
-		break;
 	case CIVILOPEDIA_PAGE_CONCEPT:
 		{
 			ConceptTypes eConcept = (ConceptTypes)widgetDataStruct.m_iData2;
 			if (NO_CONCEPT != eConcept)
 			{
 				szBuffer.assign(GC.getConceptInfo(eConcept).getDescription());
-			}
-		}
-		break;
-	case CIVILOPEDIA_PAGE_CONCEPT_NEW:
-		{
-			NewConceptTypes eConcept = (NewConceptTypes)widgetDataStruct.m_iData2;
-			if (NO_CONCEPT != eConcept)
-			{
-				szBuffer.assign(GC.getNewConceptInfo(eConcept).getDescription());
-			}
-		}
-		break;
-	case CIVILOPEDIA_PAGE_SPECIALIST:
-		{
-			SpecialistTypes eSpecialist = (SpecialistTypes)widgetDataStruct.m_iData2;
-			if (NO_SPECIALIST != eSpecialist)
-			{
-				szBuffer.assign(bMinimal ? GC.getSpecialistInfo(eSpecialist).getDescription() : gDLL->getText("TXT_KEY_MISC_HISTORICAL_INFO", GC.getSpecialistInfo(eSpecialist).getTextKeyWide()));
 			}
 		}
 		break;
@@ -4436,21 +2773,15 @@ void CvDLLWidgetData::doDealKill(CvWidgetDataStruct &widgetDataStruct)
 		if (!pDeal->isCancelable(GC.getGameINLINE().getActivePlayer()))
 		{
 			CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_TEXT);
-			if (NULL != pInfo)
-			{
-				pInfo->setText(gDLL->getText("TXT_KEY_POPUP_CANNOT_CANCEL_DEAL"));
-				gDLL->getInterfaceIFace()->addPopup(pInfo, GC.getGameINLINE().getActivePlayer(), true);
-			}
+			pInfo->setText(gDLL->getText("TXT_KEY_POPUP_CANNOT_CANCEL_DEAL"));
+			gDLL->getInterfaceIFace()->addPopup(pInfo, GC.getGameINLINE().getActivePlayer(), true);
 		}
 		else
 		{
 			CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_DEAL_CANCELED);
-			if (NULL != pInfo)
-			{
-				pInfo->setData1(pDeal->getID());
-				pInfo->setOption1(false);
-				gDLL->getInterfaceIFace()->addPopup(pInfo, GC.getGameINLINE().getActivePlayer(), true);
-			}
+			pInfo->setData1(pDeal->getID());
+			pInfo->setOption1(false);
+			gDLL->getInterfaceIFace()->addPopup(pInfo, GC.getGameINLINE().getActivePlayer(), true);
 		}
 	}
 }
@@ -4462,6 +2793,474 @@ void CvDLLWidgetData::doRefreshMilitaryAdvisor(CvWidgetDataStruct &widgetDataStr
 	argsList.add(widgetDataStruct.m_iData1);
 	argsList.add(widgetDataStruct.m_iData2);
 	gDLL->getPythonIFace()->callFunction(PYScreensModule, "refreshMilitaryAdvisor", argsList.makeFunctionArgs());
+}
+
+void CvDLLWidgetData::doCityUnitAssignCitizen(const CvWidgetDataStruct& destinationWidgetData, const CvWidgetDataStruct& sourceWidgetData)
+{
+	// citizen dragged and dropped somewhere
+	CvCity* pCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
+	if (pCity == NULL || pCity->getOwnerINLINE() != GC.getGameINLINE().getActivePlayer())
+	{
+		return;
+	}
+
+	switch (destinationWidgetData.m_eWidgetType)
+	{
+	case WIDGET_CITY_UNIT_ASSIGN_PROFESSION:
+		if (destinationWidgetData.m_iData2 > -1)
+		{
+			CvUnit* pUnit = pCity->getPopulationUnitById(sourceWidgetData.m_iData1);
+			if (pUnit != NULL)
+			{
+				if (pCity->isAvailableProfessionSlot((ProfessionTypes) destinationWidgetData.m_iData2, pUnit))
+				{
+					gDLL->sendDoTask(pCity->getID(), TASK_CHANGE_PROFESSION, sourceWidgetData.m_iData1, destinationWidgetData.m_iData2, false, false, false, false);
+				}
+				else
+				{
+					for (int i = 0; i < pCity->getPopulation(); ++i)
+					{
+						CvUnit* pUnit = pCity->getPopulationUnitByIndex(i);
+						if (pUnit->getProfession() == destinationWidgetData.m_iData2)
+						{
+							gDLL->sendDoTask(pCity->getID(), TASK_REPLACE_CITIZEN, sourceWidgetData.m_iData1, pUnit->getID(), false, false, false, false);
+							break;
+						}
+					}
+				}
+			}
+		}
+		break;
+
+	case WIDGET_ASSIGN_CITIZEN_TO_PLOT:
+		doAssignCitizenToPlot(gDLL->getInterfaceIFace()->getHeadSelectedCity(), destinationWidgetData.m_iData1, sourceWidgetData.m_iData1);
+		break;
+
+	case WIDGET_CITIZEN:
+		gDLL->sendDoTask(pCity->getID(), TASK_REPLACE_CITIZEN, sourceWidgetData.m_iData1, destinationWidgetData.m_iData1, true, false, false, false);
+		break;
+
+	case WIDGET_EJECT_CITIZEN:
+		{
+			CvUnit* pUnit = pCity->getPopulationUnitById(sourceWidgetData.m_iData1);
+			if (pUnit != NULL)
+			{
+				CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_CHOOSE_PROFESSION, pCity->getID(), pUnit->getID(), 0);
+				gDLL->getInterfaceIFace()->addPopup(pInfo, NO_PLAYER, true);
+			}
+		}
+		break;
+
+	case WIDGET_RECEIVE_MOVE_CARGO_TO_TRANSPORT:
+		{
+			CvCity* pCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
+			CvUnit* pUnit = pCity->getPopulationUnitById(sourceWidgetData.m_iData1);
+			CvUnit* pTransport = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(destinationWidgetData.m_iData1);
+
+			if (NULL != pUnit && NULL != pTransport)
+			{
+				if (pUnit->canLoadUnit(pTransport, pTransport->plot(), true))
+				{
+					gDLL->sendDoTask(pCity->getID(), TASK_EJECT_TO_TRANSPORT, pUnit->getID(), pTransport->getID(), false, false, false, false);
+				}
+			}
+		}
+		break;
+
+	default:
+		break;
+	}
+}
+
+void CvDLLWidgetData::doMoveCargoToCity(const CvWidgetDataStruct& destinationWidgetData, const CvWidgetDataStruct& sourceWidgetData)
+{
+	// cargo inside the city screen dropped somewhere
+
+	CvCity* pCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
+	if (pCity == NULL || pCity->getOwnerINLINE() != GC.getGameINLINE().getActivePlayer())
+	{
+		return;
+	}
+
+	switch (destinationWidgetData.m_eWidgetType)
+	{
+	case WIDGET_HELP_YIELD:
+	case WIDGET_RECEIVE_MOVE_CARGO_TO_CITY:
+	case WIDGET_MOVE_CARGO_TO_TRANSPORT:
+		if (gDLL->shiftKey())
+		{
+			CvUnit* pUnit = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(sourceWidgetData.m_iData2);
+			if (pUnit != NULL)
+			{
+				CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_SELECT_YIELD_AMOUNT, pUnit->getYield(), sourceWidgetData.m_iData2, COMMAND_UNLOAD);
+				pInfo->setOption1(false);
+				gDLL->getInterfaceIFace()->addPopup(pInfo, NO_PLAYER, true);
+			}
+		}
+		else
+		{
+			gDLL->sendDoCommand(sourceWidgetData.m_iData2, COMMAND_UNLOAD, -1, -1, false);
+		}
+		break;
+
+	case WIDGET_CITY_UNIT_ASSIGN_PROFESSION:
+		{
+			int iUnitId = sourceWidgetData.m_iData2;
+			CvUnit* pUnit = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(iUnitId);
+			if (pUnit == NULL)
+			{
+				break;
+			}
+			ProfessionTypes eProfession = (ProfessionTypes) destinationWidgetData.m_iData2;
+			if (eProfession == NO_PROFESSION)
+			{
+				break;
+			}
+
+			if (pUnit->canHaveProfession(eProfession, true, pCity->plot()))
+			{
+				if (pCity->isAvailableProfessionSlot(eProfession, pUnit))
+				{
+					gDLL->sendDoCommand(iUnitId, COMMAND_PROFESSION, eProfession, -1, false);
+				}
+				else
+				{
+					for (int i = 0; i < pCity->getPopulation(); ++i)
+					{
+						CvUnit* pLoopUnit = pCity->getPopulationUnitByIndex(i);
+						if (pLoopUnit->getProfession() == eProfession)
+						{
+							gDLL->sendDoTask(pCity->getID(), TASK_REPLACE_CITIZEN, iUnitId, pLoopUnit->getID(), false, false, false, false);
+							break;
+						}
+					}
+				}
+			}
+		}
+		break;
+
+	case WIDGET_ASSIGN_CITIZEN_TO_PLOT:
+		doAssignCitizenToPlot(gDLL->getInterfaceIFace()->getHeadSelectedCity(), destinationWidgetData.m_iData1, sourceWidgetData.m_iData2);
+		break;
+
+	case WIDGET_CITIZEN:
+		{
+			CvUnit* pUnit = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(sourceWidgetData.m_iData2);
+			if (NULL != pUnit)
+			{
+				gDLL->sendDoTask(pCity->getID(), TASK_REPLACE_CITIZEN, sourceWidgetData.m_iData2, destinationWidgetData.m_iData1, true, false, false, false);
+			}
+		}
+		break;
+
+	case WIDGET_EJECT_CITIZEN:
+		{
+			CvUnit* pUnit = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(sourceWidgetData.m_iData2);
+			if (pUnit != NULL)
+			{
+				gDLL->sendDoCommand(sourceWidgetData.m_iData2, COMMAND_UNLOAD, -1, -1, false);
+			}
+		}
+		break;
+
+	case WIDGET_RECEIVE_MOVE_CARGO_TO_TRANSPORT:
+		{
+			CvUnit* pUnit = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(sourceWidgetData.m_iData2);
+			CvUnit* pTransport = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(destinationWidgetData.m_iData1);
+
+			if (NULL != pUnit && NULL != pTransport)
+			{
+				gDLL->sendDoCommand(sourceWidgetData.m_iData2, COMMAND_LOAD_UNIT, pTransport->getOwnerINLINE(), destinationWidgetData.m_iData1, false);
+			}
+		}
+		break;
+	default:
+		break;
+	}
+}
+
+void CvDLLWidgetData::doMoveShipCargo(const CvWidgetDataStruct& destinationWidgetData, const CvWidgetDataStruct& sourceWidgetData)
+{
+	switch (destinationWidgetData.m_eWidgetType)
+	{
+	case WIDGET_SHIP_CARGO:
+		{
+			gDLL->sendPlayerAction(GC.getGameINLINE().getActivePlayer(), PLAYER_ACTION_TRANSFER_UNIT_IN_EUROPE, sourceWidgetData.m_iData1, destinationWidgetData.m_iData1, -1);
+			// Move cargo from one ship to another (shift split?)
+		}
+		break;
+	case WIDGET_DOCK:
+		{
+			CvUnit* pUnit = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(sourceWidgetData.m_iData1);
+			if (pUnit != NULL && pUnit->isCargo())
+			{
+				if (!pUnit->isGoods())
+				{
+					gDLL->sendPlayerAction(GC.getGameINLINE().getActivePlayer(), PLAYER_ACTION_UNLOAD_UNIT_TO_EUROPE, sourceWidgetData.m_iData1, destinationWidgetData.m_iData1, -1);
+				}
+				else
+				{
+					if (gDLL->shiftKey())
+					{
+						CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_SELECT_YIELD_AMOUNT, pUnit->getYield(), sourceWidgetData.m_iData1, PLAYER_ACTION_SELL_YIELD_UNIT);
+						pInfo->setOption1(false);
+						pInfo->setOption2(true);
+						gDLL->getInterfaceIFace()->addPopup(pInfo, NO_PLAYER, true);
+					}
+					else
+					{
+						gDLL->sendPlayerAction(GC.getGameINLINE().getActivePlayer(), PLAYER_ACTION_SELL_YIELD_UNIT, 0, pUnit->getYieldStored(), sourceWidgetData.m_iData1);
+					}			
+				}
+			}
+		}
+		break;
+	case WIDGET_MOVE_CARGO_TO_TRANSPORT:
+		{
+			PlayerTypes ePlayer = GC.getGameINLINE().getActivePlayer();
+			CvUnit* pUnit = GET_PLAYER(ePlayer).getUnit(sourceWidgetData.m_iData1);
+			if (pUnit != NULL && pUnit->isGoods())
+			{
+				if (gDLL->shiftKey())
+				{
+					CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_SELECT_YIELD_AMOUNT, pUnit->getYield(), sourceWidgetData.m_iData1, PLAYER_ACTION_SELL_YIELD_UNIT);
+					pInfo->setOption1(false);
+					pInfo->setOption2(true);
+					gDLL->getInterfaceIFace()->addPopup(pInfo, NO_PLAYER, true);
+				}
+				else
+				{
+					gDLL->sendPlayerAction(GC.getGameINLINE().getActivePlayer(), PLAYER_ACTION_SELL_YIELD_UNIT, 0, pUnit->getYieldStored(), sourceWidgetData.m_iData1);
+				}
+			}
+		}
+		break;
+
+	case WIDGET_SAIL:
+		if (sourceWidgetData.m_iData2 == -1)
+		{
+			gDLL->sendDoCommand(sourceWidgetData.m_iData1, COMMAND_SAIL_TO_EUROPE, destinationWidgetData.m_iData1, -1, false);
+		}
+		break;
+
+	default:
+		break;
+	}
+}
+
+void CvDLLWidgetData::doMoveDockUnit(const CvWidgetDataStruct& destinationWidgetData, const CvWidgetDataStruct& sourceWidgetData)
+{
+	switch (destinationWidgetData.m_eWidgetType)
+	{
+	case WIDGET_SHIP_CARGO:
+		{
+			gDLL->sendPlayerAction(GC.getGameINLINE().getActivePlayer(), PLAYER_ACTION_LOAD_UNIT_FROM_EUROPE, sourceWidgetData.m_iData1, destinationWidgetData.m_iData1, -1);
+		}
+		break;
+
+	default:
+		break;
+	}
+}
+
+void CvDLLWidgetData::doUnitIntoCity(const CvWidgetDataStruct& destinationWidgetData, const CvWidgetDataStruct& sourceWidgetData)
+{
+	// garrison from city screen citizen dragged and dropped somewhere
+
+	CvCity* pCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
+	if (pCity == NULL || pCity->getOwnerINLINE() != GC.getGameINLINE().getActivePlayer())
+	{
+		return;
+	}
+
+	switch (destinationWidgetData.m_eWidgetType)
+	{
+	case WIDGET_CITY_UNIT_ASSIGN_PROFESSION:
+		{
+			int iUnitId = sourceWidgetData.m_iData1;
+			CvUnit* pUnit = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(iUnitId);
+			if (pUnit == NULL)
+			{
+				break;
+			}
+			ProfessionTypes eProfession = (ProfessionTypes) destinationWidgetData.m_iData2;
+			if (eProfession == NO_PROFESSION)
+			{
+				break;
+			}
+
+			if (pUnit->canHaveProfession(eProfession, true, pCity->plot()))
+			{
+				if (pCity->isAvailableProfessionSlot(eProfession, pUnit))
+				{
+					gDLL->sendDoCommand(iUnitId, COMMAND_PROFESSION, eProfession, -1, false);
+				}
+				else
+				{
+					for (int i = 0; i < pCity->getPopulation(); ++i)
+					{
+						CvUnit* pLoopUnit = pCity->getPopulationUnitByIndex(i);
+						if (pLoopUnit->getProfession() == eProfession)
+						{
+							gDLL->sendDoTask(pCity->getID(), TASK_REPLACE_CITIZEN, iUnitId, pLoopUnit->getID(), false, false, false, false);
+							break;
+						}
+					}
+				}
+			}
+		}
+		break;
+
+	case WIDGET_ASSIGN_CITIZEN_TO_PLOT:
+		doAssignCitizenToPlot(gDLL->getInterfaceIFace()->getHeadSelectedCity(), destinationWidgetData.m_iData1, sourceWidgetData.m_iData1);
+		break;
+
+	case WIDGET_CITIZEN:
+		{
+			CvUnit* pUnit = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(sourceWidgetData.m_iData1);
+			if (NULL != pUnit)
+			{
+				gDLL->sendDoTask(pCity->getID(), TASK_REPLACE_CITIZEN, sourceWidgetData.m_iData1, destinationWidgetData.m_iData1, true, false, false, false);
+			}
+		}
+		break;
+
+	case WIDGET_RECEIVE_MOVE_CARGO_TO_TRANSPORT:
+		{
+			CvUnit* pUnit = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(sourceWidgetData.m_iData1);
+			CvUnit* pTransport = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(destinationWidgetData.m_iData1);
+			
+			if (NULL != pUnit && NULL != pTransport)
+			{
+				gDLL->sendDoCommand(sourceWidgetData.m_iData1, COMMAND_LOAD_UNIT, pTransport->getOwnerINLINE(), destinationWidgetData.m_iData1, false);
+			}
+		}
+		break;
+
+	default:
+		break;
+	}
+}
+
+void CvDLLWidgetData::doMoveCargoToTransport(const CvWidgetDataStruct& destinationWidgetData, const CvWidgetDataStruct& sourceWidgetData)
+{
+	// a yield dropped somewhere (could be in Europe or in City)
+
+	switch (destinationWidgetData.m_eWidgetType)
+	{
+	case WIDGET_RECEIVE_MOVE_CARGO_TO_TRANSPORT:
+	case WIDGET_MOVE_CARGO_TO_CITY:
+		// City screen
+		{
+			CvCity* pCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
+			if (pCity == NULL || pCity->getOwnerINLINE() != GC.getGameINLINE().getActivePlayer())
+			{
+				break;
+			}
+
+			if (gDLL->shiftKey())
+			{
+				CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_SELECT_YIELD_AMOUNT, sourceWidgetData.m_iData1, destinationWidgetData.m_iData1, COMMAND_LOAD_YIELD);
+				pInfo->setOption1(true);
+				gDLL->getInterfaceIFace()->addPopup(pInfo, NO_PLAYER, true);
+			}
+			else
+			{
+				gDLL->sendDoCommand(destinationWidgetData.m_iData1, COMMAND_LOAD_YIELD, sourceWidgetData.m_iData1, -1, false);
+			}
+		}
+		break;
+
+	case WIDGET_SHIP_CARGO:
+		// Europe
+		if (gDLL->shiftKey())
+		{
+			CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_SELECT_YIELD_AMOUNT, sourceWidgetData.m_iData1, destinationWidgetData.m_iData1, PLAYER_ACTION_BUY_YIELD_UNIT);
+			pInfo->setOption1(true);
+			gDLL->getInterfaceIFace()->addPopup(pInfo, NO_PLAYER, true);
+		}
+		else
+		{
+			PlayerTypes ePlayer = GC.getGameINLINE().getActivePlayer();
+			CvUnit* pUnit = GET_PLAYER(ePlayer).getUnit(destinationWidgetData.m_iData1);
+			int iAmount = pUnit->getLoadYieldAmount((YieldTypes) sourceWidgetData.m_iData1);
+			if (iAmount > 0)
+			{
+				gDLL->sendPlayerAction(GC.getGameINLINE().getActivePlayer(), PLAYER_ACTION_BUY_YIELD_UNIT, sourceWidgetData.m_iData1, iAmount, destinationWidgetData.m_iData1);
+			}
+		}
+		break;
+
+	default:
+		break;
+	}
+}
+
+void CvDLLWidgetData::doDoubleClickCitizen(const CvWidgetDataStruct& widgetDataStruct)
+{
+	CvCity* pHeadSelectedCity;
+	if (widgetDataStruct.m_iData2 != -1)
+	{
+		pHeadSelectedCity = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCity(widgetDataStruct.m_iData2);
+	}
+	else
+	{
+		pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
+	}
+	if (pHeadSelectedCity != NULL && pHeadSelectedCity->getOwnerINLINE() == GC.getGameINLINE().getActivePlayer())
+	{
+		CvUnit* pUnit = pHeadSelectedCity->getPopulationUnitById(widgetDataStruct.m_iData1);
+		if (pUnit != NULL)
+		{
+			CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_CHOOSE_PROFESSION, pHeadSelectedCity->getID(), pUnit->getID());
+			gDLL->getInterfaceIFace()->addPopup(pInfo, NO_PLAYER, true);
+		}
+	}
+}
+
+void CvDLLWidgetData::doDoubleClickDock(const CvWidgetDataStruct& widgetDataStruct)
+{
+	CvUnit* pUnit = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getEuropeUnitById(widgetDataStruct.m_iData1);
+	if (pUnit != NULL)
+	{
+		CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_CHOOSE_PROFESSION, -1, pUnit->getID(), 0);
+		gDLL->getInterfaceIFace()->addPopup(pInfo, NO_PLAYER, true);
+	}
+}
+
+void CvDLLWidgetData::doCreateTradeRoute(const CvWidgetDataStruct& widgetDataStruct)
+{
+	if (GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getNumCities() >= 2)
+	{
+		gDLL->getEventReporterIFace()->createTradeRoute(GC.getGameINLINE().getActivePlayer());
+	}
+}
+
+void CvDLLWidgetData::doEditTradeRoute(const CvWidgetDataStruct& widgetDataStruct)
+{
+	if (GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getTradeRoute(widgetDataStruct.m_iData1) != NULL)
+	{
+		gDLL->getEventReporterIFace()->editTradeRoute(GC.getGameINLINE().getActivePlayer(), widgetDataStruct.m_iData1);
+	}
+}
+
+void CvDLLWidgetData::doYieldImportExport(const CvWidgetDataStruct& widgetDataStruct)
+{
+	CvCity* pHeadSelectedCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
+	if (pHeadSelectedCity != NULL && pHeadSelectedCity->getOwnerINLINE() == GC.getGameINLINE().getActivePlayer())
+	{
+		CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_YIELD_IMPORT_EXPORT, gDLL->getInterfaceIFace()->getHeadSelectedCity()->getID());
+		gDLL->getInterfaceIFace()->addPopup(pInfo, NO_PLAYER, true);
+	}
+}
+
+void CvDLLWidgetData::doAssignTradeRoute(const CvWidgetDataStruct& widgetDataStruct)
+{
+	CvUnit* pUnit = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getUnit(widgetDataStruct.m_iData1);
+	if (pUnit != NULL)
+	{
+		gDLL->sendDoCommand(pUnit->getID(), COMMAND_ASSIGN_TRADE_ROUTE, widgetDataStruct.m_iData2, !pUnit->getGroup()->isAssignedTradeRoute(widgetDataStruct.m_iData2), false);
+	}
 }
 
 void CvDLLWidgetData::parseProductionModHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
@@ -4483,17 +3282,64 @@ void CvDLLWidgetData::parseLeaderLineHelp(CvWidgetDataStruct &widgetDataStruct, 
 	GAMETEXT.parseLeaderLineHelp(szBuffer, (PlayerTypes)widgetDataStruct.m_iData1, (PlayerTypes)widgetDataStruct.m_iData2);
 }
 
-void CvDLLWidgetData::parseCommerceModHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	CvCity* pCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
-	if (NULL != pCity)
-	{
-		GAMETEXT.setCommerceHelp(szBuffer, *pCity, (CommerceTypes)widgetDataStruct.m_iData1);
-	}
-}
-
 void CvDLLWidgetData::parseScoreHelp(CvWidgetDataStruct& widgetDataStruct, CvWStringBuffer& szBuffer)
 {
 	GAMETEXT.setScoreHelp(szBuffer, (PlayerTypes)widgetDataStruct.m_iData1);
 }
 
+void CvDLLWidgetData::parseImportExportHelp(CvWidgetDataStruct& widgetDataStruct, CvWStringBuffer& szBuffer)
+{
+	if (widgetDataStruct.m_iData1 != 0)
+	{
+		szBuffer.append(gDLL->getText("TXT_KEY_HELP_EDIT_IMPORTS"));
+	}
+	else
+	{
+		szBuffer.append(gDLL->getText("TXT_KEY_HELP_EDIT_EXPORTS"));
+	}
+}
+
+void CvDLLWidgetData::parseEjectCitizenHelp(CvWidgetDataStruct& widgetDataStruct, CvWStringBuffer& szBuffer)
+{
+	CvCity* pCity = gDLL->getInterfaceIFace()->getHeadSelectedCity();
+	if (pCity != NULL)
+	{
+		CvUnit* pUnit = GET_PLAYER(pCity->getOwnerINLINE()).getUnit(widgetDataStruct.m_iData1);
+		if (pUnit != NULL)
+		{
+			GAMETEXT.setUnitHelp(szBuffer, pUnit, false, false);
+		}
+		else
+		{
+			szBuffer.append(gDLL->getText("TXT_KEY_EJECT_CITIZEN"));
+		}
+	}
+}
+
+void CvDLLWidgetData::doAssignCitizenToPlot(CvCity* pCity, int iPlotIndex, int iUnitId)
+{
+	if (NULL != pCity)
+	{
+		if (pCity->getOwnerINLINE() == GC.getGameINLINE().getActivePlayer())
+		{
+			CvUnit* pOtherUnit = pCity->getUnitWorkingPlot(iPlotIndex);
+			if (pOtherUnit != NULL)
+			{
+				gDLL->sendDoTask(pCity->getID(), TASK_REPLACE_CITIZEN, iUnitId, pOtherUnit->getID(), true, false, false, false);
+			}
+			else
+			{
+				gDLL->sendDoTask(pCity->getID(), TASK_CHANGE_WORKING_PLOT, iPlotIndex, iUnitId, true, false, false, false);
+			}
+		}
+	}
+}
+
+void CvDLLWidgetData::doGoToCity(const CvWidgetDataStruct &widgetDataStruct)
+{
+	CvCity* pCity = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCity(widgetDataStruct.m_iData1);
+	if (pCity != NULL)
+	{
+		gDLL->getInterfaceIFace()->selectCity(pCity);
+	}
+}

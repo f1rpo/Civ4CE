@@ -112,25 +112,3 @@ BOOL APIENTRY DllMain(HANDLE hModule,
 
 	return TRUE;	// success
 }
-
-//
-// enable dll profiler if necessary, clear history
-//
-void startProfilingDLL()
-{
-	if (GC.isDLLProfilerEnabled())
-	{
-		gDLL->ProfilerBegin();
-	}
-}
-
-//
-// dump profile stats on-screen
-//
-void stopProfilingDLL()
-{
-	if (GC.isDLLProfilerEnabled())
-	{
-		gDLL->ProfilerEnd();
-	}
-}

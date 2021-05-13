@@ -10,7 +10,6 @@ struct CvPopupButtonPython
 	CvString szArt;
 };
 
-
 class CvPopupInfo
 {
 public:

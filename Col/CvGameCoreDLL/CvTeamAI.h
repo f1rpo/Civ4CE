@@ -41,7 +41,6 @@ public:
 	void AI_updateAreaStragies(bool bTargets = true);
 	void AI_updateAreaTargets();
 
-	int AI_countFinancialTrouble() const;
 	int AI_countMilitaryWeight(CvArea* pArea) const;
 
 	bool AI_isAnyCapitalAreaAlone() const;
@@ -62,22 +61,10 @@ public:
 	int AI_getAttitudeVal(TeamTypes eTeam, bool bForced = true) const;
 	int AI_getMemoryCount(TeamTypes eTeam, MemoryTypes eMemory) const;
 
-	int AI_chooseElection(const VoteSelectionData& kVoteSelectionData) const;
-
 	int AI_startWarVal(TeamTypes eTeam) const;
 	int AI_endWarVal(TeamTypes eTeam) const;
-
-	int AI_techTradeVal(TechTypes eTech, TeamTypes eTeam) const;
-	DenialTypes AI_techTrade(TechTypes eTech, TeamTypes eTeam) const;
-
 	int AI_mapTradeVal(TeamTypes eTeam) const;
 	DenialTypes AI_mapTrade(TeamTypes eTeam) const;
-
-	int AI_vassalTradeVal(TeamTypes eTeam) const;
-	DenialTypes AI_vassalTrade(TeamTypes eTeam) const;
-
-	int AI_surrenderTradeVal(TeamTypes eTeam) const;
-	DenialTypes AI_surrenderTrade(TeamTypes eTeam, int iPowerMultiplier = 100) const;
 
 	int AI_makePeaceTradeVal(TeamTypes ePeaceTeam, TeamTypes eTeam) const;
 	DenialTypes AI_makePeaceTrade(TeamTypes ePeaceTeam, TeamTypes eTeam) const;
@@ -135,6 +122,12 @@ public:
 	int AI_getEnemyPeacetimeGrantValue(TeamTypes eIndex) const;
 	void AI_setEnemyPeacetimeGrantValue(TeamTypes eIndex, int iNewValue);
 	void AI_changeEnemyPeacetimeGrantValue(TeamTypes eIndex, int iChange);
+	
+	int AI_getDamages(TeamTypes eIndex) const;
+	void AI_setDamages(TeamTypes eIndex, int iNewValue);
+	void AI_changeDamages(TeamTypes eIndex, int iChange);
+	
+	void AI_doDamages(TeamTypes eTeam, bool bPeace);
 
 	WarPlanTypes AI_getWarPlan(TeamTypes eIndex) const;
 	bool AI_isChosenWar(TeamTypes eIndex) const;
@@ -143,16 +136,27 @@ public:
 	void AI_setWarPlan(TeamTypes eIndex, WarPlanTypes eNewValue, bool bWar = true);
 
 	int AI_teamCloseness(TeamTypes eIndex, int iMaxDistance = -1) const;
+	int AI_targetValidity(TeamTypes eTeam) const;
 
 	bool AI_performNoWarRolls(TeamTypes eTeam);
 
 	int AI_getAttitudeWeight(TeamTypes eTeam);
 
-	int AI_getLowestVictoryCountdown() const;
-
-	int AI_getTechMonopolyValue(TechTypes eTech, TeamTypes eTeam) const;
-
 	bool AI_isWaterAreaRelevant(CvArea* pArea);
+
+	bool AI_isExploringNeeded(CvUnit* pUnit) const;
+
+	short AI_enemyCityDistance(CvPlot* pPlot) const;
+	short AI_enemyUnitDistance(CvPlot* pPlot) const;
+
+	int AI_getGreed(TeamTypes eTeam) const;
+	int AI_getAnger(TeamTypes eTeam) const;
+	int AI_getFear(TeamTypes eTeam) const;
+
+	int AI_warplanStrength(WarPlanTypes eWarplan) const;
+	
+	bool AI_isNative() const;
+	bool AI_isKing() const;
 
 	virtual void read(FDataStreamBase* pStream);
 	virtual void write(FDataStreamBase* pStream);
@@ -162,6 +166,9 @@ protected:
 	static CvTeamAI* m_aTeams;
 
 	TeamTypes m_eWorstEnemy;
+
+	std::vector<short> m_aiEnemyCityDistance;
+	std::vector<short> m_aiEnemyUnitDistance;
 
 	int* m_aiWarPlanStateCounter;
 	int* m_aiAtWarCounter;
@@ -173,11 +180,9 @@ protected:
 	int* m_aiWarSuccess;
 	int* m_aiEnemyPeacetimeTradeValue;
 	int* m_aiEnemyPeacetimeGrantValue;
+	int* m_aiDamages;
 
 	WarPlanTypes* m_aeWarPlan;
-
-	int AI_noTechTradeThreshold() const;
-	int AI_techTradeKnownPercent() const;
 	int AI_maxWarRand() const;
 	int AI_maxWarNearbyPowerRatio() const;
 	int AI_maxWarDistantPowerRatio() const;
@@ -190,6 +195,8 @@ protected:
 
 	void AI_doCounter();
 	void AI_doWar();
+    void AI_doTactics();
+
 
 
 	// added so under cheat mode we can call protected functions for testing

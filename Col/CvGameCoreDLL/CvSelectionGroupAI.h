@@ -50,6 +50,13 @@ public:
 
 	bool AI_isFull();
 
+	bool AI_launchAssault(CvPlot* pTargetCityPlot = NULL);
+	void AI_groupBombard();
+
+	int AI_getYieldsLoaded(short* piYields);
+
+	bool AI_tradeRoutes();
+
 	void read(FDataStreamBase* pStream);
 	void write(FDataStreamBase* pStream);
 

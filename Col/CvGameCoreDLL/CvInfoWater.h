@@ -38,32 +38,29 @@ public:
 	DllExport CvWaterPlaneInfo();
 	DllExport virtual ~CvWaterPlaneInfo();
 
-	DllExport NiColor	getMaterialDiffuse() const;			// The water plane's material diffuse color
-	DllExport NiColor	getMaterialSpecular() const;		// The water plane's material specular color
-	DllExport NiColor	getMaterialEmmisive() const;		// The water plane's material emmisive color
 	DllExport float getMaterialAlpha() const;				// The water plane's material alpha
 
 	DllExport float getTextureScaling() const;				// The water plane's texture scale
 	DllExport float getTextureScrollRateU() const;			// The water plane's texture scroll rate in U
 	DllExport float getTextureScrollRateV() const;			// The water plane's texture scroll rate in V
 
-	DllExport const TCHAR * getBaseTexture() const;
-	DllExport void setBaseTexture(const TCHAR* szVal);		// The filename of the base texture
-
+	DllExport const TCHAR *getBaseTexture() const;
+	DllExport const TCHAR *getNormalTexture() const;
 	DllExport const TCHAR *getTransitionTexture() const;
-	DllExport void setTransitionTexture(const TCHAR* szVal); // The transition texture for fading ocean into land
+	DllExport const TCHAR *getEnvironmentTexture() const;
+	DllExport const TCHAR *getGridTexture() const;
 
 	DllExport bool read(CvXMLLoadUtility*);
 
 protected:
 
-	NiColor	m_kMaterialDiffuse;		// The water plane's material diffuse color
-	NiColor	m_kMaterialSpecular;	// The water plane's material specular color
-	NiColor	m_kMaterialEmmisive;	// The water plane's material emmisive color
 	float m_fMaterialAlpha;			// The water plane's material alpha
 
 	CvString m_szBaseTexture;		// The filename of the base texture
+	CvString m_szNormalTexture;		// The filename of the normal texture
 	CvString m_szTransitionTexture;	// The filename of the transition texture
+	CvString m_szEnvironmentTexture;	// The filename of the transition texture
+	CvString m_szGridTexture;	// The filename of the transition texture
 
 	float m_BaseTextureScale;		// Texture scaling
 	float m_fURate;					// Texture scroll rate
@@ -87,6 +84,7 @@ public:
 
 	DllExport bool isVisible() const;				// The terrain plane's material alpha
 	DllExport bool isGroundPlane() const;				// The terrain plane's material alpha
+	DllExport bool isCitySelection() const;				// The terrain plane's material alpha
 	DllExport float getMaterialAlpha() const;				// The terrain plane's material alpha
 	DllExport float getCloseAlpha() const;				// The terrain plane's material alpha
 
@@ -106,6 +104,7 @@ protected:
 
 	bool m_bVisible;
 	bool m_bGroundPlane;
+	bool m_bCitySelection;
 	float m_fMaterialAlpha;			// The terrain plane's material alpha
 	float m_fCloseAlpha;
 

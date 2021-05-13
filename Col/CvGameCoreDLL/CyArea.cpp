@@ -29,16 +29,6 @@ int CyArea::countNumUniqueBonusTypes()
 	return m_pArea ? m_pArea->countNumUniqueBonusTypes() : -1;
 }
 
-int CyArea::countHasReligion(int /*ReligionTypes*/ eReligion, int /*PlayerTypes*/ eOwner)
-{
-	return m_pArea ? m_pArea->countHasReligion((ReligionTypes)eReligion, (PlayerTypes)eOwner) : -1;
-}
-
-int CyArea::countHasCorporation(int /*CorporationTypes*/ eCorporation, int /*PlayerTypes*/ eOwner)
-{
-	return m_pArea ? m_pArea->countHasCorporation((CorporationTypes)eCorporation, (PlayerTypes)eOwner) : -1;
-}
-
 int CyArea::getID()
 {
 	return m_pArea ? m_pArea->getID() : -1;
@@ -79,11 +69,6 @@ int CyArea::getNumUnits()
 	return m_pArea ? m_pArea->getNumUnits() : -1;
 }
 
-int CyArea::getTotalPopulation()
-{
-	return m_pArea ? m_pArea->getTotalPopulation() : -1;
-}
-
 int CyArea::getNumStartingPlots()
 {
 	return m_pArea ? m_pArea->getNumStartingPlots() : -1;
@@ -99,11 +84,6 @@ int CyArea::getUnitsPerPlayer(int /*PlayerTypes*/ eIndex)
 	return m_pArea ? m_pArea->getUnitsPerPlayer((PlayerTypes) eIndex) : -1;
 }
 
-int CyArea::getAnimalsPerPlayer(int /*PlayerTypes*/ eIndex)
-{
-	return m_pArea ? m_pArea->getAnimalsPerPlayer((PlayerTypes) eIndex) : -1;
-}
-
 int CyArea::getCitiesPerPlayer(int /*PlayerTypes*/ eIndex)
 {
 	return m_pArea ? m_pArea->getCitiesPerPlayer((PlayerTypes) eIndex) : -1;
@@ -112,26 +92,6 @@ int CyArea::getCitiesPerPlayer(int /*PlayerTypes*/ eIndex)
 int CyArea::getPopulationPerPlayer(int /*PlayerTypes*/ eIndex)
 {
 	return m_pArea ? m_pArea->getPopulationPerPlayer((PlayerTypes) eIndex) : -1;
-}
-
-int CyArea::getBuildingGoodHealth(int /*PlayerTypes*/ eIndex)
-{
-	return m_pArea ? m_pArea->getBuildingGoodHealth((PlayerTypes) eIndex) : -1;
-}
-
-int CyArea::getBuildingBadHealth(int /*PlayerTypes*/ eIndex)
-{
-	return m_pArea ? m_pArea->getBuildingBadHealth((PlayerTypes) eIndex) : -1;
-}
-
-int CyArea::getBuildingHappiness(int /*PlayerTypes*/ eIndex)
-{
-	return m_pArea ? m_pArea->getBuildingHappiness((PlayerTypes) eIndex) : -1;
-}
-
-int CyArea::getFreeSpecialist(int /*PlayerTypes*/ eIndex)
-{
-	return m_pArea ? m_pArea->getFreeSpecialist((PlayerTypes) eIndex) : -1;
 }
 
 int CyArea::getPower(int /*PlayerTypes*/ eIndex)
@@ -152,16 +112,6 @@ int CyArea::getNumRevealedTiles(int /*TeamTypes*/ eIndex)
 int CyArea::getNumUnrevealedTiles(int /*TeamTypes*/ eIndex)
 {
 	return m_pArea ? m_pArea->getNumUnrevealedTiles((TeamTypes)eIndex) : -1;
-}
-
-bool CyArea::isCleanPower(int /*TeamTypes*/ eIndex)
-{
-	return m_pArea ? m_pArea->isCleanPower((TeamTypes)eIndex) : false;
-}
-
-bool CyArea::isBorderObstacle(int /*TeamTypes*/ eIndex)
-{
-	return m_pArea ? m_pArea->isBorderObstacle((TeamTypes)eIndex) : false;
 }
 
 int /*AreaAITypes*/ CyArea::getAreaAIType(int /*TeamTypes*/ eIndex)

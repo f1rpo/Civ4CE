@@ -250,15 +250,15 @@ bool CvXMLLoadUtility::GetXmlVal(bool* pbVal, bool bDefault)
 //				non-comment xml node if the current node is a comment node
 //
 //------------------------------------------------------------------------------------------------------
-bool CvXMLLoadUtility::GetNextXmlVal(std::string& pszVal, char* pszDefault)
+bool CvXMLLoadUtility::GetNextXmlVal(std::string* pszVal, char* pszDefault)
 {
 	if (pszDefault)
 	{
-		pszVal = pszDefault;
+		*pszVal = pszDefault;
 	}
 	else
 	{
-		pszVal.clear();
+		(*pszVal).clear();
 	}
 
 	// if we can set the current xml node to it's next sibling
@@ -268,7 +268,7 @@ bool CvXMLLoadUtility::GetNextXmlVal(std::string& pszVal, char* pszDefault)
 		if (SkipToNextVal())
 		{
 			// get the string value of the current xml node
-			gDLL->getXMLIFace()->GetLastNodeValue(m_pFXml,pszVal);
+			gDLL->getXMLIFace()->GetLastNodeValue(m_pFXml, *pszVal);
 			return true;
 		}
 		// otherwise we can't find a non-comment node on this level so we will FAssert and return false
@@ -293,15 +293,15 @@ bool CvXMLLoadUtility::GetNextXmlVal(std::string& pszVal, char* pszDefault)
 //				non-comment xml node if the current node is a comment node
 //
 //------------------------------------------------------------------------------------------------------
-bool CvXMLLoadUtility::GetNextXmlVal(std::wstring& pszVal, wchar* pszDefault)
+bool CvXMLLoadUtility::GetNextXmlVal(std::wstring* pszVal, wchar* pszDefault)
 {
 	if (pszDefault)
 	{
-		pszVal = pszDefault;
+		*pszVal = pszDefault;
 	}
 	else
 	{
-		pszVal.clear();
+		(*pszVal).clear();
 	}
 
 	// if we can set the current xml node to it's next sibling
@@ -311,7 +311,7 @@ bool CvXMLLoadUtility::GetNextXmlVal(std::wstring& pszVal, wchar* pszDefault)
 		if (SkipToNextVal())
 		{
 			// get the string value of the current xml node
-			gDLL->getXMLIFace()->GetLastNodeValue(m_pFXml,pszVal);
+			gDLL->getXMLIFace()->GetLastNodeValue(m_pFXml, *pszVal);
 			return true;
 		}
 		// otherwise we can't find a non-comment node on this level so we will FAssert and return false
@@ -1228,7 +1228,7 @@ bool CvXMLLoadUtility::GetChildXmlValByName(bool* pbVal, const TCHAR* szName, bo
 int CvXMLLoadUtility::GetHotKeyInt(const TCHAR* pszHotKeyVal)
 {
 	// SPEEDUP
-	PROFILE("GetHotKeyInt");
+	PROFILE_FUNC();
 	int i;
 
 	struct CvKeyBoardMapping

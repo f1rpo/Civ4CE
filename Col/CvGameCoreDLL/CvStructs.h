@@ -27,20 +27,22 @@ struct DllExport XYCoords
 struct DllExport IDInfo
 {
 
-	IDInfo(PlayerTypes eOwner=NO_PLAYER, int iID=FFreeList::INVALID_INDEX) : eOwner(eOwner), iID(iID) {}
+	IDInfo(PlayerTypes eOwner = NO_PLAYER, int iID = -1) : eOwner(eOwner), iID(iID) {}
 	PlayerTypes eOwner;
 	int iID;
 
-	bool operator== (const IDInfo& info) const
-	{
-		return (eOwner == info.eOwner && iID == info.iID);
-	}
+	bool operator== (const IDInfo& rhs) const { return (rhs.eOwner == eOwner && rhs.iID == iID); }
+	bool operator!= (const IDInfo& rhs) const { return (!operator==(rhs)); }
+	bool operator< (const IDInfo& rhs) const { if (eOwner != rhs.eOwner) return (eOwner < rhs.eOwner); if (iID != rhs.iID) return (iID < rhs.iID); return false; }
 
 	void reset()
 	{
 		eOwner = NO_PLAYER;
-		iID = FFreeList::INVALID_INDEX;
+		iID = -1;
 	}
+
+	void read(FDataStreamBase* pStream);
+	void write(FDataStreamBase* pStream) const;
 };
 
 struct DllExport GameTurnInfo
@@ -69,9 +71,13 @@ struct DllExport MissionData
 struct DllExport TradeData
 {
 	TradeableItems m_eItemType;				//	What type of item is this
-	int m_iData;											//	Any additional data?
+	int m_iData1;											//	Any additional data?
+	IDInfo m_kTransport;
 	bool m_bOffering;									//	Is this item up for grabs?
 	bool m_bHidden;										//	Are we hidden?
+
+	void read(FDataStreamBase* pStream);
+	void write(FDataStreamBase* pStream) const;
 };
 
 struct EventTriggeredData
@@ -86,44 +92,9 @@ struct EventTriggeredData
 	int m_iUnitId;
 	PlayerTypes m_eOtherPlayer;
 	int m_iOtherPlayerCityId;
-	ReligionTypes m_eReligion;
-	CorporationTypes m_eCorporation;
 	BuildingTypes m_eBuilding;
 	CvWString m_szText;
 	CvWString m_szGlobalText;
-
-	int getID() const;
-	void setID(int iID);
-	void read(FDataStreamBase* pStream);
-	void write(FDataStreamBase* pStream);
-};
-
-struct VoteSelectionSubData
-{
-	VoteTypes eVote;
-	PlayerTypes ePlayer;
-	int iCityId;
-	PlayerTypes eOtherPlayer;
-	CvWString szText;
-};
-
-struct VoteSelectionData
-{
-	int iId;
-	VoteSourceTypes eVoteSource;
-	std::vector<VoteSelectionSubData> aVoteOptions;
-
-	int getID() const;
-	void setID(int iID);
-	void read(FDataStreamBase* pStream);
-	void write(FDataStreamBase* pStream);
-};
-
-struct VoteTriggeredData
-{
-	int iId;
-	VoteSourceTypes eVoteSource;
-	VoteSelectionSubData kVoteOption;
 
 	int getID() const;
 	void setID(int iID);
@@ -152,16 +123,6 @@ struct PlotExtraYield
 	void write(FDataStreamBase* pStream);
 };
 
-struct PlotExtraCost
-{
-	int m_iX;
-	int m_iY;
-	int m_iCost;
-
-	void read(FDataStreamBase* pStream);
-	void write(FDataStreamBase* pStream);
-};
-
 typedef std::vector< std::pair<BuildingClassTypes, int> > BuildingChangeArray;
 
 struct BuildingYieldChange
@@ -173,17 +134,6 @@ struct BuildingYieldChange
 	void read(FDataStreamBase* pStream);
 	void write(FDataStreamBase* pStream);
 };
-
-struct BuildingCommerceChange
-{
-	BuildingClassTypes eBuildingClass;
-	CommerceTypes eCommerce;
-	int iChange;
-
-	void read(FDataStreamBase* pStream);
-	void write(FDataStreamBase* pStream);
-};
-
 
 struct DllExport FOWVis
 {
@@ -350,9 +300,7 @@ public:
 	void setDamage(BattleUnitTypes unitType, BattleTimeTypes timeType, int damage);
 	void addDamage(BattleUnitTypes unitType, BattleTimeTypes timeType, int increment);
 
-	int getFirstStrikes(BattleUnitTypes unitType) const;
-	void setFirstStrikes(BattleUnitTypes unitType, int firstStrikes);
-	void addFirstStrikes(BattleUnitTypes unitType, int increment);
+	bool isOneStrike() const;
 
 	bool isAdvanceSquare() const;
 	void setAdvanceSquare(bool advanceSquare);
@@ -376,30 +324,11 @@ private:
 	void checkBattleTimeType(BattleTimeTypes timeType) const;
 	void checkBattleRound(int index) const;
 
-	int					m_aDamage[BATTLE_UNIT_COUNT][BATTLE_TIME_COUNT];	//!< The beginning damage of the units
-	int					m_aFirstStrikes[BATTLE_UNIT_COUNT];		//!< The number of ranged first strikes the units made
-	int					m_iNumRangedRounds;				//!< The number of ranged rounds
-	int					m_iNumMeleeRounds;				//!< The number of melee rounds
-	bool				m_bAdvanceSquare;					//!< true if the attacking unit should move into the new square
+	int	m_aDamage[BATTLE_UNIT_COUNT][BATTLE_TIME_COUNT];	//!< The beginning damage of the units
+	int	m_iNumRangedRounds;				//!< The number of ranged rounds
+	int	m_iNumMeleeRounds;				//!< The number of melee rounds
+	bool m_bAdvanceSquare;					//!< true if the attacking unit should move into the new square
 	CvBattleRoundVector	m_aBattleRounds;					//!< The rounds that define the battle plan
-};
-
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//  CLASS:      CvAirMissionDefinition
-//!  \brief		A definition passed to CvAirMissionManager to start an air mission
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-class DllExport CvAirMissionDefinition : public CvMissionDefinition
-{
-public:
-	CvAirMissionDefinition();
-	CvAirMissionDefinition( const CvAirMissionDefinition & kCopy );
-
-	int getDamage(BattleUnitTypes unitType) const;
-	void setDamage(BattleUnitTypes unitType, int damage);
-	bool isDead(BattleUnitTypes unitType) const;
-
-private:
-	int					m_aDamage[BATTLE_UNIT_COUNT];		//!< The ending damage of the units
 };
 
 struct DllExport CvWidgetDataStruct

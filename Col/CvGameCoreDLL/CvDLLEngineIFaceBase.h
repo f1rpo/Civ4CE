@@ -65,7 +65,7 @@ public:
 	virtual void RebuildPlot(int plotX, int plotY, bool bRebuildHeights, bool bRebuildTextures) = 0;
 	virtual void RebuildRiverPlotTile(int plotX, int plotY, bool bRebuildHeights, bool bRebuildTextures) = 0;
 	virtual void RebuildTileArt(int plotX, int plotY) = 0;
-	virtual void ForceTreeOffsets(int plotX, int plotY) = 0;
+	virtual void RebuildAllTileArt() = 0;
 
 	virtual bool GetGridMode() = 0;
 	virtual void SetGridMode(bool bVal) = 0;
@@ -74,7 +74,6 @@ public:
 	virtual void clearColoredPlots(PlotLandscapeLayers layer) = 0;
 	virtual void fillAreaBorderPlot(int plotX, int plotY, const NiColorA &color, AreaBorderLayers layer) = 0;
 	virtual void clearAreaBorderPlots(AreaBorderLayers layer) = 0;
-	virtual void updateFoundingBorder() = 0;
 	virtual void addLandmark(CvPlot *plot, const wchar *caption) = 0;
 
 	virtual void TriggerEffect(int iEffect, NiPoint3 pt3Point, float rotation = 0.0f) = 0;
@@ -82,16 +81,19 @@ public:
 
 	virtual void clearSigns() = 0;
 
+	//yield symbols
+	virtual void clearYieldSymbol(CvPlot *pPlot) = 0;
+	virtual void setYieldSymbolVisible(CvPlot *pPlot, bool bVisible) = 0;
+	virtual void setYieldSymbolOffset(CvPlot *pPlot, float fXOffset) = 0;
+	virtual void setYieldSymbolAppearance(CvPlot *pPlot, YieldTypes eYield, float fAlpha, float fScale, bool bHighlight) = 0;
+	virtual void setYieldSymbolYieldAmount(CvPlot *pPlot, YieldTypes eYield, int iCount) = 0;
+
 	// dirty bits
 	virtual void SetDirty(EngineDirtyBits eBit, bool bNewValue) = 0;
 	virtual bool IsDirty(EngineDirtyBits eBit) = 0;
 	virtual void PushFogOfWar(FogOfWarModeTypes eNewMode) = 0;
 	virtual FogOfWarModeTypes PopFogOfWar() = 0;
 	virtual void setFogOfWarFromStack() = 0;
-	virtual void MarkBridgesDirty() = 0;
-	virtual void AddLaunch(PlayerTypes playerType) = 0;
-	virtual void AddGreatWall(CvCity *city) = 0;
-	virtual void RemoveGreatWall(CvCity *city) = 0;
 	virtual void MarkPlotTextureAsDirty(int plotX, int plotY) = 0;
 };
 

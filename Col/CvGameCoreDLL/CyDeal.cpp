@@ -91,6 +91,6 @@ void CyDeal::kill()
 {
 	if (NULL != m_pDeal)
 	{
-		m_pDeal->kill();
+		m_pDeal->kill(true, NO_TEAM);
 	}
 }

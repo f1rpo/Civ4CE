@@ -39,7 +39,6 @@ public:
 	virtual bool removeFromSelectionList(CvUnit* pUnit) = 0;
 	virtual void makeSelectionListDirty() = 0;
 	virtual bool mirrorsSelectionGroup() = 0;
-	virtual bool canSelectionListFound() = 0;
 
 	virtual void bringToTop(CvPopup *pPopup) = 0;
 	virtual bool isPopupUp() = 0;
@@ -72,7 +71,7 @@ public:
 	virtual void selectLookAtCity(bool bAdd = false) = 0;
 	virtual void addSelectedCity(CvCity* pNewValue) = 0;
 	virtual void clearSelectedCities() = 0;
-	virtual bool isCitySelected(CvCity *pCity) = 0;
+	virtual bool isCitySelected(const CvCity *pCity) = 0;
 	virtual CvCity* getHeadSelectedCity() = 0;
 	virtual bool isCitySelection() = 0;
 	virtual CLLNode<IDInfo>* nextSelectedCitiesNode(CLLNode<IDInfo>* pNode) = 0;
@@ -83,6 +82,7 @@ public:
 		int iFlashX = -1, int iFlashY = -1, bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false) = 0;
 	virtual void addCombatMessage(PlayerTypes ePlayer, CvWString szString) = 0;
 	virtual void addQuestMessage(PlayerTypes ePlayer, CvWString szString, int iQuestId) = 0;
+	virtual void addTutorialMessage(PlayerTypes ePlayer, CvWString szString) = 0;
 	virtual void showMessage(CvTalkingHeadMessage& msg) = 0;
 	virtual void flushTalkingHeadMessages() = 0;
 	virtual void clearEventMessages() = 0;
@@ -99,7 +99,6 @@ public:
 
 	virtual bool isCombatFocus() = 0;
 	virtual void setCombatFocus(bool bNewValue) = 0;
-	virtual void setDiploQueue(CvDiploParameters* pDiploParams, PlayerTypes ePlayer = NO_PLAYER) = 0;
 
 	virtual bool isDirty(InterfaceDirtyBits eDirtyItem) = 0;
 	virtual void setDirty(InterfaceDirtyBits eDirtyItem, bool bNewValue) = 0;
@@ -117,8 +116,6 @@ public:
 	virtual void toggleYieldVisibleMode() = 0;
 	virtual bool isScoresVisible() = 0;
 	virtual void toggleScoresVisible() = 0;
-	virtual bool isScoresMinimized() = 0;
-	virtual void toggleScoresMinimized() = 0;
 	virtual bool isNetStatsVisible() = 0;
 
 	virtual int getOriginalPlotCount() = 0;
@@ -129,6 +126,8 @@ public:
 	virtual bool isFlashing(PlayerTypes eWho) = 0;
 	virtual void setDiplomacyLocked(bool bLocked) = 0;
 	virtual bool isDiplomacyLocked() = 0;
+	virtual void setDiplomacyTransportId(PlayerTypes eWho, int iTransportId) = 0;
+	virtual int getDiplomacyTransportId(PlayerTypes eWho) = 0;
 
 	virtual void setMinimapColor(MinimapModeTypes eMinimapMode, int iX, int iY, ColorTypes eColor, float fAlpha) = 0;
 	virtual unsigned char* getMinimapBaseTexture() const = 0;
@@ -141,6 +140,7 @@ public:
 	virtual void setForcePopup(bool bNewValue) = 0;
 
 	virtual void lookAtCityOffset(int iCity) = 0;
+	virtual void lookAtUnit(int iUnit) = 0;
 
 	virtual void toggleTurnLog() = 0;
 	virtual void showTurnLog(ChatTargetTypes eTarget = NO_CHATTARGET) = 0;
@@ -149,6 +149,7 @@ public:
 	virtual int getPlotListColumn() = 0;
 	virtual void verifyPlotListColumn() = 0;
 	virtual int getPlotListOffset() = 0;
+	virtual void toggleMultiRowPlotList() = 0;
 
 	virtual void unlockPopupHelp() = 0;
 
@@ -168,6 +169,9 @@ public:
 	virtual int getFontCenterVertically() = 0;
 	virtual int getFontAdditive() = 0;
 
+	virtual void popupStartVLayout(CvPopup* pPopup, uint iFlags) = 0;
+	virtual void popupStartHLayout(CvPopup* pPopup, uint iFlags) = 0;
+	virtual void popupEndLayout(CvPopup* pPopup) = 0;
 	virtual void popupSetHeaderString( CvPopup* pPopup, CvWString szText, uint uiFlags = DLL_FONT_CENTER_JUSTIFY ) = 0;
 	virtual void popupSetBodyString( CvPopup* pPopup, CvWString szText, uint uiFlags = DLL_FONT_LEFT_JUSTIFY, char *szName = NULL, CvWString szHelpText = "" ) = 0;
 	virtual void popupLaunch( CvPopup* pPopup, bool bCreateOkButton = true, PopupStates bState = POPUPSTATE_QUEUED, int iNumPixelScroll = 0 ) = 0;
@@ -177,13 +181,12 @@ public:
 	virtual void popupAddDDS( CvPopup* pPopup, const char* szIconFilename, int iWidth = 0, int iHeight = 0, CvWString szHelpText = "") = 0;
 
 	virtual void popupAddSeparator( CvPopup* pPopup, int iSpace = 0) = 0;
-
 	virtual void popupAddGenericButton( CvPopup* pPopup, CvWString szText, const char* szIcon = 0, int iButtonId = -1, WidgetTypes eWidgetType = WIDGET_GENERAL, int iData1 = MAX_INT, int iData2 = MAX_INT,
 		bool bOption = true, PopupControlLayout ctrlLayout = POPUP_LAYOUT_CENTER, unsigned int textJustifcation = DLL_FONT_LEFT_JUSTIFY ) = 0;
-
 	virtual void popupCreateEditBox( CvPopup* pPopup, CvWString szDefaultString = "", WidgetTypes eWidgetType = WIDGET_GENERAL, CvWString szHelpText = "", int iGroup = 0,
 		PopupControlLayout ctrlLayout = POPUP_LAYOUT_STRETCH, unsigned int preferredCharWidth = 0, unsigned int maxCharCount = 256 ) = 0;
 	virtual void popupEnableEditBox( CvPopup* pPopup, int iGroup = 0, bool bEnable = false ) = 0;
+	virtual void popupCreateSpinBox(CvPopup* pPopup, int iIndex, const CvWString& szHelpText, int iDefault, int iIncrement, int iMax, int iMin) = 0;
 
 	virtual void popupCreateRadioButtons( CvPopup * pPopup, int iNumButtons, int iGroup = 0, WidgetTypes eWidgetType = WIDGET_GENERAL, PopupControlLayout ctrlLayout = POPUP_LAYOUT_CENTER ) = 0;
 	virtual void popupSetRadioButtonText( CvPopup * pPopup, int iRadioButtonID, CvWString szText, int iGroup = 0, CvWString szHelpText = "" ) = 0;
@@ -194,19 +197,8 @@ public:
 
 	virtual void popupSetAsCancelled(CvPopup* pPopup) = 0;
 	virtual bool popupIsDying(CvPopup* pPopup) = 0;
-	virtual void setCityTabSelectionRow(CityTabTypes eTabType) = 0;
-
-	virtual bool noTechSplash() = 0;
-
-	virtual EspionageMissionTypes getEspionageActiveMission() = 0;
-	virtual void setEspionageActiveMission(EspionageMissionTypes eMission) = 0;
-	virtual PlayerTypes getEspionageTargetPlayer() = 0;
-	virtual void setEspionageTargetPlayer(PlayerTypes ePlayer) = 0;
-
 	virtual bool isInAdvancedStart() const = 0;
 	virtual void setInAdvancedStart(bool bAdvancedStart) = 0;
-
-	virtual bool isSpaceshipScreenUp() const = 0;
 
 	virtual void setBusy(bool bBusy) = 0;
 };

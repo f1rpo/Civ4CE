@@ -1,101 +1,137 @@
 #include "CvGameCoreDLL.h"
 #include "CvPopupReturn.h"
 
-#define CvPopup_SetAtGrow(kArray, iIdx, kValue)\
-	if((int)kArray.size() <= iIdx) kArray.resize(iIdx+1);\
-	kArray[iIdx] = kValue;
-
-PopupReturn::PopupReturn(const PopupReturn &popupReturn)
+PopupReturn::PopupReturn()
 {
-	int iI;
-
-	for (iI = 0; iI < popupReturn.getRadioButtonSize(); iI++)
-	{
-		CvPopup_SetAtGrow(m_aiSelectedRadioButton, iI, popupReturn.getSelectedRadioButton( iI ));
-	}
-
-	for (iI = 0; iI < popupReturn.getCheckboxSize(); iI++)
-	{
-		CvPopup_SetAtGrow(m_aiBitField, iI, popupReturn.getCheckboxBitfield( iI ));
-	}
-
-	for (iI = 0; iI < popupReturn.getEditboxSize(); iI++)
-	{
-		CvPopup_SetAtGrow(m_aszEditBoxString, iI, popupReturn.getEditBoxString( iI ));
-	}
-
-	for (iI = 0; iI < popupReturn.getSpinnerWidsize(); iI++)
-	{
-		CvPopup_SetAtGrow(m_aiSpinnerWidgetValues, iI, popupReturn.getSpinnerWidgetValue( iI ));
-	}
-
-	for (iI = 0; iI < popupReturn.getPulldownSize(); iI++)
-	{
-		CvPopup_SetAtGrow(m_aiPulldownID, iI, popupReturn.getSelectedPullDownValue( iI ));
-	}
-
-	for (iI = 0; iI < popupReturn.getListBoxSize(); iI++)
-	{
-		CvPopup_SetAtGrow(m_aiListBoxID, iI, popupReturn.getSelectedListBoxValue( iI ));
-	}
-
-	for (iI = 0; iI < popupReturn.getSpinBoxSize(); iI++)
-	{
-		CvPopup_SetAtGrow(m_aiSpinBoxID, iI, popupReturn.getSpinnerWidgetValue( iI ));
-	}
-
-	for (iI = 0; iI < popupReturn.getButtonSize(); iI++)
-	{
-		CvPopup_SetAtGrow(m_aiButtonID, iI, popupReturn.getButtonClicked( iI ));
-	}
 }
 
-// Assignment operator
-PopupReturn &PopupReturn::operator=(const PopupReturn &source)
+
+void PopupReturn::setSelectedRadioButton(int iValue, int iGroup)
 {
-	int iI;
+	m_aiSelectedRadioButton[iGroup] = iValue;
+}
 
-	for (iI = 0; iI < source.getRadioButtonSize(); iI++)
+int PopupReturn::getSelectedRadioButton(int iGroup) const
+{
+	std::map<int, int>::const_iterator it = m_aiSelectedRadioButton.find(iGroup);
+	if (it == m_aiSelectedRadioButton.end())
 	{
-		CvPopup_SetAtGrow(m_aiSelectedRadioButton, iI, source.getSelectedRadioButton( iI ));
+		return -1;
 	}
 
-	for (iI = 0; iI < source.getCheckboxSize(); iI++)
+	return (*it).second;
+}
+
+void PopupReturn::setCheckboxBitfield(int iValue, int iGroup)
+{
+	m_aiBitField[iGroup] = iValue;
+}
+
+int PopupReturn::getCheckboxBitfield(int iGroup) const
+{
+	std::map<int, int>::const_iterator it = m_aiBitField.find(iGroup);
+	if (it == m_aiBitField.end())
 	{
-		CvPopup_SetAtGrow(m_aiBitField, iI, source.getCheckboxBitfield( iI ));
+		return -1;
 	}
 
-	for (iI = 0; iI < source.getEditboxSize(); iI++)
+	return (*it).second;
+}
+
+void PopupReturn::setEditBoxString(const wchar* szValue, int iGroup)
+{
+	m_aszEditBoxString[iGroup] = szValue;
+}
+
+const wchar* PopupReturn::getEditBoxString(int iGroup) const
+{
+	std::map<int, CvWString>::const_iterator it = m_aszEditBoxString.find(iGroup);
+	if (it == m_aszEditBoxString.end())
 	{
-		CvPopup_SetAtGrow(m_aszEditBoxString, iI, source.getEditBoxString( iI ));
+		return NULL;
 	}
 
-	for (iI = 0; iI < source.getSpinnerWidsize(); iI++)
+	return (*it).second.GetCString();
+}
+
+void PopupReturn::setSpinnerWidgetValue(int iValue, int iGroup)
+{
+	m_aiSpinnerWidgetValues[iGroup] = iValue;
+}
+
+int PopupReturn::getSpinnerWidgetValue(int iGroup) const
+{
+	std::map<int, int>::const_iterator it = m_aiSpinBoxID.find(iGroup);
+	if (it == m_aiSpinBoxID.end())
 	{
-		CvPopup_SetAtGrow(m_aiSpinnerWidgetValues, iI, source.getSpinnerWidgetValue( iI ));
+		return -1;
 	}
 
-	for (iI = 0; iI < source.getPulldownSize(); iI++)
+	return (*it).second;
+}
+
+void PopupReturn::setSelectedPulldownValue(int iValue, int iGroup)
+{
+	m_aiPulldownID[iGroup] = iValue;
+}
+
+int PopupReturn::getSelectedPullDownValue(int iGroup) const
+{
+	std::map<int, int>::const_iterator it = m_aiPulldownID.find(iGroup);
+	if (it == m_aiPulldownID.end())
 	{
-		CvPopup_SetAtGrow(m_aiPulldownID, iI, source.getSelectedPullDownValue( iI ));
+		return -1;
 	}
 
-	for (iI = 0; iI < source.getListBoxSize(); iI++)
+	return (*it).second;
+}
+
+void PopupReturn::setSelectedListBoxValue(int iValue, int iGroup)
+{
+	m_aiListBoxID[iGroup] = iValue;
+}
+
+int PopupReturn::getSelectedListBoxValue(int iGroup) const
+{
+	std::map<int, int>::const_iterator it = m_aiListBoxID.find(iGroup);
+	if (it == m_aiListBoxID.end())
 	{
-		CvPopup_SetAtGrow(m_aiListBoxID, iI, source.getSelectedListBoxValue( iI ));
+		return -1;
 	}
 
-	for (iI = 0; iI < source.getSpinBoxSize(); iI++)
+	return (*it).second;
+}
+
+void PopupReturn::setCurrentSpinBoxValue(int iValue, int iIndex)
+{
+	m_aiSpinBoxID[iIndex] = iValue;
+}
+
+int PopupReturn::getCurrentSpinBoxValue(int iIndex) const
+{
+	std::map<int, int>::const_iterator it = m_aiSpinBoxID.find(iIndex);
+	if (it == m_aiSpinBoxID.end())
 	{
-		CvPopup_SetAtGrow(m_aiSpinBoxID, iI, source.getSpinnerWidgetValue( iI ));
+		return -1;
 	}
 
-	for (iI = 0; iI < source.getButtonSize(); iI++)
+	return (*it).second;
+}
+
+void PopupReturn::setButtonClicked(int iValue, int iGroup)
+{
+	m_aiButtonID[iGroup] = iValue;
+}
+
+int PopupReturn::getButtonClicked(int iGroup) const
+{
+	std::map<int, int>::const_iterator it = m_aiButtonID.find(iGroup);
+	if (it == m_aiButtonID.end())
 	{
-		CvPopup_SetAtGrow(m_aiButtonID, iI, source.getButtonClicked( iI ));
+		return -1;
 	}
 
-	return ( *this );
+	return (*it).second;
 }
 
 //
@@ -103,65 +139,74 @@ PopupReturn &PopupReturn::operator=(const PopupReturn &source)
 //
 void PopupReturn::read(FDataStreamBase* pStream)
 {
-	int iSize;
+	uint iSize;
 	int iValue;
-	int i;
-	wchar szValue[1024];
+	int iIndex;
+	CvWString szValue;
+	uint i;
 
 	pStream->Read( &iSize );
 	for (i = 0; i < iSize; i++)
 	{
+		pStream->Read( &iIndex );
 		pStream->Read( &iValue );
-		CvPopup_SetAtGrow(m_aiSelectedRadioButton, i, iValue );
+		m_aiSelectedRadioButton[iIndex] = iValue;
 	}
 
 	pStream->Read( &iSize );
 	for (i = 0; i < iSize; i++)
 	{
+		pStream->Read( &iIndex );
 		pStream->Read( &iValue );
-		CvPopup_SetAtGrow(m_aiBitField, i, iValue );
+		m_aiBitField[iIndex] = iValue;
 	}
 
 	pStream->Read( &iSize );
 	for (i = 0; i < iSize; i++)
 	{
-		pStream->ReadString( szValue );
-		CvPopup_SetAtGrow(m_aszEditBoxString, i, szValue );
+		pStream->Read( &iIndex );
+		pStream->ReadString(szValue);
+		m_aszEditBoxString[iIndex] = szValue;
 	}
 
 	pStream->Read( &iSize );
 	for (i = 0; i < iSize; i++)
 	{
+		pStream->Read( &iIndex );
 		pStream->Read( &iValue );
-		CvPopup_SetAtGrow(m_aiSpinnerWidgetValues, i, iValue );
+		m_aiSpinnerWidgetValues[iIndex] = iValue;
 	}
 
 	pStream->Read( &iSize );
 	for (i = 0; i < iSize; i++)
 	{
+		pStream->Read( &iIndex );
 		pStream->Read( &iValue );
-		CvPopup_SetAtGrow(m_aiPulldownID, i, iValue );
+		m_aiPulldownID[iIndex] = iValue;
 	}
 
 	pStream->Read( &iSize );
 	for (i = 0; i < iSize; i++)
 	{
+		pStream->Read( &iIndex );
 		pStream->Read( &iValue );
-		CvPopup_SetAtGrow(m_aiListBoxID, i, iValue );
+		m_aiListBoxID[iIndex] = iValue;
 	}
 
 	pStream->Read( &iSize );
 	for (i = 0; i < iSize; i++)
 	{
+		pStream->Read( &iIndex );
 		pStream->Read( &iValue );
-		CvPopup_SetAtGrow(m_aiSpinBoxID, i, iValue);
+		m_aiSpinBoxID[iIndex] = iValue;
 	}
 
 	pStream->Read( &iSize );
 	for (i = 0; i < iSize; i++)
 	{
+		pStream->Read( &iIndex );
 		pStream->Read( &iValue );
-		CvPopup_SetAtGrow(m_aiButtonID, i, iValue );
+		m_aiButtonID[iIndex] = iValue;
 	}
 }
 
@@ -170,56 +215,59 @@ void PopupReturn::read(FDataStreamBase* pStream)
 //
 void PopupReturn::write(FDataStreamBase* pStream) const
 {
-	unsigned int iI;
-	//char szString[1024];
-
 	pStream->Write( m_aiSelectedRadioButton.size() );
-	for (iI = 0; iI < m_aiSelectedRadioButton.size(); iI++)
+	for (std::map<int, int>::const_iterator it = m_aiSelectedRadioButton.begin(); it != m_aiSelectedRadioButton.end(); ++it)
 	{
-		pStream->Write( m_aiSelectedRadioButton[iI] );
+		pStream->Write((*it).first);
+		pStream->Write((*it).second);
 	}
 
 	pStream->Write( m_aiBitField.size() );
-	for (iI = 0; iI < m_aiBitField.size(); iI++)
+	for (std::map<int, int>::const_iterator it = m_aiBitField.begin(); it != m_aiBitField.end(); ++it)
 	{
-		pStream->Write( m_aiBitField[iI] );
+		pStream->Write((*it).first);
+		pStream->Write((*it).second);
 	}
 
 	pStream->Write( m_aszEditBoxString.size() );
-	for (iI = 0; iI < m_aszEditBoxString.size(); iI++)
+	for (std::map<int, CvWString>::const_iterator it = m_aszEditBoxString.begin(); it != m_aszEditBoxString.end(); ++it)
 	{
-		CvWString ws(m_aszEditBoxString[iI]);
-		pStream->WriteString( ws.c_str() );
+		pStream->Write((*it).first);
+		pStream->WriteString((*it).second);
 	}
 
 	pStream->Write( m_aiSpinnerWidgetValues.size() );
-	for (iI = 0; iI < m_aiSpinnerWidgetValues.size(); iI++)
+	for (std::map<int, int>::const_iterator it = m_aiSpinnerWidgetValues.begin(); it != m_aiSpinnerWidgetValues.end(); ++it)
 	{
-		pStream->Write( m_aiSpinnerWidgetValues[iI] );
+		pStream->Write((*it).first);
+		pStream->Write((*it).second);
 	}
 
 	pStream->Write( m_aiPulldownID.size() );
-	for (iI = 0; iI < m_aiPulldownID.size(); iI++)
+	for (std::map<int, int>::const_iterator it = m_aiPulldownID.begin(); it != m_aiPulldownID.end(); ++it)
 	{
-		pStream->Write( m_aiPulldownID[iI] );
+		pStream->Write((*it).first);
+		pStream->Write((*it).second);
 	}
 
 	pStream->Write( m_aiListBoxID.size() );
-	for (iI = 0; iI < m_aiListBoxID.size(); iI++)
+	for (std::map<int, int>::const_iterator it = m_aiListBoxID.begin(); it != m_aiListBoxID.end(); ++it)
 	{
-		pStream->Write( m_aiListBoxID[iI] );
+		pStream->Write((*it).first);
+		pStream->Write((*it).second);
 	}
 
 	pStream->Write( m_aiSpinBoxID.size() );
-	for (iI = 0; iI < m_aiSpinBoxID.size(); iI++)
+	for (std::map<int, int>::const_iterator it = m_aiSpinBoxID.begin(); it != m_aiSpinBoxID.end(); ++it)
 	{
-		pStream->Write( m_aiSpinBoxID[iI] );
+		pStream->Write((*it).first);
+		pStream->Write((*it).second);
 	}
 
 	pStream->Write( m_aiButtonID.size() );
-	for (iI = 0; iI < m_aiButtonID.size(); iI++)
+	for (std::map<int, int>::const_iterator it = m_aiButtonID.begin(); it != m_aiButtonID.end(); ++it)
 	{
-		pStream->Write( m_aiButtonID[iI] );
+		pStream->Write((*it).first);
+		pStream->Write((*it).second);
 	}
 }
-

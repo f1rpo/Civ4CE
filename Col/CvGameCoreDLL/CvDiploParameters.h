@@ -14,17 +14,10 @@ public:
 
 	DllExport void setWhoTalkingTo(PlayerTypes eWhoTalkingTo);
 	DllExport PlayerTypes getWhoTalkingTo() const;
-	DllExport void setDiploComment(DiploCommentTypes eCommentType, const std::vector<FVariable>* args=NULL);
-
-	// allow 3 args either int or string.  can't really use va_argslist here
-	DllExport void setDiploComment(DiploCommentTypes eCommentType, CvWString  arg1, CvWString  arg2="", CvWString  arg3="");
-	DllExport void setDiploComment(DiploCommentTypes eCommentType, CvWString  arg1, CvWString  arg2, int arg3=MAX_INT);
-	DllExport void setDiploComment(DiploCommentTypes eCommentType, CvWString  arg1, int arg2, CvWString  arg3="");
-	DllExport void setDiploComment(DiploCommentTypes eCommentType, CvWString  arg1, int arg2, int arg3=MAX_INT);
-	DllExport void setDiploComment(DiploCommentTypes eCommentType, int arg1, CvWString  arg2="", CvWString  arg3="");
-	DllExport void setDiploComment(DiploCommentTypes eCommentType, int arg1, CvWString  arg2, int arg3=MAX_INT);
-	DllExport void setDiploComment(DiploCommentTypes eCommentType, int arg1, int arg2=MAX_INT, CvWString  arg3="");
-	DllExport void setDiploComment(DiploCommentTypes eCommentType, int arg1, int arg2, int arg3=MAX_INT);
+	DllExport void setDiploComment(DiploCommentTypes eCommentType);
+	DllExport void addDiploCommentVariable(const wchar *szArg);
+	DllExport void addDiploCommentVariable(int iArg);
+	DllExport void addDiploCommentVariable(const FVariable& var);
 
 	DllExport DiploCommentTypes getDiploComment() const;
 	DllExport void setOurOfferList(const CLinkList<TradeData>& ourOffer);
@@ -48,6 +41,10 @@ public:
 	DllExport void setChatText(const wchar* szText);
 	DllExport const wchar* getChatText() const;
 	DllExport const std::vector<FVariable>& getDiploCommentArgs() const { return m_diploCommentArgs; }
+	DllExport const IDInfo& getTransport() const;
+	DllExport void setTransport(const IDInfo& kTransport);
+	DllExport const IDInfo& getCity() const;
+	DllExport void setCity(const IDInfo& kCity);
 
 	DllExport void read(FDataStreamBase& stream);
 	DllExport void write(FDataStreamBase& stream) const;
@@ -66,6 +63,8 @@ private:
 	bool m_bTheirOffering;
 	CvWString m_szChatText;
 	std::vector<FVariable> m_diploCommentArgs;
+	IDInfo m_kTransport;
+	IDInfo m_kCity;
 };
 
 #endif

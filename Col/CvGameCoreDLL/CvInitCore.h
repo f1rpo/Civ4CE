@@ -52,6 +52,7 @@ public:
 	DllExport bool getMultiplayer() const;
 	DllExport bool getNewGame() const;
 	DllExport bool getSavedGame() const;
+	DllExport bool getScenario() const;
 	DllExport bool getGameMultiplayer() const { return (getMultiplayer() || getPitboss() || getPbem() || getHotseat()); }
 
 	DllExport bool getPitboss() const;
@@ -223,13 +224,6 @@ public:
 	DllExport const CvString & getSmtpHost(PlayerTypes eID) const;
 	DllExport void setSmtpHost(PlayerTypes eID, const CvString & szHost);
 
-	DllExport bool getWhiteFlag(PlayerTypes eID) const;
-	DllExport void setWhiteFlag(PlayerTypes eID, bool bWhiteFlag);
-
-	DllExport const CvWString & getFlagDecal(PlayerTypes eID) const;
-	DllExport void setFlagDecal(PlayerTypes eID, const CvWString & szFlagDecal);
-
-
 	DllExport CivilizationTypes getCiv(PlayerTypes eID) const;
 	DllExport void setCiv(PlayerTypes eID, CivilizationTypes eCiv);
 
@@ -276,6 +270,8 @@ public:
 	DllExport void setXMLCheck(PlayerTypes eID, const CvString & iXMLCheck);
 
 	DllExport void resetAdvancedStartPoints();
+
+	DllExport int getMaxEuropePlayers() const;
 
 	DllExport virtual void read(FDataStreamBase* pStream);
 	DllExport virtual void write(FDataStreamBase* pStream);
@@ -362,9 +358,6 @@ protected:
 	CvWString* m_aszCivPassword;
 	CvString* m_aszEmail;
 	CvString* m_aszSmtpHost;
-
-	bool* m_abWhiteFlag;
-	CvWString* m_aszFlagDecal;
 
 	CivilizationTypes* m_aeCiv;
 	LeaderHeadTypes* m_aeLeader;
