@@ -174,7 +174,7 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
 			}
 
 		self.ORDER_LIST = ["RELATIONS", \
-#											 "GLANCE", \
+											 "GLANCE", \
 											 "ACTIVE_TRADE", \
 											 "BONUS", \
 											 "INFO", \

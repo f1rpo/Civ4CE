@@ -370,7 +370,7 @@ class CvWorldBuilderDiplomacyScreen:
 		iPlayer = int(szWidget[szWidget.find("_")+1:])
 		iActualPlayer = self.getActualPlayer(iPlayer)
 		if (iSelection == 0):
-			gc.getTeam(gc.getPlayer(self.m_iActivePlayer).getTeam()).declareWar(gc.getPlayer(iActualPlayer).getTeam(), False)
+			gc.getTeam(gc.getPlayer(self.m_iActivePlayer).getTeam()).declareWar(gc.getPlayer(iActualPlayer).getTeam(), False, WarPlanTypes.WARPLAN_LIMITED)
 		elif (iSelection == 1):
 			gc.getTeam(gc.getPlayer(self.m_iActivePlayer).getTeam()).makePeace(gc.getPlayer(iActualPlayer).getTeam())
 

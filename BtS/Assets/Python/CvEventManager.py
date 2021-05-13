@@ -822,8 +822,12 @@ class CvEventManager:
 				if gc.getTeam(owner.getTeam()).isAtWar(gc.getPlayer(iPlayer).getTeam()):
 					if gc.getNumEventTriggerInfos() > 0: # prevents mods that don't have events from getting an error
 						iEvent = CvUtil.findInfoTypeNum(gc.getEventTriggerInfo, gc.getNumEventTriggerInfos(),'EVENTTRIGGER_PARTISANS')
-						if iEvent != -1 and gc.getGame().isEventActive(iEvent) and owner.getEventTriggerWeight(iEvent) >= 0:
-							triggerData = owner.initTriggeredData(iEvent, true, -1, city.getX(), city.getY(), iPlayer, city.getID(), -1, -1, -1, -1)
+						if iEvent != -1 and gc.getGame().isEventActive(iEvent):
+							event = gc.getEventTriggerInfo(iEvent)
+							for iCivic in range(gc.getNumCivicOptionInfos()):
+								if owner.getCivics(iCivic) == event.getCivic():
+									triggerData = owner.initTriggeredData(iEvent, true, -1, city.getX(), city.getY(), iPlayer, city.getID(), -1, -1, -1, -1)
+									break
 			
 		CvUtil.pyPrint("City Razed Event: %s" %(city.getName(),))
 	

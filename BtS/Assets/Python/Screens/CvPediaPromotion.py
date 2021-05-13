@@ -185,9 +185,32 @@ class CvPediaPromotion:
 		i = 0
 		for iI in range(gc.getNumUnitCombatInfos()):
 			if (0 != gc.getPromotionInfo(self.iPromotion).getUnitCombat(iI)):
-				iRow = screen.appendTableRow(szTable)
-				screen.setTableText(szTable, 0, i, u"<font=2>" + gc.getUnitCombatInfo(iI).getDescription() + u"</font>", gc.getUnitCombatInfo(iI).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT_COMBAT, iI, -1, CvUtil.FONT_LEFT_JUSTIFY)
-				i += 1
+				bValid = true
+				for iJ in range(gc.getNumUnitInfos()):
+					if (gc.getUnitInfo(iJ).getUnitCombatType() == iI):
+						if not isPromotionValid(self.iPromotion, iJ, true):
+							bValid = false
+							break
+						
+				if bValid:
+					iRow = screen.appendTableRow(szTable)
+					screen.setTableText(szTable, 0, i, u"<font=2>" + gc.getUnitCombatInfo(iI).getDescription() + u"</font>", gc.getUnitCombatInfo(iI).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT_COMBAT, iI, -1, CvUtil.FONT_LEFT_JUSTIFY)
+					i += 1
+					
+				else:
+					for iJ in range(gc.getNumUnitInfos()):
+						if (gc.getUnitInfo(iJ).getUnitCombatType() == iI):
+							if (isPromotionValid(self.iPromotion, iJ, true)):
+								iRow = screen.appendTableRow(szTable)
+								screen.setTableText(szTable, 0, i, u"<font=2>" + gc.getUnitInfo(iJ).getDescription() + u"</font>", gc.getUnitInfo(iJ).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, iJ, -1, CvUtil.FONT_LEFT_JUSTIFY)
+								i += 1
+								
+			else:
+				for iJ in range(gc.getNumUnitInfos()):
+					if (gc.getUnitInfo(iJ).getUnitCombatType() == iI) and (0 != gc.getUnitInfo(iJ).getFreePromotions(self.iPromotion)):
+						iRow = screen.appendTableRow(szTable)
+						screen.setTableText(szTable, 0, i, u"<font=2>" + gc.getUnitInfo(iJ).getDescription() + u"</font>", gc.getUnitInfo(iJ).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, iJ, -1, CvUtil.FONT_LEFT_JUSTIFY)
+						i += 1
 
 	def placeLinks(self, bRedraw):
 
