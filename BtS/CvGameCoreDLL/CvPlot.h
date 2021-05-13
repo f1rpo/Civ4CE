@@ -468,6 +468,8 @@ public:
 
 	bool isEspionageCounterSpy(TeamTypes eTeam) const;
 
+	bool isTeamCity(const CvUnit& kUnit, bool bCheckImprovement) const;
+
 	void read(FDataStreamBase* pStream);
 	void write(FDataStreamBase* pStream);
 

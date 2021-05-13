@@ -13,6 +13,7 @@
 #define MOVE_DECLARE_WAR											(0x00000008)
 #define MOVE_DIRECT_ATTACK										(0x00000010)
 #define MOVE_THROUGH_ENEMY										(0x00000020)
+#define MOVE_MAX_MOVES											(0x00000040)
 
 #define RANDPLOT_LAND													(0x00000001)
 #define RANDPLOT_UNOWNED											(0x00000002)

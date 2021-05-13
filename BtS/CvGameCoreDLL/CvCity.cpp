@@ -5789,22 +5789,46 @@ int CvCity::getBuildingBadHealth() const
 
 int CvCity::getBuildingHealth(BuildingTypes eBuilding) const
 {
-	if ((GC.getBuildingInfo(eBuilding).getHealth() > 0) || !(isBuildingOnlyHealthy()))
+	int iHealth;
+
+	if (isBuildingOnlyHealthy())
 	{
-		int iHealth = GC.getBuildingInfo(eBuilding).getHealth();
-
-		iHealth += getBuildingHealthChange((BuildingClassTypes)GC.getBuildingInfo(eBuilding).getBuildingClassType());
-
-		iHealth += GET_PLAYER(getOwnerINLINE()).getExtraBuildingHealth(eBuilding);
-
-		return iHealth;
+		iHealth = std::max(0, GC.getBuildingInfo(eBuilding).getHealth());
+		iHealth += std::max(0, getBuildingHealthChange((BuildingClassTypes)GC.getBuildingInfo(eBuilding).getBuildingClassType()));
+		iHealth += std::max(0, GET_PLAYER(getOwnerINLINE()).getExtraBuildingHealth(eBuilding));
 	}
 	else
 	{
-		return 0;
+		iHealth = GC.getBuildingInfo(eBuilding).getHealth();
+		iHealth += getBuildingHealthChange((BuildingClassTypes)GC.getBuildingInfo(eBuilding).getBuildingClassType());
+		iHealth += GET_PLAYER(getOwnerINLINE()).getExtraBuildingHealth(eBuilding);
 	}
+
+	return iHealth;
 }
 
+int CvCity::getBuildingGoodHealth(BuildingTypes eBuilding) const
+{
+	int iHealth = std::max(0, GC.getBuildingInfo(eBuilding).getHealth());
+	iHealth += std::max(0, getBuildingHealthChange((BuildingClassTypes)GC.getBuildingInfo(eBuilding).getBuildingClassType()));
+	iHealth += std::max(0, GET_PLAYER(getOwnerINLINE()).getExtraBuildingHealth(eBuilding));
+
+	return iHealth;
+}
+
+int CvCity::getBuildingBadHealth(BuildingTypes eBuilding) const
+{
+	if (isBuildingOnlyHealthy())
+	{
+		return 0;
+	}
+
+	int iHealth = std::min(0, GC.getBuildingInfo(eBuilding).getHealth());
+	iHealth += std::min(0, getBuildingHealthChange((BuildingClassTypes)GC.getBuildingInfo(eBuilding).getBuildingClassType()));
+	iHealth += std::min(0, GET_PLAYER(getOwnerINLINE()).getExtraBuildingHealth(eBuilding));
+
+	return iHealth;
+}
 
 void CvCity::changeBuildingGoodHealth(int iChange)
 {

@@ -189,7 +189,7 @@ void CvSelectionGroup::doTurn()
 					setForceUpdate(true);					
 				}
 			}
-			else if ((getActivityType() != ACTIVITY_MISSION) || (!canFight() && (GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 1) > 0)))
+			else if ((getActivityType() != ACTIVITY_MISSION) || (!canFight() && (GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 2) > 0)))
 			{
 				setForceUpdate(true);
 			}
@@ -205,7 +205,7 @@ void CvSelectionGroup::doTurn()
 			}
 			else if (getActivityType() == ACTIVITY_MISSION)
 			{
-				if (GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 1) > 0)
+				if (GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 2) > 0)
 				{
 					clearMissionQueue();
 				}
@@ -484,7 +484,7 @@ void CvSelectionGroup::autoMission()
 		{
 			if (!isBusy())
 			{
-				if (isHuman() && GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 1) > 0)
+				if (isHuman() && GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 1) > 0 && (getHeadUnitAI() != UNITAI_SPY))
 				{
 					clearMissionQueue();
 				}

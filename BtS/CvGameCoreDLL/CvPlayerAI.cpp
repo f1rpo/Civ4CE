@@ -95,7 +95,7 @@ CvPlayerAI::CvPlayerAI()
 	m_aiAverageYieldMultiplier = new int[NUM_YIELD_TYPES];
 	m_aiAverageCommerceMultiplier = new int[NUM_COMMERCE_TYPES];
 	m_aiAverageCommerceExchange = new int[NUM_COMMERCE_TYPES];
-	
+
 	m_aiBonusValue = NULL;
 	m_aiUnitClassWeights = NULL;
 	m_aiUnitCombatWeights = NULL;
@@ -1298,6 +1298,20 @@ bool CvPlayerAI::AI_acceptUnit(CvUnit* pUnit)
 	if (isHuman())
 	{
 		return true;
+	}
+
+	if ((pUnit->AI_getUnitAIType() == UNITAI_MISSIONARY) && !(pUnit->getUnitInfo().getReligionSpreads(getStateReligion()) > 0))
+	{
+		for (int iI = 0; iI < GC.getNumCivicInfos(); iI++)
+		{
+			if (GC.getCivicInfo((CivicTypes)iI).isNoNonStateReligionSpread())
+			{
+				if (isCivic((CivicTypes)iI))
+				{
+					return false;
+				}
+			}
+		}
 	}
 
 	if (AI_isFinancialTrouble())
@@ -6854,7 +6868,7 @@ DenialTypes CvPlayerAI::AI_bonusTrade(BonusTypes eBonus, PlayerTypes ePlayer)
 
 	FAssertMsg(ePlayer != getID(), "shouldn't call this function on ourselves");
 
-	if (isHuman())
+	if (isHuman() && GET_PLAYER(ePlayer).isHuman())
 	{
 		return NO_DENIAL;
 	}
@@ -6874,19 +6888,24 @@ DenialTypes CvPlayerAI::AI_bonusTrade(BonusTypes eBonus, PlayerTypes ePlayer)
 		return NO_DENIAL;
 	}
 
+	if (GET_PLAYER(ePlayer).getNumAvailableBonuses(eBonus) > 0 && GET_PLAYER(ePlayer).AI_corporationBonusVal(eBonus) <= 0)
+	{
+		return (GET_PLAYER(ePlayer).isHuman() ? DENIAL_JOKING : DENIAL_NO_GAIN);
+	}
+
+	if (isHuman())
+	{
+		return NO_DENIAL;
+	}
+
 	if (GET_TEAM(getTeam()).AI_getWorstEnemy() == GET_PLAYER(ePlayer).getTeam())
 	{
 		return DENIAL_WORST_ENEMY;
 	}
 
-	if (!isHuman() && (AI_corporationBonusVal(eBonus) > 0))
+	if (AI_corporationBonusVal(eBonus) > 0)
 	{
 		return DENIAL_JOKING;
-	}
-
-	if (GET_PLAYER(ePlayer).getNumAvailableBonuses(eBonus) > 0 && GET_PLAYER(ePlayer).AI_corporationBonusVal(eBonus) <= 0)
-	{
-		return (GET_PLAYER(ePlayer).isHuman() ? DENIAL_JOKING : DENIAL_NO_GAIN);
 	}
 
 	bStrategic = false;
@@ -8958,30 +8977,30 @@ int CvPlayerAI::AI_plotTargetMissionAIs(CvPlot* pPlot, MissionAITypes* aeMission
 	{
 		if (pLoopSelectionGroup != pSkipSelectionGroup)
 		{
-					CvPlot* pMissionPlot = pLoopSelectionGroup->AI_getMissionAIPlot();
+			CvPlot* pMissionPlot = pLoopSelectionGroup->AI_getMissionAIPlot();
 
-				if (pMissionPlot != NULL)
-				{
+			if (pMissionPlot != NULL)
+			{
 				MissionAITypes eGroupMissionAI = pLoopSelectionGroup->AI_getMissionAIType();
-						int iDistance = stepDistance(pPlot->getX_INLINE(), pPlot->getY_INLINE(), pMissionPlot->getX_INLINE(), pMissionPlot->getY_INLINE());
+				int iDistance = stepDistance(pPlot->getX_INLINE(), pPlot->getY_INLINE(), pMissionPlot->getX_INLINE(), pMissionPlot->getY_INLINE());
 
-						if (iDistance <= iRange)
-					{
+				if (iDistance <= iRange)
+				{
 					for (int iMissionAIIndex = 0; iMissionAIIndex < iMissionAICount; iMissionAIIndex++)
 					{
 						if (eGroupMissionAI == aeMissionAI[iMissionAIIndex] || aeMissionAI[iMissionAIIndex] == NO_MISSIONAI)
 						{
-						iCount += pLoopSelectionGroup->getNumUnits();
+							iCount += pLoopSelectionGroup->getNumUnits();
 
-						if (iDistance < iClosestTargetRange)
-						{
-							iClosestTargetRange = iDistance;
+							if (iDistance < iClosestTargetRange)
+							{
+								iClosestTargetRange = iDistance;
+							}
 						}
 					}
 				}
 			}
 		}
-	}
 	}
 
 	return iCount;
@@ -10767,7 +10786,7 @@ void CvPlayerAI::AI_doCommerce()
 			}
 			else
 			{
-			changeCommercePercent(COMMERCE_RESEARCH, -GC.getDefineINT("COMMERCE_PERCENT_CHANGE_INCREMENTS"));			
+				changeCommercePercent(COMMERCE_RESEARCH, -GC.getDefineINT("COMMERCE_PERCENT_CHANGE_INCREMENTS"));			
 			}
 			//changeCommercePercent(COMMERCE_GOLD, GC.getDefineINT("COMMERCE_PERCENT_CHANGE_INCREMENTS"));
 		}
@@ -16928,4 +16947,56 @@ void CvPlayerAI::AI_invalidateCloseBordersAttitudeCache()
 	{
 		m_aiCloseBordersAttitudeCache[i] = MAX_INT;
 	}
+}
+
+bool CvPlayerAI::AI_isPlotThreatened(CvPlot* pPlot, int iRange, bool bTestMoves)
+{
+	PROFILE_FUNC();
+
+	CvArea *pPlotArea = pPlot->area();
+
+	if (iRange == -1)
+	{
+		iRange = DANGER_RANGE;
+	}
+
+	for (int iDX = -iRange; iDX <= iRange; iDX++)
+	{
+		for (int iDY = -iRange; iDY <= iRange; iDY++)
+		{
+			CvPlot* pLoopPlot = plotXY(pPlot->getX_INLINE(), pPlot->getY_INLINE(), iDX, iDY);
+
+			if (pLoopPlot != NULL)
+			{
+				if (pLoopPlot->area() == pPlotArea)
+				{
+					for (CLLNode<IDInfo>* pUnitNode = pLoopPlot->headUnitNode(); pUnitNode != NULL; pUnitNode = pLoopPlot->nextUnitNode(pUnitNode))
+					{
+						CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
+						if (pLoopUnit->isEnemy(getTeam()) && pLoopUnit->canAttack() && !pLoopUnit->isInvisible(getTeam(), false))
+						{
+							if (pLoopUnit->canMoveOrAttackInto(pPlot))
+							{
+								int iPathTurns = 0;
+								if (bTestMoves)
+								{
+									if (!pLoopUnit->getGroup()->generatePath(pLoopPlot, pPlot, MOVE_MAX_MOVES | MOVE_IGNORE_DANGER, false, &iPathTurns))
+									{
+										iPathTurns = MAX_INT;
+									}
+								}
+
+								if (iPathTurns <= 1)
+								{
+									return true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return false;
 }

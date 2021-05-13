@@ -1263,7 +1263,7 @@ void CvUnitAI::AI_workerMove()
 
     if (!(getGroup()->canDefend()))
 	{
-		if (GET_PLAYER(getOwnerINLINE()).AI_getUnitDanger(this, 2) > 0)
+		if (GET_PLAYER(getOwnerINLINE()).AI_isPlotThreatened(plot(), 2))
 		{
 			if (AI_retreatToCity()) // XXX maybe not do this??? could be working productively somewhere else...
 			{
@@ -1271,7 +1271,6 @@ void CvUnitAI::AI_workerMove()
 			}
 		}
 	}
-
 
 	if (bCanRoute)
 	{
@@ -1453,7 +1452,7 @@ void CvUnitAI::AI_workerMove()
 		}
 	}
 
-	if ((AI_getBirthmark() % 3) == 0)
+//	if ((AI_getBirthmark() % 3) == 0)
 	{
 		if (bCanRoute)
 		{
@@ -7203,7 +7202,10 @@ bool CvUnitAI::AI_guardCity(bool bLeave, bool bSearch, int iMaxPath)
 				//This unit is not suited for defense, skip the mission
 				//to protect this city but encourage others to defend instead.
 				getGroup()->pushMission(MISSION_SKIP);
-				finishMoves();
+				if (!isHurt())
+				{
+					finishMoves();
+				}
 			}
 			return true;
 		}
@@ -8615,8 +8617,7 @@ bool CvUnitAI::AI_spreadCorporation()
 										//Generally prefer to heavily target one player
 										iValue /= 2;
 									}
-										
-									
+
 									bool bForceMove = false;
 									if (isHuman())
 									{

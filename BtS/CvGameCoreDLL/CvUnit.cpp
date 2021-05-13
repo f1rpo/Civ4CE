@@ -514,7 +514,7 @@ void CvUnit::kill(bool bDelay, PlayerTypes ePlayer)
 
 				if (pPlot->isValidDomainForLocation(*pLoopUnit))
 				{
-					pLoopUnit->setCapturingPlayer(getCapturingPlayer());
+					pLoopUnit->setCapturingPlayer(NO_PLAYER);
 				}
 				
 				pLoopUnit->kill(false, ePlayer);
@@ -1522,6 +1522,17 @@ void CvUnit::updateCombat(bool bQuick)
 
 			changeMoves(std::max(GC.getMOVE_DENOMINATOR(), pPlot->movementCost(this, plot())));
 
+			if (!canMove() || !isBlitz())
+			{
+				if (IsSelected())
+				{
+					if (gDLL->getInterfaceIFace()->getLengthSelectionList() > 1)
+					{
+						gDLL->getInterfaceIFace()->removeFromSelectionList(this);
+					}
+				}
+			}
+
 			getGroup()->clearMissionQueue();
 		}
 	}
@@ -2325,6 +2336,10 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 			{
 				return false;
 			}
+			if (!pPlot->isTeamCity(*this, true) && isAlwaysHostile(NULL))
+			{
+				return false;
+			}
 		}
 		break;
 
@@ -2783,9 +2798,19 @@ bool CvUnit::jumpToNearestValidPlot()
 								iValue += plotDistance(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), pNearestCity->getX_INLINE(), pNearestCity->getY_INLINE());
 							}
 
-							if (pLoopPlot->area() != area())
+							if (getDomainType() == DOMAIN_SEA && !plot()->isWater())
 							{
-								iValue *= 3;
+								if (!pLoopPlot->isWater() || !pLoopPlot->isAdjacentToArea(area()))
+								{
+									iValue *= 3;
+								}
+							}
+							else
+							{
+								if (pLoopPlot->area() != area())
+								{
+									iValue *= 3;
+								}
 							}
 
 							if (iValue < iBestValue)
@@ -6268,7 +6293,7 @@ bool CvUnit::isIntruding() const
 		return false;
 	}
 
-	if (GET_TEAM(eLocalTeam).isVassal(getTeam()))
+	if (GET_TEAM(eLocalTeam).isVassal(getTeam()) || GET_TEAM(getTeam()).isVassal(eLocalTeam))
 	{
 		return false;
 	}
@@ -6450,6 +6475,7 @@ void CvUnit::promote(PromotionTypes ePromotion, int iLeaderUnitId)
 
 			//update graphics models
 			m_eLeaderUnitType = pWarlord->getUnitType();
+			gDLL->getInterfaceIFace()->removeFromSelectionList(this);
 			reloadEntity();
 		}
 	}
@@ -12448,7 +12474,7 @@ bool CvUnit::isAlwaysHostile(const CvPlot* pPlot) const
 
 bool CvUnit::verifyStackValid()
 {
-	if (plot()->isVisibleEnemyUnit(this))
+	if (plot()->isVisibleEnemyUnit(this) && !alwaysInvisible())
 	{
 		return jumpToNearestValidPlot();
 	}

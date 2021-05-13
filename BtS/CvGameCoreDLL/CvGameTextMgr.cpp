@@ -447,6 +447,16 @@ void CvGameTextMgr::setEspionageMissionHelp(CvWStringBuffer &szBuffer, const CvU
 					szBuffer.append(gDLL->getText("TXT_KEY_UNIT_HELP_NO_ESPIONAGE_REASON_VISIBLE", GET_PLAYER(eOwner).getNameKey()));
 				}
 			}
+			else if (pUnit->getFortifyTurns() > 0)
+			{
+				int iModifier = -(pUnit->getFortifyTurns() * GC.getDefineINT("ESPIONAGE_EACH_TURN_UNIT_COST_DECREASE"));
+				if (0 != iModifier)
+				{
+					szBuffer.append(NEWLINE);
+					szBuffer.append(gDLL->getText("TXT_KEY_ESPIONAGE_COST", iModifier));
+				}
+			}
+
 		}
 	}
 }
@@ -3848,7 +3858,7 @@ void CvGameTextMgr::parseSpecialistHelp(CvWStringBuffer &szHelpString, Specialis
 
 		for (iI = 0; iI < NUM_YIELD_TYPES; ++iI)
 		{
-			if (bCivilopediaText)
+			if (GC.getGameINLINE().getActivePlayer() == NO_PLAYER)
 			{
 				aiYields[iI] = GC.getSpecialistInfo(eSpecialist).getYieldChange(iI);
 			}
@@ -3862,7 +3872,7 @@ void CvGameTextMgr::parseSpecialistHelp(CvWStringBuffer &szHelpString, Specialis
 
 		for (iI = 0; iI < NUM_COMMERCE_TYPES; ++iI)
 		{
-			if (bCivilopediaText)
+			if (GC.getGameINLINE().getActivePlayer() == NO_PLAYER)
 			{
 				aiCommerces[iI] = GC.getSpecialistInfo(eSpecialist).getCommerceChange(iI);
 			}
@@ -6433,7 +6443,7 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, BuildingTypes eBu
 		int iHealth;
 		if (NULL != pCity)
 		{
-			iHealth = pCity->getBuildingHealth(eBuilding);
+			iHealth = pCity->getBuildingGoodHealth(eBuilding);
 		}
 		else
 		{
@@ -6445,6 +6455,17 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, BuildingTypes eBu
 					iHealth += GET_PLAYER(ePlayer).getExtraBuildingHealth(eBuilding);
 				}
 			}
+		}
+		if (iHealth != 0)
+		{
+			szTempBuffer.Format(L", +%d%c", abs(iHealth), ((iHealth > 0) ? gDLL->getSymbolID(HEALTHY_CHAR): gDLL->getSymbolID(UNHEALTHY_CHAR)));
+			szBuffer.append(szTempBuffer);
+		}
+
+		iHealth = 0;
+		if (NULL != pCity)
+		{
+			iHealth = pCity->getBuildingBadHealth(eBuilding);
 		}
 		if (iHealth != 0)
 		{
@@ -6467,7 +6488,7 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, BuildingTypes eBu
 		int aiCommerces[NUM_COMMERCE_TYPES];
 		for (int iI = 0; iI < NUM_COMMERCE_TYPES; ++iI)
 		{
-			if (NULL == pCity)
+			if ((NULL == pCity) || (pCity->getNumBuilding(eBuilding) <= 0))
 			{
 				aiCommerces[iI] = kBuilding.getCommerceChange(iI);
 				aiCommerces[iI] += kBuilding.getObsoleteSafeCommerceChange(iI);

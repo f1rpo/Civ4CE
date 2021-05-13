@@ -2818,8 +2818,11 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 				{
 					pSelectedUnit = ::getUnit(pSelectedUnitNode->m_data);
 
-					iNowWorkRate += pSelectedUnit->workRate(false);
-					iThenWorkRate += pSelectedUnit->workRate(true);
+					if (pSelectedUnit->getBuildType() != eBuild)
+					{
+						iNowWorkRate += pSelectedUnit->workRate(false);
+						iThenWorkRate += pSelectedUnit->workRate(true);
+					}
 
 					pSelectedUnitNode = gDLL->getInterfaceIFace()->nextSelectionListNode(pSelectedUnitNode);
 				}
@@ -3196,6 +3199,11 @@ void CvDLLWidgetData::parseContactCivHelp(CvWidgetDataStruct &widgetDataStruct, 
 			GAMETEXT.getEspionageString(szBuffer, ((PlayerTypes)widgetDataStruct.m_iData1), GC.getGameINLINE().getActivePlayer());
 
 			szBuffer.append(gDLL->getText("TXT_KEY_MISC_CTRL_TRADE"));
+		}
+		else
+		{
+			szBuffer.append(NEWLINE);
+			GAMETEXT.getEspionageString(szBuffer, ((PlayerTypes)widgetDataStruct.m_iData1), GC.getGameINLINE().getActivePlayer());
 		}
 
 		if ((GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).getTeam() != GC.getGameINLINE().getActiveTeam()) && !(GET_TEAM(GC.getGameINLINE().getActiveTeam()).isAtWar(GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1).getTeam())))
