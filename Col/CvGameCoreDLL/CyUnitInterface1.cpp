@@ -15,6 +15,13 @@ void CyUnitPythonInterface1(python::class_<CyUnit>& x)
 {
 	OutputDebugString("Python Extension Module - CyUnitPythonInterface1\n");
 	x
+		// PatchMod: Sail to West START
+		.def("canSailEast", &CyUnit::canSailEast)
+		.def("setSailEast", &CyUnit::setSailEast)
+		.def("canSailWest", &CyUnit::canSailWest)
+		.def("setSailWest", &CyUnit::setSailWest)
+		// PatchMod: Sail to West END
+
 		.def("isNone", &CyUnit::isNone, "bool () - Is this a valid unit instance?")
 		.def("convert", &CyUnit::convert, "void (CyUnit* pUnit)")
 		.def("kill", &CyUnit::kill, "void (bool bDelay)")

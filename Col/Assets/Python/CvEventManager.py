@@ -154,6 +154,9 @@ class CvEventManager:
 			CvUtil.EventShowWonder: ('ShowWonder', self.__eventShowWonderApply, self.__eventShowWonderBegin),
 			CvUtil.EventCreateTradeRoute: ('CreateTradeRoute', self.__eventCreateTradeRouteApply, self.__eventCreateTradeRouteBegin),
 			CvUtil.EventEditTradeRoute: ('EditTradeRoute', self.__eventEditTradeRouteApply, self.__eventEditTradeRouteBegin),
+# Dale - AoD: AoDCheatMenu START
+			CvUtil.EventAoDCheatMenu: ('AoDCheatMenu', self.AoDCheatMenuApply, self.AoDCheatMenuBegin),
+# Dale - AoD: AoDCheatMenu END
 
 		}
 #################### EVENT STARTERS ######################
@@ -215,6 +218,11 @@ class CvEventManager:
 			theKey=int(key)
 
 			CvCameraControls.g_CameraControls.handleInput( theKey )
+
+# Dale - AoD: AoDCheatMenu START
+			if( theKey == int(InputTypes.KB_Z) and self.bShift and self.bCtrl ) :
+				self.beginEvent(CvUtil.EventAoDCheatMenu)
+# Dale - AoD: AoDCheatMenu END
 
 			if (self.bAllowCheats):
 				# Shift - T (Debug - No MP)
@@ -298,6 +306,19 @@ class CvEventManager:
 		return 0
 
 	def onGameStart(self, argsList):
+# PatchMod: Randomise stuff on map START
+		gc.getGame().setupScenarioPlayers()
+		if (gc.getGame().getGameTurnYear() == gc.getDefineINT("START_YEAR")):
+			if(CyMap().plot(0,0).getTerrainType() == 0):
+				CyMapGenerator().eraseBonuses()
+				CyMapGenerator().eraseGoodies()
+				CyMapGenerator().eraseEurope()
+				CyMapGenerator().addBonuses()
+				CyMapGenerator().addGoodies()
+				CyMapGenerator().addEurope()
+				gc.getGame().reassignStartingPlots()
+# PatchMod: Randomise stuff on map END
+
 		'Called at the start of the game'
 		if (gc.getGame().getGameTurnYear() == gc.getDefineINT("START_YEAR") and not gc.getGame().isOption(GameOptionTypes.GAMEOPTION_ADVANCED_START)):
 			for iPlayer in range(gc.getMAX_PLAYERS()):
@@ -618,7 +639,10 @@ class CvEventManager:
 	def onCityBuilt(self, argsList):
 		'City Built'
 		city = argsList[0]
-		if (city.getOwner() == gc.getGame().getActivePlayer()):
+# Dale - AoD: AI Autoplay START
+		if (city.getOwner() == gc.getGame().getActivePlayer() and gc.getGame().getAIAutoPlay() == 0):
+#		if (city.getOwner() == gc.getGame().getActivePlayer()):
+# Dale - AoD: AI Autoplay END
 			self.__eventEditCityNameBegin(city, False)
 		CvUtil.pyPrint('City Built Event: %s' %(city.getName()))
 
@@ -1017,4 +1041,49 @@ class CvEventManager:
 	def __eventWBStartYearPopupApply(self, playerID, userData, popupReturn):
 		iStartYear = popupReturn.getSpinnerWidgetValue(int(0))
 		CvScreensInterface.getWorldBuilderScreen().setStartYearCB(iStartYear)
+		
+# Dale - AoD: AoDCheatMenu START
+	def AoDCheatMenuBegin(self, argsList):
+		popup = CyPopup(CvUtil.EventAoDCheatMenu, EventContextTypes.EVENTCONTEXT_ALL, True)
+		popup.setHeaderString(localText.getText("TXT_KEY_CHEATMENU_TITLE", ()), CvUtil.FONT_CENTER_JUSTIFY)
+		popup.setBodyString(localText.getText("TXT_KEY_CHEATMENU_TEXT", ()), CvUtil.FONT_CENTER_JUSTIFY)
+		popup.addButton(localText.getText("TXT_KEY_CHEATMENU_CANCEL", ()))
+		popup.addSeparator()
+		popup.setBodyString(localText.getText("TXT_KEY_AIAUTOPLAY", ()), CvUtil.FONT_CENTER_JUSTIFY)
+		popup.createSpinBox(0, "", 0, 5, 300, 0)
+		popup.addButton(localText.getText("TXT_KEY_AIAUTOPLAY10", ()))
+		popup.addButton(localText.getText("TXT_KEY_AIAUTOPLAY50", ()))
+		popup.addSeparator()
+		popup.setBodyString(localText.getText("TXT_KEY_MONEYTREE", ()), CvUtil.FONT_CENTER_JUSTIFY)
+		popup.createSpinBox(1, "", 0, 100, 10000, 0)
+		popup.addButton(localText.getText("TXT_KEY_MONEYTREE1000", ()))
+		popup.addButton(localText.getText("TXT_KEY_MONEYTREE5000", ()))
+		popup.addSeparator()
+		popup.launch(True, PopupStates.POPUPSTATE_IMMEDIATE)
+		return
+
+	def AoDCheatMenuApply(self, playerID, userData, popupReturn):
+		autoIdx = popupReturn.getButtonClicked()
+		iPlayer = gc.getPlayer(playerID)
+		iAutoplay = 0
+		iAutoplay = popupReturn.getSpinnerWidgetValue(int(0))
+		if (iAutoplay > 0):
+			CyGame().setAIAutoPlay(iAutoplay)
+		if (autoIdx == 0):
+			return
+		if (autoIdx == 1):
+			CyGame().setAIAutoPlay(10)
+		if (autoIdx == 2):
+			CyGame().setAIAutoPlay(50)
+		iMoneyTree = 0
+		iMoneyTree = popupReturn.getSpinnerWidgetValue(int(1))
+		if (iMoneyTree > 0):
+			iPlayer.changeGold(iMoneyTree)
+		if (autoIdx == 3):
+			iPlayer.changeGold(1000)
+		if (autoIdx == 4):
+			iPlayer.changeGold(5000)
+		return
+# Dale - AoD: AoDCheatMenu END
+
 		

@@ -1104,6 +1104,9 @@ void CyEnumsPythonInterface()
 		.value("MEMORY_EVENT_GOOD_TO_US", MEMORY_EVENT_GOOD_TO_US)
 		.value("MEMORY_EVENT_BAD_TO_US", MEMORY_EVENT_BAD_TO_US)
 		.value("MEMORY_LIBERATED_CITIES", MEMORY_LIBERATED_CITIES)
+		// PatchMod: Mission failure START
+		.value("MEMORY_MISSION_FAIL", MEMORY_MISSION_FAIL)
+		// PatchMod: Mission failure END
 		.value("NUM_MEMORY_TYPES", NUM_MEMORY_TYPES)
 		;
 	python::enum_<AttitudeTypes>("AttitudeTypes")

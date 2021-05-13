@@ -332,6 +332,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
 				<NoWarAttitudeProb>
@@ -715,6 +719,10 @@
 				<MemoryAttitudePercent>
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
@@ -1100,6 +1108,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
 				<NoWarAttitudeProb>
@@ -1483,6 +1495,10 @@
 				<MemoryAttitudePercent>
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
@@ -1868,6 +1884,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
 				<NoWarAttitudeProb>
@@ -2251,6 +2271,10 @@
 				<MemoryAttitudePercent>
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
@@ -2636,6 +2660,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
 				<NoWarAttitudeProb>
@@ -3019,6 +3047,10 @@
 				<MemoryAttitudePercent>
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
@@ -3407,6 +3439,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
 				<NoWarAttitudeProb>
@@ -3793,6 +3829,10 @@
 				<MemoryAttitudePercent>
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
@@ -4181,6 +4221,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
 				<NoWarAttitudeProb>
@@ -4567,6 +4611,10 @@
 				<MemoryAttitudePercent>
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
@@ -4955,6 +5003,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
 				<NoWarAttitudeProb>
@@ -5341,6 +5393,10 @@
 				<MemoryAttitudePercent>
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
@@ -5729,6 +5785,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
 				<NoWarAttitudeProb>
@@ -6116,6 +6176,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
 				<NoWarAttitudeProb>
@@ -6494,6 +6558,10 @@
 				<MemoryAttitudePercent>
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
@@ -6874,6 +6942,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
 				<NoWarAttitudeProb>
@@ -7248,6 +7320,10 @@
 				<MemoryAttitudePercent>
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>
@@ -7627,6 +7703,10 @@
 				<MemoryAttitudePercent>
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
+				</MemoryAttitudePercent>
+				<MemoryAttitudePercent>
+					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
 			<NoWarAttitudeProbs>

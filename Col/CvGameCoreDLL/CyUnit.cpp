@@ -1076,3 +1076,25 @@ std::string CyUnit::getFullLengthIcon() const
 {
 	return m_pUnit ? m_pUnit->getFullLengthIcon() : "";
 }
+
+// PatchMod: Sail to West START
+bool CyUnit::canSailEast()
+{
+	return m_pUnit ? m_pUnit->canSailEast() : false;
+}
+
+bool CyUnit::setSailEast()
+{
+	return m_pUnit ? m_pUnit->setSailEast() : false;
+}
+
+bool CyUnit::canSailWest()
+{
+	return m_pUnit ? m_pUnit->canSailWest() : false;
+}
+
+bool CyUnit::setSailWest()
+{
+	return m_pUnit ? m_pUnit->setSailWest() : false;
+}
+// PatchMod: Sail to West END

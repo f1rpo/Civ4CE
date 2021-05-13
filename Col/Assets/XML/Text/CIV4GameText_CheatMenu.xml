@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by lcollins (Firaxis Games) -->
+<!-- Sid Meier's Civilization 4 -->
+<!-- Copyright Firaxis Games 2005 -->
+<!-- -->
+<!-- Game Text - New -->
+<Civ4GameText xmlns="http://www.firaxis.com">
+	<TEXT>
+		<Tag>TXT_KEY_CHEATMENU_TITLE</Tag>
+		<English>AoD Cheat Menu!</English>
+		<French>AoD Cheat Menu!</French>
+		<German>AoD Cheat Menu!</German>
+		<Italian>AoD Cheat Menu!</Italian>
+		<Spanish>AoD Cheat Menu!</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CHEATMENU_TEXT</Tag>
+		<English>Please choose an option from below. Remember, I know you cheated!</English>
+		<French>Please choose an option from below. Remember, I know you cheated!</French>
+		<German>Please choose an option from below. Remember, I know you cheated!</German>
+		<Italian>Please choose an option from below. Remember, I know you cheated!</Italian>
+		<Spanish>Please choose an option from below. Remember, I know you cheated!</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CHEATMENU_CANCEL</Tag>
+		<English>I am not a cheater! (CANCEL)</English>
+		<French>I am not a cheater! (CANCEL)</French>
+		<German>I am not a cheater! (CANCEL)</German>
+		<Italian>I am not a cheater! (CANCEL)</Italian>
+		<Spanish>I am not a cheater! (CANCEL)</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_AIAUTOPLAY</Tag>
+		<English>Number of turns to AI Autoplay:</English>
+		<French>Number of turns to AI Autoplay:</French>
+		<German>Number of turns to AI Autoplay:</German>
+		<Italian>Number of turns to AI Autoplay:</Italian>
+		<Spanish>Number of turns to AI Autoplay:</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_AIAUTOPLAY10</Tag>
+		<English>AI Autoplay 10 Turns</English>
+		<French>AI Autoplay 10 Turns</French>
+		<German>AI Autoplay 10 Turns</German>
+		<Italian>AI Autoplay 10 Turns</Italian>
+		<Spanish>AI Autoplay 10 Turns</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_AIAUTOPLAY50</Tag>
+		<English>AI Autoplay 50 Turns</English>
+		<French>AI Autoplay 50 Turns</French>
+		<German>AI Autoplay 50 Turns</German>
+		<Italian>AI Autoplay 50 Turns</Italian>
+		<Spanish>AI Autoplay 50 Turns</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MONEYTREE</Tag>
+		<English>Amount of ducats to add:</English>
+		<French>Amount of ducats to add:</French>
+		<German>Amount of ducats to add:</German>
+		<Italian>Amount of ducats to add:</Italian>
+		<Spanish>Amount of ducats to add:</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MONEYTREE1000</Tag>
+		<English>Add 1000 ducats</English>
+		<French>Add 1000 ducats</French>
+		<German>Add 1000 ducats</German>
+		<Italian>Add 1000 ducats</Italian>
+		<Spanish>Add 1000 ducats</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MONEYTREE5000</Tag>
+		<English>Add 5000 ducats</English>
+		<French>Add 5000 ducats</French>
+		<German>Add 5000 ducats</German>
+		<Italian>Add 5000 ducats</Italian>
+		<Spanish>Add 5000 ducats</Spanish>
+	</TEXT>
+</Civ4GameText>

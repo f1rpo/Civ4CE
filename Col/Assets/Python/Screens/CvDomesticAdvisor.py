@@ -20,6 +20,11 @@ class CvDomesticAdvisor:
 	# Screen construction function
 	def interfaceScreen(self):
 
+# PatchMod: Stop F1 pressing during diplomacy START
+		if (CyGame().isInDiplomacy()):
+			return
+# PatchMod: Stop F1 pressing during diplomacy END
+
 		player = gc.getPlayer(gc.getGame().getActivePlayer())
 
 		# Create a new screen, called DomesticAdvisur, using the file CvDomesticAdvisor.py for input

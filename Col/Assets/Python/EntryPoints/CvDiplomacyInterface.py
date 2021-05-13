@@ -11,6 +11,9 @@ def beginDiplomacy (argsList):
 	This is what gets called when you first begin diplomacy
 	The first parameter argsList[0] is the 'comment type', or how they feel about you
 	"""
+# PatchMod: Stop F1 pressing during diplomacy START
+	CyGame().inDiplomacy(true)
+# PatchMod: Stop F1 pressing during diplomacy END
 	eComment = argsList[0]
 	commentArgsSize = argsList[1]
 	if (commentArgsSize):

@@ -2784,7 +2784,10 @@ bool CvDLLButtonPopup::launchTalkNativesPopup(CvPopup* pPopup, CvPopupInfo& info
 	if (pUnit->canEstablishMission())
 	{
 		++iNumActions;
-		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_TALK_NATIVES_POPUP_MISSION"), NULL, COMMAND_ESTABLISH_MISSION);
+		// PatchMod: Mission failure START
+		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_TALK_NATIVES_POPUP_MISSION2", GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getMissionFailurePercent()), NULL, COMMAND_ESTABLISH_MISSION);
+//		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_TALK_NATIVES_POPUP_MISSION"), NULL, COMMAND_ESTABLISH_MISSION);
+		// PatchMod: Mission failure END
 	}
 
 	if (pUnit->canTradeYield(pUnit->plot()))

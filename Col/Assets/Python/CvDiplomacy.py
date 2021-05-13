@@ -116,7 +116,10 @@ class CvDiplomacy:
 			# Or reject them...
 			player = gc.getPlayer(gc.getGame().getActivePlayer())
 			eYield = player.getHighestTradedYield()
-			iCityId = player.getHighestStoredYieldCityId(eYield)
+# PatchMod: Tax party city START
+			iCityId = player.getHighestStoredYieldPartyCityId(eYield)
+#			iCityId = player.getHighestStoredYieldCityId(eYield)
+# PatchMod: Tax party city END
 			city = player.getCity(iCityId)
 			if city.isNone():
 				szCityName = u""
@@ -605,15 +608,15 @@ class CvDiplomacy:
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_ACCEPT_BUY_UNITS")):
 			CyInterface().playGeneralSound("AS2D_KISS_MY_RING")
 			diploScreen.buyUnits()
-			diploScreen.closeScreen()
+			self.closeDiploScreen()
 
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_KING_GIFT_SHIP")):
 			CyInterface().playGeneralSound("AS2D_KISS_MY_RING")
-			diploScreen.closeScreen()
+			self.closeDiploScreen()
 
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_KING_REVIVE")):
 			CyInterface().playGeneralSound("AS2D_KISS_MY_RING")
-			diploScreen.closeScreen()
+			self.closeDiploScreen()
 
 		# If we wish to make a trade proposal or try to renegotiate
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_PROPOSAL") or
@@ -783,59 +786,59 @@ class CvDiplomacy:
 
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_ACCEPT_PINKY")):
 			diploScreen.diploEvent(DiploEventTypes.DIPLOEVENT_ACCEPT_TAX_RATE, diploScreen.getData(), -1)
-			diploScreen.closeScreen()
+			self.closeDiploScreen()
 
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_TAX_PARTY")):
 			self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_REJECT_PINKY"), gc.getYieldInfo(iData1).getTextKey())
 
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_REJECT_PINKY")):
 			diploScreen.diploEvent(DiploEventTypes.DIPLOEVENT_REFUSE_TAX_RATE, iData1, iData2)
-			diploScreen.closeScreen()
+			self.closeDiploScreen()
 
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_KING_GIVE_GOLD")):
 			self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_KING_ACCEPT_GOLD"))
 
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_KING_ACCEPTED_GOLD")):
 			diploScreen.diploEvent(DiploEventTypes.DIPLOEVENT_ACCEPT_KING_GOLD, diploScreen.getData(), -1)
-			diploScreen.closeScreen()
+			self.closeDiploScreen()
 
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_KING_REFUSE_GOLD")):
 			self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_KING_REFUSE_GOLD"))
 
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_KING_REFUSED_GOLD")):
 			diploScreen.diploEvent(DiploEventTypes.DIPLOEVENT_REFUSE_KING_GOLD, diploScreen.getData(), -1)
-			diploScreen.closeScreen()
+			self.closeDiploScreen()
 
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_LIVE_AMONG_NATIVES_ACCEPT")):
 			diploScreen.diploEvent(DiploEventTypes.DIPLOEVENT_LIVE_AMONG_NATIVES, diploScreen.getData(), -1)
-			diploScreen.closeScreen()
+			self.closeDiploScreen()
 
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_TREASURE_TRANSPORT_ACCEPT")):
 			diploScreen.diploEvent(DiploEventTypes.DIPLOEVENT_TRANSPORT_TREASURE, diploScreen.getData(), -1)
-			diploScreen.closeScreen()
+			self.closeDiploScreen()
 
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_FOUND_CITY_NO_FOOD_YES")):
 			diploScreen.diploEvent(DiploEventTypes.DIPLOEVENT_FOUND_CITY_CHECK_NATIVES, diploScreen.getData(), -1)
-			diploScreen.closeScreen()
+			self.closeDiploScreen()
 
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_FOUND_CITY_INLAND_YES")):
 			diploScreen.diploEvent(DiploEventTypes.DIPLOEVENT_FOUND_CITY_CHECK_NATIVES, diploScreen.getData(), -1)
-			diploScreen.closeScreen()
+			self.closeDiploScreen()
 
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_FOUND_FIRST_CITY")):
 			diploScreen.diploEvent(DiploEventTypes.DIPLOEVENT_FOUND_CITY, diploScreen.getData(), false)
-			diploScreen.closeScreen()
+			self.closeDiploScreen()
 
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_FOUND_CITY_BUY")):
 			diploScreen.diploEvent(DiploEventTypes.DIPLOEVENT_FOUND_CITY, diploScreen.getData(), true)
-			diploScreen.closeScreen()
+			self.closeDiploScreen()
 
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_FOUND_CITY_TAKE")):
 			diploScreen.diploEvent(DiploEventTypes.DIPLOEVENT_FOUND_CITY, diploScreen.getData(), false)
-			diploScreen.closeScreen()
+			self.closeDiploScreen()
 
 		else:
-			diploScreen.closeScreen()
+			self.closeDiploScreen()
 
 	def dealCanceled( self ):
 
@@ -857,3 +860,10 @@ class CvDiplomacy:
 
 		print "Jason " + strComment
 		return -1
+
+# PatchMod: Stop F1 pressing during diplomacy START
+	def closeDiploScreen(self):
+		diploScreen = CyDiplomacy()
+		CyGame().inDiplomacy(false)
+		diploScreen.closeScreen()
+# PatchMod: Stop F1 pressing during diplomacy END

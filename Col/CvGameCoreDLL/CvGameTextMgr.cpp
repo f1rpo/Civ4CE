@@ -3048,6 +3048,10 @@ void CvGameTextMgr::parseTraits(CvWStringBuffer &szHelpString, TraitTypes eTrait
 				szHelpString.append(L"  ");
 			}
 			szHelpString.append(gDLL->getText("TXT_KEY_FATHER_NATIVE_ATTITUDE_GOOD"));
+			// PatchMod: Native auto-peace START
+			szHelpString.append(NEWLINE);
+			szHelpString.append(gDLL->getText("TXT_KEY_FATHER_NATIVE_ATTITUDE_GOOD2"));
+			// PatchMod: Native auto-peace END
 		}
 		else if (kTrait.getNativeAttitudeChange() < 0)
 		{
@@ -3800,6 +3804,10 @@ void CvGameTextMgr::parseCivicInfo(CvWStringBuffer &szHelpText, CivicTypes eCivi
 	{
 		szHelpText.append(NEWLINE);
 		szHelpText.append(gDLL->getText("TXT_KEY_FATHER_NATIVE_ATTITUDE_GOOD"));
+		// PatchMod: Native auto-peace START
+		szHelpText.append(NEWLINE);
+		szHelpText.append(gDLL->getText("TXT_KEY_FATHER_NATIVE_ATTITUDE_GOOD2"));
+		// PatchMod: Native auto-peace END
 	}
 	else if (kCivicInfo.getNativeAttitudeChange() < 0)
 	{
@@ -3955,6 +3963,12 @@ void CvGameTextMgr::setBasicUnitHelp(CvWStringBuffer &szBuffer, UnitTypes eUnit,
 			CvUnitInfo& kTransportUnitInfo = GC.getUnitInfo((UnitTypes) i);
 			if (kTransportUnitInfo.getCargoSpace() >= kUnitInfo.getRequiredTransportSize())
 			{
+			    // PatchMod: Fix basic help (Kudos Jeckel) START
+			    if (kTransportUnitInfo.getSpecialCargo() != NO_SPECIALUNIT && kUnitInfo.getSpecialCargo() != kTransportUnitInfo.getSpecialCargo())
+			    {
+			        continue;
+			    }
+				// PatchMod: Fix basic help (Kudos Jeckel) END
 				szBuffer.append(NEWLINE);
 				szBuffer.append(gDLL->getText("TXT_KEY_UNIT_CARGO", kTransportUnitInfo.getTextKeyWide()));
 			}

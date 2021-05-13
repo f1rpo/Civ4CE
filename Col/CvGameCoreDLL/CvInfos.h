@@ -604,6 +604,14 @@ class CvUnitInfo : public CvHotkeyInfo
 public:
 	DllExport CvUnitInfo();
 	DllExport virtual ~CvUnitInfo();
+
+	// PatchMod: Berth size START
+protected:
+	int m_iBerthSize;
+public:
+	DllExport int getBerthSize() const;
+	// PatchMod: Berth size END
+
 	DllExport int getAIWeight() const;
 	DllExport int getHurryCostModifier() const;
 	DllExport int getEuropeCost() const;
@@ -1536,6 +1544,35 @@ class CvHandicapInfo :
 public:
 	DllExport CvHandicapInfo();
 	DllExport virtual ~CvHandicapInfo();
+	// PatchMod: REF Reduction START
+protected:
+	int m_iKingUnitThresholdPercent;
+	int m_iKingGoldThresholdPercent;
+public:
+	DllExport int getKingUnitThresholdPercent() const;
+	DllExport int getKingGoldThresholdPercent() const;
+	// PatchMod: REF Reduction END
+	// PatchMod: Mission failure START
+protected:
+	int m_iMissionFailureThresholdPercent;
+public:
+	DllExport int getMissionFailureThresholdPercent() const;
+	// PatchMod: Mission failure END
+
+	// PatchMod: Give ship to pilgrim regardless of gold START
+protected:
+	bool m_bFreeShip;
+public:
+	DllExport bool isFreeShip() const;
+	// PatchMod: Give ship to pilgrim regardless of gold END
+
+	// PatchMod: Money tree START
+protected:
+	int m_iAIMoneyTree;
+public:
+	DllExport int getAIMoneyTree() const;
+	// PatchMod: Money tree END
+
 	DllExport int getStartingLocationPercent() const;
 	DllExport int getAdvancedStartPointsMod() const;
 	DllExport int getStartingGold() const;
@@ -1627,6 +1664,9 @@ public:
 	DllExport int getConstructPercent() const;
 	DllExport int getFatherPercent() const;
 	DllExport int getGreatGeneralPercent() const;
+	//patchmod WoI expansion start;
+	DllExport int getRevolutionTurns() const;
+	//patchmod WoI expansion end;
 	DllExport int getNumTurnIncrements() const;
 
 	DllExport GameTurnInfo& getGameTurnInfo(int iIndex) const;
@@ -1640,6 +1680,9 @@ protected:
 	int m_iConstructPercent;
 	int m_iFatherPercent;
 	int m_iGreatGeneralPercent;
+	//patchmod WoI expansion start;
+	int m_iRevolutionTurns;
+    //patchmod WoI expansion end;
 	int m_iNumTurnIncrements;
 	CvString m_szGameSpeedName;
 	GameTurnInfo* m_pGameTurnInfo;

@@ -13,6 +13,7 @@
 			<iStartingLocPercent>10</iStartingLocPercent>
 			<iAdvancedStartPointsMod>150</iAdvancedStartPointsMod>
 			<iGold>1000</iGold>
+			<bFreeShip>1</bFreeShip>
 			<iFatherPercent>60</iFatherPercent>
 			<iAttitudeChange>2</iAttitudeChange>
 			<iStartingDefenseUnits>0</iStartingDefenseUnits>
@@ -32,11 +33,15 @@
 			<iAIConstructPercent>160</iAIConstructPercent>
 			<iAIUnitUpgradePercent>50</iAIUnitUpgradePercent>
 			<iAIHurryPercent>80</iAIHurryPercent>
+			<iAIMoneyTree>0</iAIMoneyTree>
 			<iAIPerEraModifier>0</iAIPerEraModifier>
 			<iAIAdvancedStartPercent>100</iAIAdvancedStartPercent>
 			<iAIKingUnitThresholdPercent>200</iAIKingUnitThresholdPercent>
+			<iKingUnitThresholdPercent>200</iKingUnitThresholdPercent>
+			<iKingGoldThresholdPercent>100</iKingGoldThresholdPercent>
 			<iEuropePriceThresholdMultiplier>200</iEuropePriceThresholdMultiplier>
 			<iNativePacifismPercent>100</iNativePacifismPercent>
+			<iMissionFailureThresholdPercent>100</iMissionFailureThresholdPercent>
 			<Goodies>
 				<GoodyType>GOODY_SCOUT</GoodyType>
 				<GoodyType>GOODY_SCOUT</GoodyType>
@@ -85,11 +90,15 @@
 			<iAIConstructPercent>110</iAIConstructPercent>
 			<iAIUnitUpgradePercent>50</iAIUnitUpgradePercent>
 			<iAIHurryPercent>80</iAIHurryPercent>
+			<iAIMoneyTree>5</iAIMoneyTree>
 			<iAIPerEraModifier>0</iAIPerEraModifier>
 			<iAIAdvancedStartPercent>100</iAIAdvancedStartPercent>
 			<iAIKingUnitThresholdPercent>200</iAIKingUnitThresholdPercent>
+			<iKingUnitThresholdPercent>180</iKingUnitThresholdPercent>
+			<iKingGoldThresholdPercent>100</iKingGoldThresholdPercent>
 			<iEuropePriceThresholdMultiplier>120</iEuropePriceThresholdMultiplier>
 			<iNativePacifismPercent>90</iNativePacifismPercent>
+			<iMissionFailureThresholdPercent>97</iMissionFailureThresholdPercent>
 			<Goodies>
 				<GoodyType>GOODY_SCOUT</GoodyType>
 				<GoodyType>GOODY_SCOUT</GoodyType>
@@ -139,11 +148,15 @@
 			<iAIConstructPercent>100</iAIConstructPercent>
 			<iAIUnitUpgradePercent>50</iAIUnitUpgradePercent>
 			<iAIHurryPercent>70</iAIHurryPercent>
+			<iAIMoneyTree>10</iAIMoneyTree>
 			<iAIPerEraModifier>0</iAIPerEraModifier>
 			<iAIAdvancedStartPercent>100</iAIAdvancedStartPercent>
 			<iAIKingUnitThresholdPercent>200</iAIKingUnitThresholdPercent>
+			<iKingUnitThresholdPercent>160</iKingUnitThresholdPercent>
+			<iKingGoldThresholdPercent>100</iKingGoldThresholdPercent>
 			<iEuropePriceThresholdMultiplier>100</iEuropePriceThresholdMultiplier>
 			<iNativePacifismPercent>80</iNativePacifismPercent>
+			<iMissionFailureThresholdPercent>94</iMissionFailureThresholdPercent>
 			<Goodies>
 				<GoodyType>GOODY_SCOUT</GoodyType>
 				<GoodyType>GOODY_SCOUT</GoodyType>
@@ -197,11 +210,15 @@
 			<iAIConstructPercent>90</iAIConstructPercent>
 			<iAIUnitUpgradePercent>50</iAIUnitUpgradePercent>
 			<iAIHurryPercent>65</iAIHurryPercent>
+			<iAIMoneyTree>15</iAIMoneyTree>
 			<iAIPerEraModifier>-1</iAIPerEraModifier>
 			<iAIAdvancedStartPercent>110</iAIAdvancedStartPercent>
 			<iAIKingUnitThresholdPercent>200</iAIKingUnitThresholdPercent>
+			<iKingUnitThresholdPercent>140</iKingUnitThresholdPercent>
+			<iKingGoldThresholdPercent>100</iKingGoldThresholdPercent>
 			<iEuropePriceThresholdMultiplier>90</iEuropePriceThresholdMultiplier>
 			<iNativePacifismPercent>70</iNativePacifismPercent>
+			<iMissionFailureThresholdPercent>91</iMissionFailureThresholdPercent>
 			<Goodies>
 				<GoodyType>GOODY_SCOUT</GoodyType>
 				<GoodyType>GOODY_TREASURE</GoodyType>
@@ -253,11 +270,15 @@
 			<iAIConstructPercent>75</iAIConstructPercent>
 			<iAIUnitUpgradePercent>50</iAIUnitUpgradePercent>
 			<iAIHurryPercent>60</iAIHurryPercent>
+			<iAIMoneyTree>20</iAIMoneyTree>
 			<iAIPerEraModifier>-2</iAIPerEraModifier>
 			<iAIAdvancedStartPercent>120</iAIAdvancedStartPercent>
 			<iAIKingUnitThresholdPercent>200</iAIKingUnitThresholdPercent>
+			<iKingUnitThresholdPercent>120</iKingUnitThresholdPercent>
+			<iKingGoldThresholdPercent>100</iKingGoldThresholdPercent>
 			<iEuropePriceThresholdMultiplier>80</iEuropePriceThresholdMultiplier>
 			<iNativePacifismPercent>60</iNativePacifismPercent>
+			<iMissionFailureThresholdPercent>89</iMissionFailureThresholdPercent>
 			<Goodies>
 				<GoodyType>GOODY_SCOUT</GoodyType>
 				<GoodyType>GOODY_TREASURE</GoodyType>
@@ -309,11 +330,15 @@
 			<iAIConstructPercent>60</iAIConstructPercent>
 			<iAIUnitUpgradePercent>50</iAIUnitUpgradePercent>
 			<iAIHurryPercent>55</iAIHurryPercent>
+			<iAIMoneyTree>25</iAIMoneyTree>
 			<iAIPerEraModifier>-3</iAIPerEraModifier>
 			<iAIAdvancedStartPercent>135</iAIAdvancedStartPercent>
 			<iAIKingUnitThresholdPercent>200</iAIKingUnitThresholdPercent>
+			<iKingUnitThresholdPercent>100</iKingUnitThresholdPercent>
+			<iKingGoldThresholdPercent>100</iKingGoldThresholdPercent>
 			<iEuropePriceThresholdMultiplier>70</iEuropePriceThresholdMultiplier>
 			<iNativePacifismPercent>40</iNativePacifismPercent>
+			<iMissionFailureThresholdPercent>87</iMissionFailureThresholdPercent>
 			<Goodies>
 				<GoodyType>GOODY_SCOUT</GoodyType>
 				<GoodyType>GOODY_TREASURE</GoodyType>
@@ -367,11 +392,15 @@
 			<iAIConstructPercent>50</iAIConstructPercent>
 			<iAIUnitUpgradePercent>50</iAIUnitUpgradePercent>
 			<iAIHurryPercent>50</iAIHurryPercent>
+			<iAIMoneyTree>30</iAIMoneyTree>
 			<iAIPerEraModifier>-4</iAIPerEraModifier>
 			<iAIAdvancedStartPercent>150</iAIAdvancedStartPercent>
 			<iAIKingUnitThresholdPercent>200</iAIKingUnitThresholdPercent>
+			<iKingUnitThresholdPercent>90</iKingUnitThresholdPercent>
+			<iKingGoldThresholdPercent>100</iKingGoldThresholdPercent>
 			<iEuropePriceThresholdMultiplier>60</iEuropePriceThresholdMultiplier>
 			<iNativePacifismPercent>25</iNativePacifismPercent>
+			<iMissionFailureThresholdPercent>85</iMissionFailureThresholdPercent>
 			<Goodies>
 				<GoodyType>GOODY_SCOUT</GoodyType>
 				<GoodyType>GOODY_TREASURE</GoodyType>

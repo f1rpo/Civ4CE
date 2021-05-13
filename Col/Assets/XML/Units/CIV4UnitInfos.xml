@@ -125,6 +125,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>200</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>3</iNativeLearnTime>
@@ -368,6 +369,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>150</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>4</iNativeLearnTime>
@@ -611,6 +613,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>100</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>7</iNativeLearnTime>
@@ -890,9 +893,10 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>200</iAsset>
 			<iPower>0</iPower>
-			<iNativeLearnTime>3</iNativeLearnTime>
+			<iNativeLearnTime>-1</iNativeLearnTime>
 			<iStudentWeight>100</iStudentWeight>
 			<iTeacherWeight>0</iTeacherWeight>
 			<ProfessionMeshGroups>
@@ -949,17 +953,6 @@
 					<UnitMeshGroup>
 						<iRequired>1</iRequired>
 						<ArtDefineTag>ART_DEF_UNIT_PROFESSION_PIONEER</ArtDefineTag>
-					</UnitMeshGroup>
-				</UnitMeshGroups>
-				<UnitMeshGroups>
-					<ProfessionType>PROFESSION_MISSIONARY</ProfessionType>
-					<fMaxSpeed>1.75</fMaxSpeed>
-					<fPadTime>1</fPadTime>
-					<iMeleeWaveSize>4</iMeleeWaveSize>
-					<iRangedWaveSize>0</iRangedWaveSize>
-					<UnitMeshGroup>
-						<iRequired>1</iRequired>
-						<ArtDefineTag>ART_DEF_UNIT_PROFESSION_MISSIONARY</ArtDefineTag>
 					</UnitMeshGroup>
 				</UnitMeshGroups>
 			</ProfessionMeshGroups>
@@ -1097,6 +1090,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -1304,6 +1298,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -1511,6 +1506,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -1718,6 +1714,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -1925,6 +1922,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -2137,6 +2135,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -2344,6 +2343,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -2556,6 +2556,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -2763,6 +2764,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -2970,6 +2972,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -3177,6 +3180,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -3384,6 +3388,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -3591,6 +3596,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -3798,6 +3804,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -4005,6 +4012,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -4212,6 +4220,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -4419,6 +4428,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -4629,6 +4639,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>25</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -4819,6 +4830,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>50</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -5038,6 +5050,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -5244,6 +5257,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -5451,6 +5465,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -5658,6 +5673,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -5864,6 +5880,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -6077,6 +6094,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>200</iAsset>
 			<iPower>50</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -6250,6 +6268,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>100</iAsset>
 			<iPower>300</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -6390,6 +6409,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>100</iAsset>
 			<iPower>300</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -6526,6 +6546,7 @@
 			<DomainCargo>DOMAIN_LAND</DomainCargo>
 			<iCargo>2</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>200</iAsset>
 			<iPower>50</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -6666,6 +6687,7 @@
 			<DomainCargo>DOMAIN_LAND</DomainCargo>
 			<iCargo>4</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>100</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -6797,6 +6819,7 @@
 			<DomainCargo>DOMAIN_LAND</DomainCargo>
 			<iCargo>2</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>250</iAsset>
 			<iPower>200</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -6933,6 +6956,7 @@
 			<DomainCargo>DOMAIN_LAND</DomainCargo>
 			<iCargo>6</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>300</iAsset>
 			<iPower>300</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -7064,6 +7088,7 @@
 			<DomainCargo>DOMAIN_LAND</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>300</iAsset>
 			<iPower>500</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -7205,6 +7230,7 @@
 			<DomainCargo>DOMAIN_LAND</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>350</iAsset>
 			<iPower>600</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -7346,6 +7372,7 @@
 			<DomainCargo>DOMAIN_LAND</DomainCargo>
 			<iCargo>4</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>350</iAsset>
 			<iPower>600</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -7469,6 +7496,7 @@
 			<DomainCargo>DOMAIN_LAND</DomainCargo>
 			<iCargo>2</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>50</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -7587,6 +7615,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>0</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -7705,6 +7734,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>0</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -7823,6 +7853,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>0</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -7941,6 +7972,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>0</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -8059,6 +8091,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>0</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -8177,6 +8210,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>0</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -8295,6 +8329,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>0</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -8413,6 +8448,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>0</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -8531,6 +8567,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>0</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -8649,6 +8686,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>0</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -8767,6 +8805,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>0</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -8885,6 +8924,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>0</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -9003,6 +9043,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>0</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -9121,6 +9162,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>0</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -9239,6 +9281,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>0</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -9357,6 +9400,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>0</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -9475,6 +9519,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>6</iRequiredTransportSize>
+			<iBerthSize>6</iBerthSize>
 			<iAsset>0</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
@@ -9618,6 +9663,7 @@
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
 			<iRequiredTransportSize>1</iRequiredTransportSize>
+			<iBerthSize>1</iBerthSize>
 			<iAsset>0</iAsset>
 			<iPower>0</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>

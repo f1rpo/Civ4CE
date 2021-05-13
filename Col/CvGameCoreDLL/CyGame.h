@@ -17,6 +17,16 @@ class CyGame
 {
 public:
 	CyGame();
+	// PatchMod: Randomise stuff on map START
+	void reassignStartingPlots();
+	void setupScenarioPlayers();
+	// PatchMod: Randomise stuff on map END
+
+	// PatchMod: Stop F1 pressing during diplomacy START
+	void inDiplomacy(bool bValue);
+	bool isInDiplomacy();
+	// PatchMod: Stop F1 pressing during diplomacy START
+
 	CyGame(CvGame* pGame);			// Call from C++
 	CyGame(CvGameAI* pGame);			// Call from C++;
 	CvGame* getGame() { return m_pGame;	}	// Call from C++

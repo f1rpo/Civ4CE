@@ -18,6 +18,10 @@ void CyPlayerPythonInterface2(python::class_<CyPlayer>& x)
 	// set the docstring of the current module scope
 	python::scope().attr("__doc__") = "Civilization IV Player Class";
 	x
+		// PatchMod: Tax party city START
+		.def("getHighestStoredYieldPartyCityId", &CyPlayer::getHighestStoredYieldPartyCityId)
+		// PatchMod: Tax party city END
+
 		.def("AI_updateFoundValues", &CyPlayer::AI_updateFoundValues, "void (bool bStartingLoc)")
 		.def("AI_foundValue", &CyPlayer::AI_foundValue, "int (int, int, int, bool)")
 		.def("AI_demandRebukedWar", &CyPlayer::AI_demandRebukedWar, "bool (int /*PlayerTypes*/)")

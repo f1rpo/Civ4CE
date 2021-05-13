@@ -12,7 +12,7 @@
 			<Direction>east</Direction>
 			<bStart>1</bStart>
 			<iTripLength>2</iTripLength>
-			<iMinLandDistance>3</iMinLandDistance>
+			<iMinLandDistance>4</iMinLandDistance>
 			<iWidth>5</iWidth>
 		</EuropeInfo>
 		<EuropeInfo>
@@ -21,7 +21,7 @@
 			<Direction>west</Direction>
 			<bStart>0</bStart>
 			<iTripLength>4</iTripLength>
-			<iMinLandDistance>3</iMinLandDistance>
+			<iMinLandDistance>4</iMinLandDistance>
 			<iWidth>5</iWidth>
 		</EuropeInfo>
 		<EuropeInfo>

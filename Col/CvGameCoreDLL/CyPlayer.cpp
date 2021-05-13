@@ -1138,3 +1138,10 @@ std::wstring CyPlayer::getTradeMessage(int i) const
 {
 	return m_pPlayer ? m_pPlayer->getTradeMessage(i) : L"";
 }
+
+// PatchMod: Tax party city START
+int CyPlayer::getHighestStoredYieldPartyCityId(int /*YieldTypes*/ eYield)
+{
+	return m_pPlayer ? m_pPlayer->getHighestStoredYieldPartyCityId((YieldTypes) eYield) : -1;
+}
+// PatchMod: Tax party city END

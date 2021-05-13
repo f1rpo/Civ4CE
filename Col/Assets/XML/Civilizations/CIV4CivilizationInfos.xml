@@ -742,14 +742,6 @@
 					<FreeUnitProfession>NONE</FreeUnitProfession>
 				</FreeUnitClass>
 				<FreeUnitClass>
-					<UnitClassType>UNITCLASS_SHIP_OF_THE_LINE</UnitClassType>
-					<FreeUnitProfession>NONE</FreeUnitProfession>
-				</FreeUnitClass>
-				<FreeUnitClass>
-					<UnitClassType>UNITCLASS_SHIP_OF_THE_LINE</UnitClassType>
-					<FreeUnitProfession>NONE</FreeUnitProfession>
-				</FreeUnitClass>
-				<FreeUnitClass>
 					<UnitClassType>UNITCLASS_CANNON</UnitClassType>
 					<FreeUnitProfession>NONE</FreeUnitProfession>
 				</FreeUnitClass>
@@ -780,14 +772,6 @@
 				<FreeUnitClass>
 					<UnitClassType>UNITCLASS_REGULAR</UnitClassType>
 					<FreeUnitProfession>PROFESSION_DRAGOON</FreeUnitProfession>
-				</FreeUnitClass>
-				<FreeUnitClass>
-					<UnitClassType>UNITCLASS_REGULAR</UnitClassType>
-					<FreeUnitProfession>PROFESSION_SOLDIER</FreeUnitProfession>
-				</FreeUnitClass>
-				<FreeUnitClass>
-					<UnitClassType>UNITCLASS_REGULAR</UnitClassType>
-					<FreeUnitProfession>PROFESSION_SOLDIER</FreeUnitProfession>
 				</FreeUnitClass>
 				<FreeUnitClass>
 					<UnitClassType>UNITCLASS_REGULAR</UnitClassType>
@@ -898,14 +882,6 @@
 					<FreeUnitProfession>NONE</FreeUnitProfession>
 				</FreeUnitClass>
 				<FreeUnitClass>
-					<UnitClassType>UNITCLASS_SHIP_OF_THE_LINE</UnitClassType>
-					<FreeUnitProfession>NONE</FreeUnitProfession>
-				</FreeUnitClass>
-				<FreeUnitClass>
-					<UnitClassType>UNITCLASS_SHIP_OF_THE_LINE</UnitClassType>
-					<FreeUnitProfession>NONE</FreeUnitProfession>
-				</FreeUnitClass>
-				<FreeUnitClass>
 					<UnitClassType>UNITCLASS_CANNON</UnitClassType>
 					<FreeUnitProfession>NONE</FreeUnitProfession>
 				</FreeUnitClass>
@@ -936,14 +912,6 @@
 				<FreeUnitClass>
 					<UnitClassType>UNITCLASS_REGULAR</UnitClassType>
 					<FreeUnitProfession>PROFESSION_DRAGOON</FreeUnitProfession>
-				</FreeUnitClass>
-				<FreeUnitClass>
-					<UnitClassType>UNITCLASS_REGULAR</UnitClassType>
-					<FreeUnitProfession>PROFESSION_SOLDIER</FreeUnitProfession>
-				</FreeUnitClass>
-				<FreeUnitClass>
-					<UnitClassType>UNITCLASS_REGULAR</UnitClassType>
-					<FreeUnitProfession>PROFESSION_SOLDIER</FreeUnitProfession>
 				</FreeUnitClass>
 				<FreeUnitClass>
 					<UnitClassType>UNITCLASS_REGULAR</UnitClassType>
@@ -1054,14 +1022,6 @@
 					<FreeUnitProfession>NONE</FreeUnitProfession>
 				</FreeUnitClass>
 				<FreeUnitClass>
-					<UnitClassType>UNITCLASS_SHIP_OF_THE_LINE</UnitClassType>
-					<FreeUnitProfession>NONE</FreeUnitProfession>
-				</FreeUnitClass>
-				<FreeUnitClass>
-					<UnitClassType>UNITCLASS_SHIP_OF_THE_LINE</UnitClassType>
-					<FreeUnitProfession>NONE</FreeUnitProfession>
-				</FreeUnitClass>
-				<FreeUnitClass>
 					<UnitClassType>UNITCLASS_CANNON</UnitClassType>
 					<FreeUnitProfession>NONE</FreeUnitProfession>
 				</FreeUnitClass>
@@ -1092,14 +1052,6 @@
 				<FreeUnitClass>
 					<UnitClassType>UNITCLASS_REGULAR</UnitClassType>
 					<FreeUnitProfession>PROFESSION_DRAGOON</FreeUnitProfession>
-				</FreeUnitClass>
-				<FreeUnitClass>
-					<UnitClassType>UNITCLASS_REGULAR</UnitClassType>
-					<FreeUnitProfession>PROFESSION_SOLDIER</FreeUnitProfession>
-				</FreeUnitClass>
-				<FreeUnitClass>
-					<UnitClassType>UNITCLASS_REGULAR</UnitClassType>
-					<FreeUnitProfession>PROFESSION_SOLDIER</FreeUnitProfession>
 				</FreeUnitClass>
 				<FreeUnitClass>
 					<UnitClassType>UNITCLASS_REGULAR</UnitClassType>
@@ -1210,14 +1162,6 @@
 					<FreeUnitProfession>NONE</FreeUnitProfession>
 				</FreeUnitClass>
 				<FreeUnitClass>
-					<UnitClassType>UNITCLASS_SHIP_OF_THE_LINE</UnitClassType>
-					<FreeUnitProfession>NONE</FreeUnitProfession>
-				</FreeUnitClass>
-				<FreeUnitClass>
-					<UnitClassType>UNITCLASS_SHIP_OF_THE_LINE</UnitClassType>
-					<FreeUnitProfession>NONE</FreeUnitProfession>
-				</FreeUnitClass>
-				<FreeUnitClass>
 					<UnitClassType>UNITCLASS_CANNON</UnitClassType>
 					<FreeUnitProfession>NONE</FreeUnitProfession>
 				</FreeUnitClass>
@@ -1248,14 +1192,6 @@
 				<FreeUnitClass>
 					<UnitClassType>UNITCLASS_REGULAR</UnitClassType>
 					<FreeUnitProfession>PROFESSION_DRAGOON</FreeUnitProfession>
-				</FreeUnitClass>
-				<FreeUnitClass>
-					<UnitClassType>UNITCLASS_REGULAR</UnitClassType>
-					<FreeUnitProfession>PROFESSION_SOLDIER</FreeUnitProfession>
-				</FreeUnitClass>
-				<FreeUnitClass>
-					<UnitClassType>UNITCLASS_REGULAR</UnitClassType>
-					<FreeUnitProfession>PROFESSION_SOLDIER</FreeUnitProfession>
 				</FreeUnitClass>
 				<FreeUnitClass>
 					<UnitClassType>UNITCLASS_REGULAR</UnitClassType>

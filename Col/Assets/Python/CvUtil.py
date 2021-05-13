@@ -56,6 +56,10 @@ EventShowWonder = 5012
 EventCreateTradeRoute = 5013
 EventEditTradeRoute = 5014
 
+# Dale - AoD: AoDCheatMenu START
+EventAoDCheatMenu = 6000
+# Dale - AoD: AoDCheatMenu END
+
 EventLButtonDown=1
 EventLcButtonDblClick=2
 EventRButtonDown=3
@@ -65,7 +69,9 @@ EventKeyDown=6
 EventKeyUp=7
 
 # List of unreported Events
-SilentEvents = [EventEditCityName, EventEditUnitName, EventCreateTradeRoute, EventEditTradeRoute]
+# Dale - AoD: AoDCheatMenu START
+SilentEvents = [EventEditCityName, EventEditUnitName, EventCreateTradeRoute, EventEditTradeRoute, EventAoDCheatMenu]
+# Dale - AoD: AoDCheatMenu END
 
 # Popup defines (TODO: Expose these from C++)
 FONT_CENTER_JUSTIFY=1<<2

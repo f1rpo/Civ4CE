@@ -74,6 +74,13 @@ public:
 	CvUnit();
 	virtual ~CvUnit();
 	
+	// PatchMod: Sail to West START
+	bool canSailEast();
+	bool setSailEast();
+	bool canSailWest();
+	bool setSailWest();
+	// PatchMod: Sail to West END
+
 	void reloadEntity();
 	void init(int iID, UnitTypes eUnit, ProfessionTypes eProfession, UnitAITypes eUnitAI, PlayerTypes eOwner, int iX, int iY, DirectionTypes eFacingDirection, int iYieldStored);
 	void uninit();

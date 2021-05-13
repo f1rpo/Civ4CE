@@ -3091,7 +3091,7 @@
 			<iHillsAttack>0</iHillsAttack>
 			<iHillsDefense>0</iHillsDefense>
 			<iPillageChange>0</iPillageChange>
-			<iUpgradeDiscount>100</iUpgradeDiscount>
+			<iUpgradeDiscount>0</iUpgradeDiscount>
 			<iExperiencePercent>0</iExperiencePercent>
 			<TerrainAttacks/>
 			<TerrainDefenses/>

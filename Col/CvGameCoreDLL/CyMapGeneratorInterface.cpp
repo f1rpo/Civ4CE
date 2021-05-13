@@ -13,6 +13,11 @@ void CyMapGeneratorPythonInterface()
 	OutputDebugString("Python Extension Module - CyMapGeneratorPythonInterface\n");
 
 	python::class_<CyMapGenerator>("CyMapGenerator")
+		// PatchMod: Randomise stuff on map START
+		.def("eraseEurope", &CyMapGenerator::eraseEurope)
+		.def("addEurope", &CyMapGenerator::addEurope)
+		// PatchMod: Randomise stuff on map END
+
 		.def("isNone", &CyMapGenerator::isNone, "bool () - valid CyMapGenerator() interface")
 
 		.def("canPlaceBonusAt", &CyMapGenerator::canPlaceBonusAt, "bool (int /*BonusTypes*/ eBonus, int iX, int iY, bool bIgnoreLatitude)")

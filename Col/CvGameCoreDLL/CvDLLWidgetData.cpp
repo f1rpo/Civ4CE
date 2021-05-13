@@ -2587,11 +2587,17 @@ void CvDLLWidgetData::parseAssignTradeRoute(CvWidgetDataStruct &widgetDataStruct
 	{
 		if (pUnit->getGroup()->isAssignedTradeRoute(widgetDataStruct.m_iData2))
 		{
-			szBuffer.assign(gDLL->getText("TXT_KEY_ASSIGN_ROUTE"));
+		    // PatchMod: Backwards buttons (Kudos Jeckel) START
+			//szBuffer.assign(gDLL->getText("TXT_KEY_ASSIGN_ROUTE"));
+			szBuffer.assign(gDLL->getText("TXT_KEY_UNASSIGN_ROUTE"));
+		    // PatchMod: Backwards buttons (Kudos Jeckel) END
 		}
 		else
 		{
-			szBuffer.assign(gDLL->getText("TXT_KEY_UNASSIGN_ROUTE"));
+		    // PatchMod: Backwards buttons (Kudos Jeckel) START
+			szBuffer.assign(gDLL->getText("TXT_KEY_ASSIGN_ROUTE"));
+			//szBuffer.assign(gDLL->getText("TXT_KEY_UNASSIGN_ROUTE"));
+		    // PatchMod: Backwards buttons (Kudos Jeckel) END
 		}
 	}
 }
@@ -3223,7 +3229,10 @@ void CvDLLWidgetData::doDoubleClickDock(const CvWidgetDataStruct& widgetDataStru
 	CvUnit* pUnit = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getEuropeUnitById(widgetDataStruct.m_iData1);
 	if (pUnit != NULL)
 	{
-		CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_CHOOSE_PROFESSION, -1, pUnit->getID(), 0);
+		// PatchMod: Auto cycling bug fix START
+		CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_CHOOSE_PROFESSION, -1, pUnit->getID());
+//		CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_CHOOSE_PROFESSION, -1, pUnit->getID(), 0);
+		// PatchMod: Auto cycling bug fix END
 		gDLL->getInterfaceIFace()->addPopup(pInfo, NO_PLAYER, true);
 	}
 }

@@ -149,3 +149,17 @@ void CyMapGenerator::setPlotTypes(boost::python::list& listPlotTypes)
 	m_pMapGenerator->setPlotTypes(paiPlotTypes);
 	delete [] paiPlotTypes;
 }
+
+// PatchMod: Randomise stuff on map START
+void CyMapGenerator::addEurope()
+{
+	if (m_pMapGenerator)
+		m_pMapGenerator->addEurope();
+}
+
+void CyMapGenerator::eraseEurope()
+{
+	if (m_pMapGenerator)
+		m_pMapGenerator->eraseEurope();
+}
+// PatchMod: Randomise stuff on map END

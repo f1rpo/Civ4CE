@@ -686,6 +686,36 @@ void CvTeam::declareWarNoRevolution(TeamTypes eTeam, bool bNewDiplo, WarPlanType
 	FAssertMsg(eTeam != NO_TEAM, "eTeam is not assigned a valid value");
 	FAssertMsg(eTeam != getID(), "eTeam is not expected to be equal with getID()");
 
+	// PatchMod: Force start peace START
+	if (GC.getGameINLINE().getGameTurn() < 20)
+	{
+		bool bEuropean1 = false;
+		bool bEuropean2 = false;
+		for (int iI = 0; iI < MAX_PLAYERS; iI++)
+		{
+			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			{
+				if (GET_PLAYER((PlayerTypes)iI).getParent() != NO_PLAYER)
+				{
+					bEuropean1 = true;
+				}
+			}
+			if (GET_PLAYER((PlayerTypes)iI).getTeam() == eTeam)
+			{
+				if (GET_PLAYER((PlayerTypes)iI).getParent() != NO_PLAYER)
+				{
+					bEuropean2 = true;
+				}
+			}
+		}
+		if (bEuropean1 && bEuropean2)
+		{
+			GET_PLAYER(GC.getGameINLINE().getActivePlayer()).doKingForcePeace();
+			return;
+		}
+	}
+	// PatchMod: Force start peace END
+
 	if (!isAtWar(eTeam))
 	{
 		for (pLoopDeal = GC.getGameINLINE().firstDeal(&iLoop); pLoopDeal != NULL; pLoopDeal = GC.getGameINLINE().nextDeal(&iLoop))
@@ -2738,6 +2768,12 @@ void CvTeam::doRevolution()
 					FAssert(pRevolutionUnit != NULL);
 				}
 				kTeamPlayer.clearRevolutionEuropeUnits();
+				// PatchMod: Clear blockaded goods START
+				kTeamPlayer.setYieldEuropeTradableAll();
+				// PatchMod: Clear blockaded goods END
+				// PatchMod: Intercept Europe units START
+				kTeamPlayer.interceptEuropeUnits();
+				// PatchMod: Intercept Europe units END
 				kTeamPlayer.doEra();
 				kTeamPlayer.validateTradeRoutes();
 			}
@@ -2748,7 +2784,9 @@ void CvTeam::doRevolution()
 	{
 		gDLL->getInterfaceIFace()->setDirty(ColoredPlots_DIRTY_BIT, true);
 	}
-
+    // patchmod WoI extension start;
+    bool anyRevolution = false;
+    //patchmod WoI extension end;
 
 	for (int iPlayer = 0; iPlayer < MAX_PLAYERS; ++iPlayer)
 	{
@@ -2772,7 +2810,25 @@ void CvTeam::doRevolution()
 				}
 			}
 		}
+
+		//patchmod WoI extension start;
+		if ((GC.getEraInfo(kPlayer.getCurrentEra()).isRevolution()) && (kPlayer.getTeam() != (TeamTypes)getID()))
+		//if ((kPlayer.isInRevolution()) && (kPlayer.getTeam() != (TeamTypes)getID()))
+		{
+            anyRevolution = true;
+        }
 	}
+
+	//patchmod WoI extension start;
+
+
+	if (!anyRevolution)
+	{
+	    GC.getGameINLINE().setMaxTurns(GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getRevolutionTurns() + GC.getGameINLINE().getGameTurn());
+	    GC.getGameINLINE().setEstimateEndTurn(GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getRevolutionTurns() + GC.getGameINLINE().getGameTurn());
+	}
+
+	//patchmod WoI extension end;
 }
 
 bool CvTeam::isParentOf(TeamTypes eChildTeam) const
