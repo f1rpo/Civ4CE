@@ -19,6 +19,7 @@
 #include "CyArgsList.h"
 #include "FProfiler.h"
 #include "CvGameTextMgr.h"
+#include "UnofficialPatch.h"
 
 // interfaces used
 #include "CvDLLEngineIFaceBase.h"
@@ -10739,6 +10740,13 @@ void CvCity::popOrder(int iNum, bool bFinish, bool bChoose)
 			}
 			setUnitProduction(eTrainUnit, 0);
 
+			// Unofficial Patch Start
+			// * Limited which production modifiers affect gold from production overflow. 1/3
+#ifdef _USE_UNOFFICIALPATCH
+			iLostProduction *= getBaseYieldRateModifier(YIELD_PRODUCTION);
+			iLostProduction /= std::max(1, getBaseYieldRateModifier(YIELD_PRODUCTION, getProductionModifier(eTrainUnit)));
+#endif
+			// Unofficial Patch End
 			int iProductionGold = ((iLostProduction * GC.getDefineINT("MAXED_UNIT_GOLD_PERCENT")) / 100);
 			if (iProductionGold > 0)
 			{
@@ -10811,6 +10819,13 @@ void CvCity::popOrder(int iNum, bool bFinish, bool bChoose)
 			}
 			setBuildingProduction(eConstructBuilding, 0);
 
+			// Unofficial Patch Start
+			// * Limited which production modifiers affect gold from production overflow. 2/3
+#ifdef _USE_UNOFFICIALPATCH
+			iLostProduction *= getBaseYieldRateModifier(YIELD_PRODUCTION);
+			iLostProduction /= std::max(1, getBaseYieldRateModifier(YIELD_PRODUCTION, getProductionModifier(eConstructBuilding)));
+#endif
+			// Unofficial Patch End
 			int iProductionGold = ((iLostProduction * GC.getDefineINT("MAXED_BUILDING_GOLD_PERCENT")) / 100);
 			if (iProductionGold > 0)
 			{
@@ -10898,6 +10913,13 @@ void CvCity::popOrder(int iNum, bool bFinish, bool bChoose)
 			}
 			setProjectProduction(eCreateProject, 0);
 
+			// Unofficial Patch Start
+			// * Limited which production modifiers affect gold from production overflow. 3/3
+#ifdef _USE_UNOFFICIALPATCH
+			iLostProduction *= getBaseYieldRateModifier(YIELD_PRODUCTION);
+			iLostProduction /= std::max(1, getBaseYieldRateModifier(YIELD_PRODUCTION, getProductionModifier(eCreateProject)));
+#endif
+			// Unofficial Patch End
 			int iProductionGold = ((iLostProduction * GC.getDefineINT("MAXED_PROJECT_GOLD_PERCENT")) / 100);
 			if (iProductionGold > 0)
 			{

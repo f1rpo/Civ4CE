@@ -19,6 +19,7 @@
 #include "FProfiler.h"
 #include "FVariableSystem.h"
 #include "CvInitCore.h"
+#include "UnofficialPatch.h"
 
 #define COPY(dst, src, typeName) \
 	{ \
@@ -3578,3 +3579,24 @@ void CvGlobals::setBorderFinder(FAStar* pVal) { m_borderFinder = pVal; }
 void CvGlobals::setAreaFinder(FAStar* pVal) { m_areaFinder = pVal; }
 void CvGlobals::setPlotGroupFinder(FAStar* pVal) { m_plotGroupFinder = pVal; }
 CvDLLUtilityIFaceBase* CvGlobals::getDLLIFaceNonInl() { return m_pDLL; }
+
+// Unofficial Patch Start
+// Added global context functions isUnofficialPatch() and getUnofficialPatchVersion() which are exposed to Python.
+bool CvGlobals::isUnofficialPatch() const 
+{
+#ifdef _USE_UNOFFICIALPATCH
+	return true; 
+#else
+	return false;
+#endif
+}
+
+int CvGlobals::getUnofficialPatchVersion() const 
+{ 
+#ifdef _USE_UNOFFICIALPATCH
+	return UP_PATCH_VERSION; 
+#else
+	return 0;
+#endif
+}
+// Unofficial Patch End

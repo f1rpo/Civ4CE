@@ -22,6 +22,7 @@
 #include "CyArgsList.h"
 #include "CvDLLPythonIFaceBase.h"
 #include <set>
+#include "UnofficialPatch.h"
 
 // Public Functions...
 
@@ -101,6 +102,13 @@ bool CvSelectionGroup::sentryAlert() const
 {
 	int iMaxRange = 0;
 	CLLNode<IDInfo>* pUnitNode = headUnitNode();
+	// Unofficial Patch Start
+	// * Groups on sentry now awake based on farthest-seeing unit's vision rather than head unit's vision. [Pep]
+	// To fix this in the simplest way, we are changing pHeadUnit to be the best-seeing unit.
+	// So the variable name is now not really accurate but it will do what it's supposed to.
+#ifdef _USE_UNOFFICIALPATCH
+	CvUnit *pHeadUnit = getHeadUnit();
+#endif
 	while (pUnitNode != NULL)
 	{
 		CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
@@ -111,10 +119,16 @@ bool CvSelectionGroup::sentryAlert() const
 		if (iRange > iMaxRange)
 		{
 			iMaxRange = iRange;
+#ifdef _USE_UNOFFICIALPATCH
+			pHeadUnit = pLoopUnit;
+#endif
+	// Unofficial Patch End
 		}
 	}
 
+#ifndef _USE_UNOFFICIALPATCH
 	CvUnit* pHeadUnit = getHeadUnit();
+#endif
 	if (NULL != pHeadUnit)
 	{
 		for (int iX = -iMaxRange; iX <= iMaxRange; ++iX)
@@ -192,7 +206,26 @@ void CvSelectionGroup::doTurn()
 		{
 			if (getActivityType() == ACTIVITY_MISSION)
 			{
+				// Unofficial Patch Start
+				// * Spies really no longer interrupt their mission when moving next to an enemy unit
+#ifdef _USE_UNOFFICIALPATCH
+				bool bNonSpy = false;
+				for (CLLNode<IDInfo>* pUnitNode = headUnitNode(); pUnitNode != NULL; pUnitNode = nextUnitNode(pUnitNode))
+				{
+					CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
+					// For all invisible units, use !pLoopUnit->alwaysInvisible()
+					if (!pLoopUnit->isSpy())
+					{
+						bNonSpy = true;
+						break;
+					}
+				}
+
+				if (bNonSpy && GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 2) > 0)
+#else
 				if (GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 2) > 0)
+#endif
+				// Unofficial Patch End
 				{
 					clearMissionQueue();
 				}

@@ -13,6 +13,7 @@
 #include "CyArgsList.h"
 #include "CvInfos.h"
 #include "FProfiler.h"
+#include "UnofficialPatch.h"
 
 #include "CvDLLPythonIFaceBase.h"
 #include "CvDLLInterfaceIFaceBase.h"
@@ -4409,7 +4410,14 @@ int CvCityAI::AI_neededDefenders()
 	{
 		if (bOffenseWar)
 		{
-			if (!hasActiveWorldWonder() || isHolyCity())
+		    // Unofficial Patch Start
+		    // * Fixed AI defender bug for newly captured cities.
+#ifdef _USE_UNOFFICIALPATCH
+			if (!hasActiveWorldWonder() && !isHolyCity())
+#else
+			if  (!hasActiveWorldWonder() || isHolyCity())
+#endif
+			// Unofficial Patch End
 			{
 				iDefenders /= 2;
 				iDefenders = std::max(1, iDefenders);
