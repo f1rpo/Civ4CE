@@ -1,6 +1,6 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2006
-## 
+## Modified in v3.01
 ## CvEventManager
 ## This class is passed an argsList from CvAppInterface.onEvent
 ## The argsList can contain anything from mouse location to key info
