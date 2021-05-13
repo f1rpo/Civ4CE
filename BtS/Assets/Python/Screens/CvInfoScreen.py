@@ -1,6 +1,5 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
-# Modified in v3.01
 
 # Thanks to "Ulf 'ulfn' Norell" from Apolyton for his additions relating to the graph section of this screen
 
