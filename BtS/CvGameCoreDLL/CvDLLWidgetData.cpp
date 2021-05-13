@@ -2484,7 +2484,11 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 
 					if (eImprovement != NO_IMPROVEMENT)
 					{
-						iYield = pMissionPlot->calculateImprovementYieldChange(eImprovement, ((YieldTypes)iI), pHeadSelectedUnit->getOwnerINLINE());
+						iYield += pMissionPlot->calculateImprovementYieldChange(eImprovement, ((YieldTypes)iI), pHeadSelectedUnit->getOwnerINLINE());
+						if (pMissionPlot->getImprovementType() != NO_IMPROVEMENT)
+						{
+							iYield -= pMissionPlot->calculateImprovementYieldChange(pMissionPlot->getImprovementType(), ((YieldTypes)iI), pHeadSelectedUnit->getOwnerINLINE());
+						}
 					}
 
 					if (NO_FEATURE != pMissionPlot->getFeatureType())

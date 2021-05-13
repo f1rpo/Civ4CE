@@ -172,11 +172,6 @@ int CyGame::countHumanPlayersAlive()
 	return m_pGame ? m_pGame->countHumanPlayersAlive() : -1;
 }
 
-int CyGame::countHumanPlayersEverAlive()
-{
-	return m_pGame ? m_pGame->countHumanPlayersEverAlive() : -1;
-}
-
 int CyGame::countTotalCivPower()
 {
 	return m_pGame ? m_pGame->countTotalCivPower() : -1;

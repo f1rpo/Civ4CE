@@ -17,7 +17,7 @@ public:
 	virtual ~CvTeam();
 
 	DllExport void init(TeamTypes eID);
-	DllExport void reset(TeamTypes eID = (TeamTypes)0, bool bConstructorCall = false);
+	DllExport void reset(TeamTypes eID = NO_TEAM, bool bConstructorCall = false);
 
 protected:
 
@@ -327,7 +327,7 @@ public:
 	bool hasShrine(ReligionTypes eReligion);
 
 	virtual void AI_init() = 0;
-	virtual void AI_reset() = 0;
+	virtual void AI_reset(bool bConstructor) = 0;
 	virtual void AI_doTurnPre() = 0;
 	virtual void AI_doTurnPost() = 0;
 	virtual void AI_makeAssignWorkDirty() = 0;

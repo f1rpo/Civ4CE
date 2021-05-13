@@ -167,6 +167,7 @@ void CyPlotPythonInterface1(python::class_<CyPlot>& x)
 
 		.def("getOwner", &CyPlot::getOwner, "int ()")
 		.def("setOwner", &CyPlot::setOwner, "void (int /*PlayerTypes*/ eNewValue)")
+		.def("setOwnerNoUnitCheck", &CyPlot::setOwnerNoUnitCheck, "void (int /*PlayerTypes*/ eNewValue)")
 		.def("getPlotType", &CyPlot::getPlotType, "int ()")
 		.def("isWater", &CyPlot::isWater, "bool ()")
 		.def("isFlatlands", &CyPlot::isFlatlands, "bool ()")

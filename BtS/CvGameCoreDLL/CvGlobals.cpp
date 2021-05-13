@@ -1,7 +1,5 @@
 //
 // globals.cpp
-// Author -	Mustafa Thamer
-//					Jon Shafer - 03/2005
 //
 #include "CvGameCoreDLL.h"
 #include "CvGlobals.h"
@@ -3208,16 +3206,6 @@ void CvGlobals::writeDiplomacyInfoArray(FDataStreamBase* pStream)
 	writeInfoArray(pStream, m_paDiplomacyInfo);
 }
 
-bool CvGlobals::readDiploTextInfoArray(FDataStreamBase* pStream)
-{
-	return readInfoArray(pStream, GAMETEXT.m_paDiplomacyTextInfo, "DiplomacyTextInfo");
-}
-
-void CvGlobals::writeDiploTextInfoArray(FDataStreamBase* pStream)
-{
-	writeInfoArray(pStream, GAMETEXT.m_paDiplomacyTextInfo);
-}
-
 bool CvGlobals::readCivicInfoArray(FDataStreamBase* pStream)
 {
 	return readInfoArray(pStream, m_paCivicInfo, "CvCivicInfo");
@@ -3470,8 +3458,6 @@ void CvGlobals::deleteInfoArrays()
 	SAFE_DELETE_ARRAY(GC.getFootstepAudioTypes());
 	SAFE_DELETE_ARRAY(GC.getFootstepAudioTags());
 	deleteInfoArray(m_paQuestInfo);
-	deleteInfoArray(m_paHints);
-	deleteInfoArray(m_paMainMenus);
 	deleteInfoArray(m_paTutorialInfo);
 
 	deleteInfoArray(m_paEventInfo);

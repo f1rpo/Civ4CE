@@ -48,7 +48,6 @@ void CyGamePythonInterface()
 		.def("countCivTeamsAlive", &CyGame::countCivTeamsAlive, "int ()")
 		.def("countCivTeamsEverAlive", &CyGame::countCivTeamsEverAlive, "int ()")
 		.def("countHumanPlayersAlive", &CyGame::countHumanPlayersAlive, "int ()")
-		.def("countHumanPlayersEverAlive", &CyGame::countHumanPlayersEverAlive, "int ()")
 
 		.def("countTotalCivPower", &CyGame::countTotalCivPower, "int ()")
 		.def("countTotalNukeUnits", &CyGame::countTotalNukeUnits, "int ()")

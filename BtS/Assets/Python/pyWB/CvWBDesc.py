@@ -5,7 +5,6 @@
 # Used by WorldBuilder
 #
 # Author -	Mustafa Thamer
-#		Jon Shafer
 #
 
 from CvPythonExtensions import *
@@ -656,6 +655,7 @@ class CvUnitDesc:
 		self.plotX = -1
 		self.plotY = -1
 		self.unitType = None
+		self.szName = None
 		self.leaderUnitType = None
 		self.owner =-1
 		self.damage = 0
@@ -687,6 +687,8 @@ class CvUnitDesc:
 					
 				unit = player.initUnit(unitTypeNum, self.plotX, self.plotY, UnitAITypes(eUnitAI), self.facingDirection)
 			if (unit):
+				if (self.szName != None):
+					unit.setName(self.szName)
 				#leader unit type
 				if(self.leaderUnitType != None):
 					leaderUnitTypeNum = CvUtil.findInfoTypeNum(gc.getUnitInfo, gc.getNumUnitInfos(), self.leaderUnitType)
@@ -734,7 +736,12 @@ class CvUnitDesc:
 				self.unitType = v
 				self.owner = int(vOwner)
 				continue
-				
+
+			v = parser.findTokenValue(toks, "UnitName")
+			if (v != -1):
+				self.szName = v.decode(fileencoding)
+				continue
+
 			v = parser.findTokenValue(toks, "LeaderUnitType")
 			if (v != -1):
 				self.leaderUnitType = v
@@ -798,6 +805,8 @@ class CvUnitDesc:
 		unitOwner= unit.getOwner()
 		f.write("\tBeginUnit\n")
 		f.write("\t\tUnitType=%s, UnitOwner=%d\n" %(unitType,unitOwner))
+		if (len(unit.getNameNoDesc()) > 0):
+			f.write("\t\tUnitName=%s\n" %(unit.getNameNoDesc().encode(fileencoding),))
 		if unit.getLeaderUnitType() != -1:
 			f.write("\t\tLeaderUnitType=%s\n" %(gc.getUnitInfo(unit.getLeaderUnitType()).getType()))
 		f.write("\t\tDamage=%d\n" %(unit.getDamage(),))

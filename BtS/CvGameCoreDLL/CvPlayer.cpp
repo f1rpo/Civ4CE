@@ -291,8 +291,6 @@ void CvPlayer::init(PlayerTypes eID)
 
 void CvPlayer::uninit()
 {
-	int iI;
-
 	SAFE_DELETE_ARRAY(m_paiBonusExport);
 	SAFE_DELETE_ARRAY(m_paiBonusImport);
 	SAFE_DELETE_ARRAY(m_paiImprovementCount);
@@ -322,7 +320,7 @@ void CvPlayer::uninit()
 
 	if (m_ppaaiSpecialistExtraYield != NULL)
 	{
-		for (iI = 0; iI < GC.getNumSpecialistInfos(); iI++)
+		for (int iI = 0; iI < GC.getNumSpecialistInfos(); iI++)
 		{
 			SAFE_DELETE_ARRAY(m_ppaaiSpecialistExtraYield[iI]);
 		}
@@ -331,7 +329,7 @@ void CvPlayer::uninit()
 
 	if (m_ppaaiImprovementYieldChange != NULL)
 	{
-		for (iI = 0; iI < GC.getNumImprovementInfos(); iI++)
+		for (int iI = 0; iI < GC.getNumImprovementInfos(); iI++)
 		{
 			SAFE_DELETE_ARRAY(m_ppaaiImprovementYieldChange[iI]);
 		}
@@ -519,11 +517,26 @@ void CvPlayer::reset(PlayerTypes eID, bool bConstructorCall)
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
 		m_aiGoldPerTurnByPlayer[iI] = 0;
+		if (!bConstructorCall && getID() != NO_PLAYER)
+		{
+			GET_PLAYER((PlayerTypes) iI).m_aiGoldPerTurnByPlayer[getID()] = 0;
+		}
 	}
 
 	for (iI = 0; iI < MAX_TEAMS; iI++)
 	{
 		m_aiEspionageSpendingWeightAgainstTeam[iI] = 0;
+
+		if (!bConstructorCall && getTeam() != NO_TEAM)
+		{
+			for (iJ = 0; iJ < MAX_PLAYERS; iJ++)
+			{
+				if (GET_PLAYER((PlayerTypes) iJ).getTeam() == iI)
+				{
+					GET_PLAYER((PlayerTypes) iJ).setEspionageSpendingWeightAgainstTeam(getTeam(), 0);
+				}
+			}
+		}
 	}
 
 	for (iI = 0; iI < NUM_FEAT_TYPES; iI++)
@@ -714,7 +727,7 @@ void CvPlayer::reset(PlayerTypes eID, bool bConstructorCall)
 
 	if (!bConstructorCall)
 	{
-		AI_reset();
+		AI_reset(false);
 	}
 }
 
@@ -1610,7 +1623,7 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade, bool b
 					}
 				}
 
-				pNewCity->setNumRealBuildingTimed(eBuilding, iNum, false, ((PlayerTypes)(paiBuildingOriginalOwner[iI])), paiBuildingOriginalTime[iI]);
+				pNewCity->setNumRealBuildingTimed(eBuilding, std::min(pNewCity->getNumRealBuilding(eBuilding) + iNum, GC.getCITY_MAX_NUM_BUILDINGS()), false, ((PlayerTypes)(paiBuildingOriginalOwner[iI])), paiBuildingOriginalTime[iI]);
 			}
 		}
 	}
@@ -1699,9 +1712,7 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade, bool b
 		if (lResult == 1)
 		{
 			//auto raze based on game rules
-			if (((pNewCity->getHighestPopulation() == 1) && !GC.getGameINLINE().isOption(GAMEOPTION_NO_CITY_RAZING)) ||
-				((GC.getGameINLINE().getMaxCityElimination() > 0) && !GC.getGameINLINE().isOption(GAMEOPTION_NO_CITY_RAZING)) ||
-				(GC.getGameINLINE().isOption(GAMEOPTION_ONE_CITY_CHALLENGE) && isHuman()))
+			if (pNewCity->isAutoRaze())
 			{
 				if (iCaptureGold > 0)
 				{
@@ -1737,7 +1748,7 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade, bool b
 				else
 				{
 					pNewCity->chooseProduction();
-					gDLL->getEventReporterIFace()->cityAcquiredAndKept(GC.getGameINLINE().getActivePlayer(), pNewCity);
+					gDLL->getEventReporterIFace()->cityAcquiredAndKept(getID(), pNewCity);
 				}
 			}
 		}
@@ -1752,7 +1763,7 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade, bool b
 		}
 		else
 		{
-			gDLL->getEventReporterIFace()->cityAcquiredAndKept(GC.getGameINLINE().getActivePlayer(), pNewCity);
+			gDLL->getEventReporterIFace()->cityAcquiredAndKept(getID(), pNewCity);
 		}
 	}
 
@@ -1760,7 +1771,7 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade, bool b
 	for (CvEventMap::iterator it = m_mapEventsOccured.begin(); it != m_mapEventsOccured.end(); ++it)
 	{
 		EventTriggeredData &triggerData = it->second;
-		if((triggerData.m_eOtherPlayer == pNewCity->getPreviousOwner()) && (triggerData.m_iOtherPlayerCityId == iOldCityId))
+		if((triggerData.m_eOtherPlayer == eOldOwner) && (triggerData.m_iOtherPlayerCityId == iOldCityId))
 		{
 			triggerData.m_iOtherPlayerCityId = -1;
 		}
@@ -2485,7 +2496,7 @@ void CvPlayer::doTurn()
 
 	AI_assignWorkingPlots();
 
-	if (0 == GET_TEAM(getTeam()).getHasMetCivCount(true))
+	if (0 == GET_TEAM(getTeam()).getHasMetCivCount(true) || GC.getGameINLINE().isOption(GAMEOPTION_NO_ESPIONAGE))
 	{
 		setCommercePercent(COMMERCE_ESPIONAGE, 0);
 	}
@@ -3752,7 +3763,7 @@ bool CvPlayer::canReceiveTradeCity() const
 	return true;
 }
 
-bool CvPlayer::canTradeItem(PlayerTypes eWhoTo, TradeData item, bool bTestDenial)
+bool CvPlayer::canTradeItem(PlayerTypes eWhoTo, TradeData item, bool bTestDenial) const
 {
 	CvCity *pOurCapitalCity;
 
@@ -4035,7 +4046,7 @@ bool CvPlayer::canTradeItem(PlayerTypes eWhoTo, TradeData item, bool bTestDenial
 }
 
 
-DenialTypes CvPlayer::getTradeDenial(PlayerTypes eWhoTo, TradeData item)
+DenialTypes CvPlayer::getTradeDenial(PlayerTypes eWhoTo, TradeData item) const
 {
 	CvCity* pCity;
 
@@ -4402,19 +4413,22 @@ int CvPlayer::getNumGovernmentCenters() const
 
 bool CvPlayer::canRaze(CvCity* pCity) const
 {
-	if (GC.getGameINLINE().isOption(GAMEOPTION_NO_CITY_RAZING))
+	if (!pCity->isAutoRaze())
 	{
-		return false;
-	}
+		if (GC.getGameINLINE().isOption(GAMEOPTION_NO_CITY_RAZING))
+		{
+			return false;
+		}
 
-	if (pCity->getOwnerINLINE() != getID())
-	{
-		return false;
-	}
+		if (pCity->getOwnerINLINE() != getID())
+		{
+			return false;
+		}
 
-	if (pCity->calculateTeamCulturePercent(getTeam()) >= GC.getDefineINT("RAZING_CULTURAL_PERCENT_THRESHOLD"))
-	{
-		return false;
+		if (pCity->calculateTeamCulturePercent(getTeam()) >= GC.getDefineINT("RAZING_CULTURAL_PERCENT_THRESHOLD"))
+		{
+			return false;
+		}
 	}
 
 	CyCity* pyCity = new CyCity(pCity);
@@ -4649,6 +4663,7 @@ void CvPlayer::receiveGoody(CvPlot* pPlot, GoodyTypes eGoody, CvUnit* pUnit)
 	szBuffer = GC.getGoodyInfo(eGoody).getDescription();
 
 	iGold = GC.getGoodyInfo(eGoody).getGold() + GC.getGameINLINE().getSorenRandNum(GC.getGoodyInfo(eGoody).getGoldRand1(), "Goody Gold 1") + GC.getGameINLINE().getSorenRandNum(GC.getGoodyInfo(eGoody).getGoldRand2(), "Goody Gold 2");
+	iGold  = (iGold * GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getGrowthPercent()) / 100;
 
 	if (iGold != 0)
 	{
@@ -5122,6 +5137,14 @@ bool CvPlayer::canTrain(UnitTypes eUnit, bool bContinue, bool bTestVisible, bool
 	if (GC.getGameINLINE().isOption(GAMEOPTION_ONE_CITY_CHALLENGE) && isHuman())
 	{
 		if (GC.getUnitInfo(eUnit).isFound())
+		{
+			return false;
+		}
+	}
+
+	if (GC.getGameINLINE().isOption(GAMEOPTION_NO_ESPIONAGE))
+	{
+		if (GC.getUnitInfo(eUnit).isSpy() || GC.getUnitInfo(eUnit).getEspionagePoints() > 0)
 		{
 			return false;
 		}
@@ -10455,7 +10478,21 @@ int CvPlayer::getCommerceRate(CommerceTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex is expected to be non-negative (invalid Index)");
 	FAssertMsg(eIndex < NUM_COMMERCE_TYPES, "eIndex is expected to be within maximum bounds (invalid Index)");
-	return m_aiCommerceRate[eIndex] / 100;  
+
+	int iRate = m_aiCommerceRate[eIndex];
+	if (GC.getGameINLINE().isOption(GAMEOPTION_NO_ESPIONAGE))
+	{
+		if (eIndex == COMMERCE_CULTURE)
+		{
+			iRate += m_aiCommerceRate[COMMERCE_ESPIONAGE];
+		}
+		else if (eIndex == COMMERCE_ESPIONAGE)
+		{
+			iRate = 0;
+		}
+	}
+
+	return iRate / 100;  
 }
 
 
@@ -10597,9 +10634,12 @@ bool CvPlayer::isCommerceFlexible(CommerceTypes eIndex) const
 		return false;
 	}
 
-	if (eIndex == COMMERCE_ESPIONAGE && 0 == GET_TEAM(getTeam()).getHasMetCivCount(true))
+	if (eIndex == COMMERCE_ESPIONAGE)
 	{
-		return false;
+		if (0 == GET_TEAM(getTeam()).getHasMetCivCount(true) || GC.getGameINLINE().isOption(GAMEOPTION_NO_ESPIONAGE))
+		{
+			return false;
+		}
 	}
 
 	return (GC.getCommerceInfo(eIndex).isFlexiblePercent() || (getCommerceFlexibleCount(eIndex) > 0) || GET_TEAM(getTeam()).isCommerceFlexible(eIndex));
@@ -11202,7 +11242,7 @@ bool CvPlayer::isActiveCorporation(CorporationTypes eIndex) const
 		return false;
 	}
 
-	if (isNoForeignCorporations() && !hasHeadquarters(eIndex) && GC.getGameINLINE().getHeadquarters(eIndex))
+	if (isNoForeignCorporations() && !hasHeadquarters(eIndex))
 	{
 		return false;
 	}
@@ -12383,44 +12423,6 @@ void CvPlayer::clearSpaceShipPopups()
 	}
 }
 
-void CvPlayer::cheatSpaceShipParts()
-{
-	//add one space project that is still available
-	CvTeam &team = GET_TEAM(getTeam());
-	for(int i=0;i<GC.getNumProjectInfos();i++)
-	{
-		ProjectTypes projectType = (ProjectTypes) i;
-		CvProjectInfo &projectInfo = GC.getProjectInfo(projectType);
-		if(projectInfo.isSpaceship())
-		{
-			//cheat required projects
-			for(int j=0;j<GC.getNumProjectInfos();j++)
-			{
-				ProjectTypes requiredProject = (ProjectTypes) j;
-				int requiredProjects = projectInfo.getProjectsNeeded(requiredProject);
-				while(team.getProjectCount(requiredProject) < requiredProjects)
-					team.changeProjectCount(requiredProject, 1);
-			}
-
-			//cheat required techs
-			TechTypes requiredTech = (TechTypes) projectInfo.getTechPrereq();
-			if(!team.isHasTech(requiredTech))
-				team.setHasTech(requiredTech, true, getID(), true, true);
-
-			//cheat one space component
-			int maxAllowed = projectInfo.getMaxTeamInstances();
-			if(team.getProjectCount(projectType) < maxAllowed)
-			{
-				team.changeProjectCount(projectType, 1);
-
-				CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_PYTHON_SCREEN, projectType);
-				pInfo->setText(L"showSpaceShip");
-				gDLL->getInterfaceIFace()->addPopup(pInfo, getID());
-			}
-		}
-	}
-}
-
 int CvPlayer::getScoreHistory(int iTurn) const
 {
 	CvTurnScoreMap::const_iterator it = m_mapScoreHistory.find(iTurn);
@@ -13576,12 +13578,23 @@ bool CvPlayer::doEspionageMission(EspionageMissionTypes eMission, PlayerTypes eT
 
 			if (NULL != pCity)
 			{
+				szBuffer = gDLL->getText("TXT_KEY_ESPIONAGE_TARGET_CITY_CULTURE_INSERTED", pCity->getNameKey()).GetCString();				
+
 				int iCultureAmount = kMission.getCityInsertCultureAmountFactor() * pCity->countTotalCultureTimes100();
 				iCultureAmount /= 10000;
 				iCultureAmount = std::max(1, iCultureAmount);
 
-				szBuffer = gDLL->getText("TXT_KEY_ESPIONAGE_TARGET_CITY_CULTURE_INSERTED", pCity->getNameKey()).GetCString();				
-				pCity->changeCulture(getID(), iCultureAmount, true, true);
+				int iNumTurnsApplied = (GC.getDefineINT("GREAT_WORKS_CULTURE_TURNS") * GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getUnitGreatWorkPercent()) / 100;
+
+				for (int i = 0; i < iNumTurnsApplied; ++i)
+				{
+					pCity->changeCultureTimes100(getID(), iCultureAmount / iNumTurnsApplied, true, true);
+				}
+
+				if (iNumTurnsApplied > 0)
+				{
+					pCity->changeCultureTimes100(getID(), iCultureAmount % iNumTurnsApplied, false, true);
+				}
 
 				bSomethingHappened = true;
 			}
@@ -14054,7 +14067,7 @@ void CvPlayer::doAdvancedStartAction(AdvancedStartActionTypes eAction, int iX, i
 				if (getAdvancedStartPoints() >= iCost || 0 == getNumCities())
 				{
 					found(iX, iY);
-					changeAdvancedStartPoints(-iCost);
+					changeAdvancedStartPoints(-std::min(iCost, getAdvancedStartPoints()));
 					GC.getGameINLINE().updateColoredPlots();
 					CvCity* pCity = pPlot->getPlotCity();
 					if (pCity != NULL)
@@ -14098,30 +14111,35 @@ void CvPlayer::doAdvancedStartAction(AdvancedStartActionTypes eAction, int iX, i
 					return;
 				}
 
-				// Add Pop to the City
+				bool bPopChanged = false;
 				if (bAdd)
 				{
 					if (getAdvancedStartPoints() >= iCost)
 					{
 						pCity->changePopulation(1);
 						changeAdvancedStartPoints(-iCost);
-						if (pCity->getPopulation() > 1)
-						{
-							pCity->setFood(pCity->growthThreshold() / 2);
-							pCity->setFoodKept((pCity->getFood() * pCity->getMaxFoodKeptPercent()) / 100);
-						}
+						bPopChanged = true;
 					}
 				}
-
-				// Remove Pop from the city
 				else
 				{
 					pCity->changePopulation(-1);
 					changeAdvancedStartPoints(iCost);
+					bPopChanged = true;
+				}
+
+				if (bPopChanged)
+				{
+					pCity->setHighestPopulation(pCity->getPopulation());
 					if (pCity->getPopulation() == 1)
 					{
 						pCity->setFood(0);
 						pCity->setFoodKept(0);
+					}
+					else if (pCity->getPopulation() > 1)
+					{
+						pCity->setFood(pCity->growthThreshold() / 2);
+						pCity->setFoodKept((pCity->getFood() * pCity->getMaxFoodKeptPercent()) / 100);
 					}
 				}
 			}
@@ -14944,7 +14962,7 @@ int CvPlayer::getAdvancedStartRouteCost(RouteTypes eRoute, bool bAdd, CvPlot* pP
 		}
 
 		// Must be owned by me
-		if (pPlot->getOwner() != getID())
+		if (pPlot->getOwnerINLINE() != getID())
 		{
 			return -1;
 		}
@@ -15074,7 +15092,7 @@ int CvPlayer::getAdvancedStartImprovementCost(ImprovementTypes eImprovement, boo
 		}
 
 		// Must be owned by me
-		if (pPlot->getOwner() != getID())
+		if (pPlot->getOwnerINLINE() != getID())
 		{
 			return -1;
 		}
@@ -16452,7 +16470,7 @@ void CvPlayer::createGreatPeople(UnitTypes eGreatPersonUnit, bool bIncrementThre
 		{
 			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getTeam())
 			{
-				GET_PLAYER((PlayerTypes)iI).changeGreatGeneralsThresholdModifier(GC.getDefineINT("GREAT_GENERALS_THRESHOLD_INCREASE_TEAM") * ((getGreatPeopleCreated() / 10) + 1));
+				GET_PLAYER((PlayerTypes)iI).changeGreatGeneralsThresholdModifier(GC.getDefineINT("GREAT_GENERALS_THRESHOLD_INCREASE_TEAM") * ((getGreatGeneralsCreated() / 10) + 1));
 			}
 		}
 	}
@@ -17706,6 +17724,10 @@ void CvPlayer::applyEvent(EventTypes eEvent, int iEventTriggeredId, bool bUpdate
 						}
 					}
 				}
+				else
+				{
+					resetEventOccured((EventTypes)iEvent, false);
+				}
 			}
 		}
 	}
@@ -18456,7 +18478,7 @@ void CvPlayer::doEvents()
 	for (int i = 0; i < GC.getNumEventTriggerInfos(); ++i)
 	{
 		int iWeight = getEventTriggerWeight((EventTriggerTypes)i);
-		if (iWeight < 0)
+		if (iWeight == -1)
 		{
 			trigger((EventTriggerTypes)i);
 		}
@@ -18792,23 +18814,20 @@ CvCity* CvPlayer::pickTriggerCity(EventTriggerTypes eTrigger) const
 	for (CvCity* pLoopCity = firstCity(&iLoop); pLoopCity != NULL; pLoopCity = nextCity(&iLoop))
 	{
 		int iValue = pLoopCity->getTriggerValue(eTrigger);
-		if (iValue > iBestValue)
+
+		if (iValue >= iBestValue && iValue != MIN_INT)
 		{
-			if (NULL != pCity)
+			if (iValue > iBestValue)
 			{
-				apCities.push_back(pCity);
+				apCities.clear();
+				iBestValue = iValue;
 			}
 
-			iBestValue = iValue;
-			pCity = pLoopCity;
-		}
-		else if (MIN_INT != iValue)
-		{
 			apCities.push_back(pLoopCity);
 		}
 	}
 
-	if (NULL == pCity && apCities.size() > 0)
+	if (apCities.size() > 0)
 	{
 		int iChosen = GC.getGameINLINE().getSorenRandNum(apCities.size(), "Event pick city");
 		pCity = apCities[iChosen];
@@ -18827,23 +18846,19 @@ CvUnit* CvPlayer::pickTriggerUnit(EventTriggerTypes eTrigger, CvPlot* pPlot, boo
 	{
 		int iValue = pLoopUnit->getTriggerValue(eTrigger, pPlot, bPickPlot);
 
-		if (iValue > iBestValue)
+		if (iValue >= iBestValue && iValue != MIN_INT)
 		{
-			if (NULL != pUnit)
+			if (iValue > iBestValue)
 			{
-				apUnits.push_back(pUnit);
+				apUnits.clear();
+				iBestValue = iValue;
 			}
 
-			iBestValue = iValue;
-			pUnit = pLoopUnit;
-		}
-		else if (MIN_INT != iValue)
-		{
-			apUnits.push_back(pLoopUnit);
+			apUnits.push_back(pUnit);
 		}
 	}
 
-	if (NULL == pUnit && apUnits.size() > 0)
+	if (apUnits.size() > 0)
 	{
 		int iChosen = GC.getGameINLINE().getSorenRandNum(apUnits.size(), "Event pick unit");
 		pUnit = apUnits[iChosen];
@@ -19069,12 +19084,27 @@ PlayerTypes CvPlayer::getSplitEmpirePlayer(int iAreaId) const
 	}
 
 	PlayerTypes eNewPlayer = NO_PLAYER;
+
+	// Try to find a player who's never been in the game before
 	for (int i = 0; i < MAX_CIV_PLAYERS; ++i)
 	{
 		if (!GET_PLAYER((PlayerTypes)i).isEverAlive())
 		{
 			eNewPlayer = (PlayerTypes)i;
 			break;
+		}
+	}
+
+	if (eNewPlayer == NO_PLAYER)
+	{
+		// Try to recycle a dead player
+		for (int i = 0; i < MAX_CIV_PLAYERS; ++i)
+		{
+			if (!GET_PLAYER((PlayerTypes)i).isAlive())
+			{
+				eNewPlayer = (PlayerTypes)i;
+				break;
+			}
 		}
 	}
 
@@ -19248,7 +19278,7 @@ bool CvPlayer::splitEmpire(int iAreaId)
 		return false;
 	}
 
-	bool bPlayerExists = GET_PLAYER(eNewPlayer).isAlive();
+	bool bPlayerExists = GET_TEAM(GET_PLAYER(eNewPlayer).getTeam()).isAlive();
 	FAssert(!bPlayerExists);
 	if (!bPlayerExists)
 	{
@@ -19288,7 +19318,7 @@ bool CvPlayer::splitEmpire(int iAreaId)
 		{
 			if (GET_PLAYER((PlayerTypes)i).isAlive())
 			{
-				if (i == getID() || i == eNewPlayer || GET_TEAM(GET_PLAYER((PlayerTypes)i).getTeam()).isHasMet(GET_PLAYER((PlayerTypes)getID()).getTeam()))
+				if (i == getID() || i == eNewPlayer || GET_TEAM(GET_PLAYER((PlayerTypes)i).getTeam()).isHasMet(getTeam()))
 				{
 					gDLL->getInterfaceIFace()->addMessage((PlayerTypes)i, false, GC.getEVENT_MESSAGE_TIME(), szMessage, "AS2D_REVOLTEND", MESSAGE_TYPE_MAJOR_EVENT, ARTFILEMGR.getInterfaceArtInfo("INTERFACE_CITY_BAR_CAPITAL_TEXTURE")->getPath());
 				}
@@ -19296,16 +19326,27 @@ bool CvPlayer::splitEmpire(int iAreaId)
 		}
 		GC.getGameINLINE().addReplayMessage(REPLAY_MESSAGE_MAJOR_EVENT, getID(), szMessage, -1, -1, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
 
+		// remove leftover culture from old recycled player
+		for (int iPlot = 0; iPlot < GC.getMapINLINE().numPlotsINLINE(); ++iPlot)
+		{
+			CvPlot* pLoopPlot = GC.getMapINLINE().plotByIndexINLINE(iPlot);
+
+			pLoopPlot->setCulture(eNewPlayer, 0, false, false);
+		}
+
 		GC.getGameINLINE().addPlayer(eNewPlayer, eBestLeader, eBestCiv);
 		GET_PLAYER(eNewPlayer).setParent(getID());
 
 		CvTeam& kNewTeam = GET_TEAM(GET_PLAYER(eNewPlayer).getTeam());
 		for (int i = 0; i < GC.getNumTechInfos(); ++i)
 		{
-			kNewTeam.setHasTech((TechTypes)i, GET_TEAM(getTeam()).isHasTech((TechTypes)i), eNewPlayer, false, false);
-			if (GET_TEAM(getTeam()).isNoTradeTech((TechTypes)i))
+			if (GET_TEAM(getTeam()).isHasTech((TechTypes)i))
 			{
-				kNewTeam.setNoTradeTech((TechTypes)i, true);
+				kNewTeam.setHasTech((TechTypes)i, true, eNewPlayer, false, false);
+				if (GET_TEAM(getTeam()).isNoTradeTech((TechTypes)i) || GC.getGameINLINE().isOption(GAMEOPTION_NO_TECH_BROKERING))
+				{
+					kNewTeam.setNoTradeTech((TechTypes)i, true);
+				}
 			}
 		}
 
@@ -20411,5 +20452,507 @@ void CvPlayer::verifyUnitStacksValid()
 	for(CvUnit* pLoopUnit = firstUnit(&iLoop); pLoopUnit != NULL; pLoopUnit = nextUnit(&iLoop))
 	{
 		pLoopUnit->verifyStackValid();
+	}
+}
+
+void CvPlayer::buildTradeTable(PlayerTypes eOtherPlayer, CLinkList<TradeData>& ourList) const
+{
+	TradeData item;
+	int iLoop;
+
+	//	Put the gold and maps into the table
+	setTradeItem(&item, TRADE_GOLD);
+	if (canTradeItem(eOtherPlayer, item))
+	{
+		ourList.insertAtEnd(item);
+	}
+
+	//	Gold per turn
+	setTradeItem(&item, TRADE_GOLD_PER_TURN);
+	if (canTradeItem(eOtherPlayer, item))
+	{
+		ourList.insertAtEnd(item);
+	}
+
+	//	Maps
+	setTradeItem(&item, TRADE_MAPS, 0);
+	if (canTradeItem(eOtherPlayer, item))
+	{
+		ourList.insertAtEnd(item);
+	}
+
+	//	Vassal
+	setTradeItem(&item, TRADE_VASSAL, 0);
+	if (canTradeItem(eOtherPlayer, item))
+	{
+		ourList.insertAtEnd(item);
+	}
+
+	//	Open Borders
+	setTradeItem(&item, TRADE_OPEN_BORDERS);
+	if (canTradeItem(eOtherPlayer, item))
+	{
+		ourList.insertAtEnd(item);
+	}
+
+	//	Defensive Pact
+	setTradeItem(&item, TRADE_DEFENSIVE_PACT);
+	if (canTradeItem(eOtherPlayer, item))
+	{
+		ourList.insertAtEnd(item);
+	}
+
+	//	Permanent Alliance
+	setTradeItem(&item, TRADE_PERMANENT_ALLIANCE);
+	if (canTradeItem(eOtherPlayer, item))
+	{
+		ourList.insertAtEnd(item);
+	}
+
+	if (::atWar(getTeam(), GET_PLAYER(eOtherPlayer).getTeam()))
+	{
+		//	We are at war, allow a peace treaty option
+		setTradeItem(&item, TRADE_PEACE_TREATY);
+		ourList.insertAtEnd(item);
+
+		//	Capitulation
+		setTradeItem(&item, TRADE_SURRENDER, 0);
+		if (canTradeItem(eOtherPlayer, item))
+		{
+			ourList.insertAtEnd(item);
+		}
+	}
+
+	//	Initial build of the inventory lists and buttons.
+	//	Go through all the possible headings
+	for (int i = NUM_BASIC_ITEMS; i < NUM_TRADEABLE_HEADINGS; i++)
+	{
+		bool bFoundItemUs = false;
+
+		//	Build what we need to build for this item
+		switch (i)
+		{
+		case TRADE_TECHNOLOGIES:
+			for (int j = 0; j < GC.getNumTechInfos(); j++)
+			{
+				setTradeItem(&item, TRADE_TECHNOLOGIES, j);
+				if (canTradeItem(eOtherPlayer, item))
+				{
+					bFoundItemUs = true;
+					ourList.insertAtEnd(item);
+				}
+			}
+			break;
+
+		case TRADE_RESOURCES:
+			for (int j = 0; j < GC.getNumBonusInfos(); j++)
+			{
+				setTradeItem(&item, TRADE_RESOURCES, j);
+				if (canTradeItem(eOtherPlayer, item))
+				{
+					bFoundItemUs = true;
+					ourList.insertAtEnd(item);
+				}
+			}
+			break;
+
+		case TRADE_CITIES:
+			for (CvCity* pLoopCity = firstCity(&iLoop); pLoopCity != NULL; pLoopCity = nextCity(&iLoop))
+			{
+				setTradeItem(&item, TRADE_CITIES, pLoopCity->getID());
+				if (canTradeItem(eOtherPlayer, item))
+				{
+					bFoundItemUs = true;
+					ourList.insertAtEnd(item);
+				}
+			}
+			break;
+
+		case TRADE_PEACE:
+			if (!isHuman())
+			{
+				for (int j = 0; j < MAX_CIV_TEAMS; j++)
+				{
+					if (GET_TEAM((TeamTypes)j).isAlive())
+					{
+						if (j != getTeam() && j != GET_PLAYER(eOtherPlayer).getTeam())
+						{
+							setTradeItem(&item, TRADE_PEACE, j);
+							if (canTradeItem(eOtherPlayer, item))
+							{
+								ourList.insertAtEnd(item);
+								bFoundItemUs = true;
+							}
+						}
+					}
+				}
+			}
+			break;
+
+		case TRADE_WAR:
+			if (!isHuman())
+			{
+				for (int j = 0; j < MAX_CIV_TEAMS; j++)
+				{
+					if (GET_TEAM((TeamTypes)j).isAlive())
+					{
+						if (j != getTeam() && j != GET_PLAYER(eOtherPlayer).getTeam())
+						{
+							setTradeItem(&item, TRADE_WAR, j);
+							if (canTradeItem(eOtherPlayer, item))
+							{
+								ourList.insertAtEnd(item);
+								bFoundItemUs = true;
+							}
+						}
+					}
+				}
+			}
+			break;
+
+		case TRADE_EMBARGO:
+			if (!isHuman())
+			{
+				for (int j = 0; j < MAX_CIV_TEAMS; j++)
+				{
+					if (GET_TEAM((TeamTypes)j).isAlive())
+					{
+						if (j != getTeam() && j != GET_PLAYER(eOtherPlayer).getTeam())
+						{
+							setTradeItem(&item, TRADE_EMBARGO, j);
+							if (canTradeItem(eOtherPlayer, item))
+							{
+								ourList.insertAtEnd(item);
+								bFoundItemUs = true;
+							}
+						}
+					}
+				}
+			}
+			break;
+
+		case TRADE_CIVIC:
+			for (int j = 0; j < GC.getNumCivicInfos(); j++)
+			{
+				setTradeItem(&item, TRADE_CIVIC, j);
+				if (canTradeItem(eOtherPlayer, item))
+				{
+					bFoundItemUs = true;
+					ourList.insertAtEnd(item);
+				}
+			}
+			break;
+
+		case TRADE_RELIGION:
+			for (int j = 0; j < GC.getNumReligionInfos(); j++)
+			{
+				setTradeItem(&item, TRADE_RELIGION, j);
+				if (canTradeItem(eOtherPlayer, item))
+				{
+					bFoundItemUs = true;
+					ourList.insertAtEnd(item);
+				}
+			}
+			break;
+		}
+	}
+}
+
+bool CvPlayer::getHeadingTradeString(PlayerTypes eOtherPlayer, TradeableItems eItem, CvWString& szString, CvString& szIcon) const
+{
+	szIcon.clear();
+
+	switch ( eItem )
+	{
+	case TRADE_TECHNOLOGIES:
+		szString = gDLL->getText("TXT_KEY_CONCEPT_TECHNOLOGY");
+		break;
+
+	case TRADE_RESOURCES:
+		szString = gDLL->getText("TXT_KEY_TRADE_RESOURCES");
+		break;
+
+	case TRADE_CITIES:
+		szString = gDLL->getText("TXT_KEY_TRADE_CITIES");
+		break;
+
+	case TRADE_PEACE:
+		szString = gDLL->getText("TXT_KEY_TRADE_MAKE_PEACE_WITH");
+		break;
+
+	case TRADE_WAR:
+		szString = gDLL->getText("TXT_KEY_TRADE_DECLARE_WAR_ON");
+		break;
+
+	case TRADE_EMBARGO:
+		szString = gDLL->getText("TXT_KEY_TRADE_STOP_TRADING_WITH");
+		break;
+
+	case TRADE_CIVIC:
+		szString = gDLL->getText("TXT_KEY_TRADE_ADOPT");
+		break;
+
+	case TRADE_RELIGION:
+		szString = gDLL->getText("TXT_KEY_TRADE_CONVERT");
+		break;
+	default:
+		szString.clear();
+		return false;
+		break;
+	}
+
+	return true;
+}
+
+
+bool CvPlayer::getItemTradeString(PlayerTypes eOtherPlayer, bool bOffer, bool bShowingCurrent, const TradeData& zTradeData, CvWString& szString, CvString& szIcon) const
+{
+	szIcon.clear();
+
+	switch (zTradeData.m_eItemType)
+	{
+	case TRADE_GOLD:
+		if (bOffer)
+		{
+			szString = gDLL->getText("TXT_KEY_TRADE_GOLD_NUM", zTradeData.m_iData);
+		}
+		else
+		{
+			szString = gDLL->getText("TXT_KEY_TRADE_GOLD_NUM", AI_maxGoldTrade(eOtherPlayer));
+		}
+		break;
+	case TRADE_GOLD_PER_TURN:
+		if (bOffer)
+		{
+			szString = gDLL->getText("TXT_KEY_TRADE_GOLD_PER_TURN_NUM", zTradeData.m_iData);
+		}
+		else
+		{
+			szString = gDLL->getText("TXT_KEY_TRADE_GOLD_PER_TURN_NUM", AI_maxGoldPerTurnTrade(eOtherPlayer));
+		}
+		break;
+	case TRADE_MAPS:
+		szString = gDLL->getText("TXT_KEY_TRADE_WORLD_MAP_STRING");
+		break;
+	case TRADE_VASSAL:
+		szString = gDLL->getText("TXT_KEY_TRADE_VASSAL_STRING");
+		break;
+	case TRADE_SURRENDER:
+		szString = gDLL->getText("TXT_KEY_TRADE_CAPITULATE_STRING");
+		break;
+	case TRADE_OPEN_BORDERS:
+		szString = gDLL->getText("TXT_KEY_TRADE_OPEN_BORDERS_STRING");
+		break;
+	case TRADE_DEFENSIVE_PACT:
+		szString = gDLL->getText("TXT_KEY_TRADE_DEFENSIVE_PACT_STRING");
+		break;
+	case TRADE_PERMANENT_ALLIANCE:
+		szString = gDLL->getText("TXT_KEY_TRADE_PERMANENT_ALLIANCE_STRING");
+		break;
+	case TRADE_PEACE_TREATY:
+		szString = gDLL->getText("TXT_KEY_TRADE_PEACE_TREATY_STRING", GC.getDefineINT("PEACE_TREATY_LENGTH"));
+		break;
+	case TRADE_TECHNOLOGIES:
+		szString = GC.getTechInfo((TechTypes)zTradeData.m_iData).getDescription();
+		szIcon = GC.getTechInfo((TechTypes)zTradeData.m_iData).getButton();
+		break;
+	case TRADE_RESOURCES:
+		if (bOffer)
+		{
+			int iNumResources = GET_PLAYER(eOtherPlayer).getNumTradeableBonuses((BonusTypes)zTradeData.m_iData);
+			if (bShowingCurrent)
+			{
+				++iNumResources;
+			}
+			szString = gDLL->getText("TXT_KEY_TRADE_RESOURCE", GC.getBonusInfo((BonusTypes)zTradeData.m_iData).getDescription(), iNumResources);
+
+		}
+		else
+		{
+			szString.Format( L"%s (%d)", GC.getBonusInfo((BonusTypes)zTradeData.m_iData).getDescription(), getNumTradeableBonuses((BonusTypes)zTradeData.m_iData));
+		}
+		szIcon = GC.getBonusInfo((BonusTypes)zTradeData.m_iData).getButton();
+		break;
+	case TRADE_CITIES:
+		{
+			CvCity* pCity = NULL;
+			if (bOffer)
+			{
+				pCity = GET_PLAYER(eOtherPlayer).getCity(zTradeData.m_iData);
+			}
+			else
+			{
+				pCity = getCity(zTradeData.m_iData);
+			}
+			if (NULL != pCity)
+			{
+				if (pCity->getLiberationPlayer(false) == eOtherPlayer)
+				{
+					szString.Format(L"%s (%s)", pCity->getName().GetCString(), gDLL->getText("TXT_KEY_LIBERATE_CITY").GetCString());
+				}
+				else
+				{
+					szString = gDLL->getText("TXT_KEY_CITY_OF", pCity->getNameKey());
+				}
+			}
+		}
+		break;
+	case TRADE_PEACE:
+		if (bOffer)
+		{
+			szString = gDLL->getText("TXT_KEY_TRADE_PEACE_WITH");
+			szString += GET_TEAM((TeamTypes)zTradeData.m_iData).getName();
+		}
+		else
+		{
+			szString = GET_TEAM((TeamTypes)zTradeData.m_iData).getName();
+		}
+		break;
+	case TRADE_WAR:
+		if (bOffer)
+		{
+			szString = gDLL->getText("TXT_KEY_TRADE_WAR_WITH");
+			szString += GET_TEAM((TeamTypes)zTradeData.m_iData).getName();
+		}
+		else
+		{
+			szString = GET_TEAM((TeamTypes)zTradeData.m_iData).getName();
+		}
+		break;
+	case TRADE_EMBARGO:
+		if (bOffer)
+		{
+			szString = gDLL->getText("TXT_KEY_TRADE_STOP_TRADING_WITH");
+			szString += L" " + GET_TEAM((TeamTypes)zTradeData.m_iData).getName();
+		}
+		else
+		{
+			szString = GET_TEAM((TeamTypes)zTradeData.m_iData).getName();
+		}
+		break;
+	case TRADE_CIVIC:
+		if (bOffer)
+		{
+			szString = gDLL->getText("TXT_KEY_TRADE_ADOPT");
+			szString += GC.getCivicInfo((CivicTypes)zTradeData.m_iData).getDescription();
+		}
+		else
+		{
+			szString = GC.getCivicInfo((CivicTypes)zTradeData.m_iData).getDescription();
+		}
+		szIcon = GC.getCivicInfo((CivicTypes)zTradeData.m_iData).getButton();
+		break;
+	case TRADE_RELIGION:
+		if (bOffer)
+		{
+			szString = gDLL->getText("TXT_KEY_TRADE_CONVERT");
+			szString += GC.getReligionInfo((ReligionTypes)zTradeData.m_iData).getDescription();
+		}
+		else
+		{
+			szString = GC.getReligionInfo((ReligionTypes)zTradeData.m_iData).getDescription();
+		}
+		szIcon = GC.getReligionInfo((ReligionTypes)zTradeData.m_iData).getButton();
+		break;
+	default:
+		szString.clear();
+		return false;
+	}
+
+	return true;
+}
+
+void CvPlayer::updateTradeList(PlayerTypes eOtherPlayer, CLinkList<TradeData>& ourInventory, const CLinkList<TradeData>& ourOffer, const CLinkList<TradeData>& theirOffer) const
+{
+	for (CLLNode<TradeData>* pNode = ourInventory.head(); pNode != NULL; pNode = ourInventory.next(pNode))
+	{
+		pNode->m_data.m_bHidden = false;
+
+		// Don't show peace treaties when not at war
+		if (!::atWar(getTeam(), GET_PLAYER(eOtherPlayer).getTeam()))
+		{
+			if (pNode->m_data.m_eItemType == TRADE_PEACE_TREATY || pNode->m_data.m_eItemType == TRADE_SURRENDER)
+			{
+				pNode->m_data.m_bHidden = true;
+			}
+		}
+
+		// Don't show technologies with no tech trading game option 
+		if (GC.getGame().isOption(GAMEOPTION_NO_TECH_TRADING) && pNode->m_data.m_eItemType == TRADE_TECHNOLOGIES)
+		{
+			pNode->m_data.m_bHidden = true;
+		}
+	}
+
+	for (CLLNode<TradeData>* pNode = ourInventory.head(); pNode != NULL; pNode = ourInventory.next(pNode))
+	{
+		switch (pNode->m_data.m_eItemType)
+		{
+		case TRADE_PEACE_TREATY:
+			for (CLLNode<TradeData>* pOfferNode = ourOffer.head(); pOfferNode != NULL; pOfferNode = ourOffer.next(pOfferNode))
+			{
+				// Don't show vassal deals if peace treaty is already on the table
+				if (CvDeal::isVassal(pOfferNode->m_data.m_eItemType))
+				{
+					pNode->m_data.m_bHidden = true;
+					break;
+				}
+			}
+			break;
+		case TRADE_VASSAL:
+		case TRADE_SURRENDER:
+			for (CLLNode<TradeData>* pOfferNode = theirOffer.head(); pOfferNode != NULL; pOfferNode = theirOffer.next(pOfferNode))
+			{
+				// Don't show vassal deals if another type of vassal deal is on the table
+				if (CvDeal::isVassal(pOfferNode->m_data.m_eItemType))
+				{
+					pNode->m_data.m_bHidden = true;
+					break;
+				}
+			}
+
+			if (!pNode->m_data.m_bHidden)
+			{
+				for (CLLNode<TradeData>* pOfferNode = ourOffer.head(); pOfferNode != NULL; pOfferNode = ourOffer.next(pOfferNode))
+				{
+					// Don't show peace deals if the other player is offering to be a vassal
+					if (CvDeal::isEndWar(pOfferNode->m_data.m_eItemType))
+					{
+						pNode->m_data.m_bHidden = true;
+						break;
+					}
+				}
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	if (!isHuman() || !GET_PLAYER(eOtherPlayer).isHuman())  // everything allowed in human-human trades
+	{
+		CLLNode<TradeData>* pFirstOffer = ourOffer.head();
+		if (pFirstOffer == NULL)
+		{
+			pFirstOffer = theirOffer.head();
+		}
+
+		if (pFirstOffer != NULL)
+		{
+			if (!CvDeal::isEndWar(pFirstOffer->m_data.m_eItemType) || !::atWar(getTeam(), GET_PLAYER(eOtherPlayer).getTeam()))
+			{
+				for (CLLNode<TradeData>* pNode = ourInventory.head(); pNode != NULL; pNode = ourInventory.next(pNode))
+				{
+					if (pFirstOffer->m_data.m_eItemType == TRADE_CITIES || pNode->m_data.m_eItemType == TRADE_CITIES)
+					{
+						pNode->m_data.m_bHidden = true;
+					}
+					else if (CvDeal::isAnnual(pFirstOffer->m_data.m_eItemType) != CvDeal::isAnnual(pNode->m_data.m_eItemType))
+					{
+						pNode->m_data.m_bHidden = true;
+					}
+				}
+			}
+		}
 	}
 }

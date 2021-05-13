@@ -60,7 +60,7 @@ public:
 	DllExport void testExtendedGame();
 
 	DllExport CvUnit* getPlotUnit(const CvPlot* pPlot, int iIndex);
-	DllExport void getPlotUnits(const CvPlot *pPlot, std::vector<CvUnit *> &plotUnits);
+	DllExport void getPlotUnits(const CvPlot *pPlot, std::vector<CvUnit*>& plotUnits);
 
 	DllExport void cycleCities(bool bForward = true, bool bAdd = false);																				// Exposed to Python
 	DllExport void cycleSelectionGroups(bool bClear, bool bForward = true, bool bWorkers = false);							// Exposed to Python
@@ -113,7 +113,6 @@ public:
 	DllExport int countCivTeamsAlive() const;																			// Exposed to Python
 	DllExport int countCivTeamsEverAlive() const;																	// Exposed to Python
 	DllExport int countHumanPlayersAlive() const;																	// Exposed to Python
-	DllExport int countHumanPlayersEverAlive() const;															// Exposed to Python
 
 	int countTotalCivPower();																								// Exposed to Python
 	int countTotalNukeUnits();																							// Exposed to Python

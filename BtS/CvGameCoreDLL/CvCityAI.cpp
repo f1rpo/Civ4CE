@@ -773,7 +773,10 @@ void CvCityAI::AI_chooseProduction()
 	{
 		iEconomyFlags |= BUILDINGFOCUS_SPECIALIST;
 	}
-	iEconomyFlags |= BUILDINGFOCUS_ESPIONAGE;
+	if (!GC.getGameINLINE().isOption(GAMEOPTION_NO_ESPIONAGE))
+	{
+		iEconomyFlags |= BUILDINGFOCUS_ESPIONAGE;
+	}
 
 	if (iNumCitiesInArea > 2)
 	{	
@@ -3047,7 +3050,7 @@ int CvCityAI::AI_buildingValueThreshold(BuildingTypes eBuilding, int iFocusFlags
 
 				for (int iUnitIndex = 0; iUnitIndex < GC.getNumUnitClassInfos(); iUnitIndex++)
 				{
-					UnitTypes eUnit = (UnitTypes)GC.getCivilizationInfo(GET_PLAYER(getOwnerINLINE()).getCivilizationType()).getCivilizationUnits(iUnitIndex);
+					UnitTypes eUnit = (UnitTypes)GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(iUnitIndex);
 
 					if (NO_UNIT != eUnit)
 					{
@@ -3923,6 +3926,11 @@ int CvCityAI::AI_buildingValueThreshold(BuildingTypes eBuilding, int iFocusFlags
 				{
 					iTempValue = (kBuilding.getCommerceChange(COMMERCE_CULTURE) * 3);
 					iTempValue += (kBuilding.getObsoleteSafeCommerceChange(COMMERCE_CULTURE) * 3);
+					if (GC.getGameINLINE().isOption(GAMEOPTION_NO_ESPIONAGE))
+					{
+						iTempValue += (kBuilding.getCommerceChange(COMMERCE_ESPIONAGE) * 3);
+						iTempValue += (kBuilding.getObsoleteSafeCommerceChange(COMMERCE_ESPIONAGE) * 3);
+					}
 
 					if ((getCommerceRate(COMMERCE_CULTURE) == 0) && (AI_calculateTargetCulturePerTurn() == 1))
 					{
@@ -3950,6 +3958,10 @@ int CvCityAI::AI_buildingValueThreshold(BuildingTypes eBuilding, int iFocusFlags
 					}
 					
 					iValue += ((kBuilding.getCommerceModifier(COMMERCE_CULTURE) * getBaseCommerceRate(COMMERCE_CULTURE)) / 15);
+					if (GC.getGameINLINE().isOption(GAMEOPTION_NO_ESPIONAGE))
+					{
+						iValue += ((kBuilding.getCommerceModifier(COMMERCE_ESPIONAGE) * getBaseCommerceRate(COMMERCE_ESPIONAGE)) / 15);
+					}
 				}
 				
                 if (iFocusFlags & BUILDINGFOCUS_BIGCULTURE)
@@ -3974,7 +3986,7 @@ int CvCityAI::AI_buildingValueThreshold(BuildingTypes eBuilding, int iFocusFlags
 					}
 				}
 				
-				if (iFocusFlags & BUILDINGFOCUS_ESPIONAGE)
+				if (iFocusFlags & BUILDINGFOCUS_ESPIONAGE || (GC.getGameINLINE().isOption(GAMEOPTION_NO_ESPIONAGE) && (iFocusFlags & BUILDINGFOCUS_CULTURE)))
 				{
 					iTempValue = ((kBuilding.getCommerceModifier(COMMERCE_ESPIONAGE) * getBaseCommerceRate(COMMERCE_ESPIONAGE)) / 60);
 					
@@ -7113,7 +7125,7 @@ int CvCityAI::AI_yieldValue(short* piYields, short* piCommerceYields, bool bAvoi
 	}	
 	// value commerce low(6)
 
-	for (iI = 0; iI < NUM_COMMERCE_TYPES; iI++)
+	for (int iI = 0; iI < NUM_COMMERCE_TYPES; iI++)
 	{
 		if (aiCommerceYieldsTimes100[iI] != 0)
 		{
@@ -8396,7 +8408,10 @@ void CvCityAI::AI_buildGovernorChooseProduction()
 	iEconomyFlags |= BUILDINGFOCUS_HAPPY;
 	iEconomyFlags |= BUILDINGFOCUS_HEALTHY;
 	iEconomyFlags |= BUILDINGFOCUS_SPECIALIST;
-	iEconomyFlags |= BUILDINGFOCUS_ESPIONAGE;
+	if (!GC.getGameINLINE().isOption(GAMEOPTION_NO_ESPIONAGE))
+	{
+		iEconomyFlags |= BUILDINGFOCUS_ESPIONAGE;
+	}
 	
 	//20 means 5g or ~2 happiness...
 	if (AI_chooseBuilding(iEconomyFlags, 20, 20 / iMinValueDivisor))
@@ -9133,76 +9148,6 @@ int CvCityAI::AI_cityThreat(bool bDangerPercent)
 	return iValue;
 }
 
-void CvCityAI::AI_tryToWorkPlot(CvPlot* pPlot)
-{
-	FAssert(pPlot != NULL);
-	FAssert(pPlot->getWorkingCity() == this);
-	FAssert(!pPlot->isBeingWorked());
-	
-	bool bAvoidGrowth = AI_avoidGrowth();
-	bool bIgnoreGrowth = AI_ignoreGrowth();
-	
-	if (!isHuman() || isCitizensAutomated())
-	{
-		return;
-	}
-	
-	int iWorstPlot = -1;
-	int iWorstPlotValue = MAX_INT;
-	
-	//find a better plot.
-	for (int iI = 0; iI < NUM_CITY_PLOTS; iI++)
-	{
-		if (iI != CITY_HOME_PLOT)
-		{
-			CvPlot* pLoopPlot = plotCity(getX_INLINE(), getY_INLINE(), iI);
-			if ((pLoopPlot != NULL) && (pLoopPlot->getWorkingCity() == this))
-			{
-				if (pLoopPlot->isBeingWorked())
-				{
-					FAssert(pPlot != pLoopPlot);
-					//use of setWorkingPlot is to make a apples with apples comparison
-					//and properly account for multipliers
-					setWorkingPlot(pLoopPlot, false);
-					int iPlotValue = AI_plotValue(pPlot, bAvoidGrowth, /*bRemove*/ false, /*bIgnoreFood*/ false, bIgnoreGrowth, false);
-					int iLoopPlotValue = AI_plotValue(pLoopPlot, bAvoidGrowth, /*bRemove*/ false, /*bIgnoreFood*/ false, bIgnoreGrowth, false);
-					setWorkingPlot(pLoopPlot, true);
-					if ((iLoopPlotValue < iPlotValue) && (iLoopPlotValue < iWorstPlotValue))
-					{
-						iWorstPlot = iI;
-						iWorstPlotValue = iLoopPlotValue;
-					}
-				}
-			}
-		}
-	}
-	
-	SpecialistTypes eDefaultSpecialist = (SpecialistTypes)GC.getDefineINT("DEFAULT_SPECIALIST");
-	if (eDefaultSpecialist != NO_SPECIALIST)
-	{
-		if (getSpecialistCount(eDefaultSpecialist) > 0)
-		{
-			changeSpecialistCount(eDefaultSpecialist, -1);
-			int iPlotValue = AI_plotValue(pPlot, bAvoidGrowth, /*bRemove*/ false, /*bIgnoreFood*/ false, bIgnoreGrowth, false);
-			int iDefaultSpecialistValue = AI_specialistValue(eDefaultSpecialist, bAvoidGrowth, false);
-			changeSpecialistCount(eDefaultSpecialist, 1);
-			
-			if ((iDefaultSpecialistValue < iWorstPlotValue) && (iDefaultSpecialistValue < iPlotValue))
-			{
-				changeSpecialistCount(eDefaultSpecialist, -1);
-				setWorkingPlot(pPlot, true);
-				return;
-			}
-		}
-	}
-	
-	if (iWorstPlot != -1)
-	{
-		setWorkingPlot(iWorstPlot, false);
-		setWorkingPlot(pPlot, true);		
-	}
-}
-
 //Workers have/needed is not intended to be a strict
 //target but rather an indication.
 //if needed is at least 1 that means a worker
@@ -9442,7 +9387,11 @@ BuildingTypes CvCityAI::AI_bestAdvancedStartBuilding(int iPass)
 	}
 	if (iPass >= 4)
 	{
-		iFocusFlags |= (BUILDINGFOCUS_GOLD | BUILDINGFOCUS_RESEARCH | BUILDINGFOCUS_ESPIONAGE | BUILDINGFOCUS_MAINTENANCE);
+		iFocusFlags |= (BUILDINGFOCUS_GOLD | BUILDINGFOCUS_RESEARCH | BUILDINGFOCUS_MAINTENANCE);
+		if (!GC.getGameINLINE().isOption(GAMEOPTION_NO_ESPIONAGE))
+		{
+			iFocusFlags |= BUILDINGFOCUS_ESPIONAGE;
+		}
 	}
 			
 	return AI_bestBuildingThreshold(iFocusFlags, 0, std::max(0, 20 - iPass * 5));

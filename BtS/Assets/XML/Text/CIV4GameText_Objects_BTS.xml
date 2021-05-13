@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by lcollins (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -1123,7 +1123,7 @@
 			<Plural>0</Plural>
 		</German>
 		<Italian>
-			<Text>Arciere babilonese:Arcieri</Text>
+			<Text>Arciere babilonese:Arcieri babilonesi</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Italian>
@@ -2790,174 +2790,6 @@
 		</Spanish>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_BTS_CIVS</Tag>
-		<English>Beyond the Sword Civilizations</English>
-		<French>
-			<Text>Civilisations de Beyond The Sword</Text>
-			<Gender>Female</Gender>
-			<Plural>1</Plural>
-		</French>
-		<German>
-			<Text>Beyond The Sword-Zivilisationen</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</German>
-		<Italian>
-			<Text>Civilt&#224; di Beyond the Sword</Text>
-			<Gender>Female</Gender>
-			<Plural>1</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Civilizaciones de "Beyond The Sword"</Text>
-			<Gender>Female</Gender>
-			<Plural>1</Plural>
-		</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_BTS_BUILDINGS</Tag>
-		<English>Beyond the Sword Buildings</English>
-		<French>
-			<Text>B&#226;timents de Beyond The Sword</Text>
-			<Gender>Male</Gender>
-			<Plural>1</Plural>
-		</French>
-		<German>
-			<Text>Beyond The Sword-Geb&#228;ude</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</German>
-		<Italian>
-			<Text>Edifici di Beyond the Sword</Text>
-			<Gender>Male</Gender>
-			<Plural>1</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Edificios de "Beyond The Sword"</Text>
-			<Gender>Male</Gender>
-			<Plural>1</Plural>
-		</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_BTS_UNITS</Tag>
-		<English>Beyond the Sword Units</English>
-		<French>
-			<Text>Unit&#233;s de Beyond The Sword</Text>
-			<Gender>Female</Gender>
-			<Plural>1</Plural>
-		</French>
-		<German>
-			<Text>Beyond The Sword-Einheiten</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</German>
-		<Italian>
-			<Text>Unit&#224; di Beyond the Sword</Text>
-			<Gender>Female</Gender>
-			<Plural>1</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Unidades de "Beyond The Sword"</Text>
-			<Gender>Female</Gender>
-			<Plural>1</Plural>
-		</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_BTS_LEADERS</Tag>
-		<English>Beyond the Sword Leaders</English>
-		<French>
-			<Text>Dirigeants de Beyond The Sword</Text>
-			<Gender>Male</Gender>
-			<Plural>1</Plural>
-		</French>
-		<German>
-			<Text>Beyond The Sword-Staatsoberh&#228;upter</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</German>
-		<Italian>
-			<Text>Leader di Beyond the Sword</Text>
-			<Gender>Male</Gender>
-			<Plural>1</Plural>
-		</Italian>
-		<Spanish>
-			<Text>L&#237;deres de "Beyond The Sword"</Text>
-			<Gender>Male</Gender>
-			<Plural>1</Plural>
-		</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_BTS_WONDERS</Tag>
-		<English>Beyond the Sword Wonders</English>
-		<French>
-			<Text>Merveilles de Beyond The Sword</Text>
-			<Gender>Female</Gender>
-			<Plural>1</Plural>
-		</French>
-		<German>
-			<Text>Beyond The Sword-Wunder</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</German>
-		<Italian>
-			<Text>Meraviglie di Beyond the Sword</Text>
-			<Gender>Female</Gender>
-			<Plural>1</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Maravillas de "Beyond The Sword"</Text>
-			<Gender>Female</Gender>
-			<Plural>1</Plural>
-		</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_BTS_TECHS</Tag>
-		<English>Beyond the Sword Technologies</English>
-		<French>
-			<Text>Technologies de Beyond The Sword</Text>
-			<Gender>Female</Gender>
-			<Plural>1</Plural>
-		</French>
-		<German>
-			<Text>Beyond The Sword-Technologien</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</German>
-		<Italian>
-			<Text>Tecnologie di Beyond the Sword</Text>
-			<Gender>Female</Gender>
-			<Plural>1</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Tecnolog&#237;as de "Beyond The Sword"</Text>
-			<Gender>Female</Gender>
-			<Plural>1</Plural>
-		</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_BTS_RULES_CHANGES</Tag>
-		<English>Beyond the Sword Rules Changes</English>
-		<French>
-			<Text>R&#232;gles modifi&#233;es de Beyond The Sword</Text>
-			<Gender>Female</Gender>
-			<Plural>0</Plural>
-		</French>
-		<German>
-			<Text>Beyond The Sword-Regel&#228;nderungen</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</German>
-		<Italian>
-			<Text>Cambiamenti delle regole di Beyond the Sword</Text>
-			<Gender>Male</Gender>
-			<Plural>1</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Cambios en las reglas de "Beyond The Sword"</Text>
-			<Gender>Male</Gender>
-			<Plural>1</Plural>
-		</Spanish>
-	</TEXT>
-	<TEXT>
 		<Tag>TXT_KEY_RELIGION_JUDAISM_ADJECTIVE</Tag>
 		<English>
 			<Text>Jewish</Text>
@@ -3983,7 +3815,7 @@
 			<Plural>0</Plural>
 		</German>
 		<Italian>
-			<Text>Etanolo standard</Text>
+			<Text>Etanolo Standard</Text>
 			<Gender>Female</Gender>
 			<Plural>0</Plural>
 		</Italian>
@@ -4031,7 +3863,7 @@
 			<Plural>0</Plural>
 		</German>
 		<Italian>
-			<Text>Estrazioni minerarie Inc.</Text>
+			<Text>Estrazioni Minerarie Inc.</Text>
 			<Gender>Female</Gender>
 			<Plural>0</Plural>
 		</Italian>
@@ -4127,7 +3959,7 @@
 			<Plural>0</Plural>
 		</German>
 		<Italian>
-			<Text>Funzionario della Etanolo standard:Funzionari della Etanolo standard</Text>
+			<Text>Funzionario della Etanolo Standard:Funzionari della Etanolo Standard</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Italian>
@@ -4175,7 +4007,7 @@
 			<Plural>0</Plural>
 		</German>
 		<Italian>
-			<Text>Funzionario della Estrazioni minerarie Inc.:Funzionari della Estrazioni minerarie Inc.</Text>
+			<Text>Funzionario della Estrazioni Minerarie Inc.:Funzionari della Estrazioni Minerarie Inc.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Italian>
@@ -4400,278 +4232,6 @@
 			<Gender>Female</Gender>
 			<Plural>0:1</Plural>
 		</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MISC_RIVERS</Tag>
-		<English>Rivers</English>
-		<French>
-			<Text>Fleuves</Text>
-			<Gender>Male</Gender>
-			<Plural>1</Plural>
-		</French>
-		<German>
-			<Text>Fl&#252;sse</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</German>
-		<Italian>
-			<Text>Rivers</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>R&#237;os</Text>
-			<Gender>Male</Gender>
-			<Plural>1</Plural>
-		</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_GAME_OPTION_NO_EVENTS</Tag>
-		<English>No Random Events</English>
-		<French>Pas d'&#233;v&#233;nements al&#233;atoires</French>
-		<German>Keine Zufallsereignisse</German>
-		<Italian>Nessun evento casuale</Italian>
-		<Spanish>Sin sucesos al azar</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_GAME_OPTION_NO_EVENTS_HELP</Tag>
-		<English>Random Events do not occur</English>
-		<French>Les &#233;v&#233;nements al&#233;atoires ne se produisent pas</French>
-		<German>Es finden keine Zufallsereignisse statt</German>
-		<Italian>Non si verificano eventi casuali</Italian>
-		<Spanish>No ocurren sucesos al azar</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_GAME_OPTION_NO_TECH_BROKERING</Tag>
-		<English>No Technology Brokering</English>
-		<French>Pas de commerce de technologie</French>
-		<German>Kein Technologieaustausch</German>
-		<Italian>Nessuna vendita di tecnologie</Italian>
-		<Spanish>Sin intermediaci&#243;n con tecnolog&#237;a</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MISSION_PLUNDER</Tag>
-		<English>Blockade</English>
-		<French>Blocus</French>
-		<German>Blockade</German>
-		<Italian>Embargo</Italian>
-		<Spanish>Bloqueo</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_CORPORATION_SCREEN_TITLE</Tag>
-		<English>Corporation Advisor</English>
-		<French>Conseiller commercial</French>
-		<German>Unternehmensberater</German>
-		<Italian>Consigliere corporativo</Italian>
-		<Spanish>Consejero de corporaci&#243;n</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_CORPORATION_SCREEN_HEADQUARTERS</Tag>
-		<English>Headquarters:</English>
-		<French>Quartier g&#233;n&#233;ral :</French>
-		<German>Unternehmenssitze:</German>
-		<Italian>Quartier generale:</Italian>
-		<Spanish>Sede:</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MAIN_MENU_BTS_MOD</Tag>
-		<English>Mod</English>
-		<French>Mod</French>
-		<German>Mod</German>
-		<Italian>Mod</Italian>
-		<Spanish>Mod</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MAIN_MENU_BTS_SCENARIO</Tag>
-		<English>Scenario</English>
-		<French>Sc&#233;nario</French>
-		<German>Szenario</German>
-		<Italian>Scenario</Italian>
-		<Spanish>Escenario</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_FOREIGN_ADVISOR_TECHS</Tag>
-		<English>Techs</English>
-		<French>Technologies</French>
-		<German>Technologien</German>
-		<Italian>Tecnologie</Italian>
-		<Spanish>Tecnolog&#237;as</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_FOREIGN_ADVISOR_NONE</Tag>
-		<English>None</English>
-		<French>Aucun(e)</French>
-		<German>Ohne</German>
-		<Italian>Nessuna</Italian>
-		<Spanish>No</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MILITARY_ADVISOR_DONT_GROUP</Tag>
-		<English>Don't Group Units</English>
-		<French>Ne pas grouper les unit&#233;s</French>
-		<German>Einheiten nicht gruppieren</German>
-		<Italian>Non raggruppare unit&#224;</Italian>
-		<Spanish>No agrupar unidades</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MILITARY_ADVISOR_GROUP_STACK</Tag>
-		<English>Group by Stack</English>
-		<French>Grouper par tas</French>
-		<German>Nach Verband gruppieren</German>
-		<Italian>Raggruppa per gruppo</Italian>
-		<Spanish>Agrupar por apilamiento</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MILITARY_ADVISOR_GROUP_COMBAT</Tag>
-		<English>Group by Combat Type</English>
-		<French>Grouper par type de combat</French>
-		<German>Nach Kampftyp gruppieren</German>
-		<Italian>Raggruppa per tipo</Italian>
-		<Spanish>Agrupar por tipo de combate</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MILITARY_ADVISOR_GROUP_LOCATION</Tag>
-		<English>Group by Location</English>
-		<French>Grouper par emplacement</French>
-		<German>Nach Standort gruppieren</German>
-		<Italian>Raggruppa per posizione</Italian>
-		<Spanish>Agrupar por lugar</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_ESPIONAGE_SCREEN_SPENDING_WEIGHT</Tag>
-		<English>Weight</English>
-		<French>Poids</French>
-		<German>Gewich.</German>
-		<Italian>Peso</Italian>
-		<Spanish>Peso</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_ESPIONAGE_SCREEN_COST</Tag>
-		<English>Cost</English>
-		<French>Co&#251;t</French>
-		<German>Kosten</German>
-		<Italian>Costo</Italian>
-		<Spanish>Coste</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_ESPIONAGE_SCREEN_MISSIONS</Tag>
-		<English>Missions</English>
-		<French>Missions</French>
-		<German>Missionen</German>
-		<Italian>Missioni</Italian>
-		<Spanish>Misiones</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_ESPIONAGE_SCREEN_PASSIVE_EFFECTS</Tag>
-		<English>Passive Effects</English>
-		<French>Effets passifs</French>
-		<German>Passive Auswirkungen</German>
-		<Italian>Effetti passivi</Italian>
-		<Spanish>Efectos pasivos</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_RELIGION_UNKNOWN</Tag>
-		<English>a Religion</English>
-		<French>une religion</French>
-		<German>eine Religion</German>
-		<Italian>una religione</Italian>
-		<Spanish>una religi&#243;n</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_GAME_OPTION_PICK_RELIGION</Tag>
-		<English>Choose Religions</English>
-		<French>Choisir religions</French>
-		<German>Religionen w&#228;hlen</German>
-		<Italian>Scegli religioni</Italian>
-		<Spanish>Elegir religi&#243;n</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PLAYER_OPTION_MODDER_1</Tag>
-		<English>ModPlayerOption1</English>
-		<French>Mod Option du joueur 1</French>
-		<German>Mod-Spieleroption1</German>
-		<Italian>ModPlayerOption1</Italian>
-		<Spanish>ModPlayerOption1</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PLAYER_OPTION_MODDER_2</Tag>
-		<English>ModPlayerOption2</English>
-		<French>Mod Option du joueur 2</French>
-		<German>Mod-Spieleroption2</German>
-		<Italian>ModPlayerOption2</Italian>
-		<Spanish>ModPlayerOption2</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PLAYER_OPTION_MODDER_3</Tag>
-		<English>ModPlayerOption3</English>
-		<French>Mod Option du joueur 3</French>
-		<German>Mod-Spieleroption3</German>
-		<Italian>ModPlayerOption3</Italian>
-		<Spanish>ModPlayerOption3</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_WB_AS_TECH</Tag>
-		<English>Techs</English>
-		<French>Technologies</French>
-		<German>Technologien</German>
-		<Italian>Tecnologie</Italian>
-		<Spanish>Tecnolog&#237;as</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PLAYER_OPTION_NO_ENEMY_GLOW</Tag>
-		<English>No Enemy Glow</English>
-		<French>Pas d'&#233;clairage ennemi</French>
-		<German>Keine Feindkennzeichnung</German>
-		<Italian>Non evidenziare il nemico</Italian>
-		<Spanish>Sin brillo enemigo</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MAP_SCRIPT_CONTINENTS_SIZE</Tag>
-		<English>Continents Size</English>
-		<French>Taille des continents</French>
-		<German>Kontinentgr&#246;&#223;e</German>
-		<Italian>Dimensione dei continenti</Italian>
-		<Spanish>Tama&#241;o de los continentes</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MAP_SCRIPT_ISLANDS_SIZE</Tag>
-		<English>Islands Size</English>
-		<French>Taille des &#238;les</French>
-		<German>Inselgr&#246;&#223;e</German>
-		<Italian>Dimensione delle isole</Italian>
-		<Spanish>Tama&#241;o de las islas</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MAP_SCRIPT_ISLAND_OVERLAP</Tag>
-		<English>Island Overlap</English>
-		<French>Superposition des &#238;les</French>
-		<German>Insel&#252;berlagerung</German>
-		<Italian>Sovrapposizione isole</Italian>
-		<Spanish>Solapamiento de islas</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MAP_SCRIPT_ISLAND_REGION_SEPARATE</Tag>
-		<English>Island Region Separate</English>
-		<French>S&#233;paration des r&#233;gions insulaires</French>
-		<German>Separate Inselregionen</German>
-		<Italian>Separa regioni isolane</Italian>
-		<Spanish>Regi&#243;n de islas separada</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_MAP_SCRIPT_ISLANDS_MIXED_IN</Tag>
-		<English>Islands Mixed In</English>
-		<French>M&#233;lange des &#238;les</French>
-		<German>Gemischte Inseln</German>
-		<Italian>Isole mischiate</Italian>
-		<Spanish>Islas mezcladas</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_GAME_OPTION_LEAD_ANY_CIV</Tag>
-		<English>Unrestricted Leaders</English>
-		<French>Pas de restriction de dirigeants</French>
-		<German>Beliebige Staatsoberh&#228;upter</German>
-		<Italian>Leader senza limitazioni</Italian>
-		<Spanish>L&#237;deres sin restricciones</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GREAT_PERSON_GERONIMO</Tag>

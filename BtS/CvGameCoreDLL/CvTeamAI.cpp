@@ -57,7 +57,7 @@ CvTeamAI::CvTeamAI()
 	m_aeWarPlan = new WarPlanTypes[MAX_TEAMS];
 
 
-	AI_reset();
+	AI_reset(true);
 }
 
 
@@ -81,7 +81,7 @@ CvTeamAI::~CvTeamAI()
 
 void CvTeamAI::AI_init()
 {
-	AI_reset();
+	AI_reset(false);
 
 	//--------------------------------
 	// Init other game data
@@ -93,15 +93,13 @@ void CvTeamAI::AI_uninit()
 }
 
 
-void CvTeamAI::AI_reset()
+void CvTeamAI::AI_reset(bool bConstructor)
 {
-	int iI;
-
 	AI_uninit();
 
 	m_eWorstEnemy = NO_TEAM;
 
-	for (iI = 0; iI < MAX_TEAMS; iI++)
+	for (int iI = 0; iI < MAX_TEAMS; iI++)
 	{
 		m_aiWarPlanStateCounter[iI] = 0;
 		m_aiAtWarCounter[iI] = 0;
@@ -113,11 +111,24 @@ void CvTeamAI::AI_reset()
 		m_aiWarSuccess[iI] = 0;
 		m_aiEnemyPeacetimeTradeValue[iI] = 0;
 		m_aiEnemyPeacetimeGrantValue[iI] = 0;
-	}
-
-	for (iI = 0; iI < MAX_TEAMS; iI++)
-	{
 		m_aeWarPlan[iI] = NO_WARPLAN;
+
+		if (!bConstructor && getID() != NO_TEAM)
+		{
+			TeamTypes eLoopTeam = (TeamTypes) iI;
+			CvTeamAI& kLoopTeam = GET_TEAM(eLoopTeam);
+			kLoopTeam.m_aiWarPlanStateCounter[getID()] = 0;
+			kLoopTeam.m_aiAtWarCounter[getID()] = 0;
+			kLoopTeam.m_aiAtPeaceCounter[getID()] = 0;
+			kLoopTeam.m_aiHasMetCounter[getID()] = 0;
+			kLoopTeam.m_aiOpenBordersCounter[getID()] = 0;
+			kLoopTeam.m_aiDefensivePactCounter[getID()] = 0;
+			kLoopTeam.m_aiShareWarCounter[getID()] = 0;
+			kLoopTeam.m_aiWarSuccess[getID()] = 0;
+			kLoopTeam.m_aiEnemyPeacetimeTradeValue[getID()] = 0;
+			kLoopTeam.m_aiEnemyPeacetimeGrantValue[getID()] = 0;
+			kLoopTeam.m_aeWarPlan[getID()] = NO_WARPLAN;
+		}
 	}
 }
 
@@ -1589,7 +1600,7 @@ DenialTypes CvTeamAI::AI_surrenderTrade(TeamTypes eTeam, int iPowerMultiplier) c
 			int iOurSuccess = std::max(10, AI_getWarSuccess(eTeam));
 			int iOthersBestSuccess = 0;
 			for (int iTeam = 0; iTeam < MAX_CIV_TEAMS; ++iTeam)
-		{
+			{
 				if (iTeam != eTeam && iTeam != getID())
 				{
 					CvTeam& kLoopTeam = GET_TEAM((TeamTypes)iTeam);
@@ -1679,7 +1690,7 @@ DenialTypes CvTeamAI::AI_surrenderTrade(TeamTypes eTeam, int iPowerMultiplier) c
 			return DENIAL_POWER_US;
 		}
 
-		if (4 * iVassalPower > 3 * iAveragePower || 3 * iVassalPower > 2 * iMasterPower)
+		if (iVassalPower > iAveragePower || 3 * iVassalPower > 2 * iMasterPower)
 		{
 			return DENIAL_POWER_US;
 		}
@@ -2295,30 +2306,26 @@ void CvTeamAI::AI_updateWorstEnemy()
 {
 	PROFILE_FUNC();
 
-	TeamTypes eBestTeam;
-	int iValue;
-	int iBestValue;
-	int iI;
+	TeamTypes eBestTeam = NO_TEAM;
+	int iBestValue = MAX_INT;
 
-	iBestValue = MAX_INT;
-	eBestTeam = NO_TEAM;
-
-	for (iI = 0; iI < MAX_CIV_TEAMS; iI++)
+	for (int iI = 0; iI < MAX_CIV_TEAMS; iI++)
 	{
-		if (GET_TEAM((TeamTypes)iI).isAlive())
+		TeamTypes eLoopTeam = (TeamTypes) iI;
+		CvTeam& kLoopTeam = GET_TEAM(eLoopTeam);
+		if (kLoopTeam.isAlive())
 		{
-			if (iI != getID() && !GET_TEAM((TeamTypes)iI).isVassal(getID()))
+			if (iI != getID() && !kLoopTeam.isVassal(getID()))
 			{
-				if (isHasMet((TeamTypes)iI))
+				if (isHasMet(eLoopTeam))
 				{
-					if (AI_getAttitude((TeamTypes)iI) < ATTITUDE_CAUTIOUS)
+					if (AI_getAttitude(eLoopTeam) < ATTITUDE_CAUTIOUS)
 					{
-						iValue = AI_getAttitudeVal((TeamTypes)iI);
-
+						int iValue = AI_getAttitudeVal(eLoopTeam);
 						if (iValue < iBestValue)
 						{
 							iBestValue = iValue;
-							eBestTeam = ((TeamTypes)iI);
+							eBestTeam = eLoopTeam;
 						}
 					}
 				}

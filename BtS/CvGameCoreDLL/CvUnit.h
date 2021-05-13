@@ -60,6 +60,7 @@ struct DllExport CombatDetails					// Exposed to Python
 	int iMaxHitPoints;
 	int iCurrCombatStr;
 	PlayerTypes eOwner;
+	PlayerTypes eVisualOwner;
 	std::wstring sUnitName;
 };
 
@@ -330,6 +331,7 @@ public:
 
 	DllExport bool canFight() const;																									// Exposed to Python
 	bool canAttack() const;																														// Exposed to Python
+	bool canAttack(const CvUnit& defender) const;
 	bool canDefend(const CvPlot* pPlot = NULL) const;																	// Exposed to Python
 	bool canSiege(TeamTypes eTeam) const;																							// Exposed to Python
 
@@ -477,6 +479,7 @@ public:
 
 	DllExport int getCargo() const;																														// Exposed to Python					
 	void changeCargo(int iChange);
+	void getCargoUnits(std::vector<CvUnit*>& aUnits) const;
 
 	CvPlot* getAttackPlot() const;
 	void setAttackPlot(const CvPlot* pNewValue, bool bAirCombat);
@@ -662,14 +665,14 @@ public:
 
 	DllExport CvUnit* getTransportUnit() const;																							// Exposed to Python
 	DllExport bool isCargo() const;																													// Exposed to Python
-	void setTransportUnit(CvUnit* pTransportUnit);
+	void setTransportUnit(CvUnit* pTransportUnit);																							// Exposed to Python
 
 	int getExtraDomainModifier(DomainTypes eIndex) const;																		// Exposed to Python
 	void changeExtraDomainModifier(DomainTypes eIndex, int iChange);
 
 	DllExport const CvWString getName(uint uiForm = 0) const;																// Exposed to Python
 	DllExport const wchar* getNameKey() const;																							// Exposed to Python
-	DllExport const CvWString getNameNoDesc() const;																				// Exposed to Python
+	DllExport const CvWString& getNameNoDesc() const;																				// Exposed to Python
 	DllExport void setName(const CvWString szNewValue);																			// Exposed to Python
 
 	// Script data needs to be a narrow string for pickling in Python
@@ -848,7 +851,7 @@ protected:
 
 	bool canAdvance(const CvPlot* pPlot, int iThreshold) const;
 	void collateralCombat(const CvPlot* pPlot, CvUnit* pSkipUnit = NULL);
-	void flankingStrikeCombat(const CvPlot* pPlot, int iAttackerStrength, int iAttackerFirepower, CvUnit* pSkipUnit = NULL);
+	void flankingStrikeCombat(const CvPlot* pPlot, int iAttackerStrength, int iAttackerFirepower, int iDefenderOdds, int iDefenderDamage, CvUnit* pSkipUnit = NULL);
 
 	bool interceptTest(const CvPlot* pPlot);
 	CvUnit* airStrikeTarget(const CvPlot* pPlot) const;
@@ -866,6 +869,7 @@ protected:
 	bool isCombatVisible(const CvUnit* pDefender) const;
 	void resolveCombat(CvUnit* pDefender, CvPlot* pPlot, CvBattleDefinition& kBattle);
 	void resolveAirCombat(CvUnit* pInterceptor, CvPlot* pPlot, CvAirMissionDefinition& kBattle);
+	void checkRemoveSelectionAfterAttack();
 };
 
 #endif

@@ -9,8 +9,6 @@
 //
 // 'global' vars for Civ IV.  singleton class.
 // All globals and global types should be contained in this class
-// Author -	Mustafa Thamer
-//					Jon Shafer - 03/2005
 //
 
 class FProfiler;
@@ -815,9 +813,6 @@ public:
 
 	DllExport bool readDiplomacyInfoArray(FDataStreamBase* pStream);
 	DllExport void writeDiplomacyInfoArray(FDataStreamBase* pStream);
-
-	DllExport bool readDiploTextInfoArray(FDataStreamBase* pStream);
-	DllExport void writeDiploTextInfoArray(FDataStreamBase* pStream);
 
 	DllExport bool readCivicInfoArray(FDataStreamBase* pStream);
 	DllExport void writeCivicInfoArray(FDataStreamBase* pStream);

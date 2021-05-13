@@ -184,10 +184,34 @@ void CvTeam::reset(TeamTypes eID, bool bConstructorCall)
 		m_aiStolenVisibilityTimer[iI] = 0;
 		m_aiWarWeariness[iI] = 0;
 		m_aiTechShareCount[iI] = 0;
-
 		m_aiEspionagePointsAgainstTeam[iI] = 0;
 		m_aiCounterespionageTurnsLeftAgainstTeam[iI] = 0;
 		m_aiCounterespionageModAgainstTeam[iI] = 0;
+		m_abHasMet[iI] = false;
+		m_abAtWar[iI] = false;
+		m_abPermanentWarPeace[iI] = false;
+		m_abOpenBorders[iI] = false;
+		m_abDefensivePact[iI] = false;
+		m_abForcePeace[iI] = false;
+		m_abVassal[iI] = false;
+
+		if (!bConstructorCall && getID() != NO_TEAM)
+		{
+			CvTeam& kLoopTeam = GET_TEAM((TeamTypes) iI);
+			kLoopTeam.m_aiStolenVisibilityTimer[getID()] = 0;
+			kLoopTeam.m_aiWarWeariness[getID()] = 0;
+			kLoopTeam.m_aiTechShareCount[getID()] = 0;
+			kLoopTeam.m_aiEspionagePointsAgainstTeam[getID()] = 0;
+			kLoopTeam.m_aiCounterespionageTurnsLeftAgainstTeam[getID()] = 0;
+			kLoopTeam.m_aiCounterespionageModAgainstTeam[getID()] = 0;
+			kLoopTeam.m_abHasMet[getID()] = false;
+			kLoopTeam.m_abAtWar[getID()] = false;
+			kLoopTeam.m_abPermanentWarPeace[getID()] = false;
+			kLoopTeam.m_abOpenBorders[getID()] = false;
+			kLoopTeam.m_abDefensivePact[getID()] = false;
+			kLoopTeam.m_abForcePeace[getID()] = false;
+			kLoopTeam.m_abVassal[getID()] = false;
+		}
 	}
 
 	for (iI = 0; iI < NUM_COMMERCE_TYPES; iI++)
@@ -198,17 +222,6 @@ void CvTeam::reset(TeamTypes eID, bool bConstructorCall)
 	for (iI = 0; iI < NUM_DOMAIN_TYPES; iI++)
 	{
 		m_aiExtraMoves[iI] = 0;
-	}
-
-	for (iI = 0; iI < MAX_TEAMS; iI++)
-	{
-		m_abHasMet[iI] = false;
-		m_abAtWar[iI] = false;
-		m_abPermanentWarPeace[iI] = false;
-		m_abOpenBorders[iI] = false;
-		m_abDefensivePact[iI] = false;
-		m_abForcePeace[iI] = false;
-		m_abVassal[iI] = false;
 	}
 
 	if (!bConstructorCall)
@@ -317,7 +330,7 @@ void CvTeam::reset(TeamTypes eID, bool bConstructorCall)
 
 		m_aeRevealedBonuses.clear();
 
-		AI_reset();
+		AI_reset(false);
 	}
 }
 
@@ -3283,7 +3296,6 @@ bool CvTeam::isHasMet(TeamTypes eIndex)	const
 	return m_abHasMet[eIndex];
 }
 
-
 void CvTeam::makeHasMet(TeamTypes eIndex, bool bNewDiplo)
 {
 	CvDiploParameters* pDiplo;
@@ -3502,7 +3514,21 @@ void CvTeam::setDefensivePact(TeamTypes eIndex, bool bNewValue)
 		if (bNewValue && !GET_TEAM(eIndex).isDefensivePact(getID()))
 		{
 			CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_PLAYERS_SIGN_DEFENSIVE_PACT", getName().GetCString(), GET_TEAM(eIndex).getName().GetCString());
+
 			GC.getGameINLINE().addReplayMessage(REPLAY_MESSAGE_MAJOR_EVENT, getLeaderID(), szBuffer, -1, -1, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
+
+
+			for (int iI = 0; iI < MAX_PLAYERS; iI++)
+			{
+				CvPlayer& kPlayer = GET_PLAYER((PlayerTypes)iI);
+				if (kPlayer.isAlive())
+				{
+					if (isHasMet(kPlayer.getTeam()) && GET_TEAM(eIndex).isHasMet(kPlayer.getTeam()))
+					{
+						gDLL->getInterfaceIFace()->addMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
+					}
+				}
+			}
 		}
 	}
 }
@@ -4544,9 +4570,17 @@ void CvTeam::resetVictoryProgress()
 
 			for (int iJ = 0; iJ < MAX_PLAYERS; ++iJ)
 			{
-				if (GET_PLAYER((PlayerTypes)iJ).isAlive())
+				CvPlayer& kPlayer = GET_PLAYER((PlayerTypes)iJ);
+				if (kPlayer.isAlive())
 				{
 					gDLL->getInterfaceIFace()->addMessage(((PlayerTypes)iJ), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_MELTDOWN", MESSAGE_TYPE_MAJOR_EVENT);
+
+					if (kPlayer.getTeam() == getID())
+					{
+						CvPopupInfo* pInfo = new CvPopupInfo();
+						pInfo->setText(szBuffer);
+						gDLL->getInterfaceIFace()->addPopup(pInfo, (PlayerTypes) iJ);
+					}
 				}
 			}
 

@@ -617,6 +617,11 @@ void CyPlot::setOwner(int /*PlayerTypes*/ eNewValue)
 		m_pPlot->setOwner((PlayerTypes) eNewValue, true, true);
 }
 
+void CyPlot::setOwnerNoUnitCheck(int /*PlayerTypes*/ eNewValue)
+{
+	if (m_pPlot)
+		m_pPlot->setOwner((PlayerTypes) eNewValue, false, true);
+}
 PlotTypes CyPlot::getPlotType()
 {
 	return m_pPlot ? m_pPlot->getPlotType() : NO_PLOT;

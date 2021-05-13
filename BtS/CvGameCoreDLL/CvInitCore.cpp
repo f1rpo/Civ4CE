@@ -1153,13 +1153,16 @@ void CvInitCore::setActivePlayer(PlayerTypes eActivePlayer)
 
 void CvInitCore::setType(GameType eType)
 {
-	m_eType = eType;
-
-	if(CvPlayerAI::areStaticsInitialized())
+	if (getType() != eType)
 	{
-		for (int i = 0; i < MAX_PLAYERS; ++i)
+		m_eType = eType;
+
+		if(CvPlayerAI::areStaticsInitialized())
 		{
-			GET_PLAYER((PlayerTypes)i).updateHuman();
+			for (int i = 0; i < MAX_PLAYERS; ++i)
+			{
+				GET_PLAYER((PlayerTypes)i).updateHuman();
+			}
 		}
 	}
 }
@@ -1183,13 +1186,16 @@ void CvInitCore::setType(const CvWString & szType)
 
 void CvInitCore::setMode(GameMode eMode)
 {
-	m_eMode = eMode;
-
-	if(CvPlayerAI::areStaticsInitialized())
+	if (getMode() != eMode)
 	{
-		for (int i = 0; i < MAX_PLAYERS; ++i)
+		m_eMode = eMode;
+
+		if(CvPlayerAI::areStaticsInitialized())
 		{
-			GET_PLAYER((PlayerTypes)i).updateHuman();
+			for (int i = 0; i < MAX_PLAYERS; ++i)
+			{
+				GET_PLAYER((PlayerTypes)i).updateHuman();
+			}
 		}
 	}
 }
@@ -1550,11 +1556,14 @@ void CvInitCore::setTeam(PlayerTypes eID, TeamTypes eTeam)
 	FASSERT_BOUNDS(0, MAX_PLAYERS, eID, "CvInitCore::setTeam");
 	if ( checkBounds(eID, 0, MAX_PLAYERS) )
 	{
-		m_aeTeam[eID] = eTeam;
-		
-		if(CvPlayerAI::areStaticsInitialized())
+		if (getTeam(eID) != eTeam)
 		{
-			GET_PLAYER(eID).updateTeamType();
+			m_aeTeam[eID] = eTeam;
+
+			if(CvPlayerAI::areStaticsInitialized())
+			{
+				GET_PLAYER(eID).updateTeamType();
+			}
 		}
 	}
 }
@@ -1644,11 +1653,14 @@ void CvInitCore::setSlotStatus(PlayerTypes eID, SlotStatus eSlotStatus)
 	FASSERT_BOUNDS(0, MAX_PLAYERS, eID, "CvInitCore::setSlotStatus");
 	if ( checkBounds(eID, 0, MAX_PLAYERS) )
 	{
-		m_aeSlotStatus[eID] = eSlotStatus;
-
-		if(CvPlayerAI::areStaticsInitialized())
+		if (getSlotStatus(eID) != eSlotStatus)
 		{
-			GET_PLAYER(eID).updateHuman();
+			m_aeSlotStatus[eID] = eSlotStatus;
+
+			if(CvPlayerAI::areStaticsInitialized())
+			{
+				GET_PLAYER(eID).updateHuman();
+			}
 		}
 	}
 }
@@ -1901,7 +1913,16 @@ void CvInitCore::read(FDataStreamBase* pStream)
 		pStream->Read(m_iNumVictories, m_abVictories);
 	}
 
-	pStream->Read(NUM_GAMEOPTION_TYPES, m_abOptions);
+
+	if (uiSaveFlag > 0)
+	{
+		pStream->Read(NUM_GAMEOPTION_TYPES, m_abOptions);
+	}
+	else
+	{
+		pStream->Read(NUM_GAMEOPTION_TYPES-1, m_abOptions);
+		m_abOptions[NUM_GAMEOPTION_TYPES-1] = false;
+	}
 	pStream->Read(NUM_MPOPTION_TYPES, m_abMPOptions);
 
 	pStream->Read(&m_bStatReporting);
@@ -1962,7 +1983,7 @@ void CvInitCore::read(FDataStreamBase* pStream)
 
 void CvInitCore::write(FDataStreamBase* pStream)
 {
-	uint uiSaveFlag=0;
+	uint uiSaveFlag=1;
 	pStream->Write(uiSaveFlag);		// flag for expansion, see SaveBits)
 
 	// GAME DATA

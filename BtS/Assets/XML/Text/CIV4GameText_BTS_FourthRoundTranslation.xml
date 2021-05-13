@@ -441,4 +441,20 @@
 		<Italian>[ICON_BULLET]Richiesto %s1 per la vittoria %s2_victory</Italian>
 		<Spanish>[ICON_BULLET]Se necesita %s1 para la victoria %s2_victory</Spanish>
 	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_AT_WAR_WITH</Tag>
+		<English>[ICON_BULLET][COLOR_WARNING_TEXT]War with %s1_player[COLOR_REVERT]</English>
+		<French>[ICON_BULLET][COLOR_WARNING_TEXT]Guerre avec %s1_player[COLOR_REVERT]</French>
+		<German>[ICON_BULLET][COLOR_WARNING_TEXT]Krieg mit %s1_player[COLOR_REVERT]</German>
+		<Italian>[ICON_BULLET][COLOR_WARNING_TEXT]Guerra con %s1_player[COLOR_REVERT]</Italian>
+		<Spanish>[ICON_BULLET][COLOR_WARNING_TEXT]Guerra con %s1_player[COLOR_REVERT]</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_WORST_ENEMY_OF</Tag>
+		<English>[ICON_BULLET][COLOR_WARNING_TEXT]Worst Enemy of %s1_player[COLOR_REVERT]</English>
+		<French>[ICON_BULLET][COLOR_WARNING_TEXT]Pire ennemi de %s1_player[COLOR_REVERT]</French>
+		<German>[ICON_BULLET][COLOR_WARNING_TEXT]Schlecht feindlich von %s1_player[COLOR_REVERT]</German>
+		<Italian>[ICON_BULLET][COLOR_WARNING_TEXT]Peggiore ostile di %s1_player[COLOR_REVERT]</Italian>
+		<Spanish>[ICON_BULLET][COLOR_WARNING_TEXT]Peor enemigo de %s1_player[COLOR_REVERT]</Spanish>
+	</TEXT>
 </Civ4GameText>

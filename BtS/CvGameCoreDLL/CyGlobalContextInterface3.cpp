@@ -1,6 +1,5 @@
 //
 // published python interface for CyGlobalContext
-// Author - Jon Shafer
 //
 
 #include "CvGameCoreDLL.h"

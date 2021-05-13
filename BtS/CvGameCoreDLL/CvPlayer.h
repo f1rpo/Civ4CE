@@ -147,8 +147,8 @@ public:
 	DllExport void handleDiploEvent(DiploEventTypes eDiploEvent, PlayerTypes ePlayer, int iData1, int iData2);
 	bool canTradeWith(PlayerTypes eWhoTo) const;																													// Exposed to Python
 	bool canReceiveTradeCity() const;
-	DllExport bool canTradeItem(PlayerTypes eWhoTo, TradeData item, bool bTestDenial = false);			// Exposed to Python
-	DllExport DenialTypes getTradeDenial(PlayerTypes eWhoTo, TradeData item);												// Exposed to Python
+	DllExport bool canTradeItem(PlayerTypes eWhoTo, TradeData item, bool bTestDenial = false) const;			// Exposed to Python
+	DllExport DenialTypes getTradeDenial(PlayerTypes eWhoTo, TradeData item) const;												// Exposed to Python
 	bool canTradeNetworkWith(PlayerTypes ePlayer) const;																									// Exposed to Python
 	int getNumAvailableBonuses(BonusTypes eBonus) const;																									// Exposed to Python
 	DllExport int getNumTradeableBonuses(BonusTypes eBonus) const;																				// Exposed to Python
@@ -875,7 +875,6 @@ public:
 	DllExport CvDiploParameters* popFrontDiplomacy();
 	DllExport void showSpaceShip();
 	DllExport void clearSpaceShipPopups();
-	DllExport void cheatSpaceShipParts();
 
 	int getScoreHistory(int iTurn) const;																								// Exposed to Python
 	void updateScoreHistory(int iTurn, int iBestScore);
@@ -964,8 +963,13 @@ public:
 
 	void verifyUnitStacksValid();
 
+	DllExport void buildTradeTable(PlayerTypes eOtherPlayer, CLinkList<TradeData>& ourList) const;
+	DllExport bool getHeadingTradeString(PlayerTypes eOtherPlayer, TradeableItems eItem, CvWString& szString, CvString& szIcon) const;
+	DllExport bool getItemTradeString(PlayerTypes eOtherPlayer, bool bOffer, bool bShowingCurrent, const TradeData& zTradeData, CvWString& szString, CvString& szIcon) const;
+	DllExport void updateTradeList(PlayerTypes eOtherPlayer, CLinkList<TradeData>& ourInventory, const CLinkList<TradeData>& ourOffer, const CLinkList<TradeData>& theirOffer) const;
+
 	virtual void AI_init() = 0;
-	virtual void AI_reset() = 0;
+	virtual void AI_reset(bool bConstructor) = 0;
 	virtual void AI_doTurnPre() = 0;
 	virtual void AI_doTurnPost() = 0;
 	virtual void AI_doTurnUnitsPre() = 0;
@@ -994,12 +998,12 @@ public:
 	virtual bool AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeData>* pTheirList, const CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirInventory, CLinkList<TradeData>* pOurInventory, CLinkList<TradeData>* pTheirCounter, CLinkList<TradeData>* pOurCounter) = 0;
 	virtual int AI_bonusVal(BonusTypes eBonus, int iChange = 0) = 0;
 	virtual int AI_bonusTradeVal(BonusTypes eBonus, PlayerTypes ePlayer, int iChange = 0) = 0;
-	virtual DenialTypes AI_bonusTrade(BonusTypes eBonus, PlayerTypes ePlayer) = 0;
+	virtual DenialTypes AI_bonusTrade(BonusTypes eBonus, PlayerTypes ePlayer) const = 0;
 	virtual int AI_cityTradeVal(CvCity* pCity) = 0;
-	virtual DenialTypes AI_cityTrade(CvCity* pCity, PlayerTypes ePlayer) = 0;
-	virtual DenialTypes AI_stopTradingTrade(TeamTypes eTradeTeam, PlayerTypes ePlayer) = 0;
-	virtual DenialTypes AI_civicTrade(CivicTypes eCivic, PlayerTypes ePlayer) = 0;
-	virtual DenialTypes AI_religionTrade(ReligionTypes eReligion, PlayerTypes ePlayer) = 0;
+	virtual DenialTypes AI_cityTrade(CvCity* pCity, PlayerTypes ePlayer) const = 0;
+	virtual DenialTypes AI_stopTradingTrade(TeamTypes eTradeTeam, PlayerTypes ePlayer) const = 0;
+	virtual DenialTypes AI_civicTrade(CivicTypes eCivic, PlayerTypes ePlayer) const = 0;
+	virtual DenialTypes AI_religionTrade(ReligionTypes eReligion, PlayerTypes ePlayer) const = 0;
 	virtual int AI_unitValue(UnitTypes eUnit, UnitAITypes eUnitAI, CvArea* pArea) = 0;						// Exposed to Python
 	virtual int AI_totalUnitAIs(UnitAITypes eUnitAI) = 0;																					// Exposed to Python
 	virtual int AI_totalAreaUnitAIs(CvArea* pArea, UnitAITypes eUnitAI) = 0;											// Exposed to Python
@@ -1025,6 +1029,8 @@ public:
 	virtual ReligionTypes AI_chooseReligion() = 0;
 	virtual int AI_getExtraGoldTarget() const = 0;
 	virtual void AI_setExtraGoldTarget(int iNewValue) = 0;
+	virtual int AI_maxGoldPerTurnTrade(PlayerTypes ePlayer) const = 0;
+	virtual int AI_maxGoldTrade(PlayerTypes ePlayer) const = 0;
 
 protected:
 

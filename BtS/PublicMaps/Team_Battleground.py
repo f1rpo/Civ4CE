@@ -7,6 +7,16 @@
 #	Copyright (c) 2005 Firaxis Games, Inc. All rights reserved.
 #-----------------------------------------------------------------------------
 #
+#
+# Ruff - Desert Bridge & Round Start
+#  Additional options added by Ruff_Hi from
+#        - Civilization Fanatics (http://forums.civfanatics.com/member.php?u=64034)
+#        - Deviant Minds (http://deviantminds.us/forum/memberlist.php?mode=viewprofile&u=8)
+#        - Realms Beyond (http://realmsbeyond.net/forums/member.php?u=555)
+#    - Left v Right with a desert land bridge
+#    - round with starting locations uniformly spread around the circle
+#    - donut - same as round but with water at the center
+
 
 from CvPythonExtensions import *
 import CvUtil
@@ -17,6 +27,11 @@ from CvMapGeneratorUtil import HintedWorld
 from CvMapGeneratorUtil import TerrainGenerator
 from CvMapGeneratorUtil import FeatureGenerator
 
+from math import sqrt
+from math import cos
+from math import sin
+from math import radians
+
 def getDescription():
 	return "TXT_KEY_MAP_SCRIPT_TEAM_BATTLEGROUND_DESCR"
 
@@ -25,7 +40,7 @@ def getNumCustomMapOptions():
 	
 def getNumHiddenCustomMapOptions():
 	return 1
-
+	
 def getCustomMapOptionName(argsList):
 	[iOption] = argsList
 	option_names = {
@@ -39,7 +54,7 @@ def getCustomMapOptionName(argsList):
 def getNumCustomMapOptionValues(argsList):
 	[iOption] = argsList
 	option_values = {
-		0:	3,
+		0:	6,
 		1:	3,
 		2:	3
 		}
@@ -47,11 +62,15 @@ def getNumCustomMapOptionValues(argsList):
 	
 def getCustomMapOptionDescAt(argsList):
 	[iOption, iSelection] = argsList
+
 	selection_names = {
 		0:	{
 			0: "TXT_KEY_MAP_SCRIPT_LEFT_VS_RIGHT",
 			1: "TXT_KEY_MAP_SCRIPT_TOP_VS_BOTTOM",
-			2: "TXT_KEY_MAP_SCRIPT_FOUR_CORNERS"
+			2: "TXT_KEY_MAP_SCRIPT_FOUR_CORNERS",
+			3: "TXT_KEY_MAP_SCRIPT_LEFT_VS_RIGHT_BRIDGE",
+			4: "TXT_KEY_MAP_SCRIPT_ROUND",
+			5: "TXT_KEY_MAP_SCRIPT_DONUT"
 			},
 		1:	{
 			0: "TXT_KEY_MAP_SCRIPT_START_TOGETHER",
@@ -64,6 +83,7 @@ def getCustomMapOptionDescAt(argsList):
 			2: "TXT_KEY_MAP_WRAP_TOROID"
 			}
 		}
+
 	translated_text = unicode(CyTranslator().getText(selection_names[iOption][iSelection], ()))
 	return translated_text
 	
@@ -132,8 +152,15 @@ def getGridSize(argsList):
 		return []
 
 	# Get user input.
-	grid_choice = CyMap().getCustomMapOption(0)
+	grid_choice = CyMap().getCustomMapOption(0)  # 0 = left v right, 1 = top v bottom, 2 = four corners, 3 = left v right with land bridge, 4 = round, 5 = donut
 	if grid_choice == 2:
+		grid_choice = 1
+
+	if grid_choice == 3: # left v right with land bridge defaults to same as left v right
+		grid_choice = 0
+	
+	if (grid_choice == 4   # round
+	or  grid_choice == 5): # donut
 		grid_choice = 1
 	
 	grid_sizes = [{WorldSizeTypes.WORLDSIZE_DUEL:		(5,3),
@@ -196,7 +223,7 @@ def generatePlotTypes():
 						hinted_world.setValue(x,y,128) # coast
 					if y == centery:
 						hinted_world.setValue(x,y,0) # ocean
-                                
+
 		hinted_world.buildAllContinents()
 		plotTypes = hinted_world.generatePlotTypes(20)
 	
@@ -272,6 +299,57 @@ def generatePlotTypes():
 		
 		return plotTypes
 
+	if (userInputPlots == 4   # round
+	or  userInputPlots == 5): # donut
+		hinted_world = HintedWorld()
+		iNumPlotsX = map.getGridWidth()
+		iNumPlotsY = map.getGridHeight()
+
+		centery = (iNumPlotsY - 1)//2
+		centerx = (iNumPlotsX - 1)//2
+		radii = centery - 1
+
+		# Set all blocks to ocean except the inner circle
+		for x in range(iNumPlotsX):
+			for y in range(iNumPlotsY):
+				dist_xy_c = sqrt( (x - centerx) ** 2 + (y - centery) ** 2)
+				if dist_xy_c < radii:
+					hinted_world.setValue(x,y,255)
+				else:
+					hinted_world.setValue(x,y,0) # ocean
+
+		hinted_world.buildAllContinents()
+		plotTypes = hinted_world.generatePlotTypes(water_percent = 0)
+
+		if userInputPlots == 5: # donut
+			# get the size of the hole
+			map_size = map.getWorldSize()
+			sizevalues = {
+				WorldSizeTypes.WORLDSIZE_DUEL:		2,
+				WorldSizeTypes.WORLDSIZE_TINY:		3,
+				WorldSizeTypes.WORLDSIZE_SMALL:		4,
+				WorldSizeTypes.WORLDSIZE_STANDARD:	5,
+				WorldSizeTypes.WORLDSIZE_LARGE:		7,
+				WorldSizeTypes.WORLDSIZE_HUGE:		8
+				}
+			hole_radii = sizevalues[map_size]
+
+		# Set all blocks to ocean except the inner circle
+		for x in range(iNumPlotsX):
+			for y in range(iNumPlotsY):
+				i = map.plotNum(x, y)
+				dist_xy_c = sqrt( (x - centerx) ** 2 + (y - centery) ** 2)
+				if (dist_xy_c < radii):
+					plotTypes[i] = PlotTypes.PLOT_LAND
+				else:
+					plotTypes[i] = PlotTypes.PLOT_OCEAN
+
+				if (userInputPlots == 5 # donut
+				and dist_xy_c < hole_radii):
+					plotTypes[i] = PlotTypes.PLOT_OCEAN
+
+		return plotTypes
+
 	elif userInputPlots == 1: # Top vs Bottom
 		fractal_world = FractalWorld(fracXExp=6, fracYExp=6)
 		fractal_world.initFractal(continent_grain = 4, rift_grain = -1, has_center_rift = False, invert_heights = True)
@@ -309,6 +387,17 @@ def generatePlotTypes():
 				i = map.plotNum(x, y)
 				if plotTypes[i] != PlotTypes.PLOT_OCEAN:
 					plotTypes[i] = PlotTypes.PLOT_OCEAN
+
+		if userInputPlots == 3: # Left v Right with bridge
+			centerplotx = (iNumPlotsX)//2
+			centerploty = (iNumPlotsY)//2
+			dy = 1
+			for x in range(iNumPlotsX):
+				for y in range(centerploty-dy, centerploty+dy+1):
+					i = map.plotNum(x, y)
+					if plotTypes[i] == PlotTypes.PLOT_OCEAN:
+						plotTypes[i] = PlotTypes.PLOT_LAND
+
 		return plotTypes
 
 class TeamBGTerrainGenerator(CvMapGeneratorUtil.TerrainGenerator):
@@ -336,6 +425,18 @@ class TeamBGTerrainGenerator(CvMapGeneratorUtil.TerrainGenerator):
 				terrainVal = self.terrainPlains
 			else:
 				terrainVal =self.terrainGrass
+
+		map = CyMap()
+		userInputPlots = map.getCustomMapOption(0)
+		if userInputPlots == 3: # Left v Right with bridge
+			if (iY - 3 > 0
+			and iY + 3 < map.getGridHeight()):
+				if (self.map.plot(iX, iY - 3).isWater()
+				and self.map.plot(iX, iY + 3).isWater()):
+					terrainVal = self.terrainDesert
+				elif (self.map.plot(iX, iY - 3).isWater()
+				or    self.map.plot(iX, iY + 3).isWater()):
+					terrainVal = self.terrainPlains
 
 		if (terrainVal == TerrainTypes.NO_TERRAIN):
 			return self.map.plot(iX, iY).getTerrainType()
@@ -367,8 +468,96 @@ def assignStartingPlots():
 	global shuffledTeams
 	global assignedPlayers
 	assignedPlayers = [0] * gc.getGame().countCivTeamsEverAlive()
+
 	print assignedPlayers
+
 	shuffle = gc.getGame().getMapRand().get(2, "Start Location Shuffle - PYTHON")
+
+	global shuffledPlayers
+	global player_num
+
+	map = CyMap()
+	userInputPlots = map.getCustomMapOption(0)
+	if (userInputPlots == 4   # round
+	or  userInputPlots == 5): # donut
+
+# this block of code takes the players and shuffles them
+# if the 'teams start together' is selected (ie map.getCustomMapOption(1) = 0)
+# then the shuffled players are sorted into teams
+# then each player in the shuffled player array is assigned a starting plot 1 in from the coast
+# and uniformly spread around the circle
+
+# shuffle the players
+		player_num = gc.getGame().countCivPlayersEverAlive()
+		player_list = [0] * player_num
+		shuffledPlayers = []
+
+		for playerLoop in range(player_num):
+			player_list[playerLoop] = playerLoop
+
+		for playerLoop in range(player_num):
+			iChoosePlayer = dice.get(len(player_list), "Shuffling Players - TBG PYTHON")
+			shuffledPlayers.append(player_list[iChoosePlayer])
+			del player_list[iChoosePlayer]
+
+
+# sort by team if required
+		userInputProximity = map.getCustomMapOption(1)
+		if userInputProximity == 0: # Start Together
+			shuffledPlayers_Team = [0] * player_num
+			for playerLoop in range(player_num):
+				shuffledPlayers_Team[playerLoop] = CyGlobalContext().getPlayer(playerLoop).getTeam()
+
+			player_Start = 0
+			player_Out = player_Start + 1
+			player_In = player_Start + 2
+
+			while (player_Out < player_num
+			and    player_In  < player_num):
+				if shuffledPlayers_Team[player_Start] == shuffledPlayers_Team[player_Out]:
+					player_Out = player_Out + 1
+					player_In = player_In + 1
+
+				elif shuffledPlayers_Team[player_Start] == shuffledPlayers_Team[player_In]:
+					temp = shuffledPlayers[player_In]
+					shuffledPlayers[player_In] = shuffledPlayers[player_Out]
+					shuffledPlayers[player_Out] = temp
+
+					temp = shuffledPlayers_Team[player_In]
+					shuffledPlayers_Team[player_In] = shuffledPlayers_Team[player_Out]
+					shuffledPlayers_Team[player_Out] = temp
+
+					player_Start = player_Start + 1
+					player_Out = player_Start + 1
+					player_In = player_Start + 2
+
+				else:
+					player_In = player_In + 1
+
+					if player_In > player_num:
+						player_Out = player_Out + 1
+						player_Start = player_Out - 1
+						player_In = player_Out + 1
+
+
+# allocate starting plot by player
+		iNumPlotsX = map.getGridWidth()
+		iNumPlotsY = map.getGridHeight()
+
+		centery = (iNumPlotsY - 1)//2
+		centerx = (iNumPlotsX - 1)//2
+		radii = centery - 2
+
+		base_theta = 360 / player_num * dice.get(1000, "Starting Plot - base theta") / 1000
+
+		for playerLoop in range(player_num):
+			pPlayer = shuffledPlayers[playerLoop]
+			theta = base_theta + playerLoop * 360 / player_num
+			x = int(centerx + round(radii * cos(radians(theta)),0))
+			y = int(centery + round(radii * sin(radians(theta)),0))
+			pPlot = map.plot(x, y)
+			CyGlobalContext().getPlayer(pPlayer).setStartingPlot(pPlot,True)
+
 	if gc.getGame().countCivTeamsEverAlive() < 5:
 		team_list = [0, 1, 2, 3]
 		shuffledTeams = []
@@ -376,12 +565,21 @@ def assignStartingPlots():
 			iChooseTeam = dice.get(len(team_list), "Shuffling Regions - TBG PYTHON")
 			shuffledTeams.append(team_list[iChooseTeam])
 			del team_list[iChooseTeam]
+
 	CyPythonMgr().allowDefaultImpl()
 	
 def findStartingPlot(argsList):
 	[playerID] = argsList
 	global assignedPlayers
 	global team_num
+
+	map = CyMap()
+	userInputPlots = map.getCustomMapOption(0)
+	if (userInputPlots == 4   # round
+	or  userInputPlots == 5): # donut ... starting position already set - return plotnum
+		pPlot = CyGlobalContext().getPlayer(playerID).getStartingPlot()
+		return map.plotNum(pPlot.getX(), pPlot.getY())
+
 	thisTeamID = CyGlobalContext().getPlayer(playerID).getTeam()
 	teamID = team_num[thisTeamID]
 	
@@ -395,15 +593,19 @@ def findStartingPlot(argsList):
 		userInputProximity = map.getCustomMapOption(1)
 		if userInputProximity == 2: # Start anywhere!
 			return true
+
 		global shuffle
 		global shuffledTeams
 		global team_num
+		global shuffledPlayers
+		global player_num
+
 		thisTeamID = CyGlobalContext().getPlayer(playerID).getTeam()
 		teamID = team_num[thisTeamID]
 		userInputPlots = map.getCustomMapOption(0)
 		iW = map.getGridWidth()
 		iH = map.getGridHeight()
-		
+
 		# Two Teams, Start Together
 		if numTeams == 2 and userInputProximity == 0: # Two teams, Start Together
 			if userInputPlots == 1: # TvB
@@ -416,7 +618,9 @@ def findStartingPlot(argsList):
 				if teamID == 1 and shuffle and y <= iH * 0.4:
 					return true
 				return false
-			elif userInputPlots == 0: # LvR
+
+			elif (userInputPlots == 0   # LvR
+			or    userInputPlots == 3): # LvR with land bridge
 				if teamID == 0 and shuffle and x >= iW * 0.6:
 					return true
 				if teamID == 1 and not shuffle and x >= iW * 0.6:
@@ -426,6 +630,7 @@ def findStartingPlot(argsList):
 				if teamID == 1 and shuffle and x <= iW * 0.4:
 					return true
 				return false
+
 			else: # 4C
 				corner = shuffledTeams[teamID]
 				if corner == 0 and x <= iW * 0.4 and y <= iH * 0.4:
@@ -482,7 +687,9 @@ def findStartingPlot(argsList):
 				if teamID == 1 and side and y <= iH * 0.4:
 					return true
 				return false
-			elif userInputPlots == 0: # LvR
+
+			elif (userInputPlots == 0   # LvR
+			or    userInputPlots == 3): # LvR with land bridge
 				if teamID == 0 and side and x >= iW * 0.6:
 					return true
 				if teamID == 1 and not side and x >= iW * 0.6:
@@ -492,6 +699,7 @@ def findStartingPlot(argsList):
 				if teamID == 1 and side and x <= iW * 0.4:
 					return true
 				return false
+
 			else: # 4C
 				corner = shuffledTeams[side]
 				if corner == 0 and x <= iW * 0.4 and y <= iH * 0.4:
@@ -527,15 +735,18 @@ def getRiverStartCardinalDirection(argsList):
 	iH = map.getGridHeight()
 	userInputPlots = CyMap().getCustomMapOption(0)
 
-	if userInputPlots == 0:
+	if (userInputPlots == 0 # LvR
+	or  userInputPlots == 3): # LvR with land bridge
 		if x < iW/2:
 			return CardinalDirectionTypes.CARDINALDIRECTION_EAST
 		else:
 			return CardinalDirectionTypes.CARDINALDIRECTION_WEST
+
 	elif userInputPlots == 2:
 		if y < iH/2:
 			return CardinalDirectionTypes.CARDINALDIRECTION_NORTH
 		else:
 			return CardinalDirectionTypes.CARDINALDIRECTION_SOUTH
+
 	else:
 		CyPythonMgr().allowDefaultImpl()

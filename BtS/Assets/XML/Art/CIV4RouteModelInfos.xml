@@ -1,8 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Jason Winokur (Firaxis Games) --><!-- Sid Meier's Civilization 4 --><!-- Copyright Firaxis Games 2005 --><!-- --><!-- Route art path information --><Civ4RouteModelInfos xmlns="x-schema:CIV4ArtDefinesSchema.xml">
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
+<!-- Sid Meier's Civilization 4 -->
+<!-- Copyright Firaxis Games 2005 -->
+<!-- -->
+<!-- Route art path information -->
+<Civ4RouteModelInfos xmlns="x-schema:CIV4ArtDefinesSchema.xml">
 	<RouteModelInfos>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadA00.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadA00.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadA00.nif</LateModelFile>
 			<ModelFileKey>A00</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -12,7 +18,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadA01.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadA01.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadA01.nif</LateModelFile>
 			<ModelFileKey>A01</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -22,7 +28,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadA02.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadA02.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadA02.nif</LateModelFile>
 			<ModelFileKey>A02</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -32,7 +38,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadB01.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadB01.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadB01.nif</LateModelFile>
 			<ModelFileKey>B01</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -42,7 +48,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadB02.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadB02.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadB02.nif</LateModelFile>
 			<ModelFileKey>B02</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -52,7 +58,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadB03.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadB03.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadB03.nif</LateModelFile>
 			<ModelFileKey>B03</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -62,7 +68,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadB04.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadB04.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadB04.nif</LateModelFile>
 			<ModelFileKey>B04</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -72,7 +78,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadB05.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadB05.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadB05.nif</LateModelFile>
 			<ModelFileKey>B05</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -82,7 +88,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadB06.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadB06.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadB06.nif</LateModelFile>
 			<ModelFileKey>B06</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -92,7 +98,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadB07.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadB07.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadB07.nif</LateModelFile>
 			<ModelFileKey>B07</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -102,7 +108,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadB08.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadB08.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadB08.nif</LateModelFile>
 			<ModelFileKey>B08</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -112,7 +118,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadB05.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadB05.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadB05.nif</LateModelFile>
 			<ModelFileKey>C01</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -122,7 +128,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadB06.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadB06.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadB06.nif</LateModelFile>
 			<ModelFileKey>C02</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -132,7 +138,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC03.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC03.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC03.nif</LateModelFile>
 			<ModelFileKey>C03</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -142,7 +148,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC04.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC04.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC04.nif</LateModelFile>
 			<ModelFileKey>C04</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -152,7 +158,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadB03.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadB03.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadB03.nif</LateModelFile>
 			<ModelFileKey>C05OtherDir</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -162,7 +168,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC06.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC06.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC06.nif</LateModelFile>
 			<ModelFileKey>C06</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -172,7 +178,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC07.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC07.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC07.nif</LateModelFile>
 			<ModelFileKey>C07</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -182,7 +188,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC08.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC08.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC08.nif</LateModelFile>
 			<ModelFileKey>C08</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -192,7 +198,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC09.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC09.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC09.nif</LateModelFile>
 			<ModelFileKey>C09</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -202,7 +208,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC10.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC10.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC10.nif</LateModelFile>
 			<ModelFileKey>C10</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -212,7 +218,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadB07.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadB07.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadB07.nif</LateModelFile>
 			<ModelFileKey>C11</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -222,7 +228,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC12.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC12.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC12.nif</LateModelFile>
 			<ModelFileKey>C12</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -232,7 +238,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadB08.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadB08.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadB08.nif</LateModelFile>
 			<ModelFileKey>C13</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -242,7 +248,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC14.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC14.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC14.nif</LateModelFile>
 			<ModelFileKey>C14</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -252,7 +258,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD02.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</LateModelFile>
 			<ModelFileKey>D01</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -262,7 +268,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD02.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</LateModelFile>
 			<ModelFileKey>D02</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -272,7 +278,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD03.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD03.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD03.nif</LateModelFile>
 			<ModelFileKey>D03</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -282,7 +288,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC04.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC04.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC04.nif</LateModelFile>
 			<ModelFileKey>D04</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -292,7 +298,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD05.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD05.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD05.nif</LateModelFile>
 			<ModelFileKey>D05</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -302,7 +308,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadB04.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadB04.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadB04.nif</LateModelFile>
 			<ModelFileKey>D06</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -312,7 +318,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD07.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD07.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD07.nif</LateModelFile>
 			<ModelFileKey>D07</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -322,7 +328,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD08.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD08.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD08.nif</LateModelFile>
 			<ModelFileKey>D08</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -332,7 +338,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadB08.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadB08.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadB08.nif</LateModelFile>
 			<ModelFileKey>D09</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -342,7 +348,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadB07.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadB07.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadB07.nif</LateModelFile>
 			<ModelFileKey>D10</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -352,7 +358,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC06.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC06.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC06.nif</LateModelFile>
 			<ModelFileKey>D11</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -362,7 +368,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC07.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC07.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC07.nif</LateModelFile>
 			<ModelFileKey>D12</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -372,7 +378,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC04.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC04.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC04.nif</LateModelFile>
 			<ModelFileKey>D13</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -382,7 +388,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC04.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC04.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC04.nif</LateModelFile>
 			<ModelFileKey>D14</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -392,7 +398,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC10.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC10.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC10.nif</LateModelFile>
 			<ModelFileKey>D15</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -402,7 +408,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC06.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC06.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC06.nif</LateModelFile>
 			<ModelFileKey>D16</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -412,7 +418,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC12.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC12.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC12.nif</LateModelFile>
 			<ModelFileKey>D17</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -422,7 +428,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC14.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC14.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC14.nif</LateModelFile>
 			<ModelFileKey>D18</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -432,7 +438,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD19.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD19.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD19.nif</LateModelFile>
 			<ModelFileKey>D19</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -442,7 +448,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD20.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD20.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD20.nif</LateModelFile>
 			<ModelFileKey>D20</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -452,7 +458,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD02.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</LateModelFile>
 			<ModelFileKey>E01</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -462,7 +468,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD02.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</LateModelFile>
 			<ModelFileKey>E02</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -472,7 +478,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD20.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD20.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD20.nif</LateModelFile>
 			<ModelFileKey>E03</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -482,7 +488,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC04.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC04.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC04.nif</LateModelFile>
 			<ModelFileKey>E04</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -492,7 +498,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD05.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD05.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD05.nif</LateModelFile>
 			<ModelFileKey>E05</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -502,7 +508,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadB04.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadB04.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadB04.nif</LateModelFile>
 			<ModelFileKey>E06</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -512,7 +518,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC08.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC08.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC08.nif</LateModelFile>
 			<ModelFileKey>E07</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -522,7 +528,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD20.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD20.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD20.nif</LateModelFile>
 			<ModelFileKey>E08</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -532,7 +538,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC09.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC09.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC09.nif</LateModelFile>
 			<ModelFileKey>E09</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -542,7 +548,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD19.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD19.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD19.nif</LateModelFile>
 			<ModelFileKey>E10</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -552,7 +558,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC06.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC06.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC06.nif</LateModelFile>
 			<ModelFileKey>E11</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -562,7 +568,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadB06.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadB06.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadB06.nif</LateModelFile>
 			<ModelFileKey>E12</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -572,7 +578,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD19.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD19.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD19.nif</LateModelFile>
 			<ModelFileKey>E13</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -582,7 +588,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC04.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC04.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC04.nif</LateModelFile>
 			<ModelFileKey>E14</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -592,7 +598,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD02.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</LateModelFile>
 			<ModelFileKey>F01</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -602,7 +608,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD02.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</LateModelFile>
 			<ModelFileKey>F02</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -612,7 +618,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD02.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</LateModelFile>
 			<ModelFileKey>F03</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -622,7 +628,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD02.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</LateModelFile>
 			<ModelFileKey>F04</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -632,7 +638,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC08.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC08.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC08.nif</LateModelFile>
 			<ModelFileKey>F05</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -642,7 +648,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD20.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD20.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD20.nif</LateModelFile>
 			<ModelFileKey>F06</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -652,7 +658,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC06.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC06.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC06.nif</LateModelFile>
 			<ModelFileKey>F07</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -662,7 +668,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadC06.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadC06.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadC06.nif</LateModelFile>
 			<ModelFileKey>F08</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -672,7 +678,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD02.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</LateModelFile>
 			<ModelFileKey>G01</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -682,7 +688,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD02.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</LateModelFile>
 			<ModelFileKey>G02</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>
@@ -692,7 +698,7 @@
 		</RouteModelInfo>
 		<RouteModelInfo>
 			<ModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</ModelFile>
-			<LateModelFile>Art/Terrain/Routes/Modern Roads/RailroadD02.nif</LateModelFile>
+			<LateModelFile>Art/Terrain/Routes/Roads/RoadD02.nif</LateModelFile>
 			<ModelFileKey>H01</ModelFileKey>
 			<Animated>0</Animated>
 			<RouteType>ROUTE_ROAD</RouteType>

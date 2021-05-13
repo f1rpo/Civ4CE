@@ -935,11 +935,11 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_INFO_FUGITIVE_4</Tag>
-		<English>Our gesture of goodwill toward the %s1_civ_adjective Empire has angered %s6_player.</English>
-		<French>Notre geste de bonne volont&#233; envers l'empire %s1:1_civ_adjective a provoqu&#233; la col&#232;re de %s6_player.</French>
-		<German>Unsere Geste des guten Willens gegen&#252;ber dem %s1:2_civ_adjective Reich hat %s6_player ver&#228;rgert.</German>
-		<Italian>Il nostro gesto di benevolenza verso l'impero %s1_civ_adjective ha irritato %s6_player.</Italian>
-		<Spanish>Nuestro gesto de buena voluntad hacia el imperio %s1:1_civ_adjective ha enojado a %s6_player.</Spanish>
+		<English>Our gesture of goodwill toward the %s3_civ_adjective Empire has angered %s6_player.</English>
+		<French>Notre geste de bonne volont&#233; envers l'empire %s3:1_civ_adjective a provoqu&#233; la col&#232;re de %s6_player.</French>
+		<German>Unsere Geste des guten Willens gegen&#252;ber dem %s3:2_civ_adjective Reich hat %s6_player ver&#228;rgert.</German>
+		<Italian>Il nostro gesto di benevolenza verso l'impero %s3_civ_adjective ha irritato %s6_player.</Italian>
+		<Spanish>Nuestro gesto de buena voluntad hacia el imperio %s3:1_civ_adjective ha enojado a %s6_player.</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_INFO_FUGITIVE_5</Tag>
@@ -5932,7 +5932,7 @@
 		<English>The %s1_civ_adjective game designers have developed a new game of Civilization.</English>
 		<French>Les developpeurs de jeux videos %s1_civ_adjective game ont cree un nouvelle version de Civilization.</French>
 		<German>Von %s1:2_civ_adjective Entwicklern wird ein neuartiges Computerspiel namens 'Civilization' pr&#228;sentiert.</German>
-		<Italian>%s1_civ_adjective game designers hanno sviluppato un nuovo gioco chiamato Civilization.</Italian>
+		<Italian>Progettisti di videogiochi %s1_civ_adjective hanno sviluppato un nuovo gioco chiamato Civilization.</Italian>
 		<Spanish>Los dise&#241;adores de juegos %s1_civ_adjective han desarrollado un nuevo juego de Civilization.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -5940,7 +5940,7 @@
 		<English>Our game designers have developed a new addictive game of Civilization. How shall we proceed?</English>
 		<French>Nos developpeurs de jeux videos on cree une nouvelle et addictive version de Civilization. Que devons-nous faire?</French>
 		<German>Unsere Entwickler pr&#228;sentieren ein neuartiges Computerspiel namens 'Civilization'. Was meint Ihr dazu?</German>
-		<Italian>I nostri game designers hanno sviluppato un nuovo gioco chiamato Civilization. Cosa dobbiamo fare?</Italian>
+		<Italian>I nostri progettisti di videogiochi hanno sviluppato un nuovo gioco chiamato Civilization. Cosa dobbiamo fare?</Italian>
 		<Spanish>Nuestros dise&#241;adores de juegos han desarrollado un nuevo juego de Civilization. &#191;Qu&#233; debemos hacer?</Spanish>
 	</TEXT>
 	<TEXT>
@@ -5989,7 +5989,7 @@
 		<English>Inspired by books telling stories about the culture of %s2_city, immigrants are flowing to the city!</English>
 		<French>Motives par ce qu'ils ont lu sur la culture de %s2_city, les immigrants y arrivent en masse!</French>
 		<German>Geschichten &#252;ber die reiche Kultur der Stadt %s2_city ziehen viele Immigranten an.</German>
-		<Italian>Ispirati dai libri che raccontano storie sulle bellezze culturali di %s2_city,un flusso di immigranti si dirige verso la citt&#224;!</Italian>
+		<Italian>Ispirati dai libri che raccontano storie sulle bellezze culturali di %s2_city, un flusso di immigranti si dirige verso la citt&#224;!</Italian>
 		<Spanish>Inspirados por libros que narran historias sobre la cultura de %s2_city, los inmigrantes est&#225;n inundando la ciudad!</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6029,7 +6029,7 @@
 		<English>Forget these tests. Anything worth knowing has already been discovered, so why risk needless death?</English>
 		<French>Au diable les tests! Tout ce qui en vaut la peine a deja ete decouvert, alors pourquoi risquer des morts inutiles?</French>
 		<German>Riskante Feldversuche kommen nicht in Frage. Wir setzen die Gesundheit von Menschen nicht aufs Spiel.</German>
-		<Italian>Dimentica i test. Tutto ci&#242; che &#232; necessario nel campo medico &#232; gi&#224; stato scoperto, perch&#232; rischiare decessi inutili.</Italian>
+		<Italian>Dimentica i test. Tutto ci&#242; che &#232; necessario nel campo medico &#232; gi&#224; stato scoperto, perch&#232; rischiare decessi inutili?</Italian>
 		<Spanish>Olvida esas pruebas. Ya ha sido descubierto algo de valor, &#191;para qu&#233; arriesgarse con pruebas innecesarias?</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6149,7 +6149,7 @@
 		<English>He's a senile old fool. Let him teach if he wants to.</English>
 		<French>Ce n'est qu'un vieux radoteur. Laissez-le enseigner s'il le souhaite.</French>
 		<German>Der senile alte Narr soll lehren, was er will.</German>
-		<Italian>E' un vecchio pazzo. Lasciatelo insegnare se vuole.</Italian>
+		<Italian>&#200; un vecchio pazzo. Lasciatelo insegnare se vuole.</Italian>
 		<Spanish>Es un viejo tonto senil. Dejadle ense&#241;ar si as&#237; lo desea.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6165,7 +6165,7 @@
 		<English>A high-ranking %s1_civ_adjective intelligence agent has defected to the %s4_civ_adjective government.</English>
 		<French>Un agent %s1_civ_adjective haut place a deserte et a rejoint le gouvernement %s4_civ_adjective.</French>
 		<German>Ein hochrangiger %[s1:3_civ_adjective]r Spion ist zum %s4:2_civ_adjective Reich &#252;bergelaufen.</German>
-		<Italian>Un agente di grado elevato dell'intelligence %s1_civ_adjective ha defezionato ed &#232; passato al servizio del governo %s4_civ_adjective.</Italian>
+		<Italian>Un agente di grado elevato dell'intelligence %s1_civ_adjective ha disertato ed &#232; passato al servizio del governo %s4_civ_adjective.</Italian>
 		<Spanish>Un agente de inteligencia %s1_civ_adjective de alto rango ha desertado al gobierno %s4_civ_adjective.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6173,7 +6173,7 @@
 		<English>One of our high-ranking intelligence agents has defected to the %s1_civ_adjective empire.</English>
 		<French>Un de nos agents haut place a deserte nos rangs pour rejoindre l'empire %s1_civ_adjective.</French>
 		<German>Einer unserer hochrangigen Spione ist zum %s1:2_civ_adjective Reich &#252;bergelaufen.</German>
-		<Italian>Uno dei nostri agenti dell'intelligence di grado elevato ha defezionato ed &#232; passato al servizio dell'impero %s1_civ_adjective</Italian>
+		<Italian>Uno dei nostri agenti dell'intelligence di grado elevato ha disertato ed &#232; passato al servizio dell'impero %s1_civ_adjective</Italian>
 		<Spanish>Uno de nuestros agentes de inteligencia de alto rango ha desertado al imperio %s1_civ_adjective</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6181,7 +6181,7 @@
 		<English>That's regrettable. We'll need to review our security procedures.</English>
 		<French>C'est regrettable. Il nous faut revoir nos procedures de securite.</French>
 		<German>Das ist bedauerlich. Lasst die Sicherheitsma&#223;nahmen &#252;berpr&#252;fen.</German>
-		<Italian>E' una cosa deplorevole. Dovremo rivedere le nostre misure di sicurezza.</Italian>
+		<Italian>&#200; una cosa deplorevole. Dovremo rivedere le nostre misure di sicurezza.</Italian>
 		<Spanish>Es lamentable. Tendremos que revisar nuestros procedimientos de seguridad.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6189,7 +6189,7 @@
 		<English>Unacceptable. An "accident" should happen to the traitor!</English>
 		<French>Intolerable. Un "accident" devrait arriver au traitre!</French>
 		<German>Das ist inakzeptabel. Sorgt f&#252;r einen "Unfall" des Verr&#228;ters...</German>
-		<Italian>E' inaccettabile. Il traditore la deve pagare!</Italian>
+		<Italian>&#200; inaccettabile. Il traditore la deve pagare!</Italian>
 		<Spanish>Inaceptable. El traidor debe sufrir un "accidente"!</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6261,7 +6261,7 @@
 		<English>That is an act of war! Clearly, our people and military contractors will rise to the occasion!</English>
 		<French>C'est une declaration de guerre! Il est evident que notre peuple et nos fournisseurs militaires sauront profiter de cette occasion!</French>
 		<German>Dieser Vorfall ist ein kriegerischer Akt! Die Emp&#246;rung wird das Volk in Rage versetzen und zu H&#246;chstleistungen antreiben.</German>
-		<Italian>Questo &#232; un atto di guerra! Certamente, i nostri cittadini reagiranno duramente alla notizia e i contractor militari vorranno approfittarne di questa occasione!</Italian>
+		<Italian>Questo &#232; un atto di guerra! Certamente, i nostri cittadini reagiranno duramente alla notizia e i contractor militari vorranno approfittare di questa occasione!</Italian>
 		<Spanish>Esto es un acto de guerra! Obviamente, nuestro pueblo y contratistas militares estaran a la altura!</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6277,7 +6277,7 @@
 		<English>News reports indicate massive %s1_civ_adjective protests over the country's nuclear weapons stockpile.</English>
 		<French>Derniere minute: manifestions %s1_civ_adjective contre l'arsenal nucleaire national!</French>
 		<German>Es gibt Berichte &#252;ber massive %s1:3_civ_adjective B&#252;rgerproteste hinsichtlich des Atomwaffenarsenals.</German>
-		<Italian>Rapporti recenti mostrano massicce proteste di cittadini %s1_civ_adjective in relazione all'arsenale nucleare della nazione.</Italian>
+		<Italian>Rapporti recenti mostrano massicce proteste di cittadini %s1_civ_adjective per l'arsenale nucleare della nazione.</Italian>
 		<Spanish>Las noticias indican protestas masivas en %s1_civ_adjective por la reserva nuclear del pais.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6293,7 +6293,7 @@
 		<English>The people's wishes are our top priority. We will disband our nuclear weapons.</English>
 		<French>Notre priorite est de contenter nos citoyens. Nous allons desarmer notre arsenal nucleaire.</French>
 		<German>Der Volkswille hat oberste Priorit&#228;t. Das Atomwaffenarsenal wird aufgel&#246;st.</German>
-		<Italian>La volont&#224; della nostra popolazione &#232; la nostra prima priorit&#224;. Avvia il disarmo nucleare.</Italian>
+		<Italian>La volont&#224; del nostro popolo &#232; la nostra prima priorit&#224;. Avvia il disarmo nucleare.</Italian>
 		<Spanish>Los deseos del pueblo son nuestra primera prioridad. Desmantelaremos nuestro arsenal nuclear.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6309,7 +6309,7 @@
 		<English>What? Find those who spread such nonsense and prosecute them!</English>
 		<French>De quoi? Trouvez les responsables de ces idioties et trainez-les en justice!</French>
 		<German>In diesem Land entscheide ich. Lasst die Urheber der Meinungsmache strafrechtlich verfolgen!</German>
-		<Italian>Cosa? Trova chi diffonde queste sciocchezze e mettiamoli sotto processo!!</Italian>
+		<Italian>Cosa? Trovate chi diffonde queste sciocchezze e metteteli sotto processo!!</Italian>
 		<Spanish>&#191;Qu&#233;? Encontrad a quien divulgue estas estupideces y perseguidle!</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6357,7 +6357,7 @@
 		<English>The dam in %s2_city has broken, flooding the city's suburbs and killing people.</English>
 		<French>Le barrage de %s2_city a rompu, inondant les faubourgs de la ville et faisant de nombreuses victimes.</French>
 		<German>Ein Bruch des Wasserschutzwalls in der Stadt %s2_city verursacht &#220;berflutungen von Stadtbezirken und fordert Todesopfer.</German>
-		<Italian>La diga di %s2_city si &#232; squarciata. I sobborghi della citt&#224; sono stati inondati e sono stati segnalati diverse persone uccise.</Italian>
+		<Italian>La diga di %s2_city &#232; crollata. I sobborghi della citt&#224; sono stati inondati e sono state segnalate diverse persone uccise.</Italian>
 		<Spanish>La presa en %s2_city ha cedido, inundando las afueras de la ciudad y matando gente.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6373,7 +6373,7 @@
 		<English>That is very unfortunate, but we can not help. Tell the local authorities they'll have to handle the situation.</English>
 		<French>C'est malheureux, mais nous ne pouvons rien y faire. Mettez les autorites locales en charge de la situation.</French>
 		<German>Wir k&#246;nnen uns derzeit keine Hilfsma&#223;nahmen leisten. Die lokalen Beh&#246;rden m&#252;ssen mit dieser Situation selbst fertig werden.</German>
-		<Italian>E' una cosa molto spiacevole, ma non possiamo fare nulla. Dici alle autorit&#224; locali che dovranno occuparsi della situazione.</Italian>
+		<Italian>&#200; una cosa molto spiacevole, ma non possiamo fare nulla. Dici alle autorit&#224; locali che dovranno occuparsi della situazione.</Italian>
 		<Spanish>Eso es muy desafortunado, pero no podemos ayudar. Decir a las autoridades locales que tendr&#225;n que manejar la situaci&#243;n.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6405,7 +6405,7 @@
 		<English>A Rabbi from %s2_city has written a collection of religious works that is of great importance to Judaism worldwide.</English>
 		<French>Un rabbin de %s2_city a termine la redaction de son oeuvre, d'importance majeure pour le judaisme.</French>
 		<German>Ein Rabbi aus der Stadt %s2_city hat eine wertvolle Sammlung religi&#246;ser Schriften verfasst, die von weltweiter Bedeutung f&#252;r das Judentum ist.</German>
-		<Italian>Un rabbino di %s2_city ha scritto una preziosa raccolta di opere religiose che &#232; di grande importanza per il Giudaismo nel mondo.</Italian>
+		<Italian>Un rabbino di %s2_city ha scritto una preziosa raccolta di opere religiose di grande importanza per il Giudaismo nel mondo.</Italian>
 		<Spanish>Un rabino de %s2_city ha escrito una colecci&#243;n de obras religiosas de gran valor para el judaismo mundial.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6509,7 +6509,7 @@
 		<English>The man who is Tezcatlipoca's likeness has escaped during this year's Toxcatl feast in the %s1_civ_adjective Empire.</English>
 		<French>L'homme qui incarne Tezcatlipoca s'est echappe au cours du festival annuel de Toxcatl de l'empire %s1_civ_adjective.</French>
 		<German>Im %s1:2_civ_adjective Reich gibt es einen religi&#246;sen Skandal, weil das geweihte Opfer vor der heiligen Blutzeremonie entkommen konnte.</German>
-		<Italian>L'uomo che ha le sembianze di Tezcalipoca &#232; scappato durante la celebrazione di quest'anno di Toxcatl nell'impero %s1_civ_adjective</Italian>
+		<Italian>L'uomo che ha le sembianze di Tezcatlipoca &#232; scappato durante la celebrazione di quest'anno di Toxcatl nell'impero %s1_civ_adjective</Italian>
 		<Spanish>El hombre que es el favorito de Tezcatlipoca ha huido durante el festival Toxcatl en el imperio %s1_civ_adjective.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6525,7 +6525,7 @@
 		<English>This is horrible news. May the heavens be merciful...</English>
 		<French>Quelle horrible nouvelle. Que les cieux nous soient clements!</French>
 		<German>Schreckliche Nachricht. M&#246;gen uns die G&#246;tter gn&#228;dig sein.</German>
-		<Italian>E' una notizia orribile! Che gli dei abbiano piet&#224;...</Italian>
+		<Italian>&#200; una notizia orribile! Che gli dei abbiano piet&#224;...</Italian>
 		<Spanish>Terribles noticias. Que los cielos sean piadosos...</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6557,7 +6557,7 @@
 		<English>That is disgusting and preposterous. The heresy must be dealt with in the name of Amun-Re, even if the locals won't support it.</English>
 		<French>C'est inadmissible et deprave. Cette heresie doit etre contrecarre au nom d'Amon-Re, meme si les autochtones ne l'approuvent pas.</French>
 		<German>Beendet im Namen des Fruchtbarkeitsgottes diese widerliche Ketzerei, notfalls mit Gewalt gegen die Bev&#246;lkerung.</German>
-		<Italian>Tutto ci&#242; &#232; disgustoso e assurdo. Bisogna che ci occupiamo di questa eresia nel nome di Amun-Re, anche se non troveremmo l'appoggio delle popolazioni locali.</Italian>
+		<Italian>Tutto ci&#242; &#232; disgustoso e assurdo. Dovremo occuparci di questa eresia nel nome di Amun-Re, anche se non avremo l'appoggio delle popolazioni locali.</Italian>
 		<Spanish>Eso es lamentable y absurdo. La herejia debe ser tratada con el nombre de Amun-Re, incluso si la poblaci&#243;n local no lo apoya.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6669,7 +6669,7 @@
 		<English>It's a valid point, our clerics need more influence.</English>
 		<French>Ce sont de justes revendications, notre clerge a besoin d'etre plus influent.</French>
 		<German>Nun gut, ich gew&#228;hre den Geistlichen mehr Einfluss.</German>
-		<Italian>Hanno ragione,le organizzazioni ecclesiastiche devono avere pi&#249; influenza.</Italian>
+		<Italian>Hanno ragione, le organizzazioni ecclesiastiche devono avere pi&#249; influenza.</Italian>
 		<Spanish>Es un argumento v&#225;lido, nuestro clerigos necesitan m&#225;s influencia.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6701,7 +6701,31 @@
 		<English>That's an overreaction. The President has gotten the message that his administration needs to improve.</English>
 		<French>Ils en font trop. Le president devrait comprendre le message et renover son administration.</French>
 		<German>Ein Amtsenthebungsverfahren w&#228;re &#252;bertrieben. Aber die Regierungsf&#252;hrung soll die Sorgen der Menschen ernster nehmen.</German>
-		<Italian>E' una reazione eccessiva. Il Presidente avr&#224; inteso il messaggio che la sua amministrazione deve migliorare.</Italian>
+		<Italian>&#200; una reazione eccessiva. Il Presidente avr&#224; inteso il messaggio che la sua amministrazione deve migliorare.</Italian>
 		<Spanish>Eso es una exageraci&#243;n. El presidente debe captar el mensaje de que su administraci&#243;n debe mejorar.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_EARTHDAY_HELP_2</Tag>
+		<English>[ICON_BULLET]Persuade other nations to convert to [COLOR_HIGHLIGHT_TEXT]Environmentalism[COLOR_REVERT] (at least one civilization must have the ability to do so).</English>
+		<French>[ICON_BULLET]Persuader d'autres nations de se convertir à l'[COLOR_HIGHLIGHT_TEXT]écologie[COLOR_REVERT] (au moins une civilisation doit posséder cette capacité).</French>
+		<German>[ICON_BULLET]&#220;berzeugt andere Nationen, zum [COLOR_HIGHLIGHT_TEXT]Umweltschutz[COLOR_REVERT] zu wechseln (mindestens eine Zivilisation muss dazu f&#228;hig sein).</German>
+		<Italian>[ICON_BULLET]Persuadi altre nazioni a convertirsi all'[COLOR_HIGHLIGHT_TEXT]Ambientalismo[COLOR_REVERT] (almeno una delle altre civilt&#224; deve essere in grado di farlo).</Italian>
+		<Spanish>[ICON_BULLET]Convence a otras naciones de que se conviertan al [COLOR_HIGHLIGHT_TEXT]Ecologismo[COLOR_REVERT] (al menos una civilizaci&#243;n debe poseer la capacidad de hacerlo).</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_SALTPETER_DISCOVERED</Tag>
+		<English>Saltpeter Discovered.</English>
+		<French>Salpêtre découvert.</French>
+		<German>Salpeter entdeckt.</German>
+		<Italian>Scoperto il salnitro.</Italian>
+		<Spanish>Has descubierto el salitre.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_FAIL_OLYMPICS</Tag>
+   		<English>All records of ancient games have been forever lost.</English>
+   		<French>Toutes les informations sur les jeux antiques ont &#233;t&#233; perdues pour toujours.</French>
+   		<German>Alle Informationen &#252;ber die alte Spiele sind f&#252;r immer verloren worden.</German>
+   		<Italian>Tutte le informazioni sui giochi antichi sono state perse per sempre.</Italian>
+   		<Spanish>Toda la informaci&#243;n sobre los juegos antiguos se ha perdido por siempre.</Spanish>
 	</TEXT>
 </Civ4GameText>

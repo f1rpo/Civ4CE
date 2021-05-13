@@ -464,7 +464,7 @@
 		<EspionageMissionInfo>
 			<Type>ESPIONAGEMISSION_CITY_REVOLT</Type>
 			<Description>TXT_KEY_ESPIONAGE_CITY_REVOLT</Description>
-			<iCost>500</iCost>
+			<iCost>650</iCost>
 			<bIsPassive>0</bIsPassive>
 			<bIsTwoPhases>0</bIsTwoPhases>
 			<bTargetsCity>1</bTargetsCity>

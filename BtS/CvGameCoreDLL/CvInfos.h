@@ -5,10 +5,6 @@
 //
 //  FILE:    CvInfos.h
 //
-//  AUTHOR:	Eric MacDonald  --  8/2003
-//					Mustafa Thamer 11/2004
-//					Jon Shafer - 03/2005		
-//
 //  PURPOSE: All Civ4 info classes and the base class for them
 //
 //------------------------------------------------------------------------------------------------
@@ -16,8 +12,6 @@
 //------------------------------------------------------------------------------------------------
 #ifndef CV_INFO_H
 #define CV_INFO_H
-
-//#include "CvStructs.h"
 
 #pragma warning( disable: 4251 )		// needs to have dll-interface to be used by clients of class
 #pragma warning( disable: 4127 )
@@ -36,14 +30,8 @@ class CvInfoBase
 {
 //---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
-
-	//constructor
 	DllExport CvInfoBase();
-	//destructor
 	DllExport virtual ~CvInfoBase();
-
-	DllExport CvInfoBase(const CvInfoBase& kCopy);
-	DllExport CvInfoBase& operator=(const CvInfoBase& kCopy);
 
 	DllExport virtual void reset();
 
@@ -51,8 +39,6 @@ public:
 
 	DllExport const TCHAR* getType() const;										// Exposed to Python
 	DllExport virtual const TCHAR* getButton() const;					// Exposed to Python
-	DllExport const TCHAR* getTextKey() const;
-	DllExport const char* getXmlVal() const;  // the name of this XML node
 
 	// for python wide string handling
 	std::wstring pyGetTextKey() { return getTextKeyWide(); }						// Exposed to Python
@@ -70,14 +56,6 @@ public:
 	DllExport const wchar* getHelp() const;		
 	DllExport const wchar* getStrategy() const;	
 
-	DllExport void setType(const TCHAR* szVal);
-	DllExport void setButton(const TCHAR* szVal);
-	DllExport void setTextKey(const TCHAR* szVal);
-	DllExport void setCivilopediaKey(const TCHAR* szVal);
-	DllExport void setHelpKey(const TCHAR* szVal);
-	DllExport void setStrategyKey(const TCHAR* szVal);
-	DllExport void setXmlVal(const char* szVal);
-
 	DllExport bool isMatchForLink(std::wstring szLink, bool bKeysOnly) const;
 
 	DllExport virtual void read(FDataStreamBase* pStream);
@@ -90,28 +68,23 @@ public:
 protected:
 
 	bool doneReadingXML(CvXMLLoadUtility* pXML);
-	void setTempText(const wchar* szValue) const { m_szTempText = szValue;	}
-	void copy(const CvInfoBase& kCopy);
 
 	bool m_bGraphicalOnly;
 
-	char* m_szType;
-	char* m_szButton;				// Used for Infos that don't require an ArtAssetInfo
-	char* m_szTextKey;
-	mutable wchar* m_szCachedTextKey;
-	mutable wchar* m_szCachedText;
-	char* m_szCivilopediaKey;
-	mutable wchar* m_szCachedCivilopedia;
-	char* m_szHelpKey;
-	mutable wchar* m_szCachedHelp;
-	char* m_szStrategyKey;
-	mutable wchar* m_szCachedStrategy;
-	char* m_szXmlVal;
+	CvString m_szType;
+	CvString m_szButton;				// Used for Infos that don't require an ArtAssetInfo
+	CvWString m_szTextKey;
+	CvWString m_szCivilopediaKey;
+	CvWString m_szHelpKey;
+	CvWString m_szStrategyKey;
 
 	// translated text
-	mutable CvWString m_szTempText;
 	std::vector<CvString> m_aszExtraXMLforPass3;
 	mutable std::vector<CvWString> m_aCachedDescriptions;
+	mutable CvWString m_szCachedText;
+	mutable CvWString m_szCachedHelp;
+	mutable CvWString m_szCachedStrategy;
+	mutable CvWString m_szCachedCivilopedia;
 };
 
 //
@@ -211,7 +184,6 @@ protected:
 
 };
 
-// JON - XXX TODO, expose to python or remove (used by CvDiplomacyInfo.getResponse() )
 class CvDiplomacyResponse
 {
 //---------------------------------------PUBLIC INTERFACE---------------------------------
@@ -370,8 +342,7 @@ public:
 	DllExport bool isWaterWork() const;							// Exposed to Python
 	DllExport bool isRiverTrade() const;							// Exposed to Python
 
-	std::wstring pyGetQuote() { return getQuote(); }	// Exposed to Python
-	DllExport const wchar* getQuote();				
+	std::wstring getQuote() const;	// Exposed to Python
 	DllExport void setQuoteKey(const TCHAR* szVal);
 	DllExport const TCHAR* getSound() const;				// Exposed to Python
 	DllExport void setSound(const TCHAR* szVal);
@@ -783,7 +754,6 @@ public:
 	DllExport const wchar* getHelp() const;
 	DllExport const wchar* getStrategy() const;
 	DllExport virtual const TCHAR* getButton() const;
-	DllExport const TCHAR* getTextKey() const;
 	DllExport const wchar* getTextKeyWide() const;
 
 	// functions to replace the CvHotkey calls
@@ -1456,7 +1426,7 @@ protected:
 	bool m_bStateReligion;
 	bool m_bNoNonStateReligionSpread;
 
-	CvString m_szWeLoveTheKingKey;
+	CvWString m_szWeLoveTheKingKey;
 
 	// Arrays
 
@@ -2156,6 +2126,7 @@ public:
 
 	DllExport CvCivilizationInfo();
 	DllExport virtual ~CvCivilizationInfo();
+	DllExport virtual void reset();
 
 	DllExport int getDefaultPlayerColor() const;				// Expose to Python
 	DllExport int getArtStyleType() const;				// Expose to Python
@@ -2170,13 +2141,11 @@ public:
 
 	std::wstring pyGetShortDescription(uint uiForm) { return getShortDescription(uiForm); }				// Exposed to Python
 	DllExport const wchar* getShortDescription(uint uiForm = 0);
-	DllExport void setShortDescriptionKey(const TCHAR* szVal);
 	DllExport const wchar* getShortDescriptionKey() const;				// Exposed to Python
 	std::wstring pyGetShortDescriptionKey() { return getShortDescriptionKey(); }				// Exposed to Python
 	
 	std::wstring pyGetAdjective(uint uiForm) { return getAdjective(uiForm);  }	// Exposed to Python
 	DllExport const wchar* getAdjective(uint uiForm = 0);				
-	DllExport void setAdjectiveKey(const TCHAR* szVal);
 	DllExport const wchar* getAdjectiveKey() const;				// Exposed to Python
 	std::wstring pyGetAdjectiveKey() { return getAdjectiveKey(); }				// Exposed to Python
 
@@ -2225,8 +2194,8 @@ protected:
 	bool m_bPlayable;				
 
 	CvString m_szArtDefineTag;
-	CvString m_szShortDescriptionKey;
-	CvString m_szAdjectiveKey;
+	CvWString m_szShortDescriptionKey;
+	CvWString m_szAdjectiveKey;
 	// Arrays
 
 	int* m_piCivilizationBuildings;
@@ -2240,6 +2209,9 @@ protected:
 	bool* m_pbCivilizationDisableTechs;
 
 	CvString* m_paszCityNames;
+
+	mutable std::vector<CvWString> m_aszShortDescription;
+	mutable std::vector<CvWString> m_aszAdjective;
 };
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -4041,8 +4013,6 @@ public:
 
 	DllExport const TCHAR* getButtonDisabled() const;		//	Exposed to Python
 
-	std::wstring pyGetAdjective(uint uiForm) { return getAdjective(uiForm);  }	// Exposed to Python
-	DllExport const wchar* getAdjective(uint uiForm = 0);				
 	DllExport void setAdjectiveKey(const TCHAR* szVal);
 	DllExport const wchar* getAdjectiveKey() const;				// Exposed to Python
 	std::wstring pyGetAdjectiveKey() { return getAdjectiveKey(); }				// Exposed to Python
@@ -4074,7 +4044,7 @@ protected:
 	CvString m_szMovieFile;
 	CvString m_szMovieSound;
 	CvString m_szSound;
-	CvString m_szAdjectiveKey;
+	CvWString m_szAdjectiveKey;
 
 	// Arrays
 
@@ -6345,8 +6315,8 @@ public:
 	DllExport int getVoteInterval() const;					// Exposed to Python
 	DllExport int getFreeSpecialist() const;					// Exposed to Python
 	DllExport int getCivic() const;					// Exposed to Python
-	DllExport const CvWString& getPopupText() const;
-	DllExport const CvWString& getSecretaryGeneralText() const;
+	DllExport const CvWString getPopupText() const;
+	DllExport const CvWString getSecretaryGeneralText() const;
 
 	std::wstring pyGetSecretaryGeneralText() { return getSecretaryGeneralText(); }						// Exposed to Python
 

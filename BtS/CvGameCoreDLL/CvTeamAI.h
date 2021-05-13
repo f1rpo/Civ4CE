@@ -31,7 +31,7 @@ public:
 
 	void AI_init();
 	void AI_uninit();
-	void AI_reset();
+	void AI_reset(bool bConstructor);
 
 	void AI_doTurnPre();
 	void AI_doTurnPost();

@@ -54,8 +54,8 @@ def getCustomMapOptionDescAt(argsList):
 		0:	{
 			0: "TXT_KEY_MAP_SCRIPT_HILLS",
 			1: "TXT_KEY_MAP_SCRIPT_PEAKS",
-			2: "TXT_KEY_TERRAIN_DESERT",
-			3: "TXT_KEY_TERRAIN_OCEAN",
+			2: "TXT_KEY_MAP_SCRIPT_DESERT",
+			3: "TXT_KEY_MAP_SCRIPT_OCEAN",
 			4: "TXT_KEY_WORLD_STANDARD"
 			},
 		1:	{

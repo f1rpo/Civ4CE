@@ -50,6 +50,12 @@ def canTriggerBlessedSea(argsList):
 			
 	if (iOurLandmasses > iOurMaxLandmass):
 		return false
+
+	player = gc.getPlayer(kTriggeredData.ePlayer)
+	if player.getUnitClassCount(CvUtil.findInfoTypeNum(gc.getUnitClassInfo, gc.getNumUnitClassInfos(), 'UNITCLASS_GALLEY')) == 0:
+		if player.getUnitClassCount(CvUtil.findInfoTypeNum(gc.getUnitClassInfo, gc.getNumUnitClassInfos(), 'UNITCLASS_CARAVEL')) == 0:
+			if player.getUnitClassCount(CvUtil.findInfoTypeNum(gc.getUnitClassInfo, gc.getNumUnitClassInfos(), 'UNITCLASS_GALLEON')) == 0:
+				return false
 			
 	return true
 
@@ -1820,6 +1826,24 @@ def canTriggerTheHuns(argsList):
 	if not bFoundValid:
 		return false
 
+	# Can we build the counter unit?		
+	iCounterUnitClass = CvUtil.findInfoTypeNum(gc.getUnitClassInfo, gc.getNumUnitClassInfos(), 'UNITCLASS_SPEARMAN')
+	iCounterUnit = gc.getCivilizationInfo(player.getCivilizationType()).getCivilizationUnits(iCounterUnitClass)
+	if iCounterUnit == -1:
+		return false
+
+	(loopCity, iter) = player.firstCity(false)
+	bFound = false
+	while(loopCity):
+		if (loopCity.canTrain(iCounterUnit, false, false)):
+			bFound = true
+			break
+				
+		(loopCity, iter) = player.nextCity(iter, false)
+		
+	if not bFound:
+		return false
+
 #	Find an eligible plot
 	map = gc.getMap()	
 	for i in range(map.numPlots()):
@@ -1911,6 +1935,24 @@ def canTriggerTheVandals(argsList):
 				break
 				
 	if not bFoundValid:
+		return false
+
+	# Can we build the counter unit?		
+	iCounterUnitClass = CvUtil.findInfoTypeNum(gc.getUnitClassInfo, gc.getNumUnitClassInfos(), 'UNITCLASS_AXEMAN')
+	iCounterUnit = gc.getCivilizationInfo(player.getCivilizationType()).getCivilizationUnits(iCounterUnitClass)
+	if iCounterUnit == -1:
+		return false
+
+	(loopCity, iter) = player.firstCity(false)
+	bFound = false
+	while(loopCity):
+		if (loopCity.canTrain(iCounterUnit, false, false)):
+			bFound = true
+			break
+				
+		(loopCity, iter) = player.nextCity(iter, false)
+		
+	if not bFound:
 		return false
 
 #	Find an eligible plot
@@ -2006,6 +2048,24 @@ def canTriggerTheGoths(argsList):
 	if not bFoundValid:
 		return false
 
+	# Can we build the counter unit?		
+	iCounterUnitClass = CvUtil.findInfoTypeNum(gc.getUnitClassInfo, gc.getNumUnitClassInfos(), 'UNITCLASS_CHARIOT')
+	iCounterUnit = gc.getCivilizationInfo(player.getCivilizationType()).getCivilizationUnits(iCounterUnitClass)
+	if iCounterUnit == -1:
+		return false
+
+	(loopCity, iter) = player.firstCity(false)
+	bFound = false
+	while(loopCity):
+		if (loopCity.canTrain(iCounterUnit, false, false)):
+			bFound = true
+			break
+				
+		(loopCity, iter) = player.nextCity(iter, false)
+		
+	if not bFound:
+		return false
+
 #	Find an eligible plot
 	map = gc.getMap()	
 	for i in range(map.numPlots()):
@@ -2099,6 +2159,24 @@ def canTriggerThePhilistines(argsList):
 	if not bFoundValid:
 		return false
 
+	# Can we build the counter unit?		
+	iCounterUnitClass = CvUtil.findInfoTypeNum(gc.getUnitClassInfo, gc.getNumUnitClassInfos(), 'UNITCLASS_AXEMAN')
+	iCounterUnit = gc.getCivilizationInfo(player.getCivilizationType()).getCivilizationUnits(iCounterUnitClass)
+	if iCounterUnit == -1:
+		return false
+
+	(loopCity, iter) = player.firstCity(false)
+	bFound = false
+	while(loopCity):
+		if (loopCity.canTrain(iCounterUnit, false, false)):
+			bFound = true
+			break
+				
+		(loopCity, iter) = player.nextCity(iter, false)
+		
+	if not bFound:
+		return false
+
 #	Find an eligible plot
 	map = gc.getMap()	
 	for i in range(map.numPlots()):
@@ -2190,6 +2268,24 @@ def canTriggerTheVedicAryans(argsList):
 				break
 				
 	if not bFoundValid:
+		return false
+
+	# Can we build the counter unit?		
+	iCounterUnitClass = CvUtil.findInfoTypeNum(gc.getUnitClassInfo, gc.getNumUnitClassInfos(), 'UNITCLASS_ARCHER')
+	iCounterUnit = gc.getCivilizationInfo(player.getCivilizationType()).getCivilizationUnits(iCounterUnitClass)
+	if iCounterUnit == -1:
+		return false
+
+	(loopCity, iter) = player.firstCity(false)
+	bFound = false
+	while(loopCity):
+		if (loopCity.canTrain(iCounterUnit, false, false)):
+			bFound = true
+			break
+				
+		(loopCity, iter) = player.nextCity(iter, false)
+		
+	if not bFound:
 		return false
 
 #	Find an eligible plot

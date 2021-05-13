@@ -207,6 +207,7 @@ public:
 	virtual void setInAdvancedStart(bool bAdvancedStart) = 0;
 
 	virtual bool isSpaceshipScreenUp() const = 0;
+	virtual bool isDebugMenuCreated() const = 0;
 
 	virtual void setBusy(bool bBusy) = 0;
 };

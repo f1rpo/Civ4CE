@@ -354,6 +354,7 @@ void CyUnitPythonInterface1(python::class_<CyUnit>& x)
 
 		.def("getTransportUnit", &CyUnit::getTransportUnit, python::return_value_policy<python::manage_new_object>(), "CyUnit* ()")
 		.def("isCargo", &CyUnit::isCargo, "bool ()")
+		.def("setTransportUnit", &CyUnit::setTransportUnit, "void (CyUnit* pTransportUnit)")
 
 		.def("getExtraDomainModifier", &CyUnit::getExtraDomainModifier, "int ()")
 

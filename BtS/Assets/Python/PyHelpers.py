@@ -1711,7 +1711,6 @@ class PyInfo:
 				return True
 			return False
 		
-		# XXX Should this be isWater? - JShafer
 		def isFreshWater(self):
 			if self.info.isFreshWater():
 				return True
@@ -1737,7 +1736,6 @@ class PyInfo:
 		def getImprovementUpgrade(self):
 			return self.info.getImprovementUpgrade()
 		
-		# XXX Do these exist? - JShafer
 		def getScale(self):
 			return self.info.fScale
 		

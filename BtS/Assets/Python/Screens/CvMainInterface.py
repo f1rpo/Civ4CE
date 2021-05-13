@@ -210,20 +210,17 @@ class CvMainInterface:
 		screen.hide( "InterfaceRightBackgroundWidget" )
 	
 		# Top Center Background
-
-		# SF CHANGE
-		screen.addPanel( "InterfaceTopCenter", u"", u"", True, False, 257, -2, xResolution-(257*2), 48, PanelStyles.PANEL_STYLE_STANDARD)
-
+		screen.addPanel( "InterfaceTopCenter", u"", u"", True, False, 275, -2, xResolution-(275*2), 48, PanelStyles.PANEL_STYLE_STANDARD)
 		screen.setStyle( "InterfaceTopCenter", "Panel_Game_HudTC_Style" )
 		screen.hide( "InterfaceTopCenter" )
 
 		# Top Left Background
-		screen.addPanel( "InterfaceTopLeft", u"", u"", True, False, 0, -2, 267, 60, PanelStyles.PANEL_STYLE_STANDARD)
+		screen.addPanel( "InterfaceTopLeft", u"", u"", True, False, 0, -2, 286, 60, PanelStyles.PANEL_STYLE_STANDARD)
 		screen.setStyle( "InterfaceTopLeft", "Panel_Game_HudTL_Style" )
 		screen.hide( "InterfaceTopLeft" )
 
 		# Top Right Background
-		screen.addPanel( "InterfaceTopRight", u"", u"", True, False, xResolution - 267, -2, 267, 60, PanelStyles.PANEL_STYLE_STANDARD)
+		screen.addPanel( "InterfaceTopRight", u"", u"", True, False, xResolution - 286, -2, 286, 60, PanelStyles.PANEL_STYLE_STANDARD)
 		screen.setStyle( "InterfaceTopRight", "Panel_Game_HudTR_Style" )
 		screen.hide( "InterfaceTopRight" )
 
@@ -289,10 +286,11 @@ class CvMainInterface:
 		screen.setStyle( "InfoAdvisorButton", "Button_HUDAdvisorRecord_Style" )
 		screen.hide( "InfoAdvisorButton" )
 
-		iBtnX += iBtnAdvance
-		screen.setImageButton( "EspionageAdvisorButton", "", iBtnX, iBtnY, iBtnWidth, iBtnWidth, WidgetTypes.WIDGET_ACTION, gc.getControlInfo(ControlTypes.CONTROL_ESPIONAGE_SCREEN).getActionInfoIndex(), -1 )
-		screen.setStyle( "EspionageAdvisorButton", "Button_HUDAdvisorEspionage_Style" )
-		screen.hide( "EspionageAdvisorButton" )
+		if not gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_ESPIONAGE):
+			iBtnX += iBtnAdvance
+			screen.setImageButton( "EspionageAdvisorButton", "", iBtnX, iBtnY, iBtnWidth, iBtnWidth, WidgetTypes.WIDGET_ACTION, gc.getControlInfo(ControlTypes.CONTROL_ESPIONAGE_SCREEN).getActionInfoIndex(), -1 )
+			screen.setStyle( "EspionageAdvisorButton", "Button_HUDAdvisorEspionage_Style" )
+			screen.hide( "EspionageAdvisorButton" )
 		
 		# City Tabs
 		iBtnX = xResolution - 324
@@ -462,7 +460,7 @@ class CvMainInterface:
 
 		szGameDataList = []
 		
-		screen.addStackedBarGFC( "ResearchBar", 268 + ( (xResolution - 1024) / 2 ), 2, 487, iStackBarHeight, InfoBarTypes.NUM_INFOBAR_TYPES, WidgetTypes.WIDGET_RESEARCH, -1, -1 )
+		screen.addStackedBarGFC( "ResearchBar", 287 + ( (xResolution - 1024) / 2 ), 2, 450, iStackBarHeight, InfoBarTypes.NUM_INFOBAR_TYPES, WidgetTypes.WIDGET_RESEARCH, -1, -1 )
 		screen.setStackedBarColors( "ResearchBar", InfoBarTypes.INFOBAR_STORED, gc.getInfoTypeForString("COLOR_RESEARCH_STORED") )
 		screen.setStackedBarColors( "ResearchBar", InfoBarTypes.INFOBAR_RATE, gc.getInfoTypeForString("COLOR_RESEARCH_RATE") )
 		screen.setStackedBarColors( "ResearchBar", InfoBarTypes.INFOBAR_RATE_EXTRA, gc.getInfoTypeForString("COLOR_EMPTY") )
@@ -1057,7 +1055,7 @@ class CvMainInterface:
 				screen.moveToFront("SelectedCityText")
 
 			elif ( CyInterface().getHeadSelectedUnit() ):
-				screen.addUnitGraphicGFC( "InterfaceUnitModel", CyInterface().getHeadSelectedUnit().getUnitType(), 175, yResolution - 138, 123, 132, WidgetTypes.WIDGET_UNIT_MODEL, CyInterface().getHeadSelectedUnit().getUnitType(), -1,  -20, 30, 1, False )
+				screen.addSpecificUnitGraphicGFC( "InterfaceUnitModel", CyInterface().getHeadSelectedUnit(), 175, yResolution - 138, 123, 132, WidgetTypes.WIDGET_UNIT_MODEL, CyInterface().getHeadSelectedUnit().getUnitType(), -1,  -20, 30, 1, False )
 				screen.moveToFront("SelectedUnitText")
 			else:
 				screen.hide( "InterfaceUnitModel" )
@@ -2888,7 +2886,7 @@ class CvMainInterface:
 		
 		screen = CyGInterfaceScreen( "MainInterface", CvScreenEnums.MAIN_INTERFACE )
 		xResolution = screen.getXResolution()
-		screen.moveItem( szButtonID, 264 + ( ( xResolution - 1024 ) / 2 ) + ( 34 * ( iCount % 15 ) ), 0 + ( 34 * ( iCount / 15 ) ), -0.3 )
+		screen.moveItem( szButtonID, 287 + ( ( xResolution - 1024 ) / 2 ) + ( 34 * ( iCount % 15 ) ), 0 + ( 34 * ( iCount / 15 ) ), -0.3 )
 							
 	# Will set the selection button position
 	def setScoreTextPosition( self, szButtonID, iWhichLine ):

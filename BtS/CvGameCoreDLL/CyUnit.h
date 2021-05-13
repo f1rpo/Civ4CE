@@ -365,6 +365,7 @@ public:
 
 	CyUnit* getTransportUnit() const;
 	bool isCargo();
+	void setTransportUnit(CyUnit* pTransportUnit);
 
 	int getExtraDomainModifier(int /*DomainTypes*/ eIndex);
 

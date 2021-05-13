@@ -179,7 +179,6 @@ class CvPediaImprovement:
 				iYieldChange = info.getImprovementBonusYield(j, k)
 				if (iYieldChange != 0):
 					bEffect = True
-					iYieldChange += info.getYieldChange(k)
 					if (bFirst):
 						bFirst = False
 					else:

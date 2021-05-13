@@ -7,13 +7,13 @@
 <Civ4MainMenus xmlns="x-schema:CIV4ArtDefinesSchema.xml">
 	<MainMenus>
 		<MainMenu>
-			<Type>MAIN_MENU_BEYOND_SWORD</Type>
-			<Description>Beyond the Sword</Description>
-			<Scene>MAINMENU_SCENE</Scene>
-			<SceneNoShader>MAINMENU_SCENE</SceneNoShader>
+			<Type>MAIN_MENU_CLASSICAL</Type>
+			<Description>BTS Classical</Description>
+			<Scene>MAINMENU_SCENE_CLASSICAL</Scene>
+			<SceneNoShader>MAINMENU_SCENE_CLASSICAL</SceneNoShader>
 			<Soundtrack>AS2D_OPENING_MENU</Soundtrack>
-			<Loading>MAINMENU_LOAD_BTS</Loading>
-			<LoadingSlideshow>MAINMENU_SLIDESHOW_LOAD_BTS</LoadingSlideshow>
+			<Loading>MAINMENU_LOAD_CLASSICAL</Loading>
+			<LoadingSlideshow>MAINMENU_SLIDESHOW_LOAD_CLASSICAL</LoadingSlideshow>
 		</MainMenu>
 		<MainMenu>
 			<Type>MAIN_MENU_VANILLA</Type>
@@ -34,13 +34,13 @@
 			<LoadingSlideshow>MAINMENU_SLIDESHOW_LOAD_WARLORDS</LoadingSlideshow>
 		</MainMenu>
 		<MainMenu>
-			<Type>MAIN_MENU_CLASSICAL</Type>
-			<Description>BTS Classical</Description>
-			<Scene>MAINMENU_SCENE_CLASSICAL</Scene>
-			<SceneNoShader>MAINMENU_SCENE_CLASSICAL</SceneNoShader>
+			<Type>MAIN_MENU_BEYOND_SWORD</Type>
+			<Description>Beyond the Sword</Description>
+			<Scene>MAINMENU_SCENE</Scene>
+			<SceneNoShader>MAINMENU_SCENE</SceneNoShader>
 			<Soundtrack>AS2D_OPENING_MENU</Soundtrack>
-			<Loading>MAINMENU_LOAD_CLASSICAL</Loading>
-			<LoadingSlideshow>MAINMENU_SLIDESHOW_LOAD_CLASSICAL</LoadingSlideshow>
+			<Loading>MAINMENU_LOAD_BTS</Loading>
+			<LoadingSlideshow>MAINMENU_SLIDESHOW_LOAD_BTS</LoadingSlideshow>
 		</MainMenu>
 	</MainMenus>
 </Civ4MainMenus>

@@ -181,6 +181,7 @@ void CyStructsPythonInterface1()
 		.def_readwrite("iMaxHitPoints", &CombatDetails::iMaxHitPoints)
 		.def_readwrite("iCurrCombatStr", &CombatDetails::iCurrCombatStr)
 		.def_readwrite("eOwner", &CombatDetails::eOwner)
+		.def_readwrite("eVisualOwner", &CombatDetails::eVisualOwner)
 		.def_readwrite("sUnitName", &CombatDetails::sUnitName)
 		;
 }

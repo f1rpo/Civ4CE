@@ -109,7 +109,6 @@ public:
 	int AI_playerCloseness(PlayerTypes eIndex, int iMaxDistance);
 	int AI_cityThreat(bool bDangerPercent = false);
 	
-	void AI_tryToWorkPlot(CvPlot* pPlot);
 	int AI_getWorkersHave();
 	int AI_getWorkersNeeded();
 	void AI_changeWorkersHave(int iChange);

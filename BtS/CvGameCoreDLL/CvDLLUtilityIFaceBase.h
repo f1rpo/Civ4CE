@@ -253,6 +253,7 @@ public:
 	virtual bool isGameInitializing() = 0;
 
 	virtual void enumerateFiles(std::vector<CvString>& files, const char* szPattern) = 0;
+	virtual void enumerateModuleFiles(std::vector<CvString>& aszFiles, const CvString& refcstrRootDirectory,	const CvString&	refcstrModularDirectory, const CvString& refcstrExtension, bool bSearchSubdirectories) = 0;
 	virtual bool getTestingFont() const = 0;
 
 	virtual void SaveGame(SaveGameTypes eSaveGame) = 0;

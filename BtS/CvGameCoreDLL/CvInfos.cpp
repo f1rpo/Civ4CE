@@ -3,10 +3,6 @@
 //
 //  FILE:    CvInfos.cpp
 //
-//  AUTHOR:	Eric MacDonald  --  8/2003
-//					Mustafa Thamer 11/2004
-//					Jon Shafer - 03/2005		
-//
 //  PURPOSE: The base class for all info classes to inherit from.  This gives us the base description
 //				and type strings
 //
@@ -15,32 +11,12 @@
 //------------------------------------------------------------------------------------------------
 #include "CvGameCoreDLL.h"
 #include "CvInfos.h"
-//#include "CvEnums.h"
 #include "CvGlobals.h"
 #include "CvArtFileMgr.h"
 #include "CvXMLLoadUtility.h"
 #include "CvDLLXMLIFaceBase.h"
 #include "CvGameTextMgr.h"
 #include "CvGameCoreUtils.h"
-
-// replacement for strdup
-char* copyString(const char* szString)
-{
-	if (!szString)
-		return NULL;
-	char* pBuf = new char[strlen(szString)+1];
-	strcpy(pBuf, szString);
-	return pBuf;
-}
-
-wchar* copyString(const wchar* szString)
-{
-	if (!szString)
-		return NULL;
-	wchar* pBuf = new wchar[wcslen(szString)+1];
-	wcscpy(pBuf, szString);
-	return pBuf;
-}
 
 //------------------------------------------------------------------------------------------------------
 //
@@ -50,19 +26,7 @@ wchar* copyString(const wchar* szString)
 //
 //------------------------------------------------------------------------------------------------------
 CvInfoBase::CvInfoBase() :
-m_bGraphicalOnly(false),
-m_szType(NULL),
-m_szButton(NULL),	
-m_szTextKey(NULL),
-m_szCachedTextKey(NULL),
-m_szCachedText(NULL),
-m_szCivilopediaKey(NULL),
-m_szCachedCivilopedia(NULL),
-m_szHelpKey(NULL),
-m_szCachedHelp(NULL),
-m_szStrategyKey(NULL),
-m_szCachedStrategy(NULL),
-m_szXmlVal(NULL)
+m_bGraphicalOnly(false)
 {
 }
 
@@ -75,66 +39,19 @@ m_szXmlVal(NULL)
 //------------------------------------------------------------------------------------------------------
 CvInfoBase::~CvInfoBase()
 {
-	SAFE_DELETE_ARRAY(m_szType);
-	SAFE_DELETE_ARRAY(m_szButton);		
-	SAFE_DELETE_ARRAY(m_szTextKey);
-	SAFE_DELETE_ARRAY(m_szCachedTextKey);
-	SAFE_DELETE_ARRAY(m_szCachedText);
-	SAFE_DELETE_ARRAY(m_szCivilopediaKey);
-	SAFE_DELETE_ARRAY(m_szCachedCivilopedia);
-	SAFE_DELETE_ARRAY(m_szHelpKey);
-	SAFE_DELETE_ARRAY(m_szCachedHelp);
-	SAFE_DELETE_ARRAY(m_szStrategyKey);
-	SAFE_DELETE_ARRAY(m_szCachedStrategy);
-	SAFE_DELETE_ARRAY(m_szXmlVal);
-}
-
-CvInfoBase::CvInfoBase(const CvInfoBase& kCopy)
-{
-	copy(kCopy);
-}
-
-CvInfoBase& CvInfoBase::operator=(const CvInfoBase& kCopy)
-{
-	copy(kCopy);
-	return *this;
-}
-
-void CvInfoBase::copy(const CvInfoBase& kCopy)
-{
-	setType(kCopy.m_szType);
-	setButton(kCopy.m_szButton);
-	setTextKey(kCopy.m_szTextKey);
-	setCivilopediaKey(kCopy.m_szCivilopediaKey);
-	setHelpKey(kCopy.m_szHelpKey);
-	setStrategyKey(kCopy.m_szStrategyKey);
-	setXmlVal(kCopy.m_szXmlVal);
-	m_bGraphicalOnly = kCopy.m_bGraphicalOnly;
 }
 
 void CvInfoBase::read(FDataStreamBase* pStream)
 {
-	SAFE_DELETE_ARRAY(m_szType);
-	SAFE_DELETE_ARRAY(m_szButton);		
-	SAFE_DELETE_ARRAY(m_szTextKey);
-	SAFE_DELETE_ARRAY(m_szCachedTextKey);
-	SAFE_DELETE_ARRAY(m_szCachedText);
-	SAFE_DELETE_ARRAY(m_szCivilopediaKey);
-	SAFE_DELETE_ARRAY(m_szCachedCivilopedia);
-	SAFE_DELETE_ARRAY(m_szHelpKey);
-	SAFE_DELETE_ARRAY(m_szCachedHelp);
-	SAFE_DELETE_ARRAY(m_szStrategyKey);
-	SAFE_DELETE_ARRAY(m_szCachedStrategy);
-	SAFE_DELETE_ARRAY(m_szXmlVal);
+	reset();
 
 	pStream->Read(&m_bGraphicalOnly);
-	m_szType = pStream->ReadString();
-	m_szCivilopediaKey = pStream->ReadString();
-	m_szHelpKey = pStream->ReadString();
-	m_szStrategyKey = pStream->ReadString();
-	m_szButton = pStream->ReadString();
-	m_szTextKey = pStream->ReadString();
-	m_szXmlVal = pStream->ReadString();
+	pStream->ReadString(m_szType);
+	pStream->ReadString(m_szCivilopediaKey);
+	pStream->ReadString(m_szHelpKey);
+	pStream->ReadString(m_szStrategyKey);
+	pStream->ReadString(m_szButton);
+	pStream->ReadString(m_szTextKey);
 }
 
 void CvInfoBase::write(FDataStreamBase* pStream)
@@ -146,18 +63,16 @@ void CvInfoBase::write(FDataStreamBase* pStream)
 	pStream->WriteString(m_szStrategyKey);
 	pStream->WriteString(m_szButton);
 	pStream->WriteString(m_szTextKey);
-	pStream->WriteString(m_szXmlVal);
 }
 
 void CvInfoBase::reset()
 {
 	//clear cache
-	m_aCachedDescriptions.erase(m_aCachedDescriptions.begin(), m_aCachedDescriptions.end());
-	SAFE_DELETE_ARRAY(m_szCachedTextKey);
-	SAFE_DELETE_ARRAY(m_szCachedText);
-	SAFE_DELETE_ARRAY(m_szCachedCivilopedia);
-	SAFE_DELETE_ARRAY(m_szCachedHelp);
-	SAFE_DELETE_ARRAY(m_szCachedStrategy);
+	m_aCachedDescriptions.clear();
+	m_szCachedText.clear();
+	m_szCachedHelp.clear();
+	m_szCachedStrategy.clear();
+	m_szCachedCivilopedia.clear();
 }
 
 bool CvInfoBase::isGraphicalOnly() const
@@ -167,30 +82,27 @@ bool CvInfoBase::isGraphicalOnly() const
 
 const TCHAR* CvInfoBase::getType() const
 {
-	return m_szType;
-}
+	if (m_szType.empty())
+	{
+		return NULL;
+	}
 
-const char* CvInfoBase::getXmlVal() const
-{
-	return m_szXmlVal;
+	return m_szType;
 }
 
 const TCHAR* CvInfoBase::getButton() const
 {
-	return m_szButton;
-}
+	if (m_szButton.empty())
+	{
+		return NULL;
+	}
 
-const TCHAR* CvInfoBase::getTextKey() const
-{
-	return m_szTextKey;
+	return m_szButton;
 }
 
 const wchar* CvInfoBase::getTextKeyWide() const
 {
-	if(m_szCachedTextKey == NULL)
-		m_szCachedTextKey = copyString(CvWString(m_szTextKey).GetCString());
-
-	return m_szCachedTextKey;
+	return m_szTextKey;
 }
 
 const wchar* CvInfoBase::getDescription(uint uiForm) const
@@ -207,81 +119,42 @@ const wchar* CvInfoBase::getText() const
 {
 	// used instead of getDescription for Info entries that are not objects
 	// so they do not have gender/plurality/forms defined in the Translator system
-	if(m_szCachedText == NULL)
-		m_szCachedText = copyString(gDLL->getText(m_szTextKey).GetCString());
+	if(m_szCachedText.empty())
+	{
+		m_szCachedText = gDLL->getText(m_szTextKey);
+	}
 
 	return m_szCachedText;
 }
 
 const wchar* CvInfoBase::getCivilopedia() const
 {
-	if(m_szCachedCivilopedia == NULL)
-		m_szCachedCivilopedia = copyString(gDLL->getText(m_szCivilopediaKey).GetCString());
+	if(m_szCachedCivilopedia.empty())
+	{
+		m_szCachedCivilopedia = gDLL->getText(m_szCivilopediaKey);
+	}
 
 	return m_szCachedCivilopedia;
 }
 
 const wchar*  CvInfoBase::getHelp() const
 {
-	if(m_szCachedHelp == NULL)
-		m_szCachedHelp = copyString(gDLL->getText(m_szHelpKey).GetCString());
+	if (m_szCachedHelp.empty())
+	{
+		m_szCachedHelp = gDLL->getText(m_szHelpKey);
+	}
 
 	return m_szCachedHelp;
 }
 
 const wchar* CvInfoBase::getStrategy() const
 {
-	if(m_szCachedStrategy == NULL)
-		m_szCachedStrategy = copyString(gDLL->getText(m_szStrategyKey).GetCString());
+	if (m_szCachedStrategy.empty())
+	{
+		m_szCachedStrategy = gDLL->getText(m_szStrategyKey);
+	}
 
 	return m_szCachedStrategy;
-}
-
-void CvInfoBase::setType(const TCHAR* szVal)
-{
-	SAFE_DELETE_ARRAY(m_szType);
-	m_szType = copyString(szVal);
-}
-
-void CvInfoBase::setXmlVal(const char* szVal)
-{
-	SAFE_DELETE_ARRAY(m_szXmlVal);
-	m_szXmlVal = copyString(szVal);
-}
-
-void CvInfoBase::setButton(const TCHAR* szVal)
-{
-	SAFE_DELETE_ARRAY(m_szButton);
-	m_szButton = copyString(szVal);
-}
-
-void CvInfoBase::setTextKey(const TCHAR* szVal)
-{
-	SAFE_DELETE_ARRAY(m_szTextKey);
-	SAFE_DELETE_ARRAY(m_szCachedTextKey);
-	SAFE_DELETE_ARRAY(m_szCachedText);
-	m_szTextKey = copyString(szVal);
-}
-
-void CvInfoBase::setCivilopediaKey(const TCHAR* szVal)
-{
-	SAFE_DELETE_ARRAY(m_szCivilopediaKey);
-	SAFE_DELETE_ARRAY(m_szCachedCivilopedia);
-	m_szCivilopediaKey = copyString(szVal);
-}
-
-void CvInfoBase::setHelpKey(const TCHAR* szVal)
-{
-	SAFE_DELETE_ARRAY(m_szHelpKey);
-	SAFE_DELETE_ARRAY(m_szCachedHelp);
-	m_szHelpKey = copyString(szVal);
-}
-
-void CvInfoBase::setStrategyKey(const TCHAR* szVal)
-{
-	SAFE_DELETE_ARRAY(m_szStrategyKey);
-	SAFE_DELETE_ARRAY(m_szCachedStrategy);
-	m_szStrategyKey = copyString(szVal);
 }
 
 bool CvInfoBase::isMatchForLink(std::wstring szLink, bool bKeysOnly) const
@@ -320,58 +193,28 @@ bool CvInfoBase::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	if (pXML->GetXmlVal(szTextVal))
-	{
-		// GetXmlVal returns the XML tags for all children as well, separated by spaces
-		// Keep only the first value
-		CvString::size_type i = szTextVal.find(' ', 0);
-		if (CvString::npos != i)
-		{
-			szTextVal.resize(i);
-		}
-		setXmlVal(szTextVal);
-	}
-
 	pXML->MapChildren();	// try to hash children for fast lookup by name
 
 	// GRAPHICAL ONLY
 	pXML->GetChildXmlValByName(&m_bGraphicalOnly, "bGraphicalOnly");
 
 	// TYPE
-	if (pXML->GetChildXmlValByName(szTextVal, "Type"))
-	{
-		setType(szTextVal);
-	}
+	pXML->GetChildXmlValByName(m_szType, "Type");
 
 	// DESCRIPTION
-	if (pXML->GetChildXmlValByName(szTextVal, "Description"))
-	{
-		setTextKey(szTextVal);
-	}
+	pXML->GetChildXmlValByName(m_szTextKey, "Description");
 
 	// CIVILOPEDIA
-	if (pXML->GetChildXmlValByName(szTextVal, "Civilopedia"))
-	{
-		setCivilopediaKey(szTextVal);
-	}
+	pXML->GetChildXmlValByName(m_szCivilopediaKey, "Civilopedia");
 
 	// HELP
-	if (pXML->GetChildXmlValByName(szTextVal, "Help"))
-	{
-		setHelpKey(szTextVal);
-	}
+	pXML->GetChildXmlValByName(m_szHelpKey, "Help");
 
 	// STRATEGY
-	if (pXML->GetChildXmlValByName(szTextVal, "Strategy"))
-	{
-		setStrategyKey(szTextVal);
-	}
+	pXML->GetChildXmlValByName(m_szStrategyKey, "Strategy");
 
 	// BUTTON
-	if (pXML->GetChildXmlValByName(szTextVal, "Button"))
-	{
-		setButton(szTextVal);
-	}
+	pXML->GetChildXmlValByName(m_szButton, "Button");
 
 	return true;
 }
@@ -736,21 +579,22 @@ void CvHotkeyInfo::setHotKey(const TCHAR* szVal)
 
 std::wstring CvHotkeyInfo::getHotKeyDescription() const
 {
+	CvWString szTemptext;
 	if (!m_szHotKeyAltDescriptionKey.empty())
 	{
-		m_szTempText = CvWString::format(L"%s (%s)", gDLL->getObjectText(m_szHotKeyAltDescriptionKey, 0).GetCString(), gDLL->getObjectText(m_szHotKeyDescriptionKey, 0).GetCString());
+		szTemptext.Format(L"%s (%s)", gDLL->getObjectText(m_szHotKeyAltDescriptionKey, 0).GetCString(), gDLL->getObjectText(m_szHotKeyDescriptionKey, 0).GetCString());
 	}
 	else
 	{
-		m_szTempText = gDLL->getObjectText(m_szHotKeyDescriptionKey, 0);
+		szTemptext = gDLL->getObjectText(m_szHotKeyDescriptionKey, 0);
 	}
 
 	if (!m_szHotKeyString.empty())
 	{
-		m_szTempText += m_szHotKeyString;
+		szTemptext += m_szHotKeyString;
 	}
 
-	return m_szTempText.GetCString();
+	return szTemptext;
 }
 
 void CvHotkeyInfo::setHotKeyDescription(const wchar* szHotKeyDescKey, const wchar* szHotKeyAltDescKey, const wchar* szHotKeyString)
@@ -1374,10 +1218,9 @@ bool CvTechInfo::isRiverTrade() const
 	return m_bRiverTrade;
 }
 
-const wchar* CvTechInfo::getQuote()		
+std::wstring CvTechInfo::getQuote()	const
 {
-	m_szTempText = gDLL->getText(m_szQuoteKey);
-	return m_szTempText;
+	return gDLL->getText(m_szQuoteKey);
 }
 
 void CvTechInfo::setQuoteKey(const TCHAR* szVal)
@@ -2965,16 +2808,6 @@ const TCHAR* CvActionInfo::getButton() const
 	if (getHotkeyInfo())
 	{
 		return getHotkeyInfo()->getButton();
-	}
-
-	return NULL;
-}
-
-const TCHAR* CvActionInfo::getTextKey() const
-{
-	if (getHotkeyInfo())
-	{
-		return getHotkeyInfo()->getTextKey();
 	}
 
 	return NULL;
@@ -5099,21 +4932,23 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 		m_paszLateArtDefineTags = new CvString[ iIndexVal ];
 		m_paszMiddleArtDefineTags = new CvString[ iIndexVal ];
 
-		gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(), "UnitMeshGroup");
-		for ( k = 0; k < iIndexVal; k++ )
+		if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(), "UnitMeshGroup"))
 		{
-			pXML->GetChildXmlValByName( &m_piUnitGroupRequired[k], "iRequired");
-			pXML->GetChildXmlValByName(szTextVal, "EarlyArtDefineTag");
-			setEarlyArtDefineTag(k, szTextVal);
-			pXML->GetChildXmlValByName(szTextVal, "LateArtDefineTag");
-			setLateArtDefineTag(k, szTextVal);
-			pXML->GetChildXmlValByName(szTextVal, "MiddleArtDefineTag");
-			setMiddleArtDefineTag(k, szTextVal);
-			gDLL->getXMLIFace()->NextSibling(pXML->GetXML());
+			for ( k = 0; k < iIndexVal; k++ )
+			{
+				pXML->GetChildXmlValByName( &m_piUnitGroupRequired[k], "iRequired");
+				pXML->GetChildXmlValByName(szTextVal, "EarlyArtDefineTag");
+				setEarlyArtDefineTag(k, szTextVal);
+				pXML->GetChildXmlValByName(szTextVal, "LateArtDefineTag");
+				setLateArtDefineTag(k, szTextVal);
+				pXML->GetChildXmlValByName(szTextVal, "MiddleArtDefineTag");
+				setMiddleArtDefineTag(k, szTextVal);
+				gDLL->getXMLIFace()->NextSibling(pXML->GetXML());
+			}
+			gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
 		}
 		gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
 	}
-	gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
 
 	pXML->GetChildXmlValByName(m_szFormationType, "FormationType");
 
@@ -5732,8 +5567,7 @@ bool CvCivicInfo::isNoNonStateReligionSpread() const
 
 const wchar* CvCivicInfo::getWeLoveTheKing()		
 {
-	m_szTempText = gDLL->getText(m_szWeLoveTheKingKey);
-	return m_szTempText;
+	return m_szWeLoveTheKingKey;
 }
 
 void CvCivicInfo::setWeLoveTheKingKey(const TCHAR* szVal)
@@ -6554,7 +6388,7 @@ m_iNumCitiesPrereq(0),
 m_iNumTeamsPrereq(0),							
 m_iUnitLevelPrereq(0),							
 m_iMinLatitude(0),									
-m_iMaxLatitude(0),									
+m_iMaxLatitude(90),									
 m_iGreatPeopleRateModifier(0),				
 m_iGreatGeneralRateModifier(0),				
 m_iDomesticGreatGeneralRateModifier(0),				
@@ -8430,7 +8264,7 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iNumTeamsPrereq, "iTeamsPrereq");
 	pXML->GetChildXmlValByName(&m_iUnitLevelPrereq, "iLevelPrereq");
 	pXML->GetChildXmlValByName(&m_iMinLatitude, "iMinLatitude");
-	pXML->GetChildXmlValByName(&m_iMaxLatitude, "iMaxLatitude");
+	pXML->GetChildXmlValByName(&m_iMaxLatitude, "iMaxLatitude", 90);
 	pXML->GetChildXmlValByName(&m_iGreatPeopleRateModifier, "iGreatPeopleRateModifier");
 	pXML->GetChildXmlValByName(&m_iGreatGeneralRateModifier, "iGreatGeneralRateModifier");
 	pXML->GetChildXmlValByName(&m_iDomesticGreatGeneralRateModifier, "iDomesticGreatGeneralRateModifier");
@@ -8707,17 +8541,20 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 			{
 				pXML->GetChildXmlValByName(szTextVal, "SpecialistType");
 				k = pXML->FindInInfoClass(szTextVal);
-				// delete the array since it will be reallocated
-				SAFE_DELETE_ARRAY(m_ppaiSpecialistYieldChange[k]);
-				if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(),"YieldChanges") && (k > -1))
+				if (k > -1)
 				{
-					// call the function that sets the yield change variable
-					pXML->SetYields(&m_ppaiSpecialistYieldChange[k]);
-					gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
-				}
-				else
-				{
-					pXML->InitList(&m_ppaiSpecialistYieldChange[k], NUM_YIELD_TYPES);
+					// delete the array since it will be reallocated
+					SAFE_DELETE_ARRAY(m_ppaiSpecialistYieldChange[k]);
+					if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(),"YieldChanges"))
+					{
+						// call the function that sets the yield change variable
+						pXML->SetYields(&m_ppaiSpecialistYieldChange[k]);
+						gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
+					}
+					else
+					{
+						pXML->InitList(&m_ppaiSpecialistYieldChange[k], NUM_YIELD_TYPES);
+					}
 				}
 
 				if (!gDLL->getXMLIFace()->NextSibling(pXML->GetXML()))
@@ -8745,17 +8582,21 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 			{
 				pXML->GetChildXmlValByName(szTextVal, "BonusType");
 				k = pXML->FindInInfoClass(szTextVal);
-				// delete the array since it will be reallocated
-				SAFE_DELETE_ARRAY(m_ppaiBonusYieldModifier[k]);
-				if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(),"YieldModifiers") && (k > -1))
+				if (k > -1)
 				{
-					// call the function that sets the yield change variable
-					pXML->SetYields(&m_ppaiBonusYieldModifier[k]);
-					gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
-				}
-				else
-				{
-					pXML->InitList(&m_ppaiBonusYieldModifier[k], NUM_YIELD_TYPES);
+					// delete the array since it will be reallocated
+					SAFE_DELETE_ARRAY(m_ppaiBonusYieldModifier[k]);
+					if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(),"YieldModifiers"))
+					{
+						// call the function that sets the yield change variable
+						pXML->SetYields(&m_ppaiBonusYieldModifier[k]);
+						gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
+					}
+					else
+					{
+						pXML->InitList(&m_ppaiBonusYieldModifier[k], NUM_YIELD_TYPES);
+					}
+
 				}
 
 				if (!gDLL->getXMLIFace()->NextSibling(pXML->GetXML()))
@@ -9273,6 +9114,14 @@ CvCivilizationInfo::~CvCivilizationInfo()
 	SAFE_DELETE_ARRAY(m_paszCityNames);
 }
 
+void CvCivilizationInfo::reset()
+{
+	CvInfoBase::reset();
+	m_aszAdjective.clear();
+	m_aszShortDescription.clear();
+}
+
+
 int CvCivilizationInfo::getDefaultPlayerColor() const
 {
 	return m_iDefaultPlayerColor;
@@ -9320,36 +9169,32 @@ bool CvCivilizationInfo::isPlayable() const
 
 const wchar* CvCivilizationInfo::getShortDescription(uint uiForm)
 {
-	m_szTempText = gDLL->getObjectText(m_szShortDescriptionKey, uiForm);
-	return m_szTempText;
-}
+	while(m_aszShortDescription.size() <= uiForm)
+	{
+		m_aszShortDescription.push_back(gDLL->getObjectText(m_szShortDescriptionKey, m_aszShortDescription.size()));
+	}
 
-void CvCivilizationInfo::setShortDescriptionKey(const TCHAR* szVal)
-{
-	m_szShortDescriptionKey = szVal;
+	return m_aszShortDescription[uiForm];
 }
 
 const wchar* CvCivilizationInfo::getShortDescriptionKey() const
 {
-	setTempText(CvWString(m_szShortDescriptionKey));
-	return m_szTempText;
+	return m_szShortDescriptionKey;
 }
 
 const wchar* CvCivilizationInfo::getAdjective(uint uiForm)		
 {
-	m_szTempText = gDLL->getObjectText(m_szAdjectiveKey, uiForm);
-	return m_szTempText;
-}
+	while(m_aszAdjective.size() <= uiForm)
+	{
+		m_aszAdjective.push_back(gDLL->getObjectText(m_szAdjectiveKey, m_aszAdjective.size()));
+	}
 
-void CvCivilizationInfo::setAdjectiveKey(const TCHAR* szVal)
-{
-	m_szAdjectiveKey = szVal;
+	return m_aszAdjective[uiForm];
 }
 
 const wchar* CvCivilizationInfo::getAdjectiveKey() const
 {
-	setTempText(CvWString(m_szAdjectiveKey));
-	return m_szTempText;
+	return m_szAdjectiveKey;
 }
 
 const TCHAR* CvCivilizationInfo::getFlagTexture() const	
@@ -9562,13 +9407,11 @@ bool CvCivilizationInfo::read(CvXMLLoadUtility* pXML)
 
 	int j, iNumSibs;
 
-	pXML->GetChildXmlValByName(szTextVal, "ShortDescription");
+	pXML->GetChildXmlValByName(m_szShortDescriptionKey, "ShortDescription");
 	// Get the Text from Text/Civ4GameTextXML.xml
-	setShortDescriptionKey(szTextVal);
 
-	pXML->GetChildXmlValByName(szTextVal, "Adjective");
+	pXML->GetChildXmlValByName(m_szAdjectiveKey, "Adjective");
 	// Get the Text from Text/Civ4GameTextXML.xml
-	setAdjectiveKey(szTextVal);
 
 	pXML->GetChildXmlValByName(szTextVal, "DefaultPlayerColor");
 	m_iDefaultPlayerColor = pXML->FindInInfoClass(szTextVal);
@@ -12372,7 +12215,7 @@ m_iHealth(0),
 m_iHappiness(0),
 m_iMinAreaSize(0),
 m_iMinLatitude(0),
-m_iMaxLatitude(0),
+m_iMaxLatitude(90),
 m_iPlacementOrder(0),
 m_iConstAppearance(0),
 m_iRandAppearance1(0),
@@ -12622,7 +12465,7 @@ bool CvBonusInfo::isFeature(int i) const
 
 bool CvBonusInfo::isFeatureTerrain(int i) const	
 {
-	FAssertMsg(i < GC.getNumFeatureInfos(), "Index out of bounds");
+	FAssertMsg(i < GC.getNumTerrainInfos(), "Index out of bounds");
 	FAssertMsg(i > -1, "Index out of bounds");
 	return m_pbFeatureTerrain ?	m_pbFeatureTerrain[i] : false; 
 }
@@ -12794,7 +12637,7 @@ bool CvBonusInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iHappiness, "iHappiness");
 	pXML->GetChildXmlValByName(&m_iMinAreaSize, "iMinAreaSize");
 	pXML->GetChildXmlValByName(&m_iMinLatitude, "iMinLatitude");
-	pXML->GetChildXmlValByName(&m_iMaxLatitude, "iMaxLatitude");
+	pXML->GetChildXmlValByName(&m_iMaxLatitude, "iMaxLatitude", 90);
 	pXML->GetChildXmlValByName(&m_iPlacementOrder, "iPlacementOrder");
 	pXML->GetChildXmlValByName(&m_iConstAppearance, "iConstAppearance");
 
@@ -15736,12 +15579,6 @@ void CvReligionInfo::setSound(const TCHAR* szVal)
 	m_szSound=szVal; 
 }
 
-const wchar* CvReligionInfo::getAdjective(uint uiForm)		
-{
-	m_szTempText = gDLL->getObjectText(m_szAdjectiveKey, uiForm);
-	return m_szTempText;
-}
-
 void CvReligionInfo::setAdjectiveKey(const TCHAR* szVal)
 {
 	m_szAdjectiveKey = szVal;
@@ -15749,8 +15586,7 @@ void CvReligionInfo::setAdjectiveKey(const TCHAR* szVal)
 
 const wchar* CvReligionInfo::getAdjectiveKey() const
 {
-	setTempText(CvWString(m_szAdjectiveKey));
-	return m_szTempText;
+	return m_szAdjectiveKey;
 }
 
 // Arrays
@@ -17388,7 +17224,7 @@ const TCHAR* CvAssetInfoBase::getTag() const
 
 void CvAssetInfoBase::setTag(const TCHAR* szDesc)		
 {
-	setType(szDesc); 
+	m_szType = szDesc; 
 }
 
 const TCHAR* CvAssetInfoBase::getPath() const			
@@ -19054,11 +18890,7 @@ bool CvGameText::read(CvXMLLoadUtility* pXML)
 	}
 
 	gDLL->getXMLIFace()->SetToChild(pXML->GetXML()); // Move down to Child level
-	pXML->GetXmlVal(szTextVal);		// TAG
-	setType(szTextVal);
-
-//	OutputDebugString(szTextVal.c_str());
-//	OutputDebugString("\n");
+	pXML->GetXmlVal(m_szType);		// TAG
 
 	static const int iMaxNumLanguages = GC.getDefineINT("MAX_NUM_LANGUAGES");
 	int iNumLanguages = NUM_LANGUAGES ? NUM_LANGUAGES : iMaxNumLanguages + 1;
@@ -22919,16 +22751,14 @@ int CvVoteSourceInfo::getReligionCommerce(int i) const
 	return m_aiReligionCommerces[i];
 }
 
-const CvWString& CvVoteSourceInfo::getPopupText() const
+const CvWString CvVoteSourceInfo::getPopupText() const
 {
-	setTempText(gDLL->getText(m_szPopupText.GetCString()));
-	return m_szTempText;
+	return gDLL->getText(m_szPopupText);
 }
 
-const CvWString& CvVoteSourceInfo::getSecretaryGeneralText() const
+const CvWString CvVoteSourceInfo::getSecretaryGeneralText() const
 {
-	setTempText(gDLL->getText(m_szSecretaryGeneralText.GetCString()));
-	return m_szTempText;
+	return gDLL->getText(m_szSecretaryGeneralText);
 }
 
 bool CvVoteSourceInfo::read(CvXMLLoadUtility* pXML)

@@ -2306,12 +2306,14 @@ class CvWorldBuilderScreen:
 			for j in range (CyMap().getGridHeight()):
 				pPlot = CyMap().plot(i,j)
 				if (not pPlot.isNone()):
-					pPlot.setRevealed(self.m_iCurrentTeam, bReveal, False, -1);
+					if bReveal or (not pPlot.isVisible(self.m_iCurrentTeam, False)):
+						pPlot.setRevealed(self.m_iCurrentTeam, bReveal, False, -1);
 		self.refreshReveal()
 		return
 
 	def RevealCurrentPlot(self, bReveal):
-		self.m_pCurrentPlot.setRevealed(self.m_iCurrentTeam, bReveal, False, -1);
+		if bReveal or (not self.m_pCurrentPlot.isVisible(self.m_iCurrentTeam, False)):
+			self.m_pCurrentPlot.setRevealed(self.m_iCurrentTeam, bReveal, False, -1)
 		return
 
 	def showRevealed(self, pPlot):

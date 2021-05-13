@@ -1518,6 +1518,12 @@ bool CyUnit::isCargo()
 	return m_pUnit ? m_pUnit->isCargo() : false;
 }
 
+void CyUnit::setTransportUnit(CyUnit* pTransportUnit)
+{
+	if (m_pUnit)
+		m_pUnit->setTransportUnit(pTransportUnit->getUnit());
+}
+
 int CyUnit::getExtraDomainModifier(int /*DomainTypes*/ eIndex)
 {
 	return m_pUnit ? m_pUnit->getExtraDomainModifier((DomainTypes) eIndex) : -1;

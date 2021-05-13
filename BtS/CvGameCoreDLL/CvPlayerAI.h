@@ -8,7 +8,6 @@
 #include "CvPlayer.h"
 #include "AI_defines.h"
 
-class FAStar;
 class CvEventTriggerInfo;
 
 class CvPlayerAI : public CvPlayer
@@ -36,7 +35,7 @@ public:
 
 	void AI_init();
 	void AI_uninit();
-	void AI_reset();
+	void AI_reset(bool bConstructor);
 
 	int AI_getFlavorValue(FlavorTypes eFlavor);
 
@@ -83,7 +82,6 @@ public:
 	bool AI_isCommercePlot(CvPlot* pPlot);
 	int AI_getPlotDanger(CvPlot* pPlot, int iRange = -1, bool bTestMoves = true);
 	int AI_getUnitDanger(CvUnit* pUnit, int iRange = -1, bool bTestMoves = true, bool bAnyDanger = true);
-	int AI_getSpyDanger(CvPlot* pPlot, int iRange, bool bTestMoves = true);
 	int AI_getWaterDanger(CvPlot* pPlot, int iRange, bool bTestMoves = true);
 
 	bool AI_avoidScience();
@@ -130,28 +128,28 @@ public:
 	bool AI_considerOffer(PlayerTypes ePlayer, const CLinkList<TradeData>* pTheirList, const CLinkList<TradeData>* pOurList, int iChange = 1);
 	bool AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeData>* pTheirList, const CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirInventory, CLinkList<TradeData>* pOurInventory, CLinkList<TradeData>* pTheirCounter, CLinkList<TradeData>* pOurCounter);
 
-	DllExport int AI_maxGoldTrade(PlayerTypes ePlayer);
+	DllExport int AI_maxGoldTrade(PlayerTypes ePlayer) const;
 
-	DllExport int AI_maxGoldPerTurnTrade(PlayerTypes ePlayer);
+	DllExport int AI_maxGoldPerTurnTrade(PlayerTypes ePlayer) const;
 	int AI_goldPerTurnTradeVal(int iGoldPerTurn);
 
 	int AI_bonusVal(BonusTypes eBonus, int iChange = 1);
 	int AI_baseBonusVal(BonusTypes eBonus);
 	int AI_bonusTradeVal(BonusTypes eBonus, PlayerTypes ePlayer, int iChange);
-	DenialTypes AI_bonusTrade(BonusTypes eBonus, PlayerTypes ePlayer);
-	int AI_corporationBonusVal(BonusTypes eBonus);
+	DenialTypes AI_bonusTrade(BonusTypes eBonus, PlayerTypes ePlayer) const;
+	int AI_corporationBonusVal(BonusTypes eBonus) const;
 
 	int AI_cityTradeVal(CvCity* pCity);
-	DenialTypes AI_cityTrade(CvCity* pCity, PlayerTypes ePlayer);
+	DenialTypes AI_cityTrade(CvCity* pCity, PlayerTypes ePlayer) const;
 
 	int AI_stopTradingTradeVal(TeamTypes eTradeTeam, PlayerTypes ePlayer);
-	DenialTypes AI_stopTradingTrade(TeamTypes eTradeTeam, PlayerTypes ePlayer);
+	DenialTypes AI_stopTradingTrade(TeamTypes eTradeTeam, PlayerTypes ePlayer) const;
 
 	int AI_civicTradeVal(CivicTypes eCivic, PlayerTypes ePlayer);
-	DenialTypes AI_civicTrade(CivicTypes eCivic, PlayerTypes ePlayer);
+	DenialTypes AI_civicTrade(CivicTypes eCivic, PlayerTypes ePlayer) const;
 
 	int AI_religionTradeVal(ReligionTypes eReligion, PlayerTypes ePlayer);
-	DenialTypes AI_religionTrade(ReligionTypes eReligion, PlayerTypes ePlayer);
+	DenialTypes AI_religionTrade(ReligionTypes eReligion, PlayerTypes ePlayer) const;
 
 	int AI_unitImpassableCount(UnitTypes eUnit);
 	int AI_unitValue(UnitTypes eUnit, UnitAITypes eUnitAI, CvArea* pArea);
@@ -236,7 +234,7 @@ public:
 	int AI_getPeacetimeGrantValue(PlayerTypes eIndex);
 	void AI_changePeacetimeGrantValue(PlayerTypes eIndex, int iChange);
 
-	int AI_getGoldTradedTo(PlayerTypes eIndex);
+	int AI_getGoldTradedTo(PlayerTypes eIndex) const;
 	void AI_changeGoldTradedTo(PlayerTypes eIndex, int iChange);
 
 	int AI_getAttitudeExtra(PlayerTypes eIndex);
@@ -419,8 +417,6 @@ protected:
 		
 	void AI_doEnemyUnitData();
 	void AI_invalidateCloseBordersAttitudeCache();
-
-	FAStar* m_pRouteFinder;
 	
 	friend class CvGameTextMgr;
 };

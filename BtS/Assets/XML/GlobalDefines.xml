@@ -7,7 +7,11 @@
 <Civ4Defines xmlns="x-schema:CIV4GlobalDefinesSchema.xml">
 	<Define>
 		<DefineName>CIV4_VERSION</DefineName>
-		<iDefineIntVal>313</iDefineIntVal>
+		<iDefineIntVal>317</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>MIN_VERSION</DefineName>
+		<iDefineIntVal>000</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>SAVE_VERSION</DefineName>
@@ -726,6 +730,18 @@
 		<iDefineIntVal>20</iDefineIntVal>
 	</Define>
 	<Define>
+		<DefineName>GLOBAL_WARMING_FOREST</DefineName>
+		<iDefineIntVal>50</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>GLOBAL_WARMING_UNHEALTH_WEIGHT</DefineName>
+		<iDefineIntVal>20</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>GLOBAL_WARMING_NUKE_WEIGHT</DefineName>
+		<iDefineIntVal>50</iDefineIntVal>
+	</Define>
+	<Define>
 		<DefineName>TECH_COST_EXTRA_TEAM_MEMBER_MODIFIER</DefineName>
 		<iDefineIntVal>50</iDefineIntVal>
 	</Define>
@@ -847,7 +863,7 @@
 	</Define>
 	<Define>
 		<DefineName>BASE_WAR_WEARINESS_MULTIPLIER</DefineName>
-		<iDefineIntVal>5</iDefineIntVal>
+		<iDefineIntVal>2</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>FORCED_WAR_WAR_WEARINESS_MODIFIER</DefineName>
@@ -855,7 +871,7 @@
 	</Define>
 	<Define>
 		<DefineName>MULTIPLAYER_WAR_WEARINESS_MODIFIER</DefineName>
-		<iDefineIntVal>-50</iDefineIntVal>
+		<iDefineIntVal>0</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>PERCENT_ANGER_DIVISOR</DefineName>

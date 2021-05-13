@@ -766,7 +766,7 @@ void CvPlot::verifyUnitValidPlot()
 
 		if (bErased)
 		{
-			aUnits.erase(it);
+			it = aUnits.erase(it);
 		}
 		else
 		{
@@ -807,7 +807,7 @@ void CvPlot::verifyUnitValidPlot()
 
 			if (bErased)
 			{
-				aUnits.erase(it);
+				it = aUnits.erase(it);
 			}
 			else
 			{
@@ -3248,6 +3248,11 @@ bool CvPlot::isFriendlyCity(const CvUnit& kUnit, bool bCheckImprovement) const
 
 	if (NO_TEAM != ePlotTeam)
 	{
+		if (kUnit.isEnemy(ePlotTeam))
+		{
+			return false;
+		}
+
 		TeamTypes eTeam = GET_PLAYER(kUnit.getCombatOwner(ePlotTeam, this)).getTeam();
 
 		if (eTeam == ePlotTeam)
@@ -7355,15 +7360,6 @@ bool CvPlot::changeBuildProgress(BuildTypes eBuild, int iChange, TeamTypes eTeam
 			if (GC.getBuildInfo(eBuild).getImprovement() != NO_IMPROVEMENT)
 			{
 				setImprovementType((ImprovementTypes)GC.getBuildInfo(eBuild).getImprovement());
-				//allocate a worker to this tile if it makes sense.
-				CvCity* pWorkingCity = getWorkingCity();
-				if (pWorkingCity != NULL && !isBeingWorked())
-				{
-					if (!pWorkingCity->isHuman() || pWorkingCity->isCitizensAutomated())
-					{
-						pWorkingCity->AI_tryToWorkPlot(this);
-					}
-				}
 			}
 
 			if (GC.getBuildInfo(eBuild).getRoute() != NO_ROUTE)
@@ -7772,6 +7768,7 @@ void CvPlot::setCenterUnit(CvUnit* pNewValue)
 	if (pOldValue != pNewValue)
 	{
 		m_pCenterUnit = pNewValue;
+		updateMinimapColor();
 
 		setFlagDirty(true);
 
@@ -9727,34 +9724,3 @@ bool CvPlot::isEspionageCounterSpy(TeamTypes eTeam) const
 	return false;
 }
 
-bool CvPlot::isTeamCity(const CvUnit& kUnit, bool bCheckImprovement) const
-{
-	if (!isCity(bCheckImprovement, kUnit.getTeam()))
-	{
-		return false;
-	}
-
-	if (isVisibleEnemyUnit(&kUnit))
-	{
-		return false;
-	}
-
-	TeamTypes ePlotTeam = getTeam();
-
-	if (NO_TEAM != ePlotTeam)
-	{
-		TeamTypes eTeam = GET_PLAYER(kUnit.getCombatOwner(ePlotTeam, this)).getTeam();
-
-		if (eTeam == ePlotTeam)
-		{
-			return true;
-		}
-
-		if (GET_TEAM(ePlotTeam).isVassal(eTeam))
-		{
-			return true;
-		}
-	}
-
-	return false;
-}

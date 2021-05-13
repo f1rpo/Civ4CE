@@ -1654,57 +1654,56 @@ int pathAdd(FAStarNode* parent, FAStarNode* node, int data, const void* pointer,
 {
 	PROFILE_FUNC();
 
-	CLLNode<IDInfo>* pUnitNode;
-	CvSelectionGroup* pSelectionGroup;
-	CvUnit* pLoopUnit;
-	CvPlot* pFromPlot;
-	CvPlot* pToPlot;
-	int iStartMoves;
-	int iMoves;
-	int iTurns;
+	CvSelectionGroup* pSelectionGroup = ((CvSelectionGroup *)pointer);
+	FAssert(pSelectionGroup->getNumUnits() > 0);
 
-	pSelectionGroup = ((CvSelectionGroup *)pointer);
+	int iTurns = 1;
+	int iMoves = MAX_INT;
 
 	if (data == ASNC_INITIALADD)
 	{
-		iMoves = MAX_INT;
-		iTurns = 1;
-
-		pUnitNode = pSelectionGroup->headUnitNode();
-
-		while (pUnitNode != NULL)
+		bool bMaxMoves = (gDLL->getFAStarIFace()->GetInfo(finder) & MOVE_MAX_MOVES);
+		if (bMaxMoves)
 		{
-			pLoopUnit = ::getUnit(pUnitNode->m_data);
-			pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode);
+			iMoves = 0;
+		}
 
-			iMoves = std::min(iMoves, (gDLL->getFAStarIFace()->GetInfo(finder) & MOVE_MAX_MOVES) ? pLoopUnit->maxMoves() : pLoopUnit->movesLeft());
+		for (CLLNode<IDInfo>* pUnitNode = pSelectionGroup->headUnitNode(); pUnitNode != NULL; pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode))
+		{
+			CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
+			if (bMaxMoves)
+			{
+				iMoves = std::max(iMoves, pLoopUnit->maxMoves());
+			}
+			else
+			{
+				iMoves = std::min(iMoves, pLoopUnit->movesLeft());
+			}
 		}
 	}
 	else
 	{
-		pFromPlot = GC.getMapINLINE().plotSorenINLINE(parent->m_iX, parent->m_iY);
+		CvPlot* pFromPlot = GC.getMapINLINE().plotSorenINLINE(parent->m_iX, parent->m_iY);
 		FAssertMsg(pFromPlot != NULL, "FromPlot is not assigned a valid value");
-		pToPlot = GC.getMapINLINE().plotSorenINLINE(node->m_iX, node->m_iY);
+		CvPlot* pToPlot = GC.getMapINLINE().plotSorenINLINE(node->m_iX, node->m_iY);
 		FAssertMsg(pToPlot != NULL, "ToPlot is not assigned a valid value");
 
-		iStartMoves = parent->m_iData1;
+		int iStartMoves = parent->m_iData1;
 		iTurns = parent->m_iData2;
-
 		if (iStartMoves == 0)
 		{
 			iTurns++;
 		}
 
-		iMoves = MAX_INT;
-
-		pUnitNode = pSelectionGroup->headUnitNode();
-
-		while (pUnitNode != NULL)
+		for (CLLNode<IDInfo>* pUnitNode = pSelectionGroup->headUnitNode(); pUnitNode != NULL; pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode))
 		{
-			pLoopUnit = ::getUnit(pUnitNode->m_data);
-			pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode);
+			CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
 
-			iMoves = std::min(iMoves, std::max(0, ((iStartMoves > 0) ? iStartMoves : pLoopUnit->maxMoves()) - pToPlot->movementCost(pLoopUnit, pFromPlot)));
+			int iUnitMoves = (iStartMoves == 0 ? pLoopUnit->maxMoves() : iStartMoves);
+			iUnitMoves -= pToPlot->movementCost(pLoopUnit, pFromPlot);
+			iUnitMoves = std::max(iUnitMoves, 0);
+			
+			iMoves = std::min(iMoves, iUnitMoves);
 		}
 	}
 

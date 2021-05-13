@@ -320,6 +320,7 @@ class CvEventManager:
 		return ""
 
 	def onLoadGame(self, argsList):
+		CvAdvisorUtils.resetNoLiberateCities()
 		return 0
 
 	def onGameStart(self, argsList):
@@ -343,6 +344,8 @@ class CvEventManager:
 					popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_DETAILS)
 					popupInfo.setOption1(true)
 					popupInfo.addPopup(iPlayer)
+
+		CvAdvisorUtils.resetNoLiberateCities()
 																	
 	def onGameEnd(self, argsList):
 		'Called at the End of the game'
@@ -417,20 +420,29 @@ class CvEventManager:
 		iIsAttacker = genericArgs[2]
 		iDamage = genericArgs[3]
 		
-		if (iIsAttacker == 0):
-			combatMessage = localText.getText("TXT_KEY_COMBAT_MESSAGE_HIT", (gc.getPlayer(cdDefender.eOwner).getNameKey(), cdDefender.sUnitName, iDamage, cdDefender.iCurrHitPoints, cdDefender.iMaxHitPoints))
+		if cdDefender.eOwner == cdDefender.eVisualOwner:
+			szDefenderName = gc.getPlayer(cdDefender.eOwner).getNameKey()
+		else:
+			szDefenderName = localText.getText("TXT_KEY_TRAIT_PLAYER_UNKNOWN", ())
+		if cdAttacker.eOwner == cdAttacker.eVisualOwner:
+			szAttackerName = gc.getPlayer(cdAttacker.eOwner).getNameKey()
+		else:
+			szAttackerName = localText.getText("TXT_KEY_TRAIT_PLAYER_UNKNOWN", ())
+
+		if (iIsAttacker == 0):				
+			combatMessage = localText.getText("TXT_KEY_COMBAT_MESSAGE_HIT", (szDefenderName, cdDefender.sUnitName, iDamage, cdDefender.iCurrHitPoints, cdDefender.iMaxHitPoints))
 			CyInterface().addCombatMessage(cdAttacker.eOwner,combatMessage)
 			CyInterface().addCombatMessage(cdDefender.eOwner,combatMessage)
 			if (cdDefender.iCurrHitPoints <= 0):
-				combatMessage = localText.getText("TXT_KEY_COMBAT_MESSAGE_DEFEATED", (gc.getPlayer(cdAttacker.eOwner).getNameKey(), cdAttacker.sUnitName, gc.getPlayer(cdDefender.eOwner).getNameKey(), cdDefender.sUnitName))
+				combatMessage = localText.getText("TXT_KEY_COMBAT_MESSAGE_DEFEATED", (szAttackerName, cdAttacker.sUnitName, szDefenderName, cdDefender.sUnitName))
 				CyInterface().addCombatMessage(cdAttacker.eOwner,combatMessage)
 				CyInterface().addCombatMessage(cdDefender.eOwner,combatMessage)
 		elif (iIsAttacker == 1):
-			combatMessage = localText.getText("TXT_KEY_COMBAT_MESSAGE_HIT", (gc.getPlayer(cdAttacker.eOwner).getNameKey(), cdAttacker.sUnitName, iDamage, cdAttacker.iCurrHitPoints, cdAttacker.iMaxHitPoints))
+			combatMessage = localText.getText("TXT_KEY_COMBAT_MESSAGE_HIT", (szAttackerName, cdAttacker.sUnitName, iDamage, cdAttacker.iCurrHitPoints, cdAttacker.iMaxHitPoints))
 			CyInterface().addCombatMessage(cdAttacker.eOwner,combatMessage)
 			CyInterface().addCombatMessage(cdDefender.eOwner,combatMessage)
 			if (cdAttacker.iCurrHitPoints <= 0):
-				combatMessage = localText.getText("TXT_KEY_COMBAT_MESSAGE_DEFEATED", (gc.getPlayer(cdDefender.eOwner).getNameKey(), cdDefender.sUnitName, gc.getPlayer(cdAttacker.eOwner).getNameKey(), cdAttacker.sUnitName))
+				combatMessage = localText.getText("TXT_KEY_COMBAT_MESSAGE_DEFEATED", (szDefenderName, cdDefender.sUnitName, szAttackerName, cdAttacker.sUnitName))
 				CyInterface().addCombatMessage(cdAttacker.eOwner,combatMessage)
 				CyInterface().addCombatMessage(cdDefender.eOwner,combatMessage)
 
@@ -822,7 +834,7 @@ class CvEventManager:
 				if gc.getTeam(owner.getTeam()).isAtWar(gc.getPlayer(iPlayer).getTeam()):
 					if gc.getNumEventTriggerInfos() > 0: # prevents mods that don't have events from getting an error
 						iEvent = CvUtil.findInfoTypeNum(gc.getEventTriggerInfo, gc.getNumEventTriggerInfos(),'EVENTTRIGGER_PARTISANS')
-						if iEvent != -1 and gc.getGame().isEventActive(iEvent) and owner.getEventTriggerWeight(iEvent) >= 0:
+						if iEvent != -1 and gc.getGame().isEventActive(iEvent) and owner.getEventTriggerWeight(iEvent) < 0:
 							triggerData = owner.initTriggeredData(iEvent, true, -1, city.getX(), city.getY(), iPlayer, city.getID(), -1, -1, -1, -1)
 			
 		CvUtil.pyPrint("City Razed Event: %s" %(city.getName(),))

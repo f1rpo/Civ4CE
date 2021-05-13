@@ -382,7 +382,7 @@ class CvInfoScreen:
 		self.TEXT_POPULATION = localText.getText("TXT_KEY_DEMO_SCREEN_POPULATION_TEXT", ())
 		self.TEXT_HAPPINESS = localText.getText("TXT_KEY_DEMO_SCREEN_HAPPINESS_TEXT", ())
 		self.TEXT_HEALTH = localText.getText("TXT_KEY_DEMO_SCREEN_HEALTH_TEXT", ())
-		self.TEXT_IMP_EXP = localText.getText("TXT_KEY_DEMO_SCREEN_IMPORTS_TEXT", ()) + "/" + localText.getText("TXT_KEY_DEMO_SCREEN_EXPORTS_TEXT", ())
+		self.TEXT_IMP_EXP = localText.getText("TXT_KEY_DEMO_SCREEN_EXPORTS_TEXT", ()) + " - " + localText.getText("TXT_KEY_DEMO_SCREEN_IMPORTS_TEXT", ())
 
 		self.TEXT_ECONOMY_MEASURE = (u"  %c" % CyGame().getSymbolID(FontSymbols.BULLET_CHAR)) + localText.getText("TXT_KEY_DEMO_SCREEN_ECONOMY_MEASURE", ())
 		self.TEXT_INDUSTRY_MEASURE = (u"  %c" % CyGame().getSymbolID(FontSymbols.BULLET_CHAR)) + localText.getText("TXT_KEY_DEMO_SCREEN_INDUSTRY_MEASURE", ())
@@ -901,6 +901,46 @@ class CvInfoScreen:
 	def drawDemographicsTab(self):
 
 	    self.drawTextChart()
+	    
+	def getHappyValue(self, pPlayer):
+		iHappy = pPlayer.calculateTotalCityHappiness()
+		iUnhappy = pPlayer.calculateTotalCityUnhappiness()
+		return (iHappy * 100) / max(1, iHappy + iUnhappy)	 
+
+	def getHealthValue(self, pPlayer):
+		iGood = pPlayer.calculateTotalCityHealthiness()
+		iBad = pPlayer.calculateTotalCityUnhealthiness()
+		return (iGood * 100) / max(1, iGood + iBad)	 
+		
+	def getRank(self, aiGroup):
+		aiGroup.sort()
+		aiGroup.reverse()		
+		iRank = 1
+		for (iLoopValue, iLoopPlayer) in aiGroup:
+			if iLoopPlayer == self.iActivePlayer:
+				return iRank
+			iRank += 1
+		return 0
+
+	def getBest(self, aiGroup):
+		bFirst = true
+		iBest = 0
+		for (iLoopValue, iLoopPlayer) in aiGroup:
+			if iLoopPlayer != self.iActivePlayer:
+				if bFirst or iLoopValue > iBest:
+					iBest = iLoopValue
+					bFirst = false
+		return iBest
+
+	def getWorst(self, aiGroup):
+		bFirst = true
+		iWorst = 0
+		for (iLoopValue, iLoopPlayer) in aiGroup:
+			if iLoopPlayer != self.iActivePlayer:
+				if bFirst or iLoopValue < iWorst:
+					iWorst = iLoopValue
+					bFirst = false
+		return iWorst
 
 	def drawTextChart(self):
 
@@ -910,62 +950,17 @@ class CvInfoScreen:
 
 		pPlayer = gc.getPlayer(self.iActivePlayer)
 
-		iEconomy = pPlayer.calculateTotalCommerce()
-		iIndustry = pPlayer.calculateTotalYield(YieldTypes.YIELD_PRODUCTION)
-		iAgriculture = pPlayer.calculateTotalYield(YieldTypes.YIELD_FOOD)
-		fMilitary = pPlayer.getPower() * 1000
-		iLandArea = pPlayer.getTotalLand() * 1000
-		iPopulation = pPlayer.getRealPopulation()
-		if (pPlayer.calculateTotalCityHappiness() > 0):
-			iHappiness = int((1.0 * pPlayer.calculateTotalCityHappiness()) / (pPlayer.calculateTotalCityHappiness() + \
-					pPlayer.calculateTotalCityUnhappiness()) * 100)
-		else:
-			iHappiness = 50
-
-		if (pPlayer.calculateTotalCityHealthiness() > 0):
-			iHealth = int((1.0 * pPlayer.calculateTotalCityHealthiness()) / (pPlayer.calculateTotalCityHealthiness() + \
-					pPlayer.calculateTotalCityUnhealthiness()) * 100)
-		else:
-			iHealth = 30
-		iImports = pPlayer.calculateTotalImports(YieldTypes.YIELD_COMMERCE)
-		iExports = pPlayer.calculateTotalExports(YieldTypes.YIELD_COMMERCE)
-
-		if (iExports > 0):
-			if (iImports == 0):
-				fImpExpRatio = 1 / (1.0 * iExports)
-			else:
-				fImpExpRatio = iImports / (1.0 * iExports)
-		else:
-			# Make ratio 1 when both imports and exports are 0
-			if (iImports == 0):
-				fImpExpRatio = 1.0
-			else:
-				fImpExpRatio = 1.0 * iImports
-
-		iEconomyRank = 0
-		iIndustryRank = 0
-		iAgricultureRank = 0
-		iMilitaryRank = 0
-		iLandAreaRank = 0
-		iPopulationRank = 0
-		iHappinessRank = 0
-		iHealthRank = 0
-		iImpExpRatioRank = 0
-
-		fEconomyGameAverage = 0
-		fIndustryGameAverage = 0
-		fAgricultureGameAverage = 0
-		fMilitaryGameAverage = 0
-		fLandAreaGameAverage = 0
-		fPopulationGameAverage = 0
-		fHappinessGameAverage = 0
-		fHealthGameAverage = 0
-		fImportsGameAverage = 0
-		fExportsGameAverage = 0
-		fImpExpRatioGameAverage = 0
+		iEconomyGameAverage = 0
+		iIndustryGameAverage = 0
+		iAgricultureGameAverage = 0
+		iMilitaryGameAverage = 0
+		iLandAreaGameAverage = 0
+		iPopulationGameAverage = 0
+		iHappinessGameAverage = 0
+		iHealthGameAverage = 0
+		iNetTradeGameAverage = 0
 
 		# Lists of Player values - will be used to determine rank, strength and average per city
-
 		aiGroupEconomy = []
 		aiGroupIndustry = []
 		aiGroupAgriculture = []
@@ -974,17 +969,7 @@ class CvInfoScreen:
 		aiGroupPopulation = []
 		aiGroupHappiness = []
 		aiGroupHealth = []
-		aiGroupImports = []
-		aiGroupExports = []
-		afGroupImpExpRatio = []
-
-		iImportsGameBest	= 0
-		iExportsGameBest	= 0
-		fImpExpRatioGameBest	= 0
-
-		iImportsGameWorst	= 0
-		iExportsGameWorst	= 0
-		fImpExpRatioGameWorst	= 1000000.0
+		aiGroupNetTrade = []
 
 		# Loop through all players to determine Rank and relative Strength
 		for iPlayerLoop in range(gc.getMAX_PLAYERS()):
@@ -994,200 +979,109 @@ class CvInfoScreen:
 				iNumActivePlayers += 1
 
 				pCurrPlayer = gc.getPlayer(iPlayerLoop)
-				aiGroupEconomy.append(pCurrPlayer.calculateTotalCommerce())
-				aiGroupIndustry.append(pCurrPlayer.calculateTotalYield(YieldTypes.YIELD_PRODUCTION))
-				aiGroupAgriculture.append(pCurrPlayer.calculateTotalYield(YieldTypes.YIELD_FOOD))
-				aiGroupMilitary.append(pCurrPlayer.getPower() * 1000)
-				aiGroupLandArea.append(pCurrPlayer.getTotalLand() * 1000)
-				aiGroupPopulation.append(pCurrPlayer.getRealPopulation())
-				if (pCurrPlayer.calculateTotalCityHappiness() > 0):
-					aiGroupHappiness.append(int((1.0 * pCurrPlayer.calculateTotalCityHappiness()) / (pCurrPlayer.calculateTotalCityHappiness() \
-						+ pCurrPlayer.calculateTotalCityUnhappiness()) * 100))
+				
+				iValue = pCurrPlayer.calculateTotalCommerce()
+				if iPlayerLoop == self.iActivePlayer:
+					iEconomy = iValue
 				else:
-					aiGroupHappiness.append(50)
-
-				if (pCurrPlayer.calculateTotalCityHealthiness() > 0):
-					aiGroupHealth.append(int((1.0 * pCurrPlayer.calculateTotalCityHealthiness()) / (pCurrPlayer.calculateTotalCityHealthiness() \
-						+ pCurrPlayer.calculateTotalCityUnhealthiness()) * 100))
+					iEconomyGameAverage += iValue
+				aiGroupEconomy.append((iValue, iPlayerLoop))
+				
+				iValue = pCurrPlayer.calculateTotalYield(YieldTypes.YIELD_PRODUCTION)
+				if iPlayerLoop == self.iActivePlayer:
+					iIndustry = iValue
 				else:
-					aiGroupHealth.append(30)
-				iTempImports = pCurrPlayer.calculateTotalImports(YieldTypes.YIELD_COMMERCE)
-				aiGroupImports.append(iTempImports)
-				iTempExports = pCurrPlayer.calculateTotalExports(YieldTypes.YIELD_COMMERCE)
-				aiGroupExports.append(iTempExports)
+					iIndustryGameAverage += iValue
+				aiGroupIndustry.append((iValue, iPlayerLoop))
 
-				if (iTempExports > 0):
-					if (iTempImports == 0):
-						fGroupImpExpRatio = 1 / (1.0 * iTempExports)
-						afGroupImpExpRatio.append(fGroupImpExpRatio)
-					else:
-						fGroupImpExpRatio = iTempImports / (1.0 * iTempExports)
-						afGroupImpExpRatio.append(fGroupImpExpRatio)
+				iValue = pCurrPlayer.calculateTotalYield(YieldTypes.YIELD_FOOD)
+				if iPlayerLoop == self.iActivePlayer:
+					iAgriculture = iValue
 				else:
-					# Make ratio 1 when both imports and exports are 0
-					if (iTempImports == 0):
-						fGroupImpExpRatio = 1.0
-						afGroupImpExpRatio.append(fGroupImpExpRatio)
-					else:
-						fGroupImpExpRatio = 1.0 * iTempImports
-						afGroupImpExpRatio.append(fGroupImpExpRatio)
+					iAgricultureGameAverage += iValue
+				aiGroupAgriculture.append((iValue, iPlayerLoop))
 
-				if iPlayerLoop != self.iActivePlayer:
-					if (fGroupImpExpRatio > fImpExpRatioGameBest):
-						fImpExpRatioGameBest = fGroupImpExpRatio
-						iImportsGameBest	 = iTempImports
-						iExportsGameBest	 = iTempExports
+				iValue = pCurrPlayer.getPower() * 1000
+				if iPlayerLoop == self.iActivePlayer:
+					iMilitary = iValue
+				else:
+					iMilitaryGameAverage += iValue
+				aiGroupMilitary.append((iValue, iPlayerLoop))
 
-					if (fGroupImpExpRatio < fImpExpRatioGameWorst):
-						fImpExpRatioGameWorst = fGroupImpExpRatio
-						iImportsGameWorst	 = iTempImports
-						iExportsGameWorst	 = iTempExports
+				iValue = pCurrPlayer.getTotalLand() * 1000
+				if iPlayerLoop == self.iActivePlayer:
+					iLandArea = iValue
+				else:
+					iLandAreaGameAverage += iValue
+				aiGroupLandArea.append((iValue, iPlayerLoop))
 
-		aiGroupEconomy.sort()
-		aiGroupIndustry.sort()
-		aiGroupAgriculture.sort()
-		aiGroupMilitary.sort()
-		aiGroupLandArea.sort()
-		aiGroupPopulation.sort()
-		aiGroupHappiness.sort()
-		aiGroupHealth.sort()
-		aiGroupImports.sort()
-		aiGroupExports.sort()
-		afGroupImpExpRatio.sort()
+				iValue = pCurrPlayer.getRealPopulation()
+				if iPlayerLoop == self.iActivePlayer:
+					iPopulation = iValue
+				else:
+					iPopulationGameAverage += iValue
+				aiGroupPopulation.append((iValue, iPlayerLoop))
 
-		aiGroupEconomy.reverse()
-		aiGroupIndustry.reverse()
-		aiGroupAgriculture.reverse()
-		aiGroupMilitary.reverse()
-		aiGroupLandArea.reverse()
-		aiGroupPopulation.reverse()
-		aiGroupHappiness.reverse()
-		aiGroupHealth.reverse()
-		aiGroupImports.reverse()
-		aiGroupExports.reverse()
-		afGroupImpExpRatio.reverse()
+				iValue = self.getHappyValue(pCurrPlayer)
+				if iPlayerLoop == self.iActivePlayer:
+					iHappiness = iValue
+				else:
+					iHappinessGameAverage += iValue
+				aiGroupHappiness.append((iValue, iPlayerLoop))
 
-		# Lists of player values are ordered from highest first to lowest, so determine Rank, Strength and World Average
+				iValue = self.getHealthValue(pCurrPlayer)
+				if iPlayerLoop == self.iActivePlayer:
+					iHealth = iValue
+				else:
+					iHealthGameAverage += iValue
+				aiGroupHealth.append((iValue, iPlayerLoop))
+					
+				iValue = pCurrPlayer.calculateTotalExports(YieldTypes.YIELD_COMMERCE) - pCurrPlayer.calculateTotalImports(YieldTypes.YIELD_COMMERCE)
+				if iPlayerLoop == self.iActivePlayer:
+					iNetTrade = iValue
+				else:
+					iNetTradeGameAverage += iValue
+				aiGroupNetTrade.append((iValue, iPlayerLoop))
+					
+		iEconomyRank = self.getRank(aiGroupEconomy)
+		iIndustryRank = self.getRank(aiGroupIndustry)
+		iAgricultureRank = self.getRank(aiGroupAgriculture)
+		iMilitaryRank = self.getRank(aiGroupMilitary)
+		iLandAreaRank = self.getRank(aiGroupLandArea)
+		iPopulationRank = self.getRank(aiGroupPopulation)
+		iHappinessRank = self.getRank(aiGroupHappiness)
+		iHealthRank = self.getRank(aiGroupHealth)
+		iNetTradeRank = self.getRank(aiGroupNetTrade)
 
-		bEconomyFound = false
-		bIndustryFound = false
-		bAgricultureFound = false
-		bMilitaryFound = false
-		bLandAreaFound = false
-		bPopulationFound = false
-		bHappinessFound = false
-		bHealthFound = false
-		bImpExpRatioFound = false
+		iEconomyGameBest	= self.getBest(aiGroupEconomy)
+		iIndustryGameBest	= self.getBest(aiGroupIndustry)
+		iAgricultureGameBest	= self.getBest(aiGroupAgriculture)
+		iMilitaryGameBest	= self.getBest(aiGroupMilitary)
+		iLandAreaGameBest	= self.getBest(aiGroupLandArea)
+		iPopulationGameBest	= self.getBest(aiGroupPopulation)
+		iHappinessGameBest	= self.getBest(aiGroupHappiness)
+		iHealthGameBest		= self.getBest(aiGroupHealth)
+		iNetTradeGameBest	= self.getBest(aiGroupNetTrade)
 
-		for i in range(len(aiGroupEconomy)):
+		iEconomyGameWorst	= self.getWorst(aiGroupEconomy)
+		iIndustryGameWorst	= self.getWorst(aiGroupIndustry)
+		iAgricultureGameWorst	= self.getWorst(aiGroupAgriculture)
+		iMilitaryGameWorst	= self.getWorst(aiGroupMilitary)
+		iLandAreaGameWorst	= self.getWorst(aiGroupLandArea)
+		iPopulationGameWorst	= self.getWorst(aiGroupPopulation)
+		iHappinessGameWorst	= self.getWorst(aiGroupHappiness)
+		iHealthGameWorst	= self.getWorst(aiGroupHealth)
+		iNetTradeGameWorst	= self.getWorst(aiGroupNetTrade)
 
-			if (iEconomy == aiGroupEconomy[i] and bEconomyFound == false):
-				iEconomyRank = i + 1
-				bEconomyFound = true
-			else:
-				fEconomyGameAverage += aiGroupEconomy[i]
-
-			if (iIndustry == aiGroupIndustry[i] and bIndustryFound == false):
-				iIndustryRank = i + 1
-				bIndustryFound = true
-			else:
-				fIndustryGameAverage += aiGroupIndustry[i]
-
-			if (iAgriculture == aiGroupAgriculture[i] and bAgricultureFound == false):
-				iAgricultureRank = i + 1
-				bAgricultureFound = true
-			else:
-				fAgricultureGameAverage += aiGroupAgriculture[i]
-
-			if (fMilitary == aiGroupMilitary[i] and bMilitaryFound == false):
-				iMilitaryRank = i + 1
-				bMilitaryFound = true
-			else:
-				fMilitaryGameAverage += aiGroupMilitary[i]
-
-			if (iLandArea == aiGroupLandArea[i] and bLandAreaFound == false):
-				iLandAreaRank = i + 1
-				bLandAreaFound = true
-			else:
-				fLandAreaGameAverage += aiGroupLandArea[i]
-
-			if (iPopulation == aiGroupPopulation[i] and bPopulationFound == false):
-				iPopulationRank = i + 1
-				bPopulationFound = true
-			else:
-				fPopulationGameAverage += aiGroupPopulation[i]
-
-			if (iHappiness == aiGroupHappiness[i] and bHappinessFound == false):
-				iHappinessRank = i + 1
-				bHappinessFound = true
-			else:
-				fHappinessGameAverage += aiGroupHappiness[i]
-
-			if (iHealth == aiGroupHealth[i] and bHealthFound == false):
-				iHealthRank = i + 1
-				bHealthFound = true
-			else:
-				fHealthGameAverage += aiGroupHealth[i]
-
-			if (fImpExpRatio == afGroupImpExpRatio[i] and bImpExpRatioFound == false):
-				iImpExpRatioRank = i + 1
-				bImpExpRatioFound = true
-			else:
-				fImportsGameAverage += aiGroupImports[i]
-				fExportsGameAverage += aiGroupImports[i]
-
-		iEconomyGameBest	= 0
-		iIndustryGameBest	= 0
-		iAgricultureGameBest	= 0
-		iMilitaryGameBest	= 0
-		iLandAreaGameBest	= 0
-		iPopulationGameBest	= 0
-		iHappinessGameBest	= 0
-		iHealthGameBest		= 0
-
-		iEconomyGameWorst	= 0
-		iIndustryGameWorst	= 0
-		iAgricultureGameWorst	= 0
-		iMilitaryGameWorst	= 0
-		iLandAreaGameWorst	= 0
-		iPopulationGameWorst	= 0
-		iHappinessGameWorst	= 0
-		iHealthGameWorst	= 0
-
-		if (iNumActivePlayers > 1):
-
-			fEconomyGameAverage = (1.0 * fEconomyGameAverage) / (iNumActivePlayers - 1)
-			fIndustryGameAverage = (1.0 * fIndustryGameAverage) / (iNumActivePlayers - 1)
-			fAgricultureGameAverage = (1.0 * fAgricultureGameAverage) / (iNumActivePlayers - 1)
-			fMilitaryGameAverage = int((1.0 * fMilitaryGameAverage) / (iNumActivePlayers - 1))
-			fLandAreaGameAverage = (1.0 * fLandAreaGameAverage) / (iNumActivePlayers - 1)
-			fPopulationGameAverage = int((1.0 * fPopulationGameAverage) / (iNumActivePlayers - 1))
-			fHappinessGameAverage = (1.0 * fHappinessGameAverage) / (iNumActivePlayers - 1)
-			fHealthGameAverage = (1.0 * fHealthGameAverage) / (iNumActivePlayers - 1)
-			fImportsGameAverage = (1.0 * fImportsGameAverage) / (iNumActivePlayers - 1)
-			fExportsGameAverage = (1.0 * fExportsGameAverage) / (iNumActivePlayers - 1)
-
-			ix = lambda x: iff(x == 1, 1, 0)
-
-			iEconomyGameBest	= aiGroupEconomy[ix(iEconomyRank)]
-			iIndustryGameBest	= aiGroupIndustry[ix(iIndustryRank)]
-			iAgricultureGameBest	= aiGroupAgriculture[ix(iAgricultureRank)]
-			iMilitaryGameBest	= aiGroupMilitary[ix(iMilitaryRank)]
-			iLandAreaGameBest	= aiGroupLandArea[ix(iLandAreaRank)]
-			iPopulationGameBest	= aiGroupPopulation[ix(iPopulationRank)]
-			iHappinessGameBest	= aiGroupHappiness[ix(iHappinessRank)]
-			iHealthGameBest		= aiGroupHealth[ix(iHealthRank)]
-
-			ix = lambda x: iff(x == iNumActivePlayers, iNumActivePlayers - 2, iNumActivePlayers - 1)
-
-			iEconomyGameWorst	= aiGroupEconomy[ix(iEconomyRank)]
-			iIndustryGameWorst	= aiGroupIndustry[ix(iIndustryRank)]
-			iAgricultureGameWorst	= aiGroupAgriculture[ix(iAgricultureRank)]
-			iMilitaryGameWorst	= aiGroupMilitary[ix(iMilitaryRank)]
-			iLandAreaGameWorst	= aiGroupLandArea[ix(iLandAreaRank)]
-			iPopulationGameWorst	= aiGroupPopulation[ix(iPopulationRank)]
-			iHappinessGameWorst	= aiGroupHappiness[ix(iHappinessRank)]
-			iHealthGameWorst	= aiGroupHealth[ix(iHealthRank)]
+		iEconomyGameAverage = iEconomyGameAverage / max(1, iNumActivePlayers - 1)
+		iIndustryGameAverage = iIndustryGameAverage / max(1, iNumActivePlayers - 1)
+		iAgricultureGameAverage = iAgricultureGameAverage / max(1, iNumActivePlayers - 1)
+		iMilitaryGameAverage = iMilitaryGameAverage / max(1, iNumActivePlayers - 1)
+		iLandAreaGameAverage = iLandAreaGameAverage / max(1, iNumActivePlayers - 1)
+		iPopulationGameAverage = iPopulationGameAverage / max(1, iNumActivePlayers - 1)
+		iHappinessGameAverage = iHappinessGameAverage / max(1, iNumActivePlayers - 1)
+		iHealthGameAverage = iHealthGameAverage / max(1, iNumActivePlayers - 1)
+		iNetTradeGameAverage = iNetTradeGameAverage / max(1, iNumActivePlayers - 1)
 
 
 		######## TEXT ########
@@ -1229,12 +1123,12 @@ class CvInfoScreen:
 		screen.setTableText(szTable, iCol, 0, str(iEconomy), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		screen.setTableText(szTable, iCol, 3, str(iIndustry), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		screen.setTableText(szTable, iCol, 6, str(iAgriculture), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
-		screen.setTableText(szTable, iCol, 9, str(int(fMilitary)), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+		screen.setTableText(szTable, iCol, 9, str(iMilitary), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		screen.setTableText(szTable, iCol, 11, str(iLandArea), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		screen.setTableText(szTable, iCol, 14, str(iPopulation), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		screen.setTableText(szTable, iCol, 16, str(iHappiness) + self.TEXT_HAPPINESS_MEASURE, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		screen.setTableText(szTable, iCol, 18, str(iHealth), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
-		screen.setTableText(szTable, iCol, 21, str(iImports) + "/" + str(iExports), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+		screen.setTableText(szTable, iCol, 21, str(iNetTrade), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 
 		iCol = 2
 		screen.setTableText(szTable, iCol, 0, str(iEconomyGameBest), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
@@ -1245,18 +1139,18 @@ class CvInfoScreen:
 		screen.setTableText(szTable, iCol, 14, str(iPopulationGameBest), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		screen.setTableText(szTable, iCol, 16, str(iHappinessGameBest) + self.TEXT_HAPPINESS_MEASURE, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		screen.setTableText(szTable, iCol, 18, str(iHealthGameBest), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
-		screen.setTableText(szTable, iCol, 21, str(iImportsGameBest) + "/" + str(iExportsGameBest), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+		screen.setTableText(szTable, iCol, 21, str(iNetTradeGameBest), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 
 		iCol = 3
-		screen.setTableText(szTable, iCol, 0, str(int(fEconomyGameAverage)), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
-		screen.setTableText(szTable, iCol, 3, str(int(fIndustryGameAverage)), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
-		screen.setTableText(szTable, iCol, 6, str(int(fAgricultureGameAverage)), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
-		screen.setTableText(szTable, iCol, 9, str(int(fMilitaryGameAverage)), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
-		screen.setTableText(szTable, iCol, 11, str(int(fLandAreaGameAverage)), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
-		screen.setTableText(szTable, iCol, 14, str(int(fPopulationGameAverage)), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
-		screen.setTableText(szTable, iCol, 16, str(int(fHappinessGameAverage)) + self.TEXT_HAPPINESS_MEASURE, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
-		screen.setTableText(szTable, iCol, 18, str(int(fHealthGameAverage)), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
-		screen.setTableText(szTable, iCol, 21, str(int(fImportsGameAverage)) + "/" + str(int(fExportsGameAverage)), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+		screen.setTableText(szTable, iCol, 0, str(iEconomyGameAverage), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+		screen.setTableText(szTable, iCol, 3, str(iIndustryGameAverage), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+		screen.setTableText(szTable, iCol, 6, str(iAgricultureGameAverage), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+		screen.setTableText(szTable, iCol, 9, str(iMilitaryGameAverage), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+		screen.setTableText(szTable, iCol, 11, str(iLandAreaGameAverage), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+		screen.setTableText(szTable, iCol, 14, str(iPopulationGameAverage), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+		screen.setTableText(szTable, iCol, 16, str(iHappinessGameAverage) + self.TEXT_HAPPINESS_MEASURE, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+		screen.setTableText(szTable, iCol, 18, str(iHealthGameAverage), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+		screen.setTableText(szTable, iCol, 21, str(iNetTradeGameAverage), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 
 		iCol = 4
 		screen.setTableText(szTable, iCol, 0, str(iEconomyGameWorst), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
@@ -1267,7 +1161,7 @@ class CvInfoScreen:
 		screen.setTableText(szTable, iCol, 14, str(iPopulationGameWorst), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		screen.setTableText(szTable, iCol, 16, str(iHappinessGameWorst) + self.TEXT_HAPPINESS_MEASURE, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		screen.setTableText(szTable, iCol, 18, str(iHealthGameWorst), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
-		screen.setTableText(szTable, iCol, 21, str(iImportsGameWorst) + "/" + str(iExportsGameWorst), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+		screen.setTableText(szTable, iCol, 21, str(iNetTradeGameWorst), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 
 		iCol = 5
 		screen.setTableText(szTable, iCol, 0, str(iEconomyRank), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
@@ -1278,7 +1172,7 @@ class CvInfoScreen:
 		screen.setTableText(szTable, iCol, 14, str(iPopulationRank), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		screen.setTableText(szTable, iCol, 16, str(iHappinessRank), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		screen.setTableText(szTable, iCol, 18, str(iHealthRank), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
-		screen.setTableText(szTable, iCol, 21, str(iImpExpRatioRank), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+		screen.setTableText(szTable, iCol, 21, str(iNetTradeRank), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 
 		return
 

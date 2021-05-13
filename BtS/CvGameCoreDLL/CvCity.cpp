@@ -1131,7 +1131,14 @@ void CvCity::doTask(TaskTypes eTask, int iData1, int iData2, bool bOption, bool 
 		break;
 
 	case TASK_GIFT:
-		GET_PLAYER((PlayerTypes)iData1).acquireCity(this, false, true, true);
+		if (getLiberationPlayer(false) == iData1)
+		{
+			liberate(false);
+		}
+		else
+		{
+			GET_PLAYER((PlayerTypes)iData1).acquireCity(this, false, true, true);
+		}
 		break;
 
 	case TASK_LIBERATE:
@@ -1760,7 +1767,7 @@ bool CvCity::canTrain(UnitCombatTypes eUnitCombat) const
 {
 	for (int i = 0; i < GC.getNumUnitClassInfos(); i++)
 	{
-		UnitTypes eUnit = (UnitTypes)GC.getCivilizationInfo(GET_PLAYER(getOwnerINLINE()).getCivilizationType()).getCivilizationUnits(i);
+		UnitTypes eUnit = (UnitTypes)GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(i);
 
 		if (NO_UNIT != eUnit)
 		{
@@ -1947,7 +1954,12 @@ bool CvCity::canConstruct(BuildingTypes eBuilding, bool bContinue, bool bTestVis
 		eCorporation = (CorporationTypes)GC.getBuildingInfo(eBuilding).getFoundsCorporation();
 		if (eCorporation != NO_CORPORATION)
 		{
-			if (!GET_PLAYER(getOwnerINLINE()).isActiveCorporation(eCorporation))
+			if (GC.getGameINLINE().isCorporationFounded(eCorporation))
+			{
+				return false;
+			}
+
+			if (GET_PLAYER(getOwnerINLINE()).isNoCorporations())
 			{
 				return false;
 			}
@@ -4791,14 +4803,7 @@ int CvCity::getNumBuilding(BuildingTypes eIndex) const
 {
 	FAssertMsg(eIndex != NO_BUILDING, "BuildingType eIndex is expected to not be NO_BUILDING");
 
-	if (GC.getCITY_MAX_NUM_BUILDINGS() <= 1)
-	{
-		return std::max(getNumRealBuilding(eIndex), getNumFreeBuilding(eIndex));
-	}
-	else
-	{
-		return (getNumRealBuilding(eIndex) + getNumFreeBuilding(eIndex));
-	}
+	return std::min(GC.getCITY_MAX_NUM_BUILDINGS(), getNumRealBuilding(eIndex) + getNumFreeBuilding(eIndex));
 }
 
 
@@ -5789,19 +5794,11 @@ int CvCity::getBuildingBadHealth() const
 
 int CvCity::getBuildingHealth(BuildingTypes eBuilding) const
 {
-	int iHealth;
+	int iHealth = getBuildingGoodHealth(eBuilding);
 
-	if (isBuildingOnlyHealthy())
+	if (!isBuildingOnlyHealthy())
 	{
-		iHealth = std::max(0, GC.getBuildingInfo(eBuilding).getHealth());
-		iHealth += std::max(0, getBuildingHealthChange((BuildingClassTypes)GC.getBuildingInfo(eBuilding).getBuildingClassType()));
-		iHealth += std::max(0, GET_PLAYER(getOwnerINLINE()).getExtraBuildingHealth(eBuilding));
-	}
-	else
-	{
-		iHealth = GC.getBuildingInfo(eBuilding).getHealth();
-		iHealth += getBuildingHealthChange((BuildingClassTypes)GC.getBuildingInfo(eBuilding).getBuildingClassType());
-		iHealth += GET_PLAYER(getOwnerINLINE()).getExtraBuildingHealth(eBuilding);
+		iHealth += getBuildingBadHealth(eBuilding);
 	}
 
 	return iHealth;
@@ -5851,7 +5848,7 @@ void CvCity::changeBuildingBadHealth(int iChange)
 {
 	if (iChange != 0)
 	{
-		m_iBuildingBadHealth = (m_iBuildingBadHealth + iChange);
+		m_iBuildingBadHealth += iChange;
 		FAssert(getBuildingBadHealth() <= 0);
 
 		AI_setAssignWorkDirty(true);
@@ -6532,7 +6529,7 @@ int CvCity::getBuildingOnlyHealthyCount() const
 
 
 bool CvCity::isBuildingOnlyHealthy() const																		
-{
+ {
 	if (GET_PLAYER(getOwnerINLINE()).isBuildingOnlyHealthy())
 	{
 		return true;
@@ -7915,16 +7912,28 @@ void CvCity::updateExtraSpecialistYield()
 
 int CvCity::getCommerceRate(CommerceTypes eIndex) const
 {
-	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
-	FAssertMsg(eIndex < NUM_COMMERCE_TYPES, "eIndex expected to be < NUM_COMMERCE_TYPES");
-	return m_aiCommerceRate[eIndex] / 100;
+	return getCommerceRateTimes100(eIndex) / 100;
 }
 
 int CvCity::getCommerceRateTimes100(CommerceTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < NUM_COMMERCE_TYPES, "eIndex expected to be < NUM_COMMERCE_TYPES");
-	return m_aiCommerceRate[eIndex];
+
+	int iRate = m_aiCommerceRate[eIndex];
+	if (GC.getGameINLINE().isOption(GAMEOPTION_NO_ESPIONAGE))
+	{
+		if (eIndex == COMMERCE_CULTURE)
+		{
+			iRate += m_aiCommerceRate[COMMERCE_ESPIONAGE];
+		}
+		else if (eIndex == COMMERCE_ESPIONAGE)
+		{
+			iRate = 0;
+		}
+	}
+
+	return iRate;
 }
 
 
@@ -8007,11 +8016,9 @@ void CvCity::updateCommerce(CommerceTypes eIndex)
 
 void CvCity::updateCommerce()
 {
-	int iI;
-
 	GET_PLAYER(getOwnerINLINE()).invalidateYieldRankCache();
 
-	for (iI = 0; iI < NUM_COMMERCE_TYPES; iI++)
+	for (int iI = 0; iI < NUM_COMMERCE_TYPES; iI++)
 	{
 		updateCommerce((CommerceTypes)iI);
 	}
@@ -9293,6 +9300,11 @@ void CvCity::setGreatPeopleUnitRate(UnitTypes eIndex, int iNewValue)
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < GC.getNumUnitInfos(), "eIndex expected to be < GC.getNumUnitInfos()");
+	if (GC.getGameINLINE().isOption(GAMEOPTION_NO_ESPIONAGE) && GC.getUnitInfo(eIndex).getEspionagePoints() > 0)
+	{
+		return;
+	}
+
 	m_paiGreatPeopleUnitRate[eIndex] = iNewValue;
 	FAssert(getGreatPeopleUnitRate(eIndex) >= 0);
 }
@@ -10963,7 +10975,7 @@ void CvCity::popOrder(int iNum, bool bFinish, bool bChoose)
 		if (eTrainUnit != NO_UNIT)
 		{
 			swprintf(szBuffer, gDLL->getText(((isLimitedUnitClass((UnitClassTypes)(GC.getUnitInfo(eTrainUnit).getUnitClassType()))) ? "TXT_KEY_MISC_TRAINED_UNIT_IN_LIMITED" : "TXT_KEY_MISC_TRAINED_UNIT_IN"), GC.getUnitInfo(eTrainUnit).getTextKeyWide(), getNameKey()).GetCString());
-			strcpy( szSound, GC.getUnitInfo(eTrainUnit).getArtInfo(0,GET_PLAYER(getOwner()).getCurrentEra(), NO_UNIT_ARTSTYLE)->getTrainSound() );
+			strcpy( szSound, GC.getUnitInfo(eTrainUnit).getArtInfo(0,GET_PLAYER(getOwnerINLINE()).getCurrentEra(), NO_UNIT_ARTSTYLE)->getTrainSound() );
 			szIcon = GET_PLAYER(getOwnerINLINE()).getUnitButton(eTrainUnit);
 		}
 		else if (eConstructBuilding != NO_BUILDING)
@@ -11532,11 +11544,6 @@ void CvCity::doReligion()
 
 void CvCity::doGreatPeople()
 {
-	UnitTypes eGreatPeopleUnit;
-	int iTotalGreatPeopleUnitProgress;
-	int iGreatPeopleUnitRand;
-	int iI;
-
 	CyCity* pyCity = new CyCity(this);
 	CyArgsList argsList;
 	argsList.add(gDLL->getPythonIFace()->makePythonObject(pyCity));	// pass in city class
@@ -11555,27 +11562,23 @@ void CvCity::doGreatPeople()
 
 	changeGreatPeopleProgress(getGreatPeopleRate());
 
-	for (iI = 0; iI < GC.getNumUnitInfos(); iI++)
+	for (int iI = 0; iI < GC.getNumUnitInfos(); iI++)
 	{
 		changeGreatPeopleUnitProgress(((UnitTypes)iI), getGreatPeopleUnitRate((UnitTypes)iI));
 	}
 
 	if (getGreatPeopleProgress() >= GET_PLAYER(getOwnerINLINE()).greatPeopleThreshold(false))
 	{
-		changeGreatPeopleProgress(-(GET_PLAYER(getOwnerINLINE()).greatPeopleThreshold(false)));
-
-		iTotalGreatPeopleUnitProgress = 0;
-
-		for (iI = 0; iI < GC.getNumUnitInfos(); iI++)
+		int iTotalGreatPeopleUnitProgress = 0;
+		for (int iI = 0; iI < GC.getNumUnitInfos(); iI++)
 		{
 			iTotalGreatPeopleUnitProgress += getGreatPeopleUnitProgress((UnitTypes)iI);
 		}
 
-		iGreatPeopleUnitRand = GC.getGameINLINE().getSorenRandNum(iTotalGreatPeopleUnitProgress, "Great Person");
+		int iGreatPeopleUnitRand = GC.getGameINLINE().getSorenRandNum(iTotalGreatPeopleUnitProgress, "Great Person");
 
-		eGreatPeopleUnit = NO_UNIT;
-
-		for (iI = 0; iI < GC.getNumUnitInfos(); iI++)
+		UnitTypes eGreatPeopleUnit = NO_UNIT;
+		for (int iI = 0; iI < GC.getNumUnitInfos(); iI++)
 		{
 			if (iGreatPeopleUnitRand < getGreatPeopleUnitProgress((UnitTypes)iI))
 			{
@@ -11590,7 +11593,9 @@ void CvCity::doGreatPeople()
 
 		if (eGreatPeopleUnit != NO_UNIT)
 		{
-			for (iI = 0; iI < GC.getNumUnitInfos(); iI++)
+			changeGreatPeopleProgress(-(GET_PLAYER(getOwnerINLINE()).greatPeopleThreshold(false)));
+
+			for (int iI = 0; iI < GC.getNumUnitInfos(); iI++)
 			{
 				setGreatPeopleUnitProgress(((UnitTypes)iI), 0);
 			}
@@ -12608,7 +12613,7 @@ bool CvCity::canApplyEvent(EventTypes eEvent, const EventTriggeredData& kTrigger
 
 		if (kEvent.getBuildingChange() > 0)
 		{
-			if (getNumRealBuilding(eBuilding) >= GC.getCITY_MAX_NUM_BUILDINGS())
+			if (getNumBuilding(eBuilding) >= GC.getCITY_MAX_NUM_BUILDINGS())
 			{
 				return false;
 			}
@@ -13404,4 +13409,27 @@ int CvCity::getBestYieldAvailable(YieldTypes eYield) const
 	}
 
 	return iBestYieldAvailable;
+}
+
+bool CvCity::isAutoRaze() const
+{
+	if (!GC.getGameINLINE().isOption(GAMEOPTION_NO_CITY_RAZING))
+	{
+		if (getHighestPopulation() == 1)
+		{
+			return true;
+		}
+
+		if (GC.getGameINLINE().getMaxCityElimination() > 0)
+		{
+			return true;
+		}
+	}
+
+	if (GC.getGameINLINE().isOption(GAMEOPTION_ONE_CITY_CHALLENGE) && isHuman())
+	{
+		return true;
+	}
+
+	return false;
 }

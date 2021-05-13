@@ -58,7 +58,6 @@ public:
 	int countCivTeamsAlive();
 	int countCivTeamsEverAlive();
 	int countHumanPlayersAlive();
-	int countHumanPlayersEverAlive();
 
 	int countTotalCivPower();
 	int countTotalNukeUnits();

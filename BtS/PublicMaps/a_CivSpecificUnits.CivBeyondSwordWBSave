@@ -1,0 +1,3224 @@
+Version=11
+BeginGame
+	Era=ERA_ANCIENT
+	Speed=GAMESPEED_QUICK
+	Calendar=CALENDAR_DEFAULT
+	Victory=VICTORY_TIME
+	Victory=VICTORY_CONQUEST
+	Victory=VICTORY_DOMINATION
+	Victory=VICTORY_CULTURAL
+	Victory=VICTORY_SPACE_RACE
+	Victory=VICTORY_DIPLOMATIC
+	GameTurn=0
+	MaxTurns=330
+	MaxCityElimination=0
+	NumAdvancedStartPoints=321
+	TargetScore=0
+	StartYear=-4000
+	Description=
+	ModPath=
+EndGame
+BeginTeam
+	TeamID=0
+	Tech=TECH_AGRICULTURE
+	Tech=TECH_MINING
+	ContactWithTeam=0
+	ContactWithTeam=1
+	ContactWithTeam=2
+	RevealMap=0
+EndTeam
+BeginTeam
+	TeamID=1
+	Tech=TECH_MYSTICISM
+	Tech=TECH_HUNTING
+	ContactWithTeam=0
+	ContactWithTeam=1
+	ContactWithTeam=2
+	RevealMap=0
+EndTeam
+BeginTeam
+	TeamID=2
+	Tech=TECH_FISHING
+	Tech=TECH_HUNTING
+	ContactWithTeam=0
+	ContactWithTeam=1
+	ContactWithTeam=2
+	ContactWithTeam=3
+	RevealMap=0
+EndTeam
+BeginTeam
+	TeamID=3
+	Tech=TECH_MYSTICISM
+	Tech=TECH_MINING
+	ContactWithTeam=2
+	ContactWithTeam=3
+	ContactWithTeam=4
+	RevealMap=0
+EndTeam
+BeginTeam
+	TeamID=4
+	Tech=TECH_THE_WHEEL
+	Tech=TECH_AGRICULTURE
+	ContactWithTeam=3
+	ContactWithTeam=4
+	RevealMap=0
+EndTeam
+BeginTeam
+	TeamID=5
+	ContactWithTeam=5
+	RevealMap=0
+EndTeam
+BeginTeam
+	TeamID=6
+	ContactWithTeam=6
+	RevealMap=0
+EndTeam
+BeginTeam
+	TeamID=7
+	ContactWithTeam=7
+	RevealMap=0
+EndTeam
+BeginTeam
+	TeamID=8
+	ContactWithTeam=8
+	RevealMap=0
+EndTeam
+BeginTeam
+	TeamID=9
+	ContactWithTeam=9
+	RevealMap=0
+EndTeam
+BeginTeam
+	TeamID=10
+	ContactWithTeam=10
+	RevealMap=0
+EndTeam
+BeginTeam
+	TeamID=11
+	ContactWithTeam=11
+	RevealMap=0
+EndTeam
+BeginTeam
+	TeamID=12
+	ContactWithTeam=12
+	RevealMap=0
+EndTeam
+BeginTeam
+	TeamID=13
+	ContactWithTeam=13
+	RevealMap=0
+EndTeam
+BeginTeam
+	TeamID=14
+	ContactWithTeam=14
+	RevealMap=0
+EndTeam
+BeginTeam
+	TeamID=15
+	ContactWithTeam=15
+	RevealMap=0
+EndTeam
+BeginTeam
+	TeamID=16
+	ContactWithTeam=16
+	RevealMap=0
+EndTeam
+BeginTeam
+	TeamID=17
+	ContactWithTeam=17
+	RevealMap=0
+EndTeam
+BeginPlayer
+	Team=0
+	LeaderType=LEADER_QIN_SHI_HUANG
+	LeaderName=Alex
+	CivDesc=Chinese Empire
+	CivShortDesc=China
+	CivAdjective=Chinese
+	FlagDecal=Art/Interface/TeamColor/FlagDECAL_Dragon.dds
+	WhiteFlag=0
+	CivType=CIVILIZATION_CHINA
+	Color=PLAYERCOLOR_DARK_PINK
+	ArtStyle=ARTSTYLE_ASIAN
+	PlayableCiv=1
+	MinorNationStatus=0
+	StartingGold=0
+	StartingX=8, StartingY=4
+	StateReligion=
+	StartingEra=ERA_ANCIENT
+	RandomStartLocation=false
+	CivicOption=CIVICOPTION_GOVERNMENT, Civic=CIVIC_DESPOTISM
+	CivicOption=CIVICOPTION_LEGAL, Civic=CIVIC_BARBARISM
+	CivicOption=CIVICOPTION_LABOR, Civic=CIVIC_TRIBALISM
+	CivicOption=CIVICOPTION_ECONOMY, Civic=CIVIC_DECENTRALIZATION
+	CivicOption=CIVICOPTION_RELIGION, Civic=CIVIC_PAGANISM
+	Handicap=HANDICAP_NOBLE
+EndPlayer
+BeginPlayer
+	Team=1
+	LeaderType=LEADER_BOUDICA
+	LeaderName=Boudica
+	CivDesc=Celtic Empire
+	CivShortDesc=Celtia
+	CivAdjective=Celtic
+	FlagDecal=Art/Interface/TeamColor/FlagDECAL_CelticCross.dds
+	WhiteFlag=0
+	CivType=CIVILIZATION_CELT
+	Color=PLAYERCOLOR_LIGHT_ORANGE
+	ArtStyle=ARTSTYLE_EUROPEAN
+	PlayableCiv=1
+	MinorNationStatus=0
+	StartingGold=0
+	StartingX=7, StartingY=8
+	StateReligion=
+	StartingEra=ERA_ANCIENT
+	RandomStartLocation=false
+	CivicOption=CIVICOPTION_GOVERNMENT, Civic=CIVIC_DESPOTISM
+	CivicOption=CIVICOPTION_LEGAL, Civic=CIVIC_BARBARISM
+	CivicOption=CIVICOPTION_LABOR, Civic=CIVIC_TRIBALISM
+	CivicOption=CIVICOPTION_ECONOMY, Civic=CIVIC_DECENTRALIZATION
+	CivicOption=CIVICOPTION_RELIGION, Civic=CIVIC_PAGANISM
+	Handicap=HANDICAP_NOBLE
+EndPlayer
+BeginPlayer
+	Team=2
+	LeaderType=LEADER_ALEXANDER
+	LeaderName=Alexander
+	CivDesc=Greek Empire
+	CivShortDesc=Greece
+	CivAdjective=Greek
+	FlagDecal=Art/Interface/TeamColor/FlagDECAL_Helmet.dds
+	WhiteFlag=0
+	CivType=CIVILIZATION_GREECE
+	Color=PLAYERCOLOR_LIGHT_BLUE
+	ArtStyle=ARTSTYLE_GRECO_ROMAN
+	PlayableCiv=1
+	MinorNationStatus=0
+	StartingGold=0
+	StartingX=11, StartingY=17
+	StateReligion=
+	StartingEra=ERA_ANCIENT
+	RandomStartLocation=false
+	CivicOption=CIVICOPTION_GOVERNMENT, Civic=CIVIC_DESPOTISM
+	CivicOption=CIVICOPTION_LEGAL, Civic=CIVIC_BARBARISM
+	CivicOption=CIVICOPTION_LABOR, Civic=CIVIC_TRIBALISM
+	CivicOption=CIVICOPTION_ECONOMY, Civic=CIVIC_DECENTRALIZATION
+	CivicOption=CIVICOPTION_RELIGION, Civic=CIVIC_PAGANISM
+	Handicap=HANDICAP_NOBLE
+EndPlayer
+BeginPlayer
+	Team=3
+	LeaderType=LEADER_PACAL
+	LeaderName=Pacal II
+	CivDesc=Maya Empire
+	CivShortDesc=Maya
+	CivAdjective=Maya
+	FlagDecal=Art/Interface/TeamColor/FlagDECAL_Maya.dds
+	WhiteFlag=0
+	CivType=CIVILIZATION_MAYA
+	Color=PLAYERCOLOR_MIDDLE_CYAN
+	ArtStyle=ARTSTYLE_SOUTH_AMERICA
+	PlayableCiv=1
+	MinorNationStatus=0
+	StartingGold=0
+	StartingX=12, StartingY=5
+	StateReligion=
+	StartingEra=ERA_ANCIENT
+	RandomStartLocation=false
+	CivicOption=CIVICOPTION_GOVERNMENT, Civic=CIVIC_DESPOTISM
+	CivicOption=CIVICOPTION_LEGAL, Civic=CIVIC_BARBARISM
+	CivicOption=CIVICOPTION_LABOR, Civic=CIVIC_TRIBALISM
+	CivicOption=CIVICOPTION_ECONOMY, Civic=CIVIC_DECENTRALIZATION
+	CivicOption=CIVICOPTION_RELIGION, Civic=CIVIC_PAGANISM
+	Handicap=HANDICAP_NOBLE
+EndPlayer
+BeginPlayer
+	Team=4
+	LeaderType=LEADER_RAMESSES
+	LeaderName=Ramesses II
+	CivDesc=Egyptian Empire
+	CivShortDesc=Egypt
+	CivAdjective=Egyptian
+	FlagDecal=Art/Interface/TeamColor/FlagDECAL_EyeOfRa.dds
+	WhiteFlag=0
+	CivType=CIVILIZATION_EGYPT
+	Color=PLAYERCOLOR_YELLOW
+	ArtStyle=ARTSTYLE_MIDDLE_EAST
+	PlayableCiv=1
+	MinorNationStatus=0
+	StartingGold=0
+	StartingX=13, StartingY=11
+	StateReligion=
+	StartingEra=ERA_ANCIENT
+	RandomStartLocation=false
+	CivicOption=CIVICOPTION_GOVERNMENT, Civic=CIVIC_DESPOTISM
+	CivicOption=CIVICOPTION_LEGAL, Civic=CIVIC_BARBARISM
+	CivicOption=CIVICOPTION_LABOR, Civic=CIVIC_TRIBALISM
+	CivicOption=CIVICOPTION_ECONOMY, Civic=CIVIC_DECENTRALIZATION
+	CivicOption=CIVICOPTION_RELIGION, Civic=CIVIC_PAGANISM
+	Handicap=HANDICAP_NOBLE
+EndPlayer
+BeginPlayer
+	Team=5
+	LeaderType=NONE
+	CivType=NONE
+	Color=NONE
+	ArtStyle=NONE
+	Handicap=HANDICAP_NOBLE
+EndPlayer
+BeginPlayer
+	Team=6
+	LeaderType=NONE
+	CivType=NONE
+	Color=NONE
+	ArtStyle=NONE
+	Handicap=HANDICAP_NOBLE
+EndPlayer
+BeginPlayer
+	Team=7
+	LeaderType=NONE
+	CivType=NONE
+	Color=NONE
+	ArtStyle=NONE
+	Handicap=HANDICAP_NOBLE
+EndPlayer
+BeginPlayer
+	Team=8
+	LeaderType=NONE
+	CivType=NONE
+	Color=NONE
+	ArtStyle=NONE
+	Handicap=HANDICAP_NOBLE
+EndPlayer
+BeginPlayer
+	Team=9
+	LeaderType=NONE
+	CivType=NONE
+	Color=NONE
+	ArtStyle=NONE
+	Handicap=HANDICAP_NOBLE
+EndPlayer
+BeginPlayer
+	Team=10
+	LeaderType=NONE
+	CivType=NONE
+	Color=NONE
+	ArtStyle=NONE
+	Handicap=HANDICAP_NOBLE
+EndPlayer
+BeginPlayer
+	Team=11
+	LeaderType=NONE
+	CivType=NONE
+	Color=NONE
+	ArtStyle=NONE
+	Handicap=HANDICAP_NOBLE
+EndPlayer
+BeginPlayer
+	Team=12
+	LeaderType=NONE
+	CivType=NONE
+	Color=NONE
+	ArtStyle=NONE
+	Handicap=HANDICAP_NOBLE
+EndPlayer
+BeginPlayer
+	Team=13
+	LeaderType=NONE
+	CivType=NONE
+	Color=NONE
+	ArtStyle=NONE
+	Handicap=HANDICAP_NOBLE
+EndPlayer
+BeginPlayer
+	Team=14
+	LeaderType=NONE
+	CivType=NONE
+	Color=NONE
+	ArtStyle=NONE
+	Handicap=HANDICAP_NOBLE
+EndPlayer
+BeginPlayer
+	Team=15
+	LeaderType=NONE
+	CivType=NONE
+	Color=NONE
+	ArtStyle=NONE
+	Handicap=HANDICAP_NOBLE
+EndPlayer
+BeginPlayer
+	Team=16
+	LeaderType=NONE
+	CivType=NONE
+	Color=NONE
+	ArtStyle=NONE
+	Handicap=HANDICAP_NOBLE
+EndPlayer
+BeginPlayer
+	Team=17
+	LeaderType=NONE
+	CivType=NONE
+	Color=NONE
+	ArtStyle=NONE
+	Handicap=HANDICAP_NOBLE
+EndPlayer
+BeginMap
+	grid width=20
+	grid height=20
+	top latitude=90
+	bottom latitude=-90
+	wrap X=0
+	wrap Y=0
+	world size=WORLDSIZE_SMALL
+	climate=CLIMATE_TEMPERATE
+	sealevel=SEALEVEL_MEDIUM
+	num plots written=400
+	num signs written=0
+	Randomize Resources=false
+EndMap
+
+### Plot Info ###
+BeginPlot
+	x=0,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=1
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=2
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=3
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=4
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=5
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=6
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=7
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=8
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=9
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=10
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=11
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=12
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=13
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=14
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=15
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=16
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=17
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=18
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=0,y=19
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=1,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=1,y=1
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=1,y=2
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=1,y=3
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=1,y=4
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=1,y=5
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=1,y=6
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=1,y=7
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=1,y=8
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=1,y=9
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=1,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=1,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=1,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=1,y=13
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=1,y=14
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=1,y=15
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=1,y=16
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=1,y=17
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=1,y=18
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=1,y=19
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=2,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=2,y=1
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=2,y=2
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=2,y=3
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=2,y=4
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=2,y=5
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=2,y=6
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=2,y=7
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=2,y=8
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=2,y=9
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=2,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=2,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=2,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=2,y=13
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=2,y=14
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=1,2,3,
+EndPlot
+BeginPlot
+	x=2,y=15
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=2,y=16
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=2,y=17
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=2,y=18
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=2,y=19
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=3,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=3,y=1
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=3,y=2
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=3,y=3
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=3,y=4
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=3,y=5
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=3,y=6
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=3,y=7
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=3,y=8
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=3,y=9
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=3,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=3,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=3,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SETTLER, UnitOwner=4
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_SETTLE
+	EndUnit
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=3,y=13
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SETTLER, UnitOwner=3
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_SETTLE
+	EndUnit
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=3,y=14
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SETTLER, UnitOwner=2
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_SETTLE
+	EndUnit
+	TeamReveal=1,2,3,
+EndPlot
+BeginPlot
+	x=3,y=15
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SETTLER, UnitOwner=1
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_SETTLE
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=3,y=16
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SETTLER, UnitOwner=0
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_SETTLE
+	EndUnit
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=3,y=17
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=3,y=18
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=3,y=19
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=4,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=4,y=1
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=4,y=2
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=4,y=3
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=4,y=4
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=4,y=5
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=4,y=6
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=4,y=7
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=4,y=8
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=4,y=9
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=4,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=4,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=4,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_WORKER, UnitOwner=4
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_WORKER
+	EndUnit
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=4,y=13
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_WORKER, UnitOwner=3
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_WORKER
+	EndUnit
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=4,y=14
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_WORKER, UnitOwner=2
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_WORKER
+	EndUnit
+	TeamReveal=1,2,3,
+EndPlot
+BeginPlot
+	x=4,y=15
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_WORKER, UnitOwner=1
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_WORKER
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=4,y=16
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_WORKER, UnitOwner=0
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_WORKER
+	EndUnit
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=4,y=17
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=4,y=18
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=4,y=19
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=5,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=5,y=1
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=5,y=2
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=5,y=3
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=5,y=4
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=5,y=5
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=5,y=6
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=5,y=7
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=5,y=8
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=5,y=9
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=1,
+EndPlot
+BeginPlot
+	x=5,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=1,
+EndPlot
+BeginPlot
+	x=5,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=5,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_HORSE_ARCHER, UnitOwner=4
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=5,y=13
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_HORSE_ARCHER, UnitOwner=3
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=5,y=14
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_HORSE_ARCHER, UnitOwner=2
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=1,2,3,
+EndPlot
+BeginPlot
+	x=5,y=15
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_HORSE_ARCHER, UnitOwner=1
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=5,y=16
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_HORSE_ARCHER, UnitOwner=0
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=5,y=17
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=5,y=18
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=5,y=19
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=6,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=6,y=1
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=6,y=2
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=6,y=3
+	BonusType=BONUS_FISH
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=6,y=4
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=6,y=5
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=6,y=6
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=6,y=7
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=6,y=8
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=6,y=9
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=1,
+EndPlot
+BeginPlot
+	x=6,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=1,
+EndPlot
+BeginPlot
+	x=6,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=6,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_WAR_ELEPHANT, UnitOwner=4
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=6,y=13
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_WAR_ELEPHANT, UnitOwner=3
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=6,y=14
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_WAR_ELEPHANT, UnitOwner=2
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=1,2,3,
+EndPlot
+BeginPlot
+	x=6,y=15
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_WAR_ELEPHANT, UnitOwner=1
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=6,y=16
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_WAR_ELEPHANT, UnitOwner=0
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=6,y=17
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=6,y=18
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=6,y=19
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=7,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=7,y=1
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=7,y=2
+	BonusType=BONUS_WHALE
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=7,y=3
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=7,y=4
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=7,y=5
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=7,y=6
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=7,y=7
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=7,y=8
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=1,
+EndPlot
+BeginPlot
+	x=7,y=9
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=1,
+EndPlot
+BeginPlot
+	x=7,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=1,
+EndPlot
+BeginPlot
+	x=7,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=7,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SCOUT, UnitOwner=4
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_EXPLORE
+	EndUnit
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=7,y=13
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SCOUT, UnitOwner=3
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_EXPLORE
+	EndUnit
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=7,y=14
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SCOUT, UnitOwner=2
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_EXPLORE
+	EndUnit
+	TeamReveal=1,2,3,
+EndPlot
+BeginPlot
+	x=7,y=15
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SCOUT, UnitOwner=1
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_EXPLORE
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=7,y=16
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SCOUT, UnitOwner=0
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_EXPLORE
+	EndUnit
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=7,y=17
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=7,y=18
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=7,y=19
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=8,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=8,y=1
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=8,y=2
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=8,y=3
+	BonusType=BONUS_CRAB
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=8,y=4
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=8,y=5
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=8,y=6
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=8,y=7
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=8,y=8
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=1,
+EndPlot
+BeginPlot
+	x=8,y=9
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=1,
+EndPlot
+BeginPlot
+	x=8,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=1,
+EndPlot
+BeginPlot
+	x=8,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=8,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_KNIGHT, UnitOwner=4
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=8,y=13
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_KNIGHT, UnitOwner=3
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=8,y=14
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_KNIGHT, UnitOwner=2
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=1,2,3,
+EndPlot
+BeginPlot
+	x=8,y=15
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_KNIGHT, UnitOwner=1
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=8,y=16
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_KNIGHT, UnitOwner=0
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=8,y=17
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=8,y=18
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=8,y=19
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=9,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=9,y=1
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=9,y=2
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=9,y=3
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=9,y=4
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=9,y=5
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=9,y=6
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=9,y=7
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=1,
+EndPlot
+BeginPlot
+	x=9,y=8
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=9,y=9
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=1,
+EndPlot
+BeginPlot
+	x=9,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=1,
+EndPlot
+BeginPlot
+	x=9,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=9,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_PIKEMAN, UnitOwner=4
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=9,y=13
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_PIKEMAN, UnitOwner=3
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=9,y=14
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_PIKEMAN, UnitOwner=2
+		Damage=0
+		Level=1, Experience=0
+		PromotionType=PROMOTION_COMBAT1
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=1,2,3,
+EndPlot
+BeginPlot
+	x=9,y=15
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_PIKEMAN, UnitOwner=1
+		Damage=0
+		Level=1, Experience=0
+		PromotionType=PROMOTION_COMBAT1
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=9,y=16
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_PIKEMAN, UnitOwner=0
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=9,y=17
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,2,
+EndPlot
+BeginPlot
+	x=9,y=18
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,2,
+EndPlot
+BeginPlot
+	x=9,y=19
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=2,
+EndPlot
+BeginPlot
+	x=10,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=10,y=1
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=10,y=2
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=10,y=3
+	BonusType=BONUS_CRAB
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=10,y=4
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,3,
+EndPlot
+BeginPlot
+	x=10,y=5
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,3,
+EndPlot
+BeginPlot
+	x=10,y=6
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,3,
+EndPlot
+BeginPlot
+	x=10,y=7
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=10,y=8
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=10,y=9
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=10,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=10,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=10,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_CHARIOT, UnitOwner=4
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=10,y=13
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_CHARIOT, UnitOwner=3
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=10,y=14
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_CHARIOT, UnitOwner=2
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=1,2,3,
+EndPlot
+BeginPlot
+	x=10,y=15
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_CHARIOT, UnitOwner=1
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=10,y=16
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_CHARIOT, UnitOwner=0
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=10,y=17
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,2,
+EndPlot
+BeginPlot
+	x=10,y=18
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,2,
+EndPlot
+BeginPlot
+	x=10,y=19
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=2,
+EndPlot
+BeginPlot
+	x=11,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=11,y=1
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=11,y=2
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=11,y=3
+	BonusType=BONUS_CRAB
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=11,y=4
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=11,y=5
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=11,y=6
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=11,y=7
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=11,y=8
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=11,y=9
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=11,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=11,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=11,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_ARCHER, UnitOwner=4
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_CITY_DEFENSE
+	EndUnit
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=11,y=13
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_ARCHER, UnitOwner=3
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_CITY_DEFENSE
+	EndUnit
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=11,y=14
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_ARCHER, UnitOwner=2
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_CITY_DEFENSE
+	EndUnit
+	TeamReveal=1,2,3,
+EndPlot
+BeginPlot
+	x=11,y=15
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_ARCHER, UnitOwner=1
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_CITY_DEFENSE
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=11,y=16
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_ARCHER, UnitOwner=0
+		Damage=0
+		Level=1, Experience=0
+		PromotionType=PROMOTION_CITY_GARRISON1
+		PromotionType=PROMOTION_DRILL1
+		FacingDirection=4
+		UnitAIType=UNITAI_CITY_DEFENSE
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=11,y=17
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,2,
+EndPlot
+BeginPlot
+	x=11,y=18
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,2,
+EndPlot
+BeginPlot
+	x=11,y=19
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=2,
+EndPlot
+BeginPlot
+	x=12,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=12,y=1
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=12,y=2
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=12,y=3
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=12,y=4
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=12,y=5
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=12,y=6
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=12,y=7
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=12,y=8
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=12,y=9
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=12,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=12,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=12,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_LONGBOWMAN, UnitOwner=4
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_CITY_DEFENSE
+	EndUnit
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=12,y=13
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_LONGBOWMAN, UnitOwner=3
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_CITY_DEFENSE
+	EndUnit
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=12,y=14
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_LONGBOWMAN, UnitOwner=2
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_CITY_DEFENSE
+	EndUnit
+	TeamReveal=1,2,3,
+EndPlot
+BeginPlot
+	x=12,y=15
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_LONGBOWMAN, UnitOwner=1
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_CITY_DEFENSE
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=12,y=16
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_LONGBOWMAN, UnitOwner=0
+		Damage=0
+		Level=1, Experience=0
+		PromotionType=PROMOTION_CITY_GARRISON1
+		PromotionType=PROMOTION_DRILL1
+		FacingDirection=4
+		UnitAIType=UNITAI_CITY_DEFENSE
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=12,y=17
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,2,
+EndPlot
+BeginPlot
+	x=12,y=18
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,2,
+EndPlot
+BeginPlot
+	x=12,y=19
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=2,
+EndPlot
+BeginPlot
+	x=13,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=13,y=1
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=13,y=2
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=13,y=3
+	BonusType=BONUS_FISH
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=13,y=4
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=13,y=5
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=13,y=6
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=13,y=7
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=13,y=8
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=13,y=9
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=13,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=13,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=13,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_CROSSBOWMAN, UnitOwner=4
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=13,y=13
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_CROSSBOWMAN, UnitOwner=3
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=13,y=14
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_CROSSBOWMAN, UnitOwner=2
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=1,2,3,
+EndPlot
+BeginPlot
+	x=13,y=15
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_CROSSBOWMAN, UnitOwner=1
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=13,y=16
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_CROSSBOWMAN, UnitOwner=0
+		Damage=0
+		Level=1, Experience=0
+		PromotionType=PROMOTION_CITY_GARRISON1
+		PromotionType=PROMOTION_DRILL1
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=13,y=17
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,2,
+EndPlot
+BeginPlot
+	x=13,y=18
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,2,
+EndPlot
+BeginPlot
+	x=13,y=19
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=2,
+EndPlot
+BeginPlot
+	x=14,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=14,y=1
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=14,y=2
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=14,y=3
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=14,y=4
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=14,y=5
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=14,y=6
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=14,y=7
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,
+EndPlot
+BeginPlot
+	x=14,y=8
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=14,y=9
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=14,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=14,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=14,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_MACEMAN, UnitOwner=4
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=14,y=13
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_MACEMAN, UnitOwner=3
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=14,y=14
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_MACEMAN, UnitOwner=2
+		Damage=0
+		Level=1, Experience=0
+		PromotionType=PROMOTION_COMBAT1
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=0,1,2,3,
+EndPlot
+BeginPlot
+	x=14,y=15
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_MACEMAN, UnitOwner=1
+		Damage=0
+		Level=1, Experience=0
+		PromotionType=PROMOTION_COMBAT1
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=14,y=16
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_MACEMAN, UnitOwner=0
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=14,y=17
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=14,y=18
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=14,y=19
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=15,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=15,y=1
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=15,y=2
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=15,y=3
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=15,y=4
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=15,y=5
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=15,y=6
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=15,y=7
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=15,y=8
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=15,y=9
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=15,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=15,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=15,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_WARRIOR, UnitOwner=4
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=15,y=13
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_WARRIOR, UnitOwner=3
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=15,y=14
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_WARRIOR, UnitOwner=2
+		Damage=0
+		Level=1, Experience=0
+		PromotionType=PROMOTION_COMBAT1
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=0,1,2,3,
+EndPlot
+BeginPlot
+	x=15,y=15
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_WARRIOR, UnitOwner=1
+		Damage=0
+		Level=1, Experience=0
+		PromotionType=PROMOTION_COMBAT1
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=15,y=16
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_WARRIOR, UnitOwner=0
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=15,y=17
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=15,y=18
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=15,y=19
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=16,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=16,y=1
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=16,y=2
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=16,y=3
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=16,y=4
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=16,y=5
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=16,y=6
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=16,y=7
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=16,y=8
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=16,y=9
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=16,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=16,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=16,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_AXEMAN, UnitOwner=4
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=16,y=13
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_AXEMAN, UnitOwner=3
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=16,y=14
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_AXEMAN, UnitOwner=2
+		Damage=0
+		Level=1, Experience=0
+		PromotionType=PROMOTION_COMBAT1
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=1,2,3,
+EndPlot
+BeginPlot
+	x=16,y=15
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_AXEMAN, UnitOwner=1
+		Damage=0
+		Level=1, Experience=0
+		PromotionType=PROMOTION_COMBAT1
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=16,y=16
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_AXEMAN, UnitOwner=0
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=16,y=17
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=16,y=18
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=16,y=19
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=17,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=17,y=1
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=17,y=2
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=17,y=3
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=17,y=4
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=17,y=5
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=17,y=6
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=17,y=7
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=17,y=8
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=17,y=9
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=17,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=17,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=17,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SWORDSMAN, UnitOwner=4
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=17,y=13
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SWORDSMAN, UnitOwner=3
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=17,y=14
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SWORDSMAN, UnitOwner=2
+		Damage=0
+		Level=1, Experience=0
+		PromotionType=PROMOTION_COMBAT1
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=1,2,3,4,
+EndPlot
+BeginPlot
+	x=17,y=15
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SWORDSMAN, UnitOwner=1
+		Damage=0
+		Level=1, Experience=0
+		PromotionType=PROMOTION_COMBAT1
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=0,1,2,3,
+EndPlot
+BeginPlot
+	x=17,y=16
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SWORDSMAN, UnitOwner=0
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_ATTACK
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=17,y=17
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=17,y=18
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=17,y=19
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=18,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=18,y=1
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=18,y=2
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=18,y=3
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=18,y=4
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=18,y=5
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=18,y=6
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=18,y=7
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=18,y=8
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=18,y=9
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=18,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=4,
+EndPlot
+BeginPlot
+	x=18,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=18,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SPEARMAN, UnitOwner=4
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=18,y=13
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SPEARMAN, UnitOwner=3
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=18,y=14
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SPEARMAN, UnitOwner=2
+		Damage=0
+		Level=1, Experience=0
+		PromotionType=PROMOTION_COMBAT1
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=1,2,3,4,
+EndPlot
+BeginPlot
+	x=18,y=15
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SPEARMAN, UnitOwner=1
+		Damage=0
+		Level=1, Experience=0
+		PromotionType=PROMOTION_COMBAT1
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=0,1,2,3,
+EndPlot
+BeginPlot
+	x=18,y=16
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	BeginUnit
+		UnitType=UNIT_SPEARMAN, UnitOwner=0
+		Damage=0
+		Level=1, Experience=0
+		FacingDirection=4
+		UnitAIType=UNITAI_COUNTER
+	EndUnit
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=18,y=17
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=18,y=18
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=18,y=19
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=19,y=0
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=19,y=1
+	FeatureType=FEATURE_ICE, FeatureVariety=0
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=19,y=2
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=19,y=3
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=19,y=4
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=19,y=5
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=19,y=6
+	TerrainType=TERRAIN_OCEAN
+	PlotType=3
+EndPlot
+BeginPlot
+	x=19,y=7
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=19,y=8
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=19,y=9
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=19,y=10
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+EndPlot
+BeginPlot
+	x=19,y=11
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=19,y=12
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=3,4,
+EndPlot
+BeginPlot
+	x=19,y=13
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=2,3,4,
+EndPlot
+BeginPlot
+	x=19,y=14
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=1,2,3,
+EndPlot
+BeginPlot
+	x=19,y=15
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,1,2,
+EndPlot
+BeginPlot
+	x=19,y=16
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,1,
+EndPlot
+BeginPlot
+	x=19,y=17
+	TerrainType=TERRAIN_DESERT
+	PlotType=2
+	TeamReveal=0,
+EndPlot
+BeginPlot
+	x=19,y=18
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+BeginPlot
+	x=19,y=19
+	TerrainType=TERRAIN_COAST
+	PlotType=3
+EndPlot
+
+### Sign Info ###

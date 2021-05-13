@@ -60,7 +60,6 @@ public:
 	bool isFull();																																											// Exposed to Python
 	bool hasCargo();																																										// Exposed to Python
 	int getCargo() const;
-	bool buildCargoUnitList(CLinkList<IDInfo>& unitList) const;
 	DllExport bool canAllMove();																																				// Exposed to Python
 	bool canAnyMove();																																									// Exposed to Python
 	bool hasMoved();																																										// Exposed to Python
@@ -147,7 +146,7 @@ public:
 	DllExport bool addUnit(CvUnit* pUnit, bool bMinimalChange);
 	void removeUnit(CvUnit* pUnit);
 	void mergeIntoGroup(CvSelectionGroup* pSelectionGroup);
-	CvSelectionGroup* splitGroup(int iSplitSize, CvUnit* pNewHeadUnit = NULL);
+	CvSelectionGroup* splitGroup(int iSplitSize, CvUnit* pNewHeadUnit = NULL, CvSelectionGroup** ppOtherGroup = NULL);
 
 	DllExport CLLNode<IDInfo>* deleteUnitNode(CLLNode<IDInfo>* pNode);
 	DllExport CLLNode<IDInfo>* nextUnitNode(CLLNode<IDInfo>* pNode) const;

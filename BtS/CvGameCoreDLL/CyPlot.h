@@ -171,6 +171,7 @@ public:
 
 	int /*PlayerTypes*/ getOwner();
 	void setOwner(int /*PlayerTypes*/ eNewValue);
+	void setOwnerNoUnitCheck(int /*PlayerTypes*/ eNewValue);
 	PlotTypes getPlotType();
 	bool isWater();
 	bool isFlatlands();

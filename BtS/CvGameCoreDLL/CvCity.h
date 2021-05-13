@@ -147,7 +147,7 @@ public:
 	DllExport HandicapTypes getHandicapType() const;												// Exposed to Python
 	DllExport CivilizationTypes getCivilizationType() const;								// Exposed to Python
 	LeaderHeadTypes getPersonalityType() const;															// Exposed to Python
-	ArtStyleTypes getArtStyleType() const;														// Exposed to Python
+	DllExport ArtStyleTypes getArtStyleType() const;														// Exposed to Python
 	DllExport CitySizeTypes getCitySizeType() const;												// Exposed to Python
 
 	bool hasTrait(TraitTypes eTrait) const;																	// Exposed to Python
@@ -851,6 +851,8 @@ public:
 	int getNoBonusCount(BonusTypes eBonus) const;
 	bool isNoBonus(BonusTypes eBonus) const;   // Exposed to Python
 
+	bool isAutoRaze() const;
+
 	void read(FDataStreamBase* pStream);
 	void write(FDataStreamBase* pStream);
 
@@ -898,8 +900,6 @@ public:
 	virtual int AI_cityThreat(bool bDangerPercent = false) = 0;
 	virtual BuildingTypes AI_bestAdvancedStartBuilding(int iPass) = 0;
 	
-	virtual void AI_tryToWorkPlot(CvPlot* pPlot) = 0;
-
 	virtual int AI_getWorkersHave() = 0;
 	virtual int AI_getWorkersNeeded() = 0;
 	virtual void AI_changeWorkersHave(int iChange) = 0;

@@ -1230,12 +1230,8 @@
 			<MinDifficulty>NONE</MinDifficulty>
 			<iAngry>0</iAngry>
 			<iUnhealthy>0</iUnhealthy>
-			<UnitsRequired>
-				<UnitClass>UNITCLASS_GALLEY</UnitClass>
-				<UnitClass>UNITCLASS_CARAVEL</UnitClass>
-				<UnitClass>UNITCLASS_GALLEON</UnitClass>
-			</UnitsRequired>
-			<iNumUnits>1</iNumUnits>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
 			<iNumUnitsGlobal>0</iNumUnitsGlobal>
 			<iUnitDamagedWeight>0</iUnitDamagedWeight>
 			<iUnitDistanceWeight>0</iUnitDistanceWeight>
@@ -1287,7 +1283,7 @@
 			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
 			<bPickCity>0</bPickCity>
 			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
-			<bShowPlot>1</bShowPlot>
+			<bShowPlot>0</bShowPlot>
 			<iCityFoodWeight>0</iCityFoodWeight>
 			<PythonCanDo>canTriggerBlessedSea</PythonCanDo>
 			<PythonCanDoCity/>
@@ -12445,7 +12441,9 @@
 			<bPrereqEventPlot>0</bPrereqEventPlot>
 			<OrPreReqs/>
 			<AndPreReqs/>
-			<ObsoleteTechs/>
+			<ObsoleteTechs>
+				<ObsoleteTech>TECH_RIFLING</ObsoleteTech>
+			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
 			<bTeam>0</bTeam>
 			<bGlobal>0</bGlobal>
@@ -13429,8 +13427,8 @@
 				</TriggerText>
 			</TriggerTexts>
 			<bSinglePlayer>0</bSinglePlayer>
-			<iPercentGamesActive>35</iPercentGamesActive>
-			<iWeight>0</iWeight>
+			<iPercentGamesActive>100</iPercentGamesActive>
+			<iWeight>-2</iWeight>
 			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
 			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
 			<Civic>CIVIC_EMANCIPATION</Civic>
@@ -13913,7 +13911,9 @@
 			<bPrereqEventPlot>0</bPrereqEventPlot>
 			<OrPreReqs/>
 			<AndPreReqs/>
-			<ObsoleteTechs/>
+			<ObsoleteTechs>
+				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
+			</ObsoleteTechs>
 			<bRecurring>1</bRecurring>
 			<bTeam>0</bTeam>
 			<bGlobal>0</bGlobal>

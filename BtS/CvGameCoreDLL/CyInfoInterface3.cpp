@@ -245,7 +245,6 @@ void CyInfoPythonInterface3()
 		.def("getMovieSound", &CvReligionInfo::getMovieSound, "string ()")
 		.def("getSound", &CvReligionInfo::getSound, "string ()")
 		.def("getButtonDisabled", &CvReligionInfo::getButtonDisabled, "string ()")
-		.def("getAdjective", &CvReligionInfo::pyGetAdjective, "wstring ()")
 		.def("getAdjectiveKey", &CvReligionInfo::pyGetAdjectiveKey, "wstring ()")
 
 		// Arrays
@@ -348,7 +347,6 @@ void CyInfoPythonInterface3()
 		;
 
 	python::class_<CvArtInfoAsset, python::bases<CvAssetInfoBase> >("CvArtInfoAsset")
-		.def("setButton", &CvArtInfoAsset::setButton, "void (string)")
 		.def("getButton", &CvArtInfoAsset::getButton, "string ()")
 		.def("setNIF", &CvArtInfoAsset::setNIF, "void (string)")
 		.def("getNIF", &CvArtInfoAsset::getNIF, "string ()")

@@ -21,6 +21,7 @@
 #include "CySelectionGroup.h"
 #include "CyArgsList.h"
 #include "CvDLLPythonIFaceBase.h"
+#include <set>
 
 // Public Functions...
 
@@ -182,28 +183,14 @@ void CvSelectionGroup::doTurn()
 
 		if (AI_isControlled())
 		{
-			if (getHeadUnitAI() == UNITAI_SPY)
-			{
-				if (GET_PLAYER(getOwnerINLINE()).AI_getSpyDanger(plot(), 2) > 0)
-				{
-					setForceUpdate(true);					
-				}
-			}
-			else if ((getActivityType() != ACTIVITY_MISSION) || (!canFight() && (GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 2) > 0)))
+			if ((getActivityType() != ACTIVITY_MISSION) || (!canFight() && (GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 2) > 0)))
 			{
 				setForceUpdate(true);
 			}
 		}
 		else
 		{
-			if (getHeadUnitAI() == UNITAI_SPY)
-			{
-				if (GET_PLAYER(getOwnerINLINE()).AI_getSpyDanger(plot(), 2) > 0)
-				{
-					clearMissionQueue();
-				}
-			}
-			else if (getActivityType() == ACTIVITY_MISSION)
+			if (getActivityType() == ACTIVITY_MISSION)
 			{
 				if (GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 2) > 0)
 				{
@@ -381,7 +368,7 @@ void CvSelectionGroup::playActionSound()
 	pHeadUnit = getHeadUnit();
 	if ( pHeadUnit )
 	{
-		iScriptId = pHeadUnit->getArtInfo(0, GET_PLAYER(getOwner()).getCurrentEra())->getActionSoundScriptId();
+		iScriptId = pHeadUnit->getArtInfo(0, GET_PLAYER(getOwnerINLINE()).getCurrentEra())->getActionSoundScriptId();
 	}
 
 	if ( (iScriptId == -1) && pHeadUnit )
@@ -484,7 +471,21 @@ void CvSelectionGroup::autoMission()
 		{
 			if (!isBusy())
 			{
-				if (isHuman() && GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 1) > 0 && (getHeadUnitAI() != UNITAI_SPY))
+				bool bVisibleHuman = false;
+				if (isHuman())
+				{
+					for (CLLNode<IDInfo>* pUnitNode = headUnitNode(); pUnitNode != NULL; pUnitNode = nextUnitNode(pUnitNode))
+					{
+						CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
+						if (!pLoopUnit->alwaysInvisible())
+						{
+							bVisibleHuman = true;
+							break;
+						}
+					}
+				}
+
+				if (bVisibleHuman && GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 1) > 0)
 				{
 					clearMissionQueue();
 				}
@@ -2298,42 +2299,6 @@ int CvSelectionGroup::getCargo() const
 	return iCargoCount;
 }
 
-// adds every unit on this plot which is cargo of our group to unitList
-bool CvSelectionGroup::buildCargoUnitList(CLinkList<IDInfo>& unitList) const
-{
-	bool bUnitAdded = false;
-	
-	if (getNumUnits() > 0)
-	{
-		// special case the quick check
-		if (getNumUnits() == 1 && !getHeadUnit()->hasCargo())
-		{
-			return false;
-		}
-
-		CvPlot* pPlot = plot();
-		if (pPlot != NULL)
-		{
-			
-			CLLNode<IDInfo>* pUnitNode = pPlot->headUnitNode();
-			while (pUnitNode != NULL)
-			{
-				CvUnit* pCargoUnit = ::getUnit(pUnitNode->m_data);
-				pUnitNode = pPlot->nextUnitNode(pUnitNode);
-				
-				CvUnit* pTransportUnit = pCargoUnit->getTransportUnit();
-				if (pTransportUnit != NULL && pTransportUnit->getGroup() == this)
-				{
-					unitList.insertAtEnd(pCargoUnit->getIDInfo());
-					bUnitAdded = true;
-				}
-			}
-		}
-	}
-
-	return bUnitAdded;
-}
-
 bool CvSelectionGroup::canAllMove()
 {
 	CLLNode<IDInfo>* pUnitNode;
@@ -2999,7 +2964,7 @@ bool CvSelectionGroup::groupAttack(int iX, int iY, int iFlags, bool& bFailedAlre
 	{
 		if ((getDomainType() == DOMAIN_AIR) || (stepDistance(getX(), getY(), pDestPlot->getX_INLINE(), pDestPlot->getY_INLINE()) == 1))
 		{
-			if ((iFlags & MOVE_DIRECT_ATTACK) || (getDomainType() == DOMAIN_AIR) || (generatePath(plot(), pDestPlot, iFlags) && (getPathFirstPlot() == pDestPlot)))
+			if ((iFlags & MOVE_DIRECT_ATTACK) || (getDomainType() == DOMAIN_AIR) || (iFlags & MOVE_THROUGH_ENEMY) || (generatePath(plot(), pDestPlot, iFlags) && (getPathFirstPlot() == pDestPlot)))
 			{
 				int iAttackOdds;
 				CvUnit* pBestAttackUnit = AI_getBestGroupAttacker(pDestPlot, true, iAttackOdds);
@@ -3313,7 +3278,10 @@ void CvSelectionGroup::setTransportUnit(CvUnit* pTransportUnit)
 		if (iCargoSpaceAvailable < getNumUnits())
 		{
 			CvSelectionGroup* pSplitGroup = splitGroup(iCargoSpaceAvailable);
-			pSplitGroup->setTransportUnit(pTransportUnit);
+			if (pSplitGroup != NULL)
+			{
+				pSplitGroup->setTransportUnit(pTransportUnit);
+			}
 			return;
 		}
 		
@@ -3386,9 +3354,7 @@ bool CvSelectionGroup::isAmphibPlot(const CvPlot* pPlot) const
 bool CvSelectionGroup::groupAmphibMove(CvPlot* pPlot, int iFlags)
 {
 	CLLNode<IDInfo>* pUnitNode1;
-	CLLNode<IDInfo>* pUnitNode2;
 	CvUnit* pLoopUnit1;
-	CvUnit* pLoopUnit2;
 	bool bLanding = false;
 
 	FAssert(getOwnerINLINE() != NO_PLAYER);
@@ -3411,29 +3377,24 @@ bool CvSelectionGroup::groupAmphibMove(CvPlot* pPlot, int iFlags)
 
 				if ((pLoopUnit1->getCargo() > 0) && (pLoopUnit1->domainCargo() == DOMAIN_LAND))
 				{
-					std::vector<CvSelectionGroup*> aCargoGroups;
-
-					pUnitNode2 = plot()->headUnitNode();
-					while (pUnitNode2 != NULL)
+					std::vector<CvUnit*> aCargoUnits;
+					pLoopUnit1->getCargoUnits(aCargoUnits);
+					std::set<CvSelectionGroup*> aCargoGroups;
+					for (uint i = 0; i < aCargoUnits.size(); ++i)
 					{
-						pLoopUnit2 = ::getUnit(pUnitNode2->m_data);
-						pUnitNode2 = plot()->nextUnitNode(pUnitNode2);
-
-						if (pLoopUnit2->getTransportUnit() == pLoopUnit1)
-						{
-							if (pLoopUnit2->isGroupHead())
-							{
-								aCargoGroups.push_back(pLoopUnit2->getGroup());
-							}
-						}
+						aCargoGroups.insert(aCargoUnits[i]->getGroup());
 					}
 
-					std::vector<CvSelectionGroup*>::iterator it;
+					std::set<CvSelectionGroup*>::iterator it;
 					for (it = aCargoGroups.begin(); it != aCargoGroups.end(); ++it)
 					{
-						FAssert(!(*it)->at(pPlot->getX_INLINE(), pPlot->getY_INLINE()));
-						(*it)->pushMission(MISSION_MOVE_TO, pPlot->getX_INLINE(), pPlot->getY_INLINE(), (MOVE_IGNORE_DANGER | iFlags));
-						bLanding = true;
+						CvSelectionGroup* pGroup = *it;
+						if (pGroup->canAllMove())
+						{
+							FAssert(!pGroup->at(pPlot->getX_INLINE(), pPlot->getY_INLINE()));
+							pGroup->pushMission(MISSION_MOVE_TO, pPlot->getX_INLINE(), pPlot->getY_INLINE(), (MOVE_IGNORE_DANGER | iFlags));
+							bLanding = true;
+						}
 					}
 				}
 			}
@@ -3981,7 +3942,7 @@ void CvSelectionGroup::mergeIntoGroup(CvSelectionGroup* pSelectionGroup)
 
 // split this group into two new groups, one of iSplitSize, the other the remaining units
 // split up each unit AI type as evenly as possible
-CvSelectionGroup* CvSelectionGroup::splitGroup(int iSplitSize, CvUnit* pNewHeadUnit)
+CvSelectionGroup* CvSelectionGroup::splitGroup(int iSplitSize, CvUnit* pNewHeadUnit, CvSelectionGroup** ppOtherGroup)
 {
 	FAssertMsg(iSplitSize > 0, "non-positive splitGroup size");
 	if (!(iSplitSize > 0))
@@ -4101,8 +4062,17 @@ CvSelectionGroup* CvSelectionGroup::splitGroup(int iSplitSize, CvUnit* pNewHeadU
 				// is this the right UnitAI?
 				if (eLoopUnitAI == eTargetUnitAI)
 				{
-					// move this unit to the appropriate group (if pRemainderGroup NULL, it gets its own group)
-					pLoopUnit->joinGroup(bDestinationSplit ? pSplitGroup : pRemainderGroup);
+					// move this unit to the appropriate group 
+					if (bDestinationSplit)
+					{
+						pLoopUnit->joinGroup(pSplitGroup);
+					}
+					else
+					{
+						pLoopUnit->joinGroup(pRemainderGroup);
+						// (if pRemainderGroup NULL, it gets its own group)
+						pRemainderGroup = pLoopUnit->getGroup();
+					}
 					
 					// if we moved to remainder, try for next unit AI
 					if (!bDestinationSplit)
@@ -4130,6 +4100,11 @@ CvSelectionGroup* CvSelectionGroup::splitGroup(int iSplitSize, CvUnit* pNewHeadU
 
 	FAssertMsg(pSplitGroup->getNumUnits() <= iSplitSize, "somehow our split group is too large");
 	
+	if (ppOtherGroup != NULL)
+	{
+		*ppOtherGroup = pRemainderGroup;
+	}
+
 	return pSplitGroup;
 }
 

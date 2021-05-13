@@ -16,7 +16,6 @@ void CyInfoPythonInterface1()
 
 		.def("getType", &CvInfoBase::getType, "string ()")
 		.def("getButton", &CvInfoBase::getButton, "string ()")
-		.def("getXmlVal", &CvInfoBase::getXmlVal, "string ()")
 
 		.def("getTextKey", &CvInfoBase::pyGetTextKey, "wstring ()")
 		.def("getText", &CvInfoBase::pyGetText, "wstring ()")
@@ -88,7 +87,7 @@ void CyInfoPythonInterface1()
 		.def("isWaterWork", &CvTechInfo::isWaterWork, "bool ()")
 		.def("isRiverTrade", &CvTechInfo::isRiverTrade, "bool ()")
 
-		.def("getQuote", &CvTechInfo::pyGetQuote, "wstring ()")
+		.def("getQuote", &CvTechInfo::getQuote, "wstring ()")
 		.def("getSound", &CvTechInfo::getSound, "string ()")
 		.def("getSoundMP", &CvTechInfo::getSoundMP, "string ()")
 

@@ -727,6 +727,7 @@ enum DllExport GameOptionTypes				// Exposed to Python
 	GAMEOPTION_NO_VASSAL_STATES,
 	GAMEOPTION_NO_GOODY_HUTS,
 	GAMEOPTION_NO_EVENTS,
+	GAMEOPTION_NO_ESPIONAGE,
 
 #ifdef _USRDLL
 	NUM_GAMEOPTION_TYPES
@@ -1127,6 +1128,7 @@ enum DllExport VoteTypes					// Exposed to Python
 
 enum DllExport PlayerVoteTypes			// Exposed to Python
 {
+	NO_PLAYER_VOTE_CHECKED = -6,
 	PLAYER_VOTE_NEVER = -5,
 	PLAYER_VOTE_ABSTAIN = -4,
 	PLAYER_VOTE_NO = -3,

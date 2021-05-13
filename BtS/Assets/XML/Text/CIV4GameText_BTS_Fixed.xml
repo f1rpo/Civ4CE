@@ -30,7 +30,7 @@
 		<English>[COLOR_BUILDING_TEXT]Public Transportation[COLOR_REVERT] provides a bonus to health in your city and an added bonus for access to [COLOR_HIGHLIGHT_TEXT]Oil[COLOR_REVERT] or when under [COLOR_HIGHLIGHT_TEXT]Environmentalism[COLOR_REVERT].</English>
 		<French>Les [COLOR_BUILDING_TEXT]Transports publics[COLOR_REVERT] conf&#232;rent un bonus de sant&#233; &#224; votre ville et un bonus suppl&#233;mentaire d&#251; &#224; l'acc&#232;s au [COLOR_HIGHLIGHT_TEXT]p&#233;trole[COLOR_REVERT] ou sous la doctrine [COLOR_HIGHLIGHT_TEXT]Ecologie[COLOR_REVERT].</French>
 		<German>[COLOR_BUILDING_TEXT]&#214;ffentliche Verkehrsmittel[COLOR_REVERT] erh&#246;hen die Gesundheit in einer Stadt und gew&#228;hren einen zus&#228;tzlichen Bonus f&#252;r den Zugang zu [COLOR_HIGHLIGHT_TEXT]&#214;l[COLOR_REVERT] oder f&#252;r die Staatsform [COLOR_HIGHLIGHT_TEXT]Umweltschutz[COLOR_REVERT].</German>
-		<Italian>I [COLOR_BUILDING_TEXT]Trasporti pubblici[COLOR_REVERT] danno un bonus alla salute della tua citt&#224; e un bonus aggiuntivo sei hai accesso a [COLOR_HIGHLIGHT_TEXT]Petrolio[COLOR_REVERT] oppure se hai adottato la forma di governo [COLOR_HIGHLIGHT_TEXT]Ambientalismo[COLOR_REVERT].</Italian>
+		<Italian>I [COLOR_BUILDING_TEXT]Trasporti pubblici[COLOR_REVERT] danno un bonus alla salute della tua citt&#224; e un bonus aggiuntivo sei hai accesso al [COLOR_HIGHLIGHT_TEXT]Petrolio[COLOR_REVERT] oppure se hai adottato la forma di governo [COLOR_HIGHLIGHT_TEXT]Ambientalismo[COLOR_REVERT].</Italian>
 		<Spanish>El [COLOR_BUILDING_TEXT]Transporte p&#250;blico[COLOR_REVERT] da una bonificaci&#243;n a la salud de la ciudad y una bonificaci&#243;n a&#241;adida por acceder al [COLOR_HIGHLIGHT_TEXT]Petr&#243;leo[COLOR_REVERT] o cuando se funciona bajo el [COLOR_HIGHLIGHT_TEXT]Ecologismo[COLOR_REVERT].</Spanish>
 	</TEXT>
 	<TEXT>
@@ -38,7 +38,7 @@
 		<English>About Beyond the Sword</English>
 		<French>A propos de Beyond the Sword</French>
 		<German>&#220;ber Beyond the Sword</German>
-		<Italian>Informazioni su Beyond the Sword</Italian>
+		<Italian>A proposito di Beyond the Sword</Italian>
 		<Spanish>Acerca de Beyond the Sword</Spanish>
 	</TEXT>
 	<TEXT>
@@ -62,7 +62,7 @@
 		<English>The first civilization to discover [COLOR_TECH_TEXT]Physics[COLOR_REVERT] receives a [COLOR_UNIT_TEXT]Great Scientist[COLOR_REVERT]. It also enables the [COLOR_UNIT_TEXT]Airship[COLOR_REVERT] unit and reveals the [COLOR_HIGHLIGHT_TEXT]Uranium[COLOR_REVERT] resource.</English>
 		<French>La premi&#232;re civilisation qui d&#233;couvre la [COLOR_TECH_TEXT]Physique[COLOR_REVERT] obtient un [COLOR_UNIT_TEXT]Savant illustre[COLOR_REVERT]. Elle permet la construction d'[COLOR_UNIT_TEXT]Avions[COLOR_REVERT]. Elle fait &#233;galement appara&#238;tre l'[COLOR_HIGHLIGHT_TEXT]uranium[COLOR_REVERT] sur la carte.</French>
 		<German>Die erste Zivilisation, die die [COLOR_TECH_TEXT]Physik[COLOR_REVERT] entdeckt, erh&#228;lt einen [COLOR_UNIT_TEXT]Gro&#223;en Wissenschaftler[COLOR_REVERT] und kann das [COLOR_UNIT_TEXT]Luftschiff[COLOR_REVERT] bauen. Diese Technologie deckt auch die Ressource [COLOR_HIGHLIGHT_TEXT]Uran[COLOR_REVERT] auf.</German>
-		<Italian>Chi ricerca per primo la [COLOR_TECH_TEXT]Fisica[COLOR_REVERT] riceve un [COLOR_UNIT_TEXT]Grande Scienziato[COLOR_REVERT] e sblocca il [COLOR_UNIT_TEXT]dirigibile[COLOR_REVERT] e rivela la risorsa [COLOR_HIGHLIGHT_TEXT]Uranio[COLOR_REVERT].</Italian>
+		<Italian>Chi ricerca per primo la [COLOR_TECH_TEXT]Fisica[COLOR_REVERT] riceve un [COLOR_UNIT_TEXT]Grande Scienziato[COLOR_REVERT], sblocca il [COLOR_UNIT_TEXT]Dirigibile[COLOR_REVERT] e rivela la risorsa [COLOR_HIGHLIGHT_TEXT]Uranio[COLOR_REVERT].</Italian>
 		<Spanish>La primera civilizaci&#243;n en descubrir la [COLOR_TECH_TEXT]F&#237;sica[COLOR_REVERT] recibe un [COLOR_UNIT_TEXT]Gran cient&#237;fico[COLOR_REVERT]. Tambi&#233;n activa la unidad del [COLOR_UNIT_TEXT]Dirigible[COLOR_REVERT] y revela el recurso del [COLOR_HIGHLIGHT_TEXT]Uranio[COLOR_REVERT].</Spanish>
 	</TEXT>
 	<TEXT>
@@ -70,7 +70,7 @@
 		<English>[COLOR_TECH_TEXT]Medicine[COLOR_REVERT] allows you to construct the [COLOR_BUILDING_TEXT]Hospital[COLOR_REVERT] city improvement, the [COLOR_BUILDING_TEXT]Sid's Sushi Co.[COLOR_REVERT] wonder and the [COLOR_BUILDING_TEXT]Red Cross[COLOR_REVERT] national wonder. It enables the [COLOR_HIGHLIGHT_TEXT]Environmentalism[COLOR_REVERT] civic.</English>
 		<French>La [COLOR_TECH_TEXT]M&#233;decine[COLOR_REVERT] permet de construire des [COLOR_BUILDING_TEXT]H&#244;pitaux[COLOR_REVERT], la soci&#233;t&#233; commerciale [COLOR_BUILDING_TEXT]Sid's sushis Co.[COLOR_REVERT] et la [COLOR_BUILDING_TEXT]Croix-Rouge[COLOR_REVERT]. Elle permet d'acc&#233;der &#224; la doctrine [COLOR_HIGHLIGHT_TEXT]Ecologie[COLOR_REVERT].</French>
 		<German>Die [COLOR_TECH_TEXT]Medizin[COLOR_REVERT] erm&#246;glicht den Bau des [COLOR_BUILDING_TEXT]Krankenhauses[COLOR_REVERT] als Stadt-Modernisierung, des Wunders [COLOR_BUILDING_TEXT]Sid's Sushi Company[COLOR_REVERT] und des Nationalen Wunders [COLOR_BUILDING_TEXT]Rotes Kreuz[COLOR_REVERT]. Au&#223;erdem wird die Staatsform [COLOR_HIGHLIGHT_TEXT]Umweltschutz[COLOR_REVERT] verf&#252;gbar.</German>
-		<Italian>La [COLOR_TECH_TEXT]Medicina[COLOR_REVERT] permette la realizzazione del miglioramento cittadino [COLOR_BUILDING_TEXT]ospedale[COLOR_REVERT], della Meraviglia [COLOR_BUILDING_TEXT]Sid Sushi[COLOR_REVERT] e della Meraviglia Nazionale [COLOR_BUILDING_TEXT]Croce Rossa[COLOR_REVERT]. Inoltre, permette la realizzazione della forma di governo [COLOR_HIGHLIGHT_TEXT]Ambientalismo[COLOR_REVERT].</Italian>
+		<Italian>La [COLOR_TECH_TEXT]Medicina[COLOR_REVERT] permette la realizzazione del miglioramento cittadino [COLOR_BUILDING_TEXT]Ospedale[COLOR_REVERT], della meraviglia [COLOR_BUILDING_TEXT]Sid Sushi[COLOR_REVERT] e della Meraviglia Nazionale [COLOR_BUILDING_TEXT]Croce Rossa[COLOR_REVERT]. Inoltre, permette la realizzazione della forma di governo [COLOR_HIGHLIGHT_TEXT]Ambientalismo[COLOR_REVERT].</Italian>
 		<Spanish>La [COLOR_TECH_TEXT]Medicina[COLOR_REVERT] permite construir la mejora urbana del [COLOR_BUILDING_TEXT]Hospital[COLOR_REVERT], la maravilla de [COLOR_BUILDING_TEXT]Sid's Sushi[COLOR_REVERT] y la maravilla nacional de la [COLOR_BUILDING_TEXT]Cruz Roja[COLOR_REVERT]. Activa el principio del [COLOR_HIGHLIGHT_TEXT]Ecologismo[COLOR_REVERT].</Spanish>
 	</TEXT>
 	<TEXT>
@@ -78,7 +78,7 @@
 		<English>[COLOR_TECH_TEXT]Railroad[COLOR_REVERT] allows construction of [COLOR_UNIT_TEXT]Machine Gun[COLOR_REVERT] units and the [COLOR_BUILDING_TEXT]Mining Inc[COLOR_REVERT] wonder. Most importantly, with [COLOR_HIGHLIGHT_TEXT]Coal[COLOR_REVERT] or [COLOR_HIGHLIGHT_TEXT]Oil[COLOR_REVERT] it allows your workers to upgrade your [COLOR_HIGHLIGHT_TEXT]Roads[COLOR_REVERT] to [COLOR_HIGHLIGHT_TEXT]Railroads[COLOR_REVERT], vastly increasing your units' movement.</English>
 		<French>La [COLOR_TECH_TEXT]Voie ferr&#233;e[COLOR_REVERT] permet la construction de [COLOR_UNIT_TEXT]Mitrailleuses[COLOR_REVERT] et de la soci&#233;t&#233; commerciale [COLOR_BUILDING_TEXT]Compagnie d'exploitation mini&#232;re[COLOR_REVERT]. Mais surtout, avec du [COLOR_HIGHLIGHT_TEXT]charbon[COLOR_REVERT] ou du [COLOR_HIGHLIGHT_TEXT]p&#233;trole[COLOR_REVERT], elle permet &#224; vos ouvriers d'am&#233;liorer vos [COLOR_HIGHLIGHT_TEXT]routes[COLOR_REVERT] en [COLOR_HIGHLIGHT_TEXT]voies ferr&#233;es[COLOR_REVERT], acc&#233;l&#233;rant tr&#232;s nettement le d&#233;placement de vos unit&#233;s.</French>
 		<German>Die [COLOR_TECH_TEXT]Eisenbahn[COLOR_REVERT] erm&#246;glicht den Bau von [COLOR_UNIT_TEXT]Maschinengewehren[COLOR_REVERT] und das Wunder [COLOR_BUILDING_TEXT]Mining Inc.[COLOR_REVERT]. Besonders wichtig: Mit [COLOR_HIGHLIGHT_TEXT]Kohle[COLOR_REVERT] oder [COLOR_HIGHLIGHT_TEXT]&#214;l[COLOR_REVERT] erlaubt sie Ihnen, Ihre [COLOR_HIGHLIGHT_TEXT]Stra&#223;en[COLOR_REVERT] zu [COLOR_HIGHLIGHT_TEXT]Eisenbahn[COLOR_REVERT] zu verbessern, so dass sich Ihre Einheiten bedeutend schneller fortbewegen.</German>
-		<Italian>La [COLOR_TECH_TEXT]Ferrovia[COLOR_REVERT] permette la realizzazione dei [COLOR_UNIT_TEXT]mitragliatori[COLOR_REVERT] e della Meraviglia [COLOR_BUILDING_TEXT]Estrazioni minerarie Inc.[COLOR_REVERT]. Inoltre, insieme al [COLOR_HIGHLIGHT_TEXT]Carbone[COLOR_REVERT] o al [COLOR_HIGHLIGHT_TEXT]Petrolio[COLOR_REVERT], permette ai lavoratori di aggiornare le [COLOR_HIGHLIGHT_TEXT]strade[COLOR_REVERT] in [COLOR_HIGHLIGHT_TEXT]ferrovie[COLOR_REVERT], migliorando notevolmente il movimento delle unit&#224;.</Italian>
+		<Italian>La [COLOR_TECH_TEXT]Ferrovia[COLOR_REVERT] permette la realizzazione dei [COLOR_UNIT_TEXT]Mitragliatori[COLOR_REVERT] e della meraviglia [COLOR_BUILDING_TEXT]Estrazioni Minerarie Inc.[COLOR_REVERT]. Inoltre, insieme al [COLOR_HIGHLIGHT_TEXT]Carbone[COLOR_REVERT] o al [COLOR_HIGHLIGHT_TEXT]Petrolio[COLOR_REVERT], permette ai lavoratori di aggiornare le [COLOR_HIGHLIGHT_TEXT]strade[COLOR_REVERT] in [COLOR_HIGHLIGHT_TEXT]ferrovie[COLOR_REVERT], migliorando notevolmente il movimento delle unit&#224;.</Italian>
 		<Spanish>El [COLOR_TECH_TEXT]Ferrocarril[COLOR_REVERT] permite la construcci&#243;n de las unidades de [COLOR_UNIT_TEXT]Ametralladoras[COLOR_REVERT] y la maravilla de [COLOR_BUILDING_TEXT]Mining Inc.[COLOR_REVERT]. Y, lo que es m&#225;s importante, junto con el [COLOR_HIGHLIGHT_TEXT]Carb&#243;n[COLOR_REVERT] o el [COLOR_HIGHLIGHT_TEXT]Petr&#243;leo[COLOR_REVERT] permite a los trabajadores modernizar las [COLOR_HIGHLIGHT_TEXT]Carreteras[COLOR_REVERT] y convertirlas en [COLOR_HIGHLIGHT_TEXT]Ferrocarriles[COLOR_REVERT], lo que aumenta enormemente el movimiento de las unidades.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -86,7 +86,7 @@
 		<English>[COLOR_TECH_TEXT]Sailing[COLOR_REVERT] allows you to build the [COLOR_UNIT_TEXT]Galley[COLOR_REVERT] unit. It also enables trading along coasts and rivers, as well as the construction of the [COLOR_BUILDING_TEXT]Lighthouse[COLOR_REVERT] city improvement and the [COLOR_BUILDING_TEXT]Moai Statues[COLOR_REVERT].</English>
 		<French>La [COLOR_TECH_TEXT]Navigation &#224; voile[COLOR_REVERT] vous permet de construire l'unit&#233; [COLOR_UNIT_TEXT]Gal&#232;re[COLOR_REVERT] et de faire du commerce le long des c&#244;tes et des cours d'eau. Elle permet aussi la construction du [COLOR_BUILDING_TEXT]Phare[COLOR_REVERT] et des [COLOR_BUILDING_TEXT]Statues Moa&#239;[COLOR_REVERT].</French>
 		<German>Das [COLOR_TECH_TEXT]Segeln[COLOR_REVERT] erm&#246;glicht Ihnen den Bau einer [COLOR_UNIT_TEXT]Galeere[COLOR_REVERT], den Handel an K&#252;sten und Fl&#252;ssen, sowie die Errichtung eines [COLOR_BUILDING_TEXT]Leuchtturms[COLOR_REVERT].</German>
-		<Italian>La [COLOR_TECH_TEXT]Navigazione[COLOR_REVERT] permette la realizzazione di [COLOR_UNIT_TEXT]galee[COLOR_REVERT]. Inoltre, premette gli scambi marittimi e fluviali e la costruzione del miglioramento cittadino [COLOR_BUILDING_TEXT]faro[COLOR_REVERT] e delle [COLOR_BUILDING_TEXT]statue Moai[COLOR_REVERT].</Italian>
+		<Italian>La [COLOR_TECH_TEXT]Navigazione[COLOR_REVERT] permette la realizzazione di [COLOR_UNIT_TEXT]galee[COLOR_REVERT]. Inoltre, premette gli scambi marittimi e fluviali e la costruzione del miglioramento cittadino [COLOR_BUILDING_TEXT]Faro[COLOR_REVERT] e delle [COLOR_BUILDING_TEXT]Statue Moai[COLOR_REVERT].</Italian>
 		<Spanish>La [COLOR_TECH_TEXT]Navegaci&#243;n a vela[COLOR_REVERT] permite construir la unidad de la [COLOR_UNIT_TEXT]Galera[COLOR_REVERT]. Tambi&#233;n activa el comercio a lo largo de costas y r&#237;os, as&#237; como la construcci&#243;n de la mejora urbana del [COLOR_BUILDING_TEXT]Faro[COLOR_REVERT] y la maravilla de [COLOR_BUILDING_TEXT]Los Moai[COLOR_REVERT].</Spanish>
 	</TEXT>
 	<TEXT>
@@ -94,7 +94,7 @@
 		<English>Build the [COLOR_BUILDING_TEXT]Cereal Mills[COLOR_REVERT] Headquarters to create the [COLOR_HIGHLIGHT_TEXT]Cereal Mills Corporation[COLOR_REVERT], which consumes [COLOR_HIGHLIGHT_TEXT]Wheat[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Corn[COLOR_REVERT] or [COLOR_HIGHLIGHT_TEXT]Rice[COLOR_REVERT] and adds a food bonus to cities where the [COLOR_HIGHLIGHT_TEXT]Cereal Mills Corporation[COLOR_REVERT] is present.  The Headquarters provide gold for each city in the world with a Cereal Mills franchise.</English>
 		<French>Construisez le si&#232;ge des [COLOR_BUILDING_TEXT]Grands Moulins c&#233;r&#233;aliers[COLOR_REVERT] pour cr&#233;er la soci&#233;t&#233; commerciale [COLOR_HIGHLIGHT_TEXT]Grands Moulins c&#233;r&#233;aliers[COLOR_REVERT], qui consomme du [COLOR_HIGHLIGHT_TEXT]bl&#233;[COLOR_REVERT], du [COLOR_HIGHLIGHT_TEXT]ma&#239;s[COLOR_REVERT] ou du [COLOR_HIGHLIGHT_TEXT]riz[COLOR_REVERT] et conf&#232;re un bonus de nourriture aux villes o&#249; les [COLOR_HIGHLIGHT_TEXT]Grands Moulins c&#233;r&#233;aliers[COLOR_REVERT] sont pr&#233;sents. Il conf&#232;re &#233;galement un bonus culturel et un bonus d'or.</French>
 		<German>Der Bau des Unternehmenssitzes der [COLOR_BUILDING_TEXT]Cereal Mills[COLOR_REVERT] bildet die Grundlage f&#252;r die Errichtung der Kapitalgesellschaft [COLOR_HIGHLIGHT_TEXT]Cereal Mills Inc.[COLOR_REVERT], welche [COLOR_HIGHLIGHT_TEXT]Weizen[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Mais[COLOR_REVERT] oder [COLOR_HIGHLIGHT_TEXT]Reis[COLOR_REVERT] verarbeitet. Die [COLOR_HIGHLIGHT_TEXT]Cereal Mills Inc.[COLOR_REVERT] gew&#228;hrt jeder Stadt, in der sie vertreten ist, einen Nahrungsmittelbonus. Der Unternehmenssitz bringt allen St&#228;dten der Welt mit einem Cereal Mills-Franchise Gold ein.</German>
-		<Italian>Costruisci il Quartier generale della [COLOR_BUILDING_TEXT]Mulini Cereali[COLOR_REVERT] per creare la [COLOR_HIGHLIGHT_TEXT]Corporazione Mulini Cereali[COLOR_REVERT], che consuma [COLOR_HIGHLIGHT_TEXT]Frumento[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Granoturco[COLOR_REVERT] o [COLOR_HIGHLIGHT_TEXT]Riso[COLOR_REVERT] e d&#224; un bonus di cibo alle citt&#224; in cui si trova. Il Quartier generale fornisce oro in ciascuna citt&#224; dove &#232; presente Mulini Cereali.</Italian>
+		<Italian>Costruisci il Quartier generale della [COLOR_BUILDING_TEXT]Mulini Cereali[COLOR_REVERT] per creare la [COLOR_HIGHLIGHT_TEXT]Corporazione Mulini Cereali[COLOR_REVERT], che consuma [COLOR_HIGHLIGHT_TEXT]Frumento[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Granoturco[COLOR_REVERT] o [COLOR_HIGHLIGHT_TEXT]Riso[COLOR_REVERT] e d&#224; un bonus di cibo alle citt&#224; in cui si trova. Il Quartier generale fornisce oro in ciascuna citt&#224; dove &#232; presente la Mulini Cereali.</Italian>
 		<Spanish>Construye la sede de [COLOR_BUILDING_TEXT]Cereal Mills[COLOR_REVERT] para crear la [COLOR_HIGHLIGHT_TEXT]Corporaci&#243;n Cereal Mills[COLOR_REVERT], que consume [COLOR_HIGHLIGHT_TEXT]Trigo[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Ma&#237;z[COLOR_REVERT] o [COLOR_HIGHLIGHT_TEXT]Arroz[COLOR_REVERT] y suma una bonificaci&#243;n a los alimentos en las ciudades donde la corporaci&#243;n est&#233; presente.  La sede proporcionar&#225; oro para todas las ciudades del mundo en las que est&#233; presente la franquicia Cereal Mills.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -102,7 +102,7 @@
 		<English>Build the [COLOR_BUILDING_TEXT]Sid's Sushi Company[COLOR_REVERT] Headquarters to create the [COLOR_HIGHLIGHT_TEXT]Sid's Sushi Corporation[COLOR_REVERT], which consumes [COLOR_HIGHLIGHT_TEXT]Clams[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Fish[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Crabs[COLOR_REVERT] and [COLOR_HIGHLIGHT_TEXT]Rice[COLOR_REVERT] and adds bonus food and culture to cities where the [COLOR_HIGHLIGHT_TEXT]Sid's Sushi Corporation[COLOR_REVERT] is present. The Headquarters provide gold for each city in the world with a Sid's Sushi franchise.</English>
 		<French>Construisez le si&#232;ge de l'entreprise [COLOR_BUILDING_TEXT]Sid's Sushi[COLOR_REVERT] pour cr&#233;er la [COLOR_HIGHLIGHT_TEXT]soci&#233;t&#233; commerciale Sid's Sushi[COLOR_REVERT], qui consomme des [COLOR_HIGHLIGHT_TEXT]coquillages[COLOR_REVERT], du [COLOR_HIGHLIGHT_TEXT]poisson[COLOR_REVERT], des [COLOR_HIGHLIGHT_TEXT]crabes[COLOR_REVERT] et du [COLOR_HIGHLIGHT_TEXT]riz[COLOR_REVERT], et procure un bonus de nourriture aux villes o&#249; la [COLOR_HIGHLIGHT_TEXT]soci&#233;t&#233; commerciale Sid's Sushi[COLOR_REVERT] est implant&#233;e. Il conf&#232;re &#233;galement un bonus culturel et un bonus d'or.</French>
 		<German>Der Bau des Unternehmenssitzes von [COLOR_BUILDING_TEXT]Sid's Sushi[COLOR_REVERT] bildet die Grundlage f&#252;r die Errichtung der Kapitalgesellschaft [COLOR_HIGHLIGHT_TEXT]Sid's Sushi Company[COLOR_REVERT], welche [COLOR_HIGHLIGHT_TEXT]Muscheln[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Fisch[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Krabben[COLOR_REVERT] und [COLOR_HIGHLIGHT_TEXT]Reis[COLOR_REVERT] verarbeitet. Die [COLOR_HIGHLIGHT_TEXT]Sid's Sushi Company[COLOR_REVERT] gew&#228;hrt jeder Stadt, in der sie vertreten ist, einen Nahrungs- und Kulturbonus. Der Unternehmenssitz bringt allen St&#228;dten der Welt mit einem Sid's Sushi-Franchise Gold ein.</German>
-		<Italian>Costruisci il Quartier generale della [COLOR_BUILDING_TEXT]Sid Sushi[COLOR_REVERT] per creare la [COLOR_HIGHLIGHT_TEXT]Corporazione Sid Sushi[COLOR_REVERT], che consuma [COLOR_HIGHLIGHT_TEXT]Molluschi[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Pesci[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Crostacei[COLOR_REVERT] e [COLOR_HIGHLIGHT_TEXT]Riso[COLOR_REVERT] e d&#224; un bonus di cibo alle citt&#224; in cui si trova. Il Quartier generale fornisce oro in ciascuna citt&#224; dove &#232; presente Sid Sushi.</Italian>
+		<Italian>Costruisci il Quartier generale della [COLOR_BUILDING_TEXT]Sid Sushi[COLOR_REVERT] per creare la [COLOR_HIGHLIGHT_TEXT]Corporazione Sid Sushi[COLOR_REVERT], che consuma [COLOR_HIGHLIGHT_TEXT]Molluschi[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Pesci[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Crostacei[COLOR_REVERT] e [COLOR_HIGHLIGHT_TEXT]Riso[COLOR_REVERT] e d&#224; un bonus di cibo alle citt&#224; in cui si trova. Il Quartier generale fornisce oro in ciascuna citt&#224; dove &#232; presente la Sid Sushi.</Italian>
 		<Spanish>Construye la sede de la [COLOR_BUILDING_TEXT]Sid's Sushi Company[COLOR_REVERT] para crear la [COLOR_HIGHLIGHT_TEXT]Corporaci&#243;n Sid's Sushi[COLOR_REVERT], que consume [COLOR_HIGHLIGHT_TEXT]Almejas[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Pescado[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Cangrejos[COLOR_REVERT] y [COLOR_HIGHLIGHT_TEXT]Arroz[COLOR_REVERT], y suma una bonificaci&#243;n de alimentos y de cultura a las ciudades donde la corporaci&#243;n est&#233; presente. La sede proporcionar&#225; oro para todas las ciudades del mundo en las que est&#233; presente la franquicia Sid's Sushi.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -110,7 +110,7 @@
 		<English>Build the [COLOR_BUILDING_TEXT]Standard Ethanol[COLOR_REVERT] Headquarters to create the [COLOR_HIGHLIGHT_TEXT]Standard Ethanol Corporation[COLOR_REVERT], which consumes [COLOR_HIGHLIGHT_TEXT]Corn[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Sugar[COLOR_REVERT] and [COLOR_HIGHLIGHT_TEXT]Rice[COLOR_REVERT] and adds [COLOR_HIGHLIGHT_TEXT]Oil[COLOR_REVERT] and a research bonus to every city where the [COLOR_HIGHLIGHT_TEXT]Standard Ethanol Corporation[COLOR_REVERT] is present.  The Headquarters provide gold for each city in the world with a Standard Ethanol franchise.</English>
 		<French>Construisez le si&#232;ge d'[COLOR_BUILDING_TEXT]Ethanol Inc.[COLOR_REVERT] pour cr&#233;er la [COLOR_HIGHLIGHT_TEXT]soci&#233;t&#233; commerciale Ethanol Inc.[COLOR_REVERT], qui consomme du [COLOR_HIGHLIGHT_TEXT]ma&#239;s[COLOR_REVERT], du [COLOR_HIGHLIGHT_TEXT]sucre[COLOR_REVERT] et du [COLOR_HIGHLIGHT_TEXT]riz[COLOR_REVERT], et g&#233;n&#232;re du [COLOR_HIGHLIGHT_TEXT]p&#233;trole[COLOR_REVERT] dans chaque ville o&#249; la [COLOR_HIGHLIGHT_TEXT]soci&#233;t&#233; commerciale Ethanol Inc.[COLOR_REVERT] est implant&#233;e. Il conf&#232;re &#233;galement un bonus culturel et un bonus d'or.</French>
 		<German>Der Bau des Unternehmenssitzes der [COLOR_BUILDING_TEXT]Standard Ethanol[COLOR_REVERT] bildet die Grundlage f&#252;r die Errichtung der Kapitalgesellschaft [COLOR_HIGHLIGHT_TEXT]Standard Ethanol[COLOR_REVERT], welche [COLOR_HIGHLIGHT_TEXT]Mais[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Zucker[COLOR_REVERT] und [COLOR_HIGHLIGHT_TEXT]Reis[COLOR_REVERT] verarbeitet. Die [COLOR_HIGHLIGHT_TEXT]Standard Ethanol[COLOR_REVERT] versorgt eine Stadt mit [COLOR_HIGHLIGHT_TEXT]&#214;l[COLOR_REVERT] und gew&#228;hrt jeder Stadt, in der sie vertreten ist, einen Forschungsbonus. Der Unternehmenssitz bringt allen St&#228;dten der Welt mit einem Standard Ethanol-Franchise Gold ein.</German>
-		<Italian>Costruisci il Quartier generale della [COLOR_BUILDING_TEXT]Etanolo standard[COLOR_REVERT] per creare la [COLOR_HIGHLIGHT_TEXT]Corporazione Etanolo standard[COLOR_REVERT], che consuma [COLOR_HIGHLIGHT_TEXT]Granoturco[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Zucchero[COLOR_REVERT] e [COLOR_HIGHLIGHT_TEXT]Riso[COLOR_REVERT] e genera [COLOR_HIGHLIGHT_TEXT]Petrolio[COLOR_REVERT] in ogni citt&#224; in cui si trova. Il Quartier generale fornisce oro in ciascuna citt&#224; dove &#232; presente Etanolo standard.</Italian>
+		<Italian>Costruisci il Quartier generale della [COLOR_BUILDING_TEXT]Etanolo Standard[COLOR_REVERT] per creare la [COLOR_HIGHLIGHT_TEXT]Corporazione Etanolo standard[COLOR_REVERT], che consuma [COLOR_HIGHLIGHT_TEXT]Granoturco[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Zucchero[COLOR_REVERT] e [COLOR_HIGHLIGHT_TEXT]Riso[COLOR_REVERT] e genera [COLOR_HIGHLIGHT_TEXT]Petrolio[COLOR_REVERT] in ogni citt&#224; in cui si trova. Il Quartier generale fornisce oro in ciascuna citt&#224; dove &#232; presente la Etanolo Standard.</Italian>
 		<Spanish>Construye la sede de la [COLOR_BUILDING_TEXT]Standard Ethanol[COLOR_REVERT] para crear la [COLOR_HIGHLIGHT_TEXT]Corporaci&#243;n Standard Ethanol[COLOR_REVERT], que consume [COLOR_HIGHLIGHT_TEXT]Ma&#237;z[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Az&#250;car[COLOR_REVERT] y [COLOR_HIGHLIGHT_TEXT]Arroz[COLOR_REVERT], y genera [COLOR_HIGHLIGHT_TEXT]Petr&#243;leo[COLOR_REVERT] y una bonificaci&#243;n de investigaci&#243;n en toda ciudad en la que la corporaci&#243;n est&#233; presente.  La sede proporcionar&#225; oro para todas las ciudades del mundo en las que est&#233; presente la franquicia Standard Ethanol.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -118,7 +118,7 @@
 		<English>Build the [COLOR_BUILDING_TEXT]Creative Constructions[COLOR_REVERT] Headquarters to create the [COLOR_HIGHLIGHT_TEXT]Creative Constructions Corporation[COLOR_REVERT], which consumes [COLOR_HIGHLIGHT_TEXT]Iron[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Copper[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Stone[COLOR_REVERT] or [COLOR_HIGHLIGHT_TEXT]Marble[COLOR_REVERT] and adds a production and culture bonus to every city where the [COLOR_HIGHLIGHT_TEXT]Creative Constructions Corporation[COLOR_REVERT] is present.  The Headquarters provide gold for each city in the world with a Creative Constructions franchise.</English>
 		<French>Construisez le si&#232;ge des [COLOR_BUILDING_TEXT]Constructions Cr&#233;atives[COLOR_REVERT] pour cr&#233;er la soci&#233;t&#233; commerciale : [COLOR_HIGHLIGHT_TEXT]Constructions Cr&#233;atives[COLOR_REVERT], qui consomme du [COLOR_HIGHLIGHT_TEXT]fer[COLOR_REVERT], du [COLOR_HIGHLIGHT_TEXT]cuivre[COLOR_REVERT], de la [COLOR_HIGHLIGHT_TEXT]pierre[COLOR_REVERT] ou du [COLOR_HIGHLIGHT_TEXT]marbre[COLOR_REVERT] et conf&#232;re un bonus de production &#224; chaque ville o&#249; les [COLOR_HIGHLIGHT_TEXT]Constructions Cr&#233;atives[COLOR_REVERT] sont pr&#233;sentes. Il conf&#232;re &#233;galement un bonus culturel et un bonus d'or.</French>
 		<German>Der Bau des Unternehmenssitzes der [COLOR_BUILDING_TEXT]Creative Constructions[COLOR_REVERT] bildet die Grundlage f&#252;r die Errichtung der Kapitalgesellschaft [COLOR_HIGHLIGHT_TEXT]Creative Constructions[COLOR_REVERT], welche [COLOR_HIGHLIGHT_TEXT]Eisen[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Kupfer[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Stein[COLOR_REVERT] oder [COLOR_HIGHLIGHT_TEXT]Marmor[COLOR_REVERT] verarbeitet. Die [COLOR_HIGHLIGHT_TEXT]Creative Constructions[COLOR_REVERT] gew&#228;hrt jeder Stadt, in der sie vertreten ist, einen Produktions- und Kulturbonus. Der Unternehmenssitz bringt allen St&#228;dten der Welt mit einem Creative Constructions-Franchise Gold ein.</German>
-		<Italian>Costruisci il Quartier generale della [COLOR_BUILDING_TEXT]Creazioni Costruttive[COLOR_REVERT] per creare la [COLOR_HIGHLIGHT_TEXT]Corporazione Creazioni Costruttive[COLOR_REVERT], che consuma [COLOR_HIGHLIGHT_TEXT]Ferro[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Rame[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Pietra[COLOR_REVERT] o [COLOR_HIGHLIGHT_TEXT]Marmo[COLOR_REVERT] e d&#224; un bonus di produzione e cultura in ogni citt&#224; in cui si trova. Il Quartier generale fornisce oro in ciascuna citt&#224; dove &#232; presente Creazioni Costruttive.</Italian>
+		<Italian>Costruisci il Quartier generale della [COLOR_BUILDING_TEXT]Creazioni Costruttive[COLOR_REVERT] per creare la [COLOR_HIGHLIGHT_TEXT]Corporazione Creazioni Costruttive[COLOR_REVERT], che consuma [COLOR_HIGHLIGHT_TEXT]Ferro[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Rame[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Pietra[COLOR_REVERT] o [COLOR_HIGHLIGHT_TEXT]Marmo[COLOR_REVERT] e d&#224; un bonus di produzione e cultura in ogni citt&#224; in cui si trova. Il Quartier generale fornisce oro in ciascuna citt&#224; dove &#232; presente la Creazioni Costruttive.</Italian>
 		<Spanish>Construye la sede de la [COLOR_BUILDING_TEXT]Creative Constructions[COLOR_REVERT] para crear la [COLOR_HIGHLIGHT_TEXT]Corporaci&#243;n Creative Constructions[COLOR_REVERT], que consume [COLOR_HIGHLIGHT_TEXT]Hierro[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Cobre[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Piedra[COLOR_REVERT] o [COLOR_HIGHLIGHT_TEXT]M&#225;rmol[COLOR_REVERT] y suma una bonificaci&#243;n a la producci&#243;n y a la cultura en toda ciudad en la que la corporaci&#243;n est&#233; presente.  La sede proporcionar&#225; oro para todas las ciudades del mundo en las que est&#233; presente la franquicia Creative Constructions.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -126,7 +126,7 @@
 		<English>Build the [COLOR_BUILDING_TEXT]Mining Inc[COLOR_REVERT] Headquarters to create the [COLOR_HIGHLIGHT_TEXT]Mining Inc Corporation[COLOR_REVERT], which consumes [COLOR_HIGHLIGHT_TEXT]Aluminum[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Iron[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Copper[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Coal[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Silver[COLOR_REVERT] or [COLOR_HIGHLIGHT_TEXT]Gold[COLOR_REVERT] and adds a production bonus to any city where the [COLOR_HIGHLIGHT_TEXT]Mining Inc Corporation[COLOR_REVERT] is present.  The Headquarters provide gold for each city in the world with a Mining Inc. franchise.</English>
 		<French>Construisez le si&#232;ge de la [COLOR_BUILDING_TEXT]Compagnie d'exploitation mini&#232;re[COLOR_REVERT] pour cr&#233;er la soci&#233;t&#233; commerciale : [COLOR_HIGHLIGHT_TEXT]Compagnie d'exploitation mini&#232;re[COLOR_REVERT], qui consomme du [COLOR_HIGHLIGHT_TEXT]Fer[COLOR_REVERT], du [COLOR_HIGHLIGHT_TEXT]Cuivre[COLOR_REVERT], du [COLOR_HIGHLIGHT_TEXT]charbon[COLOR_REVERT], de l'[COLOR_HIGHLIGHT_TEXT]argent[COLOR_REVERT] ou de l'[COLOR_HIGHLIGHT_TEXT]Or[COLOR_REVERT] et ajoute un bonus commercial &#224; toute ville o&#249; la [COLOR_HIGHLIGHT_TEXT]Compagnie d'exploitation mini&#232;re[COLOR_REVERT] est pr&#233;sente. Il conf&#232;re &#233;galement un bonus culturel et un bonus d'or.</French>
 		<German>Der Bau des Unternehmenssitzes der [COLOR_BUILDING_TEXT]Mining Inc.[COLOR_REVERT] bildet die Grundlage f&#252;r die Errichtung der Kapitalgesellschaft [COLOR_HIGHLIGHT_TEXT]Mining Inc.[COLOR_REVERT], welche [COLOR_HIGHLIGHT_TEXT]Aluminium[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Eisen[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Kupfer[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Kohle[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Silber[COLOR_REVERT] oder [COLOR_HIGHLIGHT_TEXT]Gold[COLOR_REVERT] verarbeitet. Die [COLOR_HIGHLIGHT_TEXT]Mining Inc.[COLOR_REVERT] gew&#228;hrt jeder Stadt, in der sie vertreten ist, einen Produktionsbonus. Der Unternehmenssitz bringt allen St&#228;dten der Welt mit einem Mining Inc.-Franchise Gold ein.</German>
-		<Italian>Costruisci il Quartier generale della [COLOR_BUILDING_TEXT]Estrazioni minerarie Inc[COLOR_REVERT] per creare la [COLOR_HIGHLIGHT_TEXT]Corporazione Estrazioni minerarie Inc[COLOR_REVERT], che consuma [COLOR_HIGHLIGHT_TEXT]Ferro[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Rame[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Carbone[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Oro[COLOR_REVERT] o [COLOR_HIGHLIGHT_TEXT]Argento[COLOR_REVERT] e d&#224; un bonus di produzione a ogni citt&#224; in cui si trova. Il Quartier generale fornisce oro in ciascuna citt&#224; dove &#232; presente Estrazioni minerarie Inc.</Italian>
+		<Italian>Costruisci il Quartier generale della [COLOR_BUILDING_TEXT]Estrazioni minerarie Inc[COLOR_REVERT] per creare la [COLOR_HIGHLIGHT_TEXT]Corporazione Estrazioni minerarie Inc[COLOR_REVERT], che consuma [COLOR_HIGHLIGHT_TEXT]Ferro[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Rame[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Carbone[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Oro[COLOR_REVERT] o [COLOR_HIGHLIGHT_TEXT]Argento[COLOR_REVERT] e d&#224; un bonus di produzione a ogni citt&#224; in cui si trova. Il Quartier generale fornisce oro in ciascuna citt&#224; dove &#232; presente la Estrazioni Minerarie Inc.</Italian>
 		<Spanish>Construye la sede de la [COLOR_BUILDING_TEXT]Mining Inc.[COLOR_REVERT] para crear la corporaci&#243;n [COLOR_HIGHLIGHT_TEXT]Mining Inc.[COLOR_REVERT], que consume [COLOR_HIGHLIGHT_TEXT]Aluminio[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Hierro[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Cobre[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Carb&#243;n[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Plata[COLOR_REVERT] u [COLOR_HIGHLIGHT_TEXT]Oro[COLOR_REVERT] y suma una bonificaci&#243;n a la producci&#243;n en toda ciudad donde la corporaci&#243;n est&#233; presente.  La sede proporcionar&#225; oro para todas las ciudades del mundo en las que est&#233; presente la franquicia Mining Inc..</Spanish>
 	</TEXT>
 	<TEXT>
@@ -134,7 +134,7 @@
 		<English>Build the [COLOR_BUILDING_TEXT]Aluminum Co.[COLOR_REVERT] Headquarters to create the [COLOR_HIGHLIGHT_TEXT]Aluminum Co. Corporation[COLOR_REVERT], which consumes [COLOR_HIGHLIGHT_TEXT]Coal[COLOR_REVERT] and adds [COLOR_HIGHLIGHT_TEXT]Aluminum[COLOR_REVERT] and a research bonus to every city where the [COLOR_HIGHLIGHT_TEXT]Aluminum Co. Corporation[COLOR_REVERT] is present.  The Headquarters provide gold for each city in the world with an Alunimum Co. franchise.</English>
 		<French>Construisez le si&#232;ge d'[COLOR_BUILDING_TEXT]Aluminium S.A.[COLOR_REVERT] pour cr&#233;er la soci&#233;t&#233; commerciale [COLOR_HIGHLIGHT_TEXT]Aluminium S.A.[COLOR_REVERT], qui consomme du [COLOR_HIGHLIGHT_TEXT]charbon[COLOR_REVERT] et g&#233;n&#232;re de l'[COLOR_HIGHLIGHT_TEXT]aluminium[COLOR_REVERT] dans chaque ville o&#249; [COLOR_HIGHLIGHT_TEXT]Aluminium S.A.[COLOR_REVERT] est pr&#233;sente. Il conf&#232;re &#233;galement un bonus d'or pour chaque ville o&#249; se trouve une filiale d'Aluminium S.A.</French>
 		<German>Der Bau des Unternehmenssitzes der [COLOR_BUILDING_TEXT]Aluminum Co.[COLOR_REVERT] bildet die Grundlage f&#252;r die Errichtung der Kapitalgesellschaft [COLOR_HIGHLIGHT_TEXT]Aluminum Co.[COLOR_REVERT], welche [COLOR_HIGHLIGHT_TEXT]Kohle[COLOR_REVERT] verarbeitet. Die [COLOR_HIGHLIGHT_TEXT]Aluminum Co.[COLOR_REVERT] versorgt jede Stadt, in der sie vertreten ist, mit [COLOR_HIGHLIGHT_TEXT]Aluminium[COLOR_REVERT] und einem Forschungsbonus. Der Unternehmenssitz bringt allen St&#228;dten der Welt mit einem Aluminum Co.-Franchise Gold ein.</German>
-		<Italian>Costruisci il Quartier generale della [COLOR_BUILDING_TEXT]Alluminio Co.[COLOR_REVERT] per creare la [COLOR_HIGHLIGHT_TEXT]Corporazione Alluminio Co.[COLOR_REVERT], che consuma [COLOR_HIGHLIGHT_TEXT]Carbone[COLOR_REVERT] e aggiunge [COLOR_HIGHLIGHT_TEXT]Alluminio[COLOR_REVERT] e un bonus sulla ricerca in ogni citt&#224; in cui si trova. Il Quartier generale fornisce oro in ciascuna citt&#224; e nel mondo dove &#232; presente Alluminio Co.</Italian>
+		<Italian>Costruisci il Quartier generale della [COLOR_BUILDING_TEXT]Alluminio Co.[COLOR_REVERT] per creare la [COLOR_HIGHLIGHT_TEXT]Corporazione Alluminio Co.[COLOR_REVERT], che consuma [COLOR_HIGHLIGHT_TEXT]Carbone[COLOR_REVERT] e aggiunge [COLOR_HIGHLIGHT_TEXT]Alluminio[COLOR_REVERT] e un bonus sulla ricerca in ogni citt&#224; in cui si trova. Il Quartier generale fornisce oro in ciascuna citt&#224; e nel mondo dove &#232; presente la Alluminio Co.</Italian>
 		<Spanish>Construye la sede de la [COLOR_BUILDING_TEXT]Aluminum Co.[COLOR_REVERT] para crear la [COLOR_HIGHLIGHT_TEXT]Corporaci&#243;n Aluminum Co. [COLOR_REVERT], que consume [COLOR_HIGHLIGHT_TEXT]Carb&#243;n[COLOR_REVERT] y suma [COLOR_HIGHLIGHT_TEXT]Aluminio[COLOR_REVERT] y una bonificaci&#243;n de investigaci&#243;n en toda ciudad donde la corporaci&#243;n est&#233; presente.  La sede proporcionar&#225; oro para todas las ciudades del mundo en las que est&#233; presente la franquicia Aluminum Co.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -142,7 +142,7 @@
 		<English>Build the [COLOR_BUILDING_TEXT]Civilized Jewelers Inc[COLOR_REVERT] Headquarters to create the [COLOR_HIGHLIGHT_TEXT]Civilized Jewelers Inc Corporation[COLOR_REVERT] which consumes [COLOR_HIGHLIGHT_TEXT]Gold[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Silver[COLOR_REVERT] or [COLOR_HIGHLIGHT_TEXT]Gems[COLOR_REVERT] and adds gold and a culture bonus to every city where the [COLOR_HIGHLIGHT_TEXT]Civilized Jewelers Inc Corporation[COLOR_REVERT] is present.  The Headquarters provide gold for each city in the world with a Civilized Jewelers franchise.</English>
 		<French>Construisez le si&#232;ge des [COLOR_BUILDING_TEXT]Bijoutiers associ&#233;s[COLOR_REVERT] pour cr&#233;er la soci&#233;t&#233; commerciale [COLOR_HIGHLIGHT_TEXT]Bijoutiers associ&#233;s[COLOR_REVERT] qui consomme de l'[COLOR_HIGHLIGHT_TEXT]or[COLOR_REVERT], de l'[COLOR_HIGHLIGHT_TEXT]argent[COLOR_REVERT] ou des [COLOR_HIGHLIGHT_TEXT]pierres pr&#233;cieuses[COLOR_REVERT] et conf&#232;re un bonus d'or &#224; chaque cit&#233; o&#249; les [COLOR_HIGHLIGHT_TEXT]Bijoutiers associ&#233;s[COLOR_REVERT] sont pr&#233;sents. Il conf&#232;re &#233;galement un bonus d'or pour chaque ville o&#249; se trouve une filiale de Bijoutiers associ&#233;s.</French>
 		<German>Der Bau des Unternehmenssitzes der [COLOR_BUILDING_TEXT]Civilized Jewelers Inc.[COLOR_REVERT] bildet die Grundlage f&#252;r die Errichtung der Kapitalgesellschaft [COLOR_HIGHLIGHT_TEXT]Civilized Jewelers Inc.[COLOR_REVERT], welche [COLOR_HIGHLIGHT_TEXT]Gold[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Silber[COLOR_REVERT] oder [COLOR_HIGHLIGHT_TEXT]Edelsteine[COLOR_REVERT] verarbeitet. Die [COLOR_HIGHLIGHT_TEXT]Civilized Jewelers Inc.[COLOR_REVERT] gew&#228;hrt jeder Stadt, in der sie vertreten ist, einen Kultur- sowie einen Goldbonus. Der Unternehmenssitz bringt allen St&#228;dten der Welt mit einem Civilized Jewelers-Franchise Gold ein.</German>
-		<Italian>Costruisci il Quartier generale della [COLOR_BUILDING_TEXT]Gioiellieri Civilizzati[COLOR_REVERT] per creare la [COLOR_HIGHLIGHT_TEXT]Corporazione Gioiellieri Civilizzati[COLOR_REVERT], che consuma [COLOR_HIGHLIGHT_TEXT]Oro[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Argento[COLOR_REVERT] o [COLOR_HIGHLIGHT_TEXT]Gemme[COLOR_REVERT] e d&#224; un bonus di cultura e oro in ogni citt&#224; in cui si trova. Il Quartier generale fornisce oro in ciascuna citt&#224; dove &#232; presente Gioiellieri Civilizzati.</Italian>
+		<Italian>Costruisci il Quartier generale della [COLOR_BUILDING_TEXT]Gioiellieri Civilizzati[COLOR_REVERT] per creare la [COLOR_HIGHLIGHT_TEXT]Corporazione Gioiellieri Civilizzati[COLOR_REVERT], che consuma [COLOR_HIGHLIGHT_TEXT]Oro[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Argento[COLOR_REVERT] o [COLOR_HIGHLIGHT_TEXT]Gemme[COLOR_REVERT] e d&#224; un bonus di cultura e oro in ogni citt&#224; in cui si trova. Il Quartier generale fornisce oro in ciascuna citt&#224; dove &#232; presente la Gioiellieri Civilizzati.</Italian>
 		<Spanish>Construye la sede de la [COLOR_BUILDING_TEXT]Civilized Jewelers Inc.[COLOR_REVERT] para crear la [COLOR_HIGHLIGHT_TEXT]Corporaci&#243;n Civilized Jewelers Inc.[COLOR_REVERT], que consume [COLOR_HIGHLIGHT_TEXT]Oro[COLOR_REVERT], [COLOR_HIGHLIGHT_TEXT]Plata[COLOR_REVERT] o [COLOR_HIGHLIGHT_TEXT]Gemas[COLOR_REVERT] y suma oro y una bonificaci&#243;n a la cultura de toda ciudad donde la corporaci&#243;n est&#233; presente.  La sede proporcionar&#225; oro para todas las ciudades del mundo en las que est&#233; presente la franquicia Civilized Jewelers Inc.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -248,7 +248,7 @@
 		</German>
 		<Italian>
 			<Text>Funzionario della Sid Sushi</Text>
-			<Gender>Female</Gender>
+			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</Italian>
 		<Spanish>
@@ -273,7 +273,7 @@
 		<Italian>
 			<Text>Sid Sushi</Text>
 			<Gender>Male</Gender>
-			<Plural>1</Plural>
+			<Plural>0</Plural>
 		</Italian>
 		<Spanish>
 			<Text>Sid's Sushi</Text>
@@ -326,7 +326,7 @@
 		<English>No Sound</English>
 		<French>Muet</French>
 		<German>Kein Ton</German>
-		<Italian>Nessun suono</Italian>
+		<Italian>Muto</Italian>
 		<Spanish>Sin sonido</Spanish>
 	</TEXT>
 	<TEXT>
@@ -358,7 +358,7 @@
 		<English>Glorious</English>
 		<French>un chef glorieux</French>
 		<German>Glorreiche</German>
-		<Italian>glorioso</Italian>
+		<Italian>Glorioso</Italian>
 		<Spanish>Glorios</Spanish>
 	</TEXT>
 	<TEXT>
@@ -366,7 +366,7 @@
 		<English>Great</English>
 		<French>un grand chef</French>
 		<German>Gro&#223;artige</German>
-		<Italian>grande</Italian>
+		<Italian>Grande</Italian>
 		<Spanish>Grandios</Spanish>
 	</TEXT>
 	<TEXT>
@@ -374,7 +374,7 @@
 		<English>Fine</English>
 		<French>un chef raffin&#233;</French>
 		<German>Beachtliche</German>
-		<Italian>eccellente</Italian>
+		<Italian>Eccellente</Italian>
 		<Spanish>Adecuad</Spanish>
 	</TEXT>
 	<TEXT>
@@ -382,7 +382,7 @@
 		<English>Mediocre</English>
 		<French>un chef m&#233;diocre</French>
 		<German>Mittelm&#228;&#223;ige</German>
-		<Italian>mediocre</Italian>
+		<Italian>Mediocre</Italian>
 		<Spanish>Deslucid</Spanish>
 	</TEXT>
 	<TEXT>
@@ -390,7 +390,7 @@
 		<English>Puny</English>
 		<French>un chef faible</French>
 		<German>Armselige</German>
-		<Italian>debole</Italian>
+		<Italian>Debole</Italian>
 		<Spanish>Debiluch</Spanish>
 	</TEXT>
 	<TEXT>
@@ -398,7 +398,7 @@
 		<English>Pathetic</English>
 		<French>un chef pitoyable</French>
 		<German>J&#228;mmerliche</German>
-		<Italian>patetico</Italian>
+		<Italian>Patetico</Italian>
 		<Spanish>Pat&#233;tic</Spanish>
 	</TEXT>
 	<TEXT>
@@ -406,7 +406,7 @@
 		<English>Hopeless</English>
 		<French>un chef affligeant</French>
 		<German>Hoffnungslose</German>
-		<Italian>disperato</Italian>
+		<Italian>Disperato</Italian>
 		<Spanish>Deshauciad</Spanish>
 	</TEXT>
 	<TEXT>
@@ -414,7 +414,7 @@
 		<English>Forgotten</English>
 		<French>un chef oubli&#233;</French>
 		<German>Vergessene</German>
-		<Italian>dimenticato</Italian>
+		<Italian>Dimenticato</Italian>
 		<Spanish>Olvidad</Spanish>
 	</TEXT>
 </Civ4GameText>
