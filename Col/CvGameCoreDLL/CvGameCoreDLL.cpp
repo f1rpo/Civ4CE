@@ -9,7 +9,7 @@
 #include "CvDLLInterfaceIFaceBase.h"
 
 //
-// operator global new and delete override for gamecore DLL 
+// operator global new and delete override for gamecore DLL
 //
 void *__cdecl operator new(size_t size)
 {
@@ -82,14 +82,14 @@ unsigned int memSize(void* a)
 	return gDLL->memSize(a);
 }
 
-BOOL APIENTRY DllMain(HANDLE hModule, 
-					  DWORD  ul_reason_for_call, 
+BOOL APIENTRY DllMain(HANDLE hModule,
+					  DWORD  ul_reason_for_call,
 					  LPVOID lpReserved)
 {
 	switch( ul_reason_for_call ) {
 	case DLL_PROCESS_ATTACH:
 		{
-		// The DLL is being loaded into the virtual address space of the current process as a result of the process starting up 
+		// The DLL is being loaded into the virtual address space of the current process as a result of the process starting up
 		OutputDebugString("DLL_PROCESS_ATTACH\n");
 
 		// set timer precision
@@ -109,7 +109,7 @@ BOOL APIENTRY DllMain(HANDLE hModule,
 		GC.setDLLIFace(NULL);
 		break;
 	}
-	
+
 	return TRUE;	// success
 }
 

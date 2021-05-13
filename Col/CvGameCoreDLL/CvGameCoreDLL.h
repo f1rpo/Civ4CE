@@ -28,7 +28,7 @@
 #include <map>
 #include <hash_map>
 
-#define DllExport   __declspec( dllexport ) 
+#define DllExport   __declspec( dllexport )
 
 //
 // GameBryo
@@ -38,7 +38,7 @@ class NiColor
 public:
 	float r, g, b;
 };
-class NiColorA 
+class NiColorA
 {
 public:
 	NiColorA(float fr, float fg, float fb, float fa) : r(fr), g(fg), b(fb), a(fa) {}
@@ -57,7 +57,7 @@ class NiPoint3
 {
 public:
 	NiPoint3() {}
-	NiPoint3(float fx, float fy, float fz) : x(fx),y(fy),z(fz) {} 
+	NiPoint3(float fx, float fy, float fz) : x(fx),y(fy),z(fz) {}
 
 	bool NiPoint3::operator== (const NiPoint3& pt) const
 	{	return (x == pt.x && y == pt.y && z == pt.z);	}

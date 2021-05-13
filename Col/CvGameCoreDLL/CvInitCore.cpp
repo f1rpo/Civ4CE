@@ -133,7 +133,7 @@ void CvInitCore::setDefaults()
 	{
 		m_abMPOptions[i] = GC.getMPOptionInfo((MultiplayerOptionTypes)i).getDefault();
 	}
-}	
+}
 
 
 bool CvInitCore::getHuman(PlayerTypes eID) const
@@ -723,7 +723,7 @@ void CvInitCore::resetPlayer(PlayerTypes eID, CvInitCore * pSource, bool bClear,
 
 
 CvWString CvInitCore::getMapScriptName() const
-{ 
+{
 	if (gDLL->getTransferredMap())
 	{
 		if (!getWBMapScript())
@@ -732,8 +732,8 @@ CvWString CvInitCore::getMapScriptName() const
 			return ( m_szMapScriptName + CvWString(MAP_TRANSFER_EXT) );
 		}
 	}
-	return m_szMapScriptName; 
-}	
+	return m_szMapScriptName;
+}
 
 void CvInitCore::setMapScriptName(const CvWString & szMapScriptName)
 {
@@ -949,7 +949,7 @@ void CvInitCore::refreshCustomMapOptions()
 				// Got number of custom map options - now get the option defaults
 				CustomMapOptionTypes *aeMapOptions = new CustomMapOptionTypes[iNumOptions];
 				for (int i = 0; i < iNumOptions; ++i)
-				{	
+				{
 					long iOptionDefault = 0;
 					CyArgsList argsList;
 					argsList.add(i);
@@ -1551,7 +1551,7 @@ void CvInitCore::setTeam(PlayerTypes eID, TeamTypes eTeam)
 	if ( checkBounds(eID, 0, MAX_PLAYERS) )
 	{
 		m_aeTeam[eID] = eTeam;
-		
+
 		if(CvPlayerAI::areStaticsInitialized())
 		{
 			GET_PLAYER(eID).updateTeamType();
@@ -1845,13 +1845,13 @@ void CvInitCore::resetAdvancedStartPoints()
 	{
 		iPoints += GC.getEraInfo(getEra()).getAdvancedStartPoints();
 	}
-	
+
 	if (NO_WORLDSIZE != getWorldSize())
 	{
 		iPoints *= GC.getWorldInfo(getWorldSize()).getAdvancedStartPointsMod();
 		iPoints /= 100;
 	}
-	
+
 	if (NO_GAMESPEED != getGameSpeed())
 	{
 		iPoints *= GC.getGameSpeedInfo(getGameSpeed()).getGrowthPercent();

@@ -183,7 +183,7 @@ private:
 			return wcscmp(s1, s2) < 0;
 		}
 	};
-	
+
 	std::vector<CvDiplomacyTextInfo*> m_paDiplomacyTextInfo;
 	std::vector<int*> m_apbPromotion;
 

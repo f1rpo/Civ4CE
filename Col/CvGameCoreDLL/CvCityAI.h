@@ -37,7 +37,7 @@ public:
 
 	DllExport BuildingTypes AI_bestBuilding(int iFocusFlags = 0, int iMaxTurns = 0, bool bAsync = false, AdvisorTypes eIgnoreAdvisor = NO_ADVISOR);
 	BuildingTypes AI_bestBuildingThreshold(int iFocusFlags = 0, int iMaxTurns = 0, int iMinThreshold = 0, bool bAsync = false, AdvisorTypes eIgnoreAdvisor = NO_ADVISOR);
-	
+
 	DllExport int AI_buildingValue(BuildingTypes eBuilding, int iFocusFlags = 0);
 	int AI_buildingValueThreshold(BuildingTypes eBuilding, int iFocusFlags = 0, int iThreshold = 0);
 
@@ -95,26 +95,26 @@ public:
 	DllExport void AI_updateBestBuild();
 
 	virtual int AI_cityValue() const;
-    
+
     int AI_calculateWaterWorldPercent();
-    
+
     int AI_getCityImportance(bool bEconomy, bool bMilitary);
-    
+
     int AI_yieldMultiplier(YieldTypes eYield);
     void AI_updateSpecialYieldMultiplier();
     int AI_specialYieldMultiplier(YieldTypes eYield);
-    
+
     int AI_countNumBonuses(BonusTypes eBonus, bool bIncludeOurs, bool bIncludeNeutral, int iOtherCultureThreshold, bool bLand = true, bool bWater = true);
 
 	int AI_playerCloseness(PlayerTypes eIndex, int iMaxDistance);
 	int AI_cityThreat(bool bDangerPercent = false);
-	
+
 	void AI_tryToWorkPlot(CvPlot* pPlot);
 	int AI_getWorkersHave();
 	int AI_getWorkersNeeded();
 	void AI_changeWorkersHave(int iChange);
 	BuildingTypes AI_bestAdvancedStartBuilding(int iPass);
-	
+
 	DllExport void read(FDataStreamBase* pStream);
 	DllExport void write(FDataStreamBase* pStream);
 
@@ -137,19 +137,19 @@ protected:
 	BuildTypes m_aeBestBuild[NUM_CITY_PLOTS];
 
 	bool* m_pbEmphasize;
-	
+
 	int* m_aiSpecialYieldMultiplier;
-	
+
 	int m_iCachePlayerClosenessTurn;
 	int m_iCachePlayerClosenessDistance;
 	int* m_aiPlayerCloseness;
-	
+
 	int m_iNeededFloatingDefenders;
 	int m_iNeededFloatingDefendersCacheTurn;
-	
+
 	int m_iWorkersNeeded;
 	int m_iWorkersHave;
-	
+
 
 	void AI_doDraft(bool bForce = false);
 	void AI_doHurry(bool bForce = false);
@@ -161,10 +161,10 @@ protected:
 	bool AI_doPanic();
 	int AI_calculateCulturePressure(bool bGreatWork = false);
 
-	
+
 	bool AI_chooseUnit(UnitAITypes eUnitAI = NO_UNITAI);
 	bool AI_chooseUnit(UnitTypes eUnit, UnitAITypes eUnitAI);
-	
+
 	bool AI_chooseDefender();
 	bool AI_chooseLeastRepresentedUnit(UnitTypeWeightArray &allowedTypes);
 	bool AI_chooseBuilding(int iFocusFlags = 0, int iMaxTurns = MAX_INT, int iMinThreshold = 0);
@@ -185,19 +185,19 @@ protected:
 	int AI_buildUnitProb();
 
 	void AI_bestPlotBuild(CvPlot* pPlot, int* piBestValue, BuildTypes* peBestBuild, int iFoodPriority, int iProductionPriority, int iCommercePriority, bool bChop, int iHappyAdjust, int iHealthAdjust, int iFoodChange);
-	
+
 	void AI_buildGovernorChooseProduction();
-	
+
 	int AI_getYieldMagicValue(const int* piYieldsTimes100, bool bHealthy);
 	int AI_getPlotMagicValue(CvPlot* pPlot, bool bHealthy, bool bWorkerOptimization = false);
 	int AI_countGoodTiles(bool bHealthy, bool bUnworkedOnly, int iThreshold = 50, bool bWorkerOptimization = false);
 	int AI_countGoodSpecialists(bool bHealthy);
 	int AI_calculateTargetCulturePerTurn();
-	
+
 	void AI_stealPlots();
-	
+
 	int AI_buildingSpecialYieldChangeValue(BuildingTypes kBuilding, YieldTypes eYield);
-	
+
 	void AI_cachePlayerCloseness(int iMaxDistance);
 	void AI_updateWorkersNeededHere();
 

@@ -186,7 +186,7 @@ protected:
 	bool AI_missileLoad(UnitAITypes eTargetUnitAI, int iMaxOwnUnitAI = -1, bool bStealthOnly = false);
 	bool AI_airStrike();
 	bool AI_airBombPlots();
-	bool AI_airBombDefenses();	
+	bool AI_airBombDefenses();
 	bool AI_exploreAir();
 	bool AI_nuke();
 	bool AI_nukeRange(int iRange);
@@ -218,14 +218,14 @@ protected:
 	bool AI_moveIntoCity(int iRange);
 
 	bool AI_groupMergeRange(UnitAITypes eUnitAI, int iRange, bool bBiggerOnly = true, bool bAllowRegrouping = false, bool bIgnoreFaster = false);
-	
+
 	bool AI_artistCultureVictoryMove();
 
 	bool AI_poach();
 	bool AI_choke(int iRange = 1);
-	
+
 	bool AI_solveBlockageProblem(CvPlot* pDestPlot, bool bDeclareWar);
-	
+
 	int AI_calculatePlotWorkersNeeded(CvPlot* pPlot, BuildTypes eBuild);
 
 	int AI_getEspionageTargetValue(CvPlot* pPlot, int iMaxPath);

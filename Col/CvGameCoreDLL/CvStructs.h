@@ -43,13 +43,13 @@ struct DllExport IDInfo
 	}
 };
 
-struct DllExport GameTurnInfo				// Exposed to Python
+struct DllExport GameTurnInfo
 {
 	int iMonthIncrement;
 	int iNumGameTurnsPerIncrement;
 };
 
-struct DllExport OrderData					// Exposed to Python
+struct DllExport OrderData
 {
 	OrderTypes eOrderType;
 	int iData1;
@@ -57,7 +57,7 @@ struct DllExport OrderData					// Exposed to Python
 	bool bSave;
 };
 
-struct DllExport MissionData				// Exposed to Python
+struct DllExport MissionData
 {
 	MissionTypes eMissionType;
 	int iData1;
@@ -66,7 +66,7 @@ struct DllExport MissionData				// Exposed to Python
 	int iPushTurn;
 };
 
-struct DllExport TradeData					// Exposed to Python
+struct DllExport TradeData
 {
 	TradeableItems m_eItemType;				//	What type of item is this
 	int m_iData;											//	Any additional data?
@@ -349,18 +349,18 @@ public:
 	int getDamage(BattleUnitTypes unitType, BattleTimeTypes timeType) const;
 	void setDamage(BattleUnitTypes unitType, BattleTimeTypes timeType, int damage);
 	void addDamage(BattleUnitTypes unitType, BattleTimeTypes timeType, int increment);
-	
+
 	int getFirstStrikes(BattleUnitTypes unitType) const;
 	void setFirstStrikes(BattleUnitTypes unitType, int firstStrikes);
 	void addFirstStrikes(BattleUnitTypes unitType, int increment);
-	
+
 	bool isAdvanceSquare() const;
 	void setAdvanceSquare(bool advanceSquare);
 
 	int getNumRangedRounds() const;
 	void setNumRangedRounds(int count);
 	void addNumRangedRounds(int increment);
-	
+
 	int getNumMeleeRounds() const;
 	void setNumMeleeRounds(int count);
 	void addNumMeleeRounds(int increment);

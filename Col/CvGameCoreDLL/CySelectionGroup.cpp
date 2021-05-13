@@ -1,6 +1,6 @@
 //
 // Python wrapper class for CySelectionGroup
-// 
+//
 //
 #include "CvGameCoreDLL.h"
 #include "CySelectionGroup.h"
@@ -230,7 +230,7 @@ void CySelectionGroup::setActivityType(int /*ActivityTypes*/ eNewValue)
 		m_pSelectionGroup->setActivityType((ActivityTypes) eNewValue);
 }
 
-int /*AutomateTypes*/ CySelectionGroup::getAutomateType() 
+int /*AutomateTypes*/ CySelectionGroup::getAutomateType()
 {
 	return m_pSelectionGroup ? (AutomateTypes) m_pSelectionGroup->getAutomateType() : -1;
 }

@@ -53,7 +53,7 @@ bool CyUnit::isActionRecommended(int i)
 	return false;
 }
 
-bool CyUnit::isBetterDefenderThan(CyUnit* pDefender, CyUnit* pAttacker) 
+bool CyUnit::isBetterDefenderThan(CyUnit* pDefender, CyUnit* pAttacker)
 {
 	return m_pUnit ? m_pUnit->isBetterDefenderThan(pDefender->getUnit(), pAttacker->getUnit()) : false;
 }
@@ -89,7 +89,7 @@ bool CyUnit::canEnterArea(int /*TeamTypes*/ eTeam, CyArea* pArea, bool bIgnoreRi
 	return m_pUnit ? (int) m_pUnit->canEnterArea((TeamTypes) eTeam, pArea->getArea(), bIgnoreRightOfPassage) : false;
 }
 
-int /*TeamTypes*/ CyUnit::getDeclareWarMove(CyPlot* pPlot)																					 
+int /*TeamTypes*/ CyUnit::getDeclareWarMove(CyPlot* pPlot)
 {
 	return m_pUnit ? (int) m_pUnit->getDeclareWarMove(pPlot->getPlot()) : (int) NO_TEAM;
 }
@@ -440,12 +440,12 @@ bool CyUnit::upgradeAvailable(int /*UnitTypes*/ eFromUnit, int /*UnitClassTypes*
 	return m_pUnit ? m_pUnit->upgradeAvailable((UnitTypes) eFromUnit, (UnitClassTypes) eToUnitClass, iCount) : false;
 }
 
-bool CyUnit::canUpgrade(int /*UnitTypes*/ eUnit, bool bTestVisible)			
+bool CyUnit::canUpgrade(int /*UnitTypes*/ eUnit, bool bTestVisible)
 {
 	return m_pUnit ? m_pUnit->canUpgrade((UnitTypes)eUnit, bTestVisible) : false;
 }
 
-bool CyUnit::hasUpgrade(bool bSearch)			
+bool CyUnit::hasUpgrade(bool bSearch)
 {
 	return m_pUnit ? m_pUnit->hasUpgrade(bSearch) : false;
 }
@@ -1034,7 +1034,7 @@ bool CyUnit::isFull()
 	return m_pUnit ? m_pUnit->isFull() : false;
 }
 
-int CyUnit::cargoSpaceAvailable(int /*SpecialUnitTypes*/ eSpecialCargo, int /*DomainTypes*/ eDomainCargo)	 
+int CyUnit::cargoSpaceAvailable(int /*SpecialUnitTypes*/ eSpecialCargo, int /*DomainTypes*/ eDomainCargo)
 {
 	return m_pUnit ? m_pUnit->cargoSpaceAvailable((SpecialUnitTypes) eSpecialCargo, (DomainTypes) eDomainCargo) : -1;
 }
@@ -1251,7 +1251,7 @@ int CyUnit::getBlitzCount()
 	return m_pUnit ? m_pUnit->getBlitzCount() : -1;
 }
 
-bool CyUnit::isBlitz()	 
+bool CyUnit::isBlitz()
 {
 	return m_pUnit ? m_pUnit->isBlitz() : false;
 }
@@ -1261,7 +1261,7 @@ int CyUnit::getAmphibCount()
 	return m_pUnit ? m_pUnit->getAmphibCount() : -1;
 }
 
-bool CyUnit::isAmphib()		 
+bool CyUnit::isAmphib()
 {
 	return m_pUnit ? m_pUnit->isAmphib() : false;
 }
@@ -1271,22 +1271,22 @@ int CyUnit::getRiverCount()
 	return m_pUnit ? m_pUnit->getRiverCount() : -1;
 }
 
-bool CyUnit::isRiver()	 
+bool CyUnit::isRiver()
 {
 	return m_pUnit ? m_pUnit->isRiver() : false;
 }
 
-bool CyUnit::isEnemyRoute()	
+bool CyUnit::isEnemyRoute()
 {
 	return m_pUnit ? m_pUnit->isEnemyRoute(): false;
 }
 
-bool CyUnit::isAlwaysHeal()			 
+bool CyUnit::isAlwaysHeal()
 {
 	return m_pUnit ? m_pUnit->isAlwaysHeal(): false;
 }
 
-bool CyUnit::isHillsDoubleMove()			 
+bool CyUnit::isHillsDoubleMove()
 {
 	return m_pUnit ? m_pUnit->isHillsDoubleMove(): false;
 }
@@ -1434,7 +1434,7 @@ void CyUnit::setImmobileTimer(int iNewValue)
 	}
 }
 
-bool CyUnit::isMadeAttack()	 
+bool CyUnit::isMadeAttack()
 {
 	return m_pUnit ? m_pUnit->isMadeAttack() : false;
 }
@@ -1445,7 +1445,7 @@ void CyUnit::setMadeAttack(bool bNewValue)
 		m_pUnit->setMadeAttack(bNewValue);
 }
 
-bool CyUnit::isMadeInterception()	 
+bool CyUnit::isMadeInterception()
 {
 	return m_pUnit ? m_pUnit->isMadeInterception() : false;
 }
@@ -1456,7 +1456,7 @@ void CyUnit::setMadeInterception(bool bNewValue)
 		m_pUnit->setMadeInterception(bNewValue);
 }
 
-bool CyUnit::isPromotionReady() 
+bool CyUnit::isPromotionReady()
 {
 	return m_pUnit ? m_pUnit->isPromotionReady() : false;
 }

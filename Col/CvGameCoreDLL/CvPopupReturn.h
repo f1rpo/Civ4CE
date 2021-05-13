@@ -37,7 +37,7 @@ public:
 	}
 
 	//	Will get the selected radio button
-	int getSelectedRadioButton( int iGroup = 0 ) const															// Exposed to Python (JS)
+	int getSelectedRadioButton( int iGroup = 0 ) const															 (JS)
 	{
 		return m_aiSelectedRadioButton[iGroup];
 	}
@@ -49,7 +49,7 @@ public:
 	}
 
 	//	Will set the bitfield for checkboxes
-	void setCheckboxBitfield( int iValue, int iGroup = 0 )								
+	void setCheckboxBitfield( int iValue, int iGroup = 0 )
 	{
 		//m_aiBitField, iGroup, iValue );
 		CvPopup_SetAtGrow(m_aiBitField, iGroup, iValue);
@@ -75,10 +75,10 @@ public:
 	}
 
 	//	Will get the selected editbox string
-	const wchar *getEditBoxString( int iGroup = 0 ) const														// Exposed to Python
+	const wchar *getEditBoxString( int iGroup = 0 ) const
 	{
 //		return ((uint)iGroup<m_aszEditBoxString.size()) ? m_aszEditBoxString[iGroup] : NULL;
-		if ((uint)iGroup<m_aszEditBoxString.size()) 
+		if ((uint)iGroup<m_aszEditBoxString.size())
 			return m_aszEditBoxString[iGroup];
 		return NULL;
 	}
@@ -115,7 +115,7 @@ public:
 	}
 
 	//	Will get the selected pulldown value
-	int getSelectedPullDownValue( int iGroup = 0 ) const														// Exposed to Python
+	int getSelectedPullDownValue( int iGroup = 0 ) const
 	{
 		return m_aiPulldownID[iGroup];
 	}
@@ -133,7 +133,7 @@ public:
 	}
 
 	//	Will get the selected listbox value
-	int getSelectedListBoxValue( int iGroup = 0 ) const															// Exposed to Python
+	int getSelectedListBoxValue( int iGroup = 0 ) const
 	{
 		return ((uint)iGroup<m_aiListBoxID.size()) ? m_aiListBoxID[iGroup] : -1;
 	}
@@ -151,7 +151,7 @@ public:
 	}
 
 	//	Will get the current spinbox value
-	int getCurrentSpinBoxValue( int iIndex = 0 ) const															// Exposed to Python
+	int getCurrentSpinBoxValue( int iIndex = 0 ) const
 	{
 		return ((uint)iIndex<m_aiSpinBoxID.size()) ? m_aiSpinBoxID[iIndex] : -1;
 	}
@@ -169,7 +169,7 @@ public:
 	}
 
 	//	Will get the button ID
-	int getButtonClicked( int iGroup = 0 ) const																// Exposed to Python
+	int getButtonClicked( int iGroup = 0 ) const
 	{
 		return m_aiButtonID[iGroup];
 	}

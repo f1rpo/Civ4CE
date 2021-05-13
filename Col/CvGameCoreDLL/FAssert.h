@@ -8,7 +8,7 @@
 // simply by changing the following lines to define FASSERT_ENABLE or using project settings to override
 #ifdef _DEBUG
 #define FASSERT_ENABLE
-#endif 
+#endif
 
 #ifdef FASSERT_ENABLE
 

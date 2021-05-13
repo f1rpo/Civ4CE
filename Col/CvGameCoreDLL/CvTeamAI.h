@@ -21,7 +21,7 @@ public:
 	{
 		FAssertMsg(eTeam != NO_TEAM, "eTeam is not assigned a valid value");
 		FAssertMsg(eTeam < MAX_TEAMS, "eTeam is not assigned a valid value");
-		return m_aTeams[eTeam]; 
+		return m_aTeams[eTeam];
 	}
 #endif
 	DllExport static CvTeamAI& getTeamNonInl(TeamTypes eTeam);
@@ -143,17 +143,17 @@ public:
 	void AI_setWarPlan(TeamTypes eIndex, WarPlanTypes eNewValue, bool bWar = true);
 
 	int AI_teamCloseness(TeamTypes eIndex, int iMaxDistance = -1) const;
-	
+
 	bool AI_performNoWarRolls(TeamTypes eTeam);
-	
+
 	int AI_getAttitudeWeight(TeamTypes eTeam);
-	
+
 	int AI_getLowestVictoryCountdown() const;
 
 	int AI_getTechMonopolyValue(TechTypes eTech, TeamTypes eTeam) const;
-	
+
 	bool AI_isWaterAreaRelevant(CvArea* pArea);
-	
+
 	virtual void read(FDataStreamBase* pStream);
 	virtual void write(FDataStreamBase* pStream);
 

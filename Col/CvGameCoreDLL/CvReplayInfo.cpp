@@ -30,7 +30,7 @@ CvReplayInfo::CvReplayInfo() :
 	m_bMultiplayer(false),
 	m_iStartYear(0)
 {
-	m_nMinimapSize = ((GC.getDefineINT("MINIMAP_RENDER_SIZE") * GC.getDefineINT("MINIMAP_RENDER_SIZE")) / 2); 
+	m_nMinimapSize = ((GC.getDefineINT("MINIMAP_RENDER_SIZE") * GC.getDefineINT("MINIMAP_RENDER_SIZE")) / 2);
 }
 
 CvReplayInfo::~CvReplayInfo()
@@ -155,7 +155,7 @@ void CvReplayInfo::createInfo(PlayerTypes ePlayer)
 				pMsg->setText(game.getReplayMessageText(i));
 				pMsg->setPlot(game.getReplayMessagePlotX(i), game.getReplayMessagePlotY(i));
 				m_listReplayMessages.push_back(pMsg);
-			}	
+			}
 		}
 		else
 		{
@@ -166,16 +166,16 @@ void CvReplayInfo::createInfo(PlayerTypes ePlayer)
 				pMsg->setText(game.getReplayMessageText(i));
 				pMsg->setPlot(game.getReplayMessagePlotX(i), game.getReplayMessagePlotY(i));
 				m_listReplayMessages.push_back(pMsg);
-			}	
+			}
 		}
 	}
 
 	m_iMapWidth = GC.getMapINLINE().getGridWidthINLINE();
 	m_iMapHeight = GC.getMapINLINE().getGridHeightINLINE();
-	
-	SAFE_DELETE(m_pcMinimapPixels);	
+
+	SAFE_DELETE(m_pcMinimapPixels);
 	m_pcMinimapPixels = new unsigned char[m_nMinimapSize];
-	
+
 	void *ptexture = (void*)gDLL->getInterfaceIFace()->getMinimapBaseTexture();
 	if (ptexture)
 		memcpy((void*)m_pcMinimapPixels, ptexture, m_nMinimapSize);

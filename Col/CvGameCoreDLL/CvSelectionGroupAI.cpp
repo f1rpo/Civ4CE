@@ -158,7 +158,7 @@ bool CvSelectionGroupAI::AI_update()
 	int iTempHack = 0; // XXX
 
 	bDead = false;
-	
+
 	bool bFailedAlreadyFighting = false;
 	while ((m_bGroupAttack && !bFailedAlreadyFighting) || readyToMove())
 	{
@@ -178,7 +178,7 @@ bool CvSelectionGroupAI::AI_update()
 						pHeadUnit->getX_INLINE(), pHeadUnit->getY_INLINE(), szTempString.GetCString());
 					gDLL->messageControlLog(szOut);
 				}
-				
+
 				pHeadUnit->finishMoves();
 			}
 			break;
@@ -186,7 +186,7 @@ bool CvSelectionGroupAI::AI_update()
 
 		// if we want to force the group to attack, force another attack
 		if (m_bGroupAttack)
-		{			
+		{
 			m_bGroupAttack = false;
 
 			groupAttack(m_iGroupAttackX, m_iGroupAttackY, MOVE_DIRECT_ATTACK, bFailedAlreadyFighting);
@@ -289,7 +289,7 @@ int CvSelectionGroupAI::AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy)
 	{
 		return 100;
 	}
-	
+
 	int iOdds = 0;
 	pAttacker = AI_getBestGroupAttacker(pPlot, bPotentialEnemy, iOdds);
 
@@ -320,7 +320,7 @@ CvUnit* CvSelectionGroupAI::AI_getBestGroupAttacker(const CvPlot* pPlot, bool bP
 	pUnitNode = headUnitNode();
 
 	bool bIsHuman = (pUnitNode != NULL) ? GET_PLAYER(::getUnit(pUnitNode->m_data)->getOwnerINLINE()).isHuman() : true;
-			
+
 	while (pUnitNode != NULL)
 	{
 		pLoopUnit = ::getUnit(pUnitNode->m_data);
@@ -350,7 +350,7 @@ CvUnit* CvSelectionGroupAI::AI_getBestGroupAttacker(const CvPlot* pPlot, bool bP
 					if (bForce || pLoopUnit->canMoveInto(pPlot, /*bAttack*/ true, /*bDeclareWar*/ bPotentialEnemy))
 					{
 						iOdds = pLoopUnit->AI_attackOdds(pPlot, bPotentialEnemy);
-						
+
 						iValue = iOdds;
 						FAssertMsg(iValue > 0, "iValue is expected to be greater than 0");
 
@@ -377,7 +377,7 @@ CvUnit* CvSelectionGroupAI::AI_getBestGroupAttacker(const CvPlot* pPlot, bool bP
 			}
 		}
 	}
-	
+
 	iUnitOdds = iBestOdds;
 	return pBestUnit;
 }
@@ -462,7 +462,7 @@ int CvSelectionGroupAI::AI_compareStacks(const CvPlot* pPlot, bool bPotentialEne
 		eOwner = getHeadOwner();
 	}
 	FAssert(eOwner != NO_PLAYER);
-	
+
 	int defenderSum = pPlot->AI_sumStrength(NO_PLAYER, getOwnerINLINE(), eDomainType, true, !bPotentialEnemy, bPotentialEnemy);
 	compareRatio /= std::max(1, defenderSum);
 
@@ -575,7 +575,7 @@ bool CvSelectionGroupAI::AI_isDeclareWar(const CvPlot* pPlot)
 					return true;
 				}
 				break;
-				
+
 			case UNITAI_PARADROP:
 			case UNITAI_RESERVE:
 			case UNITAI_COUNTER:
@@ -702,7 +702,7 @@ bool CvSelectionGroupAI::AI_isFull()
 		// do two passes, the first pass, we ignore units with speical cargo
 		int iSpecialCargoCount = 0;
 		int iCargoCount = 0;
-		
+
 		// first pass, count but ignore special cargo units
 		pUnitNode = headUnitNode();
 
@@ -727,7 +727,7 @@ bool CvSelectionGroupAI::AI_isFull()
 				}
 			}
 		}
-		
+
 		// if every unit in the group has special cargo, then check those, otherwise, consider ourselves full
 		if (iSpecialCargoCount >= iCargoCount)
 		{
@@ -736,7 +736,7 @@ bool CvSelectionGroupAI::AI_isFull()
 			{
 				pLoopUnit = ::getUnit(pUnitNode->m_data);
 				pUnitNode = nextUnitNode(pUnitNode);
-				
+
 				if (pLoopUnit->AI_getUnitAIType() == eUnitAI)
 				{
 					if (!(pLoopUnit->isFull()))
@@ -750,7 +750,7 @@ bool CvSelectionGroupAI::AI_isFull()
 		return true;
 	}
 
-	return false;	
+	return false;
 }
 
 
@@ -760,7 +760,7 @@ CvUnit* CvSelectionGroupAI::AI_ejectBestDefender(CvPlot* pDefendPlot)
 	CvUnit* pLoopUnit;
 
 	pEntityNode = headUnitNode();
-	
+
 	CvUnit* pBestUnit = NULL;
 	int iBestUnitValue = 0;
 
@@ -768,11 +768,11 @@ CvUnit* CvSelectionGroupAI::AI_ejectBestDefender(CvPlot* pDefendPlot)
 	{
 		pLoopUnit = ::getUnit(pEntityNode->m_data);
 		pEntityNode = nextUnitNode(pEntityNode);
-		
+
 		if (!pLoopUnit->noDefensiveBonus())
 		{
 			int iValue = pLoopUnit->currEffectiveStr(pDefendPlot, NULL) * 100;
-			
+
 			if (pDefendPlot->isCity(true, getTeam()))
 			{
 				iValue *= 100 + pLoopUnit->cityDefenseModifier();
@@ -781,9 +781,9 @@ CvUnit* CvSelectionGroupAI::AI_ejectBestDefender(CvPlot* pDefendPlot)
 
 			iValue *= 100;
 			iValue /= (100 + pLoopUnit->cityAttackModifier() + pLoopUnit->getExtraCityAttackPercent());
-			
+
 			iValue /= 2 + pLoopUnit->getLevel();
-			
+
 			if (iValue > iBestUnitValue)
 			{
 				iBestUnitValue = iValue;
@@ -791,12 +791,12 @@ CvUnit* CvSelectionGroupAI::AI_ejectBestDefender(CvPlot* pDefendPlot)
 			}
 		}
 	}
-	
+
 	if (NULL != pBestUnit && getNumUnits() > 1)
 	{
 		pBestUnit->joinGroup(NULL);
 	}
-	
+
 	return pBestUnit;
 }
 

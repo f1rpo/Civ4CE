@@ -14,8 +14,8 @@
 #include "CvGlobals.h"	// for gDLL
 
 #ifndef FINAL_RELEASE
-#ifndef FP_PROFILE_ENABLE 
-	#define FP_PROFILE_ENABLE 
+#ifndef FP_PROFILE_ENABLE
+	#define FP_PROFILE_ENABLE
 #endif
 #endif
 
@@ -57,7 +57,7 @@ public:
 		{
 			gDLL->EndSample(m_pSample);
 			bValid = false;
-		}	
+		}
 	};
 
 private:
@@ -68,12 +68,12 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 
 // Main Interface for Profile
-#ifdef FP_PROFILE_ENABLE				// Turn Profiling On or Off .. 
+#ifdef FP_PROFILE_ENABLE				// Turn Profiling On or Off ..
 #define PROFILE(name)\
 	static ProfileSample sample(name);\
-	CProfileScope ProfileScope(&sample);		
+	CProfileScope ProfileScope(&sample);
 
-//BEGIN & END macros:		Only needed if you don't want to use the scope macro above. 
+//BEGIN & END macros:		Only needed if you don't want to use the scope macro above.
 // Macros must be in the same scope
 #define PROFILE_BEGIN(name)\
 	static ProfileSample sample__(name);\
@@ -83,7 +83,7 @@ private:
 
 #define PROFILE_FUNC()\
 	static ProfileSample sample(__FUNCTION__);\
-	CProfileScope ProfileScope(&sample);		
+	CProfileScope ProfileScope(&sample);
 
 #else
 #define PROFILE(name)				// Remove profiling code

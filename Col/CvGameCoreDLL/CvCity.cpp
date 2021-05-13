@@ -1359,7 +1359,7 @@ int CvCity::countNumImprovedPlots(ImprovementTypes eImprovement, bool bPotential
 			{
 				if (eImprovement != NO_IMPROVEMENT)
 				{
-					if (pLoopPlot->getImprovementType() == eImprovement || 
+					if (pLoopPlot->getImprovementType() == eImprovement ||
 						(bPotential && pLoopPlot->canHaveImprovement(eImprovement, getTeam())))
 					{
 						++iCount;
@@ -1709,7 +1709,7 @@ bool CvCity::canTrain(UnitTypes eUnit, bool bContinue, bool bTestVisible, bool b
 		argsList.add(bIgnoreUpgrades);
 		long lResult=0;
 		gDLL->getPythonIFace()->callFunction(PYGameModule, "canTrain", argsList.makeFunctionArgs(), &lResult);
-		delete pyCity;	// python fxn must not hold on to this pointer 
+		delete pyCity;	// python fxn must not hold on to this pointer
 		if (lResult == 1)
 		{
 			return true;
@@ -1746,7 +1746,7 @@ bool CvCity::canTrain(UnitTypes eUnit, bool bContinue, bool bTestVisible, bool b
 		argsList2.add(bIgnoreUpgrades);
 		long lResult=0;
 		gDLL->getPythonIFace()->callFunction(PYGameModule, "cannotTrain", argsList2.makeFunctionArgs(), &lResult);
-		delete pyCity;	// python fxn must not hold on to this pointer 
+		delete pyCity;	// python fxn must not hold on to this pointer
 		if (lResult == 1)
 		{
 			return false;
@@ -1802,7 +1802,7 @@ bool CvCity::canConstruct(BuildingTypes eBuilding, bool bContinue, bool bTestVis
 		argsList.add(bIgnoreCost);
 		long lResult=0;
 		gDLL->getPythonIFace()->callFunction(PYGameModule, "canConstruct", argsList.makeFunctionArgs(), &lResult);
-		delete pyCity;	// python fxn must not hold on to this pointer 
+		delete pyCity;	// python fxn must not hold on to this pointer
 		if (lResult == 1)
 		{
 			return true;
@@ -2031,7 +2031,7 @@ bool CvCity::canConstruct(BuildingTypes eBuilding, bool bContinue, bool bTestVis
 		argsList2.add(bIgnoreCost);
 		long lResult=0;
 		gDLL->getPythonIFace()->callFunction(PYGameModule, "cannotConstruct", argsList2.makeFunctionArgs(), &lResult);
-		delete pyCity;	// python fxn must not hold on to this pointer 
+		delete pyCity;	// python fxn must not hold on to this pointer
 		if (lResult == 1)
 		{
 			return false;
@@ -2052,7 +2052,7 @@ bool CvCity::canCreate(ProjectTypes eProject, bool bContinue, bool bTestVisible)
 	argsList.add(bTestVisible);
 	long lResult=0;
 	gDLL->getPythonIFace()->callFunction(PYGameModule, "canCreate", argsList.makeFunctionArgs(), &lResult);
-	delete pyCity;	// python fxn must not hold on to this pointer 
+	delete pyCity;	// python fxn must not hold on to this pointer
 	if (lResult == 1)
 	{
 		return true;
@@ -2071,7 +2071,7 @@ bool CvCity::canCreate(ProjectTypes eProject, bool bContinue, bool bTestVisible)
 	argsList2.add(bTestVisible);
 	lResult=0;
 	gDLL->getPythonIFace()->callFunction(PYGameModule, "cannotCreate", argsList2.makeFunctionArgs(), &lResult);
-	delete pyCity;	// python fxn must not hold on to this pointer 
+	delete pyCity;	// python fxn must not hold on to this pointer
 	if (lResult == 1)
 	{
 		return false;
@@ -2090,7 +2090,7 @@ bool CvCity::canMaintain(ProcessTypes eProcess, bool bContinue) const
 	argsList.add(bContinue);
 	long lResult=0;
 	gDLL->getPythonIFace()->callFunction(PYGameModule, "canMaintain", argsList.makeFunctionArgs(), &lResult);
-	delete pyCity;	// python fxn must not hold on to this pointer 
+	delete pyCity;	// python fxn must not hold on to this pointer
 	if (lResult == 1)
 	{
 		return true;
@@ -2108,7 +2108,7 @@ bool CvCity::canMaintain(ProcessTypes eProcess, bool bContinue) const
 	argsList2.add(bContinue);
 	lResult=0;
 	gDLL->getPythonIFace()->callFunction(PYGameModule, "cannotMaintain", argsList2.makeFunctionArgs(), &lResult);
-	delete pyCity;	// python fxn must not hold on to this pointer 
+	delete pyCity;	// python fxn must not hold on to this pointer
 	if (lResult == 1)
 	{
 		return false;
@@ -3266,7 +3266,7 @@ UnitTypes CvCity::getConscriptUnit() const
 	int iI;
 
 	long lConscriptUnit;
-	
+
 	iBestValue = 0;
 	eBestUnit = NO_UNIT;
 
@@ -3294,7 +3294,7 @@ UnitTypes CvCity::getConscriptUnit() const
 	argsList.add(getOwnerINLINE());	// pass in player
 	lConscriptUnit = -1;
 	gDLL->getPythonIFace()->callFunction(PYGameModule, "getConscriptUnitType", argsList.makeFunctionArgs(),&lConscriptUnit);
-	
+
 	if (lConscriptUnit != -1)
 	{
 		eBestUnit = ((UnitTypes)lConscriptUnit);
@@ -3399,14 +3399,14 @@ CvUnit* CvCity::initConscriptedUnit()
 		return NULL;
 	}
 
-	if (GET_PLAYER(getOwnerINLINE()).AI_unitValue(eConscriptUnit, UNITAI_ATTACK, area()) > 0) 
-	{ 
-		eCityAI = UNITAI_ATTACK; 
-	} 
-	else if (GET_PLAYER(getOwnerINLINE()).AI_unitValue(eConscriptUnit, UNITAI_CITY_DEFENSE, area()) > 0) 
-	{ 
-		eCityAI = UNITAI_CITY_DEFENSE; 
-	} 
+	if (GET_PLAYER(getOwnerINLINE()).AI_unitValue(eConscriptUnit, UNITAI_ATTACK, area()) > 0)
+	{
+		eCityAI = UNITAI_ATTACK;
+	}
+	else if (GET_PLAYER(getOwnerINLINE()).AI_unitValue(eConscriptUnit, UNITAI_CITY_DEFENSE, area()) > 0)
+	{
+		eCityAI = UNITAI_CITY_DEFENSE;
+	}
 	else if (GET_PLAYER(getOwnerINLINE()).AI_unitValue(eConscriptUnit, UNITAI_CITY_COUNTER, area()) > 0)
 	{
 		eCityAI = UNITAI_CITY_COUNTER;
@@ -4609,7 +4609,7 @@ int CvCity::getHurryCost(bool bExtra, int iProductionLeft, int iHurryModifier, i
 		if (iExtraProduction > 0)
 		{
 			int iAdjustedProd = iProduction * iProduction;
-			
+
 			// round up
 			iProduction = (iAdjustedProd + (iExtraProduction - 1)) / iExtraProduction;
 		}
@@ -5122,7 +5122,7 @@ int CvCity::getWorkingPopulation() const
 }
 
 
-void CvCity::changeWorkingPopulation(int iChange)														
+void CvCity::changeWorkingPopulation(int iChange)
 {
 	m_iWorkingPopulation = (m_iWorkingPopulation + iChange);
 	FAssert(getWorkingPopulation() >= 0);
@@ -5135,7 +5135,7 @@ int CvCity::getSpecialistPopulation() const
 }
 
 
-void CvCity::changeSpecialistPopulation(int iChange)													
+void CvCity::changeSpecialistPopulation(int iChange)
 {
 	if (iChange != 0)
 	{
@@ -5155,7 +5155,7 @@ int CvCity::getNumGreatPeople() const
 }
 
 
-void CvCity::changeNumGreatPeople(int iChange)															
+void CvCity::changeNumGreatPeople(int iChange)
 {
 	if (iChange != 0)
 	{
@@ -5293,7 +5293,7 @@ void CvCity::changeNumBuildings(int iChange)
 }
 
 
-int CvCity::getGovernmentCenterCount() const																
+int CvCity::getGovernmentCenterCount() const
 {
 	return m_iGovernmentCenterCount;
 }
@@ -5474,7 +5474,7 @@ int CvCity::calculateColonyMaintenanceTimes100() const
 	iNumCitiesPercent /= 100;
 
 	int iNumCities = (area()->getCitiesPerPlayer(getOwnerINLINE()) - 1) * iNumCitiesPercent;
-	
+
 	int iMaintenance = (iNumCities * iNumCities) / 100;
 
 	iMaintenance = std::min(iMaintenance, (GC.getHandicapInfo(getHandicapType()).getMaxColonyMaintenance() * calculateDistanceMaintenanceTimes100()) / 100);
@@ -6472,13 +6472,13 @@ void CvCity::changeNoUnhappinessCount(int iChange)
 }
 
 
-int CvCity::getNoUnhealthyPopulationCount()	const																	
+int CvCity::getNoUnhealthyPopulationCount()	const
 {
 	return m_iNoUnhealthyPopulationCount;
 }
 
 
-bool CvCity::isNoUnhealthyPopulation() const																		
+bool CvCity::isNoUnhealthyPopulation() const
 {
 	if (GET_PLAYER(getOwnerINLINE()).isNoUnhealthyPopulation())
 	{
@@ -6501,13 +6501,13 @@ void CvCity::changeNoUnhealthyPopulationCount(int iChange)
 }
 
 
-int CvCity::getBuildingOnlyHealthyCount() const																	
+int CvCity::getBuildingOnlyHealthyCount() const
 {
 	return m_iBuildingOnlyHealthyCount;
 }
 
 
-bool CvCity::isBuildingOnlyHealthy() const																		
+bool CvCity::isBuildingOnlyHealthy() const
 {
 	if (GET_PLAYER(getOwnerINLINE()).isBuildingOnlyHealthy())
 	{
@@ -6593,14 +6593,14 @@ int CvCity::getOverflowProduction() const
 }
 
 
-void CvCity::setOverflowProduction(int iNewValue)														
+void CvCity::setOverflowProduction(int iNewValue)
 {
 	m_iOverflowProduction = iNewValue;
 	FAssert(getOverflowProduction() >= 0);
 }
 
 
-void CvCity::changeOverflowProduction(int iChange, int iProductionModifier)														
+void CvCity::changeOverflowProduction(int iChange, int iProductionModifier)
 {
 	int iOverflow = (100 * iChange) / std::max(1, getBaseYieldRateModifier(YIELD_PRODUCTION, iProductionModifier));
 
@@ -6614,38 +6614,38 @@ int CvCity::getFeatureProduction() const
 }
 
 
-void CvCity::setFeatureProduction(int iNewValue)														
+void CvCity::setFeatureProduction(int iNewValue)
 {
 	m_iFeatureProduction = iNewValue;
 	FAssert(getFeatureProduction() >= 0);
 }
 
 
-void CvCity::changeFeatureProduction(int iChange)													
+void CvCity::changeFeatureProduction(int iChange)
 {
 	setFeatureProduction(getFeatureProduction() + iChange);
 }
 
 
-int CvCity::getMilitaryProductionModifier()	const													
+int CvCity::getMilitaryProductionModifier()	const
 {
 	return m_iMilitaryProductionModifier;
 }
 
 
-void CvCity::changeMilitaryProductionModifier(int iChange)												
+void CvCity::changeMilitaryProductionModifier(int iChange)
 {
 	m_iMilitaryProductionModifier = (m_iMilitaryProductionModifier + iChange);
 }
 
 
-int CvCity::getSpaceProductionModifier() const															
+int CvCity::getSpaceProductionModifier() const
 {
 	return m_iSpaceProductionModifier;
 }
 
 
-void CvCity::changeSpaceProductionModifier(int iChange)												
+void CvCity::changeSpaceProductionModifier(int iChange)
 {
 	m_iSpaceProductionModifier = (m_iSpaceProductionModifier + iChange);
 }
@@ -6904,7 +6904,7 @@ void CvCity::changePowerCount(int iChange, bool bDirty)
 }
 
 
-int CvCity::getDefenseDamage() const																
+int CvCity::getDefenseDamage() const
 {
 	return m_iDefenseDamage;
 }
@@ -7031,7 +7031,7 @@ void CvCity::setOccupationTimer(int iNewValue)
 }
 
 
-void CvCity::changeOccupationTimer(int iChange)												
+void CvCity::changeOccupationTimer(int iChange)
 {
 	setOccupationTimer(getOccupationTimer() + iChange);
 }
@@ -7050,7 +7050,7 @@ void CvCity::setCultureUpdateTimer(int iNewValue)
 }
 
 
-void CvCity::changeCultureUpdateTimer(int iChange)												
+void CvCity::changeCultureUpdateTimer(int iChange)
 {
 	setCultureUpdateTimer(getCultureUpdateTimer() + iChange);
 }
@@ -7179,7 +7179,7 @@ void CvCity::setWeLoveTheKingDay(bool bNewValue)
 }
 
 
-bool CvCity::isCitizensAutomated() const																
+bool CvCity::isCitizensAutomated() const
 {
 	return m_bCitizensAutomated;
 }
@@ -7235,10 +7235,10 @@ void CvCity::setProductionAutomated(bool bNewValue, bool bClear)
 				clearOrderQueue();
 			}
 		}
-		
+
 		if (!isProduction())
 		{
-		    AI_chooseProduction();		    
+		    AI_chooseProduction();
 		}
 	}
 }
@@ -7439,13 +7439,13 @@ void CvCity::setCultureLevel(CultureLevelTypes eNewValue, bool bUpdatePlotGroups
 
 				// ONEVENT - Culture growth
 				gDLL->getEventReporterIFace()->cultureExpansion(this, getOwnerINLINE());
-				
+
 				//Stop Build Culture
 				if (isProductionProcess())
 				{
 					if (GC.getProcessInfo(getProductionProcess()).getProductionToCommerceModifier(COMMERCE_CULTURE) > 0)
 					{
-						popOrder(0, false, true);						
+						popOrder(0, false, true);
 					}
 				}
 			}
@@ -7525,7 +7525,7 @@ void CvCity::changeRiverPlotYield(YieldTypes eIndex, int iChange)
 }
 
 
-int CvCity::getBaseYieldRate(YieldTypes eIndex)	const													
+int CvCity::getBaseYieldRate(YieldTypes eIndex)	const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < NUM_YIELD_TYPES, "eIndex expected to be < NUM_YIELD_TYPES");
@@ -7602,13 +7602,13 @@ void CvCity::setBaseYieldRate(YieldTypes eIndex, int iNewValue)
 }
 
 
-void CvCity::changeBaseYieldRate(YieldTypes eIndex, int iChange)										
+void CvCity::changeBaseYieldRate(YieldTypes eIndex, int iChange)
 {
 	setBaseYieldRate(eIndex, (getBaseYieldRate(eIndex) + iChange));
 }
 
 
-int CvCity::getYieldRateModifier(YieldTypes eIndex)	const														
+int CvCity::getYieldRateModifier(YieldTypes eIndex)	const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < NUM_YIELD_TYPES, "eIndex expected to be < NUM_YIELD_TYPES");
@@ -7643,7 +7643,7 @@ void CvCity::changeYieldRateModifier(YieldTypes eIndex, int iChange)
 }
 
 
-int CvCity::getPowerYieldRateModifier(YieldTypes eIndex) const												
+int CvCity::getPowerYieldRateModifier(YieldTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < NUM_YIELD_TYPES, "eIndex expected to be < NUM_YIELD_TYPES");
@@ -7678,7 +7678,7 @@ void CvCity::changePowerYieldRateModifier(YieldTypes eIndex, int iChange)
 }
 
 
-int CvCity::getBonusYieldRateModifier(YieldTypes eIndex) const												
+int CvCity::getBonusYieldRateModifier(YieldTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < NUM_YIELD_TYPES, "eIndex expected to be < NUM_YIELD_TYPES");
@@ -7994,7 +7994,7 @@ void CvCity::updateCommerce()
 }
 
 
-int CvCity::getProductionToCommerceModifier(CommerceTypes eIndex) const										 
+int CvCity::getProductionToCommerceModifier(CommerceTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < NUM_COMMERCE_TYPES, "eIndex expected to be < NUM_COMMERCE_TYPES");
@@ -8016,7 +8016,7 @@ void CvCity::changeProductionToCommerceModifier(CommerceTypes eIndex, int iChang
 }
 
 
-int CvCity::getBuildingCommerce(CommerceTypes eIndex) const												 
+int CvCity::getBuildingCommerce(CommerceTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < NUM_COMMERCE_TYPES, "eIndex expected to be < NUM_COMMERCE_TYPES");
@@ -8037,7 +8037,7 @@ int CvCity::getBuildingCommerceByBuilding(CommerceTypes eIndex, BuildingTypes eB
 
 	if (getNumBuilding(eBuilding) > 0)
 	{
-		CvBuildingInfo& kBuilding = GC.getBuildingInfo(eBuilding);	
+		CvBuildingInfo& kBuilding = GC.getBuildingInfo(eBuilding);
 		if (!(kBuilding.isCommerceChangeOriginalOwner(eIndex)) || (getBuildingOriginalOwner(eBuilding) == getOwnerINLINE()))
 		{
 			iCommerce += kBuilding.getObsoleteSafeCommerceChange(eIndex) * getNumBuilding(eBuilding);
@@ -8105,7 +8105,7 @@ void CvCity::updateBuildingCommerce()
 }
 
 
-int CvCity::getSpecialistCommerce(CommerceTypes eIndex)	const												 
+int CvCity::getSpecialistCommerce(CommerceTypes eIndex)	const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < NUM_COMMERCE_TYPES, "eIndex expected to be < NUM_COMMERCE_TYPES");
@@ -8128,7 +8128,7 @@ void CvCity::changeSpecialistCommerce(CommerceTypes eIndex, int iChange)
 }
 
 
-int CvCity::getReligionCommerce(CommerceTypes eIndex) const												 
+int CvCity::getReligionCommerce(CommerceTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < NUM_COMMERCE_TYPES, "eIndex expected to be < NUM_COMMERCE_TYPES");
@@ -8223,7 +8223,7 @@ void CvCity::setCorporationYield(YieldTypes eIndex, int iNewValue)
 	}
 }
 
-int CvCity::getCorporationCommerce(CommerceTypes eIndex) const												 
+int CvCity::getCorporationCommerce(CommerceTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < NUM_COMMERCE_TYPES, "eIndex expected to be < NUM_COMMERCE_TYPES");
@@ -8346,7 +8346,7 @@ void CvCity::updateCorporationBonus()
 	for (int iI = 0; iI < GC.getNumBonusInfos(); ++iI)
 	{
 		abHadBonuses.push_back(hasBonus((BonusTypes)iI));
-		m_paiNumCorpProducedBonuses[iI] = 0; 
+		m_paiNumCorpProducedBonuses[iI] = 0;
 		aiLastCorpProducedBonuses.push_back(getNumBonuses((BonusTypes)iI));
 		aiExtraCorpProducedBonuses.push_back(0);
 	}
@@ -8416,11 +8416,11 @@ void CvCity::updateCorporationBonus()
 				processBonus((BonusTypes)iI, -1);
 			}
 		}
-	}			
+	}
 }
 
 
-int CvCity::getCommerceRateModifier(CommerceTypes eIndex) const											 
+int CvCity::getCommerceRateModifier(CommerceTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < NUM_COMMERCE_TYPES, "eIndex expected to be < NUM_COMMERCE_TYPES");
@@ -8444,7 +8444,7 @@ void CvCity::changeCommerceRateModifier(CommerceTypes eIndex, int iChange)
 }
 
 
-int CvCity::getCommerceHappinessPer(CommerceTypes eIndex) const									 
+int CvCity::getCommerceHappinessPer(CommerceTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < NUM_COMMERCE_TYPES, "eIndex expected to be < NUM_COMMERCE_TYPES");
@@ -8489,7 +8489,7 @@ void CvCity::changeCommerceHappinessPer(CommerceTypes eIndex, int iChange)
 }
 
 
-int CvCity::getDomainFreeExperience(DomainTypes eIndex) const													 
+int CvCity::getDomainFreeExperience(DomainTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < NUM_DOMAIN_TYPES, "eIndex expected to be < NUM_DOMAIN_TYPES");
@@ -8506,7 +8506,7 @@ void CvCity::changeDomainFreeExperience(DomainTypes eIndex, int iChange)
 }
 
 
-int CvCity::getDomainProductionModifier(DomainTypes eIndex) const										 
+int CvCity::getDomainProductionModifier(DomainTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < NUM_DOMAIN_TYPES, "eIndex expected to be < NUM_DOMAIN_TYPES");
@@ -9082,7 +9082,7 @@ bool CvCity::isActiveCorporation(CorporationTypes eCorporation) const
 	return false;
 }
 
-int CvCity::getBuildingProduction(BuildingTypes eIndex)	const															 
+int CvCity::getBuildingProduction(BuildingTypes eIndex)	const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < GC.getNumBuildingInfos(), "eIndex expected to be < GC.getNumBuildingInfos()");
@@ -9113,13 +9113,13 @@ void CvCity::setBuildingProduction(BuildingTypes eIndex, int iNewValue)
 }
 
 
-void CvCity::changeBuildingProduction(BuildingTypes eIndex, int iChange)							 
+void CvCity::changeBuildingProduction(BuildingTypes eIndex, int iChange)
 {
 	setBuildingProduction(eIndex, (getBuildingProduction(eIndex) + iChange));
 }
 
 
-int CvCity::getBuildingProductionTime(BuildingTypes eIndex)	const															 
+int CvCity::getBuildingProductionTime(BuildingTypes eIndex)	const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < GC.getNumBuildingInfos(), "eIndex expected to be < GC.getNumBuildingInfos()");
@@ -9136,13 +9136,13 @@ void CvCity::setBuildingProductionTime(BuildingTypes eIndex, int iNewValue)
 }
 
 
-void CvCity::changeBuildingProductionTime(BuildingTypes eIndex, int iChange)							 
+void CvCity::changeBuildingProductionTime(BuildingTypes eIndex, int iChange)
 {
 	setBuildingProductionTime(eIndex, (getBuildingProductionTime(eIndex) + iChange));
 }
 
 
-int CvCity::getProjectProduction(ProjectTypes eIndex) const																 
+int CvCity::getProjectProduction(ProjectTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < GC.getNumProjectInfos(), "eIndex expected to be < GC.getNumProjectInfos()");
@@ -9173,7 +9173,7 @@ void CvCity::setProjectProduction(ProjectTypes eIndex, int iNewValue)
 }
 
 
-void CvCity::changeProjectProduction(ProjectTypes eIndex, int iChange)							 
+void CvCity::changeProjectProduction(ProjectTypes eIndex, int iChange)
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < GC.getNumProjectInfos(), "eIndex expected to be < GC.getNumProjectInfos()");
@@ -9181,7 +9181,7 @@ void CvCity::changeProjectProduction(ProjectTypes eIndex, int iChange)
 }
 
 
-int CvCity::getBuildingOriginalOwner(BuildingTypes eIndex) const															 
+int CvCity::getBuildingOriginalOwner(BuildingTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < GC.getNumBuildingInfos(), "eIndex expected to be < GC.getNumBuildingInfos()");
@@ -9189,7 +9189,7 @@ int CvCity::getBuildingOriginalOwner(BuildingTypes eIndex) const
 }
 
 
-int CvCity::getBuildingOriginalTime(BuildingTypes eIndex) const															  
+int CvCity::getBuildingOriginalTime(BuildingTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < GC.getNumBuildingInfos(), "eIndex expected to be < GC.getNumBuildingInfos()");
@@ -9197,7 +9197,7 @@ int CvCity::getBuildingOriginalTime(BuildingTypes eIndex) const
 }
 
 
-int CvCity::getUnitProduction(UnitTypes eIndex)	const																			 
+int CvCity::getUnitProduction(UnitTypes eIndex)	const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < GC.getNumUnitInfos(), "eIndex expected to be < GC.getNumUnitInfos()");
@@ -9228,13 +9228,13 @@ void CvCity::setUnitProduction(UnitTypes eIndex, int iNewValue)
 }
 
 
-void CvCity::changeUnitProduction(UnitTypes eIndex, int iChange)											 
+void CvCity::changeUnitProduction(UnitTypes eIndex, int iChange)
 {
 	setUnitProduction(eIndex, (getUnitProduction(eIndex) + iChange));
 }
 
 
-int CvCity::getUnitProductionTime(UnitTypes eIndex)	const																			 
+int CvCity::getUnitProductionTime(UnitTypes eIndex)	const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < GC.getNumUnitInfos(), "eIndex expected to be < GC.getNumUnitInfos()");
@@ -9251,13 +9251,13 @@ void CvCity::setUnitProductionTime(UnitTypes eIndex, int iNewValue)
 }
 
 
-void CvCity::changeUnitProductionTime(UnitTypes eIndex, int iChange)											 
+void CvCity::changeUnitProductionTime(UnitTypes eIndex, int iChange)
 {
 	setUnitProductionTime(eIndex, (getUnitProductionTime(eIndex) + iChange));
 }
 
 
-int CvCity::getGreatPeopleUnitRate(UnitTypes eIndex) const																 
+int CvCity::getGreatPeopleUnitRate(UnitTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < GC.getNumUnitInfos(), "eIndex expected to be < GC.getNumUnitInfos()");
@@ -9265,7 +9265,7 @@ int CvCity::getGreatPeopleUnitRate(UnitTypes eIndex) const
 }
 
 
-void CvCity::setGreatPeopleUnitRate(UnitTypes eIndex, int iNewValue)										 
+void CvCity::setGreatPeopleUnitRate(UnitTypes eIndex, int iNewValue)
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < GC.getNumUnitInfos(), "eIndex expected to be < GC.getNumUnitInfos()");
@@ -9274,13 +9274,13 @@ void CvCity::setGreatPeopleUnitRate(UnitTypes eIndex, int iNewValue)
 }
 
 
-void CvCity::changeGreatPeopleUnitRate(UnitTypes eIndex, int iChange)									 
+void CvCity::changeGreatPeopleUnitRate(UnitTypes eIndex, int iChange)
 {
 	setGreatPeopleUnitRate(eIndex, (getGreatPeopleUnitRate(eIndex) + iChange));
 }
 
 
-int CvCity::getGreatPeopleUnitProgress(UnitTypes eIndex) const														 
+int CvCity::getGreatPeopleUnitProgress(UnitTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < GC.getNumUnitInfos(), "eIndex expected to be < GC.getNumUnitInfos()");
@@ -9288,7 +9288,7 @@ int CvCity::getGreatPeopleUnitProgress(UnitTypes eIndex) const
 }
 
 
-void CvCity::setGreatPeopleUnitProgress(UnitTypes eIndex, int iNewValue)							 
+void CvCity::setGreatPeopleUnitProgress(UnitTypes eIndex, int iNewValue)
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < GC.getNumUnitInfos(), "eIndex expected to be < GC.getNumUnitInfos()");
@@ -9297,7 +9297,7 @@ void CvCity::setGreatPeopleUnitProgress(UnitTypes eIndex, int iNewValue)
 }
 
 
-void CvCity::changeGreatPeopleUnitProgress(UnitTypes eIndex, int iChange)							 
+void CvCity::changeGreatPeopleUnitProgress(UnitTypes eIndex, int iChange)
 {
 	setGreatPeopleUnitProgress(eIndex, (getGreatPeopleUnitProgress(eIndex) + iChange));
 }
@@ -9768,7 +9768,7 @@ void CvCity::setWorkingPlot(int iIndex, bool bNewValue)
 			if ((getTeam() == GC.getGameINLINE().getActiveTeam()) || GC.getGameINLINE().isDebugMode())
 			{
 				pPlot->updateSymbolDisplay();
-			}			
+			}
 		}
 
 		if (isCitySelected())
@@ -9838,7 +9838,7 @@ void CvCity::alterWorkingPlot(int iIndex)
 }
 
 
-int CvCity::getNumRealBuilding(BuildingTypes eIndex) const									 
+int CvCity::getNumRealBuilding(BuildingTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < GC.getNumBuildingInfos(), "eIndex expected to be < GC.getNumBuildingInfos()");
@@ -10017,7 +10017,7 @@ void CvCity::setNumRealBuildingTimed(BuildingTypes eIndex, int iNewValue, bool b
 				if (GC.getBuildingInfo(eIndex).isAllowsNukes())
 				{
 					GC.getGameINLINE().makeNukesValid(true);
-				}	
+				}
 
 				GC.getGameINLINE().incrementBuildingClassCreatedCount((BuildingClassTypes)(GC.getBuildingInfo(eIndex).getBuildingClassType()));
 			}
@@ -10051,7 +10051,7 @@ void CvCity::setNumRealBuildingTimed(BuildingTypes eIndex, int iNewValue, bool b
 }
 
 
-int CvCity::getNumFreeBuilding(BuildingTypes eIndex) const													 
+int CvCity::getNumFreeBuilding(BuildingTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < GC.getNumBuildingInfos(), "eIndex expected to be < GC.getNumBuildingInfos()");
@@ -10080,7 +10080,7 @@ void CvCity::setNumFreeBuilding(BuildingTypes eIndex, int iNewValue)
 }
 
 
-bool CvCity::isHasReligion(ReligionTypes eIndex) const													 
+bool CvCity::isHasReligion(ReligionTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < GC.getNumReligionInfos(), "eIndex expected to be < GC.getNumReligionInfos()");
@@ -10158,7 +10158,7 @@ void CvCity::setHasReligion(ReligionTypes eIndex, bool bNewValue, bool bAnnounce
 				}
 			}
 		}
-		
+
 		if (bNewValue)
 		{
 			// Python Event
@@ -10169,7 +10169,7 @@ void CvCity::setHasReligion(ReligionTypes eIndex, bool bNewValue, bool bAnnounce
 			// Python Event
 			gDLL->getEventReporterIFace()->religionRemove(eIndex, getOwnerINLINE(), this);
 		}
-		
+
 	}
 }
 
@@ -10240,7 +10240,7 @@ void CvCity::processVoteSourceBonus(VoteSourceTypes eVoteSource, bool bActive)
 }
 
 
-bool CvCity::isHasCorporation(CorporationTypes eIndex) const													 
+bool CvCity::isHasCorporation(CorporationTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < GC.getNumCorporationInfos(), "eIndex expected to be < GC.getNumCorporationInfos()");
@@ -11070,7 +11070,7 @@ void CvCity::doGrowth()
 	argsList.add(gDLL->getPythonIFace()->makePythonObject(pyCity));	// pass in city class
 	long lResult=0;
 	gDLL->getPythonIFace()->callFunction(PYGameModule, "doGrowth", argsList.makeFunctionArgs(), &lResult);
-	delete pyCity;	// python fxn must not hold on to this pointer 
+	delete pyCity;	// python fxn must not hold on to this pointer
 	if (lResult == 1)
 	{
 		return;
@@ -11117,7 +11117,7 @@ void CvCity::doCulture()
 	argsList.add(gDLL->getPythonIFace()->makePythonObject(pyCity));	// pass in city class
 	long lResult=0;
 	gDLL->getPythonIFace()->callFunction(PYGameModule, "doCulture", argsList.makeFunctionArgs(), &lResult);
-	delete pyCity;	// python fxn must not hold on to this pointer 
+	delete pyCity;	// python fxn must not hold on to this pointer
 	if (lResult == 1)
 	{
 		return;
@@ -11142,7 +11142,7 @@ void CvCity::doPlotCulture(bool bUpdate, PlayerTypes ePlayer, int iCultureRate)
 	argsList.add(iCultureRate);
 	long lResult=0;
 	gDLL->getPythonIFace()->callFunction(PYGameModule, "doPlotCulture", argsList.makeFunctionArgs(), &lResult);
-	delete pyCity;	// python fxn must not hold on to this pointer 
+	delete pyCity;	// python fxn must not hold on to this pointer
 	if (lResult == 1)
 	{
 		return;
@@ -11341,7 +11341,7 @@ void CvCity::doProduction(bool bAllowNoProduction)
 	argsList.add(gDLL->getPythonIFace()->makePythonObject(pyCity));	// pass in city class
 	long lResult=0;
 	gDLL->getPythonIFace()->callFunction(PYGameModule, "doProduction", argsList.makeFunctionArgs(), &lResult);
-	delete pyCity;	// python fxn must not hold on to this pointer 
+	delete pyCity;	// python fxn must not hold on to this pointer
 	if (lResult == 1)
 	{
 		return;
@@ -11453,7 +11453,7 @@ void CvCity::doReligion()
 	argsList.add(gDLL->getPythonIFace()->makePythonObject(pyCity));	// pass in city class
 	long lResult=0;
 	gDLL->getPythonIFace()->callFunction(PYGameModule, "doReligion", argsList.makeFunctionArgs(), &lResult);
-	delete pyCity;	// python fxn must not hold on to this pointer 
+	delete pyCity;	// python fxn must not hold on to this pointer
 	if (lResult == 1)
 	{
 		return;
@@ -11518,7 +11518,7 @@ void CvCity::doGreatPeople()
 	argsList.add(gDLL->getPythonIFace()->makePythonObject(pyCity));	// pass in city class
 	long lResult=0;
 	gDLL->getPythonIFace()->callFunction(PYGameModule, "doGreatPeople", argsList.makeFunctionArgs(), &lResult);
-	delete pyCity;	// python fxn must not hold on to this pointer 
+	delete pyCity;	// python fxn must not hold on to this pointer
 	if (lResult == 1)
 	{
 		return;
@@ -11587,7 +11587,7 @@ void CvCity::doMeltdown()
 	argsList.add(gDLL->getPythonIFace()->makePythonObject(pyCity));	// pass in city class
 	long lResult=0;
 	gDLL->getPythonIFace()->callFunction(PYGameModule, "doMeltdown", argsList.makeFunctionArgs(), &lResult);
-	delete pyCity;	// python fxn must not hold on to this pointer 
+	delete pyCity;	// python fxn must not hold on to this pointer
 	if (lResult == 1)
 	{
 		return;
@@ -12126,12 +12126,12 @@ void CvCity::getVisibleBuildings(std::list<BuildingTypes>& kChosenVisible, int& 
 	// how big is this city, in terms of buildings?
 	// general rule: no more than fPercentUnique percent of a city can be uniques
 	int iTotalVisibleBuildings;
-	if(stricmp(GC.getDefineSTRING("GAME_CITY_SIZE_METHOD"), "METHOD_EXPONENTIAL") == 0) 
+	if(stricmp(GC.getDefineSTRING("GAME_CITY_SIZE_METHOD"), "METHOD_EXPONENTIAL") == 0)
 	{
 		int iCityScaleMod =  ((int)(pow((float)getPopulation(), GC.getDefineFLOAT("GAME_CITY_SIZE_EXP_MODIFIER")))) * 2;
 		iTotalVisibleBuildings = (10 + iCityScaleMod);
-	} 
-	else 
+	}
+	else
 	{
 		float fLo = GC.getDefineFLOAT("GAME_CITY_SIZE_LINMAP_AT_0");
 		float fHi = GC.getDefineFLOAT("GAME_CITY_SIZE_LINMAP_AT_50");
@@ -12148,12 +12148,12 @@ void CvCity::getVisibleBuildings(std::list<BuildingTypes>& kChosenVisible, int& 
 	{
 		iNumUniques = iMaxNumUniques;
 	}
-	else 
+	else
 	{
 		iNumUniques = kVisible.size();
 	}
 	iNumGenerics = iTotalVisibleBuildings - iNumUniques + getCitySizeBoost();
-	
+
 	// return
 	iChosenNumGenerics = iNumGenerics;
 	for(int i = 0; i < iNumUniques; i++)
@@ -12168,7 +12168,7 @@ static int natGetDeterministicRandom(int iMin, int iMax, int iSeedX, int iSeedY)
 	return (rand() % (iMax - iMin)) + iMin;
 }
 
-void CvCity::getVisibleEffects(ZoomLevelTypes eCurZoom, std::vector<const TCHAR*>& kEffectNames) 
+void CvCity::getVisibleEffects(ZoomLevelTypes eCurZoom, std::vector<const TCHAR*>& kEffectNames)
 {
 	if (isOccupation() && isVisible(getTeam(), false) == true)
 	{
@@ -12182,16 +12182,16 @@ void CvCity::getVisibleEffects(ZoomLevelTypes eCurZoom, std::vector<const TCHAR*
 			kEffectNames.push_back("EFFECT_CITY_BIG_BURNING_SMOKE");
 		}
 		return;
-	} 
+	}
 
-	if ((getTeam() == GC.getGameINLINE().getActiveTeam()) || GC.getGameINLINE().isDebugMode()) 
+	if ((getTeam() == GC.getGameINLINE().getActiveTeam()) || GC.getGameINLINE().isDebugMode())
 	{
-		
+
 		if (angryPopulation() > 0)
 		{
 			kEffectNames.push_back("EFFECT_CITY_BURNING_SMOKE");
 		}
-		
+
 		if (healthRate() < 0)
 		{
 			kEffectNames.push_back("EFFECT_CITY_DISEASED");
@@ -12244,7 +12244,7 @@ void CvCity::getCityBillboardSizeIconColors(NiColorA& kDotColor, NiColorA& kText
 			if ((foodDifference() == -1) && (getFood() >= ((75 * growthThreshold()) / 100)))
 			{
 				kDotColor = kStagnant;
-				kTextColor = kBlack;	
+				kTextColor = kBlack;
 			}
 			else
 			{
@@ -12851,7 +12851,7 @@ void CvCity::setEventOccured(EventTypes eEvent, bool bOccured)
 bool CvCity::hasShrine(ReligionTypes eReligion)
 {
 	bool bHasShrine = false;
-	
+
 	// note, for normal XML, this count will be one, there is only one shrine of each religion
 	int	shrineBuildingCount = GC.getGameINLINE().getShrineBuildingCount(eReligion);
 	for (int iI = 0; iI < shrineBuildingCount; iI++)
@@ -13300,8 +13300,8 @@ PlayerTypes CvCity::getLiberationPlayer(bool bConquest) const
 						}
 					}
 
-					if (GET_PLAYER((PlayerTypes)iPlayer).getTeam() == getTeam() 
-						|| GET_TEAM(GET_PLAYER((PlayerTypes)iPlayer).getTeam()).isVassal(getTeam()) 
+					if (GET_PLAYER((PlayerTypes)iPlayer).getTeam() == getTeam()
+						|| GET_TEAM(GET_PLAYER((PlayerTypes)iPlayer).getTeam()).isVassal(getTeam())
 						|| GET_TEAM(getTeam()).isVassal(GET_PLAYER((PlayerTypes)iPlayer).getTeam()))
 					{
 						iCultureTimes100 *= 2;

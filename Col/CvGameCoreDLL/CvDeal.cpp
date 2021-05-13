@@ -398,7 +398,7 @@ bool CvDeal::isUncancelableVassalDeal(PlayerTypes eByPlayer, CvWString* pszReaso
 		{
 			CvTeam& kVassal = GET_TEAM(GET_PLAYER(getFirstPlayer()).getTeam());
 			TeamTypes eMaster = GET_PLAYER(getSecondPlayer()).getTeam();
-			
+
 			if (!kVassal.canVassalRevolt(eMaster))
 			{
 				if (pszReason)
@@ -432,7 +432,7 @@ bool CvDeal::isUncancelableVassalDeal(PlayerTypes eByPlayer, CvWString* pszReaso
 		{
 			CvTeam& kVassal = GET_TEAM(GET_PLAYER(getSecondPlayer()).getTeam());
 			TeamTypes eMaster = GET_PLAYER(getFirstPlayer()).getTeam();
-			
+
 			if (!kVassal.canVassalRevolt(eMaster))
 			{
 				if (pszReason)
@@ -720,16 +720,16 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 			}
 		}
 
-		for (iI = 0; iI < MAX_PLAYERS; iI++) 
-		{ 
-			if (GET_PLAYER((PlayerTypes)iI).isAlive()) 
-			{ 
-				if (GET_PLAYER((PlayerTypes)iI).getTeam() == GET_PLAYER(eToPlayer).getTeam()) 
-				{ 
-					GET_PLAYER((PlayerTypes)iI).updatePlotGroups(); 
-				} 
-			} 
-		} 
+		for (iI = 0; iI < MAX_PLAYERS; iI++)
+		{
+			if (GET_PLAYER((PlayerTypes)iI).isAlive())
+			{
+				if (GET_PLAYER((PlayerTypes)iI).getTeam() == GET_PLAYER(eToPlayer).getTeam())
+				{
+					GET_PLAYER((PlayerTypes)iI).updatePlotGroups();
+				}
+			}
+		}
 		break;
 
 	case TRADE_SURRENDER:

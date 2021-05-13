@@ -202,13 +202,13 @@ void CvArea::reset(int iID, bool bWater, bool bConstructorCall)
 }
 
 
-int CvArea::getID() const						
+int CvArea::getID() const
 {
 	return m_iID;
 }
 
 
-void CvArea::setID(int iID)														
+void CvArea::setID(int iID)
 {
 	m_iID = iID;
 }
@@ -355,7 +355,7 @@ int CvArea::getNumTiles() const
 }
 
 
-bool CvArea::isLake() const							
+bool CvArea::isLake() const
 {
 	return (isWater() && (getNumTiles() <= GC.getLAKE_MAX_AREA_SIZE()));
 }
@@ -393,7 +393,7 @@ int CvArea::getNumUnownedTiles() const
 }
 
 
-void CvArea::changeNumOwnedTiles(int iChange)									
+void CvArea::changeNumOwnedTiles(int iChange)
 {
 	m_iNumOwnedTiles = (m_iNumOwnedTiles + iChange);
 	FAssert(getNumOwnedTiles() >= 0);
@@ -401,32 +401,32 @@ void CvArea::changeNumOwnedTiles(int iChange)
 }
 
 
-int CvArea::getNumRiverEdges() const												
+int CvArea::getNumRiverEdges() const
 {
 	return m_iNumRiverEdges;
 }
 
 
-void CvArea::changeNumRiverEdges(int iChange)									
+void CvArea::changeNumRiverEdges(int iChange)
 {
 	m_iNumRiverEdges = (m_iNumRiverEdges + iChange);
 	FAssert(getNumRiverEdges() >= 0);
 }
 
 
-int CvArea::getNumUnits() const					
+int CvArea::getNumUnits() const
 {
 	return m_iNumUnits;
 }
 
 
-int CvArea::getNumCities() const					
+int CvArea::getNumCities() const
 {
 	return m_iNumCities;
 }
 
 
-int CvArea::getTotalPopulation() const					
+int CvArea::getTotalPopulation() const
 {
 	return m_iTotalPopulation;
 }
@@ -445,13 +445,13 @@ void CvArea::changeNumStartingPlots(int iChange)
 }
 
 
-bool CvArea::isWater() const							
+bool CvArea::isWater() const
 {
 	return m_bWater;
 }
 
 
-int CvArea::getUnitsPerPlayer(PlayerTypes eIndex) const												
+int CvArea::getUnitsPerPlayer(PlayerTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex is expected to be >= 0");
 	FAssertMsg(eIndex < MAX_PLAYERS, "eIndex is expected to be < MAX_PLAYERS");
@@ -459,7 +459,7 @@ int CvArea::getUnitsPerPlayer(PlayerTypes eIndex) const
 }
 
 
-void CvArea::changeUnitsPerPlayer(PlayerTypes eIndex, int iChange)							
+void CvArea::changeUnitsPerPlayer(PlayerTypes eIndex, int iChange)
 {
 	FAssertMsg(eIndex >= 0, "eIndex is expected to be >= 0");
 	FAssertMsg(eIndex < MAX_PLAYERS, "eIndex is expected to be < MAX_PLAYERS");
@@ -470,7 +470,7 @@ void CvArea::changeUnitsPerPlayer(PlayerTypes eIndex, int iChange)
 }
 
 
-int CvArea::getAnimalsPerPlayer(PlayerTypes eIndex) const			
+int CvArea::getAnimalsPerPlayer(PlayerTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex is expected to be >= 0");
 	FAssertMsg(eIndex < MAX_PLAYERS, "eIndex is expected to be < MAX_PLAYERS");
@@ -495,7 +495,7 @@ int CvArea::getCitiesPerPlayer(PlayerTypes eIndex) const
 }
 
 
-void CvArea::changeCitiesPerPlayer(PlayerTypes eIndex, int iChange)							
+void CvArea::changeCitiesPerPlayer(PlayerTypes eIndex, int iChange)
 {
 	FAssertMsg(eIndex >= 0, "eIndex is expected to be >= 0");
 	FAssertMsg(eIndex < MAX_PLAYERS, "eIndex is expected to be < MAX_PLAYERS");
@@ -514,7 +514,7 @@ int CvArea::getPopulationPerPlayer(PlayerTypes eIndex) const
 }
 
 
-void CvArea::changePopulationPerPlayer(PlayerTypes eIndex, int iChange)							
+void CvArea::changePopulationPerPlayer(PlayerTypes eIndex, int iChange)
 {
 	FAssertMsg(eIndex >= 0, "eIndex is expected to be >= 0");
 	FAssertMsg(eIndex < MAX_PLAYERS, "eIndex is expected to be < MAX_PLAYERS");
@@ -525,7 +525,7 @@ void CvArea::changePopulationPerPlayer(PlayerTypes eIndex, int iChange)
 }
 
 
-int CvArea::getBuildingGoodHealth(PlayerTypes eIndex) const 
+int CvArea::getBuildingGoodHealth(PlayerTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex is expected to be >= 0");
 	FAssertMsg(eIndex < MAX_PLAYERS, "eIndex is expected to be < MAX_PLAYERS");
@@ -802,7 +802,7 @@ void CvArea::changeYieldRateModifier(PlayerTypes eIndex1, YieldTypes eIndex2, in
 	if (iChange != 0)
 	{
 		m_aaiYieldRateModifier[eIndex1][eIndex2] = (m_aaiYieldRateModifier[eIndex1][eIndex2] + iChange);
-		
+
 		GET_PLAYER(eIndex1).invalidateYieldRankCache(eIndex2);
 
 		if (eIndex2 == YIELD_COMMERCE)
@@ -883,7 +883,7 @@ int CvArea::getNumTotalBonuses() const
 }
 
 
-void CvArea::changeNumBonuses(BonusTypes eBonus, int iChange)					
+void CvArea::changeNumBonuses(BonusTypes eBonus, int iChange)
 {
 	FAssertMsg(eBonus >= 0, "eBonus expected to be >= 0");
 	FAssertMsg(eBonus < GC.getNumBonusInfos(), "eBonus expected to be < GC.getNumBonusInfos");
@@ -900,7 +900,7 @@ int CvArea::getNumImprovements(ImprovementTypes eImprovement) const
 }
 
 
-void CvArea::changeNumImprovements(ImprovementTypes eImprovement, int iChange)	
+void CvArea::changeNumImprovements(ImprovementTypes eImprovement, int iChange)
 {
 	FAssertMsg(eImprovement >= 0, "eImprovement expected to be >= 0");
 	FAssertMsg(eImprovement < GC.getNumImprovementInfos(), "eImprovement expected to be < GC.getNumImprovementInfos");

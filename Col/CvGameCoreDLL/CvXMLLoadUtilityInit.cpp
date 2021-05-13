@@ -308,5 +308,5 @@ void CvXMLLoadUtility::InitUnitDefaults(int **ppiDefaults)
 //------------------------------------------------------------------------------------------------------
 void CvXMLLoadUtility::CleanUpGlobalVariables()
 {
-	GC.deleteInfoArrays();	
+	GC.deleteInfoArrays();
 }

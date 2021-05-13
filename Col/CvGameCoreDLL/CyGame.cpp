@@ -1,6 +1,6 @@
 //
-// Python wrapper class for CvGame 
-// 
+// Python wrapper class for CvGame
+//
 
 #include "CvGameCoreDLL.h"
 #include "CyGame.h"
@@ -567,7 +567,7 @@ bool CyGame::isCircumnavigated() const
 	return m_pGame ? m_pGame->isCircumnavigated() : false;
 }
 
-void CyGame::makeCircumnavigated()								 
+void CyGame::makeCircumnavigated()
 {
 	if (m_pGame)
 		m_pGame->makeCircumnavigated();
@@ -631,7 +631,7 @@ bool CyGame::isFinalInitialized()
 	return m_pGame ? m_pGame->isFinalInitialized() : false;
 }
 
-int /*PlayerTypes*/ CyGame::getActivePlayer() 
+int /*PlayerTypes*/ CyGame::getActivePlayer()
 {
 	return m_pGame ? (int)m_pGame->getActivePlayer() : -1;
 }
@@ -652,22 +652,22 @@ bool CyGame::isPaused()
 	return m_pGame ? m_pGame->isPaused() : false;
 }
 
-int /*PlayerTypes*/ CyGame::getBestLandUnit() 
+int /*PlayerTypes*/ CyGame::getBestLandUnit()
 {
 	return m_pGame ? (int)m_pGame->getBestLandUnit() : -1;
 }
 
-int CyGame::getBestLandUnitCombat() 
+int CyGame::getBestLandUnitCombat()
 {
 	return m_pGame ? m_pGame->getBestLandUnitCombat() : -1;
 }
 
-int /*TeamTypes*/ CyGame::getWinner() 
+int /*TeamTypes*/ CyGame::getWinner()
 {
 	return m_pGame ? (int)m_pGame->getWinner() : -1;
 }
 
-int /*VictoryTypes*/ CyGame::getVictory() 
+int /*VictoryTypes*/ CyGame::getVictory()
 {
 	return m_pGame ? (int)m_pGame->getVictory() : -1;
 }
@@ -678,7 +678,7 @@ void CyGame::setWinner(int /*TeamTypes*/ eNewWinner, int /*VictoryTypes*/ eNewVi
 		m_pGame->setWinner((TeamTypes) eNewWinner, (VictoryTypes) eNewVictory);
 }
 
-int /*GameStateTypes*/ CyGame::getGameState() 
+int /*GameStateTypes*/ CyGame::getGameState()
 {
 	return m_pGame ? (int)m_pGame->getGameState() : -1;
 }
@@ -769,7 +769,7 @@ bool CyGame::isUnitClassMaxedOut(int /*UnitClassTypes*/ eIndex, int iExtra)
 	return m_pGame ? m_pGame->isUnitClassMaxedOut((UnitClassTypes)eIndex, iExtra) : -1;
 }
 
-int CyGame::getBuildingClassCreatedCount(int /*BuildingClassTypes*/ eIndex) 
+int CyGame::getBuildingClassCreatedCount(int /*BuildingClassTypes*/ eIndex)
 {
 	return m_pGame ? m_pGame->getBuildingClassCreatedCount((BuildingClassTypes) eIndex) : -1;
 }
@@ -779,7 +779,7 @@ bool CyGame::isBuildingClassMaxedOut(int /*BuildingClassTypes*/ eIndex, int iExt
 	return m_pGame ? m_pGame->isBuildingClassMaxedOut((BuildingClassTypes)eIndex, iExtra) : false;
 }
 
-int CyGame::getProjectCreatedCount(int /*ProjectTypes*/ eIndex) 
+int CyGame::getProjectCreatedCount(int /*ProjectTypes*/ eIndex)
 {
 	return m_pGame ? m_pGame->getProjectCreatedCount((ProjectTypes) eIndex) : -1;
 }
@@ -789,7 +789,7 @@ bool CyGame::isProjectMaxedOut(int /*ProjectTypes*/ eIndex, int iExtra)
 	return m_pGame ? m_pGame->isProjectMaxedOut((ProjectTypes)eIndex, iExtra) : false;
 }
 
-int CyGame::getForceCivicCount(int /*CivicTypes*/ eIndex) 
+int CyGame::getForceCivicCount(int /*CivicTypes*/ eIndex)
 {
 	return m_pGame ? m_pGame->getForceCivicCount((CivicTypes) eIndex) : -1;
 }
@@ -804,7 +804,7 @@ bool CyGame::isForceCivicOption(int /*CivicOptionTypes*/ eCivicOption)
 	return m_pGame ? m_pGame->isForceCivicOption((CivicOptionTypes)eCivicOption) : false;
 }
 
-int CyGame::getVoteOutcome(int /*VoteTypes*/ eIndex) 
+int CyGame::getVoteOutcome(int /*VoteTypes*/ eIndex)
 {
 	return m_pGame ? m_pGame->getVoteOutcome((VoteTypes) eIndex) : NO_PLAYER_VOTE;
 }
@@ -943,12 +943,12 @@ std::wstring CyGame::getName()
 	return m_pGame ? m_pGame->getName() : "";
 }
 
-int CyGame::getIndexAfterLastDeal() 
+int CyGame::getIndexAfterLastDeal()
 {
 	return m_pGame ? m_pGame->getIndexAfterLastDeal() : -1;
 }
 
-int CyGame::getNumDeals() 
+int CyGame::getNumDeals()
 {
 	return m_pGame ? m_pGame->getNumDeals() : -1;
 }
@@ -991,7 +991,7 @@ CvRandom& CyGame::getMapRand()
 	return (m_pGame->getMapRand());
 }
 
-int CyGame::getMapRandNum(int iNum, TCHAR* pszLog) 
+int CyGame::getMapRandNum(int iNum, TCHAR* pszLog)
 {
 	return m_pGame ? m_pGame->getMapRandNum(iNum, pszLog) : -1;
 }
@@ -1002,7 +1002,7 @@ CvRandom& CyGame::getSorenRand()
 	return (m_pGame->getSorenRand());
 }
 
-int CyGame::getSorenRandNum(int iNum, TCHAR* pszLog) 
+int CyGame::getSorenRandNum(int iNum, TCHAR* pszLog)
 {
 	return m_pGame ? m_pGame->getSorenRandNum(iNum, pszLog) : -1;
 }

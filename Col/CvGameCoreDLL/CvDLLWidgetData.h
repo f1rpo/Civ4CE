@@ -201,7 +201,7 @@ public:
 	void parseCommerceModHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer);
 
 protected:
-	
+
 	static CvDLLWidgetData* m_pInst;
 
 };

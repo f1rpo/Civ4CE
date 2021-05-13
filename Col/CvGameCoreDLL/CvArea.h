@@ -22,100 +22,100 @@ public:
 	void uninit();
 	void reset(int iID = 0, bool bWater = false, bool bConstructorCall = false);
 
-	int calculateTotalBestNatureYield() const;																// Exposed to Python
+	int calculateTotalBestNatureYield() const;
 
-	int countCoastalLand() const;																							// Exposed to Python
-	int countNumUniqueBonusTypes() const;																			// Exposed to Python
-	int countHasReligion(ReligionTypes eReligion, PlayerTypes eOwner = NO_PLAYER) const;		// Exposed to Python
-	int countHasCorporation(CorporationTypes eCorporation, PlayerTypes eOwner = NO_PLAYER) const;		// Exposed to Python
+	int countCoastalLand() const;
+	int countNumUniqueBonusTypes() const;
+	int countHasReligion(ReligionTypes eReligion, PlayerTypes eOwner = NO_PLAYER) const;
+	int countHasCorporation(CorporationTypes eCorporation, PlayerTypes eOwner = NO_PLAYER) const;
 
-	DllExport int getID() const;																							// Exposed to Python
+	DllExport int getID() const;
 	void setID(int iID);
 
-	int getNumTiles() const;																									// Exposed to Python
-	bool isLake() const;																											// Exposed to Python
+	int getNumTiles() const;
+	bool isLake() const;
 	void changeNumTiles(int iChange);
 
-	int getNumOwnedTiles() const;																							// Exposed to Python
-	int getNumUnownedTiles() const;																						// Exposed to Python
+	int getNumOwnedTiles() const;
+	int getNumUnownedTiles() const;
 	void changeNumOwnedTiles(int iChange);
 
-	int getNumRiverEdges() const;																							// Exposed to Python
+	int getNumRiverEdges() const;
 	void changeNumRiverEdges(int iChange);
 
-	int getNumCities() const;																									// Exposed to Python
+	int getNumCities() const;
 
-	int getNumUnits() const;																									// Exposed to Python
+	int getNumUnits() const;
 
-	int getTotalPopulation() const;																						// Exposed to Python
+	int getTotalPopulation() const;
 
-	int getNumStartingPlots() const;																					// Exposed to Python
+	int getNumStartingPlots() const;
 	void changeNumStartingPlots(int iChange);
 
-	bool isWater() const;																											// Exposed to Python
+	bool isWater() const;
 
-	int getUnitsPerPlayer(PlayerTypes eIndex) const;													// Exposed to Python
+	int getUnitsPerPlayer(PlayerTypes eIndex) const;
 	void changeUnitsPerPlayer(PlayerTypes eIndex, int iChange);
 
-	int getAnimalsPerPlayer(PlayerTypes eIndex) const;												// Exposed to Python
+	int getAnimalsPerPlayer(PlayerTypes eIndex) const;
 	void changeAnimalsPerPlayer(PlayerTypes eIndex, int iChange);
 
-	int getCitiesPerPlayer(PlayerTypes eIndex) const;													// Exposed to Python
+	int getCitiesPerPlayer(PlayerTypes eIndex) const;
 	void changeCitiesPerPlayer(PlayerTypes eIndex, int iChange);
 
-	int getPopulationPerPlayer(PlayerTypes eIndex) const;											// Exposed to Python
+	int getPopulationPerPlayer(PlayerTypes eIndex) const;
 	void changePopulationPerPlayer(PlayerTypes eIndex, int iChange);
 
-	int getBuildingGoodHealth(PlayerTypes eIndex) const;											// Exposed to Python
+	int getBuildingGoodHealth(PlayerTypes eIndex) const;
 	void changeBuildingGoodHealth(PlayerTypes eIndex, int iChange);
 
-	int getBuildingBadHealth(PlayerTypes eIndex) const;												// Exposed to Python
+	int getBuildingBadHealth(PlayerTypes eIndex) const;
 	void changeBuildingBadHealth(PlayerTypes eIndex, int iChange);
 
-	int getBuildingHappiness(PlayerTypes eIndex) const;												// Exposed to Python
+	int getBuildingHappiness(PlayerTypes eIndex) const;
 	void changeBuildingHappiness(PlayerTypes eIndex, int iChange);
 
-	int getFreeSpecialist(PlayerTypes eIndex) const;													// Exposed to Python
+	int getFreeSpecialist(PlayerTypes eIndex) const;
 	void changeFreeSpecialist(PlayerTypes eIndex, int iChange);
 
-	int getPower(PlayerTypes eIndex) const;																		// Exposed to Python
+	int getPower(PlayerTypes eIndex) const;
 	void changePower(PlayerTypes eIndex, int iChange);
 
-	int getBestFoundValue(PlayerTypes eIndex) const;													// Exposed to Python
+	int getBestFoundValue(PlayerTypes eIndex) const;
 	void setBestFoundValue(PlayerTypes eIndex, int iNewValue);
 
-	int getNumRevealedTiles(TeamTypes eIndex) const;													// Exposed to Python
-	int getNumUnrevealedTiles(TeamTypes eIndex) const;												// Exposed to Python
+	int getNumRevealedTiles(TeamTypes eIndex) const;
+	int getNumUnrevealedTiles(TeamTypes eIndex) const;
 	void changeNumRevealedTiles(TeamTypes eIndex, int iChange);
 
 	int getCleanPowerCount(TeamTypes eIndex) const;
-	bool isCleanPower(TeamTypes eIndex) const;																// Exposed to Python
+	bool isCleanPower(TeamTypes eIndex) const;
 	void changeCleanPowerCount(TeamTypes eIndex, int iChange);
 
 	int getBorderObstacleCount(TeamTypes eIndex) const;
-	DllExport bool isBorderObstacle(TeamTypes eIndex) const;																// Exposed to Python
+	DllExport bool isBorderObstacle(TeamTypes eIndex) const;
 	void changeBorderObstacleCount(TeamTypes eIndex, int iChange);
 
-	AreaAITypes getAreaAIType(TeamTypes eIndex) const;												// Exposed to Python
+	AreaAITypes getAreaAIType(TeamTypes eIndex) const;
 	void setAreaAIType(TeamTypes eIndex, AreaAITypes eNewValue);
 
-	CvCity* getTargetCity(PlayerTypes eIndex) const;													// Exposed to Python
+	CvCity* getTargetCity(PlayerTypes eIndex) const;
 	void setTargetCity(PlayerTypes eIndex, CvCity* pNewValue);
 
-	int getYieldRateModifier(PlayerTypes eIndex1, YieldTypes eIndex2) const;	// Exposed to Python
+	int getYieldRateModifier(PlayerTypes eIndex1, YieldTypes eIndex2) const;
 	void changeYieldRateModifier(PlayerTypes eIndex1, YieldTypes eIndex2, int iChange);
 
-	int getNumTrainAIUnits(PlayerTypes eIndex1, UnitAITypes eIndex2) const;		// Exposed to Python
+	int getNumTrainAIUnits(PlayerTypes eIndex1, UnitAITypes eIndex2) const;
 	void changeNumTrainAIUnits(PlayerTypes eIndex1, UnitAITypes eIndex2, int iChange);
 
-	int getNumAIUnits(PlayerTypes eIndex1, UnitAITypes eIndex2) const;				// Exposed to Python
+	int getNumAIUnits(PlayerTypes eIndex1, UnitAITypes eIndex2) const;
 	void changeNumAIUnits(PlayerTypes eIndex1, UnitAITypes eIndex2, int iChange);
 
-	int getNumBonuses(BonusTypes eBonus) const;																// Exposed to Python
-	int getNumTotalBonuses() const;																						// Exposed to Python
+	int getNumBonuses(BonusTypes eBonus) const;
+	int getNumTotalBonuses() const;
 	void changeNumBonuses(BonusTypes eBonus, int iChange);
 
-	int getNumImprovements(ImprovementTypes eImprovement) const;							// Exposed to Python
+	int getNumImprovements(ImprovementTypes eImprovement) const;
 	void changeNumImprovements(ImprovementTypes eImprovement, int iChange);
 
 protected:

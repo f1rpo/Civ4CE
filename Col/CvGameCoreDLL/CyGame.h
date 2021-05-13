@@ -3,7 +3,7 @@
 #ifndef CyGame_h
 #define CyGame_h
 //
-// Python wrapper class for CvGame 
+// Python wrapper class for CvGame
 // SINGLETON
 // updated 6-5
 
@@ -65,9 +65,9 @@ public:
 	int countKnownTechNumTeams(int /*TechTypes*/ eTech);
 	int getNumFreeBonuses(int /*BuildingTypes*/ eBuilding);
 
-	int countReligionLevels(int /*ReligionTypes*/ eReligion);	
+	int countReligionLevels(int /*ReligionTypes*/ eReligion);
 	int calculateReligionPercent(int /* ReligionTypes*/ eReligion);
-	int countCorporationLevels(int /*CorporationTypes*/ eCorporation);	
+	int countCorporationLevels(int /*CorporationTypes*/ eCorporation);
 
 	int goldenAgeLength();
 	int victoryDelay(int /*VictoryTypes*/ eVictory);
@@ -92,7 +92,7 @@ public:
 	void setGameTurn(int iNewValue);
 	int getTurnYear(int iGameTurn);
 	int getGameTurnYear();
-	
+
 	int getElapsedGameTurns();
 	int getMaxTurns() const;
 	void setMaxTurns(int iNewValue);
@@ -166,7 +166,7 @@ public:
 	bool isPaused();
 	int /*UnitTypes*/ getBestLandUnit();
 	int getBestLandUnitCombat();
-	
+
 	int /*TeamTypes*/ getWinner();
 	int /*VictoryTypes*/ getVictory();
 	void setWinner(int /*TeamTypes*/ eNewWinner, int /*VictoryTypes*/ eNewVictory);
@@ -174,7 +174,7 @@ public:
 	int /*HandicapTypes*/ getHandicapType();
 	CalendarTypes getCalendar() const;
 	int /*EraTypes*/ getStartEra();
-	int /*GameSpeedTypes*/ getGameSpeedType();	
+	int /*GameSpeedTypes*/ getGameSpeedType();
 	/*PlayerTypes*/ int getRankPlayer(int iRank);
 	int getPlayerRank(int /*PlayerTypes*/ iIndex);
 	int getPlayerScore(int /*PlayerTypes*/ iIndex);
@@ -263,7 +263,7 @@ public:
 
 	void setPlotExtraYield(int iX, int iY, int /*YieldTypes*/ eYield, int iExtraYield);
 	void changePlotExtraCost(int iX, int iY, int iExtraCost);
-	
+
 	bool isCivEverActive(int /*CivilizationTypes*/ eCivilization);
 	bool isLeaderEverActive(int /*LeaderHeadTypes*/ eLeader);
 	bool isUnitEverActive(int /*UnitTypes*/ eUnit);
