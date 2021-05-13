@@ -26,6 +26,7 @@
 #include "FProfiler.h"
 #include "CvPopupInfo.h"
 #include "CvArtFileMgr.h"
+#include "UnofficialPatch.h"
 
 // Public Functions...
 
@@ -2157,6 +2158,16 @@ bool CvUnit::canEnterTerritory(TeamTypes eTeam, bool bIgnoreRightOfPassage) cons
 	{
 		return true;
 	}
+
+	// Unofficial Patch Start
+	// * Hidden Nationality units can now enter friendly rival territory (without open borders) when starting move in a city. [Pep]
+#ifdef _USE_UNOFFICIALPATCH
+	if (getUnitInfo().isHiddenNationality())
+	{
+		return true;
+	}
+#endif
+	// Unofficial Patch End
 
 	if (!bIgnoreRightOfPassage)
 	{
@@ -6277,7 +6288,14 @@ bool CvUnit::isIntruding() const
 		return false;
 	}
 
+	// Unofficial Patch Start
+	// * Vassal's spies no longer caught in master's territory
+#ifdef _USE_UNOFFICIALPATCH
+	if (GET_TEAM(eLocalTeam).isVassal(getTeam()) || GET_TEAM(getTeam()).isVassal(eLocalTeam))
+#else
 	if (GET_TEAM(eLocalTeam).isVassal(getTeam()))
+#endif
+	// Unofficial Patch End
 	{
 		return false;
 	}
@@ -11510,7 +11528,14 @@ void CvUnit::collateralCombat(const CvPlot* pPlot, CvUnit* pSkipUnit)
 
 	iCollateralStrength = ((((getDomainType() == DOMAIN_AIR) ? airBaseCombatStr() : baseCombatStr()) * collateralDamage()) / 100);
 
+	// Unofficial Patch Start
+	// * Barrage promotions made working again on Tanks and other units with no base collateral ability
+#ifdef _USE_UNOFFICIALPATCH
+	if (iCollateralStrength == 0 && getExtraCollateralDamage() == 0)
+#else
 	if (iCollateralStrength == 0)
+#endif
+	// Unofficial Patch End
 	{
 		return;
 	}
@@ -11574,16 +11599,38 @@ void CvUnit::collateralCombat(const CvPlot* pPlot, CvUnit* pSkipUnit)
 			{
 				iTheirStrength = pBestUnit->baseCombatStr();
 
+				// Unofficial Patch Start
+				// * Revised collateral damage formula for non-native collateral units, if modded in
+				// * Fixed collateral damage calculation related to defensive modifiers like those on Drill 2+ units. [DanF5771]
+#ifdef _USE_UNOFFICIALPATCH
+				if (iCollateralStrength == 0)
+				{
+					iCollateralStrength = baseCombatStr();
+				}
+#endif
 				iStrengthFactor = ((iCollateralStrength + iTheirStrength + 1) / 2);
 
 				iCollateralDamage = (GC.getDefineINT("COLLATERAL_COMBAT_DAMAGE") * (iCollateralStrength + iStrengthFactor)) / (iTheirStrength + iStrengthFactor);
 
+#ifdef _USE_UNOFFICIALPATCH
+				int iModifier = getUnitInfo().getCollateralDamage() > 0 ? (100 + getExtraCollateralDamage()) : getExtraCollateralDamage();
+				iModifier *= (100 - pBestUnit->getCollateralDamageProtection());
+				iModifier /= 100;
+#else
 				int iModifier = 100;
 				iModifier += getExtraCollateralDamage();
 				iModifier -= pBestUnit->getCollateralDamageProtection();
+#endif
+
 				if (pCity != NULL)
 				{
+#ifdef _USE_UNOFFICIALPATCH
+					iModifier *= (100 + pCity->getAirModifier());
+					iModifier /= 100;
+#else
 					iModifier += pCity->getAirModifier();
+#endif
+					// Unofficial Patch End
 				}
 				iCollateralDamage *= iModifier;
 				iCollateralDamage /= 100;
@@ -12313,6 +12360,16 @@ int CvUnit::getTriggerValue(EventTriggerTypes eTrigger, const CvPlot* pPlot, boo
 	{
 		return MIN_INT;
 	}
+
+	// Unofficial Patch Start
+	// * Fixed bug that allowed an event to trigger on a unit who just died.
+#ifdef _USE_UNOFFICIALPATCH
+	if (isDead())
+	{
+		return MIN_INT;
+	}
+#endif
+	// Unofficial Patch End
 
 	if (!isEmpty(kTrigger.getPythonCanDoUnit()))
 	{

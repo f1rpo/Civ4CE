@@ -14,6 +14,7 @@
 #include "FProfiler.h"
 #include "CyArgsList.h"
 #include "CvDLLPythonIFaceBase.h"
+#include "UnofficialPatch.h"
 
 // statics
 
@@ -918,11 +919,24 @@ int CvTeamAI::AI_startWarVal(TeamTypes eTeam) const
 	iValue += (3 * AI_calculateCapitalProximity(eTeam)) / ((iValue > 0) ? 2 : 3);
 	
 	int iClosenessValue = AI_teamCloseness(eTeam);
+	// Unofficial Patch Start
+	// * Modified how closeness is used for determining who to attack, different settings for regular and Aggressive AI. [jdog5000/BetterAI]
 	if (iClosenessValue == 0)
 	{
+#ifdef _USE_UNOFFICIALPATCH
+		// (Better AI) Dividing iValue by 4 is a drastic move, will result in more backstabbing between friendly neighbors which is appropriate for Aggressive
+		iValue /= (GC.getGameINLINE().isOption(GAMEOPTION_AGGRESSIVE_AI) ? 4 : 2);
+#else
 		iValue /= 4;
+#endif
 	}
+#ifdef _USE_UNOFFICIALPATCH
+	// (Better AI) Closeness values are much smaller after the fix to CvPlayerAI::AI_playerCloseness, no need to divide by 4
+	iValue += iClosenessValue;
+#else
 	iValue += iClosenessValue / 4;
+#endif
+	// Unofficial Patch End
 	
 	int iOurVictoryCountdown = AI_getLowestVictoryCountdown();
 	int iTheirVictoryCountdown = GET_TEAM(eTeam).AI_getLowestVictoryCountdown();
@@ -1118,6 +1132,56 @@ int CvTeamAI::AI_endWarVal(TeamTypes eTeam) const
 		iValue *= 3;
 		iValue /= 2;
 	}
+
+	// Unofficial Patch Start
+	// * Somewhat experimental AI change: Aggressive AI now considerably less likely to want peace 
+	// if it poses more of an immediate threat to enemy cities than it currently faces itself.
+#ifdef _USE_UNOFFICIALPATCH
+	if (GC.getGameINLINE().isOption(GAMEOPTION_AGGRESSIVE_AI))
+	{
+		int iOurEndangeredCities = 0;
+		int iTheirEndangeredCities = 0;
+		
+		for (int iPlayer = 0; iPlayer < MAX_CIV_PLAYERS; iPlayer++)
+		{
+			CvPlayer& kPlayer = GET_PLAYER((PlayerTypes)iPlayer);
+			
+			if (kPlayer.getTeam() == eTeam)
+			{
+				int iLoop;
+				CvCity* pTheirLoopCity;
+				
+				for (pTheirLoopCity = kPlayer.firstCity(&iLoop); pTheirLoopCity != NULL; pTheirLoopCity = kPlayer.nextCity(&iLoop))
+				{
+					if (pTheirLoopCity->AI_isDanger())
+					{
+						iTheirEndangeredCities++;
+					}
+				}
+			}
+
+			if (kPlayer.getTeam() == getID())
+			{
+				int iLoop;
+				CvCity* pOurLoopCity;
+				
+				for (pOurLoopCity = kPlayer.firstCity(&iLoop); pOurLoopCity != NULL; pOurLoopCity = kPlayer.nextCity(&iLoop))
+				{
+					if (pOurLoopCity->AI_isDanger())
+					{
+						iOurEndangeredCities++;
+					}
+				}
+			}
+		}
+
+		if (iTheirEndangeredCities > iOurEndangeredCities)
+		{
+			iValue /= 3;
+		}
+	}
+#endif
+	// Unofficial Patch End
 
 	iValue -= (iValue % GC.getDefineINT("DIPLOMACY_VALUE_REMAINDER"));
 

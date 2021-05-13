@@ -23,6 +23,7 @@
 #include "CvGameTextMgr.h"
 #include "CyCity.h"
 #include "CyPlot.h"
+#include "UnofficialPatch.h"
 
 #include "CvDLLInterfaceIFaceBase.h"
 #include "CvDLLEntityIFaceBase.h"
@@ -476,6 +477,12 @@ void CvPlayer::reset(PlayerTypes eID, bool bConstructorCall)
 	m_bExtendedGame = false;
 	m_bFoundedFirstCity = false;
 	m_bStrike = false;
+	// Unofficial Patch Start
+	// * Added jdog5000's AIAutoPlay changes to help with testing.
+#ifdef _USE_AIAUTOPLAY
+	m_bDisableHuman = false;
+#endif
+	// Unofficial Patch End
 
 	m_eID = eID;
 	updateTeamType();
@@ -1451,10 +1458,16 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade, bool b
 		aeFreeSpecialists.push_back(pOldCity->getAddedFreeSpecialistCount((SpecialistTypes)iI));
 	}
 
+	// Unofficial Patch Start
+	// * Fixed bug where a disloyal AP member could capture a loyal member's city and retain extra hammer bonuses in that city. Pt 1/3
+	// This is removed because we want to make sure the old owner does not have any loyalty bonuses before copying other city properties.
+#ifndef _USE_UNOFFICIALPATCH
 	for (iI = 0; iI < GC.getNumVoteSourceInfos(); ++iI)
 	{
 		pOldCity->processVoteSourceBonus((VoteSourceTypes)iI, true);
 	}
+#endif
+	// Unofficial Patch End
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
@@ -1565,6 +1578,11 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade, bool b
 		pNewCity->setCultureTimes100(((PlayerTypes)iI), aiCulture[iI], false, false);
 	}
 
+	// Unofficial Patch Start
+	// * Fixed bug where a disloyal AP member could capture a loyal member's city and retain extra hammer bonuses in that city. Pt 2/3
+	// The assignment of religions will be moved until after all building attributes are processed so that the loyalty bonus
+	// is not prematurely reinstated. This keeps it from getting nullified by later changes.
+#ifndef _USE_UNOFFICIALPATCH
 	for (iI = 0; iI < GC.getNumReligionInfos(); iI++)
 	{
 		if (pabHasReligion[iI])
@@ -1577,6 +1595,8 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade, bool b
 			GC.getGameINLINE().setHolyCity(((ReligionTypes)iI), pNewCity, false);
 		}
 	}
+#endif
+	// Unofficial Patch End
 
 	for (iI = 0; iI < GC.getNumCorporationInfos(); iI++)
 	{
@@ -1652,6 +1672,25 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade, bool b
 	{
 		pNewCity->changeFreeSpecialistCount((SpecialistTypes)iI, aeFreeSpecialists[iI]);
 	}
+
+	// Unofficial Patch Start
+	// * Fixed bug where a disloyal AP member could capture a loyal member's city and retain extra hammer bonuses in that city. Pt 3/3
+	// This is the new location of the religion assignment.
+#ifdef _USE_UNOFFICIALPATCH
+	for (iI = 0; iI < GC.getNumReligionInfos(); iI++)
+	{
+		if (pabHasReligion[iI])
+		{
+			pNewCity->setHasReligion(((ReligionTypes)iI), true, false, true);
+		}
+
+		if (pabHolyCity[iI])
+		{
+			GC.getGameINLINE().setHolyCity(((ReligionTypes)iI), pNewCity, false);
+		}
+	}
+#endif
+	// Unofficial Patch End
 
 	if (bTrade)
 	{
@@ -2221,6 +2260,20 @@ bool CvPlayer::hasTrait(TraitTypes eTrait) const
 	return GC.getLeaderHeadInfo(getLeaderType()).hasTrait(eTrait);
 }
 
+// Unofficial Patch Start
+// * Added jdog5000's AIAutoPlay changes to help with testing.
+#ifdef _USE_AIAUTOPLAY
+void CvPlayer::setHumanDisabled(bool newVal)
+{
+	m_bDisableHuman = newVal;
+	updateHuman();		//MRGENIE fix for BtS 3.13
+}
+bool CvPlayer::isHumanDisabled() const
+{
+	return m_bDisableHuman;
+}
+#endif
+// Unofficial Patch End
 
 bool CvPlayer::isHuman() const
 {
@@ -2235,7 +2288,21 @@ void CvPlayer::updateHuman()
 	}
 	else
 	{
+		// Unofficial Patch Start
+		// * Added jdog5000's AIAutoPlay changes to help with testing.
+#ifdef _USE_AIAUTOPLAY
+		if( m_bDisableHuman )
+		{
+			m_bHuman = false;
+		}
+		else
+		{
+			m_bHuman = GC.getInitCore().getHuman(getID());
+		}
+#else
 		m_bHuman = GC.getInitCore().getHuman(getID());
+#endif
+		// Unofficial Patch End
 	}
 }
 
@@ -13584,17 +13651,31 @@ bool CvPlayer::doEspionageMission(EspionageMissionTypes eMission, PlayerTypes eT
 				iCultureAmount /= 10000;
 				iCultureAmount = std::max(1, iCultureAmount);
 
+				// Unofficial Patch Start
+				// * Fixed espionage spread culture mission to insert the listed 5% of culture rather than the current .05%
+				// Note: This next line is the only thing they had in 3.13
+				//pCity->changeCulture(getID(), iCultureAmount, true, true);
+				
 				int iNumTurnsApplied = (GC.getDefineINT("GREAT_WORKS_CULTURE_TURNS") * GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getUnitGreatWorkPercent()) / 100;
 
 				for (int i = 0; i < iNumTurnsApplied; ++i)
 				{
+#ifdef _USE_UNOFFICIALPATCH
+					pCity->changeCulture(getID(), iCultureAmount / iNumTurnsApplied, true, true);
+#else
 					pCity->changeCultureTimes100(getID(), iCultureAmount / iNumTurnsApplied, true, true);
+#endif
 				}
 
 				if (iNumTurnsApplied > 0)
 				{
+#ifdef _USE_UNOFFICIALPATCH
+					pCity->changeCulture(getID(), iCultureAmount % iNumTurnsApplied, false, true);
+#else
 					pCity->changeCultureTimes100(getID(), iCultureAmount % iNumTurnsApplied, false, true);
+#endif
 				}
+				// Unofficial Patch End
 
 				bSomethingHappened = true;
 			}
@@ -18854,7 +18935,10 @@ CvUnit* CvPlayer::pickTriggerUnit(EventTriggerTypes eTrigger, CvPlot* pPlot, boo
 				iBestValue = iValue;
 			}
 
-			apUnits.push_back(pUnit);
+			// Unofficial Patch Start
+			// * Fixed bug that prevented random events that target a unit from triggering
+			apUnits.push_back(pLoopUnit);
+			// Unofficial Patch End
 		}
 	}
 

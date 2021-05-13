@@ -537,9 +537,10 @@ class CvInfoScreen:
 		
 		iDemographicsMission = -1
 		# See if Espionage allows graph to be shown for each player
-		for iMissionLoop in range(gc.getNumEspionageMissionInfos()):
-			if (gc.getEspionageMissionInfo(iMissionLoop).isSeeDemographics()):
-				iDemographicsMission = iMissionLoop
+		if not (gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_ESPIONAGE)):
+			for iMissionLoop in range(gc.getNumEspionageMissionInfos()):
+				if (gc.getEspionageMissionInfo(iMissionLoop).isSeeDemographics()):
+					iDemographicsMission = iMissionLoop
 				
 		# Determine who this active player knows
 		self.aiPlayersMet = []
@@ -2135,6 +2136,10 @@ class CvInfoScreen:
 					if (self.pActiveTeam.isHasMet(iLoopPlayerTeam)):
 						self.aiPlayersMet.append(iLoopPlayer)
 						self.iNumPlayersMet += 1
+				# Force recache of all scores
+				self.scoreCache = []
+				for t in self.RANGE_SCORES:
+					self.scoreCache.append(None)
 				self.redrawContents()
 
 			iSelected = inputClass.getData()

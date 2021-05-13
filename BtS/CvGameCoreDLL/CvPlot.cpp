@@ -25,6 +25,7 @@
 #include "CvArtFileMgr.h"
 #include "CyArgsList.h"
 #include "CvDLLPythonIFaceBase.h"
+#include "UnofficialPatch.h"
 
 #define STANDARD_MINIMAP_ALPHA		(0.6f)
 
@@ -5313,7 +5314,22 @@ void CvPlot::setImprovementType(ImprovementTypes eNewValue)
 			}
 		}
 
+		// Unofficial Patch Start
+		// * Building or removing a fort will now force a plotgroup update to verify resource connections.
+#ifdef _USE_UNOFFICIALPATCH
+		if ( (NO_IMPROVEMENT != getImprovementType() && GC.getImprovementInfo(getImprovementType()).isActsAsCity()) ||
+			 (NO_IMPROVEMENT != eOldImprovement && GC.getImprovementInfo(eOldImprovement).isActsAsCity()) )
+		{
+			//GC.getGameINLINE().updatePlotGroups();
+			updatePlotGroup();
+		}
+
+		// Also, a nearly inconsequential fix here using the proper NO_IMPROVEMENT instead of NO_FEATURE
+		if (NO_IMPROVEMENT != eOldImprovement && GC.getImprovementInfo(eOldImprovement).isActsAsCity())
+#else
 		if (NO_FEATURE != eOldImprovement && GC.getImprovementInfo(eOldImprovement).isActsAsCity())
+#endif
+		// Unofficial Patch End
 		{
 			verifyUnitValidPlot();
 		}

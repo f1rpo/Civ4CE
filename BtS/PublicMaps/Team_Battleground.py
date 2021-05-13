@@ -32,16 +32,21 @@ from math import cos
 from math import sin
 from math import radians
 
+#import BugUtil
+
 def getDescription():
+#	BugUtil.debug("Team_Battleground: getDescription")
 	return "TXT_KEY_MAP_SCRIPT_TEAM_BATTLEGROUND_DESCR"
 
 def getNumCustomMapOptions():
+#	BugUtil.debug("Team_Battleground: getNumCustomMapOptions")
 	return 3
 	
 def getNumHiddenCustomMapOptions():
 	return 1
 	
 def getCustomMapOptionName(argsList):
+#	BugUtil.debug("Team_Battleground: getCustomMapOptionName")
 	[iOption] = argsList
 	option_names = {
 		0:	"TXT_KEY_MAP_SCRIPT_TEAM_PLACEMENT",
@@ -61,6 +66,7 @@ def getNumCustomMapOptionValues(argsList):
 	return option_values[iOption]
 	
 def getCustomMapOptionDescAt(argsList):
+#	BugUtil.debug("Team_Battleground: getCustomMapOptionDescAt")
 	[iOption, iSelection] = argsList
 
 	selection_names = {
@@ -88,6 +94,7 @@ def getCustomMapOptionDescAt(argsList):
 	return translated_text
 	
 def getCustomMapOptionDefault(argsList):
+#	BugUtil.debug("Team_Battleground: getCustomMapOptionDefault")
 	[iOption] = argsList
 	option_defaults = {
 		0:	1,
@@ -97,6 +104,7 @@ def getCustomMapOptionDefault(argsList):
 	return option_defaults[iOption]
 
 def isRandomCustomMapOption(argsList):
+#	BugUtil.debug("Team_Battleground: isRandomCustomMapOption")
 	[iOption] = argsList
 	option_random = {
 		0:	true,
@@ -129,6 +137,7 @@ def minStartingDistanceModifier():
 	return -65
 
 def beforeGeneration():
+#	BugUtil.debug("Team_Battleground: beforeGeneration")
 	global equator
 	global team_num
 	team_num = []
@@ -147,6 +156,7 @@ def beforeGeneration():
 	return None
 
 def getGridSize(argsList):
+#	BugUtil.debug("Team_Battleground: getGridSize")
 	"Different grids, depending on the choice of Team Placement. Very small worlds."
 	if (argsList[0] == -1): # (-1,) is passed to function on loads
 		return []
@@ -181,6 +191,7 @@ def getGridSize(argsList):
 	return grid_sizes[grid_choice][eWorldSize]
 
 def generatePlotTypes():
+#	BugUtil.debug("Team_Battleground: generatePlotTypes")
 	NiTextOut("Setting Plot Types (Python Team Battleground) ...")
 	global hinted_world, mapRand
 	global fractal_world
@@ -339,9 +350,16 @@ def generatePlotTypes():
 			for y in range(iNumPlotsY):
 				i = map.plotNum(x, y)
 				dist_xy_c = sqrt( (x - centerx) ** 2 + (y - centery) ** 2)
-				if (dist_xy_c < radii):
-					plotTypes[i] = PlotTypes.PLOT_LAND
-				else:
+
+#				if (dist_xy_c < radii):
+#					if not (plotTypes[i] == PlotTypes.PLOT_LAND
+#					and plotTypes[i] == PlotTypes.PLOT_PEAK
+#					and plotTypes[i] == PlotTypes.PLOT_HILLS):
+#						plotTypes[i] = PlotTypes.PLOT_LAND
+#				else:
+#					plotTypes[i] = PlotTypes.PLOT_OCEAN
+
+				if (dist_xy_c >= radii):
 					plotTypes[i] = PlotTypes.PLOT_OCEAN
 
 				if (userInputPlots == 5 # donut
@@ -402,29 +420,28 @@ def generatePlotTypes():
 
 class TeamBGTerrainGenerator(CvMapGeneratorUtil.TerrainGenerator):
 	def generateTerrainAtPlot(self, iX, iY):
+#		BugUtil.debug("Team_Battleground: generateTerrainAtPlot")
 		global equator
 		lat = 0.8 * self.getLatitudeAtPlot(iX,iY)
 
-		if (self.map.plot(iX, iY).isWater()):
-			return self.map.plot(iX, iY).getTerrainType()
+		if not self.map.plot(iX, iY).isWater():
+			terrainVal = self.terrainGrass
 
-		terrainVal = self.terrainGrass
-
-		if lat >= self.fSnowLatitude:
-			terrainVal = self.terrainIce
-		elif lat >= self.fTundraLatitude:
-			terrainVal = self.terrainTundra
-		elif lat < self.fGrassLatitude:
-			terrainVal = equator # Equator is grass usually, but desert for TvB
-		else:
-			desertVal = self.deserts.getHeight(iX, iY)
-			plainsVal = self.plains.getHeight(iX, iY)
-			if ((desertVal >= self.iDesertBottom) and (desertVal <= self.iDesertTop) and (lat >= self.fDesertBottomLatitude) and (lat < self.fDesertTopLatitude)):
-				terrainVal = self.terrainDesert
-			elif ((plainsVal >= self.iPlainsBottom) and (plainsVal <= self.iPlainsTop)):
-				terrainVal = self.terrainPlains
+			if lat >= self.fSnowLatitude:
+				terrainVal = self.terrainIce
+			elif lat >= self.fTundraLatitude:
+				terrainVal = self.terrainTundra
+			elif lat < self.fGrassLatitude:
+				terrainVal = equator # Equator is grass usually, but desert for TvB
 			else:
-				terrainVal =self.terrainGrass
+				desertVal = self.deserts.getHeight(iX, iY)
+				plainsVal = self.plains.getHeight(iX, iY)
+				if ((desertVal >= self.iDesertBottom) and (desertVal <= self.iDesertTop) and (lat >= self.fDesertBottomLatitude) and (lat < self.fDesertTopLatitude)):
+					terrainVal = self.terrainDesert
+				elif ((plainsVal >= self.iPlainsBottom) and (plainsVal <= self.iPlainsTop)):
+					terrainVal = self.terrainPlains
+				else:
+					terrainVal =self.terrainGrass
 
 		map = CyMap()
 		userInputPlots = map.getCustomMapOption(0)
@@ -438,12 +455,44 @@ class TeamBGTerrainGenerator(CvMapGeneratorUtil.TerrainGenerator):
 				or    self.map.plot(iX, iY + 3).isWater()):
 					terrainVal = self.terrainPlains
 
+		if (userInputPlots == 4   # round
+		or  userInputPlots == 5): # donut
+			centery = (map.getGridHeight() - 1)//2
+			centerx = (map.getGridWidth() - 1)//2
+			radii = centery - 1
+			dist_xy_c = sqrt( (iX - centerx) ** 2 + (iY - centery) ** 2)
+
+			if userInputPlots == 5: # donut
+				# get the size of the hole
+				map_size = map.getWorldSize()
+				sizevalues = {
+					WorldSizeTypes.WORLDSIZE_DUEL:		2,
+					WorldSizeTypes.WORLDSIZE_TINY:		3,
+					WorldSizeTypes.WORLDSIZE_SMALL:		4,
+					WorldSizeTypes.WORLDSIZE_STANDARD:	5,
+					WorldSizeTypes.WORLDSIZE_LARGE:		7,
+					WorldSizeTypes.WORLDSIZE_HUGE:		8
+					}
+				hole_radii = sizevalues[map_size]
+			else:
+				hole_radii = -1
+
+			# Set all blocks to ocean except the inner circle
+			if (dist_xy_c < radii
+			and dist_xy_c > hole_radii
+			and self.map.plot(iX, iY).isWater()):
+				return self.terrainPlains
+
+		if (self.map.plot(iX, iY).isWater()):
+			return self.map.plot(iX, iY).getTerrainType()
+
 		if (terrainVal == TerrainTypes.NO_TERRAIN):
 			return self.map.plot(iX, iY).getTerrainType()
 
 		return terrainVal
 
 def generateTerrainTypes():
+#	BugUtil.debug("Team_Battleground: generateTerrainTypes")
 	NiTextOut("Generating Terrain (Python Team Battleground) ...")
 	terraingen = TeamBGTerrainGenerator()
 	terraingen.__init__(iDesertPercent=15)
@@ -456,20 +505,27 @@ class TeamBGFeatureGenerator(CvMapGeneratorUtil.FeatureGenerator):
 		return 0.8 * (abs((self.iGridH/2) - iY)/float(self.iGridH/2))
 
 def addFeatures():
+#	BugUtil.debug("Team_Battleground: addFeatures")
 	NiTextOut("Adding Features (Python Team Battleground) ...")
 	featuregen = TeamBGFeatureGenerator()
 	featuregen.addFeatures()
 	return 0
 
 def assignStartingPlots():
+#	BugUtil.debug("Team_Battleground: assignStartingPlots1")
 	gc = CyGlobalContext()
 	dice = gc.getGame().getMapRand()
 	global shuffle
 	global shuffledTeams
 	global assignedPlayers
-	assignedPlayers = [0] * gc.getGame().countCivTeamsEverAlive()
 
-	print assignedPlayers
+#	BugUtil.debug("Team_Battleground: assignStartingPlots2 %i %i %i %i", gc.getGame().countCivTeamsEverAlive(), gc.getGame().countCivTeamsAlive(), gc.getGame().countCivPlayersAlive(), gc.getGame().countCivPlayersEverAlive())
+
+	assignedPlayers = [0] * gc.getGame().countCivPlayersAlive()
+
+#	BugUtil.debug("Team_Battleground: assignStartingPlots3")
+
+#	print shuffledTeams
 
 	shuffle = gc.getGame().getMapRand().get(2, "Start Location Shuffle - PYTHON")
 
@@ -478,8 +534,13 @@ def assignStartingPlots():
 
 	map = CyMap()
 	userInputPlots = map.getCustomMapOption(0)
+
+#	BugUtil.debug("Team_Battleground: assignStartingPlots userInputPlots %i", userInputPlots)
+
 	if (userInputPlots == 4   # round
 	or  userInputPlots == 5): # donut
+
+#		BugUtil.debug("Team_Battleground: assignStartingPlots inside if")
 
 # this block of code takes the players and shuffles them
 # if the 'teams start together' is selected (ie map.getCustomMapOption(1) = 0)
@@ -488,57 +549,49 @@ def assignStartingPlots():
 # and uniformly spread around the circle
 
 # shuffle the players
-		player_num = gc.getGame().countCivPlayersEverAlive()
-		player_list = [0] * player_num
-		shuffledPlayers = []
+		player_num = gc.getGame().countCivPlayersAlive()
+		userInputProximity = map.getCustomMapOption(1)  # team members start together, 0 = True
+		shuffleTeams = True # there is an option on screen for this but I don't know how to reference it
 
+		shuffle_Array = []
+
+		# shuffle the players
 		for playerLoop in range(player_num):
-			player_list[playerLoop] = playerLoop
+			if shuffleTeams:
+				shuffle_Array.append([dice.get(10000, "Shuffling Players - TBG PYTHON"), playerLoop])  # why 10,000?  Why not?
+			else:
+				shuffle_Array.append([1, playerLoop])
 
-		for playerLoop in range(player_num):
-			iChoosePlayer = dice.get(len(player_list), "Shuffling Players - TBG PYTHON")
-			shuffledPlayers.append(player_list[iChoosePlayer])
-			del player_list[iChoosePlayer]
+#			BugUtil.debug("Team_Battleground: assignStartingPlots shuffle array #1")
+#			print shuffle_Array
 
+		shuffle_Array.sort()
 
-# sort by team if required
-		userInputProximity = map.getCustomMapOption(1)
-		if userInputProximity == 0: # Start Together
-			shuffledPlayers_Team = [0] * player_num
+#		BugUtil.debug("Team_Battleground: assignStartingPlots shuffle array #2")
+#		print shuffle_Array
+
+#		print shuffle_Array[1][0]
+
+		# organize the array into team order (if required)
+		if userInputProximity == 0: # teams members start together
 			for playerLoop in range(player_num):
-				shuffledPlayers_Team[playerLoop] = CyGlobalContext().getPlayer(playerLoop).getTeam()
+				player = shuffle_Array[playerLoop][1]
+				team = CyGlobalContext().getPlayer(player).getTeam()
+				shuffle_Array[playerLoop][0] = team
 
-			player_Start = 0
-			player_Out = player_Start + 1
-			player_In = player_Start + 2
+#			BugUtil.debug("Team_Battleground: assignStartingPlots shuffle array #3")
+#			print shuffle_Array
+			shuffle_Array.sort()
+#			BugUtil.debug("Team_Battleground: assignStartingPlots shuffle array #4")
+#			print shuffle_Array
 
-			while (player_Out < player_num
-			and    player_In  < player_num):
-				if shuffledPlayers_Team[player_Start] == shuffledPlayers_Team[player_Out]:
-					player_Out = player_Out + 1
-					player_In = player_In + 1
+		shuffledPlayers = []
+		for playerLoop in range(player_num):
+#			print shuffle_Array[playerLoop][1]
+			shuffledPlayers.append(shuffle_Array[playerLoop][1])
 
-				elif shuffledPlayers_Team[player_Start] == shuffledPlayers_Team[player_In]:
-					temp = shuffledPlayers[player_In]
-					shuffledPlayers[player_In] = shuffledPlayers[player_Out]
-					shuffledPlayers[player_Out] = temp
-
-					temp = shuffledPlayers_Team[player_In]
-					shuffledPlayers_Team[player_In] = shuffledPlayers_Team[player_Out]
-					shuffledPlayers_Team[player_Out] = temp
-
-					player_Start = player_Start + 1
-					player_Out = player_Start + 1
-					player_In = player_Start + 2
-
-				else:
-					player_In = player_In + 1
-
-					if player_In > player_num:
-						player_Out = player_Out + 1
-						player_Start = player_Out - 1
-						player_In = player_Out + 1
-
+#		BugUtil.debug("Team_Battleground: assignStartingPlots shuffled player list - final")
+#		print shuffledPlayers
 
 # allocate starting plot by player
 		iNumPlotsX = map.getGridWidth()
@@ -558,21 +611,26 @@ def assignStartingPlots():
 			pPlot = map.plot(x, y)
 			CyGlobalContext().getPlayer(pPlayer).setStartingPlot(pPlot,True)
 
-	if gc.getGame().countCivTeamsEverAlive() < 5:
-		team_list = [0, 1, 2, 3]
-		shuffledTeams = []
-		for teamLoop in range(gc.getGame().countCivTeamsEverAlive()):
-			iChooseTeam = dice.get(len(team_list), "Shuffling Regions - TBG PYTHON")
-			shuffledTeams.append(team_list[iChooseTeam])
-			del team_list[iChooseTeam]
+	else:
+#		BugUtil.debug("Team_Battleground: assignStartingPlots else %i", gc.getGame().countCivTeamsAlive())
+		if gc.getGame().countCivTeamsAlive() < 5:
+#			BugUtil.debug("Team_Battleground: assignStartingPlots inside if")
+			team_list = [0, 1, 2, 3]
+			shuffledTeams = []
+			for teamLoop in range(gc.getGame().countCivTeamsAlive()):
+				iChooseTeam = dice.get(len(team_list), "Shuffling Regions - TBG PYTHON")
+				shuffledTeams.append(team_list[iChooseTeam])
+				del team_list[iChooseTeam]
 
 	CyPythonMgr().allowDefaultImpl()
 	
 def findStartingPlot(argsList):
+#	BugUtil.debug("Team_Battleground: findStartingPlot1")
 	[playerID] = argsList
 	global assignedPlayers
 	global team_num
 
+#	BugUtil.debug("Team_Battleground: findStartingPlot2")
 	map = CyMap()
 	userInputPlots = map.getCustomMapOption(0)
 	if (userInputPlots == 4   # round
@@ -580,12 +638,17 @@ def findStartingPlot(argsList):
 		pPlot = CyGlobalContext().getPlayer(playerID).getStartingPlot()
 		return map.plotNum(pPlot.getX(), pPlot.getY())
 
+#	BugUtil.debug("Team_Battleground: findStartingPlot3")
+
 	thisTeamID = CyGlobalContext().getPlayer(playerID).getTeam()
 	teamID = team_num[thisTeamID]
 	
 	assignedPlayers[teamID] += 1
 
+#	BugUtil.debug("Team_Battleground: findStartingPlot4")
+
 	def isValid(playerID, x, y):
+#		BugUtil.debug("Team_Battleground: isValid")
 		map = CyMap()
 		numTeams = CyGlobalContext().getGame().countCivTeamsAlive()
 		if numTeams > 4 or numTeams < 2: # Put em anywhere, and let the normalizer sort em out.
@@ -605,6 +668,8 @@ def findStartingPlot(argsList):
 		userInputPlots = map.getCustomMapOption(0)
 		iW = map.getGridWidth()
 		iH = map.getGridHeight()
+
+#		BugUtil.debug("Team_Battleground: isValid teams %i, prox %i", numTeams, userInputProximity)
 
 		# Two Teams, Start Together
 		if numTeams == 2 and userInputProximity == 0: # Two teams, Start Together

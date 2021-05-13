@@ -174,7 +174,7 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
 			}
 
 		self.ORDER_LIST = ["RELATIONS", \
-#											 "GLANCE", \
+											 "GLANCE", \
 											 "ACTIVE_TRADE", \
 											 "BONUS", \
 											 "INFO", \
@@ -345,7 +345,7 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
 					screen.attachImageButton (infoPanelName, "", gc.getCivicInfo (nCivic).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIVIC, nCivic, 1, False)
 					
 				nFavoriteCivic = objLeaderHead.getFavoriteCivic()
-				if nFavoriteCivic != -1:
+				if (nFavoriteCivic != -1) and (not gc.getGame().isOption(GameOptionTypes.GAMEOPTION_RANDOM_PERSONALITIES)):
 					screen.attachTextGFC(infoPanelName, "", localText.getText("TXT_KEY_PEDIA_FAV_CIVIC", ()) + ":", FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 					objCivicInfo = gc.getCivicInfo (nFavoriteCivic)
 					screen.attachImageButton (infoPanelName, "", objCivicInfo.getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIVIC, nFavoriteCivic, 1, False)
@@ -447,10 +447,13 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
 			nAttitude = 0
 			szAttitude = CyGameTextMgr().getAttitudeString(nPlayer, nTarget)
 #			ExoticForPrint (("%d toward %d" % (nPlayer, nTarget)) + str(szAttitude))
-			ltPlusAndMinuses = re.findall ("[-+][0-9]+", szAttitude)
+			# Unofficial Patch Start
+			# * Fixed bug where Glance screen would include part of player's name in attitude calculation.
+			ltPlusAndMinuses = re.findall ("[-+][0-9]+\s?: ", szAttitude)
 #			ExoticForPrint ("Length: %d" % len (ltPlusAndMinuses))
 			for i in range (len (ltPlusAndMinuses)):
-				nAttitude += int (ltPlusAndMinuses[i])
+				nAttitude += int (ltPlusAndMinuses[i][:-2])
+			# Unofficial Patch End
 #			ExoticForPrint ("Attitude: %d" % nAttitude)
 		else:
 			return None

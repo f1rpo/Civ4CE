@@ -601,4 +601,20 @@
 		<Italian>Tutti i movimenti del giocatore vengono velocizzati</Italian>
 		<Spanish>Todos los movimientos del jugador se aceleran.</Spanish>
 	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_UNIT_COLLATERAL_DAMAGE</Tag>
+		<English>[ICON_BULLET]Causes Collateral Damage (max. %d1%%)</English>
+		<French>[ICON_BULLET]Provoque des dommages collat&#233;raux (max. %d1%%)</French>
+		<German>[ICON_BULLET]Verursacht Kollateralschaden (max. %d1%%)</German>
+		<Italian>[ICON_BULLET]Provoca danni collaterali (max. %d1%%)</Italian>
+		<Spanish>[ICON_BULLET]Inflige da&#241;os colaterales (max. %d1%%)</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_REPLACED_BY_BUILDING</Tag>
+		<English>Replaced by [LINK=literal]%s1_default_building[\LINK]</English>
+		<French>Remplac&#233; par [LINK=literal]%s1_default_building[\LINK]</French>
+		<German>Ersetzt durch Geb&#228;ude [LINK=literal]%s1_default_building[\LINK]</German>
+		<Italian>Sostituita dall'edifici&#224; [LINK=literal]%s1_default_building[\LINK]</Italian>
+		<Spanish>Sustituida por una edifico de [LINK=literal]%s1_default_building[\LINK]</Spanish>
+	</TEXT>
 </Civ4GameText>

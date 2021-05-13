@@ -871,6 +871,12 @@ public:
 	DllExport int getMaxNumSymbols() const;
 	DllExport int getNumGraphicLevels() const;
 
+	// Unofficial Patch Start
+	// Added global context functions isUnofficialPatch() and getUnofficialPatchVersion() which are exposed to Python.
+	bool isUnofficialPatch() const;
+	int getUnofficialPatchVersion() const;
+	// Unofficial Patch End
+
 	void deleteInfoArrays();
 
 protected:

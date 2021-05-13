@@ -14,6 +14,7 @@
 #include "CySelectionGroup.h"
 #include "CvDLLInterfaceIFaceBase.h"
 #include "CvGlobals.h"
+#include "UnofficialPatch.h"
 
 CyUnit::CyUnit() : m_pUnit(NULL)
 {
@@ -1393,7 +1394,14 @@ int CyUnit::getExtraHillsDefensePercent()
 
 int CyUnit::getRevoltProtection() const
 {
+	// Unofficial Patch Start
+	// * Fixed bug with CyUnit::getRevoltProtection() returning the wrong value.
+#ifdef _USE_UNOFFICIALPATCH
+	return m_pUnit ? m_pUnit->getRevoltProtection() : -1;
+#else
 	return m_pUnit ? m_pUnit->getExtraHillsDefensePercent() : -1;
+#endif
+	// Unofficial Patch End
 }
 
 int CyUnit::getCollateralDamageProtection() const
