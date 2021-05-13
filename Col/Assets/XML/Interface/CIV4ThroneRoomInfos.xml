@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
+<!-- Sid Meier's Civilization 4 -->
+<!-- Copyright Firaxis Games 2005 -->
+<!-- -->
+<!-- Throne Room -->
+<Civ4ThroneRoomInfos xmlns="x-schema:CIV4InterfaceSchema.xml">
+	<ThroneRoomInfos>
+		<ThroneRoomInfo>
+			<Event>Play</Event>
+			<Description>Initial zoom in.</Description>
+			<iFromState>0</iFromState>
+			<iToState>1</iToState>
+			<NodeName/>
+			<iAnimation>0</iAnimation>
+		</ThroneRoomInfo>
+		<ThroneRoomInfo>
+			<Event>LeftScreen</Event>
+			<Description>Default to left.</Description>
+			<iFromState>1</iFromState>
+			<iToState>2</iToState>
+			<NodeName/>
+			<iAnimation>1</iAnimation>
+		</ThroneRoomInfo>
+		<ThroneRoomInfo>
+			<Event>RightScreen</Event>
+			<Description>Default to right.</Description>
+			<iFromState>1</iFromState>
+			<iToState>3</iToState>
+			<NodeName/>
+			<iAnimation>4</iAnimation>
+		</ThroneRoomInfo>
+		<ThroneRoomInfo>
+			<Event>LeftScreen</Event>
+			<Description>Left to left.</Description>
+			<iFromState>2</iFromState>
+			<iToState>2</iToState>
+			<NodeName/>
+			<iAnimation>2</iAnimation>
+		</ThroneRoomInfo>
+		<ThroneRoomInfo>
+			<Event>RightScreen</Event>
+			<Description>Left to default.</Description>
+			<iFromState>2</iFromState>
+			<iToState>1</iToState>
+			<NodeName/>
+			<iAnimation>3</iAnimation>
+		</ThroneRoomInfo>
+		<ThroneRoomInfo>
+			<Event>LeftScreen</Event>
+			<Description>Right to default.</Description>
+			<iFromState>3</iFromState>
+			<iToState>1</iToState>
+			<NodeName/>
+			<iAnimation>6</iAnimation>
+		</ThroneRoomInfo>
+		<ThroneRoomInfo>
+			<Event>RightScreen</Event>
+			<Description>Right to right.</Description>
+			<iFromState>3</iFromState>
+			<iToState>3</iToState>
+			<NodeName/>
+			<iAnimation>5</iAnimation>
+		</ThroneRoomInfo>
+	</ThroneRoomInfos>
+</Civ4ThroneRoomInfos>

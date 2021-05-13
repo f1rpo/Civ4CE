@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by tomw (Firaxis Games) -->
+<!-- Sid Meier's Civilization 4 -->
+<!-- Copyright Firaxis Games 2005 -->
+<!-- -->
+<!-- Camera overlays are textures that draw right in front of the camera in the order below. -JW -->
+<Civ4CameraOverlayInfos xmlns="x-schema:CIV4MiscSchema.xml">
+	<CameraOverlayInfos>
+		<CameraOverlayInfo>
+			<bVisible>1</bVisible>
+			<TextureFile>Art/Terrain/PlotTextures/Dark_Background_Overlay.dds</TextureFile>
+			<CameraOverlayType>CAMERA_OVERLAY_DECAL</CameraOverlayType>
+		</CameraOverlayInfo>
+		<CameraOverlayInfo>
+			<bVisible>0</bVisible>
+			<TextureFile>Art/Terrain/PlotTextures/Light_Forground_Overlay.dds</TextureFile>
+			<CameraOverlayType>CAMERA_OVERLAY_ADDITIVE</CameraOverlayType>
+		</CameraOverlayInfo>
+	</CameraOverlayInfos>
+</Civ4CameraOverlayInfos>

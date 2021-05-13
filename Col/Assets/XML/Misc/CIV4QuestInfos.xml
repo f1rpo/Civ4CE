@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Ed Piper (Firaxis Games) -->
+<Civ4QuestInfos xmlns="x-schema:CIV4MiscSchema.xml">
+	<QuestInfo>
+		<Type>TUTORIAL_MOVE_UNIT</Type>
+		<Description>TEMP</Description>
+		<QuestObjective>TXT_KEY_TUTORIAL_MOVE_UNIT_OBJECTIVE</QuestObjective>
+		<QuestBodyText>TXT_KEY_TUTORIAL_MOVE_UNIT_BODYTEXT</QuestBodyText>
+		<QuestMessages/>
+		<QuestLinks/>
+		<QuestSounds>
+			<QuestSound>AS2D_TUT_MOVE_UNIT</QuestSound>
+		</QuestSounds>
+		<QuestScript>NONE</QuestScript>
+	</QuestInfo>
+</Civ4QuestInfos>

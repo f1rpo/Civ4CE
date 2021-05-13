@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Progtern (Firaxis Games) -->
+<!-- Sid Meier's Civilization 4 -->
+<!-- Copyright Firaxis Games 2005 -->
+<!-- -->
+<!-- Symbol Mesh -->
+<Civ4SymbolMeshPaths xmlns="x-schema:CIV4TerrainSchema.xml">
+	<SymbolMeshPaths>
+		<SymbolMeshPath>Art/Interface/Symbols/Food/Food01.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Interface/Symbols/Food/Food02.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Interface/Symbols/Food/Food03.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Interface/Symbols/Food/Food04.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Interface/Symbols/Food/Food05.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Interface/Symbols/Production/Production01.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Interface/Symbols/Production/Production02.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Interface/Symbols/Production/Production03.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Interface/Symbols/Production/Production04.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Interface/Symbols/Production/Production05.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Interface/Symbols/Commerce/Commerce01.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Interface/Symbols/Commerce/Commerce02.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Interface/Symbols/Commerce/Commerce03.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Interface/Symbols/Commerce/Commerce04.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Interface/Symbols/Commerce/Commerce05.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/IcePack/level1_solid/solidice1.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/IcePack/level1_solid/solidice2.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/IcePack/level1_solid/solidice3.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/IcePack/level2_broken/icebroken1.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/IcePack/level2_broken/icebroken2.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/IcePack/level2_broken/icebroken3.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/IcePack/level3_shapes/iceshape1.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/IcePack/level3_shapes/iceshape2.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/IcePack/level3_shapes/iceshape3.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Peak/PeakDecalA.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Peak/PeakDecalB.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Peak/PeakDecalC.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Peak/PeakDecalA.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Peak/PeakDecalB.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Peak/PeakDecalC.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Peak/PeakDecalA.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Peak/PeakDecalB.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Peak/PeakDecalC.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Jungle/JungleA.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Jungle/JungleB.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Jungle/JungleC.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Jungle/JungleA.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Jungle/JungleB.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Jungle/JungleC.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Jungle/JungleA.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Jungle/JungleB.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Jungle/JungleC.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Oasis/Oasis.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Oasis/Oasis.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Oasis/Oasis.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Oasis/Oasis.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Oasis/Oasis.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Oasis/Oasis.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Oasis/Oasis.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Oasis/Oasis.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Oasis/Oasis.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/TreeEvergreen/EvergreenA.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/TreeEvergreen/EvergreenB.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/TreeEvergreen/EvergreenC.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/TreeLeafy/LeafyA.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/TreeLeafy/LeafyB.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/TreeLeafy/LeafyC.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/TreeLeafy/LeafyA.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/TreeLeafy/LeafyB.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/TreeLeafy/LeafyC.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Fallout/Fallout.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Fallout/Fallout.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Fallout/Fallout.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Fallout/Fallout.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Fallout/Fallout.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Fallout/Fallout.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Fallout/Fallout.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Fallout/Fallout.nif</SymbolMeshPath>
+		<SymbolMeshPath>Art/Terrain/Features/Fallout/Fallout.nif</SymbolMeshPath>
+		<!-- Roads, they select their own .NIF -->
+		<SymbolMeshPath>Art/Empty.nif</SymbolMeshPath>
+		<!-- Railroads, they select their own .NIF -->
+		<SymbolMeshPath>Art/Empty.nif</SymbolMeshPath>
+		<!-- Rivers, they select their own .NIF -->
+		<SymbolMeshPath>Art/Empty.nif</SymbolMeshPath>
+	</SymbolMeshPaths>
+</Civ4SymbolMeshPaths>

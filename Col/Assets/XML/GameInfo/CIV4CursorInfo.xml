@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by tomw (Firaxis Games) -->
+<!-- Sid Meier's Civilization 4 -->
+<!-- Copyright Firaxis Games 2005 -->
+<!-- -->
+<!-- Cursor Infos -->
+<Civ4CursorInfo xmlns="x-schema:CIV4GameInfoSchema.xml">
+	<CursorInfos>
+		<CursorInfo>
+			<Type>CURSOR_DEFAULT</Type>
+			<CursorPath>res/Cursors/Pointer.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_PING</Type>
+			<CursorPath>res/Cursors/Ping.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_GO_TO</Type>
+			<CursorPath>res/Cursors/GoTo.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_ROUTE_TO</Type>
+			<CursorPath>res/Cursors/RouteTo.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_AIRLIFT</Type>
+			<CursorPath>res/Cursors/Airlift.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_NUKE</Type>
+			<CursorPath>res/Cursors/Nuke.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_AIRSTRIKE</Type>
+			<CursorPath>res/Cursors/Airstrike.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_RECON</Type>
+			<CursorPath>res/Cursors/Recon.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_PARADROP</Type>
+			<CursorPath>res/Cursors/Rebase.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_AIRBOMB</Type>
+			<CursorPath>res/Cursors/Airbomb.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_REBASE</Type>
+			<CursorPath>res/Cursors/Rebase.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_BUSY</Type>
+			<CursorPath>res/Cursors/Waiting.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_MOVE</Type>
+			<CursorPath>res/Cursors/Move.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_SPLITV</Type>
+			<CursorPath>res/Cursors/Split V.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_SPLITH</Type>
+			<CursorPath>res/Cursors/Split H.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_SIZEV</Type>
+			<CursorPath>res/Cursors/Size V.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_SIZEH</Type>
+			<CursorPath>res/Cursors/Size H.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_SIZENE</Type>
+			<CursorPath>res/Cursors/Size Diagonal 2.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_SIZENW</Type>
+			<CursorPath>res/Cursors/Size Diagonal 1.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_SIZEALL</Type>
+			<CursorPath>res/Cursors/Size All.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_LINK</Type>
+			<CursorPath>res/Cursors/Link.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_GRIP</Type>
+			<CursorPath>res/Cursors/Grip.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
+			<Type>CURSOR_EDIT</Type>
+			<CursorPath>res/Cursors/Edit.ani</CursorPath>
+		</CursorInfo>
+	</CursorInfos>
+</Civ4CursorInfo>
