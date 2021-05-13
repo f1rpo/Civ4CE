@@ -123,6 +123,17 @@ def handleGlobeViewDropdownBoxInput ( argsList ):
 	
 	return 1
 		
+def handleMainMenuDropdownBoxInput ( argsList ):
+	"Handles Main Menu Dropdown Box input"
+	iValue, szName = argsList
+	
+	UserProfile.setMainMenu(iValue)
+	refresh()
+	restartPopup(true)
+	saveProfile()
+	
+	return 1
+		
 def handleResolutionDropdownInput ( argsList ):
 	"Handles Resolution Dropdown Box input"
 	iValue, szName = argsList

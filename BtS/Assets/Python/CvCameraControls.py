@@ -96,9 +96,13 @@ class CvCameraControls:
 			CyCamera().Translate( NiPoint3( t_Coord[0], t_Coord[1], t_Coord[2] ) )
 
 	def doRotateGlobe( self ):
-		if bDebugModeState == False:
-			CyGame().toggleDebugMode()
-		self.zoomCamera(1.0)
+		self.resetCameraControls()
+		if CyEngine().getCityBillboardVisibility():
+			CyEngine().setCityBillboardVisibility(False)
+		if CyInterface().getShowInterface() == InterfaceVisibility.INTERFACE_SHOW:
+			CyInterface().setShowInterface(InterfaceVisibility.INTERFACE_HIDE_ALL)
+		
+		CyCamera().SetZoom(1.0)
 		self.doRotateCamera( True, -self.SINGLE_PLOT_UNITS )
 	
 ######################

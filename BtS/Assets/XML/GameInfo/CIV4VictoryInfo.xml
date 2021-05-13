@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Jesse Smith (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -22,7 +22,8 @@
 			<CityCulture>NONE</CityCulture>
 			<iNumCultureCities>0</iNumCultureCities>
 			<iTotalCultureRatio>0</iTotalCultureRatio>
-			<VictoryMovie></VictoryMovie>
+			<iVictoryDelayTurns>0</iVictoryDelayTurns>
+			<VictoryMovie/>
 		</VictoryInfo>
 		<VictoryInfo>
 			<Type>VICTORY_TIME</Type>
@@ -40,7 +41,8 @@
 			<CityCulture>NONE</CityCulture>
 			<iNumCultureCities>0</iNumCultureCities>
 			<iTotalCultureRatio>0</iTotalCultureRatio>
-			<VictoryMovie></VictoryMovie>
+			<iVictoryDelayTurns>0</iVictoryDelayTurns>
+			<VictoryMovie/>
 		</VictoryInfo>
 		<VictoryInfo>
 			<Type>VICTORY_CONQUEST</Type>
@@ -58,6 +60,7 @@
 			<CityCulture>NONE</CityCulture>
 			<iNumCultureCities>0</iNumCultureCities>
 			<iTotalCultureRatio>0</iTotalCultureRatio>
+			<iVictoryDelayTurns>0</iVictoryDelayTurns>
 			<VictoryMovie>ART_DEF_MOVIE_VICTORY_CONQUEST</VictoryMovie>
 		</VictoryInfo>
 		<VictoryInfo>
@@ -76,6 +79,7 @@
 			<CityCulture>NONE</CityCulture>
 			<iNumCultureCities>0</iNumCultureCities>
 			<iTotalCultureRatio>0</iTotalCultureRatio>
+			<iVictoryDelayTurns>0</iVictoryDelayTurns>
 			<VictoryMovie>ART_DEF_MOVIE_VICTORY_DOMINATION</VictoryMovie>
 		</VictoryInfo>
 		<VictoryInfo>
@@ -94,12 +98,13 @@
 			<CityCulture>CULTURELEVEL_LEGENDARY</CityCulture>
 			<iNumCultureCities>3</iNumCultureCities>
 			<iTotalCultureRatio>0</iTotalCultureRatio>
+			<iVictoryDelayTurns>0</iVictoryDelayTurns>
 			<VictoryMovie>ART_DEF_MOVIE_VICTORY_CULTURAL</VictoryMovie>
 		</VictoryInfo>
 		<VictoryInfo>
 			<Type>VICTORY_SPACE_RACE</Type>
 			<Description>TXT_KEY_VICTORY_SPACE_RACE</Description>
-			<Civilopedia>TXT_KEY_VICTORY_SPACE_RACE_PEDIA</Civilopedia>
+			<Civilopedia>TXT_KEY_VICTORY_SPACE_RACE_READY</Civilopedia>
 			<bTargetScore>0</bTargetScore>
 			<bEndScore>0</bEndScore>
 			<bConquest>0</bConquest>
@@ -112,6 +117,7 @@
 			<CityCulture>NONE</CityCulture>
 			<iNumCultureCities>0</iNumCultureCities>
 			<iTotalCultureRatio>0</iTotalCultureRatio>
+			<iVictoryDelayTurns>10</iVictoryDelayTurns>
 			<VictoryMovie>ART_DEF_MOVIE_VICTORY_SPACE_RACE</VictoryMovie>
 		</VictoryInfo>
 		<VictoryInfo>
@@ -130,7 +136,8 @@
 			<CityCulture>NONE</CityCulture>
 			<iNumCultureCities>0</iNumCultureCities>
 			<iTotalCultureRatio>0</iTotalCultureRatio>
-			<VictoryMovie></VictoryMovie>
+			<iVictoryDelayTurns>0</iVictoryDelayTurns>
+			<VictoryMovie/>
 		</VictoryInfo>
 	</VictoryInfos>
 </Civ4VictoryInfo>

@@ -5,6 +5,7 @@
 
 import CvUtil
 from CvPythonExtensions import *
+import CvEventInterface
 
 # globals
 gc = CyGlobalContext()
@@ -19,6 +20,10 @@ class CvGameUtils:
 			return True
 		else:
 			return False
+
+	def isVictory(self, argsList):
+		eVictory = argsList[0]
+		return True
 
 	def isPlayerResearch(self, argsList):
 		ePlayer = argsList[0]
@@ -55,6 +60,10 @@ class CvGameUtils:
 		iRazingPlayer, pCity = argsList
 		return True
 	
+	def canDeclareWar(self,argsList):
+		iAttackingTeam, iDefendingTeam = argsList
+		return True
+	
 	def skipProductionPopup(self,argsList):
 		pCity = argsList[0]
 		return False
@@ -79,10 +88,25 @@ class CvGameUtils:
 		iAction = argsList[1]
 		return False
 
+	def unitCannotMoveInto(self,argsList):
+		ePlayer = argsList[0]		
+		iUnitId = argsList[1]
+		iPlotX = argsList[2]
+		iPlotY = argsList[3]
+		return False
+
 	def cannotHandleAction(self,argsList):
 		pPlot = argsList[0]
 		iAction = argsList[1]
 		bTestVisible = argsList[2]
+		return False
+
+	def canBuild(self,argsList):
+		iX, iY, iBuild, iPlayer = argsList
+		return -1	# Returning -1 means ignore; 0 means Build cannot be performed; 1 or greater means it can
+
+	def cannotFoundCity(self,argsList):
+		iPlayer, iPlotX, iPlotY = argsList
 		return False
 
 	def cannotSelectionListMove(self,argsList):
@@ -133,6 +157,8 @@ class CvGameUtils:
 		eUnit = argsList[1]
 		bContinue = argsList[2]
 		bTestVisible = argsList[3]
+		bIgnoreCost = argsList[4]
+		bIgnoreUpgrades = argsList[5]
 		return False
 
 	def cannotTrain(self,argsList):
@@ -140,6 +166,8 @@ class CvGameUtils:
 		eUnit = argsList[1]
 		bContinue = argsList[2]
 		bTestVisible = argsList[3]
+		bIgnoreCost = argsList[4]
+		bIgnoreUpgrades = argsList[5]
 		return False
 
 	def canConstruct(self,argsList):
@@ -255,10 +283,16 @@ class CvGameUtils:
 	def doPlotCulture(self,argsList):
 		pCity = argsList[0]
 		bUpdate = argsList[1]
+		ePlayer = argsList[2]
+		iCultureRate = argsList[3]
 		return False
 
 	def doReligion(self,argsList):
 		pCity = argsList[0]
+		return False
+
+	def cannotSpreadReligion(self,argsList):
+		iOwner, iUnitID, iReligion, iX, iY = argsList[0]
 		return False
 
 	def doGreatPeople(self,argsList):
@@ -304,4 +338,79 @@ class CvGameUtils:
 			iCaptureGold /= gc.getDefineINT("CAPTURE_GOLD_MAX_TURNS")
 		
 		return iCaptureGold
+	
+	def citiesDestroyFeatures(self,argsList):
+		iX, iY= argsList
+		return True
+		
+	def canFoundCitiesOnWater(self,argsList):
+		iX, iY= argsList
+		return False
+		
+	def doCombat(self,argsList):
+		pSelectionGroup, pDestPlot = argsList
+		return False
 
+	def getConscriptUnitType(self, argsList):
+		iPlayer = argsList[0]
+		iConscriptUnitType = -1 #return this with the value of the UNIT TYPE you want to be conscripted, -1 uses default system
+		
+		return iConscriptUnitType
+
+	def getCityFoundValue(self, argsList):
+		iPlayer, iPlotX, iPlotY = argsList
+		iFoundValue = -1 # Any value besides -1 will be used
+		
+		return iFoundValue
+		
+	def canPickPlot(self, argsList):
+		pPlot = argsList[0]
+		return true
+		
+	def getUnitCostMod(self, argsList):
+		iPlayer, iUnit = argsList
+		iCostMod = -1 # Any value > 0 will be used
+		
+		return iCostMod
+
+	def getBuildingCostMod(self, argsList):
+		iPlayer, iCityID, iBuilding = argsList
+		pPlayer = gc.getPlayer(iPlayer)
+		pCity = pPlayer.getCity(iCityID)
+		
+		iCostMod = -1 # Any value > 0 will be used
+		
+		return iCostMod
+		
+	def canUpgradeAnywhere(self, argsList):
+		pUnit = argsList
+		
+		bCanUpgradeAnywhere = 0
+		
+		return bCanUpgradeAnywhere
+		
+	def getWidgetHelp(self, argsList):
+		eWidgetType, iData1, iData2, bOption = argsList
+		
+		return u""
+		
+	def getUpgradePriceOverride(self, argsList):
+		iPlayer, iUnitID, iUnitTypeUpgrade = argsList
+		
+		return -1	# Any value 0 or above will be used
+	
+	def getExperienceNeeded(self, argsList):
+		# use this function to set how much experience a unit needs
+		iLevel, iOwner = argsList
+		
+		iExperienceNeeded = 0
+
+		# regular epic game experience		
+		iExperienceNeeded = iLevel * iLevel + 1
+
+		iModifier = gc.getPlayer(iOwner).getLevelExperienceModifier()
+		if (0 != iModifier):
+			iExperienceNeeded += (iExperienceNeeded * iModifier + 99) / 100   # ROUND UP
+			
+		return iExperienceNeeded
+		

@@ -89,10 +89,13 @@ class CvPediaHistory:
 		for iI in range(iNum):
 			if (not self.getInfo(listSorted[iI][1]).isGraphicalOnly()):
 				if bRedraw:
-					screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_DESCRIPTION_NO_HELP, self.iCivilopediaPageType, listSorted[iI][1], CvUtil.FONT_LEFT_JUSTIFY)
+					screen.appendListBoxStringNoUpdate(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_DESCRIPTION_NO_HELP, self.iCivilopediaPageType, listSorted[iI][1], CvUtil.FONT_LEFT_JUSTIFY)
 				if listSorted[iI][1] == self.iEntry:
 					iSelected = i
 				i += 1
+				
+		if bRedraw:
+			screen.updateListBox(self.top.LIST_ID)
 					
 		screen.setSelectedListBoxStringGFC(self.top.LIST_ID, iSelected)
 
@@ -117,12 +120,16 @@ class CvPediaHistory:
 			iNum = gc.getNumLeaderHeadInfos()
 		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_RELIGION == self.iCivilopediaPageType):
 			iNum = gc.getNumReligionInfos()
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CORPORATION == self.iCivilopediaPageType):
+			iNum = gc.getNumCorporationInfos()
 		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CIVIC == self.iCivilopediaPageType):
 			iNum = gc.getNumCivicInfos()
 		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_PROJECT == self.iCivilopediaPageType):
 			iNum = gc.getNumProjectInfos()
 		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CONCEPT == self.iCivilopediaPageType):
 			iNum = gc.getNumConceptInfos()
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CONCEPT_NEW == self.iCivilopediaPageType):
+			iNum = gc.getNumNewConceptInfos()
 		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_SPECIALIST == self.iCivilopediaPageType):
 			iNum = gc.getNumSpecialistInfos()
 		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_TERRAIN == self.iCivilopediaPageType):
@@ -154,12 +161,16 @@ class CvPediaHistory:
 			info = gc.getLeaderHeadInfo(iEntry)
 		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_RELIGION == self.iCivilopediaPageType):
 			info = gc.getReligionInfo(iEntry)
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CORPORATION == self.iCivilopediaPageType):
+			info = gc.getCorporationInfo(iEntry)
 		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CIVIC == self.iCivilopediaPageType):
 			info = gc.getCivicInfo(iEntry)
 		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_PROJECT == self.iCivilopediaPageType):
 			info = gc.getProjectInfo(iEntry)
 		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CONCEPT == self.iCivilopediaPageType):
 			info = gc.getConceptInfo(iEntry)
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CONCEPT_NEW == self.iCivilopediaPageType):
+			info = gc.getNewConceptInfo(iEntry)
 		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_SPECIALIST == self.iCivilopediaPageType):
 			info = gc.getSpecialistInfo(iEntry)
 		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_TERRAIN == self.iCivilopediaPageType):
@@ -200,6 +211,8 @@ class CvPediaHistory:
 			iLink = WidgetTypes.WIDGET_PEDIA_JUMP_TO_LEADER
 		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_RELIGION == self.iCivilopediaPageType):
 			iLink = WidgetTypes.WIDGET_PEDIA_JUMP_TO_RELIGION
+		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CORPORATION == self.iCivilopediaPageType):
+			iLink = WidgetTypes.WIDGET_PEDIA_JUMP_TO_CORPORATION
 		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_CIVIC == self.iCivilopediaPageType):
 			iLink = WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIVIC
 		elif (CivilopediaPageTypes.CIVILOPEDIA_PAGE_PROJECT == self.iCivilopediaPageType):

@@ -27,6 +27,9 @@ def isVictoryTest():
 	#CvUtil.pyPrint( "CvGameInterface.isVictoryTest" )
 	return gameUtils().isVictoryTest()
 
+def isVictory(argsList):
+	return gameUtils().isVictory(argsList)
+
 def isPlayerResearch(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.isPlayerResearch" )
 	return gameUtils().isPlayerResearch(argsList)
@@ -67,6 +70,10 @@ def canRazeCity(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.canRazeCity" )
 	return gameUtils().canRazeCity(argsList)
 
+def canDeclareWar(argsList):
+	#CvUtil.pyPrint( "CvGameInterface.canRazeCity" )
+	return gameUtils().canDeclareWar(argsList)
+
 def showExamineCityButton(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.showExamineCityButton" )
 	return gameUtils().showExamineCityButton(argsList)
@@ -87,9 +94,20 @@ def isActionRecommended(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.isActionRecommended" )
 	return gameUtils().isActionRecommended(argsList)
 
+def unitCannotMoveInto(argsList):
+	return gameUtils().unitCannotMoveInto(argsList)
+
 def cannotHandleAction(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.cannotHandleAction" )
 	return gameUtils().cannotHandleAction(argsList)
+
+def canBuild(argsList):
+	#CvUtil.pyPrint( "CvGameInterface.canBuild" )
+	return gameUtils().canBuild(argsList)
+
+def cannotFoundCity(argsList):
+	#CvUtil.pyPrint( "CvGameInterface.cannotHandleAction" )
+	return gameUtils().cannotFoundCity(argsList)
 
 def cannotSelectionListMove(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.cannotSelectionListMove" )
@@ -235,3 +253,39 @@ def doPillageGold(argsList):
 
 def doCityCaptureGold(argsList):
 	return gameUtils().doCityCaptureGold(argsList)
+
+def citiesDestroyFeatures(argsList):
+	return gameUtils().citiesDestroyFeatures(argsList)
+
+def canFoundCitiesOnWater(argsList):
+	return gameUtils().canFoundCitiesOnWater(argsList)
+
+def doCombat(argsList):
+	return gameUtils().doCombat(argsList)
+
+def getConscriptUnitType(argsList):
+	return gameUtils().getConscriptUnitType(argsList)
+
+def getCityFoundValue(argsList):
+	return gameUtils().getCityFoundValue(argsList)
+
+def canPickPlot(argsList):
+	return gameUtils().canPickPlot(argsList)
+
+def getUnitCostMod(argsList):
+	return gameUtils().getUnitCostMod(argsList)
+
+def getBuildingCostMod(argsList):
+	return gameUtils().getBuildingCostMod(argsList)
+
+def canUpgradeAnywhere(argsList):
+	return gameUtils().canUpgradeAnywhere(argsList)
+	
+def getWidgetHelp(argsList):
+	return gameUtils().getWidgetHelp(argsList)
+	
+def getUpgradePriceOverride(argsList):
+	return gameUtils().getUpgradePriceOverride(argsList)
+
+def getExperienceNeeded(argsList):
+	return gameUtils().getExperienceNeeded(argsList)

@@ -39,6 +39,10 @@
 			<CursorPath>res/Cursors/Recon.ani</CursorPath>
 		</CursorInfo>
 		<CursorInfo>
+			<Type>CURSOR_PARADROP</Type>
+			<CursorPath>res/Cursors/Rebase.ani</CursorPath>
+		</CursorInfo>
+		<CursorInfo>
 			<Type>CURSOR_AIRBOMB</Type>
 			<CursorPath>res/Cursors/Airbomb.ani</CursorPath>
 		</CursorInfo>

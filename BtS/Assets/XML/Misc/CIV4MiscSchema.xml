@@ -1,4 +1,4 @@
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Bart Muzzin (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -20,24 +20,33 @@
 	<ElementType name="TechMovementChanges" content="eltOnly">
 		<element type="TechMovementChange" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
+	<ElementType name="PrereqOrBonus" content="eltOnly">
+		<element type="BonusType"/>
+	</ElementType>
+	<ElementType name="PrereqOrBonuses" content="eltOnly">
+		<element type="PrereqOrBonus" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
 	<ElementType name="Button" content="textOnly"/>
+	<ElementType name="iAdvancedStartCost" content="textOnly" dt:type="int"/>
+	<ElementType name="iAdvancedStartCostIncrease" content="textOnly" dt:type="int"/>
 	<ElementType name="iValue" content="textOnly" dt:type="int"/>
 	<ElementType name="iMovement" content="textOnly" dt:type="int"/>
 	<ElementType name="iFlatMovement" content="textOnly" dt:type="int"/>
-	<ElementType name="fZBias" content="textOnly"/>
 	<ElementType name="RouteInfo" content="eltOnly">
 		<element type="Type"/>
 		<element type="Description"/>
 		<element type="iValue"/>
+		<element type="iAdvancedStartCost"/>
+		<element type="iAdvancedStartCostIncrease"/>
 		<element type="iMovement"/>
 		<element type="iFlatMovement"/>
 		<element type="BonusType"/>
+		<element type="PrereqOrBonuses"/>
 		<element type="Yields"/>
 		<element type="TechMovementChanges"/>
 		<element type="Button"/>
 	</ElementType>
 	<ElementType name="RouteInfos" content="eltOnly">
-		<element type="fZBias"/>
 		<element type="RouteInfo" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="Path" content="textOnly"/>
@@ -51,7 +60,6 @@
 		<element type="Type" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="RiverInfos" content="eltOnly">
-		<element type="fZBias"/>
 		<element type="RiverInfo" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="RiverModelInfo" content="eltOnly">
@@ -69,8 +77,13 @@
 	<ElementType name="ContainsGrid" content="textOnly" dt:type="int"/>
 	<ElementType name="TextureFile" content="textOnly"/>
 	<ElementType name="TextureScaling" content="textOnly"/>
+	<ElementType name="TextureScalingU" content="textOnly"/>
+	<ElementType name="TextureScalingV" content="textOnly"/>
 	<ElementType name="URate" content="textOnly"/>
 	<ElementType name="VRate" content="textOnly"/>
+	<ElementType name="ZHeight" content="textOnly"/>
+	<ElementType name="FogType" content="textOnly"/>
+	<ElementType name="CameraOverlayType" content="textOnly"/>
 	<ElementType name="FunctionType" content="textOnly"/>
 	<ElementType name="Time" content="textOnly"/>
 	<ElementType name="Value" content="textOnly"/>
@@ -78,6 +91,8 @@
 	<ElementType name="g" content="textOnly"/>
 	<ElementType name="b" content="textOnly"/>
 	<ElementType name="MaterialAlpha" content="textOnly"/>
+	<ElementType name="CloseAlpha" content="textOnly"/>
+	<ElementType name="bVisible" content="textOnly" dt:type="boolean"/>
 	<ElementType name="fScale" content="textOnly"/>
 	<ElementType name="fUpdateRate" content="textOnly"/>
 	<ElementType name="bIsProjectile" content="textOnly" dt:type="int"/>
@@ -132,6 +147,23 @@
 	<ElementType name="WaterPlaneInfo" content="eltOnly">
 		<element type="WaterMaterial" minOccurs="1" maxOccurs="1"/>
 		<element type="WaterTextures"/>
+	</ElementType>
+	<ElementType name="TerrainPlaneInfo" content="eltOnly">
+		<element type="bVisible"/>
+		<element type="MaterialAlpha"/>
+		<element type="CloseAlpha"/>
+		<element type="TextureFile"/>
+		<element type="TextureScalingU"/>
+		<element type="TextureScalingV"/>
+		<element type="URate"/>
+		<element type="VRate"/>
+		<element type="ZHeight"/>
+		<element type="FogType"/>
+	</ElementType>
+	<ElementType name="CameraOverlayInfo" content="eltOnly">
+		<element type="bVisible"/>
+		<element type="TextureFile"/>
+		<element type="CameraOverlayType"/>
 	</ElementType>
 	<ElementType name="EffectInfo" content="eltOnly">
 		<element type="Type"/>
@@ -297,6 +329,12 @@
 	<ElementType name="WaterPlaneInfos" content="eltOnly">
 		<element type="WaterPlaneInfo" minOccurs="1" maxOccurs="*"/>
 	</ElementType>
+	<ElementType name="TerrainPlaneInfos" content="eltOnly">
+		<element type="TerrainPlaneInfo" minOccurs="1" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="CameraOverlayInfos" content="eltOnly">
+		<element type="CameraOverlayInfo" minOccurs="1" maxOccurs="*"/>
+	</ElementType>
 	<ElementType name="Civ4RouteInfos" content="eltOnly">
 		<element type="RouteInfos" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -305,6 +343,12 @@
 	</ElementType>
 	<ElementType name="Civ4WaterPlaneInfos" content="eltOnly">
 		<element type="WaterPlaneInfos" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="Civ4TerrainPlaneInfos" content="eltOnly">
+		<element type="TerrainPlaneInfos" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="Civ4CameraOverlayInfos" content="eltOnly">
+		<element type="CameraOverlayInfos" minOccurs="0" maxOccurs="1"/>
 	</ElementType>
 	<ElementType name="Civ4EffectInfos" content="eltOnly">
 		<element type="EffectInfos" minOccurs="0" maxOccurs="*"/>
@@ -322,6 +366,8 @@
 		<element type="RouteInfos" minOccurs="0" maxOccurs="*"/>
 		<element type="RiverInfos" minOccurs="0" maxOccurs="*"/>
 		<element type="WaterPlaneInfos" minOccurs="0" maxOccurs="1"/>
+		<element type="TerrainPlaneInfos" minOccurs="0" maxOccurs="1"/>
+		<element type="CameraOverlayInfos" minOccurs="0" maxOccurs="1"/>
 		<element type="EffectInfos" minOccurs="0" maxOccurs="1"/>
 		<element type="AttachableInfos" minOccurs="0" maxOccurs="1"/>
 		<element type="QuestInfo" minOccurs="0" maxOccurs="1"/>

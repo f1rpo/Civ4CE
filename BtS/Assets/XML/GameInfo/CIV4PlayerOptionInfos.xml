@@ -114,5 +114,29 @@
 			<Help>TXT_KEY_PLAYEROPTION_LEAVE_FORESTS_HELP</Help>
 			<bDefault>0</bDefault>
 		</PlayerOptionInfo>
+		<PlayerOptionInfo>
+			<Type>PLAYEROPTION_MISSIONARIES_AUTOMATED</Type>
+			<Description>TXT_KEY_PLAYER_OPTION_MISSIONARIES_AUTOMATED</Description>
+			<Help>TXT_KEY_PLAYER_OPTION_MISSIONARIES_AUTOMATED_HELP</Help>
+			<bDefault>0</bDefault>
+		</PlayerOptionInfo>
+		<PlayerOptionInfo>
+			<Type>PLAYEROPTION_MODDER_1</Type>
+			<Description>TXT_KEY_PLAYER_OPTION_MODDER_1</Description>
+			<Help>TXT_KEY_PLAYER_OPTION_MODDER_1_HELP</Help>
+			<bDefault>0</bDefault>
+		</PlayerOptionInfo>
+		<PlayerOptionInfo>
+			<Type>PLAYEROPTION_MODDER_2</Type>
+			<Description>TXT_KEY_PLAYER_OPTION_MODDER_2</Description>
+			<Help>TXT_KEY_PLAYER_OPTION_MODDER_2_HELP</Help>
+			<bDefault>0</bDefault>
+		</PlayerOptionInfo>
+		<PlayerOptionInfo>
+			<Type>PLAYEROPTION_MODDER_3</Type>
+			<Description>TXT_KEY_PLAYER_OPTION_MODDER_3</Description>
+			<Help>TXT_KEY_PLAYER_OPTION_MODDER_3_HELP</Help>
+			<bDefault>0</bDefault>
+		</PlayerOptionInfo>
 	</PlayerOptionInfos>
 </Civ4PlayerOptionInfos>

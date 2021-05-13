@@ -52,6 +52,8 @@ Button_HUDAdvisorForeign_Style
 Button_HUDAdvisorMilitary_Style
 Button_HUDAdvisorTechnology_Style
 Button_HUDAdvisorReligious_Style
+Button_HUDAdvisorCorporation_Style
+Button_HUDAdvisorEspionage_Style
 Button_HUDAdvisorVictory_Style
 Button_HUDAdvisorRecord_Style
 Button_HUDGlobeStrategy_Style
@@ -865,6 +867,66 @@ with GFC_Control_Button
 			.Disable				= GBitmap("Civ4/HUD/HUD_icons.tga", HVGrid, 10, 10, 6, 2);
 			.Toggle					= GBitmap("Civ4/HUD/HUD_icons.tga", HVGrid, 10, 10, 6, 3);
 			.ToggleRollover			= GBitmap("Civ4/HUD/HUD_icons.tga", HVGrid, 10, 10, 6, 4);
+			.TogglePress			= .Toggle;
+			.ToggleDisable			= .Disable;
+		}
+
+		map GFC_CtrlTheme_Bitmap_Control_Button				=	SF_CtrlTheme_Civ4_Control_Button_HUDSmall_Style;
+		map GFC_Control										=	SF_CtrlTheme_Civ4_Control_Button_HUDSmall_Style;
+	}
+
+	//HUD Advisor Button - Religious
+	style SF_CtrlTheme_Civ4_Control_Button_HUDAdvisorCorporation_Style
+	{
+
+		with GFC_Control_Button_Image
+		{
+			.Default				= GBitmap("../Beyond the Sword/Resource/Civ4/HUD/HUD_BTS_icons.tga", HVGrid, 5, 5, 1, 0);
+			.Rollover				= GBitmap("../Beyond the Sword/Resource/Civ4/HUD/HUD_BTS_icons.tga", HVGrid, 5, 5, 1, 1);
+			.Press					= .Default
+			.Disable				= GBitmap("../Beyond the Sword/Resource/Civ4/HUD/HUD_BTS_icons.tga", HVGrid, 5, 5, 1, 2);
+			.Toggle					= GBitmap("../Beyond the Sword/Resource/Civ4/HUD/HUD_BTS_icons.tga", HVGrid, 5, 5, 1, 3);
+			.ToggleRollover			= GBitmap("../Beyond the Sword/Resource/Civ4/HUD/HUD_BTS_icons.tga", HVGrid, 5, 5, 1, 4);
+			.TogglePress			= .Toggle;
+			.ToggleDisable			= .Disable;
+		}
+
+		map GFC_CtrlTheme_Bitmap_Control_Button				=	SF_CtrlTheme_Civ4_Control_Button_HUDSmall_Style;
+		map GFC_Control										=	SF_CtrlTheme_Civ4_Control_Button_HUDSmall_Style;
+	}
+
+	//HUD Advisor Button - Espionage
+	style SF_CtrlTheme_Civ4_Control_Button_HUDAdvisorEspionage_Style
+	{
+
+		with GFC_Control_Button_Image
+		{
+			.Default				= GBitmap("../Beyond the Sword/Resource/Civ4/HUD/HUD_BTS_icons.tga", HVGrid, 5, 5, 0, 0);
+			.Rollover				= GBitmap("../Beyond the Sword/Resource/Civ4/HUD/HUD_BTS_icons.tga", HVGrid, 5, 5, 0, 1);
+			.Press					= .Default;
+			.Disable				= GBitmap("../Beyond the Sword/Resource/Civ4/HUD/HUD_BTS_icons.tga", HVGrid, 5, 5, 0, 2);
+			.Toggle					= GBitmap("../Beyond the Sword/Resource/Civ4/HUD/HUD_BTS_icons.tga", HVGrid, 5, 5, 0, 3);
+			.ToggleRollover			= GBitmap("../Beyond the Sword/Resource/Civ4/HUD/HUD_BTS_icons.tga", HVGrid, 5, 5, 0, 4);
+			.TogglePress			= .Toggle;
+			.ToggleDisable			= .Disable;
+		}
+
+		map GFC_CtrlTheme_Bitmap_Control_Button				=	SF_CtrlTheme_Civ4_Control_Button_HUDSmall_Style;
+		map GFC_Control										=	SF_CtrlTheme_Civ4_Control_Button_HUDSmall_Style;
+	}
+
+	//HUD Buy-Sell Unit Button
+	style SF_CtrlTheme_Civ4_Control_Button_HUDBuySellUnit_Style
+	{
+
+		with GFC_Control_Button_Image
+		{
+			.Default				= GBitmap("../Beyond the Sword/Resource/Civ4/HUD/HUD_BTS_icons.tga", HVGrid, 5, 5, 2, 0);
+			.Rollover				= GBitmap("../Beyond the Sword/Resource/Civ4/HUD/HUD_BTS_icons.tga", HVGrid, 5, 5, 2, 1);
+			.Press					= .Default
+			.Disable				= GBitmap("../Beyond the Sword/Resource/Civ4/HUD/HUD_BTS_icons.tga", HVGrid, 5, 5, 2, 2);
+			.Toggle					= GBitmap("../Beyond the Sword/Resource/Civ4/HUD/HUD_BTS_icons.tga", HVGrid, 5, 5, 2, 3);
+			.ToggleRollover			= GBitmap("../Beyond the Sword/Resource/Civ4/HUD/HUD_BTS_icons.tga", HVGrid, 5, 5, 2, 4);
 			.TogglePress			= .Toggle;
 			.ToggleDisable			= .Disable;
 		}

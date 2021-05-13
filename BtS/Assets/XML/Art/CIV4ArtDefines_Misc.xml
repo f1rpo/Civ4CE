@@ -154,11 +154,25 @@
 			<KFM>Art/Units/Flag/Medallions.kfm</KFM>
 		</MiscArtInfo>
 		<MiscArtInfo>
-			<Type>ART_UNITGROUP_FLAG</Type>
+			<Type>ART_UNITGROUP_FLAG_ANCIENT</Type>
 			<Path>None</Path>
 			<fScale>0.8</fScale>
-			<NIF>Art/Units/Flag/Flag.nif</NIF>
-			<KFM>Art/Units/Flag/Flag.kfm</KFM>
+			<NIF>Art/Units/Flags/Ancient_Flag.nif</NIF>
+			<KFM>Art/Units/Flags/Ancient_Flag.kfm</KFM>
+		</MiscArtInfo>
+		<MiscArtInfo>
+			<Type>ART_UNITGROUP_FLAG_MEDIEVAL</Type>
+			<Path>None</Path>
+			<fScale>0.8</fScale>
+			<NIF>Art/Units/Flags/Medieval_Flag.nif</NIF>
+			<KFM>Art/Units/Flags/Medieval_Flag.kfm</KFM>
+		</MiscArtInfo>
+		<MiscArtInfo>
+			<Type>ART_UNITGROUP_FLAG_MODERN</Type>
+			<Path>None</Path>
+			<fScale>0.8</fScale>
+			<NIF>Art/Units/Flags/Modern_Flag.nif</NIF>
+			<KFM>Art/Units/Flags/Modern_Flag.kfm</KFM>
 		</MiscArtInfo>
 		<MiscArtInfo>
 			<Type>ART_UNITGROUP_FLAG_GLOW</Type>
@@ -205,6 +219,13 @@
 		<MiscArtInfo>
 			<Type>PLOT_TEXTURE</Type>
 			<Path>Art/Terrain/PlotTextures/PlotTexture.dds</Path>
+			<fScale>1.0</fScale>
+			<NIF>None</NIF>
+			<KFM>None</KFM>
+		</MiscArtInfo>
+		<MiscArtInfo>
+			<Type>AREA_BORDER_TEXTURE</Type>
+			<Path>Art/Terrain/PlotTextures/AreaBorder.dds</Path>
 			<fScale>1.0</fScale>
 			<NIF>None</NIF>
 			<KFM>None</KFM>
@@ -285,6 +306,41 @@
 			<!-- positive scale: city billboards use fonts from GameFont.tga -->
 			<!-- negative scale: GFC billboards (uses the interface font) -->
 			<fScale>1.0</fScale>
+			<NIF>None</NIF>
+			<KFM>None</KFM>
+		</MiscArtInfo>
+		<MiscArtInfo>
+			<Type>SPACE_SHIP_BUTTON</Type>
+			<Path>,Art/Interface/Buttons/Buildings/ApolloProgram.dds,Art/Interface/Buttons/Buildings_Atlas.dds,3,1</Path>
+			<fScale>1.0</fScale>
+			<NIF/>
+			<KFM/>
+		</MiscArtInfo>
+		<MiscArtInfo>
+			<Type>REPLACE_LEADER_BACKGROUND</Type>
+			<Path/>
+			<fScale>1</fScale>
+			<NIF></NIF>
+			<KFM></KFM>
+		</MiscArtInfo>
+		<MiscArtInfo>
+			<Type>REPLACE_LEADER_FORGROUND</Type>
+			<Path/>
+			<fScale>1</fScale>
+			<NIF></NIF>
+			<KFM></KFM>
+		</MiscArtInfo>
+		<MiscArtInfo>
+			<Type>DEFAULT_THEME_NAME</Type>
+			<Path>Resource/Civ4.thm</Path>
+			<fScale>0.0</fScale>
+			<NIF>None</NIF>
+			<KFM>None</KFM>
+		</MiscArtInfo>
+		<MiscArtInfo>
+			<Type>SOUND_BLASTER_LOGO</Type>
+			<Path>Art/Interface/Screens/Options/X-Fi_Logo_Sound Best_trans On.dds</Path>
+			<fScale>0.0</fScale>
 			<NIF>None</NIF>
 			<KFM>None</KFM>
 		</MiscArtInfo>

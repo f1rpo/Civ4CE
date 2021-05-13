@@ -41,7 +41,8 @@ BeginTeam
 	Tech=TECH_MUSIC                         
 	Tech=TECH_PAPER                         
 	Tech=TECH_EDUCATION                         
-	Tech=TECH_GUNPOWDER                         
+	Tech=TECH_GUNPOWDER    
+	Tech=TECH_AESTHETICS
 	AtWar=10                         
 	RevealMap=0                 
 EndTeam                 
@@ -74,7 +75,8 @@ BeginTeam
 	Tech=TECH_FEUDALISM                         
 	Tech=TECH_PHILOSOPHY                         
 	Tech=TECH_PAPER                         
-	Tech=TECH_EDUCATION 			
+	Tech=TECH_EDUCATION 
+	Tech=TECH_AESTHETICS	
 	RevealMap=0                 
 EndTeam                 
 BeginTeam                         
@@ -109,7 +111,8 @@ BeginTeam
 	Tech=TECH_FEUDALISM                         
 	Tech=TECH_ENGINEERING                         
 	Tech=TECH_DIVINE_RIGHT                         
-	Tech=TECH_GUILDS 			
+	Tech=TECH_GUILDS 	
+	Tech=TECH_AESTHETICS	
 	AtWar=3 			
 	AtWar=13 			
 	OpenBordersWithTeam=5 			
@@ -154,7 +157,8 @@ BeginTeam
 	Tech=TECH_MUSIC                         
 	Tech=TECH_DIVINE_RIGHT                         
 	Tech=TECH_PAPER                         
-	Tech=TECH_GUILDS 			
+	Tech=TECH_GUILDS 
+	Tech=TECH_AESTHETICS	
 	AtWar=2 			
 	AtWar=4 			
 	AtWar=5 			
@@ -197,7 +201,8 @@ BeginTeam
 	Tech=TECH_FEUDALISM                         
 	Tech=TECH_ENGINEERING                         
 	Tech=TECH_DIVINE_RIGHT                         
-	Tech=TECH_GUILDS 			
+	Tech=TECH_GUILDS 	
+	Tech=TECH_AESTHETICS	
 	AtWar=3 			
 	AtWar=13 			
 	RevealMap=0                 
@@ -233,7 +238,8 @@ BeginTeam
 	Tech=TECH_THEOLOGY                         
 	Tech=TECH_FEUDALISM                         
 	Tech=TECH_ENGINEERING                         
-	Tech=TECH_GUILDS 			
+	Tech=TECH_GUILDS 
+	Tech=TECH_AESTHETICS	
 	AtWar=3 			
 	AtWar=13 			
 	OpenBordersWithTeam=2 			
@@ -274,7 +280,8 @@ BeginTeam
 	Tech=TECH_MUSIC                         
 	Tech=TECH_ENGINEERING                         
 	Tech=TECH_DIVINE_RIGHT                         
-	Tech=TECH_GUILDS 			
+	Tech=TECH_GUILDS 
+	Tech=TECH_AESTHETICS	
 	AtWar=3 			
 	AtWar=13 			
 	OpenBordersWithTeam=2 			
@@ -311,7 +318,8 @@ BeginTeam
 	Tech=TECH_CALENDAR                         
 	Tech=TECH_THEOLOGY                         
 	Tech=TECH_FEUDALISM                         
-	Tech=TECH_ENGINEERING 			
+	Tech=TECH_ENGINEERING 
+	Tech=TECH_AESTHETICS	
 	AtWar=3 			
 	RevealMap=0                 
 EndTeam                 
@@ -344,7 +352,8 @@ BeginTeam
 	Tech=TECH_CURRENCY                         
 	Tech=TECH_CALENDAR                         
 	Tech=TECH_THEOLOGY                         
-	Tech=TECH_FEUDALISM 			
+	Tech=TECH_FEUDALISM 
+	Tech=TECH_AESTHETICS	
 	RevealMap=0                 
 EndTeam                 
 BeginTeam                         
@@ -365,7 +374,8 @@ BeginTeam
 	Tech=TECH_CONSTRUCTION                         
 	Tech=TECH_CODE_OF_LAWS                         
 	Tech=TECH_CALENDAR                         
-	Tech=TECH_CIVIL_SERVICE 			
+	Tech=TECH_CIVIL_SERVICE 	
+	Tech=TECH_AESTHETICS	
 	RevealMap=0                 
 EndTeam                 
 BeginTeam                         
@@ -396,7 +406,8 @@ BeginTeam
 	Tech=TECH_CURRENCY                         
 	Tech=TECH_CALENDAR                         
 	Tech=TECH_FEUDALISM                         
-	Tech=TECH_PHILOSOPHY 			
+	Tech=TECH_PHILOSOPHY 		
+	Tech=TECH_AESTHETICS	
 	AtWar=0 			
 	RevealMap=0                 
 EndTeam                 
@@ -419,7 +430,8 @@ BeginTeam
 	Tech=TECH_CONSTRUCTION                         
 	Tech=TECH_CODE_OF_LAWS                         
 	Tech=TECH_CALENDAR                         
-	Tech=TECH_MUSIC 			
+	Tech=TECH_MUSIC 	
+	Tech=TECH_AESTHETICS	
 	RevealMap=0                 
 EndTeam                 
 BeginTeam                         
@@ -459,7 +471,8 @@ BeginTeam
 	Tech=TECH_MUSIC                         
 	Tech=TECH_ENGINEERING                         
 	Tech=TECH_DIVINE_RIGHT                         
-	Tech=TECH_GUILDS 			
+	Tech=TECH_GUILDS 		
+	Tech=TECH_AESTHETICS	
 	AtWar=3 			
 	AtWar=13 			
 	OpenBordersWithTeam=2 			
@@ -496,7 +509,9 @@ BeginTeam
 	Tech=TECH_CURRENCY                         
 	Tech=TECH_CALENDAR                         
 	Tech=TECH_MACHINERY                         
-	Tech=TECH_THEOLOGY 			
+	Tech=TECH_THEOLOGY 	
+	Tech=TECH_CIVIL_SERVICE	
+	Tech=TECH_AESTHETICS
 	AtWar=2 			
 	AtWar=3 			
 	AtWar=4 			
@@ -535,14 +550,85 @@ BeginTeam
 	Tech=TECH_FEUDALISM                         
 	Tech=TECH_PHILOSOPHY                         
 	Tech=TECH_MUSIC                         
-	Tech=TECH_PAPER 			
+	Tech=TECH_PAPER 		
+	Tech=TECH_AESTHETICS	
 	AtWar=3 			
 	RevealMap=0                 
 EndTeam                 
-BeginTeam                 
-EndTeam                 
-BeginTeam                 
-EndTeam                 
+BeginTeam                         
+	Tech=TECH_MINING                         
+	Tech=TECH_MYSTICISM                         
+	Tech=TECH_FISHING                         
+	Tech=TECH_THE_WHEEL                         
+	Tech=TECH_AGRICULTURE                         
+	Tech=TECH_HUNTING                         
+	Tech=TECH_BRONZE_WORKING                         
+	Tech=TECH_MASONRY                         
+	Tech=TECH_POLYTHEISM                         
+	Tech=TECH_MEDITATION                         
+	Tech=TECH_SAILING                         
+	Tech=TECH_POTTERY                         
+	Tech=TECH_ANIMAL_HUSBANDRY                         
+	Tech=TECH_ARCHERY                         
+	Tech=TECH_PRIESTHOOD                         
+	Tech=TECH_WRITING                         
+	Tech=TECH_HORSEBACK_RIDING                         
+	Tech=TECH_IRON_WORKING                         
+	Tech=TECH_METAL_CASTING                         
+	Tech=TECH_MONARCHY                         
+	Tech=TECH_MATHEMATICS                         
+	Tech=TECH_CONSTRUCTION                         
+	Tech=TECH_CODE_OF_LAWS                         
+	Tech=TECH_CURRENCY                         
+	Tech=TECH_CALENDAR                         
+	Tech=TECH_MACHINERY                         
+	Tech=TECH_FEUDALISM                         
+	Tech=TECH_PHILOSOPHY                         
+	Tech=TECH_MUSIC                         
+	Tech=TECH_PAPER 		
+	Tech=TECH_AESTHETICS	
+	AtWar=10  
+	RevealMap=0                 
+EndTeam                
+BeginTeam                         
+	Tech=TECH_MINING                         
+	Tech=TECH_MYSTICISM                         
+	Tech=TECH_FISHING                         
+	Tech=TECH_THE_WHEEL                         
+	Tech=TECH_AGRICULTURE                         
+	Tech=TECH_HUNTING                         
+	Tech=TECH_BRONZE_WORKING                         
+	Tech=TECH_MASONRY                         
+	Tech=TECH_POLYTHEISM                         
+	Tech=TECH_MEDITATION                         
+	Tech=TECH_SAILING                         
+	Tech=TECH_POTTERY                         
+	Tech=TECH_ANIMAL_HUSBANDRY                         
+	Tech=TECH_ARCHERY                         
+	Tech=TECH_PRIESTHOOD                         
+	Tech=TECH_WRITING                         
+	Tech=TECH_HORSEBACK_RIDING                         
+	Tech=TECH_IRON_WORKING                         
+	Tech=TECH_METAL_CASTING                         
+	Tech=TECH_MONARCHY                         
+	Tech=TECH_MATHEMATICS                         
+	Tech=TECH_COMPASS                         
+	Tech=TECH_CONSTRUCTION                         
+	Tech=TECH_CODE_OF_LAWS                         
+	Tech=TECH_CURRENCY                         
+	Tech=TECH_CALENDAR                         
+	Tech=TECH_MACHINERY                         
+	Tech=TECH_CIVIL_SERVICE                         
+	Tech=TECH_FEUDALISM                         
+	Tech=TECH_PHILOSOPHY                         
+	Tech=TECH_MUSIC                         
+	Tech=TECH_PAPER                         
+	Tech=TECH_EDUCATION                         
+	Tech=TECH_GUNPOWDER    
+	Tech=TECH_AESTHETICS
+	AtWar=10                         
+	RevealMap=0                 
+EndTeam                  
 BeginTeam                 
 EndTeam
 BeginPlayer                         
@@ -854,12 +940,12 @@ BeginPlayer
 EndPlayer                         
 BeginPlayer                         
 	Team=6                         
-	CivDesc=TXT_KEY_CIV_HOLYROMAN_DESC
-	CivShortDesc=TXT_KEY_CIV_GERMANY_SHORT_DESC
-	CivAdjective=TXT_KEY_CIV_GERMANY_ADJECTIVE                        
-	LeaderName=TXT_KEY_LEADER_FREDERICK                        
-	LeaderType=LEADER_FREDERICK
-	CivType=CIVILIZATION_GERMANY                         
+	CivDesc=TXT_KEY_CIV_HOLY_ROMAN_DESC
+	CivShortDesc=TXT_KEY_CIV_HOLY_ROMAN_SHORT_DESC
+	CivAdjective=TXT_KEY_CIV_HOLY_ROMAN_ADJECTIVE                        
+	LeaderName=TXT_KEY_LEADER_CHARLEMAGNE                        
+	LeaderType=LEADER_CHARLEMAGNE
+	CivType=CIVILIZATION_HOLY_ROMAN                         
 	PlayableCiv=1
 	MinorNationStatus=0                         
 	FlagDecal=Art/Interface/TeamColor/FlagDECAL_Eagle.dds                         
@@ -872,69 +958,51 @@ BeginPlayer
 	CivicOption=CIVICOPTION_LABOR, Civic=CIVIC_SERFDOM                         
 	CivicOption=CIVICOPTION_ECONOMY, Civic=CIVIC_DECENTRALIZATION                         
 	CivicOption=CIVICOPTION_RELIGION, Civic=CIVIC_ORGANIZED_RELIGION 			
-	CityList=TXT_KEY_CITY_NAME_HAMBURG                         
-	CityList=TXT_KEY_CITY_NAME_BERLIN 			
-	CityList=TXT_KEY_CITY_NAME_MUNICH 			
-	CityList=TXT_KEY_CITY_NAME_COLOGNE 			
-	CityList=TXT_KEY_CITY_NAME_FRANKFURT 			
-	CityList=TXT_KEY_CITY_NAME_ESSEN 			
-	CityList=TXT_KEY_CITY_NAME_DORTMUND 			
-	CityList=TXT_KEY_CITY_NAME_STUTTGART 			
-	CityList=TXT_KEY_CITY_NAME_DUSSELDORF 			
-	CityList=TXT_KEY_CITY_NAME_HANNOVER 			
-	CityList=TXT_KEY_CITY_NAME_DUISBURG                         
-	CityList=TXT_KEY_CITY_NAME_LEIPZIG 			
-	CityList=TXT_KEY_CITY_NAME_NUREMBERG 			
-	CityList=TXT_KEY_CITY_NAME_DRESDEN 			
-	CityList=TXT_KEY_CITY_NAME_BONN 			
-	CityList=TXT_KEY_CITY_NAME_BOCHUM 			
-	CityList=TXT_KEY_CITY_NAME_MAGDEBURG 			
-	CityList=TXT_KEY_CITY_NAME_BIELEFELD 			
-	CityList=TXT_KEY_CITY_NAME_MANNHEIM 			
-	CityList=TXT_KEY_CITY_NAME_KARLSRUHE 			
-	CityList=TXT_KEY_CITY_NAME_GELSENKIRCHEN 			
-	CityList=TXT_KEY_CITY_NAME_WIESBADEN 			
-	CityList=TXT_KEY_CITY_NAME_MUNSTER 			
-	CityList=TXT_KEY_CITY_NAME_ROSTOCK 			
-	CityList=TXT_KEY_CITY_NAME_AUGSBURG 			
-	CityList=TXT_KEY_CITY_NAME_CHEMNITZ 			
-	CityList=TXT_KEY_CITY_NAME_AACHEN 			
-	CityList=TXT_KEY_CITY_NAME_BRAUNSCHWEIG 			
-	CityList=TXT_KEY_CITY_NAME_HALLE 			
-	CityList=TXT_KEY_CITY_NAME_MONCHENGLADBACH 			
-	CityList=TXT_KEY_CITY_NAME_KIEL 			
-	CityList=TXT_KEY_CITY_NAME_WUPPERTAL 			
-	CityList=TXT_KEY_CITY_NAME_LUBECK 			
-	CityList=TXT_KEY_CITY_NAME_FREIBURG 			
-	CityList=TXT_KEY_CITY_NAME_HAGEN 			
-	CityList=TXT_KEY_CITY_NAME_ERFURT 			
-	CityList=TXT_KEY_CITY_NAME_HEIDELBERG 			
-	CityList=TXT_KEY_CITY_NAME_KASSEL 			
-	CityList=TXT_KEY_CITY_NAME_MAINZ 			
-	CityList=TXT_KEY_CITY_NAME_OBERHAUSEN 			
-	CityList=TXT_KEY_CITY_NAME_HAMM 			
-	CityList=TXT_KEY_CITY_NAME_SAARBRUCKEN 			
-	CityList=TXT_KEY_CITY_NAME_KREFELD 			
-	CityList=TXT_KEY_CITY_NAME_POTSDAM 			
-	CityList=TXT_KEY_CITY_NAME_SOLINGEN 			
-	CityList=TXT_KEY_CITY_NAME_OSNABRUCK 			
-	CityList=TXT_KEY_CITY_NAME_LUDWIGSHAFEN 			
-	CityList=TXT_KEY_CITY_NAME_LEVERKUSEN 			
-	CityList=TXT_KEY_CITY_NAME_OLDENBURG 			
-	CityList=TXT_KEY_CITY_NAME_NEUSS 			
-	CityList=TXT_KEY_CITY_NAME_MULHEIM 			
-	CityList=TXT_KEY_CITY_NAME_DARMSTADT 			
-	CityList=TXT_KEY_CITY_NAME_HERNE 			
-	CityList=TXT_KEY_CITY_NAME_WURZBURG 			
-	CityList=TXT_KEY_CITY_NAME_REGENSBURG 			
-	CityList=TXT_KEY_CITY_NAME_RECKLINGHAUSEN 			
-	CityList=TXT_KEY_CITY_NAME_GOTTINGEN 			
-	CityList=TXT_KEY_CITY_NAME_WOLFSBURG 			
-	CityList=TXT_KEY_CITY_NAME_ULM 			
-	CityList=TXT_KEY_CITY_NAME_KOBLENZ 			
-	CityList=TXT_KEY_CITY_NAME_HILDESHEIM 			
-	CityList=TXT_KEY_CITY_NAME_ERLANGEN 			
-	CityList=TXT_KEY_CITY_NAME_TRIER                         
+	CityList=TXT_KEY_CITY_NAME_AACHEN
+	CityList=TXT_KEY_CITY_NAME_PRAGUE
+	CityList=TXT_KEY_CITY_NAME_VIENNA
+	CityList=TXT_KEY_CITY_NAME_NUREMBERG
+	CityList=TXT_KEY_CITY_NAME_AUGSBURG
+	CityList=TXT_KEY_CITY_NAME_MAINZ
+	CityList=TXT_KEY_CITY_NAME_ULM
+	CityList=TXT_KEY_CITY_NAME_FLORENCE
+	CityList=TXT_KEY_CITY_NAME_PISA
+	CityList=TXT_KEY_CITY_NAME_LUXEMBURG
+	CityList=TXT_KEY_CITY_NAME_STRASSBURG
+	CityList=TXT_KEY_CITY_NAME_LUBECK
+	CityList=TXT_KEY_CITY_NAME_BRANDENBURG
+	CityList=TXT_KEY_CITY_NAME_HEIDELBERG
+	CityList=TXT_KEY_CITY_NAME_TRIER
+	CityList=TXT_KEY_CITY_NAME_REGENSBURG
+	CityList=TXT_KEY_CITY_NAME_MAGDEBURG
+	CityList=TXT_KEY_CITY_NAME_WORMS
+	CityList=TXT_KEY_CITY_NAME_CONSTANCE
+	CityList=TXT_KEY_CITY_NAME_BASLE
+	CityList=TXT_KEY_CITY_NAME_ZURICH
+	CityList=TXT_KEY_CITY_NAME_INNSBRUCK
+	CityList=TXT_KEY_CITY_NAME_TRENT
+	CityList=TXT_KEY_CITY_NAME_GENOA
+	CityList=TXT_KEY_CITY_NAME_LUCCA
+	CityList=TXT_KEY_CITY_NAME_SIENNA
+	CityList=TXT_KEY_CITY_NAME_ARLES
+	CityList=TXT_KEY_CITY_NAME_BESANCON
+	CityList=TXT_KEY_CITY_NAME_METZ
+	CityList=TXT_KEY_CITY_NAME_WIRTEN
+	CityList=TXT_KEY_CITY_NAME_BRUSSELS
+	CityList=TXT_KEY_CITY_NAME_ANTWERP
+	CityList=TXT_KEY_CITY_NAME_LUTTICH
+	CityList=TXT_KEY_CITY_NAME_STETTIN
+	CityList=TXT_KEY_CITY_NAME_KOLBERG
+	CityList=TXT_KEY_CITY_NAME_BRESLAU
+	CityList=TXT_KEY_CITY_NAME_OLMUTZ
+	CityList=TXT_KEY_CITY_NAME_PILSEN
+	CityList=TXT_KEY_CITY_NAME_BAMBERG
+	CityList=TXT_KEY_CITY_NAME_MANNHEIM
+	CityList=TXT_KEY_CITY_NAME_GOSLAR
+	CityList=TXT_KEY_CITY_NAME_SPIRES
+	CityList=TXT_KEY_CITY_NAME_PADERBORN
+	CityList=TXT_KEY_CITY_NAME_PASSAU
+	CityList=TXT_KEY_CITY_NAME_HAGENAU                      
 	Handicap=HANDICAP_CHIEFTAIN                         
 	AttitudePlayer=3, AttitudeExtra=-10                         
 	AttitudePlayer=12, AttitudeExtra=-4                         
@@ -1095,11 +1163,11 @@ BeginPlayer
 	CivDesc=TXT_KEY_CIV_BYZANTINE_DESC
 	CivShortDesc=TXT_KEY_CIV_BYZANTINE_SHORT_DESC
 	CivAdjective=TXT_KEY_CIV_BYZANTINE_ADJECTIVE                        
-	LeaderName=TXT_KEY_LEADER_BASIL                        
-	LeaderType=LEADER_JULIUS_CAESAR
-	CivType=CIVILIZATION_ROME                         
-	PlayableCiv=0
-	MinorNationStatus=1                         
+	LeaderName=TXT_KEY_LEADER_JUSTINIAN                        
+	LeaderType=LEADER_JUSTINIAN 
+	CivType=CIVILIZATION_BYZANTIUM                         
+	PlayableCiv=1
+	MinorNationStatus=0                         
 	FlagDecal=Art/Interface/TeamColor/FlagDECAL_Labarum.dds                         
 	Color=PLAYERCOLOR_DARK_PURPLE                         
 	ArtStyle=ARTSTYLE_EUROPEAN                         
@@ -1110,27 +1178,46 @@ BeginPlayer
 	CivicOption=CIVICOPTION_LABOR, Civic=CIVIC_SERFDOM                         
 	CivicOption=CIVICOPTION_ECONOMY, Civic=CIVIC_DECENTRALIZATION                         
 	CivicOption=CIVICOPTION_RELIGION, Civic=CIVIC_THEOCRACY                         
-	CityList=Adrianople 			
-	CityList=Caesarea 			
-	CityList=Nicaea 			
-	CityList=Varna 			
-	CityList=Smyrna 			
-	CityList=Heraclea 			
-	CityList=Chalcedon 			
-	CityList=Sardica 			
-	CityList=Naissus 			
-	CityList=Septum 			
-	CityList=Nicomedia 			
-	CityList=Amorium 			
-	CityList=Ancyra 			
-	CityList=Brusa 			
-	CityList=Iconium 			
-	CityList=Prilep 			
-	CityList=Ohrid 			
-	CityList=Vidin 			
-	CityList=Samosata 			
-	CityList=Ani 			
-	CityList=Edessa                         
+	CityList=TXT_KEY_CITY_NAME_THESSALONICA
+	CityList=TXT_KEY_CITY_NAME_ADRIANOPLE
+	CityList=TXT_KEY_CITY_NAME_NICAEA
+	CityList=TXT_KEY_CITY_NAME_ANTIOCH
+	CityList=TXT_KEY_CITY_NAME_NICOMEDIA
+	CityList=TXT_KEY_CITY_NAME_ANGORA
+	CityList=TXT_KEY_CITY_NAME_ICONIUM
+	CityList=TXT_KEY_CITY_NAME_LAODICEA
+	CityList=TXT_KEY_CITY_NAME_DORYLAEUM
+	CityList=TXT_KEY_CITY_NAME_AMORIUM
+	CityList=TXT_KEY_CITY_NAME_PHILIPPOPOLIS
+	CityList=TXT_KEY_CITY_NAME_MISTRA
+	CityList=TXT_KEY_CITY_NAME_EDESSA
+	CityList=TXT_KEY_CITY_NAME_HERACLEA
+	CityList=TXT_KEY_CITY_NAME_THEODOSIOPOLIS
+	CityList=TXT_KEY_CITY_NAME_ODESSOS
+	CityList=TXT_KEY_CITY_NAME_MESEMBRIA
+	CityList=TXT_KEY_CITY_NAME_SARDICA
+	CityList=TXT_KEY_CITY_NAME_RAGUSA
+	CityList=TXT_KEY_CITY_NAME_PHILIPPI
+	CityList=TXT_KEY_CITY_NAME_JUSTINIANOPOLIS
+	CityList=TXT_KEY_CITY_NAME_IOANNINA
+	CityList=TXT_KEY_CITY_NAME_CEPHALONIA
+	CityList=TXT_KEY_CITY_NAME_SELYMBRIA
+	CityList=TXT_KEY_CITY_NAME_CALLIPOLIS
+	CityList=TXT_KEY_CITY_NAME_CHANDAX
+	CityList=TXT_KEY_CITY_NAME_LEFKOSIA
+	CityList=TXT_KEY_CITY_NAME_FAMAGUSTA
+	CityList=TXT_KEY_CITY_NAME_BARI
+	CityList=TXT_KEY_CITY_NAME_OTRANTO
+	CityList=TXT_KEY_CITY_NAME_CHALCEDON
+	CityList=TXT_KEY_CITY_NAME_NEOCAESAREA
+	CityList=TXT_KEY_CITY_NAME_METILENE
+	CityList=TXT_KEY_CITY_NAME_SELEUCIA
+	CityList=TXT_KEY_CITY_NAME_SEBASTEA
+	CityList=TXT_KEY_CITY_NAME_MYRA
+	CityList=TXT_KEY_CITY_NAME_GANGRA
+	CityList=TXT_KEY_CITY_NAME_OCHRYD
+	CityList=TXT_KEY_CITY_NAME_BUTHROTUM
+	CityList=TXT_KEY_CITY_NAME_NAISSUS                        
 	Handicap=HANDICAP_MONARCH                         
 	AttitudePlayer=3, AttitudeExtra=-10                         
 	AttitudePlayer=6, AttitudeExtra=-4                         
@@ -1140,13 +1227,13 @@ BeginPlayer
 	CivDesc=TXT_KEY_CIV_VIKING_DESC
 	CivShortDesc=TXT_KEY_CIV_VIKING_SHORT_DESC
 	CivAdjective=TXT_KEY_CIV_VIKING_ADJECTIVE                        
-	LeaderName=TXT_KEY_LEADER_SVEIN                        
-	LeaderType=LEADER_ALEXANDER
-	CivType=CIVILIZATION_GREECE                         
-	PlayableCiv=0
-	MinorNationStatus=1                         
+	LeaderName=TXT_KEY_LEADER_RAGNAR                       
+	LeaderType=LEADER_RAGNAR
+	CivType=CIVILIZATION_VIKING                         
+	PlayableCiv=1
+	MinorNationStatus=0                         
 	FlagDecal=Art/Interface/TeamColor/FlagDECAL_Helm.dds                         
-	Color=PLAYERCOLOR_BLUE                         
+	Color=PLAYERCOLOR_LIGHT_PURPLE                        
 	ArtStyle=ARTSTYLE_EUROPEAN                         
 	StartingGold=50                         
 	StateReligion=                         
@@ -1155,37 +1242,42 @@ BeginPlayer
 	CivicOption=CIVICOPTION_LABOR, Civic=CIVIC_SLAVERY                         
 	CivicOption=CIVICOPTION_ECONOMY, Civic=CIVIC_DECENTRALIZATION                         
 	CivicOption=CIVICOPTION_RELIGION, Civic=CIVIC_PAGANISM 			
-	CityList=Bergen 			
-	CityList=Copenhagen 			
-	CityList=Reykjavik 			
-	CityList=Oslo 			
-	CityList=Stockholm 			
-	CityList=Birka 			
-	CityList=Aarhus 			
-	CityList=Odense 			
-	CityList=Hareid 			
-	CityList=Molde 			
-	CityList=Alesund 			
-	CityList=Bodo 			
-	CityList=Karasjok 			
-	CityList=Tromso 			
-	CityList=Vadso 			
-	CityList=Farsund 			
-	CityList=Risor 			
-	CityList=Fauske 			
-	CityList=Karistad 			
-	CityList=Batsfjord 			
-	CityList=Hammerfest 			
-	CityList=Honningsvag 			
-	CityList=Svolvaer 			
-	CityList=Haugesund 			
-	CityList=Sarpsborg 			
-	CityList=Lillehammer 			
-	CityList=Elverurn 			
-	CityList=Falun 			
-	CityList=Helsinki 			
-	CityList=Keflavik 			
-	CityList=Thunderfall                         
+	CityList=TXT_KEY_CITY_NAME_HAITHABU
+	CityList=TXT_KEY_CITY_NAME_BIRKA
+	CityList=TXT_KEY_CITY_NAME_BJORGVIN
+	CityList=TXT_KEY_CITY_NAME_JELLING
+	CityList=TXT_KEY_CITY_NAME_ROSKILDE
+	CityList=TXT_KEY_CITY_NAME_TONSBERG
+	CityList=TXT_KEY_CITY_NAME_SIGTUNA
+	CityList=TXT_KEY_CITY_NAME_LODOSE
+	CityList=TXT_KEY_CITY_NAME_ODENSE
+	CityList=TXT_KEY_CITY_NAME_OSLO
+	CityList=TXT_KEY_CITY_NAME_LINDHOLM
+	CityList=TXT_KEY_CITY_NAME_VASTERAS
+	CityList=TXT_KEY_CITY_NAME_AARHUS
+	CityList=TXT_KEY_CITY_NAME_LUND
+	CityList=TXT_KEY_CITY_NAME_KAUPANG
+	CityList=TXT_KEY_CITY_NAME_REYKJAVIK
+	CityList=TXT_KEY_CITY_NAME_THINGVELLIR
+	CityList=TXT_KEY_CITY_NAME_JORVIK
+	CityList=TXT_KEY_CITY_NAME_LINCOLN
+	CityList=TXT_KEY_CITY_NAME_DEORABY
+	CityList=TXT_KEY_CITY_NAME_STAMFORD
+	CityList=TXT_KEY_CITY_NAME_DYFLIN
+	CityList=TXT_KEY_CITY_NAME_VADREJFORD
+	CityList=TXT_KEY_CITY_NAME_LIMERICK
+	CityList=TXT_KEY_CITY_NAME_ROWANE
+	CityList=TXT_KEY_CITY_NAME_KONUGARD
+	CityList=TXT_KEY_CITY_NAME_HOLMGARD
+	CityList=TXT_KEY_CITY_NAME_ALDEIGJUBORG
+	CityList=TXT_KEY_CITY_NAME_KIRKJUVAGR
+	CityList=TXT_KEY_CITY_NAME_TYNWALD
+	CityList=TXT_KEY_CITY_NAME_LEIRVIK
+	CityList=TXT_KEY_CITY_NAME_TINGANES
+	CityList=TXT_KEY_CITY_NAME_KIRKJUBOUR
+	CityList=TXT_KEY_CITY_NAME_BRATTAHLID
+	CityList=TXT_KEY_CITY_NAME_VINLAND
+	CityList=TXT_KEY_CITY_NAME_THUNDERFALL                       
 	Handicap=HANDICAP_WARLORD                         
 EndPlayer                         
 BeginPlayer                         
@@ -1210,16 +1302,112 @@ BeginPlayer
 	CivicOption=CIVICOPTION_RELIGION, Civic=CIVIC_ORGANIZED_RELIGION                         
 	Handicap=HANDICAP_EMPEROR                         
 EndPlayer                         
-BeginPlayer
-	LeaderType=NONE
-	CivType=NONE
-	Team=15
+BeginPlayer                         
+	Team=15                         
+	CivDesc=TXT_KEY_CIV_KHMER_DESC
+	CivShortDesc=TXT_KEY_CIV_KHMER_SHORT_DESC
+	CivAdjective=TXT_KEY_CIV_KHMER_ADJECTIVE                        
+	LeaderName=TXT_KEY_LEADER_SURYAVARMAN                        
+	LeaderType=LEADER_SURYAVARMAN
+	CivType=CIVILIZATION_KHMER                         
+	PlayableCiv=1
+	MinorNationStatus=0                         
+	Color=PLAYERCOLOR_BLUE                         
+	ArtStyle=ARTSTYLE_ASIAN                         
+	StartingGold=60                         
+	StateReligion=RELIGION_BUDDHISM                         
+	CivicOption=CIVICOPTION_GOVERNMENT, Civic=CIVIC_DESPOTISM                         
+	CivicOption=CIVICOPTION_LEGAL, Civic=CIVIC_BARBARISM                         
+	CivicOption=CIVICOPTION_LABOR, Civic=CIVIC_CASTE_SYSTEM                         
+	CivicOption=CIVICOPTION_ECONOMY, Civic=CIVIC_DECENTRALIZATION                         
+	CivicOption=CIVICOPTION_RELIGION, Civic=CIVIC_ORGANIZED_RELIGION                         
+	CityList=TXT_KEY_CITY_NAME_RAJAVIHARA
+	CityList=TXT_KEY_CITY_NAME_ISVARAPURA
+	CityList=TXT_KEY_CITY_NAME_BANTEAY_KDEI
+	CityList=TXT_KEY_CITY_NAME_JAYENDRANAGARI
+	CityList=TXT_KEY_CITY_NAME_PRE_RUP
+	CityList=TXT_KEY_CITY_NAME_VIMAYAPURA
+	CityList=TXT_KEY_CITY_NAME_LINGAPURA
+	CityList=TXT_KEY_CITY_NAME_KRONG_CHAKTOMUK
+	CityList=TXT_KEY_CITY_NAME_CHOK_GARGYAR
+	CityList=TXT_KEY_CITY_NAME_MAHENDRAPARVATA
+	CityList=TXT_KEY_CITY_NAME_AMARENDRAPURA
+	CityList=TXT_KEY_CITY_NAME_INDRAPURA
+	CityList=TXT_KEY_CITY_NAME_LAVO
+	CityList=TXT_KEY_CITY_NAME_PREAH_VIHEAR
+	CityList=TXT_KEY_CITY_NAME_PHANOM_RUNG
+	CityList=TXT_KEY_CITY_NAME_PHIMAI
+	CityList=TXT_KEY_CITY_NAME_MUANG_TAM
+	CityList=TXT_KEY_CITY_NAME_BENG_MELEA
+	CityList=TXT_KEY_CITY_NAME_PRASAT_BAKAN
+	CityList=TXT_KEY_CITY_NAME_SINGHAPURA
+	CityList=TXT_KEY_CITY_NAME_CHALIENG
+	CityList=TXT_KEY_CITY_NAME_SUKHOTHAI
+	CityList=TXT_KEY_CITY_NAME_VIANGCHAN
+	CityList=TXT_KEY_CITY_NAME_BATTAMBANG
+	CityList=TXT_KEY_CITY_NAME_SURYAPARVATA
+	CityList=TXT_KEY_CITY_NAME_PREY_NOKOR
+	CityList=TXT_KEY_CITY_NAME_O_KEO
+	CityList=TXT_KEY_CITY_NAME_ANINDITAPURA
+	CityList=TXT_KEY_CITY_NAME_ISANAPURA
+	CityList=TXT_KEY_CITY_NAME_SHRESTAPURA
+	CityList=TXT_KEY_CITY_NAME_ANGKOR_BOREI
+	CityList=TXT_KEY_CITY_NAME_VYADHAPURA
+	CityList=TXT_KEY_CITY_NAME_BHAVAPURA
+	CityList=TXT_KEY_CITY_NAME_SAMBHUPURA
+	CityList=TXT_KEY_CITY_NAME_LOVEK
+	CityList=TXT_KEY_CITY_NAME_UDONG	
+	Handicap=HANDICAP_NOBLE                         
 EndPlayer                         
-BeginPlayer
-	LeaderType=NONE
-	CivType=NONE
-	Team=16
-EndPlayer                         
+BeginPlayer                         
+	Team=16                         
+	CivDesc=TXT_KEY_CIV_KOREA_DESC
+	CivShortDesc=TXT_KEY_CIV_KOREA_SHORT_DESC
+	CivAdjective=TXT_KEY_CIV_KOREA_ADJECTIVE                        
+	LeaderName=TXT_KEY_LEADER_WANGKON                        
+	LeaderType=LEADER_WANGKON
+	CivType=CIVILIZATION_KOREA                         
+	PlayableCiv=1
+	MinorNationStatus=0                         
+	ArtStyle=ARTSTYLE_ASIAN                         
+	StartingGold=30                         
+	StateReligion=RELIGION_BUDDHISM                         
+	StartingEra=ERA_MEDIEVAL                         
+	CivicOption=CIVICOPTION_GOVERNMENT, Civic=CIVIC_HEREDITARY_RULE                         
+	CivicOption=CIVICOPTION_LEGAL, Civic=CIVIC_BUREAUCRACY                         
+	CivicOption=CIVICOPTION_LABOR, Civic=CIVIC_TRIBALISM                         
+	CivicOption=CIVICOPTION_ECONOMY, Civic=CIVIC_DECENTRALIZATION                         
+	CivicOption=CIVICOPTION_RELIGION, Civic=CIVIC_PAGANISM                         
+	CityList=TXT_KEY_CITY_NAME_WONSAN
+	CityList=TXT_KEY_CITY_NAME_PUSAN
+	CityList=TXT_KEY_CITY_NAME_NAMPO
+	CityList=TXT_KEY_CITY_NAME_CHEJU
+	CityList=TXT_KEY_CITY_NAME_HYANGSAN
+	CityList=TXT_KEY_CITY_NAME_ULSAN
+	CityList=TXT_KEY_CITY_NAME_INCHON
+	CityList=TXT_KEY_CITY_NAME_PYONGSONG
+	CityList=TXT_KEY_CITY_NAME_TAEJON
+	CityList=TXT_KEY_CITY_NAME_PAEGAM
+	CityList=TXT_KEY_CITY_NAME_MANPO
+	CityList=TXT_KEY_CITY_NAME_KAESONG
+	CityList=TXT_KEY_CITY_NAME_CHONJU
+	CityList=TXT_KEY_CITY_NAME_SARIWON
+	CityList=TXT_KEY_CITY_NAME_SUWON
+	CityList=TXT_KEY_CITY_NAME_HAEJU
+	CityList=TXT_KEY_CITY_NAME_TAEGU
+	CityList=TXT_KEY_CITY_NAME_CHINJE
+	CityList=TXT_KEY_CITY_NAME_TOKCHON
+	CityList=TXT_KEY_CITY_NAME_CHONGFU
+	CityList=TXT_KEY_CITY_NAME_TAEGWON
+	CityList=TXT_KEY_CITY_NAME_SOKCHO
+	CityList=TXT_KEY_CITY_NAME_HAMHUNG
+	CityList=TXT_KEY_CITY_NAME_IRI
+	CityList=TXT_KEY_CITY_NAME_HUICHON
+	CityList=TXT_KEY_CITY_NAME_NAMWON
+	CityList=TXT_KEY_CITY_NAME_KUMGANG
+	CityList=TXT_KEY_CITY_NAME_OIJONGBU                        
+	Handicap=HANDICAP_MONARCH                         
+EndPlayer                       
 BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
@@ -19859,8 +20047,9 @@ BeginPlot
 		Level=1, Experience=0
 	EndUnit
 	BeginUnit
-		UnitType=UNIT_SWORDSMAN, UnitOwner=13
+		UnitType=UNIT_VIKING_BESERKER, UnitOwner=13
 		Level=1, Experience=0
+		UnitAIType=UNITAI_ATTACK_CITY
 	EndUnit
 	TeamReveal=2,4,5,6,12,13,
 EndPlot
@@ -20999,7 +21188,9 @@ BeginPlot
 		BuildingType=BUILDING_PALACE                             
 		BuildingType=BUILDING_GRANARY                             
 		BuildingType=BUILDING_LIBRARY                             
-		BuildingType=BUILDING_FORGE                             
+		BuildingType=BUILDING_FORGE 
+		BuildingType=BUILDING_WALLS
+		BuildingType=BUILDING_SPANISH_CITADEL
 		BuildingType=BUILDING_CHRISTIAN_CATHEDRAL                             
 		BuildingType=BUILDING_CHRISTIAN_MONASTERY                             
 		ReligionType=RELIGION_CHRISTIANITY                             
@@ -22961,8 +23152,9 @@ BeginPlot
 		Level=1, Experience=0
 	EndUnit
 	BeginUnit
-		UnitType=UNIT_SWORDSMAN, UnitOwner=13
+		UnitType=UNIT_VIKING_BESERKER, UnitOwner=13
 		Level=1, Experience=0
+		UnitAIType=UNITAI_ATTACK_CITY
 	EndUnit
 	BeginUnit
 		UnitType=UNIT_GALLEY, UnitOwner=13
@@ -22974,8 +23166,9 @@ BeginPlot
 		Level=1, Experience=0
 	EndUnit
 	BeginUnit
-		UnitType=UNIT_SWORDSMAN, UnitOwner=13
+		UnitType=UNIT_VIKING_BESERKER, UnitOwner=13
 		Level=1, Experience=0
+		UnitAIType=UNITAI_ATTACK_CITY
 	EndUnit
 	TeamReveal=2,4,5,6,12,13,
 EndPlot
@@ -23459,9 +23652,10 @@ BeginPlot
 		UnitType=UNIT_LONGBOWMAN, UnitOwner=13
 		Level=1, Experience=0
 	EndUnit
-	BeginUnit
-		UnitType=UNIT_SWORDSMAN, UnitOwner=13
+		BeginUnit
+		UnitType=UNIT_VIKING_BESERKER, UnitOwner=13
 		Level=1, Experience=0
+		UnitAIType=UNITAI_ATTACK_CITY
 	EndUnit
 	RouteType=ROUTE_ROAD
 	BeginCity
@@ -23470,7 +23664,7 @@ BeginPlot
 		CityPopulation=4
 		CityCulture=10                             
 		BuildingType=BUILDING_BARRACKS                             
-		BuildingType=BUILDING_LIGHTHOUSE                             
+		BuildingType=BUILDING_VIKING_TRADING_POST                             
 		ReligionType=RELIGION_CHRISTIANITY                             
 	EndCity
 EndPlot
@@ -24301,7 +24495,7 @@ BeginPlot
 		Level=1, Experience=0
 	EndUnit
 	BeginUnit
-		UnitType=UNIT_AXEMAN, UnitOwner=13
+		UnitType=UNIT_VIKING_BESERKER, UnitOwner=13
 		Level=1, Experience=0
 	EndUnit
 	RouteType=ROUTE_ROAD
@@ -24312,7 +24506,7 @@ BeginPlot
 		CityCulture=10                             
 		BuildingType=BUILDING_PALACE                             
 		BuildingType=BUILDING_BARRACKS                             
-		BuildingType=BUILDING_LIGHTHOUSE                             
+		BuildingType=BUILDING_VIKING_TRADING_POST                             
 		BuildingType=BUILDING_MARKET                             
 		ReligionType=RELIGION_CHRISTIANITY                             
 	EndCity
@@ -24687,9 +24881,10 @@ BeginPlot
 		BuildingType=BUILDING_OBELISK                             
 		BuildingType=BUILDING_LIBRARY                             
 		BuildingType=BUILDING_MARKET                             
-		BuildingType=BUILDING_COURTHOUSE                             
+		BuildingType=BUILDING_HOLY_ROMAN_RATHAUS                             
 		BuildingType=BUILDING_CHRISTIAN_CATHEDRAL                             
-		BuildingType=BUILDING_CHRISTIAN_MONASTERY                             
+		BuildingType=BUILDING_CHRISTIAN_MONASTERY
+		BuildingType=BUILDING_APOSTOLIC_PALACE  
 		ReligionType=RELIGION_CHRISTIANITY                             
 	EndCity
 	TeamReveal=2,3,4,5,6,7,12,
@@ -25195,7 +25390,7 @@ BeginPlot
 		CityCulture=10                             
 		BuildingType=BUILDING_CASTLE                             
 		BuildingType=BUILDING_GRANARY                             
-		BuildingType=BUILDING_COURTHOUSE                             
+		BuildingType=BUILDING_HOLY_ROMAN_RATHAUS                             
 		BuildingType=BUILDING_CHRISTIAN_CATHEDRAL                             
 		ReligionType=RELIGION_CHRISTIANITY                             
 	EndCity
@@ -26459,7 +26654,7 @@ BeginPlot
 		Level=1, Experience=0
 	EndUnit
 	BeginUnit
-		UnitType=UNIT_KNIGHT, UnitOwner=12
+		UnitType=UNIT_BYZANTINE_CATAPHRACT, UnitOwner=12
 		Level=1, Experience=0
 	EndUnit
 	RouteType=ROUTE_ROAD
@@ -27363,7 +27558,7 @@ BeginPlot
 		Level=1, Experience=0
 	EndUnit
 	BeginUnit
-		UnitType=UNIT_KNIGHT, UnitOwner=12
+		UnitType=UNIT_BYZANTINE_CATAPHRACT, UnitOwner=12
 		Level=1, Experience=0
 	EndUnit
 	BeginUnit
@@ -27380,7 +27575,7 @@ BeginPlot
 		BuildingType=BUILDING_GRANARY                             
 		BuildingType=BUILDING_LIGHTHOUSE                             
 		BuildingType=BUILDING_LIBRARY                             
-		BuildingType=BUILDING_THEATRE                             
+		BuildingType=BUILDING_BYZANTINE_HIPPODROME                             
 		BuildingType=BUILDING_PARTHENON                             
 		ReligionType=RELIGION_CHRISTIANITY                             
 		ReligionType=RELIGION_JUDAISM                             
@@ -27881,11 +28076,11 @@ BeginPlot
 		Level=1, Experience=0
 	EndUnit
 	BeginUnit
-		UnitType=UNIT_KNIGHT, UnitOwner=12
+		UnitType=UNIT_BYZANTINE_CATAPHRACT, UnitOwner=12
 		Level=1, Experience=0
 	EndUnit
 	BeginUnit
-		UnitType=UNIT_KNIGHT, UnitOwner=12
+		UnitType=UNIT_BYZANTINE_CATAPHRACT, UnitOwner=12
 		Level=1, Experience=0
 	EndUnit
 	BeginUnit
@@ -28336,9 +28531,9 @@ BeginPlot
 		CityCulture=300                             
 		BuildingType=BUILDING_LIGHTHOUSE                             
 		BuildingType=BUILDING_MARKET                             
-		BuildingType=BUILDING_LIBRARY                             
+		BuildingType=BUILDING_ARABIAN_MADRASSA                             
 		BuildingType=BUILDING_PYRAMID                             
-		BuildingType=BUILDING_OBELISK                             
+		BuildingType=BUILDING_EGYPTIAN_OBELISK                             
 		ReligionType=RELIGION_ISLAM                             
 		ReligionType=RELIGION_JUDAISM                             
 	EndCity
@@ -29173,7 +29368,7 @@ BeginPlot
 		CityName=Aksum                             
 		CityPopulation=4
 		CityCulture=0                             
-		BuildingType=BUILDING_OBELISK                             
+		BuildingType=BUILDING_ETHIOPIAN_STELE                             
 		ReligionType=RELIGION_CHRISTIANITY                             
 	EndCity
 	TeamReveal=3,
@@ -29260,7 +29455,7 @@ BeginPlot
 		Level=1, Experience=0
 	EndUnit
 	BeginUnit
-		UnitType=UNIT_KNIGHT, UnitOwner=12
+		UnitType=UNIT_BYZANTINE_CATAPHRACT, UnitOwner=12
 		Level=1, Experience=0
 	EndUnit
 	RouteType=ROUTE_ROAD
@@ -30206,7 +30401,7 @@ BeginPlot
 		Level=1, Experience=0
 	EndUnit
 	BeginUnit
-		UnitType=UNIT_KNIGHT, UnitOwner=12
+		UnitType=UNIT_BYZANTINE_CATAPHRACT, UnitOwner=12
 		Level=1, Experience=0
 	EndUnit
 	BeginUnit
@@ -30644,7 +30839,7 @@ BeginPlot
 	ImprovementType=IMPROVEMENT_PLANTATION
 	RouteType=ROUTE_ROAD
 	BeginUnit
-		UnitType=UNIT_KNIGHT, UnitOwner=12
+		UnitType=UNIT_BYZANTINE_CATAPHRACT, UnitOwner=12
 		Level=1, Experience=0
 	EndUnit
 	BeginUnit
@@ -31060,7 +31255,7 @@ BeginPlot
 		CityPopulation=4
 		CityCulture=500                             
 		BuildingType=BUILDING_PALACE                             
-		BuildingType=BUILDING_LIBRARY                             
+		BuildingType=BUILDING_ARABIAN_MADRASSA                             
 		BuildingType=BUILDING_MARKET                             
 		BuildingType=BUILDING_ISLAMIC_TEMPLE                             
 		BuildingType=BUILDING_ISLAMIC_CATHEDRAL                             
@@ -32387,7 +32582,7 @@ BeginPlot
 		CityPopulation=6
 		CityCulture=10                             
 		BuildingType=BUILDING_WALLS                             
-		BuildingType=BUILDING_LIBRARY                             
+		BuildingType=BUILDING_ARABIAN_MADRASSA                             
 		BuildingType=BUILDING_MARKET                             
 		BuildingType=BUILDING_SPIRAL_MINARET                             
 		ReligionType=RELIGION_ISLAM                             
@@ -40273,6 +40468,19 @@ BeginPlot
 	RiverNSDirection=2
 	TerrainType=TERRAIN_GRASS
 	PlotType=2
+	BeginUnit
+		UnitType=UNIT_WAR_ELEPHANT, UnitOwner=18
+		Level=1, Experience=0
+	EndUnit
+	RouteType=ROUTE_ROAD
+	BeginCity
+		CityOwner=18
+		CityName=Pagan                             
+		CityPopulation=3
+		CityCulture=0                             
+		BuildingType=BUILDING_BUDDHIST_MONASTERY    
+		BuildingType=BUILDING_SHWEDAGON_PAYA   
+	EndCity
 	TeamReveal=0,14,
 EndPlot
 BeginPlot
@@ -41112,23 +41320,6 @@ BeginPlot
 	FeatureType=FEATURE_JUNGLE, FeatureVariety=0
 	TerrainType=TERRAIN_GRASS
 	PlotType=1
-	BeginUnit
-		UnitType=UNIT_SWORDSMAN, UnitOwner=18
-		Level=1, Experience=0
-	EndUnit
-	BeginUnit
-		UnitType=UNIT_WAR_ELEPHANT, UnitOwner=18
-		Level=1, Experience=0
-	EndUnit
-	RouteType=ROUTE_ROAD
-	BeginCity
-		CityOwner=18
-		CityName=Malacca                             
-		CityPopulation=5
-		CityCulture=0                             
-		BuildingType=BUILDING_BUDDHIST_MONASTERY                             
-		ReligionType=RELIGION_BUDDHISM                             
-	EndCity
 	TeamReveal=14,
 EndPlot
 BeginPlot
@@ -41153,22 +41344,6 @@ BeginPlot
 	FeatureType=FEATURE_JUNGLE, FeatureVariety=0
 	TerrainType=TERRAIN_GRASS
 	PlotType=2
-	BeginUnit
-		UnitType=UNIT_WAR_ELEPHANT, UnitOwner=18
-		Level=1, Experience=0
-	EndUnit
-	BeginUnit
-		UnitType=UNIT_WAR_ELEPHANT, UnitOwner=18
-		Level=1, Experience=0
-	EndUnit
-	RouteType=ROUTE_ROAD
-	BeginCity
-		CityOwner=18
-		CityName=Pagan                             
-		CityPopulation=3
-		CityCulture=0                             
-		BuildingType=BUILDING_BUDDHIST_MONASTERY                             
-	EndCity
 	TeamReveal=0,14,
 EndPlot
 BeginPlot
@@ -41656,10 +41831,6 @@ BeginPlot
 		Level=1, Experience=0
 	EndUnit
 	BeginUnit
-		UnitType=UNIT_WAR_ELEPHANT, UnitOwner=18
-		Level=1, Experience=0
-	EndUnit
-	BeginUnit
 		UnitType=UNIT_ARCHER, UnitOwner=18
 		Level=1, Experience=0
 	EndUnit
@@ -42057,29 +42228,6 @@ BeginPlot
 	x=102,y=32
 	TerrainType=TERRAIN_GRASS
 	PlotType=2
-	BeginUnit
-		UnitType=UNIT_WAR_ELEPHANT, UnitOwner=18
-		Level=1, Experience=0
-	EndUnit
-	BeginUnit
-		UnitType=UNIT_WAR_ELEPHANT, UnitOwner=18
-		Level=1, Experience=0
-	EndUnit
-	BeginUnit
-		UnitType=UNIT_ARCHER, UnitOwner=18
-		Level=1, Experience=0
-	EndUnit
-	RouteType=ROUTE_ROAD
-	BeginCity
-		CityOwner=18
-		CityName=Angkor                             
-		CityPopulation=4
-		CityCulture=0                             
-		BuildingType=BUILDING_ANGKOR_WAT                             
-		BuildingType=BUILDING_BUDDHIST_MONASTERY                             
-		ReligionType=RELIGION_HINDUISM                             
-		ReligionType=RELIGION_BUDDHISM                             
-	EndCity
 	TeamReveal=0,14,
 EndPlot
 BeginPlot
@@ -42095,9 +42243,41 @@ BeginPlot
 	x=102,y=34
 	isWOfRiver
 	RiverNSDirection=2
-	FeatureType=FEATURE_JUNGLE, FeatureVariety=0
 	TerrainType=TERRAIN_GRASS
 	PlotType=2
+	BeginUnit
+		UnitType=UNIT_KHMER_BALLISTA_ELEPHANT, UnitOwner=15
+		Level=1, Experience=0
+	EndUnit
+	BeginUnit
+		UnitType=UNIT_KHMER_BALLISTA_ELEPHANT, UnitOwner=15
+		Level=1, Experience=0
+	EndUnit
+	BeginUnit
+		UnitType=UNIT_KHMER_BALLISTA_ELEPHANT, UnitOwner=15
+		Level=1, Experience=0
+	EndUnit
+	BeginUnit
+		UnitType=UNIT_ARCHER, UnitOwner=15
+		Level=1, Experience=0
+	EndUnit
+	BeginUnit
+		UnitType=UNIT_WORKER, UnitOwner=15
+		Level=1, Experience=0
+	EndUnit
+	RouteType=ROUTE_ROAD
+	BeginCity
+		CityOwner=15
+		CityName=Angkor                             
+		CityPopulation=4
+		CityCulture=0    
+		BuildingType=BUILDING_PALACE 
+		BuildingType=BUILDING_KHMER_BARAY                            
+		BuildingType=BUILDING_BUDDHIST_MONASTERY
+		BuildingType=BUILDING_ANGKOR_WAT		
+		ReligionType=RELIGION_HINDUISM                             
+		ReligionType=RELIGION_BUDDHISM                             
+	EndCity
 	TeamReveal=0,14,
 EndPlot
 BeginPlot
@@ -44361,6 +44541,7 @@ BeginPlot
 	isWOfRiver
 	RiverNSDirection=2
 	TerrainType=TERRAIN_GRASS
+	BonusType=BONUS_SILK
 	PlotType=2
 EndPlot
 BeginPlot
@@ -44746,31 +44927,36 @@ BeginPlot
 	BonusType=BONUS_PIG
 	TerrainType=TERRAIN_GRASS
 	PlotType=2
-	BeginUnit
-		UnitType=UNIT_ARCHER, UnitOwner=18
-		Level=1, Experience=0
-	EndUnit
-	BeginUnit
-		UnitType=UNIT_ARCHER, UnitOwner=18
-		Level=1, Experience=0
-	EndUnit
-	RouteType=ROUTE_ROAD
-	BeginCity
-		CityOwner=18
-		CityName=Pyongyang                             
-		CityPopulation=4
-		CityCulture=10                             
-		ReligionType=RELIGION_BUDDHISM                             
-		ReligionType=RELIGION_TAOISM                             
-	EndCity
 	TeamReveal=0,
 EndPlot
 BeginPlot
 	x=108,y=48
-	BonusType=BONUS_SILK
 	FeatureType=FEATURE_FOREST, FeatureVariety=1
 	TerrainType=TERRAIN_GRASS
 	PlotType=2
+	BeginUnit
+		UnitType=UNIT_ARCHER, UnitOwner=16
+		Level=1, Experience=0
+	EndUnit
+	BeginUnit
+		UnitType=UNIT_ARCHER, UnitOwner=16
+		Level=1, Experience=0
+	EndUnit
+	RouteType=ROUTE_ROAD
+	BeginCity
+		CityOwner=16
+		CityName=Pyongyang                             
+		CityPopulation=4
+		CityCulture=10                             
+		BuildingType=BUILDING_BARRACKS                             
+		BuildingType=BUILDING_GRANARY                             
+		BuildingType=BUILDING_MARKET                             
+		BuildingType=BUILDING_FORGE                             
+		BuildingType=BUILDING_LIBRARY 		
+		ReligionType=RELIGION_BUDDHISM                             
+		ReligionType=RELIGION_TAOISM                             
+	EndCity	
+	TeamReveal=0,
 EndPlot
 BeginPlot
 	x=108,y=49
@@ -45135,17 +45321,43 @@ BeginPlot
 EndPlot
 BeginPlot
 	x=109,y=45
-	BonusType=BONUS_SILK
 	FeatureType=FEATURE_FOREST, FeatureVariety=1
+	BonusType=BONUS_SILK
 	TerrainType=TERRAIN_GRASS
 	PlotType=2
-	ImprovementType=IMPROVEMENT_GOODY_HUT
 	TeamReveal=0,
 EndPlot
 BeginPlot
 	x=109,y=46
 	TerrainType=TERRAIN_GRASS
 	PlotType=2
+	BeginUnit
+		UnitType=UNIT_ARCHER, UnitOwner=16
+		Level=1, Experience=0
+	EndUnit
+	BeginUnit
+		UnitType=UNIT_ARCHER, UnitOwner=16
+		Level=1, Experience=0
+	EndUnit
+	BeginUnit
+		UnitType=UNIT_SWORDSMAN, UnitOwner=16
+		Level=1, Experience=0
+	EndUnit
+	RouteType=ROUTE_ROAD
+	BeginCity
+		CityOwner=16
+		CityName=Seoul                     
+		CityPopulation=4
+		CityCulture=10    
+		BuildingType=BUILDING_PALACE                             
+		BuildingType=BUILDING_BARRACKS                             
+		BuildingType=BUILDING_GRANARY                             
+		BuildingType=BUILDING_MARKET                             
+		BuildingType=BUILDING_FORGE                             
+		BuildingType=BUILDING_LIBRARY 		
+		ReligionType=RELIGION_BUDDHISM                             
+		ReligionType=RELIGION_TAOISM                             
+	EndCity
 	TeamReveal=0,
 EndPlot
 BeginPlot

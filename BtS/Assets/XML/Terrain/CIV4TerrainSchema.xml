@@ -5,6 +5,7 @@
 <!-- Terrain Schema -->
 <Schema xmlns="urn:schemas-microsoft-com:xml-data" xmlns:dt="urn:schemas-microsoft-com:datatypes">
 	<ElementType name="Civilopedia" content="textOnly"/>
+	<ElementType name="Help" content="textOnly"/>
 	<ElementType name="SymbolMeshPath" content="textOnly"/>
 	<ElementType name="SymbolMeshPaths" content="eltOnly">
 		<element type="SymbolMeshPath" maxOccurs="*"/>
@@ -45,6 +46,7 @@
 		<element type="Type"/>
 		<element type="Description"/>
 		<element type="Civilopedia"/>
+		<element type="Help" minOccurs="0"/>
 		<element type="ArtDefineTag"/>
 		<element type="Yields"/>
 		<element type="RiverYieldChange"/>
@@ -114,6 +116,7 @@
 	<ElementType name="iAppearance" content="textOnly" dt:type="int"/>
 	<ElementType name="iDisappearance" content="textOnly" dt:type="int"/>
 	<ElementType name="iGrowth" content="textOnly" dt:type="int"/>
+	<ElementType name="iTurnDamage" content="textOnly" dt:type="int"/>
 	<ElementType name="bNoCoast" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bNoRiver" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bNoAdjacent" content="textOnly" dt:type="boolean"/>
@@ -122,6 +125,8 @@
 	<ElementType name="bAddsFreshWater" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bNoCity" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bNoImprovement" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bVisibleAlways" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bNukeImmune" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bTerrain" content="textOnly" dt:type="boolean"/>
 	<ElementType name="TerrainBoolean" content="eltOnly">
 		<element type="TerrainType"/>
@@ -130,16 +135,14 @@
 	<ElementType name="TerrainBooleans" content="eltOnly">
 		<element type="TerrainBoolean" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
-	<ElementType name="VarietyButton" content="textOnly"/>
-	<ElementType name="VarietyButtons" content="eltOnly">
-		<element type="VarietyButton" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
 	<ElementType name="EffectType" content="textOnly"/>
 	<ElementType name="iEffectProbability" content="textOnly" dt:type="int"/>
+	<ElementType name="OnUnitChangeTo" content="textOnly"/>
 	<ElementType name="FeatureInfo" content="eltOnly">
 		<element type="Type"/>
 		<element type="Description"/>
 		<element type="Civilopedia"/>
+		<element type="Help" minOccurs="0"/>
 		<element type="ArtDefineTag"/>
 		<element type="YieldChanges"/>
 		<element type="RiverYieldChange"/>
@@ -151,6 +154,7 @@
 		<element type="iAppearance"/>
 		<element type="iDisappearance"/>
 		<element type="iGrowth"/>
+		<element type="iTurnDamage"/>
 		<element type="bNoCoast"/>
 		<element type="bNoRiver"/>
 		<element type="bNoAdjacent"/>
@@ -160,13 +164,15 @@
 		<element type="bImpassable"/>
 		<element type="bNoCity"/>
 		<element type="bNoImprovement"/>
+		<element type="bVisibleAlways"/>
+		<element type="bNukeImmune"/>
+		<element type="OnUnitChangeTo"/>
 		<element type="TerrainBooleans"/>
-		<element type="SymbolPaths"/>
-		<element type="VarietyButtons"/>
 		<element type="FootstepSounds"/>
 		<element type="WorldSoundscapeAudioScript" minOccurs="0"/>
 		<element type="EffectType"/>
 		<element type="iEffectProbability"/>
+		<element type="iAdvancedStartRemoveCost"/>
 	</ElementType>
 	<ElementType name="FeatureInfos" content="eltOnly">
 		<element type="FeatureInfo" maxOccurs="*"/>
@@ -235,6 +241,7 @@
 		<element type="Type"/>
 		<element type="Description"/>
 		<element type="Civilopedia"/>
+		<element type="Help" minOccurs="0"/>
 		<element type="BonusClassType"/>
 		<element type="ArtDefineTag"/>
 		<element type="TechReveal"/>
@@ -381,9 +388,14 @@
 	<ElementType name="bGoody" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bPermanent" content="textOnly" dt:type="boolean"/>
 	<ElementType name="iGoodyRange" content="textOnly" dt:type="int"/>
+	<ElementType name="iFeatureGrowth" content="textOnly" dt:type="int"/>
 	<ElementType name="iAirBombDefense" content="textOnly" dt:type="int"/>
 	<ElementType name="iDefenseModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iPillageGold" content="textOnly" dt:type="int"/>
+	<ElementType name="bOutsideBorders" content="textOnly" dt:type="boolean"/>
+	<ElementType name="iAdvancedStartCost" content="textOnly" dt:type="int"/>
+	<ElementType name="iAdvancedStartRemoveCost" content="textOnly" dt:type="int"/>
+	<ElementType name="iAdvancedStartCostIncrease" content="textOnly" dt:type="int"/>
 	<ElementType name="iTilesPerGoody" content="textOnly" dt:type="int"/>
 	<ElementType name="iUpgradeTime" content="textOnly" dt:type="int"/>
 	<ElementType name="bMakesValid" content="textOnly" dt:type="boolean"/>
@@ -405,6 +417,7 @@
 		<element type="Type"/>
 		<element type="Description"/>
 		<element type="Civilopedia"/>
+		<element type="Help" minOccurs="0"/>
 		<element type="ArtDefineTag"/>
 		<element type="PrereqNatureYields" minOccurs="0"/>
 		<element type="YieldChanges" minOccurs="0"/>
@@ -425,12 +438,17 @@
 		<element type="bGoody"/>
 		<element type="bPermanent"/>
 		<element type="bUseLSystem" minOccurs="0"/>
+		<element type="iAdvancedStartCost"/>
+		<element type="iAdvancedStartCostIncrease"/>
 		<element type="iTilesPerGoody"/>
 		<element type="iGoodyRange"/>
+		<element type="iFeatureGrowth"/>
 		<element type="iUpgradeTime"/>
 		<element type="iAirBombDefense"/>
 		<element type="iDefenseModifier"/>
+		<element type="iHappiness"/>
 		<element type="iPillageGold"/>
+		<element type="bOutsideBorders"/>
 		<element type="TerrainMakesValids"/>
 		<element type="FeatureMakesValids"/>
 		<element type="BonusTypeStructs" minOccurs="0" maxOccurs="*"/>

@@ -315,6 +315,10 @@
 			<Path>Art/Interface/Screens/TechTree/X.dds</Path>
 		</InterfaceArtInfo>
 		<InterfaceArtInfo>
+			<Type>INTERFACE_BUTTONS_CHECK</Type>
+			<Path>Art/Interface/Buttons/General/CheckMark.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
 			<Type>INTERFACE_BUTTONS_RIGHT</Type>
 			<Path>Art/Interface/Buttons/General/RIGHT.dds</Path>
 		</InterfaceArtInfo>
@@ -543,6 +547,10 @@
 			<Path>Art/Interface/Screens/TechTree/Adjust_Culture.dds</Path>
 		</InterfaceArtInfo>
 		<InterfaceArtInfo>
+			<Type>INTERFACE_TECH_ESPIONAGE</Type>
+			<Path>Art/Interface/Buttons/Process/ProcessCulture.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,8,16</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
 			<Type>INTERFACE_TECH_DEFENSIVEPACT</Type>
 			<Path>Art/Interface/Screens/TechTree/Defensive_Pacts.dds</Path>
 		</InterfaceArtInfo>
@@ -616,7 +624,11 @@
 		</InterfaceArtInfo>
 		<InterfaceArtInfo>
 			<Type>INTERFACE_TECH_WATERTRADE</Type>
-			<Path>Art/Interface/Screens/TechTree/Ocean_Trade.dds</Path>
+			<Path>,Art/Interface/Screens/TechTree/Ocean_Trade.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,8,3</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>INTERFACE_TECH_RIVERTRADE</Type>
+			<Path>,Art/Interface/Screens/TechTree/Ocean_Trade.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,8,6</Path>
 		</InterfaceArtInfo>
 		<InterfaceArtInfo>
 			<Type>INTERFACE_TECH_WATERWORK</Type>
@@ -731,6 +743,22 @@
 			<Path>Art/Interface/Screens/Loading/LoadingScreenBGslideshowWarlords.dds</Path>
 		</InterfaceArtInfo>
 		<InterfaceArtInfo>
+			<Type>MAINMENU_LOAD_BTS</Type>
+			<Path>Art/Interface/Screens/Loading/LoadingScreenBGBeyondtheSword.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>MAINMENU_SLIDESHOW_LOAD_CLASSICAL</Type>
+			<Path>Art/Interface/Screens/Loading/LoadingScreenBGslideshowClassical.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>MAINMENU_LOAD_CLASSICAL</Type>
+			<Path>Art/Interface/Screens/Loading/LoadingScreenBGClassical.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>MAINMENU_SLIDESHOW_LOAD_BTS</Type>
+			<Path>Art/Interface/Screens/Loading/LoadingScreenBGslideshowBeyondtheSword.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
 			<Type>INTRO_LOGOS</Type>
 			<Path>Art/Interface/Screens/Credits/Logos.dds</Path>
 		</InterfaceArtInfo>
@@ -768,11 +796,23 @@
 		</InterfaceArtInfo>
 		<InterfaceArtInfo>
 			<Type>MAINMENU_SCENE</Type>
-			<Path>Art/Interface/Main Menu/CIV4MainMenuBG.kfm</Path>
+			<Path>Art/Interface/Main Menu/CIV4MainMenuBG.nif</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>MAINMENU_SCENE_CLASSICAL</Type>
+			<Path>Art/Interface/Classical Main Menu/CIV4MainMenuBG.nif</Path>
 		</InterfaceArtInfo>
 		<InterfaceArtInfo>
 			<Type>MAINMENU_SCENE_NO_SHADER</Type>
-			<Path>Art/Interface/Main Menu/CIV4MainMenuBG_noshader.kfm</Path>
+			<Path>Art/Interface/Warlords Main Menu/CIV4MainMenuBG_noshader.nif</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>MAINMENU_SCENE_WARLORDS</Type>
+			<Path>Art/Interface/Warlords Main Menu/CIV4MainMenuBG.kfm</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>MAINMENU_SCENE_VANILLA</Type>
+			<Path>Art/Interface/Civ4 Main Menu/CIV4MainMenuBG.nif</Path>
 		</InterfaceArtInfo>
 		<InterfaceArtInfo>
 			<Type>MAINMENU_SP</Type>
@@ -1211,6 +1251,54 @@
 		<InterfaceArtInfo>
 			<Type>SCREEN_UN_BG</Type>
 			<Path>Art/Interface/Screens/Reward/UN_BG.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>SCROLL_UP_ARROW</Type>
+			<Path>Art/Interface/Buttons/up_arrow.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>SCROLL_DOWN_ARROW</Type>
+			<Path>Art/Interface/Buttons/down_arrow.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>WHITE_CIRCLE_20</Type>
+			<Path>Art/Interface/Buttons/white_circle_20.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>WHITE_CIRCLE_40</Type>
+			<Path>Art/Interface/Buttons/white_circle_40.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>WHITE_CIRCLE_50</Type>
+			<Path>Art/Interface/Buttons/white_circle_50.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>ESPIONAGE_BUTTON</Type>
+			<Path>,Art/Interface/Buttons/Process/ProcessCulture.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,8,16</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>CULTURE_BUTTON</Type>
+			<Path>Art/Interface/Buttons/Process/ProcessCulture.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>INTERFACE_STARS</Type>
+			<Path>Art/Interface/Main Menu/stars.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>INTERFACE_BLACK</Type>
+			<Path>Art/Interface/Screens/Black.dds</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>INTERFACE_EVENT_BULLET</Type>
+			<Path>,Art/Interface/Buttons/Process/Blank.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,8,5</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>INTERFACE_EVENT_UNAVAILABLE_BULLET</Type>
+			<Path>,Art/Interface/Buttons/Process/Blank.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,7,5</Path>
+		</InterfaceArtInfo>
+		<InterfaceArtInfo>
+			<Type>INTERFACE_AUTOMATE</Type>
+			<Path>Art/Interface/Buttons/Actions/Automate.dds</Path>
 		</InterfaceArtInfo>
 	</InterfaceArtInfos>
 </Civ4ArtDefines>

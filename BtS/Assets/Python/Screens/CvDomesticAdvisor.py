@@ -1,13 +1,9 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
 from CvPythonExtensions import *
-import PyHelpers
 import CvUtil
 import ScreenInput
 import CvScreenEnums
-
-PyPlayer = PyHelpers.PyPlayer
-PyCity = PyHelpers.PyCity
 
 #	IMPORTANT INFORMATION
 #	
@@ -20,6 +16,7 @@ PyCity = PyHelpers.PyCity
 #	when attaching to the background, please use the 'Background' keyword.
 
 #  Thanks to Lee Reeves, AKA Taelis on civfanatics.com
+#  Thanks to Solver
 
 
 # globals
@@ -27,59 +24,27 @@ gc = CyGlobalContext()
 ArtFileMgr = CyArtFileMgr()
 localText = CyTranslator()
 
-#	Set up the base Coordinates here...
-STANDARD_Z = -2.2
-TOP_Y = 96
-Y_SPACING = 32
-DATE_COLUMN = 70
-NAME_COLUMN = DATE_COLUMN + 90
-CULTURE_COLUMN = NAME_COLUMN + 130
-HAPPY_COLUMN = CULTURE_COLUMN + 90
-HEALTH_COLUMN = HAPPY_COLUMN + 100
-FOOD_COLUMN = HEALTH_COLUMN + 40
-PRODUCTION_COLUMN = FOOD_COLUMN + 40
-GOLD_COLUMN = PRODUCTION_COLUMN + 40
-GREATPEOPLE_COLUMN = GOLD_COLUMN + 40
-PRODUCING_COLUMN = GREATPEOPLE_COLUMN + 170
-
-
-# Sorting information
-DATE = 0
-NAME = 1
-CULTURE = 2
-HAPPY = 3
-HEALTH = 4
-FOOD = 5
-PRODUCTION = 6
-GOLD = 7
-GREATPEOPLE = 8
-PRODUCING = 9
-POPULATION = 10
-UNHAPPY = 11
-ANGRY = 12
-BAD_HEALTH = 13
-CONSUMPTION = 14
-SCIENCE = 15
-CULTURE_RATE = 16
-GREATPEOPLE_RATE = 17
-
-# What are we sorting by?
-iSortingBy = DATE
-iSortingDown = True
-
-# Listbox identifiers...
-UNIT_CHOSEN = 0
-BUILDING_CHOSEN = 1
-PROJECT_CHOSEN = 2
-PROCESS_CHOSEN = 3
-
 class CvDomesticAdvisor:
 	"Domestic Advisor Screen"
 	def __init__(self):
 		self.listSelectedCities = []
 		
+	# Screen construction function
+	def interfaceScreen(self):
+	
+		player = gc.getPlayer(gc.getGame().getActivePlayer())
+		
+		# Create a new screen, called DomesticAdvisur, using the file CvDomesticAdvisor.py for input
+		screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
+
+		self.nScreenWidth = screen.getXResolution() - 30
+		self.nScreenHeight = screen.getYResolution() - 250
+		self.nTableWidth = self.nScreenWidth - 35
+		self.nTableHeight = self.nScreenHeight - 85
+		self.nNormalizedTableWidth = 970
+
 		self.nFirstSpecialistX = 30
-		self.nSpecialistY = 540
+		self.nSpecialistY = self.nScreenHeight - 55
 		self.nSpecialistWidth = 32
 		self.nSpecialistLength = 32
 		self.nSpecialistDistance = 100
@@ -94,25 +59,26 @@ class CvDomesticAdvisor:
 		self.nSpecTextOffsetX = 40
 		self.nSpecTextOffsetY = 10
 
-	# Screen construction function
-	def interfaceScreen(self):
-	
-		# This will get the actual Player class into iPlayer
-		iPlayer = PyPlayer(CyGame().getActivePlayer())
-		
-		# Create a new screen, called DomesticAdvisur, using the file CvDomesticAdvisor.py for input
-		screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
-		screen.setDimensions(screen.centerX(0), screen.centerY(0), 1024, 768)
+		screen.setRenderInterfaceOnly(True)
+		screen.setDimensions(15, 100, self.nScreenWidth, self.nScreenHeight)
 		screen.showScreen(PopupStates.POPUPSTATE_IMMEDIATE, False)
 	
 		# Here we set the background widget and exit button, and we show the screen
-		screen.addPanel( "DomesticAdvisorBG", u"", u"", True, False, 0, 48, 1024, 548, PanelStyles.PANEL_STYLE_MAIN )
-		screen.setText("DomesticExit", "Background", localText.getText("TXT_KEY_PEDIA_SCREEN_EXIT", ()).upper(), CvUtil.FONT_RIGHT_JUSTIFY, 1012, 564, -0.1, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_CLOSE_SCREEN, -1, -1 )
-	
-		# Header...
-		#szText = "<font=4>" + localText.getText("TXT_KEY_DOMESTIC_ADVISOR_TITLE", ()).upper() + "</font>"
-		#screen.setLabel( "DomesticTitleHeader", "Background", szText, CvUtil.FONT_CENTER_JUSTIFY, 472, 40, STANDARD_Z, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
+		screen.addPanel( "DomesticAdvisorBG", u"", u"", True, False, 0, 0, self.nScreenWidth, self.nScreenHeight, PanelStyles.PANEL_STYLE_MAIN )
+		screen.setText("DomesticExit", "Background", localText.getText("TXT_KEY_PEDIA_SCREEN_EXIT", ()).upper(), CvUtil.FONT_RIGHT_JUSTIFY, self.nScreenWidth - 25, self.nScreenHeight - 45, -0.1, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_CLOSE_SCREEN, -1, -1 )
 
+		bCanLiberate = false
+		(loopCity, iter) = player.firstCity(false)
+		while(loopCity):
+			if loopCity.getLiberationPlayer() != -1:
+				bCanLiberate = true
+				break
+			(loopCity, iter) = player.nextCity(iter, false)
+		
+		if (bCanLiberate or gc.getPlayer(gc.getGame().getActivePlayer()).canSplitEmpire()):
+			screen.setImageButton( "DomesticSplit", "", self.nScreenWidth - 110, self.nScreenHeight - 45, 28, 28, WidgetTypes.WIDGET_ACTION, gc.getControlInfo(ControlTypes.CONTROL_FREE_COLONY).getActionInfoIndex(), -1 )
+			screen.setStyle( "DomesticSplit", "Button_HUDAdvisorVictory_Style" )
+	
 		# Erase the flag?
 		CyInterface().setDirty(InterfaceDirtyBits.MiscButtons_DIRTY_BIT, True)
 
@@ -126,91 +92,83 @@ class CvDomesticAdvisor:
 		screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
 		
 		# Zoom to City
-		screen.setTableColumnHeader( "CityListBackground", 0, "", 30 )
-		
-		# Date Founded Column
-		screen.setTableColumnHeader( "CityListBackground", 1, "<font=2>" + localText.getText("TXT_KEY_DOMESTIC_ADVISOR_FOUNDED", ()) + "</font>", 85 )
+		screen.setTableColumnHeader( "CityListBackground", 0, "", (30 * self.nTableWidth) / self.nNormalizedTableWidth )
 		
 		# Name Column
-		screen.setTableColumnHeader( "CityListBackground", 2, "<font=2>" + localText.getText("TXT_KEY_DOMESTIC_ADVISOR_NAME", ()) + "</font>", 101 )
+		screen.setTableColumnHeader( "CityListBackground", 1, "<font=2>" + localText.getText("TXT_KEY_DOMESTIC_ADVISOR_NAME", ()) + "</font>", (221 * self.nTableWidth) / self.nNormalizedTableWidth )
 		
 		# Population Column
-		screen.setTableColumnHeader( "CityListBackground", 3, "<font=2>" + localText.getText("TXT_KEY_POPULATION", ()) + "</font>", 40 )
-		
-		# Angry Column
-		screen.setTableColumnHeader( "CityListBackground", 4, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.ANGRY_POP_CHAR)) + "</font>", 40 )
+		screen.setTableColumnHeader( "CityListBackground", 2, "<font=2>" + localText.getText("TXT_KEY_POPULATION", ()) + "</font>", (40 * self.nTableWidth) / self.nNormalizedTableWidth )
 		
 		# Happiness Column
-		screen.setTableColumnHeader( "CityListBackground", 5, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.HAPPY_CHAR)) + "</font>", 40 )
-		
-		# Unhappiness Column
-		screen.setTableColumnHeader( "CityListBackground", 6, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.UNHAPPY_CHAR)) + "</font>", 40 )
+		screen.setTableColumnHeader( "CityListBackground", 3, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.HAPPY_CHAR)) + "</font>", (40 * self.nTableWidth) / self.nNormalizedTableWidth )
 		
 		# Health Column
-		screen.setTableColumnHeader( "CityListBackground", 7, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.HEALTHY_CHAR)) + "</font>", 40 )
-		
-		# Bad Health Column
-		screen.setTableColumnHeader( "CityListBackground", 8, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.UNHEALTHY_CHAR)) + "</font>", 40 )
+		screen.setTableColumnHeader( "CityListBackground", 4, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.HEALTHY_CHAR)) + "</font>", (40 * self.nTableWidth) / self.nNormalizedTableWidth )
 		
 		# Food Column
-		screen.setTableColumnHeader( "CityListBackground", 9, "<font=2>" + (u"%c" % gc.getYieldInfo(YieldTypes.YIELD_FOOD).getChar()) + "</font>", 40 )
-		
-		# Food Consumed Column
-		screen.setTableColumnHeader( "CityListBackground", 10, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.EATEN_FOOD_CHAR)) + "</font>", 40 )
+		screen.setTableColumnHeader( "CityListBackground", 5, "<font=2>" + (u"%c" % gc.getYieldInfo(YieldTypes.YIELD_FOOD).getChar()) + "</font>", (40 * self.nTableWidth) / self.nNormalizedTableWidth )
 		
 		# Production Column
-		screen.setTableColumnHeader( "CityListBackground", 11, "<font=2>" + (u"%c" % gc.getYieldInfo(YieldTypes.YIELD_PRODUCTION).getChar()) + "</font>", 40 )
+		screen.setTableColumnHeader( "CityListBackground", 6, "<font=2>" + (u"%c" % gc.getYieldInfo(YieldTypes.YIELD_PRODUCTION).getChar()) + "</font>", (40 * self.nTableWidth) / self.nNormalizedTableWidth )
 		
 		# Gold Column
-		screen.setTableColumnHeader( "CityListBackground", 12, "<font=2>" + (u"%c" % gc.getYieldInfo(YieldTypes.YIELD_COMMERCE).getChar()) + "</font>", 40 )
+		screen.setTableColumnHeader( "CityListBackground", 7, "<font=2>" + (u"%c" % gc.getCommerceInfo(CommerceTypes.COMMERCE_GOLD).getChar()) + "</font>", (40 * self.nTableWidth) / self.nNormalizedTableWidth )
 		
 		# Research Column
 		szText = u"%c" %(gc.getCommerceInfo(CommerceTypes.COMMERCE_RESEARCH).getChar())
-		screen.setTableColumnHeader( "CityListBackground", 13, "<font=2>" + szText, 40 )
+		screen.setTableColumnHeader( "CityListBackground", 8, "<font=2>" + szText, (40 * self.nTableWidth) / self.nNormalizedTableWidth )
+		
+		# Espionage Column
+		szText = u"%c" %(gc.getCommerceInfo(CommerceTypes.COMMERCE_ESPIONAGE).getChar())
+		screen.setTableColumnHeader( "CityListBackground", 9, "<font=2>" + szText, (40 * self.nTableWidth) / self.nNormalizedTableWidth )
 		
 		# Culture Column
-		screen.setTableColumnHeader( "CityListBackground", 14, "<font=2>" + (u"%c" % gc.getCommerceInfo(CommerceTypes.COMMERCE_CULTURE).getChar()) + "</font>", 40 )
-		
-		# Culture Column
-		screen.setTableColumnHeader( "CityListBackground", 15, "<font=2>" + localText.getText("TXT_KEY_TOTAL", ()) + "</font>", 55 )
+		screen.setTableColumnHeader( "CityListBackground", 10, "<font=2>" + (u"%c" % gc.getCommerceInfo(CommerceTypes.COMMERCE_CULTURE).getChar()) + "</font>", (70 * self.nTableWidth) / self.nNormalizedTableWidth )
+				
+		# Trade Column
+		screen.setTableColumnHeader( "CityListBackground", 11, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.TRADE_CHAR)) + "</font>", (35 * self.nTableWidth) / self.nNormalizedTableWidth )
+				
+		# Maintenance Column
+		screen.setTableColumnHeader( "CityListBackground", 12, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.BAD_GOLD_CHAR)) + "</font>", (40 * self.nTableWidth) / self.nNormalizedTableWidth )
 		
 		# Great Person Column
-		screen.setTableColumnHeader( "CityListBackground", 16, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.GREAT_PEOPLE_CHAR)) + "</font>", 40 )
-		
-		# Great Person Column
-		screen.setTableColumnHeader( "CityListBackground", 17, "<font=2>" + localText.getText("TXT_KEY_TOTAL", ()) + "</font>", 55 )
-		
+		screen.setTableColumnHeader( "CityListBackground", 13, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.GREAT_PEOPLE_CHAR)) + "</font>", (70 * self.nTableWidth) / self.nNormalizedTableWidth )
+				
+		# Garrison Column
+		screen.setTableColumnHeader( "CityListBackground", 14, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.DEFENSE_CHAR)) + "</font>", (35 * self.nTableWidth) / self.nNormalizedTableWidth )
+				
 		# Production Column
-		screen.setTableColumnHeader( "CityListBackground", 18, "<font=2>" + localText.getText("TXT_KEY_DOMESTIC_ADVISOR_PRODUCING", ()) + "</font>", 132 )
-	
+		screen.setTableColumnHeader( "CityListBackground", 15, "<font=2>" + localText.getText("TXT_KEY_DOMESTIC_ADVISOR_PRODUCING", ()) + "</font>", (132 * self.nTableWidth) / self.nNormalizedTableWidth )	
+
+		# Liberate Column
+		screen.setTableColumnHeader( "CityListBackground", 16, "", (25 * self.nTableWidth) / self.nNormalizedTableWidth )
+
 	# Function to draw the contents of the cityList passed in
 	def drawContents (self):
 	
 		# Get the screen and the player
 		screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
-		iPlayer = PyPlayer(CyGame().getActivePlayer())
+		player = gc.getPlayer(CyGame().getActivePlayer())
 		
 		screen.moveToFront( "Background" )
 		
 		# Build the table	
-		screen.addTableControlGFC( "CityListBackground", 19, 22, 61, 980, 476, True, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD )
+		screen.addTableControlGFC( "CityListBackground", 19, 18, 21, self.nTableWidth, self.nTableHeight, True, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD )
 		screen.enableSelect( "CityListBackground", True )
 		screen.enableSort( "CityListBackground" )
 		screen.setStyle("CityListBackground", "Table_StandardCiv_Style")
 
 		# Loop through the cities
-		cityList = iPlayer.getCityList()
 		i = 0
-		for pLoopCity in cityList:
-
+		(pLoopCity, iter) = player.firstCity(false)
+		while(pLoopCity):
 			screen.appendTableRow( "CityListBackground" )
-	
 			if (pLoopCity.getName() in self.listSelectedCities):
 				screen.selectRow( "CityListBackground", i, True )
-						
 			self.updateTable(pLoopCity, i)
-
 			i += 1
+			(pLoopCity, iter) = player.nextCity(iter, false)
 		
 		self.drawHeaders()
 		
@@ -218,7 +176,7 @@ class CvDomesticAdvisor:
 		
 		screen.moveToBack( "DomesticAdvisorBG" )
 		
-		self.updateAppropriateCitySelection(len(cityList))
+		self.updateAppropriateCitySelection()
 		
 		CyInterface().setDirty(InterfaceDirtyBits.Domestic_Advisor_DIRTY_BIT, true)
 
@@ -228,67 +186,109 @@ class CvDomesticAdvisor:
 
 		screen.setTableText( "CityListBackground", 0, i, "", ArtFileMgr.getInterfaceArtInfo("INTERFACE_BUTTONS_CITYSELECTION").getPath(), WidgetTypes.WIDGET_ZOOM_CITY, pLoopCity.getOwner(), pLoopCity.getID(), CvUtil.FONT_LEFT_JUSTIFY);
 
-		# Founded date first...
-		szIDText = "Date" + str(pLoopCity.getID())
-		
-		iTurnTime = pLoopCity.getGameTurnFounded()
-		szFounded = ""
-		szFounded = szFounded + unicode(CyGameTextMgr().getTimeStr(iTurnTime, false))
+		szName = pLoopCity.getName()
 		if pLoopCity.isCapital():
-			szFounded = szFounded + (u"%c" % CyGame().getSymbolID(FontSymbols.STAR_CHAR))
+			szName += (u"%c" % CyGame().getSymbolID(FontSymbols.STAR_CHAR))
+		elif pLoopCity.isGovernmentCenter():
+			szName += (u"%c" % CyGame().getSymbolID(FontSymbols.SILVER_STAR_CHAR))
 		
-		screen.setTableDate( "CityListBackground", 1, i, szFounded, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
-		
+		for iReligion in range(gc.getNumReligionInfos()):
+			if pLoopCity.isHasReligion(iReligion):
+				if pLoopCity.isHolyCityByType(iReligion):
+					szName += (u"%c" % gc.getReligionInfo(iReligion).getHolyCityChar())
+				else:
+					szName += (u"%c" % gc.getReligionInfo(iReligion).getChar())
+						
+		for iCorporation in range(gc.getNumCorporationInfos()):
+			if pLoopCity.isHeadquartersByType(iCorporation):
+				szName += (u"%c" % gc.getCorporationInfo(iCorporation).getHeadquarterChar())
+			elif pLoopCity.isActiveCorporation(iCorporation):
+				szName += (u"%c" % gc.getCorporationInfo(iCorporation).getChar())
+					
 		# City name...
-		screen.setTableText( "CityListBackground", 2, i, pLoopCity.getName(), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		screen.setTableText( "CityListBackground", 1, i, szName, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 		
 		# Population
-		screen.setTableInt( "CityListBackground", 3, i, unicode(pLoopCity.getPopulation()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
-
-		# Angry...	
-		screen.setTableInt( "CityListBackground", 4, i, unicode(pLoopCity.getAngryPopulation()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		screen.setTableInt( "CityListBackground", 2, i, unicode(pLoopCity.getPopulation()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
 		# Happiness...
-		screen.setTableInt( "CityListBackground", 5, i, unicode(pLoopCity.getHappyPopulation()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
-
-		# Unhappiness...
-		screen.setTableInt( "CityListBackground", 6, i, unicode(pLoopCity.getUnhappyPopulation()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		iNetHappy = pLoopCity.happyLevel() - pLoopCity.unhappyLevel(0)
+		szText = unicode(iNetHappy)
+		if iNetHappy > 0:
+			szText = localText.getText("TXT_KEY_COLOR_POSITIVE", ()) + szText + localText.getText("TXT_KEY_COLOR_REVERT", ())
+		elif iNetHappy < 0:
+			szText = localText.getText("TXT_KEY_COLOR_NEGATIVE", ()) + szText + localText.getText("TXT_KEY_COLOR_REVERT", ())
+		screen.setTableInt( "CityListBackground", 3, i, szText, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
 		# Health...
-		screen.setTableInt( "CityListBackground", 7, i, unicode(pLoopCity.getGoodHealth()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
-
-		# Unhealthy...			
-		screen.setTableInt( "CityListBackground", 8, i, unicode(pLoopCity.getBadHealth()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		iNetHealth = pLoopCity.goodHealth() - pLoopCity.badHealth(0)
+		szText = unicode(iNetHealth)
+		if iNetHealth > 0:
+			szText = localText.getText("TXT_KEY_COLOR_POSITIVE", ()) + szText + localText.getText("TXT_KEY_COLOR_REVERT", ())
+		elif iNetHealth < 0:
+			szText = localText.getText("TXT_KEY_COLOR_NEGATIVE", ()) + szText + localText.getText("TXT_KEY_COLOR_REVERT", ())
+		screen.setTableInt( "CityListBackground", 4, i, szText, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
 		# Food status...
-		screen.setTableInt( "CityListBackground", 9, i, unicode(pLoopCity.getFoodRate()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		iNetFood = pLoopCity.foodDifference(true)
+		szText = unicode(iNetFood)
+		if iNetFood > 0:
+			szText = localText.getText("TXT_KEY_COLOR_POSITIVE", ()) + szText + localText.getText("TXT_KEY_COLOR_REVERT", ())
+		elif iNetFood < 0:
+			szText = localText.getText("TXT_KEY_COLOR_NEGATIVE", ()) + szText + localText.getText("TXT_KEY_COLOR_REVERT", ())
+		screen.setTableInt( "CityListBackground", 5, i, szText, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 		
-		# Food consumed
-		screen.setTableInt( "CityListBackground", 10, i, unicode(pLoopCity.foodConsumption( False, 0 )), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
-
 		# Production status...
-		screen.setTableInt( "CityListBackground", 11, i, unicode(pLoopCity.getProductionRate()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		screen.setTableInt( "CityListBackground", 6, i, unicode(pLoopCity.getYieldRate(YieldTypes.YIELD_PRODUCTION)), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
 		# Gold status...
-		screen.setTableInt( "CityListBackground", 12, i, unicode(pLoopCity.calculateGoldRate()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		screen.setTableInt( "CityListBackground", 7, i, unicode(pLoopCity.getCommerceRate(CommerceTypes.COMMERCE_GOLD)), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
 		# Science rate...
-		screen.setTableInt( "CityListBackground", 13, i, unicode(pLoopCity.getResearchRate()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		screen.setTableInt( "CityListBackground", 8, i, unicode(pLoopCity.getCommerceRate(CommerceTypes.COMMERCE_RESEARCH)), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+
+		# Espionage rate...
+		screen.setTableInt( "CityListBackground", 9, i, unicode(pLoopCity.getCommerceRate(CommerceTypes.COMMERCE_ESPIONAGE)), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
 		# Culture status...
-		screen.setTableInt( "CityListBackground", 14, i, unicode(pLoopCity.getCultureCommerce()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		szCulture = unicode(pLoopCity.getCommerceRate(CommerceTypes.COMMERCE_CULTURE))
+		iCultureTimes100 = pLoopCity.getCultureTimes100(CommerceTypes.COMMERCE_CULTURE)
+		iCultureRateTimes100 = pLoopCity.getCommerceRateTimes100(CommerceTypes.COMMERCE_CULTURE)
+		if iCultureRateTimes100 > 0:
+			iCultureLeftTimes100 = 100 * pLoopCity.getCultureThreshold() - iCultureTimes100
+			if iCultureLeftTimes100 > 0:
+				szCulture += u" (" + unicode((iCultureLeftTimes100  + iCultureRateTimes100 - 1) / iCultureRateTimes100) + u")"
 
-		# Total Culture			
-		screen.setTableInt( "CityListBackground", 15, i, unicode(pLoopCity.getCulture()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		screen.setTableInt( "CityListBackground", 10, i, szCulture, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+
+		# Trade
+		screen.setTableInt( "CityListBackground", 11, i, unicode(pLoopCity.getTradeYield(YieldTypes.YIELD_COMMERCE)), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+
+		# Maintenance...
+		screen.setTableInt( "CityListBackground", 12, i, unicode(pLoopCity.getMaintenance()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
 		# Great Person
-		screen.setTableInt( "CityListBackground", 16, i, unicode(pLoopCity.getGreatPeopleRate()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
-
-		# Great Person
-		screen.setTableInt( "CityListBackground", 17, i, unicode(pLoopCity.getGreatPeopleProgress()), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		iGreatPersonRate = pLoopCity.getGreatPeopleRate()
+		szGreatPerson = unicode(iGreatPersonRate)
+		if iGreatPersonRate > 0:
+			iGPPLeft = gc.getPlayer(gc.getGame().getActivePlayer()).greatPeopleThreshold(false) - pLoopCity.getGreatPeopleProgress()
+			if iGPPLeft > 0:
+				iTurnsLeft = iGPPLeft / pLoopCity.getGreatPeopleRate()
+				if iTurnsLeft * pLoopCity.getGreatPeopleRate() <  iGPPLeft:
+					iTurnsLeft += 1
+				szGreatPerson += u" (" + unicode(iTurnsLeft) + u")"
+		
+		screen.setTableInt( "CityListBackground", 13, i, szGreatPerson, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		
+		# Garrison
+		screen.setTableInt( "CityListBackground", 14, i, unicode(pLoopCity.plot().getNumDefenders(pLoopCity.getOwner())), "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
 		# Producing	
-		screen.setTableText( "CityListBackground", 18, i, pLoopCity.getProductionName() + " (" + str(pLoopCity.getGeneralProductionTurnsLeft()) + ")", "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+		screen.setTableText( "CityListBackground", 15, i, pLoopCity.getProductionName() + " (" + str(pLoopCity.getGeneralProductionTurnsLeft()) + ")", "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+
+		# Liberation
+		if pLoopCity.getLiberationPlayer() != -1:			
+			screen.setTableText( "CityListBackground", 16, i, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.OCCUPATION_CHAR)) + "</font>", "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 		
 		
 	# Draw the specialist and their increase and decrease buttons
@@ -321,7 +321,7 @@ class CvDomesticAdvisor:
 				screen.hide("SpecialistPlus" + str(i))
 				screen.hide("SpecialistMinus" + str(i))
 				screen.hide("SpecialistText" + str(i))
-
+				
 	def updateSpecialists(self):
 		""" Function which shows the specialists."""
 		screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
@@ -374,14 +374,19 @@ class CvDomesticAdvisor:
 				popupInfo.setText(u"showDomesticAdvisor")
 				popupInfo.addPopup(inputClass.getData1())		
 			else:
-				self.updateAppropriateCitySelection(len(PyPlayer(CyGame().getActivePlayer()).getCityList()))
+				self.updateAppropriateCitySelection()
 				self.updateSpecialists()
+		elif (inputClass.getNotifyCode() == NotifyCode.NOTIFY_CLICKED):
+			if (inputClass.getFunctionName() == "DomesticSplit"):
+				screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
+				screen.hideScreen()
 			
 		return 0
 	
-	def updateAppropriateCitySelection(self, nCities):
+	def updateAppropriateCitySelection(self):
+		nCities = gc.getPlayer(gc.getGame().getActivePlayer()).getNumCities()
 		screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
-		screen.updateAppropriateCitySelection( "CityListBackground", nCities, 2 )
+		screen.updateAppropriateCitySelection( "CityListBackground", nCities, 1 )
 		self.listSelectedCities = []
 		for i in range(nCities):
 			if screen.isRowSelected("CityListBackground", i):
@@ -392,16 +397,15 @@ class CvDomesticAdvisor:
 			CyInterface().setDirty(InterfaceDirtyBits.Domestic_Advisor_DIRTY_BIT, False)
 			
 			screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
-			iPlayer = PyPlayer(CyGame().getActivePlayer())
+			player = gc.getPlayer(CyGame().getActivePlayer())
 
-			cityList = iPlayer.getCityList()
-			for i in range(len(cityList)):
-			
-				pLoopCity = PyCity( CyGame().getActivePlayer(), cityList[i].getID() )
-
-				#screen.setTableTextKey( "CityListBackground", 18, pLoopCity.getName(), 2, pLoopCity.getProductionName() + " (" + str(pLoopCity.getGeneralProductionTurnsLeft()) + ")", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY, len(cityList) )	
+			i = 0
+			(pLoopCity, iter) = player.firstCity(false)
+			while(pLoopCity):
 				self.updateTable(pLoopCity, i)
-				
+				i += 1
+				(pLoopCity, iter) = player.nextCity(iter, false)
+			
 			self.updateSpecialists()
 		
 		return

@@ -213,12 +213,7 @@ class CvTechSplashScreen:
 			if (isTechRequiredForProject(self.iTech, j)):
 				screen.attachImageButton( panelName, "", CyGlobalContext().getProjectInfo(j).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM,
 							  WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROJECT, j, 1, False )
-							  
-		for j in range(CyGlobalContext().getNumPromotionInfos()):
-			if (CyGlobalContext().getPromotionInfo(j).getTechPrereq() == self.iTech):
-				screen.attachImageButton( panelName, "", CyGlobalContext().getPromotionInfo(j).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM,
-							  WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, j, 1, False )
-				
+							  				
 
 	# returns a unique ID for a widget in this screen
 	def getNextWidgetName(self):

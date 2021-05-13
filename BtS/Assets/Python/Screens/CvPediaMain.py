@@ -22,6 +22,7 @@ import CvPediaSpecialist
 import CvPediaHistory
 import CvPediaProject
 import CvPediaReligion
+import CvPediaCorporation
 
 # globals
 gc = CyGlobalContext()
@@ -98,6 +99,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		self.pediaSpecialist = CvPediaSpecialist.CvPediaSpecialist(self)
 		self.pediaProjectScreen = CvPediaProject.CvPediaProject(self)
 		self.pediaReligion = CvPediaReligion.CvPediaReligion(self)
+		self.pediaCorporation = CvPediaCorporation.CvPediaCorporation(self)
 		self.pediaHistorical = CvPediaHistory.CvPediaHistory(self)
 				
 		# used for navigating "forward" and "back" in civilopedia
@@ -126,9 +128,11 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 			CivilopediaPageTypes.CIVILOPEDIA_PAGE_CIV	: self.placeCivs,
 			CivilopediaPageTypes.CIVILOPEDIA_PAGE_LEADER	: self.placeLeaders,
 			CivilopediaPageTypes.CIVILOPEDIA_PAGE_RELIGION	: self.placeReligions,
+			CivilopediaPageTypes.CIVILOPEDIA_PAGE_CORPORATION	: self.placeCorporations,
 			CivilopediaPageTypes.CIVILOPEDIA_PAGE_CIVIC	: self.placeCivics,
 			CivilopediaPageTypes.CIVILOPEDIA_PAGE_PROJECT	: self.placeProjects,
 			CivilopediaPageTypes.CIVILOPEDIA_PAGE_CONCEPT	: self.placeConcepts,
+			CivilopediaPageTypes.CIVILOPEDIA_PAGE_CONCEPT_NEW	: self.placeNewConcepts,
 			CivilopediaPageTypes.CIVILOPEDIA_PAGE_HINTS	: self.placeHints,
 			}
 		
@@ -155,9 +159,11 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		self.szCategoryCiv = localText.getText("TXT_KEY_PEDIA_CATEGORY_CIV", ())		
 		self.szCategoryLeader = localText.getText("TXT_KEY_PEDIA_CATEGORY_LEADER", ())		
 		self.szCategoryReligion = localText.getText("TXT_KEY_PEDIA_CATEGORY_RELIGION", ())		
+		self.szCategoryCorporation = localText.getText("TXT_KEY_CONCEPT_CORPORATIONS", ())		
 		self.szCategoryCivic = localText.getText("TXT_KEY_PEDIA_CATEGORY_CIVIC", ())		
 		self.szCategoryProject = localText.getText("TXT_KEY_PEDIA_CATEGORY_PROJECT", ())		
 		self.szCategoryConcept = localText.getText("TXT_KEY_PEDIA_CATEGORY_CONCEPT", ())
+		self.szCategoryConceptNew = localText.getText("TXT_KEY_PEDIA_CATEGORY_CONCEPT_NEW", ())
 		self.szCategoryHints = localText.getText("TXT_KEY_PEDIA_CATEGORY_HINTS", ())
 		
 		self.listCategories = [ self.szCategoryTech, 
@@ -174,9 +180,11 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 								self.szCategoryCiv, 
 								self.szCategoryLeader,
 								self.szCategoryReligion, 
+								self.szCategoryCorporation, 
 								self.szCategoryCivic, 
 								self.szCategoryProject,  
 								self.szCategoryConcept,
+								self.szCategoryConceptNew,
 								self.szCategoryHints]
 								
 		# Create a new screen
@@ -247,7 +255,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		if (nEntries % nColumns):
 			nRows += 1
 		tableName = self.getNextWidgetName()
-		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
 		for i in range(nColumns):
 			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
@@ -268,14 +276,20 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		
 		# Create and place a tech pane									
 		list = self.getSortedList( gc.getNumUnitInfos(), gc.getUnitInfo )
+		
+		if gc.getDefineINT("CIVILOPEDIA_SHOW_ACTIVE_CIVS_ONLY") and gc.getGame().isFinalInitialized():
+			listCopy = list[:]
+			for item in listCopy:
+				if not gc.getGame().isUnitEverActive(item[1]):
+					list.remove(item)
 
-		nColumns = 4
+		nColumns = 5
 		nEntries = len(list)
 		nRows = nEntries // nColumns
 		if (nEntries % nColumns):
 			nRows += 1
 		tableName = self.getNextWidgetName()
-		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
 		for i in range(nColumns):
 			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
@@ -297,13 +311,19 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		# Create and place a tech pane									
 		list = self.pediaBuildingScreen.getBuildingSortedList(false)
 
+		if gc.getDefineINT("CIVILOPEDIA_SHOW_ACTIVE_CIVS_ONLY") and gc.getGame().isFinalInitialized():
+			listCopy = list[:]
+			for item in listCopy:
+				if not gc.getGame().isBuildingEverActive(item[1]):
+					list.remove(item)
+
 		nColumns = 4
 		nEntries = len(list)
 		nRows = nEntries // nColumns
 		if (nEntries % nColumns):
 			nRows += 1
 		tableName = self.getNextWidgetName()
-		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
 		for i in range(nColumns):
 			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
@@ -325,13 +345,13 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		# Create and place a tech pane									
 		list = self.pediaBuildingScreen.getBuildingSortedList(true)
 
-		nColumns = 2
+		nColumns = 3
 		nEntries = len(list)
 		nRows = nEntries // nColumns
 		if (nEntries % nColumns):
 			nRows += 1
 		tableName = self.getNextWidgetName()
-		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
 		for i in range(nColumns):
 			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
@@ -359,7 +379,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		if (nEntries % nColumns):
 			nRows += 1
 		tableName = self.getNextWidgetName()
-		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
 		for i in range(nColumns):
 			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
@@ -387,7 +407,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		if (nEntries % nColumns):
 			nRows += 1
 		tableName = self.getNextWidgetName()
-		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
 		for i in range(nColumns):
 			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
@@ -409,13 +429,13 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		# Create and place a tech pane									
 		list = self.getSortedList( gc.getNumPromotionInfos(), gc.getPromotionInfo )
 
-		nColumns = 2
+		nColumns = 3
 		nEntries = len(list)
 		nRows = nEntries // nColumns
 		if (nEntries % nColumns):
 			nRows += 1
 		tableName = self.getNextWidgetName()
-		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
 		for i in range(nColumns):
 			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
@@ -443,7 +463,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		if (nEntries % nColumns):
 			nRows += 1
 		tableName = self.getNextWidgetName()
-		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
 		for i in range(nColumns):
 			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
@@ -465,13 +485,19 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		# Create and place a tech pane									
 		list = self.getSortedList( gc.getNumCivilizationInfos(), gc.getCivilizationInfo )
 
-		nColumns = 1
+		if gc.getDefineINT("CIVILOPEDIA_SHOW_ACTIVE_CIVS_ONLY") and gc.getGame().isFinalInitialized():
+			listCopy = list[:]
+			for item in listCopy:
+				if not gc.getGame().isCivEverActive(item[1]):
+					list.remove(item)
+
+		nColumns = 2
 		nEntries = len(list)
 		nRows = nEntries // nColumns
 		if (nEntries % nColumns):
 			nRows += 1
 		tableName = self.getNextWidgetName()
-		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
 		for i in range(nColumns):
 			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
@@ -497,14 +523,17 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		for item in listCopy:
 			if item[1] == gc.getDefineINT("BARBARIAN_LEADER"):
 				list.remove(item)
+			elif gc.getDefineINT("CIVILOPEDIA_SHOW_ACTIVE_CIVS_ONLY") and gc.getGame().isFinalInitialized():
+				if not gc.getGame().isLeaderEverActive(item[1]):
+					list.remove(item)
 
-		nColumns = 2
+		nColumns = 3
 		nEntries = len(list)
 		nRows = nEntries // nColumns
 		if (nEntries % nColumns):
 			nRows += 1
 		tableName = self.getNextWidgetName()
-		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
 		for i in range(nColumns):
 			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
@@ -517,7 +546,19 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 			if iRow >= iNumRows:
 				iNumRows += 1
 				screen.appendTableRow(tableName)
-			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getLeaderHeadInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_LEADER, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+			
+			iNumCivs = 0
+			iLeaderCiv = -1
+			for iCiv in range(gc.getNumCivilizationInfos()):
+				civ = gc.getCivilizationInfo(iCiv)
+				if civ.isLeaders(item[1]):
+					iNumCivs += 1
+					iLeaderCiv = iCiv
+
+			if iNumCivs != 1:
+				iLeaderCiv = -1
+
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getLeaderHeadInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_LEADER, item[1], iLeaderCiv, CvUtil.FONT_LEFT_JUSTIFY)
 			iCounter += 1
 
 	def placeReligions(self):
@@ -532,7 +573,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		if (nEntries % nColumns):
 			nRows += 1
 		tableName = self.getNextWidgetName()
-		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
 		for i in range(nColumns):
 			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
@@ -548,6 +589,34 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getReligionInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_RELIGION, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
 			iCounter += 1
 						
+	def placeCorporations(self):
+		screen = self.getScreen()
+		
+		# Create and place a tech pane									
+		list = self.getSortedList( gc.getNumCorporationInfos(), gc.getCorporationInfo )
+
+		nColumns = 1
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
+		tableName = self.getNextWidgetName()
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
+		screen.enableSelect(tableName, False)
+		for i in range(nColumns):
+			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
+		
+		iCounter = 0
+		iNumRows = 0
+		for item in list:
+			iRow = iCounter % nRows
+			iColumn = iCounter // nRows
+			if iRow >= iNumRows:
+				iNumRows += 1
+				screen.appendTableRow(tableName)
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getCorporationInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_CORPORATION, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+			iCounter += 1
+						
 	def placeCivics(self):
 		screen = self.getScreen()
 		
@@ -560,7 +629,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		if (nEntries % nColumns):
 			nRows += 1
 		tableName = self.getNextWidgetName()
-		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
 		for i in range(nColumns):
 			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
@@ -588,7 +657,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		if (nEntries % nColumns):
 			nRows += 1
 		tableName = self.getNextWidgetName()
-		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
 		for i in range(nColumns):
 			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
@@ -616,7 +685,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		if (nEntries % nColumns):
 			nRows += 1
 		tableName = self.getNextWidgetName()
-		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
 		for i in range(nColumns):
 			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
@@ -645,7 +714,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		if (nEntries % nColumns):
 			nRows += 1
 		tableName = self.getNextWidgetName()
-		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
 		for i in range(nColumns):
 			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
@@ -673,7 +742,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		if (nEntries % nColumns):
 			nRows += 1
 		tableName = self.getNextWidgetName()
-		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
 		for i in range(nColumns):
 			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
@@ -690,6 +759,35 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 			iCounter += 1
 
 						
+	def placeNewConcepts(self):
+		screen = self.getScreen()
+		
+		# Create and place a tech pane									
+		list = self.getSortedList( gc.getNumNewConceptInfos(), gc.getNewConceptInfo )
+
+		nColumns = 3
+		nEntries = len(list)
+		nRows = nEntries // nColumns
+		if (nEntries % nColumns):
+			nRows += 1
+		tableName = self.getNextWidgetName()
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
+		screen.enableSelect(tableName, False)
+		for i in range(nColumns):
+			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
+		
+		iCounter = 0
+		iNumRows = 0
+		for item in list:
+			iColumn = iCounter // nRows
+			iRow = iCounter % nRows
+			if iRow >= iNumRows:
+				iNumRows += 1
+				screen.appendTableRow(tableName)
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getNewConceptInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_DESCRIPTION, CivilopediaPageTypes.CIVILOPEDIA_PAGE_CONCEPT_NEW, item[1], CvUtil.FONT_LEFT_JUSTIFY)
+			iCounter += 1
+
+						
 	def placeSpecialists(self):
 		screen = self.getScreen()
 		
@@ -702,7 +800,7 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		if (nEntries % nColumns):
 			nRows += 1
 		tableName = self.getNextWidgetName()
-		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 16, 16, TableStyles.TABLE_STYLE_STANDARD);
+		screen.addTableControlGFC(tableName, nColumns, self.X_ITEMS_PANE, self.Y_ITEMS_PANE+5, self.W_ITEMS_PANE, self.H_ITEMS_PANE-5, False, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD);
 		screen.enableSelect(tableName, False)
 		for i in range(nColumns):
 			screen.setTableColumnHeader(tableName, i, "", self.W_ITEMS_PANE/nColumns)
@@ -729,7 +827,9 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		hintText = string.split( szHintsText, "\n" )
 		for hint in hintText:
 			if len( hint ) != 0:
-				screen.appendListBoxString( self.szAreaId, hint, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+				screen.appendListBoxStringNoUpdate( self.szAreaId, hint, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+				
+		screen.updateListBox(self.szAreaId)
 										
 	def placeLinks(self, bRedraw):
 		
@@ -741,8 +841,11 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 		i = 0
 		for szCategory in self.listCategories:
 			if bRedraw:
-				screen.appendListBoxString(self.LIST_ID, szCategory, WidgetTypes.WIDGET_PEDIA_MAIN, i, 0, CvUtil.FONT_LEFT_JUSTIFY )
+				screen.appendListBoxStringNoUpdate(self.LIST_ID, szCategory, WidgetTypes.WIDGET_PEDIA_MAIN, i, 0, CvUtil.FONT_LEFT_JUSTIFY )
 			i += 1
+		
+		if bRedraw:
+			screen.updateListBox(self.LIST_ID)
 
 		screen.setSelectedListBoxStringGFC(self.LIST_ID, self.iCategory)
 					
@@ -795,6 +898,8 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 			self.pediaProjectScreen.interfaceScreen(iEntry)	
 		elif (iScreen == CvScreenEnums.PEDIA_RELIGION):
 			self.pediaReligion.interfaceScreen(iEntry)	
+		elif (iScreen == CvScreenEnums.PEDIA_CORPORATION):
+			self.pediaCorporation.interfaceScreen(iEntry)	
 		elif (iScreen == CvScreenEnums.PEDIA_HISTORY):
 			self.pediaHistorical.interfaceScreen(iEntry)	
 
@@ -851,12 +956,16 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_LEADER), True)			
 		if (szLink == "PEDIA_MAIN_RELIGION"):
 			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_RELIGION), True)			
+		if (szLink == "PEDIA_MAIN_CORPORATION"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_CORPORATION), True)			
 		if (szLink == "PEDIA_MAIN_CIVIC"):
 			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_CIVIC), True)			
 		if (szLink == "PEDIA_MAIN_PROJECT"):
 			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_PROJECT), True)			
 		if (szLink == "PEDIA_MAIN_CONCEPT"):
 			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_CONCEPT), True)			
+		if (szLink == "PEDIA_MAIN_CONCEPT_NEW"):
+			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_CONCEPT_NEW), True)			
 		if (szLink == "PEDIA_MAIN_HINTS"):
 			return self.pediaJump(CvScreenEnums.PEDIA_MAIN, int(CivilopediaPageTypes.CIVILOPEDIA_PAGE_HINTS), True)			
 
@@ -864,12 +973,19 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 			if (gc.getConceptInfo(i).isMatchForLink(szLink, False)):
 				iEntryId = self.pediaHistorical.getIdFromEntryInfo(CivilopediaPageTypes.CIVILOPEDIA_PAGE_CONCEPT, i)
 				return self.pediaJump(CvScreenEnums.PEDIA_HISTORY, iEntryId, True)
+		for i in range(gc.getNumNewConceptInfos()):
+			if (gc.getNewConceptInfo(i).isMatchForLink(szLink, False)):
+				iEntryId = self.pediaHistorical.getIdFromEntryInfo(CivilopediaPageTypes.CIVILOPEDIA_PAGE_CONCEPT_NEW, i)
+				return self.pediaJump(CvScreenEnums.PEDIA_HISTORY, iEntryId, True)
 		for i in range(gc.getNumTechInfos()):
 			if (gc.getTechInfo(i).isMatchForLink(szLink, False)):
 				return self.pediaJump(CvScreenEnums.PEDIA_TECH, i, True)
 		for i in range(gc.getNumUnitInfos()):
 			if (gc.getUnitInfo(i).isMatchForLink(szLink, False)):
 				return self.pediaJump(CvScreenEnums.PEDIA_UNIT, i, True)
+		for i in range(gc.getNumCorporationInfos()):
+			if (gc.getCorporationInfo(i).isMatchForLink(szLink, False)):
+				return self.pediaJump(CvScreenEnums.PEDIA_CORPORATION, i, True)
 		for i in range(gc.getNumBuildingInfos()):
 			if (gc.getBuildingInfo(i).isMatchForLink(szLink, False)):
 				return self.pediaJump(CvScreenEnums.PEDIA_BUILDING, i, True)
@@ -953,6 +1069,8 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 			return self.pediaProjectScreen.handleInput(inputClass)
 		if (self.iLastScreen == CvScreenEnums.PEDIA_RELIGION):
 			return self.pediaReligion.handleInput(inputClass)
+		if (self.iLastScreen == CvScreenEnums.PEDIA_CORPORATION):
+			return self.pediaCorporation.handleInput(inputClass)
 		if (self.iLastScreen == CvScreenEnums.PEDIA_HISTORY):
 			return self.pediaHistorical.handleInput(inputClass)
 						

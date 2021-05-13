@@ -196,6 +196,42 @@ def unitBuiltFeats(pCity, pUnit):
 				popupInfo.addPythonButton(localText.getText("TXT_KEY_FEAT_ACCOMPLISHED_MORE", ()), "")
 				popupInfo.addPopup(pCity.getOwner())
 
+	if (not gc.getPlayer(pCity.getOwner()).isFeatAccomplished(FeatTypes.FEAT_UNIT_PRIVATEER)):
+
+		if (pUnit.getUnitType() == gc.getInfoTypeForString("UNIT_PRIVATEER")):
+		
+			gc.getPlayer(pCity.getOwner()).setFeatAccomplished(FeatTypes.FEAT_UNIT_PRIVATEER, True)
+			
+			if (featPopup(pCity.getOwner()) and (gc.getGame().getStartYear() == gc.getDefineINT("START_YEAR"))):
+				popupInfo = CyPopupInfo()
+				popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+				popupInfo.setData1(FeatTypes.FEAT_UNIT_PRIVATEER)
+				popupInfo.setData2(pCity.getID())
+				popupInfo.setText(localText.getText("TXT_KEY_FEAT_UNIT_PRIVATEER", (pUnit.getNameKey(), pCity.getNameKey(), )))
+				popupInfo.setOnClickedPythonCallback("featAccomplishedOnClickedCallback")
+				popupInfo.setOnFocusPythonCallback("featAccomplishedOnFocusCallback")
+				popupInfo.addPythonButton(localText.getText("TXT_KEY_FEAT_ACCOMPLISHED_OK", ()), "")
+				popupInfo.addPythonButton(localText.getText("TXT_KEY_FEAT_ACCOMPLISHED_MORE", ()), "")
+				popupInfo.addPopup(pCity.getOwner())
+
+	if (not gc.getPlayer(pCity.getOwner()).isFeatAccomplished(FeatTypes.FEAT_UNIT_SPY)):
+
+		if (pUnit.getUnitType() == gc.getInfoTypeForString("UNIT_SPY")):
+		
+			gc.getPlayer(pCity.getOwner()).setFeatAccomplished(FeatTypes.FEAT_UNIT_SPY, True)
+			
+			if (featPopup(pCity.getOwner()) and (gc.getGame().getStartYear() == gc.getDefineINT("START_YEAR"))):
+				popupInfo = CyPopupInfo()
+				popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+				popupInfo.setData1(FeatTypes.FEAT_UNIT_SPY)
+				popupInfo.setData2(pCity.getID())
+				popupInfo.setText(localText.getText("TXT_KEY_FEAT_UNIT_SPY", (pUnit.getNameKey(), pCity.getNameKey(), )))
+				popupInfo.setOnClickedPythonCallback("featAccomplishedOnClickedCallback")
+				popupInfo.setOnFocusPythonCallback("featAccomplishedOnFocusCallback")
+				popupInfo.addPythonButton(localText.getText("TXT_KEY_FEAT_ACCOMPLISHED_OK", ()), "")
+				popupInfo.addPythonButton(localText.getText("TXT_KEY_FEAT_ACCOMPLISHED_MORE", ()), "")
+				popupInfo.addPopup(pCity.getOwner())
+
 def buildingBuiltFeats(pCity, iBuildingType):
 	
 	if (not gc.getPlayer(pCity.getOwner()).isFeatAccomplished(FeatTypes.FEAT_NATIONAL_WONDER)):
@@ -370,6 +406,54 @@ def endTurnFeats(iPlayer):
 						
 						break
 
+		if (not gc.getPlayer(iPlayer).isFeatAccomplished(FeatTypes.FEAT_CORPORATION_ENABLED)):
+		
+			for iI in range(gc.getNumBuildingInfos()):
+				eCorporation = gc.getBuildingInfo(iI).getFoundsCorporation()
+				if eCorporation != -1 and not gc.getGame().isCorporationFounded(eCorporation):
+					bValid = true
+					eTeam = gc.getPlayer(iPlayer).getTeam()
+					if not gc.getTeam(eTeam).isHasTech(gc.getBuildingInfo(iI).getPrereqAndTech()):
+						bValid = false
+					if bValid:
+						for iPrereq in range(gc.getDefineINT("NUM_BUILDING_AND_TECH_PREREQS")):
+							if not gc.getTeam(eTeam).isHasTech(gc.getBuildingInfo(iI).getPrereqAndTechs(iPrereq)):
+								bValid = false
+								break
+					if bValid:							
+						gc.getPlayer(iPlayer).setFeatAccomplished(FeatTypes.FEAT_CORPORATION_ENABLED, True)
+						
+						szBonusList = u""
+						bFirst = true
+						for iPrereq in range(gc.getDefineINT("NUM_CORPORATION_PREREQ_BONUSES")):
+							eBonus = gc.getCorporationInfo(eCorporation).getPrereqBonus(iPrereq)
+							if eBonus != -1:
+								if bFirst:
+									bFirst = false
+								else:
+									szBonusList += localText.getText("TXT_KEY_OR", ())
+								szBonusList += gc.getBonusInfo(eBonus).getDescription()
+						
+						szFounder = u""
+						for iUnit in range(gc.getNumUnitInfos()):
+							if gc.getUnitInfo(iUnit).getBuildings(iI) or gc.getUnitInfo(iUnit).getForceBuildings(iI):
+								szFounder = gc.getUnitInfo(iUnit).getTextKey()
+								break
+						
+						if (featPopup(iPlayer) and (gc.getGame().getStartYear() == gc.getDefineINT("START_YEAR"))):
+							popupInfo = CyPopupInfo()
+							popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+							popupInfo.setData1(FeatTypes.FEAT_CORPORATION_ENABLED)
+							popupInfo.setData2(pCapitalCity.getID())
+							popupInfo.setText(localText.getText("TXT_KEY_FEAT_CORPORATION_ENABLED", (gc.getCorporationInfo(eCorporation).getTextKey(), szFounder, szBonusList)))
+							popupInfo.setOnClickedPythonCallback("featAccomplishedOnClickedCallback")
+							popupInfo.setOnFocusPythonCallback("featAccomplishedOnFocusCallback")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_FEAT_ACCOMPLISHED_OK", ()), "")
+							popupInfo.addPythonButton(localText.getText("TXT_KEY_FEAT_ACCOMPLISHED_MORE", ()), "")
+							popupInfo.addPopup(iPlayer)
+						
+						break
+
 def cityAdvise(pCity, iPlayer):
 
 	global g_iAdvisorNags
@@ -379,6 +463,39 @@ def cityAdvise(pCity, iPlayer):
 
 	if (gc.getPlayer(iPlayer).isOption(PlayerOptionTypes.PLAYEROPTION_ADVISOR_POPUPS) and gc.getPlayer(iPlayer).isHuman() and not gc.getGame().isNetworkMultiPlayer()):
 		
+		eLiberationPlayer = pCity.getLiberationPlayer()							
+		if (eLiberationPlayer != -1):
+		
+			if (gc.getGame().getGameTurn()) % 40 == pCity.getGameTurnFounded() % 40:
+
+				popupInfo = CyPopupInfo()
+				popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+				popupInfo.setData1(pCity.getID())
+				popupInfo.setText(localText.getText("TXT_KEY_POPUP_LIBERATION_DEMAND", (pCity.getNameKey(), gc.getPlayer(eLiberationPlayer).getCivilizationDescriptionKey(), gc.getPlayer(eLiberationPlayer).getNameKey())))
+				popupInfo.setOnClickedPythonCallback("liberateOnClickedCallback")
+				popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
+				popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
+				popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
+				popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
+				popupInfo.addPopup(iPlayer)
+				g_iAdvisorNags += 1
+
+		elif (gc.getPlayer(iPlayer).canSplitEmpire() and pCity.AI_cityValue() < 0):
+		
+			if (true or gc.getGame().getGameTurn()) % 40 == pCity.getGameTurnFounded() % 40:
+
+				popupInfo = CyPopupInfo()
+				popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+				popupInfo.setData1(pCity.getID())
+				popupInfo.setText(localText.getText("TXT_KEY_POPUP_COLONY_DEMAND", (pCity.getNameKey(), )))
+				popupInfo.setOnClickedPythonCallback("colonyOnClickedCallback")
+				popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
+				popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
+				popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
+				popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
+				popupInfo.addPopup(iPlayer)
+				g_iAdvisorNags += 1
+
 		if (pCity.isProduction()):
 		
 			if (not pCity.isProductionUnit() and (pCity.getOrderQueueLength() <= 1)):
@@ -724,7 +841,7 @@ def cityAdvise(pCity, iPlayer):
 							popupInfo.addPopup(iPlayer)
 							g_iAdvisorNags += 1
 
-				if (pCity.getCommerceRate(CommerceTypes.COMMERCE_CULTURE) == 0):
+				if (pCity.getCommerceRate(CommerceTypes.COMMERCE_CULTURE) == 0 and not pCity.isOccupation()):
 				
 					if (gc.getGame().getGameTurn() + 7) % 40 == pCity.getGameTurnFounded() % 40:
 

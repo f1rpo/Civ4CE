@@ -56,9 +56,9 @@ class CvInfoScreen:
 		self.Y_EXIT = 730
 
 		self.X_GRAPH_TAB	= 30
-		self.X_DEMOGRAPHICS_TAB = 195
-		self.X_TOP_CITIES_TAB	= 410
-		self.X_STATS_TAB	= 713
+		self.X_DEMOGRAPHICS_TAB = 165
+		self.X_TOP_CITIES_TAB	= 425
+		self.X_STATS_TAB	= 663
 		self.Y_TABS		= 730
 		self.W_BUTTON		= 200
 		self.H_BUTTON		= 30
@@ -84,7 +84,8 @@ class CvInfoScreen:
 		self.AGRICULTURE_SCORE	= 3
 		self.POWER_SCORE	= 4
 		self.CULTURE_SCORE	= 5
-		self.NUM_SCORES		= 6
+		self.ESPIONAGE_SCORE	= 6
+		self.NUM_SCORES		= 7
 		self.RANGE_SCORES	= range(self.NUM_SCORES)
 
 		self.scoreCache	= []
@@ -154,6 +155,7 @@ class CvInfoScreen:
 		self.AGRICULTURE_SCORE	= 3
 		self.POWER_SCORE	= 4
 		self.CULTURE_SCORE	= 5
+		self.ESPIONAGE_SCORE	= 6
 
 ############################################### DEMOGRAPHICS ###############################################
 
@@ -346,15 +348,15 @@ class CvInfoScreen:
 
 		self.EXIT_TEXT = u"<font=4>" + localText.getText("TXT_KEY_PEDIA_SCREEN_EXIT", ()).upper() + u"</font>"
 
-		self.TEXT_GRAPH = u"<font=4>" + localText.getText("TXT_KEY_INFO_GRAPH", ()).upper() + u"</font>"
-		self.TEXT_DEMOGRAPHICS = u"<font=4>" + localText.getText("TXT_KEY_DEMO_SCREEN_TITLE", ()).upper() + u"</font>"
+		self.TEXT_GRAPH = u"<font=3>" + localText.getText("TXT_KEY_INFO_GRAPH", ()).upper() + u"</font>"
+		self.TEXT_DEMOGRAPHICS = u"<font=3>" + localText.getText("TXT_KEY_DEMO_SCREEN_TITLE", ()).upper() + u"</font>"
 		self.TEXT_DEMOGRAPHICS_SMALL = localText.getText("TXT_KEY_DEMO_SCREEN_TITLE", ())
-		self.TEXT_TOP_CITIES = u"<font=4>" + localText.getText("TXT_KEY_WONDERS_SCREEN_TOP_CITIES_TEXT", ()).upper() + u"</font>"
-		self.TEXT_STATS = u"<font=4>" + localText.getText("TXT_KEY_INFO_SCREEN_STATISTICS_TITLE", ()).upper() + u"</font>"
-		self.TEXT_GRAPH_YELLOW = u"<font=4>" + localText.getColorText("TXT_KEY_INFO_GRAPH", (), gc.getInfoTypeForString("COLOR_YELLOW")).upper() + u"</font>"
-		self.TEXT_DEMOGRAPHICS_YELLOW = u"<font=4>" + localText.getColorText("TXT_KEY_DEMO_SCREEN_TITLE", (), gc.getInfoTypeForString("COLOR_YELLOW")).upper() + u"</font>"
-		self.TEXT_TOP_CITIES_YELLOW = u"<font=4>" + localText.getColorText("TXT_KEY_WONDERS_SCREEN_TOP_CITIES_TEXT", (), gc.getInfoTypeForString("COLOR_YELLOW")).upper() + u"</font>"
-		self.TEXT_STATS_YELLOW = u"<font=4>" + localText.getColorText("TXT_KEY_INFO_SCREEN_STATISTICS_TITLE", (), gc.getInfoTypeForString("COLOR_YELLOW")).upper() + u"</font>"
+		self.TEXT_TOP_CITIES = u"<font=3>" + localText.getText("TXT_KEY_WONDERS_SCREEN_TOP_CITIES_TEXT", ()).upper() + u"</font>"
+		self.TEXT_STATS = u"<font=3>" + localText.getText("TXT_KEY_INFO_SCREEN_STATISTICS_TITLE", ()).upper() + u"</font>"
+		self.TEXT_GRAPH_YELLOW = u"<font=3>" + localText.getColorText("TXT_KEY_INFO_GRAPH", (), gc.getInfoTypeForString("COLOR_YELLOW")).upper() + u"</font>"
+		self.TEXT_DEMOGRAPHICS_YELLOW = u"<font=3>" + localText.getColorText("TXT_KEY_DEMO_SCREEN_TITLE", (), gc.getInfoTypeForString("COLOR_YELLOW")).upper() + u"</font>"
+		self.TEXT_TOP_CITIES_YELLOW = u"<font=3>" + localText.getColorText("TXT_KEY_WONDERS_SCREEN_TOP_CITIES_TEXT", (), gc.getInfoTypeForString("COLOR_YELLOW")).upper() + u"</font>"
+		self.TEXT_STATS_YELLOW = u"<font=3>" + localText.getColorText("TXT_KEY_INFO_SCREEN_STATISTICS_TITLE", (), gc.getInfoTypeForString("COLOR_YELLOW")).upper() + u"</font>"
 
 		self.TEXT_SHOW_ALL_PLAYERS =  localText.getText("TXT_KEY_SHOW_ALL_PLAYERS", ())
 		self.TEXT_SHOW_ALL_PLAYERS_GRAY = localText.getColorText("TXT_KEY_SHOW_ALL_PLAYERS", (), gc.getInfoTypeForString("COLOR_PLAYER_GRAY")).upper()
@@ -364,6 +366,7 @@ class CvInfoScreen:
 		self.TEXT_SCORE = localText.getText("TXT_KEY_GAME_SCORE", ())
 		self.TEXT_POWER = localText.getText("TXT_KEY_POWER", ())
 		self.TEXT_CULTURE = localText.getObjectText("TXT_KEY_COMMERCE_CULTURE", 0)
+		self.TEXT_ESPIONAGE = localText.getObjectText("TXT_KEY_ESPIONAGE_CULTURE", 0)
 
 		self.TEXT_VALUE = localText.getText("TXT_KEY_DEMO_SCREEN_VALUE_TEXT", ())
 		self.TEXT_RANK = localText.getText("TXT_KEY_DEMO_SCREEN_RANK_TEXT", ())
@@ -513,8 +516,7 @@ class CvInfoScreen:
 		# Header...
 		self.szHeaderWidget = self.getNextWidgetName()
 		screen.setText(self.szHeaderWidget, "Background", self.SCREEN_TITLE, CvUtil.FONT_CENTER_JUSTIFY, self.X_TITLE, self.Y_TITLE, self.Z_CONTROLS, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-		screen.setTextHighlightColor(self.szHeaderWidget, gc.getInfoTypeForString("COLOR_BROWN_TEXT"))
-
+		
 		# Help area for tooltips
 		screen.setHelpTextArea(self.W_HELP_AREA, FontTypes.SMALL_FONT, self.X_SCREEN, self.Y_SCREEN, self.Z_HELP_AREA, 1, ArtFileMgr.getInterfaceArtInfo("POPUPS_BACKGROUND_TRANSPARENT").getPath(), True, True, CvUtil.FONT_LEFT_JUSTIFY, 0 )
 
@@ -532,7 +534,15 @@ class CvInfoScreen:
 		self.pActivePlayer = gc.getPlayer(self.iActivePlayer)
 		self.iActiveTeam = self.pActivePlayer.getTeam()
 		self.pActiveTeam = gc.getTeam(self.iActiveTeam)
-
+		
+		iDemographicsMission = -1
+		# See if Espionage allows graph to be shown for each player
+		for iMissionLoop in range(gc.getNumEspionageMissionInfos()):
+			if (gc.getEspionageMissionInfo(iMissionLoop).isSeeDemographics()):
+				iDemographicsMission = iMissionLoop
+		
+		NULL_PLOT = CyMap().plot(-1,-1)
+		
 		# Determine who this active player knows
 		self.aiPlayersMet = []
 		self.iNumPlayersMet = 0
@@ -541,8 +551,12 @@ class CvInfoScreen:
 			iLoopPlayerTeam = pLoopPlayer.getTeam()
 			if (gc.getTeam(iLoopPlayerTeam).isEverAlive()):
 				if (self.pActiveTeam.isHasMet(iLoopPlayerTeam) or CyGame().isDebugMode() or iEndGame != 0):
-					self.aiPlayersMet.append(iLoopPlayer)
-					self.iNumPlayersMet += 1
+					if (	iDemographicsMission == -1 or
+							self.pActivePlayer.canDoEspionageMission(iDemographicsMission, iLoopPlayer, NULL_PLOT, -1) or
+							iEndGame != 0 or
+							iLoopPlayerTeam == CyGame().getActiveTeam()):
+						self.aiPlayersMet.append(iLoopPlayer)
+						self.iNumPlayersMet += 1
 
 		# "Save" current widgets so they won't be deleted later when changing tabs
 		self.iNumPermanentWidgets = self.nWidgetCount
@@ -644,6 +658,7 @@ class CvInfoScreen:
 	    screen.addPullDownString(self.szGraphDropdownWidget, self.TEXT_AGRICULTURE, 3, 3, False )
 	    screen.addPullDownString(self.szGraphDropdownWidget, self.TEXT_POWER, 4, 4, False )
 	    screen.addPullDownString(self.szGraphDropdownWidget, self.TEXT_CULTURE, 5, 5, False )
+	    screen.addPullDownString(self.szGraphDropdownWidget, self.TEXT_ESPIONAGE, 6, 6, False )
 
 	    self.dropDownTurns = []
 	    self.szTurnsDropdownWidget = self.getNextWidgetName()
@@ -739,6 +754,8 @@ class CvInfoScreen:
 		return gc.getPlayer(iPlayer).getPowerHistory(iTurn)
 	    elif (scoreType == self.CULTURE_SCORE):
 		return gc.getPlayer(iPlayer).getCultureHistory(iTurn)
+	    elif (scoreType == self.ESPIONAGE_SCORE):
+		return gc.getPlayer(iPlayer).getEspionageHistory(iTurn)
 
 	# Requires the cache to be built
 	def getHistory(self, scoreType, iPlayer, iRelTurn):
@@ -895,7 +912,7 @@ class CvInfoScreen:
 
 		pPlayer = gc.getPlayer(self.iActivePlayer)
 
-		iEconomy = pPlayer.calculateTotalYield(YieldTypes.YIELD_COMMERCE) - pPlayer.calculateInflatedCosts()
+		iEconomy = pPlayer.calculateTotalCommerce()
 		iIndustry = pPlayer.calculateTotalYield(YieldTypes.YIELD_PRODUCTION)
 		iAgriculture = pPlayer.calculateTotalYield(YieldTypes.YIELD_FOOD)
 		fMilitary = pPlayer.getPower() * 1000
@@ -979,7 +996,7 @@ class CvInfoScreen:
 				iNumActivePlayers += 1
 
 				pCurrPlayer = gc.getPlayer(iPlayerLoop)
-				aiGroupEconomy.append(pCurrPlayer.calculateTotalYield(YieldTypes.YIELD_COMMERCE) - pCurrPlayer.calculateInflatedCosts())
+				aiGroupEconomy.append(pCurrPlayer.calculateTotalCommerce())
 				aiGroupIndustry.append(pCurrPlayer.calculateTotalYield(YieldTypes.YIELD_PRODUCTION))
 				aiGroupAgriculture.append(pCurrPlayer.calculateTotalYield(YieldTypes.YIELD_FOOD))
 				aiGroupMilitary.append(pCurrPlayer.getPower() * 1000)
@@ -1353,7 +1370,7 @@ class CvInfoScreen:
 					# If this building is a wonder...
 					if (isWorldWonderClass(gc.getBuildingInfo(iBuildingLoop).getBuildingClassType())):
 
-						if (pCity.hasBuilding(iBuildingLoop)):
+						if (pCity.getNumBuilding(iBuildingLoop) > 0):
 
 							aiTempWondersList.append(iBuildingLoop)
 							aiTopCitiesNumWonders[iCityLoop] += 1
@@ -1862,7 +1879,7 @@ class CvInfoScreen:
 
 										self.aaWondersBeingBuilt.append([iBuildingProd, pPlayer.getCivilizationShortDescription(0)])
 
-								if (pCity.hasBuilding(iBuildingLoop)):
+								if (pCity.getNumBuilding(iBuildingLoop) > 0):
 									if (iPlayerTeam == gc.getPlayer(self.iActivePlayer).getTeam() or gc.getTeam(gc.getPlayer(self.iActivePlayer).getTeam()).isHasMet(iPlayerTeam)):								
 										self.aaWondersBuilt.append([pCity.getBuildingOriginalTime(iBuildingLoop),iBuildingLoop,pPlayer.getCivilizationShortDescription(0),szCityName])
 									else:
@@ -1881,7 +1898,7 @@ class CvInfoScreen:
 
 										self.aaWondersBeingBuilt.append([iBuildingProd, pPlayer.getCivilizationShortDescription(0)])
 
-								if (pCity.hasBuilding(iBuildingLoop)):
+								if (pCity.getNumBuilding(iBuildingLoop) > 0):
 
 	#								print("Adding National wonder to list: %s, %d, %s" %(pCity.getBuildingOriginalTime(iBuildingLoop),iBuildingLoop,pPlayer.getCivilizationAdjective(0)))
 									if (iPlayerTeam == gc.getPlayer(self.iActivePlayer).getTeam() or gc.getTeam(gc.getPlayer(self.iActivePlayer).getTeam()).isHasMet(iPlayerTeam)):								
@@ -2300,6 +2317,9 @@ class CvInfoScreen:
 
 					elif (iSelected == 5):
 						self.iGraphTabID = self.CULTURE_SCORE
+
+					elif (iSelected == 6):
+						self.iGraphTabID = self.ESPIONAGE_SCORE
 
 					self.drawGraph()
 

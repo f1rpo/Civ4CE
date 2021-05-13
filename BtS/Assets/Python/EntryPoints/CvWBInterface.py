@@ -59,6 +59,7 @@ def getGameData():
 	gameTurn = WBDesc.gameDesc.gameTurn
 	maxTurns = WBDesc.gameDesc.maxTurns
 	maxCityElimination = WBDesc.gameDesc.maxCityElimination
+	numAdvancedStartPoints = WBDesc.gameDesc.numAdvancedStartPoints
 	targetScore = WBDesc.gameDesc.targetScore
 	worldSizeType = CvUtil.findInfoTypeNum(gc.getWorldInfo, gc.getNumWorldInfos(), WBDesc.mapDesc.worldSize)
 	climateType = CvUtil.findInfoTypeNum(gc.getClimateInfo, gc.getNumClimateInfos(), WBDesc.mapDesc.climate)
@@ -97,6 +98,7 @@ def getGameData():
 	t=t+(gameTurn,)
 	t=t+(maxTurns,)
 	t=t+(maxCityElimination,)
+	t=t+(numAdvancedStartPoints,)
 	t=t+(targetScore,)
 	
 	return t

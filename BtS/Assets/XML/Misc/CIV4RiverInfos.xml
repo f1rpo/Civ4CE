@@ -6,7 +6,6 @@
 <!-- River Infos -->
 <Civ4RiverInfos xmlns="x-schema:CIV4MiscSchema.xml">
 	<RiverInfos>
-		<fZBias>3</fZBias>
 		<RiverInfo>
 			<Type>RIVER_RIVER</Type>
 		</RiverInfo>

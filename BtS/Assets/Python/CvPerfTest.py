@@ -92,7 +92,7 @@ class CvFillMap:
 		#	print "units", iX, iY
 		unitAI = UnitAITypes.UNITAI_UNKNOWN
 		for i in range(numUnits):
-			player.initUnit(unitType, iX, iY, unitAI)
+			player.initUnit(unitType, iX, iY, unitAI, DirectionTypes.NO_DIRECTION)
 		
 		# check if we should put improvements down TODO
 		

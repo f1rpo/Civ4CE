@@ -1,98 +1,21 @@
-<?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Jason Winokur (Firaxis Games) -->
+<?xml version="1.0" ?>
 <UnitFormations xmlns="x-schema:Civ4FormationSchema.xml">
 	<UnitFormation>
 		<Name>IDLE (1)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>0</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_IDLE</EventType>
 			<EventType>ENTITY_EVENT_SURRENDER</EventType>
 			<EventType>ENTITY_EVENT_CAPTURED</EventType>
+			<EventType>ENTITY_EVENT_GREAT_EVENT</EventType>
+			<EventType>ENTITY_EVENT_FOUND</EventType>
+			<EventType>ENTITY_EVENT_BUILD</EventType>
+			<EventType>ENTITY_EVENT_PARADROP</EventType>
+			<EventType>ENTITY_EVENT_SHOVEL</EventType>
+			<EventType>ENTITY_EVENT_DIE_ANIMATION</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_SETTLER</UnitType>
-			<UnitType>UNIT_WORKER</UnitType>
-			<UnitType>UNIT_INDIAN_FAST_WORKER</UnitType>
-			<UnitType>UNIT_SCOUT</UnitType>
-			<UnitType>UNIT_EXPLORER</UnitType>
-			<UnitType>UNIT_SPY</UnitType>
-			<UnitType>UNIT_JEWISH_MISSIONARY</UnitType>
-			<UnitType>UNIT_CHRISTIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_ISLAMIC_MISSIONARY</UnitType>
-			<UnitType>UNIT_HINDU_MISSIONARY</UnitType>
-			<UnitType>UNIT_BUDDHIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_CONFUCIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_TAOIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_WARRIOR</UnitType>
-			<UnitType>UNIT_INCAN_QUECHUA</UnitType>
-			<UnitType>UNIT_SWORDSMAN</UnitType>
-			<UnitType>UNIT_CELTIC_GALLIC_WARRIOR</UnitType>
-			<UnitType>UNIT_JAPAN_SAMURAI</UnitType>
-			<UnitType>UNIT_ROME_PRAETORIAN</UnitType>
-			<UnitType>UNIT_AXEMAN</UnitType>
-			<UnitType>UNIT_VIKING_BESERKER</UnitType>
-			<UnitType>UNIT_AZTEC_JAGUAR</UnitType>
-			<UnitType>UNIT_MACEMAN</UnitType>
-			<UnitType>UNIT_SPEARMAN</UnitType>
-			<UnitType>UNIT_GREEK_PHALANX</UnitType>
-			<UnitType>UNIT_ZULU_IMPI</UnitType>
-			<UnitType>UNIT_PIKEMAN</UnitType>
-			<UnitType>UNIT_MUSKETMAN</UnitType>
-			<UnitType>UNIT_FRENCH_MUSKETEER</UnitType>
-			<UnitType>UNIT_OTTOMAN_JANISSARY</UnitType>
-			<UnitType>UNIT_RIFLEMAN</UnitType>
-			<UnitType>UNIT_ENGLISH_REDCOAT</UnitType>
-			<UnitType>UNIT_GRENADIER</UnitType>
-			<UnitType>UNIT_INFANTRY</UnitType>
-			<UnitType>UNIT_SAM_INFANTRY</UnitType>
-			<UnitType>UNIT_MARINE</UnitType>
-			<UnitType>UNIT_AMERICAN_NAVY_SEAL</UnitType>
-			<UnitType>UNIT_ARCHER</UnitType>
-			<UnitType>UNIT_MALI_SKIRMISHER</UnitType>
-			<UnitType>UNIT_LONGBOWMAN</UnitType>
-			<UnitType>UNIT_CROSSBOWMAN</UnitType>
-			<UnitType>UNIT_CHINA_CHOKONU</UnitType>
-			<UnitType>UNIT_CHARIOT</UnitType>
-			<UnitType>UNIT_EGYPT_WARCHARIOT</UnitType>
-			<UnitType>UNIT_PERSIA_IMMORTAL</UnitType>
-			<UnitType>UNIT_HORSE_ARCHER</UnitType>
-			<UnitType>UNIT_ARABIA_CAMELARCHER</UnitType>
-			<UnitType>UNIT_CARTHAGE_NUMIDIAN_CAVALRY</UnitType>
-			<UnitType>UNIT_MONGOL_KESHIK</UnitType>
-			<UnitType>UNIT_KNIGHT</UnitType>
-			<UnitType>UNIT_SPANISH_CONQUISTADOR</UnitType>
-			<UnitType>UNIT_CAVALRY</UnitType>
-			<UnitType>UNIT_RUSSIA_COSSACK</UnitType>
-			<UnitType>UNIT_WAR_ELEPHANT</UnitType>
-			<UnitType>UNIT_MACHINE_GUN</UnitType>
-			<UnitType>UNIT_WORKBOAT</UnitType>
-			<UnitType>UNIT_GALLEY</UnitType>
-			<UnitType>UNIT_TRIREME</UnitType>
-			<UnitType>UNIT_CARAVEL</UnitType>
-			<UnitType>UNIT_GALLEON</UnitType>
-			<UnitType>UNIT_FRIGATE</UnitType>
-			<UnitType>UNIT_IRONCLAD</UnitType>
-			<UnitType>UNIT_TRANSPORT</UnitType>
-			<UnitType>UNIT_DESTROYER</UnitType>
-			<UnitType>UNIT_BATTLESHIP</UnitType>
-			<UnitType>UNIT_SUBMARINE</UnitType>
-			<UnitType>UNIT_CARRIER</UnitType>
-			<UnitType>UNIT_FIGHTER</UnitType>
-			<UnitType>UNIT_JET_FIGHTER</UnitType>
-			<UnitType>UNIT_BOMBER</UnitType>
-			<UnitType>UNIT_STEALTH_BOMBER</UnitType>
-			<UnitType>UNIT_ICBM</UnitType>
-			<UnitType>UNIT_PROPHET</UnitType>
-			<UnitType>UNIT_ARTIST</UnitType>
-			<UnitType>UNIT_SCIENTIST</UnitType>
-			<UnitType>UNIT_MERCHANT</UnitType>
-			<UnitType>UNIT_ENGINEER</UnitType>
-			<UnitType>UNIT_GREAT_GENERAL</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.0201342281879</x>
 				<y>-0.201342281879</y>
@@ -101,122 +24,40 @@
 			<Direction>3.14159265359</Direction>
 			<DirVariation>0.188679622641</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>IDLE (2)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>0</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_IDLE</EventType>
 			<EventType>ENTITY_EVENT_SURRENDER</EventType>
 			<EventType>ENTITY_EVENT_CAPTURED</EventType>
+			<EventType>ENTITY_EVENT_PARADROP</EventType>
+			<EventType>ENTITY_EVENT_SHOVEL</EventType>
+			<EventType>ENTITY_EVENT_DIE_ANIMATION</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_SETTLER</UnitType>
-			<UnitType>UNIT_WORKER</UnitType>
-			<UnitType>UNIT_INDIAN_FAST_WORKER</UnitType>
-			<UnitType>UNIT_SCOUT</UnitType>
-			<UnitType>UNIT_EXPLORER</UnitType>
-			<UnitType>UNIT_SPY</UnitType>
-			<UnitType>UNIT_JEWISH_MISSIONARY</UnitType>
-			<UnitType>UNIT_CHRISTIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_ISLAMIC_MISSIONARY</UnitType>
-			<UnitType>UNIT_HINDU_MISSIONARY</UnitType>
-			<UnitType>UNIT_BUDDHIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_CONFUCIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_TAOIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_WARRIOR</UnitType>
-			<UnitType>UNIT_INCAN_QUECHUA</UnitType>
-			<UnitType>UNIT_SWORDSMAN</UnitType>
-			<UnitType>UNIT_CELTIC_GALLIC_WARRIOR</UnitType>
-			<UnitType>UNIT_JAPAN_SAMURAI</UnitType>
-			<UnitType>UNIT_ROME_PRAETORIAN</UnitType>
-			<UnitType>UNIT_AXEMAN</UnitType>
-			<UnitType>UNIT_VIKING_BESERKER</UnitType>
-			<UnitType>UNIT_AZTEC_JAGUAR</UnitType>
-			<UnitType>UNIT_MACEMAN</UnitType>
-			<UnitType>UNIT_SPEARMAN</UnitType>
-			<UnitType>UNIT_GREEK_PHALANX</UnitType>
-			<UnitType>UNIT_ZULU_IMPI</UnitType>
-			<UnitType>UNIT_PIKEMAN</UnitType>
-			<UnitType>UNIT_MUSKETMAN</UnitType>
-			<UnitType>UNIT_FRENCH_MUSKETEER</UnitType>
-			<UnitType>UNIT_OTTOMAN_JANISSARY</UnitType>
-			<UnitType>UNIT_RIFLEMAN</UnitType>
-			<UnitType>UNIT_ENGLISH_REDCOAT</UnitType>
-			<UnitType>UNIT_GRENADIER</UnitType>
-			<UnitType>UNIT_INFANTRY</UnitType>
-			<UnitType>UNIT_SAM_INFANTRY</UnitType>
-			<UnitType>UNIT_MARINE</UnitType>
-			<UnitType>UNIT_AMERICAN_NAVY_SEAL</UnitType>
-			<UnitType>UNIT_ARCHER</UnitType>
-			<UnitType>UNIT_MALI_SKIRMISHER</UnitType>
-			<UnitType>UNIT_LONGBOWMAN</UnitType>
-			<UnitType>UNIT_CROSSBOWMAN</UnitType>
-			<UnitType>UNIT_CHINA_CHOKONU</UnitType>
-			<UnitType>UNIT_CHARIOT</UnitType>
-			<UnitType>UNIT_EGYPT_WARCHARIOT</UnitType>
-			<UnitType>UNIT_PERSIA_IMMORTAL</UnitType>
-			<UnitType>UNIT_HORSE_ARCHER</UnitType>
-			<UnitType>UNIT_ARABIA_CAMELARCHER</UnitType>
-			<UnitType>UNIT_CARTHAGE_NUMIDIAN_CAVALRY</UnitType>
-			<UnitType>UNIT_MONGOL_KESHIK</UnitType>
-			<UnitType>UNIT_KNIGHT</UnitType>
-			<UnitType>UNIT_SPANISH_CONQUISTADOR</UnitType>
-			<UnitType>UNIT_CAVALRY</UnitType>
-			<UnitType>UNIT_RUSSIA_COSSACK</UnitType>
-			<UnitType>UNIT_WAR_ELEPHANT</UnitType>
-			<UnitType>UNIT_MACHINE_GUN</UnitType>
-			<UnitType>UNIT_WORKBOAT</UnitType>
-			<UnitType>UNIT_GALLEY</UnitType>
-			<UnitType>UNIT_TRIREME</UnitType>
-			<UnitType>UNIT_CARAVEL</UnitType>
-			<UnitType>UNIT_GALLEON</UnitType>
-			<UnitType>UNIT_FRIGATE</UnitType>
-			<UnitType>UNIT_IRONCLAD</UnitType>
-			<UnitType>UNIT_TRANSPORT</UnitType>
-			<UnitType>UNIT_DESTROYER</UnitType>
-			<UnitType>UNIT_BATTLESHIP</UnitType>
-			<UnitType>UNIT_SUBMARINE</UnitType>
-			<UnitType>UNIT_CARRIER</UnitType>
-			<UnitType>UNIT_FIGHTER</UnitType>
-			<UnitType>UNIT_JET_FIGHTER</UnitType>
-			<UnitType>UNIT_BOMBER</UnitType>
-			<UnitType>UNIT_STEALTH_BOMBER</UnitType>
-			<UnitType>UNIT_ICBM</UnitType>
-			<UnitType>UNIT_PROPHET</UnitType>
-			<UnitType>UNIT_ARTIST</UnitType>
-			<UnitType>UNIT_SCIENTIST</UnitType>
-			<UnitType>UNIT_MERCHANT</UnitType>
-			<UnitType>UNIT_ENGINEER</UnitType>
-			<UnitType>UNIT_GREAT_GENERAL</UnitType>
-			<UnitType>UNIT_CATAPULT</UnitType>
-			<UnitType>UNIT_TREBUCHET</UnitType>
-			<UnitType>UNIT_KOREAN_HWACHA</UnitType>
-			<UnitType>UNIT_CANNON</UnitType>
-			<UnitType>UNIT_ARTILLERY</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.48322147651</x>
 				<y>-0.0704697986577</y>
@@ -226,6 +67,7 @@
 			<DirVariation>0.404474968323</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.453020134228</x>
 				<y>-0.0805369127517</y>
@@ -234,117 +76,39 @@
 			<Direction>2.94419709374</Direction>
 			<DirVariation>0.40049968789</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>IDLE (3)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>0</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_IDLE</EventType>
 			<EventType>ENTITY_EVENT_SURRENDER</EventType>
 			<EventType>ENTITY_EVENT_CAPTURED</EventType>
+			<EventType>ENTITY_EVENT_PARADROP</EventType>
+			<EventType>ENTITY_EVENT_DIE_ANIMATION</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_SETTLER</UnitType>
-			<UnitType>UNIT_WORKER</UnitType>
-			<UnitType>UNIT_INDIAN_FAST_WORKER</UnitType>
-			<UnitType>UNIT_SCOUT</UnitType>
-			<UnitType>UNIT_EXPLORER</UnitType>
-			<UnitType>UNIT_SPY</UnitType>
-			<UnitType>UNIT_JEWISH_MISSIONARY</UnitType>
-			<UnitType>UNIT_CHRISTIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_ISLAMIC_MISSIONARY</UnitType>
-			<UnitType>UNIT_HINDU_MISSIONARY</UnitType>
-			<UnitType>UNIT_BUDDHIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_CONFUCIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_TAOIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_WARRIOR</UnitType>
-			<UnitType>UNIT_INCAN_QUECHUA</UnitType>
-			<UnitType>UNIT_SWORDSMAN</UnitType>
-			<UnitType>UNIT_CELTIC_GALLIC_WARRIOR</UnitType>
-			<UnitType>UNIT_JAPAN_SAMURAI</UnitType>
-			<UnitType>UNIT_ROME_PRAETORIAN</UnitType>
-			<UnitType>UNIT_AXEMAN</UnitType>
-			<UnitType>UNIT_VIKING_BESERKER</UnitType>
-			<UnitType>UNIT_AZTEC_JAGUAR</UnitType>
-			<UnitType>UNIT_MACEMAN</UnitType>
-			<UnitType>UNIT_SPEARMAN</UnitType>
-			<UnitType>UNIT_GREEK_PHALANX</UnitType>
-			<UnitType>UNIT_ZULU_IMPI</UnitType>
-			<UnitType>UNIT_PIKEMAN</UnitType>
-			<UnitType>UNIT_MUSKETMAN</UnitType>
-			<UnitType>UNIT_FRENCH_MUSKETEER</UnitType>
-			<UnitType>UNIT_OTTOMAN_JANISSARY</UnitType>
-			<UnitType>UNIT_RIFLEMAN</UnitType>
-			<UnitType>UNIT_ENGLISH_REDCOAT</UnitType>
-			<UnitType>UNIT_GRENADIER</UnitType>
-			<UnitType>UNIT_INFANTRY</UnitType>
-			<UnitType>UNIT_SAM_INFANTRY</UnitType>
-			<UnitType>UNIT_MARINE</UnitType>
-			<UnitType>UNIT_AMERICAN_NAVY_SEAL</UnitType>
-			<UnitType>UNIT_ARCHER</UnitType>
-			<UnitType>UNIT_MALI_SKIRMISHER</UnitType>
-			<UnitType>UNIT_LONGBOWMAN</UnitType>
-			<UnitType>UNIT_CROSSBOWMAN</UnitType>
-			<UnitType>UNIT_CHINA_CHOKONU</UnitType>
-			<UnitType>UNIT_CHARIOT</UnitType>
-			<UnitType>UNIT_EGYPT_WARCHARIOT</UnitType>
-			<UnitType>UNIT_PERSIA_IMMORTAL</UnitType>
-			<UnitType>UNIT_HORSE_ARCHER</UnitType>
-			<UnitType>UNIT_ARABIA_CAMELARCHER</UnitType>
-			<UnitType>UNIT_CARTHAGE_NUMIDIAN_CAVALRY</UnitType>
-			<UnitType>UNIT_MONGOL_KESHIK</UnitType>
-			<UnitType>UNIT_KNIGHT</UnitType>
-			<UnitType>UNIT_SPANISH_CONQUISTADOR</UnitType>
-			<UnitType>UNIT_CAVALRY</UnitType>
-			<UnitType>UNIT_RUSSIA_COSSACK</UnitType>
-			<UnitType>UNIT_WAR_ELEPHANT</UnitType>
-			<UnitType>UNIT_MACHINE_GUN</UnitType>
-			<UnitType>UNIT_WORKBOAT</UnitType>
-			<UnitType>UNIT_GALLEY</UnitType>
-			<UnitType>UNIT_TRIREME</UnitType>
-			<UnitType>UNIT_CARAVEL</UnitType>
-			<UnitType>UNIT_GALLEON</UnitType>
-			<UnitType>UNIT_FRIGATE</UnitType>
-			<UnitType>UNIT_IRONCLAD</UnitType>
-			<UnitType>UNIT_TRANSPORT</UnitType>
-			<UnitType>UNIT_DESTROYER</UnitType>
-			<UnitType>UNIT_BATTLESHIP</UnitType>
-			<UnitType>UNIT_SUBMARINE</UnitType>
-			<UnitType>UNIT_CARRIER</UnitType>
-			<UnitType>UNIT_FIGHTER</UnitType>
-			<UnitType>UNIT_JET_FIGHTER</UnitType>
-			<UnitType>UNIT_BOMBER</UnitType>
-			<UnitType>UNIT_STEALTH_BOMBER</UnitType>
-			<UnitType>UNIT_ICBM</UnitType>
-			<UnitType>UNIT_PROPHET</UnitType>
-			<UnitType>UNIT_ARTIST</UnitType>
-			<UnitType>UNIT_SCIENTIST</UnitType>
-			<UnitType>UNIT_MERCHANT</UnitType>
-			<UnitType>UNIT_ENGINEER</UnitType>
-			<UnitType>UNIT_GREAT_GENERAL</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.0201342281879</x>
 				<y>-0.161073825503</y>
@@ -354,6 +118,7 @@
 			<DirVariation>0.188679622641</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.503355704698</x>
 				<y>0.010067114094</y>
@@ -363,6 +128,7 @@
 			<DirVariation>0.528393792545</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.513422818792</x>
 				<y>-0.010067114094</y>
@@ -371,117 +137,39 @@
 			<Direction>3.49458304142</Direction>
 			<DirVariation>0.572712842531</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>IDLE (4)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>0</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_IDLE</EventType>
 			<EventType>ENTITY_EVENT_SURRENDER</EventType>
 			<EventType>ENTITY_EVENT_CAPTURED</EventType>
+			<EventType>ENTITY_EVENT_PARADROP</EventType>
+			<EventType>ENTITY_EVENT_DIE_ANIMATION</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_SETTLER</UnitType>
-			<UnitType>UNIT_WORKER</UnitType>
-			<UnitType>UNIT_INDIAN_FAST_WORKER</UnitType>
-			<UnitType>UNIT_SCOUT</UnitType>
-			<UnitType>UNIT_EXPLORER</UnitType>
-			<UnitType>UNIT_SPY</UnitType>
-			<UnitType>UNIT_JEWISH_MISSIONARY</UnitType>
-			<UnitType>UNIT_CHRISTIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_ISLAMIC_MISSIONARY</UnitType>
-			<UnitType>UNIT_HINDU_MISSIONARY</UnitType>
-			<UnitType>UNIT_BUDDHIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_CONFUCIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_TAOIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_WARRIOR</UnitType>
-			<UnitType>UNIT_INCAN_QUECHUA</UnitType>
-			<UnitType>UNIT_SWORDSMAN</UnitType>
-			<UnitType>UNIT_CELTIC_GALLIC_WARRIOR</UnitType>
-			<UnitType>UNIT_JAPAN_SAMURAI</UnitType>
-			<UnitType>UNIT_ROME_PRAETORIAN</UnitType>
-			<UnitType>UNIT_AXEMAN</UnitType>
-			<UnitType>UNIT_VIKING_BESERKER</UnitType>
-			<UnitType>UNIT_AZTEC_JAGUAR</UnitType>
-			<UnitType>UNIT_MACEMAN</UnitType>
-			<UnitType>UNIT_SPEARMAN</UnitType>
-			<UnitType>UNIT_GREEK_PHALANX</UnitType>
-			<UnitType>UNIT_ZULU_IMPI</UnitType>
-			<UnitType>UNIT_PIKEMAN</UnitType>
-			<UnitType>UNIT_MUSKETMAN</UnitType>
-			<UnitType>UNIT_FRENCH_MUSKETEER</UnitType>
-			<UnitType>UNIT_OTTOMAN_JANISSARY</UnitType>
-			<UnitType>UNIT_RIFLEMAN</UnitType>
-			<UnitType>UNIT_ENGLISH_REDCOAT</UnitType>
-			<UnitType>UNIT_GRENADIER</UnitType>
-			<UnitType>UNIT_INFANTRY</UnitType>
-			<UnitType>UNIT_SAM_INFANTRY</UnitType>
-			<UnitType>UNIT_MARINE</UnitType>
-			<UnitType>UNIT_AMERICAN_NAVY_SEAL</UnitType>
-			<UnitType>UNIT_ARCHER</UnitType>
-			<UnitType>UNIT_MALI_SKIRMISHER</UnitType>
-			<UnitType>UNIT_LONGBOWMAN</UnitType>
-			<UnitType>UNIT_CROSSBOWMAN</UnitType>
-			<UnitType>UNIT_CHINA_CHOKONU</UnitType>
-			<UnitType>UNIT_CHARIOT</UnitType>
-			<UnitType>UNIT_EGYPT_WARCHARIOT</UnitType>
-			<UnitType>UNIT_PERSIA_IMMORTAL</UnitType>
-			<UnitType>UNIT_HORSE_ARCHER</UnitType>
-			<UnitType>UNIT_ARABIA_CAMELARCHER</UnitType>
-			<UnitType>UNIT_CARTHAGE_NUMIDIAN_CAVALRY</UnitType>
-			<UnitType>UNIT_MONGOL_KESHIK</UnitType>
-			<UnitType>UNIT_KNIGHT</UnitType>
-			<UnitType>UNIT_SPANISH_CONQUISTADOR</UnitType>
-			<UnitType>UNIT_CAVALRY</UnitType>
-			<UnitType>UNIT_RUSSIA_COSSACK</UnitType>
-			<UnitType>UNIT_WAR_ELEPHANT</UnitType>
-			<UnitType>UNIT_MACHINE_GUN</UnitType>
-			<UnitType>UNIT_WORKBOAT</UnitType>
-			<UnitType>UNIT_GALLEY</UnitType>
-			<UnitType>UNIT_TRIREME</UnitType>
-			<UnitType>UNIT_CARAVEL</UnitType>
-			<UnitType>UNIT_GALLEON</UnitType>
-			<UnitType>UNIT_FRIGATE</UnitType>
-			<UnitType>UNIT_IRONCLAD</UnitType>
-			<UnitType>UNIT_TRANSPORT</UnitType>
-			<UnitType>UNIT_DESTROYER</UnitType>
-			<UnitType>UNIT_BATTLESHIP</UnitType>
-			<UnitType>UNIT_SUBMARINE</UnitType>
-			<UnitType>UNIT_CARRIER</UnitType>
-			<UnitType>UNIT_FIGHTER</UnitType>
-			<UnitType>UNIT_JET_FIGHTER</UnitType>
-			<UnitType>UNIT_BOMBER</UnitType>
-			<UnitType>UNIT_STEALTH_BOMBER</UnitType>
-			<UnitType>UNIT_ICBM</UnitType>
-			<UnitType>UNIT_PROPHET</UnitType>
-			<UnitType>UNIT_ARTIST</UnitType>
-			<UnitType>UNIT_SCIENTIST</UnitType>
-			<UnitType>UNIT_MERCHANT</UnitType>
-			<UnitType>UNIT_ENGINEER</UnitType>
-			<UnitType>UNIT_GREAT_GENERAL</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.0</x>
 				<y>-0.573825503356</y>
@@ -491,6 +179,7 @@
 			<DirVariation>0.188679622641</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.503355704698</x>
 				<y>0.010067114094</y>
@@ -500,6 +189,7 @@
 			<DirVariation>0.528393792545</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.513422818792</x>
 				<y>-0.010067114094</y>
@@ -509,6 +199,7 @@
 			<DirVariation>0.572712842531</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.0201342281879</x>
 				<y>0.624161073826</y>
@@ -517,30 +208,526 @@
 			<Direction>3.14159265359</Direction>
 			<DirVariation>0.188679622641</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
+	</UnitFormation>
+	<UnitFormation>
+		<Name>IDLE (5)</Name>
+		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
+		<EventMaskList>
+			<EventType>ENTITY_EVENT_IDLE</EventType>
+			<EventType>ENTITY_EVENT_DIE</EventType>
+			<EventType>ENTITY_EVENT_DAMAGE</EventType>
+			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
+			<EventType>ENTITY_EVENT_END_COMBAT</EventType>
+			<EventType>ENTITY_EVENT_SURRENDER</EventType>
+			<EventType>ENTITY_EVENT_CAPTURED</EventType>
+			<EventType>ENTITY_EVENT_AIRPATROL</EventType>
+			<EventType>ENTITY_EVENT_AIRINTERCEPTION</EventType>
+			<EventType>ENTITY_EVENT_AIRBOMB</EventType>
+			<EventType>ENTITY_EVENT_PARADROP</EventType>
+			<EventType>ENTITY_EVENT_AIRSTRIKE</EventType>
+			<EventType>ENTITY_EVENT_AIRRECON</EventType>
+			<EventType>ENTITY_EVENT_NUKE</EventType>
+			<EventType>ENTITY_EVENT_MULTI_SELECT</EventType>
+			<EventType>ENTITY_EVENT_MULTI_DESELECT</EventType>
+			<EventType>ENTITY_EVENT_GREAT_EVENT</EventType>
+			<EventType>ENTITY_EVENT_PILLAGE</EventType>
+			<EventType>ENTITY_EVENT_SABOTAGE</EventType>
+			<EventType>ENTITY_EVENT_DESTROY</EventType>
+			<EventType>ENTITY_EVENT_STEAL_PLANS</EventType>
+			<EventType>ENTITY_EVENT_BOMBARD</EventType>
+			<EventType>ENTITY_EVENT_FOUND</EventType>
+			<EventType>ENTITY_EVENT_FORTIFY</EventType>
+			<EventType>ENTITY_EVENT_SENTRY</EventType>
+			<EventType>ENTITY_EVENT_HEAL</EventType>
+			<EventType>ENTITY_EVENT_SLEEP</EventType>
+			<EventType>ENTITY_EVENT_SHOVEL</EventType>
+			<EventType>ENTITY_EVENT_BUILD</EventType>
+			<EventType>ENTITY_EVENT_IRRIGATE</EventType>
+			<EventType>ENTITY_EVENT_MINE</EventType>
+			<EventType>ENTITY_EVENT_CHOP</EventType>
+			<EventType>ENTITY_EVENT_RAILROAD</EventType>
+		</EventMaskList>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.38255033557</x>
+				<y>0.372483221477</y>
+			</Position>
+			<PositionRadius>17.691806013</PositionRadius>
+			<Direction>3.1941757152</Direction>
+			<DirVariation>0.466904701197</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>0.302013422819</x>
+				<y>0.372483221477</y>
+			</Position>
+			<PositionRadius>17.0</PositionRadius>
+			<Direction>3.27414418589</Direction>
+			<DirVariation>0.468614980554</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.614093959732</x>
+				<y>-0.372483221477</y>
+			</Position>
+			<PositionRadius>16.1245154966</PositionRadius>
+			<Direction>3.21836454486</Direction>
+			<DirVariation>0.54626001135</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.0805369127517</x>
+				<y>-0.362416107383</y>
+			</Position>
+			<PositionRadius>15.0</PositionRadius>
+			<Direction>3.05485431491</Direction>
+			<DirVariation>0.565685424949</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>0.513422818792</x>
+				<y>-0.362416107383</y>
+			</Position>
+			<PositionRadius>19.2353840617</PositionRadius>
 			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<DirVariation>0.344093010682</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
+			<Position>
+				<x>-0.0805369127517</x>
+				<y>0.835570469799</y>
+			</Position>
+			<PositionRadius>18.0</PositionRadius>
+			<Direction>3.14159265359</Direction>
+			<DirVariation>0.4472135955</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
+			<Position>
+				<x>-0.855704697987</x>
+				<y>-0.634228187919</y>
+			</Position>
+			<PositionRadius>19.6468827044</PositionRadius>
+			<Direction>2.38648825011</Direction>
+			<DirVariation>0.722772439984</DirVariation>
+		</UnitEntry>
+	</UnitFormation>
+	<UnitFormation>
+		<Name>IDLE (6)</Name>
+		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
+		<EventMaskList>
+			<EventType>ENTITY_EVENT_IDLE</EventType>
+			<EventType>ENTITY_EVENT_DIE</EventType>
+			<EventType>ENTITY_EVENT_DAMAGE</EventType>
+			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
+			<EventType>ENTITY_EVENT_END_COMBAT</EventType>
+			<EventType>ENTITY_EVENT_SURRENDER</EventType>
+			<EventType>ENTITY_EVENT_CAPTURED</EventType>
+			<EventType>ENTITY_EVENT_AIRPATROL</EventType>
+			<EventType>ENTITY_EVENT_AIRINTERCEPTION</EventType>
+			<EventType>ENTITY_EVENT_AIRBOMB</EventType>
+			<EventType>ENTITY_EVENT_PARADROP</EventType>
+			<EventType>ENTITY_EVENT_AIRSTRIKE</EventType>
+			<EventType>ENTITY_EVENT_AIRRECON</EventType>
+			<EventType>ENTITY_EVENT_NUKE</EventType>
+			<EventType>ENTITY_EVENT_MULTI_SELECT</EventType>
+			<EventType>ENTITY_EVENT_MULTI_DESELECT</EventType>
+			<EventType>ENTITY_EVENT_GREAT_EVENT</EventType>
+			<EventType>ENTITY_EVENT_PILLAGE</EventType>
+			<EventType>ENTITY_EVENT_SABOTAGE</EventType>
+			<EventType>ENTITY_EVENT_DESTROY</EventType>
+			<EventType>ENTITY_EVENT_STEAL_PLANS</EventType>
+			<EventType>ENTITY_EVENT_BOMBARD</EventType>
+			<EventType>ENTITY_EVENT_FOUND</EventType>
+			<EventType>ENTITY_EVENT_FORTIFY</EventType>
+			<EventType>ENTITY_EVENT_SENTRY</EventType>
+			<EventType>ENTITY_EVENT_HEAL</EventType>
+			<EventType>ENTITY_EVENT_SLEEP</EventType>
+			<EventType>ENTITY_EVENT_SHOVEL</EventType>
+			<EventType>ENTITY_EVENT_BUILD</EventType>
+			<EventType>ENTITY_EVENT_IRRIGATE</EventType>
+			<EventType>ENTITY_EVENT_MINE</EventType>
+			<EventType>ENTITY_EVENT_CHOP</EventType>
+			<EventType>ENTITY_EVENT_RAILROAD</EventType>
+		</EventMaskList>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.010067114094</x>
+				<y>0.38255033557</y>
+			</Position>
+			<PositionRadius>17.691806013</PositionRadius>
+			<Direction>3.1941757152</Direction>
+			<DirVariation>0.466904701197</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>0.523489932886</x>
+				<y>0.372483221477</y>
+			</Position>
+			<PositionRadius>17.0</PositionRadius>
+			<Direction>3.27414418589</Direction>
+			<DirVariation>0.468614980554</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.503355704698</x>
+				<y>-0.362416107383</y>
+			</Position>
+			<PositionRadius>16.1245154966</PositionRadius>
+			<Direction>3.21836454486</Direction>
+			<DirVariation>0.54626001135</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>0.010067114094</x>
+				<y>-0.342281879195</y>
+			</Position>
+			<PositionRadius>15.0</PositionRadius>
+			<Direction>3.05485431491</Direction>
+			<DirVariation>0.565685424949</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>0.53355704698</x>
+				<y>-0.352348993289</y>
+			</Position>
+			<PositionRadius>19.2353840617</PositionRadius>
+			<Direction>3.14159265359</Direction>
+			<DirVariation>0.344093010682</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
+			<Position>
+				<x>-0.0805369127517</x>
+				<y>0.835570469799</y>
+			</Position>
+			<PositionRadius>18.0</PositionRadius>
+			<Direction>3.14159265359</Direction>
+			<DirVariation>0.4472135955</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
+			<Position>
+				<x>-0.744966442953</x>
+				<y>-0.644295302013</y>
+			</Position>
+			<PositionRadius>19.6468827044</PositionRadius>
+			<Direction>2.38648825011</Direction>
+			<DirVariation>0.722772439984</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.523489932886</x>
+				<y>0.352348993289</y>
+			</Position>
+			<PositionRadius>17.691806013</PositionRadius>
+			<Direction>3.1941757152</Direction>
+			<DirVariation>0.466904701197</DirVariation>
+		</UnitEntry>
+	</UnitFormation>
+	<UnitFormation>
+		<Name>IDLE (7)</Name>
+		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
+		<EventMaskList>
+			<EventType>ENTITY_EVENT_IDLE</EventType>
+			<EventType>ENTITY_EVENT_DIE</EventType>
+			<EventType>ENTITY_EVENT_DAMAGE</EventType>
+			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
+			<EventType>ENTITY_EVENT_END_COMBAT</EventType>
+			<EventType>ENTITY_EVENT_SURRENDER</EventType>
+			<EventType>ENTITY_EVENT_CAPTURED</EventType>
+			<EventType>ENTITY_EVENT_AIRPATROL</EventType>
+			<EventType>ENTITY_EVENT_AIRINTERCEPTION</EventType>
+			<EventType>ENTITY_EVENT_AIRBOMB</EventType>
+			<EventType>ENTITY_EVENT_PARADROP</EventType>
+			<EventType>ENTITY_EVENT_AIRSTRIKE</EventType>
+			<EventType>ENTITY_EVENT_AIRRECON</EventType>
+			<EventType>ENTITY_EVENT_NUKE</EventType>
+			<EventType>ENTITY_EVENT_MULTI_SELECT</EventType>
+			<EventType>ENTITY_EVENT_MULTI_DESELECT</EventType>
+			<EventType>ENTITY_EVENT_GREAT_EVENT</EventType>
+			<EventType>ENTITY_EVENT_PILLAGE</EventType>
+			<EventType>ENTITY_EVENT_SABOTAGE</EventType>
+			<EventType>ENTITY_EVENT_DESTROY</EventType>
+			<EventType>ENTITY_EVENT_STEAL_PLANS</EventType>
+			<EventType>ENTITY_EVENT_BOMBARD</EventType>
+			<EventType>ENTITY_EVENT_FOUND</EventType>
+			<EventType>ENTITY_EVENT_FORTIFY</EventType>
+			<EventType>ENTITY_EVENT_SENTRY</EventType>
+			<EventType>ENTITY_EVENT_HEAL</EventType>
+			<EventType>ENTITY_EVENT_SLEEP</EventType>
+			<EventType>ENTITY_EVENT_SHOVEL</EventType>
+			<EventType>ENTITY_EVENT_BUILD</EventType>
+			<EventType>ENTITY_EVENT_IRRIGATE</EventType>
+			<EventType>ENTITY_EVENT_MINE</EventType>
+			<EventType>ENTITY_EVENT_CHOP</EventType>
+			<EventType>ENTITY_EVENT_RAILROAD</EventType>
+		</EventMaskList>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.523489932886</x>
+				<y>0.372483221477</y>
+			</Position>
+			<PositionRadius>17.691806013</PositionRadius>
+			<Direction>3.1941757152</Direction>
+			<DirVariation>0.466904701197</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.0302013422819</x>
+				<y>0.362416107383</y>
+			</Position>
+			<PositionRadius>17.0</PositionRadius>
+			<Direction>3.27414418589</Direction>
+			<DirVariation>0.468614980554</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>0.503355704698</x>
+				<y>0.362416107383</y>
+			</Position>
+			<PositionRadius>16.1245154966</PositionRadius>
+			<Direction>3.21836454486</Direction>
+			<DirVariation>0.54626001135</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.674496644295</x>
+				<y>-0.362416107383</y>
+			</Position>
+			<PositionRadius>15.0</PositionRadius>
+			<Direction>3.05485431491</Direction>
+			<DirVariation>0.565685424949</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.181208053691</x>
+				<y>-0.342281879195</y>
+			</Position>
+			<PositionRadius>19.2353840617</PositionRadius>
+			<Direction>3.14159265359</Direction>
+			<DirVariation>0.344093010682</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
+			<Position>
+				<x>-0.0805369127517</x>
+				<y>0.835570469799</y>
+			</Position>
+			<PositionRadius>18.0</PositionRadius>
+			<Direction>3.14159265359</Direction>
+			<DirVariation>0.4472135955</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
+			<Position>
+				<x>-0.855704697987</x>
+				<y>-0.634228187919</y>
+			</Position>
+			<PositionRadius>19.6468827044</PositionRadius>
+			<Direction>2.38648825011</Direction>
+			<DirVariation>0.722772439984</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>0.332214765101</x>
+				<y>-0.372483221477</y>
+			</Position>
+			<PositionRadius>16.1245154966</PositionRadius>
+			<Direction>3.21836454486</Direction>
+			<DirVariation>0.54626001135</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>0.795302013423</x>
+				<y>-0.362416107383</y>
+			</Position>
+			<PositionRadius>17.691806013</PositionRadius>
+			<Direction>3.1941757152</Direction>
+			<DirVariation>0.466904701197</DirVariation>
+		</UnitEntry>
+	</UnitFormation>
+	<UnitFormation>
+		<Name>IDLE (8)</Name>
+		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
+		<EventMaskList>
+			<EventType>ENTITY_EVENT_IDLE</EventType>
+			<EventType>ENTITY_EVENT_DIE</EventType>
+			<EventType>ENTITY_EVENT_DAMAGE</EventType>
+			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
+			<EventType>ENTITY_EVENT_END_COMBAT</EventType>
+			<EventType>ENTITY_EVENT_SURRENDER</EventType>
+			<EventType>ENTITY_EVENT_CAPTURED</EventType>
+			<EventType>ENTITY_EVENT_AIRPATROL</EventType>
+			<EventType>ENTITY_EVENT_AIRINTERCEPTION</EventType>
+			<EventType>ENTITY_EVENT_AIRBOMB</EventType>
+			<EventType>ENTITY_EVENT_PARADROP</EventType>
+			<EventType>ENTITY_EVENT_AIRSTRIKE</EventType>
+			<EventType>ENTITY_EVENT_AIRRECON</EventType>
+			<EventType>ENTITY_EVENT_NUKE</EventType>
+			<EventType>ENTITY_EVENT_MULTI_SELECT</EventType>
+			<EventType>ENTITY_EVENT_MULTI_DESELECT</EventType>
+			<EventType>ENTITY_EVENT_GREAT_EVENT</EventType>
+			<EventType>ENTITY_EVENT_PILLAGE</EventType>
+			<EventType>ENTITY_EVENT_SABOTAGE</EventType>
+			<EventType>ENTITY_EVENT_DESTROY</EventType>
+			<EventType>ENTITY_EVENT_STEAL_PLANS</EventType>
+			<EventType>ENTITY_EVENT_BOMBARD</EventType>
+			<EventType>ENTITY_EVENT_FOUND</EventType>
+			<EventType>ENTITY_EVENT_FORTIFY</EventType>
+			<EventType>ENTITY_EVENT_SENTRY</EventType>
+			<EventType>ENTITY_EVENT_HEAL</EventType>
+			<EventType>ENTITY_EVENT_SLEEP</EventType>
+			<EventType>ENTITY_EVENT_SHOVEL</EventType>
+			<EventType>ENTITY_EVENT_BUILD</EventType>
+			<EventType>ENTITY_EVENT_IRRIGATE</EventType>
+			<EventType>ENTITY_EVENT_MINE</EventType>
+			<EventType>ENTITY_EVENT_CHOP</EventType>
+			<EventType>ENTITY_EVENT_RAILROAD</EventType>
+		</EventMaskList>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.684563758389</x>
+				<y>0.412751677852</y>
+			</Position>
+			<PositionRadius>17.691806013</PositionRadius>
+			<Direction>3.1941757152</Direction>
+			<DirVariation>0.466904701197</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.140939597315</x>
+				<y>0.38255033557</y>
+			</Position>
+			<PositionRadius>17.0</PositionRadius>
+			<Direction>3.27414418589</Direction>
+			<DirVariation>0.468614980554</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>0.322147651007</x>
+				<y>0.362416107383</y>
+			</Position>
+			<PositionRadius>16.1245154966</PositionRadius>
+			<Direction>3.21836454486</Direction>
+			<DirVariation>0.54626001135</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>0.755033557047</x>
+				<y>0.372483221477</y>
+			</Position>
+			<PositionRadius>15.0</PositionRadius>
+			<Direction>3.05485431491</Direction>
+			<DirVariation>0.565685424949</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.654362416107</x>
+				<y>-0.372483221477</y>
+			</Position>
+			<PositionRadius>19.2353840617</PositionRadius>
+			<Direction>3.14159265359</Direction>
+			<DirVariation>0.344093010682</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
+			<Position>
+				<x>-0.0805369127517</x>
+				<y>0.835570469799</y>
+			</Position>
+			<PositionRadius>18.0</PositionRadius>
+			<Direction>3.14159265359</Direction>
+			<DirVariation>0.4472135955</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
+			<Position>
+				<x>-0.805369127517</x>
+				<y>-0.795302013423</y>
+			</Position>
+			<PositionRadius>19.6468827044</PositionRadius>
+			<Direction>2.38648825011</Direction>
+			<DirVariation>0.722772439984</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.120805369128</x>
+				<y>-0.38255033557</y>
+			</Position>
+			<PositionRadius>17.691806013</PositionRadius>
+			<Direction>3.1941757152</Direction>
+			<DirVariation>0.466904701197</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>0.38255033557</x>
+				<y>-0.38255033557</y>
+			</Position>
+			<PositionRadius>17.691806013</PositionRadius>
+			<Direction>3.1941757152</Direction>
+			<DirVariation>0.466904701197</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>0.785234899329</x>
+				<y>-0.392617449664</y>
+			</Position>
+			<PositionRadius>17.691806013</PositionRadius>
+			<Direction>3.1941757152</Direction>
+			<DirVariation>0.466904701197</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>FORTIFY (1)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_FORTIFY</EventType>
 			<EventType>ENTITY_EVENT_SLEEP</EventType>
@@ -548,88 +735,8 @@
 			<EventType>ENTITY_EVENT_HEAL</EventType>
 			<EventType>ENTITY_EVENT_SENTRY</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_SETTLER</UnitType>
-			<UnitType>UNIT_WORKER</UnitType>
-			<UnitType>UNIT_INDIAN_FAST_WORKER</UnitType>
-			<UnitType>UNIT_SCOUT</UnitType>
-			<UnitType>UNIT_EXPLORER</UnitType>
-			<UnitType>UNIT_SPY</UnitType>
-			<UnitType>UNIT_JEWISH_MISSIONARY</UnitType>
-			<UnitType>UNIT_CHRISTIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_ISLAMIC_MISSIONARY</UnitType>
-			<UnitType>UNIT_HINDU_MISSIONARY</UnitType>
-			<UnitType>UNIT_BUDDHIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_CONFUCIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_TAOIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_WARRIOR</UnitType>
-			<UnitType>UNIT_INCAN_QUECHUA</UnitType>
-			<UnitType>UNIT_SWORDSMAN</UnitType>
-			<UnitType>UNIT_CELTIC_GALLIC_WARRIOR</UnitType>
-			<UnitType>UNIT_JAPAN_SAMURAI</UnitType>
-			<UnitType>UNIT_ROME_PRAETORIAN</UnitType>
-			<UnitType>UNIT_AXEMAN</UnitType>
-			<UnitType>UNIT_VIKING_BESERKER</UnitType>
-			<UnitType>UNIT_AZTEC_JAGUAR</UnitType>
-			<UnitType>UNIT_MACEMAN</UnitType>
-			<UnitType>UNIT_SPEARMAN</UnitType>
-			<UnitType>UNIT_GREEK_PHALANX</UnitType>
-			<UnitType>UNIT_ZULU_IMPI</UnitType>
-			<UnitType>UNIT_PIKEMAN</UnitType>
-			<UnitType>UNIT_MUSKETMAN</UnitType>
-			<UnitType>UNIT_FRENCH_MUSKETEER</UnitType>
-			<UnitType>UNIT_OTTOMAN_JANISSARY</UnitType>
-			<UnitType>UNIT_RIFLEMAN</UnitType>
-			<UnitType>UNIT_ENGLISH_REDCOAT</UnitType>
-			<UnitType>UNIT_GRENADIER</UnitType>
-			<UnitType>UNIT_INFANTRY</UnitType>
-			<UnitType>UNIT_SAM_INFANTRY</UnitType>
-			<UnitType>UNIT_MARINE</UnitType>
-			<UnitType>UNIT_AMERICAN_NAVY_SEAL</UnitType>
-			<UnitType>UNIT_ARCHER</UnitType>
-			<UnitType>UNIT_MALI_SKIRMISHER</UnitType>
-			<UnitType>UNIT_LONGBOWMAN</UnitType>
-			<UnitType>UNIT_CROSSBOWMAN</UnitType>
-			<UnitType>UNIT_CHINA_CHOKONU</UnitType>
-			<UnitType>UNIT_CHARIOT</UnitType>
-			<UnitType>UNIT_EGYPT_WARCHARIOT</UnitType>
-			<UnitType>UNIT_PERSIA_IMMORTAL</UnitType>
-			<UnitType>UNIT_HORSE_ARCHER</UnitType>
-			<UnitType>UNIT_ARABIA_CAMELARCHER</UnitType>
-			<UnitType>UNIT_CARTHAGE_NUMIDIAN_CAVALRY</UnitType>
-			<UnitType>UNIT_MONGOL_KESHIK</UnitType>
-			<UnitType>UNIT_KNIGHT</UnitType>
-			<UnitType>UNIT_SPANISH_CONQUISTADOR</UnitType>
-			<UnitType>UNIT_CAVALRY</UnitType>
-			<UnitType>UNIT_RUSSIA_COSSACK</UnitType>
-			<UnitType>UNIT_WAR_ELEPHANT</UnitType>
-			<UnitType>UNIT_MACHINE_GUN</UnitType>
-			<UnitType>UNIT_WORKBOAT</UnitType>
-			<UnitType>UNIT_GALLEY</UnitType>
-			<UnitType>UNIT_TRIREME</UnitType>
-			<UnitType>UNIT_CARAVEL</UnitType>
-			<UnitType>UNIT_GALLEON</UnitType>
-			<UnitType>UNIT_FRIGATE</UnitType>
-			<UnitType>UNIT_IRONCLAD</UnitType>
-			<UnitType>UNIT_TRANSPORT</UnitType>
-			<UnitType>UNIT_DESTROYER</UnitType>
-			<UnitType>UNIT_BATTLESHIP</UnitType>
-			<UnitType>UNIT_SUBMARINE</UnitType>
-			<UnitType>UNIT_CARRIER</UnitType>
-			<UnitType>UNIT_FIGHTER</UnitType>
-			<UnitType>UNIT_JET_FIGHTER</UnitType>
-			<UnitType>UNIT_BOMBER</UnitType>
-			<UnitType>UNIT_STEALTH_BOMBER</UnitType>
-			<UnitType>UNIT_ICBM</UnitType>
-			<UnitType>UNIT_PROPHET</UnitType>
-			<UnitType>UNIT_ARTIST</UnitType>
-			<UnitType>UNIT_SCIENTIST</UnitType>
-			<UnitType>UNIT_MERCHANT</UnitType>
-			<UnitType>UNIT_ENGINEER</UnitType>
-			<UnitType>UNIT_GREAT_GENERAL</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.0302013422819</x>
 				<y>-0.0402684563758</y>
@@ -638,30 +745,30 @@
 			<Direction>3.09717743834</Direction>
 			<DirVariation>0.46389654019</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.0</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>FORTIFY (2)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_FORTIFY</EventType>
 			<EventType>ENTITY_EVENT_SLEEP</EventType>
@@ -669,93 +776,8 @@
 			<EventType>ENTITY_EVENT_HEAL</EventType>
 			<EventType>ENTITY_EVENT_SENTRY</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_SETTLER</UnitType>
-			<UnitType>UNIT_WORKER</UnitType>
-			<UnitType>UNIT_INDIAN_FAST_WORKER</UnitType>
-			<UnitType>UNIT_SCOUT</UnitType>
-			<UnitType>UNIT_EXPLORER</UnitType>
-			<UnitType>UNIT_SPY</UnitType>
-			<UnitType>UNIT_JEWISH_MISSIONARY</UnitType>
-			<UnitType>UNIT_CHRISTIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_ISLAMIC_MISSIONARY</UnitType>
-			<UnitType>UNIT_HINDU_MISSIONARY</UnitType>
-			<UnitType>UNIT_BUDDHIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_CONFUCIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_TAOIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_WARRIOR</UnitType>
-			<UnitType>UNIT_INCAN_QUECHUA</UnitType>
-			<UnitType>UNIT_SWORDSMAN</UnitType>
-			<UnitType>UNIT_CELTIC_GALLIC_WARRIOR</UnitType>
-			<UnitType>UNIT_JAPAN_SAMURAI</UnitType>
-			<UnitType>UNIT_ROME_PRAETORIAN</UnitType>
-			<UnitType>UNIT_AXEMAN</UnitType>
-			<UnitType>UNIT_VIKING_BESERKER</UnitType>
-			<UnitType>UNIT_AZTEC_JAGUAR</UnitType>
-			<UnitType>UNIT_MACEMAN</UnitType>
-			<UnitType>UNIT_SPEARMAN</UnitType>
-			<UnitType>UNIT_GREEK_PHALANX</UnitType>
-			<UnitType>UNIT_ZULU_IMPI</UnitType>
-			<UnitType>UNIT_PIKEMAN</UnitType>
-			<UnitType>UNIT_MUSKETMAN</UnitType>
-			<UnitType>UNIT_FRENCH_MUSKETEER</UnitType>
-			<UnitType>UNIT_OTTOMAN_JANISSARY</UnitType>
-			<UnitType>UNIT_RIFLEMAN</UnitType>
-			<UnitType>UNIT_ENGLISH_REDCOAT</UnitType>
-			<UnitType>UNIT_GRENADIER</UnitType>
-			<UnitType>UNIT_INFANTRY</UnitType>
-			<UnitType>UNIT_SAM_INFANTRY</UnitType>
-			<UnitType>UNIT_MARINE</UnitType>
-			<UnitType>UNIT_AMERICAN_NAVY_SEAL</UnitType>
-			<UnitType>UNIT_ARCHER</UnitType>
-			<UnitType>UNIT_MALI_SKIRMISHER</UnitType>
-			<UnitType>UNIT_LONGBOWMAN</UnitType>
-			<UnitType>UNIT_CROSSBOWMAN</UnitType>
-			<UnitType>UNIT_CHINA_CHOKONU</UnitType>
-			<UnitType>UNIT_CHARIOT</UnitType>
-			<UnitType>UNIT_EGYPT_WARCHARIOT</UnitType>
-			<UnitType>UNIT_PERSIA_IMMORTAL</UnitType>
-			<UnitType>UNIT_HORSE_ARCHER</UnitType>
-			<UnitType>UNIT_ARABIA_CAMELARCHER</UnitType>
-			<UnitType>UNIT_CARTHAGE_NUMIDIAN_CAVALRY</UnitType>
-			<UnitType>UNIT_MONGOL_KESHIK</UnitType>
-			<UnitType>UNIT_KNIGHT</UnitType>
-			<UnitType>UNIT_SPANISH_CONQUISTADOR</UnitType>
-			<UnitType>UNIT_CAVALRY</UnitType>
-			<UnitType>UNIT_RUSSIA_COSSACK</UnitType>
-			<UnitType>UNIT_WAR_ELEPHANT</UnitType>
-			<UnitType>UNIT_MACHINE_GUN</UnitType>
-			<UnitType>UNIT_WORKBOAT</UnitType>
-			<UnitType>UNIT_GALLEY</UnitType>
-			<UnitType>UNIT_TRIREME</UnitType>
-			<UnitType>UNIT_CARAVEL</UnitType>
-			<UnitType>UNIT_GALLEON</UnitType>
-			<UnitType>UNIT_FRIGATE</UnitType>
-			<UnitType>UNIT_IRONCLAD</UnitType>
-			<UnitType>UNIT_TRANSPORT</UnitType>
-			<UnitType>UNIT_DESTROYER</UnitType>
-			<UnitType>UNIT_BATTLESHIP</UnitType>
-			<UnitType>UNIT_SUBMARINE</UnitType>
-			<UnitType>UNIT_CARRIER</UnitType>
-			<UnitType>UNIT_FIGHTER</UnitType>
-			<UnitType>UNIT_JET_FIGHTER</UnitType>
-			<UnitType>UNIT_BOMBER</UnitType>
-			<UnitType>UNIT_STEALTH_BOMBER</UnitType>
-			<UnitType>UNIT_ICBM</UnitType>
-			<UnitType>UNIT_PROPHET</UnitType>
-			<UnitType>UNIT_ARTIST</UnitType>
-			<UnitType>UNIT_SCIENTIST</UnitType>
-			<UnitType>UNIT_MERCHANT</UnitType>
-			<UnitType>UNIT_ENGINEER</UnitType>
-			<UnitType>UNIT_GREAT_GENERAL</UnitType>
-			<UnitType>UNIT_CATAPULT</UnitType>
-			<UnitType>UNIT_TREBUCHET</UnitType>
-			<UnitType>UNIT_KOREAN_HWACHA</UnitType>
-			<UnitType>UNIT_CANNON</UnitType>
-			<UnitType>UNIT_ARTILLERY</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.352348993289</x>
 				<y>-0.0402684563758</y>
@@ -765,6 +787,7 @@
 			<DirVariation>0.583095189485</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.312080536913</x>
 				<y>-0.0503355704698</y>
@@ -773,30 +796,30 @@
 			<Direction>2.29504632754</Direction>
 			<DirVariation>0.6</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.0</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>FORTIFY (3)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_FORTIFY</EventType>
 			<EventType>ENTITY_EVENT_SLEEP</EventType>
@@ -804,88 +827,8 @@
 			<EventType>ENTITY_EVENT_HEAL</EventType>
 			<EventType>ENTITY_EVENT_SENTRY</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_SETTLER</UnitType>
-			<UnitType>UNIT_WORKER</UnitType>
-			<UnitType>UNIT_INDIAN_FAST_WORKER</UnitType>
-			<UnitType>UNIT_SCOUT</UnitType>
-			<UnitType>UNIT_EXPLORER</UnitType>
-			<UnitType>UNIT_SPY</UnitType>
-			<UnitType>UNIT_JEWISH_MISSIONARY</UnitType>
-			<UnitType>UNIT_CHRISTIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_ISLAMIC_MISSIONARY</UnitType>
-			<UnitType>UNIT_HINDU_MISSIONARY</UnitType>
-			<UnitType>UNIT_BUDDHIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_CONFUCIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_TAOIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_WARRIOR</UnitType>
-			<UnitType>UNIT_INCAN_QUECHUA</UnitType>
-			<UnitType>UNIT_SWORDSMAN</UnitType>
-			<UnitType>UNIT_CELTIC_GALLIC_WARRIOR</UnitType>
-			<UnitType>UNIT_JAPAN_SAMURAI</UnitType>
-			<UnitType>UNIT_ROME_PRAETORIAN</UnitType>
-			<UnitType>UNIT_AXEMAN</UnitType>
-			<UnitType>UNIT_VIKING_BESERKER</UnitType>
-			<UnitType>UNIT_AZTEC_JAGUAR</UnitType>
-			<UnitType>UNIT_MACEMAN</UnitType>
-			<UnitType>UNIT_SPEARMAN</UnitType>
-			<UnitType>UNIT_GREEK_PHALANX</UnitType>
-			<UnitType>UNIT_ZULU_IMPI</UnitType>
-			<UnitType>UNIT_PIKEMAN</UnitType>
-			<UnitType>UNIT_MUSKETMAN</UnitType>
-			<UnitType>UNIT_FRENCH_MUSKETEER</UnitType>
-			<UnitType>UNIT_OTTOMAN_JANISSARY</UnitType>
-			<UnitType>UNIT_RIFLEMAN</UnitType>
-			<UnitType>UNIT_ENGLISH_REDCOAT</UnitType>
-			<UnitType>UNIT_GRENADIER</UnitType>
-			<UnitType>UNIT_INFANTRY</UnitType>
-			<UnitType>UNIT_SAM_INFANTRY</UnitType>
-			<UnitType>UNIT_MARINE</UnitType>
-			<UnitType>UNIT_AMERICAN_NAVY_SEAL</UnitType>
-			<UnitType>UNIT_ARCHER</UnitType>
-			<UnitType>UNIT_MALI_SKIRMISHER</UnitType>
-			<UnitType>UNIT_LONGBOWMAN</UnitType>
-			<UnitType>UNIT_CROSSBOWMAN</UnitType>
-			<UnitType>UNIT_CHINA_CHOKONU</UnitType>
-			<UnitType>UNIT_CHARIOT</UnitType>
-			<UnitType>UNIT_EGYPT_WARCHARIOT</UnitType>
-			<UnitType>UNIT_PERSIA_IMMORTAL</UnitType>
-			<UnitType>UNIT_HORSE_ARCHER</UnitType>
-			<UnitType>UNIT_ARABIA_CAMELARCHER</UnitType>
-			<UnitType>UNIT_CARTHAGE_NUMIDIAN_CAVALRY</UnitType>
-			<UnitType>UNIT_MONGOL_KESHIK</UnitType>
-			<UnitType>UNIT_KNIGHT</UnitType>
-			<UnitType>UNIT_SPANISH_CONQUISTADOR</UnitType>
-			<UnitType>UNIT_CAVALRY</UnitType>
-			<UnitType>UNIT_RUSSIA_COSSACK</UnitType>
-			<UnitType>UNIT_WAR_ELEPHANT</UnitType>
-			<UnitType>UNIT_MACHINE_GUN</UnitType>
-			<UnitType>UNIT_WORKBOAT</UnitType>
-			<UnitType>UNIT_GALLEY</UnitType>
-			<UnitType>UNIT_TRIREME</UnitType>
-			<UnitType>UNIT_CARAVEL</UnitType>
-			<UnitType>UNIT_GALLEON</UnitType>
-			<UnitType>UNIT_FRIGATE</UnitType>
-			<UnitType>UNIT_IRONCLAD</UnitType>
-			<UnitType>UNIT_TRANSPORT</UnitType>
-			<UnitType>UNIT_DESTROYER</UnitType>
-			<UnitType>UNIT_BATTLESHIP</UnitType>
-			<UnitType>UNIT_SUBMARINE</UnitType>
-			<UnitType>UNIT_CARRIER</UnitType>
-			<UnitType>UNIT_FIGHTER</UnitType>
-			<UnitType>UNIT_JET_FIGHTER</UnitType>
-			<UnitType>UNIT_BOMBER</UnitType>
-			<UnitType>UNIT_STEALTH_BOMBER</UnitType>
-			<UnitType>UNIT_ICBM</UnitType>
-			<UnitType>UNIT_PROPHET</UnitType>
-			<UnitType>UNIT_ARTIST</UnitType>
-			<UnitType>UNIT_SCIENTIST</UnitType>
-			<UnitType>UNIT_MERCHANT</UnitType>
-			<UnitType>UNIT_ENGINEER</UnitType>
-			<UnitType>UNIT_GREAT_GENERAL</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.352348993289</x>
 				<y>-0.251677852349</y>
@@ -895,6 +838,7 @@
 			<DirVariation>0.583095189485</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.342281879195</x>
 				<y>-0.241610738255</y>
@@ -904,6 +848,7 @@
 			<DirVariation>0.6</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.0201342281879</x>
 				<y>0.251677852349</y>
@@ -912,30 +857,30 @@
 			<Direction>6.3257128418</Direction>
 			<DirVariation>0.583095189485</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.0</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>FORTIFY (4)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_FORTIFY</EventType>
 			<EventType>ENTITY_EVENT_SLEEP</EventType>
@@ -943,88 +888,8 @@
 			<EventType>ENTITY_EVENT_HEAL</EventType>
 			<EventType>ENTITY_EVENT_SENTRY</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_SETTLER</UnitType>
-			<UnitType>UNIT_WORKER</UnitType>
-			<UnitType>UNIT_INDIAN_FAST_WORKER</UnitType>
-			<UnitType>UNIT_SCOUT</UnitType>
-			<UnitType>UNIT_EXPLORER</UnitType>
-			<UnitType>UNIT_SPY</UnitType>
-			<UnitType>UNIT_JEWISH_MISSIONARY</UnitType>
-			<UnitType>UNIT_CHRISTIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_ISLAMIC_MISSIONARY</UnitType>
-			<UnitType>UNIT_HINDU_MISSIONARY</UnitType>
-			<UnitType>UNIT_BUDDHIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_CONFUCIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_TAOIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_WARRIOR</UnitType>
-			<UnitType>UNIT_INCAN_QUECHUA</UnitType>
-			<UnitType>UNIT_SWORDSMAN</UnitType>
-			<UnitType>UNIT_CELTIC_GALLIC_WARRIOR</UnitType>
-			<UnitType>UNIT_JAPAN_SAMURAI</UnitType>
-			<UnitType>UNIT_ROME_PRAETORIAN</UnitType>
-			<UnitType>UNIT_AXEMAN</UnitType>
-			<UnitType>UNIT_VIKING_BESERKER</UnitType>
-			<UnitType>UNIT_AZTEC_JAGUAR</UnitType>
-			<UnitType>UNIT_MACEMAN</UnitType>
-			<UnitType>UNIT_SPEARMAN</UnitType>
-			<UnitType>UNIT_GREEK_PHALANX</UnitType>
-			<UnitType>UNIT_ZULU_IMPI</UnitType>
-			<UnitType>UNIT_PIKEMAN</UnitType>
-			<UnitType>UNIT_MUSKETMAN</UnitType>
-			<UnitType>UNIT_FRENCH_MUSKETEER</UnitType>
-			<UnitType>UNIT_OTTOMAN_JANISSARY</UnitType>
-			<UnitType>UNIT_RIFLEMAN</UnitType>
-			<UnitType>UNIT_ENGLISH_REDCOAT</UnitType>
-			<UnitType>UNIT_GRENADIER</UnitType>
-			<UnitType>UNIT_INFANTRY</UnitType>
-			<UnitType>UNIT_SAM_INFANTRY</UnitType>
-			<UnitType>UNIT_MARINE</UnitType>
-			<UnitType>UNIT_AMERICAN_NAVY_SEAL</UnitType>
-			<UnitType>UNIT_ARCHER</UnitType>
-			<UnitType>UNIT_MALI_SKIRMISHER</UnitType>
-			<UnitType>UNIT_LONGBOWMAN</UnitType>
-			<UnitType>UNIT_CROSSBOWMAN</UnitType>
-			<UnitType>UNIT_CHINA_CHOKONU</UnitType>
-			<UnitType>UNIT_CHARIOT</UnitType>
-			<UnitType>UNIT_EGYPT_WARCHARIOT</UnitType>
-			<UnitType>UNIT_PERSIA_IMMORTAL</UnitType>
-			<UnitType>UNIT_HORSE_ARCHER</UnitType>
-			<UnitType>UNIT_ARABIA_CAMELARCHER</UnitType>
-			<UnitType>UNIT_CARTHAGE_NUMIDIAN_CAVALRY</UnitType>
-			<UnitType>UNIT_MONGOL_KESHIK</UnitType>
-			<UnitType>UNIT_KNIGHT</UnitType>
-			<UnitType>UNIT_SPANISH_CONQUISTADOR</UnitType>
-			<UnitType>UNIT_CAVALRY</UnitType>
-			<UnitType>UNIT_RUSSIA_COSSACK</UnitType>
-			<UnitType>UNIT_WAR_ELEPHANT</UnitType>
-			<UnitType>UNIT_MACHINE_GUN</UnitType>
-			<UnitType>UNIT_WORKBOAT</UnitType>
-			<UnitType>UNIT_GALLEY</UnitType>
-			<UnitType>UNIT_TRIREME</UnitType>
-			<UnitType>UNIT_CARAVEL</UnitType>
-			<UnitType>UNIT_GALLEON</UnitType>
-			<UnitType>UNIT_FRIGATE</UnitType>
-			<UnitType>UNIT_IRONCLAD</UnitType>
-			<UnitType>UNIT_TRANSPORT</UnitType>
-			<UnitType>UNIT_DESTROYER</UnitType>
-			<UnitType>UNIT_BATTLESHIP</UnitType>
-			<UnitType>UNIT_SUBMARINE</UnitType>
-			<UnitType>UNIT_CARRIER</UnitType>
-			<UnitType>UNIT_FIGHTER</UnitType>
-			<UnitType>UNIT_JET_FIGHTER</UnitType>
-			<UnitType>UNIT_BOMBER</UnitType>
-			<UnitType>UNIT_STEALTH_BOMBER</UnitType>
-			<UnitType>UNIT_ICBM</UnitType>
-			<UnitType>UNIT_PROPHET</UnitType>
-			<UnitType>UNIT_ARTIST</UnitType>
-			<UnitType>UNIT_SCIENTIST</UnitType>
-			<UnitType>UNIT_MERCHANT</UnitType>
-			<UnitType>UNIT_ENGINEER</UnitType>
-			<UnitType>UNIT_GREAT_GENERAL</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.342281879195</x>
 				<y>-0.251677852349</y>
@@ -1034,6 +899,7 @@
 			<DirVariation>0.583095189485</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.342281879195</x>
 				<y>-0.241610738255</y>
@@ -1043,6 +909,7 @@
 			<DirVariation>0.6</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.342281879195</x>
 				<y>0.352348993289</y>
@@ -1052,6 +919,7 @@
 			<DirVariation>0.694262198308</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.332214765101</x>
 				<y>0.362416107383</y>
@@ -1060,356 +928,36 @@
 			<Direction>7.06858347058</Direction>
 			<DirVariation>0.6260990337</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
-			<Position>
-				<x>0.0</x>
-				<y>0.0</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
-			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>RIFLE BATTLE (1)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>0</UseFacing>
-		<RotationMask>255</RotationMask>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
-		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_MUSKETMAN</UnitType>
-			<UnitType>UNIT_FRENCH_MUSKETEER</UnitType>
-			<UnitType>UNIT_OTTOMAN_JANISSARY</UnitType>
-			<UnitType>UNIT_RIFLEMAN</UnitType>
-			<UnitType>UNIT_ENGLISH_REDCOAT</UnitType>
-			<UnitType>UNIT_INFANTRY</UnitType>
-			<UnitType>UNIT_LONGBOWMAN</UnitType>
-			<UnitType>UNIT_CROSSBOWMAN</UnitType>
-			<UnitType>UNIT_CHINA_CHOKONU</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>-0.0201342281879</x>
-				<y>-0.10067114094</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</UnitEntry>
-		<GreatUnitEntry>
-			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
-			<Position>
-				<x>-0.8</x>
-				<y>-1.2</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>RIFLE BATTLE (2)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>0</UseFacing>
-		<RotationMask>255</RotationMask>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
-		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_MUSKETMAN</UnitType>
-			<UnitType>UNIT_FRENCH_MUSKETEER</UnitType>
-			<UnitType>UNIT_OTTOMAN_JANISSARY</UnitType>
-			<UnitType>UNIT_RIFLEMAN</UnitType>
-			<UnitType>UNIT_ENGLISH_REDCOAT</UnitType>
-			<UnitType>UNIT_INFANTRY</UnitType>
-			<UnitType>UNIT_LONGBOWMAN</UnitType>
-			<UnitType>UNIT_CROSSBOWMAN</UnitType>
-			<UnitType>UNIT_CHINA_CHOKONU</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
-		<UnitEntry>
-			<Position>
-				<x>-0.312080536913</x>
-				<y>-0.0906040268456</y>
-			</Position>
-			<PositionRadius>15.8113883008</PositionRadius>
-			<Direction>3.22473388548</Direction>
-			<DirVariation>0.404474968323</DirVariation>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>0.211409395973</x>
-				<y>-0.0805369127517</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>15.1327459504</PositionRadius>
-			<Direction>2.94419709374</Direction>
-			<DirVariation>0.40049968789</DirVariation>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
-			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
-			<Position>
-				<x>-0.8</x>
-				<y>-1.2</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>RIFLE BATTLE (3)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>0</UseFacing>
-		<RotationMask>255</RotationMask>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
-		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_MUSKETMAN</UnitType>
-			<UnitType>UNIT_FRENCH_MUSKETEER</UnitType>
-			<UnitType>UNIT_OTTOMAN_JANISSARY</UnitType>
-			<UnitType>UNIT_RIFLEMAN</UnitType>
-			<UnitType>UNIT_ENGLISH_REDCOAT</UnitType>
-			<UnitType>UNIT_INFANTRY</UnitType>
-			<UnitType>UNIT_LONGBOWMAN</UnitType>
-			<UnitType>UNIT_CROSSBOWMAN</UnitType>
-			<UnitType>UNIT_CHINA_CHOKONU</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
-		<UnitEntry>
-			<Position>
-				<x>-0.0302013422819</x>
-				<y>-0.0604026845638</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<Position>
-				<x>0.473154362416</x>
-				<y>-0.0503355704698</y>
-			</Position>
-			<PositionRadius>19.9248588452</PositionRadius>
-			<Direction>3.11420224511</Direction>
-			<DirVariation>0.322490309932</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<Position>
-				<x>-0.553691275168</x>
-				<y>-0.0503355704698</y>
-			</Position>
-			<PositionRadius>19.9248588452</PositionRadius>
-			<Direction>3.11420224511</Direction>
-			<DirVariation>0.322490309932</DirVariation>
-		</UnitEntry>
-		<GreatUnitEntry>
-			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
-			<Position>
-				<x>-0.8</x>
-				<y>-1.2</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>RIFLE BATTLE (4)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
-		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_MUSKETMAN</UnitType>
-			<UnitType>UNIT_FRENCH_MUSKETEER</UnitType>
-			<UnitType>UNIT_OTTOMAN_JANISSARY</UnitType>
-			<UnitType>UNIT_RIFLEMAN</UnitType>
-			<UnitType>UNIT_ENGLISH_REDCOAT</UnitType>
-			<UnitType>UNIT_INFANTRY</UnitType>
-			<UnitType>UNIT_LONGBOWMAN</UnitType>
-			<UnitType>UNIT_CROSSBOWMAN</UnitType>
-			<UnitType>UNIT_CHINA_CHOKONU</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
-		<UnitEntry>
-			<Position>
-				<x>-0.0302013422819</x>
-				<y>-0.0604026845638</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<Position>
-				<x>0.473154362416</x>
-				<y>-0.0503355704698</y>
-			</Position>
-			<PositionRadius>19.9248588452</PositionRadius>
-			<Direction>3.11420224511</Direction>
-			<DirVariation>0.322490309932</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<Position>
-				<x>-0.553691275168</x>
-				<y>-0.0503355704698</y>
-			</Position>
-			<PositionRadius>19.9248588452</PositionRadius>
-			<Direction>3.11420224511</Direction>
-			<DirVariation>0.322490309932</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<Position>
-				<x>-0.302013422819</x>
-				<y>0.43288590604</y>
-			</Position>
-			<PositionRadius>11.0453610172</PositionRadius>
-			<Direction>3.10934577115</Direction>
-			<DirVariation>0.286356421266</DirVariation>
-		</UnitEntry>
-		<GreatUnitEntry>
-			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
-			<Position>
-				<x>-0.8</x>
-				<y>-1.2</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>BATTLE (1)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>0</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
+			<EventType>ENTITY_EVENT_DIE</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_LION</UnitType>
-			<UnitType>UNIT_BEAR</UnitType>
-			<UnitType>UNIT_PANTHER</UnitType>
-			<UnitType>UNIT_WOLF</UnitType>
-			<UnitType>UNIT_SETTLER</UnitType>
-			<UnitType>UNIT_WORKER</UnitType>
-			<UnitType>UNIT_INDIAN_FAST_WORKER</UnitType>
-			<UnitType>UNIT_SCOUT</UnitType>
-			<UnitType>UNIT_EXPLORER</UnitType>
-			<UnitType>UNIT_SPY</UnitType>
-			<UnitType>UNIT_JEWISH_MISSIONARY</UnitType>
-			<UnitType>UNIT_CHRISTIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_ISLAMIC_MISSIONARY</UnitType>
-			<UnitType>UNIT_HINDU_MISSIONARY</UnitType>
-			<UnitType>UNIT_BUDDHIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_CONFUCIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_TAOIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_WARRIOR</UnitType>
-			<UnitType>UNIT_INCAN_QUECHUA</UnitType>
-			<UnitType>UNIT_SWORDSMAN</UnitType>
-			<UnitType>UNIT_CELTIC_GALLIC_WARRIOR</UnitType>
-			<UnitType>UNIT_JAPAN_SAMURAI</UnitType>
-			<UnitType>UNIT_ROME_PRAETORIAN</UnitType>
-			<UnitType>UNIT_AXEMAN</UnitType>
-			<UnitType>UNIT_VIKING_BESERKER</UnitType>
-			<UnitType>UNIT_AZTEC_JAGUAR</UnitType>
-			<UnitType>UNIT_MACEMAN</UnitType>
-			<UnitType>UNIT_SPEARMAN</UnitType>
-			<UnitType>UNIT_GREEK_PHALANX</UnitType>
-			<UnitType>UNIT_ZULU_IMPI</UnitType>
-			<UnitType>UNIT_PIKEMAN</UnitType>
-			<UnitType>UNIT_GRENADIER</UnitType>
-			<UnitType>UNIT_SAM_INFANTRY</UnitType>
-			<UnitType>UNIT_MARINE</UnitType>
-			<UnitType>UNIT_AMERICAN_NAVY_SEAL</UnitType>
-			<UnitType>UNIT_ARCHER</UnitType>
-			<UnitType>UNIT_MALI_SKIRMISHER</UnitType>
-			<UnitType>UNIT_CHARIOT</UnitType>
-			<UnitType>UNIT_EGYPT_WARCHARIOT</UnitType>
-			<UnitType>UNIT_PERSIA_IMMORTAL</UnitType>
-			<UnitType>UNIT_HORSE_ARCHER</UnitType>
-			<UnitType>UNIT_ARABIA_CAMELARCHER</UnitType>
-			<UnitType>UNIT_CARTHAGE_NUMIDIAN_CAVALRY</UnitType>
-			<UnitType>UNIT_MONGOL_KESHIK</UnitType>
-			<UnitType>UNIT_KNIGHT</UnitType>
-			<UnitType>UNIT_SPANISH_CONQUISTADOR</UnitType>
-			<UnitType>UNIT_CAVALRY</UnitType>
-			<UnitType>UNIT_RUSSIA_COSSACK</UnitType>
-			<UnitType>UNIT_WAR_ELEPHANT</UnitType>
-			<UnitType>UNIT_MACHINE_GUN</UnitType>
-			<UnitType>UNIT_WORKBOAT</UnitType>
-			<UnitType>UNIT_GALLEY</UnitType>
-			<UnitType>UNIT_TRIREME</UnitType>
-			<UnitType>UNIT_CARAVEL</UnitType>
-			<UnitType>UNIT_GALLEON</UnitType>
-			<UnitType>UNIT_FRIGATE</UnitType>
-			<UnitType>UNIT_IRONCLAD</UnitType>
-			<UnitType>UNIT_TRANSPORT</UnitType>
-			<UnitType>UNIT_DESTROYER</UnitType>
-			<UnitType>UNIT_BATTLESHIP</UnitType>
-			<UnitType>UNIT_SUBMARINE</UnitType>
-			<UnitType>UNIT_CARRIER</UnitType>
-			<UnitType>UNIT_FIGHTER</UnitType>
-			<UnitType>UNIT_JET_FIGHTER</UnitType>
-			<UnitType>UNIT_BOMBER</UnitType>
-			<UnitType>UNIT_STEALTH_BOMBER</UnitType>
-			<UnitType>UNIT_ICBM</UnitType>
-			<UnitType>UNIT_PROPHET</UnitType>
-			<UnitType>UNIT_ARTIST</UnitType>
-			<UnitType>UNIT_SCIENTIST</UnitType>
-			<UnitType>UNIT_MERCHANT</UnitType>
-			<UnitType>UNIT_ENGINEER</UnitType>
-			<UnitType>UNIT_GREAT_GENERAL</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.0201342281879</x>
 				<y>-0.201342281879</y>
@@ -1418,110 +966,36 @@
 			<Direction>3.14159265359</Direction>
 			<DirVariation>0.188679622641</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-2.74832214765</x>
+				<y>-4.39932885906</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.8</x>
-				<y>-1.2</y>
+				<x>-0.744966442953</x>
+				<y>-0.895973154362</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>BATTLE (2)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>0</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
+			<EventType>ENTITY_EVENT_DIE</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_LION</UnitType>
-			<UnitType>UNIT_BEAR</UnitType>
-			<UnitType>UNIT_PANTHER</UnitType>
-			<UnitType>UNIT_WOLF</UnitType>
-			<UnitType>UNIT_SETTLER</UnitType>
-			<UnitType>UNIT_WORKER</UnitType>
-			<UnitType>UNIT_INDIAN_FAST_WORKER</UnitType>
-			<UnitType>UNIT_SCOUT</UnitType>
-			<UnitType>UNIT_EXPLORER</UnitType>
-			<UnitType>UNIT_SPY</UnitType>
-			<UnitType>UNIT_JEWISH_MISSIONARY</UnitType>
-			<UnitType>UNIT_CHRISTIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_ISLAMIC_MISSIONARY</UnitType>
-			<UnitType>UNIT_HINDU_MISSIONARY</UnitType>
-			<UnitType>UNIT_BUDDHIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_CONFUCIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_TAOIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_WARRIOR</UnitType>
-			<UnitType>UNIT_INCAN_QUECHUA</UnitType>
-			<UnitType>UNIT_SWORDSMAN</UnitType>
-			<UnitType>UNIT_CELTIC_GALLIC_WARRIOR</UnitType>
-			<UnitType>UNIT_JAPAN_SAMURAI</UnitType>
-			<UnitType>UNIT_ROME_PRAETORIAN</UnitType>
-			<UnitType>UNIT_AXEMAN</UnitType>
-			<UnitType>UNIT_VIKING_BESERKER</UnitType>
-			<UnitType>UNIT_AZTEC_JAGUAR</UnitType>
-			<UnitType>UNIT_MACEMAN</UnitType>
-			<UnitType>UNIT_SPEARMAN</UnitType>
-			<UnitType>UNIT_GREEK_PHALANX</UnitType>
-			<UnitType>UNIT_ZULU_IMPI</UnitType>
-			<UnitType>UNIT_PIKEMAN</UnitType>
-			<UnitType>UNIT_GRENADIER</UnitType>
-			<UnitType>UNIT_SAM_INFANTRY</UnitType>
-			<UnitType>UNIT_MARINE</UnitType>
-			<UnitType>UNIT_AMERICAN_NAVY_SEAL</UnitType>
-			<UnitType>UNIT_ARCHER</UnitType>
-			<UnitType>UNIT_MALI_SKIRMISHER</UnitType>
-			<UnitType>UNIT_CHARIOT</UnitType>
-			<UnitType>UNIT_EGYPT_WARCHARIOT</UnitType>
-			<UnitType>UNIT_PERSIA_IMMORTAL</UnitType>
-			<UnitType>UNIT_HORSE_ARCHER</UnitType>
-			<UnitType>UNIT_ARABIA_CAMELARCHER</UnitType>
-			<UnitType>UNIT_CARTHAGE_NUMIDIAN_CAVALRY</UnitType>
-			<UnitType>UNIT_MONGOL_KESHIK</UnitType>
-			<UnitType>UNIT_KNIGHT</UnitType>
-			<UnitType>UNIT_SPANISH_CONQUISTADOR</UnitType>
-			<UnitType>UNIT_CAVALRY</UnitType>
-			<UnitType>UNIT_RUSSIA_COSSACK</UnitType>
-			<UnitType>UNIT_WAR_ELEPHANT</UnitType>
-			<UnitType>UNIT_MACHINE_GUN</UnitType>
-			<UnitType>UNIT_WORKBOAT</UnitType>
-			<UnitType>UNIT_GALLEY</UnitType>
-			<UnitType>UNIT_TRIREME</UnitType>
-			<UnitType>UNIT_CARAVEL</UnitType>
-			<UnitType>UNIT_GALLEON</UnitType>
-			<UnitType>UNIT_FRIGATE</UnitType>
-			<UnitType>UNIT_IRONCLAD</UnitType>
-			<UnitType>UNIT_TRANSPORT</UnitType>
-			<UnitType>UNIT_DESTROYER</UnitType>
-			<UnitType>UNIT_BATTLESHIP</UnitType>
-			<UnitType>UNIT_SUBMARINE</UnitType>
-			<UnitType>UNIT_CARRIER</UnitType>
-			<UnitType>UNIT_FIGHTER</UnitType>
-			<UnitType>UNIT_JET_FIGHTER</UnitType>
-			<UnitType>UNIT_BOMBER</UnitType>
-			<UnitType>UNIT_STEALTH_BOMBER</UnitType>
-			<UnitType>UNIT_ICBM</UnitType>
-			<UnitType>UNIT_PROPHET</UnitType>
-			<UnitType>UNIT_ARTIST</UnitType>
-			<UnitType>UNIT_SCIENTIST</UnitType>
-			<UnitType>UNIT_MERCHANT</UnitType>
-			<UnitType>UNIT_ENGINEER</UnitType>
-			<UnitType>UNIT_GREAT_GENERAL</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.48322147651</x>
 				<y>-0.0704697986577</y>
@@ -1531,6 +1005,7 @@
 			<DirVariation>0.404474968323</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.453020134228</x>
 				<y>-0.0805369127517</y>
@@ -1539,110 +1014,36 @@
 			<Direction>2.94419709374</Direction>
 			<DirVariation>0.40049968789</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.0402684563758</x>
+				<y>-0.201342281879</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.8</x>
-				<y>-1.2</y>
+				<x>-0.704697986577</x>
+				<y>-0.936241610738</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>BATTLE (3)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>0</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
+			<EventType>ENTITY_EVENT_DIE</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_LION</UnitType>
-			<UnitType>UNIT_BEAR</UnitType>
-			<UnitType>UNIT_PANTHER</UnitType>
-			<UnitType>UNIT_WOLF</UnitType>
-			<UnitType>UNIT_SETTLER</UnitType>
-			<UnitType>UNIT_WORKER</UnitType>
-			<UnitType>UNIT_INDIAN_FAST_WORKER</UnitType>
-			<UnitType>UNIT_SCOUT</UnitType>
-			<UnitType>UNIT_EXPLORER</UnitType>
-			<UnitType>UNIT_SPY</UnitType>
-			<UnitType>UNIT_JEWISH_MISSIONARY</UnitType>
-			<UnitType>UNIT_CHRISTIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_ISLAMIC_MISSIONARY</UnitType>
-			<UnitType>UNIT_HINDU_MISSIONARY</UnitType>
-			<UnitType>UNIT_BUDDHIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_CONFUCIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_TAOIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_WARRIOR</UnitType>
-			<UnitType>UNIT_INCAN_QUECHUA</UnitType>
-			<UnitType>UNIT_SWORDSMAN</UnitType>
-			<UnitType>UNIT_CELTIC_GALLIC_WARRIOR</UnitType>
-			<UnitType>UNIT_JAPAN_SAMURAI</UnitType>
-			<UnitType>UNIT_ROME_PRAETORIAN</UnitType>
-			<UnitType>UNIT_AXEMAN</UnitType>
-			<UnitType>UNIT_VIKING_BESERKER</UnitType>
-			<UnitType>UNIT_AZTEC_JAGUAR</UnitType>
-			<UnitType>UNIT_MACEMAN</UnitType>
-			<UnitType>UNIT_SPEARMAN</UnitType>
-			<UnitType>UNIT_GREEK_PHALANX</UnitType>
-			<UnitType>UNIT_ZULU_IMPI</UnitType>
-			<UnitType>UNIT_PIKEMAN</UnitType>
-			<UnitType>UNIT_GRENADIER</UnitType>
-			<UnitType>UNIT_SAM_INFANTRY</UnitType>
-			<UnitType>UNIT_MARINE</UnitType>
-			<UnitType>UNIT_AMERICAN_NAVY_SEAL</UnitType>
-			<UnitType>UNIT_ARCHER</UnitType>
-			<UnitType>UNIT_MALI_SKIRMISHER</UnitType>
-			<UnitType>UNIT_CHARIOT</UnitType>
-			<UnitType>UNIT_EGYPT_WARCHARIOT</UnitType>
-			<UnitType>UNIT_PERSIA_IMMORTAL</UnitType>
-			<UnitType>UNIT_HORSE_ARCHER</UnitType>
-			<UnitType>UNIT_ARABIA_CAMELARCHER</UnitType>
-			<UnitType>UNIT_CARTHAGE_NUMIDIAN_CAVALRY</UnitType>
-			<UnitType>UNIT_MONGOL_KESHIK</UnitType>
-			<UnitType>UNIT_KNIGHT</UnitType>
-			<UnitType>UNIT_SPANISH_CONQUISTADOR</UnitType>
-			<UnitType>UNIT_CAVALRY</UnitType>
-			<UnitType>UNIT_RUSSIA_COSSACK</UnitType>
-			<UnitType>UNIT_WAR_ELEPHANT</UnitType>
-			<UnitType>UNIT_MACHINE_GUN</UnitType>
-			<UnitType>UNIT_WORKBOAT</UnitType>
-			<UnitType>UNIT_GALLEY</UnitType>
-			<UnitType>UNIT_TRIREME</UnitType>
-			<UnitType>UNIT_CARAVEL</UnitType>
-			<UnitType>UNIT_GALLEON</UnitType>
-			<UnitType>UNIT_FRIGATE</UnitType>
-			<UnitType>UNIT_IRONCLAD</UnitType>
-			<UnitType>UNIT_TRANSPORT</UnitType>
-			<UnitType>UNIT_DESTROYER</UnitType>
-			<UnitType>UNIT_BATTLESHIP</UnitType>
-			<UnitType>UNIT_SUBMARINE</UnitType>
-			<UnitType>UNIT_CARRIER</UnitType>
-			<UnitType>UNIT_FIGHTER</UnitType>
-			<UnitType>UNIT_JET_FIGHTER</UnitType>
-			<UnitType>UNIT_BOMBER</UnitType>
-			<UnitType>UNIT_STEALTH_BOMBER</UnitType>
-			<UnitType>UNIT_ICBM</UnitType>
-			<UnitType>UNIT_PROPHET</UnitType>
-			<UnitType>UNIT_ARTIST</UnitType>
-			<UnitType>UNIT_SCIENTIST</UnitType>
-			<UnitType>UNIT_MERCHANT</UnitType>
-			<UnitType>UNIT_ENGINEER</UnitType>
-			<UnitType>UNIT_GREAT_GENERAL</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.0201342281879</x>
 				<y>-0.332214765101</y>
@@ -1652,6 +1053,7 @@
 			<DirVariation>0.188679622641</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.503355704698</x>
 				<y>0.010067114094</y>
@@ -1661,6 +1063,7 @@
 			<DirVariation>0.528393792545</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.513422818792</x>
 				<y>-0.010067114094</y>
@@ -1669,110 +1072,36 @@
 			<Direction>3.49458304142</Direction>
 			<DirVariation>0.572712842531</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.0201342281879</x>
+				<y>0.0604026845638</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.8</x>
-				<y>-1.2</y>
+				<x>-0.664429530201</x>
+				<y>-0.936241610738</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>2.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>BATTLE (4)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>0</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
+			<EventType>ENTITY_EVENT_DIE</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_LION</UnitType>
-			<UnitType>UNIT_BEAR</UnitType>
-			<UnitType>UNIT_PANTHER</UnitType>
-			<UnitType>UNIT_WOLF</UnitType>
-			<UnitType>UNIT_SETTLER</UnitType>
-			<UnitType>UNIT_WORKER</UnitType>
-			<UnitType>UNIT_INDIAN_FAST_WORKER</UnitType>
-			<UnitType>UNIT_SCOUT</UnitType>
-			<UnitType>UNIT_EXPLORER</UnitType>
-			<UnitType>UNIT_SPY</UnitType>
-			<UnitType>UNIT_JEWISH_MISSIONARY</UnitType>
-			<UnitType>UNIT_CHRISTIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_ISLAMIC_MISSIONARY</UnitType>
-			<UnitType>UNIT_HINDU_MISSIONARY</UnitType>
-			<UnitType>UNIT_BUDDHIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_CONFUCIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_TAOIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_WARRIOR</UnitType>
-			<UnitType>UNIT_INCAN_QUECHUA</UnitType>
-			<UnitType>UNIT_SWORDSMAN</UnitType>
-			<UnitType>UNIT_CELTIC_GALLIC_WARRIOR</UnitType>
-			<UnitType>UNIT_JAPAN_SAMURAI</UnitType>
-			<UnitType>UNIT_ROME_PRAETORIAN</UnitType>
-			<UnitType>UNIT_AXEMAN</UnitType>
-			<UnitType>UNIT_VIKING_BESERKER</UnitType>
-			<UnitType>UNIT_AZTEC_JAGUAR</UnitType>
-			<UnitType>UNIT_MACEMAN</UnitType>
-			<UnitType>UNIT_SPEARMAN</UnitType>
-			<UnitType>UNIT_GREEK_PHALANX</UnitType>
-			<UnitType>UNIT_ZULU_IMPI</UnitType>
-			<UnitType>UNIT_PIKEMAN</UnitType>
-			<UnitType>UNIT_GRENADIER</UnitType>
-			<UnitType>UNIT_SAM_INFANTRY</UnitType>
-			<UnitType>UNIT_MARINE</UnitType>
-			<UnitType>UNIT_AMERICAN_NAVY_SEAL</UnitType>
-			<UnitType>UNIT_ARCHER</UnitType>
-			<UnitType>UNIT_MALI_SKIRMISHER</UnitType>
-			<UnitType>UNIT_CHARIOT</UnitType>
-			<UnitType>UNIT_EGYPT_WARCHARIOT</UnitType>
-			<UnitType>UNIT_PERSIA_IMMORTAL</UnitType>
-			<UnitType>UNIT_HORSE_ARCHER</UnitType>
-			<UnitType>UNIT_ARABIA_CAMELARCHER</UnitType>
-			<UnitType>UNIT_CARTHAGE_NUMIDIAN_CAVALRY</UnitType>
-			<UnitType>UNIT_MONGOL_KESHIK</UnitType>
-			<UnitType>UNIT_KNIGHT</UnitType>
-			<UnitType>UNIT_SPANISH_CONQUISTADOR</UnitType>
-			<UnitType>UNIT_CAVALRY</UnitType>
-			<UnitType>UNIT_RUSSIA_COSSACK</UnitType>
-			<UnitType>UNIT_WAR_ELEPHANT</UnitType>
-			<UnitType>UNIT_MACHINE_GUN</UnitType>
-			<UnitType>UNIT_WORKBOAT</UnitType>
-			<UnitType>UNIT_GALLEY</UnitType>
-			<UnitType>UNIT_TRIREME</UnitType>
-			<UnitType>UNIT_CARAVEL</UnitType>
-			<UnitType>UNIT_GALLEON</UnitType>
-			<UnitType>UNIT_FRIGATE</UnitType>
-			<UnitType>UNIT_IRONCLAD</UnitType>
-			<UnitType>UNIT_TRANSPORT</UnitType>
-			<UnitType>UNIT_DESTROYER</UnitType>
-			<UnitType>UNIT_BATTLESHIP</UnitType>
-			<UnitType>UNIT_SUBMARINE</UnitType>
-			<UnitType>UNIT_CARRIER</UnitType>
-			<UnitType>UNIT_FIGHTER</UnitType>
-			<UnitType>UNIT_JET_FIGHTER</UnitType>
-			<UnitType>UNIT_BOMBER</UnitType>
-			<UnitType>UNIT_STEALTH_BOMBER</UnitType>
-			<UnitType>UNIT_ICBM</UnitType>
-			<UnitType>UNIT_PROPHET</UnitType>
-			<UnitType>UNIT_ARTIST</UnitType>
-			<UnitType>UNIT_SCIENTIST</UnitType>
-			<UnitType>UNIT_MERCHANT</UnitType>
-			<UnitType>UNIT_ENGINEER</UnitType>
-			<UnitType>UNIT_GREAT_GENERAL</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.0</x>
 				<y>-0.573825503356</y>
@@ -1782,6 +1111,7 @@
 			<DirVariation>0.188679622641</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.503355704698</x>
 				<y>0.010067114094</y>
@@ -1791,6 +1121,7 @@
 			<DirVariation>0.528393792545</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.513422818792</x>
 				<y>-0.010067114094</y>
@@ -1800,6 +1131,7 @@
 			<DirVariation>0.572712842531</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.0201342281879</x>
 				<y>0.624161073826</y>
@@ -1808,30 +1140,30 @@
 			<Direction>3.14159265359</Direction>
 			<DirVariation>0.188679622641</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.0201342281879</x>
+				<y>-0.161073825503</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.8</x>
-				<y>-1.2</y>
+				<x>-0.593959731544</x>
+				<y>-0.976510067114</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>WORKERS WORKING</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>0</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_SHOVEL</EventType>
 			<EventType>ENTITY_EVENT_BUILD</EventType>
@@ -1840,12 +1172,8 @@
 			<EventType>ENTITY_EVENT_CHOP</EventType>
 			<EventType>ENTITY_EVENT_RAILROAD</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_WORKER</UnitType>
-			<UnitType>UNIT_INDIAN_FAST_WORKER</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.0704697986577</x>
 				<y>0.523489932886</y>
@@ -1855,6 +1183,7 @@
 			<DirVariation>0.430813184571</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.302013422819</x>
 				<y>-0.342281879195</y>
@@ -1863,273 +1192,35 @@
 			<Direction>7.01204003363</Direction>
 			<DirVariation>0.4</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
-			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
-			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>BOW BATTLE (1)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
-		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_CROSSBOWMAN</UnitType>
-			<UnitType>UNIT_CHINA_CHOKONU</UnitType>
-			<UnitType>UNIT_LONGBOWMAN</UnitType>
-			<UnitType>UNIT_ARCHER</UnitType>
-			<UnitType>UNIT_MALI_SKIRMISHER</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>-0.0302013422819</x>
-				<y>-0.0302013422819</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</UnitEntry>
-		<GreatUnitEntry>
-			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
-			<Position>
-				<x>-0.8</x>
-				<y>-1.2</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>BOW BATTLE (2)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
-		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_ARCHER</UnitType>
-			<UnitType>UNIT_MALI_SKIRMISHER</UnitType>
-			<UnitType>UNIT_LONGBOWMAN</UnitType>
-			<UnitType>UNIT_CROSSBOWMAN</UnitType>
-			<UnitType>UNIT_CHINA_CHOKONU</UnitType>
-			<UnitType>UNIT_CATAPULT</UnitType>
-			<UnitType>UNIT_TREBUCHET</UnitType>
-			<UnitType>UNIT_KOREAN_HWACHA</UnitType>
-			<UnitType>UNIT_CANNON</UnitType>
-			<UnitType>UNIT_ARTILLERY</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
-		<UnitEntry>
-			<Position>
-				<x>-0.312080536913</x>
-				<y>-0.0906040268456</y>
-			</Position>
-			<PositionRadius>15.8113883008</PositionRadius>
-			<Direction>3.22473388548</Direction>
-			<DirVariation>0.404474968323</DirVariation>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>0.322147651007</x>
-				<y>-0.0906040268456</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>15.1327459504</PositionRadius>
-			<Direction>2.94419709374</Direction>
-			<DirVariation>0.40049968789</DirVariation>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
-			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
-			<Position>
-				<x>-0.8</x>
-				<y>-1.2</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>BOW BATTLE (3)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
-		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_ARCHER</UnitType>
-			<UnitType>UNIT_MALI_SKIRMISHER</UnitType>
-			<UnitType>UNIT_LONGBOWMAN</UnitType>
-			<UnitType>UNIT_CROSSBOWMAN</UnitType>
-			<UnitType>UNIT_CHINA_CHOKONU</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
-		<UnitEntry>
-			<Position>
-				<x>-0.0201342281879</x>
-				<y>-0.151006711409</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<Position>
-				<x>0.473154362416</x>
-				<y>-0.110738255034</y>
-			</Position>
-			<PositionRadius>19.9248588452</PositionRadius>
-			<Direction>3.11420224511</Direction>
-			<DirVariation>0.322490309932</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<Position>
-				<x>-0.503355704698</x>
-				<y>-0.120805369128</y>
-			</Position>
-			<PositionRadius>19.9248588452</PositionRadius>
-			<Direction>3.11420224511</Direction>
-			<DirVariation>0.322490309932</DirVariation>
-		</UnitEntry>
-		<GreatUnitEntry>
-			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
-			<Position>
-				<x>-0.8</x>
-				<y>-1.2</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>BOW BATTLE (4)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
-		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_ARCHER</UnitType>
-			<UnitType>UNIT_MALI_SKIRMISHER</UnitType>
-			<UnitType>UNIT_LONGBOWMAN</UnitType>
-			<UnitType>UNIT_CROSSBOWMAN</UnitType>
-			<UnitType>UNIT_CHINA_CHOKONU</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
-		<UnitEntry>
-			<Position>
-				<x>-0.0201342281879</x>
-				<y>-0.151006711409</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<Position>
-				<x>0.473154362416</x>
-				<y>-0.110738255034</y>
-			</Position>
-			<PositionRadius>19.9248588452</PositionRadius>
-			<Direction>3.11420224511</Direction>
-			<DirVariation>0.322490309932</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<Position>
-				<x>-0.503355704698</x>
-				<y>-0.120805369128</y>
-			</Position>
-			<PositionRadius>19.9248588452</PositionRadius>
-			<Direction>3.11420224511</Direction>
-			<DirVariation>0.322490309932</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<Position>
-				<x>-0.241610738255</x>
-				<y>0.302013422819</y>
-			</Position>
-			<PositionRadius>14.8660687473</PositionRadius>
-			<Direction>3.12492752988</Direction>
-			<DirVariation>0.266833281283</DirVariation>
-		</UnitEntry>
-		<GreatUnitEntry>
-			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
-			<Position>
-				<x>-0.8</x>
-				<y>-1.2</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>FOUND CITY (4)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_FOUND</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_SETTLER</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.0704697986577</x>
 				<y>-0.332214765101</y>
@@ -2139,6 +1230,7 @@
 			<DirVariation>0.514198405287</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.362416107383</x>
 				<y>0.110738255034</y>
@@ -2148,6 +1240,7 @@
 			<DirVariation>0.33941125497</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.453020134228</x>
 				<y>0.110738255034</y>
@@ -2157,6 +1250,7 @@
 			<DirVariation>0.233238075794</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.0604026845638</x>
 				<y>0.402684563758</y>
@@ -2165,41 +1259,243 @@
 			<Direction>2.80685581627</Direction>
 			<DirVariation>0.375765884561</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
+			</Position>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
+			<Position>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
+			</Position>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
+	</UnitFormation>
+	<UnitFormation>
+		<Name>BOW BATTLE (1)</Name>
+		<FormationType>FORMATION_TYPE_RANGED</FormationType>
+		<EventMaskList>
+			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
+		</EventMaskList>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.0302013422819</x>
+				<y>-0.0302013422819</y>
 			</Position>
 			<PositionRadius>13.0384048104</PositionRadius>
 			<Direction>3.14159265359</Direction>
 			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
+			</Position>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
+			<Position>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
+			</Position>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
+	</UnitFormation>
+	<UnitFormation>
+		<Name>BOW BATTLE (2)</Name>
+		<FormationType>FORMATION_TYPE_RANGED</FormationType>
+		<EventMaskList>
+			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
+		</EventMaskList>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.312080536913</x>
+				<y>-0.0906040268456</y>
+			</Position>
+			<PositionRadius>15.8113883008</PositionRadius>
+			<Direction>3.22473388548</Direction>
+			<DirVariation>0.404474968323</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>0.322147651007</x>
+				<y>-0.0906040268456</y>
+			</Position>
+			<PositionRadius>15.1327459504</PositionRadius>
+			<Direction>2.94419709374</Direction>
+			<DirVariation>0.40049968789</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
+			<Position>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
+			</Position>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
+			<Position>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
+			</Position>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
+	</UnitFormation>
+	<UnitFormation>
+		<Name>BOW BATTLE (3)</Name>
+		<FormationType>FORMATION_TYPE_RANGED</FormationType>
+		<EventMaskList>
+			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
+		</EventMaskList>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.0201342281879</x>
+				<y>-0.151006711409</y>
 			</Position>
 			<PositionRadius>13.0384048104</PositionRadius>
 			<Direction>3.14159265359</Direction>
 			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>0.473154362416</x>
+				<y>-0.110738255034</y>
+			</Position>
+			<PositionRadius>19.9248588452</PositionRadius>
+			<Direction>3.11420224511</Direction>
+			<DirVariation>0.322490309932</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.503355704698</x>
+				<y>-0.120805369128</y>
+			</Position>
+			<PositionRadius>19.9248588452</PositionRadius>
+			<Direction>3.11420224511</Direction>
+			<DirVariation>0.322490309932</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
+			<Position>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
+			</Position>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
+			<Position>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
+			</Position>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
+	</UnitFormation>
+	<UnitFormation>
+		<Name>BOW BATTLE (4)</Name>
+		<FormationType>FORMATION_TYPE_RANGED</FormationType>
+		<EventMaskList>
+			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
+		</EventMaskList>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.0201342281879</x>
+				<y>-0.151006711409</y>
+			</Position>
+			<PositionRadius>13.0384048104</PositionRadius>
+			<Direction>3.14159265359</Direction>
+			<DirVariation>0.188679622641</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>0.473154362416</x>
+				<y>-0.110738255034</y>
+			</Position>
+			<PositionRadius>19.9248588452</PositionRadius>
+			<Direction>3.11420224511</Direction>
+			<DirVariation>0.322490309932</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.503355704698</x>
+				<y>-0.120805369128</y>
+			</Position>
+			<PositionRadius>19.9248588452</PositionRadius>
+			<Direction>3.11420224511</Direction>
+			<DirVariation>0.322490309932</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.241610738255</x>
+				<y>0.302013422819</y>
+			</Position>
+			<PositionRadius>14.8660687473</PositionRadius>
+			<Direction>3.12492752988</Direction>
+			<DirVariation>0.266833281283</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
+			<Position>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
+			</Position>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
+			<Position>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
+			</Position>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>ANIMAL IDLE (1)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_IDLE</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_LION</UnitType>
-			<UnitType>UNIT_BEAR</UnitType>
-			<UnitType>UNIT_WOLF</UnitType>
-			<UnitType>UNIT_PANTHER</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.302013422819</x>
 				<y>0.322147651007</y>
@@ -2208,41 +1504,35 @@
 			<Direction>3.14159265359</Direction>
 			<DirVariation>0.188679622641</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>ANIMAL IDLE (2)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_IDLE</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_LION</UnitType>
-			<UnitType>UNIT_BEAR</UnitType>
-			<UnitType>UNIT_WOLF</UnitType>
-			<UnitType>UNIT_PANTHER</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.322147651007</x>
 				<y>0.302013422819</y>
@@ -2252,6 +1542,7 @@
 			<DirVariation>0.404474968323</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.241610738255</x>
 				<y>-0.392617449664</y>
@@ -2260,41 +1551,35 @@
 			<Direction>2.94419709374</Direction>
 			<DirVariation>0.40049968789</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>ANIMAL IDLE (3)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_IDLE</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_LION</UnitType>
-			<UnitType>UNIT_BEAR</UnitType>
-			<UnitType>UNIT_WOLF</UnitType>
-			<UnitType>UNIT_PANTHER</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.0503355704698</x>
 				<y>-0.402684563758</y>
@@ -2304,6 +1589,7 @@
 			<DirVariation>0.404474968323</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.362416107383</x>
 				<y>0.0201342281879</y>
@@ -2313,6 +1599,7 @@
 			<DirVariation>0.40049968789</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.281879194631</x>
 				<y>0.291946308725</y>
@@ -2321,41 +1608,35 @@
 			<Direction>3.10161396647</Direction>
 			<DirVariation>0.341760149813</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>ANIMAL IDLE (4)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_IDLE</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_LION</UnitType>
-			<UnitType>UNIT_BEAR</UnitType>
-			<UnitType>UNIT_WOLF</UnitType>
-			<UnitType>UNIT_PANTHER</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.010067114094</x>
 				<y>-0.392617449664</y>
@@ -2365,6 +1646,7 @@
 			<DirVariation>0.188679622641</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.372483221477</x>
 				<y>0.0302013422819</y>
@@ -2374,6 +1656,7 @@
 			<DirVariation>0.528393792545</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.332214765101</x>
 				<y>0.291946308725</y>
@@ -2383,6 +1666,7 @@
 			<DirVariation>0.572712842531</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.140939597315</x>
 				<y>0.634228187919</y>
@@ -2391,42 +1675,36 @@
 			<Direction>3.14159265359</Direction>
 			<DirVariation>0.188679622641</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>ANIMAL FORTIFY (1)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_FORTIFY</EventType>
 			<EventType>ENTITY_EVENT_SLEEP</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_LION</UnitType>
-			<UnitType>UNIT_BEAR</UnitType>
-			<UnitType>UNIT_PANTHER</UnitType>
-			<UnitType>UNIT_WOLF</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.0604026845638</x>
 				<y>0.010067114094</y>
@@ -2435,42 +1713,36 @@
 			<Direction>3.09717743834</Direction>
 			<DirVariation>0.46389654019</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>ANIMAL FORTIFY (2)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_FORTIFY</EventType>
 			<EventType>ENTITY_EVENT_SLEEP</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_LION</UnitType>
-			<UnitType>UNIT_BEAR</UnitType>
-			<UnitType>UNIT_PANTHER</UnitType>
-			<UnitType>UNIT_WOLF</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.352348993289</x>
 				<y>-0.261744966443</y>
@@ -2480,6 +1752,7 @@
 			<DirVariation>0.583095189485</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.261744966443</x>
 				<y>0.302013422819</y>
@@ -2488,42 +1761,36 @@
 			<Direction>2.29504632754</Direction>
 			<DirVariation>0.6</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>ANIMAL FORTIFY(3)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_FORTIFY</EventType>
 			<EventType>ENTITY_EVENT_SLEEP</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_LION</UnitType>
-			<UnitType>UNIT_BEAR</UnitType>
-			<UnitType>UNIT_PANTHER</UnitType>
-			<UnitType>UNIT_WOLF</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.342281879195</x>
 				<y>-0.473154362416</y>
@@ -2533,6 +1800,7 @@
 			<DirVariation>0.583095189485</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.362416107383</x>
 				<y>-0.0201342281879</y>
@@ -2542,6 +1810,7 @@
 			<DirVariation>0.6</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.171140939597</x>
 				<y>0.442953020134</y>
@@ -2550,42 +1819,36 @@
 			<Direction>7.36402430772</Direction>
 			<DirVariation>0.577234787586</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>ANIMAL FORTIFY(4)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_FORTIFY</EventType>
 			<EventType>ENTITY_EVENT_SLEEP</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_LION</UnitType>
-			<UnitType>UNIT_BEAR</UnitType>
-			<UnitType>UNIT_PANTHER</UnitType>
-			<UnitType>UNIT_WOLF</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.453020134228</x>
 				<y>-0.53355704698</y>
@@ -2595,6 +1858,7 @@
 			<DirVariation>0.583095189485</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.302013422819</x>
 				<y>0.473154362416</y>
@@ -2604,6 +1868,7 @@
 			<DirVariation>0.6</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.271812080537</x>
 				<y>0.231543624161</y>
@@ -2613,6 +1878,7 @@
 			<DirVariation>0.577234787586</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.352348993289</x>
 				<y>-0.261744966443</y>
@@ -2621,41 +1887,35 @@
 			<Direction>5.56909460857</Direction>
 			<DirVariation>0.683520299625</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>ANIMAL BATTLE(1)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_LION</UnitType>
-			<UnitType>UNIT_BEAR</UnitType>
-			<UnitType>UNIT_WOLF</UnitType>
-			<UnitType>UNIT_PANTHER</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.0402684563758</x>
 				<y>-0.271812080537</y>
@@ -2664,41 +1924,35 @@
 			<Direction>3.14159265359</Direction>
 			<DirVariation>0.188679622641</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.8</x>
-				<y>-1.2</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>ANIMAL BATTLE(2)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_LION</UnitType>
-			<UnitType>UNIT_BEAR</UnitType>
-			<UnitType>UNIT_WOLF</UnitType>
-			<UnitType>UNIT_PANTHER</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.503355704698</x>
 				<y>-0.503355704698</y>
@@ -2708,6 +1962,7 @@
 			<DirVariation>0.404474968323</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.392617449664</x>
 				<y>-0.453020134228</y>
@@ -2716,41 +1971,35 @@
 			<Direction>2.94419709374</Direction>
 			<DirVariation>0.40049968789</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.8</x>
-				<y>-1.2</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>ANIMAL BATTLE(3)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_LION</UnitType>
-			<UnitType>UNIT_BEAR</UnitType>
-			<UnitType>UNIT_WOLF</UnitType>
-			<UnitType>UNIT_PANTHER</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.0302013422819</x>
 				<y>-0.412751677852</y>
@@ -2760,6 +2009,7 @@
 			<DirVariation>0.404474968323</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.714765100671</x>
 				<y>-0.624161073826</y>
@@ -2769,6 +2019,7 @@
 			<DirVariation>0.40049968789</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.694630872483</x>
 				<y>-0.58389261745</y>
@@ -2777,41 +2028,35 @@
 			<Direction>3.10161396647</Direction>
 			<DirVariation>0.341760149813</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.8</x>
-				<y>-1.2</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>ANIMAL BATTLE(4)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
+		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_LION</UnitType>
-			<UnitType>UNIT_BEAR</UnitType>
-			<UnitType>UNIT_WOLF</UnitType>
-			<UnitType>UNIT_PANTHER</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.0</x>
 				<y>-0.38255033557</y>
@@ -2821,6 +2066,7 @@
 			<DirVariation>0.188679622641</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.58389261745</x>
 				<y>-0.48322147651</y>
@@ -2830,6 +2076,7 @@
 			<DirVariation>0.528393792545</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.58389261745</x>
 				<y>-0.523489932886</y>
@@ -2839,6 +2086,7 @@
 			<DirVariation>0.572712842531</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.322147651007</x>
 				<y>0.010067114094</y>
@@ -2847,228 +2095,265 @@
 			<Direction>3.14159265359</Direction>
 			<DirVariation>0.188679622641</DirVariation>
 		</UnitEntry>
-		<GreatUnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>0.0</x>
-				<y>0.5</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
 			<Position>
-				<x>-0.8</x>
-				<y>-1.2</y>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
-		<Name>TANK IDLE (1)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
+		<Name>1 Units</Name>
+		<FormationType>FORMATION_TYPE_MACHINE</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_IDLE</EventType>
-		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_MECHANIZED_INFANTRY</UnitType>
-			<UnitType>UNIT_TANK</UnitType>
-			<UnitType>UNIT_GERMAN_PANZER</UnitType>
-			<UnitType>UNIT_MODERN_ARMOR</UnitType>
-			<UnitType>UNIT_GUNSHIP</UnitType>
-			<UnitType>UNIT_CATAPULT</UnitType>
-			<UnitType>UNIT_TREBUCHET</UnitType>
-			<UnitType>UNIT_KOREAN_HWACHA</UnitType>
-			<UnitType>UNIT_CANNON</UnitType>
-			<UnitType>UNIT_ARTILLERY</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
-		<UnitEntry>
-			<Position>
-				<x>-0.010067114094</x>
-				<y>0.0906040268456</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</UnitEntry>
-		<GreatUnitEntry>
-			<Position>
-				<x>-0.5</x>
-				<y>0.25</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
-			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>TANK FORTFIY (1)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_FORTIFY</EventType>
-			<EventType>ENTITY_EVENT_SLEEP</EventType>
-			<EventType>ENTITY_EVENT_PILLAGE</EventType>
-			<EventType>ENTITY_EVENT_HEAL</EventType>
-			<EventType>ENTITY_EVENT_SENTRY</EventType>
-		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_MECHANIZED_INFANTRY</UnitType>
-			<UnitType>UNIT_TANK</UnitType>
-			<UnitType>UNIT_GERMAN_PANZER</UnitType>
-			<UnitType>UNIT_MODERN_ARMOR</UnitType>
-			<UnitType>UNIT_GUNSHIP</UnitType>
-			<UnitType>UNIT_CATAPULT</UnitType>
-			<UnitType>UNIT_TREBUCHET</UnitType>
-			<UnitType>UNIT_KOREAN_HWACHA</UnitType>
-			<UnitType>UNIT_CANNON</UnitType>
-			<UnitType>UNIT_ARTILLERY</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
-		<UnitEntry>
-			<Position>
-				<x>-0.010067114094</x>
-				<y>0.0906040268456</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</UnitEntry>
-		<GreatUnitEntry>
-			<Position>
-				<x>-0.5</x>
-				<y>0.25</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
-			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>TANK ATTACK (1)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
-		<EventMaskList>
+			<EventType>ENTITY_EVENT_DIE</EventType>
+			<EventType>ENTITY_EVENT_DAMAGE</EventType>
 			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
-			<EventType>ENTITY_EVENT_BOMBARD</EventType>
-		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_MECHANIZED_INFANTRY</UnitType>
-			<UnitType>UNIT_TANK</UnitType>
-			<UnitType>UNIT_GERMAN_PANZER</UnitType>
-			<UnitType>UNIT_MODERN_ARMOR</UnitType>
-			<UnitType>UNIT_GUNSHIP</UnitType>
-			<UnitType>UNIT_CATAPULT</UnitType>
-			<UnitType>UNIT_TREBUCHET</UnitType>
-			<UnitType>UNIT_KOREAN_HWACHA</UnitType>
-			<UnitType>UNIT_CANNON</UnitType>
-			<UnitType>UNIT_ARTILLERY</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
-		<UnitEntry>
-			<Position>
-				<x>-0.010067114094</x>
-				<y>0.0906040268456</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</UnitEntry>
-		<GreatUnitEntry>
-			<Position>
-				<x>-0.5</x>
-				<y>0.25</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
-			<Position>
-				<x>-0.8</x>
-				<y>-1.2</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>GREAT PEOPLE AND MISSIONARY ACTIVATE (1)</Name>
-		<DirectionType>DIRECTION_SOUTH</DirectionType>
-		<UseFacing>1</UseFacing>
-		<RotationMask>255</RotationMask>
-		<EventMaskList>
+			<EventType>ENTITY_EVENT_END_COMBAT</EventType>
+			<EventType>ENTITY_EVENT_SURRENDER</EventType>
+			<EventType>ENTITY_EVENT_CAPTURED</EventType>
+			<EventType>ENTITY_EVENT_AIRPATROL</EventType>
+			<EventType>ENTITY_EVENT_AIRINTERCEPTION</EventType>
+			<EventType>ENTITY_EVENT_AIRBOMB</EventType>
+			<EventType>ENTITY_EVENT_PARADROP</EventType>
+			<EventType>ENTITY_EVENT_AIRSTRIKE</EventType>
+			<EventType>ENTITY_EVENT_AIRRECON</EventType>
+			<EventType>ENTITY_EVENT_NUKE</EventType>
+			<EventType>ENTITY_EVENT_MULTI_SELECT</EventType>
+			<EventType>ENTITY_EVENT_MULTI_DESELECT</EventType>
 			<EventType>ENTITY_EVENT_GREAT_EVENT</EventType>
+			<EventType>ENTITY_EVENT_PILLAGE</EventType>
+			<EventType>ENTITY_EVENT_SABOTAGE</EventType>
+			<EventType>ENTITY_EVENT_DESTROY</EventType>
+			<EventType>ENTITY_EVENT_STEAL_PLANS</EventType>
+			<EventType>ENTITY_EVENT_BOMBARD</EventType>
+			<EventType>ENTITY_EVENT_DIE_ANIMATION</EventType>
 			<EventType>ENTITY_EVENT_FOUND</EventType>
+			<EventType>ENTITY_EVENT_FORTIFY</EventType>
+			<EventType>ENTITY_EVENT_SENTRY</EventType>
+			<EventType>ENTITY_EVENT_HEAL</EventType>
+			<EventType>ENTITY_EVENT_SLEEP</EventType>
+			<EventType>ENTITY_EVENT_SHOVEL</EventType>
+			<EventType>ENTITY_EVENT_BUILD</EventType>
+			<EventType>ENTITY_EVENT_IRRIGATE</EventType>
+			<EventType>ENTITY_EVENT_MINE</EventType>
+			<EventType>ENTITY_EVENT_CHOP</EventType>
+			<EventType>ENTITY_EVENT_RAILROAD</EventType>
 		</EventMaskList>
-		<UnitMaskList>
-			<UnitType>UNIT_ARTIST</UnitType>
-			<UnitType>UNIT_MERCHANT</UnitType>
-			<UnitType>UNIT_ENGINEER</UnitType>
-			<UnitType>UNIT_SCIENTIST</UnitType>
-			<UnitType>UNIT_PROPHET</UnitType>
-			<UnitType>UNIT_GREAT_GENERAL</UnitType>
-			<UnitType>UNIT_JEWISH_MISSIONARY</UnitType>
-			<UnitType>UNIT_CHRISTIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_ISLAMIC_MISSIONARY</UnitType>
-			<UnitType>UNIT_HINDU_MISSIONARY</UnitType>
-			<UnitType>UNIT_BUDDHIST_MISSIONARY</UnitType>
-			<UnitType>UNIT_CONFUCIAN_MISSIONARY</UnitType>
-			<UnitType>UNIT_TAOIST_MISSIONARY</UnitType>
-		</UnitMaskList>
-		<PromotionMaskList/>
 		<UnitEntry>
-			<Position>
-				<x>-0.0201342281879</x>
-				<y>-0.201342281879</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</UnitEntry>
-		<GreatUnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.0</x>
-				<y>0.5</y>
+				<y>0.0</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
+			<PositionRadius>0.0</PositionRadius>
 			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</GreatUnitEntry>
-		<SiegeUnitEntry>
+			<DirVariation>0.0</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>-0.5</x>
-				<y>-0.8</y>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
 			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
+			<Position>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
+			</Position>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
+	</UnitFormation>
+	<UnitFormation>
+		<Name>2 Units</Name>
+		<FormationType>FORMATION_TYPE_MACHINE</FormationType>
+		<EventMaskList>
+			<EventType>ENTITY_EVENT_IDLE</EventType>
+			<EventType>ENTITY_EVENT_DIE</EventType>
+			<EventType>ENTITY_EVENT_DAMAGE</EventType>
+			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
+			<EventType>ENTITY_EVENT_END_COMBAT</EventType>
+			<EventType>ENTITY_EVENT_SURRENDER</EventType>
+			<EventType>ENTITY_EVENT_CAPTURED</EventType>
+			<EventType>ENTITY_EVENT_AIRPATROL</EventType>
+			<EventType>ENTITY_EVENT_AIRINTERCEPTION</EventType>
+			<EventType>ENTITY_EVENT_AIRBOMB</EventType>
+			<EventType>ENTITY_EVENT_PARADROP</EventType>
+			<EventType>ENTITY_EVENT_AIRSTRIKE</EventType>
+			<EventType>ENTITY_EVENT_AIRRECON</EventType>
+			<EventType>ENTITY_EVENT_NUKE</EventType>
+			<EventType>ENTITY_EVENT_MULTI_SELECT</EventType>
+			<EventType>ENTITY_EVENT_MULTI_DESELECT</EventType>
+			<EventType>ENTITY_EVENT_GREAT_EVENT</EventType>
+			<EventType>ENTITY_EVENT_PILLAGE</EventType>
+			<EventType>ENTITY_EVENT_SABOTAGE</EventType>
+			<EventType>ENTITY_EVENT_DESTROY</EventType>
+			<EventType>ENTITY_EVENT_STEAL_PLANS</EventType>
+			<EventType>ENTITY_EVENT_BOMBARD</EventType>
+			<EventType>ENTITY_EVENT_DIE_ANIMATION</EventType>
+			<EventType>ENTITY_EVENT_FOUND</EventType>
+			<EventType>ENTITY_EVENT_FORTIFY</EventType>
+			<EventType>ENTITY_EVENT_SENTRY</EventType>
+			<EventType>ENTITY_EVENT_HEAL</EventType>
+			<EventType>ENTITY_EVENT_SLEEP</EventType>
+			<EventType>ENTITY_EVENT_SHOVEL</EventType>
+			<EventType>ENTITY_EVENT_BUILD</EventType>
+			<EventType>ENTITY_EVENT_IRRIGATE</EventType>
+			<EventType>ENTITY_EVENT_MINE</EventType>
+			<EventType>ENTITY_EVENT_CHOP</EventType>
+			<EventType>ENTITY_EVENT_RAILROAD</EventType>
+		</EventMaskList>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>0.392617449664</x>
+				<y>0.130872483221</y>
+			</Position>
+			<PositionRadius>0.0</PositionRadius>
 			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</SiegeUnitEntry>
+			<DirVariation>0.0</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.332214765101</x>
+				<y>0.130872483221</y>
+			</Position>
+			<PositionRadius>0.0</PositionRadius>
+			<Direction>3.14159265359</Direction>
+			<DirVariation>0.0</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
+			<Position>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
+			</Position>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
+			<Position>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
+			</Position>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
+	</UnitFormation>
+	<UnitFormation>
+		<Name>3 Units</Name>
+		<FormationType>FORMATION_TYPE_MACHINE</FormationType>
+		<EventMaskList>
+			<EventType>ENTITY_EVENT_IDLE</EventType>
+			<EventType>ENTITY_EVENT_DIE</EventType>
+			<EventType>ENTITY_EVENT_DAMAGE</EventType>
+			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
+			<EventType>ENTITY_EVENT_END_COMBAT</EventType>
+			<EventType>ENTITY_EVENT_SURRENDER</EventType>
+			<EventType>ENTITY_EVENT_CAPTURED</EventType>
+			<EventType>ENTITY_EVENT_AIRPATROL</EventType>
+			<EventType>ENTITY_EVENT_AIRINTERCEPTION</EventType>
+			<EventType>ENTITY_EVENT_AIRBOMB</EventType>
+			<EventType>ENTITY_EVENT_PARADROP</EventType>
+			<EventType>ENTITY_EVENT_AIRSTRIKE</EventType>
+			<EventType>ENTITY_EVENT_AIRRECON</EventType>
+			<EventType>ENTITY_EVENT_NUKE</EventType>
+			<EventType>ENTITY_EVENT_MULTI_SELECT</EventType>
+			<EventType>ENTITY_EVENT_MULTI_DESELECT</EventType>
+			<EventType>ENTITY_EVENT_GREAT_EVENT</EventType>
+			<EventType>ENTITY_EVENT_PILLAGE</EventType>
+			<EventType>ENTITY_EVENT_SABOTAGE</EventType>
+			<EventType>ENTITY_EVENT_DESTROY</EventType>
+			<EventType>ENTITY_EVENT_STEAL_PLANS</EventType>
+			<EventType>ENTITY_EVENT_BOMBARD</EventType>
+			<EventType>ENTITY_EVENT_DIE_ANIMATION</EventType>
+			<EventType>ENTITY_EVENT_FOUND</EventType>
+			<EventType>ENTITY_EVENT_FORTIFY</EventType>
+			<EventType>ENTITY_EVENT_SENTRY</EventType>
+			<EventType>ENTITY_EVENT_HEAL</EventType>
+			<EventType>ENTITY_EVENT_SLEEP</EventType>
+			<EventType>ENTITY_EVENT_SHOVEL</EventType>
+			<EventType>ENTITY_EVENT_BUILD</EventType>
+			<EventType>ENTITY_EVENT_IRRIGATE</EventType>
+			<EventType>ENTITY_EVENT_MINE</EventType>
+			<EventType>ENTITY_EVENT_CHOP</EventType>
+			<EventType>ENTITY_EVENT_RAILROAD</EventType>
+		</EventMaskList>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>0.0</x>
+				<y>0.0</y>
+			</Position>
+			<PositionRadius>0.0</PositionRadius>
+			<Direction>3.14159265359</Direction>
+			<DirVariation>0.0</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>0.593959731544</x>
+				<y>0.332214765101</y>
+			</Position>
+			<PositionRadius>0.0</PositionRadius>
+			<Direction>3.14159265359</Direction>
+			<DirVariation>0.0</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>UNIT</UnitEntryType>
+			<Position>
+				<x>-0.543624161074</x>
+				<y>0.342281879195</y>
+			</Position>
+			<PositionRadius>0.0</PositionRadius>
+			<Direction>3.14159265359</Direction>
+			<DirVariation>0.0</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>GENERAL</UnitEntryType>
+			<Position>
+				<x>-0.332214765101</x>
+				<y>0.694630872483</y>
+			</Position>
+			<PositionRadius>22.0</PositionRadius>
+			<Direction>3.11129889367</Direction>
+			<DirVariation>0.440454310911</DirVariation>
+		</UnitEntry>
+		<UnitEntry>
+			<UnitEntryType>SIEGE</UnitEntryType>
+			<Position>
+				<x>-0.573825503356</x>
+				<y>-0.53355704698</y>
+			</Position>
+			<PositionRadius>25.0</PositionRadius>
+			<Direction>2.44685437739</Direction>
+			<DirVariation>0.521536192416</DirVariation>
+		</UnitEntry>
 	</UnitFormation>
 </UnitFormations>

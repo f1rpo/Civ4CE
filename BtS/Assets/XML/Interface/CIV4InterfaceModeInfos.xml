@@ -238,6 +238,29 @@
 			<Button>,Art/Interface/Buttons/Actions/Recon.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,3,6</Button>
 		</InterfaceModeInfo>
 		<InterfaceModeInfo>
+			<Type>INTERFACEMODE_PARADROP</Type>
+			<Description>TXT_KEY_INTERFACEMODE_PARADROP</Description>
+			<Help>TXT_KEY_INTERFACEMODE_PARADROP_HELP</Help>
+			<CursorType>CURSOR_PARADROP</CursorType>
+			<Mission>MISSION_PARADROP</Mission>
+			<HotKey>KB_P</HotKey>
+			<bAltDown>0</bAltDown>
+			<bShiftDown>0</bShiftDown>
+			<bCtrlDown>0</bCtrlDown>
+			<iHotKeyPriority>0</iHotKeyPriority>
+			<HotKeyAlt/>
+			<bAltDownAlt>0</bAltDownAlt>
+			<bShiftDownAlt>0</bShiftDownAlt>
+			<bCtrlDownAlt>0</bCtrlDownAlt>
+			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
+			<bVisible>1</bVisible>
+			<bGotoPlot>0</bGotoPlot>
+			<bHighlightPlot>1</bHighlightPlot>
+			<bSelectType>0</bSelectType>
+			<bSelectAll>0</bSelectAll>
+			<Button>,Art/Interface/Buttons/TechTree/Corporation.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,5,16</Button>
+		</InterfaceModeInfo>
+		<InterfaceModeInfo>
 			<Type>INTERFACEMODE_AIRBOMB</Type>
 			<Description>TXT_KEY_INTERFACEMODE_AIRBOMB</Description>
 			<Help>TXT_KEY_INTERFACEMODE_AIRBOMB_HELP</Help>
@@ -259,6 +282,29 @@
 			<bSelectType>0</bSelectType>
 			<bSelectAll>0</bSelectAll>
 			<Button>,Art/Interface/Buttons/Actions/Airbomb.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,5,6</Button>
+		</InterfaceModeInfo>
+		<InterfaceModeInfo>
+			<Type>INTERFACEMODE_RANGE_ATTACK</Type>
+			<Description>TXT_KEY_INTERFACEMODE_RANGE_ATTACK</Description>
+			<Help>TXT_KEY_INTERFACEMODE_RANGE_ATTACK_HELP</Help>
+			<CursorType>CURSOR_AIRBOMB</CursorType>
+			<Mission>MISSION_RANGE_ATTACK</Mission>
+			<HotKey>KB_B</HotKey>
+			<bAltDown>0</bAltDown>
+			<bShiftDown>0</bShiftDown>
+			<bCtrlDown>0</bCtrlDown>
+			<iHotKeyPriority>0</iHotKeyPriority>
+			<HotKeyAlt/>
+			<bAltDownAlt>0</bAltDownAlt>
+			<bShiftDownAlt>0</bShiftDownAlt>
+			<bCtrlDownAlt>0</bCtrlDownAlt>
+			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
+			<bVisible>1</bVisible>
+			<bGotoPlot>0</bGotoPlot>
+			<bHighlightPlot>1</bHighlightPlot>
+			<bSelectType>0</bSelectType>
+			<bSelectAll>0</bSelectAll>
+			<Button>,Art/Interface/Buttons/Actions/Bombard.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,2,1</Button>
 		</InterfaceModeInfo>
 		<InterfaceModeInfo>
 			<Type>INTERFACEMODE_AIRSTRIKE</Type>
@@ -305,6 +351,18 @@
 			<bSelectType>0</bSelectType>
 			<bSelectAll>0</bSelectAll>
 			<Button>,Art/Interface/Buttons/Actions/Rebase.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,2,6</Button>
+		</InterfaceModeInfo>
+		<InterfaceModeInfo>
+			<Type>INTERFACEMODE_PYTHON_PICK_PLOT</Type>
+			<Description></Description>
+			<Help/>
+			<CursorType>CURSOR_PING</CursorType>
+			<Mission>NONE</Mission>
+			<bVisible>0</bVisible>
+			<bGotoPlot>0</bGotoPlot>
+			<bHighlightPlot>1</bHighlightPlot>
+			<bSelectType>0</bSelectType>
+			<bSelectAll>0</bSelectAll>
 		</InterfaceModeInfo>
 	</InterfaceModeInfos>
 </Civ4InterfaceModeInfos>

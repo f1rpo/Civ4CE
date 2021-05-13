@@ -398,5 +398,43 @@
 			<fScale>1.0</fScale>
 			<Path>Art/Effects/improvement_steam/fx_improvement_steam.nif</Path>
 		</AttachableInfo>
+		<AttachableInfo>
+			<Type>ATTACHABLE_ICBM_GREENGLOW</Type>
+			<Description>ICBM greenglow</Description>
+			<fScale>1.5</fScale>
+			<Path>Art/Effects/cities_sickly_fumes/fx_cities_sickly_fumes.nif</Path>
+		</AttachableInfo>
+		<AttachableInfo>
+			<Type>ATTACHABLE_IMPFIREPLACEFIRE_BIG</Type>
+			<Description>Fire for improvement fire place</Description>
+			<fScale>1.0</fScale>
+			<Path>Art/Effects/fire_torch/fx_fire_torch.nif</Path>
+		</AttachableInfo>
+
+		<!-- Final Frontier: -->
+		<AttachableInfo>
+			<Type>ATTACHABLE_INVASIONSHIP_GLOW</Type>
+			<Description>Invasion Ship Engine Glow</Description>
+			<fScale>1.0</fScale>
+			<Path>Art/Effects/FF_Engine_Glow/FF_Engine_Glow.nif</Path>
+		</AttachableInfo>
+		<AttachableInfo>
+			<Type>ATTACHABLE_INVASIONSHIP_THRUST</Type>
+			<Description>Invasion Ship Engine Thrust</Description>
+			<fScale>0.8</fScale>
+			<Path>Art/Effects/FF_Engine_Thrust/FF_Engine_Thrust.nif</Path>
+		</AttachableInfo>
+		<AttachableInfo>
+			<Type>ATTACHABLE_INVASIONSHIP_FORCEFIELD</Type>
+			<Description>Invasion Ship Forcefield</Description>
+			<fScale>1.0</fScale>
+			<Path>Art/Effects/FF_Forcefield/FF_FOrcefield.nif</Path>
+		</AttachableInfo>
+		<AttachableInfo>
+			<Type>ATTACHABLE_INVASIONSHIP_GLOW_BIG</Type>
+			<Description>Invasion Ship Engine Glow</Description>
+			<fScale>1.8</fScale>
+			<Path>Art/Effects/FF_Engine_Glow/FF_Engine_Glow.nif</Path>
+		</AttachableInfo>
 	</AttachableInfos>
 </Civ4AttachableInfos>

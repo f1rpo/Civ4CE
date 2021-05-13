@@ -68,8 +68,8 @@ class CvIntroMovieScreen:
 		# Logos
 		screen.setImageButton( "Logos", ArtFileMgr.getInterfaceArtInfo("INTRO_LOGOS").getPath(), screen.centerX(0)+233, screen.centerY(0)+331, 549, 294, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 		
-		screen.setLabel( "LegalText1", "Background", "<font=2>" + localText.getText("TXT_LEGAL_LINE_1", ()) + "</font>", CvUtil.FONT_CENTER_JUSTIFY, screen.centerX(0)+512, screen.centerY(0)+654, -0.1, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-		screen.setLabel( "LegalText2", "Background", "<font=2>" + localText.getText("TXT_LEGAL_LINE_2", ()) + "</font>", CvUtil.FONT_CENTER_JUSTIFY, screen.centerX(0)+512, screen.centerY(0)+674, -0.1, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
+		screen.addMultilineText("LegalText1", "<font=1>" + localText.getText("TXT_LEGAL_LINE_1", ()) + "</font>", screen.centerX(0)+110, screen.centerY(0)+590, 804, 200, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+		screen.setLabel( "LegalText2", "Background", "<font=2>" + localText.getText("TXT_LEGAL_LINE_2", ()) + "</font>", CvUtil.FONT_CENTER_JUSTIFY, screen.centerX(0)+512, screen.centerY(0)+740, -0.1, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 		screen.setShowFor( 4000 )
 
 	def closeScreen(self):
@@ -84,17 +84,24 @@ class CvIntroMovieScreen:
 	def handleInput (self, inputClass):
 		screen = CyGInterfaceScreen( "IntroMovieScreen", CvScreenEnums.INTRO_MOVIE_SCREEN )
 		if (inputClass.getNotifyCode() == NotifyCode.NOTIFY_MOVIE_DONE or inputClass.getNotifyCode() == NotifyCode.NOTIFY_CLICKED or inputClass.getNotifyCode() == NotifyCode.NOTIFY_CHARACTER):
-			if self.bMovieState == 2:
+			if (inputClass.getNotifyCode() != NotifyCode.NOTIFY_MOVIE_DONE):
+				setNoIntroMovie(true)
+			if self.bMovieState == 3:
 				return self.hideScreen()
-			elif self.bMovieState == 1:
-				self.bMovieState = 2
+			elif self.bMovieState == 2:
+				self.bMovieState = 3
 				self.currentMovie = "ART_DEF_MOVIE_INTRO"
 				self.closeScreen()
 				self.createMovieScreen( "ART_DEF_MOVIE_INTRO" )
-			else:
-				self.bMovieState = 1
+			elif self.bMovieState == 1:
+				self.bMovieState = 2
 				self.closeScreen()
 				self.createLogoScreen()
+			else:
+				self.bMovieState = 1
+				self.currentMovie = "ART_DEF_MOVIE_NVIDIA_INTRO"
+				self.closeScreen()
+				self.createMovieScreen( "ART_DEF_MOVIE_NVIDIA_INTRO" )
 		return 0
 
 	def update(self, fDelta):

@@ -278,9 +278,9 @@ class PyPlayer:
 		"none - spawns unitIdx at X, Y - ALWAYS use default UnitAIType"
 		if (iNum > 1): #multiple units
 			for i in range(iNum):
-				self.player.initUnit(unitID, X, Y, UnitAITypes.NO_UNITAI)
+				self.player.initUnit(unitID, X, Y, UnitAITypes.NO_UNITAI, DirectionTypes.NO_DIRECTION)
 		else:
-			self.player.initUnit(unitID, X, Y, UnitAITypes.NO_UNITAI)
+			return self.player.initUnit(unitID, X, Y, UnitAITypes.NO_UNITAI, DirectionTypes.NO_DIRECTION)
 	
 	def hasUnitType(self, iUnit):
 		' bool - Has iUnit? '
@@ -465,9 +465,9 @@ class PyCity:
 		"int - Unhappy Population"
 		return self.city.unhappyLevel(0)
 		
-	def hasBuilding(self, iBuildingID):
-		"bool - Whether or not this city has iBuildingID"
-		return self.city.hasBuilding(iBuildingID)
+	def getNumBuilding(self, iBuildingID):
+		"int - Number of iBuildingIDs this city has"
+		return self.city.getNumBuilding(iBuildingID)
 		
 	def canTrain (self, iUnit):
 		return self.city.canTrain(iUnit, False, False)
@@ -532,6 +532,14 @@ class PyCity:
 		"int - Total Production Yield"
 		return self.city.getCommerceRate(CommerceTypes.COMMERCE_RESEARCH)
 	
+	def getGoldRate(self):
+		"int - Total Production Yield"
+		return self.city.getCommerceRate(CommerceTypes.COMMERCE_GOLD)
+	
+	def getEspionageRate(self):
+		"int - Total Production Yield"
+		return self.city.getCommerceRate(CommerceTypes.COMMERCE_ESPIONAGE)
+	
 	def getProductionName(self):
 		"str - Current Productions Name"
 		return self.city.getProductionName()
@@ -586,11 +594,11 @@ class PyCity:
 	
 	def initUnit(self, iUnitID):
 		plot = self.plot()
-		gc.getActivePlayer().initUnit( iUnitID, plot.getX(), plot.getY(), UnitAITypes.NO_UNITAI )
+		gc.getActivePlayer().initUnit( iUnitID, plot.getX(), plot.getY(), UnitAITypes.NO_UNITAI, DirectionTypes.NO_DIRECTION )
 	
-	def hasBuildingIdx(self, buildingIdx):
-		"bool - City has buildingIdx?"
-		if (self.city.hasBuilding(buildingIdx)):
+	def getNumBuildingIdx(self, buildingIdx):
+		"int - How many buildingIdx city has?"
+		if (self.city.getNumBuilding(buildingIdx)):
 			return True
 		return False
 	
@@ -619,6 +627,26 @@ class PyCity:
 				lReligions.append(i)
 		return lReligions
 	
+	def hasCorporation(self, corporationIdx):
+		"bool - City has corporationIdx?"
+		if (self.city.isHasCorporation(corporationIdx)):
+			return True
+		return False
+	
+	def getHeadquarters(self):
+		lHeadquarters = []
+		for i in range(gc.getNumCorporationInfos()):
+			if self.city.isHeadquartersByType(i):
+				lHeadquarters.append(i)
+		return lHeadquarters
+	
+	def getCorporations(self):
+		lCorporations = []
+		for i in range(gc.getNumCorporationInfos()):
+			if self.hasCorporation(i):
+				lCorporations.append(i)
+		return lCorporations
+	
 	def isCapital(self):
 		"bool - City is capital?"
 		if self.city.isCapital():
@@ -638,9 +666,9 @@ class PyCity:
 		if plot:
 			engine.LookAt(plot.getPoint(), true)
 	
-	def setHasRealBuildingIdx(self, buildingIdx, bAdd):
+	def setNumRealBuildingIdx(self, buildingIdx, iNum):
 		"none - Add or Remove (bAdd) by buildingIdx"
-		return self.city.setHasRealBuilding(buildingIdx, bAdd)
+		return self.city.setNumRealBuilding(buildingIdx, iNum)
 
 	def getBuildingList(self):
 		"intList - List of all buildingIdx in the city"
@@ -649,7 +677,7 @@ class PyCity:
 		buildingList=[]
 		
 		for buildingIdx in range(numBuildingInfos):
-			if (self.hasBuildingIdx( buildingIdx )):
+			if (self.getNumBuildingIdx( buildingIdx )):
 				buildingList.append( buildingIdx )
 		return buildingList
 	

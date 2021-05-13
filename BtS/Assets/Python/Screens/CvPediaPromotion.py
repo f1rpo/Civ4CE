@@ -154,6 +154,10 @@ class CvPediaPromotion:
 		if (eTech > -1):
 			screen.attachImageButton( panelName, "", gc.getTechInfo(eTech).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, eTech, 1, False )		
 						
+		eReligion = gc.getPromotionInfo(self.iPromotion).getStateReligionPrereq()
+		if (eReligion > -1):
+			screen.attachImageButton( panelName, "", gc.getReligionInfo(eReligion).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_RELIGION, eReligion, 1, False )		
+						
 	def placeSpecial(self):
 
 		screen = self.top.getScreen()
@@ -164,8 +168,8 @@ class CvPediaPromotion:
 		
 		listName = self.top.getNextWidgetName()
 		
-		szSpecialText = CyGameTextMgr().getPromotionHelp(self.iPromotion, True)
-		screen.addMultilineText(listName, szSpecialText, self.X_SPECIAL_PANE+5, self.Y_SPECIAL_PANE+5, self.W_SPECIAL_PANE-10, self.H_SPECIAL_PANE-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
+		szSpecialText = CyGameTextMgr().getPromotionHelp(self.iPromotion, True)[1:]
+		screen.addMultilineText(listName, szSpecialText, self.X_SPECIAL_PANE+5, self.Y_SPECIAL_PANE+30, self.W_SPECIAL_PANE-10, self.H_SPECIAL_PANE-35, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
 
 	def placeUnitGroups(self):
 		screen = self.top.getScreen()
@@ -182,7 +186,7 @@ class CvPediaPromotion:
 		for iI in range(gc.getNumUnitCombatInfos()):
 			if (0 != gc.getPromotionInfo(self.iPromotion).getUnitCombat(iI)):
 				iRow = screen.appendTableRow(szTable)
-				screen.setTableText(szTable, 0, i, u"<font=4>" + gc.getUnitCombatInfo(iI).getDescription() + u"</font>", gc.getUnitCombatInfo(iI).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT_COMBAT, iI, -1, CvUtil.FONT_LEFT_JUSTIFY)
+				screen.setTableText(szTable, 0, i, u"<font=2>" + gc.getUnitCombatInfo(iI).getDescription() + u"</font>", gc.getUnitCombatInfo(iI).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT_COMBAT, iI, -1, CvUtil.FONT_LEFT_JUSTIFY)
 				i += 1
 
 	def placeLinks(self, bRedraw):
@@ -203,10 +207,13 @@ class CvPediaPromotion:
 		for iI in range(gc.getNumPromotionInfos()):
 			if (not gc.getPromotionInfo(listSorted[iI][1]).isGraphicalOnly()):
 				if bRedraw:
-					screen.appendListBoxString( self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
+					screen.appendListBoxStringNoUpdate( self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
 				if listSorted[iI][1] == self.iPromotion:
 					iSelected = i			
 				i += 1
+				
+		if bRedraw:
+			screen.updateListBox(self.top.LIST_ID)
 
 		screen.setSelectedListBoxStringGFC(self.top.LIST_ID, iSelected)
 

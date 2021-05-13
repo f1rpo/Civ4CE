@@ -138,6 +138,11 @@ def getGridSize(argsList):
 		WorldSizeTypes.WORLDSIZE_HUGE:		(38,24)
 	}
 
+	if (argsList[0] == -1): # (-1,) is passed to function on loads
+		return []
+	[eWorldSize] = argsList
+	return grid_sizes[eWorldSize]
+
 def minStartingDistanceModifier():
 	return -20
 

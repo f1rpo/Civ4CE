@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Greg Cunningham (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Firaxis Games (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -142,6 +142,14 @@
 			<fScale>1.0</fScale>
 			<fUpdateRate>1.0</fUpdateRate>
 			<Path>Art/Shared/PawPrint.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_MECHPRINT</Type>
+			<Description>Assault Mech Print</Description>
+			<fScale>5.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Shared/MechPrint.nif</Path>
 			<bIsProjectile>0</bIsProjectile>
 		</EffectInfo>
 		<EffectInfo>
@@ -1745,6 +1753,14 @@
 			<bIsProjectile>0</bIsProjectile>
 		</EffectInfo>
 		<EffectInfo>
+			<Type>EFFECT_ENEMY_GLOW_UNIT</Type>
+			<Description>Enemy glow for unit</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Effects/Unit_Enemy_Presence/fx_Unit_Enemy_Presence.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
 			<Type>EFFECT_PROMOTION_INTERFACE</Type>
 			<Description>Promotion for Interface</Description>
 			<fScale>1.0</fScale>
@@ -2303,6 +2319,14 @@
 		</EffectInfo>
 		<!--Cities:-->
 		<EffectInfo>
+			<Type>EFFECT_SHRINE_FLAMES</Type>
+			<Description>Fire for AGE OF GODS Ianna shrine</Description>
+			<fScale>3.5</fScale>
+			<fUpdateRate>0.8</fUpdateRate>
+			<Path>Art/Effects/fire_torch/fx_fire_torch.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
 			<Type>EFFECT_CHIMNEY_SMOKE_01</Type>
 			<Description>Chimney smoke for cities (variation)</Description>
 			<fScale>1.0</fScale>
@@ -2413,6 +2437,112 @@
 			<fScale>1.0</fScale>
 			<fUpdateRate>1.0</fUpdateRate>
 			<Path>Art/Effects/PrototypeEffects/Galley/GalleyArrows.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_MISSILE_LARGE_HIT</Type>
+			<Description>Small explosion for Invasion Ship</Description>
+			<fScale>3.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Effects/FF_explosion_large/FF_explosion_large.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+
+		<!--Final Frontier Unit Effects:-->
+		<EffectInfo>
+			<Type>EFFECT_INVASIONSHIP_SMALL_HIT</Type>
+			<Description>Large explosion for Invasion Ship</Description>
+			<fScale>0.3</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Effects/FF_explosion_large/FF_explosion_large.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_INVASIONSHIP_LARGE_HIT</Type>
+			<Description>Small explosion for Invasion Ship</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Effects/FF_explosion_large/FF_explosion_large.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_INVASIONSHIP_LASER</Type>
+			<Description>Powerup laser effect</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Effects/FF_powerUp_laser/FF_powerUp_laser.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_INVASIONSHIP_FLAK</Type>
+			<Description>Powerup laser effect</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Effects/FF_Flak_Fire/fx_weapon_flak.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_INVASIONSHIP_LASERBEAM</Type>
+			<Description>Powerup laser effect</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Effects/FF_Laserbeam/fx_laserbeam.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_INVASIONSHIP_TORPEDO</Type>
+			<Description>Powerup laser effect</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Effects/FF_Torpedo/fx_torpedo.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_INVASIONSHIP_LASERFIRE</Type>
+			<Description>Standard laser effect</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Effects/FF_Laser_Fire/fx_laser_fire.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_INVASIONSHIP_LASERFIRESMALL</Type>
+			<Description>Smaller laser effect</Description>
+			<fScale>0.6</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Effects/FF_Laser_Fire/fx_laser_fire_small.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_INVASIONSHIP_LASERFIRE_BIG</Type>
+			<Description>Standard laser effect</Description>
+			<fScale>2.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Effects/FF_Laser_Fire/fx_laser_fire.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_RED_EYELASER</Type>
+			<Description>Red pulse cannon</Description>
+			<fScale>0.5</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Effects/Red_Laser/fx_redlaser.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_FRONTIER_SIGNAL</Type>
+			<Description>Space radio signals</Description>
+			<fScale>1.0</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Effects/FF_Signal/ff_signal.nif</Path>
+			<bIsProjectile>0</bIsProjectile>
+		</EffectInfo>
+		<EffectInfo>
+			<Type>EFFECT_FF_TRANSPORT</Type>
+			<Description>Colony settling effect</Description>
+			<fScale>0.3</fScale>
+			<fUpdateRate>1.0</fUpdateRate>
+			<Path>Art/Effects/FF_Transporter/fx_transporter.nif</Path>
 			<bIsProjectile>0</bIsProjectile>
 		</EffectInfo>
 	</EffectInfos>

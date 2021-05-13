@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Tim McCracken (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -6,11 +7,11 @@
 <Civ4Defines xmlns="x-schema:CIV4GlobalDefinesSchema.xml">
 	<Define>
 		<DefineName>CIV4_VERSION</DefineName>
-		<iDefineIntVal>213</iDefineIntVal>
+		<iDefineIntVal>301</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>SAVE_VERSION</DefineName>
-		<iDefineIntVal>200</iDefineIntVal>
+		<iDefineIntVal>300</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>MAX_NUM_LANGUAGES</DefineName>
@@ -141,6 +142,10 @@
 		<fDefineFloatVal>5</fDefineFloatVal>
 	</Define>
 	<Define>
+		<DefineName>RECON_VISIBILITY_RANGE</DefineName>
+		<iDefineIntVal>5</iDefineIntVal>
+	</Define>
+	<Define>
 		<DefineName>PLOT_VISIBILITY_RANGE</DefineName>
 		<iDefineIntVal>1</iDefineIntVal>
 	</Define>
@@ -225,6 +230,14 @@
 		<iDefineIntVal>1</iDefineIntVal>
 	</Define>
 	<Define>
+		<DefineName>CITY_FREE_CULTURE_GROWTH_FACTOR</DefineName>
+		<iDefineIntVal>20</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>GREAT_WORKS_CULTURE_TURNS</DefineName>
+		<iDefineIntVal>20</iDefineIntVal>
+	</Define>
+	<Define>
 		<DefineName>OWNERSHIP_SCORE_DURATION_THRESHOLD</DefineName>
 		<iDefineIntVal>20</iDefineIntVal>
 	</Define>
@@ -281,6 +294,14 @@
 		<iDefineIntVal>4</iDefineIntVal>
 	</Define>
 	<Define>
+		<DefineName>NUM_CORPORATION_PREREQ_BONUSES</DefineName>
+		<iDefineIntVal>5</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>NUM_ROUTE_PREREQ_OR_BONUSES</DefineName>
+		<iDefineIntVal>2</iDefineIntVal>
+	</Define>
+	<Define>
 		<DefineName>MAX_WORLD_WONDERS_PER_CITY</DefineName>
 		<iDefineIntVal>-1</iDefineIntVal>
 	</Define>
@@ -291,6 +312,10 @@
 	<Define>
 		<DefineName>MAX_NATIONAL_WONDERS_PER_CITY</DefineName>
 		<iDefineIntVal>2</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>MAX_NATIONAL_WONDERS_PER_CITY_FOR_OCC</DefineName>
+		<iDefineIntVal>5</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>MAX_BUILDINGS_PER_CITY</DefineName>
@@ -337,6 +362,10 @@
 		<iDefineIntVal>2</iDefineIntVal>
 	</Define>
 	<Define>
+		<DefineName>POWER_HEALTH_CHANGE</DefineName>
+		<iDefineIntVal>-2</iDefineIntVal>
+	</Define>
+	<Define>
 		<DefineName>DIRTY_POWER_HEALTH_CHANGE</DefineName>
 		<iDefineIntVal>-2</iDefineIntVal>
 	</Define>
@@ -366,6 +395,22 @@
 	</Define>
 	<Define>
 		<DefineName>AIR_COMBAT_DAMAGE</DefineName>
+		<iDefineIntVal>30</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>INTERCEPTION_MAX_ROUNDS</DefineName>
+		<iDefineIntVal>5</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>MAX_INTERCEPTION_DAMAGE</DefineName>
+		<iDefineIntVal>50</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>MIN_INTERCEPTION_DAMAGE</DefineName>
+		<iDefineIntVal>10</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>RANGE_COMBAT_DAMAGE</DefineName>
 		<iDefineIntVal>30</iDefineIntVal>
 	</Define>
 	<Define>
@@ -410,6 +455,10 @@
 	</Define>
 	<Define>
 		<DefineName>FOUND_RELIGION_CITY_RAND</DefineName>
+		<iDefineIntVal>10</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>FOUND_CORPORATION_CITY_RAND</DefineName>
 		<iDefineIntVal>10</iDefineIntVal>
 	</Define>
 	<Define>
@@ -522,7 +571,7 @@
 	</Define>
 	<Define>
 		<DefineName>BASE_GOLDEN_AGE_UNITS</DefineName>
-		<iDefineIntVal>2</iDefineIntVal>
+		<iDefineIntVal>1</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>GOLDEN_AGE_UNITS_MULTIPLIER</DefineName>
@@ -531,6 +580,10 @@
 	<Define>
 		<DefineName>GOLDEN_AGE_LENGTH</DefineName>
 		<iDefineIntVal>8</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>GOLDEN_AGE_GREAT_PEOPLE_MODIFIER</DefineName>
+		<iDefineIntVal>100</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>HILLS_EXTRA_MOVEMENT</DefineName>
@@ -551,6 +604,10 @@
 	<Define>
 		<DefineName>CAPITAL_TRADE_MODIFIER</DefineName>
 		<iDefineIntVal>25</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>OVERSEAS_TRADE_MODIFIER</DefineName>
+		<iDefineIntVal>100</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>FOREIGN_TRADE_MODIFIER</DefineName>
@@ -777,6 +834,18 @@
 		<iDefineIntVal>10</iDefineIntVal>
 	</Define>
 	<Define>
+		<DefineName>DEFY_RESOLUTION_POP_ANGER</DefineName>
+		<iDefineIntVal>5</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>DEFY_RESOLUTION_ANGER_DIVISOR</DefineName>
+		<iDefineIntVal>20</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>TEMP_HAPPY</DefineName>
+		<iDefineIntVal>1</iDefineIntVal>
+	</Define>
+	<Define>
 		<DefineName>BASE_WAR_WEARINESS_MULTIPLIER</DefineName>
 		<iDefineIntVal>5</iDefineIntVal>
 	</Define>
@@ -972,10 +1041,6 @@
 	</Define>
 	<!-- Unit health bar positioning, formerly controlled by UNIT_INFO_Z_OFFSET, is now controlled by the UNIT_HEALTH_BILLBOARD_* faders in CIV4DetailManager.xml -->
 	<Define>
-		<DefineName>DIPLO_VOTE_TURN_FREQUENCY</DefineName>
-		<iDefineIntVal>4</iDefineIntVal>
-	</Define>
-	<Define>
 		<DefineName>DIPLO_VOTE_SECRETARY_GENERAL_INTERVAL</DefineName>
 		<iDefineIntVal>4</iDefineIntVal>
 	</Define>
@@ -1004,6 +1069,10 @@
 		<iDefineIntVal>1000</iDefineIntVal>
 	</Define>
 	<Define>
+		<DefineName>CORPORATION_FOREIGN_SPREAD_COST_PERCENT</DefineName>
+		<iDefineIntVal>200</iDefineIntVal>
+	</Define>
+	<Define>
 		<DefineName>HOLY_CITY_INFLUENCE</DefineName>
 		<iDefineIntVal>1</iDefineIntVal>
 	</Define>
@@ -1020,6 +1089,34 @@
 		<fDefineFloatVal>180.0</fDefineFloatVal>
 	</Define>
 	<Define>
+		<DefineName>DISABLE_CLOSE_ZOOM_MODE</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>CAMERA_UPPER_PITCH</DefineName>
+		<fDefineFloatVal>-90.0</fDefineFloatVal>
+	</Define>
+	<Define>
+		<DefineName>CAMERA_LOWER_PITCH</DefineName>
+		<fDefineFloatVal>-28.0</fDefineFloatVal>
+	</Define>
+	<Define>
+		<DefineName>CAMERA_MIN_SCROLL_SPEED</DefineName>
+		<fDefineFloatVal>300</fDefineFloatVal>
+	</Define>
+	<Define>
+		<DefineName>CAMERA_MAX_SCROLL_SPEED</DefineName>
+		<fDefineFloatVal>1800</fDefineFloatVal>
+	</Define>
+	<Define>
+		<DefineName>CAMERA_MIN_YAW</DefineName>
+		<fDefineFloatVal>-45.0</fDefineFloatVal>
+	</Define>
+	<Define>
+		<DefineName>CAMERA_MAX_YAW</DefineName>
+		<fDefineFloatVal>45.0</fDefineFloatVal>
+	</Define>
+	<Define>
 		<DefineName>CAMERA_START_DISTANCE</DefineName>
 		<fDefineFloatVal>2200</fDefineFloatVal>
 	</Define>
@@ -1031,6 +1128,10 @@
 		<DefineName>CAMERA_MIN_DISTANCE</DefineName>
 		<fDefineFloatVal>700</fDefineFloatVal>
 	</Define>
+	<Define>
+		<DefineName>CAMERA_MAX_TURN_OFFSET</DefineName>
+		<fDefineFloatVal>0.1</fDefineFloatVal>
+	</Define>
 	<!-- Controlling the camera's maximum distance is a bit tricky since differently-sized maps need the camera to move back different amounts
 	     There is a lower-bound on the maximum distance, specified below. Thus, the camera will never get any closer than 7000 units.
 	     To actually tweak the apparent-size of the globe when fully-back, you need to go into CIV4DetailManager.XML  and adjust the
@@ -1040,7 +1141,27 @@
 		<fDefineFloatVal>7000</fDefineFloatVal>
 	</Define>
 	<Define>
+		<DefineName>CAMERA_FORCE_TO_SMALLEST_MAX_DISTANCE</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>CAMERA_NEAR_FAR_PLANE_RATIO</DefineName>
+		<fDefineFloatVal>100</fDefineFloatVal>
+	</Define>
+	<Define>
 		<DefineName>ALLOW_UNIT_SCALE_ADJUST_ON_ZOOM</DefineName>
+		<iDefineIntVal>1</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>RENDER_AREABORDER_UNDER_FEATURES</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>RENDER_GLOBEVIEW_CLOUDS</DefineName>
+		<iDefineIntVal>1</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>RENDER_WATER</DefineName>
 		<iDefineIntVal>1</iDefineIntVal>
 	</Define>
 	<Define>
@@ -1056,12 +1177,12 @@
 		<fDefineFloatVal>900</fDefineFloatVal>
 	</Define>
 	<Define>
-		<DefineName>EFFECT_DEFAULT_SIZE</DefineName>
-		<fDefineFloatVal>50.0</fDefineFloatVal>
+		<DefineName>CAMERA_FAR_CLIP_Z_HEIGHT</DefineName>
+		<fDefineFloatVal>0</fDefineFloatVal>
 	</Define>
 	<Define>
-		<DefineName>COMBAT_SYNCH_DIE_FADE</DefineName>
-		<iDefineIntVal>0</iDefineIntVal>
+		<DefineName>EFFECT_DEFAULT_SIZE</DefineName>
+		<fDefineFloatVal>50.0</fDefineFloatVal>
 	</Define>
 	<Define>
 		<DefineName>UNIT_MULTISELECT_MAX</DefineName>
@@ -1173,7 +1294,7 @@
 	<Define>
 		<DefineName>UNIT_TRAIL_RESOLUTION</DefineName>
 		<!--The resolution of the wake/trail left by units-->
-		<fDefineFloatVal>10.0</fDefineFloatVal>
+		<fDefineFloatVal>5.0</fDefineFloatVal>
 	</Define>
 	<Define>
 		<DefineName>SCORE_POPULATION_FACTOR</DefineName>
@@ -1277,6 +1398,14 @@
 		<iDefineIntVal>90</iDefineIntVal>
 	</Define>
 	<Define>
+		<DefineName>MAX_INTERCEPTION_PROBABILITY</DefineName>
+		<iDefineIntVal>100</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>MAX_EVASION_PROBABILITY</DefineName>
+		<iDefineIntVal>90</iDefineIntVal>
+	</Define>
+	<Define>
 		<DefineName>PLAYER_ALWAYS_RAZES_CITIES</DefineName>
 		<iDefineIntVal>0</iDefineIntVal>
 	</Define>
@@ -1287,5 +1416,226 @@
 	<Define>
 		<DefineName>MIN_CITY_ATTACK_MODIFIER_FOR_SIEGE_TOWER</DefineName>
 		<iDefineIntVal>10</iDefineIntVal>
+	</Define>
+	<!-- Each 'whatever' modifies cost of espionage Missions by this % -->
+	<Define>
+		<DefineName>ESPIONAGE_CITY_POP_EACH_MOD</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ESPIONAGE_CITY_TRADE_ROUTE_MOD</DefineName>
+		<iDefineIntVal>-20</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ESPIONAGE_CITY_RELIGION_STATE_MOD</DefineName>
+		<iDefineIntVal>-15</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ESPIONAGE_CITY_HOLY_CITY_MOD</DefineName>
+		<iDefineIntVal>-25</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ESPIONAGE_CULTURE_MULTIPLIER_MOD</DefineName>
+		<iDefineIntVal>50</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ESPIONAGE_DISTANCE_MULTIPLIER_MOD</DefineName>
+		<iDefineIntVal>100</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ESPIONAGE_SPENDING_MULTIPLIER</DefineName>
+		<iDefineIntVal>100</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ESPIONAGE_EACH_TURN_UNIT_COST_DECREASE</DefineName>
+		<iDefineIntVal>10</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ESPIONAGE_INTERCEPT_SPENDING_MAX</DefineName>
+		<iDefineIntVal>25</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ESPIONAGE_INTERCEPT_COUNTERSPY</DefineName>
+		<iDefineIntVal>15</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ESPIONAGE_INTERCEPT_COUNTERESPIONAGE_MISSION</DefineName>
+		<iDefineIntVal>20</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ESPIONAGE_INTERCEPT_RECENT_MISSION</DefineName>
+		<iDefineIntVal>15</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ESPIONAGE_SPY_REVEAL_IDENTITY_PERCENT</DefineName>
+		<iDefineIntVal>25</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ESPIONAGE_SPY_INTERCEPT_MOD</DefineName>
+		<iDefineIntVal>-75</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ESPIONAGE_SPY_NO_INTRUDE_INTERCEPT_MOD</DefineName>
+		<iDefineIntVal>-90</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ESPIONAGE_SPY_MISSION_ESCAPE_MOD</DefineName>
+		<iDefineIntVal>-50</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>FOW_WAS_VISIBLE_COLOR</DefineName>
+		<fDefineFloatVal>0.43</fDefineFloatVal>
+	</Define>
+	<Define>
+		<DefineName>FOW_MINIMAP_WAS_VISIBLE_COLOR</DefineName>
+		<fDefineFloatVal>0.43</fDefineFloatVal>
+	</Define>
+	<Define>
+		<DefineName>CITY_SCREEN_FOG_ENABLED</DefineName>
+		<iDefineIntVal>1</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>AI_CAN_DISBAND_UNITS</DefineName>
+		<iDefineIntVal>1</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>CAMERA_CITY_TURN</DefineName>
+		<fDefineFloatVal>0</fDefineFloatVal>
+	</Define>
+	<Define>
+		<DefineName>CAMERA_CITY_NO_PITCH</DefineName>
+		<iDefineIntVal>1</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>CAMERA_SPECIAL_PITCH</DefineName>
+		<fDefineFloatVal>-90.0</fDefineFloatVal>
+	</Define>
+	<Define>
+		<DefineName>CITY_SCREEN_CLICK_WILL_EXIT</DefineName>
+		<iDefineIntVal>1</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>WATER_POTENTIAL_CITY_WORK_FOR_AREA</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>LAND_UNITS_CAN_ATTACK_WATER_CITIES</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>CITY_MAX_NUM_BUILDINGS</DefineName>
+		<iDefineIntVal>1</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>RANGED_ATTACKS_USE_MOVES</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>AI_SHOULDNT_MANAGE_PLOT_ASSIGNMENT</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ROUTE_Z_BIAS</DefineName>
+		<fDefineFloatVal>3</fDefineFloatVal>
+	</Define>
+	<Define>
+		<DefineName>RIVER_Z_BIAS</DefineName>
+		<fDefineFloatVal>3</fDefineFloatVal>
+	</Define>
+	<Define>
+		<DefineName>ADVANCED_START_ALLOW_UNITS_OUTSIDE_CITIES</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ADVANCED_START_MAX_UNITS_PER_CITY</DefineName>
+		<iDefineIntVal>2</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ADVANCED_START_SIGHT_RANGE</DefineName>
+		<iDefineIntVal>4</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ADVANCED_START_CITY_COST</DefineName>
+		<iDefineIntVal>67</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ADVANCED_START_CITY_COST_INCREASE</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ADVANCED_START_POPULATION_COST</DefineName>
+		<iDefineIntVal>150</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ADVANCED_START_POPULATION_COST_INCREASE</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ADVANCED_START_CULTURE_COST</DefineName>
+		<iDefineIntVal>25</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ADVANCED_START_CULTURE_COST_INCREASE</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ADVANCED_START_VISIBILITY_COST</DefineName>
+		<iDefineIntVal>2</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ADVANCED_START_VISIBILITY_COST_INCREASE</DefineName>
+		<iDefineIntVal>3</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>ADVANCED_START_CITY_PLACEMENT_MAX_RANGE</DefineName>
+		<iDefineIntVal>6</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>NEW_CITY_BUILDING_VALUE_MODIFIER</DefineName>
+		<iDefineIntVal>-60</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>IGNORE_PLOT_GROUP_FOR_TRADE_ROUTES</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>EVENT_PROBABILITY_ROLL_SIDES</DefineName>
+		<iDefineIntVal>100</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>FIRST_EVENT_DELAY_TURNS</DefineName>
+		<iDefineIntVal>20</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>CIVILOPEDIA_SHOW_ACTIVE_CIVS_ONLY</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>USE_MODDERS_PLAYEROPTION_1</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>USE_MODDERS_PLAYEROPTION_2</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>USE_MODDERS_PLAYEROPTION_3</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>CITY_AIR_UNIT_CAPACITY</DefineName>
+		<iDefineIntVal>4</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>COLONY_NUM_FREE_DEFENDERS</DefineName>
+		<iDefineIntVal>2</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>SHIP_BLOCKADE_RANGE</DefineName>
+		<iDefineIntVal>3</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>PATH_DAMAGE_WEIGHT</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
 	</Define>
 </Civ4Defines>

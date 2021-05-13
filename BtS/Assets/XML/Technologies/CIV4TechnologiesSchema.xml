@@ -13,6 +13,8 @@
 	<ElementType name="iAIWeight" content="textOnly" dt:type="int"/>
 	<ElementType name="iAITradeModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iCost" content="textOnly" dt:type="int"/>
+	<ElementType name="iAdvancedStartCost" content="textOnly" dt:type="int"/>
+	<ElementType name="iAdvancedStartCostIncrease" content="textOnly" dt:type="int"/>
 	<ElementType name="Era" content="textOnly"/>
 	<ElementType name="FirstFreeUnitClass" content="textOnly"/>
 	<ElementType name="iFeatureProductionModifier" content="textOnly" dt:type="int"/>
@@ -56,6 +58,7 @@
 	<ElementType name="CommerceFlexible" content="eltOnly">
 		<element type="bFlexible" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
+	<ElementType name="bRiverTrade" content="textOnly" dt:type="boolean"/>
 	<ElementType name="TerrainType" content="textOnly"/>
 	<ElementType name="bTerrainTrade" content="textOnly" dt:type="boolean"/>
 	<ElementType name="TerrainTrade" content="eltOnly">
@@ -101,6 +104,8 @@
 		<element type="iAIWeight"/>
 		<element type="iAITradeModifier"/>
 		<element type="iCost"/>
+		<element type="iAdvancedStartCost"/>
+		<element type="iAdvancedStartCostIncrease"/>
 		<element type="Era"/>
 		<element type="FirstFreeUnitClass"/>
 		<element type="iFeatureProductionModifier" minOccurs="0"/>
@@ -134,6 +139,7 @@
 		<element type="DomainExtraMoves"/>
 		<element type="CommerceFlexible"/>
 		<element type="TerrainTrades"/>
+		<element type="bRiverTrade"/>
 		<element type="Flavors"/>
 		<element type="OrPreReqs"/>
 		<element type="AndPreReqs"/>

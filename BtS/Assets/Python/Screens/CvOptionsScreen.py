@@ -99,6 +99,7 @@ class CvOptionsScreen:
 		self.getTabControl().setValue("GraphicsLevelDropdownBox", UserProfile.getGraphicsLevel() )
 		self.getTabControl().setValue("RenderQualityDropdownBox", UserProfile.getRenderQualityLevel() )
 		self.getTabControl().setValue("GlobeViewDropdownBox", UserProfile.getGlobeViewRenderLevel() )
+		self.getTabControl().setValue("MainMenuDropdownBox", UserProfile.getMainMenu() )
 		
 		# Graphic Option Checkboxes
 		for iOptionLoop in range(GraphicOptionTypes.NUM_GRAPHICOPTION_TYPES):
@@ -272,18 +273,33 @@ class CvOptionsScreen:
 		
 		i = 0
 		for iOptionLoop in range(PlayerOptionTypes.NUM_PLAYEROPTION_TYPES):
-			szOptionDesc = gc.getPlayerOptionsInfoByIndex(iOptionLoop).getDescription()
-			szHelp = gc.getPlayerOptionsInfoByIndex(iOptionLoop).getHelp()
-			szCallbackFunction = "handleGameOptionsClicked"
-			szWidgetName = "GameOptionCheckBox_" + str(iOptionLoop)
-			bOptionOn = UserProfile.getPlayerOption(iOptionLoop)#gc.getPlayer(gc.getGame().getActivePlayer()).isOption(iOptionLoop)
-			if ((i+1) <= (PlayerOptionTypes.NUM_PLAYEROPTION_TYPES+1)/2): 
-				vbox = "GameVBox1"
-			else: 
-				vbox = "GameVBox2"
-			tab.attachCheckBox(vbox, szWidgetName, szOptionDesc, self.callbackIFace, szCallbackFunction, szWidgetName, bOptionOn)
-			tab.setToolTip(szWidgetName, szHelp)
-			i += 1
+			
+			bContinue = true
+			
+			if (iOptionLoop == PlayerOptionTypes.PLAYEROPTION_MODDER_1):
+				if (gc.getDefineINT("USE_MODDERS_PLAYEROPTION_1") == 0):
+					bContinue = false
+			elif (iOptionLoop == PlayerOptionTypes.PLAYEROPTION_MODDER_2):
+				if (gc.getDefineINT("USE_MODDERS_PLAYEROPTION_2") == 0):
+					bContinue = false
+			elif (iOptionLoop == PlayerOptionTypes.PLAYEROPTION_MODDER_3):
+				if (gc.getDefineINT("USE_MODDERS_PLAYEROPTION_3") == 0):
+					bContinue = false
+			
+			if (bContinue):
+				
+				szOptionDesc = gc.getPlayerOptionsInfoByIndex(iOptionLoop).getDescription()
+				szHelp = gc.getPlayerOptionsInfoByIndex(iOptionLoop).getHelp()
+				szCallbackFunction = "handleGameOptionsClicked"
+				szWidgetName = "GameOptionCheckBox_" + str(iOptionLoop)
+				bOptionOn = UserProfile.getPlayerOption(iOptionLoop)#gc.getPlayer(gc.getGame().getActivePlayer()).isOption(iOptionLoop)
+				if ((i+1) <= (PlayerOptionTypes.NUM_PLAYEROPTION_TYPES+1)/2): 
+					vbox = "GameVBox1"
+				else: 
+					vbox = "GameVBox2"
+				tab.attachCheckBox(vbox, szWidgetName, szOptionDesc, self.callbackIFace, szCallbackFunction, szWidgetName, bOptionOn)
+				tab.setToolTip(szWidgetName, szHelp)
+				i += 1
 				
 	
 		tab.attachSpacer("GamePanelCenter")
@@ -439,6 +455,19 @@ class CvOptionsScreen:
 		iInitialSelection = UserProfile.getGlobeViewRenderLevel()
 		tab.attachDropDown(vbox2, szWidgetName, szDropdownDesc, aszDropdownElements, self.callbackIFace, szCallbackFunction, szWidgetName, iInitialSelection)		
 
+		# Main menu
+		tab.attachLabel(vbox1, "MainMenuLabel", localText.getText("TXT_KEY_OPENING_MENU", ()))	# Label
+		tab.setControlFlag("MainMenuLabel", "CF_LABEL_DEFAULTSIZE")
+				
+		szDropdownDesc = "MainMenuDropdownBox"
+		aszDropdownElements = ()
+		for iMainMenuLoop in range(gc.getNumMainMenus()):
+			aszDropdownElements = aszDropdownElements + (gc.getMainMenus(iMainMenuLoop).getDescription(),)
+		szCallbackFunction = "handleMainMenuDropdownBoxInput"
+		szWidgetName = self.szMainMenuDropdownBoxName = "DropdownBox"
+		iInitialSelection = UserProfile.getMainMenu()
+		tab.attachDropDown(vbox2, szWidgetName, szDropdownDesc, aszDropdownElements, self.callbackIFace, szCallbackFunction, szWidgetName, iInitialSelection)
+
 		####### GAME GRAPHICS
 
 		tab.attachVSeparator(hbox, "GfxSeparator")
@@ -582,11 +611,18 @@ class CvOptionsScreen:
 		tab.attachHBox("VolumePanelVBox", "SoundPanelHBox")
 		tab.setLayoutFlag("SoundPanelHBox", "LAYOUT_SIZE_HPREFERREDEXPANDING")
 		tab.setLayoutFlag("SoundPanelHBox", "LAYOUT_SIZE_VPREFERRED")
-			
-			
+						
 		######################### Voice Config Section #########################
 		
 		tab.attachVBox("SoundPanelHBox", "VoiceVBox")
+
+		# Checkbox
+		szOptionDesc = localText.getText("TXT_KEY_OPTIONS_VOICE", ())
+		szCallbackFunction = "handleVoiceCheckboxInput"
+		self.szVoiceCheckboxName = "VoiceCheckbox"
+		szWidgetName = "VoiceChatCheckbox"
+		bUseVoice = UserProfile.useVoice()
+		tab.attachCheckBox("VoiceVBox", szWidgetName, szOptionDesc, self.callbackIFace, szCallbackFunction, szWidgetName, bUseVoice)
 
 		# Capture Device Dropdown
 		tab.attachLabel("VoiceVBox", "VoiceCaptureLabel", localText.getText("TXT_KEY_OPTIONS_CAPTURE_DEVICE", ()))
@@ -631,20 +667,15 @@ class CvOptionsScreen:
 		iInitialVal = UserProfile.getPlaybackVolume()
 		tab.attachHSlider("VoiceVBox", szWidgetName, self.callbackIFace, szCallbackFunction, szWidgetName, iMin, iMax, iInitialVal)
 		tab.setControlFlag(szWidgetName, "CF_SLIDER_FILL_UP")
-		
-		
-		tab.attachVBox("SoundPanelHBox", "SoundConfigVBox")
-		
-		# Checkbox
-		szOptionDesc = localText.getText("TXT_KEY_OPTIONS_VOICE", ())
-		szCallbackFunction = "handleVoiceCheckboxInput"
-		self.szVoiceCheckboxName = "VoiceCheckbox"
-		szWidgetName = "VoiceChatCheckbox"
-		bUseVoice = UserProfile.useVoice()
-		tab.attachCheckBox("SoundConfigVBox", szWidgetName, szOptionDesc, self.callbackIFace, szCallbackFunction, szWidgetName, bUseVoice)
-		
+								
 		######################### Speaker Config Dropdown #########################
 		
+		tab.attachVSeparator("SoundPanelHBox", "SoundVSeparator")
+
+		tab.attachVBox("SoundPanelHBox", "SoundConfigVBox")
+
+		tab.attachImage("SoundConfigVBox", "SoundBlasterLogo", CyArtFileMgr().getMiscArtInfo("SOUND_BLASTER_LOGO").getPath())
+
 		tab.attachLabel("SoundConfigVBox", "SpeakerConfigLabel", localText.getText("TXT_KEY_OPTIONS_SPEAKERS", ()))	# Label
 		szDropdownDesc = "SpeakerConfigDropdownBox"
 		aszDropdownElements = ()
@@ -665,6 +696,12 @@ class CvOptionsScreen:
 			
 		######################### Custom Audio Path #########################
 		
+		tab.attachHSeparator("SoundConfigVBox", "SoundSeparator")
+
+		tab.attachHBox("SoundConfigVBox", "CustomPanelHBox")
+		tab.setLayoutFlag("CustomPanelHBox", "LAYOUT_SIZE_HPREFERREDEXPANDING")
+		tab.setLayoutFlag("CustomPanelHBox", "LAYOUT_SIZE_VPREFERRED")
+										
 		# Checkbox
 		szOptionDesc = localText.getText("TXT_KEY_OPTIONS_CUSTOM_MUSIC", ())
 		szCallbackFunction = "handleCustomMusicPathCheckboxInput"
@@ -673,9 +710,9 @@ class CvOptionsScreen:
 		bUseCustomMusicPath = false
 		if (UserProfile.getMusicPath() != ""):
 			bUseCustomMusicPath = true
-		tab.attachCheckBox("SoundConfigVBox", szWidgetName, szOptionDesc, self.callbackIFace, szCallbackFunction, szWidgetName, bUseCustomMusicPath)
+		tab.attachCheckBox("CustomPanelHBox", szWidgetName, szOptionDesc, self.callbackIFace, szCallbackFunction, szWidgetName, bUseCustomMusicPath)
 				
-		tab.attachHBox("SoundConfigVBox", "AudioPathHBox")
+		tab.attachHBox("CustomPanelHBox", "AudioPathHBox")
 		tab.setLayoutFlag("AudioPathHBox", "LAYOUT_SIZE_HFIXEDEXPANDING")
 		
 		# Browse Button

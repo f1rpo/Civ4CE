@@ -280,6 +280,46 @@ class CvDebugTools:
 		if ( iNUnits < map.getGridWidth() * map.getGridHeight() ):
 			for x in range(map.getGridWidth()):
 				for y in range((iNUnits/map.getGridWidth())+1):
-					player.initUnit( (x + y * map.getGridWidth())%iNUnits, x, y, UnitAITypes.NO_UNITAI )
+					player.initUnit( (x + y * map.getGridWidth())%iNUnits, x, y, UnitAITypes.NO_UNITAI, DirectionTypes.NO_DIRECTION )
+
+	def wonderMovie( self ):
+		'ShowWonder Movie'
+		
+		popup = PyPopup.PyPopup( CvUtil.EventShowWonder, EventContextTypes.EVENTCONTEXT_ALL )
+		popup.setHeaderString( "Wonder Movie" )
+		popup.createPullDown()
+		for i in range(gc.getNumBuildingInfos()):
+			szMovieFile = gc.getBuildingInfo(i).getMovie()
+			if (szMovieFile != None and len(szMovieFile) > 0):
+				popup.addPullDownString( gc.getBuildingInfo(i).getDescription(), i )
+
+		for i in range(gc.getNumProjectInfos()):
+			szMovieFile = None
+			szArtDef = gc.getProjectInfo(i).getMovieArtDef()
+			if (len(szArtDef) > 0):
+				szMovieFile = CyArtFileMgr().getMovieArtInfo(szArtDef).getPath()
+			if (szMovieFile != None and len(szMovieFile) > 0):
+				popup.addPullDownString( gc.getProjectInfo(i).getDescription(), gc.getNumBuildingInfos() + i )
+			
+		popup.launch(true, PopupStates.POPUPSTATE_IMMEDIATE)
+	
+	def applyWonderMovie( self, argsList ):
+		'Apply Wonder Movie'
+		popupReturn = argsList
+		wonderID = popupReturn.getSelectedPullDownValue( 0 )
+					
+		popupInfo = CyPopupInfo()
+		popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON_SCREEN)
+		popupInfo.setData2(-1)
+		popupInfo.setText(u"showWonderMovie")
+		
+		if wonderID < gc.getNumBuildingInfos():
+			popupInfo.setData3(0)
+			popupInfo.setData1(wonderID)
+		else:
+			popupInfo.setData3(2)
+			popupInfo.setData1(wonderID - gc.getNumBuildingInfos())
+
+		popupInfo.addPopup(0)
 
 g_CvDebugTools = CvDebugTools()

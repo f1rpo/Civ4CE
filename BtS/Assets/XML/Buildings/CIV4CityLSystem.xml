@@ -249,35 +249,8 @@
 			<Attribute Class="Scalar">iBatchGroup:1</Attribute>
 		</ArtRef>		
 		<!-- LEAF 1x1 BUILDINGS -->
-		<ArtRef Name="building:BUILDING_OBELISK">
-			<Scale>1.25</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_EGYPTIAN_OBELISK">
-			<Scale>1.25</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_CHRISTIAN_TEMPLE">
-			<Scale>2.0</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_HELLENIC_TEMPLE">
-			<Scale>2.0</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_GRANARY">
-			<Scale>1.2</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_GROCER">
-			<Scale>2.3</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_OBSERVATORY">
-			<Scale>1.33</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_HEROIC_EPIC">
-			<Scale>1.4</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_ORACLE">
-			<Scale>1.8</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_VI_LEGENDARY_SAGA">
-			<Scale>1</Scale>
+		<ArtRef Name="building:LSYSTEM_1x1">
+			<Scale>1.0</Scale>
 		</ArtRef>
 	</LNode>
 	<LNode Name="Leaf_2x1">
@@ -711,46 +684,13 @@
 			<Attribute Class="Rotation">90,270</Attribute>
 		</ArtRef>
 		<!-- LEAF 2x1 BUILDINGS -->
-		<ArtRef Name="building:BUILDING_ACADEMY">
+		<ArtRef Name="building:LSYSTEM_2x1">
 			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>2.3</Scale>
+			<Scale>1.0</Scale>
 		</ArtRef>
-		<ArtRef Name="building:BUILDING_SISTINE_CHAPEL">
+		<ArtRef Name="building:LSYSTEM_1x2">
 			<Attribute Class="Rotation">90,270</Attribute>
-			<Scale>1.1</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_BANK">
-			<Attribute Class="Rotation">90,180,270</Attribute>
-			<Attribute Class="Scalar">fCurvatureBias:68</Attribute>
-			<Scale>1.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_JAIL">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>1.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_FORGE">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>1.25</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_NATIONAL_EPIC">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>1.66</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_WALL_STREET">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>1.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_PARTHENON">
-			<Attribute Class="Rotation">90,270</Attribute>
-			<Scale>1.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_FRENCH_SALON">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>1.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_STABLE">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>0.8</Scale>
+			<Scale>1.0</Scale>
 		</ArtRef>
 	</LNode>
 	<!-- LEAF 3x1 BUILDINGS -->
@@ -833,21 +773,13 @@
 			<Attribute Class="Rotation">90,270</Attribute>
 		</ArtRef>
 		<!-- LEAF 3x1 BUILDINGS -->
-		<ArtRef Name="building:BUILDING_ISLAMIC_MONASTERY">
+		<ArtRef Name="building:LSYSTEM_3x1">
 			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>2.5</Scale>
+			<Scale>1.0</Scale>
 		</ArtRef>
-		<ArtRef Name="building:BUILDING_VI_KING_SAGA">
+		<ArtRef Name="building:LSYSTEM_1x3">
 			<Attribute Class="Rotation">90,270</Attribute>
-			<Scale>1</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_HOLLYWOOD">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>1.66</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_RUSSIAN_RESEARCH_INSTITUTE">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>1.3</Scale>
+			<Scale>1.0</Scale>
 		</ArtRef>
 	</LNode>
 	<LNode Name="Leaf_2x2">
@@ -965,394 +897,50 @@
 			<Attribute Class="Scalar">iBatchGroup:1</Attribute>
 		</ArtRef>
 		<!-- LEAF 2x2 BUILDINGS -->
-		<ArtRef Name="building:BUILDING_ARABIAN_MADRASSA">
-			<Scale>1.8</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_OTTOMAN_HAMMAM">
-			<Scale>1.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_PERSIAN_APOTHECARY">
-			<Scale>1.25</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_MALI_MINT">
-			<Scale>1.2</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_JAPANESE_SHALE_PLANT">
-			<Scale>1.7</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_THEATRE">
-			<Scale>.9</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_ROCKNROLL">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>1.7</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_KREMLIN">
-			<Scale>1.1</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_SPIRAL_MINARET">
-			<Scale>1.4</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_ANGKOR_WAT">
-			<Scale>1.25</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_RED_CROSS">
-			<Scale>1.66</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_EIFFEL_TOWER">
-			<Scale>1.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_BUNKER">
-			<Scale>1.4</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_LABORATORY">
-			<Scale>1.15</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_BROADCAST_TOWER">
-			<Scale>.8</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_BARRACKS">
-			<Scale>1.15</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_ZULU_IKHANDA">
-			<Scale>1.05</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_HINDU_SHRINE">
-			<Scale>1.25</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_ISLAMIC_SHRINE">
-			<Rotate>45</Rotate>
-			<Scale>1.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_JEWISH_SHRINE"/>
-		<ArtRef Name="building:BUILDING_TAOIST_SHRINE">
-			<Scale>1.2</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_SPACE_ELEVATOR">
-			<Scale>0.85</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_BUDDHIST_TEMPLE">
-			<Scale>2.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_HINDU_TEMPLE">
-			<Scale>2.9</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_JEWISH_TEMPLE">
-			<Scale>4.0</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_ISLAMIC_TEMPLE">
-			<Rotate>45</Rotate>
-			<Scale>2.9</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_CONFUCIAN_TEMPLE">
-			<Rotate>45</Rotate>
-			<Scale>2.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_TAOIST_TEMPLE">
-			<Scale>2.75</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_CONFUCIAN_MONASTERY">
-			<Scale>2.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_TAOIST_MONASTERY">
-			<Scale>2.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_MAUSOLEUM">
-			<Attribute Class="Rotation">90,270</Attribute>
-			<Scale>1.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_KOREAN_SEOWON">
+		<ArtRef Name="building:LSYSTEM_2x2">
 			<Scale>1.0</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_INDIAN_MAUSOLEUM">
-			<Attribute Class="Rotation">90,270</Attribute>
-			<Scale>1.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_MONGOL_GER">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>0.8</Scale>
 		</ArtRef>
 	</LNode>
 	<LNode Name="Leaf_3x2">
 		<Width>3</Width>
 		<Height>2</Height>
 		<!-- LEAF 3x2 BUILDINGS -->
-		<ArtRef Name="building:BUILDING_PALACE">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>1.15</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_PLATOS_ACADEMY">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>1.15</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_ARTEMIS">
-			<Attribute Class="Rotation">90,270</Attribute>
-			<Scale>1.7</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_ROMAN_FORUM">
-			<Attribute Class="Rotation">90,270</Attribute>
-			<Scale>1.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_SANKORE">
-			<Attribute Class="Rotation">90,270</Attribute>
-			<Scale>2.3</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_STATUE_OF_ZEUS">
-			<Attribute Class="Rotation">90,270</Attribute>
-			<Scale>2.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_GREEK_ODEON">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>3.1</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_ENGLISH_STOCK_EXCHANGE">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>1.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_BROADWAY">
-			<Attribute Class="Rotation">0,90</Attribute>
-			<Scale>1.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_COAL_PLANT">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>1.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_RECYCLING_CENTER">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>1.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_SUPERMARKET">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>2.1</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_AMERICAN_MALL">
-			<Attribute Class="Rotation">90,270</Attribute>
-			<Scale>2.09</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_CONFUCIAN_CATHEDRAL">
-			<Attribute Class="Rotation">90,180</Attribute>
-			<Scale>2.0</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_MARKET">
+		<ArtRef Name="building:LSYSTEM_3x2">
 			<Attribute Class="Rotation">0,180</Attribute>
 			<Scale>1.0</Scale>
 		</ArtRef>
-		<ArtRef Name="building:BUILDING_AIRPORT">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>3.3</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_COURTHOUSE">
-			<Attribute Class="Rotation">0,90,180</Attribute>
-			<Scale>1.8</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_AZTEC_SACRIFICIAL_ALTAR">
-			<Attribute Class="Rotation">0,90,180</Attribute>
-			<Scale>1.8</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_GREAT_PALACE">
-			<Attribute Class="Rotation">0,180</Attribute>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_LIBRARY">
-			<Attribute Class="Rotation">0,90,180</Attribute>
-			<Scale>1.2</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_BUDDHIST_MONASTERY">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>4.0</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_CHRISTIAN_MONASTERY">
+		<ArtRef Name="building:LSYSTEM_2x3">
 			<Attribute Class="Rotation">90,270</Attribute>
-			<Scale>2.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_HELLENIC_MONASTERY">
-			<Attribute Class="Rotation">90,270</Attribute>
-			<Scale>2.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_HINDU_MONASTERY">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>3.0</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_SCOTLAND_YARD">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>1.75</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_BUDDHIST_SHRINE">
-			<Attribute Class="Rotation">0,180</Attribute>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_CONFUCIAN_SHRINE">
-			<Attribute Class="Rotation">0,180</Attribute>
 			<Scale>1.0</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_THEATRE">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>1.8</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_CHINESE_PAVILLION">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>1.8</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_BOMB_SHELTER">
-			<Attribute Class="Rotation">90,270</Attribute>
-			<Scale>1.25</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_UNIVERSITY">
-			<Scale>1.35</Scale>
-			<Attribute Class="Rotation">90,270</Attribute>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_MILITARY_ENCAMPMENT">
-			<Scale>1.75</Scale>
-			<Attribute Class="Rotation">0,180</Attribute>
 		</ArtRef>
 	</LNode>
 	<LNode Name="Leaf_4x2">
 		<Width>4</Width>
 		<Height>2</Height>
 		<!-- LEAF 4x2 BUILDINGS -->
-		<ArtRef Name="building:BUILDING_FACTORY">
-			<Scale>2.2</Scale>
+		<ArtRef Name="building:LSYSTEM_4x2">
 			<Attribute Class="Rotation">0,180</Attribute>
+			<Scale>1.0</Scale>
 		</ArtRef>
-		<ArtRef Name="building:BUILDING_SENATE_BUILDING">
-			<Scale>1.5</Scale>
-			<Attribute Class="Rotation">0,180</Attribute>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_MT_RUSHMORE">
-			<Scale>1.3</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_IRON_WORKS">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>2.75</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_HOSPITAL">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>2.65</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_TAOIST_CATHEDRAL">
-			<Scale>1.9</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_HYDRO_PLANT">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>2.0</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_CHRISTIAN_SHRINE">
-			<Attribute Class="Rotation">90,180,270</Attribute>
-			<Scale>1.25</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_HERMITAGE">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>1.25</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_UNITED_NATIONS">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Translate>6.5,5.5</Translate>
-			<Scale>1.25</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_NOTRE_DAME">
+		<ArtRef Name="building:LSYSTEM_2x4">
 			<Attribute Class="Rotation">90,270</Attribute>
-			<Scale>1.33</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_WEST_POINT">
-			<Attribute Class="Rotation">90,270</Attribute>
-			<Scale>1.75</Scale>
+			<Scale>1.0</Scale>
 		</ArtRef>
 	</LNode>
 	<LNode Name="Leaf_3x3">
 		<Width>3</Width>
 		<Height>3</Height>
 		<!-- LEAF 3x3 BUILDINGS -->
-		<ArtRef Name="building:BUILDING_NUCLEAR_PLANT">
-			<Attribute Class="Rotation">0,180</Attribute>
-			<Scale>2.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_AGORA">
+		<ArtRef Name="building:LSYSTEM_3x3">
 			<Scale>1.0</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_THEATRE_OF_DIONYSUS">
-			<Scale>1.0</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_INCAN_TERRACE">
-			<Scale>1.2</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_MILITARY_ACADEMY">
-			<Scale>2.0</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_GERMAN_ASSEMBLY_PLANT">
-			<Scale>2.0</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_CHICHEN_ITZA">
-			<Scale>1.33</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_HAGIA_SOPHIA">
-			<Scale>1.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_GLOBE_THEATRE">
-			<Scale>1.50</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_CASTLE">
-			<Scale>1.75</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_COLOSSEUM">
-			<Scale>2.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_CHRISTIAN_CATHEDRAL">
-			<Scale>1.66</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_HELLENIC_CATHEDRAL">
-			<Scale>1.66</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_JEWISH_CATHEDRAL">
-			<Scale>1.66</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_JEWISH_MONASTERY">
-			<Scale>2.25</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_STONEHENGE">
-			<Scale>1.4</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_PENTAGON">
-			<Scale>2.0</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_GREAT_LIBRARY">
-			<Scale>1.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_OXFORD_UNIVERSITY">
-			<Scale>2.15</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_HANGING_GARDEN">
-			<Scale>1.66</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_TAJ_MAHAL">
-			<Scale>1.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_STATUE_OF_LIBERTY">
-			<Scale>2.0</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_SPANISH_CITADEL">
-			<Scale>1.2</Scale>
 		</ArtRef>
 	</LNode>
 	<LNode Name="Leaf_4x4">
 		<Width>4</Width>
 		<Height>4</Height>
 		<!-- LEAF 4x4 BUILDINGS -->
-		<ArtRef Name="building:BUILDING_VERSAILLES">
-			<Attribute Class="Rotation">0,90,180</Attribute>
-			<Scale>1.66</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_PYRAMID">
-			<Scale>2.75</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_GREAT_DAM">
-			<Scale>1.4</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_ISLAMIC_CATHEDRAL">
-			<Scale>1.75</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_HINDU_CATHEDRAL">
-			<Scale>2.0</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_BUDDHIST_CATHEDRAL">
-			<Scale>3.0</Scale>
+		<ArtRef Name="building:LSYSTEM_4x4">
+			<Scale>1.0</Scale>
 		</ArtRef>
 	</LNode>
 	<LNode Name="Emergency_Overflow">
@@ -1372,7 +960,7 @@
 	<LNode Name="BuildingsUsingCustomLayoutEngines">
 		<Width>1</Width>
 		<Height>1</Height>
-		<ArtRef Name="building:BUILDING_WALLS">
+		<ArtRef Name="building:LSYSTEM_WALLS">
 			<Attribute Class="Scalar">szSpecialLayout:CityCenter</Attribute>
 			<Attribute Class="Scalar">szBuilder:WallBuilder</Attribute>
 			<Attribute Class="Scalar">bLayoutAfterGenerics:1</Attribute>
@@ -1380,17 +968,7 @@
 			<Rotate>45</Rotate>
 			<!-- this needs to be the negative of the CITY_TWIST value in detail manager; note that this uses degrees but DetailManager uses radians. Sorry. -->
 		</ArtRef>
-		<ArtRef Name="building:BUILDING_HIGH_WALLS">
-			<Attribute Class="Scalar">szSpecialLayout:CityCenter</Attribute>
-			<Attribute Class="Scalar">szBuilder:WallBuilder</Attribute>
-			<Attribute Class="Scalar">bLayoutAfterGenerics:1</Attribute>
-			<Attribute Class="Scalar">bNoContour:1</Attribute>
-			<Attribute Class="Scalar">szPostArtFile:Art/Structures/Buildings/Tall Wall/post01_tall.nif</Attribute>
-			<Attribute Class="Scalar">szWallArtFile:Art/Structures/Buildings/Tall Wall/wall%1_tall.nif</Attribute>
-			<Rotate>45</Rotate>
-			<!-- this needs to be the negative of the CITY_TWIST value in detail manager; note that this uses degrees but DetailManager uses radians. Sorry. -->
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_CELTIC_DUN">
+		<ArtRef Name="building:LSYSTEM_CELTIC_DUN">
 			<Attribute Class="Scalar">szSpecialLayout:CityCenter</Attribute>
 			<Attribute Class="Scalar">szBuilder:WallBuilder</Attribute>
 			<Attribute Class="Scalar">bLayoutAfterGenerics:1</Attribute>
@@ -1400,7 +978,17 @@
 			<Rotate>45</Rotate>
 			<!-- this needs to be the negative of the CITY_TWIST value in detail manager; note that this uses degrees but DetailManager uses radians. Sorry. -->
 		</ArtRef>
-		<ArtRef Name="building:BUILDING_GREAT_WALL">
+		<ArtRef Name="building:LSYSTEM_HIGH_WALLS">
+			<Attribute Class="Scalar">szSpecialLayout:CityCenter</Attribute>
+			<Attribute Class="Scalar">szBuilder:WallBuilder</Attribute>
+			<Attribute Class="Scalar">bLayoutAfterGenerics:1</Attribute>
+			<Attribute Class="Scalar">bNoContour:1</Attribute>
+			<Attribute Class="Scalar">szPostArtFile:Art/Structures/Buildings/Tall Wall/post01_tall.nif</Attribute>
+			<Attribute Class="Scalar">szWallArtFile:Art/Structures/Buildings/Tall Wall/wall%1_tall.nif</Attribute>
+			<Rotate>45</Rotate>
+			<!-- this needs to be the negative of the CITY_TWIST value in detail manager; note that this uses degrees but DetailManager uses radians. Sorry. -->
+		</ArtRef>
+		<ArtRef Name="building:LSYSTEM_GREAT_WALL">
 			<Attribute Class="Scalar">szSpecialLayout:CityCenter</Attribute>
 			<Attribute Class="Scalar">szBuilder:GreatWallBuilder</Attribute>
 			<Attribute Class="Scalar">bLayoutAfterGenerics:1</Attribute>
@@ -1408,7 +996,7 @@
 			<Rotate>45</Rotate>
 			<!-- this needs to be the negative of the CITY_TWIST value in detail manager; note that this uses degrees but DetailManager uses radians. Sorry. -->
 		</ArtRef>
-		<ArtRef Name="building:BUILDING_AQUEDUCT">
+		<ArtRef Name="building:LSYSTEM_AQUEDUCT">
 			<Attribute Class="Scalar">szSpecialLayout:CityCenter</Attribute>
 			<Attribute Class="Scalar">szBuilder:AqueductBuilder</Attribute>
 			<Attribute Class="Scalar">bLayoutAfterGenerics:0</Attribute>
@@ -1416,14 +1004,28 @@
 			<Rotate>45</Rotate>
 			<!-- this needs to be the negative of the CITY_TWIST value in detail manager; note that this uses degrees but DetailManager uses radians. Sorry. -->
 		</ArtRef>
-		<ArtRef Name="building:BUILDING_LIGHTHOUSE">
+		<ArtRef Name="building:LSYSTEM_ARCOLOGY">
+			<Attribute Class="Scalar">szSpecialLayout:CitySurround</Attribute>
+			<Attribute Class="Scalar">bLayoutAfterGenerics:1</Attribute>
+			<Attribute Class="Scalar">bNoContour:1</Attribute>
+			<Rotate>45</Rotate>
+			<!-- this needs to be the negative of the CITY_TWIST value in detail manager; note that this uses degrees but DetailManager uses radians. Sorry. -->
+		</ArtRef>
+		<ArtRef Name="building:LSYSTEM_RIVER">
+			<Attribute Class="Scalar">szSpecialLayout:CityRiver</Attribute>
+			<Attribute Class="Scalar">bLayoutAfterGenerics:1</Attribute>
+			<Attribute Class="Scalar">bNoContour:0</Attribute>
+			<Attribute Class="Scalar">bNoWaterTest:1</Attribute>
+			<Rotate>45</Rotate>
+		</ArtRef>
+		<ArtRef Name="building:LSYSTEM_LIGHTHOUSE">
 			<Attribute Class="Era">ERA_ANCIENT,ERA_CLASSICAL,ERA_MEDIEVAL,ERA_RENAISSANCE</Attribute>
 			<Attribute Class="Scalar">bNoWaterTest:1</Attribute>
 			<!-- this bypasses water testing -->
 			<Attribute Class="Scalar">szSpecialLayout:Water</Attribute>
 			<Scale>1.5</Scale>
 		</ArtRef>
-		<ArtRef Name="building:BUILDING_LIGHTHOUSE">
+		<ArtRef Name="building:LSYSTEM_LIGHTHOUSE">
 			<Attribute Class="Scalar">szNIF:Art/Structures/Buildings/Lighthouse/LighthouseModern.nif</Attribute>
 			<Attribute Class="Era">ERA_INDUSTRIAL,ERA_MODERN,ERA_FUTURE</Attribute>
 			<Attribute Class="Scalar">bNoWaterTest:1</Attribute>
@@ -1431,39 +1033,32 @@
 			<Attribute Class="Scalar">szSpecialLayout:Water</Attribute>
 			<Scale>1.5</Scale>
 		</ArtRef>
-		<ArtRef Name="building:BUILDING_GREAT_LIGHTHOUSE">
+		<ArtRef Name="building:LSYSTEM_WATER">
 			<Attribute Class="Scalar">bNoWaterTest:1</Attribute>
 			<!-- this bypasses water testing -->
 			<Attribute Class="Scalar">szSpecialLayout:Water</Attribute>
-			<Scale>2.2</Scale>
+			<Scale>1.0</Scale>
 		</ArtRef>
-		<ArtRef Name="building:BUILDING_COLOSSUS">
-			<Attribute Class="Scalar">bNoWaterTest:1</Attribute>
-			<!-- this bypasses water testing -->
-			<Attribute Class="Scalar">szSpecialLayout:Water</Attribute>
-			<Scale>1.25</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_HARBOR">
+		<ArtRef Name="building:LSYSTEM_HARBOR">
 			<Attribute Class="Era">ERA_ANCIENT,ERA_CLASSICAL,ERA_MEDIEVAL,ERA_RENAISSANCE</Attribute>
 			<Attribute Class="Scalar">bNoWaterTest:1</Attribute>
 			<!-- this bypasses water testing -->
 			<Attribute Class="Scalar">szSpecialLayout:Coast</Attribute>
 			<Attribute Class="Scalar">bHasNoShadow:1</Attribute>
 			<Attribute Class="Scalar">bUseCostAligner:1</Attribute>
-			<Attribute Class="Scalar">fAlignerBoxSize:25</Attribute>
+			<Attribute Class="Scalar">fAlignerBoxSize:10</Attribute>
 			<Attribute Class="Scalar">fPushX:0</Attribute>
-			<!-- To debug the placement of the alignpoints, uncomment this next line
-			<Attribute Class="Scalar">fAlignerOverride:0.0</Attribute>
-			-->
-			<Attribute Class="ScalarList">lAlignerPointsX: -0.40, -0.60, -0.20, 1.00, 1.0</Attribute>
-			<Attribute Class="ScalarList">lAlignerPointsY: 1.50, 0.2, -1.50, -.50, 1.1</Attribute>
-			<Attribute Class="ScalarList">lAlignerPointsWet: 0, 0, 0, 1, 1</Attribute>
-			<Attribute Class="ScalarList">lAlignerPointsWeight: .33, .33, .33, .5, .5</Attribute>
+			<!-- To debug the placement of the alignpoints, set next line to 0.0 -->
+			<Attribute Class="Scalar">fAlignerOverride:-1.0</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsX: -5, -5, -5, -5, -5, -3, -3, -3, -3, -3, -1, -1, -1, -1, -1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsY: -6, -3, 0, 3, 6, -6, -3, 0, 3, 6, -6, -3, 0, 3, 6, -6, -3, 0, 3, 6, -6, -3, 0, 3, 6, -6, -3, 0, 3, 6</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsWet: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsWeight: 1, 2, 3, 2, 1, 2, 4, 6, 4, 2, 3, 6, 9, 6, 3, 3, 6, 9, 6, 3, 2, 4, 6, 4, 2, 1, 2, 3, 2, 1</Attribute>
 			<Attribute Class="Scalar">bForceWaterHeight:1</Attribute>
-			<Rotate>-60</Rotate>
+			<Rotate>-45</Rotate>
 			<Scale>2.5</Scale>
 		</ArtRef>
-		<ArtRef Name="building:BUILDING_HARBOR">
+		<ArtRef Name="building:LSYSTEM_HARBOR">
 			<Attribute Class="Scalar">szNIF:Art/Structures/Buildings/Harbor/HarborModern.nif</Attribute>
 			<Attribute Class="Era">ERA_INDUSTRIAL,ERA_MODERN,ERA_FUTURE</Attribute>
 			<Attribute Class="Scalar">bNoWaterTest:1</Attribute>
@@ -1471,92 +1066,35 @@
 			<Attribute Class="Scalar">szSpecialLayout:Coast</Attribute>
 			<Attribute Class="Scalar">bHasNoShadow:1</Attribute>
 			<Attribute Class="Scalar">bUseCostAligner:1</Attribute>
-			<Attribute Class="Scalar">fAlignerBoxSize:25</Attribute>
+			<Attribute Class="Scalar">fAlignerBoxSize:10</Attribute>
 			<Attribute Class="Scalar">fPushX:0</Attribute>
-			<!-- To debug the placement of the alignpoints, uncomment this next line
-			<Attribute Class="Scalar">fAlignerOverride:0.0</Attribute>
-			-->
-			<Attribute Class="ScalarList">lAlignerPointsX: -0.40, -0.60, -0.20, 1.00, 1.0</Attribute>
-			<Attribute Class="ScalarList">lAlignerPointsY: 1.50, 0.2, -1.50, -.50, 1.1</Attribute>
-			<Attribute Class="ScalarList">lAlignerPointsWet: 0, 0, 0, 1, 1</Attribute>
-			<Attribute Class="ScalarList">lAlignerPointsWeight: .33, .33, .33, .5, .5</Attribute>
+			<!-- To debug the placement of the alignpoints, set next line to 0.0 -->
+			<Attribute Class="Scalar">fAlignerOverride:-1.0</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsX: -5, -5, -5, -5, -5, -3, -3, -3, -3, -3, -1, -1, -1, -1, -1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsY: -6, -3, 0, 3, 6, -6, -3, 0, 3, 6, -6, -3, 0, 3, 6, -6, -3, 0, 3, 6, -6, -3, 0, 3, 6, -6, -3, 0, 3, 6</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsWet: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsWeight: 1, 2, 3, 2, 1, 2, 4, 6, 4, 2, 3, 6, 9, 6, 3, 3, 6, 9, 6, 3, 2, 4, 6, 4, 2, 1, 2, 3, 2, 1</Attribute>
 			<Attribute Class="Scalar">bForceWaterHeight:1</Attribute>
-			<Rotate>-60</Rotate>
+			<Rotate>-45</Rotate>
 			<Scale>1.1</Scale>
 		</ArtRef>
-		<ArtRef Name="building:BUILDING_VIKING_TRADING_POST">
+		<ArtRef Name="building:LSYSTEM_COAST">
 			<Attribute Class="Scalar">bNoWaterTest:1</Attribute>
 			<!-- this bypasses water testing -->
 			<Attribute Class="Scalar">szSpecialLayout:Coast</Attribute>
 			<Attribute Class="Scalar">bHasNoShadow:1</Attribute>
 			<Attribute Class="Scalar">bUseCostAligner:1</Attribute>
-			<Attribute Class="Scalar">fAlignerBoxSize:25</Attribute>
+			<Attribute Class="Scalar">fAlignerBoxSize:10</Attribute>
 			<Attribute Class="Scalar">fPushX:0</Attribute>
-			<!-- To debug the placement of the alignpoints, uncomment this next line
-			<Attribute Class="Scalar">fAlignerOverride:0.0</Attribute>
-			-->
-			<Attribute Class="ScalarList">lAlignerPointsX:		-0.40,	-0.60,	-0.20,	1.00,	1.0</Attribute>
-			<Attribute Class="ScalarList">lAlignerPointsY:		1.50,	0.2,	-1.50,	-.50,	1.1</Attribute>
-			<Attribute Class="ScalarList">lAlignerPointsWet:	0,		0,		0,		1,		1</Attribute>
-			<Attribute Class="ScalarList">lAlignerPointsWeight:	.33,	.33,	.33,	.5,		.5</Attribute>
+			<!-- To debug the placement of the alignpoints, set next line to 0.0 -->
+			<Attribute Class="Scalar">fAlignerOverride:-1.0</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsX: -5, -5, -5, -5, -5, -3, -3, -3, -3, -3, -1, -1, -1, -1, -1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsY: -6, -3, 0, 3, 6, -6, -3, 0, 3, 6, -6, -3, 0, 3, 6, -6, -3, 0, 3, 6, -6, -3, 0, 3, 6, -6, -3, 0, 3, 6</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsWet: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1</Attribute>
+			<Attribute Class="ScalarList">lAlignerPointsWeight: 1, 2, 3, 2, 1, 2, 4, 6, 4, 2, 3, 6, 9, 6, 3, 3, 6, 9, 6, 3, 2, 4, 6, 4, 2, 1, 2, 3, 2, 1</Attribute>
 			<Attribute Class="Scalar">bForceWaterHeight:1</Attribute>
-			<Rotate>-60</Rotate>
-			<Scale>2.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_CARTHAGE_COTHON">
-			<Attribute Class="Era">ERA_ANCIENT,ERA_CLASSICAL,ERA_MEDIEVAL,ERA_RENAISSANCE</Attribute>
-			<Attribute Class="Scalar">bNoWaterTest:1</Attribute>
-			<!-- this bypasses water testing -->
-			<Attribute Class="Scalar">szSpecialLayout:Coast</Attribute>
-			<Attribute Class="Scalar">bHasNoShadow:1</Attribute>
-			<Attribute Class="Scalar">bUseCostAligner:1</Attribute>
-			<Attribute Class="Scalar">fAlignerBoxSize:25</Attribute>
-			<Attribute Class="Scalar">fPushX:0</Attribute>
-			<!-- To debug the placement of the alignpoints, uncomment this next line
-			<Attribute Class="Scalar">fAlignerOverride:0.0</Attribute>
-			-->
-			<Attribute Class="ScalarList">lAlignerPointsX:		-0.40,	-0.60,	-0.20,	1.00,	1.0</Attribute>
-			<Attribute Class="ScalarList">lAlignerPointsY:		1.50,	0.2,	-1.50,	-.50,	1.1</Attribute>
-			<Attribute Class="ScalarList">lAlignerPointsWet:	0,		0,		0,		1,		1</Attribute>
-			<Attribute Class="ScalarList">lAlignerPointsWeight:	.33,	.33,	.33,	.5,		.5</Attribute>
-			<Attribute Class="Scalar">bForceWaterHeight:1</Attribute>
-			<Rotate>-60</Rotate>
-			<Scale>2.5</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_CARTHAGE_COTHON">
-			<Attribute Class="Scalar">szNIF:Art/Structures/Buildings/Harbor/HarborModern.nif</Attribute>
-			<Attribute Class="Era">ERA_INDUSTRIAL,ERA_MODERN,ERA_FUTURE</Attribute>
-			<Attribute Class="Scalar">bNoWaterTest:1</Attribute>
-			<!-- this bypasses water testing -->
-			<Attribute Class="Scalar">szSpecialLayout:Coast</Attribute>
-			<Attribute Class="Scalar">bHasNoShadow:1</Attribute>
-			<Attribute Class="Scalar">bUseCostAligner:1</Attribute>
-			<Attribute Class="Scalar">fAlignerBoxSize:25</Attribute>
-			<Attribute Class="Scalar">fPushX:0</Attribute>
-			<!-- To debug the placement of the alignpoints, uncomment this next line
-			<Attribute Class="Scalar">fAlignerOverride:0.0</Attribute>
-			-->
-			<Attribute Class="ScalarList">lAlignerPointsX:		-0.40,	-0.60,	-0.20,	1.00,	1.0</Attribute>
-			<Attribute Class="ScalarList">lAlignerPointsY:		1.50,	0.2,	-1.50,	-.50,	1.1</Attribute>
-			<Attribute Class="ScalarList">lAlignerPointsWet:	0,		0,		0,		1,		1</Attribute>
-			<Attribute Class="ScalarList">lAlignerPointsWeight:	.33,	.33,	.33,	.5,		.5</Attribute>
-			<Attribute Class="Scalar">bForceWaterHeight:1</Attribute>
-			<Rotate>-60</Rotate>
-			<Scale>1.1</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_DRYDOCK">
-			<Attribute Class="Scalar">bNoWaterTest:1</Attribute>
-			<Attribute Class="Rotation">0,180</Attribute>
-			<!-- this bypasses water testing -->
-			<Attribute Class="Scalar">szSpecialLayout:Coast</Attribute>
-			<Scale>3.0</Scale>
-		</ArtRef>
-		<ArtRef Name="building:BUILDING_VI_SHIPYARD">
-			<Attribute Class="Scalar">bNoWaterTest:1</Attribute>
-			<Attribute Class="Rotation">0,180</Attribute>
-			<!-- this bypasses water testing -->
-			<Attribute Class="Scalar">szSpecialLayout:Coast</Attribute>
-			<Scale>3.0</Scale>
+			<Rotate>-45</Rotate>
+			<Scale>1.0</Scale>
 		</ArtRef>
 	</LNode>
 	<!-- *************************************************************************** -->

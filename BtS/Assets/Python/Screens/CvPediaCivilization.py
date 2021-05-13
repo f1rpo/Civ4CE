@@ -151,7 +151,7 @@ class CvPediaCivilization:
 		for iLeader in range(gc.getNumLeaderHeadInfos()):
 			civ = gc.getCivilizationInfo(self.iCivilization)
 			if civ.isLeaders(iLeader):
-				screen.attachImageButton( panelName, "", gc.getLeaderHeadInfo(iLeader).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_LEADER, iLeader, 1, False )
+				screen.attachImageButton( panelName, "", gc.getLeaderHeadInfo(iLeader).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_LEADER, iLeader, self.iCivilization, False )
 		
 	def placeText(self):
 		
@@ -181,11 +181,15 @@ class CvPediaCivilization:
 		i = 0
 		for iI in range(gc.getNumCivilizationInfos()):
 			if (gc.getCivilizationInfo(listSorted[iI][1]).isPlayable() and not gc.getCivilizationInfo(listSorted[iI][1]).isGraphicalOnly()):
-				if bRedraw:
-					screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIV, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
-				if listSorted[iI][1] == self.iCivilization:
-					iSelected = i
-				i += 1
+				if (not gc.getDefineINT("CIVILOPEDIA_SHOW_ACTIVE_CIVS_ONLY") or not gc.getGame().isFinalInitialized() or gc.getGame().isCivEverActive(listSorted[iI][1])):
+					if bRedraw:
+						screen.appendListBoxStringNoUpdate(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIV, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
+					if listSorted[iI][1] == self.iCivilization:
+						iSelected = i
+					i += 1
+					
+		if bRedraw:
+			screen.updateListBox(self.top.LIST_ID)
 					
 		screen.setSelectedListBoxStringGFC(self.top.LIST_ID, iSelected)
 			

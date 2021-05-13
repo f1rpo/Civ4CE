@@ -42,5 +42,11 @@
 			<Help>TXT_KEY_FORCE_CONTROL_MAX_CITY_ELIMINATION_HELP</Help>
 			<bDefault>0</bDefault>
 		</ForceControlInfo>
+		<ForceControlInfo>
+			<Type>FORCECONTROL_ADVANCED_START</Type>
+			<Description>TXT_KEY_FORCE_ADVANCED_START</Description>
+			<Help>TXT_KEY_FORCE_ADVANCED_START</Help>
+			<bDefault>0</bDefault>
+		</ForceControlInfo>
 	</ForceControlInfos>
 </Civ4ForceControlInfos>

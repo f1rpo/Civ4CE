@@ -62,10 +62,17 @@ class CvWonderMovieScreen:
 		self.bDone = false
 		
 		# not all projects have movies
+		self.szMovieFile = None
 		if self.iMovieType == MOVIE_SCREEN_PROJECT:
 			szArtDef = gc.getProjectInfo(iMovieItem).getMovieArtDef()
-			if len(szArtDef) == 0:
-				return
+			if (len(szArtDef) > 0):
+				self.szMovieFile = CyArtFileMgr().getMovieArtInfo(szArtDef).getPath()
+		elif self.iMovieType == MOVIE_SCREEN_WONDER:
+			self.szMovieFile = gc.getBuildingInfo(iMovieItem).getMovie()
+		elif self.iMovieType == MOVIE_SCREEN_RELIGION:
+			self.szMovieFile = gc.getReligionInfo(iMovieItem).getMovieFile()
+		if (self.szMovieFile == None or len(self.szMovieFile) == 0):
+			return
 		
 		player = PyPlayer(CyGame().getActivePlayer())
 		
@@ -95,7 +102,7 @@ class CvWonderMovieScreen:
 		elif self.iMovieType == MOVIE_SCREEN_PROJECT:
 			szHeader = gc.getProjectInfo(iMovieItem).getDescription()
 
-		screen.setText(szHeaderId, "Background", szHeader, CvUtil.FONT_CENTER_JUSTIFY,
+		screen.setLabel(szHeaderId, "Background", u"<font=4b>" + szHeader + "</font>", CvUtil.FONT_CENTER_JUSTIFY,
 				self.X_WINDOW + self.W_WINDOW / 2, self.Y_TITLE, self.Z_CONTROLS, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 				
 		screen.hide("Background")
@@ -110,13 +117,10 @@ class CvWonderMovieScreen:
 
 		# Play the movie
 		if self.iMovieType == MOVIE_SCREEN_RELIGION:
-			screen.addReligionMovieWidgetGFC( "ReligionMovie", gc.getReligionInfo(self.iWonderId).getMovieFile(), self.X_WINDOW + self.X_MOVIE, self.Y_WINDOW + self.Y_MOVIE, self.W_MOVIE, self.H_MOVIE, WidgetTypes.WIDGET_GENERAL, -1, -1)
+			screen.addReligionMovieWidgetGFC( "ReligionMovie", self.szMovieFile, self.X_WINDOW + self.X_MOVIE, self.Y_WINDOW + self.Y_MOVIE, self.W_MOVIE, self.H_MOVIE, WidgetTypes.WIDGET_GENERAL, -1, -1)
 			CyInterface().playGeneralSound(gc.getReligionInfo(self.iWonderId).getMovieSound())		
-		elif self.iMovieType == MOVIE_SCREEN_WONDER:		
-			screen.playMovie(gc.getBuildingInfo(self.iWonderId).getMovie(), self.X_WINDOW + self.X_MOVIE, self.Y_WINDOW + self.Y_MOVIE, self.W_MOVIE, self.H_MOVIE, -2.3 )
-		elif self.iMovieType == MOVIE_SCREEN_PROJECT:
-			szArtDef = gc.getProjectInfo(self.iWonderId).getMovieArtDef()
-			screen.playMovie(CyArtFileMgr().getMovieArtInfo(szArtDef).getPath(), self.X_WINDOW + self.X_MOVIE, self.Y_WINDOW + self.Y_MOVIE, self.W_MOVIE, self.H_MOVIE, -2.3 )
+		else:
+			screen.playMovie(self.szMovieFile, self.X_WINDOW + self.X_MOVIE, self.Y_WINDOW + self.Y_MOVIE, self.W_MOVIE, self.H_MOVIE, -2.3 )
 			
 		screen.setButtonGFC("WonderExit" + str(self.iWonderId), localText.getText("TXT_KEY_MAIN_MENU_OK", ()), "", self.X_EXIT, self.Y_EXIT, self.W_EXIT, self.H_EXIT, WidgetTypes.WIDGET_CLOSE_SCREEN, -1, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
 

@@ -1,3 +1,4 @@
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -14,6 +15,14 @@
 	</ElementType>
 	<ElementType name="ConceptInfos" content="eltOnly">
 		<element type="ConceptInfo" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="NewConceptInfo" content="eltOnly">
+		<element type="Type"/>
+		<element type="Description"/>
+		<element type="Civilopedia"/>
+	</ElementType>
+	<ElementType name="NewConceptInfos" content="eltOnly">
+		<element type="NewConceptInfo" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="CityTabInfo" content="eltOnly">
 		<element type="Type"/>
@@ -96,16 +105,41 @@
 	</ElementType>
 	<ElementType name="Civ4BasicInfos" content="eltOnly">
 		<element type="ConceptInfos"/>
+	</ElementType>
+	<ElementType name="Civ4NewConceptInfos" content="eltOnly">
+		<element type="NewConceptInfos"/>
+	</ElementType>
+	<ElementType name="Civ4CityTabInfos" content="eltOnly">
 		<element type="CityTabInfos"/>
+	</ElementType>
+	<ElementType name="Civ4CalendarInfos" content="eltOnly">
 		<element type="CalendarInfos"/>
+	</ElementType>
+	<ElementType name="Civ4SeasonInfos" content="eltOnly">
 		<element type="SeasonInfos"/>
+	</ElementType>
+	<ElementType name="Civ4MonthInfos" content="eltOnly">
 		<element type="MonthInfos"/>
+	</ElementType>
+	<ElementType name="Civ4DenialInfos" content="eltOnly">
 		<element type="DenialInfos"/>
+	</ElementType>
+	<ElementType name="Civ4InvisibleInfos" content="eltOnly">
 		<element type="InvisibleInfos"/>
+	</ElementType>
+	<ElementType name="Civ4UnitCombatInfos" content="eltOnly">
 		<element type="UnitCombatInfos"/>
+	</ElementType>
+	<ElementType name="Civ4DomainInfos" content="eltOnly">
 		<element type="DomainInfos"/>
+	</ElementType>
+	<ElementType name="Civ4UnitAIInfos" content="eltOnly">
 		<element type="UnitAIInfos"/>
+	</ElementType>
+	<ElementType name="Civ4AttitudeInfos" content="eltOnly">
 		<element type="AttitudeInfos"/>
+	</ElementType>
+	<ElementType name="Civ4MemoryInfos" content="eltOnly">
 		<element type="MemoryInfos"/>
 	</ElementType>
 </Schema>

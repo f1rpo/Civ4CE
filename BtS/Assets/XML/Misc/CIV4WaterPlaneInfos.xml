@@ -30,9 +30,9 @@
 			<WaterTextures>
 				<WaterBaseTexture>
 					<TextureFile>Art/Terrain/Water/Water.dds</TextureFile>
-					<TextureScaling>0.0010822511</TextureScaling>
-					<URate>0.00016667</URate>
-					<VRate>0.00004167</VRate>
+					<TextureScaling>0.0020822511</TextureScaling>
+					<URate>0.000150003</URate>
+					<VRate>0.000029169</VRate>
 				</WaterBaseTexture>
 				<WaterTransitionTexture>
 					<TextureFile>Art/Terrain/Water/CoastLandBlends.dds</TextureFile>

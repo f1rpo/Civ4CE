@@ -109,6 +109,29 @@
 			<Button>,Art/Interface/Buttons/Actions/Fortify.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,8,1</Button>
 		</MissionInfo>
 		<MissionInfo>
+			<Type>MISSION_PLUNDER</Type>
+			<Description>TXT_KEY_MISSION_PLUNDER</Description>
+			<Help>TXT_KEY_MISSION_PLUNDER_HELP</Help>
+			<Waypoint>NONE</Waypoint>
+			<EntityEventType>ENTITY_EVENT_FORTIFY</EntityEventType>
+			<iTime>0</iTime>
+			<bTarget>0</bTarget>
+			<bBuild>0</bBuild>
+			<bSound>1</bSound>
+			<HotKey>KB_P</HotKey>
+			<bAltDown>0</bAltDown>
+			<bShiftDown>1</bShiftDown>
+			<bCtrlDown>0</bCtrlDown>
+			<iHotKeyPriority>0</iHotKeyPriority>
+			<HotKeyAlt/>
+			<bAltDownAlt>0</bAltDownAlt>
+			<bShiftDownAlt>0</bShiftDownAlt>
+			<bCtrlDownAlt>0</bCtrlDownAlt>
+			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
+			<bVisible>1</bVisible>
+			<Button>,Art/Interface/Buttons/TechTree/Corporation.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,7,14</Button>
+		</MissionInfo>
+		<MissionInfo>
 			<Type>MISSION_AIRPATROL</Type>
 			<Description>TXT_KEY_MISSION_INTERCEPT</Description>
 			<Help>TXT_KEY_MISSION_INTERCEPT_HELP</Help>
@@ -131,6 +154,29 @@
 			<iOrderPriority>14</iOrderPriority>
 			<bVisible>1</bVisible>
 			<Button>,Art/Interface/Buttons/Actions/Intercept.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,3,2</Button>
+		</MissionInfo>
+		<MissionInfo>
+			<Type>MISSION_SEAPATROL</Type>
+			<Description>TXT_KEY_MISSION_SEAPATROL</Description>
+			<Help>TXT_KEY_MISSION_SEAPATROL_HELP</Help>
+			<Waypoint>NONE</Waypoint>
+			<iTime>0</iTime>
+			<bTarget>0</bTarget>
+			<bBuild>0</bBuild>
+			<bSound>1</bSound>
+			<HotKey>KB_P</HotKey>
+			<bAltDown>0</bAltDown>
+			<bShiftDown>0</bShiftDown>
+			<bCtrlDown>0</bCtrlDown>
+			<iHotKeyPriority>1</iHotKeyPriority>
+			<HotKeyAlt/>
+			<bAltDownAlt>0</bAltDownAlt>
+			<bShiftDownAlt>0</bShiftDownAlt>
+			<bCtrlDownAlt>0</bCtrlDownAlt>
+			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
+			<iOrderPriority>12</iOrderPriority>
+			<bVisible>1</bVisible>
+			<Button>,Art/Interface/Buttons/TechTree/Corporation.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,6,16</Button>
 		</MissionInfo>
 		<MissionInfo>
 			<Type>MISSION_HEAL</Type>
@@ -211,6 +257,18 @@
 			<Button>,Art/Interface/Buttons/Actions/Recon.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,3,6</Button>
 		</MissionInfo>
 		<MissionInfo>
+			<Type>MISSION_PARADROP</Type>
+			<Description>TXT_KEY_MISSION_PARADROP</Description>
+			<Help>TXT_KEY_MISSION_PARADROP_HELP</Help>
+			<Waypoint>NONE</Waypoint>
+			<EntityEventType>ENTITY_EVENT_PARADROP</EntityEventType>
+			<iTime>1</iTime>
+			<bTarget>0</bTarget>
+			<bBuild>0</bBuild>
+			<bSound>1</bSound>
+			<Button>,Art/Interface/Buttons/TechTree/Corporation.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,5,16</Button>
+		</MissionInfo>
+		<MissionInfo>
 			<Type>MISSION_AIRBOMB</Type>
 			<Description>TXT_KEY_MISSION_AIRBOMB</Description>
 			<Help>TXT_KEY_MISSION_AIRBOMB_HELP</Help>
@@ -223,12 +281,35 @@
 			<Button>,Art/Interface/Buttons/Actions/Airbomb.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,5,6</Button>
 		</MissionInfo>
 		<MissionInfo>
+			<Type>MISSION_RANGE_ATTACK</Type>
+			<Description>TXT_KEY_MISSION_RANGE_ATTACK</Description>
+			<Help>TXT_KEY_MISSION_RANGE_ATTACK_HELP</Help>
+			<Waypoint>NONE</Waypoint>
+			<EntityEventType>ENTITY_EVENT_BOMBARD</EntityEventType>
+			<iTime>10</iTime>
+			<bTarget>0</bTarget>
+			<bBuild>0</bBuild>
+			<bSound>1</bSound>
+			<HotKey>KB_B</HotKey>
+			<bAltDown>0</bAltDown>
+			<bShiftDown>0</bShiftDown>
+			<bCtrlDown>0</bCtrlDown>
+			<iHotKeyPriority>0</iHotKeyPriority>
+			<HotKeyAlt/>
+			<bAltDownAlt>0</bAltDownAlt>
+			<bShiftDownAlt>0</bShiftDownAlt>
+			<bCtrlDownAlt>0</bCtrlDownAlt>
+			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
+			<bVisible>1</bVisible>
+			<Button>,Art/Interface/Buttons/Actions/Bombard.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,2,1</Button>
+		</MissionInfo>
+		<MissionInfo>
 			<Type>MISSION_BOMBARD</Type>
 			<Description>TXT_KEY_MISSION_BOMBARD</Description>
 			<Help>TXT_KEY_MISSION_BOMBARD_HELP</Help>
 			<Waypoint>NONE</Waypoint>
 			<EntityEventType>ENTITY_EVENT_BOMBARD</EntityEventType>
-			<iTime>16</iTime>
+			<iTime>10</iTime>
 			<bTarget>0</bTarget>
 			<bBuild>0</bBuild>
 			<bSound>1</bSound>
@@ -372,6 +453,17 @@
 			<bSound>1</bSound>
 		</MissionInfo>
 		<MissionInfo>
+			<Type>MISSION_SPREAD_CORPORATION</Type>
+			<Description>TXT_KEY_MISSION_SPREAD_CORPORATION</Description>
+			<Help>TXT_KEY_MISSION_SPREAD_CORPORATION_HELP</Help>
+			<Waypoint>NONE</Waypoint>
+			<EntityEventType>ENTITY_EVENT_GREAT_EVENT</EntityEventType>
+			<iTime>16</iTime>
+			<bTarget>0</bTarget>
+			<bBuild>0</bBuild>
+			<bSound>1</bSound>
+		</MissionInfo>
+		<MissionInfo>
 			<Type>MISSION_JOIN</Type>
 			<Description>TXT_KEY_MISSION_JOIN_CITY</Description>
 			<Help>TXT_KEY_MISSION_JOIN_CITY_HELP</Help>
@@ -486,6 +578,29 @@
 			<Button>,Art/Interface/Buttons/Actions/GreatWork.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,4,3</Button>
 		</MissionInfo>
 		<MissionInfo>
+			<Type>MISSION_INFILTRATE</Type>
+			<Description>TXT_KEY_MISSION_INFILTRATE</Description>
+			<Help>TXT_KEY_MISSION_INFILTRATE_HELP</Help>
+			<Waypoint>NONE</Waypoint>
+			<EntityEventType>ENTITY_EVENT_GREAT_EVENT</EntityEventType>
+			<iTime>18</iTime>
+			<bTarget>0</bTarget>
+			<bBuild>0</bBuild>
+			<bSound>0</bSound>
+			<HotKey/>
+			<bAltDown>0</bAltDown>
+			<bShiftDown>0</bShiftDown>
+			<bCtrlDown>0</bCtrlDown>
+			<iHotKeyPriority>0</iHotKeyPriority>
+			<HotKeyAlt/>
+			<bAltDownAlt>0</bAltDownAlt>
+			<bShiftDownAlt>0</bShiftDownAlt>
+			<bCtrlDownAlt>0</bCtrlDownAlt>
+			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
+			<bVisible>1</bVisible>
+			<Button>,Art/Interface/Buttons/TechTree/Corporation.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,7,16</Button>
+		</MissionInfo>
+		<MissionInfo>
 			<Type>MISSION_GOLDEN_AGE</Type>
 			<Description>TXT_KEY_MISSION_START_GOLDENAGE</Description>
 			<Help>TXT_KEY_MISSION_START_GOLDENAGE_HELP</Help>
@@ -540,6 +655,52 @@
 			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
 			<bVisible>1</bVisible>
 			<Button>,Art/Interface/Buttons/TechTree/Nationalism.dds,Art/Interface/Buttons/Warlords_Atlas_1.dds,5,10</Button>
+		</MissionInfo>
+		<MissionInfo>
+			<Type>MISSION_ESPIONAGE</Type>
+			<Description>TXT_KEY_MISSION_PERFORM_ESPIONAGE</Description>
+			<Help/>
+			<Waypoint>NONE</Waypoint>
+			<EntityEventType>ENTITY_EVENT_GREAT_EVENT</EntityEventType>
+			<iTime>14</iTime>
+			<bTarget>0</bTarget>
+			<bBuild>0</bBuild>
+			<bSound>0</bSound>
+			<HotKey/>
+			<bAltDown>0</bAltDown>
+			<bShiftDown>0</bShiftDown>
+			<bCtrlDown>0</bCtrlDown>
+			<iHotKeyPriority>0</iHotKeyPriority>
+			<HotKeyAlt/>
+			<bAltDownAlt>0</bAltDownAlt>
+			<bShiftDownAlt>0</bShiftDownAlt>
+			<bCtrlDownAlt>0</bCtrlDownAlt>
+			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
+			<bVisible>1</bVisible>
+			<Button>,Art/Interface/Buttons/TechTree/Corporation.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,8,16</Button>
+		</MissionInfo>
+		<MissionInfo>
+			<Type>MISSION_DIE_ANIMATION</Type>
+			<Description>TXT_KEY_MISSION_KILL_SPY</Description>
+			<Help>TXT_KEY_MISSION_KILL_SPY_HELP</Help>
+			<Waypoint>NONE</Waypoint>
+			<EntityEventType>ENTITY_EVENT_DIE_ANIMATION</EntityEventType>
+			<iTime>16</iTime>
+			<bTarget>0</bTarget>
+			<bBuild>0</bBuild>
+			<bSound>1</bSound>
+			<HotKey>KB_K</HotKey>
+			<bAltDown>0</bAltDown>
+			<bShiftDown>0</bShiftDown>
+			<bCtrlDown>0</bCtrlDown>
+			<iHotKeyPriority>0</iHotKeyPriority>
+			<HotKeyAlt/>
+			<bAltDownAlt>0</bAltDownAlt>
+			<bShiftDownAlt>0</bShiftDownAlt>
+			<bCtrlDownAlt>0</bCtrlDownAlt>
+			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
+			<bVisible>1</bVisible>
+			<Button>,Art/Interface/Buttons/Actions/Bombard.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,2,1</Button>
 		</MissionInfo>
 		<!--The following missions are simply to link to entity events-->
 		<MissionInfo>

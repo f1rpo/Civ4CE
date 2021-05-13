@@ -155,8 +155,8 @@ class CvPediaProject:
 		
 		listName = self.top.getNextWidgetName()
 		
-		szSpecialText = CyGameTextMgr().getProjectHelp(self.iProject, True, None)
-		screen.addMultilineText(listName, szSpecialText, self.X_SPECIAL+5, self.Y_SPECIAL+5, self.W_SPECIAL-10, self.H_SPECIAL-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
+		szSpecialText = CyGameTextMgr().getProjectHelp(self.iProject, True, None)[1:]
+		screen.addMultilineText(listName, szSpecialText, self.X_SPECIAL+5, self.Y_SPECIAL+30, self.W_SPECIAL-10, self.H_SPECIAL-35, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
 		
 	def placeText(self):
 		

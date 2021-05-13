@@ -113,7 +113,7 @@ def onPbemSend(argsList):
 
 	part = writer.nextpart()
 	part.addheader('Content-Transfer-Encoding', 'base64')
-	szStartBody = "application/CivWarlordsSave; name=%s" % szFilename
+	szStartBody = "application/CivBeyondSwordSave; name=%s" % szFilename
 	body = part.startbody(szStartBody)
 	base64.encode(open(szPath+szFilename, 'rb'), body)
 

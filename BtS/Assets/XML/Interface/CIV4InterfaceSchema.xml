@@ -1,4 +1,4 @@
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Ed Lynch (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -98,6 +98,12 @@
 	<ElementType name="iFromState" content="textOnly" dt:type="int"/>
 	<ElementType name="iToState" content="textOnly" dt:type="int"/>
 	<ElementType name="NodeName" content="textOnly"/>
+	<ElementType name="ProjectName" content="textOnly"/>
+	<ElementType name="CameraUpAxis" content="textOnly"/>
+	<ElementType name="InfoType" content="textOnly"/>
+	<ElementType name="PartNumber" content="textOnly" dt:type="int"/>
+	<ElementType name="ArtType" content="textOnly" dt:type="int"/>
+	<ElementType name="EventCode" content="textOnly" dt:type="int"/>
 	<ElementType name="iAnimation" content="textOnly" dt:type="int"/>
 	<ElementType name="FileName" content="textOnly"/>
 	<ElementType name="ThroneRoomCamera" content="eltOnly">
@@ -112,8 +118,10 @@
 		<element type="iAnimation"/>
 	</ElementType>
 	<ElementType name="ThroneRoomInfos" content="eltOnly">
-		<element type="ThroneRoomCamera"/>
 		<element type="ThroneRoomInfo" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="ThroneRoomCameraInfos" content="eltOnly">
+		<element type="ThroneRoomCamera"/>
 	</ElementType>
 	<ElementType name="ArtStyleType" content="textOnly"/>
 	<ElementType name="EraType" content="textOnly"/>
@@ -174,6 +182,18 @@
 	<ElementType name="WorldPickerInfos" content="eltOnly">
 		<element type="WorldPickerInfo" maxOccurs="*"/>
 	</ElementType>
+	<ElementType name="SpaceShipInfo" content="eltOnly">
+		<element type="InfoType"/>
+		<element type="NodeName"/>
+		<element type="ProjectName"/>
+		<element type="CameraUpAxis"/>
+		<element type="PartNumber"/>
+		<element type="ArtType"/>
+		<element type="EventCode"/>
+	</ElementType>
+	<ElementType name="SpaceShipInfos" content="eltOnly">
+		<element type="SpaceShipInfo" maxOccurs="*"/>
+	</ElementType>
 	<ElementType name="CameraInfo" content="eltOnly">
 		<element type="Type"/>
 		<element type="Description"/>
@@ -204,14 +224,22 @@
 	<ElementType name="Civ4ThroneRoomInfos" content="eltOnly">
 		<element type="ThroneRoomInfos" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
+	<ElementType name="Civ4ThroneRoomCameraInfos" content="eltOnly">
+		<element type="ThroneRoomCameraInfos" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
 	<ElementType name="Civ4ThroneRoomStyleInfos" content="eltOnly">
 		<element type="ThroneRoomStyleInfos" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="Civ4SlideShowInfos" content="eltOnly">
 		<element type="SlideShowInfos" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="Civ4SlideShowRandomInfos" content="eltOnly">
 		<element type="SlideShowRandomInfos" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="Civ4WorldPickerInfos" content="eltOnly">
 		<element type="WorldPickerInfos" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="Civ4SpaceShipInfos" content="eltOnly">
+		<element type="SpaceShipInfos" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 </Schema>

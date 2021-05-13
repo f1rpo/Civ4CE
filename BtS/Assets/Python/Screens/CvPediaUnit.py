@@ -135,31 +135,33 @@ class CvPediaUnit:
 		screen.addListBoxGFC(panelName, "", self.X_STATS_PANE, self.Y_STATS_PANE, self.W_STATS_PANE, self.H_STATS_PANE, TableStyles.TABLE_STYLE_EMPTY)
 		screen.enableSelect(panelName, False)
 		
-		if (gc.getUnitInfo(self.iUnit).getAirCombat() > 0):
+		if (gc.getUnitInfo(self.iUnit).getAirCombat() > 0 and gc.getUnitInfo(self.iUnit).getCombat() == 0):
 			iStrength = gc.getUnitInfo(self.iUnit).getAirCombat()
 		else:
 			iStrength = gc.getUnitInfo(self.iUnit).getCombat()
 			
 		szName = self.top.getNextWidgetName()		
 		szStrength = localText.getText("TXT_KEY_PEDIA_STRENGTH", ( iStrength, ) )
-		screen.appendListBoxString(panelName, u"<font=4>" + szStrength.upper() + u"%c" % CyGame().getSymbolID(FontSymbols.STRENGTH_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+		screen.appendListBoxStringNoUpdate(panelName, u"<font=4>" + szStrength.upper() + u"%c" % CyGame().getSymbolID(FontSymbols.STRENGTH_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
 		szName = self.top.getNextWidgetName()
 		szMovement = localText.getText("TXT_KEY_PEDIA_MOVEMENT", ( gc.getUnitInfo(self.iUnit).getMoves(), ) )
-		screen.appendListBoxString(panelName, u"<font=4>" + szMovement.upper() + u"%c" % CyGame().getSymbolID(FontSymbols.MOVES_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+		screen.appendListBoxStringNoUpdate(panelName, u"<font=4>" + szMovement.upper() + u"%c" % CyGame().getSymbolID(FontSymbols.MOVES_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
-		if (gc.getUnitInfo(self.iUnit).getProductionCost() >= 0):
+		if (gc.getUnitInfo(self.iUnit).getProductionCost() >= 0 and not gc.getUnitInfo(self.iUnit).isFound()):
 			szName = self.top.getNextWidgetName()
 			if self.top.iActivePlayer == -1:
 				szCost = localText.getText("TXT_KEY_PEDIA_COST", ((gc.getUnitInfo(self.iUnit).getProductionCost() * gc.getDefineINT("UNIT_PRODUCTION_PERCENT"))/100,))
 			else:
 				szCost = localText.getText("TXT_KEY_PEDIA_COST", ( gc.getActivePlayer().getUnitProductionNeeded(self.iUnit), ) )
-			screen.appendListBoxString(panelName, u"<font=4>" + szCost.upper() + u"%c" % gc.getYieldInfo(YieldTypes.YIELD_PRODUCTION).getChar() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+			screen.appendListBoxStringNoUpdate(panelName, u"<font=4>" + szCost.upper() + u"%c" % gc.getYieldInfo(YieldTypes.YIELD_PRODUCTION).getChar() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
 		if (gc.getUnitInfo(self.iUnit).getAirRange() > 0):
 			szName = self.top.getNextWidgetName()
 			szRange = localText.getText("TXT_KEY_PEDIA_RANGE", ( gc.getUnitInfo(self.iUnit).getAirRange(), ) )
-			screen.appendListBoxString(panelName, u"<font=4>" + szRange.upper() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+			screen.appendListBoxStringNoUpdate(panelName, u"<font=4>" + szRange.upper() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+			
+		screen.updateListBox(panelName)
 						
 	# Place prereqs (techs, resources)
 	def placeRequires(self):
@@ -273,7 +275,14 @@ class CvPediaUnit:
 						PanelStyles.PANEL_STYLE_BLUE50 )
 		
 		textName = self.top.getNextWidgetName()
-		screen.addMultilineText( textName, gc.getUnitInfo(self.iUnit).getCivilopedia(), self.X_HISTORY_PANE + 15, self.Y_HISTORY_PANE + 40,
+		szText = u"" 
+		if len(gc.getUnitInfo(self.iUnit).getStrategy()) > 0:
+			szText += localText.getText("TXT_KEY_CIVILOPEDIA_STRATEGY", ())
+			szText += gc.getUnitInfo(self.iUnit).getStrategy()
+			szText += u"\n\n"
+		szText += localText.getText("TXT_KEY_CIVILOPEDIA_BACKGROUND", ())
+		szText += gc.getUnitInfo(self.iUnit).getCivilopedia()
+		screen.addMultilineText( textName, szText, self.X_HISTORY_PANE + 15, self.Y_HISTORY_PANE + 40,
 		    self.W_HISTORY_PANE - (15 * 2), self.H_HISTORY_PANE - (15 * 2) - 25, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		
 	def placeLinks(self, bRedraw):
@@ -293,11 +302,15 @@ class CvPediaUnit:
 		iSelected = 0
 		for iI in range(gc.getNumUnitInfos()):
 			if (not gc.getUnitInfo(unitsList[iI][1]).isGraphicalOnly()):
-				if bRedraw:
-					screen.appendListBoxString( self.top.LIST_ID, unitsList[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, unitsList[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
-				if unitsList[iI][1] == self.iUnit:
-					iSelected = i
-				i += 1
+				if (not gc.getDefineINT("CIVILOPEDIA_SHOW_ACTIVE_CIVS_ONLY") or not gc.getGame().isFinalInitialized() or gc.getGame().isUnitEverActive(unitsList[iI][1])):
+					if bRedraw:
+						screen.appendListBoxStringNoUpdate( self.top.LIST_ID, unitsList[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, unitsList[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
+					if unitsList[iI][1] == self.iUnit:
+						iSelected = i
+					i += 1
+					
+		if bRedraw:
+			screen.updateListBox(self.top.LIST_ID)
 
 		screen.setSelectedListBoxStringGFC(self.top.LIST_ID, iSelected)
 			
@@ -313,7 +326,7 @@ class CvPediaUnit:
 		screen.addMultiListControlGFC(rowListName, "", self.X_PROMO_PANE+15, self.Y_PROMO_PANE+40, self.W_PROMO_PANE-20, self.H_PROMO_PANE-40, 1, self.PROMOTION_ICON_SIZE, self.PROMOTION_ICON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
 	
 		for k in range(gc.getNumPromotionInfos()):
-			if (isPromotionValid(k, self.iUnit) and not gc.getPromotionInfo(k).isGraphicalOnly()):
+			if (isPromotionValid(k, self.iUnit, false) and not gc.getPromotionInfo(k).isGraphicalOnly()):
 				screen.appendMultiListButton( rowListName, gc.getPromotionInfo(k).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, k, -1, false )
 								
 	# Will handle the input for this screen...

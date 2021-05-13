@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Jesse Smith (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Firaxis Games (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -8,11 +8,15 @@
 	<MovieArtInfos>
 		<MovieArtInfo>
 			<Type>ART_DEF_MOVIE_INTRO</Type>
-			<Path>Art/Movies/Intros/intro.bik</Path>
+			<Path>Art/Movies/Intros/BTS Intro Final.bik</Path>
 		</MovieArtInfo>
 		<MovieArtInfo>
 			<Type>ART_DEF_MOVIE_2K_INTRO</Type>
 			<Path>Art/Movies/Intros/2KG_NTSC.bik</Path>
+		</MovieArtInfo>
+		<MovieArtInfo>
+			<Type>ART_DEF_MOVIE_NVIDIA_INTRO</Type>
+			<Path>Art/Movies/Intros/TheWay_720x486.bik</Path>
 		</MovieArtInfo>
 		<MovieArtInfo>
 			<Type>ART_DEF_MOVIE_PLACEHOLDER</Type>
@@ -186,6 +190,26 @@
 			<Type>ART_DEF_MOVIE_SHRINE_TAOIST</Type>
 			<Path>Art/Movies/Religion/Taoism/Shrine_Tao_dwg_512.dds</Path>
 			<KFM>None</KFM>
+		</MovieArtInfo>
+		<MovieArtInfo>
+			<Type>ART_DEF_MOVIE_APOSTOLIC_PALACE</Type>
+			<Path>Art/Movies/Wonders/Apostolic Palace.bik</Path>
+		</MovieArtInfo>
+		<MovieArtInfo>
+			<Type>ART_DEF_MOVIE_MAUSOLEUM_OF_MAUSSOLLOS</Type>
+			<Path>Art/Movies/Wonders/Mausoleum.bik</Path>
+		</MovieArtInfo>
+		<MovieArtInfo>
+			<Type>ART_DEF_MOVIE_STATUE_OF_ZEUS</Type>
+			<Path>Art/Movies/Wonders/Zeus.bik</Path>
+		</MovieArtInfo>
+		<MovieArtInfo>
+			<Type>ART_DEF_MOVIE_SHWEDAGON_PAYA</Type>
+			<Path>Art/Movies/Wonders/Shwedagon Paya.bik</Path>
+		</MovieArtInfo>
+		<MovieArtInfo>
+			<Type>ART_DEF_MOVIE_CHRIST_THE_REDEEMER</Type>
+			<Path>Art/Movies/Wonders/Christ the Redeemer.bik</Path>
 		</MovieArtInfo>
 	</MovieArtInfos>
 </Civ4ArtDefines>

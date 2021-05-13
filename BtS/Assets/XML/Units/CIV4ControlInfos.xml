@@ -353,6 +353,21 @@
 			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
 		</ControlInfo>
 		<ControlInfo>
+			<Type>CONTROL_UNIT_ICONS</Type>
+			<Description>TXT_KEY_ACTION_UNIT_ICONS</Description>
+			<Help>TXT_KEY_GLOBELAYER_UNITS</Help>
+			<HotKey>KB_U</HotKey>
+			<bAltDown>1</bAltDown>
+			<bShiftDown>0</bShiftDown>
+			<bCtrlDown>0</bCtrlDown>
+			<iHotKeyPriority>0</iHotKeyPriority>
+			<HotKeyAlt/>
+			<bAltDownAlt>0</bAltDownAlt>
+			<bShiftDownAlt>0</bShiftDownAlt>
+			<bCtrlDownAlt>0</bCtrlDownAlt>
+			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
+		</ControlInfo>
+		<ControlInfo>
 			<Type>CONTROL_GLOBELAYER</Type>
 			<Description>TXT_KEY_GLOBE_VIEW</Description>
 			<Help>TXT_KEY_GLOBEVIEW_TOGGLE</Help>
@@ -614,6 +629,21 @@
 			<HotKey>KB_F7</HotKey>
 			<bAltDown>0</bAltDown>
 			<bShiftDown>0</bShiftDown>
+			<bCtrlDown>0</bCtrlDown>
+			<iHotKeyPriority>0</iHotKeyPriority>
+			<HotKeyAlt/>
+			<bAltDownAlt>0</bAltDownAlt>
+			<bShiftDownAlt>0</bShiftDownAlt>
+			<bCtrlDownAlt>0</bCtrlDownAlt>
+			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
+		</ControlInfo>
+		<ControlInfo>
+			<Type>CONTROL_CORPORATION_SCREEN</Type>
+			<Description>TXT_KEY_ACTION_SHOW_CORPORATION_SCREEN</Description>
+			<Help/>
+			<HotKey>KB_F7</HotKey>
+			<bAltDown>0</bAltDown>
+			<bShiftDown>1</bShiftDown>
 			<bCtrlDown>0</bCtrlDown>
 			<iHotKeyPriority>0</iHotKeyPriority>
 			<HotKeyAlt/>
@@ -885,6 +915,36 @@
 			<bAltDown>0</bAltDown>
 			<bShiftDown>0</bShiftDown>
 			<bCtrlDown>1</bCtrlDown>
+			<iHotKeyPriority>0</iHotKeyPriority>
+			<HotKeyAlt/>
+			<bAltDownAlt>0</bAltDownAlt>
+			<bShiftDownAlt>0</bShiftDownAlt>
+			<bCtrlDownAlt>0</bCtrlDownAlt>
+			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
+		</ControlInfo>
+		<ControlInfo>
+			<Type>CONTROL_ESPIONAGE_SCREEN</Type>
+			<Description>TXT_KEY_ESPIONAGE_SCREEN</Description>
+			<Help/>
+			<HotKey>KB_E</HotKey>
+			<bAltDown>0</bAltDown>
+			<bShiftDown>0</bShiftDown>
+			<bCtrlDown>1</bCtrlDown>
+			<iHotKeyPriority>0</iHotKeyPriority>
+			<HotKeyAlt/>
+			<bAltDownAlt>0</bAltDownAlt>
+			<bShiftDownAlt>0</bShiftDownAlt>
+			<bCtrlDownAlt>0</bCtrlDownAlt>
+			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
+		</ControlInfo>
+		<ControlInfo>
+			<Type>CONTROL_FREE_COLONY</Type>
+			<Description>TXT_KEY_FREE_COLONY</Description>
+			<Help/>
+			<HotKey>KB_F1</HotKey>
+			<bAltDown>1</bAltDown>
+			<bShiftDown>0</bShiftDown>
+			<bCtrlDown>0</bCtrlDown>
 			<iHotKeyPriority>0</iHotKeyPriority>
 			<HotKeyAlt/>
 			<bAltDownAlt>0</bAltDownAlt>

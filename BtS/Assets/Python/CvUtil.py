@@ -42,6 +42,7 @@ PopupTypeWBEditUnit = 201
 PopupTypeWBContextEnd	= 299
 
 # EVENT ID VALUES (also used in popup contexts)
+EventGetEspionageTarget = 4999
 EventEditCityName = 5000
 EventEditCity = 5001
 EventPlaceObject = 5002
@@ -52,6 +53,7 @@ EventWBAllPlotsPopup = 5008
 EventWBLandmarkPopup = 5009
 EventWBScriptPopup = 5010
 EventWBStartYearPopup = 5011
+EventShowWonder = 5012
 
 EventLButtonDown=1
 EventLcButtonDblClick=2
@@ -161,7 +163,7 @@ def shuffle(num, rand):
 	return piShuffle
 
 def spawnUnit(iUnit, pPlot, pPlayer):
-	pPlayer.initUnit(iUnit, pPlot.getX(), pPlot.getY(), UnitAITypes.NO_UNITAI)
+	pPlayer.initUnit(iUnit, pPlot.getX(), pPlot.getY(), UnitAITypes.NO_UNITAI, DirectionTypes.NO_DIRECTION)
 	return 1
 
 def findInfoTypeNum(infoGetter, numInfos, typeStr):
@@ -193,9 +195,9 @@ def AdjustBuilding(add, all, BuildingIdx, pCity): # adds/removes buildings from 
 	if (BuildingIdx!= -1):  
 		if (all):                #Add/Remove ALL
 			for i in range(BuildingIdx):
-				pCity.setHasRealBuildingIdx(i,add)
+				pCity.setNumRealBuildingIdx(i,add)
 		else:
-			pCity.setHasRealBuildingIdx(BuildingIdx,add)
+			pCity.setNumRealBuildingIdx(BuildingIdx,add)
 	return 0
 
 def getIcon(iconEntry):						# returns Font Icons
@@ -256,14 +258,26 @@ def combatDetailMessageBuilder(cdUnit, ePlayer, iChange):
 		msg=localText.getText("TXT_KEY_COMBAT_MESSAGE_CITY_DEFENSE",(cdUnit.iCityDefenseModifier * iChange,))
 		CyInterface().addCombatMessage(ePlayer,msg)
 		
+	if (cdUnit.iHillsAttackModifier != 0):
+		msg=localText.getText("TXT_KEY_COMBAT_MESSAGE_HILLS_ATTACK",(cdUnit.iHillsAttackModifier * iChange,))
+		CyInterface().addCombatMessage(ePlayer,msg)
+		
 	if (cdUnit.iHillsDefenseModifier != 0):
 		msg=localText.getText("TXT_KEY_COMBAT_MESSAGE_HILLS",(cdUnit.iHillsDefenseModifier * iChange,))
+		CyInterface().addCombatMessage(ePlayer,msg)
+		
+	if (cdUnit.iFeatureAttackModifier != 0):
+		msg=localText.getText("TXT_KEY_COMBAT_MESSAGE_FEATURE_ATTACK",(cdUnit.iFeatureAttackModifier * iChange,))
 		CyInterface().addCombatMessage(ePlayer,msg)
 		
 	if (cdUnit.iFeatureDefenseModifier != 0):
 		msg=localText.getText("TXT_KEY_COMBAT_MESSAGE_FEATURE",(cdUnit.iFeatureDefenseModifier * iChange,))
 		CyInterface().addCombatMessage(ePlayer,msg)
 		
+	if (cdUnit.iTerrainAttackModifier != 0):
+		msg=localText.getText("TXT_KEY_COMBAT_MESSAGE_TERRAIN_ATTACK",(cdUnit.iTerrainAttackModifier * iChange,))
+		CyInterface().addCombatMessage(ePlayer,msg)
+
 	if (cdUnit.iTerrainDefenseModifier != 0):
 		msg=localText.getText("TXT_KEY_COMBAT_MESSAGE_TERRAIN",(cdUnit.iTerrainDefenseModifier * iChange,))
 		CyInterface().addCombatMessage(ePlayer,msg)

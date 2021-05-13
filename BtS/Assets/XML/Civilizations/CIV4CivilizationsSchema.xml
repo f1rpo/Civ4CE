@@ -13,6 +13,7 @@
 	<ElementType name="iBasePeaceWeight" content="textOnly" dt:type="int"/>
 	<ElementType name="iPeaceWeightRand" content="textOnly" dt:type="int"/>
 	<ElementType name="iWarmongerRespect" content="textOnly" dt:type="int"/>
+	<ElementType name="iEspionageWeight" content="textOnly" dt:type="int"/>
 	<ElementType name="iRefuseToTalkWarThreshold" content="textOnly" dt:type="int"/>
 	<ElementType name="iNoTechTradeThreshold" content="textOnly" dt:type="int"/>
 	<ElementType name="iTechTradeKnownPercent" content="textOnly" dt:type="int"/>
@@ -77,7 +78,9 @@
 	<ElementType name="PermanentAllianceRefuseAttitudeThreshold" content="textOnly"/>
 	<ElementType name="VassalRefuseAttitudeThreshold" content="textOnly"/>
 	<ElementType name="iVassalPowerModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iFreedomAppreciation" content="textOnly" dt:type="int"/>
 	<ElementType name="FavoriteCivic" content="textOnly"/>
+	<ElementType name="FavoriteReligion" content="textOnly"/>
 	<ElementType name="TraitType" content="textOnly"/>
 	<ElementType name="bTrait" content="textOnly" dt:type="boolean"/>
 	<ElementType name="Trait" content="eltOnly">
@@ -96,6 +99,7 @@
 	<ElementType name="Flavors" content="eltOnly">
 		<element type="Flavor" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
+	<ElementType name="DerivativeCiv" content="textOnly"/>
 	<ElementType name="ContactType" content="textOnly"/>
 	<ElementType name="iContactRand" content="textOnly" dt:type="int"/>
 	<ElementType name="ContactRand" content="eltOnly">
@@ -188,6 +192,7 @@
 		<element type="iBasePeaceWeight"/>
 		<element type="iPeaceWeightRand"/>
 		<element type="iWarmongerRespect"/>
+		<element type="iEspionageWeight"/>
 		<element type="iRefuseToTalkWarThreshold"/>
 		<element type="iNoTechTradeThreshold"/>
 		<element type="iTechTradeKnownPercent"/>
@@ -252,7 +257,9 @@
 		<element type="PermanentAllianceRefuseAttitudeThreshold"/>
 		<element type="VassalRefuseAttitudeThreshold"/>
 		<element type="iVassalPowerModifier"/>
+		<element type="iFreedomAppreciation"/>
 		<element type="FavoriteCivic"/>
+		<element type="FavoriteReligion"/>
 		<element type="Traits"/>
 		<element type="Flavors"/>
 		<element type="ContactRands"/>
@@ -272,6 +279,7 @@
 	</ElementType>
 	<ElementType name="Type" content="textOnly"/>
 	<ElementType name="ShortDescription" content="textOnly"/>
+	<ElementType name="Help" content="textOnly"/>
 	<ElementType name="iHealth" content="textOnly" dt:type="int"/>
 	<ElementType name="iHappiness" content="textOnly" dt:type="int"/>
 	<ElementType name="iMaxAnarchy" content="textOnly" dt:type="int"/>
@@ -320,6 +328,7 @@
 		<element type="Type"/>
 		<element type="Description"/>
 		<element type="ShortDescription"/>
+		<element type="Help" minOccurs="0"/>
 		<element type="iHealth"/>
 		<element type="iHappiness"/>
 		<element type="iMaxAnarchy"/>
@@ -420,6 +429,7 @@
 	</ElementType>
 	<ElementType name="CivilizationSelectionSound" content="textOnly"/>
 	<ElementType name="CivilizationActionSound" content="textOnly"/>
+	<ElementType name="UnitArtStyleType" content="textOnly"/>
 	<ElementType name="CivilizationInfo" content="eltOnly">
 		<element type="Type"/>
 		<element type="Description"/>
@@ -429,6 +439,7 @@
 		<element type="DefaultPlayerColor"/>
 		<element type="ArtDefineTag"/>
 		<element type="ArtStyleType"/>
+		<element type="UnitArtStyleType" minOccurs="0" maxOccurs="1"/>
 		<element type="bPlayable"/>
 		<element type="bAIPlayable"/>
 		<element type="Cities"/>
@@ -441,6 +452,7 @@
 		<element type="InitialCivics"/>
 		<element type="AnarchyCivics" minOccurs="0"/>
 		<element type="Leaders" minOccurs="0"/>
+		<element type="DerivativeCiv"/>
 		<element type="CivilizationSelectionSound"/>
 		<element type="CivilizationActionSound"/>
 	</ElementType>
@@ -456,9 +468,35 @@
 	<ElementType name="Civ4CivilizationInfos" content="eltOnly">
 		<element type="CivilizationInfos" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
+	<ElementType name="EarlyArtDefineTag" content="textOnly"/>
+	<ElementType name="LateArtDefineTag" content="textOnly"/>
+	<ElementType name="MiddleArtDefineTag" content="textOnly"/>
+	<ElementType name="UnitMeshGroup" content="eltOnly">
+		<element type="EarlyArtDefineTag" minOccurs="0"/>
+		<element type="LateArtDefineTag" minOccurs="0"/>
+		<element type="MiddleArtDefineTag" minOccurs="0"/>
+	</ElementType>
+	<ElementType name="StyleUnit" content="eltOnly">
+		<element type="UnitType"/>
+		<element type="UnitMeshGroup" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="StyleUnits" content="eltOnly">
+		<element type="StyleUnit" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="UnitArtStyleTypeInfo" content="eltOnly">
+		<element type="Type"/>
+		<element type="StyleUnits" minOccurs="0" maxOccurs="1"/>
+	</ElementType>
+	<ElementType name="UnitArtStyleTypeInfos" content="eltOnly">
+		<element type="UnitArtStyleTypeInfo" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="Civ4UnitArtStyleTypeInfos" content="eltOnly">
+		<element type="UnitArtStyleTypeInfos" minOccurs="0"/>
+	</ElementType>
 	<ElementType name="Civ4Civilizations" content="eltOnly">
 		<element type="LeaderHeadInfos" minOccurs="0" maxOccurs="*"/>
-		<element type="TraitInfos"/>
+		<element type="TraitInfos" minOccurs="0" maxOccurs="*"/>
 		<element type="CivilizationInfos" minOccurs="0" maxOccurs="*"/>
+		<element type="UnitArtStyleTypeInfos" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 </Schema>

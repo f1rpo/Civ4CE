@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Jesse Smith (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -26,7 +26,10 @@
 			<iTradeProfitPercent>80</iTradeProfitPercent>
 			<iDistanceMaintenancePercent>50</iDistanceMaintenancePercent>
 			<iNumCitiesMaintenancePercent>45</iNumCitiesMaintenancePercent>
+			<iColonyMaintenancePercent>67</iColonyMaintenancePercent>
+			<iCorporationMaintenancePercent>400</iCorporationMaintenancePercent>
 			<iNumCitiesAnarchyPercent>11</iNumCitiesAnarchyPercent>
+			<iAdvancedStartPointsMod>80</iAdvancedStartPointsMod>
 		</WorldInfo>
 		<WorldInfo>
 			<Type>WORLDSIZE_TINY</Type>
@@ -47,7 +50,10 @@
 			<iTradeProfitPercent>70</iTradeProfitPercent>
 			<iDistanceMaintenancePercent>60</iDistanceMaintenancePercent>
 			<iNumCitiesMaintenancePercent>40</iNumCitiesMaintenancePercent>
+			<iColonyMaintenancePercent>60</iColonyMaintenancePercent>
+			<iCorporationMaintenancePercent>200</iCorporationMaintenancePercent>
 			<iNumCitiesAnarchyPercent>10</iNumCitiesAnarchyPercent>
+			<iAdvancedStartPointsMod>85</iAdvancedStartPointsMod>
 		</WorldInfo>
 		<WorldInfo>
 			<Type>WORLDSIZE_SMALL</Type>
@@ -68,7 +74,10 @@
 			<iTradeProfitPercent>60</iTradeProfitPercent>
 			<iDistanceMaintenancePercent>70</iDistanceMaintenancePercent>
 			<iNumCitiesMaintenancePercent>35</iNumCitiesMaintenancePercent>
+			<iColonyMaintenancePercent>52</iColonyMaintenancePercent>
+			<iCorporationMaintenancePercent>150</iCorporationMaintenancePercent>
 			<iNumCitiesAnarchyPercent>9</iNumCitiesAnarchyPercent>
+			<iAdvancedStartPointsMod>90</iAdvancedStartPointsMod>
 		</WorldInfo>
 		<WorldInfo>
 			<Type>WORLDSIZE_STANDARD</Type>
@@ -89,7 +98,10 @@
 			<iTradeProfitPercent>50</iTradeProfitPercent>
 			<iDistanceMaintenancePercent>80</iDistanceMaintenancePercent>
 			<iNumCitiesMaintenancePercent>30</iNumCitiesMaintenancePercent>
+			<iColonyMaintenancePercent>45</iColonyMaintenancePercent>
+			<iCorporationMaintenancePercent>100</iCorporationMaintenancePercent>
 			<iNumCitiesAnarchyPercent>8</iNumCitiesAnarchyPercent>
+			<iAdvancedStartPointsMod>100</iAdvancedStartPointsMod>
 		</WorldInfo>
 		<WorldInfo>
 			<Type>WORLDSIZE_LARGE</Type>
@@ -110,7 +122,10 @@
 			<iTradeProfitPercent>40</iTradeProfitPercent>
 			<iDistanceMaintenancePercent>90</iDistanceMaintenancePercent>
 			<iNumCitiesMaintenancePercent>25</iNumCitiesMaintenancePercent>
+			<iColonyMaintenancePercent>37</iColonyMaintenancePercent>
+			<iCorporationMaintenancePercent>75</iCorporationMaintenancePercent>
 			<iNumCitiesAnarchyPercent>7</iNumCitiesAnarchyPercent>
+			<iAdvancedStartPointsMod>110</iAdvancedStartPointsMod>
 		</WorldInfo>
 		<WorldInfo>
 			<Type>WORLDSIZE_HUGE</Type>
@@ -131,7 +146,10 @@
 			<iTradeProfitPercent>30</iTradeProfitPercent>
 			<iDistanceMaintenancePercent>100</iDistanceMaintenancePercent>
 			<iNumCitiesMaintenancePercent>20</iNumCitiesMaintenancePercent>
+			<iColonyMaintenancePercent>30</iColonyMaintenancePercent>
+			<iCorporationMaintenancePercent>50</iCorporationMaintenancePercent>
 			<iNumCitiesAnarchyPercent>6</iNumCitiesAnarchyPercent>
+			<iAdvancedStartPointsMod>120</iAdvancedStartPointsMod>
 		</WorldInfo>
 	</WorldInfos>
 </Civ4WorldInfo>

@@ -6,91 +6,109 @@ BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
 	Team=0
+	RandomStartLocation=true
 EndPlayer
 BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
 	Team=1
+	RandomStartLocation=true
 EndPlayer                         
 BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
 	Team=2
+	RandomStartLocation=true
 EndPlayer 			
 BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
 	Team=3
+	RandomStartLocation=true
 EndPlayer                         
 BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
 	Team=4
+	RandomStartLocation=true
 EndPlayer         		
 BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
 	Team=5
+	RandomStartLocation=true
 EndPlayer 			
 BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
 	Team=6
+	RandomStartLocation=true
 EndPlayer                         
 BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
 	Team=7
+	RandomStartLocation=true
 EndPlayer                         
 BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
 	Team=8
+	RandomStartLocation=true
 EndPlayer 			
 BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
 	Team=9
+	RandomStartLocation=true
 EndPlayer                         
 BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
 	Team=10
+	RandomStartLocation=true
 EndPlayer                         
 BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
 	Team=11
+	RandomStartLocation=true
 EndPlayer 			
 BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
 	Team=12
+	RandomStartLocation=true
 EndPlayer                         
 BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
 	Team=13
+	RandomStartLocation=true
 EndPlayer                         
 BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
 	Team=14
+	RandomStartLocation=true
 EndPlayer 			
 BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
 	Team=15
+	RandomStartLocation=true
 EndPlayer                         
 BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
 	Team=16
+	RandomStartLocation=true
 EndPlayer                         
 BeginPlayer
 	LeaderType=NONE
 	CivType=NONE
 	Team=17
+	RandomStartLocation=true
 EndPlayer 			
 
 BeginMap
@@ -104,6 +122,7 @@ BeginMap
 	climate=CLIMATE_TEMPERATE
 	sealevel=SEALEVEL_MEDIUM
 	num plots written=7300
+	Randomize Resources=true
 EndMap
 
 ### Plot Info ###

@@ -4,11 +4,14 @@ import CvMainInterface
 import CvDomesticAdvisor
 import CvTechChooser
 import CvForeignAdvisor
+import CvExoticForeignAdvisor
 import CvMilitaryAdvisor
 import CvFinanceAdvisor
 import CvReligionScreen
+import CvCorporationScreen
 import CvCivicsScreen
 import CvVictoryScreen
+import CvEspionageAdvisor
 
 import CvOptionsScreen
 import CvReplayScreen
@@ -25,6 +28,7 @@ import CvIntroMovieScreen
 import CvVictoryMovieScreen
 import CvWonderMovieScreen
 import CvEraMovieScreen
+import CvSpaceShipScreen
 
 import CvPediaMain
 import CvPediaHistory
@@ -67,7 +71,8 @@ def numPlotListButtons():
 
 techChooser = CvTechChooser.CvTechChooser()
 def showTechChooser():
-	techChooser.interfaceScreen()
+	if (-1 != CyGame().getActivePlayer()):
+		techChooser.interfaceScreen()
 
 hallOfFameScreen = CvHallOfFameScreen.CvHallOfFameScreen(HALL_OF_FAME)
 def showHallOfFame(argsList):
@@ -75,31 +80,48 @@ def showHallOfFame(argsList):
 
 civicScreen = CvCivicsScreen.CvCivicsScreen()
 def showCivicsScreen():
-	civicScreen.interfaceScreen()
+	if (-1 != CyGame().getActivePlayer()):
+		civicScreen.interfaceScreen()
 
 religionScreen = CvReligionScreen.CvReligionScreen()
 def showReligionScreen():
-	religionScreen.interfaceScreen()
+	if (-1 != CyGame().getActivePlayer()):
+		religionScreen.interfaceScreen()
+
+corporationScreen = CvCorporationScreen.CvCorporationScreen()
+def showCorporationScreen():
+	if (-1 != CyGame().getActivePlayer()):
+		corporationScreen.interfaceScreen()
 
 optionsScreen = CvOptionsScreen.CvOptionsScreen()
 def showOptionsScreen():
 	optionsScreen.interfaceScreen()
 
-foreignAdvisor = CvForeignAdvisor.CvForeignAdvisor()
+#foreignAdvisor = CvForeignAdvisor.CvForeignAdvisor()
+foreignAdvisor = CvExoticForeignAdvisor.CvExoticForeignAdvisor()
 def showForeignAdvisorScreen(argsList):
-	foreignAdvisor.interfaceScreen(argsList[0])
+	if (-1 != CyGame().getActivePlayer()):
+		foreignAdvisor.interfaceScreen(argsList[0])
 
 financeAdvisor = CvFinanceAdvisor.CvFinanceAdvisor()
 def showFinanceAdvisor():
-	financeAdvisor.interfaceScreen()
+	if (-1 != CyGame().getActivePlayer()):
+		financeAdvisor.interfaceScreen()
 
 domesticAdvisor = CvDomesticAdvisor.CvDomesticAdvisor()
 def showDomesticAdvisor(argsList):
-	domesticAdvisor.interfaceScreen()
+	if (-1 != CyGame().getActivePlayer()):
+		domesticAdvisor.interfaceScreen()
 
 militaryAdvisor = CvMilitaryAdvisor.CvMilitaryAdvisor(MILITARY_ADVISOR)
 def showMilitaryAdvisor():
-	militaryAdvisor.interfaceScreen()
+	if (-1 != CyGame().getActivePlayer()):
+		militaryAdvisor.interfaceScreen()
+
+espionageAdvisor = CvEspionageAdvisor.CvEspionageAdvisor()
+def showEspionageAdvisor():
+	if (-1 != CyGame().getActivePlayer()):
+		espionageAdvisor.interfaceScreen()
 
 dawnOfMan = CvDawnOfMan.CvDawnOfMan(DAWN_OF_MAN)
 def showDawnOfMan(argsList):
@@ -121,6 +143,11 @@ eraMovie = CvEraMovieScreen.CvEraMovieScreen()
 def showEraMovie(argsList):
 	eraMovie.interfaceScreen(argsList[0])
 	
+spaceShip = CvSpaceShipScreen.CvSpaceShipScreen()
+def showSpaceShip(argsList):
+	if (-1 != CyGame().getActivePlayer()):
+		spaceShip.interfaceScreen(argsList[0])
+	
 replayScreen = CvReplayScreen.CvReplayScreen(REPLAY_SCREEN)
 def showReplay(argsList):
 	if argsList[0] > -1:
@@ -141,9 +168,10 @@ def showTopCivs():
 
 infoScreen = CvInfoScreen.CvInfoScreen(INFO_SCREEN)
 def showInfoScreen(argsList):
-	iTabID = argsList[0]
-	iEndGame = argsList[1]
-	infoScreen.showScreen(-1, iTabID, iEndGame)
+	if (-1 != CyGame().getActivePlayer()):
+		iTabID = argsList[0]
+		iEndGame = argsList[1]
+		infoScreen.showScreen(-1, iTabID, iEndGame)
 
 debugInfoScreen = CvDebugInfoScreen.CvDebugInfoScreen()
 def showDebugInfoScreen():
@@ -155,7 +183,8 @@ def showTechSplash(argsList):
 
 victoryScreen = CvVictoryScreen.CvVictoryScreen(VICTORY_SCREEN)
 def showVictoryScreen():
-	victoryScreen.interfaceScreen()
+	if (-1 != CyGame().getActivePlayer()):
+		victoryScreen.interfaceScreen()
 
 #################################################
 ## Civilopedia
@@ -190,6 +219,9 @@ def pediaJumpToProject(argsList):
 	
 def pediaJumpToReligion(argsList):
 	pediaMainScreen.pediaJump(PEDIA_RELIGION, argsList[0], True)
+	
+def pediaJumpToCorporation(argsList):
+	pediaMainScreen.pediaJump(PEDIA_CORPORATION, argsList[0], True)
 	
 def pediaJumpToPromotion(argsList):
 	pediaMainScreen.pediaJump(PEDIA_PROMOTION, argsList[0], True)
@@ -290,6 +322,9 @@ def WorldBuilderHandleBonusCB( argsList ):
 def WorldBuilderHandleImprovementCB(argsList):
 	worldBuilderScreen.handleImprovementCB(argsList)
 
+def WorldBuilderHandleTerritoryCB(argsList):
+	worldBuilderScreen.handleTerritoryCB(argsList)
+
 def WorldBuilderHandlePlotTypeCB( argsList ):
 	worldBuilderScreen.handlePlotTypeCB(argsList)
 
@@ -371,6 +406,19 @@ def WorldBuilderHandleFlyoutMenuCB( argsList ):
 def WorldBuilderGetHighlightPlot(argsList):
 	return worldBuilderScreen.getHighlightPlot(argsList)
 
+def WorldBuilderOnAdvancedStartBrushSelected(argsList):
+	iList,iIndex,iTab = argsList;
+	print("WB Advanced Start brush selected, iList=%d, iIndex=%d, type=%d" %(iList,iIndex,iTab))	
+	if (iTab == worldBuilderScreen.m_iASTechTabID):
+		showTechChooser()
+	elif (iTab == worldBuilderScreen.m_iASCityTabID and iList == worldBuilderScreen.m_iASAutomateListID):
+		CyMessageControl().sendAdvancedStartAction(AdvancedStartActionTypes.ADVANCEDSTARTACTION_AUTOMATE, worldBuilderScreen.m_iCurrentPlayer, -1, -1, -1, true)
+		
+	if (worldBuilderScreen.setCurrentAdvancedStartIndex(iIndex)):
+		if (worldBuilderScreen.setCurrentAdvancedStartList(iList)):
+			return 1
+	return 0
+
 def WorldBuilderOnNormalPlayerBrushSelected(argsList):
 	iList,iIndex,iTab = argsList;
 	print("WB brush selected, iList=%d, iIndex=%d, type=%d" %(iList,iIndex,iTab))	
@@ -404,10 +452,52 @@ def WorldBuilderOnWBEditHolyCitySelected(argsList):
 		return 1
 	return 0
 
+def WorldBuilderOnWBEditCorporationSelected(argsList):
+	iList,iIndex,iTab = argsList;
+	if (worldBuilderScreen.setEditCorporationSelected(iIndex)):
+		return 1
+	return 0
+
+def WorldBuilderOnWBEditHeadquartersSelected(argsList):
+	iList,iIndex,iTab = argsList;
+	if (worldBuilderScreen.setEditHeadquartersSelected(iIndex)):
+		return 1
+	return 0
+
 def WorldBuilderOnAllPlotsBrushSelected(argsList):
 	if (worldBuilderScreen.handleAllPlotsCB(argsList)):
 		return 1
 	return 0
+
+def WorldBuilderGetASUnitTabID():
+	return worldBuilderScreen.getASUnitTabID()
+
+def WorldBuilderGetASCityTabID():
+	return worldBuilderScreen.getASCityTabID()
+
+def WorldBuilderGetASCityListID():
+	return worldBuilderScreen.getASCityListID()
+
+def WorldBuilderGetASBuildingsListID():
+	return worldBuilderScreen.getASBuildingsListID()
+
+def WorldBuilderGetASAutomateListID():
+	return worldBuilderScreen.getASAutomateListID()
+
+def WorldBuilderGetASImprovementsTabID():
+	return worldBuilderScreen.getASImprovementsTabID()
+
+def WorldBuilderGetASRoutesListID():
+	return worldBuilderScreen.getASRoutesListID()
+
+def WorldBuilderGetASImprovementsListID():
+	return worldBuilderScreen.getASImprovementsListID()
+
+def WorldBuilderGetASVisibilityTabID():
+	return worldBuilderScreen.getASVisibilityTabID()
+
+def WorldBuilderGetASTechTabID():
+	return worldBuilderScreen.getASTechTabID()
 
 def WorldBuilderGetUnitTabID():
 	return worldBuilderScreen.getUnitTabID()
@@ -445,6 +535,12 @@ def WorldBuilderGetPlotTypeListID():
 def WorldBuilderGetRouteListID():
 	return worldBuilderScreen.getRouteListID()
 
+def WorldBuilderGetTerritoryTabID():
+	return worldBuilderScreen.getTerritoryTabID()
+
+def WorldBuilderGetTerritoryListID():
+	return worldBuilderScreen.getTerritoryListID()
+
 def WorldBuilderHasTech(argsList):
 	iTech = argsList[0]
 	return worldBuilderScreen.hasTech(iTech)
@@ -455,7 +551,7 @@ def WorldBuilderHasPromotion(argsList):
 
 def WorldBuilderHasBuilding(argsList):
 	iBuilding = argsList[0]
-	return worldBuilderScreen.hasBuilding(iBuilding)
+	return worldBuilderScreen.getNumBuilding(iBuilding)
 
 def WorldBuilderHasReligion(argsList):
 	iReligion = argsList[0]
@@ -464,6 +560,14 @@ def WorldBuilderHasReligion(argsList):
 def WorldBuilderHasHolyCity(argsList):
 	iReligion = argsList[0]
 	return worldBuilderScreen.hasHolyCity(iReligion)
+
+def WorldBuilderHasCorporation(argsList):
+	iCorporation = argsList[0]
+	return worldBuilderScreen.hasCorporation(iCorporation)
+
+def WorldBuilderHasHeadquarters(argsList):
+	iCorporation = argsList[0]
+	return worldBuilderScreen.hasHeadquarters(iCorporation)
 
 def WorldBuilderHandleDiploPlayerDropdownCB( argsList ):
 	worldBuilderScreen.handleDiploPlayerDropdownCB(argsList)
@@ -677,6 +781,38 @@ def cityWarningOnFocusCallback(argsList):
 	CyInterface().lookAtCityOffset(argsList[0])
 	return 0
 
+def liberateOnClickedCallback(argsList):
+	iButtonId = argsList[0]
+	iData1 = argsList[1]
+	iData2 = argsList[2]
+	iData3 = argsList[3]
+	iData4 = argsList[4]
+	szText = argsList[5]
+	bOption1 = argsList[6]
+	bOption2 = argsList[7]
+	city = CyGlobalContext().getPlayer(CyGlobalContext().getGame().getActivePlayer()).getCity(iData1)
+	if (not city.isNone()):
+		if (iButtonId == 0):
+			CyMessageControl().sendDoTask(iData1, TaskTypes.TASK_LIBERATE, -1, -1, False, False, False, False)
+		elif (iButtonId == 2):
+			CyInterface().selectCity(city, False)
+
+def colonyOnClickedCallback(argsList):
+	iButtonId = argsList[0]
+	iData1 = argsList[1]
+	iData2 = argsList[2]
+	iData3 = argsList[3]
+	iData4 = argsList[4]
+	szText = argsList[5]
+	bOption1 = argsList[6]
+	bOption2 = argsList[7]
+	city = CyGlobalContext().getPlayer(CyGlobalContext().getGame().getActivePlayer()).getCity(iData1)
+	if (not city.isNone()):
+		if (iButtonId == 0):
+			CyMessageControl().sendEmpireSplit(CyGlobalContext().getGame().getActivePlayer(), city.area().getID())
+		elif (iButtonId == 2):
+			CyInterface().selectCity(city, False)
+
 def featAccomplishedOnClickedCallback(argsList):
 	iButtonId = argsList[0]
 	iData1 = argsList[1]
@@ -690,7 +826,7 @@ def featAccomplishedOnClickedCallback(argsList):
 	if (iButtonId == 1):
 		if (iData1 == FeatTypes.FEAT_TRADE_ROUTE):
 			showDomesticAdvisor(())
-		elif ((iData1 >= FeatTypes.FEAT_UNITCOMBAT_ARCHER) and (iData1 <= FeatTypes.FEAT_UNITCOMBAT_NAVAL)):
+		elif ((iData1 >= FeatTypes.FEAT_UNITCOMBAT_ARCHER) and (iData1 <= FeatTypes.FEAT_UNIT_SPY)):
 			showMilitaryAdvisor()
 		elif ((iData1 >= FeatTypes.FEAT_COPPER_CONNECTED) and (iData1 <= FeatTypes.FEAT_FOOD_CONNECTED)):
 			showForeignAdvisorScreen([0])
@@ -700,6 +836,8 @@ def featAccomplishedOnClickedCallback(argsList):
 		elif ((iData1 >= FeatTypes.FEAT_POPULATION_HALF_MILLION) and (iData1 <= FeatTypes.FEAT_POPULATION_2_BILLION)):
 		  # 1 is for the demographics tab...
 			showInfoScreen([1, 0])
+		elif iData1 == FeatTypes.FEAT_CORPORATION_ENABLED:
+			showCorporationScreen()
 
 def featAccomplishedOnFocusCallback(argsList):
 	iData1 = argsList[0]
@@ -720,7 +858,8 @@ def featAccomplishedOnFocusCallback(argsList):
 #######################################################################################
 ## Handle Close Map
 #######################################################################################
-HandleCloseMap = {  DAWN_OF_MAN : dawnOfMan,				
+HandleCloseMap = {  DAWN_OF_MAN : dawnOfMan,
+					SPACE_SHIP_SCREEN : spaceShip,			
 				# add new screens here
 				}
 
@@ -730,6 +869,7 @@ HandleCloseMap = {  DAWN_OF_MAN : dawnOfMan,
 HandleInputMap = {  MAIN_INTERFACE : mainInterface,
 					DOMESTIC_ADVISOR : domesticAdvisor,
 					RELIGION_SCREEN : religionScreen,
+					CORPORATION_SCREEN : corporationScreen,
 					CIVICS_SCREEN : civicScreen,
 					TECH_CHOOSER : techChooser,
 					FOREIGN_ADVISOR : foreignAdvisor,
@@ -738,6 +878,7 @@ HandleInputMap = {  MAIN_INTERFACE : mainInterface,
 					DAWN_OF_MAN : dawnOfMan,
 					WONDER_MOVIE_SCREEN : wonderMovie,
 					ERA_MOVIE_SCREEN : eraMovie,
+					SPACE_SHIP_SCREEN : spaceShip,
 					INTRO_MOVIE_SCREEN : introMovie,
 					OPTIONS_SCREEN : optionsScreen,
 					INFO_SCREEN : infoScreen,
@@ -747,6 +888,8 @@ HandleInputMap = {  MAIN_INTERFACE : mainInterface,
 					TOP_CIVS : topCivs,
 					HALL_OF_FAME : hallOfFameScreen,
 					VICTORY_MOVIE_SCREEN : victoryMovie,
+					ESPIONAGE_ADVISOR : espionageAdvisor,
+					DAN_QUAYLE_SCREEN : danQuayleScreen,
 					
 					PEDIA_MAIN : pediaMainScreen,
 					PEDIA_TECH : pediaMainScreen,
@@ -763,6 +906,7 @@ HandleInputMap = {  MAIN_INTERFACE : mainInterface,
 					PEDIA_CIVILIZATION : pediaMainScreen,
 					PEDIA_LEADER : pediaMainScreen,
 					PEDIA_RELIGION : pediaMainScreen,
+					PEDIA_CORPORATION : pediaMainScreen,
 					PEDIA_HISTORY : pediaMainScreen,
 					WORLDBUILDER_SCREEN : worldBuilderScreen,
 					WORLDBUILDER_DIPLOMACY_SCREEN : worldBuilderDiplomacyScreen,
@@ -791,7 +935,8 @@ HandleNavigationMap = {
 					PEDIA_CIVILIZATION : pediaMainScreen,
 					PEDIA_LEADER : pediaMainScreen,
 					PEDIA_HISTORY : pediaMainScreen,
-					PEDIA_RELIGION : pediaMainScreen
+					PEDIA_RELIGION : pediaMainScreen,
+					PEDIA_CORPORATION : pediaMainScreen
 				
 				# add new screens here
 				}

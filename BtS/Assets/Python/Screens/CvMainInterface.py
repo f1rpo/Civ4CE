@@ -26,7 +26,7 @@ MAX_SELECTED_TEXT = 5
 MAX_DISPLAYABLE_BUILDINGS = 15
 MAX_DISPLAYABLE_TRADE_ROUTES = 4
 MAX_BONUS_ROWS = 10
-MAX_CITIZEN_BUTTONS = 6
+MAX_CITIZEN_BUTTONS = 8
 
 SELECTION_BUTTON_COLUMNS = 8
 SELECTION_BUTTON_ROWS = 2
@@ -101,11 +101,9 @@ g_pSelectedUnit = 0
 
 class CvMainInterface:
 	"Main Interface Screen"
-
+	
 	def numPlotListButtons(self):
-		screen = CyGInterfaceScreen( "MainInterface", CvScreenEnums.MAIN_INTERFACE )
-		xResolution = screen.getXResolution()
-		return ((xResolution - (iMultiListXL+iMultiListXR) - 68) / 34)
+		return self.m_iNumPlotListButtons
 
 	def interfaceScreen (self):
 
@@ -135,6 +133,7 @@ class CvMainInterface:
 		# Find out our resolution
 		xResolution = screen.getXResolution()
 		yResolution = screen.getYResolution()
+		self.m_iNumPlotListButtons = (xResolution - (iMultiListXL+iMultiListXR) - 68) / 34
 		
 		screen.setDimensions(0, 0, xResolution, yResolution)
 
@@ -166,7 +165,7 @@ class CvMainInterface:
 		screen.setStyle( "InterfaceCenterRightBackgroundWidget", "Panel_City_Right_Style" )
 		screen.hide( "InterfaceCenterRightBackgroundWidget" )
 		
-		screen.addPanel( "CityScreenAdjustPanel", u"", u"", True, False, 10, 44, 238, 86, PanelStyles.PANEL_STYLE_STANDARD )
+		screen.addPanel( "CityScreenAdjustPanel", u"", u"", True, False, 10, 44, 238, 105, PanelStyles.PANEL_STYLE_STANDARD )
 		screen.setStyle( "CityScreenAdjustPanel", "Panel_City_Info_Style" )
 		screen.hide( "CityScreenAdjustPanel" )
 		
@@ -229,7 +228,7 @@ class CvMainInterface:
 		screen.hide( "InterfaceTopRight" )
 
 		iBtnWidth	= 28
-		iBtnAdvance = 26
+		iBtnAdvance = 25
 		iBtnY = 27
 		iBtnX = 27
 		
@@ -238,7 +237,7 @@ class CvMainInterface:
 		screen.setStyle( "TurnLogButton", "Button_HUDLog_Style" )
 		screen.hide( "TurnLogButton" )
 		
-		iBtnX = xResolution - 241
+		iBtnX = xResolution - 277
 		
 		# Advisor Buttons...
 		screen.setImageButton( "DomesticAdvisorButton", "", iBtnX, iBtnY, iBtnWidth, iBtnWidth, WidgetTypes.WIDGET_ACTION, gc.getControlInfo(ControlTypes.CONTROL_DOMESTIC_SCREEN).getActionInfoIndex(), -1 )
@@ -276,6 +275,11 @@ class CvMainInterface:
 		screen.hide( "ReligiousAdvisorButton" )
 		
 		iBtnX += iBtnAdvance
+		screen.setImageButton( "CorporationAdvisorButton", "", iBtnX, iBtnY, iBtnWidth, iBtnWidth, WidgetTypes.WIDGET_ACTION, gc.getControlInfo(ControlTypes.CONTROL_CORPORATION_SCREEN).getActionInfoIndex(), -1 )
+		screen.setStyle( "CorporationAdvisorButton", "Button_HUDAdvisorCorporation_Style" )
+		screen.hide( "CorporationAdvisorButton" )
+		
+		iBtnX += iBtnAdvance
 		screen.setImageButton( "VictoryAdvisorButton", "", iBtnX, iBtnY, iBtnWidth, iBtnWidth, WidgetTypes.WIDGET_ACTION, gc.getControlInfo(ControlTypes.CONTROL_VICTORY_SCREEN).getActionInfoIndex(), -1 )
 		screen.setStyle( "VictoryAdvisorButton", "Button_HUDAdvisorVictory_Style" )
 		screen.hide( "VictoryAdvisorButton" )
@@ -285,6 +289,10 @@ class CvMainInterface:
 		screen.setStyle( "InfoAdvisorButton", "Button_HUDAdvisorRecord_Style" )
 		screen.hide( "InfoAdvisorButton" )
 
+		iBtnX += iBtnAdvance
+		screen.setImageButton( "EspionageAdvisorButton", "", iBtnX, iBtnY, iBtnWidth, iBtnWidth, WidgetTypes.WIDGET_ACTION, gc.getControlInfo(ControlTypes.CONTROL_ESPIONAGE_SCREEN).getActionInfoIndex(), -1 )
+		screen.setStyle( "EspionageAdvisorButton", "Button_HUDAdvisorEspionage_Style" )
+		screen.hide( "EspionageAdvisorButton" )
 		
 		# City Tabs
 		iBtnX = xResolution - 324
@@ -335,17 +343,33 @@ class CvMainInterface:
 		# PLOT LIST BUTTONS
 		# *********************************************************************************
 
-		for j in range(gc.getDefineINT("MAX_PLOT_LIST_ROWS")):
+		for j in range(gc.getMAX_PLOT_LIST_ROWS()):
+			yRow = (j - gc.getMAX_PLOT_LIST_ROWS() + 1) * 34
+			yPixel = yResolution - 169 + yRow - 3
+			xPixel = 315 - 3
+			xWidth = self.numPlotListButtons() * 34 + 3
+			yHeight = 32 + 3
+		
+			szStringPanel = "PlotListPanel" + str(j)
+			screen.addPanel(szStringPanel, u"", u"", True, False, xPixel, yPixel, xWidth, yHeight, PanelStyles.PANEL_STYLE_EMPTY)
+
 			for i in range(self.numPlotListButtons()):
 				k = j*self.numPlotListButtons()+i
-				yRow = (j - gc.getDefineINT("MAX_PLOT_LIST_ROWS") + 1) * 34
+				
+				xOffset = i * 34
+				
 				szString = "PlotListButton" + str(k)
-				screen.addCheckBoxGFC( szString, ArtFileMgr.getInterfaceArtInfo("INTERFACE_BUTTONS_GOVERNOR").getPath(), ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(), 315 + (i * 34), yResolution - 169 + yRow, 32, 32, WidgetTypes.WIDGET_PLOT_LIST, k, -1, ButtonStyles.BUTTON_STYLE_LABEL )
+				screen.addCheckBoxGFCAt(szStringPanel, szString, ArtFileMgr.getInterfaceArtInfo("INTERFACE_BUTTONS_GOVERNOR").getPath(), ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(), xOffset + 3, 3, 32, 32, WidgetTypes.WIDGET_PLOT_LIST, k, -1, ButtonStyles.BUTTON_STYLE_LABEL, True )
 				screen.hide( szString )
 				
 				szStringHealth = szString + "Health"
-				screen.addStackedBarGFC( szStringHealth, 315 + (i * 34), yResolution - 146 + yRow, 32, 11, InfoBarTypes.NUM_INFOBAR_TYPES, WidgetTypes.WIDGET_GENERAL, k, -1 )
+				screen.addStackedBarGFCAt( szStringHealth, szStringPanel, xOffset + 3, 26, 32, 11, InfoBarTypes.NUM_INFOBAR_TYPES, WidgetTypes.WIDGET_GENERAL, k, -1 )
 				screen.hide( szStringHealth )
+				
+				szStringIcon = szString + "Icon"
+				szFileName = ArtFileMgr.getInterfaceArtInfo("OVERLAY_MOVE").getPath()
+				screen.addDDSGFCAt( szStringIcon, szStringPanel, szFileName, xOffset, 0, 12, 12, WidgetTypes.WIDGET_PLOT_LIST, k, -1, False )
+				screen.hide( szStringIcon )
 
 		# End Turn Text		
 		screen.setLabel( "EndTurnText", "Background", u"", CvUtil.FONT_CENTER_JUSTIFY, 0, yResolution - 188, -0.1, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
@@ -370,7 +394,11 @@ class CvMainInterface:
 		i = 0
 		for i in range(gc.getNumReligionInfos()):
 			szName = "ReligionButton" + str(i)
-			screen.setImageButton( szName, gc.getReligionInfo(i).getTechButton(), 0, 0, 32, 32, WidgetTypes.WIDGET_RESEARCH, gc.getReligionInfo(i).getTechPrereq(), -1 )
+			if gc.getGame().isOption(GameOptionTypes.GAMEOPTION_PICK_RELIGION):
+				szButton = gc.getReligionInfo(i).getGenericTechButton()
+			else:
+				szButton = gc.getReligionInfo(i).getTechButton()
+			screen.setImageButton( szName, szButton, 0, 0, 32, 32, WidgetTypes.WIDGET_RESEARCH, gc.getReligionInfo(i).getTechPrereq(), -1 )
 			screen.hide( szName )
 		
 		# *********************************************************************************
@@ -383,7 +411,7 @@ class CvMainInterface:
 		i = 0
 		for i in range(MAX_CITIZEN_BUTTONS):
 			szName = "AngryCitizen" + str(i)
-			screen.setImageButton( szName, ArtFileMgr.getInterfaceArtInfo("INTERFACE_ANGRYCITIZEN_TEXTURE").getPath(), xResolution - 74 - (34 * i), yResolution - 248, 32, 32, WidgetTypes.WIDGET_ANGRY_CITIZEN, -1, -1 )
+			screen.setImageButton( szName, ArtFileMgr.getInterfaceArtInfo("INTERFACE_ANGRYCITIZEN_TEXTURE").getPath(), xResolution - 74 - (26 * i), yResolution - 238, 24, 24, WidgetTypes.WIDGET_ANGRY_CITIZEN, -1, -1 )
 			screen.hide( szName )
 			
 		iCount = 0
@@ -393,7 +421,7 @@ class CvMainInterface:
 		for i in range( gc.getNumSpecialistInfos() ):
 			if (gc.getSpecialistInfo(i).isVisible()):
 				szName = "IncreaseSpecialist" + str(i)
-				screen.setButtonGFC( szName, u"", "", xResolution - 38, (yResolution - 282 - (34 * iCount)), 20, 20, WidgetTypes.WIDGET_CHANGE_SPECIALIST, i, 1, ButtonStyles.BUTTON_STYLE_CITY_PLUS )
+				screen.setButtonGFC( szName, u"", "", xResolution - 46, (yResolution - 270 - (26 * iCount)), 20, 20, WidgetTypes.WIDGET_CHANGE_SPECIALIST, i, 1, ButtonStyles.BUTTON_STYLE_CITY_PLUS )
 				screen.hide( szName )
 
 				iCount = iCount + 1
@@ -405,7 +433,7 @@ class CvMainInterface:
 		for i in range( gc.getNumSpecialistInfos() ):
 			if (gc.getSpecialistInfo(i).isVisible()):
 				szName = "DecreaseSpecialist" + str(i)
-				screen.setButtonGFC( szName, u"", "", xResolution - 38, (yResolution - 265 - (34 * iCount)), 20, 20, WidgetTypes.WIDGET_CHANGE_SPECIALIST, i, -1, ButtonStyles.BUTTON_STYLE_CITY_MINUS )
+				screen.setButtonGFC( szName, u"", "", xResolution - 24, (yResolution - 270 - (26 * iCount)), 20, 20, WidgetTypes.WIDGET_CHANGE_SPECIALIST, i, -1, ButtonStyles.BUTTON_STYLE_CITY_MINUS )
 				screen.hide( szName )
 
 				iCount = iCount + 1
@@ -419,13 +447,13 @@ class CvMainInterface:
 			if (gc.getSpecialistInfo(i).isVisible()):
 			
 				szName = "CitizenDisabledButton" + str(i)
-				screen.setImageButton( szName, gc.getSpecialistInfo(i).getTexture(), xResolution - 74, (yResolution - 282 - (34 * i)), 32, 32, WidgetTypes.WIDGET_DISABLED_CITIZEN, i, -1 )
+				screen.setImageButton( szName, gc.getSpecialistInfo(i).getTexture(), xResolution - 74, (yResolution - 272 - (26 * i)), 24, 24, WidgetTypes.WIDGET_DISABLED_CITIZEN, i, -1 )
 				screen.enable( szName, False )
 				screen.hide( szName )
 
 				for j in range(MAX_CITIZEN_BUTTONS):
 					szName = "CitizenButton" + str((i * 100) + j)
-					screen.addCheckBoxGFC( szName, gc.getSpecialistInfo(i).getTexture(), "", xResolution - 74 - (34 * j), (yResolution - 282 - (34 * i)), 32, 32, WidgetTypes.WIDGET_CITIZEN, i, j, ButtonStyles.BUTTON_STYLE_LABEL )
+					screen.addCheckBoxGFC( szName, gc.getSpecialistInfo(i).getTexture(), "", xResolution - 74 - (26 * j), (yResolution - 272 - (26 * i)), 24, 24, WidgetTypes.WIDGET_CITIZEN, i, j, ButtonStyles.BUTTON_STYLE_LABEL )
 					screen.hide( szName )
 
 		# **********************************************************
@@ -476,12 +504,18 @@ class CvMainInterface:
 		screen.hide( "CultureBar" )
 
 		# Holy City Overlay
-		i = 0
 		for i in range( gc.getNumReligionInfos() ):
 			xCoord = xResolution - 242 + (i * 34)
 			yCoord = 42
 			szName = "ReligionHolyCityDDS" + str(i)
 			screen.addDDSGFC( szName, ArtFileMgr.getInterfaceArtInfo("INTERFACE_HOLYCITY_OVERLAY").getPath(), xCoord, yCoord, 24, 24, WidgetTypes.WIDGET_HELP_RELIGION_CITY, i, -1 )
+			screen.hide( szName )
+
+		for i in range( gc.getNumCorporationInfos() ):
+			xCoord = xResolution - 242 + (i * 34)
+			yCoord = 66
+			szName = "CorporationHeadquarterDDS" + str(i)
+			screen.addDDSGFC( szName, ArtFileMgr.getInterfaceArtInfo("INTERFACE_HOLYCITY_OVERLAY").getPath(), xCoord, yCoord, 24, 24, WidgetTypes.WIDGET_HELP_CORPORATION_CITY, i, -1 )
 			screen.hide( szName )
 
 		screen.addStackedBarGFC( "NationalityBar", 16, yResolution - 214, 220, iStackBarHeight, InfoBarTypes.NUM_INFOBAR_TYPES, WidgetTypes.WIDGET_HELP_NATIONALITY, -1, -1 )
@@ -499,18 +533,18 @@ class CvMainInterface:
 		screen.setButtonGFC( "PlotListPlus", u"", "", 298 + ( xResolution - (iMultiListXL+iMultiListXR) - 34 ), yResolution - 171, 32, 32, WidgetTypes.WIDGET_PLOT_LIST_SHIFT, 1, -1, ButtonStyles.BUTTON_STYLE_ARROW_RIGHT )
 		screen.hide( "PlotListPlus" )
 
-		screen.addPanel( "TradeRouteListBackground", u"", u"", True, False, 10, 138, 238, 30, PanelStyles.PANEL_STYLE_STANDARD )
+		screen.addPanel( "TradeRouteListBackground", u"", u"", True, False, 10, 157, 238, 30, PanelStyles.PANEL_STYLE_STANDARD )
 		screen.setStyle( "TradeRouteListBackground", "Panel_City_Header_Style" )
 		screen.hide( "TradeRouteListBackground" )
 
-		screen.setLabel( "TradeRouteListLabel", "Background", localText.getText("TXT_KEY_HEADING_TRADEROUTE_LIST", ()), CvUtil.FONT_CENTER_JUSTIFY, 129, 146, -0.1, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
+		screen.setLabel( "TradeRouteListLabel", "Background", localText.getText("TXT_KEY_HEADING_TRADEROUTE_LIST", ()), CvUtil.FONT_CENTER_JUSTIFY, 129, 165, -0.1, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 		screen.hide( "TradeRouteListLabel" )
 
-		screen.addPanel( "BuildingListBackground", u"", u"", True, False, 10, 268, 238, 30, PanelStyles.PANEL_STYLE_STANDARD )
+		screen.addPanel( "BuildingListBackground", u"", u"", True, False, 10, 287, 238, 30, PanelStyles.PANEL_STYLE_STANDARD )
 		screen.setStyle( "BuildingListBackground", "Panel_City_Header_Style" )
 		screen.hide( "BuildingListBackground" )
 
-		screen.setLabel( "BuildingListLabel", "Background", localText.getText("TXT_KEY_CONCEPT_BUILDINGS", ()), CvUtil.FONT_CENTER_JUSTIFY, 129, 276, -0.1, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
+		screen.setLabel( "BuildingListLabel", "Background", localText.getText("TXT_KEY_CONCEPT_BUILDINGS", ()), CvUtil.FONT_CENTER_JUSTIFY, 129, 295, -0.1, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 		screen.hide( "BuildingListLabel" )
 
 		# *********************************************************************************
@@ -573,6 +607,7 @@ class CvMainInterface:
 		# Find out our resolution
 		xResolution = screen.getXResolution()
 		yResolution = screen.getYResolution()
+		self.m_iNumPlotListButtons = (xResolution - (iMultiListXL+iMultiListXR) - 68) / 34
 		
 		# This should recreate the minimap on load games and returns if already exists -JW
 		screen.initMinimap( xResolution - 210, xResolution - 9, yResolution - 131, yResolution - 9, -0.1 )
@@ -643,9 +678,12 @@ class CvMainInterface:
 
 		self.updateEndTurnButton()
 		
-		self.updateTimeText()
-		screen.setLabel( "TimeText", "Background", g_szTimeText, CvUtil.FONT_RIGHT_JUSTIFY, xResolution - 56, 6, -0.3, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-		screen.show( "TimeText" )
+		if (CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_HIDE_ALL and CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_ADVANCED_START):
+			self.updateTimeText()
+			screen.setLabel( "TimeText", "Background", g_szTimeText, CvUtil.FONT_RIGHT_JUSTIFY, xResolution - 56, 6, -0.3, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
+			screen.show( "TimeText" )
+		else:
+			screen.hide( "TimeText" )		
 
 		return 0
 
@@ -728,11 +766,11 @@ class CvMainInterface:
 		if ( not CyInterface().isCityScreenUp() or ( pHeadSelectedCity.getOwner() == gc.getGame().getActivePlayer() ) or gc.getGame().isDebugMode() ):
 			iCount = 0
 
-			if ( CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_HIDE_ALL and CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_MINIMAP_ONLY ):
+			if ( CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_HIDE_ALL and CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_MINIMAP_ONLY and CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_ADVANCED_START):
 				for iI in range( CommerceTypes.NUM_COMMERCE_TYPES ):
 					# Intentional offset...
 					eCommerce = (iI + 1) % CommerceTypes.NUM_COMMERCE_TYPES
-
+										
 					if (gc.getActivePlayer().isCommerceFlexible(eCommerce) or (CyInterface().isCityScreenUp() and (eCommerce == CommerceTypes.COMMERCE_GOLD))):
 						szString1 = "IncreasePercent" + str(eCommerce)
 						screen.setButtonGFC( szString1, u"", "", 70, 50 + (19 * iCount), 20, 20, WidgetTypes.WIDGET_CHANGE_PERCENT, eCommerce, gc.getDefineINT("COMMERCE_PERCENT_CHANGE_INCREMENTS"), ButtonStyles.BUTTON_STYLE_CITY_PLUS )
@@ -816,11 +854,13 @@ class CvMainInterface:
 			screen.hide( "InterfaceTopCenter" )
 			screen.hide( "InterfaceTopRight" )
 			screen.hide( "TurnLogButton" )
+			screen.hide( "EspionageAdvisorButton" )
 			screen.hide( "DomesticAdvisorButton" )
 			screen.hide( "ForeignAdvisorButton" )
 			screen.hide( "TechAdvisorButton" )
 			screen.hide( "CivicsAdvisorButton" )
 			screen.hide( "ReligiousAdvisorButton" )
+			screen.hide( "CorporationAdvisorButton" )
 			screen.hide( "FinanceAdvisorButton" )
 			screen.hide( "MilitaryAdvisorButton" )
 			screen.hide( "VictoryAdvisorButton" )
@@ -836,17 +876,19 @@ class CvMainInterface:
 			screen.hide( "InterfaceTopCenter" )
 			screen.hide( "InterfaceTopRight" )
 			screen.hide( "TurnLogButton" )
+			screen.hide( "EspionageAdvisorButton" )
 			screen.hide( "DomesticAdvisorButton" )
 			screen.hide( "ForeignAdvisorButton" )
 			screen.hide( "TechAdvisorButton" )
 			screen.hide( "CivicsAdvisorButton" )
 			screen.hide( "ReligiousAdvisorButton" )
+			screen.hide( "CorporationAdvisorButton" )
 			screen.hide( "FinanceAdvisorButton" )
 			screen.hide( "MilitaryAdvisorButton" )
 			screen.hide( "VictoryAdvisorButton" )
 			screen.hide( "InfoAdvisorButton" )
 			
-		elif ( CyInterface().getShowInterface() == InterfaceVisibility.INTERFACE_HIDE ):
+		elif ( CyInterface().getShowInterface() == InterfaceVisibility.INTERFACE_HIDE):
 			screen.hide( "InterfaceLeftBackgroundWidget" )
 			screen.show( "InterfaceTopBackgroundWidget" )
 			screen.hide( "InterfaceCenterBackgroundWidget" )
@@ -856,25 +898,51 @@ class CvMainInterface:
 			screen.show( "InterfaceTopCenter" )
 			screen.show( "InterfaceTopRight" )
 			screen.show( "TurnLogButton" )
+			screen.show( "EspionageAdvisorButton" )
 			screen.show( "DomesticAdvisorButton" )
 			screen.show( "ForeignAdvisorButton" )
 			screen.show( "TechAdvisorButton" )
 			screen.show( "CivicsAdvisorButton" )
 			screen.show( "ReligiousAdvisorButton" )
+			screen.show( "CorporationAdvisorButton" )
 			screen.show( "FinanceAdvisorButton" )
 			screen.show( "MilitaryAdvisorButton" )
 			screen.show( "VictoryAdvisorButton" )
 			screen.show( "InfoAdvisorButton" )
 			screen.moveToFront( "TurnLogButton" )
+			screen.moveToFront( "EspionageAdvisorButton" )
 			screen.moveToFront( "DomesticAdvisorButton" )
 			screen.moveToFront( "ForeignAdvisorButton" )
 			screen.moveToFront( "TechAdvisorButton" )
 			screen.moveToFront( "CivicsAdvisorButton" )
 			screen.moveToFront( "ReligiousAdvisorButton" )
+			screen.moveToFront( "CorporationAdvisorButton" )
 			screen.moveToFront( "FinanceAdvisorButton" )
 			screen.moveToFront( "MilitaryAdvisorButton" )
 			screen.moveToFront( "VictoryAdvisorButton" )
 			screen.moveToFront( "InfoAdvisorButton" )
+
+		elif (CyInterface().getShowInterface() == InterfaceVisibility.INTERFACE_ADVANCED_START):		
+			screen.hide( "InterfaceLeftBackgroundWidget" )
+			screen.hide( "InterfaceTopBackgroundWidget" )
+			screen.hide( "InterfaceCenterBackgroundWidget" )
+			screen.hide( "InterfaceRightBackgroundWidget" )
+			screen.show( "MiniMapPanel" )
+			screen.hide( "InterfaceTopLeft" )
+			screen.hide( "InterfaceTopCenter" )
+			screen.hide( "InterfaceTopRight" )
+			screen.hide( "TurnLogButton" )
+			screen.hide( "EspionageAdvisorButton" )
+			screen.hide( "DomesticAdvisorButton" )
+			screen.hide( "ForeignAdvisorButton" )
+			screen.hide( "TechAdvisorButton" )
+			screen.hide( "CivicsAdvisorButton" )
+			screen.hide( "ReligiousAdvisorButton" )
+			screen.hide( "CorporationAdvisorButton" )
+			screen.hide( "FinanceAdvisorButton" )
+			screen.hide( "MilitaryAdvisorButton" )
+			screen.hide( "VictoryAdvisorButton" )
+			screen.hide( "InfoAdvisorButton" )
 			
 		elif ( CyEngine().isGlobeviewUp() ):
 			screen.hide( "InterfaceLeftBackgroundWidget" )
@@ -886,21 +954,25 @@ class CvMainInterface:
 			screen.show( "InterfaceTopCenter" )
 			screen.show( "InterfaceTopRight" )
 			screen.show( "TurnLogButton" )
+			screen.show( "EspionageAdvisorButton" )
 			screen.show( "DomesticAdvisorButton" )
 			screen.show( "ForeignAdvisorButton" )
 			screen.show( "TechAdvisorButton" )
 			screen.show( "CivicsAdvisorButton" )
 			screen.show( "ReligiousAdvisorButton" )
+			screen.show( "CorporationAdvisorButton" )
 			screen.show( "FinanceAdvisorButton" )
 			screen.show( "MilitaryAdvisorButton" )
 			screen.show( "VictoryAdvisorButton" )
 			screen.show( "InfoAdvisorButton" )			
 			screen.moveToFront( "TurnLogButton" )
+			screen.moveToFront( "EspionageAdvisorButton" )
 			screen.moveToFront( "DomesticAdvisorButton" )
 			screen.moveToFront( "ForeignAdvisorButton" )
 			screen.moveToFront( "TechAdvisorButton" )
 			screen.moveToFront( "CivicsAdvisorButton" )
 			screen.moveToFront( "ReligiousAdvisorButton" )
+			screen.moveToFront( "CorporationAdvisorButton" )
 			screen.moveToFront( "FinanceAdvisorButton" )
 			screen.moveToFront( "MilitaryAdvisorButton" )
 			screen.moveToFront( "VictoryAdvisorButton" )
@@ -916,21 +988,25 @@ class CvMainInterface:
 			screen.show( "InterfaceTopCenter" )
 			screen.show( "InterfaceTopRight" )
 			screen.show( "TurnLogButton" )
+			screen.show( "EspionageAdvisorButton" )
 			screen.show( "DomesticAdvisorButton" )
 			screen.show( "ForeignAdvisorButton" )
 			screen.show( "TechAdvisorButton" )
 			screen.show( "CivicsAdvisorButton" )
 			screen.show( "ReligiousAdvisorButton" )
+			screen.show( "CorporationAdvisorButton" )
 			screen.show( "FinanceAdvisorButton" )
 			screen.show( "MilitaryAdvisorButton" )
 			screen.show( "VictoryAdvisorButton" )
 			screen.show( "InfoAdvisorButton" )
 			screen.moveToFront( "TurnLogButton" )
+			screen.moveToFront( "EspionageAdvisorButton" )
 			screen.moveToFront( "DomesticAdvisorButton" )
 			screen.moveToFront( "ForeignAdvisorButton" )
 			screen.moveToFront( "TechAdvisorButton" )
 			screen.moveToFront( "CivicsAdvisorButton" )
 			screen.moveToFront( "ReligiousAdvisorButton" )
+			screen.moveToFront( "CorporationAdvisorButton" )
 			screen.moveToFront( "FinanceAdvisorButton" )
 			screen.moveToFront( "MilitaryAdvisorButton" )
 			screen.moveToFront( "VictoryAdvisorButton" )
@@ -958,13 +1034,17 @@ class CvMainInterface:
 					if ( bHandled == False ):
 						eOrderNodeType = CyInterface().getOrderNodeType(i)
 						if (eOrderNodeType  == OrderTypes.ORDER_TRAIN ):
-							screen.addUnitGraphicGFC( "InterfaceUnitModel", CyInterface().getOrderNodeData1(i), 190, yResolution - 138, 103, 132, WidgetTypes.WIDGET_HELP_SELECTED, 0, -1,  -20, 30, 1, False )
+							screen.addUnitGraphicGFC( "InterfaceUnitModel", CyInterface().getOrderNodeData1(i), 175, yResolution - 138, 123, 132, WidgetTypes.WIDGET_HELP_SELECTED, 0, -1,  -20, 30, 1, False )
 							bHandled = True
 						elif ( eOrderNodeType == OrderTypes.ORDER_CONSTRUCT ):
-							screen.addBuildingGraphicGFC( "InterfaceUnitModel", CyInterface().getOrderNodeData1(i), 190, yResolution - 138, 103, 132, WidgetTypes.WIDGET_HELP_SELECTED, 0, -1,  -20, 30, 0.8, False )
+							screen.addBuildingGraphicGFC( "InterfaceUnitModel", CyInterface().getOrderNodeData1(i), 175, yResolution - 138, 123, 132, WidgetTypes.WIDGET_HELP_SELECTED, 0, -1,  -20, 30, 0.8, False )
 							bHandled = True
 						elif ( eOrderNodeType == OrderTypes.ORDER_CREATE ):
-							screen.hide( "InterfaceUnitModel" )
+							if(gc.getProjectInfo(CyInterface().getOrderNodeData1(i)).isSpaceship()):
+								modelType = 0
+								screen.addSpaceShipWidgetGFC("InterfaceUnitModel", 175, yResolution - 138, 123, 132, CyInterface().getOrderNodeData1(i), modelType, WidgetTypes.WIDGET_HELP_SELECTED, 0, -1)
+							else:
+								screen.hide( "InterfaceUnitModel" )
 							bHandled = True
 						elif ( eOrderNodeType == OrderTypes.ORDER_MAINTAIN ):
 							screen.hide( "InterfaceUnitModel" )
@@ -975,7 +1055,7 @@ class CvMainInterface:
 					bHandled = True
 
 			elif ( CyInterface().getHeadSelectedUnit() ):
-				screen.addUnitGraphicGFC( "InterfaceUnitModel", CyInterface().getHeadSelectedUnit().getUnitType(), 190, yResolution - 138, 103, 132, WidgetTypes.WIDGET_UNIT_MODEL, CyInterface().getHeadSelectedUnit().getUnitType(), -1,  -20, 30, 1, False )
+				screen.addUnitGraphicGFC( "InterfaceUnitModel", CyInterface().getHeadSelectedUnit().getUnitType(), 175, yResolution - 138, 123, 132, WidgetTypes.WIDGET_UNIT_MODEL, CyInterface().getHeadSelectedUnit().getUnitType(), -1,  -20, 30, 1, False )
 			else:
 				screen.hide( "InterfaceUnitModel" )
 		else:
@@ -990,7 +1070,10 @@ class CvMainInterface:
 		screen.hide( "PlotListMinus" )
 		screen.hide( "PlotListPlus" )
 		
-		for j in range(gc.getDefineINT("MAX_PLOT_LIST_ROWS")):
+		for j in range(gc.getMAX_PLOT_LIST_ROWS()):
+			#szStringPanel = "PlotListPanel" + str(j)
+			#screen.hide(szStringPanel)
+			
 			for i in range(self.numPlotListButtons()):
 				szString = "PlotListButton" + str(j*self.numPlotListButtons()+i)
 				screen.hide( szString )
@@ -998,7 +1081,6 @@ class CvMainInterface:
 				szStringHealth = szString + "Health"
 				screen.hide( szStringHealth )
 
-				# SF CHANGE
 				szStringIcon = szString + "Icon"
 				screen.hide( szStringIcon )
 
@@ -1013,23 +1095,24 @@ class CvMainInterface:
 			
 			if (CyInterface().isCityScreenUp()):
 				iMaxRows = 1
-				iSkipped = (gc.getDefineINT("MAX_PLOT_LIST_ROWS") - 1) * self.numPlotListButtons()
+				iSkipped = (gc.getMAX_PLOT_LIST_ROWS() - 1) * self.numPlotListButtons()
 				iCount += iSkipped
 			else:
-				iMaxRows = gc.getDefineINT("MAX_PLOT_LIST_ROWS")
+				iMaxRows = gc.getMAX_PLOT_LIST_ROWS()
 				iCount += CyInterface().getPlotListOffset()
 				iSkipped = 0
 
-			for i in range(pPlot.getNumUnits()):
-				pLoopUnit = CyInterface().getInterfacePlotUnit(pPlot, i)
+			CyInterface().cacheInterfacePlotUnits(pPlot)
+			for i in range(CyInterface().getNumCachedInterfacePlotUnits()):
+				pLoopUnit = CyInterface().getCachedInterfacePlotUnit(i)
 				if (pLoopUnit):
 
 					if ((iCount == 0) and (CyInterface().getPlotListColumn() > 0)):
 						bLeftArrow = True
-					elif ((iCount == (gc.getDefineINT("MAX_PLOT_LIST_ROWS") * self.numPlotListButtons() - 1)) and ((iVisibleUnits - iCount - CyInterface().getPlotListColumn() + iSkipped) > 1)):
+					elif ((iCount == (gc.getMAX_PLOT_LIST_ROWS() * self.numPlotListButtons() - 1)) and ((iVisibleUnits - iCount - CyInterface().getPlotListColumn() + iSkipped) > 1)):
 						bRightArrow = True
 						
-					if ((iCount >= 0) and (iCount <  self.numPlotListButtons() * gc.getDefineINT("MAX_PLOT_LIST_ROWS"))):
+					if ((iCount >= 0) and (iCount <  self.numPlotListButtons() * gc.getMAX_PLOT_LIST_ROWS())):
 						if ((pLoopUnit.getTeam() != gc.getGame().getActiveTeam()) or pLoopUnit.isWaiting()):
 							szFileName = ArtFileMgr.getInterfaceArtInfo("OVERLAY_FORTIFY").getPath()
 							
@@ -1043,7 +1126,6 @@ class CvMainInterface:
 
 						szString = "PlotListButton" + str(iCount)
 						screen.changeImageButton( szString, gc.getUnitInfo(pLoopUnit.getUnitType()).getButton() )
-						#screen.addCheckBoxGFC( szString, gc.getUnitInfo(pLoopUnit.getUnitType()).getButton(), ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(), 315 + (iCount * 34), yResolution - 169, 32, 32, WidgetTypes.WIDGET_PLOT_LIST, iCount + CyInterface().getPlotListColumn(), -1, ButtonStyles.BUTTON_STYLE_LABEL )
 						if ( pLoopUnit.getOwner() == gc.getGame().getActivePlayer() ):
 							bEnable = True
 						else:
@@ -1075,10 +1157,9 @@ class CvMainInterface:
 								screen.setStackedBarColors(szStringHealth, InfoBarTypes.INFOBAR_STORED, gc.getInfoTypeForString("COLOR_GREEN"))
 							screen.show( szStringHealth )
 						
-						# SF CHANGE 
 						# Adds the overlay first
 						szStringIcon = szString + "Icon"
-						screen.addDDSGFC( szStringIcon, szFileName, 312 + ((iCount % self.numPlotListButtons()) * 34), yResolution - 172 + (iCount / self.numPlotListButtons() - gc.getDefineINT("MAX_PLOT_LIST_ROWS") + 1) * 34, 12, 12, WidgetTypes.WIDGET_PLOT_LIST, iCount, -1 )
+						screen.changeDDSGFC( szStringIcon, szFileName )
 						screen.show( szStringIcon )
 
 					iCount = iCount + 1
@@ -1095,11 +1176,11 @@ class CvMainInterface:
 	# This will update the flag widget for SP hotseat and dbeugging
 	def updateFlag( self ):
 
-		if ( CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_HIDE_ALL and CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_MINIMAP_ONLY ):
+		if ( CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_HIDE_ALL and CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_MINIMAP_ONLY and CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_ADVANCED_START ):
 			screen = CyGInterfaceScreen( "MainInterface", CvScreenEnums.MAIN_INTERFACE )
 			xResolution = screen.getXResolution()
 			yResolution = screen.getYResolution()
-			screen.addFlagWidgetGFC( "CivilizationFlag", ArtFileMgr.getMiscArtInfo("ART_UNITGROUP_FLAG").getKFM(), xResolution - 288, yResolution - 138, 68, 250, gc.getGame().getActivePlayer(), WidgetTypes.WIDGET_FLAG, gc.getGame().getActivePlayer(), -1)
+			screen.addFlagWidgetGFC( "CivilizationFlag", xResolution - 288, yResolution - 138, 68, 250, gc.getGame().getActivePlayer(), WidgetTypes.WIDGET_FLAG, gc.getGame().getActivePlayer(), -1)
 		
 	# Will hide and show the selection buttons and their associated buttons
 	def updateSelectionButtons( self ):
@@ -1146,6 +1227,7 @@ class CvMainInterface:
 
 		# Conscript Button Show
 		screen.hide( "Conscript" )
+		#screen.hide( "Liberate" )
 		screen.hide( "AutomateProduction" )
 		screen.hide( "AutomateCitizens" )
 
@@ -1155,6 +1237,17 @@ class CvMainInterface:
 
 			if ((pHeadSelectedCity.getOwner() == gc.getGame().getActivePlayer()) or gc.getGame().isDebugMode()):
 			
+				iBtnX = xResolution - 284
+				iBtnY = yResolution - 177
+				iBtnW = 64
+				iBtnH = 30
+
+				# Liberate button
+				#szText = "<font=1>" + localText.getText("TXT_KEY_LIBERATE_CITY", ()) + "</font>"
+				#screen.setButtonGFC( "Liberate", szText, "", iBtnX, iBtnY, iBtnW, iBtnH, WidgetTypes.WIDGET_LIBERATE_CITY, -1, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
+				#screen.setStyle( "Liberate", "Button_CityT1_Style" )
+				#screen.hide( "Liberate" )
+
 				iBtnSX = xResolution - 284
 				
 				iBtnX = iBtnSX
@@ -1278,6 +1371,13 @@ class CvMainInterface:
 					screen.enable( "Conscript", True )
 				else:
 					screen.enable( "Conscript", False )
+
+				# Liberate Button Show
+				#screen.show( "Liberate" )
+				#if (-1 != pHeadSelectedCity.getLiberationPlayer()):
+				#	screen.enable( "Liberate", True )
+				#else:
+				#	screen.enable( "Liberate", False )
 
 				iCount = 0
 				iRow = 0
@@ -1418,7 +1518,6 @@ class CvMainInterface:
 	
 		screen = CyGInterfaceScreen( "MainInterface", CvScreenEnums.MAIN_INTERFACE )
 
-		i = 0
 		for i in range( gc.getNumTechInfos() ):
 			szName = "ResearchButton" + str(i)
 			screen.hide( szName )
@@ -1430,7 +1529,6 @@ class CvMainInterface:
 		#screen.hide( "InterfaceOrnamentLeftLow" )
 		#screen.hide( "InterfaceOrnamentRightLow" )
 			
-		i = 0
 		for i in range(gc.getNumReligionInfos()):
 			szName = "ReligionButton" + str(i)
 			screen.hide( szName )
@@ -1448,7 +1546,7 @@ class CvMainInterface:
 						for j in range( gc.getNumReligionInfos() ):
 							if ( not bDone ):
 								if (gc.getReligionInfo(j).getTechPrereq() == i):
-									if not (gc.getGame().isReligionFounded(j)):
+									if not (gc.getGame().isReligionSlotTaken(j)):
 										szName = "ReligionButton" + str(j)
 										bDone = True
 
@@ -1518,7 +1616,7 @@ class CvMainInterface:
 						if (pHeadSelectedCity.getFreeSpecialistCount(i) > 0):
 							if (iCount < MAX_CITIZEN_BUTTONS):
 								szName = "FreeSpecialist" + str(iCount)
-								screen.setImageButton( szName, gc.getSpecialistInfo(i).getTexture(), (xResolution - 74  - (34 * iCount)), yResolution - 216, 32, 32, WidgetTypes.WIDGET_FREE_CITIZEN, i, 1 )
+								screen.setImageButton( szName, gc.getSpecialistInfo(i).getTexture(), (xResolution - 74  - (26 * iCount)), yResolution - 206, 24, 24, WidgetTypes.WIDGET_FREE_CITIZEN, i, 1 )
 								screen.show( szName )
 								bHandled = true
 							iCount += 1
@@ -1528,7 +1626,7 @@ class CvMainInterface:
 						for j in range( pHeadSelectedCity.getFreeSpecialistCount(i) ):
 							if (iCount < MAX_CITIZEN_BUTTONS):
 								szName = "FreeSpecialist" + str(iCount)
-								screen.setImageButton( szName, gc.getSpecialistInfo(i).getTexture(), (xResolution - 74  - (34 * iCount)), yResolution - 216, 32, 32, WidgetTypes.WIDGET_FREE_CITIZEN, i, -1 )
+								screen.setImageButton( szName, gc.getSpecialistInfo(i).getTexture(), (xResolution - 74  - (26 * iCount)), yResolution - 206, 24, 24, WidgetTypes.WIDGET_FREE_CITIZEN, i, -1 )
 								screen.show( szName )
 								bHandled = true
 
@@ -1566,10 +1664,10 @@ class CvMainInterface:
 					for j in range( iCount ):
 						bHandled = True
 						szName = "CitizenButton" + str((i * 100) + j)
-						screen.addCheckBoxGFC( szName, gc.getSpecialistInfo(i).getTexture(), "", xResolution - 74 - (34 * j), (yResolution - 282 - (34 * i)), 32, 32, WidgetTypes.WIDGET_CITIZEN, i, j, ButtonStyles.BUTTON_STYLE_LABEL )
+						screen.addCheckBoxGFC( szName, gc.getSpecialistInfo(i).getTexture(), "", xResolution - 74 - (26 * j), (yResolution - 272 - (26 * i)), 24, 24, WidgetTypes.WIDGET_CITIZEN, i, j, ButtonStyles.BUTTON_STYLE_LABEL )
 						screen.show( szName )
 						szName = "CitizenButtonHighlight" + str((i * 100) + j)
-						screen.addDDSGFC( szName, ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(), xResolution - 74 - (34 * j), (yResolution - 282 - (34 * i)), 32, 32, WidgetTypes.WIDGET_CITIZEN, i, j )
+						screen.addDDSGFC( szName, ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(), xResolution - 74 - (26 * j), (yResolution - 272 - (26 * i)), 24, 24, WidgetTypes.WIDGET_CITIZEN, i, j )
 						if ( pHeadSelectedCity.getForceSpecialistCount(i) > j ):
 							screen.show( szName )
 						else:
@@ -1609,8 +1707,10 @@ class CvMainInterface:
 		for iI in range(CommerceTypes.NUM_COMMERCE_TYPES):
 			szString = "PercentText" + str(iI)
 			screen.hide(szString)
+			szString = "RateText" + str(iI)
+			screen.hide(szString)
 
-		if ( CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_HIDE_ALL and CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_MINIMAP_ONLY ):
+		if ( CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_HIDE_ALL and CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_MINIMAP_ONLY  and CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_ADVANCED_START):
 
 			# Percent of commerce
 			if (gc.getPlayer(ePlayer).isAlive()):
@@ -1623,6 +1723,12 @@ class CvMainInterface:
 						screen.setLabel( szString, "Background", szOutText, CvUtil.FONT_LEFT_JUSTIFY, 14, 50 + (iCount * 19), -0.1, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 						screen.show( szString )
 
+						if not CyInterface().isCityScreenUp():
+							szOutText = u"<font=2>" + localText.getText("TXT_KEY_MISC_POS_GOLD_PER_TURN", (gc.getPlayer(ePlayer).getCommerceRate(CommerceTypes(eCommerce)), )) + u"</font>"
+							szString = "RateText" + str(iI)
+							screen.setLabel( szString, "Background", szOutText, CvUtil.FONT_LEFT_JUSTIFY, 112, 50 + (iCount * 19), -0.1, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
+							screen.show( szString )
+
 						iCount = iCount + 1;
                                                 
 			self.updateTimeText()
@@ -1630,7 +1736,7 @@ class CvMainInterface:
 			screen.show( "TimeText" )
 			
 			if (gc.getPlayer(ePlayer).isAlive()):
-			
+				
 				szText = CyGameTextMgr().getGoldStr(ePlayer)
 				screen.setLabel( "GoldText", "Background", szText, CvUtil.FONT_LEFT_JUSTIFY, 12, 6, -0.3, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 				screen.show( "GoldText" )
@@ -1675,10 +1781,9 @@ class CvMainInterface:
 		
 		ePlayer = gc.getGame().getActivePlayer()
 		
-		if (CyUserProfile().isClockOn()):# and bUseClockText):
-			g_szTimeText = getClockText() + u" - " + unicode(CyGameTextMgr().getInterfaceTimeStr(ePlayer))
-		else:
-			g_szTimeText = unicode(CyGameTextMgr().getInterfaceTimeStr(ePlayer))
+		g_szTimeText = localText.getText("TXT_KEY_TIME_TURN", (CyGame().getGameTurn(), )) + u" - " + unicode(CyGameTextMgr().getInterfaceTimeStr(ePlayer))
+		if (CyUserProfile().isClockOn()):
+			g_szTimeText = getClockText() + u" - " + g_szTimeText
 		
 	# Will update the selection Data Strings
 	def updateCityScreen( self ):
@@ -1730,23 +1835,29 @@ class CvMainInterface:
 			szName = "ReligionDDS" + str(i)
 			screen.hide( szName )
 			
+		for i in range( gc.getNumCorporationInfos() ):
+			szName = "CorporationHeadquarterDDS" + str(i)
+			screen.hide( szName )
+			szName = "CorporationDDS" + str(i)
+			screen.hide( szName )
+			
 		for i in range(CommerceTypes.NUM_COMMERCE_TYPES):
 			szName = "CityPercentText" + str(i)
 			screen.hide( szName )
 
-		screen.addPanel( "BonusPane0", u"", u"", True, False, xResolution - 244, 70, 57, yResolution - 530, PanelStyles.PANEL_STYLE_CITY_COLUMNL )
+		screen.addPanel( "BonusPane0", u"", u"", True, False, xResolution - 244, 94, 57, yResolution - 520, PanelStyles.PANEL_STYLE_CITY_COLUMNL )
 		screen.hide( "BonusPane0" )
-		screen.addScrollPanel( "BonusBack0", u"", xResolution - 242, 70, 157, yResolution - 546, PanelStyles.PANEL_STYLE_EXTERNAL )
+		screen.addScrollPanel( "BonusBack0", u"", xResolution - 242, 94, 157, yResolution - 536, PanelStyles.PANEL_STYLE_EXTERNAL )
 		screen.hide( "BonusBack0" )
 
-		screen.addPanel( "BonusPane1", u"", u"", True, False, xResolution - 187, 70, 68, yResolution - 530, PanelStyles.PANEL_STYLE_CITY_COLUMNC )
+		screen.addPanel( "BonusPane1", u"", u"", True, False, xResolution - 187, 94, 68, yResolution - 520, PanelStyles.PANEL_STYLE_CITY_COLUMNC )
 		screen.hide( "BonusPane1" )
-		screen.addScrollPanel( "BonusBack1", u"", xResolution - 191, 70, 184, yResolution - 546, PanelStyles.PANEL_STYLE_EXTERNAL )
+		screen.addScrollPanel( "BonusBack1", u"", xResolution - 191, 94, 184, yResolution - 536, PanelStyles.PANEL_STYLE_EXTERNAL )
 		screen.hide( "BonusBack1" )
 
-		screen.addPanel( "BonusPane2", u"", u"", True, False, xResolution - 119, 70, 107, yResolution - 530, PanelStyles.PANEL_STYLE_CITY_COLUMNR )
+		screen.addPanel( "BonusPane2", u"", u"", True, False, xResolution - 119, 94, 107, yResolution - 520, PanelStyles.PANEL_STYLE_CITY_COLUMNR )
 		screen.hide( "BonusPane2" )
-		screen.addScrollPanel( "BonusBack2", u"", xResolution - 125, 70, 205, yResolution - 546, PanelStyles.PANEL_STYLE_EXTERNAL )
+		screen.addScrollPanel( "BonusBack2", u"", xResolution - 125, 94, 205, yResolution - 536, PanelStyles.PANEL_STYLE_EXTERNAL )
 		screen.hide( "BonusBack2" )
 
 		screen.hide( "TradeRouteTable" )
@@ -1968,9 +2079,9 @@ class CvMainInterface:
 
 				iCount = 0
 
-				screen.addTableControlGFC( "TradeRouteTable", 3, 10, 168, 238, 98, False, False, 32, 32, TableStyles.TABLE_STYLE_STANDARD )
+				screen.addTableControlGFC( "TradeRouteTable", 3, 10, 187, 238, 98, False, False, 32, 32, TableStyles.TABLE_STYLE_STANDARD )
 				screen.setStyle( "TradeRouteTable", "Table_City_Style" )
-				screen.addTableControlGFC( "BuildingListTable", 3, 10, 298, 238, yResolution - 522, False, False, 32, 32, TableStyles.TABLE_STYLE_STANDARD )
+				screen.addTableControlGFC( "BuildingListTable", 3, 10, 317, 238, yResolution - 541, False, False, 32, 32, TableStyles.TABLE_STYLE_STANDARD )
 				screen.setStyle( "BuildingListTable", "Table_City_Style" )
 				
 				screen.setTableColumnHeader( "TradeRouteTable", 0, u"", 108 )
@@ -1997,81 +2108,84 @@ class CvMainInterface:
 				i = 0
 				iNumBuildings = 0
 				for i in range( gc.getNumBuildingInfos() ):
-					if (pHeadSelectedCity.hasBuilding(i)):
-						szLeftBuffer = gc.getBuildingInfo(i).getDescription()
-						szRightBuffer = u""
-						bFirst = True
+					if (pHeadSelectedCity.getNumBuilding(i) > 0):
 
-						if (pHeadSelectedCity.hasActiveBuilding(i)):
-							iHealth = pHeadSelectedCity.getBuildingHealth(i)
+						for k in range(pHeadSelectedCity.getNumBuilding(i)):
+							
+							szLeftBuffer = gc.getBuildingInfo(i).getDescription()
+							szRightBuffer = u""
+							bFirst = True
+							
+							if (pHeadSelectedCity.getNumActiveBuilding(i) > 0):
+								iHealth = pHeadSelectedCity.getBuildingHealth(i)
 
-							if (iHealth != 0):
-								if ( bFirst == False ):
-									szRightBuffer = szRightBuffer + ", "
-								else:
-									bFirst = False
-									
-								if ( iHealth > 0 ):
-									szTempBuffer = u"+%d%c" %( iHealth, CyGame().getSymbolID(FontSymbols.HEALTHY_CHAR) )
-									szRightBuffer = szRightBuffer + szTempBuffer
-								else:
-									szTempBuffer = u"+%d%c" %( -(iHealth), CyGame().getSymbolID(FontSymbols.UNHEALTHY_CHAR) )
-									szRightBuffer = szRightBuffer + szTempBuffer
-
-							iHappiness = pHeadSelectedCity.getBuildingHappiness(i)
-
-							if (iHappiness != 0):
-								if ( bFirst == False ):
-									szRightBuffer = szRightBuffer + ", "
-								else:
-									bFirst = False
-									
-								if ( iHappiness > 0 ):
-									szTempBuffer = u"+%d%c" %(iHappiness, CyGame().getSymbolID(FontSymbols.HAPPY_CHAR) )
-									szRightBuffer = szRightBuffer + szTempBuffer
-								else:
-									szTempBuffer = u"+%d%c" %( -(iHappiness), CyGame().getSymbolID(FontSymbols.UNHAPPY_CHAR) )
-									szRightBuffer = szRightBuffer + szTempBuffer
-
-							for j in range( YieldTypes.NUM_YIELD_TYPES):
-								iYield = gc.getBuildingInfo(i).getYieldChange(j)
-
-								if (iYield != 0):
+								if (iHealth != 0):
 									if ( bFirst == False ):
 										szRightBuffer = szRightBuffer + ", "
 									else:
 										bFirst = False
 										
-									if ( iYield > 0 ):
-										szTempBuffer = u"%s%d%c" %( "+", iYield, gc.getYieldInfo(j).getChar() )
+									if ( iHealth > 0 ):
+										szTempBuffer = u"+%d%c" %( iHealth, CyGame().getSymbolID(FontSymbols.HEALTHY_CHAR) )
 										szRightBuffer = szRightBuffer + szTempBuffer
 									else:
-										szTempBuffer = u"%s%d%c" %( "", iYield, gc.getYieldInfo(j).getChar() )
+										szTempBuffer = u"+%d%c" %( -(iHealth), CyGame().getSymbolID(FontSymbols.UNHEALTHY_CHAR) )
 										szRightBuffer = szRightBuffer + szTempBuffer
 
-						for j in range(CommerceTypes.NUM_COMMERCE_TYPES):
-							iCommerce = pHeadSelectedCity.getBuildingCommerceByBuilding(j, i)
+								iHappiness = pHeadSelectedCity.getBuildingHappiness(i)
 
-							if (iCommerce != 0):
-								if ( bFirst == False ):
-									szRightBuffer = szRightBuffer + ", "
-								else:
-									bFirst = False
-									
-								if ( iCommerce > 0 ):
-									szTempBuffer = u"%s%d%c" %( "+", iCommerce, gc.getCommerceInfo(j).getChar() )
-									szRightBuffer = szRightBuffer + szTempBuffer
-								else:
-									szTempBuffer = u"%s%d%c" %( "", iCommerce, gc.getCommerceInfo(j).getChar() )
-									szRightBuffer = szRightBuffer + szTempBuffer
+								if (iHappiness != 0):
+									if ( bFirst == False ):
+										szRightBuffer = szRightBuffer + ", "
+									else:
+										bFirst = False
+										
+									if ( iHappiness > 0 ):
+										szTempBuffer = u"+%d%c" %(iHappiness, CyGame().getSymbolID(FontSymbols.HAPPY_CHAR) )
+										szRightBuffer = szRightBuffer + szTempBuffer
+									else:
+										szTempBuffer = u"+%d%c" %( -(iHappiness), CyGame().getSymbolID(FontSymbols.UNHAPPY_CHAR) )
+										szRightBuffer = szRightBuffer + szTempBuffer
 
-						szBuffer = szLeftBuffer + "  " + szRightBuffer
-						
-						screen.appendTableRow( "BuildingListTable" )
-						screen.setTableText( "BuildingListTable", 0, iNumBuildings, "<font=1>" + szLeftBuffer + "</font>", "", WidgetTypes.WIDGET_HELP_BUILDING, i, -1, CvUtil.FONT_LEFT_JUSTIFY )
-						screen.setTableText( "BuildingListTable", 1, iNumBuildings, "<font=1>" + szRightBuffer + "</font>", "", WidgetTypes.WIDGET_HELP_BUILDING, i, -1, CvUtil.FONT_RIGHT_JUSTIFY )
-						
-						iNumBuildings = iNumBuildings + 1
+								for j in range( YieldTypes.NUM_YIELD_TYPES):
+									iYield = gc.getBuildingInfo(i).getYieldChange(j) + pHeadSelectedCity.getNumBuilding(i) * pHeadSelectedCity.getBuildingYieldChange(gc.getBuildingInfo(i).getBuildingClassType(), j)
+
+									if (iYield != 0):
+										if ( bFirst == False ):
+											szRightBuffer = szRightBuffer + ", "
+										else:
+											bFirst = False
+											
+										if ( iYield > 0 ):
+											szTempBuffer = u"%s%d%c" %( "+", iYield, gc.getYieldInfo(j).getChar() )
+											szRightBuffer = szRightBuffer + szTempBuffer
+										else:
+											szTempBuffer = u"%s%d%c" %( "", iYield, gc.getYieldInfo(j).getChar() )
+											szRightBuffer = szRightBuffer + szTempBuffer
+
+							for j in range(CommerceTypes.NUM_COMMERCE_TYPES):
+								iCommerce = pHeadSelectedCity.getBuildingCommerceByBuilding(j, i) / pHeadSelectedCity.getNumBuilding(i)
+	
+								if (iCommerce != 0):
+									if ( bFirst == False ):
+										szRightBuffer = szRightBuffer + ", "
+									else:
+										bFirst = False
+										
+									if ( iCommerce > 0 ):
+										szTempBuffer = u"%s%d%c" %( "+", iCommerce, gc.getCommerceInfo(j).getChar() )
+										szRightBuffer = szRightBuffer + szTempBuffer
+									else:
+										szTempBuffer = u"%s%d%c" %( "", iCommerce, gc.getCommerceInfo(j).getChar() )
+										szRightBuffer = szRightBuffer + szTempBuffer
+	
+							szBuffer = szLeftBuffer + "  " + szRightBuffer
+							
+							screen.appendTableRow( "BuildingListTable" )
+							screen.setTableText( "BuildingListTable", 0, iNumBuildings, "<font=1>" + szLeftBuffer + "</font>", "", WidgetTypes.WIDGET_HELP_BUILDING, i, -1, CvUtil.FONT_LEFT_JUSTIFY )
+							screen.setTableText( "BuildingListTable", 1, iNumBuildings, "<font=1>" + szRightBuffer + "</font>", "", WidgetTypes.WIDGET_HELP_BUILDING, i, -1, CvUtil.FONT_RIGHT_JUSTIFY )
+							
+							iNumBuildings = iNumBuildings + 1
 						
 				if ( iNumBuildings > g_iNumBuildings ):
 					g_iNumBuildings = iNumBuildings
@@ -2098,8 +2212,8 @@ class CvMainInterface:
 									szRightBuffer = szRightBuffer + szTempBuffer
 
 						screen.appendTableRow( "TradeRouteTable" )
-						screen.setTableText( "TradeRouteTable", 0, iNumTradeRoutes, "<font=1>" + szLeftBuffer + "</font>", "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
-						screen.setTableText( "TradeRouteTable", 1, iNumTradeRoutes, "<font=1>" + szRightBuffer + "</font>", "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_RIGHT_JUSTIFY )
+						screen.setTableText( "TradeRouteTable", 0, iNumTradeRoutes, "<font=1>" + szLeftBuffer + "</font>", "", WidgetTypes.WIDGET_HELP_TRADE_ROUTE_CITY, i, -1, CvUtil.FONT_LEFT_JUSTIFY )
+						screen.setTableText( "TradeRouteTable", 1, iNumTradeRoutes, "<font=1>" + szRightBuffer + "</font>", "", WidgetTypes.WIDGET_HELP_TRADE_ROUTE_CITY, i, -1, CvUtil.FONT_RIGHT_JUSTIFY )
 						
 						iNumTradeRoutes = iNumTradeRoutes + 1
 						
@@ -2134,7 +2248,7 @@ class CvMainInterface:
 							if ( iHappiness > 0 ):
 								szTempBuffer = u"<font=1>+%d%c</font>" %(iHappiness, CyGame().getSymbolID(FontSymbols.HAPPY_CHAR) )
 							else:
-								szTempBuffer = u"<font=1>-%d%c</font>" %( iHappiness, CyGame().getSymbolID(FontSymbols.UNHAPPY_CHAR) )
+								szTempBuffer = u"<font=1>+%d%c</font>" %( -iHappiness, CyGame().getSymbolID(FontSymbols.UNHAPPY_CHAR) )
 
 							if ( iHealth > 0 ):
 								szTempBuffer += u"<font=1>, +%d%c</font>" %( iHealth, CyGame().getSymbolID( FontSymbols.HEALTHY_CHAR ) )
@@ -2152,7 +2266,7 @@ class CvMainInterface:
 							if ( iHealth > 0 ):
 								szTempBuffer = u"<font=1>+%d%c</font>" %( iHealth, CyGame().getSymbolID( FontSymbols.HEALTHY_CHAR ) )
 							else:
-								szTempBuffer = u"<font=1>-%d%c</font>" %( iHealth, CyGame().getSymbolID(FontSymbols.UNHEALTHY_CHAR) )
+								szTempBuffer = u"<font=1>+%d%c</font>" %( -iHealth, CyGame().getSymbolID(FontSymbols.UNHEALTHY_CHAR) )
 								
 							szName = "CenterBonusItemLeft" + str(iCenterCount)
 							screen.setLabelAt( szName, "BonusBack1", szLeadBuffer, CvUtil.FONT_LEFT_JUSTIFY, 0, (iCenterCount * 20) + 4, -0.1, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, i, -1 )
@@ -2181,16 +2295,15 @@ class CvMainInterface:
 
 				szBuffer = localText.getText("INTERFACE_CITY_MAINTENANCE", ())
 				
-				screen.setLabel( "MaintenanceText", "Background", szBuffer, CvUtil.FONT_LEFT_JUSTIFY, 15, 107, -0.3, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_HELP_MAINTENANCE, -1, -1 )
+				screen.setLabel( "MaintenanceText", "Background", szBuffer, CvUtil.FONT_LEFT_JUSTIFY, 15, 126, -0.3, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_HELP_MAINTENANCE, -1, -1 )
 				screen.show( "MaintenanceText" )
 				
 				szBuffer = u"-%d.%02d %c" %(iMaintenance/100, iMaintenance%100, gc.getCommerceInfo(CommerceTypes.COMMERCE_GOLD).getChar())
-				screen.setLabel( "MaintenanceAmountText", "Background", szBuffer, CvUtil.FONT_RIGHT_JUSTIFY, 220, 106, -0.3, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_HELP_MAINTENANCE, -1, -1 )
+				screen.setLabel( "MaintenanceAmountText", "Background", szBuffer, CvUtil.FONT_RIGHT_JUSTIFY, 220, 125, -0.3, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_HELP_MAINTENANCE, -1, -1 )
 				screen.show( "MaintenanceAmountText" )
 
 				szBuffer = u""
 
-				i = 0
 				for i in range(gc.getNumReligionInfos()):
 					xCoord = xResolution - 242 + (i * 34)
 					yCoord = 42
@@ -2239,6 +2352,57 @@ class CvMainInterface:
 
 					szName = "ReligionDDS" + str(i)
 					screen.setImageButton( szName, szButton, xCoord, yCoord, 24, 24, WidgetTypes.WIDGET_HELP_RELIGION_CITY, i, -1 )
+					screen.enable( szName, bEnable )
+					screen.show( szName )
+
+				for i in range(gc.getNumCorporationInfos()):
+					xCoord = xResolution - 242 + (i * 34)
+					yCoord = 66
+					
+					bEnable = True
+						
+					if (pHeadSelectedCity.isHasCorporation(i)):
+						if (pHeadSelectedCity.isHeadquartersByType(i)):
+							szTempBuffer = u"%c" %(gc.getCorporationInfo(i).getHeadquarterChar())
+							szName = "CorporationHeadquarterDDS" + str(i)
+							screen.show( szName )
+						else:
+							szTempBuffer = u"%c" %(gc.getCorporationInfo(i).getChar())
+						szBuffer = szBuffer + szTempBuffer
+
+						for j in range(YieldTypes.NUM_YIELD_TYPES):
+							iYield = pHeadSelectedCity.getCorporationYieldByCorporation(j, i)
+
+							if (iYield != 0):
+								if ( iYield > 0 ):
+									szTempBuffer = u",%s%d%c" %("+", iYield, gc.getYieldInfo(j).getChar() )
+									szBuffer = szBuffer + szTempBuffer
+								else:
+									szTempBuffer = u",%s%d%c" %( "", iYield, gc.getYieldInfo(j).getChar() )
+									szBuffer = szBuffer + szTempBuffer
+						
+						for j in range(CommerceTypes.NUM_COMMERCE_TYPES):
+							iCommerce = pHeadSelectedCity.getCorporationCommerceByCorporation(j, i)
+
+							if (iCommerce != 0):
+								if ( iCommerce > 0 ):
+									szTempBuffer = u",%s%d%c" %("+", iCommerce, gc.getCommerceInfo(j).getChar() )
+									szBuffer = szBuffer + szTempBuffer
+								else:
+									szTempBuffer = u",%s%d%c" %( "", iCommerce, gc.getCommerceInfo(j).getChar() )
+									szBuffer = szBuffer + szTempBuffer
+
+						szBuffer += " "
+						
+						szButton = gc.getCorporationInfo(i).getButton()
+					
+					else:
+					
+						bEnable = False
+						szButton = gc.getCorporationInfo(i).getButton()
+
+					szName = "CorporationDDS" + str(i)
+					screen.setImageButton( szName, szButton, xCoord, yCoord, 24, 24, WidgetTypes.WIDGET_HELP_CORPORATION_CITY, i, -1 )
 					screen.enable( szName, bEnable )
 					screen.show( szName )
 
@@ -2593,94 +2757,104 @@ class CvMainInterface:
 		iCount = 0
 		iBtnHeight = 22
 		
-		if (CyInterface().isScoresVisible() and not CyInterface().isCityScreenUp() and CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_HIDE_ALL and CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_MINIMAP_ONLY and CyEngine().isGlobeviewUp() == false):
+		if ((CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_HIDE_ALL and CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_MINIMAP_ONLY)):
+			if (CyInterface().isScoresVisible() and not CyInterface().isCityScreenUp() and CyEngine().isGlobeviewUp() == false):
 
-			i = gc.getMAX_CIV_TEAMS() - 1
-			while (i > -1):
-				eTeam = gc.getGame().getRankTeam(i)
+				i = gc.getMAX_CIV_TEAMS() - 1
+				while (i > -1):
+					eTeam = gc.getGame().getRankTeam(i)
 
-				if (gc.getTeam(gc.getGame().getActiveTeam()).isHasMet(eTeam) or gc.getTeam(eTeam).isHuman() or gc.getGame().isDebugMode()):
-					j = gc.getMAX_CIV_PLAYERS() - 1
-					while (j > -1):
-						ePlayer = gc.getGame().getRankPlayer(j)
+					if (gc.getTeam(gc.getGame().getActiveTeam()).isHasMet(eTeam) or gc.getTeam(eTeam).isHuman() or gc.getGame().isDebugMode()):
+						j = gc.getMAX_CIV_PLAYERS() - 1
+						while (j > -1):
+							ePlayer = gc.getGame().getRankPlayer(j)
 
-						if (gc.getPlayer(ePlayer).isEverAlive() and not gc.getPlayer(ePlayer).isMinorCiv()):
+							if (not CyInterface().isScoresMinimized() or gc.getGame().getActivePlayer() == ePlayer):
+								if (gc.getPlayer(ePlayer).isAlive() and not gc.getPlayer(ePlayer).isMinorCiv()):
 
-							if (gc.getPlayer(ePlayer).getTeam() == eTeam):
-								szBuffer = u"<font=2>"
+									if (gc.getPlayer(ePlayer).getTeam() == eTeam):
+										szBuffer = u"<font=2>"
 
-								if (gc.getGame().isGameMultiPlayer()):
-									if (not (gc.getPlayer(ePlayer).isTurnActive())):
-										szBuffer = szBuffer + "*"
+										if (gc.getGame().isGameMultiPlayer()):
+											if (not (gc.getPlayer(ePlayer).isTurnActive())):
+												szBuffer = szBuffer + "*"
 
-								if (not CyInterface().isFlashingPlayer(ePlayer) or CyInterface().shouldFlash(ePlayer)):
-									if (ePlayer == gc.getGame().getActivePlayer()):
-										szTempBuffer = u"%d: [<color=%d,%d,%d,%d>%s</color>]" %(gc.getGame().getPlayerScore(ePlayer), gc.getPlayer(ePlayer).getPlayerTextColorR(), gc.getPlayer(ePlayer).getPlayerTextColorG(), gc.getPlayer(ePlayer).getPlayerTextColorB(), gc.getPlayer(ePlayer).getPlayerTextColorA(), gc.getPlayer(ePlayer).getName())
-									else:
-										szTempBuffer = u"%d: <color=%d,%d,%d,%d>%s</color>" %(gc.getGame().getPlayerScore(ePlayer), gc.getPlayer(ePlayer).getPlayerTextColorR(), gc.getPlayer(ePlayer).getPlayerTextColorG(), gc.getPlayer(ePlayer).getPlayerTextColorB(), gc.getPlayer(ePlayer).getPlayerTextColorA(), gc.getPlayer(ePlayer).getName())
-								else:
-									szTempBuffer = u"%d: %s" %(gc.getGame().getPlayerScore(ePlayer), gc.getPlayer(ePlayer).getName())
-								szBuffer = szBuffer + szTempBuffer
-
-								if (gc.getTeam(eTeam).isAlive()):
-									if ( not (gc.getTeam(gc.getGame().getActiveTeam()).isHasMet(eTeam)) ):
-										szBuffer = szBuffer + (" ?")
-									if (gc.getTeam(eTeam).isAtWar(gc.getGame().getActiveTeam())):
-										szBuffer = szBuffer + "("  + localText.getColorText("TXT_KEY_CONCEPT_WAR", (), gc.getInfoTypeForString("COLOR_RED")).upper() + ")"
-									if (gc.getPlayer(ePlayer).canTradeNetworkWith(gc.getGame().getActivePlayer()) and (ePlayer != gc.getGame().getActivePlayer())):
-										szTempBuffer = u"%c" %(CyGame().getSymbolID(FontSymbols.TRADE_CHAR))
-										szBuffer = szBuffer + szTempBuffer
-									if (gc.getTeam(eTeam).isOpenBorders(gc.getGame().getActiveTeam())):
-										szTempBuffer = u"%c" %(CyGame().getSymbolID(FontSymbols.OPEN_BORDERS_CHAR))
-										szBuffer = szBuffer + szTempBuffer
-									if (gc.getTeam(eTeam).isDefensivePact(gc.getGame().getActiveTeam())):
-										szTempBuffer = u"%c" %(CyGame().getSymbolID(FontSymbols.DEFENSIVE_PACT_CHAR))
-										szBuffer = szBuffer + szTempBuffer
-									if (gc.getPlayer(ePlayer).getStateReligion() != -1):
-										if (gc.getPlayer(ePlayer).hasHolyCity(gc.getPlayer(ePlayer).getStateReligion())):
-											szTempBuffer = u"%c" %(gc.getReligionInfo(gc.getPlayer(ePlayer).getStateReligion()).getHolyCityChar())
-											szBuffer = szBuffer + szTempBuffer
+										if (not CyInterface().isFlashingPlayer(ePlayer) or CyInterface().shouldFlash(ePlayer)):
+											if (ePlayer == gc.getGame().getActivePlayer()):
+												szTempBuffer = u"%d: [<color=%d,%d,%d,%d>%s</color>]" %(gc.getGame().getPlayerScore(ePlayer), gc.getPlayer(ePlayer).getPlayerTextColorR(), gc.getPlayer(ePlayer).getPlayerTextColorG(), gc.getPlayer(ePlayer).getPlayerTextColorB(), gc.getPlayer(ePlayer).getPlayerTextColorA(), gc.getPlayer(ePlayer).getName())
+											else:
+												szTempBuffer = u"%d: <color=%d,%d,%d,%d>%s</color>" %(gc.getGame().getPlayerScore(ePlayer), gc.getPlayer(ePlayer).getPlayerTextColorR(), gc.getPlayer(ePlayer).getPlayerTextColorG(), gc.getPlayer(ePlayer).getPlayerTextColorB(), gc.getPlayer(ePlayer).getPlayerTextColorA(), gc.getPlayer(ePlayer).getName())
 										else:
-											szTempBuffer = u"%c" %(gc.getReligionInfo(gc.getPlayer(ePlayer).getStateReligion()).getChar())
-											szBuffer = szBuffer + szTempBuffer
-												
-								if (((gc.getPlayer(ePlayer).getTeam() == gc.getGame().getActiveTeam()) and (gc.getTeam(gc.getGame().getActiveTeam()).getNumMembers() > 1)) or (gc.getTeam(gc.getPlayer(ePlayer).getTeam()).isVassal(gc.getGame().getActiveTeam())) or gc.getGame().isDebugMode()):
-									if (gc.getPlayer(ePlayer).getCurrentResearch() != -1):
-										szTempBuffer = u"-%s (%d)" %(gc.getTechInfo(gc.getPlayer(ePlayer).getCurrentResearch()).getDescription(), gc.getPlayer(ePlayer).getResearchTurnsLeft(gc.getPlayer(ePlayer).getCurrentResearch(), True))
+											szTempBuffer = u"%d: %s" %(gc.getGame().getPlayerScore(ePlayer), gc.getPlayer(ePlayer).getName())
 										szBuffer = szBuffer + szTempBuffer
-								if (CyGame().isNetworkMultiPlayer()):
-									szBuffer = szBuffer + CyGameTextMgr().getNetStats(ePlayer)
-									
-								if (gc.getPlayer(ePlayer).isHuman() and CyInterface().isOOSVisible()):
-									szTempBuffer = u" <color=255,0,0>* %s *</color>" %(CyGameTextMgr().getOOSSeeds(ePlayer))
-									szBuffer = szBuffer + szTempBuffer
-									
-								szBuffer = szBuffer + "</font>"
 
-								if ( CyInterface().determineWidth( szBuffer ) > iWidth ):
-									iWidth = CyInterface().determineWidth( szBuffer )
+										if (gc.getTeam(eTeam).isAlive()):
+											if ( not (gc.getTeam(gc.getGame().getActiveTeam()).isHasMet(eTeam)) ):
+												szBuffer = szBuffer + (" ?")
+											if (gc.getTeam(eTeam).isAtWar(gc.getGame().getActiveTeam())):
+												szBuffer = szBuffer + "("  + localText.getColorText("TXT_KEY_CONCEPT_WAR", (), gc.getInfoTypeForString("COLOR_RED")).upper() + ")"
+											if (gc.getPlayer(ePlayer).canTradeNetworkWith(gc.getGame().getActivePlayer()) and (ePlayer != gc.getGame().getActivePlayer())):
+												szTempBuffer = u"%c" %(CyGame().getSymbolID(FontSymbols.TRADE_CHAR))
+												szBuffer = szBuffer + szTempBuffer
+											if (gc.getTeam(eTeam).isOpenBorders(gc.getGame().getActiveTeam())):
+												szTempBuffer = u"%c" %(CyGame().getSymbolID(FontSymbols.OPEN_BORDERS_CHAR))
+												szBuffer = szBuffer + szTempBuffer
+											if (gc.getTeam(eTeam).isDefensivePact(gc.getGame().getActiveTeam())):
+												szTempBuffer = u"%c" %(CyGame().getSymbolID(FontSymbols.DEFENSIVE_PACT_CHAR))
+												szBuffer = szBuffer + szTempBuffer
+											if (gc.getPlayer(ePlayer).getStateReligion() != -1):
+												if (gc.getPlayer(ePlayer).hasHolyCity(gc.getPlayer(ePlayer).getStateReligion())):
+													szTempBuffer = u"%c" %(gc.getReligionInfo(gc.getPlayer(ePlayer).getStateReligion()).getHolyCityChar())
+													szBuffer = szBuffer + szTempBuffer
+												else:
+													szTempBuffer = u"%c" %(gc.getReligionInfo(gc.getPlayer(ePlayer).getStateReligion()).getChar())
+													szBuffer = szBuffer + szTempBuffer
+											if (gc.getTeam(eTeam).getEspionagePointsAgainstTeam(gc.getGame().getActiveTeam()) < gc.getTeam(gc.getGame().getActiveTeam()).getEspionagePointsAgainstTeam(eTeam)):
+												szTempBuffer = u"%c" %(gc.getCommerceInfo(CommerceTypes.COMMERCE_ESPIONAGE).getChar())
+												szBuffer = szBuffer + szTempBuffer
+										
+										bEspionageCanSeeResearch = false
+										for iMissionLoop in range(gc.getNumEspionageMissionInfos()):
+											if (gc.getEspionageMissionInfo(iMissionLoop).isSeeResearch()):
+												bEspionageCanSeeResearch = gc.getPlayer(gc.getGame().getActivePlayer()).canDoEspionageMission(iMissionLoop, ePlayer, CyMap().plot(-1,-1), -1)
+												break
+										
+										if (((gc.getPlayer(ePlayer).getTeam() == gc.getGame().getActiveTeam()) and (gc.getTeam(gc.getGame().getActiveTeam()).getNumMembers() > 1)) or (gc.getTeam(gc.getPlayer(ePlayer).getTeam()).isVassal(gc.getGame().getActiveTeam())) or gc.getGame().isDebugMode() or bEspionageCanSeeResearch):
+											if (gc.getPlayer(ePlayer).getCurrentResearch() != -1):
+												szTempBuffer = u"-%s (%d)" %(gc.getTechInfo(gc.getPlayer(ePlayer).getCurrentResearch()).getDescription(), gc.getPlayer(ePlayer).getResearchTurnsLeft(gc.getPlayer(ePlayer).getCurrentResearch(), True))
+												szBuffer = szBuffer + szTempBuffer
+										if (CyGame().isNetworkMultiPlayer()):
+											szBuffer = szBuffer + CyGameTextMgr().getNetStats(ePlayer)
+											
+										if (gc.getPlayer(ePlayer).isHuman() and CyInterface().isOOSVisible()):
+											szTempBuffer = u" <color=255,0,0>* %s *</color>" %(CyGameTextMgr().getOOSSeeds(ePlayer))
+											szBuffer = szBuffer + szTempBuffer
+											
+										szBuffer = szBuffer + "</font>"
 
-								szName = "ScoreText" + str(ePlayer)
-								if ( CyInterface().getShowInterface() == InterfaceVisibility.INTERFACE_SHOW ):
-									yCoord = yResolution - 206
-								else:
-									yCoord = yResolution - 88
-								screen.setText( szName, "Background", szBuffer, CvUtil.FONT_RIGHT_JUSTIFY, xResolution - 12, yCoord - (iCount * iBtnHeight), -0.3, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_CONTACT_CIV, ePlayer, -1 )
-								screen.show( szName )
-								screen.setTextBackgroundPane( szName, gc.getInfoTypeForString("COLOR_BLACK") )
+										if ( CyInterface().determineWidth( szBuffer ) > iWidth ):
+											iWidth = CyInterface().determineWidth( szBuffer )
 
-								CyInterface().checkFlashReset(ePlayer)
+										szName = "ScoreText" + str(ePlayer)
+										if ( CyInterface().getShowInterface() == InterfaceVisibility.INTERFACE_SHOW or CyInterface().isInAdvancedStart()):
+											yCoord = yResolution - 206
+										else:
+											yCoord = yResolution - 88
+										screen.setText( szName, "Background", szBuffer, CvUtil.FONT_RIGHT_JUSTIFY, xResolution - 12, yCoord - (iCount * iBtnHeight), -0.3, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_CONTACT_CIV, ePlayer, -1 )
+										screen.show( szName )
+										
+										CyInterface().checkFlashReset(ePlayer)
 
-								iCount = iCount + 1
-						j = j - 1
-				i = i - 1
+										iCount = iCount + 1
+							j = j - 1
+					i = i - 1
 
-			if ( CyInterface().getShowInterface() == InterfaceVisibility.INTERFACE_SHOW ):
-				yCoord = yResolution - 186
-			else:
-				yCoord = yResolution - 68
-			screen.setPanelSize( "ScoreBackground", xResolution - 21 - iWidth, yCoord - (iBtnHeight * iCount) - 4, iWidth + 12, (iBtnHeight * iCount) + 8 )
-			screen.show( "ScoreBackground" )
+				if ( CyInterface().getShowInterface() == InterfaceVisibility.INTERFACE_SHOW or CyInterface().isInAdvancedStart()):
+					yCoord = yResolution - 186
+				else:
+					yCoord = yResolution - 68
+				screen.setPanelSize( "ScoreBackground", xResolution - 21 - iWidth, yCoord - (iBtnHeight * iCount) - 4, iWidth + 12, (iBtnHeight * iCount) + 8 )
+				screen.show( "ScoreBackground" )
 
 	# Will update the help Strings
 	def updateHelpStrings( self ):
@@ -2773,7 +2947,7 @@ class CvMainInterface:
 			for i in range(kGLM.getNumLayers()):
 				szButtonID = "GlobeLayer" + str(i)
 				screen.setState( szButtonID, iCurrentLayerID == i )
-
+				
 			# Set up options pane
 			if bHasOptions:
 				kLayer = kGLM.getLayer(iCurrentLayerID)
@@ -2814,11 +2988,21 @@ class CvMainInterface:
 				kLayer = kGLM.getLayer(iCurrentLayerID)
 				if kLayer.getName() == "RESOURCES":
 					screen.setState("ResourceIcons", True)
-					#kLayer.setCurrentOption(0)
 				else:
 					screen.setState("ResourceIcons", False)
+
+				if kLayer.getName() == "UNITS":
+					screen.setState("UnitIcons", True)
+				else:
+					screen.setState("UnitIcons", False)
 			else:
 				screen.setState("ResourceIcons", False)
+				screen.setState("UnitIcons", False)
+				
+			screen.setState("Grid", CyUserProfile().getGrid())
+			screen.setState("BareMap", CyUserProfile().getMap())
+			screen.setState("Yields", CyUserProfile().getYields())
+			screen.setState("ScoresVisible", CyUserProfile().getScores())
 
 			screen.hide( "InterfaceGlobeLayerPanel" )
 			screen.setState("GlobeToggle", False )
@@ -2834,7 +3018,7 @@ class CvMainInterface:
 		if ( CyInterface().isCityScreenUp() ):
 			bVisible = False
 		
-		kMainButtons = ["Ping", "Grid", "BareMap", "Yields", "ScoresVisible", "ResourceIcons"]
+		kMainButtons = ["UnitIcons", "Grid", "BareMap", "Yields", "ScoresVisible", "ResourceIcons"]
 		kGlobeButtons = []
 		for i in range(kGLM.getNumLayers()):
 			szButtonID = "GlobeLayer" + str(i)
@@ -2908,9 +3092,10 @@ class CvMainInterface:
 		xResolution = screen.getXResolution()
 		yResolution = screen.getYResolution()
 
-		screen.setImageButton( "Ping", "", 0, 0, 28, 28, WidgetTypes.WIDGET_ACTION, gc.getControlInfo(ControlTypes.CONTROL_PING).getActionInfoIndex(), -1 )
-		screen.setStyle( "Ping", "Button_HUDBtnPing_Style" )
-		screen.hide( "Ping" )
+		screen.addCheckBoxGFC( "UnitIcons", "", "", 0, 0, 28, 28, WidgetTypes.WIDGET_ACTION, gc.getControlInfo(ControlTypes.CONTROL_UNIT_ICONS).getActionInfoIndex(), -1, ButtonStyles.BUTTON_STYLE_LABEL )
+		screen.setStyle( "UnitIcons", "Button_HUDGlobeUnit_Style" )
+		screen.setState( "UnitIcons", False )
+		screen.hide( "UnitIcons" )
 
 		screen.addCheckBoxGFC( "Grid", "", "", 0, 0, 28, 28, WidgetTypes.WIDGET_ACTION, gc.getControlInfo(ControlTypes.CONTROL_GRID).getActionInfoIndex(), -1, ButtonStyles.BUTTON_STYLE_LABEL )
 		screen.setStyle( "Grid", "Button_HUDBtnGrid_Style" )

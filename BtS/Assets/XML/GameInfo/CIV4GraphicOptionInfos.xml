@@ -31,6 +31,12 @@
 			<bDefault>0</bDefault>
 		</GraphicOptionInfo>
 		<GraphicOptionInfo>
+			<Type>GRAPHICOPTION_NO_ENEMY_GLOW</Type>
+			<Description>TXT_KEY_PLAYER_OPTION_NO_ENEMY_GLOW</Description>
+			<Help>TXT_KEY_PLAYER_OPTION_NO_ENEMY_GLOW_HELP</Help>
+			<bDefault>0</bDefault>
+		</GraphicOptionInfo>
+		<GraphicOptionInfo>
 			<Type>GRAPHICOPTION_FROZEN_ANIMATIONS</Type>
 			<Description>TXT_KEY_GRAPHIC_OPTION_FROZEN_ANIMATIONS</Description>
 			<Help>TXT_KEY_GRAPHIC_OPTION_FROZEN_ANIMATIONS_HELP</Help>

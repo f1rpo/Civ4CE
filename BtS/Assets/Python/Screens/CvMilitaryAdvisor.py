@@ -272,6 +272,7 @@ class CvMilitaryAdvisor:
 		# self.unitsList[iUnit][1] is the unit type (e.g. Warrior)
 		# self.unitsList[iUnit][2] is a list of the active player's actual units
 		# self.unitsList[iUnit][3] is the total number of those units seen by the active player (not only his own)
+		
 		if bReload:
 			for iUnit in range(gc.getNumUnitInfos()):
 				self.unitsList[iUnit] = (gc.getUnitInfo(iUnit).getUnitCombatType(), iUnit, [], 0)
@@ -292,7 +293,7 @@ class CvMilitaryAdvisor:
 							iNumUnits = self.unitsList[unitType][3]
 							if (iPlayer == self.iActivePlayer):
 								iNumUnits += 1
-							if loopUnit.getOwner() in self.selectedPlayerList:
+							if loopUnit.getVisualOwner() in self.selectedPlayerList:
 								self.unitsList[unitType][2].append(loopUnit)							
 							
 							self.unitsList[unitType] = (self.unitsList[unitType][0], self.unitsList[unitType][1], self.unitsList[unitType][2], iNumUnits)
@@ -369,7 +370,7 @@ class CvMilitaryAdvisor:
 							screen.setListBoxStringGFC(self.UNIT_LIST_ID, iItem, szDescription, WidgetTypes.WIDGET_MINIMAP_HIGHLIGHT, -loopUnit.getOwner(), loopUnit.getID(), CvUtil.FONT_LEFT_JUSTIFY)
 						iItem += 1
 
-					iPlayer = loopUnit.getOwner()
+					iPlayer = loopUnit.getVisualOwner()
 					player = PyPlayer(iPlayer)
 					iColor = gc.getPlayerColorInfo(gc.getPlayer(iPlayer).getPlayerColor()).getColorTypePrimary()
 					screen.setMinimapColor(MinimapModeTypes.MINIMAPMODE_MILITARY, loopUnit.getX(), loopUnit.getY(), iColor, 0.6)

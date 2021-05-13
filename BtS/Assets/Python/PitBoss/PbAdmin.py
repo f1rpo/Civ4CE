@@ -8,6 +8,7 @@ from CvPythonExtensions import *
 import wx
 import wx.lib.scrolledpanel
 import time
+import string
 
 PB = CyPitboss()
 gc = CyGlobalContext()
@@ -60,12 +61,21 @@ class AdminFrame(wx.Frame):
 		
 		# Add the turn timer if we have one
 		if (PB.getTurnTimer()):
+			timerSizer = wx.BoxSizer(wx.HORIZONTAL)
+			
+			# Add a button to allow turn timer modification
+			timerChangeButton = wx.Button(self, -1, localText.getText("TXT_KEY_MP_OPTION_TURN_TIMER", ()))
+			self.Bind(wx.EVT_BUTTON, self.OnChangeTimer, timerChangeButton)
+			timerSizer.Add(timerChangeButton, 0, wx.ALL, 5)
+
 			self.timerDisplay = wx.StaticText(self, -1, "")
 			font = wx.Font(16, wx.SWISS, wx.NORMAL, wx.NORMAL)
 			self.timerDisplay.SetFont(font)
 			self.timerDisplay.SetSize(self.timerDisplay.GetBestSize())
-			pageSizer.Add(self.timerDisplay, 0, wx.ALL, 5)
-		
+			timerSizer.Add(self.timerDisplay, 0, wx.ALL, 5)
+			
+			pageSizer.Add(timerSizer, 0, wx.ALL, 5)
+			
 		infoSizer = wx.BoxSizer(wx.HORIZONTAL)
 		leftSizer = wx.BoxSizer(wx.VERTICAL)
 		
@@ -177,7 +187,6 @@ class AdminFrame(wx.Frame):
 		
 		# Chat edit
 		self.chatEdit = wx.TextCtrl(self, -1, "", size=(225,-1), style=wx.TE_PROCESS_ENTER)
-		self.chatEdit.SetMaxLength(300)
 		self.chatEdit.SetHelpText(localText.getText("TXT_KEY_PITBOSS_CHAT_EDIT_HELP", ()))
 		dialogSizer.Add(self.chatEdit, 0, wx.ALL, 5)
 		self.Bind(wx.EVT_TEXT_ENTER, self.OnSendChat, self.chatEdit)
@@ -305,8 +314,8 @@ class AdminFrame(wx.Frame):
 		"'save' event handler"
 		dlg = wx.FileDialog(
 			self, message=(localText.getText("TXT_KEY_PITBOSS_SAVE_AS", ())), defaultDir=".\saves\multi",
-			defaultFile="Pitboss_"+PB.getGamedate(True)+".CivWarlordsSave", 
-			wildcard=(localText.getText("TXT_KEY_PITBOSS_SAVE_AS_TEXT", ())) + " (*.CivWarlordsSave)|*.CivWarlordsSave", style=wx.SAVE | wx.OVERWRITE_PROMPT
+			defaultFile="Pitboss_"+PB.getGamedate(True)+".CivBeyondSwordSave", 
+			wildcard=(localText.getText("TXT_KEY_PITBOSS_SAVE_AS_TEXT", ())) + " (*.CivBeyondSwordSave)|*.CivBeyondSwordSave", style=wx.SAVE | wx.OVERWRITE_PROMPT
 			)
 			
 		if dlg.ShowModal() == wx.ID_OK:
@@ -335,6 +344,30 @@ class AdminFrame(wx.Frame):
 			# Set the MotD
 			self.motdDisplayBox.SetValue(dlg.GetValue())
 			
+	def OnChangeTimer(self, event):
+		"Turn timer event handler"
+		
+		# Changing Timer - pop a modal dialog
+		dlg = wx.TextEntryDialog(
+			self, localText.getText("TXT_KEY_PITBOSS_TURN_TIMER_NEW", ()),
+			localText.getText("TXT_KEY_MP_OPTION_TURN_TIMER", ()))
+		dlg.SetValue("%s" % (gc.getGame().getPitbossTurnTime(), ))
+			
+		# Show the modal dialog and get the response
+		if dlg.ShowModal() == wx.ID_OK:
+			szValue = dlg.GetValue()
+			if szValue != "":
+				if not self.IsNumericString(szValue):
+					dlg2 = wx.MessageDialog(
+						self, localText.getText("TXT_KEY_PITBOSS_TURNTIMER_ERROR_DESC", ()),
+						localText.getText("TXT_KEY_PITBOSS_TURNTIMER_ERROR_TITLE", ()), wx.OK|wx.ICON_EXCLAMATION)
+						
+					if dlg2.ShowModal() == wx.ID_OK:
+						# Clear out the TurnTimer Edit box
+						dlg.SetValue("")
+				else:
+					PB.turnTimerChanged((int)(dlg.GetValue()))
+			
 	def OnSendChat(self, event):
 		"'Chat Send' event handler"
 		
@@ -353,6 +386,11 @@ class AdminFrame(wx.Frame):
 		PB.quit()
 		self.Destroy()
 
+	def IsNumericString(self, myStr):
+		for myChar in myStr:
+			if myChar not in string.digits:
+				return False
+		return True
 #
 # main app class
 #
@@ -410,3 +448,4 @@ class AdminIFace(wx.App):
 		#msgBox.Show(True)
 		outMsg = title + ":\n" + desc
 		PB.consoleOut(outMsg)
+		

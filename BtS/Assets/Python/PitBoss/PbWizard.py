@@ -505,7 +505,7 @@ class LoadSelectPage(wx.wizard.PyWizardPage):
 				bScenario = false
 				dlg = wx.FileDialog(
 					self, message=(localText.getText("TXT_KEY_PITBOSS_CHOOSE_SAVE", ())), defaultDir=".\saves\multi",
-					defaultFile="", wildcard=localText.getText("TXT_KEY_PITBOSS_SAVE_FILES", ("(*.CivWarlordsSave)|*.CivWarlordsSave", )), style=wx.OPEN
+					defaultFile="", wildcard=localText.getText("TXT_KEY_PITBOSS_SAVE_FILES", ("(*.CivBeyondSwordSave)|*.CivBeyondSwordSave", )), style=wx.OPEN
 					)
 				
 				# Show the modal dialog and get the response
@@ -948,6 +948,16 @@ class StagingPage(wx.wizard.WizardPageSimple):
 			
 		self.optionsSizer.Add(checkBoxSizer, 0, wx.LEFT, 10)
 		
+		# Entry box for number of advanced start points
+		advancedStartPointsSizer = wx.BoxSizer(wx.HORIZONTAL)
+		advancedStartPointsText = wx.StaticText(self, -1, localText.getText("TXT_KEY_ADVANCED_START_POINTS", ()))
+		self.advancedStartPointsEdit = wx.TextCtrl(self, -1, str(gameData.iAdvancedStartPoints), size=(50,-1))
+		advancedStartPointsSizer.Add(advancedStartPointsText, 0, wx.TOP, 5)
+		advancedStartPointsSizer.Add(self.advancedStartPointsEdit, 0, wx.TOP, 5)
+		self.Bind(wx.EVT_TEXT, self.OnAdvancedStartPointsEntered, self.advancedStartPointsEdit)
+		
+		mpOptionsSizer.Add(advancedStartPointsSizer, 0, wx.ALL, 5)
+		
 		# Add our options box to the page
 		self.pageSizer.Add(self.optionsSizer, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5)
 		
@@ -1078,6 +1088,7 @@ class StagingPage(wx.wizard.WizardPageSimple):
 	def ChangeGameParam(self):
 		maxTurnsValue = 0
 		cityEliminationValue = 0
+		advancedStartPointsValue = 0
 		turnTimerValue = 0
 		
 		strValue = self.maxTurnsEdit.GetValue()
@@ -1088,6 +1099,10 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		if (len(strValue) > 0):
 			cityEliminationValue = (int)(self.cityEliminationEdit.GetValue())
 			
+		strValue = self.advancedStartPointsEdit.GetValue()
+		if (len(strValue) > 0):
+			advancedStartPointsValue = (int)(self.advancedStartPointsEdit.GetValue())
+			
 		strValue = self.turnTimerEdit.GetValue()
 		if (len(strValue) > 0):
 			turnTimerValue = (int)(self.turnTimerEdit.GetValue())
@@ -1095,7 +1110,7 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		PB.gameParamChanged( self.mapChoice.GetStringSelection(), self.sizeChoice.GetSelection(),
 			self.climateChoice.GetSelection(), self.seaLevelChoice.GetSelection(),
 			self.eraChoice.GetSelection(), self.speedChoice.GetSelection(), maxTurnsValue, cityEliminationValue,
-			turnTimerValue, self.adminPasswordEdit.GetValue() )
+			advancedStartPointsValue, turnTimerValue, self.adminPasswordEdit.GetValue() )
 			
 	def OnCustomMapOptionChoice(self, event):
 		# Get the option ID
@@ -1143,6 +1158,27 @@ class StagingPage(wx.wizard.WizardPageSimple):
 				if dlg.ShowModal() == wx.ID_OK:
 					# Clear out the MaxTurns Edit box
 					self.cityEliminationEdit.SetValue("")
+			else:
+				# It's a number
+				self.ChangeGameParam()
+		else:
+			# It's been cleared
+			self.ChangeGameParam()
+		
+	def OnAdvancedStartPointsEntered(self, event):
+		# Check to see if there is an string
+		if ( (self.advancedStartPointsEdit.GetValue() != "")  ):
+			# There is, make sure it's a number
+			if ( not self.IsNumericString(self.advancedStartPointsEdit.GetValue()) ):
+				# It's not - lay the smack down				
+				dlg = wx.MessageDialog(
+					self, localText.getText("TXT_KEY_PITBOSS_CITYELIMINATION_ERROR_DESC", ()),
+					localText.getText("TXT_KEY_PITBOSS_CITYELIMINATION_ERROR_TITLE", ()), wx.OK|wx.ICON_EXCLAMATION)
+					
+				# Show the modal dialog and get the response
+				if dlg.ShowModal() == wx.ID_OK:
+					# Clear out the MaxTurns Edit box
+					self.advancedStartPointsEdit.SetValue("")
 			else:
 				# It's a number
 				self.ChangeGameParam()
@@ -1230,6 +1266,7 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		global bScenario
 		
 		# Get game data first
+		PB.resetAdvancedStartPoints()
 		gameData = PB.getGameSetupData()
 		
 		self.refreshCustomMapOptions(gameData.getMapName())
@@ -1260,6 +1297,9 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		
 		self.cityEliminationEdit.SetValue(str(gameData.iCityElimination))
 		self.cityEliminationEdit.Enable(not bSaved and not PB.forceCityElimination())
+		
+		self.advancedStartPointsEdit.SetValue(str(gameData.iAdvancedStartPoints))
+		self.advancedStartPointsEdit.Enable(not bSaved and not PB.forceAdvancedStart())
 		
 		self.turnTimerEdit.SetValue(str(gameData.iTurnTime))
 		if (not bSaved):
@@ -1440,6 +1480,10 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		self.optionsSizer.Layout()
 		self.pageSizer.Layout()
 		self.Layout()
+		
+		
+	def refreshAdvancedStartPoints(self, iPoints):
+		self.advancedStartPointsEdit.SetValue(str(iPoints))
 		
 		
 	def buildCustomMapOptions(self, szMapName):
@@ -1682,4 +1726,12 @@ class StartupIFace(wx.App):
 		if (curPage == self.staging):
 			# Update the custom map options in the staging room
 			curPage.refreshCustomMapOptions(szMapName)
-	
+
+	def refreshAdvancedStartPoints(self, iPoints):
+		global curPage
+		
+		# Refresh the page if we in the staging window
+		if (curPage == self.staging):
+			# Update the custom map options in the staging room
+			curPage.refreshAdvancedStartPoints(iPoints)
+		

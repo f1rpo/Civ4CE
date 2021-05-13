@@ -126,28 +126,28 @@ class CvPediaBuilding:
 			szBuildingType = localText.getText("TXT_KEY_PEDIA_WORLD_WONDER", ())
 			if (iMaxInstances > 1):
 				szBuildingType += " " + localText.getText("TXT_KEY_PEDIA_WONDER_INSTANCES", (iMaxInstances,))
-				screen.appendListBoxString(panelName, u"<font=4>" + szBuildingType.upper() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+				screen.appendListBoxStringNoUpdate(panelName, u"<font=4>" + szBuildingType.upper() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
 		if (isTeamWonderClass(gc.getBuildingInfo(self.iBuilding).getBuildingClassType())):
 			iMaxInstances = gc.getBuildingClassInfo(gc.getBuildingInfo(self.iBuilding).getBuildingClassType()).getMaxTeamInstances()
 			szBuildingType = localText.getText("TXT_KEY_PEDIA_TEAM_WONDER", ())
 			if (iMaxInstances > 1):
 				szBuildingType += " " + localText.getText("TXT_KEY_PEDIA_WONDER_INSTANCES", (iMaxInstances,))
-				screen.appendListBoxString(panelName, u"<font=4>" + szBuildingType.upper() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+				screen.appendListBoxStringNoUpdate(panelName, u"<font=4>" + szBuildingType.upper() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
 		if (isNationalWonderClass(gc.getBuildingInfo(self.iBuilding).getBuildingClassType())):
 			iMaxInstances = gc.getBuildingClassInfo(gc.getBuildingInfo(self.iBuilding).getBuildingClassType()).getMaxPlayerInstances()
 			szBuildingType = localText.getText("TXT_KEY_PEDIA_NATIONAL_WONDER", ())
 			if (iMaxInstances > 1):
 				szBuildingType += " " + localText.getText("TXT_KEY_PEDIA_WONDER_INSTANCES", (iMaxInstances,))
-				screen.appendListBoxString(panelName, u"<font=4>" + szBuildingType.upper() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+				screen.appendListBoxStringNoUpdate(panelName, u"<font=4>" + szBuildingType.upper() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
 		if (buildingInfo.getProductionCost() > 0):
 			if self.top.iActivePlayer == -1:
 				szCost = localText.getText("TXT_KEY_PEDIA_COST", ((buildingInfo.getProductionCost() * gc.getDefineINT("BUILDING_PRODUCTION_PERCENT"))/100,))
 			else:
 				szCost = localText.getText("TXT_KEY_PEDIA_COST", (gc.getPlayer(self.top.iActivePlayer).getBuildingProductionNeeded(self.iBuilding),))
-			screen.appendListBoxString(panelName, u"<font=4>" + szCost.upper() + u"%c" % gc.getYieldInfo(YieldTypes.YIELD_PRODUCTION).getChar() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+			screen.appendListBoxStringNoUpdate(panelName, u"<font=4>" + szCost.upper() + u"%c" % gc.getYieldInfo(YieldTypes.YIELD_PRODUCTION).getChar() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
 		for k in range(YieldTypes.NUM_YIELD_TYPES):
 			if (buildingInfo.getYieldChange(k) != 0):
@@ -160,7 +160,7 @@ class CvPediaBuilding:
 				
 				szText1 = szYield.upper() + szSign + str(buildingInfo.getYieldChange(k))
 				szText2 = szText1 + (u"%c" % (gc.getYieldInfo(k).getChar()))
-				screen.appendListBoxString(panelName, u"<font=4>" + szText2 + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+				screen.appendListBoxStringNoUpdate(panelName, u"<font=4>" + szText2 + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
 			
 		for k in range(CommerceTypes.NUM_COMMERCE_TYPES):
@@ -176,7 +176,7 @@ class CvPediaBuilding:
 				
 				szText1 = szCommerce.upper() + szSign + str(iTotalCommerce)
 				szText2 = szText1 + (u"%c" % (gc.getCommerceInfo(k).getChar()))
-				screen.appendListBoxString(panelName, u"<font=4>" + szText2 + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+				screen.appendListBoxStringNoUpdate(panelName, u"<font=4>" + szText2 + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
 		iHappiness = buildingInfo.getHappiness()
 		if self.top.iActivePlayer != -1:
@@ -185,23 +185,30 @@ class CvPediaBuilding:
 			
 		if (iHappiness > 0):
 			szText = localText.getText("TXT_KEY_PEDIA_HAPPY", (iHappiness,)).upper()
-			screen.appendListBoxString(panelName, u"<font=4>" + szText + u"%c" % CyGame().getSymbolID(FontSymbols.HAPPY_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+			screen.appendListBoxStringNoUpdate(panelName, u"<font=4>" + szText + u"%c" % CyGame().getSymbolID(FontSymbols.HAPPY_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 			
 		elif (iHappiness < 0):
 			szText = localText.getText("TXT_KEY_PEDIA_UNHAPPY", (-iHappiness,)).upper()
-			screen.appendListBoxString(panelName, u"<font=4>" + szText + u"%c" % CyGame().getSymbolID(FontSymbols.UNHAPPY_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+			screen.appendListBoxStringNoUpdate(panelName, u"<font=4>" + szText + u"%c" % CyGame().getSymbolID(FontSymbols.UNHAPPY_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
-		if (buildingInfo.getHealth() > 0):
-			szText = localText.getText("TXT_KEY_PEDIA_HEALTHY", (buildingInfo.getHealth(),)).upper()
-			screen.appendListBoxString(panelName, u"<font=4>" + szText + u"%c" % CyGame().getSymbolID(FontSymbols.HEALTHY_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+		iHealth = buildingInfo.getHealth()
+		if self.top.iActivePlayer != -1:
+			if (self.iBuilding == gc.getCivilizationInfo(gc.getPlayer(self.top.iActivePlayer).getCivilizationType()).getCivilizationBuildings(buildingInfo.getBuildingClassType())):
+				iHealth += gc.getPlayer(self.top.iActivePlayer).getExtraBuildingHealth(self.iBuilding)
 			
-		elif (buildingInfo.getHealth() < 0):
-			szText = localText.getText("TXT_KEY_PEDIA_UNHEALTHY", (-buildingInfo.getHealth(),)).upper()
-			screen.appendListBoxString(panelName, u"<font=4>" + szText + u"%c" % CyGame().getSymbolID(FontSymbols.UNHEALTHY_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+		if (iHealth > 0):
+			szText = localText.getText("TXT_KEY_PEDIA_HEALTHY", (iHealth,)).upper()
+			screen.appendListBoxStringNoUpdate(panelName, u"<font=4>" + szText + u"%c" % CyGame().getSymbolID(FontSymbols.HEALTHY_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+			
+		elif (iHealth < 0):
+			szText = localText.getText("TXT_KEY_PEDIA_UNHEALTHY", (-iHealth,)).upper()
+			screen.appendListBoxStringNoUpdate(panelName, u"<font=4>" + szText + u"%c" % CyGame().getSymbolID(FontSymbols.UNHEALTHY_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 		
 		if (buildingInfo.getGreatPeopleRateChange() != 0):
 			szText = localText.getText("TXT_KEY_PEDIA_GREAT_PEOPLE", (buildingInfo.getGreatPeopleRateChange(),)).upper()
-			screen.appendListBoxString(panelName, u"<font=4>" + szText + u"%c" % CyGame().getSymbolID(FontSymbols.GREAT_PEOPLE_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+			screen.appendListBoxStringNoUpdate(panelName, u"<font=4>" + szText + u"%c" % CyGame().getSymbolID(FontSymbols.GREAT_PEOPLE_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+			
+		screen.updateListBox(panelName)
 			
 	# Place prereqs (techs, resources)
 	def placeRequires(self):
@@ -228,6 +235,18 @@ class CvPediaBuilding:
 			iPrereq = gc.getBuildingInfo(self.iBuilding).getPrereqOrBonuses(k)
 			if (iPrereq >= 0):
 				screen.attachImageButton( panelName, "", gc.getBonusInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, iPrereq, -1, False )
+		
+		iCorporation = gc.getBuildingInfo(self.iBuilding).getFoundsCorporation()
+		bFirst = true
+		if (iCorporation >= 0):
+			for k in range(gc.getNUM_CORPORATION_PREREQ_BONUSES()):
+				iPrereq = gc.getCorporationInfo(iCorporation).getPrereqBonus(k)
+				if (iPrereq >= 0):
+					if not bFirst:
+						screen.attachLabel(panelName, "", localText.getText("TXT_KEY_OR", ()))
+					else:
+						bFirst = false
+					screen.attachImageButton( panelName, "", gc.getBonusInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, iPrereq, -1, False )
 				
 		# add religion button
 		iPrereq = gc.getBuildingInfo(self.iBuilding).getPrereqReligion()
@@ -245,8 +264,8 @@ class CvPediaBuilding:
 		
 		listName = self.top.getNextWidgetName()
 		
-		szSpecialText = CyGameTextMgr().getBuildingHelp(self.iBuilding, True, False, False, None)
-		screen.addMultilineText(listName, szSpecialText, self.X_SPECIAL_PANE+5, self.Y_SPECIAL_PANE+5, self.W_SPECIAL_PANE-10, self.H_SPECIAL_PANE-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
+		szSpecialText = CyGameTextMgr().getBuildingHelp(self.iBuilding, True, False, False, None)[1:]
+		screen.addMultilineText(listName, szSpecialText, self.X_SPECIAL_PANE+5, self.Y_SPECIAL_PANE+30, self.W_SPECIAL_PANE-10, self.H_SPECIAL_PANE-35, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
 
 	def placeHistory(self):
 		
@@ -259,8 +278,14 @@ class CvPediaBuilding:
 						PanelStyles.PANEL_STYLE_BLUE50 )
 		
 		textName = self.top.getNextWidgetName()
-#		screen.attachMultilineText( panelName, textName, gc.getBuildingInfo(self.iBuilding).getCivilopedia(),WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
-		screen.addMultilineText( textName, gc.getBuildingInfo(self.iBuilding).getCivilopedia(), self.X_HISTORY_PANE + 15, self.Y_HISTORY_PANE + 40,
+		szText = u"" 
+		if len(gc.getBuildingInfo(self.iBuilding).getStrategy()) > 0:
+			szText += localText.getText("TXT_KEY_CIVILOPEDIA_STRATEGY", ())
+			szText += gc.getBuildingInfo(self.iBuilding).getStrategy()
+			szText += u"\n\n"
+		szText += localText.getText("TXT_KEY_CIVILOPEDIA_BACKGROUND", ())
+		szText += gc.getBuildingInfo(self.iBuilding).getCivilopedia()
+		screen.addMultilineText( textName, szText, self.X_HISTORY_PANE + 15, self.Y_HISTORY_PANE + 40,
 		    self.W_HISTORY_PANE - (15 * 2), self.H_HISTORY_PANE - (15 * 2) - 25, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 		
 	def placeLinks(self, bRedraw):
@@ -276,11 +301,15 @@ class CvPediaBuilding:
 		i = 0
 		for iI in range(len(listSorted)):
 			if (not gc.getBuildingInfo(listSorted[iI][1]).isGraphicalOnly()):
-				if bRedraw:
-					screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY)
-				if listSorted[iI][1] == self.iBuilding:
-					iSelected = i
-				i += 1			
+				if (not gc.getDefineINT("CIVILOPEDIA_SHOW_ACTIVE_CIVS_ONLY") or not gc.getGame().isFinalInitialized() or gc.getGame().isBuildingEverActive(listSorted[iI][1])):
+					if bRedraw:
+						screen.appendListBoxStringNoUpdate(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY)
+					if listSorted[iI][1] == self.iBuilding:
+						iSelected = i
+					i += 1		
+					
+		if bRedraw:
+			screen.updateListBox(self.top.LIST_ID)	
 
 		screen.setSelectedListBoxStringGFC(self.top.LIST_ID, iSelected)
 			

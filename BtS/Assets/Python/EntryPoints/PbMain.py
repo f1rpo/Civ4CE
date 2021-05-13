@@ -72,6 +72,11 @@ def refreshCustomMapOptions(argsList):
 	mapName = argsList[0]
 	app.refreshCustomMapOptions(mapName)
 	
+def refreshAdvancedStartPoints(argsList):
+	global app
+	iPoints = argsList[0]
+	app.refreshAdvancedStartPoints(iPoints)
+	
 def getMessageOfTheDay():
 	global app
 	return app.getMotD()

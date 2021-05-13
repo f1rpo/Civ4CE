@@ -3,7 +3,7 @@
 <!-- -->
 <!-- Building Schema -->
 <!-- -->
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Pat Dawson (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
 <Schema xmlns="urn:schemas-microsoft-com:xml-data" xmlns:dt="urn:schemas-microsoft-com:datatypes">
 	<ElementType name="Type" content="textOnly"/>
 	<ElementType name="iMaxGlobalInstances" content="textOnly" dt:type="int"/>
@@ -49,8 +49,12 @@
 	<ElementType name="HolyCity" content="textOnly"/>
 	<ElementType name="ReligionType" content="textOnly"/>
 	<ElementType name="StateReligion" content="textOnly"/>
+	<ElementType name="bStateReligion" content="textOnly" dt:type="boolean"/>
 	<ElementType name="PrereqReligion" content="textOnly"/>
+	<ElementType name="PrereqCorporation" content="textOnly"/>
+	<ElementType name="FoundsCorporation" content="textOnly"/>
 	<ElementType name="GlobalReligionCommerce" content="textOnly"/>
+	<ElementType name="GlobalCorporationCommerce" content="textOnly"/>
 	<ElementType name="VictoryPrereq" content="textOnly"/>
 	<ElementType name="FreeStartEra" content="textOnly"/>
 	<ElementType name="MaxStartEra" content="textOnly"/>
@@ -81,6 +85,7 @@
 	<ElementType name="HappinessTraits" content="eltOnly">
 		<element type="HappinessTrait" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
+	<ElementType name="NoBonus" content="textOnly"/>
 	<ElementType name="PowerBonus" content="textOnly"/>
 	<ElementType name="FreeBonus" content="textOnly"/>
 	<ElementType name="iNumFreeBonuses" content="textOnly" dt:type="int"/>
@@ -91,11 +96,12 @@
 	<ElementType name="bPower" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bDirtyPower" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bAreaCleanPower" content="textOnly" dt:type="boolean"/>
-	<ElementType name="bDiploVote" content="textOnly" dt:type="boolean"/>
+	<ElementType name="DiploVoteType" content="textOnly"/>
 	<ElementType name="bForceTeamVoteEligible" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bCapital" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bGovernmentCenter" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bGoldenAge" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bAllowsNukes" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bMapCentering" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bNoUnhappiness" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bNoUnhealthyPopulation" content="textOnly" dt:type="boolean"/>
@@ -107,6 +113,8 @@
 	<ElementType name="iAIWeight" content="textOnly" dt:type="int"/>
 	<ElementType name="iCost" content="textOnly" dt:type="int"/>
 	<ElementType name="iHurryCostModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iAdvancedStartCost" content="textOnly" dt:type="int"/>
+	<ElementType name="iAdvancedStartCostIncrease" content="textOnly" dt:type="int"/>
 	<ElementType name="iMinAreaSize" content="textOnly" dt:type="int"/>
 	<ElementType name="iConquestProb" content="textOnly" dt:type="int"/>
 	<ElementType name="iCitiesPrereq" content="textOnly" dt:type="int"/>
@@ -119,12 +127,14 @@
 	<ElementType name="iDomesticGreatGeneralRateModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iGlobalGreatPeopleRateModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iAnarchyModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iGoldenAgeModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iGlobalHurryModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iExperience" content="textOnly" dt:type="int"/>
 	<ElementType name="iGlobalExperience" content="textOnly" dt:type="int"/>
 	<ElementType name="iFoodKept" content="textOnly" dt:type="int"/>
 	<ElementType name="iAirlift" content="textOnly" dt:type="int"/>
 	<ElementType name="iAirModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iAirUnitCapacity" content="textOnly" dt:type="int"/>
 	<ElementType name="iNukeModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iNukeExplosionRand" content="textOnly" dt:type="int"/>
 	<ElementType name="iFreeSpecialist" content="textOnly" dt:type="int"/>
@@ -133,6 +143,7 @@
 	<ElementType name="iMaintenanceModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iWarWearinessModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iGlobalWarWearinessModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iEnemyWarWearinessModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iHealRateChange" content="textOnly" dt:type="int"/>
 	<ElementType name="iHealth" content="textOnly" dt:type="int"/>
 	<ElementType name="iAreaHealth" content="textOnly" dt:type="int"/>
@@ -149,11 +160,13 @@
 	<ElementType name="iCoastalTradeRoutes" content="textOnly" dt:type="int"/>
 	<ElementType name="iGlobalTradeRoutes" content="textOnly" dt:type="int"/>
 	<ElementType name="iTradeRouteModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iForeignTradeRouteModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iGlobalPopulationChange" content="textOnly" dt:type="int"/>
 	<ElementType name="iFreeTechs" content="textOnly" dt:type="int"/>
 	<ElementType name="iDefense" content="textOnly" dt:type="int"/>
 	<ElementType name="iBombardDefense" content="textOnly" dt:type="int"/>
 	<ElementType name="iAllCityDefense" content="textOnly" dt:type="int"/>
+	<ElementType name="iEspionageDefense" content="textOnly" dt:type="int"/>
 	<ElementType name="iAsset" content="textOnly" dt:type="int"/>
 	<ElementType name="iPower" content="textOnly" dt:type="int"/>
 	<ElementType name="fVisibilityPriority" content="textOnly"/>
@@ -165,6 +178,9 @@
 	<ElementType name="bBorderObstacle" content="textOnly" dt:type="boolean"/>
 	<ElementType name="iYield" content="textOnly" dt:type="int"/>
 	<ElementType name="SeaPlotYieldChanges" content="eltOnly">
+		<element type="iYield" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="RiverPlotYieldChanges" content="eltOnly">
 		<element type="iYield" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="GlobalSeaPlotYieldChanges" content="eltOnly">
@@ -332,6 +348,14 @@
 	<ElementType name="BonusYieldModifiers" content="eltOnly">
 		<element type="BonusYieldModifier" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
+	<ElementType name="ImprovementFreeSpecialist" content="eltOnly">
+		<element type="ImprovementType"/>
+		<element type="iFreeSpecialistCount"/>
+	</ElementType>
+	<ElementType name="ImprovementFreeSpecialists" content="eltOnly">
+		<element type="ImprovementFreeSpecialist" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="ImprovementType" content="textOnly"/>
 	<ElementType name="FlavorType" content="textOnly"/>
 	<ElementType name="iFlavor" content="textOnly" dt:type="int"/>
 	<ElementType name="Flavor" content="eltOnly">
@@ -362,14 +386,19 @@
 		<element type="Description"/>
 		<element type="Civilopedia"/>
 		<element type="Strategy"/>
+		<element type="Help" minOccurs="0"/>
 		<element type="Advisor"/>
 		<element type="ArtDefineTag"/>
 		<element type="MovieDefineTag"/>
 		<element type="HolyCity"/>
 		<element type="ReligionType"/>
 		<element type="StateReligion"/>
+		<element type="bStateReligion"/>
 		<element type="PrereqReligion"/>
+		<element type="PrereqCorporation"/>
+		<element type="FoundsCorporation"/>
 		<element type="GlobalReligionCommerce"/>
+		<element type="GlobalCorporationCommerce"/>
 		<element type="VictoryPrereq"/>
 		<element type="FreeStartEra"/>
 		<element type="MaxStartEra"/>
@@ -380,6 +409,7 @@
 		<element type="PrereqBonuses"/>
 		<element type="ProductionTraits"/>
 		<element type="HappinessTraits"/>
+		<element type="NoBonus"/>
 		<element type="PowerBonus"/>
 		<element type="FreeBonus"/>
 		<element type="iNumFreeBonuses"/>
@@ -396,11 +426,12 @@
 		<element type="bPower"/>
 		<element type="bDirtyPower"/>
 		<element type="bAreaCleanPower"/>
-		<element type="bDiploVote"/>
+		<element type="DiploVoteType"/>
 		<element type="bForceTeamVoteEligible"/>
 		<element type="bCapital"/>
 		<element type="bGovernmentCenter"/>
 		<element type="bGoldenAge"/>
+		<element type="bAllowsNukes"/>
 		<element type="bMapCentering"/>
 		<element type="bNoUnhappiness"/>
 		<element type="bNoUnhealthyPopulation"/>
@@ -412,6 +443,8 @@
 		<element type="iAIWeight"/>
 		<element type="iCost"/>
 		<element type="iHurryCostModifier"/>
+		<element type="iAdvancedStartCost"/>
+		<element type="iAdvancedStartCostIncrease"/>
 		<element type="iMinAreaSize"/>
 		<element type="iConquestProb"/>
 		<element type="iCitiesPrereq"/>
@@ -424,12 +457,14 @@
 		<element type="iDomesticGreatGeneralRateModifier"/>
 		<element type="iGlobalGreatPeopleRateModifier"/>
 		<element type="iAnarchyModifier"/>
+		<element type="iGoldenAgeModifier"/>
 		<element type="iGlobalHurryModifier"/>
 		<element type="iExperience"/>
 		<element type="iGlobalExperience"/>
 		<element type="iFoodKept"/>
 		<element type="iAirlift"/>
 		<element type="iAirModifier"/>
+		<element type="iAirUnitCapacity"/>
 		<element type="iNukeModifier"/>
 		<element type="iNukeExplosionRand"/>
 		<element type="iFreeSpecialist"/>
@@ -438,6 +473,7 @@
 		<element type="iMaintenanceModifier"/>
 		<element type="iWarWearinessModifier"/>
 		<element type="iGlobalWarWearinessModifier"/>
+		<element type="iEnemyWarWearinessModifier"/>
 		<element type="iHealRateChange"/>
 		<element type="iHealth"/>
 		<element type="iAreaHealth"/>
@@ -454,15 +490,18 @@
 		<element type="iCoastalTradeRoutes"/>
 		<element type="iGlobalTradeRoutes"/>
 		<element type="iTradeRouteModifier"/>
+		<element type="iForeignTradeRouteModifier"/>
 		<element type="iGlobalPopulationChange"/>
 		<element type="iFreeTechs"/>
 		<element type="iDefense"/>
 		<element type="iBombardDefense"/>
 		<element type="iAllCityDefense"/>
+		<element type="iEspionageDefense"/>
 		<element type="iAsset"/>
 		<element type="iPower"/>
 		<element type="fVisibilityPriority"/>
 		<element type="SeaPlotYieldChanges"/>
+		<element type="RiverPlotYieldChanges"/>
 		<element type="GlobalSeaPlotYieldChanges"/>
 		<element type="YieldChanges"/>
 		<element type="YieldModifiers" minOccurs="0"/>
@@ -494,6 +533,7 @@
 		<element type="BuildingClassNeededs"/>
 		<element type="SpecialistYieldChanges"/>
 		<element type="BonusYieldModifiers"/>
+		<element type="ImprovementFreeSpecialists"/>
 		<element type="Flavors"/>
 		<element type="HotKey"/>
 		<element type="bAltDown"/>
@@ -508,6 +548,7 @@
 	<ElementType name="SpecialBuildingName" content="textOnly"/>
 	<ElementType name="SpecialBuildingDescription" content="textOnly"/>
 	<ElementType name="TechPrereq" content="textOnly"/>
+	<ElementType name="TechPrereqAnyone" content="textOnly"/>
 	<ElementType name="ArtStyleType" content="textOnly"/>
 	<ElementType name="iRequiredPopulation" content="textOnly" dt:type="int"/>
 	<ElementType name="fScale" content="textOnly"/>
@@ -518,6 +559,7 @@
 		<element type="Description"/>
 		<element type="ObsoleteTech"/>
 		<element type="TechPrereq"/>
+		<element type="TechPrereqAnyone"/>
 		<element type="bValid"/>
 		<element type="ProductionTraits"/>
 		<element type="Button"/>

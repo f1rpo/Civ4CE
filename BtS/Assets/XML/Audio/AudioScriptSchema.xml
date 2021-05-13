@@ -1,4 +1,4 @@
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Rob McLaughlin (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -34,6 +34,7 @@
 	<ElementType name="fMaxDryLevel" content="textOnly"/>
 	<ElementType name="fMinWetLevel" content="textOnly"/>
 	<ElementType name="fMaxWetLevel" content="textOnly"/>
+	<ElementType name="iNotPlayPercent" content="textOnly" dt:type="int"/>
 	<ElementType name="ScriptType" content="textOnly"/>
 	<ElementType name="SoundscapeElement" content="eltOnly">
 		<element type="ScriptType"/>
@@ -66,6 +67,7 @@
 		<element type="fMaxDryLevel"/>
 		<element type="fMinWetLevel"/>
 		<element type="fMaxWetLevel"/>
+		<element type="iNotPlayPercent"/>
 	</ElementType>
 	<ElementType name="Script2DSound" content="eltOnly">
 		<element type="ScriptID"/>
@@ -88,6 +90,7 @@
 		<element type="fMaxDryLevel"/>
 		<element type="fMinWetLevel"/>
 		<element type="fMaxWetLevel"/>
+		<element type="iNotPlayPercent"/>
 	</ElementType>
 	<ElementType name="ScriptSoundscape" content="eltOnly">
 		<element type="ScriptID"/>

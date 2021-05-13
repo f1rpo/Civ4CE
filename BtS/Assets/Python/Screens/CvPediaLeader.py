@@ -106,8 +106,19 @@ class CvPediaLeader:
                                  self.X_TRAITS, self.Y_TRAITS, self.W_TRAITS, self.H_TRAITS, PanelStyles.PANEL_STYLE_BLUE50 )
 				
 		listName = self.top.getNextWidgetName()
-		
-		szSpecialText = CyGameTextMgr().parseLeaderTraits(self.iLeader, -1, False, True)
+
+		iNumCivs = 0
+		iLeaderCiv = -1
+		for iCiv in range(gc.getNumCivilizationInfos()):
+			civ = gc.getCivilizationInfo(iCiv)
+			if civ.isLeaders(self.iLeader):
+				iNumCivs += 1
+				iLeaderCiv = iCiv
+
+		if iNumCivs == 1:
+			szSpecialText = CyGameTextMgr().parseLeaderTraits(self.iLeader, iLeaderCiv, False, True)
+		else:		
+			szSpecialText = CyGameTextMgr().parseLeaderTraits(self.iLeader, -1, False, True)
 		szSpecialText = szSpecialText[1:]
 		screen.addMultilineText(listName, szSpecialText, self.X_TRAITS+5, self.Y_TRAITS+30, self.W_TRAITS-10, self.H_TRAITS-35, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
 		
@@ -154,11 +165,15 @@ class CvPediaLeader:
 		iSelected = 0
 		for iI in range(gc.getNumLeaderHeadInfos()):
 			if (rowListName[iI][1] != gc.getDefineINT("BARBARIAN_LEADER") and not gc.getLeaderHeadInfo(rowListName[iI][1]).isGraphicalOnly()):
-				if bRedraw:
-					screen.appendListBoxString(self.top.LIST_ID, rowListName[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_LEADER, rowListName[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY)
-				if rowListName[iI][1] == self.iLeader:
-					iSelected = i
-				i += 1
+				if (not gc.getDefineINT("CIVILOPEDIA_SHOW_ACTIVE_CIVS_ONLY") or not gc.getGame().isFinalInitialized() or gc.getGame().isLeaderEverActive(rowListName[iI][1])):
+					if bRedraw:
+						screen.appendListBoxStringNoUpdate(self.top.LIST_ID, rowListName[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_LEADER, rowListName[iI][1], -1, CvUtil.FONT_LEFT_JUSTIFY)
+					if rowListName[iI][1] == self.iLeader:
+						iSelected = i
+					i += 1
+					
+		if bRedraw:
+			screen.updateListBox(self.top.LIST_ID)
 		
 		screen.setSelectedListBoxStringGFC(self.top.LIST_ID, iSelected)
 		
@@ -187,6 +202,8 @@ class CvPediaLeader:
 			elif (inputClass.getData() == int(InputTypes.KB_5)):
 				self.top.getScreen().setLeaderheadMood(self.leaderWidget, AttitudeTypes.ATTITUDE_FURIOUS)
 				self.top.getScreen().performLeaderheadAction(self.leaderWidget, LeaderheadAction.NO_LEADERANIM)
+			else:
+				self.top.getScreen().leaderheadKeyInput(self.leaderWidget, inputClass.getData())
 		return 0
 
 

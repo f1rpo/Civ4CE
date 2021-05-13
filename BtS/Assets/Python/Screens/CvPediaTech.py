@@ -135,11 +135,11 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 		screen.attachLabel(panelName, "", "  ")
 
 		for j in range(gc.getNumTechInfos()):
-			for k in range(gc.getDefineINT("NUM_OR_TECH_PREREQS")):
+			for k in range(gc.getNUM_OR_TECH_PREREQS()):
 				iPrereq = gc.getTechInfo(j).getPrereqOrTechs(k)
 				if (iPrereq == self.iTech):
         				screen.attachImageButton( panelName, "", gc.getTechInfo(j).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_DERIVED_TECH, j, self.iTech, False )
-			for k in range(gc.getDefineINT("NUM_AND_TECH_PREREQS")):
+			for k in range(gc.getNUM_AND_TECH_PREREQS()):
 				iPrereq = gc.getTechInfo(j).getPrereqAndTechs(k)
 				if (iPrereq == self.iTech):
         				screen.attachImageButton( panelName, "", gc.getTechInfo(j).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_DERIVED_TECH, j, self.iTech, False )
@@ -157,7 +157,7 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 		screen.attachLabel(panelName, "", "  ")
 		
 		bFirst = True
-		for j in range(gc.getDefineINT("NUM_AND_TECH_PREREQS")):
+		for j in range(gc.getNUM_AND_TECH_PREREQS()):
 			eTech = gc.getTechInfo(self.iTech).getPrereqAndTechs(j)
 			if (eTech > -1):
 				if (not bFirst):
@@ -168,7 +168,7 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 					
 		# count the number of OR techs
 		nOrTechs = 0
-		for j in range(gc.getDefineINT("NUM_OR_TECH_PREREQS")):
+		for j in range(gc.getNUM_OR_TECH_PREREQS()):
 			if (gc.getTechInfo(self.iTech).getPrereqOrTechs(j) > -1):
 				nOrTechs += 1
 				
@@ -188,7 +188,7 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 			screen.attachLabel(panelName, "", szLeftDelimeter)
 			
 		bFirst = True
-		for j in range(gc.getDefineINT("NUM_OR_TECH_PREREQS")):
+		for j in range(gc.getNUM_OR_TECH_PREREQS()):
 			eTech = gc.getTechInfo(self.iTech).getPrereqOrTechs(j)
 			if (eTech > -1):
 				if (not bFirst):
@@ -247,8 +247,8 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 		
 		listName = self.top.getNextWidgetName()
 		
-		szSpecialText = CyGameTextMgr().getTechHelp(self.iTech, True, False, False, False, -1)
-		screen.addMultilineText(listName, szSpecialText, self.X_SPECIAL_PANE+5, self.Y_SPECIAL_PANE+5, self.W_SPECIAL_PANE-10, self.H_SPECIAL_PANE-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
+		szSpecialText = CyGameTextMgr().getTechHelp(self.iTech, True, False, False, False, -1)[1:]
+		screen.addMultilineText(listName, szSpecialText, self.X_SPECIAL_PANE+5, self.Y_SPECIAL_PANE+30, self.W_SPECIAL_PANE-35, self.H_SPECIAL_PANE-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)	
 		
 
 	def placeQuote(self):
@@ -279,10 +279,13 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 		for iI in range(gc.getNumTechInfos()):
 			if (not gc.getTechInfo(techsList[iI][1]).isGraphicalOnly()): 
 				if bRedraw:
-					screen.appendListBoxString(self.top.LIST_ID, techsList[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, techsList[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
+					screen.appendListBoxStringNoUpdate(self.top.LIST_ID, techsList[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, techsList[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
 				if techsList[iI][1] == self.iTech:
 					iSelected = i
-				i += 1			
+				i += 1		
+				
+		if bRedraw:
+			screen.updateListBox(self.top.LIST_ID)	
 
 		screen.setSelectedListBoxStringGFC(self.top.LIST_ID, iSelected)
 								
