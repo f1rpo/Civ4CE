@@ -60,6 +60,16 @@ public:
 	DllExport bool isCancelable(PlayerTypes eByPlayer = NO_PLAYER, CvWString* pszReason = NULL);
 	DllExport int turnsToCancel(PlayerTypes eByPlayer = NO_PLAYER);
 
+	DllExport static bool isAnnual(TradeableItems eItem);
+	DllExport static bool isDual(TradeableItems eItem, bool bExcludePeace = false);
+	DllExport static bool hasData(TradeableItems eItem);
+	DllExport static bool isGold(TradeableItems eItem);
+	DllExport static bool isEndWar(TradeableItems eItem);
+	DllExport static bool isVassal(TradeableItems eItem);
+	DllExport static TradeableItems getPeaceItem();
+	DllExport static TradeableItems getGoldItem();
+	DllExport static TradeableItems getGoldPerTurnItem();
+
 	void read(FDataStreamBase* pStream);
 	void write(FDataStreamBase* pStream);
 

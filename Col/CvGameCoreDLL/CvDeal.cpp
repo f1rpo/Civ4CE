@@ -1056,3 +1056,92 @@ int CvDeal::turnsToCancel(PlayerTypes eByPlayer)
 {
 	return (getInitialGameTurn() + GC.getDefineINT("PEACE_TREATY_LENGTH") - GC.getGameINLINE().getGameTurn());
 }
+
+// static
+bool CvDeal::isAnnual(TradeableItems eItem)
+{
+	switch (eItem)
+	{
+	case TRADE_RESOURCES:
+	case TRADE_GOLD_PER_TURN:
+	case TRADE_VASSAL:
+	case TRADE_SURRENDER:
+	case TRADE_OPEN_BORDERS:
+	case TRADE_DEFENSIVE_PACT:
+	case TRADE_PERMANENT_ALLIANCE:
+		return true;
+		break;
+	}
+	
+	return false;
+}
+
+// static
+bool CvDeal::isDual(TradeableItems eItem, bool bExcludePeace)
+{
+	switch (eItem)
+	{
+	case TRADE_OPEN_BORDERS:
+	case TRADE_DEFENSIVE_PACT:
+	case TRADE_PERMANENT_ALLIANCE:
+		return true;
+	case TRADE_PEACE_TREATY:
+		return (!bExcludePeace);
+	}
+
+	return false;
+}
+
+// static
+bool CvDeal::hasData(TradeableItems eItem)
+{
+	return (eItem != TRADE_MAPS &&
+		eItem != TRADE_VASSAL &&
+		eItem != TRADE_SURRENDER &&
+		eItem != TRADE_OPEN_BORDERS &&
+		eItem != TRADE_DEFENSIVE_PACT &&
+		eItem != TRADE_PERMANENT_ALLIANCE &&
+		eItem != TRADE_PEACE_TREATY);
+}
+
+bool CvDeal::isGold(TradeableItems eItem)
+{
+	return (eItem == getGoldItem() || eItem == getGoldPerTurnItem());
+}
+
+bool CvDeal::isVassal(TradeableItems eItem)
+{
+	return (eItem == TRADE_VASSAL || eItem == TRADE_SURRENDER);
+}
+
+bool CvDeal::isEndWar(TradeableItems eItem)
+{
+	if (eItem == getPeaceItem())
+	{
+		return true;
+	}
+
+	if (isVassal(eItem))
+	{
+		return true;
+	}
+
+	return false;
+}
+
+TradeableItems CvDeal::getPeaceItem()
+{
+	return TRADE_PEACE_TREATY;
+}
+
+TradeableItems CvDeal::getGoldItem()
+{
+	return TRADE_GOLD;
+}
+
+TradeableItems CvDeal::getGoldPerTurnItem()
+{
+	return TRADE_GOLD_PER_TURN;
+}
+
+
