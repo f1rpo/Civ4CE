@@ -8,6 +8,7 @@
 #include "CvPlayer.h"
 #include "AI_defines.h"
 
+class FAStar;
 class CvEventTriggerInfo;
 
 class CvPlayerAI : public CvPlayer
@@ -335,6 +336,8 @@ public:
 	int AI_getPlotAirbaseValue(CvPlot* pPlot);
 	int AI_getPlotCanalValue(CvPlot* pPlot);
 
+	bool AI_isPlotThreatened(CvPlot* pPlot, int iRange = -1, bool bTestMoves = true);
+
 	// for serialization
   virtual void read(FDataStreamBase* pStream);
   virtual void write(FDataStreamBase* pStream);
@@ -416,6 +419,8 @@ protected:
 		
 	void AI_doEnemyUnitData();
 	void AI_invalidateCloseBordersAttitudeCache();
+
+	FAStar* m_pRouteFinder;
 	
 	friend class CvGameTextMgr;
 };

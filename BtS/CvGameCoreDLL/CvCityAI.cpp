@@ -5303,7 +5303,10 @@ void CvCityAI::AI_updateBestBuild()
 				}
 			}
 		}
-		m_aiBestBuildValue[iBestPlot] *= 2;
+		if (iBestPlot != -1)
+		{
+			m_aiBestBuildValue[iBestPlot] *= 2;
+		}
 		
 		//Prune plots which are sub-par.
 		if (iBestUnworkedPlotValue > 0)
@@ -6186,7 +6189,39 @@ bool CvCityAI::AI_bestSpreadUnit(bool bMissionary, bool bExecutive, int iBaseCha
 									{
 										int iValue = iCorporationValue;
 										iValue /= kUnitInfo.getProductionCost();
+
+										int iLoop;
+										int iTotalCount = 0;
+										int iPlotCount = 0;
+										for (CvUnit* pLoopUnit = kPlayer.firstUnit(&iLoop); pLoopUnit != NULL; pLoopUnit = kPlayer.nextUnit(&iLoop))
+										{
+											if ((pLoopUnit->AI_getUnitAIType() == UNITAI_MISSIONARY) && (pLoopUnit->getUnitInfo().getCorporationSpreads(eCorporation) > 0))
+											{
+												iTotalCount++;
+												if (pLoopUnit->plot() == plot())
+												{
+													iPlotCount++;
+												}
+											}
+										}
+										iCorporationValue /= std::max(1, (iTotalCount / 4) + iPlotCount);
+
+										int iCost = std::max(0, GC.getCorporationInfo(eCorporation).getSpreadCost() * (100 + GET_PLAYER(getOwnerINLINE()).calculateInflationRate()));
+										iCost /= 100;
 										
+										if (kPlayer.getGold() >= iCost)
+										{
+											iCost *= GC.getDefineINT("CORPORATION_FOREIGN_SPREAD_COST_PERCENT");
+											iCost /= 100;
+											if (kPlayer.getGold() < iCost && iTotalCount > 1)
+											{
+												iCorporationValue /= 2;
+											}
+										}
+										else if (iTotalCount > 1)
+										{
+											iCorporationValue /= 5;
+										}
 										if (iValue > iBestValue)
 										{
 											iBestValue = iValue;
@@ -7316,14 +7351,7 @@ int CvCityAI::AI_plotValue(CvPlot* pPlot, bool bAvoidGrowth, bool bRemove, bool 
 	if ((eCurrentImprovement != NO_IMPROVEMENT) && (GC.getImprovementInfo(pPlot->getImprovementType()).getImprovementUpgrade() != NO_IMPROVEMENT))
 	{
 		iValue += 200;
-		int iUpgradeTime = (GC.getGameINLINE().getImprovementUpgradeTime(eCurrentImprovement));
-		if (iUpgradeTime > 0) //assert this?
-		{
-			int iUpgradePenalty = (100 * (iUpgradeTime - pPlot->getUpgradeProgress()));
-			iUpgradePenalty *= (iTotalDiff * 5);
-			iUpgradePenalty /= std::max(1, GC.getGameSpeedInfo(GC.getGame().getGameSpeedType()).getImprovementPercent());
-			iValue -= iUpgradePenalty;
-		}		
+		iValue -= pPlot->getUpgradeTimeLeft(eCurrentImprovement, NO_PLAYER);		
 	}
 
 	return iValue;

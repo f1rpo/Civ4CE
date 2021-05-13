@@ -9703,7 +9703,7 @@ int CvPlot::airUnitSpaceAvailable(TeamTypes eTeam) const
 		iMaxUnits = GC.getDefineINT("CITY_AIR_UNIT_CAPACITY");
 	}
 
-	return (iMaxUnits - countNumAirUnits(getTeam()));
+	return (iMaxUnits - countNumAirUnits(eTeam));
 }
 
 
@@ -9727,3 +9727,34 @@ bool CvPlot::isEspionageCounterSpy(TeamTypes eTeam) const
 	return false;
 }
 
+bool CvPlot::isTeamCity(const CvUnit& kUnit, bool bCheckImprovement) const
+{
+	if (!isCity(bCheckImprovement, kUnit.getTeam()))
+	{
+		return false;
+	}
+
+	if (isVisibleEnemyUnit(&kUnit))
+	{
+		return false;
+	}
+
+	TeamTypes ePlotTeam = getTeam();
+
+	if (NO_TEAM != ePlotTeam)
+	{
+		TeamTypes eTeam = GET_PLAYER(kUnit.getCombatOwner(ePlotTeam, this)).getTeam();
+
+		if (eTeam == ePlotTeam)
+		{
+			return true;
+		}
+
+		if (GET_TEAM(ePlotTeam).isVassal(eTeam))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}

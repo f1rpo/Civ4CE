@@ -341,6 +341,8 @@ public:
 	int getBuildingGoodHealth() const;																		// Exposed to Python
 	int getBuildingBadHealth() const;																			// Exposed to Python
 	int getBuildingHealth(BuildingTypes eBuilding) const;									// Exposed to Python
+	int getBuildingGoodHealth(BuildingTypes eBuilding) const;
+	int getBuildingBadHealth(BuildingTypes eBuilding) const;
 	void changeBuildingGoodHealth(int iChange);
 	void changeBuildingBadHealth(int iChange);
 

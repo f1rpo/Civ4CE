@@ -144,6 +144,34 @@ void CvDeal::addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* p
 
 	if (atWar(GET_PLAYER(getFirstPlayer()).getTeam(), GET_PLAYER(getSecondPlayer()).getTeam()))
 	{
+		if (isVassalTrade(pSecondList))
+		{
+			for (int iI = 0; iI < MAX_TEAMS; iI++)
+			{
+				if (((TeamTypes)iI != GET_PLAYER(getFirstPlayer()).getTeam()) && ((TeamTypes)iI != GET_PLAYER(getSecondPlayer()).getTeam()))
+				{
+					if (GET_TEAM((TeamTypes)iI).isAlive() && GET_TEAM((TeamTypes)iI).isVassal(GET_PLAYER(getSecondPlayer()).getTeam()))
+					{
+						GET_TEAM(GET_PLAYER(getSecondPlayer()).getTeam()).freeVassal((TeamTypes)iI);
+						GET_TEAM((TeamTypes)iI).AI_setAtWarCounter(GET_PLAYER(getFirstPlayer()).getTeam(), 10000);
+					}
+				}
+			}
+		}
+		if (isVassalTrade(pFirstList))
+		{
+			for (int iI = 0; iI < MAX_TEAMS; iI++)
+			{
+				if (((TeamTypes)iI != GET_PLAYER(getSecondPlayer()).getTeam()) && ((TeamTypes)iI != GET_PLAYER(getFirstPlayer()).getTeam()))
+				{
+					if (GET_TEAM((TeamTypes)iI).isAlive() && GET_TEAM((TeamTypes)iI).isVassal(GET_PLAYER(getFirstPlayer()).getTeam()))
+					{
+						GET_TEAM(GET_PLAYER(getFirstPlayer()).getTeam()).freeVassal((TeamTypes)iI);
+						GET_TEAM((TeamTypes)iI).AI_setAtWarCounter(GET_PLAYER(getSecondPlayer()).getTeam(), 10000);
+					}
+				}
+			}
+		}
 		GET_TEAM(GET_PLAYER(getFirstPlayer()).getTeam()).makePeace(GET_PLAYER(getSecondPlayer()).getTeam(), !isVassalTrade(pFirstList) && !isVassalTrade(pSecondList));
 	}
 	else

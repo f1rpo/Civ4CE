@@ -1677,7 +1677,7 @@ int pathAdd(FAStarNode* parent, FAStarNode* node, int data, const void* pointer,
 			pLoopUnit = ::getUnit(pUnitNode->m_data);
 			pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode);
 
-			iMoves = std::min(iMoves, pLoopUnit->movesLeft());
+			iMoves = std::min(iMoves, (gDLL->getFAStarIFace()->GetInfo(finder) & MOVE_MAX_MOVES) ? pLoopUnit->maxMoves() : pLoopUnit->movesLeft());
 		}
 	}
 	else

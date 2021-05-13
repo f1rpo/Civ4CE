@@ -11202,7 +11202,7 @@ bool CvPlayer::isActiveCorporation(CorporationTypes eIndex) const
 		return false;
 	}
 
-	if (isNoForeignCorporations() && !hasHeadquarters(eIndex))
+	if (isNoForeignCorporations() && !hasHeadquarters(eIndex) && GC.getGameINLINE().getHeadquarters(eIndex))
 	{
 		return false;
 	}
@@ -13146,14 +13146,17 @@ int CvPlayer::getEspionageMissionBaseCost(EspionageMissionTypes eMission, Player
 		{
 			for (int iBuilding = 0; iBuilding < GC.getNumBuildingInfos(); ++iBuilding)
 			{
-				if (canSpyDestroyBuilding(eTargetPlayer, (BuildingTypes)iBuilding))
+				if (NULL != pCity && pCity->getNumRealBuilding((BuildingTypes)iBuilding) > 0)
 				{
-					int iValue = getProductionNeeded((BuildingTypes)iBuilding);
-
-					if (iValue < iCost)
+					if (canSpyDestroyBuilding(eTargetPlayer, (BuildingTypes)iBuilding))
 					{
-						iCost = iValue;
-						eBuilding = (BuildingTypes)iBuilding;
+						int iValue = getProductionNeeded((BuildingTypes)iBuilding);
+
+						if (iValue < iCost)
+						{
+							iCost = iValue;
+							eBuilding = (BuildingTypes)iBuilding;
+						}
 					}
 				}
 			}
@@ -13687,6 +13690,7 @@ bool CvPlayer::doEspionageMission(EspionageMissionTypes eMission, PlayerTypes eT
 
 		szBuffer = gDLL->getText("TXT_KEY_ESPIONAGE_TARGET_TECH_BOUGHT", GC.getTechInfo((TechTypes) iTech).getDescription()).GetCString();
 		GET_TEAM(getTeam()).setHasTech((TechTypes) iTech, true, getID(), false, true);
+		GET_TEAM(getTeam()).setNoTradeTech((TechTypes)iTech, true);
 
 		bSomethingHappened = true;
 	}
@@ -19067,7 +19071,7 @@ PlayerTypes CvPlayer::getSplitEmpirePlayer(int iAreaId) const
 	PlayerTypes eNewPlayer = NO_PLAYER;
 	for (int i = 0; i < MAX_CIV_PLAYERS; ++i)
 	{
-		if (!GET_PLAYER((PlayerTypes)i).isAlive())
+		if (!GET_PLAYER((PlayerTypes)i).isEverAlive())
 		{
 			eNewPlayer = (PlayerTypes)i;
 			break;
@@ -19284,7 +19288,7 @@ bool CvPlayer::splitEmpire(int iAreaId)
 		{
 			if (GET_PLAYER((PlayerTypes)i).isAlive())
 			{
-				if (i == getID() || i == eNewPlayer || GET_TEAM(GET_PLAYER((PlayerTypes)i).getTeam()).isHasMet(GET_PLAYER((PlayerTypes)i).getTeam()))
+				if (i == getID() || i == eNewPlayer || GET_TEAM(GET_PLAYER((PlayerTypes)i).getTeam()).isHasMet(GET_PLAYER((PlayerTypes)getID()).getTeam()))
 				{
 					gDLL->getInterfaceIFace()->addMessage((PlayerTypes)i, false, GC.getEVENT_MESSAGE_TIME(), szMessage, "AS2D_REVOLTEND", MESSAGE_TYPE_MAJOR_EVENT, ARTFILEMGR.getInterfaceArtInfo("INTERFACE_CITY_BAR_CAPITAL_TEXTURE")->getPath());
 				}
@@ -19299,6 +19303,10 @@ bool CvPlayer::splitEmpire(int iAreaId)
 		for (int i = 0; i < GC.getNumTechInfos(); ++i)
 		{
 			kNewTeam.setHasTech((TechTypes)i, GET_TEAM(getTeam()).isHasTech((TechTypes)i), eNewPlayer, false, false);
+			if (GET_TEAM(getTeam()).isNoTradeTech((TechTypes)i))
+			{
+				kNewTeam.setNoTradeTech((TechTypes)i, true);
+			}
 		}
 
 		for (int iTeam = 0; iTeam < MAX_TEAMS; ++iTeam)
@@ -19354,6 +19362,11 @@ bool CvPlayer::splitEmpire(int iAreaId)
 			}
 
 			aCultures.push_back(std::make_pair(iPlot, iCulture));
+		}
+
+		if (pLoopPlot->isRevealed(getTeam(), false))
+		{
+			pLoopPlot->setRevealed(GET_PLAYER(eNewPlayer).getTeam(), true, false, getTeam(), false);
 		}
 	}
 

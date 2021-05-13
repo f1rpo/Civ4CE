@@ -2307,7 +2307,7 @@ void CvTeamAI::AI_updateWorstEnemy()
 	{
 		if (GET_TEAM((TeamTypes)iI).isAlive())
 		{
-			if (iI != getID())
+			if (iI != getID() && !GET_TEAM((TeamTypes)iI).isVassal(getID()))
 			{
 				if (isHasMet((TeamTypes)iI))
 				{
