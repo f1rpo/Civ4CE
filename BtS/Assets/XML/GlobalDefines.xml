@@ -7,7 +7,7 @@
 <Civ4Defines xmlns="x-schema:CIV4GlobalDefinesSchema.xml">
 	<Define>
 		<DefineName>CIV4_VERSION</DefineName>
-		<iDefineIntVal>301</iDefineIntVal>
+		<iDefineIntVal>302</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>SAVE_VERSION</DefineName>
