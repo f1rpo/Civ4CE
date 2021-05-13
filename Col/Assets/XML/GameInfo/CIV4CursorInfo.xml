@@ -23,34 +23,6 @@
 			<CursorPath>res/Cursors/RouteTo.ani</CursorPath>
 		</CursorInfo>
 		<CursorInfo>
-			<Type>CURSOR_AIRLIFT</Type>
-			<CursorPath>res/Cursors/Airlift.ani</CursorPath>
-		</CursorInfo>
-		<CursorInfo>
-			<Type>CURSOR_NUKE</Type>
-			<CursorPath>res/Cursors/Nuke.ani</CursorPath>
-		</CursorInfo>
-		<CursorInfo>
-			<Type>CURSOR_AIRSTRIKE</Type>
-			<CursorPath>res/Cursors/Airstrike.ani</CursorPath>
-		</CursorInfo>
-		<CursorInfo>
-			<Type>CURSOR_RECON</Type>
-			<CursorPath>res/Cursors/Recon.ani</CursorPath>
-		</CursorInfo>
-		<CursorInfo>
-			<Type>CURSOR_PARADROP</Type>
-			<CursorPath>res/Cursors/Rebase.ani</CursorPath>
-		</CursorInfo>
-		<CursorInfo>
-			<Type>CURSOR_AIRBOMB</Type>
-			<CursorPath>res/Cursors/Airbomb.ani</CursorPath>
-		</CursorInfo>
-		<CursorInfo>
-			<Type>CURSOR_REBASE</Type>
-			<CursorPath>res/Cursors/Rebase.ani</CursorPath>
-		</CursorInfo>
-		<CursorInfo>
 			<Type>CURSOR_BUSY</Type>
 			<CursorPath>res/Cursors/Waiting.ani</CursorPath>
 		</CursorInfo>

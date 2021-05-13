@@ -86,56 +86,6 @@
 	</ElementType>
 	<ElementType name="iEnableCode" content="textOnly" dt:type="int"/>
 	<ElementType name="iDisableCode" content="textOnly" dt:type="int"/>
-	<ElementType name="AdvisorInfo" content="eltOnly">
-		<element type="Type"/>
-		<element type="Description"/>
-		<element type="EventCodes" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="AdvisorInfos" content="eltOnly">
-		<element type="AdvisorInfo" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="Event" content="textOnly"/>
-	<ElementType name="iFromState" content="textOnly" dt:type="int"/>
-	<ElementType name="iToState" content="textOnly" dt:type="int"/>
-	<ElementType name="NodeName" content="textOnly"/>
-	<ElementType name="ProjectName" content="textOnly"/>
-	<ElementType name="CameraUpAxis" content="textOnly"/>
-	<ElementType name="InfoType" content="textOnly"/>
-	<ElementType name="PartNumber" content="textOnly" dt:type="int"/>
-	<ElementType name="ArtType" content="textOnly" dt:type="int"/>
-	<ElementType name="EventCode" content="textOnly" dt:type="int"/>
-	<ElementType name="iAnimation" content="textOnly" dt:type="int"/>
-	<ElementType name="FileName" content="textOnly"/>
-	<ElementType name="ThroneRoomCamera" content="eltOnly">
-		<element type="FileName"/>
-	</ElementType>
-	<ElementType name="ThroneRoomInfo" content="eltOnly">
-		<element type="Event"/>
-		<element type="Description"/>
-		<element type="iFromState"/>
-		<element type="iToState"/>
-		<element type="NodeName"/>
-		<element type="iAnimation"/>
-	</ElementType>
-	<ElementType name="ThroneRoomInfos" content="eltOnly">
-		<element type="ThroneRoomInfo" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="ThroneRoomCameraInfos" content="eltOnly">
-		<element type="ThroneRoomCamera"/>
-	</ElementType>
-	<ElementType name="ArtStyleType" content="textOnly"/>
-	<ElementType name="EraType" content="textOnly"/>
-	<ElementType name="TextureName" content="textOnly"/>
-	<ElementType name="ThroneRoomStyleInfo" content="eltOnly">
-		<element type="ArtStyleType"/>
-		<element type="EraType"/>
-		<element type="FileName"/>
-		<element type="NodeName" minOccurs="0" maxOccurs="*"/>
-		<element type="TextureName" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="ThroneRoomStyleInfos" content="eltOnly">
-		<element type="ThroneRoomStyleInfo" maxOccurs="*"/>
-	</ElementType>
 	<ElementType name="Path" content="textOnly"/>
 	<ElementType name="TransitionType" content="textOnly"/>
 	<ElementType name="fStartTime" content="textOnly"/>
@@ -182,29 +132,6 @@
 	<ElementType name="WorldPickerInfos" content="eltOnly">
 		<element type="WorldPickerInfo" maxOccurs="*"/>
 	</ElementType>
-	<ElementType name="SpaceShipInfo" content="eltOnly">
-		<element type="InfoType"/>
-		<element type="NodeName"/>
-		<element type="ProjectName"/>
-		<element type="CameraUpAxis"/>
-		<element type="PartNumber"/>
-		<element type="ArtType"/>
-		<element type="EventCode"/>
-	</ElementType>
-	<ElementType name="SpaceShipInfos" content="eltOnly">
-		<element type="SpaceShipInfo" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="CameraInfo" content="eltOnly">
-		<element type="Type"/>
-		<element type="Description"/>
-		<element type="Path"/>
-	</ElementType>
-	<ElementType name="CameraInfos" content="eltOnly">
-		<element type="CameraInfo" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="Civ4CameraInfos" content="eltOnly">
-		<element type="CameraInfos" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
 	<ElementType name="Civ4ColorVals" content="eltOnly">
 		<element type="ColorVals" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -218,18 +145,6 @@
 		<element type="ColorVals" minOccurs="0" maxOccurs="*"/>
 		<element type="InterfaceModeInfos" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
-	<ElementType name="Civ4AdvisorInfos" content="eltOnly">
-		<element type="AdvisorInfos" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="Civ4ThroneRoomInfos" content="eltOnly">
-		<element type="ThroneRoomInfos" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="Civ4ThroneRoomCameraInfos" content="eltOnly">
-		<element type="ThroneRoomCameraInfos" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="Civ4ThroneRoomStyleInfos" content="eltOnly">
-		<element type="ThroneRoomStyleInfos" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
 	<ElementType name="Civ4SlideShowInfos" content="eltOnly">
 		<element type="SlideShowInfos" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -238,8 +153,5 @@
 	</ElementType>
 	<ElementType name="Civ4WorldPickerInfos" content="eltOnly">
 		<element type="WorldPickerInfos" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="Civ4SpaceShipInfos" content="eltOnly">
-		<element type="SpaceShipInfos" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 </Schema>

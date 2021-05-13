@@ -23,25 +23,7 @@
 			<Command>COMMAND_AUTOMATE</Command>
 			<Automate>AUTOMATE_BUILD</Automate>
 			<bVisible>1</bVisible>
-			<Button>Art/Interface/Buttons/Actions/Automate.dds</Button>
-		</AutomateInfo>
-		<AutomateInfo>
-			<Description>TXT_KEY_ACTION_AUTOMATE_NETWORK</Description>
-			<Help>TXT_KEY_ACTION_AUTOMATE_NETWORK_HELP</Help>
-			<HotKey>KB_N</HotKey>
-			<bAltDown>0</bAltDown>
-			<bShiftDown>0</bShiftDown>
-			<bCtrlDown>0</bCtrlDown>
-			<iHotKeyPriority>0</iHotKeyPriority>
-			<HotKeyAlt/>
-			<bAltDownAlt>0</bAltDownAlt>
-			<bShiftDownAlt>0</bShiftDownAlt>
-			<bCtrlDownAlt>0</bCtrlDownAlt>
-			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
-			<Command>COMMAND_AUTOMATE</Command>
-			<Automate>AUTOMATE_NETWORK</Automate>
-			<bVisible>1</bVisible>
-			<Button>Art/Interface/Buttons/Actions/AutomateNetwork.dds</Button>
+			<Button>Art/Interface/Game Hud/Actions/automate_high_res.dds</Button>
 		</AutomateInfo>
 		<AutomateInfo>
 			<Description>TXT_KEY_ACTION_AUTOMATE_CITY</Description>
@@ -59,7 +41,7 @@
 			<Command>COMMAND_AUTOMATE</Command>
 			<Automate>AUTOMATE_CITY</Automate>
 			<bVisible>1</bVisible>
-			<Button>Art/Interface/Buttons/Actions/AutomateCity.dds</Button>
+			<Button>Art/Interface/Game Hud/Actions/automate_city_high_res.dds</Button>
 		</AutomateInfo>
 		<AutomateInfo>
 			<Description>TXT_KEY_ACTION_AUTOMATE_EXPLORE</Description>
@@ -77,12 +59,66 @@
 			<Command>COMMAND_AUTOMATE</Command>
 			<Automate>AUTOMATE_EXPLORE</Automate>
 			<bVisible>1</bVisible>
-			<Button>Art/Interface/Buttons/Actions/Explore.dds</Button>
+			<Button>Art/Interface/Game Hud/Actions/explore_high_res.dds</Button>
 		</AutomateInfo>
 		<AutomateInfo>
-			<Description>TXT_KEY_ACTION_AUTOMATE_RELIGION</Description>
-			<Help>TXT_KEY_ACTION_AUTOMATE_RELIGION_HELP</Help>
-			<HotKey>KB_R</HotKey>
+			<Description>TXT_KEY_COMMAND_SAIL_TO_EUROPE</Description>
+			<Help>TXT_KEY_COMMAND_SAIL_TO_EUROPE_HELP</Help>
+			<HotKey>KB_E</HotKey>
+			<bAltDown>0</bAltDown>
+			<bShiftDown>0</bShiftDown>
+			<bCtrlDown>1</bCtrlDown>
+			<iHotKeyPriority>0</iHotKeyPriority>
+			<HotKeyAlt/>
+			<bAltDownAlt>0</bAltDownAlt>
+			<bShiftDownAlt>0</bShiftDownAlt>
+			<bCtrlDownAlt>0</bCtrlDownAlt>
+			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
+			<Command>COMMAND_AUTOMATE</Command>
+			<Automate>AUTOMATE_SAIL</Automate>
+			<bVisible>1</bVisible>
+			<Button>Art/Interface/Game Hud/Actions/sail_to_mother_high_res.dds</Button>
+		</AutomateInfo>
+		<AutomateInfo>
+			<Description>TXT_KEY_COMMAND_CHOOSE_TRADE_ROUTES</Description>
+			<Help>TXT_KEY_COMMAND_CHOOSE_TRADE_ROUTES_HELP</Help>
+			<HotKey>KB_C</HotKey>
+			<bAltDown>0</bAltDown>
+			<bShiftDown>1</bShiftDown>
+			<bCtrlDown>0</bCtrlDown>
+			<iHotKeyPriority>0</iHotKeyPriority>
+			<HotKeyAlt/>
+			<bAltDownAlt>0</bAltDownAlt>
+			<bShiftDownAlt>0</bShiftDownAlt>
+			<bCtrlDownAlt>0</bCtrlDownAlt>
+			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
+			<Command>COMMAND_AUTOMATE</Command>
+			<Automate>AUTOMATE_TRANSPORT_CITY</Automate>
+			<bVisible>0</bVisible>
+			<Button>Art/Interface/Game Hud/Actions/automate_city_high_res.dds</Button>
+		</AutomateInfo>
+		<AutomateInfo>
+			<Description>TXT_KEY_ACTION_AUTOMATE_TRANSPORT_FULL</Description>
+			<Help>TXT_KEY_ACTION_AUTOMATE_TRANSPORT_FULL_HELP</Help>
+			<HotKey>KB_C</HotKey>
+			<bAltDown>1</bAltDown>
+			<bShiftDown>1</bShiftDown>
+			<bCtrlDown>0</bCtrlDown>
+			<iHotKeyPriority>0</iHotKeyPriority>
+			<HotKeyAlt/>
+			<bAltDownAlt>0</bAltDownAlt>
+			<bShiftDownAlt>0</bShiftDownAlt>
+			<bCtrlDownAlt>0</bCtrlDownAlt>
+			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
+			<Command>COMMAND_AUTOMATE</Command>
+			<Automate>AUTOMATE_TRANSPORT_FULL</Automate>
+			<bVisible>1</bVisible>
+			<Button>Art/Interface/Game Hud/Actions/automate_transport_high_res.dds</Button>
+		</AutomateInfo>
+		<AutomateInfo>
+			<Description>TXT_KEY_ACTION_AUTOMATE_FULL</Description>
+			<Help>TXT_KEY_ACTION_AUTOMATE_FULL_HELP</Help>
+			<HotKey>KB_A</HotKey>
 			<bAltDown>0</bAltDown>
 			<bShiftDown>0</bShiftDown>
 			<bCtrlDown>0</bCtrlDown>
@@ -93,9 +129,9 @@
 			<bCtrlDownAlt>0</bCtrlDownAlt>
 			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
 			<Command>COMMAND_AUTOMATE</Command>
-			<Automate>AUTOMATE_RELIGION</Automate>
+			<Automate>AUTOMATE_FULL</Automate>
 			<bVisible>1</bVisible>
-			<Button>Art/Interface/Buttons/Actions/Automate.dds</Button>
+			<Button>Art/Interface/Game Hud/Actions/automate_high_res.dds</Button>
 		</AutomateInfo>
 	</AutomateInfos>
 </Civ4AutomateInfos>

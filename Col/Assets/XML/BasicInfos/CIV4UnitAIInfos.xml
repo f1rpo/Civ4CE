@@ -11,164 +11,68 @@
 			<Description>UNITAI_UNKNOWN</Description>
 		</UnitAIInfo>
 		<UnitAIInfo>
-			<Type>UNITAI_ANIMAL</Type>
-			<Description>UNITAI_ANIMAL</Description>
+			<Type>UNITAI_COLONIST</Type>
+			<Description>UNITAI_COLONIST</Description>
 		</UnitAIInfo>
 		<UnitAIInfo>
-			<Type>UNITAI_SETTLE</Type>
-			<Description>UNITAI_SETTLE</Description>
+			<Type>UNITAI_SETTLER</Type>
+			<Description>UNITAI_SETTLER</Description>
 		</UnitAIInfo>
 		<UnitAIInfo>
 			<Type>UNITAI_WORKER</Type>
-			<Description>UNITAI_WORKER</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_ATTACK</Type>
-			<Description>UNITAI_ATTACK</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_ATTACK_CITY</Type>
-			<Description>UNITAI_ATTACK_CITY</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_COLLATERAL</Type>
-			<Description>UNITAI_COLLATERAL</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_PILLAGE</Type>
-			<Description>UNITAI_PILLAGE</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_RESERVE</Type>
-			<Description>UNITAI_RESERVE</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_COUNTER</Type>
-			<Description>UNITAI_COUNTER</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_CITY_DEFENSE</Type>
-			<Description>UNITAI_CITY_DEFENSE</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_CITY_COUNTER</Type>
-			<Description>UNITAI_CITY_COUNTER</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_CITY_SPECIAL</Type>
-			<Description>UNITAI_CITY_SPECIAL</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_EXPLORE</Type>
-			<Description>UNITAI_EXPLORE</Description>
+			<Description>UNITAI_Worker</Description>
 		</UnitAIInfo>
 		<UnitAIInfo>
 			<Type>UNITAI_MISSIONARY</Type>
 			<Description>UNITAI_MISSIONARY</Description>
 		</UnitAIInfo>
 		<UnitAIInfo>
-			<Type>UNITAI_PROPHET</Type>
-			<Description>UNITAI_PROPHET</Description>
+			<Type>UNITAI_SCOUT</Type>
+			<Description>UNITAI_SCOUT</Description>
 		</UnitAIInfo>
 		<UnitAIInfo>
-			<Type>UNITAI_ARTIST</Type>
-			<Description>UNITAI_ARTIST</Description>
+			<Type>UNITAI_WAGON</Type>
+			<Description>UNITAI_WAGON</Description>
 		</UnitAIInfo>
 		<UnitAIInfo>
-			<Type>UNITAI_SCIENTIST</Type>
-			<Description>UNITAI_SCIENTIST</Description>
+			<Type>UNITAI_TREASURE</Type>
+			<Description>UNITAI_TREASURE</Description>
+		</UnitAIInfo>
+		<UnitAIInfo>
+			<Type>UNITAI_YIELD</Type>
+			<Description>UNITAI_YIELD</Description>
 		</UnitAIInfo>
 		<UnitAIInfo>
 			<Type>UNITAI_GENERAL</Type>
 			<Description>UNITAI_GENERAL</Description>
 		</UnitAIInfo>
 		<UnitAIInfo>
-			<Type>UNITAI_MERCHANT</Type>
-			<Description>UNITAI_MERCHANT</Description>
+			<Type>UNITAI_DEFENSIVE</Type>
+			<Description>UNITAI_DEFENSIVE</Description>
 		</UnitAIInfo>
 		<UnitAIInfo>
-			<Type>UNITAI_ENGINEER</Type>
-			<Description>UNITAI_ENGINEER</Description>
+			<Type>UNITAI_OFFENSIVE</Type>
+			<Description>UNITAI_OFFENSIVE</Description>
 		</UnitAIInfo>
 		<UnitAIInfo>
-			<Type>UNITAI_SPY</Type>
-			<Description>UNITAI_SPY</Description>
+			<Type>UNITAI_COUNTER</Type>
+			<Description>UNITAI_COUNTER</Description>
 		</UnitAIInfo>
 		<UnitAIInfo>
-			<Type>UNITAI_ICBM</Type>
-			<Description>UNITAI_ICBM</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_WORKER_SEA</Type>
-			<Description>UNITAI_WORKER_SEA</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_ATTACK_SEA</Type>
-			<Description>UNITAI_ATTACK_SEA</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_RESERVE_SEA</Type>
-			<Description>UNITAI_RESERVE_SEA</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_ESCORT_SEA</Type>
-			<Description>UNITAI_ESCORT_SEA</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_EXPLORE_SEA</Type>
-			<Description>UNITAI_EXPLORE_SEA</Description>
+			<Type>UNITAI_TRANSPORT_SEA</Type>
+			<Description>UNITAI_TRANSPORT_SEA</Description>
 		</UnitAIInfo>
 		<UnitAIInfo>
 			<Type>UNITAI_ASSAULT_SEA</Type>
 			<Description>UNITAI_ASSAULT_SEA</Description>
 		</UnitAIInfo>
 		<UnitAIInfo>
-			<Type>UNITAI_SETTLER_SEA</Type>
-			<Description>UNITAI_SETTLER_SEA</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_MISSIONARY_SEA</Type>
-			<Description>UNITAI_MISSIONARY_SEA</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_SPY_SEA</Type>
-			<Description>UNITAI_SPY_SEA</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_CARRIER_SEA</Type>
-			<Description>UNITAI_CARRIER_SEA</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_MISSILE_CARRIER_SEA</Type>
-			<Description>UNITAI_MISSILE_CARRIER_SEA</Description>
+			<Type>UNITAI_COMBAT_SEA</Type>
+			<Description>UNITAI_COMBAT_SEA</Description>
 		</UnitAIInfo>
 		<UnitAIInfo>
 			<Type>UNITAI_PIRATE_SEA</Type>
 			<Description>UNITAI_PIRATE_SEA</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_ATTACK_AIR</Type>
-			<Description>UNITAI_ATTACK_AIR</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_DEFENSE_AIR</Type>
-			<Description>UNITAI_DEFENSE_AIR</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_CARRIER_AIR</Type>
-			<Description>UNITAI_CARRIER_AIR</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_MISSILE_AIR</Type>
-			<Description>UNITAI_MISSILE_AIR</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_PARADROP</Type>
-			<Description>UNITAI_PARADROP</Description>
-		</UnitAIInfo>
-		<UnitAIInfo>
-			<Type>UNITAI_ATTACK_CITY_LEMMING</Type>
-			<Description>UNITAI_ATTACK_CITY_LEMMING</Description>
 		</UnitAIInfo>
 	</UnitAIInfos>
 </Civ4UnitAIInfos>

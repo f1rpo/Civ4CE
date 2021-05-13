@@ -1,4 +1,4 @@
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by EXTREME (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -11,16 +11,12 @@
 	<ElementType name="QuestFailText" content="textOnly"/>
 	<ElementType name="Button" content="textOnly"/>
 	<ElementType name="bQuest" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bTutorial" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bSinglePlayer" content="textOnly" dt:type="boolean"/>
 	<ElementType name="iMinTreasury" content="textOnly" dt:type="int"/>
 	<ElementType name="iGold" content="textOnly" dt:type="int"/>
 	<ElementType name="iRandomGold" content="textOnly" dt:type="int"/>
 	<ElementType name="iCulture" content="textOnly" dt:type="int"/>
-	<ElementType name="iEspionagePoints" content="textOnly" dt:type="int"/>
-	<ElementType name="Tech" content="textOnly"/>
-	<ElementType name="iTechPercent" content="textOnly" dt:type="int"/>
-	<ElementType name="iTechCostPercent" content="textOnly" dt:type="int"/>
-	<ElementType name="iTechMinTurnsLeft" content="textOnly" dt:type="int"/>
 	<ElementType name="Civic" content="textOnly"/>
 	<ElementType name="iMinPopulation" content="textOnly" dt:type="int"/>
 	<ElementType name="iMaxPopulation" content="textOnly" dt:type="int"/>
@@ -29,17 +25,12 @@
 	<ElementType name="iMinOurLandmass" content="textOnly" dt:type="int"/>
 	<ElementType name="iMaxOurLandmass" content="textOnly" dt:type="int"/>
 	<ElementType name="MinDifficulty" content="textOnly"/>
-	<ElementType name="iAngry" content="textOnly" dt:type="int"/>
-	<ElementType name="iUnhealthy" content="textOnly" dt:type="int"/>
 	<ElementType name="UnitsRequired" content="eltOnly">
 		<element type="UnitClass" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="UnitClass" content="textOnly"/>
 	<ElementType name="bUnitsOnPlot" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bOwnPlot" content="textOnly" dt:type="boolean"/>
-	<ElementType name="iMaxNumReligions" content="textOnly" dt:type="int"/>
-	<ElementType name="iNumReligions" content="textOnly" dt:type="int"/>
-	<ElementType name="iNumCorporations" content="textOnly" dt:type="int"/>
 	<ElementType name="iNumUnits" content="textOnly" dt:type="int"/>
 	<ElementType name="iNumUnitsGlobal" content="textOnly" dt:type="int"/>
 	<ElementType name="iNumFreeUnits" content="textOnly" dt:type="int"/>
@@ -66,24 +57,11 @@
 		<element type="UnitClassPromotion" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="UnitName" content="textOnly"/>
-	<ElementType name="iHappy" content="textOnly" dt:type="int"/>
-	<ElementType name="iHealth" content="textOnly" dt:type="int"/>
-	<ElementType name="iHurryAnger" content="textOnly" dt:type="int"/>
-	<ElementType name="iHappyTurns" content="textOnly" dt:type="int"/>
 	<ElementType name="iRevoltTurns" content="textOnly" dt:type="int"/>
 	<ElementType name="iMinPillage" content="textOnly" dt:type="int"/>
 	<ElementType name="iMaxPillage" content="textOnly" dt:type="int"/>
 	<ElementType name="iFood" content="textOnly" dt:type="int"/>
 	<ElementType name="iFoodPercent" content="textOnly" dt:type="int"/>
-	<ElementType name="SpecialistType" content="textOnly"/>
-	<ElementType name="iFreeSpecialistCount" content="textOnly" dt:type="int"/>
-	<ElementType name="FreeSpecialistCount" content="eltOnly">
-		<element type="SpecialistType"/>
-		<element type="iFreeSpecialistCount"/>
-	</ElementType>
-	<ElementType name="FreeSpecialistCounts" content="eltOnly">
-		<element type="FreeSpecialistCount" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
 	<ElementType name="bTeam" content="textOnly" dt:type="int"/>
 	<ElementType name="bRecurring" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bGlobal" content="textOnly" dt:type="boolean"/>
@@ -91,35 +69,14 @@
 	<ElementType name="bGoldToPlayer" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bOtherPlayerWar" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bOtherPlayerAI" content="textOnly" dt:type="boolean"/>
-	<ElementType name="bOtherPlayerHasReligion" content="textOnly" dt:type="boolean"/>
-	<ElementType name="bOtherPlayerHasOtherReligion" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bOtherPlayerNative" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bOtherPlayerPlayable" content="textOnly" dt:type="boolean"/>
 	<ElementType name="iOtherPlayerShareBorders" content="textOnly" dt:type="int"/>
-	<ElementType name="OtherPlayerHasTech" content="textOnly"/>
 	<ElementType name="bPickCity" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bPickOtherPlayerCity" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bDeclareWar" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bShowPlot" content="textOnly" dt:type="boolean"/>
 	<ElementType name="iCityFoodWeight" content="textOnly" dt:type="int"/>
-	<ElementType name="iFreeUnitSupport" content="textOnly" dt:type="int"/>
-	<ElementType name="iInflationMod" content="textOnly" dt:type="int"/>
-	<ElementType name="iSpaceProductionMod" content="textOnly" dt:type="int"/>
-	<ElementType name="bGoldenAge" content="textOnly" dt:type="boolean"/>
-	<ElementType name="bPickReligion" content="textOnly" dt:type="boolean"/>
-	<ElementType name="bStateReligion" content="textOnly" dt:type="boolean"/>
-	<ElementType name="bHolyCity" content="textOnly" dt:type="boolean"/>
-	<ElementType name="bPickCorporation" content="textOnly" dt:type="boolean"/>
-	<ElementType name="bHeadquarters" content="textOnly" dt:type="boolean"/>
-	<ElementType name="PrereqTech" content="textOnly"/>
-	<ElementType name="OrPreReqs" content="eltOnly">
-		<element type="PrereqTech" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="AndPreReqs" content="eltOnly">
-		<element type="PrereqTech" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="ObsoleteTechs" content="eltOnly">
-		<element type="ObsoleteTech" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="ObsoleteTech" content="textOnly"/>
 	<ElementType name="PythonCallback" content="textOnly"/>
 	<ElementType name="PythonExpireCheck" content="textOnly"/>
 	<ElementType name="PythonCanDo" content="textOnly"/>
@@ -131,8 +88,6 @@
 	<ElementType name="iPercentGamesActive" content="textOnly" dt:type="int"/>
 	<ElementType name="bProbabilityUnitMultiply" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bProbabilityBuildingMultiply" content="textOnly" dt:type="boolean"/>
-	<ElementType name="iConvertOwnCities" content="textOnly" dt:type="int"/>
-	<ElementType name="iConvertOtherCities" content="textOnly" dt:type="int"/>
 	<ElementType name="iOurAttitudeModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iAttitudeModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iTheirEnemyAttitudeModifier" content="textOnly" dt:type="int"/>
@@ -160,31 +115,14 @@
 	</ElementType>
 	<ElementType name="ImprovementType" content="textOnly"/>
 	<ElementType name="iImprovementChange" content="textOnly" dt:type="int"/>
-	<ElementType name="BonusesRequired" content="eltOnly">
-		<element type="BonusType" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="BonusType" content="textOnly"/>
-	<ElementType name="iBonusChange" content="textOnly" dt:type="int"/>
 	<ElementType name="RoutesRequired" content="eltOnly">
 		<element type="RouteType" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="RouteType" content="textOnly"/>
 	<ElementType name="iRouteChange" content="textOnly" dt:type="int"/>
 	<ElementType name="BonusRevealed" content="textOnly"/>
-	<ElementType name="BonusGift" content="textOnly"/>
-	<ElementType name="FlavorType" content="textOnly"/>
-	<ElementType name="iFlavor" content="textOnly" dt:type="int"/>
-	<ElementType name="TechFlavor" content="eltOnly">
-		<element type="FlavorType"/>
-		<element type="iFlavor"/>
-	</ElementType>
-	<ElementType name="TechFlavors" content="eltOnly">
-		<element type="TechFlavor" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
 	<ElementType name="YieldType" content="textOnly"/>
-	<ElementType name="CommerceType" content="textOnly"/>
 	<ElementType name="iExtraYield" content="textOnly" dt:type="int"/>
-	<ElementType name="iExtraCommerce" content="textOnly" dt:type="int"/>
 	<ElementType name="PlotExtraYield" content="eltOnly">
 		<element type="YieldType"/>
 		<element type="iExtraYield"/>
@@ -199,28 +137,6 @@
 	</ElementType>
 	<ElementType name="BuildingExtraYields" content="eltOnly">
 		<element type="BuildingExtraYield" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="BuildingExtraCommerce" content="eltOnly">
-		<element type="BuildingClass"/>
-		<element type="CommerceType"/>
-		<element type="iExtraCommerce"/>
-	</ElementType>
-	<ElementType name="BuildingExtraCommerces" content="eltOnly">
-		<element type="BuildingExtraCommerce" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="BuildingExtraHappy" content="eltOnly">
-		<element type="BuildingClass"/>
-		<element type="iHappy"/>
-	</ElementType>
-	<ElementType name="BuildingExtraHappies" content="eltOnly">
-		<element type="BuildingExtraHappy" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="BuildingExtraHealth" content="eltOnly">
-		<element type="BuildingClass"/>
-		<element type="iHealth"/>
-	</ElementType>
-	<ElementType name="BuildingExtraHealths" content="eltOnly">
-		<element type="BuildingExtraHealth" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="iEventChance" content="textOnly" dt:type="int"/>
 	<ElementType name="EventChance" content="eltOnly">
@@ -238,14 +154,6 @@
 	<ElementType name="EventTimes" content="eltOnly">
 		<element type="EventTime" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
-	<ElementType name="ReligionsRequired" content="eltOnly">
-		<element type="ReligionType" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="ReligionType" content="textOnly"/>
-	<ElementType name="CorporationsRequired" content="eltOnly">
-		<element type="CorporationType" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="CorporationType" content="textOnly"/>
 	<ElementType name="Text" content="textOnly"/>
 	<ElementType name="TriggerTexts" content="eltOnly">
 		<element type="TriggerText" minOccurs="1" maxOccurs="*"/>
@@ -269,10 +177,12 @@
 		<element type="EventChance" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="bPrereqEventPlot" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bFrontPopup" content="textOnly" dt:type="boolean"/>
 	<ElementType name="EventTriggerInfo" content="eltOnly">
 		<element type="Type"/>
 		<element type="WorldNewsTexts"/>
 		<element type="TriggerTexts"/>
+		<element type="bTutorial"/>
 		<element type="bSinglePlayer"/>
 		<element type="iPercentGamesActive"/>
 		<element type="iWeight"/>
@@ -286,8 +196,6 @@
 		<element type="iMinOurLandmass"/>
 		<element type="iMaxOurLandmass"/>
 		<element type="MinDifficulty"/>
-		<element type="iAngry"/>
-		<element type="iUnhealthy"/>
 		<element type="UnitsRequired"/>
 		<element type="iNumUnits"/>
 		<element type="iNumUnitsGlobal"/>
@@ -304,36 +212,23 @@
 		<element type="FeaturesRequired"/>
 		<element type="TerrainsRequired"/>
 		<element type="ImprovementsRequired"/>
-		<element type="BonusesRequired"/>
 		<element type="RoutesRequired"/>
-		<element type="ReligionsRequired"/>
-		<element type="iNumReligions"/>
-		<element type="CorporationsRequired"/>
-		<element type="iNumCorporations"/>
-		<element type="bPickReligion"/>
-		<element type="bStateReligion"/>
-		<element type="bHolyCity"/>
-		<element type="bPickCorporation"/>
-		<element type="bHeadquarters"/>
 		<element type="Events"/>
 		<element type="PrereqEvents"/>
 		<element type="bPrereqEventPlot"/>
-		<element type="OrPreReqs"/>
-		<element type="AndPreReqs"/>
-		<element type="ObsoleteTechs"/>
 		<element type="bRecurring"/>
 		<element type="bTeam"/>
 		<element type="bGlobal"/>
 		<element type="bPickPlayer"/>
 		<element type="bOtherPlayerWar"/>
-		<element type="bOtherPlayerHasReligion"/>
-		<element type="bOtherPlayerHasOtherReligion"/>
 		<element type="bOtherPlayerAI"/>
+		<element type="bOtherPlayerNative"/>
+		<element type="bOtherPlayerPlayable"/>
 		<element type="iOtherPlayerShareBorders"/>
-		<element type="OtherPlayerHasTech"/>
 		<element type="bPickCity"/>
 		<element type="bPickOtherPlayerCity"/>
 		<element type="bShowPlot"/>
+		<element type="bFrontPopup"/>
 		<element type="iCityFoodWeight"/>
 		<element type="PythonCanDo"/>
 		<element type="PythonCanDoCity"/>
@@ -363,17 +258,6 @@
 		<element type="bGoldToPlayer"/>
 		<element type="iRandomGold"/>
 		<element type="iCulture"/>
-		<element type="iEspionagePoints"/>
-		<element type="bGoldenAge"/>
-		<element type="iFreeUnitSupport"/>
-		<element type="iInflationMod"/>
-		<element type="iSpaceProductionMod"/>
-		<element type="Tech"/>
-		<element type="TechFlavors"/>
-		<element type="iTechPercent"/>
-		<element type="iTechCostPercent"/>
-		<element type="iTechMinTurnsLeft"/>
-		<element type="PrereqTech"/>
 		<element type="UnitClass"/>
 		<element type="iNumFreeUnits"/>
 		<element type="bDisbandUnit"/>
@@ -386,33 +270,19 @@
 		<element type="BuildingClass"/>
 		<element type="iBuildingChange"/>
 		<element type="BuildingExtraYields"/>
-		<element type="BuildingExtraCommerces"/>
-		<element type="BuildingExtraHappies"/>
-		<element type="BuildingExtraHealths"/>
-		<element type="iHappy"/>
-		<element type="iHealth"/>
-		<element type="iHurryAnger"/>
-		<element type="iHappyTurns"/>
 		<element type="iRevoltTurns"/>
 		<element type="iMinPillage"/>
 		<element type="iMaxPillage"/>
 		<element type="iFood"/>
 		<element type="iFoodPercent"/>
-		<element type="FreeSpecialistCounts"/>
 		<element type="FeatureType"/>
 		<element type="iFeatureChange"/>
 		<element type="ImprovementType"/>
 		<element type="iImprovementChange"/>
-		<element type="BonusType"/>
-		<element type="iBonusChange"/>
 		<element type="RouteType"/>
 		<element type="iRouteChange"/>
 		<element type="BonusRevealed"/>
-		<element type="BonusGift"/>
 		<element type="PlotExtraYields"/>
-		<element type="iConvertOwnCities"/>
-		<element type="iConvertOtherCities"/>
-		<element type="iMaxNumReligions"/>
 		<element type="iOurAttitudeModifier"/>
 		<element type="iAttitudeModifier"/>
 		<element type="iTheirEnemyAttitudeModifier"/>

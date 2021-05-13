@@ -2,8 +2,8 @@
 ## Copyright Firaxis Games 2005
 ##
 ## #####   WARNING - MODIFYING THE FUNCTION NAMES OF THIS FILE IS PROHIBITED  #####
-## 
-## The app specifically calls the functions as they are named. Use this file to pass 
+##
+## The app specifically calls the functions as they are named. Use this file to pass
 ## args to another file that contains your modifications
 ##
 ## MODDERS - If you create a GameUtils file, update the CvGameInterfaceFile reference to point to your new file
@@ -22,45 +22,13 @@ normalGameUtils = CvGameInterfaceFile.GameUtils
 def gameUtils():
 	' replace normalGameUtils with your mod version'
 	return normalGameUtils
-		
+
 def isVictoryTest():
 	#CvUtil.pyPrint( "CvGameInterface.isVictoryTest" )
 	return gameUtils().isVictoryTest()
 
 def isVictory(argsList):
 	return gameUtils().isVictory(argsList)
-
-def isPlayerResearch(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.isPlayerResearch" )
-	return gameUtils().isPlayerResearch(argsList)
-
-def getExtraCost(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.getExtraCost" )
-	return gameUtils().getExtraCost(argsList)
-
-def createBarbarianCities():
-	#CvUtil.pyPrint( "CvGameInterface.createBarbarianCities" )
-	return gameUtils().createBarbarianCities()
-
-def createBarbarianUnits():
-	#CvUtil.pyPrint( "CvGameInterface.createBarbarianUnits" )
-	return gameUtils().createBarbarianUnits()
-
-def skipResearchPopup(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.skipResearchPopup" )
-	return gameUtils().skipResearchPopup(argsList)
-
-def showTechChooserButton(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.showTechChooserButton" )
-	return gameUtils().showTechChooserButton(argsList)
-
-def getFirstRecommendedTech(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.getFirstRecommendedTech" )
-	return gameUtils().getFirstRecommendedTech(argsList)
-
-def getSecondRecommendedTech(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.getSecondRecommendedTech" )
-	return gameUtils().getSecondRecommendedTech(argsList)
 
 def skipProductionPopup(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.skipProductionPopup" )
@@ -105,10 +73,6 @@ def canBuild(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.canBuild" )
 	return gameUtils().canBuild(argsList)
 
-def cannotFoundCity(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.cannotHandleAction" )
-	return gameUtils().cannotFoundCity(argsList)
-
 def cannotSelectionListMove(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.cannotSelectionListMove" )
 	return gameUtils().cannotSelectionListMove(argsList)
@@ -120,15 +84,6 @@ def cannotSelectionListGameNetMessage(argsList):
 def cannotDoControl(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.cannotDoControl" )
 	return gameUtils().cannotDoControl(argsList)
-
-def canResearch(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.canResearch" )
-	return gameUtils().canResearch(argsList)
-
-def cannotResearch(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.cannotResearch" )
-	return gameUtils().cannotResearch(argsList)
-
 def canDoCivic(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.canDoCivic" )
 	return gameUtils().canDoCivic(argsList)
@@ -153,27 +108,6 @@ def cannotConstruct(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.cannotConstruct" )
 	return gameUtils().cannotConstruct(argsList)
 
-def canCreate(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.canCreate" )
-	return gameUtils().canCreate(argsList)
-
-def cannotCreate(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.cannotCreate" )
-	return gameUtils().cannotCreate(argsList)
-
-def canMaintain(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.canMaintain" )
-	return gameUtils().canMaintain(argsList)
-
-def cannotMaintain(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.cannotMaintain" )
-	return gameUtils().cannotMaintain(argsList)
-
-def AI_chooseTech(argsList):
-	'AI chooses what to research'
-	#CvUtil.pyPrint( "CvGameInterface.AI_chooseTech" )
-	return gameUtils().AI_chooseTech(argsList)
-
 def AI_chooseProduction(argsList):
 	'AI chooses city production'
 	#CvUtil.pyPrint( "CvGameInterface.AI_chooseProduction" )
@@ -197,22 +131,9 @@ def AI_doDiplo(argsList):
 def calculateScore(argsList):
 	return gameUtils().calculateScore(argsList)
 
-def doHolyCity():
-	#CvUtil.pyPrint( "CvGameInterface.doHolyCity" )
-	return gameUtils().doHolyCity()
-
-def doHolyCityTech(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.doHolyCityTech" )
-	return gameUtils().doHolyCityTech(argsList)
-
 def doGold(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.doGold" )
 	return gameUtils().doGold(argsList)
-
-def doResearch(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.doResearch" )
-	return gameUtils().doResearch(argsList)
-
 def doGoody(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.doGoody" )
 	return gameUtils().doGoody(argsList)
@@ -233,18 +154,6 @@ def doPlotCulture(argsList):
 	#CvUtil.pyPrint( "CvGameInterface.doPlotCulture" )
 	return gameUtils().doPlotCulture(argsList)
 
-def doReligion(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.doReligion" )
-	return gameUtils().doReligion(argsList)
-
-def doGreatPeople(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.doGreatPeople" )
-	return gameUtils().doGreatPeople(argsList)
-
-def doMeltdown(argsList):
-	#CvUtil.pyPrint( "CvGameInterface.doMeltdown" )
-	return gameUtils().doMeltdown(argsList)
-
 def doReviveActivePlayer(argsList):
 	return gameUtils().doReviveActivePlayer(argsList)
 
@@ -263,9 +172,6 @@ def canFoundCitiesOnWater(argsList):
 def doCombat(argsList):
 	return gameUtils().doCombat(argsList)
 
-def getConscriptUnitType(argsList):
-	return gameUtils().getConscriptUnitType(argsList)
-
 def getCityFoundValue(argsList):
 	return gameUtils().getCityFoundValue(argsList)
 
@@ -280,10 +186,7 @@ def getBuildingCostMod(argsList):
 
 def canUpgradeAnywhere(argsList):
 	return gameUtils().canUpgradeAnywhere(argsList)
-	
-def getWidgetHelp(argsList):
-	return gameUtils().getWidgetHelp(argsList)
-	
+
 def getUpgradePriceOverride(argsList):
 	return gameUtils().getUpgradePriceOverride(argsList)
 

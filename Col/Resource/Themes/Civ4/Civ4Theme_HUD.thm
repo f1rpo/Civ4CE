@@ -398,7 +398,7 @@ with GFC_Control_Button
 				layer {
 					LayerFlags		= GFlags(GCtrlBitmapSkin, GFC_BITMAPSKIN_CENTER_FIXED);
 					DestCombine		= GColorCombine(BlendSource,Disable);
-					Image			= GBitmap("Civ4/HUD/HUD_EndTurn_btn.tga", HVGrid, 1, 1, 0, 0);
+					Image			= GBitmap("Colonization/end_turn.dds", HVGrid, 1, 1, 0, 0);
 					Margin			= GRectMargin(0,0,0,0);
 				}
 			}

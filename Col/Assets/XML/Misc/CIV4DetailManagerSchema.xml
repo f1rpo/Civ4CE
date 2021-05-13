@@ -2,7 +2,7 @@
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
 <!-- Detail Manager -->
-<!-- Defines level-of-detail controllers for Civ4 graphical elements -->
+<!-- Defines level-of-detail controllers for graphical elements -->
 <Schema xmlns="urn:schemas-microsoft-com:xml-data" xmlns:dt="urn:schemas-microsoft-com:datatypes">
 	<!-- base types-->
 	<ElementType name="Name" content="textOnly"/>

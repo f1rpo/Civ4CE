@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by tomw (Firaxis Games) --><!-- Sid Meier's Civilization 4 --><!-- Copyright Firaxis Games 2005 --><!-- --><!-- Terrain Plane, texture scaling and zheight are in world units, urate and vrate are in texture units --><Civ4TerrainPlaneInfos xmlns="x-schema:CIV4MiscSchema.xml">
 	<TerrainPlaneInfos>
 		<TerrainPlaneInfo>
-			<bVisible>0</bVisible>
+			<bVisible>1</bVisible>
 			<bGroundPlane>0</bGroundPlane>
-			<MaterialAlpha>0.5</MaterialAlpha>
-			<CloseAlpha>0.5</CloseAlpha>
-			<TextureFile>Art/Terrain/PlotTextures/PlotTexture.dds</TextureFile>
+			<bCitySelection>1</bCitySelection>
+			<MaterialAlpha>0.2</MaterialAlpha>
+			<CloseAlpha>0.2</CloseAlpha>
+			<TextureFile>Art/Terrain/PlotTextures/WhiteTerrainPlane.dds</TextureFile>
 			<TextureScalingU>1000</TextureScalingU>
 			<TextureScalingV>1000</TextureScalingV>
-			<URate>0.01</URate>
-			<VRate>0.005</VRate>
+			<URate>0.0</URate>
+			<VRate>0.0</VRate>
 			<ZHeight>120</ZHeight>
 			<FogType>FOG_TYPE_NONE</FogType>
 		</TerrainPlaneInfo>

@@ -5,14 +5,17 @@
 		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_IDLE</EventType>
+			<EventType>ENTITY_EVENT_FOUND</EventType>
 			<EventType>ENTITY_EVENT_SURRENDER</EventType>
 			<EventType>ENTITY_EVENT_CAPTURED</EventType>
 			<EventType>ENTITY_EVENT_GREAT_EVENT</EventType>
 			<EventType>ENTITY_EVENT_FOUND</EventType>
 			<EventType>ENTITY_EVENT_BUILD</EventType>
-			<EventType>ENTITY_EVENT_PARADROP</EventType>
+			<EventType>ENTITY_EVENT_IRRIGATE</EventType>
+			<EventType>ENTITY_EVENT_MINE</EventType>
+			<EventType>ENTITY_EVENT_CHOP</EventType>
+			<EventType>ENTITY_EVENT_RAILROAD</EventType>
 			<EventType>ENTITY_EVENT_SHOVEL</EventType>
-			<EventType>ENTITY_EVENT_DIE_ANIMATION</EventType>
 		</EventMaskList>
 		<UnitEntry>
 			<UnitEntryType>UNIT</UnitEntryType>
@@ -34,27 +37,16 @@
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
 		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>IDLE (2)</Name>
 		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_IDLE</EventType>
+			<EventType>ENTITY_EVENT_FOUND</EventType>
 			<EventType>ENTITY_EVENT_SURRENDER</EventType>
 			<EventType>ENTITY_EVENT_CAPTURED</EventType>
-			<EventType>ENTITY_EVENT_PARADROP</EventType>
 			<EventType>ENTITY_EVENT_SHOVEL</EventType>
-			<EventType>ENTITY_EVENT_DIE_ANIMATION</EventType>
 		</EventMaskList>
 		<UnitEntry>
 			<UnitEntryType>UNIT</UnitEntryType>
@@ -86,26 +78,15 @@
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
 		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>IDLE (3)</Name>
 		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_IDLE</EventType>
+			<EventType>ENTITY_EVENT_FOUND</EventType>
 			<EventType>ENTITY_EVENT_SURRENDER</EventType>
 			<EventType>ENTITY_EVENT_CAPTURED</EventType>
-			<EventType>ENTITY_EVENT_PARADROP</EventType>
-			<EventType>ENTITY_EVENT_DIE_ANIMATION</EventType>
 		</EventMaskList>
 		<UnitEntry>
 			<UnitEntryType>UNIT</UnitEntryType>
@@ -147,26 +128,15 @@
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
 		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>IDLE (4)</Name>
 		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_IDLE</EventType>
+			<EventType>ENTITY_EVENT_FOUND</EventType>
 			<EventType>ENTITY_EVENT_SURRENDER</EventType>
 			<EventType>ENTITY_EVENT_CAPTURED</EventType>
-			<EventType>ENTITY_EVENT_PARADROP</EventType>
-			<EventType>ENTITY_EVENT_DIE_ANIMATION</EventType>
 		</EventMaskList>
 		<UnitEntry>
 			<UnitEntryType>UNIT</UnitEntryType>
@@ -218,42 +188,23 @@
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
 		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>IDLE (5)</Name>
 		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_IDLE</EventType>
+			<EventType>ENTITY_EVENT_FOUND</EventType>
 			<EventType>ENTITY_EVENT_DIE</EventType>
 			<EventType>ENTITY_EVENT_DAMAGE</EventType>
 			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
 			<EventType>ENTITY_EVENT_END_COMBAT</EventType>
 			<EventType>ENTITY_EVENT_SURRENDER</EventType>
 			<EventType>ENTITY_EVENT_CAPTURED</EventType>
-			<EventType>ENTITY_EVENT_AIRPATROL</EventType>
-			<EventType>ENTITY_EVENT_AIRINTERCEPTION</EventType>
-			<EventType>ENTITY_EVENT_AIRBOMB</EventType>
-			<EventType>ENTITY_EVENT_PARADROP</EventType>
-			<EventType>ENTITY_EVENT_AIRSTRIKE</EventType>
-			<EventType>ENTITY_EVENT_AIRRECON</EventType>
-			<EventType>ENTITY_EVENT_NUKE</EventType>
 			<EventType>ENTITY_EVENT_MULTI_SELECT</EventType>
 			<EventType>ENTITY_EVENT_MULTI_DESELECT</EventType>
 			<EventType>ENTITY_EVENT_GREAT_EVENT</EventType>
 			<EventType>ENTITY_EVENT_PILLAGE</EventType>
-			<EventType>ENTITY_EVENT_SABOTAGE</EventType>
-			<EventType>ENTITY_EVENT_DESTROY</EventType>
-			<EventType>ENTITY_EVENT_STEAL_PLANS</EventType>
 			<EventType>ENTITY_EVENT_BOMBARD</EventType>
 			<EventType>ENTITY_EVENT_FOUND</EventType>
 			<EventType>ENTITY_EVENT_FORTIFY</EventType>
@@ -327,42 +278,23 @@
 			<Direction>3.14159265359</Direction>
 			<DirVariation>0.4472135955</DirVariation>
 		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.855704697987</x>
-				<y>-0.634228187919</y>
-			</Position>
-			<PositionRadius>19.6468827044</PositionRadius>
-			<Direction>2.38648825011</Direction>
-			<DirVariation>0.722772439984</DirVariation>
-		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>IDLE (6)</Name>
 		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_IDLE</EventType>
+			<EventType>ENTITY_EVENT_FOUND</EventType>
 			<EventType>ENTITY_EVENT_DIE</EventType>
 			<EventType>ENTITY_EVENT_DAMAGE</EventType>
 			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
 			<EventType>ENTITY_EVENT_END_COMBAT</EventType>
 			<EventType>ENTITY_EVENT_SURRENDER</EventType>
 			<EventType>ENTITY_EVENT_CAPTURED</EventType>
-			<EventType>ENTITY_EVENT_AIRPATROL</EventType>
-			<EventType>ENTITY_EVENT_AIRINTERCEPTION</EventType>
-			<EventType>ENTITY_EVENT_AIRBOMB</EventType>
-			<EventType>ENTITY_EVENT_PARADROP</EventType>
-			<EventType>ENTITY_EVENT_AIRSTRIKE</EventType>
-			<EventType>ENTITY_EVENT_AIRRECON</EventType>
-			<EventType>ENTITY_EVENT_NUKE</EventType>
 			<EventType>ENTITY_EVENT_MULTI_SELECT</EventType>
 			<EventType>ENTITY_EVENT_MULTI_DESELECT</EventType>
 			<EventType>ENTITY_EVENT_GREAT_EVENT</EventType>
 			<EventType>ENTITY_EVENT_PILLAGE</EventType>
-			<EventType>ENTITY_EVENT_SABOTAGE</EventType>
-			<EventType>ENTITY_EVENT_DESTROY</EventType>
-			<EventType>ENTITY_EVENT_STEAL_PLANS</EventType>
 			<EventType>ENTITY_EVENT_BOMBARD</EventType>
 			<EventType>ENTITY_EVENT_FOUND</EventType>
 			<EventType>ENTITY_EVENT_FORTIFY</EventType>
@@ -437,16 +369,6 @@
 			<DirVariation>0.4472135955</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.744966442953</x>
-				<y>-0.644295302013</y>
-			</Position>
-			<PositionRadius>19.6468827044</PositionRadius>
-			<Direction>2.38648825011</Direction>
-			<DirVariation>0.722772439984</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
 			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.523489932886</x>
@@ -462,26 +384,17 @@
 		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_IDLE</EventType>
+			<EventType>ENTITY_EVENT_FOUND</EventType>
 			<EventType>ENTITY_EVENT_DIE</EventType>
 			<EventType>ENTITY_EVENT_DAMAGE</EventType>
 			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
 			<EventType>ENTITY_EVENT_END_COMBAT</EventType>
 			<EventType>ENTITY_EVENT_SURRENDER</EventType>
 			<EventType>ENTITY_EVENT_CAPTURED</EventType>
-			<EventType>ENTITY_EVENT_AIRPATROL</EventType>
-			<EventType>ENTITY_EVENT_AIRINTERCEPTION</EventType>
-			<EventType>ENTITY_EVENT_AIRBOMB</EventType>
-			<EventType>ENTITY_EVENT_PARADROP</EventType>
-			<EventType>ENTITY_EVENT_AIRSTRIKE</EventType>
-			<EventType>ENTITY_EVENT_AIRRECON</EventType>
-			<EventType>ENTITY_EVENT_NUKE</EventType>
 			<EventType>ENTITY_EVENT_MULTI_SELECT</EventType>
 			<EventType>ENTITY_EVENT_MULTI_DESELECT</EventType>
 			<EventType>ENTITY_EVENT_GREAT_EVENT</EventType>
 			<EventType>ENTITY_EVENT_PILLAGE</EventType>
-			<EventType>ENTITY_EVENT_SABOTAGE</EventType>
-			<EventType>ENTITY_EVENT_DESTROY</EventType>
-			<EventType>ENTITY_EVENT_STEAL_PLANS</EventType>
 			<EventType>ENTITY_EVENT_BOMBARD</EventType>
 			<EventType>ENTITY_EVENT_FOUND</EventType>
 			<EventType>ENTITY_EVENT_FORTIFY</EventType>
@@ -556,16 +469,6 @@
 			<DirVariation>0.4472135955</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.855704697987</x>
-				<y>-0.634228187919</y>
-			</Position>
-			<PositionRadius>19.6468827044</PositionRadius>
-			<Direction>2.38648825011</Direction>
-			<DirVariation>0.722772439984</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
 			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>0.332214765101</x>
@@ -591,26 +494,17 @@
 		<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 		<EventMaskList>
 			<EventType>ENTITY_EVENT_IDLE</EventType>
+			<EventType>ENTITY_EVENT_FOUND</EventType>
 			<EventType>ENTITY_EVENT_DIE</EventType>
 			<EventType>ENTITY_EVENT_DAMAGE</EventType>
 			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
 			<EventType>ENTITY_EVENT_END_COMBAT</EventType>
 			<EventType>ENTITY_EVENT_SURRENDER</EventType>
 			<EventType>ENTITY_EVENT_CAPTURED</EventType>
-			<EventType>ENTITY_EVENT_AIRPATROL</EventType>
-			<EventType>ENTITY_EVENT_AIRINTERCEPTION</EventType>
-			<EventType>ENTITY_EVENT_AIRBOMB</EventType>
-			<EventType>ENTITY_EVENT_PARADROP</EventType>
-			<EventType>ENTITY_EVENT_AIRSTRIKE</EventType>
-			<EventType>ENTITY_EVENT_AIRRECON</EventType>
-			<EventType>ENTITY_EVENT_NUKE</EventType>
 			<EventType>ENTITY_EVENT_MULTI_SELECT</EventType>
 			<EventType>ENTITY_EVENT_MULTI_DESELECT</EventType>
 			<EventType>ENTITY_EVENT_GREAT_EVENT</EventType>
 			<EventType>ENTITY_EVENT_PILLAGE</EventType>
-			<EventType>ENTITY_EVENT_SABOTAGE</EventType>
-			<EventType>ENTITY_EVENT_DESTROY</EventType>
-			<EventType>ENTITY_EVENT_STEAL_PLANS</EventType>
 			<EventType>ENTITY_EVENT_BOMBARD</EventType>
 			<EventType>ENTITY_EVENT_FOUND</EventType>
 			<EventType>ENTITY_EVENT_FORTIFY</EventType>
@@ -685,16 +579,6 @@
 			<DirVariation>0.4472135955</DirVariation>
 		</UnitEntry>
 		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.805369127517</x>
-				<y>-0.795302013423</y>
-			</Position>
-			<PositionRadius>19.6468827044</PositionRadius>
-			<Direction>2.38648825011</Direction>
-			<DirVariation>0.722772439984</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
 			<UnitEntryType>UNIT</UnitEntryType>
 			<Position>
 				<x>-0.120805369128</x>
@@ -755,16 +639,6 @@
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
 		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>FORTIFY (2)</Name>
@@ -805,16 +679,6 @@
 			<PositionRadius>22.0</PositionRadius>
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
 		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
@@ -866,16 +730,6 @@
 			<PositionRadius>22.0</PositionRadius>
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
 		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
@@ -938,16 +792,6 @@
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
 		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>BATTLE (1)</Name>
@@ -975,16 +819,6 @@
 			<PositionRadius>22.0</PositionRadius>
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.744966442953</x>
-				<y>-0.895973154362</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
 		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
@@ -1023,16 +857,6 @@
 			<PositionRadius>22.0</PositionRadius>
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.704697986577</x>
-				<y>-0.936241610738</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
 		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
@@ -1081,16 +905,6 @@
 			<PositionRadius>22.0</PositionRadius>
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.664429530201</x>
-				<y>-0.936241610738</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
 		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
@@ -1150,16 +964,6 @@
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
 		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.593959731544</x>
-				<y>-0.976510067114</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>WORKERS WORKING</Name>
@@ -1201,16 +1005,6 @@
 			<PositionRadius>22.0</PositionRadius>
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
 		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
@@ -1269,16 +1063,6 @@
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
 		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>BOW BATTLE (1)</Name>
@@ -1305,16 +1089,6 @@
 			<PositionRadius>22.0</PositionRadius>
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
 		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
@@ -1352,16 +1126,6 @@
 			<PositionRadius>22.0</PositionRadius>
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
 		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
@@ -1409,16 +1173,6 @@
 			<PositionRadius>22.0</PositionRadius>
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
 		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
@@ -1477,644 +1231,6 @@
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
 		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>ANIMAL IDLE (1)</Name>
-		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_IDLE</EventType>
-		</EventMaskList>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>0.302013422819</x>
-				<y>0.322147651007</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>GENERAL</UnitEntryType>
-			<Position>
-				<x>-0.332214765101</x>
-				<y>0.694630872483</y>
-			</Position>
-			<PositionRadius>22.0</PositionRadius>
-			<Direction>3.11129889367</Direction>
-			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>ANIMAL IDLE (2)</Name>
-		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_IDLE</EventType>
-		</EventMaskList>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>-0.322147651007</x>
-				<y>0.302013422819</y>
-			</Position>
-			<PositionRadius>15.8113883008</PositionRadius>
-			<Direction>3.22473388548</Direction>
-			<DirVariation>0.404474968323</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>0.241610738255</x>
-				<y>-0.392617449664</y>
-			</Position>
-			<PositionRadius>15.1327459504</PositionRadius>
-			<Direction>2.94419709374</Direction>
-			<DirVariation>0.40049968789</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>GENERAL</UnitEntryType>
-			<Position>
-				<x>-0.332214765101</x>
-				<y>0.694630872483</y>
-			</Position>
-			<PositionRadius>22.0</PositionRadius>
-			<Direction>3.11129889367</Direction>
-			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>ANIMAL IDLE (3)</Name>
-		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_IDLE</EventType>
-		</EventMaskList>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>-0.0503355704698</x>
-				<y>-0.402684563758</y>
-			</Position>
-			<PositionRadius>15.8113883008</PositionRadius>
-			<Direction>3.22473388548</Direction>
-			<DirVariation>0.404474968323</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>-0.362416107383</x>
-				<y>0.0201342281879</y>
-			</Position>
-			<PositionRadius>15.1327459504</PositionRadius>
-			<Direction>2.94419709374</Direction>
-			<DirVariation>0.40049968789</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>0.281879194631</x>
-				<y>0.291946308725</y>
-			</Position>
-			<PositionRadius>20.0997512422</PositionRadius>
-			<Direction>3.10161396647</Direction>
-			<DirVariation>0.341760149813</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>GENERAL</UnitEntryType>
-			<Position>
-				<x>-0.332214765101</x>
-				<y>0.694630872483</y>
-			</Position>
-			<PositionRadius>22.0</PositionRadius>
-			<Direction>3.11129889367</Direction>
-			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>ANIMAL IDLE (4)</Name>
-		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_IDLE</EventType>
-		</EventMaskList>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>-0.010067114094</x>
-				<y>-0.392617449664</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>0.372483221477</x>
-				<y>0.0302013422819</y>
-			</Position>
-			<PositionRadius>18.6010752377</PositionRadius>
-			<Direction>2.68825395774</Direction>
-			<DirVariation>0.528393792545</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>-0.332214765101</x>
-				<y>0.291946308725</y>
-			</Position>
-			<PositionRadius>19.6977156036</PositionRadius>
-			<Direction>3.49458304142</Direction>
-			<DirVariation>0.572712842531</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>0.140939597315</x>
-				<y>0.634228187919</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>GENERAL</UnitEntryType>
-			<Position>
-				<x>-0.332214765101</x>
-				<y>0.694630872483</y>
-			</Position>
-			<PositionRadius>22.0</PositionRadius>
-			<Direction>3.11129889367</Direction>
-			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>ANIMAL FORTIFY (1)</Name>
-		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_FORTIFY</EventType>
-			<EventType>ENTITY_EVENT_SLEEP</EventType>
-		</EventMaskList>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>-0.0604026845638</x>
-				<y>0.010067114094</y>
-			</Position>
-			<PositionRadius>21.0950231097</PositionRadius>
-			<Direction>3.09717743834</Direction>
-			<DirVariation>0.46389654019</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>GENERAL</UnitEntryType>
-			<Position>
-				<x>-0.332214765101</x>
-				<y>0.694630872483</y>
-			</Position>
-			<PositionRadius>22.0</PositionRadius>
-			<Direction>3.11129889367</Direction>
-			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>ANIMAL FORTIFY (2)</Name>
-		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_FORTIFY</EventType>
-			<EventType>ENTITY_EVENT_SLEEP</EventType>
-		</EventMaskList>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>-0.352348993289</x>
-				<y>-0.261744966443</y>
-			</Position>
-			<PositionRadius>15.2643375225</PositionRadius>
-			<Direction>3.94659614784</Direction>
-			<DirVariation>0.583095189485</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>0.261744966443</x>
-				<y>0.302013422819</y>
-			</Position>
-			<PositionRadius>14.8660687473</PositionRadius>
-			<Direction>2.29504632754</Direction>
-			<DirVariation>0.6</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>GENERAL</UnitEntryType>
-			<Position>
-				<x>-0.332214765101</x>
-				<y>0.694630872483</y>
-			</Position>
-			<PositionRadius>22.0</PositionRadius>
-			<Direction>3.11129889367</Direction>
-			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>ANIMAL FORTIFY(3)</Name>
-		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_FORTIFY</EventType>
-			<EventType>ENTITY_EVENT_SLEEP</EventType>
-		</EventMaskList>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>-0.342281879195</x>
-				<y>-0.473154362416</y>
-			</Position>
-			<PositionRadius>15.2643375225</PositionRadius>
-			<Direction>3.94659614784</Direction>
-			<DirVariation>0.583095189485</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>0.362416107383</x>
-				<y>-0.0201342281879</y>
-			</Position>
-			<PositionRadius>14.8660687473</PositionRadius>
-			<Direction>2.29504632754</Direction>
-			<DirVariation>0.6</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>-0.171140939597</x>
-				<y>0.442953020134</y>
-			</Position>
-			<PositionRadius>18.3575597507</PositionRadius>
-			<Direction>7.36402430772</Direction>
-			<DirVariation>0.577234787586</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>GENERAL</UnitEntryType>
-			<Position>
-				<x>-0.332214765101</x>
-				<y>0.694630872483</y>
-			</Position>
-			<PositionRadius>22.0</PositionRadius>
-			<Direction>3.11129889367</Direction>
-			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>ANIMAL FORTIFY(4)</Name>
-		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_FORTIFY</EventType>
-			<EventType>ENTITY_EVENT_SLEEP</EventType>
-		</EventMaskList>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>-0.453020134228</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>15.2643375225</PositionRadius>
-			<Direction>3.94659614784</Direction>
-			<DirVariation>0.583095189485</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>0.302013422819</x>
-				<y>0.473154362416</y>
-			</Position>
-			<PositionRadius>14.8660687473</PositionRadius>
-			<Direction>2.29504632754</Direction>
-			<DirVariation>0.6</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>-0.271812080537</x>
-				<y>0.231543624161</y>
-			</Position>
-			<PositionRadius>18.3575597507</PositionRadius>
-			<Direction>7.36402430772</Direction>
-			<DirVariation>0.577234787586</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>0.352348993289</x>
-				<y>-0.261744966443</y>
-			</Position>
-			<PositionRadius>17.88854382</PositionRadius>
-			<Direction>5.56909460857</Direction>
-			<DirVariation>0.683520299625</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>GENERAL</UnitEntryType>
-			<Position>
-				<x>-0.332214765101</x>
-				<y>0.694630872483</y>
-			</Position>
-			<PositionRadius>22.0</PositionRadius>
-			<Direction>3.11129889367</Direction>
-			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>ANIMAL BATTLE(1)</Name>
-		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
-		</EventMaskList>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>0.0402684563758</x>
-				<y>-0.271812080537</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>GENERAL</UnitEntryType>
-			<Position>
-				<x>-0.332214765101</x>
-				<y>0.694630872483</y>
-			</Position>
-			<PositionRadius>22.0</PositionRadius>
-			<Direction>3.11129889367</Direction>
-			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>ANIMAL BATTLE(2)</Name>
-		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
-		</EventMaskList>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>-0.503355704698</x>
-				<y>-0.503355704698</y>
-			</Position>
-			<PositionRadius>15.8113883008</PositionRadius>
-			<Direction>3.22473388548</Direction>
-			<DirVariation>0.404474968323</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>0.392617449664</x>
-				<y>-0.453020134228</y>
-			</Position>
-			<PositionRadius>15.1327459504</PositionRadius>
-			<Direction>2.94419709374</Direction>
-			<DirVariation>0.40049968789</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>GENERAL</UnitEntryType>
-			<Position>
-				<x>-0.332214765101</x>
-				<y>0.694630872483</y>
-			</Position>
-			<PositionRadius>22.0</PositionRadius>
-			<Direction>3.11129889367</Direction>
-			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>ANIMAL BATTLE(3)</Name>
-		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
-		</EventMaskList>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>-0.0302013422819</x>
-				<y>-0.412751677852</y>
-			</Position>
-			<PositionRadius>15.8113883008</PositionRadius>
-			<Direction>3.22473388548</Direction>
-			<DirVariation>0.404474968323</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>-0.714765100671</x>
-				<y>-0.624161073826</y>
-			</Position>
-			<PositionRadius>15.1327459504</PositionRadius>
-			<Direction>2.94419709374</Direction>
-			<DirVariation>0.40049968789</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>0.694630872483</x>
-				<y>-0.58389261745</y>
-			</Position>
-			<PositionRadius>20.0997512422</PositionRadius>
-			<Direction>3.10161396647</Direction>
-			<DirVariation>0.341760149813</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>GENERAL</UnitEntryType>
-			<Position>
-				<x>-0.332214765101</x>
-				<y>0.694630872483</y>
-			</Position>
-			<PositionRadius>22.0</PositionRadius>
-			<Direction>3.11129889367</Direction>
-			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
-	</UnitFormation>
-	<UnitFormation>
-		<Name>ANIMAL BATTLE(4)</Name>
-		<FormationType>FORMATION_TYPE_ANIMAL</FormationType>
-		<EventMaskList>
-			<EventType>ENTITY_EVENT_BEGIN_COMBAT</EventType>
-		</EventMaskList>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>0.0</x>
-				<y>-0.38255033557</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>0.58389261745</x>
-				<y>-0.48322147651</y>
-			</Position>
-			<PositionRadius>18.6010752377</PositionRadius>
-			<Direction>2.68825395774</Direction>
-			<DirVariation>0.528393792545</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>-0.58389261745</x>
-				<y>-0.523489932886</y>
-			</Position>
-			<PositionRadius>19.6977156036</PositionRadius>
-			<Direction>3.49458304142</Direction>
-			<DirVariation>0.572712842531</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>UNIT</UnitEntryType>
-			<Position>
-				<x>0.322147651007</x>
-				<y>0.010067114094</y>
-			</Position>
-			<PositionRadius>13.0384048104</PositionRadius>
-			<Direction>3.14159265359</Direction>
-			<DirVariation>0.188679622641</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>GENERAL</UnitEntryType>
-			<Position>
-				<x>-0.332214765101</x>
-				<y>0.694630872483</y>
-			</Position>
-			<PositionRadius>22.0</PositionRadius>
-			<Direction>3.11129889367</Direction>
-			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
-		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
 		<Name>1 Units</Name>
@@ -2127,22 +1243,11 @@
 			<EventType>ENTITY_EVENT_END_COMBAT</EventType>
 			<EventType>ENTITY_EVENT_SURRENDER</EventType>
 			<EventType>ENTITY_EVENT_CAPTURED</EventType>
-			<EventType>ENTITY_EVENT_AIRPATROL</EventType>
-			<EventType>ENTITY_EVENT_AIRINTERCEPTION</EventType>
-			<EventType>ENTITY_EVENT_AIRBOMB</EventType>
-			<EventType>ENTITY_EVENT_PARADROP</EventType>
-			<EventType>ENTITY_EVENT_AIRSTRIKE</EventType>
-			<EventType>ENTITY_EVENT_AIRRECON</EventType>
-			<EventType>ENTITY_EVENT_NUKE</EventType>
 			<EventType>ENTITY_EVENT_MULTI_SELECT</EventType>
 			<EventType>ENTITY_EVENT_MULTI_DESELECT</EventType>
 			<EventType>ENTITY_EVENT_GREAT_EVENT</EventType>
 			<EventType>ENTITY_EVENT_PILLAGE</EventType>
-			<EventType>ENTITY_EVENT_SABOTAGE</EventType>
-			<EventType>ENTITY_EVENT_DESTROY</EventType>
-			<EventType>ENTITY_EVENT_STEAL_PLANS</EventType>
 			<EventType>ENTITY_EVENT_BOMBARD</EventType>
-			<EventType>ENTITY_EVENT_DIE_ANIMATION</EventType>
 			<EventType>ENTITY_EVENT_FOUND</EventType>
 			<EventType>ENTITY_EVENT_FORTIFY</EventType>
 			<EventType>ENTITY_EVENT_SENTRY</EventType>
@@ -2168,22 +1273,12 @@
 		<UnitEntry>
 			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>-0.332214765101</x>
+				<x>0.332214765101</x>
 				<y>0.694630872483</y>
 			</Position>
 			<PositionRadius>22.0</PositionRadius>
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
 		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
@@ -2197,22 +1292,11 @@
 			<EventType>ENTITY_EVENT_END_COMBAT</EventType>
 			<EventType>ENTITY_EVENT_SURRENDER</EventType>
 			<EventType>ENTITY_EVENT_CAPTURED</EventType>
-			<EventType>ENTITY_EVENT_AIRPATROL</EventType>
-			<EventType>ENTITY_EVENT_AIRINTERCEPTION</EventType>
-			<EventType>ENTITY_EVENT_AIRBOMB</EventType>
-			<EventType>ENTITY_EVENT_PARADROP</EventType>
-			<EventType>ENTITY_EVENT_AIRSTRIKE</EventType>
-			<EventType>ENTITY_EVENT_AIRRECON</EventType>
-			<EventType>ENTITY_EVENT_NUKE</EventType>
 			<EventType>ENTITY_EVENT_MULTI_SELECT</EventType>
 			<EventType>ENTITY_EVENT_MULTI_DESELECT</EventType>
 			<EventType>ENTITY_EVENT_GREAT_EVENT</EventType>
 			<EventType>ENTITY_EVENT_PILLAGE</EventType>
-			<EventType>ENTITY_EVENT_SABOTAGE</EventType>
-			<EventType>ENTITY_EVENT_DESTROY</EventType>
-			<EventType>ENTITY_EVENT_STEAL_PLANS</EventType>
 			<EventType>ENTITY_EVENT_BOMBARD</EventType>
-			<EventType>ENTITY_EVENT_DIE_ANIMATION</EventType>
 			<EventType>ENTITY_EVENT_FOUND</EventType>
 			<EventType>ENTITY_EVENT_FORTIFY</EventType>
 			<EventType>ENTITY_EVENT_SENTRY</EventType>
@@ -2248,22 +1332,12 @@
 		<UnitEntry>
 			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>-0.332214765101</x>
+				<x>0.332214765101</x>
 				<y>0.694630872483</y>
 			</Position>
 			<PositionRadius>22.0</PositionRadius>
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
 		</UnitEntry>
 	</UnitFormation>
 	<UnitFormation>
@@ -2277,22 +1351,11 @@
 			<EventType>ENTITY_EVENT_END_COMBAT</EventType>
 			<EventType>ENTITY_EVENT_SURRENDER</EventType>
 			<EventType>ENTITY_EVENT_CAPTURED</EventType>
-			<EventType>ENTITY_EVENT_AIRPATROL</EventType>
-			<EventType>ENTITY_EVENT_AIRINTERCEPTION</EventType>
-			<EventType>ENTITY_EVENT_AIRBOMB</EventType>
-			<EventType>ENTITY_EVENT_PARADROP</EventType>
-			<EventType>ENTITY_EVENT_AIRSTRIKE</EventType>
-			<EventType>ENTITY_EVENT_AIRRECON</EventType>
-			<EventType>ENTITY_EVENT_NUKE</EventType>
 			<EventType>ENTITY_EVENT_MULTI_SELECT</EventType>
 			<EventType>ENTITY_EVENT_MULTI_DESELECT</EventType>
 			<EventType>ENTITY_EVENT_GREAT_EVENT</EventType>
 			<EventType>ENTITY_EVENT_PILLAGE</EventType>
-			<EventType>ENTITY_EVENT_SABOTAGE</EventType>
-			<EventType>ENTITY_EVENT_DESTROY</EventType>
-			<EventType>ENTITY_EVENT_STEAL_PLANS</EventType>
 			<EventType>ENTITY_EVENT_BOMBARD</EventType>
-			<EventType>ENTITY_EVENT_DIE_ANIMATION</EventType>
 			<EventType>ENTITY_EVENT_FOUND</EventType>
 			<EventType>ENTITY_EVENT_FORTIFY</EventType>
 			<EventType>ENTITY_EVENT_SENTRY</EventType>
@@ -2338,22 +1401,12 @@
 		<UnitEntry>
 			<UnitEntryType>GENERAL</UnitEntryType>
 			<Position>
-				<x>-0.332214765101</x>
+				<x>0.332214765101</x>
 				<y>0.694630872483</y>
 			</Position>
 			<PositionRadius>22.0</PositionRadius>
 			<Direction>3.11129889367</Direction>
 			<DirVariation>0.440454310911</DirVariation>
-		</UnitEntry>
-		<UnitEntry>
-			<UnitEntryType>SIEGE</UnitEntryType>
-			<Position>
-				<x>-0.573825503356</x>
-				<y>-0.53355704698</y>
-			</Position>
-			<PositionRadius>25.0</PositionRadius>
-			<Direction>2.44685437739</Direction>
-			<DirVariation>0.521536192416</DirVariation>
 		</UnitEntry>
 	</UnitFormation>
 </UnitFormations>

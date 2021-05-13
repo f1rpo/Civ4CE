@@ -13,7 +13,7 @@ class CvUnitController:
 	def __init__(self):
 		pass						# One
 
-						
+
 	def ProcessEvent ( self, pCyUnitEntity, iEvent):
 		"""Controls the logic to react to the event."""
 
@@ -25,7 +25,7 @@ class CvUnitController:
 			iCurrentUnit = 0
 			for i in range(0, pCyUnitEntity.GetSubEntityCount()):
 
-				# 
+				#
 				pCyUnitSubEntity = pCyUnitEntity.GetSubEntity(i);
 				if pCyUnitSubEntity.isDead():
 					continue

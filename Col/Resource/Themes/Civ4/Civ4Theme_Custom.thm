@@ -111,6 +111,8 @@ Button_Plus_Style
 Button_Minus_Style
 Button_ArrowR_Style
 Button_ArrowL_Style
+Button_ArrowU_Style
+Button_ArrowD_Style
 Button_Leader_Style
 Button_Metal_Style
 Button_ToggleRadio_Style
@@ -2252,7 +2254,7 @@ with GFC_Control_Panel
 		{			
 		.StyleId_Border			=	GPropertyId(SF_CtrlTheme_Civ4_Control_Border_StoneLabel_Style);
 		.Flag_NoInnerFill		=	0;
-		.Flag_Title_Pos			=	GFlags(GPanelCtrl, GFC_CF_PANEL_TITLE_POS_OUTSIDE);
+		.Flag_Title_Pos			=	GFlags(GPanelCtrl, GFC_CF_PANEL_TITLE_POS_INSIDE);
 		
 		.Color_Inner			=	SF_CtrlTheme_Civ4_Control_Color_BG;
 		
@@ -2732,7 +2734,7 @@ with GFC_Control_Button
 				layer {
 					DestCombine		= GColorCombine(BlendSource,Disable);
 					LayerFlags		= GFlags(GCtrlBitmapSkin, GFC_BITMAPSKIN_CENTER_BILINEAR, GFC_BITMAPSKIN_SIDES_BILINEAR);
-					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 2, 4, 1, 0);
+					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 4, 4, 1, 0);
 					Margin			= GRectMargin(1,0,24,0);
 					LeftFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
 					RightFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
@@ -2743,7 +2745,7 @@ with GFC_Control_Button
 				layer {
 					DestCombine		= GColorCombine(BlendSource,Disable);
 					LayerFlags		= GFlags(GCtrlBitmapSkin, GFC_BITMAPSKIN_CENTER_BILINEAR, GFC_BITMAPSKIN_SIDES_BILINEAR);
-					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 2, 4, 1, 2);
+					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 4, 4, 1, 2);
 					Margin			= GRectMargin(1,0,24,0);
 					LeftFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
 					RightFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
@@ -2755,7 +2757,7 @@ with GFC_Control_Button
 				layer {
 					DestCombine		= GColorCombine(BlendSource,Disable);
 					LayerFlags		= GFlags(GCtrlBitmapSkin, GFC_BITMAPSKIN_CENTER_BILINEAR, GFC_BITMAPSKIN_SIDES_BILINEAR);
-					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 2, 4, 1, 1);
+					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 4, 4, 1, 1);
 					Margin			= GRectMargin(1,0,24,0);
 					LeftFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
 					RightFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
@@ -2766,7 +2768,7 @@ with GFC_Control_Button
 				layer {
 					DestCombine		= GColorCombine(BlendSource,Disable);
 					LayerFlags		= GFlags(GCtrlBitmapSkin, GFC_BITMAPSKIN_CENTER_BILINEAR, GFC_BITMAPSKIN_SIDES_BILINEAR);
-					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 2, 4, 1, 3);
+					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 4, 4, 1, 3);
 					Margin			= GRectMargin(1,0,24,0);
 					LeftFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
 					RightFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
@@ -2856,7 +2858,7 @@ with GFC_Control_Button
 				layer {
 					DestCombine		= GColorCombine(BlendSource,Disable);
 					LayerFlags		= GFlags(GCtrlBitmapSkin, GFC_BITMAPSKIN_CENTER_BILINEAR, GFC_BITMAPSKIN_SIDES_BILINEAR);
-					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 2, 4, 0, 0);
+					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 4, 4, 0, 0);
 					Margin			= GRectMargin(24,0,1,0);
 					LeftFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
 					RightFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
@@ -2867,7 +2869,7 @@ with GFC_Control_Button
 				layer {
 					DestCombine		= GColorCombine(BlendSource,Disable);
 					LayerFlags		= GFlags(GCtrlBitmapSkin, GFC_BITMAPSKIN_CENTER_BILINEAR, GFC_BITMAPSKIN_SIDES_BILINEAR);
-					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 2, 4, 0, 2);
+					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 4, 4, 0, 2);
 					Margin			= GRectMargin(24,0,1,0);
 					LeftFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
 					RightFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
@@ -2879,7 +2881,7 @@ with GFC_Control_Button
 				layer {
 					DestCombine		= GColorCombine(BlendSource,Disable);
 					LayerFlags		= GFlags(GCtrlBitmapSkin, GFC_BITMAPSKIN_CENTER_BILINEAR, GFC_BITMAPSKIN_SIDES_BILINEAR);
-					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 2, 4, 0, 1);
+					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 4, 4, 0, 1);
 					Margin			= GRectMargin(24,0,1,0);
 					LeftFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
 					RightFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
@@ -2890,7 +2892,255 @@ with GFC_Control_Button
 				layer {
 					DestCombine		= GColorCombine(BlendSource,Disable);
 					LayerFlags		= GFlags(GCtrlBitmapSkin, GFC_BITMAPSKIN_CENTER_BILINEAR, GFC_BITMAPSKIN_SIDES_BILINEAR);
-					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 2, 4, 0, 3);
+					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 4, 4, 0, 3);
+					Margin			= GRectMargin(24,0,1,0);
+					LeftFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
+					RightFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
+				}
+			}
+			.Focus					= .Rollover;
+			.FocusPress				= .Press;
+			.FocusRollover			= .Rollover;
+			.FocusDisable			= .Disable;
+
+			.Toggle					= .Press;
+			.ToggleRollover			= .Press;
+			.TogglePress			= .Rollover;
+			.ToggleDisable			= .Disable;
+			.ToggleFocus			= .FocusPress;
+			.ToggleFocusRollover	= .FocusPress;
+			.ToggleFocusPress		= .FocusRollover;
+			.ToggleFocusDisable		= .FocusDisable;
+
+			.Inactive				= .Default;
+			.InactiveRollover		= .Rollover;
+			.InactivePress			= .Press;
+			.InactiveDisable		= .Disable;
+			.InactiveToggle			= .Toggle;
+			.InactiveToggleRollover	= .TogglePress;
+			.InactiveTogglePress	= .ToggleRollover;
+			.InactiveToggleDisable	= .ToggleDisable;
+
+			.Winoff					= .Default;
+			.WinoffRollover			= .Rollover;
+			.WinoffPress			= .Press;
+			.WinoffDisable			= .Disable;
+			.WinoffToggle			= .Toggle;
+			.WinoffToggleRollover	= .TogglePress;
+			.WinoffTogglePress		= .ToggleRollover;
+			.WinoffToggleDisable	= .ToggleDisable;
+		}
+
+		map GFC_CtrlTheme_Bitmap_Control_Button					= GFC_Control_DefaultButton_Style;
+		map GFC_Control											= GFC_Control_DefaultButton_Style;
+	}
+	
+	// Main Menu - Bottom bar TEXT buttons (arrow up)
+	style SF_CtrlTheme_Civ4_Control_Button_Main_ArrowU_Style
+	{
+		GFC_Control_Renderer_Control				=	GFC_CtrlTheme_Bitmap_Control_Button_Renderer_ControlStandard;		
+		GFC_Control_Flag_Mask_InvalidateControl		=	GFlags(GCtrl, GFC_CF_ACTIVE, GFC_CF_DISABLED, GFC_CF_TRANSPARENT, GFC_CF_TOPLAYER);
+		.Size_BorderMargin							=	GRectMargin(25,0,0,0);
+		
+		with .Color_Text
+		{
+			.Default						=	GFC_Control_Color_Text_Default;
+			.Press							=	GColor(255,223, 93);
+			.Disable						=	GFC_Control_Color_Text_Disable;
+			.Rollover						=	GColor(179,228,255);
+			.Focus							=	.Rollover;
+			.FocusRollover					=	.Rollover;
+			.Toggle							=	.Default;		
+			.TogglePress					=	.Press;			
+			.ToggleDisable					=	.Disable;		
+			.ToggleRollover					=	.Rollover;		
+			.ToggleFocus					=	.Focus;			
+			.ToggleFocusRollover			=	.FocusRollover;	
+		}
+
+		with .Color_TextShadow
+		{
+			.Default						=	GFC_Control_Color_TextShadow_Default;
+			.Press							=	.Default;
+			.Disable						=	GFC_Control_Color_TextShadow_Disable;
+			.Rollover						=	.Default;
+			.Focus							=	.Default;
+			.FocusRollover					=	.Default;
+			.Toggle							=	.Default;		
+			.TogglePress					=	.Press;			
+			.ToggleDisable					=	.Disable;		
+			.ToggleRollover					=	.Rollover;		
+			.ToggleFocus					=	.Focus;			
+			.ToggleFocusRollover			=	.FocusRollover;	
+		}
+
+		// Image skins
+		with GFC_CtrlTheme_Bitmap_Control_Button_Skin
+		{
+			.Default
+			{
+				layer {
+					DestCombine		= GColorCombine(BlendSource,Disable);
+					LayerFlags		= GFlags(GCtrlBitmapSkin, GFC_BITMAPSKIN_CENTER_BILINEAR, GFC_BITMAPSKIN_SIDES_BILINEAR);
+					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 4, 4, 2, 0);
+					Margin			= GRectMargin(24,0,1,0);
+					LeftFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
+					RightFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
+				}
+			}
+			.Press	//NOTE: THIS IS NOT VISIBLE DURRING TESTING IF BUTTON HAS A FOCUS AND IT IS NOT MAPPED TO PRESS STATE.
+			{
+				layer {
+					DestCombine		= GColorCombine(BlendSource,Disable);
+					LayerFlags		= GFlags(GCtrlBitmapSkin, GFC_BITMAPSKIN_CENTER_BILINEAR, GFC_BITMAPSKIN_SIDES_BILINEAR);
+					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 4, 4, 2, 2);
+					Margin			= GRectMargin(24,0,1,0);
+					LeftFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
+					RightFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
+				}
+
+			}
+			.Rollover
+			{
+				layer {
+					DestCombine		= GColorCombine(BlendSource,Disable);
+					LayerFlags		= GFlags(GCtrlBitmapSkin, GFC_BITMAPSKIN_CENTER_BILINEAR, GFC_BITMAPSKIN_SIDES_BILINEAR);
+					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 4, 4, 2, 1);
+					Margin			= GRectMargin(24,0,1,0);
+					LeftFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
+					RightFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
+				}
+			}
+			.Disable
+			{
+				layer {
+					DestCombine		= GColorCombine(BlendSource,Disable);
+					LayerFlags		= GFlags(GCtrlBitmapSkin, GFC_BITMAPSKIN_CENTER_BILINEAR, GFC_BITMAPSKIN_SIDES_BILINEAR);
+					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 4, 4, 2, 3);
+					Margin			= GRectMargin(24,0,1,0);
+					LeftFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
+					RightFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
+				}
+			}
+			.Focus					= .Rollover;
+			.FocusPress				= .Press;
+			.FocusRollover			= .Rollover;
+			.FocusDisable			= .Disable;
+
+			.Toggle					= .Press;
+			.ToggleRollover			= .Press;
+			.TogglePress			= .Rollover;
+			.ToggleDisable			= .Disable;
+			.ToggleFocus			= .FocusPress;
+			.ToggleFocusRollover	= .FocusPress;
+			.ToggleFocusPress		= .FocusRollover;
+			.ToggleFocusDisable		= .FocusDisable;
+
+			.Inactive				= .Default;
+			.InactiveRollover		= .Rollover;
+			.InactivePress			= .Press;
+			.InactiveDisable		= .Disable;
+			.InactiveToggle			= .Toggle;
+			.InactiveToggleRollover	= .TogglePress;
+			.InactiveTogglePress	= .ToggleRollover;
+			.InactiveToggleDisable	= .ToggleDisable;
+
+			.Winoff					= .Default;
+			.WinoffRollover			= .Rollover;
+			.WinoffPress			= .Press;
+			.WinoffDisable			= .Disable;
+			.WinoffToggle			= .Toggle;
+			.WinoffToggleRollover	= .TogglePress;
+			.WinoffTogglePress		= .ToggleRollover;
+			.WinoffToggleDisable	= .ToggleDisable;
+		}
+
+		map GFC_CtrlTheme_Bitmap_Control_Button					= GFC_Control_DefaultButton_Style;
+		map GFC_Control											= GFC_Control_DefaultButton_Style;
+	}
+	
+	// Main Menu - Bottom bar TEXT buttons (arrow up)
+	style SF_CtrlTheme_Civ4_Control_Button_Main_ArrowD_Style
+	{
+		GFC_Control_Renderer_Control				=	GFC_CtrlTheme_Bitmap_Control_Button_Renderer_ControlStandard;		
+		GFC_Control_Flag_Mask_InvalidateControl		=	GFlags(GCtrl, GFC_CF_ACTIVE, GFC_CF_DISABLED, GFC_CF_TRANSPARENT, GFC_CF_TOPLAYER);
+		.Size_BorderMargin							=	GRectMargin(25,0,0,0);
+		
+		with .Color_Text
+		{
+			.Default						=	GFC_Control_Color_Text_Default;
+			.Press							=	GColor(255,223, 93);
+			.Disable						=	GFC_Control_Color_Text_Disable;
+			.Rollover						=	GColor(179,228,255);
+			.Focus							=	.Rollover;
+			.FocusRollover					=	.Rollover;
+			.Toggle							=	.Default;		
+			.TogglePress					=	.Press;			
+			.ToggleDisable					=	.Disable;		
+			.ToggleRollover					=	.Rollover;		
+			.ToggleFocus					=	.Focus;			
+			.ToggleFocusRollover			=	.FocusRollover;	
+		}
+
+		with .Color_TextShadow
+		{
+			.Default						=	GFC_Control_Color_TextShadow_Default;
+			.Press							=	.Default;
+			.Disable						=	GFC_Control_Color_TextShadow_Disable;
+			.Rollover						=	.Default;
+			.Focus							=	.Default;
+			.FocusRollover					=	.Default;
+			.Toggle							=	.Default;		
+			.TogglePress					=	.Press;			
+			.ToggleDisable					=	.Disable;		
+			.ToggleRollover					=	.Rollover;		
+			.ToggleFocus					=	.Focus;			
+			.ToggleFocusRollover			=	.FocusRollover;	
+		}
+
+		// Image skins
+		with GFC_CtrlTheme_Bitmap_Control_Button_Skin
+		{
+			.Default
+			{
+				layer {
+					DestCombine		= GColorCombine(BlendSource,Disable);
+					LayerFlags		= GFlags(GCtrlBitmapSkin, GFC_BITMAPSKIN_CENTER_BILINEAR, GFC_BITMAPSKIN_SIDES_BILINEAR);
+					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 4, 4, 3, 0);
+					Margin			= GRectMargin(24,0,1,0);
+					LeftFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
+					RightFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
+				}
+			}
+			.Press	//NOTE: THIS IS NOT VISIBLE DURRING TESTING IF BUTTON HAS A FOCUS AND IT IS NOT MAPPED TO PRESS STATE.
+			{
+				layer {
+					DestCombine		= GColorCombine(BlendSource,Disable);
+					LayerFlags		= GFlags(GCtrlBitmapSkin, GFC_BITMAPSKIN_CENTER_BILINEAR, GFC_BITMAPSKIN_SIDES_BILINEAR);
+					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 4, 4, 3, 2);
+					Margin			= GRectMargin(24,0,1,0);
+					LeftFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
+					RightFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
+				}
+
+			}
+			.Rollover
+			{
+				layer {
+					DestCombine		= GColorCombine(BlendSource,Disable);
+					LayerFlags		= GFlags(GCtrlBitmapSkin, GFC_BITMAPSKIN_CENTER_BILINEAR, GFC_BITMAPSKIN_SIDES_BILINEAR);
+					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 4, 4, 3, 1);
+					Margin			= GRectMargin(24,0,1,0);
+					LeftFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
+					RightFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
+				}
+			}
+			.Disable
+			{
+				layer {
+					DestCombine		= GColorCombine(BlendSource,Disable);
+					LayerFlags		= GFlags(GCtrlBitmapSkin, GFC_BITMAPSKIN_CENTER_BILINEAR, GFC_BITMAPSKIN_SIDES_BILINEAR);
+					Image			= GBitmap("Civ4/Custom/button_arrows.tga", HVGrid, 4, 4, 3, 3);
 					Margin			= GRectMargin(24,0,1,0);
 					LeftFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);
 					RightFlags 		= GFlags(GCtrlBitmapSkinSection, GFC_BITMAPSKIN_SECTION_VFIXED_CENTER);

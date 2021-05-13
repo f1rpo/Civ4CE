@@ -5,7 +5,7 @@ def parseText(argsList):
 	print szMsg
 	print iValueList
 	return 0
-	
+
 def toggleDebugMode():
 	import CvDebugTools
 	CvDebugTools.toggleDebugMode()

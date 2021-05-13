@@ -3,8 +3,8 @@
 <!-- -->
 <!-- CityLSystem Schema -->
 <!-- -->
-<!-- Defines an arbitrary Civ4 LSystem -->
-<!-- When debugging LSystems, refer to Civ4/Logs/LSystem.log for help -->
+<!-- Defines an arbitrary LSystem -->
+<!-- When debugging LSystems, refer to Colonization/Logs/LSystem.log for help -->
 <Schema xmlns="urn:schemas-microsoft-com:xml-data" xmlns:dt="urn:schemas-microsoft-com:datatypes">
 	<!-- base types-->
 	<ElementType name="Filename" content="textOnly"/>
@@ -36,7 +36,7 @@
 		<element type="Scale" minOccurs="0" maxOccurs="1"/>
 	</ElementType>
 	<!-- a production encodes a split of a node into multiple child nodes -->
-	<!-- Civ4\Tools\Graphics\LSysTool can be used to create productions from bitmaps -->
+	<!-- Colonization\Tools\Graphics\LSysTool can be used to create productions from bitmaps -->
 	<ElementType name="LProduction">
 		<AttributeType name="From" required="yes"/>
 		<attribute type="From"/>
@@ -57,7 +57,7 @@
 		<element type="Scale" minOccurs="0" maxOccurs="1"/>
 	</ElementType>
 	<!-- a node can contain ArtRefs, e.g. plain-old-NIFs, as well as named references to entities ...
-	     how these entity references are mapped from strings to actual CvEntities is determined by the CvLSystem 
+	     how these entity references are mapped from strings to actual CvEntities is determined by the CvLSystem
 	     runtime
 	  -->
 	<ElementType name="LNode">

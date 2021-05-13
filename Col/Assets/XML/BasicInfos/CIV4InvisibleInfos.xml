@@ -5,14 +5,5 @@
 <!-- -->
 <!-- Basic Infos -->
 <Civ4InvisibleInfos xmlns="x-schema:CIV4BasicInfoSchema.xml">
-	<InvisibleInfos>
-		<InvisibleInfo>
-			<Type>INVISIBLE_SUBMARINE</Type>
-			<Description>TXT_KEY_INVISIBLE_SUBMARINE</Description>
-		</InvisibleInfo>
-		<InvisibleInfo>
-			<Type>INVISIBLE_STEALTH</Type>
-			<Description>TXT_KEY_INVISIBLE_STEALTH_NAVY</Description>
-		</InvisibleInfo>
-	</InvisibleInfos>
+	<InvisibleInfos/>
 </Civ4InvisibleInfos>

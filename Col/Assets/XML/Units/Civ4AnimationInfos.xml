@@ -192,44 +192,9 @@
 			<BaseID>15</BaseID>
 		</AnimationCategory>
 		<AnimationCategory>
-			<Type>ANIMCAT_STEAL_PLANS</Type>
-			<DefaultTo>ANIMCAT_IDLE</DefaultTo>
-			<BaseID>16</BaseID>
-		</AnimationCategory>
-		<AnimationCategory>
-			<Type>ANIMCAT_SABOTAGE</Type>
-			<DefaultTo>ANIMCAT_IDLE</DefaultTo>
-			<BaseID>17</BaseID>
-		</AnimationCategory>
-		<AnimationCategory>
 			<Type>ANIMCAT_SURRENDER</Type>
 			<DefaultTo>ANIMCAT_IDLE</DefaultTo>
 			<BaseID>2</BaseID>
-		</AnimationCategory>
-		<AnimationCategory>
-			<Type>ANIMCAT_AIRPATROL</Type>
-			<DefaultTo>ANIMCAT_MOVE</DefaultTo>
-			<BaseID>70</BaseID>
-		</AnimationCategory>
-		<AnimationCategory>
-			<Type>ANIMCAT_AIRFADEIN</Type>
-			<DefaultTo>ANIMCAT_MOVE</DefaultTo>
-			<BaseID>71</BaseID>
-		</AnimationCategory>
-		<AnimationCategory>
-			<Type>ANIMCAT_AIRFADEOUT</Type>
-			<DefaultTo>ANIMCAT_MOVE</DefaultTo>
-			<BaseID>72</BaseID>
-		</AnimationCategory>
-		<AnimationCategory>
-			<Type>ANIMCAT_AIRSTRIKE</Type>
-			<DefaultTo>ANIMCAT_RANGED_STRIKE</DefaultTo>
-			<BaseID>42</BaseID>
-		</AnimationCategory>
-		<AnimationCategory>
-			<Type>ANIMCAT_AIRBOMB</Type>
-			<DefaultTo>ANIMCAT_RANGED_STRIKE</DefaultTo>
-			<BaseID>40</BaseID>
 		</AnimationCategory>
 		<AnimationCategory>
 			<Type>ANIMCAT_LEADER_COMMAND</Type>

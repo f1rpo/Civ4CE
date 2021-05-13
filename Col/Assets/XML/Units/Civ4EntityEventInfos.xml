@@ -47,49 +47,6 @@
 			<bUpdateFormation>0</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTITY_EVENT_AIRPATROL</Type>
-			<AnimationPathTypes>
-				<AnimationPathType>ANIMATIONPATH_AIRPATROL</AnimationPathType>
-			</AnimationPathTypes>
-			<bUpdateFormation>1</bUpdateFormation>
-		</EntityEventInfo>
-		<EntityEventInfo>
-			<Type>ENTITY_EVENT_AIRINTERCEPTION</Type>
-			<AnimationPathTypes>
-				<AnimationPathType>ANIMATIONPATH_IDLE</AnimationPathType>
-			</AnimationPathTypes>
-			<bUpdateFormation>1</bUpdateFormation>
-		</EntityEventInfo>
-		<EntityEventInfo>
-			<Type>ENTITY_EVENT_AIRBOMB</Type>
-			<AnimationPathTypes>
-				<AnimationPathType>ANIMATIONPATH_AIRBOMB</AnimationPathType>
-			</AnimationPathTypes>
-			<bUpdateFormation>1</bUpdateFormation>
-		</EntityEventInfo>
-		<EntityEventInfo>
-			<Type>ENTITY_EVENT_PARADROP</Type>
-			<AnimationPathTypes>
-				<AnimationPathType>ANIMATIONPATH_AIRSTRIKE</AnimationPathType>
-			</AnimationPathTypes>
-			<bUpdateFormation>1</bUpdateFormation>
-		</EntityEventInfo>
-		<EntityEventInfo>
-			<Type>ENTITY_EVENT_AIRSTRIKE</Type>
-			<AnimationPathTypes>
-				<AnimationPathType>ANIMATIONPATH_AIRSTRIKE</AnimationPathType>
-			</AnimationPathTypes>
-			<bUpdateFormation>1</bUpdateFormation>
-		</EntityEventInfo>
-		<EntityEventInfo>
-			<Type>ENTITY_EVENT_AIRRECON</Type>
-			<bUpdateFormation>1</bUpdateFormation>
-		</EntityEventInfo>
-		<EntityEventInfo>
-			<Type>ENTITY_EVENT_NUKE</Type>
-			<bUpdateFormation>1</bUpdateFormation>
-		</EntityEventInfo>
-		<EntityEventInfo>
 			<Type>ENTITY_EVENT_MULTI_SELECT</Type>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
@@ -115,27 +72,6 @@
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>
-			<Type>ENTITY_EVENT_SABOTAGE</Type>
-			<AnimationPathTypes>
-				<AnimationPathType>ANIMATIONPATH_SABOTAGE</AnimationPathType>
-			</AnimationPathTypes>
-			<bUpdateFormation>1</bUpdateFormation>
-		</EntityEventInfo>
-		<EntityEventInfo>
-			<Type>ENTITY_EVENT_DESTROY</Type>
-			<AnimationPathTypes>
-				<AnimationPathType>ANIMATIONPATH_DESTROY</AnimationPathType>
-			</AnimationPathTypes>
-			<bUpdateFormation>1</bUpdateFormation>
-		</EntityEventInfo>
-		<EntityEventInfo>
-			<Type>ENTITY_EVENT_STEAL_PLANS</Type>
-			<AnimationPathTypes>
-				<AnimationPathType>ANIMATIONPATH_STEAL_PLANS</AnimationPathType>
-			</AnimationPathTypes>
-			<bUpdateFormation>1</bUpdateFormation>
-		</EntityEventInfo>
-		<EntityEventInfo>
 			<Type>ENTITY_EVENT_BOMBARD</Type>
 			<AnimationPathTypes>
 				<AnimationPathType>ANIMATIONPATH_RANGED_STRIKE</AnimationPathType>
@@ -143,13 +79,6 @@
 			<EffectTypes>
 				<EffectType>EFFECT_EXPLOSION_DIRT</EffectType>
 			</EffectTypes>
-			<bUpdateFormation>1</bUpdateFormation>
-		</EntityEventInfo>
-		<EntityEventInfo>
-			<Type>ENTITY_EVENT_DIE_ANIMATION</Type>
-			<AnimationPathTypes>
-				<AnimationPathType>ANIMATIONPATH_RANGED_DIE</AnimationPathType>
-			</AnimationPathTypes>
 			<bUpdateFormation>1</bUpdateFormation>
 		</EntityEventInfo>
 		<EntityEventInfo>

@@ -8,21 +8,21 @@ class CvIntEditorPanel( wx.Panel ):
 
 	def __init__( self, kParent, szVarName ):
 		wx.Panel.__init__( self, kParent )
-		
+
 		self.hLabel = wx.StaticText( self, -1, szVarName )
 		self.hEdit = wx.TextCtrl( self, value = str( gVDS.getValueInt( szVarName ) ) )
 		self.szVarName = szVarName;
-		
+
 		self.hSizer = wx.BoxSizer( wx.HORIZONTAL )
 		self.hSizer.Add( self.hLabel, 1, wx.EXPAND | wx.ALL, 4 )
 		self.hSizer.Add( self.hEdit, 1, wx.ALIGN_RIGHT )
 		self.SetSizer( self.hSizer )
-		
+
 		self.Bind( wx.EVT_TEXT_ENTER, self.OnUpdateText, self.hEdit )
-		
+
 	def OnUpdateText( self, kEvent ):
 		gVDS.setValueInt( self.szVarName, int(self.hEdit.GetLineText( 0 )) )
-		
+
 class CvFloatEditorPanel( wx.Panel ):
 
 	def __init__( self, kParent, szVarName ):
@@ -63,9 +63,9 @@ class CvStringEditorPanel( wx.Panel ):
 class CvDefineEditorFrame( wx.Frame ):
 
 	ID_VARCOMBO = 1000
-	
+
 	def __init__( self ):
-		wx.Frame.__init__( self, None, -1, "Info Editor", (-1,-1), (-1,-1),	
+		wx.Frame.__init__( self, None, -1, "Info Editor", (-1,-1), (-1,-1),
 			wx.MAXIMIZE_BOX | wx.CLOSE_BOX | wx.SYSTEM_MENU | wx.CAPTION | wx.RESIZE_BORDER | wx.VSCROLL  )
 
 		self.hSizer = wx.BoxSizer( wx.VERTICAL )
@@ -74,14 +74,14 @@ class CvDefineEditorFrame( wx.Frame ):
 		self.SetSizer( self.hSizer )
 
 		szVarName = gVDS.getFirstVariableName()
-		
+
 		while szVarName != "":
 			self.hVarCombo.Append( szVarName )
 			szVarName = gVDS.getNextVariableName()
-			
-		
+
+
 		self.Bind( wx.EVT_TEXT, self.OnComboSelection, self.hVarCombo )
-		
+
 	def OnComboSelection( self, kEvent ):
 		szVarName = self.hVarCombo.GetValue()
 		if szVarName != "":
@@ -93,7 +93,7 @@ class CvDefineEditorFrame( wx.Frame ):
 				hPanel = CvFloatEditorPanel( self, szVarName )
 			elif szVarType == "string":
 				hPanel = CvStringEditorPanel( self, szVarName )
-				
+
 			if hPanel != None:
 				self.hSizer.Add( hPanel, 1, wx.EXPAND )
 		self.hSizer.Layout()

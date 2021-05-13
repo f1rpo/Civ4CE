@@ -5,19 +5,7 @@
 <!-- Global Defines -->
 <Civ4Defines xmlns="x-schema:CIV4GlobalDefinesSchema.xml">
 	<Define>
-		<DefineName>USE_CANNOT_FOUND_CITY_CALLBACK</DefineName>
-		<iDefineIntVal>0</iDefineIntVal>
-	</Define>
-	<Define>
 		<DefineName>USE_CAN_FOUND_CITIES_ON_WATER_CALLBACK</DefineName>
-		<iDefineIntVal>0</iDefineIntVal>
-	</Define>
-	<Define>
-		<DefineName>USE_IS_PLAYER_RESEARCH_CALLBACK</DefineName>
-		<iDefineIntVal>0</iDefineIntVal>
-	</Define>
-	<Define>
-		<DefineName>USE_CAN_RESEARCH_CALLBACK</DefineName>
 		<iDefineIntVal>0</iDefineIntVal>
 	</Define>
 	<Define>
@@ -38,10 +26,6 @@
 	</Define>
 	<Define>
 		<DefineName>USE_CAN_DECLARE_WAR_CALLBACK</DefineName>
-		<iDefineIntVal>0</iDefineIntVal>
-	</Define>
-	<Define>
-		<DefineName>USE_CANNOT_RESEARCH_CALLBACK</DefineName>
 		<iDefineIntVal>0</iDefineIntVal>
 	</Define>
 	<Define>
@@ -77,10 +61,6 @@
 		<iDefineIntVal>0</iDefineIntVal>
 	</Define>
 	<Define>
-		<DefineName>USE_CANNOT_SPREAD_RELIGION_CALLBACK</DefineName>
-		<iDefineIntVal>0</iDefineIntVal>
-	</Define>
-	<Define>
 		<DefineName>USE_FINISH_TEXT_CALLBACK</DefineName>
 		<iDefineIntVal>0</iDefineIntVal>
 	</Define>
@@ -90,7 +70,11 @@
 	</Define>
 	<Define>
 		<DefineName>USE_ON_UNIT_SELECTED_CALLBACK</DefineName>
-		<iDefineIntVal>0</iDefineIntVal>
+		<iDefineIntVal>1</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>USE_ON_MISSIONARY_CONVERTED_UNIT_CALLBACK</DefineName>
+		<iDefineIntVal>1</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>USE_ON_UPDATE_CALLBACK</DefineName>

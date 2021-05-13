@@ -2,7 +2,6 @@
 ## Copyright Firaxis Games 2005
 from CvPythonExtensions import *
 import CvUtil
-import Popup as PyPopup
 
 #globals
 gc = CyGlobalContext()
@@ -14,7 +13,7 @@ gc = CyGlobalContext()
 # This allows you to specify a strFunctionName. If the player clicks that button then this file
 # will be called with the specified function name.
 
-# ie: addPythonButton( self, strFunctionName, strButtonText, strHelpText, strArtPointer = "Art\Interface\Popups\PopupRadioButton.kfm", iData1 = -1, iData2 = -1, bOption = True):	
+# ie: addPythonButton( self, strFunctionName, strButtonText, strHelpText, strArtPointer = "Art\Interface\Popups\PopupRadioButton.kfm", iData1 = -1, iData2 = -1, bOption = True):
 
 def initTestPopup():
 
@@ -130,7 +129,7 @@ def initPythonTestPopup():
 		szListBoxString = "ListBox String " + str(i)
 		popup.addListBoxString( szListBoxString, i, 1 )
 	popup.setSelectedListBoxString( 1, 1 )
-	
+
 	# add a dds
 	popup.addPythonDDS( "art/interface/buttons/unit/Caravel.dds", "DDS Help text", 280, 100, 32, 32 )
 

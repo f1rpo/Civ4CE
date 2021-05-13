@@ -20,10 +20,6 @@
 	<ElementType name="FunctionTypes" content="eltOnly">
 		<element type="FunctionType" maxOccurs="*"/>
 	</ElementType>
-	<ElementType name="FlavorType" content="textOnly"/>
-	<ElementType name="FlavorTypes" content="eltOnly">
-		<element type="FlavorType" maxOccurs="*"/>
-	</ElementType>
 	<ElementType name="ArtStyleType" content="textOnly"/>
 	<ElementType name="ArtStyleTypes" content="eltOnly">
 		<element type="ArtStyleType" maxOccurs="*"/>
@@ -67,7 +63,6 @@
 	<ElementType name="Civ4Types" content="eltOnly">
 		<element type="AnimationOperatorTypes"/>
 		<element type="FunctionTypes"/>
-		<element type="FlavorTypes"/>
 		<element type="ArtStyleTypes"/>
 		<element type="CitySizeTypes"/>
 		<element type="ContactTypes"/>

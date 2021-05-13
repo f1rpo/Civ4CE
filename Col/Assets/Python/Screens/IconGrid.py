@@ -17,22 +17,22 @@ class IconData:
 		self.image = sImage
 		self.widgetType = widgetType
 		self.data = iData
-	
+
 
 class CellData:
 
 	def __init__(self):
 		self.icons = []
 		self.text = ""
-	
+
 	def addIcon(self, sImage, widgetType, iData):
 		self.icons.append(IconData(sImage, widgetType, iData))
-	
+
 	def setText(self, sText):
 		self.text = sText
-	
-	
-	
+
+
+
 class RowData:
 
 	def __init__(self, sRowHeader, sMessage, iNumColumns):
@@ -41,14 +41,14 @@ class RowData:
 		self.cells = []
 		for i in range(iNumColumns):
 			self.cells.append(CellData())
-	
+
 	def addIcon(self, iColumnIndex, sImage, widgetType, iData):
 		self.cells[iColumnIndex].addIcon(sImage, widgetType, iData)
-	
+
 	def setText(self, iColumnIndex, sText):
 		self.cells[iColumnIndex].setText(sText)
-	
-	
+
+
 
 class ColumnGroup:
 
@@ -61,7 +61,7 @@ GRID_MULTI_LIST_COLUMN = 1
 GRID_TEXT_COLUMN = 2
 
 class IconGrid:
-	
+
 	def __init__(self, sWidgetId, screen, iX, iY, iWidth, iHeight, columns, bUseSmallIcons, bShowRowHeader, bShowRowBorder):
 		self.WIDGET_ID = sWidgetId
 		self.NEXT_WIDGET_ID = sWidgetId + "IG"
@@ -80,10 +80,10 @@ class IconGrid:
 		self.data = []
 		self.scrollPosition = 0
 		self.textColWidth = {}
-		
+
 		for i in range(len(self.columns)):
 			self.header.append("")
-	
+
 		self.groupTitleHeight = 24
 		self.headerHeight = 24
 		self.iconColWidth = 68
@@ -92,50 +92,50 @@ class IconGrid:
 		self.scrollArrowSize = 24
 		self.rowBorderWidth = 3
 		self.scrollSpace = 3
-		
+
 		self.groupBorder = 10
 		self.groupLabelOffset = "  "
 		self.minColSpace = 3
 		self.minRowSpace = 0
-		
+
 		self.SCROLL_UP = 1
 		self.SCROLL_DOWN = 2
-		
+
 
 	def setGroupBorder(self, iVal):
 		self.groupBorder = iVal
-	
-		
+
+
 	def setGroupLabelOffset(self, sVal):
 		self.groupLabelOffset = sVal
-		
-		
+
+
 	def setMinColumnSpace(self, iVal):
 		self.minColSpace = iVal
-	
-		
+
+
 	def	setMinRowSpace(self, iVal):
 		self.minRowSpace = iVal
-		
-		
+
+
 	def setSize(self, iWidth, iHeight):
 		self.width = iWidth
 		self.height = iHeight
 
-	
+
 	def setPosition(self, iX, iY):
 		self.xStart = iX
 		self.yStart = iY
 
-	
+
 	def getPrefferedWidth(self):
 		self.calculateLayout()
-		
+
 		prefferedWidth = self.scrollArrowSize + self.scrollSpace + self.minColSpace * (len(self.columns) - 1)
 		for colGroup in self.columnGroups:
 			if (colGroup.label != ""):
 				prefferedWidth += self.groupBorder * 2
-		
+
 		for index in range(len(self.columns)):
 			if (self.columns[index] == GRID_ICON_COLUMN):
 				prefferedWidth += self.iconColWidth
@@ -143,17 +143,17 @@ class IconGrid:
 				prefferedWidth += self.multiListColWidth
 			elif (self.columns[index] == GRID_TEXT_COLUMN):
 				prefferedWidth += self.textColWidth[index]
-		
+
 		if (self.showRowBorder):
 			prefferedWidth += self.rowBorderWidth * 2
 		return prefferedWidth
 
-			
-	
+
+
 	def getPrefferedHeight(self):
 		self.calculateLayout()
 		initHeight = self.totalRowHeight * self.numRows + self.minRowSpace * (self.numRows - 1)
-		
+
 		if (len(self.columnGroups) > 0):
 			if (not self.showRowHeader):
 				return initHeight + self.colGroupHeight + 10
@@ -161,20 +161,20 @@ class IconGrid:
 				return initHeight + self.colGroupHeight + 5
 		else:
 			return initHeight + self.headerHeight
-	
-	
+
+
 	def setHeader(self, iCol, sLabel):
 		self.header[iCol] = sLabel
-		
-		
+
+
 	def setTextColWidth(self, iCol, iWidth):
 		self.textColWidth[iCol] = iWidth
-		
-		
+
+
 	def createColumnGroup(self, sLabel, iLength):
 		self.columnGroups.append(ColumnGroup(sLabel, iLength))
 
-	
+
 	def createGrid(self):
 		self.calculateLayout()
 		self.addControls()
@@ -182,32 +182,32 @@ class IconGrid:
 
 	def appendRow(self, sRowHeader, sMessage):
 		self.data.append(RowData(sRowHeader, sMessage, len(self.columns)))
-	
-	
+
+
  	def addIcon(self, iRowIndex, iColumnIndex, sImage, widgetType, iData):
  		self.data[iRowIndex].addIcon(iColumnIndex, sImage, widgetType, iData)
-	
- 		
+
+
  	def setText(self, iRowIndex, iColumnIndex, sText):
  		self.data[iRowIndex].setText(iColumnIndex, sText)
- 		
- 		
+
+
 	def clearData(self):
 		self.scrollPosition = 0
 		self.data = []
-	
-	
+
+
 	def scrollUp(self):
 		self.scrollPosition = self.scrollPosition - 1
 		self.refresh()
-	
-	
+
+
 	def scrollDown(self):
 		self.scrollPosition = self.scrollPosition + 1
 		self.refresh()
-	
-	
-	
+
+
+
 	def refresh(self):
 		# check if scrollPosistion is valid and show/hide scroll buttons
 		if (self.scrollPosition <= 0):
@@ -215,7 +215,7 @@ class IconGrid:
 			self.scrollPosition = 0
 		else:
 			self.screen.show(self.scrollUpArrow)
-		
+
 		if (len(self.data) - self.numRows <= 0):
 			self.screen.hide(self.scrollDownArrow)
 		elif (self.scrollPosition >= len(self.data) - self.numRows):
@@ -227,7 +227,7 @@ class IconGrid:
 		maxIndex = min(self.numRows, len(self.data))
  		for rowIndex in range(maxIndex):
  			rowData = self.data[self.scrollPosition + rowIndex]
- 			
+
 			currentX = self.xStart
 			currentY = self.firstRowY + (self.totalRowHeight + self.rowSpace) * rowIndex + 2
 			if (self.showRowBorder):
@@ -239,13 +239,13 @@ class IconGrid:
 									, "<font=3>" + rowData.rowHeader + "</font>", CvUtil.FONT_LEFT_JUSTIFY
 									, self.xStart + 5, self.firstRowY + (self.totalRowHeight + self.rowSpace) * rowIndex - 3
 									, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
- 			
+
 			startIndex = 0
 			for groupIndex in range(len(self.columnGroups)):
 				colGroup = self.columnGroups[groupIndex]
 				if (colGroup.label != ""):
 					currentX += self.groupBorder
-				
+
 				for offset in range(colGroup.length):
 					if (self.columns[startIndex + offset] == GRID_ICON_COLUMN):
 						iconData = rowData.cells[startIndex + offset].icons[0]
@@ -268,11 +268,11 @@ class IconGrid:
 											, "<font=3>" + text + "</font>", CvUtil.FONT_LEFT_JUSTIFY
 											, currentX + 6, textY, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 						currentX += self.textColWidth[startIndex + offset] + self.colSpace
-						
+
 				startIndex += colGroup.length
 				if (colGroup.label != ""):
-					currentX += self.groupBorder		
-			
+					currentX += self.groupBorder
+
 			for offset in range(len(self.columns) - startIndex):
 				if (self.columns[startIndex + offset] == GRID_ICON_COLUMN):
 					iconData = rowData.cells[startIndex + offset].icons[0]
@@ -293,7 +293,7 @@ class IconGrid:
 										, currentX + 6, self.firstRowY + (self.totalRowHeight + self.rowSpace) * rowIndex + 28
 										, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 					currentX += self.textColWidth[startIndex + offset] + self.colSpace
-			
+
 			if ( rowData.message == "" ):
 				self.screen.attachLabel(self.rowName + str(rowIndex), self.rowName + str(rowIndex) + "NotConnected", "")
 			else:
@@ -301,9 +301,9 @@ class IconGrid:
 									   , self.rowName + str(rowIndex) + "NotConnected"
 									   , "<font=3>                              " + rowData.message + "</font>" )
 
-		
-		
-		
+
+
+
 	def calculateLayout(self):
 		if (self.useSmallIcons):
 			self.iconSize = 32
@@ -316,7 +316,7 @@ class IconGrid:
 			if (colGroup.label != ""):
 				availableWidth -= self.groupBorder * 2
 				useColGroups = True
-		
+
 		numMultiListCols = 0
 		for colIndex in range(len(self.columns)):
 			col = self.columns[colIndex]
@@ -326,15 +326,15 @@ class IconGrid:
 				numMultiListCols += 1
 			if (col == GRID_TEXT_COLUMN):
 				availableWidth -= self.textColWidth[colIndex]
-		
+
 		if (self.showRowBorder):
 			availableWidth -= self.rowBorderWidth * 2
-		
+
 		initMultiListColWidth = availableWidth / numMultiListCols
 		numIcons = (initMultiListColWidth - 16) / (self.iconSize + 2)
 		self.multiListColWidth = numIcons * (self.iconSize + 2) + 16
 		self.colSpace = (availableWidth - self.multiListColWidth * numMultiListCols) / (len(self.columns) - 1) + self.minColSpace
-		
+
 		# height
 		if (useColGroups):
 			self.colGroupHeight = self.groupTitleHeight + self.headerHeight + 8
@@ -349,36 +349,36 @@ class IconGrid:
 			self.headerY = self.yStart
 			self.firstRowY = self.headerY + self.headerHeight
 			availableHeight = self.height - self.headerHeight
-		
+
 		if (self.showRowHeader):
 			self.totalRowHeight = self.rowHeight + self.rowHeaderHeight
 			self.multiListStartY = self.firstRowY + self.rowHeaderHeight
 		else:
 			self.totalRowHeight = self.rowHeight
 			self.multiListStartY = self.firstRowY
-		
+
 		if (self.showRowBorder):
 			self.totalRowHeight += self.rowBorderWidth * 2
-		
+
 		self.numRows = (availableHeight + self.minRowSpace) / (self.totalRowHeight + self.minRowSpace)
 		self.rowSpace = (availableHeight - self.numRows * self.totalRowHeight) / (self.numRows - 1)
-		
-		
-		
-		
-		
+
+
+
+
+
 	def addControls(self):
 		self.addGroups()
 		self.addHeader()
-		
+
 		# add the rows
 		self.leaderHeadName = self.getNextWidgetName()
 		self.multiListName = self.getNextWidgetName()
 		self.rowName = self.getNextWidgetName()
-		
+
 		for rowIndex in range(self.numRows):
 			self.addRow(rowIndex)
-		
+
 		self.scrollUpArrow = self.getNextWidgetName()
 		self.scrollDownArrow = self.getNextWidgetName()
 		self.screen.setImageButton( self.scrollUpArrow
@@ -398,11 +398,11 @@ class IconGrid:
 
 	def addGroups(self):
 		self.groupPanelName = self.getNextWidgetName()
-		
+
 		startIndex = 0
 		lastColGroupIndex = 0
 		colGroupX = self.xStart
-		
+
 		for index in range(len(self.columnGroups)):
 			colGroup = self.columnGroups[index]
 			if (colGroup.label != ""):
@@ -417,7 +417,7 @@ class IconGrid:
 				colGroupWidth -= self.colSpace
 				self.screen.addPanel( self.groupPanelName + str(index), self.groupLabelOffset + colGroup.label, "", False, False
 									, colGroupX, self.yStart, colGroupWidth + 7, self.colGroupHeight
-									, PanelStyles.PANEL_STYLE_MAIN_TAN )
+									, PanelStyles.PANEL_STYLE_MAIN_TAN, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 				colGroupX += colGroupWidth + self.colSpace
 			else:
 				for offset in range(colGroup.length):
@@ -428,9 +428,9 @@ class IconGrid:
 					elif (self.columns[startIndex + offset] == GRID_TEXT_COLUMN):
 						colGroupX += self.textColWidth[startIndex + offset] + self.colSpace
 			startIndex += colGroup.length
-			
-	
-	
+
+
+
 	def addHeader(self):
 		self.headerName = self.getNextWidgetName()
 		headerX = self.xStart
@@ -443,7 +443,7 @@ class IconGrid:
 		for groupIndex in range(len(self.columnGroups)):
 			colGroup = self.columnGroups[groupIndex]
 			headerWidth = 0
-			
+
 			for offset in range(colGroup.length):
 				if (self.columns[startIndex + offset] == GRID_ICON_COLUMN):
 					headerWidth = self.iconColWidth + self.colSpace
@@ -451,7 +451,7 @@ class IconGrid:
 					headerWidth = self.multiListColWidth + self.colSpace
 				elif (self.columns[startIndex + offset] == GRID_TEXT_COLUMN):
 					headerWidth = self.textColWidth[startIndex + offset] + self.colSpace
-				
+
 				if (offset == colGroup.length - 1): # last column of this group
 					if (colGroup.label != ""):
 						headerWidth += self.groupBorder
@@ -463,7 +463,7 @@ class IconGrid:
 										, "<font=3>" + self.header[startIndex + offset] + "</font>"
 										, "", WidgetTypes.WIDGET_GENERAL, -1, -1, 0 )
 			startIndex += colGroup.length
-		
+
 		for offset in range(len(self.columns) - startIndex):
 			if (self.columns[startIndex + offset] == GRID_ICON_COLUMN):
 				headerWidth = self.iconColWidth + self.colSpace
@@ -476,9 +476,9 @@ class IconGrid:
 									, "<font=3>" + self.header[startIndex + offset] + "</font>"
 									, "", WidgetTypes.WIDGET_GENERAL, -1, -1, 0 )
 
-	
-	
-	
+
+
+
 	def addRow(self, rowIndex):
 		if (self.showRowBorder):
 			panelY = self.firstRowY + (self.totalRowHeight + self.rowSpace) * rowIndex
@@ -486,23 +486,23 @@ class IconGrid:
 			if (self.showRowHeader):
 				panelY += self.rowHeaderHeight
 				panelHeight -= self.rowHeaderHeight
-			
+
 			self.screen.addPanel( self.rowName + str(rowIndex), "", "", False, True, self.xStart, panelY
 								, self.width - self.scrollArrowSize - self.scrollSpace, panelHeight
-								, PanelStyles.PANEL_STYLE_OUT )
-		
+								, PanelStyles.PANEL_STYLE_OUT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
+
 		startIndex = 0
 		currentX = self.xStart
 		listY = self.multiListStartY + (self.totalRowHeight + self.rowSpace) * rowIndex
 		if (self.showRowBorder):
 			currentX += self.rowBorderWidth
 			listY += self.rowBorderWidth + 1
-		
+
 		for groupIndex in range(len(self.columnGroups)):
 			colGroup = self.columnGroups[groupIndex]
 			if (colGroup.label != ""):
 				currentX += self.groupBorder
-			
+
 			for offset in range(colGroup.length):
 				if (self.columns[startIndex + offset] == GRID_ICON_COLUMN):
 					currentX += self.iconColWidth + self.colSpace
@@ -513,11 +513,11 @@ class IconGrid:
 					currentX += self.multiListColWidth + self.colSpace
 				elif (self.columns[startIndex + offset] == GRID_TEXT_COLUMN):
 					currentX += self.textColWidth[startIndex + offset] + self.colSpace
-			
+
 			startIndex += colGroup.length
 			if (colGroup.label != ""):
-				currentX += self.groupBorder		
-		
+				currentX += self.groupBorder
+
 		for offset in range(len(self.columns) - startIndex):
 			if (self.columns[startIndex + offset] == GRID_ICON_COLUMN):
 				currentX += self.iconColWidth + self.colSpace
@@ -535,4 +535,4 @@ class IconGrid:
 		szName = self.NEXT_WIDGET_ID + str(self.widgetCount)
 		self.widgetCount += 1
 		return szName
-		
+

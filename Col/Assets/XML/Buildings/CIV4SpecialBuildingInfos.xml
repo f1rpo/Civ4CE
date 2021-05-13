@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by EXTREME (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -7,49 +7,124 @@
 <Civ4SpecialBuildingInfos xmlns="x-schema:CIV4BuildingsSchema.xml">
 	<SpecialBuildingInfos>
 		<SpecialBuildingInfo>
-			<Type>SPECIALBUILDING_BOMB_SHELTER</Type>
-			<Description>TXT_KEY_SPECIALBUILDING_BOMB_SHELTER</Description>
-			<ObsoleteTech>NONE</ObsoleteTech>
-			<TechPrereq>NONE</TechPrereq>
-			<TechPrereqAnyone>NONE</TechPrereqAnyone>
-			<bValid>0</bValid>
+			<Type>SPECIALBUILDING_BELLS</Type>
+			<Description>TXT_KEY_SPECIALBUILDING_BELLS</Description>
+			<bValid>1</bValid>
+			<FontButtonIndex>17</FontButtonIndex>
 			<ProductionTraits/>
 			<Button>Art/Interface/Buttons/Buildings/BombShelters.dds</Button>
 		</SpecialBuildingInfo>
 		<SpecialBuildingInfo>
-			<Type>SPECIALBUILDING_TEMPLE</Type>
-			<Description>TXT_KEY_SPECIALBUILDING_TEMPLE</Description>
-			<ObsoleteTech>NONE</ObsoleteTech>
-			<TechPrereq>TECH_PRIESTHOOD</TechPrereq>
-			<TechPrereqAnyone>NONE</TechPrereqAnyone>
+			<Type>SPECIALBUILDING_HAMMERS</Type>
+			<Description>TXT_KEY_SPECIALBUILDING_HAMMERS</Description>
 			<bValid>1</bValid>
-			<ProductionTraits>
-				<ProductionTrait>
-					<ProductionTraitType>TRAIT_SPIRITUAL</ProductionTraitType>
-					<iProductionTrait>100</iProductionTrait>
-				</ProductionTrait>
-			</ProductionTraits>
-			<Button>Art/Interface/Buttons/Buildings/Temple.dds</Button>
+			<FontButtonIndex>16</FontButtonIndex>
+			<ProductionTraits/>
+			<Button>Art/Interface/Buttons/Buildings/BombShelters.dds</Button>
 		</SpecialBuildingInfo>
 		<SpecialBuildingInfo>
-			<Type>SPECIALBUILDING_CATHEDRAL</Type>
-			<Description>TXT_KEY_SPECIALBUILDING_CATHEDRAL</Description>
-			<ObsoleteTech>NONE</ObsoleteTech>
-			<TechPrereq>TECH_MUSIC</TechPrereq>
-			<TechPrereqAnyone>NONE</TechPrereqAnyone>
+			<Type>SPECIALBUILDING_COATS</Type>
+			<Description>TXT_KEY_SPECIALBUILDING_COATS</Description>
 			<bValid>1</bValid>
+			<FontButtonIndex>9</FontButtonIndex>
 			<ProductionTraits/>
-			<Button>Art/Interface/Buttons/Buildings/Cathedral.dds</Button>
+			<Button>Art/Interface/Buttons/Buildings/BombShelters.dds</Button>
 		</SpecialBuildingInfo>
 		<SpecialBuildingInfo>
-			<Type>SPECIALBUILDING_MONASTERY</Type>
-			<Description>TXT_KEY_SPECIALBUILDING_MONASTERY</Description>
-			<ObsoleteTech>TECH_SCIENTIFIC_METHOD</ObsoleteTech>
-			<TechPrereq>TECH_MEDITATION</TechPrereq>
-			<TechPrereqAnyone>NONE</TechPrereqAnyone>
+			<Type>SPECIALBUILDING_CLOTH</Type>
+			<Description>TXT_KEY_SPECIALBUILDING_CLOTH</Description>
 			<bValid>1</bValid>
+			<FontButtonIndex>8</FontButtonIndex>
 			<ProductionTraits/>
-			<Button>Art/Interface/Buttons/Buildings/Monastery_Hindu.dds</Button>
+			<Button>Art/Interface/Buttons/Buildings/BombShelters.dds</Button>
+		</SpecialBuildingInfo>
+		<SpecialBuildingInfo>
+			<Type>SPECIALBUILDING_RUM</Type>
+			<Description>TXT_KEY_SPECIALBUILDING_RUM</Description>
+			<bValid>1</bValid>
+			<FontButtonIndex>10</FontButtonIndex>
+			<ProductionTraits/>
+			<Button>Art/Interface/Buttons/Buildings/BombShelters.dds</Button>
+		</SpecialBuildingInfo>
+		<SpecialBuildingInfo>
+			<Type>SPECIALBUILDING_CIGARS</Type>
+			<Description>TXT_KEY_SPECIALBUILDING_CIGARS</Description>
+			<bValid>1</bValid>
+			<FontButtonIndex>11</FontButtonIndex>
+			<ProductionTraits/>
+			<Button>Art/Interface/Buttons/Buildings/BombShelters.dds</Button>
+		</SpecialBuildingInfo>
+		<SpecialBuildingInfo>
+			<Type>SPECIALBUILDING_TOOLS</Type>
+			<Description>TXT_KEY_SPECIALBUILDING_TOOLS</Description>
+			<bValid>1</bValid>
+			<FontButtonIndex>12</FontButtonIndex>
+			<ProductionTraits/>
+			<Button>Art/Interface/Buttons/Buildings/BombShelters.dds</Button>
+		</SpecialBuildingInfo>
+		<SpecialBuildingInfo>
+			<Type>SPECIALBUILDING_CROSSES</Type>
+			<Description>TXT_KEY_SPECIALBUILDING_CROSSES</Description>
+			<bValid>1</bValid>
+			<FontButtonIndex>18</FontButtonIndex>
+			<ProductionTraits/>
+			<Button>Art/Interface/Buttons/Buildings/BombShelters.dds</Button>
+		</SpecialBuildingInfo>
+		<SpecialBuildingInfo>
+			<Type>SPECIALBUILDING_MUSKETS</Type>
+			<Description>TXT_KEY_SPECIALBUILDING_MUSKETS</Description>
+			<bValid>1</bValid>
+			<FontButtonIndex>13</FontButtonIndex>
+			<ProductionTraits/>
+			<Button>Art/Interface/Buttons/Buildings/BombShelters.dds</Button>
+		</SpecialBuildingInfo>
+		<SpecialBuildingInfo>
+			<Type>SPECIALBUILDING_HORSES</Type>
+			<Description>TXT_KEY_SPECIALBUILDING_HORSES</Description>
+			<bValid>1</bValid>
+			<FontButtonIndex>14</FontButtonIndex>
+			<ProductionTraits/>
+			<Button>Art/Interface/Buttons/Buildings/BombShelters.dds</Button>
+		</SpecialBuildingInfo>
+		<SpecialBuildingInfo>
+			<Type>SPECIALBUILDING_DOCK</Type>
+			<Description>TXT_KEY_SPECIALBUILDING_DOCK</Description>
+			<bValid>1</bValid>
+			<FontButtonIndex>20</FontButtonIndex>
+			<ProductionTraits/>
+			<Button>Art/Interface/Buttons/Buildings/BombShelters.dds</Button>
+		</SpecialBuildingInfo>
+		<SpecialBuildingInfo>
+			<Type>SPECIALBUILDING_WAREHOUSE</Type>
+			<Description>TXT_KEY_SPECIALBUILDING_WAREHOUSE</Description>
+			<bValid>1</bValid>
+			<FontButtonIndex>15</FontButtonIndex>
+			<ProductionTraits/>
+			<Button>Art/Interface/Buttons/Buildings/BombShelters.dds</Button>
+		</SpecialBuildingInfo>
+		<SpecialBuildingInfo>
+			<Type>SPECIALBUILDING_EDUCATION</Type>
+			<Description>TXT_KEY_SPECIALBUILDING_EDUCATION</Description>
+			<bValid>1</bValid>
+			<FontButtonIndex>19</FontButtonIndex>
+			<ProductionTraits/>
+			<Button>Art/Interface/Buttons/Buildings/BombShelters.dds</Button>
+		</SpecialBuildingInfo>
+		<SpecialBuildingInfo>
+			<Type>SPECIALBUILDING_WALLS</Type>
+			<Description>TXT_KEY_SPECIALBUILDING_WALLS</Description>
+			<bValid>1</bValid>
+			<FontButtonIndex>21</FontButtonIndex>
+			<ProductionTraits/>
+			<Button>Art/Interface/Buttons/Buildings/BombShelters.dds</Button>
+		</SpecialBuildingInfo>
+		<SpecialBuildingInfo>
+			<Type>SPECIALBUILDING_PRINT</Type>
+			<Description>TXT_KEY_SPECIALBUILDING_PRINT</Description>
+			<bValid>1</bValid>
+			<FontButtonIndex>17</FontButtonIndex>
+			<ProductionTraits/>
+			<Button>Art/Interface/Buttons/Buildings/BombShelters.dds</Button>
 		</SpecialBuildingInfo>
 	</SpecialBuildingInfos>
 </Civ4SpecialBuildingInfos>

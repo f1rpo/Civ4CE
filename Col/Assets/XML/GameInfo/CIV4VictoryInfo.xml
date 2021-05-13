@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by EXTREME (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -10,134 +10,77 @@
 			<Type>VICTORY_SCORE</Type>
 			<Description>TXT_KEY_VICTORY_SCORE</Description>
 			<Civilopedia>TXT_KEY_VICTORY_SCORE_PEDIA</Civilopedia>
+			<bDefault>0</bDefault>
 			<bTargetScore>1</bTargetScore>
+			<bEndEurope>0</bEndEurope>
 			<bEndScore>0</bEndScore>
 			<bConquest>0</bConquest>
-			<bDiploVote>0</bDiploVote>
 			<bPermanent>1</bPermanent>
+			<bRevolution>0</bRevolution>
 			<iPopulationPercentLead>0</iPopulationPercentLead>
 			<iLandPercent>0</iLandPercent>
 			<iMinLandPercent>0</iMinLandPercent>
-			<iReligionPercent>0</iReligionPercent>
 			<CityCulture>NONE</CityCulture>
 			<iNumCultureCities>0</iNumCultureCities>
 			<iTotalCultureRatio>0</iTotalCultureRatio>
-			<iVictoryDelayTurns>0</iVictoryDelayTurns>
+			<VictoryMovie/>
+		</VictoryInfo>
+		<VictoryInfo>
+			<Type>VICTORY_EUROPE</Type>
+			<Description>TXT_KEY_EUROPE_SCREEN_TITLE</Description>
+			<Civilopedia>TXT_KEY_VICTORY_EUROPE_PEDIA</Civilopedia>
+			<bDefault>1</bDefault>
+			<bTargetScore>0</bTargetScore>
+			<bEndEurope>1</bEndEurope>
+			<bEndScore>0</bEndScore>
+			<bConquest>0</bConquest>
+			<bPermanent>0</bPermanent>
+			<bRevolution>0</bRevolution>
+			<iPopulationPercentLead>0</iPopulationPercentLead>
+			<iLandPercent>0</iLandPercent>
+			<iMinLandPercent>0</iMinLandPercent>
+			<CityCulture>NONE</CityCulture>
+			<iNumCultureCities>0</iNumCultureCities>
+			<iTotalCultureRatio>0</iTotalCultureRatio>
 			<VictoryMovie/>
 		</VictoryInfo>
 		<VictoryInfo>
 			<Type>VICTORY_TIME</Type>
 			<Description>TXT_KEY_VICTORY_TIME</Description>
 			<Civilopedia>TXT_KEY_VICTORY_TIME_PEDIA</Civilopedia>
+			<bDefault>0</bDefault>
 			<bTargetScore>0</bTargetScore>
+			<bEndEurope>0</bEndEurope>
 			<bEndScore>1</bEndScore>
 			<bConquest>0</bConquest>
-			<bDiploVote>0</bDiploVote>
 			<bPermanent>0</bPermanent>
+			<bRevolution>0</bRevolution>
 			<iPopulationPercentLead>0</iPopulationPercentLead>
 			<iLandPercent>0</iLandPercent>
 			<iMinLandPercent>0</iMinLandPercent>
-			<iReligionPercent>0</iReligionPercent>
 			<CityCulture>NONE</CityCulture>
 			<iNumCultureCities>0</iNumCultureCities>
 			<iTotalCultureRatio>0</iTotalCultureRatio>
-			<iVictoryDelayTurns>0</iVictoryDelayTurns>
 			<VictoryMovie/>
 		</VictoryInfo>
 		<VictoryInfo>
-			<Type>VICTORY_CONQUEST</Type>
-			<Description>TXT_KEY_VICTORY_CONQUEST</Description>
-			<Civilopedia>TXT_KEY_VICTORY_CONQUEST_PEDIA</Civilopedia>
+			<Type>VICTORY_REVOLUTION</Type>
+			<Description>TXT_KEY_VICTORY_REVOLUTION</Description>
+			<Civilopedia>TXT_KEY_VICTORY_REVOLUTION_PEDIA</Civilopedia>
+			<bDefault>1</bDefault>
 			<bTargetScore>0</bTargetScore>
+			<bEndEurope>0</bEndEurope>
 			<bEndScore>0</bEndScore>
-			<bConquest>1</bConquest>
-			<bDiploVote>0</bDiploVote>
+			<bConquest>0</bConquest>
 			<bPermanent>0</bPermanent>
+			<bRevolution>1</bRevolution>
 			<iPopulationPercentLead>0</iPopulationPercentLead>
 			<iLandPercent>0</iLandPercent>
 			<iMinLandPercent>0</iMinLandPercent>
-			<iReligionPercent>0</iReligionPercent>
 			<CityCulture>NONE</CityCulture>
 			<iNumCultureCities>0</iNumCultureCities>
 			<iTotalCultureRatio>0</iTotalCultureRatio>
-			<iVictoryDelayTurns>0</iVictoryDelayTurns>
-			<VictoryMovie>ART_DEF_MOVIE_VICTORY_CONQUEST</VictoryMovie>
-		</VictoryInfo>
-		<VictoryInfo>
-			<Type>VICTORY_DOMINATION</Type>
-			<Description>TXT_KEY_VICTORY_DOMINATION</Description>
-			<Civilopedia>TXT_KEY_VICTORY_DOMINATION_PEDIA</Civilopedia>
-			<bTargetScore>0</bTargetScore>
-			<bEndScore>0</bEndScore>
-			<bConquest>0</bConquest>
-			<bDiploVote>0</bDiploVote>
-			<bPermanent>0</bPermanent>
-			<iPopulationPercentLead>25</iPopulationPercentLead>
-			<iLandPercent>78</iLandPercent>
-			<iMinLandPercent>51</iMinLandPercent>
-			<iReligionPercent>0</iReligionPercent>
-			<CityCulture>NONE</CityCulture>
-			<iNumCultureCities>0</iNumCultureCities>
-			<iTotalCultureRatio>0</iTotalCultureRatio>
-			<iVictoryDelayTurns>0</iVictoryDelayTurns>
-			<VictoryMovie>ART_DEF_MOVIE_VICTORY_DOMINATION</VictoryMovie>
-		</VictoryInfo>
-		<VictoryInfo>
-			<Type>VICTORY_CULTURAL</Type>
-			<Description>TXT_KEY_VICTORY_CULTURAL</Description>
-			<Civilopedia>TXT_KEY_VICTORY_CULTURAL_PEDIA</Civilopedia>
-			<bTargetScore>0</bTargetScore>
-			<bEndScore>0</bEndScore>
-			<bConquest>0</bConquest>
-			<bDiploVote>0</bDiploVote>
-			<bPermanent>0</bPermanent>
-			<iPopulationPercentLead>0</iPopulationPercentLead>
-			<iLandPercent>0</iLandPercent>
-			<iMinLandPercent>0</iMinLandPercent>
-			<iReligionPercent>0</iReligionPercent>
-			<CityCulture>CULTURELEVEL_LEGENDARY</CityCulture>
-			<iNumCultureCities>3</iNumCultureCities>
-			<iTotalCultureRatio>0</iTotalCultureRatio>
-			<iVictoryDelayTurns>0</iVictoryDelayTurns>
-			<VictoryMovie>ART_DEF_MOVIE_VICTORY_CULTURAL</VictoryMovie>
-		</VictoryInfo>
-		<VictoryInfo>
-			<Type>VICTORY_SPACE_RACE</Type>
-			<Description>TXT_KEY_VICTORY_SPACE_RACE</Description>
-			<Civilopedia>TXT_KEY_VICTORY_SPACE_RACE_READY</Civilopedia>
-			<bTargetScore>0</bTargetScore>
-			<bEndScore>0</bEndScore>
-			<bConquest>0</bConquest>
-			<bDiploVote>0</bDiploVote>
-			<bPermanent>0</bPermanent>
-			<iPopulationPercentLead>0</iPopulationPercentLead>
-			<iLandPercent>0</iLandPercent>
-			<iMinLandPercent>0</iMinLandPercent>
-			<iReligionPercent>0</iReligionPercent>
-			<CityCulture>NONE</CityCulture>
-			<iNumCultureCities>0</iNumCultureCities>
-			<iTotalCultureRatio>0</iTotalCultureRatio>
-			<iVictoryDelayTurns>10</iVictoryDelayTurns>
-			<VictoryMovie>ART_DEF_MOVIE_VICTORY_SPACE_RACE</VictoryMovie>
-		</VictoryInfo>
-		<VictoryInfo>
-			<Type>VICTORY_DIPLOMATIC</Type>
-			<Description>TXT_KEY_VICTORY_DIPLOMATIC</Description>
-			<Civilopedia>TXT_KEY_VICTORY_DIPLOMATIC_PEDIA</Civilopedia>
-			<bTargetScore>0</bTargetScore>
-			<bEndScore>0</bEndScore>
-			<bConquest>0</bConquest>
-			<bDiploVote>1</bDiploVote>
-			<bPermanent>0</bPermanent>
-			<iPopulationPercentLead>0</iPopulationPercentLead>
-			<iLandPercent>0</iLandPercent>
-			<iMinLandPercent>0</iMinLandPercent>
-			<iReligionPercent>0</iReligionPercent>
-			<CityCulture>NONE</CityCulture>
-			<iNumCultureCities>0</iNumCultureCities>
-			<iTotalCultureRatio>0</iTotalCultureRatio>
-			<iVictoryDelayTurns>0</iVictoryDelayTurns>
-			<VictoryMovie/>
+			<VictoryMovie>ART_DEF_MOVIE_VICTORY_REVOLUTION</VictoryMovie>
 		</VictoryInfo>
 	</VictoryInfos>
 </Civ4VictoryInfo>

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Jesse Smith (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -7,29 +7,24 @@
 <Civ4CivicOptionInfos xmlns="x-schema:CIV4GameInfoSchema.xml">
 	<CivicOptionInfos>
 		<CivicOptionInfo>
-			<Type>CIVICOPTION_GOVERNMENT</Type>
-			<Description>TXT_KEY_CIVICOPTION_GOVERNMENT</Description>
-			<TraitNoUpkeeps/>
+			<Type>CIVICOPTION_SLAVERY</Type>
+			<Description>TXT_KEY_CIVICOPTION_SLAVERY</Description>
 		</CivicOptionInfo>
 		<CivicOptionInfo>
-			<Type>CIVICOPTION_LEGAL</Type>
-			<Description>TXT_KEY_CIVICOPTION_LEGAL</Description>
-			<TraitNoUpkeeps/>
+			<Type>CIVICOPTION_ELECTION</Type>
+			<Description>TXT_KEY_CIVICOPTION_ELECTION</Description>
 		</CivicOptionInfo>
 		<CivicOptionInfo>
-			<Type>CIVICOPTION_LABOR</Type>
-			<Description>TXT_KEY_CIVICOPTION_LABOR</Description>
-			<TraitNoUpkeeps/>
-		</CivicOptionInfo>
-		<CivicOptionInfo>
-			<Type>CIVICOPTION_ECONOMY</Type>
-			<Description>TXT_KEY_CIVICOPTION_ECONOMY</Description>
-			<TraitNoUpkeeps/>
+			<Type>CIVICOPTION_NATIVES</Type>
+			<Description>TXT_KEY_CIVICOPTION_NATIVES</Description>
 		</CivicOptionInfo>
 		<CivicOptionInfo>
 			<Type>CIVICOPTION_RELIGION</Type>
 			<Description>TXT_KEY_CIVICOPTION_RELIGION</Description>
-			<TraitNoUpkeeps/>
+		</CivicOptionInfo>
+		<CivicOptionInfo>
+			<Type>CIVICOPTION_SECURITY</Type>
+			<Description>TXT_KEY_CIVICOPTION_SECURITY</Description>
 		</CivicOptionInfo>
 	</CivicOptionInfos>
 </Civ4CivicOptionInfos>

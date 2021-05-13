@@ -6,9 +6,9 @@ import sys
 class TextParser:
 	def __init__(self, l_Text, outputFile ):
 		self.__list_Text = l_Text
-		self.outputFile = outputFile 
+		self.outputFile = outputFile
 		self.run()
-		
+
 	def run(self):
 		f = open(self.outputFile,'w')
 		self.CollectWRNERR()
@@ -29,10 +29,10 @@ class TextParser:
 		f.write("COULD NOT START SOUNDTRACK WITH\n\n")
 		f.writelines(self.getListByToken("FSoundtrack::Start(): Could not start soundtrack with "))
 		f.close()
-	
+
 	def printSpacer(self,f):
 		f.write("\n\n\n----------------------------------------------------------\n\n\n")
-		
+
 	def getListByToken(self, token):
 		newlist = list()
 		for line in self.__list_Text:
@@ -49,7 +49,7 @@ class TextParser:
 			[ strList.append("%s\n"%item) for item in newlist ]
 			return strList
 		return newlist
-		
+
 	def removeUselessLines(self):
 		useless = [ "FAudioSystemMiles::Acquire3DSampleId: Could not acquire Id",
 					"Illegal index -1",
@@ -59,7 +59,7 @@ class TextParser:
 				if line.find(item) != -1:
 					self.__list_Text.remove(line)
 					break
-	
+
 	def CollectWRNERR(self):
 		newList = []
 		for line in self.__list_Text:

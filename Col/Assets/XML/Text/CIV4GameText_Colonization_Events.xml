@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by lcollins (Firaxis Games) -->
+<!-- Sid Meier's Civilization 4 -->
+<!-- Copyright Firaxis Games 2005 -->
+<!-- -->
+<!-- Game Text - New -->
+<Civ4GameText xmlns="http://www.firaxis.com">
+	<!--TUTORIAL EVENT TRIGGERS-->
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_JOIN_UNIT_TO_CITY_DONE_2</Tag>
+		<English>[BOLD]Production and Resource Management[\BOLD][NEWLINE][TAB]Congratulations! You just increased the population of %s2_city. These new citizens can be assigned to work the plots adjacent to your settlement to gather raw materials. Citizens can also be assigned to buildings within your settlement to convert raw materials into manufactured goods.  On the settlement screen, simply [double-click] your citizen to assign him to a specific profession or drag him to the plot or building you wish him to work.</English>
+		<French>[BOLD]Gestion des ressources et de la production[\BOLD][NEWLINE][TAB]F&#233;licitations ! La population de la colonie : %s2_city vient d'augmenter. Vous pouvez d&#233;sormais ordonner aux nouveaux citoyens d'exploiter les cases adjacentes &#224; la colonie afin d'y r&#233;colter des mati&#232;res premi&#232;res. Vous pouvez &#233;galement les assigner &#224; la construction de b&#226;timents qui vous permettront de transformer ces derni&#232;res en produits manufactur&#233;s. Pour cela, une fois sur l'&#233;cran de colonie, il vous suffit d'effectuer un [double-clic] sur votre citoyen pour lui attribuer une profession ou de le faire glisser vers la case ou le b&#226;timent o&#249; vous aimeriez qu'il travaille.</French>
+		<German>[BOLD]Produktion und Ressourcen-Management[\BOLD][NEWLINE][TAB]Gl&#252;ckwunsch! Sie haben eben die Bev&#246;lkerung Ihrer Siedlung %s2_city erh&#246;ht. Diese neuen B&#252;rger wurden zur Arbeit auf den Gel&#228;ndefeldern neben Ihrer Siedlung eingeteilt, um Rohstoffe zu produzieren. B&#252;rger k&#246;nnen auch den Geb&#228;uden in Ihrer Siedlung zugewiesen werden, um Rohstoffe zu Fertigwaren weiterzuverarbeiten. Im Siedlungsbildschirm klicken Sie einfach doppelt auf Ihren B&#252;rger, um ihm einen speziellen Beruf zuzuweisen, oder ziehen Sie ihn auf das Gel&#228;ndefeld oder Geb&#228;ude, wo er arbeiten soll.</German>
+		<Italian>[BOLD]Produzione e gestione risorse[\BOLD][NEWLINE][TAB]Congratulazioni! Hai appena fatto aumentare la popolazione di %s2_city. Puoi assegnare questi nuovi cittadini a lavorare nelle caselle adiacenti all'insediamento, per raccogliere materie prime. Puoi anche assegnare i cittadini a lavorare negli edifici all'interno dell'insediamento, per trasformare le materie prime in beni. Nella schermata dell'insediamento, [clicca due volte] sul cittadino per assegnarlo a una professione specifica, o trascinalo sulla casella o edificio in cui vuoi che lavori.</Italian>
+		<Spanish>[BOLD]Producci&#243;n y gesti&#243;n de recursos[\BOLD][NEWLINE][TAB]&#161;Felicidades! Acab&#225;is de aumentar la poblaci&#243;n de %s2_city. Pod&#233;is asignar estos nuevos ciudadanos a trabajar en las casillas adyacentes al asentamiento para obtener materias primas. Tambi&#233;n se pueden asignar ciudadanos a los edificios del asentamiento para convertir materias primas en productos manufacturados.  En la pantalla del asentamiento, basta con hacer doble clic en el ciudadano para asignarlo a una profesi&#243;n espec&#237;fica o arrastrarlo a la casilla o edificio en el que quer&#233;is que trabaje.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_IMMIGRANT</Tag>
+		<English>[BOLD]Immigration[\BOLD][NEWLINE][TAB]A new colonist is waiting at the docks of your motherland looking for religious freedom and passage to the New World. To pick him up, move your ship to the colored area near the edge of the map and click the "Sail to Europe" button.</English>
+		<French>[BOLD]Immigration[\BOLD][NEWLINE][TAB]Un nouveau colon en qu&#234;te de libert&#233; religieuse attend impatiemment dans le port de votre m&#232;re patrie qu'un navire le transporte jusqu'au Nouveau monde. Pour le r&#233;cup&#233;rer, d&#233;placez votre navire jusqu'&#224; la zone color&#233;e bordant la carte, puis cliquez sur Naviguer vers l'Europe.</French>
+		<German>[BOLD]Immigration[\BOLD][NEWLINE][TAB]Ein neuer Kolonist wartet an den Docks Ihres Mutterlandes und ist auf der Suche nach Religionsfreiheit und einer &#220;berfahrt in die Neue Welt. Um ihn abzuholen, bewegen Sie Ihr Schiff in den farbigen Bereich am Rand der Karte und klicken Sie auf den Button "Nach Europa segeln".</German>
+		<Italian>[BOLD]Immigrazione[\BOLD][NEWLINE][TAB]Un nuovo colono attende sui moli della madrepatria, alla ricerca di libert&#224; religiosa e di un passaggio verso il Nuovo Mondo. Per raccoglierlo sposta la nave nella zona colorata sui bordi della mappa e clicca sul pulsante "Fai vela per l'Europa".</Italian>
+		<Spanish>[BOLD]Inmigraci&#243;n[\BOLD][NEWLINE][TAB]Un nuevo Colono aguarda en los muelles de la madre patria, en busca de libertad de culto y un pasaje al Nuevo Mundo. Para recogerlo, llevad el barco al &#225;rea de color que hay lado del borde del mapa y haced clic en el bot&#243;n "Navegar a Europa".</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_PIONEER</Tag>
+		<English>[BOLD]Pioneer[\BOLD][NEWLINE][TAB]Colonists with access to Tools can be assigned to the Pioneer profession. Pioneers can improve the land, which increases your settlement's production, build roads, which speeds transport between settlements, and can even found new settlements. Acquire enough tools and make a Pioneer.</English>
+		<French>[BOLD]Pionnier[\BOLD][NEWLINE][TAB]Les colons ayant acc&#232;s &#224; des outils peuvent adopter la profession de pionnier. Les pionniers peuvent am&#233;liorer les terrains pour augmenter la production de votre colonie, construire des routes pour acc&#233;l&#233;rer les d&#233;placements entre les colonies, ou encore fonder de nouvelles colonies. Procurez-vous suffisamment d'outils puis cr&#233;ez un pionnier.</French>
+		<German>[BOLD]Pionier[\BOLD][NEWLINE][TAB]Kolonisten mit Zugang zu Werkzeug k&#246;nnen dem Pionierberuf zugewiesen werden. Pioniere k&#246;nnen das Land modernisieren, was zu einer Steigerung der Produktion Ihrer Stadt f&#252;hrt, Stra&#223;en errichten, um die Transporte zwischen den Siedlungen zu beschleunigen, und sogar neue Siedlungen gr&#252;nden. Verschaffen Sie sich gen&#252;gend Werkzeug und erstellen Sie einen Pionier.</German>
+		<Italian>[BOLD]Pioniere[\BOLD][NEWLINE][TAB]I coloni che hanno attrezzi a disposizione possono venire assegnati alla professione di pionieri. I pionieri possono migliorare la terra (aumentando cos&#236; la produzione dell'insediamento), costruire strade (velocizzando i trasporti tra gli insediamenti) e addirittura fondare nuovi insediamenti. Ottieni abbastanza attrezzi e crea un pioniere.</Italian>
+		<Spanish>[BOLD]Pionero[\BOLD][NEWLINE][TAB]A los Colonos con acceso a Herramientas se les puede asignar la profesi&#243;n de Pionero. Los Pioneros pueden mejorar la tierra (lo cual aumenta la producci&#243;n del asentamiento), construir carreteras (lo cual acelera el transporte entre asentamientos) e incluso fundar nuevos asentamientos. Conseguid suficientes Herramientas y cread un Pionero.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_IMPROVE_LAND</Tag>
+		<English>[BOLD]Improving Land Tiles[\BOLD][NEWLINE][TAB]Congratulations! You have obtained a Pioneer. To improve your land, move your Pioneer to the desired plot and click on one of the "Build [Improvement]" buttons. Each improvement requires a small amount of gold to be constructed.</English>
+		<French>[BOLD]Am&#233;liorer les cases de terrain[\BOLD][NEWLINE][TAB]F&#233;licitations ! Vous venez de faire l'acquisition d'un pionnier. Pour am&#233;liorer une case de terrain, d&#233;placez-y votre pionnier puis cliquez sur l'un des boutons Construire [Am&#233;lioration]. La construction de toute am&#233;lioration implique une petite d&#233;pense en or.</French>
+		<German>[BOLD]Gel&#228;ndefelder modernisieren[\BOLD][NEWLINE][TAB]Gl&#252;ckwunsch! Sie haben einen Pionier erhalten. Um Ihr Land zu modernisieren, bewegen Sie den Pionier auf das entsprechende Gel&#228;ndefeld und klicken Sie auf einen der "[Modernisierung] bauen"-Buttons. Jede Modernisierung kostet bei der Errichtung eine kleine Menge Gold.</German>
+		<Italian>[BOLD]Migliorare le caselle terrestri[\BOLD][NEWLINE][TAB]Congratulazioni! Hai ottenuto un pioniere. Per migliorare la terra, sposta il pioniere sulla casella desiderata e clicca su uno dei pulsanti "Costruisci [miglioramento]". Ci vuole una piccola quantit&#224; d'oro per costruire ogni miglioramento.</Italian>
+		<Spanish>[BOLD]Mejora de las casillas de tierra[\BOLD][NEWLINE][TAB]&#161;Felicidades! Hab&#233;is conseguido un Pionero. Para mejorar la tierra, llevadlo a la casilla deseada y haced clic en uno de los botones "Construir [mejora]". Para construir cada una se necesita una peque&#241;a cantidad de Oro.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_NATIVE_VILLAGES</Tag>
+		<English>[BOLD]Natives[\BOLD][NEWLINE][TAB]Interaction with the natives can be beneficial in many ways. You can freely enter native settlements. With one of your units in a native settlement, you can speak with that settlement's chief (and possibly receive a gift), live among the natives to learn a specialty, buy or sell goods to the natives (if the unit is a transport), or establish a mission (if the unit is a missionary). You can also conquer native settlements with combat units.</English>
+		<French>[BOLD]Indig&#232;nes[\BOLD][NEWLINE][TAB]Interagir avec les indig&#232;nes peut offrir de nombreux avantages. Pour commencer, vous pouvez entrer librement dans leurs colonies. Lorsque l'une de vos unit&#233;s s'y trouve, il vous est possible de parler &#224; son chef et peut-&#234;tre m&#234;me de recevoir un pr&#233;sent. Il est &#233;galement possible de vivre au sein de la colonie pour y apprendre une sp&#233;cialit&#233;, d'y acheter ou vendre des marchandises aux autochtones, ou d'y &#233;tablir une mission (si l'unit&#233; en question est un missionnaire). Il vous est &#233;galement possible, gr&#226;ce &#224; vos unit&#233;s de combat, de vous emparer des colonies indig&#232;nes.</French>
+		<German>[BOLD]Ureinwohner[\BOLD][NEWLINE][TAB]Interaktion mit den Ureinwohnern kann zahlreiche Vorteile bringen. Sie k&#246;nnen Ureinwohner-Siedlungen uneingeschr&#228;nkt betreten. Wenn sich eine Ihrer Einheiten in einer Ureinwohner-Siedlung befindet, k&#246;nnen Sie mit dem H&#228;uptling der Siedlung sprechen (und erhalten vielleicht ein Geschenk), bei den Ureinwohnern leben und eine Spezialf&#228;higkeit erlernen, Handel mit den Ureinwohnern betreiben (wenn es sich um eine Transporteinheit handelt) oder eine Mission errichten (wenn die Einheit ein Missionar ist). Sie k&#246;nnen Ureinwohner-Siedlungen mit Kampfeinheiten auch erobern.</German>
+		<Italian>[BOLD]Nativi[\BOLD][NEWLINE][TAB]L'interazione con i nativi pu&#242; essere positiva in molti modi. Puoi entrare liberamente negli insediamenti dei nativi. Quando una delle tue unit&#224; &#232; in un insediamento nativo puoi parlare col capo (e magari ricevere un regalo), vivere tra i nativi per imparare una specialit&#224;, vendere o acquistare beni (se &#232; un'unit&#224; di trasporto) o fondare una missione (se l'unit&#224; &#232; un missionario). Puoi anche conquistare gli insediamenti nativi con unit&#224; combattenti.</Italian>
+		<Spanish>[BOLD]Nativos[\BOLD][NEWLINE][TAB]La interacci&#243;n con los Nativos puede resultar beneficiosa de varias maneras. Pod&#233;is entrar libremente en los asentamientos ind&#237;genas. Con una de vuestras unidades en uno de ellos, pod&#233;is hablar con el jefe del Nativo (y, posiblemente, recibir un regalo), vivir entre los Nativos para aprender una especialidad, comprarles o venderles mercanc&#237;as (si la unidad es un transporte) o fundar una misi&#243;n (si la unidad es un Misionero). Tambi&#233;n pod&#233;is conquistar el asentamiento ind&#237;gena con unidades de combate.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_REVOLUTION</Tag>
+		<English>[BOLD]Revolution![\BOLD][NEWLINE][TAB]Over half of your citizens feel your colony should be a sovereign state.  You can now declare independence from your motherland by visiting the Revolution Screen.</English>
+		<French>[BOLD]R&#233;volution ![\BOLD][NEWLINE][TAB]Plus de la moiti&#233; des citoyens estiment que votre colonie devrait &#234;tre autonome. Vous pouvez d&#233;sormais d&#233;clarer votre ind&#233;pendance depuis l'&#233;cran de R&#233;volution.</French>
+		<German>[BOLD]Revolution![\BOLD][NEWLINE][TAB]Mehr als die H&#228;lfte Ihrer B&#252;rger wollen, dass Ihre Kolonie zu einem souver&#228;nen Staat wird. Sie k&#246;nnen nun die Unabh&#228;ngigkeit von Ihrem Mutterland erkl&#228;ren, indem Sie den Revolutionsbildschirm aufrufen.</German>
+		<Italian>[BOLD]Rivoluzione![\BOLD][NEWLINE][TAB]Pi&#249; della met&#224; dei tuoi cittadini &#232; convinta che la colonia dovrebbe essere uno stato sovrano. Ora puoi dichiarare l'indipendenza dalla madrepatria, dalla schermata della rivoluzione.</Italian>
+		<Spanish>[BOLD]&#161;Revoluci&#243;n![\BOLD][NEWLINE][TAB]La mitad o m&#225;s de los ciudadanos creen que la colonia deber&#237;a ser un estado soberano.  Pod&#233;is declarar la independencia de vuestra madre patria si vais a la pantalla Revoluci&#243;n.</Spanish>
+	</TEXT>
+	<!--TUTORIAL EVENTS-->
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TUTORIAL_FOUND_COLONY_2</Tag>
+		<English>I will establish my colony in the New World.</English>
+		<French>Je vais fonder ma colonie dans le Nouveau monde.</French>
+		<German>Ich werde meine Kolonie in der Neuen Welt gr&#252;nden.</German>
+		<Italian>Insedier&#242; la mia colonia nel Nuovo Mondo.</Italian>
+		<Spanish>Fundar&#233; mi colonia en el Nuevo Mundo.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TUTORIAL_END_TUTORIAL_2</Tag>
+		<English>Please disable tutorial quests.</English>
+		<French>Veuillez d&#233;sactiver les qu&#234;tes du didacticiel.</French>
+		<German>Bitte die Tutorial-Quests deaktivieren.</German>
+		<Italian>Disattiva le imprese del tutorial.</Italian>
+		<Spanish>Por favor, desactivad las misiones del tutorial.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TUTORIAL_JOIN_TO_CITY_2</Tag>
+		<English>I will join a unit to a settlement.</English>
+		<French>Je vais int&#233;grer une unit&#233; &#224; une colonie.</French>
+		<German>Ich schlie&#223;e eine Einheit einer Siedlung an.</German>
+		<Italian>Unir&#242; un'unit&#224; a un insediamento.</Italian>
+		<Spanish>Unir&#233; una unidad al asentamiento.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TUTORIAL_RATHER_EXPLORE_2</Tag>
+		<English>I would rather explore this new world.</English>
+		<French>Je vais plut&#244;t explorer ce nouveau monde qui s'offre &#224; moi.</French>
+		<German>Ich m&#246;chte lieber diese neue Welt erforschen.</German>
+		<Italian>Preferirei esplorare questo nuovo mondo.</Italian>
+		<Spanish>Preferir&#237;a explorar este nuevo mundo.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TUTORIAL_JOIN_UNIT_TO_CITY_DONE_2</Tag>
+		<English>Back to the game.</English>
+		<French>Retour &#224; la partie.</French>
+		<German>Zur&#252;ck zum Spiel.</German>
+		<Italian>Torna alla partita.</Italian>
+		<Spanish>Volver al juego.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TUTORIAL_IMMIGRATION_GO</Tag>
+		<English>I will pick up the colonist from Europe.</English>
+		<French>Je vais r&#233;cup&#233;rer le colon en Europe.</French>
+		<German>Ich werde den Kolonisten in Europa abholen.</German>
+		<Italian>Prender&#242; il colono in Europa.</Italian>
+		<Spanish>Recoger&#233; al Colono de Europa.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TUTORIAL_IMMIGRATION_WAIT</Tag>
+		<English>He can wait. I have other things to attend to.</English>
+		<French>Il peut attendre. J'ai d'autres choses plus importantes &#224; faire.</French>
+		<German>Er kann warten. Ich muss mich um andere Dinge k&#252;mmern.</German>
+		<Italian>Pu&#242; aspettare. Ho altre cose da fare.</Italian>
+		<Spanish>Que se espere. Tengo otras cosas que hacer.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TUTORIAL_RETURN_TO_GAME</Tag>
+		<English>Return to game.</English>
+		<French>Retour &#224; la partie.</French>
+		<German>Zum Spiel zur&#252;ckkehren.</German>
+		<Italian>Torna alla partita.</Italian>
+		<Spanish>Regresar al juego.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TUTORIAL_CIVILOPEDIA</Tag>
+		<English>Tell me more.</English>
+		<French>Dites-m'en plus.</French>
+		<German>Ich m&#246;chte mehr erfahren.</German>
+		<Italian>Dimmi di pi&#249;.</Italian>
+		<Spanish>Explicadme m&#225;s.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TUTORIAL_PIONEER</Tag>
+		<English>I will make a Pioneer.</English>
+		<French>Je vais cr&#233;er un pionnier.</French>
+		<German>Ich m&#246;chte einen Pionier errichten.</German>
+		<Italian>Creer&#242; un pioniere.</Italian>
+		<Spanish>Har&#233; un Pionero.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TUTORIAL_NO_PIONEER</Tag>
+		<English>I have no interest in improving my land right now.</English>
+		<French>Je n'ai aucune envie d'am&#233;liorer mon territoire.</French>
+		<German>Ich m&#246;chte im Augenblick mein Land nicht modernisieren.</German>
+		<Italian>Non mi interessa migliorare la terra, in questo momento.</Italian>
+		<Spanish>Ahora mismo no tengo inter&#233;s en mejorar la tierra.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TUTORIAL_IMPROVE_LAND</Tag>
+		<English>I will improve my land.</English>
+		<French>Je vais am&#233;liorer mon territoire.</French>
+		<German>Ich werde mein Land modernisieren.</German>
+		<Italian>Migliorer&#242; la terra.</Italian>
+		<Spanish>Mejorar&#233; mi tierra.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TUTORIAL_NO_IMPROVE_LAND</Tag>
+		<English>I have no interest in improving my land right now.</English>
+		<French>Je n'ai aucune envie d'am&#233;liorer mon territoire.</French>
+		<German>Ich m&#246;chte im Augenblick mein Land nicht modernisieren.</German>
+		<Italian>Non mi interessa migliorare la terra, in questo momento.</Italian>
+		<Spanish>Ahora mismo no tengo inter&#233;s en mejorar la tierra.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_RESOURCE_TOOLS</Tag>
+		<English>[BOLD]Tools[\BOLD][NEWLINE][TAB]%s2_city has begun to create Tools. Manufactured from Ore, Tools are required to build many advanced buildings and are also used to make Pioneers and Guns.</English>
+		<French>[BOLD]Outils[\BOLD][NEWLINE][TAB]%s2_city a commenc&#233; &#224; cr&#233;er des outils. Fabriqu&#233;s &#224; partir de minerai, les outils sont n&#233;cessaires pour construire de nombreux b&#226;timents complexes et servent aussi &#224; la cr&#233;ation des pionniers et des armes &#224; feu.</French>
+		<German>[BOLD]Werkzeuge[\BOLD][NEWLINE][TAB]%s2_city hat mit der Produktion von Werkzeugen begonnen. Die aus Eisenerz gefertigten Werkzeuge werden zur Errichtung vieler fortschrittlicher Geb&#228;ude ben&#246;tigt und kommen ebenfalls bei der Ausbildung von Pionieren und der Herstellung von Schusswaffen zum Einsatz.</German>
+		<Italian>[BOLD]Attrezzi[\BOLD][NEWLINE][TAB]%s2_city ha cominciato a produrre attrezzi. Vengono prodotti usando il minerale e sono richiesti per costruire molti edifici avanzati; inoltre servono anche per creare pionieri e armi.</Italian>
+		<Spanish>[BOLD]Herramientas[\BOLD][NEWLINE][TAB]%s2_city ha empezado a crear Herramientas. Construidas a partir de Mineral, las Herramientas son necesarias para construir muchos edificios avanzados y tambi&#233;n se utilizan para hacer Pioneros y Armas.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_BUILDING_REQUIRES_TOOLS</Tag>
+		<English>[BOLD]Tools[\BOLD][NEWLINE][TAB]%s2_city has begun constructing a building that requires Tools. The Tools will be consumed at the end of the building's construction, so you do not need to have them in the city at the beginning of construction.</English>
+		<French>[BOLD]Outils[\BOLD][NEWLINE][TAB]%s2_city a commenc&#233; &#224; construire un b&#226;timent n&#233;cessitant des outils. Les outils seront consomm&#233;s &#224; la fin de la construction du b&#226;timent, votre ville n'a donc pas besoin d'en poss&#233;der lorsque la construction d&#233;marre.</French>
+		<German>[BOLD]Werkzeuge[\BOLD][NEWLINE][TAB]%s2_city hat mit der Errichtung eines Geb&#228;udes begonnen, f&#252;r das Werkzeuge ben&#246;tigt werden. Die Werkzeuge werden am Ende des Bauvorhabens gebraucht, zu Beginn m&#252;ssen sie sich also noch nicht in der Stadt befinden.</German>
+		<Italian>[BOLD]Attrezzi[\BOLD][NEWLINE][TAB]%s2_city ha cominciato a costruire un edificio che richiede attrezzi. Gli attrezzi saranno consumati alla fine della costruzione dell'edificio, quindi non serve che tu li abbia in citt&#224; quando avvii la costruzione.</Italian>
+		<Spanish>[BOLD]Herramientas[\BOLD][NEWLINE][TAB]%s2_city ha empezado a construir un edificio que precisa Herramientas. Las Herramientas se consumir&#225;n al t&#233;rmino de la construcci&#243;n del edificio, por lo que no necesit&#225;is tenerlas en la ciudad al principio de la construcci&#243;n.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_AUTOMATED_TRADE</Tag>
+		<English>[BOLD]Automated Trade[\BOLD][NEWLINE][TAB]Trade between two cities can be automated by using a transport, such as a wagon train or a ship. To set up trade, first click on the governor tab in the Settlement Screen and assign an import in one settlement and an export in another. Now select a transport unit (either a ship or wagon train), click on the Assign Trade Routes button and place a checkmark in the trade route you would like this transport unit to begin traveling.</English>
+		<French>[BOLD]Commerce automatis&#233;[\BOLD][NEWLINE][TAB]Le commerce entre deux villes peut &#234;tre automatis&#233; en utilisant une unit&#233; de transport, comme un convoi de chariots ou un navire. Pour mettre en place le commerce, cliquez sur l'onglet "Gouverneur" dans l'&#233;cran de colonie et attribuez une importation &#224; une colonie et une exportation &#224; une autre. S&#233;lectionnez ensuite une unit&#233; de transport (un navire ou un convoi de chariots), cliquez sur le bouton "Attribuer des routes commerciales" et d&#233;signez la route commerciale sur laquelle vous voulez faire circuler cette unit&#233; de transport.</French>
+		<German>[BOLD]Automatisierter Handel[\BOLD][NEWLINE][TAB]Der Handel zwischen zwei St&#228;dten kann mit Hilfe eines Transportmittels, d. h. ein Kutschentross oder ein Schiff, automatisiert werden. Um alle Handelsvorkehrungen zu treffen, klicken Sie im Siedlungsbildschirm auf "Gouverneur" und weisen Sie der einen Siedlung einen Import, der anderen einen Export zu. Jetzt w&#228;hlen Sie eine Transporteinheit (entweder ein Schiff oder einen Kutschentross), klicken Sie auf "Handelswege zuweisen" und markieren Sie den Handelsweg, den das Transportmittel nehmen soll.</German>
+		<Italian>[BOLD]Commercio automatizzato[\BOLD][NEWLINE][TAB]Puoi automatizzare il commercio tra due citt&#224; usando un trasporto, come una colonna di carovane o una nave. Per impostarlo devi prima cliccare su Governatore, nella schermata dell'insediamento, e selezionare un'importazione in un insediamento e un'esportazione in un altro. Poi seleziona un'unit&#224; da trasporto (una nave o una colonna di carovane), clicca sul pulsante Assegna rotte commerciali e metti un visto sulla rotta che vorresti far percorrere all'unit&#224; da trasporto.</Italian>
+		<Spanish>[BOLD]Intercambio automatizado[\BOLD][NEWLINE][TAB]El intercambio entre dos ciudades puede automatizarse mediante un transporte como, por ejemplo, una Caravana de carromatos o un barco. Para iniciar el intercambio, primero haced clic en la pesta&#241;a del gobernante, en la pantalla del asentamiento, y asignad una importaci&#243;n en un asentamiento y una exportaci&#243;n en otro. Ahora, seleccionad la unidad de transporte (bien un barco o una Caravana de carromatos), haced clic en el bot&#243;n "Asignar rutas comerciales" y marcad la ruta comercial en que quer&#233;is que empiece a recorrer esta unidad de transporte.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_JOIN_UNIT_TO_CITY_2</Tag>
+		<English>[BOLD]Joining a Settlement[\BOLD][NEWLINE][TAB]Congratulations! You have established the settlement of %s2_city. In order to increase your settlement's population and production, you must join new units to your settlements. Move a unit onto a settlement and click the "Join Settlement" button.</English>
+		<French>[BOLD]Rejoindre une colonie[\BOLD][NEWLINE][TAB]F&#233;licitations ! Vous avez fond&#233; la colonie : %s2_city. Pour augmenter sa productivit&#233; et la population, vous allez devoir y mobiliser des colons. D&#233;placez-y une unit&#233; et cliquez sur "Rejoindre la colonie".</French>
+		<German>[BOLD]Einer Siedlung anschlie&#223;en[\BOLD][NEWLINE][TAB]Gl&#252;ckwunsch! Sie haben die Siedlung %s2_city gegr&#252;ndet. Um die Bev&#246;lkerung und die Produktion Ihrer Siedlung zu steigern, m&#252;ssen sich neue Einheiten der Siedlung anschlie&#223;en. Bewegen Sie eine Einheit auf eine Siedlung und klicken Sie auf "Anschluss an Siedlung".</German>
+		<Italian>[BOLD]Unire all'insediamento[\BOLD][NEWLINE][TAB]Congratulazioni! Hai fondato l'insediamento di %s2_city. Per aumentarne produzione e popolazione, devi unire nuove unit&#224; all'insediamento. Sposta un'unit&#224; sull'insediamento e clicca sul pulsante "Unisci all'insediamento".</Italian>
+		<Spanish>[BOLD]Unirse a un asentamiento[\BOLD][NEWLINE][TAB]&#161;Felicidades! Hab&#233;is fundado el asentamiento de %s2_city. Para aumentar la poblaci&#243;n y la producci&#243;n de vuestro asentamiento, deb&#233;is a&#241;adirle nuevas unidades. Llevad la unidad a &#233;ste y haced clic en el bot&#243;n "Unirse a asentamiento".</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_MOTHERLAND</Tag>
+		<English>[BOLD]Europe[\BOLD][NEWLINE][TAB]One of your ships is expected to arrive in Europe shortly. From the Europe screen, you can buy and sell goods, load immigrants, and recruit new units. When you are done, drag your ship to the section of the screen labeled "Outbound."</English>
+		<French>[BOLD]Europe[\BOLD][NEWLINE][TAB]L'un de vos navires arrivera bient&#244;t en Europe. Depuis l'&#233;cran de l'Europe, vous pouvez acheter et vendre des marchandises, faire monter des immigrants &#224; bord et recruter de nouvelles unit&#233;s. Une fois que vous avez termin&#233;, faites glisser votre navire dans la zone de l'&#233;cran o&#249; appara&#238;t la mention "En partance".</French>
+		<German>[BOLD]Europa[\BOLD][NEWLINE][TAB]Eines Ihrer Schiffe soll in K&#252;rze in Europa ankommen. Im Europa-Bildschirm k&#246;nnen Sie G&#252;ter kaufen und verkaufen, Immigranten an Bord holen und neue Einheiten rekrutieren. Wenn Sie damit fertig sind, ziehen Sie Ihr Schiff in den Bereich des Bildschirms, auf dem "Auslaufend" steht.</German>
+		<Italian>[BOLD]Fondare un insediamento[\BOLD][NEWLINE][TAB]La vita di un colono &#232; piena di sfide. Per sopravvivere dovrai trovare una terra e fondare una colonia. Quando selezioni un'unit&#224; che pu&#242; costruire una colonia, sulle caselle adatte alla fondazione di una colonia appariranno dei cerchi verdi. Dopo aver trovato la posizione adeguata, sposta un'unit&#224; su quella casella e clicca sul pulsante "Costruisci insediamento".</Italian>
+		<Spanish>[BOLD]Europa[\BOLD][NEWLINE][TAB]Se espera que uno de vuestros barcos llegue a Europa en breve. En la pantalla de Europa, pod&#233;is comprar y vender mercanc&#237;as, embarcar a inmigrantes y reclutar nuevas unidades. Cuando hay&#225;is terminado, arrastrad el barco a la secci&#243;n de la pantalla llamada "Salientes".</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_PROFESSIONS</Tag>
+		<English>[BOLD]Professions[\BOLD][NEWLINE][TAB]Any citizen can be assigned to any Profession by [double-clicking] him on the settlement screen and selecting a profession from the menu, or by dragging him onto a tile or building. The number of goods that a unit creates while assigned to a profession depends in large part on the unit's type. For example, an Indentured Servant can work in the Blacksmith's Shop, although he will not produce as many tools as an Expert Blacksmith.</English>
+		<French>[BOLD]Professions[\BOLD][NEWLINE][TAB]N'importe quel citoyen peut adopter n'importe quelle profession. Pour cela, faites un [double clic] sur lui dans l'&#233;cran de colonie et choisissez-lui une profession dans le menu. Vous pouvez &#233;galement le faire glisser vers une case ou un b&#226;timent. La quantit&#233; de marchandises que cette unit&#233; cr&#233;e lorsque vous lui avez attribu&#233; une profession d&#233;pend en grande partie de son type. Par exemple, m&#234;me si un engag&#233; peut travailler dans une forge, il ne produira pas autant d'outils qu'un forgeron professionnel.</French>
+		<German>[BOLD]Berufe[\BOLD][NEWLINE][TAB]Jeder B&#252;rger kann einem beliebigen Beruf zugewiesen werden - entweder, indem Sie im Siedlungsbildschirm doppelt auf den B&#252;rger klicken und aus dem Men&#252; einen Beruf ausw&#228;hlen, oder indem Sie ihn auf ein Gel&#228;ndefeld oder Geb&#228;ude ziehen. Die Anzahl der G&#252;ter, die eine Einheit produziert, h&#228;ngt zu einem gro&#223;en Teil von der Art der Einheit ab. So kann etwa ein Schuldknecht in einem Schmiedebetrieb arbeiten, wird jedoch deutlich weniger Werkzeug herstellen als ein Meisterschmied.</German>
+		<Italian>[BOLD]Professioni[\BOLD][NEWLINE][TAB]Puoi assegnare qualsiasi professione a qualsiasi cittadino [cliccandolo due volte] nella schermata dell'insediamento e selezionando una professione dal menu, oppure puoi trascinarlo su una casella o un edificio. Il numero di beni prodotti da un'unit&#224; mentre &#232; assegnata a una professione dipende in gran parte dal tipo di unit&#224;. Per esempio un servo per contratto pu&#242; lavorare nella bottega del fabbro, anche se non produrr&#224; tanti attrezzi quanti ne produce mastro fabbro.</Italian>
+		<Spanish>[BOLD]Profesiones[\BOLD][NEWLINE][TAB]Se puede asignar cualquier profesi&#243;n a cualquier ciudadano haciendo doble clic en &#233;l en la pantalla del asentamiento y seleccionando una profesi&#243;n en el men&#250;, o bien arrastr&#225;ndolo a una casilla o a un edificio. La cantidad de mercanc&#237;as que una unidad cree cuando tenga asignada una profesi&#243;n depende en su mayor parte del tipo de unidad. Por ejemplo, un Siervo por deudas puede trabajar en la Herrer&#237;a, aunque no producir&#225; tantas Herramientas como un Herrero experto.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_IMPROVE_LAND_DONE</Tag>
+		<English>[BOLD]Improving Land Tiles[\BOLD][NEWLINE][TAB]Congratulations! You have built a %s8_improvement near %s2_city.</English>
+		<French>[BOLD]Am&#233;liorer les cases de terrain[\BOLD][NEWLINE][TAB]F&#233;licitations ! Vous venez de construire l'am&#233;lioration : %s8_improvement pr&#232;s de la colonie : %s2_city.</French>
+		<German>[BOLD]Gel&#228;ndefelder modernisieren[\BOLD][NEWLINE][TAB]Gl&#252;ckwunsch! Sie haben die Modernisierung %s8_improvement in der N&#228;he der Siedlung %s2_city errichtet.</German>
+		<Italian>[BOLD]Migliorare le caselle di terra[\BOLD][NEWLINE][TAB]Congratulazioni! Hai costruito il miglioramento %s8_improvement vicino a %s2_city.</Italian>
+		<Spanish>[BOLD]Mejora de las casillas de tierra[\BOLD][NEWLINE][TAB]&#161;Felicidades! Hab&#233;is construido [NUM8:un:una:unos:unas] %s8_improvement cerca de %s2_city.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_SPEAK_WITH_CHIEF</Tag>
+		<English>[BOLD]Speak to Chief[\BOLD][NEWLINE][TAB]Making contact with the chiefs of neighboring native villages can be a valuable source of resources to fledgling colonies. Contacted chiefs will tell you what goods their village is interested in acquiring, what skill they can teach your colonists, and - if you are the first European to contact the village - they will often give you a gift.[NEWLINE][TAB]To speak to a chief, move a unit onto the village tile and select the "Speak to Chief" order.</English>
+		<French>[BOLD]Parler au chef[\BOLD][NEWLINE][TAB]Rencontrer les chefs des villages indig&#232;nes voisins peut s'av&#233;rer une pr&#233;cieuse mine de ressources pour les colonies nouvellement cr&#233;&#233;es. Les chefs que vous contactez vous diront quelles marchandises leur village souhaiterait pouvoir acheter, les comp&#233;tences qu'ils peuvent enseigner &#224; vos colons, et si vous &#234;tes le premier Europ&#233;en &#224; entrer en contact avec eux, ils pourront m&#234;me vous offrir un cadeau ![NEWLINE][TAB]Pour parler &#224; un chef, envoyez une unit&#233; sur la case du village et s&#233;lectionnez l'ordre "Parler au chef".</French>
+		<German>[BOLD]Mit dem H&#228;uptling sprechen[\BOLD][NEWLINE][TAB]Den Kontakt mit H&#228;uptlingen benachbarter D&#246;rfer von Eingeborenen herzustellen kann eine wertvolle Ressourcenquelle f&#252;r junge Kolonien sein. Kontaktierte H&#228;uptlinge werden Ihnen mitteilen, an welchen G&#252;tern ihr Dorf interessiert ist, welche F&#228;higkeiten sie Ihren Kolonisten beibringen k&#246;nnen, und - falls Sie der erste Europ&#228;er sind, der Kontakt zu dem Dorf aufnimmt - &#252;berreichen sie oft Geschenke.[NEWLINE][TAB]Um mit einem H&#228;uptling zu sprechen, bewegen Sie eine Einheit auf das Gel&#228;ndefeld des Dorfes und w&#228;hlen Sie den Befehl "Mit dem H&#228;uptling sprechen!".</German>
+		<Italian>[BOLD]Parla con il capo[\BOLD][NEWLINE][TAB]Prendere contatti con i capi dei vicini villaggi nativi pu&#242; rivelarsi una valida fonte di risorse per le neonate colonie. I capi che contatti ti diranno quali sono i beni che al loro villaggio interessa acquistare, quali abilit&#224; possono insegnare ai tuoi coloni e, se sarai il primo europeo a contattarli, spesso ti faranno un regalo.[NEWLINE][TAB]Per parlare con un capo, sposta un'unit&#224; sulla casella del villaggio e scegli l'ordine Parla con il capo.</Italian>
+		<Spanish>[BOLD]Hablar con los jefes[\BOLD][NEWLINE][TAB]Establecer contacto con los jefes de las aldeas nativas vecinas puede ser una fuente valiosa de recursos para las colonias incipientes. Los jefes con los que contact&#233;is os dir&#225;n qu&#233; mercanc&#237;as le interesa adquirir a su aldea, qu&#233; habilidad pueden ense&#241;arles a vuestros Colonos y ?si sois el primer europeo que contacta con ellos? hasta os har&#225;n un regalo.[NEWLINE][TAB]Para hablar con un jefe, llevad una unidad hasta la casilla de la aldea y seleccionad la orden "Hablar con el jefe".</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TUTORIAL_SPEAK_WITH_CHIEF_ACCEPTED</Tag>
+		<English>I will go speak to a chief right away.</English>
+		<French>Je vais de ce pas rencontrer un chef.</French>
+		<German>Ich werde sofort mit einem H&#228;uptling sprechen.</German>
+		<Italian>Parler&#242; subito con un capo.</Italian>
+		<Spanish>Ir&#233; a hablar con un jefe ahora mismo.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TUTORIAL_SPEAK_WITH_CHIEF_DENIED</Tag>
+		<English>I don't want to go talk to the native chiefs.</English>
+		<French>Je refuse d'aller &#224; la rencontre des chefs indig&#232;nes.</French>
+		<German>Ich will nicht mit den Eingeborenenh&#228;uptlingen sprechen.</German>
+		<Italian>Non voglio andare a parlare con i capi dei nativi.</Italian>
+		<Spanish>No quiero hablar con los jefes nativos.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_SPEAK_WITH_CHIEF_COMPLETED</Tag>
+		<English>[BOLD]Success![\BOLD][NEWLINE][TAB]Good job! You have successfully spoken to a chief.</English>
+		<French>[BOLD]Victoire ![\BOLD][NEWLINE][TAB]Bien jou&#233; ! Vous avez r&#233;ussi &#224; parler &#224; un chef.</French>
+		<German>[BOLD]Erfolg![\BOLD][NEWLINE][TAB]Gut gemacht! Sie haben erfolgreich mit einem H&#228;uptling gesprochen.</German>
+		<Italian>[BOLD]Ce l'hai fatta![\BOLD][NEWLINE][TAB]Bel lavoro! Sei riuscito a parlare con un capo.</Italian>
+		<Spanish>[BOLD]&#161;Conseguido![\BOLD][NEWLINE][TAB]&#161;Buen trabajo! Hab&#233;is conseguido hablar con un jefe.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_WAR</Tag>
+		<English>[BOLD]War[\BOLD][NEWLINE][TAB]War has been declared between you and the %s1_civ. To defend your cities, you will want to make sure each of your settlements has guns. Guns can either be purchased from Europe or built in a settlement that has an Armory. [NEWLINE]Once you have guns, any unit can be equipped with guns to make them a Soldier. In addition to guns, Cannons can also be made in an Armory or bought from Europe. War will continue until one side is destroyed, or a peace is negotiated through the diplomacy screen.</English>
+		<French>[BOLD]Guerre[\BOLD][NEWLINE][TAB]La guerre a &#233;t&#233; d&#233;clar&#233;e entre vous et les %s1_civ. Pour assurer la d&#233;fense de vos villes, vous devrez faire en sorte que toutes vos villes poss&#232;dent des armes &#224; feu. Pour vous procurer des armes &#224; feu, achetez-les en Europe ou faites-les fabriquer dans une colonie &#233;quip&#233;e d'une armurerie.[NEWLINE]Une fois en possession d'armes &#224; feu, vous pouvez en &#233;quiper vos unit&#233;s pour en faire des soldats. En plus des armes &#224; feu, les canons peuvent &#233;galement &#234;tre fabriqu&#233;s dans une armurerie ou achet&#233;s en Europe. La guerre continuera de faire rage jusqu'&#224; ce que l'un des deux camps soient d&#233;truit ou qu'un accord de paix soit n&#233;goci&#233; via l'&#233;cran de diplomatie.</French>
+		<German>[BOLD]Krieg[\BOLD][NEWLINE][TAB]Zwischen Ihrem und dem %s1:3_civ Volk wurde der Krieg erkl&#228;rt. Um Ihre Siedlungen zu verteidigen, sollten Sie sicherstellen, dass alle Ihre Siedlungen &#252;ber Schusswaffen verf&#252;gen. Sie k&#246;nnen entweder aus Europa gekauft oder in einer Siedlung hergestellt werden, die &#252;ber eine Waffenkammer verf&#252;gt. [NEWLINE]Sobald Sie Schusswaffen haben, k&#246;nnen Sie alle Einheiten damit ausstatten, um sie zu Soldaten zu machen. Zus&#228;tzlich zu den Schusswaffen k&#246;nnen Sie auch Kanonen in der Waffenkammer herstellen oder in Europa kaufen. Der Krieg dauert an, bis eine Seite zerst&#246;rt ist oder &#252;ber den Diplomatie-Bildschirm Frieden ausgehandelt wurde.</German>
+		<Italian>[BOLD]Guerra[\BOLD][NEWLINE][TAB]&#200; scoppiata la guerra tra te e i %s1_civ. Per difendere le tue citt&#224;, assicurati che ogni insediamento disponga di armi. Puoi acquistarle dall'Europa oppure farle costruire in un insediamento dotato di armeria. [NEWLINE]Quando avrai le armi, potrai trasformare qualsiasi unit&#224; in soldati. Oltre alle armi, anche i cannoni possono essere costruiti in un'armeria o acquistati dall'Europa. La guerra continuer&#224; fino alla distruzione di uno dei contendenti oppure fino a quando non verr&#224; stipulato un trattato di pace tramite la schermata della diplomazia.</Italian>
+		<Spanish>[BOLD]Guerra[\BOLD][NEWLINE][TAB]Se ha declarado la guerra entre vosotros y el %s1_civ. Para defender vuestras ciudades, deb&#233;is cercioraros de que todos vuestros asentamientos tengan Armas. &#201;stas pueden comprarse en Europa o hacerse en un asentamiento que cuente con un Polvor&#237;n. [NEWLINE]Cuando teng&#225;is Armas, podr&#233;is equipar a cualquier unidad con ellas para convertirla en un Soldado. Adem&#225;s de Armas, tambi&#233;n se pueden hacer Ca&#241;ones en un Polvor&#237;n o comprarlos en Europa. La guerra seguir&#225; hasta que uno de los bandos sea destruido o se negocie la paz mediante la pantalla de diplomacia.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_IMMIGRANT_DONE_2</Tag>
+		<English>[BOLD]Immigration[\BOLD][NEWLINE][TAB]Congratulations! You have picked up your first immigrant from Europe. Immigrants appear as your settlements produce Crosses. You can increase your production of Crosses by having a unit work within a Church or Cathedral. You can see how long it will be until another immigrant becomes available on the Europe Screen.</English>
+		<French>[BOLD]Immigration[\BOLD][NEWLINE][TAB]F&#233;licitations ! Vous avez r&#233;cup&#233;r&#233; votre premier immigrant en Europe. Les immigrants apparaissent &#224; mesure que vos colonies produisent des croix. Pour augmenter votre production de croix, faites travailler une unit&#233; dans une &#233;glise ou une cath&#233;drale. Consultez l'&#233;cran de l'Europe pour savoir dans combien de temps le prochain immigrant sera disponible.</French>
+		<German>[BOLD]Immigration[\BOLD][NEWLINE][TAB]Gl&#252;ckwunsch! Sie haben Ihren ersten Immigranten aus Europa aufgenommen! Immigranten erscheinen, wenn Ihre Siedlungen Kreuze produzieren. Sie k&#246;nnen die Produktion von Kreuzen erh&#246;hen, wenn Sie eine Einheit in einer Kirche oder Kathedrale arbeiten lassen. Wie lange es dauert, bis ein weiterer Immigrant verf&#252;gbar wird, sehen Sie auf dem Europa-Bildschirm.</German>
+		<Italian>[BOLD]Immigrazione[\BOLD][NEWLINE][TAB]Congratulazioni! Hai raccolto il tuo primo immigrante proveniente dall'Europa. Gli immigranti vengono visualizzati mano a mano che i tuoi insediamenti producono croci. Puoi aumentare la produzione di croci assegnando un'unit&#224; al lavoro in una chiesa o una cattedrale. Puoi vedere quanto tempo manca alla comparsa di un nuovo immigrante nella schermata dell'Europa.</Italian>
+		<Spanish>[BOLD]Inmigraci&#243;n[\BOLD][NEWLINE][TAB]&#161;Felicidades! Hab&#233;is recogido a vuestro primer inmigrante de Europa. Los inmigrantes aparecen a medida que los asentamientos producen Cruces. Pod&#233;is aumentar vuestra producci&#243;n de Cruces si hac&#233;is que una unidad trabaje en una Iglesia o en una Catedral. En la pantalla de Europa pod&#233;is ver cu&#225;nto tiempo queda para tener disponible a otro inmigrante.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_FOUNDING_FATHERS_2</Tag>
+		<English>[BOLD]Founding Fathers[\BOLD][NEWLINE][TAB]A Founding Father is about to offer to join your colony. A Founding Father is not a physical unit in the game, but instead provides a significant bonus to your colony. When a Founding Father joins your colony, Founding Father points are consumed, so sometimes it may be advantageous to save your points for a more expensive Founding Father. But be warned, a Founding Father will join only the first colony that accepts him or her.</English>
+		<French>[BOLD]P&#232;res fondateurs[\BOLD][NEWLINE][TAB]Un P&#232;re fondateur s'appr&#234;te &#224; rejoindre votre colonie. Le P&#232;re fondateur n'est pas une unit&#233; physique du jeu, mais il apporte un bonus significatif &#224; votre colonie. Quand un P&#232;re fondateur rejoint votre colonie, vous utilisez des points de P&#232;res fondateurs, il peut donc parfois s'av&#233;rer avantageux d'&#233;conomiser vos points pour acqu&#233;rir un P&#232;re fondateur plus cher. Mais attention, un P&#232;re fondateur ne rejoindra que la premi&#232;re colonie qui l'accepte.</French>
+		<German>[BOLD]Gr&#252;nderv&#228;ter[\BOLD][NEWLINE][TAB]Ein Gr&#252;ndervater macht Ihnen das Angebot, sich Ihrer Kolonie anzuschlie&#223;en. Ein Gr&#252;ndervater ist keine physische Einheit im Spiel, sondern sie bietet einen betr&#228;chtlichen Bonus f&#252;r Ihre Kolonie. Wenn sich ein Gr&#252;ndervater Ihrer Kolonie anschlie&#223;t, kostet das Gr&#252;nderv&#228;terpunkte, es kann also manchmal von Vorteil sein, die Punkte f&#252;r einen teureren Gr&#252;ndervater zu sparen. Aber seien Sie gewarnt, ein Gr&#252;ndervater schlie&#223;t sich nur der Kolonie an, die ihn als Erstes aufnimmt.</German>
+		<Italian>[BOLD]Padri Fondatori[\BOLD][NEWLINE][TAB]Un Padre Fondatore sta per offrirsi di unirsi alla tua colonia. Un Padre Fondatore non &#232; un'unit&#224; fisica vera e propria, ma fornisce un importante bonus alla tua colonia. Quando un Padre Fondatore si unisce alla tua colonia, consumi punti Padre Fondatore, quindi talvolta conviene risparmiarli per spenderli successivamente per un Padre Fondatore pi&#249; costoso. Ma fai attenzione, perch&#233; un Padre Fondatore entrer&#224; solo nella prima colonia che lo accetta.</Italian>
+		<Spanish>[BOLD]Padres fundadores[\BOLD][NEWLINE][TAB]Un Padre fundador est&#225; a punto de unirse a vuestra colonia. Un Padre fundador no es unidad "f&#237;sica" del juego, si no que, en vez de ello, proporciona una bonificaci&#243;n importante a vuestra colonia. Cuando un Padre fundador se une a vuestra colonia, se consumen puntos de Padres fundadores, por lo que a veces puede resultar m&#225;s provechoso guardarse los puntos para un Padre fundador m&#225;s caro. Aunque tambi&#233;n hab&#233;is de saber que un Padre fundador (o Madre fundadora) solo se unir&#225; a la primera colonia que lo (la) acepte.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_OVERSTOCK</Tag>
+		<English>[BOLD]Goods Wasted[\BOLD][NEWLINE][TAB]You are losing goods in %s2_city. Each settlement can normally only hold 100 of each good, and once this threshold is reached you will begin losing goods each turn. To increase this threshold build a Warehouse or Warehouse Expansion.</English>
+		<French>[BOLD]Marchandises perdues[\BOLD][NEWLINE][TAB]%s2_city perd des marchandises. Chaque colonie ne peut normalement disposer que de 100 unit&#233;s de chaque marchandise au maximum. Si jamais ce plafond venait &#224; &#234;tre d&#233;pass&#233;, vous commenceriez &#224; perdre des marchandises chaque tour. Pour augmenter ce plafond, construisez un entrep&#244;t ou une extension d'entrep&#244;t.</French>
+		<German>[BOLD]Verschwendete G&#252;ter[\BOLD][NEWLINE][TAB]Sie verlieren G&#252;ter in der Siedlung %s2_city. Jede Siedlung kann normalerweise 100 Einheiten jedes Gutes halten, aber wenn diese Grenze erreicht ist, verlieren Sie in jede Runde G&#252;ter. Um diese Grenze zu erh&#246;hen, errichten Sie ein Lagerhaus oder eine Lagerhauserweiterung.</German>
+		<Italian>[BOLD]Beni sprecati[\BOLD][NEWLINE][TAB]A %s2_city stai perdendo beni. Normalmente ogni insediamento pu&#242; immagazzinare 100 unit&#224; di ciascun bene e, una volta raggiunto questo limite, comincerai a perdere beni a ogni turno. Per aumentare il limite devi costruire un magazzino o un'espansione del magazzino.</Italian>
+		<Spanish>[BOLD]Mercanc&#237;as desperdiciadas[\BOLD][NEWLINE][TAB]Est&#225;is perdiendo mercanc&#237;as en %s2_city. Normalmente, cada asentamiento solo puede almacenar 100 unidades de cada mercanc&#237;a y, una vez que se alcanza este tope, empezar&#233;is a perder mercanc&#237;as cada turno. Para aumentar este tope, construid un Almac&#233;n o un Almac&#233;n ampliado.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_TAXES</Tag>
+		<English>[BOLD]Taxes![\BOLD][NEWLINE][TAB]Your King has raised your taxes. These taxes will be deducted from every monetary transaction with your motherland.[NEWLINE]Any time your king attempts to raise your taxes, you are given the option of throwing a "Goods Party." Doing so will stop the tax increase, but you will never be able to trade that good with your motherland again!</English>
+		<French>[BOLD]Imp&#244;ts ![\BOLD][NEWLINE][TAB]Votre roi a augment&#233; vos imp&#244;ts, d&#233;duits de chaque transaction mon&#233;taire que vous effectuez avec la m&#232;re patrie.[NEWLINE]Chaque fois que votre roi veut augmenter vos imp&#244;ts, vous avez la possibilit&#233; d'organiser une op&#233;ration contestataire de Destruction des marchandises. Si vous choisissez cette option, l'augmentation sera ignor&#233;e, mais vous ne pourrez plus jamais vendre cette marchandise en Europe !</French>
+		<German>[BOLD]Steuern![\BOLD][NEWLINE][TAB]Ihr K&#246;nig hat die Steuern erh&#246;ht. Diese Steuern werden bei jeder Geldtransaktion mit Ihrem Heimatland abgezogen.[NEWLINE]Immer wenn Ihr K&#246;nig versucht, die Steuern zu erh&#246;hen, k&#246;nnen Sie einen "G&#252;teraufstand" starten. Dadurch verhindern Sie die Steuererh&#246;hung, aber Sie k&#246;nnen dieses Gut nie mehr mit Ihrem Heimatland handeln!</German>
+		<Italian>[BOLD]Tasse![\BOLD][NEWLINE][TAB]Il re ha aumentato le tasse. Queste verranno dedotte da ogni transazione monetaria con la madrepatria.[NEWLINE]Ogni volta che il re cerca di aumentare le tasse, hai l'opportunit&#224; di protestare dando la "festa" di un determinato bene. Cos&#236; facendo eviterai l'aumento di tasse, ma non potrai mai pi&#249; commerciare quel bene con la madrepatria!</Italian>
+		<Spanish>[BOLD]&#161;Impuestos![\BOLD][NEWLINE][TAB]Vuestro rey os ha subido los impuestos. &#201;stos se deducir&#225;n de toda transacci&#243;n monetaria realizada con la madre patria.[NEWLINE]Cada vez que vuestro monarca intente subiros los impuestos, se os dar&#225; la opci&#243;n de fundar un partido para la mercanc&#237;a en concreto. Al hacerlo, impedir&#233;is el aumento de impuestos, pero nunca m&#225;s podr&#233;is comerciar con vuestra patria.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TUTORIAL_FOUND_COLONY_2</Tag>
+		<English>[BOLD]Founding a Settlement[\BOLD][NEWLINE][TAB]The life of a colonist is a challenging one. In order to survive, you will need to find land and construct a settlement. When a unit that can build a settlement is selected, blue circles will appear on the tiles that would make excellent locations to found a new settlement.  Once you have found the appropriate location, move a unit to the appropriate tile and click the "Build Settlement" button.</English>
+		<French>[BOLD]Fonder une colonie[\BOLD][NEWLINE][TAB]La vie d'un colon est loin d'&#234;tre un long fleuve tranquille. Pour survivre, vous allez devoir trouver une terre &#224; exploiter et y fonder une colonie. Quand une unit&#233; capable de b&#226;tir une colonie est s&#233;lectionn&#233;e, des cercles bleus apparaissent sur les cases susceptibles de convenir &#224; votre nouvelle colonie. Une fois que vous avez d&#233;termin&#233; l'endroit appropri&#233;, d&#233;placez-y une unit&#233; et s&#233;lectionnez "Fonder une colonie".</French>
+		<German>[BOLD]Eine Siedlung gr&#252;nden[\BOLD][NEWLINE][TAB]Das Leben eines Kolonisten ist nicht leicht. Um zu &#252;berleben, m&#252;ssen Sie Land finden und eine Siedlung errichten. Wenn eine Einheit ausgew&#228;hlt ist, die eine Siedlung gr&#252;nden kann, erscheinen blaue Kreise auf den zum Bau optimal geeigneten Gel&#228;ndefeldern. Wenn Sie einen geeigneten Ort gefunden haben, bewegen Sie die Einheit zu dem Gel&#228;ndefeld und klicken Sie auf "Siedlung gr&#252;nden".</German>
+		<Italian>[BOLD]Fondazione di un insediamento[\BOLD][NEWLINE][TAB]La vita di un colono &#232; piena di sfide. Per sopravvivere dovrai trovare una terra e fondare un insediamento. Quando selezioni un'unit&#224; che pu&#242; costruire un insediamento, sulle caselle adatte alla fondazione di un insediamento appariranno dei cerchi blu. Dopo aver trovato la posizione adeguata, sposta un'unit&#224; su quella casella e clicca sul pulsante "Costruisci insediamento".</Italian>
+		<Spanish>[BOLD]Fundaci&#243;n de un asentamiento[\BOLD][NEWLINE][TAB]La vida del colono es dif&#237;cil. Para sobrevivir, ten&#233;is que encontrar tierra y construir un asentamiento. Cuando se selecciona una unidad que puede construir un asentamiento, aparecer&#225;n c&#237;rculos azules en las casillas que se consideren id&#243;neas para fundar un asentamiento.  Una vez que hay&#225;is encontrado la ubicaci&#243;n apropiada, llevad una unidad a la respectiva casilla y haced clic en el bot&#243;n "Construir Asentamiento".</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TUTORIAL_CITY_SCREEN</Tag>
+		<English>[BOLD]Settlement Screen[\BOLD][NEWLINE][TAB]On the Settlement Screen, you can control what your settlement's population produces.  To produce raw materials, like cotton, sugar, or tobacco, simply drag a colonist into the Terrain Window to the right of the Building Display. To assign a colonist to make Manufactured Goods, drag him to a building on the Building Display in middle of the screen. You may also drag him to the section labeled "Garrison" to have the unit leave the settlement. Note, you must always have at least one colonist inside your settlement.[NEWLINE][TAB]Across the bottom of the settlement screen is the Goods Display, which list all of the goods your settlement contains and how many it is producing or losing each turn. Goods can be loaded into any transport currently in the same tile as your settlement by dragging them to the "Transport" section.</English>
+		<French>[BOLD]Ecran de colonie[\BOLD][NEWLINE][TAB]Sur l'&#233;cran de colonie, vous pouvez contr&#244;ler ce que produit la population de votre colonie. Pour produire des mati&#232;res premi&#232;res comme du coton, du sucre ou du tabac, il vous suffit de d&#233;poser un colon dans la fen&#234;tre du terrain, sur la droite de la fen&#234;tre des b&#226;timents. Pour assigner un colon &#224; la fabrication de marchandises manufactur&#233;es, d&#233;posez-le sur un b&#226;timent de la fen&#234;tre des b&#226;timents au centre de l'&#233;cran. Vous pouvez &#233;galement le d&#233;poser dans la section "Garnison" pour que l'unit&#233; quitte la colonie. Attention, vous devez toujours avoir au moins un colon pr&#233;sent dans votre colonie ![NEWLINE][TAB]En bas de l'&#233;cran se trouve la fen&#234;tre des marchandises, qui r&#233;pertorie la liste de toutes les marchandises que poss&#232;de votre colonie et combien elle en produit ou en perd chaque tour. Les marchandises peuvent &#234;tre charg&#233;es dans n'importe quelle unit&#233; de transport situ&#233;e sur la case de votre colonie, en les d&#233;posant dans la section "Transport".</French>
+		<German>[BOLD]Siedlungsbildschirm[\BOLD][NEWLINE][TAB]Im Siedlungsbildschirm k&#246;nnen Sie kontrollieren, was die Bev&#246;lkerung dieser Siedlung produziert. Um Rohstoffe wie Baumwolle, Zucker oder Tabak zu produzieren, zieht einfach einen Kolonisten in das Gel&#228;ndefenster rechts von der Geb&#228;udeanzeige. Um einen Kolonisten anzuweisen, Fertigwaren herzustellen, ziehen Sie ihn zu einem Geb&#228;ude der Geb&#228;udeanzeige in der Mitte des Bildschirms. Sie k&#246;nnen ihn auch in den Bereich "Garnison" ziehen, damit die Einheit die Siedlung verl&#228;sst. Achtung, in Ihrer Siedlung muss sich immer mindestens ein Kolonist befinden.[NEWLINE][TAB]Unten im Siedlungsbildschirm befindet sich die G&#252;teranzeige, eine Liste aller G&#252;ter Ihrer Siedlung mit Angaben, wie viel davon pro Runde produziert werden oder verlorengehen. G&#252;ter k&#246;nnen in ein beliebiges Transportmittel geladen werden, das sich im gleichen Gel&#228;ndefeld wie Ihre Siedlung befindet, indem Sie sie in den Bereich "Transport" ziehen.</German>
+		<Italian>[BOLD]Schermata dell'insediamento[\BOLD][NEWLINE][TAB]Nella schermata dell'insediamento puoi controllare ci&#242; che produce la popolazione del tuo insediamento. Per produrre materie prime come cotone, zucchero o tabacco, trascina semplicemente un colono nella finestra del terreno, a destra della finestra degli edifici. Per assegnare un colono alla produzione di beni finiti, trascinalo su un edificio nella finestra degli edifici, al centro dello schermo. Puoi anche trascinarlo nella sezione chiamata Guarnigione, per fare in modo che lasci l'insediamento. Ricorda che devi sempre avere almeno un colono all'interno dell'insediamento.[NEWLINE][TAB]Nella parte inferiore della schermata dell'insediamento trovi la finestra dei beni, che elenca tutti i beni contenuti nell'insediamento e quanti quest'ultimo ne produce o ne perde ogni turno. Puoi caricare i beni su qualsiasi mezzo di trasporto presente nella stessa casella dell'insediamento trascinandoli nella sezione Trasporto.</Italian>
+		<Spanish>[BOLD]Pantalla del asentamiento[\BOLD][NEWLINE][TAB]En esta pantalla pod&#233;is controlar lo que produce la poblaci&#243;n de vuestro asentamiento.  Para producir materias primas ?como Algod&#243;n, Az&#250;car o Tabaco? basta con arrastrar a un colono hasta la ventana del terreno, a la derecha del visor de edificios. Para destinar a un Colono a hacer bienes manufacturados, arrastradlo hasta un edificio del visor de edificios, en medio de la pantalla. Tambi&#233;n pod&#233;is arrastrarlo hasta el apartado llamado "Guarnici&#243;n" para que la unidad deje el asentamiento. Nota: Siempre deb&#233;is tener al menos un colono en vuestro asentamiento.[NEWLINE][TAB]A lo largo de la parte inferior de la pantalla se encuentra el visor de mercanc&#237;as, que lista todas las mercanc&#237;as que contiene el asentamiento y la cantidad de ellas que produce o pierde cada turno. Las mercanc&#237;as se pueden embarcar en cualquier transporte que se encuentre en la misma casilla del asentamiento arrastr&#225;ndolas al apartado "Transporte".</Spanish>
+	</TEXT>
+</Civ4GameText>

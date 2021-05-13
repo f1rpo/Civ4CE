@@ -27,18 +27,6 @@
 			<Description>TXT_KEY_DENIAL_JOKING</Description>
 		</DenialInfo>
 		<DenialInfo>
-			<Type>DENIAL_ANGER_CIVIC</Type>
-			<Description>TXT_KEY_DENIAL_ANGER_CIVIC</Description>
-		</DenialInfo>
-		<DenialInfo>
-			<Type>DENIAL_FAVORITE_CIVIC</Type>
-			<Description>TXT_KEY_DENIAL_FAVORITE_CIVIC</Description>
-		</DenialInfo>
-		<DenialInfo>
-			<Type>DENIAL_MINORITY_RELIGION</Type>
-			<Description>TXT_KEY_DENIAL_MINORITY_RELIGION</Description>
-		</DenialInfo>
-		<DenialInfo>
 			<Type>DENIAL_CONTACT_THEM</Type>
 			<Description>TXT_KEY_DENIAL_CONTACT_THEM</Description>
 		</DenialInfo>
@@ -53,14 +41,6 @@
 		<DenialInfo>
 			<Type>DENIAL_ATTITUDE_THEM</Type>
 			<Description>TXT_KEY_DENIAL_ATTITUDE_THEM</Description>
-		</DenialInfo>
-		<DenialInfo>
-			<Type>DENIAL_TECH_WHORE</Type>
-			<Description>TXT_KEY_DENIAL_TECH_WHORE</Description>
-		</DenialInfo>
-		<DenialInfo>
-			<Type>DENIAL_TECH_MONOPOLY</Type>
-			<Description>TXT_KEY_DENIAL_TECH_MONOPOLY</Description>
 		</DenialInfo>
 		<DenialInfo>
 			<Type>DENIAL_POWER_US</Type>
@@ -83,6 +63,10 @@
 			<Description>TXT_KEY_DENIAL_NO_GAIN</Description>
 		</DenialInfo>
 		<DenialInfo>
+			<Type>DENIAL_NOT_INTERESTED</Type>
+			<Description>TXT_KEY_DENIAL_NOT_INTERESTED</Description>
+		</DenialInfo>
+		<DenialInfo>
 			<Type>DENIAL_NOT_ALLIED</Type>
 			<Description>TXT_KEY_DENIAL_NOT_ALLIED</Description>
 		</DenialInfo>
@@ -101,10 +85,6 @@
 		<DenialInfo>
 			<Type>DENIAL_TOO_FAR</Type>
 			<Description>TXT_KEY_DENIAL_TOO_FAR</Description>
-		</DenialInfo>
-		<DenialInfo>
-			<Type>DENIAL_VASSAL</Type>
-			<Description>TXT_KEY_DENIAL_VASSAL</Description>
 		</DenialInfo>
 		<DenialInfo>
 			<Type>DENIAL_WAR_NOT_POSSIBLE_US</Type>

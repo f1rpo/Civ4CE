@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Jesse Smith (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by EXTREME (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -8,29 +8,33 @@
 	<GoodyInfos>
 		<GoodyInfo>
 			<Type>GOODY_LOW_GOLD</Type>
-			<Description>TXT_KEY_GOODY_GOLD</Description>
+			<Description>TXT_KEY_TRADE_TITLE_GOLD</Description>
 			<Sound>AS2D_GOODY_GOLD</Sound>
-			<iGold>20</iGold>
-			<iGoldRand1>21</iGoldRand1>
-			<iGoldRand2>21</iGoldRand2>
+			<AnnounceText>TXT_KEY_GOODY_ANNOUNCE_GOLD</AnnounceText>
+			<ChiefText>TXT_KEY_CHIEF_GOODY_GOLD</ChiefText>
+			<iGold>50</iGold>
+			<iGoldRand1>26</iGoldRand1>
+			<iGoldRand2>26</iGoldRand2>
 			<iMapOffset>0</iMapOffset>
 			<iMapRange>0</iMapRange>
 			<iMapProb>0</iMapProb>
 			<iExperience>0</iExperience>
 			<iHealing>0</iHealing>
 			<iDamagePrereq>0</iDamagePrereq>
-			<bTech>0</bTech>
 			<bBad>0</bBad>
+			<bWar>0</bWar>
 			<UnitClass>NONE</UnitClass>
-			<BarbarianClass>NONE</BarbarianClass>
-			<iBarbarianUnitProb>0</iBarbarianUnitProb>
-			<iMinBarbarians>0</iMinBarbarians>
+			<TeachUnitClass>NONE</TeachUnitClass>
+			<iCityGoodyWeight>1000</iCityGoodyWeight>
+			<GoodyWeights/>
 		</GoodyInfo>
 		<GoodyInfo>
 			<Type>GOODY_HIGH_GOLD</Type>
-			<Description>TXT_KEY_GOODY_GOLD</Description>
+			<Description>TXT_KEY_TRADE_TITLE_GOLD</Description>
 			<Sound>AS2D_GOODY_GOLD</Sound>
-			<iGold>20</iGold>
+			<AnnounceText>TXT_KEY_GOODY_ANNOUNCE_GOLD</AnnounceText>
+			<ChiefText>TXT_KEY_CHIEF_GOODY_GOLD</ChiefText>
+			<iGold>100</iGold>
 			<iGoldRand1>51</iGoldRand1>
 			<iGoldRand2>51</iGoldRand2>
 			<iMapOffset>0</iMapOffset>
@@ -39,117 +43,41 @@
 			<iExperience>0</iExperience>
 			<iHealing>0</iHealing>
 			<iDamagePrereq>0</iDamagePrereq>
-			<bTech>0</bTech>
 			<bBad>0</bBad>
+			<bWar>0</bWar>
 			<UnitClass>NONE</UnitClass>
-			<BarbarianClass>NONE</BarbarianClass>
-			<iBarbarianUnitProb>0</iBarbarianUnitProb>
-			<iMinBarbarians>0</iMinBarbarians>
+			<TeachUnitClass>NONE</TeachUnitClass>
+			<iCityGoodyWeight>1000</iCityGoodyWeight>
+			<GoodyWeights/>
 		</GoodyInfo>
 		<GoodyInfo>
 			<Type>GOODY_MAP</Type>
-			<Description>TXT_KEY_GOODY_MAP</Description>
+			<Description>TXT_KEY_MAIN_MENU_MAP</Description>
 			<Sound>AS2D_GOODY_MAP</Sound>
+			<AnnounceText>TXT_KEY_GOODY_ANNOUNCE_MAP</AnnounceText>
+			<ChiefText>TXT_KEY_CHIEF_GOODY_MAP</ChiefText>
 			<iGold>0</iGold>
 			<iGoldRand1>0</iGoldRand1>
 			<iGoldRand2>0</iGoldRand2>
-			<iMapOffset>4</iMapOffset>
-			<iMapRange>4</iMapRange>
+			<iMapOffset>3</iMapOffset>
+			<iMapRange>3</iMapRange>
 			<iMapProb>80</iMapProb>
 			<iExperience>0</iExperience>
 			<iHealing>0</iHealing>
 			<iDamagePrereq>0</iDamagePrereq>
-			<bTech>0</bTech>
 			<bBad>0</bBad>
+			<bWar>0</bWar>
 			<UnitClass>NONE</UnitClass>
-			<BarbarianClass>NONE</BarbarianClass>
-			<iBarbarianUnitProb>0</iBarbarianUnitProb>
-			<iMinBarbarians>0</iMinBarbarians>
-		</GoodyInfo>
-		<GoodyInfo>
-			<Type>GOODY_SETTLER</Type>
-			<Description>TXT_KEY_GOODY_SETTLER</Description>
-			<Sound>AS2D_GOODY_SETTLER</Sound>
-			<iGold>0</iGold>
-			<iGoldRand1>0</iGoldRand1>
-			<iGoldRand2>0</iGoldRand2>
-			<iMapOffset>0</iMapOffset>
-			<iMapRange>0</iMapRange>
-			<iMapProb>0</iMapProb>
-			<iExperience>0</iExperience>
-			<iHealing>0</iHealing>
-			<iDamagePrereq>0</iDamagePrereq>
-			<bTech>0</bTech>
-			<bBad>0</bBad>
-			<UnitClass>UNITCLASS_SETTLER</UnitClass>
-			<BarbarianClass>NONE</BarbarianClass>
-			<iBarbarianUnitProb>0</iBarbarianUnitProb>
-			<iMinBarbarians>0</iMinBarbarians>
-		</GoodyInfo>
-		<GoodyInfo>
-			<Type>GOODY_WARRIOR</Type>
-			<Description>TXT_KEY_GOODY_WARRIOR</Description>
-			<Sound>AS2D_GOODY_WARRIOR</Sound>
-			<iGold>0</iGold>
-			<iGoldRand1>0</iGoldRand1>
-			<iGoldRand2>0</iGoldRand2>
-			<iMapOffset>0</iMapOffset>
-			<iMapRange>0</iMapRange>
-			<iMapProb>0</iMapProb>
-			<iExperience>0</iExperience>
-			<iHealing>0</iHealing>
-			<iDamagePrereq>0</iDamagePrereq>
-			<bTech>0</bTech>
-			<bBad>0</bBad>
-			<UnitClass>UNITCLASS_WARRIOR</UnitClass>
-			<BarbarianClass>NONE</BarbarianClass>
-			<iBarbarianUnitProb>0</iBarbarianUnitProb>
-			<iMinBarbarians>0</iMinBarbarians>
-		</GoodyInfo>
-		<GoodyInfo>
-			<Type>GOODY_SCOUT</Type>
-			<Description>TXT_KEY_GOODY_SCOUT</Description>
-			<Sound>AS2D_GOODY_SCOUT</Sound>
-			<iGold>0</iGold>
-			<iGoldRand1>0</iGoldRand1>
-			<iGoldRand2>0</iGoldRand2>
-			<iMapOffset>0</iMapOffset>
-			<iMapRange>0</iMapRange>
-			<iMapProb>0</iMapProb>
-			<iExperience>0</iExperience>
-			<iHealing>0</iHealing>
-			<iDamagePrereq>0</iDamagePrereq>
-			<bTech>0</bTech>
-			<bBad>0</bBad>
-			<UnitClass>UNITCLASS_SCOUT</UnitClass>
-			<BarbarianClass>NONE</BarbarianClass>
-			<iBarbarianUnitProb>0</iBarbarianUnitProb>
-			<iMinBarbarians>0</iMinBarbarians>
-		</GoodyInfo>
-		<GoodyInfo>
-			<Type>GOODY_WORKER</Type>
-			<Description>TXT_KEY_GOODY_WORKER</Description>
-			<Sound>AS2D_GOODY_WORKER</Sound>
-			<iGold>0</iGold>
-			<iGoldRand1>0</iGoldRand1>
-			<iGoldRand2>0</iGoldRand2>
-			<iMapOffset>0</iMapOffset>
-			<iMapRange>0</iMapRange>
-			<iMapProb>0</iMapProb>
-			<iExperience>0</iExperience>
-			<iHealing>0</iHealing>
-			<iDamagePrereq>0</iDamagePrereq>
-			<bTech>0</bTech>
-			<bBad>0</bBad>
-			<UnitClass>UNITCLASS_WORKER</UnitClass>
-			<BarbarianClass>NONE</BarbarianClass>
-			<iBarbarianUnitProb>0</iBarbarianUnitProb>
-			<iMinBarbarians>0</iMinBarbarians>
+			<TeachUnitClass>NONE</TeachUnitClass>
+			<iCityGoodyWeight>1000</iCityGoodyWeight>
+			<GoodyWeights/>
 		</GoodyInfo>
 		<GoodyInfo>
 			<Type>GOODY_EXPERIENCE</Type>
-			<Description>TXT_KEY_GOODY_EXPERIENCE</Description>
+			<Description>INTERFACE_PANE_EXPERIENCE</Description>
 			<Sound>AS2D_GOODY_XP</Sound>
+			<AnnounceText>TXT_KEY_GOODY_ANNOUNCE_EXPERIENCE</AnnounceText>
+			<ChiefText>TXT_KEY_CHIEF_GOODY_EXPERIENCE</ChiefText>
 			<iGold>0</iGold>
 			<iGoldRand1>0</iGoldRand1>
 			<iGoldRand2>0</iGoldRand2>
@@ -159,17 +87,19 @@
 			<iExperience>5</iExperience>
 			<iHealing>0</iHealing>
 			<iDamagePrereq>0</iDamagePrereq>
-			<bTech>0</bTech>
 			<bBad>0</bBad>
+			<bWar>0</bWar>
 			<UnitClass>NONE</UnitClass>
-			<BarbarianClass>NONE</BarbarianClass>
-			<iBarbarianUnitProb>0</iBarbarianUnitProb>
-			<iMinBarbarians>0</iMinBarbarians>
+			<TeachUnitClass>NONE</TeachUnitClass>
+			<iCityGoodyWeight>1000</iCityGoodyWeight>
+			<GoodyWeights/>
 		</GoodyInfo>
 		<GoodyInfo>
 			<Type>GOODY_HEALING</Type>
 			<Description>TXT_KEY_GOODY_HEALING</Description>
 			<Sound>AS2D_GOODY_HEAL</Sound>
+			<AnnounceText>TXT_KEY_GOODY_ANNOUNCE_HEALING</AnnounceText>
+			<ChiefText>TXT_KEY_CHIEF_GOODY_HEALING</ChiefText>
 			<iGold>0</iGold>
 			<iGoldRand1>0</iGoldRand1>
 			<iGoldRand2>0</iGoldRand2>
@@ -179,17 +109,19 @@
 			<iExperience>0</iExperience>
 			<iHealing>100</iHealing>
 			<iDamagePrereq>60</iDamagePrereq>
-			<bTech>0</bTech>
 			<bBad>0</bBad>
+			<bWar>0</bWar>
 			<UnitClass>NONE</UnitClass>
-			<BarbarianClass>NONE</BarbarianClass>
-			<iBarbarianUnitProb>0</iBarbarianUnitProb>
-			<iMinBarbarians>0</iMinBarbarians>
+			<TeachUnitClass>NONE</TeachUnitClass>
+			<iCityGoodyWeight>0</iCityGoodyWeight>
+			<GoodyWeights/>
 		</GoodyInfo>
 		<GoodyInfo>
-			<Type>GOODY_TECH</Type>
-			<Description>TXT_KEY_GOODY_TECH</Description>
-			<Sound/>
+			<Type>GOODY_HOSTILE_WEAK</Type>
+			<Description>TXT_KEY_GOODY_HOSTILE_NATIVES</Description>
+			<Sound>AS2D_GOODY_HOSTILE</Sound>
+			<AnnounceText>TXT_KEY_GOODY_ANNOUNCE_HOSTILE</AnnounceText>
+			<ChiefText>TXT_KEY_CHIEF_GOODY_HOSTILE_WEAK</ChiefText>
 			<iGold>0</iGold>
 			<iGoldRand1>0</iGoldRand1>
 			<iGoldRand2>0</iGoldRand2>
@@ -197,19 +129,65 @@
 			<iMapRange>0</iMapRange>
 			<iMapProb>0</iMapProb>
 			<iExperience>0</iExperience>
+			<iHealing>-50</iHealing>
+			<iDamagePrereq>0</iDamagePrereq>
+			<bBad>1</bBad>
+			<bWar>0</bWar>
+			<UnitClass>NONE</UnitClass>
+			<TeachUnitClass>NONE</TeachUnitClass>
+			<iCityGoodyWeight>0</iCityGoodyWeight>
+			<GoodyWeights/>
+		</GoodyInfo>
+		<GoodyInfo>
+			<Type>GOODY_HOSTILE_STRONG</Type>
+			<Description>TXT_KEY_GOODY_HOSTILE_NATIVES</Description>
+			<Sound>AS2D_GOODY_HOSTILE</Sound>
+			<AnnounceText>TXT_KEY_GOODY_ANNOUNCE_HOSTILE</AnnounceText>
+			<ChiefText>TXT_KEY_CHIEF_GOODY_HOSTILE_STRONG</ChiefText>
+			<iGold>0</iGold>
+			<iGoldRand1>0</iGoldRand1>
+			<iGoldRand2>0</iGoldRand2>
+			<iMapOffset>0</iMapOffset>
+			<iMapRange>0</iMapRange>
+			<iMapProb>0</iMapProb>
+			<iExperience>0</iExperience>
+			<iHealing>-100</iHealing>
+			<iDamagePrereq>0</iDamagePrereq>
+			<bBad>1</bBad>
+			<bWar>0</bWar>
+			<UnitClass>NONE</UnitClass>
+			<TeachUnitClass>NONE</TeachUnitClass>
+			<iCityGoodyWeight>0</iCityGoodyWeight>
+			<GoodyWeights/>
+		</GoodyInfo>
+		<GoodyInfo>
+			<Type>GOODY_TREASURE</Type>
+			<Description>TXT_KEY_UNIT_TREASURE</Description>
+			<Sound>AS2D_GOODY_GOLD</Sound>
+			<AnnounceText>TXT_KEY_GOODY_ANNOUNCE_TREASURE</AnnounceText>
+			<ChiefText>TXT_KEY_CHIEF_GOODY_GOLD</ChiefText>
+			<iGold>250</iGold>
+			<iGoldRand1>251</iGoldRand1>
+			<iGoldRand2>251</iGoldRand2>
+			<iMapOffset>0</iMapOffset>
+			<iMapRange>0</iMapRange>
+			<iMapProb>0</iMapProb>
+			<iExperience>0</iExperience>
 			<iHealing>0</iHealing>
 			<iDamagePrereq>0</iDamagePrereq>
-			<bTech>1</bTech>
 			<bBad>0</bBad>
-			<UnitClass>NONE</UnitClass>
-			<BarbarianClass>NONE</BarbarianClass>
-			<iBarbarianUnitProb>0</iBarbarianUnitProb>
-			<iMinBarbarians>0</iMinBarbarians>
+			<bWar>0</bWar>
+			<UnitClass>UNITCLASS_TREASURE</UnitClass>
+			<TeachUnitClass>NONE</TeachUnitClass>
+			<iCityGoodyWeight>1000</iCityGoodyWeight>
+			<GoodyWeights/>
 		</GoodyInfo>
 		<GoodyInfo>
-			<Type>GOODY_BARBARIANS_WEAK</Type>
-			<Description>TXT_KEY_GOODY_BARBARIANS</Description>
+			<Type>GOODY_WAR</Type>
+			<Description>TXT_KEY_CONCEPT_WAR</Description>
 			<Sound>AS2D_GOODY_HOSTILE</Sound>
+			<AnnounceText>TXT_KEY_GOODY_ANNOUNCE_WAR</AnnounceText>
+			<ChiefText>TXT_KEY_CHIEF_GOODY_WAR</ChiefText>
 			<iGold>0</iGold>
 			<iGoldRand1>0</iGoldRand1>
 			<iGoldRand2>0</iGoldRand2>
@@ -219,17 +197,19 @@
 			<iExperience>0</iExperience>
 			<iHealing>0</iHealing>
 			<iDamagePrereq>0</iDamagePrereq>
-			<bTech>0</bTech>
 			<bBad>1</bBad>
+			<bWar>1</bWar>
 			<UnitClass>NONE</UnitClass>
-			<BarbarianClass>UNITCLASS_WARRIOR</BarbarianClass>
-			<iBarbarianUnitProb>20</iBarbarianUnitProb>
-			<iMinBarbarians>1</iMinBarbarians>
+			<TeachUnitClass>NONE</TeachUnitClass>
+			<iCityGoodyWeight>0</iCityGoodyWeight>
+			<GoodyWeights/>
 		</GoodyInfo>
 		<GoodyInfo>
-			<Type>GOODY_BARBARIANS_STRONG</Type>
-			<Description>TXT_KEY_GOODY_BARBARIANS</Description>
-			<Sound>AS2D_GOODY_HOSTILE</Sound>
+			<Type>GOODY_SCOUT</Type>
+			<Description>TXT_KEY_UNIT_SCOUT</Description>
+			<Sound>AS2D_GOODY_XP</Sound>
+			<AnnounceText>TXT_KEY_GOODY_ANNOUNCE_SCOUT</AnnounceText>
+			<ChiefText>TXT_KEY_CHIEF_GOODY_SCOUT</ChiefText>
 			<iGold>0</iGold>
 			<iGoldRand1>0</iGoldRand1>
 			<iGoldRand2>0</iGoldRand2>
@@ -239,12 +219,43 @@
 			<iExperience>0</iExperience>
 			<iHealing>0</iHealing>
 			<iDamagePrereq>0</iDamagePrereq>
-			<bTech>0</bTech>
-			<bBad>1</bBad>
+			<bBad>0</bBad>
+			<bWar>0</bWar>
 			<UnitClass>NONE</UnitClass>
-			<BarbarianClass>UNITCLASS_WARRIOR</BarbarianClass>
-			<iBarbarianUnitProb>40</iBarbarianUnitProb>
-			<iMinBarbarians>2</iMinBarbarians>
+			<TeachUnitClass>UNITCLASS_SCOUT</TeachUnitClass>
+			<iCityGoodyWeight>1000</iCityGoodyWeight>
+			<GoodyWeights/>
+		</GoodyInfo>
+		<GoodyInfo>
+			<Type>GOODY_BURIAL_GROUNDS</Type>
+			<Description>TXT_KEY_GOODY_BURIAL_GROUNDS</Description>
+			<Sound>AS2D_GOODY_HOSTILE</Sound>
+			<AnnounceText>TXT_KEY_GOODY_ANNOUNCE_BURIAL_GROUNDS</AnnounceText>
+			<ChiefText>TXT_KEY_CHIEF_GOODY_BURIAL_GROUNDS</ChiefText>
+			<iGold>0</iGold>
+			<iGoldRand1>0</iGoldRand1>
+			<iGoldRand2>0</iGoldRand2>
+			<iMapOffset>0</iMapOffset>
+			<iMapRange>0</iMapRange>
+			<iMapProb>0</iMapProb>
+			<iExperience>0</iExperience>
+			<iHealing>0</iHealing>
+			<iDamagePrereq>0</iDamagePrereq>
+			<bBad>0</bBad>
+			<bWar>0</bWar>
+			<UnitClass>NONE</UnitClass>
+			<TeachUnitClass>NONE</TeachUnitClass>
+			<iCityGoodyWeight>0</iCityGoodyWeight>
+			<GoodyWeights>
+				<GoodyWeight>
+					<Type>GOODY_WAR</Type>
+					<iWeight>25</iWeight>
+				</GoodyWeight>
+				<GoodyWeight>
+					<Type>GOODY_TREASURE</Type>
+					<iWeight>75</iWeight>
+				</GoodyWeight>
+			</GoodyWeights>
 		</GoodyInfo>
 	</GoodyInfos>
 </Civ4GoodyInfo>

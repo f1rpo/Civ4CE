@@ -88,13 +88,6 @@
 			</PathEntry>
 		</AnimationPath>
 		<AnimationPath>
-			<Type>ANIMATIONPATH_NUKE_STRIKE</Type>
-			<bMissionPath>1</bMissionPath>
-			<PathEntry>
-				<Category>ANIMCAT_MELEE_STRIKE</Category>
-			</PathEntry>
-		</AnimationPath>
-		<AnimationPath>
 			<Type>ANIMATIONPATH_MELEE_STRIKE</Type>
 			<bMissionPath>1</bMissionPath>
 			<PathEntry>
@@ -257,47 +250,6 @@
 			</PathEntry>
 			<PathEntry>
 				<Category>ANIMCAT_LEADER_COMMAND_IDLE</Category>
-			</PathEntry>
-		</AnimationPath>
-		<AnimationPath>
-			<Type>ANIMATIONPATH_AIRFADEIN</Type>
-			<bMissionPath>1</bMissionPath>
-			<PathEntry>
-				<Category>ANIMCAT_AIRFADEIN</Category>
-				<Operator/>
-				<Parameter/>
-			</PathEntry>
-			<PathEntry>
-				<Category>ANIMCAT_MOVE</Category>
-				<Operator/>
-				<Parameter/>
-			</PathEntry>
-		</AnimationPath>
-		<AnimationPath>
-			<Type>ANIMATIONPATH_AIRFADEOUT</Type>
-			<bMissionPath>1</bMissionPath>
-			<PathEntry>
-				<Category>ANIMCAT_AIRFADEOUT</Category>
-				<Operator/>
-				<Parameter/>
-			</PathEntry>
-		</AnimationPath>
-		<AnimationPath>
-			<Type>ANIMATIONPATH_AIRSTRIKE</Type>
-			<bMissionPath>1</bMissionPath>
-			<PathEntry>
-				<Category>ANIMCAT_AIRSTRIKE</Category>
-				<Operator/>
-				<Parameter/>
-			</PathEntry>
-		</AnimationPath>
-		<AnimationPath>
-			<Type>ANIMATIONPATH_AIRBOMB</Type>
-			<bMissionPath>1</bMissionPath>
-			<PathEntry>
-				<Category>ANIMCAT_AIRBOMB</Category>
-				<Operator/>
-				<Parameter/>
 			</PathEntry>
 		</AnimationPath>
 		<!-- Extra animation paths, not directly referenced in code-->
@@ -758,27 +710,6 @@
 			</PathEntry>
 		</AnimationPath>
 		<AnimationPath>
-			<Type>ANIMATIONPATH_SABOTAGE</Type>
-			<bMissionPath>0</bMissionPath>
-			<PathEntry>
-				<Category>ANIMCAT_SABOTAGE</Category>
-			</PathEntry>
-		</AnimationPath>
-		<AnimationPath>
-			<Type>ANIMATIONPATH_DESTROY</Type>
-			<bMissionPath>0</bMissionPath>
-			<PathEntry>
-				<Category>ANIMCAT_SABOTAGE</Category>
-			</PathEntry>
-		</AnimationPath>
-		<AnimationPath>
-			<Type>ANIMATIONPATH_STEAL_PLANS</Type>
-			<bMissionPath>0</bMissionPath>
-			<PathEntry>
-				<Category>ANIMCAT_STEAL_PLANS</Category>
-			</PathEntry>
-		</AnimationPath>
-		<AnimationPath>
 			<Type>ANIMATIONPATH_GREAT_EVENT</Type>
 			<bMissionPath>1</bMissionPath>
 			<PathEntry>
@@ -790,15 +721,6 @@
 			<bMissionPath>1</bMissionPath>
 			<PathEntry>
 				<Category>ANIMCAT_SURRENDER</Category>
-			</PathEntry>
-		</AnimationPath>
-		<AnimationPath>
-			<Type>ANIMATIONPATH_AIRPATROL</Type>
-			<bMissionPath>0</bMissionPath>
-			<PathEntry>
-				<Category>ANIMCAT_AIRPATROL</Category>
-				<Operator/>
-				<Parameter/>
 			</PathEntry>
 		</AnimationPath>
 	</AnimationPaths>

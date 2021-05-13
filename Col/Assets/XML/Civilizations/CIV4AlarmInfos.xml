@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
+<Civ4AlarmInfos xmlns="x-schema:CIV4CivilizationsSchema.xml">
+	<!-- Sid Meier's Civilization 4 -->
+	<!-- Copyright Firaxis Games 2005 -->
+	<!-- -->
+	<!--Alarm Infos -->
+	<AlarmInfos>
+		<AlarmInfo>
+			<Type>ALARM_DEFAULT</Type>
+			<iRange>3</iRange>
+			<iColony>0</iColony>
+			<iNumColonies>10</iNumColonies>
+			<iPopulation>25</iPopulation>
+			<iUnit>100</iUnit>
+			<iMissionary>-1</iMissionary>
+			<iAttitudeDivisor>100</iAttitudeDivisor>
+		</AlarmInfo>
+	</AlarmInfos>
+</Civ4AlarmInfos>

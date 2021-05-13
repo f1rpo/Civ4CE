@@ -3,338 +3,140 @@
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
-<!-- Slide Show Infos -->
+<!-- Slide Show Infos, the first entry gets added to the end of the credits -->
 <Civ4SlideShowRandomInfos xmlns="x-schema:CIV4InterfaceSchema.xml">
 	<SlideShowRandomInfos>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_006.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_206.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/ProgressScreen/005.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_200.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/ProgressScreen/008.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_201.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/ProgressScreen/009.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_202.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/ProgressScreen/010.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_203.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/ProgressScreen/011.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_204.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/ProgressScreen/012.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_205.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/ProgressScreen/013.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_207.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/ProgressScreen/018.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_208.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/ProgressScreen/023.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_209.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/ProgressScreen/027.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_210.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/ProgressScreen/029.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_211.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/ProgressScreen/034.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_212.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/ProgressScreen/036.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_213.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/ProgressScreen/037.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_214.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/ProgressScreen/038.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_215.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/ProgressScreen/039.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_216.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/ProgressScreen/041.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_217.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/ProgressScreen/045.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_218.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Movies/Religion/Buddhism/Shrine_Bud_Dwg_512.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_219.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Movies/Religion/Christianity/Shrine_Chr_dwg_512.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_220.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Movies/Religion/Confucianism/Shrine_Con_dwg_512.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_221.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Movies/Religion/Hinduism/Shrine_Hin_dwg_512.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_222.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Movies/Religion/Islam/Shrine_Isl_dwg_512.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_223.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Movies/Religion/Judaism/Shrine_Jud_dwg_512.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_224.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Movies/Religion/Taoism/Shrine_Tao_dwg_512.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_225.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Movies/Era/Era01-Classical.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_226.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Movies/Era/Era02-Medeival.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_227.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Movies/Era/Era03-Renaissance.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_228.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Movies/Era/Era04-Industrial.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_229.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Movies/Era/Era05-Modern.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_230.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_001.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_231.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_002.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_232.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_003.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_233.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_004.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_234.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_005.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_235.dds</Path>
 		</SlideShowRandomInfo>
-		<!--Group shot moved to front<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_006.dds</Path>
-		</SlideShowRandomInfo>-->
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_007.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_236.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_008.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_237.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_009.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_238.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_010.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_239.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_011.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_240.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_012.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_241.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_013.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_242.dds</Path>
 		</SlideShowRandomInfo>
 		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_014.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_015.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_016.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_017.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_018.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_019.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_020.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_021.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_022.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_023.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_024.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_025.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_026.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_027.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_028.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_029.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_030.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_031.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_032.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_033.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_034.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_035.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_036.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_037.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_038.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_039.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_040.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_041.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_042.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_043.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_044.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_045.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_046.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_047.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_048.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_049.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_050.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_051.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_052.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_053.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_054.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_055.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_056.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_057.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_058.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_059.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_060.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_061.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_062.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_063.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_064.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_065.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_066.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_067.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_068.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_069.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_070.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_071.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_072.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_073.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_074.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_075.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_076.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_077.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_078.dds</Path>
-		</SlideShowRandomInfo>
-		<SlideShowRandomInfo>
-			<Path>Art/Interface/Screens/Credits/Cred_079.dds</Path>
+			<Path>Art/Interface/Screens/Credits/cred_243.dds</Path>
 		</SlideShowRandomInfo>
 	</SlideShowRandomInfos>
 </Civ4SlideShowRandomInfos>

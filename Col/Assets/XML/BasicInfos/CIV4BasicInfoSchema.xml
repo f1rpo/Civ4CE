@@ -1,4 +1,4 @@
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by EXTREME (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -14,23 +14,7 @@
 		<element type="Civilopedia"/>
 	</ElementType>
 	<ElementType name="ConceptInfos" content="eltOnly">
-		<element type="ConceptInfo" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="NewConceptInfo" content="eltOnly">
-		<element type="Type"/>
-		<element type="Description"/>
-		<element type="Civilopedia"/>
-	</ElementType>
-	<ElementType name="NewConceptInfos" content="eltOnly">
-		<element type="NewConceptInfo" maxOccurs="*"/>
-	</ElementType>
-	<ElementType name="CityTabInfo" content="eltOnly">
-		<element type="Type"/>
-		<element type="Description"/>
-		<element type="Button"/>
-	</ElementType>
-	<ElementType name="CityTabInfos" content="eltOnly">
-		<element type="CityTabInfo" maxOccurs="*"/>
+		<element type="ConceptInfo" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="CalendarInfo" content="eltOnly">
 		<element type="Type"/>
@@ -65,7 +49,7 @@
 		<element type="Description"/>
 	</ElementType>
 	<ElementType name="InvisibleInfos" content="eltOnly">
-		<element type="InvisibleInfo" maxOccurs="*"/>
+		<element type="InvisibleInfo" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="UnitCombatInfo" content="eltOnly">
 		<element type="Type"/>
@@ -103,14 +87,15 @@
 	<ElementType name="MemoryInfos" content="eltOnly">
 		<element type="MemoryInfo" maxOccurs="*"/>
 	</ElementType>
+	<ElementType name="FatherCategoryInfo" content="eltOnly">
+		<element type="Type"/>
+		<element type="Description"/>
+	</ElementType>
+	<ElementType name="FatherCategoryInfos" content="eltOnly">
+		<element type="FatherCategoryInfo" maxOccurs="*"/>
+	</ElementType>
 	<ElementType name="Civ4BasicInfos" content="eltOnly">
 		<element type="ConceptInfos"/>
-	</ElementType>
-	<ElementType name="Civ4NewConceptInfos" content="eltOnly">
-		<element type="NewConceptInfos"/>
-	</ElementType>
-	<ElementType name="Civ4CityTabInfos" content="eltOnly">
-		<element type="CityTabInfos"/>
 	</ElementType>
 	<ElementType name="Civ4CalendarInfos" content="eltOnly">
 		<element type="CalendarInfos"/>
@@ -141,5 +126,8 @@
 	</ElementType>
 	<ElementType name="Civ4MemoryInfos" content="eltOnly">
 		<element type="MemoryInfos"/>
+	</ElementType>
+	<ElementType name="Civ4FatherCategoryInfos" content="eltOnly">
+		<element type="FatherCategoryInfos"/>
 	</ElementType>
 </Schema>

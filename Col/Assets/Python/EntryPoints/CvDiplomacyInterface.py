@@ -31,17 +31,17 @@ def handleUserResponse (argsList):
 	iData1 = argsList[1]
 	iData2 = argsList[2]
 	diploClass.handleUserResponse(eComment, iData1, iData2)
-	
+
 def dealCanceled ():
 	diploClass = CvDiplomacy.CvDiplomacy()
 
 	diploClass.dealCanceled()
-	
+
 def refresh (argsList):
 	diploClass = CvDiplomacy.CvDiplomacy()
 	diploClass.determineResponses(argsList[0])
 
 def toggleDebugLogging():
 	CvDiplomacy.DebugLogging = not CvDiplomacy.DebugLogging
-	
+
 	

@@ -19,24 +19,8 @@
 			<Description>TXT_KEY_MEMORY_HIRED_WAR_ALLY</Description>
 		</MemoryInfo>
 		<MemoryInfo>
-			<Type>MEMORY_NUKED_US</Type>
-			<Description>TXT_KEY_MEMORY_NUKED_US</Description>
-		</MemoryInfo>
-		<MemoryInfo>
-			<Type>MEMORY_NUKED_FRIEND</Type>
-			<Description>TXT_KEY_MEMORY_NUKED_FRIEND</Description>
-		</MemoryInfo>
-		<MemoryInfo>
 			<Type>MEMORY_RAZED_CITY</Type>
 			<Description>TXT_KEY_MEMORY_RAZED_CITY</Description>
-		</MemoryInfo>
-		<MemoryInfo>
-			<Type>MEMORY_RAZED_HOLY_CITY</Type>
-			<Description>TXT_KEY_MEMORY_RAZED_HOLY_CITY</Description>
-		</MemoryInfo>
-		<MemoryInfo>
-			<Type>MEMORY_SPY_CAUGHT</Type>
-			<Description>TXT_KEY_MEMORY_SPY_CAUGHT</Description>
 		</MemoryInfo>
 		<MemoryInfo>
 			<Type>MEMORY_GIVE_HELP</Type>
@@ -53,22 +37,6 @@
 		<MemoryInfo>
 			<Type>MEMORY_REJECTED_DEMAND</Type>
 			<Description>TXT_KEY_MEMORY_REJECTED_DEMAND</Description>
-		</MemoryInfo>
-		<MemoryInfo>
-			<Type>MEMORY_ACCEPTED_RELIGION</Type>
-			<Description>TXT_KEY_MEMORY_ACCEPTED_RELIGION</Description>
-		</MemoryInfo>
-		<MemoryInfo>
-			<Type>MEMORY_DENIED_RELIGION</Type>
-			<Description>TXT_KEY_MEMORY_DENIED_RELIGION</Description>
-		</MemoryInfo>
-		<MemoryInfo>
-			<Type>MEMORY_ACCEPTED_CIVIC</Type>
-			<Description>TXT_KEY_MEMORY_ACCEPTED_CIVIC</Description>
-		</MemoryInfo>
-		<MemoryInfo>
-			<Type>MEMORY_DENIED_CIVIC</Type>
-			<Description>TXT_KEY_MEMORY_DENIED_CIVIC</Description>
 		</MemoryInfo>
 		<MemoryInfo>
 			<Type>MEMORY_ACCEPTED_JOIN_WAR</Type>
@@ -111,22 +79,6 @@
 			<Description>TXT_KEY_MEMORY_CANCELLED_OPEN_BORDERS</Description>
 		</MemoryInfo>
 		<MemoryInfo>
-			<Type>MEMORY_TRADED_TECH_TO_US</Type>
-			<Description>TXT_KEY_MEMORY_TRADED_TECH_TO_US</Description>
-		</MemoryInfo>
-		<MemoryInfo>
-			<Type>MEMORY_RECEIVED_TECH_FROM_ANY</Type>
-			<Description>TXT_KEY_MEMORY_RECEIVED_TECH_FROM_ANY</Description>
-		</MemoryInfo>
-		<MemoryInfo>
-			<Type>MEMORY_VOTED_AGAINST_US</Type>
-			<Description>TXT_KEY_MEMORY_VOTED_AGAINST_US</Description>
-		</MemoryInfo>
-		<MemoryInfo>
-			<Type>MEMORY_VOTED_FOR_US</Type>
-			<Description>TXT_KEY_MEMORY_VOTED_FOR_US</Description>
-		</MemoryInfo>
-		<MemoryInfo>
 			<Type>MEMORY_EVENT_GOOD_TO_US</Type>
 			<Description>TXT_KEY_MEMORY_EVENT_GOOD_TO_US</Description>
 		</MemoryInfo>
@@ -137,6 +89,14 @@
 		<MemoryInfo>
 			<Type>MEMORY_LIBERATED_CITIES</Type>
 			<Description>TXT_KEY_MEMORY_LIBERATED_CITIES</Description>
+		</MemoryInfo>
+		<MemoryInfo>
+			<Type>MEMORY_REFUSED_TAX</Type>
+			<Description>TXT_KEY_MEMORY_REFUSED_TAX</Description>
+		</MemoryInfo>
+		<MemoryInfo>
+			<Type>MEMORY_REVENGE_TAKEN</Type>
+			<Description>TXT_KEY_MEMORY_REVENGE_TAKEN</Description>
 		</MemoryInfo>
 	</MemoryInfos>
 </Civ4MemoryInfos>

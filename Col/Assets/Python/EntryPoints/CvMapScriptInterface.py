@@ -6,7 +6,7 @@ import CvUtil
 """
 MAP SCRIPT INTERFACE
 
-This file contains stubs for all the functions that a map script can override. To create a map script, 
+This file contains stubs for all the functions that a map script can override. To create a map script,
 copy the imports at the top of this file into a new file.
 
 Then you can implement as many of the below functions as you want. If one of the functions is not implemented
@@ -31,7 +31,7 @@ As of July 2005, some functions listed here in CvMapScriptInterface.py have
 become Mandatory Functions. That is, your script must contain versions of
 these functions, as the entire function is handled in Python. Without a
 version of a Mandatory Function, your script will produce errors. The rest
-of the functions listed in this file remain Optional Overrides. 
+of the functions listed in this file remain Optional Overrides.
 
 For a complete list of Mandatory Functions, check the default minimum map
 script, Continents.py that is located in the /PublicMaps/ folder with the
@@ -86,7 +86,7 @@ The following list indicates the order in which wrapped functions are executed.
 ! getRiverAltitude()				# Called for EACH PLOT of a river, during river generation. (Only if using default river generation).
 * addLakes()						# Fourth layer of data creation for the plot array.
 * addFeatures()						# Fifth layer of data creation for the plot array.
-* addBonuses()						# Sixth layer of data creation for the plot array. 
+* addBonuses()						# Sixth layer of data creation for the plot array.
 ! addBonusType()					# Called separately for each bonus entry found in the applicable XML file.
 ! canPlaceBonusAt()					# If overridden, called for each plot, for each bonus.
 * addGoodies()						# Seventh (and final) layer of data creation for the plot array. NOTE: Goodies are "improvements", not "features".
@@ -97,27 +97,18 @@ The following list indicates the order in which wrapped functions are executed.
 
 * minStartingDistanceModifier()		# Can increase or decrease (by a percentage) the standard values for minimum distance between any two start plots.
 * assignStartingPlots()				# This is the only main start plot function that is called only once. If you use any process that results in determining
-									# specific plots in which civs will start, this is where to handle it. Use setStartPlot() to specify a start plot. If you 
+									# specific plots in which civs will start, this is where to handle it. Use setStartPlot() to specify a start plot. If you
 									# use this function, the other "find" functions will not be called automatically, but you can call them manually if you need them.
-! findStartingPlot()				# The version in CvMapGeneratorUtil is NOT the default! That version looks for the best local area only. The default 
-									# implementation first looks for the best continent, uninhabited portion of a continent, or best island, THEN also looks 
+! findStartingPlot()				# The version in CvMapGeneratorUtil is NOT the default! That version looks for the best local area only. The default
+									# implementation first looks for the best continent, uninhabited portion of a continent, or best island, THEN also looks
 									# for a rich local area in which to start this civ. ... The function is called once per civ.
-! findStartingArea()				# Each land mass (even one plot island) has its own areaID. This function is part of the default process. You can override 
+! findStartingArea()				# Each land mass (even one plot island) has its own areaID. This function is part of the default process. You can override
 									# this function and leave the others intact if you only want to specify which areaID(s) in which a given civ should appear.
-									# The default start location functions are very powerful, as this is an area that got high priority and lots of personal 
+									# The default start location functions are very powerful, as this is an area that got high priority and lots of personal
 									# attention from Soren and I both. Pretty much the sky is the limit: if you can build a better mousetrap, have at it!
 * normalizeStartingPlotLocations()	# This function only matters if any teams of more than one civ (aka permanent alliances) exist at game launch. This function
-									# works to group team members together as best it can. If you hardwire any start plots for specific players and don't want 
+									# works to group team members together as best it can. If you hardwire any start plots for specific players and don't want
 									# the game to mess with them, shuffing them around, then you need to override (disable) this function.
-! normalizeAddRiver()
-! normalizeRemovePeaks()
-! normalizeAddLakes()
-! normalizeRemoveBadFeatures()		# These eight functions are all part of the start plot "terrain normalizer". This process softens "dud" starts and...
-! normalizeRemoveBadTerrain()		# ...tries to ensure better balance around the immediate area of where a civ's initial units appear. There are eight...
-! normalizeAddFoodBonuses()			# ...subfunctions listed here so that you can include or disable specific ones at your pleasure.
-! normalizeAddGoodTerrain()
-! normalizeAddExtras()
-* startHumansOnSameTile()			# Human players' starting settler(s) and other units normally start separated. This can force them to start together.
 
 
 - Bob Thomas   September 23, 2005
@@ -140,13 +131,13 @@ def isAdvancedMap():
 	Return 0 if you want your map to show up in the simple singleplayer menu
 	"""
 	return 1
-	
+
 def getModPath():
 	"""
 	Returns the path of the mod this map is associated with
 	"""
 	return ""
-	
+
 """
 USER DEFINED MAP OPTIONS
 """
@@ -156,27 +147,27 @@ def isClimateMap():
 	Uses the Climate options
 	"""
 	return 1
-	
+
 def isSeaLevelMap():
 	"""
 	Uses the Sea Level options
 	"""
 	return 1
-	
+
 def getNumCustomMapOptions():
 	"""
 	Number of different user-defined options for this map
 	Return an integer
 	"""
 	return 0
-	
+
 def getNumHiddenCustomMapOptions():
 	"""
 	Number of different user-defined options for this map
 	Return an integer
 	"""
 	return 0
-	
+
 def getCustomMapOptionName(argsList):
 	"""
 	Returns name of specified option
@@ -184,7 +175,7 @@ def getCustomMapOptionName(argsList):
 	Return a Unicode string
 	"""
 	return u""
-	
+
 def getNumCustomMapOptionValues(argsList):
 	"""
 	Number of different choices for a particular setting
@@ -192,7 +183,7 @@ def getNumCustomMapOptionValues(argsList):
 	Return an integer
 	"""
 	return 0
-	
+
 def getCustomMapOptionDescAt(argsList):
 	"""
 	Returns name of value of option at specified row
@@ -201,7 +192,7 @@ def getCustomMapOptionDescAt(argsList):
 	Return a Unicode string
 	"""
 	return u""
-	
+
 def getCustomMapOptionDefault(argsList):
 	"""
 	Returns default value of specified option
@@ -209,7 +200,7 @@ def getCustomMapOptionDefault(argsList):
 	Return an integer
 	"""
 	return 0
-	
+
 def isRandomCustomMapOption(argsList):
 	"""
 	Returns a flag indicating whether a random option should be provided
@@ -227,7 +218,7 @@ MAP SIZE AND WRAPPING FUNCTIONS
 def getWrapX():
 	"Can be overridden to change whether the map wraps around in the X direction. Default is true"
 	CyPythonMgr().allowDefaultImpl()
-	
+
 def getWrapY():
 	"Can be overridden to change whether the map wraps around in the Y direction. Default is false"
 	CyPythonMgr().allowDefaultImpl()
@@ -244,6 +235,18 @@ def isBonusIgnoreLatitude():
 	"Can be overridden to determine whether bonus generation ignores latitude. Default is false"
 	CyPythonMgr().allowDefaultImpl()
 
+def isEuropeStart(argsList):
+	[europeInfo] = argsList
+	CyPythonMgr().allowDefaultImpl()
+
+def getEuropeWidth(argsList):
+	[europeInfo] = argsList
+	CyPythonMgr().allowDefaultImpl()
+
+def getEuropeMinLandDistance(argsList):
+	[europeInfo] = argsList
+	CyPythonMgr().allowDefaultImpl()
+
 def getGridSize(argsList):
 	"""Given an argument of [worldSize], where worldSize is of type WorldSizeTypes.
 	Can be overridden to return a (width, height) tuple representing the number of terrain cells
@@ -258,11 +261,11 @@ MAP GENERATION FUNCTIONS
 
 def generateRandomMap():
 	"""Can be overridden if you want to manually control the sequence in which plot types, heights, and terrain are generated.
-	
+
 	WARNING: If you override this function, then none of the following functions will be automatically called for you:
 		generateTerrain()
 		generatePlotTypes()
-	
+
 	However, unless you have some specific reason to change the sequence of map generation, you should probably just override
 	one or more of the functions listed above.
 	"""
@@ -304,9 +307,9 @@ def getRiverAltitude(argsList):
 def addLakes():
 	"Can override to control where lakes are added on the map"
 	CyPythonMgr().allowDefaultImpl()
-	
+
 def addFeatures():
-	"Can override to control where features (i.e. forest, oasis, flood plains, etc.) are added on the map"
+	"Can override to control where features (i.e. forest, etc.) are added on the map"
 	CyPythonMgr().allowDefaultImpl()
 
 def addBonuses():
@@ -354,7 +357,7 @@ def findStartingArea(argsList):
 	force the player to start in a certain area, or -1 to specify that the player should start in the best
 	location, irrespective of which area it is in. If not overridden, the default implementation will try
 	to maximize the size of the player's part of his area
-	
+
 	WARNING: If findStartingPlot() is overriden then this function will not automatically be called."""
 	playerID = argsList[0]
 	CyPythonMgr().allowDefaultImpl()
@@ -367,39 +370,3 @@ def findStartingPlot(argsList):
 def normalizeStartingPlotLocations():
 	"Can override to change how starting plots are distributed. (note, this function is called after all starting locs are distributed...)"
 	CyPythonMgr().allowDefaultImpl()
-
-def normalizeAddRiver():
-	"A normalize start function (called after starting plots are set) - this call adds a river."
-	CyPythonMgr().allowDefaultImpl()
-
-def normalizeRemovePeaks():
-	"A normalize start function (called after starting plots are set) - this call removes peaks."
-	CyPythonMgr().allowDefaultImpl()
-
-def normalizeAddLakes():
-	"A normalize start function (called after starting plots are set) - this call adds a lake."
-	CyPythonMgr().allowDefaultImpl()
-
-def normalizeRemoveBadFeatures():
-	"A normalize start function (called after starting plots are set) - this call removes bad features."
-	CyPythonMgr().allowDefaultImpl()
-
-def normalizeRemoveBadTerrain():
-	"A normalize start function (called after starting plots are set) - this call removes bad terrain."
-	CyPythonMgr().allowDefaultImpl()
-
-def normalizeAddFoodBonuses():
-	"A normalize start function (called after starting plots are set) - this call adds food bonuses."
-	CyPythonMgr().allowDefaultImpl()
-
-def normalizeAddGoodTerrain():
-	"A normalize start function (called after starting plots are set) - this call adds good terrain."
-	CyPythonMgr().allowDefaultImpl()
-
-def normalizeAddExtras():
-	"A normalize start function (called after starting plots are set) - this call adds extra features and bonuses."
-	CyPythonMgr().allowDefaultImpl()
-
-def startHumansOnSameTile():
-	"Returns true if all human units should start on the same tile"
-	return False

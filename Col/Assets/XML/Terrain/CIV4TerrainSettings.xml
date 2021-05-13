@@ -9,25 +9,15 @@
 		<LandscapeInfo>
 			<Type>LANDSCAPE_DEFAULT</Type>
 			<iWaterHeight>49</iWaterHeight>
-			<bRandomMap>1</bRandomMap>
-			<HeightMap/>
-			<TerrainMap/>
-			<NormalMap/>
-			<BlendMap/>
-			<SkyArt>Art/Terrain/Sky/Sky.NIF</SkyArt>
-			<iFogR>0</iFogR>
-			<iFogG>0</iFogG>
-			<iFogB>0</iFogB>
+			<EnvironmentTexture>Art/Terrain/Textures/TerrainEnvironment.dds</EnvironmentTexture>
 			<fTextureScaleX>2.0</fTextureScaleX>
 			<fTextureScaleY>2.0</fTextureScaleY>
-			<iPlotsPerCellX>4</iPlotsPerCellX>
-			<iPlotsPerCellY>4</iPlotsPerCellY>
-			<iGameCellSizeX>17</iGameCellSizeX>
-			<iGameCellSizeY>17</iGameCellSizeY>
+			<iPlotsPerCellX>6</iPlotsPerCellX>
+			<iPlotsPerCellY>6</iPlotsPerCellY>
+			<iPlotVertsWide>17</iPlotVertsWide>
+			<iPlotVertsHigh>17</iPlotVertsHigh>
 			<fZScale>1.0</fZScale>
-			<bTerrainShader>1</bTerrainShader>
-			<bUseLightmap>0</bUseLightmap>
-			<fPeakScale>0.44</fPeakScale>
+			<fPeakScale>0.24</fPeakScale>
 			<fHillScale>0.13</fHillScale>
 		</LandscapeInfo>
 	</LandscapeInfos>

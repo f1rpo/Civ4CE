@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Firaxis Games (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by XMLSPY 2004 Professional Ed. Release 2, Installed Multi + SMP for 3 users (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -105,20 +105,6 @@
 			<fAlpha>1.00</fAlpha>
 		</ColorVal>
 		<ColorVal>
-			<Type>COLOR_YIELD_PRODUCTION</Type>
-			<fRed>0.44</fRed>
-			<fGreen>0.56</fGreen>
-			<fBlue>0.74</fBlue>
-			<fAlpha>1.00</fAlpha>
-		</ColorVal>
-		<ColorVal>
-			<Type>COLOR_YIELD_COMMERCE</Type>
-			<fRed>1.00</fRed>
-			<fGreen>0.94</fGreen>
-			<fBlue>0.08</fBlue>
-			<fAlpha>1.00</fAlpha>
-		</ColorVal>
-		<ColorVal>
 			<Type>COLOR_CITY_BLUE</Type>
 			<fRed>0.07</fRed>
 			<fGreen>0.46</fGreen>
@@ -161,18 +147,18 @@
 			<fAlpha>1.00</fAlpha>
 		</ColorVal>
 		<ColorVal>
-			<Type>COLOR_RESEARCH_STORED</Type>
-			<fRed>0.00</fRed>
-			<fGreen>0.90</fGreen>
-			<fBlue>0.20</fBlue>
+			<Type>COLOR_FONT_GOLD</Type>
+			<fRed>1.00</fRed>
+			<fGreen>0.91</fGreen>
+			<fBlue>0.39</fBlue>
 			<fAlpha>1.00</fAlpha>
 		</ColorVal>
 		<ColorVal>
-			<Type>COLOR_RESEARCH_RATE</Type>
-			<fRed>0.00</fRed>
-			<fGreen>0.90</fGreen>
-			<fBlue>0.20</fBlue>
-			<fAlpha>0.60</fAlpha>
+			<Type>COLOR_FONT_CREAM</Type>
+			<fRed>1.00</fRed>
+			<fGreen>0.96</fGreen>
+			<fBlue>0.77</fBlue>
+			<fAlpha>1.00</fAlpha>
 		</ColorVal>
 		<ColorVal>
 			<Type>COLOR_CULTURE_STORED</Type>
@@ -231,13 +217,6 @@
 			<fAlpha>0.75</fAlpha>
 		</ColorVal>
 		<ColorVal>
-			<Type>COLOR_TECH_TEXT</Type>
-			<fRed>0.50</fRed>
-			<fGreen>1.00</fGreen>
-			<fBlue>0.10</fBlue>
-			<fAlpha>1.00</fAlpha>
-		</ColorVal>
-		<ColorVal>
 			<Type>COLOR_UNIT_TEXT</Type>
 			<fRed>1.00</fRed>
 			<fGreen>1.00</fGreen>
@@ -246,13 +225,6 @@
 		</ColorVal>
 		<ColorVal>
 			<Type>COLOR_BUILDING_TEXT</Type>
-			<fRed>0.80</fRed>
-			<fGreen>0.80</fGreen>
-			<fBlue>0.85</fBlue>
-			<fAlpha>1.00</fAlpha>
-		</ColorVal>
-		<ColorVal>
-			<Type>COLOR_PROJECT_TEXT</Type>
 			<fRed>0.80</fRed>
 			<fGreen>0.80</fGreen>
 			<fBlue>0.85</fBlue>
@@ -278,6 +250,13 @@
 			<fGreen>0.30</fGreen>
 			<fBlue>0.30</fBlue>
 			<fAlpha>1.00</fAlpha>
+		</ColorVal>
+		<ColorVal>
+			<Type>COLOR_WARNING_RATE</Type>
+			<fRed>1.00</fRed>
+			<fGreen>0.00</fGreen>
+			<fBlue>0.00</fBlue>
+			<fAlpha>0.60</fAlpha>
 		</ColorVal>
 		<ColorVal>
 			<Type>COLOR_POSITIVE_TEXT</Type>
@@ -327,41 +306,6 @@
 			<fGreen>0.09</fGreen>
 			<fBlue>0.03</fBlue>
 			<fAlpha>1.00</fAlpha>
-		</ColorVal>
-		<ColorVal>
-			<Type>COLOR_TECH_GREEN</Type>
-			<fRed>0.16</fRed>
-			<fGreen>0.70</fGreen>
-			<fBlue>0.27</fBlue>
-			<fAlpha>0.50</fAlpha>
-		</ColorVal>
-		<ColorVal>
-			<Type>COLOR_TECH_BLUE</Type>
-			<fRed>0.21</fRed>
-			<fGreen>0.23</fGreen>
-			<fBlue>0.68</fBlue>
-			<fAlpha>0.50</fAlpha>
-		</ColorVal>
-		<ColorVal>
-			<Type>COLOR_TECH_WORKING</Type>
-			<fRed>0.21</fRed>
-			<fGreen>0.23</fGreen>
-			<fBlue>0.68</fBlue>
-			<fAlpha>0.50</fAlpha>
-		</ColorVal>
-		<ColorVal>
-			<Type>COLOR_TECH_BLACK</Type>
-			<fRed>0.00</fRed>
-			<fGreen>0.00</fGreen>
-			<fBlue>0.00</fBlue>
-			<fAlpha>0.50</fAlpha>
-		</ColorVal>
-		<ColorVal>
-			<Type>COLOR_TECH_RED</Type>
-			<fRed>1.00</fRed>
-			<fGreen>0.00</fGreen>
-			<fBlue>0.00</fBlue>
-			<fAlpha>0.50</fAlpha>
 		</ColorVal>
 		<ColorVal>
 			<Type>COLOR_PLAYER_BLACK</Type>
@@ -522,13 +466,6 @@
 			<fRed>1.0</fRed>
 			<fGreen>0.80</fGreen>
 			<fBlue>0.00</fBlue>
-			<fAlpha>1.00</fAlpha>
-		</ColorVal>
-		<ColorVal>
-			<Type>COLOR_PLAYER_GRAY</Type>
-			<fRed>0.7</fRed>
-			<fGreen>0.7</fGreen>
-			<fBlue>0.7</fBlue>
 			<fAlpha>1.00</fAlpha>
 		</ColorVal>
 		<ColorVal>
@@ -743,9 +680,9 @@
 		</ColorVal>
 		<ColorVal>
 			<Type>COLOR_PLAYER_DARK_GRAY</Type>
-			<fRed>0.369</fRed>
-			<fGreen>0.369</fGreen>
-			<fBlue>0.369</fBlue>
+			<fRed>0.390</fRed>
+			<fGreen>0.375</fGreen>
+			<fBlue>0.300</fBlue>
 			<fAlpha>1.00</fAlpha>
 		</ColorVal>
 		<ColorVal>
@@ -886,6 +823,20 @@
 			<fRed>0.251</fRed>
 			<fGreen>0.251</fGreen>
 			<fBlue>0.251</fBlue>
+			<fAlpha>1.00</fAlpha>
+		</ColorVal>
+		<ColorVal>
+			<Type>COLOR_PLAYER_GRAY_WARM</Type>
+			<fRed>0.9</fRed>
+			<fGreen>0.82</fGreen>
+			<fBlue>0.70</fBlue>
+			<fAlpha>1.00</fAlpha>
+		</ColorVal>
+		<ColorVal>
+			<Type>COLOR_PLAYER_GRAY</Type>
+			<fRed>0.70</fRed>
+			<fGreen>0.70</fGreen>
+			<fBlue>0.70</fBlue>
 			<fAlpha>1.00</fAlpha>
 		</ColorVal>
 		<ColorVal>

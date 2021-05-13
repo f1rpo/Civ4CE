@@ -15,15 +15,15 @@ import ScreenInput as PyScreenInput
 class CvScreenUtils:
     # Place any screens that you would like to handle input in HandleInputMap
     # You can also overwrite control from the default interface by returning 1 from any function
-    HandleInputMap = {                  
+    HandleInputMap = {
                     # add new screens here
                     }
-    
+
     def leftMouseDown (self, argsList):
         # return 1 to consume the input
         screenEnum = argsList[0]
         return 0
-            
+
     def rightMouseDown (self, argsList):
         # return 1 to consume the input
         screenEnum = argsList[0]
@@ -43,11 +43,11 @@ class CvScreenUtils:
 
     def handleInput (self, argsList):
         ' handle input is called when a screen is up '
-        screenEnum, inputClass = argsList 
+        screenEnum, inputClass = argsList
         if (self.HandleInputMap and inputClass and self.HandleInputMap.has_key(screenEnum)):
             # get the screen that is active from the HandleInputMap Dictionary
             screen = self.HandleInputMap.get( inputClass.getPythonFile() )
-        
+
             # call handle input on that screen
             if ( screen ):
                 # return 1 to consume input

@@ -9,10 +9,10 @@ gc = CyGlobalContext()
 
 	This is the Unit Helper function class. It was designed to handle common CyUnit()
 	tasks. Each function is documented using the following format:
-		
+
 		def <functionName>(arguments):
 			"<return ObjectType> - description"
-		
+
 	ObjectType Key:
 		none	=	doesn't return a value
 		int		=	integer
@@ -24,9 +24,9 @@ gc = CyGlobalContext()
 		obj		=	object aka instance
 		objlist =	list of objects/instances
 		bool	=	boolean (True (1) or False (0))
-		
-	GOAL: To create easy to use Unit access functions. 
-	
+
+	GOAL: To create easy to use Unit access functions.
+
 	- bmuzzin (Please feel free to contact with any feedback .. or you could ask Jesse ;) !)
 """
 
@@ -38,7 +38,7 @@ class Unit:
 	def isNone(self):
 		"bool - Is the unit instance valid?"
 		return self.unit.isNone()
-	
+
 	############## G E N E R A L ##############
 
 	def NotifyEntity( self, iEvent ):

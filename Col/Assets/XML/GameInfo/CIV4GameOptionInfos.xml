@@ -11,40 +11,12 @@
 			<Description>TXT_KEY_GAME_OPTION_ADVANCED_START</Description>
 			<Help>TXT_KEY_GAME_OPTION_ADVANCED_START_HELP</Help>
 			<bDefault>0</bDefault>
-			<bVisible>1</bVisible>
+			<bVisible>0</bVisible>
 		</GameOptionInfo>
 		<GameOptionInfo>
 			<Type>GAMEOPTION_NO_CITY_RAZING</Type>
 			<Description>TXT_KEY_GAME_OPTION_NO_CITY_RAZING</Description>
 			<Help>TXT_KEY_GAME_OPTION_NO_CITY_RAZING_HELP</Help>
-			<bDefault>0</bDefault>
-			<bVisible>1</bVisible>
-		</GameOptionInfo>
-		<GameOptionInfo>
-			<Type>GAMEOPTION_NO_CITY_FLIPPING</Type>
-			<Description>TXT_KEY_GAME_OPTION_NO_CITY_FLIPPING</Description>
-			<Help>TXT_KEY_GAME_OPTION_NO_CITY_FLIPPING_HELP</Help>
-			<bDefault>0</bDefault>
-			<bVisible>1</bVisible>
-		</GameOptionInfo>
-		<GameOptionInfo>
-			<Type>GAMEOPTION_FLIPPING_AFTER_CONQUEST</Type>
-			<Description>TXT_KEY_GAME_OPTION_FLIPPING_AFTER_CONQUEST</Description>
-			<Help>TXT_KEY_GAME_OPTION_FLIPPING_AFTER_CONQUEST_HELP</Help>
-			<bDefault>0</bDefault>
-			<bVisible>1</bVisible>
-		</GameOptionInfo>
-		<GameOptionInfo>
-			<Type>GAMEOPTION_NO_BARBARIANS</Type>
-			<Description>TXT_KEY_GAME_OPTION_NO_BARBARIANS</Description>
-			<Help>TXT_KEY_GAME_OPTION_NO_BARBARIANS_HELP</Help>
-			<bDefault>0</bDefault>
-			<bVisible>1</bVisible>
-		</GameOptionInfo>
-		<GameOptionInfo>
-			<Type>GAMEOPTION_RAGING_BARBARIANS</Type>
-			<Description>TXT_KEY_GAME_OPTION_RAGING_BARBARIANS</Description>
-			<Help>TXT_KEY_GAME_OPTION_RAGING_BARBARIANS_HELP</Help>
 			<bDefault>0</bDefault>
 			<bVisible>1</bVisible>
 		</GameOptionInfo>
@@ -59,34 +31,6 @@
 			<Type>GAMEOPTION_LEAD_ANY_CIV</Type>
 			<Description>TXT_KEY_GAME_OPTION_LEAD_ANY_CIV</Description>
 			<Help>TXT_KEY_GAME_OPTION_LEAD_ANY_CIV_HELP</Help>
-			<bDefault>0</bDefault>
-			<bVisible>1</bVisible>
-		</GameOptionInfo>
-		<GameOptionInfo>
-			<Type>GAMEOPTION_RANDOM_PERSONALITIES</Type>
-			<Description>TXT_KEY_GAME_OPTION_RANDOM_PERSONALITIES</Description>
-			<Help>TXT_KEY_GAME_OPTION_RANDOM_PERSONALITIES_HELP</Help>
-			<bDefault>0</bDefault>
-			<bVisible>1</bVisible>
-		</GameOptionInfo>
-		<GameOptionInfo>
-			<Type>GAMEOPTION_PICK_RELIGION</Type>
-			<Description>TXT_KEY_GAME_OPTION_PICK_RELIGION</Description>
-			<Help>TXT_KEY_GAME_OPTION_PICK_RELIGION_HELP</Help>
-			<bDefault>0</bDefault>
-			<bVisible>1</bVisible>
-		</GameOptionInfo>
-		<GameOptionInfo>
-			<Type>GAMEOPTION_NO_TECH_TRADING</Type>
-			<Description>TXT_KEY_GAME_OPTION_NO_TECH_TRADING</Description>
-			<Help>TXT_KEY_GAME_OPTION_NO_TECH_TRADING_HELP</Help>
-			<bDefault>0</bDefault>
-			<bVisible>1</bVisible>
-		</GameOptionInfo>
-		<GameOptionInfo>
-			<Type>GAMEOPTION_NO_TECH_BROKERING</Type>
-			<Description>TXT_KEY_GAME_OPTION_NO_TECH_BROKERING</Description>
-			<Help>TXT_KEY_GAME_OPTION_NO_TECH_BROKERING_HELP</Help>
 			<bDefault>0</bDefault>
 			<bVisible>1</bVisible>
 		</GameOptionInfo>
@@ -123,7 +67,7 @@
 			<Description>TXT_KEY_GAME_OPTION_NO_CHANGING_WAR_PEACE</Description>
 			<Help>TXT_KEY_GAME_OPTION_NO_CHANGING_WAR_PEACE_HELP</Help>
 			<bDefault>0</bDefault>
-			<bVisible>1</bVisible>
+			<bVisible>0</bVisible>
 		</GameOptionInfo>
 		<GameOptionInfo>
 			<Type>GAMEOPTION_NEW_RANDOM_SEED</Type>
@@ -140,20 +84,6 @@
 			<bVisible>1</bVisible>
 		</GameOptionInfo>
 		<GameOptionInfo>
-			<Type>GAMEOPTION_COMPLETE_KILLS</Type>
-			<Description>TXT_KEY_GAME_OPTION_COMPLETE_KILLS</Description>
-			<Help>TXT_KEY_GAME_OPTION_COMPLETE_KILLS_HELP</Help>
-			<bDefault>0</bDefault>
-			<bVisible>1</bVisible>
-		</GameOptionInfo>
-		<GameOptionInfo>
-			<Type>GAMEOPTION_NO_VASSAL_STATES</Type>
-			<Description>TXT_KEY_GAME_OPTION_NO_VASSAL_STATES</Description>
-			<Help>TXT_KEY_GAME_OPTION_NO_VASSAL_STATES_HELP</Help>
-			<bDefault>0</bDefault>
-			<bVisible>1</bVisible>
-		</GameOptionInfo>
-		<GameOptionInfo>
 			<Type>GAMEOPTION_NO_GOODY_HUTS</Type>
 			<Description>TXT_KEY_GAME_OPTION_NO_GOODY_HUTS</Description>
 			<Help>TXT_KEY_GAME_OPTION_NO_GOODY_HUTS_HELP</Help>
@@ -165,7 +95,7 @@
 			<Description>TXT_KEY_GAME_OPTION_NO_EVENTS</Description>
 			<Help>TXT_KEY_GAME_OPTION_NO_EVENTS_HELP</Help>
 			<bDefault>0</bDefault>
-			<bVisible>1</bVisible>
+			<bVisible>0</bVisible>
 		</GameOptionInfo>
 	</GameOptionInfos>
 </Civ4GameOptionInfos>
