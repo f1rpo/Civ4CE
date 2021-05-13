@@ -3048,10 +3048,8 @@ void CvGameTextMgr::parseTraits(CvWStringBuffer &szHelpString, TraitTypes eTrait
 				szHelpString.append(L"  ");
 			}
 			szHelpString.append(gDLL->getText("TXT_KEY_FATHER_NATIVE_ATTITUDE_GOOD"));
-			// PatchMod: Native auto-peace START
 			szHelpString.append(NEWLINE);
 			szHelpString.append(gDLL->getText("TXT_KEY_FATHER_NATIVE_ATTITUDE_GOOD2"));
-			// PatchMod: Native auto-peace END
 		}
 		else if (kTrait.getNativeAttitudeChange() < 0)
 		{
@@ -3804,10 +3802,8 @@ void CvGameTextMgr::parseCivicInfo(CvWStringBuffer &szHelpText, CivicTypes eCivi
 	{
 		szHelpText.append(NEWLINE);
 		szHelpText.append(gDLL->getText("TXT_KEY_FATHER_NATIVE_ATTITUDE_GOOD"));
-		// PatchMod: Native auto-peace START
 		szHelpText.append(NEWLINE);
 		szHelpText.append(gDLL->getText("TXT_KEY_FATHER_NATIVE_ATTITUDE_GOOD2"));
-		// PatchMod: Native auto-peace END
 	}
 	else if (kCivicInfo.getNativeAttitudeChange() < 0)
 	{
@@ -3963,14 +3959,11 @@ void CvGameTextMgr::setBasicUnitHelp(CvWStringBuffer &szBuffer, UnitTypes eUnit,
 			CvUnitInfo& kTransportUnitInfo = GC.getUnitInfo((UnitTypes) i);
 			if (kTransportUnitInfo.getCargoSpace() >= kUnitInfo.getRequiredTransportSize())
 			{
-			    // PatchMod: Fix basic help (Kudos Jeckel) START
-			    if (kTransportUnitInfo.getSpecialCargo() != NO_SPECIALUNIT && kUnitInfo.getSpecialCargo() != kTransportUnitInfo.getSpecialCargo())
+			    if (kTransportUnitInfo.getSpecialCargo() == NO_SPECIALUNIT || kUnitInfo.getSpecialCargo() == kTransportUnitInfo.getSpecialCargo())
 			    {
-			        continue;
+					szBuffer.append(NEWLINE);
+					szBuffer.append(gDLL->getText("TXT_KEY_UNIT_CARGO", kTransportUnitInfo.getTextKeyWide()));
 			    }
-				// PatchMod: Fix basic help (Kudos Jeckel) END
-				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_UNIT_CARGO", kTransportUnitInfo.getTextKeyWide()));
 			}
 		}
 	}
@@ -5945,7 +5938,7 @@ void CvGameTextMgr::setProductionHelp(CvWStringBuffer &szBuffer, CvCity& city)
 
 	int iModProduction = (iBaseModifier * iBaseProduction) / 100;
 
-	FAssertMsg(iModProduction == city.getCurrentProductionDifference(!city.isProductionConvince()), "Modified Production does not match actual value");
+	FAssertMsg(iModProduction == city.getCurrentProductionDifference(true), "Modified Production does not match actual value");
 
 	szBuffer.append(NEWLINE);
 	szBuffer.append(gDLL->getText("TXT_KEY_MISC_HELP_PROD_FINAL_YIELD", iModProduction));
@@ -6476,7 +6469,7 @@ int CvGameTextMgr::setCityYieldModifierString(CvWStringBuffer& szBuffer, YieldTy
 		}
 	}
 
-	int iRebelMod = kCity.getRebelPercent() * GC.getDefineINT("MAX_REBEL_YIELD_MODIFIER") / 100;
+	int iRebelMod = kCity.getRebelPercent() * GC.getMAX_REBEL_YIELD_MODIFIER() / 100;
 	if (0 != iRebelMod)
 	{
 		szBuffer.append(NEWLINE);
@@ -6502,9 +6495,9 @@ void CvGameTextMgr::buildCityBillboardIconString( CvWStringBuffer& szBuffer, CvC
 {
 	szBuffer.clear();
 
-	if (pCity->getMissionaryCivilization() != NO_CIVILIZATION)
+	if (pCity->getMissionaryPlayer() != NO_PLAYER)
 	{
-		szBuffer.append(CvWString::format(L" %c", GC.getCivilizationInfo(pCity->getMissionaryCivilization()).getMissionaryChar()));
+		szBuffer.append(CvWString::format(L" %c", GC.getCivilizationInfo(GET_PLAYER(pCity->getMissionaryPlayer()).getCivilizationType()).getMissionaryChar()));
 	}
 
 	// XXX out this in bottom bar???
@@ -6714,7 +6707,7 @@ void CvGameTextMgr::setCitizenHelp(CvWStringBuffer &szString, const CvCity& kCit
 				int iEducationProduced = kCity.calculateNetYield(YIELD_EDUCATION);
 				if (iEducationProduced > 0)
 				{
-					int iEducationNeeded = GET_PLAYER(ePlayer).educationThreshold() - kUnit.getYieldStored();
+					int iEducationNeeded = kCity.educationThreshold() - kUnit.getYieldStored();
 
 					int iStudentOutput = kCity.getProfessionOutput(kUnit.getProfession(), &kUnit, NULL) * kCity.getBaseYieldRateModifier(YIELD_EDUCATION) / 100;
 					iStudentOutput = std::max(iStudentOutput, 1);

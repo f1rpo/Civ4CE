@@ -23,7 +23,7 @@ def generatePlotTypes():
 	fractal_world = FractalWorld( 4, 4 )
 	fractal_world.initFractal(continent_grain = 3, rift_grain = 4, has_center_rift = False, polar = True)
 	retVal = fractal_world.generatePlotTypes(70)
-	sinkEasternShore(fractal_world, 4)
+	sinkEasternShore(fractal_world, 5)
 	return retVal
 
 def generateTerrainTypes():

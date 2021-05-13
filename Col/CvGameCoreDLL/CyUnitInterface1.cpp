@@ -15,13 +15,6 @@ void CyUnitPythonInterface1(python::class_<CyUnit>& x)
 {
 	OutputDebugString("Python Extension Module - CyUnitPythonInterface1\n");
 	x
-		// PatchMod: Sail to West START
-		.def("canSailEast", &CyUnit::canSailEast)
-		.def("setSailEast", &CyUnit::setSailEast)
-		.def("canSailWest", &CyUnit::canSailWest)
-		.def("setSailWest", &CyUnit::setSailWest)
-		// PatchMod: Sail to West END
-
 		.def("isNone", &CyUnit::isNone, "bool () - Is this a valid unit instance?")
 		.def("convert", &CyUnit::convert, "void (CyUnit* pUnit)")
 		.def("kill", &CyUnit::kill, "void (bool bDelay)")
@@ -155,7 +148,7 @@ void CyUnitPythonInterface1(python::class_<CyUnit>& x)
 		.def("hasCargo", &CyUnit::hasCargo, "bool ()")
 		.def("canCargoAllMove", &CyUnit::canCargoAllMove, "bool ()")
 		.def("getUnitAICargo", &CyUnit::getUnitAICargo, "int (int (UnitAITypes) eUnitAI)")
-		.def("canAssignTradeRoute", &CyUnit::canAssignTradeRoute, "bool (int iRouteId)")
+		.def("canAssignTradeRoute", &CyUnit::canAssignTradeRoute, "bool (int iRouteId, bool bReusePath)")
 		.def("getID", &CyUnit::getID, "int ()")
 		.def("getGroupID", &CyUnit::getGroupID, "int ()")
 		.def("isInGroup", &CyUnit::isInGroup, "bool ()")
@@ -270,6 +263,7 @@ void CyUnitPythonInterface1(python::class_<CyUnit>& x)
 		.def("setUnitTravelTimer", &CyUnit::setUnitTravelTimer, "void (int)")
 		.def("getUnitTravelState", &CyUnit::getUnitTravelState, "int /*UnitTravelStates*/ ()")
 		.def("setUnitTravelState", &CyUnit::setUnitTravelState, "void (int /*UnitTravelStates*/, bool bShowEuropeScreen)")
+		.def("canSailEurope", &CyUnit::canSailEurope)
 		.def("isColonistLocked", &CyUnit::isColonistLocked, "bool ()")
 		// Python Helper Functions
 		.def("centerCamera", &CyUnit::centerCamera, "void () - Centers the Camera on the unit")

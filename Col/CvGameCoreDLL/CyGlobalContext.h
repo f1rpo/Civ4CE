@@ -234,6 +234,7 @@ public:
 	int getSEAWATER_SEE_FROM_CHANGE() const { return GC.getSEAWATER_SEE_FROM_CHANGE(); }
 	int getPEAK_SEE_FROM_CHANGE() const { return GC.getPEAK_SEE_FROM_CHANGE(); }
 	int getHILLS_SEE_FROM_CHANGE() const { return GC.getHILLS_SEE_FROM_CHANGE(); }
+	int getMAX_REBEL_YIELD_MODIFIER() const { return GC.getMAX_REBEL_YIELD_MODIFIER(); }
 	float getCAMERA_MIN_YAW() const { return GC.getCAMERA_MIN_YAW(); }
 	float getCAMERA_MAX_YAW() const { return GC.getCAMERA_MAX_YAW(); }
 	float getCAMERA_FAR_CLIP_Z_HEIGHT() const { return GC.getCAMERA_FAR_CLIP_Z_HEIGHT(); }

@@ -10,10 +10,8 @@
 			<Type>HANDICAP_PILGRIM</Type>
 			<Description>TXT_KEY_HANDICAP_PILGRIM</Description>
 			<Help>TXT_KEY_HANDICAP_PILGRIM_HELP</Help>
-			<iStartingLocPercent>10</iStartingLocPercent>
 			<iAdvancedStartPointsMod>150</iAdvancedStartPointsMod>
 			<iGold>1000</iGold>
-			<bFreeShip>1</bFreeShip>
 			<iFatherPercent>60</iFatherPercent>
 			<iAttitudeChange>2</iAttitudeChange>
 			<iStartingDefenseUnits>0</iStartingDefenseUnits>
@@ -33,12 +31,12 @@
 			<iAIConstructPercent>160</iAIConstructPercent>
 			<iAIUnitUpgradePercent>50</iAIUnitUpgradePercent>
 			<iAIHurryPercent>80</iAIHurryPercent>
-			<iAIMoneyTree>0</iAIMoneyTree>
+			<iAIExtraTradePercent>0</iAIExtraTradePercent>
 			<iAIPerEraModifier>0</iAIPerEraModifier>
 			<iAIAdvancedStartPercent>100</iAIAdvancedStartPercent>
-			<iAIKingUnitThresholdPercent>200</iAIKingUnitThresholdPercent>
-			<iKingUnitThresholdPercent>200</iKingUnitThresholdPercent>
-			<iKingGoldThresholdPercent>100</iKingGoldThresholdPercent>
+			<iAIKingUnitThresholdPercent>300</iAIKingUnitThresholdPercent>
+			<iKingNumUnitMultiplier>102</iKingNumUnitMultiplier>
+			<iKingGoldThresholdPercent>2</iKingGoldThresholdPercent>
 			<iEuropePriceThresholdMultiplier>200</iEuropePriceThresholdMultiplier>
 			<iNativePacifismPercent>100</iNativePacifismPercent>
 			<iMissionFailureThresholdPercent>100</iMissionFailureThresholdPercent>
@@ -68,7 +66,6 @@
 			<Type>HANDICAP_PIONEER</Type>
 			<Description>TXT_KEY_HANDICAP_PIONEER</Description>
 			<Help>TXT_KEY_HANDICAP_PIONEER_HELP</Help>
-			<iStartingLocPercent>30</iStartingLocPercent>
 			<iAdvancedStartPointsMod>110</iAdvancedStartPointsMod>
 			<iGold>200</iGold>
 			<iFatherPercent>90</iFatherPercent>
@@ -90,12 +87,12 @@
 			<iAIConstructPercent>110</iAIConstructPercent>
 			<iAIUnitUpgradePercent>50</iAIUnitUpgradePercent>
 			<iAIHurryPercent>80</iAIHurryPercent>
-			<iAIMoneyTree>5</iAIMoneyTree>
+			<iAIExtraTradePercent>5</iAIExtraTradePercent>
 			<iAIPerEraModifier>0</iAIPerEraModifier>
 			<iAIAdvancedStartPercent>100</iAIAdvancedStartPercent>
-			<iAIKingUnitThresholdPercent>200</iAIKingUnitThresholdPercent>
-			<iKingUnitThresholdPercent>180</iKingUnitThresholdPercent>
-			<iKingGoldThresholdPercent>100</iKingGoldThresholdPercent>
+			<iAIKingUnitThresholdPercent>250</iAIKingUnitThresholdPercent>
+			<iKingNumUnitMultiplier>104</iKingNumUnitMultiplier>
+			<iKingGoldThresholdPercent>2</iKingGoldThresholdPercent>
 			<iEuropePriceThresholdMultiplier>120</iEuropePriceThresholdMultiplier>
 			<iNativePacifismPercent>90</iNativePacifismPercent>
 			<iMissionFailureThresholdPercent>97</iMissionFailureThresholdPercent>
@@ -126,7 +123,6 @@
 			<Type>HANDICAP_EXPLORER</Type>
 			<Description>TXT_KEY_HANDICAP_EXPLORER</Description>
 			<Help>TXT_KEY_HANDICAP_EXPLORER_HELP</Help>
-			<iStartingLocPercent>40</iStartingLocPercent>
 			<iAdvancedStartPointsMod>100</iAdvancedStartPointsMod>
 			<iGold>0</iGold>
 			<iFatherPercent>100</iFatherPercent>
@@ -148,12 +144,12 @@
 			<iAIConstructPercent>100</iAIConstructPercent>
 			<iAIUnitUpgradePercent>50</iAIUnitUpgradePercent>
 			<iAIHurryPercent>70</iAIHurryPercent>
-			<iAIMoneyTree>10</iAIMoneyTree>
+			<iAIExtraTradePercent>10</iAIExtraTradePercent>
 			<iAIPerEraModifier>0</iAIPerEraModifier>
 			<iAIAdvancedStartPercent>100</iAIAdvancedStartPercent>
-			<iAIKingUnitThresholdPercent>200</iAIKingUnitThresholdPercent>
-			<iKingUnitThresholdPercent>160</iKingUnitThresholdPercent>
-			<iKingGoldThresholdPercent>100</iKingGoldThresholdPercent>
+			<iAIKingUnitThresholdPercent>230</iAIKingUnitThresholdPercent>
+			<iKingNumUnitMultiplier>106</iKingNumUnitMultiplier>
+			<iKingGoldThresholdPercent>2</iKingGoldThresholdPercent>
 			<iEuropePriceThresholdMultiplier>100</iEuropePriceThresholdMultiplier>
 			<iNativePacifismPercent>80</iNativePacifismPercent>
 			<iMissionFailureThresholdPercent>94</iMissionFailureThresholdPercent>
@@ -188,7 +184,6 @@
 			<Type>HANDICAP_CONQUISTADOR</Type>
 			<Description>TXT_KEY_HANDICAP_CONQUISTADOR</Description>
 			<Help>TXT_KEY_HANDICAP_CONQUISTADOR_HELP</Help>
-			<iStartingLocPercent>50</iStartingLocPercent>
 			<iAdvancedStartPointsMod>95</iAdvancedStartPointsMod>
 			<iGold>0</iGold>
 			<iFatherPercent>110</iFatherPercent>
@@ -210,12 +205,12 @@
 			<iAIConstructPercent>90</iAIConstructPercent>
 			<iAIUnitUpgradePercent>50</iAIUnitUpgradePercent>
 			<iAIHurryPercent>65</iAIHurryPercent>
-			<iAIMoneyTree>15</iAIMoneyTree>
+			<iAIExtraTradePercent>15</iAIExtraTradePercent>
 			<iAIPerEraModifier>-1</iAIPerEraModifier>
 			<iAIAdvancedStartPercent>110</iAIAdvancedStartPercent>
-			<iAIKingUnitThresholdPercent>200</iAIKingUnitThresholdPercent>
-			<iKingUnitThresholdPercent>140</iKingUnitThresholdPercent>
-			<iKingGoldThresholdPercent>100</iKingGoldThresholdPercent>
+			<iAIKingUnitThresholdPercent>210</iAIKingUnitThresholdPercent>
+			<iKingNumUnitMultiplier>108</iKingNumUnitMultiplier>
+			<iKingGoldThresholdPercent>2</iKingGoldThresholdPercent>
 			<iEuropePriceThresholdMultiplier>90</iEuropePriceThresholdMultiplier>
 			<iNativePacifismPercent>70</iNativePacifismPercent>
 			<iMissionFailureThresholdPercent>91</iMissionFailureThresholdPercent>
@@ -248,7 +243,6 @@
 			<Type>HANDICAP_GOVERNOR</Type>
 			<Description>TXT_KEY_HANDICAP_GOVERNOR</Description>
 			<Help>TXT_KEY_HANDICAP_GOVERNOR_HELP</Help>
-			<iStartingLocPercent>60</iStartingLocPercent>
 			<iAdvancedStartPointsMod>90</iAdvancedStartPointsMod>
 			<iGold>0</iGold>
 			<iFatherPercent>115</iFatherPercent>
@@ -270,12 +264,12 @@
 			<iAIConstructPercent>75</iAIConstructPercent>
 			<iAIUnitUpgradePercent>50</iAIUnitUpgradePercent>
 			<iAIHurryPercent>60</iAIHurryPercent>
-			<iAIMoneyTree>20</iAIMoneyTree>
+			<iAIExtraTradePercent>20</iAIExtraTradePercent>
 			<iAIPerEraModifier>-2</iAIPerEraModifier>
 			<iAIAdvancedStartPercent>120</iAIAdvancedStartPercent>
 			<iAIKingUnitThresholdPercent>200</iAIKingUnitThresholdPercent>
-			<iKingUnitThresholdPercent>120</iKingUnitThresholdPercent>
-			<iKingGoldThresholdPercent>100</iKingGoldThresholdPercent>
+			<iKingNumUnitMultiplier>109</iKingNumUnitMultiplier>
+			<iKingGoldThresholdPercent>2</iKingGoldThresholdPercent>
 			<iEuropePriceThresholdMultiplier>80</iEuropePriceThresholdMultiplier>
 			<iNativePacifismPercent>60</iNativePacifismPercent>
 			<iMissionFailureThresholdPercent>89</iMissionFailureThresholdPercent>
@@ -308,7 +302,6 @@
 			<Type>HANDICAP_PATRIOT</Type>
 			<Description>TXT_KEY_HANDICAP_PATRIOT</Description>
 			<Help>TXT_KEY_HANDICAP_PATRIOT_HELP</Help>
-			<iStartingLocPercent>70</iStartingLocPercent>
 			<iAdvancedStartPointsMod>85</iAdvancedStartPointsMod>
 			<iGold>0</iGold>
 			<iFatherPercent>120</iFatherPercent>
@@ -330,12 +323,12 @@
 			<iAIConstructPercent>60</iAIConstructPercent>
 			<iAIUnitUpgradePercent>50</iAIUnitUpgradePercent>
 			<iAIHurryPercent>55</iAIHurryPercent>
-			<iAIMoneyTree>25</iAIMoneyTree>
+			<iAIExtraTradePercent>25</iAIExtraTradePercent>
 			<iAIPerEraModifier>-3</iAIPerEraModifier>
 			<iAIAdvancedStartPercent>135</iAIAdvancedStartPercent>
-			<iAIKingUnitThresholdPercent>200</iAIKingUnitThresholdPercent>
-			<iKingUnitThresholdPercent>100</iKingUnitThresholdPercent>
-			<iKingGoldThresholdPercent>100</iKingGoldThresholdPercent>
+			<iAIKingUnitThresholdPercent>190</iAIKingUnitThresholdPercent>
+			<iKingNumUnitMultiplier>110</iKingNumUnitMultiplier>
+			<iKingGoldThresholdPercent>2</iKingGoldThresholdPercent>
 			<iEuropePriceThresholdMultiplier>70</iEuropePriceThresholdMultiplier>
 			<iNativePacifismPercent>40</iNativePacifismPercent>
 			<iMissionFailureThresholdPercent>87</iMissionFailureThresholdPercent>
@@ -370,7 +363,6 @@
 			<Type>HANDICAP_REVOLUTIONARY</Type>
 			<Description>TXT_KEY_HANDICAP_REVOLUTIONARY</Description>
 			<Help>TXT_KEY_HANDICAP_REVOLUTIONARY_HELP</Help>
-			<iStartingLocPercent>80</iStartingLocPercent>
 			<iAdvancedStartPointsMod>80</iAdvancedStartPointsMod>
 			<iGold>0</iGold>
 			<iFatherPercent>125</iFatherPercent>
@@ -392,12 +384,12 @@
 			<iAIConstructPercent>50</iAIConstructPercent>
 			<iAIUnitUpgradePercent>50</iAIUnitUpgradePercent>
 			<iAIHurryPercent>50</iAIHurryPercent>
-			<iAIMoneyTree>30</iAIMoneyTree>
+			<iAIExtraTradePercent>30</iAIExtraTradePercent>
 			<iAIPerEraModifier>-4</iAIPerEraModifier>
 			<iAIAdvancedStartPercent>150</iAIAdvancedStartPercent>
-			<iAIKingUnitThresholdPercent>200</iAIKingUnitThresholdPercent>
-			<iKingUnitThresholdPercent>90</iKingUnitThresholdPercent>
-			<iKingGoldThresholdPercent>100</iKingGoldThresholdPercent>
+			<iAIKingUnitThresholdPercent>180</iAIKingUnitThresholdPercent>
+			<iKingNumUnitMultiplier>111</iKingNumUnitMultiplier>
+			<iKingGoldThresholdPercent>2</iKingGoldThresholdPercent>
 			<iEuropePriceThresholdMultiplier>60</iEuropePriceThresholdMultiplier>
 			<iNativePacifismPercent>25</iNativePacifismPercent>
 			<iMissionFailureThresholdPercent>85</iMissionFailureThresholdPercent>

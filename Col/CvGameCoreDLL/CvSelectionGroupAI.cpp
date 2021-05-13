@@ -202,8 +202,6 @@ bool CvSelectionGroupAI::AI_update()
 				break;
 			}
 
-			resetPath();
-
 			if (pHeadUnit->AI_update())
 			{
 				// AI_update returns true when we should abort the loop and wait until next slice
@@ -261,8 +259,6 @@ bool CvSelectionGroupAI::AI_update()
 
 					if (pLoopUnit->canMove())
 					{
-						resetPath();
-
 						if (pLoopUnit->AI_follow())
 						{
 							bFollow = true;

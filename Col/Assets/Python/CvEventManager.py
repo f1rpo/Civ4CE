@@ -618,7 +618,7 @@ class CvEventManager:
 	def onCityBuilt(self, argsList):
 		'City Built'
 		city = argsList[0]
-		if (city.getOwner() == gc.getGame().getActivePlayer()):
+		if ((city.getOwner() == gc.getGame().getActivePlayer()) and gc.getPlayer(city.getOwner()).isHuman()):
 			self.__eventEditCityNameBegin(city, False)
 		CvUtil.pyPrint('City Built Event: %s' %(city.getName()))
 

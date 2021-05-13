@@ -48,6 +48,8 @@ CvPlayer::CvPlayer()
 	m_aiYieldTradedTotal = new int[NUM_YIELD_TYPES];
 	m_aiYieldBoughtTotal = new int[NUM_YIELD_TYPES];
 	m_aiTaxYieldModifierCount = new int[NUM_YIELD_TYPES];
+	m_aiMissionaryPoints = new int[MAX_PLAYERS];
+	m_aiMissionaryThresholdMultiplier = new int[MAX_PLAYERS];
 
 	m_abYieldEuropeTradable = new bool[NUM_YIELD_TYPES];
 	m_abFeatAccomplished = new bool[NUM_FEAT_TYPES];
@@ -66,8 +68,6 @@ CvPlayer::CvPlayer()
 	m_paiBuildingClassMaking = NULL;
 	m_paiHurryCount = NULL;
 	m_paiSpecialBuildingNotRequiredCount = NULL;
-	m_aiMissionaryPoints = NULL;
-	m_aiMissionaryThresholdMultiplier = NULL;
 	m_aiProfessionEquipmentModifier = NULL;
 	m_aiTraitCount = NULL;
 
@@ -94,6 +94,8 @@ CvPlayer::~CvPlayer()
 	SAFE_DELETE_ARRAY(m_aiYieldTradedTotal);
 	SAFE_DELETE_ARRAY(m_aiYieldBoughtTotal);
 	SAFE_DELETE_ARRAY(m_aiTaxYieldModifierCount);
+	SAFE_DELETE_ARRAY(m_aiMissionaryPoints);
+	SAFE_DELETE_ARRAY(m_aiMissionaryThresholdMultiplier);
 	SAFE_DELETE_ARRAY(m_abYieldEuropeTradable);
 	SAFE_DELETE_ARRAY(m_abFeatAccomplished);
 	SAFE_DELETE_ARRAY(m_abOptions);
@@ -215,8 +217,6 @@ void CvPlayer::uninit()
 	SAFE_DELETE_ARRAY(m_paiBuildingClassMaking);
 	SAFE_DELETE_ARRAY(m_paiHurryCount);
 	SAFE_DELETE_ARRAY(m_paiSpecialBuildingNotRequiredCount);
-	SAFE_DELETE_ARRAY(m_aiMissionaryPoints);
-	SAFE_DELETE_ARRAY(m_aiMissionaryThresholdMultiplier);
 	SAFE_DELETE_ARRAY(m_aiProfessionEquipmentModifier);
 	SAFE_DELETE_ARRAY(m_aiTraitCount);
 
@@ -272,14 +272,6 @@ void CvPlayer::reset(PlayerTypes eID, bool bConstructorCall)
 	// Uninit class
 	uninit();
 
-	// Dale - AoD: AI Autoplay START
-	m_bDisableHuman = false;
-	// Dale - AoD: AI Autoplay END
-
-	// PatchMod: Mission failure START
-	m_iMissionFailurePercent = 100;
-	// PatchMod: Mission failure END
-
 	m_iStartingX = INVALID_PLOT_COORD;
 	m_iStartingY = INVALID_PLOT_COORD;
 	m_iTotalPopulation = 0;
@@ -293,7 +285,7 @@ void CvPlayer::reset(PlayerTypes eID, bool bConstructorCall)
 	m_iDomesticGreatGeneralRateModifier = 0;
 	m_iImmigrationThresholdMultiplier = 100;
 	m_iRevolutionEuropeUnitThresholdMultiplier = 100;
-	m_iEducationThresholdMultiplier = 100;
+	m_iKingNumUnitMultiplier = 100;
 	m_iNativeAngerModifier = 0;
 	m_iFreeExperience = 0;
 	m_iWorkerSpeedModifier = 0;
@@ -321,6 +313,7 @@ void CvPlayer::reset(PlayerTypes eID, bool bConstructorCall)
 	m_iRevolutionEuropeTradeCount = 0;
 	m_iFatherPointMultiplier = 100;
 	m_iMissionaryRateModifier = 0;
+	m_iMissionarySuccessPercent = 100;
 	m_uiStartTime = 0;
 
 	m_bAlive = false;
@@ -362,6 +355,12 @@ void CvPlayer::reset(PlayerTypes eID, bool bConstructorCall)
 		m_aiYieldBoughtTotal[iI] = 0;
 		m_abYieldEuropeTradable[iI] = true;
 		m_aiTaxYieldModifierCount[iI] = 0;
+	}
+
+	for (iI = 0; iI < MAX_PLAYERS; ++iI)
+	{
+		m_aiMissionaryPoints[iI] = 0;
+		m_aiMissionaryThresholdMultiplier[iI] = 100;
 	}
 
 	for (iI = 0; iI < NUM_FEAT_TYPES; iI++)
@@ -451,16 +450,6 @@ void CvPlayer::reset(PlayerTypes eID, bool bConstructorCall)
 		for (iI = 0; iI < GC.getNumCivicOptionInfos(); iI++)
 		{
 			m_paeCivics[iI] = NO_CIVIC;
-		}
-		FAssertMsg(0 < GC.getNumCivilizationInfos(), "GC.getNumCivilizationInfos() is not greater than zero but it is used to allocate memory in CvPlayer::reset");
-		FAssertMsg(m_aiMissionaryPoints==NULL, "about to leak memory, CvPlayer::m_aiMissionaryPoints");
-		m_aiMissionaryPoints = new int[GC.getNumCivilizationInfos()];
-		FAssertMsg(m_aiMissionaryThresholdMultiplier==NULL, "about to leak memory, CvPlayer::m_aiMissionaryThresholdMultiplier");
-		m_aiMissionaryThresholdMultiplier = new int[GC.getNumCivilizationInfos()];
-		for (iI = 0; iI < GC.getNumCivilizationInfos(); iI++)
-		{
-			m_aiMissionaryPoints[iI] = 0;
-			m_aiMissionaryThresholdMultiplier[iI] = 100;
 		}
 
 		FAssertMsg(m_aiProfessionEquipmentModifier==NULL, "about to leak memory, CvPlayer::m_aiProfessionEquipmentModifier");
@@ -759,10 +748,7 @@ int CvPlayer::startingPlotRange() const
 {
 	int iRange;
 
-	// PatchMod: Spread out start locs START
 	iRange = (GC.getMapINLINE().maxStepDistance() + 40);
-//	iRange = (GC.getMapINLINE().maxStepDistance() + 10);
-	// PatchMod: Spread out start locs END
 
 	iRange *= GC.getDefineINT("STARTING_DISTANCE_PERCENT");
 	iRange /= 100;
@@ -1266,6 +1252,7 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade)
 	iDamage = pOldCity->getDefenseDamage();
 	int iOldCityId = pOldCity->getID();
 	UnitClassTypes eTeachUnitClass = pOldCity->getTeachUnitClass();
+	int iEducationThresholdMultiplier = pOldCity->getEducationThresholdMultiplier();
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
@@ -1364,6 +1351,7 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade)
 	pNewCity->setOriginalOwner(eOriginalOwner);
 	pNewCity->setGameTurnFounded(iGameTurnFounded);
 	pNewCity->setTeachUnitClass(eTeachUnitClass);
+	pNewCity->setEducationThresholdMultiplier(iEducationThresholdMultiplier);
 	
 	for (uint i = 0; i < aNewPopulationUnits.size(); i++)
 	{
@@ -1886,13 +1874,6 @@ void CvPlayer::updateHuman()
 	{
 		m_bHuman = GC.getInitCore().getHuman(getID());
 	}
-
-	// Dale - AoD: AI Autoplay START
-	if( m_bDisableHuman )
-	{
-		m_bHuman = false;
-	}
-	// Dale - AoD: AI Autoplay END
 }
 
 bool CvPlayer::isNative() const
@@ -2104,6 +2085,8 @@ void CvPlayer::doTurn()
 
 	doEvents();
 
+	interceptEuropeUnits();
+
 	updateEconomyHistory(GC.getGameINLINE().getGameTurn(), getGold());
 	updateIndustryHistory(GC.getGameINLINE().getGameTurn(), calculateTotalYield(YIELD_HAMMERS));
 	updateAgricultureHistory(GC.getGameINLINE().getGameTurn(), calculateTotalYield(YIELD_FOOD));
@@ -2118,7 +2101,7 @@ void CvPlayer::doTurn()
 
 	gDLL->getEventReporterIFace()->endPlayerTurn( GC.getGameINLINE().getGameTurn(),  getID());
 
-	FAssert(checkPower());
+	FAssert(checkPower(false));
 	FAssert(checkPopulation());
 }
 
@@ -2132,19 +2115,19 @@ void CvPlayer::doTurnUnits()
 
 	AI_doTurnUnitsPre();
 
-	for(pLoopSelectionGroup = firstSelectionGroup(&iLoop); pLoopSelectionGroup != NULL; pLoopSelectionGroup = nextSelectionGroup(&iLoop))
+	for (pLoopSelectionGroup = firstSelectionGroup(&iLoop); pLoopSelectionGroup != NULL; pLoopSelectionGroup = nextSelectionGroup(&iLoop))
 	{
 		pLoopSelectionGroup->doDelayedDeath();
 	}
 
 
-	for(pLoopSelectionGroup = firstSelectionGroup(&iLoop); pLoopSelectionGroup != NULL; pLoopSelectionGroup = nextSelectionGroup(&iLoop))
+	for (pLoopSelectionGroup = firstSelectionGroup(&iLoop); pLoopSelectionGroup != NULL; pLoopSelectionGroup = nextSelectionGroup(&iLoop))
 	{
 		pLoopSelectionGroup->doTurn();
 	}
 	
 
-	if(getParent() != NO_PLAYER)
+	if (getParent() != NO_PLAYER)
 	{
 		CvPlayer& kEurope = GET_PLAYER(getParent());
 		if (kEurope.isAlive() && kEurope.isEurope() && !::atWar(getTeam(), kEurope.getTeam()))
@@ -2159,7 +2142,7 @@ void CvPlayer::doTurnUnits()
 					if (GC.getUnitInfo(eLoopUnit).getDomainType() == DOMAIN_SEA)
 					{
 						int iCost = getEuropeUnitBuyPrice(eLoopUnit);
-						if (iCost < iLowestCost)
+						if (iCost < iLowestCost && iCost >= 0)
 						{
 							iLowestCost = iCost;
 							eCheapestShip = eLoopUnit;
@@ -2168,23 +2151,17 @@ void CvPlayer::doTurnUnits()
 				}
 			}
 
-			// PatchMod: Give ship to pilgrim regardless of gold START
-			if (eCheapestShip != NO_UNIT && (getGold() < getEuropeUnitBuyPrice(eCheapestShip) ||  GC.getHandicapInfo(getHandicapType()).isFreeShip()))
-//			if (eCheapestShip != NO_UNIT && getGold() < getEuropeUnitBuyPrice(eCheapestShip))
-			// PatchMod: Give ship to pilgrim regardless of gold END
+			if (eCheapestShip != NO_UNIT && getGold() < getEuropeUnitBuyPrice(eCheapestShip))
 			{
-				// PatchMod: Randomise spawn spot START
 				CvPlot* pBestPlot = getStartingPlot();
 				CvPlot* pLoopPlot = NULL;
 				int iBestPlotRand = 0;
-				int iPlotRand = 0;
 				for (int iI = 0; iI < GC.getMapINLINE().numPlotsINLINE(); iI++)
 				{
-					gDLL->callUpdater();
 					pLoopPlot = GC.getMapINLINE().plotByIndexINLINE(iI);
-					if (pLoopPlot->getX_INLINE() > (GC.getMapINLINE().getGridWidthINLINE() / 2) && pLoopPlot->isEurope())
+					if (pLoopPlot->isRevealed(getTeam(), false) && pBestPlot->getEurope() == pLoopPlot->getEurope())
 					{
-						iPlotRand = (1 + GC.getGameINLINE().getSorenRandNum(1000, "Starting Plot"));
+						int iPlotRand = (1 + GC.getGameINLINE().getSorenRandNum(1000, "Starting Plot"));
 						if (iPlotRand > iBestPlotRand)
 						{
 							iBestPlotRand = iPlotRand;
@@ -2193,7 +2170,6 @@ void CvPlayer::doTurnUnits()
 					}
 				}
 				setStartingPlot(pBestPlot, true);
-				// PatchMod: Randomise spawn spot END
 
 				bool bHasShip = false;
 				int iLoop;
@@ -2226,12 +2202,6 @@ void CvPlayer::doTurnUnits()
 					//change taxrate
 					int iOldTaxRate = getTaxRate();
 					int iNewTaxRate = std::min(99, iOldTaxRate + 1 + GC.getGameINLINE().getSorenRandNum(GC.getDefineINT("TAX_RATE_MAX_INCREASE"), "Tax Rate Increase for ship"));
-					// PatchMod: Give ship to pilgrim regardless of gold START
-					if (GC.getHandicapInfo(getHandicapType()).isFreeShip())
-					{
-						iNewTaxRate = iOldTaxRate + 1;
-					}
-					// PatchMod: Give ship to pilgrim regardless of gold END
 					int iChange = iNewTaxRate - iOldTaxRate;
 					changeTaxRate(iChange);
 
@@ -2847,9 +2817,7 @@ void CvPlayer::handleDiploEvent(DiploEventTypes eDiploEvent, PlayerTypes ePlayer
 
 	case DIPLOEVENT_ACCEPT_KING_GOLD:
 		GET_PLAYER(ePlayer).changeGold(-iData1);
-		// PatchMod: REF Reduction START
 		GET_PLAYER(ePlayer).doREFReduction(iData1);
-		// PatchMod: REF Reduction END
 		break;
 
 	case DIPLOEVENT_REFUSE_KING_GOLD:
@@ -4871,19 +4839,6 @@ int CvPlayer::revolutionEuropeUnitThreshold() const
 	return std::max(1, iThreshold);
 }
 
-int CvPlayer::educationThreshold() const
-{
-	int iThreshold = ((GC.getDefineINT("EDUCATION_THRESHOLD") * std::max(0, (getEducationThresholdMultiplier()))) / 100);
-
-	iThreshold *= GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getGrowthPercent();
-	iThreshold /= 100;
-
-	iThreshold *= GC.getEraInfo(GC.getGameINLINE().getStartEra()).getGrowthPercent();
-	iThreshold /= 100;
-
-	return std::max(1, iThreshold);
-}
-
 CvPlot* CvPlayer::getStartingPlot() const
 {
 	return GC.getMapINLINE().plotSorenINLINE(m_iStartingX, m_iStartingY);
@@ -5041,6 +4996,16 @@ void CvPlayer::changeGold(int iChange)
 	}
 }
 
+int CvPlayer::getExtraTradeMultiplier(PlayerTypes eOtherPlayer) const
+{
+	int iMultiplier = 100;
+	if (!isHuman() && !GET_PLAYER(eOtherPlayer).isHuman())
+	{
+		iMultiplier += GC.getHandicapInfo(GC.getGameINLINE().getHandicapType()).getAIExtraTradePercent();
+	}
+	return iMultiplier;
+}
+
 int CvPlayer::getAdvancedStartPoints() const
 {
 	return m_iAdvancedStartPoints;
@@ -5131,14 +5096,14 @@ void CvPlayer::setRevolutionEuropeUnitThresholdMultiplier(int iValue)
 	m_iRevolutionEuropeUnitThresholdMultiplier = iValue;
 }
 
-int CvPlayer::getEducationThresholdMultiplier() const
+int CvPlayer::getKingNumUnitMultiplier() const
 {
-	return m_iEducationThresholdMultiplier;
+	return m_iKingNumUnitMultiplier;
 }
 
-void CvPlayer::setEducationThresholdMultiplier(int iValue)													
+void CvPlayer::setKingNumUnitMultiplier(int iValue)													
 {
-	m_iEducationThresholdMultiplier = iValue;
+	m_iKingNumUnitMultiplier = iValue;
 }
 
 int CvPlayer::getNativeAngerModifier() const												
@@ -5584,6 +5549,14 @@ void CvPlayer::setAlive(bool bNewValue)
 			if (!isHuman())
 			{
 				gDLL->closeSlot(getID());
+			}
+
+			if (!GC.getGameINLINE().isGameMultiPlayer())
+			{
+				if (GC.getGameINLINE().getActivePlayer() == getID() && GC.getGameINLINE().getAIAutoPlay() <= 0 && !gDLL->GetAutorun())
+				{
+					GC.getGameINLINE().setGameState(GAMESTATE_OVER);
+				}
 			}
 
 			if (GC.getGameINLINE().getElapsedGameTurns() > 0)
@@ -6399,6 +6372,14 @@ void CvPlayer::setYieldEuropeTradable(YieldTypes eYield, bool bTradeable)
 	}
 }
 
+void CvPlayer::setYieldEuropeTradableAll()
+{
+	for (int iI = 0; iI < NUM_YIELD_TYPES; iI++)
+	{
+		setYieldEuropeTradable((YieldTypes)iI, true);
+	}
+}
+
 bool CvPlayer::isFeatAccomplished(FeatTypes eIndex) const
 {
 	FAssertMsg(eIndex >= 0, "eIndex is expected to be non-negative (invalid Index)");
@@ -6652,6 +6633,12 @@ void CvPlayer::changeProfessionCombatChange(ProfessionTypes eIndex, int iChange)
 	if(iChange != 0)
 	{
 		int iLoop;
+
+		for (CvCity* pCity = firstCity(&iLoop); pCity != NULL; pCity = nextCity(&iLoop))
+		{
+			pCity->AI_setWorkforceHack(true);
+		}
+
 		for (CvUnit* pUnit = firstUnit(&iLoop); pUnit != NULL; pUnit = nextUnit(&iLoop))
 		{
 			pUnit->processProfession(pUnit->getProfession(), -1, false);
@@ -6696,6 +6683,11 @@ void CvPlayer::changeProfessionCombatChange(ProfessionTypes eIndex, int iChange)
 					pUnit->processProfession(pUnit->getProfession(), 1, false);
 				}
 			}
+		}
+
+		for (CvCity* pCity = firstCity(&iLoop); pCity != NULL; pCity = nextCity(&iLoop))
+		{
+			pCity->AI_setWorkforceHack(false);
 		}
 	}
 }
@@ -7905,22 +7897,9 @@ void CvPlayer::doGold()
 
 	int iGoldChange = 0;
 
-	// PatchMod: Money tree START
-	if (!isHuman() && getGold() < 20000)
-	{
-		if (getGold() > 0)
-		{
-            iGoldChange = (getGold() * GC.getHandicapInfo(getHandicapType()).getAIMoneyTree()) / 100;
-		} else {
-			iGoldChange = (-getGold() * GC.getHandicapInfo(getHandicapType()).getAIMoneyTree()) / 100;
-		}
-	}
-	// PatchMod: Money tree END
-
 	FAssert(isHuman() || ((getGold() + iGoldChange) >= 0));
 
 	changeGold(iGoldChange);
-
 }
 
 void CvPlayer::doBells()
@@ -7935,7 +7914,6 @@ void CvPlayer::doBells()
 	{
 		return;
 	}
-
 	//add bells to political points
 	for (int i = 0; i < GC.getNumFatherPointInfos(); ++i)
 	{
@@ -7944,10 +7922,7 @@ void CvPlayer::doBells()
 	}
 
 	//update revolution unit bells
-	// PatchMod: Don't increase REF after WoI START
-	if (!isInRevolution() && !GC.getEraInfo(getCurrentEra()).isRevolution())
-//	if (!isInRevolution())
-	// PatchMod: Don't increase REF after WoI END
+	if (!GC.getEraInfo(getCurrentEra()).isRevolution())
 	{
 		changeBellsStored(iBellsRate);
 		if (getBellsStored() >= revolutionEuropeUnitThreshold() && iBellsRate > GC.getCivilizationInfo(getCivilizationType()).getFreeYields(YIELD_BELLS))
@@ -7983,29 +7958,19 @@ void CvPlayer::doBells()
 
 				if (iNumFreeUnits > 0)
 				{
-					int iIndex = GC.getGameINLINE().getSorenRand().pickValue(aiUnitWeights, "Pick Expeditionary force unit");
-					int iUnitClass = kCivilizationInfo.getCivilizationFreeUnitsClass(iIndex);
-					ProfessionTypes eUnitProfession = (ProfessionTypes) kCivilizationInfo.getCivilizationFreeUnitsProfession(iIndex);
-					UnitTypes eUnit = (UnitTypes)kCivilizationInfo.getCivilizationUnits(iUnitClass);
-					FAssert(eUnit != NO_UNIT);
-					int iNumUnits = std::max(1, getRevolutionEuropeUnitThresholdMultiplier() / 100);
+					int iNumUnits = std::max(1, GC.getDefineINT("KING_INITIAL_UNIT_INCREASE") * getKingNumUnitMultiplier() / 100);
 					for (int i = 0; i < iNumUnits; ++i)
 					{
+						int iIndex = GC.getGameINLINE().getSorenRand().pickValue(aiUnitWeights, "Pick Expeditionary force unit");
+						int iUnitClass = kCivilizationInfo.getCivilizationFreeUnitsClass(iIndex);
+						ProfessionTypes eUnitProfession = (ProfessionTypes) kCivilizationInfo.getCivilizationFreeUnitsProfession(iIndex);
+						UnitTypes eUnit = (UnitTypes)kCivilizationInfo.getCivilizationUnits(iUnitClass);
+						FAssert(eUnit != NO_UNIT);
 						addRevolutionEuropeUnit(eUnit, eUnitProfession);
 					}
 
-					const wchar* szUnitName;
-					if (eUnitProfession != NO_PROFESSION)
-					{
-						szUnitName = GC.getProfessionInfo(eUnitProfession).getTextKeyWide();
-					}
-					else
-					{
-						szUnitName = GC.getUnitInfo(eUnit).getTextKeyWide();
-					}
-
-					CvWString szBuffer = gDLL->getText("TXT_KEY_NEW_EUROPE_ARMY", kParent.getCivilizationShortDescriptionKey(), getCivilizationShortDescriptionKey(), szUnitName, kParent.getCivilizationAdjectiveKey());
-					gDLL->getInterfaceIFace()->addMessage(getID(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_UNIT_GREATPEOPLE", MESSAGE_TYPE_INFO, GC.getUnitInfo(eUnit).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_UNIT_TEXT"));
+					CvWString szBuffer = gDLL->getText("TXT_KEY_NEW_EUROPE_ARMY_NEW", kParent.getCivilizationShortDescriptionKey(), getCivilizationShortDescriptionKey(), iNumUnits, kParent.getCivilizationAdjectiveKey());
+					gDLL->getInterfaceIFace()->addMessage(getID(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_UNIT_GREATPEOPLE", GC.getGameINLINE().isDebugMode() ? MESSAGE_TYPE_MAJOR_EVENT : MESSAGE_TYPE_INFO, GC.getLeaderHeadInfo(kParent.getLeaderType()).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_UNIT_TEXT"));
 				}
 			}
 		}
@@ -9531,10 +9496,6 @@ void CvPlayer::read(FDataStreamBase* pStream)
 	uint uiFlag=0;
 	pStream->Read(&uiFlag);	// flags for expansion
 
-	// PatchMod: Mission failure START
-	pStream->Read(&m_iMissionFailurePercent);
-	// PatchMod: Mission failure END
-
 	pStream->Read(&m_iStartingX);
 	pStream->Read(&m_iStartingY);
 	pStream->Read(&m_iTotalPopulation);
@@ -9548,7 +9509,15 @@ void CvPlayer::read(FDataStreamBase* pStream)
 	pStream->Read(&m_iDomesticGreatGeneralRateModifier);
 	pStream->Read(&m_iImmigrationThresholdMultiplier);
 	pStream->Read(&m_iRevolutionEuropeUnitThresholdMultiplier);
-	pStream->Read(&m_iEducationThresholdMultiplier);
+	if (uiFlag > 1)
+	{
+		pStream->Read(&m_iKingNumUnitMultiplier);
+	}
+	if (uiFlag <= 2) 
+	{
+		int iEducationThresholdMultiplier;
+		pStream->Read(&iEducationThresholdMultiplier);
+	}
 	pStream->Read(&m_iNativeAngerModifier);
 	pStream->Read(&m_iFreeExperience);
 	pStream->Read(&m_iWorkerSpeedModifier);
@@ -9567,6 +9536,10 @@ void CvPlayer::read(FDataStreamBase* pStream)
 	pStream->Read(&m_iLandScore);
 	pStream->Read(&m_iFatherScore);
 	pStream->Read(&m_iCombatExperience);
+	if (uiFlag > 1)
+	{
+		pStream->Read(&m_iMissionarySuccessPercent);
+	}
 
 	pStream->Read(&m_bAlive);
 	pStream->Read(&m_bEverAlive);
@@ -9596,6 +9569,11 @@ void CvPlayer::read(FDataStreamBase* pStream)
 	pStream->Read(NUM_YIELD_TYPES, m_aiYieldTradedTotal);
 	pStream->Read(NUM_YIELD_TYPES, m_aiYieldBoughtTotal);
 	pStream->Read(NUM_YIELD_TYPES, m_aiTaxYieldModifierCount);
+	if (uiFlag > 1)
+	{
+		pStream->Read(MAX_PLAYERS, m_aiMissionaryPoints);
+		pStream->Read(MAX_PLAYERS, m_aiMissionaryThresholdMultiplier);
+	}
 
 	pStream->Read(NUM_YIELD_TYPES, m_abYieldEuropeTradable);
 	pStream->Read(NUM_FEAT_TYPES, m_abFeatAccomplished);
@@ -9617,8 +9595,12 @@ void CvPlayer::read(FDataStreamBase* pStream)
 	pStream->Read(GC.getNumBuildingClassInfos(), m_paiBuildingClassMaking);
 	pStream->Read(GC.getNumHurryInfos(), m_paiHurryCount);
 	pStream->Read(GC.getNumSpecialBuildingInfos(), m_paiSpecialBuildingNotRequiredCount);
-	pStream->Read(GC.getNumCivilizationInfos(), m_aiMissionaryPoints);
-	pStream->Read(GC.getNumCivilizationInfos(), m_aiMissionaryThresholdMultiplier);
+	if (uiFlag <= 1)
+	{
+		std::vector<int> aiMissionaryPoints(GC.getNumCivilizationInfos());
+		pStream->Read(GC.getNumCivilizationInfos(), &aiMissionaryPoints[0]);
+		pStream->Read(GC.getNumCivilizationInfos(), &aiMissionaryPoints[0]);
+	}
 	pStream->Read(GC.getNumProfessionInfos(), m_aiProfessionEquipmentModifier);
 	pStream->Read(GC.getNumTraitInfos(), m_aiTraitCount);
 
@@ -9873,30 +9855,14 @@ void CvPlayer::read(FDataStreamBase* pStream)
 		}
 	}
 
-	if (uiFlag > 0)
+	m_triggersFired.clear();
+	uint iSize;
+	pStream->Read(&iSize);
+	for (uint i = 0; i < iSize; i++)
 	{
-		m_triggersFired.clear();
-		uint iSize;
-		pStream->Read(&iSize);
-		for (uint i = 0; i < iSize; i++)
-		{
-			int iTrigger;
-			pStream->Read(&iTrigger);
-			m_triggersFired.push_back((EventTriggerTypes)iTrigger);
-		}
-	}
-	else
-	{
-		int iNumEventTriggers = std::min(176, GC.getNumEventTriggerInfos()); // yuck, hardcoded number of eventTriggers in the epic game in initial release
-		for (iI=0; iI < iNumEventTriggers; iI++)
-		{
-			bool bTriggered;
-			pStream->Read(&bTriggered);
-			if (bTriggered)
-			{
-				m_triggersFired.push_back((EventTriggerTypes)iI);
-			}
-		}
+		int iTrigger;
+		pStream->Read(&iTrigger);
+		m_triggersFired.push_back((EventTriggerTypes)iTrigger);
 	}
 
 	// Get the NetID from the initialization structure
@@ -9921,12 +9887,8 @@ void CvPlayer::write(FDataStreamBase* pStream)
 {
 	int iI;
 
-	uint uiFlag = 1;
+	uint uiFlag = 3;
 	pStream->Write(uiFlag);		// flag for expansion
-
-	// PatchMod: Mission failure START
-	pStream->Write(m_iMissionFailurePercent);
-	// PatchMod: Mission failure END
 
 	pStream->Write(m_iStartingX);
 	pStream->Write(m_iStartingY);
@@ -9941,7 +9903,7 @@ void CvPlayer::write(FDataStreamBase* pStream)
 	pStream->Write(m_iDomesticGreatGeneralRateModifier);
 	pStream->Write(m_iImmigrationThresholdMultiplier);
 	pStream->Write(m_iRevolutionEuropeUnitThresholdMultiplier);
-	pStream->Write(m_iEducationThresholdMultiplier);
+	pStream->Write(m_iKingNumUnitMultiplier);
 	pStream->Write(m_iNativeAngerModifier);
 	pStream->Write(m_iFreeExperience);
 	pStream->Write(m_iWorkerSpeedModifier);
@@ -9960,6 +9922,7 @@ void CvPlayer::write(FDataStreamBase* pStream)
 	pStream->Write(m_iLandScore);
 	pStream->Write(m_iFatherScore);
 	pStream->Write(m_iCombatExperience);
+	pStream->Write(m_iMissionarySuccessPercent);
 
 	pStream->Write(m_bAlive);
 	pStream->Write(m_bEverAlive);
@@ -9988,6 +9951,8 @@ void CvPlayer::write(FDataStreamBase* pStream)
 	pStream->Write(NUM_YIELD_TYPES, m_aiYieldTradedTotal);
 	pStream->Write(NUM_YIELD_TYPES, m_aiYieldBoughtTotal);
 	pStream->Write(NUM_YIELD_TYPES, m_aiTaxYieldModifierCount);
+	pStream->Write(MAX_PLAYERS, m_aiMissionaryPoints);
+	pStream->Write(MAX_PLAYERS, m_aiMissionaryThresholdMultiplier);
 
 	pStream->Write(NUM_YIELD_TYPES, m_abYieldEuropeTradable);
 	pStream->Write(NUM_FEAT_TYPES, m_abFeatAccomplished);
@@ -10009,8 +9974,6 @@ void CvPlayer::write(FDataStreamBase* pStream)
 	pStream->Write(GC.getNumBuildingClassInfos(), m_paiBuildingClassMaking);
 	pStream->Write(GC.getNumHurryInfos(), m_paiHurryCount);
 	pStream->Write(GC.getNumSpecialBuildingInfos(), m_paiSpecialBuildingNotRequiredCount);
-	pStream->Write(GC.getNumCivilizationInfos(), m_aiMissionaryPoints);
-	pStream->Write(GC.getNumCivilizationInfos(), m_aiMissionaryThresholdMultiplier);
 	pStream->Write(GC.getNumProfessionInfos(), m_aiProfessionEquipmentModifier);
 	pStream->Write(GC.getNumTraitInfos(), m_aiTraitCount);
 
@@ -12491,7 +12454,7 @@ void CvPlayer::sellYieldUnitToEurope(CvUnit* pUnit, int iAmount, int iCommission
 			{
 				iAmount = std::min(iAmount, pUnit->getYieldStored());
 				int iProfit = getSellToEuropeProfit(eYield, iAmount * (100 - iCommission) / 100);
-				changeGold(iProfit);
+				changeGold(iProfit * getExtraTradeMultiplier(kPlayerEurope.getID()) / 100);
 
 				changeYieldTradedTotal(eYield, iAmount);
 				kPlayerEurope.changeYieldTradedTotal(eYield, iAmount);
@@ -12526,7 +12489,7 @@ void CvPlayer::sellYieldUnitToEurope(CvUnit* pUnit, int iAmount, int iCommission
 			int iAmount = pUnit->getYieldStored();
 			int iNetAmount = iAmount * (100 - iCommission) / 100;
 			iNetAmount -= (iNetAmount * getTaxRate()) / 100;
-			changeGold(iNetAmount);
+			changeGold(iNetAmount * getExtraTradeMultiplier(kPlayerEurope.getID()) / 100);
 
 			pUnit->setYieldStored(0);
 			pUnit->setTransportUnit(NULL);
@@ -12540,9 +12503,6 @@ void CvPlayer::sellYieldUnitToEurope(CvUnit* pUnit, int iAmount, int iCommission
 			gDLL->getInterfaceIFace()->setDirty(EuropeScreen_DIRTY_BIT, true);
 		}
 	}
-	// PatchMod: Check Europe prices after each trade START
-	GET_PLAYER(getParent()).doPrices();
-	// PatchMod: Check Europe prices after each trade END
 }
 
 CvUnit* CvPlayer::buyYieldUnitFromEurope(YieldTypes eYield, int iAmount, CvUnit* pTransport)
@@ -12616,9 +12576,6 @@ CvUnit* CvPlayer::buyYieldUnitFromEurope(YieldTypes eYield, int iAmount, CvUnit*
 
 		gDLL->getEventReporterIFace()->yieldBoughtFromEurope(getID(), eYield, iAmount);
 	}
-	// PatchMod: Check Europe prices after each trade START
-	GET_PLAYER(getParent()).doPrices();
-	// PatchMod: Check Europe prices after each trade END
 
 	return pUnit;
 }
@@ -12628,10 +12585,9 @@ int CvPlayer::getEuropeUnitBuyPrice(UnitTypes eUnit) const
 	CvUnitInfo& kUnit = GC.getUnitInfo(eUnit);
 
 	int iCost = kUnit.getEuropeCost();
-	if (iCost < 0)
-	{
-		return iCost;
-	}
+	
+	bool bNegative = (iCost < 0);
+	iCost = std::abs(iCost);
 
 	iCost += GET_TEAM(getTeam()).getEuropeUnitsPurchased((UnitClassTypes) kUnit.getUnitClassType()) * kUnit.getEuropeCostIncrease();
 
@@ -12657,6 +12613,11 @@ int CvPlayer::getEuropeUnitBuyPrice(UnitTypes eUnit) const
 
 		iCost *= std::max(0, ((GC.getHandicapInfo(GC.getGameINLINE().getHandicapType()).getAIPerEraModifier() * getCurrentEra()) + 100));
 		iCost /= 100;
+	}
+
+	if(bNegative)
+	{
+		iCost = std::min(-iCost, -1);
 	}
 
 	return iCost;
@@ -13170,78 +13131,34 @@ bool CvPlayer::checkIndependence() const
 
 void CvPlayer::applyMissionaryPoints(CvCity* pCity)
 {
-	CivilizationTypes eCivilization = pCity->getMissionaryCivilization();
-	if(eCivilization != NO_CIVILIZATION)
+	FAssert(pCity->getOwnerINLINE() == getID());
+	PlayerTypes ePlayer = pCity->getMissionaryPlayer();
+	if (ePlayer != NO_PLAYER)
 	{
-		//add up modifiers of all players that affect this mission
-		int iModifier = 100 + getMissionaryRateModifier();
-		for(int i=0;i<MAX_PLAYERS;i++)
+		int iModifier = 100 + getMissionaryRateModifier() + GET_PLAYER(ePlayer).getMissionaryRateModifier();
+		changeMissionaryPoints(ePlayer, pCity->getMissionaryRate() * iModifier / 100);
+		int iThreshold = missionaryThreshold(ePlayer);
+		if (getMissionaryPoints(ePlayer) >= iThreshold)
 		{
-			CvPlayer& kPlayer = GET_PLAYER((PlayerTypes) i);
-			if(kPlayer.isAlive())
-			{
-				if(kPlayer.getCivilizationType() == eCivilization)
-				{
-					iModifier += kPlayer.getMissionaryRateModifier();
-				}
-			}
-		}
-
-		changeMissionaryPoints(eCivilization, pCity->getMissionaryRate() * iModifier / 100);
-		int iThreshold = missionaryThreshold(eCivilization);
-		if(getMissionaryPoints(eCivilization) >= iThreshold)
-		{
-			// PatchMod: Missionary player START
-			PlayerTypes ePlayer = pCity->getMissionaryPlayer();
-//			std::vector<int> aiWeights(MAX_PLAYERS, 0);
-//
-//			//pick a random player for the civilization
-//			for (int i = 0; i < MAX_PLAYERS; ++i)
-//			{
-//				PlayerTypes eLoopPlayer = (PlayerTypes) i;
-//				CvPlayer& kPlayer = GET_PLAYER(eLoopPlayer);
-//				if (kPlayer.isAlive())
-//				{
-//					if(kPlayer.getCivilizationType() == eCivilization)
-//					{
-//						if(!::atWar(getTeam(), kPlayer.getTeam()))
-//						{
-//							aiWeights[i] = GC.getMapINLINE().maxPlotDistance();
-//
-//							CvCity* pClosestCity = GC.getMapINLINE().findCity(pCity->getX_INLINE(), pCity->getY_INLINE(), eLoopPlayer);
-//							if (pClosestCity != NULL)
-//							{
-//								aiWeights[i] /= std::max(1, ::plotDistance(pCity->getX_INLINE(), pCity->getY_INLINE(), pClosestCity->getX_INLINE(), pClosestCity->getY_INLINE()));
-//							}
-//						}
-//					}
-//				}
-//			}
-//			PlayerTypes ePlayer = (PlayerTypes) GC.getGameINLINE().getSorenRand().pickValue(aiWeights, "Pick missionary player for convert");
-			// PatchMod: Missionary player END
-
 			//spawn converted native
 			bool bUnitCreated = false;
-			if(ePlayer != NO_PLAYER)
+			UnitClassTypes eUnitClass = (UnitClassTypes) GC.getCivilizationInfo(getCivilizationType()).getCapturedCityUnitClass();
+			if (eUnitClass != NO_UNITCLASS)
 			{
-				UnitClassTypes eUnitClass = (UnitClassTypes) GC.getCivilizationInfo(getCivilizationType()).getCapturedCityUnitClass();
-				if (eUnitClass != NO_UNITCLASS)
+				UnitTypes eUnit = (UnitTypes) GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationUnits(eUnitClass);
+				if (eUnit != NO_UNIT)
 				{
-					UnitTypes eUnit = (UnitTypes) GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationUnits(eUnitClass);
-					if (eUnit != NO_UNIT)
+					CvUnit* pUnit = GET_PLAYER(ePlayer).initUnit(eUnit, (ProfessionTypes) GC.getUnitInfo(eUnit).getDefaultProfession(), pCity->getX_INLINE(), pCity->getY_INLINE());
+					if(pUnit != NULL)
 					{
-						CvUnit* pUnit = GET_PLAYER(ePlayer).initUnit(eUnit, (ProfessionTypes) GC.getUnitInfo(eUnit).getDefaultProfession(), pCity->getX_INLINE(), pCity->getY_INLINE());
-						if(pUnit != NULL)
-						{
-							bUnitCreated = true;
-							gDLL->getEventReporterIFace()->missionaryConvertedUnit(pUnit);
+						bUnitCreated = true;
+						gDLL->getEventReporterIFace()->missionaryConvertedUnit(pUnit);
 
-							CvWString szBuffer = gDLL->getText("TXT_KEY_NATIVES_CONVERTED", pCity->getNameKey());
-							gDLL->getInterfaceIFace()->addMessage(ePlayer, true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_UNIT_GREATPEOPLE", MESSAGE_TYPE_INFO, GC.getUnitInfo(eUnit).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_UNIT_TEXT"), pCity->getX_INLINE(), pCity->getY_INLINE(), true, true);
+						CvWString szBuffer = gDLL->getText("TXT_KEY_NATIVES_CONVERTED", pCity->getNameKey());
+						gDLL->getInterfaceIFace()->addMessage(ePlayer, true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_UNIT_GREATPEOPLE", MESSAGE_TYPE_INFO, GC.getUnitInfo(eUnit).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_UNIT_TEXT"), pCity->getX_INLINE(), pCity->getY_INLINE(), true, true);
 
-							changeMissionaryPoints(eCivilization, -iThreshold);
-							setMissionaryThresholdMultiplier(eCivilization, (getMissionaryThresholdMultiplier(eCivilization) * (100 + GC.getDefineINT("MISSIONARY_THRESHOLD_INCREASE"))) / 100);
-						}
+						changeMissionaryPoints(ePlayer, -iThreshold);
+						setMissionaryThresholdMultiplier(ePlayer, (getMissionaryThresholdMultiplier(ePlayer) * (100 + GC.getDefineINT("MISSIONARY_THRESHOLD_INCREASE"))) / 100);
 					}
 				}
 			}
@@ -13250,85 +13167,80 @@ void CvPlayer::applyMissionaryPoints(CvCity* pCity)
 	}
 }
 
-int CvPlayer::getMissionaryPoints(CivilizationTypes eCivilization) const
+int CvPlayer::getMissionaryPoints(PlayerTypes ePlayer) const
 {
-	FAssert(eCivilization >= 0 && eCivilization < GC.getNumCivilizationInfos());
-	return m_aiMissionaryPoints[eCivilization];
+	FAssert(ePlayer >= 0 && ePlayer < MAX_PLAYERS);
+	return m_aiMissionaryPoints[ePlayer];
 }
 
-void CvPlayer::changeMissionaryPoints(CivilizationTypes eCivilization, int iChange)
+void CvPlayer::changeMissionaryPoints(PlayerTypes ePlayer, int iChange)
 {
-	FAssert(eCivilization >= 0 && eCivilization < GC.getNumCivilizationInfos());
+	FAssert(ePlayer >= 0 && ePlayer < MAX_PLAYERS);
 	if(iChange != 0)
 	{
-		m_aiMissionaryPoints[eCivilization] += iChange;
-		FAssert(m_aiMissionaryPoints[eCivilization] >= 0);
+		m_aiMissionaryPoints[ePlayer] += iChange;
+		FAssert(m_aiMissionaryPoints[ePlayer] >= 0);
 	}
 }
 
-int CvPlayer::getMissionaryThresholdMultiplier(CivilizationTypes eCivilization) const
+int CvPlayer::getMissionaryThresholdMultiplier(PlayerTypes ePlayer) const
 {
-	FAssert(eCivilization >= 0 && eCivilization < GC.getNumCivilizationInfos());
-	return m_aiMissionaryThresholdMultiplier[eCivilization];
+	FAssert(ePlayer >= 0 && ePlayer < MAX_PLAYERS);
+	return m_aiMissionaryThresholdMultiplier[ePlayer];
 }
 
-void CvPlayer::setMissionaryThresholdMultiplier(CivilizationTypes eCivilization, int iValue)
+void CvPlayer::setMissionaryThresholdMultiplier(PlayerTypes ePlayer, int iValue)
 {
-	FAssert(eCivilization >= 0 && eCivilization < GC.getNumCivilizationInfos());
-	m_aiMissionaryThresholdMultiplier[eCivilization] = iValue;
-	FAssert(getMissionaryThresholdMultiplier(eCivilization) > 0);
+	FAssert(ePlayer >= 0 && ePlayer < MAX_PLAYERS);
+	m_aiMissionaryThresholdMultiplier[ePlayer] = iValue;
+	FAssert(getMissionaryThresholdMultiplier(ePlayer) > 0);
 }
 
-int CvPlayer::missionaryThreshold(CivilizationTypes eCivilization) const
+int CvPlayer::missionaryThreshold(PlayerTypes ePlayer) const
 {
-	int iThreshold = ((GC.getDefineINT("MISSIONARY_THRESHOLD") * std::max(0, (getMissionaryThresholdMultiplier(eCivilization)))) / 100);
+	int iThreshold = ((GC.getDefineINT("MISSIONARY_THRESHOLD") * std::max(0, (getMissionaryThresholdMultiplier(ePlayer)))) / 100);
 
-	iThreshold *= GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getGreatGeneralPercent();
+	iThreshold *= GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getGrowthPercent();
 	iThreshold /= 100;
 
-	iThreshold *= GC.getEraInfo(GC.getGameINLINE().getStartEra()).getGreatGeneralPercent();
+	iThreshold *= GC.getEraInfo(GC.getGameINLINE().getStartEra()).getGrowthPercent();
 	iThreshold /= 100;
 
 	return std::max(1, iThreshold);
 }
 
-void CvPlayer::burnMissions(CivilizationTypes eCivilization)
+void CvPlayer::burnMissions(PlayerTypes ePlayer)
 {
 	int iLoop;
 	for (CvCity* pCity = firstCity(&iLoop); pCity != NULL; pCity = nextCity(&iLoop))
 	{
-		if (pCity->getMissionaryCivilization() == eCivilization)
+		if (pCity->getMissionaryPlayer() == ePlayer)
 		{
-			pCity->setMissionaryCivilization(NO_CIVILIZATION);
-			// PatchMod: Missionary player START
 			pCity->setMissionaryPlayer(NO_PLAYER);
-			// PatchMod: Missionary player END
 		}
 	}
 }
 
-bool CvPlayer::canHaveMission(CivilizationTypes eCivilization) const
+bool CvPlayer::canHaveMission(PlayerTypes ePlayer) const
 {
 	if (!isNative())
 	{
 		return false;
 	}
 
-	if (GC.getCivilizationInfo(eCivilization).isNative())
+	if (!GET_PLAYER(ePlayer).isAlive())
 	{
 		return false;
 	}
 
-	for (int iPlayer = 0; iPlayer < MAX_PLAYERS; ++iPlayer)
+	if (GET_PLAYER(ePlayer).isNative())
 	{
-		CvPlayer& kLoopPlayer = GET_PLAYER((PlayerTypes) iPlayer);
-		if (kLoopPlayer.isAlive() && kLoopPlayer.getCivilizationType() == eCivilization)
-		{
-			if (::atWar(kLoopPlayer.getTeam(), getTeam()))
-			{
-				return false;
-			}
-		}
+		return false;
+	}
+
+	if (::atWar(GET_PLAYER(ePlayer).getTeam(), getTeam()))
+	{
+		return false;
 	}
 
 	return true;
@@ -13336,11 +13248,11 @@ bool CvPlayer::canHaveMission(CivilizationTypes eCivilization) const
 
 void CvPlayer::validateMissions()
 {
-	for (int iCivilization = 0; iCivilization < GC.getNumCivilizationInfos(); ++iCivilization)
+	for (int iPlayer = 0; iPlayer < MAX_PLAYERS; ++iPlayer)
 	{
-		if (!canHaveMission((CivilizationTypes) iCivilization))
+		if (!canHaveMission((PlayerTypes) iPlayer))
 		{
-			burnMissions((CivilizationTypes) iCivilization);
+			burnMissions((PlayerTypes) iPlayer);
 		}
 	}
 }
@@ -13353,6 +13265,16 @@ int CvPlayer::getMissionaryRateModifier() const
 void  CvPlayer::changeMissionaryRateModifier(int iChange)
 {
 	m_iMissionaryRateModifier += iChange;
+}
+
+int CvPlayer::getMissionarySuccessPercent() const
+{
+	return m_iMissionarySuccessPercent;
+}
+
+void CvPlayer::setMissionarySuccessPercent(int iValue)
+{
+	m_iMissionarySuccessPercent = iValue;
 }
 
 int CvPlayer::getRebelCombatPercent() const
@@ -13488,10 +13410,7 @@ bool CvPlayer::isProfessionValid(ProfessionTypes eProfession, UnitTypes eUnit) c
 			{
 				// Natives cannot be combat professions
 				CvProfessionInfo& kProfession = GC.getProfessionInfo(eProfession);
-				// PatchMod: Natives cant be missionaries START
 				if ((!kProfession.isUnarmed() && kProfession.getCombatChange() > 0 && !kProfession.isScout()) || kProfession.getMissionaryRate() > 0)
-//				if (!kProfession.isUnarmed() && kProfession.getCombatChange() > 0 && !kProfession.isScout())
-				// PatchMod: Natives cant be missionaries END
 				{
 					return false;
 				}
@@ -13518,7 +13437,7 @@ void CvPlayer::doPrices()
 
 			if (kYield.isCargo())
 			{
-				int iBaseThreshold = kYield.getPriceChangeThreshold() * GC.getHandicapInfo(getHandicapType()).getEuropePriceThresholdMultiplier() / 100;
+				int iBaseThreshold = kYield.getPriceChangeThreshold() * GC.getHandicapInfo(getHandicapType()).getEuropePriceThresholdMultiplier() * GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getGrowthPercent() / 10000;
 				int iNewPrice = kYield.getBuyPriceLow() + GC.getGameINLINE().getSorenRandNum(kYield.getBuyPriceHigh() - kYield.getBuyPriceLow() + 1, "Price selection");
 				iNewPrice += getYieldBoughtTotal(eYield) / std::max(1, iBaseThreshold);
 
@@ -13533,10 +13452,7 @@ void CvPlayer::doPrices()
 	}
 
 	//do tax rate change
-	// PatchMod: Don't raise tax after WoI START
-	if (!isInRevolution() && !GC.getEraInfo(getCurrentEra()).isRevolution())
-//	if (!isInRevolution())
-	// PatchMod: Don't raise tax after WoI END
+	if (!GC.getEraInfo(getCurrentEra()).isRevolution())
 	{
 		PlayerTypes eParent = getParent();
 		if (eParent != NO_PLAYER)
@@ -13546,12 +13462,10 @@ void CvPlayer::doPrices()
 				int iTotalTraded = 0;
 				for (int i = 0; i < NUM_YIELD_TYPES; i++)
 				{
-					// PatchMod: Don't count blockaded goods in tax threshold START
 					if (isYieldEuropeTradable((YieldTypes)i))
 					{
-                        iTotalTraded += getYieldTradedTotal((YieldTypes) i);
+						iTotalTraded += getYieldTradedTotal((YieldTypes) i);
 					}
-					// PatchMod: Don't count blockaded goods in tax threshold END
 				}
 
 				//modify the traded threshold
@@ -13668,7 +13582,7 @@ UnitTypes CvPlayer::pickBestImmigrant()
 	return eBestUnit;
 }
 
-bool CvPlayer::canHurry(HurryTypes eHurry) const
+bool CvPlayer::canHurry(HurryTypes eHurry, int iIndex) const
 {
 	CvHurryInfo& kHurry = GC.getHurryInfo(eHurry);
 
@@ -13680,7 +13594,7 @@ bool CvPlayer::canHurry(HurryTypes eHurry) const
 			{
 				if (immigrationThreshold() > getCrossesStored())
 				{
-					if (getHurryGold(eHurry) <= getGold())
+					if (getHurryGold(eHurry, iIndex) <= getGold())
 					{
 						return true;
 					}
@@ -13698,39 +13612,40 @@ bool CvPlayer::canHurry(HurryTypes eHurry) const
 
 void CvPlayer::hurry(HurryTypes eHurry, int iIndex)
 {
-	if (!canHurry(eHurry))
+	if (!canHurry(eHurry, iIndex))
 	{
-		int iPrice = getHurryGold(eHurry);
+		int iPrice = getHurryGold(eHurry, iIndex);
 		if (iPrice >= getGold())
 		{
 			m_aszTradeMessages.push_back(gDLL->getText("EUROPE_SCREEN_RECRUIT_UNIT_LACK_FUNDS", GC.getUnitInfo(getDocksNextUnit(iIndex)).getTextKeyWide(), iPrice));
 			gDLL->getInterfaceIFace()->setDirty(EuropeScreen_DIRTY_BIT, true);
 		}
-		return;
 	}
-
-	CvHurryInfo& kHurry = GC.getHurryInfo(eHurry);
-
-	if (kHurry.getGoldPerCross() > 0)
+	else
 	{
-		changeGold(-getHurryGold(eHurry));
-		changeCrossesStored(immigrationThreshold() - getCrossesStored());
-		doImmigrant(iIndex);
+		CvHurryInfo& kHurry = GC.getHurryInfo(eHurry);
+
+		if (kHurry.getGoldPerCross() > 0)
+		{
+			changeGold(-getHurryGold(eHurry, iIndex));
+			changeCrossesStored(immigrationThreshold() - getCrossesStored());
+			doImmigrant(iIndex);
+		}
 	}
 }
 
-int CvPlayer::getHurryGold(HurryTypes eHurry) const
+int CvPlayer::getHurryGold(HurryTypes eHurry, int iIndex) const
 {
-	int iCrossesLeft = immigrationThreshold() - getCrossesStored();
+	int iThreshold = immigrationThreshold();
+	int iCrossesLeft = iThreshold - getCrossesStored();
 	int iGold = GC.getHurryInfo(eHurry).getGoldPerCross() * iCrossesLeft;
 	iGold += GC.getHurryInfo(eHurry).getFlatGold() * GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getGrowthPercent() / 100;
-
-	// PatchMod: Hurry cost no more than specialist START
-	if (iGold > 2000)
+	if (iIndex != -1)
 	{
-        iGold = 2000;
+		int iImmigrationPrice = std::abs(getEuropeUnitBuyPrice(getDocksNextUnit(iIndex))) * iCrossesLeft / std::max(1, iThreshold);
+		iGold = std::min(iGold, iImmigrationPrice);
 	}
-	// PatchMod: Hurry cost no more than specialist END
+	
 	return iGold;
 }
 
@@ -13768,28 +13683,6 @@ void CvPlayer::doImmigrant(int iIndex)
 			gDLL->getInterfaceIFace()->addMessage(getID(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_UNIT_GREATPEOPLE", MESSAGE_TYPE_INFO, GC.getUnitInfo(eBestUnit).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_UNIT_TEXT"));
 
 			gDLL->getInterfaceIFace()->setDirty(EuropeScreen_DIRTY_BIT, true);
-
-			// PatchMod: AI arm colonists START
-			if (!isHuman())
-			{
-				int iUndefended = 0;
-				int iNeeded = GET_PLAYER(pUnit->getOwnerINLINE()).AI_totalDefendersNeeded(&iUndefended);
-				if (iNeeded > 0 || GET_PLAYER(pUnit->getOwnerINLINE()).AI_isStrategy(STRATEGY_REVOLUTION_PREPARING))
-				{
-					ProfessionTypes eBestProfession = NO_PROFESSION;
-					if (GC.getGameINLINE().getSorenRandNum(100, "") < 50)
-					{
-						eBestProfession = GET_PLAYER(pUnit->getOwnerINLINE()).AI_idealProfessionForUnitAIType(UNITAI_DEFENSIVE);
-					} else {
-						eBestProfession = GET_PLAYER(pUnit->getOwnerINLINE()).AI_idealProfessionForUnitAIType(UNITAI_COUNTER);
-					}
-					if (pUnit->canHaveProfession(eBestProfession, false))
-					{
-				        pUnit->setProfession(eBestProfession, true);
-					}
-				}
-			}
-			// PatchMod: AI arm colonists END
 
 			FAssert(pUnit != NULL);
 			if(pUnit != NULL)
@@ -14284,7 +14177,7 @@ bool CvPlayer::checkPopulation() const
 	return (iNumPopulation == getTotalPopulation());
 }
 
-bool CvPlayer::checkPower() const
+bool CvPlayer::checkPower(bool bReset)
 {
 	int iPower = 0;
 	int iAsset = 0;
@@ -14338,117 +14231,75 @@ bool CvPlayer::checkPower() const
 		mapAreaPower[pCity->area()->getID()] += iCityPower;
 	}
 
+	bool bCheck = true;
 	if (iPower != getPower())
 	{
-		return false;
+		if (bReset)
+		{
+			changePower(iPower - getPower());
+		}
+		bCheck = false;
 	}
 
 	if (iAsset != getAssets())
 	{
-		return false;
+		if (bReset)
+		{
+			changeAssets(iAsset - getAssets());
+		}
+		bCheck = false;
 	}
 
 	for (CvArea* pArea = GC.getMapINLINE().firstArea(&iLoop); pArea != NULL; pArea = GC.getMapINLINE().nextArea(&iLoop))
 	{
 		if (mapAreaPower[pArea->getID()] != pArea->getPower(getID()))
 		{
-			return false;
+			if (bReset)
+			{
+				pArea->changePower(getID(), mapAreaPower[pArea->getID()] - pArea->getPower(getID()));
+			}
+			bCheck = false;
 		}
 	}
 
-	return true;
+	return bCheck;
 }
 
-// Dale - AoD: AI Autoplay START
-void CvPlayer::setDisableHuman( bool newVal )
-{
-	m_bDisableHuman = newVal;
-}
-
-bool CvPlayer::getDisableHuman( )
-{
-	return m_bDisableHuman;
-}
-// Dale - AoD: AI Autoplay END
-
-// PatchMod: REF Reduction START
 void CvPlayer::doREFReduction(int iGold)
 {
-	setRevolutionEuropeUnitThresholdMultiplier(getRevolutionEuropeUnitThresholdMultiplier() * ((100 + (iGold / GC.getHandicapInfo(getHandicapType()).getKingGoldThresholdPercent())) / 100));
-	return;
+	setRevolutionEuropeUnitThresholdMultiplier(getRevolutionEuropeUnitThresholdMultiplier() * (100 + iGold * GC.getHandicapInfo(getHandicapType()).getKingGoldThresholdPercent() / 100) / 100);
 }
-// PatchMod: REF Reduction END
 
-// PatchMod: Force start peace START
-void CvPlayer::doKingForcePeace()
-{
-	CvWString szMessage = gDLL->getText("TXT_KEY_FORCE_START_PEACE");
-	gDLL->getInterfaceIFace()->addMessage(getID(), true, GC.getEVENT_MESSAGE_TIME(), szMessage, "AS2D_CITY_REVOLT", MESSAGE_TYPE_MAJOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), NULL, NULL, true, true);
-	return;
-}
-// PatchMod: Force start peace END
-
-// PatchMod: Intercept Europe units START
 void CvPlayer::interceptEuropeUnits()
 {
-	int iLoop;
-	CvWString szMessage;
-	CvPlot* pPlot;
-	for (CvUnit* pUnit = firstUnit(&iLoop); pUnit != NULL; pUnit = nextUnit(&iLoop))
+	if (!canTradeWithEurope())
 	{
-		if (pUnit->getUnitTravelState() == UNIT_TRAVEL_STATE_TO_EUROPE || pUnit->getUnitTravelState() == UNIT_TRAVEL_STATE_IN_EUROPE)
+		std::vector<CvUnit*> apEuropeUnits;
+		int iLoop;
+		for (CvUnit* pUnit = firstUnit(&iLoop); pUnit != NULL; pUnit = nextUnit(&iLoop))
 		{
-			pPlot = pUnit->plot();
-			szMessage = gDLL->getText("TXT_KEY_YOU_UNITS_EUROPE_INTERCEPTED", pUnit->getNameOrProfessionKey());
+			if (pUnit->getUnitTravelState() == UNIT_TRAVEL_STATE_TO_EUROPE || pUnit->getUnitTravelState() == UNIT_TRAVEL_STATE_IN_EUROPE)
+			{
+				if (!pUnit->isCargo())
+				{
+					apEuropeUnits.push_back(pUnit);
+				}
+			}
+		}
+
+		for (size_t i = 0; i < apEuropeUnits.size(); ++i)
+		{
+			CvUnit* pUnit = apEuropeUnits[i];
+			CvPlot* pPlot = pUnit->plot();
+			CvWString szMessage = gDLL->getText("TXT_KEY_YOU_UNITS_EUROPE_INTERCEPTED", pUnit->getNameOrProfessionKey());
 			gDLL->getInterfaceIFace()->addMessage(getID(), true, GC.getEVENT_MESSAGE_TIME(), szMessage, "AS2D_COMBAT", MESSAGE_TYPE_DISPLAY_ONLY, pUnit->getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pPlot->getX_INLINE(), pPlot->getY_INLINE(), true);
 			pUnit->kill(false);
 		}
-	}
-	return;
-}
-// PatchMod: Intercept Europe units END
 
-// PatchMod: Mission failure START
-int CvPlayer::getMissionFailurePercent() const
-{
-	return m_iMissionFailurePercent;
-}
-
-void CvPlayer::setMissionFailurePercent(int iValue)
-{
-	m_iMissionFailurePercent = iValue;
-}
-// PatchMod: Mission failure END
-
-// PatchMod: Tax party city START
-int CvPlayer::getHighestStoredYieldPartyCityId(YieldTypes eYield) const
-{
-	int iLoop;
-	int iBestCityId = -1;
-	int iBestAmount = 0;
-	for (CvCity* pLoopCity = firstCity(&iLoop); pLoopCity != NULL; pLoopCity = nextCity(&iLoop))
-	{
-		if (pLoopCity->isCoastal(GC.getMIN_WATER_SIZE_FOR_OCEAN()))
+		for (uint i = 0; i < m_aEuropeUnits.size(); ++i)
 		{
-			int iAmount = pLoopCity->getYieldStored(eYield);
-			if(iAmount > iBestAmount)
-			{
-				iBestAmount = iAmount;
-				iBestCityId = pLoopCity->getID();
-			}
+			m_aEuropeUnits[i]->updateOwnerCache(-1);
 		}
-	}
-
-	return iBestCityId;
-}
-// PatchMod: Tax party city END
-
-// PatchMod: Clear blockaded goods START
-void CvPlayer::setYieldEuropeTradableAll()
-{
-	for (int iI = 0; iI < NUM_YIELD_TYPES; iI++)
-	{
-		m_abYieldEuropeTradable[iI] = true;
+		freeEuropeUnits();
 	}
 }
-// PatchMod: Clear blockaded goods END

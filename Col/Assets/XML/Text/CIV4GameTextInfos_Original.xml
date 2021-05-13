@@ -250,7 +250,7 @@
 		<English>Load</English>
 		<French>Charger</French>
 		<German>Laden</German>
-		<Italian>Imbarca</Italian>
+		<Italian>Carica</Italian>
 		<Spanish>Embarcar</Spanish>
 	</TEXT>
 	<TEXT>
@@ -634,7 +634,7 @@
 		<English>Load</English>
 		<French>Charger</French>
 		<German>Laden</German>
-		<Italian>Imbarca</Italian>
+		<Italian>Carica</Italian>
 		<Spanish>Embarcar</Spanish>
 	</TEXT>
 	<TEXT>
@@ -1784,18 +1784,18 @@
 	<TEXT>
 		<Tag>TXT_KEY_DEMO_SCREEN_IMPORTS_TEXT</Tag>
 		<English>Imports</English>
-		<French>Importations</French>
+		<French>Importer</French>
 		<German>Importe</German>
-		<Italian>Importazioni</Italian>
-		<Spanish>Importaciones</Spanish>
+		<Italian>Import.</Italian>
+		<Spanish>Importar</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_DEMO_SCREEN_EXPORTS_TEXT</Tag>
 		<English>Exports</English>
-		<French>Exportations</French>
+		<French>Exporter</French>
 		<German>Exporte</German>
-		<Italian>Esportazioni</Italian>
-		<Spanish>Exportaciones</Spanish>
+		<Italian>Esport.</Italian>
+		<Spanish>Exportar</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_DEMO_SCREEN_ECONOMY_MEASURE</Tag>
@@ -1953,7 +1953,7 @@
 		<Tag>TXT_KEY_REPLAY_SCREEN_SPEED</Tag>
 		<English>Speed</English>
 		<French>Vitesse</French>
-		<German>Geschwindigkeit</German>
+		<German>Geschw.</German>
 		<Italian>Velocit&#224;</Italian>
 		<Spanish>Velocidad</Spanish>
 	</TEXT>
@@ -5047,10 +5047,10 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISC_TURNS_LEFT</Tag>
-		<English>%d1 [NUM1:Turn:Turns] To Win!</English>
-		<French>Il reste %d1 [NUM1:tour:tours] !</French>
-		<German>Noch %d1 [NUM1:Runde:Runden]!</German>
-		<Italian>%d1 [NUM1:turno rimasto:turni rimasti]!</Italian>
+		<English>%d1 [NUM1:Turn:Turns] To Win</English>
+		<French>Il reste %d1 [NUM1:tour:tours]</French>
+		<German>Noch %d1 [NUM1:Runde:Runden]</German>
+		<Italian>%d1 [NUM1:turno rimasto:turni rimasti]</Italian>
 		<Spanish>[NUM1:Queda:Quedan] %d1 [NUM1:turno:turnos]</Spanish>
 	</TEXT>
 	<TEXT>
@@ -6289,9 +6289,9 @@
 		<Tag>TXT_KEY_POWER</Tag>
 		<English>Power</English>
 		<French>Puissance</French>
-		<German>Elektrizit&#228;t</German>
-		<Italian>Energia</Italian>
-		<Spanish>Energ&#237;a</Spanish>
+		<German>Macht</German>
+		<Italian>Potenza</Italian>
+		<Spanish>Poder</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_SIDS_TIPS</Tag>
@@ -6497,7 +6497,7 @@
 		<Tag>TXT_KEY_MAIN_MENU_SELECT_GAME_SPEED_TITLE</Tag>
 		<English>GAME SPEED</English>
 		<French>VITESSE DU JEU</French>
-		<German>GESCHWINDIGKEIT</German>
+		<German>GESCHW.</German>
 		<Italian>VEL. DI GIOCO</Italian>
 		<Spanish>VELOCID. DE JUEGO</Spanish>
 	</TEXT>
@@ -10321,7 +10321,7 @@
 		<Tag>TXT_KEY_INFO_RIVAL_BEST</Tag>
 		<English>Rival Best</English>
 		<French>Meilleur rival</French>
-		<German>Besten herausfordern</German>
+		<German>bester Gegner</German>
 		<Italian>Migliore rivale</Italian>
 		<Spanish>Mejor rival</Spanish>
 	</TEXT>
@@ -10329,7 +10329,7 @@
 		<Tag>TXT_KEY_INFO_RIVAL_WORST</Tag>
 		<English>Rival Worst</English>
 		<French>Pire rival</French>
-		<German>Schlechtesten herausfordern</German>
+		<German>schlecht. Gegner</German>
 		<Italian>Peggiore rivale</Italian>
 		<Spanish>Peor rival</Spanish>
 	</TEXT>
@@ -14459,7 +14459,7 @@
 		<English>You show great wisdom and acumen in picking your friends, [CT_NAME]. The [OUR_EMPIRE] thanks you.</English>
 		<French>Vous faites preuve de sagesse et de perspicacit&#233; dans le choix de vos amis, [CT_NAME]. L'[OUR_EMPIRE] vous remercie.</French>
 		<German>Sieht aus, als h&#228;ttet Ihr einen guten Riecher, wenn es um die Wahl Eurer Freunde geht, [CT_NAME]. Das [OUR_EMPIRE:2] dankt Euch.</German>
-		<Italian>Hai mostrato grande saggezza e acume nella scelta dei tuoi amici, [CT_NAME]. L'[OUR_EMPIRE] ti ringrazia.</Italian>
+		<Italian>Hai mostrato grande saggezza e acume nella scelta dei tuoi amici, [CT_NAME]. Noi [OUR_EMPIRE] ti ringraziamo.</Italian>
 		<Spanish>Demostr&#225;is gran sabidur&#237;a y perspicacia a la hora de escoger a vuestros amigos, [CT_NAME]. El [OUR_EMPIRE] os da las gracias.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -17674,7 +17674,7 @@
 		<Tag>TXT_KEY_DEMO_SCREEN_INDUSTRY_TEXT</Tag>
 		<English>Mfg. Goods (Prod.)</English>
 		<French>March. (Prod.)</French>
-		<German>Ind. (Prod.)</German>
+		<German>G&#252;terproduktion</German>
 		<Italian>Beni (Prod.)</Italian>
 		<Spanish>Producci&#243;n</Spanish>
 	</TEXT>
@@ -17682,7 +17682,7 @@
 		<Tag>TXT_KEY_DEMO_SCREEN_AGRICULTURE_TEXT</Tag>
 		<English>Crop Yield (Food)</English>
 		<French>R&#233;colte (Nour.)</French>
-		<German>Getreideertrag (Nahrung)</German>
+		<German>Nahrung</German>
 		<Italian>Prod. raccol. (cibo)</Italian>
 		<Spanish>Alimentos</Spanish>
 	</TEXT>
@@ -17945,7 +17945,7 @@
 	<TEXT>
 		<Tag>TXT_KEY_MAIN_MENU_SETTINGS</Tag>
 		<English>Settings</English>
-		<French>Param&#200;tres</French>
+		<French>Param&#232;tres</French>
 		<German>Einstellungen</German>
 		<Italian>Impostazioni</Italian>
 		<Spanish>Configuraci&#243;n</Spanish>

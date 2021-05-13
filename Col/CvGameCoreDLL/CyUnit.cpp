@@ -554,9 +554,9 @@ int CyUnit::getUnitAICargo(UnitAITypes eUnitAI)
 {
 	return m_pUnit ? m_pUnit->getUnitAICargo(eUnitAI) : -1;
 }
-bool CyUnit::canAssignTradeRoute(int iRouteId) const
+bool CyUnit::canAssignTradeRoute(int iRouteId, bool bReusePath) const
 {
-	return m_pUnit ? m_pUnit->canAssignTradeRoute(iRouteId) : false;
+	return m_pUnit ? m_pUnit->canAssignTradeRoute(iRouteId, bReusePath) : false;
 }
 int CyUnit::getID()
 {
@@ -1051,6 +1051,10 @@ void CyUnit::setUnitTravelState(int /*UnitTravelStates*/ eState, bool bShowEurop
 	if (m_pUnit)
 		m_pUnit->setUnitTravelState((UnitTravelStates) eState, bShowEuropeScreen);
 }
+bool CyUnit::canSailEurope(int iEurope)
+{
+	return m_pUnit ? m_pUnit->canSailEurope((EuropeTypes) iEurope) : false;
+}
 bool CyUnit::isColonistLocked()
 {
 	return m_pUnit ? m_pUnit->isColonistLocked() : false;
@@ -1076,25 +1080,3 @@ std::string CyUnit::getFullLengthIcon() const
 {
 	return m_pUnit ? m_pUnit->getFullLengthIcon() : "";
 }
-
-// PatchMod: Sail to West START
-bool CyUnit::canSailEast()
-{
-	return m_pUnit ? m_pUnit->canSailEast() : false;
-}
-
-bool CyUnit::setSailEast()
-{
-	return m_pUnit ? m_pUnit->setSailEast() : false;
-}
-
-bool CyUnit::canSailWest()
-{
-	return m_pUnit ? m_pUnit->canSailWest() : false;
-}
-
-bool CyUnit::setSailWest()
-{
-	return m_pUnit ? m_pUnit->setSailWest() : false;
-}
-// PatchMod: Sail to West END

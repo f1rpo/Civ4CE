@@ -2288,9 +2288,6 @@ void CvUnitMeshGroups::write(FDataStreamBase* stream)
 //
 //------------------------------------------------------------------------------------------------------
 CvUnitInfo::CvUnitInfo() :
-// PatchMod: Berth size START
-m_iBerthSize(1),
-// PatchMod: Berth size END
 m_iAIWeight(0),
 m_iHurryCostModifier(0),
 m_iEuropeCost(0),
@@ -2936,9 +2933,6 @@ void CvUnitInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iDomainCargo);
 	stream->Read(&m_iCargoSpace);
 	stream->Read(&m_iRequiredTransportSize);
-	// PatchMod: Berth size START
-	stream->Read(&m_iBerthSize);
-	// PatchMod: Berth size END
 	stream->Read(&m_iAssetValue);
 	stream->Read(&m_iPowerValue);
 	stream->Read(&m_iUnitClassType);
@@ -3098,9 +3092,6 @@ void CvUnitInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iDomainCargo);
 	stream->Write(m_iCargoSpace);
 	stream->Write(m_iRequiredTransportSize);
-	// PatchMod: Berth size START
-	stream->Write(m_iBerthSize);
-	// PatchMod: Berth size END
 	stream->Write(m_iAssetValue);
 	stream->Write(m_iPowerValue);
 	stream->Write(m_iUnitClassType);
@@ -3290,9 +3281,6 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 	m_iDomainCargo = pXML->FindInInfoClass(szTextVal);
 	pXML->GetChildXmlValByName(&m_iCargoSpace, "iCargo");
 	pXML->GetChildXmlValByName(&m_iRequiredTransportSize, "iRequiredTransportSize");
-	// PatchMod: Berth size START
-	pXML->GetChildXmlValByName(&m_iBerthSize, "iBerthSize");
-	// PatchMod: Berth size END
 	pXML->GetChildXmlValByName(&m_iAssetValue, "iAsset");
 	pXML->GetChildXmlValByName(&m_iPowerValue, "iPower");
 	// Read the mesh groups elements
@@ -5814,12 +5802,8 @@ bool CvHurryInfo::read(CvXMLLoadUtility* pXML)
 //
 //------------------------------------------------------------------------------------------------------
 CvHandicapInfo::CvHandicapInfo() :
-m_iStartingLocationPercent(0),
 m_iAdvancedStartPointsMod(0),
 m_iStartingGold(0),
-// PatchMod: Give ship to pilgrim regardless of gold START
-m_bFreeShip(0),
-// PatchMod: Give ship to pilgrim regardless of gold END
 m_iFatherPercent(0),
 m_iAttitudeChange(0),
 m_iStartingDefenseUnits(0),
@@ -5839,22 +5823,16 @@ m_iAITrainPercent(0),
 m_iAIConstructPercent(0),
 m_iAIUnitUpgradePercent(0),
 m_iAIHurryPercent(0),
-// PatchMod: Money tree START
-m_iAIMoneyTree(0),
-// PatchMod: Money tree END
+m_iAIExtraTradePercent(0),
 m_iAIPerEraModifier(0),
 m_iAIAdvancedStartPercent(0),
 m_iAIKingUnitThresholdPercent(0),
-// PatchMod: REF Reduction START
-m_iKingUnitThresholdPercent(0),
 m_iKingGoldThresholdPercent(0),
-// PatchMod: REF Reduction END
 m_iNumGoodies(0),
 m_iEuropePriceThresholdMultiplier(0),
 m_iNativePacifismPercent(0),
-// PatchMod: Mission failure START
 m_iMissionFailureThresholdPercent(0),
-// PatchMod: Mission failure END
+m_iKingNumUnitMultiplier(0),
 m_aiGoodies(NULL)
 {
 }
@@ -5868,10 +5846,6 @@ m_aiGoodies(NULL)
 CvHandicapInfo::~CvHandicapInfo()
 {
 	SAFE_DELETE_ARRAY(m_aiGoodies);
-}
-int CvHandicapInfo::getStartingLocationPercent() const
-{
-	return m_iStartingLocationPercent;
 }
 int CvHandicapInfo::getAdvancedStartPointsMod() const
 {
@@ -5957,6 +5931,10 @@ int CvHandicapInfo::getAIHurryPercent() const
 {
 	return m_iAIHurryPercent;
 }
+int CvHandicapInfo::getAIExtraTradePercent() const
+{
+	return m_iAIExtraTradePercent;
+}
 int CvHandicapInfo::getAIPerEraModifier() const
 {
 	return m_iAIPerEraModifier;
@@ -5981,6 +5959,20 @@ int CvHandicapInfo::getNativePacifismPercent() const
 {
 	return m_iNativePacifismPercent;
 }
+int CvHandicapInfo::getMissionFailureThresholdPercent() const
+{
+	return m_iMissionFailureThresholdPercent;
+}
+
+int CvHandicapInfo::getKingNumUnitMultiplier() const
+{
+	return m_iKingNumUnitMultiplier;
+}
+int CvHandicapInfo::getKingGoldThresholdPercent() const
+{
+	return m_iKingGoldThresholdPercent;
+}
+
 // Arrays
 int CvHandicapInfo::getGoodies(int i) const
 {
@@ -5993,12 +5985,8 @@ void CvHandicapInfo::read(FDataStreamBase* stream)
 	CvInfoBase::read(stream);
 	uint uiFlag=0;
 	stream->Read(&uiFlag);		// Flag for Expansion
-	stream->Read(&m_iStartingLocationPercent);
 	stream->Read(&m_iAdvancedStartPointsMod);
 	stream->Read(&m_iStartingGold);
-	// PatchMod: Give ship to pilgrim regardless of gold START
-	stream->Read(&m_bFreeShip);
-	// PatchMod: Give ship to pilgrim regardless of gold END
 	stream->Read(&m_iFatherPercent);
 	stream->Read(&m_iAttitudeChange);
 	stream->Read(&m_iStartingDefenseUnits);
@@ -6018,23 +6006,16 @@ void CvHandicapInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iAIConstructPercent);
 	stream->Read(&m_iAIUnitUpgradePercent);
 	stream->Read(&m_iAIHurryPercent);
-	// PatchMod: Money tree START
-	stream->Read(&m_iAIMoneyTree);
-	// PatchMod: Money tree END
+	stream->Read(&m_iAIExtraTradePercent);
 	stream->Read(&m_iAIPerEraModifier);
 	stream->Read(&m_iAIAdvancedStartPercent);
 	stream->Read(&m_iAIKingUnitThresholdPercent);
-	// PatchMod: REF Reduction START
-	stream->Read(&m_iKingUnitThresholdPercent);
 	stream->Read(&m_iKingGoldThresholdPercent);
-	// PatchMod: REF Reduction END
 	stream->Read(&m_iNumGoodies);
 	stream->Read(&m_iEuropePriceThresholdMultiplier);
 	stream->Read(&m_iNativePacifismPercent);
-	// PatchMod: Mission failure START
 	stream->Read(&m_iMissionFailureThresholdPercent);
-	// PatchMod: Mission failure END
-
+	stream->Read(&m_iKingNumUnitMultiplier);
 	stream->ReadString(m_szHandicapName);
 	// Arrays
 	SAFE_DELETE_ARRAY(m_aiGoodies);
@@ -6046,12 +6027,8 @@ void CvHandicapInfo::write(FDataStreamBase* stream)
 	CvInfoBase::write(stream);
 	uint uiFlag=0;
 	stream->Write(uiFlag);		// Flag for Expansion
-	stream->Write(m_iStartingLocationPercent);
 	stream->Write(m_iAdvancedStartPointsMod);
 	stream->Write(m_iStartingGold);
-	// PatchMod: Give ship to pilgrim regardless of gold START
-	stream->Write(m_bFreeShip);
-	// PatchMod: Give ship to pilgrim regardless of gold END
 	stream->Write(m_iFatherPercent);
 	stream->Write(m_iAttitudeChange);
 	stream->Write(m_iStartingDefenseUnits);
@@ -6071,22 +6048,16 @@ void CvHandicapInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iAIConstructPercent);
 	stream->Write(m_iAIUnitUpgradePercent);
 	stream->Write(m_iAIHurryPercent);
-	// PatchMod: Money tree START
-	stream->Write(m_iAIMoneyTree);
-	// PatchMod: Money tree END
+	stream->Write(m_iAIExtraTradePercent);
 	stream->Write(m_iAIPerEraModifier);
 	stream->Write(m_iAIAdvancedStartPercent);
 	stream->Write(m_iAIKingUnitThresholdPercent);
-	// PatchMod: REF Reduction START
-	stream->Write(m_iKingUnitThresholdPercent);
 	stream->Write(m_iKingGoldThresholdPercent);
-	// PatchMod: REF Reduction END
 	stream->Write(m_iNumGoodies);
 	stream->Write(m_iEuropePriceThresholdMultiplier);
 	stream->Write(m_iNativePacifismPercent);
-	// PatchMod: Mission failure START
 	stream->Write(m_iMissionFailureThresholdPercent);
-	// PatchMod: Mission failure END
+	stream->Write(m_iKingNumUnitMultiplier);
 	stream->WriteString(m_szHandicapName);
 	// Arrays
 	stream->Write(getNumGoodies(), m_aiGoodies);
@@ -6098,12 +6069,8 @@ bool CvHandicapInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 	int j;
-	pXML->GetChildXmlValByName(&m_iStartingLocationPercent, "iStartingLocPercent");
 	pXML->GetChildXmlValByName(&m_iAdvancedStartPointsMod, "iAdvancedStartPointsMod");
 	pXML->GetChildXmlValByName(&m_iStartingGold, "iGold");
-	// PatchMod: Give ship to pilgrim regardless of gold START
-	pXML->GetChildXmlValByName(&m_bFreeShip, "bFreeShip");
-	// PatchMod: Give ship to pilgrim regardless of gold END
 	pXML->GetChildXmlValByName(&m_iFatherPercent, "iFatherPercent");
 	pXML->GetChildXmlValByName(&m_iAttitudeChange, "iAttitudeChange");
 	pXML->GetChildXmlValByName(&m_iStartingDefenseUnits, "iStartingDefenseUnits");
@@ -6123,21 +6090,15 @@ bool CvHandicapInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iAIConstructPercent, "iAIConstructPercent");
 	pXML->GetChildXmlValByName(&m_iAIUnitUpgradePercent, "iAIUnitUpgradePercent");
 	pXML->GetChildXmlValByName(&m_iAIHurryPercent, "iAIHurryPercent");
-	// PatchMod: Money tree START
-	pXML->GetChildXmlValByName(&m_iAIMoneyTree, "iAIMoneyTree");
-	// PatchMod: Money tree END
+	pXML->GetChildXmlValByName(&m_iAIExtraTradePercent, "iAIExtraTradePercent");
 	pXML->GetChildXmlValByName(&m_iAIPerEraModifier, "iAIPerEraModifier");
 	pXML->GetChildXmlValByName(&m_iAIAdvancedStartPercent, "iAIAdvancedStartPercent");
 	pXML->GetChildXmlValByName(&m_iAIKingUnitThresholdPercent, "iAIKingUnitThresholdPercent");
-	// PatchMod: REF Reduction START
-	pXML->GetChildXmlValByName(&m_iKingUnitThresholdPercent, "iKingUnitThresholdPercent");
 	pXML->GetChildXmlValByName(&m_iKingGoldThresholdPercent, "iKingGoldThresholdPercent");
-	// PatchMod: REF Reduction END
 	pXML->GetChildXmlValByName(&m_iEuropePriceThresholdMultiplier, "iEuropePriceThresholdMultiplier");
 	pXML->GetChildXmlValByName(&m_iNativePacifismPercent, "iNativePacifismPercent");
-	// PatchMod: Mission failure START
 	pXML->GetChildXmlValByName(&m_iMissionFailureThresholdPercent, "iMissionFailureThresholdPercent");
-	// PatchMod: Mission failure END
+	pXML->GetChildXmlValByName(&m_iKingNumUnitMultiplier, "iKingNumUnitMultiplier");
 	if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(), "Goodies"))
 	{
 		CvString* pszGoodyNames = NULL;
@@ -6176,9 +6137,7 @@ m_iTrainPercent(0),
 m_iConstructPercent(0),
 m_iFatherPercent(0),
 m_iGreatGeneralPercent(0),
-//patchmod WoI expansion start;
 m_iRevolutionTurns(0),
-//patchmod WoI expansion end;
 m_iNumTurnIncrements(0),
 m_pGameTurnInfo(NULL)
 {
@@ -6218,12 +6177,10 @@ int CvGameSpeedInfo::getGreatGeneralPercent() const
 {
 	return m_iGreatGeneralPercent;
 }
-//patchmod WoI expansion start;
 int CvGameSpeedInfo::getRevolutionTurns() const
 {
     return m_iRevolutionTurns;
 }
-//patchmod WoI expansion end;
 int CvGameSpeedInfo::getNumTurnIncrements() const
 {
 	return m_iNumTurnIncrements;
@@ -6249,9 +6206,7 @@ bool CvGameSpeedInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iConstructPercent, "iConstructPercent");
 	pXML->GetChildXmlValByName(&m_iFatherPercent, "iFatherPercent");
 	pXML->GetChildXmlValByName(&m_iGreatGeneralPercent, "iGreatGeneralPercent");
-	//patchmod WoI expansion start;
 	pXML->GetChildXmlValByName(&m_iRevolutionTurns, "iRevolutionTurns");
-	//patchmod WoI expansion end;
 	if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(),"GameTurnInfos"))
 	{
 		m_iNumTurnIncrements = gDLL->getXMLIFace()->GetNumChildren(pXML->GetXML());
@@ -8971,7 +8926,7 @@ CvEuropeInfo::CvEuropeInfo() :
 	m_iCardinalDirection(NO_CARDINALDIRECTION),
 	m_iTripLength(0),
 	m_iMinLandDistance(0),
-	m_iWidth(0)
+	m_iWidthPercent(0)
 {
 }
 CvEuropeInfo::~CvEuropeInfo()
@@ -8993,9 +8948,9 @@ int CvEuropeInfo::getMinLandDistance() const
 {
 	return m_iMinLandDistance;
 }
-int CvEuropeInfo::getWidth() const
+int CvEuropeInfo::getWidthPercent() const
 {
-	return m_iWidth;
+	return m_iWidthPercent;
 }
 bool CvEuropeInfo::read(CvXMLLoadUtility* pXML)
 {
@@ -9027,7 +8982,7 @@ bool CvEuropeInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_bStart, "bStart");
 	pXML->GetChildXmlValByName(&m_iTripLength, "iTripLength");
 	pXML->GetChildXmlValByName(&m_iMinLandDistance, "iMinLandDistance");
-	pXML->GetChildXmlValByName(&m_iWidth, "iWidth");
+	pXML->GetChildXmlValByName(&m_iWidthPercent, "iWidthPercent");
 
 	return true;
 }
@@ -13371,44 +13326,3 @@ bool CvAlarmInfo::read(CvXMLLoadUtility* pXML)
 
 	return true;
 }
-
-
-// PatchMod: REF Reduction START
-int CvHandicapInfo::getKingUnitThresholdPercent() const
-{
-	return m_iKingUnitThresholdPercent;
-}
-
-int CvHandicapInfo::getKingGoldThresholdPercent() const
-{
-	return m_iKingGoldThresholdPercent;
-}
-// PatchMod: REF Reduction END
-
-// PatchMod: Mission failure START
-int CvHandicapInfo::getMissionFailureThresholdPercent() const
-{
-	return m_iMissionFailureThresholdPercent;
-}
-// PatchMod: Mission failure END
-
-// PatchMod: Give ship to pilgrim regardless of gold START
-bool CvHandicapInfo::isFreeShip() const
-{
-	return m_bFreeShip;
-}
-// PatchMod: Give ship to pilgrim regardless of gold END
-
-// PatchMod: Berth size START
-int CvUnitInfo::getBerthSize() const
-{
-	return m_iBerthSize;
-}
-// PatchMod: Berth size END
-
-// PatchMod: Money tree START
-int CvHandicapInfo::getAIMoneyTree() const
-{
-	return m_iAIMoneyTree;
-}
-// PatchMod: Money tree END

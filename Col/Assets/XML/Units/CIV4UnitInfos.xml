@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by EXTREME (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -86,7 +86,7 @@
 			<iHurryCostModifier>0</iHurryCostModifier>
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-			<iEuropeCost>-1</iEuropeCost>
+			<iEuropeCost>-800</iEuropeCost>
 			<iEuropeCostIncrease>0</iEuropeCostIncrease>
 			<iImmigrationWeight>100</iImmigrationWeight>
 			<iImmigrationWeightDecay>10</iImmigrationWeightDecay>
@@ -100,8 +100,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -288,7 +288,7 @@
 			<iHurryCostModifier>0</iHurryCostModifier>
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-			<iEuropeCost>-1</iEuropeCost>
+			<iEuropeCost>-800</iEuropeCost>
 			<iEuropeCostIncrease>0</iEuropeCostIncrease>
 			<iImmigrationWeight>100</iImmigrationWeight>
 			<iImmigrationWeightDecay>5</iImmigrationWeightDecay>
@@ -302,8 +302,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -531,7 +531,7 @@
 			<iHurryCostModifier>0</iHurryCostModifier>
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-			<iEuropeCost>-1</iEuropeCost>
+			<iEuropeCost>-600</iEuropeCost>
 			<iEuropeCostIncrease>0</iEuropeCostIncrease>
 			<iImmigrationWeight>100</iImmigrationWeight>
 			<iImmigrationWeightDecay>0</iImmigrationWeightDecay>
@@ -545,8 +545,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -788,8 +788,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -892,7 +892,7 @@
 			<iRequiredTransportSize>1</iRequiredTransportSize>
 			<iAsset>200</iAsset>
 			<iPower>0</iPower>
-			<iNativeLearnTime>3</iNativeLearnTime>
+			<iNativeLearnTime>-1</iNativeLearnTime>
 			<iStudentWeight>100</iStudentWeight>
 			<iTeacherWeight>0</iTeacherWeight>
 			<ProfessionMeshGroups>
@@ -949,17 +949,6 @@
 					<UnitMeshGroup>
 						<iRequired>1</iRequired>
 						<ArtDefineTag>ART_DEF_UNIT_PROFESSION_PIONEER</ArtDefineTag>
-					</UnitMeshGroup>
-				</UnitMeshGroups>
-				<UnitMeshGroups>
-					<ProfessionType>PROFESSION_MISSIONARY</ProfessionType>
-					<fMaxSpeed>1.75</fMaxSpeed>
-					<fPadTime>1</fPadTime>
-					<iMeleeWaveSize>4</iMeleeWaveSize>
-					<iRangedWaveSize>0</iRangedWaveSize>
-					<UnitMeshGroup>
-						<iRequired>1</iRequired>
-						<ArtDefineTag>ART_DEF_UNIT_PROFESSION_MISSIONARY</ArtDefineTag>
 					</UnitMeshGroup>
 				</UnitMeshGroups>
 			</ProfessionMeshGroups>
@@ -1067,8 +1056,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -1274,8 +1263,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -1481,8 +1470,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -1688,8 +1677,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -1895,8 +1884,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -2102,8 +2091,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -2314,8 +2303,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -2521,8 +2510,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -2733,8 +2722,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -2940,8 +2929,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -3147,8 +3136,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -3354,8 +3343,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -3561,8 +3550,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -3768,8 +3757,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -3975,8 +3964,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -4182,8 +4171,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -4389,8 +4378,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -4604,8 +4593,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -4633,7 +4622,7 @@
 			<iPower>25</iPower>
 			<iNativeLearnTime>-1</iNativeLearnTime>
 			<iStudentWeight>0</iStudentWeight>
-			<iTeacherWeight>0</iTeacherWeight>
+			<iTeacherWeight>2</iTeacherWeight>
 			<ProfessionMeshGroups>
 				<UnitMeshGroups>
 					<ProfessionType>NONE</ProfessionType>
@@ -4794,10 +4783,10 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
-			<iCityAttack>50</iCityAttack>
+			<iCityAttack>25</iCityAttack>
 			<iCityDefense>0</iCityDefense>
 			<iHillsAttack>0</iHillsAttack>
 			<iHillsDefense>0</iHillsDefense>
@@ -5013,8 +5002,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -5205,7 +5194,7 @@
 			<iHurryCostModifier>0</iHurryCostModifier>
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-			<iEuropeCost>-1</iEuropeCost>
+			<iEuropeCost>-1500</iEuropeCost>
 			<iEuropeCostIncrease>0</iEuropeCostIncrease>
 			<iImmigrationWeight>200</iImmigrationWeight>
 			<iImmigrationWeightDecay>75</iImmigrationWeightDecay>
@@ -5219,8 +5208,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -5421,8 +5410,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -5628,8 +5617,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -5825,7 +5814,7 @@
 			<iHurryCostModifier>0</iHurryCostModifier>
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-			<iEuropeCost>-1</iEuropeCost>
+			<iEuropeCost>-2000</iEuropeCost>
 			<iEuropeCostIncrease>0</iEuropeCostIncrease>
 			<iImmigrationWeight>50</iImmigrationWeight>
 			<iImmigrationWeightDecay>25</iImmigrationWeightDecay>
@@ -5839,8 +5828,8 @@
 			<FeatureImpassables/>
 			<EvasionBuildings/>
 			<iCombat>0</iCombat>
-			<iXPValueAttack>0</iXPValueAttack>
-			<iXPValueDefense>0</iXPValueDefense>
+			<iXPValueAttack>4</iXPValueAttack>
+			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCityAttack>0</iCityAttack>
 			<iCityDefense>0</iCityDefense>
@@ -6368,7 +6357,7 @@
 			<iXPValueAttack>4</iXPValueAttack>
 			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>0</iWithdrawalProb>
-			<iCityAttack>150</iCityAttack>
+			<iCityAttack>125</iCityAttack>
 			<iCityDefense>50</iCityDefense>
 			<iHillsAttack>0</iHillsAttack>
 			<iHillsDefense>0</iHillsDefense>
@@ -7015,18 +7004,18 @@
 				</YieldCost>
 				<YieldCost>
 					<YieldType>YIELD_TOOLS</YieldType>
-					<iCost>200</iCost>
+					<iCost>100</iCost>
 				</YieldCost>
 				<YieldCost>
 					<YieldType>YIELD_MUSKETS</YieldType>
-					<iCost>200</iCost>
+					<iCost>150</iCost>
 				</YieldCost>
 			</YieldCosts>
 			<iHurryCostModifier>0</iHurryCostModifier>
 			<iAdvancedStartCost>100</iAdvancedStartCost>
 			<iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
 			<iEuropeCost>5000</iEuropeCost>
-			<iEuropeCostIncrease>1000</iEuropeCostIncrease>
+			<iEuropeCostIncrease>0</iEuropeCostIncrease>
 			<iImmigrationWeight>0</iImmigrationWeight>
 			<iImmigrationWeightDecay>0</iImmigrationWeightDecay>
 			<iMinAreaSize>20</iMinAreaSize>
@@ -7142,22 +7131,22 @@
 			<YieldCosts>
 				<YieldCost>
 					<YieldType>YIELD_HAMMERS</YieldType>
-					<iCost>400</iCost>
+					<iCost>350</iCost>
 				</YieldCost>
 				<YieldCost>
 					<YieldType>YIELD_TOOLS</YieldType>
-					<iCost>300</iCost>
+					<iCost>150</iCost>
 				</YieldCost>
 				<YieldCost>
 					<YieldType>YIELD_MUSKETS</YieldType>
-					<iCost>300</iCost>
+					<iCost>200</iCost>
 				</YieldCost>
 			</YieldCosts>
 			<iHurryCostModifier>0</iHurryCostModifier>
 			<iAdvancedStartCost>100</iAdvancedStartCost>
 			<iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-			<iEuropeCost>8000</iEuropeCost>
-			<iEuropeCostIncrease>1500</iEuropeCostIncrease>
+			<iEuropeCost>-1</iEuropeCost>
+			<iEuropeCostIncrease>0</iEuropeCostIncrease>
 			<iImmigrationWeight>0</iImmigrationWeight>
 			<iImmigrationWeightDecay>0</iImmigrationWeightDecay>
 			<iMinAreaSize>20</iMinAreaSize>
@@ -7283,15 +7272,15 @@
 			<YieldCosts>
 				<YieldCost>
 					<YieldType>YIELD_HAMMERS</YieldType>
-					<iCost>400</iCost>
+					<iCost>350</iCost>
 				</YieldCost>
 				<YieldCost>
 					<YieldType>YIELD_TOOLS</YieldType>
-					<iCost>300</iCost>
+					<iCost>150</iCost>
 				</YieldCost>
 				<YieldCost>
 					<YieldType>YIELD_MUSKETS</YieldType>
-					<iCost>300</iCost>
+					<iCost>200</iCost>
 				</YieldCost>
 			</YieldCosts>
 			<iHurryCostModifier>0</iHurryCostModifier>

@@ -33,7 +33,7 @@ public:
 
 	DllExport void AI_chooseProduction();
 
-	DllExport UnitTypes AI_bestUnit(bool bAsync = false, UnitAITypes* peBestUnitAI = NULL) const;
+	DllExport UnitTypes AI_bestUnit(bool bAsync = false, UnitAITypes* peBestUnitAI = NULL, bool bPickAny = false) const;
 	DllExport UnitTypes AI_bestUnitAI(UnitAITypes eUnitAI, bool bAsync = false) const;
 
 	DllExport BuildingTypes AI_bestBuilding(int iFocusFlags = 0, int iMaxTurns = 0, bool bAsync = false) const;
@@ -187,7 +187,7 @@ protected:
 	bool m_bAssignWorkDirty;
 	bool m_bChooseProductionDirty;
 
-	bool m_bWorkforceHack; //Does not need to be serialized.
+	int m_iWorkforceHack; //Does not need to be serialized.
 
 	IDInfo m_routeToCity;
 
@@ -220,7 +220,7 @@ protected:
 
 	bool AI_chooseBuild();
 
-	bool AI_chooseUnit(UnitAITypes eUnitAI = NO_UNITAI);
+	bool AI_chooseUnit(UnitAITypes eUnitAI = NO_UNITAI, bool bPickAny = false);
 	bool AI_chooseUnit(UnitTypes eUnit, UnitAITypes eUnitAI);
 
 	bool AI_chooseDefender();

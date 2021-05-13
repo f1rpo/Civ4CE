@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="7.10"
 	Name="CvGameCoreDLL"
-	ProjectGUID="{E323AF8E-688B-4ED7-BA84-269D8F3AAE2D}"
+	ProjectGUID="{316FA856-61B1-4E94-BCB1-C2592501C5D7}"
 	RootNamespace="CvGameCoreDLL"
 	SccProjectName="Perforce Project"
 	SccAuxPath=""

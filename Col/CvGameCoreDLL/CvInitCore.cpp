@@ -1997,8 +1997,12 @@ void CvInitCore::write(FDataStreamBase* pStream)
 	pStream->Write(MAX_PLAYERS, (int*)m_aeColor);
 	pStream->Write(MAX_PLAYERS, (int*)m_aeArtStyle);
 
+	//don't save autoplay active player as AI
+	SlotStatus eOldStatus = m_aeSlotStatus[getActivePlayer()];
+	m_aeSlotStatus[getActivePlayer()] = SS_TAKEN;
 	pStream->Write(MAX_PLAYERS, (int*)m_aeSlotStatus);
 	pStream->Write(MAX_PLAYERS, (int*)m_aeSlotClaim);
+	m_aeSlotStatus[getActivePlayer()] = eOldStatus;
 
 	pStream->Write(MAX_PLAYERS, m_abPlayableCiv);
 	pStream->Write(MAX_PLAYERS, m_abMinorNationCiv);

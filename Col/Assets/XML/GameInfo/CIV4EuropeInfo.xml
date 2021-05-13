@@ -13,7 +13,7 @@
 			<bStart>1</bStart>
 			<iTripLength>2</iTripLength>
 			<iMinLandDistance>4</iMinLandDistance>
-			<iWidth>5</iWidth>
+			<iWidthPercent>20</iWidthPercent>
 		</EuropeInfo>
 		<EuropeInfo>
 			<Type>EUROPE_WEST</Type>
@@ -22,7 +22,7 @@
 			<bStart>0</bStart>
 			<iTripLength>4</iTripLength>
 			<iMinLandDistance>4</iMinLandDistance>
-			<iWidth>5</iWidth>
+			<iWidthPercent>20</iWidthPercent>
 		</EuropeInfo>
 		<EuropeInfo>
 			<Type>EUROPE_NORTH</Type>
@@ -31,7 +31,7 @@
 			<bStart>0</bStart>
 			<iTripLength>2</iTripLength>
 			<iMinLandDistance>0</iMinLandDistance>
-			<iWidth>0</iWidth>
+			<iWidthPercent>0</iWidthPercent>
 		</EuropeInfo>
 		<EuropeInfo>
 			<Type>EUROPE_SOUTH</Type>
@@ -40,7 +40,7 @@
 			<bStart>0</bStart>
 			<iTripLength>4</iTripLength>
 			<iMinLandDistance>3</iMinLandDistance>
-			<iWidth>0</iWidth>
+			<iWidthPercent>0</iWidthPercent>
 		</EuropeInfo>
 	</EuropeInfos>
 </Civ4EuropeInfo>

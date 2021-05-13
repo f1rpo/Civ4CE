@@ -22,7 +22,7 @@ public:
 	DllExport int getLength() const;
 	DllExport void setLength(int iLength);
 	DllExport ColorTypes getFlashColor() const;
-	void setFlashColor(ColorTypes eColor);
+	DllExport void setFlashColor(ColorTypes eColor);
 	DllExport int getX() const;
 	void setX(int i);
 	DllExport int getY() const;

@@ -63,35 +63,39 @@
 			<YieldModifiers>
 				<YieldModifier>
 					<YieldType>YIELD_FOOD</YieldType>
-					<iYield>25</iYield>
+					<iYield>50</iYield>
 				</YieldModifier>
 				<YieldModifier>
 					<YieldType>YIELD_LUMBER</YieldType>
-					<iYield>25</iYield>
+					<iYield>50</iYield>
 				</YieldModifier>
 				<YieldModifier>
 					<YieldType>YIELD_SILVER</YieldType>
-					<iYield>25</iYield>
+					<iYield>50</iYield>
 				</YieldModifier>
 				<YieldModifier>
 					<YieldType>YIELD_COTTON</YieldType>
-					<iYield>25</iYield>
+					<iYield>50</iYield>
 				</YieldModifier>
 				<YieldModifier>
 					<YieldType>YIELD_FUR</YieldType>
-					<iYield>25</iYield>
+					<iYield>50</iYield>
 				</YieldModifier>
 				<YieldModifier>
 					<YieldType>YIELD_SUGAR</YieldType>
-					<iYield>25</iYield>
+					<iYield>50</iYield>
 				</YieldModifier>
 				<YieldModifier>
 					<YieldType>YIELD_TOBACCO</YieldType>
-					<iYield>25</iYield>
+					<iYield>50</iYield>
 				</YieldModifier>
 				<YieldModifier>
 					<YieldType>YIELD_ORE</YieldType>
-					<iYield>25</iYield>
+					<iYield>50</iYield>
+				</YieldModifier>
+				<YieldModifier>
+					<YieldType>YIELD_HAMMERS</YieldType>
+					<iYield>50</iYield>
 				</YieldModifier>
 			</YieldModifiers>
 			<CapitalYieldModifiers/>
@@ -109,7 +113,7 @@
 			<Civilopedia>TXT_KEY_CIVIC_MONARCHY_PEDIA</Civilopedia>
 			<Strategy>TXT_KEY_CIVIC_MONARCHY_STRATEGY</Strategy>
 			<Button>,Art/Interface/Buttons/Civilizations/Colonization_Civilizations_Leaders.dds,8,4</Button>
-			<iAIWeight>0</iAIWeight>
+			<iAIWeight>100</iAIWeight>
 			<iGreatGeneralRateModifier>0</iGreatGeneralRateModifier>
 			<iDomesticGreatGeneralRateModifier>0</iDomesticGreatGeneralRateModifier>
 			<iFreeExperience>0</iFreeExperience>

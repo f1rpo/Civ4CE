@@ -681,36 +681,3 @@ int CyGame::getFatherCategoryPosition(int /*FatherTypes*/ eFather)
 	return (NULL != m_pGame ? m_pGame->getFatherCategoryPosition((FatherTypes)eFather) : -1);
 }
 
-
-// PatchMod: Randomise stuff on map START
-void CyGame::reassignStartingPlots()
-{
-	if (m_pGame)
-	{
-		m_pGame->reassignStartingPlots();
-	}
-}
-
-void CyGame::setupScenarioPlayers()
-{
-	if (m_pGame)
-	{
-		m_pGame->setupScenarioPlayers();
-	}
-}
-// PatchMod: Randomise stuff on map END
-
-// PatchMod: Stop F1 pressing during diplomacy START
-void CyGame::inDiplomacy(bool bValue)
-{
-	if (m_pGame)
-	{
-		m_pGame->inDiplomacy(bValue);
-	}
-}
-
-bool CyGame::isInDiplomacy()
-{
-	return (NULL != m_pGame ? m_pGame->isInDiplomacy() : false);
-}
-// PatchMod: Stop F1 pressing during diplomacy END

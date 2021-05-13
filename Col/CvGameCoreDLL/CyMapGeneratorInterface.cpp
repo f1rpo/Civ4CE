@@ -13,11 +13,6 @@ void CyMapGeneratorPythonInterface()
 	OutputDebugString("Python Extension Module - CyMapGeneratorPythonInterface\n");
 
 	python::class_<CyMapGenerator>("CyMapGenerator")
-		// PatchMod: Randomise stuff on map START
-		.def("eraseEurope", &CyMapGenerator::eraseEurope)
-		.def("addEurope", &CyMapGenerator::addEurope)
-		// PatchMod: Randomise stuff on map END
-
 		.def("isNone", &CyMapGenerator::isNone, "bool () - valid CyMapGenerator() interface")
 
 		.def("canPlaceBonusAt", &CyMapGenerator::canPlaceBonusAt, "bool (int /*BonusTypes*/ eBonus, int iX, int iY, bool bIgnoreLatitude)")
@@ -33,11 +28,13 @@ void CyMapGeneratorPythonInterface()
 		.def("addUniqueBonusType", &CyMapGenerator::addUniqueBonusType, "void (int /*BonusTypes*/ eBonusType)")
 		.def("addNonUniqueBonusType", &CyMapGenerator::addNonUniqueBonusType, "void (int /*BonusTypes*/ eBonusType)")
 		.def("addGoodies", &CyMapGenerator::addGoodies, "void ()")
+		.def("addEurope", &CyMapGenerator::addEurope)
 
 		.def("eraseRivers", &CyMapGenerator::eraseRivers, "void ()")
 		.def("eraseFeatures", &CyMapGenerator::eraseFeatures, "void ()")
 		.def("eraseBonuses", &CyMapGenerator::eraseBonuses, "void ()")
 		.def("eraseGoodies", &CyMapGenerator::eraseGoodies, "void ()")
+		.def("eraseEurope", &CyMapGenerator::eraseEurope)
 
 		.def("generateRandomMap", &CyMapGenerator::generateRandomMap, "void ()")
 

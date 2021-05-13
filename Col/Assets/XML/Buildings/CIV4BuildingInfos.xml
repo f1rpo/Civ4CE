@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by EXTREME (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Josh Scanlan (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -831,6 +831,10 @@
 					<YieldType>YIELD_CLOTH</YieldType>
 					<iModifier>50</iModifier>
 				</YieldModifier>
+				<YieldModifier>
+					<YieldType>YIELD_BELLS</YieldType>
+					<iModifier>25</iModifier>
+				</YieldModifier>
 			</YieldModifiers>
 			<ConstructSound/>
 			<UnitCombatFreeExperiences/>
@@ -1061,6 +1065,10 @@
 				<YieldModifier>
 					<YieldType>YIELD_COATS</YieldType>
 					<iModifier>50</iModifier>
+				</YieldModifier>
+				<YieldModifier>
+					<YieldType>YIELD_BELLS</YieldType>
+					<iModifier>25</iModifier>
 				</YieldModifier>
 			</YieldModifiers>
 			<ConstructSound/>
@@ -1293,6 +1301,10 @@
 					<YieldType>YIELD_RUM</YieldType>
 					<iModifier>50</iModifier>
 				</YieldModifier>
+				<YieldModifier>
+					<YieldType>YIELD_BELLS</YieldType>
+					<iModifier>25</iModifier>
+				</YieldModifier>
 			</YieldModifiers>
 			<ConstructSound/>
 			<UnitCombatFreeExperiences/>
@@ -1523,6 +1535,10 @@
 				<YieldModifier>
 					<YieldType>YIELD_CIGARS</YieldType>
 					<iModifier>50</iModifier>
+				</YieldModifier>
+				<YieldModifier>
+					<YieldType>YIELD_BELLS</YieldType>
+					<iModifier>25</iModifier>
 				</YieldModifier>
 			</YieldModifiers>
 			<ConstructSound/>
@@ -1755,6 +1771,10 @@
 					<YieldType>YIELD_TOOLS</YieldType>
 					<iModifier>50</iModifier>
 				</YieldModifier>
+				<YieldModifier>
+					<YieldType>YIELD_BELLS</YieldType>
+					<iModifier>25</iModifier>
+				</YieldModifier>
 			</YieldModifiers>
 			<ConstructSound/>
 			<UnitCombatFreeExperiences/>
@@ -1985,6 +2005,10 @@
 				<YieldModifier>
 					<YieldType>YIELD_MUSKETS</YieldType>
 					<iModifier>50</iModifier>
+				</YieldModifier>
+				<YieldModifier>
+					<YieldType>YIELD_BELLS</YieldType>
+					<iModifier>25</iModifier>
 				</YieldModifier>
 			</YieldModifiers>
 			<ConstructSound/>
@@ -2951,7 +2975,12 @@
 			<SeaPlotYieldChanges/>
 			<RiverPlotYieldChanges/>
 			<YieldChanges/>
-			<YieldModifiers/>
+			<YieldModifiers>
+				<YieldModifier>
+					<YieldType>YIELD_BELLS</YieldType>
+					<iModifier>25</iModifier>
+				</YieldModifier>
+			</YieldModifiers>
 			<ConstructSound/>
 			<UnitCombatFreeExperiences/>
 			<DomainFreeExperiences/>

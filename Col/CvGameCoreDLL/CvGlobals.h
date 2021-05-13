@@ -606,6 +606,7 @@ public:
 	DllExport int getSEAWATER_SEE_FROM_CHANGE();
 	DllExport int getPEAK_SEE_FROM_CHANGE();
 	DllExport int getHILLS_SEE_FROM_CHANGE();
+	DllExport int getMAX_REBEL_YIELD_MODIFIER();
 
 	DllExport float getCAMERA_MIN_YAW();
 	DllExport float getCAMERA_MAX_YAW();
@@ -934,6 +935,7 @@ protected:
 	int m_iSEAWATER_SEE_FROM_CHANGE;
 	int m_iPEAK_SEE_FROM_CHANGE;
 	int m_iHILLS_SEE_FROM_CHANGE;
+	int m_iMAX_REBEL_YIELD_MODIFIER;
 
 	float m_fCAMERA_MIN_YAW;
 	float m_fCAMERA_MAX_YAW;

@@ -219,7 +219,7 @@
 			<UnitCombatMods>
 				<UnitCombatMod>
 					<UnitCombatType>UNITCOMBAT_GUN</UnitCombatType>
-					<iUnitCombatMod>5</iUnitCombatMod>
+					<iUnitCombatMod>20</iUnitCombatMod>
 				</UnitCombatMod>
 			</UnitCombatMods>
 			<DomainMods/>
@@ -281,7 +281,7 @@
 			<UnitCombatMods>
 				<UnitCombatMod>
 					<UnitCombatType>UNITCOMBAT_GUN</UnitCombatType>
-					<iUnitCombatMod>10</iUnitCombatMod>
+					<iUnitCombatMod>25</iUnitCombatMod>
 				</UnitCombatMod>
 			</UnitCombatMods>
 			<DomainMods/>
@@ -343,7 +343,7 @@
 			<UnitCombatMods>
 				<UnitCombatMod>
 					<UnitCombatType>UNITCOMBAT_GUN</UnitCombatType>
-					<iUnitCombatMod>15</iUnitCombatMod>
+					<iUnitCombatMod>30</iUnitCombatMod>
 				</UnitCombatMod>
 			</UnitCombatMods>
 			<DomainMods/>

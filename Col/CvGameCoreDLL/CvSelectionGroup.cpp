@@ -3946,7 +3946,7 @@ void CvSelectionGroup::deactivateHeadMission()
 	}
 }
 
-bool CvSelectionGroup::canAssignTradeRoute(int iRouteID) const
+bool CvSelectionGroup::canAssignTradeRoute(int iRouteID, bool bReusePath) const
 {
 	CLLNode<IDInfo>* pUnitNode = headUnitNode();
 	while (pUnitNode != NULL)
@@ -3954,7 +3954,7 @@ bool CvSelectionGroup::canAssignTradeRoute(int iRouteID) const
 		CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
 		pUnitNode = nextUnitNode(pUnitNode);
 
-		if (pLoopUnit->canAssignTradeRoute(iRouteID))
+		if (pLoopUnit->canAssignTradeRoute(iRouteID, bReusePath))
 		{
 			return true;
 		}

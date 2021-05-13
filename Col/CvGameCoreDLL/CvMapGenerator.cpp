@@ -7,7 +7,6 @@
 #include "CvRandom.h"
 #include "CvGameCoreUtils.h"
 #include "CvGameAI.h"
-//#include "CvEnums.h"
 #include "CvInfos.h"
 #include "CvDLLPythonIFaceBase.h"
 #include "FProfiler.h"
@@ -884,8 +883,8 @@ void CvMapGenerator::addEurope()
 	{
 		EuropeTypes eEurope = (EuropeTypes) iEurope;
 		CvEuropeInfo& kEurope = GC.getEuropeInfo(eEurope);
-		int iWidth = kEurope.getWidth();
-		gDLL->getPythonIFace()->pythonGetEuropeWidth(eEurope, &iWidth);
+		int iWidthPercent = kEurope.getWidthPercent();
+		gDLL->getPythonIFace()->pythonGetEuropeWidthPercent(eEurope, &iWidthPercent);
 		int iMinLandDistance = kEurope.getMinLandDistance();
 		gDLL->getPythonIFace()->pythonGetEuropeMinLandDistance(eEurope, &iMinLandDistance);
 
@@ -903,20 +902,16 @@ void CvMapGenerator::addEurope()
 					switch (kEurope.getCardinalDirection())
 					{
 					case CARDINALDIRECTION_EAST:
-						// PatchMod: Extend Europe Zone further in START
-						bEurope = (pPlot->getX_INLINE() > (GC.getMapINLINE().getGridWidthINLINE() / 3) * 2);
-//						bEurope = (pPlot->getX_INLINE() > GC.getMapINLINE().getGridWidthINLINE() - iWidth);
+						bEurope = (pPlot->getX_INLINE() > (100 - iWidthPercent) * GC.getMapINLINE().getGridWidthINLINE() / 100);
 						break;
 					case CARDINALDIRECTION_WEST:
-						bEurope = (pPlot->getX_INLINE() < GC.getMapINLINE().getGridWidthINLINE() / 3);
-//						bEurope = (pPlot->getX_INLINE() < iWidth);
-						// PatchMod: Extend Europe Zone further in END
+						bEurope = (pPlot->getX_INLINE() < iWidthPercent * GC.getMapINLINE().getGridWidthINLINE() / 100);
 						break;
 					case CARDINALDIRECTION_NORTH:
-						bEurope = (pPlot->getY_INLINE() > GC.getMapINLINE().getGridHeightINLINE() - iWidth);
+						bEurope = (pPlot->getY_INLINE() > (100 - iWidthPercent) * GC.getMapINLINE().getGridHeightINLINE() / 100);
 						break;
 					case CARDINALDIRECTION_SOUTH:
-						bEurope = (pPlot->getY_INLINE() < iWidth);
+						bEurope = (pPlot->getY_INLINE() < iWidthPercent * GC.getMapINLINE().getGridHeightINLINE() / 100);
 						break;
 					default:
 						FAssertMsg(false, "Invalid direction");
@@ -965,9 +960,7 @@ void CvMapGenerator::addEurope()
 
 void CvMapGenerator::eraseRivers()
 {
-	int i;
-
-	for (i = 0; i < GC.getMapINLINE().numPlotsINLINE(); i++)
+	for (int i = 0; i < GC.getMapINLINE().numPlotsINLINE(); i++)
 	{
 		CvPlot* pPlot = GC.getMapINLINE().plotByIndexINLINE(i);
 		if (pPlot->isNOfRiver())
@@ -983,9 +976,7 @@ void CvMapGenerator::eraseRivers()
 
 void CvMapGenerator::eraseFeatures()
 {
-	int i;
-
-	for (i = 0; i < GC.getMapINLINE().numPlotsINLINE(); i++)
+	for (int i = 0; i < GC.getMapINLINE().numPlotsINLINE(); i++)
 	{
 		CvPlot* pPlot = GC.getMapINLINE().plotByIndexINLINE(i);
 		pPlot->setFeatureType(NO_FEATURE);
@@ -994,9 +985,7 @@ void CvMapGenerator::eraseFeatures()
 
 void CvMapGenerator::eraseBonuses()
 {
-	int i;
-
-	for (i = 0; i < GC.getMapINLINE().numPlotsINLINE(); i++)
+	for (int i = 0; i < GC.getMapINLINE().numPlotsINLINE(); i++)
 	{
 		CvPlot* pPlot = GC.getMapINLINE().plotByIndexINLINE(i);
 		pPlot->setBonusType(NO_BONUS);
@@ -1005,15 +994,22 @@ void CvMapGenerator::eraseBonuses()
 
 void CvMapGenerator::eraseGoodies()
 {
-	int i;
-
-	for (i = 0; i < GC.getMapINLINE().numPlotsINLINE(); i++)
+	for (int i = 0; i < GC.getMapINLINE().numPlotsINLINE(); i++)
 	{
 		CvPlot* pPlot = GC.getMapINLINE().plotByIndexINLINE(i);
 		if (pPlot->isGoody())
 		{
 			pPlot->removeGoody();
 		}
+	}
+}
+
+void CvMapGenerator::eraseEurope()
+{
+	for (int i = 0; i < GC.getMapINLINE().numPlotsINLINE(); i++)
+	{
+		CvPlot* pPlot = GC.getMapINLINE().plotByIndexINLINE(i);
+		pPlot->setEurope(NO_EUROPE);
 	}
 }
 
@@ -1217,15 +1213,3 @@ int CvMapGenerator::calculateNumBonusesToAdd(BonusTypes eBonusType)
 	iBonusCount = std::max(1, iBonusCount);
 	return iBonusCount;
 }
-
-// PatchMod: Randomise stuff on map START
-void CvMapGenerator::eraseEurope()
-{
-	int i;
-	for (i = 0; i < GC.getMapINLINE().numPlotsINLINE(); i++)
-	{
-		CvPlot* pPlot = GC.getMapINLINE().plotByIndexINLINE(i);
-		pPlot->setEurope(NO_EUROPE);
-	}
-}
-// PatchMod: Randomise stuff on map END

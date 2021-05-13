@@ -74,13 +74,6 @@ public:
 	CvUnit();
 	virtual ~CvUnit();
 	
-	// PatchMod: Sail to West START
-	bool canSailEast();
-	bool setSailEast();
-	bool canSailWest();
-	bool setSailWest();
-	// PatchMod: Sail to West END
-
 	void reloadEntity();
 	void init(int iID, UnitTypes eUnit, ProfessionTypes eProfession, UnitAITypes eUnitAI, PlayerTypes eOwner, int iX, int iY, DirectionTypes eFacingDirection, int iYieldStored);
 	void uninit();
@@ -168,6 +161,7 @@ public:
 
 	bool canEstablishMission() const;
 	void establishMission();
+	int getMissionarySuccessPercent() const;
 
 	bool canSpeakWithChief(CvPlot* pPlot) const;
 	void speakWithChief();
@@ -325,7 +319,7 @@ public:
 	bool canCargoAllMove() const;
 	bool canCargoEnterArea(PlayerTypes ePlayer, const CvArea* pArea, bool bIgnoreRightOfPassage) const;
 	int getUnitAICargo(UnitAITypes eUnitAI) const;
-	bool canAssignTradeRoute(int iRouteId) const;
+	bool canAssignTradeRoute(int iRouteId, bool bReusePath = false) const;
 
 	DllExport int getID() const;
 	int getIndex() const;
@@ -358,6 +352,7 @@ public:
 	bool at(int iX, int iY) const;
 	DllExport bool atPlot(const CvPlot* pPlot) const;
 	DllExport CvPlot* plot() const;
+	CvCity* getCity() const;
 	int getArea() const;
 	CvArea* area() const;
 	int getLastMoveTurn() const;
@@ -518,7 +513,7 @@ public:
 	void setPostCombatPlot(int iX, int iY);
 	DllExport CvUnit* getTransportUnit() const;
 	bool isCargo() const;
-	bool setTransportUnit(CvUnit* pTransportUnit);
+	bool setTransportUnit(CvUnit* pTransportUnit, bool bUnload = true);
 	int getExtraDomainModifier(DomainTypes eIndex) const;
 	void changeExtraDomainModifier(DomainTypes eIndex, int iChange);
 	DllExport const CvWString getName(uint uiForm = 0) const;
@@ -598,6 +593,9 @@ public:
 	void setUnitTravelTimer(int iValue);
 	UnitTravelStates getUnitTravelState() const;
 	void setUnitTravelState(UnitTravelStates eState, bool bShowEuropeScreen);
+
+	bool setSailEurope(EuropeTypes eEurope);
+	bool canSailEurope(EuropeTypes eEurope);
 
 	void setHomeCity(CvCity* pNewValue);
 	CvCity* getHomeCity() const;

@@ -7,88 +7,110 @@
 //
 //  AUTHOR:  Tom Whittaker - 02/09
 //
-//  PURPOSE: Splat Tile Terrain Shader - Base Texute + LM FOW 
+//  PURPOSE: Splat Tile Terrain Shader - Base Texute + LM FOW
 //			 todotw: right now supports one base texture. Similar to aggregate
 //
 //  Listing: fxc /Tvs_1_1 /ETerrainVS /FcTerrainVS.lst Terrain.fx
 //------------------------------------------------------------------------------------------------
 //  Copyright (c) 2003 Firaxis Games, Inc. All rights reserved.
 //------------------------------------------------------------------------------------------------
- 
+
+#include "Civ4ShadowMap.fx.hlsl"
+
 // Transformations
 float4x4	mtxWorldViewProj	: WORLDVIEWPROJECTION;
+float4x4	mtxInvView : INVVIEWTRANSPOSE;
 float4x4    mtxWorld   : WORLD;
 float4x4	mtxFOW     : GLOBAL;
-float4x4    mtxLightmap: GLOBAL;
-float		fDetailTexScaling:GLOBAL = 2.0f;
-int			iTrilinearTextureIndex : GLOBAL = 0;
-int			iMipStatus : GLOBAL = 2; //LINEAR
+float2		f2DetailTexScaling : GLOBAL;
+float		fFrameTime : GLOBAL;
+int			iShaderIndex : GLOBAL;
 
 //------------------------------------------------------------------------------------------------
 // VERTEX OUTPUT FORMATS
-//------------------------------------------------------------------------------------------------ 
+//------------------------------------------------------------------------------------------------
 struct VS_INPUT
 {
 	float3 f3Position   : POSITION;
-	float2 f2BaseTex    : TEXCOORD0;	// base 
-	float2 fDetailTex   : TEXCOORD1;	// decal 
+	float3 f3Normal		: NORMAL;
+	float2 f2BaseTex    : TEXCOORD0;
 };
 
-struct VS_OUTPUT_11
+struct VS_OUTPUT
 {
 	float4	f4Position		: POSITION;
-
-    float2	f2BaseTex		: TEXCOORD0;	// Base 
-    float2	f2FOWTex		: TEXCOORD1;	// FOW 
-	float2	f2LightMapTex	: TEXCOORD2;	// Lightmap 
-	float2  f2Detail		: TEXCOORD3;    // terrain decal map
+	float4	f4BaseDetailTex	: TEXCOORD0;
+    float2	f2FOWTex		: TEXCOORD1;
+	float4	f4ShadowTex		: TEXCOORD2;
+	float3	f3Normal		: TEXCOORD3;
+	float3  f3EyeVector		: TEXCOORD4;
+	float3  f3ReflectEye	: TEXCOORD5;
 };
 
-
-struct VS_OUTPUT_14
+struct VS_OUTPUT_SIMPLE
 {
 	float4	f4Position		: POSITION;
-    float2	f2BaseTex		: TEXCOORD0;	// Base 
-    float2	f2FOWTex		: TEXCOORD1;	// FOW 
-	float2	f2LightMapTex	: TEXCOORD2;	// Lightmap 
-	float2  f2Detail		: TEXCOORD3;    // terrain decal map
+	float4	f4Lighting		: COLOR1;
+	float2	f2BaseTex		: TEXCOORD0;
+    float2	f2DetailTex		: TEXCOORD1;
+    float2	f2FOWTex		: TEXCOORD2;
+	float4	f4ShadowTex		: TEXCOORD3;
 };
 
 //------------------------------------------------------------------------------------------------
 //                          VERTEX SHADER
 //------------------------------------------------------------------------------------------------
 
-VS_OUTPUT_11 VSTerrain_Tile_11( VS_INPUT vIn )
+VS_OUTPUT VSTerrain_Tile( VS_INPUT vIn )
 {
-	VS_OUTPUT_11 vOut = (VS_OUTPUT_11)0;			
-	
+	VS_OUTPUT vOut = (VS_OUTPUT)0;
+
 	//Transform position
-	vOut.f4Position  = mul(float4(vIn.f3Position, 1), mtxWorldViewProj);	
-    float3 worldPos = mul(float4(vIn.f3Position, 1), (float4x3)mtxWorld);			//todotw: if we're only going to need this for Fog combine the 2 and remove the transform
+	vOut.f4Position  = mul(float4(vIn.f3Position, 1), mtxWorldViewProj);
+    float4 f4WorldPosition = mul(float4(vIn.f3Position, 1), mtxWorld);
+
+    //eye vector
+	float4 f4CameraPosition = mul(mtxInvView, float4(0, 0, 0, 1));
+	float3 f3EyeVector = normalize(f4CameraPosition.xyz - f4WorldPosition.xyz);
+	vOut.f3EyeVector = f3EyeVector;
+
+	//reflected eye
+	float3 f3ReflectEye = reflect(-f3EyeVector, float3(0, 0, 1));
+	f3ReflectEye.y *= -1; //texture v is opposite world y
+	f3ReflectEye = 0.5 * f3ReflectEye + 0.5;
+	vOut.f3ReflectEye = f3ReflectEye;
 
 	// Copy over the texture coordinates
-	vOut.f2BaseTex     = vIn.f2BaseTex;
-	vOut.f2FOWTex      = mul(float4(worldPos,1),mtxFOW);				// fog of war
-	vOut.f2LightMapTex = mul(float4(worldPos,1),mtxLightmap);			// Lightmap 
-	vOut.f2Detail      = vIn.fDetailTex * fDetailTexScaling;	// Detail 
-	
+	vOut.f4BaseDetailTex.xy = vIn.f2BaseTex;
+	vOut.f4BaseDetailTex.zw = f4WorldPosition.xy * f2DetailTexScaling;
+
+	vOut.f2FOWTex      = mul(f4WorldPosition, mtxFOW);
+	vOut.f4ShadowTex   = getShadowTexCoord(f4WorldPosition);
+	vOut.f3Normal = normalize(vIn.f3Normal);
+
 	return vOut;
 }
 
-VS_OUTPUT_14 VSTerrain_Tile_14( VS_INPUT vIn )
+VS_OUTPUT_SIMPLE VSTerrain_TileSimple( VS_INPUT vIn )
 {
-	VS_OUTPUT_14 vOut = (VS_OUTPUT_14)0;			
-	
+	VS_OUTPUT_SIMPLE vOut = (VS_OUTPUT_SIMPLE)0;
+
 	//Transform position
-	vOut.f4Position  = mul(float4(vIn.f3Position, 1), mtxWorldViewProj);	
-    float3 P = mul(float4(vIn.f3Position, 1), (float4x3)mtxWorld);			//todotw: if we're only going to need this for Fog combine the 2 and remove the transform
+	vOut.f4Position  = mul(float4(vIn.f3Position, 1), mtxWorldViewProj);
+    float4 f4WorldPosition = mul(float4(vIn.f3Position, 1), mtxWorld);
 
 	// Copy over the texture coordinates
-	vOut.f2BaseTex     = vIn.f2BaseTex;
-	vOut.f2FOWTex      = mul(float4(P,1),mtxFOW);				// fog of war
-	vOut.f2LightMapTex = mul(float4(P,1),mtxLightmap);			// Lightmap 
-	vOut.f2Detail      = vIn.fDetailTex * fDetailTexScaling;	// Detail 
-		
+	vOut.f2BaseTex = vIn.f2BaseTex;
+	vOut.f2DetailTex = f4WorldPosition.xy * f2DetailTexScaling;
+
+	vOut.f2FOWTex      = mul(f4WorldPosition, mtxFOW);
+	vOut.f4ShadowTex   = getShadowTexCoord(f4WorldPosition);
+
+	float3 f3Normal = normalize(vIn.f3Normal);
+	float fDiffuseDot = max(dot(f3Normal, -f3SunLightDir), 0);
+	float3 f3Diffuse = fDiffuseDot * f3SunLightDiffuse;
+	vOut.f4Lighting = float4(f3Diffuse, 1);
+
 	return vOut;
 }
 
@@ -97,108 +119,95 @@ VS_OUTPUT_14 VSTerrain_Tile_14( VS_INPUT vIn )
 //------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------
 // TEXTURES
-//------------------------------------------------------------------------------------------------  
-texture TerrainBaseTexture0	   <string NTM = "shader";  int NTMIndex = 0;>;
+//------------------------------------------------------------------------------------------------
+texture TerrainBaseTexture	   <string NTM = "shader";  int NTMIndex = 0;>;
 texture TerrainDetailTexture   <string NTM = "shader";  int NTMIndex = 1;>;
-texture TerrainLightmapTexture <string NTM = "shader";  int NTMIndex = 2;>;
-texture TerrainFOWarTexture    <string NTM = "shader";  int NTMIndex = 3;>;
-texture TerrainPlotFogTexture  <string NTM = "shader";  int NTMIndex = 4;>;
+texture TerrainFOWarTexture    <string NTM = "shader";  int NTMIndex = 2;>;
+texture ShadowMapTexture	   <string NTM = "shader";  int NTMIndex = 3;>;
+texture EnvironmentMapTexture <string NTM = "shader";  int NTMIndex = 4;>;
 
 //------------------------------------------------------------------------------------------------
 // SAMPLERS
 //------------------------------------------------------------------------------------------------											//NONE!
-sampler TerrainBase : register(s0) = sampler_state  { Texture = (TerrainBaseTexture0);  AddressU = Clamp; AddressV = Clamp; MagFilter = Linear; MipFilter = Linear; MinFilter = Linear; };
-sampler TerrainBaseNoMips : register(s0) = sampler_state  { Texture = (TerrainBaseTexture0);  AddressU = Clamp; AddressV = Clamp; MagFilter = Linear; MipFilter = None; MinFilter = Linear; };
-sampler TerrainFOWar = sampler_state  { Texture = (TerrainFOWarTexture);  AddressU = Wrap; AddressV = Wrap; MagFilter = Linear; MipFilter = Linear; MinFilter = Linear; };
-sampler TerrainLightmap= sampler_state{ Texture = (TerrainLightmapTexture); AddressU = Clamp; AddressV = Clamp; MagFilter = Linear; MipFilter = Linear; MinFilter = Linear; };
-sampler TerrainDetail = sampler_state { Texture = (TerrainDetailTexture  );  AddressU = Wrap; AddressV = Wrap; MagFilter = Linear; MipFilter = Linear; MinFilter = Linear; };
-sampler TerrainPlotFog = sampler_state  { Texture = (TerrainPlotFogTexture);  AddressU = Clamp; AddressV = Clamp; MagFilter = Point; MipFilter = None; MinFilter = Point; };
+sampler TerrainBase : register(s0) = sampler_state  { Texture = (TerrainBaseTexture);  AddressU = Clamp; AddressV = Clamp; MagFilter = Linear; MipFilter = Linear; MinFilter = Linear; srgbtexture = false;};
+sampler TerrainBaseNoMips : register(s0) = sampler_state  { Texture = (TerrainBaseTexture);  AddressU = Clamp; AddressV = Clamp; MagFilter = POINT; MipFilter = None; MinFilter = POINT; srgbtexture = false;};
+sampler TerrainDetail : register(s1) = sampler_state { Texture = (TerrainDetailTexture  );  AddressU = Wrap; AddressV = Wrap; MagFilter = Linear; MipFilter = Linear; MinFilter = Linear; srgbtexture = false;};
+sampler TerrainDetailNoMips : register(s1) = sampler_state { Texture = (TerrainDetailTexture  );  AddressU = Wrap; AddressV = Wrap; MagFilter = POINT; MipFilter = NONE; MinFilter = POINT; srgbtexture = false;};
+sampler TerrainFOWar = sampler_state  { Texture = (TerrainFOWarTexture);  AddressU = Wrap; AddressV = Wrap; MagFilter = Linear; MipFilter = Linear; MinFilter = Linear; srgbtexture = false;};
+sampler ShadowMap = sampler_state { Texture = (ShadowMapTexture);  AddressU = CLAMP; AddressV = CLAMP; MagFilter = LINEAR; MipFilter = NONE; MinFilter = LINEAR; srgbtexture = false;};
+sampler EnvironmentMap = sampler_state { Texture = (EnvironmentMapTexture);  AddressU = CLAMP; AddressV = CLAMP; AddressW = CLAMP; MagFilter = LINEAR; MipFilter = LINEAR; MinFilter = LINEAR; srgbtexture = false;};
 
-//------------------------------------------------------------------------------------------------ 
-//      PSTerrain_Blender - Blends a 4 Base and an 3 Alpha textures 
-//------------------------------------------------------------------------------------------------ 
-float4 PSTerrain_SPLATTILE_LMFW_11 ( VS_OUTPUT_11 Input, uniform sampler TerrainBaseSampler, uniform bool bAlphaShader ) : COLOR 
-{ 
-        // Read all our base textures, the grid and FOW texture 
-        float4 f4BaseTex = tex2D( TerrainBaseSampler,  Input.f2BaseTex  ); 
-        float3 f3FOWTex   = tex2D( TerrainFOWar, Input.f2FOWTex ); 
-        float3 f3Lightmap  = tex2D( TerrainLightmap, Input.f2LightMapTex); 
-        float3 f3DetailTex = tex2D( TerrainDetail, Input.f2Detail); 
-
-        // FinalColor = Base * Detail * Lightmap * Decal(A) * FOW       
-        float4  f4FinalColor = 0.0f; 
-        f4FinalColor = f4BaseTex; 
-        f4FinalColor.rgb = (f4FinalColor.rgb* f3FOWTex.rgb + (f3Lightmap.rgb - 0.5f )* f3FOWTex.rgb) ;  // blend in detail map
-        
-        if(bAlphaShader)
-			f4FinalColor.a = lerp(1, f4FinalColor.a, f3FOWTex.r);
-        
-        //f4FinalColor = tex2D( TerrainBase0,  Input.f2BaseTex  ); 
-//      f4FinalColor.rgb += (f4DetailTex.rgb - 0.5f);   // blend in detail map 
-//      f4FinalColor.rgb += (f4Lightmap.rgb - 0.5f);            // modulate by the diffuse,ambient, shadow term(no specular)
-//      f4FinalColor.rgb *= f4FOWTex.rgb;               //FOW textures 
-
-        return f4FinalColor; 
-} 
-
-float4 PSTerrain_SPLATTILE_LMFW_14 ( VS_OUTPUT_14 Input, uniform sampler TerrainBaseSampler, uniform bool bAlphaShader ) : COLOR
+float4 PSTerrain ( VS_OUTPUT Input, uniform sampler TerrainBaseSampler, uniform sampler TerrainDetailSampler ) : COLOR
 {
 	// Read all our base textures, the grid and FOW texture
-	float4 f4BaseTex = tex2D( TerrainBaseSampler,  Input.f2BaseTex  );
+	float4 f4BaseTex = tex2D( TerrainBaseSampler,  Input.f4BaseDetailTex.xy );
+	float4 f4DetailTex = tex2D( TerrainDetailSampler, Input.f4BaseDetailTex.zw );
 	float3 f3FOWTex   = tex2D( TerrainFOWar, Input.f2FOWTex );
-	float3 f3Lightmap  = tex2D( TerrainLightmap, Input.f2LightMapTex);
-	float3 f3DetailTex = tex2D( TerrainDetail, Input.f2Detail);
 
-	// FinalColor = Base * Detail * Lightmap * Decal(A) * FOW	
-	float4	f4FinalColor;// = 0.0f;
+	//environment
+	float4 f4Environment = tex2D( EnvironmentMap, Input.f3ReflectEye.xy );
 
-	// 7 instructions - no detail
-	f4FinalColor = f4BaseTex;
-	f4FinalColor.rgb = f4FinalColor.rgb + (f3Lightmap.rgb - 0.5f);	// modulate by the diffuse,ambient, shadow term(no specular)
-	f4FinalColor.rgb *= f3FOWTex.rgb;				//FOW textures
-	
-	if(bAlphaShader)
-		f4FinalColor.a = lerp(1, f4FinalColor.a, f3FOWTex.r);
+	//shadow
+	float fShadowFactor = getShadowFactor( ShadowMap, Input.f4ShadowTex, float4(1, 0, 0, 0) );
 
+	//diffuse
+	float3 f3Normal = normalize(Input.f3Normal);
+	float fDiffuseDot = max(dot(f3Normal, -f3SunLightDir), 0);
+	float3 f3Diffuse = fDiffuseDot * f3SunLightDiffuse * fShadowFactor + f3SunAmbientColor;
+
+	//specular
+	float3 f3HalfVector = normalize(Input.f3EyeVector - f3SunLightDir);
+	float fSpecularDot = max(dot(f3Normal, f3HalfVector), 0);
+	float3 f3Specular = pow(fSpecularDot, 4) * f3SunLightDiffuse * fShadowFactor;
+
+	//combine textures
+	float4 f4FinalColor = f4BaseTex;
+	f4FinalColor.rgb += f4DetailTex.rgb - 0.5f;
+	f4FinalColor.rgb *= f3Diffuse;
+	f4FinalColor.rgb += 0.1 * f3Specular;
+	f4FinalColor.rgb += f4DetailTex.a * f4Environment;
+	f4FinalColor.rgb *= f3FOWTex;				//FOW textures
+
+	// Return the result
 	return f4FinalColor;
 }
 
-
-float4 PSTerrain_SPLATTILE_LMFW_20 ( VS_OUTPUT_14 Input, uniform sampler TerrainBaseSampler, uniform bool bAlphaShader ) : COLOR
+float4 PSTerrainSimple ( VS_OUTPUT_SIMPLE Input, uniform sampler TerrainBaseSampler, uniform sampler TerrainDetailSampler ) : COLOR
 {
 	// Read all our base textures, the grid and FOW texture
-	float4 f4BaseTex = tex2D( TerrainBaseSampler,  Input.f2BaseTex  );
+	float4 f4BaseTex = tex2D( TerrainBaseSampler,  Input.f2BaseTex );
+	float4 f4DetailTex = tex2D( TerrainDetailSampler, Input.f2DetailTex );
 	float3 f3FOWTex   = tex2D( TerrainFOWar, Input.f2FOWTex );
-	float3 f3Lightmap  = tex2D( TerrainLightmap, Input.f2LightMapTex);
-	float3 f3DetailTex = tex2D( TerrainDetail, Input.f2Detail);
 
-	// FinalColor = Base * Detail * Lightmap * Decal(A) * FOW	
-	float4	f4FinalColor;// = 0.0f;
+	//shadow
+	float fShadowFactor = getShadowFactor( ShadowMap, Input.f4ShadowTex, float4(1, 0, 0, 0) );
+	float3 f3Diffuse = Input.f4Lighting.rgb * fShadowFactor + f3SunAmbientColor;
 
-	// 7 instructions - no detail
-	f4FinalColor = f4BaseTex;
-	//f4FinalColor.rgb = (f4FinalColor.rgb* f3FOWTex.rgb + (f3Lightmap.rgb - 0.5f )* f3FOWTex.rgb) ;	// blend in detail map
-	//f4FinalColor.rgb = (f4FinalColor.rgb* f3FOWTex.rgb + (f3DetailTex.rgb - 0.5f )* f3FOWTex.rgb) ;	// blend in detail map
+	//combine textures
+	float4 f4FinalColor = f4BaseTex;
+	f4FinalColor.rgb = saturate(f4FinalColor.rgb + f4DetailTex.rgb - 0.5);
+	f4FinalColor.rgb *= f3Diffuse;
+	f4FinalColor.rgb *= f3FOWTex;				//FOW textures
 
-	//This won't work because of the HLSL compiler
-	f4FinalColor.rgb = f4FinalColor.rgb + (f3DetailTex.rgb - 0.5f);	// blend in detail map
-	f4FinalColor.rgb = f4FinalColor.rgb + (f3Lightmap.rgb - 0.5f);	// modulate by the diffuse,ambient, shadow term(no specular)
-	f4FinalColor.rgb *= f3FOWTex.rgb;				//FOW textures
-	
-	if(bAlphaShader)
-		f4FinalColor.a = lerp(1, f4FinalColor.a, f3FOWTex.r);
-	
-	// Return the result	
+	// Return the result
 	return f4FinalColor;
 }
+
+float4 PSTerrain_Shadow ( VS_OUTPUT Input ) : COLOR
+{
+	return float4(1, 1, 1, 1);
+}
+
 //------------------------------------------------------------------------------------------------
 //                          TECHNIQUES
 //<bool UsesNIRenderState = true;>
 //------------------------------------------------------------------------------------------------
-Pixelshader PSArray20[2] =
+Pixelshader PSArray20[4] =
 {
-	compile ps_2_0 PSTerrain_SPLATTILE_LMFW_20(TerrainBase, false),
-	compile ps_2_0 PSTerrain_SPLATTILE_LMFW_20(TerrainBaseNoMips, false)
+	compile ps_2_0 PSTerrain(TerrainBase, TerrainDetail),
+	compile ps_2_0 PSTerrain(TerrainBase, TerrainDetail),
+	compile ps_2_0 PSTerrain(TerrainBaseNoMips, TerrainDetailNoMips),
+	compile ps_2_0 PSTerrain_Shadow()
 };
 
 technique TerrainShader< string shadername= "TerrainShader"; int implementation=0;>
@@ -210,7 +219,7 @@ technique TerrainShader< string shadername= "TerrainShader"; int implementation=
 		ZWriteEnable		= TRUE;
 		ZFunc				= LESSEQUAL;
 
-		// Disable alpha blending and testing	
+		// Disable alpha blending and testing
 		AlphaBlendEnable = true;
 		AlphaTestEnable	 = true;
 		AlphaRef         = 0;
@@ -218,30 +227,21 @@ technique TerrainShader< string shadername= "TerrainShader"; int implementation=
 		SrcBlend		 = SrcAlpha;
 		DestBlend		 = InvSrcAlpha;
 
-		// Set texture coordinate indices and	
-		TexCoordIndex[0]	= 0;		
-		TexCoordIndex[1]	= 1;		
-		TexCoordIndex[2]	= 2;	
-		TexCoordIndex[3]	= 3;	
-
-		TextureTransformFlags[0] = 0;
-		TextureTransformFlags[1] = 0;	
-		TextureTransformFlags[2] = 0;	
-		TextureTransformFlags[3] = 0;	
-
 		// Set vertex and pixel shaders
-		VertexShader = compile vs_1_1 VSTerrain_Tile_14();
-		PixelShader	 = (PSArray20[iTrilinearTextureIndex]);
+		VertexShader = compile vs_2_0 VSTerrain_Tile();
+		PixelShader	 = (PSArray20[iShaderIndex]);
 	}
 }
 
-Pixelshader PSArray14[2] =
+Pixelshader PSArray11[4] =
 {
-	compile ps_1_4 PSTerrain_SPLATTILE_LMFW_14(TerrainBase, false),
-	compile ps_1_4 PSTerrain_SPLATTILE_LMFW_14(TerrainBaseNoMips, false)
+	compile ps_1_1 PSTerrainSimple(TerrainBase, TerrainDetail),
+	compile ps_1_1 PSTerrainSimple(TerrainBase, TerrainDetail),
+	compile ps_1_1 PSTerrainSimple(TerrainBaseNoMips, TerrainDetailNoMips),
+	compile ps_1_1 PSTerrain_Shadow()
 };
 
-technique TerrainShader14< string shadername= "TerrainShader"; int implementation=1;>
+technique TerrainShaderSimple< string shadername= "TerrainShaderSimple"; int implementation=0;>
 {
 	pass P0
 	{
@@ -250,434 +250,16 @@ technique TerrainShader14< string shadername= "TerrainShader"; int implementatio
 		ZWriteEnable		= TRUE;
 		ZFunc				= LESSEQUAL;
 
-		// Disable alpha blending and testing	
+		// Disable alpha blending and testing
 		AlphaBlendEnable = true;
 		AlphaTestEnable	 = true;
 		AlphaRef         = 0;
 		AlphaFunc        = GREATER;
 		SrcBlend		 = SrcAlpha;
 		DestBlend		 = InvSrcAlpha;
-
-		// Set texture coordinate indices and	
-		TexCoordIndex[0]	= 0;		
-		TexCoordIndex[1]	= 1;		
-		TexCoordIndex[2]	= 2;	
-		TexCoordIndex[3]	= 3;	
-
-		TextureTransformFlags[0] = 0;
-		TextureTransformFlags[1] = 0;	
-		TextureTransformFlags[2] = 0;	
-		TextureTransformFlags[3] = 0;
 
 		// Set vertex and pixel shaders
-		VertexShader = compile vs_1_1 VSTerrain_Tile_14();
-		PixelShader	 = (PSArray14[iTrilinearTextureIndex]);
-	}
-}
-
-Pixelshader PSArray11[2] =
-{
-	compile ps_1_1 PSTerrain_SPLATTILE_LMFW_11(TerrainBase, false),
-	compile ps_1_1 PSTerrain_SPLATTILE_LMFW_11(TerrainBaseNoMips, false)
-};
-
-technique TerrainShader_11< string shadername= "TerrainShader"; int implementation=2;>
-{
-	pass P0
-	{
-		// Enable depth writing
-		ZEnable				= TRUE;
-		ZWriteEnable		= TRUE;
-		ZFunc				= LESSEQUAL;
-
-		// Disable alpha blending and testing	
-		AlphaBlendEnable = true;
-		AlphaTestEnable	 = true;
-		AlphaRef         = 0;
-		AlphaFunc        = GREATER;
-		SrcBlend		 = SRCALPHA;
-		DestBlend		 = INVSRCALPHA;
-
-		// Set texture coordinate indices and	
-		TexCoordIndex[0]	= 0;		
-		TexCoordIndex[1]	= 1;		
-		TexCoordIndex[2]	= 2;	
-		TexCoordIndex[3]	= 3;	
-
-		TextureTransformFlags[0] = 0;
-		TextureTransformFlags[1] = 0;	
-		TextureTransformFlags[2] = 0;	
-		TextureTransformFlags[3] = 0;
-
-		// Set vertex and pixel shaders
-		VertexShader = compile vs_1_1 VSTerrain_Tile_11();
-		PixelShader	 = (PSArray11[iTrilinearTextureIndex]);
-	}
-}
-
-
-// Fixed Function Version
-technique TerrainShader_FF_4TPP< string shadername= "TerrainShader"; int implementation=3;>
-{
-	pass P0
-	{
-		ZEnable        = true;
-		ZWriteEnable   = true;
-		ZFunc          = LESSEQUAL;
-		
-		// Disable alpha blending and testing	
-		AlphaBlendEnable = true;
-		AlphaTestEnable	 = true;
-		AlphaRef         = 0;
-		AlphaFunc        = GREATER;
-		SrcBlend		 = SrcAlpha;
-		DestBlend		 = InvSrcAlpha;
-
-		// textures
-		Sampler[0]    =   <TerrainBase>;
-		Sampler[1]    =   <TerrainLightmap>;
-		Sampler[2]    =   <TerrainFOWar>;
-		
-		MipFilter[0] = <iMipStatus>;
-		
-		TexCoordIndex[0] = 0;
-		TexCoordIndex[1] = CAMERASPACEPOSITION;
-		TexCoordIndex[2] = CAMERASPACEPOSITION;
-
-		TextureTransformFlags[0] = 0;
-		TextureTransformFlags[1] = Count3;	
-		TextureTransformFlags[2] = Count3;	
-
-		TextureTransform[0] = 0;
-		TextureTransform[1] = <mtxLightmap>;	
-		TextureTransform[2] = <mtxFOW>;
-
-		// texture stage 0 - Base Texture
-		ColorOp[0]       = SelectArg1;
-		ColorArg1[0]     = Texture;
-		AlphaOp[0]		 = SelectArg1;
-		AlphaArg1[0]	 = Texture;
-
-		// texture stage 1 - lightmap
-		ColorOp[1]       = SelectArg1;//Addsigned;//;
-		ColorArg1[1]	 = Current;//Texture
-		ColorArg2[1]     = Current;
-		AlphaOp[1]		 = SelectArg1;
-		AlphaArg1[1]	 = Current;
-
-		// texture stage 2	- FoW
-		ColorOp[2]       = Modulate;
-		ColorArg1[2]     = Texture;
-		ColorArg2[2]     = Current;
-		AlphaOp[2]		 = SelectArg1;
-		AlphaArg1[2]	 = Current;
-
-		// texture stage 3 
-		ColorOp[3]       = disable;
-		AlphaOp[3]		 = disable;
-
-		// shaders
-		VertexShader     = NULL;
-		PixelShader      = NULL;
-	}
-}
-
-
-technique TerrainShader_FF_2TPP< string shadername= "TerrainShader"; int implementation=4;>
-{
-	pass P0
-	{
-		ZEnable        = TRUE;
-		ZWriteEnable   = TRUE;
-		ZFunc          = LESSEQUAL;
-
-		
-		// Disable alpha blending and testing	
-		AlphaBlendEnable = true;
-		AlphaTestEnable	 = true;
-		AlphaRef         = 0;
-		AlphaFunc        = Greater;
-		SrcBlend		 = SrcAlpha;
-		DestBlend		 = InvSrcAlpha;
-
-		// textures
-		Sampler[0]    =   <TerrainBase>;
-		Sampler[1]    =   <TerrainFOWar>;
-		
-		MipFilter[0] = <iMipStatus>;
-
-		TexCoordIndex[0] = 0;	
-        TexCoordIndex[1] = CAMERASPACEPOSITION;	//fow
-                
-       	TextureTransformFlags[0] = 0;
-		TextureTransformFlags[1] = Count3;	
-                
-        // transforms
-        TextureTransform[0] = 0;
-		TextureTransform[1] = <mtxFOW>;
-		
-
-		// texture stage 0 - Base Texture
-		ColorOp[0]       = SelectArg1;
-		ColorArg1[0]     = Texture;
-		AlphaOp[0]		 = SelectArg1;
-		AlphaArg1[0]	 = Texture;
-
-		// texture stage 2	- FoW
-		ColorOp[1]       = Modulate;
-		ColorArg1[1]     = Texture;
-		ColorArg2[1]     = Current;
-		AlphaOp[1]		 = SelectArg1;
-		AlphaArg1[1]	 = Current;
-
-		// shaders
-		VertexShader     = NULL;
-		PixelShader      = NULL;
-	}
-}
-
-
-//------------------------------------------------------------------------------------------------
-//                          TECHNIQUES - TerrainAlphaShader
-//<bool UsesNIRenderState = true;>
-//------------------------------------------------------------------------------------------------
-Pixelshader PSAlphaArray20[2] =
-{
-	compile ps_2_0 PSTerrain_SPLATTILE_LMFW_20(TerrainBase, true),
-	compile ps_2_0 PSTerrain_SPLATTILE_LMFW_20(TerrainBaseNoMips, true)
-};
-
-technique TerrainAlphaShader< string shadername= "TerrainAlphaShader"; int implementation=0;>
-{
-	pass P0
-	{
-		// Disable depth writing
-		ZEnable				= TRUE;
-		ZWriteEnable		= TRUE;
-		ZFunc				= LESSEQUAL;
-
-		// Disable alpha blending and testing	
-		AlphaBlendEnable = true;
-		AlphaTestEnable	 = true;
-		AlphaRef         = 0;
-		AlphaFunc        = GREATER;
-		SrcBlend		 = SrcAlpha;
-		DestBlend		 = InvSrcAlpha;
-
-		// Set texture coordinate indices and	
-		TexCoordIndex[0]	= 0;		
-		TexCoordIndex[1]	= 1;		
-		TexCoordIndex[2]	= 2;	
-		TexCoordIndex[3]	= 3;	
-
-		TextureTransformFlags[0] = 0;
-		TextureTransformFlags[1] = 0;	
-		TextureTransformFlags[2] = 0;	
-		TextureTransformFlags[3] = 0;	
-
-		// Set vertex and pixel shaders
-		VertexShader = compile vs_1_1 VSTerrain_Tile_14();
-		PixelShader	 = (PSAlphaArray20[iTrilinearTextureIndex]);
-	}
-}
-
-Pixelshader PSAlphaArray14[2] =
-{
-	compile ps_1_4 PSTerrain_SPLATTILE_LMFW_14(TerrainBase, true),
-	compile ps_1_4 PSTerrain_SPLATTILE_LMFW_14(TerrainBaseNoMips, true)
-};
-
-technique TerrainAlphaShader14< string shadername= "TerrainAlphaShader"; int implementation=1;>
-{
-	pass P0
-	{
-		// Enable depth writing
-		ZEnable				= TRUE;
-		ZWriteEnable		= TRUE;
-		ZFunc				= LESSEQUAL;
-
-		// Disable alpha blending and testing	
-		AlphaBlendEnable = true;
-		AlphaTestEnable	 = true;
-		AlphaRef         = 0;
-		AlphaFunc        = GREATER;
-		SrcBlend		 = SrcAlpha;
-		DestBlend		 = InvSrcAlpha;
-
-		// Set texture coordinate indices and	
-		TexCoordIndex[0]	= 0;		
-		TexCoordIndex[1]	= 1;		
-		TexCoordIndex[2]	= 2;	
-		TexCoordIndex[3]	= 3;	
-
-		TextureTransformFlags[0] = 0;
-		TextureTransformFlags[1] = 0;	
-		TextureTransformFlags[2] = 0;	
-		TextureTransformFlags[3] = 0;
-
-		// Set vertex and pixel shaders
-		VertexShader = compile vs_1_1 VSTerrain_Tile_14();
-		PixelShader	 = (PSAlphaArray14[iTrilinearTextureIndex]);
-	}
-}
-
-Pixelshader PSAlphaArray11[2] =
-{
-	compile ps_1_1 PSTerrain_SPLATTILE_LMFW_11(TerrainBase, true),
-	compile ps_1_1 PSTerrain_SPLATTILE_LMFW_11(TerrainBaseNoMips, true)
-};
-
-technique TerrainAlphaShader_11< string shadername= "TerrainAlphaShader"; int implementation=2;>
-{
-	pass P0
-	{
-		// Enable depth writing
-		ZEnable				= TRUE;
-		ZWriteEnable		= TRUE;
-		ZFunc				= LESSEQUAL;
-
-		// Disable alpha blending and testing	
-		AlphaBlendEnable = true;
-		AlphaTestEnable	 = true;
-		AlphaRef         = 0;
-		AlphaFunc        = GREATER;
-		SrcBlend		 = SRCALPHA;
-		DestBlend		 = INVSRCALPHA;
-
-		// Set texture coordinate indices and	
-		TexCoordIndex[0]	= 0;		
-		TexCoordIndex[1]	= 1;		
-		TexCoordIndex[2]	= 2;	
-		TexCoordIndex[3]	= 3;	
-
-		TextureTransformFlags[0] = 0;
-		TextureTransformFlags[1] = 0;	
-		TextureTransformFlags[2] = 0;	
-		TextureTransformFlags[3] = 0;
-
-		// Set vertex and pixel shaders
-		VertexShader = compile vs_1_1 VSTerrain_Tile_11();
-		PixelShader	 = (PSAlphaArray11[iTrilinearTextureIndex]);
-	}
-}
-
-
-// Fixed Function Version
-technique TerrainAlphaShader_FF_4TPP< string shadername= "TerrainAlphaShader"; int implementation=3;>
-{
-	pass P0
-	{
-		ZEnable        = true;
-		ZWriteEnable   = true;
-		ZFunc          = LESSEQUAL;
-		
-		// Disable alpha blending and testing	
-		AlphaBlendEnable = true;
-		AlphaTestEnable	 = true;
-		AlphaRef         = 0;
-		AlphaFunc        = GREATER;
-		SrcBlend		 = SrcAlpha;
-		DestBlend		 = InvSrcAlpha;
-
-		// textures
-		Sampler[0]    =   <TerrainBase>;
-		Sampler[1]    =   <TerrainLightmap>;
-		Sampler[2]    =   <TerrainFOWar>;
-		
-		MipFilter[0] = <iMipStatus>;
-		
-		TexCoordIndex[0] = 0;
-		TexCoordIndex[1] = CAMERASPACEPOSITION;
-		TexCoordIndex[2] = CAMERASPACEPOSITION;
-
-		TextureTransformFlags[0] = 0;
-		TextureTransformFlags[1] = Count3;	
-		TextureTransformFlags[2] = Count3;	
-
-		TextureTransform[0] = 0;
-		TextureTransform[1] = <mtxLightmap>;	
-		TextureTransform[2] = <mtxFOW>;
-
-		// texture stage 0 - Base Texture
-		ColorOp[0]       = SelectArg1;
-		ColorArg1[0]     = Texture;
-		AlphaOp[0]		 = SelectArg1;
-		AlphaArg1[0]	 = Texture;
-
-		// texture stage 1 - lightmap
-		ColorOp[1]       = SelectArg1;//Addsigned;//;
-		ColorArg1[1]	 = Current;//Texture
-		ColorArg2[1]     = Current;
-		AlphaOp[1]		 = SelectArg1;
-		AlphaArg1[1]	 = Current;
-
-		// texture stage 2	- FoW
-		ColorOp[2]       = Modulate;
-		ColorArg1[2]     = Texture;
-		ColorArg2[2]     = Current;
-		AlphaOp[2]		 = SelectArg1;
-		AlphaArg1[2]	 = Current;
-
-		// texture stage 3 
-		ColorOp[3]       = disable;
-		AlphaOp[3]		 = disable;
-
-		// shaders
-		VertexShader     = NULL;
-		PixelShader      = NULL;
-	}
-}
-
-
-technique TerrainAlphaShader_FF_2TPP< string shadername= "TerrainAlphaShader"; int implementation=4;>
-{
-	pass P0
-	{
-		ZEnable        = TRUE;
-		ZWriteEnable   = TRUE;
-		ZFunc          = LESSEQUAL;
-
-		
-		// Disable alpha blending and testing	
-		AlphaBlendEnable = true;
-		AlphaTestEnable	 = true;
-		AlphaRef         = 0;
-		AlphaFunc        = Greater;
-		SrcBlend		 = SrcAlpha;
-		DestBlend		 = InvSrcAlpha;
-
-		// textures
-		Sampler[0]    =   <TerrainBase>;
-		Sampler[1]    =   <TerrainFOWar>;
-		
-		MipFilter[0] = <iMipStatus>;
-
-		TexCoordIndex[0] = 0;	
-        TexCoordIndex[1] = CAMERASPACEPOSITION;	//fow
-                
-       	TextureTransformFlags[0] = 0;
-		TextureTransformFlags[1] = Count3;	
-                
-        // transforms
-        TextureTransform[0] = 0;
-		TextureTransform[1] = <mtxFOW>;
-		
-
-		// texture stage 0 - Base Texture
-		ColorOp[0]       = SelectArg1;
-		ColorArg1[0]     = Texture;
-		AlphaOp[0]		 = SelectArg1;
-		AlphaArg1[0]	 = Texture;
-
-		// texture stage 2	- FoW
-		ColorOp[1]       = Modulate;
-		ColorArg1[1]     = Texture;
-		ColorArg2[1]     = Current;
-		AlphaOp[1]		 = SelectArg1;
-		AlphaArg1[1]	 = Current;
-
-		// shaders
-		VertexShader     = NULL;
-		PixelShader      = NULL;
+		VertexShader = compile vs_1_1 VSTerrain_TileSimple();
+		PixelShader	 = (PSArray11[iShaderIndex]);
 	}
 }

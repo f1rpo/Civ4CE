@@ -518,7 +518,7 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 		{
 			int iGold = trade.m_iData1;
 			GET_PLAYER(eFromPlayer).changeGold(-iGold);
-			GET_PLAYER(eToPlayer).changeGold(iGold);
+			GET_PLAYER(eToPlayer).changeGold(iGold * GET_PLAYER(eToPlayer).getExtraTradeMultiplier(eFromPlayer) / 100);
 			GET_PLAYER(eFromPlayer).AI_changeGoldTradedTo(eToPlayer, iGold);
 
 			for (int i = 0; i < GC.getNumFatherPointInfos(); ++i)
@@ -559,7 +559,7 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 					//load yields from city onto transport
 					if(pCity->getOwnerINLINE() == eFromPlayer)
 					{
-						iAmount = pTransport->getLoadYieldAmount(eYield);
+						iAmount = pTransport->getMaxLoadYieldAmount(eYield);
 						pTransport->loadYield(eYield, true);
 					}
 					else //unload yields from transport into city
@@ -587,6 +587,10 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 
 					if (iAmount > 0)
 					{
+						GET_PLAYER(eFromPlayer).changeYieldTradedTotal(eYield, iAmount);
+						GET_PLAYER(eToPlayer).changeYieldTradedTotal(eYield, iAmount);
+						GC.getGameINLINE().changeYieldBoughtTotal(GET_PLAYER(eToPlayer).getID(), eYield, -iAmount);
+
 						int iNativeHappy = GC.getYieldInfo(eYield).getNativeHappy();
 						if (iNativeHappy != 0)
 						{

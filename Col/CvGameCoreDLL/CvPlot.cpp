@@ -251,10 +251,7 @@ void CvPlot::erase()
 	setImprovementType(NO_IMPROVEMENT);
 	setRouteType(NO_ROUTE);
 	setFeatureType(NO_FEATURE);
-
-	// PatchMod: Remove Europe Zones START
 	setEurope(NO_EUROPE);
-	// PatchMod: Remove Europe Zones END
 
 	// disable rivers
 	setNOfRiver(false, NO_CARDINALDIRECTION);
@@ -2144,14 +2141,9 @@ int CvPlot::movementCost(const CvUnit* pUnit, const CvPlot* pFromPlot) const
 		}
 	}
 
-	// PatchMod: Terrain double move fix START
 	bool bHasTerrainCost = (iRegularCost > 0);
-//	bool bHasTerrainCost = (iRegularCost > 1);
-	// PatchMod: Terrain double move fix END
 
-	iRegularCost = std::min(iRegularCost, pUnit->baseMoves());
-
-	iRegularCost *= GC.getMOVE_DENOMINATOR();
+	iRegularCost = std::min(iRegularCost, pUnit->baseMoves()) * GC.getMOVE_DENOMINATOR();
 
 	if (bHasTerrainCost)
 	{
@@ -2702,7 +2694,11 @@ bool CvPlot::isFriendlyCity(const CvUnit& kUnit, bool bCheckImprovement) const
 
 		if (!kUnit.isEnemy(ePlotTeam, this) && GET_PLAYER(getOwnerINLINE()).isAlwaysOpenBorders())
 		{
-			return true;
+			// Military Ships (Frigates, Ship-Of-The-Line, Man-O-Wars) cannot enter native villages
+			if (kUnit.getUnitInfo().isHiddenNationality() || kUnit.isOnlyDefensive() || kUnit.getDomainType() != DOMAIN_SEA)
+			{
+				return true;
+			}
 		}
 	}
 

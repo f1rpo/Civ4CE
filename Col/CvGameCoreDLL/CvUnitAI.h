@@ -17,12 +17,6 @@ public:
 	CvUnitAI();
 	virtual ~CvUnitAI();
 
-	// PatchMod: Treasure Fix START
-	CvPlot* AI_canLoadAdjacent(CvPlot* pPlot, bool bTestCity);
-	bool AI_loadAdjacent(CvPlot* pPlot, bool bTestCity);
-	bool AI_hasTransportOfSize(int iBerthSize);
-	// PatchMod: Treasure Fix END
-
 	void AI_init();
 	void AI_uninit();
 	void AI_reset();
@@ -70,6 +64,9 @@ public:
 	ProfessionTypes AI_getOldProfession() const;
 	void AI_setOldProfession(ProfessionTypes eProfession);
 	ProfessionTypes AI_getIdealProfession() const;
+
+	bool AI_loadAdjacent(CvPlot* pPlot, bool bTestCity);
+	bool AI_allowedToJoin(const CvCity* pCity) const;
 
 	void read(FDataStreamBase* pStream);
 	void write(FDataStreamBase* pStream);
@@ -235,7 +232,6 @@ protected:
 	bool AI_foundRange(int iRange, bool bFollow = false);
 	bool AI_joinCityBrave();
 	bool AI_joinCity(int iMaxPath = MAX_INT);
-	bool AI_joinCityReplace(int iMaxPath = MAX_INT);
 	bool AI_joinOptimalCity();
 	bool AI_joinCityDefender();
 	bool AI_yieldDestination(int iMaxPath = MAX_INT);

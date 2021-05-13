@@ -166,7 +166,7 @@ public:
 	int getMissionData1(int iNode) const;
 	int getMissionData2(int iNode) const;
 
-	bool canAssignTradeRoute(int iRouteID) const;
+	bool canAssignTradeRoute(int iRouteID, bool bReusePath = false) const;
 	void assignTradeRoute(int iRouteID, bool bAssign);
 	bool isAssignedTradeRoute(int iRouteId) const;
 	void clearTradeRoutes();

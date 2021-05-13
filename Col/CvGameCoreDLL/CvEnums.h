@@ -1796,9 +1796,7 @@ enum DllExport MemoryTypes
 	MEMORY_LIBERATED_CITIES,
 	MEMORY_REFUSED_TAX,
 	MEMORY_REVENGE_TAKEN,
-	// PatchMod: Mission failure START
-	MEMORY_MISSION_FAIL,
-	// PatchMod: Mission failure END
+	MEMORY_MISSIONARY_FAIL,
 
 #ifdef _USRDLL
 	NUM_MEMORY_TYPES

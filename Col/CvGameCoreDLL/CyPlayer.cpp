@@ -289,10 +289,6 @@ int CyPlayer::immigrationThreshold()
 {
 	return m_pPlayer ? m_pPlayer->immigrationThreshold() : -1;
 }
-int CyPlayer::educationThreshold()
-{
-	return m_pPlayer ? m_pPlayer->educationThreshold() : -1;
-}
 int CyPlayer::revolutionEuropeUnitThreshold()
 {
 	return m_pPlayer ? m_pPlayer->revolutionEuropeUnitThreshold() : -1;
@@ -662,7 +658,7 @@ int CyPlayer::getHurryCount(int /*HurryTypes*/ eIndex)
 }
 bool CyPlayer::canHurry(int /*HurryTypes*/ eIndex)
 {
-	return m_pPlayer ? m_pPlayer->canHurry((HurryTypes)eIndex) : (int) NO_HURRY;
+	return m_pPlayer ? m_pPlayer->canHurry((HurryTypes)eIndex, -1) : (int) NO_HURRY;
 }
 int CyPlayer::getSpecialBuildingNotRequiredCount(int /*SpecialBuildingTypes*/ eIndex)
 {
@@ -1138,10 +1134,3 @@ std::wstring CyPlayer::getTradeMessage(int i) const
 {
 	return m_pPlayer ? m_pPlayer->getTradeMessage(i) : L"";
 }
-
-// PatchMod: Tax party city START
-int CyPlayer::getHighestStoredYieldPartyCityId(int /*YieldTypes*/ eYield)
-{
-	return m_pPlayer ? m_pPlayer->getHighestStoredYieldPartyCityId((YieldTypes) eYield) : -1;
-}
-// PatchMod: Tax party city END

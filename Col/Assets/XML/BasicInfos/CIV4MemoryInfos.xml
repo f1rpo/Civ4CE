@@ -99,8 +99,8 @@
 			<Description>TXT_KEY_MEMORY_REVENGE_TAKEN</Description>
 		</MemoryInfo>
 		<MemoryInfo>
-			<Type>MEMORY_MISSION_FAIL</Type>
-			<Description>TXT_KEY_MEMORY_MISSION_FAIL</Description>
+			<Type>MEMORY_MISSIONARY_FAIL</Type>
+			<Description>TXT_KEY_MEMORY_MISSIONARY_FAIL</Description>
 		</MemoryInfo>
 	</MemoryInfos>
 </Civ4MemoryInfos>

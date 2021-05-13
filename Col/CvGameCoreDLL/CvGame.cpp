@@ -249,7 +249,7 @@ void CvGame::init(HandicapTypes eHandicap)
 //
 // Set initial items (units, techs, etc...)
 //
-void CvGame::setInitialItems()
+void CvGame::setInitialItems(bool bScenario)
 {
 	PROFILE_FUNC();
 
@@ -261,11 +261,18 @@ void CvGame::setInitialItems()
 		}
 	}
 
-	initFreeState();
+	if (!bScenario)
+	{
+		initFreeState();
+	}
 	updateOceanDistances();
-	assignStartingPlots();
-	//normalizeStartingPlots();
-	assignNativeTerritory();
+
+	if (!bScenario)
+	{
+		assignStartingPlots();
+		//normalizeStartingPlots();
+		assignNativeTerritory();
+	}
 	initFreeUnits();
 	initImmigration();
 
@@ -296,12 +303,10 @@ void CvGame::regenerateMap()
 		GET_PLAYER((PlayerTypes)iI).killUnits();
 	}
 
-	// PatchMod: Reset REF on regenerate START
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
 		GET_PLAYER((PlayerTypes)iI).clearRevolutionEuropeUnits();
 	}
-	// PatchMod: Reset REF on regenerate END
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
@@ -335,7 +340,7 @@ void CvGame::regenerateMap()
 
 	gDLL->resetStatistics();
 
-	setInitialItems();
+	setInitialItems(false);
 
 	initScoreCalculation();
 	setFinalInitialized(true);
@@ -398,10 +403,6 @@ void CvGame::reset(HandicapTypes eHandicap, bool bConstructorCall)
 	// Uninit class
 	uninit();
 
-	// PatchMod: Stop F1 pressing during diplomacy START
-	m_bInDiplomacy = false;
-	// PatchMod: Stop F1 pressing during diplomacy END
-
 	m_iEndTurnMessagesSent = 0;
 	m_iElapsedGameTurns = 0;
 	m_iStartTurn = 0;
@@ -428,6 +429,7 @@ void CvGame::reset(HandicapTypes eHandicap, bool bConstructorCall)
 	m_bPbemTurnSent = false;
 	m_bHotPbemBetweenTurns = false;
 	m_bPlayerOptionsSent = false;
+	m_bMaxTurnsExtended = false;
 
 	m_eHandicap = eHandicap;
 	m_ePausePlayer = NO_PLAYER;
@@ -618,18 +620,10 @@ void CvGame::assignStartingPlots()
 
 	CvPlot* pPlot;
 	CvPlot* pBestPlot;
-	bool bStartFound;
 	bool bValid;
-	int iRandOffset;
-	int iLoopTeam;
-	int iLoopPlayer;
-	int iHumanSlot;
 	int iValue;
 	int iBestValue;
 	int iI, iJ, iK;
-
-	std::vector<int> playerOrder;
-	std::vector<int>::iterator playerOrderIter;
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
@@ -688,203 +682,54 @@ void CvGame::assignStartingPlots()
 		return; // Python override
 	}
 
-	if (isTeamGame())
+
+	bool bDone = false;
+	for (int iPass = 0; iPass < 2 * MAX_PLAYERS && !bDone; iPass++)
 	{
-		for (int iPass = 0; iPass < 2 * MAX_PLAYERS; ++iPass)
+		std::vector<int> aiShuffledTeams(MAX_TEAMS);
+		getSorenRand().shuffleSequence(aiShuffledTeams, "Team starting plot");
+
+		for (int iHuman = 0; iHuman <= 1; ++iHuman)
 		{
-			bStartFound = false;
-
-			iRandOffset = getSorenRandNum(countCivTeamsAlive(), "Team Starting Plot");
-
-			for (iI = 0; iI < MAX_TEAMS; iI++)
+			for (iI = 0; iI < MAX_TEAMS; ++iI)
 			{
-				iLoopTeam = ((iI + iRandOffset) % MAX_TEAMS);
-
-				if (GET_TEAM((TeamTypes)iLoopTeam).isAlive())
+				TeamTypes eTeam = (TeamTypes) aiShuffledTeams[iI];
+				CvTeam& kTeam = GET_TEAM(eTeam);
+				//do all human teams before AI teams
+				if (kTeam.isAlive() && (iHuman == (kTeam.isHuman() ? 0 : 1)))
 				{
-					for (iJ = 0; iJ < MAX_PLAYERS; iJ++)
+					for (iJ = 0; iJ < MAX_PLAYERS; ++iJ)
 					{
-						if (GET_PLAYER((PlayerTypes)iJ).isAlive())
+						CvPlayer& kPlayer = GET_PLAYER((PlayerTypes)iJ);
+						if (kPlayer.isAlive() && kPlayer.getTeam() == eTeam)
 						{
-							if (GET_PLAYER((PlayerTypes)iJ).getTeam() == iLoopTeam)
+							if (kPlayer.getStartingPlot() == NULL)
 							{
-								if (GET_PLAYER((PlayerTypes)iJ).getStartingPlot() == NULL)
+								CvPlot* pStartingPlot = kPlayer.findStartingPlot();
+								if (NULL != pStartingPlot)
 								{
-									CvPlot* pStartingPlot = GET_PLAYER((PlayerTypes)iJ).findStartingPlot();
-
-									if (NULL != pStartingPlot)
-									{
-										GET_PLAYER((PlayerTypes)iJ).setStartingPlot(pStartingPlot, true);
-										playerOrder.push_back(iJ);
-									}
-									bStartFound = true;
-									break;
+									kPlayer.setStartingPlot(pStartingPlot, true);
 								}
+								break;
 							}
 						}
 					}
 				}
-			}
-
-			if (!bStartFound)
-			{
-				break;
 			}
 		}
 
 		//check all players have starting plots
+		bDone = true;
 		for (iJ = 0; iJ < MAX_PLAYERS; iJ++)
 		{
-			FAssertMsg(!GET_PLAYER((PlayerTypes)iJ).isAlive() || GET_PLAYER((PlayerTypes)iJ).getStartingPlot() != NULL, "Player has no starting plot");
-		}
-	}
-	else if (isGameMultiPlayer())
-	{
-		iRandOffset = getSorenRandNum(countCivPlayersAlive(), "Player Starting Plot");
-
-		for (iI = 0; iI < MAX_PLAYERS; iI++)
-		{
-			iLoopPlayer = ((iI + iRandOffset) % MAX_PLAYERS);
-
-			if (GET_PLAYER((PlayerTypes)iLoopPlayer).isAlive())
+			if (GET_PLAYER((PlayerTypes)iJ).isAlive() && GET_PLAYER((PlayerTypes)iJ).getStartingPlot() == NULL)
 			{
-				if (GET_PLAYER((PlayerTypes)iLoopPlayer).isHuman())
-				{
-					if (GET_PLAYER((PlayerTypes)iLoopPlayer).getStartingPlot() == NULL)
-					{
-						GET_PLAYER((PlayerTypes)iLoopPlayer).setStartingPlot(GET_PLAYER((PlayerTypes)iLoopPlayer).findStartingPlot(), true);
-						playerOrder.push_back(iLoopPlayer);
-					}
-				}
-			}
-		}
-
-		for (iI = 0; iI < MAX_PLAYERS; iI++)
-		{
-			if (GET_PLAYER((PlayerTypes)iI).isAlive())
-			{
-				if (!(GET_PLAYER((PlayerTypes)iI).isHuman()))
-				{
-					if (GET_PLAYER((PlayerTypes)iI).getStartingPlot() == NULL)
-					{
-						GET_PLAYER((PlayerTypes)iI).setStartingPlot(GET_PLAYER((PlayerTypes)iI).findStartingPlot(), true);
-						playerOrder.push_back(iI);
-					}
-				}
+				bDone = false;
 			}
 		}
 	}
-	else
-	{
-		iHumanSlot = range((((countCivPlayersAlive() - 1) * GC.getHandicapInfo(getHandicapType()).getStartingLocationPercent()) / 100), 0, (countCivPlayersAlive() - 1));
 
-		// PatchMod: Random Start Locs START
-/*		for (iI = 0; iI < iHumanSlot; iI++)
-		{
-			if (GET_PLAYER((PlayerTypes)iI).isAlive())
-			{
-				if (!(GET_PLAYER((PlayerTypes)iI).isHuman()))
-				{
-					if (GET_PLAYER((PlayerTypes)iI).getStartingPlot() == NULL)
-					{
-						GET_PLAYER((PlayerTypes)iI).setStartingPlot(GET_PLAYER((PlayerTypes)iI).findStartingPlot(), true);
-						playerOrder.push_back(iI);
-					}
-				}
-			}
-		}
-
-		for (iI = 0; iI < MAX_PLAYERS; iI++)
-		{
-			if (GET_PLAYER((PlayerTypes)iI).isAlive())
-			{
-				if (GET_PLAYER((PlayerTypes)iI).isHuman())
-				{
-					if (GET_PLAYER((PlayerTypes)iI).getStartingPlot() == NULL)
-					{
-						GET_PLAYER((PlayerTypes)iI).setStartingPlot(GET_PLAYER((PlayerTypes)iI).findStartingPlot(), true);
-						playerOrder.push_back(iI);
-					}
-				}
-			}
-		}*/
-		// PatchMod: Random Start Locs END
-		for (iI = 0; iI < MAX_PLAYERS; iI++)
-		{
-			if (GET_PLAYER((PlayerTypes)iI).isAlive())
-			{
-				if (GET_PLAYER((PlayerTypes)iI).getStartingPlot() == NULL)
-				{
-					GET_PLAYER((PlayerTypes)iI).setStartingPlot(GET_PLAYER((PlayerTypes)iI).findStartingPlot(), true);
-					playerOrder.push_back(iI);
-				}
-			}
-		}
-		// PatchMod: Random Start Locs START
-		// Randomise start locations amongst water starters (Human Europeans)
-		int iWaterCount = 0;
-		int iCounter = 0;
-		for (iI = 0; iI < MAX_PLAYERS; iI++)
-		{
-			if (GET_PLAYER((PlayerTypes)iI).isAlive())
-			{
-				if (GC.getCivilizationInfo(GET_PLAYER((PlayerTypes)iI).getCivilizationType()).isWaterStart())
-				{
-					iWaterCount++;
-				}
-			}
-		}
-		int iRandStart = 0;
-		CvPlot* pTempPlot = NULL;
-		for (iJ = 0; iJ < MAX_PLAYERS; iJ++)
-		{
-			if (GET_PLAYER((PlayerTypes)iJ).isAlive())
-			{
-				if (GC.getCivilizationInfo(GET_PLAYER((PlayerTypes)iJ).getCivilizationType()).isWaterStart() && GET_PLAYER((PlayerTypes)iJ).isHuman())
-				{
-					iRandStart = getSorenRandNum(iWaterCount, "");
-					iCounter = 0;
-					for (iI = 0; iI < MAX_PLAYERS; iI++)
-					{
-						if (GET_PLAYER((PlayerTypes)iI).isAlive())
-						{
-							if (GC.getCivilizationInfo(GET_PLAYER((PlayerTypes)iI).getCivilizationType()).isWaterStart())
-							{
-								iCounter++;
-							}
-						}
-						if (iCounter == iRandStart)
-						{
-							pTempPlot = GET_PLAYER((PlayerTypes)iJ).getStartingPlot();
-							GET_PLAYER((PlayerTypes)iJ).setStartingPlot(GET_PLAYER((PlayerTypes)iI).getStartingPlot(), true);
-							GET_PLAYER((PlayerTypes)iI).setStartingPlot(pTempPlot, true);
-							iI = MAX_PLAYERS;
-						}
-					}
-				}
-			}
-		}
-	}
-	// PatchMod: Random Start Locs END
-
-	// PatchMod: Random Start Locs START
-	// This section of code made Euros appear from top-bottom in order (after removing the human player)
-	/*
-	//Now iterate over the player starts in the original order and re-place them.
-	for (playerOrderIter = playerOrder.begin(); playerOrderIter != playerOrder.end(); ++playerOrderIter)
-	{
-		GET_PLAYER((PlayerTypes)(*playerOrderIter)).setStartingPlot(GET_PLAYER((PlayerTypes)(*playerOrderIter)).findStartingPlot(), true);
-	}
-	
-	//Do it again to even out the water player starts.
-	for (playerOrderIter = playerOrder.begin(); playerOrderIter != playerOrder.end(); ++playerOrderIter)
-	{
-		if (GC.getCivilizationInfo(GET_PLAYER((PlayerTypes)(*playerOrderIter)).getCivilizationType()).isWaterStart())
-		{
-			GET_PLAYER((PlayerTypes)(*playerOrderIter)).setStartingPlot(GET_PLAYER((PlayerTypes)(*playerOrderIter)).findStartingPlot(), true);
-		}
-	}*/
-	// PatchMod: Random Start Locs END
+	FAssertMsg(bDone, "Player has no starting plot");
 }
 
 // Swaps starting locations until we have reached the optimal closeness between teams
@@ -3094,6 +2939,7 @@ void CvGame::doControl(ControlTypes eControl)
 		break;
 
 	case CONTROL_DOMESTIC_SCREEN:
+		if (!gDLL->isDiplomacy())
 		{
 			bool bFound = false;
 			const CvPopupQueue& aPopups = GET_PLAYER(getActivePlayer()).getPopups();
@@ -3672,6 +3518,15 @@ void CvGame::incrementElapsedGameTurns()
 	m_iElapsedGameTurns++;
 }
 
+bool CvGame::isMaxTurnsExtended() const
+{
+	return m_bMaxTurnsExtended;
+}
+
+void CvGame::setMaxTurnsExtended(bool bExtended)
+{
+	m_bMaxTurnsExtended = bExtended;
+}
 
 int CvGame::getMaxTurns() const
 {
@@ -3689,6 +3544,71 @@ void CvGame::setMaxTurns(int iNewValue)
 void CvGame::changeMaxTurns(int iChange)
 {
 	setMaxTurns(getMaxTurns() + iChange);
+}
+
+void CvGame::getTurnTimerText(CvWString& szBuffer) const
+{
+	if (isMPOption(MPOPTION_TURN_TIMER))
+	{
+		// Get number of turn slices remaining until end-of-turn
+		int iTurnSlicesRemaining = getTurnSlicesRemaining();
+
+		if (iTurnSlicesRemaining > 0)
+		{
+			// Get number of seconds remaining
+			int iTurnSecondsRemaining = ((int)floorf((float)(iTurnSlicesRemaining-1) * ((float)gDLL->getMillisecsPerTurn()/1000.0f)) + 1);
+			int iTurnMinutesRemaining = (int)(iTurnSecondsRemaining/60);
+			iTurnSecondsRemaining = (iTurnSecondsRemaining%60);
+			int iTurnHoursRemaining = (int)(iTurnMinutesRemaining/60);
+			iTurnMinutesRemaining = (iTurnMinutesRemaining%60);
+
+			// Display time remaining
+			CvWString szTempBuffer;
+			szTempBuffer.Format(L"%d:%02d:%02d", iTurnHoursRemaining, iTurnMinutesRemaining, iTurnSecondsRemaining);
+			szBuffer += szTempBuffer;
+		}
+		else
+		{
+			// Flash zeroes
+			if (iTurnSlicesRemaining % 2 == 0)
+			{
+				// Display 0
+				szBuffer+=L"0:00";
+			}
+		}
+	}
+
+	if (getGameState() == GAMESTATE_ON)
+	{
+		if (isOption(GAMEOPTION_ADVANCED_START) && !isOption(GAMEOPTION_ALWAYS_WAR) && getElapsedGameTurns() <= GC.getDefineINT("PEACE_TREATY_LENGTH"))
+		{
+			if (!szBuffer.empty())
+			{
+				szBuffer += L" -- ";
+			}
+
+			szBuffer += gDLL->getText("TXT_KEY_MISC_ADVANCED_START_PEACE_REMAINING", GC.getDefineINT("PEACE_TREATY_LENGTH") - getElapsedGameTurns());
+		}
+		else if (getMaxTurns() > 0)
+		{
+			if ((getElapsedGameTurns() >= (getMaxTurns() - GC.getDefineINT("END_GAME_DISPLAY_WARNING"))) && (getElapsedGameTurns() < getMaxTurns()))
+			{
+				if (!isEmpty(szBuffer))
+				{
+					szBuffer += L" -- ";
+				}
+
+				if (isMaxTurnsExtended() || GET_PLAYER(getActivePlayer()).isInRevolution())
+				{
+					szBuffer += gDLL->getText("TXT_KEY_MISC_TURNS_LEFT", (getMaxTurns() - getElapsedGameTurns()));
+				}
+				else
+				{
+					szBuffer += gDLL->getText("TXT_KEY_MISC_TURNS_LEFT_TO_DOI", (getMaxTurns() - getElapsedGameTurns()));
+				}
+			}
+		}
+	}
 }
 
 
@@ -3794,7 +3714,7 @@ void CvGame::changeCutoffSlice(int iChange)
 }
 
 
-int CvGame::getTurnSlicesRemaining()
+int CvGame::getTurnSlicesRemaining() const
 {
 	return (getCutoffSlice() - getTurnSlice());
 }
@@ -4035,18 +3955,17 @@ void CvGame::setAIAutoPlay(int iNewValue)
 	if (iOldValue != iNewValue)
 	{
 		m_iAIAutoPlay = std::max(0, iNewValue);
-		// Dale - AoD: AI Autoplay START
 
-		GET_PLAYER(getActivePlayer()).setDisableHuman((getAIAutoPlay() != 0));
-		GET_PLAYER(getActivePlayer()).updateHuman();
-
-		/*
-		if ((iOldValue == 0) && (getAIAutoPlay() > 0))
+		if (getAIAutoPlay() > 0)
 		{
-			GET_PLAYER(getActivePlayer()).killUnits();
-			GET_PLAYER(getActivePlayer()).killCities();
-		}*/
-		// Dale - AoD: AI Autoplay END
+			GC.getInitCore().setSlotStatus(getActivePlayer(), SS_COMPUTER);
+		}
+		else
+		{
+			GC.getInitCore().setSlotStatus(getActivePlayer(), SS_TAKEN);
+		}
+
+		GET_PLAYER(getActivePlayer()).checkPower(true);
 	}
 }
 
@@ -4054,9 +3973,6 @@ void CvGame::setAIAutoPlay(int iNewValue)
 void CvGame::changeAIAutoPlay(int iChange)
 {
 	setAIAutoPlay(getAIAutoPlay() + iChange);
-	// Dale - AoD: AI Autoplay START
-	GET_PLAYER(getActivePlayer()).setDisableHuman((getAIAutoPlay() != 0));
-	// Dale - AoD: AI Autoplay END
 }
 
 
@@ -4415,6 +4331,14 @@ void CvGame::setWinner(TeamTypes eNewWinner, VictoryTypes eNewVictory)
 						GET_TEAM(getWinner()).makePeace((TeamTypes) iTeam);
 					}
 				}
+
+				for (int iPlayer = 0; iPlayer < MAX_PLAYERS; ++iPlayer)
+				{
+					if (GET_PLAYER((PlayerTypes) iPlayer).getTeam() == getWinner())
+					{
+						GET_PLAYER((PlayerTypes) iPlayer).setTaxRate(0);
+					}
+				}
 			}
 
 			if (getWinner() != NO_TEAM)
@@ -4442,7 +4366,7 @@ void CvGame::setWinner(TeamTypes eNewWinner, VictoryTypes eNewVictory)
 }
 
 
-GameStateTypes CvGame::getGameState()
+GameStateTypes CvGame::getGameState() const
 {
 	return m_eGameState;
 }
@@ -5913,6 +5837,10 @@ void CvGame::read(FDataStreamBase* pStream)
 	// m_bPbemTurnSent not saved
 	pStream->Read(&m_bHotPbemBetweenTurns);
 	// m_bPlayerOptionsSent not saved
+	if (uiFlag > 0)
+	{
+		pStream->Read(&m_bMaxTurnsExtended);
+	}
 
 	pStream->Read((int*)&m_eHandicap);
 	pStream->Read((int*)&m_ePausePlayer);
@@ -6038,7 +5966,7 @@ void CvGame::read(FDataStreamBase* pStream)
 
 void CvGame::write(FDataStreamBase* pStream)
 {
-	uint uiFlag=0;
+	uint uiFlag=1;
 	pStream->Write(uiFlag);		// flag for expansion
 
 	pStream->Write(m_iEndTurnMessagesSent);
@@ -6067,6 +5995,7 @@ void CvGame::write(FDataStreamBase* pStream)
 	// m_bPbemTurnSent not saved
 	pStream->Write(m_bHotPbemBetweenTurns);
 	// m_bPlayerOptionsSent not saved
+	pStream->Write(m_bMaxTurnsExtended);
 
 	pStream->Write(m_eHandicap);
 	pStream->Write(m_ePausePlayer);
@@ -6691,58 +6620,3 @@ void CvGame::updateOceanDistances()
 
 	OutputDebugStr(CvString::format("[CvGame::updateOceanDistances] Plots: %i, Visits: %i\n", GC.getMapINLINE().numPlotsINLINE(), iVisits).GetCString());
 }
-
-
-// PatchMod: Randomise stuff on map START
-void CvGame::reassignStartingPlots()
-{
-	int iI;
-	int iLoop;
-	CvUnit* pLoopUnit;
-	CvPlot* pLoopPlot;
-	for (iI = 0; iI < MAX_PLAYERS; iI++)
-	{
-		GET_PLAYER((PlayerTypes)iI).setFoundedFirstCity(false);
-		GET_PLAYER((PlayerTypes)iI).setStartingPlot(NULL, false);
-	}
-	for(iI = 0; iI < GC.getMapINLINE().numPlotsINLINE(); iI++)
-	{
-		pLoopPlot = GC.getMapINLINE().plotByIndexINLINE(iI);
-		pLoopPlot->setStartingPlot(false);
-	}
-	for (iI = 0; iI < MAX_TEAMS; iI++)
-	{
-		GC.getMapINLINE().setRevealedPlots(((TeamTypes)iI), false);
-	}
-	assignStartingPlots();
-	for (iI = 0; iI < MAX_PLAYERS; iI++)
-	{
-		pLoopPlot = GET_PLAYER((PlayerTypes)iI).getStartingPlot();
-		for(pLoopUnit = GET_PLAYER((PlayerTypes)iI).firstUnit(&iLoop); pLoopUnit != NULL; pLoopUnit = GET_PLAYER((PlayerTypes)iI).nextUnit(&iLoop))
-		{
-			pLoopUnit->setXY(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), false, false);
-		}
-	}
-}
-
-void CvGame::setupScenarioPlayers()
-{
-	if (GC.getInitCore().getScenario())
-	{
-		updateOceanDistances();
-	}
-	return;
-}
-// PatchMod: Randomise stuff on map END
-
-// PatchMod: Stop F1 pressing during diplomacy START
-void CvGame::inDiplomacy(bool bValue)
-{
-	m_bInDiplomacy = bValue;
-}
-
-bool CvGame::isInDiplomacy() const
-{
-	return m_bInDiplomacy;
-}
-// PatchMod: Stop F1 pressing during diplomacy END

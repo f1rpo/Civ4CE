@@ -72,7 +72,7 @@ void CySelectionGroupInterface()
 		.def("generatePath", &CySelectionGroup::generatePath, "bool (CyPlot* pFromPlot, CyPlot* pToPlot, int iFlags, bool bReuse, int* piPathTurns)")
 		.def("resetPath", &CySelectionGroup::resetPath, "void ()")
 		.def("isAssignedTradeRoute", &CySelectionGroup::isAssignedTradeRoute, "bool (int iRouteId)")
-		.def("canAssignTradeRoute", &CySelectionGroup::canAssignTradeRoute, "bool (int iRouteId)")
+		.def("canAssignTradeRoute", &CySelectionGroup::canAssignTradeRoute, "bool (int iRouteId, bool bReusePath)")
 		.def("getNumUnits", &CySelectionGroup::getNumUnits, "int ()")			// JS Help!
 		.def("clearMissionQueue", &CySelectionGroup::clearMissionQueue, "void ()")
 		.def("getLengthMissionQueue", &CySelectionGroup::getLengthMissionQueue, "int ()")

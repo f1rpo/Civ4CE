@@ -289,6 +289,7 @@ void CyMap::regenerateGameElements()
 		pMapGen->eraseFeatures();
 		pMapGen->eraseBonuses();
 		pMapGen->eraseGoodies();
+		pMapGen->eraseEurope();
 		pMapGen->addGameElements();
 	}
 }

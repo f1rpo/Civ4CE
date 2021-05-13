@@ -841,7 +841,7 @@
 		<Tag>TXT_KEY_YIELD_ORE</Tag>
 		<English>Ore</English>
 		<French>
-			<Text>Minerai de fer:Minerais de fer</Text>
+			<Text>Min. de fer:Min. de fer</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</French>
@@ -1640,18 +1640,18 @@
 		<Tag>TXT_KEY_UNIT_MINER</Tag>
 		<English>Expert Ore Miner:Expert Ore Miners</English>
 		<French>
-			<Text>Mineur de fer professionnel:Mineurs de fer profesionnels</Text>
+			<Text>Mineur de fer pro.:Mineurs de fer pro.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</French>
-		<German>Erfahrener Eisenminenarbeiter:Erfahrene Eisenminenarbeiter</German>
+		<German>Erf. Eisenminenarbeiter:Erf. Eisenminenarbeiter</German>
 		<Italian>
-			<Text>Minatore esperto:Minatori esperti</Text>
+			<Text>Minatore esp.:Minatori esp.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Italian>
 		<Spanish>
-			<Text>Minero experto:Mineros expertos</Text>
+			<Text>Minero exp.:Mineros exp.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Spanish>
@@ -1680,18 +1680,18 @@
 		<Tag>TXT_KEY_UNIT_LUMBERJACK</Tag>
 		<English>Expert Lumberjack:Expert Lumberjacks</English>
 		<French>
-			<Text>B&#251;cheron professionnel:B&#251;cherons professionnels</Text>
+			<Text>B&#251;cheron pro.:B&#251;cherons pro.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</French>
-		<German>Erfahrener Holzf&#228;ller:Erfahrene Holzf&#228;ller</German>
+		<German>Erf. Holzf&#228;ller:Erf. Holzf&#228;ller</German>
 		<Italian>
-			<Text>Boscaiolo esperto:Boscaioli esperti</Text>
+			<Text>Boscaiolo esp.:Boscaioli esp.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Italian>
 		<Spanish>
-			<Text>Le&#241;ador experto:Le&#241;adores expertos</Text>
+			<Text>Le&#241;ador exp.:Le&#241;adores exp.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Spanish>
@@ -1700,18 +1700,18 @@
 		<Tag>TXT_KEY_UNIT_TOBACCO_PLANTER</Tag>
 		<English>Expert Tobacco Planter:Expert Tobacco Planters</English>
 		<French>
-			<Text>Planteurs de tabac professionnel:Planteurs de tabac professionnels</Text>
+			<Text>Planteur de tabac pro.:Planteurs de tabac pro.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</French>
-		<German>Erfahrener Tabakpflanzer:Erfahrene Tabakpflanzer</German>
+		<German>Erf. Tabakpflanzer:Erf. Tabakpflanzer</German>
 		<Italian>
-			<Text>Colt. esperto di tab.:Coltivatori esperti di tabacco</Text>
+			<Text>Colt. esp. di tab.:Coltivatori esp. di tabacco</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Italian>
 		<Spanish>
-			<Text>Plantador de tabaco experto:Plantadores de tabaco expertos</Text>
+			<Text>Tabaquero exp.:Tabaqueros exp.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Spanish>
@@ -1720,18 +1720,18 @@
 		<Tag>TXT_KEY_UNIT_COTTON_PLANTER</Tag>
 		<English>Expert Cotton Planter:Expert Cotton Planters</English>
 		<French>
-			<Text>Planteur de coton professionnel:Planteurs de coton professionnels</Text>
+			<Text>Planteur de coton pro.:Planteurs de coton pro.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</French>
-		<German>Erfahrener Baumwollpflanzer:Erfahrene Baumwollpflanzer</German>
+		<German>Erf. Baumwollpflanzer:Erf. Baumwollpflanzer</German>
 		<Italian>
-			<Text>Coltivatore esperto di cotone:Coltivatori esperti di cotone</Text>
+			<Text>Coltivatore esp. di cotone:Coltivatori esp. di cotone</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Italian>
 		<Spanish>
-			<Text>Algodonero exp.:Plantadores de algod&#243;n expertos</Text>
+			<Text>Algodonero exp.:Algodoneros exp.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Spanish>
@@ -1740,18 +1740,18 @@
 		<Tag>TXT_KEY_UNIT_SUGAR_PLANTER</Tag>
 		<English>Expert Sugar Planter:Expert Sugar Planters</English>
 		<French>
-			<Text>Planteur de sucre professionnel:Planteurs de sucre professionnels</Text>
+			<Text>Planteur de sucre pro.:Planteurs de sucre pro.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</French>
-		<German>Erfahrener Zuckerrohrpflanzer:Erfahrene Zuckerrohrpflanzer</German>
+		<German>Erf. Zuckerrohrpflanzer:Erf. Zuckerrohrpflanzer</German>
 		<Italian>
-			<Text>Coltivatore esperto di zucchero:Coltivatori esperti di zucchero</Text>
+			<Text>Coltivatore esp. di zucchero:Coltivatori esp. di zucchero</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Italian>
 		<Spanish>
-			<Text>Experto en az&#250;car:Expertos en az&#250;car</Text>
+			<Text>Exp. en az&#250;car:Exps en az&#250;car</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Spanish>
@@ -1764,14 +1764,14 @@
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</French>
-		<German>Erfahrener Bauer:Erfahrene Bauern</German>
+		<German>Erf. Bauer:Erf. Bauern</German>
 		<Italian>
-			<Text>Contadino esperto:Contadini esperti</Text>
+			<Text>Contadino esp.:Contadini esp.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Italian>
 		<Spanish>
-			<Text>Agricultor experto:Agricultores expertos</Text>
+			<Text>Agricultor exp.:Agricultores exp.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Spanish>
@@ -1780,18 +1780,18 @@
 		<Tag>TXT_KEY_UNIT_TRAPPER</Tag>
 		<English>Expert Trapper:Expert Trappers</English>
 		<French>
-			<Text>Trappeur professionnel:Trappeurs professionnels</Text>
+			<Text>Trappeur pro.:Trappeurs pro.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</French>
-		<German>Erfahrener Pelzj&#228;ger:Erfahrene Pelzj&#228;ger</German>
+		<German>Erf. Pelzj&#228;ger:Erf. Pelzj&#228;ger</German>
 		<Italian>
-			<Text>Cacciatore esperto:Cacciatori esperti</Text>
+			<Text>Cacciatore esp.:Cacciatori esp.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Italian>
 		<Spanish>
-			<Text>Trampero experto:Tramperos expertos</Text>
+			<Text>Trampero exp.:Tramperos exp.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Spanish>
@@ -1800,18 +1800,18 @@
 		<Tag>TXT_KEY_UNIT_FISHERMAN</Tag>
 		<English>Expert Fisherman:Expert Fishermen</English>
 		<French>
-			<Text>P&#234;cheur professionnel:P&#234;cheurs professionnels</Text>
+			<Text>P&#234;cheur pro.:P&#234;cheurs pro.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</French>
-		<German>Erfahrener Fischer:Erfahrene Fischer</German>
+		<German>Erf. Fischer:Erf. Fischer</German>
 		<Italian>
-			<Text>Pescatore esperto:Pescatori esperti</Text>
+			<Text>Pescatore esp.:Pescatori esp.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Italian>
 		<Spanish>
-			<Text>Pescador experto:Pescadores expertos</Text>
+			<Text>Pescador exp.:Pescadores exp.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Spanish>
@@ -1820,11 +1820,11 @@
 		<Tag>TXT_KEY_UNIT_SILVERMINER</Tag>
 		<English>Expert Silver Miner:Expert Silver Miners</English>
 		<French>
-			<Text>Mineur d'argent professionnel:Mineurs d'argent professionnels</Text>
+			<Text>Mineur d'argent pro.:Mineurs d'argent pro.</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</French>
-		<German>Erfahrener Silberminenarbeiter:Erfahrene Silberminenarbeiter</German>
+		<German>Erf. Silberminenarbeiter:Erf. Silberminenarbeiter</German>
 		<Italian>
 			<Text>Minatore d'argento esperto:Minatori d'argento esperti</Text>
 			<Gender>Male</Gender>
@@ -2171,7 +2171,7 @@
 			<Plural>0:1</Plural>
 		</Italian>
 		<Spanish>
-			<Text>Nav&#237;o mercante:Nav&#237;os mercantes</Text>
+			<Text>Mercante:Mercantes</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</Spanish>
@@ -2206,7 +2206,7 @@
 		</French>
 		<German>Linienschiff:Linienschiffe</German>
 		<Italian>
-			<Text>Nave da prima linea:Navi da prima linea</Text>
+			<Text>Nave prima linea:Navi prima linea</Text>
 			<Gender>Female</Gender>
 			<Plural>0:1</Plural>
 		</Italian>
@@ -2311,7 +2311,7 @@
 			<Plural>0</Plural>
 		</Italian>
 		<Spanish>
-			<Text>Alimentos</Text>
+			<Text>Alimento</Text>
 			<Gender>Male</Gender>
 			<Plural>1</Plural>
 		</Spanish>
@@ -11255,7 +11255,7 @@
 			<Plural>0</Plural>
 		</Italian>
 		<Spanish>
-			<Text>Alimentos</Text>
+			<Text>Alimento</Text>
 			<Gender>Male</Gender>
 			<Plural>1</Plural>
 		</Spanish>
@@ -14195,7 +14195,7 @@
 			<Plural>0</Plural>
 		</Italian>
 		<Spanish>
-			<Text>Raposa de los pantanos I</Text>
+			<Text>Raposa de los pantanos II</Text>
 			<Gender>Female</Gender>
 			<Plural>0</Plural>
 		</Spanish>
@@ -14215,7 +14215,7 @@
 			<Plural>0</Plural>
 		</Italian>
 		<Spanish>
-			<Text>Raposa de los pantanos I</Text>
+			<Text>Raposa de los pantanos III</Text>
 			<Gender>Female</Gender>
 			<Plural>0</Plural>
 		</Spanish>
@@ -14775,7 +14775,7 @@
 			<Plural>0</Plural>
 		</Italian>
 		<Spanish>
-			<Text>Veterana I</Text>
+			<Text>Veterana III</Text>
 			<Gender>Female</Gender>
 			<Plural>0</Plural>
 		</Spanish>

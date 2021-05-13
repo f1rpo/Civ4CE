@@ -435,8 +435,17 @@ void CvUnit::convert(CvUnit* pUnit, bool bKill)
 	if (bKill)
 	{
 		ProfessionTypes eProfession = pUnit->getProfession();
+		CvCity* pCity = pUnit->getCity();
+		if (pCity != NULL)
+		{
+			pCity->AI_setWorkforceHack(true);
+		}
 		pUnit->setProfession(NO_PROFESSION);  // leave equipment behind
 		setProfession(eProfession, true);
+		if (pCity != NULL)
+		{
+			pCity->AI_setWorkforceHack(false);
+		}
 	}
 	setUnitTravelState(pUnit->getUnitTravelState(), false);
 	setUnitTravelTimer(pUnit->getUnitTravelTimer());
@@ -455,7 +464,7 @@ void CvUnit::convert(CvUnit* pUnit, bool bKill)
 	bool bAlive = true;
 	if (pTransportUnit != NULL)
 	{
-		pUnit->setTransportUnit(NULL);
+		pUnit->setTransportUnit(NULL, false);
 		bAlive = setTransportUnit(pTransportUnit);
 	}
 
@@ -2000,6 +2009,10 @@ void CvUnit::doCommand(CommandTypes eCommand, int iData1, int iData2)
 			break;
 
 		case COMMAND_SAIL_TO_EUROPE:
+			if (iData2 != NO_EUROPE)
+			{
+				setSailEurope((EuropeTypes) iData2);
+			}
 			crossOcean((UnitTravelStates) iData1);
 			break;
 
@@ -2330,15 +2343,6 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 				return false;
 			}
 		}
-		// PatchMod: Stop MoW's entering native settlements START
-		if (pPlot->isCity() && GET_PLAYER(pPlot->getOwnerINLINE()).isNative())
-		{
-			if (GET_PLAYER(getOwnerINLINE()).isEurope())
-			{
-                return false;
-			}
-		}
-		// PatchMod: Stop MoW's entering native settlements END
 		break;
 
 	case DOMAIN_LAND:
@@ -2867,7 +2871,7 @@ void CvUnit::gift(bool bTestTransport)
 	}
 
 	FAssertMsg(plot()->getOwnerINLINE() != NO_PLAYER, "plot()->getOwnerINLINE() is not expected to be equal with NO_PLAYER");
-	pGiftUnit = GET_PLAYER(plot()->getOwnerINLINE()).initUnit(getUnitType(), getProfession(), getX_INLINE(), getY_INLINE(), AI_getUnitAIType());
+	pGiftUnit = GET_PLAYER(plot()->getOwnerINLINE()).initUnit(getUnitType(), getProfession(), getX_INLINE(), getY_INLINE(), AI_getUnitAIType(), getFacingDirection(false), getYieldStored());
 
 	FAssertMsg(pGiftUnit != NULL, "GiftUnit is not assigned a valid value");
 
@@ -2925,16 +2929,10 @@ bool CvUnit::canLoadUnit(const CvUnit* pTransport, const CvPlot* pPlot, bool bCh
 		return false;
 	}
 
-	// PatchMod: Berth fix START
-	if (pTransport->cargoSpaceAvailable(getSpecialUnitType(), getDomainType()) < getUnitInfo().getBerthSize())
+	if (!(pTransport->cargoSpaceAvailable(getSpecialUnitType(), getDomainType())))
 	{
 		return false;
 	}
-//	if (!(pTransport->cargoSpaceAvailable(getSpecialUnitType(), getDomainType())))
-//	{
-//		return false;
-//	}
-	// PatchMod: Berth fix END
 
 	if (pTransport->cargoSpace() < getUnitInfo().getRequiredTransportSize())
 	{
@@ -3419,10 +3417,6 @@ void CvUnit::crossOcean(UnitTravelStates eNewState)
 		return;
 	}
 
-	// PatchMod: Stacked units screwy START
-	getGroup()->splitGroup(1, this);
-	// PatchMod: Stacked units screwy END
-
 	int iTravelTime = GC.getEuropeInfo(plot()->getEurope()).getTripLength();
 
 	iTravelTime *= GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getGrowthPercent();
@@ -3609,13 +3603,12 @@ void CvUnit::doUnloadYield(int iAmount)
 	{
 		pCity->changeYieldStored(eYield, pUnloadingUnit->getYieldStored());
 		pCity->AI_changeTradeBalance(eYield, iAmount);
-		int iValue = GC.getGameINLINE().getSorenRandNum(pCity->getMaxYieldCapacity(), "change desired yield");
-		// PatchMod: Change desired good fix START
-		if (iAmount > iValue && pCity->AI_getDesiredYield() == eYield)
-//		if (iAmount > iValue)
-		// PatchMod: Change desired good fix END
+		if (pCity->AI_getDesiredYield() == eYield)
 		{
-			pCity->AI_assignDesiredYield();
+			if (iAmount > GC.getGameINLINE().getSorenRandNum(pCity->getMaxYieldCapacity(), "change desired yield"))
+			{
+				pCity->AI_assignDesiredYield();
+			}
 		}
 		pUnloadingUnit->setYieldStored(0);
 	}
@@ -3720,10 +3713,6 @@ void CvUnit::learn()
 
 	CvCity* pCity = plot()->getPlotCity();
 	PlayerTypes eNativePlayer = pCity->getOwnerINLINE();
-
-	// PatchMod: Stacked units screwy START
-	getGroup()->splitGroup(1, this);
-	// PatchMod: Stacked units screwy END
 
 	if (isHuman() && !getGroup()->AI_isControlled() && !GET_PLAYER(eNativePlayer).isHuman())
 	{
@@ -3968,7 +3957,7 @@ bool CvUnit::canEstablishMission() const
 	}
 
 	CvPlayer& kCityOwner = GET_PLAYER(pCity->getOwnerINLINE());
-	if (!kCityOwner.canHaveMission(getCivilizationType()))
+	if (!kCityOwner.canHaveMission(getOwnerINLINE()))
 	{
 		return false;
 	}
@@ -3990,40 +3979,39 @@ void CvUnit::establishMission()
 
 	CvCity* pCity = plot()->getPlotCity();
 
-	// PatchMod: Mission failure START
-	int iSuccessPercent = GET_PLAYER(getOwnerINLINE()).getMissionFailurePercent() * (100 + (getUnitInfo().getMissionaryRateModifier() / 2)) / 100;
-	if (GC.getGameINLINE().getSorenRandNum(100, "Mission failure roll") > iSuccessPercent)
+	if (GC.getGameINLINE().getSorenRandNum(100, "Mission failure roll") > getMissionarySuccessPercent())
 	{
 		CvWString szBuffer = gDLL->getText("TXT_KEY_MISSION_FAILED", plot()->getPlotCity()->getNameKey());
 		gDLL->getInterfaceIFace()->addMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_MINOR_EVENT, GC.getCommandInfo(COMMAND_ESTABLISH_MISSION).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"), getX_INLINE(), getY_INLINE(), true, true);
-		GET_PLAYER(pCity->getOwnerINLINE()).AI_changeMemoryCount((getOwnerINLINE()), MEMORY_MISSION_FAIL, 1);
-		kill(true);
-		return;
+		GET_PLAYER(pCity->getOwnerINLINE()).AI_changeMemoryCount((getOwnerINLINE()), MEMORY_MISSIONARY_FAIL, 1);
 	}
-	GET_PLAYER(getOwnerINLINE()).setMissionFailurePercent(GET_PLAYER(getOwnerINLINE()).getMissionFailurePercent() * GC.getHandicapInfo(GC.getGameINLINE().getHandicapType()).getMissionFailureThresholdPercent() / 100);
-	// PatchMod: Mission failure END
-
-	int iMissionaryRate = GC.getProfessionInfo(getProfession()).getMissionaryRate() * (100 + getUnitInfo().getMissionaryRateModifier()) / 100;
-	if (!isHuman())
+	else
 	{
-		iMissionaryRate = (iMissionaryRate * 100 + 50) / GC.getHandicapInfo(GC.getGameINLINE().getHandicapType()).getAIGrowthPercent();
-	}
-	pCity->setMissionaryCivilization(GET_PLAYER(getOwnerINLINE()).getCivilizationType());
-	// PatchMod: Missionary player START
-	pCity->setMissionaryPlayer(getOwnerINLINE());
-	// PatchMod: Missionary player END
-	pCity->setMissionaryRate(iMissionaryRate);
+		GET_PLAYER(getOwnerINLINE()).setMissionarySuccessPercent(GET_PLAYER(getOwnerINLINE()).getMissionarySuccessPercent() * GC.getHandicapInfo(GC.getGameINLINE().getHandicapType()).getMissionFailureThresholdPercent() / 100);
+
+		int iMissionaryRate = GC.getProfessionInfo(getProfession()).getMissionaryRate() * (100 + getUnitInfo().getMissionaryRateModifier()) / 100;
+		if (!isHuman())
+		{
+			iMissionaryRate = (iMissionaryRate * 100 + 50) / GC.getHandicapInfo(GC.getGameINLINE().getHandicapType()).getAIGrowthPercent();
+		}
+		pCity->setMissionaryPlayer(getOwnerINLINE());
+		pCity->setMissionaryRate(iMissionaryRate);
 
 
-	for (int i = 0; i < GC.getNumFatherPointInfos(); ++i)
-	{
-		FatherPointTypes ePointType = (FatherPointTypes) i;
-		GET_PLAYER(getOwnerINLINE()).changeFatherPoints(ePointType, GC.getFatherPointInfo(ePointType).getMissionaryPoints());
+		for (int i = 0; i < GC.getNumFatherPointInfos(); ++i)
+		{
+			FatherPointTypes ePointType = (FatherPointTypes) i;
+			GET_PLAYER(getOwnerINLINE()).changeFatherPoints(ePointType, GC.getFatherPointInfo(ePointType).getMissionaryPoints());
+		}
 	}
 
 	kill(true);
 }
 
+int CvUnit::getMissionarySuccessPercent() const
+{
+	return GET_PLAYER(getOwnerINLINE()).getMissionarySuccessPercent() * (100 + (getUnitInfo().getMissionaryRateModifier() * GC.getDefineINT("MISSIONARY_RATE_EFFECT_ON_SUCCESS") / 100)) / 100;
+}
 
 bool CvUnit::canSpeakWithChief(CvPlot* pPlot) const
 {
@@ -4630,7 +4618,7 @@ bool CvUnit::found()
 	CvPlayer& kPlayer = GET_PLAYER(getOwnerINLINE());
 
 	PlayerTypes eParent = kPlayer.getParent();
-	if (eParent != NO_PLAYER && !kPlayer.isInRevolution() && !isAutomated())
+	if (eParent != NO_PLAYER && !GC.getEraInfo(kPlayer.getCurrentEra()).isRevolution() && !isAutomated())
 	{
 		int iFoodDifference = plot()->calculateNatureYield(YIELD_FOOD, getTeam(), true) - GC.getFOOD_CONSUMPTION_PER_POPULATION();
 		bool bInland = !plot()->isCoastalLand(GC.getDefineINT("MIN_WATER_SIZE_FOR_OCEAN"));
@@ -4793,7 +4781,7 @@ bool CvUnit::canJoinCity(const CvPlot* pPlot, bool bTestVisible) const
 		return false;
 	}
 
-	if (pCity->getTeam() != getTeam())
+	if (pCity->getOwnerINLINE() != getOwnerINLINE())
 	{
 		return false;
 	}
@@ -4823,30 +4811,22 @@ bool CvUnit::canJoinCity(const CvPlot* pPlot, bool bTestVisible) const
 			}
 		}
 
-		// PatchMod: Move-do START
-		if (GC.getProfessionInfo(getProfession()).isUnarmed() || GC.getProfessionInfo(getProfession()).isCitizen()) {
-			if (movesLeft() <= 0)
+		ProfessionTypes eProfession = getProfession();
+		if (eProfession == NO_PROFESSION || GC.getProfessionInfo(eProfession).isUnarmed() || GC.getProfessionInfo(eProfession).isCitizen()) 
+		{
+			if (movesLeft() == 0)
 			{
 				return false;
 			}
-		} else {
+		} 
+		else 
+		{
 			if (hasMoved())
 			{
 				return false;
 			}
 		}
-		// PatchMod: Move-do END
 	}
-
-	// PatchMod: AI defending city START
-	if (!isHuman())
-	{
-		if (canAttack() && pCity->AI_neededDefenders() > pPlot->getNumDefenders(getOwnerINLINE()))
-		{
-			return false;
-		}
-	}
-	// PatchMod: AI defending city END
 
 	return true;
 }
@@ -7036,8 +7016,10 @@ int CvUnit::getUnitAICargo(UnitAITypes eUnitAI) const
 	return iCount;
 }
 
-bool CvUnit::canAssignTradeRoute(int iRouteID) const
+bool CvUnit::canAssignTradeRoute(int iRouteID, bool bReusePath) const
 {
+	PROFILE_FUNC();
+
 	if (cargoSpace() < 1 || GET_PLAYER(getOwnerINLINE()).getNumTradeRoutes() < 1)
 	{
 		return false;
@@ -7097,13 +7079,13 @@ bool CvUnit::canAssignTradeRoute(int iRouteID) const
 	}
 
 	CvCity* pSource = ::getCity(pTradeRoute->getSourceCity());
-	if (pSource == NULL || !generatePath(pSource->plot()))
+	if (pSource == NULL || !generatePath(pSource->plot(), 0, bReusePath))
 	{
 		return false;
 	}
 
 	CvCity* pDestination = ::getCity(pTradeRoute->getDestinationCity());
-	if (pDestination != NULL && !generatePath(pDestination->plot()))
+	if (pDestination != NULL && !generatePath(pDestination->plot(), 0, bReusePath))
 	{
 		return false;
 	}
@@ -7755,10 +7737,7 @@ void CvUnit::setXY(int iX, int iY, bool bGroup, bool bUpdate, bool bShow, bool b
 			for (int i = 0; i < GC.getNumFatherPointInfos(); ++i)
 			{
 				FatherPointTypes ePointType = (FatherPointTypes) i;
-				// PatchMod: Fix gamespeed exploring father points START
-				GET_PLAYER(getOwnerINLINE()).changeFatherPoints(ePointType, (GC.getFatherPointInfo(ePointType).getGoodyPoints() * GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getFatherPercent() / 100));
-//				GET_PLAYER(getOwnerINLINE()).changeFatherPoints(ePointType, GC.getFatherPointInfo(ePointType).getGoodyPoints());
-				// PatchMod: Fix gamespeed exploring father points END
+				GET_PLAYER(getOwnerINLINE()).changeFatherPoints(ePointType, GC.getFatherPointInfo(ePointType).getGoodyPoints() * GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getFatherPercent() / 100);
 			}
 
 			GET_PLAYER(getOwnerINLINE()).doGoody(pNewPlot, this);
@@ -7799,6 +7778,15 @@ CvPlot* CvUnit::plot() const
 	}
 }
 
+CvCity* CvUnit::getCity() const
+{
+	CvPlot* pPlot = plot();
+	if (pPlot != NULL)
+	{
+		return pPlot->getPlotCity();
+	}
+	return NULL;
+}
 
 int CvUnit::getArea() const
 {
@@ -8737,20 +8725,14 @@ bool CvUnit::canHaveProfession(ProfessionTypes eProfession, bool bBumpOther, con
 					}
 				}
 			}
-		}
 
-		if (!kNewProfession.isCitizen())
-		{
-			// PatchMod: Move-do START
-			if (movesLeft() <= 0)
+			if (!kNewProfession.isCitizen())
 			{
-				return false;
+				if (movesLeft() == 0)
+				{
+					return false;
+				}
 			}
-//			if (hasMoved())
-//			{
-//				return false;
-//			}
-			// PatchMod: Move-do END
 		}
 	}
 
@@ -9312,17 +9294,10 @@ bool CvUnit::isCargo() const
 }
 
 // returns false if the unit is killed
-bool CvUnit::setTransportUnit(CvUnit* pTransportUnit)
+bool CvUnit::setTransportUnit(CvUnit* pTransportUnit, bool bUnload)
 {
 	CvUnit* pOldTransportUnit = getTransportUnit();
 
-	// PatchMod: Berth Size START
-    int iCargoSize = getUnitInfo().getBerthSize();
-	if (iCargoSize < 1 || iCargoSize > getUnitInfo().getRequiredTransportSize())
-	{
-		iCargoSize = getUnitInfo().getRequiredTransportSize();
-	}
-    // PatchMod: Berth Size END
 	if (pOldTransportUnit != pTransportUnit)
 	{
 		if (getOwnerINLINE() == GC.getGameINLINE().getActivePlayer())
@@ -9334,10 +9309,7 @@ bool CvUnit::setTransportUnit(CvUnit* pTransportUnit)
 		
 		if (pOldTransportUnit != NULL)
 		{
-			// PatchMod: Berth Size START
-		    pOldTransportUnit->changeCargo(-iCargoSize);
-			//pOldTransportUnit->changeCargo(-1);
-			// PatchMod: Berth Size END
+			pOldTransportUnit->changeCargo(-1);
 		}
 		m_transportUnit.reset();
 
@@ -9401,10 +9373,7 @@ bool CvUnit::setTransportUnit(CvUnit* pTransportUnit)
 				setXY(pTransportUnit->getX_INLINE(), pTransportUnit->getY_INLINE());
 			}
 
-			// PatchMod: Berth Size START
-            pTransportUnit->changeCargo(iCargoSize);
-			//pTransportUnit->changeCargo(1);
-			// PatchMod: Berth Size END
+			pTransportUnit->changeCargo(1);
 			pTransportUnit->getGroup()->setActivityType(ACTIVITY_AWAKE);
 		}
 		else //dropped off of vehicle
@@ -9425,7 +9394,7 @@ bool CvUnit::setTransportUnit(CvUnit* pTransportUnit)
 			}
 
 			//place yields into city
-			if (getYield() != NO_YIELD)
+			if (bUnload && getYield() != NO_YIELD)
 			{
 				doUnloadYield(getYieldStored());
 			}
@@ -10807,7 +10776,7 @@ void CvUnit::setYieldStored(int iYieldAmount)
 				CvCity* pCity = kPlayer.getPopulationUnitCity(getID());
 				if (pCity != NULL)
 				{
-					if (getYieldStored() >= kPlayer.educationThreshold())
+					if (getYieldStored() >= pCity->educationThreshold())
 					{
 						if (isHuman())
 						{
@@ -10944,7 +10913,7 @@ UnitTravelStates CvUnit::getUnitTravelState() const
 void CvUnit::setUnitTravelState(UnitTravelStates eState, bool bShowEuropeScreen)
 {
 	if (getUnitTravelState() != eState)
-	{
+	{		
 		CvPlot* pPlot = plot();
 		if (pPlot != NULL)
 		{
@@ -10992,6 +10961,11 @@ void CvUnit::setUnitTravelState(UnitTravelStates eState, bool bShowEuropeScreen)
 					}
 				}
 			}
+		}
+
+		if (getGroup() != NULL)
+		{
+			getGroup()->splitGroup(1, this);
 		}
 
 		if (!isOnMap())
@@ -11052,6 +11026,85 @@ void CvUnit::setUnitTravelState(UnitTravelStates eState, bool bShowEuropeScreen)
 	}
 }
 
+bool CvUnit::setSailEurope(EuropeTypes eEurope)
+{
+	CvPlot* pBestPlot = NULL;
+
+	if (eEurope == NO_EUROPE)
+	{
+		return true;
+	}
+
+	if (plot()->getEurope() == eEurope)
+	{
+		return true;
+	}
+
+	CvPlayerAI& kLoopPlayer = GET_PLAYER(getOwnerINLINE());
+	for (int iI = 0; iI < GC.getMapINLINE().numPlotsINLINE(); iI++)
+	{
+		CvPlot* pPlot = GC.getMapINLINE().plotByIndexINLINE(iI);
+		int iAvgDistance = 0;
+		int iBestDistance = 100000;
+		if (pPlot->getEurope() == eEurope)
+		{
+			if (pPlot->isRevealed(getTeam(), false))
+			{
+				if (kLoopPlayer.getNumCities() > 0)
+				{
+					int iLoop;
+					for (CvCity* pLoopCity = kLoopPlayer.firstCity(&iLoop); pLoopCity != NULL; pLoopCity = kLoopPlayer.nextCity(&iLoop))
+					{
+						iAvgDistance += stepDistance(pPlot->getX_INLINE(), pPlot->getY_INLINE(), pLoopCity->getX_INLINE(), pLoopCity->getY_INLINE());
+					}
+				} 
+				else 
+				{
+					iAvgDistance += stepDistance(pPlot->getX_INLINE(), pPlot->getY_INLINE(), kLoopPlayer.getStartingPlot()->getX_INLINE(), kLoopPlayer.getStartingPlot()->getY_INLINE());
+				}
+
+				if (iAvgDistance > 0 && iAvgDistance < iBestDistance)
+				{
+					iBestDistance = iAvgDistance;
+					pBestPlot = pPlot;
+				}
+			}
+		}
+	}
+	if (pBestPlot != NULL)
+	{
+		setXY(pBestPlot->getX_INLINE(), pBestPlot->getY_INLINE());
+		return true;
+	}
+	return false;
+}
+
+bool CvUnit::canSailEurope(EuropeTypes eEurope)
+{
+	if (eEurope == NO_EUROPE)
+	{
+		return true;
+	}
+
+	if (plot()->getEurope() == eEurope)
+	{
+		return true;
+	}
+
+	for (int iI = 0; iI < GC.getMapINLINE().numPlotsINLINE(); iI++)
+	{
+		CvPlot* pPlot = GC.getMapINLINE().plotByIndexINLINE(iI);
+		if (pPlot->isRevealed(getTeam(), false))
+		{
+			if (pPlot->getEurope() == eEurope)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 void CvUnit::setHomeCity(CvCity* pNewValue)
 {
 	if (pNewValue == NULL)
@@ -11075,7 +11128,7 @@ void CvUnit::setHomeCity(CvCity* pNewValue)
 
 CvCity* CvUnit::getHomeCity() const
 {
-	return getCity(m_homeCity);
+	return ::getCity(m_homeCity);
 }
 
 bool CvUnit::isOnMap() const
@@ -11368,151 +11421,3 @@ bool CvUnit::raidGoods(CvCity* pCity)
 	return true;
 }
 
-// PatchMod: Sail to West START
-bool CvUnit::canSailEast()
-{
-	CvPlot* pPlot;
-	if (getX_INLINE() > (GC.getMapINLINE().getGridWidthINLINE() / 2))
-	{
-		return true;
-	}
-	for (int iI = 0; iI < GC.getMapINLINE().numPlotsINLINE(); iI++)
-	{
-		pPlot = GC.getMapINLINE().plotByIndexINLINE(iI);
-		if (pPlot->isRevealed(getTeam(), false))
-		{
-			if (pPlot->getX_INLINE() > (GC.getMapINLINE().getGridWidthINLINE() / 2))
-			{
-				if (pPlot->isEurope())
-				{
-                    return true;
-				}
-			}
-		}
-	}
-	return false;
-}
-
-bool CvUnit::setSailEast()
-{
-	CvPlot* pPlot;
-	CvPlot* pBestPlot = NULL;
-	CvCity* pLoopCity;
-	int iAvgDistance = 0;
-	int iBestDistance = 100000;
-	int iLoop;
-	if (getX_INLINE() > (GC.getMapINLINE().getGridWidthINLINE() / 2))
-	{
-		return true;
-	}
-	CvPlayerAI& kLoopPlayer = GET_PLAYER(getOwnerINLINE());
-	for (int iI = 0; iI < GC.getMapINLINE().numPlotsINLINE(); iI++)
-	{
-		pPlot = GC.getMapINLINE().plotByIndexINLINE(iI);
-		iAvgDistance = 0;
-		if (pPlot->getX_INLINE() > (GC.getMapINLINE().getGridWidthINLINE() / 2))
-		{
-			if (pPlot->isRevealed(getTeam(), false))
-			{
-				if (pPlot->isEurope())
-				{
-					if (kLoopPlayer.getNumCities() > 0)
-					{
-						for (pLoopCity = kLoopPlayer.firstCity(&iLoop); pLoopCity != NULL; pLoopCity = kLoopPlayer.nextCity(&iLoop))
-						{
-							iAvgDistance += stepDistance(pPlot->getX_INLINE(), pPlot->getY_INLINE(), pLoopCity->getX_INLINE(), pLoopCity->getY_INLINE());
-						}
-					} else {
-						iAvgDistance += stepDistance(pPlot->getX_INLINE(), pPlot->getY_INLINE(), kLoopPlayer.getStartingPlot()->getX_INLINE(), kLoopPlayer.getStartingPlot()->getY_INLINE());
-					}
-					if (iAvgDistance > 0 && iAvgDistance < iBestDistance)
-					{
-						iBestDistance = iAvgDistance;
-						pBestPlot = pPlot;
-					}
-				}
-			}
-		}
-	}
-	if (pBestPlot != NULL)
-	{
-		setXY(pBestPlot->getX_INLINE(), pBestPlot->getY_INLINE());
-		return true;
-	}
-	return false;
-}
-
-bool CvUnit::canSailWest()
-{
-	CvPlot* pPlot;
-	if (getX_INLINE() < (GC.getMapINLINE().getGridWidthINLINE() / 2))
-	{
-		return true;
-	}
-	for (int iI = 0; iI < GC.getMapINLINE().numPlotsINLINE(); iI++)
-	{
-		pPlot = GC.getMapINLINE().plotByIndexINLINE(iI);
-		if (pPlot->isRevealed(getTeam(), false))
-		{
-			if (pPlot->getX_INLINE() < (GC.getMapINLINE().getGridWidthINLINE() / 2))
-			{
-				if (pPlot->isEurope())
-				{
-                    return true;
-				}
-			}
-		}
-	}
-	return false;
-}
-
-bool CvUnit::setSailWest()
-{
-	CvPlot* pPlot;
-	CvPlot* pBestPlot = NULL;
-	CvCity* pLoopCity;
-	int iAvgDistance = 0;
-	int iBestDistance = 100000;
-	int iLoop;
-	if (getX_INLINE() < (GC.getMapINLINE().getGridWidthINLINE() / 2))
-	{
-//		gDLL->getInterfaceIFace()->addMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), "Got here - west", "AS2D_UNITCAPTURE", MESSAGE_TYPE_INFO, getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), getX_INLINE(), getY_INLINE());
-		return true;
-	}
-	CvPlayerAI& kLoopPlayer = GET_PLAYER(getOwnerINLINE());
-	for (int iI = 0; iI < GC.getMapINLINE().numPlotsINLINE(); iI++)
-	{
-		pPlot = GC.getMapINLINE().plotByIndexINLINE(iI);
-		iAvgDistance = 0;
-		if (pPlot->getX_INLINE() < (GC.getMapINLINE().getGridWidthINLINE() / 2))
-		{
-			if (pPlot->isRevealed(getTeam(), false))
-			{
-				if (pPlot->isEurope())
-				{
-					if (kLoopPlayer.getNumCities() > 0)
-					{
-						for (pLoopCity = kLoopPlayer.firstCity(&iLoop); pLoopCity != NULL; pLoopCity = kLoopPlayer.nextCity(&iLoop))
-						{
-							iAvgDistance += stepDistance(pPlot->getX_INLINE(), pPlot->getY_INLINE(), pLoopCity->getX_INLINE(), pLoopCity->getY_INLINE());
-						}
-					} else {
-						iAvgDistance += stepDistance(pPlot->getX_INLINE(), pPlot->getY_INLINE(), kLoopPlayer.getStartingPlot()->getX_INLINE(), kLoopPlayer.getStartingPlot()->getY_INLINE());
-					}
-					if (iAvgDistance > 0 && iAvgDistance < iBestDistance)
-					{
-						iBestDistance = iAvgDistance;
-						pBestPlot = pPlot;
-					}
-				}
-			}
-		}
-	}
-	if (pBestPlot != NULL)
-	{
-		setXY(pBestPlot->getX_INLINE(), pBestPlot->getY_INLINE());
-		return true;
-	}
-	return false;
-}
-// PatchMod: Sail to West END

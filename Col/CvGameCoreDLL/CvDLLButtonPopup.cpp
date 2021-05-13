@@ -2562,7 +2562,7 @@ bool CvDLLButtonPopup::launchTradeRoutesPopup(CvPopup* pPopup, CvPopupInfo &info
 	for (uint i = 0; i < aiRoutes.size(); ++i)
 	{
 		CvTradeRoute* pTradeRoute = aiRoutes[i];
-		if (pGroup->canAssignTradeRoute(pTradeRoute->getID()))
+		if (pGroup->canAssignTradeRoute(pTradeRoute->getID(), i != 0))
 		{
 			CvWString szText = gDLL->getText("TXT_KEY_TRADE_ROUTE_DESCRIPTION", GC.getYieldInfo(pTradeRoute->getYield()).getTextKeyWide(), pTradeRoute->getSourceCityNameKey(), pTradeRoute->getDestinationCityNameKey());
 			aTradeRoutes.push_back(std::make_pair(pTradeRoute->getID(), szText));
@@ -2784,10 +2784,9 @@ bool CvDLLButtonPopup::launchTalkNativesPopup(CvPopup* pPopup, CvPopupInfo& info
 	if (pUnit->canEstablishMission())
 	{
 		++iNumActions;
-		// PatchMod: Mission failure START
-		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_TALK_NATIVES_POPUP_MISSION2", GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getMissionFailurePercent()), NULL, COMMAND_ESTABLISH_MISSION);
-//		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_TALK_NATIVES_POPUP_MISSION"), NULL, COMMAND_ESTABLISH_MISSION);
-		// PatchMod: Mission failure END
+		CvWString szText = gDLL->getText("TXT_KEY_TALK_NATIVES_POPUP_MISSION");
+		szText += L" (" + gDLL->getText("TXT_KEY_TALK_NATIVES_POPUP_MISSION2", std::min(100, pUnit->getMissionarySuccessPercent())) + L")";
+		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szText, NULL, COMMAND_ESTABLISH_MISSION);
 	}
 
 	if (pUnit->canTradeYield(pUnit->plot()))

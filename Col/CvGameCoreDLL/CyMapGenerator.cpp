@@ -89,6 +89,12 @@ void CyMapGenerator::addGoodies()
 		m_pMapGenerator->addGoodies();
 }
 
+void CyMapGenerator::addEurope()
+{
+	if (m_pMapGenerator)
+		m_pMapGenerator->addEurope();
+}
+
 void CyMapGenerator::eraseRivers()
 {
 	if (m_pMapGenerator)
@@ -111,6 +117,12 @@ void CyMapGenerator::eraseGoodies()
 {
 	if (m_pMapGenerator)
 		m_pMapGenerator->eraseGoodies();
+}
+
+void CyMapGenerator::eraseEurope()
+{
+	if (m_pMapGenerator)
+		m_pMapGenerator->eraseEurope();
 }
 
 void CyMapGenerator::generateRandomMap()
@@ -150,16 +162,3 @@ void CyMapGenerator::setPlotTypes(boost::python::list& listPlotTypes)
 	delete [] paiPlotTypes;
 }
 
-// PatchMod: Randomise stuff on map START
-void CyMapGenerator::addEurope()
-{
-	if (m_pMapGenerator)
-		m_pMapGenerator->addEurope();
-}
-
-void CyMapGenerator::eraseEurope()
-{
-	if (m_pMapGenerator)
-		m_pMapGenerator->eraseEurope();
-}
-// PatchMod: Randomise stuff on map END

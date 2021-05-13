@@ -19,10 +19,6 @@ public:
 	DllExport CvMapGenerator();
 	DllExport virtual ~CvMapGenerator();
 
-	// PatchMod: Randomise stuff on map START
-	DllExport void eraseEurope();
-	// PatchMod: Randomise stuff on map END
-
 	bool canPlaceBonusAt(BonusTypes eBonus, int iX, int iY, bool bIgnoreLatitude);
 	bool canPlaceGoodyAt(ImprovementTypes eImprovement, int iX, int iY);
 
@@ -44,6 +40,7 @@ public:
 	DllExport void eraseFeatures();
 	DllExport void eraseBonuses();
 	DllExport void eraseGoodies();
+	DllExport void eraseEurope();
 
 	DllExport void generateRandomMap();
 

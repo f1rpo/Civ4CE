@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Ed Piper (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by EXTREME (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -14,8 +14,8 @@
 			<iBuyPriceLow>0</iBuyPriceLow>
 			<iBuyPriceHigh>2</iBuyPriceHigh>
 			<iSellPriceDifference>8</iSellPriceDifference>
-			<iPriceChangeThreshold>1000</iPriceChangeThreshold>
-			<iPriceCorrectionPercent>1</iPriceCorrectionPercent>
+			<iPriceChangeThreshold>800</iPriceChangeThreshold>
+			<iPriceCorrectionPercent>2</iPriceCorrectionPercent>
 			<iNativeBuyPrice>-1</iNativeBuyPrice>
 			<iNativeSellPrice>7</iNativeSellPrice>
 			<iNativeConsumptionPercent>-1</iNativeConsumptionPercent>
@@ -46,8 +46,8 @@
 			<iBuyPriceLow>0</iBuyPriceLow>
 			<iBuyPriceHigh>1</iBuyPriceHigh>
 			<iSellPriceDifference>3</iSellPriceDifference>
-			<iPriceChangeThreshold>1000</iPriceChangeThreshold>
-			<iPriceCorrectionPercent>1</iPriceCorrectionPercent>
+			<iPriceChangeThreshold>800</iPriceChangeThreshold>
+			<iPriceCorrectionPercent>2</iPriceCorrectionPercent>
 			<iNativeBuyPrice>-1</iNativeBuyPrice>
 			<iNativeSellPrice>5</iNativeSellPrice>
 			<iNativeConsumptionPercent>40</iNativeConsumptionPercent>
@@ -79,7 +79,7 @@
 			<iBuyPriceHigh>19</iBuyPriceHigh>
 			<iSellPriceDifference>1</iSellPriceDifference>
 			<iPriceChangeThreshold>100</iPriceChangeThreshold>
-			<iPriceCorrectionPercent>5</iPriceCorrectionPercent>
+			<iPriceCorrectionPercent>10</iPriceCorrectionPercent>
 			<iNativeBuyPrice>-1</iNativeBuyPrice>
 			<iNativeSellPrice>6</iNativeSellPrice>
 			<iNativeConsumptionPercent>25</iNativeConsumptionPercent>
@@ -110,8 +110,8 @@
 			<iBuyPriceLow>3</iBuyPriceLow>
 			<iBuyPriceHigh>5</iBuyPriceHigh>
 			<iSellPriceDifference>2</iSellPriceDifference>
-			<iPriceChangeThreshold>1000</iPriceChangeThreshold>
-			<iPriceCorrectionPercent>1</iPriceCorrectionPercent>
+			<iPriceChangeThreshold>800</iPriceChangeThreshold>
+			<iPriceCorrectionPercent>2</iPriceCorrectionPercent>
 			<iNativeBuyPrice>-1</iNativeBuyPrice>
 			<iNativeSellPrice>5</iNativeSellPrice>
 			<iNativeConsumptionPercent>50</iNativeConsumptionPercent>
@@ -142,8 +142,8 @@
 			<iBuyPriceLow>4</iBuyPriceLow>
 			<iBuyPriceHigh>6</iBuyPriceHigh>
 			<iSellPriceDifference>2</iSellPriceDifference>
-			<iPriceChangeThreshold>1000</iPriceChangeThreshold>
-			<iPriceCorrectionPercent>1</iPriceCorrectionPercent>
+			<iPriceChangeThreshold>800</iPriceChangeThreshold>
+			<iPriceCorrectionPercent>2</iPriceCorrectionPercent>
 			<iNativeBuyPrice>-1</iNativeBuyPrice>
 			<iNativeSellPrice>6</iNativeSellPrice>
 			<iNativeConsumptionPercent>50</iNativeConsumptionPercent>
@@ -174,8 +174,8 @@
 			<iBuyPriceLow>4</iBuyPriceLow>
 			<iBuyPriceHigh>6</iBuyPriceHigh>
 			<iSellPriceDifference>2</iSellPriceDifference>
-			<iPriceChangeThreshold>1000</iPriceChangeThreshold>
-			<iPriceCorrectionPercent>1</iPriceCorrectionPercent>
+			<iPriceChangeThreshold>800</iPriceChangeThreshold>
+			<iPriceCorrectionPercent>2</iPriceCorrectionPercent>
 			<iNativeBuyPrice>-1</iNativeBuyPrice>
 			<iNativeSellPrice>6</iNativeSellPrice>
 			<iNativeConsumptionPercent>40</iNativeConsumptionPercent>
@@ -206,8 +206,8 @@
 			<iBuyPriceLow>3</iBuyPriceLow>
 			<iBuyPriceHigh>5</iBuyPriceHigh>
 			<iSellPriceDifference>2</iSellPriceDifference>
-			<iPriceChangeThreshold>1000</iPriceChangeThreshold>
-			<iPriceCorrectionPercent>1</iPriceCorrectionPercent>
+			<iPriceChangeThreshold>800</iPriceChangeThreshold>
+			<iPriceCorrectionPercent>2</iPriceCorrectionPercent>
 			<iNativeBuyPrice>-1</iNativeBuyPrice>
 			<iNativeSellPrice>7</iNativeSellPrice>
 			<iNativeConsumptionPercent>60</iNativeConsumptionPercent>
@@ -238,8 +238,8 @@
 			<iBuyPriceLow>2</iBuyPriceLow>
 			<iBuyPriceHigh>4</iBuyPriceHigh>
 			<iSellPriceDifference>3</iSellPriceDifference>
-			<iPriceChangeThreshold>1000</iPriceChangeThreshold>
-			<iPriceCorrectionPercent>1</iPriceCorrectionPercent>
+			<iPriceChangeThreshold>800</iPriceChangeThreshold>
+			<iPriceCorrectionPercent>2</iPriceCorrectionPercent>
 			<iNativeBuyPrice>-1</iNativeBuyPrice>
 			<iNativeSellPrice>5</iNativeSellPrice>
 			<iNativeConsumptionPercent>25</iNativeConsumptionPercent>
@@ -270,8 +270,8 @@
 			<iBuyPriceLow>8</iBuyPriceLow>
 			<iBuyPriceHigh>12</iBuyPriceHigh>
 			<iSellPriceDifference>1</iSellPriceDifference>
-			<iPriceChangeThreshold>1500</iPriceChangeThreshold>
-			<iPriceCorrectionPercent>1</iPriceCorrectionPercent>
+			<iPriceChangeThreshold>800</iPriceChangeThreshold>
+			<iPriceCorrectionPercent>2</iPriceCorrectionPercent>
 			<iNativeBuyPrice>9</iNativeBuyPrice>
 			<iNativeSellPrice>-1</iNativeSellPrice>
 			<iNativeConsumptionPercent>50</iNativeConsumptionPercent>
@@ -302,8 +302,8 @@
 			<iBuyPriceLow>8</iBuyPriceLow>
 			<iBuyPriceHigh>12</iBuyPriceHigh>
 			<iSellPriceDifference>1</iSellPriceDifference>
-			<iPriceChangeThreshold>1500</iPriceChangeThreshold>
-			<iPriceCorrectionPercent>1</iPriceCorrectionPercent>
+			<iPriceChangeThreshold>800</iPriceChangeThreshold>
+			<iPriceCorrectionPercent>2</iPriceCorrectionPercent>
 			<iNativeBuyPrice>7</iNativeBuyPrice>
 			<iNativeSellPrice>-1</iNativeSellPrice>
 			<iNativeConsumptionPercent>50</iNativeConsumptionPercent>
@@ -334,8 +334,8 @@
 			<iBuyPriceLow>8</iBuyPriceLow>
 			<iBuyPriceHigh>12</iBuyPriceHigh>
 			<iSellPriceDifference>1</iSellPriceDifference>
-			<iPriceChangeThreshold>1500</iPriceChangeThreshold>
-			<iPriceCorrectionPercent>1</iPriceCorrectionPercent>
+			<iPriceChangeThreshold>800</iPriceChangeThreshold>
+			<iPriceCorrectionPercent>2</iPriceCorrectionPercent>
 			<iNativeBuyPrice>10</iNativeBuyPrice>
 			<iNativeSellPrice>-1</iNativeSellPrice>
 			<iNativeConsumptionPercent>50</iNativeConsumptionPercent>
@@ -366,8 +366,8 @@
 			<iBuyPriceLow>8</iBuyPriceLow>
 			<iBuyPriceHigh>12</iBuyPriceHigh>
 			<iSellPriceDifference>1</iSellPriceDifference>
-			<iPriceChangeThreshold>1500</iPriceChangeThreshold>
-			<iPriceCorrectionPercent>1</iPriceCorrectionPercent>
+			<iPriceChangeThreshold>800</iPriceChangeThreshold>
+			<iPriceCorrectionPercent>2</iPriceCorrectionPercent>
 			<iNativeBuyPrice>9</iNativeBuyPrice>
 			<iNativeSellPrice>-1</iNativeSellPrice>
 			<iNativeConsumptionPercent>25</iNativeConsumptionPercent>
@@ -398,8 +398,8 @@
 			<iBuyPriceLow>1</iBuyPriceLow>
 			<iBuyPriceHigh>2</iBuyPriceHigh>
 			<iSellPriceDifference>1</iSellPriceDifference>
-			<iPriceChangeThreshold>600</iPriceChangeThreshold>
-			<iPriceCorrectionPercent>1</iPriceCorrectionPercent>
+			<iPriceChangeThreshold>500</iPriceChangeThreshold>
+			<iPriceCorrectionPercent>2</iPriceCorrectionPercent>
 			<iNativeBuyPrice>7</iNativeBuyPrice>
 			<iNativeSellPrice>-1</iNativeSellPrice>
 			<iNativeConsumptionPercent>20</iNativeConsumptionPercent>
@@ -430,8 +430,8 @@
 			<iBuyPriceLow>3</iBuyPriceLow>
 			<iBuyPriceHigh>5</iBuyPriceHigh>
 			<iSellPriceDifference>3</iSellPriceDifference>
-			<iPriceChangeThreshold>600</iPriceChangeThreshold>
-			<iPriceCorrectionPercent>1</iPriceCorrectionPercent>
+			<iPriceChangeThreshold>500</iPriceChangeThreshold>
+			<iPriceCorrectionPercent>2</iPriceCorrectionPercent>
 			<iNativeBuyPrice>17</iNativeBuyPrice>
 			<iNativeSellPrice>-1</iNativeSellPrice>
 			<iNativeConsumptionPercent>100</iNativeConsumptionPercent>
@@ -462,8 +462,8 @@
 			<iBuyPriceLow>4</iBuyPriceLow>
 			<iBuyPriceHigh>6</iBuyPriceHigh>
 			<iSellPriceDifference>2</iSellPriceDifference>
-			<iPriceChangeThreshold>600</iPriceChangeThreshold>
-			<iPriceCorrectionPercent>1</iPriceCorrectionPercent>
+			<iPriceChangeThreshold>500</iPriceChangeThreshold>
+			<iPriceCorrectionPercent>2</iPriceCorrectionPercent>
 			<iNativeBuyPrice>10</iNativeBuyPrice>
 			<iNativeSellPrice>-1</iNativeSellPrice>
 			<iNativeConsumptionPercent>100</iNativeConsumptionPercent>
@@ -494,8 +494,8 @@
 			<iBuyPriceLow>1</iBuyPriceLow>
 			<iBuyPriceHigh>2</iBuyPriceHigh>
 			<iSellPriceDifference>1</iSellPriceDifference>
-			<iPriceChangeThreshold>600</iPriceChangeThreshold>
-			<iPriceCorrectionPercent>1</iPriceCorrectionPercent>
+			<iPriceChangeThreshold>500</iPriceChangeThreshold>
+			<iPriceCorrectionPercent>2</iPriceCorrectionPercent>
 			<iNativeBuyPrice>5</iNativeBuyPrice>
 			<iNativeSellPrice>-1</iNativeSellPrice>
 			<iNativeConsumptionPercent>40</iNativeConsumptionPercent>

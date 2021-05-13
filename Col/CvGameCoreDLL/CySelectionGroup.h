@@ -77,7 +77,7 @@ public:
 	bool generatePath(CyPlot* pFromPlot, CyPlot* pToPlot, int iFlags, bool bReuse, int* piPathTurns);
 	void resetPath();
 	bool isAssignedTradeRoute(int iRouteID) const;
-	bool canAssignTradeRoute(int iRouteID) const;
+	bool canAssignTradeRoute(int iRouteID, bool bReusePath) const;
 	int getNumUnits();
 	void clearMissionQueue();
 	int getLengthMissionQueue();

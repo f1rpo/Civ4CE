@@ -23,9 +23,7 @@ class CvEuropeScreen:
 		self.BUY_UNIT_BUTTON_ID = 5
 		self.DOCK_BUTTON_ID = 6
 		self.SAIL_TO_NEW_WORLD = 7
-# PatchMod: Sail to West START
 		self.SAIL_TO_NEW_WORLD_WEST = 12
-# PatchMod: Sale to West END
 		self.SELL_ALL = 8
 		self.LOAD_ALL = 9
 		self.HELP_CROSS_RATE = 10
@@ -81,6 +79,9 @@ class CvEuropeScreen:
 		self.Y_BOUND = self.Y_UPPER_EDGE + (self.PANE_HEIGHT / 2)
 		self.Y_DOCKS_OFFSET = 50
 		self.H_DOCK = (self.PANE_HEIGHT - (self.H_TEXT_MARGIN * 2)) * 35 / 100
+		
+		self.EUROPE_EAST = CvUtil.findInfoTypeNum('EUROPE_EAST')
+		self.EUROPE_WEST = CvUtil.findInfoTypeNum('EUROPE_WEST')
 
 		# Set the background and exit button, and show the screen
 		screen.setDimensions(0, 0, self.XResolution, self.YResolution)
@@ -214,13 +215,11 @@ class CvEuropeScreen:
 				screen.setImageButtonAt(self.getNextWidgetName(), "LoadingList", gc.getActionInfo(gc.getInfoTypeForString("COMMAND_LOAD")).getButton(), ShipPanelWidth - (self.CARGO_ICON_SIZE * 2 / 2), yLocation_InPort + self.SHIP_ICON_SIZE - (self.CARGO_ICON_SIZE * 3 / 8), self.CARGO_ICON_SIZE * 3 / 2, self.CARGO_ICON_SIZE * 3 / 2, WidgetTypes.WIDGET_GENERAL, self.LOAD_ALL, unit.getID())
 
 			screen.addDragableButtonAt("LoadingList", self.getNextWidgetName(), unit.getFullLengthIcon(), "", 0, yLocation_InPort, self.SHIP_ICON_SIZE * 2, self.SHIP_ICON_SIZE * 2, WidgetTypes.WIDGET_SHIP_CARGO, unit.getID(), -1, ButtonStyles.BUTTON_STYLE_LABEL)
-# PatchMod: Sail to West START
 #			screen.setImageButtonAt(self.getNextWidgetName(), "LoadingList", ArtFileMgr.getInterfaceArtInfo("INTERFACE_EUROPE_SAIL").getPath(), - (self.CARGO_ICON_SIZE / 3) + 4, yLocation_InPort + (self.SHIP_ICON_SIZE * 2) - (self.CARGO_ICON_SIZE * 3 / 4), self.CARGO_ICON_SIZE * 3 / 2, self.CARGO_ICON_SIZE * 3 / 2, WidgetTypes.WIDGET_GENERAL, self.SAIL_TO_NEW_WORLD, unit.getID())
-			if (unit.canSailEast()):
+			if (unit.canSailEurope(self.EUROPE_EAST)):
 				screen.setImageButtonAt(self.getNextWidgetName(), "LoadingList", ArtFileMgr.getInterfaceArtInfo("INTERFACE_EUROPE_SAIL").getPath(), - (self.CARGO_ICON_SIZE / 3) + 4, yLocation_InPort + (self.SHIP_ICON_SIZE * 2) - (self.CARGO_ICON_SIZE * 3 / 4), self.CARGO_ICON_SIZE * 3 / 2, self.CARGO_ICON_SIZE * 3 / 2, WidgetTypes.WIDGET_GENERAL, self.SAIL_TO_NEW_WORLD, unit.getID())
-			if (unit.canSailWest()):
+			if (unit.canSailEurope(self.EUROPE_WEST)):
 				screen.setImageButtonAt(self.getNextWidgetName(), "LoadingList", ArtFileMgr.getInterfaceArtInfo("INTERFACE_EUROPE_SAIL").getPath(), - (self.CARGO_ICON_SIZE / 3) + 4, yLocation_InPort + (self.SHIP_ICON_SIZE / 2), self.CARGO_ICON_SIZE * 3 / 2, self.CARGO_ICON_SIZE * 3 / 2, WidgetTypes.WIDGET_GENERAL, self.SAIL_TO_NEW_WORLD_WEST, unit.getID())
-# PatchMod: Sail to West END
 			yLocation_InPort -= ShipPanelHight + (ShipPanelHight / 3)
 
 		ShipPanelHight = self.YResolution / 12
@@ -365,21 +364,17 @@ class CvEuropeScreen:
 					popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PURCHASE_EUROPE_UNIT)
 					CyInterface().addPopup(popupInfo, gc.getGame().getActivePlayer(), true, false)
 
-# PatchMod: Sail to West START
 				elif (inputClass.getData1() == self.SAIL_TO_NEW_WORLD) :
 					activePlayer = gc.getPlayer(gc.getGame().getActivePlayer())
 					transport = activePlayer.getUnit(inputClass.getData2())
-					transport.setSailEast()
 					if (not transport.isNone()) and transport.getUnitTravelState() != UnitTravelStates.UNIT_TRAVEL_STATE_FROM_EUROPE:
-						CyMessageControl().sendDoCommand(inputClass.getData2(), CommandTypes.COMMAND_SAIL_TO_EUROPE, UnitTravelStates.UNIT_TRAVEL_STATE_FROM_EUROPE, -1, false)
+						CyMessageControl().sendDoCommand(inputClass.getData2(), CommandTypes.COMMAND_SAIL_TO_EUROPE, UnitTravelStates.UNIT_TRAVEL_STATE_FROM_EUROPE, self.EUROPE_EAST, false)
 
 				elif (inputClass.getData1() == self.SAIL_TO_NEW_WORLD_WEST) :
 					activePlayer = gc.getPlayer(gc.getGame().getActivePlayer())
 					transport = activePlayer.getUnit(inputClass.getData2())
-					transport.setSailWest()
 					if (not transport.isNone()) and transport.getUnitTravelState() != UnitTravelStates.UNIT_TRAVEL_STATE_FROM_EUROPE:
-						CyMessageControl().sendDoCommand(inputClass.getData2(), CommandTypes.COMMAND_SAIL_TO_EUROPE, UnitTravelStates.UNIT_TRAVEL_STATE_FROM_EUROPE, -1, false)
-# PatchMod: Sail to West END
+						CyMessageControl().sendDoCommand(inputClass.getData2(), CommandTypes.COMMAND_SAIL_TO_EUROPE, UnitTravelStates.UNIT_TRAVEL_STATE_FROM_EUROPE, self.EUROPE_WEST, false)
 
 				elif (inputClass.getData1() == self.SELL_ALL) :
 					player = gc.getPlayer(gc.getGame().getActivePlayer())
@@ -411,13 +406,10 @@ class CvEuropeScreen:
 		iScreen, eWidgetType, iData1, iData2, bOption = argsList
 
 		if eWidgetType == WidgetTypes.WIDGET_GENERAL:
-# PatchMod: Sail to West START
 			if iData1 == self.SAIL_TO_NEW_WORLD:
-				return localText.getText("TXT_KEY_SAIL_EAST", ())
-#				return localText.getText("TXT_KEY_SAIL", ())
+				return localText.getText("TXT_KEY_SAIL", ()) + " - " + localText.getObjectText("TXT_KEY_EUROPE_EAST", 0)
 			if iData1 == self.SAIL_TO_NEW_WORLD_WEST:
-				return localText.getText("TXT_KEY_SAIL_WEST", ())
-# PatchMod: Sail to West END
+				return localText.getText("TXT_KEY_SAIL", ()) + " - " + localText.getObjectText("TXT_KEY_EUROPE_WEST", 0)
 			elif iData1 == self.SELL_ALL:
 				return localText.getText("TXT_KEY_SELL_ALL", ())
 			elif iData1 == self.LOAD_ALL:

@@ -239,7 +239,7 @@ def isEuropeStart(argsList):
 	[europeInfo] = argsList
 	CyPythonMgr().allowDefaultImpl()
 
-def getEuropeWidth(argsList):
+def getEuropeWidthPercent(argsList):
 	[europeInfo] = argsList
 	CyPythonMgr().allowDefaultImpl()
 

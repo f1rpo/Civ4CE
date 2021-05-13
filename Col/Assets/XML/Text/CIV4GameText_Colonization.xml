@@ -42,7 +42,7 @@
 		<English>All players are locked into either war or peace for the length of the game</English>
 		<French>Tous les joueurs sont bloqu&#233;s en &#233;tat de guerre ou de paix pendant toute la dur&#233;e du jeu.</French>
 		<German>Alle Spieler befinden sich f&#252;r die gesamte Spieldauer entweder im Krieg oder im Frieden</German>
-		<Italian>Tutti i giocatori sono bloccati in guerra o in pace per tutta la partita</Italian>
+		<Italian>Tutti i giocatori sono bloccati in guerra o in pace per tutta la partita.</Italian>
 		<Spanish>Todos los jugadores quedar&#225;n bloqueados en guerra o en paz hasta que acabe la partida.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -50,7 +50,7 @@
 		<English>All AI players are at war with the human for the length of the game</English>
 		<French>Toutes les factions g&#233;r&#233;es par l'IA sont en guerre avec le joueur pendant toute la dur&#233;e du jeu.</French>
 		<German>Alle KI-Spieler befinden sich f&#252;r die gesamte Spieldauer mit den menschlichen Spielern im Krieg</German>
-		<Italian>Tutti i giocatori gestiti dall'IA sono in guerra con le colonie dei giocatori per tutta la partita</Italian>
+		<Italian>Tutti i giocatori gestiti dall'IA sono in guerra con le colonie dei giocatori per tutta la partita.</Italian>
 		<Spanish>Todos los jugadores de la IA est&#225;n en guerra con los humanos hasta que acabe la partida.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -58,7 +58,7 @@
 		<English>Two colonies can form a Permanent Alliance which lasts the rest of the game</English>
 		<French>Deux colonies peuvent former une Alliance permanente qui durera jusqu'&#224; la fin du jeu.</French>
 		<German>Zwei Kolonien k&#246;nnen eine Allianz schlie&#223;en, die die restliche Spielzeit &#252;berdauert</German>
-		<Italian>Due colonie possono formare una alleanza permanente che duri fino alla fine della partita</Italian>
+		<Italian>Due colonie possono formare una alleanza permanente che duri fino alla fine della partita.</Italian>
 		<Spanish>Dos colonias pueden formar una alianza permanente que dure hasta que acabe la partida.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -74,7 +74,7 @@
 		<English>Players cannot declare war on each other</English>
 		<French>Les joueurs ne peuvent pas se d&#233;clarer la guerre.</French>
 		<German>Spieler k&#246;nnen sich gegenseitig nicht den Krieg erkl&#228;ren</German>
-		<Italian>I giocatori non possono dichiararsi guerra tra loro</Italian>
+		<Italian>I giocatori non possono dichiararsi guerra tra loro.</Italian>
 		<Spanish>Los jugadores no se pueden declarar la guerra.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -82,7 +82,7 @@
 		<English>Players can "hot-join" into an AI player's slot at any time</English>
 		<French>Les joueurs peuvent rejoindre une partie &#224; la vol&#233;e et prendre la place d'un joueur g&#233;r&#233; par l'IA.</French>
 		<German>Spieler k&#246;nnen sich jederzeit im Schnellverfahren einem KI-Spieler anschlie&#223;en</German>
-		<Italian>I giocatori possono "prendere il posto" di quelli gestiti dall'IA in qualsiasi momento</Italian>
+		<Italian>I giocatori possono "prendere il posto" di quelli gestiti dall'IA in qualsiasi momento.</Italian>
 		<Spanish>Los jugadores pueden "tomar las riendas" de un jugador de la IA en cualquier momento.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -90,7 +90,7 @@
 		<English>All players conduct their turns at the same time</English>
 		<French>Tous les joueurs jouent leurs tours en m&#234;me temps.</French>
 		<German>Alle Spieler f&#252;hren ihre Runden gleichzeitig aus</German>
-		<Italian>Tutti i giocatori effettuano il proprio turno contemporaneamente</Italian>
+		<Italian>Tutti i giocatori effettuano il proprio turno contemporaneamente.</Italian>
 		<Spanish>Todos los jugadores llevan a cabo sus turnos a la vez.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -122,7 +122,7 @@
 		<English>A Mutual Protection Pact - Each Party Agrees to Automatically Declare War if the Other Party is Attacked (Note: This Agreement is Automatically Canceled if Either Player Declares War on a Third Party.)</English>
 		<French>Trait&#233; de protection mutuelle : chaque partie accepte de d&#233;clarer automatiquement la guerre si l'autre partie est attaqu&#233;e. (Remarque : cet accord est automatiquement annul&#233; si l'un des joueurs d&#233;clare la guerre &#224; une autre nation.)</French>
 		<German>Ein Verteidigungsb&#252;ndnis - Beide Parteien stimmen zu, den Angreifern der anderen Partei automatisch den Krieg zu erkl&#228;ren. (Hinweis: Das B&#252;ndnis wird automatisch hinf&#228;llig, wenn einer der beiden Spieler einer dritten Partei den Krieg erkl&#228;rt.)</German>
-		<Italian>Un patto di mutua protezione: ogni civilt&#224; accetta di dichiarare automaticamente guerra se la civilt&#224; alleata viene attaccata (Nota: il patto viene automaticamente annullato se uno dei due giocatori dichiara guerra a una terza nazione.)</Italian>
+		<Italian>Un patto di mutua protezione: ogni civilt&#224; accetta di dichiarare automaticamente guerra se la civilt&#224; alleata viene attaccata (Nota: il patto viene automaticamente annullato se uno dei due giocatori dichiara guerra a una terza nazione).</Italian>
 		<Spanish>Un acuerdo de protecci&#243;n mutua: cada parte accede a declarar autom&#225;ticamente la guerra si alguien ataca a la otra (nota: este pacto queda revocado autom&#225;ticamente si cualquier jugador le declara la guerra a un tercero).</Spanish>
 	</TEXT>
 	<TEXT>
@@ -146,7 +146,7 @@
 		<English>Press [ALT + Q] to retire from the game. In multiplayer this automatically gives control of your Colonies to an AI.</English>
 		<French>Appuyez sur [ALT] + [Q] pour abandonner le jeu. En mode multijoueur, cette action conf&#232;re automatiquement le contr&#244;le de vos colonies &#224; une IA.</French>
 		<German>Dr&#252;cken Sie [ALT + Q], um das Spiel zu verlassen. Im Multiplayer-Modus &#252;bernimmt nun die KI die Kontrolle &#252;ber Ihre Kolonien.</German>
-		<Italian>Premi [ALT + Q] per ritirarti dalla partita. Nel multigiocatore, il controllo della tua colonia viene automaticamente assegnato alla IA.</Italian>
+		<Italian>Premi [ALT + Q] per ritirarti dalla partita. Nella modalità multigiocatore, il controllo della tua colonia viene automaticamente assegnato alla IA.</Italian>
 		<Spanish>Pulsar [ALT + Q] para retirarse de la partida. En el modo para varios jugadores esto le dar&#225; el control de las colonias a la IA.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -178,7 +178,7 @@
 		<English>Hold down the [SHIFT] key to add items to the end of your settlement's build queue.</English>
 		<French>Maintenez la touche [MAJ] enfonc&#233;e pour ajouter des &#233;l&#233;ments &#224; la fin de la file d'attente des b&#226;timents &#224; construire dans votre colonie.</French>
 		<German>Halten Sie [UMSCHALTEN] gedr&#252;ckt, um Objekte dem Ende der Bauliste Ihrer Siedlung hinzuzuf&#252;gen.</German>
-		<Italian>Tieni premuto [MAIUSC] per aggiungere degli oggetti in fondo alla coda di costruzione del tuo insediamento.</Italian>
+		<Italian>Tieni premuto [MAIUSC] per porre degli oggetti all'inizio della coda di costruzione per il tuo insediamento.</Italian>
 		<Spanish>Mantener pulsada la tecla [MAY&#218;S] para a&#241;adir elementos al final de la cola de construcci&#243;n del asentamiento.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -194,7 +194,7 @@
 		<English>While in the settlement screen, press [CTRL + # key] to save the production queue. This queue can be loaded in any other settlement by pressing the # key.</English>
 		<French>A partir de l'&#233;cran des colonies, appuyez sur [CTRL] +[ #] pour sauvegarder la file d'attente de production. Cette file d'attente peut &#234;tre charg&#233;e dans n'importe quelle autre colonie en appuyant sur la touche #.</French>
 		<German>Dr&#252;cken Sie im Siedlungsbildschirm [STRG + Zifferntaste], um die Produktionsliste zu speichern. Dr&#252;cken Sie in einer beliebigen anderen Siedlung die gew&#252;nschte Zifferntaste, wenn Sie die Produktionsliste laden m&#246;chten.</German>
-		<Italian>Mentre ti trovi nella schermata dell'insediamento, [CTRL + #] per salvare la coda di produzione. Questa coda pu&#242; essere caricata in qualsiasi altro insediamento premendo il tasto #.</Italian>
+		<Italian>Mentre ti trovi nella schermata dell'insediamento, premi [CTRL + #] per salvare la coda di produzione. Questa coda pu&#242; essere caricata in qualsiasi altro insediamento premendo il tasto #.</Italian>
 		<Spanish>Pulsar [CTRL + n&#250;mero] en la pantalla del asentamiento para guardar la cola de producci&#243;n. Se podr&#225; cargar esa cola en cualquier otro asentamiento pulsando dicho n&#250;mero.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -234,7 +234,7 @@
 		<English>Settlement Elimination Limit: </English>
 		<French>Limite d'&#233;limination de la colonie :</French>
 		<German>Siedlungseliminierungs-Limit: </German>
-		<Italian>Limite eliminazione insediamento: </Italian>
+		<Italian>Limite d'eliminazione dell'insediamento: </Italian>
 		<Spanish>L&#237;mite de eliminaci&#243;n de asentamientos: </Spanish>
 	</TEXT>
 	<TEXT>
@@ -266,7 +266,7 @@
 		<English>Force Max Settlement Elimination</English>
 		<French>Forcer le nombre maximum d'&#233;limination de colonies</French>
 		<German>Max. Siedlungseliminierung erzwingen</German>
-		<Italian>Forza la massima eliminazione insediamento</Italian>
+		<Italian>Forza il limite di eliminazione dell'insediamento</Italian>
 		<Spanish>Forzar l&#237;mite de eliminaci&#243;n de asentamientos</Spanish>
 	</TEXT>
 	<TEXT>
@@ -274,7 +274,7 @@
 		<English>Settlement Elimination Limit:</English>
 		<French>Limite d'&#233;limination de colonies :</French>
 		<German>Limit Siedlungseliminierung:</German>
-		<Italian>Limite eliminazione insediamento:</Italian>
+		<Italian>Limite di eliminazione dell'insediamento:</Italian>
 		<Spanish>L&#237;mite de eliminaci&#243;n de asentamientos:</Spanish>
 	</TEXT>
 	<TEXT>
@@ -298,7 +298,7 @@
 		<English>The human player can never control more than one settlement</English>
 		<French>Le joueur humain ne peut jamais contr&#244;ler plus d'une colonie.</French>
 		<German>Der menschliche Spieler kann maximal eine Siedlung kontrollieren</German>
-		<Italian>Il giocatore non pu&#242; mai controllare pi&#249; di un insediamento</Italian>
+		<Italian>Il giocatore non pu&#242; mai controllare pi&#249; di un insediamento.</Italian>
 		<Spanish>El jugador humano nunca podr&#225; controlar m&#225;s de un asentamiento.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -306,7 +306,7 @@
 		<English>The advisor occasionally interrupts play to suggest a new build choice in a settlement</English>
 		<French>Le conseiller interrompt parfois la partie pour sugg&#233;rer une nouvelle construction dans la colonie.</French>
 		<German>Der Berater unterbricht gelegentlich das Spiel, um ein neues Bauprojekt in einer Siedlung vorzuschlagen</German>
-		<Italian>Il consigliere interromper&#224; saltuariamente il gioco per suggerirti una costruzione da realizzare in un insediamento</Italian>
+		<Italian>Il consigliere interromper&#224; saltuariamente il gioco per suggerirti una costruzione da realizzare in un insediamento.</Italian>
 		<Spanish>El consejero interrumpe de vez en cuando para sugerir algo nuevo que construir en un asentamiento.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -362,7 +362,7 @@
 		<English>Examine Settlement</English>
 		<French>Examiner la colonie</French>
 		<German>Siedlung untersuchen</German>
-		<Italian>Esamina insediamento</Italian>
+		<Italian>Esamina l'insediamento</Italian>
 		<Spanish>Examinar el asentamiento</Spanish>
 	</TEXT>
 	<TEXT>
@@ -394,7 +394,7 @@
 		<English>Press [HOME] and [END] to cycle through your settlements.</English>
 		<French>Appuyez sur [ORIGINE]et [FIN] pour faire d&#233;filer vos colonies.</French>
 		<German>Dr&#252;cken Sie [POS1] und [ENDE], um durch Ihre Siedlungen zu schalten.</German>
-		<Italian>Premi [HOME] e [FINE] per scorrere i tuoi insediamenti...</Italian>
+		<Italian>Premi [HOME] e [FINE] per scorrere tra i tuoi insediamenti...</Italian>
 		<Spanish>Pulsar [INICIO] y [FIN] para pasar de un asentamiento a otro.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -402,7 +402,7 @@
 		<English>While in the settlement screen, you can use [LEFT ARROW] and [RIGHT ARROW] to cycle between settlements.</English>
 		<French>Lorsque l'&#233;cran de colonie est affich&#233;, vous pouvez utiliser les touches [FLECHE GAUCHE] et [FLECHE DROITE] pour faire d&#233;filer les colonies.</French>
 		<German>Im Siedlungsbildschirm k&#246;nnen Sie mit [PFEIL LINKS] und [PFEIL RECHTS] durch Ihre Siedlungen schalten.</German>
-		<Italian>Quando sei nella schermata dell'insediamento, puoi usare la [FRECCIA SINISTRA] e la [FRECCIA DESTRA] per scorrere gli insediamenti...</Italian>
+		<Italian>Quando sei nella schermata dell'insediamento, puoi usare la [FRECCIA SINISTRA] e la [FRECCIA DESTRA] per scorrere tra gli insediamenti...</Italian>
 		<Spanish>En la pantalla del asentamiento se puede usar la [FLECHA IZQUIERDA] y la [FLECHA DERECHA] para pasar de un asentamiento a otro.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -426,7 +426,7 @@
 		<English>"You liberated our settlements"</English>
 		<French>"Vous avez lib&#233;r&#233; nos colonies".</French>
 		<German>"Ihr habt unsere Siedlungen befreit!"</German>
-		<Italian>"Hai liberato i nostri insediamenti"</Italian>
+		<Italian>"Hai liberato i nostri insediamenti".</Italian>
 		<Spanish>"Hab&#233;is liberado nuestros asentamientos"</Spanish>
 	</TEXT>
 	<TEXT>
@@ -450,7 +450,7 @@
 		<English>[ICON_BULLET]%d1%% stored [ICON_FOOD] in all settlements</English>
 		<French>[ICON_BULLET]%d1%%[ICON_FOOD] dans toutes les colonies.</French>
 		<German>[ICON_BULLET]%d1%% [ICON_FOOD] in allen Siedlungen eingelagert</German>
-		<Italian>[ICON_BULLET]%d1%% [ICON_FOOD] conservato in tutti gli insediamenti</Italian>
+		<Italian>[ICON_BULLET]%d1%% [ICON_FOOD] conservato in tutti gli insediamenti.</Italian>
 		<Spanish>[ICON_BULLET]%d1%% [ICON_FOOD] almacenados en todos los asentamientos</Spanish>
 	</TEXT>
 	<TEXT>
@@ -522,7 +522,7 @@
 		<English>%d1 settlements with %s2 Culture</English>
 		<French>%d1 colonies avec la culture : %s2</French>
 		<German>%d1 Siedlungen mit Kulturstufe %s2</German>
-		<Italian>%d1 insediamenti con %s2 cultura</Italian>
+		<Italian>%d1 insediamenti con cultura %s2</Italian>
 		<Spanish>%d1 asentamientos con cultura %s2</Spanish>
 	</TEXT>
 	<TEXT>
@@ -530,7 +530,7 @@
 		<English>Top 5 Settlements</English>
 		<French>5 meilleures colonies</French>
 		<German>5 beste Siedlungen</German>
-		<Italian>I primi 5 insediam.</Italian>
+		<Italian>Le migliori 5 citt&#224;</Italian>
 		<Spanish>5 mejores ciudades</Spanish>
 	</TEXT>
 	<TEXT>
@@ -834,7 +834,7 @@
 		<English>[ICON_BULLET]%D1_Modifier Production of %s2_list_of_icons</English>
 		<French>[ICON_BULLET]%D1_Modifier Production de %s2_list_of_icons</French>
 		<German>[ICON_BULLET]%D1_Modifier Produktion von %s2_list_of_icons</German>
-		<Italian>[ICON_BULLET]%D1_Modifier produzione di %s2_list_of_icons</Italian>
+		<Italian>[ICON_BULLET]%D1_Modifica produzione di %s2_list_of_icons</Italian>
 		<Spanish>[ICON_BULLET]%D1_Modifier a la producci&#243;n de %s2_list_of_icons</Spanish>
 	</TEXT>
 	<TEXT>
@@ -874,7 +874,7 @@
 		<English>%d1%F2 per Citizen</English>
 		<French>%d1%F2 par citoyen</French>
 		<German>%d1%F2 pro B&#252;rger</German>
-		<Italian>%d1%F2 per cittad.</Italian>
+		<Italian>%d1%F2 per cittadino</Italian>
 		<Spanish>%d1%F2 por ciudadano</Spanish>
 	</TEXT>
 	<TEXT>
@@ -1026,7 +1026,7 @@
 		<English>Angry %s1_civ_adjective colonists in %s2_city destroy all shipments of %s3_yield in protest for excessive taxation without representation.</English>
 		<French>Dans la ville : %s2_city, des colons %s1:3_civ_adjective d&#233;truisent toutes les cargaisons de %s3_yield pour protester contre la taxation sans repr&#233;sentation.</French>
 		<German>W&#252;tende %s1:3_civ_adjective Kolonisten in der Siedlung %s2_city zerst&#246;ren aus Protest alle %s3_yield-Lieferungen, da sie hohe Steuern zahlen m&#252;ssen, aber nicht im Parlament vertreten sind.</German>
-		<Italian>Bellicosi coloni %s1_civ_adjective a %s2_city hanno distrutto tutte le partite di %s3_yield per protestare con l'eccessiva tassazione senza rappresentanza.</Italian>
+		<Italian>Bellicosi coloni %s1_civ_adjective a %s2_city hanno distrutto tutti i carichi %s3_yield per protestare contro l'eccessiva tassazione senza rappresentanza.</Italian>
 		<Spanish>Los enojados colonos %s1:3_civ_adjective de %s2_city destruyen todos los cargamentos de %s3_yield en protesta por los impuestos excesivos sin representantes.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -1912,10 +1912,10 @@
 	<TEXT>
 		<Tag>TXT_KEY_TRADE_ROUTE_DESCRIPTION</Tag>
 		<English>%s1_yield from %s2_city to %s3_city</English>
-		<French>%s1_yield de la ville : %s2_city &#224; la ville : %s3_city</French>
-		<German>%s1_yield von der Siedlung %s2_city zur Siedlung %s3_city</German>
+		<French>%s1_yield de : %s2_city &#224; : %s3_city</French>
+		<German>%s1_yield von %s2_city nach %s3_city</German>
 		<Italian>%s1_yield da %s2_city a %s3_city</Italian>
-		<Spanish>%s1_yield por ruta de %s2_city a %s3_city</Spanish>
+		<Spanish>%s1_yield de %s2_city a %s3_city</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_TRAIT_NATIVE_ANGER_MODIFIER_PLUS</Tag>
@@ -2194,7 +2194,7 @@
 		<English>[ICON_BULLET]Acts as a Settlement for combat purposes</English>
 		<French>[ICON_BULLET]Consid&#233;r&#233; comme une colonie en ce qui concerne les combats.</French>
 		<German>[ICON_BULLET]Dient als Standort f&#252;r milit&#228;rische Zwecke</German>
-		<Italian>[ICON_BULLET]Ai fini dei combattimenti, equivalgono a un insediamento</Italian>
+		<Italian>[ICON_BULLET]Equivale a un insediamento volto allo scopo di combattere.</Italian>
 		<Spanish>[ICON_BULLET]Hace las veces de asentamiento a efectos de combate.</Spanish>
 	</TEXT>
 	<TEXT>
@@ -2210,7 +2210,7 @@
 		<English>[ICON_BULLET]Yields %D1%% Treasure when villages are captured</English>
 		<French>[ICON_BULLET]Conf&#232;re %D1%% tr&#233;sor(s) quand des villages sont captur&#233;s</French>
 		<German>[ICON_BULLET]Bringt %D1%% an Sch&#228;tzen, wenn D&#246;rfer eingenommen werden</German>
-		<Italian>[ICON_BULLET]Rende %D1%% tesoro quando vengono conquistati i villaggi</Italian>
+		<Italian>[ICON_BULLET]Rende %D1%% di tesoro quando vengono conquistati i villaggi</Italian>
 		<Spanish>[ICON_BULLET]Rinde %D1%% de tesoro cuando se capturan aldeas</Spanish>
 	</TEXT>
 	<TEXT>
@@ -2226,7 +2226,7 @@
 		<English>[ICON_BULLET]Free [COLOR_BUILDING_TEXT][LINK=literal]%s1_Name[\LINK][COLOR_REVERT] in Every Settlement</English>
 		<French>[ICON_BULLET]Un b&#226;timent : [COLOR_BUILDING_TEXT][LINK=literal]%s1_Name[\LINK][COLOR_REVERT] gratuit dans chaque colonie</French>
 		<German>[ICON_BULLET]Freies Geb&#228;ude [COLOR_BUILDING_TEXT][LINK=literal]%s1_Name[\LINK][COLOR_REVERT] in jeder Siedlung</German>
-		<Italian>[ICON_BULLET][COLOR_BUILDING_TEXT][LINK=literal]%s1_Name[\LINK][COLOR_REVERT] [NUM1:gratuito:gratuita:gratuiti:gratuite] in ogni insediamento</Italian>
+		<Italian>[ICON_BULLET][COLOR_BUILDING_TEXT][LINK=literal]%s1_Name[\LINK][COLOR_REVERT] gratis in ogni insediamento</Italian>
 		<Spanish>[ICON_BULLET][COLOR_BUILDING_TEXT][LINK=literal]%s1_Name[\LINK][COLOR_REVERT] gratis en cada asentamiento</Spanish>
 	</TEXT>
 	<TEXT>
@@ -2234,7 +2234,7 @@
 		<English>[ICON_BULLET]Makes this Settlement the Capital</English>
 		<French>[ICON_BULLET]Faire de cette colonie notre capitale</French>
 		<German>[ICON_BULLET]Erhebt diese Siedlung zur Hauptstadt</German>
-		<Italian>[ICON_BULLET]Rende capitale questo insediamento</Italian>
+		<Italian>[ICON_BULLET]Rende questo insediamento la Capitale</Italian>
 		<Spanish>[ICON_BULLET]Convierte este asentamiento en la capital</Spanish>
 	</TEXT>
 	<TEXT>
@@ -2431,19 +2431,11 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_HELP_EDIT_IMPORTS</Tag>
-		<English>Edit Imports</English>
-		<French>Modifier les importations</French>
-		<German>Importe bearbeiten</German>
-		<Italian>Modifica importazioni</Italian>
-		<Spanish>Editar importaciones</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_HELP_EDIT_EXPORTS</Tag>
-		<English>Edit Exports</English>
-		<French>Modifier les exportations</French>
+		<English>Edit Imports and Exports</English>
+		<French>Modifier les importations et les exportations</French>
 		<German>Im-/Exporte bearbeiten</German>
-		<Italian>Modifica esportazioni</Italian>
-		<Spanish>Editar exportaciones</Spanish>
+		<Italian>Modifica importazioni e esportazioni</Italian>
+		<Spanish>Editar importaciones y exportaciones</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_YIELD_IMPORT_POPUP</Tag>
@@ -2539,7 +2531,7 @@
 		<French>Choisissez une sp&#233;cialit&#233; pour l'unit&#233; : %s1_profession form&#233;e dans la ville : %s2_city</French>
 		<German>W&#228;hlen Sie eine Spezialf&#228;higkeit f&#252;r die ausgebildete %s1_profession-Einheit in der Stadt %s2_city</German>
 		<Italian>Scegli una specializzazione per l'unit&#224; %s1_profession che si diploma a %s2_city</Italian>
-		<Spanish>Elegir una especialidad para [NUM1:el.la:los:las] %s1_profession a graduar en %s2_city.</Spanish>
+		<Spanish>Elegir una especialidad para  %s1_profession a graduar en %s2_city.</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GOODS_RAIDED</Tag>
@@ -2625,7 +2617,7 @@
 		<Tag>TXT_KEY_TRADE_ROUTE_MAINTAIN</Tag>
 		<English>Keep</English>
 		<French>Conserver</French>
-		<German>Beibehalten</German>
+		<German>Behalten</German>
 		<Italian>Mantieni</Italian>
 		<Spanish>Mantener</Spanish>
 	</TEXT>
@@ -2892,14 +2884,6 @@
 		<German>[ICON_BULLET]%D1 Produktion von %s2_list_of_icons zu Wasser</German>
 		<Italian>[ICON_BULLET]%D1 produzione di %s2_list_of_icons in acqua</Italian>
 		<Spanish>[ICON_BULLET]%D1 a la producci&#243;n de %s2_list_of_icons en agua</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_NEW_EUROPE_ARMY</Tag>
-		<English>The King of %s1_civ_short is alarmed at the rebel sentiment in %s2_civ_short. He has added %s3:2_unit to the %s4_adjective Royal Expeditionary Force.</English>
-		<French>Le roi des %s1_civ_short s'inqui&#232;te du vent de r&#233;volte qui souffle chez les %s2_civ_short. Il a ajout&#233; une unit&#233; de %s3:2_unit au Corps exp&#233;ditionnaire %s4_adjective.</French>
-		<German>Der K&#246;nig von %s1_civ_short ist durch die rebellische Stimmung in %s2_civ_short beunruhigt. Er hat mit der Einheit %s3_unit die %s4:2_adjective K&#246;niglichen Expeditionsstreitm&#228;chte verst&#228;rkt.</German>
-		<Italian>Il re di %s1_civ_short &#232; allarmato dal sentimento di ribellione in %s2_civ_short. Ha aggiunto un'unit&#224; di %s3:2_unit al corpo di spedizione reale %s4_adjective.</Italian>
-		<Spanish>El rey de %s1_civ_short est&#225; alarmado por el sentimiento de rebeli&#243;n que se respira en %s2_civ_short. Ha a&#241;adido unidades de %s3_unit a la Real Fuerza Expedicionaria %s4:2_adjective.</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_CITY_STARVING</Tag>
@@ -3497,8 +3481,8 @@
 		<Tag>TXT_KEY_HANDICAP_PILGRIM</Tag>
 		<English>Pilgrim (Easiest)</English>
 		<French>P&#232;lerin (facile)</French>
-		<German>Pilgerer (am leichtesten)</German>
-		<Italian>Pellegrino (diff. min.)</Italian>
+		<German>Pilger (leicht)</German>
+		<Italian>Peregrino</Italian>
 		<Spanish>Peregrino (m&#225;s f&#225;cil)</Spanish>
 	</TEXT>
 	<TEXT>
@@ -3545,8 +3529,8 @@
 		<Tag>TXT_KEY_HANDICAP_REVOLUTIONARY</Tag>
 		<English>Revolutionary (Hardest)</English>
 		<French>R&#233;volutionnaire (Dur)</French>
-		<German>Revolution&#228;r (am schwierigsten)</German>
-		<Italian>Rivoluzionario (max)</Italian>
+		<German>Revolution&#228;r</German>
+		<Italian>Rivoltoso</Italian>
 		<Spanish>Revoluc. (m&#225;s dif&#237;cil)</Spanish>
 	</TEXT>
 	<TEXT>

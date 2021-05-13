@@ -21,18 +21,6 @@ public:
 	void setupGraphical();
 	DllExport void kill();
 
-	// PatchMod: Yields messages START
-	void calculateNetYields(int aiYields[], bool noval) const;
-	// PatchMod: Yields messages END
-
-	// PatchMod: Missionary player START
-protected:
-	PlayerTypes m_eMissionaryPlayer;
-public:
-	PlayerTypes getMissionaryPlayer() const;
-	void setMissionaryPlayer(PlayerTypes ePlayer);
-	// PatchMod: Missionary player END
-
 	void doTurn();
 	bool isCitySelected() const;
 	DllExport bool canBeSelected() const;
@@ -111,7 +99,6 @@ public:
 	int getProductionModifier(UnitTypes eUnit) const;
 	int getProductionModifier(BuildingTypes eBuilding) const;
 
-	int getProductionDifference(int iProductionNeeded, int iProduction, int iProductionModifier, bool bOverflow) const;
 	DllExport int getCurrentProductionDifference(bool bOverflow) const;
 
 	DllExport bool canHurry(HurryTypes eHurry, bool bTestVisible = false) const;
@@ -312,7 +299,7 @@ public:
 	void changeYieldStored(YieldTypes eYield, int iChange);
 	int getYieldRushed(YieldTypes eYield) const;
 	void changeYieldRushed(YieldTypes eYield, int iChange);
-	void calculateNetYields(int aiYields[], int* aiProducedYields = NULL, int* aiConsumedYields = NULL) const;
+	void calculateNetYields(int aiYields[], int* aiProducedYields = NULL, int* aiConsumedYields = NULL, bool bPrintWarning = false) const;
 	int calculateNetYield(YieldTypes eYield) const;
 	int calculateActualYieldProduced(YieldTypes eYield) const;
 	int calculateActualYieldConsumed(YieldTypes eYield) const;
@@ -421,11 +408,11 @@ public:
 	DllExport bool isScoutVisited(TeamTypes eTeam) const;
 	GoodyTypes getGoodyType(const CvUnit* pUnit) const;
 	int doGoody(CvUnit* pUnit, GoodyTypes eGoody);
+	PlayerTypes getMissionaryPlayer() const;
 	CivilizationTypes getMissionaryCivilization() const;
-	void setMissionaryCivilization(CivilizationTypes eCivilization);
+	void setMissionaryPlayer(PlayerTypes ePlayer);
 	int getMissionaryRate() const;
 	void setMissionaryRate(int iRate);
-	PlayerTypes calculateConvertRecipient(TeamTypes eTeam = NO_TEAM, int* piOdds = NULL);
 
 	DllExport int getRebelPercent() const;
 	DllExport int getRebelSentiment() const;
@@ -434,6 +421,10 @@ public:
 	int getTeachUnitMultiplier() const;
 	void setTeachUnitMultiplier(int iModifier);
 	UnitClassTypes bestTeachUnitClass();
+
+	int getEducationThresholdMultiplier() const;
+	void setEducationThresholdMultiplier(int iModifier);
+	int educationThreshold() const;
 
 	CvUnit* ejectBestDefender(CvUnit* pCurrentBest, CvUnit* pAttacker);
 	CvUnit* getBestDefender(ProfessionTypes* peProfession, CvUnit* pCurrentBest, const CvUnit* pAttacker) const;
@@ -451,7 +442,7 @@ public:
 	virtual bool AI_avoidGrowth() const = 0;
 	virtual void AI_setAvoidGrowth(bool bNewValue) = 0;
 	virtual void AI_chooseProduction() = 0;
-	virtual UnitTypes AI_bestUnit(bool bAsync = false, UnitAITypes* peBestUnitAI = NULL) const = 0;
+	virtual UnitTypes AI_bestUnit(bool bAsync = false, UnitAITypes* peBestUnitAI = NULL, bool bPickAny = false) const = 0;
 	virtual UnitTypes AI_bestUnitAI(UnitAITypes eUnitAI, bool bAsync = false) const = 0;
 	virtual BuildingTypes AI_bestBuilding(int iFocusFlags = 0, int iMaxTurns = MAX_INT, bool bAsync = false) const = 0;
 	virtual int AI_buildingValue(BuildingTypes eBuilding, int iFocusFlags = 0) const = 0;
@@ -588,6 +579,7 @@ protected:
 	int m_iMissionaryRate;
 	int m_iRebelSentiment;
 	int m_iTeachUnitMultiplier;
+	int m_iEducationThresholdMultiplier;
 
 	bool m_bNeverLost;
 	bool m_bBombarded;
@@ -600,7 +592,7 @@ protected:
 	PlayerTypes m_eOriginalOwner;
 	CultureLevelTypes m_eCultureLevel;
 	UnitClassTypes m_eTeachUnitClass;
-	CivilizationTypes m_eMissionaryCivilization;
+	PlayerTypes m_eMissionaryPlayer;
 	int* m_aiSeaPlotYield;
 	int* m_aiRiverPlotYield;
 	int* m_aiYieldRateModifier;
@@ -662,6 +654,8 @@ protected:
 	int getHurryPopulation(HurryTypes eHurry, int iHurryCost) const;
 	int getHurryYieldDeficit(HurryTypes eHurry, YieldTypes eYield) const;
 	int getHurryYieldNeeded(HurryTypes eHurry, YieldTypes eYield) const;
+	int getProductionDifference(int iProductionModifier, bool bOverflow, bool bUseStoredHammers) const;
+	int getStoredProductionDifference() const;
 
 	void setUnitWorkingPlot(int iPlotIndex, int iUnitId);
 	void setUnitWorkingPlot(const CvPlot* pPlot, int iUnitId);

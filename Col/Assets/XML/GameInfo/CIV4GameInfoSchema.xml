@@ -50,7 +50,7 @@
 	<ElementType name="bStart" content="textOnly" dt:type="boolean"/>
 	<ElementType name="iTripLength" content="textOnly" dt:type="int"/>
 	<ElementType name="iMinLandDistance" content="textOnly" dt:type="int"/>
-	<ElementType name="iWidth" content="textOnly" dt:type="int"/>
+	<ElementType name="iWidthPercent" content="textOnly" dt:type="int"/>
 	<ElementType name="Direction" content="textOnly"/>
 	<ElementType name="EuropeInfo" content="eltOnly">
 		<element type="Type"/>
@@ -59,7 +59,7 @@
 		<element type="bStart"/>
 		<element type="iTripLength"/>
 		<element type="iMinLandDistance"/>
-		<element type="iWidth"/>
+		<element type="iWidthPercent"/>
 	</ElementType>
 	<ElementType name="WorldInfo" content="eltOnly">
 		<element type="Type"/>
@@ -161,9 +161,7 @@
 		<element type="GoodyInfo" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="Name" content="textOnly"/>
-	<ElementType name="iStartingLocPercent" content="textOnly" dt:type="int"/>
 	<ElementType name="iFreeUnits" content="textOnly" dt:type="int"/>
-	<ElementType name="bFreeShip" content="textOnly" dt:type="boolean"/>
 	<ElementType name="iAttitudeChange" content="textOnly" dt:type="int"/>
 	<ElementType name="iStartingDefenseUnits" content="textOnly" dt:type="int"/>
 	<ElementType name="iStartingWorkerUnits" content="textOnly" dt:type="int"/>
@@ -182,11 +180,11 @@
 	<ElementType name="iAIConstructPercent" content="textOnly" dt:type="int"/>
 	<ElementType name="iAIUnitUpgradePercent" content="textOnly" dt:type="int"/>
 	<ElementType name="iAIHurryPercent" content="textOnly" dt:type="int"/>
-	<ElementType name="iAIMoneyTree" content="textOnly" dt:type="int"/>
+	<ElementType name="iAIExtraTradePercent" content="textOnly" dt:type="int"/>
 	<ElementType name="iAIPerEraModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iAIAdvancedStartPercent" content="textOnly" dt:type="int"/>
 	<ElementType name="iAIKingUnitThresholdPercent" content="textOnly" dt:type="int"/>
-	<ElementType name="iKingUnitThresholdPercent" content="textOnly" dt:type="int"/>
+	<ElementType name="iKingNumUnitMultiplier" content="textOnly" dt:type="int"/>
 	<ElementType name="iKingGoldThresholdPercent" content="textOnly" dt:type="int"/>
 	<ElementType name="iEuropePriceThresholdMultiplier" content="textOnly" dt:type="int"/>
 	<ElementType name="iNativePacifismPercent" content="textOnly" dt:type="int"/>
@@ -199,10 +197,8 @@
 		<element type="Type"/>
 		<element type="Description"/>
 		<element type="Help"/>
-		<element type="iStartingLocPercent"/>
 		<element type="iAdvancedStartPointsMod"/>
 		<element type="iGold"/>
-		<element type="bFreeShip" minOccurs="0"/>
 		<element type="iFatherPercent"/>
 		<element type="iAttitudeChange"/>
 		<element type="iStartingDefenseUnits"/>
@@ -222,11 +218,11 @@
 		<element type="iAIConstructPercent"/>
 		<element type="iAIUnitUpgradePercent"/>
 		<element type="iAIHurryPercent"/>
-		<element type="iAIMoneyTree"/>
+		<element type="iAIExtraTradePercent"/>
 		<element type="iAIPerEraModifier"/>
 		<element type="iAIAdvancedStartPercent"/>
 		<element type="iAIKingUnitThresholdPercent"/>
-		<element type="iKingUnitThresholdPercent"/>
+		<element type="iKingNumUnitMultiplier"/>
 		<element type="iKingGoldThresholdPercent"/>
 		<element type="iEuropePriceThresholdMultiplier"/>
 		<element type="iNativePacifismPercent"/>

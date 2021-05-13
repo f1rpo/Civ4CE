@@ -634,6 +634,14 @@ bool CvTeam::canDeclareWar(TeamTypes eTeam) const
 		}
 	}
 
+	if (hasColonialPlayer() && GET_TEAM(eTeam).hasColonialPlayer())
+	{
+		if (GC.getGameINLINE().getElapsedGameTurns() < GC.getDefineINT("COLONIAL_FORCED_PEACE_TURNS"))
+		{
+			return false;
+		}
+	}
+
 	if (hasEuropePlayer())
 	{
 		return false;
@@ -685,36 +693,6 @@ void CvTeam::declareWarNoRevolution(TeamTypes eTeam, bool bNewDiplo, WarPlanType
 
 	FAssertMsg(eTeam != NO_TEAM, "eTeam is not assigned a valid value");
 	FAssertMsg(eTeam != getID(), "eTeam is not expected to be equal with getID()");
-
-	// PatchMod: Force start peace START
-	if (GC.getGameINLINE().getGameTurn() < 20)
-	{
-		bool bEuropean1 = false;
-		bool bEuropean2 = false;
-		for (int iI = 0; iI < MAX_PLAYERS; iI++)
-		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
-			{
-				if (GET_PLAYER((PlayerTypes)iI).getParent() != NO_PLAYER)
-				{
-					bEuropean1 = true;
-				}
-			}
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == eTeam)
-			{
-				if (GET_PLAYER((PlayerTypes)iI).getParent() != NO_PLAYER)
-				{
-					bEuropean2 = true;
-				}
-			}
-		}
-		if (bEuropean1 && bEuropean2)
-		{
-			GET_PLAYER(GC.getGameINLINE().getActivePlayer()).doKingForcePeace();
-			return;
-		}
-	}
-	// PatchMod: Force start peace END
 
 	if (!isAtWar(eTeam))
 	{
@@ -2716,6 +2694,18 @@ void CvTeam::doRevolution()
 		return;
 	}
 
+	CvGame& kGame = GC.getGameINLINE();
+	if (!kGame.isMaxTurnsExtended())
+	{
+		int iRevolutionTurns = GC.getGameSpeedInfo(kGame.getGameSpeedType()).getRevolutionTurns();
+		if (iRevolutionTurns + kGame.getElapsedGameTurns() > kGame.getMaxTurns())
+		{
+			kGame.setMaxTurns(iRevolutionTurns + kGame.getElapsedGameTurns());
+			kGame.setEstimateEndTurn(iRevolutionTurns + kGame.getGameTurn());
+			kGame.setMaxTurnsExtended(true);
+		}
+	}
+
 	for (int iPlayer = 0; iPlayer < MAX_PLAYERS; ++iPlayer)
 	{
 		CvPlayer& kTeamPlayer = GET_PLAYER((PlayerTypes) iPlayer);
@@ -2728,26 +2718,7 @@ void CvTeam::doRevolution()
 
 				GET_TEAM(kParent.getTeam()).declareWarNoRevolution(getID(), true, WARPLAN_TOTAL, false);
 
-				CvPlot* pStartingPlot = kTeamPlayer.getStartingPlot();
-				if(pStartingPlot == NULL)
-				{
-					int iBestValue = 0;
-					for (int iPlot = 0; iPlot < GC.getMapINLINE().numPlotsINLINE(); ++iPlot)
-					{
-						CvPlot* pPlot = GC.getMapINLINE().plotByIndexINLINE(iPlot);
-						if(pPlot->isEurope())
-						{
-							int iValue = 1 + GC.getGameINLINE().getSorenRandNum(1000, "Revolution Start Plot");
-							if(iValue > iBestValue)
-							{
-								iBestValue = iValue;
-								pStartingPlot = pPlot;
-							}
-						}
-					}
-					FAssert(pStartingPlot != NULL);
-				}
-
+				//create REF in Europe
 				for (int i = 0; i < kTeamPlayer.getNumRevolutionEuropeUnits(); ++i)
 				{
 					CvUnit* pRevolutionUnit = NULL;
@@ -2768,12 +2739,7 @@ void CvTeam::doRevolution()
 					FAssert(pRevolutionUnit != NULL);
 				}
 				kTeamPlayer.clearRevolutionEuropeUnits();
-				// PatchMod: Clear blockaded goods START
 				kTeamPlayer.setYieldEuropeTradableAll();
-				// PatchMod: Clear blockaded goods END
-				// PatchMod: Intercept Europe units START
-				kTeamPlayer.interceptEuropeUnits();
-				// PatchMod: Intercept Europe units END
 				kTeamPlayer.doEra();
 				kTeamPlayer.validateTradeRoutes();
 			}
@@ -2784,9 +2750,6 @@ void CvTeam::doRevolution()
 	{
 		gDLL->getInterfaceIFace()->setDirty(ColoredPlots_DIRTY_BIT, true);
 	}
-    // patchmod WoI extension start;
-    bool anyRevolution = false;
-    //patchmod WoI extension end;
 
 	for (int iPlayer = 0; iPlayer < MAX_PLAYERS; ++iPlayer)
 	{
@@ -2810,25 +2773,7 @@ void CvTeam::doRevolution()
 				}
 			}
 		}
-
-		//patchmod WoI extension start;
-		if ((GC.getEraInfo(kPlayer.getCurrentEra()).isRevolution()) && (kPlayer.getTeam() != (TeamTypes)getID()))
-		//if ((kPlayer.isInRevolution()) && (kPlayer.getTeam() != (TeamTypes)getID()))
-		{
-            anyRevolution = true;
-        }
 	}
-
-	//patchmod WoI extension start;
-
-
-	if (!anyRevolution)
-	{
-	    GC.getGameINLINE().setMaxTurns(GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getRevolutionTurns() + GC.getGameINLINE().getGameTurn());
-	    GC.getGameINLINE().setEstimateEndTurn(GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getRevolutionTurns() + GC.getGameINLINE().getGameTurn());
-	}
-
-	//patchmod WoI extension end;
 }
 
 bool CvTeam::isParentOf(TeamTypes eChildTeam) const

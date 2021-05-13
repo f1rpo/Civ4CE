@@ -4527,7 +4527,7 @@ int CvPlayerAI::AI_unitGoldValue(UnitTypes eUnit, UnitAITypes eUnitAI, CvArea* p
 	
 	if (kUnitInfo.getDefaultProfession() != NO_PROFESSION)
 	{
-		iValue += kUnitInfo.getEuropeCost();
+		iValue += std::max(0, kUnitInfo.getEuropeCost());
 	}
 	
 	int iTempValue;
@@ -4790,26 +4790,22 @@ int CvPlayerAI::AI_totalWaterAreaUnitAIs(CvArea* pArea, UnitAITypes eUnitAI)
 	return iCount;
 }
 
-
-int CvPlayerAI::AI_countCargoSpace(UnitAITypes eUnitAI)
+bool CvPlayerAI::AI_hasSeaTransport(const CvUnit* pCargo) const
 {
-	CvUnit* pLoopUnit;
-	int iCount;
 	int iLoop;
-
-	iCount = 0;
-
-	for(pLoopUnit = firstUnit(&iLoop); pLoopUnit != NULL; pLoopUnit = nextUnit(&iLoop))
+	for (CvUnit* pLoopUnit = firstUnit(&iLoop); pLoopUnit != NULL; pLoopUnit = nextUnit(&iLoop))
 	{
-		if (pLoopUnit->AI_getUnitAIType() == eUnitAI)
+		if (pLoopUnit != pCargo && pLoopUnit->getDomainType() == DOMAIN_SEA)
 		{
-			iCount += pLoopUnit->cargoSpace();
+			if (pLoopUnit->cargoSpace() >= pCargo->getUnitInfo().getRequiredTransportSize())
+			{
+				return true;
+			}
+
 		}
 	}
-
-	return iCount;
+	return false;
 }
-
 
 int CvPlayerAI::AI_neededExplorers(CvArea* pArea)
 {
@@ -6648,12 +6644,10 @@ bool CvPlayerAI::AI_doDiploKissPinky(PlayerTypes ePlayer)
 		return false;
 	}
 
-	// PatchMod: Don't demand gold after WoI START
-	if (GC.getEraInfo(getCurrentEra()).isRevolution())
+	if (GC.getEraInfo(kPlayer.getCurrentEra()).isRevolution())
 	{
 		return false;
 	}
-	// PatchMod: Don't demand gold after WoI END
 
 	if (kPlayer.getNumCities() == 0)
 	{
@@ -7359,7 +7353,7 @@ void CvPlayerAI::AI_doEurope()
 		}
 		else if (eBuyProfessionUnit != NO_UNIT)
 		{
-			FAssert(iBuyPrice != -1);
+			FAssert(iBuyPrice >= 0);
 			if (getGold() > iBuyPrice)
 			{
 				CvUnit* pUnit = buyEuropeUnit(eBuyProfessionUnit, 100);
@@ -7367,8 +7361,32 @@ void CvPlayerAI::AI_doEurope()
 			}
 		}				
 	}
-	
-	return;
+
+	//arm any europe units that need it
+	for (int i = 0; i < getNumEuropeUnits(); i++)
+	{
+		CvUnit *pUnit = getEuropeUnit(i);
+
+		int iUndefended = 0;
+		int iNeeded = AI_totalDefendersNeeded(&iUndefended);
+		if (iNeeded > 0 || AI_isStrategy(STRATEGY_REVOLUTION_PREPARING))
+		{
+			ProfessionTypes eBestProfession = NO_PROFESSION;
+			if (GC.getGameINLINE().getSorenRandNum(100, "") < 50)
+			{
+				eBestProfession = GET_PLAYER(pUnit->getOwnerINLINE()).AI_idealProfessionForUnitAIType(UNITAI_DEFENSIVE);
+			} 
+			else 
+			{
+				eBestProfession = GET_PLAYER(pUnit->getOwnerINLINE()).AI_idealProfessionForUnitAIType(UNITAI_COUNTER);
+			}
+
+			if (eBestProfession != NO_PROFESSION && pUnit->canHaveProfession(eBestProfession, false))
+			{
+				changeProfessionEurope(pUnit->getID(), eBestProfession);
+			}
+		}
+	}
 }
 		
 void CvPlayerAI::AI_nativeYieldGift(CvUnit* pUnit)
@@ -9168,6 +9186,7 @@ int CvPlayerAI::AI_unitAIValueMultipler(UnitAITypes eUnitAI)
 				iModifier -= getNativeCombatModifier() * 4;
 				iModifier += getMissionaryRateModifier();
 				iModifier += 10 * GC.getLeaderHeadInfo(getLeaderType()).getNativeAttitude();
+				iModifier += getMissionarySuccessPercent() - 50;
 				if (iModifier != 0)
 				{
 					iLowerPop *= 100 + std::max(0, -iModifier);
@@ -9263,17 +9282,17 @@ int CvPlayerAI::AI_unitAIValueMultipler(UnitAITypes eUnitAI)
 				{
 					iValue += 3000 / (25 + iCount);
 				}
-				// PatchMod: AI Defending START
+				
 				if (AI_isStrategy(STRATEGY_REVOLUTION_PREPARING))
 				{
 					iValue += 3000 / (25 + iCount);
 				}
+				
 				if (getGold() > 5000)
 				{
 					iValue += 1;
 					iValue *= 2;
 				}
-				// PatchMod: AI Defending END
 			}
 			break;
 			
@@ -9295,12 +9314,11 @@ int CvPlayerAI::AI_unitAIValueMultipler(UnitAITypes eUnitAI)
 						iValue += 50 + getNativeCombatModifier() * 2;
 					}
 				}
-				// PatchMod: AI Defending START
+				
 				if (AI_isStrategy(STRATEGY_REVOLUTION_PREPARING))
 				{
 					iValue += 1500 / (40 + iCount);
 				}
-				// PatchMod: AI Defending END
 			}
 			break;
 			
@@ -9314,31 +9332,29 @@ int CvPlayerAI::AI_unitAIValueMultipler(UnitAITypes eUnitAI)
 				{
 					iValue += 25;
 				}
+				
 				if (AI_isStrategy(STRATEGY_REVOLUTION_DECLARING))
 				{
 					iValue += 3000 / (25 + iCount);
 				}
-				// PatchMod: AI Defending START
+				
 				if (AI_isStrategy(STRATEGY_REVOLUTION_PREPARING))
 				{
 					iValue += 3000 / (25 + iCount);
 				}
+				
 				if (getGold() > 5000)
 				{
 					iValue += 1;
 					iValue *= 2;
 				}
-				// PatchMod: AI Defending END
 			}
 			break;
 			
 		case UNITAI_TRANSPORT_SEA:
 			if (!AI_isStrategy(STRATEGY_REVOLUTION))
 			{
-				// PatchMod: AI More ships START
 				if (iCount < 6)
-//				if (iCount < 3)
-				// PatchMod: AI More ships END
 				{
 					int iLowerPop = 5 - countNumCoastalCities();
 					int iPop = 13 + 26 * iCount;
@@ -9951,11 +9967,9 @@ void CvPlayerAI::read(FDataStreamBase* pStream)
 	}
 	for (int i = 0; i < MAX_PLAYERS; i++)
 	{
-		pStream->Read(NUM_MEMORY_TYPES, m_aaiMemoryCount[i]);
+		pStream->Read(uiFlag > 1 ? NUM_MEMORY_TYPES : NUM_MEMORY_TYPES - 1, m_aaiMemoryCount[i]);
 	}
 	
-	
-
 	pStream->Read(&m_iTurnLastProductionDirty);
 	pStream->Read(&m_iTurnLastManagedPop);
 	pStream->Read(&m_iMoveQueuePasses);
@@ -10002,7 +10016,7 @@ void CvPlayerAI::write(FDataStreamBase* pStream)
 {
 	CvPlayer::write(pStream);	// write base class data first
 
-	uint uiFlag=1;
+	uint uiFlag=2;
 	pStream->Write(uiFlag);		// flag for expansion
 
 	pStream->Write(m_distanceMap.size());
@@ -11186,10 +11200,13 @@ void CvPlayerAI::AI_doStrategy()
 					
 					if (iValue > 125)
 					{
-						if (kTeam.canDoRevolution())
+						if (AI_totalDefendersNeeded(NULL) - AI_totalUnitAIs(UNITAI_OFFENSIVE) - AI_totalUnitAIs(UNITAI_COUNTER) - getNumCities() <= 0)
 						{
-							kTeam.doRevolution();
-							AI_setStrategy(STRATEGY_REVOLUTION);
+							if (kTeam.canDoRevolution())
+							{
+								kTeam.doRevolution();
+								AI_setStrategy(STRATEGY_REVOLUTION);
+							}
 						}
 					}
 				}
@@ -11627,10 +11644,7 @@ int CvPlayerAI::AI_totalDefendersNeeded(int* piUndefendedCityCount)
 	iValue = 0;
 	for (pLoopCity = firstCity(&iLoop); pLoopCity != NULL; pLoopCity = nextCity(&iLoop))
 	{
-		// PatchMod: AI Defending city START
-		int iHave = pLoopCity->AI_numDefenders(true, false);
-//		int iHave = pLoopCity->AI_numDefenders(true, true);
-		// PatchMod: AI defending city END
+		int iHave = pLoopCity->AI_numDefenders(true, true);
 		int iNeeded = pLoopCity->AI_neededDefenders();
 		
 		if (iNeeded > 0)
@@ -13105,6 +13119,16 @@ void CvPlayerAI::AI_updateNextBuyUnit()
 			}
 		}
 		
+		if (iTreasureSum < 1)
+		{
+			iTreasureSum = 1;
+		}
+
+		if (iTreasureSize < 1)
+		{
+			iTreasureSize = 1;
+		}
+
 		if (iTreasureSum > 0)
 		{
 			bValid = true;
@@ -13119,11 +13143,7 @@ void CvPlayerAI::AI_updateNextBuyUnit()
 				if (eLoopUnit != NO_UNIT)
 				{
 					CvUnitInfo& kUnitInfo = GC.getUnitInfo(eLoopUnit);
-					
-					// PatchMod: Better AI purchasing START
 					if (kUnitInfo.getDefaultProfession() == NO_PROFESSION || kUnitInfo.getDefaultUnitAIType() == UNITAI_DEFENSIVE || kUnitInfo.getDefaultUnitAIType() == UNITAI_COUNTER)
-//					if (kUnitInfo.getDefaultProfession() == NO_PROFESSION)
-					// PatchMod: Better AI purchasing END
 					{
 						int iPrice = getEuropeUnitBuyPrice(eLoopUnit);
 						if (iPrice > 0)// && !kUnitInfo.getUnitAIType(eLoopUnitAI))
@@ -13132,12 +13152,19 @@ void CvPlayerAI::AI_updateNextBuyUnit()
 							{
 								if (kUnitInfo.getCargoSpace() >= iTreasureSize)
 								{
-									iMultipler += 100 + (100 * iTreasureSum) / getEuropeUnitBuyPrice(eLoopUnit);
+									iMultipler += 100 + (100 * iTreasureSum) / iPrice;
 									iPrice = std::max(iPrice / 3, iPrice - iTreasureSum);
 								}
 							}
 
-							
+							if (kUnitInfo.getDefaultUnitAIType() == UNITAI_COMBAT_SEA)
+							{
+								iMultipler += 100 + (100 * (kUnitInfo.getCombat() * 1000)) / iPrice;
+								if (getGold() > iPrice)
+								{
+									iPrice /= 4;
+								}
+							}							
 							
 							int iGoldValue = AI_unitGoldValue(eLoopUnit, eLoopUnitAI, NULL);
 							

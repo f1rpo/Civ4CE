@@ -18,13 +18,6 @@ class CyUnit
 public:
 	CyUnit();
 
-	// PatchMod: Sail to West START
-	bool canSailEast();
-	bool setSailEast();
-	bool canSailWest();
-	bool setSailWest();
-	// PatchMod: Sail to West END
-
 	DllExport CyUnit(CvUnit* pUnit);		// Call from C++
 	CvUnit* getUnit() { return m_pUnit;	};	// Call from C++
 	const CvUnit* getUnit() const { return m_pUnit;	};	// Call from C++
@@ -161,7 +154,7 @@ public:
 	bool hasCargo();
 	bool canCargoAllMove();
 	int getUnitAICargo(UnitAITypes eUnitAI);
-	bool canAssignTradeRoute(int iRouteId) const;
+	bool canAssignTradeRoute(int iRouteId, bool bReusePath) const;
 	int getID();
 	int getGroupID();
 	bool isInGroup();
@@ -277,6 +270,7 @@ public:
 	void setUnitTravelTimer(int iValue);
 	int /*UnitTravelStates*/ getUnitTravelState();
 	void setUnitTravelState(int /*UnitTravelStates*/ eState, bool bShowEuropeScreen);
+	bool canSailEurope(int iEurope);
 	bool isColonistLocked();
 	const CvArtInfoUnit* getArtInfo(int i) const;
 	std::string getButton() const;

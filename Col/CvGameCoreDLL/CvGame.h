@@ -24,19 +24,6 @@ public:
 	DllExport CvGame();
 	DllExport virtual ~CvGame();
 
-	// PatchMod: Randomise stuff on map START
-	DllExport void reassignStartingPlots();
-	DllExport void setupScenarioPlayers();
-	// PatchMod: Randomise stuff on map END
-
-	// PatchMod: Stop F1 pressing during diplomacy START
-protected:
-	bool m_bInDiplomacy;
-public:
-	DllExport void inDiplomacy(bool bValue);
-	DllExport bool isInDiplomacy() const;
-	// PatchMod: Stop F1 pressing during diplomacy END
-
 	DllExport void init(HandicapTypes eHandicap);
 	DllExport void reset(HandicapTypes eHandicap, bool bConstructorCall = false);
 
@@ -46,7 +33,7 @@ protected:
 
 public:
 
-	DllExport void setInitialItems();
+	DllExport void setInitialItems(bool bScenario);
 	DllExport void regenerateMap();
 
 	DllExport void initDiplomacy();
@@ -141,10 +128,14 @@ public:
 	DllExport int getGameTurnYear();
 
 	DllExport int getElapsedGameTurns() const;
-	DllExport void incrementElapsedGameTurns();
+	void incrementElapsedGameTurns();
+	bool isMaxTurnsExtended() const;
+	void setMaxTurnsExtended(bool bExtended);
 	DllExport int getMaxTurns() const;
 	DllExport void setMaxTurns(int iNewValue);
-	DllExport void changeMaxTurns(int iChange);
+	void changeMaxTurns(int iChange);
+
+	DllExport void getTurnTimerText(CvWString& szBuffer) const;
 
 	DllExport int getMaxCityElimination() const;
 	DllExport void setMaxCityElimination(int iNewValue);
@@ -169,7 +160,7 @@ public:
 	DllExport void setCutoffSlice(int iNewValue);
 	DllExport void changeCutoffSlice(int iChange);
 
-	DllExport int getTurnSlicesRemaining();
+	DllExport int getTurnSlicesRemaining() const;
 	DllExport void resetTurnTimer();
 	DllExport void incrementTurnTimer(int iNumTurnSlices);
 	TurnTimerTypes getTurnTimerType() const;
@@ -234,7 +225,7 @@ public:
 	DllExport VictoryTypes getVictory() const;
 	DllExport void setWinner(TeamTypes eNewWinner, VictoryTypes eNewVictory);
 
-	DllExport GameStateTypes getGameState();
+	DllExport GameStateTypes getGameState() const;
 	DllExport void setGameState(GameStateTypes eNewValue);
 	DllExport EraTypes getStartEra() const;
 
@@ -387,6 +378,7 @@ protected:
 	bool m_bPbemTurnSent;
 	bool m_bHotPbemBetweenTurns;
 	bool m_bPlayerOptionsSent;
+	bool m_bMaxTurnsExtended;
 
 	HandicapTypes m_eHandicap;
 	PlayerTypes m_ePausePlayer;

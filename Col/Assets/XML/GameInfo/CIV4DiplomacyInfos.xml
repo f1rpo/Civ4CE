@@ -4965,19 +4965,5 @@
 				</Response>
 			</Responses>
 		</DiplomacyInfo>
-		<DiplomacyInfo>
-			<Type>AI_DIPLOCOMMENT_FORCE_START_PEACE</Type>
-			<Responses>
-				<Response>
-					<Civilizations/>
-					<Leaders/>
-					<Attitudes/>
-					<DiplomacyPowers/>
-					<DiplomacyText>
-						<Text>AI_DIPLO_FORCE_START_PEACE</Text>
-					</DiplomacyText>
-				</Response>
-			</Responses>
-		</DiplomacyInfo>
 	</DiplomacyInfos>
 </Civ4DiplomacyInfos>

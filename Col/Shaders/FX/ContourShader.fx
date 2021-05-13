@@ -8,7 +8,7 @@
 //  AUTHOR:  Tom Whittaker - 12/10/2003
 //
 //  PURPOSE: Contour Group Vertex Shader
-//                - Adjusts a vertex by a worldspace offset. 
+//                - Adjusts a vertex by a worldspace offset.
 //                - Used to place objects patches on the terrain.
 //
 //  Listing: fxc /Tvs_1_1 /EContourVS /FcContourShader.lst ContourShader.fx
@@ -18,71 +18,66 @@
 
 //------------------------------------------------------------------------------------------------
 //                          VARIABLES
-//------------------------------------------------------------------------------------------------          
+//------------------------------------------------------------------------------------------------
 
-float4x4 World : WORLD;
-float4x4 WorldViewProj: WORLDVIEWPROJECTION;
+#include "Civ4ShadowMap.fx.hlsl"
+
+float4x4 ViewProj: VIEWPROJECTION;
 
 float4x4 mtxFOW  : GLOBAL;
-float4x4 mtxLightmap: GLOBAL;
-float4 fHeightOffset0[64] : GLOBAL;		// Height offset index by Id 
+float4 f4ForestOffsets[64] : GLOBAL;
 float fFrameTime : GLOBAL;
-
-
+int iShaderIndex : GLOBAL;
 
 //------------------------------------------------------------------------------------------------
 //                          VERTEX INPUT & OUTPUT FORMATS
-//------------------------------------------------------------------------------------------------ 
+//------------------------------------------------------------------------------------------------
 struct VS_INPUT
 {
-   float3 Pos     : POSITION;
-   float3 Normal  : NORMAL;
-   float4 InstanceIndex: COLOR;
-   float2 Tex     : TEXCOORD0;
+   float4 f4Pos     : POSITION;
+   float3 f3Normal  : NORMAL;
+   float4 f4InstanceIndex: COLOR;
+   float2 f2Tex     : TEXCOORD0;
 };
-
 
 struct VS_OUTPUT
 {
-    float4 f4Pos                : POSITION;
-    float4 Diff					: COLOR0;
-    float2 f2TexCoords0         : TEXCOORD0;	//base
-    float4 f4TexCoords1         : TEXCOORD1;	//fow
-    float4 f4TexCoords2			: TEXCOORD2;	//texkill
+	float4 f4Pos                : POSITION;
+	float3 f3Normal				: COLOR0;
+	float2 f2BaseTex			: TEXCOORD0;
+	float4 f4FOWTex				: TEXCOORD1;
+	float4 f4ShadowTex			: TEXCOORD2;
 };
 
-
-//Include Civ4's generic lighting equation, used in several shaders
-#include "ComputeCiv4Lighting.fx"
-
-//float treeKillHeight : LOCAL  = 240.0f ;
-
-float3 windir :GLOBAL= { 0.2, 0, 0.0f};
+float4 windir :GLOBAL= { 0.02, 0, 0, 0 };
 //------------------------------------------------------------------------------------------------
 //                          VERTEX SHADER
 //------------------------------------------------------------------------------------------------
 //
-// - Adjust Z height based on Heights[Color.R] 
+// - Adjust Z height based on Heights[Color.R]
 //
-VS_OUTPUT ContourVS( VS_INPUT vIn )
+VS_OUTPUT ContourVS( VS_INPUT vIn, uniform bool bSimpleShader )
 {
     VS_OUTPUT vOut = (VS_OUTPUT)0;
 
 	//Transform vertex and adjust height offset
-	int index = vIn.InstanceIndex.x * 256.0f;
-    vIn.Pos.z += fHeightOffset0[index].x;				//Adjut height by Height offset 
-    float zdist = vIn.Pos.z - fHeightOffset0[index].x;
-    vIn.Pos += sin(fFrameTime + index) * zdist * windir * 0.15;
-	vOut.f4Pos  = mul(float4(vIn.Pos, 1), WorldViewProj);
-    float3 P = mul(float4(vIn.Pos, 1), (float4x3)World);			
+	int index = vIn.f4InstanceIndex.r * 255 + 0.5; //expand and bias for integer truncation
+	float4 f4ForestOffset = f4ForestOffsets[index];
+	vIn.f4Pos.xyz *= f4ForestOffset.w; //scale
+	float zHeight = vIn.f4Pos.z;
+	vIn.f4Pos.xyz += f4ForestOffset.xyz;				//Adjut height by Height offset
+	
+	if(!bSimpleShader)
+		vIn.f4Pos += sin(fFrameTime * 0.7 + index) * zHeight * windir;
+	
+	vOut.f4Pos = mul(vIn.f4Pos, ViewProj);
 
     // Set texture coordinates
-    vOut.f2TexCoords0 = vIn.Tex;
-    vOut.f4TexCoords1 = mul(float4(P,1),mtxFOW);
-    vOut.f4TexCoords2.xy = vIn.Pos.z + 80.0f;//treeKillHeight;//mul(float4(P,1),mtxLightmap);
-   	vOut.Diff.rgb	  = 1.0f;//ComputeCiv4Lighting( vIn.Normal );	// L.N
-   	vOut.Diff.a       = 1.0f;
-    
+    vOut.f2BaseTex = vIn.f2Tex;
+    vOut.f4FOWTex = mul(vIn.f4Pos, mtxFOW);
+    vOut.f4ShadowTex = getShadowTexCoord(vIn.f4Pos);
+    vOut.f3Normal = normalize(vIn.f3Normal);
+
     return vOut;
 }
 
@@ -91,111 +86,108 @@ VS_OUTPUT ContourVS( VS_INPUT vIn )
 //------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------
 //                          SAMPLERS
-//------------------------------------------------------------------------------------------------  
+//------------------------------------------------------------------------------------------------
 texture BaseTexture <string NTM = "base";>;
-texture ShadowMap   <string NTM = "shader"; int NTMIndex = 1; >;
-texture FogOfWarMap <string NTM = "shader"; int NTMIndex = 2; >;
+texture ShadowMapTexture <string NTM = "shader";  int NTMIndex = 0;>;
+texture FogOfWarMap <string NTM = "shader"; int NTMIndex = 1; >;
 
-sampler ContourBase      = sampler_state{ Texture = (BaseTexture);  AddressU = wrap; AddressV = wrap; MagFilter = linear; MinFilter = linear; MipFilter = linear;};
-sampler ShadowMapSampler = sampler_state{ Texture = (ShadowMap);    AddressU = wrap; AddressV = wrap; MagFilter = linear; MinFilter = linear; MipFilter = linear;};
-sampler FogOfWarSampler  = sampler_state{ Texture = (FogOfWarMap);  AddressU = wrap; AddressV = wrap; MagFilter = linear; MinFilter = linear; MipFilter = linear;};
+sampler ContourBase      = sampler_state{ Texture = (BaseTexture);  AddressU = wrap; AddressV = wrap; MagFilter = linear; MinFilter = linear; MipFilter = linear; srgbtexture = false;};
+sampler ShadowMap = sampler_state { Texture = (ShadowMapTexture);  AddressU = CLAMP; AddressV = CLAMP; MagFilter = LINEAR; MipFilter = NONE; MinFilter = LINEAR; srgbtexture = false;};
+sampler FogOfWarSampler  = sampler_state{ Texture = (FogOfWarMap);  AddressU = wrap; AddressV = wrap; MagFilter = linear; MinFilter = linear; MipFilter = linear; srgbtexture = false;};
 
-
-PIXELSHADER Shadowmap_PS = asm
+float4 ContourPS ( VS_OUTPUT vIn ) : COLOR
 {
-	ps_1_1	
-	tex			t0				//base		
-	tex			t1				//fow
-	//tex		    t2				//shadowmap					
+	//base * FOW
+	float4 f4Base = tex2D(ContourBase, vIn.f2BaseTex);
+	float4 f4FOW = tex2D(FogOfWarSampler, vIn.f4FOWTex.xy);
+	float4 f4Result = f4Base * f4FOW;
+	
+	float NDotL = dot(vIn.f3Normal, -f3SunLightDir);
+	float3 f3Diffuse = saturate(NDotL) * f3SunLightDiffuse;
 
-	texkill  t2
-	mul			r0, t0,t1		// base * fow
-	//mul			r0, r0,t2		// base * fow * shadow
-	mul			r0, r0, v0.rgba // base * fow * shadow * color
-};
+	//lighting
+	float fShadowFactor = getShadowFactor( ShadowMap, vIn.f4ShadowTex, float4(0, 1, 0, 0) );
+	float3 f3Lighting = f3Diffuse * fShadowFactor + f3SunAmbientColor;
+	f4Result.rgb *= f3Lighting;
+
+	return f4Result;
+}
+
+float4 ContourPS_Simple ( VS_OUTPUT vIn ) : COLOR
+{
+	//base
+	float4 f4Result = tex2D(ContourBase, vIn.f2BaseTex);
+
+	//lighting
+	float NDotL = dot(vIn.f3Normal, -f3SunLightDir);
+	float3 f3Diffuse = saturate(NDotL) * f3SunLightDiffuse;
+	float3 f3Lighting = f3Diffuse + f3SunAmbientColor;
+	f4Result.rgb *= f3Lighting;
+
+	return f4Result;
+}
+
+float4 ContourPS_Shadow ( VS_OUTPUT vIn ) : COLOR
+{
+	//base * FOW
+	float4 f4Base = tex2D(ContourBase, vIn.f2BaseTex);
+	return float4(f4Base.a, 0, f4Base.a, f4Base.a);
+}
 
 //------------------------------------------------------------------------------------------------
 //                          TECHNIQUES //bool UsesNIRenderState = true;>
 //------------------------------------------------------------------------------------------------
-technique Contour_Shader< string shadername = "Contour_Shader"; int implementation=0; bool UsesNIRenderState = true;>
+Pixelshader PSArray11[4] =
 {
-    pass P0
-    {
-        // Set the smaplers
-        Sampler[0] = <ContourBase>;
-   		Sampler[1] = <FogOfWarSampler>;
-   		//Sampler[2] = <ShadowMapSampler>;
-   		
-   		// Allow the use of multiple texcoord indices
-        TexCoordIndex[0] = 0;
-        TexCoordIndex[1] = 1;
-        //TexCoordIndex[2] = 2;
+	compile ps_1_1 ContourPS_Simple(),
+	compile ps_1_1 ContourPS(),
+	compile ps_1_1 ContourPS(),
+	compile ps_1_1 ContourPS_Shadow()
+};
 
-		TextureTransformFlags[0] = 0;
-        TextureTransformFlags[1] = PROJECTED;
-        //TextureTransformFlags[2] = PROJECTED;
-        
-        // Set up textures and texture stage states
-        VertexShader = compile vs_1_1 ContourVS();
-        PixelShader  = <Shadowmap_PS>;
-    }
-}
-
-//<bool UsesNIRenderState = true;>
-technique TContour_FF< string shadername = "Contour_Shader"; int implementation=1; bool UsesNIRenderState = true;>
+technique Contour_Shader< string shadername = "Contour_Shader"; int implementation=0;>
 {
     pass P0
     {
 		// Enable depth writing
-		ZEnable				= TRUE;
-		ZWriteEnable		= TRUE;
-		ZFunc				= LESSEQUAL;
+        ZEnable        = TRUE;
+        ZWriteEnable   = TRUE;
+        ZFunc          = LESSEQUAL;
 
-		// Disable lighting
-		Lighting			= FALSE;
+        // Enable alpha blending & testing
+        AlphaBlendEnable = TRUE;
+        AlphaTestEnable	 = TRUE;
+        SrcBlend         = SRCALPHA;
+        DestBlend        = INVSRCALPHA;
+        AlphaRef		 = 100;
+        AlphaFunc		 = GREATER;
 
-		// Disable alpha blending and testing	
-		AlphaBlendEnable = true;
-		AlphaTestEnable	 = true;
-		//AlphaRef         = 0;
-		AlphaFunc        = GREATER;
-		SrcBlend		 = SRCALPHA;
-		DestBlend		 = INVSRCALPHA;
-   
-        // textures
-        Texture[0]  = (BaseTexture);
-        Texture[1]  = (FogOfWarMap);
-
-		TexCoordIndex[0] = 0;
-		TexCoordIndex[1] = CAMERASPACEPOSITION;
-
-		TextureTransformFlags[0] = 0;
-		TextureTransformFlags[1] = Count3;	
-
-		TextureTransform[0] = 0;
-		TextureTransform[1] = <mtxFOW>;
-        
-       	// texture stage 0 - Base Texture
-		ColorOp[0]       = SelectArg1;
-		ColorArg1[0]     = Texture;
-		AlphaOp[0]		 = SelectArg1;
-		AlphaArg1[0]	 = Texture;
-
-		// texture stage 2	- FoW
-		ColorOp[1]       = Modulate;
-		ColorArg1[1]     = Texture;
-		ColorArg2[1]     = Current;
-		AlphaOp[1]		 = SelectArg1;
-		AlphaArg1[1]	 = Current;
-
-		// texture stage 3 
-		ColorOp[2]       = disable;
-		AlphaOp[2]		 = disable;
-
-      	// shaders
-		VertexShader     = NULL;
-		PixelShader      = NULL;
+		VertexShader = compile vs_1_1 ContourVS(false);
+		PixelShader	 = (PSArray11[iShaderIndex]);
     }
 }
 
+//------------------------------------------------------------------------------------------------
+//                          TECHNIQUES //bool UsesNIRenderState = true;>
+//------------------------------------------------------------------------------------------------
+technique ContourSimple_Shader< string shadername = "ContourSimple_Shader"; int implementation=0;>
+{
+    pass P0
+    {
+		// Enable depth writing
+        ZEnable        = TRUE;
+        ZWriteEnable   = TRUE;
+        ZFunc          = LESSEQUAL;
 
+        // Enable alpha blending & testing
+        AlphaBlendEnable = TRUE;
+        AlphaTestEnable	 = TRUE;
+        SrcBlend         = SRCALPHA;
+        DestBlend        = INVSRCALPHA;
+        AlphaRef		 = 100;
+        AlphaFunc		 = GREATER;
+
+		VertexShader = compile vs_1_1 ContourVS(true);
+		PixelShader	 = (PSArray11[iShaderIndex]);
+    }
+}

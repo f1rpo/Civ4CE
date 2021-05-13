@@ -7,7 +7,7 @@
 <Civ4Defines xmlns="x-schema:CIV4GlobalDefinesSchema.xml">
 	<Define>
 		<DefineName>CIV4_VERSION</DefineName>
-		<iDefineIntVal>100</iDefineIntVal>
+		<iDefineIntVal>101</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>MIN_VERSION</DefineName>
@@ -15,7 +15,7 @@
 	</Define>
 	<Define>
 		<DefineName>SAVE_VERSION</DefineName>
-		<iDefineIntVal>001</iDefineIntVal>
+		<iDefineIntVal>002</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>MAX_NUM_LANGUAGES</DefineName>
@@ -227,7 +227,7 @@
 	</Define>
 	<Define>
 		<DefineName>AMPHIB_ATTACK_MODIFIER</DefineName>
-		<iDefineIntVal>-20</iDefineIntVal>
+		<iDefineIntVal>-50</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>ENEMY_HEAL_RATE</DefineName>
@@ -271,11 +271,15 @@
 	</Define>
 	<Define>
 		<DefineName>REVOLUTION_EUROPE_UNIT_THRESHOLD_INCREASE</DefineName>
-		<iDefineIntVal>10</iDefineIntVal>
+		<iDefineIntVal>25</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>REVOLUTION_EUROPE_UNIT_THRESHOLD</DefineName>
 		<iDefineIntVal>75</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>KING_INITIAL_UNIT_INCREASE</DefineName>
+		<iDefineIntVal>4</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>REVOLUTION_EUROPE_UNIT_SHIP_MODIFIER</DefineName>
@@ -283,7 +287,7 @@
 	</Define>
 	<Define>
 		<DefineName>EDUCATION_THRESHOLD_INCREASE</DefineName>
-		<iDefineIntVal>10</iDefineIntVal>
+		<iDefineIntVal>15</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>EDUCATION_THRESHOLD</DefineName>
@@ -296,6 +300,10 @@
 	<Define>
 		<DefineName>MISSIONARY_THRESHOLD</DefineName>
 		<iDefineIntVal>1000</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>MISSIONARY_RATE_EFFECT_ON_SUCCESS</DefineName>
+		<iDefineIntVal>50</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>NATIVE_TEACH_THRESHOLD_INCREASE</DefineName>
@@ -356,6 +364,10 @@
 	<Define>
 		<DefineName>PEACE_TREATY_LENGTH</DefineName>
 		<iDefineIntVal>10</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>COLONIAL_FORCED_PEACE_TURNS</DefineName>
+		<iDefineIntVal>20</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>OCCUPATION_CULTURE_PERCENT_THRESHOLD</DefineName>
@@ -766,6 +778,10 @@
 	</Define>
 	<Define>
 		<DefineName>NATIVE_GROWTH_THRESHOLD_MULTIPLIER</DefineName>
+		<iDefineIntVal>100</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>END_GAME_DISPLAY_WARNING</DefineName>
 		<iDefineIntVal>100</iDefineIntVal>
 	</Define>
 </Civ4Defines>

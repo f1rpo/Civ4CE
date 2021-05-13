@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Alex Mantzaris (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by EXTREME (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- -->
@@ -12,7 +12,7 @@
 			<Civilopedia>TXT_KEY_LEADER_WASHINGTON_PEDIA</Civilopedia>
 			<ArtDefineTag>ART_DEF_LEADER_WASHINGTON</ArtDefineTag>
 			<AlarmType>NONE</AlarmType>
-			<iBaseAttitude>-1</iBaseAttitude>
+			<iBaseAttitude>-2</iBaseAttitude>
 			<iNativeAttitude>0</iNativeAttitude>
 			<iRefuseToTalkWarThreshold>6</iRefuseToTalkWarThreshold>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
@@ -238,6 +238,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -333,7 +337,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -400,7 +404,7 @@
 			<Civilopedia>TXT_KEY_LEADER_ADAMS_PEDIA</Civilopedia>
 			<ArtDefineTag>ART_DEF_LEADER_ADAMS</ArtDefineTag>
 			<AlarmType>NONE</AlarmType>
-			<iBaseAttitude>0</iBaseAttitude>
+			<iBaseAttitude>-1</iBaseAttitude>
 			<iNativeAttitude>0</iNativeAttitude>
 			<iRefuseToTalkWarThreshold>10</iRefuseToTalkWarThreshold>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
@@ -626,6 +630,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -721,7 +729,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -788,7 +796,7 @@
 			<Civilopedia>TXT_KEY_LEADER_CHAMPLAIN_PEDIA</Civilopedia>
 			<ArtDefineTag>ART_DEF_LEADER_CHAMPLAIN</ArtDefineTag>
 			<AlarmType>NONE</AlarmType>
-			<iBaseAttitude>3</iBaseAttitude>
+			<iBaseAttitude>1</iBaseAttitude>
 			<iNativeAttitude>2</iNativeAttitude>
 			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
@@ -1014,6 +1022,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -1109,7 +1121,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -1176,7 +1188,7 @@
 			<Civilopedia>TXT_KEY_LEADER_FRONTENAC_PEDIA</Civilopedia>
 			<ArtDefineTag>ART_DEF_LEADER_FRONTENAC</ArtDefineTag>
 			<AlarmType>NONE</AlarmType>
-			<iBaseAttitude>0</iBaseAttitude>
+			<iBaseAttitude>-1</iBaseAttitude>
 			<iNativeAttitude>4</iNativeAttitude>
 			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
@@ -1402,6 +1414,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -1497,7 +1513,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -1564,7 +1580,7 @@
 			<Civilopedia>TXT_KEY_LEADER_BOLIVAR_PEDIA</Civilopedia>
 			<ArtDefineTag>ART_DEF_LEADER_BOLIVAR</ArtDefineTag>
 			<AlarmType>NONE</AlarmType>
-			<iBaseAttitude>-2</iBaseAttitude>
+			<iBaseAttitude>-3</iBaseAttitude>
 			<iNativeAttitude>-2</iNativeAttitude>
 			<iRefuseToTalkWarThreshold>14</iRefuseToTalkWarThreshold>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
@@ -1790,6 +1806,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -1885,7 +1905,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -1952,7 +1972,7 @@
 			<Civilopedia>TXT_KEY_LEADER_SAN_MARTIN_PEDIA</Civilopedia>
 			<ArtDefineTag>ART_DEF_LEADER_SAN_MARTIN</ArtDefineTag>
 			<AlarmType>NONE</AlarmType>
-			<iBaseAttitude>-1</iBaseAttitude>
+			<iBaseAttitude>-2</iBaseAttitude>
 			<iNativeAttitude>1</iNativeAttitude>
 			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
@@ -2178,6 +2198,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -2273,7 +2297,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -2340,7 +2364,7 @@
 			<Civilopedia>TXT_KEY_LEADER_STUYVESANT_PEDIA</Civilopedia>
 			<ArtDefineTag>ART_DEF_LEADER_STUYVESANT</ArtDefineTag>
 			<AlarmType>NONE</AlarmType>
-			<iBaseAttitude>0</iBaseAttitude>
+			<iBaseAttitude>-1</iBaseAttitude>
 			<iNativeAttitude>1</iNativeAttitude>
 			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
@@ -2566,6 +2590,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -2661,7 +2689,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -2728,7 +2756,7 @@
 			<Civilopedia>TXT_KEY_LEADER_DONCK_PEDIA</Civilopedia>
 			<ArtDefineTag>ART_DEF_LEADER_DONCK</ArtDefineTag>
 			<AlarmType>NONE</AlarmType>
-			<iBaseAttitude>1</iBaseAttitude>
+			<iBaseAttitude>0</iBaseAttitude>
 			<iNativeAttitude>3</iNativeAttitude>
 			<iRefuseToTalkWarThreshold>8</iRefuseToTalkWarThreshold>
 			<iMaxGoldTradePercent>5</iMaxGoldTradePercent>
@@ -2954,6 +2982,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -3049,7 +3081,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -3123,7 +3155,7 @@
 			<iMaxWarRand>200</iMaxWarRand>
 			<iMaxWarNearbyPowerRatio>130</iMaxWarNearbyPowerRatio>
 			<iMaxWarDistantPowerRatio>0</iMaxWarDistantPowerRatio>
-			<iMaxWarMinAdjacentLandPercent>0</iMaxWarMinAdjacentLandPercent>
+			<iMaxWarMinAdjacentLandPercent>2</iMaxWarMinAdjacentLandPercent>
 			<iLimitedWarRand>300</iLimitedWarRand>
 			<iLimitedWarPowerRatio>100</iLimitedWarPowerRatio>
 			<iDogpileWarRand>100</iDogpileWarRand>
@@ -3345,6 +3377,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -3440,7 +3476,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -3514,7 +3550,7 @@
 			<iMaxWarRand>400</iMaxWarRand>
 			<iMaxWarNearbyPowerRatio>130</iMaxWarNearbyPowerRatio>
 			<iMaxWarDistantPowerRatio>0</iMaxWarDistantPowerRatio>
-			<iMaxWarMinAdjacentLandPercent>2</iMaxWarMinAdjacentLandPercent>
+			<iMaxWarMinAdjacentLandPercent>4</iMaxWarMinAdjacentLandPercent>
 			<iLimitedWarRand>200</iLimitedWarRand>
 			<iLimitedWarPowerRatio>100</iLimitedWarPowerRatio>
 			<iDogpileWarRand>100</iDogpileWarRand>
@@ -3736,6 +3772,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -3831,7 +3871,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -3905,7 +3945,7 @@
 			<iMaxWarRand>100</iMaxWarRand>
 			<iMaxWarNearbyPowerRatio>130</iMaxWarNearbyPowerRatio>
 			<iMaxWarDistantPowerRatio>0</iMaxWarDistantPowerRatio>
-			<iMaxWarMinAdjacentLandPercent>5</iMaxWarMinAdjacentLandPercent>
+			<iMaxWarMinAdjacentLandPercent>7</iMaxWarMinAdjacentLandPercent>
 			<iLimitedWarRand>200</iLimitedWarRand>
 			<iLimitedWarPowerRatio>130</iLimitedWarPowerRatio>
 			<iDogpileWarRand>25</iDogpileWarRand>
@@ -4127,6 +4167,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -4222,7 +4266,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -4296,7 +4340,7 @@
 			<iMaxWarRand>200</iMaxWarRand>
 			<iMaxWarNearbyPowerRatio>130</iMaxWarNearbyPowerRatio>
 			<iMaxWarDistantPowerRatio>0</iMaxWarDistantPowerRatio>
-			<iMaxWarMinAdjacentLandPercent>3</iMaxWarMinAdjacentLandPercent>
+			<iMaxWarMinAdjacentLandPercent>5</iMaxWarMinAdjacentLandPercent>
 			<iLimitedWarRand>50</iLimitedWarRand>
 			<iLimitedWarPowerRatio>100</iLimitedWarPowerRatio>
 			<iDogpileWarRand>25</iDogpileWarRand>
@@ -4518,6 +4562,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -4613,7 +4661,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -4687,7 +4735,7 @@
 			<iMaxWarRand>100</iMaxWarRand>
 			<iMaxWarNearbyPowerRatio>130</iMaxWarNearbyPowerRatio>
 			<iMaxWarDistantPowerRatio>0</iMaxWarDistantPowerRatio>
-			<iMaxWarMinAdjacentLandPercent>5</iMaxWarMinAdjacentLandPercent>
+			<iMaxWarMinAdjacentLandPercent>7</iMaxWarMinAdjacentLandPercent>
 			<iLimitedWarRand>100</iLimitedWarRand>
 			<iLimitedWarPowerRatio>90</iLimitedWarPowerRatio>
 			<iDogpileWarRand>50</iDogpileWarRand>
@@ -4909,6 +4957,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -5004,7 +5056,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -5078,7 +5130,7 @@
 			<iMaxWarRand>200</iMaxWarRand>
 			<iMaxWarNearbyPowerRatio>130</iMaxWarNearbyPowerRatio>
 			<iMaxWarDistantPowerRatio>0</iMaxWarDistantPowerRatio>
-			<iMaxWarMinAdjacentLandPercent>5</iMaxWarMinAdjacentLandPercent>
+			<iMaxWarMinAdjacentLandPercent>7</iMaxWarMinAdjacentLandPercent>
 			<iLimitedWarRand>80</iLimitedWarRand>
 			<iLimitedWarPowerRatio>100</iLimitedWarPowerRatio>
 			<iDogpileWarRand>50</iDogpileWarRand>
@@ -5300,6 +5352,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -5395,7 +5451,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -5469,7 +5525,7 @@
 			<iMaxWarRand>200</iMaxWarRand>
 			<iMaxWarNearbyPowerRatio>130</iMaxWarNearbyPowerRatio>
 			<iMaxWarDistantPowerRatio>0</iMaxWarDistantPowerRatio>
-			<iMaxWarMinAdjacentLandPercent>4</iMaxWarMinAdjacentLandPercent>
+			<iMaxWarMinAdjacentLandPercent>6</iMaxWarMinAdjacentLandPercent>
 			<iLimitedWarRand>100</iLimitedWarRand>
 			<iLimitedWarPowerRatio>120</iLimitedWarPowerRatio>
 			<iDogpileWarRand>50</iDogpileWarRand>
@@ -5691,6 +5747,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -5786,7 +5846,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -5860,7 +5920,7 @@
 			<iMaxWarRand>400</iMaxWarRand>
 			<iMaxWarNearbyPowerRatio>130</iMaxWarNearbyPowerRatio>
 			<iMaxWarDistantPowerRatio>0</iMaxWarDistantPowerRatio>
-			<iMaxWarMinAdjacentLandPercent>3</iMaxWarMinAdjacentLandPercent>
+			<iMaxWarMinAdjacentLandPercent>5</iMaxWarMinAdjacentLandPercent>
 			<iLimitedWarRand>160</iLimitedWarRand>
 			<iLimitedWarPowerRatio>80</iLimitedWarPowerRatio>
 			<iDogpileWarRand>100</iDogpileWarRand>
@@ -6082,6 +6142,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -6177,7 +6241,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -6465,6 +6529,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -6560,7 +6628,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -6848,6 +6916,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -6943,7 +7015,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -7227,6 +7299,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -7322,7 +7398,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>
@@ -7610,6 +7686,10 @@
 					<MemoryType>MEMORY_REVENGE_TAKEN</MemoryType>
 					<iMemoryRand>100</iMemoryRand>
 				</MemoryDecay>
+				<MemoryDecay>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
+					<iMemoryRand>100</iMemoryRand>
+				</MemoryDecay>
 			</MemoryDecays>
 			<MemoryAttitudePercents>
 				<MemoryAttitudePercent>
@@ -7705,7 +7785,7 @@
 					<iMemoryAttitudePercent>200</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 				<MemoryAttitudePercent>
-					<MemoryType>MEMORY_MISSION_FAIL</MemoryType>
+					<MemoryType>MEMORY_MISSIONARY_FAIL</MemoryType>
 					<iMemoryAttitudePercent>-50</iMemoryAttitudePercent>
 				</MemoryAttitudePercent>
 			</MemoryAttitudePercents>

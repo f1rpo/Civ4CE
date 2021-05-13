@@ -7,6 +7,7 @@ import traceback
 # for file ops
 import os
 import sys
+import time
 
 # For Civ game code access
 from CvPythonExtensions import *
@@ -56,10 +57,6 @@ EventShowWonder = 5012
 EventCreateTradeRoute = 5013
 EventEditTradeRoute = 5014
 
-# Dale - AoD: AoDCheatMenu START
-EventAoDCheatMenu = 6000
-# Dale - AoD: AoDCheatMenu END
-
 EventLButtonDown=1
 EventLcButtonDblClick=2
 EventRButtonDown=3
@@ -69,9 +66,7 @@ EventKeyDown=6
 EventKeyUp=7
 
 # List of unreported Events
-# Dale - AoD: AoDCheatMenu START
-SilentEvents = [EventEditCityName, EventEditUnitName, EventCreateTradeRoute, EventEditTradeRoute, EventAoDCheatMenu]
-# Dale - AoD: AoDCheatMenu END
+SilentEvents = [EventEditCityName, EventEditUnitName, EventCreateTradeRoute, EventEditTradeRoute]
 
 # Popup defines (TODO: Expose these from C++)
 FONT_CENTER_JUSTIFY=1<<2
@@ -90,6 +85,25 @@ def convertToStr(s):
 		return s.encode("latin_1")
 	return s
 
+class Profile:
+	def __init__(self):
+		self.timeStack = []		
+	
+	def reset(self):
+		self.timeStack = []
+
+	def startTime(self):
+		fTime = time.clock()
+		self.timeStack.append(fTime)
+	
+	def endTime(self, text):
+		fEndTime = time.clock()
+		fStartTime = self.timeStack.pop(len(self.timeStack) - 1)
+		strIndent = ""
+		for i in range(len(self.timeStack) - 1):
+			strIndent += "  "
+		print "%s%s: %.3fs" % (strIndent, text, fEndTime - fStartTime)
+		
 class RedirectDebug:
 	"""Send Debug Messages to Civ Engine"""
 	def __init__(self):
@@ -160,9 +174,6 @@ def getScoreComponent(iRawScore, iInitial, iMax, iFactor, bExponential, bFinal, 
 
 	return int(iScore)
 
-def getOppositeCardinalDirection(dir):
-	return (dir + 2) % CardinalDirectionTypes.NUM_CARDINALDIRECTION_TYPES
-
 def shuffle(num, rand):
 	"returns a tuple of size num of shuffled numbers"
 	piShuffle = [0]*num
@@ -175,23 +186,6 @@ def findInfoTypeNum(typeStr):
 	idx = gc.getInfoTypeForString(typeStr)
 	pyAssert(idx != -1, "Can't find type enum for type tag %s" %(typeStr,))
 	return idx
-
-def getInfo(strInfoType, strInfoName):	# returns info for InfoType
-	#set Type to lowercase
-	strInfoType = strInfoType.lower()
-	strInfoName = strInfoName.capitalize()
-
-	#get the appropriate dictionary item
-	infoDict = GlobalInfosMap.get(strInfoType)
-	#get the number of infos
-	numInfos = infoDict['NUM']()
-	#loop through each info
-	for i in range(numInfos):
-		loopInfo = infoDict['GET'](i)
-
-		if loopInfo.getDescription() == strInfoName:
-			#and return the one requested
-			return loopInfo
 
 def AdjustBuilding(add, all, BuildingIdx, pCity): # adds/removes buildings from a city
 	"Function for toggling buildings in cities"

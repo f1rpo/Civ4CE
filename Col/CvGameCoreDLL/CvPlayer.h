@@ -32,42 +32,6 @@ public:
 	CvPlayer();
 	virtual ~CvPlayer();
 
-	// Dale - AoD: AI Autoplay START
-	void setDisableHuman( bool newVal );
-	bool getDisableHuman( );
-protected:
-	bool m_bDisableHuman;
-public:
-	// Dale - AoD: AI Autoplay END
-
-	// PatchMod: REF Reduction START
-	void doREFReduction(int iGold);
-	// PatchMod: REF Reduction END
-
-	// PatchMod: Force start peace START
-	void doKingForcePeace();
-	// PatchMod: Force start peace END
-
-	// PatchMod: Intercept Europe units START
-	void interceptEuropeUnits();
-	// PatchMod: Intercept Europe units END
-
-	// PatchMod: Mission failure START
-protected:
-	int m_iMissionFailurePercent;
-public:
-	int getMissionFailurePercent() const;
-	void setMissionFailurePercent(int iValue);
-	// PatchMod: Mission failure END
-
-	// PatchMod: Tax party city START
-	int getHighestStoredYieldPartyCityId(YieldTypes eYield) const;
-	// PatchMod: Tax party city END
-
-	// PatchMod: Clear blockaded goods START
-	void setYieldEuropeTradableAll();
-	// PatchMod: Clear blockaded goods END
-
 	DllExport void init(PlayerTypes eID);
 	DllExport void setupGraphical();
 	DllExport void reset(PlayerTypes eID = NO_PLAYER, bool bConstructorCall = false);
@@ -191,7 +155,6 @@ public:
 	DllExport int greatGeneralThreshold() const;
 	int immigrationThreshold() const;
 	int revolutionEuropeUnitThreshold() const;
-	int educationThreshold() const;
 	DllExport CvPlot* getStartingPlot() const;
 	DllExport void setStartingPlot(CvPlot* pNewValue, bool bUpdateStartDist);
 	DllExport int getTotalPopulation() const;
@@ -205,6 +168,7 @@ public:
 	DllExport int getGold() const;
 	DllExport void setGold(int iNewValue);
 	DllExport void changeGold(int iChange);
+	int getExtraTradeMultiplier(PlayerTypes eOtherPlayer) const;
 	DllExport int getAdvancedStartPoints() const;
 	DllExport void setAdvancedStartPoints(int iNewValue);
 	DllExport void changeAdvancedStartPoints(int iChange);
@@ -231,8 +195,8 @@ public:
 	void setImmigrationThresholdMultiplier(int iChange);
 	int getRevolutionEuropeUnitThresholdMultiplier() const;
 	void setRevolutionEuropeUnitThresholdMultiplier(int iChange);
-	int getEducationThresholdMultiplier() const;
-	void setEducationThresholdMultiplier(int iChange);
+	int getKingNumUnitMultiplier() const;
+	void setKingNumUnitMultiplier(int iChange);
 	int getNativeAngerModifier() const;
 	void changeNativeAngerModifier(int iChange);
 	int getFreeExperience() const;
@@ -338,6 +302,7 @@ public:
 	int getYieldRate(YieldTypes eIndex) const;
 	bool isYieldEuropeTradable(YieldTypes eIndex) const;
 	void setYieldEuropeTradable(YieldTypes eIndex, bool bTradeable);
+	void setYieldEuropeTradableAll();
 	bool isFeatAccomplished(FeatTypes eIndex) const;
 	void setFeatAccomplished(FeatTypes eIndex, bool bNewValue);
 	DllExport bool shouldDisplayFeatPopup(FeatTypes eIndex) const;
@@ -421,6 +386,7 @@ public:
 	void loadUnitFromEurope(CvUnit* pUnit, CvUnit* pTransport);
 	void unloadUnitToEurope(CvUnit* pUnit);
 	void transferUnitInEurope(CvUnit* pUnit, CvUnit* pTransport);
+	void doREFReduction(int iGold);
 
 	int countNumTravelUnits(UnitTravelStates eState, DomainTypes eDomain) const;
 	int countNumDomainUnits(DomainTypes eDomain) const;
@@ -542,6 +508,7 @@ public:
 	int getRevolutionEuropeTradeCount() const;
 	void changeRevolutionEuropeTradeCount(int iChange);
 	bool canTradeWithEurope() const;
+	void interceptEuropeUnits();
 
 	int getSellToEuropeProfit(YieldTypes eYield, int iAmount) const;
 	int getYieldSellPrice(YieldTypes eYield) const;
@@ -569,16 +536,18 @@ public:
 	bool checkIndependence() const;
 
 	void applyMissionaryPoints(CvCity* pCity);
-	int getMissionaryPoints(CivilizationTypes eCivilization) const;
-	void changeMissionaryPoints(CivilizationTypes eCivilization, int iChange);
-	int getMissionaryThresholdMultiplier(CivilizationTypes eCivilization) const;
-	void setMissionaryThresholdMultiplier(CivilizationTypes eCivilization, int iValue);
-	int missionaryThreshold(CivilizationTypes eCivilization) const;
-	void burnMissions(CivilizationTypes eCivilization);
-	bool canHaveMission(CivilizationTypes eCivilization) const;
+	int getMissionaryPoints(PlayerTypes ePlayer) const;
+	void changeMissionaryPoints(PlayerTypes ePlayer, int iChange);
+	int getMissionaryThresholdMultiplier(PlayerTypes ePlayer) const;
+	void setMissionaryThresholdMultiplier(PlayerTypes ePlayer, int iValue);
+	int missionaryThreshold(PlayerTypes ePlayer) const;
+	void burnMissions(PlayerTypes ePlayer);
+	bool canHaveMission(PlayerTypes ePlayer) const;
 	void validateMissions();
 	int getMissionaryRateModifier() const;
 	void changeMissionaryRateModifier(int iChange);
+	int getMissionarySuccessPercent() const;
+	void setMissionarySuccessPercent(int iValue);
 
 	int getRebelCombatPercent() const;
 
@@ -596,9 +565,9 @@ public:
 
 	UnitTypes getDocksNextUnit(int i) const;
 	UnitTypes pickBestImmigrant();
-	bool canHurry(HurryTypes eHurry) const;
+	bool canHurry(HurryTypes eHurry, int iIndex) const;
 	void hurry(HurryTypes eHurry, int iIndex);
-	int getHurryGold(HurryTypes eHurry) const;
+	int getHurryGold(HurryTypes eHurry, int iIndex) const;
 	const wchar* getHurryItemTextKey(HurryTypes eHurry, int iData) const;
 	void doImmigrant(int iIndex);
 
@@ -661,7 +630,7 @@ public:
 	virtual CvCity* AI_findBestPort() const = 0;
 
 	bool checkPopulation() const;
-	bool checkPower() const;
+	bool checkPower(bool bReset);
 
 protected:
 
@@ -678,7 +647,7 @@ protected:
 	int m_iDomesticGreatGeneralRateModifier;
 	int m_iImmigrationThresholdMultiplier;
 	int m_iRevolutionEuropeUnitThresholdMultiplier;
-	int m_iEducationThresholdMultiplier;
+	int m_iKingNumUnitMultiplier;
 	int m_iNativeAngerModifier;
 	int m_iFreeExperience;
 	int m_iWorkerSpeedModifier;
@@ -706,6 +675,7 @@ protected:
 	int m_iRevolutionEuropeTradeCount;
 	int m_iFatherPointMultiplier;
 	int m_iMissionaryRateModifier;
+	int m_iMissionarySuccessPercent;
 
 	uint m_uiStartTime;  // XXX save these?
 

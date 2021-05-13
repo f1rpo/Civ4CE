@@ -19,8 +19,8 @@
 #include "CvDLLFAStarIFaceBase.h"
 
 
-#define BUILDINGFOCUS_FOOD					(1 << 1)
 #define BUILDINGFOCUS_NO_RECURSION			(1 << 31)
+#define BUILDINGFOCUS_BUILD_ANYTHING		(1 << 30)
 
 #define YIELD_DISCOUNT_TURNS 			10
 
@@ -99,7 +99,7 @@ void CvCityAI::AI_reset()
 	m_bAssignWorkDirty = false;
 	m_bChooseProductionDirty = false;
 	
-	m_bWorkforceHack = false;
+	m_iWorkforceHack = 0;
 
 	m_routeToCity.reset();
 	
@@ -244,46 +244,8 @@ void CvCityAI::AI_assignWorkingPlots()
 	it's kind of expensive, but not THAT expensive with only 8 plots per colony
 	and the population numbers being low.
 	*/
-//	std::vector<PopUnit> orderedPop;
 	std::deque<CvUnit*> citizens;
-//	for (uint i = 0; i < m_aPopulationUnits.size(); ++i)
-//	{
-//		CvUnit* pUnit = m_aPopulationUnits[i];
-//		if (pUnit != NULL)
-//		{
-//			CvPlot* pWorkedPlot = getPlotWorkedByUnit(pUnit);
-//			if (!pUnit->isColonistLocked() || pUnit->getProfession() == NO_PROFESSION ||
-//				(pWorkedPlot != NULL && pWorkedPlot->getYield((YieldTypes) GC.getProfessionInfo(pUnit->getProfession()).getYieldProduced()) == 0))
-//			{
-//				if (pWorkedPlot != NULL)
-//				{
-//					clearUnitWorkingPlot(pWorkedPlot);
-//				}
-//				pUnit->setColonistLocked(false);
-//				pUnit->setProfession(NO_PROFESSION);				
-//				
-//				PopUnit kPopUnit;
-//				kPopUnit.m_pUnit = pUnit;
-//				
-//				ProfessionTypes eIdealProfession = GET_PLAYER(getOwnerINLINE()).AI_idealProfessionForUnit(pUnit->getUnitType());
-//				if (eIdealProfession != NO_PROFESSION)
-//				{
-//					if (!pUnit->canHaveProfession(eIdealProfession))
-//					{
-//						eIdealProfession = NO_PROFESSION;
-//					}
-//				}
-//				kPopUnit.m_eIdealProfession = eIdealProfession;
-//				
-//				orderedPop.push_back(kPopUnit);
-//			}
-//		}
-//	}
-//	
-//	std::sort(orderedPop.begin(), orderedPop.end());
-	
-	//Plot workers go first. Followed by
-	
+		
 	for (int iPass = 0; iPass < 3; ++iPass)
 	{
 		for (uint i = 0; i < m_aPopulationUnits.size(); ++i)
@@ -380,145 +342,6 @@ void CvCityAI::AI_assignWorkingPlots()
 			}
 		}
 	}
-	
-	/*
-	citizens.clear();
-	for (uint i = 0; i < m_aPopulationUnits.size(); ++i)
-	{
-		CvUnit* pUnit = m_aPopulationUnits[i];
-		if (pUnit != NULL)
-		{
-			if (!pUnit->isColonistLocked())
-			{
-				ProfessionTypes eProfession = pUnit->getProfession();
-				if (eProfession == NO_PROFESSION || (GC.getProfessionInfo(eProfession).isCitizen() && !GC.getProfessionInfo(eProfession).isWorkPlot()))
-				{			
-					citizens.push_back(pUnit);
-				}
-			}
-		}
-	}
-	
-	//Finally, prune each profession (remove superflous units) and reassign them.
-	//This can happen when like an indentured servant joins a profession with say
-	//6 available input, followed by a master who can still take the role, because
-	//there are still 4 input available. At this point, the servant is now superflous.
-	//Technically it can even happen with say, 2 servants taking up the profession
-	//followed by the master - both servant are superflous.
-	
-	for (int i=0;i<GC.getNumProfessionInfos();i++)
-	{
-		ProfessionTypes eLoopProfession = (ProfessionTypes) i;
-		if (GC.getCivilizationInfo(getCivilizationType()).isValidProfession(eLoopProfession))
-		{
-			CvProfessionInfo& kProfessionInfo = GC.getProfessionInfo(eLoopProfession);
-			if (kProfessionInfo.isCitizen())
-			{
-				if (!kProfessionInfo.isWorkPlot())
-				{
-					//int iYieldOutput = getProfessionOutput(eLoopProfession, pUnit);
-					//int iYieldInput = getProfessionInput(eLoopProfession, pUnit);
-					YieldTypes eYieldInputType = (YieldTypes) kProfessionInfo.getYieldConsumed();
-					//YieldTypes eYieldOutputType = (YieldTypes) kProfessionInfo.getYieldProduced();
-					
-					if ((eYieldInputType != NO_YIELD) && (eYieldInputType != YIELD_FOOD))
-					{
-						bool bDone = false;
-						while(!bDone)
-						{
-							int iNetYield = getRawYieldProduced(eYieldInputType) - getRawYieldConsumed(eYieldInputType);
-							if (iNetYield < 0)
-							{
-								int iBestValue = MAX_INT;
-								CvUnit* pBestUnit = NULL;
-								
-								for (uint i = 0; i < m_aPopulationUnits.size(); ++i)
-								{
-									CvUnit* pUnit = m_aPopulationUnits[i];
-									if (pUnit != NULL)
-									{
-										if (!pUnit->isColonistLocked())
-										{
-											if (pUnit->getProfession() == eLoopProfession)
-											{
-												int iValue = getProfessionOutput(eLoopProfession, pUnit);
-												if (iValue < iBestValue)
-												{
-													iBestValue = iValue;
-													pBestUnit = pUnit;
-												}
-											}
-										}
-									}
-								}
-								if (pBestUnit != NULL)
-								{
-									pBestUnit->setProfession(NO_PROFESSION);
-									CvUnit* pDisplacedUnit = NULL;
-									pDisplacedUnit = AI_assignToBestJob(pBestUnit);
-									
-									if (pBestUnit->getProfession() == eLoopProfession)
-									{
-										bDone = true;
-										break;
-									}								
-
-									int iCount = 0;
-									while (pDisplacedUnit != NULL)
-									{
-										pDisplacedUnit = AI_assignToBestJob(pDisplacedUnit);
-										if(pDisplacedUnit != NULL)
-										{
-											FAssert(pDisplacedUnit->getProfession() != NO_PROFESSION);
-										}
-										
-										iCount++;
-										if (iCount > 100)
-										{
-											FAssertMsg(false, "Infinite loop in workforce assignment");
-											bDone = true;
-											break;
-										}
-									}
-								}
-								else
-								{
-									bDone = true;
-									break;
-								}
-							}
-							else
-							{
-								bDone = true;
-								break;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	iMaxIterations = citizens.size() * 2;
-	
-	iCount = 0;
-	while (!citizens.empty())
-	{
-		CvUnit* pUnit = citizens.back();
-		citizens.pop_back();
-		
-		CvUnit* pOldUnit = AI_assignToBestJob(pUnit, true);
-		if (pOldUnit != NULL)
-		{
-			citizens.push_back(pOldUnit);
-		}
-		iCount++;
-		if (iCount > iMaxIterations)
-		{
-			FAssertMsg(false, "AI plot assignment confusion");
-			break;
-		}
-	}*/
 	
 	AI_setAssignWorkDirty(false);
 
@@ -656,21 +479,33 @@ void CvCityAI::AI_chooseProduction()
 	
 	if (isNative())
 	{
-		if (AI_chooseUnit(UNITAI_DEFENSIVE))
+		if (AI_chooseUnit(UNITAI_DEFENSIVE, false))
 		{
 			return;
 		}
 	}
 	
-	if (AI_chooseUnit(NO_UNITAI))
+	if (AI_chooseUnit(NO_UNITAI, false))
+		{
+			return;
+		}
+
+	if (AI_chooseBuilding(BUILDINGFOCUS_BUILD_ANYTHING, MAX_INT, 8))
 	{
 		return;
 	}
 	
+	if (AI_chooseUnit(NO_UNITAI, true))
+	{
+		return;
+	}
+	
+	//colonies should always be building something
+	FAssertMsg(isNative(), "AI not building anything.");
 }
 
 
-UnitTypes CvCityAI::AI_bestUnit(bool bAsync, UnitAITypes* peBestUnitAI) const
+UnitTypes CvCityAI::AI_bestUnit(bool bAsync, UnitAITypes* peBestUnitAI, bool bPickAny) const
 {
 	int aiUnitAIVal[NUM_UNITAI_TYPES];
 	UnitTypes eUnit = NO_UNIT;
@@ -706,8 +541,11 @@ UnitTypes CvCityAI::AI_bestUnit(bool bAsync, UnitAITypes* peBestUnitAI) const
 		aiUnitAIVal[iI] *= std::max(0, (GC.getLeaderHeadInfo(getPersonalityType()).getUnitAIWeightModifier(iI) + 100));
 		aiUnitAIVal[iI] /= 100;
 		
-		aiUnitAIVal[iI] *= GET_PLAYER(getOwnerINLINE()).AI_unitAIValueMultipler((UnitAITypes)iI);
-		aiUnitAIVal[iI] /= 100;
+		if (!bPickAny)
+		{
+			aiUnitAIVal[iI] *= GET_PLAYER(getOwnerINLINE()).AI_unitAIValueMultipler((UnitAITypes)iI);
+			aiUnitAIVal[iI] /= 100;
+		}
 	}
 
 	for (iI = 0; iI < NUM_UNITAI_TYPES; iI++)
@@ -980,7 +818,6 @@ BuildingTypes CvCityAI::AI_bestBuildingIgnoreRequirements(int iFocusFlags, int i
 int CvCityAI::AI_buildingValue(BuildingTypes eBuilding, int iFocusFlags) const
 {
 	//
-	
 	bool bIsStarted = getBuildingProduction(eBuilding) > 0;
 	
 	CvBuildingInfo& kBuildingInfo = GC.getBuildingInfo(eBuilding);
@@ -1002,7 +839,6 @@ int CvCityAI::AI_buildingValue(BuildingTypes eBuilding, int iFocusFlags) const
 			iCityCapacity += kBuildingInfo.getYieldStorage() * GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getStoragePercent() / 100;
 		}
 				
-		int iHighestExcess = 0;
 		int iTotalExcess = 0;
 		int iHighestPercentFull = 0;
 
@@ -1016,7 +852,6 @@ int CvCityAI::AI_buildingValue(BuildingTypes eBuilding, int iFocusFlags) const
 				if (iExcess > 0)
 				{
 					iTotalExcess += iExcess;
-					iHighestExcess = std::max(iHighestExcess, iTotalExcess);
 				}
 				
 				iHighestPercentFull = std::max(iHighestPercentFull, 100 * getYieldStored(eLoopYield) / iCityCapacity);
@@ -1025,9 +860,9 @@ int CvCityAI::AI_buildingValue(BuildingTypes eBuilding, int iFocusFlags) const
 		
 		int iTempValue = kBuildingInfo.getYieldStorage();
 		
-		iValue += iTempValue / (bIsMajorCity ? 3 : 6);
-		iValue += iTempValue * iHighestPercentFull / 400;
-		iValue += iTempValue * (((iTotalExcess - iHighestExcess) / 2 + iHighestExcess) * 100 / GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getStoragePercent()) / 100;
+		iValue += iTempValue / 3;
+		iValue += iHighestPercentFull;
+		iValue += 10 * iTotalExcess;
 		
 		bIsMilitary = true;
 	}
@@ -1080,19 +915,26 @@ int CvCityAI::AI_buildingValue(BuildingTypes eBuilding, int iFocusFlags) const
 			{
 				YieldTypes eYieldConsumed = (YieldTypes)kLoopProfession.getYieldConsumed();
 				YieldTypes eYieldProduced = (YieldTypes) kLoopProfession.getYieldProduced();
-				if (((eYieldProduced != NO_YIELD) && (!(kOwner.AI_isYieldFinalProduct(eYieldProduced) || eYieldProduced == YIELD_HAMMERS)) || bIsMajorCity))
+				if ((eYieldProduced != NO_YIELD) && !kOwner.AI_isYieldFinalProduct(eYieldProduced) && (eYieldProduced != YIELD_HAMMERS) || bIsMajorCity)
 				{
 					int iHighestOutput = kOwner.AI_highestProfessionOutput(eLoopProfession, this);
-					if (kBuildingInfo.getProfessionOutput() > iHighestOutput)
+					int iOutput = kBuildingInfo.getProfessionOutput();
+					
+					int iModifiedOutput = iOutput;
+					if(eYieldProduced != NO_YIELD)
 					{
-						int iOutput = kBuildingInfo.getProfessionOutput();
+						iModifiedOutput *= 100 + kBuildingInfo.getYieldModifier(eYieldProduced);
+						iModifiedOutput /= 100;
+					}
 						
+					if (iModifiedOutput > iHighestOutput)
+					{
 						if (iOutput != 0)
 						{
 							int iRawYieldProduced = getRawYieldProduced(eYieldProduced);
 							if (iOutput > 0)
 							{
-								int iTempValue = AI_estimateYieldValue(eYieldProduced, iOutput);
+								int iTempValue = AI_estimateYieldValue(eYieldProduced, iModifiedOutput);
 								if (iRawYieldProduced > 0)
 								{
 									iTempValue *= 150 + 10 * iRawYieldProduced;
@@ -1312,7 +1154,7 @@ int CvCityAI::AI_buildingValue(BuildingTypes eBuilding, int iFocusFlags) const
 					 }
 					if (bOthersNeeded)
 					{
-						iValue += AI_buildingValue(eLoopBuilding, iFocusFlags | BUILDINGFOCUS_NO_RECURSION) / (bOthersNeeded ? 3 : 6);
+						iValue += AI_buildingValue(eLoopBuilding, iFocusFlags | BUILDINGFOCUS_NO_RECURSION) / 3;
 					}
 				}
 			}
@@ -1349,6 +1191,27 @@ int CvCityAI::AI_buildingValue(BuildingTypes eBuilding, int iFocusFlags) const
 			{
 				iValue -= AI_buildingValue(eBestExisting, iFocusFlags);
 			}
+		}
+	}
+	
+	//increase building value if only needs hammers
+	if (!isHasConceptualBuilding(eBuilding) && (iFocusFlags & BUILDINGFOCUS_BUILD_ANYTHING))
+	{
+		iValue += 10;
+
+		bool bNonHammerCost = false;
+		for (int i = 0; i < NUM_YIELD_TYPES; ++i)
+		{
+			if ((kBuildingInfo.getYieldCost(i) > 0) && (i != YIELD_HAMMERS))
+			{
+				bNonHammerCost = true;
+				break;
+			}
+		}
+
+		if (!bNonHammerCost)
+		{
+			iValue += 10;
 		}
 	}
 	
@@ -1412,15 +1275,7 @@ int CvCityAI::AI_neededDefenders() const
 		return 2 + getHighestPopulation() / 2;
 	}
 
-	// PatchMod: AI defending city START
-//	if (!(GET_TEAM(getTeam()).AI_isWarPossible()))
-//	{
-//		return 0;
-//	}
-
 	iDefenders = 2;
-//	iDefenders = 1;
-	// PatchMod: AI defending city END
 	
 	if (GET_PLAYER(getOwnerINLINE()).AI_isStrategy(STRATEGY_REVOLUTION_PREPARING))
 	{
@@ -1433,12 +1288,8 @@ int CvCityAI::AI_neededDefenders() const
 			}
 		}
 	}
-		
-	
-	// PatchMod: AI defending city START
+			
 	iDefenders += getPopulation() / 2;
-//	iDefenders += getPopulation() / 8;
-	// PatchMod: AI defending city END
 	
 	return iDefenders;
 }
@@ -2290,7 +2141,7 @@ bool CvCityAI::AI_chooseBuild()
 	
 }
 
-bool CvCityAI::AI_chooseUnit(UnitAITypes eUnitAI)
+bool CvCityAI::AI_chooseUnit(UnitAITypes eUnitAI, bool bPickAny)
 {
 	UnitTypes eBestUnit;
 
@@ -2300,7 +2151,7 @@ bool CvCityAI::AI_chooseUnit(UnitAITypes eUnitAI)
 	}
 	else
 	{
-		eBestUnit = AI_bestUnit(false, &eUnitAI);
+		eBestUnit = AI_bestUnit(false, &eUnitAI, bPickAny);
 	}
 
 	if (eBestUnit != NO_UNIT)
@@ -3767,9 +3618,9 @@ int CvCityAI::AI_calculateAlarm(PlayerTypes eIndex) const
 	}
 	
 	//Religion
-	if (getMissionaryCivilization() != NO_CIVILIZATION)
+	if (getMissionaryPlayer() != NO_PLAYER)
 	{
-		if (getMissionaryCivilization() == GET_PLAYER(eIndex).getCivilizationType())
+		if (GET_PLAYER(getMissionaryPlayer()).getCivilizationType() == GET_PLAYER(eIndex).getCivilizationType())
 		{
 			int iModifier = 100 + GET_PLAYER(eIndex).getMissionaryRateModifier() + GET_PLAYER(getOwnerINLINE()).getMissionaryRateModifier();
 			iNegativeAlarm += getMissionaryRate() * kAlarm.getMissionary() * iModifier / 100;
@@ -5434,16 +5285,16 @@ void CvCityAI::AI_educateStudent(int iUnitId)
 	}
 }
 
-//This supresses certain checks to all the workforce allocation algorithm to run
+//This suppresses certain checks to all the workforce allocation algorithm to run
 //more smoothly (ignore time-consuming checks and swaps)
 void CvCityAI::AI_setWorkforceHack(bool bNewValue)
 {
-	m_bWorkforceHack = bNewValue;
+	m_iWorkforceHack += (bNewValue ? 1 : -1);
 }
 
 bool CvCityAI::AI_isWorkforceHack()
 {
-	return m_bWorkforceHack;
+	return (m_iWorkforceHack > 0);
 }
 
 

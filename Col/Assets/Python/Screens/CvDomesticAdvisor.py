@@ -16,10 +16,9 @@ class CvDomesticAdvisor:
 	def __init__(self):
 		self.listSelectedCities = []
 		self.selectedSelectionGroupHeadUnitID = -1
-
+		
 	# Screen construction function
 	def interfaceScreen(self):
-
 		player = gc.getPlayer(gc.getGame().getActivePlayer())
 
 		# Create a new screen, called DomesticAdvisur, using the file CvDomesticAdvisor.py for input
@@ -155,7 +154,7 @@ class CvDomesticAdvisor:
 
 		# Draw the city list...
 		self.drawContents()
-
+		
 	def drawButtons(self):
 		screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
 
@@ -391,7 +390,6 @@ class CvDomesticAdvisor:
 							SelectionState = True
 							
 	def RebuildArrays (self):
-	
 		#Get a list of the Players Cities
 		player = gc.getPlayer(gc.getGame().getActivePlayer())
 		self.Cities = []
@@ -407,7 +405,7 @@ class CvDomesticAdvisor:
 		self.Transports = []
 		SelectionGroup, Iterator = player.firstSelectionGroup(false)
 		while (SelectionGroup != None):
-			if (SelectionGroup.canAssignTradeRoute(-1)):
+			if (SelectionGroup.canAssignTradeRoute(-1, false)):
 				self.Transports.append(SelectionGroup)		
 			SelectionGroup, Iterator = player.nextSelectionGroup(Iterator, false)
 
@@ -415,8 +413,10 @@ class CvDomesticAdvisor:
 		for iTransport in range(len(self.Transports)):
 			Transport = self.Transports[iTransport]
 			RouteValidArray = []
+			bReusePath = false
 			for Route in self.Routes:
-				RouteValidArray.append(Transport.canAssignTradeRoute(Route.getID()))
+				RouteValidArray.append(Transport.canAssignTradeRoute(Route.getID(), bReusePath))
+				bReusePath = true
 			self.RouteValidity.append(RouteValidArray)
 
 	def RebuildTransportTable (self):

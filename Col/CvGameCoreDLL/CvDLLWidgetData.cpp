@@ -1364,7 +1364,7 @@ void CvDLLWidgetData::parseHurryHelp(CvWidgetDataStruct &widgetDataStruct, CvWSt
 			}
 
 			bool bFirst = true;
-			if (!(GET_PLAYER(pHeadSelectedCity->getOwnerINLINE()).canHurry((HurryTypes)(widgetDataStruct.m_iData1))))
+			if (!(GET_PLAYER(pHeadSelectedCity->getOwnerINLINE()).canHurry((HurryTypes)(widgetDataStruct.m_iData1), -1)))
 			{
 				for (int iI = 0; iI < GC.getNumCivicInfos(); iI++)
 				{
@@ -1421,7 +1421,7 @@ void CvDLLWidgetData::parsePlayerHurryHelp(CvWidgetDataStruct &widgetDataStruct,
 	HurryTypes eHurry = (HurryTypes) widgetDataStruct.m_iData1;
 	szBuffer.assign(gDLL->getText("TXT_KEY_MISC_HURRY_PROD", kPlayer.getHurryItemTextKey(eHurry, widgetDataStruct.m_iData2)));
 
-	int iHurryGold = kPlayer.getHurryGold(eHurry);
+	int iHurryGold = kPlayer.getHurryGold(eHurry, widgetDataStruct.m_iData2);
 	if (iHurryGold > 0)
 	{
 		szBuffer.append(NEWLINE);
@@ -1929,6 +1929,29 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 					}
 				}
 			}
+			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getCommandType() == COMMAND_ESTABLISH_MISSION)
+			{
+				CvUnit* pMissionary = NULL;
+				pSelectedUnitNode = gDLL->getInterfaceIFace()->headSelectionListNode();
+				while (pSelectedUnitNode != NULL)
+				{
+					pSelectedUnit = ::getUnit(pSelectedUnitNode->m_data);
+					if (pSelectedUnit->canEstablishMission())
+					{
+						pMissionary = pSelectedUnit;
+						break;
+					}
+
+					pSelectedUnitNode = gDLL->getInterfaceIFace()->nextSelectionListNode(pSelectedUnitNode);
+				}
+
+
+				if (pMissionary != NULL)
+				{
+					szBuffer.append(NEWLINE);
+					szBuffer.append(gDLL->getText("TXT_KEY_TALK_NATIVES_POPUP_MISSION2", std::min(100, pMissionary->getMissionarySuccessPercent())));
+				}
+			}
 
 			if (GC.getCommandInfo((CommandTypes)(GC.getActionInfo(widgetDataStruct.m_iData1).getCommandType())).getAll())
 			{
@@ -2074,9 +2097,16 @@ void CvDLLWidgetData::parseContactCivHelp(CvWidgetDataStruct &widgetDataStruct, 
 		CvPlayerAI& player = GET_PLAYER((PlayerTypes)widgetDataStruct.m_iData1);
 		
 		szBuffer.append(CvWString::format(L"\nPlayer %d, Team %d", player.getID(), player.getTeam()));
-		szBuffer.append(CvWString::format(L"\n%d%c", player.getGold(), gDLL->getSymbolID(GOLD_CHAR)));
+		szBuffer.append(CvWString::format(L"\n%d%c %d%c", player.getGold(), gDLL->getSymbolID(GOLD_CHAR), GET_TEAM(player.getTeam()).getRebelPercent(), gDLL->getSymbolID(POWER_CHAR)));
 		szBuffer.append(CvWString::format(L"\nCities = %d, Units = %d, Pop = %d, AIPop = %d", player.getNumCities(), player.getNumUnits(), player.getTotalPopulation(), player.AI_getPopulation()));
 		szBuffer.append(CvWString::format(L"\nIncome = %d, Hurry Spending = %d", player.AI_getTotalIncome(), player.AI_getHurrySpending()));
+		for (int i = 0; i < NUM_STRATEGY_TYPES; ++i)
+		{
+			if (player.AI_isStrategy((StrategyTypes) i))
+			{
+				szBuffer.append(CvWString::format(L"\nStrategy %d, Duration %d", i, player.AI_getStrategyDuration((StrategyTypes) i)));
+			}
+		}
 		
 		//Extra Info
 		ProfessionTypes eBuyProfession;
@@ -2587,17 +2617,11 @@ void CvDLLWidgetData::parseAssignTradeRoute(CvWidgetDataStruct &widgetDataStruct
 	{
 		if (pUnit->getGroup()->isAssignedTradeRoute(widgetDataStruct.m_iData2))
 		{
-		    // PatchMod: Backwards buttons (Kudos Jeckel) START
-			//szBuffer.assign(gDLL->getText("TXT_KEY_ASSIGN_ROUTE"));
 			szBuffer.assign(gDLL->getText("TXT_KEY_UNASSIGN_ROUTE"));
-		    // PatchMod: Backwards buttons (Kudos Jeckel) END
 		}
 		else
 		{
-		    // PatchMod: Backwards buttons (Kudos Jeckel) START
 			szBuffer.assign(gDLL->getText("TXT_KEY_ASSIGN_ROUTE"));
-			//szBuffer.assign(gDLL->getText("TXT_KEY_UNASSIGN_ROUTE"));
-		    // PatchMod: Backwards buttons (Kudos Jeckel) END
 		}
 	}
 }
@@ -3229,10 +3253,7 @@ void CvDLLWidgetData::doDoubleClickDock(const CvWidgetDataStruct& widgetDataStru
 	CvUnit* pUnit = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getEuropeUnitById(widgetDataStruct.m_iData1);
 	if (pUnit != NULL)
 	{
-		// PatchMod: Auto cycling bug fix START
-		CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_CHOOSE_PROFESSION, -1, pUnit->getID());
-//		CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_CHOOSE_PROFESSION, -1, pUnit->getID(), 0);
-		// PatchMod: Auto cycling bug fix END
+		CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_CHOOSE_PROFESSION, -1, pUnit->getID(), 0);
 		gDLL->getInterfaceIFace()->addPopup(pInfo, NO_PLAYER, true);
 	}
 }
@@ -3298,14 +3319,7 @@ void CvDLLWidgetData::parseScoreHelp(CvWidgetDataStruct& widgetDataStruct, CvWSt
 
 void CvDLLWidgetData::parseImportExportHelp(CvWidgetDataStruct& widgetDataStruct, CvWStringBuffer& szBuffer)
 {
-	if (widgetDataStruct.m_iData1 != 0)
-	{
-		szBuffer.append(gDLL->getText("TXT_KEY_HELP_EDIT_IMPORTS"));
-	}
-	else
-	{
-		szBuffer.append(gDLL->getText("TXT_KEY_HELP_EDIT_EXPORTS"));
-	}
+	szBuffer.append(gDLL->getText("TXT_KEY_HELP_EDIT_IMPORTS"));
 }
 
 void CvDLLWidgetData::parseEjectCitizenHelp(CvWidgetDataStruct& widgetDataStruct, CvWStringBuffer& szBuffer)

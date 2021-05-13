@@ -138,7 +138,7 @@ public:
 	int AI_totalUnitAIs(UnitAITypes eUnitAI);
 	int AI_totalAreaUnitAIs(CvArea* pArea, UnitAITypes eUnitAI);
 	int AI_totalWaterAreaUnitAIs(CvArea* pArea, UnitAITypes eUnitAI);
-	int AI_countCargoSpace(UnitAITypes eUnitAI);
+	bool AI_hasSeaTransport(const CvUnit* pCargo) const;
 
 	int AI_neededExplorers(CvArea* pArea);
 	int AI_neededWorkers(CvArea* pArea);

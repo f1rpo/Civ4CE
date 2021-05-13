@@ -267,9 +267,9 @@ bool CySelectionGroup::isAssignedTradeRoute(int iRouteID) const
 	return m_pSelectionGroup ? m_pSelectionGroup->isAssignedTradeRoute(iRouteID) : false;
 }
 
-bool CySelectionGroup::canAssignTradeRoute(int iRouteID) const
+bool CySelectionGroup::canAssignTradeRoute(int iRouteID, bool bReusePath) const
 {
-	return m_pSelectionGroup ? m_pSelectionGroup->canAssignTradeRoute(iRouteID) : false;
+	return m_pSelectionGroup ? m_pSelectionGroup->canAssignTradeRoute(iRouteID, bReusePath) : false;
 }
 
 int CySelectionGroup::getNumUnits()

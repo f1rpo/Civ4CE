@@ -610,27 +610,6 @@ int CvTeamAI::AI_calculateCapitalProximity(TeamTypes eTeam) const
 }
 
 
-bool CvTeamAI::AI_isWarPossible() const
-{
-	if (getAtWarCount() > 0)
-	{
-		return true;
-	}
-
-	if (GC.getGameINLINE().isOption(GAMEOPTION_ALWAYS_WAR))
-	{
-		return true;
-	}
-
-	if (!(GC.getGameINLINE().isOption(GAMEOPTION_ALWAYS_PEACE)) && !(GC.getGameINLINE().isOption(GAMEOPTION_NO_CHANGING_WAR_PEACE)))
-	{
-		return true;
-	}
-
-	return false;
-}
-
-
 bool CvTeamAI::AI_isLandTarget(TeamTypes eTeam) const
 {
 	if (!AI_hasCitiesInPrimaryArea(eTeam))

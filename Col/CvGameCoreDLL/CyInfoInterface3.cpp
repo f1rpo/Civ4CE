@@ -194,7 +194,7 @@ void CyInfoPythonInterface3()
 		.def("getCardinalDirection", &CvEuropeInfo::getCardinalDirection, "int ()")
 		.def("getTripLength", &CvEuropeInfo::getTripLength, "int ()")
 		.def("getMinLandDistance", &CvEuropeInfo::getMinLandDistance, "int ()")
-		.def("getWidth", &CvEuropeInfo::getWidth, "int ()")
+		.def("getWidthPercent", &CvEuropeInfo::getWidthPercent, "int ()")
 		;
 	python::class_<CvAssetInfoBase>("CvAssetInfoBase")
 		.def("setTag", &CvAssetInfoBase::setTag, "void (string)")
