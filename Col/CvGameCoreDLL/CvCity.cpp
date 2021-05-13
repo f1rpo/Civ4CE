@@ -309,6 +309,10 @@ void CvCity::reset(int iID, PlayerTypes eOwner, int iX, int iY, bool bConstructo
 	// Uninit class
 	uninit();
 
+	// PatchMod: Missionary player START
+	m_eMissionaryPlayer = NO_PLAYER;
+	// PatchMod: Missionary player END
+
 	m_iID = iID;
 	m_iX = iX;
 	m_iY = iY;
@@ -609,6 +613,10 @@ void CvCity::doTurn()
 
 	doSpecialists();
 
+	// PatchMod: Resource depletion bugfix START
+	doProduction(bAllowNoProduction);
+	// PatchMod: Resource depletion bugfix END
+
 	doYields();
 
 	doGrowth();
@@ -617,7 +625,9 @@ void CvCity::doTurn()
 
 	doPlotCulture(false, getOwnerINLINE(), getCultureRate());
 
-	doProduction(bAllowNoProduction);
+	// PatchMod: Resource depletion bugfix START
+//	doProduction(bAllowNoProduction);
+	// PatchMod: Resource depletion bugfix END
 
 	doDecay();
 
@@ -4286,6 +4296,117 @@ void CvCity::calculateNetYields(int aiYields[NUM_YIELD_TYPES], int* aiProducedYi
 	}
 }
 
+// PatchMod: Yields messages START
+void CvCity::calculateNetYields(int aiYields[NUM_YIELD_TYPES],bool noval) const
+{
+	PROFILE_FUNC();
+
+	int aiConsumedYields[NUM_YIELD_TYPES];
+	int aiProducedYields[NUM_YIELD_TYPES];
+
+
+	for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
+	{
+		YieldTypes eYield = (YieldTypes) iYield;
+		aiConsumedYields[iYield] = getRawYieldConsumed(eYield);
+		aiProducedYields[iYield] = getBaseRawYieldProduced(eYield);
+		aiYields[iYield] = getYieldStored(eYield) - aiConsumedYields[iYield] + aiProducedYields[iYield] * getBaseYieldRateModifier(eYield) / 100;
+	}
+
+	if (!isOccupation())
+	{
+
+
+		std::vector<int> aiYieldsAvailable;
+		for (uint i = 0; i < m_aPopulationUnits.size(); ++i)
+		{
+			CvUnit* pUnit = m_aPopulationUnits[i];
+			if (pUnit->getProfession() != NO_PROFESSION)
+			{
+				aiYieldsAvailable.push_back(getProfessionInput(pUnit->getProfession(), pUnit));
+			}
+			else
+			{
+				aiYieldsAvailable.push_back(-1);
+			}
+		}
+
+
+		for (uint i = 0; i < m_aPopulationUnits.size(); ++i)
+		{
+			bool bFound = false;
+			for (int iUnitIndex = 0; iUnitIndex < (int)m_aPopulationUnits.size(); ++iUnitIndex)
+			{
+				CvUnit* pUnit = m_aPopulationUnits[iUnitIndex];
+
+				if (aiYieldsAvailable[iUnitIndex] > 0)
+				{
+					CvProfessionInfo& kProfession = GC.getProfessionInfo(pUnit->getProfession());
+
+					YieldTypes eYieldConsumed = (YieldTypes) kProfession.getYieldConsumed();
+
+					if (eYieldConsumed != NO_YIELD)
+					{
+						int iYieldStored = aiYields[eYieldConsumed];
+						if (iYieldStored < 0)
+						{
+							bFound = true;
+							YieldTypes eYieldProduced = (YieldTypes) kProfession.getYieldProduced();
+							if (NO_YIELD != eYieldProduced)
+							{
+								int iDeficit = std::min(-iYieldStored, aiYieldsAvailable[iUnitIndex]);
+								aiYieldsAvailable[iUnitIndex] -= iDeficit;
+
+								aiConsumedYields[eYieldConsumed] -= iDeficit;
+								aiProducedYields[eYieldProduced] -= iDeficit;
+
+								aiYields[eYieldProduced] = getYieldStored(eYieldProduced) - aiConsumedYields[eYieldProduced] + aiProducedYields[eYieldProduced] * getBaseYieldRateModifier(eYieldProduced) / 100;
+								aiYields[eYieldConsumed] = getYieldStored(eYieldConsumed) - aiConsumedYields[eYieldConsumed] + aiProducedYields[eYieldConsumed] * getBaseYieldRateModifier(eYieldConsumed) / 100;
+							}
+							else
+							{
+								FAssertMsg(false, "Could not find matching production for negative yield rate.");
+							}
+						}
+					}
+				}
+				else if (aiYieldsAvailable[iUnitIndex] == 0)
+				{
+				    CvProfessionInfo& kProfession = GC.getProfessionInfo(pUnit->getProfession());
+				    YieldTypes eYieldConsumed = (YieldTypes) kProfession.getYieldConsumed();
+				    YieldTypes eYieldProduced = (YieldTypes) kProfession.getYieldProduced();
+
+				    if (eYieldConsumed != NO_YIELD)
+				    {
+                        CvWString szBuffer = gDLL->getText("TXT_KEY_NO_RAW", getNameKey(),GC.getYieldInfo(eYieldConsumed).getChar(),GC.getYieldInfo(eYieldProduced).getChar());
+                        gDLL->getInterfaceIFace()->addMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_DEAL_CANCELLED", MESSAGE_TYPE_MINOR_EVENT, GC.getYieldInfo(eYieldConsumed).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), getX_INLINE(), getY_INLINE(), true, true);
+				    }
+				}
+			}
+
+			if(!bFound)
+			{
+				break;
+			}
+		}
+	}
+
+	for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
+	{
+		FAssert((iYield == YIELD_FOOD) || (aiYields[iYield] >= 0));
+		aiYields[iYield] -= getYieldStored((YieldTypes) iYield);
+	}
+
+	// Immigration
+	int iImmigration = 0;
+	YieldTypes eImmigrationYield = GET_PLAYER(getOwnerINLINE()).getImmigrationConversion();
+	if (eImmigrationYield != YIELD_CROSSES)
+	{
+		aiYields[eImmigrationYield] += aiYields[YIELD_CROSSES];
+	}
+}
+// PatchMod: Yields messages END
+
 int CvCity::calculateNetYield(YieldTypes eYield) const
 {
 	FAssert(eYield < NUM_YIELD_TYPES && eYield >= 0);
@@ -5836,7 +5957,10 @@ void CvCity::doYields()
 	}
 
 	int aiYields[NUM_YIELD_TYPES];
-	calculateNetYields(aiYields);
+	// PatchMod: Yields messages START
+	calculateNetYields(aiYields,false);
+//	calculateNetYields(aiYields);
+	// PatchMod: Yields messages END
 
 	int iMaxCapacity = getMaxYieldCapacity();
 	for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
@@ -5890,6 +6014,13 @@ void CvCity::doYields()
 					{
 						GET_PLAYER(getOwnerINLINE()).changeGold(iProfit);
 
+						// PatchMod: Record warehouse trades START
+						CvPlayer& kPlayerEurope = GET_PLAYER(GET_PLAYER(getOwnerINLINE()).getParent());
+						GET_PLAYER(getOwnerINLINE()).changeYieldTradedTotal(eYield, iLoss);
+						kPlayerEurope.changeYieldTradedTotal(eYield, iLoss);
+						GC.getGameINLINE().changeYieldBoughtTotal(kPlayerEurope.getID(), eYield, -iLoss);
+						// PatchMod: Record warehouse trades END
+
 						CvWString szBuffer = gDLL->getText("TXT_KEY_GOODS_LOST_SOLD", iLoss, GC.getYieldInfo(eYield).getChar(), getNameKey(), iProfit);
 						gDLL->getInterfaceIFace()->addMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_BUILD_BANK", MESSAGE_TYPE_MINOR_EVENT, GC.getYieldInfo(eYield).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), getX_INLINE(), getY_INLINE(), true, true);
 					}
@@ -5899,7 +6030,14 @@ void CvCity::doYields()
 						gDLL->getInterfaceIFace()->addMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_DEAL_CANCELLED", MESSAGE_TYPE_MINOR_EVENT, GC.getYieldInfo(eYield).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), getX_INLINE(), getY_INLINE(), true, true);
 					}
 				}
-
+				// PatchMod: yield warnings START
+				//else if((iExcess > (-1)*(.05*iMaxCapacity)) && (aiYields[eYield] > 0))
+				else if((iExcess > (-1)*(aiYields[eYield])) && (aiYields[eYield] > 0))
+				{
+					CvWString szBuffer = gDLL->getText("TXT_KEY_RUNNING_OUT_OF_SPACE",GC.getYieldInfo(eYield).getChar(), getNameKey());
+					gDLL->getInterfaceIFace()->addMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_DEAL_CANCELLED", MESSAGE_TYPE_MINOR_EVENT, GC.getYieldInfo(eYield).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), getX_INLINE(), getY_INLINE(), true, true);
+                }
+                // PatchMod: yield warnings END
 				if (aiYields[eYield] > 0)
 				{
 					for (int i = 0; i < GC.getNumFatherPointInfos(); ++i)
@@ -6245,6 +6383,10 @@ void CvCity::read(FDataStreamBase* pStream)
 	uint uiFlag=0;
 	pStream->Read(&uiFlag);	// flags for expansion
 
+	// PatchMod: Missionary player START
+	pStream->Read((int*)&m_eMissionaryPlayer);
+	// PatchMod: Missionary player END
+
 	pStream->Read(&m_iID);
 	pStream->Read(&m_iX);
 	pStream->Read(&m_iY);
@@ -6392,6 +6534,10 @@ void CvCity::write(FDataStreamBase* pStream)
 {
 	uint uiFlag=0;
 	pStream->Write(uiFlag);		// flag for expansion
+
+	// PatchMod: Missionary player START
+	pStream->Write(m_eMissionaryPlayer);
+	// PatchMod: Missionary player END
 
 	pStream->Write(m_iID);
 	pStream->Write(m_iX);
@@ -8361,11 +8507,13 @@ bool CvCity::educateStudent(int iUnitId, UnitTypes eUnit)
 	FAssert(pLearnUnit != NULL);
 	pLearnUnit->convert(pUnit, true);
 
+	// PatchMod: Further education START
 	// clear the accumulated teacher points
-	for (int i = 0; i < GC.getNumUnitInfos(); ++i)
-	{
-		m_aiSpecialistWeights[i] = 0;
-	}
+//	for (int i = 0; i < GC.getNumUnitInfos(); ++i)
+//	{
+//		m_aiSpecialistWeights[i] = 0;
+//	}
+	// PatchMod: Further education END
 
 	kPlayer.setEducationThresholdMultiplier((kPlayer.getEducationThresholdMultiplier() * (100 + GC.getDefineINT("EDUCATION_THRESHOLD_INCREASE"))) / 100);
 	kPlayer.changeGold(-iPrice);
@@ -8716,3 +8864,14 @@ int CvCity::getMaintainLevel(YieldTypes eYield) const
 	return 0;
 }
 
+// PatchMod: Missionary player START
+PlayerTypes CvCity::getMissionaryPlayer() const
+{
+	return m_eMissionaryPlayer;
+}
+
+void CvCity::setMissionaryPlayer(PlayerTypes ePlayer)
+{
+	m_eMissionaryPlayer = ePlayer;
+}
+// PatchMod: Missionary player END

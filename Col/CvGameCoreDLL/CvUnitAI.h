@@ -17,6 +17,12 @@ public:
 	CvUnitAI();
 	virtual ~CvUnitAI();
 
+	// PatchMod: Treasure Fix START
+	CvPlot* AI_canLoadAdjacent(CvPlot* pPlot, bool bTestCity);
+	bool AI_loadAdjacent(CvPlot* pPlot, bool bTestCity);
+	bool AI_hasTransportOfSize(int iBerthSize);
+	// PatchMod: Treasure Fix END
+
 	void AI_init();
 	void AI_uninit();
 	void AI_reset();

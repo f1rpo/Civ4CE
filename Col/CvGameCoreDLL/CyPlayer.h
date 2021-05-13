@@ -20,6 +20,11 @@ public:
 	CyPlayer();
 	CyPlayer(CvPlayer* pPlayer);		// Call from C++
 	CvPlayer* getPlayer() { return m_pPlayer;	}	// Call from C++
+
+	// PatchMod: Tax party city START
+	int getHighestStoredYieldPartyCityId(int /*YieldTypes*/ eYield);
+	// PatchMod: Tax party city END
+
 	bool isNone() { return (m_pPlayer==NULL); }
 	int startingPlotRange();
 	CyPlot* findStartingPlot(bool bRandomize);

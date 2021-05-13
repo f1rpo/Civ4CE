@@ -903,10 +903,14 @@ void CvMapGenerator::addEurope()
 					switch (kEurope.getCardinalDirection())
 					{
 					case CARDINALDIRECTION_EAST:
-						bEurope = (pPlot->getX_INLINE() > GC.getMapINLINE().getGridWidthINLINE() - iWidth);
+						// PatchMod: Extend Europe Zone further in START
+						bEurope = (pPlot->getX_INLINE() > (GC.getMapINLINE().getGridWidthINLINE() / 3) * 2);
+//						bEurope = (pPlot->getX_INLINE() > GC.getMapINLINE().getGridWidthINLINE() - iWidth);
 						break;
 					case CARDINALDIRECTION_WEST:
-						bEurope = (pPlot->getX_INLINE() < iWidth);
+						bEurope = (pPlot->getX_INLINE() < GC.getMapINLINE().getGridWidthINLINE() / 3);
+//						bEurope = (pPlot->getX_INLINE() < iWidth);
+						// PatchMod: Extend Europe Zone further in END
 						break;
 					case CARDINALDIRECTION_NORTH:
 						bEurope = (pPlot->getY_INLINE() > GC.getMapINLINE().getGridHeightINLINE() - iWidth);
@@ -1213,3 +1217,15 @@ int CvMapGenerator::calculateNumBonusesToAdd(BonusTypes eBonusType)
 	iBonusCount = std::max(1, iBonusCount);
 	return iBonusCount;
 }
+
+// PatchMod: Randomise stuff on map START
+void CvMapGenerator::eraseEurope()
+{
+	int i;
+	for (i = 0; i < GC.getMapINLINE().numPlotsINLINE(); i++)
+	{
+		CvPlot* pPlot = GC.getMapINLINE().plotByIndexINLINE(i);
+		pPlot->setEurope(NO_EUROPE);
+	}
+}
+// PatchMod: Randomise stuff on map END

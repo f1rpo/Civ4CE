@@ -21,6 +21,18 @@ public:
 	void setupGraphical();
 	DllExport void kill();
 
+	// PatchMod: Yields messages START
+	void calculateNetYields(int aiYields[], bool noval) const;
+	// PatchMod: Yields messages END
+
+	// PatchMod: Missionary player START
+protected:
+	PlayerTypes m_eMissionaryPlayer;
+public:
+	PlayerTypes getMissionaryPlayer() const;
+	void setMissionaryPlayer(PlayerTypes ePlayer);
+	// PatchMod: Missionary player END
+
 	void doTurn();
 	bool isCitySelected() const;
 	DllExport bool canBeSelected() const;

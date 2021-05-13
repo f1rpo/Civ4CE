@@ -24,6 +24,19 @@ public:
 	DllExport CvGame();
 	DllExport virtual ~CvGame();
 
+	// PatchMod: Randomise stuff on map START
+	DllExport void reassignStartingPlots();
+	DllExport void setupScenarioPlayers();
+	// PatchMod: Randomise stuff on map END
+
+	// PatchMod: Stop F1 pressing during diplomacy START
+protected:
+	bool m_bInDiplomacy;
+public:
+	DllExport void inDiplomacy(bool bValue);
+	DllExport bool isInDiplomacy() const;
+	// PatchMod: Stop F1 pressing during diplomacy END
+
 	DllExport void init(HandicapTypes eHandicap);
 	DllExport void reset(HandicapTypes eHandicap, bool bConstructorCall = false);
 

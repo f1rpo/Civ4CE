@@ -1412,12 +1412,15 @@ int CvCityAI::AI_neededDefenders() const
 		return 2 + getHighestPopulation() / 2;
 	}
 
-	if (!(GET_TEAM(getTeam()).AI_isWarPossible()))
-	{
-		return 0;
-	}
-		
-	iDefenders = 1;
+	// PatchMod: AI defending city START
+//	if (!(GET_TEAM(getTeam()).AI_isWarPossible()))
+//	{
+//		return 0;
+//	}
+
+	iDefenders = 2;
+//	iDefenders = 1;
+	// PatchMod: AI defending city END
 	
 	if (GET_PLAYER(getOwnerINLINE()).AI_isStrategy(STRATEGY_REVOLUTION_PREPARING))
 	{
@@ -1432,7 +1435,10 @@ int CvCityAI::AI_neededDefenders() const
 	}
 		
 	
-	iDefenders += getPopulation() / 8;
+	// PatchMod: AI defending city START
+	iDefenders += getPopulation() / 2;
+//	iDefenders += getPopulation() / 8;
+	// PatchMod: AI defending city END
 	
 	return iDefenders;
 }

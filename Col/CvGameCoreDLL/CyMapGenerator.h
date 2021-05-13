@@ -24,6 +24,11 @@ public:
 	CvMapGenerator* getMapGenerator() { return m_pMapGenerator;	}	// Call from C++
 	bool isNone() { return (m_pMapGenerator==NULL); }
 
+	// PatchMod: Randomise stuff on map START
+	void addEurope();
+	void eraseEurope();
+	// PatchMod: Randomise stuff on map END
+
 	bool canPlaceBonusAt(int /*BonusTypes*/ eBonus, int iX, int iY, bool bIgnoreLatitude);
 	bool canPlaceGoodyAt(int /*ImprovementTypes*/ eImprovement, int iX, int iY);
 

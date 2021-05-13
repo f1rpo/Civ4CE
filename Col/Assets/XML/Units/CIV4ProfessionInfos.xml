@@ -869,7 +869,7 @@
 			<bCityDefender>1</bCityDefender>
 			<bCanFound>0</bCanFound>
 			<bUnarmed>0</bUnarmed>
-			<bNoDefensiveBonus>1</bNoDefensiveBonus>
+			<bNoDefensiveBonus>0</bNoDefensiveBonus>
 			<iCombatChange>3</iCombatChange>
 			<iMovesChange>0</iMovesChange>
 			<iWorkRate>0</iWorkRate>
@@ -903,7 +903,7 @@
 			<bCityDefender>0</bCityDefender>
 			<bCanFound>0</bCanFound>
 			<bUnarmed>0</bUnarmed>
-			<bNoDefensiveBonus>0</bNoDefensiveBonus>
+			<bNoDefensiveBonus>1</bNoDefensiveBonus>
 			<iCombatChange>3</iCombatChange>
 			<iMovesChange>1</iMovesChange>
 			<iWorkRate>0</iWorkRate>

@@ -32,6 +32,42 @@ public:
 	CvPlayer();
 	virtual ~CvPlayer();
 
+	// Dale - AoD: AI Autoplay START
+	void setDisableHuman( bool newVal );
+	bool getDisableHuman( );
+protected:
+	bool m_bDisableHuman;
+public:
+	// Dale - AoD: AI Autoplay END
+
+	// PatchMod: REF Reduction START
+	void doREFReduction(int iGold);
+	// PatchMod: REF Reduction END
+
+	// PatchMod: Force start peace START
+	void doKingForcePeace();
+	// PatchMod: Force start peace END
+
+	// PatchMod: Intercept Europe units START
+	void interceptEuropeUnits();
+	// PatchMod: Intercept Europe units END
+
+	// PatchMod: Mission failure START
+protected:
+	int m_iMissionFailurePercent;
+public:
+	int getMissionFailurePercent() const;
+	void setMissionFailurePercent(int iValue);
+	// PatchMod: Mission failure END
+
+	// PatchMod: Tax party city START
+	int getHighestStoredYieldPartyCityId(YieldTypes eYield) const;
+	// PatchMod: Tax party city END
+
+	// PatchMod: Clear blockaded goods START
+	void setYieldEuropeTradableAll();
+	// PatchMod: Clear blockaded goods END
+
 	DllExport void init(PlayerTypes eID);
 	DllExport void setupGraphical();
 	DllExport void reset(PlayerTypes eID = NO_PLAYER, bool bConstructorCall = false);

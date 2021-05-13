@@ -296,6 +296,13 @@ void CvGame::regenerateMap()
 		GET_PLAYER((PlayerTypes)iI).killUnits();
 	}
 
+	// PatchMod: Reset REF on regenerate START
+	for (iI = 0; iI < MAX_PLAYERS; iI++)
+	{
+		GET_PLAYER((PlayerTypes)iI).clearRevolutionEuropeUnits();
+	}
+	// PatchMod: Reset REF on regenerate END
+
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
 		GET_PLAYER((PlayerTypes)iI).killCities();
@@ -390,6 +397,10 @@ void CvGame::reset(HandicapTypes eHandicap, bool bConstructorCall)
 	//--------------------------------
 	// Uninit class
 	uninit();
+
+	// PatchMod: Stop F1 pressing during diplomacy START
+	m_bInDiplomacy = false;
+	// PatchMod: Stop F1 pressing during diplomacy END
 
 	m_iEndTurnMessagesSent = 0;
 	m_iElapsedGameTurns = 0;
@@ -767,7 +778,8 @@ void CvGame::assignStartingPlots()
 	{
 		iHumanSlot = range((((countCivPlayersAlive() - 1) * GC.getHandicapInfo(getHandicapType()).getStartingLocationPercent()) / 100), 0, (countCivPlayersAlive() - 1));
 
-		for (iI = 0; iI < iHumanSlot; iI++)
+		// PatchMod: Random Start Locs START
+/*		for (iI = 0; iI < iHumanSlot; iI++)
 		{
 			if (GET_PLAYER((PlayerTypes)iI).isAlive())
 			{
@@ -795,8 +807,8 @@ void CvGame::assignStartingPlots()
 					}
 				}
 			}
-		}
-
+		}*/
+		// PatchMod: Random Start Locs END
 		for (iI = 0; iI < MAX_PLAYERS; iI++)
 		{
 			if (GET_PLAYER((PlayerTypes)iI).isAlive())
@@ -808,8 +820,56 @@ void CvGame::assignStartingPlots()
 				}
 			}
 		}
+		// PatchMod: Random Start Locs START
+		// Randomise start locations amongst water starters (Human Europeans)
+		int iWaterCount = 0;
+		int iCounter = 0;
+		for (iI = 0; iI < MAX_PLAYERS; iI++)
+		{
+			if (GET_PLAYER((PlayerTypes)iI).isAlive())
+			{
+				if (GC.getCivilizationInfo(GET_PLAYER((PlayerTypes)iI).getCivilizationType()).isWaterStart())
+				{
+					iWaterCount++;
+				}
+			}
+		}
+		int iRandStart = 0;
+		CvPlot* pTempPlot = NULL;
+		for (iJ = 0; iJ < MAX_PLAYERS; iJ++)
+		{
+			if (GET_PLAYER((PlayerTypes)iJ).isAlive())
+			{
+				if (GC.getCivilizationInfo(GET_PLAYER((PlayerTypes)iJ).getCivilizationType()).isWaterStart() && GET_PLAYER((PlayerTypes)iJ).isHuman())
+				{
+					iRandStart = getSorenRandNum(iWaterCount, "");
+					iCounter = 0;
+					for (iI = 0; iI < MAX_PLAYERS; iI++)
+					{
+						if (GET_PLAYER((PlayerTypes)iI).isAlive())
+						{
+							if (GC.getCivilizationInfo(GET_PLAYER((PlayerTypes)iI).getCivilizationType()).isWaterStart())
+							{
+								iCounter++;
+							}
+						}
+						if (iCounter == iRandStart)
+						{
+							pTempPlot = GET_PLAYER((PlayerTypes)iJ).getStartingPlot();
+							GET_PLAYER((PlayerTypes)iJ).setStartingPlot(GET_PLAYER((PlayerTypes)iI).getStartingPlot(), true);
+							GET_PLAYER((PlayerTypes)iI).setStartingPlot(pTempPlot, true);
+							iI = MAX_PLAYERS;
+						}
+					}
+				}
+			}
+		}
 	}
+	// PatchMod: Random Start Locs END
 
+	// PatchMod: Random Start Locs START
+	// This section of code made Euros appear from top-bottom in order (after removing the human player)
+	/*
 	//Now iterate over the player starts in the original order and re-place them.
 	for (playerOrderIter = playerOrder.begin(); playerOrderIter != playerOrder.end(); ++playerOrderIter)
 	{
@@ -823,7 +883,8 @@ void CvGame::assignStartingPlots()
 		{
 			GET_PLAYER((PlayerTypes)(*playerOrderIter)).setStartingPlot(GET_PLAYER((PlayerTypes)(*playerOrderIter)).findStartingPlot(), true);
 		}
-	}
+	}*/
+	// PatchMod: Random Start Locs END
 }
 
 // Swaps starting locations until we have reached the optimal closeness between teams
@@ -3974,12 +4035,18 @@ void CvGame::setAIAutoPlay(int iNewValue)
 	if (iOldValue != iNewValue)
 	{
 		m_iAIAutoPlay = std::max(0, iNewValue);
+		// Dale - AoD: AI Autoplay START
 
+		GET_PLAYER(getActivePlayer()).setDisableHuman((getAIAutoPlay() != 0));
+		GET_PLAYER(getActivePlayer()).updateHuman();
+
+		/*
 		if ((iOldValue == 0) && (getAIAutoPlay() > 0))
 		{
 			GET_PLAYER(getActivePlayer()).killUnits();
 			GET_PLAYER(getActivePlayer()).killCities();
-		}
+		}*/
+		// Dale - AoD: AI Autoplay END
 	}
 }
 
@@ -3987,6 +4054,9 @@ void CvGame::setAIAutoPlay(int iNewValue)
 void CvGame::changeAIAutoPlay(int iChange)
 {
 	setAIAutoPlay(getAIAutoPlay() + iChange);
+	// Dale - AoD: AI Autoplay START
+	GET_PLAYER(getActivePlayer()).setDisableHuman((getAIAutoPlay() != 0));
+	// Dale - AoD: AI Autoplay END
 }
 
 
@@ -6623,3 +6693,56 @@ void CvGame::updateOceanDistances()
 }
 
 
+// PatchMod: Randomise stuff on map START
+void CvGame::reassignStartingPlots()
+{
+	int iI;
+	int iLoop;
+	CvUnit* pLoopUnit;
+	CvPlot* pLoopPlot;
+	for (iI = 0; iI < MAX_PLAYERS; iI++)
+	{
+		GET_PLAYER((PlayerTypes)iI).setFoundedFirstCity(false);
+		GET_PLAYER((PlayerTypes)iI).setStartingPlot(NULL, false);
+	}
+	for(iI = 0; iI < GC.getMapINLINE().numPlotsINLINE(); iI++)
+	{
+		pLoopPlot = GC.getMapINLINE().plotByIndexINLINE(iI);
+		pLoopPlot->setStartingPlot(false);
+	}
+	for (iI = 0; iI < MAX_TEAMS; iI++)
+	{
+		GC.getMapINLINE().setRevealedPlots(((TeamTypes)iI), false);
+	}
+	assignStartingPlots();
+	for (iI = 0; iI < MAX_PLAYERS; iI++)
+	{
+		pLoopPlot = GET_PLAYER((PlayerTypes)iI).getStartingPlot();
+		for(pLoopUnit = GET_PLAYER((PlayerTypes)iI).firstUnit(&iLoop); pLoopUnit != NULL; pLoopUnit = GET_PLAYER((PlayerTypes)iI).nextUnit(&iLoop))
+		{
+			pLoopUnit->setXY(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), false, false);
+		}
+	}
+}
+
+void CvGame::setupScenarioPlayers()
+{
+	if (GC.getInitCore().getScenario())
+	{
+		updateOceanDistances();
+	}
+	return;
+}
+// PatchMod: Randomise stuff on map END
+
+// PatchMod: Stop F1 pressing during diplomacy START
+void CvGame::inDiplomacy(bool bValue)
+{
+	m_bInDiplomacy = bValue;
+}
+
+bool CvGame::isInDiplomacy() const
+{
+	return m_bInDiplomacy;
+}
+// PatchMod: Stop F1 pressing during diplomacy END

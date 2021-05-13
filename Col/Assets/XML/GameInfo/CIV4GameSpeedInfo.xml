@@ -16,7 +16,8 @@
 			<iTrainPercent>300</iTrainPercent>
 			<iConstructPercent>300</iConstructPercent>
 			<iFatherPercent>300</iFatherPercent>
-			<iGreatGeneralPercent>300</iGreatGeneralPercent>
+			<iGreatGeneralPercent>150</iGreatGeneralPercent>
+			<iRevolutionTurns>300</iRevolutionTurns>
 			<GameTurnInfos>
 				<GameTurnInfo>
 					<iMonthIncrement>4</iMonthIncrement>
@@ -33,7 +34,8 @@
 			<iTrainPercent>150</iTrainPercent>
 			<iConstructPercent>150</iConstructPercent>
 			<iFatherPercent>150</iFatherPercent>
-			<iGreatGeneralPercent>150</iGreatGeneralPercent>
+			<iGreatGeneralPercent>125</iGreatGeneralPercent>
+			<iRevolutionTurns>150</iRevolutionTurns>
 			<GameTurnInfos>
 				<GameTurnInfo>
 					<iMonthIncrement>8</iMonthIncrement>
@@ -51,6 +53,7 @@
 			<iConstructPercent>100</iConstructPercent>
 			<iFatherPercent>100</iFatherPercent>
 			<iGreatGeneralPercent>100</iGreatGeneralPercent>
+			<iRevolutionTurns>100</iRevolutionTurns>
 			<GameTurnInfos>
 				<GameTurnInfo>
 					<iMonthIncrement>12</iMonthIncrement>
@@ -68,6 +71,7 @@
 			<iConstructPercent>75</iConstructPercent>
 			<iFatherPercent>75</iFatherPercent>
 			<iGreatGeneralPercent>75</iGreatGeneralPercent>
+			<iRevolutionTurns>75</iRevolutionTurns>
 			<GameTurnInfos>
 				<GameTurnInfo>
 					<iMonthIncrement>16</iMonthIncrement>

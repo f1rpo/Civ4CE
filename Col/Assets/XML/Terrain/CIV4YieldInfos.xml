@@ -459,9 +459,9 @@
 			<Description>TXT_KEY_YIELD_HORSES</Description>
 			<Civilopedia>TXT_KEY_YIELD_HORSES_PEDIA</Civilopedia>
 			<bCargo>1</bCargo>
-			<iBuyPriceLow>1</iBuyPriceLow>
-			<iBuyPriceHigh>2</iBuyPriceHigh>
-			<iSellPriceDifference>1</iSellPriceDifference>
+			<iBuyPriceLow>4</iBuyPriceLow>
+			<iBuyPriceHigh>6</iBuyPriceHigh>
+			<iSellPriceDifference>2</iSellPriceDifference>
 			<iPriceChangeThreshold>600</iPriceChangeThreshold>
 			<iPriceCorrectionPercent>1</iPriceCorrectionPercent>
 			<iNativeBuyPrice>10</iNativeBuyPrice>

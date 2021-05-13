@@ -12,6 +12,16 @@ void CyGamePythonInterface()
 {
 	OutputDebugString("Python Extension Module - CyGamePythonInterface\n");
 	python::class_<CyGame>("CyGame")
+		// PatchMod: Randomise stuff on map START
+		.def("reassignStartingPlots", &CyGame::reassignStartingPlots)
+		.def("setupScenarioPlayers", &CyGame::setupScenarioPlayers)
+		// PatchMod: Randomise stuff on map END
+
+		// PatchMod: Stop F1 pressing during diplomacy START
+		.def("inDiplomacy", &CyGame::inDiplomacy)
+		.def("isInDiplomacy", &CyGame::isInDiplomacy)
+		// PatchMod: Stop F1 pressing during diplomacy END
+
 		.def("isNone", &CyGame::isNone, "CyGame* () - is the instance valid?")
 		.def("updateScore", &CyGame::updateScore, "void (bool bForce)")
 		.def("cycleCities", &CyGame::cycleCities, "void (bool bForward, bool bAdd)")

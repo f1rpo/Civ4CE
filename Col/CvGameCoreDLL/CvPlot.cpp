@@ -252,6 +252,10 @@ void CvPlot::erase()
 	setRouteType(NO_ROUTE);
 	setFeatureType(NO_FEATURE);
 
+	// PatchMod: Remove Europe Zones START
+	setEurope(NO_EUROPE);
+	// PatchMod: Remove Europe Zones END
+
 	// disable rivers
 	setNOfRiver(false, NO_CARDINALDIRECTION);
 	setWOfRiver(false, NO_CARDINALDIRECTION);
@@ -2140,7 +2144,10 @@ int CvPlot::movementCost(const CvUnit* pUnit, const CvPlot* pFromPlot) const
 		}
 	}
 
-	bool bHasTerrainCost = (iRegularCost > 1);
+	// PatchMod: Terrain double move fix START
+	bool bHasTerrainCost = (iRegularCost > 0);
+//	bool bHasTerrainCost = (iRegularCost > 1);
+	// PatchMod: Terrain double move fix END
 
 	iRegularCost = std::min(iRegularCost, pUnit->baseMoves());
 

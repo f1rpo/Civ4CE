@@ -163,6 +163,7 @@
 	<ElementType name="Name" content="textOnly"/>
 	<ElementType name="iStartingLocPercent" content="textOnly" dt:type="int"/>
 	<ElementType name="iFreeUnits" content="textOnly" dt:type="int"/>
+	<ElementType name="bFreeShip" content="textOnly" dt:type="boolean"/>
 	<ElementType name="iAttitudeChange" content="textOnly" dt:type="int"/>
 	<ElementType name="iStartingDefenseUnits" content="textOnly" dt:type="int"/>
 	<ElementType name="iStartingWorkerUnits" content="textOnly" dt:type="int"/>
@@ -181,11 +182,15 @@
 	<ElementType name="iAIConstructPercent" content="textOnly" dt:type="int"/>
 	<ElementType name="iAIUnitUpgradePercent" content="textOnly" dt:type="int"/>
 	<ElementType name="iAIHurryPercent" content="textOnly" dt:type="int"/>
+	<ElementType name="iAIMoneyTree" content="textOnly" dt:type="int"/>
 	<ElementType name="iAIPerEraModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iAIAdvancedStartPercent" content="textOnly" dt:type="int"/>
 	<ElementType name="iAIKingUnitThresholdPercent" content="textOnly" dt:type="int"/>
+	<ElementType name="iKingUnitThresholdPercent" content="textOnly" dt:type="int"/>
+	<ElementType name="iKingGoldThresholdPercent" content="textOnly" dt:type="int"/>
 	<ElementType name="iEuropePriceThresholdMultiplier" content="textOnly" dt:type="int"/>
 	<ElementType name="iNativePacifismPercent" content="textOnly" dt:type="int"/>
+	<ElementType name="iMissionFailureThresholdPercent" content="textOnly" dt:type="int"/>
 	<ElementType name="GoodyType" content="textOnly"/>
 	<ElementType name="Goodies" content="eltOnly">
 		<element type="GoodyType" maxOccurs="*"/>
@@ -197,6 +202,7 @@
 		<element type="iStartingLocPercent"/>
 		<element type="iAdvancedStartPointsMod"/>
 		<element type="iGold"/>
+		<element type="bFreeShip" minOccurs="0"/>
 		<element type="iFatherPercent"/>
 		<element type="iAttitudeChange"/>
 		<element type="iStartingDefenseUnits"/>
@@ -216,11 +222,15 @@
 		<element type="iAIConstructPercent"/>
 		<element type="iAIUnitUpgradePercent"/>
 		<element type="iAIHurryPercent"/>
+		<element type="iAIMoneyTree"/>
 		<element type="iAIPerEraModifier"/>
 		<element type="iAIAdvancedStartPercent"/>
 		<element type="iAIKingUnitThresholdPercent"/>
+		<element type="iKingUnitThresholdPercent"/>
+		<element type="iKingGoldThresholdPercent"/>
 		<element type="iEuropePriceThresholdMultiplier"/>
 		<element type="iNativePacifismPercent"/>
+		<element type="iMissionFailureThresholdPercent"/>
 		<element type="Goodies" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="HandicapInfos" content="eltOnly">
@@ -415,6 +425,7 @@
 	<ElementType name="iConstructPercent" content="textOnly" dt:type="int"/>
 	<ElementType name="iGreatGeneralPercent" content="textOnly" dt:type="int"/>
 	<ElementType name="iEventChancePerTurn" content="textOnly" dt:type="int"/>
+	<ElementType name="iRevolutionTurns" content="textOnly" dt:type="int"/>
 	<ElementType name="GameSpeedInfo" content="eltOnly">
 		<element type="Type"/>
 		<element type="Description"/>
@@ -425,6 +436,7 @@
 		<element type="iConstructPercent"/>
 		<element type="iFatherPercent"/>
 		<element type="iGreatGeneralPercent"/>
+		<element type="iRevolutionTurns"/>
 		<element type="GameTurnInfos"/>
 	</ElementType>
 	<ElementType name="GameSpeedInfos" content="eltOnly">

@@ -1588,6 +1588,13 @@ void CvUnitAI::AI_treasureMove()
 		return;
 	}
 	
+	// PatchMod: Treasure Fix START
+	if (AI_loadAdjacent(AI_canLoadAdjacent(plot(), false), false))
+	{
+		return;
+	}
+	// PatchMod: Treasure Fix END
+
 	bool bDanger = GET_PLAYER(getOwnerINLINE()).AI_getUnitDanger(this, 2, false, false);
 	if (bDanger)
 	{
@@ -1608,7 +1615,10 @@ void CvUnitAI::AI_treasureMove()
 	
 	if (pCity != NULL)
 	{
-		if ((GC.getGameINLINE().getGameTurn() < 90) || bAtWar)
+		// PatchMod: Treasure Fix START
+		if (!AI_hasTransportOfSize(getUnitInfo().getRequiredTransportSize()) || bAtWar)
+//		if ((GC.getGameINLINE().getGameTurn() < 90) || bAtWar)
+		// PatchMod: Treasure Fix END
 		{
 			if (canKingTransport())
 			{
@@ -3014,6 +3024,18 @@ void CvUnitAI::AI_transportSeaMove()
 
 	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
 	bool bEmpty = !getGroup()->hasCargo();
+
+	// PatchMod: Treasure Fix START
+	if (kOwner.AI_totalUnitAIs(UNITAI_TREASURE) > 0)
+	{
+		if (AI_respondToPickup(20, UNITAI_TREASURE))
+		{
+			AI_setUnitAIState(UNITAI_STATE_SAIL);
+			return;
+		}
+
+	}
+	// PatchMod: Treasure Fix END
 
 	CvCity* pCity = NULL;
 	if (plot()->getPlotCity() != NULL)
@@ -11860,6 +11882,13 @@ BuildTypes CvUnitAI::AI_betterPlotBuild(CvPlot* pPlot, BuildTypes eBuild)
 			}
 		}
 		
+		// PatchMod: Don't let automated pioneers destroy worked lodges START
+		if (pPlot->isBeingWorked() && pPlot->getImprovementType() != NO_IMPROVEMENT)
+		{
+			bClearFeature = false;
+		}
+		// PatchMod: Don't let automated pioneers destroy worked lodges END
+		
 		if ((kFeatureInfo.getMovementCost() > 1) && (iWorkersNeeded > 1))
 		{
 			bBuildRoute = true;
@@ -13607,3 +13636,59 @@ void CvUnitAI::write(FDataStreamBase* pStream)
 }
 
 // Private Functions...
+
+// PatchMod: Treasure Fix START
+CvPlot* CvUnitAI::AI_canLoadAdjacent(CvPlot* pPlot, bool bTestCity)
+{
+	if (pPlot == NULL)
+	{
+		return NULL;
+	}
+	CvPlot* pLoopPlot = NULL;
+	for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++)
+	{
+		pLoopPlot = plotDirection(pPlot->getX_INLINE(), pPlot->getY_INLINE(), ((DirectionTypes)iI));
+		if (pLoopPlot != NULL)
+		{
+			if (canLoad(pLoopPlot, bTestCity))
+			{
+				return pLoopPlot;
+			}
+		}
+	}
+	return NULL;
+}
+
+bool CvUnitAI::AI_loadAdjacent(CvPlot* pPlot, bool bTestCity)
+{
+	if (pPlot != NULL)
+	{
+		if (canLoad(pPlot, bTestCity))
+		{
+			getGroup()->pushMission(MISSION_MOVE_TO, pPlot->getX_INLINE(), pPlot->getY_INLINE());
+			return true;
+		}
+	}
+	return false;
+}
+
+bool CvUnitAI::AI_hasTransportOfSize(int iBerthSize)
+{
+	CvUnit* pLoopUnit;
+	int iLoop;
+	for(pLoopUnit = GET_PLAYER(getOwnerINLINE()).firstUnit(&iLoop); pLoopUnit != NULL; pLoopUnit = GET_PLAYER(getOwnerINLINE()).nextUnit(&iLoop))
+	{
+		if (pLoopUnit != this)
+		{
+			if (pLoopUnit->getDomainType() == DOMAIN_SEA)
+			{
+				if (pLoopUnit->cargoSpace() >= iBerthSize)
+				{
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+// PatchMod: Treasure Fix END
