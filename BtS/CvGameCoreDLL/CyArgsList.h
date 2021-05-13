@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CyArgsList_h
 #define CyArgsList_h
 

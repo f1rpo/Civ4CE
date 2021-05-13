@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CVPOPUPRETURN_h
 #define CVPOPUPRETURN_h
 

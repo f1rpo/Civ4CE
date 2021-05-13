@@ -1,3 +1,5 @@
+#pragma once
+
 // game.h
 
 #ifndef CIV4_GAME_H
@@ -128,7 +130,6 @@ public:
 	DllExport int getImprovementUpgradeTime(ImprovementTypes eImprovement) const;		// Exposed to Python
 
 	DllExport bool canTrainNukes() const;																		// Exposed to Python
-	DllExport bool showAllMoves(TeamTypes eTeam) const;
 	DllExport EraTypes getCurrentEra() const;											// Exposed to Python
 
 	DllExport TeamTypes getActiveTeam();																		// Exposed to Python
@@ -468,7 +469,7 @@ public:
 
 	bool hasSkippedSaveChecksum() const;
 
-	void addPlayer(PlayerTypes eNewPlayer, TeamTypes eNewTeam, LeaderHeadTypes eLeader, CivilizationTypes eCiv);   // Exposed to Python
+	void addPlayer(PlayerTypes eNewPlayer, LeaderHeadTypes eLeader, CivilizationTypes eCiv);   // Exposed to Python
 
 	bool testVictory(VictoryTypes eVictory, TeamTypes eTeam, bool* pbEndScore = NULL) const;
 

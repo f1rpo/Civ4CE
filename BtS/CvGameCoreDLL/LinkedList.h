@@ -1,3 +1,5 @@
+#pragma once
+
 // LinkedList.h
 
 // A doubly-linked list

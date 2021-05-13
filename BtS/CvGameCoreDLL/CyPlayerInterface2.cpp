@@ -57,6 +57,7 @@ void CyPlayerPythonInterface2(python::class_<CyPlayer>& x)
 
 		.def("splitEmpire", &CyPlayer::splitEmpire, "bool (int iAreaId)")
 		.def("canSplitEmpire", &CyPlayer::canSplitEmpire, "bool ()")
+		.def("canSplitArea", &CyPlayer::canSplitArea, "bool (int)")
 		.def("canHaveTradeRoutesWith", &CyPlayer::canHaveTradeRoutesWith, "bool (int)")
 		.def("forcePeace", &CyPlayer::forcePeace, "void (int)")
 		;

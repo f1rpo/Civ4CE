@@ -197,7 +197,7 @@ class CvTechSplashScreen:
 			eLoopUnit = CyGlobalContext().getCivilizationInfo(CyGlobalContext().getGame().getActiveCivilizationType()).getCivilizationUnits(j)
 			if (eLoopUnit != -1):
 				if (isTechRequiredForUnit(self.iTech, eLoopUnit)):
-	        			screen.attachImageButton( panelName, "", CyGlobalContext().getUnitInfo(eLoopUnit).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM,
+	        			screen.attachImageButton( panelName, "", CyGlobalContext().getActivePlayer().getUnitButton(eLoopUnit), GenericButtonSizes.BUTTON_SIZE_CUSTOM,
 								  WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoopUnit, 1, False )
 
 		for j in range(CyGlobalContext().getNumBuildingClassInfos()):

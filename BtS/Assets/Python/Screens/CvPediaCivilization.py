@@ -137,7 +137,10 @@ class CvPediaCivilization:
 			iUniqueUnit = gc.getCivilizationInfo(self.iCivilization).getCivilizationUnits(iUnit);
 			iDefaultUnit = gc.getUnitClassInfo(iUnit).getDefaultUnitIndex();
 			if (iDefaultUnit > -1 and iUniqueUnit > -1 and iDefaultUnit != iUniqueUnit):
-				screen.attachImageButton( panelName, "", gc.getUnitInfo(iUniqueUnit).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, iUniqueUnit, 1, False )
+				szButton = gc.getUnitInfo(iUniqueUnit).getButton()
+				if self.top.iActivePlayer != -1:
+					szButton = gc.getPlayer(self.top.iActivePlayer).getUnitButton(iUniqueUnit)
+				screen.attachImageButton( panelName, "", szButton, GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, iUniqueUnit, 1, False )
 		
 	def placeLeader(self):
 		

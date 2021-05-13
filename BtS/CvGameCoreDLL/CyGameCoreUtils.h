@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CyGameCoreUtils_h
 #define CyGameCoreUtils_h
 

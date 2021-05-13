@@ -109,7 +109,6 @@ class CvPediaBonus:
 		    self.X_ICON, self.Y_ICON, self.W_ICON, self.H_ICON, PanelStyles.PANEL_STYLE_MAIN)
 		screen.addDDSGFC(self.top.getNextWidgetName(), gc.getBonusInfo(self.iBonus).getButton(),
 		    self.X_ICON + self.W_ICON/2 - self.ICON_SIZE/2, self.Y_ICON + self.H_ICON/2 - self.ICON_SIZE/2, self.ICON_SIZE, self.ICON_SIZE, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-#		screen.addDDSGFC(self.top.getNextWidgetName(), gc.getBonusInfo(self.iBonus).getButton(), self.X_ICON, self.Y_ICON, self.W_ICON, self.H_ICON, WidgetTypes.WIDGET_GENERAL, self.iBonus, -1 )
 
 		# Bonus animation
 		screen.addBonusGraphicGFC(self.top.getNextWidgetName(), self.iBonus,
@@ -136,7 +135,6 @@ class CvPediaBonus:
 		
 		panelName = self.top.getNextWidgetName()
 		screen.addListBoxGFC(panelName, "", self.X_STATS_PANE, self.Y_STATS_PANE, self.W_STATS_PANE, self.H_STATS_PANE, TableStyles.TABLE_STYLE_EMPTY)
-#		screen.addPanel( panelName, "", "", true, true, self.X_STATS_PANE, self.Y_STATS_PANE, self.W_STATS_PANE, self.H_STATS_PANE, PanelStyles.PANEL_STYLE_EMPTY )
 		screen.enableSelect(panelName, False)
 		
 		for k in range(YieldTypes.NUM_YIELD_TYPES):
@@ -149,7 +147,6 @@ class CvPediaBonus:
 					
 				szYield = (u"%s: %s%i " % (gc.getYieldInfo(k).getDescription(), sign, iYieldChange))
 				screen.appendListBoxString(panelName, u"<font=4>" + szYield.upper() + (u"%c" % gc.getYieldInfo(k).getChar()) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
-#				screen.attachTextGFC(panelName, "", szYield.upper() + (u"%c" % gc.getYieldInfo(k).getChar()), FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 										
 	def placeYield(self):
 		
@@ -241,8 +238,6 @@ class CvPediaBonus:
 		textName = self.top.getNextWidgetName()
 		screen.addMultilineText( textName, gc.getBonusInfo(self.iBonus).getCivilopedia(), self.X_HISTORY_PANE + 15, self.Y_HISTORY_PANE + 40,
 		    self.W_HISTORY_PANE - (15 * 2), self.H_HISTORY_PANE - (15 * 2) - 25, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
-#		screen.attachMultilineText( panelName, textName, gc.getBonusInfo(self.iBonus).getCivilopedia(),
-#			WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 			
 	def placeBuildings(self):
 		
@@ -268,8 +263,6 @@ class CvPediaBonus:
 		screen.attachLabel(panelName, "", "  ")
 		
 		# add unit buttons
-#		for k in range(gc.getNumUnitClassInfos()):
-#			eLoopUnit = gc.getCivilizationInfo(gc.getGame().getActiveCivilizationType()).getCivilizationUnits(k)
 		for eLoopUnit in range(gc.getNumUnitInfos()):
 			bFound = False
 			if (eLoopUnit >= 0):
@@ -282,7 +275,10 @@ class CvPediaBonus:
 							bFound = True
 						j += 1
 			if bFound:
-				screen.attachImageButton( panelName, "", gc.getUnitInfo(eLoopUnit).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoopUnit, 1, False )
+				szButton = gc.getUnitInfo(eLoopUnit).getButton()
+				if self.top.iActivePlayer != -1:
+					szButton = gc.getPlayer(self.top.iActivePlayer).getUnitButton(eLoopUnit)
+				screen.attachImageButton( panelName, "", szButton, GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoopUnit, 1, False )
 
 		for eLoopBuilding in range(gc.getNumBuildingInfos()):
 			bFound = False

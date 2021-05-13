@@ -1,3 +1,5 @@
+#pragma once
+
 // gameAI.h
 
 #ifndef CIV4_GAME_AI_H

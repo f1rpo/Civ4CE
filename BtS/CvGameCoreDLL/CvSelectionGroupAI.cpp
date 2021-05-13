@@ -189,7 +189,7 @@ bool CvSelectionGroupAI::AI_update()
 		{			
 			m_bGroupAttack = false;
 
-			bool bGroupAttacked = groupAttack(m_iGroupAttackX, m_iGroupAttackY, MOVE_DIRECT_ATTACK, bFailedAlreadyFighting);
+			groupAttack(m_iGroupAttackX, m_iGroupAttackY, MOVE_DIRECT_ATTACK, bFailedAlreadyFighting);
 		}
 		// else pick AI action
 		else
@@ -221,7 +221,7 @@ bool CvSelectionGroupAI::AI_update()
 		if (!m_bGroupAttack && AI_isForceSeparate())
 		{
 			AI_separate();	// pointers could become invalid...
-			return false;
+			return true;
 		}
 	}
 
@@ -271,7 +271,7 @@ bool CvSelectionGroupAI::AI_update()
 
 	if (bDead)
 	{
-		return false;
+		return true;
 	}
 
 	return (isBusy() || isCargoBusy());
@@ -356,7 +356,7 @@ CvUnit* CvSelectionGroupAI::AI_getBestGroupAttacker(const CvPlot* pPlot, bool bP
 
 						if (pLoopUnit->collateralDamage() > 0)
 						{
-							iPossibleTargets = min((pPlot->getNumVisibleEnemyDefenders(pLoopUnit) - 1), pLoopUnit->collateralDamageMaxUnits());
+							iPossibleTargets = std::min((pPlot->getNumVisibleEnemyDefenders(pLoopUnit) - 1), pLoopUnit->collateralDamageMaxUnits());
 
 							if (iPossibleTargets > 0)
 							{
@@ -464,7 +464,7 @@ int CvSelectionGroupAI::AI_compareStacks(const CvPlot* pPlot, bool bPotentialEne
 	FAssert(eOwner != NO_PLAYER);
 	
 	int defenderSum = pPlot->AI_sumStrength(NO_PLAYER, getOwnerINLINE(), eDomainType, true, !bPotentialEnemy, bPotentialEnemy);
-	compareRatio /= max(1, defenderSum);
+	compareRatio /= std::max(1, defenderSum);
 
 	return compareRatio;
 }

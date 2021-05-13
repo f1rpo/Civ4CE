@@ -1,3 +1,5 @@
+#pragma once
+
 // teamAI.h
 
 #ifndef CIV4_TEAM_AI_H

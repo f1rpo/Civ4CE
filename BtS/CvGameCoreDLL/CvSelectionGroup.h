@@ -1,3 +1,5 @@
+#pragma once
+
 // selectionGroup.h
 
 #ifndef CIV4_GROUP_H
@@ -25,6 +27,8 @@ public:
 	void kill();
 
 	void doTurn();
+
+	bool showMoves() const;
 
 	void updateTimers();
 	bool doDelayedDeath();
@@ -78,6 +82,7 @@ public:
 	bool IsSelected();
 	DllExport void NotifyEntity(MissionTypes eMission);
 	void airCircle(bool bStart);
+	void setBlockading(bool bStart);
 
 	int getX() const;
 	int getY() const;
@@ -88,7 +93,7 @@ public:
 	CvArea* area() const;																																													// Exposed to Python
 	DomainTypes getDomainType() const;
 
-	RouteTypes getBestBuildRoute(CvPlot* pPlot, BuildTypes* peBestBuild = NULL);	// Exposed to Python
+	RouteTypes getBestBuildRoute(CvPlot* pPlot, BuildTypes* peBestBuild = NULL) const;	// Exposed to Python
 
 	bool groupDeclareWar(CvPlot* pPlot, bool bForce = false);
 	bool groupAttack(int iX, int iY, int iFlags, bool& bFailedAlreadyFighting);
@@ -98,17 +103,17 @@ public:
 	bool groupBuild(BuildTypes eBuild);
 	void setTransportUnit(CvUnit* pTransportUnit);
 
-	bool isAmphibPlot(CvPlot* pPlot);																																		// Exposed to Python
+	bool isAmphibPlot(const CvPlot* pPlot) const;																																		// Exposed to Python
 	bool groupAmphibMove(CvPlot* pPlot, int iFlags);
 
 	DllExport bool readyToSelect(bool bAny = false);																										// Exposed to Python
 	bool readyToMove(bool bAny = false);																																// Exposed to Python
 	bool readyToAuto();																																									// Exposed to Python 
 
-	int getID();																																												// Exposed to Python
+	int getID() const;																																												// Exposed to Python
 	void setID(int iID);																			
 
-	int getMissionTimer();
+	int getMissionTimer() const;
 	void setMissionTimer(int iNewValue);
 	void changeMissionTimer(int iChange);
 	void updateMissionTimer(int iSteps = 0);
@@ -128,7 +133,7 @@ public:
 	ActivityTypes getActivityType() const;																															// Exposed to Python
 	void setActivityType(ActivityTypes eNewValue);																											// Exposed to Python
 
-	AutomateTypes getAutomateType();																																		// Exposed to Python
+	AutomateTypes getAutomateType() const;																																		// Exposed to Python
 	bool isAutomated();																																									// Exposed to Python
 	void setAutomateType(AutomateTypes eNewValue);																											// Exposed to Python
 
@@ -156,17 +161,17 @@ public:
 	TeamTypes getHeadTeam() const;
 
 	void clearMissionQueue();																																	// Exposed to Python
-	DllExport int getLengthMissionQueue();																											// Exposed to Python
-	MissionData* getMissionFromQueue(int iIndex);																							// Exposed to Python
+	DllExport int getLengthMissionQueue() const;																											// Exposed to Python
+	MissionData* getMissionFromQueue(int iIndex) const;																							// Exposed to Python
 	void insertAtEndMissionQueue(MissionData mission, bool bStart = true);
 	CLLNode<MissionData>* deleteMissionQueueNode(CLLNode<MissionData>* pNode);
 	DllExport CLLNode<MissionData>* nextMissionQueueNode(CLLNode<MissionData>* pNode) const;
 	CLLNode<MissionData>* prevMissionQueueNode(CLLNode<MissionData>* pNode) const;
 	DllExport CLLNode<MissionData>* headMissionQueueNode() const;
 	CLLNode<MissionData>* tailMissionQueueNode() const;
-	int getMissionType(int iNode);																														// Exposed to Python
-	int getMissionData1(int iNode);																														// Exposed to Python
-	int getMissionData2(int iNode);																														// Exposed to Python
+	int getMissionType(int iNode) const;																														// Exposed to Python
+	int getMissionData1(int iNode) const;																														// Exposed to Python
+	int getMissionData2(int iNode) const;																														// Exposed to Python
 
 	// for serialization
 	virtual void read(FDataStreamBase* pStream);

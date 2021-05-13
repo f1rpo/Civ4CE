@@ -379,7 +379,7 @@
 			<iBuyUnitCostFactor>0</iBuyUnitCostFactor>
 			<iBuyCityCostFactor>0</iBuyCityCostFactor>
 			<iStealTreasuryTypes>0</iStealTreasuryTypes>
-			<iCityInsertCultureAmountFactor>100</iCityInsertCultureAmountFactor>
+			<iCityInsertCultureAmountFactor>5</iCityInsertCultureAmountFactor>
 			<iCityInsertCultureCostFactor>300</iCityInsertCultureCostFactor>
 			<iCityPoisonWaterCounter>0</iCityPoisonWaterCounter>
 			<iCityUnhappinessCounter>0</iCityUnhappinessCounter>

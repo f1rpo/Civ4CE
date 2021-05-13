@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CDIALOGTEMPLATE_H
 #define CDIALOGTEMPLATE_H
 

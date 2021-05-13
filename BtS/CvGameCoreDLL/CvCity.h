@@ -1,3 +1,5 @@
+#pragma once
+
 // city.h
 
 #ifndef CIV4_CITY_H
@@ -18,12 +20,12 @@ public:
 	CvCity();
 	virtual ~CvCity();
 
-	void init(int iID, PlayerTypes eOwner, int iX, int iY, bool bBumpUnits = true);
+	void init(int iID, PlayerTypes eOwner, int iX, int iY, bool bBumpUnits, bool bUpdatePlotGroups);
 	void uninit();
 	void reset(int iID = 0, PlayerTypes eOwner = NO_PLAYER, int iX = 0, int iY = 0, bool bConstructorCall = false);
 	void setupGraphical();
 
-	DllExport void kill();																								// Exposed to Python
+	DllExport void kill(bool bUpdatePlotGroups);																								// Exposed to Python
 
 	void doTurn();
 
@@ -561,8 +563,8 @@ public:
 	CultureLevelTypes getCultureLevel() const;														// Exposed to Python
 	DllExport int getCultureThreshold() const;																	// Exposed to Python
 	static int getCultureThreshold(CultureLevelTypes eLevel);
-	void setCultureLevel(CultureLevelTypes eNewValue);
-	void updateCultureLevel();
+	void setCultureLevel(CultureLevelTypes eNewValue, bool bUpdatePlotGroups);
+	void updateCultureLevel(bool bUpdatePlotGroups);
 
 	int getSeaPlotYield(YieldTypes eIndex) const;																// Exposed to Python
 	void changeSeaPlotYield(YieldTypes eIndex, int iChange);
@@ -653,10 +655,10 @@ public:
 	PlayerTypes findHighestCulture() const;																			// Exposed to Python
 	int calculateCulturePercent(PlayerTypes eIndex) const;											// Exposed to Python
 	int calculateTeamCulturePercent(TeamTypes eIndex) const;										// Exposed to Python
-	void setCulture(PlayerTypes eIndex, int iNewValue, bool bPlots);			// Exposed to Python
-	void setCultureTimes100(PlayerTypes eIndex, int iNewValue, bool bPlots);			// Exposed to Python
-	DllExport void changeCulture(PlayerTypes eIndex, int iChange, bool bPlots);		// Exposed to Python
-	void changeCultureTimes100(PlayerTypes eIndex, int iChange, bool bPlots);		// Exposed to Python
+	void setCulture(PlayerTypes eIndex, int iNewValue, bool bPlots, bool bUpdatePlotGroups);			// Exposed to Python
+	void setCultureTimes100(PlayerTypes eIndex, int iNewValue, bool bPlots, bool bUpdatePlotGroups);			// Exposed to Python
+	DllExport void changeCulture(PlayerTypes eIndex, int iChange, bool bPlots, bool bUpdatePlotGroups);		// Exposed to Python
+	void changeCultureTimes100(PlayerTypes eIndex, int iChange, bool bPlots, bool bUpdatePlotGroups);		// Exposed to Python
 
 	int getNumRevolts(PlayerTypes eIndex) const;
 	void changeNumRevolts(PlayerTypes eIndex, int iChange);
@@ -672,8 +674,8 @@ public:
 	DllExport void setRevealed(TeamTypes eIndex, bool bNewValue);											// Exposed to Python
 
 	DllExport bool getEspionageVisibility(TeamTypes eTeam) const;								// Exposed to Python
-	void setEspionageVisibility(TeamTypes eTeam, bool bVisible);
-	void updateEspionageVisibility();
+	void setEspionageVisibility(TeamTypes eTeam, bool bVisible, bool bUpdatePlotGroups);
+	void updateEspionageVisibility(bool bUpdatePlotGroups);
 
 	DllExport const CvWString getName(uint uiForm = 0) const;								// Exposed to Python
 	DllExport const wchar* getNameKey() const;															// Exposed to Python
@@ -732,7 +734,7 @@ public:
 	void alterSpecialistCount(SpecialistTypes eIndex, int iChange);					// Exposed to Python
 
 	DllExport int getMaxSpecialistCount(SpecialistTypes eIndex) const;						// Exposed to Python
-	bool isSpecialistValid(SpecialistTypes eIndex, int iExtra = 0);					// Exposed to Python
+	bool isSpecialistValid(SpecialistTypes eIndex, int iExtra = 0) const;					// Exposed to Python
 	void changeMaxSpecialistCount(SpecialistTypes eIndex, int iChange);
 
 	DllExport int getForceSpecialistCount(SpecialistTypes eIndex) const;					// Exposed to Python
@@ -740,11 +742,12 @@ public:
 	void setForceSpecialistCount(SpecialistTypes eIndex, int iNewValue);		// Exposed to Python
 	void changeForceSpecialistCount(SpecialistTypes eIndex, int iChange);		// Exposed to Python
 
-	int getFreeSpecialistCount(SpecialistTypes eIndex) const;											// Exposed to Python
+	int getFreeSpecialistCount(SpecialistTypes eIndex) const;					// Exposed to Python
 	void setFreeSpecialistCount(SpecialistTypes eIndex, int iNewValue);			// Exposed to Python
 	void changeFreeSpecialistCount(SpecialistTypes eIndex, int iChange);		// Exposed to Python
+	int getAddedFreeSpecialistCount(SpecialistTypes eIndex) const;		// Exposed to Python
 
-	int getImprovementFreeSpecialists(ImprovementTypes eIndex) const;											// Exposed to Python
+	int getImprovementFreeSpecialists(ImprovementTypes eIndex) const;			// Exposed to Python
 	void changeImprovementFreeSpecialists(ImprovementTypes eIndex, int iChange);		// Exposed to Python
 
 	int getReligionInfluence(ReligionTypes eIndex) const;													// Exposed to Python
@@ -839,8 +842,8 @@ public:
 	int getBuildingHealthChange(BuildingClassTypes eBuildingClass) const;           // Exposed to Python
 	void setBuildingHealthChange(BuildingClassTypes eBuildingClass, int iChange);          // Exposed to Python
 
-	DllExport PlayerTypes getLiberationPlayer() const;   // Exposed to Python
-	void liberate();    // Exposed to Python
+	DllExport PlayerTypes getLiberationPlayer(bool bConquest) const;   // Exposed to Python
+	void liberate(bool bConquest);    // Exposed to Python
 
 	void changeNoBonusCount(BonusTypes eBonus, int iChange);   // Exposed to Python
 	int getNoBonusCount(BonusTypes eBonus) const;
@@ -854,7 +857,7 @@ public:
 	virtual void AI_doTurn() = 0;
 	virtual void AI_assignWorkingPlots() = 0;
 	virtual void AI_updateAssignWork() = 0;
-	virtual bool AI_avoidGrowth() = 0;
+	virtual bool AI_avoidGrowth() = 0;											// Exposed to Python
 	virtual int AI_specialistValue(SpecialistTypes eSpecialist, bool bAvoidGrowth, bool bRemove) = 0;
 	virtual void AI_chooseProduction() = 0;
 	virtual UnitTypes AI_bestUnit(bool bAsync = false, AdvisorTypes eIgnoreAdvisor = NO_ADVISOR, UnitAITypes* peBestUnitAI = NULL) = 0;
@@ -905,6 +908,8 @@ public:
 	void invalidatePopulationRankCache();
 	void invalidateYieldRankCache(YieldTypes eYield = NO_YIELD);
 	void invalidateCommerceRankCache(CommerceTypes eCommerce = NO_COMMERCE);
+
+	int getBestYieldAvailable(YieldTypes eYield) const;
 
 protected:
 

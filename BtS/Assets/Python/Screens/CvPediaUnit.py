@@ -101,7 +101,10 @@ class CvPediaUnit:
 		    self.X_UNIT_PANE, self.Y_UNIT_PANE, self.W_UNIT_PANE, self.H_UNIT_PANE, PanelStyles.PANEL_STYLE_BLUE50)
 		screen.addPanel(self.top.getNextWidgetName(), "", "", false, false,
 		    self.X_ICON, self.Y_ICON, self.W_ICON, self.H_ICON, PanelStyles.PANEL_STYLE_MAIN)
-		screen.addDDSGFC(self.top.getNextWidgetName(), gc.getUnitInfo(self.iUnit).getButton(),
+		szButton = gc.getUnitInfo(self.iUnit).getButton()
+		if self.top.iActivePlayer != -1:
+			szButton = gc.getPlayer(self.top.iActivePlayer).getUnitButton(self.iUnit)
+		screen.addDDSGFC(self.top.getNextWidgetName(), szButton,
 		    self.X_ICON + self.W_ICON/2 - self.ICON_SIZE/2, self.Y_ICON + self.H_ICON/2 - self.ICON_SIZE/2, self.ICON_SIZE, self.ICON_SIZE, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 
 		# Unit animation
@@ -225,7 +228,7 @@ class CvPediaUnit:
 		# add religion buttons
 		iPrereq = gc.getUnitInfo(self.iUnit).getPrereqReligion()
 		if (iPrereq >= 0):
-			screen.attachImageButton( panelName, "", gc.getReligionInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_HELP_RELIGION, iPrereq, -1, False )
+			screen.attachImageButton( panelName, "", gc.getReligionInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_RELIGION, iPrereq, -1, False )
 		
 		# add building buttons
 		iPrereq = gc.getUnitInfo(self.iUnit).getPrereqBuilding()
@@ -244,11 +247,15 @@ class CvPediaUnit:
 
 		for k in range(gc.getNumUnitClassInfos()):
 			if self.top.iActivePlayer == -1:
-				eLoopUnit = gc.getUnitClassInfo(k).getDefaultUnitIndex()				
+				eLoopUnit = gc.getUnitClassInfo(k).getDefaultUnitIndex()
 			else:
 				eLoopUnit = gc.getCivilizationInfo(gc.getGame().getActiveCivilizationType()).getCivilizationUnits(k)
+				
 			if (eLoopUnit >= 0 and gc.getUnitInfo(self.iUnit).getUpgradeUnitClass(k)):
-				screen.attachImageButton( panelName, "", gc.getUnitInfo(eLoopUnit).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoopUnit, 1, False )
+				szButton = gc.getUnitInfo(eLoopUnit).getButton()
+				if self.top.iActivePlayer != -1:
+					szButton = gc.getPlayer(self.top.iActivePlayer).getUnitButton(eLoopUnit)
+				screen.attachImageButton( panelName, "", szButton, GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoopUnit, 1, False )
 
 	# Place Special abilities
 	def placeSpecial(self):

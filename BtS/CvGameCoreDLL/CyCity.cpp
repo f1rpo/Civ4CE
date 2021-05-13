@@ -23,7 +23,7 @@ CyCity::CyCity(CvCity* pCity) : m_pCity(pCity)
 void CyCity::kill()
 {
 	if (m_pCity)
-		m_pCity->kill();
+		m_pCity->kill(true);
 }
 
 void CyCity::createGreatPeople(int /*UnitTypes*/ eGreatPersonUnit, bool bIncrementThreshold, bool bIncrementExperience)
@@ -1705,25 +1705,25 @@ int CyCity::calculateTeamCulturePercent(int /*TeamTypes*/ eIndex)
 void CyCity::setCulture(int /*PlayerTypes*/ eIndex, int iNewValue, bool bPlots)
 {
 	if (m_pCity)
-		m_pCity->setCulture((PlayerTypes)eIndex, iNewValue, bPlots);
+		m_pCity->setCulture((PlayerTypes)eIndex, iNewValue, bPlots, true);
 }
 
 void CyCity::setCultureTimes100(int /*PlayerTypes*/ eIndex, int iNewValue, bool bPlots)
 {
 	if (m_pCity)
-		m_pCity->setCultureTimes100((PlayerTypes)eIndex, iNewValue, bPlots);
+		m_pCity->setCultureTimes100((PlayerTypes)eIndex, iNewValue, bPlots, true);
 }
 
 void CyCity::changeCulture(int /*PlayerTypes*/ eIndex, int iChange, bool bPlots)
 {
 	if (m_pCity)
-		m_pCity->changeCulture((PlayerTypes)eIndex, iChange, bPlots);
+		m_pCity->changeCulture((PlayerTypes)eIndex, iChange, bPlots, true);
 }
 
 void CyCity::changeCultureTimes100(int /*PlayerTypes*/ eIndex, int iChange, bool bPlots)
 {
 	if (m_pCity)
-		m_pCity->changeCultureTimes100((PlayerTypes)eIndex, iChange, bPlots);
+		m_pCity->changeCultureTimes100((PlayerTypes)eIndex, iChange, bPlots, true);
 }
 
 bool CyCity::isTradeRoute(int /*PlayerTypes*/ eIndex)
@@ -1958,6 +1958,11 @@ void CyCity::changeFreeSpecialistCount(int /*SpecialistTypes*/ eIndex, int iChan
 		m_pCity->changeFreeSpecialistCount((SpecialistTypes)eIndex, iChange);
 }
 
+int CyCity::getAddedFreeSpecialistCount(int /*SpecialistTypes*/ eIndex)
+{
+	return m_pCity ? m_pCity->getAddedFreeSpecialistCount((SpecialistTypes)eIndex) : -1;
+}
+
 void CyCity::changeImprovementFreeSpecialists(int /*ImprovementTypes*/ iIndex, int iChange)
 {
 	if (m_pCity)
@@ -2146,6 +2151,11 @@ python::tuple CyCity::getWallOverridePoints() const
 	return tup;
 }
 
+bool CyCity::AI_avoidGrowth()
+{
+	return m_pCity ? m_pCity->AI_avoidGrowth() : false;
+}
+
 bool CyCity::AI_isEmphasize(int iEmphasizeType)
 {
 	return m_pCity ? m_pCity->AI_isEmphasize((EmphasizeTypes)iEmphasizeType) : false;
@@ -2234,15 +2244,15 @@ void CyCity::setBuildingHealthChange(int /*BuildingClassTypes*/ eBuildingClass, 
 	}
 }
 
-int CyCity::getLiberationPlayer()
+int CyCity::getLiberationPlayer(bool bConquest)
 {
-	return (m_pCity ? m_pCity->getLiberationPlayer() : -1);
+	return (m_pCity ? m_pCity->getLiberationPlayer(bConquest) : -1);
 }
 
-void CyCity::liberate()
+void CyCity::liberate(bool bConquest)
 {
 	if (m_pCity)
 	{
-		m_pCity->liberate();
+		m_pCity->liberate(bConquest);
 	}
 }

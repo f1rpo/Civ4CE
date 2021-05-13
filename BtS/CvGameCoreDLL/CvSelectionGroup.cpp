@@ -233,7 +233,7 @@ void CvSelectionGroup::doTurn()
 					}
 				}
 
-				setMissionTimer(max(iBestWaitTurns, getMissionTimer()));
+				setMissionTimer(std::max(iBestWaitTurns, getMissionTimer()));
 
 				if (iBestWaitTurns > 0)
 				{
@@ -249,6 +249,46 @@ void CvSelectionGroup::doTurn()
 	}
 
 	doDelayedDeath();
+}
+
+bool CvSelectionGroup::showMoves() const
+{
+	if (GC.getGameINLINE().isMPOption(MPOPTION_SIMULTANEOUS_TURNS) || GC.getGameINLINE().isSimultaneousTeamTurns())
+	{
+		return false;
+	}
+
+	for (int iI = 0; iI < MAX_CIV_PLAYERS; iI++)
+	{
+		CvPlayer& kLoopPlayer = GET_PLAYER((PlayerTypes)iI);
+		if (kLoopPlayer.isAlive())
+		{
+			if (kLoopPlayer.isHuman())
+			{
+				CvUnit* pHeadUnit = getHeadUnit();
+
+				if (NULL != pHeadUnit)
+				{
+					if (pHeadUnit->isEnemy(kLoopPlayer.getTeam()))
+					{
+						if (kLoopPlayer.isOption(PLAYEROPTION_SHOW_ENEMY_MOVES))
+						{
+							return true;
+						}
+					}
+					else
+					{
+						if (kLoopPlayer.isOption(PLAYEROPTION_SHOW_FRIENDLY_MOVES))
+						{
+							return true;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return false;
 }
 
 
@@ -273,7 +313,15 @@ void CvSelectionGroup::updateTimers()
 
 			if (pLoopUnit->isCombat())
 			{
-				pLoopUnit->updateCombat();
+				if (pLoopUnit->isAirCombat())
+				{
+					pLoopUnit->updateAirCombat();
+				}
+				else
+				{
+					pLoopUnit->updateCombat();
+				}
+
 				bCombat = true;
 				break;
 			}
@@ -720,7 +768,7 @@ bool CvSelectionGroup::canStartMission(int iMission, int iData1, int iData2, CvP
 			break;
 
 		case MISSION_PLUNDER:
-			if (pLoopUnit->canPlunder(pPlot))
+			if (pLoopUnit->canPlunder(pPlot, bTestVisible))
 			{
 				return true;
 			}
@@ -1354,19 +1402,17 @@ void CvSelectionGroup::continueMission(int iSteps)
 		return;
 	}
 
-	if (canAllMove())
+	if (!bDone)
 	{
 		if (getNumUnits() > 0)
 		{
-			if (!bDone && canAllMove())
+			if (canAllMove())
 			{
 				switch (headMissionQueueNode()->m_data.eMissionType)
 				{
 				case MISSION_MOVE_TO:
 					if (getDomainType() == DOMAIN_AIR)
 					{
-						CvUnit *headUnit = getHeadUnit();
-						CvPlot *headPlot = plot();
 						groupPathTo(headMissionQueueNode()->m_data.iData1, headMissionQueueNode()->m_data.iData2, headMissionQueueNode()->m_data.iFlags);
 						bDone = true;
 					}
@@ -1426,7 +1472,7 @@ void CvSelectionGroup::continueMission(int iSteps)
 								CvPlot* pMissionPlot = pTargetUnit->getGroup()->AI_getMissionAIPlot();
 								if (pMissionPlot != NULL && NO_TEAM != pMissionPlot->getTeam())
 								{
-									if (pMissionPlot->isOwned() && isPotentialEnemy(getTeam(), pMissionPlot->getTeam()))
+									if (pMissionPlot->isOwned() && pTargetUnit->isPotentialEnemy(pMissionPlot->getTeam(), pMissionPlot))
 									{
 										bAction = false;
 										bDone = true;
@@ -1599,7 +1645,7 @@ void CvSelectionGroup::continueMission(int iSteps)
 				{
 					updateMissionTimer(iSteps);
 
-					if (GC.getGameINLINE().showAllMoves(getTeam()))
+					if (showMoves())
 					{
 						if (GC.getGameINLINE().getActivePlayer() != NO_PLAYER)
 						{
@@ -2720,6 +2766,18 @@ void CvSelectionGroup::airCircle(bool bStart)
 }
 
 
+void CvSelectionGroup::setBlockading(bool bStart)
+{
+	CLLNode<IDInfo>* pUnitNode = headUnitNode();
+
+	while (pUnitNode != NULL)
+	{
+		::getUnit(pUnitNode->m_data)->setBlockading(bStart);
+		pUnitNode = nextUnitNode(pUnitNode);
+	}
+}
+
+
 int CvSelectionGroup::getX() const
 {
 	CvUnit* pHeadUnit;
@@ -2833,7 +2891,7 @@ DomainTypes CvSelectionGroup::getDomainType() const
 }
 
 
-RouteTypes CvSelectionGroup::getBestBuildRoute(CvPlot* pPlot, BuildTypes* peBestBuild)
+RouteTypes CvSelectionGroup::getBestBuildRoute(CvPlot* pPlot, BuildTypes* peBestBuild) const
 {
 	PROFILE_FUNC();
 
@@ -2907,7 +2965,7 @@ bool CvSelectionGroup::groupDeclareWar(CvPlot* pPlot, bool bForce)
 		{
 			if (kTeam.canDeclareWar(ePlotTeam))
 			{
-				kTeam.declareWar(ePlotTeam, true);
+				kTeam.declareWar(ePlotTeam, true, NO_WARPLAN);
 			}
 		}
 	}
@@ -3311,7 +3369,7 @@ void CvSelectionGroup::setTransportUnit(CvUnit* pTransportUnit)
 }
 
 
-bool CvSelectionGroup::isAmphibPlot(CvPlot* pPlot)
+bool CvSelectionGroup::isAmphibPlot(const CvPlot* pPlot) const
 {
 	bool bFriendly = true;
 	CvUnit* pUnit = getHeadUnit();
@@ -3331,6 +3389,7 @@ bool CvSelectionGroup::groupAmphibMove(CvPlot* pPlot, int iFlags)
 	CLLNode<IDInfo>* pUnitNode2;
 	CvUnit* pLoopUnit1;
 	CvUnit* pLoopUnit2;
+	bool bLanding = false;
 
 	FAssert(getOwnerINLINE() != NO_PLAYER);
 
@@ -3352,8 +3411,9 @@ bool CvSelectionGroup::groupAmphibMove(CvPlot* pPlot, int iFlags)
 
 				if ((pLoopUnit1->getCargo() > 0) && (pLoopUnit1->domainCargo() == DOMAIN_LAND))
 				{
-					pUnitNode2 = plot()->headUnitNode();
+					std::vector<CvSelectionGroup*> aCargoGroups;
 
+					pUnitNode2 = plot()->headUnitNode();
 					while (pUnitNode2 != NULL)
 					{
 						pLoopUnit2 = ::getUnit(pUnitNode2->m_data);
@@ -3363,18 +3423,24 @@ bool CvSelectionGroup::groupAmphibMove(CvPlot* pPlot, int iFlags)
 						{
 							if (pLoopUnit2->isGroupHead())
 							{
-								pLoopUnit2->getGroup()->pushMission(MISSION_MOVE_TO, pPlot->getX_INLINE(), pPlot->getY_INLINE(), (MOVE_IGNORE_DANGER | iFlags));
+								aCargoGroups.push_back(pLoopUnit2->getGroup());
 							}
 						}
 					}
+
+					std::vector<CvSelectionGroup*>::iterator it;
+					for (it = aCargoGroups.begin(); it != aCargoGroups.end(); ++it)
+					{
+						FAssert(!(*it)->at(pPlot->getX_INLINE(), pPlot->getY_INLINE()));
+						(*it)->pushMission(MISSION_MOVE_TO, pPlot->getX_INLINE(), pPlot->getY_INLINE(), (MOVE_IGNORE_DANGER | iFlags));
+						bLanding = true;
+					}
 				}
 			}
-
-			return true;
 		}
 	}
 
-	return false;
+	return bLanding;
 }
 
 
@@ -3396,7 +3462,7 @@ bool CvSelectionGroup::readyToAuto()
 }
 
 
-int CvSelectionGroup::getID()
+int CvSelectionGroup::getID() const
 {
 	return m_iID;
 }
@@ -3425,7 +3491,7 @@ TeamTypes CvSelectionGroup::getTeam() const
 }
 
 
-int CvSelectionGroup::getMissionTimer()
+int CvSelectionGroup::getMissionTimer() const
 {
 	return m_iMissionTimer;
 }
@@ -3452,7 +3518,7 @@ void CvSelectionGroup::updateMissionTimer(int iSteps)
 	CvPlot* pTargetPlot;
 	int iTime;
 
-	if (!isHuman() && !(GC.getGameINLINE().showAllMoves(getTeam())))
+	if (!isHuman() && !showMoves())
 	{
 		iTime = 0;
 	}
@@ -3487,13 +3553,13 @@ void CvSelectionGroup::updateMissionTimer(int iSteps)
 			}
 			else
 			{
-				iTime = min(iTime, 2);
+				iTime = std::min(iTime, 2);
 			}
 		}
 
 		if (isHuman() && (isAutomated() || (GET_PLAYER((GC.getGameINLINE().isNetworkMultiPlayer()) ? getOwnerINLINE() : GC.getGameINLINE().getActivePlayer()).isOption(PLAYEROPTION_QUICK_MOVES))))
 		{
-			iTime = min(iTime, 1);
+			iTime = std::min(iTime, 1);
 		}
 	}
 	else
@@ -3542,6 +3608,8 @@ void CvSelectionGroup::setActivityType(ActivityTypes eNewValue)
 			airCircle(false);
 		}
 
+		setBlockading(false);
+
 		m_eActivityType = eNewValue;
 
 		if (getActivityType() == ACTIVITY_INTERCEPT)
@@ -3583,7 +3651,7 @@ void CvSelectionGroup::setActivityType(ActivityTypes eNewValue)
 }
 
 
-AutomateTypes CvSelectionGroup::getAutomateType()															
+AutomateTypes CvSelectionGroup::getAutomateType() const														
 {
 	return m_eAutomateType;
 }
@@ -3944,7 +4012,7 @@ CvSelectionGroup* CvSelectionGroup::splitGroup(int iSplitSize, CvUnit* pNewHeadU
 	}
 
 	// the AI of the new head (the remainder will get the AI of the old head)
-	UnitAITypes eNewHeadAI = pNewHeadUnit->AI_getUnitAIType();
+	// UnitAITypes eNewHeadAI = pNewHeadUnit->AI_getUnitAIType();
 
 	// pRemainderHeadUnit is the head unit of the group that contains the remainder of units 
 	CvUnit* pRemainderHeadUnit = NULL;
@@ -4110,9 +4178,7 @@ CLLNode<IDInfo>* CvSelectionGroup::headUnitNode() const
 
 CvUnit* CvSelectionGroup::getHeadUnit() const
 {
-	CLLNode<IDInfo>* pUnitNode;
-
-	pUnitNode = headUnitNode();
+	CLLNode<IDInfo>* pUnitNode = headUnitNode();
 
 	if (pUnitNode != NULL)
 	{
@@ -4206,13 +4272,13 @@ void CvSelectionGroup::clearMissionQueue()
 }
 
 
-int CvSelectionGroup::getLengthMissionQueue()																	
+int CvSelectionGroup::getLengthMissionQueue() const																
 {
 	return m_missionQueue.getLength();
 }
 
 
-MissionData* CvSelectionGroup::getMissionFromQueue(int iIndex)
+MissionData* CvSelectionGroup::getMissionFromQueue(int iIndex) const
 {
 	CLLNode<MissionData>* pMissionNode;
 
@@ -4303,7 +4369,7 @@ CLLNode<MissionData>* CvSelectionGroup::tailMissionQueueNode() const
 }
 
 
-int CvSelectionGroup::getMissionType(int iNode)
+int CvSelectionGroup::getMissionType(int iNode) const
 {
 	int iCount = 0;
 	CLLNode<MissionData>* pMissionNode;
@@ -4326,7 +4392,7 @@ int CvSelectionGroup::getMissionType(int iNode)
 }
 
 
-int CvSelectionGroup::getMissionData1(int iNode)
+int CvSelectionGroup::getMissionData1(int iNode) const
 {
 	int iCount = 0;
 	CLLNode<MissionData>* pMissionNode;
@@ -4349,7 +4415,7 @@ int CvSelectionGroup::getMissionData1(int iNode)
 }
 
 
-int CvSelectionGroup::getMissionData2(int iNode)
+int CvSelectionGroup::getMissionData2(int iNode) const
 {
 	int iCount = 0;
 	CLLNode<MissionData>* pMissionNode;

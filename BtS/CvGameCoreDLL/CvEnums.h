@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CVENUMS_h
 #define CVENUMS_h
 
@@ -244,6 +246,7 @@ enum DllExport InterfaceModeTypes			// Exposed to Python
 	INTERFACEMODE_AIRSTRIKE,
 	INTERFACEMODE_REBASE,
 	INTERFACEMODE_PYTHON_PICK_PLOT,
+	INTERFACEMODE_SAVE_PLOT_NIFS,
 
 #ifdef _USRDLL
 	NUM_INTERFACEMODE_TYPES
@@ -305,7 +308,6 @@ enum DllExport EngineDirtyBits		// Exposed to Python
 	GlobePartialTexture_DIRTY_BIT,
 	MinimapTexture_DIRTY_BIT,
 	CultureBorders_DIRTY_BIT,
-	GreatWall_DIRTY_BIT,
 
 #ifdef _USRDLL
 	NUM_ENGINE_DIRTY_BITS
@@ -1736,7 +1738,6 @@ enum DllExport AnimationPathTypes	// Exposed to Python
 	
 	// Ranged combat related animation paths
 	ANIMATIONPATH_RANGED_STRIKE,
-	ANIMATIONPATH_RANGED_HURT,
 	ANIMATIONPATH_RANGED_DIE,
 	ANIMATIONPATH_RANGED_FORTIFIED,
 	ANIMATIONPATH_RANGED_RUNHIT,
@@ -1756,7 +1757,6 @@ enum DllExport AnimationPathTypes	// Exposed to Python
 	ANIMATIONPATH_FORTIFY,
 	ANIMATIONPATH_MELEE_FORTIFY,
 	ANIMATIONPATH_PILLAGE,
-	ANIMATIONPATH_BOMBARD,
 	ANIMATIONPATH_SENTRY,
 	ANIMATIONPATH_FOUND,
 	ANIMATIONPATH_IRRIGATE,

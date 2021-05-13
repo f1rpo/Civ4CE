@@ -335,69 +335,6 @@ int CvXMLLoadUtility::FindInInfoClass(const TCHAR* pszVal, bool hideAssert)
 	return idx;
 }
 
-//------------------------------------------------------------------------------------------------
-// FUNCTION:    void setActionInfoFromHotkeyInfo(
-//					CvActionInfo* pActionInfo, CvHotkeyInfo* pHotkeyInfo, CvString szHelp, int iInterfaceMode,
-//					int iMissionType, int iMissionData, int iCommandType, int iCommandData, int iControlType,
-//					int iAutomateType, bool bConfirmCommand, bool bVisible)
-//
-//! \brief      Set a action info item based on the function parameters and the info in the HotkeyInfo parameter
-//! \param      pActionInfo is the action info item that is being set
-//!							pHotkeyInfo holds most of the info to set the action info item with
-//!							szHelp is the help string if any that should be displayed for this new action info
-//!							iInterfaceMode is the interface mode for this action info
-//!							iMissionType is the mission type for this action info
-//!							iMissionData is the mission data for this action info
-//!							iCommandType is the command type for this action info
-//!							iCommandData is the command data for this action info
-//!							iControlType is the control type for this action info
-//!							iAutomateType is the automate type for this action info
-//!							bConfirmCommand indicates if the command should be confirmed with a popup or not
-//!							bVisible indicates if the action is visible to the user or not
-//!
-//! \retval
-//------------------------------------------------------------------------------------------------
-void CvXMLLoadUtility::setActionInfoFromHotkeyInfo(
-		 CvActionInfo* pActionInfo, CvHotkeyInfo* pHotkeyInfo, CvString szDescriptionPrefix, CvString szHelp,
-		  int iInterfaceMode, int iMissionType, int iMissionData, int iCommandType, int iCommandData, int iControlType,
-		 int iAutomateType, bool bConfirmCommand, bool bVisible)
-{
-/*
-	CvString szBuffer;
-	FAssertMsg(pActionInfo, "Expected the action info to be initialized in order for it to be loaded");
-	FAssertMsg(pHotkeyInfo, "Expected the hotkey info to be initialized in order for it to load the action info");
-	szBuffer = szDescriptionPrefix + " " + pHotkeyInfo->getDescription();
-	pActionInfo->setDescription(szBuffer);
-	pActionInfo->setHotKeyVal(pHotkeyInfo->getHotKeyVal());
-	pActionInfo->setHotKeyPriority(pHotkeyInfo->getHotKeyPriority());
-	pActionInfo->setAltDown(pHotkeyInfo->isAltDown());
-	pActionInfo->setShiftDown(pHotkeyInfo->isShiftDown());
-	pActionInfo->setCtrlDown(pHotkeyInfo->isCtrlDown());
-
-	// set alt hotkey info
-	pActionInfo->setHotKeyValAlt(pHotkeyInfo->getHotKeyValAlt());
-	pActionInfo->setHotKeyPriorityAlt(pHotkeyInfo->getHotKeyPriorityAlt());
-	pActionInfo->setAltDownAlt(pHotkeyInfo->isAltDownAlt());
-	pActionInfo->setShiftDownAlt(pHotkeyInfo->isShiftDownAlt());
-	pActionInfo->setCtrlDownAlt(pHotkeyInfo->isCtrlDownAlt());
-
-	pActionInfo->setHotKey(pHotkeyInfo->getHotKey());
-	szBuffer = szDescriptionPrefix + " " + pHotkeyInfo->getHotKeyDescription();
-	pActionInfo->setHotKeyDescription(szBuffer);
-	pActionInfo->setHelp(szHelp);
-	pActionInfo->setInterfaceModeType(iInterfaceMode);
-	pActionInfo->setMissionType(iMissionType);
-	pActionInfo->setMissionData(iMissionData);
-	pActionInfo->setCommandType(iCommandType);
-	pActionInfo->setCommandData(iCommandData);
-	pActionInfo->setControlType(iControlType);
-	pActionInfo->setAutomateType(iAutomateType);
-
-	pActionInfo->setConfirmCommand(bConfirmCommand);
-	pActionInfo->setVisible(bVisible);
-	pActionInfo->setButton(pHotkeyInfo->getButton());
-*/
-}
 
 //------------------------------------------------------------------------------------------------------
 //

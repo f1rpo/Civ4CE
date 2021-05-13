@@ -123,13 +123,20 @@ def handleGlobeViewDropdownBoxInput ( argsList ):
 	
 	return 1
 		
+def handleMovieDropdownBoxInput ( argsList ):
+	"Handles Movie Dropdown Box input"
+	iValue, szName = argsList
+	
+	UserProfile.setMovieQualityLevel(iValue)
+	
+	return 1
+		
 def handleMainMenuDropdownBoxInput ( argsList ):
 	"Handles Main Menu Dropdown Box input"
 	iValue, szName = argsList
 	
 	UserProfile.setMainMenu(iValue)
 	refresh()
-	restartPopup(true)
 	saveProfile()
 	
 	return 1

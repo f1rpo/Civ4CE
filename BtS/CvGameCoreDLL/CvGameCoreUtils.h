@@ -1,3 +1,5 @@
+#pragma once
+
 // utils.h
 
 #ifndef CIV4_GAMECORE_UTILS_H
@@ -37,57 +39,6 @@ class CvInfoBase;
 
 #undef max
 #undef min
-
-
-// Inline functions.
-
-inline int max(int iA, int iB)
-{
-	if (iA > iB)
-	{
-		return iA;
-	}
-	else
-	{
-		return iB;
-	}
-}
-
-inline float max(float fA, float fB)
-{
-	if (fA > fB)
-	{
-		return fA;
-	}
-	else
-	{
-		return fB;
-	}
-}
-
-inline int min(int iA, int iB)
-{
-	if (iA < iB)
-	{
-		return iA;
-	}
-	else
-	{
-		return iB;
-	}
-}
-
-inline float min(float fA, float fB)
-{
-	if (fA < fB)
-	{
-		return fA;
-	}
-	else
-	{
-		return fB;
-	}
-}
 
 //sign function taken from FirePlace - JW
 template<class T> __forceinline T getSign( T x ) { return (( x < 0 ) ? T(-1) : x > 0 ? T(1) : T(0)); };
@@ -198,7 +149,7 @@ inline int plotDistance(int iX1, int iY1, int iX2, int iY2)													// Expos
 	iDX = xDistance(iX1, iX2);
 	iDY = yDistance(iY1, iY2);
 
-	return (max(iDX, iDY) + (min(iDX, iDY) / 2));
+	return (std::max(iDX, iDY) + (std::min(iDX, iDY) / 2));
 }
 
 // 3 | 3 | 3 | 3 | 3 | 3 | 3
@@ -218,7 +169,7 @@ inline int plotDistance(int iX1, int iY1, int iX2, int iY2)													// Expos
 // Returns the distance between plots according to the pattern above...
 inline int stepDistance(int iX1, int iY1, int iX2, int iY2)													// Exposed to Python
 {
-	return max(xDistance(iX1, iX2), yDistance(iY1, iY2));
+	return std::max(xDistance(iX1, iX2), yDistance(iY1, iY2));
 }
 
 inline CvPlot* plotDirection(int iX, int iY, DirectionTypes eDirection)							// Exposed to Python

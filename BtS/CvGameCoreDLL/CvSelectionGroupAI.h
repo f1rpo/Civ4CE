@@ -1,3 +1,5 @@
+#pragma once
+
 // selectionGroupAI.h
 
 #ifndef CIV4_SELECTION_GROUP_AI_H

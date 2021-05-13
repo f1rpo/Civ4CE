@@ -1,3 +1,5 @@
+#pragma once
+
 // player.h
 
 #ifndef CIV4_PLAYER_H
@@ -21,6 +23,7 @@ typedef stdext::hash_map<int, int> CvTurnScoreMap;
 typedef stdext::hash_map<EventTypes, EventTriggeredData> CvEventMap;
 typedef std::vector< std::pair<UnitCombatTypes, PromotionTypes> > UnitCombatPromotionArray;
 typedef std::vector< std::pair<UnitClassTypes, PromotionTypes> > UnitClassPromotionArray;
+typedef std::vector< std::pair<CivilizationTypes, LeaderHeadTypes> > CivLeaderArray;
 
 class CvPlayer
 {
@@ -51,8 +54,8 @@ public:
 
 	CvPlotGroup* initPlotGroup(CvPlot* pPlot);													
 
-	DllExport CvCity* initCity(int iX, int iY, bool bBumpUnits = true);																																// Exposed to Python
-	void acquireCity(CvCity* pCity, bool bConquest, bool bTrade);																							// Exposed to Python
+	DllExport CvCity* initCity(int iX, int iY, bool bBumpUnits, bool bUpdatePlotGroups);																																// Exposed to Python
+	void acquireCity(CvCity* pCity, bool bConquest, bool bTrade, bool bUpdatePlotGroups);																							// Exposed to Python
 	void killCities();																																												// Exposed to Python
 	CvWString getNewCityName() const;																																								// Exposed to Python
 	void getCivilizationCityName(CvWString& szBuffer, CivilizationTypes eCivilization) const;
@@ -66,6 +69,7 @@ public:
 
 	bool hasTrait(TraitTypes eTrait) const;																																			// Exposed to Python						
 	DllExport bool isHuman() const;																																							// Exposed to Python						
+	DllExport void updateHuman();
 	DllExport bool isBarbarian() const;																																					// Exposed to Python						
 
 	DllExport const wchar* getName(uint uiForm = 0) const;																											// Exposed to Python
@@ -84,6 +88,7 @@ public:
 	DllExport const CvWString getWorstEnemyName() const;																																	// Exposed to Python
 	const wchar* getBestAttackUnitKey() const;																																	// Exposed to Python
 	DllExport ArtStyleTypes getArtStyleType() const;																														// Exposed to Python
+	DllExport const TCHAR* getUnitButton(UnitTypes eUnit) const;																														// Exposed to Python
 
 	void doTurn();
 	void doTurnUnits();
@@ -106,9 +111,9 @@ public:
 	void updateReligionCommerce();
 	void updateCorporation();
 	void updateCityPlotYield();
-	void updateCitySight(bool bIncrement);
+	void updateCitySight(bool bIncrement, bool bUpdatePlotGroups);
 	void updateTradeRoutes();
-	void updatePlunder(int iChange);
+	void updatePlunder(int iChange, bool bUpdatePlotGroups);
 
 	void updateTimers();
 
@@ -641,7 +646,8 @@ public:
 	void setParent(PlayerTypes eParent);
 
 	DllExport TeamTypes getTeam() const;																												// Exposed to Python					
-	void setTeam(TeamTypes eTeam);																															
+	void setTeam(TeamTypes eTeam);		
+	void updateTeamType();
 																																																							
 	DllExport PlayerColorTypes getPlayerColor() const;																								// Exposed to Python									
 	DllExport int getPlayerTextColorR() const;																												// Exposed to Python								
@@ -926,7 +932,9 @@ public:
 
 	DllExport bool splitEmpire(int iAreaId);
 	bool canSplitEmpire() const;
-	PlayerTypes getSplitEmpirePlayer(int iAreaId, TeamTypes& eTeam) const;
+	bool canSplitArea(int iAreaId) const;
+	PlayerTypes getSplitEmpirePlayer(int iAreaId) const;
+	bool getSplitEmpireLeaders(CivLeaderArray& aLeaders) const;
 
 	DllExport void launch(VictoryTypes victoryType);
 
@@ -954,6 +962,8 @@ public:
 
 	int getGrowthThreshold(int iPopulation) const;
 
+	void verifyUnitStacksValid();
+
 	virtual void AI_init() = 0;
 	virtual void AI_reset() = 0;
 	virtual void AI_doTurnPre() = 0;
@@ -978,7 +988,7 @@ public:
 	virtual bool AI_demandRebukedSneak(PlayerTypes ePlayer) = 0;
 	virtual bool AI_demandRebukedWar(PlayerTypes ePlayer) = 0;																		// Exposed to Python
 	virtual AttitudeTypes AI_getAttitude(PlayerTypes ePlayer, bool bForced = true) = 0;																// Exposed to Python
-	virtual PlayerVoteTypes AI_diploVote(const VoteSelectionSubData& kVoteData, VoteSourceTypes eVoteSource) = 0;
+	virtual PlayerVoteTypes AI_diploVote(const VoteSelectionSubData& kVoteData, VoteSourceTypes eVoteSource, bool bPropose) = 0;
 	virtual int AI_dealVal(PlayerTypes ePlayer, const CLinkList<TradeData>* pList, bool bIgnoreAnnual = false, int iExtra = 0) = 0;
 	virtual bool AI_considerOffer(PlayerTypes ePlayer, const CLinkList<TradeData>* pTheirList, const CLinkList<TradeData>* pOurList, int iChange = 1) = 0;
 	virtual bool AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeData>* pTheirList, const CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirInventory, CLinkList<TradeData>* pOurInventory, CLinkList<TradeData>* pTheirCounter, CLinkList<TradeData>* pOurCounter) = 0;
@@ -1124,12 +1134,14 @@ protected:
 	bool m_bExtendedGame;
 	bool m_bFoundedFirstCity;
 	bool m_bStrike;
+	bool m_bHuman;
 
 	PlayerTypes m_eID;
 	LeaderHeadTypes m_ePersonalityType;
 	EraTypes m_eCurrentEra;
 	ReligionTypes m_eLastStateReligion;
 	PlayerTypes m_eParent;
+	TeamTypes m_eTeamType;
 
 	int* m_aiSeaPlotYield;
 	int* m_aiYieldRateModifier;
@@ -1176,7 +1188,8 @@ protected:
 
 	bool* m_pabResearchingTech;
 	bool* m_pabLoyalMember;
-	bool* m_abTriggerFired;
+
+	std::vector<EventTriggerTypes> m_triggersFired;
 
 	CivicTypes* m_paeCivics;
 
@@ -1225,7 +1238,7 @@ protected:
 	void doEvents();
 
 	bool checkExpireEvent(EventTypes eEvent, const EventTriggeredData& kTriggeredData) const;
-	void expireEvent(EventTypes eEvent, const EventTriggeredData& kTriggeredData);
+	void expireEvent(EventTypes eEvent, const EventTriggeredData& kTriggeredData, bool bFail);
 	bool isValidTriggerReligion(const CvEventTriggerInfo& kTrigger, CvCity* pCity, ReligionTypes eReligion) const;
 	bool isValidTriggerCorporation(const CvEventTriggerInfo& kTrigger, CvCity* pCity, CorporationTypes eCorporation) const;
 	CvCity* pickTriggerCity(EventTriggerTypes eTrigger) const;

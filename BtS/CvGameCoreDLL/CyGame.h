@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CyGame_h
 #define CyGame_h
 //
@@ -257,7 +259,7 @@ public:
 
 	void saveReplay(int iPlayer);
 
-	void addPlayer(int /*PlayerTypes*/ eNewPlayer, int /*TeamTypes*/ eNewTeam, int /*LeaderHeadTypes*/ eLeader, int /*CivilizationTypes*/ eCiv);
+	void addPlayer(int /*PlayerTypes*/ eNewPlayer, int /*LeaderHeadTypes*/ eLeader, int /*CivilizationTypes*/ eCiv);
 
 	void setPlotExtraYield(int iX, int iY, int /*YieldTypes*/ eYield, int iExtraYield);
 	void changePlotExtraCost(int iX, int iY, int iExtraCost);

@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CyUnit_h
 #define CyUnit_h
 //
@@ -41,7 +43,7 @@ public:
 	bool canMoveInto(CyPlot* pPlot, bool bAttack, bool bDeclareWar, bool bIgnoreLoad); 
 	bool canMoveOrAttackInto(CyPlot* pPlot, bool bDeclareWar);		 
 	bool canMoveThrough(CyPlot* pPlot);		 
-	void jumpToNearestValidPlot();
+	bool jumpToNearestValidPlot();
 
 	bool canAutomate(AutomateTypes eAutomate);
 	bool canScrap();
@@ -134,7 +136,8 @@ public:
 	int /*UnitCombatTypes*/ getUnitCombatType();
 	int /*DomainTypes*/ getDomainType();
 	int /*InvisibleTypes*/ getInvisibleType();
-	int /*InvisibleTypes*/ getSeeInvisibleType();
+	int getNumSeeInvisibleTypes();
+	int /*InvisibleTypes*/ getSeeInvisibleType(int i);
 
 	int flavorValue(int /*FlavorTypes*/ eFlavor);
 	bool isBarbarian();
@@ -165,7 +168,7 @@ public:
 	bool isCounterSpy();
 	bool isFound();
 	bool isGoldenAge();
-	bool canCoexistWithEnemyUnit();
+	bool canCoexistWithEnemyUnit(int /*TeamTypes*/ eTeam);
 
 	bool isFighting();
 	bool isAttacking();
@@ -391,6 +394,7 @@ public:
 	void setUnitAIType(int /*UnitAITypes*/ iNewValue);
 
 	const CvArtInfoUnit* getArtInfo(int i, EraTypes eEra) const;
+	std::string getButton() const;
 
 	// Python Helper Functions
 

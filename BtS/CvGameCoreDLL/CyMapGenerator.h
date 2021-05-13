@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CyMapGenerator_h
 #define CyMapGenerator_h
 

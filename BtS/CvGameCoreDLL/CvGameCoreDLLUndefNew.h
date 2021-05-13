@@ -1,3 +1,5 @@
+#pragma once
+
 
 #ifdef USE_MEMMANAGER
 #undef new 

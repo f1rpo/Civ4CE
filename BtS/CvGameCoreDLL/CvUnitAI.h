@@ -1,3 +1,5 @@
+#pragma once
+
 // unitAI.h
 
 #ifndef CIV4_UNIT_AI_H
@@ -227,6 +229,10 @@ protected:
 	int AI_calculatePlotWorkersNeeded(CvPlot* pPlot, BuildTypes eBuild);
 
 	int AI_getEspionageTargetValue(CvPlot* pPlot, int iMaxPath);
+
+	bool AI_canGroupWithAIType(UnitAITypes eUnitAI) const;
+	bool AI_allowGroup(const CvUnit* pUnit, UnitAITypes eUnitAI) const;
+
 	// added so under cheat mode we can call protected functions for testing
 	friend class CvGameTextMgr;
 

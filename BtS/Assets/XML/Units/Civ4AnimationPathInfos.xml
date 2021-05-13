@@ -105,7 +105,15 @@
 				<Parameter>0.0</Parameter>
 			</PathEntry>
 			<PathEntry>
+				<Operator>SET_BR</Operator>
+				<Parameter>1.0</Parameter>
+			</PathEntry>
+			<PathEntry>
 				<Category>ANIMCAT_MELEE_FORTIFIED</Category>
+			</PathEntry>
+			<PathEntry>
+				<Operator>SKIP_IF</Operator>
+				<Parameter>-1.0</Parameter>
 			</PathEntry>
 		</AnimationPath>
 		<AnimationPath>
@@ -113,6 +121,17 @@
 			<bMissionPath>1</bMissionPath>
 			<PathEntry>
 				<Category>ANIMCAT_MELEE_HURT</Category>
+			</PathEntry>
+			<PathEntry>
+				<Operator>SET_BR</Operator>
+				<Parameter>1.0</Parameter>
+			</PathEntry>
+			<PathEntry>
+				<Category>ANIMCAT_MELEE_FORTIFIED</Category>
+			</PathEntry>
+			<PathEntry>
+				<Operator>SKIP_IF</Operator>
+				<Parameter>-1.0</Parameter>
 			</PathEntry>
 		</AnimationPath>
 		<AnimationPath>
@@ -127,9 +146,17 @@
 		</AnimationPath>
 		<AnimationPath>
 			<Type>ANIMATIONPATH_MELEE_FORTIFIED</Type>
-			<bMissionPath>1</bMissionPath>
+			<bMissionPath>0</bMissionPath>
+			<PathEntry>
+				<Operator>SET_BR</Operator>
+				<Parameter>1.0</Parameter>
+			</PathEntry>
 			<PathEntry>
 				<Category>ANIMCAT_MELEE_FORTIFIED</Category>
+			</PathEntry>
+			<PathEntry>
+				<Operator>SKIP_IF</Operator>
+				<Parameter>-1.0</Parameter>
 			</PathEntry>
 		</AnimationPath>
 		<AnimationPath>
@@ -157,14 +184,15 @@
 				<Parameter>0.0</Parameter>
 			</PathEntry>
 			<PathEntry>
+				<Operator>SET_BR</Operator>
+				<Parameter>1.0</Parameter>
+			</PathEntry>
+			<PathEntry>
 				<Category>ANIMCAT_RANGED_FORTIFIED</Category>
 			</PathEntry>
-		</AnimationPath>
-		<AnimationPath>
-			<Type>ANIMATIONPATH_RANGED_HURT</Type>
-			<bMissionPath>1</bMissionPath>
 			<PathEntry>
-				<Category>ANIMCAT_RANGED_STRIKE</Category>
+				<Operator>SKIP_IF</Operator>
+				<Parameter>-1.0</Parameter>
 			</PathEntry>
 		</AnimationPath>
 		<AnimationPath>
@@ -187,9 +215,17 @@
 		</AnimationPath>
 		<AnimationPath>
 			<Type>ANIMATIONPATH_RANGED_FORTIFIED</Type>
-			<bMissionPath>1</bMissionPath>
+			<bMissionPath>0</bMissionPath>
+			<PathEntry>
+				<Operator>SET_BR</Operator>
+				<Parameter>1.0</Parameter>
+			</PathEntry>
 			<PathEntry>
 				<Category>ANIMCAT_RANGED_FORTIFIED</Category>
+			</PathEntry>
+			<PathEntry>
+				<Operator>SKIP_IF</Operator>
+				<Parameter>-1.0</Parameter>
 			</PathEntry>
 		</AnimationPath>
 		<AnimationPath>
@@ -466,13 +502,6 @@
 			<PathEntry>
 				<Operator>SKIP_IF</Operator>
 				<Parameter>-1.0</Parameter>
-			</PathEntry>
-		</AnimationPath>
-		<AnimationPath>
-			<Type>ANIMATIONPATH_BOMBARD</Type>
-			<bMissionPath>0</bMissionPath>
-			<PathEntry>
-				<Category>ANIMCAT_RANGED_STRIKE</Category>
 			</PathEntry>
 		</AnimationPath>
 		<AnimationPath>

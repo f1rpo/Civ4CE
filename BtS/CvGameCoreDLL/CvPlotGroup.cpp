@@ -111,7 +111,7 @@ void CvPlotGroup::removePlot(CvPlot* pPlot)
 
 void CvPlotGroup::recalculatePlots()
 {
-	PROFILE("CvPlotGroup::recalculatePlots()");
+	PROFILE_FUNC();
 
 	CLLNode<XYCoords>* pPlotNode;
 	CvPlot* pPlot;

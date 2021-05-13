@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CIV4_MAPGENERATOR_H
 #define CIV4_MAPGENERATOR_H
 

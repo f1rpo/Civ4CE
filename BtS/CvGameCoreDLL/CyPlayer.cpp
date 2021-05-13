@@ -50,13 +50,13 @@ CyPlot* CyPlayer::findStartingPlot(bool bRandomize)
 
 CyCity* CyPlayer::initCity(int x, int y) 
 {
-	return m_pPlayer ? new CyCity(m_pPlayer->initCity(x,y)) : NULL;
+	return m_pPlayer ? new CyCity(m_pPlayer->initCity(x, y, true, true)) : NULL;
 }
 
 void CyPlayer::acquireCity(CyCity* pCity, bool bConquest, bool bTrade)
 {
 	if (m_pPlayer)
-		m_pPlayer->acquireCity(pCity->getCity(), bConquest, bTrade);
+		m_pPlayer->acquireCity(pCity->getCity(), bConquest, bTrade, true);
 }
 
 void CyPlayer::killCities()
@@ -184,6 +184,11 @@ std::wstring CyPlayer::getBestAttackUnitKey()
 int /*ArtStyleTypes*/ CyPlayer::getArtStyleType()
 {
 	return m_pPlayer ? (int) m_pPlayer->getArtStyleType() : -1;
+}
+
+std::string CyPlayer::getUnitButton(int eUnit)
+{
+	return m_pPlayer ? m_pPlayer->getUnitButton((UnitTypes)eUnit) : "";
 }
 
 int CyPlayer::findBestFoundValue( )
@@ -443,7 +448,7 @@ bool CyPlayer::canBuild(CyPlot* pPlot, int /*BuildTypes*/ eBuild, bool bTestEra,
 
 int /*RouteTypes*/ CyPlayer::getBestRoute(CyPlot* pPlot) const
 {
-	return m_pPlayer ? (int) m_pPlayer->getBestRoute(pPlot->getPlot()) : -1;
+	return m_pPlayer ? (int) m_pPlayer->getBestRoute(NULL != pPlot ? pPlot->getPlot() : NULL) : -1;
 }
 
 int CyPlayer::getImprovementUpgradeRate() const
@@ -719,7 +724,7 @@ void CyPlayer::setStartingPlot(CyPlot* pPlot, bool bUpdateStartDist)
 		return;
 	}
 
-	m_pPlayer->setStartingPlot(pPlot->getPlot(), bUpdateStartDist);
+	m_pPlayer->setStartingPlot(NULL != pPlot ? pPlot->getPlot() : NULL, bUpdateStartDist);
 }
 
 int CyPlayer::getTotalPopulation()
@@ -788,12 +793,12 @@ void CyPlayer::changeAdvancedStartPoints(int iChange)
 
 int CyPlayer::getAdvancedStartUnitCost(int /*UnitTypes*/ eUnit, bool bAdd, CyPlot* pPlot)
 {
-	return m_pPlayer ? m_pPlayer->getAdvancedStartUnitCost((UnitTypes) eUnit, bAdd, pPlot->getPlot()) : -1;
+	return m_pPlayer ? m_pPlayer->getAdvancedStartUnitCost((UnitTypes) eUnit, bAdd, NULL != pPlot ? pPlot->getPlot() : NULL) : -1;
 }
 
 int CyPlayer::getAdvancedStartCityCost(bool bAdd, CyPlot* pPlot)
 {
-	return m_pPlayer ? m_pPlayer->getAdvancedStartCityCost(bAdd, pPlot->getPlot()) : -1;
+	return m_pPlayer ? m_pPlayer->getAdvancedStartCityCost(bAdd, NULL != pPlot ? pPlot->getPlot() : NULL) : -1;
 }
 
 int CyPlayer::getAdvancedStartPopCost(bool bAdd, CyCity* pCity)
@@ -813,12 +818,12 @@ int CyPlayer::getAdvancedStartBuildingCost(int /*BuildingTypes*/ eBuilding, bool
 
 int CyPlayer::getAdvancedStartImprovementCost(int /*ImprovementTypes*/ eImprovement, bool bAdd, CyPlot* pPlot)
 {
-	return m_pPlayer ? m_pPlayer->getAdvancedStartImprovementCost((ImprovementTypes) eImprovement, bAdd, pPlot->getPlot()) : -1;
+	return m_pPlayer ? m_pPlayer->getAdvancedStartImprovementCost((ImprovementTypes) eImprovement, bAdd, NULL != pPlot ? pPlot->getPlot() : NULL) : -1;
 }
 
 int CyPlayer::getAdvancedStartRouteCost(int /*RouteTypes*/ eRoute, bool bAdd, CyPlot* pPlot)
 {
-	return m_pPlayer ? m_pPlayer->getAdvancedStartRouteCost((RouteTypes) eRoute, bAdd, pPlot->getPlot()) : -1;
+	return m_pPlayer ? m_pPlayer->getAdvancedStartRouteCost((RouteTypes) eRoute, bAdd, NULL != pPlot ? pPlot->getPlot() : NULL) : -1;
 }
 
 int CyPlayer::getAdvancedStartTechCost(int /*TechTypes*/ eTech, bool bAdd)
@@ -828,7 +833,7 @@ int CyPlayer::getAdvancedStartTechCost(int /*TechTypes*/ eTech, bool bAdd)
 
 int CyPlayer::getAdvancedStartVisibilityCost(bool bAdd, CyPlot* pPlot)
 {
-	return m_pPlayer ? m_pPlayer->getAdvancedStartVisibilityCost(bAdd, pPlot->getPlot()) : -1;
+	return m_pPlayer ? m_pPlayer->getAdvancedStartVisibilityCost(bAdd, NULL != pPlot ? pPlot->getPlot() : NULL) : -1;
 }
 
 int CyPlayer::getEspionageSpending(int /*TeamTypes*/ eIndex)
@@ -838,18 +843,18 @@ int CyPlayer::getEspionageSpending(int /*TeamTypes*/ eIndex)
 
 bool CyPlayer::canDoEspionageMission(int /*EspionageMissionTypes*/ eMission, int /*PlayerTypes*/ eTargetPlayer, CyPlot* pPlot, int iExtraData)
 {
-	return m_pPlayer ? m_pPlayer->canDoEspionageMission((EspionageMissionTypes) eMission, (PlayerTypes) eTargetPlayer, pPlot->getPlot(), iExtraData, NULL) : false;
+	return m_pPlayer ? m_pPlayer->canDoEspionageMission((EspionageMissionTypes) eMission, (PlayerTypes) eTargetPlayer, NULL != pPlot ? pPlot->getPlot() : NULL, iExtraData, NULL) : false;
 }
 
 int CyPlayer::getEspionageMissionCost(int /*EspionageMissionTypes*/ eMission, int /*PlayerTypes*/ eTargetPlayer, CyPlot* pPlot, int iExtraData)
 {
-	return m_pPlayer ? m_pPlayer->getEspionageMissionCost((EspionageMissionTypes) eMission, (PlayerTypes) eTargetPlayer, pPlot->getPlot(), iExtraData) : -1;
+	return m_pPlayer ? m_pPlayer->getEspionageMissionCost((EspionageMissionTypes) eMission, (PlayerTypes) eTargetPlayer, NULL != pPlot ? pPlot->getPlot() : NULL, iExtraData) : -1;
 }
 
 void CyPlayer::doEspionageMission(int /*EspionageMissionTypes*/ eMission, int /*PlayerTypes*/ eTargetPlayer, CyPlot* pPlot, int iExtraData, CyUnit* pUnit)
 {
 	if (m_pPlayer)
-		m_pPlayer->doEspionageMission((EspionageMissionTypes) eMission, (PlayerTypes) eTargetPlayer, pPlot->getPlot(), iExtraData, pUnit->getUnit());
+		m_pPlayer->doEspionageMission((EspionageMissionTypes) eMission, (PlayerTypes) eTargetPlayer, NULL != pPlot ? pPlot->getPlot() : NULL, iExtraData, pUnit->getUnit());
 }
 
 int CyPlayer::getEspionageSpendingWeightAgainstTeam(int /*TeamTypes*/ eIndex)
@@ -2197,6 +2202,16 @@ bool CyPlayer::canSplitEmpire() const
 	if (m_pPlayer)
 	{
 		return m_pPlayer->canSplitEmpire();
+	}
+
+	return false;
+}
+
+bool CyPlayer::canSplitArea(int iAreaId) const
+{
+	if (m_pPlayer)
+	{
+		return m_pPlayer->canSplitArea(iAreaId);
 	}
 
 	return false;

@@ -869,7 +869,6 @@ void CvXMLLoadUtility::SetGlobalActionInfo()
 	PROFILE_FUNC();
 	logMsg("SetGlobalActionInfo\n");
 	int i=0;					//loop counter
-	int j=0;					//loop counter
 
 	if(!(NUM_INTERFACEMODE_TYPES > 0))
 	{
@@ -1149,7 +1148,7 @@ void CvXMLLoadUtility::SetGlobalAnimationPathInfo(CvAnimationPathInfo** ppAnimat
 	logMsg( "SetGlobalAnimationPathInfo %s\n", szTagName );
 
 	int		i;						// Loop counters
-	CvAnimationPathInfo * pAnimPathInfo;	// local pointer to the domain info memory
+	CvAnimationPathInfo * pAnimPathInfo = NULL;	// local pointer to the domain info memory
 
 	if ( gDLL->getXMLIFace()->LocateNode(m_pFXml, szTagName ))
 	{
@@ -1297,15 +1296,16 @@ void CvXMLLoadUtility::SetGlobalClassInfo(std::vector<T*>& aInfos, const char* s
 
 				T* pClassInfo = new T;
 
+				FAssert(NULL != pClassInfo);
 				if (NULL == pClassInfo)
 				{
-					FAssert(false);
 					break;
 				}
 
-				if (!pClassInfo->read(this))
+				bool bSuccess = pClassInfo->read(this);
+				FAssert(bSuccess);
+				if (!bSuccess)
 				{
-					FAssert(false);
 					delete pClassInfo;
 					break;
 				}
@@ -1818,7 +1818,6 @@ void CvXMLLoadUtility::SetFeatureStruct(int** ppiFeatureTech, int** ppiFeatureTi
 void CvXMLLoadUtility::SetImprovementBonuses(CvImprovementBonusInfo** ppImprovementBonus)
 {
 	int i=0;				//loop counter
-	int j=0;				//loop counter
 	int iNumSibs;			// the number of siblings the current xml node has
 	TCHAR szNodeVal[256];	// temporarily holds the string value of the current xml node
 	CvImprovementBonusInfo* paImprovementBonus;	// local pointer to the bonus type struct in memory

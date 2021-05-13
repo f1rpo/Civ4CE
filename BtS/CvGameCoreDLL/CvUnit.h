@@ -1,3 +1,5 @@
+#pragma once
+
 // unit.h
 
 #ifndef CIV4_UNIT_H
@@ -83,6 +85,8 @@ public:
 	void doTurn();
 
 	void updateCombat(bool bQuick = false);
+	void updateAirCombat(bool bQuick = false);
+	void updateAirStrike(CvPlot* pPlot, bool bQuick, bool bFinish);
 
 	bool isActionRecommended(int iAction);
 
@@ -103,8 +107,9 @@ public:
 	bool canMoveThrough(const CvPlot* pPlot) const;																								// Exposed to Python
 	void attack(CvPlot* pPlot, bool bQuick);
 	void attackForDamage(CvUnit *pDefender, int attackerDamageChange, int defenderDamageChange);
+	void fightInterceptor(const CvPlot* pPlot, bool bQuick);
 	void move(CvPlot* pPlot, bool bShow);
-	void jumpToNearestValidPlot();																																// Exposed to Python
+	bool jumpToNearestValidPlot();																																// Exposed to Python
 
 	bool canAutomate(AutomateTypes eAutomate) const;																							// Exposed to Python
 	void automate(AutomateTypes eAutomate);
@@ -171,9 +176,9 @@ public:
 	bool canPillage(const CvPlot* pPlot) const;																										// Exposed to Python
 	bool pillage();
 
-	bool canPlunder(const CvPlot* pPlot) const;																					// Exposed to Python
+	bool canPlunder(const CvPlot* pPlot, bool bTestVisible = false) const;																					// Exposed to Python
 	bool plunder();
-	void updatePlunder(int iChange);
+	void updatePlunder(int iChange, bool bUpdatePlotGroups);
 
 	DllExport int sabotageCost(const CvPlot* pPlot) const;																									// Exposed to Python
 	DllExport int sabotageProb(const CvPlot* pPlot, ProbabilityTypes eProbStyle = PROBABILITY_REAL) const;	// Exposed to Python
@@ -268,7 +273,8 @@ public:
 	DllExport UnitCombatTypes getUnitCombatType() const;									// Exposed to Python								
 	DllExport DomainTypes getDomainType() const;													// Exposed to Python								
 	DllExport InvisibleTypes getInvisibleType() const;										// Exposed to Python								
-	DllExport InvisibleTypes getSeeInvisibleType() const;									// Exposed to Python								
+	DllExport int getNumSeeInvisibleTypes() const;									// Exposed to Python
+	DllExport InvisibleTypes getSeeInvisibleType(int i) const;									// Exposed to Python
 																																				
 	int flavorValue(FlavorTypes eFlavor) const;														// Exposed to Python		
 
@@ -301,7 +307,7 @@ public:
 	bool isSpy() const;
 	DllExport bool isFound() const;																				// Exposed to Python
 	bool isGoldenAge() const;																							// Exposed to Python
-	bool canCoexistWithEnemyUnit() const;																				// Exposed to Python
+	bool canCoexistWithEnemyUnit(TeamTypes eTeam) const;																				// Exposed to Python
 
 	DllExport bool isFighting() const;																		// Exposed to Python						
 	DllExport bool isAttacking() const;																		// Exposed to Python						
@@ -403,6 +409,7 @@ public:
 	int cargoSpaceAvailable(SpecialUnitTypes eSpecialCargo = NO_SPECIALUNIT, DomainTypes eDomainCargo = NO_DOMAIN) const;	// Exposed to Python
 	DllExport bool hasCargo() const;																									// Exposed to Python
 	bool canCargoAllMove() const;																											// Exposed to Python
+	bool canCargoEnterArea(TeamTypes eTeam, const CvArea* pArea, bool bIgnoreRightOfPassage) const;
 	int getUnitAICargo(UnitAITypes eUnitAI) const;																		// Exposed to Python
 
 	DllExport int getID() const;																											// Exposed to Python
@@ -434,7 +441,7 @@ public:
 		return m_iY;
 	}
 #endif
-	void setXY(int iX, int iY, bool bGroup = false, bool bUpdate = true, bool bShow = false);	// Exposed to Python
+	void setXY(int iX, int iY, bool bGroup = false, bool bUpdate = true, bool bShow = false, bool bCheckPlotVisible = false);	// Exposed to Python
 	bool at(int iX, int iY) const;																														// Exposed to Python
 	DllExport bool atPlot(const CvPlot* pPlot) const;																					// Exposed to Python
 	DllExport CvPlot* plot() const;																														// Exposed to Python
@@ -472,7 +479,8 @@ public:
 	void changeCargo(int iChange);
 
 	CvPlot* getAttackPlot() const;
-	void setAttackPlot(const CvPlot* pNewValue);
+	void setAttackPlot(const CvPlot* pNewValue, bool bAirCombat);
+	bool isAirCombat() const;
 
 	DllExport int getCombatTimer() const;
 	void setCombatTimer(int iNewValue);
@@ -636,7 +644,7 @@ public:
 	}
 #endif
 	DllExport PlayerTypes getVisualOwner(TeamTypes eForTeam = NO_TEAM) const;																									// Exposed to Python
-	DllExport PlayerTypes getCombatOwner(TeamTypes eForTeam) const;																									// Exposed to Python
+	DllExport PlayerTypes getCombatOwner(TeamTypes eForTeam, const CvPlot* pPlot) const;																									// Exposed to Python
 	DllExport TeamTypes getTeam() const;																										// Exposed to Python
 
 	PlayerTypes getCapturingPlayer() const;
@@ -700,8 +708,8 @@ public:
 
 	bool isTargetOf(const CvUnit& attacker) const;
 
-	DllExport bool isEnemy(TeamTypes eTeam) const;
-	DllExport bool isPotentialEnemy(TeamTypes eTeam) const;
+	DllExport bool isEnemy(TeamTypes eTeam, const CvPlot* pPlot = NULL) const;
+	DllExport bool isPotentialEnemy(TeamTypes eTeam, const CvPlot* pPlot = NULL) const;
 
 	bool canRangeStrike() const;
 	bool canRangeStrikeAt(const CvPlot* pPlot, int iX, int iY) const;
@@ -718,7 +726,12 @@ public:
 	bool potentialWarAction(const CvPlot* pPlot) const;
 	bool willRevealByMove(const CvPlot* pPlot) const;
 
+	bool isAlwaysHostile(const CvPlot* pPlot) const;
+
+	bool verifyStackValid();
+
 	DllExport const CvArtInfoUnit* getArtInfo(int i, EraTypes eEra) const;										// Exposed to Python
+	DllExport const TCHAR* getButton() const;										// Exposed to Python
 
 	void read(FDataStreamBase* pStream);
 	void write(FDataStreamBase* pStream);
@@ -807,6 +820,7 @@ protected:
 	bool m_bCombatFocus;
 	bool m_bInfoBarDirty;
 	bool m_bBlockading;
+	bool m_bAirCombat;
 
 	PlayerTypes m_eOwner;
 	PlayerTypes m_eCapturingPlayer;
@@ -836,10 +850,10 @@ protected:
 	void collateralCombat(const CvPlot* pPlot, CvUnit* pSkipUnit = NULL);
 	void flankingStrikeCombat(const CvPlot* pPlot, int iAttackerStrength, int iAttackerFirepower, CvUnit* pSkipUnit = NULL);
 
-	bool interceptTest(const CvPlot* pPlot, bool bParadrop = false);
+	bool interceptTest(const CvPlot* pPlot);
 	CvUnit* airStrikeTarget(const CvPlot* pPlot) const;
 	bool canAirStrike(const CvPlot* pPlot) const;
-	void airStrike(CvPlot* pPlot);
+	bool airStrike(CvPlot* pPlot);
 
 	int planBattle( CvBattleDefinition & kBattleDefinition ) const;
 	int computeUnitsToDie( const CvBattleDefinition & kDefinition, bool bRanged, BattleUnitTypes iUnit ) const;
@@ -848,6 +862,10 @@ protected:
 	int computeWaveSize( bool bRangedRound, int iAttackerMax, int iDefenderMax ) const;
 
 	void getDefenderCombatValues(CvUnit& kDefender, const CvPlot* pPlot, int iOurStrength, int iOurFirepower, int& iTheirOdds, int& iTheirStrength, int& iOurDamage, int& iTheirDamage, CombatDetails* pTheirDetails = NULL) const;
+
+	bool isCombatVisible(const CvUnit* pDefender) const;
+	void resolveCombat(CvUnit* pDefender, CvPlot* pPlot, CvBattleDefinition& kBattle);
+	void resolveAirCombat(CvUnit* pInterceptor, CvPlot* pPlot, CvAirMissionDefinition& kBattle);
 };
 
 #endif

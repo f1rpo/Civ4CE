@@ -33,7 +33,7 @@
 		<Tag>TXT_KEY_CIV_HOLY_ROMAN_SHORT_DESC</Tag>
 		<English>Holy Rome</English>
 		<French>
-			<Text>Romains</Text>
+			<Text>Romains saints</Text>
 			<Gender>Male</Gender>
 			<Plural>1</Plural>
 		</French>
@@ -4406,7 +4406,7 @@
 		<English>Rivers</English>
 		<French>
 			<Text>Fleuves</Text>
-			<Gender>Masculin</Gender>
+			<Gender>Male</Gender>
 			<Plural>1</Plural>
 		</French>
 		<German>
@@ -4488,14 +4488,6 @@
 		<German>Szenario</German>
 		<Italian>Scenario</Italian>
 		<Spanish>Escenario</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_CONCEPT_APOSTOLIC_PALACE</Tag>
-		<English>Apostolic Palace</English>
-		<French>Palais apostolique</French>
-		<German>Apostolischer Palast</German>
-		<Italian>Palazzo Apostolico</Italian>
-		<Spanish>Palacio Apost&#243;lico</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_FOREIGN_ADVISOR_TECHS</Tag>
@@ -4626,22 +4618,6 @@
 		<Spanish>Tecnolog&#237;as</Spanish>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_CIVILOPEDIA_STRATEGY</Tag>
-		<English>[BOLD]Strategy:[\BOLD][PARAGRAPH:1]</English>
-		<French>[BOLD]Strat&#233;gie :[\BOLD][PARAGRAPH:1]</French>
-		<German>[BOLD]Strategie:[\BOLD][PARAGRAPH:1]</German>
-		<Italian>[BOLD]Strategia:[\BOLD][PARAGRAPH:1]</Italian>
-		<Spanish>[BOLD]Estrategia:[\BOLD][PARAGRAPH:1]</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_CIVILOPEDIA_BACKGROUND</Tag>
-		<English>[BOLD]Background:[\BOLD][NEWLINE]</English>
-		<French>[BOLD]Histoire :[\BOLD][NEWLINE]</French>
-		<German>[BOLD]Hintergrund:[\BOLD][NEWLINE]</German>
-		<Italian>[BOLD]Informazioni:[\BOLD][NEWLINE]</Italian>
-		<Spanish>[BOLD]Historia:[\BOLD][NEWLINE]</Spanish>
-	</TEXT>
-	<TEXT>
 		<Tag>TXT_KEY_PLAYER_OPTION_NO_ENEMY_GLOW</Tag>
 		<English>No Enemy Glow</English>
 		<French>Pas d'&#233;clairage ennemi</French>
@@ -4702,7 +4678,7 @@
 		<English>Geronimo</English>
 		<French>
 			<Text>G&#233;ronimo</Text>
-			<Gender>Masculin</Gender>
+			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</French>
 		<German>
@@ -4726,7 +4702,7 @@
 		<English>Max Gogf</English>
 		<French>
 			<Text>Max Gogf</Text>
-			<Gender>Masculin</Gender>
+			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</French>
 		<German>
@@ -4750,7 +4726,7 @@
 		<English>Eystein the Wise</English>
 		<French>
 			<Text>Eystein le Sage</Text>
-			<Gender>Masculin</Gender>
+			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</French>
 		<German>
@@ -4774,7 +4750,7 @@
 		<English>Speaker the Lionhearted</English>
 		<French>
 			<Text>Speaker Coeur de Lion</Text>
-			<Gender>Masculin</Gender>
+			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</French>
 		<German>
@@ -4798,7 +4774,7 @@
 		<English>Mark Swiss</English>
 		<French>
 			<Text>Mark Swiss</Text>
-			<Gender>Masculin</Gender>
+			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</French>
 		<German>
@@ -4822,7 +4798,7 @@
 		<English>Daniel Cole</English>
 		<French>
 			<Text>Daniel Cole</Text>
-			<Gender>Masculin</Gender>
+			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</French>
 		<German>
@@ -4846,7 +4822,7 @@
 		<English>Joe Matise</English>
 		<French>
 			<Text>Joe Matise</Text>
-			<Gender>Masculin</Gender>
+			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</French>
 		<German>
@@ -4870,7 +4846,7 @@
 		<English>Atlas Titanus</English>
 		<French>
 			<Text>Atlas Titanus</Text>
-			<Gender>Masculin</Gender>
+			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</French>
 		<German>
@@ -4894,7 +4870,7 @@
 		<English>Nolan Buonarroti</English>
 		<French>
 			<Text>Nolan Buonarroti</Text>
-			<Gender>Masculin</Gender>
+			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</French>
 		<German>
@@ -4918,7 +4894,7 @@
 		<English>Foshaug the Deceiver</English>
 		<French>
 			<Text>Foshaug le Trompeur</Text>
-			<Gender>Masculin</Gender>
+			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</French>
 		<German>
@@ -4942,7 +4918,7 @@
 		<English>Viktor Griph</English>
 		<French>
 			<Text>Viktor Griph</Text>
-			<Gender>Masculin</Gender>
+			<Gender>Male</Gender>
 			<Plural>0</Plural>
 		</French>
 		<German>

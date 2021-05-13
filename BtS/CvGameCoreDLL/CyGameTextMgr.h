@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CyGameTextMgr_h
 #define CyGameTextMgr_h
 

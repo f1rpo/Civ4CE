@@ -540,9 +540,7 @@ class CvInfoScreen:
 		for iMissionLoop in range(gc.getNumEspionageMissionInfos()):
 			if (gc.getEspionageMissionInfo(iMissionLoop).isSeeDemographics()):
 				iDemographicsMission = iMissionLoop
-		
-		NULL_PLOT = CyMap().plot(-1,-1)
-		
+				
 		# Determine who this active player knows
 		self.aiPlayersMet = []
 		self.iNumPlayersMet = 0
@@ -552,7 +550,7 @@ class CvInfoScreen:
 			if (gc.getTeam(iLoopPlayerTeam).isEverAlive()):
 				if (self.pActiveTeam.isHasMet(iLoopPlayerTeam) or CyGame().isDebugMode() or iEndGame != 0):
 					if (	iDemographicsMission == -1 or
-							self.pActivePlayer.canDoEspionageMission(iDemographicsMission, iLoopPlayer, NULL_PLOT, -1) or
+							self.pActivePlayer.canDoEspionageMission(iDemographicsMission, iLoopPlayer, None, -1) or
 							iEndGame != 0 or
 							iLoopPlayerTeam == CyGame().getActiveTeam()):
 						self.aiPlayersMet.append(iLoopPlayer)
@@ -1034,15 +1032,16 @@ class CvInfoScreen:
 						fGroupImpExpRatio = 1.0 * iTempImports
 						afGroupImpExpRatio.append(fGroupImpExpRatio)
 
-				if (fGroupImpExpRatio > fImpExpRatioGameBest):
-				    fImpExpRatioGameBest = fGroupImpExpRatio
-				    iImportsGameBest	 = iTempImports
-				    iExportsGameBest	 = iTempExports
+				if iPlayerLoop != self.iActivePlayer:
+					if (fGroupImpExpRatio > fImpExpRatioGameBest):
+						fImpExpRatioGameBest = fGroupImpExpRatio
+						iImportsGameBest	 = iTempImports
+						iExportsGameBest	 = iTempExports
 
-				if (fGroupImpExpRatio < fImpExpRatioGameWorst):
-				    fImpExpRatioGameWorst = fGroupImpExpRatio
-				    iImportsGameWorst	 = iTempImports
-				    iExportsGameWorst	 = iTempExports
+					if (fGroupImpExpRatio < fImpExpRatioGameWorst):
+						fImpExpRatioGameWorst = fGroupImpExpRatio
+						iImportsGameWorst	 = iTempImports
+						iExportsGameWorst	 = iTempExports
 
 		aiGroupEconomy.sort()
 		aiGroupIndustry.sort()
@@ -2102,11 +2101,11 @@ class CvInfoScreen:
 		screen.setTableColumnHeader(szBuildingsTable, 1, self.TEXT_BUILT, iColWidth)
 		
 		# Add Rows
-		for i in range(self.iNumUnitStatsChartRows - 1):
+		for i in range(self.iNumUnitStatsChartRows):
 			screen.appendTableRow(szUnitsTable)
 		iNumUnitRows = screen.getTableNumRows(szUnitsTable)
 
-		for i in range(self.iNumBuildingStatsChartRows - 1):
+		for i in range(self.iNumBuildingStatsChartRows):
 			screen.appendTableRow(szBuildingsTable)
 		iNumBuildingRows = screen.getTableNumRows(szBuildingsTable)
 		

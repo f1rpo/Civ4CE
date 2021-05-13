@@ -614,7 +614,7 @@ int CyPlot::getOwner()
 void CyPlot::setOwner(int /*PlayerTypes*/ eNewValue)
 {
 	if (m_pPlot)
-		m_pPlot->setOwner((PlayerTypes) eNewValue);
+		m_pPlot->setOwner((PlayerTypes) eNewValue, true, true);
 }
 
 PlotTypes CyPlot::getPlotType()
@@ -781,7 +781,7 @@ int /* RouteTypes */ CyPlot::getRouteType()
 void CyPlot::setRouteType(int /*RouteTypes*/ eNewValue)
 {
 	if (m_pPlot)
-		m_pPlot->setRouteType((RouteTypes) eNewValue);
+		m_pPlot->setRouteType((RouteTypes) eNewValue, true);
 }
 
 CyCity* CyPlot::getPlotCity()
@@ -888,7 +888,7 @@ int CyPlot::calculateTeamCulturePercent(int /*TeamTypes*/ eIndex)
 void CyPlot::setCulture(int /*PlayerTypes*/ eIndex, int iChange, bool bUpdate)
 {
 	if (m_pPlot)
-		m_pPlot->setCulture((PlayerTypes)eIndex, iChange, bUpdate);
+		m_pPlot->setCulture((PlayerTypes)eIndex, iChange, bUpdate, true);
 }
 
 void CyPlot::changeCulture(int /*PlayerTypes*/ eIndex, int iChange, bool bUpdate)
@@ -930,7 +930,7 @@ int CyPlot::getVisibilityCount(int /*TeamTypes*/ eTeam)
 void CyPlot::changeVisibilityCount(int /*TeamTypes*/ eTeam, int iChange, int /*InvisibleTypes*/ eSeeInvisible)
 {
 	if (m_pPlot)
-		m_pPlot->changeVisibilityCount((TeamTypes) eTeam, iChange, (InvisibleTypes) eSeeInvisible);
+		m_pPlot->changeVisibilityCount((TeamTypes) eTeam, iChange, (InvisibleTypes) eSeeInvisible, true);
 }
 
 int CyPlot::getStolenVisibilityCount(int /*TeamTypes*/ eTeam)
@@ -961,7 +961,7 @@ bool CyPlot::isRevealed(int /*TeamTypes*/ eTeam, bool bDebug)
 void CyPlot::setRevealed(int /*TeamTypes*/ eTeam, bool bNewValue, bool bTerrainOnly, int /*TeamTypes*/ eFromTeam)
 {
 	if (m_pPlot)
-		m_pPlot->setRevealed((TeamTypes)eTeam, bNewValue, bTerrainOnly, (TeamTypes)eFromTeam);
+		m_pPlot->setRevealed((TeamTypes)eTeam, bNewValue, bTerrainOnly, (TeamTypes)eFromTeam, true);
 }
 
 int /* ImprovementTypes */ CyPlot::getRevealedImprovementType(int /*TeamTypes*/ eTeam, bool bDebug)

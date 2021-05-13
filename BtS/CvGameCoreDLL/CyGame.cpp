@@ -1097,11 +1097,11 @@ void CyGame::saveReplay(int iPlayer)
 	}
 }
 
-void CyGame::addPlayer(int eNewPlayer, int eNewTeam, int eLeader, int eCiv)
+void CyGame::addPlayer(int eNewPlayer, int eLeader, int eCiv)
 {
 	if (m_pGame)
 	{
-		m_pGame->addPlayer((PlayerTypes)eNewPlayer, (TeamTypes)eNewTeam, (LeaderHeadTypes)eLeader, (CivilizationTypes)eCiv);
+		m_pGame->addPlayer((PlayerTypes)eNewPlayer, (LeaderHeadTypes)eLeader, (CivilizationTypes)eCiv);
 	}
 }
 

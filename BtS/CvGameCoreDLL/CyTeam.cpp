@@ -31,10 +31,10 @@ bool CyTeam::canDeclareWar(int /*TeamTypes*/ eTeam)
 	return m_pTeam ? m_pTeam->canDeclareWar((TeamTypes)eTeam) : false;
 }
 
-void CyTeam::declareWar(int /*TeamTypes*/ eTeam, bool bNewDiplo)
+void CyTeam::declareWar(int /*TeamTypes*/ eTeam, bool bNewDiplo, int /*WarPlanTypes*/ eWarPlan)
 {
 	if (m_pTeam)
-		m_pTeam->declareWar((TeamTypes)eTeam, bNewDiplo);
+		m_pTeam->declareWar((TeamTypes)eTeam, bNewDiplo, (WarPlanTypes)eWarPlan);
 }
 
 void CyTeam::makePeace(int /*TeamTypes*/ eTeam)
@@ -603,7 +603,7 @@ bool CyTeam::isCommerceFlexible(int /*CommerceTypes*/ eIndex)
 void CyTeam::changeCommerceFlexibleCount(int /*CommerceTypes*/ eIndex, int iChange)
 {
 	if (m_pTeam)
-		m_pTeam->changeCommerceFlexibleCount((CommerceTypes)eIndex, eIndex);
+		m_pTeam->changeCommerceFlexibleCount((CommerceTypes)eIndex, iChange);
 }
 
 int CyTeam::getExtraMoves(int /*DomainTypes*/ eIndex)

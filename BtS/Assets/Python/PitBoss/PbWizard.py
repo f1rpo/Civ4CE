@@ -1330,7 +1330,7 @@ class StagingPage(wx.wizard.WizardPageSimple):
 		rowNum = 0
 		for rowNum in range(PB.getNumOptions()):
 			self.optionArray[rowNum].SetValue(gameData.getOptionAt(rowNum))
-			self.optionArray[rowNum].Enable(not bSaved and not PB.forceOptions())
+			self.optionArray[rowNum].Enable(not bSaved and not PB.forceOptions() and PB.isOptionValid(rowNum))
 				
 		# Have the app suggest number of players based on map size
 		PB.suggestPlayerSetup()

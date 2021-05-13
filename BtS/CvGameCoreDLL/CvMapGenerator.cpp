@@ -996,7 +996,7 @@ void CvMapGenerator::generatePlotTypes()
 	std::vector<int> plotTypesOut;
 	if (gDLL->getPythonIFace()->pythonGeneratePlotTypes(plotTypesOut) && !gDLL->getPythonIFace()->pythonUsingDefaultImpl()) // Python override
 	{
-		FAssertMsg(plotTypesOut.size() == iNumPlots, "python generatePlotTypes() should return list with length numPlotsINLINE");
+		FAssertMsg((int)plotTypesOut.size() == iNumPlots, "python generatePlotTypes() should return list with length numPlotsINLINE");
 		for (int iI = 0; iI < iNumPlots; iI++)
 		{
 			paiPlotTypes[iI] = plotTypesOut[iI];
@@ -1023,7 +1023,7 @@ void CvMapGenerator::generateTerrain()
 	if (gDLL->getPythonIFace()->pythonGenerateTerrainTypes(terrainMapOut) && !gDLL->getPythonIFace()->pythonUsingDefaultImpl()) // Python override
 	{
 		int iNumPlots = GC.getMapINLINE().numPlotsINLINE();
-		FAssertMsg(terrainMapOut.size() == iNumPlots, "python generateTerrain() should return a list with length CyMap().getNumPoints()");
+		FAssertMsg((int)terrainMapOut.size() == iNumPlots, "python generateTerrain() should return a list with length CyMap().getNumPoints()");
 		// Generate terrain for each plot
 		for (int iI = 0; iI < iNumPlots; iI++)
 		{
@@ -1158,6 +1158,6 @@ int CvMapGenerator::calculateNumBonusesToAdd(BonusTypes eBonusType)
 
 	int iPlayers = (GC.getGameINLINE().countCivPlayersAlive() * pBonusInfo.getPercentPerPlayer()) / 100;
 	int iBonusCount = (iBaseCount * (iLandTiles + iPlayers)) / 100;
-	iBonusCount = max(1, iBonusCount);
+	iBonusCount = std::max(1, iBonusCount);
 	return iBonusCount;
 }

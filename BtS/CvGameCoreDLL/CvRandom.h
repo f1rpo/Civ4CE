@@ -1,3 +1,5 @@
+#pragma once
+
 // random.h
 
 #ifndef CIV4_RANDOM_H

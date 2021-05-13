@@ -1821,7 +1821,7 @@
 			<VictoryPrereq>NONE</VictoryPrereq>
 			<FreeStartEra>NONE</FreeStartEra>
 			<MaxStartEra>NONE</MaxStartEra>
-			<ObsoleteTech>TECH_ROCKETRY</ObsoleteTech>
+			<ObsoleteTech>TECH_ADVANCED_FLIGHT</ObsoleteTech>
 			<PrereqTech>TECH_HORSEBACK_RIDING</PrereqTech>
 			<TechTypes/>
 			<Bonus>NONE</Bonus>
@@ -4293,7 +4293,7 @@
 			<iCoastalTradeRoutes>0</iCoastalTradeRoutes>
 			<iGlobalTradeRoutes>0</iGlobalTradeRoutes>
 			<iTradeRouteModifier>0</iTradeRouteModifier>
-			<iForeignTradeRouteModifier>50</iForeignTradeRouteModifier>
+			<iForeignTradeRouteModifier>100</iForeignTradeRouteModifier>
 			<iGlobalPopulationChange>0</iGlobalPopulationChange>
 			<iFreeTechs>0</iFreeTechs>
 			<iDefense>0</iDefense>
@@ -4460,7 +4460,7 @@
 			<iCoastalTradeRoutes>0</iCoastalTradeRoutes>
 			<iGlobalTradeRoutes>0</iGlobalTradeRoutes>
 			<iTradeRouteModifier>0</iTradeRouteModifier>
-			<iForeignTradeRouteModifier>50</iForeignTradeRouteModifier>
+			<iForeignTradeRouteModifier>100</iForeignTradeRouteModifier>
 			<iGlobalPopulationChange>0</iGlobalPopulationChange>
 			<iFreeTechs>0</iFreeTechs>
 			<iDefense>0</iDefense>

@@ -384,7 +384,7 @@ int getWorldSizeMaxConscript(CivicTypes eCivic)
 
 	iMaxConscript = GC.getCivicInfo(eCivic).getMaxConscript();
 
-	iMaxConscript *= max(0, (GC.getWorldInfo(GC.getMapINLINE().getWorldSize()).getMaxConscriptModifier() + 100));
+	iMaxConscript *= std::max(0, (GC.getWorldInfo(GC.getMapINLINE().getWorldSize()).getMaxConscriptModifier() + 100));
 	iMaxConscript /= 100;
 
 	return iMaxConscript;
@@ -573,7 +573,7 @@ __int64 getBinomialCoefficient(int iN, int iK)
 {
 	__int64 iTemp = 1;
 	//take advantage of symmetry in combination, eg. 15C12 = 15C3
-	iK = min(iK, iN - iK);
+	iK = std::min(iK, iN - iK);
 	
 	//eg. 15C3 = (15 * 14 * 13) / (1 * 2 * 3) = 15 / 1 * 14 / 2 * 13 / 3 = 455
 	for(int i=1;i<=iK;i++)
@@ -646,8 +646,8 @@ int getCombatOdds(CvUnit* pAttacker, CvUnit* pDefender)
 	// calculate damage done in one round
 	//////
 
-	iDamageToAttacker = max(1,((GC.getDefineINT("COMBAT_DAMAGE") * (iDefenderFirepower + iStrengthFactor)) / (iAttackerFirepower + iStrengthFactor)));
-	iDamageToDefender = max(1,((GC.getDefineINT("COMBAT_DAMAGE") * (iAttackerFirepower + iStrengthFactor)) / (iDefenderFirepower + iStrengthFactor)));
+	iDamageToAttacker = std::max(1,((GC.getDefineINT("COMBAT_DAMAGE") * (iDefenderFirepower + iStrengthFactor)) / (iAttackerFirepower + iStrengthFactor)));
+	iDamageToDefender = std::max(1,((GC.getDefineINT("COMBAT_DAMAGE") * (iAttackerFirepower + iStrengthFactor)) / (iDefenderFirepower + iStrengthFactor)));
 
 	// calculate needed rounds.
 	// Needed rounds = round_up(health/damage)
@@ -655,7 +655,7 @@ int getCombatOdds(CvUnit* pAttacker, CvUnit* pDefender)
 
 	iDefenderHitLimit = pDefender->maxHitPoints() - pAttacker->combatLimit();
 
-	iNeededRoundsAttacker = (max(0, pDefender->currHitPoints() - iDefenderHitLimit) + iDamageToDefender - 1 ) / iDamageToDefender;
+	iNeededRoundsAttacker = (std::max(0, pDefender->currHitPoints() - iDefenderHitLimit) + iDamageToDefender - 1 ) / iDamageToDefender;
 	iNeededRoundsDefender = (pAttacker->currHitPoints() + iDamageToAttacker - 1 ) / iDamageToAttacker;
 	iMaxRounds = iNeededRoundsAttacker + iNeededRoundsDefender - 1;
 
@@ -823,7 +823,7 @@ int getEspionageModifier(TeamTypes eOurTeam, TeamTypes eTargetTeam)
 	int iOurPoints = GET_TEAM(eOurTeam).getEspionagePointsEver();
 
 	int iModifier = GC.getDefineINT("ESPIONAGE_SPENDING_MULTIPLIER") * (2 * iTargetPoints + iOurPoints);
-	iModifier /= max(1, iTargetPoints + 2 * iOurPoints);
+	iModifier /= std::max(1, iTargetPoints + 2 * iOurPoints);
 	return iModifier;
 }
 
@@ -1049,7 +1049,7 @@ bool PUF_isCombatTeam(const CvUnit* pUnit, int iData1, int iData2)
 	FAssertMsg(iData1 != -1, "Invalid data argument, should be >= 0");
 	FAssertMsg(iData2 != -1, "Invalid data argument, should be >= 0");
 
-	return (GET_PLAYER(pUnit->getCombatOwner((TeamTypes)iData2)).getTeam() == iData1);
+	return (GET_PLAYER(pUnit->getCombatOwner((TeamTypes)iData2, pUnit->plot())).getTeam() == iData1 && !pUnit->isInvisible((TeamTypes)iData2, false, false));
 }
 
 bool PUF_isOtherPlayer(const CvUnit* pUnit, int iData1, int iData2)
@@ -1061,12 +1061,13 @@ bool PUF_isOtherPlayer(const CvUnit* pUnit, int iData1, int iData2)
 bool PUF_isOtherTeam(const CvUnit* pUnit, int iData1, int iData2)
 {
 	FAssertMsg(iData1 != -1, "Invalid data argument, should be >= 0");
-	if (pUnit->canCoexistWithEnemyUnit())
+	TeamTypes eTeam = GET_PLAYER((PlayerTypes)iData1).getTeam();
+	if (pUnit->canCoexistWithEnemyUnit(eTeam))
 	{
 		return false;
 	}
 
-	return (pUnit->getTeam() != GET_PLAYER((PlayerTypes)iData1).getTeam());
+	return (pUnit->getTeam() != eTeam);
 }
 
 bool PUF_isEnemy(const CvUnit* pUnit, int iData1, int iData2)
@@ -1075,9 +1076,9 @@ bool PUF_isEnemy(const CvUnit* pUnit, int iData1, int iData2)
 	FAssertMsg(iData2 != -1, "Invalid data argument, should be >= 0");
 
 	TeamTypes eOtherTeam = GET_PLAYER((PlayerTypes)iData1).getTeam();
-	TeamTypes eOurTeam = GET_PLAYER(pUnit->getCombatOwner(eOtherTeam)).getTeam();
+	TeamTypes eOurTeam = GET_PLAYER(pUnit->getCombatOwner(eOtherTeam, pUnit->plot())).getTeam();
 
-	if (pUnit->canCoexistWithEnemyUnit())
+	if (pUnit->canCoexistWithEnemyUnit(eOtherTeam))
 	{
 		return false;
 	}
@@ -1109,9 +1110,9 @@ bool PUF_isPotentialEnemy(const CvUnit* pUnit, int iData1, int iData2)
 	FAssertMsg(iData2 != -1, "Invalid data argument, should be >= 0");
 
 	TeamTypes eOtherTeam = GET_PLAYER((PlayerTypes)iData1).getTeam();
-	TeamTypes eOurTeam = GET_PLAYER(pUnit->getCombatOwner(eOtherTeam)).getTeam();
+	TeamTypes eOurTeam = GET_PLAYER(pUnit->getCombatOwner(eOtherTeam, pUnit->plot())).getTeam();
 
-	if (pUnit->canCoexistWithEnemyUnit())
+	if (pUnit->canCoexistWithEnemyUnit(eOtherTeam))
 	{
 		return false;
 	}
@@ -1124,9 +1125,9 @@ bool PUF_canDeclareWar( const CvUnit* pUnit, int iData1, int iData2)
 	FAssertMsg(iData2 != -1, "Invalid data argument, should be >= 0");
 
 	TeamTypes eOtherTeam = GET_PLAYER((PlayerTypes)iData1).getTeam();
-	TeamTypes eOurTeam = GET_PLAYER(pUnit->getCombatOwner(eOtherTeam)).getTeam();
+	TeamTypes eOurTeam = GET_PLAYER(pUnit->getCombatOwner(eOtherTeam, pUnit->plot())).getTeam();
 
-	if (pUnit->canCoexistWithEnemyUnit())
+	if (pUnit->canCoexistWithEnemyUnit(eOtherTeam))
 	{
 		return false;
 	}
@@ -1450,7 +1451,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 
 		iCost = pToPlot->movementCost(pLoopUnit, pFromPlot);
 
-		iMovesLeft = max(0, (iMax - iCost));
+		iMovesLeft = std::max(0, (iMax - iCost));
 
 		if (iMovesLeft <= iWorstMovesLeft)
 		{
@@ -1470,7 +1471,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 					{
 						if (pToPlot->getFeatureType() != NO_FEATURE)
 						{
-							iCost += (GC.getPATH_DAMAGE_WEIGHT() * max(0, GC.getFeatureInfo(pToPlot->getFeatureType()).getTurnDamage())) / GC.getMAX_HIT_POINTS();
+							iCost += (GC.getPATH_DAMAGE_WEIGHT() * std::max(0, GC.getFeatureInfo(pToPlot->getFeatureType()).getTurnDamage())) / GC.getMAX_HIT_POINTS();
 						}
 
 						if (pToPlot->getExtraMovePathCost() > 0)
@@ -1488,7 +1489,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 				{
 					if (iMovesLeft == 0)
 					{
-						iCost += (PATH_DEFENSE_WEIGHT * max(0, (200 - ((pLoopUnit->noDefensiveBonus()) ? 0 : pToPlot->defenseModifier(pLoopUnit->getTeam(), false)))));
+						iCost += (PATH_DEFENSE_WEIGHT * std::max(0, (200 - ((pLoopUnit->noDefensiveBonus()) ? 0 : pToPlot->defenseModifier(pLoopUnit->getTeam(), false)))));
 					}
 
 					if (pSelectionGroup->AI_isControlled())
@@ -1499,7 +1500,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 							{
 								if (pToPlot->isVisibleEnemyDefender(pLoopUnit))
 								{
-									iCost += (PATH_DEFENSE_WEIGHT * max(0, (200 - ((pLoopUnit->noDefensiveBonus()) ? 0 : pFromPlot->defenseModifier(pLoopUnit->getTeam(), false)))));
+									iCost += (PATH_DEFENSE_WEIGHT * std::max(0, (200 - ((pLoopUnit->noDefensiveBonus()) ? 0 : pFromPlot->defenseModifier(pLoopUnit->getTeam(), false)))));
 
 									if (!(pFromPlot->isCity()))
 									{
@@ -1676,7 +1677,7 @@ int pathAdd(FAStarNode* parent, FAStarNode* node, int data, const void* pointer,
 			pLoopUnit = ::getUnit(pUnitNode->m_data);
 			pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode);
 
-			iMoves = min(iMoves, pLoopUnit->movesLeft());
+			iMoves = std::min(iMoves, pLoopUnit->movesLeft());
 		}
 	}
 	else
@@ -1703,7 +1704,7 @@ int pathAdd(FAStarNode* parent, FAStarNode* node, int data, const void* pointer,
 			pLoopUnit = ::getUnit(pUnitNode->m_data);
 			pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode);
 
-			iMoves = min(iMoves, max(0, ((iStartMoves > 0) ? iStartMoves : pLoopUnit->maxMoves()) - pToPlot->movementCost(pLoopUnit, pFromPlot)));
+			iMoves = std::min(iMoves, std::max(0, ((iStartMoves > 0) ? iStartMoves : pLoopUnit->maxMoves()) - pToPlot->movementCost(pLoopUnit, pFromPlot)));
 		}
 	}
 

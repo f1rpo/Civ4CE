@@ -210,12 +210,13 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 		
 		screen.attachLabel(panelName, "", "  ")
 		
-#		for j in range( gc.getNumUnitClassInfos() ):
-#			eLoopUnit = gc.getCivilizationInfo(gc.getGame().getActiveCivilizationType()).getCivilizationUnits(j)
 		for eLoopUnit in range(gc.getNumUnitInfos()):
 			if (eLoopUnit != -1):
 				if (isTechRequiredForUnit(self.iTech, eLoopUnit)):
-        				screen.attachImageButton( panelName, "", gc.getUnitInfo(eLoopUnit).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoopUnit, 1, False )
+					szButton = gc.getUnitInfo(eLoopUnit).getButton()
+					if self.top.iActivePlayer != -1:
+						szButton = gc.getPlayer(self.top.iActivePlayer).getUnitButton(eLoopUnit)
+					screen.attachImageButton( panelName, "", szButton, GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoopUnit, 1, False )
 
 	# Place buildings...
 	def placeBuildings(self):
@@ -227,8 +228,6 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 		
 		screen.attachLabel(panelName, "", "  ")
 		
-#		for j in range(gc.getNumBuildingClassInfos()):
-#			eLoopBuilding = gc.getCivilizationInfo(gc.getGame().getActiveCivilizationType()).getCivilizationBuildings(j)
 		for eLoopBuilding in range(gc.getNumBuildingInfos()):
 			if (eLoopBuilding != -1):
 				if (isTechRequiredForBuilding(self.iTech, eLoopBuilding)):

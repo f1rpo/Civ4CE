@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CyPlot_h
 #define CyPlot_h
 

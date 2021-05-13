@@ -55,7 +55,7 @@ void CvFractal::fracInit(int iNewXs, int iNewYs, int iGrain, CvRandom& random, i
 // pbyHints should be a 1d array of bytes representing a 2d array 
 //	with width = 2^(iFracXExp - minExp + iGrain) + (GC.getMapINLINE().isWrapXINLINE() ? 0 : 1)
 //	and height = 2^(iFracYExp - minExp + iGrain) + (GC.getMapINLINE().isWrapYINLINE() ? 0 : 1)
-// where minExp = min(iFracXExp, iFracYExp)
+// where minExp = std::min(iFracXExp, iFracYExp)
 // Note above that an extra value is required in a dimension in which the map does not wrap.
 
 void CvFractal::fracInitHinted(int iNewXs, int iNewYs, int iGrain, CvRandom& random, byte* pbyHints, int iHintsLength, int iFlags, CvFractal* pRifts, int iFracXExp/*=7*/, int iFracYExp/*=6*/)
@@ -107,7 +107,7 @@ void CvFractal::fracInitInternal(int iNewXs, int iNewYs, int iGrain, CvRandom& r
 	m_iXInc = ((m_iFracX * FLOAT_PRECISION) / m_iXs);
 	m_iYInc = ((m_iFracY * FLOAT_PRECISION) / m_iYs);
 
-	int iMinExp = min(m_iFracXExp, m_iFracYExp);
+	int iMinExp = std::min(m_iFracXExp, m_iFracYExp);
 	iSmooth = range(iMinExp - iGrain, 0, iMinExp);
 
 	int iHintsWidth = (1 << (m_iFracXExp - iSmooth)) + ((m_iFlags & FRAC_WRAP_X) ? 0 : 1);

@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CySelectionGroup_h
 #define CySelectionGroup_h
 //

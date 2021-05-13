@@ -1,3 +1,5 @@
+#pragma once
+
 // area.h
 
 #ifndef CIV4_AREA_H

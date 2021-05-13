@@ -133,7 +133,7 @@ int CvGameAI::AI_turnsPercent(int iTurns, int iPercent)
 		iTurns /= 100;
 	}
 
-	return max(1, iTurns);
+	return std::max(1, iTurns);
 }
 
 

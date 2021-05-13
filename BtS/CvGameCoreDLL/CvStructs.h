@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CVSTRUCTS_H
 #define CVSTRUCTS_H
 

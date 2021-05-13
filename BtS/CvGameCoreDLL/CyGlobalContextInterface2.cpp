@@ -59,6 +59,7 @@ void CyGlobalContextPythonInterface2(python::class_<CyGlobalContext>& x)
 		.def("getSEAWATER_SEE_FROM_CHANGE", &CyGlobalContext::getSEAWATER_SEE_FROM_CHANGE, "int ()")
 		.def("getPEAK_SEE_FROM_CHANGE", &CyGlobalContext::getPEAK_SEE_FROM_CHANGE, "int ()")
 		.def("getHILLS_SEE_FROM_CHANGE", &CyGlobalContext::getHILLS_SEE_FROM_CHANGE, "int ()")
+		.def("getUSE_SPIES_NO_ENTER_BORDERS", &CyGlobalContext::getUSE_SPIES_NO_ENTER_BORDERS, "int ()")
 
 		.def("getCAMERA_MIN_YAW", &CyGlobalContext::getCAMERA_MIN_YAW, "float ()")
 		.def("getCAMERA_MAX_YAW", &CyGlobalContext::getCAMERA_MAX_YAW, "float ()")

@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef _CVDLLWIDGETDATA_H_
 #define _CVDLLWIDGETDATA_H_
 

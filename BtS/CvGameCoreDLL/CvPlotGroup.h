@@ -1,3 +1,5 @@
+#pragma once
+
 // plotGroup.h
 
 #ifndef CIV4_PLOT_GROUP_H

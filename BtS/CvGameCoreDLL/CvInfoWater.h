@@ -1,3 +1,5 @@
+#pragma once
+
 //  $Header:
 //------------------------------------------------------------------------------------------------
 //
@@ -84,6 +86,7 @@ public:
 	DllExport virtual ~CvTerrainPlaneInfo();
 
 	DllExport bool isVisible() const;				// The terrain plane's material alpha
+	DllExport bool isGroundPlane() const;				// The terrain plane's material alpha
 	DllExport float getMaterialAlpha() const;				// The terrain plane's material alpha
 	DllExport float getCloseAlpha() const;				// The terrain plane's material alpha
 
@@ -102,6 +105,7 @@ public:
 protected:
 
 	bool m_bVisible;
+	bool m_bGroundPlane;
 	float m_fMaterialAlpha;			// The terrain plane's material alpha
 	float m_fCloseAlpha;
 

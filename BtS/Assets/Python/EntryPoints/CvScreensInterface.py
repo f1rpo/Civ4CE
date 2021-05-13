@@ -793,7 +793,7 @@ def liberateOnClickedCallback(argsList):
 	city = CyGlobalContext().getPlayer(CyGlobalContext().getGame().getActivePlayer()).getCity(iData1)
 	if (not city.isNone()):
 		if (iButtonId == 0):
-			CyMessageControl().sendDoTask(iData1, TaskTypes.TASK_LIBERATE, -1, -1, False, False, False, False)
+			CyMessageControl().sendDoTask(iData1, TaskTypes.TASK_LIBERATE, 0, -1, False, False, False, False)
 		elif (iButtonId == 2):
 			CyInterface().selectCity(city, False)
 
@@ -860,6 +860,7 @@ def featAccomplishedOnFocusCallback(argsList):
 #######################################################################################
 HandleCloseMap = {  DAWN_OF_MAN : dawnOfMan,
 					SPACE_SHIP_SCREEN : spaceShip,			
+					TECH_CHOOSER : techChooser,			
 				# add new screens here
 				}
 

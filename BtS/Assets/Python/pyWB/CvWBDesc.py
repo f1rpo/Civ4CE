@@ -460,10 +460,10 @@ class CvPlayerDesc:
 			f.write("\tColor=NONE\n")
 			f.write("\tArtStyle=NONE\n")
 		else:
-			f.write("\tLeaderName=%s\n" %(gc.getPlayer(idx).getName().encode(fileencoding)))
-			f.write("\tCivDesc=%s\n" %(gc.getPlayer(idx).getCivilizationDescription(0).encode(fileencoding)))
-			f.write("\tCivShortDesc=%s\n" %(gc.getPlayer(idx).getCivilizationShortDescription(0).encode(fileencoding)))
-			f.write("\tCivAdjective=%s\n" %(gc.getPlayer(idx).getCivilizationAdjective(0).encode(fileencoding)))
+			f.write("\tLeaderName=%s\n" %(gc.getPlayer(idx).getNameKey().encode(fileencoding)))
+			f.write("\tCivDesc=%s\n" %(gc.getPlayer(idx).getCivilizationDescriptionKey().encode(fileencoding)))
+			f.write("\tCivShortDesc=%s\n" %(gc.getPlayer(idx).getCivilizationShortDescriptionKey().encode(fileencoding)))
+			f.write("\tCivAdjective=%s\n" %(gc.getPlayer(idx).getCivilizationAdjectiveKey().encode(fileencoding)))
 			f.write("\tFlagDecal=%s\n" %(gc.getPlayer(idx).getFlagDecal().encode(fileencoding)))
 			f.write("\tWhiteFlag=%d\n" %(gc.getPlayer(idx).isWhiteFlag(),))
 			f.write("\tCivType=%s\n" %(gc.getCivilizationInfo(gc.getPlayer(idx).getCivilizationType()).getType()))
@@ -913,7 +913,7 @@ class CvCityDesc:
 		CvUtil.pyAssert(city.isNone()==0, "null city?")
 		f.write("\tBeginCity\n")
 		f.write("\t\tCityOwner=%d\n" %(city.getOwner(),))
-		f.write("\t\tCityName=%s\n" %(city.getName().encode(fileencoding),))
+		f.write("\t\tCityName=%s\n" %(city.getNameKey().encode(fileencoding),))
 		f.write("\t\tCityPopulation=%d\n" %(city.getPopulation(),))
 		if (city.isProductionUnit()):
 			f.write("\t\tProductionUnit=%s\n" %(gc.getUnitInfo(city.getProductionUnit()).getType(),))
@@ -942,7 +942,7 @@ class CvCityDesc:
 				f.write("\t\tHeadquarterCorporationType=%s\n" %(gc.getCorporationInfo(iI).getType()))
 		
 		for iI in range(gc.getNumSpecialistInfos()):
-			for iJ in range(city.getFreeSpecialistCount(iI)):
+			for iJ in range(city.getAddedFreeSpecialistCount(iI)):
 				f.write("\t\tFreeSpecialistType=%s\n" %(gc.getSpecialistInfo(iI).getType()))	
 		
 		if city.getScriptData():
@@ -1634,7 +1634,7 @@ class CvWBDesc:
 					
 					# Wars
 					for warTeam in self.teamsDesc[iTeamLoop].bWarWithTeamList:
-						gc.getTeam(iTeamLoop).declareWar(warTeam, false)
+						gc.getTeam(iTeamLoop).declareWar(warTeam, false, WarPlanTypes.NO_WARPLAN)
 					
 					# Permanent War/Peace
 					for permanentWarPeaceTeam in self.teamsDesc[iTeamLoop].bPermanentWarPeaceList:

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by lcollins (Firaxis Games) -->
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Ed Piper (Firaxis Games) -->
 <Civ4GameText xmlns="http://www.firaxis.com">
 	<TEXT>
 		<Tag>TXT_KEY_CROSSROADS_WB_DESC</Tag>
@@ -35,7 +35,7 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_DEFENSE_WB_DESC</Tag>
-		<English>Build your city. Brace your troops. And be prepared for an unending onslaught of opponents.[NEWLINE][NEWLINE]A Civ mod with a beat 'em up mentality, Defense plants you in the middle of 20 levels of endless enemies. Slaughter your foes and earn gold to buy more troops to fortify your position. Only by using your wits can you hope to succeed. Because numbers just aren't on your side.[NEWLINE][NEWLINE]Features:[NEWLINE]Your Own Personal Battlefield[NEWLINE]Using the Advanced Start system, players may customize their defenses in order to stop their foes dead in their tracks. Use ranged units to obliterate enemies from afar or get up close and personal using specialized melee warriors. Earn gold for every kill to further insulate yourself from their ever more deadly attacks.</English>
+		<English>Build your city. Brace your troops. And be prepared for an unending onslaught of opponents.[NEWLINE][NEWLINE]A Civ mod with a beat 'em up mentality, Defense plants you in the middle of 20 levels of endless enemies. Slaughter your foes and earn gold to buy more troops to fortify your position. Only by using your wits can you hope to succeed. Because numbers just aren't on your side.[NEWLINE][NEWLINE]Features:[NEWLINE]Your Own Personal Battlefield[NEWLINE]Using the Advanced Start system, players may customize their defenses in order to stop their foes dead in their tracks. Use ranged units to obliterate enemies from afar or get up close and personal using specialized melee warriors. Earn  gold for cities left at the end of each wave to further insulate yourself from their ever more deadly attacks.</English>
 		<French>Construisez votre ville. Consolidez vos troupes. Et soyez pr&#234;t &#224; r&#233;sister aux incessantes vagues d'assauts lanc&#233;es par vos ennemis.[NEWLINE][NEWLINE]Ax&#233; sur un th&#232;me r&#233;solument guerrier, D&#233;fense vous fait lutter contre 20 niveaux d'ennemis bien d&#233;cid&#233;s &#224; avoir votre peau. Massacrez vos ennemis et gagnez de l'or pour acheter des troupes et fortifier vos positions. Puisque les statistiques sont contre vous, seule la ruse vous permettra de vaincre.[NEWLINE][NEWLINE]Particularit&#233;s :[NEWLINE]Votre propre champ de bataille[NEWLINE]Gr&#226;ce au syst&#232;me de d&#233;marrage avanc&#233;, les joueurs peuvent transformer leurs d&#233;fenses afin de stopper net leurs ennemis. Utilisez vos unit&#233;s de combat &#224; distance pour an&#233;antir vos ennemis tout en restant &#224; l'abri, ou flanquez-leur une bonne racl&#233;e en vous servant de puissants guerriers sp&#233;cialis&#233;s dans le combat rapproch&#233;. Gagnez de l'or pour chaque ennemi tu&#233; afin de vous pr&#233;server de leurs attaques toujours plus mortelles.</French>
 		<German>Errichten Sie Ihre Stadt. Bauen Sie Ihre Truppen auf. Und seien Sie bereit für nie endende Angriffe Ihrer Gegner.[NEWLINE][NEWLINE]Defense ist ein Civilization-Mod mit Beat 'em up-Charakter und versetzt Sie in 20 Level, in denen es vor Gegnern nur so wimmelt. Schalten Sie Ihre Gegner aus und verdienen Sie Gold, um mehr Truppen zu kaufen und Ihre Position zu stärken. Sie können nur gewinnen, wenn Sie Ihren Verstand einsetzen - zahlenmäßig sind Sie hoffnungslos unterlegen.[NEWLINE][NEWLINE]Features:[NEWLINE]Ihr eigenes persönliches Schlachtfeld[NEWLINE]Mit dem Fortgeschrittenen Start können Spieler ihre Verteidigung anpassen, um die Pläne ihrer Feinde zu vereiteln. Löschen Sie den Gegner mit Fernkampf-Einheiten aus der Distanz aus oder erledigen Sie das mit spezialisierten Nahkampf-Kriegern persönlich aus der Nähe. Jeder besiegte Gegner bringt Ihnen Gold ein, welches Sie auch benötigen, um sich gegen die immer tödlicher werdenden Angriffe zu wappnen.</German>
 		<Italian>Costruisci la tua città. Rinforza le truppe. E preparati a un massacro senza fine dei tuoi avversari.[NEWLINE][NEWLINE]Un mod pensato con in mente i picchiaduro, Defense ti piazza nel bel mezzo di 20 livelli pieni zeppi di nemici. Massacrali e guadagna oro con cui comprare nuove truppe e fortificare la tua posizione. La tua unica speranza di successo sta nella tua astuzia. Perché i numeri non sono proprio dalla tua parte.[NEWLINE][NEWLINE]Caratteristiche:[NEWLINE]Il tuo campo di battaglia personale[NEWLINE]Sfruttando il sistema di Avvio avanzato, i giocatori possono personalizzare le proprie difese in modo da arrestare l'avanzata dei nemici. Usa le unità a lungo raggio per annientare i nemici più lontani, o mettila sul piano personale coinvolgendo le unità da mischia. Guadagna oro per ogni nemico ucciso per proteggerti ancor di più dagli attacchi inferti dai tuoi avversari.</Italian>
@@ -192,14 +192,6 @@
 		<German>Die Loyalität von %s1_name kaufen</German>
 		<Italian>Compra la lealtà di %s1_name</Italian>
 		<Spanish>Comprar la lealtad de %s1_name</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_ESPIONAGE_HELP_INSERT_CULTURE</Tag>
-		<English>Spread your Culture to %s1_city (%d2[ICON_CULTURE])</English>
-		<French>Etendre votre culture &#224; la ville : %s1_city (%d2[ICON_CULTURE])</French>
-		<German>Kultur in %s1_city verbreiten (%d2[ICON_CULTURE])</German>
-		<Italian>Diffondi la tua cultura a %s1_city (%d2[ICON_CULTURE])</Italian>
-		<Spanish>Propagar tu cultura en %s1_city (%d2 [ICON_CULTURE]</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ESPIONAGE_HELP_POISON</Tag>

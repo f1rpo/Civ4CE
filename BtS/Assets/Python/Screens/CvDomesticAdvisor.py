@@ -70,7 +70,7 @@ class CvDomesticAdvisor:
 		bCanLiberate = false
 		(loopCity, iter) = player.firstCity(false)
 		while(loopCity):
-			if loopCity.getLiberationPlayer() != -1:
+			if loopCity.getLiberationPlayer(false) != -1:
 				bCanLiberate = true
 				break
 			(loopCity, iter) = player.nextCity(iter, false)
@@ -252,7 +252,7 @@ class CvDomesticAdvisor:
 
 		# Culture status...
 		szCulture = unicode(pLoopCity.getCommerceRate(CommerceTypes.COMMERCE_CULTURE))
-		iCultureTimes100 = pLoopCity.getCultureTimes100(CommerceTypes.COMMERCE_CULTURE)
+		iCultureTimes100 = pLoopCity.getCultureTimes100(CyGame().getActivePlayer())
 		iCultureRateTimes100 = pLoopCity.getCommerceRateTimes100(CommerceTypes.COMMERCE_CULTURE)
 		if iCultureRateTimes100 > 0:
 			iCultureLeftTimes100 = 100 * pLoopCity.getCultureThreshold() - iCultureTimes100
@@ -287,7 +287,7 @@ class CvDomesticAdvisor:
 		screen.setTableText( "CityListBackground", 15, i, pLoopCity.getProductionName() + " (" + str(pLoopCity.getGeneralProductionTurnsLeft()) + ")", "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
 		# Liberation
-		if pLoopCity.getLiberationPlayer() != -1:			
+		if pLoopCity.getLiberationPlayer(false) != -1:			
 			screen.setTableText( "CityListBackground", 16, i, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.OCCUPATION_CHAR)) + "</font>", "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 		
 		

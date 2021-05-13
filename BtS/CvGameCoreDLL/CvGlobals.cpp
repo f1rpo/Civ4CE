@@ -174,6 +174,7 @@ m_iHILLS_SEE_THROUGH_CHANGE(0),
 m_iSEAWATER_SEE_FROM_CHANGE(0),
 m_iPEAK_SEE_FROM_CHANGE(0),
 m_iHILLS_SEE_FROM_CHANGE(0),
+m_iUSE_SPIES_NO_ENTER_BORDERS(0),
 m_fCAMERA_MIN_YAW(0),
 m_fCAMERA_MAX_YAW(0),
 m_fCAMERA_FAR_CLIP_Z_HEIGHT(0),
@@ -2613,6 +2614,7 @@ void CvGlobals::cacheGlobals()
 	m_iSEAWATER_SEE_FROM_CHANGE = getDefineINT("SEAWATER_SEE_FROM_CHANGE");
 	m_iPEAK_SEE_FROM_CHANGE = getDefineINT("PEAK_SEE_FROM_CHANGE");
 	m_iHILLS_SEE_FROM_CHANGE = getDefineINT("HILLS_SEE_FROM_CHANGE");
+	m_iUSE_SPIES_NO_ENTER_BORDERS = getDefineINT("USE_SPIES_NO_ENTER_BORDERS");
 	
 	m_fCAMERA_MIN_YAW = getDefineFLOAT("CAMERA_MIN_YAW");
 	m_fCAMERA_MAX_YAW = getDefineFLOAT("CAMERA_MAX_YAW");
@@ -2854,6 +2856,11 @@ int CvGlobals::getPEAK_SEE_FROM_CHANGE()
 int CvGlobals::getHILLS_SEE_FROM_CHANGE()
 {
 	return m_iHILLS_SEE_FROM_CHANGE;
+}
+
+int CvGlobals::getUSE_SPIES_NO_ENTER_BORDERS()
+{
+	return m_iUSE_SPIES_NO_ENTER_BORDERS;
 }
 
 int CvGlobals::getNUM_CORPORATION_PREREQ_BONUSES()
@@ -3513,6 +3520,11 @@ void CvGlobals::setInfoTypeFromString(const char* szType, int idx)
 	FAssertMsg(iExisting==-1 || iExisting==idx || strcmp(szType, "ERROR")==0, CvString::format("xml info type entry %s already exists", szType).c_str());
 #endif
 	m_infosMap[szType] = idx;
+}
+
+void CvGlobals::infoTypeFromStringReset()
+{
+	m_infosMap.clear();
 }
 
 void CvGlobals::addToInfosVectors(void *infoVector)

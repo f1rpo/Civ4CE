@@ -1711,7 +1711,7 @@
 			<SpecialCargo>NONE</SpecialCargo>
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
-			<iConscription>0</iConscription>
+			<iConscription>1</iConscription>
 			<iCultureGarrison>0</iCultureGarrison>
 			<iExtraCost>0</iExtraCost>
 			<iAsset>1</iAsset>
@@ -4803,7 +4803,7 @@
 			<SpecialCargo>NONE</SpecialCargo>
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
-			<iConscription>0</iConscription>
+			<iConscription>1</iConscription>
 			<iCultureGarrison>5</iCultureGarrison>
 			<iExtraCost>0</iExtraCost>
 			<iAsset>2</iAsset>
@@ -4987,7 +4987,7 @@
 			<SpecialCargo>NONE</SpecialCargo>
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
-			<iConscription>0</iConscription>
+			<iConscription>1</iConscription>
 			<iCultureGarrison>5</iCultureGarrison>
 			<iExtraCost>0</iExtraCost>
 			<iAsset>2</iAsset>
@@ -5181,7 +5181,7 @@
 			<SpecialCargo>NONE</SpecialCargo>
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
-			<iConscription>0</iConscription>
+			<iConscription>1</iConscription>
 			<iCultureGarrison>5</iCultureGarrison>
 			<iExtraCost>0</iExtraCost>
 			<iAsset>2</iAsset>
@@ -5378,7 +5378,7 @@
 			<SpecialCargo>NONE</SpecialCargo>
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
-			<iConscription>0</iConscription>
+			<iConscription>1</iConscription>
 			<iCultureGarrison>5</iCultureGarrison>
 			<iExtraCost>0</iExtraCost>
 			<iAsset>2</iAsset>
@@ -9050,7 +9050,7 @@
 			<SpecialCargo>NONE</SpecialCargo>
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
-			<iConscription>0</iConscription>
+			<iConscription>1</iConscription>
 			<iCultureGarrison>7</iCultureGarrison>
 			<iExtraCost>0</iExtraCost>
 			<iAsset>4</iAsset>
@@ -9235,7 +9235,7 @@
 			<SpecialCargo>NONE</SpecialCargo>
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
-			<iConscription>0</iConscription>
+			<iConscription>1</iConscription>
 			<iCultureGarrison>8</iCultureGarrison>
 			<iExtraCost>0</iExtraCost>
 			<iAsset>5</iAsset>
@@ -9618,7 +9618,7 @@
 			<SpecialCargo>NONE</SpecialCargo>
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
-			<iConscription>0</iConscription>
+			<iConscription>5</iConscription>
 			<iCultureGarrison>10</iCultureGarrison>
 			<iExtraCost>0</iExtraCost>
 			<iAsset>5</iAsset>
@@ -9802,7 +9802,7 @@
 			<SpecialCargo>NONE</SpecialCargo>
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
-			<iConscription>0</iConscription>
+			<iConscription>1</iConscription>
 			<iCultureGarrison>11</iCultureGarrison>
 			<iExtraCost>0</iExtraCost>
 			<iAsset>6</iAsset>
@@ -9994,7 +9994,7 @@
 			<SpecialCargo>NONE</SpecialCargo>
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
-			<iConscription>0</iConscription>
+			<iConscription>1</iConscription>
 			<iCultureGarrison>12</iCultureGarrison>
 			<iExtraCost>0</iExtraCost>
 			<iAsset>5</iAsset>
@@ -10191,7 +10191,7 @@
 			<SpecialCargo>NONE</SpecialCargo>
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
-			<iConscription>0</iConscription>
+			<iConscription>1</iConscription>
 			<iCultureGarrison>12</iCultureGarrison>
 			<iExtraCost>0</iExtraCost>
 			<iAsset>5</iAsset>
@@ -10344,7 +10344,7 @@
 			<iFirstStrikes>0</iFirstStrikes>
 			<iChanceFirstStrikes>0</iChanceFirstStrikes>
 			<iInterceptionProbability>0</iInterceptionProbability>
-			<iEvasionProbability>0</iEvasionProbability>
+			<iEvasionProbability>25</iEvasionProbability>
 			<iWithdrawalProb>0</iWithdrawalProb>
 			<iCollateralDamage>0</iCollateralDamage>
 			<iCollateralDamageLimit>0</iCollateralDamageLimit>
@@ -10371,7 +10371,7 @@
 			<SpecialCargo>NONE</SpecialCargo>
 			<DomainCargo>NONE</DomainCargo>
 			<iCargo>0</iCargo>
-			<iConscription>0</iConscription>
+			<iConscription>1</iConscription>
 			<iCultureGarrison>12</iCultureGarrison>
 			<iExtraCost>0</iExtraCost>
 			<iAsset>5</iAsset>
@@ -15563,7 +15563,7 @@
 			<SeeInvisible>NONE</SeeInvisible>
 			<Description>TXT_KEY_UNIT_KOREAN_HWACHA</Description>
 			<Civilopedia>TXT_KEY_UNIT_KOREAN_HWACHA_PEDIA</Civilopedia>
-			<Strategy>TXT_KEY_UNIT_CATAPULT_STRATEGY</Strategy>
+			<Strategy>TXT_KEY_UNIT_KOREAN_HWACHA_STRATEGY</Strategy>
 			<Advisor>ADVISOR_MILITARY</Advisor>
 			<bAnimal>0</bAnimal>
 			<bFood>0</bFood>
@@ -17693,7 +17693,7 @@
 			<bInvisible>0</bInvisible>
 			<bFirstStrikeImmune>0</bFirstStrikeImmune>
 			<bNoDefensiveBonus>0</bNoDefensiveBonus>
-			<bIgnoreBuildingDefense>0</bIgnoreBuildingDefense>
+			<bIgnoreBuildingDefense>1</bIgnoreBuildingDefense>
 			<bCanMoveImpassable>0</bCanMoveImpassable>
 			<bCanMoveAllTerrain>0</bCanMoveAllTerrain>
 			<bFlatMovementCost>0</bFlatMovementCost>
@@ -17874,7 +17874,7 @@
 			<bInvisible>0</bInvisible>
 			<bFirstStrikeImmune>0</bFirstStrikeImmune>
 			<bNoDefensiveBonus>0</bNoDefensiveBonus>
-			<bIgnoreBuildingDefense>0</bIgnoreBuildingDefense>
+			<bIgnoreBuildingDefense>1</bIgnoreBuildingDefense>
 			<bCanMoveImpassable>0</bCanMoveImpassable>
 			<bCanMoveAllTerrain>0</bCanMoveAllTerrain>
 			<bFlatMovementCost>0</bFlatMovementCost>
@@ -18259,7 +18259,7 @@
 			<bInvisible>0</bInvisible>
 			<bFirstStrikeImmune>0</bFirstStrikeImmune>
 			<bNoDefensiveBonus>0</bNoDefensiveBonus>
-			<bIgnoreBuildingDefense>0</bIgnoreBuildingDefense>
+			<bIgnoreBuildingDefense>1</bIgnoreBuildingDefense>
 			<bCanMoveImpassable>0</bCanMoveImpassable>
 			<bCanMoveAllTerrain>0</bCanMoveAllTerrain>
 			<bFlatMovementCost>0</bFlatMovementCost>
@@ -18448,7 +18448,7 @@
 			<bInvisible>0</bInvisible>
 			<bFirstStrikeImmune>0</bFirstStrikeImmune>
 			<bNoDefensiveBonus>0</bNoDefensiveBonus>
-			<bIgnoreBuildingDefense>0</bIgnoreBuildingDefense>
+			<bIgnoreBuildingDefense>1</bIgnoreBuildingDefense>
 			<bCanMoveImpassable>0</bCanMoveImpassable>
 			<bCanMoveAllTerrain>0</bCanMoveAllTerrain>
 			<bFlatMovementCost>0</bFlatMovementCost>
@@ -19023,6 +19023,10 @@
 			<UnitClassUpgrades>
 				<UnitClassUpgrade>
 					<UnitClassUpgradeType>UNITCLASS_STEALTH_DESTROYER</UnitClassUpgradeType>
+					<bUnitClassUpgrade>1</bUnitClassUpgrade>
+				</UnitClassUpgrade>
+				<UnitClassUpgrade>
+					<UnitClassUpgradeType>UNITCLASS_MISSILE_CRUISER</UnitClassUpgradeType>
 					<bUnitClassUpgrade>1</bUnitClassUpgrade>
 				</UnitClassUpgrade>
 			</UnitClassUpgrades>
@@ -19995,12 +19999,12 @@
 			<ProductionTraits/>
 			<Flavors/>
 			<iAIWeight>0</iAIWeight>
-			<iCost>150</iCost>
+			<iCost>180</iCost>
 			<iHurryCostModifier>0</iHurryCostModifier>
 			<iAdvancedStartCost>100</iAdvancedStartCost>
 			<iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
 			<iMinAreaSize>20</iMinAreaSize>
-			<iMoves>6</iMoves>
+			<iMoves>7</iMoves>
 			<bNoRevealMap>0</bNoRevealMap>
 			<iAirRange>0</iAirRange>
 			<iAirUnitCap>0</iAirUnitCap>
@@ -20019,7 +20023,7 @@
 			<FeatureImpassables/>
 			<TerrainPassableTechs/>
 			<FeaturePassableTechs/>
-			<iCombat>24</iCombat>
+			<iCombat>30</iCombat>
 			<iCombatLimit>100</iCombatLimit>
 			<iAirCombat>0</iAirCombat>
 			<iAirCombatLimit>0</iAirCombatLimit>
@@ -22242,13 +22246,12 @@
 					<BuildingType>BUILDING_CORPORATION_6</BuildingType>
 					<bBuilding>1</bBuilding>
 				</Building>
-			</Buildings>
-			<ForceBuildings>
-				<ForceBuilding>
+				<Building>
 					<BuildingType>BUILDING_ACADEMY</BuildingType>
-					<bForceBuilding>1</bForceBuilding>
-				</ForceBuilding>
-			</ForceBuildings>
+					<bBuilding>1</bBuilding>
+				</Building>
+			</Buildings>
+			<ForceBuildings/>
 			<HolyCity>NONE</HolyCity>
 			<ReligionType>NONE</ReligionType>
 			<StateReligion>NONE</StateReligion>
@@ -22904,13 +22907,13 @@
 					<bGreatPeople>1</bGreatPeople>
 				</GreatPeople>
 			</GreatPeoples>
-			<Buildings/>
-			<ForceBuildings>
-				<ForceBuilding>
+			<Buildings>
+				<Building>
 					<BuildingType>BUILDING_MILITARY_ACADEMY</BuildingType>
-					<bForceBuilding>1</bForceBuilding>
-				</ForceBuilding>
-			</ForceBuildings>
+					<bBuilding>1</bBuilding>
+				</Building>
+			</Buildings>
+			<ForceBuildings/>
 			<HolyCity>NONE</HolyCity>
 			<ReligionType>NONE</ReligionType>
 			<StateReligion>NONE</StateReligion>
@@ -23131,13 +23134,13 @@
 					<bGreatPeople>1</bGreatPeople>
 				</GreatPeople>
 			</GreatPeoples>
-			<Buildings/>
-			<ForceBuildings>
-				<ForceBuilding>
+			<Buildings>
+				<Building>
 					<BuildingType>BUILDING_SCOTLAND_YARD</BuildingType>
-					<bForceBuilding>1</bForceBuilding>
-				</ForceBuilding>
-			</ForceBuildings>
+					<bBuilding>1</bBuilding>
+				</Building>
+			</Buildings>
+			<ForceBuildings/>
 			<HolyCity>NONE</HolyCity>
 			<ReligionType>NONE</ReligionType>
 			<StateReligion>NONE</StateReligion>

@@ -1,3 +1,5 @@
+#pragma once
+
 //  $Header:
 //------------------------------------------------------------------------------------------------
 //
@@ -171,11 +173,6 @@ public:
 	// check through the pszList parameter for the pszVal and returns the location a match
 	// is found if one is found
 	static int FindInInfoClass(const TCHAR* pszVal, bool hideAssert = false);
-
-	void setActionInfoFromHotkeyInfo(
-						CvActionInfo* pActionInfo, CvHotkeyInfo* pHotkeyInfo, CvString szDescriptionPrefix, CvString szHelp,
-						 int iInterfaceMode, int iMissionType, int iMissionData, int iCommandType, int iCommandData, int iControlType,
-						int iAutomateType, bool bConfirmCommand, bool bVisible);
 
 	template <class T>
 	void InitList(T **ppList, int iListLen, T val = 0);

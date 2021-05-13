@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CvDLLFAStarIFaceBase_h
 #define CvDLLFAStarIFaceBase_h
 

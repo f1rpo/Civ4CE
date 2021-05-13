@@ -3198,7 +3198,6 @@ m_iUnitCombatType(NO_UNITCOMBAT),
 m_iDomainType(NO_DOMAIN),
 m_iDefaultUnitAIType(NO_UNITAI),
 m_iInvisibleType(NO_INVISIBLE),
-m_iSeeInvisibleType(NO_INVISIBLE),
 m_iAdvisorType(NO_ADVISOR),
 m_iHolyCity(NO_RELIGION),
 m_iReligionType(NO_RELIGION),
@@ -3633,9 +3632,16 @@ int CvUnitInfo::getInvisibleType() const
 	return m_iInvisibleType;
 }
 
-int CvUnitInfo::getSeeInvisibleType() const
+int CvUnitInfo::getSeeInvisibleType(int i) const
 {
-	return m_iSeeInvisibleType;
+	FAssert(i < (int)m_aiSeeInvisibleTypes.size());
+
+	return m_aiSeeInvisibleTypes[i];
+}
+
+int CvUnitInfo::getNumSeeInvisibleTypes() const
+{
+	return (int)m_aiSeeInvisibleTypes.size();
 }
 
 int CvUnitInfo::getAdvisorType() const
@@ -4375,7 +4381,16 @@ void CvUnitInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iDomainType);
 	stream->Read(&m_iDefaultUnitAIType);
 	stream->Read(&m_iInvisibleType);
-	stream->Read(&m_iSeeInvisibleType);
+	
+	int iNumInvisibleTypes;
+	stream->Read(&iNumInvisibleTypes);
+	for(int i=0;i<iNumInvisibleTypes;i++)
+	{
+		int iSeeInvisibleType;
+		stream->Read(&iSeeInvisibleType);
+		m_aiSeeInvisibleTypes.push_back(iSeeInvisibleType);
+	}
+
 	stream->Read(&m_iAdvisorType);
 	stream->Read(&m_iHolyCity);
 	stream->Read(&m_iReligionType);
@@ -4597,6 +4612,8 @@ void CvUnitInfo::read(FDataStreamBase* stream)
 	m_paszUnitNames = new CvString[m_iNumUnitNames];
 	stream->ReadString(m_iNumUnitNames, m_paszUnitNames);
 
+	stream->ReadString(m_szFormationType);
+
 	updateArtDefineButton();
 }
 
@@ -4663,7 +4680,13 @@ void CvUnitInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iDomainType);
 	stream->Write(m_iDefaultUnitAIType);
 	stream->Write(m_iInvisibleType);
-	stream->Write(m_iSeeInvisibleType);
+
+	stream->Write((int)m_aiSeeInvisibleTypes.size());
+	for(int i=0;i<(int)m_aiSeeInvisibleTypes.size();i++)
+	{
+		stream->Write(m_aiSeeInvisibleTypes[i]);
+	}
+	
 	stream->Write(m_iAdvisorType);
 	stream->Write(m_iHolyCity);
 	stream->Write(m_iReligionType);
@@ -4766,6 +4789,8 @@ void CvUnitInfo::write(FDataStreamBase* stream)
 	stream->WriteString(m_iGroupDefinitions, m_paszLateArtDefineTags);
 	stream->WriteString(m_iGroupDefinitions, m_paszMiddleArtDefineTags);
 	stream->WriteString(m_iNumUnitNames, m_paszUnitNames);
+
+	stream->WriteString(m_szFormationType);
 }
 
 //
@@ -4806,7 +4831,16 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 	m_iInvisibleType = pXML->FindInInfoClass(szTextVal);
 
 	pXML->GetChildXmlValByName(szTextVal, "SeeInvisible");
-	m_iSeeInvisibleType = pXML->FindInInfoClass(szTextVal);
+	std::vector<CvString> tokens;
+	szTextVal.getTokens(",", tokens);
+	for(int i=0;i<(int)tokens.size();i++)
+	{
+		int iInvisibleType = pXML->FindInInfoClass(tokens[i]);
+		if(iInvisibleType != NO_INVISIBLE)
+		{
+			m_aiSeeInvisibleTypes.push_back(iInvisibleType);
+		}
+	}
 
 	pXML->GetChildXmlValByName(szTextVal, "Advisor");
 	m_iAdvisorType = pXML->FindInInfoClass(szTextVal);
@@ -8198,7 +8232,6 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	int i=0;						//loop counter
 	int j=0;						//loop counter
 	int k=0;						//loop counter
 	int iNumSibs=0;				// the number of siblings the current xml node has
@@ -17131,7 +17164,6 @@ bool CvAnimationPathInfo::read(CvXMLLoadUtility* pXML)
 	}
 
 	TCHAR	szTempString[1024];				// Extracting text
-	int		iCurrentPath = 0;					// The current path information we are building
 	int		iCurrentCategory;				// The current category information we are building
 	float	fParameter;						// Temporary
 
@@ -18177,20 +18209,14 @@ int CvArtInfoFeature::getConnectionMaskFromString(const CvString &connectionStri
 		return 0;
 	else
 	{
-		//tokenizer code taken from http://www.digitalpeer.com/id/simple
-		CvString delimiters = " \t\n";
-
-		// skip delimiters at beginning.
-		int lastPos = connectionString.find_first_not_of(delimiters, 0);
-
-		// find first "non-delimiter".
-		int pos = connectionString.find_first_of(delimiters, lastPos);
+		std::vector<CvString> tokens;
+		connectionString.getTokens(" \t\n", tokens);
 
 		int connectionMask = 0;
-		while (CvString::npos != pos || CvString::npos != lastPos)
+		for(int i=0;i<(int)tokens.size();i++)
 		{
 			// found a token, parse it.
-			CvString token = connectionString.substr(lastPos, pos - lastPos);
+			CvString &token = tokens[i];
 			if(token.CompareNoCase("NW") == 0)
 				connectionMask |= DIRECTION_NORTHWEST_MASK;
 			else if(token.CompareNoCase("N") == 0)
@@ -18211,12 +18237,6 @@ int CvArtInfoFeature::getConnectionMaskFromString(const CvString &connectionStri
 			{
 				FAssertMsg(false, "[Jason] Invalid connection direction.");
 			}
-
-			// skip delimiters.  Note the "not_of"
-			lastPos = connectionString.find_first_not_of(delimiters, pos);
-
-			// find next "non-delimiter"
-			pos = connectionString.find_first_of(delimiters, lastPos);
 		}
 
 		FAssertMsg(connectionMask > 0, "[Jason] Did not find feature connection mask.");

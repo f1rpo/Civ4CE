@@ -101,13 +101,21 @@ class CvPediaUnitChart:
 		unitsList=[(0,0,0,0,0)]*nUnits
 		for j in range(gc.getNumUnitInfos()):
 			if (self.iGroup == gc.getUnitInfo(j).getUnitCombatType() or self.iGroup == gc.getNumUnitCombatInfos()):
+			
+				if (gc.getUnitInfo(j).getDomainType() == DomainTypes.DOMAIN_AIR):
+					iStrength = unicode(gc.getUnitInfo(j).getAirCombat())
+					iMovement = unicode(gc.getUnitInfo(j).getAirRange())
+				else:
+					iStrength = unicode(gc.getUnitInfo(j).getCombat())
+					iMovement = unicode(gc.getUnitInfo(j).getMoves())
+					
 				if (gc.getUnitInfo(j).getProductionCost() < 0):
 					szCost = localText.getText("TXT_KEY_NON_APPLICABLE", ())
 				else:
 					szCost = unicode(gc.getUnitInfo(j).getProductionCost())# + u"%c" % gc.getYieldInfo(YieldTypes.YIELD_PRODUCTION).getChar()
-				unitsList[i] = (gc.getUnitInfo(j).getCombat(), gc.getUnitInfo(j).getMoves(), szCost, gc.getUnitInfo(j).getDescription(), j)
+					
+				unitsList[i] = (iStrength, iMovement, szCost, gc.getUnitInfo(j).getDescription(), j)
 				i += 1
-		#unitsList.sort()
 
 		for i in range(nUnits):			
 			iRow = screen.appendTableRow(szTable)

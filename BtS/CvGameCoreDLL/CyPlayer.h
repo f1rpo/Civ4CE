@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CyPlayer_h
 #define CyPlayer_h
 //
@@ -56,6 +58,7 @@ public:
 	std::wstring getWorstEnemyName();
 	std::wstring getBestAttackUnitKey();
 	int /*ArtStyleTypes*/ getArtStyleType();
+	std::string getUnitButton(int eUnit);
 	
 	int findBestFoundValue();
 
@@ -490,6 +493,7 @@ public:
 
 	bool splitEmpire(int iAreaId);
 	bool canSplitEmpire() const;
+	bool canSplitArea(int iAreaId) const;
 
 	bool canHaveTradeRoutesWith(int iPlayer);
 

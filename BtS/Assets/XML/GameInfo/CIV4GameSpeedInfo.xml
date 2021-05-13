@@ -30,8 +30,8 @@
 			<iGoldenAgePercent>200</iGoldenAgePercent>
 			<iHurryPercent>33</iHurryPercent>
 			<iHurryConscriptAngerPercent>300</iHurryConscriptAngerPercent>
-			<iInflationPercent>15</iInflationPercent>
-			<iInflationOffset>-200</iInflationOffset>
+			<iInflationPercent>10</iInflationPercent>
+			<iInflationOffset>-270</iInflationOffset>
 			<iVictoryDelayPercent>300</iVictoryDelayPercent>
 			<GameTurnInfos>
 				<GameTurnInfo>
@@ -91,8 +91,8 @@
 			<iGoldenAgePercent>125</iGoldenAgePercent>
 			<iHurryPercent>66</iHurryPercent>
 			<iHurryConscriptAngerPercent>150</iHurryConscriptAngerPercent>
-			<iInflationPercent>30</iInflationPercent>
-			<iInflationOffset>-160</iInflationOffset>
+			<iInflationPercent>20</iInflationPercent>
+			<iInflationOffset>-135</iInflationOffset>
 			<iVictoryDelayPercent>150</iVictoryDelayPercent>
 			<GameTurnInfos>
 				<GameTurnInfo>
@@ -148,8 +148,8 @@
 			<iGoldenAgePercent>100</iGoldenAgePercent>
 			<iHurryPercent>100</iHurryPercent>
 			<iHurryConscriptAngerPercent>100</iHurryConscriptAngerPercent>
-			<iInflationPercent>45</iInflationPercent>
-			<iInflationOffset>-120</iInflationOffset>
+			<iInflationPercent>30</iInflationPercent>
+			<iInflationOffset>-90</iInflationOffset>
 			<iVictoryDelayPercent>100</iVictoryDelayPercent>
 			<GameTurnInfos>
 				<GameTurnInfo>
@@ -209,8 +209,8 @@
 			<iGoldenAgePercent>80</iGoldenAgePercent>
 			<iHurryPercent>150</iHurryPercent>
 			<iHurryConscriptAngerPercent>67</iHurryConscriptAngerPercent>
-			<iInflationPercent>65</iInflationPercent>
-			<iInflationOffset>-70</iInflationOffset>
+			<iInflationPercent>45</iInflationPercent>
+			<iInflationOffset>-60</iInflationOffset>
 			<iVictoryDelayPercent>67</iVictoryDelayPercent>
 			<GameTurnInfos>
 				<GameTurnInfo>

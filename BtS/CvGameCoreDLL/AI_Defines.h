@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef AI_DEFINES_H
 #define AI_DEFINES_H
 
@@ -24,6 +26,7 @@
 #define AI_STRATEGY_LAST_STAND			(1 << 17)
 #define AI_STRATEGY_FINAL_WAR			(1 << 18)
 #define AI_STRATEGY_OWABWNW				(1 << 19)
+#define AI_STRATEGY_BIG_ESPIONAGE		(1 << 20)
 
 
 #define AI_CITY_ROLE_VALID              (1 <<  1)    //zero is bad

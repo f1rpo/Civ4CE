@@ -463,7 +463,7 @@ def cityAdvise(pCity, iPlayer):
 
 	if (gc.getPlayer(iPlayer).isOption(PlayerOptionTypes.PLAYEROPTION_ADVISOR_POPUPS) and gc.getPlayer(iPlayer).isHuman() and not gc.getGame().isNetworkMultiPlayer()):
 		
-		eLiberationPlayer = pCity.getLiberationPlayer()							
+		eLiberationPlayer = pCity.getLiberationPlayer(false)							
 		if (eLiberationPlayer != -1):
 		
 			if (gc.getGame().getGameTurn()) % 40 == pCity.getGameTurnFounded() % 40:
@@ -480,9 +480,9 @@ def cityAdvise(pCity, iPlayer):
 				popupInfo.addPopup(iPlayer)
 				g_iAdvisorNags += 1
 
-		elif (gc.getPlayer(iPlayer).canSplitEmpire() and pCity.AI_cityValue() < 0):
+		elif (gc.getPlayer(iPlayer).canSplitEmpire() and gc.getPlayer(iPlayer).canSplitArea(pCity.area().getID()) and pCity.AI_cityValue() < 0):
 		
-			if (true or gc.getGame().getGameTurn()) % 40 == pCity.getGameTurnFounded() % 40:
+			if (gc.getGame().getGameTurn()) % 40 == pCity.getGameTurnFounded() % 40:
 
 				popupInfo = CyPopupInfo()
 				popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)

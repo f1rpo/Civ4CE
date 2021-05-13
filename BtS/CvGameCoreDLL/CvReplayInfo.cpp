@@ -105,7 +105,8 @@ void CvReplayInfo::createInfo(PlayerTypes ePlayer)
 	m_iInitialTurn = GC.getGameINLINE().getStartTurn();
 	m_iStartYear = GC.getGameINLINE().getStartYear();
 	m_iFinalTurn = game.getGameTurn();
-	GAMETEXT.setTimeStr(m_szFinalDate, m_iFinalTurn, false);
+	GAMETEXT.setYearStr(m_szFinalDate, m_iFinalTurn, false, GC.getGameINLINE().getCalendar(), GC.getGameINLINE().getStartYear(), GC.getGameINLINE().getGameSpeedType());
+
 	m_eCalendar = GC.getGameINLINE().getCalendar();
 
 

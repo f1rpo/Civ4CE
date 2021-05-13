@@ -7,11 +7,11 @@
 <Civ4Defines xmlns="x-schema:CIV4GlobalDefinesSchema.xml">
 	<Define>
 		<DefineName>CIV4_VERSION</DefineName>
-		<iDefineIntVal>303</iDefineIntVal>
+		<iDefineIntVal>313</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>SAVE_VERSION</DefineName>
-		<iDefineIntVal>300</iDefineIntVal>
+		<iDefineIntVal>301</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>MAX_NUM_LANGUAGES</DefineName>
@@ -1636,6 +1636,10 @@
 	</Define>
 	<Define>
 		<DefineName>PATH_DAMAGE_WEIGHT</DefineName>
+		<iDefineIntVal>0</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>USE_SPIES_NO_ENTER_BORDERS</DefineName>
 		<iDefineIntVal>0</iDefineIntVal>
 	</Define>
 </Civ4Defines>

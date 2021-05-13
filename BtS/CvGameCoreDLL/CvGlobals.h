@@ -1,3 +1,5 @@
+#pragma once
+
 // CvGlobals.h
 
 #ifndef CIV4_GLOBALS_H
@@ -212,6 +214,7 @@ public:
 	//
 	DllExport int getInfoTypeForString(const char* szType, bool hideAssert = false) const;			// returns the infos index, use this when searching for an info type string
 	DllExport void setInfoTypeFromString(const char* szType, int idx);
+	DllExport void infoTypeFromStringReset();
 	DllExport void addToInfosVectors(void *infoVector);
 	DllExport void infosReset();
 
@@ -720,6 +723,7 @@ public:
 	DllExport int getSEAWATER_SEE_FROM_CHANGE();
 	DllExport int getPEAK_SEE_FROM_CHANGE();
 	DllExport int getHILLS_SEE_FROM_CHANGE();
+	DllExport int getUSE_SPIES_NO_ENTER_BORDERS();
 
 	DllExport float getCAMERA_MIN_YAW();
 	DllExport float getCAMERA_MAX_YAW();
@@ -1140,6 +1144,7 @@ protected:
 	int m_iSEAWATER_SEE_FROM_CHANGE;
 	int m_iPEAK_SEE_FROM_CHANGE;
 	int m_iHILLS_SEE_FROM_CHANGE;
+	int m_iUSE_SPIES_NO_ENTER_BORDERS;
 
 	float m_fCAMERA_MIN_YAW;
 	float m_fCAMERA_MAX_YAW;

@@ -627,7 +627,7 @@
 			<FeatureStructs/>
 			<HotKey>KB_F</HotKey>
 			<bAltDown>0</bAltDown>
-			<bShiftDown>0</bShiftDown>
+			<bShiftDown>1</bShiftDown>
 			<bCtrlDown>0</bCtrlDown>
 			<iHotKeyPriority>1</iHotKeyPriority>
 			<Button>,Art/Interface/Buttons/TerrainFeatures/Forest.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,4,14</Button>

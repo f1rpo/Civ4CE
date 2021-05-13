@@ -93,6 +93,7 @@
 	<ElementType name="MaterialAlpha" content="textOnly"/>
 	<ElementType name="CloseAlpha" content="textOnly"/>
 	<ElementType name="bVisible" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bGroundPlane" content="textOnly" dt:type="boolean"/>
 	<ElementType name="fScale" content="textOnly"/>
 	<ElementType name="fUpdateRate" content="textOnly"/>
 	<ElementType name="bIsProjectile" content="textOnly" dt:type="int"/>
@@ -150,6 +151,7 @@
 	</ElementType>
 	<ElementType name="TerrainPlaneInfo" content="eltOnly">
 		<element type="bVisible"/>
+		<element type="bGroundPlane"/>
 		<element type="MaterialAlpha"/>
 		<element type="CloseAlpha"/>
 		<element type="TextureFile"/>

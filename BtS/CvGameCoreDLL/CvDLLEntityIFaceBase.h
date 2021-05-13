@@ -1,5 +1,9 @@
+#pragma once
+
 #ifndef CvDLLEntityIFaceBase_h
 #define CvDLLEntityIFaceBase_h
+
+#pragma warning(disable:4100) 
 
 //#include "CvEnums.h"
 

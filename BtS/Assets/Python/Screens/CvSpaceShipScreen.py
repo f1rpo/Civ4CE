@@ -25,6 +25,7 @@ class CvSpaceShipScreen:
 		#setup panel
 		self.windowWidth = screen.getXResolution()
 		self.windowHeight = screen.getYResolution()
+		screen.setDimensions(0, 0, self.windowWidth, self.windowHeight)
 		self.W_SCREEN = 400
 		self.X_SCREEN = self.windowWidth - self.W_SCREEN - 10
 		self.H_SCREEN = 768
@@ -79,7 +80,8 @@ class CvSpaceShipScreen:
 			#check if landed on alpha centauri
 			activeTeam = gc.getGame().getActiveTeam()
 			victoryCountdown = gc.getTeam(activeTeam).getVictoryCountdown(self.spaceVictory)
-			if((victoryCountdown == 0) and (gc.getGame().getVictory() != VictoryTypes.NO_VICTORY)):
+			gameState = gc.getGame().getGameState()
+			if(((gameState == GameStateTypes.GAMESTATE_EXTENDED) and (victoryCountdown > 0)) or (victoryCountdown == 0)):
 				screen.setLabel("FinishedLabel", "SpaceShipMainPanel", "<color=255,255,0><font=4>" + localText.getText("TXT_KEY_SPACE_SHIP_ALPHA_CENTAURI", ()) + "</font></color>", CvUtil.FONT_LEFT_JUSTIFY, self.finishedLabelX, self.finishedLabelY, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 			else: #normal welcome
 				screen.setLabel("FinishedLabel", "SpaceShipMainPanel", "<color=255,255,0><font=4>" + localText.getText("TXT_KEY_SPACE_SHIP_SCREEN_WELCOME", ()) + "</font></color>", CvUtil.FONT_LEFT_JUSTIFY, self.finishedLabelX, self.finishedLabelY, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
@@ -121,7 +123,7 @@ class CvSpaceShipScreen:
 		self.rebuildComponentPanel()
 		
 		#show spaceship screen
-		screen.showScreen(PopupStates.POPUPSTATE_MINIMIZED, False)
+		screen.showScreen(PopupStates.POPUPSTATE_IMMEDIATE, False)
 						
 		return 0
 		
@@ -132,7 +134,8 @@ class CvSpaceShipScreen:
 		#check if already landed spaceship
 		activeTeam = gc.getGame().getActiveTeam()
 		victoryCountdown = gc.getTeam(activeTeam).getVictoryCountdown(self.spaceVictory)
-		if((victoryCountdown != 0) or (gc.getGame().getVictory() == VictoryTypes.NO_VICTORY)):
+		gameState = gc.getGame().getGameState()
+		if(not (((gameState == GameStateTypes.GAMESTATE_EXTENDED) and (victoryCountdown > 0)) or (victoryCountdown == 0))):
 				
 			#loop through each panel
 			for i in range(self.numComponents):
@@ -194,14 +197,12 @@ class CvSpaceShipScreen:
 				
 			#launch button
 			activeTeam = gc.getGame().getActiveTeam()
-			if(victoryCountdown >= 0):
-				victoryCountdown += 1
+			if(victoryCountdown > 0):
 				victoryDate = CyGameTextMgr().getTimeStr(gc.getGame().getGameTurn() + victoryCountdown, false)
 				screen.setLabel("ArrivalLabel1", "SpaceShipMainPanel", "<color=255,255,0><font=3b>" + localText.getText("TXT_KEY_SPACE_SHIP_SCREEN_ARRIVAL", ()) + ": " + victoryDate + "</font></color>", CvUtil.FONT_LEFT_JUSTIFY, self.X_ARRIVAL_LABEL1, self.Y_ARRIVAL_LABEL1, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 				screen.setLabel("ArrivalLabel2", "SpaceShipMainPanel", "<color=255,255,0><font=3b>" + localText.getText("TXT_KEY_REPLAY_SCREEN_TURNS", ()) + ": " + str(victoryCountdown) + "</font></color>", CvUtil.FONT_LEFT_JUSTIFY, self.X_ARRIVAL_LABEL2, self.Y_ARRIVAL_LABEL2, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 			elif(gc.getTeam(gc.getGame().getActiveTeam()).canLaunch(self.spaceVictory)):
 				delay = gc.getTeam(gc.getGame().getActiveTeam()).getVictoryDelay(self.spaceVictory)
-				delay += 1
 				screen.setLabel("LaunchLabel", "SpaceShipMainPanel", "<color=255,255,0><font=3b>" + localText.getText("TXT_KEY_SPACE_SHIP_SCREEN_TRAVEL_TIME_LABEL", (delay,)) + "</font></color>", CvUtil.FONT_LEFT_JUSTIFY, self.X_LAUNCH_LABEL, self.Y_LAUNCH_LABEL, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 				screen.setButtonGFC("LaunchButton", localText.getText("TXT_KEY_SPACE_SHIP_SCREEN_LAUNCH_BUTTON", ()), "", self.X_LAUNCH, self.Y_LAUNCH, self.W_LAUNCH, self.H_LAUNCH, WidgetTypes.WIDGET_GENERAL, self.LAUNCH_BUTTON, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
 			
@@ -264,5 +265,4 @@ class CvSpaceShipScreen:
 		return
 
 	def onClose(self):
-		screen = CyGInterfaceScreen( "SpaceShipScreen", CvScreenEnums.SPACE_SHIP_SCREEN)
-		screen.spaceShipFinalize()
+		return

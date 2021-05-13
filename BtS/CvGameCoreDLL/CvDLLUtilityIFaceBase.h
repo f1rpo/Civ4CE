@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CvDLLUtilityIFaceBase_h
 #define CvDLLUtilityIFaceBase_h
 

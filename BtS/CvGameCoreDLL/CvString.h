@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CvString_h
 #define CvString_h
 
@@ -244,6 +246,8 @@ public:
 	int GetLength() const { return size(); }
 	int Replace( char chOld, char chNew );
 
+	void getTokens(const CvString& delimiters, std::vector<CvString>& tokensOut) const;
+
 	// static helpers
 	static bool formatv(std::string& out, const char * fmt, va_list args);
 	static bool format(std::string & out, const char * fmt, ...);
@@ -268,6 +272,30 @@ inline int CvString::Replace( char chOld, char chNew )
 		}
 	}
 	return iCnt;
+}
+
+inline void CvString::getTokens(const CvString& delimiters, std::vector<CvString>& tokensOut) const
+{
+	//tokenizer code taken from http://www.digitalpeer.com/id/simple
+	
+	// skip delimiters at beginning.
+	size_type lastPos = find_first_not_of(delimiters, 0);
+
+	// find first "non-delimiter".
+	size_type pos = find_first_of(delimiters, lastPos);
+
+	while (CvString::npos != pos || CvString::npos != lastPos)
+	{
+		// found a token, parse it.
+		CvString token = substr(lastPos, pos - lastPos);
+		tokensOut.push_back(token);
+		
+		// skip delimiters.  Note the "not_of"
+		lastPos = find_first_not_of(delimiters, pos);
+
+		// find next "non-delimiter"
+		pos = find_first_of(delimiters, lastPos);
+	}
 }
 
 //

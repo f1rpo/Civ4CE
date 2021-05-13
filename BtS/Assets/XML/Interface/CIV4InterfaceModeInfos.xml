@@ -364,5 +364,17 @@
 			<bSelectType>0</bSelectType>
 			<bSelectAll>0</bSelectAll>
 		</InterfaceModeInfo>
+		<InterfaceModeInfo>
+			<Type>INTERFACEMODE_SAVE_PLOT_NIFS</Type>
+			<Description></Description>
+			<Help/>
+			<CursorType>CURSOR_PING</CursorType>
+			<Mission>NONE</Mission>
+			<bVisible>0</bVisible>
+			<bGotoPlot>0</bGotoPlot>
+			<bHighlightPlot>1</bHighlightPlot>
+			<bSelectType>0</bSelectType>
+			<bSelectAll>0</bSelectAll>
+		</InterfaceModeInfo>
 	</InterfaceModeInfos>
 </Civ4InterfaceModeInfos>

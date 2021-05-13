@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CVDEFINES_H
 #define CVDEFINES_H
 

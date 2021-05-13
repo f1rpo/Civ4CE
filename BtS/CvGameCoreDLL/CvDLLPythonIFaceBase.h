@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CvDLLPythonIFaceBase_h
 #define CvDLLPythonIFaceBase_h
 

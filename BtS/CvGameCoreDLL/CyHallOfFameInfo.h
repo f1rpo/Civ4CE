@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef __CY_HallOfFame_H__
 #define __CY_HallOfFame_H__
 

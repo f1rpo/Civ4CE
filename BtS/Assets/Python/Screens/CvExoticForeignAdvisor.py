@@ -174,7 +174,7 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
 			}
 
 		self.ORDER_LIST = ["RELATIONS", \
-											 "GLANCE", \
+#											 "GLANCE", \
 											 "ACTIVE_TRADE", \
 											 "BONUS", \
 											 "INFO", \
@@ -240,9 +240,6 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
 
 		# Set the background and exit button, and show the screen
 		screen.setDimensions(screen.centerX(0), screen.centerY(0), self.W_SCREEN, self.H_SCREEN)
-#		screen.addDrawControl(self.BACKGROUND_ID, ArtFileMgr.getInterfaceArtInfo("SCREEN_BG_OPAQUE").getPath(), 0, 0, self.W_SCREEN, self.H_SCREEN, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-#		screen.addPanel( "TopPanel", u"", u"", True, False, 0, 0, self.W_SCREEN, 55, PanelStyles.PANEL_STYLE_TOPBAR )
-#		screen.addPanel( "BottomPanel", u"", u"", True, False, 0, 713, self.W_SCREEN, 55, PanelStyles.PANEL_STYLE_BOTTOMBAR )
 		screen.showWindowBackground(False)
 		screen.setText(self.EXIT_ID, "", self.EXIT_TEXT, CvUtil.FONT_RIGHT_JUSTIFY, self.X_EXIT, self.Y_EXIT, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_CLOSE_SCREEN, -1, -1 )
 
@@ -322,8 +319,6 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
 				playerPanelName = self.getNextWidgetName()
 				screen.attachPanel(mainPanelName, playerPanelName, gc.getPlayer(iLoopPlayer).getName(), "", False, True, PanelStyles.PANEL_STYLE_MAIN)
 
-#				screen.attachLabel(playerPanelName, "", "   ")
-
 				screen.attachImageButton(playerPanelName, "", objLeaderHead.getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_LEADERHEAD, iLoopPlayer, -1, False)
 						
 				infoPanelName = self.getNextWidgetName()
@@ -355,18 +350,6 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
 					objCivicInfo = gc.getCivicInfo (nFavoriteCivic)
 					screen.attachImageButton (infoPanelName, "", objCivicInfo.getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIVIC, nFavoriteCivic, 1, False)
 					screen.attachTextGFC(infoPanelName, "", "(" + gc.getCivicOptionInfo (objCivicInfo.getCivicOptionType()).getDescription() + ")", FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-
-#				if (not gc.getTeam(playerActive.getTeam()).isGoldTrading() and not gc.getTeam(gc.getPlayer(iLoopPlayer).getTeam()).isGoldTrading() and not gc.getGame().isDebugMode()):
-#					screen.attachTextGFC(infoPanelName, "", localText.getText("TXT_KEY_FOREIGN_ADVISOR_NO_GOLD_TRADING", ()), FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-#				else:
-#					tradeData = TradeData()
-#					tradeData.ItemType = TradeableItems.TRADE_GOLD
-#					tradeData.iData = gc.getPlayer(iLoopPlayer).getGold()
-#					if (iLoopPlayer != self.iActiveLeader and gc.getPlayer(iLoopPlayer).canTradeItem(self.iActiveLeader, tradeData)):
-#						ExoticForPrint ("Can trade %d gold!" % tradeData.iData)
-#					else:
-#						ExoticForPrint ("Cannot trade %d gold!" % tradeData.iData)
-#					screen.attachTextGFC(infoPanelName, "", localText.getText("TXT_KEY_FOREIGN_ADVISOR_NUM_GOLD", (gc.getPlayer (iLoopPlayer).getGold(), 0)), FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 
 	def calculateTrade (self, nPlayer, nTradePartner):
 		# Trade status...
@@ -823,26 +806,7 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
 			self.resIconGrid.scrollDown()
 		elif (self.iScreen == self.SCREEN_DICT["TECH"]):
 			self.techIconGrid.scrollDown()
-		
-	def canResearch (self, iTech, stTechHas):
-		bCanResearch = True
-		for iRequiredTech in self.objTechTree.RequiredPrereqs (iTech):
-			if iRequiredTech not in stTechHas:
-#				ExoticForPrint ("We do not have required tech %s (%d)" % (gc.getTechInfo(iRequiredTech).getDescription(), iRequiredTech))
-				bCanResearch = False
-				break
-		if bCanResearch:
-			ltOptional = self.objTechTree.OptionalPrereqs (iTech)
-			if not ltOptional:
-				return bCanResearch
-			bCanResearch = False
-			for iOptionalTech in ltOptional:
-				if iOptionalTech in stTechHas:
-#					ExoticForPrint ("We do have optional tech %s (%d)" % (gc.getTechInfo(iOptionalTech).getDescription(), iOptionalTech))
-					bCanResearch = True
-					break
-		return bCanResearch
-		
+				
 	def drawTechDeals(self, bInitial):
 		screen = self.getScreen()
 		activePlayer = gc.getPlayer(self.iActiveLeader)
@@ -864,14 +828,7 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
 		self.techIconGrid.clearData()
 		tradeData = TradeData()
 		tradeData.ItemType = TradeableItems.TRADE_TECHNOLOGIES
-		prereqData = TradeData()
-		prereqData.ItemType = TradeableItems.TRADE_TECHNOLOGIES
 		currentRow = 0
-
-		stActiveTechCanResearch = set()
-		for iLoopTech in range(gc.getNumTechInfos()):
-			if activePlayer.canResearch (iLoopTech, False):
-				stActiveTechCanResearch.add (iLoopTech)
 		
 		for iLoopPlayer in range(gc.getMAX_PLAYERS()):
 			currentPlayer = gc.getPlayer(iLoopPlayer)
@@ -891,22 +848,17 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
 					self.techIconGrid.setText(currentRow, 3, sAmount)
 				
 				if (gc.getTeam(activePlayer.getTeam()).isTechTrading() or gc.getTeam(currentPlayer.getTeam()).isTechTrading() ):
-					stTechCanResearch = stActiveTechCanResearch.copy()
-					stTechWants = set()
-					stTechCanTrade = set()
-					stTechHas = set()
 
 					for iLoopTech in range(gc.getNumTechInfos()):
-						if (gc.getTeam(activePlayer.getTeam()).isHasTech (iLoopTech)):
-							stTechHas.add (iLoopTech)
+					
 						tradeData.iData = iLoopTech
 						if (activePlayer.canTradeItem(iLoopPlayer, tradeData, False)): # wants
 							self.techIconGrid.addIcon( currentRow, 1, gc.getTechInfo(iLoopTech).getButton()
 																				 , WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iLoopTech )
-							stTechWants.add (iLoopTech)
-
+						elif currentPlayer.canResearch(iLoopTech, False):
+							self.techIconGrid.addIcon( currentRow, 2, gc.getTechInfo(iLoopTech).getButton()
+																			, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iLoopTech )
 						if (currentPlayer.canTradeItem(self.iActiveLeader, tradeData, False)):
-							stTechCanTrade.add (iLoopTech)
 							if (currentPlayer.getTradeDenial(self.iActiveLeader, tradeData) == DenialTypes.NO_DENIAL): # will trade
 								self.techIconGrid.addIcon( currentRow, 4, gc.getTechInfo(iLoopTech).getButton()
 																					 , WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iLoopTech )
@@ -916,65 +868,6 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
 						elif (gc.getTeam(currentPlayer.getTeam()).isHasTech(iLoopTech) and activePlayer.canResearch(iLoopTech, False)):
 							self.techIconGrid.addIcon( currentRow, 6, gc.getTechInfo(iLoopTech).getButton()
 																					 , WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iLoopTech )
-
-#					ExoticForPrint ("%s" % stTechCanResearch)
-
-					stTechHas.difference_update (stTechWants)
-					while (len (stTechWants) != 0):
-						iWantTech = stTechWants.pop()
-#						ExoticForPrint ("%s, %s = %d" % (stTechWants, gc.getTechInfo (iWantTech).getDescription(), iWantTech))
-						ltRequiredPrereqFor = self.objTechTree.RequiredLeadsTo (iWantTech)
-						ltOptionalPrereqFor = self.objTechTree.OptionalLeadsTo (iWantTech)
-						for iNextTech in ltRequiredPrereqFor:
-							if iNextTech in stTechCanResearch:
-								stTechCanResearch.remove (iNextTech)
-#								ExoticForPrint ("Removing %s (%d)" % (gc.getTechInfo (iNextTech).getDescription(), iNextTech))
-							elif iNextTech in stTechHas:
-								stTechWants.add (iNextTech)
-								stTechHas.remove (iNextTech)
-#								ExoticForPrint ("Adding %s (%d)" % (gc.getTechInfo (iNextTech).getDescription(), iNextTech))
-
-						for iNextTech in ltOptionalPrereqFor:
-							bCanResearch = self.canResearch (iNextTech, stTechHas)
-
-							if iNextTech in stTechCanResearch:
-								if not bCanResearch:
-									stTechCanResearch.remove (iNextTech)
-#									ExoticForPrint ("Removing %s (%d)" % (gc.getTechInfo (iNextTech).getDescription(), iNextTech))
-							elif not bCanResearch and iNextTech in stTechHas:
-								stTechWants.add (iNextTech)
-								stTechHas.remove (iNextTech)
-#								ExoticForPrint ("Adding %s (%d)" % (gc.getTechInfo (iNextTech).getDescription(), iNextTech))
-
-					for iLoopTech in stTechCanTrade:
-						stTechHas.add (iLoopTech)
-
-						ltRequiredPrereqFor = self.objTechTree.RequiredLeadsTo (iLoopTech)
-						ltOptionalPrereqFor = self.objTechTree.OptionalLeadsTo (iLoopTech)
-
-#						ExoticForPrint ("%s Prereq for %s, %s" % (gc.getTechInfo (iLoopTech).getDescription(), ltRequiredPrereqFor, ltOptionalPrereqFor))
-
-						for iNextTech in ltRequiredPrereqFor:
-#							ExoticForPrint ("************Testing %s (%d)" % (gc.getTechInfo (iNextTech).getDescription(), iNextTech))
-							bCanResearch = self.canResearch (iNextTech, stTechHas)
-							if bCanResearch and iNextTech not in stActiveTechCanResearch:
-								stTechCanResearch.add (iNextTech)
-#								ExoticForPrint ("Adding %s (%d)" % (gc.getTechInfo (iNextTech).getDescription(), iNextTech))
-
-						for iNextTech in ltOptionalPrereqFor:
-#							ExoticForPrint ("************Testing %s (%d)" % (gc.getTechInfo (iNextTech).getDescription(), iNextTech))
-							bCanResearch = self.canResearch (iNextTech, stTechHas)
-							if bCanResearch:
-								stTechCanResearch.add (iNextTech)
-#								ExoticForPrint ("Adding %s (%d)" % (gc.getTechInfo (iNextTech).getDescription(), iNextTech))
-
-					for iLoopTech in stTechCanTrade:
-						if iLoopTech in stTechCanResearch:
-							stTechCanResearch.remove (iLoopTech)
-
-					for iLoopTech in stTechCanResearch:
-						self.techIconGrid.addIcon( currentRow, 2, gc.getTechInfo(iLoopTech).getButton()
-																			, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iLoopTech )
 
 				currentRow += 1
 		self.techIconGrid.refresh()
@@ -1032,7 +925,8 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
 					self.iSelectedLeader = inputClass.getData1()
 					self.drawContents(False)
 				elif (inputClass.getFlags() & MouseFlags.MOUSE_RBUTTONUP):
-					self.getScreen().hideScreen()
+					if inputClass.getData1() != self.iActiveLeader:
+						self.getScreen().hideScreen()
 			elif (inputClass.getFunctionName() == self.GLANCE_BUTTON):
 				self.handlePlusMinusToggle()
 ############################################

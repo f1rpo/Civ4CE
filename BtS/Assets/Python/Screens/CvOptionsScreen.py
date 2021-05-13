@@ -99,6 +99,7 @@ class CvOptionsScreen:
 		self.getTabControl().setValue("GraphicsLevelDropdownBox", UserProfile.getGraphicsLevel() )
 		self.getTabControl().setValue("RenderQualityDropdownBox", UserProfile.getRenderQualityLevel() )
 		self.getTabControl().setValue("GlobeViewDropdownBox", UserProfile.getGlobeViewRenderLevel() )
+		self.getTabControl().setValue("MovieDropdownBox", UserProfile.getMovieQualityLevel() )
 		self.getTabControl().setValue("MainMenuDropdownBox", UserProfile.getMainMenu() )
 		
 		# Graphic Option Checkboxes
@@ -453,6 +454,17 @@ class CvOptionsScreen:
 		szCallbackFunction = "handleGlobeViewDropdownBoxInput"
 		szWidgetName = self.szGlobeViewDropdownBoxName = "GlobeViewDropdownBox"
 		iInitialSelection = UserProfile.getGlobeViewRenderLevel()
+		tab.attachDropDown(vbox2, szWidgetName, szDropdownDesc, aszDropdownElements, self.callbackIFace, szCallbackFunction, szWidgetName, iInitialSelection)		
+		
+		# Movies
+		tab.attachLabel(vbox1, "MovieLabel", localText.getText("TXT_KEY_GRAPHICS_SETTINGS_MOVIE_QUALITY", ()))
+		tab.setControlFlag("MovieLabel", "CF_LABEL_DEFAULTSIZE")
+				
+		szDropdownDesc = "MovieDropdownBox"
+		aszDropdownElements = (localText.getText("TXT_KEY_SEALEVEL_HIGH", ()), localText.getText("TXT_KEY_SEALEVEL_MEDIUM", ()), localText.getText("TXT_KEY_SEALEVEL_LOW", ()))
+		szCallbackFunction = "handleMovieDropdownBoxInput"
+		szWidgetName = self.szMovieDropdownBoxName = "MovieDropdownBox"
+		iInitialSelection = UserProfile.getMovieQualityLevel()
 		tab.attachDropDown(vbox2, szWidgetName, szDropdownDesc, aszDropdownElements, self.callbackIFace, szCallbackFunction, szWidgetName, iInitialSelection)		
 
 		# Main menu

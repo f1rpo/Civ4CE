@@ -18,14 +18,6 @@
 		<Spanish>Los [COLOR_TECH_TEXT]Ordenadores[COLOR_REVERT] permiten la construcci&#243;n del proyecto [COLOR_PROJECT_TEXT]Internet[COLOR_REVERT] y del potente [COLOR_UNIT_TEXT]Blindado moderno[COLOR_REVERT]. Tambi&#233;n dejan obsoletos [COLOR_BUILDING_TEXT]Angkor Wat[COLOR_REVERT], la [COLOR_BUILDING_TEXT]Universidad de Sankore[COLOR_REVERT] y el [COLOR_BUILDING_TEXT]Minarete Helicoidal[COLOR_REVERT].</Spanish>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_BUILDING_SCOTLAND_YARD_STRATEGY</Tag>
-		<English>[COLOR_BUILDING_TEXT]Scotland Yard[COLOR_REVERT] provides a +100%% bonus to Espionage output and increases the chances of a [COLOR_UNIT_TEXT]Great Spy[COLOR_REVERT] appearing.</English>
-		<French>[COLOR_BUILDING_TEXT]Scotland Yard[COLOR_REVERT] double votre production d'espionnage et augmente les chances d'apparition d'un [COLOR_UNIT_TEXT]Espion illustre[COLOR_REVERT].</French>
-		<German>[COLOR_BUILDING_TEXT]Scotland Yard[COLOR_REVERT] gew&#228;hrt einen +100%% Bonus auf Spionageleistungen und dar&#252;ber hinaus erh&#246;hen sich die Chancen der Stadt, einen [COLOR_UNIT_TEXT]Gro&#223;en Spion[COLOR_REVERT] hervorzubringen.</German>
-		<Italian>[COLOR_BUILDING_TEXT]Scotland Yard[COLOR_REVERT] d&#224; un bonus del +100%% alla resa dello spionaggio e aumenta le probabilit&#224; che appaia una [COLOR_UNIT_TEXT]Grande Spia[COLOR_REVERT].</Italian>
-		<Spanish>[COLOR_BUILDING_TEXT]Scotland Yard[COLOR_REVERT] proporciona una bonificaci&#243;n de +100% al rendimiento del Espionaje y aumenta las posibilidades de que aparezca un [COLOR_UNIT_TEXT]Gran esp&#237;a[COLOR_REVERT].</Spanish>
-	</TEXT>
-	<TEXT>
 		<Tag>TXT_KEY_BUILDING_PENTAGON_STRATEGY</Tag>
 		<English>Once the [COLOR_BUILDING_TEXT]Pentagon[COLOR_REVERT] is built, all new units built in your civilization receive two experience points and increases the chance that its city more likely to generate a [COLOR_UNIT_TEXT]Great Spy[COLOR_REVERT].</English>
 		<French>Une fois le [COLOR_BUILDING_TEXT]Pentagone[COLOR_REVERT] construit, toutes les nouvelles unit&#233;s produites par votre civilisation re&#231;oivent 2 points d'exp&#233;rience. Le Pentagone favorise aussi l'apparition d'un [COLOR_UNIT_TEXT]Espion illustre[COLOR_REVERT] dans la ville o&#249; il se trouve.</French>
@@ -267,11 +259,11 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_BUILDING_DIPLO_VOTE</Tag>
-		<English>[ICON_BULLET]Triggers %s1 [LINK=CONCEPT_UNITED_NATIONS]Global Elections[\LINK]</English>
-		<French>[ICON_BULLET]D&#233;clenche %s1 [LINK=CONCEPT_UNITED_NATIONS]&#233;lections mondiales[\LINK]</French>
-		<German>[ICON_BULLET]L&#246;st [LINK=CONCEPT_UNITED_NATIONS]globale Wahlen[\LINK] aus (%s1).</German>
-		<Italian>[ICON_BULLET]Attiva le %s1 [LINK=CONCEPT_UNITED_NATIONS]Elezioni globali[\LINK]</Italian>
-		<Spanish>[ICON_BULLET]Activa el [LINK=CONCEPT_UNITED_NATIONS]sufragio mundial[\LINK] (%s1).</Spanish>
+		<English>[ICON_BULLET]Triggers %s1 Global Elections</English>
+		<French>[ICON_BULLET]D&#233;clenche %s1 &#233;lections mondiales</French>
+		<German>[ICON_BULLET]L&#246;st globale Wahlen aus (%s1).</German>
+		<Italian>[ICON_BULLET]Attiva le %s1 Elezioni globali</Italian>
+		<Spanish>[ICON_BULLET]Activa el sufragio mundial (%s1).</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_POPUP_CHOOSE_ELECTION</Tag>
@@ -307,11 +299,11 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMBAT_MESSAGE_TERRAIN</Tag>
-		<English>(Terrain Defense: %d%%)</English>
-		<French>(D&#233;fense terrain : %d%%)</French>
-		<German>(Gel&#228;ndeverteidigung: %d%%)</German>
-		<Italian>(Difesa da terreno: %d%%)</Italian>
-		<Spanish>(Defender terreno: %d%%)</Spanish>
+		<English>(Terrain Defense: %d1%%)</English>
+		<French>(D&#233;fense terrain : %d1%%)</French>
+		<German>(Gel&#228;ndeverteidigung: %d1%%)</German>
+		<Italian>(Difesa da terreno: %d1%%)</Italian>
+		<Spanish>(Defender terreno: %d1%%)</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>AI_DIPLO_CHANGED_FIRST_CONTACT_LEADER_RAGNAR_LODBROK_1</Tag>
@@ -600,5 +592,13 @@
 		<German>[ICON_BULLET]Hilft, gegnerische Spione zu stoppen</German>
 		<Italian>[ICON_BULLET]Aiuta a ostacolare le spie nemiche</Italian>
 		<Spanish>[ICON_BULLET]Ayuda a desenmascarar a los esp&#237;as rivales</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_PLAYER_OPTION_QUICK_MOVES_HELP</Tag>
+		<English>All of the player's moves are accelerated</English>
+		<French>Tous les mouvements du joueur sont acc&#233;l&#233;r&#233;s.</French>
+		<German>Alle eigenen Spielz&#252;ge werden beschleunigt</German>
+		<Italian>Tutti i movimenti del giocatore vengono velocizzati</Italian>
+		<Spanish>Todos los movimientos del jugador se aceleran.</Spanish>
 	</TEXT>
 </Civ4GameText>

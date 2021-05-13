@@ -66,7 +66,7 @@ def getWrapY():
 	return (map.getCustomMapOption(0) == 2)
 
 def getTopLatitude():
-	return 95
+	return 90
 	
 def getBottomLatitude():
 	return 70

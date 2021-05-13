@@ -1049,13 +1049,16 @@ class CvMainInterface:
 						elif ( eOrderNodeType == OrderTypes.ORDER_MAINTAIN ):
 							screen.hide( "InterfaceUnitModel" )
 							bHandled = True
-							
+													
 				if ( not bHandled ):
 					screen.hide( "InterfaceUnitModel" )
 					bHandled = True
 
+				screen.moveToFront("SelectedCityText")
+
 			elif ( CyInterface().getHeadSelectedUnit() ):
 				screen.addUnitGraphicGFC( "InterfaceUnitModel", CyInterface().getHeadSelectedUnit().getUnitType(), 175, yResolution - 138, 123, 132, WidgetTypes.WIDGET_UNIT_MODEL, CyInterface().getHeadSelectedUnit().getUnitType(), -1,  -20, 30, 1, False )
+				screen.moveToFront("SelectedUnitText")
 			else:
 				screen.hide( "InterfaceUnitModel" )
 		else:
@@ -1125,7 +1128,7 @@ class CvMainInterface:
 							szFileName = ArtFileMgr.getInterfaceArtInfo("OVERLAY_NOMOVE").getPath()
 
 						szString = "PlotListButton" + str(iCount)
-						screen.changeImageButton( szString, gc.getUnitInfo(pLoopUnit.getUnitType()).getButton() )
+						screen.changeImageButton( szString, pLoopUnit.getButton() )
 						if ( pLoopUnit.getOwner() == gc.getGame().getActivePlayer() ):
 							bEnable = True
 						else:
@@ -1388,11 +1391,12 @@ class CvMainInterface:
 					eLoopUnit = gc.getCivilizationInfo(pHeadSelectedCity.getCivilizationType()).getCivilizationUnits(i)
 
 					if (pHeadSelectedCity.canTrain(eLoopUnit, False, True)):
-						screen.appendMultiListButton( "BottomButtonContainer", gc.getUnitInfo(eLoopUnit).getButton(), iRow, WidgetTypes.WIDGET_TRAIN, i, -1, False )
+						szButton = gc.getPlayer(pHeadSelectedCity.getOwner()).getUnitButton(eLoopUnit)
+						screen.appendMultiListButton( "BottomButtonContainer", szButton, iRow, WidgetTypes.WIDGET_TRAIN, i, -1, False )
 						screen.show( "BottomButtonContainer" )
 						
 						if ( not pHeadSelectedCity.canTrain(eLoopUnit, False, False) ):
-							screen.disableMultiListButton( "BottomButtonContainer", iRow, iCount, gc.getUnitInfo(eLoopUnit).getButton() )
+							screen.disableMultiListButton( "BottomButtonContainer", iRow, iCount, szButton)
 						
 						iCount = iCount + 1
 						bFound = True
@@ -2816,7 +2820,7 @@ class CvMainInterface:
 										bEspionageCanSeeResearch = false
 										for iMissionLoop in range(gc.getNumEspionageMissionInfos()):
 											if (gc.getEspionageMissionInfo(iMissionLoop).isSeeResearch()):
-												bEspionageCanSeeResearch = gc.getPlayer(gc.getGame().getActivePlayer()).canDoEspionageMission(iMissionLoop, ePlayer, CyMap().plot(-1,-1), -1)
+												bEspionageCanSeeResearch = gc.getPlayer(gc.getGame().getActivePlayer()).canDoEspionageMission(iMissionLoop, ePlayer, None, -1)
 												break
 										
 										if (((gc.getPlayer(ePlayer).getTeam() == gc.getGame().getActiveTeam()) and (gc.getTeam(gc.getGame().getActiveTeam()).getNumMembers() > 1)) or (gc.getTeam(gc.getPlayer(ePlayer).getTeam()).isVassal(gc.getGame().getActiveTeam())) or gc.getGame().isDebugMode() or bEspionageCanSeeResearch):

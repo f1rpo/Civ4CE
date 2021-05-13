@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CvDLLEngineIFaceBase_h
 #define CvDLLEngineIFaceBase_h
 
@@ -17,7 +19,7 @@ public:
 	virtual void SetObeyEntityVisibleFlags(bool bObeyHide) = 0;
 	virtual void AutoSave(bool bInitial = false) = 0;
 	virtual void SaveReplay(PlayerTypes ePlayer = NO_PLAYER) = 0;
-	virtual void SaveGame(const TCHAR* pszFilename = NULL, SaveGameTypes eType = SAVEGAME_NORMAL) = 0;
+	virtual void SaveGame(CvString& szFilename, SaveGameTypes eType = SAVEGAME_NORMAL) = 0;
 	virtual void DoTurn() = 0;
 	virtual void ClearMinimap()	 = 0;
 	virtual byte GetLandscapePlotTerrainData(uint uiX, uint uiY, uint uiPointX, uint uiPointY) = 0;
@@ -77,6 +79,8 @@ public:
 
 	virtual void TriggerEffect(int iEffect, NiPoint3 pt3Point, float rotation = 0.0f) = 0;
 	virtual void printProfileText() = 0;
+
+	virtual void clearSigns() = 0;
 
 	// dirty bits
 	virtual void SetDirty(EngineDirtyBits eBit, bool bNewValue) = 0;

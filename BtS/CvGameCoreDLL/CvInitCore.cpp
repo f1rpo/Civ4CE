@@ -411,6 +411,14 @@ void CvInitCore::reassignPlayer(PlayerTypes eOldID, PlayerTypes eNewID)
 		{
 			setActivePlayer(eOldID);
 		}
+
+		if(CvPlayerAI::areStaticsInitialized())
+		{
+			GET_PLAYER(eOldID).updateTeamType();
+			GET_PLAYER(eNewID).updateTeamType();
+			GET_PLAYER(eOldID).updateHuman();
+			GET_PLAYER(eNewID).updateHuman();
+		}
 	}
 }
 
@@ -655,6 +663,12 @@ void CvInitCore::resetPlayer(PlayerTypes eID)
 		m_abReady[eID] = false;
 		m_aszPythonCheck[eID].clear();
 		m_aszXMLCheck[eID].clear();
+
+		if(CvPlayerAI::areStaticsInitialized())
+		{
+			GET_PLAYER(eID).updateTeamType();
+			GET_PLAYER(eID).updateHuman();
+		}
 	}
 }
 
@@ -1137,6 +1151,18 @@ void CvInitCore::setActivePlayer(PlayerTypes eActivePlayer)
 	}
 }
 
+void CvInitCore::setType(GameType eType)
+{
+	m_eType = eType;
+
+	if(CvPlayerAI::areStaticsInitialized())
+	{
+		for (int i = 0; i < MAX_PLAYERS; ++i)
+		{
+			GET_PLAYER((PlayerTypes)i).updateHuman();
+		}
+	}
+}
 
 void CvInitCore::setType(const CvWString & szType)
 {
@@ -1154,6 +1180,20 @@ void CvInitCore::setType(const CvWString & szType)
 		setType(GAME_NONE);
 	}
 }
+
+void CvInitCore::setMode(GameMode eMode)
+{
+	m_eMode = eMode;
+
+	if(CvPlayerAI::areStaticsInitialized())
+	{
+		for (int i = 0; i < MAX_PLAYERS; ++i)
+		{
+			GET_PLAYER((PlayerTypes)i).updateHuman();
+		}
+	}
+}
+
 
 const CvWString & CvInitCore::getLeaderName(PlayerTypes eID, uint uiForm) const
 {
@@ -1177,6 +1217,7 @@ void CvInitCore::setLeaderName(PlayerTypes eID, const CvWString & szLeaderName)
 	{
 		CvWString szName = szLeaderName;
 		gDLL->stripSpecialCharacters(szName);
+
 		m_aszLeaderName[eID] = szName;
 	}
 }
@@ -1510,6 +1551,11 @@ void CvInitCore::setTeam(PlayerTypes eID, TeamTypes eTeam)
 	if ( checkBounds(eID, 0, MAX_PLAYERS) )
 	{
 		m_aeTeam[eID] = eTeam;
+		
+		if(CvPlayerAI::areStaticsInitialized())
+		{
+			GET_PLAYER(eID).updateTeamType();
+		}
 	}
 }
 
@@ -1599,6 +1645,11 @@ void CvInitCore::setSlotStatus(PlayerTypes eID, SlotStatus eSlotStatus)
 	if ( checkBounds(eID, 0, MAX_PLAYERS) )
 	{
 		m_aeSlotStatus[eID] = eSlotStatus;
+
+		if(CvPlayerAI::areStaticsInitialized())
+		{
+			GET_PLAYER(eID).updateHuman();
+		}
 	}
 }
 
@@ -1878,12 +1929,13 @@ void CvInitCore::read(FDataStreamBase* pStream)
 	pStream->Read(MAX_PLAYERS, (int*)m_aeCiv);
 	pStream->Read(MAX_PLAYERS, (int*)m_aeLeader);
 	pStream->Read(MAX_PLAYERS, (int*)m_aeTeam);
+
+
 	pStream->Read(MAX_PLAYERS, (int*)m_aeHandicap);
 	pStream->Read(MAX_PLAYERS, (int*)m_aeColor);
 	pStream->Read(MAX_PLAYERS, (int*)m_aeArtStyle);
 
 	pStream->Read(MAX_PLAYERS, (int*)m_aeSlotStatus);
-
 	pStream->Read(MAX_PLAYERS, (int*)m_aeSlotClaim);
 
 	for (int i=0;i<MAX_PLAYERS;i++)
@@ -1896,6 +1948,15 @@ void CvInitCore::read(FDataStreamBase* pStream)
 
 	pStream->Read(MAX_PLAYERS, m_abPlayableCiv);
 	pStream->Read(MAX_PLAYERS, m_abMinorNationCiv);
+
+	if(CvPlayerAI::areStaticsInitialized())
+	{
+		for (int i=0;i<MAX_PLAYERS;i++)
+		{
+			GET_PLAYER((PlayerTypes)i).updateHuman();
+			GET_PLAYER((PlayerTypes) i).updateTeamType();
+		}
+	}
 }
 
 

@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CyGlobalContext_h
 #define CyGlobalContext_h
 
@@ -287,6 +289,7 @@ public:
 	int getSEAWATER_SEE_FROM_CHANGE() const { return GC.getSEAWATER_SEE_FROM_CHANGE(); }
 	int getPEAK_SEE_FROM_CHANGE() const { return GC.getPEAK_SEE_FROM_CHANGE(); }
 	int getHILLS_SEE_FROM_CHANGE() const { return GC.getHILLS_SEE_FROM_CHANGE(); }
+	int getUSE_SPIES_NO_ENTER_BORDERS() const { return GC.getUSE_SPIES_NO_ENTER_BORDERS(); }
 
 	float getCAMERA_MIN_YAW() const { return GC.getCAMERA_MIN_YAW(); }
 	float getCAMERA_MAX_YAW() const { return GC.getCAMERA_MAX_YAW(); }

@@ -1,3 +1,5 @@
+#pragma once
+
 //  $Header:
 //------------------------------------------------------------------------------------------------
 //
@@ -43,6 +45,7 @@ public:
 	DllExport int getCurrentLanguage();
 
 	DllExport void setTimeStr(CvWString& szString, int iGameTurn, bool bSave);
+	DllExport void setYearStr(CvWString& szString, int iGameTurn, bool bSave, CalendarTypes eCalendar, int iStartYear, GameSpeedTypes eSpeed);
 	DllExport void setDateStr(CvWString& szString, int iGameTurn, bool bSave, CalendarTypes eCalendar, int iStartYear, GameSpeedTypes eSpeed);
 	DllExport void setInterfaceTime(CvWString& szString, PlayerTypes ePlayer);
 	DllExport void setGoldStr(CvWString& szString, PlayerTypes ePlayer);
@@ -100,7 +103,7 @@ public:
 	DllExport void setConvertHelp(CvWStringBuffer& szBuffer, PlayerTypes ePlayer, ReligionTypes eReligion);
 	DllExport void setRevolutionHelp(CvWStringBuffer& szBuffer, PlayerTypes ePlayer);
 	DllExport void setVassalRevoltHelp(CvWStringBuffer& szBuffer, TeamTypes eMaster, TeamTypes eVassal);
-	DllExport void setEventHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, int iEventTriggeredId);
+	DllExport void setEventHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, int iEventTriggeredId, PlayerTypes ePlayer);
 	DllExport void setTradeRouteHelp(CvWStringBuffer &szBuffer, int iRoute, CvCity* pCity);
 	DllExport void setEspionageCostHelp(CvWStringBuffer &szBuffer, EspionageMissionTypes eMission, PlayerTypes eTargetPlayer, const CvPlot* pPlot, int iExtraData, const CvUnit* pSpyUnit);
 	DllExport void setEspionageMissionHelp(CvWStringBuffer &szBuffer, const CvUnit* pUnit);
@@ -170,8 +173,8 @@ public:
 	DllExport void buildFinanceForeignIncomeString(CvWStringBuffer& szDetails, PlayerTypes ePlayer);
 
 private:
-	void eventTechHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, TechTypes eTech, PlayerTypes eOtherPlayer);
-	void eventGoldHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, PlayerTypes eOtherPlayer);
+	void eventTechHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, TechTypes eTech, PlayerTypes ePlayer, PlayerTypes eOtherPlayer);
+	void eventGoldHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, PlayerTypes ePlayer, PlayerTypes eOtherPlayer);
 
 	struct ltstr
 	{

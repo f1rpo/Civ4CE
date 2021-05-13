@@ -92,7 +92,7 @@
 			<Description>TXT_KEY_UNIT_EXECUTIVE_1</Description>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>-1</iMaxTeamInstances>
-			<iMaxPlayerInstances>3</iMaxPlayerInstances>
+			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iInstanceCostModifier>0</iInstanceCostModifier>
 			<DefaultUnit>UNIT_EXECUTIVE_1</DefaultUnit>
 		</UnitClassInfo>
@@ -101,7 +101,7 @@
 			<Description>CHANGED_TXT_KEY_UNIT_EXECUTIVE_2</Description>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>-1</iMaxTeamInstances>
-			<iMaxPlayerInstances>3</iMaxPlayerInstances>
+			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iInstanceCostModifier>0</iInstanceCostModifier>
 			<DefaultUnit>UNIT_EXECUTIVE_2</DefaultUnit>
 		</UnitClassInfo>
@@ -110,7 +110,7 @@
 			<Description>TXT_KEY_UNIT_EXECUTIVE_3</Description>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>-1</iMaxTeamInstances>
-			<iMaxPlayerInstances>3</iMaxPlayerInstances>
+			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iInstanceCostModifier>0</iInstanceCostModifier>
 			<DefaultUnit>UNIT_EXECUTIVE_3</DefaultUnit>
 		</UnitClassInfo>
@@ -119,7 +119,7 @@
 			<Description>TXT_KEY_UNIT_EXECUTIVE_4</Description>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>-1</iMaxTeamInstances>
-			<iMaxPlayerInstances>3</iMaxPlayerInstances>
+			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iInstanceCostModifier>0</iInstanceCostModifier>
 			<DefaultUnit>UNIT_EXECUTIVE_4</DefaultUnit>
 		</UnitClassInfo>
@@ -128,7 +128,7 @@
 			<Description>TXT_KEY_UNIT_EXECUTIVE_5</Description>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>-1</iMaxTeamInstances>
-			<iMaxPlayerInstances>3</iMaxPlayerInstances>
+			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iInstanceCostModifier>0</iInstanceCostModifier>
 			<DefaultUnit>UNIT_EXECUTIVE_5</DefaultUnit>
 		</UnitClassInfo>
@@ -137,7 +137,7 @@
 			<Description>TXT_KEY_UNIT_EXECUTIVE_6</Description>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>-1</iMaxTeamInstances>
-			<iMaxPlayerInstances>3</iMaxPlayerInstances>
+			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iInstanceCostModifier>0</iInstanceCostModifier>
 			<DefaultUnit>UNIT_EXECUTIVE_6</DefaultUnit>
 		</UnitClassInfo>
@@ -146,7 +146,7 @@
 			<Description>TXT_KEY_UNIT_EXECUTIVE_7</Description>
 			<iMaxGlobalInstances>-1</iMaxGlobalInstances>
 			<iMaxTeamInstances>-1</iMaxTeamInstances>
-			<iMaxPlayerInstances>3</iMaxPlayerInstances>
+			<iMaxPlayerInstances>-1</iMaxPlayerInstances>
 			<iInstanceCostModifier>0</iInstanceCostModifier>
 			<DefaultUnit>UNIT_EXECUTIVE_7</DefaultUnit>
 		</UnitClassInfo>

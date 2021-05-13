@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CIV4_MAP_H
 #define CIV4_MAP_H
 

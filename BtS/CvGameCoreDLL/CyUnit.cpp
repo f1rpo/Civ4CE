@@ -109,10 +109,9 @@ bool CyUnit::canMoveThrough(CyPlot* pPlot)
 	return m_pUnit ? m_pUnit->canMoveThrough(pPlot->getPlot()) : false;
 }
 
-void CyUnit::jumpToNearestValidPlot()
+bool CyUnit::jumpToNearestValidPlot()
 {
-	if (m_pUnit)
-		m_pUnit->jumpToNearestValidPlot();
+	return m_pUnit ? m_pUnit->jumpToNearestValidPlot() : false;
 }
 
 bool CyUnit::canAutomate(AutomateTypes eAutomate)
@@ -486,9 +485,14 @@ int /*InvisibleTypes*/ CyUnit::getInvisibleType()
 	return m_pUnit ? (int) m_pUnit->getInvisibleType() : (int) NO_INVISIBLE;
 }
 
-int /*InvisibleTypes*/ CyUnit::getSeeInvisibleType()
+int CyUnit::getNumSeeInvisibleTypes()
 {
-	return m_pUnit ? (int) m_pUnit->getSeeInvisibleType() : (int) NO_INVISIBLE;
+	return m_pUnit ? m_pUnit->getNumSeeInvisibleTypes() : -1;
+}
+
+int /*InvisibleTypes*/ CyUnit::getSeeInvisibleType(int i)
+{
+	return m_pUnit ? (int) m_pUnit->getSeeInvisibleType(i) : (int) NO_INVISIBLE;
 }
 
 int CyUnit::flavorValue(int /*FlavorTypes*/ eFlavor)
@@ -611,9 +615,9 @@ bool CyUnit::isGoldenAge()
 	return m_pUnit ? m_pUnit->isGoldenAge() : false;
 }
 
-bool CyUnit::canCoexistWithEnemyUnit()
+bool CyUnit::canCoexistWithEnemyUnit(int /*TeamTypes*/ eTeam)
 {
-	return m_pUnit ? m_pUnit->canCoexistWithEnemyUnit() : false;
+	return m_pUnit ? m_pUnit->canCoexistWithEnemyUnit((TeamTypes)eTeam) : false;
 }
 
 bool CyUnit::isFighting()
@@ -1475,7 +1479,7 @@ int CyUnit::getVisualOwner()
 
 int CyUnit::getCombatOwner(int iForTeam)
 {
-	return m_pUnit ? m_pUnit->getCombatOwner((TeamTypes)iForTeam) : -1;
+	return m_pUnit ? m_pUnit->getCombatOwner((TeamTypes)iForTeam, m_pUnit->plot()) : -1;
 }
 
 int CyUnit::getTeam()
@@ -1663,4 +1667,9 @@ void CyUnit::rangeStrike(int iX, int iY)
 const CvArtInfoUnit* CyUnit::getArtInfo(int i, EraTypes eEra) const
 {
 	return m_pUnit ? m_pUnit->getArtInfo(i, eEra) : NULL;
+}
+
+std::string CyUnit::getButton() const
+{
+	return m_pUnit ? m_pUnit->getButton() : "";
 }

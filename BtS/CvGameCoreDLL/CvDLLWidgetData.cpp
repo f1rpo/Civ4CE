@@ -1062,7 +1062,7 @@ void CvDLLWidgetData::doPlotList(CvWidgetDataStruct &widgetDataStruct)
 
 void CvDLLWidgetData::doLiberateCity()
 {
-	GC.getGameINLINE().selectedCitiesGameNetMessage(GAMEMESSAGE_DO_TASK, TASK_LIBERATE);
+	GC.getGameINLINE().selectedCitiesGameNetMessage(GAMEMESSAGE_DO_TASK, TASK_LIBERATE, 0);
 
 	gDLL->getInterfaceIFace()->clearSelectedCities();
 }
@@ -1241,10 +1241,19 @@ void CvDLLWidgetData::doCityTab(CvWidgetDataStruct &widgetDataStruct)
 
 void CvDLLWidgetData::doContactCiv(CvWidgetDataStruct &widgetDataStruct)
 {
+	if (gDLL->isDiplomacy() || gDLL->isMPDiplomacyScreenUp())
+	{
+		return;
+	}
+
 	//	Do not execute this if we are trying to contact ourselves...
 	if (GC.getGameINLINE().getActivePlayer() == widgetDataStruct.m_iData1)
 	{
-		gDLL->getInterfaceIFace()->toggleScoresMinimized();
+		if (!gDLL->getInterfaceIFace()->isFocusedWidget())
+		{
+			gDLL->getInterfaceIFace()->toggleScoresMinimized();
+		}
+
 		return;
 	}
 
@@ -1629,7 +1638,7 @@ void CvDLLWidgetData::parseLiberateCityHelp(CvWidgetDataStruct &widgetDataStruct
 
 	if (pHeadSelectedCity != NULL)
 	{
-		PlayerTypes ePlayer = pHeadSelectedCity->getLiberationPlayer();
+		PlayerTypes ePlayer = pHeadSelectedCity->getLiberationPlayer(false);
 		if (NO_PLAYER != ePlayer)
 		{
 			szBuffer.append(gDLL->getText("TXT_KEY_LIBERATE_CITY_HELP", pHeadSelectedCity->getNameKey(), GET_PLAYER(ePlayer).getNameKey()));
@@ -1957,7 +1966,7 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 				while (pSelectedUnitNode != NULL)
 				{
 					pSelectedUnit = ::getUnit(pSelectedUnitNode->m_data);
-					iTurns = max(iTurns, pSelectedUnit->healTurns(pMissionPlot));
+					iTurns = std::max(iTurns, pSelectedUnit->healTurns(pMissionPlot));
 
 					pSelectedUnitNode = gDLL->getInterfaceIFace()->nextSelectionListNode(pSelectedUnitNode);
 				}
@@ -1976,6 +1985,16 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 				{
 					szBuffer.append(NEWLINE);
 					szBuffer.append(gDLL->getText("TXT_KEY_ACTION_DESTROY_IMP", GC.getRouteInfo(pMissionPlot->getRouteType()).getTextKeyWide()));
+				}
+			}
+			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_PLUNDER)
+			{
+				pMissionPlot = pHeadSelectedUnit->plot();
+
+				if (pMissionPlot->getTeam() == pHeadSelectedUnit->getTeam())
+				{
+					szBuffer.append(NEWLINE);
+					szBuffer.append(gDLL->getText("TXT_KEY_ACTION_PLUNDER_IN_BORDERS"));
 				}
 			}
 			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_SABOTAGE)
@@ -2232,7 +2251,7 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 			}
 			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_JOIN)
 			{
-				GAMETEXT.parseSpecialistHelp(szBuffer, ((SpecialistTypes)(GC.getActionInfo(widgetDataStruct.m_iData1).getMissionData())), pMissionCity);
+				GAMETEXT.parseSpecialistHelp(szBuffer, ((SpecialistTypes)(GC.getActionInfo(widgetDataStruct.m_iData1).getMissionData())), pMissionCity, true);
 			}
 			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_CONSTRUCT)
 			{
@@ -2483,6 +2502,17 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 					}
 				}
 
+				if (NO_IMPROVEMENT != eImprovement)
+				{
+					int iHappy = GC.getImprovementInfo(eImprovement).getHappiness();
+
+					if (iHappy != 0)
+					{
+						szTempBuffer.Format(L", +%d%c", abs(iHappy), (iHappy > 0 ? gDLL->getSymbolID(HAPPY_CHAR) : gDLL->getSymbolID(UNHAPPY_CHAR)));
+						szBuffer.append(szTempBuffer);
+					}
+				}
+
 				bValid = false;
 
 				pSelectedUnitNode = gDLL->getInterfaceIFace()->headSelectionListNode();
@@ -2504,10 +2534,21 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 				{
 					if (eImprovement != NO_IMPROVEMENT)
 					{
-						if (pMissionPlot->getTeam() != pHeadSelectedUnit->getTeam() && !GC.getImprovementInfo(eImprovement).isOutsideBorders())
+						if (pMissionPlot->getTeam() != pHeadSelectedUnit->getTeam())
 						{
-							szBuffer.append(NEWLINE);
-							szBuffer.append(gDLL->getText("TXT_KEY_ACTION_NEEDS_CULTURE_BORDER"));
+							if (GC.getImprovementInfo(eImprovement).isOutsideBorders())
+							{
+								if (pMissionPlot->getTeam() != NO_TEAM)
+								{
+									szBuffer.append(NEWLINE);
+									szBuffer.append(gDLL->getText("TXT_KEY_ACTION_NEEDS_OUT_RIVAL_CULTURE_BORDER"));
+								}
+							}
+							else
+							{
+								szBuffer.append(NEWLINE);
+								szBuffer.append(gDLL->getText("TXT_KEY_ACTION_NEEDS_CULTURE_BORDER"));
+							}
 						}
 
 						if ((eBonus == NO_BONUS) || !(GC.getImprovementInfo(eImprovement).isImprovementBonusTrade(eBonus)))
@@ -3084,8 +3125,6 @@ void CvDLLWidgetData::parseResearchHelp(CvWidgetDataStruct &widgetDataStruct, Cv
 		{
 			CvGameAI& game = GC.getGameINLINE();
 			CvPlayer& activePlayer = GET_PLAYER(game.getActivePlayer());
-			CvTeam& activeTeam = GET_TEAM(game.getActiveTeam());
-			TechTypes eCurrentResearch = activePlayer.getCurrentResearch();
 			szBuffer.assign(gDLL->getText("TXT_KEY_MISC_CHANGE_RESEARCH"));
 			szBuffer.append(NEWLINE);
 			GAMETEXT.setTechHelp(szBuffer, activePlayer.getCurrentResearch(), false, true);
@@ -3340,8 +3379,8 @@ void CvDLLWidgetData::parseTradeItem(CvWidgetDataStruct &widgetDataStruct, CvWSt
 {
 	CvWString szTempBuffer;
 	TradeData item;
-	PlayerTypes eWhoFrom;
-	PlayerTypes eWhoTo;
+	PlayerTypes eWhoFrom = NO_PLAYER;
+	PlayerTypes eWhoTo = NO_PLAYER;
 	DenialTypes eDenial;
 	PlayerTypes eWhoDenies;
 
@@ -3601,7 +3640,7 @@ void CvDLLWidgetData::parseNationalityHelp(CvWidgetDataStruct &widgetDataStruct,
 
 				if (iCityStrength > iGarrison)
 				{
-					swprintf(szTempBuffer, L"%.2f", max(0.0f, (1.0f - (((float)iGarrison) / ((float)iCityStrength)))) * ((float)(min(100.0f, ((float)pHeadSelectedCity->getRevoltTestProbability())))));
+					swprintf(szTempBuffer, L"%.2f", std::max(0.0f, (1.0f - (((float)iGarrison) / ((float)iCityStrength)))) * ((float)(std::min(100.0f, ((float)pHeadSelectedCity->getRevoltTestProbability())))));
 					szBuffer.append(NEWLINE);
 					szBuffer.append(gDLL->getText("TXT_KEY_MISC_CHANCE_OF_REVOLT", szTempBuffer));
 				}
@@ -3686,7 +3725,7 @@ void CvDLLWidgetData::parseCultureHelp(CvWidgetDataStruct &widgetDataStruct, CvW
 				int iTurnsLeft = (iCultureLeftTimes100  + iCultureRateTimes100 - 1) / iCultureRateTimes100;
 
 				szBuffer.append(L' ');
-				szBuffer.append(gDLL->getText("INTERFACE_CITY_TURNS", max(1, iTurnsLeft)));
+				szBuffer.append(gDLL->getText("INTERFACE_CITY_TURNS", std::max(1, iTurnsLeft)));
 			}
 		}
 
@@ -4168,7 +4207,7 @@ void CvDLLWidgetData::parsePromotionHelp(CvWidgetDataStruct &widgetDataStruct, C
 
 void CvDLLWidgetData::parseEventHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
 {
-	GAMETEXT.setEventHelp(szBuffer, (EventTypes)widgetDataStruct.m_iData1, widgetDataStruct.m_iData2);
+	GAMETEXT.setEventHelp(szBuffer, (EventTypes)widgetDataStruct.m_iData1, widgetDataStruct.m_iData2, GC.getGameINLINE().getActivePlayer());
 }
 
 void CvDLLWidgetData::parseUnitCombatHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)

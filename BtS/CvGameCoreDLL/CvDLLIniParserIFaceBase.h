@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CvDLLIniParserIFaceBase_h
 #define CvDLLIniParserIFaceBase_h
 

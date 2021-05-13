@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef __CY_Replay_H__
 #define __CY_Replay_H__
 

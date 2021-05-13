@@ -138,7 +138,7 @@
 		<EntityEventInfo>
 			<Type>ENTITY_EVENT_BOMBARD</Type>
 			<AnimationPathTypes>
-				<AnimationPathType>ANIMATIONPATH_BOMBARD</AnimationPathType>
+				<AnimationPathType>ANIMATIONPATH_RANGED_STRIKE</AnimationPathType>
 			</AnimationPathTypes>
 			<EffectTypes>
 				<EffectType>EFFECT_EXPLOSION_DIRT</EffectType>

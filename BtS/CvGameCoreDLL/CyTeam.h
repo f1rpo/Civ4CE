@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CyTeam_h
 #define CyTeam_h
 //
@@ -21,7 +23,7 @@ public:
 
 	bool canChangeWarPeace(int /*TeamTypes*/ eTeam);
 	bool canDeclareWar(int /*TeamTypes*/ eTeam);
-	void declareWar(int /*TeamTypes*/ eTeam, bool bNewDiplo);
+	void declareWar(int /*TeamTypes*/ eTeam, bool bNewDiplo, int /*WarPlanTypes*/ eWarPlan);
 	void makePeace(int /*TeamTypes*/ eTeam);
 	bool canContact(int /*TeamTypes*/ eTeam);
 	void meet(int /*TeamTypes*/ eTeam, bool bNewDiplo);

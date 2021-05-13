@@ -1,3 +1,5 @@
+#pragma once
+
 // fractal.h
 
 #ifndef CIV4_FRACTAL_H

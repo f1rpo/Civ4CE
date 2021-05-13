@@ -1,3 +1,5 @@
+#pragma once
+
 //  $Header:
 //------------------------------------------------------------------------------------------------
 //
@@ -18,6 +20,7 @@
 //#include "CvStructs.h"
 
 #pragma warning( disable: 4251 )		// needs to have dll-interface to be used by clients of class
+#pragma warning( disable: 4127 )
 
 class CvXMLLoadUtility;
 
@@ -81,8 +84,8 @@ public:
 	DllExport virtual void write(FDataStreamBase* pStream);
 
 	DllExport virtual bool read(CvXMLLoadUtility* pXML);
-	DllExport virtual bool readPass2(CvXMLLoadUtility* pXML) { FAssert(false); return false; }
-	DllExport virtual bool readPass3() { FAssert(false); return false; }
+	DllExport virtual bool readPass2(CvXMLLoadUtility* pXML) { pXML; FAssertMsg(false, "Override this"); return false; }
+	DllExport virtual bool readPass3() { FAssertMsg(false, "Override this"); return false; }
 
 protected:
 
@@ -887,7 +890,8 @@ public:
 	DllExport int getDomainType() const;								// Exposed to Python
 	DllExport int getDefaultUnitAIType() const;					// Exposed to Python
 	DllExport int getInvisibleType() const;							// Exposed to Python
-	DllExport int getSeeInvisibleType() const;					// Exposed to Python
+	DllExport int getSeeInvisibleType(int i) const;					// Exposed to Python
+	DllExport int getNumSeeInvisibleTypes() const;					// Exposed to Python
 	DllExport int getAdvisorType() const;								// Exposed to Python
 	DllExport int getHolyCity() const;									// Exposed to Python
 	DllExport int getReligionType() const;							// Exposed to Python
@@ -1070,7 +1074,6 @@ protected:
 	int m_iDomainType;
 	int m_iDefaultUnitAIType;
 	int m_iInvisibleType;					
-	int m_iSeeInvisibleType;
 	int m_iAdvisorType;
 	int m_iHolyCity;							
 	int m_iReligionType;					
@@ -1178,6 +1181,7 @@ protected:
 	CvString m_szFormationType;
 	CvString m_szArtDefineButton;
 
+	std::vector<int> m_aiSeeInvisibleTypes;
 };
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

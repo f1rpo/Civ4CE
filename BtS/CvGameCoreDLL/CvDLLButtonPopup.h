@@ -1,3 +1,5 @@
+#pragma once
+
 // CvDLLButtonPopup.h
 
 #ifndef CIV4_DLL_BUTTON_POPUP_H

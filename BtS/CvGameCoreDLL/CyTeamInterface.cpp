@@ -17,7 +17,7 @@ void CyTeamPythonInterface()
 
 		.def("canChangeWarPeace", &CyTeam::canChangeWarPeace, "bool (int /*TeamTypes*/ eTeam)")
 		.def("canDeclareWar", &CyTeam::canDeclareWar, "bool (int /*TeamTypes*/ eTeam)")
-		.def("declareWar", &CyTeam::declareWar, "void (int /*TeamTypes*/ eTeam, bool bNewDiplo) - Forces your team to declare War on iTeam")
+		.def("declareWar", &CyTeam::declareWar, "void (int /*TeamTypes*/ eTeam, bool bNewDiplo, int /*WarPlanTypes*/ eWarPlan) - Forces your team to declare War on iTeam")
 		.def("makePeace", &CyTeam::makePeace, "void (int /*TeamTypes*/ eTeam) - Forces peace between your team and iTeam")
 		.def("canContact", &CyTeam::canContact, "bool (int /*TeamTypes*/ eTeam)")
 		.def("meet", &CyTeam::meet, "void (int /*TeamTypes*/ eTeam, bool bNewDiplo) - forces team to meet iTeam")

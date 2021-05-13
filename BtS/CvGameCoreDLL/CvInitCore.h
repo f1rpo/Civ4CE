@@ -1,3 +1,5 @@
+#pragma once
+
 // game.h
 
 #ifndef CIV4_INITCORE_H
@@ -189,11 +191,11 @@ public:
 	DllExport void setActivePlayer(PlayerTypes eActivePlayer);
 
 	DllExport GameType getType() const	{ return m_eType; }
-	DllExport void setType(GameType eType)	{ m_eType = eType; }
+	DllExport void setType(GameType eType);
 	DllExport void setType(const CvWString & szType);
 
 	DllExport GameMode getMode() const	{ return m_eMode; }
-	DllExport void setMode(GameMode eMode)	{ m_eMode = eMode; }
+	DllExport void setMode(GameMode eMode);
 
 
 	DllExport const CvWString & getLeaderName(PlayerTypes eID, uint uiForm = 0) const;

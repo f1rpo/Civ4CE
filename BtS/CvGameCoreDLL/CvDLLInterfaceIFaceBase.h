@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CvDLLInterfaceIFaceBase_h
 #define CvDLLInterfaceIFaceBase_h
 
@@ -203,6 +205,8 @@ public:
 
 	virtual bool isInAdvancedStart() const = 0;
 	virtual void setInAdvancedStart(bool bAdvancedStart) = 0;
+
+	virtual bool isSpaceshipScreenUp() const = 0;
 
 	virtual void setBusy(bool bBusy) = 0;
 };

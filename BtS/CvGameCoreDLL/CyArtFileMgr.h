@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CyArtFileMgr_h
 #define CyArtFileMgr_h
 

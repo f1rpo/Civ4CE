@@ -389,7 +389,7 @@
 		</BuildingArtInfo>
 		<BuildingArtInfo>
 			<Type>ART_DEF_BUILDING_ACADEMY</Type>
-			<LSystem>LSYSTEM_1x1</LSystem>
+			<LSystem>LSYSTEM_3x2</LSystem>
 			<bAnimated>0</bAnimated>
 			<fScale>1.2</fScale>
 			<fInterfaceScale>0.9</fInterfaceScale>
@@ -1119,7 +1119,7 @@
 		</BuildingArtInfo>
 		<BuildingArtInfo>
 			<Type>ART_DEF_BUILDING_RED_CROSS</Type>
-			<LSystem>LSYSTEM_2x2</LSystem>
+			<LSystem>LSYSTEM_2x2_NO_ROTATE</LSystem>
 			<bAnimated>0</bAnimated>
 			<fScale>1.66</fScale>
 			<fInterfaceScale>0.48</fInterfaceScale>

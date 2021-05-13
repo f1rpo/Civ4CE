@@ -13,6 +13,7 @@ gc = CyGlobalContext()
 def writeDesc(argsList):
 	"Save out a high-level desc of the world, for WorldBuilder"
 	fileName = argsList[0]
+	global lastFileRead
 	lastFileRead=None
 	return WBDesc.write(fileName)
 	
@@ -119,17 +120,11 @@ def getPlayerData():
 	"after reading a save file, return player data as a tuple, terminated by -1"
 	t=()
 	for i in range(gc.getMAX_CIV_PLAYERS()):
-#		print "leaderType"
 		leaderType = CvUtil.findInfoTypeNum(gc.getLeaderHeadInfo, gc.getNumLeaderHeadInfos(), WBDesc.playersDesc[i].leaderType)
-#		print "civType"
 		civType = CvUtil.findInfoTypeNum(gc.getCivilizationInfo, gc.getNumCivilizationInfos(), WBDesc.playersDesc[i].civType)
-#		print "handicapType"
 		handicapType = CvUtil.findInfoTypeNum(gc.getHandicapInfo, gc.getNumHandicapInfos(), WBDesc.playersDesc[i].handicap)
-#		print "color"
 		color = CvUtil.findInfoTypeNum(gc.getPlayerColorInfo, gc.getNumPlayerColorInfos(), WBDesc.playersDesc[i].color)
-#		print "artStyle"
 		artStyle = gc.getTypesEnum(WBDesc.playersDesc[i].artStyle)
-#		print "done"
 		
 		t=t+(civType,)
 		t=t+(WBDesc.playersDesc[i].isPlayableCiv,)

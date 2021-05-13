@@ -1,3 +1,5 @@
+#pragma once
+
 // playerAI.h
 
 #ifndef CIV4_PLAYER_AI_H
@@ -29,6 +31,7 @@ public:
 
 	static void initStatics();
 	static void freeStatics();
+	DllExport static bool areStaticsInitialized();
 
 	void AI_init();
 	void AI_uninit();
@@ -119,7 +122,7 @@ public:
 	int AI_getMemoryAttitude(PlayerTypes ePlayer, MemoryTypes eMemory);
 	int AI_getColonyAttitude(PlayerTypes ePlayer);
 
-	PlayerVoteTypes AI_diploVote(const VoteSelectionSubData& kVoteData, VoteSourceTypes eVoteSource);
+	PlayerVoteTypes AI_diploVote(const VoteSelectionSubData& kVoteData, VoteSourceTypes eVoteSource, bool bPropose);
 
 	int AI_dealVal(PlayerTypes ePlayer, const CLinkList<TradeData>* pList, bool bIgnoreAnnual = false, int iExtra = 1);
 	bool AI_goldDeal(const CLinkList<TradeData>* pList);
@@ -185,7 +188,6 @@ public:
 	ReligionTypes AI_bestReligion();
 	int AI_religionValue(ReligionTypes eReligion);
 
-	EspionageMissionTypes AI_bestEspionage(PlayerTypes& eTargetPlayer, CvPlot*& pPlot, int& iData);
 	EspionageMissionTypes AI_bestPlotEspionage(CvPlot* pSpyPlot, PlayerTypes& eTargetPlayer, CvPlot*& pPlot, int& iData);
 	int AI_espionageVal(PlayerTypes eTargetPlayer, EspionageMissionTypes eMission, CvPlot* pPlot, int iData);
 
@@ -397,7 +399,6 @@ protected:
 	void AI_doResearch();
 	void AI_doCivics();
 	void AI_doReligion();
-	void AI_doEspionage();
 	void AI_doDiplo();
 	void AI_doSplit();
 	void AI_doCheckFinancialTrouble();

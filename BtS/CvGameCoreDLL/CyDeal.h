@@ -1,3 +1,5 @@
+#pragma once
+
 // CyDeal.h
 // Python wrapper class for CvDeal 
 

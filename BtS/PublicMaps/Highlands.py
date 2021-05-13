@@ -19,6 +19,7 @@ from CvMapGeneratorUtil import FeatureGenerator
 from CvMapGeneratorUtil import BonusBalancer
 
 balancer = BonusBalancer()
+shiftMultiplier = 0.0
 
 def getDescription():
 	return "TXT_KEY_MAP_SCRIPT_HIGHLANDS_DESCR"
@@ -119,7 +120,6 @@ def beforeInit():
 	# Roll a dice to determine if the cold region will be in north or south.
 	gc = CyGlobalContext()
 	dice = gc.getGame().getMapRand()
-	global shiftMultiplier
 	shiftRoll = dice.get(2, "North or South climate shift - Highlands PYTHON")
 	if shiftRoll == 0: # Cold in north
 		shiftMultiplier = 0.0
@@ -152,14 +152,12 @@ def addBonusType(argsList):
 	CyPythonMgr().allowDefaultImpl() # pretend we didn't implement this method, and let C handle this bonus in the default way
 
 def getTopLatitude():
-	global shiftMultiplier
 	if shiftMultiplier == 0.0:
 		return 85
 	else:
 		return 10
 	
 def getBottomLatitude():
-	global shiftMultiplier
 	if shiftMultiplier == 0.0:
 		return -10
 	else:
@@ -330,7 +328,6 @@ class HighlandsTerrainGenerator(CvMapGeneratorUtil.TerrainGenerator):
 			lat = 1.0
 		
 		# Flip terrain if southward shift was rolled.
-		global shiftMultiplier
 		fLatitude = abs(lat - shiftMultiplier)
 
 		return fLatitude
@@ -425,7 +422,6 @@ class HighlandsFeatureGenerator(CvMapGeneratorUtil.FeatureGenerator):
 	def getLatitudeAtPlot(self, iX, iY):
 		lat = iY/float(self.iGridH) # 0.0 = south
 		# Flip terrain if southward shift was rolled.
-		global shiftMultiplier
 		return abs(lat - shiftMultiplier)
 
 	def addFeaturesAtPlot(self, iX, iY):

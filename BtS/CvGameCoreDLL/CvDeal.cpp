@@ -682,9 +682,9 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 		pCity = GET_PLAYER(eFromPlayer).getCity(trade.m_iData);
 		if (pCity != NULL)
 		{
-			if (pCity->getLiberationPlayer() == eToPlayer)
+			if (pCity->getLiberationPlayer(false) == eToPlayer)
 			{
-				pCity->doTask(TASK_LIBERATE);
+				pCity->doTask(TASK_LIBERATE, 0);
 			}
 			else
 			{
@@ -752,7 +752,7 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 		break;
 
 	case TRADE_WAR:
-		GET_TEAM(GET_PLAYER(eFromPlayer).getTeam()).declareWar(((TeamTypes)trade.m_iData), true);
+		GET_TEAM(GET_PLAYER(eFromPlayer).getTeam()).declareWar(((TeamTypes)trade.m_iData), true, NO_WARPLAN);
 
 		for (iI = 0; iI < MAX_PLAYERS; iI++)
 		{

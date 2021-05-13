@@ -302,7 +302,10 @@ class CvPediaMain( CvPediaScreen.CvPediaScreen ):
 			if iRow >= iNumRows:
 				iNumRows += 1
 				screen.appendTableRow(tableName)
-			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", gc.getUnitInfo(item[1]).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
+			szButton = gc.getUnitInfo(item[1]).getButton()
+			if self.iActivePlayer != -1:
+				szButton = gc.getPlayer(self.iActivePlayer).getUnitButton(item[1])
+			screen.setTableText(tableName, iColumn, iRow, u"<font=3>" + item[0] + u"</font>", szButton, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, item[1], 1, CvUtil.FONT_LEFT_JUSTIFY)
 			iCounter += 1
 						
 	def placeBuildings(self):

@@ -28,7 +28,7 @@
 			<TextureBlend11>4,0</TextureBlend11>
 			<TextureBlend10>7,0</TextureBlend10>
 			<TextureBlend05>13,0</TextureBlend05>
-			<TextureBlend15>15,0 16,0 17,0 18,0 19,0 20,0 21,0 22,0 23,0 24,0 25,0 26,0 27,0 28,0 29,0 30,0 31,0 32,0</TextureBlend15>
+			<TextureBlend15>15,0 16,0 18,0 19,0 20,0 21,0 22,0 23,0 24,0 25,0 26,0 27,0 28,0 29,0 30,0 31,0 32,0</TextureBlend15>
 		</TerrainArtInfo>
 		<TerrainArtInfo>
 			<Type>ART_DEF_TERRAIN_PLAINS</Type>
@@ -52,7 +52,7 @@
 			<TextureBlend11>4,0</TextureBlend11>
 			<TextureBlend10>7,0</TextureBlend10>
 			<TextureBlend05>13,0</TextureBlend05>
-			<TextureBlend15>15,0 16,0 17,0 18,0 19,0 20,0 21,0 22,0 23,0 24,0 25,0 26,0 27,0 28,0 29,0 30,0 31,0 32,0</TextureBlend15>
+			<TextureBlend15>15,0 16,0 18,0 19,0 20,0 21,0 22,0 23,0 24,0 25,0 26,0 27,0 28,0 29,0 30,0 31,0 32,0</TextureBlend15>
 		</TerrainArtInfo>
 		<TerrainArtInfo>
 			<Type>ART_DEF_TERRAIN_DESERT</Type>
@@ -76,7 +76,7 @@
 			<TextureBlend11>4,0</TextureBlend11>
 			<TextureBlend10>7,0</TextureBlend10>
 			<TextureBlend05>13,0</TextureBlend05>
-			<TextureBlend15>15,0 16,0 17,0 18,0 19,0 20,0 21,0 22,0 23,0 24,0 25,0 26,0 27,0 28,0 29,0 30,0 31,0 32,0</TextureBlend15>
+			<TextureBlend15>15,0 16,0 18,0 19,0 20,0 21,0 22,0 23,0 24,0 25,0 26,0 27,0 28,0 29,0 30,0 31,0 32,0</TextureBlend15>
 		</TerrainArtInfo>
 		<TerrainArtInfo>
 			<Type>ART_DEF_TERRAIN_TUNDRA</Type>
@@ -100,7 +100,7 @@
 			<TextureBlend11>4,0</TextureBlend11>
 			<TextureBlend10>7,0</TextureBlend10>
 			<TextureBlend05>13,0</TextureBlend05>
-			<TextureBlend15>15,0 16,0 17,0 18,0 19,0 20,0 21,0 22,0 23,0 24,0 25,0 26,0 27,0 28,0 29,0 30,0 31,0 32,0</TextureBlend15>
+			<TextureBlend15>15,0 16,0 18,0 19,0 20,0 21,0 22,0 23,0 24,0 25,0 26,0 27,0 28,0 29,0 30,0 31,0 32,0</TextureBlend15>
 		</TerrainArtInfo>
 		<TerrainArtInfo>
 			<Type>ART_DEF_TERRAIN_SNOW</Type>
@@ -124,7 +124,7 @@
 			<TextureBlend11>4,0</TextureBlend11>
 			<TextureBlend10>7,0</TextureBlend10>
 			<TextureBlend05>13,0</TextureBlend05>
-			<TextureBlend15>15,0 16,0 17,0 18,0 19,0 20,0 21,0 22,0 23,0 24,0 25,0 26,0 27,0 28,0 29,0 30,0 31,0 32,0</TextureBlend15>
+			<TextureBlend15>15,0 16,0 18,0 19,0 20,0 21,0 22,0 23,0 24,0 25,0 26,0 27,0 28,0 29,0 30,0 31,0 32,0</TextureBlend15>
 		</TerrainArtInfo>
 		<TerrainArtInfo>
 			<Type>ART_DEF_TERRAIN_COAST</Type>

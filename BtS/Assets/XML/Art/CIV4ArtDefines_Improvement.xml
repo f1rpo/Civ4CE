@@ -173,8 +173,8 @@
 			<bExtraAnimations>0</bExtraAnimations>
 			<fScale>1.0</fScale>
 			<fInterfaceScale>1.0</fInterfaceScale>
-			<NIF>Art/Structures/Improvements/Winery/Winery_4_Nat_test/Winery.nif</NIF>
-			<KFM>Art/Structures/Improvements/Winery/Winery_4_Nat_test/Winery.kfm</KFM>
+			<NIF>Art/Structures/Improvements/Winery/Winery.nif</NIF>
+			<KFM>Art/Structures/Improvements/Winery/Winery.kfm</KFM>
 			<Button>,Art/Interface/Buttons/Builds/BuildWinery.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,6,8</Button>
 		</ImprovementArtInfo>
 		<ImprovementArtInfo>

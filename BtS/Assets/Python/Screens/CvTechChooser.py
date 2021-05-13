@@ -37,8 +37,8 @@ class CvTechChooser:
 		
 		# Advanced Start
 		self.m_iSelectedTech = -1
-		self.m_iSelectedTechDirty = 0
-		self.m_iTechRecordsDirty = 0
+		self.m_bSelectedTechDirty = false
+		self.m_bTechRecordsDirty = false
 
 	def hideScreen (self):
 	
@@ -59,6 +59,10 @@ class CvTechChooser:
 		screen.setRenderInterfaceOnly(True)
 		screen.showScreen(PopupStates.POPUPSTATE_IMMEDIATE, False)
 			
+		screen.hide("AddTechButton")
+		screen.hide("ASPointsLabel")
+		screen.hide("SelectedTechLabel")
+
 		if ( CyGame().isDebugMode() ):
 			screen.addDropDownBoxGFC( "CivDropDown", 22, 12, 192, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.SMALL_FONT )
 			screen.setActivation( "CivDropDown", ActivationTypes.ACTIVATE_MIMICPARENTFOCUS )
@@ -80,21 +84,17 @@ class CvTechChooser:
 		# Advanced Start
 		if (gc.getPlayer(self.iCivSelected).getAdvancedStartPoints() >= 0):
 			
-			self.m_iSelectedTechDirty = 1
+			self.m_bSelectedTechDirty = true
 			
 			self.X_ADD_TECH_BUTTON = 10
 			self.Y_ADD_TECH_BUTTON = 731
 			self.W_ADD_TECH_BUTTON = 150
 			self.H_ADD_TECH_BUTTON = 30
-			self.X_ADVANCED_START_TEXT = self.X_ADD_TECH_BUTTON + self.W_ADD_TECH_BUTTON  + self.W_ADD_TECH_BUTTON - 20
+			self.X_ADVANCED_START_TEXT = self.X_ADD_TECH_BUTTON + self.W_ADD_TECH_BUTTON + 20
 			
 			szText = localText.getText("TXT_KEY_WB_AS_ADD_TECH", ())
 			screen.setButtonGFC( "AddTechButton", szText, "", self.X_ADD_TECH_BUTTON, self.Y_ADD_TECH_BUTTON, self.W_ADD_TECH_BUTTON, self.H_ADD_TECH_BUTTON, WidgetTypes.WIDGET_GENERAL, -1, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
 			screen.hide("AddTechButton")
-			szText = localText.getText("TXT_KEY_WB_AS_REMOVE_TECH", ())
-			screen.setButtonGFC( "RemoveTechButton", szText, "", self.X_ADD_TECH_BUTTON, self.Y_ADD_TECH_BUTTON, self.W_ADD_TECH_BUTTON, self.H_ADD_TECH_BUTTON, WidgetTypes.WIDGET_GENERAL, -1, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
-			screen.hide("RemoveTechButton")
-			self.m_iSelectedTechDirty = 1
 			
 		# Here we set the background widget and exit button, and we show the screen
 		screen.showWindowBackground( False )
@@ -129,7 +129,6 @@ class CvTechChooser:
 		screen.moveToFront( "CivDropDown" )
 		
 		screen.moveToFront( "AddTechButton" )
-		screen.moveToFront( "RemoveTechButton" )
 	
 	def placeTechs (self):
 	
@@ -203,7 +202,7 @@ class CvTechChooser:
 				if (eLoopUnit != -1):
 					if (gc.getUnitInfo(eLoopUnit).getPrereqAndTech() == i):
 						szUnitButton = "Unit" + str(j)
-						screen.addDDSGFCAt( szUnitButton, szTechRecord, gc.getUnitInfo(eLoopUnit).getButton(), iX + fX, iY + Y_ROW, TEXTURE_SIZE, TEXTURE_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoopUnit, 1, True )
+						screen.addDDSGFCAt( szUnitButton, szTechRecord, gc.getPlayer(gc.getGame().getActivePlayer()).getUnitButton(eLoopUnit), iX + fX, iY + Y_ROW, TEXTURE_SIZE, TEXTURE_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoopUnit, 1, True )
 						fX += X_INCREMENT
 
 			j = 0
@@ -288,8 +287,11 @@ class CvTechChooser:
 			# Free unit
 			if ( gc.getTechInfo(i).getFirstFreeUnitClass() != UnitClassTypes.NO_UNITCLASS ):
 				szFreeUnitButton = "FreeUnit" + str(i)
-				screen.addDDSGFCAt( szFreeUnitButton, szTechRecord, gc.getUnitInfo(gc.getUnitClassInfo(gc.getTechInfo(i).getFirstFreeUnitClass()).getDefaultUnitIndex()).getButton(), iX + fX, iY + Y_ROW, TEXTURE_SIZE, TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_FREE_UNIT, gc.getUnitClassInfo(gc.getTechInfo(i).getFirstFreeUnitClass()).getDefaultUnitIndex(), i, False )
-				fX += X_INCREMENT
+
+				eLoopUnit = gc.getCivilizationInfo(gc.getGame().getActiveCivilizationType()).getCivilizationUnits(gc.getTechInfo(i).getFirstFreeUnitClass())
+				if (eLoopUnit != -1):				
+					screen.addDDSGFCAt( szFreeUnitButton, szTechRecord, gc.getPlayer(gc.getGame().getActivePlayer()).getUnitButton(eLoopUnit), iX + fX, iY + Y_ROW, TEXTURE_SIZE, TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_FREE_UNIT, eLoopUnit, i, False )
+					fX += X_INCREMENT
 
 			j = 0
 			k = 0
@@ -838,27 +840,17 @@ class CvTechChooser:
 			if (inputClass.getFunctionName() == "AddTechButton"):
 				if (pPlayer.getAdvancedStartTechCost(self.m_iSelectedTech, true) != -1):
 					CyMessageControl().sendAdvancedStartAction(AdvancedStartActionTypes.ADVANCEDSTARTACTION_TECH, self.iCivSelected, -1, -1, self.m_iSelectedTech, true)	#Action, Player, X, Y, Data, bAdd
-					self.m_iTechRecordsDirty = 4
-					self.m_iSelectedTechDirty = 4
-			
-			# Remove tech button
-			elif (inputClass.getFunctionName() == "RemoveTechButton"):
-				if (pPlayer.getAdvancedStartTechCost(self.m_iSelectedTech, false) != -1):
-					CyMessageControl().sendAdvancedStartAction(AdvancedStartActionTypes.ADVANCEDSTARTACTION_TECH, self.iCivSelected, -1, -1, self.m_iSelectedTech, false)	#Action, Player, X, Y, Data, bAdd
-					self.m_iTechRecordsDirty = 4
-					self.m_iSelectedTechDirty = 4
-			
+					self.m_bTechRecordsDirty = true
+					self.m_bSelectedTechDirty = true
+						
 			# Tech clicked on
 			elif (inputClass.getNotifyCode() == NotifyCode.NOTIFY_CLICKED):
 				if (inputClass.getButtonType() == WidgetTypes.WIDGET_TECH_TREE):
 					self.m_iSelectedTech = inputClass.getData1()
-					self.m_iSelectedTechDirty = 1
-				
+					self.updateSelectedTech()
+					
 		' Calls function mapped in TechChooserInputMap'
 		# only get from the map if it has the key
-#		if (inputClass.getNotifyCode() == NotifyCode.NOTIFY_CHARACTER and ( inputClass.getData() == int(InputTypes.KB_F6) or inputClass.getData() == int(InputTypes.KB_ESCAPE) ) ):
-#			self.hideScreen()
-#			return 1
 		if ( inputClass.getNotifyCode() == NotifyCode.NOTIFY_LISTBOX_ITEM_SELECTED ):
 			self.CivDropDown( inputClass )
 			return 1
@@ -885,68 +877,63 @@ class CvTechChooser:
 		return ( ( nFactor + ( ( abs( yDiff ) - 1 ) * 6 ) ) * PIXEL_INCREMENT )
 		
 	def update(self, fDelta):
-		
-		if (self.m_iSelectedTechDirty == 1):
-			self.m_iSelectedTechDirty = 0
+
+		if (CyInterface().isDirty(InterfaceDirtyBits.Advanced_Start_DIRTY_BIT)):		
+			CyInterface().setDirty(InterfaceDirtyBits.Advanced_Start_DIRTY_BIT, false)
 			
-			pPlayer = gc.getPlayer(CyGame().getActivePlayer())
-			
-			# Get the screen
-			screen = CyGInterfaceScreen( "TechChooser", CvScreenEnums.TECH_CHOOSER )
-			
-			szName = ""
-			iCost = 0
-			
-			if (self.m_iSelectedTech != -1):
-				szName = gc.getTechInfo(self.m_iSelectedTech).getDescription()
-				iCost = gc.getPlayer(CyGame().getActivePlayer()).getAdvancedStartTechCost(self.m_iSelectedTech, pPlayer.canResearch(self.m_iSelectedTech, false))
-			
-			if (iCost < 0):
-				iCost = 0
+			if (self.m_bSelectedTechDirty):
+				self.m_bSelectedTechDirty = false
+				self.updateSelectedTech()
 				
-			szText = u"<font=4>" + localText.getText("TXT_KEY_WB_AS_POINTS", (pPlayer.getAdvancedStartPoints(),)) + u"</font>"
-			screen.setLabel( "ASPointsLabel", "Background", szText, CvUtil.FONT_LEFT_JUSTIFY, self.X_ADVANCED_START_TEXT, self.Y_ADD_TECH_BUTTON + 3, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
+			if (self.m_bTechRecordsDirty):
+				self.m_bTechRecordsDirty = false
+				self.updateTechRecords(true)
 			
-			szText = u"<font=4>"
-			szText = szText + localText.getText("TXT_KEY_WB_AS_SELECTED_TECH", (szName, iCost,))#u"Selected Tech: %s, Cost: %d" %(szName, iCost)
-			szText = szText + u"</font>"
-			screen.setLabel( "SelectedTechLabel", "Background", szText, CvUtil.FONT_LEFT_JUSTIFY, self.X_ADVANCED_START_TEXT + 200, self.Y_ADD_TECH_BUTTON + 3, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-			
-			# Want to add
-			if (pPlayer.getAdvancedStartTechCost(self.m_iSelectedTech, true) != -1):
-				screen.show("AddTechButton")
-			else:
+			if (gc.getPlayer(self.iCivSelected).getAdvancedStartPoints() < 0):
+				# hide the screen
+				screen = CyGInterfaceScreen( "TechChooser", CvScreenEnums.TECH_CHOOSER )
 				screen.hide("AddTechButton")
-				
-			# Want to remove
-			if (pPlayer.getAdvancedStartTechCost(self.m_iSelectedTech, false) != -1):
-				# Disabling ability to remove/sell tech
-				i = 0
-			else:
-				screen.hide("RemoveTechButton")
-			
-		elif (self.m_iSelectedTechDirty > 1):
-			self.m_iSelectedTechDirty -= 1
-			
-		if (self.m_iTechRecordsDirty == 1):
-			print("m_iTechRecordsDirty is dirty")
-			self.m_iTechRecordsDirty = false
-			self.updateTechRecords(true)
-		elif (self.m_iTechRecordsDirty > 1):
-			self.m_iTechRecordsDirty -= 1
-		
-		if (gc.getPlayer(self.iCivSelected).getAdvancedStartPoints() < 0):
-			
-			# Get the screen
-			screen = CyGInterfaceScreen( "TechChooser", CvScreenEnums.TECH_CHOOSER )
-			
-			screen.hide("AddTechButton")
-			screen.hide("RemoveTechButton")
-			screen.hide("ASPointsLabel")
-			screen.hide("SelectedTechLabel")
+				screen.hide("ASPointsLabel")
+				screen.hide("SelectedTechLabel")
 			
 		return
-
+		
+	def updateSelectedTech(self):
+		pPlayer = gc.getPlayer(CyGame().getActivePlayer())
+		
+		# Get the screen
+		screen = CyGInterfaceScreen( "TechChooser", CvScreenEnums.TECH_CHOOSER )
+		
+		szName = ""
+		iCost = 0
+		
+		if (self.m_iSelectedTech != -1):
+			szName = gc.getTechInfo(self.m_iSelectedTech).getDescription()
+			iCost = gc.getPlayer(CyGame().getActivePlayer()).getAdvancedStartTechCost(self.m_iSelectedTech, true)
+					
+		if iCost > 0:
+			szText = u"<font=4>" + localText.getText("TXT_KEY_WB_AS_SELECTED_TECH_COST", (iCost, pPlayer.getAdvancedStartPoints())) + u"</font>"
+			screen.setLabel( "ASPointsLabel", "Background", szText, CvUtil.FONT_LEFT_JUSTIFY, self.X_ADVANCED_START_TEXT, self.Y_ADD_TECH_BUTTON + 3, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
+		else:
+			screen.hide("ASPointsLabel")
+		
+		szText = u"<font=4>"
+		szText += localText.getText("TXT_KEY_WB_AS_SELECTED_TECH", (szName,))
+		szText += u"</font>"
+		screen.setLabel( "SelectedTechLabel", "Background", szText, CvUtil.FONT_LEFT_JUSTIFY, self.X_ADVANCED_START_TEXT + 250, self.Y_ADD_TECH_BUTTON + 3, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
+		
+		# Want to add
+		if (pPlayer.getAdvancedStartTechCost(self.m_iSelectedTech, true) != -1):
+			screen.show("AddTechButton")
+		else:
+			screen.hide("AddTechButton")
+			
+	def onClose(self):
+		pPlayer = gc.getPlayer(self.iCivSelected)
+		if (pPlayer.getAdvancedStartPoints() >= 0):
+			CyInterface().setDirty(InterfaceDirtyBits.Advanced_Start_DIRTY_BIT, true)
+		return 0
+			
 class TechChooserMaps:
 
 	TechChooserInputMap = {

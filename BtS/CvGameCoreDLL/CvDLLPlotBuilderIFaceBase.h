@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CvDLLPlotBuilderIFaceBase_h
 #define CvDLLPlotBuilderIFaceBase_h
 

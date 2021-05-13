@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CvDLLEntity_h
 #define CvDLLEntity_h
 

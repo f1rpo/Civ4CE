@@ -161,6 +161,11 @@ void CvMap::reset(CvMapInitData* pInitInfo)
 		gDLL->getPythonIFace()->pythonGetLatitudes(&m_iTopLatitude, &m_iBottomLatitude);
 	}
 
+	m_iTopLatitude = std::min(m_iTopLatitude, 90);
+	m_iTopLatitude = std::max(m_iTopLatitude, -90);
+	m_iBottomLatitude = std::min(m_iBottomLatitude, 90);
+	m_iBottomLatitude = std::max(m_iBottomLatitude, -90);
+
 	m_iNextRiverID = 0;
 
 	//
@@ -246,12 +251,16 @@ void CvMap::erasePlots()
 
 void CvMap::setRevealedPlots(TeamTypes eTeam, bool bNewValue, bool bTerrainOnly)
 {
+	PROFILE_FUNC();
+
 	int iI;
 
 	for (iI = 0; iI < numPlotsINLINE(); iI++)
 	{
-		plotByIndexINLINE(iI)->setRevealed(eTeam, bNewValue, bTerrainOnly);
+		plotByIndexINLINE(iI)->setRevealed(eTeam, bNewValue, bTerrainOnly, NO_TEAM, false);
 	}
+
+	GC.getGameINLINE().updatePlotGroups();
 }
 
 
@@ -369,12 +378,12 @@ void CvMap::updateMinimapColor()
 
 void CvMap::updateSight(bool bIncrement)
 {
-	int iI;
-
-	for (iI = 0; iI < numPlotsINLINE(); iI++)
+	for (int iI = 0; iI < numPlotsINLINE(); iI++)
 	{
-		plotByIndexINLINE(iI)->updateSight(bIncrement);
+		plotByIndexINLINE(iI)->updateSight(bIncrement, false);
 	}
+
+	GC.getGameINLINE().updatePlotGroups();
 }
 
 
@@ -451,7 +460,7 @@ void CvMap::updateMinOriginalStartDist(CvArea* pArea)
 						if (iDist != -1)
 						{
 						    //int iCrowDistance = plotDistance(pStartingPlot->getX_INLINE(), pStartingPlot->getY_INLINE(), pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE());
-						    //iDist = min(iDist,  iCrowDistance * 2);
+						    //iDist = std::min(iDist,  iCrowDistance * 2);
 							if ((pLoopPlot->getMinOriginalStartDist() == -1) || (iDist < pLoopPlot->getMinOriginalStartDist()))
 							{
 								pLoopPlot->setMinOriginalStartDist(iDist);
@@ -478,9 +487,7 @@ void CvMap::updateYield()
 
 void CvMap::verifyUnitValidPlot()
 {
-	int iI;
-
-	for (iI = 0; iI < numPlotsINLINE(); iI++)
+	for (int iI = 0; iI < numPlotsINLINE(); iI++)
 	{
 		plotByIndexINLINE(iI)->verifyUnitValidPlot();
 	}
@@ -521,7 +528,6 @@ void CvMap::combinePlotGroups(PlayerTypes ePlayer, CvPlotGroup* pPlotGroup1, CvP
 		pPlotNode = pOldPlotGroup->deletePlotsNode(pPlotNode);
 	}
 }
-
 
 CvPlot* CvMap::syncRandPlot(int iFlags, int iArea, int iMinUnitDistance, int iTimeout)
 {
@@ -922,13 +928,13 @@ float CvMap::getHeightCoords()
 
 int CvMap::maxPlotDistance()
 {
-	return max(1, plotDistance(0, 0, ((isWrapXINLINE()) ? (getGridWidthINLINE() / 2) : (getGridWidthINLINE() - 1)), ((isWrapYINLINE()) ? (getGridHeightINLINE() / 2) : (getGridHeightINLINE() - 1))));
+	return std::max(1, plotDistance(0, 0, ((isWrapXINLINE()) ? (getGridWidthINLINE() / 2) : (getGridWidthINLINE() - 1)), ((isWrapYINLINE()) ? (getGridHeightINLINE() / 2) : (getGridHeightINLINE() - 1))));
 }
 
 
 int CvMap::maxStepDistance()
 {
-	return max(1, stepDistance(0, 0, ((isWrapXINLINE()) ? (getGridWidthINLINE() / 2) : (getGridWidthINLINE() - 1)), ((isWrapYINLINE()) ? (getGridHeightINLINE() / 2) : (getGridHeightINLINE() - 1))));
+	return std::max(1, stepDistance(0, 0, ((isWrapXINLINE()) ? (getGridWidthINLINE() / 2) : (getGridWidthINLINE() - 1)), ((isWrapYINLINE()) ? (getGridHeightINLINE() / 2) : (getGridHeightINLINE() - 1))));
 }
 
 

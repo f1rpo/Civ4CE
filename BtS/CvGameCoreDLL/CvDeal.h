@@ -1,3 +1,5 @@
+#pragma once
+
 // CvDeal.h
 
 #ifndef CIV4_DEAL_H

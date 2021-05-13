@@ -485,11 +485,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -1027,11 +1027,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -1580,11 +1580,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -2122,11 +2122,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -2673,11 +2673,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -3224,11 +3224,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -3779,11 +3779,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -4321,11 +4321,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -4867,11 +4867,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -5422,11 +5422,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -5980,11 +5980,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -6534,11 +6534,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -7085,11 +7085,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -7636,11 +7636,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -8185,11 +8185,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -8702,11 +8702,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -9253,11 +9253,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -9795,11 +9795,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -10350,11 +10350,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -10907,11 +10907,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -11455,11 +11455,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -12004,11 +12004,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -12566,11 +12566,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -13121,11 +13121,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -13667,11 +13667,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -14213,11 +14213,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -14764,11 +14764,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -15319,11 +15319,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -15861,11 +15861,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -16416,11 +16416,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -16967,11 +16967,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -17524,11 +17524,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -18073,11 +18073,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -18628,11 +18628,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -19183,11 +19183,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -19738,11 +19738,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -20300,11 +20300,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -20842,11 +20842,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -21391,11 +21391,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -21940,11 +21940,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -22486,11 +22486,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -23035,11 +23035,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -23584,11 +23584,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -24130,11 +24130,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -24692,11 +24692,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -25265,11 +25265,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -25827,11 +25827,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -26391,11 +26391,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -26954,11 +26954,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -27523,11 +27523,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -28101,11 +28101,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>
@@ -28672,11 +28672,11 @@
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_AGAINST_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_VOTED_FOR_US</MemoryType>
-					<iMemoryRand>20</iMemoryRand>
+					<iMemoryRand>10</iMemoryRand>
 				</MemoryDecay>
 				<MemoryDecay>
 					<MemoryType>MEMORY_EVENT_GOOD_TO_US</MemoryType>

@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CvDLLXMLIFaceBase_h
 #define CvDLLXMLIFaceBase_h
 

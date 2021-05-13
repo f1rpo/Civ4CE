@@ -1791,7 +1791,6 @@ class CvWorldBuilderScreen:
 				
 			CyEngine().clearAreaBorderPlots(AreaBorderLayers.AREA_BORDER_LAYER_WORLD_BUILDER)
 			CyEngine().fillAreaBorderPlotAlt(self.m_pCurrentPlot.getX(), self.m_pCurrentPlot.getY(), AreaBorderLayers.AREA_BORDER_LAYER_WORLD_BUILDER, "COLOR_GREEN", 1)
-			print("highlight brush")
 			for i in range( (self.m_iBrushWidth-1) ):
 				for j in range((self.m_iBrushHeight)):
 					pPlot = CyMap().plot(self.m_pCurrentPlot.getX()-(i+1), self.m_pCurrentPlot.getY()-(j))
@@ -2031,18 +2030,19 @@ class CvWorldBuilderScreen:
 		screen.addScrollPanel( "WorldBuilderMainPanel", "", iX, 0, self.iScreenWidth, iScreenHeight, PanelStyles.PANEL_STYLE_MAIN )
 				
 		if (CyInterface().isInAdvancedStart()):
-			
-			szText = u"<font=4>" + localText.getText("TXT_KEY_ADVANCED_START_BEGIN_GAME", ()).upper() + "</font>"
-			screen.setText("WorldBuilderExitButton", "WorldBuilderMainPanel", szText, CvUtil.FONT_RIGHT_JUSTIFY, self.iScreenWidth-20, iButtonY + 24, -2, FontTypes.GAME_FONT, WidgetTypes.WIDGET_WB_EXIT_BUTTON, -1, -1 )
-						
-			iX = 40
-			iY = 25
+									
+			iX = 50
+			iY = 15
 			szText = u"<font=4>" + localText.getText("TXT_KEY_WB_AS_POINTS", (gc.getPlayer(CyGame().getActivePlayer()).getAdvancedStartPoints(), )) + "</font>"
 			screen.setLabel("AdvancedStartPointsText", "Background", szText, CvUtil.FONT_LEFT_JUSTIFY, iX, iY, -2, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 			
+			iY += 30
+			szText = localText.getText("TXT_KEY_ADVANCED_START_BEGIN_GAME", ())
+			screen.setButtonGFC( "WorldBuilderExitButton", szText, "", iX, iY, 130, 28, WidgetTypes.WIDGET_WB_EXIT_BUTTON, -1, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
+
 			szText = u"<font=4>" + localText.getText("TXT_KEY_WB_AS_COST_THIS_LOCATION", (self.m_iCost, )) + u"</font>"
-			iY += 60
-			screen.setLabel("AdvancedStartCostText", "Background", szText, CvUtil.FONT_LEFT_JUSTIFY, iX, iY, -2, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
+			iY = 85
+			screen.setLabel("AdvancedStartCostText", "Background", szText, CvUtil.FONT_LEFT_JUSTIFY, iX-20, iY, -2, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 			
 		else:
 			
@@ -2181,16 +2181,14 @@ class CvWorldBuilderScreen:
 		
 		if (CyInterface().isInAdvancedStart()):
 			
-			#iX = iMaxScreenWidth-self.iScreenWidth + 40
-			iX = 40
-			iY = 25
+			iX = 50
+			iY = 15
 			szText = u"<font=4>" + localText.getText("TXT_KEY_WB_AS_POINTS", (gc.getPlayer(CyGame().getActivePlayer()).getAdvancedStartPoints(), )) + "</font>"
-#			szText = u"<font=4>Points: %d</font>" % (gc.getPlayer(CyGame().getActivePlayer()).getAdvancedStartPoints())
 			screen.setLabel("AdvancedStartPointsText", "Background", szText, CvUtil.FONT_LEFT_JUSTIFY, iX, iY, -2, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 			
 			szText = u"<font=4>" + localText.getText("TXT_KEY_WB_AS_COST_THIS_LOCATION", (self.m_iCost, )) + u"</font>"
-			iY += 60
-			screen.setLabel("AdvancedStartCostText", "Background", szText, CvUtil.FONT_LEFT_JUSTIFY, iX, iY, -2, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
+			iY = 85
+			screen.setLabel("AdvancedStartCostText", "Background", szText, CvUtil.FONT_LEFT_JUSTIFY, iX-20, iY, -2, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 			
 		else:
 	

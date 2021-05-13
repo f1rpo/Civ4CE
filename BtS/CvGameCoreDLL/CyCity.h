@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CyCity_h
 #define CyCity_h
 //
@@ -419,6 +421,7 @@ public:
 	int getFreeSpecialistCount(int /*SpecialistTypes*/ eIndex);
 	void setFreeSpecialistCount(int /*SpecialistTypes*/ eIndex, int iNewValue);
 	void changeFreeSpecialistCount(int /*SpecialistTypes*/ eIndex, int iChange);
+	int getAddedFreeSpecialistCount(int /*SpecialistTypes*/ eIndex);
 	int getImprovementFreeSpecialists(int /*ImprovementTypes*/ iIndex);
 	void changeImprovementFreeSpecialists(int /*ImprovementTypes*/ iIndex, int iChange);
 	int getReligionInfluence(int /*ReligionTypes*/ iIndex);
@@ -466,9 +469,10 @@ public:
 	int getBuildingHealthChange(int /*BuildingClassTypes*/ eBuildingClass) const;
 	void setBuildingHealthChange(int /*BuildingClassTypes*/ eBuildingClass, int iChange);
 
-	int getLiberationPlayer();
-	void liberate();
+	int getLiberationPlayer(bool bConquest);
+	void liberate(bool bConquest);
 
+	bool AI_avoidGrowth();
 	bool AI_isEmphasize(int iEmphasizeType);
 	int AI_countBestBuilds(CyArea* pArea);
 	int AI_cityValue();

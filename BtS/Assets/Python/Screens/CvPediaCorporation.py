@@ -109,7 +109,10 @@ class CvPediaCorporation:
 						break
 
 			if bRequired:
-				screen.attachImageButton( panelName, "", gc.getUnitInfo(iUnit).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, iUnit, 1, False )
+				szButton = gc.getUnitInfo(iUnit).getButton()
+				if self.top.iActivePlayer != -1:
+					szButton = gc.getPlayer(self.top.iActivePlayer).getUnitButton(iUnit)
+				screen.attachImageButton( panelName, "", szButton, GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, iUnit, 1, False )
 			
 	def placeSpecial(self):
 		

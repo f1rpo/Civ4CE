@@ -249,7 +249,7 @@ void CyGamePythonInterface()
 		.def("getReplayInfo", &CyGame::getReplayInfo, python::return_value_policy<python::manage_new_object>())
 		.def("hasSkippedSaveChecksum", &CyGame::hasSkippedSaveChecksum)
 		.def("saveReplay", &CyGame::saveReplay)
-		.def("addPlayer", &CyGame::addPlayer, "void (int eNewPlayer, int eNewTeam, int eLeader, int eCiv)")
+		.def("addPlayer", &CyGame::addPlayer, "void (int eNewPlayer, int eLeader, int eCiv)")
 		.def("setPlotExtraYield", &CyGame::setPlotExtraYield, "void (int iX, int iY, int /*YieldTypes*/ eYield, int iExtraYield)")
 		.def("changePlotExtraCost", &CyGame::changePlotExtraCost, "void (int iX, int iY, int iCost)")
 

@@ -1359,10 +1359,7 @@
 			<OrPreReqs/>
 			<AndPreReqs/>
 			<ObsoleteTechs>
-				<ObsoleteTech>TECH_STEAM_POWER</ObsoleteTech>
-				<ObsoleteTech>TECH_STEEL</ObsoleteTech>
-				<ObsoleteTech>TECH_SCIENTIFIC_METHOD</ObsoleteTech>
-				<ObsoleteTech>TECH_ARTILLERY</ObsoleteTech>
+				<ObsoleteTech>TECH_INDUSTRIALISM</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
 			<bTeam>0</bTeam>
@@ -1808,10 +1805,7 @@
 			<OrPreReqs/>
 			<AndPreReqs/>
 			<ObsoleteTechs>
-				<ObsoleteTech>TECH_STEAM_POWER</ObsoleteTech>
-				<ObsoleteTech>TECH_STEEL</ObsoleteTech>
-				<ObsoleteTech>TECH_SCIENTIFIC_METHOD</ObsoleteTech>
-				<ObsoleteTech>TECH_ARTILLERY</ObsoleteTech>
+				<ObsoleteTech>TECH_INDUSTRIALISM</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
 			<bTeam>0</bTeam>
@@ -1893,10 +1887,7 @@
 			<OrPreReqs/>
 			<AndPreReqs/>
 			<ObsoleteTechs>
-				<ObsoleteTech>TECH_STEAM_POWER</ObsoleteTech>
-				<ObsoleteTech>TECH_STEEL</ObsoleteTech>
-				<ObsoleteTech>TECH_SCIENTIFIC_METHOD</ObsoleteTech>
-				<ObsoleteTech>TECH_ARTILLERY</ObsoleteTech>
+				<ObsoleteTech>TECH_INDUSTRIALISM</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
 			<bTeam>0</bTeam>
@@ -6001,6 +5992,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -6178,6 +6170,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -7895,6 +7888,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -8157,6 +8151,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -8676,6 +8671,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -9017,6 +9013,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -9378,6 +9375,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -9463,6 +9461,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -9548,6 +9547,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -9633,6 +9633,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -9718,6 +9719,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -9913,6 +9915,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -9996,6 +9999,7 @@
 				<PrereqTech>TECH_NATIONALISM</PrereqTech>
 				<PrereqTech>TECH_PRINTING_PRESS</PrereqTech>
 				<PrereqTech>TECH_EDUCATION</PrereqTech>
+				<PrereqTech>TECH_ASTRONOMY</PrereqTech>
 				<PrereqTech>TECH_GUNPOWDER</PrereqTech>
 			</OrPreReqs>
 			<AndPreReqs/>
@@ -11220,6 +11224,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -11236,7 +11241,7 @@
 			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
 			<bShowPlot>0</bShowPlot>
 			<iCityFoodWeight>0</iCityFoodWeight>
-			<PythonCanDo/>
+			<PythonCanDo>canTriggerHorseWhispering</PythonCanDo>
 			<PythonCanDoCity/>
 			<PythonCanDoUnit/>
 			<PythonCallback/>
@@ -11311,6 +11316,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -11572,6 +11578,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -11588,7 +11595,7 @@
 			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
 			<bShowPlot>0</bShowPlot>
 			<iCityFoodWeight>0</iCityFoodWeight>
-			<PythonCanDo/>
+			<PythonCanDo>canTriggerClassicLiterature</PythonCanDo>
 			<PythonCanDoCity/>
 			<PythonCanDoUnit/>
 			<PythonCallback/>
@@ -11663,6 +11670,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -11748,6 +11756,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -11764,7 +11773,7 @@
 			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
 			<bShowPlot>0</bShowPlot>
 			<iCityFoodWeight>0</iCityFoodWeight>
-			<PythonCanDo/>
+			<PythonCanDo>canTriggerMasterBlacksmith</PythonCanDo>
 			<PythonCanDoCity/>
 			<PythonCanDoUnit/>
 			<PythonCallback/>
@@ -11839,6 +11848,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -11939,7 +11949,7 @@
 			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
 			<bShowPlot>0</bShowPlot>
 			<iCityFoodWeight>0</iCityFoodWeight>
-			<PythonCanDo/>
+			<PythonCanDo>canTriggerBestDefense</PythonCanDo>
 			<PythonCanDoCity/>
 			<PythonCanDoUnit/>
 			<PythonCallback/>
@@ -12114,7 +12124,7 @@
 			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
 			<bShowPlot>0</bShowPlot>
 			<iCityFoodWeight>0</iCityFoodWeight>
-			<PythonCanDo/>
+			<PythonCanDo>canTriggerSportsLeague</PythonCanDo>
 			<PythonCanDoCity/>
 			<PythonCanDoUnit/>
 			<PythonCallback/>
@@ -12697,6 +12707,7 @@
 				<PrereqTech>TECH_GUNPOWDER</PrereqTech>
 				<PrereqTech>TECH_EDUCATION</PrereqTech>
 				<PrereqTech>TECH_PRINTING_PRESS</PrereqTech>
+				<PrereqTech>TECH_ASTRONOMY</PrereqTech>
 				<PrereqTech>TECH_NATIONALISM</PrereqTech>
 			</OrPreReqs>
 			<AndPreReqs/>
@@ -13642,6 +13653,7 @@
 				<PrereqTech>TECH_NATIONALISM</PrereqTech>
 				<PrereqTech>TECH_PRINTING_PRESS</PrereqTech>
 				<PrereqTech>TECH_EDUCATION</PrereqTech>
+				<PrereqTech>TECH_ASTRONOMY</PrereqTech>
 				<PrereqTech>TECH_GUNPOWDER</PrereqTech>
 			</OrPreReqs>
 			<AndPreReqs/>
@@ -13728,6 +13740,7 @@
 				<PrereqTech>TECH_NATIONALISM</PrereqTech>
 				<PrereqTech>TECH_PRINTING_PRESS</PrereqTech>
 				<PrereqTech>TECH_EDUCATION</PrereqTech>
+				<PrereqTech>TECH_ASTRONOMY</PrereqTech>
 				<PrereqTech>TECH_GUNPOWDER</PrereqTech>
 			</OrPreReqs>
 			<AndPreReqs/>
@@ -13814,6 +13827,7 @@
 				<PrereqTech>TECH_NATIONALISM</PrereqTech>
 				<PrereqTech>TECH_PRINTING_PRESS</PrereqTech>
 				<PrereqTech>TECH_EDUCATION</PrereqTech>
+				<PrereqTech>TECH_ASTRONOMY</PrereqTech>
 				<PrereqTech>TECH_GUNPOWDER</PrereqTech>
 			</OrPreReqs>
 			<AndPreReqs/>
@@ -14506,6 +14520,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -14594,6 +14609,7 @@
 				<ObsoleteTech>TECH_NATIONALISM</ObsoleteTech>
 				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
 				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+				<ObsoleteTech>TECH_ASTRONOMY</ObsoleteTech>
 				<ObsoleteTech>TECH_GUNPOWDER</ObsoleteTech>
 			</ObsoleteTechs>
 			<bRecurring>0</bRecurring>
@@ -15441,6 +15457,1795 @@
 			<iCityFoodWeight>0</iCityFoodWeight>
 			<PythonCanDo>canTriggerHostileTakeoverDone</PythonCanDo>
 			<PythonCanDoCity/>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_CIV_GAME</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_CIV_GAME</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_TRIGGER_CIV_GAME</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>80</iPercentGamesActive>
+			<iWeight>100</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>NONE</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired/>
+			<iNumBuildings>0</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>0</iNumPlotsRequired>
+			<bOwnPlot>0</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired/>
+			<BonusesRequired/>
+			<RoutesRequired/>
+			<ReligionsRequired/>
+			<iNumReligions>0</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>0</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_CIV_GAME_1</Event>
+				<Event>EVENT_CIV_GAME_2</Event>
+				<Event>EVENT_CIV_GAME_3</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs>
+				<PrereqTech>TECH_COMPUTERS</PrereqTech>
+			</OrPreReqs>
+			<AndPreReqs/>
+			<ObsoleteTechs/>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>0</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>0</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>0</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo/>
+			<PythonCanDoCity/>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_SLAVE_REVOLT_WARNING</Type>
+			<WorldNewsTexts/>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_TRIGGER_SLAVE_REVOLT_WARNING</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>0</iPercentGamesActive>
+			<iWeight>0</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>CIVIC_SLAVERY</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>4</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired/>
+			<iNumBuildings>0</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>0</iNumPlotsRequired>
+			<bOwnPlot>1</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired/>
+			<BonusesRequired/>
+			<RoutesRequired/>
+			<ReligionsRequired/>
+			<iNumReligions>0</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>0</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_SLAVE_REVOLT_WARNING</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs/>
+			<ObsoleteTechs/>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>0</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>1</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>1</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo/>
+			<PythonCanDoCity/>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_IMMIGRANTS</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_IMMIGRANTS</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_TRIGGER_IMMIGRANTS</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>80</iPercentGamesActive>
+			<iWeight>200</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>NONE</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired/>
+			<iNumBuildings>0</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>0</iNumPlotsRequired>
+			<bOwnPlot>1</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired/>
+			<BonusesRequired/>
+			<RoutesRequired/>
+			<ReligionsRequired/>
+			<iNumReligions>0</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>0</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_IMMIGRANTS_1</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs>
+				<PrereqTech>TECH_PRINTING_PRESS</PrereqTech>
+			</OrPreReqs>
+			<AndPreReqs/>
+			<ObsoleteTechs/>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>0</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>1</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>1</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo/>
+			<PythonCanDoCity>canTriggerImmigrantCity</PythonCanDoCity>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_HEALING_PLANT</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_HEALING_PLANT</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_HEALING_PLANT</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>70</iPercentGamesActive>
+			<iWeight>100</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>NONE</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired/>
+			<iNumBuildings>0</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>0</iNumPlotsRequired>
+			<bOwnPlot>0</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired/>
+			<BonusesRequired/>
+			<RoutesRequired/>
+			<ReligionsRequired/>
+			<iNumReligions>0</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>0</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_HEALING_PLANT_1</Event>
+				<Event>EVENT_HEALING_PLANT_2</Event>
+				<Event>EVENT_HEALING_PLANT_3</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs/>
+			<ObsoleteTechs>
+				<ObsoleteTech>TECH_FEUDALISM</ObsoleteTech>
+				<ObsoleteTech>TECH_MACHINERY</ObsoleteTech>
+				<ObsoleteTech>TECH_PHILOSOPHY</ObsoleteTech>
+			</ObsoleteTechs>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>0</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>0</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>0</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo/>
+			<PythonCanDoCity/>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_GREAT_BEAST</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_GREAT_BEAST</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_GREAT_BEAST</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>75</iPercentGamesActive>
+			<iWeight>100</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>NONE</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired/>
+			<iNumBuildings>0</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>1</iNumPlotsRequired>
+			<bOwnPlot>1</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired>
+				<ImprovementType>IMPROVEMENT_CAMP</ImprovementType>
+			</ImprovementsRequired>
+			<BonusesRequired/>
+			<RoutesRequired/>
+			<ReligionsRequired/>
+			<iNumReligions>0</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>1</bPickReligion>
+			<bStateReligion>1</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_GREAT_BEAST_1</Event>
+				<Event>EVENT_GREAT_BEAST_2</Event>
+				<Event>EVENT_GREAT_BEAST_3</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs>
+				<PrereqTech>TECH_HUNTING</PrereqTech>
+				<PrereqTech>TECH_POLYTHEISM</PrereqTech>
+			</AndPreReqs>
+			<ObsoleteTechs>
+				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+			</ObsoleteTechs>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>0</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>0</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>1</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo/>
+			<PythonCanDoCity/>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_CONTROVERSIAL_PHILOSOPHER</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_CONTROVERSIAL_PHILOSOPHER</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_CONTROVERSIAL_PHILOSOPHER</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>75</iPercentGamesActive>
+			<iWeight>1000</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>CIVIC_THEOCRACY</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired/>
+			<iNumBuildings>0</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>0</iNumPlotsRequired>
+			<bOwnPlot>0</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired/>
+			<BonusesRequired/>
+			<RoutesRequired/>
+			<ReligionsRequired/>
+			<iNumReligions>0</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>0</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_CONTROVERSIAL_PHILOSOPHER_1</Event>
+				<Event>EVENT_CONTROVERSIAL_PHILOSOPHER_2</Event>
+				<Event>EVENT_CONTROVERSIAL_PHILOSOPHER_3</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs>
+				<PrereqTech>TECH_PHILOSOPHY</PrereqTech>
+			</AndPreReqs>
+			<ObsoleteTechs>
+				<ObsoleteTech>TECH_SCIENTIFIC_METHOD</ObsoleteTech>
+			</ObsoleteTechs>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>0</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>1</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>1</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo/>
+			<PythonCanDoCity>canTriggerControversialPhilosopherCity</PythonCanDoCity>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_DEFECTING_AGENT</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_DEFECTING_AGENT</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_DEFECTING_AGENT</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>75</iPercentGamesActive>
+			<iWeight>100</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>NONE</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired>
+				<BuildingClass>BUILDINGCLASS_INTELLIGENCE_AGENCY</BuildingClass>
+			</BuildingsRequired>
+			<iNumBuildings>0</iNumBuildings>
+			<iNumBuildingsGlobal>5</iNumBuildingsGlobal>
+			<iNumPlotsRequired>0</iNumPlotsRequired>
+			<bOwnPlot>0</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired/>
+			<BonusesRequired/>
+			<RoutesRequired/>
+			<ReligionsRequired/>
+			<iNumReligions>0</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>0</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_DEFECTING_AGENT_1</Event>
+				<Event>EVENT_DEFECTING_AGENT_2</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs/>
+			<ObsoleteTechs/>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>1</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>0</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>0</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo/>
+			<PythonCanDoCity/>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_JAIL</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_JAIL</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_JAIL</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>80</iPercentGamesActive>
+			<iWeight>100</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>NONE</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired>
+				<BuildingClass>BUILDINGCLASS_JAIL</BuildingClass>
+			</BuildingsRequired>
+			<iNumBuildings>1</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>0</iNumPlotsRequired>
+			<bOwnPlot>0</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired/>
+			<BonusesRequired/>
+			<RoutesRequired/>
+			<ReligionsRequired/>
+			<iNumReligions>0</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>0</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_JAIL_1</Event>
+				<Event>EVENT_JAIL_2</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs/>
+			<ObsoleteTechs/>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>0</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>1</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>0</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo/>
+			<PythonCanDoCity/>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_SPY_DISCOVERED</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_SPY_DISCOVERED</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_SPY_DISCOVERED</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>60</iPercentGamesActive>
+			<iWeight>100</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>NONE</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired/>
+			<iNumBuildings>0</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>0</iNumPlotsRequired>
+			<bOwnPlot>0</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired/>
+			<BonusesRequired/>
+			<RoutesRequired/>
+			<ReligionsRequired/>
+			<iNumReligions>0</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>0</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_SPY_DISCOVERED_1</Event>
+				<Event>EVENT_SPY_DISCOVERED_2</Event>
+				<Event>EVENT_SPY_DISCOVERED_3</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs>
+				<PrereqTech>TECH_INDUSTRIALISM</PrereqTech>
+			</AndPreReqs>
+			<ObsoleteTechs>
+				<ObsoleteTech>TECH_ROBOTICS</ObsoleteTech>
+			</ObsoleteTechs>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>1</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>0</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>0</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo/>
+			<PythonCanDoCity/>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_NUCLEAR_PROTEST</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_NUCLEAR_PROTEST</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_NUCLEAR_PROTEST</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>75</iPercentGamesActive>
+			<iWeight>120</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>CIVIC_FREE_SPEECH</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired/>
+			<iNumBuildings>0</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>0</iNumPlotsRequired>
+			<bOwnPlot>1</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired/>
+			<BonusesRequired/>
+			<RoutesRequired/>
+			<ReligionsRequired/>
+			<iNumReligions>0</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>0</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_NUCLEAR_PROTEST_1</Event>
+				<Event>EVENT_NUCLEAR_PROTEST_2</Event>
+				<Event>EVENT_NUCLEAR_PROTEST_3</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs/>
+			<ObsoleteTechs/>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>0</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>1</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>0</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo>canTriggerNuclearProtest</PythonCanDo>
+			<PythonCanDoCity/>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_BETTER_COAL</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_BETTER_COAL</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_BETTER_COAL</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>75</iPercentGamesActive>
+			<iWeight>100</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>NONE</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired/>
+			<iNumBuildings>0</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>1</iNumPlotsRequired>
+			<bOwnPlot>1</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired>
+				<ImprovementType>IMPROVEMENT_MINE</ImprovementType>
+			</ImprovementsRequired>
+			<BonusesRequired>
+				<BonusType>BONUS_COAL</BonusType>
+			</BonusesRequired>
+			<RoutesRequired/>
+			<ReligionsRequired/>
+			<iNumReligions>0</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>0</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_BETTER_COAL_1</Event>
+				<Event>EVENT_BETTER_COAL_2</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs/>
+			<ObsoleteTechs/>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>0</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>0</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>0</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo/>
+			<PythonCanDoCity/>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_BROKEN_DAM</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_BROKEN_DAM</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_BROKEN_DAM</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>75</iPercentGamesActive>
+			<iWeight>100</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>NONE</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired>
+				<BuildingClass>BUILDINGCLASS_HYDRO_PLANT</BuildingClass>
+			</BuildingsRequired>
+			<iNumBuildings>1</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>0</iNumPlotsRequired>
+			<bOwnPlot>0</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired/>
+			<BonusesRequired/>
+			<RoutesRequired/>
+			<ReligionsRequired/>
+			<iNumReligions>0</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>0</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_BROKEN_DAM_1</Event>
+				<Event>EVENT_BROKEN_DAM_2</Event>
+				<Event>EVENT_BROKEN_DAM_3</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs/>
+			<ObsoleteTechs/>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>0</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>1</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>1</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo/>
+			<PythonCanDoCity/>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_RABBI</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_RABBI</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_RABBI</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>0</iPercentGamesActive>
+			<iWeight>0</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>NONE</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired>
+				<BuildingClass>BUILDINGCLASS_JEWISH_MONASTERY</BuildingClass>
+			</BuildingsRequired>
+			<iNumBuildings>1</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>0</iNumPlotsRequired>
+			<bOwnPlot>0</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired/>
+			<BonusesRequired/>
+			<RoutesRequired/>
+			<ReligionsRequired>
+				<ReligionType>RELIGION_JUDAISM</ReligionType>
+			</ReligionsRequired>
+			<iNumReligions>1</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>1</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_RABBI_1</Event>
+				<Event>EVENT_RABBI_2</Event>
+				<Event>EVENT_RABBI_3</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs>
+				<PrereqTech>TECH_PAPER</PrereqTech>
+			</AndPreReqs>
+			<ObsoleteTechs>
+				<ObsoleteTech>TECH_MASS_MEDIA</ObsoleteTech>
+			</ObsoleteTechs>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>1</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>1</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>1</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo/>
+			<PythonCanDoCity/>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_GOLDEN_BUDDHA</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_GOLDEN_BUDDHA</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_GOLDEN_BUDDHA</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>0</iPercentGamesActive>
+			<iWeight>0</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>NONE</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired>
+				<BuildingClass>BUILDINGCLASS_FORGE</BuildingClass>
+			</BuildingsRequired>
+			<iNumBuildings>1</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>1</iNumPlotsRequired>
+			<bOwnPlot>1</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired>
+				<ImprovementType>IMPROVEMENT_MINE</ImprovementType>
+			</ImprovementsRequired>
+			<BonusesRequired>
+				<BonusType>BONUS_GOLD</BonusType>
+			</BonusesRequired>
+			<RoutesRequired>
+				<RouteType>ROUTE_ROAD</RouteType>
+			</RoutesRequired>
+			<ReligionsRequired>
+				<ReligionType>RELIGION_BUDDHISM</ReligionType>
+			</ReligionsRequired>
+			<iNumReligions>1</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>1</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_GOLDEN_BUDDHA_1</Event>
+				<Event>EVENT_GOLDEN_BUDDHA_2</Event>
+				<Event>EVENT_GOLDEN_BUDDHA_3</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs/>
+			<ObsoleteTechs>
+				<ObsoleteTech>TECH_STEAM_POWER</ObsoleteTech>
+			</ObsoleteTechs>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>0</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>1</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>1</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo/>
+			<PythonCanDoCity/>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_PREACHING_RESEARCHER</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_PREACHING_RESEARCHER</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_PREACHING_RESEARCHER</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>0</iPercentGamesActive>
+			<iWeight>0</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>NONE</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired>
+				<BuildingClass>BUILDINGCLASS_CHRISTIAN_MONASTERY</BuildingClass>
+			</BuildingsRequired>
+			<iNumBuildings>1</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>0</iNumPlotsRequired>
+			<bOwnPlot>0</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired/>
+			<BonusesRequired/>
+			<RoutesRequired/>
+			<ReligionsRequired>
+				<ReligionType>RELIGION_CHRISTIANITY</ReligionType>
+			</ReligionsRequired>
+			<iNumReligions>1</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>1</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_PREACHING_RESEARCHER_1</Event>
+				<Event>EVENT_PREACHING_RESEARCHER_2</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs/>
+			<ObsoleteTechs/>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>0</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>1</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>1</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo/>
+			<PythonCanDoCity>canTriggerPreachingResearcherCity</PythonCanDoCity>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_TOXCATL</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_TOXCATL</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_TOXCATL</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>90</iPercentGamesActive>
+			<iWeight>100</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>NONE</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>1</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired>
+				<BuildingClass>BUILDINGCLASS_COURTHOUSE</BuildingClass>
+			</BuildingsRequired>
+			<iNumBuildings>1</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>0</iNumPlotsRequired>
+			<bOwnPlot>0</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired/>
+			<BonusesRequired/>
+			<RoutesRequired/>
+			<ReligionsRequired/>
+			<iNumReligions>0</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>0</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_TOXCATL_1</Event>
+				<Event>EVENT_TOXCATL_2</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs/>
+			<ObsoleteTechs>
+				<ObsoleteTech>TECH_EDUCATION</ObsoleteTech>
+			</ObsoleteTechs>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>0</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>1</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>1</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo>canTriggerToxcatl</PythonCanDo>
+			<PythonCanDoCity/>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_DISSIDENT_PRIEST</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_DISSIDENT_PRIEST</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_DISSIDENT_PRIEST</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>90</iPercentGamesActive>
+			<iWeight>100</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>NONE</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired/>
+			<iNumBuildings>0</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>0</iNumPlotsRequired>
+			<bOwnPlot>0</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired/>
+			<BonusesRequired/>
+			<RoutesRequired/>
+			<ReligionsRequired/>
+			<iNumReligions>0</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>0</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_DISSIDENT_PRIEST_1</Event>
+				<Event>EVENT_DISSIDENT_PRIEST_2</Event>
+				<Event>EVENT_DISSIDENT_PRIEST_3</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs/>
+			<ObsoleteTechs>
+				<ObsoleteTech>TECH_PRINTING_PRESS</ObsoleteTech>
+			</ObsoleteTechs>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>0</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>1</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>1</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo>canTriggerDissidentPriest</PythonCanDo>
+			<PythonCanDoCity>canTriggerDissidentPriestCity</PythonCanDoCity>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_PASTURE_BUILT</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_PASTURE_BUILT</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_PASTURE_BUILT</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>80</iPercentGamesActive>
+			<iWeight>100</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>NONE</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired/>
+			<iNumBuildings>0</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>1</iNumPlotsRequired>
+			<bOwnPlot>1</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired>
+				<ImprovementType>NONE</ImprovementType>
+			</ImprovementsRequired>
+			<BonusesRequired>
+				<BonusType>BONUS_COW</BonusType>
+				<BonusType>BONUS_PIG</BonusType>
+				<BonusType>BONUS_HORSE</BonusType>
+				<BonusType>BONUS_SHEEP</BonusType>
+			</BonusesRequired>
+			<RoutesRequired>
+				<RouteType>NONE</RouteType>
+			</RoutesRequired>
+			<ReligionsRequired/>
+			<iNumReligions>0</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>0</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_PASTURE_BUILT_1</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs>
+				<PrereqTech>TECH_ANIMAL_HUSBANDRY</PrereqTech>
+			</AndPreReqs>
+			<ObsoleteTechs>
+				<ObsoleteTech>TECH_CALENDAR</ObsoleteTech>
+			</ObsoleteTechs>
+			<bRecurring>1</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>0</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>0</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>1</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo/>
+			<PythonCanDoCity/>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_ROGUE_STATION</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_ROGUE_STATION</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_ROGUE_STATION</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>90</iPercentGamesActive>
+			<iWeight>100</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>CIVIC_STATE_PROPERTY</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired>
+				<BuildingClass>BUILDINGCLASS_BROADCAST_TOWER</BuildingClass>
+			</BuildingsRequired>
+			<iNumBuildings>1</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>0</iNumPlotsRequired>
+			<bOwnPlot>0</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired/>
+			<BonusesRequired/>
+			<RoutesRequired/>
+			<ReligionsRequired/>
+			<iNumReligions>0</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>0</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_ROGUE_STATION_1</Event>
+				<Event>EVENT_ROGUE_STATION_2</Event>
+				<Event>EVENT_ROGUE_STATION_3</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs>
+				<PrereqTech>TECH_ASSEMBLY_LINE</PrereqTech>
+			</AndPreReqs>
+			<ObsoleteTechs/>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>0</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>1</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>1</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo>canTriggerRogueStation</PythonCanDo>
+			<PythonCanDoCity/>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_ANTIMONARCHISTS</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_ANTIMONARCHISTS</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_ANTIMONARCHISTS</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>90</iPercentGamesActive>
+			<iWeight>100</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>CIVIC_HEREDITARY_RULE</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired/>
+			<iNumBuildings>0</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>0</iNumPlotsRequired>
+			<bOwnPlot>0</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired/>
+			<BonusesRequired/>
+			<RoutesRequired/>
+			<ReligionsRequired/>
+			<iNumReligions>0</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>0</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_ANTIMONARCHISTS_1</Event>
+				<Event>EVENT_ANTIMONARCHISTS_2</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs/>
+			<ObsoleteTechs/>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>0</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>0</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>0</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo>canTriggerAntiMonarchists</PythonCanDo>
+			<PythonCanDoCity/>
+			<PythonCanDoUnit/>
+			<PythonCallback/>
+		</EventTriggerInfo>
+		<EventTriggerInfo>
+			<Type>EVENTTRIGGER_IMPEACHMENT</Type>
+			<WorldNewsTexts>
+				<Text>TXT_KEY_EVENTTRIGGER_IMPEACHMENT</Text>
+			</WorldNewsTexts>
+			<TriggerTexts>
+				<TriggerText>
+					<Text>TXT_KEY_EVENT_IMPEACHMENT</Text>
+					<Era>NONE</Era>
+				</TriggerText>
+			</TriggerTexts>
+			<bSinglePlayer>0</bSinglePlayer>
+			<iPercentGamesActive>90</iPercentGamesActive>
+			<iWeight>100</iWeight>
+			<bProbabilityUnitMultiply>0</bProbabilityUnitMultiply>
+			<bProbabilityBuildingMultiply>0</bProbabilityBuildingMultiply>
+			<Civic>NONE</Civic>
+			<iMinTreasury>0</iMinTreasury>
+			<iMinPopulation>0</iMinPopulation>
+			<iMaxPopulation>0</iMaxPopulation>
+			<iMinMapLandmass>0</iMinMapLandmass>
+			<iMinOurLandmass>0</iMinOurLandmass>
+			<iMaxOurLandmass>-1</iMaxOurLandmass>
+			<MinDifficulty>NONE</MinDifficulty>
+			<iAngry>0</iAngry>
+			<iUnhealthy>0</iUnhealthy>
+			<UnitsRequired/>
+			<iNumUnits>0</iNumUnits>
+			<iNumUnitsGlobal>0</iNumUnitsGlobal>
+			<iUnitDamagedWeight>0</iUnitDamagedWeight>
+			<iUnitDistanceWeight>0</iUnitDistanceWeight>
+			<iUnitExperienceWeight>0</iUnitExperienceWeight>
+			<bUnitsOnPlot>0</bUnitsOnPlot>
+			<BuildingsRequired/>
+			<iNumBuildings>0</iNumBuildings>
+			<iNumBuildingsGlobal>0</iNumBuildingsGlobal>
+			<iNumPlotsRequired>0</iNumPlotsRequired>
+			<bOwnPlot>0</bOwnPlot>
+			<iPlotType>-1</iPlotType>
+			<FeaturesRequired/>
+			<TerrainsRequired/>
+			<ImprovementsRequired/>
+			<BonusesRequired/>
+			<RoutesRequired/>
+			<ReligionsRequired/>
+			<iNumReligions>0</iNumReligions>
+			<CorporationsRequired/>
+			<iNumCorporations>0</iNumCorporations>
+			<bPickReligion>0</bPickReligion>
+			<bStateReligion>0</bStateReligion>
+			<bHolyCity>0</bHolyCity>
+			<bPickCorporation>0</bPickCorporation>
+			<bHeadquarters>0</bHeadquarters>
+			<Events>
+				<Event>EVENT_IMPEACHMENT_1</Event>
+				<Event>EVENT_IMPEACHMENT_2</Event>
+			</Events>
+			<PrereqEvents/>
+			<bPrereqEventPlot>0</bPrereqEventPlot>
+			<OrPreReqs/>
+			<AndPreReqs>
+				<PrereqTech>TECH_CONSTITUTION</PrereqTech>
+			</AndPreReqs>
+			<ObsoleteTechs/>
+			<bRecurring>0</bRecurring>
+			<bTeam>0</bTeam>
+			<bGlobal>0</bGlobal>
+			<bPickPlayer>0</bPickPlayer>
+			<bOtherPlayerWar>0</bOtherPlayerWar>
+			<bOtherPlayerHasReligion>0</bOtherPlayerHasReligion>
+			<bOtherPlayerHasOtherReligion>0</bOtherPlayerHasOtherReligion>
+			<bOtherPlayerAI>0</bOtherPlayerAI>
+			<iOtherPlayerShareBorders>0</iOtherPlayerShareBorders>
+			<OtherPlayerHasTech>NONE</OtherPlayerHasTech>
+			<bPickCity>1</bPickCity>
+			<bPickOtherPlayerCity>0</bPickOtherPlayerCity>
+			<bShowPlot>0</bShowPlot>
+			<iCityFoodWeight>0</iCityFoodWeight>
+			<PythonCanDo>canTriggerImpeachment</PythonCanDo>
+			<PythonCanDoCity>canTriggerImpeachmentCity</PythonCanDoCity>
 			<PythonCanDoUnit/>
 			<PythonCallback/>
 		</EventTriggerInfo>

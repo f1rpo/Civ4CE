@@ -172,7 +172,7 @@
 			<HotKeyAlt/>
 			<bAltDownAlt>0</bAltDownAlt>
 			<bShiftDownAlt>0</bShiftDownAlt>
-			<bCtrlDownAlt>0</bCtrlDownAlt>
+			<bCtrlDownAlt>1</bCtrlDownAlt>
 			<iHotKeyPriorityAlt>0</iHotKeyPriorityAlt>
 			<iOrderPriority>12</iOrderPriority>
 			<bVisible>1</bVisible>

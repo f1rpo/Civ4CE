@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef FASSERT_H
 #define FASSERT_H
 

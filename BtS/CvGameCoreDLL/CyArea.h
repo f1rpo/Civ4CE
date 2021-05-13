@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CyArea_h
 #define CyArea_h
 

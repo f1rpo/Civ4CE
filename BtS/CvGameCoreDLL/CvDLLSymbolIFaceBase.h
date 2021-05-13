@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CvDLLSymbolIFaceBase_h
 #define CvDLLSymbolIFaceBase_h
 

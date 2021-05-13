@@ -200,6 +200,11 @@ bool CvTerrainPlaneInfo::isVisible() const
 	return m_bVisible;
 }
 //------------------------------------------------------------------------------------------------------
+bool CvTerrainPlaneInfo::isGroundPlane() const
+{
+	return m_bGroundPlane;
+}
+//------------------------------------------------------------------------------------------------------
 float CvTerrainPlaneInfo::getMaterialAlpha() const		// The water plane's material alpha
 {
 	return m_fMaterialAlpha;
@@ -257,6 +262,7 @@ bool CvTerrainPlaneInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 
 	pXML->GetChildXmlValByName( &m_bVisible, "bVisible");
+	pXML->GetChildXmlValByName( &m_bGroundPlane, "bGroundPlane");
 	pXML->GetChildXmlValByName( &m_fMaterialAlpha, "MaterialAlpha");
 	pXML->GetChildXmlValByName( &m_fCloseAlpha, "CloseAlpha");
 
