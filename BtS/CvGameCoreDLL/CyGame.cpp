@@ -1100,6 +1100,11 @@ void CyGame::addPlayer(int eNewPlayer, int eLeader, int eCiv)
 	}
 }
 
+int CyGame::getCultureThreshold(int eLevel)
+{
+	return (m_pGame ? m_pGame->getCultureThreshold((CultureLevelTypes) eLevel) : -1);
+}
+
 void CyGame::setPlotExtraYield(int iX, int iY, int /*YieldTypes*/ eYield, int iExtraYield)
 {
 	if (m_pGame)
@@ -1139,4 +1144,12 @@ bool CyGame::isBuildingEverActive(int /*BuildingTypes*/ eBuilding)
 bool CyGame::isEventActive(int /*EventTriggerTypes*/ eTrigger)
 {
 	return (NULL != m_pGame ? m_pGame->isEventActive((EventTriggerTypes)eTrigger) : false);
+}
+
+void CyGame::doControl(int iControl)
+{
+	if (m_pGame)
+	{
+		m_pGame->doControl((ControlTypes) iControl);
+	}
 }

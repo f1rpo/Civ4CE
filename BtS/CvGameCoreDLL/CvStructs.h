@@ -412,4 +412,78 @@ struct DllExport CvWidgetDataStruct
 	WidgetTypes m_eWidgetType;			//	What the 'type' of this widget is (for parsing help and executing actions)
 };
 
+struct DllExport CvPlotIndicatorData
+{
+	CvPlotIndicatorData() : m_eVisibility(PLOT_INDICATOR_VISIBLE_ALWAYS), m_bFlashing(false), m_pUnit(NULL), m_bTestEnemyVisibility(false), m_bVisibleOnlyIfSelected(false), m_bPersistentRotation(false)
+	{
+	}
+	CvString m_strIcon;
+	CvString m_strLabel;
+	NiColor m_kColor;
+	CvWString m_strHelpText;
+	PlotIndicatorVisibilityFlags m_eVisibility;
+	bool m_bFlashing;
+	NiPoint2 m_Target;
+	const CvUnit* m_pUnit;
+	bool m_bTestEnemyVisibility;
+	bool m_bVisibleOnlyIfSelected;
+	bool m_bPersistentRotation;
+};
+
+struct DllExport CvGlobeLayerData
+{
+	CvGlobeLayerData(GlobeLayerTypes eType) : m_eType(eType), m_bGlobeViewRequired(true), m_bShouldCitiesZoom(false), m_iNumOptions(0) { }
+	GlobeLayerTypes m_eType;
+	CvString m_strName;
+	CvString m_strButtonHelpTag;
+	CvString m_strButtonStyle;
+	bool m_bGlobeViewRequired;
+	bool m_bShouldCitiesZoom;
+	int m_iNumOptions;
+};
+
+struct DllExport CvFlyoutMenuData
+{
+	CvFlyoutMenuData(FlyoutTypes eType, int iId, int iX, int iY, const wchar* strTitle) : m_eFlyout(eType), m_iID(iId), m_iX(iX), m_iY(iY), m_strTitle(strTitle) { }
+	FlyoutTypes m_eFlyout;
+	int m_iID;
+	int m_iX;
+	int m_iY;
+	CvWString m_strTitle;
+};
+
+struct DllExport CvStatBase
+{
+	CvStatBase(const char* strKey) : m_strKey(strKey) { }
+	virtual ~CvStatBase() { }
+	CvString m_strKey;
+};
+
+struct DllExport CvStatInt : public CvStatBase
+{
+	CvStatInt(const char* strKey, int iValue) : CvStatBase(strKey), m_iValue(iValue) { }
+	int m_iValue;
+};
+
+struct DllExport CvStatString : public CvStatBase
+{
+	CvStatString(const char* strKey, const char* strValue) : CvStatBase(strKey), m_strValue(strValue) { }
+	CvString m_strValue;
+};
+
+struct DllExport CvStatFloat : public CvStatBase
+{
+	CvStatFloat(const char* strKey, float fValue) : CvStatBase(strKey), m_fValue(fValue) { }
+	float m_fValue;
+};
+
+struct DllExport CvWBData
+{
+	CvWBData(int iId, const wchar* strHelp, const char* strButton) : m_iId(iId), m_strHelp(strHelp), m_strButton(strButton) { }
+	int m_iId;
+	CvWString m_strHelp;
+	CvString m_strButton;
+};
+
+
 #endif	// CVSTRUCTS_H

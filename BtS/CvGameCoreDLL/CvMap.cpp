@@ -26,6 +26,7 @@
 #include "CvInitCore.h"
 #include "CvInfos.h"
 #include "FProfiler.h"
+#include "CyArgsList.h"
 
 #include "CvDLLEngineIFaceBase.h"
 #include "CvDLLIniParserIFaceBase.h"
@@ -137,7 +138,20 @@ void CvMap::reset(CvMapInitData* pInitInfo)
 	else
 	{
 		// check map script for grid size override
-		gDLL->getPythonIFace()->pythonGetGridSize(GC.getInitCore().getWorldSize(), &m_iGridWidth, &m_iGridHeight);
+		if (GC.getInitCore().getWorldSize() != NO_WORLDSIZE)
+		{
+			std::vector<int> out;
+			CyArgsList argsList;
+			argsList.add(GC.getInitCore().getWorldSize());
+			bool ok = gDLL->getPythonIFace()->callFunction(gDLL->getPythonIFace()->getMapScriptModule(), "getGridSize", argsList.makeFunctionArgs(), &out);
+
+			if (ok && !gDLL->getPythonIFace()->pythonUsingDefaultImpl() && out.size() == 2)
+			{
+				m_iGridWidth = out[0];
+				m_iGridHeight = out[1];
+				FAssertMsg(m_iGridWidth > 0 && m_iGridHeight > 0, "the width and height returned by python getGridSize() must be positive");
+			}
+		}
 
 		// convert to plot dimensions
 		if (GC.getNumLandscapeInfos() > 0)
@@ -158,7 +172,18 @@ void CvMap::reset(CvMapInitData* pInitInfo)
 	else
 	{
 		// Check map script for latitude override (map script beats ini file)
-		gDLL->getPythonIFace()->pythonGetLatitudes(&m_iTopLatitude, &m_iBottomLatitude);
+
+		long resultTop = -1, resultBottom = -1;
+		bool okX = gDLL->getPythonIFace()->callFunction(gDLL->getPythonIFace()->getMapScriptModule(), "getTopLatitude", NULL, &resultTop);
+		bool overrideX = !gDLL->getPythonIFace()->pythonUsingDefaultImpl();
+		bool okY = gDLL->getPythonIFace()->callFunction(gDLL->getPythonIFace()->getMapScriptModule(), "getBottomLatitude", NULL, &resultBottom);
+		bool overrideY = !gDLL->getPythonIFace()->pythonUsingDefaultImpl();
+
+		if (okX && okY && overrideX && overrideY && resultTop != -1 && resultBottom != -1)
+		{
+			m_iTopLatitude = resultTop;
+			m_iBottomLatitude = resultBottom;
+		}
 	}
 
 	m_iTopLatitude = std::min(m_iTopLatitude, 90);
@@ -181,7 +206,18 @@ void CvMap::reset(CvMapInitData* pInitInfo)
 	else
 	{
 		// Check map script for wrap override (map script beats ini file)
-		gDLL->getPythonIFace()->pythonGetWrapXY(&m_bWrapX, &m_bWrapY);		
+
+		long resultX = -1, resultY = -1;
+		bool okX = gDLL->getPythonIFace()->callFunction(gDLL->getPythonIFace()->getMapScriptModule(), "getWrapX", NULL, &resultX);
+		bool overrideX = !gDLL->getPythonIFace()->pythonUsingDefaultImpl();
+		bool okY = gDLL->getPythonIFace()->callFunction(gDLL->getPythonIFace()->getMapScriptModule(), "getWrapY", NULL, &resultY);
+		bool overrideY = !gDLL->getPythonIFace()->pythonUsingDefaultImpl();
+
+		if (okX && okY && overrideX && overrideY && resultX != -1 && resultY != -1)
+		{
+			m_bWrapX = (resultX != 0);
+			m_bWrapY = (resultY != 0);
+		}
 	}
 
 	if (GC.getNumBonusInfos())

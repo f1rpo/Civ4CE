@@ -14,85 +14,85 @@ class CvCityAI : public CvCity
 
 public:
 
-	DllExport CvCityAI();
-	DllExport virtual ~CvCityAI();
+	CvCityAI();
+	virtual ~CvCityAI();
 
-	DllExport void AI_init();
-	DllExport void AI_uninit();
-	DllExport void AI_reset();
+	void AI_init();
+	void AI_uninit();
+	void AI_reset();
 
-	DllExport void AI_doTurn();
+	void AI_doTurn();
 
-	DllExport void AI_assignWorkingPlots();
-	DllExport void AI_updateAssignWork();
+	void AI_assignWorkingPlots();
+	void AI_updateAssignWork();
 
-	DllExport bool AI_avoidGrowth();
-	DllExport bool AI_ignoreGrowth();
-	DllExport int AI_specialistValue(SpecialistTypes eSpecialist, bool bAvoidGrowth, bool bRemove);
+	bool AI_avoidGrowth();
+	bool AI_ignoreGrowth();
+	int AI_specialistValue(SpecialistTypes eSpecialist, bool bAvoidGrowth, bool bRemove);
 
-	DllExport void AI_chooseProduction();
+	void AI_chooseProduction();
 
-	DllExport UnitTypes AI_bestUnit(bool bAsync = false, AdvisorTypes eIgnoreAdvisor = NO_ADVISOR, UnitAITypes* peBestUnitAI = NULL);
-	DllExport UnitTypes AI_bestUnitAI(UnitAITypes eUnitAI, bool bAsync = false, AdvisorTypes eIgnoreAdvisor = NO_ADVISOR);
+	UnitTypes AI_bestUnit(bool bAsync = false, AdvisorTypes eIgnoreAdvisor = NO_ADVISOR, UnitAITypes* peBestUnitAI = NULL);
+	UnitTypes AI_bestUnitAI(UnitAITypes eUnitAI, bool bAsync = false, AdvisorTypes eIgnoreAdvisor = NO_ADVISOR);
 
-	DllExport BuildingTypes AI_bestBuilding(int iFocusFlags = 0, int iMaxTurns = 0, bool bAsync = false, AdvisorTypes eIgnoreAdvisor = NO_ADVISOR);
+	BuildingTypes AI_bestBuilding(int iFocusFlags = 0, int iMaxTurns = 0, bool bAsync = false, AdvisorTypes eIgnoreAdvisor = NO_ADVISOR);
 	BuildingTypes AI_bestBuildingThreshold(int iFocusFlags = 0, int iMaxTurns = 0, int iMinThreshold = 0, bool bAsync = false, AdvisorTypes eIgnoreAdvisor = NO_ADVISOR);
 	
-	DllExport int AI_buildingValue(BuildingTypes eBuilding, int iFocusFlags = 0);
+	int AI_buildingValue(BuildingTypes eBuilding, int iFocusFlags = 0);
 	int AI_buildingValueThreshold(BuildingTypes eBuilding, int iFocusFlags = 0, int iThreshold = 0);
 
-	DllExport ProjectTypes AI_bestProject();
-	DllExport int AI_projectValue(ProjectTypes eProject);
+	ProjectTypes AI_bestProject();
+	int AI_projectValue(ProjectTypes eProject);
 
-	DllExport ProcessTypes AI_bestProcess();
+	ProcessTypes AI_bestProcess();
 	ProcessTypes AI_bestProcess(CommerceTypes eCommerceType);
-	DllExport int AI_processValue(ProcessTypes eProcess);
+	int AI_processValue(ProcessTypes eProcess);
 	int AI_processValue(ProcessTypes eProcess, CommerceTypes eCommerceType);
 
-	DllExport int AI_neededSeaWorkers();
+	int AI_neededSeaWorkers();
 
-	DllExport bool AI_isDefended(int iExtra = 0);
-	DllExport bool AI_isAirDefended(int iExtra = 0);
-	DllExport bool AI_isDanger();
+	bool AI_isDefended(int iExtra = 0);
+	bool AI_isAirDefended(int iExtra = 0);
+	bool AI_isDanger();
 
-	DllExport int AI_neededDefenders();
-	DllExport int AI_neededAirDefenders();
+	int AI_neededDefenders();
+	int AI_neededAirDefenders();
 	int AI_minDefenders();
 	int AI_neededFloatingDefenders();
 	void AI_updateNeededFloatingDefenders();
 
-	DllExport int AI_getEmphasizeAvoidGrowthCount();
-	DllExport bool AI_isEmphasizeAvoidGrowth();
+	int AI_getEmphasizeAvoidGrowthCount();
+	bool AI_isEmphasizeAvoidGrowth();
 
-	DllExport int AI_getEmphasizeGreatPeopleCount();
-	DllExport bool AI_isEmphasizeGreatPeople();
+	int AI_getEmphasizeGreatPeopleCount();
+	bool AI_isEmphasizeGreatPeople();
 
-	DllExport bool AI_isAssignWorkDirty();
-	DllExport void AI_setAssignWorkDirty(bool bNewValue);
+	bool AI_isAssignWorkDirty();
+	void AI_setAssignWorkDirty(bool bNewValue);
 
-	DllExport bool AI_isChooseProductionDirty();
-	DllExport void AI_setChooseProductionDirty(bool bNewValue);
+	bool AI_isChooseProductionDirty();
+	void AI_setChooseProductionDirty(bool bNewValue);
 
-	DllExport CvCity* AI_getRouteToCity() const;
-	DllExport void AI_updateRouteToCity();
+	CvCity* AI_getRouteToCity() const;
+	void AI_updateRouteToCity();
 
-	DllExport int AI_getEmphasizeYieldCount(YieldTypes eIndex);
-	DllExport bool AI_isEmphasizeYield(YieldTypes eIndex);
+	int AI_getEmphasizeYieldCount(YieldTypes eIndex);
+	bool AI_isEmphasizeYield(YieldTypes eIndex);
 
-	DllExport int AI_getEmphasizeCommerceCount(CommerceTypes eIndex);
-	DllExport bool AI_isEmphasizeCommerce(CommerceTypes eIndex);
+	int AI_getEmphasizeCommerceCount(CommerceTypes eIndex);
+	bool AI_isEmphasizeCommerce(CommerceTypes eIndex);
 
-	DllExport bool AI_isEmphasize(EmphasizeTypes eIndex);
-	DllExport void AI_setEmphasize(EmphasizeTypes eIndex, bool bNewValue);
+	bool AI_isEmphasize(EmphasizeTypes eIndex);
+	void AI_setEmphasize(EmphasizeTypes eIndex, bool bNewValue);
 	void AI_forceEmphasizeCulture(bool bNewValue);
 
-	DllExport int AI_getBestBuildValue(int iIndex);
-	DllExport int AI_totalBestBuildValue(CvArea* pArea);
+	int AI_getBestBuildValue(int iIndex);
+	int AI_totalBestBuildValue(CvArea* pArea);
 
 	int AI_clearFeatureValue(int iIndex);
-	DllExport BuildTypes AI_getBestBuild(int iIndex);
-	DllExport int AI_countBestBuilds(CvArea* pArea);
-	DllExport void AI_updateBestBuild();
+	BuildTypes AI_getBestBuild(int iIndex);
+	int AI_countBestBuilds(CvArea* pArea);
+	void AI_updateBestBuild();
 
 	virtual int AI_cityValue() const;
     
@@ -114,8 +114,8 @@ public:
 	void AI_changeWorkersHave(int iChange);
 	BuildingTypes AI_bestAdvancedStartBuilding(int iPass);
 	
-	DllExport void read(FDataStreamBase* pStream);
-	DllExport void write(FDataStreamBase* pStream);
+	void read(FDataStreamBase* pStream);
+	void write(FDataStreamBase* pStream);
 
 protected:
 

@@ -153,6 +153,8 @@ public:
 	DllExport void buildCityBillboardCityNameString( CvWStringBuffer& szBuffer, CvCity* pCity);
 	DllExport void buildCityBillboardProductionString( CvWStringBuffer& szBuffer, CvCity* pCity);
 	DllExport void buildCityBillboardCitySizeString( CvWStringBuffer& szBuffer, CvCity* pCity, const NiColorA& kColor);
+	DllExport void getCityBillboardFoodbarColors(CvCity* pCity, std::vector<NiColorA>& aColors);
+	DllExport void getCityBillboardProductionbarColors(CvCity* pCity, std::vector<NiColorA>& aColors);
 
 	DllExport void buildSingleLineTechTreeString(CvWStringBuffer &szBuffer, TechTypes eTech, bool bPlayerContext);
 	DllExport void buildTechTreeString(CvWStringBuffer &szBuffer, TechTypes eTech, bool bPlayerContext, TechTypes eFromTech);
@@ -176,6 +178,34 @@ public:
 	DllExport void getTradeScreenTitleIcon(CvString& szButton, CvWidgetDataStruct& widgetData, PlayerTypes ePlayer);
 	DllExport void getTradeScreenIcons(std::vector< std::pair<CvString, CvWidgetDataStruct> >& aIconInfos, PlayerTypes ePlayer);
 	DllExport void getTradeScreenHeader(CvWString& szHeader, PlayerTypes ePlayer, PlayerTypes eOtherPlayer, bool bAttitude);
+
+	DllExport void getGlobeLayerName(GlobeLayerTypes eType, int iOption, CvWString& strName);
+
+	DllExport void getPlotHelp(CvPlot* pMouseOverPlot, CvCity* pCity, CvPlot* pFlagPlot, bool bAlt, CvWStringBuffer& strHelp);
+	void getRebasePlotHelp(CvPlot* pPlot, CvWString& strHelp);
+	void getNukePlotHelp(CvPlot* pPlot, CvWString& strHelp);
+	DllExport void getInterfaceCenterText(CvWString& strText);
+	DllExport void getTurnTimerText(CvWString& strText);
+	DllExport void getFontSymbols(std::vector< std::vector<wchar> >& aacSymbols, std::vector<int>& aiMaxNumRows);
+	DllExport void assignFontIds(int iFirstSymbolCode, int iPadAmount);
+
+	DllExport void getCityDataForAS(std::vector<CvWBData>& mapCityList, std::vector<CvWBData>& mapBuildingList, std::vector<CvWBData>& mapAutomateList);
+	DllExport void getUnitDataForAS(std::vector<CvWBData>& mapUnitList);
+	DllExport void getImprovementDataForAS(std::vector<CvWBData>& mapImprovementList, std::vector<CvWBData>& mapRouteList);
+	DllExport void getVisibilityDataForAS(std::vector<CvWBData>& mapVisibilityList);
+	DllExport void getTechDataForAS(std::vector<CvWBData>& mapTechList);
+
+	DllExport void getUnitDataForWB(std::vector<CvWBData>& mapUnitData);
+	DllExport void getBuildingDataForWB(bool bStickyButton, std::vector<CvWBData>& mapBuildingData);
+	DllExport void getTerrainDataForWB(std::vector<CvWBData>& mapTerrainData, std::vector<CvWBData>& mapFeatureData, std::vector<CvWBData>& mapPlotData, std::vector<CvWBData>& mapRouteData);
+	DllExport void getTerritoryDataForWB(std::vector<CvWBData>& mapTerritoryData);
+
+	DllExport void getTechDataForWB(std::vector<CvWBData>& mapTechData);
+	DllExport void getPromotionDataForWB(std::vector<CvWBData>& mapPromotionData);
+	DllExport void getBonusDataForWB(std::vector<CvWBData>& mapBonusData);
+	DllExport void getImprovementDataForWB(std::vector<CvWBData>& mapImprovementData);
+	DllExport void getReligionDataForWB(bool bHolyCity, std::vector<CvWBData>& mapReligionData);
+	DllExport void getCorporationDataForWB(bool bHeadquarters, std::vector<CvWBData>& mapCorporationData);
 
 private:
 	void eventTechHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, TechTypes eTech, PlayerTypes ePlayer, PlayerTypes eOtherPlayer);

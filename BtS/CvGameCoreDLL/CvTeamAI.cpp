@@ -14,7 +14,6 @@
 #include "FProfiler.h"
 #include "CyArgsList.h"
 #include "CvDLLPythonIFaceBase.h"
-#include "UnofficialPatch.h"
 
 // statics
 
@@ -919,24 +918,11 @@ int CvTeamAI::AI_startWarVal(TeamTypes eTeam) const
 	iValue += (3 * AI_calculateCapitalProximity(eTeam)) / ((iValue > 0) ? 2 : 3);
 	
 	int iClosenessValue = AI_teamCloseness(eTeam);
-	// Unofficial Patch Start
-	// * Modified how closeness is used for determining who to attack, different settings for regular and Aggressive AI. [jdog5000/BetterAI]
 	if (iClosenessValue == 0)
 	{
-#ifdef _USE_UNOFFICIALPATCH
-		// (Better AI) Dividing iValue by 4 is a drastic move, will result in more backstabbing between friendly neighbors which is appropriate for Aggressive
 		iValue /= (GC.getGameINLINE().isOption(GAMEOPTION_AGGRESSIVE_AI) ? 4 : 2);
-#else
-		iValue /= 4;
-#endif
 	}
-#ifdef _USE_UNOFFICIALPATCH
-	// (Better AI) Closeness values are much smaller after the fix to CvPlayerAI::AI_playerCloseness, no need to divide by 4
 	iValue += iClosenessValue;
-#else
-	iValue += iClosenessValue / 4;
-#endif
-	// Unofficial Patch End
 	
 	int iOurVictoryCountdown = AI_getLowestVictoryCountdown();
 	int iTheirVictoryCountdown = GET_TEAM(eTeam).AI_getLowestVictoryCountdown();
@@ -1133,10 +1119,6 @@ int CvTeamAI::AI_endWarVal(TeamTypes eTeam) const
 		iValue /= 2;
 	}
 
-	// Unofficial Patch Start
-	// * Somewhat experimental AI change: Aggressive AI now considerably less likely to want peace 
-	// if it poses more of an immediate threat to enemy cities than it currently faces itself.
-#ifdef _USE_UNOFFICIALPATCH
 	if (GC.getGameINLINE().isOption(GAMEOPTION_AGGRESSIVE_AI))
 	{
 		int iOurEndangeredCities = 0;
@@ -1180,8 +1162,6 @@ int CvTeamAI::AI_endWarVal(TeamTypes eTeam) const
 			iValue /= 3;
 		}
 	}
-#endif
-	// Unofficial Patch End
 
 	iValue -= (iValue % GC.getDefineINT("DIPLOMACY_VALUE_REMAINDER"));
 
@@ -1284,12 +1264,10 @@ DenialTypes CvTeamAI::AI_techTrade(TechTypes eTech, TeamTypes eTeam) const
 		return NO_DENIAL;
 	}
 
-	/*
 	if (isVassal(eTeam))
 	{
 		return NO_DENIAL;
 	}
-	*/
 
 	if (isAtWar(eTeam))
 	{
@@ -1828,7 +1806,7 @@ DenialTypes CvTeamAI::AI_surrenderTrade(TeamTypes eTeam, int iPowerMultiplier) c
 
 		AttitudeTypes eAttitude = AI_getAttitude(eTeam, false);
 
-		AttitudeTypes eModifiedAttitude = CvPlayerAI::AI_getAttitude(AI_getAttitudeVal(eTeam, false) + iAttitudeModifier);
+		AttitudeTypes eModifiedAttitude = CvPlayerAI::AI_getAttitudeFromValue(AI_getAttitudeVal(eTeam, false) + iAttitudeModifier);
 
 		for (int iI = 0; iI < MAX_PLAYERS; iI++)
 		{

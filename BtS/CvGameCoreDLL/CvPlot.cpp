@@ -19,13 +19,12 @@
 #include "CvGameCoreUtils.h"
 #include "CvRandom.h"
 #include "CvDLLFAStarIFaceBase.h"
-#include "CvDLLEventReporterIFaceBase.h"
 #include "CvInfos.h"
 #include "FProfiler.h"
 #include "CvArtFileMgr.h"
 #include "CyArgsList.h"
 #include "CvDLLPythonIFaceBase.h"
-#include "UnofficialPatch.h"
+#include "CvEventReporter.h"
 
 #define STANDARD_MINIMAP_ALPHA		(0.6f)
 
@@ -932,7 +931,7 @@ void CvPlot::nukeExplosion(int iRange, CvUnit* pNukeUnit)
 		}
 	}
 
-	gDLL->getEventReporterIFace()->nukeExplosion(this, pNukeUnit);
+	CvEventReporter::getInstance().nukeExplosion(this, pNukeUnit);
 }
 
 
@@ -1038,7 +1037,7 @@ void CvPlot::updatePlotGroupBonus(bool bAdd)
 		{
 			for (iI = 0; iI < GC.getNumBonusInfos(); ++iI)
 			{
-				if ((GC.getBonusInfo((BonusTypes)iI).getTechObsolete() == NO_TECH) || !(GET_TEAM(getTeam()).isHasTech((TechTypes)(GC.getBonusInfo((BonusTypes)iI).getTechObsolete()))))
+				if (!GET_TEAM(getTeam()).isBonusObsolete((BonusTypes)iI))
 				{
 					pPlotGroup->changeNumBonuses(((BonusTypes)iI), (pPlotCity->getFreeBonus((BonusTypes)iI) * ((bAdd) ? 1 : -1)));
 				}
@@ -1237,10 +1236,7 @@ bool CvPlot::isWithinTeamCityRadius(TeamTypes eTeam, PlayerTypes eIgnorePlayer) 
 
 bool CvPlot::isLake() const
 {
-	CvArea* pArea;
-
-	pArea = area();
-
+	CvArea* pArea = area();
 	if (pArea != NULL)
 	{
 		return pArea->isLake();
@@ -1620,9 +1616,10 @@ int CvPlot::seeThroughLevel() const
 
 void CvPlot::changeAdjacentSight(TeamTypes eTeam, int iRange, bool bIncrement, CvUnit* pUnit, bool bUpdatePlotGroups)
 {
-	DirectionTypes eFacingDirection = NO_DIRECTION;
+	bool bAerial = (pUnit != NULL && pUnit->getDomainType() == DOMAIN_AIR);
 
-	if (NULL != pUnit)
+	DirectionTypes eFacingDirection = NO_DIRECTION;
+	if (!bAerial && NULL != pUnit)
 	{
 		eFacingDirection = pUnit->getFacingDirection(true);
 	}
@@ -1643,7 +1640,10 @@ void CvPlot::changeAdjacentSight(TeamTypes eTeam, int iRange, bool bIncrement, C
 	}
 
 	//check one extra outer ring
-	iRange++;
+	if (!bAerial)
+	{
+		iRange++;
+	}
 
 	for(int i=0;i<(int)aSeeInvisibleTypes.size();i++)
 	{
@@ -1652,7 +1652,7 @@ void CvPlot::changeAdjacentSight(TeamTypes eTeam, int iRange, bool bIncrement, C
 			for (int dy = -iRange; dy <= iRange; dy++)
 			{
 				//check if in facing direction
-				if (shouldProcessDisplacementPlot(dx, dy, iRange - 1, eFacingDirection))
+				if (bAerial || shouldProcessDisplacementPlot(dx, dy, iRange - 1, eFacingDirection))
 				{
 					bool outerRing = false;
 					if ((abs(dx) == iRange) || (abs(dy) == iRange))
@@ -1661,7 +1661,7 @@ void CvPlot::changeAdjacentSight(TeamTypes eTeam, int iRange, bool bIncrement, C
 					}
 
 					//check if anything blocking the plot
-					if (canSeeDisplacementPlot(eTeam, dx, dy, dx, dy, true, outerRing))
+					if (bAerial || canSeeDisplacementPlot(eTeam, dx, dy, dx, dy, true, outerRing))
 					{
 						CvPlot* pPlot = plotXY(getX_INLINE(), getY_INLINE(), dx, dy);
 						if (NULL != pPlot)
@@ -3365,6 +3365,12 @@ bool CvPlot::isVisibleEnemyUnit(PlayerTypes ePlayer) const
 {
 	return (plotCheck(PUF_isEnemy, ePlayer, false, NO_PLAYER, NO_TEAM, PUF_isVisible, ePlayer) != NULL);
 }
+
+int CvPlot::getNumVisibleUnits(PlayerTypes ePlayer) const
+{
+	return plotCount(PUF_isVisibleDebug, ePlayer);
+}
+
 
 bool CvPlot::isVisibleEnemyUnit(const CvUnit* pUnit) const
 {
@@ -5174,15 +5180,12 @@ BonusTypes CvPlot::getBonusType(TeamTypes eTeam) const
 
 BonusTypes CvPlot::getNonObsoleteBonusType(TeamTypes eTeam) const
 {
-	BonusTypes eBonus;
-
 	FAssert(eTeam != NO_TEAM);
 
-	eBonus = getBonusType(eTeam);
-
+	BonusTypes eBonus = getBonusType(eTeam);
 	if (eBonus != NO_BONUS)
 	{
-		if ((GC.getBonusInfo(eBonus).getTechObsolete() != NO_TECH) && GET_TEAM(eTeam).isHasTech((TechTypes)(GC.getBonusInfo(eBonus).getTechObsolete())))
+		if (GET_TEAM(eTeam).isBonusObsolete(eBonus))
 		{
 			return NO_BONUS;
 		}
@@ -5314,22 +5317,14 @@ void CvPlot::setImprovementType(ImprovementTypes eNewValue)
 			}
 		}
 
-		// Unofficial Patch Start
-		// * Building or removing a fort will now force a plotgroup update to verify resource connections.
-#ifdef _USE_UNOFFICIALPATCH
-		if ( (NO_IMPROVEMENT != getImprovementType() && GC.getImprovementInfo(getImprovementType()).isActsAsCity()) ||
+		// Building or removing a fort will now force a plotgroup update to verify resource connections.
+		if ( (NO_IMPROVEMENT != getImprovementType() && GC.getImprovementInfo(getImprovementType()).isActsAsCity()) !=
 			 (NO_IMPROVEMENT != eOldImprovement && GC.getImprovementInfo(eOldImprovement).isActsAsCity()) )
 		{
-			//GC.getGameINLINE().updatePlotGroups();
 			updatePlotGroup();
 		}
 
-		// Also, a nearly inconsequential fix here using the proper NO_IMPROVEMENT instead of NO_FEATURE
 		if (NO_IMPROVEMENT != eOldImprovement && GC.getImprovementInfo(eOldImprovement).isActsAsCity())
-#else
-		if (NO_FEATURE != eOldImprovement && GC.getImprovementInfo(eOldImprovement).isActsAsCity())
-#endif
-		// Unofficial Patch End
 		{
 			verifyUnitValidPlot();
 		}
@@ -5341,12 +5336,12 @@ void CvPlot::setImprovementType(ImprovementTypes eNewValue)
 
 		if (getImprovementType() != NO_IMPROVEMENT)
 		{
-			gDLL->getEventReporterIFace()->improvementBuilt(getImprovementType(), getX_INLINE(), getY_INLINE());
+			CvEventReporter::getInstance().improvementBuilt(getImprovementType(), getX_INLINE(), getY_INLINE());
 		}
 
 		if (getImprovementType() == NO_IMPROVEMENT)
 		{
-			gDLL->getEventReporterIFace()->improvementDestroyed(eOldImprovement, getOwnerINLINE(), getX_INLINE(), getY_INLINE());
+			CvEventReporter::getInstance().improvementDestroyed(eOldImprovement, getOwnerINLINE(), getX_INLINE(), getY_INLINE());
 		}
 
 		CvCity* pWorkingCity = getWorkingCity();
@@ -5413,7 +5408,7 @@ void CvPlot::setRouteType(RouteTypes eNewValue, bool bUpdatePlotGroups)
 
 		if (getRouteType() != NO_ROUTE)
 		{
-			gDLL->getEventReporterIFace()->routeBuilt(getRouteType(), getX_INLINE(), getY_INLINE());
+			CvEventReporter::getInstance().routeBuilt(getRouteType(), getX_INLINE(), getY_INLINE());
 		}
 	}
 }
@@ -7135,7 +7130,7 @@ void CvPlot::setRevealed(TeamTypes eTeam, bool bNewValue, bool bTerrainOnly, Tea
 		if (isRevealed(eTeam, false))
 		{
 			// ONEVENT - PlotRevealed
-			gDLL->getEventReporterIFace()->plotRevealed(this, eTeam);
+			CvEventReporter::getInstance().plotRevealed(this, eTeam);
 		}
 	}
 
@@ -7400,7 +7395,7 @@ bool CvPlot::changeBuildProgress(BuildTypes eBuild, int iChange, TeamTypes eTeam
 					}
 
 					// Python Event
-					gDLL->getEventReporterIFace()->plotFeatureRemoved(this, getFeatureType(), pCity);
+					CvEventReporter::getInstance().plotFeatureRemoved(this, getFeatureType(), pCity);
 
 					setFeatureType(NO_FEATURE);
 				}
@@ -9738,5 +9733,111 @@ bool CvPlot::isEspionageCounterSpy(TeamTypes eTeam) const
 	}
 
 	return false;
+}
+
+int CvPlot::getAreaIdForGreatWall() const
+{
+	return getArea();
+}
+
+int CvPlot::getSoundScriptId() const
+{
+	int iScriptId = -1;
+	if (isActiveVisible(true))
+	{
+		if (getImprovementType() != NO_IMPROVEMENT)
+		{
+			iScriptId = GC.getImprovementInfo(getImprovementType()).getWorldSoundscapeScriptId();
+		}
+		else if (getFeatureType() != NO_FEATURE)
+		{
+			iScriptId = GC.getFeatureInfo(getFeatureType()).getWorldSoundscapeScriptId();
+		}
+		else if (getTerrainType() != NO_TERRAIN)
+		{
+			iScriptId = GC.getTerrainInfo(getTerrainType()).getWorldSoundscapeScriptId();
+		}
+	}
+	return iScriptId;
+}
+
+int CvPlot::get3DAudioScriptFootstepIndex(int iFootstepTag) const
+{
+	if (getFeatureType() != NO_FEATURE)
+	{
+		return GC.getFeatureInfo(getFeatureType()).get3DAudioScriptFootstepIndex(iFootstepTag);
+	}
+
+	if (getTerrainType() != NO_TERRAIN)
+	{
+		return GC.getTerrainInfo(getTerrainType()).get3DAudioScriptFootstepIndex(iFootstepTag);
+	}
+
+	return -1;
+}
+
+float CvPlot::getAqueductSourceWeight() const
+{
+	float fWeight = 0.0f;
+	if (isLake() || isPeak() || (getFeatureType() != NO_FEATURE && GC.getFeatureInfo(getFeatureType()).isAddsFreshWater()))
+	{
+		fWeight = 1.0f;
+	}
+	else if (isHills())
+	{
+		fWeight = 0.67f;
+	}
+
+	return fWeight;
+}
+
+bool CvPlot::shouldDisplayBridge(CvPlot* pToPlot, PlayerTypes ePlayer) const
+{
+	TeamTypes eObservingTeam = GET_PLAYER(ePlayer).getTeam();
+	TeamTypes eOurTeam = getRevealedTeam(eObservingTeam, true);
+	TeamTypes eOtherTeam = NO_TEAM;
+	if (pToPlot != NULL)
+	{
+		eOtherTeam = pToPlot->getRevealedTeam(eObservingTeam, true);
+	}
+
+	if (eOurTeam == eObservingTeam || eOtherTeam == eObservingTeam || (eOurTeam == NO_TEAM && eOtherTeam == NO_TEAM))
+	{
+		return GET_TEAM(eObservingTeam).isBridgeBuilding();
+	}
+
+	if (eOurTeam == NO_TEAM)
+	{
+		return GET_TEAM(eOtherTeam).isBridgeBuilding();
+	}
+
+	if (eOtherTeam == NO_TEAM)
+	{
+		return GET_TEAM(eOurTeam).isBridgeBuilding();
+	}
+
+	return (GET_TEAM(eOurTeam).isBridgeBuilding() && GET_TEAM(eOtherTeam).isBridgeBuilding());
+}
+
+bool CvPlot::checkLateEra() const
+{
+	PlayerTypes ePlayer = getOwnerINLINE();
+	if (ePlayer == NO_PLAYER)
+	{
+		//find largest culture in this plot
+		ePlayer = GC.getGameINLINE().getActivePlayer();
+		int maxCulture = getCulture(ePlayer);
+		for (int i = 0; i < MAX_PLAYERS; i++)
+		{
+			int newCulture = getCulture((PlayerTypes) i);
+			if (newCulture > maxCulture)
+			{
+				maxCulture = newCulture;
+				ePlayer = (PlayerTypes) i;
+			}
+		}
+	}
+
+	return (GET_PLAYER(ePlayer).getCurrentEra() > GC.getNumEraInfos() / 2);
 }
 

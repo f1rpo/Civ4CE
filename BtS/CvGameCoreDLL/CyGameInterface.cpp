@@ -249,6 +249,8 @@ void CyGamePythonInterface()
 		.def("hasSkippedSaveChecksum", &CyGame::hasSkippedSaveChecksum)
 		.def("saveReplay", &CyGame::saveReplay)
 		.def("addPlayer", &CyGame::addPlayer, "void (int eNewPlayer, int eLeader, int eCiv)")
+		.def("getCultureThreshold", &CyGame::getCultureThreshold, "int getCultureThreshold(CultureLevelTypes eLevel)")
+
 		.def("setPlotExtraYield", &CyGame::setPlotExtraYield, "void (int iX, int iY, int /*YieldTypes*/ eYield, int iExtraYield)")
 		.def("changePlotExtraCost", &CyGame::changePlotExtraCost, "void (int iX, int iY, int iCost)")
 
@@ -258,6 +260,7 @@ void CyGamePythonInterface()
 		.def("isBuildingEverActive", &CyGame::isBuildingEverActive, "bool (int /*BuildingTypes*/ eBuilding)")
 
 		.def("isEventActive", &CyGame::isEventActive, "bool (int /*EventTriggerTypes*/ eTrigger)")
+		.def("doControl", &CyGame::doControl, "void (int /*ControlTypes*/ iControl)")
 		;
 
 	python::class_<CyDeal>("CyDeal")

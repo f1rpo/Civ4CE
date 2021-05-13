@@ -14,7 +14,6 @@
 #include "CySelectionGroup.h"
 #include "CvDLLInterfaceIFaceBase.h"
 #include "CvGlobals.h"
-#include "UnofficialPatch.h"
 
 CyUnit::CyUnit() : m_pUnit(NULL)
 {
@@ -774,11 +773,6 @@ CyUnit* CyUnit::bestInterceptor(CyPlot* pPlot)
 	return m_pUnit ? new CyUnit(m_pUnit->bestInterceptor(pPlot->getPlot())) : false;
 }
 
-CyUnit* CyUnit::bestSeaPillageInterceptor(CyPlot* pPlot)
-{
-	return m_pUnit ? new CyUnit(m_pUnit->bestSeaPillageInterceptor(pPlot->getPlot())) : false;
-}
-
 bool CyUnit::isAutomated()
 {
 	return m_pUnit ? m_pUnit->isAutomated() : false;
@@ -1394,14 +1388,7 @@ int CyUnit::getExtraHillsDefensePercent()
 
 int CyUnit::getRevoltProtection() const
 {
-	// Unofficial Patch Start
-	// * Fixed bug with CyUnit::getRevoltProtection() returning the wrong value.
-#ifdef _USE_UNOFFICIALPATCH
 	return m_pUnit ? m_pUnit->getRevoltProtection() : -1;
-#else
-	return m_pUnit ? m_pUnit->getExtraHillsDefensePercent() : -1;
-#endif
-	// Unofficial Patch End
 }
 
 int CyUnit::getCollateralDamageProtection() const

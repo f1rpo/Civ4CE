@@ -453,7 +453,16 @@
 				RelativePath=".\CvDLLPython.cpp">
 			</File>
 			<File
+				RelativePath=".\CvDllPythonEvents.cpp">
+			</File>
+			<File
+				RelativePath=".\CvDllTranslator.cpp">
+			</File>
+			<File
 				RelativePath=".\CvDLLWidgetData.cpp">
+			</File>
+			<File
+				RelativePath=".\CvEventReporter.cpp">
 			</File>
 			<File
 				RelativePath=".\CvFractal.cpp">
@@ -690,6 +699,12 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\CvMessageControl.cpp">
+			</File>
+			<File
+				RelativePath=".\CvMessageData.cpp">
+			</File>
+			<File
 				RelativePath=".\CvPlayer.cpp">
 				<FileConfiguration
 					Name="Debug|Win32">
@@ -865,6 +880,9 @@
 			</File>
 			<File
 				RelativePath=".\CvSelectionGroupAI.cpp">
+			</File>
+			<File
+				RelativePath=".\CvStatistics.cpp">
 			</File>
 			<File
 				RelativePath=".\CvStructs.cpp">
@@ -1043,9 +1061,6 @@
 				RelativePath=".\CvDLLEntityIFaceBase.h">
 			</File>
 			<File
-				RelativePath=".\CvDLLEventReporterIFaceBase.h">
-			</File>
-			<File
 				RelativePath=".\CvDLLFAStarIFaceBase.h">
 			</File>
 			<File
@@ -1061,10 +1076,16 @@
 				RelativePath=".\CvDLLPlotBuilderIFaceBase.h">
 			</File>
 			<File
+				RelativePath=".\CvDllPythonEvents.h">
+			</File>
+			<File
 				RelativePath=".\CvDLLPythonIFaceBase.h">
 			</File>
 			<File
 				RelativePath=".\CvDLLSymbolIFaceBase.h">
+			</File>
+			<File
+				RelativePath=".\CvDllTranslator.h">
 			</File>
 			<File
 				RelativePath=".\CvDLLUtilityIFaceBase.h">
@@ -1077,6 +1098,9 @@
 			</File>
 			<File
 				RelativePath=".\CvEnums.h">
+			</File>
+			<File
+				RelativePath=".\CvEventReporter.h">
 			</File>
 			<File
 				RelativePath=".\CvFractal.h">
@@ -1124,6 +1148,12 @@
 				RelativePath=".\CvMapGenerator.h">
 			</File>
 			<File
+				RelativePath=".\CvMessageControl.h">
+			</File>
+			<File
+				RelativePath=".\CvMessageData.h">
+			</File>
+			<File
 				RelativePath=".\CvPlayer.h">
 			</File>
 			<File
@@ -1155,6 +1185,9 @@
 			</File>
 			<File
 				RelativePath=".\CvSelectionGroupAI.h">
+			</File>
+			<File
+				RelativePath=".\CvStatistics.h">
 			</File>
 			<File
 				RelativePath=".\CvString.h">
@@ -1294,6 +1327,12 @@
 					RelativePath=".\CyMapInterface.cpp">
 				</File>
 				<File
+					RelativePath=".\CyMessageControl.cpp">
+				</File>
+				<File
+					RelativePath=".\CyMessageControlInterface.cpp">
+				</File>
+				<File
 					RelativePath=".\CyPlayer.cpp">
 				</File>
 				<File
@@ -1380,6 +1419,9 @@
 				</File>
 				<File
 					RelativePath=".\CyMapGenerator.h">
+				</File>
+				<File
+					RelativePath=".\CyMessageControl.h">
 				</File>
 				<File
 					RelativePath=".\CyPlayer.h">

@@ -16,13 +16,13 @@
 #include "FAStarNode.h"
 #include "CvInfos.h"
 #include "FProfiler.h"
-#include "CvDLLEventReporterIFaceBase.h"
 #include "CyPlot.h"
 #include "CySelectionGroup.h"
 #include "CyArgsList.h"
 #include "CvDLLPythonIFaceBase.h"
 #include <set>
-#include "UnofficialPatch.h"
+#include "CvEventReporter.h"
+
 
 // Public Functions...
 
@@ -100,15 +100,9 @@ void CvSelectionGroup::kill()
 
 bool CvSelectionGroup::sentryAlert() const
 {
+	CvUnit* pHeadUnit = NULL;
 	int iMaxRange = 0;
 	CLLNode<IDInfo>* pUnitNode = headUnitNode();
-	// Unofficial Patch Start
-	// * Groups on sentry now awake based on farthest-seeing unit's vision rather than head unit's vision. [Pep]
-	// To fix this in the simplest way, we are changing pHeadUnit to be the best-seeing unit.
-	// So the variable name is now not really accurate but it will do what it's supposed to.
-#ifdef _USE_UNOFFICIALPATCH
-	CvUnit *pHeadUnit = getHeadUnit();
-#endif
 	while (pUnitNode != NULL)
 	{
 		CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
@@ -119,16 +113,10 @@ bool CvSelectionGroup::sentryAlert() const
 		if (iRange > iMaxRange)
 		{
 			iMaxRange = iRange;
-#ifdef _USE_UNOFFICIALPATCH
 			pHeadUnit = pLoopUnit;
-#endif
-	// Unofficial Patch End
 		}
 	}
 
-#ifndef _USE_UNOFFICIALPATCH
-	CvUnit* pHeadUnit = getHeadUnit();
-#endif
 	if (NULL != pHeadUnit)
 	{
 		for (int iX = -iMaxRange; iX <= iMaxRange; ++iX)
@@ -206,14 +194,10 @@ void CvSelectionGroup::doTurn()
 		{
 			if (getActivityType() == ACTIVITY_MISSION)
 			{
-				// Unofficial Patch Start
-				// * Spies really no longer interrupt their mission when moving next to an enemy unit
-#ifdef _USE_UNOFFICIALPATCH
 				bool bNonSpy = false;
 				for (CLLNode<IDInfo>* pUnitNode = headUnitNode(); pUnitNode != NULL; pUnitNode = nextUnitNode(pUnitNode))
 				{
 					CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
-					// For all invisible units, use !pLoopUnit->alwaysInvisible()
 					if (!pLoopUnit->isSpy())
 					{
 						bNonSpy = true;
@@ -222,10 +206,6 @@ void CvSelectionGroup::doTurn()
 				}
 
 				if (bNonSpy && GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 2) > 0)
-#else
-				if (GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 2) > 0)
-#endif
-				// Unofficial Patch End
 				{
 					clearMissionQueue();
 				}
@@ -472,7 +452,7 @@ void CvSelectionGroup::pushMission(MissionTypes eMission, int iData1, int iData2
 			gDLL->getInterfaceIFace()->setHasMovedUnit(true);
 		}
 
-		gDLL->getEventReporterIFace()->selectionGroupPushMission(this, eMission);
+		CvEventReporter::getInstance().selectionGroupPushMission(this, eMission);
 
 		doDelayedDeath();
 	}
@@ -3412,16 +3392,19 @@ bool CvSelectionGroup::groupAmphibMove(CvPlot* pPlot, int iFlags)
 				{
 					std::vector<CvUnit*> aCargoUnits;
 					pLoopUnit1->getCargoUnits(aCargoUnits);
-					std::set<CvSelectionGroup*> aCargoGroups;
+					std::vector<CvSelectionGroup*> aCargoGroups;
 					for (uint i = 0; i < aCargoUnits.size(); ++i)
 					{
-						aCargoGroups.insert(aCargoUnits[i]->getGroup());
+						CvSelectionGroup* pGroup = aCargoUnits[i]->getGroup();
+						if (std::find(aCargoGroups.begin(), aCargoGroups.end(), pGroup) == aCargoGroups.end())
+						{
+							aCargoGroups.push_back(aCargoUnits[i]->getGroup());
+						}
 					}
 
-					std::set<CvSelectionGroup*>::iterator it;
-					for (it = aCargoGroups.begin(); it != aCargoGroups.end(); ++it)
+					for (uint i = 0; i < aCargoGroups.size(); ++i)
 					{
-						CvSelectionGroup* pGroup = *it;
+						CvSelectionGroup* pGroup = aCargoGroups[i];
 						if (pGroup->canAllMove())
 						{
 							FAssert(!pGroup->at(pPlot->getX_INLINE(), pPlot->getY_INLINE()));

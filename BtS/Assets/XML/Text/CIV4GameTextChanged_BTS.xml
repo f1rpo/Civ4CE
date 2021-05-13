@@ -617,4 +617,12 @@
 		<Italian>Sostituita dall'edifici&#224; [LINK=literal]%s1_default_building[\LINK]</Italian>
 		<Spanish>Sustituida por una edifico de [LINK=literal]%s1_default_building[\LINK]</Spanish>
 	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_UNHAPPY_VASSAL</Tag>
+		<English>+%d1_Change[ICON_UNHAPPY]: "Down with foreign influence!"</English>
+		<French>+%d1_Change[ICON_UNHAPPY] : "Notre influence &#224; l'&#233;tranger diminue !"</French>
+		<German>+%d1_Change[ICON_UNHAPPY]: "Nieder mit der ausl&#228;ndischen Einflussnahme!"</German>
+		<Italian>+%d1_Change[ICON_UNHAPPY]: "Abbasso l'influenza straniera!"</Italian>
+		<Spanish>+%d1_Change [ICON_UNHAPPY]: "&#161;Acabemos con la influencia extranjera!"</Spanish>
+	</TEXT>
 </Civ4GameText>

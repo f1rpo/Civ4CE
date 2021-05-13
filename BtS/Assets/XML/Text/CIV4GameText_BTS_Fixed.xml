@@ -417,4 +417,12 @@
 		<Italian>Dimenticato</Italian>
 		<Spanish>Olvidad</Spanish>
 	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_UNIT_AZTEC_JAGUAR_STRATEGY</Tag>
+		<English>This powerful melee combat unit (the Aztec replacement for the [COLOR_UNIT_TEXT]Swordsman[COLOR_REVERT]) is special because it requires no special resource and gets a bonus in [COLOR_UNIT_TEXT]Jungles[COLOR_REVERT].</English>
+		<French>Puissante unit&#233; de combat rapproch&#233; (l'unit&#233; azt&#232;que qui vient remplacer le [COLOR_UNIT_TEXT]spadassin[COLOR_REVERT]) dont la production ne co&#251;te aucune ressource. Elle b&#233;n&#233;ficie d'un fort bonus dans la [COLOR_UNIT_TEXT]jungle[COLOR_REVERT].</French>
+		<German>Diese effektive Nahkampfeinheit (die aztekische Variante des [COLOR_UNIT_TEXT]Schwertk&#228;mpfers[COLOR_REVERT]) ben&#246;tigt keine besonderen Ressourcen und hat im [COLOR_UNIT_TEXT]Dschungel[COLOR_REVERT] einen Bonus.</German>
+		<Italian>Questa potente unit&#224; da combattimento corpo a corpo (l'equivalente Azteco dello [COLOR_UNIT_TEXT]spadaccino[COLOR_REVERT]) &#232; speciale, poich&#233; non richiede risorse e ottiene un bonus nella [COLOR_UNIT_TEXT]giungla[COLOR_REVERT].</Italian>
+		<Spanish>Esta poderosa unidad de cuerpo a cuerpo (que sustituye al [COLOR_UNIT_TEXT]Soldado con espada[COLOR_REVERT] en la civilizaci&#243;n azteca) es especial porque no requiere un recurso y obtiene una bonificaci&#243;n en las [COLOR_UNIT_TEXT]Selvas[COLOR_REVERT].</Spanish>
+	</TEXT>
 </Civ4GameText>

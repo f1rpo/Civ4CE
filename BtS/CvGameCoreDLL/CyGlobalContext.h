@@ -316,13 +316,6 @@ public:
 	int getINVALID_PLOT_COORD() const { return GC.getINVALID_PLOT_COORD(); }
 	int getNUM_CITY_PLOTS() const { return GC.getNUM_CITY_PLOTS(); }
 	int getCITY_HOME_PLOT() const { return GC.getCITY_HOME_PLOT(); }
-
-	// Unofficial Patch Start
-	// Added global context functions isUnofficialPatch() and getUnofficialPatchVersion() which are exposed to Python.
-	bool isUnofficialPatch() const { return GC.isUnofficialPatch(); }
-	int getUnofficialPatchVersion() const { return GC.getUnofficialPatchVersion(); }
-	// Unofficial Patch End
-
 };
 
 #endif	// CyGlobalContext_h

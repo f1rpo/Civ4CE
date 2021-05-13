@@ -3111,7 +3111,7 @@ def canTriggerExperiencedCaptain(argsList):
 def getNumPartisanUnits(plot, iPlayer):
 	for i in range(gc.getNumCultureLevelInfos()):
 		iI = gc.getNumCultureLevelInfos() - i - 1
-		if plot.getCulture(iPlayer) >= gc.getCultureLevelInfo(iI).getSpeedThreshold(gc.getGame().getGameSpeedType()):
+		if plot.getCulture(iPlayer) >= gc.getGame().getCultureThreshold(iI):
 			return iI
 	return 0
 

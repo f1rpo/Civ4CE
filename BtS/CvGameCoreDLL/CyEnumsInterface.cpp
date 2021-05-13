@@ -864,7 +864,6 @@ void CyEnumsPythonInterface()
 		.value("DENIAL_WORST_ENEMY", DENIAL_WORST_ENEMY)
 		.value("DENIAL_POWER_YOUR_ENEMIES", DENIAL_POWER_YOUR_ENEMIES)
 		.value("DENIAL_TOO_FAR", DENIAL_TOO_FAR)
-		.value("NUM_DENIAL_TYPES", NUM_DENIAL_TYPES)
 		;
 
 	python::enum_<DomainTypes>("DomainTypes")
@@ -950,7 +949,6 @@ void CyEnumsPythonInterface()
 		.value("PROBABILITY_LOW", PROBABILITY_LOW)
 		.value("PROBABILITY_REAL", PROBABILITY_REAL)
 		.value("PROBABILITY_HIGH", PROBABILITY_HIGH)
-		.value("NUM_PROBABILITY_TYPES", NUM_PROBABILITY_TYPES)
 		;
 
 	python::enum_<ActivityTypes>("ActivityTypes")
@@ -1053,7 +1051,6 @@ void CyEnumsPythonInterface()
 		.value("MISSIONAI_ASSAULT", MISSIONAI_ASSAULT)
 		.value("MISSIONAI_CARRIER", MISSIONAI_CARRIER)
 		.value("MISSIONAI_PICKUP", MISSIONAI_PICKUP)
-		.value("NUM_MISSIONAI_TYPES", NUM_MISSIONAI_TYPES)
 		;
 
 	// any additions need to be reflected in GlobalTypes.xml
@@ -1194,7 +1191,6 @@ void CyEnumsPythonInterface()
 		.value("WARPLAN_LIMITED", WARPLAN_LIMITED)
 		.value("WARPLAN_TOTAL", WARPLAN_TOTAL)
 		.value("WARPLAN_DOGPILE", WARPLAN_DOGPILE)
-		.value("NUM_WARPLAN_TYPES", NUM_WARPLAN_TYPES)
 		;
 
 	python::enum_<AreaAITypes>("AreaAITypes")
@@ -1204,7 +1200,6 @@ void CyEnumsPythonInterface()
 		.value("AREAAI_MASSING", AREAAI_MASSING)
 		.value("AREAAI_ASSAULT", AREAAI_ASSAULT)
 		.value("AREAAI_NEUTRAL", AREAAI_NEUTRAL)
-		.value("NUM_AREAAI_TYPES", NUM_AREAAI_TYPES)
 		;
 
 	python::enum_<EndTurnButtonStates>("EndTurnButtonStates")
@@ -1920,6 +1915,5 @@ void CyEnumsPythonInterface()
 		.value("ADVANCEDSTARTACTION_TECH", ADVANCEDSTARTACTION_TECH)
 		.value("ADVANCEDSTARTACTION_VISIBILITY", ADVANCEDSTARTACTION_VISIBILITY)
 		.value("ADVANCEDSTARTACTION_AUTOMATE", ADVANCEDSTARTACTION_AUTOMATE)
-		.value("NUM_ADVANCEDSTARTACTIONS", NUM_ADVANCEDSTARTACTIONS)
 		;
 }

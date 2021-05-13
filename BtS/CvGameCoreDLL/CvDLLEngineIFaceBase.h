@@ -81,6 +81,7 @@ public:
 	virtual void printProfileText() = 0;
 
 	virtual void clearSigns() = 0;
+	virtual CvPlot* pickPlot(int x, int y, NiPoint3& worldPoint) = 0;
 
 	// dirty bits
 	virtual void SetDirty(EngineDirtyBits eBit, bool bNewValue) = 0;

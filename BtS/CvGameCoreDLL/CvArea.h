@@ -29,7 +29,7 @@ public:
 	int countHasReligion(ReligionTypes eReligion, PlayerTypes eOwner = NO_PLAYER) const;		// Exposed to Python
 	int countHasCorporation(CorporationTypes eCorporation, PlayerTypes eOwner = NO_PLAYER) const;		// Exposed to Python
 
-	DllExport int getID() const;																							// Exposed to Python
+	int getID() const;																							// Exposed to Python
 	void setID(int iID);
 
 	int getNumTiles() const;																									// Exposed to Python
@@ -93,7 +93,7 @@ public:
 	void changeCleanPowerCount(TeamTypes eIndex, int iChange);
 
 	int getBorderObstacleCount(TeamTypes eIndex) const;
-	DllExport bool isBorderObstacle(TeamTypes eIndex) const;																// Exposed to Python
+	bool isBorderObstacle(TeamTypes eIndex) const;																// Exposed to Python
 	void changeBorderObstacleCount(TeamTypes eIndex, int iChange);
 
 	AreaAITypes getAreaAIType(TeamTypes eIndex) const;												// Exposed to Python

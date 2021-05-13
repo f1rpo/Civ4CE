@@ -20,7 +20,8 @@
 #include "CvDLLEntityIFaceBase.h"
 #include "CvGameCoreUtils.h"
 #include "CvDLLEngineIFaceBase.h"
-#include "CvDLLEventReporterIFaceBase.h"
+#include "CvEventReporter.h"
+#include "CvMessageControl.h"
 
 // Public Functions...
 
@@ -170,7 +171,7 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 	case BUTTONPOPUP_DECLAREWARMOVE:
 		if (pPopupReturn->getButtonClicked() == 0)
 		{
-			gDLL->sendChangeWar((TeamTypes)info.getData1(), true);
+			CvMessageControl::getInstance().sendChangeWar((TeamTypes)info.getData1(), true);
 		}
 		if (((pPopupReturn->getButtonClicked() == 0) || info.getOption2()) && info.getFlags() == 0)
 		{
@@ -287,17 +288,28 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 	case BUTTONPOPUP_RAZECITY:
 		if (pPopupReturn->getButtonClicked() == 1)
 		{
-			gDLL->sendDoTask(info.getData1(), TASK_RAZE, -1, -1, false, false, false, false);
+			CvMessageControl::getInstance().sendDoTask(info.getData1(), TASK_RAZE, -1, -1, false, false, false, false);
 		}
 		else if (pPopupReturn->getButtonClicked() == 2)
 		{
 			CvCity* pCity = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCity(info.getData1());
 			if (NULL != pCity)
 			{
-				gDLL->getEventReporterIFace()->cityAcquiredAndKept(GC.getGameINLINE().getActivePlayer(), pCity);
+				CvEventReporter::getInstance().cityAcquiredAndKept(GC.getGameINLINE().getActivePlayer(), pCity);
 			}
 
-			gDLL->sendDoTask(info.getData1(), TASK_GIFT, info.getData2(), -1, false, false, false, false);
+			CvMessageControl::getInstance().sendDoTask(info.getData1(), TASK_GIFT, info.getData2(), -1, false, false, false, false);
+		}
+		else if (pPopupReturn->getButtonClicked() == 3)
+		{
+			CvCity* pCity = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCity(info.getData1());
+			if (NULL != pCity)
+			{
+				gDLL->getInterfaceIFace()->selectCity(pCity, false);
+			}
+
+			CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_RAZECITY, info.getData1(), info.getData2(), info.getData3());
+			gDLL->getInterfaceIFace()->addPopup(pInfo, GC.getGameINLINE().getActivePlayer(), false, true);
 		}
 		else if (pPopupReturn->getButtonClicked() == 0)
 		{
@@ -305,7 +317,7 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 			if (NULL != pCity)
 			{
 				pCity->chooseProduction();
-				gDLL->getEventReporterIFace()->cityAcquiredAndKept(GC.getGameINLINE().getActivePlayer(), pCity);
+				CvEventReporter::getInstance().cityAcquiredAndKept(GC.getGameINLINE().getActivePlayer(), pCity);
 			}
 		}
 		break;
@@ -313,7 +325,7 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 	case BUTTONPOPUP_DISBANDCITY:
 		if (pPopupReturn->getButtonClicked() == 1)
 		{
-			gDLL->sendDoTask(info.getData1(), TASK_DISBAND, -1, -1, false, false, false, false);
+			CvMessageControl::getInstance().sendDoTask(info.getData1(), TASK_DISBAND, -1, -1, false, false, false, false);
 		}
 		else if (pPopupReturn->getButtonClicked() == 0)
 		{
@@ -321,7 +333,7 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 			if (NULL != pCity)
 			{
 				pCity->chooseProduction();
-				gDLL->getEventReporterIFace()->cityAcquiredAndKept(GC.getGameINLINE().getActivePlayer(), pCity);
+				CvEventReporter::getInstance().cityAcquiredAndKept(GC.getGameINLINE().getActivePlayer(), pCity);
 			}
 		}
 		break;
@@ -346,18 +358,14 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 	case BUTTONPOPUP_CHANGECIVIC:
 		if (pPopupReturn->getButtonClicked() == 0)
 		{
-			CivicTypes* paeNewCivics = new CivicTypes[GC.getNumCivicOptionInfos()];
-
+			std::vector<CivicTypes> aeNewCivics(GC.getNumCivicOptionInfos());
 			for (iI = 0; iI < GC.getNumCivicOptionInfos(); iI++)
 			{
-				paeNewCivics[iI] = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivics((CivicOptionTypes)iI);
+				aeNewCivics[iI] = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivics((CivicOptionTypes)iI);
 			}
+			aeNewCivics[info.getData1()] = ((CivicTypes)(info.getData2()));
 
-			paeNewCivics[info.getData1()] = ((CivicTypes)(info.getData2()));
-
-			gDLL->sendUpdateCivics(paeNewCivics);
-
-			SAFE_DELETE(paeNewCivics);
+			CvMessageControl::getInstance().sendUpdateCivics(aeNewCivics);
 		}
 		else if (pPopupReturn->getButtonClicked() == 2)
 		{
@@ -368,7 +376,7 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 	case BUTTONPOPUP_CHANGERELIGION:
 		if (pPopupReturn->getButtonClicked() == 0)
 		{
-			gDLL->sendConvert((ReligionTypes)(info.getData1()));
+			CvMessageControl::getInstance().sendConvert((ReligionTypes)(info.getData1()));
 		}
 		break;
 
@@ -377,13 +385,13 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 			VoteSelectionData* pData = GC.getGameINLINE().getVoteSelection(info.getData1());
 			if (NULL != pData && pPopupReturn->getButtonClicked() < (int)pData->aVoteOptions.size())
 			{
-				gDLL->sendChooseElection((VoteTypes)(pPopupReturn->getButtonClicked()), info.getData1());
+				CvMessageControl::getInstance().sendChooseElection((VoteTypes)(pPopupReturn->getButtonClicked()), info.getData1());
 			}
 		}
 		break;
 
 	case BUTTONPOPUP_DIPLOVOTE:
-		gDLL->sendDiploVote(info.getData1(), (PlayerVoteTypes)pPopupReturn->getButtonClicked());
+		CvMessageControl::getInstance().sendDiploVote(info.getData1(), (PlayerVoteTypes)pPopupReturn->getButtonClicked());
 		break;
 
 	case BUTTONPOPUP_ALARM:
@@ -560,7 +568,8 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 		{
 			if (GC.getGameINLINE().isNetworkMultiPlayer())
 			{
-				gDLL->sendExtendedGame();
+
+				CvMessageControl::getInstance().sendExtendedGame();
 			}
 			else
 			{
@@ -639,7 +648,7 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 				}
 				else
 				{
-					gDLL->sendChangeWar(GET_PLAYER(eVassal).getTeam(), true);
+					CvMessageControl::getInstance().sendChangeWar(GET_PLAYER(eVassal).getTeam(), true);
 				}
 			}
 		}
@@ -662,7 +671,7 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 		}
 		else
 		{
-			gDLL->sendChangeWar(GET_PLAYER((PlayerTypes)info.getData1()).getTeam(), true);
+			CvMessageControl::getInstance().sendChangeWar(GET_PLAYER((PlayerTypes)info.getData1()).getTeam(), true);
 		}
 
 		break;
@@ -686,30 +695,30 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 		}
 		else if (-1 != pPopupReturn->getButtonClicked())
 		{
-			gDLL->sendEventTriggered(GC.getGameINLINE().getActivePlayer(), (EventTypes)pPopupReturn->getButtonClicked(), info.getData1());
+			CvMessageControl::getInstance().sendEventTriggered(GC.getGameINLINE().getActivePlayer(), (EventTypes)pPopupReturn->getButtonClicked(), info.getData1());
 		}
 		break;
 
 	case BUTTONPOPUP_FREE_COLONY:
 		if (pPopupReturn->getButtonClicked() > 0)
 		{
-			gDLL->sendEmpireSplit(GC.getGameINLINE().getActivePlayer(), pPopupReturn->getButtonClicked());
+			CvMessageControl::getInstance().sendEmpireSplit(GC.getGameINLINE().getActivePlayer(), pPopupReturn->getButtonClicked());
 		}
 		else if (pPopupReturn->getButtonClicked() < 0)
 		{
-			gDLL->sendDoTask(-pPopupReturn->getButtonClicked(), TASK_LIBERATE, 0, -1, false, false, false, false);
+			CvMessageControl::getInstance().sendDoTask(-pPopupReturn->getButtonClicked(), TASK_LIBERATE, 0, -1, false, false, false, false);
 		}
 		break;
 
 	case BUTTONPOPUP_LAUNCH:
 		if (0 == pPopupReturn->getButtonClicked())
 		{
-			gDLL->sendLaunch(GC.getGameINLINE().getActivePlayer(), (VictoryTypes)info.getData1());
+			CvMessageControl::getInstance().sendLaunch(GC.getGameINLINE().getActivePlayer(), (VictoryTypes)info.getData1());
 		}
 		break;
 
 	case BUTTONPOPUP_FOUND_RELIGION:
-		gDLL->sendFoundReligion(GC.getGameINLINE().getActivePlayer(), (ReligionTypes)pPopupReturn->getButtonClicked(), (ReligionTypes)info.getData1());
+		CvMessageControl::getInstance().sendFoundReligion(GC.getGameINLINE().getActivePlayer(), (ReligionTypes)pPopupReturn->getButtonClicked(), (ReligionTypes)info.getData1());
 		break;
 
 	default:
@@ -1392,6 +1401,7 @@ bool CvDLLButtonPopup::launchRazeCityPopup(CvPopup* pPopup, CvPopupInfo &info)
 		szBuffer = gDLL->getText("TXT_KEY_POPUP_RETURN_ALLIED_CITY", GET_PLAYER(eHighestCulturePlayer).getCivilizationDescriptionKey());
 		gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, szBuffer, NULL, 2, WIDGET_GENERAL, 2, eHighestCulturePlayer);
 	}
+	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_CITY_WARNING_ANSWER3").c_str(), NULL, 3, WIDGET_GENERAL, -1, -1);
 	gDLL->getInterfaceIFace()->popupLaunch(pPopup, false, POPUPSTATE_IMMEDIATE);
 
 	gDLL->getInterfaceIFace()->playGeneralSound("AS2D_CITYCAPTURE");
@@ -1572,7 +1582,7 @@ bool CvDLLButtonPopup::launchChangeCivicsPopup(CvPopup* pPopup, CvPopupInfo &inf
 		if (eCivicType != NO_CIVIC)
 		{
 			szBuffer = gDLL->getText("TXT_KEY_POPUP_NEW_CIVIC", GC.getCivicInfo(eCivicType).getTextKeyWide());
-			if (!isEmpty(GC.getCivicInfo(eCivicType).getStrategy()))
+			if (!CvWString(GC.getCivicInfo(eCivicType).getStrategy()).empty())
 			{
 				CvWString szTemp;
 				szTemp.Format(L" (%s)", GC.getCivicInfo(eCivicType).getStrategy());

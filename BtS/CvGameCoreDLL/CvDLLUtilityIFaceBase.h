@@ -37,6 +37,7 @@ class CvAudioGame;
 struct ProfileSample;
 class CvReplayInfo;
 class CvPopupInfo;
+class CvMessageData;
 
 class CvDLLUtilityIFaceBase
 {
@@ -52,7 +53,6 @@ public:
 	virtual CvDLLPlotBuilderIFaceBase* getPlotBuilderIFace() = 0;
 	virtual CvDLLRiverIFaceBase* getRiverIFace() = 0;
 	virtual CvDLLFAStarIFaceBase* getFAStarIFace() = 0;
-	virtual CvDLLEventReporterIFaceBase* getEventReporterIFace() = 0;
 	virtual CvDLLXmlIFaceBase* getXMLIFace() = 0;
 	virtual CvDLLFlagEntityIFaceBase* getFlagEntityIFace() = 0;
 	virtual CvDLLPythonIFaceBase* getPythonIFace() = 0;
@@ -101,33 +101,16 @@ public:
 	virtual CvWString GetPitbossSmtpPassword() const = 0;
 	virtual CvString GetPitbossEmail() const = 0;
 
+	virtual void sendMessageData(CvMessageData* pData) = 0;
 	virtual void sendPlayerInfo(PlayerTypes eActivePlayer) = 0;
 	virtual void sendGameInfo(const CvWString& szGameName, const CvWString& szAdminPassword) = 0;
 	virtual void sendPlayerOption(PlayerOptionTypes eOption, bool bValue) = 0;
-	virtual void sendExtendedGame() = 0;
-	virtual void sendAutoMoves() = 0;
-	virtual void sendTurnComplete() = 0;
-	virtual void sendJoinGroup(int iUnitID, int iHeadID) = 0;
-	virtual void sendPushMission(int iUnitID, MissionTypes eMission, int iData1, int iData2, int iFlags, bool bShift) = 0;
-	virtual void sendAutoMission(int iUnitID) = 0;
-	virtual void sendDoCommand(int iUnitID, CommandTypes eCommand, int iData1, int iData2, bool bAlt) = 0;
-	virtual void sendPushOrder(int iCityID, OrderTypes eOrder, int iData, bool bAlt, bool bShift, bool bCtrl) = 0;
-	virtual void sendPopOrder(int iCity, int iNum) = 0;
-	virtual void sendDoTask(int iCity, TaskTypes eTask, int iData1, int iData2, bool bOption, bool bAlt, bool bShift, bool bCtrl) = 0;
-	virtual void sendResearch(TechTypes eTech, int iDiscover, bool bShift) = 0;
-	virtual void sendPercentChange(CommerceTypes eCommerce, int iChange) = 0;
-	virtual void sendConvert(ReligionTypes eReligion) = 0;
 	virtual void sendChat(const CvWString& szChatString, ChatTargetTypes eTarget) = 0;
-	virtual void sendPing(int iX, int iY) = 0;
 	virtual void sendPause(int iPauseID = -1) = 0;
 	virtual void sendMPRetire() = 0;
 	virtual void sendToggleTradeMessage(PlayerTypes eWho, TradeableItems eItemType, int iData, int iOtherWho, bool bAIOffer, bool bSendToAll = false) = 0;
 	virtual void sendClearTableMessage(PlayerTypes eWhoTradingWith) = 0;
 	virtual void sendImplementDealMessage(PlayerTypes eOtherWho, CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirList) = 0;
-	virtual void sendChangeWar(TeamTypes iRivalTeam, bool bWar) = 0;
-	virtual void sendChangeVassal(TeamTypes iMasterTeam, bool bVassal, bool bCapitulated) = 0;
-	virtual void sendChooseElection(int iSelection, int iVoteId) = 0;
-	virtual void sendDiploVote(int iVoteId, PlayerVoteTypes eChoice) = 0;
 	virtual void sendContactCiv(NetContactTypes eContactType, PlayerTypes eWho) = 0;
 	virtual void sendOffer() = 0;
 	virtual void sendDiploEvent(PlayerTypes eWhoTradingWith, DiploEventTypes eDiploEvent, int iData1, int iData2) = 0;
@@ -135,14 +118,8 @@ public:
 	virtual void sendRenegotiateThisItem(PlayerTypes ePlayer2, TradeableItems eItemType, int iData) = 0;
 	virtual void sendExitTrade() = 0;
 	virtual void sendKillDeal(int iDealID, bool bFromDiplomacy) = 0;
-	virtual void sendUpdateCivics(CivicTypes* paeCivics) = 0;
 	virtual void sendDiplomacy(PlayerTypes ePlayer, CvDiploParameters* pParams) = 0;
 	virtual void sendPopup(PlayerTypes ePlayer, CvPopupInfo* pInfo) = 0;
-	virtual void sendEventTriggered(PlayerTypes ePlayer, EventTypes eEvent, int iEventTriggeredId) = 0;
-	virtual void sendEmpireSplit(PlayerTypes ePlayer, int iAreaId) = 0;
-	virtual void sendLaunch(PlayerTypes ePlayer, VictoryTypes eVictory) = 0;
-	virtual void sendAdvancedStartAction(AdvancedStartActionTypes eAction, PlayerTypes ePlayer, int iX, int iY, int iData, bool bAdd) = 0;
-	virtual void sendFoundReligion(PlayerTypes ePlayer, ReligionTypes eReligion, ReligionTypes eSlotReligion) = 0;
 
 	virtual int getMillisecsPerTurn() = 0;
 	virtual float getSecsPerTurn() = 0;
@@ -159,14 +136,6 @@ public:
 	virtual bool isWBMapNoPlayers() = 0;
 	virtual bool pythonMapExists(const char * szMapName) = 0;
 
-	virtual const wchar* getPlayerName(int iIndex, uint uiForm = 0) = 0;
-	virtual const wchar* getPlayerNameKey(int iIndex) = 0;
-	virtual const wchar* getCivDescription(int iIndex, uint uiForm = 0) = 0;
-	virtual const wchar* getCivDescriptionKey(int iIndex) = 0;
-	virtual const wchar* getCivShortDesc(int iIndex, uint uiForm = 0) = 0;
-	virtual const wchar* getCivShortDescKey(int iIndex) = 0;
-	virtual const wchar* getCivAdjective(int iIndex, uint uiForm = 0) = 0;
-	virtual const wchar* getCivAdjectiveKey(int iIndex) = 0;
 	virtual void stripSpecialCharacters(CvWString& szName) = 0;
 
 	virtual void initGlobals() = 0;
@@ -230,6 +199,7 @@ public:
 	virtual void logMemState(const char* msg) = 0;
 
 	virtual int getSymbolID(int iID) = 0;
+	virtual void setSymbolID(int iID, int iValue) = 0;
 
 	virtual CvWString getText(CvWString szIDTag, ...) = 0;
 	virtual CvWString getObjectText(CvWString szIDTag, uint uiForm, bool bNoSubs = false) = 0;
@@ -254,7 +224,6 @@ public:
 
 	virtual void enumerateFiles(std::vector<CvString>& files, const char* szPattern) = 0;
 	virtual void enumerateModuleFiles(std::vector<CvString>& aszFiles, const CvString& refcstrRootDirectory,	const CvString&	refcstrModularDirectory, const CvString& refcstrExtension, bool bSearchSubdirectories) = 0;
-	virtual bool getTestingFont() const = 0;
 
 	virtual void SaveGame(SaveGameTypes eSaveGame) = 0;
 	virtual void LoadGame() = 0;
@@ -271,6 +240,8 @@ public:
 	virtual bool isFMPMgrHost() = 0;
 	virtual bool isFMPMgrPublic() = 0;
 	virtual void handleRetirement(PlayerTypes ePlayer) = 0;
+	virtual PlayerTypes getFirstBadConnection() = 0;
+	virtual int getConnState(PlayerTypes ePlayer) = 0;
 
 	virtual bool ChangeINIKeyValue(const char* szGroupKey, const char* szKeyValue, const char* szOut) = 0;
 
@@ -278,7 +249,7 @@ public:
 
 	virtual const char* getModName(bool bFullPath = true) const = 0;
 	virtual bool hasSkippedSaveChecksum() const = 0;
-	virtual void resetStatistics() = 0;
+	virtual void reportStatistics() = 0;
 };
 
 #endif	// CvDLLUtilityIFaceBase_h

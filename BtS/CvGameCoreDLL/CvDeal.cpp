@@ -10,7 +10,7 @@
 #include "CvGameCoreUtils.h"
 #include "CvGameTextMgr.h"
 #include "CvDLLInterfaceIFaceBase.h"
-#include "CvDLLEventReporterIFaceBase.h"
+#include "CvEventReporter.h"
 
 // Public Functions...
 
@@ -323,31 +323,35 @@ void CvDeal::doTurn()
 // XXX probably should have some sort of message for the user or something...
 void CvDeal::verify()
 {
-	CLLNode<TradeData>* pNode;
-	bool bCancelDeal;
+	bool bCancelDeal = false;
 
-	bCancelDeal = false;
+	CvPlayer& kFirstPlayer = GET_PLAYER(getFirstPlayer());
+	CvPlayer& kSecondPlayer = GET_PLAYER(getSecondPlayer());
 
-	for (pNode = headFirstTradesNode(); (pNode != NULL); pNode = nextFirstTradesNode(pNode))
+	for (CLLNode<TradeData>* pNode = headFirstTradesNode(); (pNode != NULL); pNode = nextFirstTradesNode(pNode))
 	{
 		if (pNode->m_data.m_eItemType == TRADE_RESOURCES)
 		{
 			// XXX embargoes?
-			if ((GET_PLAYER(getFirstPlayer()).getNumTradeableBonuses((BonusTypes)(pNode->m_data.m_iData)) < 0) ||
-				  !(GET_PLAYER(getFirstPlayer()).canTradeNetworkWith(getSecondPlayer())))
+			if ((kFirstPlayer.getNumTradeableBonuses((BonusTypes)(pNode->m_data.m_iData)) < 0) ||
+				  !(kFirstPlayer.canTradeNetworkWith(getSecondPlayer())) || 
+				  GET_TEAM(kFirstPlayer.getTeam()).isBonusObsolete((BonusTypes) pNode->m_data.m_iData) || 
+				  GET_TEAM(kSecondPlayer.getTeam()).isBonusObsolete((BonusTypes) pNode->m_data.m_iData))
 			{
 				bCancelDeal = true;
 			}
 		}
 	}
 
-	for (pNode = headSecondTradesNode(); (pNode != NULL); pNode = nextSecondTradesNode(pNode))
+	for (CLLNode<TradeData>* pNode = headSecondTradesNode(); (pNode != NULL); pNode = nextSecondTradesNode(pNode))
 	{
 		if (pNode->m_data.m_eItemType == TRADE_RESOURCES)
 		{
 			// XXX embargoes?
 			if ((GET_PLAYER(getSecondPlayer()).getNumTradeableBonuses((BonusTypes)(pNode->m_data.m_iData)) < 0) ||
-				  !(GET_PLAYER(getSecondPlayer()).canTradeNetworkWith(getFirstPlayer())))
+				  !(GET_PLAYER(getSecondPlayer()).canTradeNetworkWith(getFirstPlayer())) || 
+				  GET_TEAM(kFirstPlayer.getTeam()).isBonusObsolete((BonusTypes) pNode->m_data.m_iData) || 
+				  GET_TEAM(kSecondPlayer.getTeam()).isBonusObsolete((BonusTypes) pNode->m_data.m_iData))
 			{
 				bCancelDeal = true;
 			}
@@ -732,7 +736,7 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 		GET_PLAYER(eFromPlayer).AI_changeGoldTradedTo(eToPlayer, trade.m_iData);
 
 		// Python Event
-		gDLL->getEventReporterIFace()->playerGoldTrade(eFromPlayer, eToPlayer, trade.m_iData);
+		CvEventReporter::getInstance().playerGoldTrade(eFromPlayer, eToPlayer, trade.m_iData);
 
 		break;
 

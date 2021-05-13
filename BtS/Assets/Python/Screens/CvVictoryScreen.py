@@ -672,7 +672,7 @@ class CvVictoryScreen:
 					
 					iBestCulturePlayer = -1
 					bestCityCulture = 0
-					maxCityCulture = gc.getCultureLevelInfo(victory.getCityCulture()).getSpeedThreshold(gc.getGame().getGameSpeedType())
+					maxCityCulture = gc.getGame().getCultureThreshold(victory.getCityCulture())
 					for iLoopPlayer in range(gc.getMAX_PLAYERS()):
 						if (gc.getPlayer(iLoopPlayer).isAlive() and not gc.getPlayer(iLoopPlayer).isMinorCiv() and not gc.getPlayer(iLoopPlayer).isBarbarian()):
 							if (iLoopPlayer != self.iActivePlayer and (activePlayer.getTeam().isHasMet(gc.getPlayer(iLoopPlayer).getTeam()) or gc.getGame().isDebugMode())):

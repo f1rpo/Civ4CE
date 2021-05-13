@@ -470,36 +470,36 @@ def cityAdvise(pCity, iPlayer):
 
 	if (gc.getPlayer(iPlayer).isOption(PlayerOptionTypes.PLAYEROPTION_ADVISOR_POPUPS) and gc.getPlayer(iPlayer).isHuman() and not gc.getGame().isNetworkMultiPlayer()):
 		
-#		if (gc.getGame().getGameTurn()) % 40 == pCity.getGameTurnFounded() % 40:
-		if (not pCity.getID() in g_listNoLiberateCities):
-			eLiberationPlayer = pCity.getLiberationPlayer(false)
-			if (eLiberationPlayer != -1):
-				popupInfo = CyPopupInfo()
-				popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-				popupInfo.setData1(pCity.getID())
-				popupInfo.setText(localText.getText("TXT_KEY_POPUP_LIBERATION_DEMAND", (pCity.getNameKey(), gc.getPlayer(eLiberationPlayer).getCivilizationDescriptionKey(), gc.getPlayer(eLiberationPlayer).getNameKey())))
-				popupInfo.setOnClickedPythonCallback("liberateOnClickedCallback")
-				popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
-				popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
-				popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
-				popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
-				popupInfo.addPopup(iPlayer)
-				g_listNoLiberateCities.append(pCity.getID())
-				g_iAdvisorNags += 1
+		if (gc.getGame().getGameTurn() % 40 == pCity.getGameTurnFounded() % 40):
+			if (not pCity.getID() in g_listNoLiberateCities):
+				eLiberationPlayer = pCity.getLiberationPlayer(false)
+				if (eLiberationPlayer != -1):
+					popupInfo = CyPopupInfo()
+					popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+					popupInfo.setData1(pCity.getID())
+					popupInfo.setText(localText.getText("TXT_KEY_POPUP_LIBERATION_DEMAND", (pCity.getNameKey(), gc.getPlayer(eLiberationPlayer).getCivilizationDescriptionKey(), gc.getPlayer(eLiberationPlayer).getNameKey())))
+					popupInfo.setOnClickedPythonCallback("liberateOnClickedCallback")
+					popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
+					popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
+					popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
+					popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
+					popupInfo.addPopup(iPlayer)
+					g_listNoLiberateCities.append(pCity.getID())
+					g_iAdvisorNags += 1
 
-			elif (gc.getPlayer(iPlayer).canSplitEmpire() and gc.getPlayer(iPlayer).canSplitArea(pCity.area().getID()) and pCity.AI_cityValue() < 0):
-				popupInfo = CyPopupInfo()
-				popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-				popupInfo.setData1(pCity.getID())
-				popupInfo.setText(localText.getText("TXT_KEY_POPUP_COLONY_DEMAND", (pCity.getNameKey(), )))
-				popupInfo.setOnClickedPythonCallback("colonyOnClickedCallback")
-				popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
-				popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
-				popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
-				popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
-				popupInfo.addPopup(iPlayer)
-				g_listNoLiberateCities.append(pCity.getID())
-				g_iAdvisorNags += 1
+				elif (gc.getPlayer(iPlayer).canSplitEmpire() and gc.getPlayer(iPlayer).canSplitArea(pCity.area().getID()) and pCity.AI_cityValue() < 0):
+					popupInfo = CyPopupInfo()
+					popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+					popupInfo.setData1(pCity.getID())
+					popupInfo.setText(localText.getText("TXT_KEY_POPUP_COLONY_DEMAND", (pCity.getNameKey(), )))
+					popupInfo.setOnClickedPythonCallback("colonyOnClickedCallback")
+					popupInfo.setOnFocusPythonCallback("cityWarningOnFocusCallback")
+					popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_AGREE", ()), "")
+					popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_REFUSE", ()), "")
+					popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
+					popupInfo.addPopup(iPlayer)
+					g_listNoLiberateCities.append(pCity.getID())
+					g_iAdvisorNags += 1
 
 		if (pCity.isProduction()):
 		

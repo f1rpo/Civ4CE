@@ -72,34 +72,6 @@ void CvGameAI::AI_updateAssignWork()
 }
 
 
-bool CvGameAI::AI_isFirstTech(TechTypes eTech)
-{
-	int iI;
-
-	for (iI = 0; iI < GC.getNumReligionInfos(); iI++)
-	{
-		if (GC.getReligionInfo((ReligionTypes)iI).getTechPrereq() == eTech)
-		{
-			if (!(GC.getGameINLINE().isReligionSlotTaken((ReligionTypes)iI)))
-			{
-				return true;
-			}
-		}
-	}
-
-	if (GC.getGameINLINE().countKnownTechNumTeams(eTech) == 0)
-	{
-		if ((GC.getTechInfo(eTech).getFirstFreeUnitClass() != NO_UNITCLASS) ||
-				(GC.getTechInfo(eTech).getFirstFreeTechs() > 0))
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-
 int CvGameAI::AI_combatValue(UnitTypes eUnit)
 {
 	int iValue;

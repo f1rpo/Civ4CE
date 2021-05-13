@@ -197,6 +197,9 @@ protected:
 	bool AI_cityOffenseSpy(int iRange);
 	bool AI_espionageSpy();
 	bool AI_moveToStagingCity();
+	bool AI_seaRetreatFromCityDanger();
+	bool AI_airRetreatFromCityDanger();
+	bool AI_airAttackDamagedSkip();
 
 	bool AI_followBombard();
 

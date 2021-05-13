@@ -259,7 +259,7 @@ public:
 	void saveReplay(int iPlayer);
 
 	void addPlayer(int /*PlayerTypes*/ eNewPlayer, int /*LeaderHeadTypes*/ eLeader, int /*CivilizationTypes*/ eCiv);
-
+	int getCultureThreshold(int /*CultureLevelTypes*/ eLevel);
 	void setPlotExtraYield(int iX, int iY, int /*YieldTypes*/ eYield, int iExtraYield);
 	void changePlotExtraCost(int iX, int iY, int iExtraCost);
 	
@@ -269,6 +269,7 @@ public:
 	bool isBuildingEverActive(int /*BuildingTypes*/ eBuilding);
 
 	bool isEventActive(int /*EventTriggerTypes*/ eTrigger);
+	void doControl(int iControl);
 
 protected:
 	CvGame* m_pGame;

@@ -25,7 +25,7 @@ public:
 	void removePlot(CvPlot* pPlot);
 	void recalculatePlots();														
 
-	DllExport int getID() const;
+	int getID() const;
 	void setID(int iID);
 
 	PlayerTypes getOwner() const;

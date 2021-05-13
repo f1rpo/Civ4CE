@@ -192,7 +192,6 @@ void CyUnitPythonInterface1(python::class_<CyUnit>& x)
 		.def("canAirDefend", &CyUnit::canAirDefend, "bool (CyPlot*)")
 		.def("airCombatDamage", &CyUnit::airCombatDamage, "int (CyUnit* pDefender)")
 		.def("bestInterceptor", &CyUnit::bestInterceptor, python::return_value_policy<python::manage_new_object>(), "CyUnit* (CyPlot*)")
-		.def("bestSeaPillageInterceptor", &CyUnit::bestSeaPillageInterceptor, python::return_value_policy<python::manage_new_object>(), "CyUnit* (CyPlot*)")
 
 		.def("isAutomated", &CyUnit::isAutomated, "bool ()")
 		.def("isWaiting", &CyUnit::isWaiting, "bool ()")

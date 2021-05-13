@@ -22,8 +22,6 @@ public:
 	void AI_makeAssignWorkDirty();
 	void AI_updateAssignWork();
 
-	bool AI_isFirstTech(TechTypes eTech);
-
 	int AI_combatValue(UnitTypes eUnit);
 
 	int AI_turnsPercent(int iTurns, int iPercent);

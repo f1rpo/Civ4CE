@@ -7,7 +7,7 @@
 <Civ4Defines xmlns="x-schema:CIV4GlobalDefinesSchema.xml">
 	<Define>
 		<DefineName>CIV4_VERSION</DefineName>
-		<iDefineIntVal>317</iDefineIntVal>
+		<iDefineIntVal>319</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>MIN_VERSION</DefineName>
@@ -15,7 +15,7 @@
 	</Define>
 	<Define>
 		<DefineName>SAVE_VERSION</DefineName>
-		<iDefineIntVal>301</iDefineIntVal>
+		<iDefineIntVal>302</iDefineIntVal>
 	</Define>
 	<Define>
 		<DefineName>MAX_NUM_LANGUAGES</DefineName>
@@ -1659,7 +1659,11 @@
 		<iDefineIntVal>0</iDefineIntVal>
 	</Define>
 	<Define>
-		<DefineName>BONUS_OBSOLETE_VALUE_MODIFIER</DefineName>
-		<iDefineIntVal>150</iDefineIntVal>
+		<DefineName>NO_ESPIONAGE_CULTURE_LEVEL_MODIFIER</DefineName>
+		<iDefineIntVal>100</iDefineIntVal>
+	</Define>
+	<Define>
+		<DefineName>FORCE_UNOWNED_CITY_TIMER</DefineName>
+		<iDefineIntVal>2</iDefineIntVal>
 	</Define>
 </Civ4Defines>

@@ -203,7 +203,6 @@ public:
 	bool canAirDefend(CyPlot* pPlot);																				 
 	int airCombatDamage( CyUnit* pDefender);
 	CyUnit* bestInterceptor( CyPlot* pPlot);
-	CyUnit* bestSeaPillageInterceptor( CyPlot* pPlot);
 
 	bool isAutomated();																		 
 	bool isWaiting();																		 

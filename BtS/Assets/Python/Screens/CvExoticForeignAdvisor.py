@@ -447,13 +447,10 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
 			nAttitude = 0
 			szAttitude = CyGameTextMgr().getAttitudeString(nPlayer, nTarget)
 #			ExoticForPrint (("%d toward %d" % (nPlayer, nTarget)) + str(szAttitude))
-			# Unofficial Patch Start
-			# * Fixed bug where Glance screen would include part of player's name in attitude calculation.
 			ltPlusAndMinuses = re.findall ("[-+][0-9]+\s?: ", szAttitude)
 #			ExoticForPrint ("Length: %d" % len (ltPlusAndMinuses))
 			for i in range (len (ltPlusAndMinuses)):
 				nAttitude += int (ltPlusAndMinuses[i][:-2])
-			# Unofficial Patch End
 #			ExoticForPrint ("Attitude: %d" % nAttitude)
 		else:
 			return None
@@ -855,7 +852,7 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
 					for iLoopTech in range(gc.getNumTechInfos()):
 					
 						tradeData.iData = iLoopTech
-						if (activePlayer.canTradeItem(iLoopPlayer, tradeData, False)): # wants
+						if (activePlayer.canTradeItem(iLoopPlayer, tradeData, False) and activePlayer.getTradeDenial(iLoopPlayer, tradeData) == DenialTypes.NO_DENIAL): # wants
 							self.techIconGrid.addIcon( currentRow, 1, gc.getTechInfo(iLoopTech).getButton()
 																				 , WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iLoopTech )
 						elif currentPlayer.canResearch(iLoopTech, False):

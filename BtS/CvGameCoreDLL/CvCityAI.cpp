@@ -13,7 +13,6 @@
 #include "CyArgsList.h"
 #include "CvInfos.h"
 #include "FProfiler.h"
-#include "UnofficialPatch.h"
 
 #include "CvDLLPythonIFaceBase.h"
 #include "CvDLLInterfaceIFaceBase.h"
@@ -4410,14 +4409,7 @@ int CvCityAI::AI_neededDefenders()
 	{
 		if (bOffenseWar)
 		{
-		    // Unofficial Patch Start
-		    // * Fixed AI defender bug for newly captured cities.
-#ifdef _USE_UNOFFICIALPATCH
 			if (!hasActiveWorldWonder() && !isHolyCity())
-#else
-			if  (!hasActiveWorldWonder() || isHolyCity())
-#endif
-			// Unofficial Patch End
 			{
 				iDefenders /= 2;
 				iDefenders = std::max(1, iDefenders);
@@ -5920,7 +5912,7 @@ void CvCityAI::AI_doEmphasize()
 	
 	if (GET_PLAYER(getOwnerINLINE()).getCurrentResearch() != NO_TECH)
 	{
-		bFirstTech = GC.getGameINLINE().AI_isFirstTech(GET_PLAYER(getOwnerINLINE()).getCurrentResearch());
+		bFirstTech = GET_PLAYER(getOwnerINLINE()).AI_isFirstTech(GET_PLAYER(getOwnerINLINE()).getCurrentResearch());
 	}
 	else
 	{

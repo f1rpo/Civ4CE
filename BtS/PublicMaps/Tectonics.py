@@ -1,5 +1,4 @@
 #-----------------------------------------------------------------------------
-#	Copyright (c) 2005-2008 Laurent Di Cesare
 #	Copyright (c) 2008 Firaxis Games, Inc. All rights reserved.
 #-----------------------------------------------------------------------------
 #
@@ -59,10 +58,6 @@
 # VERSION 3.15 Added an option not to group civs on Terra option,
 #							 Tuned Terra landmasses (mostly Africa, Greenland), removed
 #							 Antarctic landmass (too many barbs spawning there).
-# VERSION 3.16 Included Firaxis code for translating the options. 
-#							Kept my copyrights.
-#             Added more rivers. (Also aborted try at heghtmap for rivers.)
-#						  Updated the Terra option to have much better looking Arabia.
 # TODO The shape of the plates should be less polygonal and more random 
 #      (more round than rectangular)
 #      The number of plates could be more tunable.
@@ -750,7 +745,7 @@ class voronoiTerraMap(voronoiMap):
 		y = 4*self.mapHeight/7
 		self.plateMap[x + y*self.mapWidth] = 15
 		self.plateSize[15] = 2
-		self.plate[15] = self.landAltitude + 1
+		self.plate[15] = self.landAltitude -1
 		#South East Asia
 		x = 17*self.mapWidth/20
 		y = 4*self.mapHeight/7
@@ -792,21 +787,11 @@ class voronoiTerraMap(voronoiMap):
 					if (self.plateMap[x-1 + y*self.mapWidth] != 17):
 						self.plotTypes[x + y*self.mapWidth] = PlotTypes.PLOT_OCEAN
 						self.plotTypes[x + (y-1)*self.mapWidth] = PlotTypes.PLOT_OCEAN
-		#Force Arabia
-		for x in range(self.mapWidth):
-			for y in range(self.mapHeight):
-				if self.plateMap[x + y*self.mapWidth] == 15:
-					if self.plateMap[x + (y-1)*self.mapWidth] != 15:
-						self.plotTypes[x + y*self.mapWidth] = PlotTypes.PLOT_OCEAN
-						self.plotTypes[x + (y-1)*self.mapWidth] = PlotTypes.PLOT_OCEAN
-					if self.plateMap[x+1 + y*self.mapWidth] != 15:
-						self.plotTypes[x + y*self.mapWidth] = PlotTypes.PLOT_OCEAN
-						self.plotTypes[x+1 + y*self.mapWidth] = PlotTypes.PLOT_OCEAN
 		#Force Central America
 		baseX = self.mapWidth/6
 		x = baseX
 		width = 2
-		if (self.dice.get(10,"Width variation") > 8):
+		if (width < 4 and self.dice.get(10,"Width variation") > 8):
 			width += 1
 		if (width > 1 and self.dice.get(10,"Width variation") > 8):
 			width -= 1
@@ -1129,86 +1114,19 @@ def generatePlotTypes():
 	generator = voronoiMap(numContinents,numSeaPlates,hotspotsFrequency)
 	return generator.generate()
 
-#Rivers map second try...
-class riversMap:
+# This whole class is needlessly complex. It would be better to rewrite it by first defining
+# a new map, which is the map of the places between squares, giving them an altitude which would be the max
+# of the surrounding squares. This would simplify this a lot but I'm too lazy for now to rewrite all.
+class riversFromSea:
 	def __init__(self):
 		self.gc = CyGlobalContext()
 		self.dice = self.gc.getGame().getMapRand()
 		self.map = CyMap()
-		self.mapWidth = self.map.getGridWidth()
-		self.mapHeight = self.map.getGridHeight()
-		self.file = open( "d:\\tmp\\toto.txt", 'w' )
-		self.generateHeightMap()
-
-	def initHeightMap(self,currentLands):
-		#initialize with high altitudes on peaks and hills
-		for x in range(self.mapWidth):
-			for y in range(self.mapHeight):
-				plot = self.map.plot(x,y)
-				if (plot.getPlotType() == PlotTypes.PLOT_PEAK):
-					currentLands[x + y*self.mapWidth]  = 1
-					self.heightMap[x + y*self.mapWidth]  = 10000
-				elif (plot.getPlotType() == PlotTypes.PLOT_HILLS):
-					currentLands[x + y*self.mapWidth]  = 1
-					self.heightMap[x + y*self.mapWidth]  = 1000
-				elif (plot.getPlotType() == PlotTypes.PLOT_LAND):
-					currentLands[x + y*self.mapWidth]  = 1
-					self.heightMap[x + y*self.mapWidth]  = 1
-
-	def generateHeightMap(self):
-		self.heightMap = [0] * (self.mapWidth*self.mapHeight)
-		currentLands = [0] * (self.mapWidth*self.mapHeight)
-		self.initHeightMap(currentLands)
-		finished = false
-		#make sure there's a slope towards seas and lakes
-		while not finished:
-			finished = true
-			buffer = [1] * (self.mapWidth*self.mapHeight)
-			for x in range(self.mapWidth):
-				for y in range(self.mapHeight):
-					plot = x + y*self.mapWidth
-					if currentLands[plot] == 0:
-						buffer[plot] = 0
-						for i in self.neighbours(x, y):
-							buffer[i] = 0
-			for x in range(self.mapWidth):
-				for y in range(self.mapHeight):
-					plot = x + y*self.mapWidth
-					currentLands[plot] = buffer[plot]
-					if buffer[plot] == 1:
-						finished = false
-						self.heightMap[plot] = 1 + self.heightMap[plot]
-		#make sure there's a slope going downwards away from mountains
-		for i in range(20):
-			increase = []
-			for x in range(self.mapWidth):
-				for y in range(self.mapHeight):
-					if self.heightMap[x + y*self.mapWidth] > 20 - i:
-						for j in self.neighbours(x, y):
-							increase.append(j)
-			for plot in increase:
-				self.heightMap[plot] = self.heightMap[plot] + 2
-		for y in range(self.mapHeight):
-			for x in range(self.mapWidth):
-				plot = x + y*self.mapWidth
-				self.file.write( str( self.heightMap[plot] ) + "\t" )
-			self.file.write( "\n" )
-
-	def neighbours(self, x, y):
-		result = []
-		if x == 0:
-			result.append(y*self.mapWidth)
-		else:
-			result.append(x-1 + y*self.mapWidth)
-		if x == self.mapWidth - 1:
-			result.append(y*self.mapWidth)
-		else:
-			result.append(x+1 + y*self.mapWidth)
-		if y > 0:
-			result.append(x + (y-1)*self.mapWidth)
-		if y < self.mapHeight - 1:
-			result.append(x + (y+1)*self.mapWidth)
-		return result
+		self.width = self.map.getGridWidth()
+		self.height = self.map.getGridHeight()
+		self.straightThreshold = 3
+		if (self.width * self.height > 400):
+			self.straightThreshold = 2
 
 	def seedRivers(self):
 		climate = CyMap().getCustomMapOption(1)
@@ -1220,180 +1138,6 @@ class riversMap:
 			divider = 2
 		elif (climate == 3):               # No ice
 			divider = 3
-		probability = 30/divider
-		seeds = []
-		for x in range(self.mapWidth):
-			for y in range(self.mapHeight):
-				plot = self.map.plot(x,y)
-				if (plot.getPlotType() == PlotTypes.PLOT_HILLS):
-					if self.dice.get(100,"Start river") < probability:
-						seeds.append( plot )
-				elif (plot.getPlotType() == PlotTypes.PLOT_LAND):
-					if self.dice.get(1000,"Start river in flatland") < probability + self.heightMap[x + y*self.mapWidth]:
-						seeds.append( plot )
-		for plot in seeds:
-			riverID = self.gc.getMap().getNextRiverID()
-			self.startRiver(riverID, plot)
-		self.file.close()
-
-	def startRiver(self, riverID, plot):
-		if plot.isWater():
-			return true
-		x = plot.getX()
-		y = plot.getY()
-		height = self.heightMap[x + y * self.mapWidth]
-		ns = self.checkNorthSouth(x, y, height)
-		ew = self.checkEastWest(x, y, height)
-		if ns == CardinalDirectionTypes.NO_CARDINALDIRECTION and ew == CardinalDirectionTypes.NO_CARDINALDIRECTION:
-			self.file.write( "End river false\n" )
-			return false
-		self.file.write( "Will flow\n" )
-		if ns != CardinalDirectionTypes.NO_CARDINALDIRECTION and ew != CardinalDirectionTypes.NO_CARDINALDIRECTION:
-			if self.dice.get(self.mapHeight + self.mapWidth,"direction") < self.mapHeight:
-				self.flow(riverID, plot, ns)
-			else:
-				self.flow(riverID, plot, ew)
-		elif ns != CardinalDirectionTypes.NO_CARDINALDIRECTION:
-			self.flow(riverID, plot, ns)
-		elif ew != CardinalDirectionTypes.NO_CARDINALDIRECTION:
-			self.flow(riverID, plot, ew)
-		self.file.write( "End river true\n" )
-		return true
-
-	#checks for isWOfRiver
-	def checkNorthSouth(self, x, y, height):
-		if x == self.mapWidth - 1:
-			delta = 1 - self.mapWidth
-		else:
-			delta = 1
-		west = x + delta + y*self.mapWidth
-		northSouthHeight = height + self.heightMap[west]
-		result = CardinalDirectionTypes.NO_CARDINALDIRECTION
-		plot = self.map.plot(x,y)
-		if plot.isWOfRiver():
-			return result
-		if y > 0:
-			nHeight = self.heightMap[x + (y-1)*self.mapWidth] + self.heightMap[x + delta + (y-1)*self.mapWidth]
-			self.file.write( " For " + str(x) + ", " + str(y) + ", heights: " + str(nHeight) + " <? " + str(northSouthHeight) + "\n" )
-			if nHeight < northSouthHeight:
-				result = CardinalDirectionTypes.CARDINALDIRECTION_SOUTH
-		if y < self.mapHeight -1:
-			sHeight = self.heightMap[x + (y-1)*self.mapWidth] + self.heightMap[x + delta + (y-1)*self.mapWidth]
-			self.file.write( " For " + str(x) + ", " + str(y) + ", heights: " + str(sHeight) + " <? " + str(northSouthHeight) + "\n" )
-			if sHeight < northSouthHeight:
-				if result == CardinalDirectionTypes.NO_CARDINALDIRECTION or sHeight < nHeight:
-					result = CardinalDirectionTypes.CARDINALDIRECTION_NORTH
-		return result
-
-	#checks for isNOfRiver
-	def checkEastWest(self, x, y, height):
-		result = CardinalDirectionTypes.NO_CARDINALDIRECTION
-		plot = self.map.plot(x,y)
-		if plot.isNOfRiver():
-			return result
-		if y < self.mapHeight -1:
-			south = x + (y+1)*self.mapWidth
-			eastWestHeight = height + self.heightMap[south]
-			if x == self.mapWidth - 1:
-				west = y*self.mapWidth
-				swest = (y+1)*self.mapWidth
-			else:
-				west = x + 1 + y*self.mapWidth
-				swest = x + 1 + (y+1)*self.mapWidth
-			wHeight = self.heightMap[west] + self.heightMap[swest] 
-			self.file.write( " For " + str(x) + ", " + str(y) + ", heights: " + str(wHeight) + " <? " + str(eastWestHeight) + "\n" )
-			if wHeight < eastWestHeight:
-				result = CardinalDirectionTypes.CARDINALDIRECTION_WEST
-			if x == 0:
-				east = y*self.mapWidth
-				seast = (y+1)*self.mapWidth
-			else:
-				east = x - 1 + y*self.mapWidth
-				seast = x - 1 + (y+1)*self.mapWidth
-			eHeight = self.heightMap[east] + self.heightMap[seast] 
-			self.file.write( " For " + str(x) + ", " + str(y) + ", heights: " + str(eHeight) + " <? " + str(eastWestHeight) + "\n" )
-			if eHeight < eastWestHeight:
-				if result == CardinalDirectionTypes.NO_CARDINALDIRECTION or eHeight < wHeight:
-					result = CardinalDirectionTypes.CARDINALDIRECTION_EAST
-		return result
-
-	def joins(self, riverPlot, riverID):
-		return (riverPlot.isWOfRiver() or riverPlot.isNOfRiver()) and riverPlot.getRiverID() != riverID
-
-	def flow(self, riverID, plot, direction):
-		x = plot.getX()
-		y = plot.getY()
-		self.file.write( "Flow to " + str(x) + ", " + str(y) + "\n" )
-		if direction == CardinalDirectionTypes.CARDINALDIRECTION_EAST:
-			if x < self.mapWidth - 1:
-				riverPlot = self.map.plot(x+1,y)
-				if y == self.mapHeight - 1 or self.map.plot(x+1,y+1).isWater() or riverPlot.isWater():
-					return
-			else:
-				riverPlot = self.map.plot(0,y)
-				if y == self.mapHeight - 1 or self.map.plot(0,y+1).isWater() or riverPlot.isWater():
-					return
-			joinRiver = self.joins(riverPlot, riverID)
-			riverPlot.setNOfRiver(True,direction)
-		if direction == CardinalDirectionTypes.CARDINALDIRECTION_WEST:
-			if x > 0:
-				riverPlot = self.map.plot(x-1,y)
-				if y == self.mapHeight - 1 or self.map.plot(x-1,y+1).isWater() or riverPlot.isWater():
-					return
-			else:
-				riverPlot = self.map.plot(self.mapWidth-1,y)
-				if y == self.mapHeight - 1 or self.map.plot(self.mapWidth-1,y+1).isWater() or riverPlot.isWater():
-					return
-			joinRiver = self.joins(riverPlot, riverID)
-			riverPlot.setNOfRiver(True,direction)
-		if direction == CardinalDirectionTypes.CARDINALDIRECTION_NORTH:
-			riverPlot = self.map.plot(x,y-1)
-			if ( x == self.mapWidth - 1 and self.map.plot(0,y).isWater() ) or ( x < self.mapWidth - 1 and self.map.plot(x+1,y).isWater() ) or riverPlot.isWater():
-				return
-			joinRiver = self.joins(riverPlot, riverID)
-			riverPlot.setWOfRiver(True,direction)
-		if direction == CardinalDirectionTypes.CARDINALDIRECTION_SOUTH:
-			riverPlot = self.map.plot(x,y+1)
-			if ( x == self.mapWidth - 1 and self.map.plot(0,y).isWater() ) or ( x < self.mapWidth - 1 and self.map.plot(x+1,y).isWater() ) or riverPlot.isWater():
-				return
-			joinRiver = self.joins(riverPlot, riverID)
-			riverPlot.setWOfRiver(True,direction)
-		if joinRiver:
-			self.file.write( "Joining rivers\n" )
-			return
-		riverPlot.setRiverID(riverID)
-		self.startRiver(riverID,riverPlot)
-		#if not self.startRiver(riverID,riverPlot):
-			#self.file.write( "Add ocean in " + str(riverPlot.getX()) + ", " + str(riverPlot.getY()) + "\n" )
-			#riverPlot.setPlotType(PlotTypes.PLOT_OCEAN,true,true)
-
-# This whole class is needlessly complex. It would be better to rewrite it by first defining
-# a new map, which is the map of the places between squares, giving them an altitude which would be the max
-# of the surrounding squares. This would simplify this a lot but I'm too lazy for now to rewrite all.
-class riversFromSea:
-	def __init__(self):
-		self.gc = CyGlobalContext()
-		self.dice = self.gc.getGame().getMapRand()
-		self.map = CyMap()
-		self.width = self.map.getGridWidth()
-		self.height = self.map.getGridHeight()
-		self.straightThreshold = 4
-		self.riverLength = {}
-		self.riverTurns = {}
-		self.minRiverLength = self.height/6
-		if (self.width * self.height > 400):
-			self.straightThreshold = 3
-
-	def seedRivers(self):
-		climate = CyMap().getCustomMapOption(1)
-		if (climate == 0):                 # Arid
-			divider = 4
-		elif (climate == 1):               # Normal
-			divider = 2
-		elif (climate == 2):               # Wet
-			divider = 1
-		elif (climate == 3):               # No ice
-			divider = 2
 		maxNumber = (self.width + self.height) / divider
 		userInputLandmass = self.map.getCustomMapOption(0)
 		riversNumber = 1 + maxNumber
@@ -1405,15 +1149,9 @@ class riversFromSea:
 			return
 		coastShare = coastsNumber/riversNumber
 		for i in range(riversNumber):
-			flow = CardinalDirectionTypes.NO_CARDINALDIRECTION
-			tries = 0
-			while flow == CardinalDirectionTypes.NO_CARDINALDIRECTION and tries < 6:
-				tries = tries + 1
-				(x,y,flow) = self.generateRiver(i,coastShare)
-			if flow != CardinalDirectionTypes.NO_CARDINALDIRECTION:
+			(x,y,flow) = self.generateRiver(i,coastShare)
+			if (flow != CardinalDirectionTypes.NO_CARDINALDIRECTION):
 				riverID = self.gc.getMap().getNextRiverID()
-				self.riverLength[riverID] = 0
-				self.riverTurns[riverID] = 0
 				self.addRiverFrom(x,y,flow,riverID)
 
 	def collateCoasts(self):
@@ -1555,7 +1293,6 @@ class riversFromSea:
 		plot = self.map.plot(x,y)
 		if (plot.isWater()):
 			return
-		self.riverLength[riverID] = self.riverLength[riverID] + 1
 		eastX = self.eastX(x)
 		westX = self.westX(x)
 		if (self.preventRiversFromCrossing(x,y,flow,riverID)):
@@ -1588,9 +1325,9 @@ class riversFromSea:
 			return
 		flatDesert = (plot.getPlotType() == PlotTypes.PLOT_LAND) and (plot.getTerrainType() == CyGlobalContext().getInfoTypeForString("TERRAIN_DESERT"))
 		#Prevent Uturns in rivers
-		turnThreshold = 13
+		turnThreshold = 16
 		if flatDesert:
-			turnThreshold = 17
+			turnThreshold = 18
 		turned = False
 		northY = y + 1
 		southY = y - 1
@@ -1599,7 +1336,6 @@ class riversFromSea:
 				nextI = northY*self.width + x
 				if (self.canFlowFrom(plot,self.map.plot(x,northY)) and self.canFlowFrom(self.map.plot(self.eastX(x),y),self.map.plot(self.eastX(x),northY))):
 					turned = True
-					self.riverTurns[riverID] = self.riverTurns[riverID] + 1
 					if (flow == CardinalDirectionTypes.CARDINALDIRECTION_WEST):
 						self.addRiverFrom(x,y,CardinalDirectionTypes.CARDINALDIRECTION_SOUTH,riverID)
 					else:
@@ -1610,7 +1346,6 @@ class riversFromSea:
 				nextI = southY*self.width + x
 				if (self.canFlowFrom(plot,self.map.plot(x,southY)) and self.canFlowFrom(self.map.plot(self.eastX(x),y),self.map.plot(self.eastX(x),southY))):
 					turned = True
-					self.riverTurns[riverID] = self.riverTurns[riverID] + 1
 					if (flow == CardinalDirectionTypes.CARDINALDIRECTION_WEST):
 						southPlot = self.map.plot(x,y-1)
 						southPlot.setRiverID(riverID)
@@ -1623,7 +1358,6 @@ class riversFromSea:
 			nextI = y*self.width + eastX
 			if (self.canFlowFrom(plot,self.map.plot(eastX,y)) and self.canFlowFrom(self.map.plot(x,southY),self.map.plot(eastX,y)) and (self.dice.get(20,"branch from east") > turnThreshold)):
 				turned = True
-				self.riverTurns[riverID] = self.riverTurns[riverID] + 1
 				if (flow == CardinalDirectionTypes.CARDINALDIRECTION_NORTH):
 					eastPlot = self.map.plot(eastX,y)
 					eastPlot.setRiverID(riverID)
@@ -1643,21 +1377,17 @@ class riversFromSea:
 					self.addRiverFrom(x,y+1,CardinalDirectionTypes.CARDINALDIRECTION_EAST,riverID)
 		spawnInDesert = (not turned) and flatDesert
 		if ((self.dice.get(10,"straight river") > self.straightThreshold) or spawnInDesert):
-			if (not turned) or (self.riverTurns[riverID] * 5 < self.riverLength[riverID]):
-				self.addRiverFrom(nextX,nextY,flow,riverID)
+			self.addRiverFrom(nextX,nextY,flow,riverID)
 		else:
 			if (not turned):
-				if self.riverLength[riverID] < self.minRiverLength:
-					self.addRiverFrom(nextX,nextY,flow,riverID)
-				else:
-					plot = self.map.plot(nextX,nextY)
-					if ((plot.getPlotType() == PlotTypes.PLOT_LAND) and (self.dice.get(10,"Rivers start in hills") > 3)):
-						plot.setPlotType(PlotTypes.PLOT_HILLS,true,true)
-						if ((flow == CardinalDirectionTypes.CARDINALDIRECTION_WEST) or (flow == CardinalDirectionTypes.CARDINALDIRECTION_EAST)):
-							if southY > 0:
-								self.map.plot(nextX,southY).setPlotType(PlotTypes.PLOT_HILLS,true,true)
-						else:
-							self.map.plot(eastX,nextY).setPlotType(PlotTypes.PLOT_HILLS,true,true)
+				plot = self.map.plot(nextX,nextY)
+				if ((plot.getPlotType() == PlotTypes.PLOT_LAND) and (self.dice.get(10,"Rivers start in hills") > 3)):
+					plot.setPlotType(PlotTypes.PLOT_HILLS,true,true)
+					if ((flow == CardinalDirectionTypes.CARDINALDIRECTION_WEST) or (flow == CardinalDirectionTypes.CARDINALDIRECTION_EAST)):
+						if southY > 0:
+							self.map.plot(nextX,southY).setPlotType(PlotTypes.PLOT_HILLS,true,true)
+					else:
+						self.map.plot(eastX,nextY).setPlotType(PlotTypes.PLOT_HILLS,true,true)
 
 	def canFlowFrom(self,plot,upperPlot):
 		if (plot.isWater()):
@@ -1687,7 +1417,6 @@ class riversFromSea:
 		return eastX
 
 def addRivers():
-	#riverGenerator = riversMap()
 	riverGenerator = riversFromSea()
 	riverGenerator.seedRivers()
 

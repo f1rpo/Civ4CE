@@ -33,12 +33,12 @@ public:
 	DllExport CvInfoBase();
 	DllExport virtual ~CvInfoBase();
 
-	DllExport virtual void reset();
+	virtual void reset();
 
 	DllExport bool isGraphicalOnly() const;										// Exposed to Python
 
 	DllExport const TCHAR* getType() const;										// Exposed to Python
-	DllExport virtual const TCHAR* getButton() const;					// Exposed to Python
+	virtual const TCHAR* getButton() const;					// Exposed to Python
 
 	// for python wide string handling
 	std::wstring pyGetTextKey() { return getTextKeyWide(); }						// Exposed to Python
@@ -52,18 +52,18 @@ public:
 	DllExport const wchar* getTextKeyWide() const;
 	DllExport const wchar* getDescription(uint uiForm = 0) const;
 	DllExport const wchar* getText() const;
-	DllExport const wchar* getCivilopedia() const;
+	const wchar* getCivilopedia() const;
 	DllExport const wchar* getHelp() const;		
-	DllExport const wchar* getStrategy() const;	
+	const wchar* getStrategy() const;	
 
-	DllExport bool isMatchForLink(std::wstring szLink, bool bKeysOnly) const;
+	bool isMatchForLink(std::wstring szLink, bool bKeysOnly) const;
 
-	DllExport virtual void read(FDataStreamBase* pStream);
-	DllExport virtual void write(FDataStreamBase* pStream);
+	virtual void read(FDataStreamBase* pStream);
+	virtual void write(FDataStreamBase* pStream);
 
-	DllExport virtual bool read(CvXMLLoadUtility* pXML);
-	DllExport virtual bool readPass2(CvXMLLoadUtility* pXML) { pXML; FAssertMsg(false, "Override this"); return false; }
-	DllExport virtual bool readPass3() { FAssertMsg(false, "Override this"); return false; }
+	virtual bool read(CvXMLLoadUtility* pXML);
+	virtual bool readPass2(CvXMLLoadUtility* pXML) { pXML; FAssertMsg(false, "Override this"); return false; }
+	virtual bool readPass3() { FAssertMsg(false, "Override this"); return false; }
 
 protected:
 
@@ -102,7 +102,7 @@ public:
 	DllExport float getInterfaceScale() const;
 	DllExport void setInterfaceScale(float fInterfaceScale);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 protected:
 
@@ -122,7 +122,7 @@ public:
 	//destructor
 	DllExport virtual ~CvHotkeyInfo();
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	DllExport virtual void read(FDataStreamBase* pStream);
 	DllExport virtual void write(FDataStreamBase* pStream);
@@ -217,7 +217,7 @@ public:
 
 	DllExport void read(FDataStreamBase* stream);
 	DllExport void write(FDataStreamBase* stream);
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 protected:
 	int m_iNumDiplomacyText;
@@ -240,28 +240,28 @@ class CvSpecialistInfo : public CvHotkeyInfo
 //---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvSpecialistInfo();
-	DllExport virtual ~CvSpecialistInfo();
+	CvSpecialistInfo();
+	virtual ~CvSpecialistInfo();
 
-	DllExport int getGreatPeopleUnitClass() const;		// Exposed to Python
-	DllExport int getGreatPeopleRateChange() const;		// Exposed to Python
-	DllExport int getMissionType() const;							// Exposed to Python
-	DllExport void setMissionType(int iNewType);
-	DllExport int getExperience() const;				// Exposed to Python
+	int getGreatPeopleUnitClass() const;		// Exposed to Python
+	int getGreatPeopleRateChange() const;		// Exposed to Python
+	int getMissionType() const;							// Exposed to Python
+	void setMissionType(int iNewType);
+	int getExperience() const;				// Exposed to Python
 
-	DllExport bool isVisible() const;				// Exposed to Python
+	bool isVisible() const;				// Exposed to Python
 
 	// Arrays
 
-	DllExport int getYieldChange(int i) const;		// Exposed to Python
-	DllExport const int* getYieldChangeArray() const;		// Exposed to Python - For Moose - CvWidgetData
-	DllExport int getCommerceChange(int i) const;		// Exposed to Python
-	DllExport int getFlavorValue(int i) const;		// Exposed to Python
+	int getYieldChange(int i) const;		// Exposed to Python
+	const int* getYieldChangeArray() const;		// Exposed to Python - For Moose - CvWidgetData
+	int getCommerceChange(int i) const;		// Exposed to Python
+	int getFlavorValue(int i) const;		// Exposed to Python
 
-	DllExport const TCHAR* getTexture() const;				// Exposed to Python
-	DllExport void setTexture(const TCHAR* szVal);
+	const TCHAR* getTexture() const;				// Exposed to Python
+	void setTexture(const TCHAR* szVal);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 
@@ -299,71 +299,71 @@ friend class CvXMLLoadUtility;
 //---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvTechInfo();
-	DllExport virtual ~CvTechInfo();
+	CvTechInfo();
+	virtual ~CvTechInfo();
 
-	DllExport int getAdvisorType() const;						// Exposed to Python
-	DllExport int getAIWeight() const;							// Exposed to Python
-	DllExport int getAITradeModifier() const;				// Exposed to Python
-	DllExport int getResearchCost() const;					// Exposed to Python
-	DllExport int getAdvancedStartCost() const;				// Exposed to Python
-	DllExport int getAdvancedStartCostIncrease() const;				// Exposed to Python
-	DllExport int getEra() const;										// Exposed to Python
-	DllExport int getTradeRoutes() const;						// Exposed to Python
-	DllExport int getFeatureProductionModifier() const;	// Exposed to Python
-	DllExport int getWorkerSpeedModifier() const;		// Exposed to Python
-	DllExport int getFirstFreeUnitClass() const;		// Exposed to Python
-	DllExport int getHealth() const;								// Exposed to Python
-	DllExport int getHappiness() const;							// Exposed to Python
-	DllExport int getFirstFreeTechs() const;				// Exposed to Python
-	DllExport int getAssetValue() const;						// Exposed to Python
-	DllExport int getPowerValue() const;						// Exposed to Python
+	int getAdvisorType() const;						// Exposed to Python
+	int getAIWeight() const;							// Exposed to Python
+	int getAITradeModifier() const;				// Exposed to Python
+	int getResearchCost() const;					// Exposed to Python
+	int getAdvancedStartCost() const;				// Exposed to Python
+	int getAdvancedStartCostIncrease() const;				// Exposed to Python
+	int getEra() const;										// Exposed to Python
+	int getTradeRoutes() const;						// Exposed to Python
+	int getFeatureProductionModifier() const;	// Exposed to Python
+	int getWorkerSpeedModifier() const;		// Exposed to Python
+	int getFirstFreeUnitClass() const;		// Exposed to Python
+	int getHealth() const;								// Exposed to Python
+	int getHappiness() const;							// Exposed to Python
+	int getFirstFreeTechs() const;				// Exposed to Python
+	int getAssetValue() const;						// Exposed to Python
+	int getPowerValue() const;						// Exposed to Python
 
-	DllExport int getGridX() const;									// Exposed to Python
-	DllExport int getGridY() const;									// Exposed to Python
+	int getGridX() const;									// Exposed to Python
+	int getGridY() const;									// Exposed to Python
 
-	DllExport bool isRepeat() const;								// Exposed to Python
-	DllExport bool isTrade() const;									// Exposed to Python
-	DllExport bool isDisable() const;								// Exposed to Python
-	DllExport bool isGoodyTech() const;							// Exposed to Python
-	DllExport bool isExtraWaterSeeFrom() const;			// Exposed to Python
-	DllExport bool isMapCentering() const;					// Exposed to Python
-	DllExport bool isMapVisible() const;						// Exposed to Python
-	DllExport bool isMapTrading() const;						// Exposed to Python
-	DllExport bool isTechTrading() const;						// Exposed to Python
-	DllExport bool isGoldTrading() const;						// Exposed to Python
-	DllExport bool isOpenBordersTrading() const;		// Exposed to Python
-	DllExport bool isDefensivePactTrading() const;	// Exposed to Python
-	DllExport bool isPermanentAllianceTrading() const;	// Exposed to Python
-	DllExport bool isVassalStateTrading() const;	// Exposed to Python
-	DllExport bool isBridgeBuilding() const;				// Exposed to Python
-	DllExport bool isIrrigation() const;						// Exposed to Python
-	DllExport bool isIgnoreIrrigation() const;			// Exposed to Python
-	DllExport bool isWaterWork() const;							// Exposed to Python
-	DllExport bool isRiverTrade() const;							// Exposed to Python
+	bool isRepeat() const;								// Exposed to Python
+	bool isTrade() const;									// Exposed to Python
+	bool isDisable() const;								// Exposed to Python
+	bool isGoodyTech() const;							// Exposed to Python
+	bool isExtraWaterSeeFrom() const;			// Exposed to Python
+	bool isMapCentering() const;					// Exposed to Python
+	bool isMapVisible() const;						// Exposed to Python
+	bool isMapTrading() const;						// Exposed to Python
+	bool isTechTrading() const;						// Exposed to Python
+	bool isGoldTrading() const;						// Exposed to Python
+	bool isOpenBordersTrading() const;		// Exposed to Python
+	bool isDefensivePactTrading() const;	// Exposed to Python
+	bool isPermanentAllianceTrading() const;	// Exposed to Python
+	bool isVassalStateTrading() const;	// Exposed to Python
+	bool isBridgeBuilding() const;				// Exposed to Python
+	bool isIrrigation() const;						// Exposed to Python
+	bool isIgnoreIrrigation() const;			// Exposed to Python
+	bool isWaterWork() const;							// Exposed to Python
+	bool isRiverTrade() const;							// Exposed to Python
 
 	std::wstring getQuote() const;	// Exposed to Python
-	DllExport void setQuoteKey(const TCHAR* szVal);
-	DllExport const TCHAR* getSound() const;				// Exposed to Python
-	DllExport void setSound(const TCHAR* szVal);
-	DllExport const TCHAR* getSoundMP() const;			// Exposed to Python
-	DllExport void setSoundMP(const TCHAR* szVal);
+	void setQuoteKey(const TCHAR* szVal);
+	const TCHAR* getSound() const;				// Exposed to Python
+	void setSound(const TCHAR* szVal);
+	const TCHAR* getSoundMP() const;			// Exposed to Python
+	void setSoundMP(const TCHAR* szVal);
 
 	// Arrays
 
-	DllExport int getDomainExtraMoves(int i) const;	// Exposed to Python
-	DllExport int getFlavorValue(int i) const;			// Exposed to Python
-	DllExport int getPrereqOrTechs(int i) const;		// Exposed to Python
-	DllExport int getPrereqAndTechs(int i) const;		// Exposed to Python
+	int getDomainExtraMoves(int i) const;	// Exposed to Python
+	int getFlavorValue(int i) const;			// Exposed to Python
+	int getPrereqOrTechs(int i) const;		// Exposed to Python
+	int getPrereqAndTechs(int i) const;		// Exposed to Python
 
-	DllExport bool isCommerceFlexible(int i) const;	// Exposed to Python
-	DllExport bool isTerrainTrade(int i) const;			// Exposed to Python
+	bool isCommerceFlexible(int i) const;	// Exposed to Python
+	bool isTerrainTrade(int i) const;			// Exposed to Python
 
-	DllExport void read(FDataStreamBase* );
-	DllExport void write(FDataStreamBase* );
+	void read(FDataStreamBase* );
+	void write(FDataStreamBase* );
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
-	DllExport bool readPass2(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
+	bool readPass2(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 
@@ -437,81 +437,81 @@ class CvPromotionInfo :	public CvHotkeyInfo
 {
 //---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
-	DllExport CvPromotionInfo();
-	DllExport virtual ~CvPromotionInfo();
+	CvPromotionInfo();
+	virtual ~CvPromotionInfo();
 
-	DllExport int getLayerAnimationPath() const;
-	DllExport int getPrereqPromotion() const;				// Exposed to Python
-	DllExport void setPrereqPromotion(int i);				// Exposed to Python
-	DllExport int getPrereqOrPromotion1() const;				// Exposed to Python
-	DllExport void setPrereqOrPromotion1(int i);				// Exposed to Python
-	DllExport int getPrereqOrPromotion2() const;				// Exposed to Python
-	DllExport void setPrereqOrPromotion2(int i);				// Exposed to Python
+	int getLayerAnimationPath() const;
+	int getPrereqPromotion() const;				// Exposed to Python
+	void setPrereqPromotion(int i);				// Exposed to Python
+	int getPrereqOrPromotion1() const;				// Exposed to Python
+	void setPrereqOrPromotion1(int i);				// Exposed to Python
+	int getPrereqOrPromotion2() const;				// Exposed to Python
+	void setPrereqOrPromotion2(int i);				// Exposed to Python
 
-	DllExport int getTechPrereq() const;				// Exposed to Python
-	DllExport int getStateReligionPrereq() const;				// Exposed to Python
-	DllExport int getVisibilityChange() const;				// Exposed to Python
-	DllExport int getMovesChange() const;				// Exposed to Python
-	DllExport int getMoveDiscountChange() const;				// Exposed to Python
-	DllExport int getAirRangeChange() const;				// Exposed to Python
-	DllExport int getInterceptChange() const;				// Exposed to Python
-	DllExport int getEvasionChange() const;				// Exposed to Python
-	DllExport int getWithdrawalChange() const;				// Exposed to Python
-	DllExport int getCargoChange() const;				// Exposed to Python
-	DllExport int getCollateralDamageChange() const;				// Exposed to Python
-	DllExport int getBombardRateChange() const;				// Exposed to Python
-	DllExport int getFirstStrikesChange() const;				// Exposed to Python
-	DllExport int getChanceFirstStrikesChange() const;				// Exposed to Python
-	DllExport int getEnemyHealChange() const;				// Exposed to Python
-	DllExport int getNeutralHealChange() const;				// Exposed to Python
-	DllExport int getFriendlyHealChange() const;				// Exposed to Python
-	DllExport int getSameTileHealChange() const;				// Exposed to Python
-	DllExport int getAdjacentTileHealChange() const;				// Exposed to Python
-	DllExport int getCombatPercent() const;				// Exposed to Python
-	DllExport int getCityAttackPercent() const;				// Exposed to Python
-	DllExport int getCityDefensePercent() const;				// Exposed to Python
-	DllExport int getHillsAttackPercent() const;				// Exposed to Python
-	DllExport int getHillsDefensePercent() const;				// Exposed to Python
-	DllExport int getCommandType() const;									// Exposed to Python
-	DllExport void setCommandType(int iNewType);
+	int getTechPrereq() const;				// Exposed to Python
+	int getStateReligionPrereq() const;				// Exposed to Python
+	int getVisibilityChange() const;				// Exposed to Python
+	int getMovesChange() const;				// Exposed to Python
+	int getMoveDiscountChange() const;				// Exposed to Python
+	int getAirRangeChange() const;				// Exposed to Python
+	int getInterceptChange() const;				// Exposed to Python
+	int getEvasionChange() const;				// Exposed to Python
+	int getWithdrawalChange() const;				// Exposed to Python
+	int getCargoChange() const;				// Exposed to Python
+	int getCollateralDamageChange() const;				// Exposed to Python
+	int getBombardRateChange() const;				// Exposed to Python
+	int getFirstStrikesChange() const;				// Exposed to Python
+	int getChanceFirstStrikesChange() const;				// Exposed to Python
+	int getEnemyHealChange() const;				// Exposed to Python
+	int getNeutralHealChange() const;				// Exposed to Python
+	int getFriendlyHealChange() const;				// Exposed to Python
+	int getSameTileHealChange() const;				// Exposed to Python
+	int getAdjacentTileHealChange() const;				// Exposed to Python
+	int getCombatPercent() const;				// Exposed to Python
+	int getCityAttackPercent() const;				// Exposed to Python
+	int getCityDefensePercent() const;				// Exposed to Python
+	int getHillsAttackPercent() const;				// Exposed to Python
+	int getHillsDefensePercent() const;				// Exposed to Python
+	int getCommandType() const;									// Exposed to Python
+	void setCommandType(int iNewType);
 
-	DllExport int getRevoltProtection() const;				// Exposed to Python
-	DllExport int getCollateralDamageProtection() const;				// Exposed to Python
-	DllExport int getPillageChange() const;				// Exposed to Python
-	DllExport int getUpgradeDiscount() const;				// Exposed to Python
-	DllExport int getExperiencePercent() const;				// Exposed to Python
-	DllExport int getKamikazePercent() const;				// Exposed to Python
+	int getRevoltProtection() const;				// Exposed to Python
+	int getCollateralDamageProtection() const;				// Exposed to Python
+	int getPillageChange() const;				// Exposed to Python
+	int getUpgradeDiscount() const;				// Exposed to Python
+	int getExperiencePercent() const;				// Exposed to Python
+	int getKamikazePercent() const;				// Exposed to Python
 
-	DllExport bool isLeader() const;				// Exposed to Python
-	DllExport bool isBlitz() const;				// Exposed to Python
-	DllExport bool isAmphib() const;				// Exposed to Python
-	DllExport bool isRiver() const;				// Exposed to Python
-	DllExport bool isEnemyRoute() const;				// Exposed to Python
-	DllExport bool isAlwaysHeal() const;				// Exposed to Python
-	DllExport bool isHillsDoubleMove() const;				// Exposed to Python
-	DllExport bool isImmuneToFirstStrikes() const;				// Exposed to Python
+	bool isLeader() const;				// Exposed to Python
+	bool isBlitz() const;				// Exposed to Python
+	bool isAmphib() const;				// Exposed to Python
+	bool isRiver() const;				// Exposed to Python
+	bool isEnemyRoute() const;				// Exposed to Python
+	bool isAlwaysHeal() const;				// Exposed to Python
+	bool isHillsDoubleMove() const;				// Exposed to Python
+	bool isImmuneToFirstStrikes() const;				// Exposed to Python
 
-	DllExport const TCHAR* getSound() const;				// Exposed to Python
-	DllExport void setSound(const TCHAR* szVal);
+	const TCHAR* getSound() const;				// Exposed to Python
+	void setSound(const TCHAR* szVal);
 
 	// Arrays
 
-	DllExport int getTerrainAttackPercent(int i) const;				// Exposed to Python
-	DllExport int getTerrainDefensePercent(int i) const;				// Exposed to Python
-	DllExport int getFeatureAttackPercent(int i) const;				// Exposed to Python
-	DllExport int getFeatureDefensePercent(int i) const;				// Exposed to Python
-	DllExport int getUnitCombatModifierPercent(int i) const;				// Exposed to Python
-	DllExport int getDomainModifierPercent(int i) const;				// Exposed to Python
+	int getTerrainAttackPercent(int i) const;				// Exposed to Python
+	int getTerrainDefensePercent(int i) const;				// Exposed to Python
+	int getFeatureAttackPercent(int i) const;				// Exposed to Python
+	int getFeatureDefensePercent(int i) const;				// Exposed to Python
+	int getUnitCombatModifierPercent(int i) const;				// Exposed to Python
+	int getDomainModifierPercent(int i) const;				// Exposed to Python
 
-	DllExport bool getTerrainDoubleMove(int i) const;				// Exposed to Python
-	DllExport bool getFeatureDoubleMove(int i) const;				// Exposed to Python
-	DllExport bool getUnitCombat(int i) const;				// Exposed to Python
+	bool getTerrainDoubleMove(int i) const;				// Exposed to Python
+	bool getFeatureDoubleMove(int i) const;				// Exposed to Python
+	bool getUnitCombat(int i) const;				// Exposed to Python
 
-	DllExport void read(FDataStreamBase* stream);
-	DllExport void write(FDataStreamBase* stream);
+	void read(FDataStreamBase* stream);
+	void write(FDataStreamBase* stream);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
-	DllExport bool readPass2(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
+	bool readPass2(CvXMLLoadUtility* pXML);
 
 //---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 
@@ -605,7 +605,7 @@ public:
 
 	DllExport const TCHAR* getWaypoint() const;		// effect type, Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 
@@ -638,7 +638,7 @@ public:
 	DllExport CvControlInfo();
 	DllExport virtual ~CvControlInfo();
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 
@@ -667,7 +667,7 @@ public:
 	DllExport bool getVisible() const;
 	DllExport bool getAll() const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 
@@ -704,7 +704,7 @@ public:
 	DllExport bool getVisible() const;
 	DllExport void setVisible(bool bVal);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 
@@ -799,189 +799,189 @@ class CvUnitInfo : public CvHotkeyInfo
 {
 //---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
-	DllExport CvUnitInfo();
-	DllExport virtual ~CvUnitInfo();
+	CvUnitInfo();
+	virtual ~CvUnitInfo();
 
-	DllExport int getAIWeight() const;				// Exposed to Python
-	DllExport int getProductionCost() const;				// Exposed to Python
-	DllExport int getHurryCostModifier() const;				// Exposed to Python
-	DllExport int getAdvancedStartCost() const;				// Exposed to Python
-	DllExport int getAdvancedStartCostIncrease() const;				// Exposed to Python
-	DllExport int getMinAreaSize() const;				// Exposed to Python
-	DllExport int getMoves() const;				// Exposed to Python
-	DllExport int getAirRange() const;				// Exposed to Python
-	DllExport int getAirUnitCap() const;				// Exposed to Python
-	DllExport int getDropRange() const;				// Exposed to Python
-	DllExport int getNukeRange() const;				// Exposed to Python
-	DllExport int getWorkRate() const;				// Exposed to Python
-	DllExport int getBaseDiscover() const;		// Exposed to Python
-	DllExport int getDiscoverMultiplier() const;		// Exposed to Python
-	DllExport int getBaseHurry() const;				// Exposed to Python
-	DllExport int getHurryMultiplier() const;				// Exposed to Python
-	DllExport int getBaseTrade() const;				// Exposed to Python
-	DllExport int getTradeMultiplier() const;				// Exposed to Python
-	DllExport int getGreatWorkCulture() const;				// Exposed to Python
-	DllExport int getEspionagePoints() const;				// Exposed to Python
-	DllExport int getCombat() const;				// Exposed to Python
-	DllExport void setCombat(int iNum);				// Exposed to Python
-	DllExport int getCombatLimit() const;				// Exposed to Python
-	DllExport int getAirCombat() const;				// Exposed to Python
-	DllExport int getAirCombatLimit() const;				// Exposed to Python
-	DllExport int getXPValueAttack() const;				// Exposed to Python
-	DllExport int getXPValueDefense() const;				// Exposed to Python
-	DllExport int getFirstStrikes() const;				// Exposed to Python
-	DllExport int getChanceFirstStrikes() const;				// Exposed to Python
-	DllExport int getInterceptionProbability() const;		// Exposed to Python
-	DllExport int getEvasionProbability() const;				// Exposed to Python
-	DllExport int getWithdrawalProbability() const;			// Exposed to Python
-	DllExport int getCollateralDamage() const;					// Exposed to Python
-	DllExport int getCollateralDamageLimit() const;			// Exposed to Python
-	DllExport int getCollateralDamageMaxUnits() const;	// Exposed to Python
-	DllExport int getCityAttackModifier() const;				// Exposed to Python
-	DllExport int getCityDefenseModifier() const;				// Exposed to Python
-	DllExport int getAnimalCombatModifier() const;			// Exposed to Python
-	DllExport int getHillsAttackModifier() const;			// Exposed to Python
-	DllExport int getHillsDefenseModifier() const;			// Exposed to Python
-	DllExport int getBombRate() const;									// Exposed to Python
-	DllExport int getBombardRate() const;								// Exposed to Python
-	DllExport int getSpecialCargo() const;							// Exposed to Python
-	DllExport int getDomainCargo() const;								// Exposed to Python
+	int getAIWeight() const;				// Exposed to Python
+	int getProductionCost() const;				// Exposed to Python
+	int getHurryCostModifier() const;				// Exposed to Python
+	int getAdvancedStartCost() const;				// Exposed to Python
+	int getAdvancedStartCostIncrease() const;				// Exposed to Python
+	int getMinAreaSize() const;				// Exposed to Python
+	int getMoves() const;				// Exposed to Python
+	int getAirRange() const;				// Exposed to Python
+	int getAirUnitCap() const;				// Exposed to Python
+	int getDropRange() const;				// Exposed to Python
+	int getNukeRange() const;				// Exposed to Python
+	int getWorkRate() const;				// Exposed to Python
+	int getBaseDiscover() const;		// Exposed to Python
+	int getDiscoverMultiplier() const;		// Exposed to Python
+	int getBaseHurry() const;				// Exposed to Python
+	int getHurryMultiplier() const;				// Exposed to Python
+	int getBaseTrade() const;				// Exposed to Python
+	int getTradeMultiplier() const;				// Exposed to Python
+	int getGreatWorkCulture() const;				// Exposed to Python
+	int getEspionagePoints() const;				// Exposed to Python
+	int getCombat() const;				// Exposed to Python
+	void setCombat(int iNum);				// Exposed to Python
+	int getCombatLimit() const;				// Exposed to Python
+	int getAirCombat() const;				// Exposed to Python
+	int getAirCombatLimit() const;				// Exposed to Python
+	int getXPValueAttack() const;				// Exposed to Python
+	int getXPValueDefense() const;				// Exposed to Python
+	int getFirstStrikes() const;				// Exposed to Python
+	int getChanceFirstStrikes() const;				// Exposed to Python
+	int getInterceptionProbability() const;		// Exposed to Python
+	int getEvasionProbability() const;				// Exposed to Python
+	int getWithdrawalProbability() const;			// Exposed to Python
+	int getCollateralDamage() const;					// Exposed to Python
+	int getCollateralDamageLimit() const;			// Exposed to Python
+	int getCollateralDamageMaxUnits() const;	// Exposed to Python
+	int getCityAttackModifier() const;				// Exposed to Python
+	int getCityDefenseModifier() const;				// Exposed to Python
+	int getAnimalCombatModifier() const;			// Exposed to Python
+	int getHillsAttackModifier() const;			// Exposed to Python
+	int getHillsDefenseModifier() const;			// Exposed to Python
+	int getBombRate() const;									// Exposed to Python
+	int getBombardRate() const;								// Exposed to Python
+	int getSpecialCargo() const;							// Exposed to Python
+	int getDomainCargo() const;								// Exposed to Python
 
-	DllExport int getCargoSpace() const;								// Exposed to Python
-	DllExport int getConscriptionValue() const;					// Exposed to Python
-	DllExport int getCultureGarrisonValue() const;			// Exposed to Python
-	DllExport int getExtraCost() const;									// Exposed to Python
-	DllExport int getAssetValue() const;								// Exposed to Python
-	DllExport int getPowerValue() const;								// Exposed to Python
-	DllExport int getUnitClassType() const;							// Exposed to Python
-	DllExport int getSpecialUnitType() const;						// Exposed to Python
-	DllExport int getUnitCaptureClassType() const;			// Exposed to Python
-	DllExport int getUnitCombatType() const;						// Exposed to Python
-	DllExport int getDomainType() const;								// Exposed to Python
-	DllExport int getDefaultUnitAIType() const;					// Exposed to Python
-	DllExport int getInvisibleType() const;							// Exposed to Python
-	DllExport int getSeeInvisibleType(int i) const;					// Exposed to Python
-	DllExport int getNumSeeInvisibleTypes() const;					// Exposed to Python
-	DllExport int getAdvisorType() const;								// Exposed to Python
-	DllExport int getHolyCity() const;									// Exposed to Python
-	DllExport int getReligionType() const;							// Exposed to Python
-	DllExport int getStateReligion() const;							// Exposed to Python
-	DllExport int getPrereqReligion() const;						// Exposed to Python
-	DllExport int getPrereqCorporation() const;						// Exposed to Python
-	DllExport int getPrereqBuilding() const;						// Exposed to Python
-	DllExport int getPrereqAndTech() const;							// Exposed to Python
-	DllExport int getPrereqAndBonus() const;						// Exposed to Python
-	DllExport int getGroupSize() const;									// Exposed to Python - the initial number of individuals in the unit group
-	DllExport int getGroupDefinitions() const;					// Exposed to Python - the number of UnitMeshGroups for this unit
-	DllExport int getMeleeWaveSize() const;							// Exposed to Python
-	DllExport int getRangedWaveSize() const;						// Exposed to Python
-	DllExport int getNumUnitNames() const;							// Exposed to Python
-	DllExport int getCommandType() const;								// Exposed to Python
-	DllExport void setCommandType(int iNewType);
+	int getCargoSpace() const;								// Exposed to Python
+	int getConscriptionValue() const;					// Exposed to Python
+	int getCultureGarrisonValue() const;			// Exposed to Python
+	int getExtraCost() const;									// Exposed to Python
+	int getAssetValue() const;								// Exposed to Python
+	int getPowerValue() const;								// Exposed to Python
+	int getUnitClassType() const;							// Exposed to Python
+	int getSpecialUnitType() const;						// Exposed to Python
+	int getUnitCaptureClassType() const;			// Exposed to Python
+	int getUnitCombatType() const;						// Exposed to Python
+	int getDomainType() const;								// Exposed to Python
+	int getDefaultUnitAIType() const;					// Exposed to Python
+	int getInvisibleType() const;							// Exposed to Python
+	int getSeeInvisibleType(int i) const;					// Exposed to Python
+	int getNumSeeInvisibleTypes() const;					// Exposed to Python
+	int getAdvisorType() const;								// Exposed to Python
+	int getHolyCity() const;									// Exposed to Python
+	int getReligionType() const;							// Exposed to Python
+	int getStateReligion() const;							// Exposed to Python
+	int getPrereqReligion() const;						// Exposed to Python
+	int getPrereqCorporation() const;						// Exposed to Python
+	int getPrereqBuilding() const;						// Exposed to Python
+	int getPrereqAndTech() const;							// Exposed to Python
+	int getPrereqAndBonus() const;						// Exposed to Python
+	int getGroupSize() const;									// Exposed to Python - the initial number of individuals in the unit group
+	int getGroupDefinitions() const;					// Exposed to Python - the number of UnitMeshGroups for this unit
+	int getMeleeWaveSize() const;							// Exposed to Python
+	int getRangedWaveSize() const;						// Exposed to Python
+	int getNumUnitNames() const;							// Exposed to Python
+	int getCommandType() const;								// Exposed to Python
+	void setCommandType(int iNewType);
 
-	DllExport bool isAnimal() const;				// Exposed to Python
-	DllExport bool isFoodProduction() const;				// Exposed to Python
-	DllExport bool isNoBadGoodies() const;				// Exposed to Python
-	DllExport bool isOnlyDefensive() const;				// Exposed to Python
-	DllExport bool isNoCapture() const;				// Exposed to Python
-	DllExport bool isQuickCombat() const;				// Exposed to Python
-	DllExport bool isRivalTerritory() const;				// Exposed to Python
-	DllExport bool isMilitaryHappiness() const;				// Exposed to Python
-	DllExport bool isMilitarySupport() const;				// Exposed to Python
-	DllExport bool isMilitaryProduction() const;				// Exposed to Python
-	DllExport bool isPillage() const;				// Exposed to Python
-	DllExport bool isSpy() const;				// Exposed to Python
-	DllExport bool isSabotage() const;				// Exposed to Python
-	DllExport bool isDestroy() const;				// Exposed to Python
-	DllExport bool isStealPlans() const;				// Exposed to Python
-	DllExport bool isInvestigate() const;				// Exposed to Python
-	DllExport bool isCounterSpy() const;				// Exposed to Python
-	DllExport bool isFound() const;				// Exposed to Python
-	DllExport bool isGoldenAge() const;				// Exposed to Python
-	DllExport bool isInvisible() const;				// Exposed to Python
-	DllExport void setInvisible(bool bEnable) ;			// Exposed to Python
-	DllExport bool isFirstStrikeImmune() const;				// Exposed to Python
-	DllExport bool isNoDefensiveBonus() const;				// Exposed to Python
-	DllExport bool isIgnoreBuildingDefense() const;				// Exposed to Python
-	DllExport bool isCanMoveImpassable() const;				// Exposed to Python
-	DllExport bool isCanMoveAllTerrain() const;				// Exposed to Python
-	DllExport bool isFlatMovementCost() const;				// Exposed to Python
-	DllExport bool isIgnoreTerrainCost() const;				// Exposed to Python
-	DllExport bool isNukeImmune() const;				// Exposed to Python
-	DllExport bool isPrereqBonuses() const;				// Exposed to Python
-	DllExport bool isPrereqReligion() const;				// Exposed to Python
-	DllExport bool isMechUnit() const;							// Exposed to Python
-	DllExport bool isRenderBelowWater() const;			// Exposed to Python
-	DllExport bool isRenderAlways() const;			// Exposed to Python
-	DllExport bool isSuicide() const;			// Exposed to Python
-	DllExport bool isLineOfSight() const;			// Exposed to Python
-	DllExport bool isHiddenNationality() const;			// Exposed to Python
-	DllExport bool isAlwaysHostile() const;			// Exposed to Python
-	DllExport bool isNoRevealMap() const;			// Exposed to Python
+	bool isAnimal() const;				// Exposed to Python
+	bool isFoodProduction() const;				// Exposed to Python
+	bool isNoBadGoodies() const;				// Exposed to Python
+	bool isOnlyDefensive() const;				// Exposed to Python
+	bool isNoCapture() const;				// Exposed to Python
+	bool isQuickCombat() const;				// Exposed to Python
+	bool isRivalTerritory() const;				// Exposed to Python
+	bool isMilitaryHappiness() const;				// Exposed to Python
+	bool isMilitarySupport() const;				// Exposed to Python
+	bool isMilitaryProduction() const;				// Exposed to Python
+	bool isPillage() const;				// Exposed to Python
+	bool isSpy() const;				// Exposed to Python
+	bool isSabotage() const;				// Exposed to Python
+	bool isDestroy() const;				// Exposed to Python
+	bool isStealPlans() const;				// Exposed to Python
+	bool isInvestigate() const;				// Exposed to Python
+	bool isCounterSpy() const;				// Exposed to Python
+	bool isFound() const;				// Exposed to Python
+	bool isGoldenAge() const;				// Exposed to Python
+	bool isInvisible() const;				// Exposed to Python
+	void setInvisible(bool bEnable) ;			// Exposed to Python
+	bool isFirstStrikeImmune() const;				// Exposed to Python
+	bool isNoDefensiveBonus() const;				// Exposed to Python
+	bool isIgnoreBuildingDefense() const;				// Exposed to Python
+	bool isCanMoveImpassable() const;				// Exposed to Python
+	bool isCanMoveAllTerrain() const;				// Exposed to Python
+	bool isFlatMovementCost() const;				// Exposed to Python
+	bool isIgnoreTerrainCost() const;				// Exposed to Python
+	bool isNukeImmune() const;				// Exposed to Python
+	bool isPrereqBonuses() const;				// Exposed to Python
+	bool isPrereqReligion() const;				// Exposed to Python
+	bool isMechUnit() const;							// Exposed to Python
+	bool isRenderBelowWater() const;			// Exposed to Python
+	bool isRenderAlways() const;			// Exposed to Python
+	bool isSuicide() const;			// Exposed to Python
+	bool isLineOfSight() const;			// Exposed to Python
+	bool isHiddenNationality() const;			// Exposed to Python
+	bool isAlwaysHostile() const;			// Exposed to Python
+	bool isNoRevealMap() const;			// Exposed to Python
 
-	DllExport float getUnitMaxSpeed() const;					// Exposed to Python
-	DllExport float getUnitPadTime() const;					// Exposed to Python
+	float getUnitMaxSpeed() const;					// Exposed to Python
+	float getUnitPadTime() const;					// Exposed to Python
 
 	// Arrays
 
-	DllExport int getPrereqAndTechs(int i) const;				// Exposed to Python
-	DllExport int getPrereqOrBonuses(int i) const;				// Exposed to Python
-	DllExport int getProductionTraits(int i) const;				// Exposed to Python
-	DllExport int getFlavorValue(int i) const;				// Exposed to Python
-	DllExport int getTerrainAttackModifier(int i) const;				// Exposed to Python
-	DllExport int getTerrainDefenseModifier(int i) const;				// Exposed to Python
-	DllExport int getFeatureAttackModifier(int i) const;				// Exposed to Python
-	DllExport int getFeatureDefenseModifier(int i) const;				// Exposed to Python
-	DllExport int getUnitClassAttackModifier(int i) const;				// Exposed to Python
-	DllExport int getUnitClassDefenseModifier(int i) const;				// Exposed to Python
-	DllExport int getUnitCombatModifier(int i) const;				// Exposed to Python
-	DllExport int getUnitCombatCollateralImmune(int i) const;				// Exposed to Python
-	DllExport int getDomainModifier(int i) const;				// Exposed to Python
-	DllExport int getBonusProductionModifier(int i) const;				// Exposed to Python
-	DllExport int getUnitGroupRequired(int i) const;				// Exposed to Python
-	DllExport int getReligionSpreads(int i) const;		// Exposed to Python
-	DllExport int getCorporationSpreads(int i) const;		// Exposed to Python
-	DllExport int getTerrainPassableTech(int i) const;		// Exposed to Python
-	DllExport int getFeaturePassableTech(int i) const;		// Exposed to Python
-	DllExport int getFlankingStrikeUnitClass(int i) const;	// Exposed to Python
+	int getPrereqAndTechs(int i) const;				// Exposed to Python
+	int getPrereqOrBonuses(int i) const;				// Exposed to Python
+	int getProductionTraits(int i) const;				// Exposed to Python
+	int getFlavorValue(int i) const;				// Exposed to Python
+	int getTerrainAttackModifier(int i) const;				// Exposed to Python
+	int getTerrainDefenseModifier(int i) const;				// Exposed to Python
+	int getFeatureAttackModifier(int i) const;				// Exposed to Python
+	int getFeatureDefenseModifier(int i) const;				// Exposed to Python
+	int getUnitClassAttackModifier(int i) const;				// Exposed to Python
+	int getUnitClassDefenseModifier(int i) const;				// Exposed to Python
+	int getUnitCombatModifier(int i) const;				// Exposed to Python
+	int getUnitCombatCollateralImmune(int i) const;				// Exposed to Python
+	int getDomainModifier(int i) const;				// Exposed to Python
+	int getBonusProductionModifier(int i) const;				// Exposed to Python
+	int getUnitGroupRequired(int i) const;				// Exposed to Python
+	int getReligionSpreads(int i) const;		// Exposed to Python
+	int getCorporationSpreads(int i) const;		// Exposed to Python
+	int getTerrainPassableTech(int i) const;		// Exposed to Python
+	int getFeaturePassableTech(int i) const;		// Exposed to Python
+	int getFlankingStrikeUnitClass(int i) const;	// Exposed to Python
 
-	DllExport bool getUpgradeUnitClass(int i) const;	// Exposed to Python
-	DllExport bool getTargetUnitClass(int i) const;	// Exposed to Python
-	DllExport bool getTargetUnitCombat(int i) const;	// Exposed to Python
-	DllExport bool getDefenderUnitClass(int i) const;	// Exposed to Python
-	DllExport bool getDefenderUnitCombat(int i) const;	// Exposed to Python
-	DllExport bool getUnitAIType(int i) const;				// Exposed to Python
-	DllExport bool getNotUnitAIType(int i) const;			// Exposed to Python
-	DllExport bool getBuilds(int i) const;						// Exposed to Python
-	DllExport bool getGreatPeoples(int i) const;			// Exposed to Python
-	DllExport bool getBuildings(int i) const;					// Exposed to Python
-	DllExport bool getForceBuildings(int i) const;		// Exposed to Python
-	DllExport bool getTerrainImpassable(int i) const;				// Exposed to Python
-	DllExport bool getFeatureImpassable(int i) const;				// Exposed to Python
-	DllExport bool getTerrainNative(int i) const;			// Exposed to Python
-	DllExport bool getFeatureNative(int i) const;			// Exposed to Python
-	DllExport bool getFreePromotions(int i) const;		// Exposed to Python
-	DllExport int getLeaderPromotion() const;   // Exposed to Python
-	DllExport int getLeaderExperience() const;				// Exposed to Python
+	bool getUpgradeUnitClass(int i) const;	// Exposed to Python
+	bool getTargetUnitClass(int i) const;	// Exposed to Python
+	bool getTargetUnitCombat(int i) const;	// Exposed to Python
+	bool getDefenderUnitClass(int i) const;	// Exposed to Python
+	bool getDefenderUnitCombat(int i) const;	// Exposed to Python
+	bool getUnitAIType(int i) const;				// Exposed to Python
+	bool getNotUnitAIType(int i) const;			// Exposed to Python
+	bool getBuilds(int i) const;						// Exposed to Python
+	bool getGreatPeoples(int i) const;			// Exposed to Python
+	bool getBuildings(int i) const;					// Exposed to Python
+	bool getForceBuildings(int i) const;		// Exposed to Python
+	bool getTerrainImpassable(int i) const;				// Exposed to Python
+	bool getFeatureImpassable(int i) const;				// Exposed to Python
+	bool getTerrainNative(int i) const;			// Exposed to Python
+	bool getFeatureNative(int i) const;			// Exposed to Python
+	bool getFreePromotions(int i) const;		// Exposed to Python
+	int getLeaderPromotion() const;   // Exposed to Python
+	int getLeaderExperience() const;				// Exposed to Python
 
-	DllExport const TCHAR* getEarlyArtDefineTag(int i, UnitArtStyleTypes eStyle) const;				// Exposed to Python
-	DllExport void setEarlyArtDefineTag(int i, const TCHAR* szVal);
-	DllExport const TCHAR* getLateArtDefineTag(int i, UnitArtStyleTypes eStyle) const;				// Exposed to Python
-	DllExport void setLateArtDefineTag(int i, const TCHAR* szVal);
-	DllExport const TCHAR* getMiddleArtDefineTag(int i, UnitArtStyleTypes eStyle) const;				// Exposed to Python
-	DllExport void setMiddleArtDefineTag(int i, const TCHAR* szVal);
-	DllExport const TCHAR* getUnitNames(int i) const;
-	DllExport const TCHAR* getFormationType() const;
+	const TCHAR* getEarlyArtDefineTag(int i, UnitArtStyleTypes eStyle) const;				// Exposed to Python
+	void setEarlyArtDefineTag(int i, const TCHAR* szVal);
+	const TCHAR* getLateArtDefineTag(int i, UnitArtStyleTypes eStyle) const;				// Exposed to Python
+	void setLateArtDefineTag(int i, const TCHAR* szVal);
+	const TCHAR* getMiddleArtDefineTag(int i, UnitArtStyleTypes eStyle) const;				// Exposed to Python
+	void setMiddleArtDefineTag(int i, const TCHAR* szVal);
+	const TCHAR* getUnitNames(int i) const;
+	const TCHAR* getFormationType() const;
 
-	DllExport const TCHAR* getButton() const;
-	DllExport void updateArtDefineButton();
+	const TCHAR* getButton() const;
+	void updateArtDefineButton();
 
-	DllExport const CvArtInfoUnit* getArtInfo(int i, EraTypes eEra, UnitArtStyleTypes eStyle) const;
+	const CvArtInfoUnit* getArtInfo(int i, EraTypes eEra, UnitArtStyleTypes eStyle) const;
 
-	DllExport void read(FDataStreamBase* );
-	DllExport void write(FDataStreamBase* );
+	void read(FDataStreamBase* );
+	void write(FDataStreamBase* );
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 
@@ -1202,7 +1202,7 @@ public:
 	DllExport int getNumSiegeUnitEntries() const;
 	DllExport const CvUnitEntry &getSiegeUnitEntry(int index) const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PUBLIC MEMBER VARIABLES---------------------------------
 
@@ -1229,18 +1229,18 @@ class CvSpecialUnitInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvSpecialUnitInfo();
-	DllExport virtual ~CvSpecialUnitInfo();
+	CvSpecialUnitInfo();
+	virtual ~CvSpecialUnitInfo();
 
-	DllExport bool isValid() const;
-	DllExport bool isCityLoad() const;
+	bool isValid() const;
+	bool isCityLoad() const;
 
 	// Arrays
 
-	DllExport bool isCarrierUnitAIType(int i) const; 		// Exposed to Python
-	DllExport int getProductionTraits(int i) const;				// Exposed to Python
+	bool isCarrierUnitAIType(int i) const; 		// Exposed to Python
+	int getProductionTraits(int i) const;				// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 
@@ -1268,12 +1268,12 @@ class CvCivicOptionInfo :
 //---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvCivicOptionInfo();
-	DllExport virtual ~CvCivicOptionInfo();
+	CvCivicOptionInfo();
+	virtual ~CvCivicOptionInfo();
 
-	DllExport bool getTraitNoUpkeep(int i) const;				// Exposed to Python
+	bool getTraitNoUpkeep(int i) const;				// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -1295,87 +1295,87 @@ class CvCivicInfo :
 //---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvCivicInfo();
-	DllExport virtual ~CvCivicInfo();
+	CvCivicInfo();
+	virtual ~CvCivicInfo();
 
-	DllExport int getCivicOptionType() const;				// Exposed to Python					
-	DllExport int getAnarchyLength() const;				// Exposed to Python
-	DllExport int getUpkeep() const;				// Exposed to Python
-	DllExport int getAIWeight() const;				// Exposed to Python
-	DllExport int getGreatPeopleRateModifier() const;				// Exposed to Python
-	DllExport int getGreatGeneralRateModifier() const;				// Exposed to Python
-	DllExport int getDomesticGreatGeneralRateModifier() const;				// Exposed to Python
-	DllExport int getStateReligionGreatPeopleRateModifier() const;				// Exposed to Python
-	DllExport int getDistanceMaintenanceModifier() const;				// Exposed to Python
-	DllExport int getNumCitiesMaintenanceModifier() const;				// Exposed to Python
-	DllExport int getCorporationMaintenanceModifier() const;				// Exposed to Python
-	DllExport int getExtraHealth() const;						// Exposed to Python
-	DllExport int getFreeExperience() const;				// Exposed to Python
-	DllExport int getWorkerSpeedModifier() const;				// Exposed to Python
-	DllExport int getImprovementUpgradeRateModifier() const;				// Exposed to Python
-	DllExport int getMilitaryProductionModifier() const;				// Exposed to Python
-	DllExport int getBaseFreeUnits() const;				// Exposed to Python
-	DllExport int getBaseFreeMilitaryUnits() const;				// Exposed to Python
-	DllExport int getFreeUnitsPopulationPercent() const;				// Exposed to Python
-	DllExport int getFreeMilitaryUnitsPopulationPercent() const;				// Exposed to Python
-	DllExport int getGoldPerUnit() const;				// Exposed to Python
-	DllExport int getGoldPerMilitaryUnit() const;				// Exposed to Python
-	DllExport int getHappyPerMilitaryUnit() const;				// Exposed to Python
-	DllExport int getLargestCityHappiness() const;					// Exposed to Python
-	DllExport int getWarWearinessModifier() const;					// Exposed to Python
-	DllExport int getFreeSpecialist() const;				// Exposed to Python
-	DllExport int getTradeRoutes() const;				// Exposed to Python
-	DllExport int getTechPrereq() const;				// Exposed to Python
-	DllExport int getCivicPercentAnger() const;				// Exposed to Python
-	DllExport int getMaxConscript() const;				// Exposed to Python
-	DllExport int getStateReligionHappiness() const;				// Exposed to Python
-	DllExport int getNonStateReligionHappiness() const;				// Exposed to Python
-	DllExport int getStateReligionUnitProductionModifier() const;				// Exposed to Python
-	DllExport int getStateReligionBuildingProductionModifier() const;				// Exposed to Python
-	DllExport int getStateReligionFreeExperience() const;								// Exposed to Python
-	DllExport int getExpInBorderModifier() const;				// Exposed to Python
+	int getCivicOptionType() const;				// Exposed to Python					
+	int getAnarchyLength() const;				// Exposed to Python
+	int getUpkeep() const;				// Exposed to Python
+	int getAIWeight() const;				// Exposed to Python
+	int getGreatPeopleRateModifier() const;				// Exposed to Python
+	int getGreatGeneralRateModifier() const;				// Exposed to Python
+	int getDomesticGreatGeneralRateModifier() const;				// Exposed to Python
+	int getStateReligionGreatPeopleRateModifier() const;				// Exposed to Python
+	int getDistanceMaintenanceModifier() const;				// Exposed to Python
+	int getNumCitiesMaintenanceModifier() const;				// Exposed to Python
+	int getCorporationMaintenanceModifier() const;				// Exposed to Python
+	int getExtraHealth() const;						// Exposed to Python
+	int getFreeExperience() const;				// Exposed to Python
+	int getWorkerSpeedModifier() const;				// Exposed to Python
+	int getImprovementUpgradeRateModifier() const;				// Exposed to Python
+	int getMilitaryProductionModifier() const;				// Exposed to Python
+	int getBaseFreeUnits() const;				// Exposed to Python
+	int getBaseFreeMilitaryUnits() const;				// Exposed to Python
+	int getFreeUnitsPopulationPercent() const;				// Exposed to Python
+	int getFreeMilitaryUnitsPopulationPercent() const;				// Exposed to Python
+	int getGoldPerUnit() const;				// Exposed to Python
+	int getGoldPerMilitaryUnit() const;				// Exposed to Python
+	int getHappyPerMilitaryUnit() const;				// Exposed to Python
+	int getLargestCityHappiness() const;					// Exposed to Python
+	int getWarWearinessModifier() const;					// Exposed to Python
+	int getFreeSpecialist() const;				// Exposed to Python
+	int getTradeRoutes() const;				// Exposed to Python
+	int getTechPrereq() const;				// Exposed to Python
+	int getCivicPercentAnger() const;				// Exposed to Python
+	int getMaxConscript() const;				// Exposed to Python
+	int getStateReligionHappiness() const;				// Exposed to Python
+	int getNonStateReligionHappiness() const;				// Exposed to Python
+	int getStateReligionUnitProductionModifier() const;				// Exposed to Python
+	int getStateReligionBuildingProductionModifier() const;				// Exposed to Python
+	int getStateReligionFreeExperience() const;								// Exposed to Python
+	int getExpInBorderModifier() const;				// Exposed to Python
 
-	DllExport bool isMilitaryFoodProduction() const;				// Exposed to Python
-	DllExport bool isNoUnhealthyPopulation() const;				// Exposed to Python
-	DllExport bool isBuildingOnlyHealthy() const;				// Exposed to Python
-	DllExport bool isNoForeignTrade() const;				// Exposed to Python
-	DllExport bool isNoCorporations() const;				// Exposed to Python
-	DllExport bool isNoForeignCorporations() const;				// Exposed to Python
-	DllExport bool isStateReligion() const;				// Exposed to Python
-	DllExport bool isNoNonStateReligionSpread() const;				// Exposed to Python
+	bool isMilitaryFoodProduction() const;				// Exposed to Python
+	bool isNoUnhealthyPopulation() const;				// Exposed to Python
+	bool isBuildingOnlyHealthy() const;				// Exposed to Python
+	bool isNoForeignTrade() const;				// Exposed to Python
+	bool isNoCorporations() const;				// Exposed to Python
+	bool isNoForeignCorporations() const;				// Exposed to Python
+	bool isStateReligion() const;				// Exposed to Python
+	bool isNoNonStateReligionSpread() const;				// Exposed to Python
 
 	std::wstring pyGetWeLoveTheKing() { return getWeLoveTheKing(); }			// Exposed to Python
-	DllExport const wchar* getWeLoveTheKing();
-	DllExport void setWeLoveTheKingKey(const TCHAR* szVal);
+	const wchar* getWeLoveTheKing();
+	void setWeLoveTheKingKey(const TCHAR* szVal);
 
 	// Arrays
 
-	DllExport int getYieldModifier(int i) const;				// Exposed to Python
+	int getYieldModifier(int i) const;				// Exposed to Python
 	int* getYieldModifierArray() const;
-	DllExport int getCapitalYieldModifier(int i) const;				// Exposed to Python
+	int getCapitalYieldModifier(int i) const;				// Exposed to Python
 	int* getCapitalYieldModifierArray() const;
-	DllExport int getTradeYieldModifier(int i) const;				// Exposed to Python
+	int getTradeYieldModifier(int i) const;				// Exposed to Python
 	int* getTradeYieldModifierArray() const;
-	DllExport int getCommerceModifier(int i) const;				// Exposed to Python
+	int getCommerceModifier(int i) const;				// Exposed to Python
 	int* getCommerceModifierArray() const;
-	DllExport int getCapitalCommerceModifier(int i) const;				// Exposed to Python
+	int getCapitalCommerceModifier(int i) const;				// Exposed to Python
 	int* getCapitalCommerceModifierArray() const;
-	DllExport int getSpecialistExtraCommerce(int i) const;				// Exposed to Python
+	int getSpecialistExtraCommerce(int i) const;				// Exposed to Python
 	int* getSpecialistExtraCommerceArray() const;
-	DllExport int getBuildingHappinessChanges(int i) const;				// Exposed to Python
-	DllExport int getBuildingHealthChanges(int i) const;				// Exposed to Python
-	DllExport int getFeatureHappinessChanges(int i) const;				// Exposed to Python
+	int getBuildingHappinessChanges(int i) const;				// Exposed to Python
+	int getBuildingHealthChanges(int i) const;				// Exposed to Python
+	int getFeatureHappinessChanges(int i) const;				// Exposed to Python
 
-	DllExport bool isHurry(int i) const;													// Exposed to Python
-	DllExport bool isSpecialBuildingNotRequired(int i) const;			// Exposed to Python
-	DllExport bool isSpecialistValid(int i) const;								// Exposed to Python
+	bool isHurry(int i) const;													// Exposed to Python
+	bool isSpecialBuildingNotRequired(int i) const;			// Exposed to Python
+	bool isSpecialistValid(int i) const;								// Exposed to Python
 
-	DllExport int getImprovementYieldChanges(int i, int j) const;				// Exposed to Python
+	int getImprovementYieldChanges(int i, int j) const;				// Exposed to Python
 
-	DllExport void read(FDataStreamBase* stream);
-	DllExport void write(FDataStreamBase* stream);
+	void read(FDataStreamBase* stream);
+	void write(FDataStreamBase* stream);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 //---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -1482,7 +1482,7 @@ public:
 
 	DllExport void read(FDataStreamBase* stream);
 	DllExport void write(FDataStreamBase* stream);
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 private:
 	std::vector<CvDiplomacyResponse*> m_pResponses;
@@ -1501,18 +1501,18 @@ class CvUnitClassInfo :
 //---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvUnitClassInfo();
-	DllExport virtual ~CvUnitClassInfo();
+	CvUnitClassInfo();
+	virtual ~CvUnitClassInfo();
 
-	DllExport int getMaxGlobalInstances() const;				// Exposed to Python
-	DllExport int getMaxTeamInstances() const;				// Exposed to Python
-	DllExport int getMaxPlayerInstances() const;				// Exposed to Python
-	DllExport int getInstanceCostModifier() const;				// Exposed to Python
-	DllExport int getDefaultUnitIndex() const;				// Exposed to Python
-	DllExport void setDefaultUnitIndex(int i);
+	int getMaxGlobalInstances() const;				// Exposed to Python
+	int getMaxTeamInstances() const;				// Exposed to Python
+	int getMaxPlayerInstances() const;				// Exposed to Python
+	int getInstanceCostModifier() const;				// Exposed to Python
+	int getDefaultUnitIndex() const;				// Exposed to Python
+	void setDefaultUnitIndex(int i);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
-	DllExport bool readPass3();
+	bool read(CvXMLLoadUtility* pXML);
+	bool readPass3();
 
 //---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -1540,203 +1540,203 @@ class CvBuildingInfo : public CvHotkeyInfo
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvBuildingInfo();
-	DllExport virtual ~CvBuildingInfo();
+	CvBuildingInfo();
+	virtual ~CvBuildingInfo();
 
-	DllExport int getBuildingClassType() const;				// Exposed to Python
-	DllExport int getVictoryPrereq() const;				// Exposed to Python
-	DllExport int getFreeStartEra() const;						// Exposed to Python
-	DllExport int getMaxStartEra() const;				// Exposed to Python
-	DllExport int getObsoleteTech() const;				// Exposed to Python
-	DllExport int getPrereqAndTech() const;				// Exposed to Python
-	DllExport int getNoBonus() const;				// Exposed to Python
-	DllExport int getPowerBonus() const;				// Exposed to Python
-	DllExport int getFreeBonus() const;				// Exposed to Python
-	DllExport int getNumFreeBonuses() const;				// Exposed to Python
-	DllExport int getFreeBuildingClass() const;				// Exposed to Python
-	DllExport void setNumFreeBuildingClass(int i);
-	DllExport int getFreePromotion() const;				// Exposed to Python
-	DllExport int getCivicOption() const;				// Exposed to Python
-	DllExport int getAIWeight() const;				// Exposed to Python
-	DllExport int getProductionCost() const;				// Exposed to Python
-	DllExport int getHurryCostModifier() const;				// Exposed to Python
-	DllExport int getHurryAngerModifier() const;				// Exposed to Python
-	DllExport int getAdvancedStartCost() const;				// Exposed to Python
-	DllExport int getAdvancedStartCostIncrease() const;				// Exposed to Python
-	DllExport int getMinAreaSize() const;				// Exposed to Python
-	DllExport int getNumCitiesPrereq() const;				// Exposed to Python
-	DllExport int getNumTeamsPrereq() const;				// Exposed to Python
-	DllExport int getUnitLevelPrereq() const;				// Exposed to Python
-	DllExport int getMinLatitude() const;				// Exposed to Python
-	DllExport int getMaxLatitude() const;				// Exposed to Python
-	DllExport int getGreatPeopleRateModifier() const;				// Exposed to Python
-	DllExport int getGreatGeneralRateModifier() const;				// Exposed to Python
-	DllExport int getDomesticGreatGeneralRateModifier() const;				// Exposed to Python
-	DllExport int getGlobalGreatPeopleRateModifier() const;				// Exposed to Python
-	DllExport int getAnarchyModifier() const;				// Exposed to Python
-	DllExport int getGoldenAgeModifier() const;				// Exposed to Python
-	DllExport int getGlobalHurryModifier() const;				// Exposed to Python
-	DllExport int getFreeExperience() const;				// Exposed to Python
-	DllExport int getGlobalFreeExperience() const;				// Exposed to Python
-	DllExport int getFoodKept() const;				// Exposed to Python
-	DllExport int getAirlift() const;				// Exposed to Python
-	DllExport int getAirModifier() const;				// Exposed to Python
-	DllExport int getAirUnitCapacity() const;				// Exposed to Python
-	DllExport int getNukeModifier() const;				// Exposed to Python
-	DllExport int getNukeExplosionRand() const;				// Exposed to Python
-	DllExport int getFreeSpecialist() const;				// Exposed to Python
-	DllExport int getAreaFreeSpecialist() const;				// Exposed to Python
-	DllExport int getGlobalFreeSpecialist() const;				// Exposed to Python
-	DllExport int getHappiness() const;				// Exposed to Python
-	DllExport int getAreaHappiness() const;				// Exposed to Python
-	DllExport int getGlobalHappiness() const;				// Exposed to Python
-	DllExport int getStateReligionHappiness() const;				// Exposed to Python
-	DllExport int getWorkerSpeedModifier() const;				// Exposed to Python
-	DllExport int getMilitaryProductionModifier() const;				// Exposed to Python
-	DllExport int getSpaceProductionModifier() const;				// Exposed to Python
-	DllExport int getGlobalSpaceProductionModifier() const;				// Exposed to Python
-	DllExport int getTradeRoutes() const;				// Exposed to Python
-	DllExport int getCoastalTradeRoutes() const;				// Exposed to Python
-	DllExport int getGlobalTradeRoutes() const;				// Exposed to Python
-	DllExport int getTradeRouteModifier() const;				// Exposed to Python
-	DllExport int getForeignTradeRouteModifier() const;				// Exposed to Python
-	DllExport int getAssetValue() const;				// Exposed to Python
-	DllExport int getPowerValue() const;				// Exposed to Python
-	DllExport int getSpecialBuildingType() const;				// Exposed to Python
-	DllExport int getAdvisorType() const;				// Exposed to Python
-	DllExport int getHolyCity() const;				// Exposed to Python
-	DllExport int getReligionType() const;				// Exposed to Python
-	DllExport int getStateReligion() const;				// Exposed to Python
-	DllExport int getPrereqReligion() const;				// Exposed to Python
-	DllExport int getPrereqCorporation() const;				// Exposed to Python
-	DllExport int getFoundsCorporation() const;				// Exposed to Python
-	DllExport int getGlobalReligionCommerce() const;				// Exposed to Python
-	DllExport int getGlobalCorporationCommerce() const;				// Exposed to Python
-	DllExport int getPrereqAndBonus() const;				// Exposed to Python
-	DllExport int getGreatPeopleUnitClass() const;				// Exposed to Python
-	DllExport int getGreatPeopleRateChange() const;				// Exposed to Python
-	DllExport int getConquestProbability() const;				// Exposed to Python
-	DllExport int getMaintenanceModifier() const;				// Exposed to Python
-	DllExport int getWarWearinessModifier() const;				// Exposed to Python
-	DllExport int getGlobalWarWearinessModifier() const;				// Exposed to Python
-	DllExport int getEnemyWarWearinessModifier() const;				// Exposed to Python
-	DllExport int getHealRateChange() const;				// Exposed to Python
-	DllExport int getHealth() const;				// Exposed to Python
-	DllExport int getAreaHealth() const;				// Exposed to Python
-	DllExport int getGlobalHealth() const;				// Exposed to Python
-	DllExport int getGlobalPopulationChange() const;				// Exposed to Python
-	DllExport int getFreeTechs() const;				// Exposed to Python
-	DllExport int getDefenseModifier() const;					// Exposed to Python
-	DllExport int getBombardDefenseModifier() const;					// Exposed to Python
-	DllExport int getAllCityDefenseModifier() const;				// Exposed to Python
-	DllExport int getEspionageDefenseModifier() const;					// Exposed to Python
-	DllExport int getMissionType() const;											// Exposed to Python
-	DllExport void setMissionType(int iNewType);
-	DllExport int getVoteSourceType() const;				// Exposed to Python
+	int getBuildingClassType() const;				// Exposed to Python
+	int getVictoryPrereq() const;				// Exposed to Python
+	int getFreeStartEra() const;						// Exposed to Python
+	int getMaxStartEra() const;				// Exposed to Python
+	int getObsoleteTech() const;				// Exposed to Python
+	int getPrereqAndTech() const;				// Exposed to Python
+	int getNoBonus() const;				// Exposed to Python
+	int getPowerBonus() const;				// Exposed to Python
+	int getFreeBonus() const;				// Exposed to Python
+	int getNumFreeBonuses() const;				// Exposed to Python
+	int getFreeBuildingClass() const;				// Exposed to Python
+	void setNumFreeBuildingClass(int i);
+	int getFreePromotion() const;				// Exposed to Python
+	int getCivicOption() const;				// Exposed to Python
+	int getAIWeight() const;				// Exposed to Python
+	int getProductionCost() const;				// Exposed to Python
+	int getHurryCostModifier() const;				// Exposed to Python
+	int getHurryAngerModifier() const;				// Exposed to Python
+	int getAdvancedStartCost() const;				// Exposed to Python
+	int getAdvancedStartCostIncrease() const;				// Exposed to Python
+	int getMinAreaSize() const;				// Exposed to Python
+	int getNumCitiesPrereq() const;				// Exposed to Python
+	int getNumTeamsPrereq() const;				// Exposed to Python
+	int getUnitLevelPrereq() const;				// Exposed to Python
+	int getMinLatitude() const;				// Exposed to Python
+	int getMaxLatitude() const;				// Exposed to Python
+	int getGreatPeopleRateModifier() const;				// Exposed to Python
+	int getGreatGeneralRateModifier() const;				// Exposed to Python
+	int getDomesticGreatGeneralRateModifier() const;				// Exposed to Python
+	int getGlobalGreatPeopleRateModifier() const;				// Exposed to Python
+	int getAnarchyModifier() const;				// Exposed to Python
+	int getGoldenAgeModifier() const;				// Exposed to Python
+	int getGlobalHurryModifier() const;				// Exposed to Python
+	int getFreeExperience() const;				// Exposed to Python
+	int getGlobalFreeExperience() const;				// Exposed to Python
+	int getFoodKept() const;				// Exposed to Python
+	int getAirlift() const;				// Exposed to Python
+	int getAirModifier() const;				// Exposed to Python
+	int getAirUnitCapacity() const;				// Exposed to Python
+	int getNukeModifier() const;				// Exposed to Python
+	int getNukeExplosionRand() const;				// Exposed to Python
+	int getFreeSpecialist() const;				// Exposed to Python
+	int getAreaFreeSpecialist() const;				// Exposed to Python
+	int getGlobalFreeSpecialist() const;				// Exposed to Python
+	int getHappiness() const;				// Exposed to Python
+	int getAreaHappiness() const;				// Exposed to Python
+	int getGlobalHappiness() const;				// Exposed to Python
+	int getStateReligionHappiness() const;				// Exposed to Python
+	int getWorkerSpeedModifier() const;				// Exposed to Python
+	int getMilitaryProductionModifier() const;				// Exposed to Python
+	int getSpaceProductionModifier() const;				// Exposed to Python
+	int getGlobalSpaceProductionModifier() const;				// Exposed to Python
+	int getTradeRoutes() const;				// Exposed to Python
+	int getCoastalTradeRoutes() const;				// Exposed to Python
+	int getGlobalTradeRoutes() const;				// Exposed to Python
+	int getTradeRouteModifier() const;				// Exposed to Python
+	int getForeignTradeRouteModifier() const;				// Exposed to Python
+	int getAssetValue() const;				// Exposed to Python
+	int getPowerValue() const;				// Exposed to Python
+	int getSpecialBuildingType() const;				// Exposed to Python
+	int getAdvisorType() const;				// Exposed to Python
+	int getHolyCity() const;				// Exposed to Python
+	int getReligionType() const;				// Exposed to Python
+	int getStateReligion() const;				// Exposed to Python
+	int getPrereqReligion() const;				// Exposed to Python
+	int getPrereqCorporation() const;				// Exposed to Python
+	int getFoundsCorporation() const;				// Exposed to Python
+	int getGlobalReligionCommerce() const;				// Exposed to Python
+	int getGlobalCorporationCommerce() const;				// Exposed to Python
+	int getPrereqAndBonus() const;				// Exposed to Python
+	int getGreatPeopleUnitClass() const;				// Exposed to Python
+	int getGreatPeopleRateChange() const;				// Exposed to Python
+	int getConquestProbability() const;				// Exposed to Python
+	int getMaintenanceModifier() const;				// Exposed to Python
+	int getWarWearinessModifier() const;				// Exposed to Python
+	int getGlobalWarWearinessModifier() const;				// Exposed to Python
+	int getEnemyWarWearinessModifier() const;				// Exposed to Python
+	int getHealRateChange() const;				// Exposed to Python
+	int getHealth() const;				// Exposed to Python
+	int getAreaHealth() const;				// Exposed to Python
+	int getGlobalHealth() const;				// Exposed to Python
+	int getGlobalPopulationChange() const;				// Exposed to Python
+	int getFreeTechs() const;				// Exposed to Python
+	int getDefenseModifier() const;					// Exposed to Python
+	int getBombardDefenseModifier() const;					// Exposed to Python
+	int getAllCityDefenseModifier() const;				// Exposed to Python
+	int getEspionageDefenseModifier() const;					// Exposed to Python
+	int getMissionType() const;											// Exposed to Python
+	void setMissionType(int iNewType);
+	int getVoteSourceType() const;				// Exposed to Python
 
-	DllExport float getVisibilityPriority() const;
+	float getVisibilityPriority() const;
 
-	DllExport bool isTeamShare() const;				// Exposed to Python
-	DllExport bool isWater() const;				// Exposed to Python
-	DllExport bool isRiver() const;				// Exposed to Python
-	DllExport bool isPower() const;				// Exposed to Python
-	DllExport bool isDirtyPower() const;				// Exposed to Python
-	DllExport bool isAreaCleanPower() const;		// Exposed to Python
-	DllExport bool isAreaBorderObstacle() const;		// Exposed to Python
-	DllExport bool isForceTeamVoteEligible() const;				// Exposed to Python
-	DllExport bool isCapital() const;				// Exposed to Python
-	DllExport bool isGovernmentCenter() const;				// Exposed to Python
-	DllExport bool isGoldenAge() const;				// Exposed to Python
-	DllExport bool isMapCentering() const;				// Exposed to Python
-	DllExport bool isNoUnhappiness() const;				// Exposed to Python
-	DllExport bool isNoUnhealthyPopulation() const;				// Exposed to Python
-	DllExport bool isBuildingOnlyHealthy() const;				// Exposed to Python
-	DllExport bool isNeverCapture() const;				// Exposed to Python
-	DllExport bool isNukeImmune() const;				// Exposed to Python
-	DllExport bool isPrereqReligion() const;				// Exposed to Python
-	DllExport bool isCenterInCity() const;				// Exposed to Python
-	DllExport bool isStateReligion() const;				// Exposed to Python
-	DllExport bool isAllowsNukes() const;				// Exposed to Python
+	bool isTeamShare() const;				// Exposed to Python
+	bool isWater() const;				// Exposed to Python
+	bool isRiver() const;				// Exposed to Python
+	bool isPower() const;				// Exposed to Python
+	bool isDirtyPower() const;				// Exposed to Python
+	bool isAreaCleanPower() const;		// Exposed to Python
+	bool isAreaBorderObstacle() const;		// Exposed to Python
+	bool isForceTeamVoteEligible() const;				// Exposed to Python
+	bool isCapital() const;				// Exposed to Python
+	bool isGovernmentCenter() const;				// Exposed to Python
+	bool isGoldenAge() const;				// Exposed to Python
+	bool isMapCentering() const;				// Exposed to Python
+	bool isNoUnhappiness() const;				// Exposed to Python
+	bool isNoUnhealthyPopulation() const;				// Exposed to Python
+	bool isBuildingOnlyHealthy() const;				// Exposed to Python
+	bool isNeverCapture() const;				// Exposed to Python
+	bool isNukeImmune() const;				// Exposed to Python
+	bool isPrereqReligion() const;				// Exposed to Python
+	bool isCenterInCity() const;				// Exposed to Python
+	bool isStateReligion() const;				// Exposed to Python
+	bool isAllowsNukes() const;				// Exposed to Python
 
-	DllExport const TCHAR* getConstructSound() const;				// Exposed to Python
-	DllExport void setConstructSound(const TCHAR* szVal);
-	DllExport const TCHAR* getArtDefineTag() const;				// Exposed to Python
-	DllExport void setArtDefineTag(const TCHAR* szVal);
-	DllExport const TCHAR* getMovieDefineTag() const;				// Exposed to Python
-	DllExport void setMovieDefineTag(const TCHAR* szVal);
+	const TCHAR* getConstructSound() const;				// Exposed to Python
+	void setConstructSound(const TCHAR* szVal);
+	const TCHAR* getArtDefineTag() const;				// Exposed to Python
+	void setArtDefineTag(const TCHAR* szVal);
+	const TCHAR* getMovieDefineTag() const;				// Exposed to Python
+	void setMovieDefineTag(const TCHAR* szVal);
 
 	// Arrays
 
-	DllExport int getYieldChange(int i) const;				// Exposed to Python
+	int getYieldChange(int i) const;				// Exposed to Python
 	int* getYieldChangeArray() const;
-	DllExport int getYieldModifier(int i) const;;				// Exposed to Python
+	int getYieldModifier(int i) const;;				// Exposed to Python
 	int* getYieldModifierArray() const;
-	DllExport int getPowerYieldModifier(int i) const;				// Exposed to Python
+	int getPowerYieldModifier(int i) const;				// Exposed to Python
 	int* getPowerYieldModifierArray() const;
-	DllExport int getAreaYieldModifier(int i) const;				// Exposed to Python
+	int getAreaYieldModifier(int i) const;				// Exposed to Python
 	int* getAreaYieldModifierArray() const;
-	DllExport int getGlobalYieldModifier(int i) const;				// Exposed to Python
+	int getGlobalYieldModifier(int i) const;				// Exposed to Python
 	int* getGlobalYieldModifierArray() const;
-	DllExport int getSeaPlotYieldChange(int i) const;				// Exposed to Python
+	int getSeaPlotYieldChange(int i) const;				// Exposed to Python
 	int* getSeaPlotYieldChangeArray() const;
-	DllExport int getRiverPlotYieldChange(int i) const;				// Exposed to Python
+	int getRiverPlotYieldChange(int i) const;				// Exposed to Python
 	int* getRiverPlotYieldChangeArray() const;
-	DllExport int getGlobalSeaPlotYieldChange(int i) const;				// Exposed to Python
+	int getGlobalSeaPlotYieldChange(int i) const;				// Exposed to Python
 	int* getGlobalSeaPlotYieldChangeArray() const;
 
-	DllExport int getCommerceChange(int i) const;				// Exposed to Python
+	int getCommerceChange(int i) const;				// Exposed to Python
 	int* getCommerceChangeArray() const;
-	DllExport int getObsoleteSafeCommerceChange(int i) const;				// Exposed to Python
+	int getObsoleteSafeCommerceChange(int i) const;				// Exposed to Python
 	int* getObsoleteSafeCommerceChangeArray() const;
-	DllExport int getCommerceChangeDoubleTime(int i) const;				// Exposed to Python
-	DllExport int getCommerceModifier(int i) const;				// Exposed to Python
+	int getCommerceChangeDoubleTime(int i) const;				// Exposed to Python
+	int getCommerceModifier(int i) const;				// Exposed to Python
 	int* getCommerceModifierArray() const;
-	DllExport int getGlobalCommerceModifier(int i) const;				// Exposed to Python
+	int getGlobalCommerceModifier(int i) const;				// Exposed to Python
 	int* getGlobalCommerceModifierArray() const;
-	DllExport int getSpecialistExtraCommerce(int i) const;	// Exposed to Python
+	int getSpecialistExtraCommerce(int i) const;	// Exposed to Python
 	int* getSpecialistExtraCommerceArray() const;
-	DllExport int getStateReligionCommerce(int i) const;				// Exposed to Python
+	int getStateReligionCommerce(int i) const;				// Exposed to Python
 	int* getStateReligionCommerceArray() const;
-	DllExport int getCommerceHappiness(int i) const;				// Exposed to Python
-	DllExport int getReligionChange(int i) const;				// Exposed to Python
-	DllExport int getSpecialistCount(int i) const;				// Exposed to Python
-	DllExport int getFreeSpecialistCount(int i) const;				// Exposed to Python
-	DllExport int getBonusHealthChanges(int i) const;				// Exposed to Python
-	DllExport int getBonusHappinessChanges(int i) const;				// Exposed to Python
-	DllExport int getBonusProductionModifier(int i) const;				// Exposed to Python
-	DllExport int getUnitCombatFreeExperience(int i) const;				// Exposed to Python
-	DllExport int getDomainFreeExperience(int i) const;						// Exposed to Python
-	DllExport int getDomainProductionModifier(int i) const;				// Exposed to Python
-	DllExport int getPrereqAndTechs(int i) const;				// Exposed to Python
-	DllExport int getPrereqOrBonuses(int i) const;				// Exposed to Python
-	DllExport int getProductionTraits(int i) const;				// Exposed to Python
-	DllExport int getHappinessTraits(int i) const;				// Exposed to Python
-	DllExport int getBuildingHappinessChanges(int i) const;				// Exposed to Python
-	DllExport int getPrereqNumOfBuildingClass(int i) const;				// Exposed to Python
-	DllExport int getFlavorValue(int i) const;				// Exposed to Python
-	DllExport int getImprovementFreeSpecialist(int i) const;				// Exposed to Python
+	int getCommerceHappiness(int i) const;				// Exposed to Python
+	int getReligionChange(int i) const;				// Exposed to Python
+	int getSpecialistCount(int i) const;				// Exposed to Python
+	int getFreeSpecialistCount(int i) const;				// Exposed to Python
+	int getBonusHealthChanges(int i) const;				// Exposed to Python
+	int getBonusHappinessChanges(int i) const;				// Exposed to Python
+	int getBonusProductionModifier(int i) const;				// Exposed to Python
+	int getUnitCombatFreeExperience(int i) const;				// Exposed to Python
+	int getDomainFreeExperience(int i) const;						// Exposed to Python
+	int getDomainProductionModifier(int i) const;				// Exposed to Python
+	int getPrereqAndTechs(int i) const;				// Exposed to Python
+	int getPrereqOrBonuses(int i) const;				// Exposed to Python
+	int getProductionTraits(int i) const;				// Exposed to Python
+	int getHappinessTraits(int i) const;				// Exposed to Python
+	int getBuildingHappinessChanges(int i) const;				// Exposed to Python
+	int getPrereqNumOfBuildingClass(int i) const;				// Exposed to Python
+	int getFlavorValue(int i) const;				// Exposed to Python
+	int getImprovementFreeSpecialist(int i) const;				// Exposed to Python
 
-	DllExport bool isCommerceFlexible(int i) const;				// Exposed to Python
-	DllExport bool isCommerceChangeOriginalOwner(int i) const;				// Exposed to Python
-	DllExport bool isBuildingClassNeededInCity(int i) const;				// Exposed to Python
+	bool isCommerceFlexible(int i) const;				// Exposed to Python
+	bool isCommerceChangeOriginalOwner(int i) const;				// Exposed to Python
+	bool isBuildingClassNeededInCity(int i) const;				// Exposed to Python
 
-	DllExport int getSpecialistYieldChange(int i, int j) const;			// Exposed to Python
+	int getSpecialistYieldChange(int i, int j) const;			// Exposed to Python
 	int* getSpecialistYieldChangeArray(int i) const;
 
-	DllExport int getBonusYieldModifier(int i, int j) const;				// Exposed to Python
+	int getBonusYieldModifier(int i, int j) const;				// Exposed to Python
 	int* getBonusYieldModifierArray(int i) const;
 
 	// Other
 
-	DllExport const CvArtInfoBuilding* getArtInfo() const;
-	DllExport const CvArtInfoMovie* getMovieInfo() const;
-	DllExport const TCHAR* getButton() const;
-	DllExport const TCHAR* getMovie() const;
+	const CvArtInfoBuilding* getArtInfo() const;
+	const CvArtInfoMovie* getMovieInfo() const;
+	const TCHAR* getButton() const;
+	const TCHAR* getMovie() const;
 
 	// serialization
-	DllExport void read(FDataStreamBase*);
-	DllExport void write(FDataStreamBase*);
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	void read(FDataStreamBase*);
+	void write(FDataStreamBase*);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PUBLIC MEMBER VARIABLES---------------------------------
 protected:
@@ -1917,20 +1917,20 @@ class CvSpecialBuildingInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvSpecialBuildingInfo();
-	DllExport virtual ~CvSpecialBuildingInfo();
+	CvSpecialBuildingInfo();
+	virtual ~CvSpecialBuildingInfo();
 
-	DllExport int getObsoleteTech( void ) const;					// Exposed to Python
-	DllExport int getTechPrereq( void ) const;						// Exposed to Python
-	DllExport int getTechPrereqAnyone( void ) const;						// Exposed to Python
+	int getObsoleteTech( void ) const;					// Exposed to Python
+	int getTechPrereq( void ) const;						// Exposed to Python
+	int getTechPrereqAnyone( void ) const;						// Exposed to Python
 
-	DllExport bool isValid( void ) const;									// Exposed to Python
+	bool isValid( void ) const;									// Exposed to Python
 
 	// Arrays
 
-	DllExport int getProductionTraits(int i) const;				// Exposed to Python
+	int getProductionTraits(int i) const;				// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -1960,25 +1960,25 @@ class CvBuildingClassInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvBuildingClassInfo();
-	DllExport virtual ~CvBuildingClassInfo();
+	CvBuildingClassInfo();
+	virtual ~CvBuildingClassInfo();
 
-	DllExport int getMaxGlobalInstances() const;				// Exposed to Python
-	DllExport int getMaxTeamInstances() const;				// Exposed to Python
-	DllExport int getMaxPlayerInstances() const;				// Exposed to Python
-	DllExport int getExtraPlayerInstances() const;				// Exposed to Python
-	DllExport int getDefaultBuildingIndex() const;				// Exposed to Python
-	DllExport void setDefaultBuildingIndex(int i);
+	int getMaxGlobalInstances() const;				// Exposed to Python
+	int getMaxTeamInstances() const;				// Exposed to Python
+	int getMaxPlayerInstances() const;				// Exposed to Python
+	int getExtraPlayerInstances() const;				// Exposed to Python
+	int getDefaultBuildingIndex() const;				// Exposed to Python
+	void setDefaultBuildingIndex(int i);
 
-	DllExport bool isNoLimit() const;				// Exposed to Python
-	DllExport bool isMonument() const;				// Exposed to Python
+	bool isNoLimit() const;				// Exposed to Python
+	bool isMonument() const;				// Exposed to Python
 
 	// Arrays
 
-	DllExport int getVictoryThreshold(int i) const;				// Exposed to Python
+	int getVictoryThreshold(int i) const;				// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
-	DllExport bool readPass3();
+	bool read(CvXMLLoadUtility* pXML);
+	bool readPass3();
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -2012,8 +2012,8 @@ class CvRiverInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvRiverInfo();
-	DllExport virtual ~CvRiverInfo();
+	CvRiverInfo();
+	virtual ~CvRiverInfo();
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -2046,7 +2046,7 @@ public:
 	DllExport const TCHAR* getConnectString() const;				// Exposed to Python
 	DllExport const TCHAR* getRotateString() const;				// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 
@@ -2092,7 +2092,7 @@ public:
 	DllExport const TCHAR* getModelConnectString() const;			// Exposed to Python
 	DllExport const TCHAR* getRotateString() const;				// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 
@@ -2172,7 +2172,7 @@ public:
 	DllExport int getDerivativeCiv() const;																// Exposed to Python
 	void setDerivativeCiv(int iCiv);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 	DllExport bool readPass2(CvXMLLoadUtility* pXML);
 	DllExport void read(FDataStreamBase* stream);
 	DllExport void write(FDataStreamBase* stream);
@@ -2227,27 +2227,27 @@ class CvVictoryInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvVictoryInfo();
-	DllExport virtual ~CvVictoryInfo();
+	CvVictoryInfo();
+	virtual ~CvVictoryInfo();
 
-	DllExport int getPopulationPercentLead() const;				// Exposed to Python
-	DllExport int getLandPercent() const;				// Exposed to Python
-	DllExport int getMinLandPercent() const;				// Exposed to Python
-	DllExport int getReligionPercent() const;				// Exposed to Python
-	DllExport int getCityCulture() const;				// Exposed to Python
-	DllExport int getNumCultureCities() const;				// Exposed to Python
-	DllExport int getTotalCultureRatio() const;				// Exposed to Python
-	DllExport int getVictoryDelayTurns() const;				// Exposed to Python
+	int getPopulationPercentLead() const;				// Exposed to Python
+	int getLandPercent() const;				// Exposed to Python
+	int getMinLandPercent() const;				// Exposed to Python
+	int getReligionPercent() const;				// Exposed to Python
+	int getCityCulture() const;				// Exposed to Python
+	int getNumCultureCities() const;				// Exposed to Python
+	int getTotalCultureRatio() const;				// Exposed to Python
+	int getVictoryDelayTurns() const;				// Exposed to Python
 
-	DllExport bool isTargetScore() const;				// Exposed to Python
-	DllExport bool isEndScore() const;					// Exposed to Python
-	DllExport bool isConquest() const;					// Exposed to Python
-	DllExport bool isDiploVote() const;					// Exposed to Python
+	bool isTargetScore() const;				// Exposed to Python
+	bool isEndScore() const;					// Exposed to Python
+	bool isConquest() const;					// Exposed to Python
+	bool isDiploVote() const;					// Exposed to Python
 	DllExport bool isPermanent() const;					// Exposed to Python
 
-	DllExport const char* getMovie() const;
+	const char* getMovie() const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 
@@ -2285,15 +2285,15 @@ class CvHurryInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 	public:
 
-		DllExport CvHurryInfo();
-		DllExport virtual ~CvHurryInfo();
+		CvHurryInfo();
+		virtual ~CvHurryInfo();
 
-		DllExport int getGoldPerProduction() const;					// Exposed to Python
-		DllExport int getProductionPerPopulation() const;		// Exposed to Python
+		int getGoldPerProduction() const;					// Exposed to Python
+		int getProductionPerPopulation() const;		// Exposed to Python
 
-		DllExport bool isAnger() const;											// Exposed to Python
+		bool isAnger() const;											// Exposed to Python
 
-		DllExport bool read(CvXMLLoadUtility* pXML);
+		bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PUBLIC MEMBER VARIABLES---------------------------------
 	protected:
@@ -2318,79 +2318,79 @@ class CvHandicapInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvHandicapInfo();
-	DllExport virtual ~CvHandicapInfo();
+	CvHandicapInfo();
+	virtual ~CvHandicapInfo();
 
-	DllExport int getFreeWinsVsBarbs() const;				// Exposed to Python
-	DllExport int getAnimalAttackProb() const;				// Exposed to Python
-	DllExport int getStartingLocationPercent() const;				// Exposed to Python
-	DllExport int getAdvancedStartPointsMod() const;				// Exposed to Python
-	DllExport int getStartingGold() const;				// Exposed to Python
-	DllExport int getFreeUnits() const;				// Exposed to Python
-	DllExport int getUnitCostPercent() const;				// Exposed to Python
-	DllExport int getResearchPercent() const;				// Exposed to Python
-	DllExport int getDistanceMaintenancePercent() const;				// Exposed to Python
-	DllExport int getNumCitiesMaintenancePercent() const;				// Exposed to Python
-	DllExport int getMaxNumCitiesMaintenance() const;				// Exposed to Python
-	DllExport int getColonyMaintenancePercent() const;				// Exposed to Python
-	DllExport int getMaxColonyMaintenance() const;				// Exposed to Python
-	DllExport int getCorporationMaintenancePercent() const;				// Exposed to Python
-	DllExport int getCivicUpkeepPercent() const;				// Exposed to Python
-	DllExport int getInflationPercent() const;				// Exposed to Python
-	DllExport int getHealthBonus() const;				// Exposed to Python
-	DllExport int getHappyBonus() const;				// Exposed to Python
-	DllExport int getAttitudeChange() const;				// Exposed to Python
-	DllExport int getNoTechTradeModifier() const;				// Exposed to Python
-	DllExport int getTechTradeKnownModifier() const;				// Exposed to Python
-	DllExport int getUnownedTilesPerGameAnimal() const;				// Exposed to Python
-	DllExport int getUnownedTilesPerBarbarianUnit() const;				// Exposed to Python
-	DllExport int getUnownedWaterTilesPerBarbarianUnit() const;				// Exposed to Python
-	DllExport int getUnownedTilesPerBarbarianCity() const;				// Exposed to Python
-	DllExport int getBarbarianCreationTurnsElapsed() const;				// Exposed to Python
-	DllExport int getBarbarianCityCreationTurnsElapsed() const;				// Exposed to Python
-	DllExport int getBarbarianCityCreationProb() const;				// Exposed to Python
-	DllExport int getAnimalCombatModifier() const;				// Exposed to Python
-	DllExport int getBarbarianCombatModifier() const;				// Exposed to Python
-	DllExport int getAIAnimalCombatModifier() const;				// Exposed to Python
-	DllExport int getAIBarbarianCombatModifier() const;				// Exposed to Python
+	int getFreeWinsVsBarbs() const;				// Exposed to Python
+	int getAnimalAttackProb() const;				// Exposed to Python
+	int getStartingLocationPercent() const;				// Exposed to Python
+	int getAdvancedStartPointsMod() const;				// Exposed to Python
+	int getStartingGold() const;				// Exposed to Python
+	int getFreeUnits() const;				// Exposed to Python
+	int getUnitCostPercent() const;				// Exposed to Python
+	int getResearchPercent() const;				// Exposed to Python
+	int getDistanceMaintenancePercent() const;				// Exposed to Python
+	int getNumCitiesMaintenancePercent() const;				// Exposed to Python
+	int getMaxNumCitiesMaintenance() const;				// Exposed to Python
+	int getColonyMaintenancePercent() const;				// Exposed to Python
+	int getMaxColonyMaintenance() const;				// Exposed to Python
+	int getCorporationMaintenancePercent() const;				// Exposed to Python
+	int getCivicUpkeepPercent() const;				// Exposed to Python
+	int getInflationPercent() const;				// Exposed to Python
+	int getHealthBonus() const;				// Exposed to Python
+	int getHappyBonus() const;				// Exposed to Python
+	int getAttitudeChange() const;				// Exposed to Python
+	int getNoTechTradeModifier() const;				// Exposed to Python
+	int getTechTradeKnownModifier() const;				// Exposed to Python
+	int getUnownedTilesPerGameAnimal() const;				// Exposed to Python
+	int getUnownedTilesPerBarbarianUnit() const;				// Exposed to Python
+	int getUnownedWaterTilesPerBarbarianUnit() const;				// Exposed to Python
+	int getUnownedTilesPerBarbarianCity() const;				// Exposed to Python
+	int getBarbarianCreationTurnsElapsed() const;				// Exposed to Python
+	int getBarbarianCityCreationTurnsElapsed() const;				// Exposed to Python
+	int getBarbarianCityCreationProb() const;				// Exposed to Python
+	int getAnimalCombatModifier() const;				// Exposed to Python
+	int getBarbarianCombatModifier() const;				// Exposed to Python
+	int getAIAnimalCombatModifier() const;				// Exposed to Python
+	int getAIBarbarianCombatModifier() const;				// Exposed to Python
 
-	DllExport int getStartingDefenseUnits() const;						// Exposed to Python
-	DllExport int getStartingWorkerUnits() const;							// Exposed to Python
-	DllExport int getStartingExploreUnits() const;						// Exposed to Python
-	DllExport int getAIStartingUnitMultiplier() const;				// Exposed to Python
-	DllExport int getAIStartingDefenseUnits() const;				// Exposed to Python
-	DllExport int getAIStartingWorkerUnits() const;				// Exposed to Python
-	DllExport int getAIStartingExploreUnits() const;				// Exposed to Python
-	DllExport int getBarbarianInitialDefenders() const;				// Exposed to Python
-	DllExport int getAIDeclareWarProb() const;								// Exposed to Python
-	DllExport int getAIWorkRateModifier() const;				// Exposed to Python
-	DllExport int getAIGrowthPercent() const;				// Exposed to Python
-	DllExport int getAITrainPercent() const;				// Exposed to Python
-	DllExport int getAIWorldTrainPercent() const;				// Exposed to Python
-	DllExport int getAIConstructPercent() const;				// Exposed to Python
-	DllExport int getAIWorldConstructPercent() const;				// Exposed to Python
-	DllExport int getAICreatePercent() const;				// Exposed to Python
-	DllExport int getAIWorldCreatePercent() const;				// Exposed to Python
-	DllExport int getAICivicUpkeepPercent() const;				// Exposed to Python
-	DllExport int getAIUnitCostPercent() const;				// Exposed to Python
-	DllExport int getAIUnitSupplyPercent() const;				// Exposed to Python
-	DllExport int getAIUnitUpgradePercent() const;				// Exposed to Python
-	DllExport int getAIInflationPercent() const;				// Exposed to Python
-	DllExport int getAIWarWearinessPercent() const;				// Exposed to Python
-	DllExport int getAIPerEraModifier() const;						// Exposed to Python
-	DllExport int getAIAdvancedStartPercent() const;						// Exposed to Python
-	DllExport int getNumGoodies() const;				// Exposed to Python
+	int getStartingDefenseUnits() const;						// Exposed to Python
+	int getStartingWorkerUnits() const;							// Exposed to Python
+	int getStartingExploreUnits() const;						// Exposed to Python
+	int getAIStartingUnitMultiplier() const;				// Exposed to Python
+	int getAIStartingDefenseUnits() const;				// Exposed to Python
+	int getAIStartingWorkerUnits() const;				// Exposed to Python
+	int getAIStartingExploreUnits() const;				// Exposed to Python
+	int getBarbarianInitialDefenders() const;				// Exposed to Python
+	int getAIDeclareWarProb() const;								// Exposed to Python
+	int getAIWorkRateModifier() const;				// Exposed to Python
+	int getAIGrowthPercent() const;				// Exposed to Python
+	int getAITrainPercent() const;				// Exposed to Python
+	int getAIWorldTrainPercent() const;				// Exposed to Python
+	int getAIConstructPercent() const;				// Exposed to Python
+	int getAIWorldConstructPercent() const;				// Exposed to Python
+	int getAICreatePercent() const;				// Exposed to Python
+	int getAIWorldCreatePercent() const;				// Exposed to Python
+	int getAICivicUpkeepPercent() const;				// Exposed to Python
+	int getAIUnitCostPercent() const;				// Exposed to Python
+	int getAIUnitSupplyPercent() const;				// Exposed to Python
+	int getAIUnitUpgradePercent() const;				// Exposed to Python
+	int getAIInflationPercent() const;				// Exposed to Python
+	int getAIWarWearinessPercent() const;				// Exposed to Python
+	int getAIPerEraModifier() const;						// Exposed to Python
+	int getAIAdvancedStartPercent() const;						// Exposed to Python
+	int getNumGoodies() const;				// Exposed to Python
 
 	// Arrays
 
-	DllExport int getGoodies(int i) const;				// Exposed to Python
-	DllExport int isFreeTechs(int i) const;				// Exposed to Python
-	DllExport int isAIFreeTechs(int i) const;				// Exposed to Python
+	int getGoodies(int i) const;				// Exposed to Python
+	int isFreeTechs(int i) const;				// Exposed to Python
+	int isAIFreeTechs(int i) const;				// Exposed to Python
 
-	DllExport void read(FDataStreamBase* stream);
-	DllExport void write(FDataStreamBase* stream);
+	void read(FDataStreamBase* stream);
+	void write(FDataStreamBase* stream);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -2479,36 +2479,36 @@ class CvGameSpeedInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvGameSpeedInfo();
-	DllExport virtual ~CvGameSpeedInfo();
+	CvGameSpeedInfo();
+	virtual ~CvGameSpeedInfo();
 
-	DllExport int getGrowthPercent() const;						// Exposed to Python
-	DllExport int getTrainPercent() const;						// Exposed to Python
-	DllExport int getConstructPercent() const;				// Exposed to Python
-	DllExport int getCreatePercent() const;						// Exposed to Python
-	DllExport int getResearchPercent() const;					// Exposed to Python
-	DllExport int getBuildPercent() const;						// Exposed to Python
-	DllExport int getImprovementPercent() const;			// Exposed to Python
-	DllExport int getGreatPeoplePercent() const;			// Exposed to Python
-	DllExport int getAnarchyPercent() const;					// Exposed to Python
-	DllExport int getBarbPercent() const;							// Exposed to Python
-	DllExport int getFeatureProductionPercent() const;				// Exposed to Python
-	DllExport int getUnitDiscoverPercent() const;			// Exposed to Python
-	DllExport int getUnitHurryPercent() const;				// Exposed to Python
-	DllExport int getUnitTradePercent() const;				// Exposed to Python
-	DllExport int getUnitGreatWorkPercent() const;		// Exposed to Python
-	DllExport int getGoldenAgePercent() const;				// Exposed to Python
-	DllExport int getHurryPercent() const;						// Exposed to Python
-	DllExport int getHurryConscriptAngerPercent() const;	// Exposed to Python
-	DllExport int getInflationOffset() const;					// Exposed to Python
-	DllExport int getInflationPercent() const;				// Exposed to Python
-	DllExport int getVictoryDelayPercent() const;				// Exposed to Python
-	DllExport int getNumTurnIncrements() const;				// Exposed to Python
+	int getGrowthPercent() const;						// Exposed to Python
+	int getTrainPercent() const;						// Exposed to Python
+	int getConstructPercent() const;				// Exposed to Python
+	int getCreatePercent() const;						// Exposed to Python
+	int getResearchPercent() const;					// Exposed to Python
+	int getBuildPercent() const;						// Exposed to Python
+	int getImprovementPercent() const;			// Exposed to Python
+	int getGreatPeoplePercent() const;			// Exposed to Python
+	int getAnarchyPercent() const;					// Exposed to Python
+	int getBarbPercent() const;							// Exposed to Python
+	int getFeatureProductionPercent() const;				// Exposed to Python
+	int getUnitDiscoverPercent() const;			// Exposed to Python
+	int getUnitHurryPercent() const;				// Exposed to Python
+	int getUnitTradePercent() const;				// Exposed to Python
+	int getUnitGreatWorkPercent() const;		// Exposed to Python
+	int getGoldenAgePercent() const;				// Exposed to Python
+	int getHurryPercent() const;						// Exposed to Python
+	int getHurryConscriptAngerPercent() const;	// Exposed to Python
+	int getInflationOffset() const;					// Exposed to Python
+	int getInflationPercent() const;				// Exposed to Python
+	int getVictoryDelayPercent() const;				// Exposed to Python
+	int getNumTurnIncrements() const;				// Exposed to Python
 
-	DllExport GameTurnInfo& getGameTurnInfo(int iIndex) const;				// Exposed to Python
-	DllExport void allocateGameTurnInfos(const int iSize);
+	GameTurnInfo& getGameTurnInfo(int iIndex) const;				// Exposed to Python
+	void allocateGameTurnInfos(const int iSize);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -2553,15 +2553,15 @@ class CvTurnTimerInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvTurnTimerInfo();
-	DllExport virtual ~CvTurnTimerInfo();
+	CvTurnTimerInfo();
+	virtual ~CvTurnTimerInfo();
 
-	DllExport int getBaseTime() const;				// Exposed to Python
-	DllExport int getCityBonus() const;				// Exposed to Python
-	DllExport int getUnitBonus() const;				// Exposed to Python
-	DllExport int getFirstTurnMultiplier() const;				// Exposed to Python
+	int getBaseTime() const;				// Exposed to Python
+	int getCityBonus() const;				// Exposed to Python
+	int getUnitBonus() const;				// Exposed to Python
+	int getFirstTurnMultiplier() const;				// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -2584,29 +2584,29 @@ class CvBuildInfo : public CvHotkeyInfo
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvBuildInfo();
-	DllExport virtual ~CvBuildInfo();
+	CvBuildInfo();
+	virtual ~CvBuildInfo();
 
-	DllExport int getTime() const;				// Exposed to Python
-	DllExport int getCost() const;				// Exposed to Python
-	DllExport int getTechPrereq() const;				// Exposed to Python
-	DllExport int getImprovement() const;				// Exposed to Python
-	DllExport int getRoute() const;				// Exposed to Python
+	int getTime() const;				// Exposed to Python
+	int getCost() const;				// Exposed to Python
+	int getTechPrereq() const;				// Exposed to Python
+	int getImprovement() const;				// Exposed to Python
+	int getRoute() const;				// Exposed to Python
 	DllExport int getEntityEvent() const;				// Exposed to Python
 	DllExport int getMissionType() const;				// Exposed to Python
-	DllExport void setMissionType(int iNewType);
+	void setMissionType(int iNewType);
 
-	DllExport bool isKill() const;				// Exposed to Python
+	bool isKill() const;				// Exposed to Python
 
 	// Arrays
 
-	DllExport int getFeatureTech(int i) const;				// Exposed to Python
-	DllExport int getFeatureTime(int i) const;				// Exposed to Python
-	DllExport int getFeatureProduction(int i) const;				// Exposed to Python
+	int getFeatureTech(int i) const;				// Exposed to Python
+	int getFeatureTime(int i) const;				// Exposed to Python
+	int getFeatureProduction(int i) const;				// Exposed to Python
 
-	DllExport bool isFeatureRemove(int i) const;				// Exposed to Python
+	bool isFeatureRemove(int i) const;				// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 
@@ -2645,30 +2645,30 @@ class CvGoodyInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvGoodyInfo();
-	DllExport virtual ~CvGoodyInfo();
+	CvGoodyInfo();
+	virtual ~CvGoodyInfo();
 
-	DllExport int getGold() const;				// Exposed to Python
-	DllExport int getGoldRand1() const;				// Exposed to Python
-	DllExport int getGoldRand2() const;				// Exposed to Python
-	DllExport int getMapOffset() const;				// Exposed to Python
-	DllExport int getMapRange() const;				// Exposed to Python
-	DllExport int getMapProb() const;				// Exposed to Python
-	DllExport int getExperience() const;				// Exposed to Python
-	DllExport int getHealing() const;				// Exposed to Python
-	DllExport int getDamagePrereq() const;				// Exposed to Python
-	DllExport int getBarbarianUnitProb() const;				// Exposed to Python
-	DllExport int getMinBarbarians() const;				// Exposed to Python
-	DllExport int getUnitClassType() const;				// Exposed to Python
-	DllExport int getBarbarianUnitClass() const;				// Exposed to Python
+	int getGold() const;				// Exposed to Python
+	int getGoldRand1() const;				// Exposed to Python
+	int getGoldRand2() const;				// Exposed to Python
+	int getMapOffset() const;				// Exposed to Python
+	int getMapRange() const;				// Exposed to Python
+	int getMapProb() const;				// Exposed to Python
+	int getExperience() const;				// Exposed to Python
+	int getHealing() const;				// Exposed to Python
+	int getDamagePrereq() const;				// Exposed to Python
+	int getBarbarianUnitProb() const;				// Exposed to Python
+	int getMinBarbarians() const;				// Exposed to Python
+	int getUnitClassType() const;				// Exposed to Python
+	int getBarbarianUnitClass() const;				// Exposed to Python
 
-	DllExport bool isTech() const;				// Exposed to Python
-	DllExport bool isBad() const;				// Exposed to Python
+	bool isTech() const;				// Exposed to Python
+	bool isBad() const;				// Exposed to Python
 
-	DllExport const TCHAR* getSound() const;				// Exposed to Python
-	DllExport void setSound(const TCHAR* szVal);
+	const TCHAR* getSound() const;				// Exposed to Python
+	void setSound(const TCHAR* szVal);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 
@@ -2708,24 +2708,24 @@ class CvRouteInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvRouteInfo();
-	DllExport virtual ~CvRouteInfo();
+	CvRouteInfo();
+	virtual ~CvRouteInfo();
 
-	DllExport int getAdvancedStartCost() const;				// Exposed to Python
-	DllExport int getAdvancedStartCostIncrease() const;				// Exposed to Python
+	int getAdvancedStartCost() const;				// Exposed to Python
+	int getAdvancedStartCostIncrease() const;				// Exposed to Python
 
-	DllExport int getValue() const;								// Exposed to Python
-	DllExport int getMovementCost() const;				// Exposed to Python
-	DllExport int getFlatMovementCost() const;		// Exposed to Python
-	DllExport int getPrereqBonus() const;					// Exposed to Python
+	int getValue() const;								// Exposed to Python
+	int getMovementCost() const;				// Exposed to Python
+	int getFlatMovementCost() const;		// Exposed to Python
+	int getPrereqBonus() const;					// Exposed to Python
 
 	// Arrays
 
-	DllExport int getYieldChange(int i) const;				// Exposed to Python
-	DllExport int getTechMovementChange(int i) const;				// Exposed to Python
-	DllExport int getPrereqOrBonus(int i) const;				// Exposed to Python
+	int getYieldChange(int i) const;				// Exposed to Python
+	int getTechMovementChange(int i) const;				// Exposed to Python
+	int getPrereqOrBonus(int i) const;				// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -2763,20 +2763,20 @@ friend class CvXMLLoadUtility;
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvImprovementBonusInfo();
-	DllExport virtual ~CvImprovementBonusInfo();
+	CvImprovementBonusInfo();
+	virtual ~CvImprovementBonusInfo();
 
-	DllExport int getDiscoverRand() const;				// Exposed to Python
+	int getDiscoverRand() const;				// Exposed to Python
 
-	DllExport bool isBonusMakesValid() const;				// Exposed to Python
-	DllExport bool isBonusTrade() const;				// Exposed to Python
+	bool isBonusMakesValid() const;				// Exposed to Python
+	bool isBonusTrade() const;				// Exposed to Python
 
-	DllExport int getYieldChange(int i) const;				// Exposed to Python
+	int getYieldChange(int i) const;				// Exposed to Python
 	
 	// Serialize
 
-	DllExport void read(FDataStreamBase* stream);
-	DllExport void write(FDataStreamBase* stream);
+	void read(FDataStreamBase* stream);
+	void write(FDataStreamBase* stream);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -2806,83 +2806,81 @@ class CvImprovementInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvImprovementInfo();
-	DllExport virtual ~CvImprovementInfo();
+	CvImprovementInfo();
+	virtual ~CvImprovementInfo();
 
-	DllExport int getAdvancedStartCost() const;				// Exposed to Python
-	DllExport int getAdvancedStartCostIncrease() const;				// Exposed to Python
+	int getAdvancedStartCost() const;				// Exposed to Python
+	int getAdvancedStartCostIncrease() const;				// Exposed to Python
 
-	DllExport int getTilesPerGoody() const;				// Exposed to Python
-	DllExport int getGoodyUniqueRange() const;				// Exposed to Python
-	DllExport int getFeatureGrowthProbability() const;				// Exposed to Python
-	DllExport int getUpgradeTime() const;				// Exposed to Python
-	DllExport int getAirBombDefense() const;				// Exposed to Python
-	DllExport int getDefenseModifier() const;				// Exposed to Python
-	DllExport int getHappiness() const;				// Exposed to Python
-	DllExport int getPillageGold() const;				// Exposed to Python
-	DllExport int getImprovementPillage() const;				// Exposed to Python
-	DllExport void setImprovementPillage(int i);
-	DllExport int getImprovementUpgrade() const;				// Exposed to Python
-	DllExport void setImprovementUpgrade(int i);
+	int getTilesPerGoody() const;				// Exposed to Python
+	int getGoodyUniqueRange() const;				// Exposed to Python
+	int getFeatureGrowthProbability() const;				// Exposed to Python
+	int getUpgradeTime() const;				// Exposed to Python
+	int getAirBombDefense() const;				// Exposed to Python
+	int getDefenseModifier() const;				// Exposed to Python
+	int getHappiness() const;				// Exposed to Python
+	int getPillageGold() const;				// Exposed to Python
+	int getImprovementPillage() const;				// Exposed to Python
+	void setImprovementPillage(int i);
+	int getImprovementUpgrade() const;				// Exposed to Python
+	void setImprovementUpgrade(int i);
 
-	DllExport bool isActsAsCity() const;				// Exposed to Python
-	DllExport bool isHillsMakesValid() const;				// Exposed to Python
-	DllExport bool isFreshWaterMakesValid() const;				// Exposed to Python
-	DllExport bool isRiverSideMakesValid() const;				// Exposed to Python
-	DllExport bool isNoFreshWater() const;				// Exposed to Python
-	DllExport bool isRequiresFlatlands() const;				// Exposed to Python
+	bool isActsAsCity() const;				// Exposed to Python
+	bool isHillsMakesValid() const;				// Exposed to Python
+	bool isFreshWaterMakesValid() const;				// Exposed to Python
+	bool isRiverSideMakesValid() const;				// Exposed to Python
+	bool isNoFreshWater() const;				// Exposed to Python
+	bool isRequiresFlatlands() const;				// Exposed to Python
 	DllExport bool isRequiresRiverSide() const;				// Exposed to Python
-	DllExport bool isRequiresIrrigation() const;				// Exposed to Python
-	DllExport bool isCarriesIrrigation() const;				// Exposed to Python
-	DllExport bool isRequiresFeature() const;				// Exposed to Python
-	DllExport bool isWater() const;				// Exposed to Python
+	bool isRequiresIrrigation() const;				// Exposed to Python
+	bool isCarriesIrrigation() const;				// Exposed to Python
+	bool isRequiresFeature() const;				// Exposed to Python
+	bool isWater() const;				// Exposed to Python
 	DllExport bool isGoody() const;				// Exposed to Python
-	DllExport bool isPermanent() const;				// Exposed to Python
-	DllExport bool useLSystem() const;
-	DllExport void setUseLSystem(bool bUse);
-	DllExport bool isOutsideBorders() const;				// Exposed to Python
+	bool isPermanent() const;				// Exposed to Python
+	bool isOutsideBorders() const;				// Exposed to Python
 
-	DllExport const TCHAR* getArtDefineTag() const;
-	DllExport void setArtDefineTag(const TCHAR* szVal);
+	const TCHAR* getArtDefineTag() const;
+	void setArtDefineTag(const TCHAR* szVal);
 
-	DllExport int getWorldSoundscapeScriptId() const;
+	int getWorldSoundscapeScriptId() const;
 
 	// Arrays
 
-	DllExport int getPrereqNatureYield(int i) const;				// Exposed to Python
+	int getPrereqNatureYield(int i) const;				// Exposed to Python
 	int* getPrereqNatureYieldArray();			
-	DllExport int getYieldChange(int i) const;				// Exposed to Python
+	int getYieldChange(int i) const;				// Exposed to Python
 	int* getYieldChangeArray();			
-	DllExport int getRiverSideYieldChange(int i) const;				// Exposed to Python
+	int getRiverSideYieldChange(int i) const;				// Exposed to Python
 	int* getRiverSideYieldChangeArray();			
-	DllExport int getHillsYieldChange(int i) const;				// Exposed to Python
+	int getHillsYieldChange(int i) const;				// Exposed to Python
 	int* getHillsYieldChangeArray();			
-	DllExport int getIrrigatedYieldChange(int i) const;				// Exposed to Python
-	DllExport int* getIrrigatedYieldChangeArray();				// For Moose - CvWidgetData XXX
+	int getIrrigatedYieldChange(int i) const;				// Exposed to Python
+	int* getIrrigatedYieldChangeArray();				// For Moose - CvWidgetData XXX
 
-	DllExport bool getTerrainMakesValid(int i) const;				// Exposed to Python
-	DllExport bool getFeatureMakesValid(int i) const;				// Exposed to Python
+	bool getTerrainMakesValid(int i) const;				// Exposed to Python
+	bool getFeatureMakesValid(int i) const;				// Exposed to Python
 
-	DllExport int getTechYieldChanges(int i, int j) const;				// Exposed to Python
+	int getTechYieldChanges(int i, int j) const;				// Exposed to Python
 	int* getTechYieldChangesArray(int i);
-	DllExport int getRouteYieldChanges(int i, int j) const;				// Exposed to Python
-	DllExport int* getRouteYieldChangesArray(int i);				// For Moose - CvWidgetData XXX
+	int getRouteYieldChanges(int i, int j) const;				// Exposed to Python
+	int* getRouteYieldChangesArray(int i);				// For Moose - CvWidgetData XXX
 
-	DllExport int getImprovementBonusYield(int i, int j) const;				// Exposed to Python
-	DllExport bool isImprovementBonusMakesValid(int i) const;				// Exposed to Python
-	DllExport bool isImprovementBonusTrade(int i) const;				// Exposed to Python
-	DllExport int getImprovementBonusDiscoverRand(int i) const;				// Exposed to Python
+	int getImprovementBonusYield(int i, int j) const;				// Exposed to Python
+	bool isImprovementBonusMakesValid(int i) const;				// Exposed to Python
+	bool isImprovementBonusTrade(int i) const;				// Exposed to Python
+	int getImprovementBonusDiscoverRand(int i) const;				// Exposed to Python
 	
 	// Other
 
-	DllExport const TCHAR* getButton() const;
+	const TCHAR* getButton() const;
 	DllExport const CvArtInfoImprovement* getArtInfo() const;
 
-	DllExport void read(FDataStreamBase* stream);
-	DllExport void write(FDataStreamBase* stream);
+	void read(FDataStreamBase* stream);
+	void write(FDataStreamBase* stream);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
-	DllExport bool readPass2(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
+	bool readPass2(CvXMLLoadUtility* pXML);
 
 
 
@@ -2918,7 +2916,6 @@ protected:
 	bool m_bWater;							
 	bool m_bGoody;
 	bool m_bPermanent;
-	bool m_bUseLSystem;
 	bool m_bOutsideBorders;
 
 	CvString m_szArtDefineTag;
@@ -2957,12 +2954,12 @@ class CvBonusClassInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvBonusClassInfo();
-	DllExport virtual ~CvBonusClassInfo();
+	CvBonusClassInfo();
+	virtual ~CvBonusClassInfo();
 
-	DllExport int getUniqueRange() const;				// Exposed to Python
+	int getUniqueRange() const;				// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 
@@ -2986,65 +2983,63 @@ class CvBonusInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvBonusInfo();
-	DllExport virtual ~CvBonusInfo();
+	CvBonusInfo();
+	virtual ~CvBonusInfo();
 
-	DllExport int getBonusClassType() const;			// Exposed to Python
-	DllExport int getChar() const;								// Exposed to Python
-	DllExport void setChar(int i);								// Exposed to Python
-	DllExport int getTechReveal() const;					// Exposed to Python
-	DllExport int getTechCityTrade() const;				// Exposed to Python
-	DllExport int getTechObsolete() const;				// Exposed to Python
-	DllExport int getAITradeModifier() const;			// Exposed to Python
-	DllExport int getAIObjective() const;			// Exposed to Python
-	DllExport int getHealth() const;							// Exposed to Python
-	DllExport int getHappiness() const;						// Exposed to Python
-	DllExport int getMinAreaSize() const;					// Exposed to Python
-	DllExport int getMinLatitude() const;					// Exposed to Python
-	DllExport int getMaxLatitude() const;					// Exposed to Python
-	DllExport int getPlacementOrder() const;			// Exposed to Python
-	DllExport int getConstAppearance() const;			// Exposed to Python
-	DllExport int getRandAppearance1() const;			// Exposed to Python
-	DllExport int getRandAppearance2() const;			// Exposed to Python
-	DllExport int getRandAppearance3() const;			// Exposed to Python
-	DllExport int getRandAppearance4() const;			// Exposed to Python
-	DllExport int getPercentPerPlayer() const;		// Exposed to Python
-	DllExport int getTilesPer() const;						// Exposed to Python
-	DllExport int getMinLandPercent() const;			// Exposed to Python
-	DllExport int getUniqueRange() const;					// Exposed to Python
-	DllExport int getGroupRange() const;					// Exposed to Python
-	DllExport int getGroupRand() const;						// Exposed to Python
+	int getBonusClassType() const;			// Exposed to Python
+	int getChar() const;								// Exposed to Python
+	void setChar(int i);								// Exposed to Python
+	int getTechReveal() const;					// Exposed to Python
+	int getTechCityTrade() const;				// Exposed to Python
+	int getTechObsolete() const;				// Exposed to Python
+	int getAITradeModifier() const;			// Exposed to Python
+	int getAIObjective() const;			// Exposed to Python
+	int getHealth() const;							// Exposed to Python
+	int getHappiness() const;						// Exposed to Python
+	int getMinAreaSize() const;					// Exposed to Python
+	int getMinLatitude() const;					// Exposed to Python
+	int getMaxLatitude() const;					// Exposed to Python
+	int getPlacementOrder() const;			// Exposed to Python
+	int getConstAppearance() const;			// Exposed to Python
+	int getRandAppearance1() const;			// Exposed to Python
+	int getRandAppearance2() const;			// Exposed to Python
+	int getRandAppearance3() const;			// Exposed to Python
+	int getRandAppearance4() const;			// Exposed to Python
+	int getPercentPerPlayer() const;		// Exposed to Python
+	int getTilesPer() const;						// Exposed to Python
+	int getMinLandPercent() const;			// Exposed to Python
+	int getUniqueRange() const;					// Exposed to Python
+	int getGroupRange() const;					// Exposed to Python
+	int getGroupRand() const;						// Exposed to Python
 
-	DllExport bool isOneArea() const;							// Exposed to Python
-	DllExport bool isHills() const;								// Exposed to Python
-	DllExport bool isFlatlands() const;						// Exposed to Python
-	DllExport bool isNoRiverSide() const;					// Exposed to Python
-	DllExport bool isNormalize() const;						// Exposed to Python
-	DllExport bool useLSystem() const;
-	DllExport void setUseLSystem(bool bUse);
+	bool isOneArea() const;							// Exposed to Python
+	bool isHills() const;								// Exposed to Python
+	bool isFlatlands() const;						// Exposed to Python
+	bool isNoRiverSide() const;					// Exposed to Python
+	bool isNormalize() const;						// Exposed to Python
 
-	DllExport const TCHAR* getArtDefineTag() const;
-	DllExport void setArtDefineTag(const TCHAR* szVal);
+	const TCHAR* getArtDefineTag() const;
+	void setArtDefineTag(const TCHAR* szVal);
 
 	// Arrays
 
-	DllExport int getYieldChange(int i) const;				// Exposed to Python
+	int getYieldChange(int i) const;				// Exposed to Python
 	int* getYieldChangeArray();				// Exposed to Python
-	DllExport int getImprovementChange(int i) const;
+	int getImprovementChange(int i) const;
 
-	DllExport bool isTerrain(int i) const;				// Exposed to Python
-	DllExport bool isFeature(int i) const;				// Exposed to Python
-	DllExport bool isFeatureTerrain(int i) const;				// Exposed to Python
+	bool isTerrain(int i) const;				// Exposed to Python
+	bool isFeature(int i) const;				// Exposed to Python
+	bool isFeatureTerrain(int i) const;				// Exposed to Python
 
 	// Other
 
-	DllExport const TCHAR* getButton() const; // Exposed to Python
+	const TCHAR* getButton() const; // Exposed to Python
 	DllExport const CvArtInfoBonus* getArtInfo() const; // Exposed to Python
 
-	DllExport void read(FDataStreamBase* stream);
-	DllExport void write(FDataStreamBase* stream);
+	void read(FDataStreamBase* stream);
+	void write(FDataStreamBase* stream);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PUBLIC MEMBER VARIABLES---------------------------------
 
@@ -3080,7 +3075,6 @@ protected:
 	bool m_bFlatlands;
 	bool m_bNoRiverSide;
 	bool m_bNormalize;
-	bool m_bUseLSystem;
 
 	CvString m_szArtDefineTag;
 
@@ -3109,56 +3103,56 @@ class CvFeatureInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvFeatureInfo();
-	DllExport virtual ~CvFeatureInfo();
+	CvFeatureInfo();
+	virtual ~CvFeatureInfo();
 
-	DllExport int getMovementCost() const;							// Exposed to Python
-	DllExport int getSeeThroughChange() const;					// Exposed to Python
-	DllExport int getHealthPercent() const;							// Exposed to Python
-	DllExport int getAppearanceProbability() const;			// Exposed to Python
-	DllExport int getDisappearanceProbability() const;	// Exposed to Python
-	DllExport int getGrowthProbability() const;					// Exposed to Python
-	DllExport int getDefenseModifier() const;						// Exposed to Python
-	DllExport int getAdvancedStartRemoveCost() const;						// Exposed to Python
-	DllExport int getTurnDamage() const;						// Exposed to Python
+	int getMovementCost() const;							// Exposed to Python
+	int getSeeThroughChange() const;					// Exposed to Python
+	int getHealthPercent() const;							// Exposed to Python
+	int getAppearanceProbability() const;			// Exposed to Python
+	int getDisappearanceProbability() const;	// Exposed to Python
+	int getGrowthProbability() const;					// Exposed to Python
+	int getDefenseModifier() const;						// Exposed to Python
+	int getAdvancedStartRemoveCost() const;						// Exposed to Python
+	int getTurnDamage() const;						// Exposed to Python
 	
-	DllExport bool isNoCoast() const;						// Exposed to Python
-	DllExport bool isNoRiver() const;						// Exposed to Python
-	DllExport bool isNoAdjacent() const;				// Exposed to Python
-	DllExport bool isRequiresFlatlands() const;	// Exposed to Python
-	DllExport bool isRequiresRiver() const;			// Exposed to Python
-	DllExport bool isAddsFreshWater() const;		// Exposed to Python
-	DllExport bool isImpassable() const;				// Exposed to Python
-	DllExport bool isNoCity() const;						// Exposed to Python
-	DllExport bool isNoImprovement() const;			// Exposed to Python
-	DllExport bool isVisibleAlways() const;			// Exposed to Python
-	DllExport bool isNukeImmune() const;			// Exposed to Python
-	DllExport const TCHAR* getOnUnitChangeTo() const;
+	bool isNoCoast() const;						// Exposed to Python
+	bool isNoRiver() const;						// Exposed to Python
+	bool isNoAdjacent() const;				// Exposed to Python
+	bool isRequiresFlatlands() const;	// Exposed to Python
+	bool isRequiresRiver() const;			// Exposed to Python
+	bool isAddsFreshWater() const;		// Exposed to Python
+	bool isImpassable() const;				// Exposed to Python
+	bool isNoCity() const;						// Exposed to Python
+	bool isNoImprovement() const;			// Exposed to Python
+	bool isVisibleAlways() const;			// Exposed to Python
+	bool isNukeImmune() const;			// Exposed to Python
+	const TCHAR* getOnUnitChangeTo() const;
 
-	DllExport const TCHAR* getArtDefineTag() const;			
-	DllExport void setArtDefineTag(const TCHAR* szTag);			
+	const TCHAR* getArtDefineTag() const;			
+	void setArtDefineTag(const TCHAR* szTag);			
 
-	DllExport int getWorldSoundscapeScriptId() const;
+	int getWorldSoundscapeScriptId() const;
 
-	DllExport const TCHAR* getEffectType() const;
-	DllExport int getEffectProbability() const;
+	const TCHAR* getEffectType() const;
+	int getEffectProbability() const;
 
 	// Arrays
 
-	DllExport int getYieldChange(int i) const;						// Exposed to Python
-	DllExport int getRiverYieldChange(int i) const;				// Exposed to Python
-	DllExport int getHillsYieldChange(int i) const;				// Exposed to Python
-	DllExport int get3DAudioScriptFootstepIndex(int i) const;
+	int getYieldChange(int i) const;						// Exposed to Python
+	int getRiverYieldChange(int i) const;				// Exposed to Python
+	int getHillsYieldChange(int i) const;				// Exposed to Python
+	int get3DAudioScriptFootstepIndex(int i) const;
 
-	DllExport bool isTerrain(int i) const;								// Exposed to Python
-	DllExport int getNumVarieties() const;
+	bool isTerrain(int i) const;								// Exposed to Python
+	int getNumVarieties() const;
 
 	// Other
 
 	DllExport const CvArtInfoFeature* getArtInfo() const;
-	DllExport const TCHAR* getButton() const;
+	const TCHAR* getButton() const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -3219,18 +3213,18 @@ class CvCommerceInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvCommerceInfo();
-	DllExport virtual ~CvCommerceInfo();
+	CvCommerceInfo();
+	virtual ~CvCommerceInfo();
 
-	DllExport int getChar() const;				// Exposed to Python
-	DllExport void setChar(int i);			
-	DllExport int getInitialPercent() const;				// Exposed to Python
-	DllExport int getInitialHappiness() const;				// Exposed to Python
-	DllExport int getAIWeightPercent() const;				// Exposed to Python
+	int getChar() const;				// Exposed to Python
+	void setChar(int i);			
+	int getInitialPercent() const;				// Exposed to Python
+	int getInitialHappiness() const;				// Exposed to Python
+	int getAIWeightPercent() const;				// Exposed to Python
 
-	DllExport bool isFlexiblePercent() const;				// Exposed to Python
+	bool isFlexiblePercent() const;				// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -3258,29 +3252,29 @@ class CvYieldInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvYieldInfo();
-	DllExport virtual ~CvYieldInfo();
+	CvYieldInfo();
+	virtual ~CvYieldInfo();
 
-	DllExport int getChar() const;				// Exposed to Python
-	DllExport void setChar(int i);			
-	DllExport int getHillsChange() const;				// Exposed to Python
-	DllExport int getPeakChange() const;				// Exposed to Python
-	DllExport int getLakeChange() const;				// Exposed to Python
-	DllExport int getCityChange() const;				// Exposed to Python
-	DllExport int getPopulationChangeOffset() const;				// Exposed to Python
-	DllExport int getPopulationChangeDivisor() const;				// Exposed to Python
-	DllExport int getMinCity() const;				// Exposed to Python
-	DllExport int getTradeModifier() const;				// Exposed to Python
-	DllExport int getGoldenAgeYield() const;				// Exposed to Python
-	DllExport int getGoldenAgeYieldThreshold() const;				// Exposed to Python
-	DllExport int getAIWeightPercent() const;				// Exposed to Python
-	DllExport int getColorType() const;				// Exposed to Python
+	int getChar() const;				// Exposed to Python
+	void setChar(int i);			
+	int getHillsChange() const;				// Exposed to Python
+	int getPeakChange() const;				// Exposed to Python
+	int getLakeChange() const;				// Exposed to Python
+	int getCityChange() const;				// Exposed to Python
+	int getPopulationChangeOffset() const;				// Exposed to Python
+	int getPopulationChangeDivisor() const;				// Exposed to Python
+	int getMinCity() const;				// Exposed to Python
+	int getTradeModifier() const;				// Exposed to Python
+	int getGoldenAgeYield() const;				// Exposed to Python
+	int getGoldenAgeYieldThreshold() const;				// Exposed to Python
+	int getAIWeightPercent() const;				// Exposed to Python
+	int getColorType() const;				// Exposed to Python
 
 	// Arrays
 
-	DllExport const TCHAR* getSymbolPath(int i) const;			
+	const TCHAR* getSymbolPath(int i) const;			
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -3318,39 +3312,39 @@ class CvTerrainInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvTerrainInfo();
-	DllExport virtual ~CvTerrainInfo();
+	CvTerrainInfo();
+	virtual ~CvTerrainInfo();
 
-	DllExport int getMovementCost() const;				// Exposed to Python
-	DllExport int getSeeFromLevel() const;				// Exposed to Python
-	DllExport int getSeeThroughLevel() const;			// Exposed to Python
-	DllExport int getBuildModifier() const;				// Exposed to Python
-	DllExport int getDefenseModifier() const;			// Exposed to Python
+	int getMovementCost() const;				// Exposed to Python
+	int getSeeFromLevel() const;				// Exposed to Python
+	int getSeeThroughLevel() const;			// Exposed to Python
+	int getBuildModifier() const;				// Exposed to Python
+	int getDefenseModifier() const;			// Exposed to Python
 
-	DllExport bool isWater() const;								// Exposed to Python
-	DllExport bool isImpassable() const;					// Exposed to Python
-	DllExport bool isFound() const;								// Exposed to Python
-	DllExport bool isFoundCoast() const;					// Exposed to Python
-	DllExport bool isFoundFreshWater() const;			// Exposed to Python
+	bool isWater() const;								// Exposed to Python
+	bool isImpassable() const;					// Exposed to Python
+	bool isFound() const;								// Exposed to Python
+	bool isFoundCoast() const;					// Exposed to Python
+	bool isFoundFreshWater() const;			// Exposed to Python
 
 	DllExport const TCHAR* getArtDefineTag() const;			
-	DllExport void setArtDefineTag(const TCHAR* szTag);			
+	void setArtDefineTag(const TCHAR* szTag);			
 
-	DllExport int getWorldSoundscapeScriptId() const;
+	int getWorldSoundscapeScriptId() const;
 
 	// Arrays
 
-	DllExport int getYield(int i) const;				// Exposed to Python
-	DllExport int getRiverYieldChange(int i) const;				// Exposed to Python
-	DllExport int getHillsYieldChange(int i) const;				// Exposed to Python
-	DllExport int get3DAudioScriptFootstepIndex(int i) const;
+	int getYield(int i) const;				// Exposed to Python
+	int getRiverYieldChange(int i) const;				// Exposed to Python
+	int getHillsYieldChange(int i) const;				// Exposed to Python
+	int get3DAudioScriptFootstepIndex(int i) const;
 
 	// Other
 
-	DllExport const CvArtInfoTerrain* getArtInfo() const;
-	DllExport const TCHAR* getButton() const;
+	const CvArtInfoTerrain* getArtInfo() const;
+	const TCHAR* getButton() const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -3407,7 +3401,7 @@ public:
 	DllExport bool getSelectType() const;
 	DllExport bool getSelectAll() const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -3435,16 +3429,16 @@ class CvAdvisorInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvAdvisorInfo();
-	DllExport virtual ~CvAdvisorInfo();
+	CvAdvisorInfo();
+	virtual ~CvAdvisorInfo();
 
-	DllExport const TCHAR* getTexture() const;				// Exposed to Python
-	DllExport void setTexture(const TCHAR* szVal);			
-	DllExport int getNumCodes() const;
-	DllExport int getEnableCode(uint uiCode) const;
-	DllExport int getDisableCode(uint uiCode) const;
+	const TCHAR* getTexture() const;				// Exposed to Python
+	void setTexture(const TCHAR* szVal);			
+	int getNumCodes() const;
+	int getEnableCode(uint uiCode) const;
+	int getDisableCode(uint uiCode) const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -3466,112 +3460,112 @@ class CvLeaderHeadInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvLeaderHeadInfo();
-	DllExport virtual ~CvLeaderHeadInfo();
+	CvLeaderHeadInfo();
+	virtual ~CvLeaderHeadInfo();
 
-	DllExport int getWonderConstructRand() const;				// Exposed to Python
-	DllExport int getBaseAttitude() const;				// Exposed to Python
-	DllExport int getBasePeaceWeight() const;				// Exposed to Python
-	DllExport int getPeaceWeightRand() const;				// Exposed to Python
-	DllExport int getWarmongerRespect() const;				// Exposed to Python
-	DllExport int getEspionageWeight() const;				// Exposed to Python
-	DllExport int getRefuseToTalkWarThreshold() const;				// Exposed to Python
-	DllExport int getNoTechTradeThreshold() const;				// Exposed to Python
-	DllExport int getTechTradeKnownPercent() const;				// Exposed to Python
-	DllExport int getMaxGoldTradePercent() const;				// Exposed to Python
-	DllExport int getMaxGoldPerTurnTradePercent() const;				// Exposed to Python
-	DllExport int getMaxWarRand() const;				// Exposed to Python
-	DllExport int getMaxWarNearbyPowerRatio() const;				// Exposed to Python
-	DllExport int getMaxWarDistantPowerRatio() const;				// Exposed to Python
-	DllExport int getMaxWarMinAdjacentLandPercent() const;				// Exposed to Python
-	DllExport int getLimitedWarRand() const;				// Exposed to Python
-	DllExport int getLimitedWarPowerRatio() const;				// Exposed to Python
-	DllExport int getDogpileWarRand() const;				// Exposed to Python
-	DllExport int getMakePeaceRand() const;				// Exposed to Python
-	DllExport int getDeclareWarTradeRand() const;				// Exposed to Python
-	DllExport int getDemandRebukedSneakProb() const;				// Exposed to Python
-	DllExport int getDemandRebukedWarProb() const;				// Exposed to Python
-	DllExport int getRazeCityProb() const;				// Exposed to Python
-	DllExport int getBuildUnitProb() const;				// Exposed to Python
-	DllExport int getBaseAttackOddsChange() const;				// Exposed to Python
-	DllExport int getAttackOddsChangeRand() const;				// Exposed to Python
-	DllExport int getWorseRankDifferenceAttitudeChange() const;				// Exposed to Python
-	DllExport int getBetterRankDifferenceAttitudeChange() const;				// Exposed to Python
-	DllExport int getCloseBordersAttitudeChange() const;				// Exposed to Python
-	DllExport int getLostWarAttitudeChange() const;				// Exposed to Python
-	DllExport int getAtWarAttitudeDivisor() const;				// Exposed to Python
-	DllExport int getAtWarAttitudeChangeLimit() const;				// Exposed to Python
-	DllExport int getAtPeaceAttitudeDivisor() const;				// Exposed to Python
-	DllExport int getAtPeaceAttitudeChangeLimit() const;				// Exposed to Python
-	DllExport int getSameReligionAttitudeChange() const;				// Exposed to Python
-	DllExport int getSameReligionAttitudeDivisor() const;				// Exposed to Python
-	DllExport int getSameReligionAttitudeChangeLimit() const;				// Exposed to Python
-	DllExport int getDifferentReligionAttitudeChange() const;				// Exposed to Python
-	DllExport int getDifferentReligionAttitudeDivisor() const;				// Exposed to Python
-	DllExport int getDifferentReligionAttitudeChangeLimit() const;				// Exposed to Python
-	DllExport int getBonusTradeAttitudeDivisor() const;				// Exposed to Python
-	DllExport int getBonusTradeAttitudeChangeLimit() const;				// Exposed to Python
-	DllExport int getOpenBordersAttitudeDivisor() const;				// Exposed to Python
-	DllExport int getOpenBordersAttitudeChangeLimit() const;				// Exposed to Python
-	DllExport int getDefensivePactAttitudeDivisor() const;				// Exposed to Python
-	DllExport int getDefensivePactAttitudeChangeLimit() const;				// Exposed to Python
-	DllExport int getShareWarAttitudeChange() const;				// Exposed to Python
-	DllExport int getShareWarAttitudeDivisor() const;				// Exposed to Python
-	DllExport int getShareWarAttitudeChangeLimit() const;				// Exposed to Python
-	DllExport int getFavoriteCivicAttitudeChange() const;				// Exposed to Python
-	DllExport int getFavoriteCivicAttitudeDivisor() const;				// Exposed to Python
-	DllExport int getFavoriteCivicAttitudeChangeLimit() const;				// Exposed to Python
-	DllExport int getDemandTributeAttitudeThreshold() const;				// Exposed to Python
-	DllExport int getNoGiveHelpAttitudeThreshold() const;				// Exposed to Python
-	DllExport int getTechRefuseAttitudeThreshold() const;				// Exposed to Python
-	DllExport int getStrategicBonusRefuseAttitudeThreshold() const;				// Exposed to Python
-	DllExport int getHappinessBonusRefuseAttitudeThreshold() const;				// Exposed to Python
-	DllExport int getHealthBonusRefuseAttitudeThreshold() const;					// Exposed to Python
-	DllExport int getMapRefuseAttitudeThreshold() const;									// Exposed to Python
-	DllExport int getDeclareWarRefuseAttitudeThreshold() const;						// Exposed to Python
-	DllExport int getDeclareWarThemRefuseAttitudeThreshold() const;				// Exposed to Python
-	DllExport int getStopTradingRefuseAttitudeThreshold() const;					// Exposed to Python
-	DllExport int getStopTradingThemRefuseAttitudeThreshold() const;			// Exposed to Python
-	DllExport int getAdoptCivicRefuseAttitudeThreshold() const;						// Exposed to Python
-	DllExport int getConvertReligionRefuseAttitudeThreshold() const;			// Exposed to Python
-	DllExport int getOpenBordersRefuseAttitudeThreshold() const;					// Exposed to Python
-	DllExport int getDefensivePactRefuseAttitudeThreshold() const;				// Exposed to Python
-	DllExport int getPermanentAllianceRefuseAttitudeThreshold() const;		// Exposed to Python
-	DllExport int getVassalRefuseAttitudeThreshold() const;				// Exposed to Python
-	DllExport int getVassalPowerModifier() const;				// Exposed to Python
-	DllExport int getFavoriteCivic() const;																// Exposed to Python
-	DllExport int getFavoriteReligion() const;																// Exposed to Python
-	DllExport int getFreedomAppreciation() const;																// Exposed to Python
+	int getWonderConstructRand() const;				// Exposed to Python
+	int getBaseAttitude() const;				// Exposed to Python
+	int getBasePeaceWeight() const;				// Exposed to Python
+	int getPeaceWeightRand() const;				// Exposed to Python
+	int getWarmongerRespect() const;				// Exposed to Python
+	int getEspionageWeight() const;				// Exposed to Python
+	int getRefuseToTalkWarThreshold() const;				// Exposed to Python
+	int getNoTechTradeThreshold() const;				// Exposed to Python
+	int getTechTradeKnownPercent() const;				// Exposed to Python
+	int getMaxGoldTradePercent() const;				// Exposed to Python
+	int getMaxGoldPerTurnTradePercent() const;				// Exposed to Python
+	int getMaxWarRand() const;				// Exposed to Python
+	int getMaxWarNearbyPowerRatio() const;				// Exposed to Python
+	int getMaxWarDistantPowerRatio() const;				// Exposed to Python
+	int getMaxWarMinAdjacentLandPercent() const;				// Exposed to Python
+	int getLimitedWarRand() const;				// Exposed to Python
+	int getLimitedWarPowerRatio() const;				// Exposed to Python
+	int getDogpileWarRand() const;				// Exposed to Python
+	int getMakePeaceRand() const;				// Exposed to Python
+	int getDeclareWarTradeRand() const;				// Exposed to Python
+	int getDemandRebukedSneakProb() const;				// Exposed to Python
+	int getDemandRebukedWarProb() const;				// Exposed to Python
+	int getRazeCityProb() const;				// Exposed to Python
+	int getBuildUnitProb() const;				// Exposed to Python
+	int getBaseAttackOddsChange() const;				// Exposed to Python
+	int getAttackOddsChangeRand() const;				// Exposed to Python
+	int getWorseRankDifferenceAttitudeChange() const;				// Exposed to Python
+	int getBetterRankDifferenceAttitudeChange() const;				// Exposed to Python
+	int getCloseBordersAttitudeChange() const;				// Exposed to Python
+	int getLostWarAttitudeChange() const;				// Exposed to Python
+	int getAtWarAttitudeDivisor() const;				// Exposed to Python
+	int getAtWarAttitudeChangeLimit() const;				// Exposed to Python
+	int getAtPeaceAttitudeDivisor() const;				// Exposed to Python
+	int getAtPeaceAttitudeChangeLimit() const;				// Exposed to Python
+	int getSameReligionAttitudeChange() const;				// Exposed to Python
+	int getSameReligionAttitudeDivisor() const;				// Exposed to Python
+	int getSameReligionAttitudeChangeLimit() const;				// Exposed to Python
+	int getDifferentReligionAttitudeChange() const;				// Exposed to Python
+	int getDifferentReligionAttitudeDivisor() const;				// Exposed to Python
+	int getDifferentReligionAttitudeChangeLimit() const;				// Exposed to Python
+	int getBonusTradeAttitudeDivisor() const;				// Exposed to Python
+	int getBonusTradeAttitudeChangeLimit() const;				// Exposed to Python
+	int getOpenBordersAttitudeDivisor() const;				// Exposed to Python
+	int getOpenBordersAttitudeChangeLimit() const;				// Exposed to Python
+	int getDefensivePactAttitudeDivisor() const;				// Exposed to Python
+	int getDefensivePactAttitudeChangeLimit() const;				// Exposed to Python
+	int getShareWarAttitudeChange() const;				// Exposed to Python
+	int getShareWarAttitudeDivisor() const;				// Exposed to Python
+	int getShareWarAttitudeChangeLimit() const;				// Exposed to Python
+	int getFavoriteCivicAttitudeChange() const;				// Exposed to Python
+	int getFavoriteCivicAttitudeDivisor() const;				// Exposed to Python
+	int getFavoriteCivicAttitudeChangeLimit() const;				// Exposed to Python
+	int getDemandTributeAttitudeThreshold() const;				// Exposed to Python
+	int getNoGiveHelpAttitudeThreshold() const;				// Exposed to Python
+	int getTechRefuseAttitudeThreshold() const;				// Exposed to Python
+	int getStrategicBonusRefuseAttitudeThreshold() const;				// Exposed to Python
+	int getHappinessBonusRefuseAttitudeThreshold() const;				// Exposed to Python
+	int getHealthBonusRefuseAttitudeThreshold() const;					// Exposed to Python
+	int getMapRefuseAttitudeThreshold() const;									// Exposed to Python
+	int getDeclareWarRefuseAttitudeThreshold() const;						// Exposed to Python
+	int getDeclareWarThemRefuseAttitudeThreshold() const;				// Exposed to Python
+	int getStopTradingRefuseAttitudeThreshold() const;					// Exposed to Python
+	int getStopTradingThemRefuseAttitudeThreshold() const;			// Exposed to Python
+	int getAdoptCivicRefuseAttitudeThreshold() const;						// Exposed to Python
+	int getConvertReligionRefuseAttitudeThreshold() const;			// Exposed to Python
+	int getOpenBordersRefuseAttitudeThreshold() const;					// Exposed to Python
+	int getDefensivePactRefuseAttitudeThreshold() const;				// Exposed to Python
+	int getPermanentAllianceRefuseAttitudeThreshold() const;		// Exposed to Python
+	int getVassalRefuseAttitudeThreshold() const;				// Exposed to Python
+	int getVassalPowerModifier() const;				// Exposed to Python
+	int getFavoriteCivic() const;																// Exposed to Python
+	int getFavoriteReligion() const;																// Exposed to Python
+	int getFreedomAppreciation() const;																// Exposed to Python
 
-	DllExport const TCHAR* getArtDefineTag() const;				// Exposed to Python
-	DllExport void setArtDefineTag(const TCHAR* szVal);
+	const TCHAR* getArtDefineTag() const;				// Exposed to Python
+	void setArtDefineTag(const TCHAR* szVal);
 	
 	// Arrays
 
-	DllExport bool hasTrait(int i) const;				// Exposed to Python
+	bool hasTrait(int i) const;				// Exposed to Python
 
-	DllExport int getFlavorValue(int i) const;				// Exposed to Python
-	DllExport int getContactRand(int i) const;				// Exposed to Python
-	DllExport int getContactDelay(int i) const;				// Exposed to Python
-	DllExport int getMemoryDecayRand(int i) const;				// Exposed to Python
-	DllExport int getMemoryAttitudePercent(int i) const;				// Exposed to Python
-	DllExport int getNoWarAttitudeProb(int i) const;				// Exposed to Python
-	DllExport int getUnitAIWeightModifier(int i) const;				// Exposed to Python
-	DllExport int getImprovementWeightModifier(int i) const;				// Exposed to Python
-	DllExport int getDiploPeaceIntroMusicScriptIds(int i) const;
-	DllExport int getDiploPeaceMusicScriptIds(int i) const;
-	DllExport int getDiploWarIntroMusicScriptIds(int i) const;
-	DllExport int getDiploWarMusicScriptIds(int i) const;
+	int getFlavorValue(int i) const;				// Exposed to Python
+	int getContactRand(int i) const;				// Exposed to Python
+	int getContactDelay(int i) const;				// Exposed to Python
+	int getMemoryDecayRand(int i) const;				// Exposed to Python
+	int getMemoryAttitudePercent(int i) const;				// Exposed to Python
+	int getNoWarAttitudeProb(int i) const;				// Exposed to Python
+	int getUnitAIWeightModifier(int i) const;				// Exposed to Python
+	int getImprovementWeightModifier(int i) const;				// Exposed to Python
+	int getDiploPeaceIntroMusicScriptIds(int i) const;
+	int getDiploPeaceMusicScriptIds(int i) const;
+	int getDiploWarIntroMusicScriptIds(int i) const;
+	int getDiploWarMusicScriptIds(int i) const;
 
 	// Other
 
 	DllExport const CvArtInfoLeaderhead* getArtInfo() const;
-	DllExport const TCHAR* getLeaderHead() const;
-	DllExport const TCHAR* getButton() const;
+	const TCHAR* getLeaderHead() const;
+	const TCHAR* getButton() const;
 
-	DllExport void write(FDataStreamBase* stream);
-	DllExport void read(FDataStreamBase* stream);
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	void write(FDataStreamBase* stream);
+	void read(FDataStreamBase* stream);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -3684,30 +3678,30 @@ class CvWorldInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvWorldInfo();
-	DllExport virtual ~CvWorldInfo();
+	CvWorldInfo();
+	virtual ~CvWorldInfo();
 
 	DllExport int getDefaultPlayers() const;				// Exposed to Python
-	DllExport int getUnitNameModifier() const;				// Exposed to Python
-	DllExport int getTargetNumCities() const;				// Exposed to Python
-	DllExport int getNumFreeBuildingBonuses() const;				// Exposed to Python
-	DllExport int getBuildingClassPrereqModifier() const;				// Exposed to Python
-	DllExport int getMaxConscriptModifier() const;				// Exposed to Python
-	DllExport int getWarWearinessModifier() const;				// Exposed to Python
-	DllExport int getGridWidth() const;				// Exposed to Python
-	DllExport int getGridHeight() const;				// Exposed to Python
-	DllExport int getTerrainGrainChange() const;				// Exposed to Python
-	DllExport int getFeatureGrainChange() const;				// Exposed to Python
-	DllExport int getResearchPercent() const;				// Exposed to Python
-	DllExport int getTradeProfitPercent() const;				// Exposed to Python
-	DllExport int getDistanceMaintenancePercent() const;				// Exposed to Python
-	DllExport int getNumCitiesMaintenancePercent() const;				// Exposed to Python
-	DllExport int getColonyMaintenancePercent() const;				// Exposed to Python
-	DllExport int getCorporationMaintenancePercent() const;				// Exposed to Python
-	DllExport int getNumCitiesAnarchyPercent() const;				// Exposed to Python
-	DllExport int getAdvancedStartPointsMod() const;				// Exposed to Python
+	int getUnitNameModifier() const;				// Exposed to Python
+	int getTargetNumCities() const;				// Exposed to Python
+	int getNumFreeBuildingBonuses() const;				// Exposed to Python
+	int getBuildingClassPrereqModifier() const;				// Exposed to Python
+	int getMaxConscriptModifier() const;				// Exposed to Python
+	int getWarWearinessModifier() const;				// Exposed to Python
+	int getGridWidth() const;				// Exposed to Python
+	int getGridHeight() const;				// Exposed to Python
+	int getTerrainGrainChange() const;				// Exposed to Python
+	int getFeatureGrainChange() const;				// Exposed to Python
+	int getResearchPercent() const;				// Exposed to Python
+	int getTradeProfitPercent() const;				// Exposed to Python
+	int getDistanceMaintenancePercent() const;				// Exposed to Python
+	int getNumCitiesMaintenancePercent() const;				// Exposed to Python
+	int getColonyMaintenancePercent() const;				// Exposed to Python
+	int getCorporationMaintenancePercent() const;				// Exposed to Python
+	int getNumCitiesAnarchyPercent() const;				// Exposed to Python
+	int getAdvancedStartPointsMod() const;				// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -3741,23 +3735,23 @@ class CvClimateInfo :	public CvInfoBase
 {
 public:
 
-	DllExport CvClimateInfo();
-	DllExport virtual ~CvClimateInfo();
+	CvClimateInfo();
+	virtual ~CvClimateInfo();
 
-	DllExport int getDesertPercentChange() const;							// Exposed to Python
-	DllExport int getJungleLatitude() const;									// Exposed to Python
-	DllExport int getHillRange() const;												// Exposed to Python
-	DllExport int getPeakPercent() const;											// Exposed to Python
+	int getDesertPercentChange() const;							// Exposed to Python
+	int getJungleLatitude() const;									// Exposed to Python
+	int getHillRange() const;												// Exposed to Python
+	int getPeakPercent() const;											// Exposed to Python
 
-	DllExport float getSnowLatitudeChange() const;						// Exposed to Python
-	DllExport float getTundraLatitudeChange() const;					// Exposed to Python
-	DllExport float getGrassLatitudeChange() const;						// Exposed to Python
-	DllExport float getDesertBottomLatitudeChange() const;		// Exposed to Python
-	DllExport float getDesertTopLatitudeChange() const;				// Exposed to Python
-	DllExport float getIceLatitude() const;										// Exposed to Python
-	DllExport float getRandIceLatitude() const;								// Exposed to Python
+	float getSnowLatitudeChange() const;						// Exposed to Python
+	float getTundraLatitudeChange() const;					// Exposed to Python
+	float getGrassLatitudeChange() const;						// Exposed to Python
+	float getDesertBottomLatitudeChange() const;		// Exposed to Python
+	float getDesertTopLatitudeChange() const;				// Exposed to Python
+	float getIceLatitude() const;										// Exposed to Python
+	float getRandIceLatitude() const;								// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 protected:
 
@@ -3783,12 +3777,12 @@ class CvSeaLevelInfo :	public CvInfoBase
 {
 public:
 
-	DllExport CvSeaLevelInfo();
-	DllExport virtual ~CvSeaLevelInfo();
+	CvSeaLevelInfo();
+	virtual ~CvSeaLevelInfo();
 
-	DllExport int getSeaLevelChange() const;		// Exposed to Python
+	int getSeaLevelChange() const;		// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 protected:
 
@@ -3809,16 +3803,16 @@ class CvProcessInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvProcessInfo();
-	DllExport virtual ~CvProcessInfo();
+	CvProcessInfo();
+	virtual ~CvProcessInfo();
 
-	DllExport int getTechPrereq() const;				// Exposed to Python
+	int getTechPrereq() const;				// Exposed to Python
 
 	// Arrays
 
-	DllExport int getProductionToCommerceModifier(int i) const;				// Exposed to Python
+	int getProductionToCommerceModifier(int i) const;				// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -3841,33 +3835,33 @@ protected:
 class CvVoteInfo :	public CvInfoBase
 {
 public:
-	DllExport CvVoteInfo();
-	DllExport virtual ~CvVoteInfo();
+	CvVoteInfo();
+	virtual ~CvVoteInfo();
 
-	DllExport int getPopulationThreshold() const;	// Exposed to Python
-	DllExport int getStateReligionVotePercent() const;	// Exposed to Python
-	DllExport int getTradeRoutes() const;					// Exposed to Python
-	DllExport int getMinVoters() const;					// Exposed to Python
+	int getPopulationThreshold() const;	// Exposed to Python
+	int getStateReligionVotePercent() const;	// Exposed to Python
+	int getTradeRoutes() const;					// Exposed to Python
+	int getMinVoters() const;					// Exposed to Python
 
-	DllExport bool isSecretaryGeneral() const;		// Exposed to Python
-	DllExport bool isVictory() const;							// Exposed to Python
-	DllExport bool isFreeTrade() const;						// Exposed to Python
-	DllExport bool isNoNukes() const;							// Exposed to Python
-	DllExport bool isCityVoting() const;	// Exposed to Python
-	DllExport bool isCivVoting() const;	// Exposed to Python
-	DllExport bool isDefensivePact() const;	// Exposed to Python
-	DllExport bool isOpenBorders() const;	// Exposed to Python
-	DllExport bool isForcePeace() const;	// Exposed to Python
-	DllExport bool isForceNoTrade() const;	// Exposed to Python
-	DllExport bool isForceWar() const;	// Exposed to Python
-	DllExport bool isAssignCity() const;	// Exposed to Python
+	bool isSecretaryGeneral() const;		// Exposed to Python
+	bool isVictory() const;							// Exposed to Python
+	bool isFreeTrade() const;						// Exposed to Python
+	bool isNoNukes() const;							// Exposed to Python
+	bool isCityVoting() const;	// Exposed to Python
+	bool isCivVoting() const;	// Exposed to Python
+	bool isDefensivePact() const;	// Exposed to Python
+	bool isOpenBorders() const;	// Exposed to Python
+	bool isForcePeace() const;	// Exposed to Python
+	bool isForceNoTrade() const;	// Exposed to Python
+	bool isForceWar() const;	// Exposed to Python
+	bool isAssignCity() const;	// Exposed to Python
 
 	// Arrays
 
-	DllExport bool isForceCivic(int i) const;			// Exposed to Python
-	DllExport bool isVoteSourceType(int i) const;			// Exposed to Python
+	bool isForceCivic(int i) const;			// Exposed to Python
+	bool isVoteSourceType(int i) const;			// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 protected:
 
@@ -3909,39 +3903,39 @@ class CvProjectInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvProjectInfo();
-	DllExport virtual ~CvProjectInfo();
+	CvProjectInfo();
+	virtual ~CvProjectInfo();
 
-	DllExport int getVictoryPrereq() const;									// Exposed to Python
-	DllExport int getTechPrereq() const;										// Exposed to Python
-	DllExport int getAnyoneProjectPrereq() const;						// Exposed to Python
-	DllExport void setAnyoneProjectPrereq(int i);
-	DllExport int getMaxGlobalInstances() const;						// Exposed to Python
-	DllExport int getMaxTeamInstances() const;							// Exposed to Python
-	DllExport int getProductionCost() const;								// Exposed to Python
-	DllExport int getNukeInterception() const;							// Exposed to Python
-	DllExport int getTechShare() const;											// Exposed to Python
-	DllExport int getEveryoneSpecialUnit() const;						// Exposed to Python
-	DllExport int getEveryoneSpecialBuilding() const;				// Exposed to Python
-	DllExport int getVictoryDelayPercent() const;				// Exposed to Python
-	DllExport int getSuccessRate() const;				// Exposed to Python
+	int getVictoryPrereq() const;									// Exposed to Python
+	int getTechPrereq() const;										// Exposed to Python
+	int getAnyoneProjectPrereq() const;						// Exposed to Python
+	void setAnyoneProjectPrereq(int i);
+	int getMaxGlobalInstances() const;						// Exposed to Python
+	int getMaxTeamInstances() const;							// Exposed to Python
+	int getProductionCost() const;								// Exposed to Python
+	int getNukeInterception() const;							// Exposed to Python
+	int getTechShare() const;											// Exposed to Python
+	int getEveryoneSpecialUnit() const;						// Exposed to Python
+	int getEveryoneSpecialBuilding() const;				// Exposed to Python
+	int getVictoryDelayPercent() const;				// Exposed to Python
+	int getSuccessRate() const;				// Exposed to Python
 
-	DllExport bool isSpaceship() const;											// Exposed to Python
-	DllExport bool isAllowsNukes() const;											// Exposed to Python
-	DllExport const char* getMovieArtDef() const;						// Exposed to Python
+	bool isSpaceship() const;											// Exposed to Python
+	bool isAllowsNukes() const;											// Exposed to Python
+	const char* getMovieArtDef() const;						// Exposed to Python
 
-	DllExport const TCHAR* getCreateSound() const;					// Exposed to Python
-	DllExport void setCreateSound(const TCHAR* szVal);
+	const TCHAR* getCreateSound() const;					// Exposed to Python
+	void setCreateSound(const TCHAR* szVal);
 
 	// Arrays
 
-	DllExport int getBonusProductionModifier(int i) const;	// Exposed to Python
-	DllExport int getVictoryThreshold(int i) const;					// Exposed to Python
-	DllExport int getVictoryMinThreshold(int i) const;					// Exposed to Python
-	DllExport int getProjectsNeeded(int i) const;						// Exposed to Python
+	int getBonusProductionModifier(int i) const;	// Exposed to Python
+	int getVictoryThreshold(int i) const;					// Exposed to Python
+	int getVictoryMinThreshold(int i) const;					// Exposed to Python
+	int getProjectsNeeded(int i) const;						// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
-	DllExport bool readPass2(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
+	bool readPass2(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -3986,47 +3980,47 @@ class CvReligionInfo : public CvHotkeyInfo
 	//---------------------------------------PUBLIC INTERFACE----------------------------------------
 public:
 
-	DllExport CvReligionInfo();
-	DllExport virtual ~CvReligionInfo();
+	CvReligionInfo();
+	virtual ~CvReligionInfo();
 
-	DllExport int getChar() const;								// Exposed to Python
-	DllExport void setChar(int i);			
-	DllExport int getHolyCityChar() const;				// Exposed to Python
-	DllExport void setHolyCityChar(int i);			
-	DllExport int getTechPrereq() const;					// Exposed to Python
-	DllExport int getFreeUnitClass() const;				// Exposed to Python
-	DllExport int getNumFreeUnits() const;				// Exposed to Python
-	DllExport int getSpreadFactor() const;				// Exposed to Python
-	DllExport int getMissionType() const;					// Exposed to Python
-	DllExport void setMissionType(int iNewType);
+	int getChar() const;								// Exposed to Python
+	void setChar(int i);			
+	int getHolyCityChar() const;				// Exposed to Python
+	void setHolyCityChar(int i);			
+	int getTechPrereq() const;					// Exposed to Python
+	int getFreeUnitClass() const;				// Exposed to Python
+	int getNumFreeUnits() const;				// Exposed to Python
+	int getSpreadFactor() const;				// Exposed to Python
+	int getMissionType() const;					// Exposed to Python
+	void setMissionType(int iNewType);
 
-	DllExport const TCHAR* getTechButton() const;				// Exposed to Python
-	DllExport void setTechButton(const TCHAR* szVal);	
-	DllExport const TCHAR* getGenericTechButton() const;				// Exposed to Python
-	DllExport void setGenericTechButton(const TCHAR* szVal);	
-	DllExport const TCHAR* getMovieFile() const;				// Exposed to Python
-	DllExport void setMovieFile(const TCHAR* szVal);	
-	DllExport const TCHAR* getMovieSound() const;				// Exposed to Python
-	DllExport void setMovieSound(const TCHAR* szVal);	
-	DllExport const TCHAR* getSound() const;						// Exposed to Python
-	DllExport void setSound(const TCHAR* szVal);			
+	const TCHAR* getTechButton() const;				// Exposed to Python
+	void setTechButton(const TCHAR* szVal);	
+	const TCHAR* getGenericTechButton() const;				// Exposed to Python
+	void setGenericTechButton(const TCHAR* szVal);	
+	const TCHAR* getMovieFile() const;				// Exposed to Python
+	void setMovieFile(const TCHAR* szVal);	
+	const TCHAR* getMovieSound() const;				// Exposed to Python
+	void setMovieSound(const TCHAR* szVal);	
+	const TCHAR* getSound() const;						// Exposed to Python
+	void setSound(const TCHAR* szVal);			
 
-	DllExport const TCHAR* getButtonDisabled() const;		//	Exposed to Python
+	const TCHAR* getButtonDisabled() const;		//	Exposed to Python
 
-	DllExport void setAdjectiveKey(const TCHAR* szVal);
-	DllExport const wchar* getAdjectiveKey() const;				// Exposed to Python
+	void setAdjectiveKey(const TCHAR* szVal);
+	const wchar* getAdjectiveKey() const;				// Exposed to Python
 	std::wstring pyGetAdjectiveKey() { return getAdjectiveKey(); }				// Exposed to Python
 
 	// Arrays
 
-	DllExport int getGlobalReligionCommerce(int i) const;		// Exposed to Python
+	int getGlobalReligionCommerce(int i) const;		// Exposed to Python
 	int* getGlobalReligionCommerceArray() const;			
-	DllExport int getHolyCityCommerce(int i) const;					// Exposed to Python
+	int getHolyCityCommerce(int i) const;					// Exposed to Python
 	int* getHolyCityCommerceArray() const;
-	DllExport int getStateReligionCommerce(int i) const;		// Exposed to Python
+	int getStateReligionCommerce(int i) const;		// Exposed to Python
 	int* getStateReligionCommerceArray() const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -4066,41 +4060,41 @@ class CvCorporationInfo : public CvHotkeyInfo
 	//---------------------------------------PUBLIC INTERFACE----------------------------------------
 public:
 
-	DllExport CvCorporationInfo();
-	DllExport virtual ~CvCorporationInfo();
+	CvCorporationInfo();
+	virtual ~CvCorporationInfo();
 
-	DllExport int getChar() const;								// Exposed to Python
-	DllExport void setChar(int i);			
-	DllExport int getHeadquarterChar() const;				// Exposed to Python
-	DllExport void setHeadquarterChar(int i);			
-	DllExport int getTechPrereq() const;					// Exposed to Python
-	DllExport int getFreeUnitClass() const;				// Exposed to Python
-	DllExport int getSpreadFactor() const;				// Exposed to Python
-	DllExport int getSpreadCost() const;				// Exposed to Python
-	DllExport int getMaintenance() const;				// Exposed to Python
-	DllExport int getMissionType() const;					// Exposed to Python
-	DllExport void setMissionType(int iNewType);
+	int getChar() const;								// Exposed to Python
+	void setChar(int i);			
+	int getHeadquarterChar() const;				// Exposed to Python
+	void setHeadquarterChar(int i);			
+	int getTechPrereq() const;					// Exposed to Python
+	int getFreeUnitClass() const;				// Exposed to Python
+	int getSpreadFactor() const;				// Exposed to Python
+	int getSpreadCost() const;				// Exposed to Python
+	int getMaintenance() const;				// Exposed to Python
+	int getMissionType() const;					// Exposed to Python
+	void setMissionType(int iNewType);
 
-	DllExport int getBonusProduced() const;					// Exposed to Python
+	int getBonusProduced() const;					// Exposed to Python
 
-	DllExport const TCHAR* getMovieFile() const;				// Exposed to Python
-	DllExport void setMovieFile(const TCHAR* szVal);	
-	DllExport const TCHAR* getMovieSound() const;				// Exposed to Python
-	DllExport void setMovieSound(const TCHAR* szVal);	
-	DllExport const TCHAR* getSound() const;						// Exposed to Python
-	DllExport void setSound(const TCHAR* szVal);			
+	const TCHAR* getMovieFile() const;				// Exposed to Python
+	void setMovieFile(const TCHAR* szVal);	
+	const TCHAR* getMovieSound() const;				// Exposed to Python
+	void setMovieSound(const TCHAR* szVal);	
+	const TCHAR* getSound() const;						// Exposed to Python
+	void setSound(const TCHAR* szVal);			
 
 	// Arrays
 
-	DllExport int getPrereqBonus(int i) const;					// Exposed to Python
-	DllExport int getHeadquarterCommerce(int i) const;					// Exposed to Python
+	int getPrereqBonus(int i) const;					// Exposed to Python
+	int getHeadquarterCommerce(int i) const;					// Exposed to Python
 	int* getHeadquarterCommerceArray() const;
-	DllExport int getCommerceProduced(int i) const;					// Exposed to Python
+	int getCommerceProduced(int i) const;					// Exposed to Python
 	int* getCommerceProducedArray() const;
-	DllExport int getYieldProduced(int i) const;					// Exposed to Python
+	int getYieldProduced(int i) const;					// Exposed to Python
 	int* getYieldProducedArray() const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -4141,35 +4135,35 @@ class CvTraitInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvTraitInfo();
-	DllExport virtual ~CvTraitInfo();
+	CvTraitInfo();
+	virtual ~CvTraitInfo();
 
-	DllExport int getHealth() const;				// Exposed to Python
-	DllExport int getHappiness() const;				// Exposed to Python
-	DllExport int getMaxAnarchy() const;				// Exposed to Python
-	DllExport int getUpkeepModifier() const;				// Exposed to Python
-	DllExport int getLevelExperienceModifier() const;				// Exposed to Python
-	DllExport int getGreatPeopleRateModifier() const;				// Exposed to Python
-	DllExport int getGreatGeneralRateModifier() const;				// Exposed to Python
-	DllExport int getDomesticGreatGeneralRateModifier() const;				// Exposed to Python
-	DllExport int getMaxGlobalBuildingProductionModifier() const;				// Exposed to Python
-	DllExport int getMaxTeamBuildingProductionModifier() const;				// Exposed to Python
-	DllExport int getMaxPlayerBuildingProductionModifier() const;				// Exposed to Python
+	int getHealth() const;				// Exposed to Python
+	int getHappiness() const;				// Exposed to Python
+	int getMaxAnarchy() const;				// Exposed to Python
+	int getUpkeepModifier() const;				// Exposed to Python
+	int getLevelExperienceModifier() const;				// Exposed to Python
+	int getGreatPeopleRateModifier() const;				// Exposed to Python
+	int getGreatGeneralRateModifier() const;				// Exposed to Python
+	int getDomesticGreatGeneralRateModifier() const;				// Exposed to Python
+	int getMaxGlobalBuildingProductionModifier() const;				// Exposed to Python
+	int getMaxTeamBuildingProductionModifier() const;				// Exposed to Python
+	int getMaxPlayerBuildingProductionModifier() const;				// Exposed to Python
 
-	DllExport const TCHAR* getShortDescription() const;				// Exposed to Python
+	const TCHAR* getShortDescription() const;				// Exposed to Python
 	void setShortDescription(const TCHAR* szVal);			
 
 	// Arrays
 
-	DllExport int getExtraYieldThreshold(int i) const;				// Exposed to Python
-	DllExport int getTradeYieldModifier(int i) const;				// Exposed to Python
-	DllExport int getCommerceChange(int i) const;				// Exposed to Python
-	DllExport int getCommerceModifier(int i) const;				// Exposed to Python
+	int getExtraYieldThreshold(int i) const;				// Exposed to Python
+	int getTradeYieldModifier(int i) const;				// Exposed to Python
+	int getCommerceChange(int i) const;				// Exposed to Python
+	int getCommerceModifier(int i) const;				// Exposed to Python
 
-	DllExport int isFreePromotion(int i) const;				// Exposed to Python
-	DllExport int isFreePromotionUnitCombat(int i) const;			
+	int isFreePromotion(int i) const;				// Exposed to Python
+	int isFreePromotionUnitCombat(int i) const;			
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -4212,13 +4206,13 @@ class CvCursorInfo : public CvInfoBase
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvCursorInfo();
-	DllExport virtual ~CvCursorInfo();
+	CvCursorInfo();
+	virtual ~CvCursorInfo();
 
 	DllExport const TCHAR* getPath();				// Exposed to Python
-	DllExport void setPath(const TCHAR* szVal);			
+	void setPath(const TCHAR* szVal);			
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -4239,13 +4233,13 @@ class CvThroneRoomCamera : public CvInfoBase
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvThroneRoomCamera();
-	DllExport virtual ~CvThroneRoomCamera();
+	CvThroneRoomCamera();
+	virtual ~CvThroneRoomCamera();
 
 	DllExport const TCHAR* getFileName();
-	DllExport void setFileName(const TCHAR* szVal);			
+	void setFileName(const TCHAR* szVal);			
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -4279,7 +4273,7 @@ public:
 	DllExport int getAnimation();
 	DllExport void setAnimation(int iVal);			
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -4314,7 +4308,7 @@ public:
 	DllExport const TCHAR* getFileName();
 	DllExport void setFileName(const TCHAR* szVal);	
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -4348,7 +4342,7 @@ public:
 	DllExport float getStartTime();
 	DllExport void setStartTime(float fVal);			
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -4377,7 +4371,7 @@ public:
 	DllExport const TCHAR* getPath();
 	DllExport void setPath(const TCHAR* szVal);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -4413,7 +4407,7 @@ public:
 	DllExport int getNumWaterLevelGloss();
 	DllExport const TCHAR* getWaterLevelGlossPath(int index);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -4452,7 +4446,7 @@ public:
 	DllExport int getArtType();
 	DllExport int getEventCode();
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -4491,7 +4485,7 @@ class CvAnimationPathInfo : public CvInfoBase
 		DllExport CvAnimationPathDefinition * getPath( );
 		DllExport bool isMissionPath() const;
 
-		DllExport bool read(CvXMLLoadUtility* pXML);
+		bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PRIVATE MEMBER VARIABLES---------------------------------
 	private:
@@ -4518,7 +4512,7 @@ class CvAnimationCategoryInfo : public CvInfoBase
 		DllExport int getCategoryBaseID( );
 		DllExport int getCategoryDefaultTo( );
 
-		DllExport bool read(CvXMLLoadUtility* pXML);
+		bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PRIVATE MEMBER VARIABLES---------------------------------
 	private:
@@ -4542,7 +4536,7 @@ class CvEntityEventInfo : public CvInfoBase
 		DllExport CvEntityEventInfo();
 		DllExport virtual ~CvEntityEventInfo();
 
-		DllExport bool read(CvXMLLoadUtility* pXML);
+		bool read(CvXMLLoadUtility* pXML);
 
 		DllExport AnimationPathTypes getAnimationPathType(int iIndex = 0) const;
 		DllExport EffectTypes getEffectType(int iIndex = 0) const;
@@ -4583,7 +4577,7 @@ public:
 	DllExport const TCHAR* getPath() const;				// Exposed to Python
 	DllExport void setPath(const TCHAR* szDesc);				// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -4605,7 +4599,7 @@ public:
 	DllExport void setNIF(const TCHAR* szDesc);				// Exposed to Python
 	DllExport void setKFM(const TCHAR* szDesc);				// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -4625,7 +4619,7 @@ class CvArtInfoScalableAsset :
 {
 public:
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 };
 
@@ -4692,7 +4686,7 @@ public:
 	DllExport float getAngleInterpRate() const;
 	DllExport float getBankRate() const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	DllExport const TCHAR* getTrainSound() const;
 	DllExport void setTrainSound(const TCHAR* szVal);
@@ -4748,7 +4742,7 @@ public:
 	DllExport bool isAnimated() const;				// Exposed to Python
 	DllExport const TCHAR* getLSystemName() const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 protected:
 
@@ -4766,7 +4760,7 @@ public:
 
 	DllExport bool isWhiteFlag() const;				// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 protected:
 
@@ -4786,7 +4780,7 @@ public:
 	DllExport const TCHAR* getBackgroundKFM() const;
 	DllExport void setBackgroundKFM( const TCHAR* szKFM);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 protected:
 
@@ -4805,7 +4799,7 @@ public:
 	DllExport const TCHAR* getShaderNIF() const;
 	DllExport void setShaderNIF(const TCHAR* szDesc);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 protected:
 	CvString m_szShaderNIF;		//!< The NIF used if the graphics card supports shaders
@@ -4824,7 +4818,7 @@ public:
 
 	DllExport bool isExtraAnimations() const;				// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 protected:
 	CvString m_szShaderNIF;		//!< The NIF used if the graphics card supports shaders
@@ -4852,7 +4846,7 @@ public:
 	DllExport bool useAlphaShader();
 	DllExport CvTextureBlendSlotList &getBlendList(int blendMask);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 protected:
 
@@ -4877,7 +4871,7 @@ public:
 	DllExport TileArtTypes getTileArtType() const;	
 	DllExport LightTypes getLightType() const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	class FeatureArtModel
 	{
@@ -5061,18 +5055,18 @@ class CvEmphasizeInfo :
 //---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvEmphasizeInfo();
-	DllExport virtual ~CvEmphasizeInfo();
+	CvEmphasizeInfo();
+	virtual ~CvEmphasizeInfo();
 
-	DllExport bool isAvoidGrowth() const;				// Exposed to Python
-	DllExport bool isGreatPeople() const;				// Exposed to Python
+	bool isAvoidGrowth() const;				// Exposed to Python
+	bool isGreatPeople() const;				// Exposed to Python
 
 	// Arrays
 
-	DllExport int getYieldChange(int i) const;				// Exposed to Python
-	DllExport int getCommerceChange(int i) const;				// Exposed to Python
+	int getYieldChange(int i) const;				// Exposed to Python
+	int getCommerceChange(int i) const;				// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -5100,13 +5094,13 @@ class CvUpkeepInfo :
 //---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvUpkeepInfo();
-	DllExport virtual ~CvUpkeepInfo();
+	CvUpkeepInfo();
+	virtual ~CvUpkeepInfo();
 
-	DllExport int getPopulationPercent() const;			//	Exposed to Python
-	DllExport int getCityPercent() const;						//	Exposed to Python
+	int getPopulationPercent() const;			//	Exposed to Python
+	int getCityPercent() const;						//	Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -5129,14 +5123,14 @@ class CvCultureLevelInfo :
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvCultureLevelInfo();
-	DllExport virtual ~CvCultureLevelInfo();
+	CvCultureLevelInfo();
+	virtual ~CvCultureLevelInfo();
 
-	DllExport int getCityDefenseModifier() const;		//	Exposed to Python
+	int getCityDefenseModifier() const;		//	Exposed to Python
 
-	DllExport int getSpeedThreshold(int i) const;		//	Exposed to Python
+	int getSpeedThreshold(int i) const;		//	Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -5159,44 +5153,44 @@ class CvEraInfo :
 {
 public:
 
-	DllExport CvEraInfo();
-	DllExport virtual ~CvEraInfo();
+	CvEraInfo();
+	virtual ~CvEraInfo();
 
-	DllExport int getStartingUnitMultiplier() const;		//	Exposed to Python
-	DllExport int getStartingDefenseUnits() const;			//	Exposed to Python
-	DllExport int getStartingWorkerUnits() const;				//	Exposed to Python
-	DllExport int getStartingExploreUnits() const;			//	Exposed to Python
-	DllExport int getAdvancedStartPoints() const;					//	Exposed to Python
-	DllExport int getStartingGold() const;					//	Exposed to Python
-	DllExport int getFreePopulation() const;				//	Exposed to Python
-	DllExport int getStartPercent() const;					//	Exposed to Python
-	DllExport int getGrowthPercent() const;					//	Exposed to Python
-	DllExport int getTrainPercent() const;					//	Exposed to Python
-	DllExport int getConstructPercent() const;			//	Exposed to Python
-	DllExport int getCreatePercent() const;					//	Exposed to Python
-	DllExport int getResearchPercent() const;				//	Exposed to Python
-	DllExport int getBuildPercent() const;					//	Exposed to Python
-	DllExport int getImprovementPercent() const;		//	Exposed to Python
-	DllExport int getGreatPeoplePercent() const;		//	Exposed to Python
-	DllExport int getAnarchyPercent() const;				//	Exposed to Python
-	DllExport int getEventChancePerTurn() const;				//	Exposed to Python
-	DllExport int getSoundtrackSpace() const;				//	Exposed to Python
-	DllExport int getNumSoundtracks() const;				//	Exposed to Python
-	DllExport const TCHAR* getAudioUnitVictoryScript() const;				//	Exposed to Python
-	DllExport const TCHAR* getAudioUnitDefeatScript() const;				//	Exposed to Python
+	int getStartingUnitMultiplier() const;		//	Exposed to Python
+	int getStartingDefenseUnits() const;			//	Exposed to Python
+	int getStartingWorkerUnits() const;				//	Exposed to Python
+	int getStartingExploreUnits() const;			//	Exposed to Python
+	int getAdvancedStartPoints() const;					//	Exposed to Python
+	int getStartingGold() const;					//	Exposed to Python
+	int getFreePopulation() const;				//	Exposed to Python
+	int getStartPercent() const;					//	Exposed to Python
+	int getGrowthPercent() const;					//	Exposed to Python
+	int getTrainPercent() const;					//	Exposed to Python
+	int getConstructPercent() const;			//	Exposed to Python
+	int getCreatePercent() const;					//	Exposed to Python
+	int getResearchPercent() const;				//	Exposed to Python
+	int getBuildPercent() const;					//	Exposed to Python
+	int getImprovementPercent() const;		//	Exposed to Python
+	int getGreatPeoplePercent() const;		//	Exposed to Python
+	int getAnarchyPercent() const;				//	Exposed to Python
+	int getEventChancePerTurn() const;				//	Exposed to Python
+	int getSoundtrackSpace() const;				//	Exposed to Python
+	int getNumSoundtracks() const;				//	Exposed to Python
+	const TCHAR* getAudioUnitVictoryScript() const;				//	Exposed to Python
+	const TCHAR* getAudioUnitDefeatScript() const;				//	Exposed to Python
 
-	DllExport bool isNoGoodies() const;					//	Exposed to Python
-	DllExport bool isNoAnimals() const;					//	Exposed to Python
-	DllExport bool isNoBarbUnits() const;				//	Exposed to Python
-	DllExport bool isNoBarbCities() const;			//	Exposed to Python
-	DllExport bool isFirstSoundtrackFirst() const;			//	Exposed to Python
+	bool isNoGoodies() const;					//	Exposed to Python
+	bool isNoAnimals() const;					//	Exposed to Python
+	bool isNoBarbUnits() const;				//	Exposed to Python
+	bool isNoBarbCities() const;			//	Exposed to Python
+	bool isFirstSoundtrackFirst() const;			//	Exposed to Python
 
 	// Arrays
 
-	DllExport int getSoundtracks(int i) const;			
-	DllExport int getCitySoundscapeSciptId(int i) const;			
+	int getSoundtracks(int i) const;			
+	int getCitySoundscapeSciptId(int i) const;			
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 protected:
 
@@ -5253,7 +5247,7 @@ public:
 
 	DllExport const NiColorA& getColor() const;			
 	
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 protected:
 
@@ -5280,7 +5274,7 @@ public:
 	DllExport int getColorTypeSecondary() const;			
 	DllExport int getTextColorType() const;			
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 protected:
 
@@ -5338,7 +5332,7 @@ class CvLandscapeInfo :
 		DllExport const TCHAR* getBlendMap();			
 		DllExport void setBlendMap(const TCHAR* szPath);			
 
-		DllExport bool read(CvXMLLoadUtility* pXML);
+		bool read(CvXMLLoadUtility* pXML);
 
 	protected:
 
@@ -5471,7 +5465,7 @@ public:
 
 	void read(FDataStreamBase* stream);
 	void write(FDataStreamBase* stream);
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 private:
 
@@ -5504,7 +5498,7 @@ public:
 	DllExport float getProjectileSpeed() const { return m_fProjectileSpeed; };
 	DllExport float getProjectileArc() const { return m_fProjectileArc; };
 	DllExport bool isSticky() const { return m_bSticky; };
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 private:
 	CvString m_szPath;
@@ -5535,7 +5529,7 @@ public:
 	DllExport const TCHAR* getPath() const { return m_szPath; }
 	DllExport void setPath(const TCHAR* szVal) { m_szPath = szVal; }
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 private:
 	CvString m_szPath;
@@ -5561,7 +5555,7 @@ public:
 	DllExport const TCHAR* getPath() const { return m_szPath; }
 	DllExport void setPath(const TCHAR* szVal) { m_szPath = szVal; }
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 private:
 	CvString m_szPath;
@@ -5616,7 +5610,7 @@ public:
 	DllExport void setQuestSounds(int iIndex, const TCHAR* szText);
 	DllExport void setQuestScript(const TCHAR* szText);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 private:
 	int m_iNumQuestMessages;
@@ -5655,7 +5649,7 @@ public:
 
 	DllExport int getNumTutorialScripts() const;
 	DllExport const TCHAR* getTutorialScriptByIndex(int i) const;
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 private:
 	int m_iNumTutorialScripts;
@@ -5682,7 +5676,7 @@ public:
 	DllExport int getNumTutorialMessages() const;
 	DllExport const CvTutorialMessage* getTutorialMessage(int iIndex) const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 private:
 	CvString m_szNextTutorialInfoType;
@@ -5707,7 +5701,7 @@ public:
 	DllExport bool getDefault() const;
 	DllExport bool getVisible() const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 private:
 	bool m_bDefault;
@@ -5729,7 +5723,7 @@ public:
 
 	DllExport bool getDefault() const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 private:
 	bool m_bDefault;
@@ -5751,7 +5745,7 @@ public:
 
 	DllExport bool getDefault() const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 private:
 	bool m_bDefault;
@@ -5773,7 +5767,7 @@ public:
 
 	DllExport bool getDefault() const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 private:
 	bool m_bDefault;
@@ -5795,7 +5789,7 @@ public:
 
 	DllExport bool getDefault() const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 private:
 	bool m_bDefault;
@@ -5813,103 +5807,103 @@ class CvEventTriggerInfo : public CvInfoBase
 	friend class CvXMLLoadUtility;
 
 public:
-	DllExport CvEventTriggerInfo();
-	DllExport virtual ~CvEventTriggerInfo();
+	CvEventTriggerInfo();
+	virtual ~CvEventTriggerInfo();
 
-	DllExport int getPercentGamesActive() const;		// Exposed to Python
-	DllExport int getProbability() const;				// Exposed to Python
-	DllExport int getNumUnits() const;					// Exposed to Python
-	DllExport int getNumBuildings() const;				// Exposed to Python
-	DllExport int getNumUnitsGlobal() const;			// Exposed to Python
-	DllExport int getNumBuildingsGlobal() const;		// Exposed to Python
-	DllExport int getNumPlotsRequired() const;			// Exposed to Python
-	DllExport int getPlotType() const;					// Exposed to Python
-	DllExport int getNumReligions() const;				// Exposed to Python
-	DllExport int getNumCorporations() const;			// Exposed to Python
-	DllExport int getOtherPlayerShareBorders() const;	// Exposed to Python
-	DllExport int getOtherPlayerHasTech() const;		// Exposed to Python
-	DllExport int getCityFoodWeight() const;			// Exposed to Python
-	DllExport int getCivic() const;						// Exposed to Python
-	DllExport int getMinPopulation() const;				// Exposed to Python
-	DllExport int getMaxPopulation() const;				// Exposed to Python
-	DllExport int getMinMapLandmass() const;			// Exposed to Python
-	DllExport int getMinOurLandmass() const;			// Exposed to Python
-	DllExport int getMaxOurLandmass() const;			// Exposed to Python
-	DllExport int getMinDifficulty() const;				// Exposed to Python
-	DllExport int getAngry() const;						// Exposed to Python
-	DllExport int getUnhealthy() const;					// Exposed to Python
-	DllExport int getUnitDamagedWeight() const;			// Exposed to Python
-	DllExport int getUnitDistanceWeight() const;		// Exposed to Python
-	DllExport int getUnitExperienceWeight() const;		// Exposed to Python
-	DllExport int getMinTreasury() const;				// Exposed to Python
+	int getPercentGamesActive() const;		// Exposed to Python
+	int getProbability() const;				// Exposed to Python
+	int getNumUnits() const;					// Exposed to Python
+	int getNumBuildings() const;				// Exposed to Python
+	int getNumUnitsGlobal() const;			// Exposed to Python
+	int getNumBuildingsGlobal() const;		// Exposed to Python
+	int getNumPlotsRequired() const;			// Exposed to Python
+	int getPlotType() const;					// Exposed to Python
+	int getNumReligions() const;				// Exposed to Python
+	int getNumCorporations() const;			// Exposed to Python
+	int getOtherPlayerShareBorders() const;	// Exposed to Python
+	int getOtherPlayerHasTech() const;		// Exposed to Python
+	int getCityFoodWeight() const;			// Exposed to Python
+	int getCivic() const;						// Exposed to Python
+	int getMinPopulation() const;				// Exposed to Python
+	int getMaxPopulation() const;				// Exposed to Python
+	int getMinMapLandmass() const;			// Exposed to Python
+	int getMinOurLandmass() const;			// Exposed to Python
+	int getMaxOurLandmass() const;			// Exposed to Python
+	int getMinDifficulty() const;				// Exposed to Python
+	int getAngry() const;						// Exposed to Python
+	int getUnhealthy() const;					// Exposed to Python
+	int getUnitDamagedWeight() const;			// Exposed to Python
+	int getUnitDistanceWeight() const;		// Exposed to Python
+	int getUnitExperienceWeight() const;		// Exposed to Python
+	int getMinTreasury() const;				// Exposed to Python
 
-	DllExport int getBuildingRequired(int i) const;		// Exposed to Python
-	DllExport int getNumBuildingsRequired() const;		// Exposed to Python
-	DllExport int getUnitRequired(int i) const;			// Exposed to Python
-	DllExport int getNumUnitsRequired() const;			// Exposed to Python
-	DllExport int getPrereqOrTechs(int i) const;		// Exposed to Python
-	DllExport int getNumPrereqOrTechs() const;			// Exposed to Python
-	DllExport int getPrereqAndTechs(int i) const;		// Exposed to Python
-	DllExport int getNumPrereqAndTechs() const;			// Exposed to Python
-	DllExport int getObsoleteTech(int i) const;				// Exposed to Python
-	DllExport int getNumObsoleteTechs() const;				// Exposed to Python
-	DllExport int getEvent(int i) const;				// Exposed to Python
-	DllExport int getNumEvents() const;					// Exposed to Python
-	DllExport int getPrereqEvent(int i) const;			// Exposed to Python
-	DllExport int getNumPrereqEvents() const;			// Exposed to Python
-	DllExport int getFeatureRequired(int i) const;		// Exposed to Python
-	DllExport int getNumFeaturesRequired() const;		// Exposed to Python
-	DllExport int getTerrainRequired(int i) const;		// Exposed to Python
-	DllExport int getNumTerrainsRequired() const;		// Exposed to Python
-	DllExport int getImprovementRequired(int i) const;	// Exposed to Python
-	DllExport int getNumImprovementsRequired() const;	// Exposed to Python
-	DllExport int getBonusRequired(int i) const;		// Exposed to Python
-	DllExport int getNumBonusesRequired() const;		// Exposed to Python
-	DllExport int getRouteRequired(int i) const;		// Exposed to Python
-	DllExport int getNumRoutesRequired() const;			// Exposed to Python
-	DllExport int getReligionRequired(int i) const;		// Exposed to Python
-	DllExport int getNumReligionsRequired() const;		// Exposed to Python
-	DllExport int getCorporationRequired(int i) const;	// Exposed to Python
-	DllExport int getNumCorporationsRequired() const;	// Exposed to Python
+	int getBuildingRequired(int i) const;		// Exposed to Python
+	int getNumBuildingsRequired() const;		// Exposed to Python
+	int getUnitRequired(int i) const;			// Exposed to Python
+	int getNumUnitsRequired() const;			// Exposed to Python
+	int getPrereqOrTechs(int i) const;		// Exposed to Python
+	int getNumPrereqOrTechs() const;			// Exposed to Python
+	int getPrereqAndTechs(int i) const;		// Exposed to Python
+	int getNumPrereqAndTechs() const;			// Exposed to Python
+	int getObsoleteTech(int i) const;				// Exposed to Python
+	int getNumObsoleteTechs() const;				// Exposed to Python
+	int getEvent(int i) const;				// Exposed to Python
+	int getNumEvents() const;					// Exposed to Python
+	int getPrereqEvent(int i) const;			// Exposed to Python
+	int getNumPrereqEvents() const;			// Exposed to Python
+	int getFeatureRequired(int i) const;		// Exposed to Python
+	int getNumFeaturesRequired() const;		// Exposed to Python
+	int getTerrainRequired(int i) const;		// Exposed to Python
+	int getNumTerrainsRequired() const;		// Exposed to Python
+	int getImprovementRequired(int i) const;	// Exposed to Python
+	int getNumImprovementsRequired() const;	// Exposed to Python
+	int getBonusRequired(int i) const;		// Exposed to Python
+	int getNumBonusesRequired() const;		// Exposed to Python
+	int getRouteRequired(int i) const;		// Exposed to Python
+	int getNumRoutesRequired() const;			// Exposed to Python
+	int getReligionRequired(int i) const;		// Exposed to Python
+	int getNumReligionsRequired() const;		// Exposed to Python
+	int getCorporationRequired(int i) const;	// Exposed to Python
+	int getNumCorporationsRequired() const;	// Exposed to Python
 
-	DllExport const CvWString& getText(int i) const;
-	DllExport int getTextEra(int i) const;
-	DllExport int getNumTexts() const;
-	DllExport const CvWString& getWorldNews(int i) const;
-	DllExport int getNumWorldNews() const;
+	const CvWString& getText(int i) const;
+	int getTextEra(int i) const;
+	int getNumTexts() const;
+	const CvWString& getWorldNews(int i) const;
+	int getNumWorldNews() const;
 
-	DllExport bool isSinglePlayer() const;				// Exposed to Python
-	DllExport bool isTeam() const;						// Exposed to Python
-	DllExport bool isRecurring() const;					// Exposed to Python
-	DllExport bool isGlobal() const;					// Exposed to Python
-	DllExport bool isPickPlayer() const;				// Exposed to Python
-	DllExport bool isOtherPlayerWar() const;			// Exposed to Python
-	DllExport bool isOtherPlayerHasReligion() const;	// Exposed to Python
-	DllExport bool isOtherPlayerHasOtherReligion() const;	// Exposed to Python
-	DllExport bool isOtherPlayerAI() const;				// Exposed to Python
-	DllExport bool isPickCity() const;					// Exposed to Python
-	DllExport bool isPickOtherPlayerCity() const;		// Exposed to Python
-	DllExport bool isShowPlot() const;					// Exposed to Python
-	DllExport bool isUnitsOnPlot() const;				// Exposed to Python
-	DllExport bool isOwnPlot() const;					// Exposed to Python
-	DllExport bool isPickReligion() const;				// Exposed to Python
-	DllExport bool isStateReligion() const;				// Exposed to Python
-	DllExport bool isHolyCity() const;					// Exposed to Python
-	DllExport bool isPickCorporation() const;			// Exposed to Python
-	DllExport bool isHeadquarters() const;				// Exposed to Python
-	DllExport bool isProbabilityUnitMultiply() const;	// Exposed to Python
-	DllExport bool isProbabilityBuildingMultiply() const;	// Exposed to Python
-	DllExport bool isPrereqEventCity() const;			// Exposed to Python
+	bool isSinglePlayer() const;				// Exposed to Python
+	bool isTeam() const;						// Exposed to Python
+	bool isRecurring() const;					// Exposed to Python
+	bool isGlobal() const;					// Exposed to Python
+	bool isPickPlayer() const;				// Exposed to Python
+	bool isOtherPlayerWar() const;			// Exposed to Python
+	bool isOtherPlayerHasReligion() const;	// Exposed to Python
+	bool isOtherPlayerHasOtherReligion() const;	// Exposed to Python
+	bool isOtherPlayerAI() const;				// Exposed to Python
+	bool isPickCity() const;					// Exposed to Python
+	bool isPickOtherPlayerCity() const;		// Exposed to Python
+	bool isShowPlot() const;					// Exposed to Python
+	bool isUnitsOnPlot() const;				// Exposed to Python
+	bool isOwnPlot() const;					// Exposed to Python
+	bool isPickReligion() const;				// Exposed to Python
+	bool isStateReligion() const;				// Exposed to Python
+	bool isHolyCity() const;					// Exposed to Python
+	bool isPickCorporation() const;			// Exposed to Python
+	bool isHeadquarters() const;				// Exposed to Python
+	bool isProbabilityUnitMultiply() const;	// Exposed to Python
+	bool isProbabilityBuildingMultiply() const;	// Exposed to Python
+	bool isPrereqEventCity() const;			// Exposed to Python
 
-	DllExport const char* getPythonCallback() const;
-	DllExport const char* getPythonCanDo() const;
-	DllExport const char* getPythonCanDoCity() const;
-	DllExport const char* getPythonCanDoUnit() const;
+	const char* getPythonCallback() const;
+	const char* getPythonCanDo() const;
+	const char* getPythonCanDoCity() const;
+	const char* getPythonCanDoUnit() const;
 
-	DllExport void read(FDataStreamBase* );
-	DllExport void write(FDataStreamBase* );
+	void read(FDataStreamBase* );
+	void write(FDataStreamBase* );
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 private:
 	int m_iPercentGamesActive;
@@ -5998,100 +5992,100 @@ class CvEventInfo : public CvInfoBase
 	friend class CvXMLLoadUtility;
 
 public:
-	DllExport CvEventInfo();
-	DllExport virtual ~CvEventInfo();
+	CvEventInfo();
+	virtual ~CvEventInfo();
 
-	DllExport bool isQuest() const;						// Exposed to Python
-	DllExport bool isGlobal() const;					// Exposed to Python
-	DllExport bool isTeam() const;						// Exposed to Python
-	DllExport bool isCityEffect() const;				// Exposed to Python
-	DllExport bool isOtherPlayerCityEffect() const;		// Exposed to Python
-	DllExport bool isGoldToPlayer() const;				// Exposed to Python
-	DllExport bool isGoldenAge() const;					// Exposed to Python
-	DllExport bool isDeclareWar() const;				// Exposed to Python
-	DllExport bool isDisbandUnit() const;				// Exposed to Python
+	bool isQuest() const;						// Exposed to Python
+	bool isGlobal() const;					// Exposed to Python
+	bool isTeam() const;						// Exposed to Python
+	bool isCityEffect() const;				// Exposed to Python
+	bool isOtherPlayerCityEffect() const;		// Exposed to Python
+	bool isGoldToPlayer() const;				// Exposed to Python
+	bool isGoldenAge() const;					// Exposed to Python
+	bool isDeclareWar() const;				// Exposed to Python
+	bool isDisbandUnit() const;				// Exposed to Python
 
-	DllExport int getGold() const;						// Exposed to Python
-	DllExport int getRandomGold() const;				// Exposed to Python
-	DllExport int getEspionagePoints() const;			// Exposed to Python
-	DllExport int getCulture() const;					// Exposed to Python
-	DllExport int getTech() const;						// Exposed to Python
-	DllExport int getTechPercent() const;				// Exposed to Python
-	DllExport int getTechCostPercent() const;			// Exposed to Python
-	DllExport int getTechMinTurnsLeft() const;			// Exposed to Python
-	DllExport int getPrereqTech() const;				// Exposed to Python
-	DllExport int getUnitClass() const;					// Exposed to Python
-	DllExport int getNumUnits() const;					// Exposed to Python
-	DllExport int getBuildingClass() const;				// Exposed to Python
-	DllExport int getBuildingChange() const;			// Exposed to Python
-	DllExport int getHappy() const;						// Exposed to Python
-	DllExport int getHealth() const;					// Exposed to Python
-	DllExport int getHurryAnger() const;				// Exposed to Python
-	DllExport int getHappyTurns() const;				// Exposed to Python
-	DllExport int getFood() const;						// Exposed to Python
-	DllExport int getFoodPercent() const;				// Exposed to Python
-	DllExport int getFeature() const;					// Exposed to Python
-	DllExport int getFeatureChange() const;				// Exposed to Python
-	DllExport int getImprovement() const;				// Exposed to Python
-	DllExport int getImprovementChange() const;			// Exposed to Python
-	DllExport int getBonus() const;						// Exposed to Python
-	DllExport int getBonusChange() const;				// Exposed to Python
-	DllExport int getRoute() const;						// Exposed to Python
-	DllExport int getRouteChange() const;				// Exposed to Python
-	DllExport int getBonusRevealed() const;				// Exposed to Python
-	DllExport int getBonusGift() const;					// Exposed to Python
-	DllExport int getUnitExperience() const;			// Exposed to Python
-	DllExport int getUnitImmobileTurns() const;			// Exposed to Python
-	DllExport int getConvertOwnCities() const;			// Exposed to Python
-	DllExport int getConvertOtherCities() const;		// Exposed to Python
-	DllExport int getMaxNumReligions() const;			// Exposed to Python
-	DllExport int getOurAttitudeModifier() const;		// Exposed to Python
-	DllExport int getAttitudeModifier() const;			// Exposed to Python
-	DllExport int getTheirEnemyAttitudeModifier() const;// Exposed to Python
-	DllExport int getPopulationChange() const;			// Exposed to Python
-	DllExport int getRevoltTurns() const;				// Exposed to Python
-	DllExport int getMinPillage() const;				// Exposed to Python
-	DllExport int getMaxPillage() const;				// Exposed to Python
-	DllExport int getUnitPromotion() const;				// Exposed to Python
-	DllExport int getFreeUnitSupport() const;			// Exposed to Python
-	DllExport int getInflationModifier() const;			// Exposed to Python
-	DllExport int getSpaceProductionModifier() const;	// Exposed to Python
-	DllExport int getAIValue() const;	// Exposed to Python
+	int getGold() const;						// Exposed to Python
+	int getRandomGold() const;				// Exposed to Python
+	int getEspionagePoints() const;			// Exposed to Python
+	int getCulture() const;					// Exposed to Python
+	int getTech() const;						// Exposed to Python
+	int getTechPercent() const;				// Exposed to Python
+	int getTechCostPercent() const;			// Exposed to Python
+	int getTechMinTurnsLeft() const;			// Exposed to Python
+	int getPrereqTech() const;				// Exposed to Python
+	int getUnitClass() const;					// Exposed to Python
+	int getNumUnits() const;					// Exposed to Python
+	int getBuildingClass() const;				// Exposed to Python
+	int getBuildingChange() const;			// Exposed to Python
+	int getHappy() const;						// Exposed to Python
+	int getHealth() const;					// Exposed to Python
+	int getHurryAnger() const;				// Exposed to Python
+	int getHappyTurns() const;				// Exposed to Python
+	int getFood() const;						// Exposed to Python
+	int getFoodPercent() const;				// Exposed to Python
+	int getFeature() const;					// Exposed to Python
+	int getFeatureChange() const;				// Exposed to Python
+	int getImprovement() const;				// Exposed to Python
+	int getImprovementChange() const;			// Exposed to Python
+	int getBonus() const;						// Exposed to Python
+	int getBonusChange() const;				// Exposed to Python
+	int getRoute() const;						// Exposed to Python
+	int getRouteChange() const;				// Exposed to Python
+	int getBonusRevealed() const;				// Exposed to Python
+	int getBonusGift() const;					// Exposed to Python
+	int getUnitExperience() const;			// Exposed to Python
+	int getUnitImmobileTurns() const;			// Exposed to Python
+	int getConvertOwnCities() const;			// Exposed to Python
+	int getConvertOtherCities() const;		// Exposed to Python
+	int getMaxNumReligions() const;			// Exposed to Python
+	int getOurAttitudeModifier() const;		// Exposed to Python
+	int getAttitudeModifier() const;			// Exposed to Python
+	int getTheirEnemyAttitudeModifier() const;// Exposed to Python
+	int getPopulationChange() const;			// Exposed to Python
+	int getRevoltTurns() const;				// Exposed to Python
+	int getMinPillage() const;				// Exposed to Python
+	int getMaxPillage() const;				// Exposed to Python
+	int getUnitPromotion() const;				// Exposed to Python
+	int getFreeUnitSupport() const;			// Exposed to Python
+	int getInflationModifier() const;			// Exposed to Python
+	int getSpaceProductionModifier() const;	// Exposed to Python
+	int getAIValue() const;	// Exposed to Python
 
-	DllExport int getAdditionalEventChance(int i) const;// Exposed to Python
-	DllExport int getAdditionalEventTime(int i) const;	// Exposed to Python
-	DllExport int getClearEventChance(int i) const;		// Exposed to Python
-	DllExport int getTechFlavorValue(int i) const;		// Exposed to Python
-	DllExport int getPlotExtraYield(int i) const;		// Exposed to Python
-	DllExport int getFreeSpecialistCount(int i) const;	// Exposed to Python
-	DllExport int getUnitCombatPromotion(int i) const;	// Exposed to Python
-	DllExport int getUnitClassPromotion(int i) const;	// Exposed to Python
-	DllExport const CvWString& getWorldNews(int i) const;
-	DllExport int getNumWorldNews() const;
+	int getAdditionalEventChance(int i) const;// Exposed to Python
+	int getAdditionalEventTime(int i) const;	// Exposed to Python
+	int getClearEventChance(int i) const;		// Exposed to Python
+	int getTechFlavorValue(int i) const;		// Exposed to Python
+	int getPlotExtraYield(int i) const;		// Exposed to Python
+	int getFreeSpecialistCount(int i) const;	// Exposed to Python
+	int getUnitCombatPromotion(int i) const;	// Exposed to Python
+	int getUnitClassPromotion(int i) const;	// Exposed to Python
+	const CvWString& getWorldNews(int i) const;
+	int getNumWorldNews() const;
 
-	DllExport int getBuildingYieldChange(int iBuildingClass, int iYield) const;
-	DllExport int getNumBuildingYieldChanges() const;
-	DllExport int getBuildingCommerceChange(int iBuildingClass, int iCommerce) const;
-	DllExport int getNumBuildingCommerceChanges() const;
-	DllExport int getBuildingHappyChange(int iBuildingClass) const;
-	DllExport int getNumBuildingHappyChanges() const;
-	DllExport int getBuildingHealthChange(int iBuildingClass) const;
-	DllExport int getNumBuildingHealthChanges() const;
+	int getBuildingYieldChange(int iBuildingClass, int iYield) const;
+	int getNumBuildingYieldChanges() const;
+	int getBuildingCommerceChange(int iBuildingClass, int iCommerce) const;
+	int getNumBuildingCommerceChanges() const;
+	int getBuildingHappyChange(int iBuildingClass) const;
+	int getNumBuildingHappyChanges() const;
+	int getBuildingHealthChange(int iBuildingClass) const;
+	int getNumBuildingHealthChanges() const;
 
-	DllExport const char* getPythonCallback() const;
-	DllExport const char* getPythonExpireCheck() const;
-	DllExport const char* getPythonCanDo() const;
-	DllExport const char* getPythonHelp() const;
-	DllExport const wchar* getUnitNameKey() const;
-	DllExport const wchar* getQuestFailTextKey() const;
-	DllExport const wchar* getOtherPlayerPopup() const;
-	DllExport const wchar* getLocalInfoTextKey() const;
+	const char* getPythonCallback() const;
+	const char* getPythonExpireCheck() const;
+	const char* getPythonCanDo() const;
+	const char* getPythonHelp() const;
+	const wchar* getUnitNameKey() const;
+	const wchar* getQuestFailTextKey() const;
+	const wchar* getOtherPlayerPopup() const;
+	const wchar* getLocalInfoTextKey() const;
 
-	DllExport void read(FDataStreamBase* );
-	DllExport void write(FDataStreamBase* );
+	void read(FDataStreamBase* );
+	void write(FDataStreamBase* );
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
-	DllExport bool readPass2(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
+	bool readPass2(CvXMLLoadUtility* pXML);
 
 private:
 	bool m_bQuest;
@@ -6186,44 +6180,44 @@ class CvEspionageMissionInfo : public CvInfoBase
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 
-	DllExport CvEspionageMissionInfo();
-	DllExport virtual ~CvEspionageMissionInfo();
+	CvEspionageMissionInfo();
+	virtual ~CvEspionageMissionInfo();
 	
-	DllExport int getCost() const;
-	DllExport bool isPassive() const;
-	DllExport bool isTwoPhases() const;
-	DllExport bool isTargetsCity() const;
-	DllExport bool isSelectPlot() const;
+	int getCost() const;
+	bool isPassive() const;
+	bool isTwoPhases() const;
+	bool isTargetsCity() const;
+	bool isSelectPlot() const;
 	
-	DllExport int getTechPrereq() const;
-	DllExport int getVisibilityLevel() const;
-	DllExport bool isInvestigateCity() const;
-	DllExport bool isSeeDemographics() const;
-	DllExport bool isNoActiveMissions() const;
-	DllExport bool isSeeResearch() const;
+	int getTechPrereq() const;
+	int getVisibilityLevel() const;
+	bool isInvestigateCity() const;
+	bool isSeeDemographics() const;
+	bool isNoActiveMissions() const;
+	bool isSeeResearch() const;
 
-	DllExport bool isDestroyImprovement() const;
-	DllExport int getDestroyBuildingCostFactor() const;
-	DllExport int getDestroyUnitCostFactor() const;
-	DllExport int getDestroyProjectCostFactor() const;
-	DllExport int getDestroyProductionCostFactor() const;
-	DllExport int getBuyUnitCostFactor() const;
-	DllExport int getBuyCityCostFactor() const;
-	DllExport int getStealTreasuryTypes() const;
-	DllExport int getCityInsertCultureAmountFactor() const;
-	DllExport int getCityInsertCultureCostFactor() const;
-	DllExport int getCityPoisonWaterCounter() const;
-	DllExport int getCityUnhappinessCounter() const;
-	DllExport int getCityRevoltCounter() const;
-	DllExport int getBuyTechCostFactor() const;
-	DllExport int getSwitchCivicCostFactor() const;
-	DllExport int getSwitchReligionCostFactor() const;
-	DllExport int getPlayerAnarchyCounter() const;
-	DllExport int getCounterespionageNumTurns() const;
-	DllExport int getCounterespionageMod() const;
-	DllExport int getDifficultyMod() const;
+	bool isDestroyImprovement() const;
+	int getDestroyBuildingCostFactor() const;
+	int getDestroyUnitCostFactor() const;
+	int getDestroyProjectCostFactor() const;
+	int getDestroyProductionCostFactor() const;
+	int getBuyUnitCostFactor() const;
+	int getBuyCityCostFactor() const;
+	int getStealTreasuryTypes() const;
+	int getCityInsertCultureAmountFactor() const;
+	int getCityInsertCultureCostFactor() const;
+	int getCityPoisonWaterCounter() const;
+	int getCityUnhappinessCounter() const;
+	int getCityRevoltCounter() const;
+	int getBuyTechCostFactor() const;
+	int getSwitchCivicCostFactor() const;
+	int getSwitchReligionCostFactor() const;
+	int getPlayerAnarchyCounter() const;
+	int getCounterespionageNumTurns() const;
+	int getCounterespionageMod() const;
+	int getDifficultyMod() const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -6273,17 +6267,17 @@ class CvUnitArtStyleTypeInfo : public CvInfoBase
 {
 public:
 
-	DllExport CvUnitArtStyleTypeInfo();
-	DllExport virtual ~CvUnitArtStyleTypeInfo();
+	CvUnitArtStyleTypeInfo();
+	virtual ~CvUnitArtStyleTypeInfo();
 
-    DllExport const TCHAR* getEarlyArtDefineTag(int /*Mesh Index*/ i, int /*UnitType*/ j) const;
-	DllExport void setEarlyArtDefineTag(int /*Mesh Index*/ i, int /*UnitType*/ j, const TCHAR* szVal);
-	DllExport const TCHAR* getLateArtDefineTag(int /*Mesh Index*/ i, int /*UnitType*/ j) const;
-	DllExport void setLateArtDefineTag(int /*Mesh Index*/ i, int /*UnitType*/ j, const TCHAR* szVal);
-	DllExport const TCHAR* getMiddleArtDefineTag(int /*Mesh Index*/ i, int /*UnitType*/ j) const;
-	DllExport void setMiddleArtDefineTag(int /*Mesh Index*/ i, int /*UnitType*/ j, const TCHAR* szVal);
+    const TCHAR* getEarlyArtDefineTag(int /*Mesh Index*/ i, int /*UnitType*/ j) const;
+	void setEarlyArtDefineTag(int /*Mesh Index*/ i, int /*UnitType*/ j, const TCHAR* szVal);
+	const TCHAR* getLateArtDefineTag(int /*Mesh Index*/ i, int /*UnitType*/ j) const;
+	void setLateArtDefineTag(int /*Mesh Index*/ i, int /*UnitType*/ j, const TCHAR* szVal);
+	const TCHAR* getMiddleArtDefineTag(int /*Mesh Index*/ i, int /*UnitType*/ j) const;
+	void setMiddleArtDefineTag(int /*Mesh Index*/ i, int /*UnitType*/ j, const TCHAR* szVal);
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 protected:
 
@@ -6309,22 +6303,22 @@ class CvVoteSourceInfo : public CvInfoBase
 {
 public:
 
-	DllExport CvVoteSourceInfo();
-	DllExport virtual ~CvVoteSourceInfo();
+	CvVoteSourceInfo();
+	virtual ~CvVoteSourceInfo();
 
-	DllExport int getVoteInterval() const;					// Exposed to Python
-	DllExport int getFreeSpecialist() const;					// Exposed to Python
-	DllExport int getCivic() const;					// Exposed to Python
-	DllExport const CvWString getPopupText() const;
-	DllExport const CvWString getSecretaryGeneralText() const;
+	int getVoteInterval() const;					// Exposed to Python
+	int getFreeSpecialist() const;					// Exposed to Python
+	int getCivic() const;					// Exposed to Python
+	const CvWString getPopupText() const;
+	const CvWString getSecretaryGeneralText() const;
 
 	std::wstring pyGetSecretaryGeneralText() { return getSecretaryGeneralText(); }						// Exposed to Python
 
-	DllExport int getReligionYield(int i) const;					// Exposed to Python
-	DllExport int getReligionCommerce(int i) const;					// Exposed to Python
+	int getReligionYield(int i) const;					// Exposed to Python
+	int getReligionCommerce(int i) const;					// Exposed to Python
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
-	DllExport bool readPass3();
+	bool read(CvXMLLoadUtility* pXML);
+	bool readPass3();
 
 protected:
 	int m_iVoteInterval;
@@ -6357,7 +6351,7 @@ public:
 	DllExport std::string getLoading() const;
 	DllExport std::string getLoadingSlideshow() const;
 
-	DllExport bool read(CvXMLLoadUtility* pXML);
+	bool read(CvXMLLoadUtility* pXML);
 
 protected:
 	std::string m_szScene;

@@ -12,7 +12,7 @@
 #include "CvPlot.h"
 #include "CvTeam.h"
 #include "CvDLLInterfaceIFaceBase.h"
-#include "CvDLLEventReporterIFaceBase.h"
+#include "CvEventReporter.h"
 #include "CvDLLEngineIFaceBase.h"
 #include "CvArtFileMgr.h"
 #include "CvDiploParameters.h"
@@ -1375,7 +1375,7 @@ void CvTeam::declareWar(TeamTypes eTeam, bool bNewDiplo, WarPlanTypes eWarPlan)
 			}
 		}
 
-		gDLL->getEventReporterIFace()->changeWar(true, getID(), eTeam);
+		CvEventReporter::getInstance().changeWar(true, getID(), eTeam);
 
 		cancelDefensivePacts();
 
@@ -1522,7 +1522,7 @@ void CvTeam::makePeace(TeamTypes eTeam, bool bBumpUnits)
 		szBuffer = gDLL->getText("TXT_KEY_MISC_SOMEONE_MADE_PEACE", getName().GetCString(), GET_TEAM(eTeam).getName().GetCString());
 		GC.getGameINLINE().addReplayMessage(REPLAY_MESSAGE_MAJOR_EVENT, getLeaderID(), szBuffer, -1, -1, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
 
-		gDLL->getEventReporterIFace()->changeWar(false, getID(), eTeam);
+		CvEventReporter::getInstance().changeWar(false, getID(), eTeam);
 
 		for (iI = 0; iI < MAX_TEAMS; iI++)
 		{
@@ -2457,6 +2457,17 @@ bool CvTeam::hasBonus(BonusTypes eBonus) const
 	return false;
 }
 
+bool CvTeam::isBonusObsolete(BonusTypes eBonus) const
+{
+	TechTypes eObsoleteTech = (TechTypes) GC.getBonusInfo(eBonus).getTechObsolete();
+	if (eObsoleteTech != NO_TECH && isHasTech(eObsoleteTech))
+	{
+		return true;
+	}
+	return false;
+}
+
+
 bool CvTeam::isHuman() const
 {
 	PROFILE_FUNC();
@@ -3388,7 +3399,7 @@ void CvTeam::makeHasMet(TeamTypes eIndex, bool bNewDiplo)
 		}
 
 		// report event to Python, along with some other key state
-		gDLL->getEventReporterIFace()->firstContact(getID(), eIndex);
+		CvEventReporter::getInstance().firstContact(getID(), eIndex);
 	}
 }
 
@@ -3850,7 +3861,7 @@ void CvTeam::setVassal(TeamTypes eIndex, bool bNewValue, bool bCapitulated)
 
 		if (GC.getGameINLINE().isFinalInitialized() && !(gDLL->GetWorldBuilderMode()))
 		{
-			gDLL->getEventReporterIFace()->vassalState(eIndex, getID(), bNewValue);
+			CvEventReporter::getInstance().vassalState(eIndex, getID(), bNewValue);
 		}
 	}
 }
@@ -4045,15 +4056,15 @@ void CvTeam::finalizeProjectArtTypes()
 	//loop through each project and fill in default art values
 	for(int i=0;i<GC.getNumProjectInfos();i++)
 	{
-		ProjectTypes projectType = (ProjectTypes) i;
-		int projectCount = getProjectCount(projectType);
+		ProjectTypes eProject = (ProjectTypes) i;
+		int projectCount = getProjectCount(eProject);
 		for(int j=0;j<projectCount;j++)
 		{
-			int projectArtType = getProjectArtType(projectType, j);
+			int projectArtType = getProjectArtType(eProject, j);
 			if(projectArtType == -1) //undefined
 			{
-				int defaultArtType = getProjectDefaultArtType(projectType);
-				setProjectArtType(projectType, j, defaultArtType);
+				int defaultArtType = getProjectDefaultArtType(eProject);
+				setProjectArtType(eProject, j, defaultArtType);
 			}
 		}
 	}
@@ -4688,7 +4699,7 @@ void CvTeam::setHasTech(TechTypes eIndex, bool bNewValue, PlayerTypes ePlayer, b
 			setResearchProgress(eIndex, 0, ePlayer);
 
 			// report event to Python
-			gDLL->getEventReporterIFace()->techAcquired(eIndex, getID(), ePlayer, bAnnounce && 1 == m_paiTechCount[eIndex]);
+			CvEventReporter::getInstance().techAcquired(eIndex, getID(), ePlayer, bAnnounce && 1 == m_paiTechCount[eIndex]);
 
 			if (1 == m_paiTechCount[eIndex])
 			{
@@ -4771,7 +4782,7 @@ void CvTeam::setHasTech(TechTypes eIndex, bool bNewValue, PlayerTypes ePlayer, b
 			}
 
 			// report event to Python, along with some other key state
-			gDLL->getEventReporterIFace()->techAcquired(eIndex, getID(), ePlayer, bAnnounce);
+			CvEventReporter::getInstance().techAcquired(eIndex, getID(), ePlayer, bAnnounce);
 
 			bReligionFounded = false;
 			bFirstBonus = false;
@@ -4924,20 +4935,15 @@ void CvTeam::setHasTech(TechTypes eIndex, bool bNewValue, PlayerTypes ePlayer, b
 			{
 				if (GC.getGameINLINE().countKnownTechNumTeams(eIndex) == 1)
 				{
-					if (GC.getTechInfo(eIndex).getFirstFreeUnitClass() != NO_UNITCLASS)
+					eFreeUnit = GET_PLAYER(ePlayer).getTechFreeUnit(eIndex);
+					if (eFreeUnit != NO_UNIT)
 					{
 						bFirstBonus = true;
+						pCapitalCity = GET_PLAYER(ePlayer).getCapitalCity();
 
-						eFreeUnit = ((UnitTypes)(GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationUnits(GC.getTechInfo(eIndex).getFirstFreeUnitClass())));
-
-						if (eFreeUnit != NULL)
+						if (pCapitalCity != NULL)
 						{
-							pCapitalCity = GET_PLAYER(ePlayer).getCapitalCity();
-
-							if (pCapitalCity != NULL)
-							{
-								pCapitalCity->createGreatPeople(eFreeUnit, false, false);
-							}
+							pCapitalCity->createGreatPeople(eFreeUnit, false, false);
 						}
 					}
 
@@ -6083,5 +6089,49 @@ bool CvTeam::hasShrine(ReligionTypes eReligion)
 	}
 
 	return bHasShrine;
+}
+
+void CvTeam::getCompletedSpaceshipProjects(std::map<ProjectTypes, int>& mapProjects) const
+{
+	for (int i = 0; i < GC.getNumProjectInfos(); i++)
+	{
+		ProjectTypes eProject = (ProjectTypes) i;
+		if (GC.getProjectInfo(eProject).isSpaceship())
+		{
+			mapProjects[eProject] = getProjectCount(eProject);
+		}
+	}
+}
+
+int CvTeam::getProjectPartNumber(ProjectTypes eProject, bool bAssert) const
+{
+	int iNumBuilt = getProjectCount(eProject);
+	for (int i = 0; i < iNumBuilt; i++)
+	{
+		int artType = getProjectArtType(eProject, i);
+		if (artType < 0)
+		{
+			return i;
+		}
+	}
+
+	//didn't find empty part number
+	if (bAssert)
+	{
+		FAssertMsg(false, "Unknown part number.");
+	}
+
+	//return the last one
+	return std::min(iNumBuilt, GC.getProjectInfo(eProject).getMaxTeamInstances() - 1);
+}
+
+bool CvTeam::hasLaunched() const
+{
+	VictoryTypes spaceVictory = GC.getGameINLINE().getSpaceVictory();
+	if (spaceVictory != NO_VICTORY)
+	{
+		return (getVictoryCountdown(spaceVictory) >= 0);
+	}
+	return false;
 }
 

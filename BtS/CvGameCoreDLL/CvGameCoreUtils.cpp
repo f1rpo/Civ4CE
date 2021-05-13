@@ -213,82 +213,85 @@ bool isBeforeUnitCycle(const CvUnit* pFirstUnit, const CvUnit* pSecondUnit)
 
 bool isPromotionValid(PromotionTypes ePromotion, UnitTypes eUnit, bool bLeader)
 {
-	if (GC.getUnitInfo(eUnit).getFreePromotions(ePromotion))
+	CvUnitInfo& kUnit = GC.getUnitInfo(eUnit);
+	CvPromotionInfo& kPromotion = GC.getPromotionInfo(ePromotion);
+
+	if (kUnit.getFreePromotions(ePromotion))
 	{
 		return true;
 	}
 
-	if (GC.getUnitInfo(eUnit).getUnitCombatType() == NO_UNITCOMBAT)
+	if (kUnit.getUnitCombatType() == NO_UNITCOMBAT)
 	{
 		return false;
 	}
 
-	if (!bLeader && GC.getPromotionInfo(ePromotion).isLeader())
+	if (!bLeader && kPromotion.isLeader())
 	{
 		return false;
 	}
 
-	if (!(GC.getPromotionInfo(ePromotion).getUnitCombat(GC.getUnitInfo(eUnit).getUnitCombatType())))
+	if (!(kPromotion.getUnitCombat(kUnit.getUnitCombatType())))
 	{
 		return false;
 	}
 
-	if (GC.getUnitInfo(eUnit).isOnlyDefensive())
+	if (kUnit.isOnlyDefensive())
 	{
-		if ((GC.getPromotionInfo(ePromotion).getCityAttackPercent() != 0) ||
-			  (GC.getPromotionInfo(ePromotion).getWithdrawalChange() != 0) ||
-			  (GC.getPromotionInfo(ePromotion).getCollateralDamageChange() != 0) ||
-			  (GC.getPromotionInfo(ePromotion).isBlitz()) ||
-			  (GC.getPromotionInfo(ePromotion).isAmphib()) ||
-			  (GC.getPromotionInfo(ePromotion).isRiver()) ||
-			  (GC.getPromotionInfo(ePromotion).getHillsAttackPercent() != 0))
+		if ((kPromotion.getCityAttackPercent() != 0) ||
+			  (kPromotion.getWithdrawalChange() != 0) ||
+			  (kPromotion.getCollateralDamageChange() != 0) ||
+			  (kPromotion.isBlitz()) ||
+			  (kPromotion.isAmphib()) ||
+			  (kPromotion.isRiver()) ||
+			  (kPromotion.getHillsAttackPercent() != 0))
 		{
 			return false;
 		}
 	}
 
-	if (GC.getUnitInfo(eUnit).isIgnoreTerrainCost())
+	if (kUnit.isIgnoreTerrainCost())
 	{
-		if (GC.getPromotionInfo(ePromotion).getMoveDiscountChange() != 0)
+		if (kPromotion.getMoveDiscountChange() != 0)
 		{
 			return false;
 		}
 	}
 
-	if (GC.getUnitInfo(eUnit).getMoves() == 1)
+	if (kUnit.getMoves() == 1)
 	{
-		if (GC.getPromotionInfo(ePromotion).isBlitz())
+		if (kPromotion.isBlitz())
 		{
 			return false;
 		}
 	}
 
-	if ((GC.getUnitInfo(eUnit).getCollateralDamageLimit() == 0) || (GC.getUnitInfo(eUnit).getCollateralDamageMaxUnits() == 0))
+	if ((kUnit.getCollateralDamage() == 0) || (kUnit.getCollateralDamageLimit() == 0) || (kUnit.getCollateralDamageMaxUnits() == 0))
 	{
-		if (GC.getPromotionInfo(ePromotion).getCollateralDamageChange() != 0)
+		if (kPromotion.getCollateralDamageChange() != 0)
 		{
 			return false;
 		}
 	}
 
-	if (GC.getUnitInfo(eUnit).getInterceptionProbability() == 0)
+	if (kUnit.getInterceptionProbability() == 0)
 	{
-		if (GC.getPromotionInfo(ePromotion).getInterceptChange() != 0)
+		if (kPromotion.getInterceptChange() != 0)
 		{
 			return false;
 		}
 	}
 
-	if (NO_PROMOTION != GC.getPromotionInfo(ePromotion).getPrereqPromotion())
+	if (NO_PROMOTION != kPromotion.getPrereqPromotion())
 	{
-		if (!isPromotionValid((PromotionTypes)GC.getPromotionInfo(ePromotion).getPrereqPromotion(), eUnit, bLeader))
+		if (!isPromotionValid((PromotionTypes)kPromotion.getPrereqPromotion(), eUnit, bLeader))
 		{
 			return false;
 		}
 	}
 
-	PromotionTypes ePrereq1 = (PromotionTypes)GC.getPromotionInfo(ePromotion).getPrereqOrPromotion1();
-	PromotionTypes ePrereq2 = (PromotionTypes)GC.getPromotionInfo(ePromotion).getPrereqOrPromotion2();
+	PromotionTypes ePrereq1 = (PromotionTypes)kPromotion.getPrereqOrPromotion1();
+	PromotionTypes ePrereq2 = (PromotionTypes)kPromotion.getPrereqOrPromotion2();
 	if (NO_PROMOTION != ePrereq1 || NO_PROMOTION != ePrereq2)
 	{
 		bool bValid = false;
@@ -912,78 +915,6 @@ TechTypes getDiscoveryTech(UnitTypes eUnit, PlayerTypes ePlayer)
 	return eBestTech;
 }
 
-
-void clear(char* szString)
-{
-	szString[0] = '\0';
-}
-
-void clear(wchar* szString)
-{
-	szString[0] = L'\0';
-}
-
-void clear(std::wstring& szString)
-{
-	szString.clear();
-}
-
-void clear(std::string& szString)
-{
-	szString.clear();
-}
-
-void safecpy(CvWString& szDest, const CvWString& szSource, int iMaxLen)
-{
-	szDest = szSource;
-	if (szDest.size()>(uint)iMaxLen)
-		szDest[iMaxLen-1]=0;
-}
-
-void safecpy(char * szDest, const char * szSource, int iMaxLen)
-{
-	if (szSource)
-	{
-		strncpy(szDest, szSource, iMaxLen-1);
-		szDest[iMaxLen-1] = 0;
-	}
-	else
-	{
-		szDest[0] = '\0';
-	}
-}
-void safecpy(wchar * szDest, const wchar * szSource, int iMaxLen)
-{
-	if (szSource)
-	{
-		wcsncpy(szDest, szSource, iMaxLen-1);
-		szDest[iMaxLen-1] = L'\0';
-	}
-	else
-	{
-		szDest[0] = L'\0';
-	}
-}
-
-bool isEmpty(const char* szString)
-{
-	return (szString[0] == '\0');
-}
-
-bool isEmpty(const std::string& szStr)
-{
-	return (szStr.empty() || szStr[0] == '\0');
-}
-
-bool isEmpty(const wchar* szString)
-{
-	return (szString[0] == L'\0');
-}
-
-bool isEmpty(const std::wstring& szStr)
-{
-	return (szStr.empty() || szStr[0] == L'\0');
-}
 
 void setListHelp(wchar* szBuffer, const wchar* szStart, const wchar* szItem, const wchar* szSeparator, bool bFirst)
 {
@@ -2032,35 +1963,6 @@ int getTurnMonthForGame(int iGameTurn, int iStartYear, CalendarTypes eCalendar, 
 	}
 
 	return iTurnMonth;
-}
-
-
-void boolsToString(const bool* pBools, int iNumBools, CvString* szOut)
-{
-	*szOut = "";
-	int i;
-	for(i=0;i<iNumBools;i++)
-	{
-		*szOut += pBools[i] ? "1" : "0";
-	}
-}
-
-//
-// caller must call SAFE_DELETE_ARRAY on ppBools
-//
-void stringToBools(const char* szString, int* iNumBools, bool** ppBools)
-{
-	FAssertMsg(szString, "null string");
-	if (szString)
-	{
-		*iNumBools = strlen(szString);
-		*ppBools = new bool[*iNumBools];
-		int i;
-		for(i=0;i<*iNumBools;i++)
-		{
-			(*ppBools)[i] = (szString[i]=='1');
-		}
-	}
 }
 
 // these string functions should only be used under chipotle cheat code (not internationalized)

@@ -70,7 +70,7 @@ public:
 
 	virtual void selectCity(CvCity* pNewValue, bool bTestProduction = false) = 0;
 	virtual void selectLookAtCity(bool bAdd = false) = 0;
-	virtual void addSelectedCity(CvCity* pNewValue) = 0;
+	virtual void addSelectedCity(CvCity* pNewValue, bool bToggle = false) = 0;
 	virtual void clearSelectedCities() = 0;
 	virtual bool isCitySelected(CvCity *pCity) = 0;
 	virtual CvCity* getHeadSelectedCity() = 0;
@@ -105,6 +105,7 @@ public:
 	virtual void setDirty(InterfaceDirtyBits eDirtyItem, bool bNewValue) = 0;
 	virtual void makeInterfaceDirty() = 0;
 	virtual bool updateCursorType() = 0;
+	virtual void updatePythonScreens() = 0;
 
 	virtual void lookAt(NiPoint3 pt3Target, CameraLookAtTypes type, NiPoint3 attackDirection = NiPoint3(0, 1, 0)) = 0;
 	virtual void centerCamera(CvUnit*) = 0;
@@ -125,6 +126,9 @@ public:
 	virtual bool isCityScreenUp() = 0;
 	virtual bool isEndTurnMessage() = 0;
 	virtual void setInterfaceMode(InterfaceModeTypes eNewValue) = 0;
+	virtual InterfaceModeTypes getInterfaceMode() = 0;
+	virtual InterfaceVisibility getShowInterface() = 0;
+	virtual CvPlot* getMouseOverPlot() = 0;
 	virtual void setFlashing(PlayerTypes eWho, bool bFlashing = true) = 0;
 	virtual bool isFlashing(PlayerTypes eWho) = 0;
 	virtual void setDiplomacyLocked(bool bLocked) = 0;
@@ -159,6 +163,7 @@ public:
 	virtual bool isClockAlarmOn() = 0;
 
 	virtual void setScreenDying(int iPythonFileID, bool bDying) = 0;
+	virtual bool isExitingToMainMenu() = 0;
 	virtual void exitingToMainMenu(const char* szLoadFile=NULL) = 0;
 	virtual void setWorldBuilder(bool bTurnOn) = 0;
 	
@@ -198,11 +203,6 @@ public:
 
 	virtual bool noTechSplash() = 0;
 
-	virtual EspionageMissionTypes getEspionageActiveMission() = 0;
-	virtual void setEspionageActiveMission(EspionageMissionTypes eMission) = 0;
-	virtual PlayerTypes getEspionageTargetPlayer() = 0;
-	virtual void setEspionageTargetPlayer(PlayerTypes ePlayer) = 0;
-
 	virtual bool isInAdvancedStart() const = 0;
 	virtual void setInAdvancedStart(bool bAdvancedStart) = 0;
 
@@ -210,6 +210,9 @@ public:
 	virtual bool isDebugMenuCreated() const = 0;
 
 	virtual void setBusy(bool bBusy) = 0;
+
+	virtual void getInterfaceScreenIdsForInput(std::vector<int>& aIds) = 0;
+	virtual void doPing(int iX, int iY, PlayerTypes ePlayer) = 0;
 };
 
 

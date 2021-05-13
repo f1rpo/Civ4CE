@@ -59,33 +59,34 @@ public:
 
 	DllExport void testExtendedGame();
 
-	DllExport CvUnit* getPlotUnit(const CvPlot* pPlot, int iIndex);
-	DllExport void getPlotUnits(const CvPlot *pPlot, std::vector<CvUnit*>& plotUnits);
+	DllExport CvUnit* getPlotUnit(const CvPlot* pPlot, int iIndex) const;
+	DllExport void getPlotUnits(const CvPlot *pPlot, std::vector<CvUnit*>& plotUnits) const;
 
-	DllExport void cycleCities(bool bForward = true, bool bAdd = false);																				// Exposed to Python
-	DllExport void cycleSelectionGroups(bool bClear, bool bForward = true, bool bWorkers = false);							// Exposed to Python
-	DllExport bool cyclePlotUnits(CvPlot* pPlot, bool bForward = true, bool bAuto = false, int iCount = -1);		// Exposed to Python
+	DllExport void cycleCities(bool bForward = true, bool bAdd = false) const;																				// Exposed to Python
+	DllExport void cycleSelectionGroups(bool bClear, bool bForward = true, bool bWorkers = false) const;							// Exposed to Python
+	DllExport bool cyclePlotUnits(CvPlot* pPlot, bool bForward = true, bool bAuto = false, int iCount = -1) const;		// Exposed to Python
+	DllExport bool selectCity(CvCity* pSelectCity, bool bCtrl, bool bAlt, bool bShift) const;
 
-	DllExport void selectionListMove(CvPlot* pPlot, bool bAlt, bool bShift, bool bCtrl);												// Exposed to Python
-	DllExport void selectionListGameNetMessage(int eMessage, int iData2 = -1, int iData3 = -1, int iData4 = -1, int iFlags = 0, bool bAlt = false, bool bShift = false);	// Exposed to Python
-	DllExport void selectedCitiesGameNetMessage(int eMessage, int iData2 = -1, int iData3 = -1, int iData4 = -1, bool bOption = false, bool bAlt = false, bool bShift = false, bool bCtrl = false);	// Exposed to Python
-	DllExport void cityPushOrder(CvCity* pCity, OrderTypes eOrder, int iData, bool bAlt = false, bool bShift = false, bool bCtrl = false);	// Exposed to Python
+	DllExport void selectionListMove(CvPlot* pPlot, bool bAlt, bool bShift, bool bCtrl) const;												// Exposed to Python
+	DllExport void selectionListGameNetMessage(int eMessage, int iData2 = -1, int iData3 = -1, int iData4 = -1, int iFlags = 0, bool bAlt = false, bool bShift = false) const;	// Exposed to Python
+	DllExport void selectedCitiesGameNetMessage(int eMessage, int iData2 = -1, int iData3 = -1, int iData4 = -1, bool bOption = false, bool bAlt = false, bool bShift = false, bool bCtrl = false) const;	// Exposed to Python
+	DllExport void cityPushOrder(CvCity* pCity, OrderTypes eOrder, int iData, bool bAlt = false, bool bShift = false, bool bCtrl = false) const;	// Exposed to Python
 
-	DllExport void selectUnit(CvUnit* pUnit, bool bClear, bool bToggle = false, bool bSound = false);
-	DllExport void selectGroup(CvUnit* pUnit, bool bShift, bool bCtrl, bool bAlt);
-	DllExport void selectAll(CvPlot* pPlot);
+	DllExport void selectUnit(CvUnit* pUnit, bool bClear, bool bToggle = false, bool bSound = false) const;
+	DllExport void selectGroup(CvUnit* pUnit, bool bShift, bool bCtrl, bool bAlt) const;
+	DllExport void selectAll(CvPlot* pPlot) const;
 
-	DllExport bool selectionListIgnoreBuildingDefense();
+	DllExport bool selectionListIgnoreBuildingDefense() const;
 
-	DllExport bool canHandleAction(int iAction, CvPlot* pPlot = NULL, bool bTestVisible = false, bool bUseCache = false);
-	DllExport void setupActionCache();
+	DllExport bool canHandleAction(int iAction, CvPlot* pPlot = NULL, bool bTestVisible = false, bool bUseCache = false) const;
+	DllExport void setupActionCache() const;
 	DllExport void handleAction(int iAction);
 
-	DllExport bool canDoControl(ControlTypes eControl);
-	DllExport void doControl(ControlTypes eControl);
+	bool canDoControl(ControlTypes eControl) const;
+	void doControl(ControlTypes eControl);
 
 	DllExport void implementDeal(PlayerTypes eWho, PlayerTypes eOtherWho, CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirList, bool bForce = false);
-	DllExport void verifyDeals();
+	void verifyDeals();
 
 	DllExport void getGlobeviewConfigurationParameters(TeamTypes eTeam, bool& bStarsVisible, bool& bWorldIsRound);
 
@@ -119,48 +120,44 @@ public:
 	int countKnownTechNumTeams(TechTypes eTech);														// Exposed to Python
 	int getNumFreeBonuses(BuildingTypes eBuilding);													// Exposed to Python
 
-	DllExport int countReligionLevels(ReligionTypes eReligion);							// Exposed to Python 
-	DllExport int calculateReligionPercent(ReligionTypes eReligion) const;				// Exposed to Python
-	DllExport int countCorporationLevels(CorporationTypes eCorporation);							// Exposed to Python 
+	int countReligionLevels(ReligionTypes eReligion);							// Exposed to Python 
+	int calculateReligionPercent(ReligionTypes eReligion) const;				// Exposed to Python
+	int countCorporationLevels(CorporationTypes eCorporation);							// Exposed to Python 
 	void replaceCorporation(CorporationTypes eCorporation1, CorporationTypes eCorporation2);
 
-	DllExport int goldenAgeLength() const;																					// Exposed to Python
-	DllExport int victoryDelay(VictoryTypes eVictory) const;							// Exposed to Python
-	DllExport int getImprovementUpgradeTime(ImprovementTypes eImprovement) const;		// Exposed to Python
+	int goldenAgeLength() const;																					// Exposed to Python
+	int victoryDelay(VictoryTypes eVictory) const;							// Exposed to Python
+	int getImprovementUpgradeTime(ImprovementTypes eImprovement) const;		// Exposed to Python
 
-	DllExport bool canTrainNukes() const;																		// Exposed to Python
+	bool canTrainNukes() const;																		// Exposed to Python
 	DllExport EraTypes getCurrentEra() const;											// Exposed to Python
 
-	DllExport TeamTypes getActiveTeam();																		// Exposed to Python
-	DllExport CivilizationTypes getActiveCivilizationType();								// Exposed to Python
+	DllExport TeamTypes getActiveTeam() const;																		// Exposed to Python
+	DllExport CivilizationTypes getActiveCivilizationType() const;								// Exposed to Python
 
-	DllExport unsigned int getLastEndTurnMessageSentTime();
 	DllExport bool isNetworkMultiPlayer() const;																	// Exposed to Python
 	DllExport bool isGameMultiPlayer() const;																			// Exposed to Python
 	DllExport bool isTeamGame() const;																						// Exposed to Python
 
-	DllExport bool isModem();
-	DllExport void setModem(bool bModem);
+	bool isModem();
+	void setModem(bool bModem);
 
 	DllExport void reviveActivePlayer();																		// Exposed to Python
 
 	DllExport int getNumHumanPlayers();																			// Exposed to Python
 
-	DllExport int getEndTurnMessagesSent();
-	DllExport void incrementEndTurnMessagesSent();															
-
 	DllExport int getGameTurn();																						// Exposed to Python
 	DllExport void setGameTurn(int iNewValue);															// Exposed to Python
-	DllExport void incrementGameTurn();
-	DllExport int getTurnYear(int iGameTurn);																// Exposed to Python
-	DllExport int getGameTurnYear();																				// Exposed to Python
+	void incrementGameTurn();
+	int getTurnYear(int iGameTurn);																// Exposed to Python
+	int getGameTurnYear();																				// Exposed to Python
 
-	DllExport int getElapsedGameTurns() const;																		// Exposed to Python
-	DllExport void incrementElapsedGameTurns();
+	int getElapsedGameTurns() const;																		// Exposed to Python
+	void incrementElapsedGameTurns();
 
-	DllExport int getMaxTurns() const;																			// Exposed to Python
+	int getMaxTurns() const;																			// Exposed to Python
 	DllExport void setMaxTurns(int iNewValue);															// Exposed to Python
-	DllExport void changeMaxTurns(int iChange);															// Exposed to Python
+	void changeMaxTurns(int iChange);															// Exposed to Python
 
 	DllExport int getMaxCityElimination() const;														// Exposed to Python
 	DllExport void setMaxCityElimination(int iNewValue);										// Exposed to Python
@@ -171,75 +168,75 @@ public:
 	DllExport int getStartTurn() const;																			// Exposed to Python
 	DllExport void setStartTurn(int iNewValue);
 
-	DllExport int getStartYear() const;																			// Exposed to Python
-	DllExport void setStartYear(int iNewValue);															// Exposed to Python
+	int getStartYear() const;																			// Exposed to Python
+	void setStartYear(int iNewValue);															// Exposed to Python
 
-	DllExport int getEstimateEndTurn() const;																// Exposed to Python
-	DllExport void setEstimateEndTurn(int iNewValue);												// Exposed to Python
+	int getEstimateEndTurn() const;																// Exposed to Python
+	void setEstimateEndTurn(int iNewValue);												// Exposed to Python
 
 	DllExport int getTurnSlice() const;																			// Exposed to Python
-	DllExport int getMinutesPlayed() const;																	// Exposed to Python
-	DllExport void setTurnSlice(int iNewValue);
-	DllExport void changeTurnSlice(int iChange);
+	int getMinutesPlayed() const;																	// Exposed to Python
+	void setTurnSlice(int iNewValue);
+	void changeTurnSlice(int iChange);
 
-	DllExport int getCutoffSlice() const;
-	DllExport void setCutoffSlice(int iNewValue);
-	DllExport void changeCutoffSlice(int iChange);
+	int getCutoffSlice() const;
+	void setCutoffSlice(int iNewValue);
+	void changeCutoffSlice(int iChange);
 
 	DllExport int getTurnSlicesRemaining();
-	DllExport void resetTurnTimer();
-	DllExport void incrementTurnTimer(int iNumTurnSlices);
+	void resetTurnTimer();
+	void incrementTurnTimer(int iNumTurnSlices);
 	DllExport int getMaxTurnLen();
 
-	DllExport int getTargetScore() const;																		// Exposed to Python
+	int getTargetScore() const;																		// Exposed to Python
 	DllExport void setTargetScore(int iNewValue);														// Exposed to Python
 
-	DllExport int getNumGameTurnActive();																		// Exposed to Python
-	DllExport int countNumHumanGameTurnActive();														// Exposed to Python
-	DllExport void changeNumGameTurnActive(int iChange);
+	int getNumGameTurnActive();																		// Exposed to Python
+	DllExport int countNumHumanGameTurnActive() const;														// Exposed to Python
+	void changeNumGameTurnActive(int iChange);
 
 	DllExport int getNumCities() const;																						// Exposed to Python
-	DllExport int getNumCivCities() const;																				// Exposed to Python
-	DllExport void changeNumCities(int iChange);
+	int getNumCivCities() const;																				// Exposed to Python
+	void changeNumCities(int iChange);
 
 	DllExport int getTotalPopulation() const;																// Exposed to Python
-	DllExport void changeTotalPopulation(int iChange);
+	void changeTotalPopulation(int iChange);
 
-	DllExport int getTradeRoutes() const;																		// Exposed to Python
-	DllExport void changeTradeRoutes(int iChange);													// Exposed to Python
+	int getTradeRoutes() const;																		// Exposed to Python
+	void changeTradeRoutes(int iChange);													// Exposed to Python
 
-	DllExport int getFreeTradeCount() const;																// Exposed to Python
-	DllExport bool isFreeTrade() const;																			// Exposed to Python
-	DllExport void changeFreeTradeCount(int iChange);												// Exposed to Python
+	int getFreeTradeCount() const;																// Exposed to Python
+	bool isFreeTrade() const;																			// Exposed to Python
+	void changeFreeTradeCount(int iChange);												// Exposed to Python
 
-	DllExport int getNoNukesCount() const;																	// Exposed to Python
-	DllExport bool isNoNukes() const;																				// Exposed to Python
-	DllExport void changeNoNukesCount(int iChange);													// Exposed to Python
+	int getNoNukesCount() const;																	// Exposed to Python
+	bool isNoNukes() const;																				// Exposed to Python
+	void changeNoNukesCount(int iChange);													// Exposed to Python
 
-	DllExport int getSecretaryGeneralTimer(VoteSourceTypes eVoteSource) const;													// Exposed to Python
-	DllExport void setSecretaryGeneralTimer(VoteSourceTypes eVoteSource, int iNewValue);
-	DllExport void changeSecretaryGeneralTimer(VoteSourceTypes eVoteSource, int iChange);
+	int getSecretaryGeneralTimer(VoteSourceTypes eVoteSource) const;													// Exposed to Python
+	void setSecretaryGeneralTimer(VoteSourceTypes eVoteSource, int iNewValue);
+	void changeSecretaryGeneralTimer(VoteSourceTypes eVoteSource, int iChange);
 
-	DllExport int getVoteTimer(VoteSourceTypes eVoteSource) const;													// Exposed to Python
-	DllExport void setVoteTimer(VoteSourceTypes eVoteSource, int iNewValue);
-	DllExport void changeVoteTimer(VoteSourceTypes eVoteSource, int iChange);
+	int getVoteTimer(VoteSourceTypes eVoteSource) const;													// Exposed to Python
+	void setVoteTimer(VoteSourceTypes eVoteSource, int iNewValue);
+	void changeVoteTimer(VoteSourceTypes eVoteSource, int iChange);
 
-	DllExport int getNukesExploded() const;																	// Exposed to Python
-	DllExport void changeNukesExploded(int iChange);												// Exposed to Python
+	int getNukesExploded() const;																	// Exposed to Python
+	void changeNukesExploded(int iChange);												// Exposed to Python
 
-	DllExport int getMaxPopulation() const;																	// Exposed to Python
-	DllExport int getMaxLand() const;																				// Exposed to Python
-	DllExport int getMaxTech() const;																				// Exposed to Python
-	DllExport int getMaxWonders() const;																		// Exposed to Python
-	DllExport int getInitPopulation() const;																// Exposed to Python
-	DllExport int getInitLand() const;																			// Exposed to Python
-	DllExport int getInitTech() const;																			// Exposed to Python
-	DllExport int getInitWonders() const;																		// Exposed to Python
+	int getMaxPopulation() const;																	// Exposed to Python
+	int getMaxLand() const;																				// Exposed to Python
+	int getMaxTech() const;																				// Exposed to Python
+	int getMaxWonders() const;																		// Exposed to Python
+	int getInitPopulation() const;																// Exposed to Python
+	int getInitLand() const;																			// Exposed to Python
+	int getInitTech() const;																			// Exposed to Python
+	int getInitWonders() const;																		// Exposed to Python
 	DllExport void initScoreCalculation();
 
-	DllExport int getAIAutoPlay();																				// Exposed to Python
+	int getAIAutoPlay();																				// Exposed to Python
 	DllExport void setAIAutoPlay(int iNewValue);																// Exposed to Python
-	DllExport void changeAIAutoPlay(int iChange);
+	void changeAIAutoPlay(int iChange);
 
 	DllExport unsigned int getInitialTime();
 	DllExport void setInitialTime(unsigned int uiNewValue);
@@ -247,14 +244,14 @@ public:
 	bool isScoreDirty() const;																							// Exposed to Python
 	void setScoreDirty(bool bNewValue);																			// Exposed to Python
 
-	DllExport bool isCircumnavigated() const;																// Exposed to Python
-	DllExport void makeCircumnavigated();																		// Exposed to Python
+	bool isCircumnavigated() const;																// Exposed to Python
+	void makeCircumnavigated();																		// Exposed to Python
 	bool circumnavigationAvailable() const;
 
-	DllExport bool isDiploVote(VoteSourceTypes eVoteSource) const;																			// Exposed to Python
+	bool isDiploVote(VoteSourceTypes eVoteSource) const;																			// Exposed to Python
 	int getDiploVoteCount(VoteSourceTypes eVoteSource) const;
-	DllExport void changeDiploVote(VoteSourceTypes eVoteSource, int iChange);																					// Exposed to Python
-	DllExport bool canDoResolution(VoteSourceTypes eVoteSource, const VoteSelectionSubData& kData) const;
+	void changeDiploVote(VoteSourceTypes eVoteSource, int iChange);																					// Exposed to Python
+	bool canDoResolution(VoteSourceTypes eVoteSource, const VoteSelectionSubData& kData) const;
 	bool isValidVoteSelection(VoteSourceTypes eVoteSource, const VoteSelectionSubData& kData) const;
 
 	DllExport bool isDebugMode() const;																			// Exposed to Python
@@ -272,7 +269,7 @@ public:
 	DllExport bool isFinalInitialized() const;																		// Exposed to Python
 	DllExport void setFinalInitialized(bool bNewValue);
 
-	DllExport bool getPbemTurnSent() const;
+	bool getPbemTurnSent() const;
 	DllExport void setPbemTurnSent(bool bNewValue);
 
 	DllExport bool getHotPbemBetweenTurns() const;
@@ -288,19 +285,19 @@ public:
 	DllExport HandicapTypes getHandicapType() const;
 	DllExport void setHandicapType(HandicapTypes eHandicap);
 
-	DllExport PlayerTypes getPausePlayer();																			// Exposed to Python
-	DllExport bool isPaused();																									// Exposed to Python
+	DllExport PlayerTypes getPausePlayer() const;																			// Exposed to Python
+	DllExport bool isPaused() const;																									// Exposed to Python
 	DllExport void setPausePlayer(PlayerTypes eNewValue);
 
-	DllExport UnitTypes getBestLandUnit();																			// Exposed to Python
-	DllExport int getBestLandUnitCombat();																			// Exposed to Python
-	DllExport void setBestLandUnit(UnitTypes eNewValue);
+	UnitTypes getBestLandUnit() const;																			// Exposed to Python
+	int getBestLandUnitCombat() const;																			// Exposed to Python
+	void setBestLandUnit(UnitTypes eNewValue);
 
 	DllExport TeamTypes getWinner() const;																			// Exposed to Python
 	DllExport VictoryTypes getVictory() const;																	// Exposed to Python
-	DllExport void setWinner(TeamTypes eNewWinner, VictoryTypes eNewVictory);		// Exposed to Python
+	void setWinner(TeamTypes eNewWinner, VictoryTypes eNewVictory);		// Exposed to Python
 
-	DllExport GameStateTypes getGameState();																		// Exposed to Python
+	DllExport GameStateTypes getGameState() const;																		// Exposed to Python
 	DllExport void setGameState(GameStateTypes eNewValue);
 
 	DllExport EraTypes getStartEra() const;																			// Exposed to Python
@@ -309,26 +306,23 @@ public:
 
 	DllExport GameSpeedTypes getGameSpeedType() const;													// Exposed to Python 
 
-	DllExport int getEndTurnMessagesReceived(int iIndex);
-	DllExport void incrementEndTurnMessagesReceived(int iIndex);
+	PlayerTypes getRankPlayer(int iRank) const;															// Exposed to Python
+	void setRankPlayer(int iRank, PlayerTypes ePlayer);
 
-	DllExport PlayerTypes getRankPlayer(int iRank);															// Exposed to Python
-	DllExport void setRankPlayer(int iRank, PlayerTypes ePlayer);
+	int getPlayerRank(PlayerTypes ePlayer) const;														// Exposed to Python 
+	void setPlayerRank(PlayerTypes ePlayer, int iRank);
 
-	DllExport int getPlayerRank(PlayerTypes ePlayer);														// Exposed to Python 
-	DllExport void setPlayerRank(PlayerTypes ePlayer, int iRank);
+	DllExport int getPlayerScore(PlayerTypes ePlayer) const;													// Exposed to Python
+	void setPlayerScore(PlayerTypes ePlayer, int iScore);
 
-	DllExport int getPlayerScore(PlayerTypes ePlayer);													// Exposed to Python
-	DllExport void setPlayerScore(PlayerTypes ePlayer, int iScore);
+	TeamTypes getRankTeam(int iRank) const;																	// Exposed to Python
+	void setRankTeam(int iRank, TeamTypes eTeam);
 
-	DllExport TeamTypes getRankTeam(int iRank);																	// Exposed to Python
-	DllExport void setRankTeam(int iRank, TeamTypes eTeam);
-
-	DllExport int getTeamRank(TeamTypes eTeam);																	// Exposed to Python
-	DllExport void setTeamRank(TeamTypes eTeam, int iRank);
+	int getTeamRank(TeamTypes eTeam)const;																	// Exposed to Python
+	void setTeamRank(TeamTypes eTeam, int iRank);
 
 	DllExport int getTeamScore(TeamTypes eTeam) const;																// Exposed to Python
-	DllExport void setTeamScore(TeamTypes eTeam, int iScore);
+	void setTeamScore(TeamTypes eTeam, int iScore);
 
 	DllExport bool isOption(GameOptionTypes eIndex) const;																// Exposed to Python
 	DllExport void setOption(GameOptionTypes eIndex, bool bEnabled);
@@ -339,65 +333,65 @@ public:
 	DllExport bool isForcedControl(ForceControlTypes eIndex) const;												// Exposed to Python
 	DllExport void setForceControl(ForceControlTypes eIndex, bool bEnabled);
 
-	DllExport int getUnitCreatedCount(UnitTypes eIndex);																	// Exposed to Python
-	DllExport void incrementUnitCreatedCount(UnitTypes eIndex);
+	int getUnitCreatedCount(UnitTypes eIndex);																	// Exposed to Python
+	void incrementUnitCreatedCount(UnitTypes eIndex);
 
-	DllExport int getUnitClassCreatedCount(UnitClassTypes eIndex);												// Exposed to Python
-	DllExport bool isUnitClassMaxedOut(UnitClassTypes eIndex, int iExtra = 0);						// Exposed to Python
-	DllExport void incrementUnitClassCreatedCount(UnitClassTypes eIndex);
+	int getUnitClassCreatedCount(UnitClassTypes eIndex);												// Exposed to Python
+	bool isUnitClassMaxedOut(UnitClassTypes eIndex, int iExtra = 0);						// Exposed to Python
+	void incrementUnitClassCreatedCount(UnitClassTypes eIndex);
 
-	DllExport int getBuildingClassCreatedCount(BuildingClassTypes eIndex);								// Exposed to Python
-	DllExport bool isBuildingClassMaxedOut(BuildingClassTypes eIndex, int iExtra = 0);		// Exposed to Python
-	DllExport void incrementBuildingClassCreatedCount(BuildingClassTypes eIndex);
+	int getBuildingClassCreatedCount(BuildingClassTypes eIndex);								// Exposed to Python
+	bool isBuildingClassMaxedOut(BuildingClassTypes eIndex, int iExtra = 0);		// Exposed to Python
+	void incrementBuildingClassCreatedCount(BuildingClassTypes eIndex);
 
-	DllExport int getProjectCreatedCount(ProjectTypes eIndex);														// Exposed to Python
-	DllExport bool isProjectMaxedOut(ProjectTypes eIndex, int iExtra = 0);								// Exposed to Python
-	DllExport void incrementProjectCreatedCount(ProjectTypes eIndex, int iExtra = 1);
+	int getProjectCreatedCount(ProjectTypes eIndex);														// Exposed to Python
+	bool isProjectMaxedOut(ProjectTypes eIndex, int iExtra = 0);								// Exposed to Python
+	void incrementProjectCreatedCount(ProjectTypes eIndex, int iExtra = 1);
 
-	DllExport int getForceCivicCount(CivicTypes eIndex) const;														// Exposed to Python
-	DllExport bool isForceCivic(CivicTypes eIndex) const;																	// Exposed to Python
-	DllExport bool isForceCivicOption(CivicOptionTypes eCivicOption) const;								// Exposed to Python
-	DllExport void changeForceCivicCount(CivicTypes eIndex, int iChange);
+	int getForceCivicCount(CivicTypes eIndex) const;														// Exposed to Python
+	bool isForceCivic(CivicTypes eIndex) const;																	// Exposed to Python
+	bool isForceCivicOption(CivicOptionTypes eCivicOption) const;								// Exposed to Python
+	void changeForceCivicCount(CivicTypes eIndex, int iChange);
 
-	DllExport PlayerVoteTypes getVoteOutcome(VoteTypes eIndex) const;																	// Exposed to Python
-	DllExport bool isVotePassed(VoteTypes eIndex) const;																	// Exposed to Python
-	DllExport void setVoteOutcome(const VoteTriggeredData& kData, PlayerVoteTypes eNewValue);
+	PlayerVoteTypes getVoteOutcome(VoteTypes eIndex) const;																	// Exposed to Python
+	bool isVotePassed(VoteTypes eIndex) const;																	// Exposed to Python
+	void setVoteOutcome(const VoteTriggeredData& kData, PlayerVoteTypes eNewValue);
 
-	DllExport bool isVictoryValid(VictoryTypes eIndex) const;															// Exposed to Python
-	DllExport void setVictoryValid(VictoryTypes eIndex, bool bValid);
+	bool isVictoryValid(VictoryTypes eIndex) const;															// Exposed to Python
+	void setVictoryValid(VictoryTypes eIndex, bool bValid);
 
-	DllExport bool isSpecialUnitValid(SpecialUnitTypes eIndex);														// Exposed to Python  
-	DllExport void makeSpecialUnitValid(SpecialUnitTypes eIndex);													// Exposed to Python
+	bool isSpecialUnitValid(SpecialUnitTypes eIndex);														// Exposed to Python  
+	void makeSpecialUnitValid(SpecialUnitTypes eIndex);													// Exposed to Python
 
-	DllExport bool isSpecialBuildingValid(SpecialBuildingTypes eIndex);										// Exposed to Python
-	DllExport void makeSpecialBuildingValid(SpecialBuildingTypes eIndex, bool bAnnounce = false);									// Exposed to Python
+	bool isSpecialBuildingValid(SpecialBuildingTypes eIndex);										// Exposed to Python
+	void makeSpecialBuildingValid(SpecialBuildingTypes eIndex, bool bAnnounce = false);									// Exposed to Python
 
-	DllExport bool isNukesValid() const;														// Exposed to Python  
-	DllExport void makeNukesValid(bool bValid = true);													// Exposed to Python
+	bool isNukesValid() const;														// Exposed to Python  
+	void makeNukesValid(bool bValid = true);													// Exposed to Python
 
-	DllExport bool isInAdvancedStart() const;														// Exposed to Python  
+	bool isInAdvancedStart() const;														// Exposed to Python  
 
 	DllExport void setVoteChosen(int iSelection, int iVoteId);
 
-	DllExport int getReligionGameTurnFounded(ReligionTypes eIndex);												// Exposed to Python
-	DllExport bool isReligionFounded(ReligionTypes eIndex);																// Exposed to Python
+	int getReligionGameTurnFounded(ReligionTypes eIndex);												// Exposed to Python
+	bool isReligionFounded(ReligionTypes eIndex);																// Exposed to Python
 	void makeReligionFounded(ReligionTypes eIndex, PlayerTypes ePlayer);
 
 	bool isReligionSlotTaken(ReligionTypes eReligion) const;											// Exposed to Python
 	void setReligionSlotTaken(ReligionTypes eReligion, bool bTaken);
 
-	DllExport CvCity* getHolyCity(ReligionTypes eIndex);																	// Exposed to Python
-	DllExport void setHolyCity(ReligionTypes eIndex, CvCity* pNewValue, bool bAnnounce);	// Exposed to Python
+	CvCity* getHolyCity(ReligionTypes eIndex);																	// Exposed to Python
+	void setHolyCity(ReligionTypes eIndex, CvCity* pNewValue, bool bAnnounce);	// Exposed to Python
 
-	DllExport int getCorporationGameTurnFounded(CorporationTypes eIndex);												// Exposed to Python
-	DllExport bool isCorporationFounded(CorporationTypes eIndex);																// Exposed to Python
-	DllExport void makeCorporationFounded(CorporationTypes eIndex, PlayerTypes ePlayer);
+	int getCorporationGameTurnFounded(CorporationTypes eIndex);												// Exposed to Python
+	bool isCorporationFounded(CorporationTypes eIndex);																// Exposed to Python
+	void makeCorporationFounded(CorporationTypes eIndex, PlayerTypes ePlayer);
 
-	DllExport CvCity* getHeadquarters(CorporationTypes eIndex);																	// Exposed to Python
-	DllExport void setHeadquarters(CorporationTypes eIndex, CvCity* pNewValue, bool bAnnounce);	// Exposed to Python
+	CvCity* getHeadquarters(CorporationTypes eIndex);																	// Exposed to Python
+	void setHeadquarters(CorporationTypes eIndex, CvCity* pNewValue, bool bAnnounce);	// Exposed to Python
 
-	DllExport PlayerVoteTypes getPlayerVote(PlayerTypes eOwnerIndex, int iVoteId) const;			// Exposed to Python
-	DllExport void setPlayerVote(PlayerTypes eOwnerIndex, int iVoteId, PlayerVoteTypes eNewValue);
+	PlayerVoteTypes getPlayerVote(PlayerTypes eOwnerIndex, int iVoteId) const;			// Exposed to Python
+	void setPlayerVote(PlayerTypes eOwnerIndex, int iVoteId, PlayerVoteTypes eNewValue);
 	DllExport void castVote(PlayerTypes eOwnerIndex, int iVoteId, PlayerVoteTypes ePlayerVote);
 
 	DllExport const CvWString & getName();
@@ -407,11 +401,11 @@ public:
 	std::string getScriptData() const;																										// Exposed to Python	
 	void setScriptData(std::string szNewValue);																						// Exposed to Python	
 																																												
-	DllExport bool isDestroyedCityName(CvWString& szName) const;													
-	DllExport void addDestroyedCityName(const CvWString& szName);													
+	bool isDestroyedCityName(CvWString& szName) const;													
+	void addDestroyedCityName(const CvWString& szName);													
 																																												
-	DllExport bool isGreatPersonBorn(CvWString& szName) const;													
-	DllExport void addGreatPersonBornName(const CvWString& szName);													
+	bool isGreatPersonBorn(CvWString& szName) const;													
+	void addGreatPersonBornName(const CvWString& szName);													
 
 	DllExport int getIndexAfterLastDeal();																								// Exposed to Python	
 	DllExport int getNumDeals();																													// Exposed to Python	
@@ -431,26 +425,26 @@ public:
 	VoteTriggeredData* addVoteTriggered(VoteSourceTypes eVoteSource, const VoteSelectionSubData& kOptionData);
 	void deleteVoteTriggered(int iID);
 
-	DllExport CvRandom& getMapRand();																											// Exposed to Python	
-	DllExport int getMapRandNum(int iNum, const char* pszLog);														
+	CvRandom& getMapRand();																											// Exposed to Python	
+	int getMapRandNum(int iNum, const char* pszLog);														
 																																												
-	DllExport CvRandom& getSorenRand();																										// Exposed to Python	
-	DllExport int getSorenRandNum(int iNum, const char* pszLog);													
+	CvRandom& getSorenRand();																										// Exposed to Python	
+	int getSorenRandNum(int iNum, const char* pszLog);													
 																																												
 	DllExport int calculateSyncChecksum();																								// Exposed to Python	
 	DllExport int calculateOptionsChecksum();																							// Exposed to Python	
 
-	DllExport void addReplayMessage(ReplayMessageTypes eType = NO_REPLAY_MESSAGE, PlayerTypes ePlayer = NO_PLAYER, CvWString pszText = L"", 
+	void addReplayMessage(ReplayMessageTypes eType = NO_REPLAY_MESSAGE, PlayerTypes ePlayer = NO_PLAYER, CvWString pszText = L"", 
 		int iPlotX = -1, int iPlotY = -1, ColorTypes eColor = NO_COLOR);
-	DllExport void clearReplayMessageMap();
-	DllExport int getReplayMessageTurn(uint i) const;
-	DllExport ReplayMessageTypes getReplayMessageType(uint i) const;
-	DllExport int getReplayMessagePlotX(uint i) const;
-	DllExport int getReplayMessagePlotY(uint i) const;
-	DllExport PlayerTypes getReplayMessagePlayer(uint i) const;
-	DllExport LPCWSTR getReplayMessageText(uint i) const;
-	DllExport uint getNumReplayMessages() const;
-	DllExport ColorTypes getReplayMessageColor(uint i) const;
+	void clearReplayMessageMap();
+	int getReplayMessageTurn(uint i) const;
+	ReplayMessageTypes getReplayMessageType(uint i) const;
+	int getReplayMessagePlotX(uint i) const;
+	int getReplayMessagePlotY(uint i) const;
+	PlayerTypes getReplayMessagePlayer(uint i) const;
+	LPCWSTR getReplayMessageText(uint i) const;
+	uint getNumReplayMessages() const;
+	ColorTypes getReplayMessageColor(uint i) const;
 
 	DllExport virtual void read(FDataStreamBase* pStream);
 	DllExport virtual void write(FDataStreamBase* pStream);
@@ -481,6 +475,7 @@ public:
 	bool culturalVictoryValid();
 	int culturalVictoryNumCultureCities();
 	CultureLevelTypes culturalVictoryCultureLevel();
+	int getCultureThreshold(CultureLevelTypes eLevel) const;
 
 	int getPlotExtraYield(int iX, int iY, YieldTypes eYield) const;
 	void setPlotExtraYield(int iX, int iY, YieldTypes eYield, int iCost);   // exposed to Python
@@ -503,9 +498,51 @@ public:
 
 	void processBuilding(BuildingTypes eBuilding, int iChange);
 
-protected:
+	bool pythonIsBonusIgnoreLatitudes() const;
 
-	int m_iEndTurnMessagesSent;
+	DllExport void getGlobeLayers(std::vector<CvGlobeLayerData>& aLayers) const;
+	DllExport void startFlyoutMenu(const CvPlot* pPlot, std::vector<CvFlyoutMenuData>& aFlyoutItems) const;
+	DllExport void applyFlyoutMenu(const CvFlyoutMenuData& kItem);
+	DllExport CvPlot* getNewHighlightPlot() const;
+	DllExport ColorTypes getPlotHighlightColor(CvPlot* pPlot) const;
+	DllExport void cheatSpaceship() const;
+	DllExport VictoryTypes getSpaceVictory() const;
+	DllExport void nextActivePlayer(bool bForward);
+
+	DllExport DomainTypes getUnitDomain(UnitTypes eUnit) const;
+	DllExport const CvArtInfoBuilding* getBuildingArtInfo(BuildingTypes eBuilding) const;
+	DllExport bool isWaterBuilding(BuildingTypes eBuilding) const;
+	DllExport CivilopediaWidgetShowTypes getWidgetShow(BonusTypes eBonus) const;
+	DllExport CivilopediaWidgetShowTypes getWidgetShow(ImprovementTypes eImprovement) const;
+
+	DllExport void loadBuildQueue(const CvString& strItem) const;
+
+	DllExport int getNextSoundtrack(EraTypes eLastEra, int iLastSoundtrack) const;
+	DllExport int getSoundtrackSpace() const;
+	DllExport bool isSoundtrackOverride(CvString& strSoundtrack) const;
+
+	DllExport void initSelection() const;
+	DllExport bool canDoPing(CvPlot* pPlot, PlayerTypes ePlayer) const;
+	DllExport bool shouldDisplayReturn() const;
+	DllExport bool shouldDisplayEndTurn() const;
+	DllExport bool shouldDisplayWaitingOthers() const;
+	DllExport bool shouldDisplayWaitingYou() const;
+	DllExport bool shouldDisplayEndTurnButton() const;
+	DllExport bool shouldDisplayFlag() const;
+	DllExport bool shouldDisplayUnitModel() const;
+	DllExport bool shouldShowResearchButtons() const;
+	DllExport bool shouldCenterMinimap() const;
+	DllExport EndTurnButtonStates getEndTurnState() const;
+
+	DllExport void handleCityScreenPlotPicked(CvCity* pCity, CvPlot* pPlot, bool bAlt, bool bShift, bool bCtrl) const;
+	DllExport void handleCityScreenPlotDoublePicked(CvCity* pCity, CvPlot* pPlot, bool bAlt, bool bShift, bool bCtrl) const;
+	DllExport void handleCityScreenPlotRightPicked(CvCity* pCity, CvPlot* pPlot, bool bAlt, bool bShift, bool bCtrl) const;
+	DllExport void handleCityPlotRightPicked(CvCity* pCity, CvPlot* pPlot, bool bAlt, bool bShift, bool bCtrl) const;
+	DllExport void handleMiddleMouse(bool bCtrl, bool bAlt, bool bShift);
+
+	DllExport void handleDiplomacySetAIComment(DiploCommentTypes eComment) const;
+
+protected:
 	int m_iElapsedGameTurns;
 	int m_iStartTurn;
 	int m_iStartYear;
@@ -551,7 +588,6 @@ protected:
 
 	CvString m_szScriptData;
 
-	int* m_aiEndTurnMessagesReceived;
 	int* m_aiRankPlayer;        // Ordered by rank...
 	int* m_aiPlayerRank;        // Ordered by player ID...
 	int* m_aiPlayerScore;       // Ordered by player ID...

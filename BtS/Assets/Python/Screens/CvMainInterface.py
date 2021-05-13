@@ -1766,12 +1766,11 @@ class CvMainInterface:
 					researchCost = gc.getTeam(gc.getPlayer(ePlayer).getTeam()).getResearchCost(gc.getPlayer(ePlayer).getCurrentResearch())
 					researchRate = gc.getPlayer(ePlayer).calculateResearchRate(-1)
 					
-					iFirst = float(researchProgress + overflowResearch) / float(researchCost)
-					screen.setBarPercentage( "ResearchBar", InfoBarTypes.INFOBAR_STORED, iFirst )
-					if ( iFirst == 1 ):
-						screen.setBarPercentage( "ResearchBar", InfoBarTypes.INFOBAR_RATE, ( float(researchRate) / float(researchCost) ) )
+					screen.setBarPercentage( "ResearchBar", InfoBarTypes.INFOBAR_STORED, float(researchProgress + overflowResearch) / researchCost )
+					if ( researchCost >  researchProgress + overflowResearch):
+						screen.setBarPercentage( "ResearchBar", InfoBarTypes.INFOBAR_RATE, float(researchRate) / (researchCost - researchProgress - overflowResearch))
 					else:
-						screen.setBarPercentage( "ResearchBar", InfoBarTypes.INFOBAR_RATE, ( ( float(researchRate) / float(researchCost) ) ) / ( 1 - iFirst ) )
+						screen.setBarPercentage( "ResearchBar", InfoBarTypes.INFOBAR_RATE, 0.0 )
 
 					screen.show( "ResearchBar" )
 					
@@ -1989,21 +1988,21 @@ class CvMainInterface:
 					else:
 						iExtraFood = pHeadSelectedCity.getFood()
 					iFirst = float(iDeltaFood) / float(pHeadSelectedCity.growthThreshold())
-					screen.setBarPercentage( "PopulationBar", InfoBarTypes.INFOBAR_STORED, iFirst )
+					screen.setBarPercentage( "PopulationBar", InfoBarTypes.INFOBAR_STORED, float(iDeltaFood) / pHeadSelectedCity.growthThreshold() )
 					screen.setBarPercentage( "PopulationBar", InfoBarTypes.INFOBAR_RATE, 0.0 )
-					if ( iFirst == 1 ):
-						screen.setBarPercentage( "PopulationBar", InfoBarTypes.INFOBAR_RATE_EXTRA, ( float(iExtraFood) / float(pHeadSelectedCity.growthThreshold()) ) )
+					if ( pHeadSelectedCity.growthThreshold() > iDeltaFood):
+						screen.setBarPercentage( "PopulationBar", InfoBarTypes.INFOBAR_RATE_EXTRA, float(iExtraFood) / (pHeadSelectedCity.growthThreshold() - iDeltaFood) )
 					else:
-						screen.setBarPercentage( "PopulationBar", InfoBarTypes.INFOBAR_RATE_EXTRA, ( ( float(iExtraFood) / float(pHeadSelectedCity.growthThreshold()) ) ) / ( 1 - iFirst ) )
+						screen.setBarPercentage( "PopulationBar", InfoBarTypes.INFOBAR_RATE_EXTRA, 0.0)
 					
 				else:
 
 					iFirst = float(pHeadSelectedCity.getFood()) / float(pHeadSelectedCity.growthThreshold())
-					screen.setBarPercentage( "PopulationBar", InfoBarTypes.INFOBAR_STORED, iFirst )
-					if ( iFirst == 1 ):
-						screen.setBarPercentage( "PopulationBar", InfoBarTypes.INFOBAR_RATE, ( float(iFoodDifference) / float(pHeadSelectedCity.growthThreshold()) ) )
+					screen.setBarPercentage( "PopulationBar", InfoBarTypes.INFOBAR_STORED, float(pHeadSelectedCity.getFood()) / pHeadSelectedCity.growthThreshold() )
+					if ( pHeadSelectedCity.growthThreshold() >  pHeadSelectedCity.getFood()):
+						screen.setBarPercentage( "PopulationBar", InfoBarTypes.INFOBAR_RATE, float(iFoodDifference) / (pHeadSelectedCity.growthThreshold() - pHeadSelectedCity.getFood()) )
 					else:
-						screen.setBarPercentage( "PopulationBar", InfoBarTypes.INFOBAR_RATE, ( ( float(iFoodDifference) / float(pHeadSelectedCity.growthThreshold()) ) ) / ( 1 - iFirst ) )
+						screen.setBarPercentage( "PopulationBar", InfoBarTypes.INFOBAR_RATE, 0.0 )
 					screen.setBarPercentage( "PopulationBar", InfoBarTypes.INFOBAR_RATE_EXTRA, 0.0 )
 					
 				screen.show( "PopulationBar" )
@@ -2043,18 +2042,17 @@ class CvMainInterface:
 
 				if (not(pHeadSelectedCity.isProductionProcess())):
 				
-					iFirst = ((float(pHeadSelectedCity.getProduction())) / (float(pHeadSelectedCity.getProductionNeeded())))
-					screen.setBarPercentage( "ProductionBar", InfoBarTypes.INFOBAR_STORED, iFirst )
-					if ( iFirst == 1 ):
-						iSecond = ( ((float(iProductionDiffNoFood)) / (float(pHeadSelectedCity.getProductionNeeded()))) )
+					iNeeded = pHeadSelectedCity.getProductionNeeded()
+					iStored = pHeadSelectedCity.getProduction()
+					screen.setBarPercentage( "ProductionBar", InfoBarTypes.INFOBAR_STORED, float(iStored) / iNeeded )
+					if iNeeded > iStored:
+						screen.setBarPercentage( "ProductionBar", InfoBarTypes.INFOBAR_RATE, float(iProductionDiffNoFood) / (iNeeded - iStored) )
 					else:
-						iSecond = ( ((float(iProductionDiffNoFood)) / (float(pHeadSelectedCity.getProductionNeeded()))) ) / ( 1 - iFirst )
-					screen.setBarPercentage( "ProductionBar", InfoBarTypes.INFOBAR_RATE, iSecond )
-					if ( iFirst + iSecond == 1 ):
-						screen.setBarPercentage( "ProductionBar", InfoBarTypes.INFOBAR_RATE_EXTRA, ( ((float(iProductionDiffJustFood)) / (float(pHeadSelectedCity.getProductionNeeded()))) ) )
+						screen.setBarPercentage( "ProductionBar", InfoBarTypes.INFOBAR_RATE, 0.0 )
+					if iNeeded > iStored + iProductionDiffNoFood:
+						screen.setBarPercentage( "ProductionBar", InfoBarTypes.INFOBAR_RATE_EXTRA, float(iProductionDiffJustFood) / (iNeeded - iStored - iProductionDiffNoFood) )
 					else:
-						screen.setBarPercentage( "ProductionBar", InfoBarTypes.INFOBAR_RATE_EXTRA, ( ( ((float(iProductionDiffJustFood)) / (float(pHeadSelectedCity.getProductionNeeded()))) ) ) / ( 1 - ( iFirst + iSecond ) ) )
-
+						screen.setBarPercentage( "ProductionBar", InfoBarTypes.INFOBAR_RATE_EXTRA, 0.0)
 					screen.show( "ProductionBar" )
 
 				iCount = 0
@@ -2412,19 +2410,18 @@ class CvMainInterface:
 				screen.setLabel( "NationalityText", "Background", szBuffer, CvUtil.FONT_CENTER_JUSTIFY, 125, yResolution - 210, -0.3, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 				screen.setHitTest( "NationalityText", HitTestTypes.HITTEST_NOHIT )
 				screen.show( "NationalityText" )
-				iRemainder = 0
+				iRemainder = 100
 				iWhichBar = 0
 				for h in range( gc.getMAX_PLAYERS() ):
 					if ( gc.getPlayer(h).isAlive() ):
-						fPercent = pHeadSelectedCity.plot().calculateCulturePercent(h)
-						if ( fPercent != 0 ):
-							fPercent = fPercent / 100.0
+						iPercent = pHeadSelectedCity.plot().calculateCulturePercent(h)
+						if ( iPercent > 0 ):
 							screen.setStackedBarColorsRGB( "NationalityBar", iWhichBar, gc.getPlayer(h).getPlayerTextColorR(), gc.getPlayer(h).getPlayerTextColorG(), gc.getPlayer(h).getPlayerTextColorB(), gc.getPlayer(h).getPlayerTextColorA() )
-							if ( iRemainder == 1 ):
-								screen.setBarPercentage( "NationalityBar", iWhichBar, fPercent )
+							if ( iRemainder <= 0):
+								screen.setBarPercentage( "NationalityBar", iWhichBar, 0.0 )
 							else:
-								screen.setBarPercentage( "NationalityBar", iWhichBar, fPercent / ( 1 - iRemainder ) )
-							iRemainder += fPercent
+								screen.setBarPercentage( "NationalityBar", iWhichBar, float(iPercent) / iRemainder)
+							iRemainder -= iPercent
 							iWhichBar += 1
 				screen.show( "NationalityBar" )
 
@@ -3135,5 +3132,17 @@ class CvMainInterface:
 	
 	def update(self, fDelta):
 		return
-
-
+	
+	def forward(self):
+		if (not CyInterface().isFocused() or CyInterface().isCityScreenUp()):
+			if (CyInterface().isCitySelection()):
+				CyGame().doControl(ControlTypes.CONTROL_NEXTCITY)
+			else:
+				CyGame().doControl(ControlTypes.CONTROL_NEXTUNIT)
+		
+	def back(self):
+		if (not CyInterface().isFocused() or CyInterface().isCityScreenUp()):
+			if (CyInterface().isCitySelection()):
+				CyGame().doControl(ControlTypes.CONTROL_PREVCITY)
+			else:
+				CyGame().doControl(ControlTypes.CONTROL_PREVUNIT)

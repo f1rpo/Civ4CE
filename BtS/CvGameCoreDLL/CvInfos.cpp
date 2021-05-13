@@ -4137,11 +4137,11 @@ void CvUnitInfo::updateArtDefineButton()
 
 const CvArtInfoUnit* CvUnitInfo::getArtInfo(int i, EraTypes eEra, UnitArtStyleTypes eStyle) const
 {
-	if ((eEra > GC.getNumEraInfos() / 2) && !isEmpty(getLateArtDefineTag(i, eStyle)))
+	if ((eEra > GC.getNumEraInfos() / 2) && !CvString(getLateArtDefineTag(i, eStyle)).empty())
 	{
 		return ARTFILEMGR.getUnitArtInfo(getLateArtDefineTag(i, eStyle));
 	}
-	else if ((eEra > GC.getNumEraInfos() / 4) && !isEmpty(getMiddleArtDefineTag(i, eStyle)))
+	else if ((eEra > GC.getNumEraInfos() / 4) && !CvString(getMiddleArtDefineTag(i, eStyle)).empty())
 	{
 		return ARTFILEMGR.getUnitArtInfo(getMiddleArtDefineTag(i, eStyle));
 	}
@@ -11358,7 +11358,6 @@ m_bRequiresFeature(false),
 m_bWater(false),							
 m_bGoody(false),							
 m_bPermanent(false),							
-m_bUseLSystem(false),
 m_bOutsideBorders(false),
 m_iWorldSoundscapeScriptId(0),
 m_piPrereqNatureYield(NULL),
@@ -11555,16 +11554,6 @@ bool CvImprovementInfo::isGoody() const
 bool CvImprovementInfo::isPermanent() const			
 {
 	return m_bPermanent; 
-}
-
-bool CvImprovementInfo::useLSystem() const
-{
-	return m_bUseLSystem;
-}
-
-void CvImprovementInfo::setUseLSystem(bool bUse)
-{
-	m_bUseLSystem = bUse;
 }
 
 const TCHAR* CvImprovementInfo::getArtDefineTag() const
@@ -11775,7 +11764,6 @@ void CvImprovementInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_bWater);							
 	stream->Read(&m_bGoody);							
 	stream->Read(&m_bPermanent);							
-	stream->Read(&m_bUseLSystem);
 	stream->Read(&m_bOutsideBorders);
 
 	stream->ReadString(m_szArtDefineTag);
@@ -11887,7 +11875,6 @@ void CvImprovementInfo::write(FDataStreamBase* stream)
 	stream->Write(m_bWater);							
 	stream->Write(m_bGoody);							
 	stream->Write(m_bPermanent);							
-	stream->Write(m_bUseLSystem);
 	stream->Write(m_bOutsideBorders);
 
 	stream->WriteString(m_szArtDefineTag);
@@ -12003,7 +11990,6 @@ bool CvImprovementInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_bWater, "bWater");
 	pXML->GetChildXmlValByName(&m_bGoody, "bGoody");
 	pXML->GetChildXmlValByName(&m_bPermanent, "bPermanent");
-	pXML->GetChildXmlValByName(&m_bUseLSystem, "bUseLSystem");
 	pXML->GetChildXmlValByName(&m_iTilesPerGoody, "iTilesPerGoody");
 	pXML->GetChildXmlValByName(&m_iGoodyUniqueRange, "iGoodyRange");
 	pXML->GetChildXmlValByName(&m_iFeatureGrowthProbability, "iFeatureGrowth");
@@ -12233,7 +12219,6 @@ m_bHills(false),
 m_bFlatlands(false),
 m_bNoRiverSide(false),
 m_bNormalize(false),
-m_bUseLSystem(false),
 m_piYieldChange(NULL),
 m_piImprovementChange(NULL),
 m_pbTerrain(NULL),
@@ -12408,16 +12393,6 @@ bool CvBonusInfo::isNormalize() const
 	return m_bNormalize; 
 }
 
-bool CvBonusInfo::useLSystem() const
-{
-	return m_bUseLSystem;
-}
-
-void CvBonusInfo::setUseLSystem(bool bUse)
-{
-	m_bUseLSystem = bUse;
-}
-
 const TCHAR* CvBonusInfo::getArtDefineTag() const
 {
 	return m_szArtDefineTag; 
@@ -12521,7 +12496,6 @@ void CvBonusInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_bFlatlands);
 	stream->Read(&m_bNoRiverSide);
 	stream->Read(&m_bNormalize);
-	stream->Read(&m_bUseLSystem);
 
 	stream->ReadString(m_szArtDefineTag);
 
@@ -12585,7 +12559,6 @@ void CvBonusInfo::write(FDataStreamBase* stream)
 	stream->Write(m_bFlatlands);
 	stream->Write(m_bNoRiverSide);
 	stream->Write(m_bNormalize);
-	stream->Write(m_bUseLSystem);
 
 	stream->WriteString(m_szArtDefineTag);
 
@@ -12664,7 +12637,6 @@ bool CvBonusInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_bFlatlands, "bFlatlands");
 	pXML->GetChildXmlValByName(&m_bNoRiverSide, "bNoRiverSide");
 	pXML->GetChildXmlValByName(&m_bNormalize, "bNormalize");
-	pXML->GetChildXmlValByName(&m_bUseLSystem, "bUseLSystem");
 
 	pXML->SetVariableListTagPair(&m_pbTerrain, "TerrainBooleans", sizeof(GC.getTerrainInfo((TerrainTypes)0)), GC.getNumTerrainInfos());
 	pXML->SetVariableListTagPair(&m_pbFeature, "FeatureBooleans", sizeof(GC.getFeatureInfo((FeatureTypes)0)), GC.getNumFeatureInfos());
